@@ -1,5 +1,5 @@
 
-ENG
+ENG:
 Micra Tools consists of many functions, which are combined into one application. 
 This tool is making work much simplier and quicker.
 The Advantage is that Micra Tools can be upgraded or modified. 
@@ -8,7 +8,7 @@ In this way is the tool begin a very powerful and efficient helper in our work w
 Sawing our time and keeping good mood.
 Any multiple operation or difficulties can be solved with several clicks.  
 
-CZ
+CZ:
 Micra Tools je sestava mnoha nástrojů, které jsou sloučeny do jedné aplikace. 
 Tyto nástroje zjednodušují a urychlují práci v 3DsMax.
 Jejich výhodou oproti běžně prodávaným pluginum je možnost 
