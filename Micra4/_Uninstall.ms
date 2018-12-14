@@ -1,3 +1,6 @@
-_Uninstall.ms
+in mcPath != undefined and doesFileExist (mcPath()) do (
 
-C:/Users/Rene.baca/AppData/Local/Autodesk/3dsMax/2018 - 64bit/ENU/scripts/startup/Micra_Autorun.ms
+	fileIn (mcPath()+"_Unloader.ms") 
+	local sFile = (GetDir #userStartupScripts + "\\Micra_Autorun.ms")
+	if doesFileExist sFile do deleteFile sFile
+)
