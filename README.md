@@ -7,6 +7,15 @@ In this way is the tool begin a very powerful and efficient helper in our work w
 Sawing our time and keeping good mood.
 Any multiple operation or difficulties can be solved with several clicks.  
 
+instalation:
+
+1) Unpack zip file anywhere in hd, like C:\Micra4
+2)drag and drop file _Loader.ms in to 3Ds Max window.
+thats all, enjoy you work :-D
+
+
+René (MerlinEl)
+
 CZ:
 Micra Tools je sestava mnoha nástrojů, které jsou sloučeny do jedné aplikace. 
 Tyto nástroje zjednodušují a urychlují práci v 3DsMax.
@@ -14,6 +23,13 @@ Jejich výhodou oproti běžně prodávaným pluginum je možnost přidávat st�
 tak aby co nejlépe odpovídali našim požadavkům.
 Tak se tento nástroj stává výkonnou pomůckou, která nám pomáhá ušetřit čas a mnohdy i nervy, 
 obzvlášte u rutinních a mnohonásobně se opakujících operací.
+
+instalace:
+
+1) Rozbal soubor kdekoliv na disku, třeba C:\Micra4
+2) přetáhni spouštěcí soubor _Loader.ms ma okno v 3DsMax.
+to je vše, užívej pohodové práce :-D
+
 
 more details here > http://cestaslunce.cz/sluzby/skripty/index_eng.html
 MerlinEl 14.12.2018
