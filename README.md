@@ -17,7 +17,7 @@ thats all, enjoy you work :-D
 René (MerlinEl)
 
 CZ:
-Micra Tools je sestava mnoha nástrojů, které jsou sloučeny do jedné aplikace. 
+Micra Tools sestavá z mnoha nástrojů sloučených do jedné aplikace. 
 Tyto nástroje zjednodušují a urychlují práci v 3DsMax.
 Jejich výhodou oproti běžně prodávaným pluginum je možnost přidávat stále nové funkce a upravovat stávající, 
 tak aby co nejlépe odpovídali našim požadavkům.
