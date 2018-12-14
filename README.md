@@ -27,9 +27,10 @@ obzvlášte u rutinních a mnohonásobně se opakujících operací.
 instalace:
 
 1) Rozbal soubor kdekoliv na disku, třeba C:\Micra4
-2) přetáhni spouštěcí soubor _Loader.ms ma okno v 3DsMax.
+2) Přetáhni spouštěcí soubor _Loader.ms ma okno v 3DsMax.
 to je vše, užívej pohodové práce :-D
 
 
 more details here > http://cestaslunce.cz/sluzby/skripty/index_eng.html
+
 MerlinEl 14.12.2018
