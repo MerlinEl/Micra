@@ -1,0 +1,37 @@
+----------------------------------------
+--||||Max Script Programming Rules|||---
+----------------------------------------
+
+----------
+Functions:
+----------
+1) first leter small second big (fCount, selectMore, getObjectFromRay)
+2) brackets formating
+for o in selection do
+(
+	for n in o do
+	(
+		print n
+	)
+)
+
+----------
+Structures
+----------
+1) all big with underscore for every world   (DRAG_AND_DROP, PAINT_GEOMETRY, OBJECT_DATA)
+
+-----
+Tools
+-----
+1) all big no underscore (IMPLANT)
+
+------
+Locals 
+------   
+1) all small with underscore for every world (head_count, cel, obj_array)
+
+-------
+Globals
+-------
+mc_Form_Drop_Data --replaced with > mcGM.getParam "form_drop_data" - mcGM.setParam "form_drop_data" item
+mc_Locker_Frame_Rate

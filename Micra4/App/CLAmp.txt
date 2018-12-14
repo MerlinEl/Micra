@@ -1,0 +1,102 @@
+[To do list / Wishlist]
+------------------------------
+/PLSAVE should be able to generate M3U8 files (UTF-8 encoded playlists)
+Create an option to randomize the playlist (what winamp does when hitting Shift-Ctrl-R in playlist)
+Add some debug mode and/or extended information for troubleshooting
+Create an option to change output plugin (/OPSET)
+Create an option for setting a skin
+
+Version 1.13 - Aug 2008
+-----------------------
+/medialib was not working - fixed
+/pladd - directory parsing partially rewritten (code shared with /load, /loadnew, /loadplay so impacts the four of them)
+/pladd - was not working with https due to a bug
+/pladd - was considering strings starting with something different from http as a local filename, thus misleading for other protocols
+(rtsp://... would be considered as a filename, not as a network location).
+Extend /visuexec to /visuexec {on|off|status} (not working)
+/OUTPUTPLUGIN - new synonym for /OPGET
+/playpause used to be an alias for /pause, now they behave differently
+	/pause remains unchanged and toggles pause - if winamp is not playing, pause toggling will do nothing
+	/playpause new behaviour : if playing, same as /pause - if not playing, same as /play
+/jumptofile opens the "Jump to file" dialog window
+/tofront - new
+
+Version 1.12 - May 2007
+-----------------------
+- /SETPLPOS now accepts RANDOM as an argument
+- New option : /QUITAFTER
+- New option : /VIDEOFULLSCREEN (not working)
+
+Version 1.11 - March 2007
+-------------------------
+- Changed versionning.
+- Fixed /SKINGET (was not working)
+- Enhanced args control
+- New options : /PATHNAME /JUMP /INIFILE /INIDIR /OPGET /RATING
+- changed method for /TITLE - Behaviour unchanged
+- /PAUSE accepts optional arg (ON | OFF) [Der-Spunk request]
+
+Version 0.0.10 - Feb 2007
+-------------------------
+
+Version 0.0.9 - Jun 2006
+------------------------
+/LOADNEW now accepts URLs [Dave]
+REPEAT, RANDOM, EQSTATUS accept new argument : STATUS (/REPEAT STATUS or /RANDOM STATUS) returning ON or OFF
+/TRACKINFO LENGTH (0:00 if not currently playing)
+/TRACKINFO POS
+/PLINFO LENGTH
+/PLINFO POS - Note that even if play list is empty (Length = 0), pos is still 1.
+
+
+Version 0.0.8 - Apr 2006
+------------------------
+/VOLUP and /VOLDN now accept an optional argument
+/VOLGET returns volume level
+Fixed /VER (decimal/hexadecimal mismatch)
+Changed /START to avoid returning errors - hope works better
+Behaviour change : /Play now restarts current song, not first in playlist
+/PLSET <pos> : set playlist to item <pos> - Note that it does not affect current play
+	To play song 3 now, use clamp /plset 3 /play
+/MEDIALIBRARY to display media library window
+
+Version 0.0.7
+-------------
+Changes withdrawn
+
+Version 0.0.6 - May 2005
+------------------------
+/START was not working well
+Extended registry search to find Winamp (base on winamp install, not on file association)
+
+
+Version 0.0.5 - Apr 2005
+------------------------
+New options : 
+	/PLLAST, /PLFIRST (in Winamp V2, not really first, not really last (?))
+	/RESTART (not working with winamp 2)
+	/CDPLAY
+Option /REPLAY in V 0.0.4 was /PLLAST in fact
+Bug in function searching for winamp path from registry - Always returned as not found.
+/PLADD option did not work if pattern contained a directory.
+Added /MSG <number> to send any message
+
+Version 0.0.4 - Mar 2005
+------------------------
+Now handling wildcards for PLADD (i.e. CLAmp /PLADD *.mp3)
+Now reads Winamp.exe path from registry.
+Added NOT RUNNING state.
+New options : /STOPFADE, /STOPAFTER, /REPLAY
+
+Version 0.0.3 - Feb 2005
+------------------------
+Added some equalizer management options (/EQINFO, /EQSTATUS, /EQSET)
+Added Misc. options (/VER, /PLWIN, /PLPOS, /VOLMAX, /VOLMIN, /TITLE, /MAINWIN, /MINIMIZE)
+
+Version 0.0.2 - Feb 2005
+------------------------
+Many new options
+
+Version 0.0.1 - Jan 2005
+------------------------
+First working version.
