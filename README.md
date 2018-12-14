@@ -10,7 +10,7 @@ Any multiple operation or difficulties can be solved with several clicks.
 instalation:
 
 1) Unpack zip file anywhere in hd, like C:\Micra4
-2)drag and drop file _Loader.ms in to 3Ds Max window.
+2) Drag and drop file _Loader.ms in to 3Ds Max window.
 thats all, enjoy you work :-D
 
 
