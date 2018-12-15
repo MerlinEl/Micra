@@ -13,7 +13,7 @@ instalation:
 
 1) Unpack zip file anywhere in hd, like C:\Micra4
 2) Drag and drop file _Loader.ms in to 3Ds Max window.
-3) If Micra is not visible, probably using profile with multiple monitors. To restore settings to default type: 
+3) If Micra is not visible, probably using profile with multiple monitors. To restore settings type: 
 	Micra.restoreToDefault() 
 thats all, enjoy you work :-D
 
