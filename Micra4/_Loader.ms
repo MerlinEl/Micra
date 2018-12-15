@@ -90,10 +90,15 @@ if mcFileCheckSum() do
 	mcDialogSnappingEnabled = execute (getINISetting mcUserINI "Settings" "DialogSnap") ---remove this
 	
 	--> User Profile Switcher
+	--Always Override Temp Profile ( Profile_Temp.ini ) with Last used Profile ( Profile_1.ini,  Profile_2.ini, Profile_3.ini, ...)
+	--Load saved Settings template
 	fn mcProfileSwitch =
 	(
-		local active_name = "Profile_"+(getIniSetting mcUserINI "Settings" "CurrentProfile") + ".ini"
-		local active_file = mcPath() +"User\\"+ active_name
+		local last_profile_index = getIniSetting mcUserINI "Settings" "CurrentProfile"
+		format "last profile:%\n" last_profile_index
+		local last_profile_name = "Profile_"+ last_profile_index + ".ini"
+		local active_file = mcPath() +"User\\"+ last_profile_name
+		--override temp profile with user one
 		if doesFileExist active_file and doesFileExist mcTempProfileIni do deleteFile mcTempProfileIni
 		copyFile active_file mcTempProfileIni
 	)
@@ -238,3 +243,25 @@ if mcFileCheckSum() do
 	
 	print "Loader.ms is Done!"
 )
+
+
+--New Micra structure
+Global Micra
+struct MICRA_STRUCTURE (
+
+	TempProfileIni     = mcPath() + "Profile_Temp.ini",
+	DefaultProfileIni  = mcPath() + "Profile_Default.ini",
+	UserINI            = mcPath() + "User\\Settings.ini",
+	fn reload = (
+	
+		fileIn (mcPath()+"_Unloader.ms") -- Clean 
+		fileIn (mcPath()+ "_Loader.ms")-- Run Loader
+	),
+	fn restoreToDefault = (
+	
+		fileIn (mcPath()+"_Unloader.ms") -- Clean 
+		setIniSetting UserINI "Settings" "CurrentProfile" "8" -- Set start profile to default
+		fileIn (mcPath()+ "_Loader.ms")-- Run Loader
+	)
+)
+Micra = MICRA_STRUCTURE()
