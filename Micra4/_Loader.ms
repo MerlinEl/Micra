@@ -252,16 +252,28 @@ struct MICRA_STRUCTURE (
 	TempProfileIni     = mcPath() + "Profile_Temp.ini",
 	DefaultProfileIni  = mcPath() + "Profile_Default.ini",
 	UserINI            = mcPath() + "User\\Settings.ini",
-	fn reload = (
+	fn unload = (fileIn (mcPath()+"_Unloader.ms")), -- Clean and Close
+	fn load = (fileIn (mcPath()+ "_Loader.ms")), -- Run Loader
+	fn reload soft:true = (
 	
-		fileIn (mcPath()+"_Unloader.ms") -- Clean 
-		fileIn (mcPath()+ "_Loader.ms")-- Run Loader
+		unload()
+		load()
 	),
 	fn restoreToDefault = (
 	
-		fileIn (mcPath()+"_Unloader.ms") -- Clean 
 		setIniSetting UserINI "Settings" "CurrentProfile" "8" -- Set start profile to default
-		fileIn (mcPath()+ "_Loader.ms")-- Run Loader
+		reload()
+	),
+	fn setProfile index = (
+	
+		setIniSetting UserINI "Settings" "CurrentProfile" (index as string) -- Set start profile to default
+		reload()
 	)
 )
 Micra = MICRA_STRUCTURE()
+
+
+/*
+clearlistener() --clean listener
+gc() --free mem
+*/

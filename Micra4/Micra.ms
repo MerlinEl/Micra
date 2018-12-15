@@ -410,12 +410,12 @@ try ( mcMicraDialog.close() ) catch()
 					then
 					(
 						msc.mnu_p_items[i].backColor = netDrColor clr_back
-						msc.mnu_p_items[i].forecolor = netDrColor clr_inact
+						msc.mnu_p_items[i].forecolor = netDrColor clr_text
 					)
 					else
 					(
-						msc.mnu_p_items[i].backColor = netDrColor clr_mark
-						msc.mnu_p_items[i].forecolor = netDrColor clr_text
+						msc.mnu_p_items[i].backColor = netDrColor clr_back
+						msc.mnu_p_items[i].forecolor = netDrColor green
 					)
 				)
 				mnu.Show (s.PointToScreen (netDrPoint a.location))	
