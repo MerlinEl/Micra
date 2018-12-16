@@ -1,7 +1,11 @@
 
-3DsMax Tool
 
-EN:
+3DsMax Tool 
+
+
+
+EN: [Do not dowmload now](Restructuralization)
+
 Micra Tools consists of many functions, which are combined into one application. 
 This tool is making work much simplier and quicker.
 The Advantage is that Micra Tools can be upgraded or modified to match our requirements and to be more user friendly.
@@ -19,9 +23,8 @@ Micra.restoreToDefault()
 thats all, enjoy you work :-D
 
 
-René (MerlinEl)
+CZ: [Nestahujte](Restrukturalizace)
 
-CZ:
 Micra Tools sestavá z mnoha nástrojů sloučených do jedné aplikace. 
 Tyto nástroje zjednodušují a urychlují práci v 3DsMax.
 Jejich výhodou oproti běžně prodávaným pluginum je možnost přidávat stále nové funkce a upravovat stávající, 
