@@ -68,7 +68,7 @@ if mcPolyCount == undefined do
 			if (classof obj != Editable_Poly and classof obj != PolyMeshObject) do return (" " + obj.name) --ad a space becouse max crash if world begins with leter z. omg!	
 			--print "pass"		
 			local size = ""
-			if (getINISetting mcUserINI "Settings" "UC_ShowSize") == "true" do
+			if (getINISetting Micra.UserSettings "Settings" "UC_ShowSize") == "true" do
 			(
 				local mi=try obj.min catch [0,0,0]
 				local ma=try obj.max catch [0,0,0]
@@ -209,7 +209,7 @@ if mcPolyCount == undefined do
 		if  (obj != undefined and (classof obj == Editable_Poly or classof obj == PolyMeshObject)) then
 		(
 			local size = ""
-			if (getINISetting mcUserINI "Settings" "UC_ShowSize") == "true" do
+			if (getINISetting Micra.UserSettings "Settings" "UC_ShowSize") == "true" do
 			(
 				local mi=try obj.min catch [0,0,0]
 				local ma=try obj.max catch [0,0,0]

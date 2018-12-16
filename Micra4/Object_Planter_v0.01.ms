@@ -35,12 +35,7 @@ rollout mcObjectPlanterDialog " Object Planter v0.1" width:356 height:92
 	on mcObjectPlanterDialog lbuttonup   pos do (dMove = false; pushprompt "")
 	on mcObjectPlanterDialog mouseMove   pos do
 	(
-		if dMove and keyboard.shiftPressed do 
-		(
-			if mcDialogSnappingEnabled 
-			then mcDialogSnap mcObjectPlanterDialog DmPos
-			else setDialogPos mcObjectPlanterDialog (mouse.screenpos - DmPos)
-		)
+		if dMove and keyboard.shiftPressed do mcDialogSnap mcObjectPlanterDialog DmPos
 	)
 	------------------------------------------------------------------------
 	/* Actions */

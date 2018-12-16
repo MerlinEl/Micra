@@ -109,7 +109,7 @@ category:"Micra"
 toolTip:"Spline Magnet"
 (
 	On IsEnabled Return (classOf mcAction == StructDef and mcPoly.isInPoly()) 
-	On Execute Do (mcfileInVersion "Spline_Magnet")
+	On Execute Do (Micra.fileInVersion "Spline_Magnet")
 )
 ----------------------------------------------------------------------------------------------------------	
 MacroScript HideUni             
@@ -143,8 +143,8 @@ MacroScript SoftSelection
 category:"Micra"
 toolTip:""
 (
-	On IsEnabled Return (classOf mcPoly == StructDef and mcPoly.isInPoly() and mcfileInVersion != undefined)
-	On Execute Do (mcfileInVersion "Soft_Selection")
+	On IsEnabled Return (classOf mcPoly == StructDef and mcPoly.isInPoly() and Micra.fileInVersion != undefined)
+	On Execute Do (Micra.fileInVersion "Soft_Selection")
 	
 )
 ----------------------------------------------------------------------------------------------------------
@@ -153,10 +153,10 @@ ButtonText:"Character_Tool"
 category:"Micra" 
 Tooltip:"Character_Tool"
 (
-	On IsEnabled Return (mcfileInVersion != undefined)
+	On IsEnabled Return (Micra.fileInVersion != undefined)
 	On Execute do
 	(
-		mcfileInVersion "Character_Tool"
+		Micra.fileInVersion "Character_Tool"
 	)
 )	
 ----------------------------------------------------------------------------------------------------------
@@ -213,8 +213,8 @@ MacroScript CompleteRepairObject
 category:"Micra"
 toolTip:""
 (
-	On IsEnabled Return (mcfileInVersion != undefined)
-	On Execute Do (mcfileInVersion "Repair_Object")
+	On IsEnabled Return (Micra.fileInVersion != undefined)
+	On Execute Do (Micra.fileInVersion "Repair_Object")
 )
 ----------------------------------------------------------------------------------------------------------	
 MacroScript ResetMatEditor            
@@ -279,7 +279,7 @@ toolTip:"3DGallery"
 Icon:#("mcDGallery",1)
 (
 	On IsEnabled Return (mcPath != undefined)
-	On execute do (mcfileInVersion "3DGallery")
+	On execute do (Micra.fileInVersion "3DGallery")
 )
 ----------------------------------------------------------------------------------------------------------
 macroScript UVW_Align_U
@@ -457,7 +457,7 @@ category:"Micra"
 toolTip:""
 (
 	On IsEnabled Return (mcPath != undefined)
-	On execute do (mcfileInVersion "External_PolySplitRing")
+	On execute do (Micra.fileInVersion "External_PolySplitRing")
 )
 ----------------------------------------------------------------------------------------------------------
 macroScript Transformer
@@ -465,7 +465,7 @@ category:"Micra"
 toolTip:""
 (
 	On IsEnabled Return (mcPath != undefined)
-	On execute do (mcfileInVersion "Transformer")
+	On execute do (Micra.fileInVersion "Transformer")
 )
 ----------------------------------------------------------------------------------------------------------
 macroScript UVW_Align_Center

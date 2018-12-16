@@ -199,7 +199,7 @@ rollout mcClonerDialog "Cloner v1.05" width:164 height:296
 	on mcClonerDialog open do
 	(
 		if keyboard.controlPressed	do (cloneSelection(); destroyDialog mcClonerDialog)
-		grp_Title.text = ("Cloner v"+(getInisetting mcDefaultINI "Version" "Clone2"))
+		grp_Title.text = ("Cloner v"+(getInisetting Micra.DefaultSettings "Version" "Clone2"))
 		spnCount.value = 1
 	)
 	on mcClonerDialog close do 
@@ -212,12 +212,7 @@ rollout mcClonerDialog "Cloner v1.05" width:164 height:296
 	on mcClonerDialog lbuttonup   pos do (dMove = false; pushprompt "")
 	on mcClonerDialog mouseMove   pos do
 	(
-		if dMove and keyboard.shiftPressed do 
-		(
-			if mcDialogSnappingEnabled 
-			then mcDialogSnap mcClonerDialog DmPos
-			else setDialogPos mcClonerDialog (mouse.screenpos - DmPos)
-		)
+		if dMove and keyboard.shiftPressed do mcDialogSnap mcClonerDialog DmPos
 	)
 	--Actions -----------------------------------------------------------------------
 	on btnCenter changed state do buttonControll state btnCenter

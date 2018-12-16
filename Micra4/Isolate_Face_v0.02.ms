@@ -128,12 +128,7 @@ rollout IsolateFaceDialog "" width:148 height:68
 	on IsolateFaceDialog lbuttonup   pos do (dMove = false; pushprompt "")
 	on IsolateFaceDialog mouseMove   pos do
 	(
-		if dMove and keyboard.shiftPressed do 
-		(
-			if mcDialogSnappingEnabled 
-			then mcDialogSnap IsolateFaceDialog DmPos
-			else setDialogPos IsolateFaceDialog (mouse.screenpos - DmPos)
-		)
+		if dMove and keyboard.shiftPressed do mcDialogSnap IsolateFaceDialog DmPos
 	)
 	-->Actions
 	on btn_faces  pressed  do (isoFaceSelection())

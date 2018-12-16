@@ -12,7 +12,7 @@ rollout mcRepairDialog "" width:332 height:128
 (
 	-------------------------------------------------------------------------
 	local n, p, s, tmp, sel,oName_1, cfgPath, AutExe, f
-	local ver = getIniSetting mcDefaultINI "Version" "Repair_Object" 
+	local ver = getIniSetting Micra.DefaultSettings "Version" "Repair_Object" 
 	local dMove = false, DmPos
 	-------------------------------------------------------------------------
 	GroupBox grp_1 "" pos:[4,4] width:324 height:120
@@ -178,14 +178,14 @@ rollout mcRepairDialog "" width:332 height:128
 	on chkSaveLinks changed state do
 	(
 		if chkSaveLinks.checked
-		then setIniSetting mcUserINI "Settings" "SaveLinks" "on"
-		else setIniSetting mcUserINI "Settings" "SaveLinks" "off"
+		then setIniSetting Micra.UserSettings "Settings" "SaveLinks" "on"
+		else setIniSetting Micra.UserSettings "Settings" "SaveLinks" "off"
 	)
 	on chkSaveWire changed state do
 	(
 		if chkSaveWire.checked
-		then setIniSetting mcUserINI "Settings" "SaveWirecolor" "on"
-		else setIniSetting mcUserINI "Settings" "SaveWirecolor" "off"
+		then setIniSetting Micra.UserSettings "Settings" "SaveWirecolor" "on"
+		else setIniSetting Micra.UserSettings "Settings" "SaveWirecolor" "off"
 	)
 )
 ----------------------------------------------------------------------------

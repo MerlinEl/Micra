@@ -163,12 +163,7 @@ rollout mcisoDialog " Isolate+  v2.03" width:140 height:400
 	on mcisoDialog lbuttonup   pos do (dMove = false; pushprompt "")
 	on mcisoDialog mouseMove   pos do
 	(
-		if dMove and keyboard.shiftPressed do 
-		(
-			if mcDialogSnappingEnabled 
-			then mcDialogSnap mcisoDialog DmPos
-			else setDialogPos mcisoDialog (mouse.screenpos - DmPos)
-		)
+		if dMove and keyboard.shiftPressed do mcDialogSnap mcisoDialog DmPos
 	)
 		-->Switch Visibility Mode to Selection Mode
 		on ckb_1 changed state do 

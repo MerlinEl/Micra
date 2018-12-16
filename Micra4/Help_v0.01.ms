@@ -28,12 +28,7 @@ rollout mcMicraHelpDialog "" width:448 height:304
 	on mcMicraHelpDialog lbuttonup   pos do (dMove = false; pushprompt "")
 	on mcMicraHelpDialog mouseMove   pos do
 	(
-		if dMove and keyboard.shiftPressed do 
-		(
-			if mcDialogSnappingEnabled 
-			then mcDialogSnap mcMicraHelpDialog DmPos
-			else setDialogPos mcMicraHelpDialog (mouse.screenpos - DmPos)
-		)
+		if dMove and keyboard.shiftPressed do mcDialogSnap mcMicraHelpDialog DmPos
 	)
 	--actions
 	on btn_close pressed do destroyDialog mcMicraHelpDialog

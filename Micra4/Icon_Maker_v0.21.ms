@@ -1,5 +1,5 @@
-Global mcIconMakerDialog
-if ::mcIconMakerDialog != undefined do try(mcIconMakerDialog.Close())catch()
+Global Micra.IconMakerDialog
+if ::Micra.IconMakerDialog != undefined do try(Micra.IconMakerDialog.Close())catch()
 (
 	local mcs, dia
 	struct dotNetFormStruct (
@@ -147,7 +147,7 @@ if ::mcIconMakerDialog != undefined do try(mcIconMakerDialog.Close())catch()
 		fn getIcon img icnNum transparent:false =
 		(
 			if icnNum == 0 do return mcs.createNewImage 24 24 black
-			--local img = (dotNetClass "Drawing.Image").FromFile mcIconI --get the saved image from file as bitmap
+			--local img = (dotNetClass "Drawing.Image").FromFile Micra.IconI --get the saved image from file as bitmap
 			local img_size = [img.width, img.height]
 			local icnCount  = (img_size/24)
 			icnNum -= 1
@@ -326,8 +326,8 @@ if ::mcIconMakerDialog != undefined do try(mcIconMakerDialog.Close())catch()
 		(
 --local form = if (s.getType()).name == "MaxForm" then s else dia
 --local mcs = form.tag.value
-			mcs.tempImgLib_D = mcs.getImageFromFile mcIconI
-			mcs.tempImgLib_A = mcs.getImageFromFile mcIconM
+			mcs.tempImgLib_D = mcs.getImageFromFile Micra.IconI
+			mcs.tempImgLib_A = mcs.getImageFromFile Micra.IconM
 			mcs.icon_box.image = mcs.tempImgLib_D
 			mcs.markIcon mcs.icon_box a num:marked
 		),
@@ -335,8 +335,8 @@ if ::mcIconMakerDialog != undefined do try(mcIconMakerDialog.Close())catch()
 		(
 			if not queryBox "You are sure to save changes?" title:" Micra III?" do return false		
 			local img_format  = dotNetClass "System.Drawing.Imaging.ImageFormat" -- file formats
-			mcs.tempImgLib_D.save mcIconI img_format.bmp
-			mcs.tempImgLib_A.save mcIconM img_format.bmp
+			mcs.tempImgLib_D.save Micra.IconI img_format.bmp
+			mcs.tempImgLib_A.save Micra.IconM img_format.bmp
 			--mcs.tempImgLib_D.Dispose()
 			--mcs.tempImgLib_A.Dispose()
 		),
@@ -828,15 +828,15 @@ if ::mcIconMakerDialog != undefined do try(mcIconMakerDialog.Close())catch()
 			-- Init Maxform
 			dotNet.loadAssembly "MaxCustomControls.dll"
 			
-			form.name = "mcIconMakerDialog"
+			form.name = "Micra.IconMakerDialog"
 			form.ControlBox  = false --hide main bar
-			local fpos = (mcCall.getIniDataFromArray mcTempProfileIni "Properties_2" "mcIconMakerDialog" 2) --pick custom fpos
-			if fpos == undefined do fpos = (mcCall.getIniDataFromArray mcDefaultProfileIni "Properties_2" "mcIconMakerDialog" 2) --pick default fpos
+			local fpos = (mcCall.getIniDataFromArray Micra.TempProfileIni "Properties_2" "Micra.IconMakerDialog" 2) --pick custom fpos
+			if fpos == undefined do fpos = (mcCall.getIniDataFromArray Micra.DefaultProfileIni "Properties_2" "Micra.IconMakerDialog" 2) --pick default fpos
 			if fpos == undefined do ( --register new fpos
 			
 				fpos = [0, 0]
-				mcCall.setIniDataToArray mcTempProfileIni "Properties_2" "mcIconMakerDialog" 2 fpos 	
-				mcCall.setIniDataToArray mcDefaultProfileIni "Properties_2" "mcIconMakerDialog" 2 fpos 
+				mcCall.setIniDataToArray Micra.TempProfileIni "Properties_2" "Micra.IconMakerDialog" 2 fpos 	
+				mcCall.setIniDataToArray Micra.DefaultProfileIni "Properties_2" "Micra.IconMakerDialog" 2 fpos 
 			)
 			form.StartPosition = form.StartPosition.Manual
 			form.bounds = netDrRect fpos form_size
@@ -1013,7 +1013,7 @@ if ::mcIconMakerDialog != undefined do try(mcIconMakerDialog.Close())catch()
 					btn_fill, btn_cross,tlp
 				) 
 			)
-			local dpos   = (mcCall.getIniDataFromArray mcTempProfileIni "Properties_2" "mcIconMakerDialog" 2)
+			local dpos   = (mcCall.getIniDataFromArray Micra.TempProfileIni "Properties_2" "Micra.IconMakerDialog" 2)
 			form.Location = netDrPoint dpos
 			-- Shows the form with the specified owner (MAX) to the user (creatd by lo)
 			local nw = defNWin()
@@ -1022,7 +1022,7 @@ if ::mcIconMakerDialog != undefined do try(mcIconMakerDialog.Close())catch()
 		),
 		initIt = init()
 	)
-	mcIconMakerDialog = dotNetFormStruct()
-	mcs = mcIconMakerDialog --structure shortcut (simplest use)
-	dia = mcIconMakerDialog.form --form instance
+	Micra.IconMakerDialog = dotNetFormStruct()
+	mcs = Micra.IconMakerDialog --structure shortcut (simplest use)
+	dia = Micra.IconMakerDialog.form --form instance
 )

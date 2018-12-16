@@ -103,8 +103,8 @@ if debug == 5 do format "name:%\t tag:%\n" s.name s.tag
 				mcs.ToolTip.SetToolTip btn ""
 				btn.image = undefined
 				btn.tag = undefined
-				delINISetting mcTempProfileIni "Buttons" btn.name
-				delINISetting mcTempProfileIni "Icons" btn.name
+				delINISetting Micra.TempProfileIni "Buttons" btn.name
+				delINISetting Micra.TempProfileIni "Icons" btn.name
 				undefined
 			)		
 		)
@@ -113,7 +113,7 @@ if debug == 5 do format "name:%\t tag:%\n" s.name s.tag
 		if action_mode != undefined do (
 			
 			mcGM.setParam "action_editor_switch" action_mode
-			mcFileInVersion "Customize"
+			Micra.fileInVersion "Customize"
 		)
 	)
 	fn onMousedown s a = --drag start
@@ -158,12 +158,12 @@ if debug == 5 do format "name:%\t tag:%\n" s.name s.tag
 							btn_a.Tag = btn_b.Tag
 							btn_b.Tag = tag
 							--save Settings
-							setINISetting mcTempProfileIni "Buttons" btn_a.name btn_a.tag
-							setINISetting mcTempProfileIni "Buttons" btn_b.name btn_b.tag
-							local icn_numA = getINISetting mcTempProfileIni "Icons" btn_a.name
-							local icn_numB = getINISetting mcTempProfileIni "Icons" btn_b.name			
-							setINISetting mcTempProfileIni "Icons" btn_a.name icn_numB
-							setINISetting mcTempProfileIni "Icons" btn_b.name icn_numA
+							setINISetting Micra.TempProfileIni "Buttons" btn_a.name btn_a.tag
+							setINISetting Micra.TempProfileIni "Buttons" btn_b.name btn_b.tag
+							local icn_numA = getINISetting Micra.TempProfileIni "Icons" btn_a.name
+							local icn_numB = getINISetting Micra.TempProfileIni "Icons" btn_b.name			
+							setINISetting Micra.TempProfileIni "Icons" btn_a.name icn_numB
+							setINISetting Micra.TempProfileIni "Icons" btn_b.name icn_numA
 						)
 						else --copy if buttonB is empty
 						(
@@ -172,15 +172,15 @@ if debug == 5 do format "name:%\t tag:%\n" s.name s.tag
 							btn_b.Image = btn_a.Image --copy image
 							btn_b.Tag = btn_a.tag --copy tag
 							--save Settings
-							local icn_numA = getINISetting mcTempProfileIni "Icons" btn_a.name
-							setINISetting mcTempProfileIni "Buttons" btn_b.name btn_b.tag
-							setINISetting mcTempProfileIni "Icons"   btn_b.name icn_numA
+							local icn_numA = getINISetting Micra.TempProfileIni "Icons" btn_a.name
+							setINISetting Micra.TempProfileIni "Buttons" btn_b.name btn_b.tag
+							setINISetting Micra.TempProfileIni "Icons"   btn_b.name icn_numA
 							
 							btn_a.image = undefined
 							btn_a.tag = undefined
 							mcsA.ToolTip.SetToolTip btn_a ""
-							delINISetting mcTempProfileIni "Buttons" btn_a.name
-							delINISetting mcTempProfileIni "Icons" btn_a.name
+							delINISetting Micra.TempProfileIni "Buttons" btn_a.name
+							delINISetting Micra.TempProfileIni "Icons" btn_a.name
 						)
 					)
 					else --remove button action (if button A draget out, in to free space)
@@ -188,8 +188,8 @@ if debug == 5 do format "name:%\t tag:%\n" s.name s.tag
 						btn_a.image = undefined
 						btn_a.tag = undefined
 						mcsA.ToolTip.SetToolTip btn_a ""
-						delINISetting mcTempProfileIni "Buttons" btn_a.name
-						delINISetting mcTempProfileIni "Icons" btn_a.name
+						delINISetting Micra.TempProfileIni "Buttons" btn_a.name
+						delINISetting Micra.TempProfileIni "Icons" btn_a.name
 					)
 					mcGM.setParam "form_drop_data" undefined --clear dorop data memory
 				)
@@ -269,9 +269,9 @@ if debug == 5 do format "name:%\t tag:%\n" s.name s.tag
 		(
 			--gather data from ini
 			local bname = ("btn_"+bmask+ (i as integer) as string) 
-			local baction  = (getIniSetting mcTempProfileIni "Buttons" bname    )
+			local baction  = (getIniSetting Micra.TempProfileIni "Buttons" bname    )
 			local btooltip = (mcString.replaceCharInString (copy baction) "_" " ")
-			local biconnum = (getIniSetting mcTempProfileIni "Icons" bname      ) as integer
+			local biconnum = (getIniSetting Micra.TempProfileIni "Icons" bname      ) as integer
 			local bicn     = getIconDotNet biconnum
 			--store data in struct
 			--mcs.bnames    [ i ] = bname
@@ -385,7 +385,7 @@ if debug == 5 do format "name:%\t tag:%\n" s.name s.tag
 		if mcs.rows    == 0           do mcs.rows     = 1
 		if mcs.rows    == count_limit do mcs.rows    -= 1
 		--save in to temp profile
-		mcCall.setIniDataToArray mcTempProfileIni "Properties_1" s.parent.name 5 [mcs.columns, mcs.rows]
+		mcCall.setIniDataToArray Micra.TempProfileIni "Properties_1" s.parent.name 5 [mcs.columns, mcs.rows]
 	)
 --|	--Form move
 	fn onLblTMouseMove s a = 
@@ -524,7 +524,7 @@ if debug == 5 do format "name:%\t tag:%\n" s.name s.tag
 			if s.text != "" do 
 			(
 				s.parent.text = s.text
-				mcCall.setIniDataToArray mcTempProfileIni "Properties_1" s.parent.parent.name 4 s.text
+				mcCall.setIniDataToArray Micra.TempProfileIni "Properties_1" s.parent.parent.name 4 s.text
 			)
 			s.clear()
 			s.hide()
@@ -641,7 +641,7 @@ if debug == 5 do format "name:%\t tag:%\n" s.name s.tag
 		
 		-->Components---------------------------------------------------------------------
 		local form  = createFormInstance dname
-		local cr = (mcCall.getIniDataFromArray mcTempProfileIni "Properties_1" dname 5)
+		local cr = (mcCall.getIniDataFromArray Micra.TempProfileIni "Properties_1" dname 5)
 		struct MICRA_COMPONENTS_STRUCT 
 		( 
 			ToolTip   = dotNetObject "ToolTip",
@@ -683,8 +683,8 @@ if debug == 5 do format "name:%\t tag:%\n" s.name s.tag
 		form.tag  = dotNetMXSValue (MICRA_COMPONENTS_STRUCT columns:cr.x rows:cr.y) --Manual Lifetime
 		
 		--ini data
-		local dpos   = (mcCall.getIniDataFromArray mcTempProfileIni "Properties_1" dname 2)
-		local dtitle = (mcCall.getIniDataFromArray mcTempProfileIni "Properties_1" dname 4)
+		local dpos   = (mcCall.getIniDataFromArray Micra.TempProfileIni "Properties_1" dname 2)
+		local dtitle = (mcCall.getIniDataFromArray Micra.TempProfileIni "Properties_1" dname 4)
 		
 		inicializeInterface form style:#compact title:dtitle pos:dpos
 		generateButtons  form style:#start

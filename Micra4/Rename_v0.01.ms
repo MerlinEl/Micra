@@ -47,12 +47,7 @@ if mcRenameDialog != undefined then destroyDialog mcRenameDialog
 		on mcRenameDialog lbuttonup   pos do (dMove = false; pushprompt "")
 		on mcRenameDialog mouseMove   pos do
 		(
-			if dMove and keyboard.shiftPressed do 
-			(
-				if mcDialogSnappingEnabled 
-				then mcDialogSnap mcRenameDialog DmPos
-				else setDialogPos mcRenameDialog (mouse.screenpos - DmPos)
-			)
+			if dMove and keyboard.shiftPressed do mcDialogSnap mcRenameDialog DmPos
 		)
 		-----------------------------------------------------------------------------------------------				
 		on objs changed state do

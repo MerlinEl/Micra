@@ -325,7 +325,7 @@ struct mcCall
 			rollout mcProgressBarDialog " Inicialize 3DGallery Database:" width:332 height:132
 			(
 				GroupBox grp_info "Progress...0%" pos:[8,4] width:316 height:120
-				bitmap bmpPop1 "Bitmap" pos:[16,20] width:300 height:80 fileName:(mcPath()+"Img\\3DGall_Loader_01.bmp")
+				bitmap bmpPop1 "Bitmap" pos:[16,20] width:300 height:80 fileName:(Micra.RootDir+"Img\\3DGall_Loader_01.bmp")
 				progressBar pBar "ProgressBar" pos:[16,104] width:300 height:13
 				button btn_close "*" pos:[312,4] width:12 height:12
 				on btn_close pressed do destroyDialog mcProgressBarDialog
@@ -398,10 +398,10 @@ struct mcCall
 	),
 	fn createIniDialog dNameStr prop style:#(#style_border) modal:false resize:false =
 	(
-		if not doesFileExist mcTempProfileIni do return false
+		if not doesFileExist Micra.TempProfileIni do return false
 		
-		-->get data from mcTempProfileIni as array
-		local data  = execute (getIniSetting mcTempProfileIni prop dNameStr)
+		-->get data from Micra.TempProfileIni as array
+		local data  = execute (getIniSetting Micra.TempProfileIni prop dNameStr)
 		--format "data:%\n" data
 		if classOf data != array do return false
 		local dPos  = data[2]
@@ -415,9 +415,9 @@ struct mcCall
 	),
 	fn saveIniDialog dNameStr head  active: title: =
 	(
-		if not doesFileExist mcTempProfileIni do return false
+		if not doesFileExist Micra.TempProfileIni do return false
 		
-		local data  = execute (getIniSetting mcTempProfileIni head dNameStr)
+		local data  = execute (getIniSetting Micra.TempProfileIni head dNameStr)
 		if classOf data != array do data = #(false,[0,0],[0,0],"")
 		local dia = execute dNameStr
 		
@@ -437,7 +437,7 @@ struct mcCall
 				data[3] = [dia.width, dia.height]
 			) 
 		)
-		setIniSetting mcTempProfileIni head dNameStr (data as string)
+		setIniSetting Micra.TempProfileIni head dNameStr (data as string)
 	),
 	fn getIcon icn_num mask:#micra =
 	(	
@@ -448,15 +448,15 @@ struct mcCall
 			(
 				icSize=24 
 				imgSize=480 
-				img=mcIconI 
-				msk=mcIconM
+				img=Micra.IconI 
+				msk=Micra.IconM
 			)
 			#empty:
 			(
 				icSize=24
 				imgSize=240 
-				img=mcPath() + "Img\\i.bmp" 
-				msk=mcPath() + "Img\\m.bmp"
+				img=Micra.RootDir + "Img\\i.bmp" 
+				msk=Micra.RootDir + "Img\\m.bmp"
 			)
 		)
 		local blank = #(bitmap icSize icSize, bitmap icSize icSize color:white,1,1,1,1,1)
@@ -701,34 +701,34 @@ struct mcFile
 	),
 	fn saveLoadIniSetings head: key: data: action: =
 	(
-		if not doesFileExist mcUserINI or  not doesFileExist mcDefaultINI do return false
+		if not doesFileExist Micra.UserSettings or  not doesFileExist Micra.DefaultSettings do return false
 		if head == unsupplied or key == unsupplied do return false
 		case action of
 		(
 			#load:
 			(
-				local user_data = getINISetting mcUserINI head key
+				local user_data = getINISetting Micra.UserSettings head key
 				if user_data != ""
 				then return user_data --user settings
-				else return getINISetting mcDefaultINI head key --default settings
+				else return getINISetting Micra.DefaultSettings head key --default settings
 			)
 			#save:
 			(
 				if data == unsupplied do return false
-				setINISetting mcUserINI head key data
+				setINISetting Micra.UserSettings head key data
 			)
 		)
 	),
 	fn saveIniDialog form head key =
 	(
-		if not doesFileExist mcTempProfileIni or classOf form != dotnetObject do return false
-		local data  = execute (getIniSetting mcTempProfileIni head key)
+		if not doesFileExist Micra.TempProfileIni or classOf form != dotnetObject do return false
+		local data  = execute (getIniSetting Micra.TempProfileIni head key)
 		if classOf data != array do data = #(false,[0,0],[0,0],"")
 
 		data[1] = form.Visible
 		data[2] = [form.location.x, form.location.y]
 		data[3] = [form.width, form.height]
-		setIniSetting mcTempProfileIni head key (data as string)
+		setIniSetting Micra.TempProfileIni head key (data as string)
 	),
 	fn backupMaxFile =
 	(
@@ -792,7 +792,7 @@ struct mcFile
 	)
 )
     --local mf = mcFile()
-    --mf.getDirTree (mcPath())
+    --mf.getDirTree (Micra.RootDir)
     --print mf.all_dirs
 
 struct mcInfo
@@ -1203,8 +1203,8 @@ struct mcSystem
 	),
 	fn getActionData action_category action_name = (
 	
-		if not doesFileExist mcActionIni do ((format "Not found! [Settings.ini]\n" ); return undefined)
-		local data = getIniSetting mcActionIni action_category action_name --#(106, "mcAnimation.reverse 0 10" , "Reverse_Animation")
+		if not doesFileExist Micra.ActionsIni do ((format "Not found! [%]\n" Micra.ActionsIni); return undefined)
+		local data = getIniSetting Micra.ActionsIni action_category action_name --#(106, "mcAnimation.reverse 0 10" , "Reverse_Animation")
 		if data != "" do (
 				
 			local data_array = execute data --convert string to array
@@ -1213,13 +1213,13 @@ struct mcSystem
 		)
 		return undefined
 	),
-	--search in mcActionIni by name
+	--search in Micra.ActionsIni by name
 	fn getActionByName action_name = (
 	
-		if not doesFileExist mcActionIni do ((format "Not found! [Settings.ini]\n" ); return undefined)
-		local heads = getIniSetting mcActionIni
+		if not doesFileExist Micra.ActionsIni do ((format "Not found! [%]\n" Micra.ActionsIni); return undefined)
+		local heads = getIniSetting Micra.ActionsIni
 		for action_category in heads do( --INI Heads
-			local data = getIniSetting mcActionIni action_category action_name --INI Key
+			local data = getIniSetting Micra.ActionsIni action_category action_name --INI Key
 			if data != "" do (
 				
 				local data_array = execute data --convert string to array
@@ -1237,8 +1237,8 @@ struct mcSystem
 		
 		local data = mcSystem.getActionByName action_name -- mcObject(name:action_name, category:action_category, val:data_array)
 		if data == undefined do return false
-		local action_with_cmd = (data.get "val")[2] --(mcAnimation.reverse 0 10 ||  mcfileInVersion \"Paint_Selection\"")[2]
-		local action_type = if findString action_with_cmd "mcfileInVersion" == undefined then "function" else "file"
+		local action_with_cmd = (data.get "val")[2] --(mcAnimation.reverse 0 10 ||  Micra.fileInVersion \"Paint_Selection\"")[2]
+		local action_type = if findString action_with_cmd "Micra.fileInVersion" == undefined then "function" else "file"
 		--format "action type:%\n" action_type
 		case action_type of --mcAnimation.reverse || Paint_Selection
 		(
@@ -1255,8 +1255,8 @@ struct mcSystem
 				local fname_start = findString action_with_cmd "\""
 				local fname = substring action_with_cmd fname_start -1
 				fname = execute fname -- remove quotes
-				local current_dir = mcPath()
-				local fversion = getIniSetting mcDefaultINI "Version" fname
+				local current_dir = Micra.RootDir
+				local fversion = getIniSetting Micra.DefaultSettings "Version" fname
 				local file = current_dir + fname + "_v" + fversion + ".ms"
 				--format "open file:%\n" file
 				edit file
@@ -1379,7 +1379,7 @@ fn mcDialogSnap dia pos =
 	local sDist = rect_desktop.ma.x / 200-- set snap distance
 	
 	--get visible Dialog names
-	local allDialogs = getINISetting mcTempProfileIni "Properties_1" + getINISetting mcTempProfileIni "Properties_2"
+	local allDialogs = getINISetting Micra.TempProfileIni "Properties_1" + getINISetting Micra.TempProfileIni "Properties_2"
 	local visDialogs = for i in allDialogs where (execute (i+" != undefined")) and (execute ("classOf "+ i +" == RolloutClass")) and (execute(i+".isDisplayed")) collect i
 
 	for i in visDialogs do

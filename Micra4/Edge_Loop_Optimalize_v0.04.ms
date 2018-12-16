@@ -96,12 +96,7 @@ rollout mcELOpDialog "Untitled" width:220 height:60
 	on mcELOpDialog lbuttonup   pos do (dMove = false; pushprompt "")
 	on mcELOpDialog mouseMove   pos do
 	(
-		if dMove and keyboard.shiftPressed do 
-		(
-			if mcDialogSnappingEnabled 
-			then mcDialogSnap mcELOpDialog DmPos
-			else setDialogPos mcELOpDialog (mouse.screenpos - DmPos)
-		)
+		if dMove and keyboard.shiftPressed do mcDialogSnap mcELOpDialog DmPos
 	)
 	
 	on btn_accept pressed  do

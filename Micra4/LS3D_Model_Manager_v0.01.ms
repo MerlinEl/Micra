@@ -37,7 +37,7 @@ rollout LS3DModelManagerDialog "LS3D Model Manager v1.0" width:764 height:284 (
 	button 'btn_load_semat' "Load Semantic Materials" pos:[636,248] width:124 height:32 align:#left
 
 	local root_edit_dir, root_resources_dir
-	local SettingsINI = mcPath() + "LS3D_ReplaceModel.ini"
+	local SettingsINI = Micra.RootDir + "LS3D_ReplaceModel.ini"
 	/*fn fixPath str = (
 		local arr = #()
 		for i=1 to str.count do (

@@ -12,7 +12,7 @@
 --~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~--
 fn runGallery3D = (
 
-	local dir = pathConfig.removePathLeaf (mcPath()) + "\\3DGallery"
+	local dir = pathConfig.removePathLeaf Micra.RootDir + "\\3DGallery"
 	local fpath = dir + "\\" + "3DGallery_v1.60.ms"	
 	format "does file [%] exists:%\n" fpath (doesFileExist fpath)
 	if doesFileExist fpath do fileIn (fpath)

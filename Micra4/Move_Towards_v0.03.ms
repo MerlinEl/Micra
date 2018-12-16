@@ -59,12 +59,7 @@ rollout mcMoveTowardsDialog "" width:200 height:76
 	on mcMoveTowardsDialog lbuttonup pos   do(dMove = false)
 	on mcMoveTowardsDialog mouseMove pos do
 	(
-		if dMove and keyboard.shiftPressed do
-		(
-			if mcDialogSnappingEnabled
-			then mcDialogSnap mcMoveTowardsDialog DmPos
-			else setDialogPos mcMoveTowardsDialog (mouse.screenpos - DmPos)
-		)
+		if dMove and keyboard.shiftPressed do mcDialogSnap mcMoveTowardsDialog DmPos
 	)
 	on rdoAxis changed state  do (setRdoAxisVal state )
 	on spnTowards changed val do 

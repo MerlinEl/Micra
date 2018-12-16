@@ -115,12 +115,7 @@ rollout mcRandomizeDialog "" width:152 height:332
 	on mcRandomizeDialog lbuttonup   pos do (dMove = false; pushprompt "")
 	on mcRandomizeDialog mouseMove   pos do
 	(
-		if dMove and keyboard.shiftPressed do 
-		(
-			if mcDialogSnappingEnabled 
-			then mcDialogSnap mcRandomizeDialog DmPos
-			else setDialogPos mcRandomizeDialog (mouse.screenpos - DmPos)
-		)
+		if dMove and keyboard.shiftPressed do mcDialogSnap mcRandomizeDialog DmPos
 	)
 	-->Actions
 	on chk_pos changed state do if state do spn_pos_z.value = spn_pos_y.value = spn_pos_x.value

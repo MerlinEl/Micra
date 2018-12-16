@@ -108,14 +108,14 @@ try ( mcSaveProfileAsDialog.close() ) catch()
 			(
 				--if mcs.ebox.text != mcs.cbox.SelectedItem do renameItem form
 				local sel_index = (mcs.cbox.SelectedIndex+1) as string
-				local targetFile = mcPath() +"User\\Profile_" + sel_index  + ".ini"
-				if doesFileExist targetFile and doesFileExist mcTempProfileIni do 
+				local targetFile = Micra.RootDir +"User\\Profile_" + sel_index  + ".ini"
+				if doesFileExist targetFile and doesFileExist Micra.TempProfileIni do 
 				(
 					deleteFile targetFile 
-					copyFile mcTempProfileIni targetFile
+					copyFile Micra.TempProfileIni targetFile
 				)
 				--set new name to ini
-				setIniSetting mcUserINI "Profiles" sel_index mcs.cbox.SelectedItem
+				setIniSetting Micra.UserSettings "Profiles" sel_index mcs.cbox.SelectedItem
 				form.close()
 			)
 			"Rename": editItemName s a
@@ -145,7 +145,7 @@ try ( mcSaveProfileAsDialog.close() ) catch()
 	)
 	fn loadCBoxItems mcs =
 	(
-		local items= for i = 1 to 8 collect getIniSetting mcUserINI "Profiles" (i as string)
+		local items= for i = 1 to 8 collect getIniSetting Micra.UserSettings "Profiles" (i as string)
 		mcs.cbox.Items.AddRange (dotNetArray items)
 		mcs.cbox.SelectedIndex = 0
 	)
@@ -153,7 +153,7 @@ try ( mcSaveProfileAsDialog.close() ) catch()
 	(
 		form.name = "mcSaveProfileAsDialog"
 		form.ControlBox  = false --hide main bar
-		local fpos = (mcCall.getIniDataFromArray mcTempProfileIni "Properties_2" "mcSaveProfileAsDialog" 2)
+		local fpos = (mcCall.getIniDataFromArray Micra.TempProfileIni "Properties_2" "mcSaveProfileAsDialog" 2)
 		form.StartPosition = form.StartPosition.Manual
 		form.bounds = netDrRect fpos form_size
 		form.FormBorderStyle = form.FormBorderStyle.none

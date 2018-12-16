@@ -937,12 +937,7 @@ rollout mcLpWizardDialog "" width:528 height:84
 	on mcLpWizardDialog lbuttonup pos do(dMove = false; pushprompt "")
 	on mcLpWizardDialog mouseMove pos do
 	(
-		if dMove and keyboard.shiftPressed do 
-		(
-			if mcDialogSnappingEnabled 
-			then mcDialogSnap mcLpWizardDialog DmPos
-			else setDialogPos mcLpWizardDialog (mouse.screenpos - DmPos)
-		)
+		if dMove and keyboard.shiftPressed do mcDialogSnap mcLpWizardDialog DmPos
 	)
 	-->Start Tool
 	on ckbDraw changed state do --begin LPW Tool
@@ -1113,12 +1108,7 @@ rollout mcLpWizardDialog "" width:528 height:84
 			on lpWizardHelpDialog lbuttonup   pos do (dMove = false; pushprompt "")
 			on lpWizardHelpDialog mouseMove   pos do
 			(
-				if dMove and keyboard.shiftPressed do 
-				(
-					if mcDialogSnappingEnabled 
-					then mcDialogSnap lpWizardHelpDialog DmPos
-					else setDialogPos lpWizardHelpDialog (mouse.screenpos - DmPos)
-				)
+				if dMove and keyboard.shiftPressed do mcDialogSnap lpWizardHelpDialog DmPos
 			)
 		)
 		createDialog lpWizardHelpDialog pos:[dPos2.x, dPos2.y + 90] style:#(#style_border)

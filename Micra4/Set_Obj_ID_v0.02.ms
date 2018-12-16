@@ -117,12 +117,7 @@ rollout mcObjIDDialog "" width:144 height:84
 	on mcObjIDDialog lbuttonup   pos do (dMove = false; pushprompt "")
 	on mcObjIDDialog mouseMove   pos do
 	(
-		if dMove and keyboard.shiftPressed do 
-		(
-			if mcDialogSnappingEnabled 
-			then mcDialogSnap mcObjIDDialog DmPos
-			else setDialogPos mcObjIDDialog (mouse.screenpos - DmPos)
-		)
+		if dMove and keyboard.shiftPressed do mcDialogSnap mcObjIDDialog DmPos
 	)
 	--Actions -----------------------------------------------------------------------
 	on spn_id changed val do (set_Obj_or_Face spn_id.value)

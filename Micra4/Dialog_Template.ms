@@ -70,13 +70,13 @@ if ::mcTemplateDialog != undefined do try(mcTemplateDialog.Close())catch()
 			
 			form.name = "mcTemplateDialog"
 			form.ControlBox  = false --hide main bar
-			local fpos = (mcCall.getIniDataFromArray mcTempProfileIni "Properties_2" "mcTemplateDialog" 2) --pick custom fpos
-			if fpos == undefined do fpos = (mcCall.getIniDataFromArray mcDefaultProfileIni "Properties_2" "mcTemplateDialog" 2) --pick default fpos
+			local fpos = (mcCall.getIniDataFromArray Micra.TempProfileIni "Properties_2" "mcTemplateDialog" 2) --pick custom fpos
+			if fpos == undefined do fpos = (mcCall.getIniDataFromArray Micra.DefaultProfileIni "Properties_2" "mcTemplateDialog" 2) --pick default fpos
 			if fpos == undefined do ( --register new fpos
 			
 				fpos = [0, 0]
-				mcCall.setIniDataToArray mcTempProfileIni "Properties_2" "mcTemplateDialog" 2 fpos 	
-				mcCall.setIniDataToArray mcDefaultProfileIni "Properties_2" "mcTemplateDialog" 2 fpos 
+				mcCall.setIniDataToArray Micra.TempProfileIni "Properties_2" "mcTemplateDialog" 2 fpos 	
+				mcCall.setIniDataToArray Micra.DefaultProfileIni "Properties_2" "mcTemplateDialog" 2 fpos 
 			)
 			form.StartPosition = form.StartPosition.Manual
 			form.bounds = netDrRect fpos form_size
@@ -120,7 +120,7 @@ if ::mcTemplateDialog != undefined do try(mcTemplateDialog.Close())catch()
 			--Add Controls
 			form.controls.addRange ( #(tlp, btnMin, lblT)  )
 			--set last position if is stroed at Properties_2
-			local dpos   = (mcCall.getIniDataFromArray mcTempProfileIni "Properties_2" "mcIconMakerDialog" 2)
+			local dpos   = (mcCall.getIniDataFromArray Micra.TempProfileIni "Properties_2" "Micra.IconMakerDialog" 2)
 			form.Location = netDrPoint dpos
 			-- Shows the form with the specified owner (MAX) to the user (creatd by lo)
 			local nw = defNWin()

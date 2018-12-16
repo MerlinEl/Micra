@@ -46,56 +46,56 @@ rollout mcRenderToTextureModDialog "Untitled" width:504 height:232
 	-->Functions
 	fn loadInterface =
 	(
-		if not doesFileExist mcUserINI do return false
+		if not doesFileExist Micra.UserSettings do return false
 		local chk = #(chk_1, chk_2, chk_3, chk_4, chk_5, chk_6)
 		for i=1 to chk.count do 
 		(
-			local state = getIniSetting mcUserINI "RenderToTextureMod" chk[i].name
+			local state = getIniSetting Micra.UserSettings "RenderToTextureMod" chk[i].name
 			if state != "" do chk[i].state  = execute state
 		)
-		local ali = getIniSetting mcUserINI "RenderToTextureMod" "Ambient Lights" 
+		local ali = getIniSetting Micra.UserSettings "RenderToTextureMod" "Ambient Lights" 
 		if ali  != "" do chk_ali.checked = execute ali
-		local ren = getIniSetting mcUserINI "RenderToTextureMod" "Show Rendering"
+		local ren = getIniSetting Micra.UserSettings "RenderToTextureMod" "Show Rendering"
 		if ren  != "" do chk_show_render.checked = execute ren
-		local fty = getIniSetting mcUserINI "RenderToTextureMod" "File Type"
+		local fty = getIniSetting Micra.UserSettings "RenderToTextureMod" "File Type"
 		if fty  != "" do ddl_file_type.selection = execute fty
-		local rsi = getIniSetting mcUserINI "RenderToTextureMod" "Render Size"
+		local rsi = getIniSetting Micra.UserSettings "RenderToTextureMod" "Render Size"
 		if rsi  != "" do ddl_render_size.selection = execute rsi
-		local tli = getIniSetting mcUserINI "RenderToTextureMod" "Top Light"
+		local tli = getIniSetting Micra.UserSettings "RenderToTextureMod" "Top Light"
 		if tli  != "" then spn_toplight.value    = execute tli else spn_toplight.value    = 0.1
-		local bli = getIniSetting mcUserINI "RenderToTextureMod" "Bottom Light"
+		local bli = getIniSetting Micra.UserSettings "RenderToTextureMod" "Bottom Light"
 		if bli  != "" then spn_bottomlight.value = execute bli else spn_bottomlight.value = 0.08
 		---render
-		local ant = getIniSetting mcUserINI "RenderToTextureMod" "Antialiasing"
+		local ant = getIniSetting Micra.UserSettings "RenderToTextureMod" "Antialiasing"
 		if ant  != "" do chk_antialiasing.checked = execute ant 
-		local fil = getIniSetting mcUserINI "RenderToTextureMod" "Filter"
+		local fil = getIniSetting Micra.UserSettings "RenderToTextureMod" "Filter"
 		if fil  != "" do ddl_filters.selection = execute fil
-		local egs = getIniSetting mcUserINI "RenderToTextureMod" "Enable Global Supersampler"
+		local egs = getIniSetting Micra.UserSettings "RenderToTextureMod" "Enable Global Supersampler"
 		if egs  != "" do chk_global_ssampler.checked = execute egs
-		local smp = getIniSetting mcUserINI "RenderToTextureMod" "Sampler"
+		local smp = getIniSetting Micra.UserSettings "RenderToTextureMod" "Sampler"
 		if smp  != "" do ddl_samplers.selection = execute smp
 		--Advanced Lighting / light tracer
-		local lit = getIniSetting mcUserINI "RenderToTextureMod" "Light Tracer"
+		local lit = getIniSetting Micra.UserSettings "RenderToTextureMod" "Light Tracer"
 		if lit != "" do chk_light_tracer.checked = execute lit
 	)
 	fn saveInterface =
 	(
-		if not doesFileExist mcUserINI do return false
+		if not doesFileExist Micra.UserSettings do return false
 		local chk = #(chk_1, chk_2, chk_3, chk_4, chk_5, chk_6)
-		for i=1 to chk.count do setIniSetting mcUserINI "RenderToTextureMod" chk[i].name (chk[i].checked as string)
-		setIniSetting mcUserINI "RenderToTextureMod" "Ambient Lights" (chk_ali.checked as string)
-		setIniSetting mcUserINI "RenderToTextureMod" "Show Rendering" (chk_show_render.checked as string)
-		setIniSetting mcUserINI "RenderToTextureMod" "File Type" (ddl_file_type.selection as string)
-		setIniSetting mcUserINI "RenderToTextureMod" "Render Size" (ddl_render_size.selection as string)
-		setIniSetting mcUserINI "RenderToTextureMod" "Top Light" (spn_toplight.value as string)
-		setIniSetting mcUserINI "RenderToTextureMod" "Bottom Light" (spn_bottomlight.value as string)
+		for i=1 to chk.count do setIniSetting Micra.UserSettings "RenderToTextureMod" chk[i].name (chk[i].checked as string)
+		setIniSetting Micra.UserSettings "RenderToTextureMod" "Ambient Lights" (chk_ali.checked as string)
+		setIniSetting Micra.UserSettings "RenderToTextureMod" "Show Rendering" (chk_show_render.checked as string)
+		setIniSetting Micra.UserSettings "RenderToTextureMod" "File Type" (ddl_file_type.selection as string)
+		setIniSetting Micra.UserSettings "RenderToTextureMod" "Render Size" (ddl_render_size.selection as string)
+		setIniSetting Micra.UserSettings "RenderToTextureMod" "Top Light" (spn_toplight.value as string)
+		setIniSetting Micra.UserSettings "RenderToTextureMod" "Bottom Light" (spn_bottomlight.value as string)
 		---render
-		setIniSetting mcUserINI "RenderToTextureMod" "Antialiasing" (chk_antialiasing.checked as string)
-		setIniSetting mcUserINI "RenderToTextureMod" "Filter" (ddl_filters.selection as string)
-		setIniSetting mcUserINI "RenderToTextureMod" "Enable Global Supersampler" (chk_global_ssampler.checked as string)
-		setIniSetting mcUserINI "RenderToTextureMod" "Sampler" (ddl_samplers.selection as string)
+		setIniSetting Micra.UserSettings "RenderToTextureMod" "Antialiasing" (chk_antialiasing.checked as string)
+		setIniSetting Micra.UserSettings "RenderToTextureMod" "Filter" (ddl_filters.selection as string)
+		setIniSetting Micra.UserSettings "RenderToTextureMod" "Enable Global Supersampler" (chk_global_ssampler.checked as string)
+		setIniSetting Micra.UserSettings "RenderToTextureMod" "Sampler" (ddl_samplers.selection as string)
 		--Advanced Lighting / light tracer
-		setIniSetting mcUserINI "RenderToTextureMod" "Light Tracer" (chk_light_tracer.checked as string)
+		setIniSetting Micra.UserSettings "RenderToTextureMod" "Light Tracer" (chk_light_tracer.checked as string)
 	)
 	fn collectCheckedElements =
 	(
@@ -238,12 +238,7 @@ rollout mcRenderToTextureModDialog "Untitled" width:504 height:232
 	on mcRenderToTextureModDialog lbuttonup   pos do (dMove = false; pushprompt "")
 	on mcRenderToTextureModDialog mouseMove   pos do
 	(
-		if dMove and keyboard.shiftPressed do 
-		(
-			if mcDialogSnappingEnabled 
-			then mcDialogSnap mcRenderToTextureModDialog DmPos
-			else setDialogPos mcRenderToTextureModDialog (mouse.screenpos - DmPos)
-		)
+		if dMove and keyboard.shiftPressed do mcDialogSnap mcRenderToTextureModDialog DmPos
 	)
 	--Actions -----------------------------------------------------------------------
 	on btn_render pressed  do

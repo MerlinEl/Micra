@@ -4,8 +4,8 @@ Global mcMultiPlanterDialog
 Global mcMultiPlanterEnabled
 (
 	-----------------------------------------------------------------
-	local rootPath = getINISetting mcUserINI "3DGallery" "RootPath"
-	local profilePath = mcPath() + "User\\3DGallery_Profiles.ini"
+	local rootPath = getINISetting Micra.UserSettings "3DGallery" "RootPath"
+	local profilePath = Micra.RootDir + "User\\3DGallery_Profiles.ini"
 	-----------------------------------------------------------------
 	
 	rollout objectList "Object List" 
@@ -57,7 +57,7 @@ Global mcMultiPlanterEnabled
 		)
 		on objectList close do 
 		(
-			setINISetting mcUserINI "3DGallery" "ObjectList_RolledUp" ((not ObjectList.open) as string)
+			setINISetting Micra.UserSettings "3DGallery" "ObjectList_RolledUp" ((not ObjectList.open) as string)
 		)
 		on spn_count changed val do 
 		(
@@ -145,7 +145,7 @@ Global mcMultiPlanterEnabled
 		)
 		on RandomSettings close do 
 		(
-			setINISetting mcUserINI "3DGallery" "RandomSettings_RolledUp" ((not RandomSettings.open) as string)
+			setINISetting Micra.UserSettings "3DGallery" "RandomSettings_RolledUp" ((not RandomSettings.open) as string)
 		)
 	)
 	
@@ -166,7 +166,7 @@ Global mcMultiPlanterEnabled
 		checkbox chk_pres_over "Preserve Overlaps" pos:[136,28] width:108 height:16
 		on GlobalSettings close do 
 		(
-			setINISetting mcUserINI "3DGallery" "GlobalSettings_RolledUp" ((not GlobalSettings.open) as string)
+			setINISetting Micra.UserSettings "3DGallery" "GlobalSettings_RolledUp" ((not GlobalSettings.open) as string)
 		)
 		on spn_dist   changed val      do mcDgalleryDialog.spnDist          = val
 		on spn_sens   changed val      do mcDgalleryDialog.spnSens          = val
@@ -206,7 +206,7 @@ Global mcMultiPlanterEnabled
 			local p = [RandomSettings.spn_pos_x.value, RandomSettings.spn_pos_y.value, RandomSettings.spn_pos_z.value] as string
 			setIniSetting iniFile head "Single_Position" p
 			
-			setIniSetting mcUserINI   "3DGallery" "Last_Profile" (ddl_profile.selection as string)
+			setIniSetting Micra.UserSettings   "3DGallery" "Last_Profile" (ddl_profile.selection as string)
 			if head != "3DGalleryDefault" do
 			(
 				setIniSetting iniFile head "MaxFilePath" (mcDgalleryDialog.ObjectListArray.MaxFilePath as string)
@@ -232,7 +232,7 @@ Global mcMultiPlanterEnabled
 				else if querybox ( "Owerwrite ["+lbl+"] profile?") title:" Do you wish?" do --owerwrite
 				(
 					if lbl == "Default" 
-					then saveProfile mcUserINI head:"3DGalleryDefault"
+					then saveProfile Micra.UserSettings head:"3DGalleryDefault"
 					else saveProfile profilePath head:lbl
 					ddl_profile.selection = findItem ddl_profile.items lbl
 				)
@@ -240,7 +240,7 @@ Global mcMultiPlanterEnabled
 			else if querybox ( "Owerwrite ["+itm+"] profile?") title:" Do you wish?" do --owerwrite
 			(
 				if itm == "Default" 
-				then saveProfile mcUserINI head:"3DGalleryDefault"
+				then saveProfile Micra.UserSettings head:"3DGalleryDefault"
 				else saveProfile profilePath head:itm
 				ddl_profile.selection = findItem ddl_profile.items itm
 			)
@@ -335,7 +335,7 @@ Global mcMultiPlanterEnabled
 				if ddl_profile.items.count > 0 
 				then (ddl_profile.selection = 1; edt_profile.text = ddl_profile.items[1])
 				else (edt_profile.text = "")
-				loadProfile mcUserINI head:"3DGalleryDefault"
+				loadProfile Micra.UserSettings head:"3DGalleryDefault"
 			)
 		)
 		fn getProfileList =
@@ -346,7 +346,7 @@ Global mcMultiPlanterEnabled
 				local profiles = getIniSetting profilePath
 				ddl_profile.items = #( "Default") + profiles
 				ddl_profile.selection = 1
-				loadProfile mcUserINI head:"3DGalleryDefault"
+				loadProfile Micra.UserSettings head:"3DGalleryDefault"
 			)
 		)
 		-->dialog
@@ -359,9 +359,9 @@ Global mcMultiPlanterEnabled
 		)
 		on ProfileSettings close do 
 		(
-			setIniSetting mcUserINI "3dGallery" "Dialog_Plant_Pos"         (mcMultiPlanterDialog.pos as string )
-			setIniSetting mcUserINI "3dGallery" "Dialog_Plant_Size"        (mcMultiPlanterDialog.size as string)
-			setINISetting mcUserINI "3DGallery" "ProfileSettings_RolledUp" ((not ProfileSettings.open) as string)
+			setIniSetting Micra.UserSettings "3dGallery" "Dialog_Plant_Pos"         (mcMultiPlanterDialog.pos as string )
+			setIniSetting Micra.UserSettings "3dGallery" "Dialog_Plant_Size"        (mcMultiPlanterDialog.size as string)
+			setINISetting Micra.UserSettings "3DGallery" "ProfileSettings_RolledUp" ((not ProfileSettings.open) as string)
 			if mcDgalleryDialog != undefined do mcDgalleryDialog.ckb_plant_dialog.checked = false
 		)
 		on btn_save_add_profile pressed do saveAddProfile()	
@@ -371,18 +371,18 @@ Global mcMultiPlanterEnabled
 			local itm = ddl_profile.selected
 			edt_profile.text = itm
 			if itm == "Default" 
-			then loadProfile mcUserINI head:"3DGalleryDefault"
+			then loadProfile Micra.UserSettings head:"3DGalleryDefault"
 			else loadProfile profilePath head:itm	
 			setFocus edt_profile
 		)
 	)
 	--Multi Planter
-	local DPos  = execute(getINISetting mcUserINI "3DGallery" "Dialog_Plant_Pos"       )
-	local DSize = execute(getIniSetting mcUserINI "3dGallery" "Dialog_Plant_Size"      )
-	local OL    = execute(getINISetting mcUserINI "3DGallery" "ObjectList_RolledUp"     )
-	local RS    = execute(getINISetting mcUserINI "3DGallery" "RandomSettings_RolledUp" )
-	local GS    = execute(getINISetting mcUserINI "3DGallery" "GlobalSettings_RolledUp" )
-	local PS    = execute(getINISetting mcUserINI "3DGallery" "ProfileSettings_RolledUp")
+	local DPos  = execute(getINISetting Micra.UserSettings "3DGallery" "Dialog_Plant_Pos"       )
+	local DSize = execute(getIniSetting Micra.UserSettings "3dGallery" "Dialog_Plant_Size"      )
+	local OL    = execute(getINISetting Micra.UserSettings "3DGallery" "ObjectList_RolledUp"     )
+	local RS    = execute(getINISetting Micra.UserSettings "3DGallery" "RandomSettings_RolledUp" )
+	local GS    = execute(getINISetting Micra.UserSettings "3DGallery" "GlobalSettings_RolledUp" )
+	local PS    = execute(getINISetting Micra.UserSettings "3DGallery" "ProfileSettings_RolledUp")
 	if mcMultiPlanterDialog != undefined do closeRolloutFloater mcMultiPlanterDialog
 	mcMultiPlanterDialog = newRolloutFloater " Multi Planter:" DSize.x DSize.y DPos.x DPos.y
 	addRollout ObjectList      mcMultiPlanterDialog rolledUp:OL

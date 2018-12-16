@@ -3,7 +3,7 @@ Global mcViewportRecorderDialog
 if mcViewportRecorderDialog != undefined do destroyDialog mcViewportRecorderDialog
 rollout mcViewportRecorderDialog "" width:316 height:124
 (
-	local temp_save_path = mcPath() + "Temp\\Grab\\"
+	local temp_save_path = Micra.RootDir + "Temp\\Grab\\"
 	local dMove = false, DmPos, frame_number = 0, captured_frames = #()
 	local recording = false , paused = false
 	GroupBox grp1 "Viewport Recorder:" pos:[4,4] width:308 height:116
@@ -103,7 +103,7 @@ rollout mcViewportRecorderDialog "" width:316 height:124
 				pb_bar.value = 100.*i/captured_frames.count
 			)
 			pb_bar.value = 0
-			mcfileInVersion "Gif_Compiller"
+			Micra.fileInVersion "Gif_Compiller"
 		)
 		else 
 		(
@@ -121,19 +121,14 @@ rollout mcViewportRecorderDialog "" width:316 height:124
 	on mcViewportRecorderDialog lbuttonup   pos do (dMove = false; pushprompt "")
 	on mcViewportRecorderDialog mouseMove   pos do
 	(
-		if dMove and keyboard.shiftPressed do 
-		(
-			if mcDialogSnappingEnabled 
-			then mcDialogSnap mcViewportRecorderDialog DmPos
-			else setDialogPos mcViewportRecorderDialog (mouse.screenpos - DmPos)
-		)
+		if dMove and keyboard.shiftPressed do mcDialogSnap mcViewportRecorderDialog DmPos
 	)
 	on mcViewportRecorderDialog open do 
 	(
 		if not doesFileExist temp_save_path do makeDir temp_save_path all:true
 		if doesFileExist temp_save_path do
 		(
-			edt_path.text = mcPath() + "Help\\temp.gif"
+			edt_path.text = Micra.RootDir + "Help\\temp.gif"
 		)
 	)
 	on mcViewportRecorderDialog close do
@@ -194,7 +189,7 @@ rollout mcViewportRecorderDialog "" width:316 height:124
 	on btn_play pressed do
 	(
 		local jpg_files = getFiles (temp_save_path + "*.jpg")
-		if jpg_files.count != 0 do mcfileInVersion "Gif_Compiller"
+		if jpg_files.count != 0 do Micra.fileInVersion "Gif_Compiller"
 		--mcGifCompillerDialog.temp_save_path = temp_save_path
 		--mcGifCompillerDialog.gif_file_name  = edt_path.text
 		--playGifAnimation edt_path.text

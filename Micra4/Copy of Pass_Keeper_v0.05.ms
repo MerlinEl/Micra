@@ -18,7 +18,7 @@ rollout mcPassKeeper "Pass Keeper v0.01" width:276 height:608
 	struct INI_DATA (head, keys, data)
 	fn iniFileFound =
 	(
-		key_file = mcPath() + "User\\Keys.ini"
+		key_file = Micra.RootDir + "User\\Keys.ini"
 		if not doesFileExist key_file do createFile key_file
 		if not doesFileExist key_file 
 		then return false
@@ -190,7 +190,7 @@ rollout mcPassKeeper "Pass Keeper v0.01" width:276 height:608
 	fn saveToIni =
 	(
 		--backup file
-		local bk_file = (mcPath() + "User\\Keys.bk")
+		local bk_file = (Micra.RootDir + "User\\Keys.bk")
 		renameFile key_file bk_file
 		createFile key_file
 		--write data to new file

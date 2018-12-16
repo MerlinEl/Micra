@@ -121,7 +121,7 @@ formA_newpos.y = (mcMath.roundToInt formA_newpos.y 10)+2
 	local sDist = desktop_rect.ma.x / 200-- set snap distance
 	
 	--get visible form names
-	local all_forms = getINISetting mcTempProfileIni "Properties_1" + getINISetting mcTempProfileIni "Properties_2"
+	local all_forms = getINISetting Micra.TempProfileIni "Properties_1" + getINISetting Micra.TempProfileIni "Properties_2"
 	local visible_forms = for i in all_forms where (execute ("classOf "+ i +"== dotNetObject")) and (execute(i+".Visible")) collect i
 	
 	for i in visible_forms do
@@ -178,7 +178,7 @@ formA_newpos.y = (mcMath.roundToInt formA_newpos.y 10)+2
 fn getIconDotNet icnNum icnSize:24 =
 (
 	if icnNum == 0 do return undefined
-	local img_lib = (dotNetClass "Drawing.Image").FromFile mcIconI --get the saved image from file as bitmap
+	local img_lib = (dotNetClass "Drawing.Image").FromFile Micra.IconI --get the saved image from file as bitmap
 	local w = h = icnSize
 	local img_lib_size = [img_lib.width, img_lib.height]
 	local icnCount  = (img_lib_size/icnSize)

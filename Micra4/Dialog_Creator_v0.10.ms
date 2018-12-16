@@ -10,7 +10,6 @@ Global mcCreateDinamicDialog
 Global mcDialog
 Global mcMicraDialog
 Global mcDialogSnap
-Global mcDialogSnappingEnabled
 
 struct mcDialog
 (
@@ -55,25 +54,25 @@ struct mcDialog
 	(
 		local editMode = mcDialogEditMode != undefined and mcDialogEditMode.isDisplayed and 
 						 mcDialogEditMode.ckb_acti.checked
-		local enabled  = doesFileExist mcTempProfileIni and doesFileExist mcActionIni and 
-						 doesFileExist mcIconI and doesFileExist mcActionHelpIni
+		local enabled  = doesFileExist Micra.TempProfileIni and doesFileExist Micra.ActionsIni and 
+						 doesFileExist Micra.IconI and doesFileExist Micra.ActionsHelpIni
 		if not enabled do return false
-		local key  = getIniSetting mcTempProfileIni "Buttons" btn_str
+		local key  = getIniSetting Micra.TempProfileIni "Buttons" btn_str
 		
 		-->Edit mode switch
 		if not mouse_btn == #rc do
 		(
 			--format "edit mode >> dialog_str:%\tbutton_str:%\tbutton:%\n" dia_str btn_str (execute (dia_str+"."+btn_str))
 			local data
-			local heads = getIniSetting mcActionIni
-			for i in heads where getIniSetting mcActionIni i key != "" do data = getIniSetting mcActionIni i key
+			local heads = getIniSetting Micra.ActionsIni
+			for i in heads where getIniSetting Micra.ActionsIni i key != "" do data = getIniSetting Micra.ActionsIni i key
 			if data != undefined do data = execute data
 			if classof data  != array then data = #(1)
 			
 			if editMode
 			then
 			(
-				local icn           = bitmap 24 24 color:white --mcDialog.getIconFromFile mcIconI (data[1]-1)
+				local icn           = bitmap 24 24 color:white --mcDialog.getIconFromFile Micra.IconI (data[1]-1)
 				local iconHilighted = mcDialog.higlightButton icn green
 				local btn           = (execute (dia_str+"."+btn_str))
 				btn.images          = #(iconHilighted, undefined, 1,1,1,1,1 )
@@ -103,10 +102,10 @@ struct mcDialog
 			local click_pos = mouse.screenpos
 			if key == undefined do return false
 			local ActionHelpData  = undefined
-			local ActionHelpHeads = getIniSetting mcActionHelpIni
-			for i=1 to ActionHelpHeads.count where (findItem (getIniSetting mcActionHelpIni ActionHelpHeads[i]) key) != 0 do
+			local ActionHelpHeads = getIniSetting Micra.ActionsHelpIni
+			for i=1 to ActionHelpHeads.count where (findItem (getIniSetting Micra.ActionsHelpIni ActionHelpHeads[i]) key) != 0 do
 			(
-				ActionHelpData = getIniSetting mcActionHelpIni ActionHelpHeads[i] key
+				ActionHelpData = getIniSetting Micra.ActionsHelpIni ActionHelpHeads[i] key
 			)
 			--format "ActionHelpKey:%\tActionHelpData:%\n" ActionHelpKey ActionHelpData
 			if ActionHelpData != undefined do 
@@ -119,13 +118,13 @@ struct mcDialog
 	fn dialogButtonIcon btStr =
 	(
 		local blank = #(bitmap 24 24, bitmap 24 24 color:white,1,1,1,1,1)
-		if not doesFileExist mcTempProfileIni do return blank
-		if not doesFileExist mcIconI or not doesFileExist mcIconM do return blank
-		-->get icnum from mcTempProfileIni
-		if btStr != undefined do icNum = (getIniSetting mcTempProfileIni "Icons" btStr) as integer
+		if not doesFileExist Micra.TempProfileIni do return blank
+		if not doesFileExist Micra.IconI or not doesFileExist Micra.IconM do return blank
+		-->get icnum from Micra.TempProfileIni
+		if btStr != undefined do icNum = (getIniSetting Micra.TempProfileIni "Icons" btStr) as integer
 		if icNum < 2 do return blank
-		local icon = mcDialog.getIconFromFile mcIconI icNum
-		local mask = mcDialog.getIconFromFile mcIconM icNum
+		local icon = mcDialog.getIconFromFile Micra.IconI icNum
+		local mask = mcDialog.getIconFromFile Micra.IconM icNum
 		return #(icon, mask, 1, 1, 1, 1, 1)
 		--format "icon:%\t mask:%\t maxn:%\t btStr:%\t icNum:%\n" icon mask maxn btStr icNum
 		--#("E:\Micra\mcIcons_24i.bmp", "E:\Micra\mcIcons_24m.bmp", 100, 2, 2, 2, 2)
@@ -134,7 +133,7 @@ struct mcDialog
 --(dNameStr = "mcObjDialog"), (dMask = "A","B","C","D"...), ( w  h = width & height), (btnCount = number )
 fn mcCreateDinamicDialog dNameStr btnVH:undefined =  
 (
-	if btnVH == undefined do btnVH = (mcCall.getIniDataFromArray mcTempProfileIni "Properties_1" dNameStr 5)
+	if btnVH == undefined do btnVH = (mcCall.getIniDataFromArray Micra.TempProfileIni "Properties_1" dNameStr 5)
 	if btnVH == undefined do return false
 	local dMask    = dNameStr[dNameStr.count]
 	local pos      = [8,18] 
@@ -143,9 +142,9 @@ fn mcCreateDinamicDialog dNameStr btnVH:undefined =
 	local btnCount = (btnVH.x * btnVH.y) as integer
 	local dWidth   = ((btnVH.x*btnSize[1])+16) as integer
 	local dHeight  = ((btnVH.y*btnSize[2])+26) as integer
-	local dPos     = (mcCall.getIniDataFromArray mcTempProfileIni "Properties_1" dNameStr 2) as string
-	local dTitle   = (mcCall.getIniDataFromArray mcTempProfileIni "Properties_1" dNameStr 4)
-	--local bTooltip = (mcCall.getIniDataFromArray mcTempProfileIni "Buttons" dNameStr 3)
+	local dPos     = (mcCall.getIniDataFromArray Micra.TempProfileIni "Properties_1" dNameStr 2) as string
+	local dTitle   = (mcCall.getIniDataFromArray Micra.TempProfileIni "Properties_1" dNameStr 4)
+	--local bTooltip = (mcCall.getIniDataFromArray Micra.TempProfileIni "Buttons" dNameStr 3)
 	--if bTooltip == undefined do bTooltip = ":"
 	-------------------------------------------
 	--> 2 btn to V & 6 btn to H  =  dialog size
@@ -164,7 +163,7 @@ fn mcCreateDinamicDialog dNameStr btnVH:undefined =
 	for i=1 to btnCount do 
 	(
 		--> buttnos
-		local bTooltip = getIniSetting mcTempProfileIni "Buttons" ("btn_"+dMask+ i as string)
+		local bTooltip = getIniSetting Micra.TempProfileIni "Buttons" ("btn_"+dMask+ i as string)
 		if bTooltip == undefined do bTooltip = ":"
 		exe += "\tbutton btn_"+dMask+ i as string +" \"\" "+"pos:"+btnPos as string +"width:24 height:24 "+
 		"images:(mcDialog.dialogButtonIcon \"btn_"+dMask+ i as string +"\" ) toolTip:"+" \""+bTooltip+"\" \n"
@@ -185,12 +184,7 @@ fn mcCreateDinamicDialog dNameStr btnVH:undefined =
 	exe += "\ton "+dNameStr+" lbuttonup pos   do(dMove = false; pushprompt \"\")\n"
 	exe += "\ton "+dNameStr+" mouseMove pos do\n"
 	exe += "\t(\n"
-	exe += "\t\tif dMove and keyboard.shiftPressed do\n" 
-	exe += "\t\t(\n"
-	exe += "\t\t\tif mcDialogSnappingEnabled\n" 
-	exe += "\t\t\tthen mcDialogSnap "+dNameStr+" DmPos\n"
-	exe += "\t\t\telse setDialogPos "+dNameStr+" (mouse.screenpos - DmPos)\n"
-	exe += "\t\t)\n"
+	exe += "\t\tif dMove and keyboard.shiftPressed do mcDialogSnap "+dNameStr+" DmPos\n"
 	exe += "\t)\n"		
 	--> Actions
 	exe += "\ton btn_menu pressed do DestroyDialog "+dNameStr+"\n"
@@ -218,7 +212,7 @@ fn mcCreateDinamicDialog dNameStr btnVH:undefined =
 --Buton Marker
 fn markButton btn =
 (
-	if not doesFileExist mcTempProfileIni do return false
+	if not doesFileExist Micra.TempProfileIni do return false
 )
 
 (

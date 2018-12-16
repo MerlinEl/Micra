@@ -116,7 +116,7 @@ try ( mcInterfaceColorDilaog.close() ) catch()
 --||
 	fn getHueImage =
 	(
-		local fpath = mcPath() + "Img\\Picker_Hue.bmp"
+		local fpath = Micra.RootDir + "Img\\Picker_Hue.bmp"
 		if not doesFileExist fpath do return undefined
 		local img_file = (dotNetClass "Drawing.Image").FromFile fpath --get the saved image from file as bitmap
 		local w=img_file.width
@@ -166,7 +166,7 @@ try ( mcInterfaceColorDilaog.close() ) catch()
 	)
 	fn fillComboBox list mcs =
 	(
-		--local keys = getIniSetting mcDefaultIni "UserColor"
+		--local keys = getIniSetting Micra.DefaultSettings "UserColor"
 		list.Items.AddRange (dotNetArray mcs.ini_keys)
 		list.SelectedIndex = 0
 	)
@@ -293,7 +293,7 @@ try ( mcInterfaceColorDilaog.close() ) catch()
 		form.close()
 		
 		--restart Micra
-		fileIn (mcPath()+ "_Loader.ms")
+		fileIn (Micra.RootDir+ "_Loader.ms")
 	)
 	fn loadProfile form =
 	(
@@ -479,8 +479,8 @@ try ( mcInterfaceColorDilaog.close() ) catch()
 	(
 		form.name = "mcInterfaceColorDilaog"
 		form.ControlBox  = false --hide main bar
-		local fpos = (mcCall.getIniDataFromArray mcTempProfileIni "Properties_2" "mcInterfaceColorDilaog" 2)
-		if fpos == undefined do fpos = (mcCall.getIniDataFromArray mcDefaultProfileIni "Properties_2" "mcInterfaceColorDilaog" 2)
+		local fpos = (mcCall.getIniDataFromArray Micra.TempProfileIni "Properties_2" "mcInterfaceColorDilaog" 2)
+		if fpos == undefined do fpos = (mcCall.getIniDataFromArray Micra.DefaultProfileIni "Properties_2" "mcInterfaceColorDilaog" 2)
 		form.StartPosition = form.StartPosition.Manual
 		form.MinimumSize = netDrSize form_size
 		form.bounds = netDrRect fpos form_size

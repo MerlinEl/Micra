@@ -107,12 +107,7 @@ rollout mcLodeTestDialog "Lode Tester:" width:328 height:164
 	on mcLodeTestDialog lbuttonup   pos do (dMove = false; pushprompt "")
 	on mcLodeTestDialog mouseMove   pos do
 	(
-		if dMove and keyboard.shiftPressed do 
-		(
-			if mcDialogSnappingEnabled 
-			then mcDialogSnap mcLodeTestDialog DmPos
-			else setDialogPos mcLodeTestDialog (mouse.screenpos - DmPos)
-		)
+		if dMove and keyboard.shiftPressed do mcDialogSnap mcLodeTestDialog DmPos
 	)
 	on tmr1 tick do
 	(

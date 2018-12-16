@@ -241,7 +241,7 @@ struct mcPoseTool
 	fn setLabelName lbl =
 	(
 		ButtonTeleportSend = #("Pose Name:")
-		fileInVersion "Text_Box"
+		Micra.fileInVersion "Text_Box"
 		if ButtonTeleportGet != undefined and ButtonTeleportGet != "" do 
 		(
 			lbl.text = ButtonTeleportGet
@@ -385,12 +385,7 @@ rollout mcCharPoseDialog " Save  Pose v0.1" width:146 height:388
 	on mcCharPoseDialog lbuttonup   pos do (dMove = false; pushprompt "")
 	on mcCharPoseDialog mouseMove   pos do
 	(
-		if dMove and keyboard.shiftPressed do 
-		(
-			if mcDialogSnappingEnabled 
-			then mcDialogSnap mcCharPoseDialog DmPos
-			else setDialogPos mcCharPoseDialog (mouse.screenpos - DmPos)
-		)
+		if dMove and keyboard.shiftPressed do mcDialogSnap mcCharPoseDialog DmPos
 	)
 	-----------------------------------------------------------------------
 	/* Actions */
@@ -424,9 +419,9 @@ rollout mcCharPoseDialog " Save  Pose v0.1" width:146 height:388
 			
 			on hptsDialog open do
 			(
-				spnBody.value = execute (getIniSetting mcUserINI "PoseTool" "Body")
-				spnHands.value = execute (getIniSetting mcUserINI "PoseTool" "Hands")
-				spnFace.value = execute (getIniSetting mcUserINI "PoseTool" "Face")
+				spnBody.value = execute (getIniSetting Micra.UserSettings "PoseTool" "Body")
+				spnHands.value = execute (getIniSetting Micra.UserSettings "PoseTool" "Hands")
+				spnFace.value = execute (getIniSetting Micra.UserSettings "PoseTool" "Face")
 			)
 			on hptsDialog rbuttonup pos do (DestroyDialog hptsDialog)
 			-->MoveMode
@@ -434,12 +429,7 @@ rollout mcCharPoseDialog " Save  Pose v0.1" width:146 height:388
 			on hptsDialog lbuttonup   pos do (dMove = false; pushprompt "")
 			on hptsDialog mouseMove   pos do
 			(
-				if dMove and keyboard.shiftPressed do 
-				(
-					if mcDialogSnappingEnabled 
-					then mcDialogSnap hptsDialog DmPos
-					else setDialogPos hptsDialog (mouse.screenpos - DmPos)
-				)
+				if dMove and keyboard.shiftPressed do mcDialogSnap hptsDialog DmPos
 			)
 			on btnAccept pressed  do
 			(
@@ -453,7 +443,7 @@ rollout mcCharPoseDialog " Save  Pose v0.1" width:146 height:388
 					setINISetting (mcCT_Path + "User.ini") "CustomPoseTool" "Hands" (handsCount as string)
 					setINISetting (mcCT_Path + "User.ini") "CustomPoseTool" "Face" (faceCount as string)
 					DestroyDialog mcCharPoseDialog
-					fileInVersion "Character_Pose"
+					Micra.fileInVersion "Character_Pose"
 					DestroyDialog hptsDialog
 				)
 			)

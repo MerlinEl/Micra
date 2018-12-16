@@ -68,8 +68,8 @@ struct mcAction
 				#Relax         : modPanel.addModToSelection (Relax         ()) ui:on
 				#CameraMap     : modPanel.addModToSelection (CameraMap     ()) ui:on
 				#Skin          : modPanel.addModToSelection (Skin          ()) ui:on
-				#Conform       : mcFileInVersion "Conform"
-				#mbFracture    : mcFileInVersion "mbFracture"
+				#Conform       : Micra.fileInVersion "Conform"
+				#mbFracture    : Micra.fileInVersion "mbFracture"
 				#ResetXForm    : 
 				(
 					ResetXForm sel
@@ -100,7 +100,7 @@ struct mcAction
 		)
 		catch (format "Failed to add modifier: %\n" mod)
 		
-		local active = mcCall.getIniDataFromArray mcTempProfileIni "Properties_1" "mc_Dialog_F" 1
+		local active = mcCall.getIniDataFromArray Micra.TempProfileIni "Properties_1" "mc_Dialog_F" 1
 		if not keyboard.shiftPressed and not active and mc_Dialog_F != undefined do destroyDialog mc_Dialog_F
 	),
 	fn translateCubeMapToAway3D = 
@@ -346,7 +346,7 @@ struct mcAction
 		undo "Object's to Ground" on
 		(
 			if keyboard.shiftPressed 
-			then (mcfileInVersion "Object_Planter")
+			then (Micra.fileInVersion "Object_Planter")
 			else if selection.count != 0 then
 			(
 				for i in selection do (i.pos.z = i.pivot.z - i.min.z)
@@ -460,7 +460,7 @@ struct mcAction
 				on slidDialog rbuttonup pos do destroyDialog slidDialog
 				on slidDialog open do 
 				(
-					local val = getIniSetting mcUserINI "Settings" "AimScaleFactor"
+					local val = getIniSetting Micra.UserSettings "Settings" "AimScaleFactor"
 					lbl.caption = "  Zoom Factor: ["+val+"]"
 					sldVal.value = execute val 
 				)
@@ -470,7 +470,7 @@ struct mcAction
 				)
 				on sldVal buttonup do
 				(
-					setIniSetting mcUserINI "Settings" "AimScaleFactor" (sldVal.value as string)
+					setIniSetting Micra.UserSettings "Settings" "AimScaleFactor" (sldVal.value as string)
 					destroyDialog slidDialog
 				)
 			)
@@ -478,7 +478,7 @@ struct mcAction
 		)
 		else
 		(
-			local iVal = getIniSetting mcUserINI "Settings" "AimScaleFactor"
+			local iVal = getIniSetting Micra.UserSettings "Settings" "AimScaleFactor"
 			
 			--Store Snap Settings
 			local type = snapMode.type
@@ -998,12 +998,7 @@ struct mcAction
 					on mcSelVertsInXDialog lbuttonup   pos do (dMove = false; pushprompt "")
 					on mcSelVertsInXDialog mouseMove   pos do
 					(
-						if dMove and keyboard.shiftPressed do 
-						(
-							if mcDialogSnappingEnabled 
-							then mcDialogSnap mcSelVertsInXDialog DmPos
-							else setDialogPos mcSelVertsInXDialog (mouse.screenpos - DmPos)
-						)
+						if dMove and keyboard.shiftPressed do mcDialogSnap mcSelVertsInXDialog DmPos
 					)
 					/* Actions */
 					on spnRange changed val do undo "select verts" on (if isModeTrue() do (selectVertsInRange val) )
@@ -1449,8 +1444,8 @@ struct mcAction
 			if keyboard.controlPressed
 			then 
 			(
-				if not doesFileExist mcTempIni do return false
-				for i in sel do setIniSetting mcTempIni "Names" i.name ""
+				if not doesFileExist Micra.TempINI do return false
+				for i in sel do setIniSetting Micra.TempINI "Names" i.name ""
 			)
 			else (selectionSets["objSel"] = selection)
 		)
@@ -1472,7 +1467,7 @@ struct mcAction
 			if keyboard.altPressed and classOf Selected_Object_Position == point3 and selection.count == 1 then selection[1].pos = Selected_Object_Position
 			else if keyboard.controlPressed and sel.count != 0 then
 			(
-				local names = getIniSetting mcTempIni "Names"
+				local names = getIniSetting Micra.TempINI "Names"
 				if names.count != sel.count do return false
 				for i=1 to sel.count do sel[i].name = names[i]
 			)
@@ -2429,7 +2424,7 @@ struct mcCreate
 	),
 	fn grid3p =	
 	(	
-		mcFileInVersion "Create_3PGrid"
+		Micra.fileInVersion "Create_3PGrid"
 	),
 	fn cereate_checker color1:blue color2:white =
 	(

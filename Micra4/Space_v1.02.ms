@@ -61,12 +61,7 @@ rollout mcSpaceDialog "" width:204 height:144
 	on mcSpaceDialog lbuttonup   pos do (dMove = false; pushprompt "")
 	on mcSpaceDialog mouseMove   pos do
 	(
-		if dMove and keyboard.shiftPressed do 
-		(
-			if mcDialogSnappingEnabled 
-			then mcDialogSnap mcSpaceDialog DmPos
-			else setDialogPos mcSpaceDialog (mouse.screenpos - DmPos)
-		)
+		if dMove and keyboard.shiftPressed do mcDialogSnap mcSpaceDialog DmPos 
 	)
 	on mcSpaceDialog rbuttonup pos do (destroyDialog mcSpaceDialog)
 	--Actions -----------------------------------------------------------------------

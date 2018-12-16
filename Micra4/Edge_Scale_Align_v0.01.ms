@@ -117,12 +117,7 @@ Global mcEdgeScaleDialog
 			on mcEdgeScaleDialog lbuttonup   pos do (dMove = false; pushprompt "")
 			on mcEdgeScaleDialog mouseMove   pos do
 			(
-				if dMove and keyboard.shiftPressed do 
-				(
-					if mcDialogSnappingEnabled 
-					then mcDialogSnap mcEdgeScaleDialog DmPos
-					else setDialogPos mcEdgeScaleDialog (mouse.screenpos - DmPos)
-				)
+				if dMove and keyboard.shiftPressed do mcDialogSnap mcEdgeScaleDialog DmPos
 			)
 			on btnCancel pressed do(destroyDialog mcEdgeScaleDialog)
 			on btnPick pressed do (getEdgeLenght())

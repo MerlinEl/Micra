@@ -8,7 +8,7 @@ rollout mcGifCompillerDialog "Untitled" width:284 height:52
 	local frame_dimension = (dotNetClass "System.Drawing.Imaging.FrameDimension") --time resolution page
 	-->Locals Standart 
 	local dMove = false, DmPos, jpgPlayerDialog, gifPlayerDialog, video_size, jpg_files = #(), current_img_num = 0
-	local temp_save_path = mcPath() + "Temp\\Grab\\" , gif_file_name = "", playing = false, feake_tmr = 0
+	local temp_save_path = Micra.RootDir + "Temp\\Grab\\" , gif_file_name = "", playing = false, feake_tmr = 0
 	button btn_play "p" pos:[4,4] width:24 height:24 images:(mcCall.getIcon 170) tooltip:"Play Movie"
 	button btn_stop "s" pos:[32,4] width:24 height:24 images:(mcCall.getIcon 171) tooltip:"Stop Movie"
 	label lbl1 "FPS:" pos:[64,8] width:24 height:16
@@ -94,7 +94,7 @@ rollout mcGifCompillerDialog "Untitled" width:284 height:52
 		if gif_file_name == "" or temp_save_path == "" do return false
 		-- -label -monitor -rotate -scale -segment -crop
 		local delay = (100./spn_fps.value) as string --animation gif speed
-		local app = mcPath() + "App\\convert.exe "  
+		local app = Micra.RootDir + "App\\convert.exe "  
 		--local cmd = temp_save_path + "*.jpg" + " -delay "+delay+" "+gif_file_name
 		local cmd = temp_save_path + "*.jpg -layers OptimizeTransparency -delay "+delay+" "+gif_file_name --optimized identical pixels
 		--format "cmd:%\n" cmd
@@ -186,12 +186,7 @@ rollout mcGifCompillerDialog "Untitled" width:284 height:52
 	on mcGifCompillerDialog lbuttonup   pos do (dMove = false; pushprompt "")
 	on mcGifCompillerDialog mouseMove   pos do
 	(
-		if dMove and keyboard.shiftPressed do 
-		(
-			if mcDialogSnappingEnabled 
-			then mcDialogSnap mcGifCompillerDialog DmPos
-			else setDialogPos mcGifCompillerDialog (mouse.screenpos - DmPos)
-		)
+		if dMove and keyboard.shiftPressed do mcDialogSnap mcGifCompillerDialog DmPos
 	)
 	on mcGifCompillerDialog open do 
 	(

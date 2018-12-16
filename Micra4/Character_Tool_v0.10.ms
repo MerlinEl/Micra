@@ -19,8 +19,8 @@ if mcCharSelectDialog != undefined then destroyDialog mcCharSelectDialog
 struct mcCharTool
 	(
 		fn filterValidNodes arr = (for i in arr where isValidNode i collect i),
-		fn getFlashIniKeys head = (getINISetting (mcPath() + "Skeleton.ini") head),
-		fn translateFlashKey key = (getINISetting (mcPath() + "Skeleton.ini") "BonesMatchPatern" key),
+		fn getFlashIniKeys head = (getINISetting (Micra.RootDir + "Skeleton.ini") head),
+		fn translateFlashKey key = (getINISetting (Micra.RootDir + "Skeleton.ini") "BonesMatchPatern" key),
 		fn getBonesTree head =
 		(
 			--Translation from ini and create obj array
@@ -28,7 +28,7 @@ struct mcCharTool
 			local flashIniKeys = mcCharTool.getFlashIniKeys head
 			for k in flashIniKeys do
 			(
-				local boneObj = getNodeByName (getINISetting (mcPath() + "Skeleton.ini") head k)
+				local boneObj = getNodeByName (getINISetting (Micra.RootDir + "Skeleton.ini") head k)
 				if boneObj != undefined do append theArray boneObj
 			)
 		 	return theArray
@@ -120,7 +120,7 @@ struct mcCharTool
 		fn getBones iniKey type:undefined =
 		(
 			local theBone
-			local boneString = getINISetting (mcPath() + "Skeleton.ini") "BonesMatchPatern" iniKey
+			local boneString = getINISetting (Micra.RootDir + "Skeleton.ini") "BonesMatchPatern" iniKey
 			if boneString == "" 
 			then (messagebox ("Missing data: "+iniKey+" in Skeleton.ini.") title:" Micra!" ; return undefined)
 			else (theBone = getNodeByName boneString)
@@ -296,11 +296,11 @@ struct mcCharTool
 		fn updateSelection =
 		(
 			--For (Flash Bone Buttons) in (Max Bone Objects) check for Selection
-			local flashIniKeys = getINISetting (mcPath() + "Skeleton.ini") "BonesMatchPatern"
+			local flashIniKeys = getINISetting (Micra.RootDir + "Skeleton.ini") "BonesMatchPatern"
 			for k in flashIniKeys do
 			(
 				local valid = false
-				local boneString = (getINISetting (mcPath() + "Skeleton.ini") "BonesMatchPatern" k)
+				local boneString = (getINISetting (Micra.RootDir + "Skeleton.ini") "BonesMatchPatern" k)
 				for o in objects where (o.name == boneString and o.isSelected) do (valid = true)
 				if valid == true
 				then (mcCharSelectDialog.axFlash.TGotoFrame k 1)
@@ -322,7 +322,7 @@ rollout mcCharSelectDialog "Character Tool v0.02" width:212 height:388
 	--ON OPEN
 	on mcCharSelectDialog open do  
 	(
-		axFlash.movie = (mcPath() + "App\\Character_Tool.swf")
+		axFlash.movie = (Micra.RootDir + "App\\Character_Tool.swf")
 		
 		callbacks.addScript #SelectionSetChanged " mcCharTool.updateSelection() " id:#mcCT_Callbacks
 		callbacks.addScript #sceneUndo           " mcCharTool.updateSelection() " id:#mcCT_Callbacks
@@ -355,12 +355,7 @@ rollout mcCharSelectDialog "Character Tool v0.02" width:212 height:388
 	on mcCharSelectDialog lbuttonup   pos do (dMove = false; pushprompt "")
 	on mcCharSelectDialog mouseMove   pos do
 	(
-		if dMove and keyboard.shiftPressed do 
-		(
-			if mcDialogSnappingEnabled 
-			then mcDialogSnap mcCharSelectDialog DmPos
-			else setDialogPos mcCharSelectDialog (mouse.screenpos - DmPos)
-		)
+		if dMove and keyboard.shiftPressed do mcDialogSnap mcCharSelectDialog DmPos
 	)
 --Actions -----------------------------------------------------------------------
 	on axFlash FSCommand command param do --undo "Character Tool" on
@@ -373,7 +368,7 @@ rollout mcCharSelectDialog "Character Tool v0.02" width:212 height:388
 			then --Select bones in skin
 			(
 				local arr = mcCharTool.getBones command type:param
-				local boneName = (getINISetting (mcPath() + "Skeleton.ini") "BonesMatchPatern" command)
+				local boneName = (getINISetting (Micra.RootDir + "Skeleton.ini") "BonesMatchPatern" command)
 				mcCharTool.selectBoneFrom boneName	
 			)
 			else --Select bone objects
@@ -390,7 +385,7 @@ rollout mcCharSelectDialog "Character Tool v0.02" width:212 height:388
 	on chkLibrary changed state do 
 	(
 		if chkLibrary.checked
-		then (fileInVersion "Character_Pose")
+		then (Micra.fileInVersion "Character_Pose")
 		else (if charPoseDialog != undefined then destroyDialog charPoseDialog)
 	)
 	on spnBend buttondown do

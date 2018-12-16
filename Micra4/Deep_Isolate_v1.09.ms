@@ -265,8 +265,8 @@ fn mcDeepIsolate lvl:#upper =
 			--<
 			form.name = "mcDeepIsolateDialog"
 			form.ControlBox  = false --hide main bar
-			local fpos = (mcCall.getIniDataFromArray mcTempProfileIni "Properties_2" "mcDeepIsolateDialog" 2)
-			if fpos == undefined do fpos = (mcCall.getIniDataFromArray mcDefaultProfileIni "Properties_2" "mcDeepIsolateDialog" 2)
+			local fpos = (mcCall.getIniDataFromArray Micra.TempProfileIni "Properties_2" "mcDeepIsolateDialog" 2)
+			if fpos == undefined do fpos = (mcCall.getIniDataFromArray Micra.DefaultProfileIni "Properties_2" "mcDeepIsolateDialog" 2)
 			form.StartPosition = form.StartPosition.Manual
 			form.FormBorderStyle = form.FormBorderStyle.none
 			form.bounds = netDrRect fpos mcs.form_size

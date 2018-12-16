@@ -62,7 +62,7 @@ try ( mcColorPaleteDialog.close() ) catch()
 			(a.button.middle)  : 
 			(
 				removeBorder mcs s
-				mcFileInVersion "Color_Picker"
+				Micra.fileInVersion "Color_Picker"
 			)
 			(a.button.left )  : 
 			(
@@ -81,12 +81,12 @@ try ( mcColorPaleteDialog.close() ) catch()
 					else s.backcolor = mcs.picked_color
 					--save to ini
 					clr = netColorToRGB s.backColor
-					setIniSetting mcUserINI "ColorPalete" s.tag (clr as string)
+					setIniSetting Micra.UserSettings "ColorPalete" s.tag (clr as string)
 				)
 				else if keyboard.altPressed then
 				(
 					s.backcolor = netDrColor gray
-					setIniSetting mcUserINI "ColorPalete" s.tag (gray as string)
+					setIniSetting Micra.UserSettings "ColorPalete" s.tag (gray as string)
 				)
 				else
 				(
@@ -111,7 +111,7 @@ try ( mcColorPaleteDialog.close() ) catch()
 		local clr
 		for i in mcs.buttons
 		where (
-			clr = execute (getIniSetting mcUserINI "ColorPalete" i.tag) 
+			clr = execute (getIniSetting Micra.UserSettings "ColorPalete" i.tag) 
 			classOf clr == color
 		) do i.backColor = netDrColor clr
 		
@@ -169,7 +169,7 @@ try ( mcColorPaleteDialog.close() ) catch()
 				local screen_pos = s.PointToScreen (dotnetclass "System.Drawing.Point").Empty
 				[screen_pos.x, screen_pos.y]
 			)
-			else (mcCall.getIniDataFromArray mcTempProfileIni "Properties_2" "mcColorPaleteDialog" 2)
+			else (mcCall.getIniDataFromArray Micra.TempProfileIni "Properties_2" "mcColorPaleteDialog" 2)
 		)
 		local form_size  =[btn_size*columns_rows.x + form_offset, bar_height*columns_rows.y + form_offset]
 		form.StartPosition = form.StartPosition.Manual

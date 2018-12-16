@@ -7,8 +7,8 @@
 ---------------
 
 		/*
-		local mcDialogs = getIniSetting mcTempProfileIni "Properties_2"
-		local mcDialogsNet = getIniSetting mcTempProfileIni "Properties_1"
+		local mcDialogs = getIniSetting Micra.TempProfileIni "Properties_2"
+		local mcDialogsNet = getIniSetting Micra.TempProfileIni "Properties_1"
 		for d in mcDialogs do
 		(
 			local dia = execute d

@@ -67,12 +67,7 @@ rollout mcViewportRecorderDialog "" width:460 height:124
 	on mcViewportRecorderDialog lbuttonup   pos do (dMove = false; pushprompt "")
 	on mcViewportRecorderDialog mouseMove   pos do
 	(
-		if dMove and keyboard.shiftPressed do 
-		(
-			if mcDialogSnappingEnabled 
-			then mcDialogSnap mcViewportRecorderDialog DmPos
-			else setDialogPos mcViewportRecorderDialog (mouse.screenpos - DmPos)
-		)
+		if dMove and keyboard.shiftPressed do mcDialogSnap mcViewportRecorderDialog DmPos
 	)
 	on mcViewportRecorderDialog open do 
 	(

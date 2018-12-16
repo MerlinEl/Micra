@@ -7,7 +7,7 @@
 (
 	-->Locals:-----------------------------------------------------------------
 	struct FILE_DATA (name , path)
-	local root_path = mcPath()
+	local root_path = Micra.RootDir
 	local backup_path = root_path + "_Backup\\"
 	local root_dirs = #
 	(
@@ -91,7 +91,7 @@
 		),
 		fn backupOldVersions =
 		(
-			local dirA=(mcPath()) 
+			local dirA=(Micra.RootDir) 
 			local dirB=(dirA+"+/"+"Backup/")
 			if not doesFileExist dirA or not doesFileExist dirB do return false --check both folders
 			local the_files = getFiles (dirA+"*.ms") -- only one type for now
@@ -140,7 +140,7 @@
 	fn getIconDotNet w h icnNum icnSize:24 =
 	(
 		
-		img = (dotNetClass "Drawing.Image").FromFile mcIconI --get the saved image from file as bitmap
+		img = (dotNetClass "Drawing.Image").FromFile Micra.IconI --get the saved image from file as bitmap
 		
 		imgSize = [img.width, img.height]
 		local icnCount  = (imgSize/icnSize).x
@@ -335,17 +335,17 @@
 		local date_and_time = if t.count > 4 then t[1]+"_"+t[2]+"_"+t[3]+"_"+t[4]+"_"+t[5]+"h" else ""
 		
 		--create backup Micra in to zip file (-tzip switch)
-		local app_7z = mcPath()+"App\\7za.exe"
-		local backup_file = mcPath()+"\\_Backup\\Micra_"+date_and_time+".zip "
+		local app_7z = Micra.RootDir+"App\\7za.exe"
+		local backup_file = Micra.RootDir+"_Backup\\Micra_"+date_and_time+".zip "
 		
 		if not doesFileExist app_7z do return false
 		
-		dosCommand (app_7z +" a -tzip "+ backup_file + mcPath()+"*.* "+ mcPath()+"User "+ mcPath()+"Img "+ mcPath()+"Help "+ mcPath()+"App " )
+		dosCommand (app_7z +" a -tzip "+ backup_file + Micra.RootDir+"*.* "+ Micra.RootDir+"User "+ Micra.RootDir+"Img "+ Micra.RootDir+"Help "+ Micra.RootDir+"App " )
 		
 		--commit file in to server
 		if (queryBox ("Do you wish to send update in to sever?") title:" Micra:") do
 		(
-			local server_file = (getIniSetting mcDefaultIni "Paths" "WorkServer")+"\Micra\Micra4.zip"
+			local server_file = (getIniSetting Micra.DefaultSettings "Paths" "WorkServer")+"\Micra\Micra4.zip"
 			--format "server_path:%\tlocal_path:%\n" server_file backup_file
 			if doesFileExist server_file do deleteFile server_file
 			copyFile backup_file server_file
@@ -354,13 +354,13 @@
 	fn updateMacros =
 	(
 		--getFiles (GetDir #ui + "macroscripts\\"+"*.mcr")
-		local mcMacro = mcPath()  + "Micra_Macro.mcr"
+		local micra_macro = Micra.RootDir  + "Micra_Macro.mcr"
 		local maxMacro = GetDir #ui + "macroscripts\\"+"Micra_Macro.mcr"
-		if not doesFileExist mcMacro do return false
+		if not doesFileExist Micra.Macro do return false
 		--delete old max macro
 		if doesFileExist maxMacro do deleteFile maxMacro
 		--copy new macro from micra to max
-		copyFile mcMacro maxMacro
+		copyFile micra_macro maxMacro
 		--reload max macro
 		--macros.load maxMacro
 		--fileIn maxMacro
@@ -373,17 +373,17 @@
 		if classOf dName != string or dName.count == 0 do return false
 		local dialog_ini_names = 
 		#(
-			mcPath()+"User\\Profile_1.ini",
-			mcPath()+"User\\Profile_2.ini",
-			mcPath()+"User\\Profile_3.ini",
-			mcPath()+"User\\Profile_4.ini",
-			mcPath()+"User\\Profile_5.ini",
-			mcPath()+"User\\Profile_6.ini",
-			mcPath()+"User\\Profile_7.ini",
-			mcPath()+"User\\Profile_8.ini",
-			mcPath()+"Profile_Default.ini",
-			mcPath()+"Profile_Empty.ini",
-			mcPath()+"Profile_Temp.ini"
+			Micra.RootDir+"User\\Profile_1.ini",
+			Micra.RootDir+"User\\Profile_2.ini",
+			Micra.RootDir+"User\\Profile_3.ini",
+			Micra.RootDir+"User\\Profile_4.ini",
+			Micra.RootDir+"User\\Profile_5.ini",
+			Micra.RootDir+"User\\Profile_6.ini",
+			Micra.RootDir+"User\\Profile_7.ini",
+			Micra.RootDir+"User\\Profile_8.ini",
+			Micra.RootDir+"Profile_Default.ini",
+			Micra.RootDir+"Profile_Empty.ini",
+			Micra.RootDir+"Profile_Temp.ini"
 		)
 		for fpath in dialog_ini_names do
 		(
@@ -539,12 +539,11 @@
 			#DoubleClick:(edit current_list_item.tag)
 		)
 		label_lditing = false
-		
 	)
 	fn setScriptVersion script_name new_version = (
 		
-		if not doesFileExist mcDefaultINI  do ((format "Not found! [Settings.ini]\n" ); return false)
-		return (setIniSetting mcDefaultINI "Version" script_name new_version)
+		if not doesFileExist Micra.DefaultSettings  do ((format "Not found! [%]\n" Micra.DefaultSettings); return false)
+		return (setIniSetting Micra.DefaultSettings "Version" script_name new_version)
 	)
 	fn setVersionToActive script_file_name = (
 	
@@ -648,7 +647,7 @@
 --|| --Drag & Drop effect
 --| --Action Buttons
 	on btn_show pressed do mcSystem.show (execute tb.text)
-	on btn_reload_micra pressed do (fileIn (mcPath()+ "_Loader.ms"))
+	on btn_reload_micra pressed do (fileIn (Micra.RootDir+ "_Loader.ms"))
 	on btn_reload_scripts pressed do (fillListView tv.SelectedNode.text)
 	on btn_show_source  pressed do (try (ShowSource (execute tb.text)) Catch () ; tb.text = "")
 	on btn_backup_micra pressed do backupMicra()
@@ -665,4 +664,4 @@
 --|| --Actions Buttons
   )
 mcCall.createIniDialog "mcScriptManDialog" "Properties_2"
-mcScriptManDialog.grp_title.text = "Script Manager: v" + (getScriptVersion "Script_Manager") --update script title with version
+mcScriptManDialog.grp_title.text = "Script Manager: v" + (Micra.getScriptVersion "Script_Manager") --update script title with version

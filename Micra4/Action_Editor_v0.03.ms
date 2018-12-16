@@ -45,7 +45,7 @@ rollout mcActionEditorDialog "Action Editor:" width:772 height:224
 		--save comment	
 		local help_txt = edt_description.text
 		format "saveAll > category:% action:% comment:%\n" category_name action_name help_txt
-		setIniSetting mcActionHelpIni category_name action_name help_txt
+		setIniSetting Micra.ActionsHelpIni category_name action_name help_txt
 		--save icon index
 		
 		--save function name or filein name
@@ -63,8 +63,8 @@ rollout mcActionEditorDialog "Action Editor:" width:772 height:224
 	
 	fn getIconsFromFile  = (
 		
-		if not doesFileExist mcIconI do return undefined
-		local img = (dotNetClass "Drawing.Image").FromFile mcIconI
+		if not doesFileExist Micra.IconI do return undefined
+		local img = (dotNetClass "Drawing.Image").FromFile Micra.IconI
 		local w = img.width, h = img.height
 		local new_img = (dotNetObject "Drawing.Bitmap" w h) --Create new bitmap object
 		--new_img.ColorDepth = icon.ColorDepth.Depth24Bit
@@ -81,7 +81,7 @@ rollout mcActionEditorDialog "Action Editor:" width:772 height:224
 		local icons_image = getIconsFromFile()
 		if icons_image == undefined do return undefined
 		if icon_index <= 1 do return createNewImage 24 24 black
-		--local img = (dotNetClass "Drawing.Image").FromFile mcIconI --get the saved image from file as bitmap
+		--local img = (dotNetClass "Drawing.Image").FromFile Micra.IconI --get the saved image from file as bitmap
 		local icons_img_size = [icons_image.width, icons_image.height]
 		local icons_count  = (icons_img_size/24)
 		icon_index -= 1
@@ -117,12 +117,12 @@ rollout mcActionEditorDialog "Action Editor:" width:772 height:224
 
 		-- set global variable
 		if action_ini_data != undefined do mcGM.setParam "active_icon_index" (action_ini_data.get "val")[1] --#(106, "mcAnimation.reverse 0 10" , "Reverse_Animation")
-		mcFileInVersion "Icon_Maker"	--open icon editor	
+		Micra.fileInVersion "Icon_Maker"	--open icon editor	
 	)
 	
 	fn editHint = (
 		
-		local help_txt = getIniSetting mcActionHelpIni category_name action_name
+		local help_txt = getIniSetting Micra.ActionsHelpIni category_name action_name
 		edt_description.text = help_txt
 	)
 	
@@ -157,7 +157,7 @@ rollout mcActionEditorDialog "Action Editor:" width:772 height:224
 	fn	loadActions override:true = (
 	
 		if category_name == undefined do return false
-		local actions = getIniSetting mcActionIni category_name
+		local actions = getIniSetting Micra.ActionsIni category_name
 		if actions.count == 0 do return false
 		ddl_actions.items = actions
 		--select first item or predefined item
@@ -176,7 +176,7 @@ rollout mcActionEditorDialog "Action Editor:" width:772 height:224
 	
 	fn loadCatalog = (
 	
-		local categories = getIniSetting mcActionIni
+		local categories = getIniSetting Micra.ActionsIni
 		if categories.count == 0 do return false
 		ddl_categories.items = categories
 		ddl_categories.selection = if predefined_cat_name != undefined then (

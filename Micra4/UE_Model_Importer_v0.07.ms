@@ -949,7 +949,7 @@ rollout mcUEToMaxImporter "UE To 3DsMax Importer:" width:620 height:152
 		--rem cesta out + cesta in + balik + nazev modelu = exportuje model
 		--umodel -out=Export -path=Packages -export itm_cinema key01_obj_uni_ac
 
-		local umod_file    = mcPath()+"App\\umodel.exe"
+		local umod_file    = Micra.RootDir+"App\\umodel.exe"
 		--cesta je jeste jednou zastringovana kvuli mezeram a dlouhym nazvum
 		local cmd = "\"" +umod_file + "\"" +" -out="+export_dir +" -path="+package_path +" -export  -all "+ package_name +" "+ model_name + "\n"
 		cmd = correctPathSlashes cmd

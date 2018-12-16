@@ -117,7 +117,7 @@ if ::mcDialogEditMode != undefined do try(destroyDialog mcDialogEditMode)catch()
 		if action_category == undefined or action_name == undefined do return false
 		--save comment	
 		local help_txt = edt_description.text
-		setIniSetting mcActionHelpIni action_category action_name help_txt
+		setIniSetting Micra.ActionsHelpIni action_category action_name help_txt
 		--save icon index
 		
 		--save function name or filein name
@@ -135,8 +135,8 @@ if ::mcDialogEditMode != undefined do try(destroyDialog mcDialogEditMode)catch()
 		local action_category = getEditorData "action_category"
 		local action_name = getEditorData "action_name"
 		if action_category == undefined or action_name == undefined do return false
-		mcGM.setParam "active_icon_index" (mcCall.getIniDataFromArray mcActionIni action_category action_name 1)
-		mcFileInVersion "Icon_Maker"
+		mcGM.setParam "active_icon_index" (mcCall.getIniDataFromArray Micra.ActionsIni action_category action_name 1)
+		Micra.fileInVersion "Icon_Maker"
 	)
 	fn editModeSwitch force:undefined = (
 	
@@ -167,7 +167,7 @@ if ::mcDialogEditMode != undefined do try(destroyDialog mcDialogEditMode)catch()
 	
 		if form == undefined or action_category == undefined or action_name == undefined do return false
 		--load action info
-		local help_txt = getIniSetting mcActionHelpIni action_category action_name
+		local help_txt = getIniSetting Micra.ActionsHelpIni action_category action_name
 		setEditorData "help_text" help_txt
 		
 		/* TODO 
@@ -206,16 +206,16 @@ if ::mcDialogEditMode != undefined do try(destroyDialog mcDialogEditMode)catch()
 		
 		for i in keys do
 		(
-			local icon_num = mcCall.getIniDataFromArray mcActionIni head i 1
+			local icon_num = mcCall.getIniDataFromArray Micra.ActionsIni head i 1
 			img_list.images.add (getIconDotNet icon_num)
 		)
 		return img_list
 	)
 	fn loadCatalogs list_cat = (
 	
-		if not doesFileExist mcActionIni do return false
+		if not doesFileExist Micra.ActionsIni do return false
 		if debug == 1 do print "loadCatalogs > loading catalogs..."
-		local item_array = getIniSetting mcActionIni
+		local item_array = getIniSetting Micra.ActionsIni
 		list_cat.Items.clear()
 		list_cat.Items.AddRange (dotNetArray item_array)
 		list_cat.SelectedIndex = 1 --select first
@@ -223,11 +223,11 @@ if ::mcDialogEditMode != undefined do try(destroyDialog mcDialogEditMode)catch()
 
 	fn loadActionList list_cat list_act = (
 	
-		if not doesFileExist mcActionIni or list_act.SelectedIndex == -1 do return false
+		if not doesFileExist Micra.ActionsIni or list_act.SelectedIndex == -1 do return false
 		if debug == 1 do print "loadActionList > loading actions..."	
 		list_cat.BeginUpdate()
 		list_cat.items.Clear()
-		local item_array = getIniSetting mcActionIni list_act.SelectedItem
+		local item_array = getIniSetting Micra.ActionsIni list_act.SelectedItem
 		list_cat.SmallImageList = getImageList list_act.SelectedItem item_array
 		local list_items = #()
 		for i = 1 to item_array.count do 
@@ -279,9 +279,9 @@ if ::mcDialogEditMode != undefined do try(destroyDialog mcDialogEditMode)catch()
 						btn_b.Image = btn_a_image --copy image
 						btn_b.Tag = btn_a.tag --copy tag
 						--save Settings
-						local icn_numA = (mcCall.getIniDataFromArray mcActionIni btn_a.name btn_a.tag 1) as string
-						setINISetting mcTempProfileIni "Buttons" btn_b.name btn_b.tag
-						setINISetting mcTempProfileIni "Icons"   btn_b.name icn_numA 
+						local icn_numA = (mcCall.getIniDataFromArray Micra.ActionsIni btn_a.name btn_a.tag 1) as string
+						setINISetting Micra.TempProfileIni "Buttons" btn_b.name btn_b.tag
+						setINISetting Micra.TempProfileIni "Icons"   btn_b.name icn_numA 
 					)
 					mcGM.setParam "form_drop_data" undefined
 					--format "Customize > onMousedown > Drag End > s:% a%:\n" s a
@@ -321,7 +321,7 @@ if ::mcDialogEditMode != undefined do try(destroyDialog mcDialogEditMode)catch()
 	)
 	fn getRandomAboutImage =
 	(
-		local images = getFiles (mcPath()+"Img\\*.bmp")
+		local images = getFiles (Micra.RootDir+"Img\\*.bmp")
 		local abouts = for i in images where findString i "Micra_About" != undefined collect i
 		if abouts.count == 0 do return undefined
 		local fpath = abouts[random 1 abouts.count]
@@ -339,9 +339,9 @@ if ::mcDialogEditMode != undefined do try(destroyDialog mcDialogEditMode)catch()
 	(
 		local f    = createFile sFile
 		local data = "\n"
-		data += "fn mcPath=\""+mcFile.filterPath (mcPath())+"\"\n"--data += "fn mcPath=\""+mcPath()+"\"\n"
+		data += "fn Micra.RootDir=\""+mcFile.filterPath (Micra.RootDir)+"\"\n"--data += "fn Micra.RootDir=\""+Micra.RootDir+"\"\n"
 		data += "(\n"
-		data += "\tlocal loader = \""+mcPath()+"_Loader.ms\"\n"
+		data += "\tlocal loader = \""+Micra.RootDir+"_Loader.ms\"\n"
 		data += "\tif doesFileExist loader then\n"
 		data += "\t(\n"
 		data += "\t\tfileIn loader\n"
@@ -354,7 +354,7 @@ if ::mcDialogEditMode != undefined do try(destroyDialog mcDialogEditMode)catch()
 	)
 	fn onCheckedCahnges s a =
 	(
-		setINISetting mcUserINI "Settings" s.tag (s.checked as string)
+		setINISetting Micra.UserSettings "Settings" s.tag (s.checked as string)
 		
 		case s.tag of
 		(
@@ -378,7 +378,7 @@ if ::mcDialogEditMode != undefined do try(destroyDialog mcDialogEditMode)catch()
 			"UniversalCounter":
 			(
 				if s.checked
-				then (mcfileInVersion "Uni_Poly_Counter")
+				then (Micra.fileInVersion "Uni_Poly_Counter")
 				else (unregisterRedrawViewsCallback mcPolyCount.Count; mcPolyCount = undefined)
 			)
 			"UC_ShowSize":
@@ -448,14 +448,14 @@ if ::mcDialogEditMode != undefined do try(destroyDialog mcDialogEditMode)catch()
 	(
 		case s.text of
 		(
-			"Interface Colors":mcfileInVersion "Customize_Colors"
+			"Interface Colors":Micra.fileInVersion "Customize_Colors"
 			"Update Micra":
 			(
 				--get server file
-				local server_dir = "r:\\Resources\\Resources_new\\Micra\\"--(getIniSetting mcDefaultIni "Paths" "WorkServer")+"Micra\\"
+				local server_dir = "r:\\Resources\\Resources_new\\Micra\\"--(getIniSetting Micra.DefaultSettings "Paths" "WorkServer")+"Micra\\"
 				local server_file = server_dir + "Micra4.zip"
 				local app_7z = "C:\\Windows\\System32\\7za.exe"
-				local micra_folder = mcPath()
+				local micra_folder = Micra.RootDir
 				--OLD> local update_file = getDir #scripts+"\\Micra4.zip"
 				local update_file = getDir #userScripts+"\\Micra4.zip"
 				local backup_folder = substring micra_folder 1 (micra_folder.count-1) +"_Backup\\" --remove last slash and add _backup
@@ -498,10 +498,8 @@ if ::mcDialogEditMode != undefined do try(destroyDialog mcDialogEditMode)catch()
 				makeDir user_folder
 				treeCopy backup_user_folder user_folder
 				--Copy Micra_Macro.mcr to max  -- add version checker 
-				--OLD> local mcMacro = GetDir #ui + "MacroScripts\\Micra_Macro.mcr"
-				local mcMacro = getDir #userMacros + "\\Micra_Macro.mcr"
-				if doesFileExist mcMacro do deleteFile mcMacro
-				copyFile (mcPath()+"Micra_Macro.mcr") mcMacro
+				if doesFileExist Micra.Macro do deleteFile Micra.Macro
+				copyFile (Micra.RootDir+"Micra_Macro.mcr") Micra.Macro
 				--format "bk2:%\tuser:%\n" backup_user_folder user_folder
 				--restart Max
 				MessageBox  "Update has ben Succesfull! Please restart the 3DsMax" title:" Micra:-)"
@@ -711,7 +709,7 @@ if ::mcDialogEditMode != undefined do try(destroyDialog mcDialogEditMode)catch()
 				--Initialize Interface Components---------------------------------------------------------------------
 				for i in mcs.tab_2.checkboxes do 
 				(
-					state = execute (getIniSetting mcUserINI "Settings" i.tag)
+					state = execute (getIniSetting Micra.UserSettings "Settings" i.tag)
 					if state != undefined do i.Checked = state
 				)
 				
@@ -844,8 +842,8 @@ if ::mcDialogEditMode != undefined do try(destroyDialog mcDialogEditMode)catch()
 	(
 		form.name = "mcDialogEditMode"
 		form.ControlBox  = false --hide main bar
-		local fpos = (mcCall.getIniDataFromArray mcTempProfileIni "Properties_2" "mcDialogEditMode" 2)
-		if fpos == undefined do fpos = (mcCall.getIniDataFromArray mcDefaultProfileIni "Properties_2" "mcDialogEditMode" 2)
+		local fpos = (mcCall.getIniDataFromArray Micra.TempProfileIni "Properties_2" "mcDialogEditMode" 2)
+		if fpos == undefined do fpos = (mcCall.getIniDataFromArray Micra.DefaultProfileIni "Properties_2" "mcDialogEditMode" 2)
 		form.StartPosition = form.StartPosition.Manual
 		form.bounds = netDrRect fpos [form_width, form_height]
 		form.FormBorderStyle = form.FormBorderStyle.none

@@ -12,7 +12,7 @@ Global mcColorPaleteActiveSlot
 --Dialog:--------------------------------------------------------------------
 try ( destroyDialog mcColorPickerDialog ) catch()
 -----------------------------------------------------------------------------
-if doesFileExist (mcPath()+"Img\\ColorBySat.png") and doesFileExist (mcPath()+"Img\\ColorByVal.png") and mcColorPaleteActiveSlot != undefined do
+if doesFileExist (Micra.RootDir+"Img\\ColorBySat.png") and doesFileExist (Micra.RootDir+"Img\\ColorByVal.png") and mcColorPaleteActiveSlot != undefined do
 (
 	rollout mcColorPickerDialog "" width:328 height:276
 	(
@@ -55,7 +55,7 @@ if doesFileExist (mcPath()+"Img\\ColorBySat.png") and doesFileExist (mcPath()+"I
 			(
 				local clr = newColorBt.backColor
 				mcColorPaleteActiveSlot.backColor = clr
-				setIniSetting mcUserINI "ColorPalete" mcColorPaleteActiveSlot.tag ((netColorToRGB clr) as string)
+				setIniSetting Micra.UserSettings "ColorPalete" mcColorPaleteActiveSlot.tag ((netColorToRGB clr) as string)
 			),
 			fn updateRGBHSVSpinners col = 
 			(
@@ -96,8 +96,8 @@ if doesFileExist (mcPath()+"Img\\ColorBySat.png") and doesFileExist (mcPath()+"I
 			fn loadImage = 
 			(
 				if btswitch.state == 1 
-				then openBitmap (mcPath()+"Img\\ColorBySat.png") 
-				else openBitmap (mcPath()+"Img\\ColorByVal.png")
+				then openBitmap (Micra.RootDir+"Img\\ColorBySat.png") 
+				else openBitmap (Micra.RootDir+"Img\\ColorByVal.png")
 			)
 		)
 		-----------------------------------------------------------------------------
@@ -143,7 +143,7 @@ if doesFileExist (mcPath()+"Img\\ColorBySat.png") and doesFileExist (mcPath()+"I
 		)
 		fn loadCPImage type =
 		(
-			local fpath = mcPath() + "Img\\" + 
+			local fpath = Micra.RootDir + "Img\\" + 
 			(
 				case type of
 				(
