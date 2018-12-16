@@ -4,7 +4,7 @@
 
 
 
-EN: [Do not dowmload now](Restructuralization)
+EN: Do not dowmload now (Restructuralization)
 
 Micra Tools consists of many functions, which are combined into one application. 
 This tool is making work much simplier and quicker.
@@ -23,7 +23,7 @@ Micra.restoreToDefault()
 thats all, enjoy you work :-D
 
 
-CZ: [Nestahujte](Restrukturalizace)
+CZ: Nestahujte(Restrukturalizace)
 
 Micra Tools sestavá z mnoha nástrojů sloučených do jedné aplikace. 
 Tyto nástroje zjednodušují a urychlují práci v 3DsMax.
