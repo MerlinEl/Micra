@@ -1,0 +1,1 @@
+print ("Checkbox state is " + ckb_1.state as string))

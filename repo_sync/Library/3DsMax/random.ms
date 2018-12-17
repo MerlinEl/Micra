@@ -1,0 +1,1 @@
+for i in objects do select (getNodeByName ("Sphere0"+ (random 1 9) as string))

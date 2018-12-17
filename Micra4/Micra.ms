@@ -20,7 +20,7 @@ Global mc_Dialog_J
 Global mcMicraDialog
 Global mcDialogEditMode
 Global mcColorPaleteDialog
-Global mcCreateNetDinamicDialog
+Global mcCreateNetDynamicDialog
 Global mcGetNameAndColor
 Global mcRenameUpdate
 --move in to struct
@@ -204,7 +204,7 @@ try ( mcMicraDialog.close() ) catch()
 		local P1_Dialogs = getINISetting Micra.TempProfileIni "Properties_1" 
 		for i in P1_Dialogs where (mcCall.getIniDataFromArray Micra.TempProfileIni "Properties_1" i 1) == true do
 		(
-			mcCreateNetDinamicDialog i
+			mcCreateNetDynamicDialog i
 		)
 	)
 	fn onOpenForm s a = 
@@ -219,9 +219,8 @@ try ( mcMicraDialog.close() ) catch()
 	(
 		--print "micra closed"
 		s.tag.value.timer.stop()
-		callbacks.removeScripts id:#mcGeneralCall
 		mcFile.saveIniDialog s "Properties_2" s.name
-		fileIn (Micra.RootDir + "_Unloader.ms")
+		Micra.Unload self:false --false self, prevent depency loop
 	)
 	fn changeBackcolor s a = (s.backColor = netDrColor clr_fore)
 	fn minMaxForm s a =
@@ -281,14 +280,10 @@ try ( mcMicraDialog.close() ) catch()
 		local dia = execute s.tag
 		if classOf dia == dotNetObject and not dia.isDisposed 
 		then ( if dia.visible then dia.hide() else dia.show() )
-		else (mcCreateNetDinamicDialog s.tag)
+		else (mcCreateNetDynamicDialog s.tag)
 	)
-	fn quitMicra s a = ( ((s.GetCurrentParent()).tag).close() ) -->Shut Down Micra
-	fn reloadMicra s a =
-	(
-		((s.GetCurrentParent()).tag).close()
-		fileIn (Micra.RootDir+ "_Loader.ms")
-	)
+	fn quitMicra s a = ( Micra.unload() ) --> Shut Down Micra
+	fn reloadMicra s a =( Micra.Reload() ) --> Restart Micra
 	fn saveCurrentProfile =
 	(
 		--save current pos and size for all visible dialogs to /Profile_Temp.ini

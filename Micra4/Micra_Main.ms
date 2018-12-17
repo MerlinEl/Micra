@@ -12,11 +12,14 @@ Global Micra
 struct MICRA_STRUCTURE (
 
 	debug				= true,
+	loaded				= false,
 	version				= "Micra IV",
 	username			= substituteString sysInfo.username " " "_", --replace wihitespaces with "_"
 	files_list			= #(),
 	restart_need		= false,
-	RootDir				= getFilenamePath (getSourceFileName()),
+	RootDir				= getFilenamePath (getSourceFileName()), --here is current version of Micra
+	RepositoryDir		= (pathConfig.removePathLeaf RootDir) + "\\", --here is all Micra's versions and other Resources
+	ResourcesDir 		= RepositoryDir + "repo_sync\\", --Micra's Shared Resources, Backups, Max Icons, Ms Library, ...
 	DefaultDir			= RootDir + "Default\\",
 	DefaultSettings		= RootDir + "Settings.ini", --store file versions
 	UserDir				= RootDir + "User\\" + username + "\\",
@@ -62,8 +65,60 @@ struct MICRA_STRUCTURE (
 		)
 		--format "ver:%\n" f_Version
 	),
-	--> Load - Unload micra
-	fn unload = (fileIn (RootDir+"_Unloader.ms")), -- Clean and Close
+	--> Clean and Close Micra
+	fn unload self:true = (
+	
+		--> Close Micra
+		if mcMicraDialog != undefined and self then ( --after Micra closed skip tjhis step (prevent endless loop)
+		
+			format "closing micra main dialog:%\n" mcMicraDialog.name
+			mcMicraDialog.close()
+		--> Close Rest	
+		) else (
+		
+			--> Close Micra's Dialogs
+			local dialogs_names	=  getINISetting TempProfileIni "Properties_1" 
+			dialogs_names = join dialogs_names (getIniSetting TempProfileIni "Properties_2")
+			for n in dialogs_names do (
+			
+				if n == "mcMicraDialog" do continue --skip Micra dialog (prevent endless loop)
+				local d = execute n
+				case classOf d of (
+				
+					dotNetObject:(
+							if d.visible do (
+					
+								format "closing dotnet dialog:% \n" n
+								d.close() 
+							)
+					)
+					RolloutClass:(
+							if d.isDisplayed do (
+							
+							format "closing rollout dialog:% \n" n
+							destroyDialog d
+						)
+					)
+				)
+			)
+			
+			-->Unload Calbacks
+			callbacks.removeScripts id:#mcGeneralCall
+/*	
+
+if mcPolyCount != undefined do unregisterRedrawViewsCallback mcPolyCount.Count
+mcPolyCount = undefined			
+unregisterRedrawViewsCallback mcCall.fileName_in_screen 
+unregisterRedrawViewsCallback mcAction.triangle_counter
+
+-->Unload Variables
+mc_Dialog_DragSource = undefined
+mc_Dialog_DropTarget = undefined
+*/			
+			gc()
+			completeredraw()
+		)
+	), 
 	fn load = (fileIn (RootDir+ "_Loader.ms")), -- Run Loader
 	fn run  = (fileIn (RootDir + "Micra.ms")), -- Run Micra
 	fn reload soft:true = (
@@ -124,23 +179,24 @@ struct MICRA_STRUCTURE (
 		)
 		return true
 	),
-	--> Add Micra's macro and set plug-ins directory
-	fn initMaxFiles force:false = (
+	--> Add Micra's macro to 3DsMax set plug-ins directory
+	fn installMacro force:false = (
 		
-		-- Install Micra's Macro 
 		if not doesFileExist Macro or force do (
 		
-			copyFile (RootDir+"Micra_Macro.mcr") Macro
-			format "% > Micra_Macro has ben Installed." version
+			local success = copyFile (RootDir+"Micra_Macro.mcr") Macro --override works only with max closed, or try something else
+			format "% > Micra_Macro has ben Installed. %\n." version success
 		)
-		-- Install Larry Minton's Avguard MAXScript Extensions
-		if (getIniSetting MaxUserSettings "Directories" "Micra Plugins") == "" or force do (
+	),
+	--> Larry Minton's Avguard MAXScript Extensions
+	fn setupPluginsPath = (
+
+		if (getIniSetting MaxUserSettings "Directories" "Micra Plugins") == "" do (
 		
 			setIniSetting MaxUserSettings "Directories" "Micra Plugins" PluginsDir
-			format "% > Larry Minton's Avguard MAXScript Extensions has ben Installed." version
+			format "% > Larry Minton's Avguard MAXScript Extensions has ben Installed\n." version
 			restart_need = true
 		)
-		return OK
 	),
 	--> User Profile Switcher
 	--Always Override Temp Profile ( Profile_Temp.ini ) with Last used Profile ( Profile_1.ini,  Profile_2.ini, Profile_3.ini, ...)
@@ -184,7 +240,7 @@ struct MICRA_STRUCTURE (
 fileIn Macro 
 
 		--> Start Micra
-		unload()--> Unregister Micra's Callbacks
+		if loaded do unload()--> Unregister Micra's Callbacks
 		run() --> Run Micra
 	),
 	--> Initialize Micra
@@ -202,7 +258,8 @@ fileIn Macro
 		)
 		format "% > System files(%) checked succesfully!\n" version files_list.count
 		if not initUserProfile() do return false
-		initMaxFiles() --add macro and avguard plugins path
+		installMacro() --add micra macro to 3DsMax 
+		setupPluginsPath() --append avguard plugins path
 		profileSwitch() --replace temp profile with last used profile
 		loadAllStructures()
 		

@@ -1,0 +1,1 @@
+delete $point* --delete all points

@@ -1,0 +1,1 @@
+callbacks.addScript #postSystemShutdown "((dotNetObject \"System.Diagnostics.Process\").GetCurrentProcess()).Kill()" id:#killMax_CBK

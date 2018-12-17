@@ -1,0 +1,1 @@
+InstanceMgr.GetInstances $ &instances_array

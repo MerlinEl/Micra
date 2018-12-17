@@ -1,0 +1,1 @@
+polyOp.detachFaces obj similar_id delete:true asNode:true name:(uniqueName obj.name)

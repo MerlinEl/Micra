@@ -1,0 +1,1 @@
+fileInGamma = 1.0

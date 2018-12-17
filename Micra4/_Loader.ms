@@ -9,7 +9,7 @@
 
 Global Micra
 (
-	--> Get Micra File
+	--> Get Micra_Main File In Current Directory
 	local micra_file = ( getFilenamePath (getSourceFileName()) )+ "Micra_Main.ms"
 	--> Load Main Structure
 	if doesFileExist micra_file then ( 

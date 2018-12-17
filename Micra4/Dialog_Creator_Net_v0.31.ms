@@ -19,7 +19,7 @@ Global mc_Dialog_I
 Global mc_Dialog_J
 Global mcFormSnap
 Global getIconDotNet
-Global mcCreateNetDinamicDialog
+Global mcCreateNetDynamicDialog
 
 (
 	--------------------------------------
@@ -634,9 +634,8 @@ if debug == 5 do format "name:%\t tag:%\n" s.name s.tag
 		form.controls.addRange(#(mcs.tlp, mcs.lblT, mcs.btnMin))
 	)
 	--START BUILDING
-	fn mcCreateNetDinamicDialog dname = 
+	fn mcCreateNetDynamicDialog dname = 
 	(
-		clearListener()
 		try (execute ( dname+".close()" )) catch()
 		
 		-->Components---------------------------------------------------------------------
@@ -699,10 +698,10 @@ if debug == 5 do format "name:%\t tag:%\n" s.name s.tag
 )
 
 /*
-mcCreateNetDinamicDialog "mc_Dialog_F"
-mcCreateNetDinamicDialog "mc_Dialog_G"
-mcCreateNetDinamicDialog "mc_Dialog_H"
-mcCreateNetDinamicDialog "mc_Dialog_I"
+mcCreateNetDynamicDialog "mc_Dialog_F"
+mcCreateNetDynamicDialog "mc_Dialog_G"
+mcCreateNetDynamicDialog "mc_Dialog_H"
+mcCreateNetDynamicDialog "mc_Dialog_I"
 mc_Dialog_F.hide()
 mc_Dialog_F.show()
 */

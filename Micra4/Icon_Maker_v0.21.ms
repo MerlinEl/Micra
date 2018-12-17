@@ -1,5 +1,5 @@
-Global Micra.IconMakerDialog
-if ::Micra.IconMakerDialog != undefined do try(Micra.IconMakerDialog.Close())catch()
+Global mcIconMakerDialog
+if ::mcIconMakerDialog != undefined do try(mcIconMakerDialog.Close())catch()
 (
 	local mcs, dia
 	struct dotNetFormStruct (
@@ -828,15 +828,15 @@ if ::Micra.IconMakerDialog != undefined do try(Micra.IconMakerDialog.Close())cat
 			-- Init Maxform
 			dotNet.loadAssembly "MaxCustomControls.dll"
 			
-			form.name = "Micra.IconMakerDialog"
+			form.name = "mcIconMakerDialog"
 			form.ControlBox  = false --hide main bar
-			local fpos = (mcCall.getIniDataFromArray Micra.TempProfileIni "Properties_2" "Micra.IconMakerDialog" 2) --pick custom fpos
-			if fpos == undefined do fpos = (mcCall.getIniDataFromArray Micra.DefaultProfileIni "Properties_2" "Micra.IconMakerDialog" 2) --pick default fpos
+			local fpos = (mcCall.getIniDataFromArray Micra.TempProfileIni "Properties_2" "mcIconMakerDialog" 2) --pick custom fpos
+			if fpos == undefined do fpos = (mcCall.getIniDataFromArray Micra.DefaultProfileIni "Properties_2" "mcIconMakerDialog" 2) --pick default fpos
 			if fpos == undefined do ( --register new fpos
 			
 				fpos = [0, 0]
-				mcCall.setIniDataToArray Micra.TempProfileIni "Properties_2" "Micra.IconMakerDialog" 2 fpos 	
-				mcCall.setIniDataToArray Micra.DefaultProfileIni "Properties_2" "Micra.IconMakerDialog" 2 fpos 
+				mcCall.setIniDataToArray Micra.TempProfileIni "Properties_2" "mcIconMakerDialog" 2 fpos 	
+				mcCall.setIniDataToArray Micra.DefaultProfileIni "Properties_2" "mcIconMakerDialog" 2 fpos 
 			)
 			form.StartPosition = form.StartPosition.Manual
 			form.bounds = netDrRect fpos form_size
@@ -1013,7 +1013,7 @@ if ::Micra.IconMakerDialog != undefined do try(Micra.IconMakerDialog.Close())cat
 					btn_fill, btn_cross,tlp
 				) 
 			)
-			local dpos   = (mcCall.getIniDataFromArray Micra.TempProfileIni "Properties_2" "Micra.IconMakerDialog" 2)
+			local dpos   = (mcCall.getIniDataFromArray Micra.TempProfileIni "Properties_2" "mcIconMakerDialog" 2)
 			form.Location = netDrPoint dpos
 			-- Shows the form with the specified owner (MAX) to the user (creatd by lo)
 			local nw = defNWin()
@@ -1022,7 +1022,7 @@ if ::Micra.IconMakerDialog != undefined do try(Micra.IconMakerDialog.Close())cat
 		),
 		initIt = init()
 	)
-	Micra.IconMakerDialog = dotNetFormStruct()
-	mcs = Micra.IconMakerDialog --structure shortcut (simplest use)
-	dia = Micra.IconMakerDialog.form --form instance
+	mcIconMakerDialog = dotNetFormStruct()
+	mcs = mcIconMakerDialog --structure shortcut (simplest use)
+	dia = mcIconMakerDialog.form --form instance
 )

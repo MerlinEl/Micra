@@ -1492,11 +1492,11 @@ Struct mcCursor (
 		return case type of (
 			
 			#cursor         : dotNetClass "System.Windows.Forms.cursor"
-			#cross :dotNetObject "System.Windows.Forms.Cursor" (mcImgPath+"cross.ico")
-			#pipe   : dotNetObject "System.Windows.Forms.Cursor" (mcImgPath+"pipe.ico")
-			#fill      : dotNetObject "System.Windows.Forms.Cursor" (mcImgPath+"fill.ico")
-			#arrow  : dotNetObject "System.Windows.Forms.Cursor" (mcImgPath+"harrow.ico")
-			#grab    : dotNetObject "System.Windows.Forms.Cursor" (mcImgPath+"hmove.ico")	
+			#cross :dotNetObject "System.Windows.Forms.Cursor" (Micra.ImgPath+"cross.ico")
+			#pipe   : dotNetObject "System.Windows.Forms.Cursor" (Micra.ImgPath+"pipe.ico")
+			#fill      : dotNetObject "System.Windows.Forms.Cursor" (Micra.ImgPath+"fill.ico")
+			#arrow  : dotNetObject "System.Windows.Forms.Cursor" (Micra.ImgPath+"harrow.ico")
+			#grab    : dotNetObject "System.Windows.Forms.Cursor" (Micra.ImgPath+"hmove.ico")	
 		)
 	)
 )

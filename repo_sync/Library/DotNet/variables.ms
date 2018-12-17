@@ -1,0 +1,2 @@
+globalVars
+print (globalVars.gather())

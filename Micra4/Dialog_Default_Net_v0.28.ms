@@ -541,7 +541,6 @@ if debug == 5 do format "name:%\t tag:%\n" s.name s.tag
 	--START BUILDING
 	fn mcCreateNetDinamicDialog dname = 
 	(
-		clearListener()
 		try (execute ( dname+".close()" )) catch()
 		
 		-->Components---------------------------------------------------------------------
