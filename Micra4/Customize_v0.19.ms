@@ -603,13 +603,13 @@ if ::mcDialogEditMode != undefined do try(destroyDialog mcDialogEditMode)catch()
 								if item_text == "+ Action Editor +" then (
 									
 									item_size.height =  bar_height
-									item.BackColor = netDrColor clr_back
-									item.ForeColor = netDrColor clr_text
+									item.BackColor = netDrColor (mcUIColors.get #back)
+									item.ForeColor = netDrColor (mcUIColors.get #text)
 								) else (
 								
 									item_size.height = 24
-									item.BackColor = netDrColor #462a5f
-									item.ForeColor = netDrColor #b973ff
+									item.BackColor = netDrColor (mcUIColors.get #edtback)
+									item.ForeColor = netDrColor (mcUIColors.get #edtfore)
 								)
 			
 								item --case return

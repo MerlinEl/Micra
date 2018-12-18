@@ -58,7 +58,14 @@ struct mcArray
 		)
 		return index
 	),
-	fn reverseArray arr = (for i=arr.count to 1 by -1 collect arr[i])
+	fn reverseArray arr = (for i=arr.count to 1 by -1 collect arr[i]),
+	fn mergeClone arr1 arr2 = (
+		
+		local new_arr = #()
+		join new_arr arr1
+		join new_arr arr2
+		return new_arr
+	)
 	/*
 	a = #( #(1,2), #("c","d","e"), #(56,47) ) 
 	b = findItem2 a "c" 1
@@ -1274,6 +1281,15 @@ struct mcSystem
 		print v
 		flush f
 		close f
+	),
+	fn getMaxPos = (
+		
+		return windows.getWindowPos (windows.getMAXHWND())
+	),
+	fn getMaxCenter = (
+	
+		local max_pos = mcSystem.getMaxPos()
+		return [max_pos.w/2 + max_pos.x /2, max_pos.h/2 + max_pos.y /2]
 	)
 )
 
@@ -1472,15 +1488,17 @@ Struct mcUIColors(
 		local head_str = profiles[last_profile]
 		case clr of (
 			
-			#back   : execute (mcFile.saveLoadIniSetings head:head_str key:"backcolor" action:#load)
-			#fore    : execute (mcFile.saveLoadIniSetings head:head_str key:"forecolor" action:#load)
-			#sel     : execute (mcFile.saveLoadIniSetings head:head_str key:"selected"  action:#load)
-			#mark   : execute (mcFile.saveLoadIniSetings head:head_str key:"marked"  action:#load)
-			#btn     : execute (mcFile.saveLoadIniSetings head:head_str key:"button"   action:#load)
-			#inact   : execute (mcFile.saveLoadIniSetings head:head_str key:"inactive"  action:#load)
-			#text    : execute (mcFile.saveLoadIniSetings head:head_str key:"textcolor"  action:#load)
-			#seltext : execute (mcFile.saveLoadIniSetings head:head_str key:"seltext"  action:#load)
-			#opacity  :execute (mcFile.saveLoadIniSetings head:head_str key:"opacity"  action:#load)
+			#back		: execute (mcFile.saveLoadIniSetings head:head_str key:"backcolor" action:#load)
+			#fore			: execute (mcFile.saveLoadIniSetings head:head_str key:"forecolor" action:#load)
+			#sel			: execute (mcFile.saveLoadIniSetings head:head_str key:"selected"  action:#load)
+			#mark		: execute (mcFile.saveLoadIniSetings head:head_str key:"marked"  action:#load)
+			#btn			: execute (mcFile.saveLoadIniSetings head:head_str key:"button"   action:#load)
+			#inact		: execute (mcFile.saveLoadIniSetings head:head_str key:"inactive"  action:#load)
+			#text			: execute (mcFile.saveLoadIniSetings head:head_str key:"textcolor"  action:#load)
+			#seltext		: execute (mcFile.saveLoadIniSetings head:head_str key:"seltext"  action:#load)
+			#opacity	:execute (mcFile.saveLoadIniSetings head:head_str key:"opacity"  action:#load)
+			#edtback	:execute (mcFile.saveLoadIniSetings head:head_str key:"editback"  action:#load)
+			#edtfore	:execute (mcFile.saveLoadIniSetings head:head_str key:"editfore"  action:#load)
 		)
 	)
 )
@@ -1491,12 +1509,12 @@ Struct mcCursor (
 	fn get type = (
 		return case type of (
 			
-			#cursor         : dotNetClass "System.Windows.Forms.cursor"
-			#cross :dotNetObject "System.Windows.Forms.Cursor" (Micra.ImgPath+"cross.ico")
-			#pipe   : dotNetObject "System.Windows.Forms.Cursor" (Micra.ImgPath+"pipe.ico")
-			#fill      : dotNetObject "System.Windows.Forms.Cursor" (Micra.ImgPath+"fill.ico")
-			#arrow  : dotNetObject "System.Windows.Forms.Cursor" (Micra.ImgPath+"harrow.ico")
-			#grab    : dotNetObject "System.Windows.Forms.Cursor" (Micra.ImgPath+"hmove.ico")	
+			#cursor	: dotNetClass "System.Windows.Forms.cursor"
+			#cross	:dotNetObject "System.Windows.Forms.Cursor" (Micra.ImgPath+"cross.ico")
+			#pipe		: dotNetObject "System.Windows.Forms.Cursor" (Micra.ImgPath+"pipe.ico")
+			#fill		: dotNetObject "System.Windows.Forms.Cursor" (Micra.ImgPath+"fill.ico")
+			#arrow	: dotNetObject "System.Windows.Forms.Cursor" (Micra.ImgPath+"harrow.ico")
+			#grab	: dotNetObject "System.Windows.Forms.Cursor" (Micra.ImgPath+"hmove.ico")	
 		)
 	)
 )

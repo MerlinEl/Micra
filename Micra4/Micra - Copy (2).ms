@@ -38,6 +38,15 @@ try ( mcMicraDialog.close() ) catch()
 	local last_profile = execute (mcFile.saveLoadIniSetings head:"Interface" key:"lastprofile" action:#load)
 	local profiles = #("DefaultColor", "UserColor", "ForestColor", "EarthColor", "MoonColor", "SeaColor", "SunColor", "Close")
 	local head_str = profiles[last_profile]
+	local clr_back     = execute (mcFile.saveLoadIniSetings head:head_str key:"backcolor" action:#load)
+	local clr_fore     = execute (mcFile.saveLoadIniSetings head:head_str key:"forecolor" action:#load)
+	local clr_sel      = execute (mcFile.saveLoadIniSetings head:head_str key:"selected"  action:#load)
+	local clr_mark     = execute (mcFile.saveLoadIniSetings head:head_str key:"marked"  action:#load)
+	local clr_btn      = execute (mcFile.saveLoadIniSetings head:head_str key:"button"   action:#load)
+	local clr_inact    = execute (mcFile.saveLoadIniSetings head:head_str key:"inactive"  action:#load)
+	local clr_text     = execute (mcFile.saveLoadIniSetings head:head_str key:"textcolor"  action:#load)
+	local clr_seltext  = execute (mcFile.saveLoadIniSetings head:head_str key:"seltext"  action:#load)
+	local form_opacity = execute (mcFile.saveLoadIniSetings head:head_str key:"opacity"  action:#load)
 	local bar_height      = 14
 	local form_bounds     = 2
 	local form_offset     = 4
@@ -139,7 +148,7 @@ try ( mcMicraDialog.close() ) catch()
 			--mcs.edt_objName.enabled    = false
 				--if mcs.edt_objName.font.bold     != false do mcs.edt_objName.font.bold = false
 			mcs.edt_objName.text         = ""
-			mcs.cp_wirePicker.backcolor  = netDrColor (mcUIColors.get #seltext)
+			mcs.cp_wirePicker.backcolor  = netDrColor clr_seltext
 		)
 	)
 	fn mcRenameUpdate = --Updating "EditBox text" when CommandPanel name is changed. EditBox is not focused!
@@ -213,10 +222,7 @@ try ( mcMicraDialog.close() ) catch()
 		mcFile.saveIniDialog s "Properties_2" s.name
 		Micra.Unload self:false --false self, prevent depency loop
 	)
-	fn changeBackcolor s a = ( 
-	
-		s.backColor = netDrColor (mcUIColors.get #fore) 
-	)
+	fn changeBackcolor s a = (s.backColor = netDrColor clr_fore)
 	fn minMaxForm s a =
 	(
 		local form = s.parent
@@ -309,7 +315,7 @@ try ( mcMicraDialog.close() ) catch()
 	)
 	fn renameCurrentProfile = (
 	
-		local typed_text = mcPopup.textBox msg:"New Profile Name:"
+		local typed_text = mcPopup.textBox msg:"Type new profile name:"
 		format "typed_text:%\n" typed_text
 	)
 	fn manageProfile s a =
@@ -353,8 +359,8 @@ try ( mcMicraDialog.close() ) catch()
 				local keys = getIniSetting Micra.TempProfileIni "Properties_1"
 				if msc.mnu_t_items.count == 0 do
 				(
-					mnu.BackColor = netDrColor (mcUIColors.get #back)
-					mnu.ForeColor = netDrColor (mcUIColors.get #text)
+					mnu.BackColor = netDrColor clr_back
+					mnu.ForeColor = netDrColor clr_text
 					mnu.ShowImageMargin = false
 					for i in keys do
 					(
@@ -371,13 +377,13 @@ try ( mcMicraDialog.close() ) catch()
 					if enabled 
 					then 
 					(
-						msc.mnu_t_items[i].backColor = netDrColor (mcUIColors.get #mark)
-						msc.mnu_t_items[i].forecolor = netDrColor (mcUIColors.get #text)
+						msc.mnu_t_items[i].backColor = netDrColor clr_mark
+						msc.mnu_t_items[i].forecolor = netDrColor clr_text
 					)
 					else
 					(
-						msc.mnu_t_items[i].backColor = netDrColor (mcUIColors.get #back)
-						msc.mnu_t_items[i].forecolor = netDrColor (mcUIColors.get #inact)
+						msc.mnu_t_items[i].backColor = netDrColor clr_back
+						msc.mnu_t_items[i].forecolor = netDrColor clr_inact
 					)
 				)
 				mnu.Show (s.PointToScreen (netDrPoint a.location))
@@ -395,8 +401,8 @@ try ( mcMicraDialog.close() ) catch()
 					--Add separator at begin
 					mnu.Items.Add(dotNetObject "System.Windows.Forms.ToolStripSeparator")
 					--setup skin
-					mnu.BackColor = netDrColor (mcUIColors.get #back)
-					mnu.ForeColor = netDrColor (mcUIColors.get #text)
+					mnu.BackColor = netDrColor clr_back
+					mnu.ForeColor = netDrColor clr_text
 					mnu.ShowImageMargin = false
 					for n in menu_items_names do (
 					
@@ -417,11 +423,11 @@ try ( mcMicraDialog.close() ) catch()
 				
 					if i != cp_num then(
 					
-						msc.mnu_p_items[i].backColor = netDrColor (mcUIColors.get #back)
-						msc.mnu_p_items[i].forecolor = netDrColor (mcUIColors.get #text)
+						msc.mnu_p_items[i].backColor = netDrColor clr_back
+						msc.mnu_p_items[i].forecolor = netDrColor clr_text
 					) else (
 					
-						msc.mnu_p_items[i].backColor = netDrColor (mcUIColors.get #back)
+						msc.mnu_p_items[i].backColor = netDrColor clr_back
 						msc.mnu_p_items[i].forecolor = netDrColor green
 					)
 				)
@@ -438,8 +444,8 @@ try ( mcMicraDialog.close() ) catch()
 		for i in lbl do
 		(
 			i.size = netDrSize [(gw.getTextExtent "Micra III   ").x, btn_size]
-			i.BackColor = netDrColor (mcUIColors.get #back)
-			i.ForeColor = netDrColor (mcUIColors.get #text)
+			i.BackColor = netDrColor clr_back
+			i.ForeColor = netDrColor clr_text
 			i.margin =  dotnetobject "padding" 0
 			i.text = "Micra III" 
 			i.TextAlign = i.TextAlign.MiddleCenter
@@ -451,7 +457,7 @@ try ( mcMicraDialog.close() ) catch()
 		(
 			i.size  = netDrSize [btn_size, btn_size]
 			i.FlatStyle = i.FlatStyle.flat
-			i.FlatAppearance.BorderColor = netDrColor (mcUIColors.get #back)
+			i.FlatAppearance.BorderColor = netDrColor clr_back
 			i.FlatAppearance.BorderSize = 1
 			i.margin =  dotnetobject "padding" 0
 			i.name = tip[ cnt += 1 ]
@@ -477,20 +483,20 @@ try ( mcMicraDialog.close() ) catch()
 		
 		form.bounds = netDrRect fpos form_size
 		form.FormBorderStyle = form.FormBorderStyle.none
-		form.BackColor = netDrColor (mcUIColors.get #fore) --yellow
+		form.BackColor = netDrColor clr_fore --yellow
 		form.ShowInTaskbar = false
-		form.opacity = mcUIColors.get #opacity
+		form.opacity = form_opacity
 		
 		mcs.ToolTip.IsBalloon = true
-		mcs.ToolTip.BackColor = netDrColor (mcUIColors.get #back)
-		mcs.ToolTip.ForeColor = netDrColor (mcUIColors.get #text)
+		mcs.ToolTip.BackColor = netDrColor clr_back
+		mcs.ToolTip.ForeColor = netDrColor clr_text
 		mcs.ToolTip.AutoPopDelay = 5000
 		mcs.ToolTip.InitialDelay = 400
 		mcs.ToolTip.ReshowDelay = 100
 		mcs.ToolTip.ShowAlways = true
 		
-		mcs.mnu.BackColor = netDrColor (mcUIColors.get #back)
-		mcs.mnu.ForeColor = netDrColor (mcUIColors.get #text)
+		mcs.mnu.BackColor = netDrColor clr_back
+		mcs.mnu.ForeColor = netDrColor clr_text
 		mcs.mnu.ShowImageMargin = false
 		
 		mcs.timer.interval  = sec
@@ -498,27 +504,27 @@ try ( mcMicraDialog.close() ) catch()
 		
 		mcs.btnMin.bounds = netDrRect [form_size.x - btn_size - form_offset/2, form_offset/2] [btn_size, bar_height]
 		mcs.btnMin.FlatStyle = mcs.btnMin.FlatStyle.flat
-		mcs.btnMin.BackColor = netDrColor (mcUIColors.get #btn) --(color 124 196 22)
+		mcs.btnMin.BackColor = netDrColor clr_btn --(color 124 196 22)
 		mcs.btnMin.ForeColor = netDrColor (mcUIColors.get #text)
 		mcs.btnMin.text = "-"
 		
 		mcs.edt_objName.bounds = netDrRect [form_offset/2,bar_height+form_offset] [form_size.x - form_offset*2 - btn_size, bar_height]
-		mcs.edt_objName.BackColor = netDrColor (mcUIColors.get #back)
-		mcs.edt_objName.ForeColor = netDrColor (mcUIColors.get #seltext)
+		mcs.edt_objName.BackColor = netDrColor clr_back
+		mcs.edt_objName.ForeColor = netDrColor clr_seltext
 		mcs.edt_objName.BorderStyle = mcs.edt_objName.BorderStyle.FixedSingle
 		
 		mcs.cp_wirePicker.FlatStyle = mcs.cp_wirePicker.FlatStyle.flat
-		mcs.cp_wirePicker.FlatAppearance.BorderColor = netDrColor (mcUIColors.get #back)
+		mcs.cp_wirePicker.FlatAppearance.BorderColor = netDrColor clr_back
 		mcs.cp_wirePicker.FlatAppearance.BorderSize = 1
 		mcs.cp_wirePicker.bounds  = netDrRect [form_size.x- btn_size- form_offset, bar_height+form_offset] [btn_size+2, 20]
-		mcs.cp_wirePicker.backColor = netDrColor (mcUIColors.get #seltext)
+		mcs.cp_wirePicker.backColor = netDrColor clr_seltext
 
 		mcs.lblT.bounds = netDrRect [form_offset/2, form_offset/2] [form_size.x - form_offset, bar_height]
-		mcs.lblT.BackColor = netDrColor (mcUIColors.get #back)
-		mcs.lblT.ForeColor = netDrColor (mcUIColors.get #text)
+		mcs.lblT.BackColor = netDrColor clr_back
+		mcs.lblT.ForeColor = netDrColor clr_text
 
 		mcs.tlp.bounds = netDrRect [form_offset/2, bar_height*2+form_offset*3] [form_size.x - form_offset, btn_size]
-		mcs.tlp.backColor = netDrColor (mcUIColors.get #btn)
+		mcs.tlp.backColor = netDrColor clr_btn
 		--mcs.tlp.AutoSize = true
 		mcs.tlp.ColumnCount = 6
 		

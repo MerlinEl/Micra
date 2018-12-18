@@ -73,15 +73,14 @@ struct MICRA_STRUCTURE (
 		
 			format "closing micra main dialog:%\n" mcMicraDialog.name
 			mcMicraDialog.close()
-		--> Close Rest	
+		--> Close Other	
 		) else (
 		
 			--> Close Micra's Dialogs
-			local dialogs_names	=  getINISetting TempProfileIni "Properties_1" 
-			dialogs_names = join dialogs_names (getIniSetting TempProfileIni "Properties_2")
+			local dialogs_names	= join (getINISetting TempProfileIni "Properties_1") (getIniSetting TempProfileIni "Properties_2")
 			for n in dialogs_names do (
 			
-				if n == "mcMicraDialog" do continue --skip Micra dialog (prevent endless loop)
+				if n == "mcMicraDialog" do continue --close all except Micra dialog (prevent endless loop)
 				local d = execute n
 				case classOf d of (
 				
@@ -104,17 +103,16 @@ struct MICRA_STRUCTURE (
 			
 			-->Unload Calbacks
 			callbacks.removeScripts id:#mcGeneralCall
-/*	
-
-if mcPolyCount != undefined do unregisterRedrawViewsCallback mcPolyCount.Count
-mcPolyCount = undefined			
-unregisterRedrawViewsCallback mcCall.fileName_in_screen 
-unregisterRedrawViewsCallback mcAction.triangle_counter
+	
+--TODO check it if need
+--if mcPolyCount != undefined do unregisterRedrawViewsCallback mcPolyCount.Count; mcPolyCount = undefined			
+--unregisterRedrawViewsCallback mcCall.fileName_in_screen 
+--unregisterRedrawViewsCallback mcAction.triangle_counter
 
 -->Unload Variables
 mc_Dialog_DragSource = undefined
 mc_Dialog_DropTarget = undefined
-*/			
+		
 			gc()
 			completeredraw()
 		)
@@ -216,12 +214,14 @@ mc_Dialog_DropTarget = undefined
 		fileInVersion "Global_Memory"
 		fileInVersion "Struct_Action"
 		fileInVersion "Struct_Call"
+		fileInVersion "Popup_Dialogs"
 		
 		-->Load Functions
 		fileInVersion "Deep_Isolate"
 		
 		-->Load DotNet Components
 		fileInVersion "DotNet_Components"
+		
 		
 		-->Load Dinamic Dialog
 		fileInVersion "Dialog_Creator"

@@ -213,10 +213,7 @@ try ( mcMicraDialog.close() ) catch()
 		mcFile.saveIniDialog s "Properties_2" s.name
 		Micra.Unload self:false --false self, prevent depency loop
 	)
-	fn changeBackcolor s a = ( 
-	
-		s.backColor = netDrColor (mcUIColors.get #fore) 
-	)
+	fn changeBackcolor s a = (s.backColor = netDrColor (mcUIColors.get #fore)
 	fn minMaxForm s a =
 	(
 		local form = s.parent
@@ -309,12 +306,12 @@ try ( mcMicraDialog.close() ) catch()
 	)
 	fn renameCurrentProfile = (
 	
-		local typed_text = mcPopup.textBox msg:"New Profile Name:"
+		local typed_text = mcPopup.textBox msg:"Type new profile name:"
 		format "typed_text:%\n" typed_text
 	)
 	fn manageProfile s a =
 	(
-		case s.tag of (	
+		/*case s.tag of (	
 		
 			"Save":saveCurrentProfile()
 			"Save As":Micra.fileInVersion "Save_Profile_As"
@@ -326,7 +323,7 @@ try ( mcMicraDialog.close() ) catch()
 				setIniSetting Micra.UserSettings "Settings" "CurrentProfile" numstr --save current profile index
 				reloadMicra s a
 			)
-		)
+		)*/
 	)
 --|
 	--fn onMouseDown s a = (s.FlatStyle = s.FlatStyle.Standard)
@@ -479,7 +476,7 @@ try ( mcMicraDialog.close() ) catch()
 		form.FormBorderStyle = form.FormBorderStyle.none
 		form.BackColor = netDrColor (mcUIColors.get #fore) --yellow
 		form.ShowInTaskbar = false
-		form.opacity = mcUIColors.get #opacity
+		form.opacity = netDrColor (mcUIColors.get #opacity)
 		
 		mcs.ToolTip.IsBalloon = true
 		mcs.ToolTip.BackColor = netDrColor (mcUIColors.get #back)
