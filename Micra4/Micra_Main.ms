@@ -210,18 +210,19 @@ mc_Dialog_DropTarget = undefined
 	),
 	fn loadAllStructures = (
 	
+		if loaded do unload()--> Unregister Micra's Callbacks
+		
 		-->Load Struct
 		fileInVersion "Global_Memory"
 		fileInVersion "Struct_Action"
 		fileInVersion "Struct_Call"
-		fileInVersion "Popup_Dialogs"
 		
 		-->Load Functions
 		fileInVersion "Deep_Isolate"
 		
 		-->Load DotNet Components
 		fileInVersion "DotNet_Components"
-		
+		fileInVersion "Popup_Dialogs"
 		
 		-->Load Dinamic Dialog
 		fileInVersion "Dialog_Creator"
@@ -239,8 +240,6 @@ mc_Dialog_DropTarget = undefined
 --> Reload Macroscript , bug in 3DsMax 1012
 fileIn Macro 
 
-		--> Start Micra
-		if loaded do unload()--> Unregister Micra's Callbacks
 		run() --> Run Micra
 	),
 	--> Initialize Micra

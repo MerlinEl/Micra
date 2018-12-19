@@ -309,7 +309,7 @@ try ( mcMicraDialog.close() ) catch()
 	)
 	fn renameCurrentProfile = (
 	
-		local typed_text = mcPopup.textBox msg:"New Profile Name:"
+		local typed_text = mcPopup.textBox msg:"New Profile Name:" saved_pos:"Micra_TextBox"
 		format "typed_text:%\n" typed_text
 	)
 	fn manageProfile s a =
