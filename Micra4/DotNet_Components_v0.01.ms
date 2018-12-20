@@ -1,4 +1,37 @@
---DotNet FN--
+--new dotnet structure 2018 --TODO repalce all in micra scripts
+Global mcDotnet
+Struct MICRA_DOTNET (
+	
+	fn dColor clr       = (
+	
+		local dotnet_color = case classOf clr of (
+			
+			Name:(
+				local hex_as_color = mcColor.hexToColor clr
+				if hex_as_color == undefined do return undefined
+				(dotNetClass "Drawing.Color").fromArgb hex_as_color.r hex_as_color.g hex_as_color.b
+			)
+			Color:(dotNetClass "Drawing.Color").fromArgb clr.r clr.g clr.b
+		)
+		return dotnet_color
+	),
+	fn dBitmap size     = (dotNetObject "Drawing.Bitmap" size.x size.y),
+	fn dPoint pos       = (dotnetObject "Drawing.Point" pos.x pos.y),
+	fn dRect pos size   = (dotnetObject "Drawing.Rectangle" pos.x pos.y size.x size.y),
+	fn dSize size       = (dotNetObject "Drawing.Size" size.x size.y),
+	fn dFont font:"Arial" size:12 style:"Regular" =
+	(
+		local f_style=execute ( "(dotNetClass \"Drawing.FontStyle\")."+style)
+		dotNetObject "Drawing.Font" font size f_style
+	),
+	fn dString str        = (dotNetObject "System.String" str)
+)	
+mcDotnet = MICRA_DOTNET()
+
+
+
+
+--OLD DotNet FN--
 
 Global WindowWrapper
 Global mcSCREENS_DATA
