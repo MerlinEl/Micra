@@ -21,11 +21,6 @@ if ::mcTemplateDialog != undefined do try(mcTemplateDialog.Close())catch()
 		-- Custom Properties
 		
 		-- Default Functions
-		fn defNWin = (
-			local nw = DotNetObject "NativeWindow"
-			nw.AssignHandle (DotNetObject "System.IntPtr" (Windows.GetMaxHWND())) 
-			return nw
-		),
 		fn close = (dia.close()),
 		fn onOpenForm s a = (),
 		fn onCloseForm s a = (mcFile.saveIniDialog s "Properties_2" s.name),
@@ -120,14 +115,10 @@ if ::mcTemplateDialog != undefined do try(mcTemplateDialog.Close())catch()
 			--Add Controls
 			form.controls.addRange ( #(tlp, btnMin, lblT)  )
 			--set last position if is stroed at Properties_2
-			local dpos   = (mcCall.getIniDataFromArray Micra.TempProfileIni "Properties_2" "Micra.IconMakerDialog" 2)
+			local dpos   = (mcCall.getIniDataFromArray Micra.TempProfileIni "Properties_2" "Micra.mcTemplateDialog" 2)
 			form.Location = netDrPoint dpos
 			-- Shows the form with the specified owner (MAX) to the user (creatd by lo)
-			local nw = defNWin()
-			form.show(nw) 
-			nw.ReleaseHandle()
-			--form.showModeless()
-			--dotNet.setLifeTimeControl form #dotNet --it’s generally a good idea to let the .NET garbage collector take care of the .NET objects, instead of the Max’s one.
+			mcDotnet.dShow form
 		),
 		initIt = init()
 	)

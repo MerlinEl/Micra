@@ -1,3 +1,0 @@
-(
-	messageBox "Hello World!"
-)

@@ -35,25 +35,40 @@ try ( mcColorPaleteDialog.close() ) catch()
 	(
 		tlp = dotNetObject "TableLayoutPanel",
 		ToolTip       = dotNetObject "ToolTip",
+		tooltip_duration = 8,
 		buttons = #(),
 		picked_color = netDrColor gray,
 		last_button
 	)
 	
 	mcColorPaleteDialog.tag = dotNetMXSValue (MICRA_COMPONENTS_STRUCT()) --manual Lifetime
-	fn onMouseDown s a = --show highlight
-	(
-		mcColorPaleteActiveSlot = s
-		local mcs = s.parent.parent.tag.value
-		if mcs.last_button == s or keyboard.controlPressed or keyboard.altPressed or a.button == a.button.right do return false
-		s.FlatAppearance.BorderColor = netDrColor clr_seltext
-	)
+	
 	fn removeBorder mcs s = --remove highlight
 	(
 		if mcs.last_button == s do return false
 		mcs.last_button.FlatAppearance.BorderColor = netDrColor clr_back
 		mcs.last_button = s
 	)
+	
+	fn onMouseDown s a = --show highlight
+	(
+		mcColorPaleteActiveSlot = s
+		local mcs = s.parent.parent.tag.value
+		if a.Clicks > 1  then (
+			
+			removeBorder mcs s
+			Micra.fileInVersion "Color_Picker"
+		) else (
+			
+			if mcs.last_button == s or keyboard.controlPressed or keyboard.altPressed or a.button == a.button.right do return false
+			s.FlatAppearance.BorderColor = netDrColor clr_seltext
+		)
+	)
+
+	/*on lv DoubleClick  s a do (
+		
+		
+	)*/
 	fn onMouseUp s a = 
 	(
 		local mcs = s.parent.parent.tag.value
@@ -61,8 +76,7 @@ try ( mcColorPaleteDialog.close() ) catch()
 		(
 			(a.button.middle)  : 
 			(
-				removeBorder mcs s
-				Micra.fileInVersion "Color_Picker"
+				
 			)
 			(a.button.left )  : 
 			(
@@ -117,6 +131,7 @@ try ( mcColorPaleteDialog.close() ) catch()
 		
 		pushprompt ":Apply Color = LMB :Edit = RMB :Copy = Shift+LMB :Paste = Ctrl+LMB :Remove = Alt+LMB :Close = MMB."
 	)
+	--generate colored buttons
 	fn addButtons mcs form cr = 
 	(
 		local buttons_count = cr.x*cr.y
@@ -131,10 +146,16 @@ try ( mcColorPaleteDialog.close() ) catch()
 			btn.name = "btn_" + (i as integer) as string
 			btn.tag = (i as integer) as string
 			btn.backColor = netDrColor gray
-			--mcs.ToolTip.SetToolTip btn "LMB to Apply Color\nRMB to Edit...\nMMB to Close\nShift+LMB to copy\nCtrl+LMB to paste\nAlt+LMB to remove."
+			local	msg   = "Add	(Ctrl+LMB)\n"
+						msg += "Del	(Alt+LMB)\n"
+						msg += "Edit	(Double Click)\n"
+						msg += "Copy	(Shift+LMB)\n"
+						msg += "Paste	(Ctrl+LMB)\n"
+						msg += "Close	(RMB)\n"
+			mcs.ToolTip.SetToolTip btn msg
 			dotNet.addEventHandler btn "MouseUp" onMouseUp
 			dotNet.addEventHandler btn "MouseDown" onMouseDown
-			--dotNet.addEventHandler btn "MouseDoubleClick" onMouseDoubleClick
+			dotNet.addEventHandler btn "DoubleClick" onMouseDoubleClick
 			mcs.buttons += #(btn)
 		)
 		mcs.tlp.controls.addRange ( mcs.buttons )
@@ -181,9 +202,9 @@ try ( mcColorPaleteDialog.close() ) catch()
 		mcs.ToolTip.IsBalloon = true
 		mcs.ToolTip.BackColor = netDrColor clr_back
 		mcs.ToolTip.ForeColor = netDrColor clr_text
-		mcs.ToolTip.AutoPopDelay = 5000
-		mcs.ToolTip.InitialDelay = 500
-		mcs.ToolTip.ReshowDelay = 500
+		mcs.ToolTip.AutoPopDelay = 10000 --duration
+		mcs.ToolTip.InitialDelay = 800
+		mcs.ToolTip.ReshowDelay = 1000
 		mcs.ToolTip.ShowAlways = true
 
 		--mcs.tlp.bounds = form.bounds

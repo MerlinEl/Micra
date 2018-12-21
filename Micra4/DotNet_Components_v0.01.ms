@@ -2,6 +2,7 @@
 Global mcDotnet
 Struct MICRA_DOTNET (
 	
+	--convert max color to dotnet
 	fn dColor clr       = (
 	
 		local dotnet_color = case classOf clr of (
@@ -15,6 +16,8 @@ Struct MICRA_DOTNET (
 		)
 		return dotnet_color
 	),
+	--convert dotnet color to max color <r> <g> <b> [ <a> ]
+	fn mColor dclr = (color dclr.r dclr.g dclr.b dclr.a),
 	fn dBitmap size     = (dotNetObject "Drawing.Bitmap" size.x size.y),
 	fn dPoint pos       = (dotnetObject "Drawing.Point" pos.x pos.y),
 	fn dRect pos size   = (dotnetObject "Drawing.Rectangle" pos.x pos.y size.x size.y),
@@ -24,7 +27,22 @@ Struct MICRA_DOTNET (
 		local f_style=execute ( "(dotNetClass \"Drawing.FontStyle\")."+style)
 		dotNetObject "Drawing.Font" font size f_style
 	),
-	fn dString str        = (dotNetObject "System.String" str)
+	fn dString str  = (dotNetObject "System.String" str),
+	fn maxHW = (
+			local hv = DotNetObject "NativeWindow"
+			hv.AssignHandle (DotNetObject "System.IntPtr" (Windows.GetMaxHWND())) 
+			return hv
+	),
+	--open dotnet form with max handle implementation
+	fn dShow form = (
+		
+			if form == undefined or form.IsDisposed or form.visible do return false
+			local hv = maxHW ()
+			form.show(hv) 
+			hv.ReleaseHandle()
+			--form.showModeless()
+			--dotNet.setLifeTimeControl form #dotNet --it’s generally a good idea to let the .NET garbage collector take care of the .NET objects, instead of the Max’s one.
+	)
 )	
 mcDotnet = MICRA_DOTNET()
 
@@ -91,7 +109,15 @@ fn netDrColor clr       = (
 	return dotnet_color
 )
 fn netDrBitmap size     = (dotNetObject "Drawing.Bitmap" size.x size.y)
-fn netDrPoint pos       = (dotnetObject "Drawing.Point" pos.x pos.y)
+fn netDrPoint pos  = (
+	
+	if pos == undefined do (
+		
+			format "netDrPoint > Error > undefined pos\n"
+			return undefined
+	)
+	dotnetObject "Drawing.Point" pos.x pos.y
+)
 fn netDrRect pos size   = (dotnetObject "Drawing.Rectangle" pos.x pos.y size.x size.y)
 fn netDrSize size       = (dotNetObject "Drawing.Size" size.x size.y)
 fn netDrFont font:"Arial" size:12 style:"Regular" =

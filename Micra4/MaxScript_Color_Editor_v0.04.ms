@@ -1,5 +1,37 @@
 --Maxscript Color Editor
 try(destroyDialog mcMaxScriptColorEditorDialog)catch()
+--Struct
+Struct COLOR_PICKER_DIALOG (
+	
+	_cp = dotnetObject "ManagedServices.MaxColorPicker" (dotnetObject "System.IntPtr" (windows.getMAXHWND())) off "Pick Wirecolor",
+	fn show  title:"Pick Wirecolor" = (
+		
+		_cp.showModeless()
+		--register
+	),
+	fn showAt pos title:"Pick Wirecolor" = (
+		
+		_cp.Position = netDrPoint pos
+		show  title:title
+	),
+	fn hide = (
+		
+		_cp.close()
+		--unregister
+	),
+	fn getSize = (
+		
+		mcSize _cp.DialogRectangle.size.width mcp.DialogRectangle.size.height
+	),
+	fn moveTo pos = (
+		
+		_cp.Position = netDrPoint pos
+	),
+	fn getColor = ( _cp.CurrentColor )
+)
+Global mcColorPicker
+mcColorPicker = COLOR_PICKER_DIALOG()
+
 --Create a rollout
 rollout mcMaxScriptColorEditorDialog "MaxScript Theme Editor:"  width:680 height:516
 (
@@ -7,7 +39,7 @@ rollout mcMaxScriptColorEditorDialog "MaxScript Theme Editor:"  width:680 height
 	local alphaArr = #("0","1","2","3","4","5","6","7","8","9","A","B","C","D","E","F")
 	local user_file = getDir #maxData+"\\MXS_EditorUser.properties"
 	struct TEXT_DATA (pos, line, hex, clr, hint, ftype="Arial", fstyle="Regular", fsize=12)
-	local user_data = #(), selected_num = 0, str_stream
+	local user_data = #(), sel_item_index = 0, str_stream
 	local all_colors =#\ --40
 	(
 		"colour.global.back=",
@@ -194,6 +226,8 @@ rollout mcMaxScriptColorEditorDialog "MaxScript Theme Editor:"  width:680 height
 	--Create the dotNet listview control
 	dotNetControl lv "listView" pos:[392,4] width:283 height:504
 	dotNetControl text_box "RichTextBox" pos:[8,4] width:380 height:428
+	
+	--color components
 	colorPicker cp_clr "" pos:[4,468] width:64 height:40 enabled:true --color:red title:"Choose a color"
 	spinner spn_r "R:" pos:[84,468] width:64 height:16 range:[0,255,0] type:#integer scale:1
 	spinner spn_g "G:" pos:[164,468] width:64 height:16 range:[0,255,0] type:#integer scale:1
@@ -201,12 +235,33 @@ rollout mcMaxScriptColorEditorDialog "MaxScript Theme Editor:"  width:680 height
 	spinner spn_h "H:" pos:[84,492] width:64 height:16 range:[0,255,0] type:#integer scale:1
 	spinner spn_s "S:" pos:[164,492] width:64 height:16 range:[0,255,0] type:#integer scale:1
 	spinner spn_v "V:" pos:[244,492] width:64 height:16 range:[0,255,0] type:#integer scale:1
-	button btn_gen "Generate" pos:[312,468] width:76 height:40
+	
+	--Font components
 	dropDownList ddl_font "" pos:[8,440] width:268 height:21
 	button btn_bold "B" pos:[328,440] width:20 height:20
 	button btn_italic "I" pos:[348,440] width:20 height:20
 	button btn_under "U" pos:[368,440] width:20 height:20
 	dropDownList ddl_size "" pos:[280,440] width:44 height:21
+	
+	
+	
+	--new interface
+	/*
+		dotNetControl lv "listView" pos:[392,4] width:283 height:508
+		dotNetControl text_box "RichTextBox" pos:[8,4] width:380 height:428
+		spinner spn_fot_size "" pos:[280,443] width:44 height:16 range:[0,255,0] type:#integer scale:1
+		button btn_gen "Generate" pos:[4,468] width:384 height:40
+		dropdownList ddl_font "" pos:[40,440] width:212 height:21
+		button btn_bold "B" pos:[328,440] width:20 height:20
+		button btn_italic "I" pos:[348,440] width:20 height:20
+		button btn_under "U" pos:[368,440] width:20 height:20
+		label lbl_font "Font:" pos:[8,444] width:28 height:16
+		label lbl_font_size "Size:" pos:[260,444] width:24 height:16
+	*/
+	
+	--action components
+	button btn_gen "Generate" pos:[312,468] width:76 height:40
+	
 	fn netDrFont font:"Arial" size:12 style:"Regular" =
 	(
 		local f_style=execute ( "(dotNetClass \"Drawing.FontStyle\")."+style)
@@ -447,7 +502,7 @@ rollout mcMaxScriptColorEditorDialog "MaxScript Theme Editor:"  width:680 height
 	)
 	fn inicializeColorsBySelection type:"user" =
 	(
-		local sel=selected_num+1
+		local sel=sel_item_index+1
 		local clr=user_data[sel].clr
 		case user_data[sel].hint of
 		(
@@ -495,16 +550,19 @@ rollout mcMaxScriptColorEditorDialog "MaxScript Theme Editor:"  width:680 height
 	)
 	fn sendColorInfo clr =
 	(
-		lv.items.item[selected_num].backColor = netDrColor clr
-		user_data[selected_num+1].clr = clr
+		lv.items.item[sel_item_index].backColor = netDrColor clr
+		user_data[sel_item_index+1].clr = clr
 		local hex = rgbToHEX clr
-		user_data[selected_num+1].hex = hex
-		lv.items.item[selected_num].subItems.item[1].text = hex
+		user_data[sel_item_index+1].hex = hex
+		lv.items.item[sel_item_index].subItems.item[1].text = hex
 		inicializeColorsBySelection()
 	)
-	fn setupInterfaceBySelectedItem =
+	fn getSelectedItemData =
 	(
-		local clr = user_data[selected_num+1].clr
+		local clr = user_data[sel_item_index+1].clr --get color from selected item
+		--TODO
+		--get font and font settings
+		
 		spn_r.value  = clr.r
 		spn_g.value = clr.g
 		spn_b.value = clr.b
@@ -543,8 +601,8 @@ rollout mcMaxScriptColorEditorDialog "MaxScript Theme Editor:"  width:680 height
 		addColumns lv #("RGB","HEX","Name") #(32, 68, lv.width-(32+68)-22)
 		populateList lv
 		lv.Items.item[0].Selected = true
-		selected_num = 0
-		setupInterfaceBySelectedItem()
+		sel_item_index = 0
+		getSelectedItemData()
 		--setup tabs size
 		local int_arr = dotnetObject "System.Int32[]" 6
 		local tab_size = 0
@@ -561,17 +619,27 @@ rollout mcMaxScriptColorEditorDialog "MaxScript Theme Editor:"  width:680 height
 		str_stream= stringStream edit_text
 		inicializeColors()
 	)
-	on lv mouseDown arg do
+
+	on lv DoubleClick  s a do (
+		
+		format "DoubleClick > s:% a:%\n" s   a
+		if not mcColorPicker.visible do mcColorPicker.show()
+		format "chossen color:%n" cPicker.CurrentColor
+	)
+	on lv mouseUp s a do
 	(
-		local hit=(lv.HitTest (dotNetObject "System.Drawing.Point" arg.x arg.y))
-		selected_num = hit.item.Index
-		setupInterfaceBySelectedItem()	
-		print selected_num 
+		local sel_item = s.SelectedItems.Item[0]
+		format "mouseUp > item:% index:% a:%\n" sel_item.Position   sel_item.index a
+		--local hit=(lv.HitTest (dotNetObject "System.Drawing.Point" a.x a.y))
+		--sel_item_index = hit.item.Index
+		sel_item_index = sel_item.Index
+		getSelectedItemData()	
+ 
 	)
 	on cp_clr changed clr do 
 	(
 		sendColorInfo clr
-		setupInterfaceBySelectedItem()
+		getSelectedItemData()
 	)
 	on btn_gen pressed do
 	(
@@ -596,6 +664,7 @@ rollout mcMaxScriptColorEditorDialog "MaxScript Theme Editor:"  width:680 height
 	
 )
 CreateDialog mcMaxScriptColorEditorDialog
+mcColorPicker.showAt (GetDialogPos mcMaxScriptColorEditorDialog)
 
 
 

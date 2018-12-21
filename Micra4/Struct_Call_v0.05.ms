@@ -18,6 +18,7 @@ Global mcProgressBarDialog
 Global mcSCREENS_DATA
 Global mcUIColors
 Global mcCursor
+Global mcSize
 
 Global mcPopUpDialog
 Global mcTeleportTextDialog
@@ -73,8 +74,8 @@ struct mcArray
 	*/
 )
 
-struct mcMath
-(
+struct mcMath (
+	fn isInteger num = (mod num 1 == 0),
 	--usage:	mcMath.roundToInt 25.45 10
 	--receives the number 120 435 it return 120 000 wich is the nearest ten thousand etc..
 	fn roundToInt num round = (
@@ -198,16 +199,11 @@ struct mcMath
 			#local: return #(bmin*obj.transform, bmax*obj.transform)
 		)
 	),
-	fn colorAsInt col = --get color (color 255 255 0) return integer 16776960
-	(
-		((col.r as integer)*256 + (col.g as integer))*256 + (col.b as integer)
-	),
-	fn intAsColor int = --get integer 16776960 return color (color 255 255 0)
-	( 
-		(r=int/256^2; g=int/256-r*256; bmp=mod int 256; color r g bmp)
-	),
-	fn blendColors c1 c2 = ((c1+c2)/2),
-	fn randomColor=(color (random 1 255)  (random 1 255) (random 1 255)) 
+	fn versionUp num = (
+		
+		local new_version  = num + 0.01 as float
+		if mcMath.isInteger new_version then int new_version else new_version
+	)
 )
 struct mcCall
 (
@@ -540,7 +536,25 @@ struct mcColor (
 			return color colorArray[1] colorArray[2] colorArray[3]
 		)
 		return undefined
-	)
+	),
+	
+	/* hex to rgb explnation
+	cb = "f26d7d"
+	colRed = ("0x" + substring cb 1 2) as integer
+      colGreen = ("0x" + substring cb 3 2) as integer
+       colBlue = ("0x" + substring cb 5 2) as integer
+      color colRed colGreen colBlue
+	*/
+	fn colorAsInt col = --get color (color 255 255 0) return integer 16776960
+	(
+		((col.r as integer)*256 + (col.g as integer))*256 + (col.b as integer)
+	),
+	fn intAsColor int = --get integer 16776960 return color (color 255 255 0)
+	( 
+		(r=int/256^2; g=int/256-r*256; bmp=mod int 256; color r g bmp)
+	),
+	fn blendColors c1 c2 = ((c1+c2)/2),
+	fn randomColor=(color (random 1 255)  (random 1 255) (random 1 255)) 
 )
 
 --------------------------------------------------------------------------------
@@ -561,12 +575,12 @@ struct mcString
 			local str_1Pos = findString str str_1
 			if str_1Pos   != undefined do str[str_1Pos] = str_2
 		)
-		return str
+		str
 	),
 	fn replaceCharInString str inchar tochar =
 	(
 		for i = 1 to str.count where str[i] == inchar do str[i] = tochar
-		return str
+		str
 	),
 	fn upperLowerCase str type = --replace uper case to lower ad vice versa 
 	( 
@@ -581,8 +595,18 @@ struct mcString
 		(
 			for s=1 to 26 do (if str[n] == arr[1][s] do str[n] = arr[2][s])
 		)
-		return str 
-	) --Call: mcString.upperLowerCase "ABCDE" #down
+		str 
+	), --Call: mcString.upperLowerCase "ABCDE" #down
+	fn stringToNum str = (
+	
+		local eval_str =  execute str --format "str:% eval:%\n" str eval_str
+		case classOf eval_str of (
+			
+			float:eval_str
+			integer:eval_str
+			default:undefined	
+		)
+	)
 )
 --------------------------------------------------------------------------------
 /* Snapping */
@@ -1519,6 +1543,8 @@ Struct mcCursor (
 	)
 )
  
+
+Struct mcSize (w, h)
  
 /* --3d bounding box
 		for v = 1 to verts.count do
