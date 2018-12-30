@@ -38,12 +38,12 @@ try ( mcMicraDialog.close() ) catch()
 	local last_profile = execute (mcFile.saveLoadIniSetings head:"Interface" key:"lastprofile" action:#load)
 	local profiles = #("DefaultColor", "UserColor", "ForestColor", "EarthColor", "MoonColor", "SeaColor", "SunColor", "Close")
 	local head_str = profiles[last_profile]
-	local bar_height      = 14
-	local form_bounds     = 2
-	local form_offset     = 4
-	local btn_size        = 24
-	local form_size       =[148, 66]
-	local cp_width        = 48
+	local bar_height = 14
+	local form_bounds  = 2
+	local form_offset  = 4
+	local btn_size   = 24
+	local form_size =[148, 82]
+	local cp_width  = 48
 	local debug = 0
 
 	-->Components---------------------------------------------------------------------
@@ -78,7 +78,9 @@ try ( mcMicraDialog.close() ) catch()
 		mnu_reload    = mnu.Items.Add "Reload...",
 		dateTime      = dotNetClass "System.DateTime",
 		minimized     = false,
-		old_height
+		old_height,
+		border_offset  = 2,
+		bar_height      = 14
 	)
 	
 	form.tag = dotNetMXSValue (MICRA_COMPONENTS_STRUCT()) --manual Lifetime
@@ -170,12 +172,7 @@ try ( mcMicraDialog.close() ) catch()
 			else if isGroup sel then (for o in sel where isGroupHead o collect o)[1].name = s.text
 		)
 	)
-	fn onPickerMouseClick s a =
-	(
-		if classOf mcColorPaleteDialog == dotNetObject and not mcColorPaleteDialog.isDisposed
-		then (mcColorPaleteDialog.show())	
-		else (Micra.fileInVersion "Color_Palete")
-	)
+	fn onPickerMouseClick s a = (Micra.fileInVersion "Color_Palete")
 --||	
 	fn onGotFocus = 
 	(	
@@ -220,22 +217,23 @@ try ( mcMicraDialog.close() ) catch()
 	fn minMaxForm s a =
 	(
 		local form = s.parent
-		form.tag.value.minimized = not form.tag.value.minimized
-		local btnMin = form.tag.value.btnMin
-		local tlp    = form.tag.value.tlp
-		if form.tag.value.minimized
-		then 
-		(
-			btnMin.text = "+"
-			form.tag.value.old_height = form.height 
-			form.height = bar_height + form_bounds*2
-			tlp.hide()
-		)
-		else
-		(
-			btnMin.text = "-"
-			form.height = form.tag.value.old_height
-			tlp.show()
+		local mcs = form.tag.value
+		mcs.minimized = not mcs.minimized
+		if mcs.minimized then (
+			
+			mcs.btnMin.text = "+"
+			mcs.old_height = form.height 
+			mcs.tlp.hide()
+			mcs.edt_objName.hide()
+			mcs.cp_wirePicker.hide()
+			form.height = mcs.bar_height + mcs.border_offset*2
+		) else (
+			
+			mcs.btnMin.text = "-"
+			form.height = mcs.old_height
+			mcs.tlp.show()
+			mcs.edt_objName.show()
+			mcs.cp_wirePicker.show()
 		)
 	)
 --|	--Form move
@@ -309,7 +307,7 @@ try ( mcMicraDialog.close() ) catch()
 	)
 	fn renameCurrentProfile = (
 	
-		local typed_text = mcPopup.textBox msg:"New Profile Name:" saved_pos:"Micra_TextBox"
+		local typed_text = mcPopup.textBox title:"New Profile Name:" saved_pos:"Micra_TextBox"
 		format "typed_text:%\n" typed_text
 	)
 	fn manageProfile s a =
@@ -472,8 +470,8 @@ try ( mcMicraDialog.close() ) catch()
 		if fpos == undefined do fpos = (mcCall.getIniDataFromArray Micra.DefaultProfileIni "Properties_2" "mcMicraDialog" 2)
 		form.StartPosition = form.StartPosition.Manual
 		
-		form.MinimumSize = netDrSize form_size
-		form.MaximumSize = netDrSize form_size
+		form.MinimumSize = netDrSize [form_size.x, mcs.bar_height + mcs.border_offset*2]
+		--form.MaximumSize = netDrSize form_size
 		
 		form.bounds = netDrRect fpos form_size
 		form.FormBorderStyle = form.FormBorderStyle.none
@@ -520,7 +518,7 @@ try ( mcMicraDialog.close() ) catch()
 		mcs.tlp.bounds = netDrRect [form_offset/2, bar_height*2+form_offset*3] [form_size.x - form_offset, btn_size]
 		mcs.tlp.backColor = netDrColor (mcUIColors.get #btn)
 		--mcs.tlp.AutoSize = true
-		mcs.tlp.ColumnCount = 6
+		mcs.tlp.ColumnCount = 6 --bottom icons
 		
 		--add handlers
 		dotNet.addeventhandler mcs.mnu_close "Click" quitMicra

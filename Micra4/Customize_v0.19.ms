@@ -608,7 +608,7 @@ if ::mcDialogEditMode != undefined do try(destroyDialog mcDialogEditMode)catch()
 								) else (
 								
 									item_size.height = 24
-									item.BackColor = netDrColor (mcUIColors.get #edtback)
+									item.BackColor = netDrColor (mcUIColors.get #back)
 									item.ForeColor = netDrColor (mcUIColors.get #edtfore)
 								)
 			
@@ -618,8 +618,10 @@ if ::mcDialogEditMode != undefined do try(destroyDialog mcDialogEditMode)catch()
 							
 								item = dotNetObject "textBox"
 								item.TextAlign = (dotnetClass "System.Windows.Forms.HorizontalAlignment").Center
-								item.BackColor = netDrColor (color 18 171 226)
-								item.ForeColor = netDrColor white
+								--item.BackColor = netDrColor (color 18 171 226)
+								--item.ForeColor = netDrColor white
+								item.BackColor = netDrColor (mcUIColors.get #edtback)
+								item.ForeColor = netDrColor (mcUIColors.get #edtfore)	
 								item.Font = edit_font
 								item --case return
 							)

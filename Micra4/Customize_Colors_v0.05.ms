@@ -20,7 +20,7 @@ try ( mcInterfaceColorDilaog.close() ) catch()
 	--local form = dotNetObject "Form"
 	local form = dotNetObject "MaxCustomControls.Maxform"
 	local last_profile = execute (mcFile.saveLoadIniSetings head:"Interface" key:"lastprofile" action:#load)
-	local profiles = #("DefaultColor", "UserColor", "ForestColor", "EarthColor", "MoonColor", "SeaColor", "SunColor", "Close")
+	local profiles = #("DefaultColor", "UserColor", "ForestColor", "EarthColor", "MoonColor", "SeaColor", "SunColor", "Close") --, "SandColor"
 	local head_str = profiles[last_profile]
 	--format "last profile:%\thead:%\n" last_profile head_str
 	struct COLOR_DATA ( h, s, b, a )

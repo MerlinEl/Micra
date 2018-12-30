@@ -8,7 +8,7 @@ Struct MICRA_DOTNET (
 		local dotnet_color = case classOf clr of (
 			
 			Name:(
-				local hex_as_color = mcColor.hexToColor clr
+				local hex_as_color = mcColor.hexToRGB clr
 				if hex_as_color == undefined do return undefined
 				(dotNetClass "Drawing.Color").fromArgb hex_as_color.r hex_as_color.g hex_as_color.b
 			)
@@ -34,12 +34,19 @@ Struct MICRA_DOTNET (
 			return hv
 	),
 	--open dotnet form with max handle implementation
-	fn dShow form = (
+	fn dShow form saved_pos:true = (
 		
 			if form == undefined or form.IsDisposed or form.visible do return false
+			--get last position from Properties_2
+			if saved_pos do (
+				
+				local dpos   = (mcCall.getIniDataFromArray Micra.TempProfileIni "Properties_2" form.name 2)
+				form.Location = dPoint dpos
+			)
 			local hv = maxHW ()
-			form.show(hv) 
+			form.show(hv) -- Shows the form with the specified owner (MAX) to the user (creatd by lo)
 			hv.ReleaseHandle()
+			--form.show(WindowWrapper) --good one try it later
 			--form.showModeless()
 			--dotNet.setLifeTimeControl form #dotNet --it’s generally a good idea to let the .NET garbage collector take care of the .NET objects, instead of the Max’s one.
 	)
@@ -100,7 +107,7 @@ fn netDrColor clr       = (
 	local dotnet_color = case classOf clr of (
 		
 		Name:(
-			local hex_as_color = mcColor.hexToColor clr
+			local hex_as_color = mcColor.hexToRGB clr
 			if hex_as_color == undefined do return undefined
 			(dotNetClass "Drawing.Color").fromArgb hex_as_color.r hex_as_color.g hex_as_color.b
 		)

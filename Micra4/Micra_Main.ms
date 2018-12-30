@@ -214,11 +214,9 @@ mc_Dialog_DropTarget = undefined
 		
 		-->Load Struct
 		fileInVersion "Global_Memory"
-		fileInVersion "Struct_Action"
+		fileInVersion "Event_Manager"
 		fileInVersion "Struct_Call"
-		
-		-->Load Functions
-		fileInVersion "Deep_Isolate"
+		fileInVersion "Struct_Action"
 		
 		-->Load DotNet Components
 		fileInVersion "DotNet_Components"
@@ -230,6 +228,7 @@ mc_Dialog_DropTarget = undefined
 		
 		-->Load Applications
 		fileInVersion "Holder"
+		fileInVersion "Deep_Isolate"
 		
 		-->Load Modifiers and Plugins
 		fileInVersion "Modifiers"

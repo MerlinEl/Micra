@@ -18,6 +18,11 @@ Struct MICRA_POPUP (
 		nw.AssignHandle (DotNetObject "System.IntPtr" (Windows.GetMaxHWND())) 
 		return nw
 	),
+	fn closeForm form = (
+		
+		form.close()
+		if _saved_pos != "MaxCenter" do mcFile.saveIniDialog form "Properties_2" _saved_pos
+	),
 	fn removeInvalidChars str =	(
 		
 			if str.count == 0 do return str
@@ -30,12 +35,17 @@ Struct MICRA_POPUP (
 			)
 			return new_str
 	),
+	fn messageBox msg title:"Micra:" = (
+		
+		--TODO dotnet version more elegant :-)
+		::messageBox msg title:title beep:false
+	),
 	/**
 	* @example 
 		typed_text = mcPopup.textBox()
 		format "typed_text:%\n" typed_text
 	*/
-	fn textBox msg:"Type a text here:" saved_pos:"MaxCenter" = (
+	fn textBox title:"Type a text here:" saved_pos:"MaxCenter" = (
 	
 		local form = dotNetObject "MaxCustomControls.Maxform"
 		local lblT = dotNetObject "label"
@@ -55,7 +65,6 @@ Struct MICRA_POPUP (
 			if fpos == undefined do fpos = (mcCall.getIniDataFromArray Micra.DefaultProfileIni "Properties_2" saved_pos 2)
 			if fpos != undefined do form_rect = netDrRect fpos form_size
 		) 
-		
 		fn textBoxControll s a  = (
 		
 			local char_str = a.Keycode.toString()
@@ -66,13 +75,12 @@ Struct MICRA_POPUP (
 				print "escape"
 				
 					mcPopUp._typed_text = ""
-					s.parent.close()
-					if mcPopUp._saved_pos != "MaxCenter" do mcFile.saveIniDialog s "Properties_2" mcPopUp._saved_pos
+					mcPopUp.closeForm s.parent
 				)
 				"Return":( --Enter
 				
 					mcPopUp._typed_text = s.text
-					s.parent.close()
+					mcPopUp.closeForm s.parent
 				)
 				default:(
 				
@@ -95,7 +103,7 @@ Struct MICRA_POPUP (
 			)
 		)
 		--RC close form
-		fn onLblTMouseUp s a = ( if a.Button == a.Button.right then s.parent.hide() ) --drop form
+		fn onLblTMouseUp s a = ( if a.Button == a.Button.right then mcPopUp.closeForm s.parent ) --drop form
 
 		form.ControlBox  = false --hide main bar
 		form.StartPosition = form.StartPosition.Manual
@@ -111,7 +119,7 @@ Struct MICRA_POPUP (
 		lblT.BackColor = netDrColor (mcUIColors.get #back)
 		lblT.ForeColor = netDrColor (mcUIColors.get #text)
 		lblT.TextAlign = lblT.TextAlign.MiddleCenter
-		lblT.Text = msg
+		lblT.Text = title
 		
 		edtBox.bounds = netDrRect [ border_offset ,bar_height+border_offset*2] [312, 22]
 		edtBox.Multiline = true

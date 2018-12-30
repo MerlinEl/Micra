@@ -19,6 +19,7 @@ Global mcSCREENS_DATA
 Global mcUIColors
 Global mcCursor
 Global mcSize
+Global mcTime
 
 Global mcPopUpDialog
 Global mcTeleportTextDialog
@@ -66,6 +67,14 @@ struct mcArray
 		join new_arr arr1
 		join new_arr arr2
 		return new_arr
+	),
+	fn removeItem arr index = (
+		
+		if classOf arr != Array or index > arr.count do return false
+		--format "remove index:% from array:%\n" index arr
+		deleteItem arr index
+		--format "rest of arr:%\n" arr
+		true
 	)
 	/*
 	a = #( #(1,2), #("c","d","e"), #(56,47) ) 
@@ -480,11 +489,30 @@ struct mcCall
 	)
 )
 
-struct mcColor (
+struct MICRA_COLOR (
+	
+	alphaStr = "0123456789ABCDEF",
+	alphaArr = #("0","1","2","3","4","5","6","7","8","9","A","B","C","D","E","F"),
+	fn hexToDec num = -- used to convert single hex bit to 0-255 color value
+	(
+		n_ = findString alphaStr (substring num 1 1);
+		_n = findString alphaStr (substring num 2 1);
+		_n -= 1
+		n_ -= 1
+		return (n_ * 16 + _n);
+	),
+	fn decToHex dec = -- used to convert single color value 0-255 to hex bit
+	(
+		n_ = floor (dec / 16)
+		_n = dec - n_ * 16
+		n_ += 1
+		_n += 1
+		return alphaArr[n_] + alphaArr[_n]
+	),
 	/**
-	* @example mcColor.colorToHex (color 60 32 104)
+	* @example mcColor.rgbToHex (color 60 32 104)
 	*/
-	fn colorToHex c= ( --thanks to Mark Tsang
+	fn rgbToHex c= ( --thanks to Mark Tsang
 		
 		if classOf c != Color do return undefined
 		ret = "#"
@@ -511,31 +539,17 @@ struct mcColor (
 		execute ret
 	),
 	/**
-	* @example	mcColor.hexToColor #3c2068
+	* @example	mcColor.hexToRGB #3c2068
+	* @example	mcColor.hexToRGB dcfd38
 	*/
-	fn hexToColor hex_color= ( --thanks to Mark Tsang
-	
-		if classOf hex_color != Name do return undefined
-		local hex_string = hex_color as string	
-		if hex_string.count == 6 then (
-			colorArray = #()
-			for i = 1 to 6 by 2 do (
-				
-				local two_chars = subString hex_string i 2
-				local cv = (("0X"+two_chars) as integer)
-				if cv != undefined then
-				(
-					append colorArray cv
-				)
-				else 
-				(
-					format "invalid hex string supplied\n"
-					return undefined
-				)
-			)
-			return color colorArray[1] colorArray[2] colorArray[3]
-		)
-		return undefined
+	fn hexToRGB hex_color= ( --thanks to Mark Tsang
+		
+		local hex_string = substituteString hex_color "#" "" -- audits string for pound sign and deletes it
+		hex_string = toUpper hex_string
+		local r = hexToDec (substring hex_string 1 2)
+		local g = hexToDec (substring hex_string 3 2)
+		local b = hexToDec (substring hex_string 5 2)
+		color r  g  b
 	),
 	
 	/* hex to rgb explnation
@@ -544,6 +558,33 @@ struct mcColor (
       colGreen = ("0x" + substring cb 3 2) as integer
        colBlue = ("0x" + substring cb 5 2) as integer
       color colRed colGreen colBlue
+	
+	fn hexToRGB hex = -- converts HEX code to RGB code
+	(
+		hex = substituteString hex "#" "" -- audits string for pound sign and deletes it
+		hex = toUpper hex	
+		if hex_string.count != 6 do return undefined
+		colorArray = #()
+		for i = 1 to 6 by 2 do (
+			
+			local two_chars = subString hex_string i 2
+			local cv = (("0X"+two_chars) as integer)
+			if cv != undefined then
+			(
+				append colorArray cv
+			)
+			else 
+			(
+				format "invalid hex string supplied\n"
+				return undefined
+			)
+		)
+		return color colorArray[1] colorArray[2] colorArray[3]
+	)	
+	fn rgbToHEX clr =-- converts RGB code to HEX code
+	(
+		return ("#"+decToHex clr.r + decToHex clr.g + decToHex clr.b )
+	)
 	*/
 	fn colorAsInt col = --get color (color 255 255 0) return integer 16776960
 	(
@@ -556,6 +597,7 @@ struct mcColor (
 	fn blendColors c1 c2 = ((c1+c2)/2),
 	fn randomColor=(color (random 1 255)  (random 1 255) (random 1 255)) 
 )
+mcColor = MICRA_COLOR()
 
 --------------------------------------------------------------------------------
 /* Strings */
@@ -760,6 +802,15 @@ struct mcFile
 		data[2] = [form.location.x, form.location.y]
 		data[3] = [form.width, form.height]
 		setIniSetting Micra.TempProfileIni head key (data as string)
+	),
+	fn backupMicraFile source_file = (
+	
+		if not doesFileExist source_file do return false
+		local date_and_time = mcTime.getTime()
+		local fname = getFilenameFile source_file
+		local ftype = getFilenameType source_file
+		local target_file = Micra.ResourcesDir+"Backup\\" + fname+"_"+date_and_time+ftype
+		copyFile  source_file target_file
 	),
 	fn backupMaxFile =
 	(
@@ -1513,13 +1564,13 @@ Struct mcUIColors(
 		case clr of (
 			
 			#back		: execute (mcFile.saveLoadIniSetings head:head_str key:"backcolor" action:#load)
-			#fore			: execute (mcFile.saveLoadIniSetings head:head_str key:"forecolor" action:#load)
+			#fore		: execute (mcFile.saveLoadIniSetings head:head_str key:"forecolor" action:#load)
 			#sel			: execute (mcFile.saveLoadIniSetings head:head_str key:"selected"  action:#load)
 			#mark		: execute (mcFile.saveLoadIniSetings head:head_str key:"marked"  action:#load)
 			#btn			: execute (mcFile.saveLoadIniSetings head:head_str key:"button"   action:#load)
 			#inact		: execute (mcFile.saveLoadIniSetings head:head_str key:"inactive"  action:#load)
-			#text			: execute (mcFile.saveLoadIniSetings head:head_str key:"textcolor"  action:#load)
-			#seltext		: execute (mcFile.saveLoadIniSetings head:head_str key:"seltext"  action:#load)
+			#text		: execute (mcFile.saveLoadIniSetings head:head_str key:"textcolor"  action:#load)
+			#seltext	: execute (mcFile.saveLoadIniSetings head:head_str key:"seltext"  action:#load)
 			#opacity	:execute (mcFile.saveLoadIniSetings head:head_str key:"opacity"  action:#load)
 			#edtback	:execute (mcFile.saveLoadIniSetings head:head_str key:"editback"  action:#load)
 			#edtfore	:execute (mcFile.saveLoadIniSetings head:head_str key:"editfore"  action:#load)
@@ -1546,6 +1597,39 @@ Struct mcCursor (
 
 Struct mcSize (w, h)
  
+/**
+@ example
+mcTime.getUniqueId() --"2018122715851"
+mcTime.init()
+"day:" + mcTime.day + " month:" + mcTime.month + " year:" + mcTime.year
+*/
+Struct MICRA_TIME (
+
+	all, year, month, day, hours, mins, ms,
+	fn init = (
+		
+		all = getLocalTime()
+		year = all[1] as String 
+		month = all[2] as String 
+		day = all[4] as String 
+		hours = all[5] as String 
+		mins = all[6] as String 
+		ms = all[7] as String 
+		OK
+	),
+	fn getTime = (
+		
+		init()
+		day+"_"+month+"_"+year+"_"+hours+"_"+mins
+	),
+	fn getUniqueId = ( --Unique ID based on Time etc... "2018122715625"
+		
+		init()
+		year + month + day + hours + mins + ms
+	)
+)
+mcTime = MICRA_TIME()
+
 /* --3d bounding box
 		for v = 1 to verts.count do
 		(
