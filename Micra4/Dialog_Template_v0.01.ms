@@ -11,7 +11,6 @@ if ::mcTemplateDialog != undefined do try(mcTemplateDialog.Close())catch()
 		tlp        = dotNetObject "TableLayoutPanel",
 		old_height, 
 		minimized = false, 
-		netDMove = false, 
 		netDmPos, --mouse pos on dialog
 		form_size        = [746, 516],
 		bar_height      = 14,
@@ -23,7 +22,7 @@ if ::mcTemplateDialog != undefined do try(mcTemplateDialog.Close())catch()
 		-- Default Functions
 		fn close = (dia.close()),
 		fn onOpenForm s a = (),
-		fn onCloseForm s a = (mcFile.saveIniDialog s "Properties_2" s.name),
+		fn onCloseForm s a = (mcFile.saveIniDialog s.name "Properties_2"),
 		fn changeBackcolor = (dia.backColor = netDrColor (mcUIColors.get #fore)),
 		fn minMaxForm s a = ( -- s = Button, a = MouseEventArgs
 			
@@ -40,7 +39,7 @@ if ::mcTemplateDialog != undefined do try(mcTemplateDialog.Close())catch()
 			)
 		),
 		--Move / Snap Dialog
-		fn onLblTMouseMove s a = ( if a.Button == a.Button.left do  mcFormSnap dia mcs.netDmPos), --drag form
+		fn onLblTMouseMove s a = ( if a.Button == a.Button.left do  mcDialog.snapForm dia mcs.netDmPos), --drag form
 		fn onLblTMouseDown s a = ( --start drag
 				
 			dia.cursor.current = netCursors.Hand
@@ -54,24 +53,25 @@ if ::mcTemplateDialog != undefined do try(mcTemplateDialog.Close())catch()
 		-- SetUp Interface
 		fn init form_name = (
 			
-			-- Init Maxform
+			-- Init Maxform (not realy need each time)
 			dotNet.loadAssembly "MaxCustomControls.dll"
 			
 			form.name = form_name
-			form.ControlBox  = false --hide main bar
-			local fpos = (mcCall.getIniDataFromArray Micra.TempProfileIni "Properties_2" "mcTemplateDialog" 2) --pick custom fpos
-			if fpos == undefined do fpos = (mcCall.getIniDataFromArray Micra.DefaultProfileIni "Properties_2" "mcTemplateDialog" 2) --pick default fpos
+			local fpos = (mcFile.getIniDataFromArray Micra.TempProfileIni "Properties_2" "mcTemplateDialog" 2) --pick custom fpos
+			if fpos == undefined do fpos = (mcFile.getIniDataFromArray Micra.DefaultProfileIni "Properties_2" "mcTemplateDialog" 2) --pick default fpos
 			if fpos == undefined do ( --register new fpos
 			
 				fpos = [0, 0]
-				mcCall.setIniDataToArray Micra.TempProfileIni "Properties_2" "mcTemplateDialog" 2 fpos 	
-				mcCall.setIniDataToArray Micra.DefaultProfileIni "Properties_2" "mcTemplateDialog" 2 fpos 
+				mcFile.setIniDataToArray Micra.TempProfileIni "Properties_2" "mcTemplateDialog" 2 fpos 	
+				mcFile.setIniDataToArray Micra.DefaultProfileIni "Properties_2" "mcTemplateDialog" 2 fpos 
 			)
+			
+			form.ControlBox  = false --hide main bar
+			form.ShowInTaskbar = false
 			form.StartPosition = form.StartPosition.Manual
 			form.bounds = netDrRect fpos form_size
 			form.FormBorderStyle = form.FormBorderStyle.none
 			form.BackColor = netDrColor (mcUIColors.get #fore)
-			form.ShowInTaskbar = false
 			form.opacity = 1--(mcUIColors.get #opacity)
 			--form.TopMost=true
 			

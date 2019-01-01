@@ -190,7 +190,7 @@ if doesFileExist (Micra.RootDir+"Img\\ColorBySat.png") and doesFileExist (Micra.
 			mcs.edt_hex.text = mcColor.rgbToHex (netColorToRGB mcs.oldColor)
 			mcs.updateRGBHSVSpinners (netColorToRGB mcs.oldColor)
 		),
-		fn onCloseForm s a = (mcFile.saveIniDialog s "Properties_2" s.name),
+		fn onCloseForm s a = (mcFile.saveIniDialog s.name "Properties_2"),
 		fn changeBackcolor = (dia.backColor = netDrColor (mcUIColors.get #fore)),
 		fn minMaxForm s a = ( -- s = Button, a = MouseEventArgs
 			
@@ -211,7 +211,7 @@ if doesFileExist (Micra.RootDir+"Img\\ColorBySat.png") and doesFileExist (Micra.
 			mcPopUp.messageBox "To change image press Mouse RC." title:"Help:"
 		),
 		--Move / Snap Dialog
-		fn onLblTMouseMove s a = ( if a.Button == a.Button.left do  mcFormSnap dia mcs.netDmPos), --drag form
+		fn onLblTMouseMove s a = ( if a.Button == a.Button.left do  mcDialog.snapForm dia mcs.netDmPos), --drag form
 		fn onLblTMouseDown s a = ( --start drag
 				
 			dia.cursor.current = netCursors.Hand
@@ -230,13 +230,13 @@ if doesFileExist (Micra.RootDir+"Img\\ColorBySat.png") and doesFileExist (Micra.
 			
 			form.name = form_name
 			form.ControlBox  = false --hide main bar
-			local fpos = (mcCall.getIniDataFromArray Micra.TempProfileIni "Properties_2" "mcColorPickerDialog" 2) --pick custom fpos
-			if fpos == undefined do fpos = (mcCall.getIniDataFromArray Micra.DefaultProfileIni "Properties_2" "mcColorPickerDialog" 2) --pick default fpos
+			local fpos = (mcFile.getIniDataFromArray Micra.TempProfileIni "Properties_2" "mcColorPickerDialog" 2) --pick custom fpos
+			if fpos == undefined do fpos = (mcFile.getIniDataFromArray Micra.DefaultProfileIni "Properties_2" "mcColorPickerDialog" 2) --pick default fpos
 			if fpos == undefined do ( --register new fpos
 			
 				fpos = [0, 0]
-				mcCall.setIniDataToArray Micra.TempProfileIni "Properties_2" "mcColorPickerDialog" 2 fpos 	
-				mcCall.setIniDataToArray Micra.DefaultProfileIni "Properties_2" "mcColorPickerDialog" 2 fpos 
+				mcFile.setIniDataToArray Micra.TempProfileIni "Properties_2" "mcColorPickerDialog" 2 fpos 	
+				mcFile.setIniDataToArray Micra.DefaultProfileIni "Properties_2" "mcColorPickerDialog" 2 fpos 
 			)
 			form.StartPosition = form.StartPosition.Manual
 			form.bounds = netDrRect fpos form_size

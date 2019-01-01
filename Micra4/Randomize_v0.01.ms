@@ -108,14 +108,14 @@ rollout mcRandomizeDialog "" width:152 height:332
 		)
 	)
 	-->Dialog settings
-	on mcRandomizeDialog close do(mcCall.saveIniDialog "mcRandomizeDialog" "Properties_2")
+	on mcRandomizeDialog close do(mcFile.saveIniDialog "mcRandomizeDialog" "Properties_2")
 	on mcRandomizeDialog rbuttonup pos   do(destroyDialog mcRandomizeDialog)
 	-->MoveMode
 	on mcRandomizeDialog lbuttondown pos do (dMove = true; DmPos = pos; if not keyboard.shiftPressed do pushprompt "Pres Shift To Move...")
 	on mcRandomizeDialog lbuttonup   pos do (dMove = false; pushprompt "")
 	on mcRandomizeDialog mouseMove   pos do
 	(
-		if dMove and keyboard.shiftPressed do mcDialogSnap mcRandomizeDialog DmPos
+		if dMove and keyboard.shiftPressed do mcDialog.snapDialog mcRandomizeDialog DmPos
 	)
 	-->Actions
 	on chk_pos changed state do if state do spn_pos_z.value = spn_pos_y.value = spn_pos_x.value

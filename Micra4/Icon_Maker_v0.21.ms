@@ -69,7 +69,7 @@ if ::mcIconMakerDialog != undefined do try(mcIconMakerDialog.Close())catch()
 		),
 		--Move / Snap Dialog
 		fn onLblTMouseMove s a = ( --dragForm
-			if mcs.netDMove do mcFormSnap dia mcs.netDmPos
+			if mcs.netDMove do mcDialog.snapForm dia mcs.netDmPos
 		),
 		fn onLblTMouseDown s a = (
 				
@@ -821,7 +821,7 @@ if ::mcIconMakerDialog != undefined do try(mcIconMakerDialog.Close())catch()
 			mcs.loadIconLibrary s a marked:(if active_icon_index != undefined then active_icon_index else 0)
 			if active_icon_index != undefined do mcs.editIcon s a
 		),
-		fn onCloseForm s a = (mcFile.saveIniDialog s "Properties_2" s.name),
+		fn onCloseForm s a = (mcFile.saveIniDialog s.name "Properties_2"),
 		-- SetUp Interface
 		fn init = (
 			
@@ -830,13 +830,13 @@ if ::mcIconMakerDialog != undefined do try(mcIconMakerDialog.Close())catch()
 			
 			form.name = "mcIconMakerDialog"
 			form.ControlBox  = false --hide main bar
-			local fpos = (mcCall.getIniDataFromArray Micra.TempProfileIni "Properties_2" "mcIconMakerDialog" 2) --pick custom fpos
-			if fpos == undefined do fpos = (mcCall.getIniDataFromArray Micra.DefaultProfileIni "Properties_2" "mcIconMakerDialog" 2) --pick default fpos
+			local fpos = (mcFile.getIniDataFromArray Micra.TempProfileIni "Properties_2" "mcIconMakerDialog" 2) --pick custom fpos
+			if fpos == undefined do fpos = (mcFile.getIniDataFromArray Micra.DefaultProfileIni "Properties_2" "mcIconMakerDialog" 2) --pick default fpos
 			if fpos == undefined do ( --register new fpos
 			
 				fpos = [0, 0]
-				mcCall.setIniDataToArray Micra.TempProfileIni "Properties_2" "mcIconMakerDialog" 2 fpos 	
-				mcCall.setIniDataToArray Micra.DefaultProfileIni "Properties_2" "mcIconMakerDialog" 2 fpos 
+				mcFile.setIniDataToArray Micra.TempProfileIni "Properties_2" "mcIconMakerDialog" 2 fpos 	
+				mcFile.setIniDataToArray Micra.DefaultProfileIni "Properties_2" "mcIconMakerDialog" 2 fpos 
 			)
 			form.StartPosition = form.StartPosition.Manual
 			form.bounds = netDrRect fpos form_size
@@ -1013,7 +1013,7 @@ if ::mcIconMakerDialog != undefined do try(mcIconMakerDialog.Close())catch()
 					btn_fill, btn_cross,tlp
 				) 
 			)
-			local dpos   = (mcCall.getIniDataFromArray Micra.TempProfileIni "Properties_2" "mcIconMakerDialog" 2)
+			local dpos   = (mcFile.getIniDataFromArray Micra.TempProfileIni "Properties_2" "mcIconMakerDialog" 2)
 			form.Location = netDrPoint dpos
 			-- Shows the form with the specified owner (MAX) to the user (creatd by lo)
 			local nw = defNWin()

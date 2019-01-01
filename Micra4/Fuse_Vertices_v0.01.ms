@@ -81,7 +81,7 @@ rollout mcSelVertsInXDialog "Untitled" width:144 height:104
 	on mcSelVertsInXDialog lbuttonup pos   do (dMove = false; pushprompt "")
 	on mcSelVertsInXDialog mouseMove pos   do
 	(
-		if dMove and keyboard.shiftPressed do mcDialogSnap mcSelVertsInXDialog DmPos
+		if dMove and keyboard.shiftPressed do mcDialog.snapDialog mcSelVertsInXDialog DmPos
 	)
 	--> Actions
 	on btnConect pressed do undo "Fuse Verts In Line" on (FuseVertsInLine())

@@ -18,9 +18,9 @@
 	)
 	local sub_dirs  = #
 	( 
-		#(FILE_DATA "" "" ), 
+		#(FILE_DATA "Core" (root_path + "CORE\\")),--#(FILE_DATA "" "" ),  empty root dir
 		#(FILE_DATA "3DsMax" (Micra.ResourcesDir + "\\Library\\3DsMax\\"), FILE_DATA "DotNet" (Micra.ResourcesDir + "\\Library\\DotNet\\") ), 
-		#(FILE_DATA "User" (root_path+"User\\"), FILE_DATA "Default" root_path ), 
+		#(FILE_DATA "User" (root_path+"User\\"+ Micra.username + "\\"), FILE_DATA "Default" root_path ), 
 		#(FILE_DATA "" "" ) 
 	)
 	local dMove = false , DmPos, label_lditing = false
@@ -210,10 +210,11 @@
 		local files_array = case dir of
 		(
 			"Micra":(getFiles (root_path+"*"))
+			"Core" :(getFiles (root_path+"Core\\"+"*.*"))
 			"MCR"  :(getFiles (root_path+"*.mcr"))
 			
 			"INI"   :#()--(getFiles (root_path+"*.ini") + getFiles (root_path+"User\\*.ini"))
-			"User"  :(getFiles (root_path+"User\\*.ini"))
+			"User"  :(getFiles (root_path+"User\\"+Micra.username+"\\*.ini"))
 			"Default":(getFiles (root_path+"*.ini"))
 			
 			"Library":#()--(getFiles (root_path + "\\Library\\3DsMax\\*.ms") + getFiles  (root_path + "+\\Library\\DotNet\\*.ms"))
@@ -330,8 +331,9 @@
 		local backup_file = Micra.ResourcesDir+"Backup\\Micra_"+date_and_time+".zip " --Micra backup file
 		
 		if not doesFileExist app_7z do return false
-		
-		dosCommand (app_7z +" a -tzip "+ backup_file + Micra.RootDir+"*.* "+ Micra.RootDir+"User "+ Micra.RootDir+"Img "+ Micra.RootDir+"Help "+ Micra.RootDir+"App " + Micra.RootDir+"Default " )
+		local dir_names = #("*.*", "App", "CORE", "Default", "Help", "Img", "Pugins", "User")
+		local dir_list = ""; for n in dir_names do dir_list +=  Micra.RootDir+n+" "
+		dosCommand (app_7z +" a -tzip "+ backup_file + dir_list)
 		
 		format "Micra Backup > Done:%\n" backup_file
 		--commit file in to server
@@ -608,7 +610,7 @@
 		tv_dirs.ExpandAll()
   		setFocus edt_cmd
   	)
-	on mcScriptManDialog close do (mcCall.saveIniDialog "mcScriptManDialog" "Properties_2")
+	on mcScriptManDialog close do (mcFile.saveIniDialog "mcScriptManDialog" "Properties_2")
 	on mcScriptManDialog rbuttonup pos   do(destroyDialog mcScriptManDialog)
 	-->MoveMode
 	on mcScriptManDialog lbuttondown pos do (dMove = true; DmPos = pos; if not keyboard.shiftPressed do pushprompt "Pres Shift To Move...")

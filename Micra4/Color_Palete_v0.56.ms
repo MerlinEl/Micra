@@ -216,7 +216,7 @@ try ( mcColorPaleteDialog.close() ) catch()
 				)
 				[screen_pos.x, screen_pos.y]
 			)
-			else (mcCall.getIniDataFromArray Micra.TempProfileIni "Properties_2" "mcColorPaleteDialog" 2)
+			else (mcFile.getIniDataFromArray Micra.TempProfileIni "Properties_2" "mcColorPaleteDialog" 2)
 		)
 		form.StartPosition = form.StartPosition.Manual
 		form.MinimumSize = netDrSize [btn_size, bar_height]
@@ -249,5 +249,5 @@ try ( mcColorPaleteDialog.close() ) catch()
 		dotNet.addEventHandler form "VisibleChanged" onVisibleChanged
 	)
 	inicializeInterface mcColorPaleteDialog mcColorPaleteDialog.tag.value
-	mcColorPaleteDialog.show(WindowWrapper)
+	mcDotnet.dShow mcColorPaleteDialog saved_pos:false
 )

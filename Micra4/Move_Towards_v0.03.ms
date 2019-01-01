@@ -52,14 +52,14 @@ rollout mcMoveTowardsDialog "" width:200 height:76
 			3: lastRotZ
 		)
 	)
-	on mcMoveTowardsDialog close           do(mcCall.saveIniDialog "mcMoveTowardsDialog" "Properties_2")
+	on mcMoveTowardsDialog close           do(mcFile.saveIniDialog "mcMoveTowardsDialog" "Properties_2")
 	on mcMoveTowardsDialog rbuttonup pos   do(destroyDialog mcMoveTowardsDialog)
 	-->Move Dialog Mode
 	on mcMoveTowardsDialog lbuttondown pos do(dMove = true ; DmPos = pos)
 	on mcMoveTowardsDialog lbuttonup pos   do(dMove = false)
 	on mcMoveTowardsDialog mouseMove pos do
 	(
-		if dMove and keyboard.shiftPressed do mcDialogSnap mcMoveTowardsDialog DmPos
+		if dMove and keyboard.shiftPressed do mcDialog.snapDialog mcMoveTowardsDialog DmPos
 	)
 	on rdoAxis changed state  do (setRdoAxisVal state )
 	on spnTowards changed val do 

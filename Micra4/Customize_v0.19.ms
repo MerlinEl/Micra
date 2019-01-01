@@ -61,7 +61,7 @@ if ::mcDialogEditMode != undefined do try(destroyDialog mcDialogEditMode)catch()
 		local form = s.parent
 		if form.tag.value.netDMove do --dragForm
 		(
-			mcFormSnap form form.tag.value.netDmPos
+			mcDialog.snapForm form form.tag.value.netDmPos
 		)
 	)
 	fn onLblTMouseDown s a = 
@@ -135,7 +135,7 @@ if ::mcDialogEditMode != undefined do try(destroyDialog mcDialogEditMode)catch()
 		local action_category = getEditorData "action_category"
 		local action_name = getEditorData "action_name"
 		if action_category == undefined or action_name == undefined do return false
-		mcGM.setParam "active_icon_index" (mcCall.getIniDataFromArray Micra.ActionsIni action_category action_name 1)
+		mcGM.setParam "active_icon_index" (mcFile.getIniDataFromArray Micra.ActionsIni action_category action_name 1)
 		Micra.fileInVersion "Icon_Maker"
 	)
 	fn editModeSwitch force:undefined = (
@@ -206,7 +206,7 @@ if ::mcDialogEditMode != undefined do try(destroyDialog mcDialogEditMode)catch()
 		
 		for i in keys do
 		(
-			local icon_num = mcCall.getIniDataFromArray Micra.ActionsIni head i 1
+			local icon_num = mcFile.getIniDataFromArray Micra.ActionsIni head i 1
 			img_list.images.add (getIconDotNet icon_num)
 		)
 		return img_list
@@ -279,7 +279,7 @@ if ::mcDialogEditMode != undefined do try(destroyDialog mcDialogEditMode)catch()
 						btn_b.Image = btn_a_image --copy image
 						btn_b.Tag = btn_a.tag --copy tag
 						--save Settings
-						local icn_numA = (mcCall.getIniDataFromArray Micra.ActionsIni btn_a.name btn_a.tag 1) as string
+						local icn_numA = (mcFile.getIniDataFromArray Micra.ActionsIni btn_a.name btn_a.tag 1) as string
 						setINISetting Micra.TempProfileIni "Buttons" btn_b.name btn_b.tag
 						setINISetting Micra.TempProfileIni "Icons"   btn_b.name icn_numA 
 					)
@@ -826,7 +826,7 @@ if ::mcDialogEditMode != undefined do try(destroyDialog mcDialogEditMode)catch()
 			false:(
 			
 				--print "customize hide"
-				mcFile.saveIniDialog s "Properties_2" s.name
+				mcFile.saveIniDialog s.name "Properties_2"
 				mcGM.setParam "action_editor_switch" undefined
 				editModeSwitch force:false
 			)
@@ -844,8 +844,8 @@ if ::mcDialogEditMode != undefined do try(destroyDialog mcDialogEditMode)catch()
 	(
 		form.name = "mcDialogEditMode"
 		form.ControlBox  = false --hide main bar
-		local fpos = (mcCall.getIniDataFromArray Micra.TempProfileIni "Properties_2" "mcDialogEditMode" 2)
-		if fpos == undefined do fpos = (mcCall.getIniDataFromArray Micra.DefaultProfileIni "Properties_2" "mcDialogEditMode" 2)
+		local fpos = (mcFile.getIniDataFromArray Micra.TempProfileIni "Properties_2" "mcDialogEditMode" 2)
+		if fpos == undefined do fpos = (mcFile.getIniDataFromArray Micra.DefaultProfileIni "Properties_2" "mcDialogEditMode" 2)
 		form.StartPosition = form.StartPosition.Manual
 		form.bounds = netDrRect fpos [form_width, form_height]
 		form.FormBorderStyle = form.FormBorderStyle.none
@@ -892,6 +892,5 @@ if ::mcDialogEditMode != undefined do try(destroyDialog mcDialogEditMode)catch()
 	)
 	inicializeInterface form form.tag.value
 	mcDialogEditMode = form
-	--mcDialogEditMode.show(WindowWrapper)
-	mcDialogEditMode.showModeless()
+	mcDotnet.dShow mcDialogEditMode
 )

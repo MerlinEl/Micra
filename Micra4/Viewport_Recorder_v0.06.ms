@@ -121,7 +121,7 @@ rollout mcViewportRecorderDialog "" width:316 height:124
 	on mcViewportRecorderDialog lbuttonup   pos do (dMove = false; pushprompt "")
 	on mcViewportRecorderDialog mouseMove   pos do
 	(
-		if dMove and keyboard.shiftPressed do mcDialogSnap mcViewportRecorderDialog DmPos
+		if dMove and keyboard.shiftPressed do mcDialog.snapDialog mcViewportRecorderDialog DmPos
 	)
 	on mcViewportRecorderDialog open do 
 	(
@@ -134,7 +134,7 @@ rollout mcViewportRecorderDialog "" width:316 height:124
 	on mcViewportRecorderDialog close do
 	(
 		unregisterRedrawViewsCallback displayRect
-		mcCall.saveIniDialog "mcViewportRecorderDialog" "Properties_2"
+		mcFile.saveIniDialog "mcViewportRecorderDialog" "Properties_2"
 		completeRedraw()
 	)
 	--on btn_browse pressed do if doesFileExist temp_save_path do ShellLaunch temp_save_path ""

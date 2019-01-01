@@ -110,14 +110,14 @@ Global mcEdgeScaleDialog
 					polyOp.setVert $ theVerts[2] thePos 
 				)
 			)
-			on mcEdgeScaleDialog close do(mcCall.saveIniDialog "mcEdgeScaleDialog" "Properties_2")
+			on mcEdgeScaleDialog close do(mcFile.saveIniDialog "mcEdgeScaleDialog" "Properties_2")
 			on mcEdgeScaleDialog rbuttonup pos do (destroyDialog mcEdgeScaleDialog)
 			-->MoveMode
 			on mcEdgeScaleDialog lbuttondown pos do (dMove = true; DmPos = pos; if not keyboard.shiftPressed do pushprompt "Pres Shift To Move...")
 			on mcEdgeScaleDialog lbuttonup   pos do (dMove = false; pushprompt "")
 			on mcEdgeScaleDialog mouseMove   pos do
 			(
-				if dMove and keyboard.shiftPressed do mcDialogSnap mcEdgeScaleDialog DmPos
+				if dMove and keyboard.shiftPressed do mcDialog.snapDialog mcEdgeScaleDialog DmPos
 			)
 			on btnCancel pressed do(destroyDialog mcEdgeScaleDialog)
 			on btnPick pressed do (getEdgeLenght())

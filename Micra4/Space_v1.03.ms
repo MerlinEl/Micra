@@ -106,13 +106,13 @@ rollout mcSpaceDialog "" width:392 height:184
 	)
 
 	on mcSpaceDialog open do()
-	on mcSpaceDialog close do mcCall.saveIniDialog "mcSpaceDialog" "Properties_2"
+	on mcSpaceDialog close do mcFile.saveIniDialog "mcSpaceDialog" "Properties_2"
 	-->MoveMode
 	on mcSpaceDialog lbuttondown pos do (dMove = true; DmPos = pos; if not keyboard.shiftPressed do pushprompt "Pres Shift To Move...")
 	on mcSpaceDialog lbuttonup   pos do (dMove = false; pushprompt "")
 	on mcSpaceDialog mouseMove   pos do
 	(
-		if dMove and keyboard.shiftPressed do mcDialogSnap mcSpaceDialog DmPos
+		if dMove and keyboard.shiftPressed do mcDialog.snapDialog mcSpaceDialog DmPos
 	)
 	on mcSpaceDialog rbuttonup pos do (destroyDialog mcSpaceDialog)
 	--Actions -----------------------------------------------------------------------

@@ -385,13 +385,13 @@ if debug == 5 do format "name:%\t tag:%\n" s.name s.tag
 		if mcs.rows    == 0           do mcs.rows     = 1
 		if mcs.rows    == count_limit do mcs.rows    -= 1
 		--save in to temp profile
-		mcCall.setIniDataToArray Micra.TempProfileIni "Properties_1" s.parent.name 5 [mcs.columns, mcs.rows]
+		mcFile.setIniDataToArray Micra.TempProfileIni "Properties_1" s.parent.name 5 [mcs.columns, mcs.rows]
 	)
 --|	--Form move
 	fn onLblTMouseMove s a = 
 	(
 		local form = s.parent
-		if form.tag.value.netDMove do (mcFormSnap form form.tag.value.netDmPos) --dragForm
+		if form.tag.value.netDMove do (mcDialog.snapForm form form.tag.value.netDmPos) --dragForm
 	)
 	fn onLblTMouseDown s a = 
 	(
@@ -467,7 +467,7 @@ if debug == 5 do format "name:%\t tag:%\n" s.name s.tag
 		dotNet.addEventHandler mcs.btnVU "MouseClick" manageInterface
 		dotNet.addEventHandler mcs.btnVD "MouseClick" manageInterface
 	)
-	fn onCloseForm s a = (mcFile.saveIniDialog s "Properties_1" s.name) --mabe add: if not s.visible do ()
+	fn onCloseForm s a = (mcFile.saveIniDialog s.name "Properties_1") --mabe add: if not s.visible do ()
 	fn changeBackcolor s a = (s.backColor = netDrColor (mcUIColors.get #fore))
 --|	--Menu
 	fn hideForm s a = ((s.GetCurrentParent()).tag.hide())
@@ -524,7 +524,7 @@ if debug == 5 do format "name:%\t tag:%\n" s.name s.tag
 			if s.text != "" do 
 			(
 				s.parent.text = s.text
-				mcCall.setIniDataToArray Micra.TempProfileIni "Properties_1" s.parent.parent.name 4 s.text
+				mcFile.setIniDataToArray Micra.TempProfileIni "Properties_1" s.parent.parent.name 4 s.text
 			)
 			s.clear()
 			s.hide()
@@ -640,7 +640,7 @@ if debug == 5 do format "name:%\t tag:%\n" s.name s.tag
 		
 		-->Components---------------------------------------------------------------------
 		local form  = createFormInstance dname
-		local cr = (mcCall.getIniDataFromArray Micra.TempProfileIni "Properties_1" dname 5)
+		local cr = (mcFile.getIniDataFromArray Micra.TempProfileIni "Properties_1" dname 5)
 		struct MICRA_COMPONENTS_STRUCT 
 		( 
 			ToolTip   = dotNetObject "ToolTip",
@@ -682,8 +682,8 @@ if debug == 5 do format "name:%\t tag:%\n" s.name s.tag
 		form.tag  = dotNetMXSValue (MICRA_COMPONENTS_STRUCT columns:cr.x rows:cr.y) --Manual Lifetime
 		
 		--ini data
-		local dpos   = (mcCall.getIniDataFromArray Micra.TempProfileIni "Properties_1" dname 2)
-		local dtitle = (mcCall.getIniDataFromArray Micra.TempProfileIni "Properties_1" dname 4)
+		local dpos   = (mcFile.getIniDataFromArray Micra.TempProfileIni "Properties_1" dname 2)
+		local dtitle = (mcFile.getIniDataFromArray Micra.TempProfileIni "Properties_1" dname 4)
 		
 		inicializeInterface form style:#compact title:dtitle pos:dpos
 		generateButtons  form style:#start

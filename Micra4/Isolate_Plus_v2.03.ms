@@ -151,7 +151,7 @@ rollout mcisoDialog " Isolate+  v2.03" width:140 height:400
 	-->If mcisoDialog is closed or (alt + F4) then all Calbacks stoped.
 	on mcisoDialog close do
 	(
-		mcCall.saveIniDialog "mcisoDialog" "Properties_2"
+		mcFile.saveIniDialog "mcisoDialog" "Properties_2"
 		callbacks.removeScripts id:#mIsolate
 		callbacks.removeScripts id:#mIsolateVis
 		callbacks.removeScripts id:#mIsolateSel
@@ -163,7 +163,7 @@ rollout mcisoDialog " Isolate+  v2.03" width:140 height:400
 	on mcisoDialog lbuttonup   pos do (dMove = false; pushprompt "")
 	on mcisoDialog mouseMove   pos do
 	(
-		if dMove and keyboard.shiftPressed do mcDialogSnap mcisoDialog DmPos
+		if dMove and keyboard.shiftPressed do mcDialog.snapDialog mcisoDialog DmPos
 	)
 		-->Switch Visibility Mode to Selection Mode
 		on ckb_1 changed state do 

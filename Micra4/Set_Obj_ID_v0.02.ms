@@ -110,14 +110,14 @@ rollout mcObjIDDialog "" width:144 height:84
 	( 
 		callbacks.removeScripts id:#mcSetObjectIDCalbacks --Remove any existing callbacks with this ID.
 		deleteAllChangeHandlers id:#mcSetFaceIDCalbacks --Remove any existing callbacks with this ID.
-		mcCall.saveIniDialog "mcObjIDDialog" "Properties_2"
+		mcFile.saveIniDialog "mcObjIDDialog" "Properties_2"
 	)
 	-->MoveMode
 	on mcObjIDDialog lbuttondown pos do (dMove = true; DmPos = pos; if not keyboard.shiftPressed do pushprompt "Pres Shift To Move...")
 	on mcObjIDDialog lbuttonup   pos do (dMove = false; pushprompt "")
 	on mcObjIDDialog mouseMove   pos do
 	(
-		if dMove and keyboard.shiftPressed do mcDialogSnap mcObjIDDialog DmPos
+		if dMove and keyboard.shiftPressed do mcDialog.snapDialog mcObjIDDialog DmPos
 	)
 	--Actions -----------------------------------------------------------------------
 	on spn_id changed val do (set_Obj_or_Face spn_id.value)

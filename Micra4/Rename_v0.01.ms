@@ -39,7 +39,7 @@ if mcRenameDialog != undefined then destroyDialog mcRenameDialog
 		on mcRenameDialog rbuttonup pos do (destroyDialog mcRenameDialog )
 		on mcRenameDialog close do 
 		(
-			mcCall.saveIniDialog "mcRenameDialog" "Properties_2"
+			mcFile.saveIniDialog "mcRenameDialog" "Properties_2"
 			checked = false ; updateToolbarButtons() 
 		)
 		-->MoveMode
@@ -47,7 +47,7 @@ if mcRenameDialog != undefined then destroyDialog mcRenameDialog
 		on mcRenameDialog lbuttonup   pos do (dMove = false; pushprompt "")
 		on mcRenameDialog mouseMove   pos do
 		(
-			if dMove and keyboard.shiftPressed do mcDialogSnap mcRenameDialog DmPos
+			if dMove and keyboard.shiftPressed do mcDialog.snapDialog mcRenameDialog DmPos
 		)
 		-----------------------------------------------------------------------------------------------				
 		on objs changed state do

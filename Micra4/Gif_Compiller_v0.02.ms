@@ -186,7 +186,7 @@ rollout mcGifCompillerDialog "Untitled" width:284 height:52
 	on mcGifCompillerDialog lbuttonup   pos do (dMove = false; pushprompt "")
 	on mcGifCompillerDialog mouseMove   pos do
 	(
-		if dMove and keyboard.shiftPressed do mcDialogSnap mcGifCompillerDialog DmPos
+		if dMove and keyboard.shiftPressed do mcDialog.snapDialog mcGifCompillerDialog DmPos
 	)
 	on mcGifCompillerDialog open do 
 	(
@@ -217,7 +217,7 @@ rollout mcGifCompillerDialog "Untitled" width:284 height:52
 	)
 	on mcGifCompillerDialog close do 
 	(
-		mcCall.saveIniDialog "mcGifCompillerDialog" "Properties_2"
+		mcFile.saveIniDialog "mcGifCompillerDialog" "Properties_2"
 		if jpgPlayerDialog != undefined do destroyDialog jpgPlayerDialog
 		if gifPlayerDialog != undefined do destroyDialog gifPlayerDialog
 	)

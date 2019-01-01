@@ -334,7 +334,7 @@ rollout mcCharSelectDialog "Character Tool v0.02" width:212 height:388
 	on mcCharSelectDialog close do
 	(
 		if charPoseDialog != undefined then destroyDialog charPoseDialog
-		mcCall.saveIniDialog "mcCharSelectDialog" "Properties_2"
+		mcFile.saveIniDialog "mcCharSelectDialog" "Properties_2"
 		callbacks.removeScripts id:#mcCT_Callbacks
 		mcCT_BoneArray = Undefined
 		mcPoseTool = undefined
@@ -355,7 +355,7 @@ rollout mcCharSelectDialog "Character Tool v0.02" width:212 height:388
 	on mcCharSelectDialog lbuttonup   pos do (dMove = false; pushprompt "")
 	on mcCharSelectDialog mouseMove   pos do
 	(
-		if dMove and keyboard.shiftPressed do mcDialogSnap mcCharSelectDialog DmPos
+		if dMove and keyboard.shiftPressed do mcDialog.snapDialog mcCharSelectDialog DmPos
 	)
 --Actions -----------------------------------------------------------------------
 	on axFlash FSCommand command param do --undo "Character Tool" on

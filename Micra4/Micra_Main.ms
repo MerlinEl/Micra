@@ -54,16 +54,39 @@ struct MICRA_STRUCTURE (
 		local f_version = getScriptVersion script_name
 		if f_version == "" do(
 		
-			format "File[%], is not registred in [%]\n" script_name DefaultSettings
+			format "File[%], is not registred in [  %  ]\n" script_name DefaultSettings
 			return false
 		)
 		local file = RootDir + script_name + "_v" + f_version + ".ms"
 		if doesFileExist file do (
 		
-			try   (fileIn file ; (format "loading%\n" (" ["+script_name+"]... Succesfull!")) ) 
-			catch                (format "loading%\n" (" ["+script_name+"]... Failed!"    ))
+			try (
+				fileIn file
+				format "% > Load tool [  %  ]  was success!\n" version script_name
+			
+			) catch (
+			
+				format "% > Load tool [  %  ]  was failed!\n\tError:%\n" version script_name (getCurrentException())
+			)
 		)
 		--format "ver:%\n" f_Version
+	),
+	/*
+	*	@example
+	*	struct test1 (a, b)
+	*	Global mcTest = Micra.instanceStructure test1
+	*/
+	fn instanceStructure struct_object instance_name = (
+
+		local structure_instance
+		try (
+			structure_instance = struct_object()
+			format"% > Import struct > [  %  ] was success!\n" version instance_name
+		) catch (
+
+			format"% > Import struct > [  %  ] was failed!\n\tError:%\n" version instance_name (getCurrentException())
+		)
+		structure_instance
 	),
 	--> Clean and Close Micra
 	fn unload self:true = (
@@ -139,12 +162,15 @@ mc_Dialog_DropTarget = undefined
 	
 		if not doesFileExist DefaultSettings do return #(DefaultSettings)
 		local ms_names			= getIniSetting DefaultSettings "Version" 
+		local struct_names		= getIniSetting DefaultSettings "Structures" 
 		local system_ini_names	= getIniSetting DefaultSettings "SystemIni"
 		local default_ini_names	= getIniSetting DefaultSettings "UserIniDefault"
 		files_list				= #(RootDir+"Micra.ms")
 
 		--> collect ms and mcr
 		for i in ms_names  do files_list += #(RootDir+i+"_v"+getIniSetting DefaultSettings "Version" i+".ms") 
+		--> collect struct files
+		for i in struct_names do files_list += #(RootDir+"\\CORE\\"+i+".ms") 
 		--> collect ini 
 		for i in system_ini_names do files_list += #(RootDir+i+".ini")
 		--> collect default ini
@@ -212,10 +238,11 @@ mc_Dialog_DropTarget = undefined
 	
 		if loaded do unload()--> Unregister Micra's Callbacks
 		
-		-->Load Struct
-		fileInVersion "Global_Memory"
-		fileInVersion "Event_Manager"
-		fileInVersion "Struct_Call"
+		-->Load Core Structures
+		local struct_names = getIniSetting DefaultSettings "Structures" 
+		for i in struct_names do fileIn (RootDir+"\\CORE\\"+i+".ms") 
+		
+		--> Load Actions
 		fileInVersion "Struct_Action"
 		
 		-->Load DotNet Components
@@ -223,7 +250,6 @@ mc_Dialog_DropTarget = undefined
 		fileInVersion "Popup_Dialogs"
 		
 		-->Load Dinamic Dialog
-		fileInVersion "Dialog_Creator"
 		fileInVersion "Dialog_Creator_Net"
 		
 		-->Load Applications
@@ -251,7 +277,7 @@ fileIn Macro
 			
 			local error_msg = "Some Files(" + error_list.count as string + ") is missing!\nPlease reinstal Micra or contact me.\nmerlin_el@hotmail.com"
 			messagebox error_msg title:(" " + version + ":")
-			format "% > Missing files(%)\n%" version error_list.count error_list
+			format "% > Missing files(%)\n List:%" version error_list.count error_list
 			return false
 		)
 		format "% > System files(%) checked succesfully!\n" version files_list.count

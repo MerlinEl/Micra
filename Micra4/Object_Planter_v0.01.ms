@@ -28,14 +28,14 @@ rollout mcObjectPlanterDialog " Object Planter v0.1" width:356 height:92
 	/* Dialog */
 	------------------------------------------------------------------------
 	on mcObjectPlanterDialog open do (lblUnits.text = mcUnitsType())
-	on mcObjectPlanterDialog close do (mcCall.saveIniDialog "mcObjectPlanterDialog" "Properties_2")
+	on mcObjectPlanterDialog close do (mcFile.saveIniDialog "mcObjectPlanterDialog" "Properties_2")
     on mcObjectPlanterDialog rbuttonup pos do (DestroyDialog mcObjectPlanterDialog)
 	-->MoveMode
 	on mcObjectPlanterDialog lbuttondown pos do (dMove = true; DmPos = pos; if not keyboard.shiftPressed do pushprompt "Pres Shift To Move...")
 	on mcObjectPlanterDialog lbuttonup   pos do (dMove = false; pushprompt "")
 	on mcObjectPlanterDialog mouseMove   pos do
 	(
-		if dMove and keyboard.shiftPressed do mcDialogSnap mcObjectPlanterDialog DmPos
+		if dMove and keyboard.shiftPressed do mcDialog.snapDialog mcObjectPlanterDialog DmPos
 	)
 	------------------------------------------------------------------------
 	/* Actions */

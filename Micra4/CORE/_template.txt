@@ -1,0 +1,12 @@
+--------------------------------------------------------------------------------
+/* mcObject by Orien 2019 */
+--------------------------------------------------------------------------------
+/**
+* @example	
+*
+*/
+struct MICRA_GLOBAL_MEMORY	(
+	
+)	
+ --create instance
+Global mcGM = Micra.instanceStructure MICRA_GLOBAL_MEMORY "mcGM"

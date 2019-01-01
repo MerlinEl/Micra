@@ -99,7 +99,7 @@ rollout mcLodeTestDialog "Lode Tester:" width:328 height:164
 	)
 	on mcLodeTestDialog close do
 	(
-		mcCall.saveIniDialog "mcLodeTestDialog" "Properties_2"
+		mcFile.saveIniDialog "mcLodeTestDialog" "Properties_2"
 	)
 	on mcLodeTestDialog rbuttonup   pos do(destroyDialog mcLodeTestDialog)
 	-->MoveMode
@@ -107,7 +107,7 @@ rollout mcLodeTestDialog "Lode Tester:" width:328 height:164
 	on mcLodeTestDialog lbuttonup   pos do (dMove = false; pushprompt "")
 	on mcLodeTestDialog mouseMove   pos do
 	(
-		if dMove and keyboard.shiftPressed do mcDialogSnap mcLodeTestDialog DmPos
+		if dMove and keyboard.shiftPressed do mcDialog.snapDialog mcLodeTestDialog DmPos
 	)
 	on tmr1 tick do
 	(

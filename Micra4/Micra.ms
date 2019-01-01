@@ -84,11 +84,6 @@ try ( mcMicraDialog.close() ) catch()
 	)
 	
 	form.tag = dotNetMXSValue (MICRA_COMPONENTS_STRUCT()) --manual Lifetime
-	fn defNWin = (
-		local nw = DotNetObject "NativeWindow"
-		nw.AssignHandle (DotNetObject "System.IntPtr" (Windows.GetMaxHWND())) 
-		return nw
-	)
 --| --General Callbacks
 	fn isGroup sel =
 	(
@@ -190,7 +185,7 @@ try ( mcMicraDialog.close() ) catch()
 		if not doesFileExist Micra.TempProfileIni do return false
 		
 		local P1_Dialogs = getINISetting Micra.TempProfileIni "Properties_1" 
-		for i in P1_Dialogs where (mcCall.getIniDataFromArray Micra.TempProfileIni "Properties_1" i 1) == true do
+		for i in P1_Dialogs where (mcFile.getIniDataFromArray Micra.TempProfileIni "Properties_1" i 1) == true do
 		(
 			mcCreateNetDynamicDialog i
 		)
@@ -207,7 +202,7 @@ try ( mcMicraDialog.close() ) catch()
 	(
 		--print "micra closed"
 		s.tag.value.timer.stop()
-		mcFile.saveIniDialog s "Properties_2" s.name
+		mcFile.saveIniDialog s.name "Properties_2"
 		Micra.Unload self:false --false self, prevent depency loop
 	)
 	fn changeBackcolor s a = ( 
@@ -239,7 +234,7 @@ try ( mcMicraDialog.close() ) catch()
 --|	--Form move
 	fn onLblTMouseMove s a = 
 	(
-		if netDMove do ( mcFormSnap s.parent netDmPos ) --dragForm
+		if netDMove do ( mcDialog.snapForm s.parent netDmPos ) --dragForm
 	)
 	fn onLblTMouseDown s a = 
 	(
@@ -276,52 +271,36 @@ try ( mcMicraDialog.close() ) catch()
 	)
 	fn quitMicra s a = ( Micra.unload() ) --> Shut Down Micra
 	fn reloadMicra s a =( Micra.Reload() ) --> Restart Micra
-	fn saveCurrentProfile =
-	(
-		--save current pos and size for all visible dialogs to /Profile_Temp.ini
-		local dia_str1 = getIniSetting Micra.TempProfileIni "Properties_1"
-		local dia_str2 = getIniSetting Micra.TempProfileIni "Properties_2"
-		--new dotnet fn
-		for i in dia_str1 do 
-		(
-			local form = execute i
-			if classOf form == DotnetObject do mcFile.saveIniDialog form "Properties_1" form.name
-		)
-		--old rollout fn -- remove
-		for i in dia_str2 do 
-		(
-			local dia = execute i
-			local active = case classOf dia of
-			(
-				RolloutClass:(dia != undefined and dia.isDisplayed)
-				DotnetObject:(dia != undefined and dia.visible)
-			)
-			mcCall.saveIniDialog i "Properties_2" active:active
-		)
-
-		--write from temp to current profile
-		local active_name = "Profile_"+(getIniSetting Micra.UserSettings "Settings" "CurrentProfile") + ".ini"
-		local active_file = Micra.UserDir + active_name
+	
+	--save registred dialogs pos and size to current profile
+	fn saveCurrentProfile = (
+		--get all registred dialogs
+		local dia_names_1 = getIniSetting Micra.TempProfileIni "Properties_1" --get micra dialogs
+		local dia_names_2 = getIniSetting Micra.TempProfileIni "Properties_2" --get all other dialogs
+		--save all visible dialogs to /Profile_Temp.ini
+		for n in dia_names_1 do mcFile.saveIniDialog n "Properties_1"
+		for n in dia_names_2 do mcFile.saveIniDialog n "Properties_2"
+		--override current profile with temp one
+		local current_profile_index = getIniSetting Micra.UserSettings "Settings" "CurrentProfile"
+		local active_file = Micra.UserDir + "Profile_"+ current_profile_index + ".ini"
 		if doesFileExist active_file do deleteFile active_file
 		copyFile Micra.TempProfileIni active_file 
+		local current_profile_name = getIniSetting Micra.UserSettings "Profiles" current_profile_index
+		format "% > saveCurrentProfile > Profile:[%] has been Saved!\n" Micra.version current_profile_name
 	)
-	fn renameCurrentProfile = (
-	
-		local typed_text = mcPopup.textBox title:"New Profile Name:" saved_pos:"Micra_TextBox"
-		format "typed_text:%\n" typed_text
-	)
+
 	fn manageProfile s a =
 	(
-		case s.tag of (	
+		local menu_item_name = s.tag
+		case menu_item_name of (	
 		
 			"Save":saveCurrentProfile()
-			"Save As":Micra.fileInVersion "Save_Profile_As"
-			"Rename":renameCurrentProfile()
-			default:( --load profile by name
-			
-				local keys = for i = 1 to 8 collect (getIniSetting Micra.UserSettings "Profiles" (i as string))
-				local numstr = (findItem keys s.tag ) as string
-				setIniSetting Micra.UserSettings "Settings" "CurrentProfile" numstr --save current profile index
+			"Manage":Micra.fileInVersion "Manage_Profiles"
+			default:( --for any other names  - -> load profile by name
+
+				local keys = for i = 1 to 8 collect (getIniSetting Micra.UserSettings "Profiles" (i as string)) --collect all profile names
+				local profile_index = (findItem keys menu_item_name ) as string --find profile index by name
+				setIniSetting Micra.UserSettings "Settings" "CurrentProfile" profile_index --save desired profile index
 				reloadMicra s a
 			)
 		)
@@ -356,7 +335,7 @@ try ( mcMicraDialog.close() ) catch()
 					mnu.ShowImageMargin = false
 					for i in keys do
 					(
-						local lbl = mcCall.getIniDataFromArray Micra.TempProfileIni "Properties_1" i 4
+						local lbl = mcFile.getIniDataFromArray Micra.TempProfileIni "Properties_1" i 4
 						itm = mnu.Items.Add lbl
 						itm.tag = i
 						dotnet.addeventhandler itm "Click" showHideForm
@@ -365,7 +344,7 @@ try ( mcMicraDialog.close() ) catch()
 				)
 				for i = 1 to keys.count do
 				(
-					local enabled = (mcCall.getIniDataFromArray Micra.TempProfileIni "Properties_1" keys[i] 1)
+					local enabled = (mcFile.getIniDataFromArray Micra.TempProfileIni "Properties_1" keys[i] 1)
 					if enabled 
 					then 
 					(
@@ -385,7 +364,7 @@ try ( mcMicraDialog.close() ) catch()
 				local mnu = msc.mnu_profile
 				mnu.tag = s.parent.parent
 				local profile_names = for i = 1 to 8 collect (getIniSetting Micra.UserSettings "Profiles" (i as string))
-				local command_names = #("Save", "Save As", "Rename")
+				local command_names = #("Save", "Manage")
 				local menu_items_names = mcArray.mergeClone profile_names command_names
 				--Add menu components for first time
 				if msc.mnu_p_items.count == 0 do
@@ -465,14 +444,15 @@ try ( mcMicraDialog.close() ) catch()
 	fn inicializeInterface form mcs =
 	(
 		form.name = "mcMicraDialog"
-		form.ControlBox  = false --hide main bar
-		local fpos = (mcCall.getIniDataFromArray Micra.TempProfileIni "Properties_2" "mcMicraDialog" 2)
-		if fpos == undefined do fpos = (mcCall.getIniDataFromArray Micra.DefaultProfileIni "Properties_2" "mcMicraDialog" 2)
+		
+		local fpos = (mcFile.getIniDataFromArray Micra.TempProfileIni "Properties_2" "mcMicraDialog" 2)
+		if fpos == undefined do fpos = (mcFile.getIniDataFromArray Micra.DefaultProfileIni "Properties_2" "mcMicraDialog" 2)
 		form.StartPosition = form.StartPosition.Manual
 		
 		form.MinimumSize = netDrSize [form_size.x, mcs.bar_height + mcs.border_offset*2]
 		--form.MaximumSize = netDrSize form_size
 		
+		form.ControlBox  = false --hide main bar
 		form.bounds = netDrRect fpos form_size
 		form.FormBorderStyle = form.FormBorderStyle.none
 		form.BackColor = netDrColor (mcUIColors.get #fore) --yellow
@@ -546,8 +526,5 @@ try ( mcMicraDialog.close() ) catch()
 	mcMicraDialog = form
 	--mcMicraDialog.showModeless()
 	--mcMicraDialog.show(WindowWrapper)
-	-- Shows the form with the specified owner (MAX) to the user (creatd by lo)
-	local nw = defNWin()
-	mcMicraDialog.show(nw) 
-	nw.ReleaseHandle()
+	mcDotnet.dShow mcMicraDialog -- Shows the form with the specified owner (MAX) to the user (creatd by lo)
 )

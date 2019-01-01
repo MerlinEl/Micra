@@ -66,7 +66,7 @@ try ( mcInterfaceColorDilaog.close() ) catch()
 	form.tag = dotNetMXSValue (MICRA_COMPONENTS_STRUCT()) --manual Lifetime	
 	
 	fn closeForm s a = ( ((s.GetCurrentParent()).tag).close() )
-	fn onCloseForm s a = (mcFile.saveIniDialog s "Properties_2" s.name)
+	fn onCloseForm s a = (mcFile.saveIniDialog s.name "Properties_2")
 	fn onOpenForm s a = (s.BackColor = netDrColor s.tag.value.icolors.clr_fore) --yellow
 --|	--Form move
 	fn onLblTMouseMove s a = 
@@ -74,7 +74,7 @@ try ( mcInterfaceColorDilaog.close() ) catch()
 		local form = s.parent
 		if form.tag.value.netDMove do --dragForm
 		(
-			mcFormSnap form form.tag.value.netDmPos
+			mcDialog.snapForm form form.tag.value.netDmPos
 		)
 	)
 	fn onLblTMouseDown s a = 
@@ -479,8 +479,8 @@ try ( mcInterfaceColorDilaog.close() ) catch()
 	(
 		form.name = "mcInterfaceColorDilaog"
 		form.ControlBox  = false --hide main bar
-		local fpos = (mcCall.getIniDataFromArray Micra.TempProfileIni "Properties_2" "mcInterfaceColorDilaog" 2)
-		if fpos == undefined do fpos = (mcCall.getIniDataFromArray Micra.DefaultProfileIni "Properties_2" "mcInterfaceColorDilaog" 2)
+		local fpos = (mcFile.getIniDataFromArray Micra.TempProfileIni "Properties_2" "mcInterfaceColorDilaog" 2)
+		if fpos == undefined do fpos = (mcFile.getIniDataFromArray Micra.DefaultProfileIni "Properties_2" "mcInterfaceColorDilaog" 2)
 		form.StartPosition = form.StartPosition.Manual
 		form.MinimumSize = netDrSize form_size
 		form.bounds = netDrRect fpos form_size
@@ -532,8 +532,7 @@ try ( mcInterfaceColorDilaog.close() ) catch()
 	)
 	inicializeInterface form form.tag.value
 	mcInterfaceColorDilaog = form
-	--mcInterfaceColorDilaog.show(WindowWrapper)
-	mcInterfaceColorDilaog.showModeless()
+	mcDotnet.dShow mcInterfaceColorDilaog
 )
 
 /*

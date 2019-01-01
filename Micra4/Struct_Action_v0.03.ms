@@ -100,7 +100,7 @@ struct mcAction
 		)
 		catch (format "Failed to add modifier: %\n" mod)
 		
-		local active = mcCall.getIniDataFromArray Micra.TempProfileIni "Properties_1" "mc_Dialog_F" 1
+		local active = mcFile.getIniDataFromArray Micra.TempProfileIni "Properties_1" "mc_Dialog_F" 1
 		if not keyboard.shiftPressed and not active and mc_Dialog_F != undefined do destroyDialog mc_Dialog_F
 	),
 	fn translateCubeMapToAway3D = 
@@ -998,7 +998,7 @@ struct mcAction
 					on mcSelVertsInXDialog lbuttonup   pos do (dMove = false; pushprompt "")
 					on mcSelVertsInXDialog mouseMove   pos do
 					(
-						if dMove and keyboard.shiftPressed do mcDialogSnap mcSelVertsInXDialog DmPos
+						if dMove and keyboard.shiftPressed do mcDialog.snapDialog mcSelVertsInXDialog DmPos
 					)
 					/* Actions */
 					on spnRange changed val do undo "select verts" on (if isModeTrue() do (selectVertsInRange val) )

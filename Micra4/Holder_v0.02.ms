@@ -133,7 +133,7 @@ Global mcSelectionHolderCount = 1
 	fn onLblTMouseMove s a = 
 	(
 		local form = s.parent
-		if form.tag.value.netDMove do (mcFormSnap form form.tag.value.netDmPos) --dragForm
+		if form.tag.value.netDMove do (mcDialog.snapForm form form.tag.value.netDmPos) --dragForm
 	)
 	fn onLblTMouseDown s a = 
 	(
@@ -236,7 +236,7 @@ Global mcSelectionHolderCount = 1
 
 		inicializeInterface ( form ) title:dtitle pos:dpos
 		resizeInterface     ( form  ) style:#compact
-		form.show(WindowWrapper)
+		mcDotnet.dShow form
 	)
 )
 

@@ -230,7 +230,7 @@ rollout mcRenderToTextureModDialog "Untitled" width:504 height:232
 	)
 	on mcRenderToTextureModDialog close do 
 	( 
-		mcCall.saveIniDialog "mcRenderToTextureModDialog" "Properties_2"
+		mcFile.saveIniDialog "mcRenderToTextureModDialog" "Properties_2"
 		saveInterface()
 	)
 	-->MoveMode
@@ -238,7 +238,7 @@ rollout mcRenderToTextureModDialog "Untitled" width:504 height:232
 	on mcRenderToTextureModDialog lbuttonup   pos do (dMove = false; pushprompt "")
 	on mcRenderToTextureModDialog mouseMove   pos do
 	(
-		if dMove and keyboard.shiftPressed do mcDialogSnap mcRenderToTextureModDialog DmPos
+		if dMove and keyboard.shiftPressed do mcDialog.snapDialog mcRenderToTextureModDialog DmPos
 	)
 	--Actions -----------------------------------------------------------------------
 	on btn_render pressed  do

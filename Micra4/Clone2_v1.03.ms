@@ -204,7 +204,7 @@ rollout mcClonerDialog "Cloner v1.05" width:164 height:296
 	)
 	on mcClonerDialog close do 
 	( 
-		mcCall.saveIniDialog "mcClonerDialog" "Properties_2"
+		mcFile.saveIniDialog "mcClonerDialog" "Properties_2"
 		clearTempObjects()
 	)
 	-->MoveMode
@@ -212,7 +212,7 @@ rollout mcClonerDialog "Cloner v1.05" width:164 height:296
 	on mcClonerDialog lbuttonup   pos do (dMove = false; pushprompt "")
 	on mcClonerDialog mouseMove   pos do
 	(
-		if dMove and keyboard.shiftPressed do mcDialogSnap mcClonerDialog DmPos
+		if dMove and keyboard.shiftPressed do mcDialog.snapDialog mcClonerDialog DmPos
 	)
 	--Actions -----------------------------------------------------------------------
 	on btnCenter changed state do buttonControll state btnCenter

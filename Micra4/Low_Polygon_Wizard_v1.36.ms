@@ -925,11 +925,11 @@ rollout mcLpWizardDialog "" width:528 height:84
 	on mcLpWizardDialog close do 
 	(
 		drw.clear()
-		mcCall.saveIniDialog "mcLpWizardDialog" "Properties_2" 
+		mcFile.saveIniDialog "mcLpWizardDialog" "Properties_2" 
 	)
 	on mcLpWizardDialog rbuttonup pos   do 
 	(
-		mcCall.saveIniDialog "mcLpWizardDialog" "Properties_2"
+		mcFile.saveIniDialog "mcLpWizardDialog" "Properties_2"
 		destroyDialog mcLpWizardDialog
 	)
 	-->MoveMode
@@ -937,7 +937,7 @@ rollout mcLpWizardDialog "" width:528 height:84
 	on mcLpWizardDialog lbuttonup pos do(dMove = false; pushprompt "")
 	on mcLpWizardDialog mouseMove pos do
 	(
-		if dMove and keyboard.shiftPressed do mcDialogSnap mcLpWizardDialog DmPos
+		if dMove and keyboard.shiftPressed do mcDialog.snapDialog mcLpWizardDialog DmPos
 	)
 	-->Start Tool
 	on ckbDraw changed state do --begin LPW Tool
@@ -1108,7 +1108,7 @@ rollout mcLpWizardDialog "" width:528 height:84
 			on lpWizardHelpDialog lbuttonup   pos do (dMove = false; pushprompt "")
 			on lpWizardHelpDialog mouseMove   pos do
 			(
-				if dMove and keyboard.shiftPressed do mcDialogSnap lpWizardHelpDialog DmPos
+				if dMove and keyboard.shiftPressed do mcDialog.snapDialog lpWizardHelpDialog DmPos
 			)
 		)
 		createDialog lpWizardHelpDialog pos:[dPos2.x, dPos2.y + 90] style:#(#style_border)

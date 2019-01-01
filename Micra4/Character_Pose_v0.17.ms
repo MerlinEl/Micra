@@ -362,7 +362,7 @@ rollout mcCharPoseDialog " Save  Pose v0.1" width:146 height:388
 	--ON Close
 	on mcCharPoseDialog close do 
 	(
-		mcCall.saveIniDialog "mcCharPoseDialog" "Properties_2"
+		mcFile.saveIniDialog "mcCharPoseDialog" "Properties_2"
 		charSelectDialog.chkLibrary.checked = off
 	)
 	--ON RMB 
@@ -385,7 +385,7 @@ rollout mcCharPoseDialog " Save  Pose v0.1" width:146 height:388
 	on mcCharPoseDialog lbuttonup   pos do (dMove = false; pushprompt "")
 	on mcCharPoseDialog mouseMove   pos do
 	(
-		if dMove and keyboard.shiftPressed do mcDialogSnap mcCharPoseDialog DmPos
+		if dMove and keyboard.shiftPressed do mcDialog.snapDialog mcCharPoseDialog DmPos
 	)
 	-----------------------------------------------------------------------
 	/* Actions */
@@ -429,7 +429,7 @@ rollout mcCharPoseDialog " Save  Pose v0.1" width:146 height:388
 			on hptsDialog lbuttonup   pos do (dMove = false; pushprompt "")
 			on hptsDialog mouseMove   pos do
 			(
-				if dMove and keyboard.shiftPressed do mcDialogSnap hptsDialog DmPos
+				if dMove and keyboard.shiftPressed do mcDialog.snapDialog hptsDialog DmPos
 			)
 			on btnAccept pressed  do
 			(
