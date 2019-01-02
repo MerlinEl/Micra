@@ -12,6 +12,8 @@
         <File filename="e:\Aprog\Orien\Micra\Micra4\App\Custom Settings\MXS_EditorUser.properties" />
         <File filename="e:\Aprog\Orien\Micra\Scripting\Notepad++\maxscript.api" />
         <File filename="e:\Aprog\Orien\Micra\Scripting\Notepad++\userDefineLang.xml" />
+        <File filename="e:\Aprog\Orien\Micra\Notepad++\autoCompletion\maxscript.xml" />
+        <File filename="e:\Aprog\Orien\Micra\Notepad++\shortcuts.xml" />
     </History>
     <GUIConfigs>
         <GUIConfig name="ToolBar" visible="yes">standard</GUIConfig>
