@@ -97,11 +97,7 @@ rollout mcVertexColorDialog "Vertex Color v1.02" width:408 height:256
 			Default: 0
 		)
 	)
-	
-	
-	
-	
-	
+
 	--------
 	fn getBaseNumVerts base_object = (
 		

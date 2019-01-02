@@ -21,7 +21,6 @@ for i in (windows.getChildrenHWND 0) where i[4] == "MXS_SciTEWindow" or i[4] == 
 	)
 )
 
-
 for i in (windows.getChildrenHWND 0) do format "win:%\n" i --get alll windows in OS
 
 hwnd = dialogMonitorOps.getWindowHandle() 

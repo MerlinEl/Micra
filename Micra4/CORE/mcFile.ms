@@ -250,6 +250,28 @@ struct MICRA_FILE (
 		(
 			setIniSetting iniFile head key newValue
 		)
+	),
+	--load icon from file
+	fn getIconFromFile imgFile icNum icSize:24 imgSize:480 = (
+	
+		local icn = bitmap icSize icSize color:white
+		if not doesFileExist imgFile or icNum == undefined or icNum < 1 do return icn
+		local imgLib = openBitMap imgFile
+		local icnCount = imgSize/icSize
+		icNum -= 1
+		local X = (mod icNum icnCount)
+		local Y = (icNum / icnCount)
+		
+		local pix_x = X * icSize
+		local pix_y = Y * icSize
+		
+		for i=0 to icSize do
+		(
+			local pix = getPixels imgLib [pix_x , pix_y + i] icSize 
+			setpixels icn [0,i] pix
+		)
+		close imgLib
+		return icn
 	)
 )
  --create instance

@@ -192,8 +192,8 @@ struct MICRA_CALL
 
 		if not doesFileExist img or not doesFileExist msk do return blank
 		
-		local icon = mcDialog.getIconFromFile img icn_num icSize:icSize imgSize:imgSize
-		local mask = mcDialog.getIconFromFile msk icn_num icSize:icSize imgSize:imgSize
+		local icon = mcFile.getIconFromFile img icn_num icSize:icSize imgSize:imgSize
+		local mask = mcFile.getIconFromFile msk icn_num icSize:icSize imgSize:imgSize
 
 		return #(icon, mask, 1, 1, 1, 1, 1)
 	),

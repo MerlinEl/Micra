@@ -33,8 +33,9 @@ struct MICRA_STRUCTURE (
 	ActionsIni			= RootDir + "Actions.ini",
 	ActionsHelpIni		= RootDir + "Actions_Help.ini",
 	PluginsDir			= RootDir + "plugins\\", --all plugins here
-	Macro				= getDir #userMacros + "\\Micra_Macro.mcr",
-	MaxUserSettings 	= (pathConfig.removePathLeaf (GetDir #temp))+ "\\Plugin.UserSettings.ini",
+	MaxUserDir			= pathConfig.removePathLeaf (getDir #userMacros),	
+	Macro					= MaxUserDir + "\\usermacros\\Micra_Macro.mcr",
+	MaxUserSettings = MaxUserDir + "\\Plugin.UserSettings.ini",
 	ImgPath				= RootDir + "Img\\", 
 	IconI				= RootDir + "Img\\mcIcons_24_480x480i.bmp",
 	IconM				= RootDir + "Img\\mcIcons_24_480x480m.bmp",
