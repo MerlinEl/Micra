@@ -2,11 +2,12 @@
 <NotepadPlus>
     <FindHistory nbMaxFindHistoryPath="10" nbMaxFindHistoryFilter="10" nbMaxFindHistoryFind="10" nbMaxFindHistoryReplace="10" matchWord="no" matchCase="no" wrap="yes" directionDown="yes" fifRecuisive="yes" fifInHiddenFolder="no" dlgAlwaysVisible="no" fifFilterFollowsDoc="no" fifFolderFollowsDoc="no" searchMode="0" transparencyMode="1" transparency="150" dotMatchesNewline="no" isSearch2ButtonsMode="no">
         <Filter name="" />
+        <Filter name="" />
         <Find name="Micra" />
+        <Replace name="" />
         <Replace name="" />
     </FindHistory>
     <History nbMaxFile="10" inSubMenu="no" customLength="-1">
-        <File filename="E:\Aprog\Orien\Micra\Micra4\CORE\mcCursor.ms" />
         <File filename="e:\Aprog\Notepad++\plugins\APIs\MaxScript.xml" />
         <File filename="e:\Aprog\Orien\Micra\Micra4\App\Custom Settings\MXS_EditorAbbrev.properties" />
         <File filename="e:\Aprog\Orien\Micra\Micra4\App\Custom Settings\MXS_EditorUser.properties" />
@@ -14,6 +15,9 @@
         <File filename="e:\Aprog\Orien\Micra\Scripting\Notepad++\userDefineLang.xml" />
         <File filename="e:\Aprog\Orien\Micra\Notepad++\autoCompletion\maxscript.xml" />
         <File filename="e:\Aprog\Orien\Micra\Notepad++\shortcuts.xml" />
+        <File filename="D:\ReneBaca\3DsMax\Micra\Notepad++\tools\MXSPyCOM\initialize_COM_server.ms" />
+        <File filename="D:\ReneBaca\3DsMax\Micra\Notepad++\InitMaxBridge.ms" />
+        <File filename="C:\temp\bridge.ms" />
     </History>
     <GUIConfigs>
         <GUIConfig name="ToolBar" visible="yes">standard</GUIConfig>
@@ -48,7 +52,7 @@
         <GUIConfig name="ScintillaGlobalSettings" enableMultiSelection="no" />
         <GUIConfig name="openSaveDir" value="0" defaultDirPath="" />
         <GUIConfig name="titleBar" short="no" />
-        <GUIConfig name="stylerTheme" path="E:\Aprog\Orien\Micra\Notepad++\stylers.xml" />
+        <GUIConfig name="stylerTheme" path="D:\ReneBaca\3DsMax\Micra\Notepad++\stylers.xml" />
         <GUIConfig name="wordCharList" useDefault="yes" charsAdded="" />
         <GUIConfig name="delimiterSelection" leftmostDelimiter="40" rightmostDelimiter="41" delimiterSelectionOnEntireDocument="no" />
         <GUIConfig name="multiInst" setting="0" />

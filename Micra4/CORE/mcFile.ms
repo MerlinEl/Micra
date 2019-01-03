@@ -14,7 +14,50 @@
 *	print mcFile.all_dirs
 */
 struct MICRA_FILE (
+	
 	all_dirs = #(),
+	fn isFilePath _path =  (
+		
+		_path = pathConfig.normalizePath _path
+		getFilenameType _path != ""
+	),
+	fn isDirectory _path = (
+		
+		_path = pathConfig.normalizePath _path
+		findString  _path  ":\\" != undefined and getFilenameType _path == ""
+	),
+	fn getLastDir _path = (
+		
+		_path = pathConfig.normalizePath _path
+		pathConfig.stripPathToLeaf _path
+	),
+	/*
+	*@Example
+		mcFile.getParentDir "D:\\3DsMax\Micra\\Notepad++\\tools\\MXSPyCOM\\install.ms" 2
+			"D:\3DsMax\Micra\Notepad++\tools\"	
+		mcFile.getParentDir "D:\\3DsMax\Micra\\Notepad++\\tools\\MXSPyCOM\\install.ms" 8
+			"D:\"
+		mcFile.getParentDir "D:\\3DsMax\Micra\\Notepad++\\tools\\MXSPyCOM\\install.ms" 1000 dir_name:"Notepad++"
+			"D:\ReneBaca\3DsMax\Micra\Notepad++\"
+		mcFile.getParentDir "D:\\3DsMax\Micra\\Notepad++\\tools\\MXSPyCOM\\install.ms" 0 dir_name:"ROOT"
+			"D:\"
+	*/
+	fn getParentDir _path steps_index dir_name:undefined = (
+
+		if not (isDirectory _path) and not (isFilePath _path) do return undefined
+		local parent_path = pathConfig.normalizePath _path
+		if dir_name == "ROOT" do return substring _path 1 3
+		while (findString parent_path "\\") != undefined and steps_index > 0  and  (getLastDir parent_path) != dir_name do (
+			
+			--format "next dir:%\n" (getLastDir parent_path)
+			parent_path  = pathConfig.removePathLeaf parent_path
+			steps_index -= 1
+		)
+		--if we get bottom return drive letter
+		if (findString parent_path ":") == undefined then parent_path = substring _path 1 3
+		--append slash at the end
+		if parent_path[parent_path.count] != "\\" then parent_path + "\\" else parent_path
+	),
 	fn getDirTree dir =
 	(
 		all_dirs += curr_dirs = getDirectories (dir+"*.*")
