@@ -1,6 +1,7 @@
 --------------------------------------------------------------------------------
 /* mcTransform by Orien 2019 */
 --------------------------------------------------------------------------------
+Global mcTransform 
 struct TM (name, pos, rot);
 Global OBJ_TM
 /*
@@ -11,7 +12,7 @@ Global OBJ_TM
 
 *
 */
-struct MICRA_TRANSFORM
+struct mcTransform
 (
 	fn getRotation obj = 
 	(
@@ -78,6 +79,6 @@ struct MICRA_TRANSFORM
 		)
 	)
 )
- --create instance
-Global mcTransform = Micra.instanceStructure MICRA_TRANSFORM "mcTransform"
+ --create instance caused error (unable find function in this struct)
+--Global mcTransform = Micra.instanceStructure MICRA_TRANSFORM "mcTransform"
 

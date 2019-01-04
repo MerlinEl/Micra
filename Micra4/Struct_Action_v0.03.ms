@@ -663,6 +663,7 @@ struct mcAction
 		if maxops.pivotmode  == #none
 		then maxops.pivotmode = #pivotonly
 		else maxops.pivotmode = #none
+		completeRedraw()
 	),
 	fn addLightMap num =
 	(
