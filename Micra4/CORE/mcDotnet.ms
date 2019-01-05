@@ -12,6 +12,7 @@
 */
 Struct MICRA_DOTNET (
 	
+	bind_to_windows = true,
 	ByteClass   = (dotNetClass "System.Byte"),
 	Cursors     = (dotNetClass "Cursors"),
 	DragDropEffect = (dotNetClass "DragDropEffects"),
@@ -126,19 +127,25 @@ Struct MICRA_DOTNET (
 	*/
 	fn dShow form saved_pos:true = (
 		
-			if form == undefined or form.IsDisposed or form.visible do return false
-			--get last position from Properties_2
-			if saved_pos do (
-				
-				local dpos   = (mcFile.getIniDataFromArray Micra.TempProfileIni "Properties_2" form.name 2)
-				form.Location = dPoint dpos
-			)
-			local hv = maxHW ()
-			form.show(hv) -- Shows the form with the specified owner (MAX) to the user (creatd by lo)
-			hv.ReleaseHandle()
-			--form.show(WindowWrapper) --good one try it later
-			--form.showModeless()
-			--dotNet.setLifeTimeControl form #dotNet --it’s generally a good idea to let the .NET garbage collector take care of the .NET objects, instead of the Max’s one.
+		if form == undefined or form.IsDisposed or form.visible do return false
+		--get last position from Properties_2
+		if saved_pos do (
+			
+			local dpos   = (mcFile.getIniDataFromArray Micra.TempProfileIni "Properties_2" form.name 2)
+			form.Location = dPoint dpos
+		)
+		if bind_to_windows do ( --unbind form from 3DsMax (test mode for Notepad++)
+		
+			form.show()
+			format ("form [ % ] start bounded to windows") form.name
+			return OK
+		)
+		local hv = maxHW ()
+		form.show(hv) -- Shows the form with the specified owner (MAX) to the user (creatd by lo)
+		hv.ReleaseHandle()
+		--form.show(WindowWrapper) --good one try it later
+		--form.showModeless()
+		--dotNet.setLifeTimeControl form #dotNet --it’s generally a good idea to let the .NET garbage collector take care of the .NET objects, instead of the Max’s one.
 	)
 )	
  --create instance

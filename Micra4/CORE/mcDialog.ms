@@ -15,7 +15,7 @@
 Struct MICRA_DIALOG (
 
 	--> TODO test > Make grid with size 01  to snap dialogs, Rene (2018)
-	fn mcFormSnap_NEW formA pos =
+	fn snapForm formA pos =
 	(
 		if classOf formA != dotNetObject or pos == undefined do return false
 		
@@ -24,7 +24,7 @@ Struct MICRA_DIALOG (
 		formA_newpos.x = mcMath.roundToInt formA_newpos.x 10
 		formA_newpos.y = mcMath.roundToInt formA_newpos.y 10
 
-		format "mcFormSnap form:% pos1:%\n" formA.name formA_newpos
+		--format "snapForm form:% pos1:%\n" formA.name formA_newpos
 		
 		--final move action
 		formA.location = mcDotnet.dPoint [formA_newpos.x, formA_newpos.y]
@@ -32,7 +32,7 @@ Struct MICRA_DIALOG (
 	/*
 	* mcDialog.snapForm
 	*/
-	fn snapForm formA pos =
+	fn snapForm_old formA pos =
 	(
 		if classOf formA != dotNetObject or pos == undefined do return false
 		local current_monitor = 1 --mcScreen.active() //causing ** system exception **
