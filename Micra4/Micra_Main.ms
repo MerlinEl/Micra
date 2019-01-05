@@ -39,6 +39,7 @@ struct MICRA_STRUCTURE (
 	ImgPath				= RootDir + "Img\\", 
 	IconI				= RootDir + "Img\\mcIcons_24_480x480i.bmp",
 	IconM				= RootDir + "Img\\mcIcons_24_480x480m.bmp",
+	max_custom_controls = undefined,
 	--Set Memory Allocation in MB
 	fn increaseMemory mb = (
 	
@@ -238,6 +239,9 @@ mc_Dialog_DropTarget = undefined
 	fn loadAllStructures = (
 	
 		if loaded do unload()--> Unregister Micra's Callbacks
+		
+		-->Load MaxCustomControls.dll (dont know if is need)
+		max_custom_controls = dotNet.loadAssembly "MaxCustomControls.dll"
 		
 		-->Load Core Structures
 		local struct_names = getIniSetting DefaultSettings "Structures" 

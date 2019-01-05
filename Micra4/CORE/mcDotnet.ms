@@ -23,7 +23,7 @@ Struct MICRA_DOTNET (
 	*@Usage		convert max color to dotnet
 	*@Example 	btn.BackColor = mcDotnet.dColor red
 	*/
-	fn dColor clr       = (
+	fn dColor clr = (
 	
 		local dotnet_color = case classOf clr of (
 			
@@ -136,8 +136,9 @@ Struct MICRA_DOTNET (
 		)
 		if bind_to_windows do ( --unbind form from 3DsMax (test mode for Notepad++)
 		
+			form.topMost = true
 			form.show()
-			format ("form [ % ] start bounded to windows") form.name
+			format ("form [ % ] start bounded in to windows.\n") form.name
 			return OK
 		)
 		local hv = maxHW ()

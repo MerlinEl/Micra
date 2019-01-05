@@ -1,8 +1,8 @@
 Global mcTemplateDialog
 if ::mcTemplateDialog != undefined do try(mcTemplateDialog.Close())catch()
 (
-	local mcs, dia
-	struct dotNetFormStruct (
+	local mcs, dia --local instances
+	struct DOTNET_FORM_STRUCT (
 
 		-- Default Properties
 		form = dotNetObject "MaxCustomControls.Maxform",
@@ -52,10 +52,8 @@ if ::mcTemplateDialog != undefined do try(mcTemplateDialog.Close())catch()
 		
 		-- SetUp Interface
 		fn init form_name = (
-			
-			-- Init Maxform (not realy need each time)
-			dotNet.loadAssembly "MaxCustomControls.dll"
-			
+
+
 			form.name = form_name
 			local fpos = (mcFile.getIniDataFromArray Micra.TempProfileIni "Properties_2" "mcTemplateDialog" 2) --pick custom fpos
 			if fpos == undefined do fpos = (mcFile.getIniDataFromArray Micra.DefaultProfileIni "Properties_2" "mcTemplateDialog" 2) --pick default fpos
@@ -114,7 +112,7 @@ if ::mcTemplateDialog != undefined do try(mcTemplateDialog.Close())catch()
 		),
 		initIt = init "mcTemplateDialog" 
 	)
-	mcTemplateDialog = dotNetFormStruct()
+	mcTemplateDialog = DOTNET_FORM_STRUCT() --form instance
 	mcs = mcTemplateDialog --structure shortcut (simplest use)
-	dia = mcTemplateDialog.form --form instance
+	dia = mcTemplateDialog.form --form shortcut (simplest use)
 )
