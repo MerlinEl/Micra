@@ -73,8 +73,8 @@ struct MICRA_FILE (
 	),
 	fn copyDirTree indir outdir hidden:true exceptempty:false owerwritereadonly:true existingonly:false silent:true =
 	(
-		--indir = mcFile.filterPath2 indir
-		--outdir = mcFile.filterPath2 outdir
+		--indir = filterPath2 indir
+		--outdir = filterPath2 outdir
 		
 		trimRight indir
 		trimRight outdir
@@ -95,8 +95,8 @@ struct MICRA_FILE (
 	),
 	fn treeCopy indir outdir move:false = --recursive call
 	(
-		indir = mcFile.filterPath indir
-		outdir = mcFile.filterPath outdir
+		indir = filterPath indir
+		outdir = filterPath outdir
 
 		local files = getFiles (indir+"*.*")
 		local dirs = getDirectories (indir+"*.*")
@@ -104,21 +104,77 @@ struct MICRA_FILE (
 		for f in files do ( copyFile f (outdir+filenameFromPath f) )
 		for d in dirs do 
 		(              
-			local filter_path = filterString d "\/"
+			local filter_path = filterString d "/\\" --changed 6.1.2019
 			local new_dir = outdir+filter_path[filter_path.count]
 			makedir new_dir
-			mcFile.treeCopy d new_dir
+			treeCopy d new_dir
 		)
 	),
-	fn import =
-	(
+	fn import = (
+	
 		max file import	
 	),
-	fn open fpath =
-	(
-		fpath = mcFile.filterPath fpath 
+	fn open fpath = (
+	
+		fpath = filterPath fpath 
 		if not doesFileExist fpath do return false
 		if isMaxFile fpath do try (loadMaxFile fpath useFileUnits:true quiet:false) catch()
+	),
+	--mcFile.getIniDataFromArray Micra.TempProfileIni "Properties_2" "mcColorPickerDialog" 2
+	fn getIniDataFromArray iniFile head key arrNum =
+	(
+		if classOf iniFile != string  do return undefined
+		if classOf head    != string  do return undefined
+		if classOf key     != string  do return undefined
+		if classOf arrNum  != integer do return undefined
+		
+		if not doesFileExist iniFile do return undefined
+		if head == "" 
+		then 
+		(
+			return (getIniSetting iniFile)
+		)
+		if key == "" 
+		then
+		(
+			return (getIniSetting iniFile head)
+		)
+		if arrNum == 0 
+		then
+		(
+			return (getIniSetting iniFile head key)
+		)
+		else 
+		(
+			local data  = execute (getIniSetting iniFile head key)
+			--format "ini:%\thead:%\tkey:%\tarrnum:%\n" iniFile head key arrNum
+			if classOf data != array do return undefined
+			return data[arrNum]
+		)
+	),
+	--mcFile.setIniDataToArray Micra.TempProfileIni "Properties_2" "mcColorPickerDialog" 2 newValue
+	fn setIniDataToArray iniFile head key arrNum newValue =
+	(
+		if classOf iniFile  != string  do return undefined
+		if classOf head     != string  do return undefined
+		if classOf key      != string  do return undefined
+		if classOf arrNum   != integer do return undefined
+		--if classOf newValue != string do return undefined
+		
+		if not doesFileExist iniFile do return undefined
+		
+		if arrNum != 0 
+		then
+		(
+			local data = execute (getIniSetting iniFile head key)
+			if classOf data != array do return undefined
+			data[arrNum] =  newValue
+			setIniSetting iniFile head key (data as string)
+		)
+		else
+		(
+			setIniSetting iniFile head key newValue
+		)
 	),
 	fn saveLoadIniSetings head: key: data: action: =
 	(
@@ -146,6 +202,11 @@ struct MICRA_FILE (
 		local data = execute (getIniSetting Micra.TempProfileIni form_category form_name) --pickup form pattern
 		if classOf data != Array do data = #(false, [0,0], [0,0], "") --if form is new create default pattern
 		local form = execute form_name --get form interface
+		if superClassOf form == StructDef do ( --if form is instance class (get form from inside)
+		
+			form = form.form
+		)
+		--format "A saving form:% class:%\n" form_name (classOf form)
 		case classOf form of (
 			
 			RolloutClass: (
@@ -158,7 +219,7 @@ struct MICRA_FILE (
 				)
 			)
 			DotnetObject:(
-				
+				 
 				data[1] = form.visible
 				if form.visible do (
 				
@@ -168,6 +229,23 @@ struct MICRA_FILE (
 			)
 		)
 		setIniSetting Micra.TempProfileIni form_category form_name (data as string)
+	),
+	/**
+	*@Example
+		local from_data = mcFile.loadIniDialog form_title "Properties_2" --get saved pos and size
+	*@Return data:#(undefined, [402,362], [730,500], "") --open at start, pos, size, title
+	*/
+	fn loadIniDialog form_name form_category = (
+
+		if not doesFileExist Micra.TempProfileIni or not doesFileExist Micra.DefaultProfileIni do return undefined
+		local data = execute (getIniSetting Micra.TempProfileIni form_category form_name) --pickup saved data
+		if classOf data != Array do ( --if data not found on temp profile try get them from default profile
+		
+			data = execute (getIniSetting Micra.DefaultProfileIni form_category form_name) --pickup saved data
+		)
+		if classOf data != Array do return undefined -- form data not found
+		--format "mcFile > loadIniDialog > data:%\n" data
+		mcBounds pos:data[2] size:data[3]
 	),
 	fn backupMicraFile source_file = (
 	
@@ -236,62 +314,6 @@ struct MICRA_FILE (
 			mergeMAXFile f #noRedraw #mergeDups #useMergedMtlDups #neverReparent #select -- #promptDups
 			local obj  = selection[1]
 			if obj != undefined do obj.name = getFilenameFile f
-		)
-	),
-	--mcFile.getIniDataFromArray Micra.TempProfileIni "Properties_2" "mcColorPickerDialog" 2
-	fn getIniDataFromArray iniFile head key arrNum =
-	(
-		if classOf iniFile != string  do return undefined
-		if classOf head    != string  do return undefined
-		if classOf key     != string  do return undefined
-		if classOf arrNum  != integer do return undefined
-		
-		if not doesFileExist iniFile do return undefined
-		if head == "" 
-		then 
-		(
-			return (getIniSetting iniFile)
-		)
-		if key == "" 
-		then
-		(
-			return (getIniSetting iniFile head)
-		)
-		if arrNum == 0 
-		then
-		(
-			return (getIniSetting iniFile head key)
-		)
-		else 
-		(
-			local data  = execute (getIniSetting iniFile head key)
-			--format "ini:%\thead:%\tkey:%\tarrnum:%\n" iniFile head key arrNum
-			if classOf data != array do return undefined
-			return data[arrNum]
-		)
-	),
-	--mcFile.setIniDataToArray Micra.TempProfileIni "Properties_2" "mcColorPickerDialog" 2 newValue
-	fn setIniDataToArray iniFile head key arrNum newValue =
-	(
-		if classOf iniFile  != string  do return undefined
-		if classOf head     != string  do return undefined
-		if classOf key      != string  do return undefined
-		if classOf arrNum   != integer do return undefined
-		--if classOf newValue != string do return undefined
-		
-		if not doesFileExist iniFile do return undefined
-		
-		if arrNum != 0 
-		then
-		(
-			local data = execute (getIniSetting iniFile head key)
-			if classOf data != array do return undefined
-			data[arrNum] =  newValue
-			setIniSetting iniFile head key (data as string)
-		)
-		else
-		(
-			setIniSetting iniFile head key newValue
 		)
 	),
 	--load icon from file

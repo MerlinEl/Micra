@@ -1,14 +1,74 @@
 Global mcTemplateDialog 
-struct mcTemplateDialog (
+
+struct MICRA_CORE_STRUCT (
+			
+	--local variables
+	form_size		= [746, 516],
+	form_pos		=[200, 200],
+	bar_height		= 14,
+	border_offset	= 2,
+	btn_size        	= 24,
+	--Interface components
+	form	= dotNetObject "MaxCustomControls.Maxform",
+	lblT		= dotNetObject "label",
+	fn  close = (form.hide())
+)
+		
+struct DOTNET_MAIN_STRUCT (
 	
-	mcs, dia, 
-	fn clone source = (
-		mcs = source()  --structure instance
-		dia = mcs.form --pick form
+public
+	name,
+	mcs = MICRA_CORE_STRUCT(),
+	inst = "123",
+private	
+	fn init = (
+		
+		mcs.form.name = name
+		mcs.form.ControlBox  = false --hide main bar
+		mcs.form.ShowInTaskbar = false
+		mcs.form.StartPosition = mcs.form.StartPosition.Manual
+		mcs.form.bounds = mcDotnet.dRect mcs.form_pos mcs.form_size
+		mcs.form.FormBorderStyle = mcs.form.FormBorderStyle.none
+		mcs.form.BackColor = mcDotnet.uiColor #fore
+		mcs.form.opacity = 1 ---mcUIColors.get #opacity
+		
+		--toolbar
+		mcs.lblT.bounds = mcDotnet.dRect [mcs.border_offset, mcs.border_offset] [mcs.form_size.x - mcs.border_offset*10 , mcs.bar_height]
+		mcs.lblT.BackColor = mcDotnet.uiColor #back
+		mcs.lblT.ForeColor = mcDotnet.uiColor #text
+		mcs.lblT.Text = "Dialog Template v" + (Micra.getScriptVersion "Dialog_Template") --update script title with version
+		
+		--dia = mcs.form
+		fn onLblTMouseUp s a = ( if a.Button == a.Button.right then format "mouse up:%\n" inst) --stop drag or close  s.parent.mcs.close()
+		dotNet.addEventHandler mcs.lblT	"MouseUp"	onLblTMouseUp
+		
+		--Add Controls
+		mcs.form.controls.addRange ( #(mcs.lblT)  )
+		mcs --return interface struct
+	),
+	-- Default Functions
+private	
+	fn onOpenForm s a = (),
+	/*fn onCreate = (
+		
+		format "form hass beeen created!\n"
+		init()
+	),*/
+	--mcs = onCreate(),
+public
+	fn open = (
+
+		init()
+		format "open form:% class mcs:%\n" name mcs
+		mcs.form.show()
 	)
 )
+mcTemplateDialog = DOTNET_MAIN_STRUCT "mcTemplateDialog"
+cr = mcTemplateDialog.open()
+
+/*
 if ::mcTemplateDialog != undefined do try(mcTemplateDialog.Close())catch()
-struct DOTNET_FORM_STRUCT (
+struct DOTNET_MAIN_STRUCT (
 
 	-- Default Properties
 	form = dotNetObject "MaxCustomControls.Maxform",
@@ -120,4 +180,5 @@ struct DOTNET_FORM_STRUCT (
 	),
 	initIt = init "mcTemplateDialog" 
 )
-mcTemplateDialog.clone DOTNET_FORM_STRUCT --structure shortcut
+mcTemplateDialog.clone DOTNET_MAIN_STRUCT --structure shortcut
+*/

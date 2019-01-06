@@ -11,7 +11,7 @@ Global Micra
 
 struct MICRA_STRUCTURE (
 
-	debug				= true,
+	debug				= false, --true == show forms bounded to windows interface (Notepad++)
 	loaded				= false,
 	version				= "Micra IV",
 	username			= substituteString sysInfo.username " " "_", --replace wihitespaces with "_"

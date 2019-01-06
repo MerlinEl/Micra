@@ -71,6 +71,12 @@ si.w -- 20
 Struct mcSize (w, h)
 
 /*
+bo = mcBounds [0, 0] [200, 400]
+bo.pos -- [0, 0]
+*/
+Struct mcBounds (pos, size)
+
+/*
 re = rect()
 rct = re mi:[0,10] ma:[40,60]
 rct.wi()

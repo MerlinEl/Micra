@@ -42,7 +42,11 @@ Struct MICRA_DOTNET (
 	*/
 	fn mColor dclr = (color dclr.r dclr.g dclr.b dclr.a),
 	fn dBitmap size     = (dotNetObject "Drawing.Bitmap" size.x size.y),
-	fn dPoint pos       = (dotnetObject "Drawing.Point" pos.x pos.y),
+	fn dPoint pos       = (
+		
+		if classOf pos != Point2 do (format "mcDotnet > dPoint > Error at: pos:%\n" pos; return undefined)
+		dotnetObject "Drawing.Point" pos.x pos.y
+	),
 	fn dRect pos size   = (dotnetObject "Drawing.Rectangle" pos.x pos.y size.x size.y),
 	fn dSize size       = (dotNetObject "Drawing.Size" size.x size.y),
 	fn dFont font:"Arial" size:12 style:"Regular" =
@@ -131,7 +135,12 @@ Struct MICRA_DOTNET (
 		--get last position from Properties_2
 		if saved_pos do (
 			
-			local dpos   = (mcFile.getIniDataFromArray Micra.TempProfileIni "Properties_2" form.name 2)
+			local dpos   = (mcFile.getIniDataFromArray Micra.TempProfileIni "Properties_2" form.name 2) --return Point2 or undefined
+			if classOf dpos != Point2 then ( --first entry
+				
+				format "mcDotnet > dShow > Form [  % ] is not saved, pos:%\n" form.text pos
+				dpos = [0,0] --set default pos
+			)
 			form.Location = dPoint dpos
 		)
 		if bind_to_windows do ( --unbind form from 3DsMax (test mode for Notepad++)
@@ -147,6 +156,11 @@ Struct MICRA_DOTNET (
 		--form.show(WindowWrapper) --good one try it later
 		--form.showModeless()
 		--dotNet.setLifeTimeControl form #dotNet --it’s generally a good idea to let the .NET garbage collector take care of the .NET objects, instead of the Max’s one.
+	),
+	fn dClose form saved_pos:true = ( --not used yet
+	
+		if form == undefined or form.IsDisposed or not form.visible do return false
+		form.close()
 	)
 )	
  --create instance

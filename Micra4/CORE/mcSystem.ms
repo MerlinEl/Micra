@@ -182,7 +182,7 @@ struct mcSystem (
 	),
 	fn showActionSource action_name = (
 		
-		local data = getActionByName action_name -- mcObject(name:action_name, category:action_category, val:data_array)
+		local data = mcSystem.getActionByName action_name -- mcObject(name:action_name, category:action_category, val:data_array)
 		if data == undefined do return false
 		local action_with_cmd = (data.get "val")[2] --(mcAnimation.reverse 0 10 ||  Micra.fileInVersion \"Paint_Selection\"")[2]
 		local action_type = if findString action_with_cmd "Micra.fileInVersion" == undefined then "function" else "file"
