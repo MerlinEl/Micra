@@ -133,7 +133,7 @@ MacroScript ShowHideCage
 category:"Micra"
 toolTip:""
 (
-	On IsEnabled Return (classOf mcPoly== StructDef and mcPoly.isInPoly())
+	On IsEnabled Return (Micra != undefined and mcPoly.isInPoly())
 	(
 		selection[1].showCage = (not selection[1].showCage)
 	)
@@ -143,7 +143,7 @@ MacroScript SoftSelection
 category:"Micra"
 toolTip:""
 (
-	On IsEnabled Return (classOf mcPoly == StructDef and mcPoly.isInPoly() and Micra.fileInVersion != undefined)
+	On IsEnabled Return (Micra != undefined and mcPoly.isInPoly() and Micra.fileInVersion != undefined)
 	On Execute Do (Micra.fileInVersion "Soft_Selection")
 	
 )

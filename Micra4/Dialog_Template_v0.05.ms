@@ -31,6 +31,9 @@ public
 	--Open / Close (with default setup, save position to INI)
 	fn open = (if iskindof form dotnetobject do mcDotnet.dShow form),
 	fn close = (if iskindof form dotnetobject do form.Close()),
+	fn getName = ( title ),
+	fn getPos = ( [form.location.x, form.location.y] ),
+	fn getSize = ( [form.width, form.height] ),
 private
 	--Move / Snap Dialog /
 	fn onLblTMouseMove s a = (  --drag form
