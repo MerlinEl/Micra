@@ -11,7 +11,13 @@ Global Micra
 
 struct MICRA_STRUCTURE (
 
-	debug				= false, --true == show forms bounded to windows interface (Notepad++)
+	/**
+	@Usage Debug Micra and Tools
+	@Legend
+		0 : debug disabled
+		8 : show forms bounded to windows interface (Notepad++)
+	*/
+	debug				= 0,
 	loaded				= false,
 	version				= "Micra IV",
 	username			= substituteString sysInfo.username " " "_", --replace wihitespaces with "_"

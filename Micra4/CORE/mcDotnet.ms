@@ -12,7 +12,6 @@
 */
 Struct MICRA_DOTNET (
 	
-	bind_to_windows = true,
 	ByteClass   = (dotNetClass "System.Byte"),
 	Cursors     = (dotNetClass "Cursors"),
 	DragDropEffect = (dotNetClass "DragDropEffects"),
@@ -72,16 +71,16 @@ Struct MICRA_DOTNET (
 		local img_lib_size = [img_lib.width, img_lib.height]
 		local icnCount  = (img_lib_size/icnSize)
 		icnNum -= 1
-	if debug == 5 do format "lib size:% icn count:%\n"	img_lib_size icnCount	
+	if debug == 5 do format "mcDotnet > lib size:% icn count:%\n"	img_lib_size icnCount	
 		local X = (mod icnNum icnCount.x)
 		local Y = (icnNum / icnCount.y) as integer
-	if debug == 5 do format "x:% y:%\n" x y		
+	if debug == 5 do format "mcDotnet > x:% y:%\n" x y		
 		local pix_x = X * icnSize
 		local pix_y = Y * icnSize
 		
 		local pos = [pix_x, pix_y]
 		
-	if debug == 5 do format "ic_num:%\ticon pos in img_lib:%\n" icnNum pos
+	if debug == 5 do format "mcDotnet > ic_num:%\ticon pos in img_lib:%\n" icnNum pos
 
 		local icon = (dotNetObject "Drawing.Bitmap" w h) --Create new bitmap object
 		--icon.ColorDepth = icon.ColorDepth.Depth24Bit
@@ -143,11 +142,11 @@ Struct MICRA_DOTNET (
 			)
 			form.Location = dPoint dpos
 		)
-		if bind_to_windows do ( --unbind form from 3DsMax (test mode for Notepad++)
+		if Micra.debug == 8 do ( --unbind form from 3DsMax (test mode for Notepad++)
 		
 			form.topMost = true
 			form.show()
-			format ("form [ % ] start bounded in to windows.\n") form.name
+			format ("mcDotnet > form [ % ] start bounded in to windows.\n") form.name
 			return OK
 		)
 		local hv = maxHW ()
