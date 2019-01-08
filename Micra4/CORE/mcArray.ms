@@ -50,6 +50,11 @@ struct MCRA_ARRAY (
 		deleteItem arr index
 		--format "rest of arr:%\n" arr
 		true
+	),
+	fn sortByName arr = ( --not used not tested
+	
+		fn compareNames str1 str2 = stricmp str1.name str2.name
+		qSort arr compareNames
 	)
 )
 --create instance
