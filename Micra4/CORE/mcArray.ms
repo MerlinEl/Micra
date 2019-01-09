@@ -59,3 +59,11 @@ struct MCRA_ARRAY (
 )
 --create instance
 Global mcArray = Micra.instanceStructure MCRA_ARRAY "mcArray"
+
+
+
+--sort keys with labels at end (allow mouse hit on other components)
+/*format "A > keys:%\n" keys
+fn compareLabels str1 str2 =  str1.key == "lbl"
+qSort keys compareLabels
+format "B > keys:%\n" keys*/

@@ -6,20 +6,10 @@
   ---------------------------------------------------
 --------------------------------------------------
 
-Global mcGM
-Global mc_Dialog_A
-Global mc_Dialog_B
-Global mc_Dialog_C
-Global mc_Dialog_D
-Global mc_Dialog_E
-Global mc_Dialog_F
-Global mc_Dialog_G
-Global mc_Dialog_H
-Global mc_Dialog_I
-Global mc_Dialog_J
+Global mc_Dialog_Default
 Global mcFormSnap
 Global getIconDotNet
-Global mcCreateNetDynamicDialog
+Global mcCreateNetDinamicDialog
 
 (
 	--------------------------------------
@@ -32,25 +22,27 @@ Global mcCreateNetDynamicDialog
 	local form_offset     = 4
 	local btn_size        = 24
 	local count_limit     = 40
+	local clr_back     = execute (mcFile.saveLoadIniSetings head:head_str key:"backcolor" action:#load)
+	local clr_fore     = execute (mcFile.saveLoadIniSetings head:head_str key:"forecolor" action:#load)
+	local clr_sel      = execute (mcFile.saveLoadIniSetings head:head_str key:"selected"  action:#load)
+	local clr_mark     = execute (mcFile.saveLoadIniSetings head:head_str key:"marked"  action:#load)
+	local clr_btn      = execute (mcFile.saveLoadIniSetings head:head_str key:"button"   action:#load)
+	local clr_inact    = execute (mcFile.saveLoadIniSetings head:head_str key:"inactive"  action:#load)
+	local clr_text     = execute (mcFile.saveLoadIniSetings head:head_str key:"textcolor"  action:#load)
+	local clr_seltext  = execute (mcFile.saveLoadIniSetings head:head_str key:"seltext"  action:#load)
+	local form_opacity = execute (mcFile.saveLoadIniSetings head:head_str key:"opacity"  action:#load)
 	local debug = 0
 	local dataformats    = dotnetclass "dataformats"
-	local dnd_id = "Micra Form DragAndDrop" --Drag and drop ID. Defines where is allowed drop.
 	-----------------------------------------
 	
 	--Local scope function (Inicializes many times)
 	
 	-----------------------------------------
-	--fn createFormInstance dname = (execute ( dname + "= dotNetObject \"form\" " ) ) --none time for each new dialog
-	fn createFormInstance dname = (execute ( dname + "= dotNetObject \"MaxCustomControls.Maxform\" " ) ) --none time for each new dialog
+	fn createFormInstance dname = (execute ( dname + "= dotNetObject \"form\" " ) ) --none time for each new dialog
 	fn getHandles components =
 	(
 		for i = 0 to components.count-1 do 
 		try(format "Item:%\t Item_Handle:%\n" components.item[i] components.item[i].handle)catch (print "no handle")
-	)
-	fn defNWin = (
-		local nw = DotNetObject "NativeWindow"
-		nw.AssignHandle (DotNetObject "System.IntPtr" (Windows.GetMaxHWND())) 
-		return nw
 	)
 	--------------------------------------
 
@@ -62,7 +54,6 @@ Global mcCreateNetDynamicDialog
 	(
 		
 	)
-	--fn onBtnMouseUp s a = (enableAccelerators = true; print "mouse up") --set focus to viewport
 	fn onBtnMouseClick s a = --execute action
 	(
 		--if mouse is not on button return false
@@ -73,176 +64,95 @@ Global mcCreateNetDynamicDialog
 		
 if debug == 5 do format "name:%\t tag:%\n" s.name s.tag	
 		if s.parent.parent.tag.value.edit_mode do return false
-		if a.Button == a.Button.left do mcSystem.runAction s.tag	
-	)
---| --DragAndDrop
-	--btn:dotNetObject:System.Windows.Forms.ToolStripMenuItem args:dotNetObject:System.EventArgs
-	fn actionAddRemoveModify s a = (
-		
-		--Send parameter > Depends on choice
-		local action_mode = case s.Text of (
-			
-			"Add Action...":"add"
-			"Edit Action...":"edit"
-			"Create Action...":"create"
-			"Remove Action...":(
-			
-				local btn = mcGM.getParam "active_button"
-				if btn == undefined do return false
-				format "Remove Action in btn:%\n" btn.tag
-				local mcs = btn.parent.parent.tag.value
-				mcs.ToolTip.SetToolTip btn ""
-				btn.image = undefined
-				btn.tag = undefined
-				delINISetting Micra.TempProfileIni "Buttons" btn.name
-				delINISetting Micra.TempProfileIni "Icons" btn.name
-				undefined
-			)		
-		)
-		--Send parameter > Open Customize Dialog
-		--format "set action mode to:%\n" action_mode
-		if action_mode != undefined do (
-			
-			mcGM.setParam "action_editor_switch" action_mode
-			Micra.fileInVersion "Customize"
+		if a.Button == a.Button.left do (
+			--if action is assinged in this button progress
+			if s.tag != undefined do mcSystem.runAction s.tag 
 		)
 	)
+--| --DragAndDrop	
 	fn onMousedown s a = --drag start
 	(
 		local btn_a = s
 		local btn_b
-		local formA = btn_a.parent.parent
-		local mcsA = formA.tag.value --Form tag struct
-		if not mcsA.edit_mode do return false  --Enabled only in Edit Mode
-		
-		case a.Button.ToString() of
+		local mcsA = btn_a.parent.parent.tag.value --form tag struct
+
+		if mcsA.edit_mode and btn_a.image != undefined do  --Enabled only in Edit Mode
 		(
-			"Left": --DragAndDrop 
-			(		
-				if  btn_a.image != undefined do
-				(
-					-- this actually starts the drag and drop process
-					-- simultaneously copy dnd_id to clipboard
-					btn_a.DoDragDrop (netString dnd_id) netDragDropEffect.copy -- (modal)
-					
-					--final draAndDrop sequence
-					btn_b = mcGM.getParam "form_drop_data" --get drop data from memory
-
-					if btn_b != undefined then --if button A draged in to button B
-					(
-						local mcsB = btn_b.parent.parent.tag.value
-						if btn_b.tag != undefined 
-						then --swap actions and icons
-						(
-							--swap tooltips
-							local tltA = (mcsA.ToolTip.GetToolTip btn_a)--get tooltipA
-							local tltB = (mcsB.ToolTip.GetToolTip btn_b)--get tooltipB
-
-							mcsA.ToolTip.SetToolTip btn_a tltB
-							mcsB.ToolTip.SetToolTip btn_b tltA
-							--swap images
-							local img = btn_a.Image --get imageA
-							btn_a.Image = btn_b.Image 
-							btn_b.Image = img
-							--swap tags
-							local tag = btn_a.tag --get tagA
-							btn_a.Tag = btn_b.Tag
-							btn_b.Tag = tag
-							--save Settings
-							setINISetting Micra.TempProfileIni "Buttons" btn_a.name btn_a.tag
-							setINISetting Micra.TempProfileIni "Buttons" btn_b.name btn_b.tag
-							local icn_numA = getINISetting Micra.TempProfileIni "Icons" btn_a.name
-							local icn_numB = getINISetting Micra.TempProfileIni "Icons" btn_b.name			
-							setINISetting Micra.TempProfileIni "Icons" btn_a.name icn_numB
-							setINISetting Micra.TempProfileIni "Icons" btn_b.name icn_numA
-						)
-						else --copy if buttonB is empty
-						(
-							mcsB.ToolTip.SetToolTip btn_b (mcsA.ToolTip.GetToolTip btn_a) --copy tooltip
-							--btn_b.Cat = btn_a.name
-							btn_b.Image = btn_a.Image --copy image
-							btn_b.Tag = btn_a.tag --copy tag
-							--save Settings
-							local icn_numA = getINISetting Micra.TempProfileIni "Icons" btn_a.name
-							setINISetting Micra.TempProfileIni "Buttons" btn_b.name btn_b.tag
-							setINISetting Micra.TempProfileIni "Icons"   btn_b.name icn_numA
-							
-							btn_a.image = undefined
-							btn_a.tag = undefined
-							mcsA.ToolTip.SetToolTip btn_a ""
-							delINISetting Micra.TempProfileIni "Buttons" btn_a.name
-							delINISetting Micra.TempProfileIni "Icons" btn_a.name
-						)
-					)
-					else --remove button action (if button A draget out, in to free space)
-					(
-						btn_a.image = undefined
-						btn_a.tag = undefined
-						mcsA.ToolTip.SetToolTip btn_a ""
-						delINISetting Micra.TempProfileIni "Buttons" btn_a.name
-						delINISetting Micra.TempProfileIni "Icons" btn_a.name
-					)
-					mcGM.setParam "form_drop_data" undefined --clear dorop data memory
-				)
-			)
-			"Middle":
-			(
-				
-			)
-			"Right": --RC Menu
-			(
+			btn_a.DoDragDrop (netString "Micra Form DragAndDrop") netDragDropEffect.copy --modal
 			
-				--TODO Focus on method transfer button info
-				--if button mode edit > set customize SaveAction to true else false
-				--if button mode add > set all to false (only drag and drop is allowed)
-				--if button mode create > set customize AddAction to true else false
-				--if button mode create > do not open customize
-				local mco = mcObject()
-				mco.addMore #(
+			--final draAndDrop sequence
+			btn_b = mc_Form_Drop_Data
 
-					mcItem "dialog" formA,
-					mcItem "button" btn_a,
-					mcItem "action_category" (substring mcsA.lblT.text 1 (mcsA.lblT.text.count-1)),
-					mcItem "action_name" btn_a.tag,
-					mcItem "button_id" btn_a.name
+			if btn_b != undefined then --if button A draged in to button B
+			(
+				local mcsB = btn_b.parent.parent.tag.value
+				if btn_b.tag != undefined 
+				then --swap actions and icons
+				(
+					--swap tooltips
+					local tltA = (mcsA.ToolTip.GetToolTip btn_a)--get tooltipA
+					local tltB = (mcsB.ToolTip.GetToolTip btn_b)--get tooltipB
+
+					mcsA.ToolTip.SetToolTip btn_a tltB
+					mcsB.ToolTip.SetToolTip btn_b tltA
+					--swap images
+					local img = btn_a.Image --get imageA
+					btn_a.Image = btn_b.Image 
+					btn_b.Image = img
+					--swap tags
+					local tag = btn_a.tag --get tagA
+					btn_a.Tag = btn_b.Tag
+					btn_b.Tag = tag
+					--save Settings
+					setINISetting Micra.TempProfileIni "Buttons" btn_a.name btn_a.tag
+					setINISetting Micra.TempProfileIni "Buttons" btn_b.name btn_b.tag
+					local icn_numA = getINISetting Micra.TempProfileIni "Icons" btn_a.name
+					local icn_numB = getINISetting Micra.TempProfileIni "Icons" btn_b.name			
+					setINISetting Micra.TempProfileIni "Icons" btn_a.name icn_numB
+					setINISetting Micra.TempProfileIni "Icons" btn_b.name icn_numA
 				)
-				mcGM.setParam "action_editor_data" mco
-		
-				---format "active dialog:% button:% category:% action:% id:%\n" active_dialog active_button category_name action_name button_id
-				
-				mcGM.setParam "active_button" btn_a --keep button in memeory
-
-				
-				--local dtitle = 
-				
-				local action_exists = (btn_a.Image != undefined) 
-				mcsA.mnu2_add_action.enabled = not action_exists
-				mcsA.mnu2_edit_action.enabled = action_exists
-				mcsA.mnu2_create_action.enabled = not action_exists
-				mcsA.mnu2_remove_action.enabled = action_exists
-
-				mcsA.mnu2.Show ( s.PointToScreen a.location ) --show menu	
+				else --copy if buttonB is empty
+				(
+					mcsB.ToolTip.SetToolTip btn_b (mcsA.ToolTip.GetToolTip btn_a) --copy tooltip
+					btn_b.Image = btn_a.Image --copy image
+					btn_b.Tag = btn_a.tag --copy tag
+					--save Settings
+					local icn_numA = getINISetting Micra.TempProfileIni "Icons" btn_a.name
+					setINISetting Micra.TempProfileIni "Buttons" btn_b.name btn_b.tag
+					setINISetting Micra.TempProfileIni "Icons"   btn_b.name icn_numA
+					
+					btn_a.image = undefined
+					btn_a.tag = undefined
+					mcsA.ToolTip.SetToolTip btn_a ""
+					delINISetting Micra.TempProfileIni "Buttons" btn_a.name
+					delINISetting Micra.TempProfileIni "Icons" btn_a.name
+				)
 			)
+			else --remove button action (if button A draget out, in to free space)
+			(
+				btn_a.image = undefined
+				btn_a.tag = undefined
+				mcsA.ToolTip.SetToolTip btn_a ""
+				delINISetting Micra.TempProfileIni "Buttons" btn_a.name
+				delINISetting Micra.TempProfileIni "Icons" btn_a.name
+			)
+			mc_Form_Drop_Data = undefined
 		)
 	)
-	fn onDragenter s a = --draging item ower interface
+	fn onDragenter s a = --draging ower interface
 	(
-		--format "Dialog Creator > onDragenter > s:% a%:\n" s a
 		local mcs = s.parent.parent.tag.value --form tag struct
 		if not mcs.edit_mode do return false --Enabled only in Edit Mode
-		if not a.Data.GetDataPresent(DataFormats.text) do return false --check if ID string  is in clipboard
-		local clipboard_text = a.data.GetData(DataFormats.text) --catch ID string from clipboard
-		if clipboard_text == dnd_id do
+		if a.Data.GetDataPresent(DataFormats.text) and (a.data.GetData(DataFormats.text)) == "Micra Form DragAndDrop" do
 		(
 			a.Effect = netDragDropEffect.copy --enable drag mouse effect
 		)
 	)
 	fn onDragdrop  s a = --drag end
 	(
-		--format "Dialog Creator > onDragdrop > s:% a%:\n" s a
 		local mcs = s.parent.parent.tag.value --form tag struct
 		if not mcs.edit_mode do return false  --Enabled only in Edit Mode
-		mcGM.setParam "form_drop_data" s --store hited element
+		mc_Form_Drop_Data = s --store hited element
 	)
 --||
 	fn generateButtons form style:undefined =
@@ -273,7 +183,7 @@ if debug == 5 do format "name:%\t tag:%\n" s.name s.tag
 			local btn   = dotNetObject "Button"
 			btn.size   = netDrSize [btn_size, btn_size]
 			btn.flatstyle = btn.flatstyle.flat
-			btn.FlatAppearance.BorderColor = netDrColor (mcUIColors.get #back)
+			btn.FlatAppearance.BorderColor = netDrColor clr_back
 			btn.AllowDrop = true
 			btn.FlatAppearance.BorderSize = 1
 			--btn.cursor = btn.cursor.Current
@@ -285,7 +195,6 @@ if debug == 5 do format "name:%\t tag:%\n" s.name s.tag
 			
 			dotNet.addEventHandler btn "MouseClick"   onBtnMouseClick --"MouseClick" 
 			dotNet.addEventHandler btn "MouseDown" onMousedown
-			--dotNet.addEventHandler btn "MouseUp" onBtnMouseUp
 			dotNet.addEventHandler btn "DragEnter"  onDragenter
 			dotNet.addEventHandler btn "DragDrop"  onDragdrop
 			mcs.bobjects += #(btn)
@@ -407,8 +316,8 @@ if debug == 5 do format "name:%\t tag:%\n" s.name s.tag
 		(
 			(a.button.right)  : 
 			(
-				form.tag.value.mnu1.tag = form
-				form.tag.value.mnu1.Show ( s.PointToScreen a.location ) --show menu
+				form.tag.value.mnu.tag = form
+				form.tag.value.mnu.Show ( s.PointToScreen a.location ) --show menu
 			)
 			(a.button.left )  : 
 			(
@@ -426,30 +335,30 @@ if debug == 5 do format "name:%\t tag:%\n" s.name s.tag
 		mcs.btnHL.FlatStyle = mcs.btnHR.FlatStyle.flat
 		mcs.btnHL.text = "-"
 		mcs.btnHL.tag = "HL"
-		mcs.btnHL.BackColor = netDrColor (mcUIColors.get #btn) --(color 124 196 22)
+		mcs.btnHL.BackColor = netDrColor clr_btn --(color 124 196 22)
 		
 		mcs.btnHR.FlatStyle = mcs.btnHR.FlatStyle.flat
 		mcs.btnHR.text = "+"
 		mcs.btnHR.tag = "HR"
-		mcs.btnHR.BackColor = netDrColor (mcUIColors.get #btn) --(color 124 196 22)
+		mcs.btnHR.BackColor = netDrColor clr_btn --(color 124 196 22)
 		
 		mcs.btnVU.FlatStyle = mcs.btnHR.FlatStyle.flat
 		mcs.btnVU.text = "-"
 		mcs.btnVU.tag = "VU"
-		mcs.btnVU.BackColor = netDrColor (mcUIColors.get #btn) --(color 124 196 22)
+		mcs.btnVU.BackColor = netDrColor clr_btn --(color 124 196 22)
 	
 		mcs.btnVD.FlatStyle = mcs.btnHR.FlatStyle.flat
 		mcs.btnVD.text = "+"
 		mcs.btnVD.tag = "VD"
-		mcs.btnVD.BackColor = netDrColor (mcUIColors.get #btn) --(color 124 196 22)
+		mcs.btnVD.BackColor = netDrColor clr_btn --(color 124 196 22)
 		
 		mcs.lblH.TextAlign = mcs.lblH.TextAlign.MiddleCenter
-		mcs.lblH.BackColor = netDrColor (mcUIColors.get #back) --(color 84 132 15)
+		mcs.lblH.BackColor = netDrColor clr_back --(color 84 132 15)
 		mcs.lblH.text = ( mcs.columns as integer) as string
 		mcs.lblH.tag = "LH"
 		
 		mcs.lblV.TextAlign = mcs.lblH.TextAlign.MiddleCenter
-		mcs.lblV.BackColor = netDrColor (mcUIColors.get #back) --(color 84 132 15)
+		mcs.lblV.BackColor = netDrColor clr_back --(color 84 132 15)
 		mcs.lblV.tag = "LV"
 		mcs.lblV.text = (mcs.rows as integer) as string
 				
@@ -459,7 +368,6 @@ if debug == 5 do format "name:%\t tag:%\n" s.name s.tag
 		dotNet.addEventHandler mcs.btnVD "MouseClick" manageInterface
 	)
 	fn onCloseForm s a = (mcFile.saveIniDialog s.name "Properties_1") --mabe add: if not s.visible do ()
-	fn changeBackcolor s a = (s.backColor = netDrColor (mcUIColors.get #fore))
 --|	--Menu
 	fn hideForm s a = ((s.GetCurrentParent()).tag.hide())
 	fn editForm s a form: =
@@ -541,7 +449,7 @@ if debug == 5 do format "name:%\t tag:%\n" s.name s.tag
 		mcs.edit_box.show()
 		mcs.edit_box.focus()
 	)
---|| edit switch
+--||
 	fn onLblTDoubleClick s a =
 	(
 		local form  =  s.parent
@@ -554,78 +462,67 @@ if debug == 5 do format "name:%\t tag:%\n" s.name s.tag
 	--Inicialize
 	fn inicializeInterface form  style:#compact title:"undefined" pos:undefined =
 	(
-		local mcs = form.tag.value 
+		local mcs = form.tag.value
 		--Interface Setup
 		form.ControlBox  = false --hide main bar
 		form.StartPosition = form.StartPosition.Manual
 		form.Location = netDrPoint pos
 		--form.Bounds = netDrRect [200, 100] [form_size.x, form_size.y]
 		form.FormBorderStyle = form.FormBorderStyle.none
-		form.BackColor = netDrColor (mcUIColors.get #fore) --yellow
+		form.BackColor = netDrColor clr_fore --yellow
 		form.MinimumSize = netDrSize [btn_size, bar_height]
 		form.MaximumSize = netDrSize [btn_size*count_limit, btn_size*count_limit]
 		form.ShowInTaskbar = false
-		form.opacity = (mcUIColors.get #opacity)
+		form.opacity = form_opacity
 		
 		mcs.ToolTip.IsBalloon = true
-		mcs.ToolTip.BackColor = netDrColor (mcUIColors.get #back)
-		mcs.ToolTip.ForeColor = netDrColor (mcUIColors.get #text)
+		mcs.ToolTip.BackColor = netDrColor clr_back
+		mcs.ToolTip.ForeColor = netDrColor clr_text
 		mcs.ToolTip.AutoPopDelay = 5000
 		mcs.ToolTip.InitialDelay = 400
 		mcs.ToolTip.ReshowDelay = 100
 		mcs.ToolTip.ShowAlways = true
 		
-		mcs.mnu1.BackColor = netDrColor (mcUIColors.get #back)
-		mcs.mnu1.ForeColor = netDrColor (mcUIColors.get #text)
-		mcs.mnu1.ShowImageMargin = false
+		mcs.mnu.BackColor = netDrColor clr_back
+		mcs.mnu.ForeColor = netDrColor clr_text
+		mcs.mnu.ShowImageMargin = false
 		
-		mcs.mnu2.BackColor = netDrColor (mcUIColors.get #back)
-		mcs.mnu2.ForeColor = netDrColor (mcUIColors.get #text)
-		mcs.mnu2.ShowImageMargin = false
-		
-		mcs.lblT.BackColor = netDrColor (mcUIColors.get #back) --(color 84 132 15)
-		mcs.lblT.ForeColor = netDrColor (mcUIColors.get #text)
-		mcs.lblT.text = title --Dialog Title 
+		mcs.lblT.BackColor = netDrColor clr_back --(color 84 132 15)
+		mcs.lblT.ForeColor = netDrColor clr_text
+		mcs.lblT.text = title
 		--.ContextMenu : 	undefined
 		--.ContextMenuStrip : undefined
 		--.Parent : 	undefined
 		
 		mcs.btnMin.FlatStyle = mcs.btnMin.FlatStyle.flat
-		mcs.btnMin.BackColor = netDrColor (mcUIColors.get #btn) --(color 124 196 22)
-		mcs.btnMin.ForeColor = netDrColor (mcUIColors.get #text)
+		mcs.btnMin.BackColor = netDrColor clr_btn --(color 124 196 22)
 		mcs.btnMin.text = "-"
 
-		mcs.tlp.backColor = netDrColor (mcUIColors.get #btn) --( green )
+		mcs.tlp.backColor = netDrColor clr_btn --( green )
 		
-		mcs.edit_box.BackColor= netDrColor (mcUIColors.get #back)
-		mcs.edit_box.ForeColor= netDrColor (mcUIColors.get #text)
+		mcs.edit_box.BackColor= netDrColor clr_back
+		mcs.edit_box.ForeColor= netDrColor clr_text
 		mcs.edit_box.size = netDrSize [form.width - form_offset, btn_size]
 		mcs.edit_box.BorderStyle = mcs.edit_box.BorderStyle.FixedSingle
-	
+
 		dotNet.addEventHandler mcs.btnMin "MouseClick"   minMaxForm
 		dotNet.addEventHandler mcs.lblT   "MouseMove" onLblTMouseMove
 		dotNet.addEventHandler mcs.lblT   "MouseDown" onLblTMouseDown 
 		dotNet.addEventHandler mcs.lblT   "MouseUp"   onLblTMouseUp --"MouseClick" 
 		dotNet.addEventHandler mcs.lblT   "DoubleClick" onLblTDoubleClick
 		
-		dotNet.addeventhandler mcs.mnu1_close "Click" hideForm
-		dotNet.addeventhandler mcs.mnu1_edit  "Click" editForm
-		dotNet.addeventhandler mcs.mnu1_lock  "Click" lockForm
-		dotNet.addeventhandler mcs.mnu1_ren  "Click" renameForm
-		
-		dotNet.addeventhandler mcs.mnu2_add_action "Click" actionAddRemoveModify
-		dotNet.addeventhandler mcs.mnu2_edit_action  "Click" actionAddRemoveModify
-		dotNet.addeventhandler mcs.mnu2_create_action  "Click" actionAddRemoveModify
-		dotNet.addeventhandler mcs.mnu2_remove_action  "Click" actionAddRemoveModify
+		dotNet.addeventhandler mcs.mnu_close "Click" hideForm
+		dotNet.addeventhandler mcs.mnu_edit  "Click" editForm
+		dotNet.addeventhandler mcs.mnu_lock  "Click" lockForm
+		dotNet.addeventhandler mcs.mnu_ren  "Click" renameForm
 		
 		dotnet.addEventHandler form "Closed" onCloseForm
 		dotnet.addEventHandler form "VisibleChanged" onCloseForm
-		dotnet.AddEventHandler form "BackColorChanged" changeBackcolor --thanks cyfer
-	
+		
 		form.controls.addRange(#(mcs.tlp, mcs.lblT, mcs.btnMin))
 	)
 	--START BUILDING
-	fn mcCreateNetDynamicDialog dname = 
+	fn mcCreateNetDinamicDialog dname = 
 	(
 		try (execute ( dname+".close()" )) catch()
 		
@@ -635,16 +532,11 @@ if debug == 5 do format "name:%\t tag:%\n" s.name s.tag
 		struct MICRA_COMPONENTS_STRUCT 
 		( 
 			ToolTip   = dotNetObject "ToolTip",
-			mnu1       = dotNetObject "ContextMenuStrip",
-			mnu1_close = mnu1.Items.Add "Close...",
-			mnu1_edit  = mnu1.Items.Add "Edit..." , 
-			mnu1_lock  = mnu1.Items.Add "Lock..." , 
-			mnu1_ren  = mnu1.Items.Add "Rename..." , 
-			mnu2   	   = dotNetObject "ContextMenuStrip",
-			mnu2_add_action = mnu2.Items.Add "Add Action...",
-			mnu2_edit_action  = mnu2.Items.Add "Edit Action..." , 
-			mnu2_create_action  = mnu2.Items.Add "Create Action...",
-			mnu2_remove_action  = mnu2.Items.Add "Remove Action...",
+			mnu       = dotNetObject "ContextMenuStrip",
+			mnu_close = mnu.Items.Add "Close...",
+			mnu_edit  = mnu.Items.Add "Edit..." , 
+			mnu_lock  = mnu.Items.Add "Lock..." , 
+			mnu_ren  = mnu.Items.Add "Rename..." , 
 			tlp       = dotNetObject "TableLayoutPanel",
 			btnMin    = dotNetObject "button"  ,
 			btnHL     = dotNetObject "button",
@@ -676,23 +568,19 @@ if debug == 5 do format "name:%\t tag:%\n" s.name s.tag
 		local dpos   = (mcFile.getIniDataFromArray Micra.TempProfileIni "Properties_1" dname 2)
 		local dtitle = (mcFile.getIniDataFromArray Micra.TempProfileIni "Properties_1" dname 4)
 		
-		inicializeInterface form style:#compact title:dtitle pos:dpos
-		generateButtons  form style:#start
-		resizeInterface    form style:#compact
-		
-		-- Shows the form with the specified owner (MAX) to the user (creatd by lo)
-		local nw = defNWin()
-		form.show(nw) 
-		nw.ReleaseHandle()
-		--form.showModeless()
+		inicializeInterface ( form ) style:#compact title:dtitle pos:dpos
+		generateButtons     ( form  ) style:#start
+		resizeInterface     ( form  ) style:#compact
+	
+		mcDotnet.dShow form
 	)
 )
 
 /*
-mcCreateNetDynamicDialog "mc_Dialog_F"
-mcCreateNetDynamicDialog "mc_Dialog_G"
-mcCreateNetDynamicDialog "mc_Dialog_H"
-mcCreateNetDynamicDialog "mc_Dialog_I"
+mcCreateNetDinamicDialog "mc_Dialog_F"
+mcCreateNetDinamicDialog "mc_Dialog_G"
+mcCreateNetDinamicDialog "mc_Dialog_H"
+mcCreateNetDinamicDialog "mc_Dialog_I"
 mc_Dialog_F.hide()
 mc_Dialog_F.show()
 */

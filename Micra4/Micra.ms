@@ -18,7 +18,7 @@ Global mc_Dialog_H
 Global mc_Dialog_I
 Global mc_Dialog_J
 Global mcMicraDialog
-Global mcDialogEditMode
+Global mcCustomizeDialog
 Global mcColorPaleteDialog
 Global mcCreateNetDynamicDialog
 Global mcGetNameAndColor
@@ -320,8 +320,8 @@ try ( mcMicraDialog.close() ) catch()
 			"Help":(Micra.fileInVersion "Help")
 			"Customize":
 			(
-				if classOf mcDialogEditMode == dotNetObject and not mcDialogEditMode.isDisposed  
-				then mcDialogEditMode.show()
+				if classOf mcCustomizeDialog == dotNetObject and not mcCustomizeDialog.isDisposed and not keyboard.controlPressed  --press ctrl to force reload
+				then mcCustomizeDialog.show()
 				else Micra.fileInVersion "Customize"
 			)
 			"Toolbars":

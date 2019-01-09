@@ -11,18 +11,47 @@
 */
 struct MICRA_STRING (
 
-	fn replaceSymbol str str_1 str_2 =
+	/**
+	*@Usage 
+		Trims all leading characters specified in trimChars from the given string and returns it. 
+		If trimChars is not specified, basic whitespace characters (space, tab, and newlines) are trimmed.
+	*/
+	fn trimLeftRight str trimChars:undefined = (
+	
+		if trimChars == undefined then (
+		
+			str = trimLeft str
+			str = trimRight str
+		) else (
+		
+			str = trimLeft str trimChars
+			str = trimRight str trimChars
+		)
+	),
+	/**
+	*@Example 
+		result = mcString.replaceInString "221, Micra.fileInVersion 3DGallery, 3D Gallery" ", " ","
+		"221,Micra.fileInVersion 3DGallery,3D Gallery"
+	*/
+	fn replaceInString str old_str new_str = (
+		
+		local pattern = "\\"+old_str
+		local rgx = dotnetObject "System.Text.RegularExpressions.Regex" pattern
+		rgx.Replace str new_str
+	),
+	--This one is old causing error when multiple string replace REMOVE (use replaceInString)
+	fn replaceSymbol str find_str new_str =
 	(
 		-->erorr block
-		if str   == undefined or classOf str   != String do return ""
-		if str_1 == undefined or classOf str_1 != String do return ""
-		if str_2 == undefined or classOf str_2 != String do return ""
+		if classOf str   != String do return ""
+		if classOf find_str != String do return ""
+		if classOf new_str != String do return ""
 		-->function
-		local str_1Pos = 0
-		while str_1Pos != undefined and not keyboard.escPressed do
-		( 	
-			local str_1Pos = findString str str_1
-			if str_1Pos   != undefined do str[str_1Pos] = str_2
+		local index = 0
+		while index != undefined and not keyboard.escPressed do ( 	
+		
+			local index = findString str find_str
+			if index != undefined do str[index] = new_str
 		)
 		str
 	),
@@ -55,7 +84,54 @@ struct MICRA_STRING (
 			integer:eval_str
 			default:undefined	
 		)
+	),
+	/**
+	*@Exmaple
+		mcString.replaceSpaces "This string has too many spaces." "_"
+	*/
+	fn replaceSpaces input new_str = (
+	
+		local pattern = @"\s+"
+		local rgx = dotnetObject "System.Text.RegularExpressions.Regex" pattern
+		rgx.Replace input new_str
 	)
 )
  --create instance
 Global mcString = Micra.instanceStructure MICRA_STRING "mcString"
+
+
+
+/*
+	--fn replaceInString input find_str new_str = (
+	--str.replace(/\s/gi, "_"); 
+	--)
+
+REGEX
+	----------------------------------------------------------------------------------------------------------------------
+	--Replace space(s) with none another character
+	----------------------------------------------------------------------------------------------------------------------
+	
+	pattern = @"\s+"
+	input =  "This is       text with        far  too       much       whitespaces"
+	rgx = dotnetObject "System.Text.RegularExpressions.Regex" pattern
+	result = rgx.Replace input " "
+	print input
+	format "Pattern is : %\n" (rgx.toString())
+	print result
+	
+	"This is       text with        far  too       much       whitespaces"
+	"This is text with far too much whitespaces"
+	
+	----------------------------------------------------------------------------------------------------------------------
+	--Check if pattern is match
+	----------------------------------------------------------------------------------------------------------------------
+	
+	str = "maps/nature/water_canals_water2_0_0_1009_depth_39"
+	rgx = dotnetObject "System.Text.RegularExpressions.Regex" ""
+	match_patern = rgx.IsMatch str ".+_-?\\d+_-?\\d+_-?\\d+_depth_-?\\d+$"
+	print str
+	format "Pattern is : %\n" (rgx.toString())
+	print match_patern
+	
+	----------------------------------------------------------------------------------------------------------------------
+*/

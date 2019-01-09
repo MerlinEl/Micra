@@ -258,7 +258,6 @@ mc_Dialog_DropTarget = undefined
 		
 		-->Load DotNet Components
 		fileInVersion "DotNet_Components"
-		fileInVersion "Popup_Dialogs"
 		
 		-->Load Dinamic Dialog
 		fileInVersion "Dialog_Creator_Net"

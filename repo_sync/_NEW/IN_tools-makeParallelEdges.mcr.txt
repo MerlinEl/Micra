@@ -1,0 +1,29 @@
+macroScript makeParallelEdges category:"IN_tools"
+ (
+  global plDist, curVerts, otherVerts, crossVert, otherVert, edgeVert, sinAngle
+  if plDist==Undefined do plDist = 1
+  if classOf $.baseObject==Editable_Poly do
+   (
+	edges = polyOp.getEdgeSelection $
+  	polyOp.setEdgeFlags $ #{} 0 mask:(bit.set 0 32 true)
+	while (edges as array).count > 0 do
+	 (
+	  polyOp.setEdgeFlags $ edges (bit.set 0 32 true)
+	  for i in edges do
+	   (
+	    curfaces = (polyOp.getEdgeFaces $ i) as array
+	    curverts = polyOp.getEdgeVerts $ i as array
+	    edgeMed = ((polyop.getVert $ curverts[1]) + (polyop.getVert $ curverts[2]))/2
+	    for j=1 to 2 do
+	     (
+		  raynormal = normalize(cross ((polyop.getVert $ curVerts[j]) - edgeMed) (polyOp.getFaceNormal $ curfaces[j]))
+		  raypoint = edgeMed + plDist*raynormal
+		  polyOp.slice $ #{curfaces[j]} (ray raypoint raynormal)
+	     )
+	   )
+	  edges = (polyop.getEdgesByFlag $ (bit.set 0 32 true)) - edges
+	  polyOp.setEdgeFlags $ edges 0 mask:(bit.set 0 32 true)
+	 )
+	redrawViews()
+   )
+ )

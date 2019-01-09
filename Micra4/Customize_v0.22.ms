@@ -1,9 +1,9 @@
 --Customize Micra
 Global mcGM
-Global mcDialogEditMode --mcDialogEditMode
+Global mcCustomizeDialog --mcCustomizeDialog
 
 -->Micra Interface
-if ::mcDialogEditMode != undefined do try(destroyDialog mcDialogEditMode)catch()
+if ::mcCustomizeDialog != undefined do try(mcCustomizeDialog.close())catch()
 (
 -->Locals-----------------------------------------------------------------
 local last_profile = execute (mcFile.saveLoadIniSetings head:"Interface" key:"lastprofile" action:#load)
@@ -75,7 +75,7 @@ fn onLblTMouseUp s a =
 --| Edit Mode Functions
 fn getInterfaceComponent component_name = (
 	
-	format "getInterfaceComponent > %\n" component_name
+	--format "getInterfaceComponent > %\n" component_name
 	if form == undefined do return false
 	local toolbar_edit = form.controls.Item("toolbar_edit")
 	local mcs = form.tag.value
@@ -83,8 +83,10 @@ fn getInterfaceComponent component_name = (
 
 		"icon_index": toolbar_edit.controls.Item("edt_icon_index")
 		"action_cmd": toolbar_edit.controls.Item("cmd_act")
+		"catalog_name": toolbar_edit.controls.Item("name_cat")
 		"action_name": toolbar_edit.controls.Item("name_act")
-		"action_category": mcs.tab_1.combo_box
+		"category_list": mcs.tab_1.combo_box
+		--"action": mcs.tab_1.list_view.items.item -- (mcs.tab_1.list_view.SelectedItems.Item(0)).tag
 		"help_text": mcs.tab.controls.Item("edt_info")
 		"default":undefined
 	)
@@ -92,12 +94,83 @@ fn getInterfaceComponent component_name = (
 fn getEditorData component_name = ( --get data from editor panel
 
 	local item = getInterfaceComponent component_name
+	--format "getEditorData > item:% text:%\n" item item.text
 	return if item != undefined then item.text else undefined
 )
 fn setEditorData component_name str = ( --set data to editor panel
 
 	local item = getInterfaceComponent component_name
 	if item != undefined do item.text = str
+)
+fn addNewCatalog = (
+
+	if not doesFileExist Micra.ActionsIni do return false
+	local action_category = getEditorData "catalog_name"
+	local item_array = getIniSetting Micra.ActionsIni
+	local exists = (findItem item_array action_category) != 0
+	format "addNewCatalog > name:%  exists:%\n " action_category exists
+	if not exists then (
+	
+		setIniSetting Micra.ActionsIni action_category "del_key" "del_val" --create head and item
+		delIniSetting Micra.ActionsIni action_category "del_key" --delete item leave head
+		--reload customize
+		mcCustomizeDialog.close()
+		Micra.fileInVersion "Customize"
+	) else (
+	
+		mcPopUp.msgBox "Category already exists. Operation Aborted."
+	)
+)
+fn delCurrentCatalog = (
+
+
+	if not doesFileExist Micra.ActionsIni do return false
+	local mcs = form.tag.value
+	if mcs.tab_1.list_view.items.count > 0 do (
+		
+		mcPopUp.msgBox "Category must be empty. Operation Aborted."
+		return false
+	)
+	local action_category = getEditorData "catalog_name"
+	if hasINISetting Micra.ActionsIni action_category do(
+	
+		format "delCurrentCatalog > name:%\n " action_category
+		delIniSetting Micra.ActionsIni action_category --delete head
+		--reload customize
+		mcCustomizeDialog.close()
+		Micra.fileInVersion "Customize"
+	) 
+)
+fn addNewAction = (
+
+	--get action params 
+	local action_category = getEditorData "catalog_name"
+	local action_name = getEditorData "action_name"
+	local action_cmd = getEditorData "action_cmd"
+	local icon_index = getEditorData "icon_index"
+	if action_category.count == 0 or action_name.count == 0 or action_cmd.count == 0 or icon_index.count == 0 do return false
+	--save action in Action.ini
+--Gallery_3D = #(221, "Micra.fileInVersion \"3DGallery\"","3D Gallery")
+--Align              = #(63, "max align","Align")
+--Align_By_2Edges    = #(198,"mcAction.objectAlignByTwoEdges()", "Align By 2Edges")
+	local action_key		= mcString.replaceSpaces action_name "_" 
+	local action_data		= icon_index + ", " + action_cmd + ", " + action_name
+	/*
+		fix double qoutes
+		fa=  "Micra.fileInVersion \"3DGallery\""
+		ind1 = findString fa "\""
+		fa   = replace fa  ind1 1 "\'"
+		ind1 = findString fa "\""
+		fa   = replace fa  ind1 1 "\'"
+		execute fa
+	*/
+	format "addNewAction > catalog:% action:% action_data:%\n " action_category action_key action_data
+	--setIniSetting Micra.ActionsIni action_category action_key action_data --create head and item
+)
+fn delCurrentAction = (
+	
+	local action_name = getEditorData "action_name"
+	format "delCurrentAction > name:%\n " action_name
 )
 fn saveAction = (
 	
@@ -126,7 +199,7 @@ fn editAction = (
 )
 fn editIcon = (
 
-	local action_category = getEditorData "action_category"
+	local action_category = getEditorData "category_list"
 	local action_name = getEditorData "action_name"
 	if action_category == undefined or action_name == undefined do return false
 	mcGM.setParam "active_icon_index" (mcFile.getIniDataFromArray Micra.ActionsIni action_category action_name 1)
@@ -136,13 +209,29 @@ fn getItemIndex list item_name = (
 
 	return (for i = 1 to list.items.count where list.items[i] == item_name collect i)[1]
 )
-fn fillCurrentActionData  form = (
+fn clearCurrentActionData = (
 
+	setEditorData "help_text" ""
+	local mcs  = form.tag.value
+	if not mcs.edit_mode do return false
+	local action_category =  mcs.tab_1.combo_box.SelectedItem
+	if action_category == undefined do return false
+	setEditorData "icon_index" 	"0"
+	setEditorData "action_cmd" 	"mcAction.doSomething() or Micra.fileInVersion \"Lode_Tester\""
+	setEditorData "catalog_name" action_category
+	setEditorData "action_name" 	"Action Name"
+)
+fn fillCurrentActionData form = (
+format "fill\n"
 	if form == undefined do return false
 	local mcs  = form.tag.value
 	local action_category =  mcs.tab_1.combo_box.SelectedItem
-	if action_category == undefined or mcs.tab_1.list_view.SelectedItems.count == 0 do return false
-		
+	if action_category == undefined do return false
+	if mcs.tab_1.list_view.SelectedItems.count == 0 do (
+	
+		clearCurrentActionData()
+		return OK
+	)
 	local action_name = (mcs.tab_1.list_view.SelectedItems.Item(0)).tag
 	if debug == 1 do format "fillCurrentActionData > action_cat:% action_name:% edit_mode:%\n" action_category action_name mcs.edit_mode
 		
@@ -150,19 +239,18 @@ fn fillCurrentActionData  form = (
 	local help_txt = getIniSetting Micra.ActionsHelpIni action_category action_name
 	setEditorData "help_text" help_txt
 	
-	if not mcs.edit_mode	 do return OK
-		
+	if not mcs.edit_mode do return OK
+
 	if debug == 1 do format "Reading functions data...\n"
 
 	--load rest action data
-	local data_arr = mcSystem.getActionData action_category action_name --#(106, "mcAnimation.reverse 0 10" , "Reverse_Animation")
-	if data_arr != undefined do (
+	local data = mcSystem.getActionData action_category action_name --{cat:Animation, name:Reverse_Animation, icon:106, cmd:mcAnimation.reverse 0 10}
+	if data != undefined do (
 
-		local icon_index = data_arr[1]
-		local command = data_arr[2]
-		setEditorData "icon_index" 	(icon_index 	as String)
-		setEditorData "action_cmd" 	(command 		as String)
-		setEditorData "action_name" 	(action_name 	as String)
+		setEditorData "icon_index" 	(data.get "icon"	)
+		setEditorData "action_cmd" 	(data.get "cmd"	)
+		setEditorData "catalog_name" 	(action_category)
+		setEditorData "action_name" 	(action_name	)
 	)
 )
 fn editModeSwitch state = (
@@ -173,13 +261,13 @@ fn editModeSwitch state = (
 		mcs.edit_mode = true
 		mcs.btnMin.text = "-"
 		fillCurrentActionData form
-		mcDialogEditMode.width = form_edit_width
+		mcCustomizeDialog.width = form_edit_width
 		
 	) else (
 	
 		mcs.edit_mode = false
 		mcs.btnMin.text = "+"
-		mcDialogEditMode.width = form_default_width
+		mcCustomizeDialog.width = form_default_width
 		
 	)
 )
@@ -217,6 +305,14 @@ fn loadActionList list_cat list_act = (
 	list_cat.BeginUpdate()
 	list_cat.items.Clear()
 	local item_array = getIniSetting Micra.ActionsIni list_act.SelectedItem
+	if item_array.count == 0 do ( --clear data
+	
+		fillCurrentActionData form
+		list_cat.Items.AddRange #() 
+		list_cat.EndUpdate()
+		list_cat.Refresh()
+		return false
+	)
 	list_cat.SmallImageList = getImageList list_act.SelectedItem item_array
 	local list_items = #()
 	for i = 1 to item_array.count do 
@@ -229,7 +325,7 @@ fn loadActionList list_cat list_act = (
 		append list_items itm
 	)
 	list_cat.Items.AddRange list_items 
-	list_cat.items.item[ 1 ].selected = true --select first
+	list_cat.items.item[ 1 ].selected = true --select first.items.item[ 1 ].selected = true --select first
 	list_cat.EndUpdate()
 	list_cat.Refresh()
 )
@@ -408,16 +504,17 @@ fn delDirectoryContent dir includefiles:false quiet:true =
 	for d in dirs do (DOSCommand ("RD \""+d+"\" /s /q") )  --/s  include files /q = qieit
 )
 
+
 fn onTab1ButtonClick s a = (
 
-	format "onTab1ButtonClick > btn:%" s.name
+	--format "onTab1ButtonClick > btn:%\n" s.name
 	case s.name of (
 	
-		"btn_cat_add": print "btn_cat_add"
-		"btn_cat_del": print "btn_cat_del"
-		"btn_act_add": print "btn_act_add"
+		"btn_cat_add": addNewCatalog()
+		"btn_cat_del": delCurrentCatalog()
+		"btn_act_add": addNewAction()
 		"cmd_act_add": editAction()
-		"btn_act_del": print "btn_act_del" 
+		"btn_act_del": delCurrentAction()
 		"btn_icn_edit": editIcon() 
 		"btn_settings_save": saveAction()
 	)
@@ -551,19 +648,14 @@ fn addTab num mcs = (
 				dotNet.addEventHandler mcs.tab_1.combo_box "SelectedIndexChanged" onPickedBoxItem --change action category
 				
 				--Initialize Actions Property Components---------------------------------------------------------------------
-				local edit_font = dotnetobject "System.Drawing.Font" "Arial" 8 (dotnetclass "System.Drawing.FontStyle").bold
+				local edit_font = dotnetobject "System.Drawing.Font" "Verdana" 10 (dotnetclass "System.Drawing.FontStyle").bold
 				local keys = #(
 					mcItem "lbl" "Category:" "lbl_category", mcItem "edt" "" "name_cat", mcItem "btn" "Add Category" "btn_cat_add", mcItem "btn" "Del Category" "btn_cat_del", 
 					mcItem "lbl" "Action:" "lbl_act", mcItem "edt" "" "name_act", mcItem "edt" "" "cmd_act", mcItem "btn" "Add Action" "btn_act_add", mcItem "btn" "Edit Action" "cmd_act_add", mcItem "btn" "Del Action" "btn_act_del",
 					mcItem "lbl" "Icon:" "lbl_icn_num", mcItem "edt" "" "edt_icon_index", mcItem "btn" "Edit Icon" "btn_icn_edit",
 					mcItem "lbl" "Settings:" "btn_settings", mcItem "btn" "Save" "btn_settings_save"
 				)
-				--sort keys with labels at end (allow mouse hit on other components)
-				/*format "A > keys:%\n" keys
-				fn compareLabels str1 str2 =  str1.key == "lbl"
-				qSort keys compareLabels
-				format "B > keys:%\n" keys*/
-				
+
 				local components = #()
 				for i = 1 to keys.count do (
 					
@@ -575,6 +667,7 @@ fn addTab num mcs = (
 					
 						"btn":(
 							format "register button:%\n" item_name
+							item_size.height = 26
 							item = dotNetObject "button"
 							item.BackColor = mcDotnet.uiColor #back
 							item.ForeColor = mcDotnet.uiColor #text
@@ -584,25 +677,18 @@ fn addTab num mcs = (
 						)
 						"lbl":(
 						
+							item_size.height = bar_height + 2
 							item = dotNetObject "label"
 							item.TextAlign = (dotnetClass "system.Drawing.ContentAlignment").MiddleCenter
-							if item_text == "+ Action Editor +" then (
-								
-								item_size.height =  bar_height
-								item.BackColor = netDrColor (mcUIColors.get #back)
-								item.ForeColor = netDrColor (mcUIColors.get #text)
-							) else (
-							
-								item_size.height = 23
-								item.BackColor = netDrColor (mcUIColors.get #back)
-								item.ForeColor = netDrColor (mcUIColors.get #edtfore)
-							)
-		
+							item.BackColor = netDrColor (mcUIColors.get #back)
+							item.ForeColor = netDrColor (mcUIColors.get #edtfore)
+					
 							item --case return
 						)
 						"edt": (
 						
 							item = dotNetObject "textBox"
+							item.BorderStyle = item.BorderStyle.FixedSingle
 							item.TextAlign = (dotnetClass "System.Windows.Forms.HorizontalAlignment").Center
 							--item.BackColor = netDrColor (color 18 171 226)
 							--item.ForeColor = netDrColor white
@@ -827,10 +913,10 @@ fn onFormCreated s a = ( --only when created, not open
 
 fn inicializeInterface form mcs =
 (
-	form.name = "mcDialogEditMode"
+	form.name = "mcCustomizeDialog"
 	form.ControlBox  = false --hide main bar
-	local fpos = (mcFile.getIniDataFromArray Micra.TempProfileIni "Properties_2" "mcDialogEditMode" 2)
-	if fpos == undefined do fpos = (mcFile.getIniDataFromArray Micra.DefaultProfileIni "Properties_2" "mcDialogEditMode" 2)
+	local fpos = (mcFile.getIniDataFromArray Micra.TempProfileIni "Properties_2" "mcCustomizeDialog" 2)
+	if fpos == undefined do fpos = (mcFile.getIniDataFromArray Micra.DefaultProfileIni "Properties_2" "mcCustomizeDialog" 2)
 	form.StartPosition = form.StartPosition.Manual
 	form.bounds = netDrRect fpos [form_width, form_height]
 	form.FormBorderStyle = form.FormBorderStyle.none
@@ -877,6 +963,6 @@ fn inicializeInterface form mcs =
 	form.controls.addRange( #(mcs.btnMin, mcs.lblT, mcs.tlp_main, mcs.tab, mcs.tlp_edit) )
 )
 inicializeInterface form form.tag.value
-mcDialogEditMode = form
-mcDotnet.dShow mcDialogEditMode
+mcCustomizeDialog = form
+mcDotnet.dShow mcCustomizeDialog
 )
