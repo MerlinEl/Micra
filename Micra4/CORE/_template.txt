@@ -1,12 +1,25 @@
 --------------------------------------------------------------------------------
-/* mcObject by Orien 2019 */
+/* mcNewStructure by Orien 2019 */
 --------------------------------------------------------------------------------
-/**
-* @example	
+/*
+*@Used Structures
+	Micra
+*
+*@Used Objects
+	undefined
+*
+*@Usage
+	undefined
+*
+*@Example	
+	undefined
 *
 */
-struct MICRA_GLOBAL_MEMORY	(
+struct MICRA_NEW_STRUCTURE	(
 	
+	--variables
+	
+	--functions
 )	
  --create instance
-Global mcGM = Micra.instanceStructure MICRA_GLOBAL_MEMORY "mcGM"
+Global mcNewStructure = Micra.instanceStructure MICRA_NEW_STRUCTURE "mcNewStructure"

@@ -56,7 +56,13 @@ struct MICRA_STRUCTURE (
 	--return version "1.02" or empty string ""
 	fn getScriptVersion script_name = (
 		
-		return (getIniSetting DefaultSettings "Version" script_name)
+		getIniSetting DefaultSettings "Version" script_name
+	),
+	--get script[in root dir] with his version > "E:\Aprog\Orien\Micra\Micra4\Struct_Action_v0.03.ms"
+	fn getScriptPath script_name = (
+		
+		local script_version = getScriptVersion script_name
+		rootDir + script_name + "_v" + script_version + ".ms"
 	),
 	fn fileInVersion script_name = (	
 	

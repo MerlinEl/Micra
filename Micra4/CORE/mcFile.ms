@@ -121,6 +121,13 @@ struct MICRA_FILE (
 		if not doesFileExist fpath do return false
 		if isMaxFile fpath do try (loadMaxFile fpath useFileUnits:true quiet:false) catch()
 	),
+	fn createNewFile file_path file_text:"" = (
+	
+		local out_file = createFile file_path --create file at given file path
+		if file_text.count > 0 do format "%" file_text to:out_file --write data in to file
+		close out_file --important to close else file can't be deleted
+		OK
+	),
 	--mcFile.getIniDataFromArray Micra.TempProfileIni "Properties_2" "mcColorPickerDialog" 2
 	fn getIniDataFromArray iniFile head key arrNum =
 	(
@@ -523,47 +530,22 @@ struct MICRA_FILE (
 		format "mcFile > registerMicraScript > [%_v%]\tsuccess:%\n" script_name script_version success
 	),
 	fn appendActionOrCreateScript action_category action_name action_cmd icon_index = (
-	
-		/*
-		TODO first eliminate unwanted Actions!
-		Calculator = 32, ShellLaunch C:\WINDOWS\system32\calc.exe, Calculator --replace with function mcShell.open "calc"
-		Export_Selection   = 82, if selection.count > 0 do max file export selected, Export selection --replace with function mcFile.exportSelected()
-		Max_Reset          = 2 , (if checkForSave() != false do resetMaxFile #noPrompt),Max Reset --#noPrompt --replace with function mcFile.resetMax()
-		Reload             = 7 , try (actionMan.executeAction 0 203\ catch (MessageBox Open File last file is Failed title:Micra, Reload --#noPrompt --replace with function mcFile.reloadLastFile()
-		Save_Selection     = 57, if selection.count > 0 do max file save   selected, Save Selection --replace with function mcFile.saveSelected()
-		mcCreate
-		mcAction
-		Micra.fileInVersion
-		mcInterface
-		mcSystem
-		mcSkin
-		-------------------------------------------
-		ini data structure > icon, cmd, toolip
-		106, mcAnimation.reverse 0 10, Reverse Animation
-		221, Micra.fileInVersion 3DGallery, 3D Gallery
-		63, max align, Align
-		32, ShellLaunch C:\WINDOWS\system32\calc.exe , Calculator
-		2 , (if checkForSave() != false do resetMaxFile #noPrompt),Max Reset --#noPrompt	
-		*/			
-	
+		
+		--fix action name string
 		action_name = mcString.trimLeftRight action_name --remove left right spaces
 		local action_key	= mcString.replaceInString action_name " " "_" --replace space with underscore: 3D Gallery > 3D_Gallery
---check if action exists
-/*if mcFile.getActionByName action_key != undefined do (
 
-	mcPopUp.msgBox ("Action [ "+action_key+" ] already exists. Operation Aborted.") title:"Customize"
-	return false
-)*/
 		--assembly action
-		local action_data	 = icon_index + ", " + action_cmd + ", " + action_name	
+		local action_data = icon_index + ", " + action_cmd + ", " + action_name	
 		
 		mcString.printInBlock "mcFile > editOrCreateAction > \n\tcatalog\t: %\n\taction\t: % \n\tdata\t: %\n" params:#(action_category, action_key, action_data)
-		
-		--create new script or register one
-		if findString action_cmd "fileInVersion" != undefined do (
+		-----------------------------------------------------------------------------------------------------
+		--IF CMD contains [fileInVersion] create new script or register existing (also add ti to Actions.ini)
+		-----------------------------------------------------------------------------------------------------
+		if findString action_cmd "fileInVersion" != undefined then (
 		
 			--check if file exists
-			local script_path = ""
+			local script_path = "undefined"
 			local root_files = getFiles (Micra.rootDir + "*.ms")
 			for f in root_files do (
 			
@@ -574,31 +556,77 @@ struct MICRA_FILE (
 				)
 			)
 			format "search > script [ % ] exists:% script_path:%\n" action_key (doesFileExist script_path) script_path  
-			if doesFileExist script_path then ( --register script
+			if doesFileExist script_path then ( --if script file found
 			
 				--check if script is registred
 				local script_version = Micra.getScriptVersion action_key
-				if script_version != "" then ( --if already registred break 
+				if script_version != "" then ( --if already registred, abort 
 				
 					format "mcFile > appendActionOrCreateScript > Script [ % ] is already registred. Operation aborted.\n" action_key
 					return false
-				) else ( --register script
+				) else ( --register existing script
 					
-					--local script_file_name = filenameFromPath script_path
-					--mcFile > registerMicraScript > [Script_Manager_v0.14]	success:true
-					--registerMicraScript script_file_name
+					local script_file_name = filenameFromPath script_path
+					format "mcFile > appendActionOrCreateScript > Script [ % ] is registred succesfully.\n" script_file_name
+--enable it > registerMicraScript script_file_name
+--enable it > setIniSetting Micra.ActionsIni action_category action_key action_data
 				)
-				--local script_path = Micra.rootDir + action_key + ".ms"
 				
-			) else ( --crete script
+			) else ( --crete new script
 			
-				
+				local script_file_name = action_key + "_v0.01.ms"
+				script_path = Micra.rootDir + script_file_name
+				local template_file = Micra.rootDir + "CORE\\" + "_template.txt"
+ 				--copy template in to file
+				copyFile template_file script_path
+--enable it > registerMicraScript script_file_name
+--enable it > setIniSetting Micra.ActionsIni action_category action_key action_data
+				format "mcFile > appendActionOrCreateScript > Script [ % ] is created succesfully.\n" script_file_name
 			)
 			--open script  
+			edit script_path
+			return true
+		-----------------------------------------------------------------------------------------------------
+		--ELSE CMD is structure Action like > mcAction.doSomething()
+		-----------------------------------------------------------------------------------------------------		
+		) else (
+		
+			--All Action Structures is here (OR NOT?? How we can edit them? mcSystem is elsewhere)
+			local actions_file = Micra.getScriptPath "Struct_Action"
+			format "mcFile > appendActionOrCreateScript > Edit Action Structure:%\n" actions_file
 			
+			--mcSystem -- this structure is elsewhere make new one in Actions ... maybe
+			
+			--if structure not exist create new structure
+			--find if action exists else create new one under category
 		)
-			
-			
+
+		--check if action exists
+/*if mcFile.getActionByName action_key != undefined do (
+
+	mcPopUp.msgBox ("Action [ "+action_key+" ] already exists. Operation Aborted.") title:"Customize"
+	return false
+)*/	
+		/*
+		TODO first eliminate unwanted Actions!
+		Calculator = 32, ShellLaunch C:\WINDOWS\system32\calc.exe, Calculator --replace with function mcShell.open "calc"
+		Export_Selection   = 82, if selection.count > 0 do max file export selected, Export selection --replace with function mcFile.exportSelected()
+		Max_Reset          = 2 , (if checkForSave() != false do resetMaxFile #noPrompt),Max Reset --#noPrompt --replace with function mcFile.resetMax()
+		Reload             = 7 , try (actionMan.executeAction 0 203\ catch (MessageBox Open File last file is Failed title:Micra, Reload --#noPrompt --replace with function mcFile.reloadLastFile()
+		Save_Selection     = 57, if selection.count > 0 do max file save   selected, Save Selection --replace with function mcFile.saveSelected()
+--???
+Autosave_Switch = 3, mcSystem.autosaveSwitch() , Autosave Switch'
+Keyboard_Switch = 257, mcSystem.keyboardSwitch() , Keyboard Switch'
+Get_SHGame_Version = 183, mcSystem.getSHGameVersion(), Get SHGame Version
+
+		-------------------------------------------
+		ini data structure > icon, cmd, toolip
+		106, mcAnimation.reverse 0 10, Reverse Animation
+		221, Micra.fileInVersion 3DGallery, 3D Gallery
+		63, max align, Align
+		32, ShellLaunch C:\WINDOWS\system32\calc.exe , Calculator
+		2 , (if checkForSave() != false do resetMaxFile #noPrompt),Max Reset --#noPrompt	
+		*/		
 			
 		--if structureExists
 		

@@ -149,7 +149,8 @@ fn addNewAction = (
 	local action_cmd = getEditorData "action_cmd"
 	local icon_index = getEditorData "icon_index"
 	if action_category.count == 0 or action_name.count == 0 or action_cmd.count == 0 or icon_index.count == 0 do return false
-	mcFile.appendActionOrCreateScript action_category action_name action_cmd icon_index
+	local success = mcFile.appendActionOrCreateScript action_category action_name action_cmd icon_index
+	--if success do append new action in to list
 )
 fn delCurrentAction = (
 	
@@ -203,7 +204,7 @@ fn clearCurrentActionData = (
 	local action_category =  mcs.tab_1.combo_box.SelectedItem
 	if action_category == undefined do return false
 	setEditorData "icon_index" 	"0"
-	setEditorData "action_cmd" 	"mcAction.doSomething() or Micra.fileInVersion \"Lode_Tester\""
+	setEditorData "action_cmd" 	"mcAction.doSomething() or Micra.fileInVersion Lode_Tester"
 	setEditorData "catalog_name" action_category
 	setEditorData "action_name" 	"Action Name"
 )

@@ -1,5 +1,3 @@
-Global mcRect 
-Global mcCube
 Global mcAction
 Global mcAnimation
 Global mcCall
@@ -8,24 +6,12 @@ Global mcFile
 Global mcSnap
 Global mcSkin
 Global mcCreate
-Global mcSystem
 Global mcString
+
+
 Global mcTransform
 Global mcInterface
-Global mcDialogSnap
-
-Global mc_Dialog_A
-Global mc_Dialog_B
-Global mc_Dialog_C
-Global mc_Dialog_D
-Global mc_Dialog_E
-Global mc_Dialog_F
-Global mc_Dialog_G
-Global mc_Dialog_H
-Global mc_Dialog_I
-Global mc_Dialog_J
-Global mcPopUpDialog
-
+Global mcSystem
 Global mcSelVertsInXDialog
 
 Global mcButtonTeleportSend
