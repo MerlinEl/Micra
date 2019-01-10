@@ -118,7 +118,7 @@ fn addNewCatalog = (
 		Micra.fileInVersion "Customize"
 	) else (
 	
-		mcPopUp.msgBox "Category already exists. Operation Aborted."
+		mcPopUp.msgBox ("Category [ "+action_category+" ] already exists. Operation Aborted.") title:"Customize"
 	)
 )
 fn delCurrentCatalog = (
@@ -126,15 +126,15 @@ fn delCurrentCatalog = (
 
 	if not doesFileExist Micra.ActionsIni do return false
 	local mcs = form.tag.value
+	local action_category = getEditorData "catalog_name"
 	if mcs.tab_1.list_view.items.count > 0 do (
 		
-		mcPopUp.msgBox "Category must be empty. Operation Aborted."
+		mcPopUp.msgBox ("Category [ "+action_category+" ] must be empty. Operation Aborted.") title:"Customize"
 		return false
 	)
-	local action_category = getEditorData "catalog_name"
 	if hasINISetting Micra.ActionsIni action_category do(
 	
-		format "delCurrentCatalog > name:%\n " action_category
+		format "Customize > delCurrentCatalog > name:%\n " action_category
 		delIniSetting Micra.ActionsIni action_category --delete head
 		--reload customize
 		mcCustomizeDialog.close()
@@ -149,32 +149,16 @@ fn addNewAction = (
 	local action_cmd = getEditorData "action_cmd"
 	local icon_index = getEditorData "icon_index"
 	if action_category.count == 0 or action_name.count == 0 or action_cmd.count == 0 or icon_index.count == 0 do return false
-	--save action in Action.ini
---Gallery_3D = #(221, "Micra.fileInVersion \"3DGallery\"","3D Gallery")
---Align              = #(63, "max align","Align")
---Align_By_2Edges    = #(198,"mcAction.objectAlignByTwoEdges()", "Align By 2Edges")
-	local action_key		= mcString.replaceSpaces action_name "_" 
-	local action_data		= icon_index + ", " + action_cmd + ", " + action_name
-	/*
-		fix double qoutes
-		fa=  "Micra.fileInVersion \"3DGallery\""
-		ind1 = findString fa "\""
-		fa   = replace fa  ind1 1 "\'"
-		ind1 = findString fa "\""
-		fa   = replace fa  ind1 1 "\'"
-		execute fa
-	*/
-	format "addNewAction > catalog:% action:% action_data:%\n " action_category action_key action_data
-	--setIniSetting Micra.ActionsIni action_category action_key action_data --create head and item
+	mcFile.appendActionOrCreateScript action_category action_name action_cmd icon_index
 )
 fn delCurrentAction = (
 	
 	local action_name = getEditorData "action_name"
-	format "delCurrentAction > name:%\n " action_name
+	format "Customize > delCurrentAction > name:%\n " action_name
 )
 fn saveAction = (
 	
-	format "saveAction > todo\n" 
+	format "Customize > saveAction > todo\n" 
 	return false --- TODO
 	/*
 	local btn = mcGM.getParam "active_button"
@@ -195,14 +179,16 @@ fn editAction = (
 
 	local action_name = getEditorData "action_name"
 	if action_name == undefined do return false
-	mcSystem.showActionSource action_name
+	mcFile.showActionSource action_name
 )
 fn editIcon = (
 
 	local action_category = getEditorData "category_list"
 	local action_name = getEditorData "action_name"
 	if action_category == undefined or action_name == undefined do return false
-	mcGM.setParam "active_icon_index" (mcFile.getIniDataFromArray Micra.ActionsIni action_category action_name 1)
+	local icon_index = mcFile.getIniDataFromAction action_category action_name "icon"
+	format "icon index:%\n" icon_index
+	mcGM.setParam "active_icon_index" (execute icon_index)
 	Micra.fileInVersion "Icon_Maker"
 )
 fn getItemIndex list item_name = (
@@ -244,7 +230,7 @@ format "fill\n"
 	if debug == 1 do format "Reading functions data...\n"
 
 	--load rest action data
-	local data = mcSystem.getActionData action_category action_name --{cat:Animation, name:Reverse_Animation, icon:106, cmd:mcAnimation.reverse 0 10}
+	local data = mcFile.getActionData action_category action_name --{cat:Animation, name:Reverse_Animation, icon:106, cmd:mcAnimation.reverse 0 10}
 	if data != undefined do (
 
 		setEditorData "icon_index" 	(data.get "icon"	)
@@ -281,9 +267,10 @@ fn getImageList head keys =
 	img_list.ColorDepth = img_list.ColorDepth.Depth24Bit
 	img_list.transparentColor = netDrColor black --212 212 212 --gray color
 	
-	for i in keys do
-	(
-		local icon_num = mcFile.getIniDataFromArray Micra.ActionsIni head i 1
+	for i in keys do (
+	
+		local icon_num = mcFile.getIniDataFromAction head i "icon"
+		icon_num = execute icon_num --string to num
 		img_list.images.add (getIconDotNet icon_num)
 	)
 	return img_list
@@ -304,7 +291,7 @@ fn loadActionList list_cat list_act = (
 	if debug == 1 do print "loadActionList > loading actions..."	
 	list_cat.BeginUpdate()
 	list_cat.items.Clear()
-	local item_array = getIniSetting Micra.ActionsIni list_act.SelectedItem
+	local item_array = getIniSetting Micra.ActionsIni list_act.SelectedItem --last selected action is saved in INI
 	if item_array.count == 0 do ( --clear data
 	
 		fillCurrentActionData form
@@ -364,7 +351,7 @@ fn onMousedown s a = --click or drag (s = sender a = arguments)
 					btn_b.Image = btn_a_image --copy image
 					btn_b.Tag = btn_a.tag --copy tag
 					--save Settings
-					local icn_numA = (mcFile.getIniDataFromArray Micra.ActionsIni btn_a.name btn_a.tag 1) as string
+					local icn_numA = (mcFile.getIniDataFromAction btn_a.name btn_a.tag "icon") as string
 					setINISetting Micra.TempProfileIni "Buttons" btn_b.name btn_b.tag
 					setINISetting Micra.TempProfileIni "Icons"   btn_b.name icn_numA 
 				)

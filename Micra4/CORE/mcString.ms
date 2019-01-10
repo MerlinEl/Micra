@@ -11,6 +11,8 @@
 */
 struct MICRA_STRING (
 
+	src = micra.RootDir + "mcString.ms",
+	breakline = "----------------------------------------------------------------------------------------------------------------------------------",
 	/**
 	*@Usage 
 		Trims all leading characters specified in trimChars from the given string and returns it. 
@@ -38,6 +40,38 @@ struct MICRA_STRING (
 		local pattern = "\\"+old_str
 		local rgx = dotnetObject "System.Text.RegularExpressions.Regex" pattern
 		rgx.Replace str new_str
+	),
+	/**
+	*Still Testing 2019
+	*@Example
+		mcString.printInBlock "a: % b: %" params:#(1, 2)
+		mcString.printInBlock "Customize > addNewAction > \n\tcatalog\t: %\n\taction\t: % \n\tdata\t: %\n" params:#(action_category, action_key, action_data)
+	*/
+	fn printInBlock str params:#() = (
+		
+		if findString str "%" == undefined do (
+		
+			format "%\n%\n%\n" breakline str breakline
+			return OK
+		)
+	
+		local out_string = breakline + "\n"
+		local arr = filterString str "%"
+		/*if arr.count  != params.count do (
+		
+			format "mcString > printInBlock > Arguments not match pattern str:% params:%\n" arr.count params.count
+			return false
+		)*/
+		local out_string = breakline + "\n"
+		for i = 1 to arr.count do 
+		(
+			if params[i] == undefined do continue --skip last line if
+			out_string += arr[i] + params[i] as string
+		)
+		--format "%\n%\n%\n" breakline str breakline
+		out_string += "\n" + breakline + "\n"
+		format out_string
+		
 	),
 	--This one is old causing error when multiple string replace REMOVE (use replaceInString)
 	fn replaceSymbol str find_str new_str =
@@ -84,16 +118,6 @@ struct MICRA_STRING (
 			integer:eval_str
 			default:undefined	
 		)
-	),
-	/**
-	*@Exmaple
-		mcString.replaceSpaces "This string has too many spaces." "_"
-	*/
-	fn replaceSpaces input new_str = (
-	
-		local pattern = @"\s+"
-		local rgx = dotnetObject "System.Text.RegularExpressions.Regex" pattern
-		rgx.Replace input new_str
 	)
 )
  --create instance
@@ -105,6 +129,12 @@ Global mcString = Micra.instanceStructure MICRA_STRING "mcString"
 	--fn replaceInString input find_str new_str = (
 	--str.replace(/\s/gi, "_"); 
 	--)
+		fn replaceSpaces input new_str = (
+	
+		local pattern = @"\s+"
+		local rgx = dotnetObject "System.Text.RegularExpressions.Regex" pattern
+		rgx.Replace input new_str
+	)
 
 REGEX
 	----------------------------------------------------------------------------------------------------------------------

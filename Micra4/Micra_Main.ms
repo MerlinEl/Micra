@@ -53,16 +53,22 @@ struct MICRA_STRUCTURE (
 		if heapSize < hsize do heapSize = hsize
 	),
 	-->  OLD File in Version
+	--return version "1.02" or empty string ""
 	fn getScriptVersion script_name = (
 		
 		return (getIniSetting DefaultSettings "Version" script_name)
 	),
 	fn fileInVersion script_name = (	
 	
+		if classOf script_name != String do (
+			
+			format "% > fileInVersion > ScriptName[ % ], is not valid.\n" script_name
+			return false
+		)
 		local f_version = getScriptVersion script_name
 		if f_version == "" do(
 		
-			format "File[%], is not registred in [  %  ]\n" script_name DefaultSettings
+			format "% > fileInVersion > File[ % ], is not registred in [  %  ]\n" script_name DefaultSettings
 			return false
 		)
 		local file = RootDir + script_name + "_v" + f_version + ".ms"
@@ -70,11 +76,11 @@ struct MICRA_STRUCTURE (
 		
 			try (
 				fileIn file
-				format "% > Load tool [  %  ]  was success!\n" version script_name
+				format "% > fileInVersion > Load tool [  %  ]  was success!\n" version script_name
 			
 			) catch (
 			
-				format "% > Load tool [  %  ]  was failed!\n\tError:%\n" version script_name (getCurrentException())
+				format "% > fileInVersion > Load tool [  %  ]  was failed!\n\tError:%\n" version script_name (getCurrentException())
 			)
 		)
 		--format "ver:%\n" f_Version

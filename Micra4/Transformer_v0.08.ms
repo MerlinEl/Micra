@@ -555,7 +555,7 @@ if mc_OBJECT_TRANSFORMER != undefined do stopTool mc_OBJECT_TRANSFORMER
 				"mcTransformerMarkerS_18": (mirrorSelectedFaces obj #x)
 			)
 		),
-		fn runAction mname =
+		fn doAction mname =
 		(
 			--format "picked: %\n" mname
 			if isPolygonSelection OTD.sel[1] 
@@ -631,7 +631,7 @@ if mc_OBJECT_TRANSFORMER != undefined do stopTool mc_OBJECT_TRANSFORMER
 				)
 				else
 				(
-					undo "Transform Object" on OTF.runAction OTD.marked.name 
+					undo "Transform Object" on OTF.doAction OTD.marked.name 
 					OTD.aborted = 0
 					#stop
 				)

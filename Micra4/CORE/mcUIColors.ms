@@ -8,12 +8,13 @@
 *
 *@Used Objects
 
-*
+
 *@Example:
 	mcUIColors.get #back
 */
 Struct MICRA_UI_COLORS(
-	
+
+Public
 	fn get clr = (
 		
 		local last_profile = execute (mcFile.saveLoadIniSetings head:"Interface" key:"lastprofile" action:#load)

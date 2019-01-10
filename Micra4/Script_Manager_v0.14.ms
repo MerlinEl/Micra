@@ -584,23 +584,7 @@
 	)
 	fn setVersionToActive  = (
 	
-		if current_list_item == undefined do return false
-		local script_file_name = current_list_item.text	
-		local version_pos = (findString script_file_name "_v")
-		local script_name
-		local script_version
-		if version_pos == undefined do ( --copy file with version 0.01
-			
-			format  "Unable to activate file [%] without version." script_file_name
-			return false
-		)
-		local script_version = substring script_file_name (version_pos+2) -1 
-		local script_name = substring script_file_name 1 (version_pos-1)
-		--register script
-		if not doesFileExist Micra.DefaultSettings  do ((format "Not found! [%]\n" Micra.DefaultSettings); return false)
-		mcFile.backupMicraFile Micra.DefaultSettings
-		local success = setIniSetting Micra.DefaultSettings "Version" script_name script_version
-		format "Registred script:[%_v%]\tsuccess:%\n" script_name script_version success
+		if current_list_item != undefined do mcFile.registerMicraScript current_list_item.text	
 	)
   	-->Dialog
 	on mcScriptManDialog open do

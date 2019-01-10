@@ -5,6 +5,7 @@
 *@Used Structures
 	Micra
 	mcTime
+	mcString
 *
 *@Used Objects
 
@@ -123,6 +124,7 @@ struct MICRA_FILE (
 	--mcFile.getIniDataFromArray Micra.TempProfileIni "Properties_2" "mcColorPickerDialog" 2
 	fn getIniDataFromArray iniFile head key arrNum =
 	(
+		--input type validation
 		if classOf iniFile != string  do return undefined
 		if classOf head    != string  do return undefined
 		if classOf key     != string  do return undefined
@@ -299,7 +301,7 @@ struct MICRA_FILE (
 			file_versioned = backup_dir+"[BK]_"+new_version+"_"+file_name
 			copyFile file file_versioned
 		)
-		format "Backup File: %\n" file_versioned
+		format "mcFile > Backup File: %\n" file_versioned
 	),
 	fn getClipboardTxt =
 	(
@@ -337,6 +339,292 @@ struct MICRA_FILE (
 		)
 		close imgLib
 		return icn
+	),
+	------------------
+	--ACTION METHODS--
+	------------------
+	/**
+	*@Usage
+		get action type for different execute metods
+	*/
+	fn getActionType action_with_cmd = (
+	
+		if Micra.debug == 10 do format "mcFile > getActionType > action_with_cmd:%\n" action_with_cmd
+		--mcAnimation.reverse 0 10 --[function]
+		--mcAction.add_modifier #Unwrap_UVW --[function]
+		--Micra.fileInVersion Paint_Selection --[file]
+		--max align --[max]
+		--ShellLaunch C:\WINDOWS\system32\calc.exe --[shell]
+		--if checkForSave() != false do resetMaxFile #noPrompt --[condition]
+		local action_type = undefined
+		if (findString action_with_cmd "Micra.fileInVersion" != undefined) then action_type = "file"
+		if (findString action_with_cmd "ShellLaunch" != undefined		) then action_type = "shell"
+		if (findString action_with_cmd "if" != undefined				) then action_type = "condition"
+		if (findString action_with_cmd "max" != undefined			) then action_type = "max"
+		if action_type == undefined do action_type = "function" --defaul type
+		action_type
+	),
+	fn parseActionData ini_data action_category action_name = (
+	
+		ini_data = mcString.trimLeftRight ini_data --remove white space left and right
+		ini_data = mcString.replaceInString ini_data ", " "," -- remove white space after comma 	
+		local data_array = filterString ini_data "," --split string in to array
+		if classof data_array != array do return undefined --conversion failed
+		if Micra.debug == 10 do format "mcFile > parseActionData > data_array:%\n" data_array
+		local mc_obj = mcObject()
+		mc_obj.add "cat" action_category
+		mc_obj.add "name" action_name
+		mc_obj.add "icon" data_array[1]
+		mc_obj.add "cmd" data_array[2]
+		mc_obj.add "tooltip" data_array[3]
+		mc_obj --{cat:Animation, name:Reverse_Animation, icon:106, cmd:mcAnimation.reverse 0 10}
+	),
+	fn getActionData action_category action_name = (
+	
+		if not doesFileExist Micra.ActionsIni do ((format "Not found! [%]\n" Micra.ActionsIni); return undefined)
+		--ini data structure > icon, cmd, toolip
+		--106, mcAnimation.reverse 0 10, Reverse Animation
+		--221, Micra.fileInVersion 3DGallery, 3D Gallery
+		--63, max align, Align
+		--32, ShellLaunch C:\WINDOWS\system32\calc.exe , Calculator
+		--2 , (if checkForSave() != false do resetMaxFile #noPrompt),Max Reset --#noPrompt
+		local ini_data = getIniSetting Micra.ActionsIni action_category action_name 
+		if Micra.debug == 10 do format "mcFile > getActionData  > ini_data:%\n" ini_data
+		if ini_data != "" then (
+				
+			parseActionData ini_data action_category action_name
+			
+		) else (
+		
+			undefined
+		)
+	),
+	/**
+	*@Example 
+		mcFile.getIniDataFromAction head i "icon"
+		return string or undefined
+	*/
+	fn getIniDataFromAction action_category action_name type = (
+		
+		if not doesFileExist Micra.ActionsIni do ((format "Not found! [%]\n" Micra.ActionsIni); return undefined)
+		local data = getActionData action_category action_name --{cat:Animation, name:Reverse_Animation, icon:106, cmd:mcAnimation.reverse 0 10}
+		if data != undefined then data.get type else undefined
+	),
+	--search in Micra.ActionsIni by name
+	fn getActionByName action_name = (
+	
+		if not doesFileExist Micra.ActionsIni do ((format "mcFile > getActionByName > Not found! [%]\n" Micra.ActionsIni); return undefined)
+		local heads = getIniSetting Micra.ActionsIni
+		for action_category in heads do( --INI Heads
+			local ini_data = getIniSetting Micra.ActionsIni action_category action_name --INI Key
+			if ini_data != "" do (
+				
+				--{cat:Animation, name:Reverse_Animation, icon:106, cmd:mcAnimation.reverse 0 10}
+				return parseActionData ini_data action_category action_name
+			)
+		)
+		return undefined
+	),
+	fn getActionParams action_with_cmd = (
+	
+		local first_space = (findString action_with_cmd " ") --find first space in cmd[Micra.fileInVersion Paint_Selection]
+		local params = substring action_with_cmd first_space -1 --get rest (params)
+		params = mcString.trimLeftRight params --trim white spaces left right
+		params
+	),
+	fn showActionSource action_name = (
+		
+		local data = getActionByName action_name --{cat:Animation, name:Reverse_Animation, icon:106, cmd:mcAnimation.reverse 0 10}
+		if data == undefined do return false
+		local action_with_cmd = data.get "cmd" 
+		local action_type = getActionType action_with_cmd
+		if Micra.debug == 10 do format "mcFile > showActionSource > action type:%\n" action_type
+		case action_type of --mcAnimation.reverse || Paint_Selection
+		(
+			"function": (
+				
+				local action_end = findString action_with_cmd " " --cut before "fn" parameter > mcAnimation.reverse 0 10 
+				if action_end == undefined do action_end = findString action_with_cmd "(" --cut before "(" char > mcAction.capHoles()
+				local action = substring action_with_cmd 1 (action_end-1)
+				if Micra.debug == 10 do format "mcFile > showActionSource > action:%\n" action
+				ShowSource (execute action) --ShowSource mcAnimation.reverse	
+				return true
+			)
+			"file": (
+				
+				--format "action_with_cmd:%\n" action_with_cmd
+				local fname = getActionParams action_with_cmd --get params as fname
+				local current_dir = Micra.RootDir
+				local fversion = getIniSetting Micra.DefaultSettings "Version" fname
+				local file = current_dir + fname + "_v" + fversion + ".ms"
+				if Micra.debug == 10 do format "mcFile > showActionSource > file:%\n" file
+				edit file
+				return true
+			)
+		)
+		return false
+	),
+	fn executeAction cmd = (
+	
+		try (
+		
+			execute cmd
+			
+		) catch (
+		
+			format "mcFile > executeAction > error okurek!!! [%]\n\terror:%\n" cmd (getCurrentException())
+		)	
+	),
+	/**
+	*@Examples
+		mcFile.runAction "Align"
+		mcFile.runAction "Gallery_3D"
+	*/
+	fn runAction action_name = (
+	
+		local data = getActionByName action_name -- mcObject(name:action_name, category:action_category, val:data_array)
+		if data == undefined do return false
+		local action_with_cmd = data.get "cmd" 
+		if Micra.debug == 10 do format "mcFile > runAction > action_name:% action_with_cmd:%\n" action_name action_with_cmd
+		local action_type = getActionType action_with_cmd
+		case action_type of (
+
+			"max": executeAction action_with_cmd
+			"function": executeAction action_with_cmd
+			"condition": executeAction action_with_cmd
+			"file": (
+				--get file name
+				local fname = getActionParams action_with_cmd --get params as fname
+				if Micra.debug == 10 do format "mcFile > runAction > params:%\n" fname
+				Micra.fileInVersion fname		
+			)
+			"shell":(
+				--get file name
+				local fname = getActionParams action_with_cmd --get params as fname
+				if Micra.debug == 10 do format "mcFile > runAction > params:%\n" fname
+				try (ShellLaunch fname "") catch (format "error okurek!!! [%]\nerror:%\n" fname (getCurrentException()))		
+			)
+		)
+	),
+	fn registerMicraScript script_file_name = (
+	
+		local version_pos = (findString script_file_name "_v")
+		if version_pos == undefined do ( --copy file with version 0.01
+			
+			format  "Unable to activate file [ % ] without version." script_file_name
+			return false
+		)
+		local script_version = substring script_file_name (version_pos+2) -1 
+		local script_name = substring script_file_name 1 (version_pos-1)
+		--register script
+		if not doesFileExist Micra.DefaultSettings  do ((format "Not found! [%]\n" Micra.DefaultSettings); return false)
+		backupMicraFile Micra.DefaultSettings --some times get INI damaged , backup it
+		local success = setIniSetting Micra.DefaultSettings "Version" script_name script_version
+		format "mcFile > registerMicraScript > [%_v%]\tsuccess:%\n" script_name script_version success
+	),
+	fn appendActionOrCreateScript action_category action_name action_cmd icon_index = (
+	
+		/*
+		TODO first eliminate unwanted Actions!
+		Calculator = 32, ShellLaunch C:\WINDOWS\system32\calc.exe, Calculator --replace with function mcShell.open "calc"
+		Export_Selection   = 82, if selection.count > 0 do max file export selected, Export selection --replace with function mcFile.exportSelected()
+		Max_Reset          = 2 , (if checkForSave() != false do resetMaxFile #noPrompt),Max Reset --#noPrompt --replace with function mcFile.resetMax()
+		Reload             = 7 , try (actionMan.executeAction 0 203\ catch (MessageBox Open File last file is Failed title:Micra, Reload --#noPrompt --replace with function mcFile.reloadLastFile()
+		Save_Selection     = 57, if selection.count > 0 do max file save   selected, Save Selection --replace with function mcFile.saveSelected()
+		mcCreate
+		mcAction
+		Micra.fileInVersion
+		mcInterface
+		mcSystem
+		mcSkin
+		-------------------------------------------
+		ini data structure > icon, cmd, toolip
+		106, mcAnimation.reverse 0 10, Reverse Animation
+		221, Micra.fileInVersion 3DGallery, 3D Gallery
+		63, max align, Align
+		32, ShellLaunch C:\WINDOWS\system32\calc.exe , Calculator
+		2 , (if checkForSave() != false do resetMaxFile #noPrompt),Max Reset --#noPrompt	
+		*/			
+	
+		action_name = mcString.trimLeftRight action_name --remove left right spaces
+		local action_key	= mcString.replaceInString action_name " " "_" --replace space with underscore: 3D Gallery > 3D_Gallery
+--check if action exists
+/*if mcFile.getActionByName action_key != undefined do (
+
+	mcPopUp.msgBox ("Action [ "+action_key+" ] already exists. Operation Aborted.") title:"Customize"
+	return false
+)*/
+		--assembly action
+		local action_data	 = icon_index + ", " + action_cmd + ", " + action_name	
+		
+		mcString.printInBlock "mcFile > editOrCreateAction > \n\tcatalog\t: %\n\taction\t: % \n\tdata\t: %\n" params:#(action_category, action_key, action_data)
+		
+		--create new script or register one
+		if findString action_cmd "fileInVersion" != undefined do (
+		
+			--check if file exists
+			local script_path = ""
+			local root_files = getFiles (Micra.rootDir + "*.ms")
+			for f in root_files do (
+			
+				if findString f action_key != undefined do (
+				
+					script_path = f
+					exit --break loop
+				)
+			)
+			format "search > script [ % ] exists:% script_path:%\n" action_key (doesFileExist script_path) script_path  
+			if doesFileExist script_path then ( --register script
+			
+				--check if script is registred
+				local script_version = Micra.getScriptVersion action_key
+				if script_version != "" then ( --if already registred break 
+				
+					format "mcFile > appendActionOrCreateScript > Script [ % ] is already registred. Operation aborted.\n" action_key
+					return false
+				) else ( --register script
+					
+					--local script_file_name = filenameFromPath script_path
+					--mcFile > registerMicraScript > [Script_Manager_v0.14]	success:true
+					--registerMicraScript script_file_name
+				)
+				--local script_path = Micra.rootDir + action_key + ".ms"
+				
+			) else ( --crete script
+			
+				
+			)
+			--open script  
+			
+		)
+			
+			
+			
+		--if structureExists
+		
+		--open file and focus at end of structure
+		--insert new function
+		
+		--choices
+		--is new file (Micra.fileInVersion "3DGallery")
+		--is existing file (Micra.fileInVersion "3DGallery")
+		--is existing file but new function (mcAction.snapToSurface())
+
+	
+		/*if findString action_cmd "fileInVersion" != undefined do return "Micra_Main.ms"
+		local dot_index = findString action_cmd "."
+		local root_class = substring action_cmd dot_index
+		
+		mcString.src
+
+		local fname = mcFile.getActionParams action_cmd --get params as fname
+		local current_dir = Micra.RootDir
+		local fversion = getIniSetting Micra.DefaultSettings "Version" fname
+		local file = current_dir + fname + "_v" + fversion + ".ms"
+		if Micra.debug == 10 do format "mcFile > showActionSource > file:%\n" file*/
+		
+		--save in Action.ini
+		--setIniSetting Micra.ActionsIni action_category action_key action_data
 	)
 )
  --create instance

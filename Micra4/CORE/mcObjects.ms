@@ -6,6 +6,14 @@ Global mcObject
 Global mcSize
 Global mcRect
 Global mcCube
+/*
+*@Used Structures
+	none - this is base
+*
+*@Used Objects
+	none - this is base
+*
+*/
 
 /**
 *@example

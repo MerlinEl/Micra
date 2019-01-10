@@ -6,9 +6,18 @@
 --xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx--
 ----------------------------------------------------------------------------
 Global mcPopUp
+/*
+*@Used Structures
+	Micra
+	mcDotnet
+	mcFile
+*
+*@Used Objects
 
+
+*/
 Struct MICRA_POPUP (
-
+Private 
 	_drag_pos = [0,0,0], --form mouse pos
 	_typed_text = "",
 	_invalid_characters = "^[]()\\/*{}-+><=;:,.%@#&?!$ ",
@@ -20,6 +29,15 @@ Struct MICRA_POPUP (
 		local nw = DotNetObject "NativeWindow"
 		nw.AssignHandle (DotNetObject "System.IntPtr" (Windows.GetMaxHWND())) 
 		return nw
+	),
+	fn getMaxPos = (
+		
+		return windows.getWindowPos (windows.getMAXHWND())
+	),
+	fn getMaxCenter = (
+	
+		local max_pos = getMaxPos()
+		return [max_pos.w/2 + max_pos.x /2, max_pos.h/2 + max_pos.y /2]
 	),
 	fn closeForm form = (
 		
@@ -38,6 +56,7 @@ Struct MICRA_POPUP (
 			)
 			return new_str
 	),
+Public
 	fn messageBox msg title:"Micra:" = (
 		
 		--TODO dotnet version more elegant :-)
@@ -61,14 +80,14 @@ Struct MICRA_POPUP (
 		
 		local form_size = [320, 60]
 		_form_name = form_name
-		local max_center = mcSystem.getMaxCenter() - (form_size/2)
-		local form_rect = netDrRect max_center form_size
+		local max_center = getMaxCenter() - (form_size/2)
+		local form_rect = mcDotnet.dRect max_center form_size
 		--load pos from ini
 		if form_name != "MaxCenter" then (
 			
 			local fpos = (mcFile.getIniDataFromArray Micra.TempProfileIni "Properties_2" form_name 2)
 			if fpos == undefined do fpos = (mcFile.getIniDataFromArray Micra.DefaultProfileIni "Properties_2" form_name 2)
-			if fpos != undefined do form_rect = netDrRect fpos form_size
+			if fpos != undefined do form_rect = mcDotnet.dRect fpos form_size
 		) 
 		fn textBoxControll s a  = (
 		
@@ -113,23 +132,23 @@ Struct MICRA_POPUP (
 		form.ControlBox  = false --hide main bar
 		form.StartPosition = form.StartPosition.Manual
 		form.bounds = form_rect
-		--form.BackColor = netDrColor (mcUIColors.get #fore)
+		--form.BackColor =mcDotnet.uiColor #fore
 		form.ShowInTaskbar = false
 		form.FormBorderStyle = form.FormBorderStyle.none
 		form.opacity = 1--(mcUIColors.get #opacity)
 		--form.TopMost=true
 		
 		--toolbar
-		lblT.bounds = netDrRect [border_offset, border_offset] [form.width - border_offset*10 , bar_height]
-		lblT.BackColor = netDrColor (mcUIColors.get #back)
-		lblT.ForeColor = netDrColor (mcUIColors.get #text)
+		lblT.bounds = mcDotnet.dRect [border_offset, border_offset] [form.width - border_offset*10 , bar_height]
+		lblT.BackColor = mcDotnet.uiColor #back
+		lblT.ForeColor = mcDotnet.uiColor #text
 		lblT.TextAlign = lblT.TextAlign.MiddleCenter
 		lblT.Text = title
 		
-		edtBox.bounds = netDrRect [ border_offset ,bar_height+border_offset*2] [300, 22]
+		edtBox.bounds = mcDotnet.dRect [ border_offset ,bar_height+border_offset*2] [300, 22]
 		edtBox.Multiline = true
-		edtBox.BackColor= netDrColor (mcUIColors.get #edtback)
-		edtBox.ForeColor= netDrColor (mcUIColors.get #edtfore)
+		edtBox.BackColor= mcDotnet.uiColor #edtback
+		edtBox.ForeColor= mcDotnet.uiColor #edtfore
 		local dnfontlarge = dotNetObject "System.Drawing.Font" "Verdana" 12 ((dotNetClass "System.Drawing.FontStyle").bold)
 		edtBox.font = dnfontlarge
 		
@@ -171,8 +190,8 @@ Struct MICRA_POPUP (
 		--if duration == undefined then  ok button
 		local form_size = [form_width, form_height]*/
 		
-		local max_center = mcSystem.getMaxCenter() - (form_size/2)
-		local form_rect = if pos == undefined  then netDrRect max_center form_size else netDrRect pos form_size
+		local max_center = getMaxCenter() - (form_size/2)
+		local form_rect = if pos == undefined  then mcDotnet.dRect max_center form_size else mcDotnet.dRect pos form_size
 			
 		--Move / Snap Dialog
 		fn onLblTMouseMove s a = ( if a.Button == a.Button.left do mcDialog.snapForm s.parent mcPopUp._drag_pos ) --dragForm
@@ -193,29 +212,29 @@ Struct MICRA_POPUP (
 		form.StartPosition = form.StartPosition.Manual
 		form.bounds = form_rect
 		form.FormBorderStyle = form.FormBorderStyle.none
-		form.BackColor = netDrColor (mcUIColors.get #fore)
+		form.BackColor = mcDotnet.uiColor #fore
 		form.opacity = 1--(mcUIColors.get #opacity)
 			
 		--toolbar
-		lblT.bounds = netDrRect [border_offset, border_offset] [form.width - border_offset * 2, bar_height]
-		lblT.BackColor = netDrColor (mcUIColors.get #back)
-		lblT.ForeColor = netDrColor (mcUIColors.get #text)
+		lblT.bounds = mcDotnet.dRect  [border_offset, border_offset] [form.width - border_offset * 2, bar_height]
+		lblT.BackColor = mcDotnet.uiColor #back
+		lblT.ForeColor = mcDotnet.uiColor #text
 		lblT.TextAlign = lblT.TextAlign.MiddleCenter
 		lblT.Text = title
 		
-		edtBox.bounds = netDrRect [ border_offset ,bar_height+border_offset*2] text_box_size
+		edtBox.bounds = mcDotnet.dRect [ border_offset ,bar_height+border_offset*2] text_box_size
 		edtBox.Multiline = true	
 		--edtBox.enabled = false	
-		edtBox.BackColor= netDrColor (mcUIColors.get #edtback)
-		edtBox.ForeColor= netDrColor (mcUIColors.get #edtfore)
+		edtBox.BackColor= mcDotnet.uiColor #edtback
+		edtBox.ForeColor= mcDotnet.uiColor #edtfore
 		--edtBox.TextAlign = edtBox.TextAlign.MiddleCenter	
 		local dnfontlarge = dotNetObject "System.Drawing.Font" "Verdana" 12 ((dotNetClass "System.Drawing.FontStyle").bold)
 		edtBox.font = dnfontlarge
 		edtBox.text = msg
 		
-		btnOk.bounds = netDrRect [ form.width/2 - 50 ,bar_height+border_offset*2 + edtBox.height] [100, btn_size]
-		btnOk.BackColor= netDrColor (mcUIColors.get #back)
-		btnOk.ForeColor= netDrColor (mcUIColors.get #text)
+		btnOk.bounds = mcDotnet.dRect [ form.width/2 - 50 ,bar_height+border_offset*2 + edtBox.height] [100, btn_size]
+		btnOk.BackColor= mcDotnet.uiColor #back
+		btnOk.ForeColor= mcDotnet.uiColor #text
 		btnOk.text = "OK"
 		
 		dotNet.addEventHandler lblT   "MouseMove" onLblTMouseMove

@@ -66,7 +66,7 @@ if debug == 5 do format "name:%\t tag:%\n" s.name s.tag
 		if s.parent.parent.tag.value.edit_mode do return false
 		if a.Button == a.Button.left do (
 			--if action is assinged in this button progress
-			if s.tag != undefined do mcSystem.runAction s.tag 
+			if s.tag != undefined do mcFile.runAction s.tag 
 		)
 	)
 --| --DragAndDrop	
