@@ -11,6 +11,7 @@
 */
 struct MICRA_DRAW (
 
+	fn getSource = getSourceFileName(), --get path of this script
 	fn isBackface poly_obj the_face =
 	(
 		local v1 = (mapScreenToWorldRay mouse.pos).dir

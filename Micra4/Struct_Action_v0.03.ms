@@ -1,29 +1,21 @@
 Global mcAction
-Global mcAnimation
-Global mcCall
-Global mcPoly
-Global mcFile
-Global mcSnap
 Global mcSkin
 Global mcCreate
-Global mcString
-
-
-Global mcTransform
+Global mcMax
+Global mcShell
 Global mcInterface
-Global mcSystem
-Global mcSelVertsInXDialog
 
-Global mcButtonTeleportSend
-Global mcButtonTeleportGet
-Global mcTriangleCounter = false
+
+--fix this
+Global mcSelVertsInXDialog
 Global mcSilhouetteSelection
 Global mcSilhouetteWirecolors
-Global Selected_Object_Position
 
 
-struct mcAction
-(
+struct mcAction (
+
+	url = getSourceFileName(),
+	fn getSource = getSourceFileName(), --get path of this script
 	fn add_modifier mod =
 	(
 		local sel = selection as array
@@ -1422,69 +1414,78 @@ struct mcAction
 			#fetch: if checkForSave() do  fetchMaxFile quiet:true
 		)
 	),
-	fn hold_selection =
-	(
+	fn holdSelection = (
+	
 		local sel = selection as array
 		local obj = sel[1]
-		if sel.count > 1 then
-		(
-			if keyboard.controlPressed
-			then 
-			(
+		if sel.count > 1 then ( --save selected objects in Set List
+		
+			if keyboard.controlPressed --save selection in to temp ini
+			then (
+			
 				if not doesFileExist Micra.TempINI do return false
 				for i in sel do setIniSetting Micra.TempINI "Names" i.name ""
+			) else (
+			
+				selectionSets["objSel"] = selection
 			)
-			else (selectionSets["objSel"] = selection)
+		) else if obj != undefined and classOf obj == Editable_Poly and modPanel.getCurrentObject() != undefined and subobjectLevel > 0 then ( --save seleccted elements in Set List
+		
+			case subobjectLevel of( --save selection at current level [vertices, triangls, polygons]
+			
+				1: obj.verts["vSel"] = (polyOp.getVertSelection obj.baseobject)
+				2: obj.edges["eSel"] = (polyOp.getEdgeSelection obj.baseobject)
+				4: obj.faces["fSel"] = (polyOp.getFaceSelection obj.baseobject)
+			)
+		) else if obj != undefined and keyboard.altPressed do ( --when Alt pressed save single object pos
+		
+			mcGM.setParam "selected_object_position" selection[1].pos
 		)
-		else if obj != undefined and classOf obj == Editable_Poly and modPanel.getCurrentObject() != undefined and subobjectLevel > 0
-		then case subobjectLevel of
-		(
-			1: obj.verts["vSel"] = (polyOp.getVertSelection obj.baseobject)
-			2: obj.edges["eSel"] = (polyOp.getEdgeSelection obj.baseobject)
-			4: obj.faces["fSel"] = (polyOp.getFaceSelection obj.baseobject)
-		)
-		else if obj != undefined and keyboard.altPressed do Selected_Object_Position = selection[1].pos
 	),
-	fn fetch_selection =
+	fn fetchSelection =
 	(
 		local sel = selection as array
 		local obj = selection[1]
-		undo "Fetch Selection" on
-		(
-			if keyboard.altPressed and classOf Selected_Object_Position == point3 and selection.count == 1 then selection[1].pos = Selected_Object_Position
-			else if keyboard.controlPressed and sel.count != 0 then
-			(
+		undo "Fetch Selection" on (
+
+			if keyboard.altPressed and classOf mcGM.getParam "selected_object_position" == point3 and selection.count == 1 then ( --when Alt pressed restore single object pos
+			
+				selection[1].pos = mcGM.getParam "selected_object_position"
+				
+			) else if keyboard.controlPressed and sel.count != 0 then ( --load saved selection from temp ini
+			
 				local names = getIniSetting Micra.TempINI "Names"
 				if names.count != sel.count do return false
 				for i=1 to sel.count do sel[i].name = names[i]
-			)
-			else if obj != undefined and classOf obj == Editable_Poly and modPanel.getCurrentObject() != undefined and  subobjectLevel > 0 
-			then case subobjectLevel of
-			(
-				1: if obj.verts["vSel"] != undefined then
-				(
-					sel = for i in obj.verts["vSel"] collect execute(filterString (i as string) "(:")[2] 
-					sel += (polyOp.getVertSelection obj.baseobject)
-					obj.verts["vSel"] = sel
-					select obj.verts["vSel"]
+				
+			) else if obj != undefined and classOf obj == Editable_Poly and modPanel.getCurrentObject() != undefined and  subobjectLevel > 0 then ( --restore selected elements
+			
+				case subobjectLevel of ( --get selection at current level [vertices, triangls, polygons]
+				
+					1: if obj.verts["vSel"] != undefined then
+					(
+						sel = for i in obj.verts["vSel"] collect execute(filterString (i as string) "(:")[2] 
+						sel += (polyOp.getVertSelection obj.baseobject)
+						obj.verts["vSel"] = sel
+						select obj.verts["vSel"]
+					)
+					2: if obj.edges["eSel"] != undefined then
+					(
+						sel = for i in obj.edges["eSel"] collect execute(filterString (i as string) "(:")[2] 
+						sel += (polyOp.getEdgeSelection obj.baseobject)
+						obj.edges["eSel"] = sel
+						select obj.edges["eSel"]
+					)
+					4: if obj.faces["fSel"] != undefined then
+					(
+						sel = for i in obj.faces["fSel"] collect execute(filterString (i as string) "(:")[2] 
+						sel += (polyOp.getFaceSelection obj.baseobject)
+						obj.faces["fSel"] = sel
+						select obj.faces["fSel"]
+					)
 				)
-				2: if obj.edges["eSel"] != undefined then
-				(
-					sel = for i in obj.edges["eSel"] collect execute(filterString (i as string) "(:")[2] 
-					sel += (polyOp.getEdgeSelection obj.baseobject)
-					obj.edges["eSel"] = sel
-					select obj.edges["eSel"]
-				)
-				4: if obj.faces["fSel"] != undefined then
-				(
-					sel = for i in obj.faces["fSel"] collect execute(filterString (i as string) "(:")[2] 
-					sel += (polyOp.getFaceSelection obj.baseobject)
-					obj.faces["fSel"] = sel
-					select obj.faces["fSel"]
-				)
-			)
-			else if selectionSets["objSel"] != undefined do
-			(
+			) else if selectionSets["objSel"] != undefined do ( --restore selected objects
+			
 				sel = for o in selectionSets["objSel"] collect o--execute(filterString (i as string) "(:")[2]
 				sel += selection as array
 				selectionSets["objSel"] = sel
@@ -2244,41 +2245,10 @@ struct mcAction
 	) --resizePlane 29.21	
 )
 
-struct mcAnimation
-(
-	fn reverse begin end =
-	(
-		sel = selection as array
-		if sel.count != 4 do return false
-		undo "Reverse Animation" on for i in sel do 
-		(
-			reverseTime i.rotation.controller begin end #incLeft #incRight
-		)
-	),
-	fn store = 
-	(
-		Global mcTempControllerData
-		local obj = selection[1]
-		if obj == undefined do return false
-		mcTempControllerData = #(copy obj.position.controller, copy obj.rotation.controller, copy obj.scale.controller)
-	),
-	fn paste = 
-	(
-		local obj = selection[1]
-		if obj == undefined do return false
-		local old_obj_pos = obj.pos
-		if mcTempControllerData != undefined and mcTempControllerData.count == 3 do undo "Paste Animation" on
-		(
-			obj.position.controller = mcTempControllerData[1]
-			obj.rotation.controller = mcTempControllerData[2]
-			obj.scale.controller    = mcTempControllerData[3]
-			obj.pos = old_obj_pos
-		)
-	)
-)
 
-struct mcCreate
-(
+struct mcCreate (
+
+	fn getSource = getSourceFileName(), --get path of this script
 	fn cameraFromView name:(uniquename "Camera") type:#target =
 	(
 		if viewport.getType() == #view_persp_user do
@@ -2455,6 +2425,7 @@ struct mcCreate
 )
 struct mcInterface
 (
+	fn getSource = getSourceFileName(), --get path of this script
 	fn super_expert_mode =
 	(
 		local state = not(timeslider.isVisible()) 
@@ -2514,8 +2485,9 @@ struct mcInterface
 		)
 	)	
 )
-struct mcSkin
-(
+struct mcSkin (
+
+	fn getSource = getSourceFileName(), --get path of this script
 	fn getBoneByName mod_obj name =
 	(
 		local bones_count = skinOps.GetNumberBones mod_obj
@@ -2568,5 +2540,23 @@ struct mcSkin
 		subobjectLevel = 0
 		obj.parent = (getNodeByName "bone_body_01")
 		return OK
+	)
+)
+
+struct mcMax (
+
+	fn getSource = getSourceFileName(), --get path of this script
+	fn alignObject = (max align)
+)
+
+struct mcShell (
+
+	fn getSource = getSourceFileName(), --get path of this script
+	fn openApp app_name = (
+	
+		case app_name of(
+		
+			"calc": ShellLaunch "C:\\WINDOWS\\system32\\calc.exe"
+		)
 	)
 )

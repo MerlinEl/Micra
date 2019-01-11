@@ -12,6 +12,7 @@
 Struct MICRA_SCREEN (
 
 	scr = (dotNetClass "System.Windows.Forms.Screen"),	
+	fn getSource = getSourceFileName(), --get path of this script
 	fn count = (scr.AllScreens.count),
 	fn name num:1 = (scr.AllScreens[num].DeviceName),
 	fn size num:1 = 

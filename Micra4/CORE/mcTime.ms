@@ -15,6 +15,7 @@
 Struct MICRA_TIME (
 
 	all, year, month, day, hours, mins, ms,
+	fn getSource = getSourceFileName(), --get path of this script
 	fn init = (
 		
 		all = getLocalTime()

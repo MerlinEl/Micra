@@ -8,6 +8,7 @@
 ----------------------------------------------------------------------------
 
 Global Micra
+Global mcTriangleCounter = false --TODO > find another way used: [Micra_Macro.mcr]
 
 struct MICRA_STRUCTURE (
 

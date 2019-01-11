@@ -35,6 +35,7 @@ Struct MICRA_EVENT_SET (
 	_id,
 	_debug = false,
 	_function_list = #(),
+	fn getSource = getSourceFileName(), --get path of this script
 	fn getFnIndex evt_fn = (
 		
 		for i = 1 to _function_list.count where _function_list[i]  as String == evt_fn as String do return i
@@ -93,6 +94,7 @@ Struct MICRA_EVENTS (
 	
 		_debug = false,
 		_evts_set_list = #(),
+		fn getSource = getSourceFileName(), --get path of this script
 		fn getEventSetIndex evt_id = (
 		
 			for i = 1 to _evts_set_list.count where _evts_set_list[i]._id == evt_id do return i

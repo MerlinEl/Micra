@@ -12,6 +12,7 @@
 Global mcSystem
 struct mcSystem (
 
+	fn getSource = getSourceFileName(), --get path of this script
 	fn units_type = (
 	
 		case units.SystemType of

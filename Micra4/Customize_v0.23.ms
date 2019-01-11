@@ -16,7 +16,7 @@ local btn_size        = 24
 local form_width       = 240
 local form_height       = 420
 local form_default_width = 224 --? don't know why but this is the default size (maybe form min max?)
-local form_edit_width = 400
+local form_edit_width = 600
 local cp_width        = 48
 local debug = 1
 -->Components---------------------------------------------------------------------
@@ -78,10 +78,19 @@ fn getInterfaceComponent component_name = (
 	--format "getInterfaceComponent > %\n" component_name
 	if form == undefined do return false
 	local toolbar_edit = form.controls.Item("toolbar_edit")
+	if toolbar_edit == undefined or toolbar_edit.controls == undefined or toolbar_edit.controls.count == 0 do (
+	
+		format "Customize > getInterfaceComponent > name:% failed.\n" component_name
+		return undefined
+	)
 	local mcs = form.tag.value
 	return case component_name of (
 
-		"icon_index": toolbar_edit.controls.Item("edt_icon_index")
+		"icon_index":(
+		
+			local icon_panel = toolbar_edit.controls.Item("panel_icon")
+			icon_panel.controls.Item("edt_icon_index")
+		)
 		"action_cmd": toolbar_edit.controls.Item("cmd_act")
 		"catalog_name": toolbar_edit.controls.Item("name_cat")
 		"action_name": toolbar_edit.controls.Item("name_act")
@@ -99,6 +108,7 @@ fn getEditorData component_name = ( --get data from editor panel
 )
 fn setEditorData component_name str = ( --set data to editor panel
 
+	format "Customize > setEditorData > component_name:% text:%\n" component_name str
 	local item = getInterfaceComponent component_name
 	if item != undefined do item.text = str
 )
@@ -108,7 +118,7 @@ fn addNewCatalog = (
 	local action_category = getEditorData "catalog_name"
 	local item_array = getIniSetting Micra.ActionsIni
 	local exists = (findItem item_array action_category) != 0
-	format "addNewCatalog > name:%  exists:%\n " action_category exists
+	format "Customize > addNewCatalog > name:%  exists:%\n " action_category exists
 	if not exists then (
 	
 		setIniSetting Micra.ActionsIni action_category "del_key" "del_val" --create head and item
@@ -182,20 +192,22 @@ fn editAction = (
 	if action_name == undefined do return false
 	mcFile.showActionSource action_name
 )
-fn editIcon = (
+fn changeIcon = (
 
 	local action_category = getEditorData "category_list"
 	local action_name = getEditorData "action_name"
 	if action_category == undefined or action_name == undefined do return false
 	local icon_index = mcFile.getIniDataFromAction action_category action_name "icon"
-	format "icon index:%\n" icon_index
-	mcGM.setParam "active_icon_index" (execute icon_index)
+	format "Customize > changeIcon > icon index:%\n" icon_index
+	if icon_index != undefined do mcGM.setParam "active_icon_index" (execute icon_index)
 	Micra.fileInVersion "Icon_Maker"
 )
 fn onChangedIconIndex icon_index =  (
 	
+	format "Customize > changeIcon > onChangedIconIndex > to:%\n" icon_index
+	local mcs = form.tag.value
 	if not mcs.edit_mode do return false
-	
+	setEditorData "icon_index" (icon_index as String)
 )
 fn getItemIndex list item_name = (
 
@@ -498,9 +510,9 @@ fn delDirectoryContent dir includefiles:false quiet:true =
 )
 
 
-fn onTab1ButtonClick s a = (
+fn onEditToolbarButtonClick s a = (
 
-	--format "onTab1ButtonClick > btn:%\n" s.name
+	format "onEditToolbarButtonClick > btn:%\n" s.name
 	case s.name of (
 	
 		"btn_cat_add": addNewCatalog()
@@ -508,7 +520,7 @@ fn onTab1ButtonClick s a = (
 		"btn_act_add": addNewAction()
 		"cmd_act_add": editAction()
 		"btn_act_del": delCurrentAction()
-		"btn_icn_edit": editIcon() 
+		"btn_icn_change": changeIcon() 
 		"btn_settings_save": saveAction()
 	)
 )
@@ -639,35 +651,78 @@ fn addTab num mcs = (
 				dotNet.addEventHandler mcs.tab_1.list_view "ItemSelectionChanged" onPickedListItem --show help text when action selected (also in edit mode fill all properties)
 				dotNet.addEventHandler mcs.tab_1.list_view "MouseDown" onMousedown --manage mouse click (left, middle, right, drag and drop)
 				dotNet.addEventHandler mcs.tab_1.combo_box "SelectedIndexChanged" onPickedBoxItem --change action category
-				mcEvents.registerEvent "ICON_SELECTED_INDEX" onChangedIconIndex --when icon selected in Icon_Maker (mcIconMakerDialog)
+				mcEvents.registerEvent "ICON_INDEX_CHANGED" onChangedIconIndex --when icon selected in Icon_Maker (mcIconMakerDialog)
 				
 				--Initialize Actions Property Components---------------------------------------------------------------------
 				local edit_font = dotnetobject "System.Drawing.Font" "Verdana" 10 (dotnetclass "System.Drawing.FontStyle").bold
 				local keys = #(
-					mcItem "lbl" "Category:" "lbl_category", mcItem "edt" "" "name_cat", mcItem "btn" "Add Category" "btn_cat_add", mcItem "btn" "Del Category" "btn_cat_del", 
-					mcItem "lbl" "Action:" "lbl_act", mcItem "edt" "" "name_act", mcItem "edt" "" "cmd_act", mcItem "btn" "Add Action" "btn_act_add", mcItem "btn" "Edit Action" "cmd_act_add", mcItem "btn" "Del Action" "btn_act_del",
-					mcItem "lbl" "Icon:" "lbl_icn_num", mcItem "edt" "" "edt_icon_index", mcItem "btn" "Edit Icon" "btn_icn_edit",
-					mcItem "lbl" "Settings:" "btn_settings", mcItem "btn" "Save" "btn_settings_save"
+					--Category
+					mcItem "lbl" "Category:" "lbl_category" 1, 
+					mcItem "edt" "" "name_cat" 2, 
+					mcItem "btn" "Add Category" "btn_cat_add" 3, 
+					mcItem "btn" "Del Category" "btn_cat_del" 3, 
+					--Action
+					mcItem "lbl" "Action:" "lbl_act" 1, 
+					mcItem "edt" "" "name_act" 2, 
+					mcItem "edt" "" "cmd_act" 2, 
+					mcItem "btn" "Add Action" "btn_act_add" 4, 
+					mcItem "btn" "Edit Action" "cmd_act_add" 4, 
+					mcItem "btn" "Del Action" "btn_act_del" 4,
+					--Icon
+					mcItem "lbl" "Icon:" "lbl_icn_num" 1, 
+					mcItem "edt" "" "edt_icon_index" 5, 
+					mcItem "btn" "Change Icon" "btn_icn_change" 5,
+					--Settings
+					mcItem "lbl" "Settings:" "btn_settings" 1, 
+					mcItem "btn" "Save" "btn_settings_save" 6
 				)
 
-				local components = #()
+				--Define rollout panels
+				local panel_catalog	= dotNetObject "TableLayoutPanel"
+				panel_catalog.name = "panel_catalog"
+				panel_catalog.width  = form_edit_width - mcs.tlp_main.width - form_offset*1.5
+				panel_catalog.height = 40 --form_height - form_offset*5
+				panel_catalog.backColor = netDrColor #8183b3
+				panel_catalog.ColumnCount = 4
+				
+				local panel_action	= dotNetObject "TableLayoutPanel"
+				panel_action.name = "panel_action"
+				panel_action.width  = mcs.tlp_edit.width - form_offset
+				panel_action.height = 60
+				panel_action.backColor = netDrColor #8183b3
+				panel_action.ColumnCount = 4
+				
+				local panel_icon	= dotNetObject "TableLayoutPanel"
+				panel_icon.name = "panel_icon"
+				panel_icon.width  = mcs.tlp_edit.width - form_offset
+				panel_icon.height = 40
+				panel_icon.backColor = netDrColor #8183b3
+				panel_icon.ColumnCount = 2
+
+				local btn_save 
+				local titles = #()
+				local edits = #()
+
+				--Fill with components
 				for i = 1 to keys.count do (
 					
 					local item_type = keys[i].key
 					local item_text = keys[i].val
 					local item_name = keys[i].tag
-					local item_size = netDrSize [mcs.tlp_edit.width - form_offset, btn_size] --item.size = netDrSize [mcs.tlp_edit.width/2 - form_offset, btn_size]
+					local item_index =keys[i].index 
+					local item_size = netDrSize [mcs.tlp_edit.width - form_offset, btn_size]
 					local item = case item_type of (
 					
 						"btn":(
-							format "register button:%\n" item_name
+
+							item_size.width = 100
 							item_size.height = 26
 							item = dotNetObject "button"
 							item.BackColor = mcDotnet.uiColor #back
 							item.ForeColor = mcDotnet.uiColor #text
-							dotNet.addeventhandler item "Click" onTab1ButtonClick
-							--dotNet.setLifetimeControl item #dotnet
-							item
+							dotNet.addeventhandler item "Click" onEditToolbarButtonClick
+							dotNet.setLifetimeControl item #dotnet
+							item --case return
 						)
 						"lbl":(
 						
@@ -676,7 +731,6 @@ fn addTab num mcs = (
 							item.TextAlign = (dotnetClass "system.Drawing.ContentAlignment").MiddleCenter
 							item.BackColor = netDrColor (mcUIColors.get #back)
 							item.ForeColor = netDrColor (mcUIColors.get #text)
-					
 							item --case return
 						)
 						"edt": (
@@ -697,12 +751,24 @@ fn addTab num mcs = (
 					item.text = item_text
 					item.size = item_size
 					item.margin  =  dotnetobject "padding" 2
-					components += #(item)
+					
+					--Fill panels by index
+					case item_index of (
+							
+						1: append titles item --add titles 
+						2: append edits item --add edits
+						3: panel_catalog.Controls.Add item --add category buttons
+						4: panel_action.Controls.Add item --add action buttons
+						5: panel_icon.Controls.Add item --add icon button and edit field  --TODO (add image_tag to display icon .. maybe)
+						6: btn_save = item --add save button
+					)
 				)
+				panel_icon.Controls.Item["edt_icon_index"].width = 100 --change icon edit field width
 				--add components
-				mcs.tlp_edit.Controls.addRange components
+				local edit_components = #(titles[1], edits[1], panel_catalog, titles[2], edits[2], edits[3], panel_action, titles[3], panel_icon, titles[4], btn_save)
+				mcs.tlp_edit.Controls.addRange edit_components
 				mcs.tab_1.created = true
-				if debug == 1 do print "addTab > Actions components created. "
+				if debug == 1 do format "addTab > Edit components % created. \n" edit_components
 			)
 			
 			--Add Interface Components To Layout---------------------------------------------------------------------
@@ -894,6 +960,7 @@ fn onFormVisibilityChanged s a = (
 			mcFile.saveIniDialog s.name "Properties_2"
 			mcGM.setParam "action_editor_switch" undefined
 			editModeSwitch false --restore form width to normal
+			mcEvents.unregisterEvent "ICON_INDEX_CHANGED" onChangedIconIndex
 		)
 	)
 )
@@ -939,7 +1006,7 @@ fn inicializeInterface form mcs =
 	mcs.tlp_edit.name = "toolbar_edit"
 	mcs.tlp_edit.bounds = netDrRect [form_offset + mcs.tlp_main.width, form_offset/2]  [form_edit_width - mcs.tlp_main.width - form_offset*1.5, form_height - form_offset*5]
 	mcs.tlp_edit.backColor = netDrColor #8183b3
-	--mcs.tlp_edit.ColumnCount = 2
+	mcs.tlp_edit.ColumnCount = 1
 	
 	mcs.tab.bounds = netDrRect [form_offset/2, bar_height*2+form_offset*4] [form_width - form_offset*5, form_height - bar_height - btn_size - form_offset*6]
 	mcs.tab.backColor = mcDotnet.uiColor #btn --yellow --

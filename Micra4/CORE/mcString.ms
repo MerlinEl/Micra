@@ -11,8 +11,8 @@
 */
 struct MICRA_STRING (
 
-	src = micra.RootDir + "mcString.ms",
 	breakline = "----------------------------------------------------------------------------------------------------------------------------------",
+	fn getSource = getSourceFileName(), --get path of this script
 	/**
 	*@Usage 
 		Trims all leading characters specified in trimChars from the given string and returns it. 

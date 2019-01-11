@@ -10,6 +10,8 @@
 *
 */
 struct MICRA_MATH (
+
+	fn getSource = getSourceFileName(), --get path of this script
 	fn isInteger num = (mod num 1 == 0),
 	--usage:	mcMath.roundToInt 25.45 10
 	--receives the number 120 435 it return 120 000 wich is the nearest ten thousand etc..

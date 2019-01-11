@@ -2,8 +2,8 @@ Global mcColorPickerDialog
 /*
 MerlinEl 2018
 Accessible Events:
-		mcEvents.registerEvent "Color_Picker_Add_Color" setButtonColor
-		mcEvents.registerEvent "Color_Picker_Mod_Color" changeObjectsWire
+		mcEvents.registerEvent "COLOR_PICKER_ADD_COLOR" setButtonColor
+		mcEvents.registerEvent "COLOR_PICKER_MOD_COLOR" changeObjectsWire
 */
 
 if ::mcColorPickerDialog != undefined do try(mcColorPickerDialog.Close())catch()
@@ -50,8 +50,8 @@ if doesFileExist (Micra.RootDir+"Img\\ColorBySat.png") and doesFileExist (Micra.
 		-- Custom Properties
 		
 		-- Custom Functions
-		fn sendColor s a = (mcEvents.dispatchEvent "Color_Picker_Add_Color" data:mcs.newColorBt.backColor),
-		fn colorChanged net_clr =  (mcEvents.dispatchEvent "Color_Picker_Mod_Color" data:net_clr),
+		fn sendColor s a = (mcEvents.dispatchEvent "COLOR_PICKER_ADD_COLOR" data:mcs.newColorBt.backColor),
+		fn colorChanged net_clr =  (mcEvents.dispatchEvent "COLOR_PICKER_MOD_COLOR" data:net_clr),
 		fn updateRGBHSVSpinners col = 
 		(
 			spnR.value = col.r

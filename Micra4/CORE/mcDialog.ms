@@ -14,6 +14,7 @@
 */
 Struct MICRA_DIALOG (
 
+	fn getSource = getSourceFileName(), --get path of this script
 	--> TODO test > Make grid with size 01  to snap dialogs, Rene (2018)
 	fn snapForm formA pos =
 	(

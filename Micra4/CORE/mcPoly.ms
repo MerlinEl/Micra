@@ -11,6 +11,7 @@
 */
 struct MICRA_POLY
 (
+	fn getSource = getSourceFileName(), --get path of this script
 	fn isClass arg obj =
 	(
 		case arg of

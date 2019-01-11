@@ -69,8 +69,8 @@ try ( mcColorPaleteDialog.close() ) catch()
 		if a.Clicks > 1  then (
 			
 			removeBorder mcs s
-			mcEvents.registerEvent "Color_Picker_Add_Color" setButtonColor
-			mcEvents.registerEvent "Color_Picker_Mod_Color" changeObjectsWire
+			mcEvents.registerEvent "COLOR_PICKER_ADD_COLOR" setButtonColor
+			mcEvents.registerEvent "COLOR_PICKER_MOD_COLOR" changeObjectsWire
 			Micra.fileInVersion "Color_Picker"
 			--if not mcColorPickerDialog.visible() do mcColorPickerDialog.init()
 			
@@ -191,8 +191,8 @@ try ( mcColorPaleteDialog.close() ) catch()
 		then (updateColors s a)
 		else (
 			pushprompt ""
-			mcEvents.unregisterEventSet "Color_Picker_Add_Color" --remove event add color to palete
-			mcEvents.unregisterEventSet "Color_Picker_Mod_Color" --remove event mod color to selection
+			mcEvents.unregisterEventSet "COLOR_PICKER_ADD_COLOR" --remove event add color to palete
+			mcEvents.unregisterEventSet "COLOR_PICKER_MOD_COLOR" --remove event mod color to selection
 		)
 	)
 	fn inicializeInterface form mcs =

@@ -11,6 +11,7 @@
 */
 struct MCRA_ARRAY (
 
+	fn getSource = getSourceFileName(), --get path of this script
 	fn appendIfUnique inArray newElement = (
 		local elementExists = false
 		for elem = 1 to inArray.count do

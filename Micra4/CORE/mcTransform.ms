@@ -12,8 +12,9 @@ Global OBJ_TM
 
 *
 */
-struct mcTransform
-(
+struct mcTransform (
+
+	fn getSource = getSourceFileName(), --get path of this script
 	fn getRotation obj = 
 	(
 		local x = obj.rotation.x_rotation

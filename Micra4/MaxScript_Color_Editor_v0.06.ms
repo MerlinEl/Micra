@@ -547,8 +547,8 @@ rollout mcMaxScriptColorEditorDialog "MaxScript Theme Editor:"  width:680 height
 		
 		local clr = user_data[sel_item_index+1].clr --get color from selected item
 		mcGM.setParam "color_picker_start_color" (netDrColor clr)
-		mcEvents.registerEvent "Color_Picker_Add_Color" setButtonColor
-		mcEvents.registerEvent "Color_Picker_Mod_Color" colorizeCurrentText
+		mcEvents.registerEvent "COLOR_PICKER_ADD_COLOR" setButtonColor
+		mcEvents.registerEvent "COLOR_PICKER_MOD_COLOR" colorizeCurrentText
 		Micra.fileInVersion "Color_Picker"
 	)
 
@@ -601,8 +601,8 @@ rollout mcMaxScriptColorEditorDialog "MaxScript Theme Editor:"  width:680 height
 	on mcMaxScriptColorEditorDialog open do  inicializeInterface()
 	on mcMaxScriptColorEditorDialog close do ( --unregister events
 
-		mcEvents.unregisterEventSet "Color_Picker_Add_Color" --remove event add color to palete
-		mcEvents.unregisterEventSet "Color_Picker_Mod_Color" --remove event mod color to selection
+		mcEvents.unregisterEventSet "COLOR_PICKER_ADD_COLOR" --remove event add color to palete
+		mcEvents.unregisterEventSet "COLOR_PICKER_MOD_COLOR" --remove event mod color to selection
 		if mcColorPickerDialog != undefined and mcColorPickerDialog.visible() do mcColorPickerDialog.Close()
 	)		
 )

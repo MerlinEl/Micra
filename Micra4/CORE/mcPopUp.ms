@@ -17,7 +17,7 @@ Global mcPopUp
 
 */
 Struct MICRA_POPUP (
-Private 
+
 	_drag_pos = [0,0,0], --form mouse pos
 	_typed_text = "",
 	_invalid_characters = "^[]()\\/*{}-+><=;:,.%@#&?!$ ",
@@ -25,6 +25,7 @@ Private
 	_btn_size   = 24,
 	_border_offset  = 2,
 	_bar_height     = 14,
+	fn getSource = getSourceFileName(), --get path of this script
 	fn defNWin = (
 		local nw = DotNetObject "NativeWindow"
 		nw.AssignHandle (DotNetObject "System.IntPtr" (Windows.GetMaxHWND())) 
@@ -56,7 +57,6 @@ Private
 			)
 			return new_str
 	),
-Public
 	fn messageBox msg title:"Micra:" = (
 		
 		--TODO dotnet version more elegant :-)
@@ -121,7 +121,7 @@ Public
 		fn onLblTMouseDown s a = (
 				
 			local form = s.parent
-			form.cursor.current = netCursors.Hand
+			form.cursor.current = mcDotnet.cursors.Hand
 			if a.Button == a.Button.left do ( --enable drag
 				mcPopUp._drag_pos = [form.MousePosition.x, form.MousePosition.y] - [form.left, form.top] 
 			)
@@ -198,7 +198,7 @@ Public
 		fn onLblTMouseDown s a = (
 				
 			local form = s.parent
-			form.cursor.current = netCursors.Hand
+			form.cursor.current = mcDotnet.cursors.Hand
 			if a.Button == a.Button.left do ( --enable drag
 				mcPopUp._drag_pos = [form.MousePosition.x, form.MousePosition.y] - [form.left, form.top] 
 			)

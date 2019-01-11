@@ -17,6 +17,38 @@
 struct MICRA_FILE (
 	
 	all_dirs = #(),
+	fn getSource = getSourceFileName(), --get path of this script
+	/**
+	NOT USED
+	@Return
+		"Everyone"
+		"NT AUTHORITY\SYSTEM"
+	*/
+	fn getFileOwner f = (
+	
+		local fileInfo = dotNetObject "System.IO.FileInfo" f
+		local fileAccessControl = fileInfo.getAccessControl()
+		local NTAccountType = dotNetClass "System.Security.Principal.NTAccount"
+		local fileOwner = fileAccessControl.getOwner NTAccountType
+		fileOwner.value
+	),
+	/**
+	NOT USED
+		local SearchOption = DotNetClass "System.IO.SearchOption"
+		local DotNetDirectoryInfo = DotNetObject "System.IO.DirectoryInfo" targetPath
+		SetDirectoryAccessControlType DotNetDirectoryInfo
+		result = for tfi in (DotNetDirectoryInfo.GetFiles "*.ms" SearchOption.AllDirectories) collect tfi.FullName
+	*/
+	fn setDirectoryAccessControlType inputDirectoryInfo = (
+	
+		local tempUserName = (DotNetClass "System.Environment").UserName
+		local fileSystemRights = (DotNetClass "System.Security.AccessControl.FileSystemRights").Modify
+		local accessControlType = (DotNetClass "System.Security.AccessControl.AccessControlType").Allow
+		local fileSystemAccessRule = DotNetObject "System.Security.AccessControl.FileSystemAccessRule" tempUserName fileSystemRights accessControlType 
+		local directorySecurity = inputDirectoryInfo .GetAccessControl()
+		directorySecurity.AddAccessRule fileSystemAccessRule 
+		inputDirectoryInfo .SetAccessControl directorySecurity 
+	),
 	fn isFilePath _path =  (
 		
 		_path = pathConfig.normalizePath _path
@@ -111,10 +143,23 @@ struct MICRA_FILE (
 			treeCopy d new_dir
 		)
 	),
-	fn import = (
+	fn importObjects = (max file import),
+	fn exportObjects = (max file export),
+	fn exportSelectedObjects = (if selection.count > 0 do max file export selected),
+	fn resetMax = (if checkForSave() != false do resetMaxFile #noPrompt),
+	fn reloadLastFile = (
 	
-		max file import	
+		try (
+			
+			actionMan.executeAction 0 "203" --#noPrompt
+			
+		) catch (
+		
+			MessageBox "OpenFile last file is Failed" title:Micra.version
+		)
 	),
+	fn saveSelectedObjects = (if selection.count > 0 do max file save selected),
+	fn archiveScene = (max file archive), --Pack Scene to Zip
 	fn open fpath = (
 	
 		fpath = filterPath fpath 
@@ -360,15 +405,8 @@ struct MICRA_FILE (
 		--mcAnimation.reverse 0 10 --[function]
 		--mcAction.add_modifier #Unwrap_UVW --[function]
 		--Micra.fileInVersion Paint_Selection --[file]
-		--max align --[max]
-		--ShellLaunch C:\WINDOWS\system32\calc.exe --[shell]
-		--if checkForSave() != false do resetMaxFile #noPrompt --[condition]
-		local action_type = undefined
+		local action_type = "function" --defaul type
 		if (findString action_with_cmd "Micra.fileInVersion" != undefined) then action_type = "file"
-		if (findString action_with_cmd "ShellLaunch" != undefined		) then action_type = "shell"
-		if (findString action_with_cmd "if" != undefined				) then action_type = "condition"
-		if (findString action_with_cmd "max" != undefined			) then action_type = "max"
-		if action_type == undefined do action_type = "function" --defaul type
 		action_type
 	),
 	fn parseActionData ini_data action_category action_name = (
@@ -471,17 +509,6 @@ struct MICRA_FILE (
 		)
 		return false
 	),
-	fn executeAction cmd = (
-	
-		try (
-		
-			execute cmd
-			
-		) catch (
-		
-			format "mcFile > executeAction > error okurek!!! [%]\n\terror:%\n" cmd (getCurrentException())
-		)	
-	),
 	/**
 	*@Examples
 		mcFile.runAction "Align"
@@ -496,20 +523,18 @@ struct MICRA_FILE (
 		local action_type = getActionType action_with_cmd
 		case action_type of (
 
-			"max": executeAction action_with_cmd
-			"function": executeAction action_with_cmd
-			"condition": executeAction action_with_cmd
+			"function": (
+			
+				try (execute action_with_cmd) catch (
+				
+					format "mcFile > executeAction > error okurek!!! [%]\n\terror:%\n" action_with_cmd (getCurrentException())
+				)
+			)
 			"file": (
 				--get file name
 				local fname = getActionParams action_with_cmd --get params as fname
 				if Micra.debug == 10 do format "mcFile > runAction > params:%\n" fname
 				Micra.fileInVersion fname		
-			)
-			"shell":(
-				--get file name
-				local fname = getActionParams action_with_cmd --get params as fname
-				if Micra.debug == 10 do format "mcFile > runAction > params:%\n" fname
-				try (ShellLaunch fname "") catch (format "error okurek!!! [%]\nerror:%\n" fname (getCurrentException()))		
 			)
 		)
 	),
@@ -529,6 +554,55 @@ struct MICRA_FILE (
 		local success = setIniSetting Micra.DefaultSettings "Version" script_name script_version
 		format "mcFile > registerMicraScript > [%_v%]\tsuccess:%\n" script_name script_version success
 	),
+	/**
+	@Example
+		path = getCommandPath "mcAction"
+		struct_name = mcAction, mcAnimation, mcPoly, mcSnap, mcSkin, mcCreate, mcMax, mcShell,....
+	@Return
+		full file path
+	*/
+	fn getStructPathByName struct_name = (
+
+		local struct_instance = execute struct_name
+		--format "mcFile > getStructPathByName > struct_name:% struct_instance:%\n" struct_name struct_instance
+		if (struct_instance != undefined and hasProperty struct_instance "getSource") then (
+		
+			try (struct_instance.getSource()) catch ( undefined )
+			
+		) else (undefined)
+	),
+	/**
+	@Example
+		arr = splitCommand "mcAction.capHoles map:true"
+		arr = splitCommand "mcAction.capHoles()"
+	@Return 
+		#("mcAction", "capHoles")
+	*/
+	fn splitCommand action_cmd = (
+				
+		local dot_pos = findString action_cmd "."
+		if dot_pos == undefined do return false --wrong command format
+		local struct_name = substring action_cmd 1 (dot_pos-1) --get structure instance > mcAction
+		local function_name = substring action_cmd (dot_pos+1) -1 --get function > capHoles() or capHoles map:true
+		--substract name only 
+		local space_index =  findString function_name " "
+		if space_index != undefined then (
+			
+			function_name = substring function_name 1 (space_index-1)
+		) else (
+			
+			local bracket_index = findString function_name "("
+			function_name = substring function_name 1 (bracket_index-1)
+		)
+		#(struct_name, function_name)
+	),
+	/**
+	@	
+		action_category		Modify
+		action_name			Vertex Color
+		action_cmd			Micra.fileInVersion Vertex_Color or mcAction.capHoles()
+		icon_index			208
+	*/
 	fn appendActionOrCreateScript action_category action_name action_cmd icon_index = (
 		
 		--fix action name string
@@ -540,7 +614,9 @@ struct MICRA_FILE (
 		
 		mcString.printInBlock "mcFile > editOrCreateAction > \n\tcatalog\t: %\n\taction\t: % \n\tdata\t: %\n" params:#(action_category, action_key, action_data)
 		-----------------------------------------------------------------------------------------------------
-		--IF CMD contains [fileInVersion] create new script or register existing (also add ti to Actions.ini)
+		--IF CMD contains [fileInVersion] create new script or register existing
+			--REGISTER scipt to Settings.ini [Version]
+			--APPEND action  to Actions.ini  [action_category] [action_name]
 		-----------------------------------------------------------------------------------------------------
 		if findString action_cmd "fileInVersion" != undefined then (
 		
@@ -587,13 +663,43 @@ struct MICRA_FILE (
 			edit script_path
 			return true
 		-----------------------------------------------------------------------------------------------------
-		--ELSE CMD is structure Action like > mcAction.doSomething()
+		--ELSE CMD is structure like > mcAction.doSomething()
+		--Append to existing structure or create new one in [CORE] directory
+			--REGISTER scipt to Settings.ini [Structures]
+			--APPEND action  to Actions.ini  [action_category] [action_name]
 		-----------------------------------------------------------------------------------------------------		
 		) else (
-		
-			--All Action Structures is here (OR NOT?? How we can edit them? mcSystem is elsewhere)
-			local actions_file = Micra.getScriptPath "Struct_Action"
-			format "mcFile > appendActionOrCreateScript > Edit Action Structure:%\n" actions_file
+	
+			--get structure file first
+			local cmd_arr = splitCommand action_cmd --#("mcAction", "capHoles")
+			local struct_name = arr[1]
+			local actions_file = getStructPathByName struct_name 
+			if actions_file != undefined and doesFileExist actions_file then ( --append new function
+			
+				format "mcFile > appendActionOrCreateScript > action structure found in file:%\n" actions_file
+				--open struct_file
+				edit actions_file
+				--find struct start
+				
+				--find struct end
+
+				--append new function at end
+			
+			) else ( --create new mcStructure in folder CORE (also include to )
+			
+				format "mcFile > appendActionOrCreateScript > action structure not exists"
+				local script_file_name = Micra.rootDir + "CORE\\" + struct_name + "_v0.01.ms"
+				local template_file = Micra.rootDir + "CORE\\" + "_template.txt"
+				copyFile template_file script_path
+--enable it > registerMicraScript script_file_name core:true
+--enable it > setIniSetting Micra.ActionsIni action_category action_key action_data
+			)
+			
+			--local actions_file = Micra.getScriptPath "Struct_Action"
+			
+			
+			
+			--format "mcFile > appendActionOrCreateScript > Edit Action Structure:%\n" actions_file
 			
 			--mcSystem -- this structure is elsewhere make new one in Actions ... maybe
 			
@@ -608,12 +714,6 @@ struct MICRA_FILE (
 	return false
 )*/	
 		/*
-		TODO first eliminate unwanted Actions!
-		Calculator = 32, ShellLaunch C:\WINDOWS\system32\calc.exe, Calculator --replace with function mcShell.open "calc"
-		Export_Selection   = 82, if selection.count > 0 do max file export selected, Export selection --replace with function mcFile.exportSelected()
-		Max_Reset          = 2 , (if checkForSave() != false do resetMaxFile #noPrompt),Max Reset --#noPrompt --replace with function mcFile.resetMax()
-		Reload             = 7 , try (actionMan.executeAction 0 203\ catch (MessageBox Open File last file is Failed title:Micra, Reload --#noPrompt --replace with function mcFile.reloadLastFile()
-		Save_Selection     = 57, if selection.count > 0 do max file save   selected, Save Selection --replace with function mcFile.saveSelected()
 --???
 Autosave_Switch = 3, mcSystem.autosaveSwitch() , Autosave Switch'
 Keyboard_Switch = 257, mcSystem.keyboardSwitch() , Keyboard Switch'
@@ -657,3 +757,325 @@ Get_SHGame_Version = 183, mcSystem.getSHGameVersion(), Get SHGame Version
 )
  --create instance
 Global mcFile = Micra.instanceStructure MICRA_FILE "mcFile"
+
+
+
+
+/*
+https://forums.cgsociety.org/t/create-and-share-a-folder-with-maxscript/1707543/14
+
+ dotnet to fire a commandline process via xcopy or robocopy
+
+
+DirectorySecurity class
+getFileSecurityInfo <file_name> <attribute> testFileAttribute: <bool> 
+getFileSecurityInfo (getDir #maxRoot) #write
+isDirectoryWriteable (getDir #maxRoot)
+
+fo = (dotNetClass "System.IO.File")
+atr=fo.GetAttributes (getDir #maxRoot)
+atr.Directory
+atr.ReadOnly
+
+System.IO.File  .[static]SetAttributes <System.String>path <System.IO.FileAttributes>fileAttributes
+System.IO.File .[static]WriteAllText <System.String>path <System.String>contents
+
+-----------------------------------------------------------------------------------
+share_folder_command="net share sharename=\""+folderPath+"\"/UNLIMITED"
+	DOScommand share_folder_command
+------------------------------------------------------------------------------------
+
+HiddenDosCommand ("net share " + (pathConfig.stripPathToLeaf folderPath) + "=" + "\"" + folderPath + "\"" + " /GRANT:Everyone,FULL")
+
+-----------------------------------------------------------------------------------
+net share cshare=c:\shared /GRANT:Everyone,FULL
+
+-----------------------------------------------------------------------------------
+temp_file = getDir #maxRoot + "test.ms"
+fa = createFile temp_file
+close fa
+shellLaunch (getDir #maxRoot) ""
+deleteFile temp_file
+*/
+-----------------------------------------------------------------------------------
+/*
+fn CreateSecurityOpsAssembly =
+(
+source  = ""
+source += "using System;
+"
+source += "using System.IO;
+"
+source += "using System.Security.Principal;
+"
+source += "using System.Security.AccessControl;
+"
+source += "using System.Management;
+"
+source += " 
+"
+source += "namespace SystemSecurity
+"
+source += "{
+"
+source += "    public class AccessOps
+"
+source += "    {
+"
+source += "        public bool SetFullAccessControl(String path)
+"
+source += "        {
+"
+source += "            if (!Directory.Exists(path))
+"
+source += "            {
+"
+source += "                DirectoryInfo info = Directory.CreateDirectory(path);
+"
+source += "                if (!info.Exists) return false;
+"
+source += "            }
+"
+source += "            DirectorySecurity sec = Directory.GetAccessControl(path);
+"
+source += "       
+"
+source += "            SecurityIdentifier everyone = new SecurityIdentifier(WellKnownSidType.WorldSid, null);
+"
+source += "            sec.AddAccessRule(new FileSystemAccessRule(everyone, 
+"
+source += "                FileSystemRights.Modify | FileSystemRights.Synchronize, 
+"
+source += "                InheritanceFlags.ContainerInherit | InheritanceFlags.ObjectInherit, 
+"
+source += "                PropagationFlags.None, AccessControlType.Allow));
+"
+source += "            Directory.SetAccessControl(path, sec);
+"
+source += "            return Directory.Exists(path);
+"
+source += "        }
+"
+source += "        public Object ShareFolderPermission(String SharedFolderPath, String ShareName = \"\", String Description = \"\")
+"
+source += "        {
+"
+source += "            if (!Directory.Exists(SharedFolderPath))
+"
+source += "            {
+"
+source += "                bool result = SetFullAccessControl(SharedFolderPath);
+"
+source += "                if (!result) return false;
+"
+source += "            }
+"
+source += "            if (Directory.Exists(SharedFolderPath)) try
+"
+source += "            {
+"
+source += "                // Calling Win32_Share class to create a shared folder
+"
+source += "                ManagementClass managementClass = new ManagementClass(\"Win32_Share\");
+"
+source += "                // Get the parameter for the Create Method for the folder
+"
+source += "                ManagementBaseObject inParams = managementClass.GetMethodParameters(\"Create\");
+"
+source += "                // Assigning the values to the parameters
+"
+source += "                inParams[\"Description\"] = Description;
+"
+source += "                inParams[\"Name\"] = ShareName;
+"
+source += "                inParams[\"Path\"] = SharedFolderPath;
+"
+source += "                inParams[\"Type\"] = 0x0;
+"
+source += "                inParams[\"MaximumAllowed\"] = null;
+"
+source += "                inParams[\"Password\"] = null;
+"
+source += "                inParams[\"Access\"] = null; // Make Everyone has full control access.
+"
+source += "                // Finally Invoke the Create Method to do the process
+"
+source += "                ManagementBaseObject outParams = managementClass.InvokeMethod(\"Create\", inParams, null);
+"
+source += "                // Validation done here to check sharing is done or not
+"
+source += "                return ((uint)(outParams.Properties[\"ReturnValue\"].Value) != 0);
+"
+source += "            }
+"
+source += "            catch (Exception e)
+"
+source += "            {
+"
+source += "                return e;
+"
+source += "            }
+"
+source += "            return true;
+"
+source += "        }
+"
+source += "        public Object GetFullControl(String SharedFolderPath = \"\", String Description = \"\")
+"
+source += "        {
+"
+source += "            //user selection
+"
+source += "            NTAccount ntAccount = new NTAccount(\"Everyone\");
+"
+source += "            //SID
+"
+source += "            SecurityIdentifier userSID = (SecurityIdentifier)ntAccount.Translate(typeof(SecurityIdentifier));
+"
+source += "            byte[] utenteSIDArray = new byte[userSID.BinaryLength];
+"
+source += "            userSID.GetBinaryForm(utenteSIDArray, 0);
+"
+source += "            //Trustee
+"
+source += "            ManagementObject userTrustee = new ManagementClass(new ManagementPath(\"Win32_Trustee\"), null);
+"
+source += "            userTrustee[\"Name\"] = \"Everyone\";
+"
+source += "            userTrustee[\"SID\"] = utenteSIDArray;
+"
+source += "            //ACE
+"
+source += "            ManagementObject userACE = new ManagementClass(new ManagementPath(\"Win32_Ace\"), null);
+"
+source += "            userACE[\"AccessMask\"] = 2032127;								 //Full access
+"
+source += "            userACE[\"AceFlags\"] = AceFlags.ObjectInherit | AceFlags.ContainerInherit;
+"
+source += "            userACE[\"AceType\"] = AceType.AccessAllowed;
+"
+source += "            userACE[\"Trustee\"] = userTrustee;
+"
+source += "            ManagementObject userSecurityDescriptor = new ManagementClass(new ManagementPath(\"Win32_SecurityDescriptor\"), null);
+"
+source += "            userSecurityDescriptor[\"ControlFlags\"] = 4; //SE_DACL_PRESENT 
+"
+source += "            userSecurityDescriptor[\"DACL\"] = new object[] { userACE };
+"
+source += "            //UPGRADE SECURITY PERMISSION
+"
+source += "            ManagementClass mc = new ManagementClass(\"Win32_Share\");
+"
+source += "            ManagementObject share;
+"
+source += "            try
+"
+source += "            {
+"
+source += "                share = new ManagementObject(mc.Path + \".Name='\" + SharedFolderPath + \"'\");
+"
+source += "                share.InvokeMethod(\"SetShareInfo\", new object[] { Int32.MaxValue, Description, userSecurityDescriptor });
+"
+source += "            }
+"
+source += "            catch (ManagementException e)
+"
+source += "            {
+"
+source += "                return e.ErrorCode;
+"
+source += "            }
+"
+source += "            return true;
+"
+source += "            //This allow me to upgrade the security permission of \"Everyone\" in Windows Vista & 7 and get \"Full Control\"
+"
+source += "        }
+"
+source += "    }
+"
+source += "}
+"
+
+	csharpProvider = dotnetobject "Microsoft.CSharp.CSharpCodeProvider"
+	compilerParams = dotnetobject "System.CodeDom.Compiler.CompilerParameters"
+
+	compilerParams.ReferencedAssemblies.AddRange #("system.dll", "mscorlib.dll", "system.management.dll")
+
+	compilerParams.GenerateInMemory = on
+	compilerResults = csharpProvider.CompileAssemblyFromSource compilerParams #(source)
+	
+	assembly = compilerResults.CompiledAssembly
+	assembly.CreateInstance "SystemSecurity.AccessOps"
+)
+global SecurityOps = CreateSecurityOpsAssembly()
+*/
+
+/*
+SecurityOps.SetFullAccessControl @"c:	emp\sec2"
+SecurityOps.ShareFolderPermission @"c:	emp\sec2" "my_folder" "Shared"
+*/ 
+
+
+
+
+
+
+/*
+fn RunShellFile ShellFile =
+      	(
+      			local ShellPath = "C:\\WINDOWS\\system32\\WindowsPowerShell\\v1.0\\powershell.exe"
+      			local procInfo = dotnetobject "System.Diagnostics.ProcessStartInfo" ShellPath
+      			procInfo.Arguments = "-noprofile -executionpolicy bypass -File " + "\"" + ShellFile + "\""
+      			procInfo.CreateNoWindow = on
+      			procInfo.useShellExecute = off
+      			local DotNetHandle = dotnetclass "System.Diagnostics.Process"
+      			local SharingProcess = undefined
+      			try 
+      			(
+      				SharingProcess = DotNetHandle.Start procInfo
+      				SharingProcess.StartInfo.WindowStyle=(DotNetClass "System.Diagnostics.ProcessWindowStyle").Hidden
+      			)
+      			catch 
+      			(
+      				print "error launching Shell"
+      				return false
+      			)
+      			SharingProcess.WaitForExit()
+      			
+      			if not ( SharingProcess.ExitCode == 0 ) then 
+      			(
+      				print "Sharing was not successful, please Share the Folder Manually!"
+      				return false
+      			)
+      			else
+      			(
+      				print "Successfuly Shared"
+      				return true
+      			)	
+      			SharingProcess.Close()	
+      	)
+      	
+      	fn create_share folderPath =
+      	(
+      		makeDir folderPath
+      		ShellFile=(folderPath +"\\powershell_share.ps1")
+      		ShellCommandBuffer = 
+      		#(
+      			"function Get-GroupName", 
+      			"{",
+      			"	param ($SID)",
+      			"	$objSID = New-Object System.Security.Principal.SecurityIdentifier($sid)",
+      			"	$objUser = $objSID.Translate([System.Security.Principal.NTAccount])",
+      			"	$objUser.Value",
+      			"}",
+      			"cmd /c $(" + "\"" + "net share " + (pathConfig.stripPathToLeaf folderPath) + "=" + folderPath + " /UNLIMITED /GRANT:"+ "\"" + "\"" +"$(Get-GroupName -SID 'S-1-1-0')"+ "\"" + "\"" +",FULL" + "\"" + ")",
+      			"cmd /c $(" + "\"" + "cacls " + folderPath + " /e /p " + "\"" + "\"" +"$(Get-GroupName -SID 'S-1-1-0')"+ "\"" + "\"" + ":f" + "\"" + ")"
+      		)	
+      		(dotnetclass "System.IO.File").WriteAllLines ShellFile ShellCommandBuffer
+      		RunShellFile ShellFile
+      		deleteFile ShellFile
+      	)
+      
+      create_share (sysInfo.tempdir + "test_folder")
+*/

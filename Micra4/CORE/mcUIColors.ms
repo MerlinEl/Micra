@@ -15,6 +15,7 @@
 Struct MICRA_UI_COLORS(
 
 Public
+	fn getSource = getSourceFileName(), --get path of this script
 	fn get clr = (
 		
 		local last_profile = execute (mcFile.saveLoadIniSetings head:"Interface" key:"lastprofile" action:#load)

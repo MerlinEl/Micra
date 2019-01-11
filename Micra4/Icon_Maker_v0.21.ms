@@ -313,14 +313,8 @@ if ::mcIconMakerDialog != undefined do try(mcIconMakerDialog.Close())catch()
 			mcs.activeIconNum = if num !=  unsupplied then num else mcs.getIconNumber pos
 			--format "num:%\tactiveIconNum:%\n" num mcs.activeIconNum	
 			mcs.lblT.Text = "Icon Maker: "+mcs.activeIconNum as string+"/400"
-			
-			--send icon to Action Editor if is opened
-			if ::mcActionEditorDialog != undefined do try(
-				
-				--mcActionEditorDialog.setIcon (mcs.getIcon mcs.tempImgLib_D mcs.activeIconNum transparent:true) mcs.activeIconNum
-				mcActionEditorDialog.setIcon mcs.activeIconNum
-			
-			)catch()
+			--send event with icon number
+			mcEvents.dispatchEvent "ICON_INDEX_CHANGED" data:mcs.activeIconNum
 		),
 		fn loadIconLibrary s a marked:0 =
 		(

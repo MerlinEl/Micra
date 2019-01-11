@@ -1,5 +1,7 @@
-Global mcFormSnap
-Global getIconDotNet
+---TODO finish it
+---selected objects are freezed and one Dialog with thumbnail screenshot was created
+
+
 Global mcHoldSelection
 Global mcSelectionHolderCount = 1
 
@@ -240,4 +242,4 @@ Global mcSelectionHolderCount = 1
 	)
 )
 
-	--mcHoldSelection() 
+	mcHoldSelection() 

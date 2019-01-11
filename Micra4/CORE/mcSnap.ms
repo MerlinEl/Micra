@@ -11,6 +11,7 @@
 */
 struct MICRA_SNAP
 (
+	fn getSource = getSourceFileName(), --get path of this script
 	fn getActiveItems =
 	(
 		local active = #()

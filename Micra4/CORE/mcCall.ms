@@ -11,6 +11,7 @@
 */
 struct MICRA_CALL
 (
+	fn getSource = getSourceFileName(), --get path of this script
 	fn errorMsg block =
 	(
 		print
@@ -202,6 +203,105 @@ struct MICRA_CALL
 		local arr = filterString LocalTime "./ :"
 		if arr.count < 5 do return "invalid time"
 		return (arr[4] + ":" + arr[5] + "  " + arr[1] + "." + arr[2] + "." + arr[3])
+	),
+	/**
+	*#Usage Create maxscript Api  for notepad++ ( current used functions and structures )
+	mcCall.generateNotepadApi "D:\\ReneBaca\\Aprog\Notepad-MSX\\autoCompletion"
+	*/
+	fn generateNotepadApi notepad_api_dir = (
+		
+		local filePath = notepad_api_dir +  "\\maxscript.xml"
+		
+		local filteredSS = stringstream ""
+		format "<?xml version=\"1.0\" encoding=\"Windows-1252\" ?>\n" to:filteredSS
+		format "<NotepadPlus>\n\t<AutoComplete>\n" to:filteredSS
+		format "\t\t<Environment ignoreCase=\"yes\" startFunc=\"(\" stopFunc=\")\" paramSeparator=\".\" terminal=\";\" />\n" to:filteredSS
+		
+		local ss = stringstream ""
+		apropos "" to:ss
+		seek ss 0
+		while not eof ss do (
+		
+			local l = readLine ss
+			if matchPattern l pattern:"*#struct:*" then (
+			
+				local n = (filterString l " ")[1]
+				l = readLine ss
+				while matchPattern l pattern:"*public,*" do (
+				
+					local fu = (trimLeft (filterString l ":")[1] " ")
+					format "\t\t<KeyWord name=\"%.%\" />\n" n fu to:filteredSS
+					l = readLine ss
+				)
+			) else if matchPattern l pattern:"*(const *" then (
+			
+				local fu = (filterString l " ")[1]
+				format "\t\t<KeyWord name=\"%\" />\n" fu to:filteredSS
+			)
+		)
+		--close XML header
+		format "\t</AutoComplete>\n</NotepadPlus>\n" to:filteredSS
+		local fStream = openFile filePath mode:"w+"
+		format "%" (filteredSS as string) to:fStream
+		close fStream
+		
+		shellLaunch notepad_api_dir ""
+	),
+	/***
+	*@Usage Create MaxScript .api file for use with the automcomplete feature of the MaxScript editor.
+	*@Created by:James Haywood (http://apps.jhaywood.com/blog/)
+	*@Mod by: MerlinEl 2019
+	*@Example > mcCall.generateMaxApi()
+	***/
+	fn generateMaxApi = (
+	
+		local filteredSS = stringstream ""
+		local ss = stringstream ""
+		local max_root_dir = getDir #maxRoot
+		local max_user_dir = pathConfig.removePathLeaf (getDir #userScripts)
+		local filePath = (
+			
+			if isDirectoryWriteable max_root_dir \
+				then max_root_dir +  "\\maxscript.api" \
+				else max_user_dir +  "\\maxscript.api" 
+		)
+		apropos "" to:ss
+		seek ss 0
+		while not eof ss do (
+		
+			local l = readLine ss
+			if matchPattern l pattern:"*#struct:*" then
+			(
+				local n = (filterString l " ")[1]
+				l = readLine ss
+				while matchPattern l pattern:"*public,*" do
+				(
+					format "%.%\n" n (trimLeft (filterString l ":")[1] " ") to:filteredSS
+					l = readLine ss
+				)
+			) else if matchPattern l pattern:"*(const *" then (
+			
+				format "%\n" (filterString l " ")[1] to:filteredSS
+			)
+		)
+
+		if  doesFileExist filePath do deleteFile filePath
+		createFile filePath
+		
+		local fStream = openFile filePath mode:"w+"
+		format "%" (filteredSS as string) to:fStream
+		close fStream
+
+		if isDirectoryWriteable max_root_dir then (
+			
+			messageBox "Api was created Succesfully." title:Micra.version
+				
+		) else (
+				
+			messageBox "Api was created Succesfully.\nPlease move file [  maxscript.api  ] from User to Max Root Dir." title:Micra.version
+			shellLaunch max_root_dir ""
+			shellLaunch max_user_dir ""
+		)
 	)
 )
 --create instance

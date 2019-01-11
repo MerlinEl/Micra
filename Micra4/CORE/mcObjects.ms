@@ -35,6 +35,7 @@ struct mcItem (
 struct mcObject ( --always create instance
 	
 	keys = #(), values = #(),
+	fn getSource = getSourceFileName(), --get path of this script
 	fn add key val = (
 	
 		local key_index = findItem keys key

@@ -19,6 +19,7 @@ Struct MICRA_DOTNET (
 	PointClass  = (dotnetClass "Drawing.Point"),
 	Keys        = (dotNetClass "Keys"),
 	File       = (dotnetClass "IO.File"),
+	fn getSource = getSourceFileName(), --get path of this script
 	/*
 	*@Usage		convert max color to dotnet
 	*@Example 	btn.BackColor = mcDotnet.dColor red

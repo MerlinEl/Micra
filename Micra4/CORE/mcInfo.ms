@@ -11,6 +11,7 @@
 */
 struct MICRA_INFO (
 
+	fn getSource = getSourceFileName(), --get path of this script
 	fn all obj = 
 	(
 		show obj	

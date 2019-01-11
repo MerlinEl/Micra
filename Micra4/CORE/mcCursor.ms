@@ -12,6 +12,7 @@
 */
 Struct MICRA_CURCOR (
 
+	fn getSource = getSourceFileName(), --get path of this script
 	fn get type = (
 		return case type of (
 			

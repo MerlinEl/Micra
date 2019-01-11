@@ -18,8 +18,10 @@
 struct MICRA_NEW_STRUCTURE	(
 	
 	--variables
+
 	
 	--functions
+	fn getSource = getSourceFileName(), --get path of this script
 )	
  --create instance
 Global mcNewStructure = Micra.instanceStructure MICRA_NEW_STRUCTURE "mcNewStructure"

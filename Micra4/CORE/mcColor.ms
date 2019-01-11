@@ -10,9 +10,10 @@
 *
 */
 struct MICRA_COLOR (
-	
+
 	alphaStr = "0123456789ABCDEF",
 	alphaArr = #("0","1","2","3","4","5","6","7","8","9","A","B","C","D","E","F"),
+	fn getSource = getSourceFileName(), --get path of this script
 	fn hexToDec num = -- used to convert single hex bit to 0-255 color value
 	(
 		n_ = findString alphaStr (substring num 1 1);

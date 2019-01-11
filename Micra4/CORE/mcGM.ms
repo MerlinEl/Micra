@@ -14,7 +14,8 @@
 */
 struct MICRA_GLOBAL_MEMORY	(
 	
-	_items = mcObject(),	
+	_items = mcObject(),
+	fn getSource = getSourceFileName(), --get path of this script	
 	/**
 	 *@example	
 	 *@param	key
