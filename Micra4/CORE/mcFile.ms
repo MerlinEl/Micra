@@ -412,7 +412,7 @@ struct MICRA_FILE (
 	fn parseActionData ini_data action_category action_name = (
 	
 		ini_data = mcString.trimLeftRight ini_data --remove white space left and right
-		ini_data = mcString.replaceInString ini_data ", " "," -- remove white space after comma 	
+		ini_data = mcString.replaceAll ini_data ", " "," -- remove white space after comma 	
 		local data_array = filterString ini_data "," --split string in to array
 		if classof data_array != array do return undefined --conversion failed
 		if Micra.debug == 10 do format "mcFile > parseActionData > data_array:%\n" data_array
@@ -607,7 +607,7 @@ struct MICRA_FILE (
 		
 		--fix action name string
 		action_name = mcString.trimLeftRight action_name --remove left right spaces
-		local action_key	= mcString.replaceInString action_name " " "_" --replace space with underscore: 3D Gallery > 3D_Gallery
+		local action_key	= mcString.replaceAll action_name " " "_" --replace space with underscore: 3D Gallery > 3D_Gallery
 
 		--assembly action
 		local action_data = icon_index + ", " + action_cmd + ", " + action_name	

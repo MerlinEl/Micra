@@ -1,0 +1,24 @@
+
+The Windows operating system considers .CHM files downloaded from
+the Internet to be a security risk, and blocks them from running any
+scripts or displaying any page content.
+
+If your .CHM file does not load any help pages into the main content
+panel, you may need to unblock it.
+
+To unblock your .CHM file:
+
+1.	Find the file in Windows Explorer.
+2.	Right-click the file and select "Properties" from the contextual
+	menu.
+3.	On the General tab, click the "Unblock" button.
+4.	Re-open the file.
+
+If the "Unblock" button does not appear, or if the file still does not
+show any content:
+
+-	Ensure that there are no special characters anywhere in the path
+	and file name of the .CHM file. The # and . characters are known
+	to prevent CHM files from displaying correctly
+-	Ensure that you are not trying to open the file from a network
+	location or shared folder. Move it to a location on your computer.

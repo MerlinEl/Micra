@@ -47,6 +47,22 @@ struct MICRA_MATH (
 		
 		return 2 * int( num / 2)
 	),
+	/**
+	*@Usage
+		value:int 	input number
+		min_val:int	minimum value	
+		max_val:int	maximum value
+		return:int	min, max or value
+	*@Example
+		mcMath.minMax 100	1	50	--> 50
+		mcMath.minMax -1	1	50	--> 1
+		mcMath.minMax 100	1	200	--> 100
+	*/
+	fn minMax value min_val max_val = (
+	
+		value = amax #(value, min_val) --min
+		value = amin #(value, max_val) --max
+	),
 	fn getVectorsAngle v1 v2 = (acos(dot (normalize v1) (normalize v2))),
 	fn movePointAlongVector p v val = ( p + (normalize v) * val ),
 	fn intersectionLineLine p1 p2 p3 p4 = 

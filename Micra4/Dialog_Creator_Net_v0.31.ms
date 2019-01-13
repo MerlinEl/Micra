@@ -261,7 +261,7 @@ if debug == 5 do format "name:%\t tag:%\n" s.name s.tag
 			--gather data from ini
 			local bname = ("btn_"+bmask+ (i as integer) as string) 
 			local baction  = (getIniSetting Micra.TempProfileIni "Buttons" bname    )
-			local btooltip = (mcString.replaceCharInString (copy baction) "_" " ")
+			local btooltip = (mcString.replaceAll (copy baction) "_" " ")
 			local biconnum = (getIniSetting Micra.TempProfileIni "Icons" bname      ) as integer
 			local bicn     = getIconDotNet biconnum
 			--store data in struct

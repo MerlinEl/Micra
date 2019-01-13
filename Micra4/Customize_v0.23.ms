@@ -322,7 +322,7 @@ fn loadActionList list_cat list_act = (
 	local list_items = #()
 	for i = 1 to item_array.count do 
 	( 
-		local item_text = mcString.replaceCharInString (copy item_array[i]) "_" " "
+		local item_text = mcString.replaceAll (copy item_array[i]) "_" " "
 		local itm = dotNetObject "ListViewItem" item_text
 		itm.tag = item_array[i]
 		itm.name = list_act.SelectedItem
@@ -413,24 +413,8 @@ fn getRandomAboutImage =
 	img_file.dispose()
 	return img
 )
-fn createMicraRunScript sFile =
-(
-	local f    = createFile sFile
-	local data = "\n"
-	data += "fn Micra.RootDir=\""+mcFile.filterPath (Micra.RootDir)+"\"\n"--data += "fn Micra.RootDir=\""+Micra.RootDir+"\"\n"
-	data += "(\n"
-	data += "\tlocal loader = \""+Micra.RootDir+"_Loader.ms\"\n"
-	data += "\tif doesFileExist loader then\n"
-	data += "\t(\n"
-	data += "\t\tfileIn loader\n"
-	data += "\t)\n"
-	data += "\telse (messagebox (\"Micra4 loader is not found.\") title:\" Micra!\")\n"
-	data += ")\n"
-	--format "f:%\n" data 
-	format data to:f
-	close f
-)
-fn onCheckedCahnges s a =
+
+fn onCheckerChanges s a =
 (
 	setINISetting Micra.UserSettings "Settings" s.tag (s.checked as string)
 	
@@ -438,10 +422,7 @@ fn onCheckedCahnges s a =
 	(
 		"Autorun":
 		(
-			--local sFile = (GetDir #startupScripts + "\\Micra_Autorun.ms")
-			local sFile = (GetDir #userStartupScripts + "\\Micra_Autorun.ms")
-			if doesFileExist sFile do deleteFile sFile
-			if s.checked do createMicraRunScript sFile
+			Micra.setAutorunTo s.checked 
 		)
 		"ShowFileName":
 		(
@@ -807,7 +788,7 @@ fn addTab num mcs = (
 					cb.margin  =  dotnetobject "padding" 2
 					cb.BackColor = mcDotnet.uiColor #back
 					cb.ForeColor = mcDotnet.uiColor #text
-					dotNet.addEventHandler cb "MouseUp" onCheckedCahnges
+					dotNet.addEventHandler cb "MouseUp" onCheckerChanges
 					mcs.tab_2.checkboxes += #(cb)
 				)
 				keys = #( "Interface Colors", "Update Micra")
@@ -840,10 +821,10 @@ fn addTab num mcs = (
 			)
 			
 			--Initialize Interface Components---------------------------------------------------------------------
-			for i in mcs.tab_2.checkboxes do 
-			(
-				state = execute (getIniSetting Micra.UserSettings "Settings" i.tag)
-				if state != undefined do i.Checked = state
+			for i in mcs.tab_2.checkboxes do (
+			
+				local state = getIniSetting Micra.UserSettings "Settings" i.tag
+				if state != "" do i.Checked = execute state
 			)
 			
 			--Add Interface Components To Layout---------------------------------------------------------------------

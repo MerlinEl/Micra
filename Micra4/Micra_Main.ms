@@ -25,8 +25,10 @@ struct MICRA_STRUCTURE (
 	files_list			= #(),
 	restart_need		= false,
 	RootDir				= getFilenamePath (getSourceFileName()), --here is current version of Micra
+	AutorunDir			= RootDir + "\\Autorun\\", --all plugins goes here, also Micra's autorun file	
 	RepositoryDir		= (pathConfig.removePathLeaf RootDir) + "\\", --here is all Micra's versions and other Resources
 	ResourcesDir 		= RepositoryDir + "repo_sync\\", --Micra's Shared Resources, Backups, Max Icons, Ms Library, ...
+	AppsDir				= RootDir + "App\\",
 	DefaultDir			= RootDir + "Default\\",
 	DefaultSettings		= RootDir + "Settings.ini", --store file versions
 	UserDir				= RootDir + "User\\" + username + "\\",
@@ -39,10 +41,11 @@ struct MICRA_STRUCTURE (
 	ImagesPath 			= RootDir + "Img\\", --all images here
 	ActionsIni			= RootDir + "Actions.ini",
 	ActionsHelpIni		= RootDir + "Actions_Help.ini",
-	PluginsDir			= RootDir + "plugins\\", --all plugins here
-	MaxUserDir			= pathConfig.removePathLeaf (getDir #userMacros),	
-	Macro					= MaxUserDir + "\\usermacros\\Micra_Macro.mcr",
-	MaxUserSettings = MaxUserDir + "\\Plugin.UserSettings.ini",
+	MaxRootDir			= getDir #maxroot,
+	MaxUserDir			= pathConfig.removePathLeaf (getDir #userMacros),
+	MaxPluginsDir		= MaxUserDir + "\\MicraPlugins\\", --all plugins goes here, also Micra's autorun file	
+	Macro				= MaxUserDir + "\\usermacros\\Micra_Macro.mcr",
+	MaxUserSettings		= MaxUserDir + "\\Plugin.UserSettings.ini",
 	ImgPath				= RootDir + "Img\\", 
 	IconI				= RootDir + "Img\\mcIcons_24_480x480i.bmp",
 	IconM				= RootDir + "Img\\mcIcons_24_480x480m.bmp",
@@ -233,14 +236,87 @@ mc_Dialog_DropTarget = undefined
 			format "% > Micra_Macro has ben Installed. %\n." version success
 		)
 	),
-	--> Larry Minton's Avguard MAXScript Extensions
-	fn setupPluginsPath = (
+	fn isInstaled = (
+	
+		getIniSetting MaxUserSettings "Directories" "Micra Autorun" != ""
+	),
+	fn createMicraRunScript = (
+	
+		local loader_fpath = MaxPluginsDir+"Micra_Autorun.ms.ms"
+		local f = createFile loader_fpath
+		local data = "--------------------------------------------------------------------------------\n"
+			data += "/* Micra Start by Orien 2019 */\n"
+			data += "--------------------------------------------------------------------------------\n"
+			data += "(\n"
+			data += "\tlocal loader = \""+Micra.RootDir+"_Loader.ms\"\n"
+			data += "\tif doesFileExist loader then\n"
+			data += "\t(\n"
+			data += "\t\tfileIn loader\n"
+			data += "\t)\n"
+			data += "\telse (messagebox (\"Micra4 loader is not found.\") title:\" Micra!\")\n"
+			data += ")\n"
+		format data to:f
+		close f
+		true
+	),
+	fn installMaxPlugins = (
+	
+		--Avguard Extensions
+		--another way to check (some different function laike LocalTime)	
+		if avguardHelp == undefined do (
 
-		if (getIniSetting MaxUserSettings "Directories" "Micra Plugins") == "" do (
+			copyFile (AppsDir + "Avguard_Extensions\\avg_dlx90.dlx") (MaxPluginsDir + "avg_dlx90.dlx")
+		)
+		--MXSEditor Global Utility (depends on max version and operating system 32)
+		local bit_version = if is64bitApplication() then "64" else "86"
+		local max_root_arr = (filterString MaxRootDir " \\")
+		local max_version = max_root_arr[max_root_arr.count] --2014, 2015, 2016
+		local src_msx_file = AppsDir + "MSX_Editor\\x"+bit_version+"\\Release - Max"+max_version+"\\MXSEditor_x64.gup"
+		format "% > installMaxPlugins > 3DsaMax x%bit year:% file:%\n" version bit_version max_version src_msx_file
+		copyFile src_msx_file (MaxPluginsDir + "MXSEditor_x64.gup")
+	),
+	/**
+	*@Usage: Add Micra's Plugins path in to 3DsMax (Autorun, Avguard, MSXEditor)
+		Micra_Autorun.ms	()
+		avg_dlx90.dlx		(Larry Minton's Avguard MAXScript Extensions)
+		MXSEditor_x64.gup	()
+	*/
+	fn setAutorunTo state = (
+	
+		--Install Micra Autorun
+		if state and not (isInstaled()) do (
 		
-			setIniSetting MaxUserSettings "Directories" "Micra Plugins" PluginsDir
-			format "% > Larry Minton's Avguard MAXScript Extensions has ben Installed\n." version
+			/*
+			--create MicraPlugins directory if not exists
+			if not doesFileExist MaxPluginsDir do (makeDir MaxPluginsDir all:true)
+			if not doesFileExist MaxPluginsDir do (
+				
+				format "Unable to create User Directory:%\n." MaxPluginsDir
+				return false
+			)
+			createMicraRunScript() --cterate micra autorun file
+			installMaxPlugins() --add some plugins in MaxPluginsDir
+			setIniSetting MaxUserSettings "Directories" "Micra Plugins" MaxPluginsDir --append Micra's plugins dir to 3DsMax
+			*/
+			--Use local dir for autorun
+			setIniSetting MaxUserSettings "Directories" "Micra Autorun" AutorunDir --append Micra's Autorun dir to 3DsMax
+			setIniSetting UserSettings "Settings" "Autorun" "true" --set autorun true
+			format "% > Installation is finished\n." version
+			messageBox "Installation was succesfull.\nPlease restart 3DsMax." title:version
 			restart_need = true
+		)
+		--Uninstall Micra Autorun
+		if not state and isInstaled() do (
+		
+			delIniSetting MaxUserSettings "Directories" "Micra Autorun" --remove Micra's plugins dir to 3DsMax
+			setIniSetting UserSettings "Settings" "Autorun" "false" --set autorun false
+			
+			--delete MicraPlugins directory with files
+			--TODO ***
+			
+			format "% > Uninstall is finished\n." version
+			messageBox "Uninstallation was succesfull.\nPlease restart 3DsMax." title:version
+			unload()
 		)
 	),
 	--> User Profile Switcher
@@ -306,7 +382,6 @@ fileIn Macro
 		format "% > System files(%) checked succesfully!\n" version files_list.count
 		if not initUserProfile() do return false
 		installMacro() --add micra macro to 3DsMax 
-		setupPluginsPath() --append avguard plugins path
 		profileSwitch() --replace temp profile with last used profile
 		loadAllStructures()
 		

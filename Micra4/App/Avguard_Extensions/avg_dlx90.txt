@@ -1,0 +1,1035 @@
+Avguard Extensions - Version 9.0.0
+Requires 3dsmax r9.0
+
+Change notes:
+v5.0.1	- Initial public release.
+v5.0.2	- added: isDeformable, numPoints, getPointPos, nodeGetBoundingBox, nodeLocalBoundingBox
+v5.0.3  - added maskColor:<color> to pasteBitmap, removed bounds checking on source and destination coordinates
+v5.0.4  - added: bit.intAsFloat, bit.floatAsInt, bit.swapBytes, hideByCategory structure
+v5.0.5  - added: getClassInstances 
+v5.0.6  - added: DataPair class, ILayerManager.getLayerObject, gw.startTriangles, gw.triangle, gw.triStrip, 
+		gw.endTriangles, MAXSuperClass Base_Layer, formattedPrint, notifyDependents, setNeedsRedraw,
+		gw.hRect, gw.wRect
+v5.0.7  - added: FindPathSegAndParam, FindLengthSegAndParam
+v6.0.1  - added: interpBezier3D, tangentBezier3D, internet.attemptConnect, internet.checkConnection,
+		internet.getConnectedState, sysInfo.getLanguage
+v6.0.2	- added: sysinfo.processAffinity, sysinfo.systemAffinity 
+v6.0.3	- added: bit.isNAN, bit.isFinite, custAttributes.getOwner, globalVars.getTypeTag, globalVars.getValueTag
+		removed: internet.attemptConnect, internet.checkConnection,internet.getConnectedState, sysInfo.getLanguage,
+		ResetXForm, CenterPivot, CenterObject, WorldAlignPivot, WorldAlignObject, AlignPivot, AlignObject, 
+		AlignToParent, ResetTransform, ResetScale, ResetPivot, quatToEuler, eulerToQuat
+v6.0.4	- getClassInstances now works with MSPlugin and MSCustAttribDef values in addition to MAXClass values,
+		added: custAttributes.getDefClass
+v7.0.0	- moved most stuff to core
+v7.0.1	- moved snapMode to core
+v7.0.2	- added setModContextBBox, setModContextTM, toUpper, toLower, disableRefMsgs, enableRefMsgs, 
+		makeUniqueArray, windows.getChildrenHWND, windows.getChildHWND, windows.getMAXHWND, windows.getDesktopHWND, 
+		custAttributes.getDefInstances, substituteString, systemTools.getEnvVariable, systemTools.setEnvVariable,
+		clearControllerNewFlag, replace_LF_with_CRLF, replace_CRLF_with_LF, scanForNewPlugins
+		fixed getclipboardText/setclipboardText to fix up CRLF
+v.7.0.3 - added: colorPickerDlg, refs.dependentNodes, ReadDoubleAsFloat, WriteFloatAsDouble, SetGridSpacing, 
+		SetGridMajorLines, getBitmapInfo, registry methods, HKey class, root HKey global variables
+v.7.0.4 - fixed alpha option of colorPickerDlg, added type:{#paste | #composite | #blend} to pasteBitmap, 
+		added: getNodeTM
+v.7.0.5 - added: isAnimPlaying(), NodeExposureInterface.Create(), NodeExposureInterface.Get(), particleCenter,
+		particleLife, particleSize2, getThisScriptFilename()
+		redefined meshop.setVert, meshop.moveVert, polyop.setVert, polyop.moveVert to take array of point3 values
+		as 2nd arg
+		Yet another fix to colorPickerDlg to show the right color picker given the alpha arg value
+v.7.0.6	- added: pathIsNetworkPath, globalVars.remove, ik structure methods. Tweaked meshop.setVert, meshop.moveVert, 
+		polyop.setVert, polyop.moveVert to maintain order between verts and pos/offset if verts are specified
+		as array. Added useSoftSel keyword parameter to meshop.moveVert and polyop.moveVert.
+v.7.0.7 - patch to pasteBitmap to get around problem with how bitmap is passed it apply handler in scripted render
+		elements. Added alphaMultiplier:<float> to pasteBitmap
+v.7.0.8 - added viewport.getViewportDib()
+v.7.0.9 - added timeDisplayMode
+v.7.0.10 - added areNodesInstances, replacement for replaceInstances, HiddenDOSCommand (source from Mike BiddleCombe)
+v.8.0.1 - setclipboardText and setclipboardBitmap now return TRUE if succeded, an integer error code if failed. 
+v.9.0.0 - beta build
+
+Methods:
+
+  avguardHelp()
+      A quick summary of the methods and variables defined by this extension.
+
+  WSMApplyFC <WSM_node_array> <pos_point3_array> <vel_point3_array> <force_point3_array> interval:<interval> stepsize:<time> 
+	Applies force-field (Particles & Dynamics + Displace) and deflector (Particles Only) type Space Warps to 
+	the position, velocity, and force array values. The position values are in MAX units, the velocity values 
+	are in MAX units/tick, the force values are in Max units/tick^2 (mass assumed to be == 1). The position, 
+	velocity, and force arrays must be the same size. The effects of the space warps are evaluated over the 
+	specified interval, with a default interval of (interval currenttime (currenttime+1f)), using the specified 
+	stepsize, with a default of 1 frame. The effect of the force-field space warps are first evaluated in the 
+	order specified, followed by the deflector space warps in the order specified. The values in the position, 
+	velocity, and force arrays are replaced with the results of the evaluation of the effects of the space 
+	warps. The supplied force values are applied prior to the space warps being applied. Normally you 
+	want to set the force array to contain values of [0,0,0] prior to calling this method. Only if you are 
+	calculating an additional force in your script would you set the force array to other values. The position 
+	and velocity arrays would normally contain the results of the last call to this method. Any force-field 
+	space warp, including 3rd party plugins, should work correctly. Only the deflector space warps that ship 
+	with MAX are supported. The Path Follow space warp is not suppported as it requires a particle system.
+
+	Example usage (assuming an appropriately placed Gravity and Deflector space warp):
+
+	posArray=#([10,0,0],[10,10,0])
+	velArray=#([0,0,0],[0,0,0])
+	for i = 0 to 20 do
+	(	forceArray=#([0,0,0],[0,0,0])
+		point pos:posArray[1] 
+		point pos:posArray[2] 
+		at time i WSMApplyFC #($gravity01,$deflector01) posArray velArray forceArray
+	)
+	point pos:posArray[1] 
+	point pos:posArray[2] 
+
+	Note: Thinking about adding a 'collided' named parameter that takes a bitArray value, and have the method
+	set the corresponding bit if a collision has occurred. Also a 'stopAtCollision' named parameter that, if 
+	set to true, would stop evaluating the interval when a collision is detected. The current return value 
+	for this method is always 'ok', but would be changed to the time at which the first collision occurred or
+	undefined if no collision occurred. Also, possibly allow the <pos_point3_array> to be an array of point3
+	controllers and set keys for the controllers at each timestep. Probably would need to also specify an 
+	offset transform, since the position values need to be in world space.
+
+  WSMSupportsForce <node>
+	Returns true if the specified node can be used as a force-field type space warp for WSMApplyFC.
+
+  WSMSupportsCollision <node>
+	Returns true if the specified node can be used as a deflector type space warp for WSMApplyFC.
+
+  quatToEuler2 <quat>
+	Returns the same Euler value as is shown in the TTI for the quat
+
+  quatArrayToEulerArray <quat array>
+	Returns an array of smooth Euler values for the quat array.
+
+  close_enough <float> <float> <int>
+	Returns true if the two <float> values are approximately equal, where increasing values of <int>
+	increase the range defined as appoximately equal. A good value of <int> in most cases is 10.
+
+	Example:
+
+	for d1 in #(1., 10., 100., 1000.) do
+	( print d1
+	  for i = 0 to 8 do
+	  ( d2 = d1+(d1*10.^(-i))
+	    format "% : % : % : % : %\n" i d1 d2 (d1==d2) (close_enough d1 d2 10)
+	  )
+	)
+
+  appendIfUnique <array> <value>
+	Appends the value to the array if the value is not already in the array. Returns true if
+	the value is added, false if not.
+
+  pasteBitmap <src_bitmap> <dest_bitmap> (<src_box2> | <src_point2>) <dest_point2> maskColor:<color>
+			  type:{#paste | #composite | #blend} alphaMultiplier:<float>
+	Copies a block of pixels from src_bitmap to dest_bitmap. Position of source block is
+	specified by src_box2 or src_point2, and the destination by dest_point2. The width and
+	height of the block is specifed by src_box2 or, if src_point2 is specified, by the
+	remaining size of the source bitmap. The width and height will be clamped to prevent 
+	either source or target overruns. If maskColor is specified, pixels with this color in 
+	src_bitmap are not copied to dest_bitmap.
+	If type is #paste (the default), the source is pasted on the destination ignoring all alpha.
+	If type is #composite, the source alpha of the source is used: clamp(R = S + D * (1-S.alpha))
+	If type is #blend, the source alpha of the source is used: R = S * S.alpha + D * (1-S.alpha)
+	For both type #composite and #blend, R.alpha = S.alpha + D.alpha * (1-S.alpha)
+	type #composite would typically be used for pre-multiplied alpha images.
+	If type is #composite or #blend, the source alpha is multiplied by the alphaMultiplier value, 
+	which defaults to a value of 1.0
+	
+	Only RGBA information is copied - no channel data is copied.
+
+	Example:
+
+	bm1=bitmap 100 100 color:red
+	bm2=bitmap 100 100 color:green
+	bm3=bitmap 100 100 color:blue
+	pasteBitmap bm2 bm1 (box2 0 0 25 50) [50,50]
+	display bm1
+	pasteBitmap bm1 bm3 [25,25] [25,50] maskColor:green
+	display bm3
+
+  weldSpline <splineShape node> <tolerance>
+	Welds the selected knots in the specified splineShape that are within the specified 
+	tolerance.
+
+  findPathSegAndParam <shape> <curve_num> <param> 
+	Returns a point2 value containing the segment and segment fraction for the specified 
+	vertex-interpolated spline parameter.
+
+  findLengthSegAndParam <shape> <curve_num> <param>
+	Returns a point2 value containing the segment and segment fraction for the specified 
+	length-interpolated spline parameter.
+
+  interpBezier3D <splineShape> <spline_index> <segment_index> <param_float> pathParam:<boolean>
+	Returns a point3 coordinate for the seg and seg fraction on the indexed curve. If 
+	pathParam:false, param is the fraction of the segment length, otherwise it is a 
+	segment-based (path) fraction. Default is pathParam:false
+	
+  tangentBezier3D <splineShape> <spline_index> <segment_index> <param_float> pathParam:<boolean>
+	Returns a point3 tangent for the seg and seg fraction on the indexed curve. If 
+	pathParam:false, param is the fraction of the segment length, otherwise it is a 
+	segment-based (path) fraction. Default is pathParam:false
+
+  getclipboardText()
+  setclipboardText <string>
+	Get/Set the text string in Window's clipboard. getclipboardText returns a string value, or 
+	undefined if the clipboard does not contain a string. setclipboardText returns true if the 
+	string was successfully placed in the clipboard, an integer error code if failed. Error 
+	code meanings are: 
+	-1: memory could not be allocated
+	-2: clipboard could not be opened
+	-3: clipboard could not be cleared
+	-4: clipboard could not be set
+
+	
+  setclipboardBitmap <bitmap>
+  getclipboardBitmap()
+	Get/Set the bitmap in Window's clipboard. getclipboardBitmap returns a bitmap value, or 
+	undefined if the clipboard does not contain a bitmap. setclipboardBitmap returns true if the 
+	bitmap was successfully placed in the clipboard, an integer error code if failed. Error 
+	code meanings are: 
+	-1: memory could not be allocated
+	-2: clipboard could not be opened
+	-3: clipboard could not be cleared
+	-4: clipboard could not be set
+
+  getLocalTime()
+  getUniversalTime()
+	Returns the local or Coordinated Universal Time (UTC) as an 8 element array. Array elements 
+	are:
+	1. Year - Specifies the current year. 
+	2. Month - Specifies the current month; January = 1, February = 2, and so on. 
+	3. DayOfWeek - Specifies the current day of the week; Sunday = 0, Monday = 1, and so on. 
+	4. Day - Specifies the current day of the month. 
+	5. Hour - Specifies the current hour. 
+	6. Minute - Specifies the current minute. 
+	7. Second - Specifies the current second. 
+	8. Milliseconds - Specifies the current millisecond. 
+
+  isDeformable <node> 
+	Returns true if the node's object is deformable
+
+  numPoints <node>
+	Returns the number of deformable points for the node's object
+
+  getPointPos <node> <index>
+	Returns the position of the indexed point for the node's object. Position is returned in current
+	coordinate system.
+
+  nodeGetBoundingBox <node> <matrix3>
+	Returns a 2 element array containing the min and max points of the node's bounding box in coordinate system
+	matrix3 as point3 values. Positions returned are always in the specified matrix3 coordinate system.
+
+	Example: 
+	Create a teapot and a camera (turn on Orthographic Projection). Run:
+	bb= nodeGetBoundingBox $teapot01 $camera01.transform
+	in coordsys $camera01 point pos:bb[1]
+	in coordsys $camera01 point pos:bb[2]
+
+	Note that this does not correct for the camera's FOV
+
+  nodeLocalBoundingBox <node>
+	Returns a 2 element array containing the min and max points of the node's local bounding box. Positions returned are
+	in the current coordinate system,
+	
+	Example: 
+	Create a teapot. Run:
+	bb= nodeLocalBoundingBox $teapot01
+	point pos:bb[1]
+	point pos:bb[2]
+
+  intersectRayScene <ray>
+	Performs intersectRay on all nodes in the scene. Returns an array of results, one entry per node hit, where each
+	entry is a 2 element array containing the node and the intersectRay result for that node.
+
+  formattedPrint <value> format:<string>
+	Returns a string representation of value based on the format specified. The format specified is applied for each component
+	value for values that are comprised of more than a single value. For values or component values that are floating point
+	numbers, the default format string is "0.8g", for integers, "%d". The value specified must be one of: float, integer,
+	point3, ray, point2, quat, angleAxis, eulerAngle, matrix3, box2, color, time, or interval. The string is of the form:
+	"[Flags][Width][.Precision]Type"
+	
+	where Flags is:
+	Flag	Meaning 
+	-		Left align the result within the given field width.  Default is to right align. 
+	+		Prefix the output value with a sign (+ or -). Default is that sign appears only for negative signed values (-). 
+	0		If width is prefixed with 0, zeros are added until the minimum width is reached. If 0 and - appear, the 0 is 
+			ignored. If 0 is specified with an integer format (i, u, x, X, o, d) the 0 is ignored. Default is no padding. 
+	blank	(' ') Prefix the output value with a blank if the output value is signed and positive; the blank is ignored if 
+			both the blank and + flags appear. Default is no blank appears. 
+	#		When used with the o, x, or X format, the # flag prefixes any nonzero output value with 0, 0x, or 0X, respectively. 
+			Default is no blank appears. 
+			When used with the e, E, or f format, the # flag forces the output value to contain a decimal point in all cases.  
+			Default is decimal point appears only if digits follow it. 
+			When used with the g or G format, the # flag forces the output value to contain a decimal point in all cases and 
+			prevents the truncation of trailing zeros. Default is decimal point appears only if digits follow it, and trailing 
+			zeros are truncated. 
+			Ignored when used with d, i, or u. 
+
+	where Width is a nonnegative decimal integer controlling the minimum number of characters printed. If the number of 
+	characters in the output value is less than the specified width, blanks are added to the left or the right of the 
+	values - depending on whether the - flag (for left alignment) is specified - until the minimum width is reached. If width 
+	is prefixed with 0, zeros are added until the minimum width is reached (not useful for left-aligned numbers).
+	The width specification never causes a value to be truncated. If the number of characters in the output value is greater 
+	than the specified width, or if width is not given, all characters of the value are printed (subject to the precision 
+	specification).
+
+	where Precision specifies a nonnegative decimal integer, preceded by a period (.), which specifies the number of 
+	characters to be printed, the number of decimal places, or the number of significant digits. Unlike the width 
+	specification, the precision specification can cause either truncation of the output value or rounding of a floating-point 
+	value. If precision is specified as 0 and the value to be converted is 0, the result is no characters output.
+	Type: d, i, u, o, x, X  - The precision specifies the minimum number of digits to be printed. If the number of digits in 
+	the argument is less than precision, the output value is padded on the left with zeros. The value is not truncated when 
+	the number of digits exceeds precision. Default precision is 1. 
+	Type: e, E - The precision specifies the number of digits to be printed after the decimal point. The last printed digit 
+	is rounded. Default precision is 6; if precision is 0 or the period (.) appears without a number following it, no 
+	decimal point is printed.  
+	Type: f - The precision value specifies the number of digits after the decimal point. If a decimal point appears, at least 
+	one digit appears before it. The value is rounded to the appropriate number of digits.  Default precision is 6; if 
+	precision is 0, or if the period (.) appears without a number following it, no decimal point is printed. 
+	Type: g, G - The precision specifies the maximum number of significant digits printed. Six significant digits are printed, 
+	with any trailing zeros truncated. 
+	
+	where Type character is the only required format field; it appears after any optional format fields.
+	Character	Type	Output Format 
+	d, i		int		Signed decimal integer. 
+	o			int		Unsigned octal integer. 
+	u			int		Unsigned decimal integer. 
+	x			int		Unsigned hexadecimal integer, using “abcdef.” 
+	X			int		Unsigned hexadecimal integer, using “ABCDEF.” 
+	e			double	Signed value having the form [ – ]d.dddd e [sign]ddd where d is a single decimal digit, dddd is one or 
+						more decimal digits, ddd is exactly three decimal digits, and sign is + or –. 
+	E			double	Identical to the e format except that E rather than e introduces the exponent. 
+	f			double	Signed value having the form [ – ]dddd.dddd, where dddd is one or more decimal digits. The number of 
+						digits before the decimal point depends on the magnitude of the number, and the number of digits after 
+						the decimal point depends on the requested precision. 
+	g			double	Signed value printed in f or e format, whichever is more compact for the given value and precision. The 
+						e format is used only when the exponent of the value is less than –4 or greater than or equal to the 
+						precision argument. Trailing zeros are truncated, and the decimal point appears only if one or more 
+						digits follow it. 
+	G			double	Identical to the g format, except that E, rather than e, introduces the exponent (where appropriate). 
+
+	examples:
+	formattedPrint pi -->					"3.1415927"
+	formattedPrint pi format:"0 g" -->		" 3.14159"
+	formattedPrint -pi format:"0 g" -->		"-3.14159"
+	formattedPrint pi format:"12.8g" -->	"   3.1415927"
+	formattedPrint yellow -->				"(color 255 255 0)"
+	m = matrix3 1
+	formattedPrint m -->					"(matrix3 [1,0,0] [0,1,0] [0,0,1])"
+	formattedPrint m format:"#g" -->		"(matrix3 [1.00000,0.000000,0.000000] [0.000000,1.00000,0.000000] [0.000000,0.000000,1.00000])"
+	formattedPrint 10 format:"#o" -->		"012"
+	formattedPrint 10 format:"#x" -->		"0xa"
+
+  notifyDependents <MAXObject> partID:<name> msg:<int> propogate:<bool>
+	Sends notification message to the dependents of the object. Valid partID values and their SDK equivalent are:
+		#topo			PART_TOPO
+		#geom			PART_GEOM
+		#texmap			PART_TEXMAP
+		#mtl			PART_MTL
+		#TM				PART_TM
+		#obj			PART_OBJ
+		#objectType		PART_OBJECT_TYPE
+		#select			PART_SELECT
+		#subSelType		PART_SUBSEL_TYPE
+		#display		PART_DISPLAY
+		#vertColor		PART_VERTCOLOR
+		#gfxData		PART_GFX_DATA
+		#dispApprox		PART_DISP_APPROX
+		#extension		PART_EXTENSION
+		#TMchannel		PART_TM_CHAN
+		#MTLChannel		PART_MTL_CHAN
+		#all			PART_ALL
+		#putInFG		PART_PUT_IN_FG
+	The default partID is #all.
+	The msg value corresponds to one of the REFMSG values specified in maxsdk\include\ref.h, and documented in the SDK Help file 
+	under topic "List of Reference Messages and the their PartID parameters". The default msg value is 0x050 (REFMSG_CHANGE), 
+	unless partID is #putInFG, in which case the default is 0x070 (REFMSG_FLAGDEPENDENTS). 
+	If propogate is true (the default), the messages are propagated to the dependents of the dependents, recursively.
+	
+	This method is useful for notifying scripted controllers that a value used in the controller has changed. For example, run:
+	
+	global mySphereRadius = 10
+	s=sphere()
+	s.radius.controller = float_script()
+	s.radius.controller.script = "mySphereRadius"
+
+	Now run:
+	mySphereRadius = 50
+
+	The viewport will not update to refect the change. Now run:
+	notifydependents s.radius.controller
+
+	The viewport updates to reflect that the dependents of the controller (the sphere base object and the node) 
+	have been notified that the controller has changed.
+
+  setNeedsRedraw complete:<bool>
+	Sets an internal MXS flag that viewports need to be redrawn before MXS returns. This is equivalent to a delayed 
+	'redrawViews()'. If complete is true, a flag is set that a complete viewport redraw is needed. This is equivalent 
+	to a delayed 'completeRedraw()'. 
+
+  ILayerManager.getLayerObject {<integer layer_index>|<string layer_name>}
+	Returns specified layer as a ReferenceTarget. layer_index is 0-based, layer_name is case-insensitive.
+	Example:
+	for i = 0 to layerManager.count-1 do
+	(	ilayer = layerManager.getLayer i
+		layerName = ilayer.name 
+		layer = ILayerManager.getLayerObject i
+		layerNodes = refs.dependents layer
+		format "Layer: %; nodes: %\n" layerName layerNodes
+	)
+	Note: deprecated. Use the FPS LayerProperties interface property .layerAsRefTarg instead.
+
+  setModContextTM <node> <mod> <matrix3>
+	Set's the specified modifier's mod context's TM. 
+  
+  setModContextBBox <node> <mod> <point3 min> <point3 max>
+	Set's the specified modifier's mod context's bounding box. 
+	
+  toUpper <string> 
+	Returns new string value with the string converted to upper case
+
+  toLower <string> 
+	Returns new string value with the string converted to lower case
+	
+  substituteString <source_string> <from_string> <to_string>
+	Returns a new string with all occurrences of from_string in source_string replaced with to_string
+
+  replace_LF_with_CRLF <string>
+	Returns a new string where line feeds in input string are replaced with carriage return/line feed, unless the 
+	character preceeding the line feed is a carriage return
+	
+  replace_CRLF_with_LF <string>
+	Returns a new string where carriage return/line feeds in input string are replaced with line feeds
+	
+  disableRefMsgs()
+  enableRefMsgs()
+	Disable/enable reference notification system. Use with extreme caution. Must be paired. 
+	
+  makeUniqueArray <array>
+	Returns a new array with only unique members of source array
+	
+  clearControllerNewFlag <controller>
+	Clears the 'new' flag on the MXS wrapper for the controller. When this flag is set, when you assign
+	the controller to a property the initial value of the controller is set to the property value. When you
+	create an instance of a controller, this flag is set. It is normally cleared only after the controller
+	is assigned to a property.
+	
+  scanForNewPlugins includeUnknownSuperclasses:<bool>
+	Scans for new plugin classes and exposes the classes to MAXScript. Typically called after calling loadDllsFromDir.
+	If includeUnknownSuperclasses is false (the default), classes with unknown superclasses are ignored.
+
+  colorPickerDlg <init_color> <title_string> alpha:<bool> pos:<&Point2> 
+	Displays a modal color picker. init_color is the initial color and title_string is displayed in the title bar 
+	of the color picker. If alpha is true, the color picker supports alpha. Pos specifies the position of the 
+	dialog. If Pos is specified as a by-reference variable, the position of the dialog when closed is written 
+	back to the specified variable. If pos is not specified, the dialog is displayed at its last position. If 
+	pos is [-1,-1], the dialog is displayed centered on the MAX window. If the color picker is closed other than
+	via pressing OK, a value of 'undefined' is returned.
+
+  ReadDoubleAsFloat <BinStream> 
+	Reads a double precision float from the BinStream and returns a float.
+
+  WriteFloatAsDouble <BinStream> <float> 
+	Writes a float value as a double precision float to the BinStream.
+
+  SetGridSpacing <float> 
+	Sets home grid spacing. This corresponds to the Grid and Snap Settings dialog, Home Grid tab. The value is 
+	clamped to a minimum value of 0.001.
+
+  SetGridMajorLines <int> 
+	Sets home grid major grid lines. This corresponds to the Grid and Snap Settings dialog, Home Grid tab. The value 
+	is clamped to a minimum value of 2.
+	
+  getBitmapInfo {<filename> | <bitmap>}
+	Returns information on the specified bitmap file as an 13 element array. Array elements 
+	are:
+	1.  Expanded bitmap file name as String
+	2.  Device name as String
+	3.  Bitmap width as Integer
+	4.  Bitmap height as Integer
+	5.  Number of bits for each RGB component value as Integer
+	6.  Number of bits for alpha component as Integer. 
+	7.  The aspect ratio of the bitmap as Float
+	8.  The gamma of the bitmap as Float
+	9.  Whether the bitmap has alpha as a Boolean
+	10. First frame as Integer
+	11. Last frame as Integer
+	12. The bitmap type (from BitmapInfo::Type()) as Integer. See topic "Bitmap Types" in the SDK help file 
+	    for more info on the bitmap types.
+	13. The bitmap flags (from BitmapInfo::Flags()) as Integer. See topic "Bitmap Flags" in the SDK help file for 
+		more info on the meaning of each bit.
+	
+  getNodeTM {<node> | <rootnode>}
+	Returns transform of node or rootnode as a Matrix3. The rootnode may be the root node of an XRef Scene object. 
+	
+  isAnimPlaying()
+	Returns true if the animation is currently playing; otherwise false.
+
+  particleLife <particlesys_node> <particle_index_integer> 
+	Returns the life of the particle -- the length of time the particle will be 'alive'. Returns undefined if the 
+	particle is not alive at the current time. 
+
+  particleCenter <particlesys_node> <particle_index_integer> 
+	Returns a value indicating where the particle geometry (mesh) lies in relation to the particle position. Returns 
+	undefined if the particle is not alive at the current time. 
+	This is used by Particle Motion Blur for example. It gets the point in world space of the point it is shading, 
+	the size of the particle from ParticleSize(), and the position of the mesh from ParticleCenter(). Given this 
+	information, it can know where the point is, and it makes the head and the tail more transparent.
+	Return Values:
+		PARTCENTER_HEAD - The particle geometry lies behind the particle position.
+		PARTCENTER_CENTER - The particle geometry is centered around particle position.
+		PARTCENTER_TAIL - The particle geometry lies in front of the particle position.
+
+  particleSize2 <particlesys_node> <particle_index_integer> 
+	Returns the world space size of the specified particle. Returns undefined if the particle is not alive at the 
+	current time. 
+
+  isAnimPlaying()
+	Returns true if the animation is currently playing
+  
+  getThisScriptFilename() 
+	Returns the filename associated with the calling script
+
+  pathIsNetworkPath <file_path>
+	Returns true if the specified file path is on a network
+	
+  areNodesInstances <node> <node>
+	Returns true if the two nodes are instances.
+	Example: 
+	InstanceMgr.GetInstances $ &rptInstances
+	trueInstances = for n in rptInstances where (areNodesInstances $ n) collect n
+	
+  replaceInstances <old_MAXWrapper> <new_MAXWrapper> transferCAs:<bool>
+	Replacement for core version of replaceInstances. References are not transferred for MAXWrapper values. In some cases, 
+	attempts to access instances of new_MAXWrapper in the scene would result in a '<ref delete>' error. If transferCAs 
+	is true, any custom attributes on the old_MAXWrapper are transferred to the new_MAXWrapper if there is at least one 
+	occurrence of transferring the reference.
+	
+  HiddenDOSCommand <command string to execute> [startpath:unsupplied] [prompt:unsupplied] [donotwait:false]
+	HiddenDOSCommand looks DOSCommand, but runs more like ShellLaunch. Launches a dos command in a hidden window. 
+	"startpath" allows you to set the starting folder for the command.
+	"prompt" allows you to set the prompt that appears on the Max prompt line (just below the viewports). If you don't change it, the command string is displayed.
+	"donotwait" allows you to decide whether or not you want to return control to back to maxscript while the command runs, or wait for completion.
+	NOTE: You must redirect any output generated to a file if you are interested in text that would normally be printed to the console. 
+	Example usage:
+		HiddenDOSCommand "dir > %temp%\\hiddencmdout.tmp" startpath:"c:\\" 
+		cmd = "echo The time is " + localTime + " >> %temp%\\hiddencmdout.tmp"
+		HiddenDOSCommand cmd
+		HiddenDOSCommand "notepad %temp%\\hiddencmdout.tmp" prompt:"Waiting for Notepad to exit"
+		HiddenDOSCommand "del hiddencmd.tmp" startpath:"%temp%" donotwait:true
+	Source for HiddenDOSCommand provided by Mike BiddleCombe
+	
+	
+Global Variables:
+
+  avguard_dlx_ver 
+	read only system global - the version number of this plugin as <string> value
+	
+  timeDisplayMode
+	Lets you get and set whether to playback the Time Display mode. It contains the corresponding value 
+	set in the Time Configuration dialog. A Nmae value of #frames, #smpte, #frameTicks, #timeTicks.
+
+mouse structure variables:
+
+  mouse.inAbort
+	TRUE if any mouse proc is currently in the process of aborting; otherwise FALSE - read only.
+
+custAttributes structure methods:
+
+  custAttributes.getOwner <CustAttrib>
+	Returns the owner of the custom attribute (the object the custom attribute is applied to).
+
+  custAttributes.getDefClass <AttribDef>
+	Returns the MAXClass associated with an AttribDef.
+
+  custAttributes.getDefInstances <AttribDef>
+	Returns array of the MSCustAttrib instances of the AttribDef
+
+sysinfo structure methods:
+
+  sysinfo.processAffinity 
+	Get/set the process affinitity (the processors the process can use) as an integer. Each bit in 
+	the integer corresponds to a processor. If the bit is set, the process can use that processor.
+
+  sysinfo.systemAffinity
+	Get the system affinitity (the processors present in the system) as an integer. Each bit in 
+	the integer corresponds to a processor. If the bit is set, the processor exists.
+
+persistents structure methods:
+
+  persistents.gather()
+	Returns array of persistent global variable names as <name> values
+
+  persistents.make <global var name>
+	Makes the specified global variable name persistent. The name specified must be a global 
+	variable's name, or else a runtime error is thrown. See globalVars structure.
+
+  persistents.ispersistent <global var name>
+	Returns true if the specified global variable name is persistent. The name specified need
+	not be a global variable's name.
+
+bit structure methods:
+
+  bit.intAsFloat <int> 
+	Returns the integer value cast to a float value. Typically used for converting between integer and float 
+	values so that the remaining bit methods can be used on a float. 
+
+  bit.floatAsInt <float>
+	Returns the float value cast to a integer value. Typically used for converting between integer and float 
+	values so that the remaining bit methods can be used on a float.
+
+  bit.swapBytes <int> <int byte1> <int byte2> 
+	Returns an integer with bytes byte1 and byte2 of value int swapped. Byte 1 is the lowest order byte.
+
+  bit.isNAN <float>
+	Returns true if the float is the reserved float value NaN (not a number). A NAN is generated when the 
+	result of a floating-point operation cannot be represented as a floating point number.
+
+  bit.isFinite <float>
+	Returns true if the float is any value other than NaN, negative infinity, or positive infinity. In those 
+	three cases, it returns false.
+
+hideByCategory structure variables/methods:
+
+  hideByCategory.geometry
+  hideByCategory.shapes
+  hideByCategory.lights
+  hideByCategory.cameras
+  hideByCategory.helpers
+  hideByCategory.spacewarps
+  hideByCategory.particles
+  hideByCategory.bones
+	Get/set whether the applicable category is hidden.
+
+  hideByCategory.all()
+	Set all Hide By Category categories as hidden
+
+  hideByCategory.none()
+	Set all Hide By Category categories as not hidden
+
+globalVars structure methods:
+
+  globalVars.get <global var name>
+	Returns the value of the specified global variable
+	
+  globalVars.set <global var name> <value>
+	Sets the value of the specified global variable
+	
+  globalVars.gather()
+	Returns array of global variable names
+	
+  globalVars.isglobal <var name>
+	Returns true if the specified variable name is global
+	
+  globalVars.getTypeTag  <var name>
+	Returns the type of the global variable as an integer or name value. This method is primarily for
+	internal testing. The primary type tag values are: 10 - general global; 11 - constant global; and 
+	12 - system global
+  
+  globalVars.getValueTag <var name>
+ 	Returns the type of the value in the global variable as an integer or name value. This method is 
+ 	primarily for internal testing. Each value type has its own tag value.
+ 
+  globalVars.remove <var name>
+	Removes the specified variable name from the global variables list. Use with caution!
+	
+TCBDefaultParams structure variables:
+
+  TCBDefaultParams.tension
+  TCBDefaultParams.continuity
+  TCBDefaultParams.bias
+  TCBDefaultParams.easeTo
+  TCBDefaultParams.easeFrom
+	Get/set the default TCB key parameters. New TCB controller keys will be created with this value.
+
+BezierDefaultParams structure variables:
+
+  BezierDefaultParams.inTangentType
+  BezierDefaultParams.outTangentType
+	Get/set the default Bezier key in and out Tangent Type. Valid values are: 
+	#smooth | #linear | #step | #fast | #slow | #custom | #flat
+
+gw structure methods:
+
+  gw.startTriangles()
+	This method is called to begin sending a series of triangles to render. Call this method, then 
+	gw.triangle one or more times, then gw.endTriangles() to finish.
+
+  gw.endTriangles()
+	Call this method to finish rendering triangles. 
+
+  gw.triangle <vertex_point3_array> <color_array>
+	This method draws a triangle. Each value in <vertex_point3_array> is a vertex on the triangle.
+	<color_array> specifies the color at each vertex. The rendering mode (set via gw.setRndLimits()) 
+	must include #illum for the color values to be used. There must be 3 elements in each array. 
+	Call gw.startTriangles() first, and then gw.endTriangles() when done drawing triangles.
+
+  gw.triStrip <vertex_point3_array> <color_array> <uvw_point3_array>
+	See MXS documention on gw.wTriStrip
+
+  gw.hRect <box2> <color>
+  gw.wRect <box2> <color>
+	Draws a rectangle using the coordinates specified by box in the given color.
+	Example:
+	rect = (box2 13 47 96 97)
+	gw.wrect rect red
+	gw.wmarker [rect.left,rect.top,0] #point color:green
+	gw.wmarker [rect.left,rect.bottom,0] #point color:green
+	gw.wmarker [rect.right,rect.top,0] #point color:green
+	gw.wmarker [rect.right,rect.bottom,0] #point color:green
+	eRect = rect -- enlargeUpdateRect 1 pixel too small in either direction?
+	eRect.right += 1
+	eRect.bottom += 1
+	gw.enlargeUpdateRect eRect 
+	gw.updateScreen()
+
+windows structure methods:
+
+  windows.getChildrenHWND {<int_HWND>|#max} parent:{<int_HWND>|#max}
+	Returns array of the children windows of the specified HWND, recursively. If the specified HWND is 0, only the top 
+	level desktop windows are returned (not recursively). If the parent HWND is specified, only windows whose immediate 
+	parent is the specified window are returned. If #max is specified as the HWND, the HWND associated with MAX's main 
+	window is used. If the specified HWND does not exist, the value 'undefined' is returned. Otherwise, an array is 
+	returned. Each element of the array corresponds to a window, and contains a 5 element array. The elements of these 
+	arrays correspond to the windows: HWND, parent's HWND, ancestor's HWND, class name as a string, window text as a 
+	string.
+	
+  windows.getChildHWND {<int_HWND>|#max} <string> parent:{<int_HWND>|#max}
+	Returns child window of the specified HWND given the child window's text. Child windows are recursively searched. 
+	If the specified HWND is 0, only the top level desktop windows are searched (not recursively). If the parent HWND 
+	is specified, only windows whose immediate parent is the specified window are searched. If #max is specified as the 
+	HWND, the HWND associated with MAX's main window is used. If the specified HWND does not exist, the value 'undefined' 
+	is returned. If a child window with the specified text is not found, 'undefined' is returned. The text comparison 
+	is case insensitive. If a match is found, a 5 element array is returned, where the elements of these arrays 
+	correspond to the windows: HWND, parent's HWND, ancestor's HWND, class name as a string, window text as a string.
+	Example:
+	max file xref object -- open xref object dialog
+	xro_hwnd = windows.getChildHWND 0 "XRef Objects" parent:#max -- find xref object dialog
+	if xro_hwnd != undefined do windows.sendMessage xro_hwnd[1] 0x0010 0 0 -- if found, send close message
+	max file xref scene -- open xref sceen dialog
+	xrs_hwnd = windows.getChildHWND 0 "XRef Scenes" parent:#max -- find xref scene dialog
+	if xrs_hwnd != undefined do windows.sendMessage xrs_hwnd[1] 0x0010 0 0 -- if found, send close message
+
+  windows.getMAXHWND()
+	Returns the HWND of the main MAX windoow as an integer
+
+  windows.getDesktopHWND()
+	Returns the HWND of the Window's desktop as an integer
+	
+systemTools structure methods:
+
+  systemTools.getEnvVariable <string>
+	Returns the contents of specified environment variable. If the specified environment variable does not exist, 
+	returns a value of undefined. 
+	
+  systemTools.setEnvVariable <string> { <string> | undefined }
+	Sets the contents of specified environment variable. Returns true if the set occurred, false if not. If second arg 
+	is the value undefined, the environment variable is deleted.
+
+registry structure methods:
+  registry.closeKey <HKey>
+	Closes the open HKey. Returns true if successful, false if error. Use registry.getLastError() to get error message.
+	A HKey should not be used after it has been closed, because it will no longer be valid. HKeys should not be left 
+	open any longer than necessary. The closeKey method does not necessarily write information to the registry before 
+	returning; it can take as much as several seconds for the cache to be flushed to the hard disk. If an application 
+	must explicitly write registry information to the hard disk, it can use registry.flushKey. registry.flushKey, 
+	however, uses many system resources and should be called only when necessary. 
+
+  registry.flushKey <HKey>
+	Writes all the attributes of the open HKey into the registry.  Returns true if successful, false if error. Use 
+	registry.getLastError() to get error message.
+	It is not necessary to call RegFlushKey to change a key. Registry changes are flushed to disk by the registry using 
+	its lazy flusher. Lazy flushing occurs automatically and regularly after a system-specified interval of time. Registry 
+	changes are also flushed to disk at system shutdown. Unlike registry.closeKey, registry.flushKey returns only when all 
+	the data has been written to the registry. registry.flushKey may also write out parts of or all of the other keys. 
+	Calling this function excessively can have a negative effect on an application's performance. An application should 
+	only call registry.flushKey if it requires absolute certainty that registry changes are on disk. In general, 
+	registry.flushKey rarely, if ever, need be used. 
+
+  registry.deleteSubKey <HKey> <string subKeyName> recurse:<bool>
+	Deletes the specified subkey of the open HKey. The entire key, including all of its values, is removed. Returns true 
+	if successful, false if error. Use registry.getLastError() to get error message.
+	If recurse is false or not specified, the subkey to be deleted must not have subkeys. If recurse is true, the subkey 
+	and all its descendants are deleted.
+
+  registry.deleteKey <HKey> recurse:<bool>
+	Deletes the HKey. The parent HKey of the specified HKey must be open. The entire key, including all of its values, is 
+	removed. Returns true if successful, false if error. Use registry.getLastError() to get error message.
+	If recurse is false or not specified, the HKey to be deleted must not have subkeys. If recurse is true, the HKey and 
+	all its descendants are deleted.
+
+  registry.createKey <HKey> <string subKeyName> accessRights:<{#readOnly | #writeOnly | #all | <int>}> 
+					 newKeyCreated:<&bool> Key:<&HKey> volatile:<bool>
+	Creates a new HKey as a subkey of the specified open HKey. If the subkey already exists, the function opens it. 
+	Returns true if successful, false if error. Use registry.getLastError() to get error message.
+	See "HKey Values" for a description of the <int> values for accessRights. The default accessRights is #all
+	If a new key is created, a true value will be written to the newKeyCreated keyword variable.
+	If a new key is created or an existing key is opened, the HKey value will be written to the Key keyword variable.
+	If volatile is false or not specified, the key information will be written to the registry file. If true, the 
+	information is stored only in memory and is not preserved when the corresponding registry hive is unloaded.
+	Example: registry.createKey HKEY_CLASSES_ROOT ".123" accessRights:#all newKeyCreated:&newKeyCreated key:&key1
+	
+  registry.openKey <HKey> <string subKeyName> accessRights:<{#readOnly | #writeOnly | #all | <int>}> key:<&HKey>
+	Opens an existing HKey. Returns true if successful, false if error. Use registry.getLastError() to get error message.
+	registry.openKey does not create the specified key if the key does not exist in the registry.
+	See "HKey Values" for a description of the <int> values for accessRights. The default accessRights is #readOnly
+	If a HKey is successfully opened, the HKey value will be written to the Key keyword variable.
+	Example: registry.openKey HKEY_CLASSES_ROOT ".123" accessRights:#all key:&key1
+	
+  registry.deleteValue <HKey> <string valueName>
+	Deletes the specified value of the open HKey. Returns true if successful, false if error. Use registry.getLastError() 
+	to get error message. 
+	If valueName is an empty string (""), the default value on the HKey is deleted.
+	
+  registry.setValue <HKey> <string valueName> <name valueType> <value data>
+	Sets the data type and value of the specified value of the open HKey. Returns true if successful, false if error. 
+	Use registry.getLastError() to get error message. 
+	If valueName is an empty string (""), the default value on the HKey is set.
+	The valid valueType values for setValue, and the corresponding MXS data type are:
+	  #REG_DWORD - integer
+	  #REG_SZ - string
+	  #REG_EXPAND_SZ - string that contains unexpanded references to environment variables
+	  #REG_MULTI_SZ - array of strings
+	Example: registry.setvalue key1 "" #multiSZ #("zz","ww")
+	
+  registry.queryValue <HKey> <string valueName> type:<&name> value:<&value> expand:<bool>
+	Gets the data type and value of the specified value of the open HKey. Returns true if successful, false if error. 
+	Use registry.getLastError() to get error message. 
+	If the query is successful, the data type will be written to the type keyword variable.
+	If the query is successful and the data type is one of the following supported data types, the data value will be 
+	written to the value keyword variable.
+	  #REG_DWORD - integer
+	  #REG_SZ - string
+	  #REG_EXPAND_SZ - string that contains unexpanded references to environment variables
+	  #REG_MULTI_SZ - array of strings
+	If the data type is REG_EXPAND_SZ, and expand is true, the environment variables are expanded in the returned data
+	value.
+	Other data types that may be returned, but are not currently supported, are:
+	  #REG_BINARY
+	  #REG_DWORD_LITTLE_ENDIAN
+	  #REG_DWORD_BIG_ENDIAN
+	  #REG_LINK
+	  #REG_NONE
+	  #REG_QWORD
+	  #REG_QWORD
+	  #REG_RESOURCE_LIST
+	Example: registry.queryValue key2 "Notepad.exe" type:&type value:&val
+	
+  registry.queryInfoKey <HKey> numSubKeys:<&int> numValues:<&int>
+	Gets the number of subkeys and values of the open HKey. Returns true if successful, false if error. Use 
+	registry.getLastError() to get error message. 
+	If the query is successful, the number of subKeys and values will be written to the numSubKeys and numValues keyword 
+	variable, respectively.
+	Example: registry.queryInfoKey key2 numSubKeys:&numSubKeys numValues:&numValues
+	
+  registry.isKeyOpen <HKey>
+	Returns true of the specified HKey is open.
+	
+  registry.isParentKeyOpen <HKey>
+	Returns true of the parent HKey of the specified HKey is open.
+	
+  registry.isKeyConstant <HKey>
+	Returns true if the HKey is a constant (root) HKey.
+	
+  registry.getParentKey <HKey>
+	Returns the parent HKey of the specified HKey.
+	
+  registry.getSubKeyName <HKey> <index> name:<&name>
+	Get a subkey name of the open HKey by index. Returns true if successful, false if error. Use registry.getLastError() 
+	to get error message.
+	If successful, the name will be written to the name keyword variable.
+	Example: registry.getSubKeyName key2 i name:&vname
+  
+  registry.getSubKeyNames <HKey> names:<&array>
+	Get array of subkey names of the open HKey by index. Returns true if successful, false if error. Use 
+	registry.getLastError() to get error message.
+	If successful, an array of the subkey names as strings name will be written to the names keyword variable.
+	Example: registry.getSubKeyNames key2 names:&vnames
+
+  registry.getValueName <HKey> <index> name:<&name>
+	Get a value name of the open HKey by index. Returns true if successful, false if error. Use registry.getLastError() 
+	to get error message.
+	If successful, the name will be written to the name keyword variable.
+	Example: registry.getValueName key2 i name:&vname
+
+  registry.getValueNames <HKey> names:<&array>
+	Get array of value names of the open HKey by index. Returns true if successful, false if error. Use 
+	registry.getLastError() to get error message.
+	If successful, an array of the value names as strings name will be written to the names keyword variable.
+	Example: registry.getSubKeyNames key2 names:&vnames
+
+  registry.getLastError()
+	return string describing the last registry error that occurred\n"));
+	
+  EXAMPLES:
+	registry.openKey HKEY_CLASSES_ROOT "*" accessRights:#readOnly key:&key2
+
+	registry.queryInfoKey key2 numSubKeys:&numSubKeys numValues:&numValues;numSubKeys;numValues
+	for i = 1 to 2 do (registry.getSubKeyName key2 i name:&vname;print vname)
+
+	registry.isKeyOpen key2
+	
+	registry.setvalue key2 "" #REG_SZ "123123" -- fails because opened with #readOnly access
+	registry.getLastError()
+
+	registry.getSubKeyNames key2 names:&names;names
+	registry.getvalueNames key2 names:&names;names
+	registry.queryValue key2 "InfoTip" type:&type value:&val;type;val
+
+	registry.createKey HKEY_CLASSES_ROOT ".123x" accessRights:#all key:&key1
+	registry.setvalue key1 "" #REG_MULTI_SZ  #("zz","ww")
+	registry.queryValue key1 "" type:&type value:&val;type;val
+	registry.setvalue key1 "" #REG_SZ "123123" 
+	registry.queryValue key1 "" type:&type value:&val;type;val
+	registry.deleteKey key1 
+
+registry-related global variables:
+	HKEY_CLASSES_ROOT
+	HKEY_CURRENT_CONFIG
+	HKEY_CURRENT_USER
+	HKEY_LOCAL_MACHINE
+	HKEY_USERS
+	HKEY_PERFORMANCE_DATA
+
+
+ik structure methods:
+For those controllers that don't support IK parameters via the access method used for these methods, a value of 
+undefined is returned. IK controllers do not support the access method used, but access is provided as properties
+of the IK controller. If a node is specified, the node's transform controller is used.
+  ik.getAxisActive {<node> | <controller>} {#rotational | #sliding} 
+  ik.setAxisActive {<node> | <controller>} {#rotational | #sliding} <bitarray>
+	Get/Set whether each axis is active as a 3 bit bitarray. 
+  ik.getAxisLimit {<node> | <controller>} {#rotational | #sliding} 
+  ik.setAxisLimit {<node> | <controller>} {#rotational | #sliding} <bitarray>
+	Get/Set whether each axis is limitted as a 3 bit bitarray. 
+  ik.getAxisEase {<node> | <controller>} {#rotational | #sliding} 
+  ik.setAxisEase {<node> | <controller>} {#rotational | #sliding} <bitarray>
+	Get/Set whether each axis is eased as a 3 bit bitarray. 
+  ik.getAxisMin {<node> | <controller>} {#rotational | #sliding} 
+  ik.setAxisMin {<node> | <controller>} {#rotational | #sliding} <point3>
+	Get/Set min value for each axis as a Point3. 
+  ik.getAxisMax {<node> | <controller>} {#rotational | #sliding} 
+  ik.setAxisMax {<node> | <controller>} {#rotational | #sliding} <point3>
+	Get/Set max value for each axis as a Point3. 
+  ik.getAxisDamping {<node> | <controller>} {#rotational | #sliding} 
+  ik.setAxisDamping {<node> | <controller>} {#rotational | #sliding} <point3>
+	Get/Set damping value for each axis as a Point3. 
+  ik.getAxisPreferredAngle {<node> | <controller>}  
+  ik.setAxisPreferredAngle {<node> | <controller>} <point3>
+	Get/Set preferred angle for each axis as a Point3. 
+  ik.getAxisSpringOn {<node> | <controller>} {#rotational | #sliding}
+  ik.setAxisSpringOn {<node> | <controller>} {#rotational | #sliding} <bitarray>
+	Get/Set whether spring is on for each axis as a 3 bit bitarray. 
+  ik.getAxisSpring {<node> | <controller>} {#rotational | #sliding} 
+  ik.setAxisSpring {<node> | <controller>} {#rotational | #sliding}  <point3>
+	Get/Set spring value for each axis as a Point3. 
+  ik.getAxisSpringTension {<node> | <controller>} {#rotational | #sliding} 
+  ik.setAxisSpringTension {<node> | <controller>} {#rotational | #sliding} <point3>
+	Get/Set spring tension for each axis as a Point3. 
+
+
+NodeExposureInterface structure methods:
+
+	NOTE: following methods return an FPS interface value. This interface value is:
+
+	Interface: INodeExposureR
+	Properties:
+	Methods:
+		<bool>isExposed <integer>ui
+		<void>SetExposedInAll <bool>state
+		<void>SetExposed <bool>state <integer>ui
+		<void>BakeExposure()
+	Actions:
+ 
+	The 'ui' parameter values are:
+		0 - SelectObjects (Hit By Name dialog)
+		1 - SchematicView
+		2 - Maxscript		-- unsupported
+		3 - Merge			-- unsupported
+		4 - MergeAnimation	-- unsupported
+		5 - Replace			-- unsupported
+		6 - KeyEditor
+		7 - CurveEditor
+		8 - RangeEditor
+	as noted above, values 2 through 5 currently have no affect.
+	
+	See 'Class INodeExposure' in the SDK help file for more information on this interface. 
+ 
+
+  NodeExposureInterface.Create <node>
+	Creates the node exposure interface it not already present, and returns the interface.
+
+  NodeExposureInterface.Get <node>
+	Returns the node exposure interface if present, otherwise returns 'undefined'
+	
+	
+
+meshop structure methods:
+
+  meshop.setVert <Mesh mesh> <vertlist> {<point3 pos> | <point3 pos_array>} node:<node=unsupplied>
+	Tweak of existing setVert method to allow pos to be specified as array. If so specified, number of 
+	values in pos_array must match the number of verts specified in vertlist
+  meshop.moveVert <Mesh mesh> <vertlist> {<point3 offset> | <point3 offset_array>} node:<node=unsupplied> useSoftSel:<bool>
+	Tweak of existing moveVert method to allow pos to be specified as array. If so specified, number of 
+	values in pos_array must match the number of verts specified in vertlist. If useSoftSel is true, and the mesh's
+	soft selection data channel is present, the specified offsets are multiplied by the vertex's soft selection value.
+
+polyop structure methods:
+
+  polyop.setVert <Poly poly> <vertlist> {<point3 pos> | <point3 pos_array>} node:<node=unsupplied>
+	Tweak of existing setVert method to allow pos to be specified as array. If so specified, number of 
+	values in pos_array must match the number of verts specified in vertlist
+  polyop.moveVert <Poly poly> <vertlist> {<point3 offset> | <point3 offset_array>} node:<node> useSoftSel:<bool>
+	Tweak of existing moveVert method to allow pos to be specified as array. If so specified, number of 
+	values in pos_array must match the number of verts specified in vertlist. If useSoftSel is true, and the mesh's
+	soft selection data channel is present, the specified offsets are multiplied by the vertex's soft selection value.
+
+viewport structure methods:
+
+  viewport.getViewportDib()
+	This method returns the active viewport's graphics window image as a Bitmap value. The size of the bitmap is the 
+	same size as the viewport. This method is different from gw.getViewportDib() in that it includes the results of using
+	maxops.displayActiveCameraViewWithMultiPassEffect().
+
+refs structure methods:
+
+  refs.dependentNodes <MAXObject> firstOnly:<bool> baseObjectOnly:<bool>
+	Returns node(s) that are dependent on the specified MAXObject. If firstOnly is true, if no nodes are dependent 
+	on the specified MAXObject a value of 'undefined' is returned, otherwise a MAXNode value corresponding to the
+	first dependent node found is returned. If firstOnly is false or not specified, the return value is always an
+	array. If baseObjectOnly is true, only nodes where the MAXObject is the base object will be returned.
+
+
+DataPair Values
+  The DataPair class is simply a wrapper around two values. The values can be of any value type.
+
+  Constructors 
+	DataPair <value1> <value2>
+
+  Properties 
+	<dataPair>.v1	: Value
+	<dataPair>.v2	: Value
+
+HKey Values
+  HKey class instances are used to acccess registry keys.
+  
+  Constructors
+	HKey <HKey parentKey> <string keyName> <int writeAccess>
+	  Opens existing subkey of parentKey. This constructor is not typically used, instead the method registry.openKey is used.
+	  writeAcces values are as follows (see platform SDK help file for more info):
+		STANDARD_RIGHTS_READ	0x00020000
+		STANDARD_RIGHTS_WRITE	0x00020000
+		STANDARD_RIGHTS_ALL		0x001F0000
+		KEY_QUERY_VALUE			0x00000001
+		KEY_SET_VALUE			0x00000002
+		KEY_CREATE_SUB_KEY		0x00000004
+		KEY_ENUMERATE_SUB_KEYS	0x00000008
+	  writeAccess values for common access types are:
+		#readOnly				0x00020019
+		#writeOnly				0x00020006
+		#all					0x000f003f
+
+  Properties 
+	<HKey>.parentKey		: HKey - read-only - parent HKey
+	<HKey>.name				: String - read-only - subKey name 
+	<HKey>.accessRights		: Integer - read-only - access rights flags

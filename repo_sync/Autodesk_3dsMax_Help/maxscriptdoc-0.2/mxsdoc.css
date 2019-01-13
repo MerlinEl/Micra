@@ -1,0 +1,239 @@
+* {
+    margin:0;
+    padding:0;
+}
+
+body {
+    font-family:sans-serif;
+    background:#ddd;
+    font-size:12pt;
+}
+
+div#main {
+    width:860px;
+    border:1px solid #777;
+    border-top:0;
+    margin:auto;
+    background:#fff;
+}
+
+div#page {
+    width:600px;
+    padding:20px 20px 20px 0;
+    float:right;
+}
+
+div#toc {
+    width:230px;
+    float:left;
+    padding:20px 0;
+}
+
+div#toc h1 {
+    font-size:1em;
+    font-weight:normal;
+    background:#1BA5E0;
+    background:#21799C;
+    color:#fff;
+    padding:0.5em;
+    margin-bottom:1em;
+    padding-left:20px;
+}
+
+div#toc ul {
+    list-style-type:none;
+    margin:0;
+    padding:0;
+    margin-bottom:1em;
+    padding-left:20px;
+}
+
+div#toc ul li {
+    margin:0;
+    padding:0;
+    list-style-type:none;
+}
+
+div#toc ul li.tocSub0 {
+    font-weight:bold;
+}
+div#toc ul li.tocSub0:before {
+    content: "+ ";
+}
+
+div#toc ul li.tocSub1:before {
+    content: "- ";
+}
+
+div#toc ul li.tocSub2:before {
+    content: ". ";
+}
+
+div#toc ul li.tocSub1 {
+    margin-left:1em;
+    list-style-type:none;
+}
+
+div#toc ul li.tocSub2 {
+    margin-left:2em;
+    margin-left:none;
+}
+div#toc ul li a {
+    text-decoration:none;
+    font-size:11pt;
+    color:#201E21;
+}
+div#toc ul li a:hover {
+    text-decoration:underline;
+}
+
+div#toc {
+    font-size:0.8em;
+}
+
+div#toc p {
+    padding-left:20px;
+    margin-bottom:1em;
+}
+div#toc a {
+    text-decoration:none;
+    color:#ff0000;
+}
+
+div#toc p a {
+    color:#1BA5E0;
+}
+
+div#moduleDoc {
+    border:1px solid #aaa;
+    padding:10px 20px;
+    font-size:10.5pt;
+    margin-bottom:1em;
+    background:#eee;
+}
+
+div#moduleDoc h1{
+    font-size:13pt;
+    margin-bottom:1em;
+    padding:0.5em 0;
+    border-bottom:1px solid #aaa;
+}
+
+div#moduleDoc  a {
+    text-decoration:none;
+    color:#25AFCF;
+}
+
+p.tokenFunction {
+    font-size:12pt;
+    margin-bottom:0.5em;
+    padding:0.5em;
+    background:#eee;
+    border-left:5px solid #666;
+}
+
+p.tokenFunction span.tokenFunctionParam {
+    color:#0033ff;
+    color:#21799C;
+    font-size:10.5pt;
+    margin-left:3pt;
+    font-weight:bold;
+    padding-left:2pt;
+    border-left:3px solid #ccc;
+}
+
+span.tokenType {
+    color:#32525E;
+    font-size:0.9em;
+}
+
+span.tokenFunctionName {
+    font-weight:bold;
+    color:#CF5E25;
+}
+
+p.tokenDoc {
+    font-size:11pt;
+    margin:1em 1em;
+    margin-left:20px;
+}
+
+p.tokenParam {
+    font-size:10pt;
+    margin-left:20px;
+    padding:5px 0;
+    border-top:1px solid #eee;
+}
+
+p.tokenParam span.keyword {
+    color:#999999;
+    margin-right:10px;
+    float:left;
+    width:50px;
+    text-align:right;
+    font-style:italic;
+    margin-left:10px;
+}
+
+p.tokenParam span.name {
+    float:left;
+    font-weight:bold;
+    color:#21799C;
+    margin-right:10px;
+}
+
+div.element p.tokenParam span.text {
+    /* keyword + name = 70px*/
+    margin-left:70px;
+    padding-top:5px;
+    padding-bottom:5px;
+    display:block;
+    clear:both;
+}
+
+
+div.element {
+    border-left:1px dotted #ccc;
+    margin-top:2em;
+}
+
+div.sublevel1 {
+    margin-left:2em;
+}
+
+div.sublevel2 {
+    margin-left:4em;
+}
+
+div.clear {
+    clear:both;
+}
+
+div#footer {
+    text-align:center;
+    font-size:0.6em;
+    border-top:1px solid #ccc;
+    background:#ddd;
+    padding:10px;
+}
+
+div#footer a {
+    color:#21799C;
+}
+
+div#toc p.moduleInfo {
+    font-size:0.9em;
+    margin-bottom:0.2em;
+}
+
+div#toc p.moduleInfo span.keyword {
+    display:block;
+    clear:both;
+    font-variant:small-caps;
+}
+
+div#toc p.moduleInfo span.value {
+    display:block;
+    padding-top:0.2em;
+    margin-left:2em;
+}

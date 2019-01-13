@@ -1,0 +1,40 @@
+<html><head>
+<meta http-equiv="content-type" content="text/html; charset=windows-1252">
+<script>var pageid="";</script>
+
+  <title>maxscript.chm</title>
+  
+  <script>
+   function IsOpera(){return navigator.userAgent.indexOf("Opera")>-1} 
+   var qs=location.search.substr(1);
+   var A=qs.split("&")
+   var B=null
+   var F="introduction1.htm";
+   for(var i=0;i<A.length;i++){
+      B=A[i].split("=")
+      A[i]=[B[0],B[1]]
+   }
+   for(var j=0;j<A.length;j++){
+      if(A[j][0]=='page'){
+         F=A[j][1]
+         break
+   }
+  }
+  if (IsOpera()) F = '';</script>
+ <script>
+   document.write('<frameset rows="30,*" frameborder="no" framespacing="0" border="0" >')
+   document.write('<frame name="header" src="arch_header.html" frameborder="no" noresize="yes" scrolling="no" >')
+   if(F!='')F='?page='+F
+   document.write('<frame name="main" src="arch_frameset.html'+F+'">')
+   document.write('</frameset>')
+ </script></head>
+
+ <frameset rows="30,*" frameborder="no" framespacing="0" border="0"><frame name="header" src="maxscript2_files/arch_header.htm" frameborder="no" noresize="yes" scrolling="no"><frame name="main" src="maxscript2_files/arch_frameset.htm"></frameset>
+ 
+  
+   
+   
+  
+ 
+
+</html>
