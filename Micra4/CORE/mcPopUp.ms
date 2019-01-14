@@ -224,13 +224,17 @@ Struct MICRA_POPUP (
 		
 		edtBox.bounds = mcDotnet.dRect [ border_offset ,bar_height+border_offset*2] text_box_size
 		edtBox.Multiline = true	
-		--edtBox.enabled = false	
+		edtBox.TextAlign = edtBox.TextAlign.Center
 		edtBox.BackColor= mcDotnet.uiColor #edtback
-		edtBox.ForeColor= mcDotnet.uiColor #edtfore
-		--edtBox.TextAlign = edtBox.TextAlign.MiddleCenter	
+		edtBox.ForeColor= mcDotnet.uiColor #edtfore	
 		local dnfontlarge = dotNetObject "System.Drawing.Font" "Verdana" 12 ((dotNetClass "System.Drawing.FontStyle").bold)
 		edtBox.font = dnfontlarge
 		edtBox.text = msg
+		--disable editing
+		edtBox.ReadOnly = true	
+		edtBox.IsAccessible = false	
+		--CanFocus   .AccessibleRole : <System.Windows.Forms.AccessibleRole>
+		edtBox.SelectionStart = msg.count;	edtBox.SelectionLength = 0 --move carret to end
 		
 		btnOk.bounds = mcDotnet.dRect [ form.width/2 - 50 ,bar_height+border_offset*2 + edtBox.height] [100, btn_size]
 		btnOk.BackColor= mcDotnet.uiColor #back
@@ -244,6 +248,7 @@ Struct MICRA_POPUP (
 		
 		form.controls.addRange ( #(lblT, edtBox, btnOk)  )
 		mcDotnet.dShow form saved_pos:false
+		edtBox.DeselectAll()
 	)
 )
 mcPopUp = MICRA_POPUP()

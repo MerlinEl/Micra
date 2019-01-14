@@ -1,0 +1,230 @@
+<HTML>
+
+<HEAD>
+<style type='text/css'>
+
+.pt {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 14px;
+	font-style: normal;
+	font-weight: normal;
+	color: #000000;
+	margin: 0px 30px;
+}
+
+.tt {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 16px;
+	font-style: normal;
+	font-weight: bold;
+	color: #FF6666;
+	margin: 30px 10px;
+}
+
+.ts {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 15px;
+	font-style: normal;
+	font-weight: bold;
+	color: #993333;
+	margin: 30px 20px;
+}
+
+.tp {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 14px;
+	font-style: normal;
+	font-weight: bold;
+	color: #CC9933;
+	margin: 20px 30px;
+}
+
+.lt {
+	list-style-position: outside;
+	list-style-image: none;
+	list-style-type: square;
+	margin: 20px 40px 0px;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 14px;
+	color: #666666;
+	text-align: justify;
+
+</style>
+
+</HEAD>
+
+
+<BODY BGCOLOR=#FFFFFF>
+
+
+<BR>
+
+<FONT FACE="arial" SIZE=5>
+<P><CENTER>Multi Camera Render</CENTER></P>
+</FONT>
+<HR WIDTH=80%>
+
+<CENTER>
+
+<TABLE WIDTH=80%><TR><TD>
+
+<BR>
+<P>
+<TABLE CELLPADDING=5 CELLSPACING=0 BORDER=1 class="pt">
+<TR><TD WIDTH=150><B>Version</B></TD><TD>1.2</TD></TR>
+<TR><TD><B>3DS Max Version</B></TD><TD>5.x - 6.x - 7.x</TD></TR>
+<TR><TD><B>Date</B></TD><TD>2 February 2005</TD></TR>
+<TR><TD><B>Author</B></TD><TD>Xavier CROUZY</TD></TR>
+<TR><TD><B>Email</B></TD><TD><A HREF="mailto:scripts@amarhys.com">script@amarhys.com</A></TD></TR>
+<TR><TD><B>Website</B></TD><TD><A HREF="http://www.amarhys.com">www.amarhys.com</A></TD></TR>
+</TABLE>
+</P>
+<BR>
+
+<P class="tt">Important Note</P>
+
+
+<P class="pt">This script is freeware and you can use or distribute it without any restriction.
+However, if you want to use a part of original code for your own scripts, please 
+do not forget to quote the author as a contributor.</P>
+
+
+<P class="tt">Script Installation</P>
+
+
+<P class="pt">This script is a macro-script so it needs to be installed in a 3DS Max toolbar :</p>
+
+
+	<ul class="lt">
+
+	<li>1. Copy <i>mcrender_v1.2.ms</i> file anywhere on your hard disk</li>
+
+	<li>2. Execute <i>mcrender_v1.2.ms</i> under 3DS Max <B> [ MAXScript/Run Script... ]</B></li>
+
+	<li>3. Toolbar installation :
+
+
+		<ul>
+
+		<li>a. <B>[ Customize/Customize User Interface ]</B> and select <B>[ Toolbars ]</B> window tab</li>
+
+		<li>b. If you don't want to create a new toolbar jump to c)<BR>
+			
+   		   Press <B>[ New ]</B> and enter a toolbar name. A floating toolbar is then 
+		   created. You can dock this toolbar dragging it on interface edges.</li>   
+		
+		<li>c. In <B>[ Category ]</B> drop-down menu, select "XC_SCRIPT"</li>
+
+		<li>d. Drag and drop "Multi Camera Render" in an existing toolbar or new 
+		   one you've just created</li>
+		</ul>
+
+	</li>
+
+	<li>4. The script is now ready to be used</li>
+
+	</ul>
+</P>
+
+
+<P class="tt">Script Interface Help</P>
+
+ 
+<p class="ts">1. [Target Path and Files] section</p>
+
+<p class="tp">Target directory :</p>
+<P class="pt">Set the path location for output rendered image files. Click on <B>[..]</B> to browse the disk.</p>
+
+<p class="tp">Output file names :</p>
+<P class="pt">Output rendered image names. Name is built from the name of current camera being rendering 
+adding prefix and suffix provided by user (could be left blank).<BR><BR>
+Use the drop-down menu to select image format (TGA, JPG, BMP, TIF, PNG).</p>
+
+<p class="tp">Log file :</p>
+<P class="pt">Check this box and select a file name and a location to generate a basic rendering 
+log file. Click on <B>[..]</B> to browse the disk.</p>
+
+<p class="tp">[ Load.. ] :</p>
+<P class="pt">To load from a file a previous "Multi Camera Render" set of parameters.</p>
+
+<p class="tp">[ Save.. ] :</p>
+<P class="pt">To save to a file current "Multi Camera Render" set of parameters.</p>
+
+<p class="tp">[ More Options.. ] :</p>
+<P class="pt">Open <B>[ Render Scene ]</B> dialog box to configure other parameters for rendering.<BR>
+BE CAREFULL : do not press <B>[ Render ]</B> in this dialog box. You should close the window to return to 
+"Multi Camera Render" interface.</p>
+
+
+<p class="ts">2. [Cameras Selection] section</p>
+
+<p class="tp">Scene cameras :</p>
+<P class="pt">Current cameras in the scene (udpated each time the script is executed).</p>
+				  
+<p class="tp">Cameras to render / Scripts :</p>
+<P class="pt">Rendering list : current selection of cameras to be rendered and scripts to be executed.</p>
+
+<p class="tp">[ >> ] and [ << ] :</p>
+<P class="pt">Used to add or remove camera(s) to / from rendering list.</p>
+
+<p class="tp">[ up ] and [ down ] :</p>
+<P class="pt">Move up or down current selected item(s) in rendering list.</p>
+
+<p class="tp">[ |< ] and [ >| ] :</p>
+<P class="pt">Used to add or remove script(s) to / from rendering list.</p>
+
+<p class="tp">S and L spinners :</p>
+<P class="pt">Used to select which frame(s) to render for each camera. No effect on scripts.</p>
+
+
+<p class="ts">3. [Rendering Sequence] section</p>
+
+	
+<p class="tp">Enable pre-rendering script :</p>
+<p class="pt">Used to enable and select a script to be executed before each camera rendering.</p>
+
+<p class="tp">Reverse cameras list :</p>
+<p class="pt">When this option is checked, rendering sequence is from the last camera/script of rendering list to the first one, i.e down-top rendering.
+Default is top-down rendering.</p>
+	
+
+<p class="ts">4.[Render Cameras] button</P>
+
+<p class="pt">Push this button to render selected cameras and execute selected scripts of rendering list. To cancel rendering, press <B>[ESC]</B>.</P>
+<BR>
+<P class="tt">Versions history</P>
+
+<p class="tp">Version 1.0 :</P>
+<ul class="lt">
+<li>Initial version.</li>
+</ul></p>
+
+<p class="tp">Version 1.1 :</P>
+<ul class="lt">
+	<li>Interface layout update.</li>
+	<li>Add Credits section.</li>
+	<li>Add output image format selection.</li>
+	<li>Add rendering progress bar.</li>
+</ul></p>
+
+<p class="tp">Version 1.2 :</P>
+<ul class="lt">
+	<li>Interface layout update.</li>
+	<li>Add frames selection for each camera to be rendered.</li>
+</ul></p>
+
+<BR>
+<BR> 
+	 
+
+</TD></TR></TABLE>
+</CENTER>
+
+</BODY>
+
+
+
+
+	
+
+ 

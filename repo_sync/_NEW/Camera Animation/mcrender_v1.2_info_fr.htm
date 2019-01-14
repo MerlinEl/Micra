@@ -1,0 +1,231 @@
+<HTML>
+
+<HEAD>
+<style type='text/css'>
+
+.pt {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 14px;
+	font-style: normal;
+	font-weight: normal;
+	color: #000000;
+	margin: 0px 30px;
+}
+
+.tt {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 16px;
+	font-style: normal;
+	font-weight: bold;
+	color: #FF6666;
+	margin: 30px 10px;
+}
+
+.ts {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 15px;
+	font-style: normal;
+	font-weight: bold;
+	color: #993333;
+	margin: 30px 20px;
+}
+
+.tp {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 14px;
+	font-style: normal;
+	font-weight: bold;
+	color: #CC9933;
+	margin: 20px 30px;
+}
+
+.lt {
+	list-style-position: outside;
+	list-style-image: none;
+	list-style-type: square;
+	margin: 20px 40px 0px;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 14px;
+	color: #666666;
+	text-align: justify;
+
+</style>
+
+</HEAD>
+
+
+<BODY BGCOLOR=#FFFFFF>
+
+
+<BR>
+
+<FONT FACE="arial" SIZE=5>
+<P><CENTER>Multi Camera Render</CENTER></P>
+</FONT>
+<HR WIDTH=80%>
+
+<CENTER>
+
+<TABLE WIDTH=80%><TR><TD>
+
+<BR>
+<P>
+<TABLE CELLPADDING=5 CELLSPACING=0 BORDER=1 class="pt">
+<TR><TD WIDTH=150><B>Version</B></TD><TD>1.2</TD></TR>
+<TR><TD><B>3DS Max Version</B></TD><TD>5.x - 6.x - 7.x</TD></TR>
+<TR><TD><B>Date</B></TD><TD>2 Février 2005</TD></TR>
+<TR><TD><B>Auteur</B></TD><TD>Xavier CROUZY</TD></TR>
+<TR><TD><B>Email</B></TD><TD><A HREF="mailto:scripts@amarhys.com">script@amarhys.com</A></TD></TR>
+<TR><TD><B>Site Web</B></TD><TD><A HREF="http://www.amarhys.com">www.amarhys.com</A></TD></TR>
+</TABLE>
+</P>
+<BR>
+
+<P class="tt">Note Importante</P>
+
+
+<P class="pt">Ce script est libre de droits et vous pouvez l'utiliser ou le distribuer sans aucune restriction.
+Cependant, si vous utilisez une partie du code dans un de vos propre scripts, n'oubliez pas de citer 
+l'auteur d'origine en tant que contributeur.</P>
+
+
+<P class="tt">Installation du script</P>
+
+
+<P class="pt">Ce script est un macro-script et nécessite donc d'être installé au préalable dans une 
+barre d'outils de 3DS Max :
+
+	<ul class="lt">
+
+
+	<li>1. Copier le fichier <i>mcrender_v1.2.ms</i> n'importe où sur votre disque dur</li>
+
+	<li>2. Exécuter <i>mcrender_v1.2.ms</i> sous 3DS Max <B> [ MAXScript/Exécuter script...]</B></li>
+
+	<li>3. Installation dans la barre d'outils :
+
+
+		<ul>
+
+		<li>a. <B>[ Personnaliser/Personnaliser interface utilisateur ]</B> et sélectionner l'onglet <B>[ Barres d'outils ]</B></li>
+
+		<li>b. Si vous ne voulez pas créer une nouvelle barre d'outils rendez-vous directement en c)<BR>
+		
+		   Sélectionner <B>[ Nouveau ]</B> et entrer un nom pour la barre d'outils.
+		   Une nouvelle barre d'outils flottante est alors créée. On peut la
+		   fixer en la glissant vers l'un des bords de l'interface</li> 
+			
+		<li>c. Dans le menu déroulant <B>[ Catégorie ]</B>, sélectionner "XC_SCRIPT"</li>
+
+		<li>d. Tirer "Multi Object Modifier" dans une barre d'outils existante ou
+		   dans celle que vous venez de créer</li>
+
+		</ul>
+
+	</li>
+
+	<li>4. Le script est maintenant prêt à être utilisé</li>
+
+	</ul>
+</P>
+
+<P class="tt">Aide pour l'interface </P>
+
+ 
+<p class="ts">1. Section [Target Path and Files]</p>
+
+<p class="tp">Target directory :</p>
+<P class="pt">Défini le répertoire où seront sauvegardées les images rendues. Cliquez sur <B>[..]</B> pour explorer le disque.</p>
+
+<p class="tp">Output file names :</p>
+<P class="pt">Nom des images de sortie. Il est construit à partir du nom de la caméra en ajoutant le préfixe et le suffixe 
+définis par l'utilisateur (ces 2 champs peuvent être vides).<BR><BR>
+Utiliser le menu déroulant pour sélectionner le format d'image (TGA, JPG, BMP, TIF, PNG).</p>
+
+<p class="tp">Log file :</p>
+<P class="pt">Sélectionner cette option pour générer un fichier de rapport de rendus. Cliquez sur <B>[..]</B> pour explorer le disque.</p>
+
+<p class="tp">[ Load.. ] :</p>
+<P class="pt">Charger les paramètres de l'interface "Multi Camera Render" depuis un fichier.</p>
+
+<p class="tp">[ Save.. ] :</p>
+<P class="pt">Sauver les paramètres courants de l'interface "Multi Camera Render" dans un fichier.</p>
+
+<p class="tp">[ More Options.. ] :</p>
+<P class="pt">Ouvre la boîte de dialogue <B>[ Rendu scène ]</B> qui permet d'accèder à des paramètres de rendu supplémentaires.<BR>
+ATTENTION : ne pas appuyer sur <B>[ Rendu ]</B> dans cette boite de dialogue. Vous devez fermer cette fenêtre pour retourner à 
+l'interface "Multi Camera Render".</p>
+
+<p class="ts">2. Section [Cameras Selection]</p>
+
+<p class="tp">Scene cameras :</p>
+<P class="pt">Liste des caméras existantes dans la scène (mise à jour à chaque exécution du script).</p>
+				  
+<p class="tp">Cameras to render / Scripts :</p>
+<P class="pt">Liste des rendus : liste des caméras à rendre et des scripts à exécuter.</p>
+
+<p class="tp">[ >> ] and [ << ] :</p>
+<P class="pt">Ajouter ou supprimer une ou plusieurs caméras à/de la liste des rendus.</p>
+
+<p class="tp">[ up ] and [ down ] :</p>
+<P class="pt">Déplace vers le haut ou vers le bas un ou plusieurs items de la liste des rendus.</p>
+
+<p class="tp">[ |< ] and [ >| ] :</p>
+<P class="pt">Ajouter ou supprimer un ou plusieurs scripts à/de la liste des rendus.</p>
+
+<p class="tp">Spinners S et L :</p>
+<P class="pt">Permet de sélectionner les frames à rendre pour chaque caméra. Aucun effet sur les scripts.</p>
+
+
+<p class="ts">3. Section [Rendering Sequence]</p>
+
+	
+<p class="tp">Enable pre-rendering script :</p>
+<p class="pt">Activer cette option pour sélectionner un script qui sera exécuté avant chaque rendu de caméra.</p>
+
+<p class="tp">Reverse cameras list :</p>
+<p class="pt">Quand cette option est sélectionnée, la séquence des rendus s'exécute depuis le bas de la liste des rendus vers la haut. 
+Par défaut, la séquence s'éxecute de haut en bas.</p>
+	
+
+<p class="ts">4. Bouton [Render Cameras]</P>
+
+<p class="pt">Presser ce bouton pour rendre les caméras sélectionnées et exécuter les scripts de la liste 
+des rendus. Pour interrompre le processus, appuyer sur <B>[ESC]</B>.</P>
+<BR>
+<P class="tt">Historique des versions</P>
+
+<p class="tp">Version 1.0 :</P>
+<ul class="lt">
+<li>Version initiale.</li>
+</ul></p>
+
+<p class="tp">Version 1.1 :</P>
+<ul class="lt">
+	<li>Mise à jour de l'interface.</li>
+	<li>Ajout de la section Crédits.</li>
+	<li>Ajout de la sélection du format pour l'image de sortie.</li>
+	<li>Ajout de la barre de progression du rendu.</li>
+</ul></p>
+
+<p class="tp">Version 1.2 :</P>
+<ul class="lt">
+	<li>Mise à jour de l'interface.</li>
+	<li>Ajout de la sélection des frames pour chaque caméra à rendre.</li>
+</ul></p>
+
+<BR>
+<BR> 
+	 
+
+</TD></TR></TABLE>
+</CENTER>
+
+</BODY>
+
+
+
+
+	
+
+ 
