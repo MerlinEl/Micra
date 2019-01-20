@@ -2243,6 +2243,7 @@ struct mcAction (
 			obj.width  = obj.width / multiplier
 		)
 	) --resizePlane 29.21	
+	/*<end>*/
 )
 
 
@@ -2369,7 +2370,7 @@ struct mcCreate (
 	(	
 		Micra.fileInVersion "Create_3PGrid"
 	),
-	fn cereate_checker color1:blue color2:white =
+	fn cereateChecker color1:blue color2:white =
 	(
 		if selection.count == 0 do return false
 		undo "Add Checker" on
@@ -2384,7 +2385,7 @@ struct mcCreate (
 			selection.material = m
 		)
 	),
-	fn create_dx_material =
+	fn createDXMaterial =
 	(
 		undo "Add DX Material" on
 		(
@@ -2422,6 +2423,7 @@ struct mcCreate (
 			for i=bones_array.count to 1 by -1 do if i > 1 do bones_array[i].parent = bones_array[i-1] 
 		)
 	)
+	/*<end>*/
 )
 struct mcInterface
 (
@@ -2483,7 +2485,8 @@ struct mcInterface
 			#squash :(max scale)
 			#select :(max select)
 		)
-	)	
+	)
+	/*<end>*/	
 )
 struct mcSkin (
 
@@ -2541,12 +2544,14 @@ struct mcSkin (
 		obj.parent = (getNodeByName "bone_body_01")
 		return OK
 	)
+	/*<end>*/
 )
 
 struct mcMax (
 
 	fn getSource = getSourceFileName(), --get path of this script
 	fn alignObject = (max align)
+	/*<end>*/
 )
 
 struct mcShell (
@@ -2559,4 +2564,5 @@ struct mcShell (
 			"calc": ShellLaunch "C:\\WINDOWS\\system32\\calc.exe"
 		)
 	)
+	/*<end>*/
 )

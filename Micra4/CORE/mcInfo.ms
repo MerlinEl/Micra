@@ -53,7 +53,8 @@ struct MICRA_INFO (
 			shape: #shape
 		)
 		return type == arg
-	) 
+	)
+	/*<end>*/	
 )
 --create instance
 Global mcInfo = Micra.instanceStructure MICRA_INFO "mcInfo"

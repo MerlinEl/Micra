@@ -1,4 +1,4 @@
-Global mcMSX
+Global mcMSXE
 struct MICRA_MSX_EDITOR (
 	
 	msx_hwnd = ( --MSX Editor handle
@@ -38,8 +38,9 @@ struct MICRA_MSX_EDITOR (
 		marshal.PtrToStringUni (dotnetObject "System.IntPtr" int_ptr)
 		*/
 	)
+	/*<end>*/
 )
-mcMSX = MICRA_MSX_EDITOR()
+mcMSXE = MICRA_MSX_EDITOR()
 
 
 /*

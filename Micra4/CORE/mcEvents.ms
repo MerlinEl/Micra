@@ -165,6 +165,7 @@ Struct MICRA_EVENTS (
 			if evt_index > 0 then deleteItem _evts_set_list evt_index
 		),
 		fn unregisterAll = ( _evts_set_list = #() )
+		/*<end>*/
 )
  --create instance
 Global mcEvents = Micra.instanceStructure MICRA_EVENTS "mcEvents"

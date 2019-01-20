@@ -250,6 +250,7 @@ Struct MICRA_POPUP (
 		mcDotnet.dShow form saved_pos:false
 		edtBox.DeselectAll()
 	)
+	/*<end>*/
 )
 mcPopUp = MICRA_POPUP()
 

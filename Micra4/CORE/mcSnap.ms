@@ -58,6 +58,7 @@ struct MICRA_SNAP
 			)
 		)
 	)
+	/*<end>*/
 )
  --create instance
 Global mcSnap = Micra.instanceStructure MICRA_SNAP "mcSnap"

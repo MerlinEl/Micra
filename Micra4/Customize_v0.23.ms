@@ -159,7 +159,16 @@ fn addNewAction = (
 	local action_cmd = getEditorData "action_cmd"
 	local icon_index = getEditorData "icon_index"
 	if action_category.count == 0 or action_name.count == 0 or action_cmd.count == 0 or icon_index.count == 0 do return false
-	local success = mcFile.appendActionOrCreateScript action_category action_name action_cmd icon_index
+	/** 
+	*@Actions Methods
+		*@Structure
+			register existing action
+			create new action
+		*@File
+			register existing tool
+			create new tool
+	*/
+	local success = mcActionsEditor.editOrCreateAction action_category action_name action_cmd icon_index
 	--if success do append new action in to list
 )
 fn delCurrentAction = (
@@ -190,14 +199,14 @@ fn editAction = (
 
 	local action_name = getEditorData "action_name"
 	if action_name == undefined do return false
-	mcFile.showActionSource action_name
+	mcActionsEditor.showActionSource action_name
 )
 fn changeIcon = (
 
 	local action_category = getEditorData "category_list"
 	local action_name = getEditorData "action_name"
 	if action_category == undefined or action_name == undefined do return false
-	local icon_index = mcFile.getIniDataFromAction action_category action_name "icon"
+	local icon_index = mcActionsEditor.getIniDataFromAction action_category action_name "icon"
 	format "Customize > changeIcon > icon index:%\n" icon_index
 	if icon_index != undefined do mcGM.setParam "active_icon_index" (execute icon_index)
 	Micra.fileInVersion "Icon_Maker"
@@ -220,7 +229,7 @@ fn clearCurrentActionData = (
 	if not mcs.edit_mode do return false
 	local action_category =  mcs.tab_1.combo_box.SelectedItem
 	if action_category == undefined do return false
-	setEditorData "icon_index" 	"0"
+	setEditorData "icon_index" 	"1"
 	setEditorData "action_cmd" 	"mcAction.doSomething() or Micra.fileInVersion Lode_Tester"
 	setEditorData "catalog_name" action_category
 	setEditorData "action_name" 	"Action Name"
@@ -248,7 +257,7 @@ format "fill\n"
 	if debug == 1 do format "Reading functions data...\n"
 
 	--load rest action data
-	local data = mcFile.getActionData action_category action_name --{cat:Animation, name:Reverse_Animation, icon:106, cmd:mcAnimation.reverse 0 10}
+	local data = mcActionsEditor.getActionData action_category action_name --{cat:Animation, name:Reverse_Animation, icon:106, cmd:mcAnimation.reverse 0 10}
 	if data != undefined do (
 
 		setEditorData "icon_index" 	(data.get "icon"	)
@@ -287,7 +296,7 @@ fn getImageList head keys =
 	
 	for i in keys do (
 	
-		local icon_num = mcFile.getIniDataFromAction head i "icon"
+		local icon_num = mcActionsEditor.getIniDataFromAction head i "icon"
 		icon_num = execute icon_num --string to num
 		img_list.images.add (getIconDotNet icon_num)
 	)
@@ -330,7 +339,7 @@ fn loadActionList list_cat list_act = (
 		append list_items itm
 	)
 	list_cat.Items.AddRange list_items 
-	list_cat.items.item[ 1 ].selected = true --select first.items.item[ 1 ].selected = true --select first
+	list_cat.items.item[ 0 ].selected = true --select first.items.item[ 1 ].selected = true --select first
 	list_cat.EndUpdate()
 	list_cat.Refresh()
 )
@@ -369,7 +378,7 @@ fn onMousedown s a = --click or drag (s = sender a = arguments)
 					btn_b.Image = btn_a_image --copy image
 					btn_b.Tag = btn_a.tag --copy tag
 					--save Settings
-					local icn_numA = (mcFile.getIniDataFromAction btn_a.name btn_a.tag "icon") as string
+					local icn_numA = (mcActionsEditor.getIniDataFromAction btn_a.name btn_a.tag "icon") as string
 					setINISetting Micra.TempProfileIni "Buttons" btn_b.name btn_b.tag
 					setINISetting Micra.TempProfileIni "Icons"   btn_b.name icn_numA 
 				)

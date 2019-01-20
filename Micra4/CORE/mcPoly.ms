@@ -160,6 +160,7 @@ struct MICRA_POLY
 		delete meshObj
 		return hitRay
 	)
+	/*<end>*/
 )
 --create instance
 Global mcPoly = Micra.instanceStructure MICRA_POLY "mcPoly"

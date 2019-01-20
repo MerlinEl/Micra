@@ -205,6 +205,7 @@ Struct MICRA_DIALOG (
 		--final move action
 		if (dialogA_pos.x != x or dialogA_pos.y != y) do setDialogPos dia [x, y]
 	)
+	/*<end>*/
 )
  --create instance
 Global mcDialog = Micra.instanceStructure MICRA_DIALOG "mcDialog"

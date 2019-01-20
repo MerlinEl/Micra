@@ -163,6 +163,7 @@ Struct MICRA_DOTNET (
 		if form == undefined or form.IsDisposed or not form.visible do return false
 		form.close()
 	)
+	/*<end>*/
 )	
  --create instance
 Global mcDotnet = Micra.instanceStructure MICRA_DOTNET "mcDotnet"

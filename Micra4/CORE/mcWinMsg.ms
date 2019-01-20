@@ -268,7 +268,11 @@ struct MICRA_WINDOWS_MESSAGES (
 	WM_REFLECT = WM_USER + 0x1C00,
 	EM_GETSEL = 0x00B0,
 	EM_SETSEL = 0x00B1, --put the caret to the end of the edit window
-	EM_REPLACESEL = 0x00C2 --append text at carret pos
+	EM_REPLACESEL = 0x00C2, --append text at carret pos
+	--EM_FINDTEXT = 1080, --0x100,
+	SCI_GETCURRENTPOS = 2008,
+	SCI_GOTOPOS = 2025
+	/*<end>*/
 )
 mcWinMsg = MICRA_WINDOWS_MESSAGES()
 

@@ -79,6 +79,7 @@ struct mcTransform (
 			#height:max.z-min.z
 		)
 	)
+	/*<end>*/
 )
  --create instance caused error (unable find function in this struct)
 --Global mcTransform = Micra.instanceStructure MICRA_TRANSFORM "mcTransform"

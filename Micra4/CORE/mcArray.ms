@@ -57,6 +57,7 @@ struct MCRA_ARRAY (
 		fn compareNames str1 str2 = stricmp str1.name str2.name
 		qSort arr compareNames
 	)
+	/*<end>*/
 )
 --create instance
 Global mcArray = Micra.instanceStructure MCRA_ARRAY "mcArray"

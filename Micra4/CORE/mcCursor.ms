@@ -24,6 +24,7 @@ Struct MICRA_CURCOR (
 			#grab	: dotNetObject "System.Windows.Forms.Cursor" (Micra.ImgPath+"hmove.ico")	
 		)
 	)
+	/*<end>*/
 )
 --create instance
 Global mcCursor = Micra.instanceStructure MICRA_CURCOR "mcCursor"

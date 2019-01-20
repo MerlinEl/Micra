@@ -73,7 +73,7 @@ Global mcCreateNetDynamicDialog
 		
 if debug == 5 do format "name:%\t tag:%\n" s.name s.tag	
 		if s.parent.parent.tag.value.edit_mode do return false
-		if a.Button == a.Button.left do mcFile.runAction s.tag	
+		if a.Button == a.Button.left do mcActionsEditor.runAction s.tag	
 	)
 --| --DragAndDrop
 	--btn:dotNetObject:System.Windows.Forms.ToolStripMenuItem args:dotNetObject:System.EventArgs

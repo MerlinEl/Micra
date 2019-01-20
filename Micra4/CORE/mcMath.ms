@@ -162,6 +162,7 @@ struct MICRA_MATH (
 		local new_version  = num + 0.01 as float
 		if isInteger new_version then int new_version else new_version
 	)
+	/*<end>*/
 )
 --create instance
 Global mcMath = Micra.instanceStructure MICRA_MATH "mcMath"

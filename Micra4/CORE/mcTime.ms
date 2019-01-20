@@ -37,6 +37,7 @@ Struct MICRA_TIME (
 		init()
 		year + month + day + hours + mins + ms
 	)
+	/*<end>*/
 )
  --create instance
 Global mcTime = Micra.instanceStructure MICRA_TIME "mcTime"

@@ -303,6 +303,7 @@ struct MICRA_CALL
 			shellLaunch max_user_dir ""
 		)
 	)
+	/*<end>*/
 )
 --create instance
 Global mcCall = Micra.instanceStructure MICRA_CALL "mcCall"

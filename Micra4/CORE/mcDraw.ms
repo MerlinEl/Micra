@@ -47,6 +47,7 @@ struct MICRA_DRAW (
 		gw.enlargeUpdateRect rect--#whole 
 		gw.updateScreen()
 	)
+	/*<end>*/
 )
  --create instance
 Global mcDraw = Micra.instanceStructure MICRA_DRAW "mcDraw"

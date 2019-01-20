@@ -170,6 +170,7 @@ struct mcSystem (
 		local max_pos = mcSystem.getMaxPos()
 		return [max_pos.w/2 + max_pos.x /2, max_pos.h/2 + max_pos.y /2]
 	)
+	/*<end>*/
 )
  --creating instance caused endless loop
 --Global mcSystem = Micra.instanceStructure MICRA_SYSTEM "mcSystem"

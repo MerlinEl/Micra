@@ -56,6 +56,7 @@ fn CreateWin32Assembly forceRecompile:on = (
 		mcWin32Assembly = compilerResults.CompiledAssembly
 		mcWin32Assembly.CreateInstance "Win32"
 	)
+	/*<end>*/
 )
 mcWin32 = CreateWin32Assembly()
 

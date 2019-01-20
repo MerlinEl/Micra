@@ -16,7 +16,7 @@ struct MICRA_STRUCTURE (
 	@Usage Debug Micra and Tools
 	@Legend
 		0 : debug disabled
-		8 : show forms bounded to windows interface (Notepad++)
+		8 : unbound all froms from 3DsMax, used at Notepad++ execute
 	*/
 	debug				= 0,
 	loaded				= false,
@@ -25,6 +25,7 @@ struct MICRA_STRUCTURE (
 	files_list			= #(),
 	restart_need		= false,
 	RootDir				= getFilenamePath (getSourceFileName()), --here is current version of Micra
+	CoreDir				= RootDir+"\\CORE\\", --here is all sturctures(classes)
 	AutorunDir			= RootDir + "\\Autorun\\", --all plugins goes here, also Micra's autorun file	
 	RepositoryDir		= (pathConfig.removePathLeaf RootDir) + "\\", --here is all Micra's versions and other Resources
 	ResourcesDir 		= RepositoryDir + "repo_sync\\", --Micra's Shared Resources, Backups, Max Icons, Ms Library, ...
@@ -56,6 +57,51 @@ struct MICRA_STRUCTURE (
 		local hsize = mb*1000000
 		if heapSize < hsize do heapSize = hsize
 	),
+	/**
+	*@Usage
+		import a sturcture(class) from CoreDir(file) as Global
+	*@Example 
+		Micra.import "mcMsxInterface" --force:true
+	*/
+	fn import struct_name force:false = (
+		
+		--check if structure is already loaded
+		if execute struct_name != undefined and not force do return OK
+		--find structure file and load it as global variable
+		local file = CoreDir + struct_name + ".ms"
+		if doesFileExist file then (
+		
+			try (
+				fileIn file
+				format "% > import > structure [  %  ]  was success!\n" version struct_name
+			
+			) catch (
+			
+				format "% > import > structure [  %  ]  was failed!\n\tError:%\n" version struct_name (getCurrentException())
+			)
+		) else (
+		
+			format "% > import > structure [  %  ]  was failed!\n\tUnable locate file [ % ]\n" version struct_name file
+		)
+ 	),
+	fn importAll = (/*not need yet*/),
+		/*
+	*	@example
+	*	struct test1 (a, b)
+	*	Global mcTest = Micra.instanceStructure test1
+	*/
+	fn instanceStructure struct_object instance_name = (
+
+		local structure_instance
+		try (
+			structure_instance = struct_object()
+			format"% > instance structure > [  %  ] was success!\n" version instance_name
+		) catch (
+
+			format"% > instance structure > [  %  ] was failed!\n\tError:%\n" version instance_name (getCurrentException())
+		)
+		structure_instance
+	),
 	-->  OLD File in Version
 	--return version "1.02" or empty string ""
 	fn getScriptVersion script_name = (
@@ -68,6 +114,12 @@ struct MICRA_STRUCTURE (
 		local script_version = getScriptVersion script_name
 		rootDir + script_name + "_v" + script_version + ".ms"
 	),
+	/**
+	*@Usage 
+		run a RootDir(file) as application(tool)
+	*@Example 
+		fileInVersion "Deep_Isolate"
+	*/
 	fn fileInVersion script_name = (	
 	
 		if classOf script_name != String do (
@@ -82,7 +134,7 @@ struct MICRA_STRUCTURE (
 			return false
 		)
 		local file = RootDir + script_name + "_v" + f_version + ".ms"
-		if doesFileExist file do (
+		if doesFileExist file then (
 		
 			try (
 				fileIn file
@@ -92,25 +144,10 @@ struct MICRA_STRUCTURE (
 			
 				format "% > fileInVersion > Load tool [  %  ]  was failed!\n\tError:%\n" version script_name (getCurrentException())
 			)
+		) else (
+		
+			format "% > fileInVersion > Load tool [  %  ]  was failed!\n\tUnable locate file [ % ]\n" version script_name file
 		)
-		--format "ver:%\n" f_Version
-	),
-	/*
-	*	@example
-	*	struct test1 (a, b)
-	*	Global mcTest = Micra.instanceStructure test1
-	*/
-	fn instanceStructure struct_object instance_name = (
-
-		local structure_instance
-		try (
-			structure_instance = struct_object()
-			format"% > Import struct > [  %  ] was success!\n" version instance_name
-		) catch (
-
-			format"% > Import struct > [  %  ] was failed!\n\tError:%\n" version instance_name (getCurrentException())
-		)
-		structure_instance
 	),
 	--> Clean and Close Micra
 	fn unload self:true = (
@@ -194,7 +231,7 @@ mc_Dialog_DropTarget = undefined
 		--> collect ms and mcr
 		for i in ms_names  do files_list += #(RootDir+i+"_v"+getIniSetting DefaultSettings "Version" i+".ms") 
 		--> collect struct files
-		for i in struct_names do files_list += #(RootDir+"\\CORE\\"+i+".ms") 
+		for i in struct_names do files_list += #(CoreDir+i+".ms") 
 		--> collect ini 
 		for i in system_ini_names do files_list += #(RootDir+i+".ini")
 		--> collect default ini
@@ -340,10 +377,11 @@ mc_Dialog_DropTarget = undefined
 		
 		-->Load Core Structures
 		local struct_names = getIniSetting DefaultSettings "Structures" 
-		for i in struct_names do fileIn (RootDir+"\\CORE\\"+i+".ms") 
+		for i in struct_names do fileIn (CoreDir+i+".ms") 
 		
 		--> Load Actions
 		fileInVersion "Struct_Action"
+		fileInVersion "Actions_Editor"
 		
 		-->Load DotNet Components
 		fileInVersion "DotNet_Components"

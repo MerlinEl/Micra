@@ -117,6 +117,7 @@ struct MICRA_COLOR (
 	),
 	fn blendColors c1 c2 = ((c1+c2)/2),
 	fn randomColor=(color (random 1 255)  (random 1 255) (random 1 255)) 
+	/*<end>*/
 )
 --create instance
 Global mcColor = Micra.instanceStructure MICRA_COLOR "mcColor"

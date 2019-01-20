@@ -202,6 +202,7 @@ Public
 		close str
 		str2
 	)*/
+	/*<end>*/
 )
  --create instance
 Global mcString = Micra.instanceStructure MICRA_STRING "mcString"

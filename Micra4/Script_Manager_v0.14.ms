@@ -584,7 +584,7 @@
 	)
 	fn setVersionToActive  = (
 	
-		if current_list_item != undefined do mcFile.registerMicraScript current_list_item.text	
+		if current_list_item != undefined do mcActionsEditor.registerMicraScript current_list_item.text	
 	)
   	-->Dialog
 	on mcScriptManDialog open do

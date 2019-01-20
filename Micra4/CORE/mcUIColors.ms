@@ -36,6 +36,7 @@ Public
 			#edtfore	:execute (mcFile.saveLoadIniSetings head:head_str key:"editfore"  action:#load)
 		)
 	)
+	/*<end>*/
 )
  --create instance
 Global mcUIColors = Micra.instanceStructure MICRA_UI_COLORS "mcUIColors"

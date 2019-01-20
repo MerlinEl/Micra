@@ -34,6 +34,7 @@ struct MICRA_GLOBAL_MEMORY	(
 		
 		_items.add key	val
 	)
+	/*<end>*/
 )	
  --create instance
 Global mcGM = Micra.instanceStructure MICRA_GLOBAL_MEMORY "mcGM"

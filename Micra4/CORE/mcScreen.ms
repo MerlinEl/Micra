@@ -37,6 +37,7 @@ Struct MICRA_SCREEN (
 		if scr.AllScreens.count < num do return false
 		[scr.AllScreens[num].Bounds.x, scr.AllScreens[num].Bounds.y]
 	)
+	/*<end>*/
  )
  --create instance
 Global mcScreen = Micra.instanceStructure MICRA_SCREEN "mcScreen"

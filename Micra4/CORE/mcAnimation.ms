@@ -48,4 +48,5 @@ struct mcAnimation
 			obj.pos = old_obj_pos
 		)
 	)
+	/*<end>*/
 )

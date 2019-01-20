@@ -17,7 +17,7 @@ Global mcCube
 
 /**
 *@example
-mcItem "a" 23
+	mcItem "a" 23
 */
 struct mcItem (
 	
@@ -25,72 +25,100 @@ struct mcItem (
 )
 
 /**
-*	@example
-*	mcO = mcObject()	
-*	mcO.add "ren" 12 -- OK
-*	mcO.get "ren" -- 12
-*	mcO.keys -- #("ren")
-*	mcO.values -- #(12)
-*/
-struct mcObject ( --always create instance
-	
-	keys = #(), values = #(),
-	fn getSource = getSourceFileName(), --get path of this script
-	fn add key val = (
-	
-		local key_index = findItem keys key
-		--format "mcObject > add >  key:% val:% replace:%\n" key val (key_index>0)
-		if key_index == 0 then ( --add
-			
-			keys = append keys key
-			values =  append values val
-		) else ( --replace
-		
-			values[key_index] = val	
-		)
-	),
-	fn get key = (
-		
-		local key_index = findItem keys key
-		--format "mcObject > get >  key:% index:%\n" key key_index
-		return if key_index > 0 then values[key_index] else undefined
-	),
-	/**
-	local mco = mcObject()
+*@example
+	mco = mcObject()	
+	mco.add "first" 100 --> OK
+	mco.add "second" 200 --> OK
 	mco.addMore #(
 
 		mcItem "a" 1,
 		mcItem "b" 2,
 		mcItem "c" 3
 	)
-	mcGM.setParam "edit_action_data" mco
-	local mco2 = mcGM.getParam "edit_action_data"
-	mco2.get "c"
-	*/
+	mco.get "first" --> 100
+	mco.keys() --> #("first", "second", "a", "b", "c")
+	mco.values() --> #(100, 200, 1, 2, 3)
+	or
+	(
+		local data = mcObject()
+		data.addMore #(
+			
+			mcItem "struc" "mcFile", 
+			mcItem "func" "read", 
+			mcItem "param" "c:\\temp\\test.txt"
+		)
+		format "keys:%\n" (data.keys())
+	)
+*/
+struct mcObject ( --always create an instance
+private	
+	_keys = #(), _values = #(),
+public
+	fn getSource = getSourceFileName(), --get path of this script
+	fn keyIndex key = (finditem _keys key),		
+	fn hasKey key = (keyIndex key > 0),
+	fn keys = (_keys),
+	fn values = (_values),
+	fn add key val = (
+	
+		local key_index = keyIndex key
+		--format "mcObject > add >  key:% val:% replace:%\n" key val (key_index>0)
+		if key_index == 0 then ( --add
+			
+			_keys = append _keys key
+			_values =  append _values val
+		) else ( --replace
+		
+			_values[key_index] = val	
+		)
+	),
+	fn get key = (
+		
+		local key_index = keyIndex key
+		--format "mcObject > get >  key:% index:%\n" key key_index
+		return if key_index > 0 then _values[key_index] else undefined
+	),
 	fn addMore itm_arr = (
 	
 		for itm in itm_arr do add itm.key itm.val	
+		this
+	),
+	fn removeKey key = (
+	
+		local key_index = keyIndex key
+		if key_index > 0 do (
+		
+			deleteitem _keys key_index
+			deleteitem _values key_index
+		)
+	),
+	fn toString = (
+	
+		local str = "mcObject ("
+		for i = 1 to _keys.count do (str +=  "\n\tkey:" + _keys[i] + " val:" + _values[i] as string)
+		str += "\n)\n"
+		str
 	)
 )
 
 /*
-si = mcSize 20 45
-si.w -- 20
+	si = mcSize 20 45
+	si.w -- 20
 */
 Struct mcSize (w, h)
 
 /*
-bo = mcBounds [0, 0] [200, 400]
-bo.pos -- [0, 0]
+	bo = mcBounds [0, 0] [200, 400]
+	bo.pos -- [0, 0]
 */
 Struct mcBounds (pos, size)
 
 /*
-re = rect()
-rct = re mi:[0,10] ma:[40,60]
-rct.wi()
-rct.he()
-rct.si()
+	re = rect()
+	rct = re mi:[0,10] ma:[40,60]
+	rct.wi()
+	rct.he()
+	rct.si()
 */
 Struct mcRect 
 (
@@ -100,11 +128,11 @@ Struct mcRect
 	fn si =(ma - mi       )  --size
 )
 /*
-cu = cube2()
-cub = cu mi:$.min ma:$.max
-cub.mi
-cub.he()
-cub.si()
+	cu = cube2()
+	cub = cu mi:$.min ma:$.max
+	cub.mi
+	cub.he()
+	cub.si()
 */
 
 Struct mcCube
