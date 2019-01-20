@@ -86,8 +86,7 @@ struct MICRA_MSX (
 	fn findText str = ( --OK
 		
 		local current_script_text = mcWin32.GetWindowText mxse_hwnd
-		local str_pos = findString current_script_text str
-		str_pos
+		findString current_script_text str
 	),
 	fn insertFunctionAtStructureEnd fn_str = (
 	
