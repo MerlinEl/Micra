@@ -4,6 +4,9 @@
 /*
 *@Used Structures
 	Micra
+	mcObject
+	mcString
+	mcFile
 *
 *@Used Objects
 	undefined
@@ -195,7 +198,7 @@ struct MICRA_ACTIONS_EDITOR	(
 		local script_name = substring script_file_name 1 (version_pos-1)
 		--register script
 		if not doesFileExist Micra.DefaultSettings  do ((format "Not found! [%]\n" Micra.DefaultSettings); return false)
-		backupMicraFile Micra.DefaultSettings --some times get INI damaged , backup it
+		mcFile.backupFile Micra.DefaultSettings max_cnt:4 --some times get INI damaged , backup it 
 		local success = setIniSetting Micra.DefaultSettings "Version" script_name script_version
 		format "mcFile > registerMicraScript > [%_v%]\tsuccess:%\n" script_name script_version success
 	),

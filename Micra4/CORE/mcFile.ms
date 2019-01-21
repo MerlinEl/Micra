@@ -4,6 +4,7 @@
 /*
 *@Used Structures
 	Micra
+	mcItem
 	mcTime
 	mcString
 *
@@ -172,6 +173,56 @@ struct MICRA_FILE (
 		if file_text.count > 0 do format "%" file_text to:out_file --write data in to file
 		close out_file --important to close else file can't be deleted
 		OK
+	),
+	/**
+	*@Usage
+		clone file: [ file_name.bk1, file_name.bk2, file_name.bk3,...max_cnt ]
+	*/
+	fn backupFile fpath dest_dir:undefined max_cnt:3 = (
+	
+		if doesFileExist fpath and max_cnt > 0 then (
+		
+			if dest_dir == undefined do dest_dir = getFilenamePath fpath --get current file dir
+			if not doesDirectoryExist dest_dir do (
+			
+				format "mcFile > backupFile > Wrong destination directory: [ % ]\n" dest_dir
+				return false
+			)
+			local file_name = getFilenameFile fpath
+			--gather all backups
+			local backup_files = getFiles (dest_dir+"*.bk")
+			if backup_files.count == 0 then ( --create first backup
+			
+				local fpath_bk = dest_dir + file_name +"_1.bk"
+				local file_created = copyFile fpath fpath_bk
+				format "mcFile > backupFile > file: [ % ] success:%\n" fpath_bk file_created
+				
+			) else if  backup_files.count < max_cnt then ( --create next backup
+				
+				local fpath_bk = dest_dir + file_name +"_"+(backup_files.count+1) as string+".bk"
+				local file_created = copyFile fpath fpath_bk
+				format "mcFile > backupFile > file: [ % ] success:%\n" fpath_bk file_created
+	
+			) else ( --override oldest backup
+			
+				local dates = #()
+				for f in backup_files do (
+				
+					local tm = mcTime.fromString (getFileModDate f)
+					format "file:% time:%\n" (getFilenameFile f) (tm.toInt())
+					dates += #(mcItem key:(getFilenameFile f) val:(tm.toInt()) tag:f)
+				) 
+				fn compareLabels a b =  ( a.val > b.val)
+				qSort dates compareLabels
+				local fpath_bk = dates[1].tag
+				deleteFile fpath_bk
+				local file_created = copyFile fpath fpath_bk
+				format "mcFile > backupFile > file: [ % ] success:%\n" fpath_bk file_created
+			)
+		) else (
+		
+			format "mcFile > backupFile > file: [ % ] not found.\n" fpath
+		)
 	),
 	--mcFile.getIniDataFromArray Micra.TempProfileIni "Properties_2" "mcColorPickerDialog" 2
 	fn getIniDataFromArray iniFile head key arrNum =
