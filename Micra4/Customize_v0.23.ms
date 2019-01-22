@@ -169,12 +169,18 @@ fn addNewAction = (
 			create new tool
 	*/
 	local success = mcActionsEditor.editOrCreateAction action_category action_name action_cmd icon_index
-	--if success do append new action in to list
+--TODO
+--if success do appendNewActionToList action_name
+--add data to current Profile_1.ini
 )
 fn delCurrentAction = (
 	
+	local action_category = getEditorData "catalog_name"
 	local action_name = getEditorData "action_name"
-	format "Customize > delCurrentAction > name:%\n " action_name
+	local success = mcActionsEditor.removeAction action_category action_name
+--TODO
+--if success do removeActionFromList action_name
+--remove data from current Profile_1.ini
 )
 fn saveAction = (
 	

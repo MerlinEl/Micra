@@ -30,8 +30,8 @@ Global mcFormSnap
 
 
 -->Micra Interface
-try ( mcMicraDialog.close() ) catch()
-(
+try ( mcMicraDialog.close() ) catch() (
+
 	-->Locals-----------------------------------------------------------------
 	local sec = 60000
 	local netDMove = false, netDmPos
@@ -49,8 +49,8 @@ try ( mcMicraDialog.close() ) catch()
 	-->Components---------------------------------------------------------------------
 	local form = dotNetObject "MaxCustomControls.Maxform"
 	--local form = dotNetObject "Form" 
-	struct MICRA_COMPONENTS_STRUCT
-	(
+	struct MICRA_COMPONENTS_STRUCT (
+	
 		timer         = dotNetObject  "Timer",
 		ToolTip       = dotNetObject "ToolTip",
 		btnMin        = dotNetObject  "button",
@@ -407,13 +407,13 @@ try ( mcMicraDialog.close() ) catch()
 			)
 		)
 	)
-	fn addButtons mcs form =
-	(
+	fn addButtons mcs form = (
+	
 		local lbl = #(mcs.lbl_01)
 		local btn = #(mcs.btn_help, mcs.btn_settings, mcs.btn_toolbars, mcs.btn_profile)
 		local tip = #("Help", "Customize", "Toolbars", "Profiles")
-		for i in lbl do
-		(
+		for i in lbl do (
+		
 			i.size = netDrSize [(gw.getTextExtent "Micra III   ").x, btn_size]
 			i.BackColor = netDrColor (mcUIColors.get #back)
 			i.ForeColor = netDrColor (mcUIColors.get #text)
@@ -421,11 +421,10 @@ try ( mcMicraDialog.close() ) catch()
 			i.text = "Micra III" 
 			i.TextAlign = i.TextAlign.MiddleCenter
 		)
-
 		local cnt = 0
 		local biconnum = #(153, 154, 155, 156)
-		for i in btn do
-		(
+		for i in btn do (
+		
 			i.size  = netDrSize [btn_size, btn_size]
 			i.FlatStyle = i.FlatStyle.flat
 			i.FlatAppearance.BorderColor = netDrColor (mcUIColors.get #back)
@@ -441,10 +440,9 @@ try ( mcMicraDialog.close() ) catch()
 		mcs.tlp.controls.addRange (lbl + btn)
 	)
 --||
-	fn inicializeInterface form mcs =
-	(
+	fn inicializeInterface form mcs = (
+	
 		form.name = "mcMicraDialog"
-		
 		local fpos = (mcFile.getIniDataFromArray Micra.TempProfileIni "Properties_2" "mcMicraDialog" 2)
 		if fpos == undefined do fpos = (mcFile.getIniDataFromArray Micra.DefaultProfileIni "Properties_2" "mcMicraDialog" 2)
 		form.StartPosition = form.StartPosition.Manual

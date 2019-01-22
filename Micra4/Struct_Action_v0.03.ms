@@ -1621,7 +1621,7 @@ struct mcAction (
 			)
 		)
 	),
-	fn remove_mats =
+	fn removeMaterials =
 	(
 		undo "Remove Materials" on selection.material = undefined
 	),
