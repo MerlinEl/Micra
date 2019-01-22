@@ -25,8 +25,6 @@
 	mcEvents.unregisterEventSet "VariableChanged"
 	mcEvents.unregisterAll()
 
-
-	local id = mcTime.getUniqueId()
 	dotnet.removeAllEventHandlers _timer
 */
 --Each Event can have multiple functions under one ID

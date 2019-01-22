@@ -4,12 +4,11 @@
 /*
 *@Used Structures
 	Micra
-	mcItem
-	mcTime
+	mcDate
 	mcString
 *
 *@Used Objects
-
+	mcItem
 *
 *@Example
 *	mcFile.getDirTree (Micra.RootDir)
@@ -208,12 +207,13 @@ struct MICRA_FILE (
 				local dates = #()
 				for f in backup_files do (
 				
-					local tm = mcTime.fromString (getFileModDate f)
-					format "file:% time:%\n" (getFilenameFile f) (tm.toInt())
-					dates += #(mcItem key:(getFilenameFile f) val:(tm.toInt()) tag:f)
+					local file_mod_date = getFileModDate f
+					local offset  = (mcDate.fromString file_mod_date).offset units:#sec
+					--format "file:% is old (%) sec\n" (getFilenameFile f) offset
+					dates += #(mcItem key:(getFilenameFile f) val:offset tag:f)
 				) 
-				fn compareLabels a b =  ( a.val > b.val)
-				qSort dates compareLabels
+				fn compareDates a b =  ( a.val < b.val )
+				qSort dates compareDates
 				local fpath_bk = dates[1].tag
 				deleteFile fpath_bk
 				local file_created = copyFile fpath fpath_bk
@@ -355,7 +355,7 @@ struct MICRA_FILE (
 	fn backupMicraFile source_file = (
 	
 		if not doesFileExist source_file do return false
-		local date_and_time = mcTime.getTime()
+		local date_and_time = mcDate.getTime()
 		local fname = getFilenameFile source_file
 		local ftype = getFilenameType source_file
 		local target_file = Micra.ResourcesDir+"Backup\\" + fname+"_"+date_and_time+ftype

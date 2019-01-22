@@ -325,7 +325,7 @@
 	(
 		local state = queryBox ("Do you want to backup "+Micra.version+" ?") title:" Backup:" beep:true  
 		if not state do return false
-		local date_and_time = mcTime.getTime()
+		local date_and_time = (mcDate.current()).toStringSimple()
 		--create backup Micra in to zip file (-tzip switch)
 		local app_7z = Micra.RootDir+"App\\7za.exe" -- 7zip compiller
 		local backup_file = Micra.ResourcesDir+"Backup\\Micra_"+date_and_time+".zip " --Micra backup file

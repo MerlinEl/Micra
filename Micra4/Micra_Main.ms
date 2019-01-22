@@ -21,6 +21,7 @@ struct MICRA_STRUCTURE (
 	debug				= 0,
 	loaded				= false,
 	version				= "Micra IV",
+	borndate			= "5/4/2006 12:00:00 AM",
 	username			= substituteString sysInfo.username " " "_", --replace wihitespaces with "_"
 	files_list			= #(),
 	restart_need		= false,
