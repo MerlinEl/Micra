@@ -220,14 +220,14 @@ struct MICRA_ACTIONS_EDITOR	(
 	
 		local action_key	= nameToKey action_name
 		delIniSetting Micra.ActionsIni category_name action_key
-	)
+	),
 	fn removeAction category_name action_name = (
 	
 		format "mcActionsEditor > removeAction > name:%\n " action_name
 		unregisterAction category_name action_name
 		--TODO
 		--also remove action from micra tool button or create exception to dont load this action in to button
-	) 
+	),
 	/**
 	@Example
 		path = getCommandPath "mcAction"

@@ -30,8 +30,8 @@ Global mcFormSnap
 
 
 -->Micra Interface
-try ( mcMicraDialog.close() ) catch() (
-
+try ( mcMicraDialog.close() ) catch() 
+(
 	-->Locals-----------------------------------------------------------------
 	local sec = 60000
 	local netDMove = false, netDmPos

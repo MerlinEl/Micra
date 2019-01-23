@@ -171,7 +171,6 @@ fn addNewAction = (
 	local success = mcActionsEditor.editOrCreateAction action_category action_name action_cmd icon_index
 --TODO
 --if success do appendNewActionToList action_name
---add data to current Profile_1.ini
 )
 fn delCurrentAction = (
 	
@@ -179,8 +178,13 @@ fn delCurrentAction = (
 	local action_name = getEditorData "action_name"
 	local success = mcActionsEditor.removeAction action_category action_name
 --TODO
---if success do removeActionFromList action_name
---remove data from current Profile_1.ini
+/*
+	if success do (
+		removeActionFromList action_name
+		removeButtonData action_id
+		remove data from all profiles (Profile_1.ini, Profile_2.ini, ....Profile_8.ini) --registred buttons 
+	)
+*/
 )
 fn saveAction = (
 	

@@ -175,7 +175,9 @@ struct MICRA_FILE (
 	),
 	/**
 	*@Usage
-		clone file: [ file_name.bk1, file_name.bk2, file_name.bk3,...max_cnt ]
+		Create file copy with extension *.bk 
+		[ file_name.bk1, file_name.bk2, file_name.bk3,...max_cnt ]
+		max_cnt	define how many copies will be created, after max reached, then starts override oldest ones
 	*/
 	fn backupFile fpath dest_dir:undefined max_cnt:3 = (
 	

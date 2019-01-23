@@ -106,3 +106,22 @@ public
 )
  --create instance
 Global mcDate = Micra.instanceStructure MICRA_DATE "mcDate"
+
+
+
+
+/*
+--old way
+fn init = (
+	
+	local all = getLocalTime() --#(2019, 1, 1, 21, 19, 38, 15, 594)
+	year = all[1] as String 
+	month = all[2] as String 
+	day = all[4] as String 
+	hours = all[5] as String 
+	mins = all[6] as String 
+	sec = all[7] as String 
+	ms = all[8] as String 
+	OK
+),
+*/
