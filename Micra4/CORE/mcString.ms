@@ -184,6 +184,30 @@ Public
 			integer:eval_str
 			default:undefined	
 		)
+	),
+	/**
+		mcString.asObject "action:Move_To_X icon:28"
+	*/
+	fn toObject str = (
+
+		local data_arr = filterString str " "
+		local obj = mcObject()
+		for s in data_arr do (
+		
+			local arr = filterString s ":"
+			if arr.count != 2 then (
+		
+				format "mcString > toObject > invalid format:%\n" s
+				return false
+			) else (
+			
+				local key = trimLeftRight arr[1]
+				local val = trimLeftRight arr[2] --for now only String (TODO > int, number, point2, point3, array, bitarray)
+				--format "key:% val:%\n" key val
+				obj.add key val
+			)
+		)
+		obj
 	)
 	/* Not tested
 	,

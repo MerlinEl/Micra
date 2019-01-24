@@ -27,8 +27,6 @@ Global mcRenameUpdate
 Global getIconDotNet
 Global mcFormSnap
 
-
-
 -->Micra Interface
 try ( mcMicraDialog.close() ) catch() 
 (

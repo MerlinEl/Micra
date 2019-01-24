@@ -396,8 +396,8 @@ mc_Dialog_DropTarget = undefined
 		
 		-->Load Modifiers and Plugins
 		fileInVersion "Modifiers"
-		fileInVersion "Morph_Collector"
-		fileInVersion "Morph_Tagger"
+		--fileInVersion "Morph_Collector"
+		--fileInVersion "Morph_Tagger"
 		--fileInVersion "Morph_Dummy"
 		
 --> Reload Macroscript , bug in 3DsMax 1012

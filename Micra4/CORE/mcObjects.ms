@@ -71,7 +71,7 @@ public
 		
 			_values[key_index] = val	
 		)
-	),
+	),	
 	fn get key = (
 		
 		local key_index = keyIndex key
@@ -94,10 +94,16 @@ public
 	),
 	fn toString = (
 	
+		local str = ""
+		for i = 1 to _keys.count do (str += _keys[i] + ":" + _values[i] as string + " ")
+		trimRight str --remove last space
+	),
+	fn print = (
+	
 		local str = "mcObject ("
 		for i = 1 to _keys.count do (str +=  "\n\tkey:" + _keys[i] + " val:" + _values[i] as string)
 		str += "\n)\n"
-		str
+		::print str
 	)
 )
 
