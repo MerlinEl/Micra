@@ -26,8 +26,9 @@ struct MICRA_STRUCTURE (
 	files_list			= #(),
 	restart_need		= false,
 	RootDir				= getFilenamePath (getSourceFileName()), --here is current version of Micra
-	CoreDir				= RootDir+"\\CORE\\", --here is all sturctures(classes)
-	AutorunDir			= RootDir + "\\Autorun\\", --all plugins goes here, also Micra's autorun file	
+	CoreDir				= RootDir + "CORE\\", --here is all sturctures(classes)
+	TempDir				= RootDir + "Temp\\",
+	AutorunDir			= RootDir + "Autorun\\", --all plugins goes here, also Micra's autorun file	
 	RepositoryDir		= (pathConfig.removePathLeaf RootDir) + "\\", --here is all Micra's versions and other Resources
 	ResourcesDir 		= RepositoryDir + "repo_sync\\", --Micra's Shared Resources, Backups, Max Icons, Ms Library, ...
 	AppsDir				= RootDir + "App\\",

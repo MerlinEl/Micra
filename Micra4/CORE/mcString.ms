@@ -177,11 +177,33 @@ Public
 	), --Call: mcString.upperLowerCase "ABCDE" #down
 	fn stringToNum str = (
 	
-		local eval_str =  execute str --format "str:% eval:%\n" str eval_str
+		local eval_str =  execute str 
+		--format "str:% eval:%\n" str eval_str
 		case classOf eval_str of (
 			
 			float:eval_str
 			integer:eval_str
+			default:undefined	
+		)
+	),
+	/**
+	*@Usage
+		Not Used Experiment
+		convert string to value by class
+	*/
+	fn toValue str = (
+	
+		local eval_str =  execute str
+		format "str:% eval:%\n" str eval_str
+		case (classOf eval_str) of (
+		
+			string	: ""
+			int		: ""
+			float	: ""
+			point2	: ""
+			point3	: ""
+			array	: ""
+			bitarray: ""
 			default:undefined	
 		)
 	),
@@ -202,7 +224,7 @@ Public
 			) else (
 			
 				local key = trimLeftRight arr[1]
-				local val = trimLeftRight arr[2] --for now only String (TODO > int, number, point2, point3, array, bitarray)
+				local val = trimLeftRight arr[2] --for now only String,  (TODO > [ fn toValue ]> int, number, point2, point3, array, bitarray)
 				--format "key:% val:%\n" key val
 				obj.add key val
 			)

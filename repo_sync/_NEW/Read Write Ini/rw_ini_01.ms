@@ -50,24 +50,37 @@ fn readDataFromFile fname =  (
 	)
 )   
 
-"Profile_1.ini", "Profile_2.ini", "Profile_3.ini", "Profile_4.ini", "Profile_5.ini", "Profile_6.ini", "Profile_7.ini", "Profile_8.ini"
+--Replace Buttons single value with object string
+--Remove Icons header
+--change read data from ini in dotnet dialog creator
+--"Profile_1.ini", "Profile_2.ini", "Profile_3.ini", "Profile_4.ini", "Profile_5.ini", "Profile_6.ini", "Profile_7.ini", "Profile_8.ini"
 fn fixProfilesINI = (
+	local br = "----------------------------------------------------------------"
 	for i = 1 to 8 do (
 		
 		local profile_name = "Profile_"+i as string+".ini"
 		local ini_file =  micra.UserDir + profile_name
-		local keys  = getIniSetting Micra.TempProfileIni "Buttons" 
+		local keys  = getIniSetting ini_file "Buttons" 
+		if keys.count == 0 do (
+			
+			--delINISetting ini_file "Icons"
+			continue
+		)
+		format "%\n[ % ]\n%\n" br profile_name br
 		--replace key single value with object data
+		local ss = stringstream ""
 		for i=1 to keys.count do (
 		
 			local btn_id  = keys[i]
 			local action = getINISetting ini_file "Buttons"  btn_id
-			local icon = getINISetting ini_file "Icons"  btn_id
-			local ss = stringstream ""
-			format "action:% icon:%\n"  btn_id	action icon to:ss
+			local icon_index = getINISetting ini_file "Icons"  btn_id
+			format "% = action:% icon:%\n"  btn_id	action icon_index to:ss
+			format "% = action:% icon:%\n"  btn_id	action icon_index
 			
 		)
-		
+		---if ss.count if ss not empty write buttons
+		--delete header [Icons]
+		close ss
 	)
 )
 
@@ -75,4 +88,11 @@ fn fixProfilesINI = (
 fixProfilesINI()
 writeDataToFile "Profile_09.ini"
 readDataFromFile"Profile_09.ini"
+
+xmlfile = "c:/temp/abc.xml" 
+doc = XmlDocument() 
+doc.LoadXml xmlfile 
+-- fail, doc is now undefined
+
+
 */
