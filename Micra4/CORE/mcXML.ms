@@ -4,7 +4,7 @@
 Global mcXML
 Global XMLNode
 /*
-For delete , not used , mybe?????
+Not used yet
 
 *@Used Structures
 	Micra

@@ -4,7 +4,6 @@
 
 Global mcHoldSelection
 Global mcSelectionHolderCount = 1
-
 (
 	--------------------------------------
 	
@@ -241,5 +240,3 @@ Global mcSelectionHolderCount = 1
 		mcDotnet.dShow form
 	)
 )
-
-	mcHoldSelection() 

@@ -50,6 +50,34 @@ fn readDataFromFile fname =  (
 	)
 )   
 
+
+fn fixProfileINI ini_file = (
+	local br = "----------------------------------------------------------------"
+		local keys  = getIniSetting ini_file "Buttons" 
+		if keys.count == 0 do (
+			
+			delINISetting ini_file "Icons"
+			return OK
+		)
+		format "%\n[ % ]\n%\n" br ini_file br
+		--replace key single value with object data
+		for i=1 to keys.count do (
+		
+			local btn_id  = keys[i]
+			local action = getINISetting ini_file "Buttons"  btn_id
+			local icon_index = getINISetting ini_file "Icons"  btn_id
+			local data  = mcObject()
+			data.add "action" action
+			data.add "icon" icon_index
+			print (data.toString())
+			--write ini data as object
+			 setINISetting ini_file "Buttons"  btn_id (data.toString())
+		)
+		delINISetting ini_file "Icons"
+)
+
+
+
 --Replace Buttons single value with object string
 --Remove Icons header
 --change read data from ini in dotnet dialog creator
@@ -63,28 +91,31 @@ fn fixProfilesINI = (
 		local keys  = getIniSetting ini_file "Buttons" 
 		if keys.count == 0 do (
 			
-			--delINISetting ini_file "Icons"
+			delINISetting ini_file "Icons"
 			continue
 		)
 		format "%\n[ % ]\n%\n" br profile_name br
 		--replace key single value with object data
-		local ss = stringstream ""
 		for i=1 to keys.count do (
 		
 			local btn_id  = keys[i]
 			local action = getINISetting ini_file "Buttons"  btn_id
 			local icon_index = getINISetting ini_file "Icons"  btn_id
-			format "% = action:% icon:%\n"  btn_id	action icon_index to:ss
-			format "% = action:% icon:%\n"  btn_id	action icon_index
-			
+			local data  = mcObject()
+			data.add "action" action
+			data.add "icon" icon_index
+			print (data.toString())
+			--write ini data as object
+			 setINISetting ini_file "Buttons"  btn_id (data.toString())
 		)
-		---if ss.count if ss not empty write buttons
-		--delete header [Icons]
-		close ss
+		delINISetting ini_file "Icons"
 	)
 )
 
 /*
+fixProfileINI "D:\ReneBaca\3DsMax\Micra\Micra4\Default\Profile_Temp.ini"
+fixProfileINI "D:\ReneBaca\3DsMax\Micra\Micra4\Default\Profile_Empty.ini"
+fixProfileINI "D:\ReneBaca\3DsMax\Micra\Micra4\Default\Profile_Default.ini"
 fixProfilesINI()
 writeDataToFile "Profile_09.ini"
 readDataFromFile"Profile_09.ini"

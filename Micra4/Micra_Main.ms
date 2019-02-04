@@ -377,7 +377,7 @@ mc_Dialog_DropTarget = undefined
 		-->Load MaxCustomControls.dll (dont know if is need)
 		max_custom_controls = dotNet.loadAssembly "MaxCustomControls.dll"
 		
-		-->Load Core Structures
+		-->Load All Core Structures
 		local struct_names = getIniSetting DefaultSettings "Structures" 
 		for i in struct_names do fileIn (CoreDir+i+".ms") 
 		
@@ -392,8 +392,8 @@ mc_Dialog_DropTarget = undefined
 		fileInVersion "Dialog_Creator_Net"
 		
 		-->Load Applications
-		fileInVersion "Holder"
-		fileInVersion "Deep_Isolate"
+		fileInVersion "Holder" --render selection as thumbnail for latest reselect (action > mcHoldSelection())
+		fileInVersion "Deep_Isolate" --multi isolate
 		
 		-->Load Modifiers and Plugins
 		fileInVersion "Modifiers"
