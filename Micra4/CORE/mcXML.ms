@@ -1,11 +1,9 @@
 --------------------------------------------------------------------------------
-/* mcXML by Orien 2019 */
+/* mcXML by Orien 2019 */   --Not used yet
 --------------------------------------------------------------------------------
 Global mcXML
-Global XMLNode
+Global mcXMLNode
 /*
-Not used yet
-
 *@Used Structures
 	Micra
 *
@@ -15,18 +13,25 @@ Not used yet
 *@Usage
 	undefined
 *
-*@Example	
+*@Example
+	-----
+	LOAD
+	-----
 	xml = mcXML (Micra.TempDir + "xml_test_01.xml")
-	xml.url
-	itms = xml.getItems "books"
+	xml.exists() --true
 	ch = xml.getChildren() --root children
-	mcXML.printTree "//bookstore"
+	------
+	CREATE
+	------
+	xml = mcXML (Micra.TempDir + "xml_test_24.xml")
+	xml.exists() --false
+	xml.create "GALLERY"	
 *
 */
 
 DotNet.LoadAssembly "System.Xml"
 
-struct XMLNode(
+struct mcXMLNode(
 
 	tag,
 	parent,
@@ -34,7 +39,7 @@ struct XMLNode(
 	fn init dnNode = (
 	
 		_node = dnNode
-		Tag = dnNode.LocalName
+		tag = dnNode.LocalName
 		parent = dnNode.ParentNode
 	),
 	fn getTag = (
@@ -77,7 +82,7 @@ struct XMLNode(
 		_node.HasAttribute attribute
 	),
 	fn appendNode newNode = (
-		if classof newNode == XMLNode then(
+		if classof newNode == mcXMLNode then(
 			_node.AppendChild newNode._node
 			return True
 		)else(False)
@@ -85,7 +90,7 @@ struct XMLNode(
 	fn getChild index = (
 		dNode = _node.ChildNodes.ItemOf index
 		if dNode.Name != "#text" then(
-			newNode = XMLNode()
+			newNode = mcXMLNode()
 			newNode.init dnode
 			newNode
 		)else(return False)
@@ -94,56 +99,134 @@ struct XMLNode(
 		nodes = #()
 		for i = 0 to (_node.ChildNodes.Count - 1) do(
 			dNode = _node.ChildNodes.ItemOf i
-			newNode = XMLNode()
+			newNode = mcXMLNode()
 			newNode.init dNode
 			append nodes newNode
 		)
 		nodes
 	),
 	fn deleteChild childNode = (
-		if classof childNode == XMLNode then (
+		if classof childNode == mcXMLNode then (
 			_node.RemoveChild childNode._node
 			return True
 		)else(False)
+	),
+	fn toString = (
+	
+		format "mcXMLNode > toString > children:%\n" ( getChildren() )
 	)
 )
 
 struct mcXML (
 public	
-	url,
-private
+	url = undefined,
+--private
 	loaded		= false,
 	rootNode	= undefined,
 public
 	fn getSource = getSourceFileName(), --get path of this script
 	doc = dotNetObject "System.Xml.XmlDocument",
-	on create do (
-		if not (doesFileExist url) do return false
-		doc.load url
-		rootNode = XMLNode()
+	fn exists = (url != undefined and doesFileExist url),
+	/**
+	*@Example
+		xml = mcXML (Micra.TempDir + "xml_test_24.xml")
+		xml.exists() --false
+		xml.create "GALLERY"
+	*/
+	fn create node_name = ( --create new xml
+		
+		if loaded do return false --prevent override current data
+		local header = doc.CreateXmlDeclaration "1.0" "utf-8" ""
+		doc.AppendChild header
+		--doc.LoadXml node_name
+		local root_node = doc.createElement node_name
+		--root_node.setattribute "Name" NodeName
+		--root_node.InnerText = "Books Collection"
+		doc.appendChild root_node
+		rootNode = mcXMLNode()
 		rootNode.init doc.DocumentElement
 		loaded = true
 	),
-	fn getChildren = (rootNode.getChildren()),
+	fn getChildren = (rootNode.getChildren()), --dotNetObject:System.Xml.XPathNodeList
 	/**
+	TODO finish it
 	*@Example
-		"/bookstore/*"
-		"//book"
-		"//book/author"
+		mcXML.getChildrenAt "/bookstore/*"
+		mcXML.getChildrenAt "//book"
+		ch = mcXML.getChildrenAt "//book/author" --dotNetObject:System.Xml.XPathNodeList
+--ch[1].InnerText = "10.95"
 	*/
-	fn getItems items_path = (
+	fn getChildrenAt items_path = (
 	
 		doc.selectNodes items_path
 	),
+	/**
+	*Example
+		xml.addChild "urn:samples"
+	*/
+	fn addChild child_str path:"root" txt:"" = (
+	
+		--local elem = doc.CreateElement("bk", "genre", "urn:samples")
+		local elem = doc.CreateElement child_str
+		elem.InnerText = txt
+		doc.DocumentElement.AppendChild(elem)
+		elem
+	),
+	fn hasAttribute attr_name = (
+		
+		rootNode.hasAttribute attr_name
+	),
+	fn save = (
+	
+		if url == undefined do (
+		
+			print "Unable to save. URL is not set. "
+			return false
+		)
+		if loaded then (doc.save url; true) else false
+		/*if loaded == true then(
+			local writer = dotNetClass "System.Xml.XmlTextWriter"
+			local wSettings = dotNetObject "System.Xml.XmlWriterSettings"
+			wSettings.indent = True
+			local w = writer.create url wSettings
+			doc.writeContentTo w
+			w.close()
+			true
+		) else false*/
+	),
+	fn toString = (
+	
+		for i = 0 to (doc.ChildNodes.count - 1) do(
+
+			print i --xml.getItems
+		)
+
+		format "mcXML > toString > children:%\n" (getChildren())
+		--format "mcXML > toString > first child:%\n" (doc.FirstChild.toString()) 	
+		--format "mcXML > toString > xml:%\n" (doc.toString())
+		--format "mcXML > toString > root node:%\n" (rootNode.toString())
+	),
+	on create do (
+	
+		if not (exists()) do return OK
+		doc.load url
+		rootNode = mcXMLNode()
+		rootNode.init doc.DocumentElement
+		loaded = true
+	)
+	/*<end>*/
+)	
+
+
 	/**
 	*@Example
 		mcXML.printTree "//bookstore"
 		mcXML.printTree "//Skeleton/Bone/Item"
 	*/
-	fn printTree item_path = (
+	/*fn printTree item_path = (
 	
 		local itemIter = (doc.selectnodes item_path).GetEnumerator()
-		/*while itemIter.MoveNext() do (
+		while itemIter.MoveNext() do (
 		
 			format "\nEntry:\n" 
 			local attrIter = itemIter.Current.Attributes.GetEnumerator()
@@ -151,23 +234,83 @@ public
 			
 				format "  % = %\n" attrIter.current.Name attrIter.current.value
 			)
-		)*/
-	),
-	fn saveXML = (
+		)
+	),*/
+
+/*
+doc = dotNetObject "System.Xml.XmlDocument"
+doc.LoadXml("<book genre='novel' ISBN='1-861001-57-5'>" +
+             "<title>Pride And Prejudice</title>" +
+			"</book>")
+
+--Create a new node and add it to the document.
+--The text node is the content of the price element.
+elem = doc.CreateElement("price")
+txt = doc.CreateTextNode("19.95")
+doc.DocumentElement.AppendChild(elem)
+doc.DocumentElement.LastChild.AppendChild(txt)
+
+XmlWriter = dotNetClass "System.Xml.XmlWriter"
+stringWriter = dotNetObject "System.IO.StringWriter"
+mlTextWriter = XmlWriter.Create stringWriter
+
+doc.WriteTo xmlTextWriter
+xmlTextWriter.Flush()
+(stringWriter.GetStringBuilder()).ToString()
+
+
+
+
+--Create the XmlDocument.
+XmlDocument doc = new XmlDocument();
+doc.LoadXml("<item><name>wrench</name></item>");
+
+--Add a price element.
+XmlElement newElem = doc.CreateElement("price");
+newElem.InnerText = "10.95";
+doc.DocumentElement.AppendChild(newElem);
+
+
+XmlElement elem = doc.CreateElement("bk", "genre", "urn:samples");
+elem.InnerText = "fantasy";
+doc.DocumentElement.AppendChild(elem);
+
+
+And also to read an XML:
+
+fn recurseXML docElement =
+(
+	tempPTree = #(docElement.name)
+	tempLayerTree = #(docElement.getAttribute "layer")
 	
-		if loaded then (doc.save url; true) else false
-	),
-	fn toString = (
-	
-		
-	),
-	fn hasAttribute attr_name = (
-		
-		
+	for i = 0 to (docElement.childNodes.count - 1) do
+	(
+		tmp = (recurseXML docElement.childNodes.itemOf[i])
+		append tempPTree tmp[1]
+		append tempLayerTree tmp[2]
 	)
-	/*<end>*/
-)	
- --create instance
+	return #(tempPTree, tempLayerTree)
+)
+
+global parentTreeXML = #()
+global layerTreeXML = #()
+fn readXML =
+(
+	xmlDoc = dotNetObject "System.Xml.XmlDocument"
+	xmlDoc.load ("C:\\temp\\test.xml") 
+	
+	docElement = XmlDoc.documentElement
+	
+	-- if we don't do this here we end up with the root node on parentTreeXML
+	-- which can be worked out in anoter way also, of course.
+	for i = 0 to (docElement.childNodes.count - 1) do
+	(
+		tmp = (recurseXML docElement.childNodes.itemOf[i])
+		append parentTreeXML tmp[1]
+		append layerTreeXML tmp[2]
+	)
+)
+*/
 
 
 
@@ -225,4 +368,112 @@ myNodes = xmlDoc.selectNodes "//book[year='2003' and price<'45']"
 myAuthors = (for i = 0 to myNodes .count-1 collect myNodes .itemOf[i].innertext)
 --In examples 1, 2, 5 and 6 you get an xml-element with child-elements. Do something like this to get a specific child-element
 myPrices = (for i = 0 to myNodes.count-1 collect (myNodes.itemOf[i].getElementsByTagName "price").itemOf[0].innertext)
+*/
+
+
+
+
+
+
+/*
+StringWriter = dotNetObject "System.IO.StringWriter"
+penDotNet.show StringWriter
+
+-- Create XmlWriterSettings and fill info
+XmlWriterSettings = dotNetObject "System.Xml.XmlWriterSettings"
+XmlWriterSettings.Indent = true
+XmlWriterSettings.indentChars="	"
+XmlWriterSettings.OmitXmlDeclaration = false
+XmlWriterSettings.NewLineOnAttributes = false
+
+-- Create new XmlWriter in the StringWriter with the specified settings
+XmlWriter=dotNetClass "system.xml.xmlWriter"
+Writer = XmlWriter.Create StringWriter XmlWriterSettings
+
+-- Write the document
+Writer.WriteStartElement "XMLUI"
+ 	Writer.WriteValue "This is a test" --COMMENT and re run
+	Writer.WriteStartElement "TAB"
+	Writer.WriteAttributeString "Name" "Temp"
+	Writer.WriteAttributeString "BackGround" ""
+		Writer.WriteStartElement "UI" ""
+		Writer.WriteAttributeString "Test" "12345"
+-- 	Writer.WriteEndElement() --Don't realy need to set the end element as it does it for you. 
+-- Writer.WriteEndElement()
+
+-- Release Xml resources
+Writer.Flush()
+Writer.Close()
+xmlString=StringWriter.ToString()
+
+
+fn reformatXml xml Writer: =
+(
+	doFlush=false
+	if Writer==unsupplied do 
+	(
+		StringWriter=dotNetObject "System.IO.StringWriter"
+		XmlWriterSettings = dotNetObject "System.Xml.XmlWriterSettings"
+		XmlWriterSettings.Indent = true
+		XmlWriterSettings.indentChars="	"
+		XmlWriterSettings.OmitXmlDeclaration = false
+		XmlWriterSettings.NewLineOnAttributes = false
+		XmlWriter=dotNetClass "system.xml.xmlWriter"
+		Writer = XmlWriter.Create StringWriter XmlWriterSettings
+		doFlush=true
+	)
+	
+	case xml.name of
+	(
+		"#document": () --Do nothing
+		"xml": () --Do nothing
+		"#comment":
+		(
+			Writer.WriteComment xml.value
+		)
+		"#text":
+		(
+			Writer.writeValue xml.value
+		)
+		default:
+		(
+			Writer.WriteStartElement xml.name
+			for i = 0 to xml.Attributes.count-1 do
+			(
+				val=xml.getAttribute xml.Attributes.item[i].name
+				Writer.WriteAttributeString xml.Attributes.item[i].name val
+			)
+		)
+	)
+	
+	for i = 0 to xml.childNodes.count-1 do 
+	(
+		reformatXml xml.childNodes.item[i] Writer:writer StringWriter:StringWriter
+	)
+	
+	if doFlush do
+	(
+		Writer.Flush()
+		Writer.Close()
+	)
+	
+	StringWriter
+)
+
+--Test
+xmlDoc=dotNetObject "system.xml.xmlDocument"
+xmlStr="<?xml version=\"1.0\" encoding=\"UTF-8\"?>           <!--This is a comment--><XMLUI Name=\"Fred\">
+<TAB Name=\"Face\"><UI /><!--This is a Button below-->
+					<BUTTON Name=\"Reset\" /><INNERTEXT>This is Inner Text</INNERTEXT></TAB></XMLUI>
+"
+xmlDoc.loadXml xmlStr
+clearListener()
+xmlStr=reformatXml xmlDoc
+xmlStr.toString()
+
+
+
+xdoc = (dotNetclass "System.Xml.Linq.XDocument").Parse xmlStr
+xdoc.ToString()
+(dotnetobject "system.xml.linq.XDeclaration" "1.0" "utf-8" "").tostring() + "" + xdoc.ToString()
 */

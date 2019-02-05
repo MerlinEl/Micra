@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SETTINGS>
+	<Buttons>
+		<btn_B2 action="Move_To_X" icon="28" />
+		<btn_B3 action="Create_3PGrid" icon="81" />
+		<btn_B4 action="Mirror_2" icon="64" />
+		<btn_B5 action="Reset_Transform" icon="33" />
+		<btn_B7 action="Move_To_Ground" icon="54" />
+	</Buttons>
+</SETTINGS>
