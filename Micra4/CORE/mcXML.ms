@@ -194,14 +194,39 @@ public
 			true
 		) else false*/
 	),
+	/**
+	*@Usage
+		override document content
+	*@Example
+	*/
+	fn fromString xml_str = (
+	
+		doc.LoadXml xml_str
+		rootNode = mcXMLNode()
+		rootNode.init doc.DocumentElement
+		loaded = true
+	),
+	/**
+	*@Example
+		xml = mcXML()
+		xml.fomString (
+
+			"<?xml version='1.0' ?>" +
+			"<book genre='novel' ISBN='1-861001-57-5'>" +
+			"<title>Pride And Prejudice</title>" +
+			"</book>"
+		)
+		xml.toString()
+	*/
 	fn toString = (
 	
-		for i = 0 to (doc.ChildNodes.count - 1) do(
+		format "XML:\n%\n" doc.DocumentElement.OuterXml
+		/*local children = getChildren()
+		format "mcXML > toString > children:%\n" children
+		for ch in children do(
 
-			print i --xml.getItems
-		)
-
-		format "mcXML > toString > children:%\n" (getChildren())
+			print ch --xml.getItems
+		)*/
 		--format "mcXML > toString > first child:%\n" (doc.FirstChild.toString()) 	
 		--format "mcXML > toString > xml:%\n" (doc.toString())
 		--format "mcXML > toString > root node:%\n" (rootNode.toString())
@@ -209,10 +234,16 @@ public
 	on create do (
 	
 		if not (exists()) do return OK
-		doc.load url
-		rootNode = mcXMLNode()
-		rootNode.init doc.DocumentElement
-		loaded = true
+		try (
+			
+			doc.load url
+			rootNode = mcXMLNode()
+			rootNode.init doc.DocumentElement
+			loaded = true
+		) catch ( --unable to load XML file
+			
+				
+		)
 	)
 	/*<end>*/
 )	
@@ -238,6 +269,30 @@ public
 	),*/
 
 /*
+ header =  xmlDoc.item["Autodesk_Cache_File"] --this is how you pull an element section by name  
+--elments can have children elements.. in this case we are quarying the value of the attribute "Type" inside the "cacheType" element which is of the "Autodesk_Cache_File"..  
+cacheType = (header.item["cacheType"].GetAttribute("Type"))  
+timePerFrame = (header.item["cacheTimePerFrame"].GetAttribute("TimePerFrame")) 
+
+		xmlDoc.load 
+		myNodes = xmlDoc.selectNodes "//Part"
+		myPartname=(for i = 0 to myNodes.count-1 collect (myNodes.itemOf[i].getElementsByTagName "PartName").itemOf[0].attributes.itemOf["name"].value)
+ 		myDescrips = (for i = 0 to myNodes.count-1 collect (myNodes.itemOf[i].getElementsByTagName "PartName").itemOf[0].attributes.itemOf["Description"].value)
+ 		myProject = (for i = 0 to myNodes.count-1 collect (myNodes.itemOf[i].getElementsByTagName "PartName").itemOf[0].attributes.itemOf["Project"].value)
+ 		myDiffuse = (for i = 0 to myNodes.count-1 collect (myNodes.itemOf[i].getElementsByTagName "PartName").itemOf[0].attributes.itemOf[ "Diffuse"].value)
+		mySpec= (for i = 0 to myNodes.count-1 collect (myNodes.itemOf[i].getElementsByTagName "PartName").itemOf[0].attributes.itemOf["Spec"].value)
+		myNormal = (for i = 0 to myNodes.count-1 collect (myNodes.itemOf[i].getElementsByTagName "PartName").itemOf[0].attributes.itemOf["Normal"].value)
+ 		myReflection = (for i = 0 to myNodes.count-1 collect (myNodes.itemOf[i].getElementsByTagName "PartName").itemOf[0].attributes.itemOf["Reflection"].value)
+		
+		--FindCorrectItem (Gen_List.items[Gen_List.selection]) --Runs function to match xml to selected part
+		
+		DescripArea.text = "--" + myDescrips[(FindCorrectItem myPartname (Gen_List.items[Gen_List.selection]))]
+		ProjectArea.text = "Project-- " + myProject[(FindCorrectItem myPartname (Gen_List.items[Gen_List.selection]))]
+		DiffuseArea.text = myDiffuse[(FindCorrectItem myPartname (Gen_List.items[Gen_List.selection]))]
+		SpecArea.text = mySpec[FindCorrectItem myPartname (Gen_List.items[Gen_List.selection])]		
+		NormalArea.text = myNormal[(FindCorrectItem myPartname (Gen_List.items[Gen_List.selection]))]	
+		ReflectionArea.text = myReflection[(FindCorrectItem myPartname (Gen_List.items[Gen_List.selection]))]
+
 doc = dotNetObject "System.Xml.XmlDocument"
 doc.LoadXml("<book genre='novel' ISBN='1-861001-57-5'>" +
              "<title>Pride And Prejudice</title>" +
