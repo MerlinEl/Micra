@@ -25,7 +25,7 @@ Global mcXMLNode
 	------
 	xml = mcXML (Micra.TempDir + "xml_test_24.xml")
 	xml.exists() --false
-	xml.create "GALLERY"	
+	xml.addRootNode "GALLERY"	
 *
 */
 
@@ -131,34 +131,51 @@ public
 	*@Example
 		xml = mcXML (Micra.TempDir + "xml_test_24.xml")
 		xml.exists() --false
-		xml.create "GALLERY"
+		xml.addRootNode "GALLERY" attr:#("painting", "1") txt:"New Age"
+		xml.toString()
 	*/
-	fn create node_name = ( --create new xml
+	fn addRootNode node_name attr:#() txt:undefined= ( --create new xml
 		
-		if loaded do return false --prevent override current data
-		local header = doc.CreateXmlDeclaration "1.0" "utf-8" ""
-		doc.AppendChild header
-		--doc.LoadXml node_name
+		if loaded do (
+		
+			print "This document already has a 'DocumentElement' node."
+			return false 
+		)
 		local root_node = doc.createElement node_name
-		--root_node.setattribute "Name" NodeName
-		--root_node.InnerText = "Books Collection"
+		if attr.count == 2 do root_node.setattribute attr[1] attr[2]
+		if txt != undefined do root_node.InnerText = txt
 		doc.appendChild root_node
 		rootNode = mcXMLNode()
 		rootNode.init doc.DocumentElement
 		loaded = true
 	),
-	fn getChildren = (rootNode.getChildren()), --dotNetObject:System.Xml.XPathNodeList
 	/**
-	TODO finish it
+	*@Usage
+		return list(dotNetObject:System.Xml.XPathNodeList) of nodes(mcXMLNode)
+	*/
+	fn getChildren = (rootNode.getChildren()),
+	/**
+	TODO finish it -Not Used
 	*@Example
 		mcXML.getChildrenAt "/bookstore/*"
 		mcXML.getChildrenAt "//book"
-		ch = mcXML.getChildrenAt "//book/author" --dotNetObject:System.Xml.XPathNodeList
---ch[1].InnerText = "10.95"
+		mcXML.getChildrenAt "//book/author" 
+		return list(dotNetObject:System.Xml.XPathNodeList) of nodes(mcXMLNode)
 	*/
-	fn getChildrenAt items_path = (
+	fn getChildrenAt item_path = (
 	
-		doc.selectNodes items_path
+		--doc.selectNodes item_path
+		
+		local itemIter = (doc.selectnodes item_path).GetEnumerator()
+		while itemIter.MoveNext() do (
+		
+			local attrIter = itemIter.Current.Attributes.GetEnumerator()
+			--format "\nEntry:%\n" 
+			while attrIter.MoveNext() do (
+			
+				format "  % = %\n" attrIter.current.Name attrIter.current.value
+			)
+		)
 	),
 	/**
 	*Example
@@ -178,13 +195,13 @@ public
 	),
 	fn save = (
 	
-		if url == undefined do (
+		if not loaded or url == undefined do (
 		
-			print "Unable to save. URL is not set. "
+			print "Unable to save. URL is not set or documet is empty. "
 			return false
 		)
-		if loaded then (doc.save url; true) else false
-		/*if loaded == true then(
+		--if loaded then (doc.save url; true) else false
+		if loaded == true then(
 			local writer = dotNetClass "System.Xml.XmlTextWriter"
 			local wSettings = dotNetObject "System.Xml.XmlWriterSettings"
 			wSettings.indent = True
@@ -192,24 +209,40 @@ public
 			doc.writeContentTo w
 			w.close()
 			true
-		) else false*/
+		) else false
 	),
 	/**
 	*@Usage
 		override document content
 	*@Example
+		xml = mcXML(Micra.TempDir + "xml_test_08.xml")
+		xml.fromString (
+
+			"<?xml version='1.0' ?>" +
+			"<book genre='novel' ISBN='1-861001-57-5'>" +
+			"<title>Pride And Prejudice</title>" +
+			"</book>"
+		)
+		xml.toString()
+		xml.save()
 	*/
 	fn fromString xml_str = (
-	
-		doc.LoadXml xml_str
-		rootNode = mcXMLNode()
-		rootNode.init doc.DocumentElement
-		loaded = true
+		
+		try (
+		
+			doc.LoadXml xml_str
+			rootNode = mcXMLNode()
+			rootNode.init doc.DocumentElement
+			loaded = true
+		) catch ( --unable to parse XML string
+			
+			format "Error : mcXMLNode > fromString : %\n" (getCurrentException())	
+		)
 	),
 	/**
 	*@Example
 		xml = mcXML()
-		xml.fomString (
+		xml.fromString (
 
 			"<?xml version='1.0' ?>" +
 			"<book genre='novel' ISBN='1-861001-57-5'>" +
@@ -233,8 +266,14 @@ public
 	),
 	on create do (
 	
-		if not (exists()) do return OK
-		try (
+		--doc.PreserveWhitespace = false
+		if not (exists()) do ( --xml = mcXML() || xml = mcXML("c:/nonexisting_file.xml")
+		
+			local header = doc.CreateXmlDeclaration "1.0" "utf-8" ""
+			doc.AppendChild header
+			return OK
+		)
+		try ( --xml = mcXML("c:/existing_file.xml")
 			
 			doc.load url
 			rootNode = mcXMLNode()
@@ -242,7 +281,7 @@ public
 			loaded = true
 		) catch ( --unable to load XML file
 			
-				
+			format "Error : mcXMLNode > create: %\n" (getCurrentException())	
 		)
 	)
 	/*<end>*/

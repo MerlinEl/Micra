@@ -19,6 +19,14 @@ Struct MICRA_DOTNET (
 	PointClass  = (dotnetClass "Drawing.Point"),
 	Keys        = (dotNetClass "Keys"),
 	File       = (dotnetClass "IO.File"),
+	/**
+	*@Example
+		ns = "http://test"
+		ns_foo = "http://www.example.com"
+		mcDotnet.format "ww_1:{0} www_2:{1}"  ns ns_foo
+		> "<data xmlns=http://test xmlns:foo=http://www.example.com></data>"
+	*/
+	Format = (dotnetClass "System.String").format,
 	fn getSource = getSourceFileName(), --get path of this script
 	/*
 	*@Usage		convert max color to dotnet
@@ -93,6 +101,15 @@ Struct MICRA_DOTNET (
 		icon.MakeTransparent (netDrColor black)--(color 75 75 75)) --gray
 		icon
 	),
+	/**
+	TODO > check this method instead
+		--Max array to dotnet array
+		arr = #("http://test", "http://www.example.com")
+		dotNetArg=dotNet.ValueToDotNetObject arr (dotNetObject "System.Object")
+		dotNetArg.Length
+		dotNetArg[1]
+		(dotnetClass "System.String").format "ww_1:{0} www_2:{1}"  dotNetArg
+	*/
 	fn dArray mxsArray byte:false = (
 		if classOf mxsArray != Array or mxsArray.count == 0 do return undefined
 		local net_array
@@ -169,7 +186,15 @@ Struct MICRA_DOTNET (
 Global mcDotnet = Micra.instanceStructure MICRA_DOTNET "mcDotnet"
 
 
-/* -- old wrapper > mcColorPaleteDialog.show(WindowWrapper)
+/*
+mystring = DotNetObject "System.String" "my_string_literate"
+mystring.split "_"
+
+
+
+
+
+-- old wrapper > mcColorPaleteDialog.show(WindowWrapper)
 Global WindowWrapper
 
 if WindowWrapper == undefined do 

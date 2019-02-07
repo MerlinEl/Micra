@@ -68,10 +68,10 @@ Public
 		)
 		if find_index == -1 then undefined else find_index+1
 	),
-	fn lastIndexOf str value = (local ds = dotnetObject "System.String" str; ds.lastIndexOf value),
+	fn lastIndexOf str val = ((dotnetObject "System.String" str).lastIndexOf val),
 	fn contains str value = (findstring str value != undefined), --mcString.contains mcString.testr "we"
 	fn split str value = (filterString str value), --mcString.split mcString.testr " "
-	fn dSplit str value = (local ds = dotnetObject "System.String" str; ds.split value), --dotnet version Test
+	fn dSplit str value = ((dotnetObject "System.String" str).split value), --dotnet version Test Not used
 	/**
 	*@Usage 
 		Trims all leading characters specified in trimChars from the given string and returns it. 
