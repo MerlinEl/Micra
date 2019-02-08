@@ -2250,21 +2250,22 @@ struct mcAction (
 		if obj == undefined do return false
 		mcGM.setParam "selected_object_parent" (if obj.parent != undefined then obj.parent.name else undefined)
 		mcGM.setParam "selected_object_layer" obj.layer.name
-		format "Store object data:\n\tlink:%\n\tlayer:%\n" (mcGM.getParam "selected_object_parent") (mcGM.getParam "selected_object_layer")
+		format "Store objects(1) data:\n\tlink:%\n\tlayer:%\n" (mcGM.getParam "selected_object_parent") (mcGM.getParam "selected_object_layer")
 	),
 	fn setObjectProps = (
 		
-		local obj = selection[1]
-		if obj == undefined do return false
+		local sel = selection as array
+		if sel.count == 0 do return false
 		local parent_name = mcGM.getParam "selected_object_parent"
 		local layer_name = mcGM.getParam "selected_object_layer"
-		if parent_name != undefined do obj.parent = getNodeByName parent_name
-		if 	layer_name != undefined do (
+		local parent_node = if parent_name != undefined then getNodeByName parent_name else undefined
+		local target_layer = if layer_name != undefined then LayerManager.getLayerFromName layer_name else undefined
+		for o in sel do (
 			
-			local target_layer = LayerManager.getLayerFromName layer_name
-			if target_layer != undefined do target_layer.addNode obj
+			if parent_node != undefined do o.parent = parent_node
+			if 	target_layer != undefined do target_layer.addNode o
 		)
-		format "Set object data:\n\tlink:%\n\tlayer:%\n" parent_name layer_name
+		format "Set objects(%) data:\n\tlink:%\n\tlayer:%\n" sel.count parent_name layer_name
 	)
 	/*<end>*/
 )

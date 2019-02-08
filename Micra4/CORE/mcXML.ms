@@ -23,12 +23,21 @@ Global mcXMLNode
 	------
 	CREATE
 	------
-	xml = mcXML (Micra.TempDir + "xml_test_24.xml")
+	xml = mcXML (Micra.TempDir + "xml_test_98.xml")
 	xml.exists() --false
-	xml.addRootNode "GALLERY"	
+	xml.addRootNode "GALLERY" attr:#("paintings", "1") txt:"New Age"
+	xml.addNode "image" attr:#("year", "2018") txt:"Ren"
+	xml.save()
+	-----------
+	FROM STRING
+	-----------
+	xml = mcXML (Micra.TempDir + "xml_test_99.xml")
+	xml.fromString xml._template_1
+	xml.tostring()
+	xml.save()
 *
 */
-
+	
 DotNet.LoadAssembly "System.Xml"
 
 struct mcXMLNode(
@@ -113,13 +122,52 @@ struct mcXMLNode(
 	),
 	fn toString = (
 	
-		format "mcXMLNode > toString > children:%\n" ( getChildren() )
+		format "mcXMLNode > toString > children:%\n" ( _node.outerXML )
 	)
 )
 
 struct mcXML (
 public	
 	url = undefined,
+	_template_1 = (
+		"<?xml version='1.0' encoding='UTF-8'?>" +
+		"<bookstore>" +
+			"<book category='COOKING'>" +
+				"<title lang='en'>Everyday Italian</title>" +
+				"<author>Giada De Laurentiis</author>" +
+				"<year>2005</year>" +
+				"<price>30.00</price>" +
+			"</book>" +
+			"<book category='CHILDREN'>" +
+				"<title lang='en'>Harry Potter</title>" +
+				"<author>J K. Rowling</author>" +
+				"<year>2005</year>" +
+				"<price>29.99</price>" +
+			"</book>" +
+			"<book category='WEB'>" +
+				"<title lang='en'>Learning XML</title>" +
+				"<author>Erik T. Ray</author>" +
+				"<year>2003</year>" +
+				"<price>39.95</price>" +
+			"</book>" +
+			"<book genre='novel' ISBN='1-861001-57-5'>" +
+			"<title>Pride And Prejudice</title>" +
+			"</book>" +
+		"</bookstore>"
+	),
+	_template_2 = (
+	
+		"<?xml version='1.0' encoding='UTF-8'?>" +
+		"<SETTINGS>" +
+			"<Buttons>" +
+				"<btn_B2 action='Move_To_X' icon='28' />" +
+				"<btn_B3 action='Create_3PGrid' icon='81' />" +
+				"<btn_B4 action='Mirror_2' icon='64' />" +
+				"<btn_B5 action='Reset_Transform' icon='33' />" +
+				"<btn_B7 action='Move_To_Ground' icon='54' />" +
+			"</Buttons>" +
+		"</SETTINGS>" 
+	),
 --private
 	loaded		= false,
 	rootNode	= undefined,
@@ -127,44 +175,91 @@ public
 	fn getSource = getSourceFileName(), --get path of this script
 	doc = dotNetObject "System.Xml.XmlDocument",
 	fn exists = (url != undefined and doesFileExist url),
-	/**
-	*@Example
-		xml = mcXML (Micra.TempDir + "xml_test_24.xml")
-		xml.exists() --false
-		xml.addRootNode "GALLERY" attr:#("painting", "1") txt:"New Age"
-		xml.toString()
-	*/
-	fn addRootNode node_name attr:#() txt:undefined= ( --create new xml
-		
-		if loaded do (
-		
-			print "This document already has a 'DocumentElement' node."
-			return false 
-		)
-		local root_node = doc.createElement node_name
-		if attr.count == 2 do root_node.setattribute attr[1] attr[2]
-		if txt != undefined do root_node.InnerText = txt
-		doc.appendChild root_node
-		rootNode = mcXMLNode()
-		rootNode.init doc.DocumentElement
-		loaded = true
+	fn reformat = (
+	
+		local sw = dotNetObject "System.IO.StringWriter"
+		doc.Save sw
+		sw
 	),
 	/**
 	*@Usage
-		return list(dotNetObject:System.Xml.XPathNodeList) of nodes(mcXMLNode)
+		override document content
+	*@Example
+		xml = mcXML(Micra.TempDir + "xml_test_08.xml")
+		xml.fromString xml._template_1
+		xml.toString()
+		xml.save()
+	*/
+	fn fromString xml_str = (
+		
+		try (
+		
+			doc.LoadXml xml_str
+			rootNode = mcXMLNode()
+			rootNode.init doc.DocumentElement
+			loaded = true
+		) catch ( --unable to parse XML string
+			
+			format "Error : mcXMLNode > fromString : %\n" (getCurrentException())	
+		)
+	),
+	/**
+	*@Example
+		xml = mcXML()
+		xml.fromString xml._template_1
+		xml.toString()
+	*/
+	fn toString = (
+	
+		if doc.DocumentElement == undefined or doc.DocumentElement.IsEmpty do return ""
+		(reformat()).ToString() --Format XML String to Print Friendly XML String
+	),
+	/**
+	TODO
+	*@Example
+		xml.findNodeAt "//games/game"
+	*/
+	fn findNodeAt node_path = (
+	
+		local nodes = root.SelectNodes node_path
+		/*foreach (XmlNode node in nodes)
+		{
+			listBox1.Items.Add(node["name"].InnerText);
+		}*/
+		
+		/*
+		XmlDocument doc = new XmlDocument();
+    doc.Load("books.xml");
+
+    //Display all the book titles.
+    XmlNodeList elemList = doc.GetElementsByTagName("title");
+    for (int i=0; i < elemList.Count; i++)
+    {   
+      Console.WriteLine(elemList[i].InnerXml);
+    }  
+
+		*/
+	),
+	/**
+	*@Usage
+		return array of nodes(mcXMLNode)
 	*/
 	fn getChildren = (rootNode.getChildren()),
 	/**
 	TODO finish it -Not Used
 	*@Example
-		mcXML.getChildrenAt "/bookstore/*"
+		xml = mcXML(Micra.TempDir + "xml_test_99.xml")
+		xml.fromString _template
+		xml.toString()
+		local nodes = mcXML.getChildrenAt "/bookstore/*"
 		mcXML.getChildrenAt "//book"
 		mcXML.getChildrenAt "//book/author" 
 		return list(dotNetObject:System.Xml.XPathNodeList) of nodes(mcXMLNode)
-	*/
+	
 	fn getChildrenAt item_path = (
 	
-		--doc.selectNodes item_path
+		--local nodes = #()
+		--node.init doc.selectNodes item_path
 		
 		local itemIter = (doc.selectnodes item_path).GetEnumerator()
 		while itemIter.MoveNext() do (
@@ -176,18 +271,74 @@ public
 				format "  % = %\n" attrIter.current.Name attrIter.current.value
 			)
 		)
+	),*/
+	/**
+	*@Example
+		xml = mcXML (Micra.TempDir + "xml_test_96.xml")
+		xml.exists() --false
+		xml.addRootNode "GALLERY" attr:#("paintings", "1") txt:"New Age"
+		xml.tostring()
+		xml.save()
+	*/
+	fn addRootNode node_name attr:#() txt:""= ( --create new xml
+		
+		if loaded do (
+		
+			print "This document already has a 'DocumentElement' node."
+			return false 
+		)
+		local root_node = doc.createElement node_name
+		if attr.count == 2 do root_node.setattribute attr[1] attr[2]
+		root_node.InnerText = txt
+		doc.appendChild root_node
+		rootNode = mcXMLNode()
+		rootNode.init doc.DocumentElement
+		loaded = true
 	),
 	/**
-	*Example
-		xml.addChild "urn:samples"
+	TODO
+	*@Usage
+		insert new node or override current
+	*@Example
+		xml.addNode "//GALLERY" "image" attr:#("year", "2018") txt:"Ren"
 	*/
-	fn addChild child_str path:"root" txt:"" = (
+	fn addNode item_path node_name attr:#() txt:"" override:false = (
 	
-		--local elem = doc.CreateElement("bk", "genre", "urn:samples")
-		local elem = doc.CreateElement child_str
-		elem.InnerText = txt
-		doc.DocumentElement.AppendChild(elem)
-		elem
+		--get parent nor in path
+		global children = doc.selectnodes item_path
+		format "children:%\n" children
+		if children.count == 0 do (
+		
+			format "node:[ % ] has no children:%\n" item_path
+		)
+		format "mcXML > addNode > children:% cnt:% class:%\n" children children.Count (classOf children)
+	
+	--local child_node = doc.CreateElement child_str
+	--child_node.InnerText = txt
+	--children.AppendChild(child_node)
+	
+		if not override then (
+		
+			--local parent_node = doc.selectnodes item_path
+			--parent_node = mcXMLNode()
+			--parent_node.init doc.child_node
+		--local child_node = doc.CreateElement("bk", "genre", "urn:samples") --maybe dotnet array
+		--local child_node = doc.CreateElement child_str
+		--child_node.InnerText = txt
+			--format "mcXML > addNode > parent_node:% class:%\n" parent_node (classOf parent_node)
+		
+		)
+		
+		--local child_node = doc.CreateElement("bk", "genre", "urn:samples") --maybe dotnet array
+		--local child_node = doc.CreateElement child_str
+		--child_node.InnerText = txt
+		--node = mcXMLNode()
+		--node.init doc.child_node
+		
+		
+		--parent_node.appendNode = child_node
+		--doc.DocumentElement.AppendChild(elem)
+		--elem
 	),
 	fn hasAttribute attr_name = (
 		
@@ -210,59 +361,6 @@ public
 			w.close()
 			true
 		) else false
-	),
-	/**
-	*@Usage
-		override document content
-	*@Example
-		xml = mcXML(Micra.TempDir + "xml_test_08.xml")
-		xml.fromString (
-
-			"<?xml version='1.0' ?>" +
-			"<book genre='novel' ISBN='1-861001-57-5'>" +
-			"<title>Pride And Prejudice</title>" +
-			"</book>"
-		)
-		xml.toString()
-		xml.save()
-	*/
-	fn fromString xml_str = (
-		
-		try (
-		
-			doc.LoadXml xml_str
-			rootNode = mcXMLNode()
-			rootNode.init doc.DocumentElement
-			loaded = true
-		) catch ( --unable to parse XML string
-			
-			format "Error : mcXMLNode > fromString : %\n" (getCurrentException())	
-		)
-	),
-	/**
-	*@Example
-		xml = mcXML()
-		xml.fromString (
-
-			"<?xml version='1.0' ?>" +
-			"<book genre='novel' ISBN='1-861001-57-5'>" +
-			"<title>Pride And Prejudice</title>" +
-			"</book>"
-		)
-		xml.toString()
-	*/
-	fn toString = (
-	
-		format "XML:\n%\n" doc.DocumentElement.OuterXml
-		/*local children = getChildren()
-		format "mcXML > toString > children:%\n" children
-		for ch in children do(
-
-			print ch --xml.getItems
-		)*/
-		--format "mcXML > toString > first child:%\n" (doc.FirstChild.toString()) 	
-		--format "mcXML > toString > xml:%\n" (doc.toString())
-		--format "mcXML > toString > root node:%\n" (rootNode.toString())
 	),
 	on create do (
 	
