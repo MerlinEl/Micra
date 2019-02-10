@@ -20,10 +20,7 @@ Global mcCube
 *@example
 	mcItem "a" 23
 */
-struct mcItem (
-	
-	key, val, tag, index	
-)
+struct mcItem ( key, val, tag, index )
 
 /**
 *@example

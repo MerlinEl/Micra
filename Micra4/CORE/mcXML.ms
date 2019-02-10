@@ -1,44 +1,72 @@
 --------------------------------------------------------------------------------
-/* mcXML by Orien 2019 */   --Not used yet
+/* mcXML by Orien 2019 */
 --------------------------------------------------------------------------------
 Global mcXML
+Global mcAttrib
 Global mcXMLNode
+
 /*
 *@Used Structures
-	Micra
+	Micra --only for debug paths
 *
 *@Used Objects
-	undefined
+	mcAttrib
+	mcXMLNode
 *
 *@Usage
-	undefined
+	Read-Write XML files with intuitive interface
 *
 *@Example
-	-----
-	LOAD
-	-----
-	xml = mcXML (Micra.TempDir + "xml_test_01.xml")
+	-----------------
+	LOAD-BUILD
+	-----------------
+	xml = mcXML (Micra.TempDir + "xml_test_45.xml")
+	-----------------
+	GET DATA
+	-----------------
 	xml.exists() --true
-	ch = xml.getChildren() --root children
-	------
-	CREATE
-	------
-	xml = mcXML (Micra.TempDir + "xml_test_98.xml")
-	xml.exists() --false
-	xml.addRootNode "GALLERY" attr:#("paintings", "1") txt:"New Age"
-	xml.addNode "image" attr:#("year", "2018") txt:"Ren"
-	xml.save()
-	-----------
-	FROM STRING
-	-----------
-	xml = mcXML (Micra.TempDir + "xml_test_99.xml")
+	node = xml.getNode "//GALLERY/image_1"
+	node.getAttribute "author"
+	-----------------
+	LOAD FROM STRING
+	-----------------
+	xml.exists() --false or true
 	xml.fromString xml._template_1
-	xml.tostring()
+	-----------------
+	CREATE ROOT NODE
+	-----------------
+	xml.exists() --false
+	xml.addRootNode "GALLERY"	
+	-----------------
+	ADD-REPLACE NODES
+	-----------------
+	xml.exists() --true
+	node_attribs = #(
+	
+		mcAttrib "year" "2018", 
+		mcAttrib "author" "J K. Rowling",
+		mcAttrib "price" "39.95"
+	)
+	xml.addNode "//GALLERY" "image_1" attr:node_attribs
+	xml.addNode "//GALLERY/Nova/Day" "d_001" attr:#(mcAttrib "sell" "1000")
+	xml.addNode "//GALLERY" "image_1" attr:#(mcAttrib "author" "Giada De Laurentiis") override:true
+	
+	mc_node = xml.getNode "//GALLERY/image_1"
+	mc_node.toString()
+	mc_node.setAttribute "author" "J M. Novalis"
+	mc_node.setAttributes #(mcAttrib "author" "J M. Novalis", mcAttrib "sell" "1000")
+	mc_node.toString()
+	-----------------
+	DEBUG-SAVE
+	-----------------
+	xml.toString()
 	xml.save()
 *
 */
 	
 DotNet.LoadAssembly "System.Xml"
+
+struct mcAttrib ( key="", val="" ) --both must be strings
 
 struct mcXMLNode(
 
@@ -52,30 +80,35 @@ struct mcXMLNode(
 		parent = dnNode.ParentNode
 	),
 	fn getTag = (
+	
 		_node.Name
 	),
 	fn setTag newTag =(
-		try(_node.Name = newTag)catch(False)
-	),
-	fn getText = (
-		_node.InnerText
-	), 
-	fn setText txt = (
-		_node.InnerText = txt
-	),
-	fn addAttribute attribute value = (
-		_node.SetAttribute attribute value
+	
+		try(_node.Name = newTag)catch(false)
 	),
 	fn getAttribute attribute = (
+	
 		_node.GetAttribute attribute
 	),
-	fn setAttributeValue attribute value = (
+	fn setAttribute attribute value = (
+	
 		_node.SetAttribute attribute value
 	),
+	fn setAttributes attr = ( --arr = Array of [ mcAttrib key val ]
+	
+		if attr.count > 0 do for itm in attr do (
+		
+			if itm.key == undefined or itm.val == undefined do (format "Attribute [ % ] is invalid.\n" itm; continue)
+			setAttribute (itm.key as String) (itm.val as String)
+		)
+	),
 	fn deleteAttribute attribute = (
+	
 		_node.RemoveAttribute attribute
 	),
 	fn getAllAttributes = (
+	
 		ret = #()
 		attribs = _node.Attributes
 		for i = 0 to (attribs.Count - 1) do(
@@ -88,13 +121,15 @@ struct mcXMLNode(
 		return ret
 	),
 	fn hasAttribute attribute =(
+	
 		_node.HasAttribute attribute
 	),
 	fn appendNode newNode = (
+	
 		if classof newNode == mcXMLNode then(
 			_node.AppendChild newNode._node
-			return True
-		)else(False)
+			return true
+		)else(false)
 	),
 	fn getChild index = (
 		dNode = _node.ChildNodes.ItemOf index
@@ -102,7 +137,7 @@ struct mcXMLNode(
 			newNode = mcXMLNode()
 			newNode.init dnode
 			newNode
-		)else(return False)
+		)else(false)
 	),
 	fn getChildren = (
 		nodes = #()
@@ -117,19 +152,41 @@ struct mcXMLNode(
 	fn deleteChild childNode = (
 		if classof childNode == mcXMLNode then (
 			_node.RemoveChild childNode._node
-			return True
-		)else(False)
+			return true
+		)else(false)
 	),
-	fn toString = (
-	
-		format "mcXMLNode > toString > children:%\n" ( _node.outerXML )
-	)
+	/**
+	*@Usage
+		return first node at given patn or undefined
+	*@Example
+		xml = mcXML (Micra.TempDir + "xml_test_91.xml")
+		xml.fromString xml._template_1
+		the_node = xml.getNode "//bookstore/book/author"
+		the_node = xml.getNode "//book/author"
+		the_node = xml.getNode "//author"
+		the_node.InnerText
+		all three ways give the same result > "Giada De Laurentiis"
+	*/
+	fn getNode node_path = (
+
+		local target_node = _node.SelectSingleNode node_path
+		if target_node != undefined then (
+		
+			local newNode = mcXMLNode()
+			newNode.init target_node
+			newNode
+		) else (
+		
+			undefined
+		)
+	),
+	fn toString = (_node.OuterXml)
 )
 
 struct mcXML (
 public	
 	url = undefined,
-	_template_1 = (
+	_template_1 = ( --personaly newer use this type of struct, _template_2 is better
 		"<?xml version='1.0' encoding='UTF-8'?>" +
 		"<bookstore>" +
 			"<book category='COOKING'>" +
@@ -143,12 +200,6 @@ public
 				"<author>J K. Rowling</author>" +
 				"<year>2005</year>" +
 				"<price>29.99</price>" +
-			"</book>" +
-			"<book category='WEB'>" +
-				"<title lang='en'>Learning XML</title>" +
-				"<author>Erik T. Ray</author>" +
-				"<year>2003</year>" +
-				"<price>39.95</price>" +
 			"</book>" +
 			"<book genre='novel' ISBN='1-861001-57-5'>" +
 			"<title>Pride And Prejudice</title>" +
@@ -170,12 +221,12 @@ public
 	),
 --private
 	loaded		= false,
-	rootNode	= undefined,
+	rootNode	= undefined, --mcXMLNode
+	doc = dotNetObject "System.Xml.XmlDocument",
 public
 	fn getSource = getSourceFileName(), --get path of this script
-	doc = dotNetObject "System.Xml.XmlDocument",
 	fn exists = (url != undefined and doesFileExist url),
-	fn reformat = (
+	fn reformat = ( --add new lines and tabs
 	
 		local sw = dotNetObject "System.IO.StringWriter"
 		doc.Save sw
@@ -214,73 +265,23 @@ public
 		if doc.DocumentElement == undefined or doc.DocumentElement.IsEmpty do return ""
 		(reformat()).ToString() --Format XML String to Print Friendly XML String
 	),
-	/**
-	TODO
-	*@Example
-		xml.findNodeAt "//games/game"
-	*/
-	fn findNodeAt node_path = (
-	
-		local nodes = root.SelectNodes node_path
-		/*foreach (XmlNode node in nodes)
-		{
-			listBox1.Items.Add(node["name"].InnerText);
-		}*/
-		
-		/*
-		XmlDocument doc = new XmlDocument();
-    doc.Load("books.xml");
-
-    //Display all the book titles.
-    XmlNodeList elemList = doc.GetElementsByTagName("title");
-    for (int i=0; i < elemList.Count; i++)
-    {   
-      Console.WriteLine(elemList[i].InnerXml);
-    }  
-
-		*/
-	),
+	--fn getNode node_path = (if doc.DocumentElement != undefined then doc.SelectSingleNode node_path else undefined),
 	/**
 	*@Usage
 		return array of nodes(mcXMLNode)
 	*/
 	fn getChildren = (rootNode.getChildren()),
 	/**
-	TODO finish it -Not Used
-	*@Example
-		xml = mcXML(Micra.TempDir + "xml_test_99.xml")
-		xml.fromString _template
-		xml.toString()
-		local nodes = mcXML.getChildrenAt "/bookstore/*"
-		mcXML.getChildrenAt "//book"
-		mcXML.getChildrenAt "//book/author" 
-		return list(dotNetObject:System.Xml.XPathNodeList) of nodes(mcXMLNode)
-	
-	fn getChildrenAt item_path = (
-	
-		--local nodes = #()
-		--node.init doc.selectNodes item_path
-		
-		local itemIter = (doc.selectnodes item_path).GetEnumerator()
-		while itemIter.MoveNext() do (
-		
-			local attrIter = itemIter.Current.Attributes.GetEnumerator()
-			--format "\nEntry:%\n" 
-			while attrIter.MoveNext() do (
-			
-				format "  % = %\n" attrIter.current.Name attrIter.current.value
-			)
-		)
-	),*/
-	/**
 	*@Example
 		xml = mcXML (Micra.TempDir + "xml_test_96.xml")
 		xml.exists() --false
-		xml.addRootNode "GALLERY" attr:#("paintings", "1") txt:"New Age"
+		xml.addRootNode "GALLERY"
 		xml.tostring()
 		xml.save()
+	*@Warning
+		do not insert InnerText at rootNode (cause bad formating)
 	*/
-	fn addRootNode node_name attr:#() txt:""= ( --create new xml
+	fn addRootNode node_name = ( --create new xml
 		
 		if loaded do (
 		
@@ -288,57 +289,95 @@ public
 			return false 
 		)
 		local root_node = doc.createElement node_name
-		if attr.count == 2 do root_node.setattribute attr[1] attr[2]
-		root_node.InnerText = txt
 		doc.appendChild root_node
 		rootNode = mcXMLNode()
 		rootNode.init doc.DocumentElement
 		loaded = true
 	),
 	/**
-	TODO
-	*@Usage
-		insert new node or override current
 	*@Example
-		xml.addNode "//GALLERY" "image" attr:#("year", "2018") txt:"Ren"
+		xml = mcXML (Micra.TempDir + "xml_test_94.xml")
+		xml.loaded --true
+		node = xml.getNode "//GALLERY/image_1"
+		node.toString()
+		node.setAttribute "author" "J M. Novalis"
+		xml.toString()
 	*/
-	fn addNode item_path node_name attr:#() txt:"" override:false = (
+	fn getNode target_path = (rootNode.getNode target_path),
+	/**
+	*@Usage
+		insert new node , override current or create new at path
+	*@Example 
 	
-		--get parent nor in path
-		global children = doc.selectnodes item_path
-		format "children:%\n" children
-		if children.count == 0 do (
+		xml = mcXML (Micra.TempDir + "xml_test_94.xml")
+		xml.loaded --true
 		
-			format "node:[ % ] has no children:%\n" item_path
+		--Add:
+		node_attribs = #(mcAttrib "year" "2018", mcAttrib "author" "J K. Rowling")
+		xml.addNode "//GALLERY" "image_1" attr:node_attribs
+		node_attribs = #(mcAttrib "year" "2019", mcAttrib "author" "Erik T. Ray")
+		xml.addNode "//GALLERY" "image_2" attr:node_attribs
+		
+		--Replace:
+		node_attribs = #(mcAttrib "year" "2019", mcAttrib "author" "Giada De Laurentiis")
+		xml.addNode "//GALLERY" "image_1" attr:node_attribs override:true
+		
+		--New Path:
+		node_attribs = #(mcAttrib "year" "2020", mcAttrib "author" "D A. Makarov")
+		xml.addNode "//GALLERY/Nova/Dot" "image_1" attr:node_attribs
+		
+		xml.toString()
+	*/
+	fn addNode target_path node_name attr:#() override:false = (
+	
+		if not loaded do (print "You must create root node first"; return false)
+		local new_node = mcXMLNode()
+		new_node.init (doc.createElement node_name)
+		new_node.setAttributes attr
+		local target_node = rootNode.getNode target_path
+		if target_node == undefined do ( --insert new node with full path
+			
+			--format "Path not found! Create new path [ % ].\n" target_path
+			local path_array = filterString target_path "/" --#("GALLERY", "Nova")
+			--format "path_array:%\n" path_array
+			--found which parts of path not exist and create them
+			local progresive_path = "//" + path_array[1] 
+			local progresive_node = rootNode.getNode progresive_path
+			for i = 2 to path_array.count do (
+			
+				progresive_path = progresive_path + "/" + path_array[i]
+				if rootNode.getNode progresive_path == undefined then (
+				
+					--format "creating node at path: [ % ]\n" progresive_path
+					local next_node = mcXMLNode()
+					next_node.init (doc.createElement path_array[i])
+					progresive_node.appendNode next_node
+					
+				) else (
+				
+					--format "node exists at path [  % ]\n" progresive_path
+				)
+				progresive_node = rootNode.getNode progresive_path
+			)
+			progresive_node.appendNode new_node
+			return new_node
 		)
-		format "mcXML > addNode > children:% cnt:% class:%\n" children children.Count (classOf children)
-	
-	--local child_node = doc.CreateElement child_str
-	--child_node.InnerText = txt
-	--children.AppendChild(child_node)
-	
-		if not override then (
+		local node_path = target_path + "/" + node_name
+		local found_node = rootNode.getNode node_path
+		if override and found_node != undefined then ( --replace current node
+			
+			local root = doc.DocumentElement
+			root.ReplaceChild new_node._node found_node._node
+			new_node = found_node
+			--format "replace node:%  at:%\n" found_node.tag target_path
 		
-			--local parent_node = doc.selectnodes item_path
-			--parent_node = mcXMLNode()
-			--parent_node.init doc.child_node
-		--local child_node = doc.CreateElement("bk", "genre", "urn:samples") --maybe dotnet array
-		--local child_node = doc.CreateElement child_str
-		--child_node.InnerText = txt
-			--format "mcXML > addNode > parent_node:% class:%\n" parent_node (classOf parent_node)
+		) else ( --append new node
 		
+			new_node.parent = target_node
+			target_node.appendNode new_node
+			--format "add node:% at:%\n" node_name target_path
 		)
-		
-		--local child_node = doc.CreateElement("bk", "genre", "urn:samples") --maybe dotnet array
-		--local child_node = doc.CreateElement child_str
-		--child_node.InnerText = txt
-		--node = mcXMLNode()
-		--node.init doc.child_node
-		
-		
-		--parent_node.appendNode = child_node
-		--doc.DocumentElement.AppendChild(elem)
-		--elem
+		new_node
 	),
 	fn hasAttribute attr_name = (
 		
@@ -355,7 +394,7 @@ public
 		if loaded == true then(
 			local writer = dotNetClass "System.Xml.XmlTextWriter"
 			local wSettings = dotNetObject "System.Xml.XmlWriterSettings"
-			wSettings.indent = True
+			wSettings.indent = true
 			local w = writer.create url wSettings
 			doc.writeContentTo w
 			w.close()
@@ -384,288 +423,3 @@ public
 	)
 	/*<end>*/
 )	
-
-
-	/**
-	*@Example
-		mcXML.printTree "//bookstore"
-		mcXML.printTree "//Skeleton/Bone/Item"
-	*/
-	/*fn printTree item_path = (
-	
-		local itemIter = (doc.selectnodes item_path).GetEnumerator()
-		while itemIter.MoveNext() do (
-		
-			format "\nEntry:\n" 
-			local attrIter = itemIter.Current.Attributes.GetEnumerator()
-			while attrIter.MoveNext() do (
-			
-				format "  % = %\n" attrIter.current.Name attrIter.current.value
-			)
-		)
-	),*/
-
-/*
- header =  xmlDoc.item["Autodesk_Cache_File"] --this is how you pull an element section by name  
---elments can have children elements.. in this case we are quarying the value of the attribute "Type" inside the "cacheType" element which is of the "Autodesk_Cache_File"..  
-cacheType = (header.item["cacheType"].GetAttribute("Type"))  
-timePerFrame = (header.item["cacheTimePerFrame"].GetAttribute("TimePerFrame")) 
-
-		xmlDoc.load 
-		myNodes = xmlDoc.selectNodes "//Part"
-		myPartname=(for i = 0 to myNodes.count-1 collect (myNodes.itemOf[i].getElementsByTagName "PartName").itemOf[0].attributes.itemOf["name"].value)
- 		myDescrips = (for i = 0 to myNodes.count-1 collect (myNodes.itemOf[i].getElementsByTagName "PartName").itemOf[0].attributes.itemOf["Description"].value)
- 		myProject = (for i = 0 to myNodes.count-1 collect (myNodes.itemOf[i].getElementsByTagName "PartName").itemOf[0].attributes.itemOf["Project"].value)
- 		myDiffuse = (for i = 0 to myNodes.count-1 collect (myNodes.itemOf[i].getElementsByTagName "PartName").itemOf[0].attributes.itemOf[ "Diffuse"].value)
-		mySpec= (for i = 0 to myNodes.count-1 collect (myNodes.itemOf[i].getElementsByTagName "PartName").itemOf[0].attributes.itemOf["Spec"].value)
-		myNormal = (for i = 0 to myNodes.count-1 collect (myNodes.itemOf[i].getElementsByTagName "PartName").itemOf[0].attributes.itemOf["Normal"].value)
- 		myReflection = (for i = 0 to myNodes.count-1 collect (myNodes.itemOf[i].getElementsByTagName "PartName").itemOf[0].attributes.itemOf["Reflection"].value)
-		
-		--FindCorrectItem (Gen_List.items[Gen_List.selection]) --Runs function to match xml to selected part
-		
-		DescripArea.text = "--" + myDescrips[(FindCorrectItem myPartname (Gen_List.items[Gen_List.selection]))]
-		ProjectArea.text = "Project-- " + myProject[(FindCorrectItem myPartname (Gen_List.items[Gen_List.selection]))]
-		DiffuseArea.text = myDiffuse[(FindCorrectItem myPartname (Gen_List.items[Gen_List.selection]))]
-		SpecArea.text = mySpec[FindCorrectItem myPartname (Gen_List.items[Gen_List.selection])]		
-		NormalArea.text = myNormal[(FindCorrectItem myPartname (Gen_List.items[Gen_List.selection]))]	
-		ReflectionArea.text = myReflection[(FindCorrectItem myPartname (Gen_List.items[Gen_List.selection]))]
-
-doc = dotNetObject "System.Xml.XmlDocument"
-doc.LoadXml("<book genre='novel' ISBN='1-861001-57-5'>" +
-             "<title>Pride And Prejudice</title>" +
-			"</book>")
-
---Create a new node and add it to the document.
---The text node is the content of the price element.
-elem = doc.CreateElement("price")
-txt = doc.CreateTextNode("19.95")
-doc.DocumentElement.AppendChild(elem)
-doc.DocumentElement.LastChild.AppendChild(txt)
-
-XmlWriter = dotNetClass "System.Xml.XmlWriter"
-stringWriter = dotNetObject "System.IO.StringWriter"
-mlTextWriter = XmlWriter.Create stringWriter
-
-doc.WriteTo xmlTextWriter
-xmlTextWriter.Flush()
-(stringWriter.GetStringBuilder()).ToString()
-
-
-
-
---Create the XmlDocument.
-XmlDocument doc = new XmlDocument();
-doc.LoadXml("<item><name>wrench</name></item>");
-
---Add a price element.
-XmlElement newElem = doc.CreateElement("price");
-newElem.InnerText = "10.95";
-doc.DocumentElement.AppendChild(newElem);
-
-
-XmlElement elem = doc.CreateElement("bk", "genre", "urn:samples");
-elem.InnerText = "fantasy";
-doc.DocumentElement.AppendChild(elem);
-
-
-And also to read an XML:
-
-fn recurseXML docElement =
-(
-	tempPTree = #(docElement.name)
-	tempLayerTree = #(docElement.getAttribute "layer")
-	
-	for i = 0 to (docElement.childNodes.count - 1) do
-	(
-		tmp = (recurseXML docElement.childNodes.itemOf[i])
-		append tempPTree tmp[1]
-		append tempLayerTree tmp[2]
-	)
-	return #(tempPTree, tempLayerTree)
-)
-
-global parentTreeXML = #()
-global layerTreeXML = #()
-fn readXML =
-(
-	xmlDoc = dotNetObject "System.Xml.XmlDocument"
-	xmlDoc.load ("C:\\temp\\test.xml") 
-	
-	docElement = XmlDoc.documentElement
-	
-	-- if we don't do this here we end up with the root node on parentTreeXML
-	-- which can be worked out in anoter way also, of course.
-	for i = 0 to (docElement.childNodes.count - 1) do
-	(
-		tmp = (recurseXML docElement.childNodes.itemOf[i])
-		append parentTreeXML tmp[1]
-		append layerTreeXML tmp[2]
-	)
-)
-*/
-
-
-
-/*
-<bookstore>
-<book category="COOKING">
-<title lang="en">Everyday Italian</title>
-<author>Giada De Laurentiis</author>
-<year>2005</year>
-<price>30.00</price>
-</book>
-<book category="CHILDREN">
-<title lang="en">Harry Potter</title>
-<author>J K. Rowling</author>
-<year>2005</year>
-<price>29.99</price>
-</book>
-<book category="WEB">
-<title lang="en">XQuery Kick Start</title>
-<author>James McGovern</author>
-<author>Per Bothner</author>
-<author>Kurt Cagle</author>
-<author>James Linn</author>
-<author>Vaidyanathan Nagarajan</author>
-<year>2003</year>
-<price>49.99</price>
-</book>
-<book category="WEB">
-<title lang="en">Learning XML</title>
-<author>Erik T. Ray</author>
-<year>2003</year>
-<price>39.95</price>
-</book>
-</bookstore>
-
-
-xmlDoc = dotNetObject "system.xml.xmlDocument"
-xmlDoc.load @"somepathBookstore.xml"
---1 Get all books
-myNodes = xmlDoc.selectNodes "//book"
---2 Get all childnodes of the bookstore element
-myNodes = xmlDoc.selectNodes "/bookstore/*"
---3 Get all authors of all books
-myNodes = xmlDoc.selectNodes "//book/author"
---4 Get all authors of books from 2005
-myNodes = xmlDoc.selectNodes "//book[year='2005']/author"
---4a do the same but the year is a variable 
-yearVariable = 2005
-myNodes = xmlDoc.selectNodes ("//book[year='" + (yearVariable as string) + "']/author")
---5 Get all books from 2005
-myNodes = xmlDoc.selectNodes "//book[year='2005']"
---6 Get all books from 2003 cheaper than 45.00
-myNodes = xmlDoc.selectNodes "//book[year='2003' and price<'45']"
- --In examples 3 and 4 you do something like this to get the actual text of the xml-element in an array
-myAuthors = (for i = 0 to myNodes .count-1 collect myNodes .itemOf[i].innertext)
---In examples 1, 2, 5 and 6 you get an xml-element with child-elements. Do something like this to get a specific child-element
-myPrices = (for i = 0 to myNodes.count-1 collect (myNodes.itemOf[i].getElementsByTagName "price").itemOf[0].innertext)
-*/
-
-
-
-
-
-
-/*
-StringWriter = dotNetObject "System.IO.StringWriter"
-penDotNet.show StringWriter
-
--- Create XmlWriterSettings and fill info
-XmlWriterSettings = dotNetObject "System.Xml.XmlWriterSettings"
-XmlWriterSettings.Indent = true
-XmlWriterSettings.indentChars="	"
-XmlWriterSettings.OmitXmlDeclaration = false
-XmlWriterSettings.NewLineOnAttributes = false
-
--- Create new XmlWriter in the StringWriter with the specified settings
-XmlWriter=dotNetClass "system.xml.xmlWriter"
-Writer = XmlWriter.Create StringWriter XmlWriterSettings
-
--- Write the document
-Writer.WriteStartElement "XMLUI"
- 	Writer.WriteValue "This is a test" --COMMENT and re run
-	Writer.WriteStartElement "TAB"
-	Writer.WriteAttributeString "Name" "Temp"
-	Writer.WriteAttributeString "BackGround" ""
-		Writer.WriteStartElement "UI" ""
-		Writer.WriteAttributeString "Test" "12345"
--- 	Writer.WriteEndElement() --Don't realy need to set the end element as it does it for you. 
--- Writer.WriteEndElement()
-
--- Release Xml resources
-Writer.Flush()
-Writer.Close()
-xmlString=StringWriter.ToString()
-
-
-fn reformatXml xml Writer: =
-(
-	doFlush=false
-	if Writer==unsupplied do 
-	(
-		StringWriter=dotNetObject "System.IO.StringWriter"
-		XmlWriterSettings = dotNetObject "System.Xml.XmlWriterSettings"
-		XmlWriterSettings.Indent = true
-		XmlWriterSettings.indentChars="	"
-		XmlWriterSettings.OmitXmlDeclaration = false
-		XmlWriterSettings.NewLineOnAttributes = false
-		XmlWriter=dotNetClass "system.xml.xmlWriter"
-		Writer = XmlWriter.Create StringWriter XmlWriterSettings
-		doFlush=true
-	)
-	
-	case xml.name of
-	(
-		"#document": () --Do nothing
-		"xml": () --Do nothing
-		"#comment":
-		(
-			Writer.WriteComment xml.value
-		)
-		"#text":
-		(
-			Writer.writeValue xml.value
-		)
-		default:
-		(
-			Writer.WriteStartElement xml.name
-			for i = 0 to xml.Attributes.count-1 do
-			(
-				val=xml.getAttribute xml.Attributes.item[i].name
-				Writer.WriteAttributeString xml.Attributes.item[i].name val
-			)
-		)
-	)
-	
-	for i = 0 to xml.childNodes.count-1 do 
-	(
-		reformatXml xml.childNodes.item[i] Writer:writer StringWriter:StringWriter
-	)
-	
-	if doFlush do
-	(
-		Writer.Flush()
-		Writer.Close()
-	)
-	
-	StringWriter
-)
-
---Test
-xmlDoc=dotNetObject "system.xml.xmlDocument"
-xmlStr="<?xml version=\"1.0\" encoding=\"UTF-8\"?>           <!--This is a comment--><XMLUI Name=\"Fred\">
-<TAB Name=\"Face\"><UI /><!--This is a Button below-->
-					<BUTTON Name=\"Reset\" /><INNERTEXT>This is Inner Text</INNERTEXT></TAB></XMLUI>
-"
-xmlDoc.loadXml xmlStr
-clearListener()
-xmlStr=reformatXml xmlDoc
-xmlStr.toString()
-
-
-
-xdoc = (dotNetclass "System.Xml.Linq.XDocument").Parse xmlStr
-xdoc.ToString()
-(dotnetobject "system.xml.linq.XDeclaration" "1.0" "utf-8" "").tostring() + "" + xdoc.ToString()
-*/
