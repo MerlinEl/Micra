@@ -102,7 +102,7 @@ rollout mcSendUVWToPsDialog "Untitled" width:148 height:172
 	on mcSendUVWToPsDialog close do 
 	( 
 		saveInterface()
-		mcFile.saveIniDialog "mcSendUVWToPsDialog" "Properties_2"
+		mcFile.saveDialogSettings "mcSendUVWToPsDialog" "Properties_2"
 	)
 	-->MoveMode
 	on mcSendUVWToPsDialog lbuttondown pos do (dMove = true; DmPos = pos; if not keyboard.shiftPressed do pushprompt "Pres Shift To Move...")
@@ -115,4 +115,4 @@ rollout mcSendUVWToPsDialog "Untitled" width:148 height:172
 	on btn_print pressed  do (render_uvw_and_send_to_photoshop())
 	on btn_close pressed  do (destroyDialog mcSendUVWToPsDialog)
 )
-mcCall.createIniDialog "mcSendUVWToPsDialog" "Properties_2"
+mcCall.createXMLDialog "mcSendUVWToPsDialog" "Properties_2"

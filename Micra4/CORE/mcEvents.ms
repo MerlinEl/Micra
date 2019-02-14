@@ -166,5 +166,5 @@ Struct MICRA_EVENTS (
 		/*<end>*/
 )
  --create instance
-Global mcEvents = Micra.instanceStructure MICRA_EVENTS "mcEvents"
+Global mcEvents = mcStructMan.instanceStructure MICRA_EVENTS "mcEvents"
 

@@ -5,8 +5,8 @@ try ( mcSaveProfileAsDialog.close() ) catch()
 	-->Locals-----------------------------------------------------------------
 	local sec = 60000
 	local netDMove = false, netDmPos
-	local last_profile = execute (mcFile.saveLoadIniSetings head:"Interface" key:"lastprofile" action:#load)
-	local profiles = #("DefaultColor", "UserColor", "ForestColor", "EarthColor", "MoonColor", "SeaColor", "SunColor", "Close")
+	local last_profile = execute (mcFile.readSettings Micra.UserSettings "Interface/lastprofile")
+	local profiles = mcFile.readSettings Micra.UserSettings "ColorProfiles"  type:"keys"
 	local head_str = profiles[last_profile]
 	local bar_height      = 14
 	local form_bounds     = 2
@@ -52,7 +52,7 @@ try ( mcSaveProfileAsDialog.close() ) catch()
 		if a.Button == a.Button.right then form.close()
 	)
 --||
-	fn onCloseForm s a = (mcFile.saveIniDialog s.name "Properties_2")
+	fn onCloseForm s a = (mcFile.saveDialogSettings s.name "Properties_2")
 
 --| --Rename
 	fn incorrectCharsIsFound str =
@@ -121,11 +121,7 @@ try ( mcSaveProfileAsDialog.close() ) catch()
 				--if mcs.ebox.text != mcs.cbox.SelectedItem do renameItem form
 				/*local sel_index = (mcs.cbox.SelectedIndex+1) as string
 				local targetFile = Micra.RootDir +"User\\Profile_" + sel_index  + ".ini"
-				if doesFileExist targetFile and doesFileExist Micra.TempProfileIni do 
-				(
-					deleteFile targetFile 
-					copyFile Micra.TempProfileIni targetFile
-				)
+
 				--set new name to ini
 				setIniSetting Micra.UserSettings "Profiles" sel_index mcs.cbox.SelectedItem
 				form.close()*/
@@ -155,9 +151,9 @@ try ( mcSaveProfileAsDialog.close() ) catch()
 		)
 		mcs.tlp.controls.addRange ( mcs.buttons )
 	)
-	fn loadCBoxItems mcs =
-	(
-		local items= for i = 1 to 8 collect getIniSetting Micra.UserSettings "Profiles" (i as string)
+	fn loadCBoxItems mcs = (
+		
+		local items= for i = 1 to 8 collect mcFile.readSettings Micra.UserSettings  ("Profiles/menu_"+i as string)
 		mcs.cbox.Items.AddRange (dotNetArray items)
 		mcs.cbox.SelectedIndex = 0
 	)
@@ -165,7 +161,7 @@ try ( mcSaveProfileAsDialog.close() ) catch()
 	(
 		form.name = "mcSaveProfileAsDialog"
 		form.ControlBox  = false --hide main bar
-		local fpos = (mcFile.getIniDataFromArray Micra.TempProfileIni "Properties_2" "mcSaveProfileAsDialog" 2)
+		local fpos = execute (mcFile.readSettings Micra.UserProfile "Properties_2/mcSaveProfileAsDialog" type:"pos")
 		form.StartPosition = form.StartPosition.Manual
 		form.bounds = netDrRect fpos form_size
 		form.FormBorderStyle = form.FormBorderStyle.none

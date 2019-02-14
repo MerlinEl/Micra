@@ -37,4 +37,4 @@ struct MICRA_GLOBAL_MEMORY	(
 	/*<end>*/
 )	
  --create instance
-Global mcGM = Micra.instanceStructure MICRA_GLOBAL_MEMORY "mcGM"
+Global mcGM = mcStructMan.instanceStructure MICRA_GLOBAL_MEMORY "mcGM"

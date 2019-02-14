@@ -173,4 +173,4 @@ struct mcSystem (
 	/*<end>*/
 )
  --creating instance caused endless loop
---Global mcSystem = Micra.instanceStructure MICRA_SYSTEM "mcSystem"
+--Global mcSystem = mcStructMan.instanceStructure MICRA_SYSTEM "mcSystem"

@@ -256,7 +256,7 @@ fn mcDeepIsolate lvl:#upper =
 				s.tag.value.unhide_all_isolated()
 				s.tag.value.objects_by_lvl = #()
 				callbacks.removeScripts id:#mcDeepIsoCallbacks --Remove any existing callbacks with this ID.
-				mcFile.saveIniDialog s.name "Properties_2"
+				mcFile.saveDialogSettings s.name "Properties_2"
 			)
 			fn goUp s a = (s.parent.tag.value.isolateByLevel #lower)
 			fn goDown s a = (s.parent.tag.value.isolateByLevel #upper)
@@ -265,8 +265,8 @@ fn mcDeepIsolate lvl:#upper =
 			--<
 			form.name = "mcDeepIsolateDialog"
 			form.ControlBox  = false --hide main bar
-			local fpos = (mcFile.getIniDataFromArray Micra.TempProfileIni "Properties_2" "mcDeepIsolateDialog" 2)
-			if fpos == undefined do fpos = (mcFile.getIniDataFromArray Micra.DefaultProfileIni "Properties_2" "mcDeepIsolateDialog" 2)
+			local fpos = execute (mcFile.readSettings Micra.UserProfile ("Properties_2/mcDeepIsolateDialog") type:"pos")
+			if classOf fpos != Point2 do fpos = [0, 0]
 			form.StartPosition = form.StartPosition.Manual
 			form.FormBorderStyle = form.FormBorderStyle.none
 			form.bounds = netDrRect fpos mcs.form_size

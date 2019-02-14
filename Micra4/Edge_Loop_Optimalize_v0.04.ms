@@ -88,7 +88,7 @@ rollout mcELOpDialog "Untitled" width:220 height:60
 	-->DialogProp --------------------------------------------------------------------
 	on mcELOpDialog close do 
 	( 
-		mcFile.saveIniDialog "mcELOpDialog" "Properties_2"
+		mcFile.saveDialogSettings "mcELOpDialog" "Properties_2"
 	)
 	on mcELOpDialog rbuttonup pos do (destroyDialog mcELOpDialog)
 	-->MoveMode
@@ -108,4 +108,4 @@ rollout mcELOpDialog "Untitled" width:220 height:60
 		destroyDialog mcELOpDialog
 	)
 )
-mcCall.createIniDialog "mcELOpDialog" "Properties_2"
+mcCall.createXMLDialog "mcELOpDialog" "Properties_2"

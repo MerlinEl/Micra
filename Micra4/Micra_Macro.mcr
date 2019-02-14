@@ -275,11 +275,11 @@ toolTip:""
 ----------------------------------------------------------------------------------------------------------
 MacroScript Gallery          
 category:"Micra"
-toolTip:"3DGallery"
+toolTip:"Gallery3D"
 Icon:#("mcDGallery",1)
 (
 	On IsEnabled Return (mcPath != undefined)
-	On execute do (Micra.fileInVersion "3DGallery")
+	On execute do (Micra.fileInVersion "Gallery3D")
 )
 ----------------------------------------------------------------------------------------------------------
 macroScript UVW_Align_U

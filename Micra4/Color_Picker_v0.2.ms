@@ -190,7 +190,7 @@ if doesFileExist (Micra.RootDir+"Img\\ColorBySat.png") and doesFileExist (Micra.
 			mcs.edt_hex.text = mcColor.rgbToHex (netColorToRGB mcs.oldColor)
 			mcs.updateRGBHSVSpinners (netColorToRGB mcs.oldColor)
 		),
-		fn onCloseForm s a = (mcFile.saveIniDialog s.name "Properties_2"),
+		fn onCloseForm s a = (mcFile.saveDialogSettings s.name "Properties_2"),
 		fn changeBackcolor = (dia.backColor = netDrColor (mcUIColors.get #fore)),
 		fn minMaxForm s a = ( -- s = Button, a = MouseEventArgs
 			
@@ -230,14 +230,8 @@ if doesFileExist (Micra.RootDir+"Img\\ColorBySat.png") and doesFileExist (Micra.
 			
 			form.name = form_name
 			form.ControlBox  = false --hide main bar
-			local fpos = (mcFile.getIniDataFromArray Micra.TempProfileIni "Properties_2" "mcColorPickerDialog" 2) --pick custom fpos
-			if fpos == undefined do fpos = (mcFile.getIniDataFromArray Micra.DefaultProfileIni "Properties_2" "mcColorPickerDialog" 2) --pick default fpos
-			if fpos == undefined do ( --register new fpos
-			
-				fpos = [0, 0]
-				mcFile.setIniDataToArray Micra.TempProfileIni "Properties_2" "mcColorPickerDialog" 2 fpos 	
-				mcFile.setIniDataToArray Micra.DefaultProfileIni "Properties_2" "mcColorPickerDialog" 2 fpos 
-			)
+			local fpos = execute (mcFile.readSettings Micra.UserProfile "Properties_2/mcCustomizeDialog" type:"pos")
+			if classOf fpos != Point2 do fpos = [0, 0] --set pos to zero (register nfter dialog close
 			form.StartPosition = form.StartPosition.Manual
 			form.bounds = netDrRect fpos form_size
 			form.FormBorderStyle = form.FormBorderStyle.none
@@ -250,7 +244,7 @@ if doesFileExist (Micra.RootDir+"Img\\ColorBySat.png") and doesFileExist (Micra.
 			lblT.bounds = netDrRect [border_offset, border_offset] [form_size.x - border_offset*10 , bar_height]
 			lblT.BackColor = netDrColor (mcUIColors.get #back)
 			lblT.ForeColor = netDrColor (mcUIColors.get #text)
-			lblT.Text = "Color Picker v" + (Micra.getScriptVersion "Color_Picker") --update script title with version
+			lblT.Text = "Color Picker v" + (mcFile.getScriptVersion "Color_Picker") --update script title with version
 			
 			--min max button
 			btnMin.FlatStyle = btnMin.FlatStyle.flat

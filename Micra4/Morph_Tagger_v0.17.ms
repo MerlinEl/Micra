@@ -198,7 +198,7 @@ category:"Splines"
 		(
 			--print "Selected Morph Tagger"
 			updateNodeList()
-			if mcMorphCollectorDialog == undefined or mcMorphCollectorDialog.isDisplayed == false do Micra.fileInVersion "Morph_Collector_Manager"
+			if mcMorphCollectorDialog == undefined or mcMorphCollectorDialog.isDisplayed == false do mcFile.fileInVersion "Morph_Collector_Manager"
 		)
 		on spn_percent changed val do 
 		(

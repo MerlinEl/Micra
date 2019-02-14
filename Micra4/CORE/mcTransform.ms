@@ -82,5 +82,5 @@ struct mcTransform (
 	/*<end>*/
 )
  --create instance caused error (unable find function in this struct)
---Global mcTransform = Micra.instanceStructure MICRA_TRANSFORM "mcTransform"
+--Global mcTransform = mcStructMan.instanceStructure MICRA_TRANSFORM "mcTransform"
 

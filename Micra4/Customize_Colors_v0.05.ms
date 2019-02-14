@@ -19,25 +19,12 @@ try ( mcInterfaceColorDilaog.close() ) catch()
 	-->Components---------------------------------------------------------------------
 	--local form = dotNetObject "Form"
 	local form = dotNetObject "MaxCustomControls.Maxform"
-	local last_profile = execute (mcFile.saveLoadIniSetings head:"Interface" key:"lastprofile" action:#load)
+	local last_profile = execute mcFile.readSettings Micra.UserProfile "Interface/astprofile"
 	local profiles = #("DefaultColor", "UserColor", "ForestColor", "EarthColor", "MoonColor", "SeaColor", "SunColor", "Close") --, "SandColor"
 	local head_str = profiles[last_profile]
 	--format "last profile:%\thead:%\n" last_profile head_str
 	struct COLOR_DATA ( h, s, b, a )
-	struct INTERFACE_COLORS
-	(
-		clr_back     = execute (mcFile.saveLoadIniSetings head:head_str key:"backcolor" action:#load),
-		clr_fore     = execute (mcFile.saveLoadIniSetings head:head_str key:"forecolor" action:#load),
-		clr_sel      = execute (mcFile.saveLoadIniSetings head:head_str key:"selected"  action:#load),
-		clr_mark     = execute (mcFile.saveLoadIniSetings head:head_str key:"marked"  action:#load),
-		clr_btn      = execute (mcFile.saveLoadIniSetings head:head_str key:"button"   action:#load),
-		clr_inact    = execute (mcFile.saveLoadIniSetings head:head_str key:"inactive"  action:#load),
-		clr_text     = execute (mcFile.saveLoadIniSetings head:head_str key:"textcolor"  action:#load),
-		clr_seltext  = execute (mcFile.saveLoadIniSetings head:head_str key:"seltext"  action:#load),
-		form_opacity = execute (mcFile.saveLoadIniSetings head:head_str key:"opacity"  action:#load)
-	)
-	struct MICRA_COMPONENTS_STRUCT
-	(
+	struct MICRA_COMPONENTS_STRUCT (
 		--variables
 		lblT   = dotNetObject "label" ,
 		lblRGB = dotNetObject "label" ,
@@ -57,7 +44,6 @@ try ( mcInterfaceColorDilaog.close() ) catch()
 		buttons = #(),
 		mnu = dotNetObject "ContextMenuStrip",
 		mnu_items = #(),
-		icolors = INTERFACE_COLORS(),
 		netDMove = false, 
 		netDmPos,
 		ini_keys = #("Background", "Foreground", "Selected", "Marked", "Buttons", "Inactive", "Text", "Selected Text")
@@ -66,8 +52,8 @@ try ( mcInterfaceColorDilaog.close() ) catch()
 	form.tag = dotNetMXSValue (MICRA_COMPONENTS_STRUCT()) --manual Lifetime	
 	
 	fn closeForm s a = ( ((s.GetCurrentParent()).tag).close() )
-	fn onCloseForm s a = (mcFile.saveIniDialog s.name "Properties_2")
-	fn onOpenForm s a = (s.BackColor = netDrColor s.tag.value.icolors.clr_fore) --yellow
+	fn onCloseForm s a = (mcFile.saveDialogSettings s.name "Properties_2")
+	fn onOpenForm s a = (s.BackColor = mcDotnet.uiColor #fore) --yellow
 --|	--Form move
 	fn onLblTMouseMove s a = 
 	(
@@ -101,13 +87,13 @@ try ( mcInterfaceColorDilaog.close() ) catch()
 				if i != last_profile - 1
 				then
 				(
-					mcs.mnu.items.item[i].backColor = netDrColor mcs.icolors.clr_back
-					mcs.mnu.items.item[i].forecolor = netDrColor mcs.icolors.clr_inact
+					mcs.mnu.items.item[i].backColor = mcDotnet.uiColor #back
+					mcs.mnu.items.item[i].forecolor = mcDotnet.uiColor #inact
 				)
 				else
 				(
-					mcs.mnu.items.item[i].backColor = netDrColor mcs.icolors.clr_mark
-					mcs.mnu.items.item[i].forecolor = netDrColor mcs.icolors.clr_text
+					mcs.mnu.items.item[i].backColor = mcDotnet.uiColor #mark
+					mcs.mnu.items.item[i].forecolor = mcDotnet.uiColor #text
 				)
 			)
 			mcs.mnu.Show (s.PointToScreen a.location)
@@ -166,7 +152,7 @@ try ( mcInterfaceColorDilaog.close() ) catch()
 	)
 	fn fillComboBox list mcs =
 	(
-		--local keys = getIniSetting Micra.DefaultSettings "UserColor"
+		--local keys = mcFile.readSettings Micra.DefaultSettings "UserColor"
 		list.Items.AddRange (dotNetArray mcs.ini_keys)
 		list.SelectedIndex = 0
 	)
@@ -206,8 +192,8 @@ try ( mcInterfaceColorDilaog.close() ) catch()
 		if posX <= 2   then posX += 2
 		if posX >= 255 then posX -= 2
 		
-		local fillBrush = dotnetobject "System.Drawing.SolidBrush" (netDrColor mcs.icolors.clr_fore)
-		local fillColor = netDrColor mcs.icolors.clr_back
+		local fillBrush = dotnetobject "System.Drawing.SolidBrush" (mcDotnet.uiColor #fore)
+		local fillColor = mcDotnet.uiColor #back
 		local rect = (dotnetobject "System.Drawing.Rectangle" (posX-4) 0 8 bar_height)
 		
 		--mcSystem.show a.graphics
@@ -284,12 +270,12 @@ try ( mcInterfaceColorDilaog.close() ) catch()
 			mcs.icolors.clr_text,
 			mcs.icolors.clr_seltext
 		)
-		for i = 1  to keys.count do mcFile.saveLoadIniSetings head:head_str key:keys[i] data:(colors[i] as string) action:#save
+		for i = 1  to keys.count do mcFile.saveSettings Micra.UserSettings (head_str + "/" + keys[i]) (colors[i] as string)
 			
 		--save opacity
-		mcFile.saveLoadIniSetings head:"Interface" key:"opacity" data:((mcs.icolors.form_opacity as float) as string) action:#save
+		mcFile.saveSettings Micra.UserSettings "Interface/opacity" ((mcs.icolors.form_opacity as float) as string)
 		--save selected profile
-		mcFile.saveLoadIniSetings head:"Interface" key:"lastprofile" data:(last_profile as string) action:#save
+		mcFile.saveSettings Micra.UserSettings "Interface/lastprofile" (last_profile as string)
 		form.close()
 		
 		--restart Micra
@@ -304,12 +290,12 @@ try ( mcInterfaceColorDilaog.close() ) catch()
 		
 		--format "num:%\tform:%\thead:%\n" profile_num form head_str
 
-		form.BackColor = netDrColor mcs.icolors.clr_fore
-		for i in #(mcs.lblRGB, mcs.lblSAT, mcs.lblBRI, mcs.lblALP, mcs.lblT, mcs.combo_box, mcs.mnu) do i.backColor = netDrColor mcs.icolors.clr_back
-		for i in mcs.buttons do i.FlatAppearance.BorderColor = netDrColor mcs.icolors.clr_back
-		for i in mcs.buttons+#(mcs.tlp, mcs.btn) do i.backColor = netDrColor mcs.icolors.clr_btn
-		for i in #( mcs.lblRGB, mcs.lblSAT, mcs.lblBRI, mcs.lblALP) do i.Forecolor = netDrColor mcs.icolors.clr_inact
-		for i in mcs.buttons + #(mcs.lblT, mcs.combo_box, mcs.mnu) do i.Forecolor = netDrColor mcs.icolors.clr_text
+		form.BackColor = mcDotnet.uiColor #fore
+		for i in #(mcs.lblRGB, mcs.lblSAT, mcs.lblBRI, mcs.lblALP, mcs.lblT, mcs.combo_box, mcs.mnu) do i.backColor = mcDotnet.uiColor #back
+		for i in mcs.buttons do i.FlatAppearance.BorderColor = mcDotnet.uiColor #back
+		for i in mcs.buttons+#(mcs.tlp, mcs.btn) do i.backColor = mcDotnet.uiColor #btn
+		for i in #( mcs.lblRGB, mcs.lblSAT, mcs.lblBRI, mcs.lblALP) do i.Forecolor = mcDotnet.uiColor #inact
+		for i in mcs.buttons + #(mcs.lblT, mcs.combo_box, mcs.mnu) do i.Forecolor = mcDotnet.uiColor #text
 		
 		local clr = case mcs.combo_box.SelectedItem of
 		(
@@ -395,8 +381,8 @@ try ( mcInterfaceColorDilaog.close() ) catch()
 			lbl[i].text = txt[i]
 			lbl[i].size = netDrSize [35, bar_height]
 			lbl[i].margin  =  dotnetobject "padding" 1
-			lbl[i].backColor = netDrColor mcs.icolors.clr_back
-			lbl[i].foreColor = netDrColor mcs.icolors.clr_inact
+			lbl[i].backColor = mcDotnet.uiColor #back
+			lbl[i].foreColor = mcDotnet.uiColor #inact
 			
 			sld[i].name = txt[i]
 			sld[i].size = netDrSize [256, bar_height]
@@ -439,20 +425,20 @@ try ( mcInterfaceColorDilaog.close() ) catch()
 	fn addButons form mcs = 
 	(
 		--add color pickers
-		local clr = execute (mcFile.saveLoadIniSetings head:head_str key:"backcolor" action:#load)
+		local clr = execute (mcFile.readSettings Micra.UserSettings (head_str + "/backcolor"))
 		if classof clr != Color then clr = gray
 		
 		mcs.old_color.size = netDrSize [46, 18]
 		mcs.old_color.margin  =  dotnetobject "padding" 1
 		mcs.old_color.backColor = netDrColor clr
 		mcs.old_color.FlatStyle = mcs.old_color.FlatStyle.flat
-		--mcs.old_color.FlatAppearance.BorderColor = netDrColor mcs.icolors.clr_back
+		--mcs.old_color.FlatAppearance.BorderColor = mcDotnet.uiColor #back
 		
 		mcs.new_color.size = netDrSize [46, 18]
 		mcs.new_color.margin  =  dotnetobject "padding" 1
 		mcs.new_color.backColor = mcs.old_color.backColor
 		mcs.new_color.FlatStyle = mcs.new_color.FlatStyle.flat
-		--mcs.new_color.FlatAppearance.BorderColor = netDrColor mcs.icolors.clr_back
+		--mcs.new_color.FlatAppearance.BorderColor = mcDotnet.uiColor #back
 		
 		--add buttons
 		local btn_text_array = #("Reset", "Accept", "Cancel")
@@ -461,9 +447,9 @@ try ( mcInterfaceColorDilaog.close() ) catch()
 			local b = dotNetObject "Button"
 			b.size  = netDrSize [66, 20]
 			b.FlatStyle = b.FlatStyle.flat
-			b.FlatAppearance.BorderColor = netDrColor mcs.icolors.clr_back	
-			b.backColor = netDrColor mcs.icolors.clr_btn
-			b.Forecolor = netDrColor mcs.icolors.clr_text
+			b.FlatAppearance.BorderColor = mcDotnet.uiColor #back	
+			b.backColor = mcDotnet.uiColor #btn
+			b.Forecolor = mcDotnet.uiColor #text
 			b.FlatAppearance.BorderSize = 1
 			b.margin =  dotnetobject "padding" 0
 			b.name = "btn_"+((i as integer) as string)
@@ -479,40 +465,40 @@ try ( mcInterfaceColorDilaog.close() ) catch()
 	(
 		form.name = "mcInterfaceColorDilaog"
 		form.ControlBox  = false --hide main bar
-		local fpos = (mcFile.getIniDataFromArray Micra.TempProfileIni "Properties_2" "mcInterfaceColorDilaog" 2)
-		if fpos == undefined do fpos = (mcFile.getIniDataFromArray Micra.DefaultProfileIni "Properties_2" "mcInterfaceColorDilaog" 2)
+		local fpos = execute (mcFile.readSettings Micra.UserProfile ("Properties_2/mcInterfaceColorDilaog") type:"pos")
+		if classOf fpos != Point2 do fpos = [0, 0]
 		form.StartPosition = form.StartPosition.Manual
 		form.MinimumSize = netDrSize form_size
 		form.bounds = netDrRect fpos form_size
 		form.FormBorderStyle = form.FormBorderStyle.none
-		form.BackColor = netDrColor mcs.icolors.clr_fore --yellow
+		form.BackColor = mcDotnet.uiColor #fore --yellow
 		form.ShowInTaskbar = false
-		form.opacity = mcs.icolors.form_opacity
+		form.opacity = mcDotnet.uiColor #opacity
 		
-		mcs.mnu.BackColor = netDrColor mcs.icolors.clr_back
-		mcs.mnu.ForeColor = netDrColor mcs.icolors.clr_text
+		mcs.mnu.BackColor = mcDotnet.uiColor #back
+		mcs.mnu.ForeColor = mcDotnet.uiColor #text
 		mcs.mnu.ShowImageMargin = false
 		
 		mcs.lblT.bounds = netDrRect [form_offset/2, form_offset/2] [form_size.x - form_offset, bar_height]
-		mcs.lblT.BackColor = netDrColor mcs.icolors.clr_back
-		mcs.lblT.ForeColor = netDrColor mcs.icolors.clr_text
+		mcs.lblT.BackColor = mcDotnet.uiColor #back
+		mcs.lblT.ForeColor = mcDotnet.uiColor #text
 		mcs.lblT.Text = "Customize Interface Colors:"
 		
 		mcs.tlp.bounds = netDrRect [form_offset/2, bar_height+form_offset] [form_size.x - form_offset, bar_height*4+form_bounds*4]
-		mcs.tlp.backColor = netDrColor mcs.icolors.clr_btn
+		mcs.tlp.backColor = mcDotnet.uiColor #btn
 		mcs.tlp.ColumnCount = 2
 		mcs.tlp.RowCount = 4
 		
 		mcs.combo_box.bounds    = netDrRect [form_offset/2, bar_height*5+form_offset*3.5] [form_size.x - form_offset, 20]
-		mcs.combo_box.BackColor = netDrColor mcs.icolors.clr_back
-		mcs.combo_box.Forecolor = netDrColor mcs.icolors.clr_text
+		mcs.combo_box.BackColor = mcDotnet.uiColor #back
+		mcs.combo_box.Forecolor = mcDotnet.uiColor #text
 		mcs.combo_box.Sorted    = true
 		mcs.combo_box.DropDownStyle = mcs.combo_box.DropDownStyle.DropDownList --DropDown--Simple
 		mcs.combo_box.FlatStyle = mcs.combo_box.FlatStyle.flat
 		mcs.combo_box.MaxDropDownItems = 22
 		
 		mcs.btn.bounds = netDrRect [form_offset/2, bar_height*6+form_offset*6] [form_size.x - form_offset, 20]
-		mcs.btn.backColor = netDrColor mcs.icolors.clr_btn
+		mcs.btn.backColor = mcDotnet.uiColor #btn
 		mcs.btn.ColumnCount = 5
 		
 		dotNet.addEventHandler mcs.lblT   "MouseMove" onLblTMouseMove

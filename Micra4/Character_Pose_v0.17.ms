@@ -241,7 +241,7 @@ struct mcPoseTool
 	fn setLabelName lbl =
 	(
 		ButtonTeleportSend = #("Pose Name:")
-		Micra.fileInVersion "Text_Box"
+		mcFile.fileInVersion "Text_Box"
 		if ButtonTeleportGet != undefined and ButtonTeleportGet != "" do 
 		(
 			lbl.text = ButtonTeleportGet
@@ -362,7 +362,7 @@ rollout mcCharPoseDialog " Save  Pose v0.1" width:146 height:388
 	--ON Close
 	on mcCharPoseDialog close do 
 	(
-		mcFile.saveIniDialog "mcCharPoseDialog" "Properties_2"
+		mcFile.saveDialogSettings "mcCharPoseDialog" "Properties_2"
 		charSelectDialog.chkLibrary.checked = off
 	)
 	--ON RMB 
@@ -443,7 +443,7 @@ rollout mcCharPoseDialog " Save  Pose v0.1" width:146 height:388
 					setINISetting (mcCT_Path + "User.ini") "CustomPoseTool" "Hands" (handsCount as string)
 					setINISetting (mcCT_Path + "User.ini") "CustomPoseTool" "Face" (faceCount as string)
 					DestroyDialog mcCharPoseDialog
-					Micra.fileInVersion "Character_Pose"
+					mcFile.fileInVersion "Character_Pose"
 					DestroyDialog hptsDialog
 				)
 			)
@@ -453,7 +453,7 @@ rollout mcCharPoseDialog " Save  Pose v0.1" width:146 height:388
 	)
 )
 --~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~--
-mcCall.createIniDialog "mcCharPoseDialog" "Properties_2" style:#(#style_resizing)
+mcCall.createXMLDialog "mcCharPoseDialog" "Properties_2" style:#(#style_resizing)
 --~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~--
 
 --**\ Created by Merlin el' 7/20/2006 4:22:29 PM /**--

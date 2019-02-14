@@ -79,7 +79,7 @@ private
 	fn onCloseForm s a = (
 		
 		--format " save form:%  pos:% size:%\n" s.name (s.location.toString()) (s.size.toString())
-		mcFile.saveIniDialog s.name "Properties_2"
+		mcFile.saveDialogSettings s.name "Properties_2"
 	),
 	-- Custom  Functions
 	-->
@@ -88,12 +88,13 @@ private
 	fn init  =  (
 		
 		--setup interface
-		local from_data = mcFile.loadIniDialog title "Properties_2" --get saved pos and size
-		if from_data != undefined do (
-			
-			pos = from_data.pos
-			--size = from_data.size (when loaded every time is les and less....????)
+		local form_settings = mcFile.loadDialogSettings title "Properties_2" --get saved pos and size
+		if form_settings != undefined do (
+		
+			local pos = execute (form_settings.get "pos")
+			local size = execute (form_settings.get "pos")
 		)
+		--size = from_data.size (when loaded every time is les and less....????)
 		--format " load form:%  pos:% size:%\n" title pos size
 		
 		form.name = form.text = title
@@ -109,7 +110,7 @@ private
 		lblT.bounds = mcDotnet.dRect [border_offset, border_offset] [size.x - border_offset*10 , bar_height]
 		lblT.BackColor = mcDotnet.uiColor #back
 		lblT.ForeColor = mcDotnet.uiColor #text
-		lblT.Text = "Dialog Template v" + (Micra.getScriptVersion "Dialog_Template") --update script title with version
+		lblT.Text = "Dialog Template v" + (mcFile.getScriptVersion "Dialog_Template") --update script title with version
 		
 		--min max button
 		btnMin.FlatStyle = btnMin.FlatStyle.flat

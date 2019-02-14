@@ -50,4 +50,4 @@ struct MICRA_DRAW (
 	/*<end>*/
 )
  --create instance
-Global mcDraw = Micra.instanceStructure MICRA_DRAW "mcDraw"
+Global mcDraw = mcStructMan.instanceStructure MICRA_DRAW "mcDraw"

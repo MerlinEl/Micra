@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<USER>
+  <Properties_1>
+    <mc_Dialog_A active="false" pos="[102,740]" size="[148,66]" title="Menu:" btnCount="[6,2]" />
+    <mc_Dialog_B active="false" pos="[102,266]" size="[148,162]" title="Object:" btnCount="[6,6]" />
+    <mc_Dialog_C active="false" pos="[102,428]" size="[148,66]" title="Pivot:" btnCount="[6,2]" />
+    <mc_Dialog_D active="false" pos="[102,494]" size="[148,90]" title="Select:" btnCount="[6,3]" />
+    <mc_Dialog_E active="false" pos="[100,843]" size="[244,42]" title="Animation:" btnCount="[10,1]" />
+    <mc_Dialog_F active="false" pos="[250,202]" size="[196,90]" title="Modifiers:" btnCount="[8,3]" />
+    <mc_Dialog_G active="true" pos="[102,266]" size="[148,66]" title="Modify:" btnCount="[6,2]" />
+    <mc_Dialog_H active="false" pos="[102,674]" size="[148,66]" title="Materials:" btnCount="[6,2]" />
+    <mc_Dialog_I active="false" pos="[102,806]" size="[148,66]" title="Programming:" btnCount="[6,2]" />
+    <mc_Dialog_J active="false" pos="[100,510]" size="[460,42]" title="Experimental:" btnCount="[19,1]" />
+  </Properties_1>
+  <Properties_2>
+    <mcMicraDialog active="true" pos="[102,200]" size="[148,66]" title="" />
+    <mcCustomizeDialog active="false" pos="[250,202]" size="[224,404]" title="" />
+    <mcProgramDialog active="undefined" pos="[100,0]" size="[256,232]" title="" />
+    <mcisoDialog active="undefined" pos="[100,152]" size="[140,400]" title="" />
+    <mcModifierDialog active="undefined" pos="[100,100]" size="[400,400]" title="" />
+    <mcIconMakerDialog active="undefined" pos="[100,350]" size="[730,500]" title="" />
+    <mcDeepIsolateDialog active="undefined" pos="[100,86]" size="[84,44]" title="" />
+    <mcMoveTowardsDialog active="undefined" pos="[100,377]" size="[200,76]" title="" />
+    <mcClonerDialog active="false" pos="[671,202]" size="[164,296]" title="" />
+    <mcRenameDialog active="undefined" pos="[100,280]" size="[224,312]" title="" />
+    <mcObjectPlanterDialog active="undefined" pos="[100,201]" size="[356,92]" title="" />
+    <mcPivotPlanterDialog active="undefined" pos="[100,308]" size="[116,141]" title="" />
+    <mcRepairDialog active="undefined" pos="[100,307]" size="[144,152]" title="" />
+    <mcEdgeScaleDialog active="undefined" pos="[100,307]" size="[144,152]" title="" />
+    <mcResizeUVWDialog active="undefined" pos="[100,463]" size="[240,56]" title="" />
+    <mcLodeTestDialog active="undefined" pos="[100,86]" size="[328,164]" title="" />
+    <mcLpWizardDialog active="false" pos="[100,151]" size="[448,84]" title="" />
+    <mcCharSelectDialog active="undefined" pos="[100,390]" size="[212,388]" title="" />
+    <mcCharPoseDialog active="undefined" pos="[100,304]" size="[146,388]" title="" />
+    <mcSaveProfileAsDialog active="undefined" pos="[1152,392]" size="[180,66]" title="" />
+    <mcDgalleryDialog active="undefined" pos="[100,148]" size="[875,850]" title="" />
+    <mcRandomizeDialog active="undefined" pos="[100,152]" size="[152,332]" title="" />
+    <mcColorPaleteDialog active="undefined" pos="[1692,230]" size="[244,60]" title="" />
+    <mcSelVertsInXDialog active="undefined" pos="[100,100]" size="[100,100]" title="" />
+    <mcELOpDialog active="undefined" pos="[100,100]" size="[100,100]" title="" />
+    <mcObjIDDialog active="undefined" pos="[100,1018]" size="[144,84]" title="" />
+    <mcRenderToTextureModDialog active="undefined" pos="[100,100]" size="[100,100]" title="" />
+    <mcSendUVWToPsDialog active="undefined" pos="[100,100]" size="[148,172]" title="" />
+    <mcRotateObjectDialog active="undefined" pos="[100,100]" size="[100,100]" title="" />
+    <mcViewportRecorderDialog active="undefined" pos="[100,100]" size="[100,100]" title="" />
+    <mcGifCompillerDialog active="undefined" pos="[100,100]" size="[100,100]" title="" />
+    <mcScriptManDialog active="false" pos="[100,166]" size="[400,624]" title="" />
+    <mcColorPickerDialog active="undefined" pos="[100,100]" size="[100,100]" title="" />
+    <mcQuickColorPickerDialog active="undefined" pos="[100,100]" size="[100,100]" title="" />
+    <mcInterfaceColorDilaog active="undefined" pos="[100,427]" size="[299,130]" title="" />
+    <IsolateFaceDialog active="undefined" pos="[100,100]" size="[100,100]" title="" />
+    <mcTemplateDialog active="undefined" pos="[100,441]" size="[730,500]" title="" />
+    <mcSpaceDialog active="undefined" pos="[100,100]" size="[392,184]" title="" />
+  </Properties_2>
+  <Buttons></Buttons>
+</USER>

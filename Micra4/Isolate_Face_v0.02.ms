@@ -121,7 +121,7 @@ rollout IsolateFaceDialog "" width:148 height:68
 	)
 	-->Dialog prop
 	on IsolateFaceDialog rbuttonup pos do (destroyDialog IsolateFaceDialog)
-	on IsolateFaceDialog close do ( mcFile.saveIniDialog "IsolateFaceDialog" "Properties_2" )
+	on IsolateFaceDialog close do ( mcFile.saveDialogSettings "IsolateFaceDialog" "Properties_2" )
 	on btn_close pressed do (destroyDialog IsolateFaceDialog)
 	-->MoveMode
 	on IsolateFaceDialog lbuttondown pos do (dMove = true; DmPos = pos; if not keyboard.shiftPressed do pushprompt "Pres Shift To Move...")
@@ -136,4 +136,4 @@ rollout IsolateFaceDialog "" width:148 height:68
 	on btn_smg    pressed  do (isoByFaceSmoothGroup())
 	on btn_return pressed  do (unisolate())
 )
-mcCall.createIniDialog "IsolateFaceDialog" "Properties_2"
+mcCall.createXMLDialog "IsolateFaceDialog" "Properties_2"

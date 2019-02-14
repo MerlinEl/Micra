@@ -12,7 +12,7 @@ rollout mcRepairDialog "" width:332 height:128
 (
 	-------------------------------------------------------------------------
 	local n, p, s, tmp, sel,oName_1, cfgPath, AutExe, f
-	local ver = getIniSetting Micra.DefaultSettings "Version" "Repair_Object" 
+	local ver = mcFile.getScriptVersion "Repair_Object" 
 	local dMove = false, DmPos
 	-------------------------------------------------------------------------
 	GroupBox grp_1 "" pos:[4,4] width:324 height:120
@@ -189,7 +189,7 @@ rollout mcRepairDialog "" width:332 height:128
 	)
 )
 ----------------------------------------------------------------------------
-mcCall.createIniDialog "mcRepairDialog" "Properties_2"  modal:true 
+mcCall.createXMLDialog "mcRepairDialog" "Properties_2"  modal:true 
 ----------------------------------------------------------------------------
 
 --Repair_Object.ms

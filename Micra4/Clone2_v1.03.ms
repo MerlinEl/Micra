@@ -199,12 +199,12 @@ rollout mcClonerDialog "Cloner v1.05" width:164 height:296
 	on mcClonerDialog open do
 	(
 		if keyboard.controlPressed	do (cloneSelection(); destroyDialog mcClonerDialog)
-		grp_Title.text = ("Cloner v"+(getInisetting Micra.DefaultSettings "Version" "Clone2"))
+		grp_Title.text = ("Cloner v"+ (mcFile.getScriptVersion "Clone2"))
 		spnCount.value = 1
 	)
 	on mcClonerDialog close do 
 	( 
-		mcFile.saveIniDialog "mcClonerDialog" "Properties_2"
+		mcFile.saveDialogSettings "mcClonerDialog" "Properties_2"
 		clearTempObjects()
 	)
 	-->MoveMode
@@ -252,5 +252,5 @@ rollout mcClonerDialog "Cloner v1.05" width:164 height:296
 	on chkColor changed state do (CloneTo ActiveAction)
 	on chkInst  changed state do (CloneTo ActiveAction)
 )
-mcCall.createIniDialog "mcClonerDialog" "Properties_2"
+mcCall.createXMLDialog "mcClonerDialog" "Properties_2"
 

@@ -131,7 +131,7 @@ struct MICRA_CALL
 	(
 		if mcProgressBarDialog == undefined do
 		(
-			rollout mcProgressBarDialog " Inicialize 3DGallery Database:" width:332 height:132
+			rollout mcProgressBarDialog " Inicialize Gallery3D Database:" width:332 height:132
 			(
 				GroupBox grp_info "Progress...0%" pos:[8,4] width:316 height:120
 				bitmap bmpPop1 "Bitmap" pos:[16,20] width:300 height:80 fileName:(Micra.RootDir+"Img\\3DGall_Loader_01.bmp")
@@ -151,17 +151,23 @@ struct MICRA_CALL
 		mcProgressBarDialog.grp_info.text = "Progress..."+ ((val as integer) as string) + "%"
 		if close do (sleep 0.3; destroyDialog mcProgressBarDialog)
 	),
-	fn createIniDialog dNameStr prop style:#(#style_border) modal:false resize:false =
-	(
-		if not doesFileExist Micra.TempProfileIni do return false
-		
-		-->get data from Micra.TempProfileIni as array
-		local data  = execute (getIniSetting Micra.TempProfileIni prop dNameStr)
-		--format "data:%\n" data
-		if classOf data != array do return false
-		local dPos  = data[2]
-		local dSize = data[3]
-		
+	/**
+	*@Usage
+		dNameStr	: String
+		prop		: String
+		style		: Array
+		modal		: Boolean 
+		resize		: Boolean
+	*@Example
+		mcCall.createXMLDialog "mcCharPoseDialog" "Properties_2" style:#(#style_resizing)
+	*/
+	fn createXMLDialog dNameStr prop style:#(#style_border) modal:false resize:false = (
+	
+		local data = mcFile.readSettings Micra.UserProfile (prop + "/"+ dNameStr) type:"attribs"
+		if data == "" do return false
+		--data.print()
+		local dPos  = execute (data.get "pos")
+		local dSize = execute (data.get "size")
 		if resize and classOf dSize == Point2 
 		then (CreateDialog  (execute dNameStr) dSize.x dSize.y pos:dPos style:style modal:modal)
 		else if classOf dPos == Point2
@@ -306,4 +312,4 @@ struct MICRA_CALL
 	/*<end>*/
 )
 --create instance
-Global mcCall = Micra.instanceStructure MICRA_CALL "mcCall"
+Global mcCall = mcStructMan.instanceStructure MICRA_CALL "mcCall"

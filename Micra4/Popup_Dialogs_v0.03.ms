@@ -24,7 +24,7 @@ Struct MICRA_POPUP (
 	fn closeForm form = (
 		
 		form.close()
-		if _form_name != "MaxCenter" do mcFile.saveIniDialog _form_name "Properties_2" 
+		if _form_name != "MaxCenter" do mcFile.saveDialogSettings _form_name "Properties_2" 
 	),
 	fn removeInvalidChars str =	(
 		
@@ -66,8 +66,7 @@ Struct MICRA_POPUP (
 		--load pos from ini
 		if form_name != "MaxCenter" then (
 			
-			local fpos = (mcFile.getIniDataFromArray Micra.TempProfileIni "Properties_2" form_name 2)
-			if fpos == undefined do fpos = (mcFile.getIniDataFromArray Micra.DefaultProfileIni "Properties_2" form_name 2)
+			local fpos = execute (mcFile.readSettings Micra.UserProfile ("Properties_2/"+form_name) type:"pos")
 			if fpos != undefined do form_rect = netDrRect fpos form_size
 		) 
 		fn textBoxControll s a  = (
@@ -307,7 +306,7 @@ mcPopUp = MICRA_POPUP()
 	(
 		if mcProgressBarDialog == undefined do
 		(
-			rollout mcProgressBarDialog " Inicialize 3DGallery Database:" width:332 height:132
+			rollout mcProgressBarDialog " Inicialize Gallery3D Database:" width:332 height:132
 			(
 				GroupBox grp_info "Progress...0%" pos:[8,4] width:316 height:120
 				bitmap bmpPop1 "Bitmap" pos:[16,20] width:300 height:80 fileName:(Micra.RootDir+"Img\\3DGall_Loader_01.bmp")

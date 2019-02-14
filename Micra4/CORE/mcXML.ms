@@ -4,11 +4,9 @@
 Global mcXML
 Global mcXMLAttrib
 Global mcXMLNode
-Global mcActionsEditor
 /*
 *@Used Structures
-	Micra --only for debug paths
-	mcActionsEditor
+	Micra
 *
 *@Used Objects
 	mcXMLAttrib
@@ -165,16 +163,18 @@ struct mcXMLNode(
 	),
 	fn getAllAttributes = (
 	
-		ret = #()
+		local ret = #()
 		attribs = _node.Attributes
 		for i = 0 to (attribs.Count - 1) do(
-			t = #()
-			item = (attribs.ItemOf i)
-			append t item.Name
-			append t item.Value
-			append ret t
+
+			local item = (attribs.ItemOf i)
+			append ret (mcXMLAttrib item.Name item.Value)
 		)
 		return ret
+	),
+	fn delAllAttributes = (
+	
+		_node.Attributes.RemoveAll()
 	),
 	fn hasAttribute attribute =(
 	
@@ -188,7 +188,7 @@ struct mcXMLNode(
 		)else(false)
 	),
 	fn getChild index = (
-		dNode = _node.ChildNodes.ItemOf index
+		local dNode = _node.ChildNodes.ItemOf index
 		if dNode.Name != "#text" then(
 			newNode = mcXMLNode()
 			newNode.init dnode
@@ -196,14 +196,27 @@ struct mcXMLNode(
 		)else(false)
 	),
 	fn getChildren = (
-		nodes = #()
+	
+		local nodes = #()
 		for i = 0 to (_node.ChildNodes.Count - 1) do(
-			dNode = _node.ChildNodes.ItemOf i
+		
+			local dNode = _node.ChildNodes.ItemOf i
 			newNode = mcXMLNode()
 			newNode.init dNode
 			append nodes newNode
 		)
 		nodes
+	),
+	fn getChildrenNames = (
+	
+		local nodes = getChildren()
+		local node_names = #()
+		for n in nodes do(
+		
+			if n.tag == "#comment" do continue --skip comments nodes
+			append node_names n.tag
+		)
+		node_names
 	),
 	fn deleteChild childNode = (
 		if classof childNode == mcXMLNode then (
@@ -211,6 +224,7 @@ struct mcXMLNode(
 			return true
 		)else(false)
 	),
+	fn deleteAllChildren = (_node.RemoveAll()),
 	/**
 	*@Usage
 		return first node at given patn or undefined
@@ -224,7 +238,7 @@ struct mcXMLNode(
 		all three ways give the same result > "Giada De Laurentiis"
 	*/
 	fn getNode node_path = (
-
+	
 		local target_node = _node.SelectSingleNode node_path
 		if target_node != undefined then (
 		
@@ -257,7 +271,7 @@ public
 	),
 	/**
 	*@Usage
-		override document content
+		override all document content
 	*@Example
 		xml = mcXML(Micra.TempDir + "xml_test_08.xml")
 		xml.fromString mcXMLTemp._template_1
@@ -321,10 +335,13 @@ public
 	*@Example
 		xml = mcXML (Micra.TempDir + "xml_test_94.xml")
 		xml.loaded --true
-		node = xml.getNode "//GALLERY/image_1"
+		node = xml.getNode "//image_1" --or "//Object/Move_To_X"
 		node.toString()
 		node.setAttribute "author" "J M. Novalis"
 		xml.toString()
+	*@Warning
+		root node name > bad: "//GALLERY/image_1" correct: "//image_1"
+		last slash > bad: "//image_1/" correct: "//image_1" 
 	*/
 	fn getNode target_path = (
 	
@@ -352,16 +369,24 @@ public
 		--New Path:
 		node_attribs = #(mcXMLAttrib "year" "2020", mcXMLAttrib "author" "D A. Makarov")
 		xml.addNode "//GALLERY/Nova/Dot" "image_1" attr:node_attribs
-		
+		or
+		xml.addNode "//GALLERY/Nova/Dot/image_1" "" attr:node_attribs
 		xml.toString()
 	*/
 	fn addNode target_path node_name attr:#() override:false = (
 	
 		if not loaded do (print "You must create root node first"; return false)
+		if node_name.count == 0 do ( --split path("//GALLERY/Nova/Dot/image_1") to target_path("//GALLERY/Nova/Dot/") and node_name("image_1")
+		
+			local path_arr = filterString target_path "/"
+			if path_arr.count < 2 do (print "Invalid path"; return false)
+			node_name = path_arr[path_arr.count] --get last path name
+			target_path = trimright target_path ("/"+node_name) --remove last path name
+		)
 		local new_node = mcXMLNode()
 		new_node.init (doc.createElement node_name)
 		new_node.setAttributes attr
-		local target_node = rootNode.getNode target_path
+		local target_node = getNode target_path
 		if target_node == undefined do ( --insert new node with full path
 			
 			--format "Path not found! Create new path [ % ].\n" target_path
@@ -392,9 +417,9 @@ public
 		local node_path = target_path + "/" + node_name
 		local found_node = rootNode.getNode node_path
 		if override and found_node != undefined then ( --replace current node
-			
-			local root = doc.DocumentElement
-			root.ReplaceChild new_node._node found_node._node
+
+			found_node.parent.ReplaceChild new_node._node found_node._node
+			--doc.DocumentElement.ReplaceChild new_node._node found_node._node
 			new_node = found_node
 			--format "replace node:%  at:%\n" found_node.tag target_path
 		
@@ -406,96 +431,74 @@ public
 		)
 		new_node
 	),
+	/**
+	*@Example 
+	
+		xml = mcXML Micra.ActionsXML
+		xml.addNode "//ACTIONS/TestCat"
+		xml.delNode "//ACTIONS/TestCat"
+		xml.toString()
+		xml.save()
+	*/
+	fn delNode target_path = (
+	
+		if not loaded do (print "You must create root node first"; return false)
+		local xml_node = getNode target_path
+		if xml_node == undefined do return false
+		xml_node.parent.RemoveChild xml_node._node
+	),
+	fn delAllNodes target_path = (
+	
+		if not loaded do (print "You must create root node first"; return false)
+		local xml_node = getNode target_path
+		if xml_node == undefined do return false
+		xml_node.deleteAllChildren()
+	),
 	fn hasAttribute attr_name = (
 		
 		rootNode.hasAttribute attr_name
 	),
-	/**
-	*@Usage
-		One way to Convert(serialize) ini file to xml file
-		ini file input:
-		//icon[1] , action[2] , Tooltip[3],
-		[Object]
-		Gallery_3D			= 221, Micra.fileInVersion 3DGallery,3D Gallery
-		Align				= 63, mcMax.alignObject(),Align
-		Align_By_2Edges    = 198,mcAction.objectAlignByTwoEdges(), Align By 2Edges
-		[Pivot]
-		Afect_Pivot_Only   = 51, mcAction.pivot_affect_only(), Afect Pivot Only
-		Align_To_Edge      = 134, mcAction.pivot_align_to_edge(), Pivot To Edge
-		...
-		xml file output:
-		<?xml version="1.0" encoding="utf-8"?>
-		<ACTIONS>
-			<Object>
-				<Gallery_3D icon="221" cmd="Micra.fileInVersion 3DGallery" tooltip="3D Gallery" />
-				<Align icon="63" cmd="mcMax.alignObject()" tooltip="Align" />
-				<Align_By_2Edges icon="198" cmd="mcAction.objectAlignByTwoEdges()" tooltip="Align By 2Edges" />
-			</Object>
-			<Pivot>
-				<Afect_Pivot_Only icon="51" cmd="mcAction.pivot_affect_only()" tooltip="Afect Pivot Only" />
-				<Align_To_Edge icon="134" cmd="mcAction.pivot_align_to_edge()" tooltip="Pivot To Edge" />
-			<Pivot>
-		...
-		</ACTIONS>
-	*@Example
-		--Write
-		xml = mcXML(Micra.RootDir + "Actions.xml") --set save location
-		attr_keys = #("icon", "cmd", "tooltip") --define attribute keys
-		xml.fromINI "ACTIONS" Micra.ActionsINI attr_keys override:true --convert ini to xml
-		xml.toString() --debug test output
-		xml.save() --save file to defined url location
-		--Read
-		xml = mcXML(Micra.RootDir + "Actions.xml") --load xml
-		mc_node = xml.getNode "//ACTIONS/Object/Detach_By_ID"
-		mc_node.getAttribute "icon"
-	*/
-	fn fromINI root_node_name ini_file attr_keys override:false = (
+	fn getAllAttributes target_path = (
 	
-		if url == undefined do (print "Url is not defined"; return false)
-		if override and doesFileExist url do deleteFile url
-		addRootNode root_node_name
-		local ini_heads = getIniSetting ini_file
-		for head in ini_heads do (
-		
-			local ini_keys = getIniSetting ini_file head
-			for key in ini_keys do (
-
-				local data = mcActionsEditor.getActionData head key
-				--format "key:% data:%\n" key (data.toString())
-				if superClassOf data != StructDef do continue
-				local attribs = #()
-				for attr in attr_keys do (
-				
-					local val_str = data.get attr
-					val_str = trimLeft val_str --remove spaces at begin
-					val_str = trimRight val_str --remove spaces at end
-					attribs += #(mcXMLAttrib attr val_str)
-				)
-				--format "attribs:%\n" attribs
-				local node_path = "//"+root_node_name+"/" + head
-				addNode node_path key attr:attribs
-			)
-		)
+		if not loaded do (print "You must create root node first"; return false)
+		local xml_node = getNode target_path
+		if xml_node == undefined do return false
+		xml_node.getAllAttributes()
+	),
+	fn delAllAttributes target_path = (
+	
+		if not loaded do (print "You must create root node first"; return false)
+		local xml_node = getNode target_path
+		if xml_node == undefined do return false
+		xml_node.delAllAttributes()
+	),
+	fn swapAttributes path_a path_b = (
+	
+		local node_a = getNode ("//"+path_a)
+		local node_b = getNode ("//"+path_b)
+		if node_a == undefined or node_b == undefined do return false
+		local cotent_a = node_a.getAllAttributes() 
+		local cotent_b = node_b.getAllAttributes() 
+		--format "BEFORE nodes:\na:%\nb:%\n" (node_a.toString()) (node_b.toString())
+		node_a.delAllAttributes()
+		node_b.delAllAttributes()
+		node_a.setAttributes cotent_b
+		node_b.setAttributes cotent_a
+		--format "AFTER nodes:\na:%\nb:%\n" (node_a.toString()) (node_b.toString())
+	),
+	fn saveSimple = (if loaded then (doc.save url; true) else false), --save with intact formatting
+	fn save = ( --save nice formated
+	
+		if not loaded or url == undefined do (print "Unable to save XML. Documet is empty or URL is not set. "; return false)
+		local writer = dotNetClass "System.Xml.XmlTextWriter"
+		local wSettings = dotNetObject "System.Xml.XmlWriterSettings"
+		wSettings.indent = true
+		local w = writer.create url wSettings
+		doc.writeContentTo w
+		w.close()
 		true
 	),
-	fn save = (
-	
-		if not loaded or url == undefined do (
-		
-			print "Unable to save. URL is not set or documet is empty. "
-			return false
-		)
-		--if loaded then (doc.save url; true) else false
-		if loaded == true then(
-			local writer = dotNetClass "System.Xml.XmlTextWriter"
-			local wSettings = dotNetObject "System.Xml.XmlWriterSettings"
-			wSettings.indent = true
-			local w = writer.create url wSettings
-			doc.writeContentTo w
-			w.close()
-			true
-		) else false
-	),
+	fn remove = (if exists() do deleteFile url),
 	on create do (
 	
 		--doc.PreserveWhitespace = false
@@ -513,8 +516,24 @@ public
 			loaded = true
 		) catch ( --unable to load XML file
 			
-			format "Error : mcXMLNode > create: %\n" (getCurrentException())	
+			format "Error : mcXML > create > Unable to load XML File:[ % ] Error:\n%\n" url (getCurrentException())	
 		)
 	)
 	/*<end>*/
 )	
+
+
+
+
+--Removed > 
+	/**
+	*@Usage
+		insert - replace node with xml string
+	
+	fn fromStringAt xml_str node_path override:false = (
+	
+		if override do (
+		
+			--remove node if exists
+		)
+	),*/

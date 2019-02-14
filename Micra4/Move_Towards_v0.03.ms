@@ -52,7 +52,7 @@ rollout mcMoveTowardsDialog "" width:200 height:76
 			3: lastRotZ
 		)
 	)
-	on mcMoveTowardsDialog close           do(mcFile.saveIniDialog "mcMoveTowardsDialog" "Properties_2")
+	on mcMoveTowardsDialog close           do(mcFile.saveDialogSettings "mcMoveTowardsDialog" "Properties_2")
 	on mcMoveTowardsDialog rbuttonup pos   do(destroyDialog mcMoveTowardsDialog)
 	-->Move Dialog Mode
 	on mcMoveTowardsDialog lbuttondown pos do(dMove = true ; DmPos = pos)
@@ -68,4 +68,4 @@ rollout mcMoveTowardsDialog "" width:200 height:76
 		saveRdoAxis val
 	)
 )
-mcCall.createIniDialog "mcMoveTowardsDialog" "Properties_2"
+mcCall.createXMLDialog "mcMoveTowardsDialog" "Properties_2"

@@ -33,7 +33,7 @@ try ( mcMicraDialog.close() ) catch()
 	-->Locals-----------------------------------------------------------------
 	local sec = 60000
 	local netDMove = false, netDmPos
-	local last_profile = execute (mcFile.saveLoadIniSetings head:"Interface" key:"lastprofile" action:#load)
+	local last_profile = execute (mcFile.readSettings Micra.UserSettings "Interface/lastprofile")
 	local profiles = #("DefaultColor", "UserColor", "ForestColor", "EarthColor", "MoonColor", "SeaColor", "SunColor", "Close")
 	local head_str = profiles[last_profile]
 	local bar_height = 14
@@ -165,7 +165,7 @@ try ( mcMicraDialog.close() ) catch()
 			else if isGroup sel then (for o in sel where isGroupHead o collect o)[1].name = s.text
 		)
 	)
-	fn onPickerMouseClick s a = (Micra.fileInVersion "Color_Palete")
+	fn onPickerMouseClick s a = (mcFile.fileInVersion "Color_Palete")
 --||	
 	fn onGotFocus = 
 	(	
@@ -178,15 +178,14 @@ try ( mcMicraDialog.close() ) catch()
 		resumeEditing which:CommandPanel
 		CompleteRedraw()
 	)
-	fn loadMicraDialogs =
-	(
-		if not doesFileExist Micra.TempProfileIni do return false
+	fn isDialogActive dname = (
+
+		mcFile.readSettings Micra.UserProfile ("Properties_1/" + dname) type:"active" == "true"
+	)
+	fn loadMicraDialogs = (
 		
-		local P1_Dialogs = getINISetting Micra.TempProfileIni "Properties_1" 
-		for i in P1_Dialogs where (mcFile.getIniDataFromArray Micra.TempProfileIni "Properties_1" i 1) == true do
-		(
-			mcCreateNetDynamicDialog i
-		)
+		local P1_Dialogs = mcFile.readSettings Micra.UserProfile "Properties_1" type:"keys" --collect all micra dialog names
+		for n in P1_Dialogs where isDialogActive n do mcCreateNetDynamicDialog n --create dialogs
 	)
 	fn onOpenForm s a = 
 	(
@@ -200,7 +199,8 @@ try ( mcMicraDialog.close() ) catch()
 	(
 		--print "micra closed"
 		s.tag.value.timer.stop()
-		mcFile.saveIniDialog s.name "Properties_2"
+		mcFile.saveDialogSettings s.name "Properties_2"
+		
 		Micra.Unload self:false --false self, prevent depency loop
 	)
 	fn changeBackcolor s a = ( 
@@ -273,17 +273,14 @@ try ( mcMicraDialog.close() ) catch()
 	--save registred dialogs pos and size to current profile
 	fn saveCurrentProfile = (
 		--get all registred dialogs
-		local dia_names_1 = getIniSetting Micra.TempProfileIni "Properties_1" --get micra dialogs
-		local dia_names_2 = getIniSetting Micra.TempProfileIni "Properties_2" --get all other dialogs
-		--save all visible dialogs to /Profile_Temp.ini
-		for n in dia_names_1 do mcFile.saveIniDialog n "Properties_1"
-		for n in dia_names_2 do mcFile.saveIniDialog n "Properties_2"
-		--override current profile with temp one
-		local current_profile_index = getIniSetting Micra.UserSettings "Settings" "CurrentProfile"
-		local active_file = Micra.UserDir + "Profile_"+ current_profile_index + ".ini"
-		if doesFileExist active_file do deleteFile active_file
-		copyFile Micra.TempProfileIni active_file 
-		local current_profile_name = getIniSetting Micra.UserSettings "Profiles" current_profile_index
+		local dia_names_1 = mcFile.readSettings Micra.UserProfile "Properties_1" type:"keys" --get micra dialogs
+		local dia_names_2 = mcFile.readSettings Micra.UserProfile "Properties_2" type:"keys" --get all other dialogs
+		--save all visible dialogs to /Profile_.ini
+		for n in dia_names_1 do mcFile.saveDialogSettings n "Properties_1"
+		for n in dia_names_2 do mcFile.saveDialogSettings n "Properties_2"
+		--trace info
+		local current_profile_index = mcFile.readSettings Micra.UserSettings "Settings/CurrentProfile"
+		local current_profile_name = mcFile.readSettings Micra.UserSettings ("Profiles/menu_"+current_profile_index)
 		format "% > saveCurrentProfile > Profile:[%] has been Saved!\n" Micra.version current_profile_name
 	)
 
@@ -293,7 +290,7 @@ try ( mcMicraDialog.close() ) catch()
 		case menu_item_name of (	
 		
 			"Save":saveCurrentProfile()
-			"Manage":Micra.fileInVersion "Manage_Profiles"
+			"Manage":mcFile.fileInVersion "Manage_Profiles"
 			default:( --for any other names  - -> load profile by name
 
 				local keys = for i = 1 to 8 collect (getIniSetting Micra.UserSettings "Profiles" (i as string)) --collect all profile names
@@ -315,17 +312,17 @@ try ( mcMicraDialog.close() ) catch()
 		--print (s.PointToScreen a.location).x
 		case s.name of
 		(
-			"Help":(Micra.fileInVersion "Help")
+			"Help":(mcFile.fileInVersion "Help")
 			"Customize":
 			(
 				if classOf mcCustomizeDialog == dotNetObject and not mcCustomizeDialog.isDisposed and not keyboard.controlPressed  --press ctrl to force reload
 				then mcCustomizeDialog.show()
-				else Micra.fileInVersion "Customize"
+				else mcFile.fileInVersion "Customize"
 			)
 			"Toolbars":
 			(
 				local mnu = msc.mnu_toolbars
-				local keys = getIniSetting Micra.TempProfileIni "Properties_1"
+				local keys = mcFile.readSettings Micra.UserProfile "Properties_1" type:"keys"
 				if msc.mnu_t_items.count == 0 do
 				(
 					mnu.BackColor = netDrColor (mcUIColors.get #back)
@@ -333,7 +330,7 @@ try ( mcMicraDialog.close() ) catch()
 					mnu.ShowImageMargin = false
 					for i in keys do
 					(
-						local lbl = mcFile.getIniDataFromArray Micra.TempProfileIni "Properties_1" i 4
+						local lbl = mcFile.readSettings Micra.UserProfile ("Properties_1/"+i) type:"title"
 						itm = mnu.Items.Add lbl
 						itm.tag = i
 						dotnet.addeventhandler itm "Click" showHideForm
@@ -342,7 +339,7 @@ try ( mcMicraDialog.close() ) catch()
 				)
 				for i = 1 to keys.count do
 				(
-					local enabled = (mcFile.getIniDataFromArray Micra.TempProfileIni "Properties_1" keys[i] 1)
+					local enabled = execute (mcFile.readSettings Micra.UserProfile ("Properties_1/" + keys[i]) type:"active")
 					if enabled 
 					then 
 					(
@@ -441,8 +438,7 @@ try ( mcMicraDialog.close() ) catch()
 	fn inicializeInterface form mcs = (
 	
 		form.name = "mcMicraDialog"
-		local fpos = (mcFile.getIniDataFromArray Micra.TempProfileIni "Properties_2" "mcMicraDialog" 2)
-		if fpos == undefined do fpos = (mcFile.getIniDataFromArray Micra.DefaultProfileIni "Properties_2" "mcMicraDialog" 2)
+		local fpos = execute (mcFile.readSettings Micra.UserProfile "Properties_2/mcMicraDialog" type:"pos")
 		form.StartPosition = form.StartPosition.Manual
 		
 		form.MinimumSize = netDrSize [form_size.x, mcs.bar_height + mcs.border_offset*2]

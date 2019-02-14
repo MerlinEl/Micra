@@ -57,4 +57,4 @@ struct MICRA_INFO (
 	/*<end>*/	
 )
 --create instance
-Global mcInfo = Micra.instanceStructure MICRA_INFO "mcInfo"
+Global mcInfo = mcStructMan.instanceStructure MICRA_INFO "mcInfo"

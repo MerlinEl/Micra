@@ -105,7 +105,7 @@ public
 	/*<end>*/
 )
  --create instance
-Global mcDate = Micra.instanceStructure MICRA_DATE "mcDate"
+Global mcDate = mcStructMan.instanceStructure MICRA_DATE "mcDate"
 
 
 

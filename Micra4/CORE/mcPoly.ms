@@ -163,4 +163,4 @@ struct MICRA_POLY
 	/*<end>*/
 )
 --create instance
-Global mcPoly = Micra.instanceStructure MICRA_POLY "mcPoly"
+Global mcPoly = mcStructMan.instanceStructure MICRA_POLY "mcPoly"

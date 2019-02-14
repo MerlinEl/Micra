@@ -329,7 +329,7 @@ rollout mcVertexColorDialog "Vertex Color v1.02" width:408 height:256
 createDialog mcVertexColorDialog
 
 /*
-mcCall.createIniDialog "mcScriptManDialog" "Properties_2"
-mcScriptManDialog.grp_title.text = "Script Manager: v" + (Micra.getScriptVersion "Script_Manager") --update script title with version
+mcCall.createXMLDialog "mcScriptManDialog" "Properties_2"
+mcScriptManDialog.grp_title.text = "Script Manager: v" + (mcFile.getScriptVersion "Script_Manager") --update script title with version
 on mcScriptManDialog close do (mcCall.saveIniDialog "mcScriptManDialog" "Properties_2")
 */

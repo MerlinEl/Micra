@@ -120,4 +120,4 @@ struct MICRA_COLOR (
 	/*<end>*/
 )
 --create instance
-Global mcColor = Micra.instanceStructure MICRA_COLOR "mcColor"
+Global mcColor = mcStructMan.instanceStructure MICRA_COLOR "mcColor"

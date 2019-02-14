@@ -110,7 +110,7 @@ rollout mcObjIDDialog "" width:144 height:84
 	( 
 		callbacks.removeScripts id:#mcSetObjectIDCalbacks --Remove any existing callbacks with this ID.
 		deleteAllChangeHandlers id:#mcSetFaceIDCalbacks --Remove any existing callbacks with this ID.
-		mcFile.saveIniDialog "mcObjIDDialog" "Properties_2"
+		mcFile.saveDialogSettings "mcObjIDDialog" "Properties_2"
 	)
 	-->MoveMode
 	on mcObjIDDialog lbuttondown pos do (dMove = true; DmPos = pos; if not keyboard.shiftPressed do pushprompt "Pres Shift To Move...")
@@ -175,4 +175,4 @@ rollout mcObjIDDialog "" width:144 height:84
 		)
 	)
 )
-mcCall.createIniDialog "mcObjIDDialog" "Properties_2"
+mcCall.createXMLDialog "mcObjIDDialog" "Properties_2"

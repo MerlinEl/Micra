@@ -103,7 +103,7 @@ rollout mcViewportRecorderDialog "" width:316 height:124
 				pb_bar.value = 100.*i/captured_frames.count
 			)
 			pb_bar.value = 0
-			Micra.fileInVersion "Gif_Compiller"
+			mcFile.fileInVersion "Gif_Compiller"
 		)
 		else 
 		(
@@ -134,7 +134,7 @@ rollout mcViewportRecorderDialog "" width:316 height:124
 	on mcViewportRecorderDialog close do
 	(
 		unregisterRedrawViewsCallback displayRect
-		mcFile.saveIniDialog "mcViewportRecorderDialog" "Properties_2"
+		mcFile.saveDialogSettings "mcViewportRecorderDialog" "Properties_2"
 		completeRedraw()
 	)
 	--on btn_browse pressed do if doesFileExist temp_save_path do ShellLaunch temp_save_path ""
@@ -189,14 +189,14 @@ rollout mcViewportRecorderDialog "" width:316 height:124
 	on btn_play pressed do
 	(
 		local jpg_files = getFiles (temp_save_path + "*.jpg")
-		if jpg_files.count != 0 do Micra.fileInVersion "Gif_Compiller"
+		if jpg_files.count != 0 do mcFile.fileInVersion "Gif_Compiller"
 		--mcGifCompillerDialog.temp_save_path = temp_save_path
 		--mcGifCompillerDialog.gif_file_name  = edt_path.text
 		--playGifAnimation edt_path.text
 	)
 )
 --createDialog mcViewportRecorderDialog pos:[176,88] style:#(#style_border)
-mcCall.createIniDialog "mcViewportRecorderDialog" "Properties_2"
+mcCall.createXMLDialog "mcViewportRecorderDialog" "Properties_2"
 
 /*
 Global mcViewportRecFrameL

@@ -12,7 +12,7 @@
 	Manage multilistbox components
 *
 *@Example	
-	Micra.import "mcMsxInterfaceMLB" --force:true
+	mcStruct.import "mcMsxInterfaceMLB" --force:true
 	::mcMsxInterfaceMLB.moveItems lbx_a #up
 	::mcMsxInterfaceMLB.moveItems lbx_a #down
 *
@@ -90,4 +90,4 @@ struct MICRA_MSX_INTERFACE_MULTILISTBOX	(
 	/*<end>*/
 )	
  --create instance
-Global mcMsxInterfaceMLB = Micra.instanceStructure MICRA_MSX_INTERFACE_MULTILISTBOX "mcMsxInterfaceMLB"
+Global mcMsxInterfaceMLB = mcStructMan.instanceStructure MICRA_MSX_INTERFACE_MULTILISTBOX "mcMsxInterfaceMLB"

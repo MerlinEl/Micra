@@ -188,7 +188,7 @@ rollout smgDialog "Smoothing Groups & ID" width:144 height:240
 	(
 		unregisterRedrawViewsCallback mcSMG.isInPolygonLevel
 		deleteAllChangeHandlers id:#IDsmgSelection
-		--mcFile.saveIniDialog "smgDialog" "Properties_2"
+		--mcFile.saveDialogSettings "smgDialog" "Properties_2"
 	)
 	-----------------------------------------------------------------------------
 	/* Actions */

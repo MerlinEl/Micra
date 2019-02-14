@@ -46,8 +46,8 @@ struct mcAction (
 				#Relax         : modPanel.addModToSelection (Relax         ()) ui:on
 				#CameraMap     : modPanel.addModToSelection (CameraMap     ()) ui:on
 				#Skin          : modPanel.addModToSelection (Skin          ()) ui:on
-				#Conform       : Micra.fileInVersion "Conform"
-				#mbFracture    : Micra.fileInVersion "mbFracture"
+				#Conform       : mcFile.fileInVersion "Conform"
+				#mbFracture    : mcFile.fileInVersion "mbFracture"
 				#ResetXForm    : 
 				(
 					ResetXForm sel
@@ -78,7 +78,7 @@ struct mcAction (
 		)
 		catch (format "Failed to add modifier: %\n" mod)
 		
-		local active = mcFile.getIniDataFromArray Micra.TempProfileIni "Properties_1" "mc_Dialog_F" 1
+		local active = mcFile.readSettings Micra.UserProfile "Properties_1/mc_Dialog_F" type:"pos" == "true" --if modifiers dialog was opened in last session
 		if not keyboard.shiftPressed and not active and mc_Dialog_F != undefined do destroyDialog mc_Dialog_F
 	),
 	fn translateCubeMapToAway3D = 
@@ -324,7 +324,7 @@ struct mcAction (
 		undo "Object's to Ground" on
 		(
 			if keyboard.shiftPressed 
-			then (Micra.fileInVersion "Object_Planter")
+			then (mcFile.fileInVersion "Object_Planter")
 			else if selection.count != 0 then
 			(
 				for i in selection do (i.pos.z = i.pivot.z - i.min.z)
@@ -1418,13 +1418,15 @@ struct mcAction (
 	
 		local sel = selection as array
 		local obj = sel[1]
+		local xml_file = Micra.UserDir + "Hold_Fetch_Selection_Data.xml"
 		if sel.count > 1 then ( --save selected objects in Set List
 		
-			if keyboard.controlPressed --save selection in to temp ini
+			if keyboard.controlPressed --save selection in to xml
 			then (
-			
-				if not doesFileExist Micra.TempINI do return false
-				for i in sel do setIniSetting Micra.TempINI "Names" i.name ""
+
+				mcFile.delSettings xml_file "Selection" type:"keys"
+				mcFile.saveSettings xml_file "Selection" (for i in sel collect i.name) type:"keys"
+		
 			) else (
 			
 				selectionSets["objSel"] = selection
@@ -1446,15 +1448,17 @@ struct mcAction (
 	(
 		local sel = selection as array
 		local obj = selection[1]
+		local xml_file = Micra.UserDir + "Hold_Fetch_Selection_Data.xml"
 		undo "Fetch Selection" on (
 
 			if keyboard.altPressed and classOf mcGM.getParam "selected_object_position" == point3 and selection.count == 1 then ( --when Alt pressed restore single object pos
 			
 				selection[1].pos = mcGM.getParam "selected_object_position"
 				
-			) else if keyboard.controlPressed and sel.count != 0 then ( --load saved selection from temp ini
+			) else if keyboard.controlPressed and sel.count != 0 then ( --load selection from xml
 			
-				local names = getIniSetting Micra.TempINI "Names"
+				if not doesFileExist xml_file do return false
+				local names = mcFile.readSettings xml_file "Selection" type:"keys"
 				if names.count != sel.count do return false
 				for i=1 to sel.count do sel[i].name = names[i]
 				
@@ -2392,7 +2396,7 @@ struct mcCreate (
 	),
 	fn grid3p =	
 	(	
-		Micra.fileInVersion "Create_3PGrid"
+		mcFile.fileInVersion "Create_3PGrid"
 	),
 	fn cereateChecker color1:blue color2:white =
 	(
@@ -2582,7 +2586,8 @@ struct mcShell (
 
 	fn getSource = getSourceFileName(), --get path of this script
 	fn openApp app_name = (
-	
+		
+		--format "app name:%\n" app_name
 		case app_name of(
 		
 			"calc": ShellLaunch "C:\\WINDOWS\\system32\\calc.exe"

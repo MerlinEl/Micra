@@ -82,7 +82,7 @@ private
 	fn onCloseForm s a = (
 		
 		--format " save form:%  pos:% size:%\n" s.name (s.location.toString()) (s.size.toString())
-		mcFile.saveIniDialog s.name "Properties_2"
+		mcFile.saveDialogSettings s.name "Properties_2"
 	),
 	-- Custom  Functions
 	fn grabImage = (
@@ -165,7 +165,7 @@ private
 		lblT.bounds = mcDotnet.dRect [border_offset, border_offset] [size.x - border_offset*10 , bar_height]
 		lblT.BackColor = mcDotnet.uiColor #back
 		lblT.ForeColor = mcDotnet.uiColor #text
-		lblT.Text = "Dialog Template v" + (Micra.getScriptVersion "Dialog_Template") --update script title with version
+		lblT.Text = "Dialog Template v" + (mcFile.getScriptVersion "Dialog_Template") --update script title with version
 		
 		--min max button
 		btnMin.FlatStyle = btnMin.FlatStyle.flat

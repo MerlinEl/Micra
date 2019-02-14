@@ -39,7 +39,7 @@ if mcRenameDialog != undefined then destroyDialog mcRenameDialog
 		on mcRenameDialog rbuttonup pos do (destroyDialog mcRenameDialog )
 		on mcRenameDialog close do 
 		(
-			mcFile.saveIniDialog "mcRenameDialog" "Properties_2"
+			mcFile.saveDialogSettings "mcRenameDialog" "Properties_2"
 			checked = false ; updateToolbarButtons() 
 		)
 		-->MoveMode
@@ -137,7 +137,7 @@ its name to remove the requested number. Rename cancelled." Title:"Suffix Rename
 on execute do
 	(
 	-----------------------------------------------------------------------------------------------
-	mcCall.createIniDialog "mcRenameDialog" "Properties_2"  modal:false 
+	mcCall.createXMLDialog "mcRenameDialog" "Properties_2"  modal:false 
 	checked = true
 	-----------------------------------------------------------------------------------------------
 	)

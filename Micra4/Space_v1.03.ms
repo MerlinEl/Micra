@@ -106,7 +106,7 @@ rollout mcSpaceDialog "" width:392 height:184
 	)
 
 	on mcSpaceDialog open do()
-	on mcSpaceDialog close do mcFile.saveIniDialog "mcSpaceDialog" "Properties_2"
+	on mcSpaceDialog close do mcFile.saveDialogSettings "mcSpaceDialog" "Properties_2"
 	-->MoveMode
 	on mcSpaceDialog lbuttondown pos do (dMove = true; DmPos = pos; if not keyboard.shiftPressed do pushprompt "Pres Shift To Move...")
 	on mcSpaceDialog lbuttonup   pos do (dMove = false; pushprompt "")
@@ -141,4 +141,4 @@ rollout mcSpaceDialog "" width:392 height:184
 		undo "Distribute Objects" on distributeSelectedObjects()
 	)
 )
-mcCall.createIniDialog "mcSpaceDialog" "Properties_2"
+mcCall.createXMLDialog "mcSpaceDialog" "Properties_2"

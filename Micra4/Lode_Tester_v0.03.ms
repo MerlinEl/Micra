@@ -99,7 +99,7 @@ rollout mcLodeTestDialog "Lode Tester:" width:328 height:164
 	)
 	on mcLodeTestDialog close do
 	(
-		mcFile.saveIniDialog "mcLodeTestDialog" "Properties_2"
+		mcFile.saveDialogSettings "mcLodeTestDialog" "Properties_2"
 	)
 	on mcLodeTestDialog rbuttonup   pos do(destroyDialog mcLodeTestDialog)
 	-->MoveMode
@@ -124,4 +124,4 @@ rollout mcLodeTestDialog "Lode Tester:" width:328 height:164
 	on btn_add pressed do add_obj()
 	on btn_rem pressed do rem_obj()
 )
-mcCall.createIniDialog "mcLodeTestDialog" "Properties_2"
+mcCall.createXMLDialog "mcLodeTestDialog" "Properties_2"

@@ -165,4 +165,4 @@ struct MICRA_MATH (
 	/*<end>*/
 )
 --create instance
-Global mcMath = Micra.instanceStructure MICRA_MATH "mcMath"
+Global mcMath = mcStructMan.instanceStructure MICRA_MATH "mcMath"

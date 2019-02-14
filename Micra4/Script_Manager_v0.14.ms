@@ -339,7 +339,7 @@
 		--commit file in to server
 		/*if (queryBox ("Do you wish to send update in to sever?") title:" Micra:") do
 		(
-			local server_file = (getIniSetting Micra.DefaultSettings "Paths" "WorkServer")+"\Micra\Micra4.zip"
+			local server_file = (mcFile.readSettings Micra.DefaultSettings "Paths/WorkServer")+"\Micra\Micra4.zip"
 			--format "server_path:%\tlocal_path:%\n" server_file backup_file
 			if doesFileExist server_file do deleteFile server_file
 			copyFile backup_file server_file
@@ -594,7 +594,7 @@
 		tv_dirs.ExpandAll()
   		setFocus edt_cmd
   	)
-	on mcScriptManDialog close do (mcFile.saveIniDialog "mcScriptManDialog" "Properties_2")
+	on mcScriptManDialog close do (mcFile.saveDialogSettings "mcScriptManDialog" "Properties_2")
 	on mcScriptManDialog rbuttonup pos   do(destroyDialog mcScriptManDialog)
 	-->MoveMode
 	on mcScriptManDialog lbuttondown pos do (dMove = true; DmPos = pos; if not keyboard.shiftPressed do pushprompt "Pres Shift To Move...")
@@ -693,8 +693,8 @@
 	on btn_create_new_version pressed do createNewFileVersion()
 --|| --Actions Buttons
   )
-mcCall.createIniDialog "mcScriptManDialog" "Properties_2"
-mcScriptManDialog.grp_title.text = "Script Manager: v" + (Micra.getScriptVersion "Script_Manager") --update script title with version
+mcCall.createXMLDialog "mcScriptManDialog" "Properties_2"
+mcScriptManDialog.grp_title.text = "Script Manager: v" + (mcFile.getScriptVersion "Script_Manager") --update script title with version
   
   
   /*

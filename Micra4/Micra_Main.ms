@@ -8,6 +8,7 @@
 ----------------------------------------------------------------------------
 
 Global Micra
+Global McFile
 Global mcTriangleCounter = false --TODO > find another way used: [Micra_Macro.mcr]
 
 struct MICRA_STRUCTURE (
@@ -16,140 +17,49 @@ struct MICRA_STRUCTURE (
 	@Usage Debug Micra and Tools
 	@Legend
 		0 : debug disabled
+		4 : structures loading
 		8 : unbound all froms from 3DsMax, used at Notepad++ execute
 	*/
-	debug				= 0,
+	debug				= 4,
 	loaded				= false,
 	version				= "Micra IV",
 	borndate			= "5/4/2006 12:00:00 AM",
 	username			= substituteString sysInfo.username " " "_", --replace wihitespaces with "_"
 	files_list			= #(),
 	restart_need		= false,
+	max_custom_controls = undefined,
+	--> directory structure
 	RootDir				= getFilenamePath (getSourceFileName()), --here is current version of Micra
 	CoreDir				= RootDir + "CORE\\", --here is all sturctures(classes)
 	TempDir				= RootDir + "Temp\\",
 	AutorunDir			= RootDir + "Autorun\\", --all plugins goes here, also Micra's autorun file	
 	RepositoryDir		= (pathConfig.removePathLeaf RootDir) + "\\", --here is all Micra's versions and other Resources
-	ResourcesDir 		= RepositoryDir + "repo_sync\\", --Micra's Shared Resources, Backups, Max Icons, Ms Library, ...
+	ResourcesDir 	= RepositoryDir + "repo_sync\\", --Micra's Shared Resources, Backups, Max Icons, Ms Library, ...
 	AppsDir				= RootDir + "App\\",
 	DefaultDir			= RootDir + "Default\\",
-	DefaultSettings		= RootDir + "Settings.ini", --store file versions
-	UserDir				= RootDir + "User\\" + username + "\\",
-	UserSettings		= UserDir + "Settings.ini", --store user profile
-	DefaultUserSettings	= DefaultDir + "Settings.ini", --defaul user profile
-	EmptyProfileIni		= DefaultDir + "Profile_Empty.ini", --profile without buttons and tollbars 
-	TempProfileINI		= DefaultDir + "Profile_Temp.ini", --saved current session
-	DefaultProfileIni	= DefaultDir + "Profile_Default.ini", --default profile 
-	TempIni				= UserDir + "Temp.ini",
 	ImagesPath 			= RootDir + "Img\\", --all images here
-	ActionsIni			= RootDir + "Actions.ini",
-	ActionsHelpIni		= RootDir + "Actions_Help.ini",
+	UserDir				= RootDir + "User\\" + username + "\\",
 	MaxRootDir			= getDir #maxroot,
 	MaxUserDir			= pathConfig.removePathLeaf (getDir #userMacros),
 	MaxPluginsDir		= MaxUserDir + "\\MicraPlugins\\", --all plugins goes here, also Micra's autorun file	
 	Macro				= MaxUserDir + "\\usermacros\\Micra_Macro.mcr",
-	MaxUserSettings		= MaxUserDir + "\\Plugin.UserSettings.ini",
+	MaxUserSettings		= MaxUserDir + "\\Plugin.UserSettings.ini", --only this wil stay INI
 	ImgPath				= RootDir + "Img\\", 
 	IconI				= RootDir + "Img\\mcIcons_24_480x480i.bmp",
 	IconM				= RootDir + "Img\\mcIcons_24_480x480m.bmp",
-	max_custom_controls = undefined,
+	-- > setting structure
+	DefaultSettings		= RootDir + "Settings.xml", --default settings
+	ActionsXML			= RootDir + "Actions.xml",
+	ActionsHelpXML		= RootDir + "Actions_Help.xml",	
+	UserSettings			= UserDir + "Settings.xml", --copy of DefaultSettings
+	UserProfile				= "", --here is stored user settings (dialogs position and size, button actions) > path will be defined later 
+	--functions
+	fn getSource = getSourceFileName(), --get path of this script
 	--Set Memory Allocation in MB
 	fn increaseMemory mb = (
 	
 		local hsize = mb*1000000
 		if heapSize < hsize do heapSize = hsize
-	),
-	/**
-	*@Usage
-		import a sturcture(class) from CoreDir(file) as Global
-	*@Example 
-		Micra.import "mcMsxInterface" --force:true
-	*/
-	fn import struct_name force:false = (
-		
-		--check if structure is already loaded
-		if execute struct_name != undefined and not force do return OK
-		--find structure file and load it as global variable
-		local file = CoreDir + struct_name + ".ms"
-		if doesFileExist file then (
-		
-			try (
-				fileIn file
-				format "% > import > structure [  %  ]  was success!\n" version struct_name
-			
-			) catch (
-			
-				format "% > import > structure [  %  ]  was failed!\n\tError:%\n" version struct_name (getCurrentException())
-			)
-		) else (
-		
-			format "% > import > structure [  %  ]  was failed!\n\tUnable locate file [ % ]\n" version struct_name file
-		)
- 	),
-	fn importAll = (/*not need yet*/),
-		/*
-	*	@example
-	*	struct test1 (a, b)
-	*	Global mcTest = Micra.instanceStructure test1
-	*/
-	fn instanceStructure struct_object instance_name = (
-
-		local structure_instance
-		try (
-			structure_instance = struct_object()
-			format"% > instance structure > [  %  ] was success!\n" version instance_name
-		) catch (
-
-			format"% > instance structure > [  %  ] was failed!\n\tError:%\n" version instance_name (getCurrentException())
-		)
-		structure_instance
-	),
-	-->  OLD File in Version
-	--return version "1.02" or empty string ""
-	fn getScriptVersion script_name = (
-		
-		getIniSetting DefaultSettings "Version" script_name
-	),
-	--get script[in root dir] with his version > "E:\Aprog\Orien\Micra\Micra4\Struct_Action_v0.03.ms"
-	fn getScriptPath script_name = (
-		
-		local script_version = getScriptVersion script_name
-		rootDir + script_name + "_v" + script_version + ".ms"
-	),
-	/**
-	*@Usage 
-		run a RootDir(file) as application(tool)
-	*@Example 
-		fileInVersion "Deep_Isolate"
-	*/
-	fn fileInVersion script_name = (	
-	
-		if classOf script_name != String do (
-			
-			format "% > fileInVersion > ScriptName[ % ], is not valid.\n" script_name
-			return false
-		)
-		local f_version = getScriptVersion script_name
-		if f_version == "" do(
-		
-			format "% > fileInVersion > File[ % ], is not registred in [  %  ]\n" script_name DefaultSettings
-			return false
-		)
-		local file = RootDir + script_name + "_v" + f_version + ".ms"
-		if doesFileExist file then (
-		
-			try (
-				fileIn file
-				format "% > fileInVersion > Load tool [  %  ]  was success!\n" version script_name
-			
-			) catch (
-			
-				format "% > fileInVersion > Load tool [  %  ]  was failed!\n\tError:%\n" version script_name (getCurrentException())
-			)
-		) else (
-		
-			format "% > fileInVersion > Load tool [  %  ]  was failed!\n\tUnable locate file [ % ]\n" version script_name file
-		)
 	),
 	--> Clean and Close Micra
 	fn unload self:true = (
@@ -163,7 +73,7 @@ struct MICRA_STRUCTURE (
 		) else (
 		
 			--> Close Micra's Dialogs
-			local dialogs_names	= join (getINISetting TempProfileIni "Properties_1") (getIniSetting TempProfileIni "Properties_2")
+			local dialogs_names	= join (getINISetting UserProfile "Properties_1") (getIniSetting UserProfile "Properties_2")
 			for n in dialogs_names do (
 			
 				if n == "mcMicraDialog" do continue --close all except Micra dialog (prevent endless loop)
@@ -212,58 +122,41 @@ mc_Dialog_DropTarget = undefined
 	),
 	fn restoreToDefault = (
 	
-		setIniSetting UserSettings "Settings" "CurrentProfile" "8" -- Set start profile to default
+		mcFile.saveSettings Micra.UserSettings "Settings/CurrentProfile" "8" -- Set start profile to default
 		reload()
 	),
 	fn setProfile index = (
 	
-		setIniSetting UserSettings "Settings" "CurrentProfile" (index as string) -- Set start profile to default
+		mcFile.saveSettings Micra.UserSettings "Settings/CurrentProfile" (index as string) -- Set start profile to index(1-8)
 		reload()
 	),
-	--> check Micra's system files
-	fn initStructureFiles = (
+	--Get last used Profile ( Profile_1.xml, ..., Profile_8.xml)
+	fn loadUserProfile = (
 	
-		if not doesFileExist DefaultSettings do return #(DefaultSettings)
-		local ms_names			= getIniSetting DefaultSettings "Version" 
-		local struct_names		= getIniSetting DefaultSettings "Structures" 
-		local system_ini_names	= getIniSetting DefaultSettings "SystemIni"
-		local default_ini_names	= getIniSetting DefaultSettings "UserIniDefault"
-		files_list				= #(RootDir+"Micra.ms")
-
-		--> collect ms and mcr
-		for i in ms_names  do files_list += #(RootDir+i+"_v"+getIniSetting DefaultSettings "Version" i+".ms") 
-		--> collect struct files
-		for i in struct_names do files_list += #(CoreDir+i+".ms") 
-		--> collect ini 
-		for i in system_ini_names do files_list += #(RootDir+i+".ini")
-		--> collect default ini
-		for i in default_ini_names do files_list += #(DefaultDir+i+".ini")
-		--> return missing files
-		return (for f in files_list where not doesFileExist f collect f)
+		local last_profile_index = mcFile.readSettings Micra.UserSettings "Settings/CurrentProfile"
+		local last_profile_name = "Profile_"+ last_profile_index + ".xml"
+		UserProfile = UserDir + last_profile_name
 	),
 	--> check user files and reconstruct missing
 	--force reconstruct: Micra.initUserProfile force:true
 	fn initUserProfile force:false = (
 		
 		if not doesFileExist UserDir do (makeDir UserDir all:true)
-		if not doesFileExist UserDir do (
-			
-			format "Unable to create User Profile:%\n." UserDir
-			return false
-		)
-		--#("Profile_1", "Profile_2", "Profile_3", "Profile_4", "Profile_5", "Profile_6", "Profile_7", "Profile_8", "Settings", "Temp")
-		local user_ini_names	= getIniSetting DefaultSettings "UserIni"
-		local user_files		= for n in user_ini_names collect (UserDir+n+".ini")
-		
-		-- Create files #(Profile_1.ini, ..., Profile_8.ini, Settings.ini, Temp.ini)
+		local EmptyProfile	= DefaultDir + "Profile_Empty.xml" --profile without buttons and tollbars 
+		local DefaultProfile	= DefaultDir + "Profile_Default.xml" --default profile 
+		if not doesFileExist UserDir do (format "Unable to create User Profile:%\n." UserDir; return false)
+		--#("Profile_1", "Profile_2", "Profile_3", "Profile_4", "Profile_5", "Profile_6", "Profile_7", "Profile_8", "Settings")
+		local profile_names	= mcFile.readSettings DefaultSettings "UserIni" type:"keys"
+		local user_files		= for n in profile_names collect (UserDir+n+".xml")
+		-- Create files #(Profile_1.xml, ..., Profile_8.xml, Settings.ini)
 		for i in user_files where not doesFileExist i or force do (
 		
 			format "Build User file%\n" i
-			if findString i "Profile_1"    != undefined then (copyFile DefaultProfileIni i)
-			else if findString i "Profile" != undefined then (copyFile EmptyProfileIni i)
-			else if i == UserSettings then (copyFile DefaultUserSettings i)
-			else if i == TempIni then (close (createFile i)) --create empty file "Temp.ini"
+			if findString i "Profile_1"    != undefined then (copyFile DefaultProfile i) --copy default profile to user dir (1)
+			else if findString i "Profile" != undefined then (copyFile EmptyProfile i) --copy empty profile to user dir (2-8)
+			else if i == UserSettings then (copyFile DefaultSettings i) --copy micra settings.xml to user dir
 		)
+		loadUserProfile()
 		return true
 	),
 	--> Add Micra's macro to 3DsMax set plug-ins directory
@@ -325,21 +218,9 @@ mc_Dialog_DropTarget = undefined
 		--Install Micra Autorun
 		if state and not (isInstaled()) do (
 		
-			/*
-			--create MicraPlugins directory if not exists
-			if not doesFileExist MaxPluginsDir do (makeDir MaxPluginsDir all:true)
-			if not doesFileExist MaxPluginsDir do (
-				
-				format "Unable to create User Directory:%\n." MaxPluginsDir
-				return false
-			)
-			createMicraRunScript() --cterate micra autorun file
-			installMaxPlugins() --add some plugins in MaxPluginsDir
-			setIniSetting MaxUserSettings "Directories" "Micra Plugins" MaxPluginsDir --append Micra's plugins dir to 3DsMax
-			*/
 			--Use local dir for autorun
 			setIniSetting MaxUserSettings "Directories" "Micra Autorun" AutorunDir --append Micra's Autorun dir to 3DsMax
-			setIniSetting UserSettings "Settings" "Autorun" "true" --set autorun true
+			
 			format "% > Installation is finished\n." version
 			messageBox "Installation was succesfull.\nPlease restart 3DsMax." title:version
 			restart_need = true
@@ -348,7 +229,7 @@ mc_Dialog_DropTarget = undefined
 		if not state and isInstaled() do (
 		
 			delIniSetting MaxUserSettings "Directories" "Micra Autorun" --remove Micra's plugins dir to 3DsMax
-			setIniSetting UserSettings "Settings" "Autorun" "false" --set autorun false
+			mcFile.saveSettings Micra.UserSettings "Settings/Autorun" "false" --set autorun false
 			
 			--delete MicraPlugins directory with files
 			--TODO ***
@@ -358,79 +239,83 @@ mc_Dialog_DropTarget = undefined
 			unload()
 		)
 	),
-	--> User Profile Switcher
-	--Always Override Temp Profile ( Profile_Temp.ini ) with Last used Profile ( Profile_1.ini,  Profile_2.ini, Profile_3.ini, ...)
-	--Load saved Settings template
-	fn profileSwitch = (
+	/**
+	*@Example
+		Micra.loadStructures force:true
+	*/
+	fn loadStructures force:false = (
 	
-		local last_profile_index = getIniSetting UserSettings "Settings" "CurrentProfile"
-		local last_profile_name = "Profile_"+ last_profile_index + ".ini"
-		local LastProfileINI = UserDir + last_profile_name
-		--override temp profile with user one
-		if doesFileExist LastProfileINI and doesFileExist TempProfileINI do deleteFile TempProfileINI
-		copyFile LastProfileINI TempProfileINI --override temp profile with last user profile
-	),
-	fn loadAllStructures = (
-	
-		if loaded do unload()--> Unregister Micra's Callbacks
-		
 		-->Load MaxCustomControls.dll (dont know if is need)
 		max_custom_controls = dotNet.loadAssembly "MaxCustomControls.dll"
+		local cnt = 0
+		-->Load Base Structures
+		for i in #("mcStructMan", "mcDate", "mcString", "mcObjects", "mcXML", "mcFile") do (
 		
-		-->Load All Core Structures
-		local struct_names = getIniSetting DefaultSettings "Structures" 
-		for i in struct_names do fileIn (CoreDir+i+".ms") 
+			if debug == 4 do format "% > loadStructures > [ % ]\n" version i
+			local struct_instance = execute i
+			if struct_instance == undefined or force do fileIn (CoreDir+i+".ms")
+			cnt+=1
+		)
+		-->Load Rest Core Structures
+		local struct_names = mcFile.readSettings DefaultSettings "Structures" type:"keys"
+		for i in struct_names do (
+		
+			if debug == 4 do format "% > loadStructures > [ % ]\n" version i
+			local struct_instance = execute i
+			if struct_instance == undefined or force do fileIn (CoreDir+i+".ms") 
+			cnt+=1
+		)
+		format "% > loadStructures > total [ % ]\n" version cnt
 		
 		--> Load Actions
-		fileInVersion "Struct_Action"
-		fileInVersion "Actions_Editor"
+		mcFile.fileInVersion "Struct_Action"
+		mcFile.fileInVersion "Actions_Editor"
 		
 		-->Load DotNet Components
-		fileInVersion "DotNet_Components"
+		mcFile.fileInVersion "DotNet_Components"
 		
 		-->Load Dinamic Dialog
-		fileInVersion "Dialog_Creator_Net"
+		mcFile.fileInVersion "Dialog_Creator_Net"
 		
 		-->Load Applications
-		fileInVersion "Holder" --render selection as thumbnail for latest reselect (action > mcHoldSelection())
-		fileInVersion "Deep_Isolate" --multi isolate
+		--mcFile.fileInVersion "Holder" --render selection as thumbnail for latest reselect (action > mcHoldSelection())
+		mcFile.fileInVersion "Deep_Isolate" --multi isolate
 		
 		-->Load Modifiers and Plugins
-		fileInVersion "Modifiers"
-		--fileInVersion "Morph_Collector"
-		--fileInVersion "Morph_Tagger"
-		--fileInVersion "Morph_Dummy"
+		mcFile.fileInVersion "Modifiers"
+		--mcFile.fileInVersion "Morph_Collector"
+		--mcFile.fileInVersion "Morph_Tagger"
+		--mcFile.fileInVersion "Morph_Dummy"
 		
---> Reload Macroscript , bug in 3DsMax 1012
-fileIn Macro 
-
-		run() --> Run Micra
+		--> Reload Macroscript , bug in 3DsMax 1012
+		fileIn Macro 
 	),
 	--> Initialize Micra
 	fn initialize = (
 	
-		increaseMemory 30 --Set Memory Allocation to 30MB
-		-- Check and loading files
-		local error_list = initStructureFiles() 
-		if error_list.count > 0 do (
-			
-			local error_msg = "Some Files(" + error_list.count as string + ") is missing!\nPlease reinstal Micra or contact me.\nmerlin_el@hotmail.com"
-			messagebox error_msg title:(" " + version + ":")
-			format "% > Missing files(%)\n List:%" version error_list.count error_list
-			return false
-		)
-		format "% > System files(%) checked succesfully!\n" version files_list.count
+		increaseMemory 30 -->Set Memory Allocation to 30MB
+		if loaded do unload()--> Unregister Micra's Callbacks
+		loadStructures() --init system structures
 		if not initUserProfile() do return false
 		installMacro() --add micra macro to 3DsMax 
-		profileSwitch() --replace temp profile with last used profile
-		loadAllStructures()
-		
+		run() --> Run Micra
+		/*
+		clearlistener() --clean listener
+		gc() --free mem
+		*/
+		format "% > Inicialization complete.\n" version
+		if restart_need do format "Please Restart Max Application to finish % intalation." version	
+	)
+)
+Micra = MICRA_STRUCTURE()
+
+
 /*		
 --> Callbacks --TO DO		
 if execute (getINISetting UserSettings "Settings" "UniversalCounter") do
 (
 	--UniversalCounter	
-	fileInVersion "Uni_Poly_Counter"
+	mcFile.fileInVersion "Uni_Poly_Counter"
 )
 if execute (getINISetting UserSettings "Settings" "ShowFileName") do
 (
@@ -442,16 +327,40 @@ if execute (getINISetting UserSettings "Settings" "ShowFileName") do
 	--Use Large Vertex Dots
 	preferences.useLargeVertexDots = execute (getINISetting UserSettings "Settings" "UseLargeVertexDots")
 )
+
+	--> check Micra's system files
+	fn initStructureFiles = (
+	
+		if not doesFileExist DefaultSettings do return #(DefaultSettings)
+		local ms_names			= getIniSetting DefaultSettings "Version" 
+		local struct_names		= getIniSetting DefaultSettings "Structures" 
+		local system_ini_names	= getIniSetting DefaultSettings "SystemIni"
+		local default_ini_names	= getIniSetting DefaultSettings "UserIniDefault"
+		files_list				= #(RootDir+"Micra.ms")
+
+		--> collect ms and mcr
+		for i in ms_names  do files_list += #(RootDir+i+"_v"+getIniSetting DefaultSettings "Version" i+".ms") 
+		--> collect struct files
+		for i in struct_names do files_list += #(CoreDir+i+".ms") 
+		--> collect ini 
+		for i in system_ini_names do files_list += #(RootDir+i+".ini")
+		--> collect default ini
+		for i in default_ini_names do files_list += #(DefaultDir+i+".ini")
+		--> return missing files
+		return (for f in files_list where not doesFileExist f collect f)
+	),
+	
+			-- Check and loading files
+		local error_list = initStructureFiles() 
+		if error_list.count > 0 do (
+			
+			local error_msg = "Some Files(" + error_list.count as string + ") is missing!\nPlease reinstal Micra or contact me.\nmerlin_el@hotmail.com"
+			messagebox error_msg title:(" " + version + ":")
+			format "% > Missing files(%)\n List:%" version error_list.count error_list
+			return false
+		)
+		format "% > System files(%) checked succesfully!\n" version files_list.count
+
+
 */		
 	
-		format "% > Inicialization complete.\n" version
-		if restart_need do format "Please Restart Max Application to finish % intalation." version
-	)
-)
-Micra = MICRA_STRUCTURE()
-
-
-/*
-clearlistener() --clean listener
-gc() --free mem
-*/

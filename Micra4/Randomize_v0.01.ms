@@ -108,7 +108,7 @@ rollout mcRandomizeDialog "" width:152 height:332
 		)
 	)
 	-->Dialog settings
-	on mcRandomizeDialog close do(mcFile.saveIniDialog "mcRandomizeDialog" "Properties_2")
+	on mcRandomizeDialog close do(mcFile.saveDialogSettings "mcRandomizeDialog" "Properties_2")
 	on mcRandomizeDialog rbuttonup pos   do(destroyDialog mcRandomizeDialog)
 	-->MoveMode
 	on mcRandomizeDialog lbuttondown pos do (dMove = true; DmPos = pos; if not keyboard.shiftPressed do pushprompt "Pres Shift To Move...")
@@ -133,4 +133,4 @@ rollout mcRandomizeDialog "" width:152 height:332
 	on spn_siz_z changed val do spinControll val #siz
 	on btn_close pressed do destroyDialog mcRandomizeDialog
 )
-mcCall.createIniDialog "mcRandomizeDialog" "Properties_2" modal:false 
+mcCall.createXMLDialog "mcRandomizeDialog" "Properties_2" modal:false 

@@ -230,7 +230,7 @@ rollout mcRenderToTextureModDialog "Untitled" width:504 height:232
 	)
 	on mcRenderToTextureModDialog close do 
 	( 
-		mcFile.saveIniDialog "mcRenderToTextureModDialog" "Properties_2"
+		mcFile.saveDialogSettings "mcRenderToTextureModDialog" "Properties_2"
 		saveInterface()
 	)
 	-->MoveMode
@@ -277,7 +277,7 @@ rollout mcRenderToTextureModDialog "Untitled" width:504 height:232
 	)
 	on btn_close pressed do (destroyDialog mcRenderToTextureModDialog)
 )
-mcCall.createIniDialog "mcRenderToTextureModDialog" "Properties_2"
+mcCall.createXMLDialog "mcRenderToTextureModDialog" "Properties_2"
 
 
 /*

@@ -153,7 +153,7 @@ Struct MICRA_DOTNET (
 		--get last position from Properties_2
 		if saved_pos do (
 			
-			local dpos   = (mcFile.getIniDataFromArray Micra.TempProfileIni "Properties_2" form.name 2) --return Point2 or undefined
+			local dpos = execute (mcFile.readSettings Micra.UserProfile ("Properties_2/" + form.name) type:"pos")
 			if classOf dpos != Point2 then ( --first entry
 				
 				format "mcDotnet > dShow > Form [  % ] is not saved, pos:%\n" form.text pos
@@ -183,7 +183,7 @@ Struct MICRA_DOTNET (
 	/*<end>*/
 )	
  --create instance
-Global mcDotnet = Micra.instanceStructure MICRA_DOTNET "mcDotnet"
+Global mcDotnet = mcStructMan.instanceStructure MICRA_DOTNET "mcDotnet"
 
 
 /*

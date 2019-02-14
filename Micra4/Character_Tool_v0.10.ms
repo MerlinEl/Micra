@@ -334,7 +334,7 @@ rollout mcCharSelectDialog "Character Tool v0.02" width:212 height:388
 	on mcCharSelectDialog close do
 	(
 		if charPoseDialog != undefined then destroyDialog charPoseDialog
-		mcFile.saveIniDialog "mcCharSelectDialog" "Properties_2"
+		mcFile.saveDialogSettings "mcCharSelectDialog" "Properties_2"
 		callbacks.removeScripts id:#mcCT_Callbacks
 		mcCT_BoneArray = Undefined
 		mcPoseTool = undefined
@@ -385,7 +385,7 @@ rollout mcCharSelectDialog "Character Tool v0.02" width:212 height:388
 	on chkLibrary changed state do 
 	(
 		if chkLibrary.checked
-		then (Micra.fileInVersion "Character_Pose")
+		then (mcFile.fileInVersion "Character_Pose")
 		else (if charPoseDialog != undefined then destroyDialog charPoseDialog)
 	)
 	on spnBend buttondown do
@@ -424,7 +424,7 @@ rollout mcCharSelectDialog "Character Tool v0.02" width:212 height:388
 )
 
 --~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~--
-mcCall.createIniDialog "mcCharSelectDialog" "Properties_2"
+mcCall.createXMLDialog "mcCharSelectDialog" "Properties_2"
 --~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~--
 
 --**\ Created by Merlin el' 7/17/2006 2:10:25 PM /**--

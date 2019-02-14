@@ -6,9 +6,12 @@
 	Micra
 	mcDate
 	mcString
+	mcXML
 *
 *@Used Objects
 	mcItem
+	mcObject
+	mcXMLAttrib
 *
 *@Example
 *	mcFile.getDirTree (Micra.RootDir)
@@ -19,35 +22,48 @@ struct MICRA_FILE (
 	all_dirs = #(),
 	fn getSource = getSourceFileName(), --get path of this script
 	/**
-	NOT USED
-	@Return
-		"Everyone"
-		"NT AUTHORITY\SYSTEM"
+	*@Usage
+		script_name	: String > 
+		return		: String > version "1.02" or empty string ""
+	*@Example 
+		mcFile.getScriptVersion "Clone2"
 	*/
-	fn getFileOwner f = (
-	
-		local fileInfo = dotNetObject "System.IO.FileInfo" f
-		local fileAccessControl = fileInfo.getAccessControl()
-		local NTAccountType = dotNetClass "System.Security.Principal.NTAccount"
-		local fileOwner = fileAccessControl.getOwner NTAccountType
-		fileOwner.value
+	fn getScriptVersion script_name = (
+		
+		local xml = mcXML Micra.DefaultSettings
+		local xml_node = xml.getNode ("//Version/"+script_name)
+		if xml_node == undefined do return ""
+		xml_node.getAttribute "val"
 	),
 	/**
-	NOT USED
-		local SearchOption = DotNetClass "System.IO.SearchOption"
-		local DotNetDirectoryInfo = DotNetObject "System.IO.DirectoryInfo" targetPath
-		SetDirectoryAccessControlType DotNetDirectoryInfo
-		result = for tfi in (DotNetDirectoryInfo.GetFiles "*.ms" SearchOption.AllDirectories) collect tfi.FullName
+	*@Usage > run a RootDir(file) as application(tool)
+		script_name	: String > "Clone2"
+	*@Example 
+		mcFile.fileInVersion "Clone2"
 	*/
-	fn setDirectoryAccessControlType inputDirectoryInfo = (
+	fn fileInVersion script_name = (	
 	
-		local tempUserName = (DotNetClass "System.Environment").UserName
-		local fileSystemRights = (DotNetClass "System.Security.AccessControl.FileSystemRights").Modify
-		local accessControlType = (DotNetClass "System.Security.AccessControl.AccessControlType").Allow
-		local fileSystemAccessRule = DotNetObject "System.Security.AccessControl.FileSystemAccessRule" tempUserName fileSystemRights accessControlType 
-		local directorySecurity = inputDirectoryInfo .GetAccessControl()
-		directorySecurity.AddAccessRule fileSystemAccessRule 
-		inputDirectoryInfo .SetAccessControl directorySecurity 
+		local f_version = getScriptVersion script_name
+		if f_version == "" do(
+		
+			format "mcFile > fileInVersion > File[ % ], is not registred in [  %  ]\n" script_name Micra.DefaultSettings
+			return false
+		)
+		local file = Micra.RootDir + script_name + "_v" + f_version + ".ms" --all apps is in root dir
+		if doesFileExist file then (
+		
+			try (
+				fileIn file
+				format "mcFile > fileInVersion > Load tool [  %  ]  was success!\n" script_name
+			
+			) catch (
+			
+				format "mcFile > fileInVersion > Load tool [  %  ]  was failed!\n\tError:%\n" script_name (getCurrentException())
+			)
+		) else (
+		
+			format "mcFile > fileInVersion > Load tool [  %  ]  was failed!\n\tUnable locate file [ % ]\n" script_name file
+		)
 	),
 	fn isFilePath _path =  (
 		
@@ -196,13 +212,13 @@ struct MICRA_FILE (
 			
 				local fpath_bk = dest_dir + file_name +"_1.bk"
 				local file_created = copyFile fpath fpath_bk
-				format "mcFile > backupFile > file: [ % ] success:%\n" fpath_bk file_created
+				--format "mcFile > backupFile > file: [ % ] success:%\n" fpath_bk file_created
 				
 			) else if  backup_files.count < max_cnt then ( --create next backup
 				
 				local fpath_bk = dest_dir + file_name +"_"+(backup_files.count+1) as string+".bk"
 				local file_created = copyFile fpath fpath_bk
-				format "mcFile > backupFile > file: [ % ] success:%\n" fpath_bk file_created
+				--format "mcFile > backupFile > file: [ % ] success:%\n" fpath_bk file_created
 	
 			) else ( --override oldest backup
 			
@@ -219,140 +235,12 @@ struct MICRA_FILE (
 				local fpath_bk = dates[1].tag
 				deleteFile fpath_bk
 				local file_created = copyFile fpath fpath_bk
-				format "mcFile > backupFile > file: [ % ] success:%\n" fpath_bk file_created
+				--format "mcFile > backupFile > file: [ % ] success:%\n" fpath_bk file_created
 			)
 		) else (
 		
 			format "mcFile > backupFile > file: [ % ] not found.\n" fpath
 		)
-	),
-	--mcFile.getIniDataFromArray Micra.TempProfileIni "Properties_2" "mcColorPickerDialog" 2
-	fn getIniDataFromArray iniFile head key arrNum =
-	(
-		--input type validation
-		if classOf iniFile != string  do return undefined
-		if classOf head    != string  do return undefined
-		if classOf key     != string  do return undefined
-		if classOf arrNum  != integer do return undefined
-		
-		if not doesFileExist iniFile do return undefined
-		if head == "" 
-		then 
-		(
-			return (getIniSetting iniFile)
-		)
-		if key == "" 
-		then
-		(
-			return (getIniSetting iniFile head)
-		)
-		if arrNum == 0 
-		then
-		(
-			return (getIniSetting iniFile head key)
-		)
-		else 
-		(
-			local data  = execute (getIniSetting iniFile head key)
-			--format "ini:%\thead:%\tkey:%\tarrnum:%\n" iniFile head key arrNum
-			if classOf data != array do return undefined
-			return data[arrNum]
-		)
-	),
-	--mcFile.setIniDataToArray Micra.TempProfileIni "Properties_2" "mcColorPickerDialog" 2 newValue
-	fn setIniDataToArray iniFile head key arrNum newValue =
-	(
-		if classOf iniFile  != string  do return undefined
-		if classOf head     != string  do return undefined
-		if classOf key      != string  do return undefined
-		if classOf arrNum   != integer do return undefined
-		--if classOf newValue != string do return undefined
-		
-		if not doesFileExist iniFile do return undefined
-		
-		if arrNum != 0 
-		then
-		(
-			local data = execute (getIniSetting iniFile head key)
-			if classOf data != array do return undefined
-			data[arrNum] =  newValue
-			setIniSetting iniFile head key (data as string)
-		)
-		else
-		(
-			setIniSetting iniFile head key newValue
-		)
-	),
-	fn saveLoadIniSetings head: key: data: action: =
-	(
-		if not doesFileExist Micra.UserSettings or  not doesFileExist Micra.DefaultSettings do return false
-		if head == unsupplied or key == unsupplied do return false
-		case action of
-		(
-			#load:
-			(
-				local user_data = getINISetting Micra.UserSettings head key
-				if user_data != ""
-				then return user_data --user settings
-				else return getINISetting Micra.DefaultSettings head key --default settings
-			)
-			#save:
-			(
-				if data == unsupplied do return false
-				setINISetting Micra.UserSettings head key data
-			)
-		)
-	),
-	fn saveIniDialog form_name form_category = (
-	
-		if not doesFileExist Micra.TempProfileIni do return false
-		local data = execute (getIniSetting Micra.TempProfileIni form_category form_name) --pickup form pattern
-		if classOf data != Array do data = #(false, [0,0], [0,0], "") --if form is new create default pattern
-		local form = execute form_name --get form interface
-		if superClassOf form == StructDef do ( --if form is instance class (get form from inside)
-		
-			form = form.form
-		)
-		--format "A saving form:% class:%\n" form_name (classOf form)
-		case classOf form of (
-			
-			RolloutClass: (
-			
-				data[1] = form.isDisplayed
-				if form.isDisplayed do (
-				
-					data[2] = getDialogPos  form
-					data[3] = getDialogSize form
-				)
-			)
-			DotnetObject:(
-				 
-				data[1] = form.visible
-				if form.visible do (
-				
-					data[2] = [form.location.x, form.location.y]
-					data[3] = [form.width, form.height]
-				)
-			)
-		)
-		setIniSetting Micra.TempProfileIni form_category form_name (data as string)
-	),
-	/**
-	*@Example
-		local from_data = mcFile.loadIniDialog form_title "Properties_2" --get saved pos and size
-	*@Return data:#(undefined, [402,362], [730,500], "") --open at start, pos, size, title
-	*/
-	fn loadIniDialog form_name form_category = (
-
-		if not doesFileExist Micra.TempProfileIni or not doesFileExist Micra.DefaultProfileIni do return undefined
-		local data = execute (getIniSetting Micra.TempProfileIni form_category form_name) --pickup saved data
-		if classOf data != Array do ( --if data not found on temp profile try get them from default profile
-		
-			data = execute (getIniSetting Micra.DefaultProfileIni form_category form_name) --pickup saved data
-		)
-		if classOf data != Array do return undefined -- form data not found
-		--format "mcFile > loadIniDialog > data:%\n" data
-		mcBounds pos:data[2] size:data[3]
 	),
 	fn backupMicraFile source_file = (
 	
@@ -408,6 +296,191 @@ struct MICRA_FILE (
 		)
 		format "mcFile > Backup File: %\n" file_versioned
 	),
+	fn attribsToObject arr = ( --return mcObject
+	
+		if classOf arr != Array do return undefined
+		(mcObject.new()).addMore (for a in arr collect mcItem a.key a.val)
+	),
+	fn objectToAttribs obj = ( --return array of mcXMLAttrib
+		
+		if superClassOf obj != StructDef do return undefined
+		for k in obj.keys() collect (mcXMLAttrib k (obj.get k))
+	),
+	/**
+	*@Created 13.02.2019
+	*@Usage > save settings in to xml file
+		xml_file	: String	> xml file path
+		xml_path	: String	> target xml node > "Settings/Tools" or simple "Tools"
+		data		: String	> value to save
+		backup		: Int		> backups count
+	*@Example
+		mcFile.saveSettings xml_file "Version/Customize_Colors" "0.05" backup:4 --add-replace node with parameter > val = "0.05", also create backup first
+		mcFile.saveSettings xml_file "Selection" (for i in selection collect i.name) type:"keys" --collect all node names under path "Selection"
+		mcFile.saveSettings xml_file "Selection/Sphere050" "" --add-replace node only
+		mcFile.saveSettings xml_file "Selection/Sphere005" "78" --add-replace node with parameter > val = "78"
+		mcFile.saveSettings xml_file "Selection/Sphere005" "78" type:"cnt" --add-replace node with parameter > cnt = "78"
+		node_attribs = (mcObject.new()).addMore #(
+
+			mcItem "action" "Move_To_X", 
+			mcItem "icon" "28"
+		)
+		mcFile.saveSettings Micra.UserProfile "Buttons/btn_B4555" node_attribs type:"attribs"
+	*/
+	fn saveSettings xml_file xml_path data type:"default" backup:0 = (
+		
+		local xml = mcXML xml_file
+		if not xml.exists() then ( --create xml file
+		
+			local root_node = (filterString xml_path "/")[1] --get first item at path : "Settings/Data/Item"  > "Settings"
+			xml.addRootNode xml_path	
+			
+		) else if backup > 0 do ( --backup file
+		
+			backupFile xml_file max_cnt:backup
+		)
+		case type of (
+		
+			"val"	: (
+				local xml_node = xml.getNode ("//"+xml_path)
+				if xml_node == undefined do xml_node = xml.addNode ("//"+xml_path) "" --create empty node
+				if classOf data != String do (format "Invalid data input, except an String\n"; return false)
+				if data.count > 0 do xml_node.setAttribute "val" (data as String)
+			)
+			"keys"	: (
+				data = objectToAttribs data --convert object in to attribute array
+				if classOf data != Array do (format "Invalid data input, except an  Array\n"; return false)
+				for key in data do xml.addNode ("//"+xml_path) key
+			)
+			"attribs"	: (
+			
+				local xml_node = xml.getNode ("//"+xml_path)
+				if xml_node == undefined do xml_node = xml.addNode ("//"+xml_path) "" --create empty node	
+				data = objectToAttribs data --convert object in to attribute array
+				if classOf data != Array do (format "Invalid data input, except an Array\n"; return false)
+				if data.count > 0 do xml_node.setAttributes data
+			)
+			default	: (
+			
+				local xml_node = xml.getNode ("//"+xml_path)
+				if xml_node == undefined do xml_node = xml.addNode ("//"+xml_path) "" --create empty node	
+				if classOf data != String do (format "Invalid data input, except an String\n"; return false)
+				if data.count > 0 do xml_node.setAttribute (if type == "default" then "val" else type) (data as String)
+			)
+		)
+		if not xml.save() do ((format "Unable Save File! [%]\n" xml_file); return false)
+		true
+	),
+	/**
+	*@Example
+		local cat_names = mcFile.readSettings Micra.ActionsXML "ACTIONS" type:"keys"
+		local all_parameters = mcFile.readSettings Micra.UserProfile "ACTIONS" type:"attribs"
+		local help_txt = mcFile.readSettings Micra.ActionsHelpXML "Pivot/Afect_Pivot_Only"
+		local pos = mcFile.readSettings Micra.UserProfile "Properties_2/mcCustomizeDialog" type:"pos" --uses default type
+		local is_active = mcFile.readSettings Micra.UserProfile "Properties_2/mcCustomizeDialog" type:"active" --uses default type
+		local size = mcFile.readSettings Micra.UserProfile "Properties_2/mcCustomizeDialog" type:"size" --uses default type
+	*/
+	fn readSettings xml_file xml_path type:"default" = (
+
+		if not doesFileExist xml_file do ((format "Missing File! [%]\n" xml_file); return "")
+		local xml = mcXML xml_file
+		local xml_node = xml.getNode ("//"+xml_path)
+		if xml_node == undefined do return ""
+		case type of (
+		
+			"keys"	: xml_node.getChildrenNames()
+			"attribs"	: (
+			
+				local xml_attributes = xml_node.getAllAttributes()
+				attribsToObject xml_attributes
+			)
+			default	: xml_node.getAttribute (if type == "default" then "val" else type)
+		)
+	),
+	/**
+	*@Example
+		mcFile.delSettings xml_file "Selection" type:"keys" --remove all nodes under Selection path
+		mcFile.delSettings xml_file "Selection/Sphere005" type:"attr" --remove only atributes
+		mcFile.delSettings xml_file "Selection/sphere_01" --remove single node
+	*/
+	fn delSettings xml_file xml_path type:"default" = (
+	
+		if not doesFileExist xml_file do ((format "Missing File! [%]\n" xml_file); return false)
+		local xml = mcXML xml_file
+		case type of (
+		
+			"keys"	: xml.delAllNodes ("//"+xml_path)
+			"attr"	: xml.delAllAttributes ("//"+xml_path)
+			default	: xml.delNode ("//"+xml_path)
+		)
+		if not xml.save() do ((format "Unable Save File! [%]\n" xml_file); return false)
+		true
+	),
+	fn swapSettings xml_file xml_path_a xml_path_b = (
+	
+		if not doesFileExist xml_file do ((format "Missing File! [%]\n" xml_file); return false)
+		local xml = mcXML xml_file
+		xml.swapAttributes xml_path_a xml_path_b
+		xml.save()
+	),
+	/**
+	*@Example
+		local from_data = mcFile.loadDialogSettings "mcModifierDialog" "Properties_2" --get saved pos and size
+		> mcObject (
+			key:active val:false
+			key:pos val:[1244,290]
+			key:size val:[328,276]
+			key:title val:
+		)
+		if from_data != undefined do (
+		
+			local pos = execute (form_settings.get "pos")
+			local size = execute (form_settings.get "pos")
+			form.bounds = mcDotnet.dRect pos size
+		)
+	*/
+	fn loadDialogSettings form_name form_category = (
+
+		local form_settings = readSettings UserProfile "Properties_2/mcColorPickerDialog" type:"params"
+		if form_settings == "" do return undefined
+		form_settings
+	),
+	/**
+	*@Example
+		mcFile.saveDialogSettings s.name "Properties_2"
+	*/
+	fn saveDialogSettings form_name form_category = (
+		
+		if not doesFileExist Micra.UserProfile do return false	
+		local form = execute form_name --get form interface
+		local form_settings = mcObject()
+		if superClassOf form == StructDef do ( --if form is instance class (get form from inside)
+		
+			form = form.form
+		)
+		--format "saving form:% class:%\n" form_name (classOf form)
+		case classOf form of (
+			
+			RolloutClass: (
+			
+				form_settings.add "active" (form.isDisplayed as String)
+				if form.isDisplayed do (
+				
+					form_settings.add "pos" (getDialogPos  form as String)
+					form_settings.add "size" (getDialogSize form as String)
+				)
+			)
+			DotnetObject:(
+				 
+				form_settings.add "active" form.visible
+				if form.visible do (
+				
+					form_settings.add "pos" ([form.location.x, form.location.y] as String)
+					form_settings.add "size" ([form.width, form.height] as String)
+				)
+			)
+		)
+		mcFile.saveSettings Micra.UserProfile "Properties_2/mcCustomizeDialog" form_settings type:"attribs"
+	),
 	fn getClipboardTxt =
 	(
 		local clipboardClass = dotNetClass "System.Windows.Forms.Clipboard"
@@ -444,11 +517,42 @@ struct MICRA_FILE (
 		)
 		close imgLib
 		return icn
+	),
+	/**
+	NOT USED
+	@Return
+		"Everyone"
+		"NT AUTHORITY\SYSTEM"
+	*/
+	fn getFileOwner f = (
+	
+		local fileInfo = dotNetObject "System.IO.FileInfo" f
+		local fileAccessControl = fileInfo.getAccessControl()
+		local NTAccountType = dotNetClass "System.Security.Principal.NTAccount"
+		local fileOwner = fileAccessControl.getOwner NTAccountType
+		fileOwner.value
+	),
+	/**
+	NOT USED
+		local SearchOption = DotNetClass "System.IO.SearchOption"
+		local DotNetDirectoryInfo = DotNetObject "System.IO.DirectoryInfo" targetPath
+		SetDirectoryAccessControlType DotNetDirectoryInfo
+		result = for tfi in (DotNetDirectoryInfo.GetFiles "*.ms" SearchOption.AllDirectories) collect tfi.FullName
+	*/
+	fn setDirectoryAccessControlType inputDirectoryInfo = (
+	
+		local tempUserName = (DotNetClass "System.Environment").UserName
+		local fileSystemRights = (DotNetClass "System.Security.AccessControl.FileSystemRights").Modify
+		local accessControlType = (DotNetClass "System.Security.AccessControl.AccessControlType").Allow
+		local fileSystemAccessRule = DotNetObject "System.Security.AccessControl.FileSystemAccessRule" tempUserName fileSystemRights accessControlType 
+		local directorySecurity = inputDirectoryInfo .GetAccessControl()
+		directorySecurity.AddAccessRule fileSystemAccessRule 
+		inputDirectoryInfo .SetAccessControl directorySecurity 
 	)
 	/*<end>*/
 )
  --create instance
-Global mcFile = Micra.instanceStructure MICRA_FILE "mcFile"
+Global mcFile = mcStructMan.instanceStructure MICRA_FILE "mcFile"
 
 
 

@@ -60,7 +60,7 @@ struct MCRA_ARRAY (
 	/*<end>*/
 )
 --create instance
-Global mcArray = Micra.instanceStructure MCRA_ARRAY "mcArray"
+Global mcArray = mcStructMan.instanceStructure MCRA_ARRAY "mcArray"
 
 
 

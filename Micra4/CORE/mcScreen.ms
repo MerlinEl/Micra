@@ -40,4 +40,4 @@ Struct MICRA_SCREEN (
 	/*<end>*/
  )
  --create instance
-Global mcScreen = Micra.instanceStructure MICRA_SCREEN "mcScreen"
+Global mcScreen = mcStructMan.instanceStructure MICRA_SCREEN "mcScreen"

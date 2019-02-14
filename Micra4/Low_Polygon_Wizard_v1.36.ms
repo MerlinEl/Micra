@@ -925,11 +925,11 @@ rollout mcLpWizardDialog "" width:528 height:84
 	on mcLpWizardDialog close do 
 	(
 		drw.clear()
-		mcFile.saveIniDialog "mcLpWizardDialog" "Properties_2" 
+		mcFile.saveDialogSettings "mcLpWizardDialog" "Properties_2" 
 	)
 	on mcLpWizardDialog rbuttonup pos   do 
 	(
-		mcFile.saveIniDialog "mcLpWizardDialog" "Properties_2"
+		mcFile.saveDialogSettings "mcLpWizardDialog" "Properties_2"
 		destroyDialog mcLpWizardDialog
 	)
 	-->MoveMode
@@ -1117,7 +1117,7 @@ rollout mcLpWizardDialog "" width:528 height:84
 --~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~--
 --oooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo--
 		
-mcCall.createIniDialog "mcLpWizardDialog" "Properties_2"
+mcCall.createXMLDialog "mcLpWizardDialog" "Properties_2"
 
 --oooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo--
 --~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~--

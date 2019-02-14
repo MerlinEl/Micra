@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Selection>
+  <Sphere002 val="123" />
+  <Sphere004 />
+  <Sphere005 default="78" val="78" cnt="78" />
+  <Sphere006 />
+  <Cylinder001 />
+  <Cone001 />
+  <Cone003 />
+  <Sphere001 />
+  <Sphere006 />
+  <Cone001 />
+  <Sphere050 />
+  <Sphere045 default="78" />
+  <Sphere123 default="78" />
+</Selection>

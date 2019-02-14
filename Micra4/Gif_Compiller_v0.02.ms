@@ -217,7 +217,7 @@ rollout mcGifCompillerDialog "Untitled" width:284 height:52
 	)
 	on mcGifCompillerDialog close do 
 	(
-		mcFile.saveIniDialog "mcGifCompillerDialog" "Properties_2"
+		mcFile.saveDialogSettings "mcGifCompillerDialog" "Properties_2"
 		if jpgPlayerDialog != undefined do destroyDialog jpgPlayerDialog
 		if gifPlayerDialog != undefined do destroyDialog gifPlayerDialog
 	)
@@ -236,7 +236,7 @@ rollout mcGifCompillerDialog "Untitled" width:284 height:52
 	)
 	on btn_del pressed do deleteCurrentFrame()
 )
-mcCall.createIniDialog "mcGifCompillerDialog" "Properties_2"
+mcCall.createXMLDialog "mcGifCompillerDialog" "Properties_2"
 
 
 

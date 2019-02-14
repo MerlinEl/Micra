@@ -81,12 +81,11 @@ Public
 	
 		if trimChars == undefined then (
 		
-			str = trimLeft str
-			str = trimRight str
+			trimLeft (trimRight str)
+
 		) else (
 		
-			str = trimLeft str trimChars
-			str = trimRight str trimChars
+			trimLeft (trimRight str trimChars) trimChars
 		)
 	),
 	/**
@@ -251,7 +250,7 @@ Public
 	/*<end>*/
 )
  --create instance
-Global mcString = Micra.instanceStructure MICRA_STRING "mcString"
+Global mcString = mcStructMan.instanceStructure MICRA_STRING "mcString"
 
 
 

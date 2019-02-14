@@ -27,4 +27,4 @@ Struct MICRA_CURCOR (
 	/*<end>*/
 )
 --create instance
-Global mcCursor = Micra.instanceStructure MICRA_CURCOR "mcCursor"
+Global mcCursor = mcStructMan.instanceStructure MICRA_CURCOR "mcCursor"

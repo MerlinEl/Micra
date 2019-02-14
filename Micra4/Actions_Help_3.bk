@@ -1,0 +1,179 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ACTIONS>
+  <Object>
+    <Gallery_3D val="Katalog modelu, materialu a textur. Interaktivni kresleni obektu po povrchu." />
+    <Align val="Zarovnavani objektu na pozici rotaci a velikost." />
+    <Align_By_2Edges val="Zarovnavani objektu do svetovych souradnic podle dvou prilehlych edges." />
+    <Clone_2 val="Klonovani objektu s nastavitelnym rozestupem." />
+    <Color_Palete val="Paleta barev. S moznosti ulozeni ruznych profilu. Neni dokonceno." />
+    <Concave_Check val="Vyhleda propadle casti meshe a oznaci jejich hrany." />
+    <Detach_By_ID val="Rozdeleni objektu podle material ID." />
+    <Distributor val="Oznacene objekty rozkada na povrchu prvniho objektu." />
+    <Duppilcate_Names val="Hleda duplicitni nazvy objektu." />
+    <Group_Close val="Uzavreni balicku." />
+    <Group_Create val="Utvoreni balicku." />
+    <Group_Destroy val="Zruseni balicku." />
+    <Group_Open val="Otevreni balicku." />
+    <Lock_Object val="Zbezpeci objekt(y) proti transformaci." />
+    <Mirror_2 val="Mirroruje vybrany objekt. Pridrzenim tlacitka Ctrl otocite normaly." />
+    <Modifiers val="Otevre panel s Modifiery." />
+    <Move_To_Center val="Vycentruje objekt(y) v souradnicich X, Y, Z." />
+    <Move_To_Ground val="Usadi objekt(y) v ose Z na Nulu.Pridrzenim tlacitka Shif se otevre panel s vylepsenym nastavenim." />
+    <Move_To_X val="Vycentruje objekt(y) v souradnici X." />
+    <Randomize val="Nahodne otaceni, posun, a znena velikosti u mnoha objektu naraz." />
+    <Random_Wirecolor val="Nahodne prebarvi selektnute obekty." />
+    <Reinstance val="Obnovi instance a to podle prvniho vybraneho objektu. S Ctrl upravi rotace." />
+    <Rename val="Hromadne prejmenovani objektu." />
+    <Repair_Object val="Oprava objektu , ktere zpusobuji zasekavani a padani applikace." />
+    <Reset_Transform val="Vynuluje transformace velikosti a rotace." />
+    <Spline_Magnet val="Kresleni krivky na povrchu modelu." />
+    <Triangle_Counter val="Spocita trojuhelniky vybranych objektu. Neni li vybran zadny spocita celou scenu." />
+    <Transformer val="Vizualni pozicovani pivotu, flip a rotace objektu." />
+    <Unlock_Object val="Povoleni transformace." />
+    <UE_Model_Importer val="Importuje static a skeletal meshe z Unreal Editoru." />
+    <Quad_Check val="Oznaci vsechny polygony ,ktere nejsou ctvercoveho tvaru." />
+    <Create_Bounding_Box val="Vytvori mesh z bounding boxu u vybraneho objektu." />
+  </Object>
+  <Pivot>
+    <Afect_Pivot_Only val="Zapina / Vypina pohyblivost pivotu." />
+    <Align_To_Edge val="Natoci Pivot podel vybrane hrane." />
+    <Pick_Edge_Pivot val="Vytvori objekt Point na oznacene hrane a prevezme jeji transformaci." />
+    <Pivot_To_Center val="Vycentruje pivot(y) v souradnicich X, Y, Z." />
+    <Pivot_To_X val="Vycentruje pivot(y) v souradnici X." />
+    <Point_To_Selection val="Vlozi point do selekce vertexu." />
+    <Align_To_World val="Natoci pivot do svetovych os." />
+    <Align_To_Base val="Usadi pivot do zakladny objektu." />
+    <Pivot_To_Vertex val="Usadi pivot na oznaceny bod." />
+    <Pivot_Align_3P val="Natoci pivot podle trech bodu." />
+    <Pivot_Planter val="Rychle posouvani pivotu podle grafickeho modelu." />
+    <Iron_Sight val="Priblizi zvolenou oblast." />
+  </Pivot>
+  <Select>
+    <Advanced_Edge_Loop val="Z ringu vybere kazdou druhou nebo treti edge atd..." />
+    <Edges_Loop val="Multiselekce podel edge." />
+    <Edges_Ring val="Multiselekce na pric ede." />
+    <Edges_Border val="Selekce okraje." />
+    <Get_Verts val="Prebirani selekce mezi subobject levely." />
+    <Get_Edges val="Prebirani selekce mezi subobject levely." />
+    <Get_Faces val="Prebirani selekce mezi subobject levely." />
+    <Fetch_Selection val="Instantni nahrani posledni ulozene selekce." />
+    <Hold_Selection val="Instantni ulozeni skupiny, vertexu, edges, faces, objektu" />
+    <Isolate_Face val="Vice levlove skryvani polygonu." />
+    <Quads_Loop val="Multiselekce faces. (vyber dve sousedici polygony, musi byt ctverce)" />
+    <Paint_Selection val="Selekce pomoci malovani." />
+    <Select_Oposite val="Selektne opositni vertexy. S tlacitkem Ctrl obe strany." />
+    <Select_Verts_In_X val="Selektne vertexy v ose X. (mozno weldovat do stredu)" />
+    <Select_Half_Left val="Selektne levou polovinu objektu." />
+    <Select_Half_Right val="Selektne pravou polovinu objektu." />
+    <Select_Objects_By_Material val="Selektne objekty, ktere pouzivaji stejny material." />
+    <Select_Unsmoth_Faces val="Oznaci polygony, ktere nemaji prirazenou smooth grupu." />
+    <Verts_Loop val="Multiselekce vertexu. (vyber dva sousedici vertexy)" />
+  </Select>
+  <Modify>
+    <Affect_Backfacing val="Zapne / Vypne oznacovani zadni strany geometrie. Neni dokonceno." />
+    <Breake_To_Elements val="Rozdeli objekt na castice." />
+    <Bridge_Spline val="Vytvori linku mezi dvema polygony. Vyuziti v extrude spline." />
+    <Cap_Holes val="Uzavre otvor v geometrii." />
+    <Clean_Edges val="Smaze edge i s vertexy." />
+    <Clean_Verts_In_Line val="Smaze osamocene vertexy, ktere jsou na primce. Casto vznikaji pri pouziti fungce Bolean." />
+    <Collapse_Objects val="Spoji vice objektu do jednoho." />
+    <Edge_Scale_Align val="Zarovnavani delky egges." />
+    <Find_Double_Faces val="Oznaci dvojte polygony." />
+    <Fuse_Edges val="spoji dva edge loops." />
+    <Fuse_Verts_In_Line val="spoji vertexy v podel osy X, Y, Z." />
+    <Low_Polygon_Wizard val="Tvorba lowpoly modelu na povrchu hipoly modelu." />
+    <Mirror_Weld val="Mirroruje objekt na ose X a welduje vertexy v rozmezi 0.001. Zmacknutim Ctrl na klavesnici se aplikuje flip." />
+    <Nurms_Sub_Toggle val="Zapne / Vypne smootovani vybranych objektu." />
+    <Move_Verts_To_X val="Posune vertexy stred v ose X." />
+    <Move_Verts_To_Y val="Posune vertexy stred v ose Y." />
+    <Move_Verts_To_Z val="Posune vertexy na zem v ose Z." />
+    <Planar_X val="Zarovnavani geometrie v ose  X" />
+    <Planar_Y val="Zarovnavani geometrie v ose Y" />
+    <Planar_Z val="Zarovnavani geometrie v ose Z" />
+    <Quadrangulate val="Odstrani z polygonu sikme edge ,tak aby zustali ctverce." />
+    <Replace_Objects val="Nahradi ostatni objekty v selekci, prvnim oznacenym objektem." />
+    <Weld_And_Smooth val="Konvertne mesh na poly, zvelduje na 0.001 a smoothgroupy nastavi na 60" />
+    <Weld_Verts val="Weldovani vertexu. Nastaveni se uklada. Defaultne 0.001." />
+  </Modify>
+  <Modifiers>
+    <Conform val="Zarovnava geometrii jedenoho modelu na druhy. (Lowpoly to Hiploy)" />
+    <Bend val="Ohýba model v různých směrech." />
+    <Mirror val="Zkopíruje objek obráceně na protilehlou stranu" />
+  </Modifiers>
+  <Creation>
+    <Create_3PGrid val="Vytvori naklonenou mrizku podle tri bodu." />
+    <Create_Ambient_Lights val="Vytvori ambientni nasvetleni pro vypekani difusni mapy." />
+    <Box_Builder val="Vytvori box na povrchu jineho modelu orientovaný podle normály polygonu." />
+  </Creation>
+  <Experimental>
+    <Isolate_Plus val="Manazer objektu na Scene.Selekce, zobrazovani, hromadna uprava nazvu..." />
+    <Clean_Empty_Pivots val="Smazani vsech  mesh a poly objektu co neobsahuji zadnou geometrii." />
+    <Show_Objects_Names val="Zobrazi jmena vsech objektu primo na obrazovce. stav:(Na)" />
+    <Move_Towards val="Oddaluje a priblizuje mezi sebou dva objekty v osach X ,Y ,Z." />
+    <UVW_Wizard_Tool val="Upravuje mapping primo na povrchu objektu." />
+    <Time_Break val="Oznamuje pravidelne bezpecnostni prestavky." />
+    <Skin_Tool val="Uklada/Nahrava seznam kosti ve skinu." />
+  </Experimental>
+  <Mapping>
+    <Weld_Treshold_UVW val="Nastavi spojovani vertexu v Unwrap UVW na hodnotu 0.0001" />
+    <Preserve_UWS val="Zapina / Vypina posun geometrie rozdelene od mappingu." />
+    <Unwrap_UVW_Plus val="Doplnkove fungce pro Mapovani." />
+  </Mapping>
+  <Menu>
+    <Archive val="Archivace souboru ve formatu zip." />
+    <ASCII_Multi_Exporter val="Vyexportuje oznacene modely do formatu ASE." />
+    <ActorX_Multi_Exporter val="Vyexportuje oznacene modely, ktere maji skin do formatu PSK." />
+    <ActorX_Batch_Exporter val="Vyexportuje oznacene modely, ktere maji skin do formatu PSK podle seznamu." />
+    <Calculator val="Standartni Windowsovska kalkulacka." />
+    <Export val="Exportuje celou scenu do zvoleneho formatu." />
+    <Export_Selection val="Exportuje vybrane objekty do zvoleneho formatu." />
+    <Fetch_Scene val="Instantni nahrani sceny." />
+    <Hold_Scene val="Instantni ulozeni sceny." />
+    <Import val="Importuje externi modely do Maxu." />
+    <Load_Custom_Ui_Scheme val="Nacte znovu MaxStart UI Interface." />
+    <Max_Reset val="Nova scena." />
+    <Merge val="Importovani modelu z jine sceny. Se shiftem otevre model podle zkopirovane cesty." />
+    <Reload val="Otevreni posledni sceny." />
+    <Merge_Objects val="Pridani objektu z jine sceny." />
+    <Reload val="Otevreni posledni sceny." />
+    <Save_Selection val="Ulozi zvlast vybrane objekty." />
+  </Menu>
+  <Programming>
+    <Draw_Line_Between_Meshes val="Vitvori linku mezi dvema objekty." />
+    <MaxScript_Color_Editor val="Nastaveni barevnosti max skriptu." />
+    <Pass_Keeper val="Tady si muzes ukladat sve hesla, stranky a jine dulezite veci." />
+    <Script_Editor val="Programovaci nastroje , slouzi pro vylepseni nebo opravy teto aplikace." />
+    <Viewport_Recorder val="Muzes si nahrat postup sve prace do animovaneho gif souboru." />
+  </Programming>
+  <Material>
+    <Edit_Textures val="Otevre Textury v aplikaci Photoshop. Oznac materail nebo objekty." />
+    <Material_Color_Flatten val="Zobrazi materialy na referencnich objektech bez stinu v projection master." />
+    <Reset_Mat_Editor val="Vyresetuje materialy v material editoru. Materialy na scene zustanou beze zmeny." />
+    <Remove_Materials val="Smaze materialy z vybranych objektu." />
+    <Show_Materials val="Zobrazi nazvy materialu a textur prirazenych k objektu." />
+    <Show_Texture val="Zapne zobrazeni materialu na objektech." />
+    <Hide_Texture val="Vypne zobrazeni materialu na objektech." />
+    <Image_To_Plane val="Vlozi do sceny obrazek na placku. Rozmery 1:1." />
+    <Color_To_Material val="Prevede barvu objektu do materialu." />
+    <Set_Obj_ID val="Nastavi material ID oznacenym objektum nebo polygonum." />
+    <Add_Checker val="Prida Checker na oznacene objekty." />
+    <Add_DX_Material val="Prida DX9_StandartFX material na oznaceny objekt." />
+    <Render_To_Texture_Mod val="Modifikovany render to texture pro grafiky." />
+    <Send_UVW_To_Ps val="Otevre UVW z oznacenych polygonu v Photoshopu." />
+    <Silhouette val="Zobrazi selektnute objekty bez odlesku jen v cerne barve." />
+  </Material>
+  <Helpers>
+    <Lode_Tester val="Stridave zobrazuje dva lody." />
+    <Link_Plus val="Linkovani objektu trochu jinak. Neni dokonceno." />
+  </Helpers>
+  <Animation>
+    <Merge_Animation val="Nastavte si adresar s animacemi , ktere se  pak zobrazi v seznamu. Animace pak muzete ruzne kombinovat. (pri aplikaci je nutno mit selektlou kostru)" />
+    <Controller_Convertor val="Prevede jeden druh kontroleru na druhy. pr: TBC na Linearni." />
+    <Reverse_Animation val="Reverzne Animaci." />
+    <Copy_Animation val="Copy animation from a object." />
+    <Paste_Animation val="Paste animation to an object." />
+  </Animation>
+  <Skinning>
+    <Add_Weapon_Skin val="Prida skin na zbran a nastavi parametry" />
+  </Skinning>
+</ACTIONS>

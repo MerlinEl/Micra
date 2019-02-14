@@ -549,7 +549,7 @@ rollout mcMaxScriptColorEditorDialog "MaxScript Theme Editor:"  width:680 height
 		mcGM.setParam "color_picker_start_color" (netDrColor clr)
 		mcEvents.registerEvent "COLOR_PICKER_ADD_COLOR" setButtonColor
 		mcEvents.registerEvent "COLOR_PICKER_MOD_COLOR" colorizeCurrentText
-		Micra.fileInVersion "Color_Picker"
+		mcFile.fileInVersion "Color_Picker"
 	)
 
 	on lv_colors DoubleClick s a do ( --open color picker with selected color
@@ -558,7 +558,7 @@ rollout mcMaxScriptColorEditorDialog "MaxScript Theme Editor:"  width:680 height
 			
 			local clr = user_data[sel_item_index+1].clr --get color from selected item
 			mcGM.setParam "color_picker_start_color" (netDrColor clr)
-			Micra.fileInVersion "Color_Picker"
+			mcFile.fileInVersion "Color_Picker"
 		)
 	)
 	

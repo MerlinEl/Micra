@@ -7,18 +7,8 @@ try ( mcColorPaleteDialog.close() ) catch()
 (
 	-->Locals-----------------------------------------------------------------
 	local netDMove = false, netDmPos
-	local last_profile = execute (mcFile.saveLoadIniSetings head:"Interface" key:"lastprofile" action:#load)
+	local last_profile = execute (mcFile.readSettings Micra.UserSettings "Interface/lastprofile")
 	local profiles = #("DefaultColor", "UserColor", "ForestColor", "EarthColor", "MoonColor", "SeaColor", "SunColor", "Close")
-	local head_str = profiles[last_profile]
-	local clr_back     = execute (mcFile.saveLoadIniSetings head:head_str key:"backcolor" action:#load)
-	local clr_fore     = execute (mcFile.saveLoadIniSetings head:head_str key:"forecolor" action:#load)
-	local clr_sel      = execute (mcFile.saveLoadIniSetings head:head_str key:"selected"  action:#load)
-	local clr_mark     = execute (mcFile.saveLoadIniSetings head:head_str key:"marked"  action:#load)
-	local clr_btn      = execute (mcFile.saveLoadIniSetings head:head_str key:"button"   action:#load)
-	local clr_inact    = execute (mcFile.saveLoadIniSetings head:head_str key:"inactive"  action:#load)
-	local clr_text     = execute (mcFile.saveLoadIniSetings head:head_str key:"textcolor"  action:#load)
-	local clr_seltext  = execute (mcFile.saveLoadIniSetings head:head_str key:"seltext"  action:#load)
-	local form_opacity = execute (mcFile.saveLoadIniSetings head:head_str key:"opacity"  action:#load)
 	local bar_height      = 14
 	local form_bounds     = 2
 	local form_offset     = 4
@@ -45,7 +35,7 @@ try ( mcColorPaleteDialog.close() ) catch()
 	fn removeBorder mcs s = --remove highlight
 	(
 		if mcs.last_button == s do return false
-		mcs.last_button.FlatAppearance.BorderColor = netDrColor clr_back
+		mcs.last_button.FlatAppearance.BorderColor = mcDotnet.uiColor #back
 		mcs.last_button = s
 	)
 	
@@ -55,7 +45,7 @@ try ( mcColorPaleteDialog.close() ) catch()
 		--format "Color Palete > setButtonColor > clr:% on button:%\n" net_clr last_button.tag	
 		last_button.backColor = net_clr
 		local rgb_clr = netColorToRGB net_clr
-		setIniSetting Micra.UserSettings "ColorPalete" last_button.tag (rgb_clr as string)
+		mcFile.saveSettings Micra.UserSettings ("ColorPalete/"+last_button.tag) (rgb_clr as string)
 		--format "saved color done:%\n" rgb_clr
 	)
 	fn changeObjectsWire net_clr = (
@@ -71,13 +61,13 @@ try ( mcColorPaleteDialog.close() ) catch()
 			removeBorder mcs s
 			mcEvents.registerEvent "COLOR_PICKER_ADD_COLOR" setButtonColor
 			mcEvents.registerEvent "COLOR_PICKER_MOD_COLOR" changeObjectsWire
-			Micra.fileInVersion "Color_Picker"
+			mcFile.fileInVersion "Color_Picker"
 			--if not mcColorPickerDialog.visible() do mcColorPickerDialog.init()
 			
 		) else (
 			
 			if mcs.last_button == s or keyboard.controlPressed or keyboard.altPressed or a.button == a.button.right do return false
-			s.FlatAppearance.BorderColor = netDrColor clr_seltext
+			s.FlatAppearance.BorderColor = mcDotnet.uiColor #seltext
 		)
 	)
 
@@ -111,7 +101,7 @@ try ( mcColorPaleteDialog.close() ) catch()
 					else s.backcolor = mcs.picked_color
 					--save to ini
 					clr = netColorToRGB s.backColor
-					setIniSetting Micra.UserSettings "ColorPalete" s.tag (clr as string)
+					mcFile.saveSettings Micra.UserSettings ("ColorPalete/"+s.tag) (clr as string)
 				)
 				else if keyboard.altPressed then (
 					
@@ -140,9 +130,9 @@ try ( mcColorPaleteDialog.close() ) catch()
 	(
 		local mcs = s.tag.value
 		local clr
-		for i in mcs.buttons
-		where (
-			clr = execute (getIniSetting Micra.UserSettings "ColorPalete" i.tag) 
+		for i in mcs.buttons where (
+			
+			clr = execute (mcFile.readSettings Micra.UserSettings ("ColorPalete/btn_" + i.tag))
 			classOf clr == color
 		) do i.backColor = netDrColor clr
 		
@@ -157,7 +147,7 @@ try ( mcColorPaleteDialog.close() ) catch()
 			btn = dotnetObject "button"
 			btn.size  = netDrSize [btn_size, bar_height]
 			btn.FlatStyle = btn.FlatStyle.flat
-			btn.FlatAppearance.BorderColor = netDrColor clr_back
+			btn.FlatAppearance.BorderColor = mcDotnet.uiColor #back
 			btn.FlatAppearance.BorderSize = 1
 			btn.margin =  dotnetobject "padding" 0
 			btn.name = "btn_" + (i as integer) as string
@@ -178,7 +168,7 @@ try ( mcColorPaleteDialog.close() ) catch()
 		mcs.tlp.controls.addRange ( mcs.buttons )
 		
 		mcs.last_button = mcs.buttons[1]
-		mcs.last_button.FlatAppearance.BorderColor = netDrColor clr_seltext
+		mcs.last_button.FlatAppearance.BorderColor = mcDotnet.uiColor #seltext
 	)
 
 	fn onClosing s a = --onClosed
@@ -201,7 +191,7 @@ try ( mcColorPaleteDialog.close() ) catch()
 		form.ControlBox  = false --hide main bar
 		form.FormBorderStyle = form.FormBorderStyle.none
 		form.ShowInTaskbar = false
-		form.BackColor = netDrColor clr_fore
+		form.BackColor = mcDotnet.uiColor #fore
 		local form_size  =[btn_size*columns_rows.x + form_offset, bar_height*columns_rows.y + form_offset]
 		local fpos = 
 		(
@@ -216,7 +206,7 @@ try ( mcColorPaleteDialog.close() ) catch()
 				)
 				[screen_pos.x, screen_pos.y]
 			)
-			else (mcFile.getIniDataFromArray Micra.TempProfileIni "Properties_2" "mcColorPaleteDialog" 2)
+			else execute (mcFile.readSettings Micra.UserProfile "Properties_2/mcColorPaleteDialog" type:"pos")
 		)
 		form.StartPosition = form.StartPosition.Manual
 		form.MinimumSize = netDrSize [btn_size, bar_height]
@@ -225,8 +215,8 @@ try ( mcColorPaleteDialog.close() ) catch()
 		--form.opacity = 0.8
 		
 		mcs.ToolTip.IsBalloon = true
-		mcs.ToolTip.BackColor = netDrColor clr_back
-		mcs.ToolTip.ForeColor = netDrColor clr_text
+		mcs.ToolTip.BackColor = mcDotnet.uiColor #back
+		mcs.ToolTip.ForeColor = mcDotnet.uiColor #text
 		mcs.ToolTip.AutoPopDelay = 10000 --duration
 		mcs.ToolTip.InitialDelay = 800
 		mcs.ToolTip.ReshowDelay = 1000
@@ -236,7 +226,7 @@ try ( mcColorPaleteDialog.close() ) catch()
 		--mcs.tlp.location = netDrPoint [2, 2]
 		--mcs.tlp.margin =  dotnetobject "padding" 2
 		mcs.tlp.padding = dotnetobject "padding" 2
-		mcs.tlp.backColor = netDrColor clr_fore --clr_btn
+		mcs.tlp.backColor = mcDotnet.uiColor #fore --clr_btn
 		mcs.tlp.AutoSize = true
 		mcs.tlp.AutoSizeMode = mcs.tlp.AutoSizeMode.GrowAndShrink
 		mcs.tlp.ColumnCount = columns_rows.x

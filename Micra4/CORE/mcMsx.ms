@@ -104,4 +104,4 @@ struct MICRA_MSX (
 	/*<end>*/
 )	
  --create instance
-Global mcMsx = Micra.instanceStructure MICRA_MSX "mcMsx"
+Global mcMsx = mcStructMan.instanceStructure MICRA_MSX "mcMsx"
