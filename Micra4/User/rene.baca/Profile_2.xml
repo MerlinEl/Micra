@@ -14,7 +14,7 @@
   </Properties_1>
   <Properties_2>
     <mcMicraDialog active="true" pos="[102,200]" size="[148,66]" title="" />
-    <mcCustomizeDialog active="false" pos="[250,202]" size="[224,404]" title="" />
+    <mcCustomizeDialog active="true" pos="[102,200]" size="[148,66]" title="" />
     <mcProgramDialog active="undefined" pos="[100,0]" size="[256,232]" title="" />
     <mcisoDialog active="undefined" pos="[100,152]" size="[140,400]" title="" />
     <mcModifierDialog active="undefined" pos="[100,100]" size="[400,400]" title="" />

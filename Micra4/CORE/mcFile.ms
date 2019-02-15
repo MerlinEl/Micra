@@ -326,7 +326,7 @@ struct MICRA_FILE (
 		)
 		mcFile.saveSettings Micra.UserProfile "Buttons/btn_B4555" node_attribs type:"attribs"
 	*/
-	fn saveSettings xml_file xml_path data type:"default" backup:0 = (
+	fn saveSettings xml_file xml_path data type:"default" backup:10 = ( --temporalily 10 backups for test only
 		
 		local xml = mcXML xml_file
 		if not xml.exists() then ( --create xml file
@@ -372,12 +372,13 @@ struct MICRA_FILE (
 	),
 	/**
 	*@Example
-		local cat_names = mcFile.readSettings Micra.ActionsXML "ACTIONS" type:"keys"
-		local all_parameters = mcFile.readSettings Micra.UserProfile "ACTIONS" type:"attribs"
-		local help_txt = mcFile.readSettings Micra.ActionsHelpXML "Pivot/Afect_Pivot_Only"
-		local pos = mcFile.readSettings Micra.UserProfile "Properties_2/mcCustomizeDialog" type:"pos" --uses default type
-		local is_active = mcFile.readSettings Micra.UserProfile "Properties_2/mcCustomizeDialog" type:"active" --uses default type
-		local size = mcFile.readSettings Micra.UserProfile "Properties_2/mcCustomizeDialog" type:"size" --uses default type
+		cat_names = mcFile.readSettings Micra.ActionsXML "ACTIONS" type:"keys"
+		all_parameters = mcFile.readSettings Micra.ActionsXML "ACTIONS/Object/Spline_Magnet" type:"attribs"
+		all_parameters.print()
+		help_txt = mcFile.readSettings Micra.ActionsHelpXML "Pivot/Afect_Pivot_Only"
+		pos = mcFile.readSettings Micra.UserProfile "Properties_2/mcCustomizeDialog" type:"pos" --uses default type
+		is_active = mcFile.readSettings Micra.UserProfile "Properties_2/mcCustomizeDialog" type:"active" --uses default type
+		size = mcFile.readSettings Micra.UserProfile "Properties_2/mcCustomizeDialog" type:"size" --uses default type
 	*/
 	fn readSettings xml_file xml_path type:"default" = (
 
@@ -457,29 +458,30 @@ struct MICRA_FILE (
 		
 			form = form.form
 		)
-		--format "saving form:% class:%\n" form_name (classOf form)
 		case classOf form of (
 			
 			RolloutClass: (
 			
 				form_settings.add "active" (form.isDisplayed as String)
-				if form.isDisplayed do (
+				--if form.isDisplayed do (
 				
 					form_settings.add "pos" (getDialogPos  form as String)
 					form_settings.add "size" (getDialogSize form as String)
-				)
+				--)
+				--format "saving RolloutClass name:% settigs:%\n" form_name (form_settings.toString())
 			)
 			DotnetObject:(
 				 
 				form_settings.add "active" form.visible
-				if form.visible do (
+				--if form.visible do (
 				
 					form_settings.add "pos" ([form.location.x, form.location.y] as String)
 					form_settings.add "size" ([form.width, form.height] as String)
-				)
+				--)
+				--format "saving DotnetObject name:% settigs:%\n" form_name (form_settings.toString())
 			)
 		)
-		mcFile.saveSettings Micra.UserProfile "Properties_2/mcCustomizeDialog" form_settings type:"attribs"
+		mcFile.saveSettings Micra.UserProfile (form_category+"/"+form_name) form_settings type:"attribs"
 	),
 	fn getClipboardTxt =
 	(

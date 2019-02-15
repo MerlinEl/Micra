@@ -37,7 +37,7 @@ rollout LS3DModelManagerDialog "LS3D Model Manager v1.0" width:764 height:284 (
 	button 'btn_load_semat' "Load Semantic Materials" pos:[636,248] width:124 height:32 align:#left
 
 	local root_edit_dir, root_resources_dir
-	local SettingsINI = Micra.RootDir + "LS3D_ReplaceModel.ini"
+	local SettingsINI = Micra.UserDir + "LS3D_ReplaceModel.xml"
 	/*fn fixPath str = (
 		local arr = #()
 		for i=1 to str.count do (
@@ -63,8 +63,8 @@ rollout LS3DModelManagerDialog "LS3D Model Manager v1.0" width:764 height:284 (
 	
 	fn getINIDirs head = (
 	
-		local keys = getIniSetting SettingsINI head
-		local paths = for k in keys collect getIniSetting SettingsINI head k
+		local keys = mcFile.readSettings SettingsINI head type:"keys"
+		local paths = for k in keys collect mcFile.readSettings SettingsINI (head+"/"+k)
 		return paths	
 	)
 	
@@ -94,24 +94,25 @@ rollout LS3DModelManagerDialog "LS3D Model Manager v1.0" width:764 height:284 (
 	)
 	on LS3DModelManagerDialog open do (
 		
-		root_edit_dir = getIniSetting SettingsINI "ROOT" "edit"
-		root_resources_dir = getIniSetting SettingsINI "ROOT" "res"
-		edt_import.text = getIniSetting SettingsINI "FBX" "import"
-		edt_export.text = getIniSetting SettingsINI "FBX" "export"
+		root_edit_dir = mcFile.readSettings SettingsINI "ROOT/edit"
+		root_resources_dir = mcFile.readSettings SettingsINI "ROOT/res"
+		edt_import.text = mcFile.readSettings SettingsINI "FBX/import"
+		edt_export.text = mcFile.readSettings SettingsINI "FBX/export"
+		
 		ddl_perforce_path.items = getINIDirs "PERFORCE"
-		ddl_perforce_path.selection = (getIniSetting SettingsINI "SELECTION" "perforce_path") as integer
+		ddl_perforce_path.selection = execute(mcFile.readSettings SettingsINI "SELECTION/perforce_path")
 		updatePerforcePaths "undefined"
 		setFocus edt_asset_name
 	)
 	
 	on LS3DModelManagerDialog close do (
 		
-		setIniSetting SettingsINI "FBX" "import" edt_import.text
-		setIniSetting SettingsINI "FBX" "export" edt_export.text
-		setIniSetting SettingsINI "SELECTION" "perforce_path" (ddl_perforce_path.selection as string)
-		delIniSetting SettingsINI "PERFORCE" --remove  head with all sub items
+		mcFile.saveSettings SettingsINI "FBX/import" edt_import.text
+		mcFile.saveSettings SettingsINI "FBX/export" edt_export.text
+		mcFile.saveSettings SettingsINI "SELECTION/perforce_path" (ddl_perforce_path.selection as string)
+		mcFile.delSettings SettingsINI "PERFORCE" type:"keys" --remove all sub items
 		local cnt = 0
-		for i in ddl_perforce_path.items do setIniSetting SettingsINI  "PERFORCE" ("loc_"+(cnt+=1) as string)i 
+		for i in ddl_perforce_path.items do mcFile.saveSettings SettingsINI ("PERFORCE/loc_"+((cnt+=1) as string)) i
 	)
 	
 	on btn_import_fbx pressed do (
@@ -120,6 +121,7 @@ rollout LS3DModelManagerDialog "LS3D Model Manager v1.0" width:764 height:284 (
 		if (asset_name.count == 0) do ((format "Undefined Asset Name! [Micra] \n"); return false)
 		local import_path = edt_import.text
 		if (import_path.count == 0) do ((format "Undefined Import Path! [Micra] \n"); return false)
+		format "import file:%\n" ((import_path+"\\"+asset_name+".FBX"))littleitaly_street_01
 		importfile (import_path+"\\"+asset_name+".FBX") #noPrompt using:FBXIMP
 	)
 	

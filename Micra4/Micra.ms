@@ -200,7 +200,6 @@ try ( mcMicraDialog.close() ) catch()
 		--print "micra closed"
 		s.tag.value.timer.stop()
 		mcFile.saveDialogSettings s.name "Properties_2"
-		
 		Micra.Unload self:false --false self, prevent depency loop
 	)
 	fn changeBackcolor s a = ( 
@@ -269,33 +268,16 @@ try ( mcMicraDialog.close() ) catch()
 	)
 	fn quitMicra s a = ( Micra.unload() ) --> Shut Down Micra
 	fn reloadMicra s a =( Micra.Reload() ) --> Restart Micra
-	
-	--save registred dialogs pos and size to current profile
-	fn saveCurrentProfile = (
-		--get all registred dialogs
-		local dia_names_1 = mcFile.readSettings Micra.UserProfile "Properties_1" type:"keys" --get micra dialogs
-		local dia_names_2 = mcFile.readSettings Micra.UserProfile "Properties_2" type:"keys" --get all other dialogs
-		--save all visible dialogs to /Profile_.ini
-		for n in dia_names_1 do mcFile.saveDialogSettings n "Properties_1"
-		for n in dia_names_2 do mcFile.saveDialogSettings n "Properties_2"
-		--trace info
-		local current_profile_index = mcFile.readSettings Micra.UserSettings "Settings/CurrentProfile"
-		local current_profile_name = mcFile.readSettings Micra.UserSettings ("Profiles/menu_"+current_profile_index)
-		format "% > saveCurrentProfile > Profile:[%] has been Saved!\n" Micra.version current_profile_name
-	)
-
-	fn manageProfile s a =
-	(
+	fn manageProfile s a = (
 		local menu_item_name = s.tag
 		case menu_item_name of (	
-		
-			"Save":saveCurrentProfile()
+	
 			"Manage":mcFile.fileInVersion "Manage_Profiles"
 			default:( --for any other names  - -> load profile by name
-
-				local keys = for i = 1 to 8 collect (getIniSetting Micra.UserSettings "Profiles" (i as string)) --collect all profile names
+				
+				local keys = for i = 1 to 8 collect (mcFile.readSettings Micra.UserSettings ("Profiles/menu_"+(i as string))) --collect all profile names	
 				local profile_index = (findItem keys menu_item_name ) as string --find profile index by name
-				setIniSetting Micra.UserSettings "Settings" "CurrentProfile" profile_index --save desired profile index
+				mcFile.saveSettings Micra.UserSettings "Settings/CurrentProfile" profile_index --add-replace node
 				reloadMicra s a
 			)
 		)
@@ -305,7 +287,6 @@ try ( mcMicraDialog.close() ) catch()
 	--fn onMouseLeave s a = (s.FlatStyle = s.FlatStyle.flat)
 	fn onMouseClick s a =
 	(
-
 		local msc = s.parent.parent.tag.value
 		--s.FlatStyle = s.FlatStyle.flat
 		--print (s.PointToClient a.location).x
@@ -358,8 +339,8 @@ try ( mcMicraDialog.close() ) catch()
 			(
 				local mnu = msc.mnu_profile
 				mnu.tag = s.parent.parent
-				local profile_names = for i = 1 to 8 collect (getIniSetting Micra.UserSettings "Profiles" (i as string))
-				local command_names = #("Save", "Manage")
+				local profile_names = for i = 1 to 8 collect (mcFile.readSettings Micra.UserSettings ("Profiles/menu_"+(i as string)))
+				local command_names = #("Manage")
 				local menu_items_names = mcArray.mergeClone profile_names command_names
 				--Add menu components for first time
 				if msc.mnu_p_items.count == 0 do
@@ -372,8 +353,8 @@ try ( mcMicraDialog.close() ) catch()
 					mnu.ShowImageMargin = false
 					for n in menu_items_names do (
 					
-						--add separator before "Save" item
-						if n == "Save" do mnu.Items.Add(dotNetObject "System.Windows.Forms.ToolStripSeparator")
+						--add separator before "Manage" item
+						if n == "Manage" do mnu.Items.Add(dotNetObject "System.Windows.Forms.ToolStripSeparator")
 						--add menu items
 						itm = mnu.Items.Add (n+"...")
 						itm.tag = n
@@ -384,7 +365,7 @@ try ( mcMicraDialog.close() ) catch()
 					mnu.Items.Add(dotNetObject "System.Windows.Forms.ToolStripSeparator")
 				)
 				--mark last used profile to green
-				local cp_num = execute (getIniSetting Micra.UserSettings "Settings" "CurrentProfile")
+				local cp_num = execute (mcFile.readSettings Micra.UserSettings "Settings/CurrentProfile")
 				for i = 1 to profile_names.count do (
 				
 					if i != cp_num then(

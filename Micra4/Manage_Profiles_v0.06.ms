@@ -12,9 +12,8 @@ try ( mcSaveProfileAsDialog.close() ) catch()
 	local form_bounds     = 2
 	local form_offset     = 4
 	local btn_size        = 24
-	local form_size       =[180, 66]
+	local form_size       =[300, 66]
 	local cp_width        = 48
-	local columns_rows    = [1, 4]
 	local debug = 0
 
 	-->Components---------------------------------------------------------------------
@@ -79,7 +78,7 @@ try ( mcSaveProfileAsDialog.close() ) catch()
 		local sel_index =  (mcs.cbox.SelectedIndex+1) as string
 		local new_name = mcs.ebox.text
 		--format "rename profile:% to:%\n" sel_index new_name
-		setIniSetting Micra.UserSettings "Profiles" sel_index new_name
+		mcFile.saveSettings xml_file ("Profiles/menu_"+sel_index) new_name
 		s.hide()
 	)
 	fn onRename s a =
@@ -88,16 +87,32 @@ try ( mcSaveProfileAsDialog.close() ) catch()
 		then (renameItem s.parent; s.hide()) --Enter
 		else if a.KeyValue == 27 then s.hide() -- Ecape
 	)
+	fn copyProfile mcs = (
+	
+		--if mcs.ebox.text != mcs.cbox.SelectedItem do renameItem form
+				/*local sel_index = (mcs.cbox.SelectedIndex+1) as string
+				local targetFile = Micra.RootDir +"User\\Profile_" + sel_index  + ".ini"
+
+				--set new name to ini
+--TODO				
+				form.close()*/
+	)
+	fn pasteProfile mcs = (
+	
+--TODO	
+	
+	)
 	fn editItemName mcs  =
 	(
-		mcs.ebox.text = mcs.cbox.SelectedItem
+--TODO
+		/*mcs.ebox.text = mcs.cbox.SelectedItem
 		mcs.ebox.show()
 		mcs.ebox.BringToFront()
-		mcs.ebox.focus()
+		mcs.ebox.focus()*/
 	)
 	fn resetProfileToDefault mcs = (
-	
-		local reset_profile = queryBox ("You are sure to reset profile:[ "+mcs.cbox.SelectedItem+" ]?") title:"Warning!"
+--TODO	
+		/*local reset_profile = queryBox ("You are sure to reset profile:[ "+mcs.cbox.SelectedItem+" ]?") title:"Warning!"
 		format "reseting profile:%\n" reset_profile
 		if not reset_profile do return false
 		local items = mcs.cbox.items
@@ -106,35 +121,26 @@ try ( mcSaveProfileAsDialog.close() ) catch()
 		mcs.cbox.items.RemoveAt sel_index --remove old item
 		mcs.cbox.items.Insert sel_index "Empty"	 --add new item
 		mcs.cbox.SelectedIndex = sel_index --reselect item
-		sel_index = (sel_index+1) as string
-		--setIniSetting Micra.UserSettings "Profiles" sel_index "Empty"
+		sel_index = (sel_index+1) as string*/
 	)
 --||
 	fn onMouseUp s a = 
 	(
 		local form = s.parent.parent
 		local mcs = form.tag.value
-		case s.text of
-		(
-			"Clone" :
-			(
-				--if mcs.ebox.text != mcs.cbox.SelectedItem do renameItem form
-				/*local sel_index = (mcs.cbox.SelectedIndex+1) as string
-				local targetFile = Micra.RootDir +"User\\Profile_" + sel_index  + ".ini"
-
-				--set new name to ini
-				setIniSetting Micra.UserSettings "Profiles" sel_index mcs.cbox.SelectedItem
-				form.close()*/
-			)
-			"Rename": editItemName mcs
-			"Reset" :  resetProfileToDefault mcs
+		case s.text of (
+		
+			"Copy"	: copyProfile mcs
+			"Paste"	: pasteProfile mcs
+			"Rename"	: editItemName mcs
+			"Reset"	: resetProfileToDefault mcs
 		)
 	)
-	fn addButtons mcs =
-	(
-		local titles = #("Clone", "Rename", "Reset")
-		for i = 1 to 3 do
-		(
+	fn addButtons mcs = (
+	
+		local titles = #("Copy", "Paste", "Rename", "Reset")
+		for t in titles do (
+		
 			local btn = dotnetObject "Button"
 			btn.BackColor = mcDotnet.uiColor #back
 			btn.ForeColor = mcDotnet.uiColor #text
@@ -143,9 +149,8 @@ try ( mcSaveProfileAsDialog.close() ) catch()
 			btn.FlatAppearance.BorderColor = mcDotnet.uiColor #back
 			btn.FlatAppearance.BorderSize = 1
 			btn.margin =  dotnetobject "padding" 0
-			btn.text = titles[i]
-			btn.name = "btn_" + (i as integer) as string
-			
+			btn.text = t
+			btn.name = "btn_" + t
 			dotNet.addEventHandler btn "MouseUp" onMouseUp
 			mcs.buttons += #( btn )
 		)

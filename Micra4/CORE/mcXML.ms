@@ -60,11 +60,14 @@ Global mcXMLNode
 	xml.save()
 *
 *@Example
-
 	xml = mcXML (Micra.TempDir + "Actions.xml")
+	xml.toString()
+
+	xml = mcXML (Micra.TempDir + "Actions_01.xml")
 	xml.addRootNode "ACTIONS"	
 	xml.fromString mcXMLTemp._template_2
-	xml.addNode "//ACTIONS/Nova/Day" "d_001" attr:#(mcXMLAttrib "sell" "1000")
+	new_node = xml.addNode "//SETTINGS/Nova/Day" "d_001" attr:#(mcXMLAttrib "sell" "1000")
+	xml.addNode "//SETTINGS/Nova/Day" "d_001" attr:#(mcXMLAttrib "sell" "2000") override:true
 	xml.toString()
 	xml.save()
 *
@@ -76,7 +79,7 @@ struct MICRA_XML_TEMPLATES (
 
 	_template_1 = ( --personaly newer use this type of struct, _template_2 is better
 		"<?xml version='1.0' encoding='UTF-8'?>" +
-		"<bookstore>" +
+		"<BOOKSTORE>" +
 			"<book category='COOKING'>" +
 				"<title lang='en'>Everyday Italian</title>" +
 				"<author>Giada De Laurentiis</author>" +
@@ -92,7 +95,7 @@ struct MICRA_XML_TEMPLATES (
 			"<book genre='novel' ISBN='1-861001-57-5'>" +
 			"<title>Pride And Prejudice</title>" +
 			"</book>" +
-		"</bookstore>"
+		"</BOOKSTORE>"
 	),
 	_template_2 = (
 	
@@ -106,14 +109,14 @@ struct MICRA_XML_TEMPLATES (
 				"<btn_B7 action='Move_To_Ground' icon='54' />" +
 			"</Buttons>" +
 			"<Properties_1>" +
-				"<mc_Dialog_A=active='true' pos='[2172,872]' size='[148,66]' title='Menu:' btnCount='[6,2]' />" +
-				"<mc_Dialog_B=active='true' pos='[2172,288]' size='[148,162]' title='Object:' btnCount='[6,6]' />" +
-				"<mc_Dialog_C=active='true' pos=['2172,450]' size='[148,66]' title='Pivot:' btnCount='[6,2]' />" +
+				"<mc_Dialog_A active='true' pos='[2172,872]' size='[148,66]' title='Menu:' btnCount='[6,2]' />" +
+				"<mc_Dialog_B active='true' pos='[2172,288]' size='[148,162]' title='Object:' btnCount='[6,6]' />" +
+				"<mc_Dialog_C active='true' pos='[2172,450]' size='[148,66]' title='Pivot:' btnCount='[6,2]' />" +
 			"</Properties_1>" +
-			"<Properties_2>" +
-				"<mcMicraDialog=#(true, [2172,222], [148,66], '') />" +
-				"<mcCustomizeDialog=#(false, [1380,500], [600,404], '') />" +
-				"<mcProgramDialog=#(undefined, [2298,0], [256,232], '') />"  +
+				"<Properties_2>" +
+				"<mcMicraDialog val='#(true, [2172,222], [148,66])' />" +
+				"<mcCustomizeDialog val='#(false, [1380,500], [600,404])' />" +
+				"<mcProgramDialog val='#(undefined, [2298,0], [256,232])' />"  +
 			"</Properties_2>" +
 		"</SETTINGS>" 
 	)
@@ -522,7 +525,13 @@ public
 	/*<end>*/
 )	
 
-
+/*
+ XmlElement bookElement = doc.CreateElement("book", "http://www.contoso.com/books");
+ XmlElement titleElement = doc.CreateElement("title");
+ titleElement.InnerText = title;
+  bookElement.AppendChild(titleElement);
+bookElement.InnerXml = bookElement.InnerXml.Replace(titleElement.OuterXml, "\n    " + titleElement.OuterXml + " \n    ");
+*/
 
 
 --Removed > 

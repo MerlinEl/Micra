@@ -972,6 +972,7 @@ fn inicializeInterface form mcs =
 	form.name = "mcCustomizeDialog"
 	form.ControlBox  = false --hide main bar
 	local fpos = execute (mcFile.readSettings Micra.UserProfile "Properties_2/mcCustomizeDialog" type:"pos")
+	format "mcCustomizeDialog load pos:%\n" fpos
 	form.StartPosition = form.StartPosition.Manual
 	form.bounds = netDrRect fpos [form_width, form_height]
 	form.FormBorderStyle = form.FormBorderStyle.none
