@@ -73,7 +73,8 @@ struct MICRA_STRUCTURE (
 		) else (
 		
 			--> Close Micra's Dialogs
-			local dialogs_names	= join (getINISetting UserProfile "Properties_1") (getIniSetting UserProfile "Properties_2")
+			local dialogs_names	= mcFile.readSettings UserProfile "Properties_1" type:"keys"
+			join dialogs_names (mcFile.readSettings UserProfile "Properties_2" type:"keys")
 			for n in dialogs_names do (
 			
 				if n == "mcMicraDialog" do continue --close all except Micra dialog (prevent endless loop)
@@ -84,6 +85,8 @@ struct MICRA_STRUCTURE (
 							if d.visible do (
 					
 								format "closing dotnet dialog:% \n" n
+								--Save active for Properties_1 and Properties_2 separate
+								--mcFile.saveSettings UserProfile ("Properties_1/"+n) "true" type:"active" --add-replace node with parameter > cnt = "true"
 								d.close() 
 							)
 					)
@@ -91,12 +94,13 @@ struct MICRA_STRUCTURE (
 							if d.isDisplayed do (
 							
 							format "closing rollout dialog:% \n" n
+							--Save active for Properties_1 and Properties_2 separate
+							--mcFile.saveSettings UserProfile ("Properties_1/"+n) "true" type:"active" --add-replace node with parameter > cnt = "true"
 							destroyDialog d
 						)
 					)
 				)
 			)
-			
 			-->Unload Calbacks
 			callbacks.removeScripts id:#mcGeneralCall
 	
@@ -114,7 +118,13 @@ mc_Dialog_DropTarget = undefined
 		)
 	), 
 	fn load = (fileIn (RootDir+ "_Loader.ms")), -- Run Loader
-	fn run  = (fileIn (RootDir + "Micra.ms")), -- Run Micra
+	fn run  = (
+	
+		fileIn (RootDir + "Micra.ms")
+		--TODO open dialogs(Properties_2) which was opened last time, maybe.....
+		--local dialogs_names = mcFile.readSettings UserProfile "Properties_2" type:"keys"
+		--for each dialog where active="true" open it too
+	), -- Run Micra
 	fn reload soft:true = (
 	
 		unload()
@@ -360,7 +370,5 @@ if execute (getINISetting UserSettings "Settings" "ShowFileName") do
 			return false
 		)
 		format "% > System files(%) checked succesfully!\n" version files_list.count
-
-
 */		
 	

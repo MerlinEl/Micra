@@ -68,7 +68,7 @@ Struct MICRA_DIALOG (
 		
 		--get visible form names
 		local all_forms = mcFile.readSettings Micra.UserProfile "Properties_1" type:"keys"
-			 all_forms = join all_forms (mcFile.readSettings Micra.UserProfile "Properties_2" type:"keys")
+			 join all_forms (mcFile.readSettings Micra.UserProfile "Properties_2" type:"keys")
 		local visible_forms = for i in all_forms where (execute ("classOf "+ i +"== dotNetObject")) and (execute(i+".Visible")) collect i
 		
 		for i in visible_forms do
@@ -153,9 +153,9 @@ Struct MICRA_DIALOG (
 		local sDist = rect_desktop.ma.x / 200-- set snap distance
 		
 		--get visible Dialog names
-		local allDialogs = mcFile.readSettings Micra.UserProfile "Properties_1" type:"keys"
-			 allDialogs = join allDialogs (mcFile.readSettings Micra.UserProfile "Properties_2" type:"keys")
-		local visDialogs = for i in allDialogs where (execute (i+" != undefined")) and (execute ("classOf "+ i +" == RolloutClass")) and (execute(i+".isDisplayed")) collect i
+		local dialogs_names	= mcFile.readSettings Micra.UserProfile "Properties_1" type:"keys"
+		join dialogs_names (mcFile.readSettings Micra.UserProfile "Properties_2" type:"keys")	 
+		local visDialogs = for i in dialogs_names where (execute (i+" != undefined")) and (execute ("classOf "+ i +" == RolloutClass")) and (execute(i+".isDisplayed")) collect i
 
 		for i in visDialogs do
 		(

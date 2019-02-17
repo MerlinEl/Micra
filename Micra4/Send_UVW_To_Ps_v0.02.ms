@@ -73,28 +73,28 @@ rollout mcSendUVWToPsDialog "Untitled" width:148 height:172
 	fn loadInterface =
 	(
 		if not doesFileExist Micra.UserSettings do return false
-		local ved = getIniSetting Micra.UserSettings "RenderToTextureMod" "Visible Edges" 
+		local ved = mcFile.readSettings Micra.UserSettings "RenderToTextureMod/Visible_Edges"
 		if ved  != "" do chk_edges.checked = execute ved
-		local sed = getIniSetting Micra.UserSettings "RenderToTextureMod" "Seam Edges" 
+		local sed = mcFile.readSettings Micra.UserSettings "RenderToTextureMod/Seam_Edges"
 		if sed  != "" do chk_seam.checked = execute sed
-		local sef = getIniSetting Micra.UserSettings "RenderToTextureMod" "Slected Faces" 
+		local sef = mcFile.readSettings Micra.UserSettings "RenderToTextureMod/Slected_Faces"
 		if sef  != "" do chk_sel_faces.checked = execute sef
-		local sec = getIniSetting Micra.UserSettings "RenderToTextureMod" "Seam Edges Color" 
+		local sec = mcFile.readSettings Micra.UserSettings "RenderToTextureMod/Seam_Edges_Color" 
 		if sec  != "" do cp_seam.color = execute sec
-		local mde = getIniSetting Micra.UserSettings "RenderToTextureMod" "Mode"
+		local mde = mcFile.readSettings Micra.UserSettings "RenderToTextureMod/Mode"
 		if mde  != "" do ddl_mode.selection = execute mde
-		local siz = getIniSetting Micra.UserSettings "RenderToTextureMod" "Size"
+		local siz = mcFile.readSettings Micra.UserSettings "RenderToTextureMod/Size"
 		if siz  != "" do ddl_size.selection = execute siz
 	)
 	fn saveInterface =
 	(
 		if not doesFileExist Micra.UserSettings do return false
-		setIniSetting Micra.UserSettings "RenderToTextureMod" "Visible Edges" (chk_edges.checked as string)
-		setIniSetting Micra.UserSettings "RenderToTextureMod" "Seam Edges" (chk_seam.checked as string)
-		setIniSetting Micra.UserSettings "RenderToTextureMod" "Slected Faces" (chk_sel_faces.checked as string)
-		setIniSetting Micra.UserSettings "RenderToTextureMod" "Seam Edges Color" (cp_seam.color as string)
-		setIniSetting Micra.UserSettings "RenderToTextureMod" "Mode" (ddl_mode.selection as string)
-		setIniSetting Micra.UserSettings "RenderToTextureMod" "Size" (ddl_size.selection as string)
+		mcFile.saveSettings Micra.UserSettings "RenderToTextureMod/Visible_Edges" (chk_edges.checked as string)
+		mcFile.saveSettings Micra.UserSettings "RenderToTextureMod/Seam_Edges" (chk_seam.checked as string)
+		mcFile.saveSettings Micra.UserSettings "RenderToTextureMod/Slected_Faces" (chk_sel_faces.checked as string)
+		mcFile.saveSettings Micra.UserSettings "RenderToTextureMod/Seam_Edges_Color" (cp_seam.color as string)
+		mcFile.saveSettings Micra.UserSettings "RenderToTextureMod/Mode" (ddl_mode.selection as string)
+		mcFile.saveSettings Micra.UserSettings "RenderToTextureMod/Size" (ddl_size.selection as string)
 	)
 	-->DialogProp --------------------------------------------------------------------
 	on mcSendUVWToPsDialog rbuttonup pos do (destroyDialog mcSendUVWToPsDialog)

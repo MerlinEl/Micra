@@ -17,10 +17,10 @@
     <menu_2 val="Empty" />
     <menu_3 val="Modeling" />
     <menu_4 val="Empty2" />
-    <menu_5 val="EmptyTest1" />
-    <menu_6 val="EmptyTest2" />
+    <menu_5 val="Empty" />
+    <menu_6 val="Empty" />
     <menu_7 val="Empty" />
-    <menu_8 val="test1" />
+    <menu_8 val="Empty" />
   </Profiles>
   <PoseTool>
     <Body val="50" />

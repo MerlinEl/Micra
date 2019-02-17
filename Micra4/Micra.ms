@@ -33,9 +33,6 @@ try ( mcMicraDialog.close() ) catch()
 	-->Locals-----------------------------------------------------------------
 	local sec = 60000
 	local netDMove = false, netDmPos
-	local last_profile = execute (mcFile.readSettings Micra.UserSettings "Interface/lastprofile")
-	local profiles = #("DefaultColor", "UserColor", "ForestColor", "EarthColor", "MoonColor", "SeaColor", "SunColor", "Close")
-	local head_str = profiles[last_profile]
 	local bar_height = 14
 	local form_bounds  = 2
 	local form_offset  = 4
@@ -267,7 +264,7 @@ try ( mcMicraDialog.close() ) catch()
 		else (mcCreateNetDynamicDialog s.tag)
 	)
 	fn quitMicra s a = ( Micra.unload() ) --> Shut Down Micra
-	fn reloadMicra s a =( Micra.Reload() ) --> Restart Micra
+	fn reloadMicra s a =( Micra.reload() ) --> Restart Micra
 	fn manageProfile s a = (
 		local menu_item_name = s.tag
 		case menu_item_name of (	
@@ -278,7 +275,7 @@ try ( mcMicraDialog.close() ) catch()
 				local keys = for i = 1 to 8 collect (mcFile.readSettings Micra.UserSettings ("Profiles/menu_"+(i as string))) --collect all profile names	
 				local profile_index = (findItem keys menu_item_name ) as string --find profile index by name
 				mcFile.saveSettings Micra.UserSettings "Settings/CurrentProfile" profile_index --add-replace node
-				reloadMicra s a
+				Micra.reload()
 			)
 		)
 	)
@@ -342,28 +339,26 @@ try ( mcMicraDialog.close() ) catch()
 				local profile_names = for i = 1 to 8 collect (mcFile.readSettings Micra.UserSettings ("Profiles/menu_"+(i as string)))
 				local command_names = #("Manage")
 				local menu_items_names = mcArray.mergeClone profile_names command_names
-				--Add menu components for first time
-				if msc.mnu_p_items.count == 0 do
-				(
-					--Add separator at begin
-					mnu.Items.Add(dotNetObject "System.Windows.Forms.ToolStripSeparator")
-					--setup skin
-					mnu.BackColor = netDrColor (mcUIColors.get #back)
-					mnu.ForeColor = netDrColor (mcUIColors.get #text)
-					mnu.ShowImageMargin = false
-					for n in menu_items_names do (
-					
-						--add separator before "Manage" item
-						if n == "Manage" do mnu.Items.Add(dotNetObject "System.Windows.Forms.ToolStripSeparator")
-						--add menu items
-						itm = mnu.Items.Add (n+"...")
-						itm.tag = n
-						dotnet.addeventhandler itm "Click" manageProfile
-						msc.mnu_p_items += #(itm)	
-					)
-					--Add separator at end
-					mnu.Items.Add(dotNetObject "System.Windows.Forms.ToolStripSeparator")
+				--Add menu components each time menu opens
+				if msc.mnu_p_items.count > 0 do mnu.Items.clear()
+				--Add separator at begin
+				mnu.Items.Add(dotNetObject "System.Windows.Forms.ToolStripSeparator")
+				--setup skin
+				mnu.BackColor = netDrColor (mcUIColors.get #back)
+				mnu.ForeColor = netDrColor (mcUIColors.get #text)
+				mnu.ShowImageMargin = false
+				for n in menu_items_names do (
+				
+					--add separator before "Manage" item
+					if n == "Manage" do mnu.Items.Add(dotNetObject "System.Windows.Forms.ToolStripSeparator")
+					--add menu items
+					itm = mnu.Items.Add (n+"...")
+					itm.tag = n
+					dotnet.addeventhandler itm "Click" manageProfile
+					msc.mnu_p_items += #(itm)	
 				)
+				--Add separator at end
+				mnu.Items.Add(dotNetObject "System.Windows.Forms.ToolStripSeparator")
 				--mark last used profile to green
 				local cp_num = execute (mcFile.readSettings Micra.UserSettings "Settings/CurrentProfile")
 				for i = 1 to profile_names.count do (

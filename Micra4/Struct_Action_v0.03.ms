@@ -438,7 +438,7 @@ struct mcAction (
 				on slidDialog rbuttonup pos do destroyDialog slidDialog
 				on slidDialog open do 
 				(
-					local val = getIniSetting Micra.UserSettings "Settings" "AimScaleFactor"
+					local val = mcFile.readSettings Micra.UserSettings "Settings/AimScaleFactor"
 					lbl.caption = "  Zoom Factor: ["+val+"]"
 					sldVal.value = execute val 
 				)
@@ -448,7 +448,7 @@ struct mcAction (
 				)
 				on sldVal buttonup do
 				(
-					setIniSetting Micra.UserSettings "Settings" "AimScaleFactor" (sldVal.value as string)
+					mcFile.saveSettings Micra.UserSettings "Settings/AimScaleFactor" (sldVal.value as string)
 					destroyDialog slidDialog
 				)
 			)
@@ -456,7 +456,7 @@ struct mcAction (
 		)
 		else
 		(
-			local iVal = getIniSetting Micra.UserSettings "Settings" "AimScaleFactor"
+			local iVal = mcFile.readSettings Micra.UserSettings "Settings/AimScaleFactor"
 			
 			--Store Snap Settings
 			local type = snapMode.type

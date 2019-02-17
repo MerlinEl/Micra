@@ -29,6 +29,9 @@ public
 	*/
 	fn fromString str = (
 		--dotNetObject:System.DateTime
+		 --day and month are swapped
+		 
+		
 		_cur_date = (dotNetClass "System.DateTime").parse str
 		this
 	),

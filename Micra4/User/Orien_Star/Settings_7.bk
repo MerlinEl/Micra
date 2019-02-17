@@ -20,7 +20,7 @@
     <menu_5 val="EmptyTest1" />
     <menu_6 val="EmptyTest2" />
     <menu_7 val="Empty" />
-    <menu_8 val="test1" />
+    <menu_8 val="Empty" />
   </Profiles>
   <PoseTool>
     <Body val="50" />

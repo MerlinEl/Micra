@@ -14,7 +14,7 @@
   </Properties_1>
   <Properties_2>
     <mcMicraDialog active="true" pos="[1570,210]" size="[148,66]" title="" />
-    <mcCustomizeDialog active="false" pos="[1280,300]" size="[224,404]" title="" />
+    <mcCustomizeDialog active="false" pos="[1572,884]" size="[148,66]" title="" />
     <mcProgramDialog active="false" pos="[100,0]" size="[256,232]" title="" />
     <mcisoDialog active="false" pos="[100,152]" size="[140,400]" title="" />
     <mcModifierDialog active="false" pos="[100,100]" size="[400,400]" title="" />
@@ -32,7 +32,7 @@
     <mcLpWizardDialog active="false" pos="[100,151]" size="[448,84]" title="" />
     <mcCharSelectDialog active="false" pos="[100,390]" size="[212,388]" title="" />
     <mcCharPoseDialog active="false" pos="[100,304]" size="[146,388]" title="" />
-    <mcSaveProfileAsDialog active="true" pos="[1300,280]" size="[240,66]" title="" />
+    <mcSaveProfileAsDialog active="true" pos="[1160,360]" size="[240,66]" title="" />
     <mcDgalleryDialog active="false" pos="[100,148]" size="[875,850]" title="" />
     <mcRandomizeDialog active="false" pos="[100,152]" size="[152,332]" title="" />
     <mcColorPaleteDialog active="false" pos="[1474,230]" size="[244,60]" title="" />
@@ -44,7 +44,7 @@
     <mcRotateObjectDialog active="false" pos="[100,100]" size="[100,100]" title="" />
     <mcViewportRecorderDialog active="false" pos="[100,100]" size="[100,100]" title="" />
     <mcGifCompillerDialog active="false" pos="[100,100]" size="[100,100]" title="" />
-    <mcScriptManDialog active="false" pos="[0,0]" size="[0,0]" title="" />
+    <mcScriptManDialog active="false" pos="[100,166]" size="[400,624]" title="" />
     <mcColorPickerDialog active="false" pos="[1244,290]" size="[328,276]" title="" />
     <mcQuickColorPickerDialog active="false" pos="[100,100]" size="[100,100]" title="" />
     <mcInterfaceColorDilaog active="false" pos="[250,606]" size="[299,130]" title="" />

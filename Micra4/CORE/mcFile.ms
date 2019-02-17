@@ -21,6 +21,27 @@ struct MICRA_FILE (
 	
 	all_dirs = #(),
 	fn getSource = getSourceFileName(), --get path of this script
+	/*fn secondsSinceFileWritten fpath = ( --Not Used
+	
+   		if not doesFileExist fpath then 0
+   		else (
+   			local f = dotnetClass "system.io.File"
+   			local ft = f.GetLastWriteTimeUtc(fpath)
+   			local dt = dotNetClass "System.DateTime"
+   			dt = dt.UtcNow
+  			local t = dt.Ticks - ft.Ticks
+   			local sec = ((t / 10000.0 / 1000.0) as string) as integer
+   			sec
+   		)
+   	),*/
+	fn secondsSinceFileWritten fpath = (
+		if not doesFileExist fpath then 0
+		else (
+			local now = (dotnetclass "System.DateTime").UtcNow
+			local last = (dotnetclass "System.IO.File").GetLastWriteTimeUtc fpath
+			(now.Subtract last).Seconds
+		)
+	),
 	/**
 	*@Usage
 		script_name	: String > 
@@ -189,13 +210,25 @@ struct MICRA_FILE (
 		close out_file --important to close else file can't be deleted
 		OK
 	),
+	fn getLastVersion files_array = (
+
+		local last_version = 1
+		for f in files_array do ( 
+			
+			local fname = getFilenameFile f
+			local arr = filterString fname "_"
+			local v = execute arr[arr.count]
+			if last_version < v do last_version = v
+		)
+		last_version
+	),
 	/**
 	*@Usage
 		Create file copy with extension *.bk 
 		[ file_name.bk1, file_name.bk2, file_name.bk3,...max_cnt ]
 		max_cnt	define how many copies will be created, after max reached, then starts override oldest ones
 	*/
-	fn backupFile fpath dest_dir:undefined max_cnt:3 = (
+	fn backupFile fpath dest_dir:undefined max_cnt:0 = (
 	
 		if doesFileExist fpath and max_cnt > 0 then (
 		
@@ -208,34 +241,46 @@ struct MICRA_FILE (
 			local file_name = getFilenameFile fpath
 			--gather all backups
 			local backup_files = getFiles (dest_dir+"*.bk")
+			backup_files = for f in backup_files where findString f file_name != undefined collect f --filter only backups of current file
+			--format "mcFile > backupFile > Existing backups count:[ %/% ]\n" backup_files.count max_cnt
 			if backup_files.count == 0 then ( --create first backup
-			
+--print "first"
 				local fpath_bk = dest_dir + file_name +"_1.bk"
 				local file_created = copyFile fpath fpath_bk
 				--format "mcFile > backupFile > file: [ % ] success:%\n" fpath_bk file_created
 				
 			) else if  backup_files.count < max_cnt then ( --create next backup
-				
-				local fpath_bk = dest_dir + file_name +"_"+(backup_files.count+1) as string+".bk"
+--print "next"	
+				local last_version = getLastVersion backup_files
+				local fpath_bk = dest_dir + file_name +"_"+(last_version+1) as string+".bk"
 				local file_created = copyFile fpath fpath_bk
 				--format "mcFile > backupFile > file: [ % ] success:%\n" fpath_bk file_created
 	
 			) else ( --override oldest backup
-			
+--print "override"
 				local dates = #()
 				for f in backup_files do (
 				
-					local file_mod_date = getFileModDate f
-					local offset  = (mcDate.fromString file_mod_date).offset units:#sec
-					--format "file:% is old (%) sec\n" (getFilenameFile f) offset
-					dates += #(mcItem key:(getFilenameFile f) val:offset tag:f)
+					local file_lifetime = secondsSinceFileWritten f
+					--format "file:% is old (%) sec\n" (getFilenameFile f) file_lifetime
+					dates += #(mcItem key:(getFilenameFile f) val:file_lifetime tag:f)
 				) 
-				fn compareDates a b =  ( a.val < b.val )
+				fn compareDates a b =  (  --sort items from lower value to higer
+				
+					case of (
+					
+						(a.val < b.val) : -1 
+						(a.val > b.val) : 1
+						default: 0
+					)
+				)
 				qSort dates compareDates
-				local fpath_bk = dates[1].tag
-				deleteFile fpath_bk
+				--for d in dates do format "mcFile > backupFile > sorted file:% old:%\n" d.key d.val
+				local fpath_bk = dates[dates.count].tag --pick file with oldest date
+				local file_deleted = deleteFile fpath_bk
 				local file_created = copyFile fpath fpath_bk
-				--format "mcFile > backupFile > file: [ % ] success:%\n" fpath_bk file_created
+				format "mcFile > backupFile > delete oldest backup [ % ] success:%\n" fpath_bk file_deleted
+				format "mcFile > backupFile > create new backup [ % ] success:%\n" fpath_bk file_created
 			)
 		) else (
 		
@@ -326,7 +371,7 @@ struct MICRA_FILE (
 		)
 		mcFile.saveSettings Micra.UserProfile "Buttons/btn_B4555" node_attribs type:"attribs"
 	*/
-	fn saveSettings xml_file xml_path data type:"default" backup:10 = ( --temporalily 10 backups for test only
+	fn saveSettings xml_file xml_path data type:"default" backup:0 = (
 		
 		local xml = mcXML xml_file
 		if not xml.exists() then ( --create xml file

@@ -7,7 +7,7 @@
     <mc_Dialog_D active="false" pos="[102,494]" size="[148,90]" title="Select:" btnCount="[6,3]" />
     <mc_Dialog_E active="false" pos="[100,843]" size="[244,42]" title="Animation:" btnCount="[10,1]" />
     <mc_Dialog_F active="false" pos="[250,202]" size="[196,90]" title="Modifiers:" btnCount="[8,3]" />
-    <mc_Dialog_G active="true" pos="[102,266]" size="[148,66]" title="Modify:" btnCount="[6,2]" />
+    <mc_Dialog_G active="true" pos="[1572,662]" size="[148,66]" title="Modify:" btnCount="[6,2]" />
     <mc_Dialog_H active="false" pos="[102,674]" size="[148,66]" title="Materials:" btnCount="[6,2]" />
     <mc_Dialog_I active="false" pos="[102,806]" size="[148,66]" title="Programming:" btnCount="[6,2]" />
     <mc_Dialog_J active="false" pos="[100,510]" size="[460,42]" title="Experimental:" btnCount="[19,1]" />

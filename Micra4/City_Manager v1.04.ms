@@ -429,7 +429,7 @@ rollout mcCityManDialog "City Manager v1.04" width:500 height:812
 						local the_node = getNodeByName n
 						if the_node == undefined do continue
 						local node_children = the_node.children
-						all_children = join all_children node_children
+						join all_children node_children
 					)
 					autosel = off
 					--undo "CityMan - Hide" on 
@@ -466,7 +466,7 @@ rollout mcCityManDialog "City Manager v1.04" width:500 height:812
 						local the_node = getNodeByName n
 						if the_node == undefined do continue
 						local node_children = the_node.children
-						all_children = join all_children node_children
+						join all_children node_children
 					)
 					autosel = off
 					--undo "CityMan - Unhide" on 
@@ -568,7 +568,7 @@ createDialog mcCityManDialog
 
 coll_roads = for o in selection where (findString o.name "coll_hoboken_road") != undefined collect o
 coll_rails = for o in selection where (findString o.name "coll_hoboken_rail") != undefined collect o
-coll_roads = join coll_roads coll_rails
+join coll_roads coll_rails
 select coll_roads
 
 */
