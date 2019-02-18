@@ -8,7 +8,6 @@ Global mcDeepIsolate
 Global mcDeepIsoCallbacks
 Global netDrRect
 Global netDrSize
-Global netDrColor
 Global getIconDotNet
 
 --> debug mode
@@ -49,18 +48,6 @@ fn mcDeepIsolate lvl:#upper =
 			--> Isolate Locals
 			objects_by_lvl   = #(),
 			current_level = 1,
-			last_profile = execute (mcFile.saveLoadIniSetings head:"Interface" key:"lastprofile" action:#load),
-			profiles = #("DefaultColor", "UserColor", "ForestColor", "EarthColor", "MoonColor", "SeaColor", "SunColor", "Close"),
-			head_str = profiles[last_profile],
-			clr_back     = execute (mcFile.saveLoadIniSetings head:head_str key:"backcolor" action:#load),
-			clr_fore     = execute (mcFile.saveLoadIniSetings head:head_str key:"forecolor" action:#load),
-			clr_sel      = execute (mcFile.saveLoadIniSetings head:head_str key:"selected"  action:#load),
-			clr_mark     = execute (mcFile.saveLoadIniSetings head:head_str key:"marked"  action:#load),
-			clr_btn      = execute (mcFile.saveLoadIniSetings head:head_str key:"button"   action:#load),
-			clr_inact    = execute (mcFile.saveLoadIniSetings head:head_str key:"inactive"  action:#load),
-			clr_text     = execute (mcFile.saveLoadIniSetings head:head_str key:"textcolor"  action:#load),
-			clr_seltext  = execute (mcFile.saveLoadIniSetings head:head_str key:"seltext"  action:#load),
-			form_opacity = execute (mcFile.saveLoadIniSetings head:head_str key:"opacity"  action:#load),
 			bar_height      = 14,
 			form_bounds     = 2,
 			form_offset     = 2, --border line
@@ -274,32 +261,32 @@ fn mcDeepIsolate lvl:#upper =
 			--form.MaximumSize = netDrSize [btn_size*10, btn_size*10]
 			--form.BackColor = netDrColor blue--clr_back  --wont work
 			form.ShowInTaskbar = false
-			form.opacity = mcs.form_opacity
+			form.opacity = mcDotnet.uiColor #opacity
 			
 			
 			mcs.lblT.bounds = netDrRect [mcs.form_offset, mcs.form_offset] [mcs.form_size.x - mcs.form_offset*2 , mcs.bar_height]
-			mcs.lblT.BackColor = netDrColor mcs.clr_back
-			mcs.lblT.ForeColor = netDrColor mcs.clr_text
+			mcs.lblT.BackColor = mcDotnet.uiColor #back
+			mcs.lblT.ForeColor = mcDotnet.uiColor #text
 			mcs.lblT.Text = "Deep Isolate II:"
 			
 			mcs.lbl_lvl.bounds = netDrRect [mcs.form_size.x/2 - mcs.btn_size/2, mcs.bar_height+mcs.form_offset*2] [mcs.btn_size, mcs.btn_size]
 			mcs.lbl_lvl.Text = "1"
 			mcs.lbl_lvl.TextAlign = mcs.lbl_lvl.TextAlign.MiddleCenter --(dotnetClass "Drawing.ContentAlignment").MiddleCenter
-			mcs.lbl_lvl.BackColor = netDrColor mcs.clr_back
-			mcs.lbl_lvl.ForeColor = netDrColor mcs.clr_text
+			mcs.lbl_lvl.BackColor = mcDotnet.uiColor #back
+			mcs.lbl_lvl.ForeColor = mcDotnet.uiColor #text
 			
 			mcs.btn_min.bounds = netDrRect [mcs.form_offset, mcs.bar_height+mcs.form_offset*2] [mcs.btn_size, mcs.btn_size]
 			mcs.btn_min.flatstyle = mcs.btn_min.flatstyle.flat
 			mcs.btn_min.Image = getIconDotNet 176
 			--mcs.btn_min.FlatAppearance.BorderSize = 0
-			--mcs.btn_min.BackColor = netDrColor mcs.clr_back
+			--mcs.btn_min.BackColor = mcDotnet.uiColor #back
 			--mcs.btn_min.Text = "<"
 			
 			mcs.btn_max.bounds = netDrRect [mcs.form_size.x - mcs.btn_size - mcs.form_offset, mcs.bar_height+mcs.form_offset*2] [mcs.btn_size, mcs.btn_size]
 			mcs.btn_max.flatstyle = mcs.btn_max.flatstyle.flat
 			mcs.btn_max.Image = getIconDotNet 177
-			--mcs.btn_max.FlatAppearance.BorderColor = netDrColor mcs.clr_back
-			--mcs.btn_max.BackColor = netDrColor mcs.clr_back
+			--mcs.btn_max.FlatAppearance.BorderColor = mcDotnet.uiColor #back
+			--mcs.btn_max.BackColor = mcDotnet.uiColor #back
 			--mcs.btn_max.Text = ">"
 			
 			--add handlers

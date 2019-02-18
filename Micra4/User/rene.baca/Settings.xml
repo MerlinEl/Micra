@@ -13,7 +13,7 @@
     <SaveLinks val="on" />
   </Settings>
   <Profiles>
-    <menu_1 val="Default" />
+    <menu_1 val="Merlin" />
     <menu_2 val="Empty" />
     <menu_3 val="Empty" />
     <menu_4 val="Test" />

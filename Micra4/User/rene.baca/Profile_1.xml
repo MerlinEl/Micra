@@ -14,7 +14,7 @@
   </Properties_1>
   <Properties_2>
     <mcMicraDialog active="true" pos="[2172,222]" size="[148,66]" title="" />
-    <mcCustomizeDialog active="true" pos="[1700,430]" size="[300,66]" title="" />
+    <mcCustomizeDialog active="false" pos="[1550,330]" size="[224,404]" title="" />
     <mcProgramDialog active="undefined" pos="[2298,0]" size="[256,232]" title="" />
     <mcisoDialog active="false" pos="[181,152]" size="[140,400]" title="" />
     <mcModifierDialog active="undefined" pos="[100,100]" size="[400,400]" title="" />
@@ -32,7 +32,7 @@
     <mcLpWizardDialog active="undefined" pos="[190,151]" size="[448,84]" title="" />
     <mcCharSelectDialog active="undefined" pos="[180,390]" size="[212,388]" title="" />
     <mcCharPoseDialog active="undefined" pos="[184,304]" size="[146,388]" title="" />
-    <mcSaveProfileAsDialog active="false" pos="[1942,402]" size="[180,66]" title="" />
+    <mcSaveProfileAsDialog active="true" pos="[1890,340]" size="[240,66]" title="" />
     <mcDgalleryDialog active="undefined" pos="[-993,148]" size="[875,850]" title="" />
     <mcRandomizeDialog active="undefined" pos="[166,152]" size="[152,332]" title="" />
     <mcColorPaleteDialog active="false" pos="[2304,236]" size="[244,60]" title="" />

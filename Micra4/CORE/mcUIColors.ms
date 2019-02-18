@@ -20,7 +20,7 @@ Public
 	fn getSource = getSourceFileName(), --get path of this script
 	fn get clr = (
 		local last_profile = execute (mcFile.readSettings Micra.UserSettings "Interface/lastprofile")
-		local profiles = #("DefaultColor", "UserColor", "ForestColor", "EarthColor", "MoonColor", "SeaColor", "SunColor", "Close")
+		local profiles = #("DefaultColor", "UserColor", "ForestColor", "EarthColor", "MoonColor", "SeaColor", "SunColor")
 		local head_str = profiles[last_profile]
 		case clr of (
 			
@@ -32,7 +32,7 @@ Public
 			#inact		: execute (mcFile.readSettings Micra.UserSettings (head_str +"/inactive" ))
 			#text		: execute (mcFile.readSettings Micra.UserSettings (head_str +"/textcolor" ))
 			#seltext	: execute (mcFile.readSettings Micra.UserSettings (head_str +"/seltext" ))
-			#opacity	: execute (mcFile.readSettings Micra.UserSettings (head_str +"/opacity" ))
+			#opacity	: execute (mcFile.readSettings Micra.UserSettings (head_str +"/opacity" )) --remove it because is not color and mcDotnet.uiColor #opacity == undefined
 			#edtback	: execute (mcFile.readSettings Micra.UserSettings (head_str +"/editback" ))
 			#edtfore	: execute (mcFile.readSettings Micra.UserSettings (head_str +"/editfore" ))
 		)
