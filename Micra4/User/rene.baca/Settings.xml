@@ -9,8 +9,9 @@
     <CurrentProfile val="1" />
     <DialogSnap val="true" />
     <AimScaleFactor val="10" />
-    <SaveWirecolor val="off" />
+    <SaveWirecolor val="on" />
     <SaveLinks val="on" />
+    <SaveLayer val="on" />
   </Settings>
   <Profiles>
     <menu_1 val="Merlin" />

@@ -165,10 +165,9 @@
 		button fragBtn "Fragment object" pos:[8,261] width:144 height:21 tooltip:"Break the selected object into pieces"
 		button cancelBtn "Cancel" pos:[8,287] width:70 height:21 tooltip:"Close dialog without changes"
 		button closeBtn "Close" pos:[82,287] width:70 height:21 tooltip:"Close dialog and save settings"
-
+		local ini_file = Micra.UserDir + "mbFracture.ini"
 		fn saveINI = (
 			-- save default values to .ini file
-			ini_file = "$plugcfg\\mbFracture.ini"
 			setINISetting ini_file "Defaults" "count" (countSpn.value as string)
 			setINISetting ini_file "Defaults" "gap" (gapSpn.value as string)
 			setINISetting ini_file "Defaults" "scale" (scaleSpn.value as string)
@@ -239,7 +238,7 @@
 		)
 		
 		on fragRO open do (
-			ini_file = "$plugcfg\\mbFracture.ini"
+
 			if (doesFileExist ini_file) then (
 				-- read default values from .ini file
 				local t = getINISetting ini_file "Defaults" "count"

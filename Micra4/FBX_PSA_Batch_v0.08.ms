@@ -6,7 +6,7 @@ try (destroyDialog FBXtoPSABatchConverterDialog) catch ()
 rollout FBXtoPSABatchConverterDialog " FBX to PSA Batch Converter v0.05" width:396 height:520
 (
 	--Local Variables
-	local iniFile = getDir #scripts + "\\FBX_to_PSA_Batch_Converter.ini "
+	local iniFile = Micra.UserDir + "FBX_to_PSA_Batch_Converter.ini "
 	local bgColor = ((colorMan.getColor #background)*255)as color
 	local winColor = ((colorMan.getColor #window)*255)as color
 	local textColor = ((colorMan.getColor #text)*255)as color

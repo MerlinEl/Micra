@@ -8,7 +8,7 @@ Global mcActorXBatchExporterDialog
 if mcActorXBatchExporterDialog != undefined do destroyDialog mcActorXBatchExporterDialog
 rollout mcActorXBatchExporterDialog "ActorX Batch Exporter:" width:880 height:548
 (
-	local ini_file, check_enabled = false
+	local settings_file, check_enabled = false
 	GroupBox grp1 "List:" pos:[4,4] width:872 height:540
 	edittext edt_model_name "Model Name   :" pos:[12,436] width:860 height:20
 	edittext edt_max_file_path "Max File Path :" pos:[12,460] width:860 height:20
@@ -47,22 +47,22 @@ rollout mcActorXBatchExporterDialog "ActorX Batch Exporter:" width:880 height:54
 	)
 	fn collectItemsFromIni=
 	(
-		if not doesFileExist ini_file do return false
-		local ini_heads = getINISetting ini_file
+		if not doesFileExist settings_file do return false
+		local ini_heads = getINISetting settings_file
 		for h in ini_heads do 
 		(
-			local ini_keys = getINISetting ini_file h
+			local ini_keys = getINISetting settings_file h
 			for k in ini_keys do
 			(
-				local val =execute (getINISetting ini_file h k)
+				local val =execute (getINISetting settings_file h k)
 				addItemInList listbox h k val
 			)
 		)
 	)
 	fn inicializeInterface =
 	(
-		ini_file = (GetDir #scripts)+"\\ActorX_Batch_Exporter.ini"
-		if not doesFileExist ini_file do createFile ini_file
+		settings_file = Micra.UserDir+"ActorX_Batch_Exporter.ini"
+		if not doesFileExist settings_file do createFile settings_file
 		fnInitDotNetView ( listbox )
 		collectItemsFromIni ()
 		check_enabled = true
@@ -74,7 +74,7 @@ rollout mcActorXBatchExporterDialog "ActorX Batch Exporter:" width:880 height:54
 		local val = true
 		if head == "" or key == "" do return false
 		addItemInList listbox head key val
-		setINISetting ini_file head key (val as string)
+		setINISetting settings_file head key (val as string)
 	)
 	fn addItemsFromSelection=
 	(
@@ -99,8 +99,8 @@ rollout mcActorXBatchExporterDialog "ActorX Batch Exporter:" width:880 height:54
 			local itm = listbox.SelectedItems.item[ i ]
 			local head = (itm.SubItems.item 1).text
 			local key = (itm.SubItems.item 2).text
-			delIniSetting ini_file head key --remove keys
-			if (getINISetting ini_file head).count == 0 do delIniSetting ini_file head -- if no other keys to dele ,remove also head
+			delIniSetting settings_file head key --remove keys
+			if (getINISetting settings_file head).count == 0 do delIniSetting settings_file head -- if no other keys to dele ,remove also head
 			listbox.items.Remove itm
 		)	
 		if cnt > 1 do
@@ -120,7 +120,7 @@ rollout mcActorXBatchExporterDialog "ActorX Batch Exporter:" width:880 height:54
 			"Checked":"false"
 			"Unchecked":"true"
 		)
-		setINISetting ini_file head key val
+		setINISetting settings_file head key val
 		--format "head:%\t key:%\t val:%\n" head key val
 	)
 	fn exportModels=
@@ -203,11 +203,11 @@ rollout mcActorXBatchExporterDialog "ActorX Batch Exporter:" width:880 height:54
 		local itm = listbox.SelectedItems.item[0]
 		local h = (itm.SubItems.item 1).text
 		local k = (itm.SubItems.item 2).text
-		delIniSetting ini_file h k --remove keys
-		if (getINISetting ini_file h).count == 0 do delIniSetting ini_file h -- if no other keys to dele ,remove also head
+		delIniSetting settings_file h k --remove keys
+		if (getINISetting settings_file h).count == 0 do delIniSetting settings_file h -- if no other keys to dele ,remove also head
 		
 		addItemInList listbox head key val
-		setINISetting ini_file head key (val as string)
+		setINISetting settings_file head key (val as string)
 		listbox.clear()
 		fnInitDotNetView ( listbox )
 		collectItemsFromIni()

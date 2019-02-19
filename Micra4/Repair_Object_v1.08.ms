@@ -50,11 +50,12 @@ rollout mcRepairDialog "" width:332 height:128
 				n.parent = if p == undefined then undefined else p
 		)
 	)
-	on mcRepairDialog open          do 
-	(
+	on mcRepairDialog open do (
+	
 		grp_1.text = " Repair Object v"+ver
-		--chkSaveLinks.checked = execute (Get_IniData "CustomMicra" "DefaultMicra" "SaveLinks")
-		--chkSaveWire.checked  = execute (Get_IniData "CustomMicra" "DefaultMicra" "SaveWirecolor")
+		chkSaveLinks.checked = (mcFile.readSettings Micra.UserSettings "Settings/SaveLinks" == "on")
+		chkSaveWire.checked  = (mcFile.readSettings Micra.UserSettings "Settings/SaveWirecolor" == "on")
+		chkSaveLayer.checked  = (mcFile.readSettings Micra.UserSettings "Settings/SaveLayer" == "on")
 	)
 	on mcRepairDialog rbuttonup pos do (DestroyDialog mcRepairDialog)
 		-->MoveMode
@@ -175,18 +176,9 @@ rollout mcRepairDialog "" width:332 height:128
 		clearUndoBuffer()
 	)--btn_2
 		
-	on chkSaveLinks changed state do
-	(
-		if chkSaveLinks.checked
-		then setIniSetting Micra.UserSettings "Settings" "SaveLinks" "on"
-		else setIniSetting Micra.UserSettings "Settings" "SaveLinks" "off"
-	)
-	on chkSaveWire changed state do
-	(
-		if chkSaveWire.checked
-		then setIniSetting Micra.UserSettings "Settings" "SaveWirecolor" "on"
-		else setIniSetting Micra.UserSettings "Settings" "SaveWirecolor" "off"
-	)
+	on chkSaveLinks changed state do  mcFile.saveSettings Micra.UserSettings "Settings/SaveLinks" (if chkSaveLinks.checked then "on" else "off")
+	on chkSaveWire changed state do mcFile.saveSettings Micra.UserSettings "Settings/SaveWirecolor" (if chkSaveWire.checked then "on" else "off")
+	on chkSaveLayer changed state do mcFile.saveSettings Micra.UserSettings "Settings/SaveLayer" (if chkSaveLayer.checked then "on" else "off")
 )
 ----------------------------------------------------------------------------
 mcCall.createXMLDialog "mcRepairDialog" "Properties_2"  modal:true 

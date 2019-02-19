@@ -5,7 +5,7 @@ if RenderBySetDialog != undefined do destroyDialog RenderBySetDialog
 rollout RenderBySetDialog "Render by Set" width:668 height:96
 (
 	--local wasCancelled = true
-	local iniFile = GetDir #scripts + "\\Render by Set.ini"
+	local iniFile = Micra.UserDir + "Render by Set.ini"
 	GroupBox grp1 "Set:" pos:[4,4] width:660 height:88
 	spinner spn_w "" pos:[60,48] width:60 height:16 range:[4,10000,256] type:#integer scale:1
 	label lbl1 "Width:" pos:[16,48] width:44 height:16
@@ -23,7 +23,7 @@ rollout RenderBySetDialog "Render by Set" width:668 height:96
 		spn_h.value = renderHeight
 		if doesFileExist iniFile do
 		(
-			ddl_path.items = getINISetting iniFile "RecentPaths"
+			ddl_path.items = mcFile.readSettings iniFile "RecentPaths"
 		)
 		--ddl_path.items = #("c:\\temp\\render\\")
 		--escapeEnable=true
@@ -104,7 +104,7 @@ rollout RenderBySetDialog "Render by Set" width:668 height:96
 		if dir == undefined do return false
 		ddl_path.items = #(dir+"\\") + ddl_path.items
 		if not doesFileExist iniFile do (local f = createFile iniFile; close f)
-		setINISetting iniFile "RecentPaths" (dir+"\\") ""
+		mcFile.saveSettings iniFile "RecentPaths" (dir+"\\")
 	)
 	on RenderBySetDialog open do inicializeInterface()
 	on btn_render pressed do( renderSets() )

@@ -9,7 +9,7 @@
     <export val="C:\Users\Rene.baca\Documents\3dsMax\export" />
   </FBX>
   <SELECTION>
-    <perforce_path val="8" />
+    <perforce_path val="9" />
   </SELECTION>
   <PERFORCE>
     <loc_1 val="models\cine\generic" />
@@ -20,5 +20,6 @@
     <loc_6 val="models\cine\cine_1160" />
     <loc_7 val="missions\_test_rene" />
     <loc_8 val="models\city\lost_heaven\districts\lh_10_countryside" />
+    <loc_9 val="models\env_generic\_lh\street_props" />
   </PERFORCE>
 </LS3D>

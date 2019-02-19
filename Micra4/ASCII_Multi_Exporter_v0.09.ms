@@ -2,7 +2,7 @@
 if ASCIIMultiExportDialog != undefined do destroyDialog ASCIIMultiExportDialog  
 rollout ASCIIMultiExportDialog "ASCII Multi Exporter:" width:488 height:156
 (
-	local iniFile
+	local iniFile = Micra.UserDir + "ASCII_Multi_Exporter.ini "
 	dropdownList ddl_dir "Export Path:" pos:[16,16] width:408 height:40
 	button btn_dir "Dir..." pos:[428,32] width:48 height:24
 	GroupBox grp1 "" pos:[4,4] width:480 height:148
@@ -15,7 +15,6 @@ rollout ASCIIMultiExportDialog "ASCII Multi Exporter:" width:488 height:156
 
 	fn checkIniFile =
 	(
-		iniFile = GetDir #scripts + "\\ASCII_Multi_Exporter.ini "
 		if not doesFileExist iniFile do try (createFile iniFile) catch (return false)
 		return true
 	)

@@ -106,7 +106,7 @@ try ( mcColorPaleteDialog.close() ) catch()
 				else if keyboard.altPressed then (
 					
 					s.backcolor = netDrColor gray
-					setIniSetting Micra.UserSettings "ColorPalete" s.tag (gray as string)
+					mcFile.saveSettings Micra.UserSettings ("ColorPalete/"+s.tag) (gray as string)
 					
 				) else ( --apply color to selected objects. Also if color picker is open send him color too
 					

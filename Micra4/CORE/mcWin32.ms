@@ -61,6 +61,28 @@ fn CreateWin32Assembly forceRecompile:on = (
 mcWin32 = CreateWin32Assembly()
 
 /*
+Global User32
+fn CreateUser32Assembly = (
+
+	local source = "using System;\n"
+	source += "using System.Runtime.InteropServices;\n"
+	source += "class User32\n"
+	source += "{\n"
+	source += " [DllImport(\"user32.dll\")]\n"
+	source += " public static extern bool SetWindowPos(Int64 hWnd, int hWndArg, int Left, int Top, int Width, int Height, int hWndFlags);\n"
+	source += "}\n"
+	csharpProvider = dotnetobject "Microsoft.CSharp.CSharpCodeProvider"
+	compilerParams = dotnetobject "System.CodeDom.Compiler.CompilerParameters"			
+	compilerParams.GenerateInMemory = on
+	compilerResults = csharpProvider.CompileAssemblyFromSource compilerParams #(source)
+	compilerResults.CompiledAssembly.CreateInstance "User32"
+)
+User32 = CreateUser32Assembly()
+*/
+
+
+
+/*
 public static string GetWindowText(IntPtr hWnd)
 {
 	var sb = new StringBuilder(2000);

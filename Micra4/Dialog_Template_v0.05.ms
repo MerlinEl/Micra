@@ -88,11 +88,11 @@ private
 	fn init  =  (
 		
 		--setup interface
-		local form_settings = mcFile.loadDialogSettings title "Properties_2" --get saved pos and size
+		local form_settings = mcFile.readDialogSettings title "Properties_2" --get saved pos and size
 		if form_settings != undefined do (
 		
-			local pos = execute (form_settings.get "pos")
-			local size = execute (form_settings.get "pos")
+			pos = execute (form_settings.get "pos")
+			--size = execute (form_settings.get "pos") --causeing trouble
 		)
 		--size = from_data.size (when loaded every time is les and less....????)
 		--format " load form:%  pos:% size:%\n" title pos size
@@ -105,6 +105,7 @@ private
 		form.FormBorderStyle = form.FormBorderStyle.none
 		form.BackColor = mcDotnet.uiColor #fore
 		form.opacity = 1 ---mcUIColors.get #opacity
+		--form.TopMost = true --keep fotm upper from all toolbars
 		
 		--toolbar
 		lblT.bounds = mcDotnet.dRect [border_offset, border_offset] [size.x - border_offset*10 , bar_height]
@@ -146,3 +147,37 @@ private
 )
 ::mcTemplateDialog = DOTNET_MAIN_STRUCT title:"mcTemplateDialog"
 ::mcTemplateDialog.open()
+
+
+--test TopMost
+/*
+Global User32
+fn CreateUser32Assembly = (
+
+	local source = "using System;\n"
+	source += "using System.Runtime.InteropServices;\n"
+	source += "class User32\n"
+	source += "{\n"
+	source += " [DllImport(\"user32.dll\")]\n"
+	source += " public static extern bool SetWindowPos(Int64 hWnd, int hWndArg, int Left, int Top, int Width, int Height, int hWndFlags);\n"
+	source += "}\n"
+	csharpProvider = dotnetobject "Microsoft.CSharp.CSharpCodeProvider"
+	compilerParams = dotnetobject "System.CodeDom.Compiler.CompilerParameters"			
+	compilerParams.GenerateInMemory = on
+	compilerResults = csharpProvider.CompileAssemblyFromSource compilerParams #(source)
+	compilerResults.CompiledAssembly.CreateInstance "User32"
+)
+User32 = CreateUser32Assembly()
+
+fn showTopmost name act:on = if (hwnd = windows.getChildHWND 0 name) != undefined do  (
+	
+	local HWND_TOPMOST 	= -1
+	local HWND_NOTOPMOST 	= -2
+	User32.setWindowPos hwnd[1] (if act then HWND_TOPMOST else HWND_NOTOPMOST) 0 0 0 0 0x3 -- (SWP_NOSIZE = 0x1, SWP_NOMOVE = 0x2)
+	act
+)
+*/
+/*
+showTopmost "mcTemplateDialog" act:on
+showTopmost "mcTemplateDialog" act:off
+*/

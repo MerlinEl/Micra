@@ -50,52 +50,52 @@ rollout mcRenderToTextureModDialog "Untitled" width:504 height:232
 		local chk = #(chk_1, chk_2, chk_3, chk_4, chk_5, chk_6)
 		for i=1 to chk.count do 
 		(
-			local state = getIniSetting Micra.UserSettings "RenderToTextureMod" chk[i].name
+			local state = mcFile.readSettings Micra.UserSettings ("RenderToTextureMod/" + chk[i].name)
 			if state != "" do chk[i].state  = execute state
 		)
-		local ali = getIniSetting Micra.UserSettings "RenderToTextureMod" "Ambient Lights" 
+		local ali = mcFile.readSettings Micra.UserSettings "RenderToTextureMod/Ambient Lights" 
 		if ali  != "" do chk_ali.checked = execute ali
-		local ren = getIniSetting Micra.UserSettings "RenderToTextureMod" "Show Rendering"
+		local ren = mcFile.readSettings Micra.UserSettings "RenderToTextureMod/Show Rendering"
 		if ren  != "" do chk_show_render.checked = execute ren
-		local fty = getIniSetting Micra.UserSettings "RenderToTextureMod" "File Type"
+		local fty = mcFile.readSettings Micra.UserSettings "RenderToTextureMod/File Type"
 		if fty  != "" do ddl_file_type.selection = execute fty
-		local rsi = getIniSetting Micra.UserSettings "RenderToTextureMod" "Render Size"
+		local rsi = mcFile.readSettings Micra.UserSettings "RenderToTextureMod/Render Size"
 		if rsi  != "" do ddl_render_size.selection = execute rsi
-		local tli = getIniSetting Micra.UserSettings "RenderToTextureMod" "Top Light"
+		local tli = mcFile.readSettings Micra.UserSettings "RenderToTextureMod/Top Light"
 		if tli  != "" then spn_toplight.value    = execute tli else spn_toplight.value    = 0.1
-		local bli = getIniSetting Micra.UserSettings "RenderToTextureMod" "Bottom Light"
+		local bli = mcFile.readSettings Micra.UserSettings "RenderToTextureMod/Bottom Light"
 		if bli  != "" then spn_bottomlight.value = execute bli else spn_bottomlight.value = 0.08
 		---render
-		local ant = getIniSetting Micra.UserSettings "RenderToTextureMod" "Antialiasing"
+		local ant = mcFile.readSettings Micra.UserSettings "RenderToTextureMod/Antialiasing"
 		if ant  != "" do chk_antialiasing.checked = execute ant 
-		local fil = getIniSetting Micra.UserSettings "RenderToTextureMod" "Filter"
+		local fil = mcFile.readSettings Micra.UserSettings "RenderToTextureMod/Filter"
 		if fil  != "" do ddl_filters.selection = execute fil
-		local egs = getIniSetting Micra.UserSettings "RenderToTextureMod" "Enable Global Supersampler"
+		local egs = mcFile.readSettings Micra.UserSettings "RenderToTextureMod/Enable Global Supersampler"
 		if egs  != "" do chk_global_ssampler.checked = execute egs
-		local smp = getIniSetting Micra.UserSettings "RenderToTextureMod" "Sampler"
+		local smp = mcFile.readSettings Micra.UserSettings "RenderToTextureMod/Sampler"
 		if smp  != "" do ddl_samplers.selection = execute smp
 		--Advanced Lighting / light tracer
-		local lit = getIniSetting Micra.UserSettings "RenderToTextureMod" "Light Tracer"
+		local lit = mcFile.readSettings Micra.UserSettings "RenderToTextureMod/Light Tracer"
 		if lit != "" do chk_light_tracer.checked = execute lit
 	)
 	fn saveInterface =
 	(
 		if not doesFileExist Micra.UserSettings do return false
 		local chk = #(chk_1, chk_2, chk_3, chk_4, chk_5, chk_6)
-		for i=1 to chk.count do setIniSetting Micra.UserSettings "RenderToTextureMod" chk[i].name (chk[i].checked as string)
-		setIniSetting Micra.UserSettings "RenderToTextureMod" "Ambient Lights" (chk_ali.checked as string)
-		setIniSetting Micra.UserSettings "RenderToTextureMod" "Show Rendering" (chk_show_render.checked as string)
-		setIniSetting Micra.UserSettings "RenderToTextureMod" "File Type" (ddl_file_type.selection as string)
-		setIniSetting Micra.UserSettings "RenderToTextureMod" "Render Size" (ddl_render_size.selection as string)
-		setIniSetting Micra.UserSettings "RenderToTextureMod" "Top Light" (spn_toplight.value as string)
-		setIniSetting Micra.UserSettings "RenderToTextureMod" "Bottom Light" (spn_bottomlight.value as string)
+		for i=1 to chk.count do mcFile.saveSettings Micra.UserSettings ("RenderToTextureMod/" + chk[i].name) (chk[i].checked as string)
+		mcFile.saveSettings Micra.UserSettings "RenderToTextureMod/Ambient Lights" (chk_ali.checked as string)
+		mcFile.saveSettings Micra.UserSettings "RenderToTextureMod/Show Rendering" (chk_show_render.checked as string)
+		mcFile.saveSettings Micra.UserSettings "RenderToTextureMod/File Type" (ddl_file_type.selection as string)
+		mcFile.saveSettings Micra.UserSettings "RenderToTextureMod/Render Size" (ddl_render_size.selection as string)
+		mcFile.saveSettings Micra.UserSettings "RenderToTextureMod/Top Light" (spn_toplight.value as string)
+		mcFile.saveSettings Micra.UserSettings "RenderToTextureMod/Bottom Light" (spn_bottomlight.value as string)
 		---render
-		setIniSetting Micra.UserSettings "RenderToTextureMod" "Antialiasing" (chk_antialiasing.checked as string)
-		setIniSetting Micra.UserSettings "RenderToTextureMod" "Filter" (ddl_filters.selection as string)
-		setIniSetting Micra.UserSettings "RenderToTextureMod" "Enable Global Supersampler" (chk_global_ssampler.checked as string)
-		setIniSetting Micra.UserSettings "RenderToTextureMod" "Sampler" (ddl_samplers.selection as string)
+		mcFile.saveSettings Micra.UserSettings "RenderToTextureMod/Antialiasing" (chk_antialiasing.checked as string)
+		mcFile.saveSettings Micra.UserSettings "RenderToTextureMod/Filter" (ddl_filters.selection as string)
+		mcFile.saveSettings Micra.UserSettings "RenderToTextureMod/Enable Global Supersampler" (chk_global_ssampler.checked as string)
+		mcFile.saveSettings Micra.UserSettings "RenderToTextureMod/Sampler" (ddl_samplers.selection as string)
 		--Advanced Lighting / light tracer
-		setIniSetting Micra.UserSettings "RenderToTextureMod" "Light Tracer" (chk_light_tracer.checked as string)
+		mcFile.saveSettings Micra.UserSettings "RenderToTextureMod/Light Tracer" (chk_light_tracer.checked as string)
 	)
 	fn collectCheckedElements =
 	(

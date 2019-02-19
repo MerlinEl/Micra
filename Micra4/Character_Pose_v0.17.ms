@@ -72,7 +72,7 @@ struct mcPoseTool
 	fn savePose lbl = 
 	(
 		local mask = lbl[6] 
-		local thePath = mcCT_Path+"Pose"
+		local thePath = Micra.UserDir+"Pose"
 		local iniFile = thePath + "\\" + lbl + ".ini"
 		local bmpFile = thePath + "\\" + lbl + ".jpg"
 		
@@ -123,7 +123,7 @@ struct mcPoseTool
 	),
 	fn loadThumbs =
 	(
-		local bmpFiles = getFiles (mcCT_Path+"Pose" + "\\*.jpg")
+		local bmpFiles = getFiles (Micra.UserDir+"Pose" + "\\*.jpg")
 		
 		if bmpFiles.count == 0 do return false
 		
@@ -161,7 +161,7 @@ struct mcPoseTool
 	fn loadPose lbl =
 	(
 		local mask = lbl[6] 
-		local iniFile = mcCT_Path+"Pose" + "\\" + lbl + ".ini"
+		local iniFile = Micra.UserDir+"Pose" + "\\" + lbl + ".ini"
 		--format "label:%\tfile:%\n" lbl iniFile
 		local maskArray = case mask of
 		(
@@ -229,7 +229,7 @@ struct mcPoseTool
 	),
 	fn deletePose lbl =
 	(
-		local thePath = mcCT_Path+"Pose"
+		local thePath = Micra.UserDir+"Pose"
 		local iniFile = thePath + "\\" + lbl + ".ini"
 		local bmpFile = (thePath + "\\" + lbl + ".jpg")
  
@@ -245,14 +245,14 @@ struct mcPoseTool
 		if ButtonTeleportGet != undefined and ButtonTeleportGet != "" do 
 		(
 			lbl.text = ButtonTeleportGet
-			setINISetting (mcCT_Path + "User.ini") "BodyLabels" lbl.name ButtonTeleportGet
+			setINISetting (Micra.UserDir + "User.ini") "BodyLabels" lbl.name ButtonTeleportGet
 		)
 		ButtonTeleportGet = undefined
 		ButtonTeleportSend = undefined
 	),
 	fn inicializeLabels =
 	(
-		local lblKeys = getINISetting (mcCT_Path + "User.ini") "BodyLabels"
+		local lblKeys = getINISetting (Micra.UserDir + "User.ini") "BodyLabels"
 
 		for i in lblKeys do
 		(
@@ -263,7 +263,7 @@ struct mcPoseTool
 				"H":"Hands"
 				"F":"Face"
 			)
-			local lblData = getINISetting (mcCT_Path + "User.ini") "BodyLabels" i
+			local lblData = getINISetting (Micra.UserDir + "User.ini") "BodyLabels" i
 			if lblData != undefined and lblData != "" do 
 			(
 				(execute ("roll"+maskRoll+"." + i)).text = lblData
@@ -439,9 +439,9 @@ rollout mcCharPoseDialog " Save  Pose v0.1" width:146 height:388
 				
 				if bodyCount > 0 and handsCount > 0 and faceCount > 0 do
 				(
-					setINISetting (mcCT_Path + "User.ini") "CustomPoseTool" "Body" (bodyCount as string)
-					setINISetting (mcCT_Path + "User.ini") "CustomPoseTool" "Hands" (handsCount as string)
-					setINISetting (mcCT_Path + "User.ini") "CustomPoseTool" "Face" (faceCount as string)
+					setINISetting (Micra.UserDir + "User.ini") "CustomPoseTool" "Body" (bodyCount as string)
+					setINISetting (Micra.UserDir + "User.ini") "CustomPoseTool" "Hands" (handsCount as string)
+					setINISetting (Micra.UserDir + "User.ini") "CustomPoseTool" "Face" (faceCount as string)
 					DestroyDialog mcCharPoseDialog
 					mcFile.fileInVersion "Character_Pose"
 					DestroyDialog hptsDialog

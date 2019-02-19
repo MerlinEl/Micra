@@ -4,8 +4,8 @@ Global mcMultiPlanterDialog
 Global mcMultiPlanterEnabled
 (
 	-----------------------------------------------------------------
-	local rootPath = getINISetting Micra.UserSettings "Gallery3D" "RootPath"
-	local profilePath = Micra.RootDir + "User\\Gallery3D_Profiles.ini"
+	local rootPath = mcFile.readSettings Micra.UserSettings "Gallery3D/RootPath"
+	local profilePath = Micra.UserDir + "Gallery3D_Profiles.ini"
 	-----------------------------------------------------------------
 	
 	rollout objectList "Object List" 
@@ -57,7 +57,7 @@ Global mcMultiPlanterEnabled
 		)
 		on objectList close do 
 		(
-			setINISetting Micra.UserSettings "Gallery3D" "ObjectList_RolledUp" ((not ObjectList.open) as string)
+			mcFile.saveSettings Micra.UserSettings "Gallery3D/ObjectList_RolledUp" ((not ObjectList.open) as string)
 		)
 		on spn_count changed val do 
 		(
@@ -145,7 +145,7 @@ Global mcMultiPlanterEnabled
 		)
 		on RandomSettings close do 
 		(
-			setINISetting Micra.UserSettings "Gallery3D" "RandomSettings_RolledUp" ((not RandomSettings.open) as string)
+			mcFile.saveSettings Micra.UserSettings "Gallery3D/RandomSettings_RolledUp" ((not RandomSettings.open) as string)
 		)
 	)
 	
@@ -166,7 +166,7 @@ Global mcMultiPlanterEnabled
 		checkbox chk_pres_over "Preserve Overlaps" pos:[136,28] width:108 height:16
 		on GlobalSettings close do 
 		(
-			setINISetting Micra.UserSettings "Gallery3D" "GlobalSettings_RolledUp" ((not GlobalSettings.open) as string)
+			mcFile.saveSettings Micra.UserSettings  "Gallery3D/GlobalSettings_RolledUp" ((not GlobalSettings.open) as string)
 		)
 		on spn_dist   changed val      do mcDgalleryDialog.spnDist          = val
 		on spn_sens   changed val      do mcDgalleryDialog.spnSens          = val
@@ -189,29 +189,29 @@ Global mcMultiPlanterEnabled
 		---check
 		fn saveProfile iniFile  head:edt_profile.text = 
 		(
-			setINISetting iniFile head "Plant_Distance"    (GlobalSettings.spn_dist.value   as string)
-			setINISetting iniFile head "Plant_Sensitivity" (GlobalSettings.spn_sens.value   as string)
-			setIniSetting iniFile head "Maual_Spin_Axis"   (GlobalSettings.rdo_spin.state   as string)
-			setIniSetting iniFile head "Plant_Orientation" (GlobalSettings.rdo_ori.state    as string)
-			setIniSetting iniFile head "Plant_Snap_Offset" (GlobalSettings.spn_offset.value as string)
-			setIniSetting iniFile head "Preserve_Overlaps" (GlobalSettings.chk_pres_over.checked as string)
-			setIniSetting iniFile head "Lock_Size"         (RandomSettings.chk_lock_siz.checked as string)
-			setIniSetting iniFile head "Lock_Rotation"     (RandomSettings.chk_lock_rot.checked as string)
-			setIniSetting iniFile head "Lock_Position"     (RandomSettings.chk_lock_pos.checked as string)
+			mcFile.saveSettings Micra.UserSettings  (head + "/Plant_Distance")		(GlobalSettings.spn_dist.value   as string)
+			mcFile.saveSettings Micra.UserSettings  (head + "/Plant_Sensitivity")	(GlobalSettings.spn_sens.value   as string)
+			mcFile.saveSettings Micra.UserSettings  (head + "/Maual_Spin_Axis")	(GlobalSettings.rdo_spin.state   as string)
+			mcFile.saveSettings Micra.UserSettings  (head + "/Plant_Orientation")	(GlobalSettings.rdo_ori.state    as string)
+			mcFile.saveSettings Micra.UserSettings  (head + "/Plant_Snap_Offset")	(GlobalSettings.spn_offset.value as string)
+			mcFile.saveSettings Micra.UserSettings  (head + "/Preserve_Overlaps")	(GlobalSettings.chk_pres_over.checked as string)
+			mcFile.saveSettings Micra.UserSettings  (head + "/Lock_Size")			(RandomSettings.chk_lock_siz.checked as string)
+			mcFile.saveSettings Micra.UserSettings  (head + "/Lock_Rotation")		(RandomSettings.chk_lock_rot.checked as string)
+			mcFile.saveSettings Micra.UserSettings  (head + "/Lock_Position")		(RandomSettings.chk_lock_pos.checked as string)
 			
 			local s = [RandomSettings.spn_siz_x.value, RandomSettings.spn_siz_y.value, RandomSettings.spn_siz_z.value] as string
-			setIniSetting iniFile head "Single_Size"     s
+			mcFile.saveSettings Micra.UserSettings  (head + "/Single_Size")     s
 			local r = [RandomSettings.spn_rot_x.value, RandomSettings.spn_rot_y.value, RandomSettings.spn_rot_z.value] as string
-			setIniSetting iniFile head "Single_Rotation" r
+			mcFile.saveSettings Micra.UserSettings  (head + "/Single_Rotation") r
 			local p = [RandomSettings.spn_pos_x.value, RandomSettings.spn_pos_y.value, RandomSettings.spn_pos_z.value] as string
-			setIniSetting iniFile head "Single_Position" p
+			mcFile.saveSettings Micra.UserSettings  (head + "/Single_Position") p
 			
-			setIniSetting Micra.UserSettings   "Gallery3D" "Last_Profile" (ddl_profile.selection as string)
+			setIniSetting Micra.UserSettings "Gallery3D/Last_Profile" (ddl_profile.selection as string)
 			if head != "Gallery3DDefault" do
 			(
-				setIniSetting iniFile head "MaxFilePath" (mcDgalleryDialog.ObjectListArray.MaxFilePath as string)
-				setIniSetting iniFile head "LocalDir"    (mcDgalleryDialog.ObjectListArray.LocalDir    as string)
-				setIniSetting iniFile head "Percentage"  (mcDgalleryDialog.ObjectListArray.Percentage  as string)
+				mcFile.saveSettings Micra.UserSettings  (head + "/MaxFilePath")	(mcDgalleryDialog.ObjectListArray.MaxFilePath as string)
+				mcFile.saveSettings Micra.UserSettings  (head + "/LocalDir")		(mcDgalleryDialog.ObjectListArray.LocalDir    as string)
+				mcFile.saveSettings Micra.UserSettings  (head + "/Percentage")		(mcDgalleryDialog.ObjectListArray.Percentage  as string)
 			)
 		)
 		fn saveAddProfile =
@@ -251,25 +251,25 @@ Global mcMultiPlanterEnabled
 			if head == undefined do return false
 			if not doesFileExist iniFile do return false
 			--setup spinners  for mcMultiPlanterDialog
-			GlobalSettings.spn_dist.value       = execute (getIniSetting iniFile head "Plant_Distance"   )
-			GlobalSettings.spn_sens.value       = execute (getIniSetting iniFile head "Plant_Sensitivity")
-			GlobalSettings.rdo_spin.state       = execute (getIniSetting iniFile head "Maual_Spin_Axis"  )
-			GlobalSettings.rdo_ori.state        = execute (getIniSetting iniFile head "Plant_Orientation")	
-			GlobalSettings.spn_offset.value     = execute (getIniSetting iniFile head "Plant_Snap_Offset")
-			GlobalSettings.chk_pres_over.checked= execute (getIniSetting iniFile head "Preserve_Overlaps")
-			RandomSettings.chk_lock_siz.checked = execute (getIniSetting iniFile head "Lock_Size"        )
-			RandomSettings.chk_lock_rot.checked = execute (getIniSetting iniFile head "Lock_Rotation"    )
-			RandomSettings.chk_lock_pos.checked = execute (getIniSetting iniFile head "Lock_Position"    )
+			GlobalSettings.spn_dist.value       = execute (mcFile.readSettings iniFile (head + "Plant_Distance"   ))
+			GlobalSettings.spn_sens.value       = execute (mcFile.readSettings iniFile (head + "Plant_Sensitivity"))
+			GlobalSettings.rdo_spin.state       = execute (mcFile.readSettings iniFile (head + "Maual_Spin_Axis"  ))
+			GlobalSettings.rdo_ori.state        = execute (mcFile.readSettings iniFile (head + "Plant_Orientation"))
+			GlobalSettings.spn_offset.value     = execute (mcFile.readSettings iniFile (head + "Plant_Snap_Offset"))
+			GlobalSettings.chk_pres_over.checked= execute (mcFile.readSettings iniFile (head + "Preserve_Overlaps"))
+			RandomSettings.chk_lock_siz.checked = execute (mcFile.readSettings iniFile (head + "Lock_Size"        ))
+			RandomSettings.chk_lock_rot.checked = execute (mcFile.readSettings iniFile (head + "Lock_Rotation"    ))
+			RandomSettings.chk_lock_pos.checked = execute (mcFile.readSettings iniFile (head + "Lock_Position"    ))
 			
-			local s = execute (getIniSetting iniFile head "Single_Size")
+			local s = execute (mcFile.readSettings iniFile (head + "Single_Size"))
 			RandomSettings.spn_siz_x.value = s.x
 			RandomSettings.spn_siz_y.value = s.y
 			RandomSettings.spn_siz_z.value = s.z
-			local r = execute (getIniSetting iniFile head "Single_Rotation")
+			local r = execute (mcFile.readSettings iniFile (head + "Single_Rotation"))
 			RandomSettings.spn_rot_x.value = r.x
 			RandomSettings.spn_rot_y.value = r.y
 			RandomSettings.spn_rot_z.value = r.z
-			local p = execute (getIniSetting iniFile head "Single_Position") 
+			local p = execute (mcFile.readSettings iniFile (head + "Single_Position"))
 			RandomSettings.spn_pos_x.value = p.x
 			RandomSettings.spn_pos_y.value = p.y
 			RandomSettings.spn_pos_z.value = p.z
@@ -293,9 +293,9 @@ Global mcMultiPlanterEnabled
 			if head != "Gallery3DDefault" 
 			then
 			(
-				local mf = execute (getIniSetting iniFile head "MaxFilePath")
-				local ld = execute (getIniSetting iniFile head "LocalDir"   )
-				local pt = execute (getIniSetting iniFile head "Percentage" )
+				local mf = execute (mcFile.readSettings iniFile (head + "MaxFilePath"))
+				local ld = execute (mcFile.readSettings iniFile (head + "LocalDir"   ))
+				local pt = execute (mcFile.readSettings iniFile (head + "Percentage" ))
 				
 				if classOf mf != array or mf.count == 0 
 				then
@@ -330,7 +330,7 @@ Global mcMultiPlanterEnabled
 			if not doesFileExist profilePath do return false
 			if querybox ( " Delete ["+itm+"] profile?") title:" You are sure?" do
 			(
-				delIniSetting profilePath itm
+				mcFile.delSettings profilePath itm --remove single node
 				ddl_profile.items = deleteItem ddl_profile.items ddl_profile.selection
 				if ddl_profile.items.count > 0 
 				then (ddl_profile.selection = 1; edt_profile.text = ddl_profile.items[1])
@@ -343,7 +343,7 @@ Global mcMultiPlanterEnabled
 			if doesFileExist profilePath 
 			then
 			(
-				local profiles = getIniSetting profilePath
+				local profiles = mcFile.readSettings profilePath
 				ddl_profile.items = #( "Default") + profiles
 				ddl_profile.selection = 1
 				loadProfile Micra.UserSettings head:"Gallery3DDefault"
@@ -377,12 +377,12 @@ Global mcMultiPlanterEnabled
 		)
 	)
 	--Multi Planter
-	local DPos  = execute(getINISetting Micra.UserSettings "Gallery3D" "Dialog_Plant_Pos"       )
-	local DSize = execute(getIniSetting Micra.UserSettings "Gallery3D" "Dialog_Plant_Size"      )
-	local OL    = execute(getINISetting Micra.UserSettings "Gallery3D" "ObjectList_RolledUp"     )
-	local RS    = execute(getINISetting Micra.UserSettings "Gallery3D" "RandomSettings_RolledUp" )
-	local GS    = execute(getINISetting Micra.UserSettings "Gallery3D" "GlobalSettings_RolledUp" )
-	local PS    = execute(getINISetting Micra.UserSettings "Gallery3D" "ProfileSettings_RolledUp")
+	local DPos  = execute(mcFile.readSettings Micra.UserSettings "Gallery3D/Dialog_Plant_Pos"       )
+	local DSize = execute(mcFile.readSettings Micra.UserSettings "Gallery3D/Dialog_Plant_Size"      )
+	local OL    = execute(mcFile.readSettings Micra.UserSettings "Gallery3D/ObjectList_RolledUp"     )
+	local RS    = execute(mcFile.readSettings Micra.UserSettings "Gallery3D/RandomSettings_RolledUp" )
+	local GS    = execute(mcFile.readSettings Micra.UserSettings "Gallery3D/GlobalSettings_RolledUp" )
+	local PS    = execute(mcFile.readSettings Micra.UserSettings "Gallery3D/ProfileSettings_RolledUp")
 	if mcMultiPlanterDialog != undefined do closeRolloutFloater mcMultiPlanterDialog
 	mcMultiPlanterDialog = newRolloutFloater " Multi Planter:" DSize.x DSize.y DPos.x DPos.y
 	addRollout ObjectList      mcMultiPlanterDialog rolledUp:OL

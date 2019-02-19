@@ -470,7 +470,7 @@ struct MICRA_FILE (
 	),
 	/**
 	*@Example
-		local from_data = mcFile.loadDialogSettings "mcModifierDialog" "Properties_2" --get saved pos and size
+		local from_data = mcFile.readDialogSettings "mcModifierDialog" "Properties_2" --get saved pos and size
 		> mcObject (
 			key:active val:false
 			key:pos val:[1244,290]
@@ -484,9 +484,10 @@ struct MICRA_FILE (
 			form.bounds = mcDotnet.dRect pos size
 		)
 	*/
-	fn loadDialogSettings form_name form_category = (
+	fn readDialogSettings form_name form_category = (
 
-		local form_settings = readSettings UserProfile "Properties_2/mcColorPickerDialog" type:"params"
+		--format "xml_path:%\n" (form_category+"/"+form_name)
+		local form_settings = readSettings Micra.UserProfile (form_category+"/"+form_name) type:"attribs"
 		if form_settings == "" do return undefined
 		form_settings
 	),

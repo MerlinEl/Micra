@@ -367,17 +367,16 @@
 		if classOf dName != string or dName.count == 0 do return false
 		local dialog_ini_names = 
 		#(
-			Micra.RootDir+"User\\Profile_1.ini",
-			Micra.RootDir+"User\\Profile_2.ini",
-			Micra.RootDir+"User\\Profile_3.ini",
-			Micra.RootDir+"User\\Profile_4.ini",
-			Micra.RootDir+"User\\Profile_5.ini",
-			Micra.RootDir+"User\\Profile_6.ini",
-			Micra.RootDir+"User\\Profile_7.ini",
-			Micra.RootDir+"User\\Profile_8.ini",
-			Micra.RootDir+"Profile_Default.ini",
-			Micra.RootDir+"Profile_Empty.ini",
-			Micra.RootDir+"Profile_Temp.ini"
+			Micra.UserDir + "Profile_1.ini",
+			Micra.UserDir + "Profile_2.ini",
+			Micra.UserDir + "Profile_3.ini",
+			Micra.UserDir + "Profile_4.ini",
+			Micra.UserDir + "Profile_5.ini",
+			Micra.UserDir + "Profile_6.ini",
+			Micra.UserDir + "Profile_7.ini",
+			Micra.UserDir + "Profile_8.ini",
+			Micra.DefaultDir+"Profile_Default.ini",
+			Micra.DefaultDir+"Profile_Empty.ini"
 		)
 		for fpath in dialog_ini_names do
 		(
@@ -385,8 +384,8 @@
 			if doesFileExist fpath do (
 				
 				case cmd of(
-					"add": setIniSetting fpath "Properties_2" dName ( "#(true, [100,100], [100,100], \"\")" )
-					"del": delIniSetting fpath "Properties_2" dName
+					"add": mcFile.saveSettings fpath ("Properties_2/"+dName) "#(true, [100,100], [100,100], \"\")" --add default settings
+					"del": mcFile.delSettings fpath ("Properties_2/"+dName) --remove single node
 				)
 			)
 		)
