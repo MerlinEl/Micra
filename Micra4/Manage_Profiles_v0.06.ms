@@ -116,7 +116,7 @@ try ( mcSaveProfileAsDialog.close() ) catch()
 	
 		if queryBox ("You are sure to reset profile:[ "+mcs.cbox.SelectedItem+" ]?") title:"Warning!" do (
 			--replace selected profile with default one
-			local source_file = Micra.DefaultDir + "Profile_Empty.xml" --profile without buttons and tollbars 
+			local source_file = Micra.UserDir + "Default\\Profile_Empty.xml" --profile without buttons and tollbars 
 			local target_file = Micra.UserDir + "Profile_" + (mcs.cbox.SelectedIndex+1) as String + ".xml"
 			if doesFileExist target_file do deleteFile target_file
 			if doesFileExist source_file do copyFile source_file target_file

@@ -1,6 +1,40 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <SETTINGS>
-  <Version>
+  <Structures val="All registred Micra's Structures">
+    <!--independent classes-->
+	<mcStructMan val="on" info="structure manager" />
+    <mcWinMsg val="on" />
+    <mcWin32 val="on" info="denisT great work!" />
+    <mcObjects val="on" info="database object CORE BASE" />
+    <mcMath val="on" />
+    <mcString val="on" />
+    <mcDate val="on" />
+    <!--dependent classes-->
+    <mcColor val="on" info="color conversion tool" />
+    <mcFile val="on" info="read - write functions" />
+    <mcXML val="on" />
+    <mcINI val="on" />
+    <mcUIColors val="on" info="save-load ui colors" />
+    <mcDotnet val="on" info="dotnet functions" />
+    <mcPopUp val="on" info="popup windows of any type" />
+    <mcGM val="on" />
+    <mcAnimation val="on" />
+    <mcArray val="on" />
+    <mcFile val="on" info="read - write functions" />
+    <mcInfo val="on" />
+    <mcCursor val="on" />
+    <mcScreen val="on" />
+    <mcDialog val="on" />
+    <mcDraw val="on" />
+    <mcPoly val="on" />
+    <mcSnap val="on" />
+    <mcSystem val="on" />
+    <mcTransform val="on" />
+    <mcEvents val="on" />
+    <mcCall val="on" />
+    <mcMsx val="on" />
+  </Structures>
+  <Version val="All registred Micra's Scripts">
     <Gallery3D val="1.60" />
     <ActorX_Batch_Exporter val="0.01" />
     <ActorX_Multi_Exporter val="0.01" />
@@ -74,63 +108,28 @@
     <Dialog_Default_Net val="0.29" />
     <Actions_Editor val="0.01" />
   </Version>
-  <Structures>
-    <!--independent classes-->
-	<mcStructMan val="on" info="structure manager" />
-    <mcWinMsg val="on" />
-    <mcWin32 val="on" info="denisT great work!" />
-    <mcObjects val="on" info="database object CORE BASE" />
-    <mcMath val="on" />
-    <mcString val="on" />
-    <mcDate val="on" />
-    <!--dependent classes-->
-    <mcColor val="on" info="color conversion tool" />
-    <mcFile val="on" info="read - write functions" />
-    <mcXML val="on" />
-    <mcINI val="on" />
-    <mcUIColors val="on" info="save-load ui colors" />
-    <mcDotnet val="on" info="dotnet functions" />
-    <mcPopUp val="on" info="popup windows of any type" />
-    <mcGM val="on" />
-    <mcAnimation val="on" />
-    <mcArray val="on" />
-    <mcFile val="on" info="read - write functions" />
-    <mcInfo val="on" />
-    <mcCursor val="on" />
-    <mcScreen val="on" />
-    <mcDialog val="on" />
-    <mcDraw val="on" />
-    <mcPoly val="on" />
-    <mcSnap val="on" />
-    <mcSystem val="on" />
-    <mcTransform val="on" />
-    <mcEvents val="on" />
-    <mcCall val="on" />
-    <mcMsx val="on" />
-  </Structures>
-  <SystemIni>
-    <Actions val="1" />
-    <Actions_Help val="1" />
-    <Skeleton val="1" />
-    <Settings val="1" />
-  </SystemIni>
-  <UserIniDefault>
-    <Profile_Default val="1" />
-    <Profile_Empty val="1" />
-    <Profile_Temp val="1" />
-    <Settings val="1" />
-  </UserIniDefault>
-  <UserIni>
-    <Profile_1 val="1" />
-    <Profile_2 val="1" />
-    <Profile_3 val="1" />
-    <Profile_4 val="1" />
-    <Profile_5 val="1" />
-    <Profile_6 val="1" />
-    <Profile_7 val="1" />
-    <Profile_8 val="1" />
-    <Settings val="1" />
-  </UserIni>
+  <SystemFiles val="Micra's Settings Files">
+    <Actions val="Contains all accesible Micra's actions" />
+    <Actions_Help val="Help texts for each action" />
+    <Skeleton val="Bones pattern for humanoid Animation" />
+    <Settings val="Default Micra's Settings" />
+  </SystemFiles>
+  <UserFiles val ="User's Settings Files">
+    <Profile_1/>
+    <Profile_2/>
+    <Profile_3/>
+    <Profile_4/>
+    <Profile_5/>
+    <Profile_6/>
+    <Profile_7/>
+    <Profile_8/>
+    <Settings/>
+  </UserFiles>
+  <DefaultFiles val="Default Settings Files">
+    <Profile_Default/>
+    <Profile_Empty/>
+    <Settings/>
+  </DefaultFiles>
   <Paths>
     <WorkServer val="R=\Resources\Resources_new\" />
     <HomeServer val="E=\Micra3\Temp\Server\" />

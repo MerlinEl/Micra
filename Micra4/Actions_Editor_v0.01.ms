@@ -235,10 +235,10 @@ struct MICRA_ACTIONS_EDITOR	(
 		action_key		: "Reset_Transform"
 		icon_str		: "33"
 		cmd_str			: "mcAction.reset_transform()"
-		action_name		: "Reset Transform"
 	*/
-	fn registerAction category_key action_key icon_str cmd_str action_name	= (
+	fn registerAction category_key action_key icon_str cmd_str 	= (
 	
+		local action_name = mcString.replaceAll action_key "_" " " --"Reset Transform"
 		mcString.printInBlock "mcActionsEditor > registerAction > \n\tcatalog\t: %\n\taction\t: % \n\tdata\t: %\n" params:#(category_key, action_key, action_data)
 		local action_data = (mcObject.new()).addMore #(
 
@@ -334,7 +334,7 @@ struct MICRA_ACTIONS_EDITOR	(
 	/**
 	@Usage	
 		category_key		Modify
-		action_name			Vertex Color
+		action_key			Vertex Color
 		action_cmd		mcFile.fileInVersion Vertex_Color or mcAction.capHoles()
 		icon_index			208
 		Return				Customize --> addNewAction --> send output
@@ -346,7 +346,7 @@ struct MICRA_ACTIONS_EDITOR	(
 			register existing tool		>
 			create new tool				>
 	*/
-	fn editOrCreateAction category_key action_name action_cmd icon_index = (
+	fn editOrCreateAction category_key action_key action_cmd icon_index = (
 		
 		--fix action name string
 		action_key = mcString.trimLeftRight action_key --remove left right spaces
@@ -373,7 +373,7 @@ format "editOrCreateAction > action_key:% cmd :%\n\t%" action_key action_cmd (cm
 					
 						if not (isActionRegistred category_key (nameToKey action_key)) then ( --if not registred
 						
-							registerAction category_key action_key (icon_index as String) action_cmd action_name
+							registerAction category_key action_key (icon_index as String) action_cmd
 							
 						) else ( --if already registred, abort
 						
@@ -390,7 +390,7 @@ format "editOrCreateAction > action_key:% cmd :%\n\t%" action_key action_cmd (cm
 						--append function fo current file (in Maxscript Editor)
 						mcMsx.insertFunctionAtStructureEnd new_fn 
 						--register new action
-						registerAction category_key action_key (icon_index as String) action_cmd action_name
+						registerAction category_key action_key (icon_index as String) action_cmd
 					)
 					
 				) else ( --create new structure file and new function in CORE folder

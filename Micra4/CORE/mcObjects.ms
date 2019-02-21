@@ -58,6 +58,7 @@ private
 	_keys = #(), _values = #(),
 public
 	fn getSource = getSourceFileName(), --get path of this script
+	fn count = (_keys.count()),
 	fn new = (mcObject()),
 	fn keyIndex key = (finditem _keys key),		
 	fn hasKey key = (keyIndex key > 0),

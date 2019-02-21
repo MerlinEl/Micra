@@ -23,12 +23,12 @@ struct MICRA_STRUCTURE (
 	debug				= 4,
 	loaded				= false,
 	version				= "Micra IV",
-	borndate			= "5/4/2006 12:00:00 AM",
+	borndate			= "5/4/2006 12:00:00 AM", --CZ time
 	username			= substituteString sysInfo.username " " "_", --replace wihitespaces with "_"
 	files_list			= #(),
 	restart_need		= false,
 	max_custom_controls = undefined,
-	--> directory structure
+	--> Directory structure
 	RootDir				= getFilenamePath (getSourceFileName()), --here is current version of Micra
 	CoreDir				= RootDir + "CORE\\", --here is all sturctures(classes)
 	TempDir				= RootDir + "Temp\\",
@@ -36,23 +36,26 @@ struct MICRA_STRUCTURE (
 	RepositoryDir		= (pathConfig.removePathLeaf RootDir) + "\\", --here is all Micra's versions and other Resources
 	ResourcesDir 	= RepositoryDir + "repo_sync\\", --Micra's Shared Resources, Backups, Max Icons, Ms Library, ...
 	AppsDir				= RootDir + "App\\",
-	DefaultDir			= RootDir + "Default\\",
 	ImagesPath 			= RootDir + "Img\\", --all images here
 	UserDir				= RootDir + "User\\" + username + "\\",
 	MaxRootDir			= getDir #maxroot,
 	MaxUserDir			= pathConfig.removePathLeaf (getDir #userMacros),
 	MaxPluginsDir		= MaxUserDir + "\\MicraPlugins\\", --all plugins goes here, also Micra's autorun file	
-	Macro				= MaxUserDir + "\\usermacros\\Micra_Macro.mcr",
+	MaxMacro			= MaxUserDir + "\\usermacros\\Micra_Macro.mcr",
 	MaxUserSettings		= MaxUserDir + "\\Plugin.UserSettings.ini", --only this wil stay INI
 	ImgPath				= RootDir + "Img\\", 
 	IconI				= RootDir + "Img\\mcIcons_24_480x480i.bmp",
 	IconM				= RootDir + "Img\\mcIcons_24_480x480m.bmp",
-	-- > setting structure
+	-- > Default Setting
 	DefaultSettings		= RootDir + "Settings.xml", --default settings
+	DefaultUserSettings	= RootDir + "User\\Default\\Settings.xml", --default settings
+	DefaultProfile		= RootDir + "User\\Default\\Profile_Default.xml", --default profile 
+	EmptyProfile		= RootDir + "User\\Default\\Profile_Empty.xml", --empty profile 
 	ActionsXML			= RootDir + "Actions.xml",
 	ActionsHelpXML		= RootDir + "Actions_Help.xml",	
-	UserSettings			= UserDir + "Settings.xml", --copy of DefaultSettings
-	UserProfile				= "", --here is stored user settings (dialogs position and size, button actions) > path will be defined later 
+	-- > Udser Settings
+	UserSettings		= UserDir + "Settings.xml", --copy of DefaultSettings
+	UserProfile			= "", --here is stored user settings (dialogs position and size, button actions) > path is defined at (loadUserProfile())
 	--functions
 	fn getSource = getSourceFileName(), --get path of this script
 	--Set Memory Allocation in MB
@@ -73,8 +76,8 @@ struct MICRA_STRUCTURE (
 		) else (
 		
 			--> Close Micra's Dialogs
-			local dialogs_names	= mcFile.readSettings UserProfile "Properties_1" type:"keys"
-			join dialogs_names (mcFile.readSettings UserProfile "Properties_2" type:"keys")
+			local dialogs_names	= mcFile.readSettings DefaultProfile "Properties_1" type:"keys"
+			join dialogs_names (mcFile.readSettings DefaultProfile "Properties_2" type:"keys")
 			for n in dialogs_names do (
 			
 				if n == "mcMicraDialog" do continue --close all except Micra dialog (prevent endless loop)
@@ -109,10 +112,6 @@ struct MICRA_STRUCTURE (
 --unregisterRedrawViewsCallback mcCall.fileName_in_screen 
 --unregisterRedrawViewsCallback mcAction.triangle_counter
 
--->Unload Variables
-mc_Dialog_DragSource = undefined
-mc_Dialog_DropTarget = undefined
-		
 			gc()
 			completeredraw()
 		)
@@ -145,18 +144,21 @@ mc_Dialog_DropTarget = undefined
 	
 		local last_profile_index = mcFile.readSettings Micra.UserSettings "Settings/CurrentProfile"
 		local last_profile_name = "Profile_"+ last_profile_index + ".xml"
+		format "% > Loading Profile( % ) for User( % )\n" version last_profile_index username
 		UserProfile = UserDir + last_profile_name
 	),
 	--> check user files and reconstruct missing
 	--force reconstruct: Micra.initUserProfile force:true
 	fn initUserProfile force:false = (
 		
+		if not doesFileExist DefaultProfile or not doesFileExist EmptyProfile or not doesFileExist DefaultSettings or not doesFileExist DefaultUserSettings do (
+		
+			format "Unable to create User Profile. Missing default Templates.\n"
+			return false
+		)
 		if not doesFileExist UserDir do (makeDir UserDir all:true)
-		local EmptyProfile	= DefaultDir + "Profile_Empty.xml" --profile without buttons and tollbars 
-		local DefaultProfile	= DefaultDir + "Profile_Default.xml" --default profile 
 		if not doesFileExist UserDir do (format "Unable to create User Profile:%\n." UserDir; return false)
-		--#("Profile_1", "Profile_2", "Profile_3", "Profile_4", "Profile_5", "Profile_6", "Profile_7", "Profile_8", "Settings")
-		local profile_names	= mcFile.readSettings DefaultSettings "UserIni" type:"keys"
+		local profile_names	= mcFile.readSettings DefaultSettings "UserFiles" type:"keys"
 		local user_files		= for n in profile_names collect (UserDir+n+".xml")
 		-- Create files #(Profile_1.xml, ..., Profile_8.xml, Settings.ini)
 		for i in user_files where not doesFileExist i or force do (
@@ -164,7 +166,7 @@ mc_Dialog_DropTarget = undefined
 			format "Build User file%\n" i
 			if findString i "Profile_1"    != undefined then (copyFile DefaultProfile i) --copy default profile to user dir (1)
 			else if findString i "Profile" != undefined then (copyFile EmptyProfile i) --copy empty profile to user dir (2-8)
-			else if i == UserSettings then (copyFile DefaultSettings i) --copy micra settings.xml to user dir
+			else if i == UserSettings then (copyFile DefaultUserSettings i) --copy micra settings.xml to user dir
 		)
 		loadUserProfile()
 		return true
@@ -172,9 +174,9 @@ mc_Dialog_DropTarget = undefined
 	--> Add Micra's macro to 3DsMax set plug-ins directory
 	fn installMacro force:false = (
 		
-		if not doesFileExist Macro or force do (
+		if not doesFileExist MaxMacro or force do (
 		
-			local success = copyFile (RootDir+"Micra_Macro.mcr") Macro --override works only with max closed, or try something else
+			local success = copyFile (RootDir+"Micra_Macro.mcr") MaxMacro --override works only with max closed, or try something else
 			format "% > Micra_Macro has ben Installed. %\n." version success
 		)
 	),
@@ -258,7 +260,7 @@ mc_Dialog_DropTarget = undefined
 		-->Load MaxCustomControls.dll (dont know if is need)
 		max_custom_controls = dotNet.loadAssembly "MaxCustomControls.dll"
 		local cnt = 0
-		-->Load Base Structures
+		-->Load Base Structures (init mcFile structure)
 		for i in #("mcStructMan", "mcDate", "mcString", "mcObjects", "mcXML", "mcFile") do (
 		
 			if debug == 4 do format "% > loadStructures > [ % ]\n" version i
@@ -266,7 +268,7 @@ mc_Dialog_DropTarget = undefined
 			if struct_instance == undefined or force do fileIn (CoreDir+i+".ms")
 			cnt+=1
 		)
-		-->Load Rest Core Structures
+		-->Load Rest Core Structures using mcFile struct
 		local struct_names = mcFile.readSettings DefaultSettings "Structures" type:"keys"
 		for i in struct_names do (
 		
@@ -298,13 +300,13 @@ mc_Dialog_DropTarget = undefined
 		--mcFile.fileInVersion "Morph_Dummy"
 		
 		--> Reload Macroscript , bug in 3DsMax 1012
-		fileIn Macro 
+		fileIn MaxMacro 
 	),
 	--> Initialize Micra
 	fn initialize = (
 	
 		increaseMemory 30 -->Set Memory Allocation to 30MB
-		if loaded do unload()--> Unregister Micra's Callbacks
+		if loaded do unload()--> Unregister Micra's Callbacks and close all dialogs
 		loadStructures() --init system structures
 		if not initUserProfile() do return false
 		installMacro() --add micra macro to 3DsMax 
@@ -355,7 +357,7 @@ if execute (getINISetting UserSettings "Settings" "ShowFileName") do
 		--> collect ini 
 		for i in system_ini_names do files_list += #(RootDir+i+".ini")
 		--> collect default ini
-		for i in default_ini_names do files_list += #(DefaultDir+i+".ini")
+		for i in default_ini_names do files_list += #(UserDir + "Default\\" +i+".ini")
 		--> return missing files
 		return (for f in files_list where not doesFileExist f collect f)
 	),

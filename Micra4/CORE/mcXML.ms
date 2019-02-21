@@ -526,6 +526,8 @@ public
 )	
 
 /*
+https://docs.microsoft.com/en-us/dotnet/api/system.xml.xmldocument?view=netframework-4.7.2
+
  XmlElement bookElement = doc.CreateElement("book", "http://www.contoso.com/books");
  XmlElement titleElement = doc.CreateElement("title");
  titleElement.InnerText = title;

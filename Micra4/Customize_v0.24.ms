@@ -1,3 +1,17 @@
+--------------------------------------------------------------------------------
+/* mcCustomizeDialog by Orien 2019 */
+--------------------------------------------------------------------------------
+/*
+*@Used Structures
+	Micra
+	mcString
+*
+*@Used Objects
+	
+*
+*@Example
+*
+*/
 --Customize Micra
 Global mcGM
 Global mcCustomizeDialog --mcCustomizeDialog
@@ -145,26 +159,27 @@ fn delCurrentCatalog = (
 		mcFile.fileInVersion "Customize" 
 	)
 )
+/** 
+*@Usage
+	*@Structure
+		register existing action
+		create new action
+	*@File
+		register existing tool
+		create new tool
+*/
 fn addNewAction = (
 
 	--get action params 
-	local action_category = getEditorData "catalog_name"
+	local category_key = getEditorData "catalog_name"
 	local action_name = getEditorData "action_name"
 	local action_cmd = getEditorData "action_cmd"
 	local icon_index = getEditorData "icon_index"
-	if action_category.count == 0 or action_name.count == 0 or action_cmd.count == 0 or icon_index.count == 0 do return false
-	/** 
-	*@Actions Methods
-		*@Structure
-			register existing action
-			create new action
-		*@File
-			register existing tool
-			create new tool
-	*/
-	local success = mcActionsEditor.editOrCreateAction action_category action_name action_cmd icon_index
+	if category_key.count == 0 or action_name.count == 0 or action_cmd.count == 0 or icon_index.count == 0 do return false
+	local action_key = mcString.replaceAll action_name "_" " " --"Reset Transform"
+	local success = mcActionsEditor.editOrCreateAction category_key action_key action_cmd icon_index
 --TODO
---if success do appendNewActionToList action_name
+--if success do appendNewActionToList action_name or restart customize tool
 )
 fn delCurrentAction = (
 	
@@ -209,7 +224,7 @@ fn pickIcon = (
 
 	local action_name = getEditorData "action_name"
 	if action_name == undefined do return false
-	local action_data = mcActionsEditor.getActionData action_name
+	local action_data = mcActionsEditor.getActionData (mcString.replaceAll action_name " " "_")
 	if action_data != undefined do (
 	
 		local icon_index = action_data.get "icon"
@@ -241,7 +256,7 @@ fn clearCurrentActionData = (
 	setEditorData "action_name" 	"Action Name"
 )
 fn fillCurrentActionData form = (
-format "fill\n"
+
 	if form == undefined do return false
 	local mcs  = form.tag.value
 	local action_category =  mcs.tab_1.combo_box.SelectedItem
@@ -269,7 +284,7 @@ format "fill\n"
 		setEditorData "icon_index" 	(action_data.get "icon"	)
 		setEditorData "action_cmd" 	(action_data.get "cmd"	)
 		setEditorData "catalog_name" 	(action_category)
-		setEditorData "action_name" 	(action_name	)
+		setEditorData "action_name" 	(mcString.replaceAll action_name "_"	" ")
 	)
 )
 fn editModeSwitch state = (

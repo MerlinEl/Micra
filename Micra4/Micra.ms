@@ -270,7 +270,7 @@ try ( mcMicraDialog.close() ) catch()
 		case menu_item_name of (	
 	
 			"Manage":mcFile.fileInVersion "Manage_Profiles"
-			default:( --for any other names  - -> load profile by name
+			default:( --for any other names  - -> save picked index and load profile
 				
 				local keys = for i = 1 to 8 collect (mcFile.readSettings Micra.UserSettings ("Profiles/menu_"+(i as string))) --collect all profile names	
 				local profile_index = (findItem keys menu_item_name ) as string --find profile index by name

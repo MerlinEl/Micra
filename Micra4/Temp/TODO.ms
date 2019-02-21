@@ -10,43 +10,8 @@ Move_To_X          = 28, mcAction.object_move_to_grid(),Move To X
 
 
 
---------------------------------------
-MIGRATION SAVE-LOAD-DELETE SETTINGS >
---------------------------------------
-setIniSetting
-getIniSetting
-delIniSetting
+
 	
-DONE:
-D:\ReneBaca\3DsMax\Micra\Micra4\Micra_Main.ms
-D:\ReneBaca\3DsMax\Micra\Micra4\LS3D_Model_Manager_v0.01.ms
-D:\ReneBaca\3DsMax\Micra\Micra4\Manage_Profiles_v0.06.ms
-
-IGNORE:
-D:\ReneBaca\3DsMax\Micra\Micra4\UE_Model_Importer_v0.07.ms
-D:\ReneBaca\3DsMax\Micra\Micra4\Temp\TODO.ms
-
-
-TODO:
-D:\ReneBaca\3DsMax\Micra\Micra4\Script_Manager_v0.14.ms
-D:\ReneBaca\3DsMax\Micra\Micra4\Struct_Action_v0.03.ms
-
-D:\ReneBaca\3DsMax\Micra\Micra4\Send_UVW_To_Ps_v0.02.ms
-D:\ReneBaca\3DsMax\Micra\Micra4\Repair_Object_v1.08.ms
-D:\ReneBaca\3DsMax\Micra\Micra4\Render_To_Texture_Mod_v0.04.ms
-D:\ReneBaca\3DsMax\Micra\Micra4\Render_By_Sets_v0.04.ms
-D:\ReneBaca\3DsMax\Micra\Micra4\Multi_Planter_v1.53.ms
-D:\ReneBaca\3DsMax\Micra\Micra4\mbFracture_v0.1.ms
-
-
-D:\ReneBaca\3DsMax\Micra\Micra4\FBX_PSA_Batch_v0.08.ms
-D:\ReneBaca\3DsMax\Micra\Micra4\Color_Palete_v0.56.ms
-D:\ReneBaca\3DsMax\Micra\Micra4\Character_Pose_v0.17.ms
-D:\ReneBaca\3DsMax\Micra\Micra4\ASCII_Multi_Exporter_v0.09.ms
-D:\ReneBaca\3DsMax\Micra\Micra4\ActorX_Batch_Exporter_v0.01.ms
-
-
-
 
 
 	--save registred dialogs pos and size to current profile
@@ -66,15 +31,8 @@ D:\ReneBaca\3DsMax\Micra\Micra4\ActorX_Batch_Exporter_v0.01.ms
 	"Save":saveCurrentProfile()
 	
 	local command_names = #("Save", "Manage")
-	
-	
 
 
-	
-	
-	
-	
-	
 xml = mcXML (Micra.TempDir + "xml_test_01.xml")
 	xml.url
 	xml.exists()

@@ -1,0 +1,257 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<DEFAULT>
+  <Settings>
+    <Autorun val="false" />
+    <ShowFileName val="false" />
+    <UseLargeVertexDots val="false" />
+    <UniversalCounter val="false" />
+    <UC_ShowSize val="false" />
+    <CurrentProfile val="1" />
+    <DialogSnap val="true" />
+    <AimScaleFactor val="10" />
+    <SaveWirecolor val="off" />
+    <SaveLinks val="on" />
+  </Settings>
+  <Profiles>
+    <menu_1 val="Default" />
+    <menu_2 val="Empty_1" />
+    <menu_3 val="Empty_2" />
+    <menu_4 val="Empty_3" />
+    <menu_5 val="Empty_4" />
+    <menu_6 val="Empty_5" />
+    <menu_7 val="Empty_6" />
+    <menu_8 val="Empty_7" />
+  </Profiles>
+  <PoseTool>
+    <Body val="50" />
+    <Hands val="40" />
+    <Face val="16" />
+  </PoseTool>
+  <ColorPalete>
+    <btn_1 val="(color 38 8 0)" />
+    <btn_2 val="(color 74 35 0)" />
+    <btn_3 val="(color 66 67 0)" />
+    <btn_4 val="(color 0 22 0)" />
+    <btn_5 val="(color 0 0 255)" />
+    <btn_6 val="(color 37 0 83)" />
+    <btn_7 val="(color 225 198 87)" />
+    <btn_8 val="(color 177 27 88)" />
+    <btn_9 val="(color 0 86 207)" />
+    <btn_10 val="(color 255 255 252)" />
+    <btn_40 val="(color 0 0 0)" />
+    <btn_36 val="(color 72 0 217)" />
+    <btn_37 val="(color 255 0 221)" />
+    <btn_38 val="(color 228 214 153)" />
+    <btn_39 val="(color 0 113 202)" />
+    <btn_30 val="(color 46 46 46)" />
+    <btn_29 val="(color 196 33 0)" />
+    <btn_28 val="(color 229 166 215)" />
+    <btn_27 val="(color 251 147 255)" />
+    <btn_31 val="(color 255 0 0)" />
+    <btn_32 val="(color 244 97 0)" />
+    <btn_21 val="(color 255 120 110)" />
+    <btn_11 val="(color 132 2 0)" />
+    <btn_16 val="(color 98 0 207)" />
+    <btn_15 val="(color 0 62 164)" />
+    <btn_33 val="(color 255 255 0)" />
+    <btn_34 val="(color 0 85 0)" />
+    <btn_24 val="(color 141 255 159)" />
+    <btn_26 val="(color 183 106 255)" />
+    <btn_35 val="(color 81 179 255)" />
+    <btn_18 val="(color 0 127 148)" />
+    <btn_17 val="(color 139 0 136)" />
+    <btn_19 val="(color 127.5 127.5 127.5)" />
+    <btn_20 val="(color 81 81 81)" />
+    <btn_14 val="(color 0 85 0)" />
+    <btn_22 val="(color 255 164 75)" />
+    <btn_12 val="(color 132 82 0)" />
+    <btn_25 val="(color 8 200 248)" />
+    <btn_23 val="(color 253 255 145)" />
+    <btn_13 val="(color 112 112 0)" />
+  </ColorPalete>
+  <Gallery3D>
+    <Thumb_Render_Size val="[200,150]" />
+    <Thumb_Size val="[160,128]" />
+    <Thumb_Color val="(color 33 70 112)" />
+    <Dialog_Gal_Pos val="[-903,368]" />
+    <Dialog_Gal_Size val="[899,767]" />
+    <Dialog_Plant_Pos val="[58,220]" />
+    <Dialog_Plant_Size val="[304,673]" />
+    <Plant_Distance val="10" />
+    <Plant_Sensitivity val="0.0" />
+    <Plant_Snap_Offset val="0" />
+    <Maual_Spin_Axis val="1" />
+    <Plant_Orientation val="1" />
+    <Single_Size val="[0,0,0]" />
+    <Single_Rotation val="[0,0,0]" />
+    <Single_Position val="[0,0,0]" />
+    <Lock_Size val="false" />
+    <Lock_Rotation val="false" />
+    <Lock_Position val="false" />
+    <Last_Profile val="7" />
+    <ObjectList_RolledUp val="false" />
+    <RandomSettings_RolledUp val="false" />
+    <GlobalSettings_RolledUp val="false" />
+    <ProfileSettings_RolledUp val="false" />
+    <AntiAliasing val="true" />
+    <PixelSampler val="false" />
+    <Shadows val="false" />
+    <Quiet val="true" />
+    <lastMainCat val="Scotch" />
+    <lastSubCat val="Leafs" />
+    <Random_Objects_List />
+    <test val="1" />
+    <Server_Dir E="\Gallery3D\" />
+    <PC_Dir E="\Gallery3D\" />
+    <Dialog_Gal_Max val="false" />
+    <Opacity val="1.0" />
+    <Current_Dir E="\Gallery3D\Nature\Leafs\" />
+    <rootPath D="\ReneBaca\3DsMax\Gallery3D\" />
+    <Root_Dir E="\Gallery3D\" />
+  </Gallery3D>
+  <Gallery3DDefault>
+    <Plant_Distance val="24" />
+    <Plant_Sensitivity val="0.0" />
+    <Maual_Spin_Axis val="1" />
+    <Plant_Orientation val="1" />
+    <Plant_Snap_Offset val="1.0" />
+    <Lock_Size val="false" />
+    <Lock_Rotation val="false" />
+    <Lock_Position val="false" />
+    <Single_Size val="[0,0,0]" />
+    <Single_Rotation val="[0,0,0]" />
+    <Single_Position val="[0,0,0]" />
+    <Random_Objects_List />
+    <Preserve_Overlaps val="false" />
+  </Gallery3DDefault>
+  <RenderToTextureMod>
+    <chk_5 val="false" />
+    <chk_1 val="true" />
+    <chk_2 val="true" />
+    <chk_3 val="false" />
+    <chk_4 val="false" />
+    <chk_6 val="false" />
+    <T_I_D val="ah" />
+    <Ambient_Lights val="false" />
+    <Show_Rendering val="true" />
+    <File_Type val="1" />
+    <Render_Size val="5" />
+    <Top_Light val="0.1" />
+    <Bottom_Light val="0.08" />
+    <Antialiasing val="true" />
+    <Filter val="7" />
+    <Enable_Global_Supersampler val="true" />
+    <Sampler val="2" />
+    <Light_Tracer val="false" />
+    <Visible_Edges val="true" />
+    <Seam_Edges val="false" />
+    <Seam_Edges_Color val="(color 0 255 0)" />
+    <Mode val="1" />
+    <Size val="7" />
+    <Slected_Faces val="true" />
+  </RenderToTextureMod>
+  <Interface>
+    <lastprofile val="1" />
+    <opacity val="0.9" />
+  </Interface>
+  <ColorProfiles>
+    <DefaultColor />
+    <UserColor />
+    <ForestColor />
+    <EarthColor />
+    <MoonColor />
+    <SeaColor />
+    <SunColor />
+  </ColorProfiles>
+  <ForestColor>
+    <backcolor val="(color 1 45 0)" />
+    <forecolor val="(color 30 122 0)" />
+    <selected val="(color 6 59 90)" />
+    <marked val="(color 197 193 10)" />
+    <button val="(color 10 69 10)" />
+    <inactive val="(color 24 89 10)" />
+    <textcolor val="(color 58 143 20)" />
+    <seltext val="(color 181 196 20)" />
+    <editback val="#ffefbf" />
+    <editfore val="#a551f1" />
+    <opacity val="0.9" />
+  </ForestColor>
+  <EarthColor>
+    <backcolor val="(color 78 48 1)" />
+    <forecolor val="(color 122 68.8941 0)" />
+    <selected val="(color 205 189.243 13.6666)" />
+    <marked val="(color 197 193 10)" />
+    <button val="(color 128 100.699 27.1059)" />
+    <inactive val="(color 132 125.118 15.0118)" />
+    <textcolor val="(color 187.15 193 27.2471)" />
+    <seltext val="(color 181 196 20)" />
+    <opacity val="0.9" />
+    <editback val="#ffefbf" />
+    <editfore val="#a551f1" />
+  </EarthColor>
+  <MoonColor>
+    <backcolor val="(color 137 149 136)" />
+    <forecolor val="(color 199.676 212 195.373)" />
+    <selected val="(color 197 193 10)" />
+    <marked val="(color 10 69 10)" />
+    <button val="(color 171.98 179 171.98)" />
+    <inactive val="(color 97.4541 102 96.4)" />
+    <textcolor val="(color 11.0262 26 3.67059)" />
+    <seltext val="(color 237.001 238 225.867)" />
+    <opacity val="0.9" />
+    <editback val="#ffefbf" />
+    <editfore val="#a551f1" />
+  </MoonColor>
+  <SeaColor>
+    <backcolor val="(color 0 26.3059 43)" />
+    <forecolor val="(color 12.6274 57.5824 140)" />
+    <selected val="(color 197 193 10)" />
+    <marked val="(color 10.0118 48.8746 69)" />
+    <button val="(color 3.01176 21.667 64)" />
+    <inactive val="(color 8.61175 102.987 183)" />
+    <textcolor val="(color 30.7765 127.692 218)" />
+    <seltext val="(color 181 196 20)" />
+    <opacity val="0.9" />
+    <editback val="#ffefbf" />
+    <editfore val="#a551f1" />
+  </SeaColor>
+  <DefaultColor>
+    <backcolor val="(color 60.8706 65.7071 78)" />
+    <forecolor val="(color 88.0941 155.806 208)" />
+    <selected val="(color 216 211.207 184.659)" />
+    <marked val="(color 15.7843 64.4855 175)" />
+    <button val="(color 70.2824 81.8298 103)" />
+    <inactive val="(color 127.176 132.525 138)" />
+    <textcolor val="(color 177.059 195.661 210)" />
+    <seltext val="(color 203.608 220.376 236)" />
+    <opacity val="0.9" />
+    <editback val="#ffefbf" />
+    <editfore val="#a551f1" />
+  </DefaultColor>
+  <SunColor>
+    <backcolor val="(color 194 142 41)" />
+    <forecolor val="(color 223 167.906 0)" />
+    <selected val="(color 197 193 10)" />
+    <marked val="(color 147 110.56 32.2824)" />
+    <button val="(color 177 123.267 46.5059)" />
+    <inactive val="(color 125 81.4706 25)" />
+    <textcolor val="(color 226 202.696 93.9451)" />
+    <seltext val="(color 181 196 20)" />
+    <opacity val="0.9" />
+    <editback val="#ffefbf" />
+    <editfore val="#a551f1" />
+  </SunColor>
+  <SandColor>
+    <backcolor val="(color 208 199.191 163.953)" />
+    <forecolor val="(color 250 229.839 175.49)" />
+    <selected val="(color 128.982 216 90.6353)" />
+    <marked val="(color 10.8706 96.3736 132)" />
+    <button val="(color 212 203.197 162.118)" />
+    <inactive val="(color 128.471 139.482 156)" />
+    <textcolor val="(color 53.9647 58.2033 99)" />
+    <seltext val="(color 125.153 170.797 197)" />
+    <opacity val="0.9" />
+    <editback val="#ffefbf" />
+    <editfore val="#a551f1" />
+  </SandColor>
+</DEFAULT>

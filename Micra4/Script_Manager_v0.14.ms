@@ -375,8 +375,8 @@
 			Micra.UserDir + "Profile_6.ini",
 			Micra.UserDir + "Profile_7.ini",
 			Micra.UserDir + "Profile_8.ini",
-			Micra.DefaultDir+"Profile_Default.ini",
-			Micra.DefaultDir+"Profile_Empty.ini"
+			Micra.UserDir + "Default\\Profile_Default.ini",
+			Micra.UserDir + "Default\\Profile_Empty.ini"
 		)
 		for fpath in dialog_ini_names do
 		(

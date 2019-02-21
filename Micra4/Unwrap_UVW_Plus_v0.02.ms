@@ -283,7 +283,17 @@ rollout mcUnwrapEditorDialog "UV+" width:96 height:456
 	on btn_randomize_y pressed do randomizeElements #Y	
 	--<
 )
-createDialog mcUnwrapEditorDialog
+
+(
+	local parentUVW = windows.getChildHWND 0 "Edit UVWs"
+	if parentUVW != undefined then (
+		
+		createdialog mcUnwrapEditorDialog  parent:parentUVW[1]
+	
+	) else (
+		createdialog mcUnwrapEditorDialog
+	)
+)
 
 
 /*

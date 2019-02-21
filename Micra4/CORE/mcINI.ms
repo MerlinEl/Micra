@@ -46,11 +46,11 @@ Global mcINIHead
 	--
 	files_array = #("Skeleton", "LS3D_ReplaceModel", "Actions_Help") --Micra.RootDir
 	iniToXmlSipmle Micra.RootDir files_array[1] "SKELETON" method:"default"
-	iniToXmlSipmle Micra.DefaultDir "Settings" "DEFAULT" method:"default"
+	iniToXmlSipmle Micra.UserDir + "Default\\Settings" "DEFAULT" method:"default"
 	--
 	nodes_array = #("DEFAULT", "EMPTY", "TEMP")
-	files_array = #("Profile_Default", "Profile_Empty", "Profile_Temp") --Micra.DefaultDir
-	for i=1 to files_array.count do iniToXmlComplex Micra.DefaultDir files_array[i] nodes_array[i]
+	files_array = #("Profile_Default", "Profile_Empty", "Profile_Temp") --Micra.UserDir + "Default\\
+	for i=1 to files_array.count do iniToXmlComplex (Micra.UserDir + "Default\\") files_array[i] nodes_array[i]
 	--
 	files_array = #("Profile_1","Profile_2","Profile_3","Profile_4","Profile_5","Profile_6","Profile_7","Profile_8")
 	for i=1 to files_array.count do iniToXmlComplex Micra.UserDir files_array[i] "USER"

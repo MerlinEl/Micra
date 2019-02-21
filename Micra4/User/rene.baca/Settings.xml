@@ -15,13 +15,13 @@
   </Settings>
   <Profiles>
     <menu_1 val="Merlin" />
-    <menu_2 val="Empty" />
-    <menu_3 val="Empty" />
-    <menu_4 val="Test" />
-    <menu_5 val="Empty" />
-    <menu_6 val="Empty" />
-    <menu_7 val="Empty" />
-    <menu_8 val="Empty" />
+    <menu_2 val="Empty_1" />
+    <menu_3 val="Empty_2" />
+    <menu_4 val="Empty_3" />
+    <menu_5 val="Empty_4" />
+    <menu_6 val="Empty_5" />
+    <menu_7 val="Empty_6" />
+    <menu_8 val="Empty_7" />
   </Profiles>
   <PoseTool>
     <Body val="50" />
