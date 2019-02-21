@@ -104,6 +104,7 @@
     <Temp_UVWs_UnPack icon="192" cmd="mcAction.tempUnwrapUnPack()" tooltip="Temp UVWs UnPack" />
     <Weld_And_Smooth icon="208" cmd="mcAction.weldAndAutoSmooth()" tooltip="Weld And Smooth" />
     <Weld_Verts icon="60" cmd="mcAction.weldVerts()" tooltip="Weld Verts" />
+    <Vertex_Color icon="258" cmd="mcFile.fileInVersion Vertex_Color" tooltip="Vertex Color" />
   </Modify>
   <Creation>
     <Create_3PGrid icon="81" cmd="mcCreate.grid3p()" tooltip="Create_3PGrid" />

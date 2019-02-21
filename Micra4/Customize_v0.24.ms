@@ -176,7 +176,7 @@ fn addNewAction = (
 	local action_cmd = getEditorData "action_cmd"
 	local icon_index = getEditorData "icon_index"
 	if category_key.count == 0 or action_name.count == 0 or action_cmd.count == 0 or icon_index.count == 0 do return false
-	local action_key = mcString.replaceAll action_name "_" " " --"Reset Transform"
+	local action_key = mcString.replaceAll action_name " " "_" --"Reset Transform" > "Reset_Transform"
 	local success = mcActionsEditor.editOrCreateAction category_key action_key action_cmd icon_index
 --TODO
 --if success do appendNewActionToList action_name or restart customize tool

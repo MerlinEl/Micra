@@ -211,20 +211,20 @@ struct MICRA_ACTIONS_EDITOR	(
 	),
 		/**
 	*@Usage > add script name and version to Settings.ini, like: Edge_Scale_Align = 0.01
-		script_file_name: String > "Color_Palete_v0.56"
+		script_name: String > "Color_Palete_v0.56"
 	*/
-	fn registerMicraScript script_file_name = (
+	fn registerMicraScript script_name = (
 	
-		local version_pos = (findString script_file_name "_v")
+		local version_pos = (findString script_name "_v")
 		if version_pos == undefined do ( --file is without version
 			
-			format  "Unable to activate file [ % ] without version." script_file_name
+			format  "Unable to activate file [ % ] without version." script_name
 			return false
 		)
-		local script_version = substring script_file_name (version_pos+2) -1 
-		local script_name = substring script_file_name 1 (version_pos-1)
+		local script_version = substring script_name (version_pos+2) -1 
+		local script_name = substring script_name 1 (version_pos-1)
 		--register script
-		local success = mcFile.saveSettings Micra.DefaultSettings "Version" script_name script_version backup:4
+		local success = mcFile.saveSettings Micra.DefaultSettings ("Version/" + script_name) script_version
 		format "mcActionsEditor > registerMicraScript > [%_v%]\tsuccess:%\n" script_name script_version success
 	),
 	--fn addAction
@@ -407,13 +407,63 @@ format "editOrCreateAction > action_key:% cmd :%\n\t%" action_key action_cmd (cm
 					)
 				)
 			)
+			
+
 			-----------------------------------------------------------------------------------------------------
 			/* FILE */
 			-----------------------------------------------------------------------------------------------------
 			"file": ( --create or register only
 			
+				--if is already registred break
 				local fname = getActionParams action_cmd --get params as fname
-				format "editOrCreateAction > cmd :% fname:%\n" action_cmd fname
+				local script_version = mcFile.getScriptVersion fname
+				--format "editOrCreateAction > Script :% version:%\n" fname script_version
+				if script_version != "" do ( --if script already registred, abort 	
+
+					messageBox ("Script [ "+fname+" ] is already registred. Type different name.") title:micra.version
+					edit (Micra.rootDir + fname + "_v" + script_version + ".ms")
+					return false
+				)
+				--if file exists register it
+				local script_path = "undefined"
+				local script_name = ""
+				local root_files = getFiles (Micra.rootDir + "*.ms")
+				for f in root_files do (
+				
+					if findString f fname != undefined do (
+					
+						script_path = f
+						exit --break loop
+					)
+				)
+				if doesFileExist script_path then ( --register existing script
+								
+					script_name = getFilenameFile script_path --"Vertex_Color_v1.02"
+					format "editOrCreateAction > Script [ % ] is registred succesfully.\n" script_name
+					
+				) else ( --if script not exists crete new one
+					
+					script_name = fname + "_v0.01" --"Vertex_Color_v0.01"
+					script_path = Micra.rootDir + script_name + ".ms"
+					local template_file = Micra.rootDir + "CORE\\" + "_template.txt"
+					--copy template in to file
+					copyFile template_file script_path
+					registerMicraScript script_name
+					format "editOrCreateAction > Script [ % ] is created succesfully.\n" script_name
+					edit script_path
+				)
+				--register script in Settings.xml
+				registerMicraScript script_name 
+				--Add new action to Actions.ini >  <Iron_Sight icon="77" cmd="mcAction.pivot_iron_sight()" tooltip="Iron Sight" />
+				local action_data = (mcObject.new()).addMore #(
+
+					mcItem "icon" (icon_index as String),
+					mcItem "cmd" action_cmd,
+					mcItem "tooltip" (mcString.replaceAll action_key "_" " ")
+				)
+				mcFile.saveSettings Micra.ActionsXML (category_key + "/" + action_key) action_data type:"attribs"
+				format "editOrCreateAction > Script [ % ] is aded to category [ % ].\n" script_name category_key
+				return true
 			)
 		)
 	)

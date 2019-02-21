@@ -7,14 +7,14 @@
     <mc_Dialog_D active="true" pos="[1572,506]" size="[148,90]" title="Select:" btnCount="[6,3]" />
     <mc_Dialog_E active="false" pos="[100,843]" size="[244,42]" title="Animation:" btnCount="[10,1]" />
     <mc_Dialog_F active="true" pos="[1352,142]" size="[196,90]" title="Modifiers:" btnCount="[8,3]" />
-    <mc_Dialog_G active="true" pos="[1572,662]" size="[148,90]" title="Modify:" btnCount="[6,3]" />
+    <mc_Dialog_G active="true" pos="[1570,660]" size="[148,90]" title="Modify:" btnCount="[6,3]" />
     <mc_Dialog_H active="true" pos="[1572,752]" size="[148,66]" title="Materials:" btnCount="[6,2]" />
     <mc_Dialog_I active="true" pos="[1572,884]" size="[148,66]" title="Programming:" btnCount="[6,2]" />
     <mc_Dialog_J active="false" pos="[100,510]" size="[460,42]" title="Experimental:" btnCount="[19,1]" />
   </Properties_1>
   <Properties_2>
     <mcMicraDialog active="true" pos="[1570,210]" size="[148,66]" title="" />
-    <mcCustomizeDialog active="false" pos="[1280,300]" size="[224,404]" title="" />
+    <mcCustomizeDialog active="false" pos="[860,300]" size="[600,404]" title="" />
     <mcProgramDialog active="false" pos="[100,0]" size="[256,232]" title="" />
     <mcisoDialog active="false" pos="[100,152]" size="[140,400]" title="" />
     <mcModifierDialog active="false" pos="[100,100]" size="[400,400]" title="" />
@@ -186,7 +186,7 @@
     <btn_B27 action="ZB_Scale_From" icon="251" />
     <btn_B31 action="Copy_TM" icon="252" />
     <btn_B32 action="Paste_TM" icon="253" />
-    <btn_G16 action="Advanced_Edge_Loop" icon="1" />
+    <btn_G16 action="Vertex_Color" icon="258" />
     <btn_B33 action="Create_Bounding_Box" icon="16" />
   </Buttons>
 </USER>

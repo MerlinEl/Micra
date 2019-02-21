@@ -2,7 +2,7 @@
 <SETTINGS>
   <Structures val="All registred Micra's Structures">
     <!--independent classes-->
-	<mcStructMan val="on" info="structure manager" />
+    <mcStructMan val="on" info="structure manager" />
     <mcWinMsg val="on" />
     <mcWin32 val="on" info="denisT great work!" />
     <mcObjects val="on" info="database object CORE BASE" />
@@ -107,6 +107,7 @@
     <Dialog_Template val="0.05" />
     <Dialog_Default_Net val="0.29" />
     <Actions_Editor val="0.01" />
+    <Vertex_Color val="1.02" />
   </Version>
   <SystemFiles val="Micra's Settings Files">
     <Actions val="Contains all accesible Micra's actions" />
@@ -114,21 +115,21 @@
     <Skeleton val="Bones pattern for humanoid Animation" />
     <Settings val="Default Micra's Settings" />
   </SystemFiles>
-  <UserFiles val ="User's Settings Files">
-    <Profile_1/>
-    <Profile_2/>
-    <Profile_3/>
-    <Profile_4/>
-    <Profile_5/>
-    <Profile_6/>
-    <Profile_7/>
-    <Profile_8/>
-    <Settings/>
+  <UserFiles val="User's Settings Files">
+    <Profile_1 />
+    <Profile_2 />
+    <Profile_3 />
+    <Profile_4 />
+    <Profile_5 />
+    <Profile_6 />
+    <Profile_7 />
+    <Profile_8 />
+    <Settings />
   </UserFiles>
   <DefaultFiles val="Default Settings Files">
-    <Profile_Default/>
-    <Profile_Empty/>
-    <Settings/>
+    <Profile_Default />
+    <Profile_Empty />
+    <Settings />
   </DefaultFiles>
   <Paths>
     <WorkServer val="R=\Resources\Resources_new\" />
