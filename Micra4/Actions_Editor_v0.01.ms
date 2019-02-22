@@ -38,7 +38,7 @@ struct MICRA_ACTIONS_EDITOR	(
 	fn categoryExists category_key = (findItem (getCategories()) category_key > 0),
 	fn addCategory category_key = (
 	
-		mcFile.saveSettings Micra.ActionsXML ("ACTIONS" category_key) "" --add-replace node only
+		mcFile.saveSettings Micra.ActionsXML ("ACTIONS/" + category_key) "" --add-replace node only
 	),
 	fn delCategory category_key = ( --Actions.xml
 	
@@ -236,10 +236,10 @@ struct MICRA_ACTIONS_EDITOR	(
 		icon_str		: "33"
 		cmd_str			: "mcAction.reset_transform()"
 	*/
-	fn registerAction category_key action_key icon_str cmd_str 	= (
+	fn registerActionToActionList category_key action_key icon_str cmd_str 	= (
 	
 		local action_name = mcString.replaceAll action_key "_" " " --"Reset Transform"
-		mcString.printInBlock "mcActionsEditor > registerAction > \n\tcatalog\t: %\n\taction\t: % \n\tdata\t: %\n" params:#(category_key, action_key, action_data)
+		mcString.printInBlock "mcActionsEditor > registerActionToActionList > \n\tcatalog\t: %\n\taction\t: % \n\tdata\t: %\n" params:#(category_key, action_key, action_data)
 		local action_data = (mcObject.new()).addMore #(
 
 			mcItem "icon" icon_str,
@@ -250,14 +250,14 @@ struct MICRA_ACTIONS_EDITOR	(
 		mcFile.saveSettings Micra.ActionsXML (category_key+"/"+action_key) action_data type:"attribs"
 		messageBox ("Action [ "+action_key+" ] was registred success:"+success as string) title:micra.version
 	),
-	fn unregisterAction category_key action_key = (
+	fn unregisterActionFromActionList category_key action_key = (
 	
 		--delIniSetting Micra.ActionsIni category_key action_key
 	),
 	fn removeAction category_key action_key = (
 	
 		format "mcActionsEditor > removeAction > name:%\n " action_key
-		--unregisterAction category_key action_key
+		--unregisterActionFromActionList category_key action_key
 		--TODO
 		--also remove action from micra tool button or create exception to dont load this action in to button
 	),
@@ -285,6 +285,7 @@ struct MICRA_ACTIONS_EDITOR	(
 		obj = mcActionsEditor.splitCommand "mcAction.capHoles()"
 		obj = mcActionsEditor.splitCommand "mcAction.capHoles #map:true"
 		obj = mcActionsEditor.splitCommand "mcCreate.cereateChecker color1:(color 18 40 88) color2:(color 121 183 241)"
+		obj = mcActionsEditor.splitCommand "mcFile.fileInVersion Object_Inspector"
 		obj.toString()
 		obj.values()
 		obj.keys()
@@ -340,7 +341,7 @@ struct MICRA_ACTIONS_EDITOR	(
 		Return				Customize --> addNewAction --> send output
 	*@Actions Methods
 		*@Structure
-			register existing action	> registerAction category_key action_key	(append data to Actions.ini)
+			register existing action	> registerActionToActionList category_key action_key	(append data to Actions.ini)
 			create new action			> addNewAction category_key action_key	(open script and insert action at struct end)
 		*@File
 			register existing tool		>
@@ -373,7 +374,7 @@ format "editOrCreateAction > action_key:% cmd :%\n\t%" action_key action_cmd (cm
 					
 						if not (isActionRegistred category_key (nameToKey action_key)) then ( --if not registred
 						
-							registerAction category_key action_key (icon_index as String) action_cmd
+							registerActionToActionList category_key action_key (icon_index as String) action_cmd
 							
 						) else ( --if already registred, abort
 						
@@ -390,25 +391,33 @@ format "editOrCreateAction > action_key:% cmd :%\n\t%" action_key action_cmd (cm
 						--append function fo current file (in Maxscript Editor)
 						mcMsx.insertFunctionAtStructureEnd new_fn 
 						--register new action
-						registerAction category_key action_key (icon_index as String) action_cmd
+						registerActionToActionList category_key action_key (icon_index as String) action_cmd
 					)
 					
 				) else ( --create new structure file and new function in CORE folder
-				
-					local struct_file = Micra.rootDir + struct_name + "\\.ms" 
-					if queryBox ("Do you want to create new structure file?\n[ " + struct_file + " ]") title:micra.version do (
+		
+					local script_path = Micra.CoreDir + struct_name + "_v0.01.ms"  --"Vertex_Color_v0.01"
+					if queryBox ("Do you want to create new structure file?\n[ " + script_path + " ]") title:micra.version do (
 					
-						--create new file 
-						
-						--edit new file
-						
+						local template_file = Micra.CoreDir + "_template.txt"
+						--copy template in to file
+						copyFile template_file script_path
+						format "editOrCreateAction > Script [ % ] is created succesfully.\n" script_name
+						edit script_path --edit new file
 						--insert new function
-						print "function > try to create struct file"
+						local new_fn = "fn " + fn_name
+						if fn_params != "" do new_fn += " " + fn_params
+						new_fn += " = (\n\t\t\n\t\tInsert Code Here...\n\t)"
+						--append function fo current file (in Maxscript Editor)
+						mcMsx.insertFunctionAtStructureEnd new_fn 
+						--register new action in Actions.xml (All Actions List)
+						registerActionToActionList category_key action_key (icon_index as String) action_cmd
+						--TODO
+						--register new Script in Settings.xml (load at 3DsMax start)
 					)
 				)
 			)
 			
-
 			-----------------------------------------------------------------------------------------------------
 			/* FILE */
 			-----------------------------------------------------------------------------------------------------
@@ -470,3 +479,7 @@ format "editOrCreateAction > action_key:% cmd :%\n\t%" action_key action_cmd (cm
 )	
  --create instance
 Global mcActionsEditor = mcStructMan.instanceStructure MICRA_ACTIONS_EDITOR "mcActionsEditor"
+
+
+
+----TODO put here dialog with script name type (like LS3D_Tools, Align_Objects_3D, etc...)

@@ -223,4 +223,8 @@
   <Test_3>
     <Action_Name icon="1" cmd="mcCreate.createDXMaterial()" tooltip="Action_Name" />
   </Test_3>
+  <TuKej>
+    <Object_Inspector icon="259" cmd="mcFile.fileInVersion Object_Inspector" tooltip="Object Inspector" />
+    <Smart_LS3D_Export icon="260" cmd="mcActionsTukej.smartLS3DExport()" tooltip="Smart LS3D Export" />
+  </TuKej>
 </ACTIONS>

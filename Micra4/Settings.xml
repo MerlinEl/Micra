@@ -33,6 +33,7 @@
     <mcEvents val="on" />
     <mcCall val="on" />
     <mcMsx val="on" />
+    <mcActionsTukej val="on" />
   </Structures>
   <Version val="All registred Micra's Scripts">
     <Gallery3D val="1.60" />
@@ -108,6 +109,7 @@
     <Dialog_Default_Net val="0.29" />
     <Actions_Editor val="0.01" />
     <Vertex_Color val="1.02" />
+    <Object_Inspector val="0.02" />
   </Version>
   <SystemFiles val="Micra's Settings Files">
     <Actions val="Contains all accesible Micra's actions" />

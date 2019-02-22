@@ -39,6 +39,22 @@ struct MICRA_POLY
 		for f in faceSel where (polyOp.getVertsUsingFace obj.baseobject f).numberSet != 4 do return false
 		return true
 	),
+	fn selectSimilarFacesByNormal = (
+	
+		--Select similar faces by normal
+		local obj = (selection as array)[1]
+		if obj == undefined do return false
+		local sel_faces = polyOp.getFaceSelection obj
+		local n1 = polyOp.getFaceNormal obj (sel_faces as array)[1]
+		local faces_by_normal = #()
+		for f=1 to polyop.getNumFaces obj do(
+
+			local n2 = polyOp.getFaceNormal obj f
+			local normals_angle = acos(dot n1 n2)-- get the angle between the vectors
+			if normals_angle < 2 do faces_by_normal += #(f)
+		)
+		polyOp.setFaceSelection obj faces_by_normal
+	),
 	fn intersectionExists obj =
 	(
 		local objBase = obj.baseobject

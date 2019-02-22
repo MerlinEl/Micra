@@ -17,14 +17,14 @@ rollout mcObjectInpectorDialog "Object Inspector:" width:344 height:464
 	checkbox 'chk_rotation' "Rotation" pos:[8,188] width:84 height:24 align:#left
 	checkbox 'chk_scale' "Scale" pos:[8,212] width:84 height:24 align:#left
 	
-	label 'lbl_layer' "..." pos:[92,28] width:236 height:24 align:#left
-	label 'lbl_link' "..." pos:[92,52] width:236 height:24 align:#left
-	label 'lbl_color' "..." pos:[92,84] width:236 height:24 align:#left
-	label 'lbl_material' "..." pos:[92,108] width:236 height:24 align:#left
-	label 'lbl_id' "..." pos:[92,132] width:236 height:24 align:#left
-	label 'lbl_position' "..." pos:[92,164] width:236 height:24 align:#left
-	label 'lbl_rotation' "..." pos:[92,188] width:236 height:24 align:#left
-	label 'lbl_scale' "..." pos:[92,212] width:236 height:24 align:#left
+	label 'lbl_layer' "..." pos:[92,32] width:236 height:24 align:#left
+	label 'lbl_link' "..." pos:[92,58] width:236 height:24 align:#left
+	label 'lbl_color' "..." pos:[92,90] width:236 height:24 align:#left
+	label 'lbl_material' "..." pos:[92,114] width:236 height:24 align:#left
+	label 'lbl_id' "..." pos:[92,138] width:236 height:24 align:#left
+	label 'lbl_position' "..." pos:[92,170] width:236 height:24 align:#left
+	label 'lbl_rotation' "..." pos:[92,194] width:236 height:24 align:#left
+	label 'lbl_scale' "..." pos:[92,218] width:236 height:24 align:#left
 	
 	label 'lbl_buffer' "..." pos:[8,304] width:324 height:120 align:#left
 	local params_data
@@ -84,23 +84,26 @@ rollout mcObjectInpectorDialog "Object Inspector:" width:344 height:464
 	)
 	fn pasteObjectData = (
 		
-		local obj = selection[1]
-		if obj == undefined or params_data == undefined do return false 
-		undo "Object Inspector Paste" on for key in params_data.keys() do  (
+		local sel = selection as Array
+		if sel.count == 0 or params_data == undefined do return false 
+		undo "Object Inspector Paste" on for obj in sel do (
 			
-			local val = params_data.get key
-			case key of (
+			for key in params_data.keys() do  (
 				
-				"layer":val.addNode obj
-				"link":obj.parent = val
-				"wirecolor":obj.wirecolor = val
-				"material":obj.material = val
-				"position": obj.pos = val
-				"rotation": setRotation obj val
-				"scale": obj.scale = val
-			)
-		)	
-		updateInterfaceParams obj
+				local val = params_data.get key
+				case key of (
+					
+					"layer":val.addNode obj
+					"link":obj.parent = val
+					"wirecolor":obj.wirecolor = val
+					"material":obj.material = val
+					"position": obj.pos = val
+					"rotation": setRotation obj val
+					"scale": obj.scale = val
+				)
+			)	
+		)
+		updateInterfaceParams sel[1]
 	)
 	fn getObjectParams = (
 		
@@ -120,6 +123,8 @@ rollout mcObjectInpectorDialog "Object Inspector:" width:344 height:464
 		
 		callbacks.addScript #selectionSetChanged "mcObjectInpectorDialog.getObjectParams()" id:#objectInpectorCallbackID
 		getObjectParams()
+		local version = " v" + (mcFile.getScriptVersion "Object_Inspector") --get cript version
+		mcObjectInpectorDialog.title = "Object Inspector:" +(if version != undefined then version else "")
 	)
 	on mcObjectInpectorDialog close do (callbacks.removeScripts #selectionSetChanged id:#objectInpectorCallbackID)
 	on btn_copy pressed do copyObjectData()

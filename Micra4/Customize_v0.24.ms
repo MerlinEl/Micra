@@ -998,7 +998,7 @@ fn inicializeInterface form mcs =
 	mcs.lblT.bounds = netDrRect [form_offset/2, form_offset/2] [form_width - form_offset*5 , bar_height]
 	mcs.lblT.BackColor = mcDotnet.uiColor #back
 	mcs.lblT.ForeColor = mcDotnet.uiColor #text
-	local version = " v" + (mcFile.getScriptVersion "Customize") --add cript version
+	local version = " v" + (mcFile.getScriptVersion "Customize") --get cript version
 	mcs.lblT.Text = "Customize:" +(if version != undefined then version else "")
 	
 	mcs.btnMin.bounds = netDrRect [form_width - 42, form_offset/2] [btn_size, bar_height]

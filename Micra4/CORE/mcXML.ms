@@ -384,7 +384,9 @@ public
 			local path_arr = filterString target_path "/"
 			if path_arr.count < 2 do (print "Invalid path"; return false)
 			node_name = path_arr[path_arr.count] --get last path name
-			target_path = trimright target_path ("/"+node_name) --remove last path name
+			target_path = trimright target_path node_name --remove last path name
+			target_path = trimright target_path "/" --remove last slash
+			--format "mcXML > addNode > create new node at target_path:% arr:%  node name:%\n" target_path path_arr node_name
 		)
 		local new_node = mcXMLNode()
 		new_node.init (doc.createElement node_name)

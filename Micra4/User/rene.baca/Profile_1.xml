@@ -14,11 +14,11 @@
   </Properties_1>
   <Properties_2>
     <mcMicraDialog active="true" pos="[2172,222]" size="[148,66]" title="" />
-    <mcCustomizeDialog active="false" pos="[1440,400]" size="[600,404]" title="" />
+    <mcCustomizeDialog active="false" pos="[1350,670]" size="[224,404]" title="" />
     <mcProgramDialog active="undefined" pos="[2298,0]" size="[256,232]" title="" />
     <mcisoDialog active="false" pos="[181,152]" size="[140,400]" title="" />
     <mcModifierDialog active="undefined" pos="[100,100]" size="[400,400]" title="" />
-    <mcIconMakerDialog active="false" pos="[1540,480]" size="[730,500]" title="" />
+    <mcIconMakerDialog active="false" pos="[690,230]" size="[730,500]" title="" />
     <mcDeepIsolateDialog active="true" pos="[1118,86]" size="[84,44]" title="" />
     <mcMoveTowardsDialog active="undefined" pos="[441,377]" size="[200,76]" title="" />
     <mcClonerDialog active="undefined" pos="[1013,725]" size="[164,296]" title="" />
@@ -32,7 +32,7 @@
     <mcLpWizardDialog active="undefined" pos="[190,151]" size="[448,84]" title="" />
     <mcCharSelectDialog active="undefined" pos="[180,390]" size="[212,388]" title="" />
     <mcCharPoseDialog active="undefined" pos="[184,304]" size="[146,388]" title="" />
-    <mcSaveProfileAsDialog active="true" pos="[1890,340]" size="[240,66]" title="" />
+    <mcSaveProfileAsDialog active="true" pos="[1840,370]" size="[240,66]" title="" />
     <mcDgalleryDialog active="undefined" pos="[-993,148]" size="[875,850]" title="" />
     <mcRandomizeDialog active="undefined" pos="[166,152]" size="[152,332]" title="" />
     <mcColorPaleteDialog active="false" pos="[2304,236]" size="[244,60]" title="" />
@@ -198,7 +198,8 @@
     <btn_G19 action="Fuse_Edges" icon="158" />
     <btn_G20 action="Fuse_Verts_In_Line" icon="157" />
     <btn_I9 action="Holder" icon="118" />
-    <btn_J11 action="Get_Object_Props" icon="252" />
-    <btn_J12 action="Set_Object_Props" icon="253" />
+    <btn_J10 action="Object_Inspector" icon="259" />
+    <btn_J9 action="Vertex_Color" icon="258" />
+    <btn_J12 action="Smart_LS3D_Export" icon="260" />
   </Buttons>
 </USER>
