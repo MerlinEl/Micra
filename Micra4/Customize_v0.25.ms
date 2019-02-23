@@ -36,7 +36,7 @@ local debug = 1
 -->Components---------------------------------------------------------------------
 --local form = dotNetObject "Form" 
 local form = dotNetObject "MaxCustomControls.Maxform"
-struct TAB1_COMPONENTS_STRUCT ( created = false, combo_box, list_view, edt_info, lbl_sizer, selected_item = undefined )
+struct TAB1_COMPONENTS_STRUCT ( created = false, category_list, actions_list, edt_info, lbl_sizer, selected_item = undefined )
 struct TAB2_COMPONENTS_STRUCT ( created = false, checkboxes = #() , buttons = #(), labels = #(), titles = #() )
 struct TAB3_COMPONENTS_STRUCT ( created = false, about_items = #(), pic_box)
 struct MICRA_COMPONENTS_STRUCT
@@ -106,10 +106,14 @@ fn getInterfaceComponent component_name = (
 			icon_panel.controls.Item("edt_icon_index")
 		)
 		"action_cmd": toolbar_edit.controls.Item("cmd_act")
-		"catalog_name": toolbar_edit.controls.Item("name_cat")
+		"category_name": toolbar_edit.controls.Item("name_cat")
 		"action_name": toolbar_edit.controls.Item("name_act")
-		"category_list": mcs.tab_1.combo_box
-		--"action": mcs.tab_1.list_view.items.item -- (mcs.tab_1.list_view.SelectedItems.Item(0)).tag
+		"category_list": mcs.tab_1.category_list
+		"actions_list": mcs.tab_1.actions_list
+		"sel_action": (
+			local sel_actions = mcs.tab_1.actions_list.SelectedItems
+			if sel_actions.count > 0 then sel_actions.Item(0) else undefined
+		)
 		"help_text": mcs.tab.controls.Item("edt_info")
 		"default":undefined
 	)
@@ -122,41 +126,43 @@ fn getEditorData component_name = ( --get data from editor panel
 )
 fn setEditorData component_name str = ( --set data to editor panel
 
-	format "Customize > setEditorData > component_name:% text:%\n" component_name str
+	--format "Customize > setEditorData > component_name:% text:%\n" component_name str
 	local item = getInterfaceComponent component_name
 	if item != undefined do item.text = str
 )
 fn addNewCategory = (
 
 	if not doesFileExist Micra.ActionsXML do return false
-	local action_category = getEditorData "catalog_name"
-	local exists = mcActionsEditor.categoryExists action_category
-	format "Customize > addNewCategory > name:%  exists:%\n " action_category exists
+	local category_name = getEditorData "category_name" --get category name from right interface
+	local exists = mcActionsEditor.categoryExists category_name
+	format "Customize > addNewCategory > name:%  exists:%\n " category_name exists
 	if not exists then (
 	
-		mcActionsEditor.addCategory action_category
-		--reload customize
-		mcCustomizeDialog.close()
-		mcFile.fileInVersion "Customize"
+		mcActionsEditor.saveCategory category_name --add item to Micra.ActionsXML
+		local category_list = getInterfaceComponent "category_list"
+		local new_index = category_list.Items.Add category_name --append new item to category
+		category_list.SelectedIndex = new_index--select new item
 	) else (
 	
-		mcPopUp.msgBox ("Category [ "+action_category+" ] already exists. Operation Aborted.") title:"Customize"
+		mcPopUp.msgBox ("Category [ "+category_name+" ] already exists. Operation Aborted.") title:"Customize"
 	)
 )
-fn delCurrentCatalog = (
+fn delCurrentCategory = (
 
-	local mcs = form.tag.value
-	local action_category = getEditorData "catalog_name"
-	if mcs.tab_1.list_view.items.count > 0 do (
+	local actions_list = getInterfaceComponent "actions_list"
+	local category_list = getInterfaceComponent "category_list"
+	local category_name = category_list.selectedItem
+	if actions_list.items.count > 0 do (
 		
-		mcPopUp.msgBox ("Category [ "+action_category+" ] must be empty. Operation Aborted.") title:"Customize"
+		mcPopUp.msgBox ("Category [ "+category_name+" ] must be empty. Operation Aborted.") title:"Customize"
 		return false
 	)
-	format "Customize > delCurrentCatalog > name:%\n " action_category
-	local success = mcActionsEditor.delCategory action_category --delete head
-	if success do ( --reload customize
-		mcCustomizeDialog.close()
-		mcFile.fileInVersion "Customize" 
+	format "Customize > delCurrentCategory > name:%\n " category_name
+	mcActionsEditor.delCategory category_name --delete head from 
+	if category_list.selectedIndex >= 0 do ( --remove item from category list and select first one
+		
+		category_list.Items.RemoveAt category_list.selectedIndex
+		if category_list.Items.count > 0 do category_list.SelectedIndex = 0
 	)
 )
 /** 
@@ -171,7 +177,7 @@ fn delCurrentCatalog = (
 fn addNewAction = (
 
 	--get action params 
-	local category_key = getEditorData "catalog_name"
+	local category_key = getEditorData "category_name"
 	local action_name = getEditorData "action_name"
 	local action_cmd = getEditorData "action_cmd"
 	local icon_index = getEditorData "icon_index"
@@ -181,50 +187,57 @@ fn addNewAction = (
 --TODO
 --if success do appendNewActionToList action_name or restart customize tool
 )
+fn removeActionFromList action_key = (
+
+	local actions_list = getInterfaceComponent "actions_list"
+	for i=actions_list.Items.count-1 to 0 by -1 do (
+
+		local itm = actions_list.Items.Item(i)
+		if itm.tag == action_key do (
+		
+			itm.Remove()
+			return true
+		)
+	)
+	return false
+)
 fn delCurrentAction = (
 	
-	local action_category = getEditorData "catalog_name"
-	local action_name = getEditorData "action_name"
-	local success = mcActionsEditor.removeAction action_category action_name
---TODO
-/*
-	if success do (
-		removeActionFromList action_name
-		removeButtonData action_id
-		remove data from all profiles (Profile_1.ini, Profile_2.ini, ....Profile_8.ini) --registred buttons 
-	)
-*/
+	--remove action from Actions.xml and from Profile_(1-8).xml
+	local category_key = getEditorData "category_name"
+	local action_key = mcString.replaceAll(getEditorData "action_name") " " "_"
+	mcActionsEditor.removeAction category_key action_key
+	removeActionFromList action_key
 )
 fn saveAction = ( --save changed action data
 	
 	format "Customize > saveAction > todo\n" 
-	return false --- TODO
-	/*
-	local btn = mcGM.getParam "active_button"
-	if btn == undefined do return false
-	local action_category = btn.name
-	local action_name = btn.tag
-	if action_category == undefined or action_name == undefined do return false
-	--save comment	
-	local help_txt = edt_description.text
-	mcActionsEditor.saveActionHelp category_key action_key help_text
-	--save icon index 
-	mcActionsEditor.addReplaceAction btn.tag action_str icon_str
-	--save function name or filein name
-	
-	format "saveAction > category:% action:% comment:%\n" action_category action_name help_txt*/
+	local action_key = mcString.replaceAll(getEditorData "action_name") " " "_" --get name from right panel
+	local category_key = getEditorData "category_name"
+	local help_text = getEditorData "help_text"
+	local icon_str = getEditorData "icon_index"
+	local cmd_str = getEditorData "action_cmd"
+	--check if action exists else break
+	if not (mcActionsEditor.actionExists category_key action_key) do (print ("Unable to save non existing action:[ "+action_key+" ]"); return false)
+	--replace button icon in current Profile_?(1-8)
+	mcActionsEditor.saveButtonByName action_key icon_str
+	--save action help at Actions_Help.xml
+	mcActionsEditor.saveActionHelp category_key action_key help_text 
+	--save action data at Actions.xml
+	mcActionsEditor.saveAction category_key action_key icon_str cmd_str
+	messageBox ("Action [ "+action_key+" ] was saved successfully.") title:micra.version
 )
 fn editAction = (
 
 	local action_name = getEditorData "action_name"
 	if action_name == undefined do return false
-	mcActionsEditor.showActionSource action_name
+	mcActionsEditor.showActionSource (mcString.replaceAll action_name " " "_")
 )
 fn pickIcon = (
 
 	local action_name = getEditorData "action_name"
 	if action_name == undefined do return false
-	local action_data = mcActionsEditor.getActionData (mcString.replaceAll action_name " " "_")
+	local action_data = mcActionsEditor.readActionData (mcString.replaceAll action_name " " "_")
 	if action_data != undefined do (
 	
 		local icon_index = action_data.get "icon"
@@ -234,7 +247,7 @@ fn pickIcon = (
 )
 fn onIconIndexPicked icon_index =  ( --Event on icon picked
 	
-	format "Customize > onIconIndexPicked > to:%\n" icon_index
+	format "Customize > onIconIndexPicked > to:%\n" icon_index 
 	local mcs = form.tag.value
 	if not mcs.edit_mode do return false
 	setEditorData "icon_index" (icon_index as String)
@@ -248,29 +261,29 @@ fn clearCurrentActionData = (
 	setEditorData "help_text" ""
 	local mcs  = form.tag.value
 	if not mcs.edit_mode do return false
-	local action_category =  mcs.tab_1.combo_box.SelectedItem
-	if action_category == undefined do return false
+	local category_name =  mcs.tab_1.category_list.SelectedItem
+	if category_name == undefined do return false
 	setEditorData "icon_index" 	"1"
 	setEditorData "action_cmd" 	"mcAction.doSomething() or mcFile.fileInVersion Lode_Tester"
-	setEditorData "catalog_name" action_category
+	setEditorData "category_name" category_name
 	setEditorData "action_name" 	"Action Name"
 )
 fn fillCurrentActionData form = (
 
 	if form == undefined do return false
 	local mcs  = form.tag.value
-	local action_category =  mcs.tab_1.combo_box.SelectedItem
-	if action_category == undefined do return false
-	if mcs.tab_1.list_view.SelectedItems.count == 0 do (
+	local category_name =  mcs.tab_1.category_list.SelectedItem
+	if category_name == undefined do return false
+	if mcs.tab_1.actions_list.SelectedItems.count == 0 do (
 	
 		clearCurrentActionData()
 		return OK
 	)
-	local action_name = (mcs.tab_1.list_view.SelectedItems.Item(0)).tag
-	if debug == 1 do format "fillCurrentActionData > action_cat:% action_name:% edit_mode:%\n" action_category action_name mcs.edit_mode
+	local action_name = (mcs.tab_1.actions_list.SelectedItems.Item(0)).tag
+	if debug == 1 do format "fillCurrentActionData > action_cat:% action_name:% edit_mode:%\n" category_name action_name mcs.edit_mode
 		
 	--load action info
-	local help_txt = mcActionsEditor.getActionHelp action_category action_name
+	local help_txt = mcActionsEditor.readActionHelp category_name action_name
 	setEditorData "help_text" help_txt
 	
 	if not mcs.edit_mode do return OK
@@ -278,12 +291,12 @@ fn fillCurrentActionData form = (
 	if debug == 1 do format "Reading functions data...\n"
 
 	--load rest action data
-	local action_data = mcActionsEditor.getActionData action_name --{cat:Animation, name:Reverse_Animation, icon:106, cmd:mcAnimation.reverse 0 10}
+	local action_data = mcActionsEditor.readActionData action_name --{cat:Animation, name:Reverse_Animation, icon:106, cmd:mcAnimation.reverse 0 10}
 	if action_data != undefined do (
 
 		setEditorData "icon_index" 	(action_data.get "icon"	)
 		setEditorData "action_cmd" 	(action_data.get "cmd"	)
-		setEditorData "catalog_name" 	(action_category)
+		setEditorData "category_name" 	(category_name)
 		setEditorData "action_name" 	(mcString.replaceAll action_name "_"	" ")
 	)
 )
@@ -317,17 +330,17 @@ fn getImageList head keys =
 	
 	for k in keys do (
 	
-		local action_data = mcActionsEditor.getActionData k
+		local action_data = mcActionsEditor.readActionData k
 		local icon_num = execute (action_data.get "icon") --string to num
 		img_list.images.add (getIconDotNet icon_num)
 	)
 	return img_list
 )
-fn loadCatalogs list_cat = (
+fn loadCategories list_cat = (
 
 	local item_array = mcActionsEditor.getCategories()
 	if item_array.count == 0 do return false
-	if debug == 1 do print "loadCatalogs > loading catalogs..."
+	if debug == 1 do print "loadCategories > loading categorys..."
 	list_cat.Items.clear()
 	list_cat.Items.AddRange (dotNetArray item_array)
 	list_cat.SelectedIndex = 1 --select first
@@ -335,7 +348,7 @@ fn loadCatalogs list_cat = (
 
 fn loadActionList list_cat list_act = (
 
-	if list_act.SelectedIndex == -1 do return false --no catalog selected
+	if list_act.SelectedIndex == -1 do return false --no category selected
 	if debug == 1 do print "loadActionList > loading actions..."	
 	list_cat.BeginUpdate()
 	list_cat.items.Clear()
@@ -399,9 +412,9 @@ fn onMousedown s a = --click or drag (s = sender a = arguments)
 					btn_b.Image = btn_a_image --copy image
 					btn_b.Tag = btn_a.tag --copy tag
 					--save Settings
-					local action_data = mcActionsEditor.getActionData btn_a.tag
+					local action_data = mcActionsEditor.readActionData btn_a.tag
 					local icn_numA = action_data.get "icon"
-					mcActionsEditor.addReplaceAction btn_b.name btn_a.tag icn_numA
+					mcActionsEditor.saveButton btn_b.name btn_a.tag icn_numA
 				)
 				mcGM.setParam "form_drop_data" undefined
 				--format "Customize > onMousedown > Drag End > s:% a%:\n" s a
@@ -423,7 +436,7 @@ fn onPickedBoxItem s a = (
 	if debug == 1 do print "onPickedBoxItem > action category chossen..."
 	local form = s.parent.parent
 	local mcs  = form.tag.value
-	loadActionList mcs.tab_1.list_view s
+	loadActionList mcs.tab_1.actions_list s
 )
 --when action chosen
 fn onPickedListItem s a = (if s.parent != undefined do fillCurrentActionData s.parent.parent )
@@ -469,7 +482,7 @@ fn onCheckerChanges s a =
 			then (mcFile.fileInVersion "Uni_Poly_Counter")
 			else (unregisterRedrawViewsCallback mcPolyCount.Count; mcPolyCount = undefined)
 		)
-		"UC_ShowSize":
+		"UC_ShowSize": --universal counter missing
 		(
 			if s.checked
 			then()
@@ -519,14 +532,13 @@ fn delDirectoryContent dir includefiles:false quiet:true =
 	for d in dirs do (DOSCommand ("RD \""+d+"\" /s /q") )  --/s  include files /q = qieit
 )
 
-
 fn onEditToolbarButtonClick s a = (
 
 	format "onEditToolbarButtonClick > btn:%\n" s.name
 	case s.name of (
 	
 		"btn_cat_add": addNewCategory()
-		"btn_cat_del": delCurrentCatalog()
+		"btn_cat_del": delCurrentCategory()
 		"btn_act_add": addNewAction()
 		"cmd_act_add": editAction()
 		"btn_act_del": delCurrentAction()
@@ -611,31 +623,31 @@ fn addTab num mcs = (
 			--Create Interface Components---------------------------------------------------------------------
 			if not mcs.tab_1.created do(
 			
-				mcs.tab_1.combo_box           = dotNetObject "comboBox"
-				mcs.tab_1.combo_box.size      = netDrSize [mcs.tab.width - form_offset, 0]
-				mcs.tab_1.combo_box.BackColor = mcDotnet.uiColor #back
-				mcs.tab_1.combo_box.Forecolor = mcDotnet.uiColor #text
-				mcs.tab_1.combo_box.Sorted    = true
-				mcs.tab_1.combo_box.DropDownStyle = mcs.tab_1.combo_box.DropDownStyle.DropDown --DropDownList --DropDown--Simple
-				mcs.tab_1.combo_box.FlatStyle = mcs.tab_1.combo_box.FlatStyle.flat
-				mcs.tab_1.combo_box.MaxDropDownItems = 22
-				mcs.tab_1.combo_box.margin    =  dotnetobject "padding" 2
+				mcs.tab_1.category_list           = dotNetObject "comboBox"
+				mcs.tab_1.category_list.size      = netDrSize [mcs.tab.width - form_offset, 0]
+				mcs.tab_1.category_list.BackColor = mcDotnet.uiColor #back
+				mcs.tab_1.category_list.Forecolor = mcDotnet.uiColor #text
+				mcs.tab_1.category_list.Sorted    = true
+				mcs.tab_1.category_list.DropDownStyle = mcs.tab_1.category_list.DropDownStyle.DropDown --DropDownList --DropDown--Simple
+				mcs.tab_1.category_list.FlatStyle = mcs.tab_1.category_list.FlatStyle.flat
+				mcs.tab_1.category_list.MaxDropDownItems = 22
+				mcs.tab_1.category_list.margin    =  dotnetobject "padding" 2
 				
-				mcs.tab_1.list_view           = dotNetObject "listView"
-				mcs.tab_1.list_view.size      = netDrSize [mcs.tab.width - form_offset, mcs.tab.height - btn_size*4 - bar_height - form_offset*2]
-				mcs.tab_1.list_view.BackColor = mcDotnet.uiColor #back
-				mcs.tab_1.list_view.Forecolor = mcDotnet.uiColor #text
-				mcs.tab_1.list_view.Sorting   = mcs.tab_1.list_view.Sorting.Ascending
-				mcs.tab_1.list_view.margin    = dotnetobject "padding" 2
-				mcs.tab_1.list_view.MultiSelect = false
-				mcs.tab_1.list_view.HideSelection=false
-				mcs.tab_1.list_view.LabelEdit = false
-				mcs.tab_1.list_view.LabelWrap = false
-				mcs.tab_1.list_view.allowDrop = true -- required in order to implement DotNet drag and drop functionality
-				mcs.tab_1.list_view.view = mcs.tab_1.list_view.view.Details
-				mcs.tab_1.list_view.BorderStyle = mcs.tab_1.list_view.BorderStyle.FixedSingle
-				mcs.tab_1.list_view.HeaderStyle = mcs.tab_1.list_view.HeaderStyle.None
-				mcs.tab_1.list_view.Columns.add "" 180
+				mcs.tab_1.actions_list           = dotNetObject "listView"
+				mcs.tab_1.actions_list.size      = netDrSize [mcs.tab.width - form_offset, mcs.tab.height - btn_size*4 - bar_height - form_offset*2]
+				mcs.tab_1.actions_list.BackColor = mcDotnet.uiColor #back
+				mcs.tab_1.actions_list.Forecolor = mcDotnet.uiColor #text
+				mcs.tab_1.actions_list.Sorting   = mcs.tab_1.actions_list.Sorting.Ascending
+				mcs.tab_1.actions_list.margin    = dotnetobject "padding" 2
+				mcs.tab_1.actions_list.MultiSelect = false
+				mcs.tab_1.actions_list.HideSelection=false
+				mcs.tab_1.actions_list.LabelEdit = false
+				mcs.tab_1.actions_list.LabelWrap = false
+				mcs.tab_1.actions_list.allowDrop = true -- required in order to implement DotNet drag and drop functionality
+				mcs.tab_1.actions_list.view = mcs.tab_1.actions_list.view.Details
+				mcs.tab_1.actions_list.BorderStyle = mcs.tab_1.actions_list.BorderStyle.FixedSingle
+				mcs.tab_1.actions_list.HeaderStyle = mcs.tab_1.actions_list.HeaderStyle.None
+				mcs.tab_1.actions_list.Columns.add "" 180
 				
 				mcs.tab_1.edt_info           = dotNetObject "textBox"
 				mcs.tab_1.edt_info.name		 = "edt_info"
@@ -658,9 +670,9 @@ fn addTab num mcs = (
 				mcs.tab_1.lbl_sizer.margin    =  dotnetobject "padding" 2 
 				mcs.tab_1.lbl_sizer.TextAlign = mcs.tab_1.lbl_sizer.TextAlign.MiddleCenter
 				
-				dotNet.addEventHandler mcs.tab_1.list_view "ItemSelectionChanged" onPickedListItem --show help text when action selected (also in edit mode fill all properties)
-				dotNet.addEventHandler mcs.tab_1.list_view "MouseDown" onMousedown --manage mouse click (left, middle, right, drag and drop)
-				dotNet.addEventHandler mcs.tab_1.combo_box "SelectedIndexChanged" onPickedBoxItem --change action category
+				dotNet.addEventHandler mcs.tab_1.actions_list "ItemSelectionChanged" onPickedListItem --show help text when action selected (also in edit mode fill all properties)
+				dotNet.addEventHandler mcs.tab_1.actions_list "MouseDown" onMousedown --manage mouse click (left, middle, right, drag and drop)
+				dotNet.addEventHandler mcs.tab_1.category_list "SelectedIndexChanged" onPickedBoxItem --change action category
 				mcEvents.registerEvent "ICON_INDEX_PICKED" onIconIndexPicked --when icon selected in Icon_Maker (mcIconMakerDialog)
 				
 				--Initialize Actions Property Components---------------------------------------------------------------------
@@ -688,12 +700,12 @@ fn addTab num mcs = (
 				)
 
 				--Define rollout panels
-				local panel_catalog	= dotNetObject "TableLayoutPanel"
-				panel_catalog.name = "panel_catalog"
-				panel_catalog.width  = form_edit_width - mcs.tlp_main.width - form_offset*1.5
-				panel_catalog.height = 40 --form_height - form_offset*5
-				panel_catalog.backColor = netDrColor #8183b3
-				panel_catalog.ColumnCount = 4
+				local panel_category	= dotNetObject "TableLayoutPanel"
+				panel_category.name = "panel_category"
+				panel_category.width  = form_edit_width - mcs.tlp_main.width - form_offset*1.5
+				panel_category.height = 40 --form_height - form_offset*5
+				panel_category.backColor = netDrColor #8183b3
+				panel_category.ColumnCount = 4
 				
 				local panel_action	= dotNetObject "TableLayoutPanel"
 				panel_action.name = "panel_action"
@@ -767,7 +779,7 @@ fn addTab num mcs = (
 							
 						1: append titles item --add titles 
 						2: append edits item --add edits
-						3: panel_catalog.Controls.Add item --add category buttons
+						3: panel_category.Controls.Add item --add category buttons
 						4: panel_action.Controls.Add item --add action buttons
 						5: panel_icon.Controls.Add item --add icon button and edit field  --TODO (add image_tag to display icon .. maybe)
 						6: btn_save = item --add save button
@@ -775,7 +787,7 @@ fn addTab num mcs = (
 				)
 				panel_icon.Controls.Item["edt_icon_index"].width = 100 --change icon edit field width
 				--add components
-				local edit_components = #(titles[1], edits[1], panel_catalog, titles[2], edits[2], edits[3], panel_action, titles[3], panel_icon, titles[4], btn_save)
+				local edit_components = #(titles[1], edits[1], panel_category, titles[2], edits[2], edits[3], panel_action, titles[3], panel_icon, titles[4], btn_save)
 				mcs.tlp_edit.Controls.addRange edit_components
 				mcs.tab_1.created = true
 				if debug == 1 do format "addTab > Edit components % created. \n" edit_components
@@ -783,10 +795,10 @@ fn addTab num mcs = (
 			
 			--Add Interface Components To Layout---------------------------------------------------------------------
 			if debug == 1 do print "addTab > Actions components aded. "
-			mcs.tab.Controls.addRange #(mcs.tab_1.combo_box, mcs.tab_1.list_view, mcs.tab_1.edt_info, mcs.tab_1.lbl_sizer)
+			mcs.tab.Controls.addRange #(mcs.tab_1.category_list, mcs.tab_1.actions_list, mcs.tab_1.edt_info, mcs.tab_1.lbl_sizer)
 			
 			--Initialize Interface Components---------------------------------------------------------------------
-			loadCatalogs mcs.tab_1.combo_box
+			loadCategories mcs.tab_1.category_list
 
 			--TODO when is caled from Micra dialog, then open at edit mode
 			--if in edit mode extend panel size
@@ -794,7 +806,7 @@ fn addTab num mcs = (
 			--if debug == 1 do format "addTab > action mode:%\n" action_mode
 			--if action_mode == "edit" or action_mode == "create" do (
 			--	editModeSwitch true
-				--in edit mode select action_category and action_item
+				--in edit mode select category_name and action_item
 			--)
 		)
 		--settings interface

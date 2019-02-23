@@ -51,7 +51,10 @@ struct mcItem ( key, val, tag, index )
 	
 	or 
 	
-	mo = (mcObject.new()).addMore #(for a in arr collect mcItem a.key a.val)
+	mo = (mcObject.new()).add "val_1" "1" 
+	mo = (mcObject.new()).addMore (for i=1 to 10 collect mcItem ("val_"+i as String) (i as String))
+	mo.print()
+	
 */
 struct mcObject ( --always create an instance
 private	
@@ -76,6 +79,7 @@ public
 		
 			_values[key_index] = val	
 		)
+		this
 	),	
 	fn get key = (
 		

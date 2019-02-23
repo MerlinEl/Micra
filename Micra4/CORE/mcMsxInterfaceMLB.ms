@@ -1,12 +1,12 @@
 --------------------------------------------------------------------------------
-/* mcMsxInterfaceMLB by Orien 2019 */
+/* mcMsxInterfaceMLB by Orien 2019 */ --Not Used
 --------------------------------------------------------------------------------
 /*
 *@Used Structures
 	Micra
 *
 *@Used Objects
-	undefined
+	MultiListBox <name> [<caption>] [items:<array_of_strings>] [selection:{<bitarray> | <number_array> | <number>}] [height:<number> ] [toolTip:<string>]
 *
 *@Usage
 	Manage multilistbox components

@@ -178,7 +178,7 @@
     <Script_Editor icon="56" cmd="mcFile.fileInVersion Script_Manager" tooltip="Script Editor" />
     <Viewport_Recorder icon="172" cmd="mcFile.fileInVersion Viewport_Recorder" tooltip="Viewport Recorder" />
     <Icon_Maker icon="247" cmd="mcFile.fileInVersion Icon_Maker" tooltip="Icon Maker" />
-    <Autosave_Switch icon="3" cmd="mcSystem.autosaveSwitch()" tooltip="Autosave Switch'" />
+    <Autosave_Switch icon="3" cmd="mcSystem.autosaveSwitch()" tooltip="Autosave Switch" />
     <Keyboard_Switch icon="257" cmd="mcSystem.keyboardSwitch()" tooltip="Keyboard Switch'" />
   </Programming>
   <Material>
@@ -216,13 +216,8 @@
     <Add_Weapon_Skin icon="130" cmd="mcSkin.wpnSetupSkin()" tooltip="Add Weapon Skin" />
   </Skinning>
   <Test_2>
-    <Action_Name icon="1" cmd="mcAction.removeMaterials()" tooltip="Action Name" />
-    <Action_Name2 icon="1" cmd="mcAction.removeMaterials()" tooltip="Action_Name2" />
-    <Action_Name3 icon="5" cmd="mcAction.removeMaterials()" tooltip="Action_Name3" />
+    <Action_Name3 icon="5" cmd="mcAction.removeMaterials()" tooltip="Action Name3" />
   </Test_2>
-  <Test_3>
-    <Action_Name icon="1" cmd="mcCreate.createDXMaterial()" tooltip="Action_Name" />
-  </Test_3>
   <TuKej>
     <Object_Inspector icon="259" cmd="mcFile.fileInVersion Object_Inspector" tooltip="Object Inspector" />
     <Smart_LS3D_Export icon="260" cmd="mcActionsTukej.smartLS3DExport()" tooltip="Smart LS3D Export" />

@@ -31,12 +31,20 @@ struct MICRA_ACTIONS_EDITOR	(
 	
 		mcFile.readSettings Micra.ActionsXML "ACTIONS" type:"keys"
 	),
+	/**
+	*@Usage > get action type for different execute metods	
+	*/
+	fn getActionType action_with_cmd = (
+	
+		if (findString action_with_cmd "mcFile.fileInVersion" != undefined) then "file" else "function"
+	),
 	fn getActions category_key = (
 	
 		mcFile.readSettings Micra.ActionsXML ("ACTIONS/"+category_key) type:"keys"
 	),
+	fn actionExists category_key action_key = (findItem (getActions category_key) action_key > 0),
 	fn categoryExists category_key = (findItem (getCategories()) category_key > 0),
-	fn addCategory category_key = (
+	fn saveCategory category_key = (
 	
 		mcFile.saveSettings Micra.ActionsXML ("ACTIONS/" + category_key) "" --add-replace node only
 	),
@@ -44,33 +52,38 @@ struct MICRA_ACTIONS_EDITOR	(
 	
 		mcFile.delSettings Micra.ActionsXML ("ACTIONS/" + category_key) --remove single node
 	),
-	fn addReplaceAction button_key action_str icon_str = ( --Profile_Temp.xml
+	fn saveButton button_key action_key icon_str = ( --use current Profile_?(1-8).xml
 		
 		local node_attribs = (mcObject.new()).addMore #(
 
-			mcItem "action" action_str, 
+			mcItem "action" action_key, 
 			mcItem "icon" icon_str
 		)
 		mcFile.saveSettings Micra.UserProfile ("Buttons/" + button_key) node_attribs type:"attribs"
 	),
-	fn deleteAction button_key = (
+	fn saveButtonByName action_key icon_str = (
+	
+		--replace button data in current profile
+		local all_button_keys = mcFile.readSettings Micra.UserProfile "Buttons" type:"keys"
+		if all_button_keys.count == 0 do return false --if buttons are not registred
+		local button_key = for key in all_button_keys do ( --find button_key from action 
+		
+			local action_name = mcFile.readSettings Micra.UserProfile ("Buttons/"+key) type:"action"
+			if action_name == action_key do exit with key
+		)
+		if button_key != OK do saveButton button_key action_key icon_str --override button settings
+	),
+	fn deleteButton button_key = (
 	
 		mcFile.delSettings Micra.UserProfile ("Buttons/" + button_key) --remove single node
 	),
-	fn getActionHelp category_key action_key = (
+	fn readActionHelp category_key action_key = (
 	
-		mcFile.readSettings Micra.ActionsHelpXML (category_key + "/" + action_key)
+		mcFile.readSettings Micra.ActionsHelpXML ("ACTIONS/"+category_key + "/" + action_key)
 	),
 	fn saveActionHelp category_key action_key help_text = (
 	
-		mcFile.saveSettings Micra.ActionsHelpXML (category_key+"/"action_key) help_text
-	),
-	/**
-	*@Usage > get action type for different execute metods	
-	*/
-	fn getActionType action_with_cmd = (
-	
-		if (findString action_with_cmd "mcFile.fileInVersion" != undefined) then "file" else "function"
+		mcFile.saveSettings Micra.ActionsHelpXML ("ACTIONS/"+category_key+"/"+action_key) help_text
 	),
 	/**
 	*@Usage > replace spaces with underscore: Gallery 3D > Gallery_3D
@@ -100,15 +113,15 @@ struct MICRA_ACTIONS_EDITOR	(
 		action_key		: String
 		return 			: mcObject
 	*@Example
-		action = mcActionsEditor.getActionData "Object" "Lock_Object"
+		action = mcActionsEditor.readActionData "Object" "Lock_Object"
 		action.toString()
 		--> "cat:Object name:Lock_Object icon:88 cmd:mcAction.lockObjects true tooltip:Lock Object"
 	*/
-	fn getActionData action_key = (
+	fn readActionData action_key = (
 	
 		if not doesFileExist Micra.ActionsXML do ((format "Missing File! [%]\n" Micra.ActionsXML); return undefined)
 		local xml = mcXML Micra.ActionsXML
-		if Micra.debug == 10 do format "mcActionsEditor > getActionData  > from xml:%\n" (xml.toString()) --show whole xml
+		if Micra.debug == 10 do format "mcActionsEditor > readActionData  > from xml:%\n" (xml.toString()) --show whole xml
 		local xml_data = xml.getNode ("//"+action_key)
 		if xml_data != undefined then (
 				
@@ -130,7 +143,7 @@ struct MICRA_ACTIONS_EDITOR	(
 		mcActionsEditor.isActionRegistred "Object" "Lock_Object"
 		--> true or false
 	*/
-	fn isActionRegistred category_key action_key = ((getActionData action_key) != undefined),
+	fn isActionRegistred category_key action_key = ((readActionData action_key) != undefined),
 	/**
 	*@Usage > get action parameters 
 		action_with_cmd	: String > "mcFile.fileInVersion Paint_Selection"
@@ -150,7 +163,7 @@ struct MICRA_ACTIONS_EDITOR	(
 	*/
 	fn showActionSource action_key = (
 		
-		local action_data = getActionData action_key --mcObject(cat:Animation, name:Reverse_Animation, icon:106, cmd:mcAnimation.reverse 0 10)
+		local action_data = readActionData action_key --mcObject(cat:Animation, name:Reverse_Animation, icon:106, cmd:mcAnimation.reverse 0 10)
 		if action_data == undefined do return false
 		local action_with_cmd = action_data.get "cmd" 
 		local action_type = getActionType action_with_cmd
@@ -187,7 +200,7 @@ struct MICRA_ACTIONS_EDITOR	(
 	*/
 	fn runAction action_key = (
 	
-		local action_data = getActionData action_key --mcObject(cat:Animation, name:Reverse_Animation, icon:106, cmd:mcAnimation.reverse 0 10)
+		local action_data = readActionData action_key --mcObject(cat:Animation, name:Reverse_Animation, icon:106, cmd:mcAnimation.reverse 0 10)
 		if action_data == undefined do return false
 		local action_with_cmd = action_data.get "cmd" 
 		if Micra.debug == 10 do format "mcActionsEditor > runAction > action_key:% action_with_cmd:%\n" action_key action_with_cmd
@@ -236,10 +249,10 @@ struct MICRA_ACTIONS_EDITOR	(
 		icon_str		: "33"
 		cmd_str			: "mcAction.reset_transform()"
 	*/
-	fn registerActionToActionList category_key action_key icon_str cmd_str 	= (
+	fn saveAction category_key action_key icon_str cmd_str 	= (
 	
 		local action_name = mcString.replaceAll action_key "_" " " --"Reset Transform"
-		mcString.printInBlock "mcActionsEditor > registerActionToActionList > \n\tcatalog\t: %\n\taction\t: % \n\tdata\t: %\n" params:#(category_key, action_key, action_data)
+		mcString.printInBlock "mcActionsEditor > saveAction > \n\tcatalog\t: %\n\taction\t: % \n\tdata\t: %\n" params:#(category_key, action_key, action_data)
 		local action_data = (mcObject.new()).addMore #(
 
 			mcItem "icon" icon_str,
@@ -248,18 +261,36 @@ struct MICRA_ACTIONS_EDITOR	(
 		)
 		--<Gallery_3D icon="221" cmd="mcFile.fileInVersion Gallery3D" tooltip="Gallery 3D" />
 		mcFile.saveSettings Micra.ActionsXML (category_key+"/"+action_key) action_data type:"attribs"
-		messageBox ("Action [ "+action_key+" ] was registred success:"+success as string) title:micra.version
 	),
-	fn unregisterActionFromActionList category_key action_key = (
-	
-		--delIniSetting Micra.ActionsIni category_key action_key
-	),
+	/**
+	*Usage 
+		1) Remove Action from Actions.xml (actions list)
+		2) Remove Action from All Profiles (1-8) (buttons list)
+	*/
 	fn removeAction category_key action_key = (
 	
-		format "mcActionsEditor > removeAction > name:%\n " action_key
-		--unregisterActionFromActionList category_key action_key
-		--TODO
-		--also remove action from micra tool button or create exception to dont load this action in to button
+		if not (queryBox ("Do you want to delete Action[ "+action_key+" ] ?") title:micra.version) do return OK
+		--Deleted button data from all profiles (Profile_1.ini - Profile_8.ini)
+		local all_profiles = for i=1 to 8 collect Micra.UserDir + "Profile_" + i as string + ".xml"
+		for p in all_profiles do (
+		
+			local all_button_keys = mcFile.readSettings p "Buttons" type:"keys"
+			--format "profile:% button keys:%\n" p all_button_keys.count
+			if all_button_keys.count == 0 do continue
+			local button_key = for key in all_button_keys do ( --find button_key from action 
+			
+				local action_name = mcFile.readSettings p ("Buttons/"+key) type:"action"
+				if action_name == action_key do exit with key
+			)
+			if button_key != OK do (
+			
+				mcFile.delSettings p ("Buttons/"+button_key) --remove button
+				format "mcActionsEditor > removeAction > Remove Button [ % ] from:%\n " button_key p
+			)
+		)
+		--Delete action from Action.xml
+		mcFile.delSettings Micra.ActionsXML (category_key+"/"+action_key) --remove action
+		format "mcActionsEditor > removeAction > Remove Action [ % ] from:%\n " action_key Micra.ActionsXML
 	),
 	/**
 	@Example
@@ -279,8 +310,7 @@ struct MICRA_ACTIONS_EDITOR	(
 		) else (undefined)
 	),
 	/**
-	*@Usage
-		get struct and function for editOrCreateAction
+	*@Usage > get struct and function for editOrCreateAction
 	*@Example
 		obj = mcActionsEditor.splitCommand "mcAction.capHoles()"
 		obj = mcActionsEditor.splitCommand "mcAction.capHoles #map:true"
@@ -341,7 +371,7 @@ struct MICRA_ACTIONS_EDITOR	(
 		Return				Customize --> addNewAction --> send output
 	*@Actions Methods
 		*@Structure
-			register existing action	> registerActionToActionList category_key action_key	(append data to Actions.ini)
+			register existing action	> saveAction category_key action_key	(append data to Actions.ini)
 			create new action			> addNewAction category_key action_key	(open script and insert action at struct end)
 		*@File
 			register existing tool		>
@@ -374,7 +404,7 @@ format "editOrCreateAction > action_key:% cmd :%\n\t%" action_key action_cmd (cm
 					
 						if not (isActionRegistred category_key (nameToKey action_key)) then ( --if not registred
 						
-							registerActionToActionList category_key action_key (icon_index as String) action_cmd
+							saveAction category_key action_key (icon_index as String) action_cmd
 							
 						) else ( --if already registred, abort
 						
@@ -391,30 +421,29 @@ format "editOrCreateAction > action_key:% cmd :%\n\t%" action_key action_cmd (cm
 						--append function fo current file (in Maxscript Editor)
 						mcMsx.insertFunctionAtStructureEnd new_fn 
 						--register new action
-						registerActionToActionList category_key action_key (icon_index as String) action_cmd
+						saveAction category_key action_key (icon_index as String) action_cmd
 					)
 					
 				) else ( --create new structure file and new function in CORE folder
 		
 					local script_path = Micra.CoreDir + struct_name + "_v0.01.ms"  --"Vertex_Color_v0.01"
-					if queryBox ("Do you want to create new structure file?\n[ " + script_path + " ]") title:micra.version do (
-					
-						local template_file = Micra.CoreDir + "_template.txt"
-						--copy template in to file
-						copyFile template_file script_path
-						format "editOrCreateAction > Script [ % ] is created succesfully.\n" script_name
-						edit script_path --edit new file
-						--insert new function
-						local new_fn = "fn " + fn_name
-						if fn_params != "" do new_fn += " " + fn_params
-						new_fn += " = (\n\t\t\n\t\tInsert Code Here...\n\t)"
-						--append function fo current file (in Maxscript Editor)
-						mcMsx.insertFunctionAtStructureEnd new_fn 
-						--register new action in Actions.xml (All Actions List)
-						registerActionToActionList category_key action_key (icon_index as String) action_cmd
-						--TODO
-						--register new Script in Settings.xml (load at 3DsMax start)
-					)
+					if not (queryBox ("Do you want to create new structure file?\n[ " + script_path + " ]") title:micra.version) do return OK 
+					local template_file = Micra.CoreDir + "_template.txt"
+					--copy template in to file
+					copyFile template_file script_path
+					format "editOrCreateAction > Script [ % ] is created succesfully.\n" script_name
+					edit script_path --edit new file
+					--insert new function
+					local new_fn = "fn " + fn_name
+					if fn_params != "" do new_fn += " " + fn_params
+					new_fn += " = (\n\t\t\n\t\tInsert Code Here...\n\t)"
+					--append function fo current file (in Maxscript Editor)
+					mcMsx.insertFunctionAtStructureEnd new_fn 
+					--register new action in Actions.xml (All Actions List)
+					saveAction category_key action_key (icon_index as String) action_cmd
+					--register new Script in Settings.xml "Structures" (load at 3DsMax start)
+					local node_attribs = (mcObject.new()).add "val" "on" 
+					mcFile.saveSettings Micra.DefaultSettings ("Structures/"+struct_name) node_attribs type:"attribs"
 				)
 			)
 			
@@ -479,7 +508,3 @@ format "editOrCreateAction > action_key:% cmd :%\n\t%" action_key action_cmd (cm
 )	
  --create instance
 Global mcActionsEditor = mcStructMan.instanceStructure MICRA_ACTIONS_EDITOR "mcActionsEditor"
-
-
-
-----TODO put here dialog with script name type (like LS3D_Tools, Align_Objects_3D, etc...)

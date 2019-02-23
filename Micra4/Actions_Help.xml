@@ -144,6 +144,7 @@
     <Pass_Keeper val="Tady si muzes ukladat sve hesla, stranky a jine dulezite veci." />
     <Script_Editor val="Programovaci nastroje , slouzi pro vylepseni nebo opravy teto aplikace." />
     <Viewport_Recorder val="Muzes si nahrat postup sve prace do animovaneho gif souboru." />
+    <Autosave_Switch val="Přepínač, který vypne - zapne Autosave." />
   </Programming>
   <Material>
     <Edit_Textures val="Otevre Textury v aplikaci Photoshop. Oznac materail nebo objekty." />
@@ -176,4 +177,11 @@
   <Skinning>
     <Add_Weapon_Skin val="Prida skin na zbran a nastavi parametry" />
   </Skinning>
+  <Test_2>
+    <Action_Name3 val="test help text" />
+  </Test_2>
+  <TuKej>
+    <Object_Inspector val="Kopírování parametrů z jednoho objektu na druhý." />
+    <Smart_LS3D_Export val="Exportuje všechny nody ve scéně." />
+  </TuKej>
 </ACTIONS>

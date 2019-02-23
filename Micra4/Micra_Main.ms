@@ -9,7 +9,7 @@
 
 Global Micra
 Global McFile
-Global mcTriangleCounter = false --TODO > find another way used: [Micra_Macro.mcr]
+Global mcTriangleCounter = false --> used in: [Micra_Macro.mcr]
 
 struct MICRA_STRUCTURE (
 
@@ -28,6 +28,7 @@ struct MICRA_STRUCTURE (
 	files_list			= #(),
 	restart_need		= false,
 	max_custom_controls = undefined,
+	callbacksID			= #mcGeneralCallbacks, --micra callbacks ID
 	--> Directory structure
 	RootDir				= getFilenamePath (getSourceFileName()), --here is current version of Micra
 	CoreDir				= RootDir + "CORE\\", --here is all sturctures(classes)
@@ -105,13 +106,14 @@ struct MICRA_STRUCTURE (
 				)
 			)
 			-->Unload Calbacks
-			callbacks.removeScripts id:#mcGeneralCall
-	
---TODO check it if need
---if mcPolyCount != undefined do unregisterRedrawViewsCallback mcPolyCount.Count; mcPolyCount = undefined			
---unregisterRedrawViewsCallback mcCall.fileName_in_screen 
---unregisterRedrawViewsCallback mcAction.triangle_counter
-
+				--Micra.ms > onOpenForm (line 187 )
+				callbacks.removeScripts id:callbacksID 
+				--Customize.ms > onCheckerChanges (line 460)
+				if mcPolyCount != undefined do unregisterRedrawViewsCallback mcPolyCount.Count
+				mcPolyCount = undefined			
+				unregisterRedrawViewsCallback mcCall.fileName_in_screen 
+				unregisterRedrawViewsCallback mcAction.triangle_counter
+			-->Clean Memory
 			gc()
 			completeredraw()
 		)

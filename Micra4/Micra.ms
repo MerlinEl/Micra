@@ -188,9 +188,9 @@ try ( mcMicraDialog.close() ) catch()
 	(
 		--print "micra open"
 		loadMicraDialogs()
-		callbacks.removeScripts id:#mcGeneralCall
-		callbacks.addScript #selectionSetChanged "mcGetNameAndColor() " id:#mcGeneralCall
-		callbacks.addScript #nodeRenamed "mcRenameUpdate() " id:#mcGeneralCall
+		callbacks.removeScripts id:Micra.callbacksID
+		callbacks.addScript #selectionSetChanged "mcGetNameAndColor() " id:Micra.callbacksID
+		callbacks.addScript #nodeRenamed "mcRenameUpdate() " id:Micra.callbacksID
 	)
 	fn onCloseForm s a = 
 	(
