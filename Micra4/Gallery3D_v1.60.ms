@@ -12,8 +12,9 @@
 --~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~--
 fn runGallery3D = (
 
-	local dir = pathConfig.removePathLeaf Micra.RootDir + "\\Gallery3D"
-	local fpath = dir + "\\" + "Gallery3D_v1.60.ms"	
+	local dir = mcFile.readSettings Micra.UserSettings "Gallery3D/Root_Dir"
+	if dir == "" do dir = pathConfig.removePathLeaf Micra.RootDir + "\\Gallery3D" --set automatic root dir (at script loaction)
+	local fpath = dir + "\\" + "Gallery3D_v1.61.ms"	
 	format "does file [%] exists:%\n" fpath (doesFileExist fpath)
 	if doesFileExist fpath do fileIn (fpath)
 )

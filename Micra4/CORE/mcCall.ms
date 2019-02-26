@@ -43,7 +43,7 @@ struct MICRA_CALL
 		gw.enlargeUpdateRect #whole
 		gw.updateScreen()
 	),
-	fn fileName_in_screen =
+	fn fileNameInScreen =
 	(
 		local viewSize, fName, textSize, View_X
 		viewSize = getviewsize()

@@ -15,7 +15,12 @@ Global mc3DGallDEbug = true
 Global mc3DGalleryDialog
 Global mcTextBoxDialog
 Global mc3DGallerySettingsDialog
-Global mc3DGalleryRootDir = (getFilenamePath (getThisScriptFilename())) 
+
+Global mc3DGalleryRootDir = (getFilenamePath (getThisScriptFilename())) --set automatic root dir (at script loaction)
+( --if custom dir is defined,then pick custom path
+	local saved_dir =  mcFile.readSettings Micra.DefaultSettings "Gallery3D/Root_Dir"
+	if saved_dir != "" do domc3DGalleryRootDir = saved_dir
+)
 Global mc3DGallerySettingsDir = mc3DGalleryRootDir + "_settings\\"
 Global mc3DGalleryINI = mc3DGallerySettingsDir+"Settings.ini"	
 --~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~--
@@ -37,6 +42,7 @@ if mc3DGalleryDialog != undefined do destroyDialog mc3DGalleryDialog
 rollout mc3DGalleryDialog " 3DGallery III: 0/0" width:754 height:608
 (
 	--> Local
+	local gallery_filename = "Gallery3D_v1.61"
 	local helpFile = mc3DGallerySettingsDir+"Help.doc" --TODO > make it PDF
 	local Current_Dir = "", lastMainCat="", lastSubCat=""
 	local cursors = dotNetClass "System.Windows.Forms.Cursors"
@@ -649,8 +655,6 @@ rollout mc3DGalleryDialog " 3DGallery III: 0/0" width:754 height:608
 	)
 	fn inicializeInterface = (
 	
-		
-	
 		-->resizing interface
 		local dia_size = [mc3DGalleryDialog.width, mc3DGalleryDialog.height]
 		resizeInterface dia_size
@@ -840,11 +844,13 @@ rollout mc3DGalleryDialog " 3DGallery III: 0/0" width:754 height:608
 				)
 				fn setGlalleryPath = (
 				
-					messageBox "Directory is defined automaticaly at script location."
-					return OK
 					local gallery_dir = getSavePath caption:" Chose Models Directory..." initialDir:micra.RootDir
 					if gallery_dir == undefined or not (doesDirectoryExist gallery_dir) do return false
 					format "chossen dir:%\n" gallery_dir
+					mcFile.saveSettings Micra.UserSettings "Gallery3D/Root_Dir" (gallery_dir+"\\") -- Set start profile to default
+					destroyDialog mc3DGalleryDialog
+					destroyDialog mc3DGallerySettingsDialog
+					fileIn (gallery_dir + "\\" + mc3DGalleryDialog.gallery_filename + ".ms")
 				)
 				on mc3DGallerySettingsDialog open  do (readSettings())
 				on mc3DGallerySettingsDialog close do (mc3DGalleryDialog.ckbCFG.checked = false)

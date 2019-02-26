@@ -72,7 +72,7 @@ Global mcCreateNetDynamicDialog
 		if picked_node == undefined do return false
 		
 if debug == 5 do format "name:%\t tag:%\n" s.name s.tag	
-		if s.parent.parent.tag.value.edit_mode do return false
+		if s.parent.parent.tag.value.edit_mode or s.tag == "" do return false
 		if a.Button == a.Button.left do mcActionsEditor.runAction s.tag	
 	)
 --| --DragAndDrop

@@ -1,0 +1,707 @@
+-----------------------------------------------------------------------
+------------------GMT2.26(rFactor) Importer v0.94 by Zoltán Nagy-------
+---------------------- Modified by Peter Holt 15/12/05
+--------------------------Copy me to scripts\startup-------------------
+---------------Feel free to improve this script in any way you can-----
+----------------------------------------------------------------------- 	
+	
+
+utility ImportGMT2 "GMT2 Importer" width:161 height:303
+(
+	GroupBox grp1 "About" pos:[3,4] width:156 height:35
+	label lbl1 "GMT2 Importer v0.94 by ZN" pos:[13,20] width:138 height:17
+	button btnImportFile "Import a single file" pos:[15,229] width:124 height:26
+	GroupBox grp2 "Options" pos:[2,50] width:158 height:162
+	button btnImportDir "Import  a directory" pos:[15,267] width:124 height:23
+	label lbl2 "Additional texture path:" pos:[16,64] width:128 height:16
+	edittext edt1 "" pos:[8,80] width:103 height:16
+	checkbox chkReload "Reload existing materials" pos:[12,104] width:135 height:19
+	GroupBox grp4 "Import" pos:[-1,210] width:160 height:87
+	button btnPath "Change" pos:[111,81] width:43 height:16
+	checkbox chkAskTexes "Ask for missing textures" pos:[12,126] width:142 height:13 checked:true
+	radioButtons rdoSmoothing "Smoothing" pos:[12,145] width:111 height:62 labels:#("No smoothing", "Smooth everything", "Proper smoothing") default:3 columns:1
+
+	local gShaderNames
+	local globalSearchPath
+	
+
+
+
+	fn FindStringInArray inArray inString=
+	(
+		local index=0
+		for i=1 to inArray.count do
+		(
+			if ((stricmp inArray[i] inString)==0) then 
+			(
+				index=i
+				exit
+			)
+		)
+		index
+	)
+
+	fn ReadShaderNames= 
+	(
+		shaderFiles=#("bumpmap.gfx","cubemap.gfx","diffuse.gfx","specular.gfx")
+		shaderDir=((GetDir #maxroot)+"hardwareshaders\\")
+		for i=1 to shaderFiles.count do
+		(
+			file=openFile (shaderDir+shaderFiles[i]) mode:"rt"
+			if file != undefined then 
+			(
+				do 
+				(
+					lineInFile=readLine file
+					words=filterString lineInFile "="
+					if words.count>1 then 
+					(
+						if (words[1]=="ShaderName") then 
+						(
+							shaderLevel=(execute words[2][2])+1
+							if (findItem gShaderNames[shaderLevel] words[2])==0 then append (gShaderNames[shaderLevel]) words[2]
+						)
+					)
+
+				) while ((eof file)==false)
+				close file
+			) else messageBox "Error opening .gfx files. Extract them to 3dsmax\\hardwareshaders."
+		)
+	--print shaderNames[3].count
+	)
+
+
+
+	fn ImportGMT filename=
+	(
+		local d3dBlendArray=#("ZERO","ONE","SRC COLOR","INV SRC COLOR","SRC ALPHA","INV SRC ALPHA","DST ALPHA","INV DST ALPHA","DST COLOR","INV DST COLOR")
+		local animMethodsArray=#("Cycle","One shot","Pendulum","Transient","Random","Manual")
+		
+		gmtPath=getFileNamePath filename
+		file=fopen fileName "rb"
+		if file != undefined then 
+		(
+-----------------------------------------------------------------------
+------------------------Process the Materials first---------------------
+----------------------------------------------------------------------- 	
+
+			matEditor.Open()
+			medit.setActiveMtlSlot 12 true
+			
+			matIDs=#()
+
+			offsetMaterials=(ReadLong file)+4  --start of the material section in the gmt
+			fseek file (offsetMaterials) #seek_set  --jump there
+			numMaterials=ReadLong file  --number of materials
+
+			if ((classof meditMaterials[1])!=multiMaterial) then  meditMaterials[1]=multiMaterial numsubs:1
+			for m = 1 to numMaterials do
+			(
+				startingPos=ftell file   --store the start of this material
+				matName=ReadString file  --name of the material
+				newMatID=0
+				isNewMat=true
+				numSubs=meditMaterials[1].numSubs
+				--look for this material in the material editor
+				for sm=1 to numSubs do
+				(
+					if ((stricmp meditMaterials[1].materialList[sm].name matName)==0) then 
+					(
+						newMatID=sm
+						isNewMat=false
+						exit
+					)
+				)
+				local mat
+				--create new gMat if it wasn't found
+				if (newMatID==0) then 
+				(
+					if ((classof meditMaterials[1].materialList[numSubs])==gMotorMaterial) 
+					then (newMatID=numSubs+1)	else (newMatID=numSubs)
+					mat=meditMaterials[1].materialList[newMatID]=gMotorMaterial()
+					mat.name=matName
+					meditMaterials[1].names[newMatID]=matName
+				) else mat=meditMaterials[1].materialList[newMatID]
+				--keep the actual material ID for later
+				append matIDs newMatID
+			
+				if (isNewMat==true or chkReload.checked==true) then medit.putMtltoMtlEditor mat 12
+			
+-----------------------------------------------------------------------
+------------------------Material Properties----------------------------
+----------------------------------------------------------------------- 	
+				fseek file (startingPos+64) #seek_set
+				matProperties=ReadLong file  --see below for details
+				ambientRed=ReadFloat file
+				ambientGreen=ReadFloat file
+				ambientBlue=ReadFloat file
+				ambientAlpha=ReadFloat file
+				diffuseRed=ReadFloat file
+				diffuseGreen=ReadFloat file
+				diffuseBlue=ReadFloat file
+				diffuseAlpha=ReadFloat file
+				specularRed=ReadFloat file
+				specularGreen=ReadFloat file
+				specularBlue=ReadFloat file
+				specularAlpha=ReadFloat file
+				emissiveRed=ReadFloat file
+				emissiveGreen=ReadFloat file
+				emissiveBlue=ReadFloat file
+				emissiveAlpha=ReadFloat file
+				sourceBlend=ReadLong file
+				destBlend=ReadLong file
+				specularPower=ReadFloat file
+	
+				local ambientM,diffuseM,emissiveM,specularM
+				if ((bit.and matProperties 0x200000)==0) then ambientM=true else ambientM=false
+				if ((bit.and matProperties 0x1000000)==0) then diffuseM=true else diffuseM=false
+				if ((bit.and matProperties 0x20000000)!=0) then emissiveM=true else emissiveM=false
+				if ((bit.and matProperties 0x4000000)!=0) then specularM=true else specularM=false
+			
+				local specular,noZBuffer,twoSided,postShadow
+				if ((bit.and matProperties 0x40)!=0) then specular=true else specular=false
+				if ((bit.and matProperties 0x100)!=0) then noZBuffer=true else noZBuffer=false
+				if ((bit.and matProperties 0x800)!=0) then twoSided=true else twoSided=false	
+				if ((bit.and matProperties 0x10000)!=0) then postShadow=true else postShadow=false
+				
+				--they are just printed into the Listener for now
+				if (isNewMat==true or chkReload.checked==true) then 
+				(
+					format "\nMaterial name: %\n"	matName
+					if (ambientRed!=1.0 or ambientBlue!=1.0 or ambientGreen!=1.0 or ambientM==false) then format "Ambient: %	%	%	M: %\n" (255*ambientRed) (255*ambientGreen) (255*ambientBLue) (ambientM)
+					if (diffuseRed!=1.0 or diffuseBlue!=1.0 or diffuseGreen!=1.0 or diffuseM==false) then format "Diffuse: %	%	%	M: %	Alpha: %\n" (255*diffuseRed) (255*diffuseGreen) (255*diffuseBLue) diffuseM (255*diffuseAlpha)
+					if (emissiveRed!=0.0 or emissiveBlue!=0.0 or emissiveGreen!=0.0) then format "Emissive: %	%	%	M: %\n" (255*emissiveRed) (255*emissiveGreen) (255*emissiveBLue) emissiveM
+					if (specularRed!=0.0 or specularBlue!=0.0 or specularGreen!=0.0) then format "Specular: %	%	%	M: %	Power: %\n" (255*specularRed) (255*specularGreen) (255*specularBLue) specularM specularPower
+					if (specular==true) then format "specular: %	\n" specular 	
+					if (noZBuffer==true) then format "noZbuffer: %	\n" noZBuffer 
+					if (twoSided==true) then format "twoSided: %	\n" twoSided 
+					if (postShadow==true) then format "postShadow: %	\n" postShadow
+					if (sourceBlend!=2 or destBlend!=1) then format "Source blend: %	Dest Blend: %\n" d3dBlendArray[sourceBlend] d3dBlendArray[destBlend] 
+				)
+
+-----------------------------------------------------------------------
+------------------------3 Shader Desecriptors--------------------------
+----------------------------------------------------------------------- 	
+			
+				startTextures =#(0,0,0)
+				numTextures =#(0,0,0)
+				shaderNameIndices =#(0,0,0)
+		
+				for s = 1 to 3 do
+				(
+				
+					startingPos=ftell file  --store current position
+				    startTextures[s]=ReadLong file  --index of the first texture stage for this shader
+					numTextures[s]=ReadLong file  --number of texture stages for this shader
+					shaderName=ReadString file --name of this shader
+					if (s==1 and shaderName=="L1SPECULARMAPT0") then shaderName="L0SPECULARMAPT0" --hard-coded fix for a bug in specular.gfx
+					shaderNameIndices[s]=FindStringInArray gShaderNames[s] shaderName
+			
+					fseek file (startingPos+264) #seek_set
+	
+				)
+				fseek file 32 #seek_cur  --sometimes this 32 bytes contains something
+				numTexturesSum=ReadLong file  --sum of all texturestages
+				
+				for s = 1 to 3 do
+				(
+					--set the 2 shader comboboxes
+					if (isNewMat==true or chkReload.checked==true) then 
+					(
+						mat.shaderClass=s
+						mat.shaderSelect=shaderNameIndices[s]
+					)
+-----------------------------------------------------------------------
+------------------------Texture Stages---------------------------------
+----------------------------------------------------------------------- 	
+					for t = 1 to numtextures[s] do
+					(
+	
+						startingPos=ftell file       --start of this texturestage in the file
+						textureName=ReadString file  --exactly that
+						fseek file (startingPos+64) #seek_set --strings are 64 bytes long so jump!
+				 	    texProp1=ReadByte file      --texture stage properties
+				 	    texProp2=ReadByte file
+				 	    anisoLevel=ReadByte file  --not sure, doesn't work in editor
+				 	    trash=ReadByte file  
+				 	    mipLevel=ReadLong file #signed
+				 	    animFrames=ReadLong file
+						animType=0
+						local animMethod,animRate,animSeqStr
+						if (animFrames!=1) then  --some extra stuff to read when animation source==texture maps
+						(
+							animType=1
+							lengthSeq=ReadLong file
+							animSeqStr=stringStream "("  --print the anim sequence into a string
+							seek animSeqStr 1
+							for l = 1 to lengthSeq do
+							(
+								format "%," (ReadLong file) to:animSeqStr
+							)
+							seek animSeqStr (lengthSeq*2)
+							format ")"  to:animSeqStr
+							close animSeqStr 
+							animMethod=ReadLong file
+							animRate=ReadFloat file
+						)
+				 	    stageType=ReadLong file  --??
+				 		if (stageType==7) then  --this happens when animation source==animation file, ie .bik
+						(
+							animType=2
+							fseek file 12 #seek_cur
+						) else 
+						(
+							ukn4=ReadLong file
+						)
+						cubeMapBlend=ReadFloat file   --blend factor between base and cube texture usually
+					    indexStage=ReadLong file  --just index of tex. stage, or texture coordinate set, or both?
+    					ukn5=ReadLong file
+				 	    chromaBlue=ReadByte file #unsigned  --transparent color
+				 		chromaGreen=ReadByte file #unsigned
+				 		chromaRed=ReadByte file #unsigned
+				 		chromaAlpha=ReadByte file #unsigned
+				 		alphaRef=ReadLong file  --alpha reference value for alpha testing
+				 		lodBias=ReadFloat file
+										
+						fseek file 64 #seek_cur  --64 bytes of trash, probably for later use
+							
+						--now bang everything into to gmotortexture class, when texturename!=MATH
+					
+						if (textureName!="MATH") and (isNewMat==true or chkReload.checked==true) then 
+						(
+							try (
+							local texture
+							case s of    --three gTex arrays for the 3 shaderlevels
+							(
+								1: texture=mat.mtl_tex0[t]
+								2: texture=mat.mtl_tex1[t]
+								3: texture=mat.mtl_tex2[t]
+							)
+				
+							local myBitmap
+							shortName=getFileNameFile textureName
+							if animType==1 then shortName+="00"   --to find animated textures like sky00.dds
+							try myBitmap=openbitmap (gmtPath+shortName+".dds")    --very nasty way to find the textures
+							catch 
+							(
+								try myBitmap=openbitmap (gmtPath+shortName+".tga")
+								catch 
+								(
+									try myBitmap=openbitmap (globalSearchPath+shortName+".dds")
+									catch 
+									(
+										try myBitmap=openbitmap (globalSearchPath+shortName+".tga")
+										catch	
+										(
+											try myBitmap=openbitmap (gmtPath+shortName+".bmp")
+											catch 
+											(
+												try myBitmap=openbitmap (globalSearchPath+shortName+".bmp")
+												catch	
+												(
+													if (chkAskTexes.checked==true)	then myBitmap=selectBitmap caption:("Please find: "+textureName)
+												)
+											)
+										)
+									)
+								)
+						
+							)
+							try 
+							(
+								if myBitmap!= undefined then texture.pb_bmap1=myBitmap
+							)
+							catch ()
+							if (findString shortName "_CUBE")!= undefined then format "Cube map: %	in Mat: %	ShaderLevel: %	TexStage: %\n" (textureName) (matName) s t
+
+						
+							if animType!=0 then
+							(
+								texture.animType=animType
+								texture.animNameEdit=textureName
+								if animType==1 then
+								(
+									texture.animSeqEdit =(animSeqStr as string)
+									texture.animRate=animRate
+									texture.animFrames=animFrames
+									texture.animMethod=animMethod
+									format "Animation method: %	in Mat: %	ShaderLevel: %	TexStage: %\n" (animMethodsArray[animMethod]) (matName) s t
+
+								)
+ 						
+							)
+						
+						
+							if (bit.and texProp1 0x80)!=0 then 
+							(
+								texture.useChroma=on
+								texture.chromaColor=color chromaRed chromaGreen chromaBlue 
+															
+							)
+							if (bit.and texProp1 0x1)!=0 then texture.noReduce=on
+							if (bit.and texProp2 0x80)!=0 then texture.noCompress=on
+							if (bit.and texProp2 0x1)!=0 then texture.uniqueTex=on
+												
+							texture.coordinates.mapChannel=t     --texture coordinates channel
+							texture.blendPct=cubeMapBlend*100
+													
+							if alphaRef<0x3f then texture.chromaBlend=3   --translate alpha reference into chromaBlend
+							else if alphaRef<0x7f then texture.chromaBlend=2
+							else if alphaRef<0xbf then texture.chromaBlend=1
+							else texture.chromaBlend=0
+							texture.mipBias=lodBias					
+						
+							texture.mipType=1
+							if mipLevel==-1 then texture.MIPLevel=0 
+							else texture.MIPLevel=mipLevel
+							texture.filterType=bit.and texProp1 48
+							texture.anisoLevel=anisoLevel
+					
+						
+							try ( if (bit.and texProp1 0x2)!=0 then texture.renderTarget=on ) catch( format ""   )  --checking render target causes an exception
+						
+							if (s==1 and t==1) then showTextureMap mat texture on  --show the first dx7 texture
+
+							
+							) catch
+							(
+								format "Exception: %	Mat: %	ShaderLevel: %	TexStage: %\n" (getcurrentexception()) (matName) s t
+									
+							)
+						)
+
+				
+					)
+				)
+		
+				
+		
+			
+
+			)
+			try (
+			medit.setActiveMtlSlot 1 true
+	
+-----------------------------------------------------------------------
+------------------Get the world matrix and the pivot point-------------
+----------------------------------------------------------------------- 	
+
+			
+			local isTransformed=false
+			local matTransform,vecPivot
+			fseek file (0xf4+4) #seek_set
+			m11=ReadFloat file
+			if m11!=0 then
+			(
+				m12=ReadFloat file
+				m13=ReadFloat file
+				m14=ReadFloat file
+				m21=ReadFloat file
+				m22=ReadFloat file
+				m23=ReadFloat file
+				m24=ReadFloat file
+				m31=ReadFloat file
+				m32=ReadFloat file
+				m33=ReadFloat file
+				m34=ReadFloat file
+				m41=ReadFloat file
+				m43=ReadFloat file
+				m42=ReadFloat file  --flip y and z
+				m44=ReadFloat file
+				matTransform=matrix3 [m11,m12,m13] [m21,m22,m23] [m31,m32,m33] [m41,m42,m43]
+				ReadFloat file
+				pX=ReadFloat file
+				pZ=ReadFloat file
+				pY=ReadFloat file
+				vecPivot=point3 pX pY pZ
+				isTransformed=true
+			)
+						
+-----------------------------------------------------------------------
+-------------------------------Get our mesh----------------------------
+----------------------------------------------------------------------- 	
+
+		
+			fseek file (0x170+4) #seek_set   
+			numTrilists=ReadLong file  --number of triangle lists/strips
+			startTrilistDesc=ReadLong file  --start of trilist headers
+		
+			vertArray =#()
+			normalArray =#()
+			colorArray =#()
+			uv1Array =#()
+			uv2Array =#()
+			uv3Array =#()
+			uv4Array =#()
+			faceArray =#()
+			faceArrayOpt =#()
+			matIDArray=#()
+			startIndex=1;
+
+	
+			for m = 0 to (numTrilists-1) do
+			(
+-----------------------------------------------------------------------
+------------------------Trilist or Tristrip Descriptor-----------------
+----------------------------------------------------------------------- 	
+				fseek file (startTrilistDesc+4+m*132) #seek_set
+				nUkn0 = ReadLong file  --strip or list, see below
+				startPosNormal =  ReadLong file
+				trash=ReadLong file
+				startTexCoords = ReadLong file
+				trash=ReadLong file
+				startTanBinormal=ReadLong file  --tangents and binormals only when there's bumpmapping
+				numVertices = ReadLong file
+				trash=ReadLong file
+				numIndices = ReadLong file
+				startIndices = ReadLong file
+				fseek file (16) #seek_cur
+				indexMaterial = ((ReadLong file)+1)  --material ID
+		
+-----------------------------------------------------------------------
+------------------------Vertex Position, Normal, Color-----------------
+----------------------------------------------------------------------- 	
+			
+				fseek file (startPosNormal+4) #seek_set
+				for v = 1 to numVertices  do
+				(
+					x=ReadFloat file
+					z=ReadFloat file --flip y and z for max
+					y=ReadFloat file
+					pos=point3 x y z
+					append vertArray pos
+					nx=ReadFloat file  --normal, not used here
+					nz=ReadFloat file
+					ny=ReadFloat file
+					append normalArray (normalize [nx,ny,nz])
+					blue=ReadByte file #unsigned  --vertex color, not sure in order
+				 	green=ReadByte file #unsigned
+				 	red=ReadByte file #unsigned
+				 	alpha=ReadByte file #unsigned
+				 	append colorArray [red/255.0,green/255.0,blue/255.0]
+					trash=ReadLong file  --something
+				)
+-----------------------------------------------------------------------
+-------------------------UV data(4 channels per vertex)----------------
+----------------------------------------------------------------------- 	
+
+				fseek file (startTexCoords +4) #seek_set
+				for v = 1 to numVertices  do
+				(
+					u=ReadFloat file
+					v=ReadFloat file
+					append uv1Array [u,-v,0]
+					u=ReadFloat file
+					v=ReadFloat file
+					append uv2Array [u,-v,0]
+					u=ReadFloat file
+					v=ReadFloat file
+					append uv3Array [u,-v,0]
+					u=ReadFloat file
+					v=ReadFloat file
+					append uv4Array [u,-v,0]
+				)
+-----------------------------------------------------------------------
+-------------------------Indices---------------------------------------
+----------------------------------------------------------------------- 	
+
+
+				fseek file (startIndices+4) #seek_set
+				if (bit.and nUkn0 0x20000000)!=0 then  --we have a trilist
+				(
+					for f = 1 to (numIndices/3)  do
+					(
+						i1=((ReadShort file)+startIndex)
+						i2=((ReadShort file)+startIndex)
+						i3=((ReadShort file)+startIndex)
+						append faceArray [i1,i2,i3]
+						append faceArrayOpt [i1,i2,i3]
+						append matIDArray matIDs[indexMaterial]			
+					)
+				) else --it's a tristrip
+				(
+					if numIndices>=3 then
+					(
+						i1=((ReadShort file)+startIndex)
+						i2=((ReadShort file)+startIndex)
+						for i = 3 to (numIndices)  do
+						(
+							i3=((ReadShort file)+startIndex)
+							if (i1!=i2 and i1!=i3 and i2!=i3) then --ignore degenerate crap
+							(
+								if (mod i 2)>0.00001 then	
+								(
+									append faceArray [i1,i2,i3]
+									append faceArrayOpt [i1,i2,i3]
+								)
+								else 
+								(
+									append faceArray [i3,i2,i1]
+									append faceArrayOpt [i3,i2,i1]
+								)
+
+										
+								append matIDArray matIDs[indexMaterial]			
+							)
+							i1=i2
+							i2=i3
+						)
+					)
+			
+								
+				)
+				startIndex+=numVertices  --the triangle lists/strips are put into a single mesh
+			)
+		
+			print rdoSmoothing.state
+			if (rdoSmoothing.state==3) then
+			(
+			try (
+			
+			for v = 1 to (vertArray.count-1) do
+			(
+				
+				vertV=vertArray[v]
+				
+						
+				local vj=v+1
+				for vjfor = (v+1) to (vertArray.count) do
+				(
+						
+					if  vertV==vertArray[vj]  and  (dot normalArray[v] normalArray[vj])>0.98 then
+					(
+						for f = 1 to (faceArrayOpt.count) do
+						(
+							if faceArrayOpt[f].x>vj then faceArrayOpt[f].x-=1 else if faceArrayOpt[f].x==vj then faceArrayOpt[f].x=v 
+							if faceArrayOpt[f].y>vj then faceArrayOpt[f].y-=1 else if faceArrayOpt[f].y==vj then faceArrayOpt[f].y=v 
+							if faceArrayOpt[f].z>vj then faceArrayOpt[f].z-=1 else if faceArrayOpt[f].z==vj then faceArrayOpt[f].z=v
+						)
+					
+						deleteItem vertArray vj 
+						deleteItem normalArray vj 
+						
+					) else	vj+=1
+						
+				)
+				
+				
+				if v>=(vertArray.count-1) then exit
+
+			)
+			
+			) catch
+			(
+				format "Exception during fancy smoothing: %\n" (getcurrentexception()) 
+								
+			)
+			)
+		
+
+		    --create our mesh, setup texture coordinates
+			newMesh=mesh vertices:vertArray faces:faceArrayOpt materialIDs:matIDArray
+			
+			newMesh.material=meditMaterials[1]
+			fseek file (0x190+4) #seek_set
+			newMesh.name=ReadString file
+
+		
+			meshop.setNumMaps newMesh 5 keep:true
+			meshop.setMapSupport newMesh 4 true	
+			meshop.setNumMapVerts newMesh 0 uv1Array.count
+			meshop.setNumMapVerts newMesh 1 uv1Array.count
+			meshop.setNumMapVerts newMesh 2 uv1Array.count
+			meshop.setNumMapVerts newMesh 3 uv1Array.count
+			meshop.setNumMapVerts newMesh 4 uv1Array.count
+		
+			meshop.setNumMapFaces newMesh 0 newMesh.numFaces
+			meshop.setNumMapFaces newMesh 1 newMesh.numFaces
+			meshop.setNumMapFaces newMesh 2 newMesh.numFaces
+			meshop.setNumMapFaces newMesh 3 newMesh.numFaces
+			meshop.setNumMapFaces newMesh 4 newMesh.numFaces
+			vertList=#()
+			for v = 1 to (uv1Array.count) do
+			(
+				meshop.setMapVert newMesh 0 v colorArray[v]
+				meshop.setMapVert newMesh 1 v uv1Array[v]
+				meshop.setMapVert newMesh 2 v uv2Array[v]
+				meshop.setMapVert newMesh 3 v uv3Array[v]
+				meshop.setMapVert newMesh 4 v uv4Array[v]
+				append vertList v
+				--setNormal newMesh v normalArray[v]
+				
+			)
+			
+			for f = 1 to (newMesh.numFaces) do
+			(
+				meshop.setMapFace newMesh 0 f faceArray[f]
+				meshop.setMapFace newMesh 1 f faceArray[f]
+				meshop.setMapFace newMesh 2 f faceArray[f]
+				meshop.setMapFace newMesh 3 f faceArray[f]
+				meshop.setMapFace newMesh 4 f faceArray[f]
+				setFaceSmoothGroup newMesh f 1
+			)
+		
+			
+			if (isTransformed) then 
+			(
+				newMesh.transform=matTransform
+				newMesh.pivot=vecPivot
+			)
+		
+			if (rdoSmoothing.state==2) then meshop.weldVertsByThreshold newMesh vertList 0.000001
+			
+			--update newMesh  --said to update normals etc., not actually needed imo
+		
+
+
+			) catch
+			(
+				format "Exception during Geometry importing: %\n" (getcurrentexception()) 
+								
+			)
+
+		
+			fclose f
+		)
+	)
+
+	
+
+
+	on ImportGMT2 open do
+	(
+		dx7Shaders=#()
+		dx8Shaders=#()
+		dx9Shaders=#()
+		gShaderNames=#(dx7Shaders,dx8Shaders,dx9Shaders)
+		ReadShaderNames()
+		globalSearchPath="d:\\rFactor\\rFToolsPublic\\SampleTrackPiece\\maps\\"
+	)
+	on btnImportFile pressed do
+	(
+		globalSearchPath=edt1.text
+		fileName = getOpenFileName types: "GMT(*.gmt)|*.gmt|All|*.*|"
+		if filename != undefined then
+		(
+			ImportGMT filename
+		)	
+	)
+	on btnImportDir pressed do
+	(	
+		globalSearchPath=edt1.text
+		directory = getSavePath caption:"Import Directory" initialDir: edt1.text
+		if directory != undefined then
+		(
+			files=GetFiles (directory+"\\*.gmt")
+			for filename in files do ImportGMT filename
+		)	
+	)
+	on btnPath pressed do
+	(	
+		directory = getSavePath caption:"Additional Texture Path" initialDir: edt1.text
+		if directory != undefined then
+		(
+			edt1.text=directory+"\\"
+		)	
+	)
+)

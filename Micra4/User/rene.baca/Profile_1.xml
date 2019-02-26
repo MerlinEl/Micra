@@ -14,15 +14,15 @@
   </Properties_1>
   <Properties_2>
     <mcMicraDialog active="true" pos="[2172,222]" size="[148,66]" title="" />
-    <mcCustomizeDialog active="false" pos="[1350,670]" size="[224,404]" title="" />
+    <mcCustomizeDialog active="false" pos="[1350,670]" size="[600,404]" title="" />
     <mcProgramDialog active="undefined" pos="[2298,0]" size="[256,232]" title="" />
     <mcisoDialog active="false" pos="[181,152]" size="[140,400]" title="" />
     <mcModifierDialog active="undefined" pos="[100,100]" size="[400,400]" title="" />
-    <mcIconMakerDialog active="false" pos="[690,230]" size="[730,500]" title="" />
+    <mcIconMakerDialog active="false" pos="[1330,270]" size="[730,500]" title="" />
     <mcDeepIsolateDialog active="true" pos="[1118,86]" size="[84,44]" title="" />
     <mcMoveTowardsDialog active="undefined" pos="[441,377]" size="[200,76]" title="" />
     <mcClonerDialog active="undefined" pos="[1013,725]" size="[164,296]" title="" />
-    <mcRenameDialog active="undefined" pos="[265,280]" size="[224,312]" title="" />
+    <mcRenameDialog active="true" pos="[265,280]" size="[224,312]" title="" />
     <mcObjectPlanterDialog active="undefined" pos="[266,201]" size="[356,92]" title="" />
     <mcPivotPlanterDialog active="undefined" pos="[362,308]" size="[116,141]" title="" />
     <mcRepairDialog active="undefined" pos="[357,307]" size="[144,152]" title="" />

@@ -471,10 +471,10 @@ fn onCheckerChanges s a =
 			if s.checked
 			then
 			(
-				unregisterRedrawViewsCallback mcCall.fileName_in_screen
-				registerRedrawViewsCallback mcCall.fileName_in_screen 
+				unregisterRedrawViewsCallback mcCall.fileNameInScreen
+				registerRedrawViewsCallback mcCall.fileNameInScreen 
 			)
-			else (unregisterRedrawViewsCallback mcCall.fileName_in_screen )
+			else (unregisterRedrawViewsCallback mcCall.fileNameInScreen )
 		)
 		"UniversalCounter":
 		(

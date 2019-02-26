@@ -39,11 +39,15 @@ rollout mcVertexColorDialog "Vertex Color v1.02" width:408 height:256
 	GroupBox 'grp2' "Actions:" pos:[112,4] width:292 height:244 align:#left
 
 	button 'btn_show_colors' "ON" pos:[232,112] width:80 height:24 align:#left
-	button 'btn_show_shaded' "ON" pos:[232,140] width:80 height:24 align:#left
 	button 'btn_hide_colors' "OFF" pos:[320,112] width:80 height:24 align:#left
-	button 'btn_hide_shaded' "OFF" pos:[320,140] width:80 height:24 align:#left
-	label 'lbl_svs' "Show Vertex Shaded:" pos:[120,144] width:104 height:20 align:#left
+	button 'btn_show_alpha' "ON" pos:[232,140] width:80 height:24 align:#left
+	button 'btn_hide_alpha' "OFF" pos:[320,140] width:80 height:24 align:#left
+	button 'btn_show_shaded' "ON" pos:[232,168] width:80 height:24 align:#left
+	button 'btn_hide_shaded' "OFF" pos:[320,168] width:80 height:24 align:#left
 	label 'lbl_svc' "Show Vertex Colors:" pos:[120,116] width:104 height:20 align:#left
+	label 'lbl_sva' "Show Vertex Alpha:" pos:[120,144] width:104 height:20 align:#left
+	label 'lbl_svs' "Show Vertex Shaded:" pos:[120,172] width:104 height:20 align:#left
+
 	--local functions
 	fn getSelectionType sel= (
 		
@@ -293,7 +297,11 @@ rollout mcVertexColorDialog "Vertex Color v1.02" width:408 height:256
 	)
 	on btn_show_colors pressed  do
 	(
-		for o in selection do o.showVertexColors = true
+		for o in selection do (
+			o.vertexColorType = 0 --or o.vertexColorType = #color
+			o.showVertexColors = true
+			update o
+		)
 		completeRedraw()	
 	)
 	on btn_hide_colors pressed  do
@@ -301,6 +309,21 @@ rollout mcVertexColorDialog "Vertex Color v1.02" width:408 height:256
 		for o in selection do o.showVertexColors = false
 		completeRedraw()	
 	)
+	on btn_show_alpha pressed  do
+	(
+		for o in selection do (
+			o.vertexColorType = 2 -- or o.vertexColorType = #alpha -- set Vertex Color type to Alpha
+			o.showVertexColors = true
+			update o
+		)
+		completeRedraw()	
+	)
+	on btn_hide_alpha pressed  do
+	(
+		for o in selection do o.showVertexColors = false
+		completeRedraw()	
+	)
+	
 	on btn_show_shaded pressed  do
 	(
 		for o in selection do o.vertexColorsShaded = true
@@ -327,6 +350,36 @@ rollout mcVertexColorDialog "Vertex Color v1.02" width:408 height:256
 	)	
 )
 createDialog mcVertexColorDialog
+
+/**
+*@Usage
+	local col0 = [1,1,1] --100% alpha
+	local col1 = [0.5,0.5,0.5] --50% alpha
+	local col2 = [0.2,0.2,0.2] --20% alpha
+	--min = 0.0 max = 1.0
+
+fn setRandomVertexAlpha float_min float_max = ( 
+	
+	local obj = (selection as array)[1]
+	if obj == undefined do return false
+	local sel_verts = polyop.getVertSelection obj as array
+	for v in sel_verts do (
+		
+		local random_float = random float_min float_max
+		--format "random float:%\n" random_float
+		local p2 = [random_float, random_float, random_float] 
+		polyOp.setMapVert obj -2 v p2
+	)
+	--update
+	obj.vertexColorType = #color
+	update obj
+	obj.vertexColorType = #alpha
+	update obj
+)
+
+setRandomVertexAlpha 0.6 1.0
+*/
+
 
 /*
 mcCall.createXMLDialog "mcScriptManDialog" "Properties_2"

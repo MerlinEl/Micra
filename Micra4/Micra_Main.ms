@@ -108,11 +108,10 @@ struct MICRA_STRUCTURE (
 			-->Unload Calbacks
 				--Micra.ms > onOpenForm (line 187 )
 				callbacks.removeScripts id:callbacksID 
-				--Customize.ms > onCheckerChanges (line 460)
-				if mcPolyCount != undefined do unregisterRedrawViewsCallback mcPolyCount.Count
-				mcPolyCount = undefined			
-				unregisterRedrawViewsCallback mcCall.fileName_in_screen 
-				unregisterRedrawViewsCallback mcAction.triangle_counter
+				--Customize.ms > onCheckerChanges (line 460) --fix it cause error
+				--if mcPolyCount != undefined do unregisterRedrawViewsCallback mcPolyCount.Count		
+				--if mcCall != undefined do unregisterRedrawViewsCallback mcCall.fileNameInScreen 
+				--if mcAction != undefined do unregisterRedrawViewsCallback mcAction.triangle_counter
 			-->Clean Memory
 			gc()
 			completeredraw()
@@ -334,8 +333,8 @@ if execute (getINISetting UserSettings "Settings" "UniversalCounter") do
 if execute (getINISetting UserSettings "Settings" "ShowFileName") do
 (
 	--Show FileName in Screen
-	unregisterRedrawViewsCallback mcCall.fileName_in_screen
-	registerRedrawViewsCallback mcCall.fileName_in_screen ; completeredraw()	
+	unregisterRedrawViewsCallback mcCall.fileNameInScreen
+	registerRedrawViewsCallback mcCall.fileNameInScreen ; completeredraw()	
 )
 (
 	--Use Large Vertex Dots

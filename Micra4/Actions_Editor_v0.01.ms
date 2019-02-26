@@ -200,6 +200,7 @@ struct MICRA_ACTIONS_EDITOR	(
 	*/
 	fn runAction action_key = (
 	
+		if action_key == undefined or action_key == "" do return false
 		local action_data = readActionData action_key --mcObject(cat:Animation, name:Reverse_Animation, icon:106, cmd:mcAnimation.reverse 0 10)
 		if action_data == undefined do return false
 		local action_with_cmd = action_data.get "cmd" 

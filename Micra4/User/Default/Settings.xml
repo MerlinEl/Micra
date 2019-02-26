@@ -70,44 +70,7 @@
     <btn_13 val="(color 112 112 0)" />
   </ColorPalete>
   <Gallery3D>
-    <Thumb_Render_Size val="[200,150]" />
-    <Thumb_Size val="[160,128]" />
-    <Thumb_Color val="(color 33 70 112)" />
-    <Dialog_Gal_Pos val="[-903,368]" />
-    <Dialog_Gal_Size val="[899,767]" />
-    <Dialog_Plant_Pos val="[58,220]" />
-    <Dialog_Plant_Size val="[304,673]" />
-    <Plant_Distance val="10" />
-    <Plant_Sensitivity val="0.0" />
-    <Plant_Snap_Offset val="0" />
-    <Maual_Spin_Axis val="1" />
-    <Plant_Orientation val="1" />
-    <Single_Size val="[0,0,0]" />
-    <Single_Rotation val="[0,0,0]" />
-    <Single_Position val="[0,0,0]" />
-    <Lock_Size val="false" />
-    <Lock_Rotation val="false" />
-    <Lock_Position val="false" />
-    <Last_Profile val="7" />
-    <ObjectList_RolledUp val="false" />
-    <RandomSettings_RolledUp val="false" />
-    <GlobalSettings_RolledUp val="false" />
-    <ProfileSettings_RolledUp val="false" />
-    <AntiAliasing val="true" />
-    <PixelSampler val="false" />
-    <Shadows val="false" />
-    <Quiet val="true" />
-    <lastMainCat val="Scotch" />
-    <lastSubCat val="Leafs" />
-    <Random_Objects_List />
-    <test val="1" />
-    <Server_Dir E="\Gallery3D\" />
-    <PC_Dir E="\Gallery3D\" />
-    <Dialog_Gal_Max val="false" />
-    <Opacity val="1.0" />
-    <Current_Dir E="\Gallery3D\Nature\Leafs\" />
-    <rootPath D="\ReneBaca\3DsMax\Gallery3D\" />
-    <Root_Dir E="\Gallery3D\" />
+    <Root_Dir E="" />
   </Gallery3D>
   <Gallery3DDefault>
     <Plant_Distance val="24" />
