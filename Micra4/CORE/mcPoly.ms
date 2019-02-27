@@ -104,12 +104,12 @@ struct MICRA_POLY
 		)
 		return verts
 	),
-	fn getEdgeLength obj edge =
-	(
-		local my_verts = polyOp.getVertsUsingEdge obj edge as array
-		return distance (polyOp.getVert obj my_verts[1]) (polyOp.getVert obj my_verts[2])
+	fn getEdgeLength poly_obj edge_index = (
 		
-	),
+        local edge_verts = polyOp.getEdgeVerts poly_obj edge_index
+        local verts_pos = for v in edge_verts collect polyOp.getVert poly_obj v
+        return (distance verts_pos[1] verts_pos[2])
+    ),
 	--function getVectorDistance dx dy=
 	--(
 	--	return sqrt(dx*dx+dy*dy)

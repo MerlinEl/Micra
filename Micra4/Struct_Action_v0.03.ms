@@ -2270,6 +2270,17 @@ struct mcAction (
 			if 	target_layer != undefined do target_layer.addNode o
 		)
 		format "Set objects(%) data:\n\tlink:%\n\tlayer:%\n" sel.count parent_name layer_name
+	),
+	fn getEdgesLength = ( --todo for multiple edges selected
+	
+		local obj = (selection as array)[1]
+		 if obj == undefined or  classOf obj != Editable_Poly do return false
+		local  esel = polyOp.getEdgeSelection obj	 
+		if (esel.numberSet == 1) do (
+			  
+			local elen = mcPoly.getEdgeLength obj (esel as Array)[1]
+			format "Edge: %  length: %\n"  esel elen
+		)
 	)
 	/*<end>*/
 )

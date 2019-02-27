@@ -3,6 +3,39 @@ fn displayAlpha obj = (
 	obj.vertexColorType = #alpha
 	obj.showVertexColors = true
 )
+fn growVertSel obj sel iterations = (
+	
+	for i = 1 to iterations do sel = polyop.getVertsUsingFace obj (polyop.getFacesUsingVert obj sel)
+	return sel
+)
+fn blendVertexAlpha val_a val_b iterations:1 = (
+
+	obj = (selection as array)[1]
+	if obj == undefined do return false
+	if classOf obj != Editable_Poly do convertToPoly obj	
+	vsel_1 = polyOp.getVertSelection obj
+	if (vsel_1 as array).count == 0 do return false
+	suspendEditing()
+	vsel_2 = growVertSel obj vsel_1 1
+	vsel_intersection = vsel_2 - vsel_1
+	convertToMesh obj
+	meshop.setVertAlpha obj -2 vsel_1 val_a
+	meshop.setVertAlpha obj -2 vsel_intersection val_b
+	update obj
+	convertToPoly obj
+	resumeEditing()
+	subobjectLevel = 1
+	displayAlpha obj
+	--polyOp.setVertSelection obj vsel_intersection
+)
+blendVertexAlpha 0.2 0.5
+
+
+
+
+
+/*
+
 fn setVertAlpha obj val = ( --val 0.0 - 1.0
 	
 	max modify mode
@@ -29,7 +62,7 @@ obj = $
 val = 0.5
 displayAlpha $
 setVertAlpha $ 0.5
-
+*/
 
 
 /*
@@ -160,7 +193,7 @@ fn setRandomVertexAlpha float_min float_max = (
 	)
 	update obj
 )
-*/
+
 obj = $
 fn updateAlpha obj = (
 	
@@ -169,12 +202,12 @@ fn updateAlpha obj = (
 	convertToPoly obj
 	resumeEditing()
 	subobjectlevel = 1
-	/*obj.vertexColorType = #color
+	obj.vertexColorType = #color
 	update obj
 	obj.vertexColorType = #alpha
-	update obj*/
+	update obj
 )
-
+*/
 /*
 setRandomVertexAlpha 0.1 0.4
 setRandomVertexAlpha 0.7 1.0

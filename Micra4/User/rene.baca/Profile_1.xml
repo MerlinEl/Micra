@@ -14,11 +14,11 @@
   </Properties_1>
   <Properties_2>
     <mcMicraDialog active="true" pos="[2172,222]" size="[148,66]" title="" />
-    <mcCustomizeDialog active="false" pos="[1350,670]" size="[600,404]" title="" />
+    <mcCustomizeDialog active="false" pos="[1170,510]" size="[224,404]" title="" />
     <mcProgramDialog active="undefined" pos="[2298,0]" size="[256,232]" title="" />
     <mcisoDialog active="false" pos="[181,152]" size="[140,400]" title="" />
     <mcModifierDialog active="undefined" pos="[100,100]" size="[400,400]" title="" />
-    <mcIconMakerDialog active="false" pos="[1330,270]" size="[730,500]" title="" />
+    <mcIconMakerDialog active="false" pos="[580,420]" size="[730,500]" title="" />
     <mcDeepIsolateDialog active="true" pos="[1118,86]" size="[84,44]" title="" />
     <mcMoveTowardsDialog active="undefined" pos="[441,377]" size="[200,76]" title="" />
     <mcClonerDialog active="undefined" pos="[1013,725]" size="[164,296]" title="" />
@@ -201,5 +201,7 @@
     <btn_J10 action="Object_Inspector" icon="259" />
     <btn_J9 action="Vertex_Color" icon="258" />
     <btn_J12 action="Smart_LS3D_Export" icon="260" />
+    <btn_J11 action="Vertex_Alpha_Blend" icon="261" />
+    <btn_J13 action="Get_Edges_Length" icon="262" />
   </Buttons>
 </USER>

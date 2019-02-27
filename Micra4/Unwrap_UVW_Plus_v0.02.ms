@@ -1,9 +1,10 @@
 --Aditional Functions for Unwrap Editor 2012
-
 --Convert selection between subobject levels*
 --Select edge border*
 --Pack selection together in place*
 --offset selection by one frame x y z*
+--learn more about mapping api
+--http://www.gritengine.com/maxscript_html/unwrap_uvw_modifier.htm
 
 try (destroyDialog mcUnwrapEditorDialog) catch ()
 
@@ -40,8 +41,12 @@ rollout mcUnwrapEditorDialog "UV+" width:96 height:456
 	button btn_align_r "R" pos:[64,292] width:24 height:24 images:(mcCall.getIcon 235) toolTip:"Align Right"
 	button btn_align_c "C" pos:[36,292] width:24 height:24 images:(mcCall.getIcon 236) toolTip:"Align Center"
 	
+	button btn_align_v "V" pos:[8,324] width:24 height:24 toolTip:"Align Verticaly"
+	button btn_align_h "H" pos:[64,324] width:24 height:24 toolTip:"Align Horizontaly"
+	
 	GroupBox 'grp12' "Complex" pos:[4,356] width:88 height:96 align:#left
 	button 'btn_lm' "p1" pos:[8,372] width:24 height:24 images:(mcCall.getIcon 116) toolTip:"Add Lightmap"
+	button 'btn_stitch' "St" pos:[34,372] width:24 height:24 toolTip:"Stitch Selected Edges (Experimental)"
 	button 'btn_randomize_x' "RandX" pos:[8,400] width:36 height:24 toolTip:"Move Elements Random X" align:#left
 	button 'btn_randomize_y' "RandY" pos:[48,400] width:36 height:24 toolTip:"Move Elements Random Y" align:#left
 	spinner 'spn_randomize' "" pos:[8,428] width:80 height:16 range:[0,100,0.5] align:#left
@@ -237,7 +242,7 @@ rollout mcUnwrapEditorDialog "UV+" width:96 height:456
 			gco.SelectFaces sel_faces
 		)
 	)
-	fn randomizeElements axis = (
+	fn randomizeElements axis = ( --works OK
 		
 		gco = modpanel.getcurrentobject()
 		local sel_faces = gco.getSelectedFaces()
@@ -248,17 +253,113 @@ rollout mcUnwrapEditorDialog "UV+" width:96 height:456
 			--format "fcount:%\n" sel_faces.numberset
 			gco.SelectFaces #{i}
 			gco.selectElement()
-			local sel_center = gco.getSelCenter()
+			local element_pos = gco.getPivotOffset()
+			local random_val = random 0.1 spn_randomize.value
 			case axis of (
 				
-				#X:sel_center.x += random 0.1 spn_randomize.value
-				#Y:sel_center.y += random 0.1 spn_randomize.value
+				#X:element_pos.x += random_val
+				#Y:element_pos.y += random_val
 			)
-			gco.MoveSelected (sel_center)
+			gco.MoveSelected (element_pos)
 			excluded_faces += gco.getSelectedFaces()
 		)
+		gco.SelectFaces sel_faces
 		print "Shift Uv Elements > Done!"
 	)
+	
+	fn alignElements way = ( --works ok
+		
+		gco = modpanel.getcurrentobject()	
+		local sel_faces = gco.getSelectedFaces()
+		local excluded_faces = #()
+		undo "Align Elements V-H" on for i in sel_faces do (
+			
+			if findItem excluded_faces i  != 0 do continue
+			gco.SelectFaces #{i}
+			gco.selectElement()
+			local fsel = gco.getSelectedFaces()
+			local pos_x, pos_y, width, height
+			local the_area = gco.getArea fsel &pos_x &pos_y &width &height &area_uvw &area_geom 
+			case way of (
+			
+				#vertical: if width > height do gco.rotateSelectedCenter (degToRad  90)
+				#horizontal: if width < height do gco.rotateSelectedCenter (degToRad  90)
+			)
+			excluded_faces += fsel
+		)
+		print "Align Elements > Done!"
+	)
+	fn getEdgePos edge_index = (
+	
+		gco.SelectEdges #{edge_index}
+		gco.edgeToVertSelect() 	
+		local vsel = (gco.getSelectedVertices()) as Array
+		local p1 = gco.getVertexPosition 0 vsel[1]
+		local p2 = gco.getVertexPosition 0 vsel[2]
+		(p1 + p2) / 2
+	)
+	fn getEdgeByPos pos = (
+		
+		local all_vertices = #{1..(gco.NumberVertices())} 
+		gco.selectVertices all_vertices
+		gco.vertToEdgeSelect()
+		all_edges = gco.getSelectedEdges()		
+		with redraw off for i in all_edges do (
+			
+			local edge_pos = getEdgePos i
+			if edge_pos ==  pos do return i
+		)
+		return -1
+	)
+	fn stitchSelectedEdges = (
+		
+		--stitching cause reindex edges, then wee ned to > 
+		--wee need to save edge selection as points of center position
+		--after wee need to pick up each edge by position
+		--edges will change scale while using gco.stitchVertsNoParams() 
+		--thiss may cause missing conections 
+		--to keep edge position same , disable scale cluster >  gco.stitchVerts true 0.0
+		gco = modpanel.getcurrentobject()	
+		local sel_edges = gco.getSelectedEdges()
+		format "stored selected edges:%\n" sel_edges
+		local edges_pos = for i in sel_edges collect getEdgePos i
+		undo "Stitch Selected Edges" on for p in edges_pos do ( --for each stored edge position
+			
+			local edge_index = getEdgeByPos p
+			if edge_index == -1 then format "skip edge:%\n" edge_index else (
+				
+				format "stitch edge:%\n" edge_index
+				gco.stitchVerts true  0.0 -- 0.0 disable stretch picked edge
+				--gco.stitchVertsNoParams()
+			)
+		)
+		messageBox "Stitching was Finnished." title:micra.version
+	)	
+	/*
+		not works because of edges reindexing
+		undo "Stitch Selected Edges" on for i in sel_edges do (
+			gco.SelectEdges #{i}
+			format "edge:%\n" i
+			gco.stitchVertsNoParams() 
+		)
+		gco.SelectEdges sel_edges
+
+	--another way is pick real geometry edges and find each in uvw
+	fn stitchSelectedEdges = (
+		
+		gco = modpanel.getcurrentobject()	
+		--#{203..204, 206, 217}
+		local sel_edges_geo = gco.getSelectedGeomEdges()  --convert the UV edges to Geo Edges BitArray
+		undo "Stitch Selected Edges" on for geo_edge_index in sel_edges_geo as Array do (
+		--	gco.setSelectedGeomEdges #{}
+		--	gco.setSelectedGeomEdges #{170}
+			gco.SelectEdges sel_edges_geo
+			local uv_edge_index 
+			gco.SelectEdges #{uv_edge_index}
+			format "edge:%\n" i
+			gco.stitchVertsNoParams() 
+		)
+	)*/
 	--<
 	
 	-->Actions
@@ -281,6 +382,9 @@ rollout mcUnwrapEditorDialog "UV+" width:96 height:456
 	on btn_lm pressed do undo "Add Lightmap" on mcAction.addLightMap 2
 	on btn_randomize_x pressed do randomizeElements #X
 	on btn_randomize_y pressed do randomizeElements #Y	
+	on btn_align_v pressed do alignElements #vertical
+	on btn_align_h pressed do alignElements #horizontal
+	on btn_stitch pressed do stitchSelectedEdges()
 	--<
 )
 
@@ -297,5 +401,25 @@ rollout mcUnwrapEditorDialog "UV+" width:96 height:456
 
 
 /*
+fn uvToMesh node channel:1 scaleFactor:1.0 = 
+(
+	_mesh = snapshotasmesh node
+	sc = point3 scaleFactor scaleFactor scaleFactor
+	verts = for v=1 to meshop.getnummapverts _mesh channel collect (meshop.getmapvert _mesh channel v)*sc
+	faces = for f=1 to meshop.getnummapfaces _mesh channel collect meshop.getmapface _mesh channel f
+		
+	mesh name:(node.name + "_uvmesh") vertices:verts faces:faces	
+)
+
+
+		local all_vertices = #{1..(gco.NumberVertices())} 
+		gco.selectVertices all_vertices
+		gco.vertToEdgeSelect()
+		all_edges = gco.getSelectedEdges()		
+		gco.vertToFaceSelect()
+		all_faces = gco.getSelectedFaces()	
+
+
+
 showinterfaces (Unwrap_UVW())
 */

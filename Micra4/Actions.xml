@@ -204,6 +204,7 @@
     <Link_Plus icon="1" cmd="mcAction.link_plus()" tooltip="Link Plus" />
     <Get_SHGame_Version icon="183" cmd="mcSystem.getSHGameVersion()" tooltip="Get SHGame Version" />
     <LS3D_Model_Manager icon="254" cmd="mcFile.fileInVersion LS3D_Model_Manager" tooltip="LS3D Model Manager" />
+    <Get_Edges_Length icon="262" cmd="mcAction.getEdgesLength()" tooltip="Get Edges Length" />
   </Helpers>
   <Animation>
     <Merge_Animation icon="130" cmd="mcFile.fileInVersion Merge_Animation" tooltip="Merge Animation" />
@@ -221,5 +222,6 @@
   <TuKej>
     <Object_Inspector icon="259" cmd="mcFile.fileInVersion Object_Inspector" tooltip="Object Inspector" />
     <Smart_LS3D_Export icon="260" cmd="mcActionsTukej.smartLS3DExport()" tooltip="Smart LS3D Export" />
+    <Vertex_Alpha_Blend icon="261" cmd="mcFile.fileInVersion Vertex_Alpha_Blend" tooltip="Vertex Alpha Blend" />
   </TuKej>
 </ACTIONS>

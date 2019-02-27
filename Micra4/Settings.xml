@@ -110,6 +110,7 @@
     <Actions_Editor val="0.01" />
     <Vertex_Color val="1.02" />
     <Object_Inspector val="0.02" />
+    <Vertex_Alpha_Blend val="0.01" />
   </Version>
   <SystemFiles val="Micra's Settings Files">
     <Actions val="Contains all accesible Micra's actions" />
