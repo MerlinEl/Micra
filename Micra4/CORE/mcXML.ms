@@ -382,7 +382,7 @@ public
 		if node_name.count == 0 do ( --split path("//GALLERY/Nova/Dot/image_1") to target_path("//GALLERY/Nova/Dot/") and node_name("image_1")
 		
 			local path_arr = filterString target_path "/"
-			if path_arr.count < 2 do (print "Invalid path"; return false)
+			if path_arr.count < 2 do (print "Invalid path"; return undefined)
 			node_name = path_arr[path_arr.count] --get last path name
 			target_path = trimright target_path node_name --remove last path name
 			target_path = trimright target_path "/" --remove last slash
@@ -397,15 +397,25 @@ public
 			--format "Path not found! Create new path [ % ].\n" target_path
 			local path_array = filterString target_path "/" --#("GALLERY", "Nova")
 			--format "path_array:%\n" path_array
-			--found which parts of path not exist and create them
+			--found which parts of path not exist and create them!!!!!!!
 			local progresive_path = "//" + path_array[1] 
 			local progresive_node = rootNode.getNode progresive_path
+			 --if first node not found create one at base --test it to be finished
+			if progresive_node == undefined do (
+				
+					local next_node = mcXMLNode()
+					next_node.init (doc.createElement path_array[1])
+					rootNode.appendNode next_node
+					progresive_node = rootNode.getNode progresive_path
+			)
+			--< test this one with LS3D Model Manager --paths without SETTINGS/ --or always put in write full node path like "SETTINGS/ROOT/edit"
+			
 			for i = 2 to path_array.count do (
 			
 				progresive_path = progresive_path + "/" + path_array[i]
 				if rootNode.getNode progresive_path == undefined then (
 				
-					--format "creating node at path: [ % ]\n" progresive_path
+					format "creating node at path: [ % ]\n" progresive_path
 					local next_node = mcXMLNode()
 					next_node.init (doc.createElement path_array[i])
 					progresive_node.appendNode next_node

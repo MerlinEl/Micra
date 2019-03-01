@@ -64,6 +64,7 @@ rollout LS3DModelManagerDialog "LS3D Model Manager v1.0" width:764 height:284 (
 	fn getINIDirs head = (
 	
 		local keys = mcFile.readSettings SettingsINI head type:"keys"
+		if keys.count == 0 do return #()
 		local paths = for k in keys collect mcFile.readSettings SettingsINI (head+"/"+k)
 		return paths	
 	)
@@ -94,25 +95,29 @@ rollout LS3DModelManagerDialog "LS3D Model Manager v1.0" width:764 height:284 (
 	)
 	on LS3DModelManagerDialog open do (
 		
-		root_edit_dir = mcFile.readSettings SettingsINI "ROOT/edit"
-		root_resources_dir = mcFile.readSettings SettingsINI "ROOT/res"
-		edt_import.text = mcFile.readSettings SettingsINI "FBX/import"
-		edt_export.text = mcFile.readSettings SettingsINI "FBX/export"
+		if not doesFileExist SettingsINI do return OK --settings file was not created yet
+		root_edit_dir = mcFile.readSettings SettingsINI "SETTINGS/ROOT/edit"
+		root_resources_dir = mcFile.readSettings SettingsINI "SETTINGS/ROOT/res"
+		edt_import.text = mcFile.readSettings SettingsINI "SETTINGS/FBX/import"
+		edt_export.text = mcFile.readSettings SettingsINI "SETTINGS/FBX/export"
 		
-		ddl_perforce_path.items = getINIDirs "PERFORCE"
-		ddl_perforce_path.selection = execute(mcFile.readSettings SettingsINI "SELECTION/perforce_path")
+		ddl_perforce_path.items = getINIDirs "SETTINGS/PERFORCE"
+		ddl_perforce_path.selection = execute(mcFile.readSettings SettingsINI "SETTINGS/SELECTION/perforce_path")
 		updatePerforcePaths "undefined"
 		setFocus edt_asset_name
 	)
 	
 	on LS3DModelManagerDialog close do (
 		
-		mcFile.saveSettings SettingsINI "FBX/import" edt_import.text
-		mcFile.saveSettings SettingsINI "FBX/export" edt_export.text
-		mcFile.saveSettings SettingsINI "SELECTION/perforce_path" (ddl_perforce_path.selection as string)
-		mcFile.delSettings SettingsINI "PERFORCE" type:"keys" --remove all sub items
-		local cnt = 0
-		for i in ddl_perforce_path.items do mcFile.saveSettings SettingsINI ("PERFORCE/loc_"+((cnt+=1) as string)) i
+		if edt_import.text != "" do mcFile.saveSettings SettingsINI "SETTINGS/FBX/import" edt_import.text
+		if edt_export.text != "" do mcFile.saveSettings SettingsINI "SETTINGS/FBX/export" edt_export.text
+		if ddl_perforce_path.selection != 0 do mcFile.saveSettings SettingsINI "SETTINGS/SELECTION/perforce_path" (ddl_perforce_path.selection as string)
+		if doesFileExist SettingsINI do mcFile.delSettings SettingsINI "SETTINGS/PERFORCE" type:"keys" --remove all sub items
+		if ddl_perforce_path.items.count != 0 do (
+		
+			local cnt = 0
+			for dir in ddl_perforce_path.items do mcFile.saveSettings SettingsINI ("SETTINGS/PERFORCE/loc_"+((cnt+=1) as string)) dir
+		)
 	)
 	
 	on btn_import_fbx pressed do (
@@ -189,6 +194,7 @@ rollout LS3DModelManagerDialog "LS3D Model Manager v1.0" width:764 height:284 (
 		local dir = getSavePath caption:"Add Perforce Edit Path:" initialDir:"D:\\!2k_games\\scotch\\edit"
 		if (dir == undefined) do return OK
 		local edit_pos = findString dir "edit"
+		if edit_pos == undefined do (format "Invalid dir:%\n" dir; return false)
 		dir = substring dir (edit_pos+5) -1
 		ddl_perforce_path.items = append ddl_perforce_path.items (dir)
 		ddl_perforce_path.selection = ddl_perforce_path.items.count

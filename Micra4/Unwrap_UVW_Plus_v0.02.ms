@@ -46,7 +46,10 @@ rollout mcUnwrapEditorDialog "UV+" width:96 height:456
 	
 	GroupBox 'grp12' "Complex" pos:[4,356] width:88 height:96 align:#left
 	button 'btn_lm' "p1" pos:[8,372] width:24 height:24 images:(mcCall.getIcon 116) toolTip:"Add Lightmap"
+	
 	button 'btn_stitch' "St" pos:[34,372] width:24 height:24 toolTip:"Stitch Selected Edges (Experimental)"
+	button 'btn_fit' "St" pos:[64,372] width:24 height:24 toolTip:"Fit To Rect (Experimental)"
+	
 	button 'btn_randomize_x' "RandX" pos:[8,400] width:36 height:24 toolTip:"Move Elements Random X" align:#left
 	button 'btn_randomize_y' "RandY" pos:[48,400] width:36 height:24 toolTip:"Move Elements Random Y" align:#left
 	spinner 'spn_randomize' "" pos:[8,428] width:80 height:16 range:[0,100,0.5] align:#left
@@ -335,6 +338,55 @@ rollout mcUnwrapEditorDialog "UV+" width:96 height:456
 		)
 		messageBox "Stitching was Finnished." title:micra.version
 	)	
+	/**	
+	*@ Created by br0t 2014
+	*@ Mod by MerlinEl 2019
+	*@ Usage > Distorts all UVs to fit into the UV square (0 to 1 in UV space).
+	*/
+	fn stretchUvsToFitSquare = (
+
+		local obj = (selection as array)[1]
+		if obj == undefined do return false
+		gco = modpanel.getcurrentobject()
+		-- If there is no Unwrap modifier, exit
+		if gco == undefined do return false
+		-- Get vertex arrays
+		local geom_vertices = #{1 .. obj.numtverts}	
+		local vertices_pos = for i in geom_vertices collect (getTVert obj i)
+
+		-- Select all vertices for transformation
+		gco.selectVerticesByNode geom_vertices obj
+
+		-- Get left/lower limit
+		minY = minX = 999999
+		for texVert in vertices_pos do
+		(
+		if texVert.x < minX do minX = texVert.x
+		if texVert.y < minY do minY = texVert.y
+		)--end if
+
+		-- Move all to lower left corner of UV square	
+		moveX = minX * -1
+		moveY = minY * -1
+		gco.moveSelectedVertices [moveX, moveY, 0]
+
+		-- Verts have been changed so update the array
+		vertices_pos = for i in geom_vertices collect (getTVert obj i)
+
+		-- Get right/upper limit
+		maxY = maxX = -999999
+		for texVert in vertices_pos do
+		(
+		if texVert.x > maxX do maxX = texVert.x
+		if texVert.y > maxY do maxY = texVert.y
+		)--end if
+
+		-- Stretch to upper right corner of UV square
+		scaleX = 1.0 / maxX
+		scaleY = 1.0 / maxY
+		uvOrigin = [0, 0, 0]
+		gco.scaleSelectedXY scaleX scaleY uvOrigin
+	)--end fn
 	/*
 		not works because of edges reindexing
 		undo "Stitch Selected Edges" on for i in sel_edges do (
@@ -385,6 +437,7 @@ rollout mcUnwrapEditorDialog "UV+" width:96 height:456
 	on btn_align_v pressed do alignElements #vertical
 	on btn_align_h pressed do alignElements #horizontal
 	on btn_stitch pressed do stitchSelectedEdges()
+	on btn_fit pressed do stretchUvsToFitSquare()
 	--<
 )
 

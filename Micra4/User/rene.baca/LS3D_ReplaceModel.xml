@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<SETTINGS>
+  <SELECTION>
+    <perforce_path val="10" />
+  </SELECTION>
+  <PERFORCE>
+    <loc_1 val="models\city\lost_heaven\districts" />
+    <loc_2 val="models\cine\generic" />
+    <loc_3 val="models\env_location\_lh\lh_loc_sarahs_apartment" />
+    <loc_4 val="models\env_generic\_lh\country_side" />
+    <loc_5 val="models\env_generic\_lh\interior_props" />
+    <loc_6 val="models\city\lost_heaven\08_oakwood" />
+    <loc_7 val="models\cine\cine_1160" />
+    <loc_8 val="missions\_test_rene" />
+    <loc_9 val="models\city\lost_heaven\districts\lh_10_countryside" />
+    <loc_10 val="models\city\lost_heaven\districts\lh_00_generic" />
+  </PERFORCE>
+  <FBX>
+    <import val="D:\!2k_games\scotch_dev\exported" />
+    <export val="C:\Users\Rene.baca\Documents\3dsMax\export" />
+  </FBX>
+</SETTINGS>

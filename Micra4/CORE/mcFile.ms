@@ -376,8 +376,8 @@ struct MICRA_FILE (
 		local xml = mcXML xml_file
 		if not xml.exists() then ( --create xml file
 		
-			local root_node = (filterString xml_path "/")[1] --get first item at path : "Settings/Data/Item"  > "Settings"
-			xml.addRootNode xml_path	
+			local root_node_name = (filterString xml_path "/")[1] --get first item at path : "Settings/Data/Item"  > "Settings"
+			xml.addRootNode root_node_name	
 			
 		) else if backup > 0 do ( --backup file
 		
@@ -388,12 +388,12 @@ struct MICRA_FILE (
 			"val"	: (
 				local xml_node = xml.getNode ("//"+xml_path)
 				if xml_node == undefined do xml_node = xml.addNode ("//"+xml_path) "" --create empty node
-				if classOf data != String do (format "Invalid data input, except an String\n"; return false)
+				if classOf data != String do (format "mcFile > saveSettings > Invalid data input, except an String\n"; return false)
 				if data.count > 0 do xml_node.setAttribute "val" (data as String)
 			)
 			"keys"	: (
 				data = objectToAttribs data --convert object in to attribute array
-				if classOf data != Array do (format "Invalid data input, except an  Array\n"; return false)
+				if classOf data != Array do (format "mcFile > saveSettings > Invalid data input, except an  Array\n"; return false)
 				for key in data do xml.addNode ("//"+xml_path) key
 			)
 			"attribs"	: (
@@ -401,18 +401,19 @@ struct MICRA_FILE (
 				local xml_node = xml.getNode ("//"+xml_path)
 				if xml_node == undefined do xml_node = xml.addNode ("//"+xml_path) "" --create empty node	
 				data = objectToAttribs data --convert object in to attribute array
-				if classOf data != Array do (format "Invalid data input, except an Array\n"; return false)
+				if classOf data != Array do (format "mcFile > saveSettings > Invalid data input, except an Array\n"; return false)
 				if data.count > 0 do xml_node.setAttributes data
 			)
 			default	: (
 			
 				local xml_node = xml.getNode ("//"+xml_path)
 				if xml_node == undefined do xml_node = xml.addNode ("//"+xml_path) "" --create empty node	
-				if classOf data != String do (format "Invalid data input, except an String\n"; return false)
+				if xml_node == undefined do (format "mcFile > saveSettings > Unable create node at:%\n" xml_path; return false)
+				if classOf data != String do (format "mcFile > saveSettings > Invalid data input, except an String\n"; return false)
 				if data.count > 0 do xml_node.setAttribute (if type == "default" then "val" else type) (data as String)
 			)
 		)
-		if not xml.save() do ((format "Unable Save File! [%]\n" xml_file); return false)
+		if not xml.save() do ((format "mcFile > saveSettings > Unable Save File! [%]\n" xml_file); return false)
 		true
 	),
 	/**
@@ -427,7 +428,7 @@ struct MICRA_FILE (
 	*/
 	fn readSettings xml_file xml_path type:"default" = (
 
-		if not doesFileExist xml_file do ((format "Missing File! [%]\n" xml_file); return "")
+		if not doesFileExist xml_file do ((format "mcFile > readSettings > Missing File! [%]\n" xml_file); return "")
 		local xml = mcXML xml_file
 		local xml_node = xml.getNode ("//"+xml_path)
 		if xml_node == undefined do return ""
@@ -450,7 +451,7 @@ struct MICRA_FILE (
 	*/
 	fn delSettings xml_file xml_path type:"default" = (
 	
-		if not doesFileExist xml_file do ((format "Missing File! [%]\n" xml_file); return false)
+		if not doesFileExist xml_file do ((format "mcFile > delSettings > Missing File! [%]\n" xml_file); return false)
 		local xml = mcXML xml_file
 		case type of (
 		
@@ -458,12 +459,12 @@ struct MICRA_FILE (
 			"attr"	: xml.delAllAttributes ("//"+xml_path)
 			default	: xml.delNode ("//"+xml_path)
 		)
-		if not xml.save() do ((format "Unable Save File! [%]\n" xml_file); return false)
+		if not xml.save() do ((format "mcFile > delSettings > Unable Save File! [%]\n" xml_file); return false)
 		true
 	),
 	fn swapSettings xml_file xml_path_a xml_path_b = (
 	
-		if not doesFileExist xml_file do ((format "Missing File! [%]\n" xml_file); return false)
+		if not doesFileExist xml_file do ((format "mcFile > swapSettings > Missing File! [%]\n" xml_file); return false)
 		local xml = mcXML xml_file
 		xml.swapAttributes xml_path_a xml_path_b
 		xml.save()
