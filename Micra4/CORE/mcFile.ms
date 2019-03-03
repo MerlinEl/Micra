@@ -358,25 +358,26 @@ struct MICRA_FILE (
 		xml_path	: String	> target xml node > "Settings/Tools" or simple "Tools"
 		data		: String	> value to save
 		backup		: Int		> backups count
+	*@Rules > Is better to use full path to write in xml > rootNode(USER) > "USER/Properties_2/mcCustomizeDialog"
 	*@Example
-		mcFile.saveSettings xml_file "Version/Customize_Colors" "0.05" backup:4 --add-replace node with parameter > val = "0.05", also create backup first
-		mcFile.saveSettings xml_file "Selection" (for i in selection collect i.name) type:"keys" --collect all node names under path "Selection"
-		mcFile.saveSettings xml_file "Selection/Sphere050" "" --add-replace node only
-		mcFile.saveSettings xml_file "Selection/Sphere005" "78" --add-replace node with parameter > val = "78"
-		mcFile.saveSettings xml_file "Selection/Sphere005" "78" type:"cnt" --add-replace node with parameter > cnt = "78"
+		mcFile.saveSettings Micra.UserSettings "USER/Settings/Test_Key" "0.05" backup:4 --add-replace node with parameter > val = "0.05", also create backup first
+		mcFile.saveSettings Micra.UserSettings "USER/Test_Sub2/Test_Key" "" --add-replace node only
+		mcFile.saveSettings Micra.UserSettings "USER/Test_Sub/Test_Key" "0.05" --add-replace node with value > val = "78"
+		mcFile.saveSettings Micra.UserSettings "USER/Test_Sub3" (for i=1 to 5 collect ("key_"+i as string)) type:"keys" --write multiple keys under a node
+		mcFile.saveSettings Micra.UserSettings "USER/Sphere005" "78" type:"cnt" --add-replace node with parameter > cnt = "78"
 		node_attribs = (mcObject.new()).addMore #(
 
 			mcItem "action" "Move_To_X", 
 			mcItem "icon" "28"
 		)
-		mcFile.saveSettings Micra.UserProfile "Buttons/btn_B4555" node_attribs type:"attribs"
+		mcFile.saveSettings Micra.UserSettings "USER/Test_Sub/Test_Key2" node_attribs type:"attribs"
 	*/
 	fn saveSettings xml_file xml_path data type:"default" backup:0 = (
 		
 		local xml = mcXML xml_file
 		if not xml.exists() then ( --create xml file
 		
-			local root_node_name = (filterString xml_path "/")[1] --get first item at path : "Settings/Data/Item"  > "Settings"
+			local root_node_name = (filterString xml_path "/")[1] --get first item at path : "Settings/Data/Item"  > rootNode(Settings)
 			xml.addRootNode root_node_name	
 			
 		) else if backup > 0 do ( --backup file
@@ -392,7 +393,6 @@ struct MICRA_FILE (
 				if data.count > 0 do xml_node.setAttribute "val" (data as String)
 			)
 			"keys"	: (
-				data = objectToAttribs data --convert object in to attribute array
 				if classOf data != Array do (format "mcFile > saveSettings > Invalid data input, except an  Array\n"; return false)
 				for key in data do xml.addNode ("//"+xml_path) key
 			)
@@ -417,14 +417,20 @@ struct MICRA_FILE (
 		true
 	),
 	/**
+	*@Usage > Read XML data. 
+		xml_file	: String	> xml file path
+		xml_path	: String	> target xml node > "Settings/Tools" or simple "Tools"
+		type		: String	> attribute(get specific value) or nothing(default get "val") or "keys"(get nodes list uder key)
+		return		: String or Array
+	*@Rules > Is better to use full path to read from xml > rootNode(USER) > "USER/Properties_2/mcCustomizeDialog"
 	*@Example
-		cat_names = mcFile.readSettings Micra.ActionsXML "ACTIONS" type:"keys"
+		pos = mcFile.readSettings Micra.UserProfile "USER/Properties_2/mcCustomizeDialog" type:"pos"
+		prop2_dialogs = mcFile.readSettings Micra.UserProfile "USER/Properties_2" type:"keys"
+		help_txt = mcFile.readSettings Micra.ActionsHelpXML "ACTIONS/Pivot/Afect_Pivot_Only" --using default type "val"
 		all_parameters = mcFile.readSettings Micra.ActionsXML "ACTIONS/Object/Spline_Magnet" type:"attribs"
 		all_parameters.print()
-		help_txt = mcFile.readSettings Micra.ActionsHelpXML "Pivot/Afect_Pivot_Only"
-		pos = mcFile.readSettings Micra.UserProfile "Properties_2/mcCustomizeDialog" type:"pos" --uses default type
-		is_active = mcFile.readSettings Micra.UserProfile "Properties_2/mcCustomizeDialog" type:"active" --uses default type
-		size = mcFile.readSettings Micra.UserProfile "Properties_2/mcCustomizeDialog" type:"size" --uses default type
+		is_active = mcFile.readSettings Micra.UserProfile "USER/Properties_2/mcCustomizeDialog" type:"active"
+		size = mcFile.readSettings Micra.UserProfile "USER/Properties_2/mcCustomizeDialog" type:"size"
 	*/
 	fn readSettings xml_file xml_path type:"default" = (
 
@@ -444,10 +450,15 @@ struct MICRA_FILE (
 		)
 	),
 	/**
+	*@Usage > Delete XML data. 
+		xml_file	: String	> xml file path
+		xml_path	: String	> target xml node > "Settings/Tools" or simple "Tools"
+		type		: String	> attribute(get specific value) or nothing(default get "val") or "keys"(get nodes list uder key)
+	*@Rules > Is better to use full path to delete from xml > rootNode(USER) > "USER/Properties_2/mcCustomizeDialog"
 	*@Example
-		mcFile.delSettings xml_file "Selection" type:"keys" --remove all nodes under Selection path
-		mcFile.delSettings xml_file "Selection/Sphere005" type:"attr" --remove only atributes
-		mcFile.delSettings xml_file "Selection/sphere_01" --remove single node
+		mcFile.delSettings Micra.UserSettings "USER/Test_Sub3" type:"keys" --remove all nodes under Selection path
+		mcFile.delSettings Micra.UserSettings "USER/Test_Sub/Test_Key2" type:"attr" --remove only atributes
+		mcFile.delSettings Micra.UserSettings "USER/Test_Sub" --remove single node
 	*/
 	fn delSettings xml_file xml_path type:"default" = (
 	

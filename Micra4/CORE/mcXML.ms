@@ -65,7 +65,7 @@ Global mcXMLNode
 
 	xml = mcXML (Micra.TempDir + "Actions_01.xml")
 	xml.addRootNode "ACTIONS"	
-	xml.fromString mcXMLTemp._template_2
+	xml.fromString mcXMLTemp._template_1
 	new_node = xml.addNode "//SETTINGS/Nova/Day" "d_001" attr:#(mcXMLAttrib "sell" "1000")
 	xml.addNode "//SETTINGS/Nova/Day" "d_001" attr:#(mcXMLAttrib "sell" "2000") override:true
 	xml.toString()
@@ -77,28 +77,7 @@ DotNet.LoadAssembly "System.Xml"
 
 struct MICRA_XML_TEMPLATES (
 
-	_template_1 = ( --personaly newer use this type of struct, _template_2 is better
-		"<?xml version='1.0' encoding='UTF-8'?>" +
-		"<BOOKSTORE>" +
-			"<book category='COOKING'>" +
-				"<title lang='en'>Everyday Italian</title>" +
-				"<author>Giada De Laurentiis</author>" +
-				"<year>2005</year>" +
-				"<price>30.00</price>" +
-			"</book>" +
-			"<book category='CHILDREN'>" +
-				"<title lang='en'>Harry Potter</title>" +
-				"<author>J K. Rowling</author>" +
-				"<year>2005</year>" +
-				"<price>29.99</price>" +
-			"</book>" +
-			"<book genre='novel' ISBN='1-861001-57-5'>" +
-			"<title>Pride And Prejudice</title>" +
-			"</book>" +
-		"</BOOKSTORE>"
-	),
-	_template_2 = (
-	
+	_template_1 = (
 		"<?xml version='1.0' encoding='UTF-8'?>" +
 		"<SETTINGS>" +
 			"<Buttons>" +
@@ -119,6 +98,27 @@ struct MICRA_XML_TEMPLATES (
 				"<mcProgramDialog val='#(undefined, [2298,0], [256,232])' />"  +
 			"</Properties_2>" +
 		"</SETTINGS>" 
+	),
+	_template_2 = ( --personaly I newer use this type of xml
+	
+		"<?xml version='1.0' encoding='UTF-8'?>" +
+		"<BOOKSTORE>" +
+			"<book category='COOKING'>" +
+				"<title lang='en'>Everyday Italian</title>" +
+				"<author>Giada De Laurentiis</author>" +
+				"<year>2005</year>" +
+				"<price>30.00</price>" +
+			"</book>" +
+			"<book category='CHILDREN'>" +
+				"<title lang='en'>Harry Potter</title>" +
+				"<author>J K. Rowling</author>" +
+				"<year>2005</year>" +
+				"<price>29.99</price>" +
+			"</book>" +
+			"<book genre='novel' ISBN='1-861001-57-5'>" +
+			"<title>Pride And Prejudice</title>" +
+			"</book>" +
+		"</BOOKSTORE>"
 	)
 )
 Global mcXMLTemp = MICRA_XML_TEMPLATES()
