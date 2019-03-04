@@ -25,6 +25,10 @@ struct MICRA_TUKEJ_STRUCTURE	(
 	fn smartLS3DExport = (
 		
 		macros.run "LS3D Engine" "LS3DSmartExport"
+	),
+	fn directXLS3DSwitch = (
+		
+		if gLS3DDXSupport != undefined do gLS3DDXSupport.OpenConfigDialog()
 	)
 	/*<end>*/
 )	

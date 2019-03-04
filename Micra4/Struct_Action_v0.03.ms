@@ -1826,36 +1826,8 @@ struct mcAction (
 	),
 	fn breake_to_elements =
 	(
-		if not keyboard.controlPressed 
-		then --clasic way
-		(
-			local obj = (selection as array)[1]
-			if obj == undefined or classOf obj != Editable_Poly do return false
-			max modify mode 
-			local elements = #()
-			--undo "Breake to Elements" on
-			(
-				subobjectlevel = 4
-				local prog = 1
-				while obj.faces.count > 0 do
-				(
-					polyop.SetFaceSelection obj 1
-					obj.selectElement()
-					local element = polyop.getFaceSelection obj
-					local obj_name = uniqueName obj.name
-					polyop.detachFaces obj element asNode:true name:obj_name
-					elements += #(getNodeByName obj_name)
-					mcCall.progeressbar (100.*prog/obj.faces.count)
-					prog += 1
-				)
-				mcCall.progeressbar 100 close:true
-				delete obj
-				select elements
-				mcAction.objectGradient red blue
-			)
-		)
-		else
-		(
+		if  keyboard.controlPressed then ( --break by mat ID
+			
 			local mcCenterPivot
 			fn mcCenterPivot obj =
 			(
@@ -1867,7 +1839,7 @@ struct mcAction (
 			local dettaching = true
 			local ID = 0
 			local new_objects_names = #()
-			undo "Unpack By ID" on while dettaching and not keyboard.escPressed do with redraw off
+			undo "Break By ID" on while dettaching and not keyboard.escPressed do with redraw off
 			(
 				--format "id:%\tdetaching:%\n" id dettaching
 				ID += 1
@@ -1880,7 +1852,49 @@ struct mcAction (
 			clearselection()
 			delete obj
 			for i in new_objects_names do mcCenterPivot (getNodeByName i)
-			messagebox "Unpacked By ID" title:" Finished"
+			messagebox "Break By ID Is Finished!" title:Micra.version
+		)
+		else if  keyboard.shiftPressed then ( --break by polygons
+
+			local obj = (selection as array)[1]
+			if obj == undefined or classOf obj != Editable_Poly do return false
+			max modify mode 
+			undo "Break By Polygons" on (
+				
+				for p = (polyop.getNumFaces obj)-1 to 1 by -1 do (
+					
+					local new_name=uniquename (obj.name+"_00")
+					polyOp.detachFaces obj #{p} delete:true asNode:true name:new_name
+					centerpivot (getnodebyname new_name)
+				)
+			)
+			messagebox "Break By Polygons Is Finished!" title:Micra.version
+		) else ( --break by elements
+			
+			local obj = (selection as array)[1]
+			if obj == undefined or classOf obj != Editable_Poly do return false
+			max modify mode 
+			subobjectlevel = 4
+			--undo "Breake to Elements" on (
+				local prog = 1
+				local elements = #()
+				while obj.faces.count > 0 do
+				(
+					polyop.SetFaceSelection obj 1
+					obj.selectElement()
+					local element = polyop.getFaceSelection obj
+					local obj_name = uniqueName obj.name
+					polyop.detachFaces obj element asNode:true name:obj_name
+					elements += #(getNodeByName obj_name)
+					mcCall.progeressbar (100.*prog/obj.faces.count)
+					prog += 1
+				)
+				delete obj
+				select elements
+				mcAction.objectGradient red blue
+			--)
+			mcCall.progeressbar 100 close:true	
+			messagebox "Break By Elements Is Finished!" title:Micra.version
 		)
 		completeRedraw()
 	),

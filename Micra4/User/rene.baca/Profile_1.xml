@@ -14,7 +14,7 @@
   </Properties_1>
   <Properties_2>
     <mcMicraDialog active="true" pos="[2172,222]" size="[148,66]" title="" />
-    <mcCustomizeDialog active="false" pos="[1170,510]" size="[224,404]" title="" />
+    <mcCustomizeDialog active="false" pos="[1390,220]" size="[224,404]" title="" />
     <mcProgramDialog active="undefined" pos="[2298,0]" size="[256,232]" title="" />
     <mcisoDialog active="false" pos="[181,152]" size="[140,400]" title="" />
     <mcModifierDialog active="undefined" pos="[100,100]" size="[400,400]" title="" />
@@ -34,10 +34,10 @@
     <mcCharPoseDialog active="undefined" pos="[184,304]" size="[146,388]" title="" />
     <mcSaveProfileAsDialog active="true" pos="[1840,370]" size="[240,66]" title="" />
     <mcDgalleryDialog active="undefined" pos="[-993,148]" size="[875,850]" title="" />
-    <mcRandomizeDialog active="undefined" pos="[166,152]" size="[152,332]" title="" />
+    <mcRandomizeDialog active="true" pos="[709,157]" size="[152,332]" title="" />
     <mcColorPaleteDialog active="false" pos="[2304,236]" size="[244,60]" title="" />
     <mcSelVertsInXDialog active="undefined" pos="[100,100]" size="[100,100]" title="" />
-    <mcELOpDialog active="undefined" pos="[100,100]" size="[100,100]" title="" />
+    <mcELOpDialog active="true" pos="[100,100]" size="[220,60]" title="" />
     <mcObjIDDialog active="true" pos="[2187,1018]" size="[144,84]" title="" />
     <mcRenderToTextureModDialog active="undefined" pos="[100,100]" size="[100,100]" title="" />
     <mcSendUVWToPsDialog active="undefined" pos="[100,100]" size="[148,172]" title="" />
@@ -203,5 +203,6 @@
     <btn_J12 action="Smart_LS3D_Export" icon="260" />
     <btn_J11 action="Vertex_Alpha_Blend" icon="261" />
     <btn_J13 action="Get_Edges_Length" icon="262" />
+    <btn_J19 action="DirectX_LS3D_Switch" icon="263" />
   </Buttons>
 </USER>

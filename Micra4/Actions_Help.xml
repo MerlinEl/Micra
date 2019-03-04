@@ -71,7 +71,7 @@
   </Select>
   <Modify>
     <Affect_Backfacing val="Zapne / Vypne oznacovani zadni strany geometrie. Neni dokonceno." />
-    <Breake_To_Elements val="Rozdeli objekt na castice." />
+    <Breake_To_Elements val="Rozdeli objekt na elementy.&#xD;&#xA;+Ctrl Break By ID&#xD;&#xA;+Shift Break by Polygon" />
     <Bridge_Spline val="Vytvori linku mezi dvema polygony. Vyuziti v extrude spline." />
     <Cap_Holes val="Uzavre otvor v geometrii." />
     <Clean_Edges val="Smaze edge i s vertexy." />

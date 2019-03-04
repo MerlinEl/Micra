@@ -454,6 +454,21 @@ rollout mcUnwrapEditorDialog "UV+" width:96 height:456
 
 
 /*
+Render UVVW to textures
+for i=1 to objects.count do
+(
+	select( objects[i] )
+	m = objects[i].modifiers["Unwrap UVW"]
+	if m!= undefined then
+	(
+		s = print objects[i].name
+		m.renderUV ("uvmap_"+s+".png")
+	)
+)
+
+
+
+
 fn uvToMesh node channel:1 scaleFactor:1.0 = 
 (
 	_mesh = snapshotasmesh node

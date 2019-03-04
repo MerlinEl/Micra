@@ -77,7 +77,7 @@ if debug == 5 do format "name:%\t tag:%\n" s.name s.tag
 	)
 --| --DragAndDrop
 	--btn:dotNetObject:System.Windows.Forms.ToolStripMenuItem args:dotNetObject:System.EventArgs
-	fn actionAddRemoveModify s a = (
+	/*fn actionAddRemoveModify s a = (
 		
 		--Send parameter > Depends on choice
 		local action_mode = case s.Text of (
@@ -105,7 +105,7 @@ if debug == 5 do format "name:%\t tag:%\n" s.name s.tag
 			mcGM.setParam "action_editor_switch" action_mode
 			mcFile.fileInVersion "Customize"
 		)
-	)
+	)*/
 	fn onMousedown s a = --drag start
 	(
 		local btn_a = s
@@ -182,13 +182,13 @@ if debug == 5 do format "name:%\t tag:%\n" s.name s.tag
 			)
 			"Right": --RC Menu
 			(
-			
+				--Removed for now 
 				--TODO Focus on method transfer button info
 				--if button mode edit > set customize SaveAction to true else false
 				--if button mode add > set all to false (only drag and drop is allowed)
 				--if button mode create > set customize AddAction to true else false
 				--if button mode create > do not open customize
-				local mco = mcObject()
+				/*local mco = mcObject()
 				mco.addMore #(
 
 					mcItem "dialog" formA,
@@ -212,7 +212,7 @@ if debug == 5 do format "name:%\t tag:%\n" s.name s.tag
 				mcsA.mnu2_create_action.enabled = not action_exists
 				mcsA.mnu2_remove_action.enabled = action_exists
 
-				mcsA.mnu2.Show ( s.PointToScreen a.location ) --show menu	
+				mcsA.mnu2.Show ( s.PointToScreen a.location ) --show menu*/
 			)
 		)
 	)
@@ -235,6 +235,11 @@ if debug == 5 do format "name:%\t tag:%\n" s.name s.tag
 		if not mcs.edit_mode do return false  --Enabled only in Edit Mode
 		mcGM.setParam "form_drop_data" s --store hited element
 	)
+	/*fn onMouseEnter s a = (
+	
+		--local char_str = a.KeyChar  --a.button --a.Keycode.toString()
+		format "Mouse enter on button button tag:% name:%\n" s.tag s.name
+	)*/
 --||
 	fn generateButtons form style:undefined =
 	(
@@ -288,6 +293,7 @@ if debug == 5 do format "name:%\t tag:%\n" s.name s.tag
 			dotNet.addEventHandler btn "MouseClick"   onBtnMouseClick --"MouseClick" 
 			dotNet.addEventHandler btn "MouseDown" onMousedown
 			--dotNet.addEventHandler btn "MouseUp" onBtnMouseUp
+--dotNet.addEventHandler btn "MouseEnter" onMouseEnter  --test mouse enter
 			dotNet.addEventHandler btn "DragEnter"  onDragenter
 			dotNet.addEventHandler btn "DragDrop"  onDragdrop
 			mcs.bobjects += #(btn)
@@ -581,9 +587,9 @@ if debug == 5 do format "name:%\t tag:%\n" s.name s.tag
 		mcs.mnu1.ForeColor = netDrColor (mcUIColors.get #text)
 		mcs.mnu1.ShowImageMargin = false
 		
-		mcs.mnu2.BackColor = netDrColor (mcUIColors.get #back)
+		/*mcs.mnu2.BackColor = netDrColor (mcUIColors.get #back)
 		mcs.mnu2.ForeColor = netDrColor (mcUIColors.get #text)
-		mcs.mnu2.ShowImageMargin = false
+		mcs.mnu2.ShowImageMargin = false*/
 		
 		mcs.lblT.BackColor = netDrColor (mcUIColors.get #back) --(color 84 132 15)
 		mcs.lblT.ForeColor = netDrColor (mcUIColors.get #text)
@@ -615,10 +621,10 @@ if debug == 5 do format "name:%\t tag:%\n" s.name s.tag
 		dotNet.addeventhandler mcs.mnu1_lock  "Click" lockForm
 		dotNet.addeventhandler mcs.mnu1_ren  "Click" renameForm
 		
-		dotNet.addeventhandler mcs.mnu2_add_action "Click" actionAddRemoveModify
+		/*dotNet.addeventhandler mcs.mnu2_add_action "Click" actionAddRemoveModify
 		dotNet.addeventhandler mcs.mnu2_edit_action  "Click" actionAddRemoveModify
 		dotNet.addeventhandler mcs.mnu2_create_action  "Click" actionAddRemoveModify
-		dotNet.addeventhandler mcs.mnu2_remove_action  "Click" actionAddRemoveModify
+		dotNet.addeventhandler mcs.mnu2_remove_action  "Click" actionAddRemoveModify*/
 		
 		dotnet.addEventHandler form "Closed" onCloseForm
 		dotnet.addEventHandler form "VisibleChanged" onCloseForm
@@ -642,11 +648,11 @@ if debug == 5 do format "name:%\t tag:%\n" s.name s.tag
 			mnu1_edit  = mnu1.Items.Add "Edit..." , 
 			mnu1_lock  = mnu1.Items.Add "Lock..." , 
 			mnu1_ren  = mnu1.Items.Add "Rename..." , 
-			mnu2   	   = dotNetObject "ContextMenuStrip",
+			/*mnu2   	   = dotNetObject "ContextMenuStrip",
 			mnu2_add_action = mnu2.Items.Add "Add Action...",
 			mnu2_edit_action  = mnu2.Items.Add "Edit Action..." , 
 			mnu2_create_action  = mnu2.Items.Add "Create Action...",
-			mnu2_remove_action  = mnu2.Items.Add "Remove Action...",
+			mnu2_remove_action  = mnu2.Items.Add "Remove Action...",*/
 			tlp       = dotNetObject "TableLayoutPanel",
 			btnMin    = dotNetObject "button"  ,
 			btnHL     = dotNetObject "button",

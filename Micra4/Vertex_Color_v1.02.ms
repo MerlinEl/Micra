@@ -1,7 +1,49 @@
 Global mcVertexColorDialog
 if ::mcVertexColorDialog != undefined do try(destroyDialog mcVertexColorDialog)catch()
-rollout mcVertexColorDialog "Vertex Color v1.02" width:408 height:256
+rollout mcVertexColorDialog "Vertex Color v1.02" width:408 height:296
 (
+	--interface
+	GroupBox 'grp1' "Color Sets:" pos:[4,4] width:104 height:284 align:#left
+	GroupBox 'grp2' "Actions:" pos:[112,4] width:292 height:284 align:#left
+	
+	button 'btn_1' "button" pos:[44,24] width:52 height:24 align:#left 
+ 
+	button 'btn_2' "button" pos:[44,52] width:52 height:24 align:#left
+	button 'btn_3' "button" pos:[44,80] width:52 height:24 align:#left
+	button 'btn_4' "button" pos:[44,108] width:52 height:24 align:#left 
+ 
+	button 'btn_5' "button" pos:[44,136] width:52 height:24 align:#left 
+ 
+	button 'btn_6' "button" pos:[44,164] width:52 height:24 align:#left 
+ 
+	button 'btn_7' "button" pos:[44,192] width:52 height:24 align:#left
+	button 'btn_8' "button" pos:[44,220] width:52 height:24 align:#left 
+ 
+	button 'btn_show_colors' "ON" pos:[232,112] width:80 height:24 align:#left
+	button 'btn_hide_colors' "OFF" pos:[320,112] width:80 height:24 align:#left
+	button 'btn_show_alpha' "ON" pos:[232,140] width:80 height:24 align:#left
+	button 'btn_hide_alpha' "OFF" pos:[320,140] width:80 height:24 align:#left
+	button 'btn_show_shaded' "ON" pos:[232,168] width:80 height:24 align:#left
+	button 'btn_hide_shaded' "OFF" pos:[320,168] width:80 height:24 align:#left
+	button 'btn_set' "Assign" pos:[116,20] width:140 height:88 align:#left
+	button 'btn_sel' "Select" pos:[264,20] width:136 height:88 align:#left
+	button 'btn_set_dx' "Set DX Shader to selection" pos:[120,200] width:276 height:24 align:#left
+	button 'btn_copy_dx' "Copy values from LS3D material to DX Shader" pos:[120,228] width:276 height:24 align:#left
+	button 'btn_remove_dx' "Remove DX Shader from selection" pos:[120,256] width:276 height:24 align:#left
+
+	radiobuttons 'rdo_1' "" pos:[12,28] width:31 height:16 labels:#("1") default:1 align:#left
+	radiobuttons 'rdo_2' "" pos:[12,56] width:31 height:16 labels:#("2") default:0 align:#left
+	radiobuttons 'rdo_3' "" pos:[12,84] width:31 height:16 labels:#("3") default:0 align:#left
+	radiobuttons 'rdo_4' "" pos:[12,112] width:31 height:16 labels:#("4") default:0 align:#left
+	radiobuttons 'rdo_5' "" pos:[12,140] width:31 height:16 labels:#("5") default:0 align:#left
+	radiobuttons 'rdo_6' "" pos:[12,168] width:31 height:16 labels:#("6") default:0 align:#left
+	radiobuttons 'rdo_7' "" pos:[12,196] width:31 height:16 labels:#("7") default:0 align:#left
+	radiobuttons 'rdo_8' "" pos:[12,224] width:31 height:16 labels:#("8") default:0 align:#left
+
+	label 'lbl_svc' "Show Vertex Colors:" pos:[120,116] width:104 height:20 align:#left
+	label 'lbl_sva' "Show Vertex Alpha:" pos:[120,144] width:104 height:20 align:#left
+	label 'lbl_svs' "Show Vertex Shaded:" pos:[120,172] width:104 height:20 align:#left
+
 	--local variables
 	local bmp_colors = #(
 		color 0 255 0, --1
@@ -14,39 +56,6 @@ rollout mcVertexColorDialog "Vertex Color v1.02" width:408 height:256
 		color 224 0 255 --8
 	)
 	local current_color_index = 1
-	--interface
-	button 'btn_1' "button" pos:[44,24] width:52 height:24 align:#left 
-	button 'btn_2' "button" pos:[44,52] width:52 height:24 align:#left
-	button 'btn_3' "button" pos:[44,80] width:52 height:24 align:#left
-	button 'btn_4' "button" pos:[44,108] width:52 height:24 align:#left 
-	button 'btn_5' "button" pos:[44,136] width:52 height:24 align:#left 
-	button 'btn_6' "button" pos:[44,164] width:52 height:24 align:#left 
-	button 'btn_7' "button" pos:[44,192] width:52 height:24 align:#left
-	button 'btn_8' "button" pos:[44,220] width:52 height:24 align:#left 
- 
- 	radioButtons 'rdo_1' "" pos:[12,28] width:31 height:16 labels:#("1") align:#left default:1
-	radioButtons 'rdo_2' "" pos:[12,56] width:31 height:16 labels:#("2") align:#left default:0
-	radioButtons 'rdo_3' "" pos:[12,84] width:31 height:16 labels:#("3") align:#left default:0
-	radioButtons 'rdo_4' "" pos:[12,112] width:31 height:16 labels:#("4") align:#left default:0
-	radioButtons 'rdo_5' "" pos:[12,140] width:31 height:16 labels:#("5") align:#left default:0
-	radioButtons 'rdo_6' "" pos:[12,168] width:31 height:16 labels:#("6") align:#left default:0
-	radioButtons 'rdo_7' "" pos:[12,196] width:31 height:16 labels:#("7") align:#left default:0
-	radioButtons 'rdo_8' "" pos:[12,224] width:31 height:16 labels:#("8") align:#left default:0
- 
-	GroupBox 'grp1' "Color Sets:" pos:[4,4] width:104 height:244 align:#left
-	button 'btn_set' "Assign" pos:[116,20] width:140 height:88 align:#left
-	button 'btn_sel' "Select" pos:[264,20] width:136 height:88 align:#left
-	GroupBox 'grp2' "Actions:" pos:[112,4] width:292 height:244 align:#left
-
-	button 'btn_show_colors' "ON" pos:[232,112] width:80 height:24 align:#left
-	button 'btn_hide_colors' "OFF" pos:[320,112] width:80 height:24 align:#left
-	button 'btn_show_alpha' "ON" pos:[232,140] width:80 height:24 align:#left
-	button 'btn_hide_alpha' "OFF" pos:[320,140] width:80 height:24 align:#left
-	button 'btn_show_shaded' "ON" pos:[232,168] width:80 height:24 align:#left
-	button 'btn_hide_shaded' "OFF" pos:[320,168] width:80 height:24 align:#left
-	label 'lbl_svc' "Show Vertex Colors:" pos:[120,116] width:104 height:20 align:#left
-	label 'lbl_sva' "Show Vertex Alpha:" pos:[120,144] width:104 height:20 align:#left
-	label 'lbl_svs' "Show Vertex Shaded:" pos:[120,172] width:104 height:20 align:#left
 
 	--local functions
 	fn getSelectionType sel= (
@@ -236,6 +245,44 @@ rollout mcVertexColorDialog "Vertex Color v1.02" width:408 height:256
 			base_obj.SetSelection #Vertex sel_verts
 		)
 	)
+	------------------------------------------------------------------------------
+	--> DXShader
+	------------------------------------------------------------------------------
+	fn updateDXShaderValues = 
+	(
+		if (gLS3DDXSupport != undefined) then (
+			local sel = deepcopy (selection as array)
+			if (not gLS3DDXSupport.ObjectsConvert sel MatUpdate:true withUI:false justSet:true) then ( 
+				gLS3DDXSupport.LogM ("Unable to update DX material info on selection.") level:3 
+			) else ( 
+				if (not gLS3DDXSupport.UpdateBuildingsColors sel) then (
+					gLS3DDXSupport.LogM ("Unable to update Building Colors on selection.") level:3 
+				)				
+			)
+		)
+	)
+	------------------------------------------------------------------------------
+	fn setDXShader = 
+	(
+		if (gLS3DDXSupport != undefined) then (
+			local sel = deepcopy (selection as array)
+			if (not gLS3DDXSupport.ObjectsConvert sel LS3DtoDX:true withUI:false justSet:true) then ( gLS3DDXSupport.LogM ("Unable to convert material on selection from LS3D to DX Shader") level:3 )
+			else ( gLS3DDXSupport.LogM ("Successful conversion: Material on selection from LS3D to DX Shader") level:1 )			
+			gLS3DCHTool.UpdateDXShaderValues()
+		)
+	)
+	------------------------------------------------------------------------------
+	fn removeDXShader = 
+	(
+		if (gLS3DDXSupport != undefined) then (
+			local sel = deepcopy (selection as array)
+			if (not gLS3DDXSupport.ObjectsConvert sel LS3DtoDX:false withUI:false)  then ( gLS3DDXSupport.LogM ("Unable to convert material on selection from DX Shader to LS3D") level:3 )
+			else ( gLS3DDXSupport.LogM ("Successful conversion: Material on selection from DX Shader to LS3D") level:1 )		
+		)
+	)
+	------------------------------------------------------------------------------
+	--< DXShader
+	------------------------------------------------------------------------------
 	--interface actions
 	on rdo_1 changed state do (rdoSwitchTo 1 false)
 	on rdo_2 changed state do (rdoSwitchTo 2 false)
@@ -254,6 +301,10 @@ rollout mcVertexColorDialog "Vertex Color v1.02" width:408 height:256
 	on btn_6 pressed do (rdoSwitchTo 6 true)
 	on btn_7 pressed do (rdoSwitchTo 7 true)
 	on btn_8 pressed do (rdoSwitchTo 8 true)
+	
+	on btn_set_dx pressed do setDXShader()
+	on btn_copy_dx pressed do updateDXShaderValues()
+	on btn_remove_dx pressed do removeDXShader()
 	
 	on btn_set pressed do	( 
 		
