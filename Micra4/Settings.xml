@@ -51,10 +51,10 @@
     <Conform val="0.01" />
     <Controller_Convertor val="0.01" />
     <Create_3PGrid val="0.02" />
-    <Customize val="0.25" />
+    <Customize val="0.26" />
     <Customize_Colors val="0.05" />
     <Deep_Isolate val="1.09" />
-    <Dialog_Creator_Net val="0.33" />
+    <Dialog_Creator_Net val="0.34" />
     <DotNet_Components val="0.01" />
     <Edge_Loop_Optimalize val="0.04" />
     <Edge_Scale_Align val="0.01" />
