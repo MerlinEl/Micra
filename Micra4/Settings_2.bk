@@ -1,0 +1,283 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<SETTINGS>
+  <Structures val="All registred Micra's Structures">
+    <!--independent classes-->
+    <mcStructMan val="on" info="structure manager" />
+    <mcWinMsg val="on" />
+    <mcWin32 val="on" info="denisT great work!" />
+    <mcObjects val="on" info="database object CORE BASE" />
+    <mcMath val="on" />
+    <mcString val="on" />
+    <mcDate val="on" />
+    <!--dependent classes-->
+    <mcColor val="on" info="color conversion tool" />
+    <mcFile val="on" info="read - write functions" />
+    <mcXML val="on" />
+    <mcINI val="on" />
+    <mcUIColors val="on" info="save-load ui colors" />
+    <mcDotnet val="on" info="dotnet functions" />
+    <mcPopUp val="on" info="popup windows of any type" />
+    <mcGM val="on" />
+    <mcAnimation val="on" />
+    <mcArray val="on" />
+    <mcFile val="on" info="read - write functions" />
+    <mcInfo val="on" />
+    <mcCursor val="on" />
+    <mcScreen val="on" />
+    <mcDialog val="on" />
+    <mcDraw val="on" />
+    <mcPoly val="on" />
+    <mcSnap val="on" />
+    <mcSystem val="on" />
+    <mcTransform val="on" />
+    <mcEvents val="on" />
+    <mcCall val="on" />
+    <mcMsx val="on" />
+    <mcActionsTukej val="on" />
+  </Structures>
+  <Version val="All registred Micra's Scripts">
+    <Gallery3D val="1.60" />
+    <ActorX_Batch_Exporter val="0.01" />
+    <ActorX_Multi_Exporter val="0.01" />
+    <Advanced_Edge_Loop val="1.05" />
+    <ASCII_Multi_Exporter val="0.09" />
+    <Bridge_Spline val="0.01" />
+    <Box_Builder val="0.01" />
+    <Character_Pose val="0.17" />
+    <Character_Tool val="0.10" />
+    <Clone2 val="1.03" />
+    <Color_Palete val="0.56" />
+    <Color_Picker val="0.2" />
+    <Conform val="0.01" />
+    <Controller_Convertor val="0.01" />
+    <Create_3PGrid val="0.02" />
+    <Customize val="0.26" />
+    <Customize_Colors val="0.05" />
+    <Deep_Isolate val="1.09" />
+    <Dialog_Creator_Net val="0.34" />
+    <DotNet_Components val="0.01" />
+    <Edge_Loop_Optimalize val="0.04" />
+    <Edge_Scale_Align val="0.01" />
+    <External_PolySplitRing val="0.03" />
+    <External_Quadrangulate val="0.01" />
+    <Fuse_Vertices val="0.01" />
+    <Gif_Compiller val="0.02" />
+    <Holder val="0.04" />
+    <Help val="0.01" />
+    <Icon_Maker val="0.21" />
+    <Isolate_Face val="0.02" />
+    <Lode_Tester val="0.03" />
+    <Low_Polygon_Wizard val="1.36" />
+    <LS3D_Model_Manager val="0.01" />
+    <mbFracture val="0.1" />
+    <MaxScript_Color_Editor val="0.06" />
+    <Merge_Animation val="0.03" />
+    <Modifiers val="0.01" />
+    <Morph_Collector_Manager val="0.06" />
+    <Morph_Edges val="0.17" />
+    <Morph_Collector val="0.17" />
+    <Morph_Dummy val="0.17" />
+    <Morph_Tagger val="0.17" />
+    <Move_Towards val="0.03" />
+    <Multi_Planter val="1.53" />
+    <Object_Planter val="0.01" />
+    <Object_Distributor val="0.13" />
+    <Paint_Selection val="0.05" />
+    <Pivot_Planter val="2.02" />
+    <Randomize val="0.01" />
+    <Rename val="0.02" />
+    <Render_To_Texture_Mod val="0.04" />
+    <Repair_Object val="1.08" />
+    <Manage_Profiles val="0.06" />
+    <Script_Manager val="0.14" />
+    <Send_UVW_To_Ps val="0.02" />
+    <Set_Obj_ID val="0.02" />
+    <Skin_Tool val="0.01" />
+    <Space val="1.03" />
+    <Spline_Magnet val="0.05" />
+    <Soft_Selection val="0.01" />
+    <Struct_Action val="0.03" />
+    <Time_Break val="0.01" />
+    <Transformer val="0.08" />
+    <UE_Model_Importer val="0.07" />
+    <Uni_Poly_Counter val="0.18" />
+    <UVW_Wizard_Tool val="0.02" />
+    <Unwrap_UVW_Plus val="0.02" />
+    <Viewport_Recorder val="0.06" />
+    <Winamp_Controll val="0.02" />
+    <Dialog_Template val="0.05" />
+    <Dialog_Default_Net val="0.29" />
+    <Actions_Editor val="0.01" />
+    <Vertex_Color val="1.02" />
+    <Object_Inspector val="0.02" />
+    <Vertex_Alpha_Blend val="0.01" />
+  </Version>
+  <SystemFiles val="Micra's Settings Files">
+    <Actions val="Contains all accesible Micra's actions" />
+    <Actions_Help val="Help texts for each action" />
+    <Skeleton val="Bones pattern for humanoid Animation" />
+    <Settings val="Default Micra's Settings" />
+  </SystemFiles>
+  <UserFiles val="User's Settings Files">
+    <Profile_1 />
+    <Profile_2 />
+    <Profile_3 />
+    <Profile_4 />
+    <Profile_5 />
+    <Profile_6 />
+    <Profile_7 />
+    <Profile_8 />
+    <Settings />
+  </UserFiles>
+  <DefaultFiles val="Default Settings Files">
+    <Profile_Default />
+    <Profile_Empty />
+    <Settings />
+  </DefaultFiles>
+  <Paths>
+    <WorkServer val="R=\Resources\Resources_new\" />
+    <HomeServer val="E=\Micra3\Temp\Server\" />
+    <NetServer val="http=\Micra3\Server\" />
+  </Paths>
+  <Interface>
+    <lastprofile val="1" />
+  </Interface>
+  <ColorProfiles>
+    <DefaultColor />
+    <UserColor />
+    <ForestColor />
+    <EarthColor />
+    <MoonColor />
+    <SeaColor />
+    <SunColor />
+  </ColorProfiles>
+  <UserColor>
+    <backcolor val="color 1 45 78" />
+    <forecolor val="color 30 122 195" />
+    <selected val="color 197 193 168" />
+    <marked val="color 10 69 114" />
+    <button val="color 6 59 99" />
+    <inactive val="color 24 89 125" />
+    <textcolor val="color 58 143 210" />
+    <seltext val="color 181 196 210" />
+    <opacity val="0.8" />
+    <editback val="#12abe2" />
+    <editfore val="#f5fcff" />
+  </UserColor>
+  <SunColor>
+    <backcolor val="color 1 45 0" />
+    <forecolor val="color 30 122 0" />
+    <selected val="color 197 193 10" />
+    <marked val="color 10 69 10" />
+    <button val="color 6 59 90" />
+    <inactive val="color 24 89 10" />
+    <textcolor val="color 58 143 20" />
+    <seltext val="color 181 196 20" />
+    <opacity val="0.4" />
+    <editback val="#12abe2" />
+    <editfore val="#f5fcff" />
+  </SunColor>
+  <ForestColor>
+    <backcolor val="(color 1 45 0)" />
+    <forecolor val="(color 30 122 0)" />
+    <selected val="(color 6 59 90)" />
+    <marked val="(color 197 193 10)" />
+    <button val="(color 10 69 10)" />
+    <inactive val="(color 24 89 10)" />
+    <textcolor val="(color 58 143 20)" />
+    <seltext val="(color 181 196 20)" />
+    <opacity val="0.8" />
+    <editback val="#12abe2" />
+    <editfore val="#f5fcff" />
+  </ForestColor>
+  <EarthColor>
+    <backcolor val="(color 78 48 1)" />
+    <forecolor val="(color 122 68.8941 0)" />
+    <selected val="(color 205 189.243 13.6666)" />
+    <marked val="(color 197 193 10)" />
+    <button val="(color 128 100.699 27.1059)" />
+    <inactive val="(color 132 125.118 15.0118)" />
+    <textcolor val="(color 187.15 193 27.2471)" />
+    <seltext val="(color 181 196 20)" />
+    <opacity val="0.8" />
+    <editback val="#12abe2" />
+    <editfore val="#f5fcff" />
+  </EarthColor>
+  <MoonColor>
+    <backcolor val="(color 137.018 149 136.729)" />
+    <forecolor val="(color 199.676 212 195.373)" />
+    <selected val="(color 197 193 10)" />
+    <marked val="(color 10 69 10)" />
+    <button val="(color 171.98 179 171.98)" />
+    <inactive val="(color 97.4541 102 96.4)" />
+    <textcolor val="(color 11.0262 26 3.67059)" />
+    <seltext val="(color 237.001 238 225.867)" />
+    <opacity val="0.8" />
+    <editback val="#12abe2" />
+    <editfore val="#f5fcff" />
+  </MoonColor>
+  <SeaColor>
+    <backcolor val="(color 0 46.9412 95)" />
+    <forecolor val="(color 0 89.4118 190)" />
+    <selected val="(color 197 193 10)" />
+    <marked val="(color 10 69 10)" />
+    <button val="(color 7.79607 64.6353 142)" />
+    <inactive val="(color 8.61175 102.987 183)" />
+    <textcolor val="(color 30.7765 127.692 218)" />
+    <seltext val="(color 181 196 20)" />
+    <opacity val="0.8" />
+    <editback val="#12abe2" />
+    <editfore val="#f5fcff" />
+  </SeaColor>
+  <DefaultColor>
+    <backcolor val="(color 60.8706 65.7071 78)" />
+    <forecolor val="(color 88.0941 155.806 208)" />
+    <selected val="(color 216 211.207 184.659)" />
+    <marked val="(color 15.7843 64.4855 175)" />
+    <button val="(color 70.2824 81.8298 103)" />
+    <inactive val="(color 127.176 132.525 138)" />
+    <textcolor val="(color 177.059 195.661 210)" />
+    <seltext val="(color 203.608 220.376 236)" />
+    <opacity val="0.8" />
+    <editback val="#12abe2" />
+    <editfore val="#f5fcff" />
+  </DefaultColor>
+  <Gallery3D>
+    <Thumb_Render_Size val="[200,150]" />
+    <Thumb_Size val="[160,120]" />
+    <Thumb_Color val="(color 33 70 112)" />
+    <Dialog_Gal_Pos val="[0,0]" />
+    <Dialog_Gal_Size val="[941,620]" />
+    <Dialog_Plant_Pos val="[0,0]" />
+    <Dialog_Plant_Size val="[304,626]" />
+    <Plant_Distance val="10" />
+    <Plant_Sensitivity val="0.0" />
+    <Plant_Snap_Offset val="0" />
+    <Maual_Spin_Axis val="1" />
+    <Plant_Orientation val="1" />
+    <Single_Size val="[0,0,0]" />
+    <Single_Rotation val="[0,0,0]" />
+    <Single_Position val="[0,0,0]" />
+    <Lock_Size val="false" />
+    <Lock_Rotation val="false" />
+    <Lock_Position val="false" />
+    <Last_Profile val="6" />
+    <ObjectList_RolledUp val="false" />
+    <RandomSettings_RolledUp val="false" />
+    <GlobalSettings_RolledUp val="false" />
+    <ProfileSettings_RolledUp val="false" />
+    <AntiAliasing val="true" />
+    <PixelSampler val="false" />
+    <Shadows val="false" />
+    <Quiet val="true" />
+    <lastMainCat val="Mechanical" />
+    <lastSubCat val="Connections" />
+    <Random_Objects_List />
+    <Opacity val="0.8" />
+    <test val="1" />
+    <Server_Dir val="E=\Gallery3D\" />
+    <PC_Dir val="E=\Gallery3D\" />
+    <Current_Dir val="E=\Gallery3D\Mechanical\Connections\" />
+    <Dialog_Gal_Max val="false" />
+  </Gallery3D>
+</SETTINGS>

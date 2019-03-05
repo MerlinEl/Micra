@@ -387,16 +387,14 @@ fn onMousedown s a = ( -- Start drag Icon with data
 	
 		local btn_data  = (mcObject.new()).addMore #(
 
-			mcItem "icon_index"  btn.ImageIndex,
-			mcItem "icon_image"  (s.SmallImageList.Images.item (btn.ImageIndex)), 
+			mcItem "icon_image"(s.SmallImageList.Images.item (btn.ImageIndex)), 
 			mcItem "action_key" btn.tag, 
 			mcItem "tooltip" btn.text
 		)
-		mcGM.setParam "customize_button_data" btn_data --send data on drag
+		mcGM.setParam "customize_drag_data" btn_data --send data on drag
 		--format "Customize > onMousedown > Drag Start > Draged Action:%\n" btn.tag
-		local dnd_id = "Micra Form DragAndDrop" --define dropable place
-		s.DoDragDrop (netString dnd_id) netDragDropEffect.copy -- (modal)
-		mcGM.setParam "button_drag_data" undefined --clear data after drop
+		s.DoDragDrop (netString "Micra_Form_DragAndDrop") netDragDropEffect.copy -- Mode(modal) ID(define dropable place)
+		mcGM.setParam "customize_drag_data" undefined --clear data after drop
 		--format "Customize > onMousedown > Drag End\n" 
 	)	
 )

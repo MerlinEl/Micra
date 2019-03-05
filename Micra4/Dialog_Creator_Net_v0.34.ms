@@ -35,9 +35,8 @@ Global mcCreateNetDynamicDialog
 	-- 0 > disabled
 	-- 5 > mouse click(execute action) 
 	-- 2 > drag and drop buttons
-	local debug = 2 
+	local debug = 0
 	local dataformats    = dotnetclass "dataformats"
-	local dnd_id = "Micra Form DragAndDrop" --Drag and drop ID. Defines where is allowed drop.
 	-----------------------------------------
 	
 	--Local scope function (Inicializes many times)
@@ -111,9 +110,11 @@ if debug == 5 do format "name:%\t tag:%\n" s.name s.tag
 	)*/
 	fn addButton btn data = (
 		
-		format "Dialog Creator  > placeReplaceButtonAt > Button: [ % ] Data > \n"  btn.name 
-		data.print()
+		if debug == 2 do (
 		
+			format "Dialog Creator  > addButton > Button: [ % ] Data > \n"  btn.name 
+			data.print()
+		)
 		local mcs = btn.parent.parent.tag.value
 		mcs.ToolTip.SetToolTip btn (data.get "tooltip")
 		btn.Image = data.get "icon_image"
@@ -121,13 +122,29 @@ if debug == 5 do format "name:%\t tag:%\n" s.name s.tag
 		--save Settings
 		local action_data = mcActionsEditor.readActionData btn.tag --"cat:Object name:Lock_Object icon:88 cmd:mcAction.lockObjects true tooltip:Lock Object"
 		local icon_index = action_data.get "icon"
-		--mcActionsEditor.saveButton btn.name btn.tag icon_index
+		mcActionsEditor.saveButton btn.name btn.tag icon_index
 	)
+	--TODO > swap with empty button(move) not works 
 	fn swapButtons btn_a btn_b = (
 		
-			
+		local mcs = btn_a.parent.parent.tag.value
+		--swap tooltips
+		local tltA = (mcs.ToolTip.GetToolTip btn_a)--get tooltipA
+		local tltB = (mcs.ToolTip.GetToolTip btn_b)--get tooltipB
+		mcs.ToolTip.SetToolTip btn_a tltB
+		mcs.ToolTip.SetToolTip btn_b tltA
+		--swap images
+		local img = btn_a.Image --get imageA
+		btn_a.Image = btn_b.Image 
+		btn_b.Image = img
+		--swap tags
+		local tag = btn_a.tag --get tagA
+		btn_a.Tag = btn_b.Tag
+		btn_b.Tag = tag
+		--swap xml settings
+		mcFile.swapSettings Micra.UserProfile ("Buttons/"+btn_a.name) ("Buttons/"+btn_b.name)	
 	)
-	fn removeButton  btn = (
+	fn removeButton btn = (
 		
 		local mcs = btn.parent.parent.tag.value --form struct
 		btn.image = undefined --remove image
@@ -138,132 +155,71 @@ if debug == 5 do format "name:%\t tag:%\n" s.name s.tag
 	fn onMousedown s a = ( --drag(button) start
 	
 		local mcs = s.parent.parent.tag.value --form struct
-		if not mcs.edit_mode do return false  --Enabled only in Edit Mode
-		if debug == 2 do format "Dialog Creator > onMousedown > btn_a:% mouse:%\n"  btn_a (a.Button.ToString())
 		case a.Button.ToString() of (
 			
-			"Left": ( --Drag Statt
-				
-					local btn = s
-					local btn_data  = (mcObject.new()).addMore #(
+			"Left": ( --Button Drag Start
+			
+					if not mcs.edit_mode do return false  --Enabled only in Edit Mode
+					local source_button = s
+					if debug == 2 do format "Dialog Creator > onMousedown > Drag Start > Draged Action:%\n" source_button.tag
+					s.DoDragDrop (netString "Micra_Form_DragAndDrop") netDragDropEffect.copy -- (modal) --wait for data
+					local target_button = mcGM.getParam "micra_drop_button" --pickup button from onDragDrop event
+					if target_button != undefined then ( --droped on empty cell or another action button
+							
+						if debug == 2 do (format "Dialog Creator > onMousedown > Droped on Button:%\n" source_button.tag)
+						if target_button.Image != undefined then  ( --button dropped on another button with action (swap)
+							
+							if debug == 2 do print "SWAP"
+							swapButtons source_button target_button
 
-						mcItem "btn"  btn, --TO DO find icon index
-						mcItem "icon_index"  0, --TO DO find icon index
-						mcItem "icon_image"  (s.SmallImageList.Images.item (btn.ImageIndex)), 
-						mcItem "action_key" btn.tag, 
-						mcItem "tooltip"  (mcs.ToolTip.GetToolTip btn)--get tooltip
+						) else ( --add button 
+						
+							if debug == 2 do print "ADD"
+							local btn_data  = (mcObject.new()).addMore #(
+
+								mcItem "icon_image"  source_button.Image, 
+								mcItem "action_key" source_button.tag, 
+								mcItem "tooltip"  (mcs.ToolTip.GetToolTip source_button) --get tooltip
+							)
+							addButton target_button btn_data		
+						)
+					) else ( --droped out of space (remove button action)
+						
+						if debug == 2 do print "REMOVE"
+						removeButton source_button
 					)
-					mcGM.setParam "micra_button_data" btn_data --send data on drag
-					--format "Customize > onMousedown > Drag Start > Draged Action:%\n" btn.tag
-					local dnd_id = "Micra Form DragAndDrop" --define dropable place
-					s.DoDragDrop (netString dnd_id) netDragDropEffect.copy -- (modal)
-					mcGM.setParam "button_drag_data" undefined --clear data after drop
-					--format "Customize > onMousedown > Drag End\n" 
+					--clear data after drop
+					mcGM.setParam "customize_drag_data" undefined 
+					mcGM.setParam "micra_drop_button" undefined
+					if debug == 2 do format "Dialog Creator > onMousedown > Drag End\n" 
 			)
 			"Middle": ()
 			"Right": ()
 		)
 	)
-
-	fn onDragenter s a = ( --Enable - Disable Drop Items (depends on ID)
+	fn onDragenter s a = ( --Enable Drop For Items With identical ID > "Micra_Form_DragAndDrop"
 
 		--if debug == 2 do format "Dialog Creator > onDragenter > Target Slot:%\n" s.name
 		local mcs = s.parent.parent.tag.value --form struct
 		if not mcs.edit_mode do return false --Enabled only in Edit Mode
 		if not a.Data.GetDataPresent(DataFormats.text) do return false --check if ID string  is in clipboard
 		local clipboard_text = a.data.GetData(DataFormats.text) --catch ID string from clipboard
-		if clipboard_text == dnd_id do a.Effect = netDragDropEffect.copy --enable drag mouse effect
+		if clipboard_text == "Micra_Form_DragAndDrop" do a.Effect = netDragDropEffect.copy --enable drag mouse effect
 	)
-	fn onButtonDrop s a = ( --Drag End (add - replace - swap buttons)
+	fn onDragDrop s a = ( --Drag End (add - replace - swap buttons)
 
-		if debug == 2 do format "Dialog Creator > onButtonDrop > Target Slot:%\n" s.name
-		local btn_b = s
-		local mcs = btn_b.parent.parent.tag.value --form tag struct
+		local target_button = s
+		local mcs = target_button.parent.parent.tag.value --form tag struct
 		if not mcs.edit_mode do return false  --Enabled only in Edit Mode
-		local btn_data  =  mcGM.getParam "customize_button_data" --button draged from customize dialog
+		if debug == 2 do format "Dialog Creator > onDragDrop > Target Slot:%\n" target_button.name
+		local btn_data  =  mcGM.getParam "customize_drag_data" --button draged from customize dialog
 		if btn_data != undefined do ( --button data is accesible
 			
-			addButton btn_b btn_data	
+			if debug == 2 do print "ADD"
+			addButton target_button btn_data	
 			return OK
 		)
-		btn_data  =  mcGM.getParam "micra_button_data"  --button draged from micra dialog
-		if btn_data != undefined then (
-				
-			local btn_a = btn_data.get "btn"
-			if btn_b.image != undefined then  ( --button dropped on another button with action (swap)
-
-				swapButtons btn_a btn_b
-
-			) else ( --add button 
-
-				addButton btn_b btn_data		
-			)
-		) else ( --remove button action (if button A draget out, in to free space)
-			
-			removeButton btn_a
-		)
-				
-			/*	if  btn_a.image != undefined do (
-					-- this actually starts the drag and drop process
-					-- simultaneously copy dnd_id to clipboard
-					btn_a.DoDragDrop (netString dnd_id) netDragDropEffect.copy -- (modal)
-					--final draAndDrop sequence
-					btn_b = mcGM.getParam "form_drop_data" --get drop data from memory (button dropped from customize dialog)
-		
-					if btn_b != undefined then ( --swap if button A draged in to button B
-					
-						local mcsB = btn_b.parent.parent.tag.value
-						if btn_b.tag != undefined  then ( --swap two actions 
-						
-							--swap tooltips
-							local tltA = (mcsA.ToolTip.GetToolTip btn_a)--get tooltipA
-							local tltB = (mcsB.ToolTip.GetToolTip btn_b)--get tooltipB
-
-							mcsA.ToolTip.SetToolTip btn_a tltB
-							mcsB.ToolTip.SetToolTip btn_b tltA
-							--swap images
-							local img = btn_a.Image --get imageA
-							btn_a.Image = btn_b.Image 
-							btn_b.Image = img
-							--swap tags
-							local tag = btn_a.tag --get tagA
-							btn_a.Tag = btn_b.Tag
-							btn_b.Tag = tag
-							--swap xml settings
-							mcFile.swapSettings Micra.UserProfile ("Buttons/"+btn_a.name) ("Buttons/"+btn_a.name)
-						
-							) else (--copy if buttonB is empty
-	
-							mcsB.ToolTip.SetToolTip btn_b (mcsA.ToolTip.GetToolTip btn_a) --copy tooltip
-							--btn_b.Cat = btn_a.name
-							btn_b.Image = btn_a.Image --copy image
-							btn_b.Tag = btn_a.tag --copy tag
-							--save Settings
-							local data_a = mcFile.readSettings Micra.UserProfile ("Buttons/"+btn_a.name) type:"attribs" --get buton A data (action, icon)
-							mcActionsEditor.saveButton btn_b.name (data_a.get "action") (data_a.get "icon")
-							
-							btn_a.image = undefined
-							btn_a.tag = undefined
-							mcsA.ToolTip.SetToolTip btn_a ""
-							mcActionsEditor.deleteButton btn_a.name --unregister button A
-						)
-					) else ( --remove button action (if button A draget out, in to free space)
-			
-						removeButton btn_a
-					)
-					mcGM.setParam "form_drop_data" undefined --clear dorop data memory
-				)
-				format "Dialog Creator > onMousedown > Drag End > Droped Action to slot:%\n"  (if btn_b != undefined then btn_b.name else "undefined")
-		
-		*/
-		
-		
-		/*
-		if debug == 2 do format "Dialog Creator  > onButtonDrop > Droped Action On Slot:%\n"  s.name
-		local mcs = s.parent.parent.tag.value --form tag struct
-		if not mcs.edit_mode do return false  --Enabled only in Edit Mode
-		mcGM.setParam "form_drop_data" s --store hited element
-		*/
+		mcGM.setParam "micra_drop_button" target_button --send draged button to onMousedown(At Modal Mode)
 	)
 	/*fn onMouseEnter s a = (
 	
@@ -325,7 +281,7 @@ if debug == 5 do format "name:%\t tag:%\n" s.name s.tag
 			--dotNet.addEventHandler btn "MouseUp" onBtnMouseUp
 --dotNet.addEventHandler btn "MouseEnter" onMouseEnter  --test mouse enter
 			dotNet.addEventHandler btn "DragEnter"  onDragenter
-			dotNet.addEventHandler btn "DragDrop"  onButtonDrop
+			dotNet.addEventHandler btn "DragDrop"  onDragDrop
 			mcs.bobjects += #(btn)
 		)
 		mcs.tlp.Controls.AddRange mcs.bobjects

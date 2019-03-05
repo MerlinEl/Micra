@@ -10,11 +10,11 @@
     <mc_Dialog_G active="true" pos="[1570,660]" size="[148,90]" title="Modify:" btnCount="[6,3]" />
     <mc_Dialog_H active="true" pos="[1572,752]" size="[148,66]" title="Materials:" btnCount="[6,2]" />
     <mc_Dialog_I active="true" pos="[1572,884]" size="[148,66]" title="Programming:" btnCount="[6,2]" />
-    <mc_Dialog_J active="true" pos="[1110,940]" size="[460,42]" title="Experimental:" btnCount="[19,1]" />
+    <mc_Dialog_J active="true" pos="[1180,950]" size="[460,42]" title="Experimental:" btnCount="[19,1]" />
   </Properties_1>
   <Properties_2>
     <mcMicraDialog active="true" pos="[1570,210]" size="[148,66]" title="" />
-    <mcCustomizeDialog active="false" pos="[950,350]" size="[600,404]" title="" />
+    <mcCustomizeDialog active="false" pos="[1340,370]" size="[224,404]" title="" />
     <mcProgramDialog active="false" pos="[100,0]" size="[256,232]" title="" />
     <mcisoDialog active="false" pos="[100,152]" size="[140,400]" title="" />
     <mcModifierDialog active="false" pos="[100,100]" size="[400,400]" title="" />
@@ -191,5 +191,7 @@
     <btn_B33 action="Create_Bounding_Box" icon="16" />
     <btn_J10 action="Smart_LS3D_Export" icon="260" />
     <btn_J9 action="Object_Inspector" icon="259" />
+    <btn_J13 action="Create_3PGrid" icon="81" />
+    <btn_J14 action="Box_Builder" icon="16" />
   </Buttons>
 </USER>
