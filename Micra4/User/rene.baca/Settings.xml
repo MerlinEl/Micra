@@ -111,7 +111,7 @@
     <Seam_Edges val="false" />
     <Seam_Edges_Color val="(color 0 255 0)" />
     <Mode val="1" />
-    <Size val="6" />
+    <Size val="7" />
     <Slected_Faces val="true" />
   </RenderToTextureMod>
   <Interface>

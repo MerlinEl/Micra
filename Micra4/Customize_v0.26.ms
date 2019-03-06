@@ -393,7 +393,8 @@ fn onMousedown s a = ( -- Start drag Icon with data
 		)
 		mcGM.setParam "customize_drag_data" btn_data --send data on drag
 		--format "Customize > onMousedown > Drag Start > Draged Action:%\n" btn.tag
-		s.DoDragDrop (netString "Micra_Form_DragAndDrop") netDragDropEffect.copy -- Mode(modal) ID(define dropable place)
+		btn_data.print()
+		s.DoDragDrop (mcDotnet.dString "Micra_Form_DragAndDrop") mcDotnet.DragDropEffect.copy -- Mode(modal) ID(define dropable place)
 		mcGM.setParam "customize_drag_data" undefined --clear data after drop
 		--format "Customize > onMousedown > Drag End\n" 
 	)	

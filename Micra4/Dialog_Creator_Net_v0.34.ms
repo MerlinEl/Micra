@@ -125,9 +125,8 @@ if debug == 5 do format "name:%\t tag:%\n" s.name s.tag
 		mcActionsEditor.saveButton btn.name btn.tag icon_index
 	)
 	--TODO > swap with empty button(move) not works 
-	fn swapButtons btn_a btn_b = (
+	fn swapButtons mcs btn_a btn_b = (
 		
-		local mcs = btn_a.parent.parent.tag.value
 		--swap tooltips
 		local tltA = (mcs.ToolTip.GetToolTip btn_a)--get tooltipA
 		local tltB = (mcs.ToolTip.GetToolTip btn_b)--get tooltipB
@@ -144,13 +143,23 @@ if debug == 5 do format "name:%\t tag:%\n" s.name s.tag
 		--swap xml settings
 		mcFile.swapSettings Micra.UserProfile ("Buttons/"+btn_a.name) ("Buttons/"+btn_b.name)	
 	)
-	fn removeButton btn = (
+	fn removeButton mcs btn = (
 		
-		local mcs = btn.parent.parent.tag.value --form struct
 		btn.image = undefined --remove image
 		btn.tag = undefined --remove name
 		mcs.ToolTip.SetToolTip btn "" --remove tooltip
 		mcActionsEditor.deleteButton btn.name --unregister
+	)
+	fn moveButton mcs source_button target_button = (
+		
+		local btn_data  = (mcObject.new()).addMore #( --get source button data
+
+			mcItem "icon_image"  source_button.Image, 
+			mcItem "action_key" source_button.tag, 
+			mcItem "tooltip"  (mcs.ToolTip.GetToolTip source_button) --get tooltip
+		)
+		addButton target_button btn_data --add target button
+		removeButton mcs source_button --remove source button
 	)
 	fn onMousedown s a = ( --drag(button) start
 	
@@ -161,32 +170,26 @@ if debug == 5 do format "name:%\t tag:%\n" s.name s.tag
 			
 					if not mcs.edit_mode do return false  --Enabled only in Edit Mode
 					local source_button = s
-					if debug == 2 do format "Dialog Creator > onMousedown > Drag Start > Draged Action:%\n" source_button.tag
+					if debug == 2 do format "Dialog Creator > onMousedown > Drag Start > Draged Button slot:% tag:%\n" source_button.name source_button.tag
 					s.DoDragDrop (netString "Micra_Form_DragAndDrop") netDragDropEffect.copy -- (modal) --wait for data
 					local target_button = mcGM.getParam "micra_drop_button" --pickup button from onDragDrop event
 					if target_button != undefined then ( --droped on empty cell or another action button
 							
-						if debug == 2 do (format "Dialog Creator > onMousedown > Droped on Button:%\n" source_button.tag)
-						if target_button.Image != undefined then  ( --button dropped on another button with action (swap)
+						if debug == 2 do (format "Dialog Creator > onMousedown > Droped on Button slot:% tag:%\n" target_button.name target_button.tag)
+						if  target_button.tag != undefined and target_button.tag.count > 0 then  ( --button dropped on another button with action (swap)
 							
 							if debug == 2 do print "SWAP"
-							swapButtons source_button target_button
+							swapButtons mcs source_button target_button
 
-						) else ( --add button 
+						) else ( --move button 
 						
-							if debug == 2 do print "ADD"
-							local btn_data  = (mcObject.new()).addMore #(
-
-								mcItem "icon_image"  source_button.Image, 
-								mcItem "action_key" source_button.tag, 
-								mcItem "tooltip"  (mcs.ToolTip.GetToolTip source_button) --get tooltip
-							)
-							addButton target_button btn_data		
+							if debug == 2 do print "MOVE"
+							moveButton mcs source_button target_button		
 						)
 					) else ( --droped out of space (remove button action)
 						
 						if debug == 2 do print "REMOVE"
-						removeButton source_button
+						removeButton mcs source_button
 					)
 					--clear data after drop
 					mcGM.setParam "customize_drag_data" undefined 
