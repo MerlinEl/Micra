@@ -143,6 +143,15 @@ Struct MICRA_DOTNET (
 			hv.AssignHandle (DotNetObject "System.IntPtr" (Windows.GetMaxHWND())) 
 			return hv
 	),
+	fn focusViewport = ( 
+
+		local WM_MBUTTONDOWN 	= 0x0207
+		local WM_MBUTTONUP 	= 0x0208
+		local hwnd = for w in (windows.getChildrenHWND #max) where w[4] == "ViewPanel" do exit with w[1]
+		hwnd = (windows.getChildrenHWND hwnd)[1][1]
+		mcUser32.postmessage hwnd WM_MBUTTONDOWN 0 0
+		mcUser32.postmessage hwnd WM_MBUTTONUP 0 0
+	),
 	/*
 		@Usage	open dotnet form with max handle implementation
 		@Example	mcDotnet.dShow form saved_pos:false

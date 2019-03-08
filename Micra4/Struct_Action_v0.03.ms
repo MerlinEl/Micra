@@ -1898,15 +1898,16 @@ struct mcAction (
 		)
 		completeRedraw()
 	),
-	fn nurms_toggle =
-	(
-		if selection.count == 0 do return false
+	fn nurms_toggle = (
+		
+		if selection.count == 0 or not hasProperty selection[1] "surfSubdivide" do return false
 		local current_state = selection[1].baseobject.surfSubdivide
 		viewport.SetShowEdgeFaces current_state
-		for i in selection where classOf i == Editable_Poly or classOf i == PolyMeshObject do undo off
-		(
-			i.baseobject.showCage = false
-			i.baseobject.surfSubdivide = not current_state
+		--classOf i == Editable_Poly or classOf i == PolyMeshObject
+		undo "NURMS Toggle" on  for o in selection where hasProperty o "surfSubdivide" do (
+			
+			o.baseobject.showCage = false
+			o.baseobject.surfSubdivide = not current_state
 		)
 	),
 	fn divide_edges =

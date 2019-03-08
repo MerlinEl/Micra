@@ -14,7 +14,7 @@
   </Properties_1>
   <Properties_2>
     <mcMicraDialog active="true" pos="[1570,210]" size="[148,66]" title="" />
-    <mcCustomizeDialog active="false" pos="[1340,370]" size="[224,404]" title="" />
+    <mcCustomizeDialog active="false" pos="[940,330]" size="[224,404]" title="" />
     <mcProgramDialog active="false" pos="[100,0]" size="[256,232]" title="" />
     <mcisoDialog active="false" pos="[100,152]" size="[140,400]" title="" />
     <mcModifierDialog active="false" pos="[100,100]" size="[400,400]" title="" />
@@ -80,7 +80,6 @@
     <btn_C2 action="Pivot_To_X" icon="12" />
     <btn_C3 action="Align_To_World" icon="15" />
     <btn_C4 action="Pivot_To_Vertex" icon="14" />
-    <btn_C5 action="Pivot_Align_3P" icon="5" />
     <btn_C7 action="Align_To_Base" icon="55" />
     <btn_C12 action="Afect_Pivot_Only" icon="51" />
     <btn_C11 action="Iron_Sight" icon="77" />
@@ -193,5 +192,7 @@
     <btn_J9 action="Object_Inspector" icon="259" />
     <btn_J13 action="Create_3PGrid" icon="81" />
     <btn_J14 action="Box_Builder" icon="16" />
+    <btn_C10 action="Pivot_Align_3P" icon="5" />
+    <btn_C5 action="Pivot_Planter_2" icon="59" />
   </Buttons>
 </USER>

@@ -1,0 +1,61 @@
+We made a couple videos showing how to use Keyhydra on our Vimeo and Youtube Channel : 
+
+Onikanabo Vimeo Channel : https://vimeo.com/onikanabo
+Onikanabo Youtube channel : https://www.youtube.com/onikanabo
+
+
+Please have a look at those video for installation :
+
+1.	https://www.youtube.com/watch?v=XcUBJYa3oG4
+2.	https://www.youtube.com/watch?v=3XSfCdrXpyQ 
+
+
+
+Our Website : https://www.onikanabo.com/
+Keyhydra's page : https://keyhydra.com/
+LazerCut's page : https://keyhydra.com/keyhydra-lazercut
+
+
+
+If you encounter some licensing problem here is the checklist before contacting the support
+
+
+
+First things to check [For Personnal licenses & Trials] :
+
+1.	Active Internet connexion is required. [No Internet = No KeyHydra].
+2.	Do not have 2 versions of 3dstudio max open at the same time. [Please check the windows task manager]
+
+
+First things to check [Studio Licenses] :
+
+1.	Active Internet connexion is required. [No Internet = No KeyHydra].
+2.	Do not have 2 versions of 3dstudio max open at the same time. [Please check the windows task manager]
+3.	Check windows task manager FOR “acLAN.exe” [In the Details Tab]. If “acLAN.exe” is missing go to ‘If the server is not running above’
+4.	Press the windows key/or Windows Start Menu and type : ‘Monitor’ it will open the ‘Lan License Server Window’ there you should see if the server is running on your machine or not.
+5.	If you Motherboard or Ethernet Card changed, it mean that your MAC Address changed –> You need to contact support.
+6.	If for any reason your MAC address changed you need to contact the support –> You need to contact support.
+7.	If your pc do act as the license server [Mostly if you purchased only one license ] PLease do NOT change the server license keep it to Host : 127.0.0.1
+
+-If the server is running :
+
+1.	Restart max and than go to Main Menu –> KeyHydra –> Show
+2.	The Keyhydra window will open from there just go to : ‘Help’ menu and press ‘Check license’
+3.	Wait 5 seconds.
+4.	Than go to ‘Help’ menu ‘about’
+5.	If status is ‘Ok to run’ you’re done !
+6.	If status is still ‘Can’t check in’ you should probably contact us : sales@onikanabo.com
+
+-If the server is not running :
+
+1.	 Be sure you installed it within the KeyHydra installer [it’s required].
+2.	You can start the Licensing Server Manually –> Windows Start Menu –> Activation Cloud –> Start [Please right click run as administrator].
+3.	Wait a bit and launch max.
+
+
+And if it still doesn’t work than drop us a mail. 
+
+ContactUs : massimo@onikanabo.com
+
+Cheers.
+Massimo
