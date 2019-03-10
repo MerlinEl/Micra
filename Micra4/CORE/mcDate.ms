@@ -15,7 +15,7 @@
 */
 Struct MICRA_DATE (
 private
-	_cur_date = (dotNetClass "System.DateTime").Now, --default is current time
+	_cur_date = (dotNetClass "System.DateTime").Now, --struct instance creation time
 public
 	fn getSource = getSourceFileName(), --get path of this script
 	fn current = (_cur_date = (dotNetClass "System.DateTime").Now; this),
@@ -51,13 +51,13 @@ public
 		(mcDate.fromString "4/24/2019 12:00:00 PM").toStringSimple() --return user date
 		"4_24_2019_12_00_00"
 	*/
-	fn toStringSimple = (
+	fn toStringSimple current:false = (
 	
-		local str = toString() --"4/24/2019 12:39:49 PM"
-		local date_arr = filterString str "/\\: " --#("4", "24", "2019", "12", "39", "49", "PM")
+		local str = if current then ((dotNetClass "System.DateTime").Now).toString() else toString() --"4/24/2019 12:39:49 PM"
+		local date_arr = filterString str "/\\: ." --#("4", "24", "2019", "12", "39", "49", "PM")
 		local new_str = ""
-		for i=1 to date_arr.count-1 do new_str += date_arr[i] + (if i < date_arr.count - 1 then "_" else "")
-		new_str --"4_24_2019_12_39_49"
+		for d in date_arr do new_str += d + "_"
+		trimRight new_str "_" --remove last underscore "4_24_2019_12_39_49_"
 	),
 	fn year = (_cur_date.date.Year), 
 	fn month = (_cur_date.date.Month), 
@@ -78,9 +78,9 @@ public
 		"122201944230",...
 	*/
 	fn getUniqueId = (
-		
-		local id = toStringSimple()
-		substituteString id "_" ""
+	
+		local str = toStringSimple current:true
+		substituteString str "_" ""
 	),
 	/**
 	*@Usage

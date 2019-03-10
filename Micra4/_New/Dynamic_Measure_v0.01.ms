@@ -3,7 +3,7 @@
 *@About > Many thanks to Enrico, DenisT and Bobo
 */
 Global mcDynamicMeasure
-Global mcDynamicMeasureEnabled = false --when manipulate is on this plugin will not work unless is enabled by (executing this script)
+Global mcDynamicMeasureEnabled = true --when manipulate is on this plugin will not work unless is enabled by (executing this script)
 Global mcDynamicMeasureShowArrowsLength --ensure variable visibility
 fn mcDynamicMeasureShowArrowsLength = (
 

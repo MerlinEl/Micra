@@ -42,6 +42,13 @@ struct MICRA_MATH (
 		if round_up do result = result + (1 /  dec as float)
 		return result
 	),
+	--Author :  Kostadin Kotev / miau_u@yahoo.com /
+	function roundFloat d pre:0.01 = (
+	
+		d = (d as float)/pre
+		local v = if (d - (v1 = floor d)) > ((v2 = ceil d) - d) then v2 else v1 
+		v*pre
+	),
 	--round down a number amd convert it to even: 12445 to 12444
 	fn roundToEven num = (
 		
@@ -97,6 +104,12 @@ struct MICRA_MATH (
 		local vAC=pC-pA
 		local d=1.0-abs(dot (normalize vAB) (normalize vAC))
 		if d<=tol then true else false
+	),
+	fn roundPoint3 p dec = (
+	
+		p.x = roundToDecimals p.x dec
+		p.y = roundToDecimals p.y dec
+		p.z = roundToDecimals p.z dec
 	),
 	function get2DBoundingBox pos_array =
 	(

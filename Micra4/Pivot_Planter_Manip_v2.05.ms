@@ -11,6 +11,7 @@ if mcPivotPlanter != undefined then ( --switch
 	mcPivotPlanterEnabled = false
 	
 ) else (
+	
 	local sel = selection as array
 	local last_node = undefined
 	mcPivotPlanterEnabled = true
@@ -36,15 +37,17 @@ if mcPivotPlanter != undefined then ( --switch
 			on canManipulate target return (Superclassof target == GeometryClass and mcPivotPlanterEnabled)
 			on updateGizmos do (
 
-				if node != last_node then ( --when selection changed revert xray visibility
+				if node != last_node do ( --when selection changed revert xray visibility
 					
 					if last_node != undefined do last_node.xray = false
 					last_node = node
-					
-				) else (
-				
-					return OK
 				)
+				/*
+				else (
+				
+					format "node:% last node:% return OK\n" node last_node
+					return OK
+				)*/
 				node.xray = true
 				-- Clear the current gizmo cache
 				this.clearGizmos()
@@ -139,10 +142,7 @@ if mcPivotPlanter != undefined then ( --switch
 				--Add new box shape to gizmo
 				this.addGizmoShape bounding_box_shape GizmoDontHitTest white gray -- unselColor selColor
 				
-				--test with geometry sphere
-				--local gizSphere = manip.makeSphere p7 5 20 --pos, radius, segments
-				--this.addGizmoMesh gizSphere gizmoActiveViewportOnly (orange/255.) (blue/255.)
-				--this.addGizmoText ("Point P7") p7 gizmoActiveViewportOnly (yellow/255.) (blue/255.)
+				--format "gizmo aded:%\n" bounding_box_shape
 				
 				return "Plant Pivot Here"
 			)
@@ -150,7 +150,7 @@ if mcPivotPlanter != undefined then ( --switch
 			on mouseUp screen_point gismo_index do ( -- m --> Point2 screen pixel coordinates
 	
 				--format "node:%\tgismo index:%\tscreen point:%\tlocal pos:%\n" node.name gismo_index screen_point gpos[gismo_index+1]
-			--	if (target == undefined) do return false --fix double-drawing
+				--if (target == undefined) do return false --fix double-drawing
 				manipulateMode = off  
 				mcPivotPlanter = undefined
 				mcPivotPlanterEnabled = false

@@ -206,6 +206,7 @@
     <Get_SHGame_Version icon="183" cmd="mcSystem.getSHGameVersion()" tooltip="Get SHGame Version" />
     <LS3D_Model_Manager icon="254" cmd="mcFile.fileInVersion LS3D_Model_Manager" tooltip="LS3D Model Manager" />
     <Get_Edges_Length icon="262" cmd="mcAction.getEdgesLength()" tooltip="Get Edges Length" />
+    <Live_Measure icon="30" cmd="mcFile.fileInVersion Live_Measure" tooltip="Live Measure" />
   </Helpers>
   <Animation>
     <Merge_Animation icon="130" cmd="mcFile.fileInVersion Merge_Animation" tooltip="Merge Animation" />

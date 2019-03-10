@@ -265,12 +265,15 @@ struct MICRA_CALL
 		local ss = stringstream ""
 		local max_root_dir = getDir #maxRoot
 		local max_user_dir = pathConfig.removePathLeaf (getDir #userScripts)
-		local filePath = (
+		local filePath = if isDirectoryWriteable max_root_dir then (
+				
+			max_root_dir +  "\\maxscript.api"
 			
-			if isDirectoryWriteable max_root_dir \
-				then max_root_dir +  "\\maxscript.api" \
-				else max_user_dir +  "\\maxscript.api" 
+		) else (
+			
+			max_user_dir +  "\\maxscript.api" 
 		)
+		
 		apropos "" to:ss
 		seek ss 0
 		while not eof ss do (
@@ -292,7 +295,7 @@ struct MICRA_CALL
 		)
 
 		if  doesFileExist filePath do deleteFile filePath
-		createFile filePath
+		--createFile filePath --CAUSING ERROR!
 		
 		local fStream = openFile filePath mode:"w+"
 		format "%" (filteredSS as string) to:fStream

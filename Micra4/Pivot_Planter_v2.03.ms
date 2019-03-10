@@ -119,8 +119,8 @@ if mc_PIVOT_PLANTER != undefined do stopTool mc_PIVOT_PLANTER
 		local od = #()
 		local ray_dist    = #()
 		--collect objects shoted by ray
-		for o in objs do
-		(
+		for o in objs do (
+			
 			local i = intersectRay o ray
 			if i!= undefined do 
 			(
@@ -140,8 +140,8 @@ if mc_PIVOT_PLANTER != undefined do stopTool mc_PIVOT_PLANTER
 		)
 	)
 
-	tool mc_PIVOT_PLANTER
-	(
+	tool mc_PIVOT_PLANTER (
+		
 		on start do 
 		(
 			--print "start"
