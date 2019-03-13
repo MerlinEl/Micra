@@ -352,8 +352,8 @@ Global mcMultiPlanterEnabled
 		-->dialog
 		on ProfileSettings open do
 		(
-			GlobalSettings.lbl_units_1.text = mcSystem.units_type()
-			GlobalSettings.lbl_units_2.text = mcSystem.units_type()
+			GlobalSettings.lbl_units_1.text = mcSystem.unitsType()
+			GlobalSettings.lbl_units_2.text = mcSystem.unitsType()
 			mcDgalleryDialog.ObjectListArray = thumbnail #() #() #()
 			getProfileList()
 		)

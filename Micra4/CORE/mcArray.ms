@@ -56,6 +56,14 @@ struct MCRA_ARRAY (
 	
 		fn compareNames str1 str2 = stricmp str1.name str2.name
 		qSort arr compareNames
+	),
+	-- compare generic Arrays
+	fn isEqualArrays ar1 ar2 = (
+		with printAllElements on (ar1 as string == ar2 as string)
+	),
+	-- compare BitArrays
+	fn isEqualBitArrays ba1 ba2 = (
+		ba1.numberSet == ba2.numberSet and (ba1 - ba2).isEmpty
 	)
 	/*<end>*/
 )

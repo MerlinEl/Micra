@@ -65,7 +65,7 @@
     <Gif_Compiller val="0.02" />
     <Holder val="0.04" />
     <Help val="0.01" />
-    <Icon_Maker val="0.21" />
+    <Icon_Maker val="0.22" />
     <Isolate_Face val="0.02" />
     <Lode_Tester val="0.03" />
     <Low_Polygon_Wizard val="1.36" />
@@ -109,7 +109,7 @@
     <Dialog_Template val="0.05" />
     <Dialog_Default_Net val="0.29" />
     <Actions_Editor val="0.01" />
-    <Vertex_Color val="1.02" />
+    <Vertex_Color val="1.03" />
     <Object_Inspector val="0.02" />
     <Vertex_Alpha_Blend val="0.01" />
     <Pivot_Planter_Manip val="2.05" />

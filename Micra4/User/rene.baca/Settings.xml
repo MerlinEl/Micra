@@ -9,9 +9,9 @@
     <CurrentProfile val="1" />
     <DialogSnap val="true" />
     <AimScaleFactor val="10" />
-    <SaveWirecolor val="on" />
-    <SaveLinks val="on" />
-    <SaveLayer val="on" />
+    <SaveWirecolor val="off" />
+    <SaveLinks val="off" />
+    <SaveLayer val="off" />
   </Settings>
   <Profiles>
     <menu_1 val="Merlin" />
@@ -111,7 +111,7 @@
     <Seam_Edges val="false" />
     <Seam_Edges_Color val="(color 0 255 0)" />
     <Mode val="1" />
-    <Size val="7" />
+    <Size val="6" />
     <Slected_Faces val="true" />
   </RenderToTextureMod>
   <Interface>

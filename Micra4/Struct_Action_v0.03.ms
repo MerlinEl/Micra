@@ -1272,13 +1272,26 @@ struct mcAction (
 		then (polyOp.setFaceSelection obj triangles; mcCall.popUp (">> "+triangles.count as string+" << Non Quad polygons is found and selected!") 5 )
 		else (mcCall.popUp "All is Quad!" 3)
 	),
-	fn scale_to_zb =
-	(
-		$.scale = [0.1, 0.1, 0.1] --ZB default cube is 5x5 cm
+	fn scale_to_zb = undo "Scale To ZBrush" on (
+		
+		 for o in selection where superClassOf o == GeometryClass do (
+			
+			case units.SystemType of ( --ZB default cube is 5x5 cm
+				
+				#meters: o.scale = [0.1, 0.1, 0.1]
+				#centimeters: o.scale = [0.01, 0.01, 0.01]
+			)	
+		)
 	),	
-	fn scale_from_zb =
-	(
-		$.scale = [10, 10, 10]
+	fn scale_from_zb = undo "Scale From ZBrush" on (
+		
+		 for o in selection where superClassOf o == GeometryClass do (
+			case units.SystemType of (	
+				
+				#meters: o.scale = [10, 10, 10]
+				#centimeters: o.scale = [100, 100, 100]
+			)
+		)
 	),	
 	fn concaveCheck = -- <> convex >< concave
 	(
@@ -2296,6 +2309,12 @@ struct mcAction (
 			local elen = mcPoly.getEdgeLength obj (esel as Array)[1]
 			format "Edge: %  length: %\n"  esel elen
 		)
+	),
+	fn pivotToZero = (
+		
+		local obj = (selection as array)[1]
+		if obj == undefined or  superClassOf obj != GeometryClass do return false
+		undo "Pivot To Zero" on obj.pivot = [0, 0, 0]	
 	)
 	/*<end>*/
 )

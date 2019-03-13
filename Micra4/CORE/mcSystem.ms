@@ -13,7 +13,8 @@ Global mcSystem
 struct mcSystem (
 
 	fn getSource = getSourceFileName(), --get path of this script
-	fn units_type = (
+	--local uType = mcSystem.unitsType()
+	fn unitsType = (
 	
 		case units.SystemType of
 		(

@@ -171,7 +171,7 @@ if mcPolyCount == undefined do
 	)
 	mcPolyCount = PCount()
 	mcPolyCount.text_pos   = [5, gw.getWinSizeY()-18, 1000]
-	mcPolyCount.units_type = mcSystem.units_type()
+	mcPolyCount.units_type = mcSystem.unitsType()
 )
 --Switch is preventing double Runs
 unregisterRedrawViewsCallback mcPolyCount.Count
@@ -203,7 +203,7 @@ if mcPolyCount == undefined do
 		local obj = sel[1]
 		
 		--System Units Type
-		local uType = mcSystem.units_type()
+		local uType = mcSystem.unitsType()
 	
 		-->if selection == 1
 		if  (obj != undefined and (classof obj == Editable_Poly or classof obj == PolyMeshObject)) then

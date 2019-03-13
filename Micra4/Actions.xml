@@ -54,6 +54,7 @@
     <Pivot_Planter icon="59" cmd="mcFile.fileInVersion Pivot_Planter" tooltip="Pivot Planter" />
     <Iron_Sight icon="77" cmd="mcAction.pivot_iron_sight()" tooltip="Iron Sight" />
     <Pivot_Planter_2 icon="59" cmd="mcFile.fileInVersion Pivot_Planter_Manip" tooltip="Pivot Planter 2" />
+    <Pivot_To_Zero icon="264" cmd="mcAction.pivotToZero()" tooltip="Pivot To Zero" />
   </Pivot>
   <Select>
     <Advanced_Edge_Loop icon="1" cmd="mcFile.fileInVersion Advanced_Edge_Loop" tooltip="Advanced Edge Loop" />

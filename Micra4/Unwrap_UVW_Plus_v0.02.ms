@@ -41,8 +41,8 @@ rollout mcUnwrapEditorDialog "UV+" width:96 height:456
 	button btn_align_r "R" pos:[64,292] width:24 height:24 images:(mcCall.getIcon 235) toolTip:"Align Right"
 	button btn_align_c "C" pos:[36,292] width:24 height:24 images:(mcCall.getIcon 236) toolTip:"Align Center"
 	
-	button btn_align_v "V" pos:[8,324] width:24 height:24 toolTip:"Align Verticaly"
-	button btn_align_h "H" pos:[64,324] width:24 height:24 toolTip:"Align Horizontaly"
+	button btn_rotate_v "V" pos:[8,324] width:24 height:24 toolTip:"Rotate Vertical"
+	button btn_rotate_h "H" pos:[64,324] width:24 height:24 toolTip:"Rotate Horizontal"
 	
 	GroupBox 'grp12' "Complex" pos:[4,356] width:88 height:96 align:#left
 	button 'btn_lm' "p1" pos:[8,372] width:24 height:24 images:(mcCall.getIcon 116) toolTip:"Add Lightmap"
@@ -86,6 +86,16 @@ rollout mcUnwrapEditorDialog "UV+" width:96 height:456
 				--if keyboard.controlPressed do
 				(if lvl == 2 then gco.edgeToFaceSelect() else if lvl == 1 do gco.vertToFaceSelect())
 			)
+		)
+	)
+	fn getCurentSelectionAs type = ( --conver selection to desired type and return as array
+	
+		if (convetrSelectionTo type == false) do return #()
+		case type of (
+		
+			#verts: gco.getSelectedVertices() as Array
+			#edges: gco.getSelectedEdges() as Array
+			#faces: gco.getSelectedFaces() as Array	
 		)
 	)
 	fn selectBorder =
@@ -218,7 +228,7 @@ rollout mcUnwrapEditorDialog "UV+" width:96 height:456
 		local sel_center = gco.getSelCenter()
 		local sel_faces = gco.getSelectedFaces()
 		if sel_faces.numberset < 2 do return false
-		local excluded_faces = #() --always remove an element faces
+		local excluded_faces = #() --removed element faces
 		undo "Align Elements" on
 		(
 			for i in sel_faces do
@@ -340,50 +350,40 @@ rollout mcUnwrapEditorDialog "UV+" width:96 height:456
 	)	
 	/**	
 	*@ Created by br0t 2014
-	*@ Mod by MerlinEl 2019
+	*@ Modified by MerlinEl 2019
 	*@ Usage > Distorts all UVs to fit into the UV square (0 to 1 in UV space).
 	*/
 	fn stretchUvsToFitSquare = (
 
-		local obj = (selection as array)[1]
-		if obj == undefined do return false
-		gco = modpanel.getcurrentobject()
-		-- If there is no Unwrap modifier, exit
-		if gco == undefined do return false
-		-- Get vertex arrays
-		local geom_vertices = #{1 .. obj.numtverts}	
-		local vertices_pos = for i in geom_vertices collect (getTVert obj i)
-
-		-- Select all vertices for transformation
-		gco.selectVerticesByNode geom_vertices obj
-
+		local sel_verts = getCurentSelectionAs #verts --this procedure also define gco and select vertices
+		if sel_verts.count == 0 do return false
+		local vertices_pos = for i in sel_verts collect (gco.getVertexPosition 0 i)
 		-- Get left/lower limit
-		minY = minX = 999999
-		for texVert in vertices_pos do
-		(
-		if texVert.x < minX do minX = texVert.x
-		if texVert.y < minY do minY = texVert.y
+		local minY = minX = 999999
+		for p in vertices_pos do (
+			
+			if p.x < minX do minX = p.x
+			if p.y < minY do minY = p.y
 		)--end if
-
 		-- Move all to lower left corner of UV square	
 		moveX = minX * -1
 		moveY = minY * -1
 		gco.moveSelectedVertices [moveX, moveY, 0]
 
 		-- Verts have been changed so update the array
-		vertices_pos = for i in geom_vertices collect (getTVert obj i)
+		vertices_pos = for i in sel_verts collect (gco.getVertexPosition 0 i)
 
 		-- Get right/upper limit
 		maxY = maxX = -999999
-		for texVert in vertices_pos do
-		(
-		if texVert.x > maxX do maxX = texVert.x
-		if texVert.y > maxY do maxY = texVert.y
+		for texVert in vertices_pos do (
+			
+			if texVert.x > maxX do maxX = texVert.x
+			if texVert.y > maxY do maxY = texVert.y
 		)--end if
 
 		-- Stretch to upper right corner of UV square
-		scaleX = 1.0 / maxX
-		scaleY = 1.0 / maxY
+		local scaleX = 1.0 / maxX
+		local scaleY = 1.0 / maxY
 		uvOrigin = [0, 0, 0]
 		gco.scaleSelectedXY scaleX scaleY uvOrigin
 	)--end fn
@@ -434,8 +434,8 @@ rollout mcUnwrapEditorDialog "UV+" width:96 height:456
 	on btn_lm pressed do undo "Add Lightmap" on mcAction.addLightMap 2
 	on btn_randomize_x pressed do randomizeElements #X
 	on btn_randomize_y pressed do randomizeElements #Y	
-	on btn_align_v pressed do alignElements #vertical
-	on btn_align_h pressed do alignElements #horizontal
+	on btn_rotate_v pressed do alignElements #vertical
+	on btn_rotate_h pressed do alignElements #horizontal
 	on btn_stitch pressed do stitchSelectedEdges()
 	on btn_fit pressed do stretchUvsToFitSquare()
 	--<
@@ -451,6 +451,84 @@ rollout mcUnwrapEditorDialog "UV+" width:96 height:456
 		createdialog mcUnwrapEditorDialog
 	)
 )
+
+
+/*
+
+	on btnUp pressed do ( F_moveUV [0,1,0] )
+	on btnLeft pressed do ( F_moveUV [-1,0,0] )
+	on btnRight pressed do ( F_moveUV [1,0,0] )
+	on btnDown pressed do ( F_moveUV [0,-1,0] )
+	on btnCenter pressed do ( F_moveUV "C" )
+-- move uv's
+fn F_moveUV movePos = (
+	if selection.count == 1 do
+	(
+		obj = selection[1]
+		if obj.modifiers.count > 0 do
+		(
+			if classof obj.modifiers[1] == Unwrap_UVW do
+			(
+				objMod = obj.modifiers[1]
+				objMod.faceToVertSelect() 
+				vArray = objMod.getSelectedVertices()
+				for vVar in vArray do
+				(
+					if movePos == "C" do
+					(
+						local oldSub = subobjectlevel
+						subobjectlevel = 3
+						midPos = objMod.getSelCenter()
+						print midPos
+						movePos = [-(floor midPos.x), -(floor midPos.y), 0]
+						subobjectlevel = oldSub
+					)
+					
+					oldPos = objMod.getVertexPosition 0 vVar
+					objMod.setVertexPosition 0 vVar (oldPos + movePos)
+				)
+			)
+		)
+	)
+)
+on btnScale12H pressed do ( F_scaleUV [2,1] true)
+on btnScale12V pressed do ( F_scaleUV [1,2] true )
+on btnScale2H pressed do ( F_scaleUV [2,1] false )
+on btnScale2V pressed do ( F_scaleUV [1,2] false  )
+fn F_scaleUV scaleFactor divideBool = (
+	if selection.count == 1 do
+	(
+		obj = selection[1]
+		if obj.modifiers.count > 0 do
+		(
+			if classof obj.modifiers[1] == Unwrap_UVW do
+			(
+				objMod = obj.modifiers[1]
+				objMod.faceToVertSelect() 
+				vArray = objMod.getSelectedVertices()
+				for vVar in vArray do
+				(
+					updPos = objMod.getVertexPosition 0 vVar
+					
+					if divideBool then
+					(
+						updPos.x = updPos.x / scaleFactor.x
+						updPos.y = updPos.y / scaleFactor.y
+					)
+					else
+					(
+						updPos.x = updPos.x * scaleFactor.x
+						updPos.y = updPos.y * scaleFactor.y
+					)
+					
+					objMod.setVertexPosition 0 vVar updPos
+				)
+			)
+		)
+	)
+)
+*/
+
 
 
 /*

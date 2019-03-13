@@ -55,7 +55,7 @@ struct mcLiveMeasure	(
 		gw.setTransform(Matrix3 1)
 		gw.setColor #line line_collor 
 		gw.polyline #(p1, p2) false --close shape true - false
-		gw.text mid_pos (dist as String) color:yellow
+		gw.text mid_pos (dist as String + " " + mcSystem.unitsType()) color:yellow
 		
 		--Think about recalculate size of UPDATE rect ...
 		/*
@@ -102,7 +102,7 @@ struct mcLiveMeasure	(
 	),
 	fn toString = (
 
-		"Measure:[" + _vert_a as String + ", " + _vert_b as String + "] len:" + (getDist()) as String
+		"Measure:[" + _vert_a as String + ", " + _vert_b as String + "] len:" + (getDist()) as String + " " + mcSystem.unitsType()
 	),
 	fn selected state = (
 		
@@ -154,6 +154,7 @@ rollout mcLiveMeasureDialog "Live Measure:" width:236 height:208
 		CompleteRedraw()
 		spn_edge_length.value = (all_measures[index]).getDist()
 	)
+	
 	fn updateListDataCallback  = ( --fill all list data each time when any measure scale is changed
 		
 		if all_measures.count == 0 do return false
@@ -162,7 +163,11 @@ rollout mcLiveMeasureDialog "Live Measure:" width:236 height:208
 		
 			updated_items  = append updated_items (m.toString())
 		)
-		lbx_measures.items = updated_items
+		--condition if something is changed then update list
+		if not mcArray.isEqualArrays lbx_measures.items updated_items do (
+			
+			lbx_measures.items = updated_items	
+		)
 	)
 	fn addLineMeasure = (
 		

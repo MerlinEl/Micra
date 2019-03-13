@@ -14,11 +14,11 @@
   </Properties_1>
   <Properties_2>
     <mcMicraDialog active="true" pos="[2172,222]" size="[148,66]" title="" />
-    <mcCustomizeDialog active="false" pos="[1790,700]" size="[224,404]" title="" />
+    <mcCustomizeDialog active="false" pos="[1070,450]" size="[224,404]" title="" />
     <mcProgramDialog active="undefined" pos="[2298,0]" size="[256,232]" title="" />
     <mcisoDialog active="false" pos="[181,152]" size="[140,400]" title="" />
     <mcModifierDialog active="undefined" pos="[100,100]" size="[400,400]" title="" />
-    <mcIconMakerDialog active="false" pos="[580,420]" size="[730,500]" title="" />
+    <mcIconMakerDialog active="false" pos="[820,550]" size="[730,500]" title="" />
     <mcDeepIsolateDialog active="true" pos="[1118,86]" size="[84,44]" title="" />
     <mcMoveTowardsDialog active="undefined" pos="[441,377]" size="[200,76]" title="" />
     <mcClonerDialog active="undefined" pos="[1013,725]" size="[164,296]" title="" />
@@ -42,9 +42,9 @@
     <mcRenderToTextureModDialog active="undefined" pos="[100,100]" size="[100,100]" title="" />
     <mcSendUVWToPsDialog active="true" pos="[100,100]" size="[148,172]" title="" />
     <mcRotateObjectDialog active="undefined" pos="[100,100]" size="[100,100]" title="" />
-    <mcViewportRecorderDialog active="undefined" pos="[100,100]" size="[100,100]" title="" />
+    <mcViewportRecorderDialog active="true" pos="[100,100]" size="[316,124]" title="" />
     <mcGifCompillerDialog active="undefined" pos="[100,100]" size="[100,100]" title="" />
-    <mcScriptManDialog active="true" pos="[-548,204]" size="[400,624]" title="" />
+    <mcScriptManDialog active="true" pos="[110,296]" size="[400,624]" title="" />
     <mcColorPickerDialog active="false" pos="[120,260]" size="[328,276]" title="" />
     <mcQuickColorPickerDialog active="undefined" pos="[100,100]" size="[100,100]" title="" />
     <mcInterfaceColorDilaog active="undefined" pos="[1445,427]" size="[299,130]" title="" />
@@ -78,7 +78,6 @@
     <btn_C2 action="Pivot_To_X" icon="12" />
     <btn_C3 action="Align_To_World" icon="15" />
     <btn_C4 action="Pivot_To_Vertex" icon="14" />
-    <btn_C5 action="Pivot_Align_3P" icon="5" />
     <btn_C7 action="Align_To_Base" icon="55" />
     <btn_C12 action="Afect_Pivot_Only" icon="51" />
     <btn_C11 action="Iron_Sight" icon="77" />
@@ -205,5 +204,9 @@
     <btn_J6 action="Vertex_Alpha_Blend" icon="261" />
     <btn_J7 action="Get_Edges_Length" icon="262" />
     <btn_J16 action="Lode_Tester" icon="129" />
+    <btn_J15 action="Live_Measure" icon="30" />
+    <btn_C10 action="Pivot_Align_3P" icon="5" />
+    <btn_C5 action="Pivot_Planter_2" icon="59" />
+    <btn_C8 action="Pivot_To_Zero" icon="264" />
   </Buttons>
 </USER>
