@@ -29,7 +29,7 @@
     <mcEdgeScaleDialog active="undefined" pos="[357,307]" size="[144,152]" title="" />
     <mcResizeUVWDialog active="undefined" pos="[201,463]" size="[240,56]" title="" />
     <mcLodeTestDialog active="undefined" pos="[179,86]" size="[328,164]" title="" />
-    <mcLpWizardDialog active="undefined" pos="[190,151]" size="[448,84]" title="" />
+    <mcLpWizardDialog active="true" pos="[433,296]" size="[528,84]" title="" />
     <mcCharSelectDialog active="undefined" pos="[180,390]" size="[212,388]" title="" />
     <mcCharPoseDialog active="undefined" pos="[184,304]" size="[146,388]" title="" />
     <mcSaveProfileAsDialog active="true" pos="[1840,370]" size="[240,66]" title="" />
