@@ -22,8 +22,31 @@ struct MCRA_ARRAY (
 	 	if (not elementExists) then
 		append inArray newElement
 	),
+	/**
+	*@Author	denisT
+	*@Usage		find duplicates in an array
+	*@Example
+		mcArray.findDuplicates #(1,2,3,2,1,4) > #(#{1, 5}, #{2, 4})
+		mcArray.findDuplicates #("a","b","c","a","b","d") > #(#{1, 4}, #{2, 5})
+	*/
+	fn findDuplicates list = (
+	
+		local vals = #()
+		local dups = #()
+		for k=1 to list.count do 
+		(
+			if (i = finditem vals list[k]) != 0 then append dups[i] k else 
+			(
+				append vals list[k]
+				dups[vals.count] = #{k}
+			)
+		)
+		--collect only bitarrays with two or more dups (drop singles which is not realy dups)
+		for ba in dups where ba.numberSet > 1 collect ba
+	),
 	/*
-	@Example
+	*@Usage > Search for an item in multiarray
+	*@Example
 	a = #( #(1,2), #("c","d","e"), #(56,47) ) 
 	b = findItem2 a "c" 1
 	b = findItem2 a 47 2
@@ -36,7 +59,48 @@ struct MCRA_ARRAY (
 		)
 		return index
 	),
+	fn copyArray arr =(for i in arr collect i),
 	fn reverseArray arr = (for i=arr.count to 1 by -1 collect arr[i]),
+	fn swapItems arr index_a index_b = (
+	
+		local item_a = arr[index_a]
+		local item_b = arr[index_b]
+		arr[index_a] = item_b
+		arr[index_b] = item_a
+	),
+	/**
+	*@Usage > Rotate an array cnt times forward or backward
+	*@Example
+		ar = #(1, 2, 3, 4)
+		mcArray.rotateItems ar 1 > #(4, 1, 2, 3)
+		mcArray.rotateItems ar 2 > #(3, 4, 1, 2)
+		mcArray.rotateItems ar 1 way:#left > #(2, 3, 4, 1)
+	*/
+	fn rotateItems arr cnt way:#right = (
+
+		for i=1 to cnt do ( --how many times we shift
+		
+			case way of (
+			
+				#right:(
+					local next = 2
+					for j=1 to arr.count-1 do ( --shift each except last
+				
+						swapItems arr 1 next --swap first with next
+						next+=1
+					)
+				)
+				#left:(
+					local prev = arr.count - 1
+					for j=arr.count to 2 by -1 do ( --shift each except first
+				
+						swapItems arr arr.count prev --swap last with prev
+						prev-=1
+					)
+				)
+			)
+		)
+	),
 	fn mergeClone arr1 arr2 = (
 		
 		local new_arr = #()

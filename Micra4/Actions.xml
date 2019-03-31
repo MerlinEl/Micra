@@ -55,6 +55,7 @@
     <Iron_Sight icon="77" cmd="mcAction.pivot_iron_sight()" tooltip="Iron Sight" />
     <Pivot_Planter_2 icon="59" cmd="mcFile.fileInVersion Pivot_Planter_Manip" tooltip="Pivot Planter 2" />
     <Pivot_To_Zero icon="264" cmd="mcAction.pivotToZero()" tooltip="Pivot To Zero" />
+    <Align_To_Face icon="265" cmd="mcAction.alignPivotToSelectedFace()" tooltip="Align To Face" />
   </Pivot>
   <Select>
     <Advanced_Edge_Loop icon="1" cmd="mcFile.fileInVersion Advanced_Edge_Loop" tooltip="Advanced Edge Loop" />
@@ -208,6 +209,7 @@
     <LS3D_Model_Manager icon="254" cmd="mcFile.fileInVersion LS3D_Model_Manager" tooltip="LS3D Model Manager" />
     <Get_Edges_Length icon="262" cmd="mcAction.getEdgesLength()" tooltip="Get Edges Length" />
     <Live_Measure icon="30" cmd="mcFile.fileInVersion Live_Measure" tooltip="Live Measure" />
+    <Live_Modeling icon="146" cmd="mcFile.fileInVersion Live_Modeling" tooltip="Live Modeling" />
   </Helpers>
   <Animation>
     <Merge_Animation icon="130" cmd="mcFile.fileInVersion Merge_Animation" tooltip="Merge Animation" />

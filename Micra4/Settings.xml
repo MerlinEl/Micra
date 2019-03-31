@@ -97,7 +97,7 @@
     <Space val="1.03" />
     <Spline_Magnet val="0.05" />
     <Soft_Selection val="0.01" />
-    <Struct_Action val="0.03" />
+    <Struct_Action val="0.04" />
     <Time_Break val="0.01" />
     <Transformer val="0.08" />
     <UE_Model_Importer val="0.07" />
@@ -113,7 +113,8 @@
     <Object_Inspector val="0.02" />
     <Vertex_Alpha_Blend val="0.01" />
     <Pivot_Planter_Manip val="2.05" />
-    <Live_Measure val="0.03" />
+    <Live_Measure val="0.09" />
+    <Live_Modeling val="0.02" />
   </Version>
   <SystemFiles val="Micra's Settings Files">
     <Actions val="Contains all accesible Micra's actions" />

@@ -54,6 +54,23 @@ struct MICRA_MATH (
 		
 		return 2 * int( num / 2)
 	),
+	--Round number each > 1cm, 5cm, 10cm, 50cm, 1m 
+	fn roundIntLimited num step:10 = (
+
+		--if is float round it first
+		if classOf num == Float do num = int (roundFloat num pre:1)	
+		local cnt = int (num / step) --steps count in num
+		local m = mod num step --get modulo
+		case step of (
+
+			1		: num
+			5		: if m > 2		then (cnt * step + 5		) else cnt * step
+			10	: if m > 4		then (cnt * step + 10		) else cnt * step
+			50	: if m > 24	then (cnt * step + 50		) else cnt * step
+			100	: if m > 49	then (cnt * step + 100	) else cnt * step
+			default:undefined
+		)
+	),
 	/**
 	*@Usage
 		value:int 	input number
@@ -70,8 +87,33 @@ struct MICRA_MATH (
 		value = amax #(value, min_val) --min
 		value = amin #(value, max_val) --max
 	),
+	fn degTorad deg = (PI/deg),
 	fn getVectorsAngle v1 v2 = (acos(dot (normalize v1) (normalize v2))),
+	fn getLinesAngle pA pB pC pD = (
+	
+		local vAB=pB-pA
+		local vCD=pD-pC
+		local angle=acos (dot (normalize vAB) (normalize vCD))
+		if angle<90.0 then angle else (180.0-angle)
+	),
 	fn movePointAlongVector p v val = ( p + (normalize v) * val ),
+	/**
+	*@Usage > get circular road of points around a center
+	*/
+	fn rotatePointAroundCenter center dir radius steps:8 inverse:false debug:false clr:green = (
+
+		if inverse do dir = -dir
+		local tm = (matrixFromNormal dir)
+		local p = center+(tm.row1*radius)
+		local div = 360/steps
+		local points = for i = 0 to (360 - div) by div collect (
+
+			local q = quat i (normalize dir)
+			(((p - center ) * q) + center)
+		)
+		if debug do for i=1 to points.count do text text:(i as string) pos:points[i] size:5 wirecolor:clr
+		points
+	),
 	fn intersectionLineLine p1 p2 p3 p4 = 
 	(
 		local a=p2-p1
@@ -110,6 +152,16 @@ struct MICRA_MATH (
 		p.x = roundToDecimals p.x dec
 		p.y = roundToDecimals p.y dec
 		p.z = roundToDecimals p.z dec
+	),
+	/**
+	*@Author > Joshua Newman (2004)
+	*@Usage > Get Normal from 3 points
+	*/
+	fn get3PNormal p1 p2 p3= (
+	
+		local v3=normalize (p3-p1)
+		local v2=normalize (p2-p1)
+		normalize (cross v2 v3)
 	),
 	function get2DBoundingBox pos_array =
 	(

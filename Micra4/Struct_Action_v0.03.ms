@@ -2315,6 +2315,57 @@ struct mcAction (
 		local obj = (selection as array)[1]
 		if obj == undefined or  superClassOf obj != GeometryClass do return false
 		undo "Pivot To Zero" on obj.pivot = [0, 0, 0]	
+	),
+	/**
+	*@Author	Martijn(magicm)
+	*@Exceptions	negative or non-uniform objects scale
+	*@Examples
+		mcAction.alignPivotToObject $Box01 $Point01
+		mcAction.alignPivotToObject $Box02 (matrix3 1)
+	*/
+	fn alignPivotToObject src_obj trg_obj = (
+		-- Get matrix from object
+		if classOf trg_obj != matrix3 then trg_obj = trg_obj.transform
+		
+		-- Store child transforms
+		local ChldTms = in coordSys trg_obj ( for Chld in src_obj.children collect Chld.transform )
+		
+		-- Current offset transform matrix
+		local TmScale = scaleMatrix src_obj.objectOffsetScale
+		local TmRot = src_obj.objectOffsetRot as matrix3
+		local TmPos = transMatrix src_obj.objectOffsetPos
+		local TmOffset = TmScale * TmRot * TmPos
+		
+		-- New offset transform matrix
+		TmOffset *= src_obj.transform * inverse trg_obj
+		
+		-- Apply matrix
+		src_obj.transform = trg_obj
+		
+		-- Restore offsets
+		src_obj.objectOffsetPos = TmOffset.translation
+		src_obj.objectOffsetRot = TmOffset.rotation
+		src_obj.objectOffsetScale = TmOffset.scale
+		
+		-- Restore child transforms
+		for i = 1 to src_obj.children.count do src_obj.children[i].transform = ChldTms[i] * inverse trg_obj * src_obj.transform
+	),
+	fn pivotAlignToFace = (
+	
+		local obj = (selection as array)[1]
+		if obj == undefined or  classOf obj != Editable_Poly do return false
+		local face_index = (polyop.getFaceSelection obj as Array)[1]	 
+		if face_index == undefined do return false  
+		local face_normal = in coordsys obj (polyop.getFaceNormal obj face_index) 
+		local world_up_vector = [0,0,1] 
+		local right_vector = normalize (cross world_up_vector face_normal) 
+		local up_vector = normalize ( cross right_vector face_normal )
+		local tm = matrix3 right_vector up_vector face_normal [0,0,0] 
+		local point_helper=point()
+		point_helper.transform = tm
+		point_helper.position = polyOp.getFaceCenter obj face_index
+		mcAction.alignPivotToObject obj point_helper
+		delete point_helper
 	)
 	/*<end>*/
 )

@@ -6,6 +6,7 @@
 	Micra
 	mcDate
 	mcString
+	mcArray
 	mcXML
 *
 *@Used Objects
@@ -14,13 +15,22 @@
 	mcXMLAttrib
 *
 *@Example
-*	mcFile.getDirTree (Micra.RootDir)
-*	print mcFile.all_dirs
+*	dir_tree = mcFile.getDirTree Micra.RootDir
+*	print dir_tree
+*	files_tree = mcFile.getFilesTree Micra.RootDir
+*	print files_tree
 */
 struct MICRA_FILE (
 	
-	all_dirs = #(),
 	fn getSource = getSourceFileName(), --get path of this script
+	fn filterPath path = --fix path 
+	(
+		local arr   = filterString path "\\/"
+		local isDir = path[path.count-3] != "." -- example C:\temp.txt
+		local newPath = ""
+		for i=1 to arr.count do newPath += arr[i] + ( if isDir or i != arr.count then "/" else "")
+		return newPath
+	),
 	/*fn secondsSinceFileWritten fpath = ( --Not Used
 	
    		if not doesFileExist fpath then 0
@@ -75,15 +85,15 @@ struct MICRA_FILE (
 		
 			try (
 				fileIn file
-				format "mcFile > fileInVersion > Load tool [  %  ]  was success!\n" script_name
+				format "mcFile > fileInVersion > [  %  ]\n" script_name
 			
 			) catch (
 			
-				format "mcFile > fileInVersion > Load tool [  %  ]  was failed!\n\tError:%\n" script_name (getCurrentException())
+				format "mcFile > fileInVersion > [  %  ]  was failed!\n\tError:%\n" script_name (getCurrentException())
 			)
 		) else (
 		
-			format "mcFile > fileInVersion > Load tool [  %  ]  was failed!\n\tUnable locate file [ % ]\n" script_name file
+			format "mcFile > fileInVersion >  [  %  ]  was failed!\n\tUnable locate file [ % ]\n" script_name file
 		)
 	),
 	fn isFilePath _path =  (
@@ -128,18 +138,117 @@ struct MICRA_FILE (
 		--append slash at the end
 		if parent_path[parent_path.count] != "\\" then parent_path + "\\" else parent_path
 	),
-	fn getDirTree dir =
-	(
-		all_dirs += curr_dirs = getDirectories (dir+"*.*")
-		for i in curr_dirs do getDirTree i
+	fn getDirectoriesRecursive all_dirs current_dir = (
+	
+		local sub_dirs = getDirectories (current_dir+"*.*")
+		join all_dirs sub_dirs
+		for d in sub_dirs do getDirectoriesRecursive all_dirs d
 	),
-	fn filterPath path = 
-	(
-		local arr   = filterString path "\\/"
-		local isDir = path[path.count-3] != "." -- example C:\temp.txt
-		local newPath = ""
-		for i=1 to arr.count do newPath += arr[i] + ( if isDir or i != arr.count then "/" else "")
-		return newPath
+	fn getDirTree dir = (
+		
+		local all_dirs = #()
+		getDirectoriesRecursive all_dirs dir	
+		all_dirs
+	),
+	fn getFilesTree dir fname:"*" ext:"*"= (
+		
+		local all_dirs = getDirTree dir
+		local filter = fname + "." + ext
+		local all_files = (getFiles (dir+filter))
+		for d in all_dirs do join all_files (getFiles (d+filter))
+		all_files
+	),
+	/**
+	*@Example
+		mcFile.getFilesDuplicates "g:\\CINEMA\\_unsorted_\\"
+		mcFile.getFilesDuplicates "g:\\CINEMA\\_unsorted_\\" filter:#("avi", "url", "mp4", "srt", "mkv", "zip", "ass", "ssa")
+	*/
+	fn getFilesDuplicates dir filter:#() debug:false = (
+	
+		local all_files = getFilesTree dir
+		local file_names = for f in all_files collect filenameFromPath f
+		local dups_array = mcArray.findDuplicates file_names
+		if debug do for ba in dups_array do (
+		
+			format "------------------------------------------\n"
+			format "dupplicated files at:%\n" ba
+			for i in (ba as array) do format "\t% size:%\n" (f = all_files[i]) (getFileSize f)
+			format "------------------------------------------\n"
+		)
+		local dups = #()
+		for ba in dups_array do ( --for each dupes set
+		
+			local dupps_set = (ba as array)
+			local first_file_size = getFileSize all_files[dupps_set[1]]
+			local fisrt_skip = true
+			for i in dupps_set do (
+			
+				if fisrt_skip do ( --skip first file from each set
+				
+					fisrt_skip = false
+					continue
+				)
+				local file = all_files[i]
+				if filter.count != 0 do ( --skip files which not have right extension
+
+					local ext = getFilenameType file 
+					ext = substring ext 2 ext.count --remove dot (.avi)
+					if findItem filter ext == 0 do continue
+				)
+				if first_file_size != getFileSize file do continue --skip files with not same size
+				append dups file
+			)
+		)
+		dups
+	),
+	/**
+	*@Usage	Compare two dirs include subdirs. Output files is diference between source and target dir 
+	*@Example
+		missing_files = getMissingFiles "k:\\Filmy\\" "g:\\CINEMA\\_unsorted_\\" filter:#("avi", "url", "mp4", "srt", "mkv", "zip", "ass", "ssa")
+		missing_files = getMissingFiles "k:\\Filmy\\" "g:\\CINEMA\\_unsorted_\\" filter:#("avi")
+	*/
+	fn getMissingFiles src_dir trgt_dir filter:#() debug:false = (	
+
+		local src_files = getFilesTree src_dir
+		local trgt_files = getFilesTree trgt_dir
+		if debug do format "src:% trgt:%\n" src_files.count trgt_files.count
+		local trgt_fnames = for f in trgt_files collect (filenameFromPath f)
+		local missing_files = #()
+		for file in src_files do (
+
+			if filter.count != 0 do ( --skip files which not have right extension
+
+				local ext = getFilenameType file 
+				ext = substring ext 2 ext.count --remove dot (.avi)
+				if findItem filter ext == 0 do continue
+			)
+			local fname = filenameFromPath file
+			if findItem trgt_fnames fname != 0 do continue --found (not missing)
+			if debug do format "missing file: [ % ]\n" fname
+			append missing_files file
+		)
+		missing_files
+	),
+	/**
+	*@Example
+		mcFile.delFileInTree "g:\\CINEMA\\_unsorted_\\" "Thumbs.db"
+		mcFile.delFileInTree "g:\\CINEMA\\_unsorted_\\" "readme.txt"
+	*/
+	fn delFileInTree dir fname_ext confirm:true = (
+	
+		local far = filterString fname_ext "."
+		if confirm do (
+			
+			if not (queryBox ("You are sure to delete file [ "+fname_ext+" ]  in all subdirs:\n[ "+dir+" ] ?") title:Micra.version) do (
+				
+				print "delFileInTree > was Aborted."
+				return false
+			)
+		)
+		if far.count != 2 do return false
+		local all_files = getFilesTree dir fname:far[1] ext:far[2]
+		for f in all_files do deleteFile f
+		format "Deleted files( % )\n" all_files.count
 	),
 	fn copyDirTree indir outdir hidden:true exceptempty:false owerwritereadonly:true existingonly:false silent:true =
 	(

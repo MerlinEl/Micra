@@ -14,11 +14,11 @@
   </Properties_1>
   <Properties_2>
     <mcMicraDialog active="true" pos="[1570,210]" size="[148,66]" title="" />
-    <mcCustomizeDialog active="false" pos="[950,300]" size="[224,404]" title="" />
+    <mcCustomizeDialog active="false" pos="[950,300]" size="[600,404]" title="" />
     <mcProgramDialog active="false" pos="[100,0]" size="[256,232]" title="" />
     <mcisoDialog active="false" pos="[100,152]" size="[140,400]" title="" />
     <mcModifierDialog active="false" pos="[100,100]" size="[400,400]" title="" />
-    <mcIconMakerDialog active="false" pos="[190,310]" size="[730,500]" title="" />
+    <mcIconMakerDialog active="false" pos="[210,330]" size="[730,500]" title="" />
     <mcDeepIsolateDialog active="false" pos="[100,86]" size="[84,44]" title="" />
     <mcMoveTowardsDialog active="false" pos="[100,377]" size="[200,76]" title="" />
     <mcClonerDialog active="false" pos="[671,202]" size="[164,296]" title="" />
@@ -193,5 +193,6 @@
     <btn_C10 action="Pivot_Align_3P" icon="5" />
     <btn_C5 action="Pivot_Planter_2" icon="59" />
     <btn_J5 action="Live_Measure" icon="30" />
+    <btn_C8 action="Align_To_Face" icon="265" />
   </Buttons>
 </USER>

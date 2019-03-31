@@ -145,7 +145,7 @@ struct MICRA_STRUCTURE (
 	
 		local last_profile_index = mcFile.readSettings Micra.UserSettings "Settings/CurrentProfile"
 		local last_profile_name = "Profile_"+ last_profile_index + ".xml"
-		format "% > Loading Profile( % ) for User( % )\n" version last_profile_index username
+		format "% > loadUserProfile > profile( % ) user( % )\n" version last_profile_index username
 		UserProfile = UserDir + last_profile_name
 	),
 	--> check user files and reconstruct missing
