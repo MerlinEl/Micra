@@ -61,7 +61,7 @@ struct MICRA_UPDATER_STRUCTURE	(
 		local node_attribs = (mcObject.new()).addMore #(
 
 			mcItem "version" version_string, 
-			mcItem "date" ((mcDate.current()).toString())
+			mcItem "date" ((mcDate.current()).toStringSimple())
 		)
 		mcFile.saveSettings local_xml ("UPDATE/VERSIONS/item_"+next_index as string) node_attribs type:"attribs"
 		mcFile.saveSettings local_xml "UPDATE/CURRENT/last_index" (next_index as String)
