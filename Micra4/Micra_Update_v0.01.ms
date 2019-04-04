@@ -81,15 +81,8 @@ struct MICRA_UPDATER_STRUCTURE	(
 		local xml_current = xml.getNode ("//UPDATE/CURRENT/last_index")
 		local last_index  = xml_current.getAttribute "val"
 		local xml_version = xml.getNode ("//UPDATE/VERSIONS/item_"+last_index)
-		local last_version = xml_version.getAttribute "version"
-		format "last_index:% last_version:%\n" last_index last_version
-		
-		/*
-		local xml_node = xml.getNode ("//UPDATE/VERSIONS")
-		local last_entry = (xml_node.getChildren())[1]
-		--format "xml:%\n" (xml.toString())
-		format "nodes:%\n" last_entry
-		local server_version = last_entry.getAttribute "version"
+		local server_version = xml_version.getAttribute "version"
+		format "last_index:% server_version:%\n" last_index server_version
 		format "Micra > versions compare > LOCAL:% SERVER:%\n" local_version server_version
 		if ((execute local_version) >= (execute server_version)) then (
 		
@@ -97,7 +90,7 @@ struct MICRA_UPDATER_STRUCTURE	(
 		) else ( 
 		
 			updateMicra()
-		)*/
+		)
 	),
 	/**
 	*@Example
