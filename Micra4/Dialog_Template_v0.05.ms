@@ -8,6 +8,7 @@ Global mcTemplateDialog
 	mcTemplateDialog.moveTo [100, 200]
 	atd...
 */
+if ::mcTemplateDialog != undefined do try(mcTemplateDialog.close())catch()
 struct DOTNET_MAIN_STRUCT  (
 	
 public	
@@ -49,10 +50,25 @@ private
 			_mcs.start_mouse_pos = [_mcs.form.MousePosition.x, _mcs.form.MousePosition.y] - [_mcs.form.left, _mcs.form.top]  
 		)
 	),
-	fn onLblTMouseUp s a = (
+	fn onLblTMouseUp s a = --stop drag
+	(
+		local form = s.parent
+		case a.Button.ToString() of (
 		
-		if a.Button == a.Button.right then mcTemplateDialog.close()
-	), --stop drag or close
+			"Left"	: (
+				--format " save form:%  pos:% size:%\n" form.name (form.location.toString()) (form.size.toString())
+				mcFile.saveDialogSettings form.name "Properties_2" --save form position after drag
+			)
+			"Right"	: (
+			
+				form.close()
+			)
+			"Middle"	: (
+			
+
+			)
+		)
+	),
 	-- min max form
 	fn minMaxForm s a = ( -- s = Button, a = MouseEventArgs
 		
@@ -79,7 +95,7 @@ private
 	fn onCloseForm s a = (
 		
 		--format " save form:%  pos:% size:%\n" s.name (s.location.toString()) (s.size.toString())
-		mcFile.saveDialogSettings s.name "Properties_2"
+		mcFile.saveDialogSettings s.name "Properties_2" --save form position after close
 	),
 	-- Custom  Functions
 	-->

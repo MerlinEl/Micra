@@ -472,7 +472,7 @@ rollout mcLiveMeasureDialog "Live Measure:" width:236 height:244
 	fn addLineMeasures = (
 			
 		local obj = (selection as array )[1]
-		if subobjectlevel != 2 or obj == undefined or classOf obj != Editable_Poly do return false
+		if classOf obj != Editable_Poly do return false
 		local esel = obj.getSelection #Edge as Array	
 		for eindex in esel do (
 			

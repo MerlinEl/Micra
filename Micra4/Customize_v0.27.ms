@@ -52,8 +52,7 @@ struct MICRA_COMPONENTS_STRUCT
 	tab_1 = TAB1_COMPONENTS_STRUCT(),
 	tab_2 = TAB2_COMPONENTS_STRUCT(),
 	tab_3 = TAB3_COMPONENTS_STRUCT(),
-	netDMove = false, 
-	netDmPos,
+	start_mouse_pos, --mouse pos on dialog
 	edit_mode = false
 	--interface
 )
@@ -61,28 +60,24 @@ struct MICRA_COMPONENTS_STRUCT
 form.tag = dotNetMXSValue (MICRA_COMPONENTS_STRUCT()) --store structure here for events use
 
 --|	--Form move
-fn onLblTMouseMove s a = 
-(
+fn onLblTMouseMove s a = (  --drag form
+	
 	local form = s.parent
-	if form.tag.value.netDMove do --dragForm
-	(
-		mcDialog.snapForm form form.tag.value.netDmPos
-	)
+	local mcs = form.tag.value
+	if a.Button == a.Button.left do  mcDialog.snapForm form mcs.start_mouse_pos
 )
-fn onLblTMouseDown s a = 
-(
-	if a.Button == a.Button.left do --enableDrag
-	(
-		local form = s.parent
-		form.cursor.current = netCursors.Hand
-		form.tag.value.netDmPos = [form.MousePosition.x, form.MousePosition.y] - [form.left, form.top] 
-		form.tag.value.netDMove = true 
+fn onLblTMouseDown s a = ( --start drag
+		
+	local form = s.parent
+	local mcs = form.tag.value
+	form.cursor.current = netCursors.Hand
+	if a.Button == a.Button.left do ( --enable drag
+		mcs.start_mouse_pos = [form.MousePosition.x, form.MousePosition.y] - [form.left, form.top]  
 	)
 )
 fn onLblTMouseUp s a = (
 
 	local form = s.parent
-	form.tag.value.netDMove = false --disableDrag
 	case a.Button.ToString() of (
 	
 		"Left"	: (
@@ -963,6 +958,8 @@ fn onFormVisibilityChanged s a = (
 		false:(
 		
 			--print "customize hide"
+			--format " save form:%  pos:% size:%\n" s.name (s.location.toString()) (s.size.toString())
+			mcFile.saveDialogSettings s.name "Properties_2" --save form position after close
 			mcGM.setParam "action_editor_switch" undefined
 			editModeSwitch false --restore form width to normal
 			mcEvents.unregisterEvent "ICON_INDEX_PICKED" onIconIndexPicked

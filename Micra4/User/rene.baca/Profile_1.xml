@@ -5,23 +5,23 @@
     <mc_Dialog_B active="true" pos="[2172,288]" size="[148,162]" title="Object:" btnCount="[6,6]" />
     <mc_Dialog_C active="true" pos="[2172,450]" size="[148,66]" title="Pivot:" btnCount="[6,2]" />
     <mc_Dialog_D active="true" pos="[2172,516]" size="[148,90]" title="Select:" btnCount="[6,3]" />
-    <mc_Dialog_E active="false" pos="[148,843]" size="[244,42]" title="Animation:" btnCount="[10,1]" />
+    <mc_Dialog_E active="true" pos="[2090,1190]" size="[244,42]" title="Animation:" btnCount="[10,1]" />
     <mc_Dialog_F active="true" pos="[1976,222]" size="[196,90]" title="Modifiers:" btnCount="[8,3]" />
     <mc_Dialog_G active="true" pos="[2172,606]" size="[148,114]" title="Modify:" btnCount="[6,4]" />
     <mc_Dialog_H active="true" pos="[2172,720]" size="[148,66]" title="Materials:" btnCount="[6,2]" />
     <mc_Dialog_I active="true" pos="[2172,938]" size="[148,66]" title="Programming:" btnCount="[6,2]" />
-    <mc_Dialog_J active="true" pos="[1840,1240]" size="[460,42]" title="Experimental:" btnCount="[19,1]" />
+    <mc_Dialog_J active="true" pos="[1800,1240]" size="[532,42]" title="Experimental:" btnCount="[22,1]" />
   </Properties_1>
   <Properties_2>
     <mcMicraDialog active="true" pos="[2172,222]" size="[148,66]" title="" />
-    <mcCustomizeDialog active="false" pos="[1070,450]" size="[224,404]" title="" />
+    <mcCustomizeDialog active="true" pos="[1920,330]" size="[224,404]" title="" />
     <mcProgramDialog active="undefined" pos="[2298,0]" size="[256,232]" title="" />
     <mcisoDialog active="false" pos="[181,152]" size="[140,400]" title="" />
     <mcModifierDialog active="undefined" pos="[100,100]" size="[400,400]" title="" />
     <mcIconMakerDialog active="false" pos="[820,550]" size="[730,500]" title="" />
     <mcDeepIsolateDialog active="true" pos="[1118,86]" size="[84,44]" title="" />
     <mcMoveTowardsDialog active="undefined" pos="[441,377]" size="[200,76]" title="" />
-    <mcClonerDialog active="undefined" pos="[1013,725]" size="[164,296]" title="" />
+    <mcClonerDialog active="true" pos="[1645,374]" size="[164,296]" title="" />
     <mcRenameDialog active="true" pos="[265,280]" size="[224,312]" title="" />
     <mcObjectPlanterDialog active="undefined" pos="[266,201]" size="[356,92]" title="" />
     <mcPivotPlanterDialog active="undefined" pos="[362,308]" size="[116,141]" title="" />
@@ -40,17 +40,17 @@
     <mcELOpDialog active="true" pos="[100,100]" size="[220,60]" title="" />
     <mcObjIDDialog active="true" pos="[2187,1018]" size="[144,84]" title="" />
     <mcRenderToTextureModDialog active="undefined" pos="[100,100]" size="[100,100]" title="" />
-    <mcSendUVWToPsDialog active="true" pos="[100,100]" size="[148,172]" title="" />
+    <mcSendUVWToPsDialog active="true" pos="[76,244]" size="[148,212]" title="" />
     <mcRotateObjectDialog active="undefined" pos="[100,100]" size="[100,100]" title="" />
     <mcViewportRecorderDialog active="true" pos="[100,100]" size="[316,124]" title="" />
     <mcGifCompillerDialog active="undefined" pos="[100,100]" size="[100,100]" title="" />
-    <mcScriptManDialog active="true" pos="[110,296]" size="[400,624]" title="" />
+    <mcScriptManDialog active="true" pos="[144,279]" size="[400,624]" title="" />
     <mcColorPickerDialog active="false" pos="[120,260]" size="[328,276]" title="" />
     <mcQuickColorPickerDialog active="undefined" pos="[100,100]" size="[100,100]" title="" />
     <mcInterfaceColorDilaog active="undefined" pos="[1445,427]" size="[299,130]" title="" />
     <IsolateFaceDialog active="undefined" pos="[100,100]" size="[100,100]" title="" />
-    <mcTemplateDialog active="true" pos="[1330,350]" size="[304,181]" title="" />
-    <mcSpaceDialog active="true" pos="[100,100]" size="[392,184]" title="" />
+    <mcTemplateDialog active="true" pos="[420,320]" size="[304,181]" title="" />
+    <mcSpaceDialog active="true" pos="[1647,410]" size="[392,184]" title="" />
   </Properties_2>
   <Buttons>
     <btn_B2 action="Move_To_X" icon="28" />
@@ -208,5 +208,7 @@
     <btn_C10 action="Pivot_Align_3P" icon="5" />
     <btn_C5 action="Pivot_Planter_2" icon="59" />
     <btn_C8 action="Pivot_To_Zero" icon="264" />
+    <btn_J14 action="Create_3PGrid" icon="81" />
+    <btn_J22 action="Normal_Map_Tester" icon="61" />
   </Buttons>
 </USER>

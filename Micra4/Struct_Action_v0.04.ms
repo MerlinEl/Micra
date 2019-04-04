@@ -32,7 +32,15 @@ struct mcAction (
 				#MeshSmooth    : modPanel.addModToSelection (MeshSmooth    ()) ui:on
 				#Slice         : modPanel.addModToSelection (SliceModifier ()) ui:on
 				#UvwMap        : modPanel.addModToSelection (UvwMap        ()) ui:on
-				#Unwrap_UVW    : modPanel.addModToSelection (Unwrap_UVW    ()) ui:on
+				#Unwrap_UVW    : (
+						
+					local mo = 	Unwrap_UVW ()
+					modPanel.addModToSelection mo ui:on
+					--mo.setIgnoreBackFaceCull off
+					--mo.unwrap.move()
+					--mo.unwrap2.setFreeFormMode on
+					mo.edit()
+				)
 				#Bend          : modPanel.addModToSelection (Bend          ()) ui:on
 				#Taper         : modPanel.addModToSelection (Taper         ()) ui:on
 				#Noise         : modPanel.addModToSelection (Noisemodifier ()) ui:on
@@ -79,7 +87,7 @@ struct mcAction (
 		catch (format "Failed to add modifier: %\n" mod)
 		
 		local active = mcFile.readSettings Micra.UserProfile "Properties_1/mc_Dialog_F" type:"pos" == "true" --if modifiers dialog was opened in last session
-		if not keyboard.shiftPressed and not active and mc_Dialog_F != undefined do destroyDialog mc_Dialog_F
+		--if not keyboard.shiftPressed and not active and mc_Dialog_F != undefined do destroyDialog mc_Dialog_F
 	),
 	fn translateCubeMapToAway3D = 
 	(

@@ -229,5 +229,6 @@
     <Smart_LS3D_Export icon="260" cmd="mcActionsTukej.smartLS3DExport()" tooltip="Smart LS3D Export" />
     <Vertex_Alpha_Blend icon="261" cmd="mcFile.fileInVersion Vertex_Alpha_Blend" tooltip="Vertex Alpha Blend" />
     <DirectX_LS3D_Switch icon="263" cmd="mcActionsTukej.directXLS3DSwitch()" tooltip="DirectX LS3D Switch" />
+    <Normal_Map_Tester icon="61" cmd="mcActionsTukej.testNormalMapToggle()" tooltip="Normal Map Tester" />
   </TuKej>
 </ACTIONS>

@@ -9,13 +9,13 @@
     <CurrentProfile val="1" />
     <DialogSnap val="true" />
     <AimScaleFactor val="10" />
-    <SaveWirecolor val="off" />
-    <SaveLinks val="off" />
-    <SaveLayer val="off" />
+    <SaveWirecolor val="on" />
+    <SaveLinks val="on" />
+    <SaveLayer val="on" />
   </Settings>
   <Profiles>
     <menu_1 val="Merlin" />
-    <menu_2 val="Empty_1" />
+    <menu_2 val="Profiles_Test" />
     <menu_3 val="Empty_2" />
     <menu_4 val="Empty_3" />
     <menu_5 val="Empty_4" />
@@ -108,11 +108,13 @@
     <Sampler val="2" />
     <Light_Tracer val="false" />
     <Visible_Edges val="true" />
-    <Seam_Edges val="false" />
+    <Seam_Edges val="true" />
     <Seam_Edges_Color val="(color 0 255 0)" />
     <Mode val="1" />
-    <Size val="6" />
+    <Size val="1" />
     <Slected_Faces val="true" />
+    <Size_X val="5" />
+    <Size_Y val="5" />
   </RenderToTextureMod>
   <Interface>
     <lastprofile val="1" />

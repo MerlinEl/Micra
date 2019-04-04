@@ -299,9 +299,6 @@ struct MICRA_STRUCTURE (
 		--mcFile.fileInVersion "Morph_Collector"
 		--mcFile.fileInVersion "Morph_Tagger"
 		--mcFile.fileInVersion "Morph_Dummy"
-		
-		--> Reload Macroscript , bug in 3DsMax 1012
-		fileIn MaxMacro 
 	),
 	--> Initialize Micra
 	fn initialize = (
@@ -311,6 +308,7 @@ struct MICRA_STRUCTURE (
 		loadStructures() --init system structures
 		if not initUserProfile() do return false
 		installMacro() --add micra macro to 3DsMax 
+		fileIn MaxMacro --> Reload Macroscript , bug in 3DsMax 1012
 		run() --> Run Micra
 		/*
 		clearlistener() --clean listener

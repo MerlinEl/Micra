@@ -1,60 +1,214 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <USER>
   <Properties_1>
-    <mc_Dialog_A active="false" pos="[900,440]" size="[148,66]" title="Menu:" btnCount="[6,2]" />
-    <mc_Dialog_B active="true" pos="[100,310]" size="[148,162]" title="Object:" btnCount="[6,6]" />
-    <mc_Dialog_C active="true" pos="[100,480]" size="[148,66]" title="Pivot:" btnCount="[6,2]" />
-    <mc_Dialog_D active="false" pos="[640,420]" size="[148,90]" title="Select:" btnCount="[6,3]" />
-    <mc_Dialog_E active="false" pos="[100,843]" size="[244,42]" title="Animation:" btnCount="[10,1]" />
-    <mc_Dialog_F active="false" pos="[270,210]" size="[196,90]" title="Modifiers:" btnCount="[8,3]" />
-    <mc_Dialog_G active="false" pos="[820,340]" size="[148,90]" title="Modify:" btnCount="[6,3]" />
-    <mc_Dialog_H active="true" pos="[100,550]" size="[148,66]" title="Materials:" btnCount="[6,2]" />
-    <mc_Dialog_I active="false" pos="[750,530]" size="[148,66]" title="Programming:" btnCount="[6,2]" />
-    <mc_Dialog_J active="false" pos="[100,510]" size="[460,42]" title="Experimental:" btnCount="[19,1]" />
+    <mc_Dialog_A active="true" pos="[2172,872]" size="[148,66]" title="Menu:" btnCount="[6,2]" />
+    <mc_Dialog_B active="true" pos="[2172,288]" size="[148,162]" title="Object:" btnCount="[6,6]" />
+    <mc_Dialog_C active="true" pos="[2172,450]" size="[148,66]" title="Pivot:" btnCount="[6,2]" />
+    <mc_Dialog_D active="true" pos="[2172,516]" size="[148,90]" title="Select:" btnCount="[6,3]" />
+    <mc_Dialog_E active="true" pos="[2090,1190]" size="[244,42]" title="Animation:" btnCount="[10,1]" />
+    <mc_Dialog_F active="true" pos="[1976,222]" size="[196,90]" title="Modifiers:" btnCount="[8,3]" />
+    <mc_Dialog_G active="true" pos="[2172,606]" size="[148,114]" title="Modify:" btnCount="[6,4]" />
+    <mc_Dialog_H active="true" pos="[2172,720]" size="[148,66]" title="Materials:" btnCount="[6,2]" />
+    <mc_Dialog_I active="true" pos="[2172,938]" size="[148,66]" title="Programming:" btnCount="[6,2]" />
+    <mc_Dialog_J active="true" pos="[1800,1240]" size="[532,42]" title="Experimental:" btnCount="[22,1]" />
   </Properties_1>
   <Properties_2>
-    <mcMicraDialog active="true" pos="[100,240]" size="[148,66]" title="" />
-    <mcCustomizeDialog active="false" pos="[260,240]" size="[224,404]" title="" />
-    <mcProgramDialog active="undefined" pos="[100,0]" size="[256,232]" title="" />
-    <mcisoDialog active="undefined" pos="[100,152]" size="[140,400]" title="" />
+    <mcMicraDialog active="true" pos="[2172,222]" size="[148,66]" title="" />
+    <mcCustomizeDialog active="true" pos="[1920,330]" size="[224,404]" title="" />
+    <mcProgramDialog active="undefined" pos="[2298,0]" size="[256,232]" title="" />
+    <mcisoDialog active="false" pos="[181,152]" size="[140,400]" title="" />
     <mcModifierDialog active="undefined" pos="[100,100]" size="[400,400]" title="" />
-    <mcIconMakerDialog active="undefined" pos="[100,350]" size="[730,500]" title="" />
-    <mcDeepIsolateDialog active="undefined" pos="[100,86]" size="[84,44]" title="" />
-    <mcMoveTowardsDialog active="undefined" pos="[100,377]" size="[200,76]" title="" />
-    <mcClonerDialog active="false" pos="[671,202]" size="[164,296]" title="" />
-    <mcRenameDialog active="undefined" pos="[100,280]" size="[224,312]" title="" />
-    <mcObjectPlanterDialog active="undefined" pos="[100,201]" size="[356,92]" title="" />
-    <mcPivotPlanterDialog active="undefined" pos="[100,308]" size="[116,141]" title="" />
-    <mcRepairDialog active="undefined" pos="[100,307]" size="[144,152]" title="" />
-    <mcEdgeScaleDialog active="undefined" pos="[100,307]" size="[144,152]" title="" />
-    <mcResizeUVWDialog active="undefined" pos="[100,463]" size="[240,56]" title="" />
-    <mcLodeTestDialog active="undefined" pos="[100,86]" size="[328,164]" title="" />
-    <mcLpWizardDialog active="undefined" pos="[100,151]" size="[448,84]" title="" />
-    <mcCharSelectDialog active="undefined" pos="[100,390]" size="[212,388]" title="" />
-    <mcCharPoseDialog active="undefined" pos="[100,304]" size="[146,388]" title="" />
-    <mcSaveProfileAsDialog active="false" pos="[1362,262]" size="[180,66]" title="" />
-    <mcDgalleryDialog active="undefined" pos="[100,148]" size="[875,850]" title="" />
-    <mcRandomizeDialog active="undefined" pos="[100,152]" size="[152,332]" title="" />
-    <mcColorPaleteDialog active="false" pos="[1474,230]" size="[244,60]" title="" />
+    <mcIconMakerDialog active="false" pos="[820,550]" size="[730,500]" title="" />
+    <mcDeepIsolateDialog active="true" pos="[1118,86]" size="[84,44]" title="" />
+    <mcMoveTowardsDialog active="undefined" pos="[441,377]" size="[200,76]" title="" />
+    <mcClonerDialog active="true" pos="[1645,374]" size="[164,296]" title="" />
+    <mcRenameDialog active="true" pos="[265,280]" size="[224,312]" title="" />
+    <mcObjectPlanterDialog active="undefined" pos="[266,201]" size="[356,92]" title="" />
+    <mcPivotPlanterDialog active="undefined" pos="[362,308]" size="[116,141]" title="" />
+    <mcRepairDialog active="undefined" pos="[357,307]" size="[144,152]" title="" />
+    <mcEdgeScaleDialog active="undefined" pos="[357,307]" size="[144,152]" title="" />
+    <mcResizeUVWDialog active="undefined" pos="[201,463]" size="[240,56]" title="" />
+    <mcLodeTestDialog active="undefined" pos="[179,86]" size="[328,164]" title="" />
+    <mcLpWizardDialog active="true" pos="[433,296]" size="[528,84]" title="" />
+    <mcCharSelectDialog active="undefined" pos="[180,390]" size="[212,388]" title="" />
+    <mcCharPoseDialog active="undefined" pos="[184,304]" size="[146,388]" title="" />
+    <mcSaveProfileAsDialog active="true" pos="[1840,370]" size="[240,66]" title="" />
+    <mcDgalleryDialog active="undefined" pos="[-993,148]" size="[875,850]" title="" />
+    <mcRandomizeDialog active="true" pos="[709,157]" size="[152,332]" title="" />
+    <mcColorPaleteDialog active="false" pos="[2304,236]" size="[244,60]" title="" />
     <mcSelVertsInXDialog active="undefined" pos="[100,100]" size="[100,100]" title="" />
-    <mcELOpDialog active="undefined" pos="[100,100]" size="[100,100]" title="" />
-    <mcObjIDDialog active="undefined" pos="[100,1018]" size="[144,84]" title="" />
+    <mcELOpDialog active="true" pos="[100,100]" size="[220,60]" title="" />
+    <mcObjIDDialog active="true" pos="[2187,1018]" size="[144,84]" title="" />
     <mcRenderToTextureModDialog active="undefined" pos="[100,100]" size="[100,100]" title="" />
-    <mcSendUVWToPsDialog active="undefined" pos="[100,100]" size="[148,172]" title="" />
+    <mcSendUVWToPsDialog active="true" pos="[76,244]" size="[148,212]" title="" />
     <mcRotateObjectDialog active="undefined" pos="[100,100]" size="[100,100]" title="" />
-    <mcViewportRecorderDialog active="undefined" pos="[100,100]" size="[100,100]" title="" />
+    <mcViewportRecorderDialog active="true" pos="[100,100]" size="[316,124]" title="" />
     <mcGifCompillerDialog active="undefined" pos="[100,100]" size="[100,100]" title="" />
-    <mcScriptManDialog active="false" pos="[100,166]" size="[400,624]" title="" />
-    <mcColorPickerDialog active="undefined" pos="[1244,290]" size="[328,276]" title="" />
+    <mcScriptManDialog active="true" pos="[144,279]" size="[400,624]" title="" />
+    <mcColorPickerDialog active="false" pos="[120,260]" size="[328,276]" title="" />
     <mcQuickColorPickerDialog active="undefined" pos="[100,100]" size="[100,100]" title="" />
-    <mcInterfaceColorDilaog active="undefined" pos="[250,606]" size="[299,130]" title="" />
+    <mcInterfaceColorDilaog active="undefined" pos="[1445,427]" size="[299,130]" title="" />
     <IsolateFaceDialog active="undefined" pos="[100,100]" size="[100,100]" title="" />
-    <mcTemplateDialog active="undefined" pos="[402,362]" size="[730,500]" title="" />
-    <mcSpaceDialog active="undefined" pos="[100,100]" size="[392,184]" title="" />
+    <mcTemplateDialog active="true" pos="[420,320]" size="[304,181]" title="" />
+    <mcSpaceDialog active="true" pos="[1647,410]" size="[392,184]" title="" />
   </Properties_2>
   <Buttons>
-    <btn_B1 action="Clone_2" icon="62" />
-    <btn_B2 action="Color_Palete" icon="66" />
-    <btn_B3 action="Create_Bounding_Box" icon="16" />
+    <btn_B2 action="Move_To_X" icon="28" />
+    <btn_B3 action="Create_3PGrid" icon="81" />
+    <btn_B4 action="Mirror_2" icon="64" />
+    <btn_B5 action="Reset_Transform" icon="33" />
+    <btn_B7 action="Move_To_Ground" icon="54" />
+    <btn_B8 action="Clone_2" icon="62" />
+    <btn_B9 action="Rename" icon="67" />
+    <btn_B10 action="Align" icon="63" />
+    <btn_B11 action="Repair_Object" icon="76" />
+    <btn_B13 action="Group_Create" icon="70" />
+    <btn_B14 action="Group_Open" icon="73" />
+    <btn_B15 action="Group_Close" icon="74" />
+    <btn_B16 action="Group_Destroy" icon="71" />
+    <btn_B19 action="Lock_Object" icon="88" />
+    <btn_B20 action="Unlock_Object" icon="89" />
+    <btn_B21 action="Move_Towards" icon="86" />
+    <btn_A2 action="Import" icon="69" />
+    <btn_A8 action="Export" icon="68" />
+    <btn_A3 action="Export_Selection" icon="82" />
+    <btn_A9 action="Save_Selection" icon="57" />
+    <btn_A6 action="Reload" icon="7" />
+    <btn_C1 action="Pivot_To_Center" icon="10" />
+    <btn_C2 action="Pivot_To_X" icon="12" />
+    <btn_C3 action="Align_To_World" icon="15" />
+    <btn_C4 action="Pivot_To_Vertex" icon="14" />
+    <btn_C7 action="Align_To_Base" icon="55" />
+    <btn_C12 action="Afect_Pivot_Only" icon="51" />
+    <btn_C11 action="Iron_Sight" icon="77" />
+    <btn_C6 action="Pivot_Planter" icon="59" />
+    <btn_F1 action="Unwrap_UVW" icon="46" />
+    <btn_F2 action="UvwMap" icon="45" />
+    <btn_F3 action="SliceModifier" icon="11" />
+    <btn_F4 action="Tessellate" icon="26" />
+    <btn_F5 action="Lathe" icon="17" />
+    <btn_F6 action="Mirror" icon="64" />
+    <btn_F7 action="MeshSmooth" icon="8" />
+    <btn_F8 action="Extrude" icon="18" />
+    <btn_F9 action="Bend" icon="19" />
+    <btn_F10 action="Taper" icon="20" />
+    <btn_F11 action="Noisemodifier" icon="21" />
+    <btn_F12 action="Twist" icon="22" />
+    <btn_F13 action="Skew" icon="23" />
+    <btn_F14 action="Stretch" icon="24" />
+    <btn_F15 action="Melt" icon="43" />
+    <btn_F16 action="Push" icon="25" />
+    <btn_F17 action="Shell" icon="44" />
+    <btn_F18 action="Symmetry" icon="6" />
+    <btn_F19 action="Projection" icon="65" />
+    <btn_F20 action="CameraMap" icon="75" />
+    <btn_F21 action="ResetXForm" icon="16" />
+    <btn_F22 action="Relax" icon="91" />
+    <btn_B1 action="Move_To_Center" icon="9" />
+    <btn_F23 action="Conform" icon="93" />
+    <btn_D1 action="Verts_Loop" icon="37" />
+    <btn_D2 action="Edges_Loop" icon="34" />
+    <btn_D3 action="Edges_Ring" icon="35" />
+    <btn_D5 action="Quads_Loop" icon="38" />
+    <btn_D6 action="Paint_Selection" icon="78" />
+    <btn_D7 action="Get_Verts" icon="42" />
+    <btn_D8 action="Get_Edges" icon="41" />
+    <btn_D9 action="Get_Faces" icon="40" />
+    <btn_D10 action="Select_Half_Left" icon="79" />
+    <btn_D11 action="Select_Half_Right" icon="80" />
+    <btn_D4 action="Edges_Border" icon="36" />
+    <btn_D13 action="Select_Verts_In_X" icon="94" />
+    <btn_D14 action="Select_Oposite" icon="95" />
+    <btn_G6 action="Weld_Verts" icon="60" />
+    <btn_G5 action="Edge_Scale_Align" icon="113" />
+    <btn_G8 action="Find_Double_Faces" icon="114" />
+    <btn_B22 action="Quad_Check" icon="116" />
+    <btn_G12 action="Mirror_Weld" icon="112" />
+    <btn_G18 action="Clean_Edges" icon="96" />
+    <btn_G1 action="Planar_X" icon="97" />
+    <btn_G7 action="Planar_Y" icon="98" />
+    <btn_G13 action="Planar_Z" icon="99" />
+    <btn_G14 action="Clean_Verts_in_Line" icon="115" />
+    <btn_G17 action="Move_Verts_To_X" icon="29" />
+    <btn_G11 action="Cap_Holes" icon="100" />
+    <btn_D18 action="Fetch_Selection" icon="119" />
+    <btn_D17 action="Hold_Selection" icon="118" />
+    <btn_F24 action="STL_Check" icon="120" />
+    <btn_G2 action="Nurms_Sub_Toggle" icon="121" />
+    <btn_B17 action="Reinstance" icon="122" />
+    <btn_H1 action="Reset_Mat_Editor" icon="4" />
+    <btn_H2 action="Remove_Materials" icon="49" />
+    <btn_H3 action="Show_Materials" icon="27" />
+    <btn_A1 action="Hold_Scene" icon="47" />
+    <btn_A7 action="Fetch_Scene" icon="48" />
+    <btn_A5 action="Merge" icon="52" />
+    <btn_A12 action="Max_Reset" icon="2" />
+    <btn_A4 action="Calculator" icon="32" />
+    <btn_H7 action="Color_To_Material" icon="123" />
+    <btn_H5 action="Image_To_Plane" icon="53" />
+    <btn_H4 action="Resize_UVW" icon="126" />
+    <btn_D12 action="Select_Objects_By_Material" icon="127" />
+    <btn_G3 action="Breake_To_Elements" icon="128" />
+    <btn_G4 action="Collapse_Objects" icon="117" />
+    <btn_J1 action="Lode_Tester" icon="129" />
+    <btn_J2 action="Skin_Tool" icon="130" />
+    <btn_G15 action="Low_Polygon_Wizard" icon="132" />
+    <btn_I1 action="Script_Editor" icon="56" />
+    <btn_J3 action="Isolate_Plus" icon="31" />
+    <btn_B6 action="Triangle_Counter" icon="85" />
+    <btn_G9 action="Smooth_Poly" icon="110" />
+    <btn_G10 action="Chamfer_Edge" icon="133" />
+    <btn_C9 action="Align_To_Edge" icon="134" />
+    <btn_E1 action="Copy_Animation" icon="193" />
+    <btn_E2 action="Paste_Animation" icon="194" />
+    <btn_E3 action="Reverse_Animation" icon="106" />
+    <btn_E4 action="Merge_Animation" icon="130" />
+    <btn_E5 action="Controller_Convertor" icon="130" />
+    <btn_I3 action="MaxScript_Color_Editor" icon="222" />
+    <btn_H8 action="Edit_Textures" icon="136" />
+    <btn_H9 action="Send_UVW_To_Ps" icon="151" />
+    <btn_H10 action="Silhouette" icon="159" />
+    <btn_B18 action="Randomize" icon="131" />
+    <btn_B23 action="Duppilcate_Object" icon="245" />
+    <btn_B24 action="Swap_Two_Objects" icon="244" />
+    <btn_H11 action="Cube_Map_To_Away" icon="246" />
+    <btn_I6 action="Viewport_Recorder" icon="172" />
+    <btn_B25 action="Gallery_3D" icon="221" />
+    <btn_B30 action="Spline_Magnet" icon="224" />
+    <btn_B29 action="Transformer" icon="197" />
+    <btn_B28 action="Box_Builder" icon="16" />
+    <btn_I5 action="Icon_Maker" icon="247" />
+    <btn_B26 action="ZB_Scale_To" icon="250" />
+    <btn_H6 action="Unwrap_UVW_Plus" icon="219" />
+    <btn_B27 action="ZB_Scale_From" icon="251" />
+    <btn_B31 action="Copy_TM" icon="252" />
+    <btn_B32 action="Paste_TM" icon="253" />
+    <btn_G16 action="Bridge_Spline" icon="199" />
+    <btn_I7 action="Quadrangulate" icon="195" />
+    <btn_B33 action="Create_Bounding_Box" icon="16" />
+    <btn_I8 action="Time_Break" icon="200" />
+    <btn_B36 action="LS3D_Model_Manager" icon="254" />
+    <btn_B35 action="Space" icon="256" />
+    <btn_H12 action="Set_Obj_ID" icon="167" />
+    <btn_B34 action="Align_By_2Edges" icon="198" />
+    <btn_I12 action="Autosave_Switch" icon="3" />
+    <btn_I11 action="Keyboard_Switch" icon="257" />
+    <btn_D15 action="Edge_Loop_Optimalize" icon="135" />
+    <btn_G19 action="Fuse_Edges" icon="158" />
+    <btn_G20 action="Fuse_Verts_In_Line" icon="157" />
+    <btn_I9 action="Holder" icon="118" />
+    <btn_J10 action="Object_Inspector" icon="259" />
+    <btn_J12 action="Smart_LS3D_Export" icon="260" />
+    <btn_J19 action="DirectX_LS3D_Switch" icon="263" />
+    <btn_J5 action="Vertex_Color" icon="258" />
+    <btn_J6 action="Vertex_Alpha_Blend" icon="261" />
+    <btn_J7 action="Get_Edges_Length" icon="262" />
+    <btn_J16 action="Lode_Tester" icon="129" />
+    <btn_J15 action="Live_Measure" icon="30" />
+    <btn_C10 action="Pivot_Align_3P" icon="5" />
+    <btn_C5 action="Pivot_Planter_2" icon="59" />
+    <btn_C8 action="Pivot_To_Zero" icon="264" />
+    <btn_J14 action="Create_3PGrid" icon="81" />
+    <btn_J22 action="Normal_Map_Tester" icon="61" />
   </Buttons>
 </USER>
