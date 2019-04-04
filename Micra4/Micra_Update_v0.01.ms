@@ -4,9 +4,11 @@
 /*
 *@Used Structures
 	mcStructMan
+	mcDate
 *
 *@Used Objects
-	undefined
+	mcObject
+	mcItem
 *
 *@Usage
 	undefined
@@ -20,6 +22,7 @@ struct MICRA_UPDATER_STRUCTURE	(
 	--variables
 	server_dir = "https://github.com/MerlinEl/Micra/tree/master/Micra4_Release/",
 	server_xml = "https://raw.githubusercontent.com/MerlinEl/Micra/master/Micra4_Release/update.xml",
+	local_xml  = (pathConfig.removePathLeaf Micra.RootDir) + "\\Micra4_Release\\update.xml",
 	--functions
 	fn getSource = getSourceFileName(), --get path of this script
 	fn readXml url = (
@@ -47,6 +50,22 @@ struct MICRA_UPDATER_STRUCTURE	(
 			print (getCurrentException())
 		)
 	),
+	fn sendMicra version_string = (
+	
+		--register micra version to Settings.xml
+	
+		--register micra version to Update.xml (max 8 backups)
+		local last_index = execute (mcFile.readSettings local_xml "UPDATE/CURRENT/last_index")
+		local next_index = if last_index < 8 then last_index+1 else 1 --cyclic indexing
+		format "last_index:% next_index:%\n" last_index next_index
+		local node_attribs = (mcObject.new()).addMore #(
+
+			mcItem "version" version_string, 
+			mcItem "date" ((mcDate.current()).toString())
+		)
+		mcFile.saveSettings local_xml ("UPDATE/VERSIONS/item_"+next_index as string) node_attribs type:"attribs"
+		mcFile.saveSettings local_xml "UPDATE/CURRENT/last_index" (next_index as String)
+	),
 	fn updateMicra = (
 	
 	
@@ -59,10 +78,17 @@ struct MICRA_UPDATER_STRUCTURE	(
 		--get server micra version
 		local xml = mcXML()
 		xml.fromString (readXml server_xml)
+		local xml_current = xml.getNode ("//UPDATE/CURRENT/last_index")
+		local last_index  = xml_current.getAttribute "val"
+		local xml_version = xml.getNode ("//UPDATE/VERSIONS/item_"+last_index)
+		local last_version = xml_version.getAttribute "version"
+		format "last_index:% last_version:%\n" last_index next_index
+		
+		/*
 		local xml_node = xml.getNode ("//UPDATE/VERSIONS")
 		local last_entry = (xml_node.getChildren())[1]
 		--format "xml:%\n" (xml.toString())
-		--format "nodes:%\n" last_entry
+		format "nodes:%\n" last_entry
 		local server_version = last_entry.getAttribute "version"
 		format "Micra > versions compare > LOCAL:% SERVER:%\n" local_version server_version
 		if ((execute local_version) >= (execute server_version)) then (
@@ -71,7 +97,7 @@ struct MICRA_UPDATER_STRUCTURE	(
 		) else ( 
 		
 			updateMicra()
-		)
+		)*/
 	),
 	/**
 	*@Example
@@ -97,6 +123,37 @@ Global mcUpdater = mcStructMan.instanceStructure MICRA_UPDATER_STRUCTURE "mcUpda
 
 
 /*
+	fn checkForUpdates = (
+		
+		--get local micra version
+		local local_version = mcFile.readSettings Micra.DefaultSettings "SETTINGS/Micra/version"
+		--get server micra version
+		local xml = mcXML()
+		xml.fromString (readXml server_xml)
+		local xml_node = xml.getNode ("//UPDATE/VERSIONS")
+		local last_entry = (xml_node.getChildren())[1]
+		--format "xml:%\n" (xml.toString())
+		format "nodes:%\n" last_entry
+		local server_version = last_entry.getAttribute "version"
+		format "Micra > versions compare > LOCAL:% SERVER:%\n" local_version server_version
+		if ((execute local_version) >= (execute server_version)) then (
+		
+			messageBox "Micra is up do date. Nothing new is aviable. Have a nice day :-)" title:micra.version
+		) else ( 
+		
+			updateMicra()
+		)
+	),
+
+
+
+		--getCurrent Version
+		local current_version = mcFile.readSettings local_xml "UPDATE/VERSIONS/current_version" type:"version"
+		--store it as backup version
+		mcFile.saveSettings local_xml ("UPDATE/VERSIONS/old_version") as string) node_attribs type:"attribs"
+
+
+
 http://github.com/user/repository/ -to-> http://github.com/user/repository/archive/master.zip
 
 To download your repository as zip file via curl:
