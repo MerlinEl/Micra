@@ -82,7 +82,7 @@ struct MICRA_UPDATER_STRUCTURE	(
 		local last_index  = xml_current.getAttribute "val"
 		local xml_version = xml.getNode ("//UPDATE/VERSIONS/item_"+last_index)
 		local last_version = xml_version.getAttribute "version"
-		format "last_index:% last_version:%\n" last_index next_index
+		format "last_index:% last_version:%\n" last_index last_version
 		
 		/*
 		local xml_node = xml.getNode ("//UPDATE/VERSIONS")
