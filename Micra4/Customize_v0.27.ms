@@ -530,60 +530,10 @@ fn onTab2ButtonClick s a =
 	case s.text of
 	(
 		"Interface Colors":mcFile.fileInVersion "Customize_Colors"
-		"Update Micra":
-		(
-			--get server file
-			local server_dir = "r:\\Resources\\Resources_new\\Micra\\"
-			local server_file = server_dir + "Micra4.zip"
-			local app_7z = "C:\\Windows\\System32\\7za.exe"
-			local micra_folder = Micra.RootDir
-			--OLD> local update_file = getDir #scripts+"\\Micra4.zip"
-			local update_file = getDir #userScripts+"\\Micra4.zip"
-			local backup_folder = substring micra_folder 1 (micra_folder.count-1) +"_Backup\\" --remove last slash and add _backup
-			
-			if not doesFileExist server_dir do (MessageBox "Server is not Accessible, try later..." title:" Micra:"; return false)
-			if not doesFileExist server_file do (MessageBox "No updates found...." title:" Micra:"; return false)
-			if not doesFileExist app_7z do copyFile (micra_folder+"App\\7za.exe") app_7z
-			if not doesFileExist app_7z do return false
-/*
-			--check date and time
-			if doesFileExist update_file then
-			(
-				if getFileModDate update_file == getFileModDate server_file 
-				then (MessageBox "New updates not found...." title:" Micra:"; return false)       
-				else deleteFile update_file
-			)
-*/				
-			--download new update from server
-			deleteFile update_file
-			copyFile server_file update_file
-			if not doesFileExist update_file do (MessageBox "Unable Download New Update...Installation Aborted" title:" Micra:"; return false)
-			
-			--backup old Micra folder to Micra_backup
-			if not doesFileExist backup_folder then makeDir backup_folder else delDirectoryContent backup_folder
-			if not doesFileExist backup_folder do (MessageBox "Unable Create Micra Backup. Installation Aborted" title:" Micra:"; return false)
-			treeCopy micra_folder backup_folder
-			local files = getFiles (backup_folder+"*.*")
-			if files.count == 0 do  (MessageBox "Unable Create Micra Backup. Installation Aborted" title:" Micra:"; return false)
-			
-			--empty Micra folder
-			delDirectoryContent micra_folder
-			
-			--extract new update in to empty micra folder
-			local cmd = (app_7z + " x \"" +update_file+ "\" -o\""+micra_folder+"\"")
-			DOSCommand cmd
-			--restore user settings
-			local user_folder = micra_folder+"User\\"
-			local backup_user_folder =  backup_folder+"User\\"
-			renameFile user_folder (substring user_folder 1 (user_folder.count-1)+ "_Default" )
-			makeDir user_folder
-			treeCopy backup_user_folder user_folder
-			--Copy Micra_Macro.mcr to max  -- add version checker 
-			if doesFileExist Micra.Macro do deleteFile Micra.Macro
-			copyFile (Micra.RootDir+"Micra_Macro.mcr") Micra.Macro
-			--format "bk2:%\tuser:%\n" backup_user_folder user_folder
-			--restart Max
-			MessageBox  "Update has ben Succesfull! Please restart the 3DsMax" title:" Micra:-)"
+		"Update Micra":(
+		
+			if mcUpdater == undefined do mcFile.fileInVersion "Micra_Update" --load class if is not accessible
+			mcUpdater.checkForUpdates()
 		)
 	)
 )
