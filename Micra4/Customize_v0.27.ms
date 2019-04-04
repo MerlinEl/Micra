@@ -533,7 +533,7 @@ fn onTab2ButtonClick s a =
 		"Update Micra":(
 		
 			if mcUpdater == undefined do mcFile.fileInVersion "Micra_Update" --load class if is not accessible
-			mcUpdater.checkForUpdates()
+			::mcUpdater.checkForUpdates()
 		)
 	)
 )
