@@ -3,7 +3,7 @@
   <Properties_1>
     <mc_Dialog_A active="true" pos="[2172,872]" size="[148,66]" title="Menu:" btnCount="[6,2]" />
     <mc_Dialog_B active="true" pos="[2172,288]" size="[148,162]" title="Object:" btnCount="[6,6]" />
-    <mc_Dialog_C active="true" pos="[2172,450]" size="[148,66]" title="Pivot:" btnCount="[6,2]" />
+    <mc_Dialog_C active="true" pos="[2170,450]" size="[148,66]" title="Pivot:" btnCount="[6,2]" />
     <mc_Dialog_D active="true" pos="[2172,516]" size="[148,90]" title="Select:" btnCount="[6,3]" />
     <mc_Dialog_E active="true" pos="[2090,1190]" size="[244,42]" title="Animation:" btnCount="[10,1]" />
     <mc_Dialog_F active="true" pos="[1976,222]" size="[196,90]" title="Modifiers:" btnCount="[8,3]" />
@@ -81,7 +81,6 @@
     <btn_C7 action="Align_To_Base" icon="55" />
     <btn_C12 action="Afect_Pivot_Only" icon="51" />
     <btn_C11 action="Iron_Sight" icon="77" />
-    <btn_C6 action="Pivot_Planter" icon="59" />
     <btn_F1 action="Unwrap_UVW" icon="46" />
     <btn_F2 action="UvwMap" icon="45" />
     <btn_F3 action="SliceModifier" icon="11" />

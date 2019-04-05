@@ -50,21 +50,54 @@ struct MICRA_UPDATER_STRUCTURE	(
 			print (getCurrentException())
 		)
 	),
-	fn sendMicra version_string = (
-	
+	/**
+	*@Example
+		if mcUpdater == undefined do mcFile.fileInVersion "Micra_Update" --load class if is not accessible
+		mcUpdater.download "https://raw.githubusercontent.com/MerlinEl/Micra/master/Micra4_Release/update.xml" (Micra.TempDir+"update.xml")
+	*/
+	fn download source_url target_file = (
+		
+		if doesFileExist target_file do deleteFile target_file --delete old file
+		--download new file
+		local ServicePointManager = dotNetClass "System.Net.ServicePointManager"
+		local SecurityProtocolType = dotNetClass "System.Net.SecurityProtocolType"
+		ServicePointManager.Expect100Continue = true --using System.Net
+		ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12 --Use SecurityProtocolType.Ssl3 if needed for compatibility reasons
+		local web = dotNetObject "System.Net.WebClient"
+		web.DownloadFile (source_url) target_file
+		format "server_dir:% target_file:% downloaded:% \n" server_dir target_file (doesFileExist target_file)
+	),
+	/**
+	*@Usage > Create new micra version and upload it to GITHUB
+	*@Example
+		if mcUpdater == undefined do mcFile.fileInVersion "Micra_Update" --load class if is not accessible
+		mcUpdater.upload()
+	*/
+	fn upload = (
+			
+		if not (queryBox "You are sure to Upgrade Micra?" title:micra.version) do return false
+		--get local micra version and increase it
+		local local_version = mcFile.readSettings Micra.DefaultSettings "SETTINGS/Micra/version"
+		local new_version = mcMath.versionUp (execute local_version)
+format "Update current version:% to %\n" local_version new_version
 		--register micra version to Settings.xml
-	
+		mcFile.saveSettings Micra.DefaultSettings "SETTINGS/Micra/version" (new_version as string)		
 		--register micra version to Update.xml (max 8 backups)
 		local last_index = execute (mcFile.readSettings local_xml "UPDATE/CURRENT/last_index")
 		local next_index = if last_index < 8 then last_index+1 else 1 --cyclic indexing
-		format "last_index:% next_index:%\n" last_index next_index
+		local current_date = (mcDate.current()).toStringSimple()
+format "last_index:% next_index:% current_date:%\n" last_index next_index current_date
 		local node_attribs = (mcObject.new()).addMore #(
 
-			mcItem "version" version_string, 
-			mcItem "date" ((mcDate.current()).toStringSimple())
+			mcItem "version" (new_version as string), 
+			mcItem "date" current_date
 		)
 		mcFile.saveSettings local_xml ("UPDATE/VERSIONS/item_"+next_index as string) node_attribs type:"attribs"
 		mcFile.saveSettings local_xml "UPDATE/CURRENT/last_index" (next_index as String)
+		--pack micra in to zip file with version
+		
+		--final msg
+		messageBox ("Micra is upgraded from  [ v."+local_version as String+" ] to  [ v."+new_version as String+" ]\nTo complete upgrade commit files on Github :-)") title:micra.version
 	),
 	fn updateMicra = (
 	
@@ -91,22 +124,6 @@ struct MICRA_UPDATER_STRUCTURE	(
 		
 			updateMicra()
 		)
-	),
-	/**
-	*@Example
-		download "https://raw.githubusercontent.com/MerlinEl/Micra/master/Micra4_Release/update.xml" (Micra.TempDir+"update.xml")
-	*/
-	fn download source_url target_file = (
-		
-		if doesFileExist target_file do deleteFile target_file --delete old file
-		--download new file
-		local ServicePointManager = dotNetClass "System.Net.ServicePointManager"
-		local SecurityProtocolType = dotNetClass "System.Net.SecurityProtocolType"
-		ServicePointManager.Expect100Continue = true --using System.Net
-		ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12 --Use SecurityProtocolType.Ssl3 if needed for compatibility reasons
-		local web = dotNetObject "System.Net.WebClient"
-		web.DownloadFile (source_url) target_file
-		format "server_dir:% target_file:% downloaded:% \n" server_dir target_file (doesFileExist target_file)
 	)
 	/*<end>*/
 )	

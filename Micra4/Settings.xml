@@ -1,127 +1,127 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <SETTINGS>
-	<Micra>
-		<born val="04.25.2006"/>
-		<version val="4.01"/>
-	</Micra>
-	<Structures val="All registred Micra's Structures">
-		<!--independent classes-->
-		<mcStructMan val="on" info="structure manager" />
-		<mcWinMsg val="on" />
-		<mcWin32 val="on" info="denisT great work!" />
-		<mcUser32 val="on" info="denisT great work!" />
-		<mcObjects val="on" info="database object CORE BASE" />
-		<mcMath val="on" />
-		<mcString val="on" />
-		<mcDate val="on" />
-		<!--dependent classes-->
-		<mcMaterial val="on" />
-		<mcColor val="on" info="color conversion tool" />
-		<mcFile val="on" info="read - write functions" />
-		<mcXML val="on" />
-		<mcINI val="on" />
-		<mcUIColors val="on" info="save-load ui colors" />
-		<mcDotnet val="on" info="dotnet functions" />
-		<mcPopUp val="on" info="popup windows of any type" />
-		<mcGM val="on" />
-		<mcAnimation val="on" />
-		<mcArray val="on" />
-		<mcFile val="on" info="read - write functions" />
-		<mcInfo val="on" />
-		<mcCursor val="on" />
-		<mcScreen val="on" />
-		<mcDialog val="on" />
-		<mcDraw val="on" />
-		<mcPoly val="on" />
-		<mcSnap val="on" />
-		<mcSystem val="on" />
-		<mcTransform val="on" />
-		<mcEvents val="on" />
-		<mcCall val="on" />
-		<mcMsx val="on" />
-		<mcActionsTukej val="on" />
-	</Structures>
-	<Version val="All registred Micra's Scripts">
-		<Gallery3D val="1.60" />
-		<ActorX_Batch_Exporter val="0.01" />
-		<ActorX_Multi_Exporter val="0.01" />
-		<Advanced_Edge_Loop val="1.05" />
-		<ASCII_Multi_Exporter val="0.09" />
-		<Bridge_Spline val="0.01" />
-		<Box_Builder val="0.01" />
-		<Character_Pose val="0.17" />
-		<Character_Tool val="0.10" />
-		<Clone2 val="1.03" />
-		<Color_Palete val="0.56" />
-		<Color_Picker val="0.2" />
-		<Conform val="0.01" />
-		<Controller_Convertor val="0.01" />
-		<Create_3PGrid val="0.02" />
-		<Customize val="0.27" />
-		<Customize_Colors val="0.05" />
-		<Deep_Isolate val="1.09" />
-		<Dialog_Creator_Net val="0.35" />
-		<DotNet_Components val="0.01" />
-		<Edge_Loop_Optimalize val="0.04" />
-		<Edge_Scale_Align val="0.01" />
-		<External_PolySplitRing val="0.03" />
-		<External_Quadrangulate val="0.01" />
-		<Fuse_Vertices val="0.01" />
-		<Gif_Compiller val="0.02" />
-		<Holder val="0.04" />
-		<Help val="0.01" />
-		<Icon_Maker val="0.22" />
-		<Isolate_Face val="0.02" />
-		<Lode_Tester val="0.03" />
-		<Low_Polygon_Wizard val="1.36" />
-		<LS3D_Model_Manager val="0.01" />
-		<mbFracture val="0.1" />
-		<MaxScript_Color_Editor val="0.06" />
-		<Merge_Animation val="0.03" />
-		<Modifiers val="0.01" />
-		<Morph_Collector_Manager val="0.06" />
-		<Morph_Edges val="0.17" />
-		<Morph_Collector val="0.17" />
-		<Morph_Dummy val="0.17" />
-		<Morph_Tagger val="0.17" />
-		<Move_Towards val="0.03" />
-		<Multi_Planter val="1.53" />
-		<Object_Planter val="0.01" />
-		<Object_Distributor val="0.13" />
-		<Paint_Selection val="0.05" />
-		<Pivot_Planter val="2.03" />
-		<Randomize val="0.01" />
-		<Rename val="0.02" />
-		<Render_To_Texture_Mod val="0.04" />
-		<Repair_Object val="1.08" />
-		<Manage_Profiles val="0.06" />
-		<Script_Manager val="0.14" />
-		<Send_UVW_To_Ps val="0.03" />
-		<Set_Obj_ID val="0.02" />
-		<Skin_Tool val="0.01" />
-		<Space val="1.03" />
-		<Spline_Magnet val="0.05" />
-		<Soft_Selection val="0.01" />
-		<Struct_Action val="0.04" />
-		<Time_Break val="0.01" />
-		<Transformer val="0.08" />
-		<UE_Model_Importer val="0.07" />
-		<Uni_Poly_Counter val="0.18" />
-		<UVW_Wizard_Tool val="0.02" />
-		<Unwrap_UVW_Plus val="0.02" />
-		<Viewport_Recorder val="0.06" />
-		<Winamp_Controll val="0.02" />
-		<Dialog_Template val="0.05" />
-		<Dialog_Default_Net val="0.29" />
-		<Actions_Editor val="0.01" />
-		<Vertex_Color val="1.03" />
-		<Object_Inspector val="0.02" />
-		<Vertex_Alpha_Blend val="0.01" />
-		<Pivot_Planter_Manip val="2.05" />
-		<Live_Measure val="0.09" />
-		<Live_Modeling val="0.02" />
-		<Micra_Update val="0.01" />
-	</Version>
+  <Micra>
+    <born val="04.25.2006" />
+    <version val="4.19" />
+  </Micra>
+  <Structures val="All registred Micra's Structures">
+    <!--independent classes-->
+    <mcStructMan val="on" info="structure manager" />
+    <mcWinMsg val="on" />
+    <mcWin32 val="on" info="denisT great work!" />
+    <mcUser32 val="on" info="denisT great work!" />
+    <mcObjects val="on" info="database object CORE BASE" />
+    <mcMath val="on" />
+    <mcString val="on" />
+    <mcDate val="on" />
+    <!--dependent classes-->
+    <mcMaterial val="on" />
+    <mcColor val="on" info="color conversion tool" />
+    <mcFile val="on" info="read - write functions" />
+    <mcXML val="on" />
+    <mcINI val="on" />
+    <mcUIColors val="on" info="save-load ui colors" />
+    <mcDotnet val="on" info="dotnet functions" />
+    <mcPopUp val="on" info="popup windows of any type" />
+    <mcGM val="on" />
+    <mcAnimation val="on" />
+    <mcArray val="on" />
+    <mcFile val="on" info="read - write functions" />
+    <mcInfo val="on" />
+    <mcCursor val="on" />
+    <mcScreen val="on" />
+    <mcDialog val="on" />
+    <mcDraw val="on" />
+    <mcPoly val="on" />
+    <mcSnap val="on" />
+    <mcSystem val="on" />
+    <mcTransform val="on" />
+    <mcEvents val="on" />
+    <mcCall val="on" />
+    <mcMsx val="on" />
+    <mcActionsTukej val="on" />
+  </Structures>
+  <Version val="All registred Micra's Scripts">
+    <Gallery3D val="1.60" />
+    <ActorX_Batch_Exporter val="0.01" />
+    <ActorX_Multi_Exporter val="0.01" />
+    <Advanced_Edge_Loop val="1.05" />
+    <ASCII_Multi_Exporter val="0.09" />
+    <Bridge_Spline val="0.01" />
+    <Box_Builder val="0.01" />
+    <Character_Pose val="0.17" />
+    <Character_Tool val="0.10" />
+    <Clone2 val="1.03" />
+    <Color_Palete val="0.56" />
+    <Color_Picker val="0.2" />
+    <Conform val="0.01" />
+    <Controller_Convertor val="0.01" />
+    <Create_3PGrid val="0.02" />
+    <Customize val="0.27" />
+    <Customize_Colors val="0.05" />
+    <Deep_Isolate val="1.09" />
+    <Dialog_Creator_Net val="0.35" />
+    <DotNet_Components val="0.01" />
+    <Edge_Loop_Optimalize val="0.04" />
+    <Edge_Scale_Align val="0.01" />
+    <External_PolySplitRing val="0.03" />
+    <External_Quadrangulate val="0.01" />
+    <Fuse_Vertices val="0.01" />
+    <Gif_Compiller val="0.02" />
+    <Holder val="0.04" />
+    <Help val="0.01" />
+    <Icon_Maker val="0.22" />
+    <Isolate_Face val="0.02" />
+    <Lode_Tester val="0.03" />
+    <Low_Polygon_Wizard val="1.36" />
+    <LS3D_Model_Manager val="0.01" />
+    <mbFracture val="0.1" />
+    <MaxScript_Color_Editor val="0.06" />
+    <Merge_Animation val="0.03" />
+    <Modifiers val="0.01" />
+    <Morph_Collector_Manager val="0.06" />
+    <Morph_Edges val="0.17" />
+    <Morph_Collector val="0.17" />
+    <Morph_Dummy val="0.17" />
+    <Morph_Tagger val="0.17" />
+    <Move_Towards val="0.03" />
+    <Multi_Planter val="1.53" />
+    <Object_Planter val="0.01" />
+    <Object_Distributor val="0.13" />
+    <Paint_Selection val="0.05" />
+    <Pivot_Planter val="2.03" />
+    <Randomize val="0.01" />
+    <Rename val="0.02" />
+    <Render_To_Texture_Mod val="0.04" />
+    <Repair_Object val="1.08" />
+    <Manage_Profiles val="0.06" />
+    <Script_Manager val="0.14" />
+    <Send_UVW_To_Ps val="0.03" />
+    <Set_Obj_ID val="0.02" />
+    <Skin_Tool val="0.01" />
+    <Space val="1.03" />
+    <Spline_Magnet val="0.05" />
+    <Soft_Selection val="0.01" />
+    <Struct_Action val="0.04" />
+    <Time_Break val="0.01" />
+    <Transformer val="0.08" />
+    <UE_Model_Importer val="0.07" />
+    <Uni_Poly_Counter val="0.18" />
+    <UVW_Wizard_Tool val="0.02" />
+    <Unwrap_UVW_Plus val="0.02" />
+    <Viewport_Recorder val="0.06" />
+    <Winamp_Controll val="0.02" />
+    <Dialog_Template val="0.05" />
+    <Dialog_Default_Net val="0.29" />
+    <Actions_Editor val="0.01" />
+    <Vertex_Color val="1.03" />
+    <Object_Inspector val="0.02" />
+    <Vertex_Alpha_Blend val="0.01" />
+    <Pivot_Planter_Manip val="2.05" />
+    <Live_Measure val="0.09" />
+    <Live_Modeling val="0.02" />
+    <Micra_Update val="0.01" />
+  </Version>
   <SystemFiles val="Micra's Settings Files">
     <Actions val="Contains all accesible Micra's actions" />
     <Actions_Help val="Help texts for each action" />

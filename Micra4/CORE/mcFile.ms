@@ -717,6 +717,45 @@ struct MICRA_FILE (
 		local directorySecurity = inputDirectoryInfo .GetAccessControl()
 		directorySecurity.AddAccessRule fileSystemAccessRule 
 		inputDirectoryInfo .SetAccessControl directorySecurity 
+	),
+	/**
+	*@Example
+		mcFile.zip (Micra.RootDir+"Temp\\source_files\\") (Micra.RootDir+"Temp\\zip_dir\\Micra4_4_5_2019_PM.zip")
+	*/
+	fn zip source_dir zip_path filter:"*" = (
+	
+		if not doesFileExist source_dir do return false
+		--local objFSO = CreateOLEObject "Scripting.FileSystemObject"
+		local objShell = CreateOLEObject "WScript.Shell"
+		local zip_file = Micra.RootDir + "App\\7za.exe"
+		if not doesFileExist zip_file do return false
+		local cmd = zip_file + " a " + zip_path + " " + source_dir + filter
+		local response_index = objShell.Run cmd 0 true 
+		if response_index == 0 then true else false
+	),
+	/**
+	*@Example
+		mcFile.unzip (Micra.RootDir+"Temp\\zip_dir\\Micra4_4_5_2019_PM.zip") (Micra.RootDir+"Temp\\extract_files\\")
+	*/
+	fn unzip zip_path output_dir = (	
+	
+		if not doesFileExist zip_path or not doesFileExist output_dir do return false
+		local objShell = CreateOLEObject "WScript.Shell"
+		local zip_file = Micra.RootDir + "App\\7za.exe"
+		if not doesFileExist zip_file do return false
+		format "extracting file:\n%\nto directory:\n%\n" zip_path output_dir
+		local cmd = zip_file + " e " + zip_path + " -o " + output_dir
+		local response_index = objShell.Run cmd 0 true 
+		if response_index == 0 then true else false
+/*		
+--Extract the contants of the zip file.
+set objShell = CreateObject("Shell.Application")
+set FilesInZip=objShell.NameSpace(ZipFile).items
+objShell.NameSpace(ExtractTo).CopyHere(FilesInZip)
+Set fso = Nothing
+Set objShell = Nothing
+	*/	
+		
 	)
 	/*<end>*/
 )
