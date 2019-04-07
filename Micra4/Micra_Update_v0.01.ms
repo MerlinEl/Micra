@@ -23,7 +23,9 @@
 struct MICRA_UPDATER_STRUCTURE	(
 	
 	--variables
-	server_dir = "https://github.com/MerlinEl/Micra/tree/master/Micra4_Release/",
+	user_dir   = (pathConfig.removePathLeaf Micra.UserDir) + "\\",
+	--server_dir = "https://github.com/MerlinEl/Micra/tree/master/Micra4_Release/",
+	server_dir = "https://github.com/MerlinEl/Micra/raw/master/Micra4_Release/",
 	server_xml = "https://raw.githubusercontent.com/MerlinEl/Micra/master/Micra4_Release/update.xml",
 	local_dir  = (pathConfig.removePathLeaf Micra.RootDir) + "\\Micra4_Release\\",
 	local_xml  = local_dir + "update.xml",
@@ -62,6 +64,128 @@ struct MICRA_UPDATER_STRUCTURE	(
 		local excluded_folders_and_files = #("User", "_New", "Temp") --for now, later will be optimalized
 		mcFile.deleteDirectoryContent Micra.RootDir exclude:excluded_folders_and_files verification:"Actions.xml"
 	),
+	fn downloadZipFile source_url target_file = ( 
+		
+			if doesFileExist target_file do deleteFile target_file --delete old file
+		--download new file
+		local ServicePointManager = dotNetClass "System.Net.ServicePointManager"
+		local SecurityProtocolType = dotNetClass "System.Net.SecurityProtocolType"
+		ServicePointManager.Expect100Continue = true --using System.Net
+		ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12 --Use SecurityProtocolType.Ssl3 if needed for compatibility reasons
+		
+		local web = dotNetObject "System.Net.WebClient"
+		web.Headers.Add "Accept: text/html, application/xhtml+xml, */*"
+		web.Headers.Add "User-Agent: Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; WOW64; Trident/5.0)"
+/*
+
+fn  Completed s e =(
+	web = null
+	MessageBox  "Download completed!"
+)
+local se = dotnetObject "System.Object"
+web.DownloadFileCompleted += new AsyncCompletedEventHandler(Completed);
+
+}*/
+		-- dotnetObject "System.Object" 
+		-- dotnetClass "System.ComponentModel.AsyncCompletedEventArgs"
+		--DownloadFileCompleted <System.Object>sender <System.ComponentModel.AsyncCompletedEventArgs>e = ( ... )
+		--local newEvt = new AsyncCompletedEventArgs(ex, false, null);
+		fn DownloadFileCompleted s a = (
+			
+			format "completed s:% a:%\n" s a
+		)
+		web.DownloadFileCompleted DownloadFileCompleted
+		web.DownloadFileAsync (dotnetObject "System.Uri" source_url) (dotnetObject "System.String" target_file)
+
+		
+		--request = (dotNetClass "system.Net.WebRequest").create m  	
+		--request.Timeout = 1000
+		--request.dispose()
+		format "source_url:%\ntarget_file:%\ndownloaded:%\n" source_url target_file (doesFileExist target_file)
+	
+	/*
+		local web = dotNetObject "System.Net.WebClient"
+		fn downloadCompleted s e = (
+			
+		  web.dispose()
+		  web = null
+		  MessageBox "Download completed!"
+		)
+		web.DownloadFileCompleted += AsyncCompletedEventHandler(Completed) 
+		web.DownloadFileAsync source_url target_file
+
+protected void DownloadFiles(object sender, EventArgs e)
+{
+    using (ZipFile zip = new ZipFile())
+    {
+        zip.AlternateEncodingUsage = ZipOption.AsNecessary;
+        zip.AddDirectoryByName("Files");
+        foreach (GridViewRow row in GridView1.Rows)
+        {
+            if ((row.FindControl("chkSelect") as CheckBox).Checked)
+            {
+                string filePath = (row.FindControl("lblFilePath") as Label).Text;
+                zip.AddFile(filePath, "Files");
+            }
+        }
+        Response.Clear();
+        Response.BufferOutput = false;
+        string zipName = String.Format("Zip_{0}.zip", DateTime.Now.ToString("yyyy-MMM-dd-HHmmss"));
+        Response.ContentType = "application/zip";
+        Response.AddHeader("content-disposition", "attachment; filename=" + zipName); 
+        zip.Save(Response.OutputStream);
+        Response.End();
+    }
+}
+
+	*/
+	
+	
+/*
+protected void DownloadFile(string name)
+    {
+        string _path = Request.PhysicalApplicationPath + "CV/" + name;
+        System.IO.FileInfo _file = new System.IO.FileInfo(_path);
+        if (_file.Exists)
+        {
+            Response.Clear();
+            Response.AddHeader("Content-Disposition", "attachment; filename=" + _file.Name);
+            Response.AddHeader("Content-Length", _file.Length.ToString());
+            Response.ContentType = "application/octet-stream";
+            Response.WriteFile(_file.FullName);
+            Response.End();
+        }
+        else
+        {
+            ClientScript.RegisterStartupScript(Type.GetType("System.String"), "messagebox", "&lt;script type=\"text/javascript\"&gt;alert('File not Found');</script>");
+        }
+    }
+*/
+/*
+response.ContentType = "application/zip";
+response.AddHeader("content-disposition", "attachment; filename=" + outputFileName);
+using (ZipFile zipfile = new ZipFile()) {
+  zipfile.AddSelectedFiles("*.*", folderName, includeSubFolders);
+  zipfile.Save(response.OutputStream);
+}
+	*/
+		/*protected void Page_Load(object sender, EventArgs e)
+		{
+			Response.Clear();
+			Response.BufferOutput = false;
+			Response.ContentType = "application/zip";
+			Response.AddHeader("content-disposition", "attachment; filename=pauls_chapel_audio.zip");
+
+			using (ZipFile zip = new ZipFile())
+			{
+				zip.CompressionLevel = CompressionLevel.None;
+				zip.AddSelectedFiles("*.mp3", Server.MapPath("~/content/audio/"), "", false);
+				zip.Save(Response.OutputStream);
+			}
+
+			Response.Close();
+		}*/
+	),
 	/**
 	*@Example
 		if mcUpdater == undefined do mcFile.fileInVersion "Micra_Update" --load class if is not accessible
@@ -75,9 +199,13 @@ struct MICRA_UPDATER_STRUCTURE	(
 		local SecurityProtocolType = dotNetClass "System.Net.SecurityProtocolType"
 		ServicePointManager.Expect100Continue = true --using System.Net
 		ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12 --Use SecurityProtocolType.Ssl3 if needed for compatibility reasons
+		
 		local web = dotNetObject "System.Net.WebClient"
-		web.DownloadFile (source_url) target_file
-		format "server_dir:% target_file:% downloaded:% \n" server_dir target_file (doesFileExist target_file)
+		web.DownloadFile source_url target_file
+		--request = (dotNetClass "system.Net.WebRequest").create m  	
+		--web.Timeout = 1000
+		web.dispose()
+		format "source_url:%\ntarget_file:%\ndownloaded:%\n" source_url target_file (doesFileExist target_file)
 	),
 	/**
 	*@Usage > Create new micra version and upload it to GITHUB
@@ -112,10 +240,25 @@ format "last_index:% next_index:% current_date:%\n" last_index next_index curren
 		--final msg
 		messageBox ("Micra is upgraded from  [ v."+local_version as String+" ] to  [ v."+new_version as String+" ]\nTo complete upgrade commit files on Github :-)") title:micra.version
 	),
-	fn updateMicra = (
+	fn updateMicra zip_file = (
 	
 	
-		format "Micra Updating....\n"
+		--download Micrs4_?(1-8).zip to Micra/User directory
+		local source_url = server_dir+zip_file
+		local local_file  = user_dir+zip_file--"Micra.zip"
+		--format "Micra Updating.... \ndownloading:[ % ] to:[ % ]\n" source_url local_file
+		download source_url local_file  
+		--downloadZipFile source_url local_file  
+		--delete old Micra files
+--deleteOldVersionFiles()
+		--extract Micra zip
+		
+		--update "SETTINGS/Micra/version"
+		
+		--restart Micra
+		
+		--restart Max ??? maybe
+		--MessageBox  "Update has ben Succesfull! Please restart the 3DsMax" title:" Micra:-)"
 	),
 	fn checkForUpdates = (
 		
@@ -135,7 +278,7 @@ format "last_index:% next_index:% current_date:%\n" last_index next_index curren
 			messageBox "Micra is up do date. Nothing new is aviable. Have a nice day :-)" title:micra.version
 		) else ( 
 		
-			updateMicra()
+			updateMicra ("Micra4_"+(last_index as String)+".zip")
 		)
 	),
 	fn downloadMicra action = (
@@ -163,6 +306,83 @@ mcZip.unzip (Micra.RootDir+"Temp\\zip_dir\\Micra4_1.zip") (Micra.RootDir+"Temp\\
 
 
 /*
+public void BeginDownload(RemoteFileInfo fileInfo, string destPath)
+		{
+			try
+			{
+				var localFileInfo = new FileInfo(destPath);
+				if (localFileInfo.Exists)
+				{
+					if (Sha1VerifyFile(destPath, fileInfo.Sha1Hash))
+					{
+						var newEvt = new AsyncCompletedEventArgs(null, false, null);
+						DownloadFileCompleted(this, newEvt);
+						return; //already have the file with correct contents on disk
+					}
+				}
+			}
+			catch (Exception ex)
+			{
+				var newEvt = new AsyncCompletedEventArgs(ex, false, null);
+				DownloadFileCompleted(this, newEvt);
+				return; //something failed when trying to hash file
+			}
+
+			if (_wc != null)
+			{
+				_wc.CancelAsync();
+				_wc.Dispose();
+				_wc = null;
+			}
+
+			_wc = new CustomWebClient(Timeout);
+			_wc.DownloadProgressChanged += (sender, evt) => { DownloadProgressChanged(sender, evt); };
+			_wc.DownloadFileCompleted += (sender, evt) =>
+			{
+				using (var wc = (WebClient) sender)
+				{
+					if (evt.Cancelled || evt.Error != null)
+					{
+						DownloadFileCompleted(sender, evt);
+						return;
+					}
+
+					try
+					{
+						if (!Sha1VerifyFile(destPath, fileInfo.Sha1Hash))
+							throw new Exception("Hash mismatch after download");
+					}
+					catch (Exception ex)
+					{
+						var newEvt = new AsyncCompletedEventArgs(ex, false, evt.UserState);
+						DownloadFileCompleted(sender, newEvt);
+						return;
+					}
+
+					DownloadFileCompleted(sender, evt);
+				}
+				_wc = null;
+			};
+
+			_wc.DownloadFileAsync(new Uri(fileInfo.Url), destPath);
+		}
+		
+EDIT: Here is what i did to get it working.
+
+uploadfile = "c:/testFile.txt" -- FILE TO BE UPLOADED stored in variable
+
+--DOWNLOAD FROM FTP
+web = dotNetObject "System.Net.WebClient" -- open dot net web client for downloading files
+
+web.DownloadFile "http://www.YourWebSite.com/test/newtestFile.txt" "c:/newtestFile.txt" -- website url and directory as well as directory of new file to be downloaded
+
+--UPLOAD FROM FTP
+Web.Credentials = dotnetObject "System.Net.NetworkCredential" "user" "password" -- ftp username and password
+theUri = dotnetObject "System.Uri" ("ftp://YourWebSite.com/test/testfile.txt")
+
+web.UploadFileAsync theUri uploadfile -- upload file to ftp 
+
+
 	fn checkForUpdates = (
 		
 		--get local micra version
