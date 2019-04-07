@@ -230,6 +230,43 @@ struct MICRA_FILE (
 		missing_files
 	),
 	/**
+	*@Usage > delete files and subdirectories from given directory (exclude works only in root dir)
+	*@Alert > I recommended to use secure verification:"SomeUniqueFile.txt" to be sure you are in right directory ;-)
+	*@Example
+		mcFile.deleteDirectoryContent "e:\\Aprog\\Orien\\Micra\\Micra4\\Temp\\extract_files\\" verification:"Actions.xml"
+		mcFile.deleteDirectoryContent "e:\\Aprog\\Orien\\Micra\\Micra4\\Temp\\extract_files\\" exclude:#("bin", "Readme.txt") verification:"Actions.xml"
+	*/
+	fn deleteDirectoryContent dir exclude:#() verification:"any" = (
+	
+		local sio = dotNetClass "System.IO.Directory"
+		if not (sio.Exists dir) do return false
+		local all_dirs	= sio.GetDirectories dir
+		local dir_files	= sio.GetFiles dir
+		--format "verification check...\n"
+		if secure != "any" do (
+		
+			local is_right_directory = false
+			for f in dir_files do if filenameFromPath f == verification do is_right_directory = true
+			if not is_right_directory do (
+			
+				format "Verification falied in Directory [ % ]. Deleting Aborted. Be careful -;) \n" dir
+				return false
+			)
+		)
+		--format "process to deleting files...\n"
+		fn isPathExcluded arr path = (
+			
+			local indexes = mcArray.findWord arr (filenameFromPath path) ignoreCase:true
+			--format "arr:% path:% indexes:%\n" arr path indexes
+			indexes.count != 0
+		)
+		for f	in dir_files	where	not (isPathExcluded exclude f) do deleteFile f
+		--delete directories
+		for d	in all_dirs		where	not (isPathExcluded exclude d) do sio.Delete d true --delete dirs and subdirs
+		true
+	),
+	/**
+	*@Usage > Delete a file from all dirs and subdirs
 	*@Example
 		mcFile.delFileInTree "g:\\CINEMA\\_unsorted_\\" "Thumbs.db"
 		mcFile.delFileInTree "g:\\CINEMA\\_unsorted_\\" "readme.txt"
@@ -717,45 +754,6 @@ struct MICRA_FILE (
 		local directorySecurity = inputDirectoryInfo .GetAccessControl()
 		directorySecurity.AddAccessRule fileSystemAccessRule 
 		inputDirectoryInfo .SetAccessControl directorySecurity 
-	),
-	/**
-	*@Example
-		mcFile.zip (Micra.RootDir+"Temp\\source_files\\") (Micra.RootDir+"Temp\\zip_dir\\Micra4_4_5_2019_PM.zip")
-	*/
-	fn zip source_dir zip_path filter:"*" = (
-	
-		if not doesFileExist source_dir do return false
-		--local objFSO = CreateOLEObject "Scripting.FileSystemObject"
-		local objShell = CreateOLEObject "WScript.Shell"
-		local zip_file = Micra.RootDir + "App\\7za.exe"
-		if not doesFileExist zip_file do return false
-		local cmd = zip_file + " a " + zip_path + " " + source_dir + filter
-		local response_index = objShell.Run cmd 0 true 
-		if response_index == 0 then true else false
-	),
-	/**
-	*@Example
-		mcFile.unzip (Micra.RootDir+"Temp\\zip_dir\\Micra4_4_5_2019_PM.zip") (Micra.RootDir+"Temp\\extract_files\\")
-	*/
-	fn unzip zip_path output_dir = (	
-	
-		if not doesFileExist zip_path or not doesFileExist output_dir do return false
-		local objShell = CreateOLEObject "WScript.Shell"
-		local zip_file = Micra.RootDir + "App\\7za.exe"
-		if not doesFileExist zip_file do return false
-		format "extracting file:\n%\nto directory:\n%\n" zip_path output_dir
-		local cmd = zip_file + " e " + zip_path + " -o " + output_dir
-		local response_index = objShell.Run cmd 0 true 
-		if response_index == 0 then true else false
-/*		
---Extract the contants of the zip file.
-set objShell = CreateObject("Shell.Application")
-set FilesInZip=objShell.NameSpace(ZipFile).items
-objShell.NameSpace(ExtractTo).CopyHere(FilesInZip)
-Set fso = Nothing
-Set objShell = Nothing
-	*/	
-		
 	)
 	/*<end>*/
 )

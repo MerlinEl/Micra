@@ -44,6 +44,21 @@ struct MCRA_ARRAY (
 		--collect only bitarrays with two or more dups (drop singles which is not realy dups)
 		for ba in dups where ba.numberSet > 1 collect ba
 	),
+	/**
+	*@Author > PolyTools3D
+	*@Usage > find all words in an array
+	*@Example
+		mcArray.findWord #("a", "b", "c", "b") "B" > #()
+		mcArray.findWord #("a", "b", "c", "b") "B" ignoreCase:true > #(2, 4)
+		return an array of indexes where word is found
+	*/
+	fn findWord arr str ignoreCase:false = (
+	
+		local regex = dotnetclass "system.text.regularexpressions.regex"
+		local pattern = "\b" + str + "\b"
+		if ignoreCase do pattern = "(?i)" + pattern
+		for j = 1 to arr.count where ((regex.match arr[j] pattern).success) collect j
+	),
 	/*
 	*@Usage > Search for an item in multiarray
 	*@Example

@@ -2,7 +2,7 @@
 <SETTINGS>
   <Micra>
     <born val="04.25.2006" />
-    <version val="4.19" />
+    <version val="4.29" />
   </Micra>
   <Structures val="All registred Micra's Structures">
     <!--independent classes-->
@@ -17,6 +17,7 @@
     <!--dependent classes-->
     <mcMaterial val="on" />
     <mcColor val="on" info="color conversion tool" />
+    <mcZip val="on" info="zip - unzip functions" />
     <mcFile val="on" info="read - write functions" />
     <mcXML val="on" />
     <mcINI val="on" />

@@ -4,6 +4,7 @@
 /*
 *@Used Structures
 	mcStructMan
+	mcFile
 	mcDate
 *
 *@Used Objects
@@ -11,7 +12,9 @@
 	mcItem
 *
 *@Usage
-	undefined
+	if mcUpdater == undefined do mcFile.fileInVersion "Micra_Update" --load class if is not accessible
+	mcUpdater.uploadMicra()
+	mcUpdater.downloadMicra #update
 *
 *@Example	
 	undefined
@@ -22,7 +25,8 @@ struct MICRA_UPDATER_STRUCTURE	(
 	--variables
 	server_dir = "https://github.com/MerlinEl/Micra/tree/master/Micra4_Release/",
 	server_xml = "https://raw.githubusercontent.com/MerlinEl/Micra/master/Micra4_Release/update.xml",
-	local_xml  = (pathConfig.removePathLeaf Micra.RootDir) + "\\Micra4_Release\\update.xml",
+	local_dir  = (pathConfig.removePathLeaf Micra.RootDir) + "\\Micra4_Release\\",
+	local_xml  = local_dir + "update.xml",
 	--functions
 	fn getSource = getSourceFileName(), --get path of this script
 	fn readXml url = (
@@ -51,6 +55,14 @@ struct MICRA_UPDATER_STRUCTURE	(
 		)
 	),
 	/**
+	*@Usage > Remove all Except User directory
+	*/
+	fn deleteOldVersionFiles = (
+
+		local excluded_folders_and_files = #("User", "_New", "Temp") --for now, later will be optimalized
+		mcFile.deleteDirectoryContent Micra.RootDir exclude:excluded_folders_and_files verification:"Actions.xml"
+	),
+	/**
 	*@Example
 		if mcUpdater == undefined do mcFile.fileInVersion "Micra_Update" --load class if is not accessible
 		mcUpdater.download "https://raw.githubusercontent.com/MerlinEl/Micra/master/Micra4_Release/update.xml" (Micra.TempDir+"update.xml")
@@ -71,9 +83,9 @@ struct MICRA_UPDATER_STRUCTURE	(
 	*@Usage > Create new micra version and upload it to GITHUB
 	*@Example
 		if mcUpdater == undefined do mcFile.fileInVersion "Micra_Update" --load class if is not accessible
-		mcUpdater.upload()
+		mcUpdater.uploadMicra()
 	*/
-	fn upload = (
+	fn uploadMicra = (
 			
 		if not (queryBox "You are sure to Upgrade Micra?" title:micra.version) do return false
 		--get local micra version and increase it
@@ -95,7 +107,8 @@ format "last_index:% next_index:% current_date:%\n" last_index next_index curren
 		mcFile.saveSettings local_xml ("UPDATE/VERSIONS/item_"+next_index as string) node_attribs type:"attribs"
 		mcFile.saveSettings local_xml "UPDATE/CURRENT/last_index" (next_index as String)
 		--pack micra in to zip file with version
-		
+		local excluded_folders_and_files = #("old", "Orien_Star", "rene.baca", "Temp", "_New") --for now, later will be optimalized
+		mcZip.zip Micra.RootDir (local_dir+"Micra4_"+next_index as String+".zip") override:true exclude:excluded_folders_and_files
 		--final msg
 		messageBox ("Micra is upgraded from  [ v."+local_version as String+" ] to  [ v."+new_version as String+" ]\nTo complete upgrade commit files on Github :-)") title:micra.version
 	),
@@ -124,12 +137,29 @@ format "last_index:% next_index:% current_date:%\n" last_index next_index curren
 		
 			updateMicra()
 		)
+	),
+	fn downloadMicra action = (
+		
+		case action of (
+		
+			#update:	checkForUpdates()
+			#downgrade:	()
+			#install:	()
+		)
 	)
 	/*<end>*/
 )	
  --create instance
 Global mcUpdater = mcStructMan.instanceStructure MICRA_UPDATER_STRUCTURE "mcUpdater"
 
+/* test
+
+mcZip.zip (Micra.RootDir+"Temp\\source_files\\") (Micra.RootDir+"Temp\\zip_dir\\Micra4_1.zip") override:true
+mcZip.unzip (Micra.RootDir+"Temp\\zip_dir\\Micra4_1.zip") (Micra.RootDir+"Temp\\extract_files\\") override:true
+
+		if mcUpdater == undefined do mcFile.fileInVersion "Micra_Update" --load class if is not accessible
+		mcUpdater.upload()
+*/
 
 
 /*
