@@ -66,7 +66,7 @@ Struct MICRA_POPUP (
 		format "typed_text:%\n" typed_text
 	@info this code can't be executed by enter (he would close immediately). For call, use  menu, buttons, etc...
 	*/
-	fn textBox title:"Type a text here:" form_name:"MaxCenter" = ( --if form_name is not "MaxCenter" save - load  pos at defined Name
+	fn textBox title:"Type a text here:" form_name:"MaxCenter" crypt:false = ( --if form_name is not "MaxCenter" save - load  pos at defined Name
 	
 		local form = dotNetObject "MaxCustomControls.Maxform"
 		local lblT = dotNetObject "label"

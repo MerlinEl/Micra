@@ -527,12 +527,12 @@ fn onEditToolbarButtonClick s a = (
 )
 fn onTab2ButtonClick s a = (
 	
-	if mcUpdater == undefined do mcFile.fileInVersion "Micra_Update" --load class if is not accessible
+	if ::mcUpdater == undefined do mcFile.fileInVersion "Micra_Update" --load class if is not accessible
 	case s.text of (
 	
 		"Interface Colors": mcFile.fileInVersion "Customize_Colors"
-		"Commit Micra" : mcUpdater.updateMicra #commit
-		"Update Micra"  : mcUpdater.updateMicra #update
+		"Commit Micra" : ::mcUpdater.updateMicra #commit
+		"Update Micra"  : ::mcUpdater.updateMicra #update
 	)
 )
 --INTERFACE INIT

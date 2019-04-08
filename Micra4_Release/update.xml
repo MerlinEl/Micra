@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <UPDATE>
   <CURRENT>
-    <last_index val="7" />
+    <last_index val="8" />
   </CURRENT>
   <VERSIONS>
     <item_1 version="4.25" date="7_4_2019_14_21_42" />
@@ -11,6 +11,6 @@
     <item_5 version="4.29" date="7_4_2019_14_22_10" />
     <item_6 version="4.29" date="4_8_2019_5_49_02_PM" />
     <item_7 version="4.3" date="4_8_2019_5_51_41_PM" />
-    <item_8 version="4.24" date="7_4_2019_14_20_15" />
+    <item_8 version="4.31" date="8_4_2019_22_04_56" />
   </VERSIONS>
 </UPDATE>
