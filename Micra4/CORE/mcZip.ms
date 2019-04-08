@@ -68,6 +68,8 @@ struct MICRA_NEW_STRUCTURE	(
 		-x (Exclude) 
 	*@Example
 		mcZip.zip (Micra.RootDir+"Temp\\source_files\\") (Micra.RootDir+"Temp\\zip_dir\\Micra4_1.zip") override:true
+		--now zip without any folder "bin" or any file "readme.txt"
+		mcZip.zip (Micra.RootDir+"Temp\\source_files\\") (Micra.RootDir+"Temp\\zip_dir\\Micra4_1.zip") override:true exclude:#("bin", "readme.txt")
 	*/
 	fn zip source_dir zip_path filter:"*" win_mode:0 on_return:true override:false exclude:#()= (
 	
@@ -104,8 +106,6 @@ struct MICRA_NEW_STRUCTURE	(
 		-y (Assume Yes on all queries) 
 	*@Example
 		mcZip.unzip (Micra.RootDir+"Temp\\zip_dir\\Micra4_1.zip") (Micra.RootDir+"Temp\\extract_files\\") override:true
-		--now zip without any folder "bin" or any file "readme.txt"
-		mcZip.zip (Micra.RootDir+"Temp\\source_files\\") (Micra.RootDir+"Temp\\zip_dir\\Micra4_1.zip") override:true exclude:#("bin", "readme.txt")
 	*/
 	fn unzip zip_path output_dir win_mode:0 on_return:true override:false = (	
 

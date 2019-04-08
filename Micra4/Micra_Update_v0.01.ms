@@ -5,7 +5,10 @@
 *@Used Structures
 	mcStructMan
 	mcFile
+	mcArray
 	mcDate
+	mcCall
+	mcZip
 *
 *@Used Objects
 	mcObject
@@ -23,6 +26,8 @@
 struct MICRA_UPDATER_STRUCTURE	(
 	
 	--variables
+	WebClient,
+	server_version = "undefined",
 	user_dir   = (pathConfig.removePathLeaf Micra.UserDir) + "\\",
 	--server_dir = "https://github.com/MerlinEl/Micra/tree/master/Micra4_Release/",
 	server_dir = "https://github.com/MerlinEl/Micra/raw/master/Micra4_Release/",
@@ -64,132 +69,32 @@ struct MICRA_UPDATER_STRUCTURE	(
 		local excluded_folders_and_files = #("User", "_New", "Temp") --for now, later will be optimalized
 		mcFile.deleteDirectoryContent Micra.RootDir exclude:excluded_folders_and_files verification:"Actions.xml"
 	),
-	fn downloadZipFile source_url target_file = ( 
+	fn downloadProgress s a = (mcPopUp.progeressbar a.ProgressPercentage msg:"Downoading Update:"),
+	fn downloadCompleted s a = (
+	
+		mcPopUp.progeressbar 100 msg:"Downoading Finished:" close:true
+		dotNet.removeEventHandler mcUpdater.WebClient "DownloadProgressChanged" mcUpdater.downloadProgress
+		dotNet.removeEventHandler mcUpdater.WebClient "DownloadFileCompleted" mcUpdater.downloadCompleted
+		local local_file  = mcUpdater.user_dir+"Micra.zip"
+		if not (doesFileExist local_file) do (
 		
-			if doesFileExist target_file do deleteFile target_file --delete old file
-		--download new file
-		local ServicePointManager = dotNetClass "System.Net.ServicePointManager"
-		local SecurityProtocolType = dotNetClass "System.Net.SecurityProtocolType"
-		ServicePointManager.Expect100Continue = true --using System.Net
-		ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12 --Use SecurityProtocolType.Ssl3 if needed for compatibility reasons
-		
-		local web = dotNetObject "System.Net.WebClient"
-		web.Headers.Add "Accept: text/html, application/xhtml+xml, */*"
-		web.Headers.Add "User-Agent: Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; WOW64; Trident/5.0)"
-/*
-
-fn  Completed s e =(
-	web = null
-	MessageBox  "Download completed!"
-)
-local se = dotnetObject "System.Object"
-web.DownloadFileCompleted += new AsyncCompletedEventHandler(Completed);
-
-}*/
-		-- dotnetObject "System.Object" 
-		-- dotnetClass "System.ComponentModel.AsyncCompletedEventArgs"
-		--DownloadFileCompleted <System.Object>sender <System.ComponentModel.AsyncCompletedEventArgs>e = ( ... )
-		--local newEvt = new AsyncCompletedEventArgs(ex, false, null);
-		fn DownloadFileCompleted s a = (
-			
-			format "completed s:% a:%\n" s a
+			MessageBox "Unable Download Micra's Update. Please contact MerlinEl for help." title:Micra.version
+			return false
 		)
-		web.DownloadFileCompleted DownloadFileCompleted
-		web.DownloadFileAsync (dotnetObject "System.Uri" source_url) (dotnetObject "System.String" target_file)
-
-		
-		--request = (dotNetClass "system.Net.WebRequest").create m  	
-		--request.Timeout = 1000
-		--request.dispose()
-		format "source_url:%\ntarget_file:%\ndownloaded:%\n" source_url target_file (doesFileExist target_file)
-	
-	/*
-		local web = dotNetObject "System.Net.WebClient"
-		fn downloadCompleted s e = (
-			
-		  web.dispose()
-		  web = null
-		  MessageBox "Download completed!"
-		)
-		web.DownloadFileCompleted += AsyncCompletedEventHandler(Completed) 
-		web.DownloadFileAsync source_url target_file
-
-protected void DownloadFiles(object sender, EventArgs e)
-{
-    using (ZipFile zip = new ZipFile())
-    {
-        zip.AlternateEncodingUsage = ZipOption.AsNecessary;
-        zip.AddDirectoryByName("Files");
-        foreach (GridViewRow row in GridView1.Rows)
-        {
-            if ((row.FindControl("chkSelect") as CheckBox).Checked)
-            {
-                string filePath = (row.FindControl("lblFilePath") as Label).Text;
-                zip.AddFile(filePath, "Files");
-            }
-        }
-        Response.Clear();
-        Response.BufferOutput = false;
-        string zipName = String.Format("Zip_{0}.zip", DateTime.Now.ToString("yyyy-MMM-dd-HHmmss"));
-        Response.ContentType = "application/zip";
-        Response.AddHeader("content-disposition", "attachment; filename=" + zipName); 
-        zip.Save(Response.OutputStream);
-        Response.End();
-    }
-}
-
-	*/
-	
-	
-/*
-protected void DownloadFile(string name)
-    {
-        string _path = Request.PhysicalApplicationPath + "CV/" + name;
-        System.IO.FileInfo _file = new System.IO.FileInfo(_path);
-        if (_file.Exists)
-        {
-            Response.Clear();
-            Response.AddHeader("Content-Disposition", "attachment; filename=" + _file.Name);
-            Response.AddHeader("Content-Length", _file.Length.ToString());
-            Response.ContentType = "application/octet-stream";
-            Response.WriteFile(_file.FullName);
-            Response.End();
-        }
-        else
-        {
-            ClientScript.RegisterStartupScript(Type.GetType("System.String"), "messagebox", "&lt;script type=\"text/javascript\"&gt;alert('File not Found');</script>");
-        }
-    }
-*/
-/*
-response.ContentType = "application/zip";
-response.AddHeader("content-disposition", "attachment; filename=" + outputFileName);
-using (ZipFile zipfile = new ZipFile()) {
-  zipfile.AddSelectedFiles("*.*", folderName, includeSubFolders);
-  zipfile.Save(response.OutputStream);
-}
-	*/
-		/*protected void Page_Load(object sender, EventArgs e)
-		{
-			Response.Clear();
-			Response.BufferOutput = false;
-			Response.ContentType = "application/zip";
-			Response.AddHeader("content-disposition", "attachment; filename=pauls_chapel_audio.zip");
-
-			using (ZipFile zip = new ZipFile())
-			{
-				zip.CompressionLevel = CompressionLevel.None;
-				zip.AddSelectedFiles("*.mp3", Server.MapPath("~/content/audio/"), "", false);
-				zip.Save(Response.OutputStream);
-			}
-
-			Response.Close();
-		}*/
+		format "New Micra v.% was downloaded to:%.\n" mcUpdater.server_version local_file
+		--delete old Micra files
+		deleteOldVersionFiles()
+		--extract Micra zip
+		mcZip.unzip local_file Micra.RootDir override:true
+		deleteFile local_file	
+		--update "SETTINGS/Micra/version"
+		mcFile.saveSettings Micra.DefaultSettings "SETTINGS/Micra/version" mcUpdater.server_version		
+		--restart Micra
+		Micra.reload()
+		MessageBox  "Update Finished Succesfull! Enjoy you work!" title:Micra.version
 	),
 	/**
-	*@Example
-		if mcUpdater == undefined do mcFile.fileInVersion "Micra_Update" --load class if is not accessible
-		mcUpdater.download "https://raw.githubusercontent.com/MerlinEl/Micra/master/Micra4_Release/update.xml" (Micra.TempDir+"update.xml")
+	*@Usage > Download file from url with progress bar
 	*/
 	fn download source_url target_file = (
 		
@@ -200,12 +105,13 @@ using (ZipFile zipfile = new ZipFile()) {
 		ServicePointManager.Expect100Continue = true --using System.Net
 		ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12 --Use SecurityProtocolType.Ssl3 if needed for compatibility reasons
 		
-		local web = dotNetObject "System.Net.WebClient"
-		web.DownloadFile source_url target_file
-		--request = (dotNetClass "system.Net.WebRequest").create m  	
-		--web.Timeout = 1000
-		web.dispose()
-		format "source_url:%\ntarget_file:%\ndownloaded:%\n" source_url target_file (doesFileExist target_file)
+		format "Micra Updating.... \ndownloading:[ % ] to:[ % ]\n" source_url target_file
+		WebClient = dotNetObject "System.Net.WebClient"
+		--WebClient.DownloadFile source_url target_file
+		dotNet.addEventHandler WebClient "DownloadProgressChanged" downloadProgress
+		dotNet.addEventHandler WebClient "DownloadFileCompleted" downloadCompleted
+		WebClient.DownloadFileAsync (dotNetObject "System.Uri" source_url) target_file
+		WebClient.dispose()
 	),
 	/**
 	*@Usage > Create new micra version and upload it to GITHUB
@@ -240,52 +146,79 @@ format "last_index:% next_index:% current_date:%\n" last_index next_index curren
 		--final msg
 		messageBox ("Micra is upgraded from  [ v."+local_version as String+" ] to  [ v."+new_version as String+" ]\nTo complete upgrade commit files on Github :-)") title:micra.version
 	),
-	fn updateMicra zip_file = (
+	fn downloadMicra zip_file = ( --download Micra.zip to Micra/User directory
 	
-	
-		--download Micrs4_?(1-8).zip to Micra/User directory
 		local source_url = server_dir+zip_file
-		local local_file  = user_dir+zip_file--"Micra.zip"
-		--format "Micra Updating.... \ndownloading:[ % ] to:[ % ]\n" source_url local_file
-		download source_url local_file  
-		--downloadZipFile source_url local_file  
-		--delete old Micra files
---deleteOldVersionFiles()
-		--extract Micra zip
-		
-		--update "SETTINGS/Micra/version"
-		
-		--restart Micra
-		
-		--restart Max ??? maybe
-		--MessageBox  "Update has ben Succesfull! Please restart the 3DsMax" title:" Micra:-)"
+		local local_file  = user_dir+"Micra.zip"
+		download source_url local_file --after finished continue at > downloadCompleted  
 	),
 	fn checkForUpdates = (
 		
-		--get local micra version
-		local local_version = mcFile.readSettings Micra.DefaultSettings "SETTINGS/Micra/version"
-		--get server micra version
-		local xml = mcXML()
-		xml.fromString (readXml server_xml)
-		local xml_current = xml.getNode ("//UPDATE/CURRENT/last_index")
-		local last_index  = xml_current.getAttribute "val"
-		local xml_version = xml.getNode ("//UPDATE/VERSIONS/item_"+last_index)
-		local server_version = xml_version.getAttribute "version"
-		format "last_index:% server_version:%\n" last_index server_version
-		format "Micra > versions compare > LOCAL:% SERVER:%\n" local_version server_version
-		if ((execute local_version) >= (execute server_version)) then (
-		
-			messageBox "Micra is up do date. Nothing new is aviable. Have a nice day :-)" title:micra.version
-		) else ( 
-		
-			updateMicra ("Micra4_"+(last_index as String)+".zip")
+		Global mcUpdateMicraDialog
+		if mcUpdateMicraDialog != undefined do DestroyDialog mcUpdateMicraDialog
+		rollout mcUpdateMicraDialog (micra.version + " Updater:")  width:232 height:228 (
+			
+			GroupBox 'grp1' "" pos:[4,4] width:224 height:188 align:#left
+			listbox 'lbx_versions' "Server Versions:" pos:[8,44] width:212 height:9 align:#left
+			label 'lbl_you_version' "You Version:" pos:[8,16] width:216 height:20 align:#left
+			button 'btn_get' "Get" pos:[4,196] width:108 height:28 align:#left
+			button 'btn_abort' "Cancel" pos:[116,196] width:108 height:28 align:#left
+
+			local local_version = "0.00"
+			local server_version = "0.00"
+			local selected_version = "0.00"
+			local selected_index = 1
+			local accepted = true
+			on mcUpdateMicraDialog open do (
+				
+				--get local micra version
+				local_version = mcFile.readSettings Micra.DefaultSettings "SETTINGS/Micra/version"
+				lbl_you_version.text = "You Version:" + local_version
+				--get server micra version
+				local xml = mcXML()
+				xml.fromString (readXml server_xml)
+				local xml_current = xml.getNode ("//UPDATE/CURRENT/last_index")
+				local last_index  = xml_current.getAttribute "val"
+				local all_versions = (xml.getNode "//UPDATE/VERSIONS").getChildrenNames()
+				local xml_version = xml.getNode ("//UPDATE/VERSIONS/item_"+last_index)
+				server_version = xml_version.getAttribute "version"
+				--format "last_index:% server_version:%\n" last_index server_version
+				--format "Micra > versions compare > LOCAL:% SERVER:%\n" local_version server_version
+				local items = #()
+				for n in all_versions do ( --TODO use listbox grid to add index of each version also date
+				
+					local version = (xml.getNode ("//UPDATE/VERSIONS/"+n)).getAttribute "version"
+					append items version
+				)
+				lbx_versions.items = mcArray.reverseArray (sort items)
+			)
+			on btn_get pressed  do
+			(
+				accepted = true
+				selected_version = lbx_versions.selected
+				DestroyDialog mcUpdateMicraDialog
+			)
+			on btn_abort pressed  do
+			(
+				accepted = false
+				DestroyDialog mcUpdateMicraDialog
+			)
 		)
+		CreateDialog mcUpdateMicraDialog modal:true
+		if not mcUpdateMicraDialog.accepted do return false 
+		format "download version:% selected_index:%\n" mcUpdateMicraDialog.selected_version mcUpdateMicraDialog.selected_index
+		--downloadMicra ("Micra4_"+(mcUpdateMicraDialog.selected_index as String)+".zip")
 	),
-	fn downloadMicra action = (
+	fn checkForCommit = (
+	
+		print "commit"
+	),
+	fn updateMicra action = (
 		
 		case action of (
 		
-			#update:	checkForUpdates()
+			#commit: checkForCommit() 
+			#update: checkForUpdates()
 			#downgrade:	()
 			#install:	()
 		)

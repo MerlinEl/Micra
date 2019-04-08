@@ -26,6 +26,20 @@ rollout mcSendUVWToPsDialog "Untitled" width:148 height:212
 	colorPicker 'cp_seam' "" pos:[104,152] width:28 height:24 color:(color 0 255 0) align:#left
 	
 	--> Functions 
+	fn getCurrentTextureSize = (
+		
+		local uv = modPanel.getCurrentObject()
+		if classof uv != Unwrap_UVW do return false
+		local uv_current_texture = uv.texMapList[ uv.getCurrentMap()-1 ]
+		local bm = uv_current_texture.bitmap
+		--display bm
+		local index_x = findItem ddl_size_x.items (bm.width as string)
+		local index_y = findItem ddl_size_x.items (bm.height as string)
+		if index_x == 0 do index_x = 1
+		if index_y == 0 do index_y = 1
+		ddl_size_x.selection = index_x
+		ddl_size_y.selection = index_y
+	)
 	fn render_uvw_and_send_to_photoshop = 
 	(
 		local objs = modPanel.getCurrentObject()-- select multiple objects to multi unwrap
@@ -106,6 +120,8 @@ rollout mcSendUVWToPsDialog "Untitled" width:148 height:212
 		)
 		local ElementPlacement = ELEMENT_PLACEMENT()
 		first_layer.move bg_layer ElementPlacement.PLACEATEND
+		--select first Layer
+		app.activeDocument.activeLayer=first_layer
 		--show Photoshop
 		app.Visible=true
 		app.bringToFront()
@@ -124,10 +140,12 @@ rollout mcSendUVWToPsDialog "Untitled" width:148 height:212
 		if sec  != "" do cp_seam.color = execute sec
 		local mde = mcFile.readSettings Micra.UserSettings "RenderToTextureMod/Mode"
 		if mde  != "" do ddl_mode.selection = execute mde
-		local sizx = mcFile.readSettings Micra.UserSettings "RenderToTextureMod/Size_X"
-		if sizx  != "" do ddl_size_x.selection = execute sizx
-		local sizy = mcFile.readSettings Micra.UserSettings "RenderToTextureMod/Size_Y"
-		if sizy  != "" do ddl_size_y.selection = execute sizy	
+		
+		getCurrentTextureSize() -- auto
+		--local sizx = mcFile.readSettings Micra.UserSettings "RenderToTextureMod/Size_X"
+		--if sizx  != "" do ddl_size_x.selection = execute sizx
+		--local sizy = mcFile.readSettings Micra.UserSettings "RenderToTextureMod/Size_Y"
+		--if sizy  != "" do ddl_size_y.selection = execute sizy	
 	)
 	fn saveInterface =
 	(
@@ -137,8 +155,9 @@ rollout mcSendUVWToPsDialog "Untitled" width:148 height:212
 		mcFile.saveSettings Micra.UserSettings "RenderToTextureMod/Slected_Faces" (chk_sel_faces.checked as string)
 		mcFile.saveSettings Micra.UserSettings "RenderToTextureMod/Seam_Edges_Color" (cp_seam.color as string)
 		mcFile.saveSettings Micra.UserSettings "RenderToTextureMod/Mode" (ddl_mode.selection as string)
-		mcFile.saveSettings Micra.UserSettings "RenderToTextureMod/Size_X" (ddl_size_x.selection as string)
-		mcFile.saveSettings Micra.UserSettings "RenderToTextureMod/Size_Y" (ddl_size_y.selection as string)
+		--replaced by auto
+		--mcFile.saveSettings Micra.UserSettings "RenderToTextureMod/Size_X" (ddl_size_x.selection as string)
+		--mcFile.saveSettings Micra.UserSettings "RenderToTextureMod/Size_Y" (ddl_size_y.selection as string)
 	)
 	-->DialogProp --------------------------------------------------------------------
 	on mcSendUVWToPsDialog rbuttonup pos do (destroyDialog mcSendUVWToPsDialog)

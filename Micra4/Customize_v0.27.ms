@@ -525,16 +525,14 @@ fn onEditToolbarButtonClick s a = (
 		"btn_settings_save": saveAction()
 	)
 )
-fn onTab2ButtonClick s a =
-(
-	case s.text of
-	(
-		"Interface Colors":mcFile.fileInVersion "Customize_Colors"
-		"Update Micra":(
-		
-			if mcUpdater == undefined do mcFile.fileInVersion "Micra_Update" --load class if is not accessible
-			::mcUpdater.downloadMicra #update
-		)
+fn onTab2ButtonClick s a = (
+	
+	if mcUpdater == undefined do mcFile.fileInVersion "Micra_Update" --load class if is not accessible
+	case s.text of (
+	
+		"Interface Colors": mcFile.fileInVersion "Customize_Colors"
+		"Commit Micra" : mcUpdater.updateMicra #commit
+		"Update Micra"  : mcUpdater.updateMicra #update
 	)
 )
 --INTERFACE INIT
@@ -761,7 +759,7 @@ fn addTab num mcs = (
 					dotNet.addEventHandler cb "MouseUp" onCheckerChanges
 					mcs.tab_2.checkboxes += #(cb)
 				)
-				keys = #( "Interface Colors", "Update Micra")
+				keys = #( "Interface Colors", "Commit Micra", "Update Micra")
 				for i = 1 to keys.count do --updates
 				(
 					local b = dotNetObject "button"
@@ -799,7 +797,16 @@ fn addTab num mcs = (
 			
 			--Add Interface Components To Layout---------------------------------------------------------------------
 			if debug == 1 do print "addTab > Settings components aded. "
-			mcs.tab.Controls.addRange (#(mcs.tab_2.titles[1]) + mcs.tab_2.checkboxes + #(mcs.tab_2.titles[2]) + #(mcs.tab_2.buttons[1]) + #(mcs.tab_2.titles[3]) + #(mcs.tab_2.buttons[2]))
+			mcs.tab.Controls.addRange (
+			
+				#(mcs.tab_2.titles[1]) + 
+				mcs.tab_2.checkboxes + 
+				#(mcs.tab_2.titles[2]) + 
+				#(mcs.tab_2.buttons[1]) + 
+				#(mcs.tab_2.titles[3]) + 
+				#(mcs.tab_2.buttons[2]) +
+				#(mcs.tab_2.buttons[3])
+			)
 		)
 		--about interface
 		3: ( 

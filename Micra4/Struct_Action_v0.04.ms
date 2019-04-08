@@ -1384,10 +1384,11 @@ struct mcAction (
 				for i=2 to sel_geometry.count do 
 				(
 					polyOp.attach first_obj sel_geometry[i]
-					mcCall.progeressbar (100.*i/sel_geometry.count)
+					mcPopUp.progeressbar (100.*i/sel_geometry.count) msg:"Objects Collapsed:"
 				)
-				mcCall.progeressbar 100 close:true
+				mcPopUp.progeressbar 100 msg:"Objects Collapsed:" close:true
 				select first_obj
+				messagebox "Collapse Objects Is Finished!" title:Micra.version
 			) 
 			catch (mcCall.popUp "Incorrect objecs!" 3)	
 		)
@@ -1419,10 +1420,10 @@ struct mcAction (
 					local next_obj_faces =  all_obj_faces - obj_faces
 					polyOp.setFaceMatID obj next_obj_faces i
 					obj_faces = all_obj_faces
-					mcCall.progeressbar (100.*i/sel.count)
+					mcPopUp.progeressbar (100.*i/sel.count) msg:"Objects Collapsed:"
 				)
 			)
-			mcCall.progeressbar 100 close:true
+			mcPopUp.progeressbar 100 msg:"Objects Collapsed:" close:true
 			messagebox "Packed By ID" title:" Finished"
 		)
 		completeRedraw()
@@ -1907,14 +1908,14 @@ struct mcAction (
 					local obj_name = uniqueName obj.name
 					polyop.detachFaces obj element asNode:true name:obj_name
 					elements += #(getNodeByName obj_name)
-					mcCall.progeressbar (100.*prog/obj.faces.count)
+					mcPopUp.progeressbar (100.*prog/obj.faces.count) msg:"Elements Breaked:"
 					prog += 1
 				)
 				delete obj
 				select elements
 				mcAction.objectGradient red blue
 			--)
-			mcCall.progeressbar 100 close:true	
+			mcPopUp.progeressbar 100 msg:"Elements Breaked:" close:true
 			messagebox "Break By Elements Is Finished!" title:Micra.version
 		)
 		completeRedraw()
