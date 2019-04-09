@@ -86,7 +86,7 @@ struct MICRA_NEW_STRUCTURE	(
 		local cmd = zip_file + " a " + zip_path + " " + source_dir + filter -- -d(Delete), -u(Update) switches at end are not tested
 		--format "CMD >\n%\n" cmd
 		local exit_code = objShell.Run cmd win_mode on_return  
-		format "Zip file:[ % ] status:%\n" zip_path (translateExitCode(exit_code))
+		format "mcZip > zip file:[ % ] status:%\n" zip_path (translateExitCode(exit_code))
 		exit_code == 0 --true(success) false(failed)
 	),
 	/**

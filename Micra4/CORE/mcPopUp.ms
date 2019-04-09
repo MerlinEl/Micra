@@ -86,24 +86,16 @@ Struct MICRA_POPUP (
 			local fpos = execute (mcFile.readSettings Micra.UserProfile ("Properties_2/"+form_name) type:"pos")
 			if classOf fpos == Point2 do form_rect = mcDotnet.dRect fpos form_size
 		) 
-		fn textBoxControll s a  = (
+		fn textBoxKeyDown s a = (
 		
-			local char_str = a.Keycode.toString()
-			case char_str of (
+			case a.Keycode.toString() of (
 				
-				"Escape":( --Escape
-				
-				print "escape"
-				
-					mcPopUp._typed_text = ""
-					mcPopUp.closeForm s.parent
-				)
-				"Return":( --Enter
+				"Return":( --when pressed Enter
 				
 					mcPopUp._typed_text = s.text
 					mcPopUp.closeForm s.parent
 				)
-				default:(
+				default:( --while typing words
 				
 					if s.text.count > 0 do (
 						
@@ -111,6 +103,14 @@ Struct MICRA_POPUP (
 						s.SelectionStart = s.text.count --move cursor at end
 					)
 				)
+			)
+		)
+		fn textBoxKeyUp s a  = ( --Escape close must be on key up to avoid error
+		
+			if a.Keycode.toString() == "Escape" do ( --when pressed Escape
+
+				mcPopUp._typed_text = ""
+				mcPopUp.closeForm s.parent
 			)
 		)
 		--Move / Snap Dialog
@@ -136,7 +136,7 @@ Struct MICRA_POPUP (
 		--form.TopMost=true
 		
 		--toolbar
-		lblT.bounds = mcDotnet.dRect [border_offset, border_offset] [form.width - border_offset*10 , bar_height]
+		lblT.bounds = mcDotnet.dRect [border_offset, border_offset] [form.width - border_offset*2 , bar_height]
 		lblT.BackColor = mcDotnet.uiColor #back
 		lblT.ForeColor = mcDotnet.uiColor #text
 		lblT.TextAlign = lblT.TextAlign.MiddleCenter
@@ -148,11 +148,17 @@ Struct MICRA_POPUP (
 		edtBox.ForeColor= mcDotnet.uiColor #edtfore
 		local dnfontlarge = dotNetObject "System.Drawing.Font" "Verdana" 12 ((dotNetClass "System.Drawing.FontStyle").bold)
 		edtBox.font = dnfontlarge
+		if crypt do ( --switch to enter text or stars
+
+			edtBox.PasswordChar = "*"
+			edtBox.MaxLength = 8
+		)
 		
 		dotNet.addEventHandler lblT   "MouseMove" onLblTMouseMove
 		dotNet.addEventHandler lblT   "MouseDown" onLblTMouseDown 
 		dotNet.addEventHandler lblT   "MouseUp" onLblTMouseUp
-		dotnet.addEventHandler edtBox "KeyUp" textBoxControll
+		dotnet.addEventHandler edtBox "KeyUp" textBoxKeyUp
+		dotnet.addEventHandler edtBox "KeyDown" textBoxKeyDown
 
 		form.controls.addRange ( #(lblT, edtBox)  )
 		form.ShowModal() 
