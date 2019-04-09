@@ -121,7 +121,7 @@
     <Pivot_Planter_Manip val="2.05" />
     <Live_Measure val="0.09" />
     <Live_Modeling val="0.02" />
-    <Micra_Update val="0.02" />
+    <Micra_Update val="0.03" />
   </Version>
   <SystemFiles val="Micra's Settings Files">
     <Actions val="Contains all accesible Micra's actions" />
