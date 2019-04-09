@@ -28,7 +28,7 @@ struct MICRA_UPDATER_STRUCTURE	(
 	--variables
 	debug = true,
 	WebClient,
-	server_version = "undefined",
+	chossen_version = "undefined",
 	user_dir   = (pathConfig.removePathLeaf Micra.UserDir) + "\\",
 	--server_dir = "https://github.com/MerlinEl/Micra/tree/master/Micra4_Release/",
 	server_dir = "https://github.com/MerlinEl/Micra/raw/master/Micra4_Release/",
@@ -81,14 +81,16 @@ struct MICRA_UPDATER_STRUCTURE	(
 			MessageBox "Unable Download Micra's Update. Please contact MerlinEl for help." title:Micra.version
 			return false
 		)
-		if debug do format "mcUpdater > downloadCompleted > New Micra v.% was downloaded to:%.\n" mcUpdater.server_version local_file
+		if debug do format "mcUpdater > downloadCompleted > New Micra v% was downloaded to:%.\n" mcUpdater.chossen_version local_file
+format "mcUpdater > downloadMicra > Debug > Stop.\n"
+return OK		
 		--delete old Micra files
 		emptyMicraFolder exclude_folders_and_files:#("User", "_New", "Temp")
 		--extract Micra zip
 		mcZip.unzip local_file Micra.RootDir override:true
 		deleteFile local_file	
 		--update "SETTINGS/Micra/version"
-		mcFile.saveSettings Micra.DefaultSettings "SETTINGS/Micra/version" mcUpdater.server_version		
+		mcFile.saveSettings Micra.DefaultSettings "SETTINGS/Micra/version" mcUpdater.chossen_version		
 		--restart Micra
 		Micra.reload()
 		MessageBox  "Update Finished Succesfull! Enjoy you work!" title:Micra.version
@@ -162,10 +164,8 @@ struct MICRA_UPDATER_STRUCTURE	(
 		local fname = "Micra4_"+version+".zip"
 		local source_url = server_dir+fname
 		local local_file  = user_dir+"Micra.zip"
-		if debug do format "mcUpdater > downloadMicra > fname:% source_url:% local_file:%\n" fname source_url local_file
-format "mcUpdater > downloadMicra > Debug > Stop."
-return OK
-		download source_url local_file --after finished continue at > downloadCompleted  
+		if debug do format "mcUpdater > downloadMicra > fname:%\nsource_url:%\nlocal_file:%\n" fname source_url local_file
+		download source_url local_file --continue at > downloadCompleted  
 	),
 	fn getMicraVersion = (
 		
@@ -220,9 +220,9 @@ return OK
 		CreateDialog mcUpdateMicraDialog modal:true
 		
 		if not mcUpdateMicraDialog.accepted do return false 
-		local version = mcUpdateMicraDialog.getSlectedVersion()
-		if debug do format "mcUpdater > getMicraVersion > Selected version:%\n" version
-		downloadMicra version
+		chossen_version = mcUpdateMicraDialog.getSlectedVersion()
+		if debug do format "mcUpdater > getMicraVersion > Selected version:%\n" chossen_version
+		downloadMicra chossen_version
 	),
 	fn sendMicraVersion = (
 	
