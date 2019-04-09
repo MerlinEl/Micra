@@ -64,10 +64,9 @@ struct MICRA_UPDATER_STRUCTURE	(
 	/**
 	*@Usage > Remove all Except User directory
 	*/
-	fn deleteOldVersionFiles = (
+	fn emptyMicraFolder exclude_folders_and_files:#() = (
 
-		local excluded_folders_and_files = #("User", "_New", "Temp") --for now, later will be optimalized
-		mcFile.deleteDirectoryContent Micra.RootDir exclude:excluded_folders_and_files verification:"Actions.xml"
+		mcFile.deleteDirectoryContent Micra.RootDir exclude:exclude_folders_and_files verification:"Actions.xml"
 	),
 	fn downloadProgress s a = (mcPopUp.progeressbar a.ProgressPercentage msg:"Downoading Update:"),
 	fn downloadCompleted s a = (
@@ -83,7 +82,7 @@ struct MICRA_UPDATER_STRUCTURE	(
 		)
 		format "New Micra v.% was downloaded to:%.\n" mcUpdater.server_version local_file
 		--delete old Micra files
-		deleteOldVersionFiles()
+		emptyMicraFolder exclude_folders_and_files:#("User", "_New", "Temp")
 		--extract Micra zip
 		mcZip.unzip local_file Micra.RootDir override:true
 		deleteFile local_file	
@@ -132,7 +131,7 @@ struct MICRA_UPDATER_STRUCTURE	(
 		if not (queryBox "You are sure to Upgrade Micra?" title:micra.version) do return false
 		--get local micra version and increase it
 		local local_version = mcFile.readSettings Micra.DefaultSettings "SETTINGS/Micra/version"
-		local new_version = mcMath.versionUp (execute local_version)
+		local new_version = (mcMath.versionUp (execute local_version)) as string
 format "Update current version:% to %\n" local_version new_version
 		--register micra version to Settings.xml
 --mcFile.saveSettings Micra.DefaultSettings "SETTINGS/Micra/version" (new_version as string)		
@@ -143,18 +142,18 @@ format "Update current version:% to %\n" local_version new_version
 format "last_index:% next_index:% current_date:%\n" last_index next_index current_date
 		local node_attribs = (mcObject.new()).addMore #(
 
-			mcItem "version" (new_version as string), 
+			mcItem "version" new_version, 
 			mcItem "date" current_date
 		)
-format "downloadMicra > Debug > Stop."
-return OK
-		mcFile.saveSettings local_xml ("UPDATE/VERSIONS/item_"+next_index as string) node_attribs type:"attribs"
-		mcFile.saveSettings local_xml "UPDATE/VERSIONS/last_index" (next_index as String)
+		mcFile.saveSettings local_xml ("UPDATE/VERSIONS/item_"+next_index as string) node_attribs type:"attribs" --override version at next index 
+		mcFile.saveSettings local_xml "UPDATE/VERSIONS" new_version type:"latest" --set new version as latest
 		--pack micra in to zip file with version
 		local excluded_folders_and_files = #("old", "Orien_Star", "rene.baca", "Temp", "_New") --for now, later will be optimalized
-		mcZip.zip Micra.RootDir (local_dir+"Micra4_"+next_index as String+".zip") override:true exclude:excluded_folders_and_files
+		mcZip.zip Micra.RootDir (local_dir+"Micra4_v"+new_version+".zip") override:true exclude:excluded_folders_and_files
+		--delete oldest zip version to keep max 8 backups
+		
 		--final msg
-		messageBox ("Micra is upgraded from  [ v."+local_version as String+" ] to  [ v."+new_version as String+" ]\nTo complete upgrade commit files on Github :-)") title:micra.version
+		messageBox ("Micra is upgraded from  [ v"+local_version+" ] to  [ v"+new_version+" ]\nTo complete upgrade commit files on Github :-)") title:micra.version
 	),
 	fn downloadMicra version = ( --download Micra.zip to Micra/User directory
 		

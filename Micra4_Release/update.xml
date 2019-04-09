@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <UPDATE>
-  <VERSIONS latest="4.31" > 
-    <item_1 version="4.25" date="7_4_2019_14_21_42" />
+  <VERSIONS latest="4.32">
+    <item_1 version="4.32" date="4_9_2019_3_20_14_PM" />
     <item_2 version="4.26" date="7_4_2019_14_21_56" />
     <item_3 version="4.27" date="7_4_2019_14_22_02" />
     <item_4 version="4.28" date="7_4_2019_14_22_06" />
