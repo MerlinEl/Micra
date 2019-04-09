@@ -138,8 +138,9 @@ format "Update current version:% to %\n" local_version new_version
 		--register micra version to Update.xml (max 8 backups)
 		local last_index = getLatestIndex()
 		local next_index = if last_index < 8 then last_index+1 else 1 --cyclic indexing
+		local oldest_version = mcFile.readSettings Micra.DefaultSettings ("SETTINGS/Micra/item_"+next_index as String) type:"version"
 		local current_date = (mcDate.current()).toStringSimple()
-format "last_index:% next_index:% current_date:%\n" last_index next_index current_date
+format "last_index:% next_index:% current_date:% oldest_version:%\n" last_index next_index current_date oldest_version
 		local node_attribs = (mcObject.new()).addMore #(
 
 			mcItem "version" new_version, 
@@ -149,9 +150,10 @@ format "last_index:% next_index:% current_date:%\n" last_index next_index curren
 		mcFile.saveSettings local_xml "UPDATE/VERSIONS" new_version type:"latest" --set new version as latest
 		--pack micra in to zip file with version
 		local excluded_folders_and_files = #("old", "Orien_Star", "rene.baca", "Temp", "_New") --for now, later will be optimalized
-		mcZip.zip Micra.RootDir (local_dir+"Micra4_v"+new_version+".zip") override:true exclude:excluded_folders_and_files
-		--delete oldest zip version to keep max 8 backups
-		
+		mcZip.zip Micra.RootDir ("Micra4_v"+new_version+".zip") override:true exclude:excluded_folders_and_files
+		--TODO delete oldest zip version to keep max 8 backups
+		local oldest_zip_file = local_dir+"Micra4_v"+oldest_version+".zip"
+		if doesFileExist oldest_zip_file do deleteFile oldest_zip_file
 		--final msg
 		messageBox ("Micra is upgraded from  [ v"+local_version+" ] to  [ v"+new_version+" ]\nTo complete upgrade commit files on Github :-)") title:micra.version
 	),
