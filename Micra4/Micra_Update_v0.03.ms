@@ -81,15 +81,18 @@ struct MICRA_UPDATER_STRUCTURE	(
 			MessageBox "Unable Download Micra's Update. Please contact MerlinEl for help." title:Micra.version
 			return false
 		)
-		if mcUpdater.debug do format "mcUpdater > downloadCompleted > New Micra v% was downloaded to:%.\n" mcUpdater.chossen_version local_file	
+		if mcUpdater.debug do format "mcUpdater > downloadCompleted > New Micra v% was downloaded to:%\n" mcUpdater.chossen_version local_file	
 		--delete old Micra files
-		emptyMicraFolder exclude_folders_and_files:#("User", "_New", "Temp")
+		if mcUpdater.debug do format "mcUpdater > downloadCompleted > delete old Micra files.\n"
+		mcUpdater.emptyMicraFolder exclude_folders_and_files:#("User", "_New", "Temp", "App") --app must stay there is 7zip.exe
 		--extract Micra zip
-		mcZip.unzip local_file Micra.RootDir override:true --extract zip file
-		deleteFile local_file -- remove zip file
+		if mcUpdater.debug do format "mcUpdater > downloadCompleted > unzip new Micra files...\n\tfrom:%\n\tto:%\n" local_file Micra.RootDir
+--TODO make callback to wait for unzip done
+		mcZip.unzip local_file Micra.RootDir override:true exclude:#("App") --extract zip file (exclude can't override self 7zip.exe)
 		--update "SETTINGS/Micra/version"
 		mcFile.saveSettings Micra.DefaultSettings "SETTINGS/Micra/version" mcUpdater.chossen_version --register downloaded version	
 		--restart Micra
+		if mcUpdater.debug do format "mcUpdater > downloadCompleted > reloading Micra.\n"
 		Micra.reload()
 		MessageBox  "Update was finished Succesfully! Enjoy you work!" title:Micra.version
 	),
@@ -111,7 +114,7 @@ struct MICRA_UPDATER_STRUCTURE	(
 		ServicePointManager.Expect100Continue = true --using System.Net
 		ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12 --Use SecurityProtocolType.Ssl3 if needed for compatibility reasons
 		
-		if debug do format "mcUpdater > download > Micra Updating.... \ndownloading:[ % ] to:[ % ]\n" source_url target_file
+		if debug do format "mcUpdater > download > Micra Downloading.... \n\tfrom:[ % ]\n\tto:[ % ]\n" source_url target_file
 		WebClient = dotNetObject "System.Net.WebClient"
 		--WebClient.DownloadFile source_url target_file
 		dotNet.addEventHandler WebClient "DownloadProgressChanged" downloadProgress
@@ -162,7 +165,6 @@ struct MICRA_UPDATER_STRUCTURE	(
 		local fname = "Micra4_"+version+".zip"
 		local source_url = server_dir+fname
 		local local_file  = user_dir+"Micra.zip"
-		if debug do format "mcUpdater > downloadMicra > fname:%\nsource_url:%\nlocal_file:%\n" fname source_url local_file
 		download source_url local_file --continue at > downloadCompleted  
 	),
 	fn getMicraVersion = (
@@ -189,6 +191,7 @@ struct MICRA_UPDATER_STRUCTURE	(
 				lbl_you_version.text = "You Version: " + local_version
 				--get server micra version
 				local xml = mcXML()
+--TODO make callback to wait for readXml done
 				xml.fromString (readXml server_xml)
 				local versions_node = xml.getNode "//UPDATE/VERSIONS"
 				local server_version = versions_node.getAttribute "latest"
@@ -225,7 +228,6 @@ struct MICRA_UPDATER_STRUCTURE	(
 	fn sendMicraVersion = (
 	
 		local typed_text = mcPopup.textBox title:"Type Password:" crypt:true
-		if debug do format "mcUpdater > sendMicraVersion > typed_text:%\n" typed_text
 		if typed_text == undefined or typed_text != "orien" do return false
 		uploadMicra()
 	),

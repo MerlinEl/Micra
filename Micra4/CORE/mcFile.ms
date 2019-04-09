@@ -256,7 +256,7 @@ struct MICRA_FILE (
 		--format "process to deleting files...\n"
 		fn isPathExcluded arr path = (
 			
-			local indexes = mcArray.findWord arr (filenameFromPath path) ignoreCase:true
+			local indexes = ::mcArray.findWord arr (filenameFromPath path) ignoreCase:true
 			--format "arr:% path:% indexes:%\n" arr path indexes
 			indexes.count != 0
 		)

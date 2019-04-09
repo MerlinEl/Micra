@@ -415,7 +415,7 @@ public
 				progresive_path = progresive_path + "/" + path_array[i]
 				if rootNode.getNode progresive_path == undefined then (
 				
-					format "creating node at path: [ % ]\n" progresive_path
+					format "mcXML > addNode > creating node at path: [ % ]\n" progresive_path
 					local next_node = mcXMLNode()
 					next_node.init (doc.createElement path_array[i])
 					progresive_node.appendNode next_node

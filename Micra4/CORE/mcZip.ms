@@ -106,16 +106,23 @@ struct MICRA_NEW_STRUCTURE	(
 		-y (Assume Yes on all queries) 
 	*@Example
 		mcZip.unzip (Micra.RootDir+"Temp\\zip_dir\\Micra4_1.zip") (Micra.RootDir+"Temp\\extract_files\\") override:true
+		mcZip.unzip src trgt override:true exclude:#("App")
 	*/
-	fn unzip zip_path output_dir win_mode:0 on_return:true override:false = (	
+	fn unzip zip_path output_dir win_mode:0 on_return:true override:false exclude:#() = (	
 
 		if not (doesFileExist zip_path) or not (doesFileExist output_dir) do return false
 		local objShell = CreateOLEObject "WScript.Shell"
 		local zip_file = Micra.RootDir + "App\\7za.exe"
 		if not doesFileExist zip_file do return false
+		local filter = ""
+		if exclude.count > 0 do (
+		
+			for dir_or_file in exclude do filter += " -x!"+dir_or_file --here is important to have at start filter(*) or other mask(*.dll)
+		)
+		--format "mcZip > unzip > filter:%\n" filter
 		--format "extracting file:\n%\nto directory:\n%\n" zip_path output_dir
 		--x(Extract with full paths) r(recursive) o(output dir) y(override all)
-		local cmd = zip_file + " x " + zip_path + " -r-o" + output_dir + (if override then " -y" else "")
+		local cmd = zip_file + " x " + zip_path + " -r-o" + output_dir + (if override then " -y" else "") + filter
 		--format "CMD >\n%\n" cmd
 		local exit_code = objShell.Run cmd win_mode on_return 
 		format "Unzip file:[ % ] status:%\n" zip_path (translateExitCode(exit_code))
