@@ -81,19 +81,17 @@ struct MICRA_UPDATER_STRUCTURE	(
 			MessageBox "Unable Download Micra's Update. Please contact MerlinEl for help." title:Micra.version
 			return false
 		)
-		if debug do format "mcUpdater > downloadCompleted > New Micra v% was downloaded to:%.\n" mcUpdater.chossen_version local_file
-format "mcUpdater > downloadMicra > Debug > Stop.\n"
-return OK		
+		if mcUpdater.debug do format "mcUpdater > downloadCompleted > New Micra v% was downloaded to:%.\n" mcUpdater.chossen_version local_file	
 		--delete old Micra files
 		emptyMicraFolder exclude_folders_and_files:#("User", "_New", "Temp")
 		--extract Micra zip
-		mcZip.unzip local_file Micra.RootDir override:true
-		deleteFile local_file	
+		mcZip.unzip local_file Micra.RootDir override:true --extract zip file
+		deleteFile local_file -- remove zip file
 		--update "SETTINGS/Micra/version"
-		mcFile.saveSettings Micra.DefaultSettings "SETTINGS/Micra/version" mcUpdater.chossen_version		
+		mcFile.saveSettings Micra.DefaultSettings "SETTINGS/Micra/version" mcUpdater.chossen_version --register downloaded version	
 		--restart Micra
 		Micra.reload()
-		MessageBox  "Update Finished Succesfull! Enjoy you work!" title:Micra.version
+		MessageBox  "Update was finished Succesfully! Enjoy you work!" title:Micra.version
 	),
 	fn getLatestIndex = (
 	
