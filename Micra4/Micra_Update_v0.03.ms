@@ -93,6 +93,14 @@ struct MICRA_UPDATER_STRUCTURE	(
 		Micra.reload()
 		MessageBox  "Update Finished Succesfull! Enjoy you work!" title:Micra.version
 	),
+	fn getLatestIndex = (
+	
+		local latest_version = mcFile.readSettings local_xml "UPDATE/VERSIONS" type:"latest" --"4.25"
+		local all_versions = for i=1 to 8 collect mcFile.readSettings local_xml ("UPDATE/VERSIONS/"+"item_"+i as string) type:"version"
+		local latest_index = findItem all_versions latest_version
+		--format "getLatestIndex > latest_version:% all_versions:% latest_index:%\n" latest_version all_versions latest_index
+		latest_index
+	),
 	/**
 	*@Usage > Download file from url with progress bar
 	*/
@@ -127,9 +135,9 @@ struct MICRA_UPDATER_STRUCTURE	(
 		local new_version = mcMath.versionUp (execute local_version)
 format "Update current version:% to %\n" local_version new_version
 		--register micra version to Settings.xml
-		mcFile.saveSettings Micra.DefaultSettings "SETTINGS/Micra/version" (new_version as string)		
+--mcFile.saveSettings Micra.DefaultSettings "SETTINGS/Micra/version" (new_version as string)		
 		--register micra version to Update.xml (max 8 backups)
-		local last_index = execute (mcFile.readSettings local_xml "UPDATE/CURRENT/last_index")
+		local last_index = getLatestIndex()
 		local next_index = if last_index < 8 then last_index+1 else 1 --cyclic indexing
 		local current_date = (mcDate.current()).toStringSimple()
 format "last_index:% next_index:% current_date:%\n" last_index next_index current_date
@@ -138,21 +146,27 @@ format "last_index:% next_index:% current_date:%\n" last_index next_index curren
 			mcItem "version" (new_version as string), 
 			mcItem "date" current_date
 		)
+format "downloadMicra > Debug > Stop."
+return OK
 		mcFile.saveSettings local_xml ("UPDATE/VERSIONS/item_"+next_index as string) node_attribs type:"attribs"
-		mcFile.saveSettings local_xml "UPDATE/CURRENT/last_index" (next_index as String)
+		mcFile.saveSettings local_xml "UPDATE/VERSIONS/last_index" (next_index as String)
 		--pack micra in to zip file with version
 		local excluded_folders_and_files = #("old", "Orien_Star", "rene.baca", "Temp", "_New") --for now, later will be optimalized
 		mcZip.zip Micra.RootDir (local_dir+"Micra4_"+next_index as String+".zip") override:true exclude:excluded_folders_and_files
 		--final msg
 		messageBox ("Micra is upgraded from  [ v."+local_version as String+" ] to  [ v."+new_version as String+" ]\nTo complete upgrade commit files on Github :-)") title:micra.version
 	),
-	fn downloadMicra zip_file = ( --download Micra.zip to Micra/User directory
-	
-		local source_url = server_dir+zip_file
+	fn downloadMicra version = ( --download Micra.zip to Micra/User directory
+		
+		local fname = "Micra4_"+version+".zip"
+		local source_url = server_dir+fname
 		local local_file  = user_dir+"Micra.zip"
+format "downloadMicra > fname:% source_url:% local_file:%\n" fname source_url local_file
+format "downloadMicra > Debug > Stop."
+return OK
 		download source_url local_file --after finished continue at > downloadCompleted  
 	),
-	fn checkForUpdates = (
+	fn getMicraVersion = (
 		
 		Global mcUpdateMicraDialog
 		if mcUpdateMicraDialog != undefined do DestroyDialog mcUpdateMicraDialog
@@ -164,39 +178,30 @@ format "last_index:% next_index:% current_date:%\n" last_index next_index curren
 			button 'btn_get' "Get" pos:[4,196] width:108 height:28 align:#left
 			button 'btn_abort' "Cancel" pos:[116,196] width:108 height:28 align:#left
 			local accepted = true
-			local data = #()
 			fn getSlectedVersion = (
 				
 				local selected_text = lbx_versions.selected	
 				(filterString selected_text " ")[1]
 			)
-			fn getVersionIndex str = (
-				
-				for d in data where d.key == str do return d.val
-			)
 			on mcUpdateMicraDialog open do (
-				
+							
 				--get local micra version
 				local local_version = mcFile.readSettings Micra.DefaultSettings "SETTINGS/Micra/version"
 				lbl_you_version.text = "You Version: " + local_version
 				--get server micra version
 				local xml = mcXML()
 				xml.fromString (readXml server_xml)
-				local versions_node = xm.getNode "//UPDATE/VERSIONS"
+				local versions_node = xml.getNode "//UPDATE/VERSIONS"
 				local server_version = versions_node.getAttribute "latest"
 				local all_versions = versions_node.getChildrenNames()
-				--format "last_index:% server_version:%\n" last_index server_version
-				--format "Micra > versions compare > LOCAL:% SERVER:%\n" local_version server_version
+				format "Micra > versions compare > LOCAL:% SERVER:%\n" local_version server_version
 				local items = #()
-				data = #()
 				for n in all_versions do ( --TODO use listbox grid to add index of each version also date
 				
-					local item_index = (filterString n "_")[2]
 					local item = xml.getNode ("//UPDATE/VERSIONS/"+n)
 					local version = item.getAttribute "version"
 					local date = mcString.replaceAll (item.getAttribute "date") "_" "."
-					append data (mcItem key: ("v."+version)  val:item_index)
-					append items ("v."+version+"      " +date+"  -"+item_index)
+					append items ("v"+version+"      "+date)
 				)
 				lbx_versions.items = mcArray.reverseArray (sort items)
 			)
@@ -215,11 +220,10 @@ format "last_index:% next_index:% current_date:%\n" last_index next_index curren
 		
 		if not mcUpdateMicraDialog.accepted do return false 
 		local version = mcUpdateMicraDialog.getSlectedVersion()
-		local index = mcUpdateMicraDialog.getVersionIndex version
-		format "download version:% selected_index:%\n" version index
-		--downloadMicra ("Micra4_"+(index as String)+".zip")
+		format "Selected version:%\n" version
+		downloadMicra version
 	),
-	fn checkForCommit = (
+	fn sendMicraVersion = (
 	
 		local pass = mcPopup.textBox title:"Admin password:"
 		if pass == undefined or findString pass "orien" == undefined do return false
@@ -229,8 +233,8 @@ format "last_index:% next_index:% current_date:%\n" last_index next_index curren
 		
 		case action of (
 		
-			#commit: checkForCommit() 
-			#update: checkForUpdates()
+			#commit: sendMicraVersion() 
+			#update: getMicraVersion()
 			#downgrade:	()
 			#install:	()
 		)
@@ -241,6 +245,14 @@ format "last_index:% next_index:% current_date:%\n" last_index next_index curren
 Global mcUpdater = mcStructMan.instanceStructure MICRA_UPDATER_STRUCTURE "mcUpdater"
 
 /* test
+/*
+REPLACING METHOD (last_index) with (attribute latest:version)
+			
+xm = mcXML "D:\\ReneBaca\\3DsMax\\Micra\\Micra4_Release\\update.xml"
+ver = xm.getNode "//UPDATE/VERSIONS"
+ver.getAttribute "latest" --"4.25"
+ver.getChildrenNames() --#("item_1", "item_2", "item_3", "item_4", "item_5", "item_6", "item_7", "item_8")
+
 
 mcZip.zip (Micra.RootDir+"Temp\\source_files\\") (Micra.RootDir+"Temp\\zip_dir\\Micra4_1.zip") override:true
 mcZip.unzip (Micra.RootDir+"Temp\\zip_dir\\Micra4_1.zip") (Micra.RootDir+"Temp\\extract_files\\") override:true
@@ -328,7 +340,7 @@ theUri = dotnetObject "System.Uri" ("ftp://YourWebSite.com/test/testfile.txt")
 web.UploadFileAsync theUri uploadfile -- upload file to ftp 
 
 
-	fn checkForUpdates = (
+	fn getMicraVersion = (
 		
 		--get local micra version
 		local local_version = mcFile.readSettings Micra.DefaultSettings "SETTINGS/Micra/version"
