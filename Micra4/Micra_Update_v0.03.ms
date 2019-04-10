@@ -42,25 +42,37 @@ struct MICRA_UPDATER_STRUCTURE	(
 		local spm = dotnetclass "System.Net.ServicePointManager"
 		spm.SecurityProtocol = spm.SecurityProtocol.Tls12
 		try (
-		
+			--Create a request for the URL. 
 			local request = (dotNetClass "System.Net.WebRequest").Create url
 			request.Method = "GET"
 			request.Timeout = 1000
 			request.UserAgent = "3ds Max"
-			local response = request.getResponse()
-			local responseStream = response.GetResponseStream()
-			local encodingClass = dotNetClass "System.Text.Encoding"
-			local encoding = encodingClass.GetEncoding "utf-8"
-			local readStream = dotNetObject "System.IO.StreamReader" responseStream encoding
-			local webanswer = readStream.ReadToEnd()
-			readStream.Close()
+		   --If required by the server, set the credentials.  
+			request.Credentials = (dotNetClass "System.Net.CredentialCache").DefaultCredentials
+		   -- Get the response.  
+			local response = request.GetResponse()
+		   --Display the status.  
+		   if debug do format "mcUpdater > readXml > StatusDescription:%\n " response.StatusDescription
+		   --Get the stream containing content returned by the server. 
+			--The using block ensures the stream is automatically closed. 
+			local dataStream = response.GetResponseStream()
+			--Open the stream using a StreamReader for easy access. 
+			local encoding = (dotNetClass "System.Text.Encoding").GetEncoding "utf-8"
+			local reader = dotNetObject "System.IO.StreamReader" dataStream encoding
+			 --Read the content.
+			local responseFromServer = reader.ReadToEnd()
+			 --Display the content. 
+			if debug do format "mcUpdater > readXml > responseFromServer:\n " responseFromServer
+			--Close the reader and response.
+			reader.Close()
 			response.Close()
-			return webanswer
-			
+			return responseFromServer
+					
 		) catch (
 		
-			return "Error: readXml > exception:\n" + getCurrentException()
+			format "Error: readXml > exception:\n" + getCurrentException()
 		)
+		undefined
 	),
 	/**
 	*@Usage > Remove all Except User directory
@@ -178,7 +190,7 @@ struct MICRA_UPDATER_STRUCTURE	(
 			label 'lbl_you_version' "You Version:" pos:[8,16] width:216 height:20 align:#left
 			button 'btn_get' "Get" pos:[4,196] width:108 height:28 align:#left
 			button 'btn_abort' "Cancel" pos:[116,196] width:108 height:28 align:#left
-			local accepted = true
+			local accepted = false
 			fn getSlectedVersion = (
 				
 				local selected_text = lbx_versions.selected	
@@ -190,9 +202,16 @@ struct MICRA_UPDATER_STRUCTURE	(
 				local local_version = mcFile.readSettings Micra.DefaultSettings "SETTINGS/Micra/version"
 				lbl_you_version.text = "You Version: " + local_version
 				--get server micra version
-				local xml = mcXML()
---TODO make callback to wait for readXml done
-				xml.fromString (readXml server_xml)
+				local xml = mcXML()				
+				local xml_str = readXml server_xml
+				format "getMicraVersion > xml_str:%\n" xml_str
+				if xml_str == "undefined" do (
+
+					format "mcUpdater > getMicraVersion > Unable to Read:[ % ]\n" server_xml
+					return false
+				)
+				xml.fromString xml_str
+
 				local versions_node = xml.getNode "//UPDATE/VERSIONS"
 				local server_version = versions_node.getAttribute "latest"
 				local all_versions = versions_node.getChildrenNames()

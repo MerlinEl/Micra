@@ -114,6 +114,43 @@ Global mcDate = mcStructMan.instanceStructure MICRA_DATE "mcDate"
 
 
 /*
+try(
+ 
+	local response = ((dotnetClass "System.Net.WebRequest").Create "http://www.google.com").GetResponse()
+ 
+	local utcDateTimeString = response.Headers.get_Item "date"
+ 
+	response.dispose()
+ 
+	print utcDateTimeString
+	print (substring utcDateTimeString 6 20)
+ 
+)catch()
+
+
+------------------------
+
+
+(
+   local client = dotnetObject "System.Net.Sockets.TcpClient" "time.nist.gov" 13
+   client.SendTimeout = 2000
+   local streamReader = dotnetObject "System.IO.StreamReader" (client.GetStream())
+   local response = streamReader.ReadToEnd asDotnetObject:true
+ 
+   local utcDateTimeString = response.Substring 7 17 asDotNetObject:true
+   local localDateTime = (dotnetClass "System.DateTime").ParseExact utcDateTimeString "yy-MM-dd HH:mm:ss" (dotnetClass "System.Globalization.CultureInfo").InvariantCulture (dotnetClass "System.Globalization.DateTimeStyles").AssumeUniversal
+ 
+   streamReader.Dispose()
+   print (localDateTime.ToString())
+)
+
+
+
+
+------------------------
+
+
+
 --old way
 fn init = (
 	
