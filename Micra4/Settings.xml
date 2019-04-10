@@ -40,6 +40,7 @@
     <mcEvents val="on" />
     <mcCall val="on" />
     <mcMsx val="on" />
+	<mcNet val="on" info="Internet and Network Functions"/>
     <mcActionsTukej val="on" />
   </Structures>
   <Version val="All registred Micra's Scripts">

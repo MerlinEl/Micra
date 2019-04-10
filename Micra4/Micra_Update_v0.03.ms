@@ -9,6 +9,7 @@
 	mcDate
 	mcCall
 	mcZip
+	mcNet
 *
 *@Used Objects
 	mcObject
@@ -30,50 +31,12 @@ struct MICRA_UPDATER_STRUCTURE	(
 	WebClient,
 	chossen_version = "undefined",
 	user_dir   = (pathConfig.removePathLeaf Micra.UserDir) + "\\",
-	--server_dir = "https://github.com/MerlinEl/Micra/tree/master/Micra4_Release/",
 	server_dir = "https://github.com/MerlinEl/Micra/raw/master/Micra4_Release/",
 	server_xml = "https://raw.githubusercontent.com/MerlinEl/Micra/master/Micra4_Release/update.xml",
 	local_dir  = (pathConfig.removePathLeaf Micra.RootDir) + "\\Micra4_Release\\",
 	local_xml  = local_dir + "update.xml",
 	--functions
 	fn getSource = getSourceFileName(), --get path of this script
-	fn readXml url = (
-	
-		local spm = dotnetclass "System.Net.ServicePointManager"
-		spm.SecurityProtocol = spm.SecurityProtocol.Tls12
-		try (
-			--Create a request for the URL. 
-			local request = (dotNetClass "System.Net.WebRequest").Create url
-			request.Method = "GET"
-			request.Timeout = 5000
-			request.UserAgent = "3ds Max"
-		   --If required by the server, set the credentials.  
-			request.Credentials = (dotNetClass "System.Net.CredentialCache").DefaultCredentials
-		   -- Get the response.  
-			local response = request.GetResponse()
-		   --Display the status.  
-		   if debug do format "mcUpdater > readXml > StatusDescription:%\n " response.StatusDescription
-		   --Get the stream containing content returned by the server. 
-			--The using block ensures the stream is automatically closed. 
-			local dataStream = response.GetResponseStream()
-			--Open the stream using a StreamReader for easy access. 
-			local encoding = (dotNetClass "System.Text.Encoding").GetEncoding "utf-8"
-			local reader = dotNetObject "System.IO.StreamReader" dataStream encoding
-			 --Read the content.
-			local responseFromServer = reader.ReadToEnd()
-			 --Display the content. 
-			if debug do format "mcUpdater > readXml > responseFromServer:\n " responseFromServer
-			--Close the reader and response.
-			reader.Close()
-			response.Close()
-			return responseFromServer
-					
-		) catch (
-		
-			format "Error: readXml > exception:\n" + getCurrentException()
-		)
-		undefined
-	),
 	/**
 	*@Usage > Remove all Except User directory
 	*/
@@ -203,9 +166,9 @@ struct MICRA_UPDATER_STRUCTURE	(
 				lbl_you_version.text = "You Version: " + local_version
 				--get server micra version
 				local xml = mcXML()				
-				local xml_str = readXml server_xml
+				local xml_str = mcNet.readFile server_xml
 				format "getMicraVersion > xml_str:%\n" xml_str
-				if xml_str == "undefined" do (
+				if xml_str == undefined do (
 
 					format "mcUpdater > getMicraVersion > Unable to Read:[ % ]\n" server_xml
 					return false
@@ -264,3 +227,8 @@ struct MICRA_UPDATER_STRUCTURE	(
 )	
  --create instance
 Global mcUpdater = mcStructMan.instanceStructure MICRA_UPDATER_STRUCTURE "mcUpdater"
+
+
+/*
+TODO > COMMIT TO GITHUB maybe????
+*/

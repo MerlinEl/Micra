@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <USER>
   <Properties_1>
-    <mc_Dialog_A active="true" pos="[2172,872]" size="[148,66]" title="Menu:" btnCount="[6,2]" />
+    <mc_Dialog_A active="true" pos="[2170,870]" size="[148,66]" title="Menu:" btnCount="[6,2]" />
     <mc_Dialog_B active="true" pos="[2172,288]" size="[148,162]" title="Object:" btnCount="[6,6]" />
     <mc_Dialog_C active="true" pos="[2170,450]" size="[148,66]" title="Pivot:" btnCount="[6,2]" />
     <mc_Dialog_D active="true" pos="[2172,516]" size="[148,90]" title="Select:" btnCount="[6,3]" />
@@ -9,7 +9,7 @@
     <mc_Dialog_F active="true" pos="[1976,222]" size="[196,90]" title="Modifiers:" btnCount="[8,3]" />
     <mc_Dialog_G active="true" pos="[2172,606]" size="[148,114]" title="Modify:" btnCount="[6,4]" />
     <mc_Dialog_H active="true" pos="[2172,720]" size="[148,66]" title="Materials:" btnCount="[6,2]" />
-    <mc_Dialog_I active="true" pos="[2172,938]" size="[148,66]" title="Programming:" btnCount="[6,2]" />
+    <mc_Dialog_I active="true" pos="[2170,930]" size="[148,66]" title="Programming:" btnCount="[6,2]" />
     <mc_Dialog_J active="true" pos="[1800,1240]" size="[532,42]" title="Experimental:" btnCount="[22,1]" />
   </Properties_1>
   <Properties_2>

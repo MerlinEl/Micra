@@ -27,6 +27,10 @@ rollout mcVertexColorDialog "Vertex Color v1.02" width:408 height:296
 	--button 'btn_set_dx' "Set DX Shader to selection" pos:[120,200] width:276 height:24 align:#left
 	--button 'btn_copy_dx' "Copy values from LS3D material to DX Shader" pos:[120,228] width:276 height:24 align:#left
 	--button 'btn_remove_dx' "Remove DX Shader from selection" pos:[120,256] width:276 height:24 align:#left
+	button 'btn_r' "R" pos:[120,256] width:16 height:20 toolTip:"Set Color To Red" align:#left
+	button 'btn_g' "G" pos:[140,256] width:16 height:20 toolTip:"Set Color To Green" align:#left
+	button 'btn_b' "B" pos:[160,256] width:16 height:20 toolTip:"Set Color To Blue" align:#left
+	button 'btn_clear' "Clear" pos:[184,256] width:40 height:20 toolTip:"Clear Color" align:#left
 
 	radiobuttons 'rdo_1' "" pos:[12,28] width:31 height:16 labels:#("1") default:1 align:#left
 	radiobuttons 'rdo_2' "" pos:[12,56] width:31 height:16 labels:#("2") default:0 align:#left
@@ -299,6 +303,25 @@ rollout mcVertexColorDialog "Vertex Color v1.02" width:408 height:296
 			else ( gLS3DDXSupport.LogM ("Successful conversion: Material on selection from DX Shader to LS3D") level:1 )		
 		)
 	)
+	fn setSelectionColor clr = (
+		
+		local sel = selection as array
+		if (sel.count == 0) do (
+		
+			MessageBox "Nothing is selected." title:"Warning:" beep:off	
+			return false
+		)
+		local map_channel = 0
+		local sel_type = getSelectionType sel
+		format "sel_type:% objects:%\n" sel_type sel.count
+		case sel_type of (
+			
+			"objects"	: setObjectsColor sel clr map_channel
+			"faces"		: setFacesColor sel[1] clr
+			"verts"		: setVertsColor  sel[1] clr
+			"default"		: (undefined)
+		)	
+	)
 	------------------------------------------------------------------------------
 	--< DXShader
 	------------------------------------------------------------------------------
@@ -325,25 +348,10 @@ rollout mcVertexColorDialog "Vertex Color v1.02" width:408 height:296
 	--on btn_copy_dx pressed do updateDXShaderValues()
 	--on btn_remove_dx pressed do removeDXShader()
 	
-	on btn_set pressed do	( --assingn
+	on btn_set pressed do	( 
 		
-		local sel = selection as array
-		if (sel.count == 0) do (
-		
-			MessageBox "Nothing is selected." title:"Warning:" beep:off	
-			return false
-		)
 		local verts_color =  bmp_colors[ current_color_index ]
-		local map_channel = 0
-		local sel_type = getSelectionType sel
-		format "sel_type:% objects:%\n" sel_type sel.count
-		case sel_type of (
-			
-			"objects"	: setObjectsColor sel verts_color map_channel
-			"faces"		: setFacesColor sel[1] verts_color
-			"verts"		: setVertsColor  sel[1] verts_color
-			"default"		: (undefined)
-		)
+		setSelectionColor verts_color 
 	)
 	on btn_sel pressed do ( --select
 		
@@ -406,6 +414,10 @@ rollout mcVertexColorDialog "Vertex Color v1.02" width:408 height:296
 		for o in selection do o.vertexColorsShaded = false
 		completeRedraw()
 	)
+	on btn_r pressed do ( setSelectionColor red )
+	on btn_g pressed do ( setSelectionColor green )
+	on btn_b pressed do ( setSelectionColor blue )
+	on btn_clear pressed do (setSelectionColor white)
 	on mcVertexColorDialog open do
 	(
 		--set buttons color
