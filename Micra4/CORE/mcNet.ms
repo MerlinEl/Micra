@@ -4,6 +4,7 @@
 /*
 *@Used Structures
 	mcStructMan
+	mcEvents
 *
 *@Used Objects
 	undefined
@@ -123,8 +124,14 @@ struct MICRA_NEW_STRUCTURE	(
 		mcPopUp.progeressbar 100 msg:"Downoad Finished:" close:true
 		dotNet.removeEventHandler mcNet.WebClient "DownloadProgressChanged" mcNet.downloadProgress
 		dotNet.removeEventHandler mcNet.WebClient "DownloadFileCompleted" mcNet.downloadCompleted
-		if a.Error != undefined do format "mcNet > downloadCompleted > Error:%\n" (a.Error.toString())
-		mcEvents.dispatchEvent "FileWasDownloaded" data:mcNet._target_file
+		if a.Error != undefined then (
+		
+			format "mcNet > downloadCompleted > Error:%\n" (a.Error.toString())
+			mcEvents.dispatchEvent "FileWasDownloaded" data:""
+			
+		) else (
+			mcEvents.dispatchEvent "FileWasDownloaded" data:mcNet._target_file
+		)
 	),
 	/**
 	*@Usage > Download file from url with progress bar
@@ -141,9 +148,14 @@ struct MICRA_NEW_STRUCTURE	(
 	*/
 	fn downloadFile source_url target_file = (
 		
-		if not isConnectionAvailable() do teturn false
+		_target_file = undefined
+		if not isConnectionAvailable() do (
+		
+			mcEvents.dispatchEvent "FileWasDownloaded" data:""
+			return false
+		)
 		if doesFileExist target_file do deleteFile target_file --delete old file before download
-		_target_file = target_file
+		_target_file = target_file ---keep target file path
 		--download new file
 		local ServicePointManager = dotNetClass "System.Net.ServicePointManager"
 		local SecurityProtocolType = dotNetClass "System.Net.SecurityProtocolType"
