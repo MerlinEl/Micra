@@ -45,7 +45,7 @@ struct MICRA_UPDATER_STRUCTURE	(
 			--Create a request for the URL. 
 			local request = (dotNetClass "System.Net.WebRequest").Create url
 			request.Method = "GET"
-			request.Timeout = 1000
+			request.Timeout = 5000
 			request.UserAgent = "3ds Max"
 		   --If required by the server, set the credentials.  
 			request.Credentials = (dotNetClass "System.Net.CredentialCache").DefaultCredentials
