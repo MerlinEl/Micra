@@ -89,7 +89,7 @@ struct MICRA_NEW_STRUCTURE	(
 		spm.SecurityProtocol = spm.SecurityProtocol.Tls12
 		--try (
 			--Create a request for the URL. 
-			local request = (dotNetClass "System.Net.WebRequest").Create url
+			local request = (dotNetClass "System.Net.HttpWebRequest").Create url
 			request.Method = "GET"
 			request.Timeout = 3000
 			request.UserAgent = "3ds Max"
@@ -97,9 +97,9 @@ struct MICRA_NEW_STRUCTURE	(
 			request.Credentials = (dotNetClass "System.Net.CredentialCache").DefaultCredentials
 			--disable chache store (Next reading will be actual not a CACHE!)
 			local policy = (dotNetClass "System.Net.Cache.HttpRequestCacheLevel").Default
+			--request.DefaultCachePolicy = policy
 			local noCachePolicy = dotnetObject "System.Net.Cache.HttpRequestCachePolicy" policy.NoCacheNoStore
-			request.DefaultCachePolicy = po
-			request.CachePolicy =  po
+			request.CachePolicy =  noCachePolicy
 		   -- Get the response.  
 			local response = request.GetResponse()
 		   --Display the status.  
@@ -249,4 +249,12 @@ webrequest with POST
 	tw.Write(Result);
 	)
 }
+*/
+
+
+/*
+			local policy = (dotNetClass "System.Net.Cache.HttpRequestCacheLevel").Default
+			request.DefaultCachePolicy = policy
+			local noCachePolicy = dotnetObject "System.Net.Cache.HttpRequestCachePolicy" policy.NoCacheNoStore
+			request.CachePolicy =  noCachePolicy
 */
