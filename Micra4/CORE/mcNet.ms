@@ -113,7 +113,7 @@ struct MICRA_NEW_STRUCTURE	(
 			response.Close()
 			dataStream.Close()
 			return responseFromServer
-					
+			
 		) catch (
 		
 			format "Error: readFile > exception:\n" + getCurrentException()
