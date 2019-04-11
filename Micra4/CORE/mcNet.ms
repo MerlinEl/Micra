@@ -81,8 +81,96 @@ struct MICRA_NEW_STRUCTURE	(
 			return false;
 		}
 		*/
-	),
+	),	
 	fn readFile url = (
+		
+		if not isConnectionAvailable() do teturn undefined
+		local spm = dotnetclass "System.Net.ServicePointManager"
+		spm.SecurityProtocol = spm.SecurityProtocol.Tls12
+		try (
+			
+			--Create a policy that allows items in the cache  to be used if they have been cached one day or less.
+			/*local time_span = (dotnetCLass "System.TimeSpan").FromDays 1
+			local age_controll =  (dotnetCLass "System.Net.Cache.HttpCacheAgeControl").MaxAge
+			local requestPolicy = dotnetObject "System.Net.Cache.HttpRequestCachePolicy" age_controll time_span*/
+			--disable chache store (Next reading will be actual not a CACHE!)
+			local cache_level =  dotNetClass "System.Net.Cache.HttpRequestCacheLevel"
+			local noCachePolicy = dotnetObject "System.Net.Cache.HttpRequestCachePolicy" cache_level.NoCacheNoStore
+			--Create a request for the URL. 
+			local request = (dotNetClass "System.Net.WebRequest").Create url
+			request.CachePolicy = noCachePolicy -- Set the policy for this request only.
+			request.Method = "GET"
+			request.Timeout = 3000
+			request.UserAgent = "3ds Max"
+			request.Credentials = (dotNetClass "System.Net.CredentialCache").DefaultCredentials --If required by the server, set the credentials.  
+		   -- Get the response.  
+			local response = request.GetResponse()
+			--Determine whether the response was retrieved from the cache.  
+           if debug do format "The response was retrieved from the cache :%\n." response.IsFromCache
+		   --Display the status.  
+		   if debug do format "mcNet > readFile > StatusDescription:%\n " response.StatusDescription
+		   --Get the stream containing content returned by the server. 
+			local dataStream = response.GetResponseStream()
+			--Open the stream using a StreamReader for easy access. 
+			local encoding = (dotNetClass "System.Text.Encoding").GetEncoding "utf-8"
+			local reader = dotNetObject "System.IO.StreamReader" dataStream encoding
+			 --Read the content.
+			local responseFromServer = reader.ReadToEnd()
+			 --Display the content. 
+			if debug do format "mcNet > readFile > responseFromServer:\n " responseFromServer
+			--Close the reader and response.
+			reader.Close()
+			dataStream.Close()
+			response.Close()
+			return responseFromServer
+			
+		) catch (
+		
+			format "Error: readFile > exception:\n" + getCurrentException()
+		)
+		undefined
+	
+	),
+	fn readFile_old url = (
+		
+			if not isConnectionAvailable() do teturn undefined
+		local spm = dotnetclass "System.Net.ServicePointManager"
+		spm.SecurityProtocol = spm.SecurityProtocol.Tls12
+		try (
+			--Create a request for the URL. 
+			local request = (dotNetClass "System.Net.WebRequest").Create url
+			request.Method = "GET"
+			request.Timeout = 3000
+			request.UserAgent = "3ds Max"
+		   --If required by the server, set the credentials.  
+			request.Credentials = (dotNetClass "System.Net.CredentialCache").DefaultCredentials
+		   -- Get the response.  
+			local response = request.GetResponse()
+		   --Display the status.  
+		   if debug do format "mcNet > readFile > StatusDescription:%\n " response.StatusDescription
+		   --Get the stream containing content returned by the server. 
+			local dataStream = response.GetResponseStream()
+			--Open the stream using a StreamReader for easy access. 
+			local encoding = (dotNetClass "System.Text.Encoding").GetEncoding "utf-8"
+			local reader = dotNetObject "System.IO.StreamReader" dataStream encoding
+			 --Read the content.
+			local responseFromServer = reader.ReadToEnd()
+			 --Display the content. 
+			if debug do format "mcNet > readFile > responseFromServer:\n " responseFromServer
+			--Close the reader and response.
+			reader.Close()
+			dataStream.Close()
+			response.Close()
+			return responseFromServer
+			
+		) catch (
+		
+			format "Error: readFile > exception:\n" + getCurrentException()
+		)
+		undefined
+	
+	),
+	fn readFile_old2 url = (
 	
 		if not isConnectionAvailable() do teturn undefined
 		local spm = dotnetclass "System.Net.ServicePointManager"
@@ -90,8 +178,8 @@ struct MICRA_NEW_STRUCTURE	(
 		try (
 			--disable chache store (Next reading will be actual not a CACHE!)
 			local http_request = (dotNetClass "System.Net.HttpWebRequest").Create url
-			local chacheLevel =  dotNetClass "System.Net.Cache.HttpRequestCacheLevel"
-			local policy = dotnetObject "System.Net.Cache.HttpRequestCachePolicy" chacheLevel.Default
+			local cache_level =  dotNetClass "System.Net.Cache.HttpRequestCacheLevel"
+			local policy = dotnetObject "System.Net.Cache.HttpRequestCachePolicy" cache_level.Default
 			http_request.DefaultCachePolicy = policy
 			--Create a request for the URL. 
 			local request = (dotNetClass "System.Net.WebRequest").Create url
@@ -101,7 +189,7 @@ struct MICRA_NEW_STRUCTURE	(
 		   --If required by the server, set the credentials.  
 			request.Credentials = (dotNetClass "System.Net.CredentialCache").DefaultCredentials
 			--disable chache store (Next reading will be actual not a CACHE!)
-			local noCachePolicy = dotnetObject "System.Net.Cache.HttpRequestCachePolicy" chacheLevel.NoCacheNoStore
+			local noCachePolicy = dotnetObject "System.Net.Cache.HttpRequestCachePolicy" cache_level.NoCacheNoStore
 			request.CachePolicy =  noCachePolicy
 		   -- Get the response.  
 			local response = request.GetResponse()
@@ -118,8 +206,8 @@ struct MICRA_NEW_STRUCTURE	(
 			if debug do format "mcNet > readFile > responseFromServer:\n " responseFromServer
 			--Close the reader and response.
 			reader.Close()
-			response.Close()
 			dataStream.Close()
+			response.Close()
 			return responseFromServer
 			
 		) catch (
