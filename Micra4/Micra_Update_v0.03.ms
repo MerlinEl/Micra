@@ -90,8 +90,12 @@ struct MICRA_UPDATER_STRUCTURE	(
 		ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12 --Use SecurityProtocolType.Ssl3 if needed for compatibility reasons
 		
 		if debug do format "mcUpdater > download > Micra Downloading.... \n\tfrom:[ % ]\n\tto:[ % ]\n" source_url target_file
+		/*
+			mcEvents.registerEvent "FileWasDownloaded" fileDownloaded
+			mcNet.DownloadFile source_url target_file
+		
+		*/
 		WebClient = dotNetObject "System.Net.WebClient"
-		--WebClient.DownloadFile source_url target_file
 		dotNet.addEventHandler WebClient "DownloadProgressChanged" downloadProgress
 		dotNet.addEventHandler WebClient "DownloadFileCompleted" downloadCompleted
 		WebClient.DownloadFileAsync (dotNetObject "System.Uri" source_url) target_file
