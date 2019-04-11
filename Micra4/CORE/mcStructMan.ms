@@ -52,8 +52,8 @@ struct MICRA_STRUCTURE_MANAGER	(
 	fn importAll = (/*not need yet*/),
 	/*
 	*	@example
-	*	struct test1 (a, b)
-	*	Global mcTest = mcStructMan.instanceStructure test1
+	*	struct MC_TEST (a, b)
+	*	Global mcTest = mcStructMan.instanceStructure MC_TEST "mcTest"
 	*/
 	fn instanceStructure struct_object instance_name = (
 

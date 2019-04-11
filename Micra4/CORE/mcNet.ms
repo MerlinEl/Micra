@@ -31,11 +31,12 @@ struct MICRA_NEW_STRUCTURE	(
 		
 			local client = dotNetObject "System.Net.WebClient"
 			client.OpenRead "http://clients3.google.com/generate_204"
-			return true
+			true
 				
-		) catch ( return false)
+		) catch (false)
 		
 		/*
+		Alternative >
 		
 		[DllImport("wininet.dll")]
 			private extern static bool InternetGetConnectedState(out int connDescription, int ReservedValue);
@@ -99,7 +100,6 @@ struct MICRA_NEW_STRUCTURE	(
 		   --Display the status.  
 		   if debug do format "mcNet > readFile > StatusDescription:%\n " response.StatusDescription
 		   --Get the stream containing content returned by the server. 
-			--The using block ensures the stream is automatically closed. 
 			local dataStream = response.GetResponseStream()
 			--Open the stream using a StreamReader for easy access. 
 			local encoding = (dotNetClass "System.Text.Encoding").GetEncoding "utf-8"
@@ -111,6 +111,7 @@ struct MICRA_NEW_STRUCTURE	(
 			--Close the reader and response.
 			reader.Close()
 			response.Close()
+			dataStream.Close()
 			return responseFromServer
 					
 		) catch (
@@ -171,6 +172,11 @@ struct MICRA_NEW_STRUCTURE	(
 		dotNet.addEventHandler WebClient "DownloadFileCompleted" downloadCompleted
 		WebClient.DownloadFileAsync (dotNetObject "System.Uri" source_url) target_file
 		WebClient.dispose()
+	),
+	fn uploadFile source_file target_url = (
+	
+		--code here
+
 	)
 	/*<end>*/
 )	
