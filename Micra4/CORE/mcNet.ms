@@ -95,7 +95,14 @@ struct MICRA_NEW_STRUCTURE	(
 			request.UserAgent = "3ds Max"
 		   --If required by the server, set the credentials.  
 			request.Credentials = (dotNetClass "System.Net.CredentialCache").DefaultCredentials
-		   -- Get the response.  
+			--chache
+			--System.Net.Cache.RequestCachePolicy
+			local cl = (dotNetClass "System.Net.Cache.RequestCacheLevel").Default
+			local po = dotnetObject "System.Net.Cache.RequestCachePolicy" cl.Default
+			request.DefaultCachePolicy = po
+			request.CachePolicy =  po
+		--	request.DefaultCachePolicy  = (dotNetObject "System.Net.Cache.RequestCachePolicy").Default
+		
 			local response = request.GetResponse()
 		   --Display the status.  
 		   if debug do format "mcNet > readFile > StatusDescription:%\n " response.StatusDescription
