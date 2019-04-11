@@ -92,7 +92,7 @@ struct MICRA_NEW_STRUCTURE	(
 			local request = (dotNetClass "System.Net.WebRequest").Create url
 			request.Method = "GET"
 			request.Timeout = 3000
-			--request.UserAgent = "3ds Max"
+			request.UserAgent = "3ds Max"
 		   --If required by the server, set the credentials.  
 			request.Credentials = (dotNetClass "System.Net.CredentialCache").DefaultCredentials
 		   -- Get the response.  
