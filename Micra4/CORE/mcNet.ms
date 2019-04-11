@@ -21,7 +21,7 @@ struct MICRA_NEW_STRUCTURE	(
 	
 	--variables
 	debug=true,
-	--WebClient,
+	WebClient,
 	_target_file,
 	--functions
 	fn getSource = getSourceFileName(), --get path of this script
@@ -93,16 +93,17 @@ struct MICRA_NEW_STRUCTURE	(
 			/*local time_span = (dotnetCLass "System.TimeSpan").FromDays 1
 			local age_controll =  (dotnetCLass "System.Net.Cache.HttpCacheAgeControl").MaxAge
 			local requestPolicy = dotnetObject "System.Net.Cache.HttpRequestCachePolicy" age_controll time_span*/
-			--disable chache store (Next reading will be actual not a CACHE!)
-			local cache_level =  dotNetClass "System.Net.Cache.HttpRequestCacheLevel"
-			local noCachePolicy = dotnetObject "System.Net.Cache.HttpRequestCachePolicy" cache_level.NoCacheNoStore
 			--Create a request for the URL. 
 			local request = (dotNetClass "System.Net.WebRequest").Create url
-			request.CachePolicy = noCachePolicy -- Set the policy for this request only.
 			request.Method = "GET"
 			request.Timeout = 3000
 			request.UserAgent = "3ds Max"
 			request.Credentials = (dotNetClass "System.Net.CredentialCache").DefaultCredentials --If required by the server, set the credentials.  
+			--disable chache store (Next reading will be actual not a CACHE!)
+			local cache_level =  dotNetClass "System.Net.Cache.HttpRequestCacheLevel"
+			local noCachePolicy = dotnetObject "System.Net.Cache.HttpRequestCachePolicy" cache_level.NoCacheNoStore
+			request.DefaultCachePolicy = noCachePolicy
+			request.CachePolicy = noCachePolicy -- Set the policy for this request only.
 		   -- Get the response.  
 			local response = request.GetResponse()
 			--Determine whether the response was retrieved from the cache.  
@@ -222,6 +223,7 @@ struct MICRA_NEW_STRUCTURE	(
 		mcPopUp.progeressbar 100 msg:"Downoad Finished:" close:true
 		dotNet.removeEventHandler s "DownloadProgressChanged" mcNet.downloadProgress
 		dotNet.removeEventHandler s "DownloadFileCompleted" mcNet.downloadCompleted
+		WebClient.dispose()
 		/*dotNet.removeEventHandler mcNet.WebClient "DownloadProgressChanged" mcNet.downloadProgress
 		dotNet.removeEventHandler mcNet.WebClient "DownloadFileCompleted" mcNet.downloadCompleted*/
 		if a.Error != undefined then (
@@ -267,7 +269,6 @@ struct MICRA_NEW_STRUCTURE	(
 		dotNet.addEventHandler WebClient "DownloadProgressChanged" downloadProgress
 		dotNet.addEventHandler WebClient "DownloadFileCompleted" downloadCompleted
 		WebClient.DownloadFileAsync (dotNetObject "System.Uri" source_url) target_file
-		WebClient.dispose()
 	),
 	fn uploadFile source_file target_url = (
 	
