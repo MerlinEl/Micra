@@ -87,18 +87,21 @@ struct MICRA_NEW_STRUCTURE	(
 		if not isConnectionAvailable() do teturn undefined
 		local spm = dotnetclass "System.Net.ServicePointManager"
 		spm.SecurityProtocol = spm.SecurityProtocol.Tls12
-		--try (
+		try (
+			--disable chache store (Next reading will be actual not a CACHE!)
+			local http_request = (dotNetClass "System.Net.HttpWebRequest").Create url
+			local chacheLevel =  dotNetClass "System.Net.Cache.HttpRequestCacheLevel"
+			local policy = dotnetObject "System.Net.Cache.HttpRequestCachePolicy" chacheLevel.Default
+			http_request.DefaultCachePolicy = policy
 			--Create a request for the URL. 
-			local request = (dotNetClass "System.Net.HttpWebRequest").Create url
+			local request = (dotNetClass "System.Net.WebRequest").Create url
 			request.Method = "GET"
 			request.Timeout = 3000
 			request.UserAgent = "3ds Max"
 		   --If required by the server, set the credentials.  
 			request.Credentials = (dotNetClass "System.Net.CredentialCache").DefaultCredentials
 			--disable chache store (Next reading will be actual not a CACHE!)
-			local policy = (dotNetClass "System.Net.Cache.HttpRequestCacheLevel").Default
-			--request.DefaultCachePolicy = policy
-			local noCachePolicy = dotnetObject "System.Net.Cache.HttpRequestCachePolicy" policy.NoCacheNoStore
+			local noCachePolicy = dotnetObject "System.Net.Cache.HttpRequestCachePolicy" chacheLevel.NoCacheNoStore
 			request.CachePolicy =  noCachePolicy
 		   -- Get the response.  
 			local response = request.GetResponse()
@@ -119,11 +122,11 @@ struct MICRA_NEW_STRUCTURE	(
 			dataStream.Close()
 			return responseFromServer
 			
-		--) catch (
+		) catch (
 		
 			format "Error: readFile > exception:\n" + getCurrentException()
-		--)
-		--undefined
+		)
+		undefined
 	),
 	fn downloadProgress s a = (mcPopUp.progeressbar a.ProgressPercentage msg:"Downoading..."),
 	fn downloadCompleted s a = ( -- s(dotNetObject:System.Net.WebClient) a(dotNetObject:System.ComponentModel.AsyncCompletedEventArgs) #cancelled, #error, #UserState, #empty
