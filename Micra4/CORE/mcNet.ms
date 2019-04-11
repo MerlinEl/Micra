@@ -34,53 +34,6 @@ struct MICRA_NEW_STRUCTURE	(
 			true
 				
 		) catch (false)
-		
-		/*
-		Alternative >
-		
-		[DllImport("wininet.dll")]
-			private extern static bool InternetGetConnectedState(out int connDescription, int ReservedValue);
-
-		//check if a connection to the Internet can be established
-			public static bool IsConnectionAvailable()
-			{
-				int Desc;
-				return InternetGetConnectedState(out connDesc, 0);
-			}
-		
-		public static bool WebRequestTest()
-    {
-        string url = "http://www.google.com";
-        try
-        {
-            System.Net.WebRequest myRequest = System.Net.WebRequest.Create(url);
-            System.Net.WebResponse myResponse = myRequest.GetResponse();
-        }
-        catch (System.Net.WebException)
-        {
-            return false;
-        }
-        return true;
-    }
-		
-		private bool IsNetworkAvailable() {
-		return System.Net.NetworkInformation.NetworkInterface.GetIsNetworkAvailable();
-		}
-		
-		
-		try { 
-			Ping myPing = new Ping();
-			String host = "google.com";
-			byte[] buffer = new byte[32];
-			int timeout = 1000;
-			PingOptions pingOptions = new PingOptions();
-			PingReply reply = myPing.Send(host, timeout, buffer, pingOptions);
-			return (reply.Status == IPStatus.Success);
-		}
-		catch (Exception) {
-			return false;
-		}
-		*/
 	),	
 	fn readFile url = (
 		
@@ -130,7 +83,6 @@ struct MICRA_NEW_STRUCTURE	(
 			format "Error: readFile > exception:\n" + getCurrentException()
 		)
 		undefined
-	
 	),
 	fn readFile_old url = (
 		
@@ -169,7 +121,6 @@ struct MICRA_NEW_STRUCTURE	(
 			format "Error: readFile > exception:\n" + getCurrentException()
 		)
 		undefined
-	
 	),
 	fn readFile_old2 url = (
 	
@@ -282,6 +233,22 @@ Global mcNet = mcStructMan.instanceStructure MICRA_NEW_STRUCTURE "mcNet"
 
 
 /*
+	fn webRequestTest = (
+
+		local url = "http://www.google.com"
+		try (
+
+			local request = (dotNetClass "System.Net.WebRequest").Create url
+			local response = request.GetResponse()
+
+		) catch (
+
+			return false
+		)
+		return true
+	)
+
+
 	NI = dotnetclass "System.Net.NetworkInformation.NetworkInterface"
 	NI.GetIsNetworkAvailable()
 	ALL = NI.GetAllNetworkInterfaces()
@@ -345,8 +312,8 @@ webrequest with POST
 
 
 /*
-			local policy = (dotNetClass "System.Net.Cache.HttpRequestCacheLevel").Default
-			request.DefaultCachePolicy = policy
-			local noCachePolicy = dotnetObject "System.Net.Cache.HttpRequestCachePolicy" policy.NoCacheNoStore
-			request.CachePolicy =  noCachePolicy
+	local policy = (dotNetClass "System.Net.Cache.HttpRequestCacheLevel").Default
+	request.DefaultCachePolicy = policy
+	local noCachePolicy = dotnetObject "System.Net.Cache.HttpRequestCachePolicy" policy.NoCacheNoStore
+	request.CachePolicy =  noCachePolicy
 */
