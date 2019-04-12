@@ -25,6 +25,46 @@ struct MICRA_NEW_STRUCTURE	(
 	_target_file,
 	--functions
 	fn getSource = getSourceFileName(), --get path of this script
+	/**
+	*@Example
+		mcNet.getCurrencyCourse "EMU"
+		mcNet.getCurrencyCourse "Polsko"
+		mcNet.getCurrencyCourse "Rusko"
+	*/
+	fn getCurrencyCourse country debug:false = (
+
+		--vystavit požadavek na dnešní den
+		local local_date = (dotNetClass ("System.DateTime")).Now
+		local url = (dotnetClass "System.String").Format "http://www.cnb.cz/cs/financni_trhy/devizovy_trh/kurzy_devizoveho_trhu/denni_kurz.txt?date={0:dd.MM.yyyy}" local_date
+		local request = (dotNetClass "System.Net.HttpWebRequest").Create url
+		--odeslat jej na server a získat odpověď
+		local rs = request.GetResponse()
+		--vytvořit StreamReader pro pohodlnou práci
+		local dataStream = rs.GetResponseStream()
+		local sr = dotNetObject "System.IO.StreamReader" dataStream
+		--projít řádky
+		local kurz = ""
+		local mena = "" 
+		while Not sr.EndOfStream do (
+
+			local text_line = dotnetObject "System.String" (sr.ReadLine()) --"země|měna|množství|kód|kurz"
+			--print (text_line.toString()) 
+			--pokud jsme na řádku s dolarem, vytáhnout z něj kurz
+			if text_line.StartsWith(country+"|") do (
+
+				mena = (text_line.split "|" )[2]
+				kurz = dotnetObject "System.String" ( text_line.Substring ((text_line.LastIndexOf "|") + 1) )
+				kurz = kurz.replace "," "." --replace comma with dot
+			)
+		)	 
+		--zavřít StreamReader
+		sr.Close()
+		--zavřít spojení
+		rs.Close()
+		--vypsat aktuální kurz
+		if debug do format "Aktuální kurz: 1 % = %Kč\n" mena kurz
+		execute kurz
+	),
 	fn isConnectionAvailable = ( --Check ForInternet Connection
 	
 		try (
@@ -231,7 +271,7 @@ struct MICRA_NEW_STRUCTURE	(
 	fn uploadFile source_file target_url = (
 	
 		--TODO test mode
-		local webRequest = (dotNetClass "System.Net.WebRequest").Create target_url
+		/*local webRequest = (dotNetClass "System.Net.WebRequest").Create target_url
 		webRequest.Method = "POST"
 		webRequest.ContentType = "multipart/form-data"--"application/x-www-form-urlencoded"
 		local reqStream = webRequest.GetRequestStream()
@@ -243,7 +283,7 @@ struct MICRA_NEW_STRUCTURE	(
 		local sr = dotNetObject "System.IO.StreamReader" ((webRequest.GetResponse()).GetResponseStream())
 		result = sr.ReadToEnd()
 		local tw = dotnetObject "System.IO.StreamWriter" source_file true
-		tw.Write Result
+		tw.Write Result*/
 		
 		
 		/*
