@@ -48,6 +48,13 @@ struct MICRA_NEW_STRUCTURE	(
 			local requestPolicy = dotnetObject "System.Net.Cache.HttpRequestCachePolicy" age_controll time_span*/
 			--Create a request for the URL. 
 			local request = (dotNetClass "System.Net.WebRequest").Create url
+			
+			
+			--Turn off keep alive
+			request.KeepAlive = false;
+			--OutOfMemoryException when sending data
+			request.AllowWriteStreamBuffering = false;
+
 			request.Method = "GET"
 			request.Timeout = 3000
 			request.UserAgent = "3ds Max"
@@ -223,8 +230,48 @@ struct MICRA_NEW_STRUCTURE	(
 	),
 	fn uploadFile source_file target_url = (
 	
-		--code here
+		--TODO test mode
+		local webRequest = (dotNetClass "System.Net.WebRequest").Create target_url
+		webRequest.Method = "POST"
+		webRequest.ContentType = "multipart/form-data"--"application/x-www-form-urlencoded"
+		local reqStream = webRequest.GetRequestStream()
+		local postData = "username="+user_name+"&password="+password
+		local ste = (dotnetClass "System.Text.Encoding")
+		local postArray = ste.ASCII.GetBytes postData
+		reqStream.Write postArray 0 postArray.Length
+		reqStream.Close()
+		local sr = dotNetObject "System.IO.StreamReader" ((webRequest.GetResponse()).GetResponseStream())
+		result = sr.ReadToEnd()
+		local tw = dotnetObject "System.IO.StreamWriter" source_file true
+		tw.Write Result
+		
+		
+		/*
+		FileStream fs = null;
+WebRequest req = null;
+Stream reqst = null;
 
+fs = new FileStream(SourceFilePath, FileMode.Open, FileAccess.Read);
+int totalLength = (((int)fs.Length) + 1);
+byte[] buffer = new byte[totalLength];
+
+fs.Read(buffer, 0, buffer.Length);
+
+req = WebRequest.Create(GlobalHandler.g_strUploadUrl);
+req.Method = "POST";
+
+req.ContentType = "multipart/form-data";
+WebHeaderCollection WH = new WebHeaderCollection();
+WH.Add("FileName", MyFileName);
+
+req.Headers = WH;
+
+req.ContentLength = buffer.Length;
+
+reqst = req.GetRequestStream(); //add data to request stream
+Print("Geting Request Stream");
+reqst.Write(buffer, 0, buffer.Length);// (buffer, 0, buffer.Length);
+*/
 	)
 	/*<end>*/
 )	
