@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <UPDATE>
-  <VERSIONS latest="4.56">
+  <VERSIONS latest="4.57">
     <item_1 version="4.5" date="4_11_2019_1_25_54_PM" />
     <item_2 version="4.51" date="4_11_2019_1_55_27_PM" />
     <item_3 version="4.52" date="4_11_2019_2_03_21_PM" />
@@ -8,6 +8,6 @@
     <item_5 version="4.54" date="4_11_2019_2_14_54_PM" />
     <item_6 version="4.55" date="4_11_2019_2_41_52_PM" />
     <item_7 version="4.56" date="11_4_2019_19_07_56" />
-    <item_8 version="4.49" date="4_11_2019_1_21_49_PM" />
+    <item_8 version="4.57" date="4_12_2019_8_55_17_AM" />
   </VERSIONS>
 </UPDATE>

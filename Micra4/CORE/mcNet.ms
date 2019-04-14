@@ -25,6 +25,46 @@ struct MICRA_NEW_STRUCTURE	(
 	_target_file,
 	--functions
 	fn getSource = getSourceFileName(), --get path of this script
+	/**
+	*@Example
+		mcNet.getCurrencyCourse "EMU"
+		mcNet.getCurrencyCourse "Polsko"
+		mcNet.getCurrencyCourse "Rusko"
+	*/
+	fn getCurrencyCourse country debug:false = (
+
+		--vystavit požadavek na dnešní den
+		local local_date = (dotNetClass ("System.DateTime")).Now
+		local url = (dotnetClass "System.String").Format "http://www.cnb.cz/cs/financni_trhy/devizovy_trh/kurzy_devizoveho_trhu/denni_kurz.txt?date={0:dd.MM.yyyy}" local_date
+		local request = (dotNetClass "System.Net.HttpWebRequest").Create url
+		--odeslat jej na server a získat odpověď
+		local rs = request.GetResponse()
+		--vytvořit StreamReader pro pohodlnou práci
+		local dataStream = rs.GetResponseStream()
+		local sr = dotNetObject "System.IO.StreamReader" dataStream
+		--projít řádky
+		local kurz = ""
+		local mena = "" 
+		while Not sr.EndOfStream do (
+
+			local text_line = dotnetObject "System.String" (sr.ReadLine()) --"země|měna|množství|kód|kurz"
+			--print (text_line.toString()) 
+			--pokud jsme na řádku s dolarem, vytáhnout z něj kurz
+			if text_line.StartsWith(country+"|") do (
+
+				mena = (text_line.split "|" )[2]
+				kurz = dotnetObject "System.String" ( text_line.Substring ((text_line.LastIndexOf "|") + 1) )
+				kurz = kurz.replace "," "." --replace comma with dot
+			)
+		)	 
+		--zavřít StreamReader
+		sr.Close()
+		--zavřít spojení
+		rs.Close()
+		--vypsat aktuální kurz
+		if debug do format "Aktuální kurz: 1 % = %Kč\n" mena kurz
+		execute kurz
+	),
 	fn isConnectionAvailable = ( --Check ForInternet Connection
 	
 		try (
@@ -48,6 +88,13 @@ struct MICRA_NEW_STRUCTURE	(
 			local requestPolicy = dotnetObject "System.Net.Cache.HttpRequestCachePolicy" age_controll time_span*/
 			--Create a request for the URL. 
 			local request = (dotNetClass "System.Net.WebRequest").Create url
+			
+			
+			--Turn off keep alive
+			request.KeepAlive = false;
+			--OutOfMemoryException when sending data
+			request.AllowWriteStreamBuffering = false;
+
 			request.Method = "GET"
 			request.Timeout = 3000
 			request.UserAgent = "3ds Max"
@@ -223,8 +270,48 @@ struct MICRA_NEW_STRUCTURE	(
 	),
 	fn uploadFile source_file target_url = (
 	
-		--code here
+		--TODO test mode
+		/*local webRequest = (dotNetClass "System.Net.WebRequest").Create target_url
+		webRequest.Method = "POST"
+		webRequest.ContentType = "multipart/form-data"--"application/x-www-form-urlencoded"
+		local reqStream = webRequest.GetRequestStream()
+		local postData = "username="+user_name+"&password="+password
+		local ste = (dotnetClass "System.Text.Encoding")
+		local postArray = ste.ASCII.GetBytes postData
+		reqStream.Write postArray 0 postArray.Length
+		reqStream.Close()
+		local sr = dotNetObject "System.IO.StreamReader" ((webRequest.GetResponse()).GetResponseStream())
+		result = sr.ReadToEnd()
+		local tw = dotnetObject "System.IO.StreamWriter" source_file true
+		tw.Write Result*/
+		
+		
+		/*
+		FileStream fs = null;
+WebRequest req = null;
+Stream reqst = null;
 
+fs = new FileStream(SourceFilePath, FileMode.Open, FileAccess.Read);
+int totalLength = (((int)fs.Length) + 1);
+byte[] buffer = new byte[totalLength];
+
+fs.Read(buffer, 0, buffer.Length);
+
+req = WebRequest.Create(GlobalHandler.g_strUploadUrl);
+req.Method = "POST";
+
+req.ContentType = "multipart/form-data";
+WebHeaderCollection WH = new WebHeaderCollection();
+WH.Add("FileName", MyFileName);
+
+req.Headers = WH;
+
+req.ContentLength = buffer.Length;
+
+reqst = req.GetRequestStream(); //add data to request stream
+Print("Geting Request Stream");
+reqst.Write(buffer, 0, buffer.Length);// (buffer, 0, buffer.Length);
+*/
 	)
 	/*<end>*/
 )	
