@@ -1,15 +1,28 @@
 ﻿/*
 DOCUMENTATION
 http://scripting345.rssing.com/chan-20965412/all_p1.html
+http://estk.aenhancers.com/4%20-%20User-Interface%20Tools/scriptui-programming-model.html //interface
 https://www.adobeexchange.com/creativecloud.photoshop.html#paging --continue explore from page 7
 http://www.ps-scripts.com/
 http://ps-scripts.sourceforge.net/xtools.html
 http://www.adobe.com/devnet/photoshop/scripting.html
 http://www.smashingmagazine.com/2013/07/25/introduction-to-photoshop-scripting/
 https://www.adobe.com/content/dam/acom/en/devnet/photoshop/pdfs/photoshop-cc-javascript-ref-2015.pdf  
+
+C:\Users\Rene.baca\AppData\Roaming\Adobe\Adobe Photoshop CC 2018\Presets\Actions
 */
 
+//Clear the console
+var bt = new BridgeTalk();
+bt.target = 'estoolkit-4.0';
+bt.body = function(){app.clc();}.toSource()+"()";
+bt.send(5);
+
 #target photoshop
+app.bringToFront();
+
+var work_doc = undefined;
+var preview_doc = undefined;
 
 function WinObject() {
    
@@ -18,14 +31,26 @@ function WinObject() {
         windowResource += "orientation: 'column',"
         windowResource += "alignChildren: ['fill', 'top'],"
         windowResource += "preferredSize:[200, 400],"
+        windowResource += "location :[50, 100],"
         windowResource += "text: 'Texture Tile Tool:',"
         windowResource += "margins:15," 
         windowResource += "}"
     var win = new Window(windowResource);
     //Add Buttons
-    var btn_1 = win.add ("button", undefined, "Create New Document");
-    var btn_2 = win.add ("button", undefined, "Preview Tile");
+    var btn_def_ptrn = win.add ("button", undefined, "Define Pattern");
+    var btn_pre_tile = win.add ("button", undefined, "Preview Tile");
+    var btn_3 = win.add ("button", undefined, "Update Preview");
+    var btn_11 = win.add ("button", undefined, "Create New Document");
+    var btn_12 = win.add ("button", undefined, "Preview Tile");
+    var btn_13 = win.add('button', undefined, 'Close', {name:'close'});
+    
+    //Assign Functions
+    btn_def_ptrn.onClick =  redefinePattern
+    btn_pre_tile.onClick =  previewTile
+    
     //Define Functions
+    cTID = function(s) { return app.charIDToTypeID(s); };
+    sTID = function(s) { return app.stringIDToTypeID(s); };
     function newRGBColor(r, g, b) {
         
         var newColor = new SolidColor();
@@ -43,12 +68,21 @@ function WinObject() {
         desc2.putUnitDouble( idRds, idPxl, 0.300000 );  
         executeAction( idGsnB, desc2, DialogModes.NO );  
     }
-    function createProjectDoc(w, h, dpi){
+    function createProjectDoc(w, h, dpi, doc_name){
            
         $.writeln("w:"+w+" h:"+h+" dpi:"+dpi);
-       var project_doc =  app.documents.add(w*4, h*4, dpi, "TILE_PROJECTION", NewDocumentMode.RGB, DocumentFill.WHITE);
-       return project_doc;
+       var new_doc =  app.documents.add(w*4, h*4, dpi, doc_name, NewDocumentMode.RGB, DocumentFill.WHITE);
+       return new_doc;
     }
+    function selectDoc() {
+
+        var desc1 = new ActionDescriptor();
+        var ref1 = new ActionReference();
+        ref1.putOffset(cTID('Dcmn'), 1);
+        desc1.putReference(cTID('null'), ref1);
+        desc1.putInteger(cTID('DocI'), 217);
+        executeAction(cTID('slct'), desc1, DialogModes.NO);
+    };
     function fillColor(doc, layer, red,green,blue) {
         
         doc.selection.selectAll();
@@ -132,9 +166,25 @@ function WinObject() {
         doc.activeLayer = new_layer;
         return new_layer
     }
+    // get array of patterns’ names;
+    function getPatternNames () {
+        
+        var ref = new ActionReference();
+        ref.putProperty(stringIDToTypeID ("property"), stringIDToTypeID("presetManager") );
+        ref.putEnumerated( charIDToTypeID("capp"), charIDToTypeID("Ordn"), charIDToTypeID("Trgt") );
+        var applicationDesc = executeActionGet(ref);
+        var presetManager = applicationDesc.getList(stringIDToTypeID("presetManager"));
+        var patternNames = presetManager.getObjectValue(4).getList(stringIDToTypeID("name"));
+        var theNames = new Array;
+        for (m = 0; m < patternNames.count; m++) {
+            
+            theNames.push(patternNames.getString(m));
+        }
+        return theNames;
+   }
    function fillPatern(patternName){
         
-       //  current_doc.selection.selectAll();
+       //  work_doc.selection.selectAll();
        // docRef.selection.fill(pattern?);
     }
     function definePattern(patternName) {
@@ -150,24 +200,85 @@ function WinObject() {
         desc6.putString( charIDToTypeID('Nm  '), patternName);
         executeAction( charIDToTypeID('Mk  '), desc6, DialogModes.NO );
     }
-    btn_1.onClick = function () {
+    function createNewPattern( ptrn_name ) {
+        
+        var desc1 = new ActionDescriptor();
+        var ref1 = new ActionReference();
+        ref1.putClass(cTID('Ptrn'));
+        desc1.putReference(cTID('null'), ref1);
+        var ref2 = new ActionReference();
+        ref2.putProperty(cTID('Prpr'), sTID("selection"));
+        ref2.putEnumerated(cTID('Dcmn'), cTID('Ordn'), cTID('Trgt'));
+        desc1.putReference(cTID('Usng'), ref2);
+        desc1.putString(cTID('Nm  '), ptrn_name);
+        executeAction(cTID('Mk  '), desc1, DialogModes.NO);
+        $.writeln("createNewPattern > New Pattern has been created. Name:"+ptrn_name);
+    }
+    function deleterPatternAt ( ptrn_index ) {
+         
+         var desc1 = new ActionDescriptor();
+         var ref1 = new ActionReference();
+        ref1.putIndex(cTID('Ptrn'), ptrn_index);
+        desc1.putReference(cTID('null'), ref1);
+        executeAction(cTID('Dlt '), desc1, DialogModes.NO);
+        $.writeln("deleterPatternAt > Old Pattern has been deleted. Index:"+ptrn_index);
+    }
+    function renamePatternAt (ptrn_index, new_name) {
+
+        var desc1 = new ActionDescriptor();
+        var ref1 = new ActionReference();
+        ref1.putIndex(cTID('Ptrn'), ptrn_index);
+        desc1.putReference(cTID('null'), ref1);
+        desc1.putString(cTID('T   '), new_name);
+        executeAction(cTID('Rnm '), desc1, DialogModes.NO);
+    }
+    function deleterOldPattern ( ptrn_name ) {
+       
+        var pattern_names = getPatternNames();
+       //alert(pattern_names.join("\n"));
+       var last_pattern_name = pattern_names[pattern_names.length-1];
+       // $.writeln("last pattern name:"+last_pattern_name);
+        if (last_pattern_name == ptrn_name) deleterPatternAt(pattern_names.length-1);
+    }
+    function redefinePattern() {
+        
+        var pattern_name = "TILE_PATTERN_TEXTURE";
+         $.writeln("redefinePattern > "+pattern_name);
+        //find pattern by name and delete if exist
+        deleterOldPattern ( pattern_name );
+        //generate new pattern
+        createNewPattern( pattern_name );
+    }
+     function  previewTile() {
+         
+         
+    }
+    btn_3.onClick = function () {
+        //Update Preview
+         var preview_doc = app.documents.itemByName("TILE_PROJECTION_DOCUMENT");
+    }
+    btn_11.onClick = function () {
 
         app.documents.add(); // adds a new document
         app.activeDocument.activeLayer.applyAddNoise (400, NoiseDistribution.GAUSSIAN, true); //create noise
     }
-    btn_2.onClick = function () {
+    btn_12.onClick = function () {
 
-        var current_doc = app.activeDocument;
-        if (current_doc == undefined) return false;
-        definePattern("TILE_PROJECTION_PATTERN");
-        var w = current_doc.width;
-        var h = current_doc.height;
-        var dpi = current_doc.resolution;
-        var mode = current_doc.mode;
-        var project_doc = createProjectDoc(w, h, dpi);
-        $.writeln("project_doc w:"+project_doc.width+" h:"+project_doc.height);
-        var new_layer = addLayer(project_doc, "TILE_PROJECT");
-        fillColor (project_doc, new_layer, 255, 255, 255);
+        var work_doc = app.activeDocument;
+        if (work_doc == undefined) {
+
+            alert("document must be opened"); 
+            return false;
+        }  
+        createNewPattern("TILE_PROJECTION_PATTERN");
+        var w = work_doc.width;
+        var h = work_doc.height;
+        var dpi = work_doc.resolution;
+        var mode = work_doc.mode;
+        var preview_doc = createProjectDoc(w, h, dpi, "TILE_PROJECTION_DOCUMENT");
+        $.writeln("preview_doc w:"+preview_doc.width+" h:"+preview_doc.height);
+        var new_layer = addLayer(preview_doc, "TILE_PROJECT");
+        fillColor (preview_doc, new_layer, 255, 255, 255);
         
         addEffectColorOverlay( 0, 0, 255); 
         
@@ -196,11 +307,12 @@ function WinObject() {
                 alert(scriptName + " newLayerEffect() exception caught? line[" + ex.line + "] "  + ex);
         }*/
         
-        //addStylePattern(project_doc, new_layer);
+        //addStylePattern(preview_doc, new_layer);
         //fillPattern("TILE_PROJECTION_PATTERN");
     }
-  // Show the Window
-  win.show();
+    btn_13.onClick = function () { win.close() }    
+    // Show the Window
+      win.show();
 };
 
 // String message for BridgeTalk
@@ -215,6 +327,8 @@ bt.send();
 app.bringToFront();
 
 /*
+    
+    app.activeDocument.name
   ps.ApplicationClass app = new ps.ApplicationClass();
 
 app.Open(@"test.psd",null);//   this  statement  is  added  by  me,  is it  right?
@@ -291,8 +405,8 @@ var stemsAmount = prompt("Processing ""+originalStem.name+""nHow many stems do y
         fillLayer.move(doc.layers[doc.layers.length-1], ElementPlacement.PLACEAFTER);  
     } 
   
-current_doc.artLayers["Background"].copy() //Using the copy merged command/method
-project_doc.paste()
+work_doc.artLayers["Background"].copy() //Using the copy merged command/method
+preview_doc.paste()
   
  alert (imgD.Width.as("px"));
 //target text layer

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<flexLibProperties includeAllClasses="false" version="1">
+  <includeClasses>
+    <classEntry path="net.xtools.DateUtils"/>
+    <classEntry path="net.xtools.FileUtils"/>
+    <classEntry path="net.xtools.Log"/>
+    <classEntry path="net.xtools.Stdlib"/>
+    <classEntry path="net.xtools.StringUtils"/>
+  </includeClasses>
+  <includeResources/>
+  <namespaceManifests/>
+</flexLibProperties>

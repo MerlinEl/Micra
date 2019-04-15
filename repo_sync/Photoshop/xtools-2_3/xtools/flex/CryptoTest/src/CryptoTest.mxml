@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:WindowedApplication xmlns:mx="http://www.adobe.com/2006/mxml" layout="absolute"
+    width="582" height="254" backgroundColor="#efefef" color="#3c3c3c"
+    fontFamily="Verdana" fontSize="14" initialize="init();">
+    
+  <mx:Script source="hex.js"/>
+  <mx:Script source="base64.js"/>
+  <mx:Script>
+    <![CDATA[
+    // http://www.hanewin.net/encrypt/rsa/rsa-test.htm
+    
+    import net.xtools.RSA;
+    import net.xtools.RSAKeygen;
+    import mx.controls.Alert;
+    
+    [Bindable]
+    protected var plain:String = 'Plain text...';
+    
+    [Bindable]
+    protected var cipher:String = '';
+    
+    public function alert(msg:*):void {
+      Alert.show(msg.toString());
+    }
+    
+    public function encrypt(plain:String, p:String):String {
+      var mod=new Array();
+      var exp=new Array();
+ 
+      var s = r2s(p);
+      var l = Math.floor((s.charCodeAt(0)*256 + s.charCodeAt(1)+7)/8);
+      
+      mod = RSA.mpi2b(s.substr(0,l+2));
+      exp = RSA.mpi2b(s.substr(l+2));
+      
+      var p = plain+String.fromCharCode(1);
+      var pl = p.length;
+      
+      if(pl > l-3) {
+        alert('In this example plain text length must be less than modulus of '+(l-3)+' bytes');
+        return '';
+      }
+
+      var b=s2b(p);
+      
+      var t;
+      var i;
+      
+      var rsa:RSA = new RSA();
+      
+      var startTime=new Date();
+      var enc= rsa.encrypt(b,exp,mod);
+      var endTime=new Date();
+      
+      var cipher:String = s2hex(b2s(enc));
+      
+      var et:int = (endTime.getTime()-startTime.getTime())/1000.0;
+      
+      return cipher;
+    }
+    
+    public static function str2ar(str:String):Array {
+      var parts:Array = str.split(',');
+      for (var i:int = 0; i < parts.length; i++) {
+        parts[i] = Number(parts[i]);
+      }
+      return parts;
+    }
+    
+    public function decrypt(cipher:String, d:String, p:String, q:String, u:String):String {
+
+      var rsa:RSA = new RSA();      
+      var startTime=new Date();
+      
+      var enc=s2b(hex2s(cipher));
+      var rsa_p = str2ar(p);
+      var rsa_q = str2ar(q);
+      var rsa_u = str2ar(u);
+      var rsa_d = str2ar(d);
+      
+      var dec=b2s(rsa.decrypt(enc, rsa_d, rsa_p, rsa_q, rsa_u));
+      var endTime=new Date();
+      
+      var result:String = dec.substr(0, dec.length-1);
+      
+      var et:int = (endTime.getTime()-startTime.getTime())/1000.0;
+      
+      return result;
+    }
+    
+    public function process(str:String, mode:int):String {
+      var p:String = "211935311,68881790,40039167,85540503,68896644,54094677,4485683,48411543,65018811,13";
+      var q:String = "211786851,44910537,12620294,2086368,107896690,104002325,106186822,191436037,102140101,11";
+      var e:int = 17;
+      var pq:String = "207282829,161116953,187465851,49139708,127968569,137109791,245836705,224739531,164050657,187624902,98474435,14859,13840706,232007692,190741263,135933775,104010306,188719810,150";
+      var d:String = "182869317,213625576,71160325,135321036,117706432,12086695,244916999,234188687,141564372,48900593,127910088,205276794,207716649,72523175,238934395,150310880,128887006,159626063,26";
+      var u:String = "234582972,238154493,98032897,11062603,214515131,60010320,9668867,205749291,65933858,6";
+      
+      var pkey:String = "AgCWs/osJjMSQoGi9Pteew/dQoDA0zFCAAOgtd6Zw7Lu3GnHNuHWVAy+pyuhgsIR96ClOS7c/8ssgHuZpzGcWuKNAAUR";
+      
+      var result = '';
+      
+      try {
+        if (mode == 0) {
+          // encrypt
+          result = this.encrypt(str, pkey);
+          
+        } else {
+          // decrypt
+          result = this.decrypt(str, d, p, q, u);
+        }
+      } catch (e:Error) {
+        Alert.show(e.toString());
+      }
+      
+      return result;
+    }
+    
+    protected function init():void {
+      maxHeight = height;
+      maxWidth = width;
+    }
+    public function doEncrypt():void {
+      var self:CryptoTest = this;
+      self.cipher = self.process(self.plain, 0);
+    } 
+
+    public function doDecrypt():void {
+      var self:CryptoTest = this;      
+      self.plain = self.process(self.cipher, 1);
+    } 
+    ]]>
+  </mx:Script>
+ 
+  <mx:Canvas width="100%" height="232">
+    <mx:Label x="192" y="10" text="RSA Crypto Demo" width="198" fontSize="21"/>
+    <mx:Label x="23" y="62" text="Plaintext:" width="79"/>
+    <mx:Label x="23" y="114" text="Ciphertext (hex):"/>
+    
+    <mx:TextInput x="159" y="59" width="396" height="49"
+        id="plaintext" text="{plain}" change="plain=this.plaintext.text"/>
+        
+    <mx:TextInput x="159" y="115" width="396" height="49"
+        id="ciphertext" text="{cipher}" change="cipher=this.ciphertext.text"/>
+        
+    <mx:Button x="120" y="182" label="Encrypt" click="doEncrypt()"/>
+    <mx:Button x="372" y="182" label="Decrypt" click="doDecrypt()"/>
+  
+  </mx:Canvas>
+</mx:WindowedApplication>

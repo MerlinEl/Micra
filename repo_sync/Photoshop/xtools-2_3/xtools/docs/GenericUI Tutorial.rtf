@@ -1,0 +1,203 @@
+{\rtf1\ansi\ansicpg1252\deff0\deflang1033{\fonttbl{\f0\fnil\fcharset0 Times New Roman;}{\f1\fnil\fcharset2 Symbol;}}
+\viewkind4\uc1\pard\f0\fs20 GenericUI Tutorial\par
+\par
+Over the course of the past two years I've written  more than a few scripts for CS and CS2 that need to use the ScriptUI APIs. I've written these scripts in just about every imaginable way. Based on what I've learned, I developed GenericUI which provides a basic framework for writing scripts ScriptUI.\par
+\par
+The basic idea is that you write code to \par
+\pard{\pntext\f1\'B7\tab}{\*\pn\pnlvlblt\pnf1\pnindent0{\pntxtb\'B7}}\fi-720\li720 create a panel in a window\par
+{\pntext\f1\'B7\tab}validate the information in that panel\par
+{\pntext\f1\'B7\tab}do some processing based on the validated information\par
+\pard\par
+You don't have to write code for\par
+\pard{\pntext\f1\'B7\tab}{\*\pn\pnlvlblt\pnf1\pnindent0{\pntxtb\'B7}}\fi-720\li720 creating and managing the window\par
+{\pntext\f1\'B7\tab}creating the 'Process' and 'Cancel' buttons or their onClick methods\par
+\pard{\pntext\f1\'B7\tab}{\*\pn\pnlvlblt\pnf1\pnindent0{\pntxtb\'B7}}\fi-720\li720 calling your code (described above) at the right times\par
+\pard{\pntext\f1\'B7\tab}{\*\pn\pnlvlblt\pnf1\pnindent0{\pntxtb\'B7}}\fi-720\li720 reading and writing INI files\par
+\pard\par
+GenericUI does this by implementing the code that you would normally rewrite or copy each time you wrote a new script. You specify some properites for your script and some high level callback functions. GenericUI runs the UI and calls the code you've written as needed.\par
+\par
+\par
+The Processing Model\par
+\par
+The framework is lightweight. There is only one class, GenericUI, and a very clean way to use that class in your scripts.\par
+\par
+The model used by the framework is this:\par
+\pard{\pntext\f1\'B7\tab}{\*\pn\pnlvlblt\pnf1\pnindent0{\pntxtb\'B7}}\fi-720\li720 You define an Options class. Option objects contain the information need by the script to perform its processing. In there most basic format, the simple Objects containing numbers, strings, and booleans. Having them in this format keeps everything simple and makes it possible to totally automate the process of writing and reading INI files.\par
+{\pntext\f1\'B7\tab}You define your UI class as a subclass of GenericUI. Part of this definition is a set of properties describing your UI and a set of callback methods that will be invoked when appropriate by GenericUI.\par
+{\pntext\f1\'B7\tab}You create an instance of your UI class and call its 'exec' method. The framework creates and opens the window. When the user has entered information into the UI, the framework validates and processes the request by calling your callback methods.\par
+\pard\par
+For the rest of this document we are going to use a sample UI that has two bits of data that we need to collect from the user: source and output folders. Instead of doing any real processing, we will just display an alert where the processing would be inserted.\par
+\par
+The Options Class\par
+The first thing we need to do is define a class that we use for the information collected from the UI. In this framework we refer to this information as Options, so let's define our options to look like this:\par
+\par
+SampleUIOptions = function() \{\par
+  this.source = '';\par
+  this.outf = '';\par
+\};\par
+\par
+Notice that there is nothing in here that refers to anything in the UI or that depends on the UI. You could easily construct an Options object manually or, better yet, create an INI file describing its contents.\par
+\par
+In general, there should only be numbers, strings, and booleans in this class. Any objects or arrays will simply be converted to strings during INI file I/O. In the Advanced Usage section, we'll discuss how to handle more complex cases.\par
+\par
+\par
+The UI Class\par
+Your script must define a new class for your UI. In our example, we will define a class called SampleUI.\par
+\par
+  SampleUI = function() \{\};\par
+\par
+\par
+Properties\par
+To make this useful, we need to define some properties for the class.\par
+\par
+SampleUI = function() \{\par
+  var self = this;\par
+\par
+  self.title = "Sample UI";\par
+  self.notesSize = 50;\par
+  self.winRect = \{\par
+    x: 200, \par
+    y: 200,\par
+    w: 420, \par
+    h: 220\par
+  \};\par
+  self.documentation =\par
+    "some documentation for our Sample Application";\par
+\par
+  self.iniFile = "~/Sample.ini";\par
+  // self.hasBorder = false;\par
+\};\par
+\par
+Let's go over each of these properties.\par
+\pard{\pntext\f1\'B7\tab}{\*\pn\pnlvlblt\pnf1\pnindent0{\pntxtb\'B7}}\fi-720\li720 title - The title of the window\par
+{\pntext\f1\'B7\tab}notesSize - The vertical size of the Notes panel. If we aren't going to have a Notes panel, this should be set to 0.\par
+{\pntext\f1\'B7\tab}winRect - What size should the window be? Note that we use x and y for the upper left corner and w and h for the width and height. This makes more sense to me than the bounds used by ScriptUI.\par
+{\pntext\f1\'B7\tab}documentation - Helpful information about using the script. This will be displayed in the Notes panel if notesSize is not 0.\par
+{\pntext\f1\'B7\tab}iniFile - The name of the INI file for this script. GenericUI can automatically load and store information collected in the UI in an INI file if this property is set.\par
+{\pntext\f1\'B7\tab}hasBorder - This indicates whether or not the Panel should have a border. Since you can't really turn off the borders, GenericUI will create a Group instead of a Panel if this property is set to false.\par
+\pard\par
+To keep things clear inside our script, we should define a class that we use for the information collected from the UI. In this framework we refer to this information as Options, so let's define our options to look like this:\par
+\par
+All of that should be pretty straight-forward. Now, on to the interesting parts.\par
+\par
+GenericUI contains a lot of functionality that we want to use, so we need to make our class a subclass of GenericUI. In JavaScript, the syntax for this is:\par
+\par
+   SampleUI.prototype = new GenericUI();\par
+\par
+Methods\par
+To fully hook our subclass into the framework, we need to define these three methods:\par
+   SampleUI.prototype.createPanel = function(pnl, ini, doc) \{\};\par
+   SampleUI.prototype.validatePanel = function(pnl) \{\};\par
+   SampleUI.prototype.process = function(opts) \{\};\par
+\par
+createPanel - This method takes two parameters. pnl is the panel that we are supposed to populate with our UI components. ini is an Options object containing initial values for this components. These values may have been specified programmatically or read in from an existing INI file. The third, optional, parameter is doc, the document that we are going to be processing.\par
+\par
+To continue with our example, the createPanel method looks like this\par
+\par
+SampleUI.prototype.createPanel = function(pnl, ini) \{\par
+  var xOfs = 10;\par
+  var yy = 10;\par
+\par
+  // for our panel, we have a source directory input\par
+  var xx = xOfs;\par
+  pnl.add('statictext', [xx,yy,xx+110,yy+20], 'Source Directory:');\par
+  xx += 110;\par
+  pnl.source = pnl.add('edittext', [xx,yy,xx+220,yy+20],\par
+                                      new Folder("~").fsName);\par
+  xx += 225;\par
+  pnl.sourceBrowse = pnl.add('button', [xx,yy,xx+30,yy+20], '...');\par
+\par
+  pnl.sourceBrowse.onClick = function() \{\par
+      var pnl = this.parent;\par
+      var def = (pnl.source.text ? new Folder(pnl.source.text) : undefined); \par
+      var f = Folder.selectDialog("Select a Source folder", def);\par
+      if (f) \{\par
+        pnl.source.text = decodeURI(f.fsName);\par
+      \}\par
+  \}\par
+\par
+//... outf code clipped\par
+\par
+  if (ini) \{   // if we have an ini object\par
+    if (ini.source) \{\par
+      pnl.source.text = ini.source;  // get the source directory\par
+    \}\par
+    if (ini.outf) \{\par
+      pnl.outf.text = ini.outf;      // get the target directory\par
+    \}\par
+  \}\par
+\par
+  return pnl;    // return the panel object\par
+\};\par
+\par
+There is a bug in the JavaScript interpreter in PSCS2 that will result in runtime error in some 'createPanel' methods. [insert the error message here]. The usual remedy is to move inlined functions outside of the createPanel method. In our example it would mean making this change:\par
+\par
+SampleUI.prototype.createPanel = function(pnl, ini) \{\par
+  //...\par
+  pnl.sourceBrowse.onClick = SampleUI.sourceBrowse;\par
+  //...\par
+\};\par
+SampleUI.sourceBrowse = function() \{\par
+    try \{\par
+      var pnl = this.parent;\par
+      var def = (pnl.source.text ? new Folder(pnl.source.text) : undefined); \par
+      var f = Folder.selectDialog("Select a Source folder", def);\par
+   //...\par
+\};\par
+\par
+All we are responsible for is populating the panel with the controls that we are interested in.\par
+\par
+validatePanel - This method is where we retrieve the information from the UI, validate it, and place it in an Options object for later processing.\par
+\par
+Our example validatePanel method looks like this:\par
+\par
+SampleUI.prototype.validatePanel = function(pnl) \{\par
+  var self = this;\par
+\par
+  var opts = new SampleUIOptions(); // our options object\par
+\par
+  // A source directory must be specified and must exist\par
+  var f;\par
+  if (pnl.source.text) \{\par
+    f = new Folder(pnl.source.text);\par
+  \}\par
+  if (!f || !f.exists) \{\par
+      return self.errorPrompt("Source folder not found");\par
+  \}\par
+  opts.source = f.fsName;\par
+\par
+  //... outf code clipped\par
+\};\par
+\par
+process - The third method that we need to implement is 'process'. process methods can take two parameters, the required opts parameter containing the Options object created in our validate method and an optional doc parameter for the document we are going to process.\par
+\par
+In our example, we just want to pop up an alert as our processing.\par
+\par
+SampleUI.prototype.process = function(opts) \{\par
+  alert("In Sample.process:" + opts.toSource()); // all we do is alert\par
+\};\par
+\par
+After everything is in place, we run the script with these two lines:\par
+  var ui = new SampleUI();\par
+  ui.exec();\par
+\par
+Running Headless\par
+You have the option of running you script headless,that is, without a UI. This is useful primarily in two situations. First, if you already have an INI file and just want to run off the values in that file. This can happen when you are developing or testing the script. \par
+  var ui = new SampleUI();\par
+  ui.exec(\{ noUI: true \});\par
+\par
+The second situation where you might want to run without a UI is if you have constructed the Options object programmatically.\par
+\par
+  var opts = new SampleOptions();\par
+  opts.source = File("~").fsName;\par
+  opts.outf  = Folder.temp;\par
+  opts.noUI = true;\par
+\par
+  var ui = new SampleUI();\par
+  ui.exec(opts);\par
+\par
+Advanced Usage\par
+Options\par
+    [insert color object property in here]\par
+}
+ 

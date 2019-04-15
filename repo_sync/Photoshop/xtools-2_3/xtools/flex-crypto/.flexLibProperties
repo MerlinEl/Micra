@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<flexLibProperties version="1">
+<includeClasses>
+<classEntry path="net.xtools.RSA"/>
+<classEntry path="net.xtools.RSAKeygen"/>
+</includeClasses>
+<includeResources/>
+<namespaceManifests/>
+</flexLibProperties>

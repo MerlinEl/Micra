@@ -1,0 +1,255 @@
+README for xtools/xapps
+$Id: README,v 1.6 2007/07/30 16:08:09 anonymous Exp $
+
+This directory contains application scripts. These scripts may be run directly
+from the File->Scripts menu. As a part of the installation process, an
+ActionSet called XToolkit is loaded into Photoshop containing an Actions that
+invoke these scripts. 
+
+These scripts are divided into three categories: Tookit Scripts and Sample
+Scripts.
+
+=============================== Toolkit Scripts ==============================
+
+The scripts in this section are useful for the intenedd audience of this
+tookit: other Photoshop Javasript authors.
+
+jsh.js - CS,CS2,CS3
+        This is my most indispenible tool. It is an interactive command line
+        shell (sort of) for executing javascript code within Photoshop. I use
+        whenever I am writing new code.
+
+ActionDescriptorToXML.jsx - CS2,CS3
+        Save a descriptor to a file like this:
+                Stdlib.writeToFile("/c/temp/desc.bin",
+                                   desc.toStream(),
+                                   'BINARY');
+        and you can run this script to display the desc.bin file as XML.
+
+ActionEvalDemo.js - CS2,CS3
+        This script uses JavaScript to evaluate the steps in an Action instead
+        of using Application.doAction.
+
+ActionFileToXML.js - CS2,CS3
+ActionFileFromXML.js - CS2,CS3
+        The two scripts convert Action (.atn) Files to and from XML. This
+        capability makes it possible to edit actions as:
+                - ActionDescriptor constructs
+                - XML DOM objects
+                - strings
+        ActionFileFromXML has sample code in it (in comments) that shows how
+        to change the paths of all scripts in an action file to a new
+        directory.
+
+ActionToJavascript.jsx - CS2,CS3
+        This script translates an Action file to a Javascript file with
+        contains a JS function per Action. Additional code in this file
+        shows how to convert a single action as well. Given the rest of the
+        facilities availble, translating from XML to javascript would be
+        an easy extension to make.
+
+ActionLister.js - PS7,CS,CS2,CS3
+        This script reads the runtime ActionsPalette for a list of all
+        ActionSets and Actions. The class definitions that this information
+        is put into is copied from xlib/Action.js. The Action Sets and Actions
+        are listed in a window.
+
+ActionSetRunner.js - PS7,CS,CS2,CS3
+        ActionStepper runs all of the Actions in an ActionSet on the current
+        document. After an action is run, the new image is saved and the
+        document is reverted to is prior state before running the next action.
+        This is useful for things ActionSets like Image Effects or Frames.
+        If action's in the set require having a selection prior to running the
+        action, you should probably move them to a different action set and run
+        those with an active selection.
+
+ActionsPaletteToFiles.jsx - CS2,CS3
+        Saves the current Actions Palette out as a set of Action files.
+
+AddWatermark - PS7,CS,CS2,CS3
+
+AdjustLevels - PS7,CS,CS2,CS3
+AdjustRGBLevels - PS7,CS,CS2,CS3
+
+BackupActions.js - CS2,CS3
+        After bashing my ActionsPalette a couple of times while developing
+        some Action management routines, I wrote this script that makes
+        backing up my ActionsPalette a simple mouse click. With my luck, I
+        should probably hotkey the Action that calls this script as well.
+
+ChangeScriptPaths.jsx - CS2,CS3
+        This script will convert all all script paths in an Action File to
+        a new path. This lets you move all your scripts to a new directory
+        then change the Action File with this script so that everywhere they
+        are called gets changed to this directory.
+
+Cnvt.js - PS7,CS,CS2,CS3
+
+ColorBookDemo - CS,CS2,CS3
+
+ColorChooserIcon - CS2,CS3
+
+DropletDecompiler.js - CS2,CS3
+        Ever compile a droplet and then 'lose' the Action you used to generate
+        it? I have, more than once. It suX0Rs. So I wrote this. It can recover
+        that Action from the droplet. It worked for the one testcase I tried,
+        so I'm not making any promises...
+
+Flatten.js - PS7,CS,CS2,CS3
+        This script is great as part of packaging scripts for deployment. This
+        will flatten the include file hierarchy of an application script so
+        that you end up with one huge file, instead of several smaller ones.
+
+FontLister.js - CS,CS2,CS3
+        All of the information about fonts that can be determined from the
+        Javascript side is accessed here. For each font, the lister returns
+        the font's name, postscript name, family, and style. The 'main'
+        routine calls the functions to retrieve all of this information, then
+        writes it out in CSV format to a window.
+
+GetterDemo - CS2,CS3
+
+InsertImage - CS2,CS3
+
+Install - CS,CS2,CS3
+        This is the installation script for XToolkit. It's not all that complex
+        except for the part where a new .atn file is created by modifying an
+        existing one.
+
+LastLogEntry - PS7,CS,CS2,CS3
+
+LogWindowDemo - CS,CS2,CS3
+
+Normalize - PS7,CS,CS2,CS3
+
+PackScript.jsx - CS,CS2,CS3
+
+PresetLister.js - PS7,CS,CS2,CS3
+        This is another Lister script that lists out all of the currently
+        loaded brushes, colors, gradients, styles, patterns, shaping curves,
+        custom shapes, and tool presets. The 'main' function writes this info
+        out to a text file. Scripts developed by other people could probably
+        find something more useful to do with this information.
+
+RefreshCS3Presets.js - CS3
+
+RemoveAlphaChannels.js - PS7,CS,CS2,CS3
+
+Resize.js - PS7,CS,CS2,CS3
+
+SampleUI.js - CS,CS2,CS3
+
+SaveActionSets.jsx - CS2,CS3
+
+SLCFix.js - PS7,CS,CS2
+        ScriptingListener code is mostly functional and complete unsightly.
+        Running this converts all of that stuff into something far more
+        readable and reusable.
+
+UpdateMetadata.js - PS7,CS,CS2,CS3
+
+xbatch.jsx - CS,CS2,CS3
+
+xscan.jsx - CS3
+
+================================= Demo Scripts ===============================
+
+These scripts show how different parts of the toolkit can be used. Most of the
+scripts here were written to support my workflow. Some are 'old' and may be a
+bit rusty in places. They are provided here as examples, not finished products.
+
+Compatibility Issues:
+The Photoshop version these scripts work with follow their name. Some of these,
+particularly the Action focused scripts, don't work because of a missing API or
+interpreter problems. These I may be able to fix. Other scripts, like LogWindow
+and jsh will never work in PS7 because the UI components just don't exist
+in that version. Othere scripts, such as Cnvt and Resize by default use a
+plugin that I have on my machine, the IM StairStep Resize plugin. The don't
+require. You can go in and change the options to make it use some other
+resizing technique. I just happen to like this plugin a lot so I default to it.
+Most of these scripts will let you know if it they don't work in your version
+of Photoshop or if you don't have a plugin, shape, or style that is expected.
+
+ActionRunnerDemo.js - CS,CS2
+        This demo script shows how to use the ActionRunner class. ActionRunner
+        loads an Action from either an XML or Action file and runs it from the
+        JS interpreter. This is good for several reasons:
+        1) You can have a script run an action that calls a script. Finally.
+        2) You can run actions that have not been loaded into the runtime
+           Actions Palette.
+        3) There is a neat little extension for 'Stop' Action Items. If the
+           message in the Stop item begins with '//!JSXScript' it marks the
+           message as a Scriptlet, and interprets it has Javascript. This will
+           featur will be documented in more detail later.
+
+ColorBookDemo.js - CS,CS2
+        A ColorBook, in PS-speak, is a stored color palette. This script reads
+        all of the color books from 'Presets/Color Books' and writes what
+        information it can out to a text file.
+
+GetterDemo.jsx - CS2
+        This script accesses just everything that can be reached from the
+        Javascript API. This includes:
+                - Application Info
+                    (Preferences, PresetManager Info, Fonts, etc...)
+                for each open document
+                  - Document Info
+                  - Background Info
+                  - Layer Info
+                  - Channel Info
+                  - Path Info
+                  - History Info
+
+        If you can get information you want from the Javascript API, take a
+        look at the output of this script. This has everything you can get to,
+        although you do have to go through the ActionDescriptor API to get at
+        it.
+
+LogWindowDemo.js - CS,C2S
+        The first piece of PSJS-UI code that I wrote was this class. I like to
+        log stuff to screen or file or whatever when I'm debugging. This works
+        pretty well for that. I've reused it a lot.
+
+============================= Application Scripts ============================
+
+There rest of these scripts were written to support my specific needs. A lot of
+my work last year was in attempting to make older digitial camera images (from
+1996 on) more presentable as well as cataloging, updating metatdata, etc...
+While it is unlikely that any of these scripts will be directly useful to
+anybody, the may help to illustrate how different parts of the toolkit and
+the Photoshop Javascript API can be utilized.
+
+AddWatermark.js - PS7,CS,CS2
+        This script is a descendent of the first non-trivial script I wrote in
+        Photoshop. There is no user interface to speak of. It's all configured
+        by code. There is support for saved options, but I don't know if that
+        still works. Looks for a shape called 'Watermark Shape' and a style
+        called 'Watermark style'.
+
+AdjustLevels.js - PS7,CS,CS2
+AdjustRGBLevels.js - PS7,CS,CS2
+        These are some alternatives to the Auto Levels facilities in PS. The
+        major innovation here is that you can specify how much to clip in the
+        shadows and in the highlights, kinda what you would normally do with
+        the sliders in the Levels dialog. These alternatives don't do quite the
+        'adjustment' to your colors that the normal Auto Levels sometimes does.
+
+Cnvt.js - CS,CS2
+        This is an export-style script. After I've completed tweaking a set of
+        images, I run this script to add a watermark and then save out to some
+        set of image types and sizes. Uses the IM StairStep plugin, by default.
+
+Normalilze.js - CS,CS2
+        This script imports images and 'normalizes' them so that they have
+        consistent metatdata, color profile, bit depth, size, etc... A noise
+        reduction action may also be run as a part of the normalization
+        process. Uses the IM StairStep plugin, by default.
+
+Resize.js - PS7,CS,CS2
+        A simple example of calling code in xlib/ResizeImage.js. Uses the
+        IM StairStep plugin, by default.
+
+UpdateMetadata.js - PS7,CS,CS2
+        A basic script for updating metadata.
+
+EOF

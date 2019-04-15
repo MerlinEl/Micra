@@ -1,0 +1,26 @@
+The FTBatch.jsx script provides a rudimentary facility for breaking up
+a large processing job in to smaller components. For instance, if you have to
+process 1000 images but PS fails with an out-of-memory problem after 150
+images, you can use this script to process 100 images, restart PS, process the
+next 100 images, etc... until you're finished. Restarting PS will usually
+help you avoid memory-related problems.
+
+FTScript.jsx is a low-level interface. It needs to be laoded at startup by
+Bridge and Photoshop. 
+Copy that FTScript.jsx to one of the following folders:
+   On WinXP CS2
+      %CommonProgramFiles%\Adobe\StartupScripts
+   On WinXP CS3
+      %CommonProgramFiles%\Adobe\Startup Scripts CS3\Adobe Photoshop
+   On OSX CS2
+      /Library/Application Support/Adobe/StartupScripts
+   On OSX CS3
+      /Library/Application Support/Adobe/StartupScripts CS3/Adobe Photoshop
+
+FTScript maintains configuration information in the file ~/ftscript.ini.
+
+FTBatch.jsx is a higher-level interface. It is suitable for use when you
+are simply processing a list of files. This script maintains the list of
+files in the file ~/ftbatch.cfg.
+
+FTBatchTest.jsx is a demo script that uses the FTBatch interface.

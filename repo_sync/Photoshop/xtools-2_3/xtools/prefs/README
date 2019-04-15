@@ -1,0 +1,5 @@
+README for xtools/prefs
+$Id: README,v 1.1 2005/11/07 16:52:13 anonymous Exp $
+
+This folder will be the location where preferences are stored for
+various scripts in XToolkit.

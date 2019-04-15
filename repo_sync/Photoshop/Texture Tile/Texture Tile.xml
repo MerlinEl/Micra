@@ -1,0 +1,260 @@
+<ActionFile key="Texture%20Tile.atn" file="/d/ReneBaca/3DsMax/Micra/repo_sync/Photoshop/Texture%20Tile/Texture%20Tile.atn">
+  <ActionSet version="16" name="Texture Tile" expanded="true" count="4">
+    <Action key="1" name="Define_Pattern" colorIndex="1" expanded="false" count="1">
+      <ActionItem key="TEXT" expanded="false" enabled="true" withDialog="false" dialogOptions="0" identifier="TEXT" event="make" name="Make" hasDescriptor="true">
+        <ActionDescriptor key="make" count="3">
+          <DescValueType.REFERENCETYPE key="1853189228" id="1853189228" symname="Null" sym="null">
+            <ActionReference key="1853189228" id="1853189228" symname="Null" sym="null" count="1">
+              <ReferenceFormType.CLASSTYPE key="1349808750" id="1349808750" symname="Pattern" sym="Ptrn" classString="Pattern" class="Ptrn"/>
+            </ActionReference>
+          </DescValueType.REFERENCETYPE>
+          <DescValueType.REFERENCETYPE key="1433628263" id="1433628263" symname="Using" sym="Usng">
+            <ActionReference key="1433628263" id="1433628263" symname="Using" sym="Usng" count="2">
+              <ReferenceFormType.PROPERTY key="1349677170" id="1349677170" symname="Property" sym="Prpr" desiredClassString="Property" desiredClass="Prpr" property="1718838636" propertyName="selection" propertySym="selection"/>
+              <ReferenceFormType.ENUMERATED key="1147366766" id="1147366766" symname="Document" sym="Dcmn" desiredClassString="Document" desiredClass="Dcmn" enumeratedTypeString="Ordinal" enumeratedType="Ordn" enumeratedValueString="Target" enumeratedValue="Trgt"/>
+            </ActionReference>
+          </DescValueType.REFERENCETYPE>
+          <DescValueType.STRINGTYPE key="1315774496" id="1315774496" symname="Name" sym="Nm  " string="TILE_PATTERN_TEXTURE"/>
+        </ActionDescriptor>
+      </ActionItem>
+    </Action>
+    <Action key="2" name="Preview_Tile" colorIndex="4" expanded="false" count="3">
+      <ActionItem key="TEXT" expanded="false" enabled="true" withDialog="false" dialogOptions="0" identifier="TEXT" event="make" name="Make" hasDescriptor="true">
+        <ActionDescriptor key="make" count="2">
+          <DescValueType.OBJECTTYPE key="1316429856" id="1316429856" symname="New" sym="Nw  " objectTypeString="Document" objectType="Dcmn" count="10">
+            <ActionDescriptor key="1316429856" id="1316429856" symname="New" sym="Nw  " count="10">
+              <DescValueType.BOOLEANTYPE key="373" id="373" symname="artboard" sym="artboard" boolean="false"/>
+              <DescValueType.CLASSTYPE key="1298407456" id="1298407456" symname="Mode" sym="Md  " classString="RGBColorMode" class="RGBM"/>
+              <DescValueType.UNITDOUBLE key="1466201192" id="1466201192" symname="Width" sym="Wdth" unitDoubleTypeString="Distance" unitDoubleType="#Rlt" unitDoubleValue="2048"/>
+              <DescValueType.UNITDOUBLE key="1214736500" id="1214736500" symname="Height" sym="Hght" unitDoubleTypeString="Distance" unitDoubleType="#Rlt" unitDoubleValue="2048"/>
+              <DescValueType.UNITDOUBLE key="1383296116" id="1383296116" symname="Resolution" sym="Rslt" unitDoubleTypeString="Density" unitDoubleType="#Rsl" unitDoubleValue="72"/>
+              <DescValueType.DOUBLETYPE key="1297" id="1297" symname="pixelScaleFactor" sym="pixelScaleFactor" double="1"/>
+              <DescValueType.ENUMERATEDTYPE key="1181491232" id="1181491232" symname="Fill" sym="Fl  " enumeratedTypeString="Fill" enumeratedType="Fl  " enumeratedValueString="White" enumeratedValue="Wht "/>
+              <DescValueType.INTEGERTYPE key="1148220520" id="1148220520" symname="Depth" sym="Dpth" integer="8"/>
+              <DescValueType.STRINGTYPE key="434" id="434" symname="profile" sym="profile" string="sRGB IEC61966-2.1"/>
+              <DescValueType.LISTTYPE key="1197761907" id="1197761907" symname="Guides" sym="Gdes">
+                <ActionList key="1197761907" id="1197761907" symname="Guides" sym="Gdes" count="0"/>
+              </DescValueType.LISTTYPE>
+            </ActionDescriptor>
+          </DescValueType.OBJECTTYPE>
+          <DescValueType.INTEGERTYPE key="1148150601" id="1148150601" symname="DocumentID" sym="DocI" integer="217"/>
+        </ActionDescriptor>
+      </ActionItem>
+      <ActionItem key="TEXT" expanded="false" enabled="true" withDialog="false" dialogOptions="0" identifier="TEXT" event="set" name="Set" hasDescriptor="true">
+        <ActionDescriptor key="set" count="3">
+          <DescValueType.REFERENCETYPE key="1853189228" id="1853189228" symname="Null" sym="null">
+            <ActionReference key="1853189228" id="1853189228" symname="Null" sym="null" count="1">
+              <ReferenceFormType.PROPERTY key="1283027488" id="1283027488" symname="Layer" sym="Lyr " desiredClassString="Layer" desiredClass="Lyr " property="1113811815" propertyName="Background" propertySym="Bckg"/>
+            </ActionReference>
+          </DescValueType.REFERENCETYPE>
+          <DescValueType.OBJECTTYPE key="1411391520" id="1411391520" symname="To" sym="T   " objectTypeString="Layer" objectType="Lyr " count="2">
+            <ActionDescriptor key="1411391520" id="1411391520" symname="To" sym="T   " count="2">
+              <DescValueType.UNITDOUBLE key="1332765556" id="1332765556" symname="Opacity" sym="Opct" unitDoubleTypeString="Percent" unitDoubleType="#Prc" unitDoubleValue="100"/>
+              <DescValueType.ENUMERATEDTYPE key="1298407456" id="1298407456" symname="Mode" sym="Md  " enumeratedTypeString="BlendMode" enumeratedType="BlnM" enumeratedValueString="Normal" enumeratedValue="Nrml"/>
+            </ActionDescriptor>
+          </DescValueType.OBJECTTYPE>
+          <DescValueType.INTEGERTYPE key="1283027529" id="1283027529" symname="LayerID" sym="LyrI" integer="2"/>
+        </ActionDescriptor>
+      </ActionItem>
+      <ActionItem key="TEXT" expanded="false" enabled="true" withDialog="false" dialogOptions="0" identifier="TEXT" event="set" name="Set" hasDescriptor="true">
+        <ActionDescriptor key="set" count="2">
+          <DescValueType.REFERENCETYPE key="1853189228" id="1853189228" symname="Null" sym="null">
+            <ActionReference key="1853189228" id="1853189228" symname="Null" sym="null" count="2">
+              <ReferenceFormType.PROPERTY key="1349677170" id="1349677170" symname="Property" sym="Prpr" desiredClassString="Property" desiredClass="Prpr" property="1281713784" propertyName="LayerEffects" propertySym="Lefx"/>
+              <ReferenceFormType.ENUMERATED key="1283027488" id="1283027488" symname="Layer" sym="Lyr " desiredClassString="Layer" desiredClass="Lyr " enumeratedTypeString="Ordinal" enumeratedType="Ordn" enumeratedValueString="Target" enumeratedValue="Trgt"/>
+            </ActionReference>
+          </DescValueType.REFERENCETYPE>
+          <DescValueType.OBJECTTYPE key="1411391520" id="1411391520" symname="To" sym="T   " objectTypeString="LayerEffects" objectType="Lefx" count="2">
+            <ActionDescriptor key="1411391520" id="1411391520" symname="To" sym="T   " count="2">
+              <DescValueType.UNITDOUBLE key="1399024672" id="1399024672" symname="Scale" sym="Scl " unitDoubleTypeString="Percent" unitDoubleType="#Prc" unitDoubleValue="100"/>
+              <DescValueType.OBJECTTYPE key="1563" id="1563" symname="patternFill" sym="patternFill" objectTypeString="patternFill" objectType="patternFill" count="9">
+                <ActionDescriptor key="1563" id="1563" symname="patternFill" sym="patternFill" count="9">
+                  <DescValueType.BOOLEANTYPE key="1701732706" id="1701732706" symname="Enabled" sym="enab" boolean="true"/>
+                  <DescValueType.BOOLEANTYPE key="2677" id="2677" symname="present" sym="present" boolean="true"/>
+                  <DescValueType.BOOLEANTYPE key="2678" id="2678" symname="showInDialog" sym="showInDialog" boolean="true"/>
+                  <DescValueType.ENUMERATEDTYPE key="1298407456" id="1298407456" symname="Mode" sym="Md  " enumeratedTypeString="BlendMode" enumeratedType="BlnM" enumeratedValueString="Normal" enumeratedValue="Nrml"/>
+                  <DescValueType.UNITDOUBLE key="1332765556" id="1332765556" symname="Opacity" sym="Opct" unitDoubleTypeString="Percent" unitDoubleType="#Prc" unitDoubleValue="100"/>
+                  <DescValueType.OBJECTTYPE key="1349808750" id="1349808750" symname="Pattern" sym="Ptrn" objectTypeString="Pattern" objectType="Ptrn" count="2">
+                    <ActionDescriptor key="1349808750" id="1349808750" symname="Pattern" sym="Ptrn" count="2">
+                      <DescValueType.STRINGTYPE key="1315774496" id="1315774496" symname="Name" sym="Nm  " string="TILE_PATTERN_TEXTURE"/>
+                      <DescValueType.STRINGTYPE key="1231318644" id="1231318644" symname="Identifier" sym="Idnt" string="0015f8ad-2b72-eb42-8ef8-fc232a98a33b"/>
+                    </ActionDescriptor>
+                  </DescValueType.OBJECTTYPE>
+                  <DescValueType.UNITDOUBLE key="1399024672" id="1399024672" symname="Scale" sym="Scl " unitDoubleTypeString="Percent" unitDoubleType="#Prc" unitDoubleValue="100"/>
+                  <DescValueType.BOOLEANTYPE key="1097623406" id="1097623406" symname="Align" sym="Algn" boolean="true"/>
+                  <DescValueType.OBJECTTYPE key="1497" id="1497" symname="phase" sym="phase" objectTypeString="Point" objectType="Pnt " count="2">
+                    <ActionDescriptor key="1497" id="1497" symname="phase" sym="phase" count="2">
+                      <DescValueType.DOUBLETYPE key="1215461998" id="1215461998" symname="Horizontal" sym="Hrzn" double="0"/>
+                      <DescValueType.DOUBLETYPE key="1450341475" id="1450341475" symname="Vertical" sym="Vrtc" double="0"/>
+                    </ActionDescriptor>
+                  </DescValueType.OBJECTTYPE>
+                </ActionDescriptor>
+              </DescValueType.OBJECTTYPE>
+            </ActionDescriptor>
+          </DescValueType.OBJECTTYPE>
+        </ActionDescriptor>
+      </ActionItem>
+    </Action>
+    <Action key="3" name="Update_Tile" colorIndex="2" expanded="false" count="4">
+      <ActionItem key="TEXT" expanded="false" enabled="true" withDialog="false" dialogOptions="0" identifier="TEXT" event="make" name="Make" hasDescriptor="true">
+        <ActionDescriptor key="make" count="3">
+          <DescValueType.REFERENCETYPE key="1853189228" id="1853189228" symname="Null" sym="null">
+            <ActionReference key="1853189228" id="1853189228" symname="Null" sym="null" count="1">
+              <ReferenceFormType.CLASSTYPE key="1349808750" id="1349808750" symname="Pattern" sym="Ptrn" classString="Pattern" class="Ptrn"/>
+            </ActionReference>
+          </DescValueType.REFERENCETYPE>
+          <DescValueType.REFERENCETYPE key="1433628263" id="1433628263" symname="Using" sym="Usng">
+            <ActionReference key="1433628263" id="1433628263" symname="Using" sym="Usng" count="2">
+              <ReferenceFormType.PROPERTY key="1349677170" id="1349677170" symname="Property" sym="Prpr" desiredClassString="Property" desiredClass="Prpr" property="1718838636" propertyName="selection" propertySym="selection"/>
+              <ReferenceFormType.ENUMERATED key="1147366766" id="1147366766" symname="Document" sym="Dcmn" desiredClassString="Document" desiredClass="Dcmn" enumeratedTypeString="Ordinal" enumeratedType="Ordn" enumeratedValueString="Target" enumeratedValue="Trgt"/>
+            </ActionReference>
+          </DescValueType.REFERENCETYPE>
+          <DescValueType.STRINGTYPE key="1315774496" id="1315774496" symname="Name" sym="Nm  " string="TILE_PATTERN_TEXTURE"/>
+        </ActionDescriptor>
+      </ActionItem>
+      <ActionItem key="TEXT" expanded="false" enabled="true" withDialog="false" dialogOptions="2" identifier="TEXT" event="select" name="Select" hasDescriptor="true">
+        <ActionDescriptor key="select" count="2">
+          <DescValueType.REFERENCETYPE key="1853189228" id="1853189228" symname="Null" sym="null">
+            <ActionReference key="1853189228" id="1853189228" symname="Null" sym="null" count="1">
+              <ReferenceFormType.OFFSET key="1147366766" id="1147366766" symname="Document" sym="Dcmn" desiredClassString="Document" desiredClass="Dcmn" offset="1"/>
+            </ActionReference>
+          </DescValueType.REFERENCETYPE>
+          <DescValueType.INTEGERTYPE key="1148150601" id="1148150601" symname="DocumentID" sym="DocI" integer="217"/>
+        </ActionDescriptor>
+      </ActionItem>
+      <ActionItem key="TEXT" expanded="false" enabled="true" withDialog="false" dialogOptions="0" identifier="TEXT" event="set" name="Set" hasDescriptor="true">
+        <ActionDescriptor key="set" count="2">
+          <DescValueType.REFERENCETYPE key="1853189228" id="1853189228" symname="Null" sym="null">
+            <ActionReference key="1853189228" id="1853189228" symname="Null" sym="null" count="2">
+              <ReferenceFormType.PROPERTY key="1349677170" id="1349677170" symname="Property" sym="Prpr" desiredClassString="Property" desiredClass="Prpr" property="1281713784" propertyName="LayerEffects" propertySym="Lefx"/>
+              <ReferenceFormType.ENUMERATED key="1283027488" id="1283027488" symname="Layer" sym="Lyr " desiredClassString="Layer" desiredClass="Lyr " enumeratedTypeString="Ordinal" enumeratedType="Ordn" enumeratedValueString="Target" enumeratedValue="Trgt"/>
+            </ActionReference>
+          </DescValueType.REFERENCETYPE>
+          <DescValueType.OBJECTTYPE key="1411391520" id="1411391520" symname="To" sym="T   " objectTypeString="LayerEffects" objectType="Lefx" count="2">
+            <ActionDescriptor key="1411391520" id="1411391520" symname="To" sym="T   " count="2">
+              <DescValueType.UNITDOUBLE key="1399024672" id="1399024672" symname="Scale" sym="Scl " unitDoubleTypeString="Percent" unitDoubleType="#Prc" unitDoubleValue="100"/>
+              <DescValueType.OBJECTTYPE key="1563" id="1563" symname="patternFill" sym="patternFill" objectTypeString="patternFill" objectType="patternFill" count="9">
+                <ActionDescriptor key="1563" id="1563" symname="patternFill" sym="patternFill" count="9">
+                  <DescValueType.BOOLEANTYPE key="1701732706" id="1701732706" symname="Enabled" sym="enab" boolean="true"/>
+                  <DescValueType.BOOLEANTYPE key="2677" id="2677" symname="present" sym="present" boolean="true"/>
+                  <DescValueType.BOOLEANTYPE key="2678" id="2678" symname="showInDialog" sym="showInDialog" boolean="true"/>
+                  <DescValueType.ENUMERATEDTYPE key="1298407456" id="1298407456" symname="Mode" sym="Md  " enumeratedTypeString="BlendMode" enumeratedType="BlnM" enumeratedValueString="Normal" enumeratedValue="Nrml"/>
+                  <DescValueType.UNITDOUBLE key="1332765556" id="1332765556" symname="Opacity" sym="Opct" unitDoubleTypeString="Percent" unitDoubleType="#Prc" unitDoubleValue="100"/>
+                  <DescValueType.OBJECTTYPE key="1349808750" id="1349808750" symname="Pattern" sym="Ptrn" objectTypeString="Pattern" objectType="Ptrn" count="2">
+                    <ActionDescriptor key="1349808750" id="1349808750" symname="Pattern" sym="Ptrn" count="2">
+                      <DescValueType.STRINGTYPE key="1315774496" id="1315774496" symname="Name" sym="Nm  " string="TILE_PATTERN_TEXTURE"/>
+                      <DescValueType.STRINGTYPE key="1231318644" id="1231318644" symname="Identifier" sym="Idnt" string="d1768e52-b71c-154b-9d7b-e642a73c625a"/>
+                    </ActionDescriptor>
+                  </DescValueType.OBJECTTYPE>
+                  <DescValueType.UNITDOUBLE key="1399024672" id="1399024672" symname="Scale" sym="Scl " unitDoubleTypeString="Percent" unitDoubleType="#Prc" unitDoubleValue="100"/>
+                  <DescValueType.BOOLEANTYPE key="1097623406" id="1097623406" symname="Align" sym="Algn" boolean="true"/>
+                  <DescValueType.OBJECTTYPE key="1497" id="1497" symname="phase" sym="phase" objectTypeString="Point" objectType="Pnt " count="2">
+                    <ActionDescriptor key="1497" id="1497" symname="phase" sym="phase" count="2">
+                      <DescValueType.DOUBLETYPE key="1215461998" id="1215461998" symname="Horizontal" sym="Hrzn" double="0"/>
+                      <DescValueType.DOUBLETYPE key="1450341475" id="1450341475" symname="Vertical" sym="Vrtc" double="0"/>
+                    </ActionDescriptor>
+                  </DescValueType.OBJECTTYPE>
+                </ActionDescriptor>
+              </DescValueType.OBJECTTYPE>
+            </ActionDescriptor>
+          </DescValueType.OBJECTTYPE>
+        </ActionDescriptor>
+      </ActionItem>
+      <ActionItem key="TEXT" expanded="false" enabled="true" withDialog="false" dialogOptions="2" identifier="TEXT" event="select" name="Select" hasDescriptor="true">
+        <ActionDescriptor key="select" count="2">
+          <DescValueType.REFERENCETYPE key="1853189228" id="1853189228" symname="Null" sym="null">
+            <ActionReference key="1853189228" id="1853189228" symname="Null" sym="null" count="1">
+              <ReferenceFormType.OFFSET key="1147366766" id="1147366766" symname="Document" sym="Dcmn" desiredClassString="Document" desiredClass="Dcmn" offset="-1"/>
+            </ActionReference>
+          </DescValueType.REFERENCETYPE>
+          <DescValueType.INTEGERTYPE key="1148150601" id="1148150601" symname="DocumentID" sym="DocI" integer="202"/>
+        </ActionDescriptor>
+      </ActionItem>
+    </Action>
+    <Action key="4" name="Update" colorIndex="2" expanded="false" count="5">
+      <ActionItem key="TEXT" expanded="true" enabled="true" withDialog="false" dialogOptions="0" identifier="TEXT" event="make" name="Make" hasDescriptor="true">
+        <ActionDescriptor key="make" count="3">
+          <DescValueType.REFERENCETYPE key="1853189228" id="1853189228" symname="Null" sym="null">
+            <ActionReference key="1853189228" id="1853189228" symname="Null" sym="null" count="1">
+              <ReferenceFormType.CLASSTYPE key="1349808750" id="1349808750" symname="Pattern" sym="Ptrn" classString="Pattern" class="Ptrn"/>
+            </ActionReference>
+          </DescValueType.REFERENCETYPE>
+          <DescValueType.REFERENCETYPE key="1433628263" id="1433628263" symname="Using" sym="Usng">
+            <ActionReference key="1433628263" id="1433628263" symname="Using" sym="Usng" count="2">
+              <ReferenceFormType.PROPERTY key="1349677170" id="1349677170" symname="Property" sym="Prpr" desiredClassString="Property" desiredClass="Prpr" property="1718838636" propertyName="selection" propertySym="selection"/>
+              <ReferenceFormType.ENUMERATED key="1147366766" id="1147366766" symname="Document" sym="Dcmn" desiredClassString="Document" desiredClass="Dcmn" enumeratedTypeString="Ordinal" enumeratedType="Ordn" enumeratedValueString="Target" enumeratedValue="Trgt"/>
+            </ActionReference>
+          </DescValueType.REFERENCETYPE>
+          <DescValueType.STRINGTYPE key="1315774496" id="1315774496" symname="Name" sym="Nm  " string="TILE_PATTERN_TEXTURE"/>
+        </ActionDescriptor>
+      </ActionItem>
+      <ActionItem key="TEXT" expanded="false" enabled="true" withDialog="false" dialogOptions="2" identifier="TEXT" event="select" name="Select" hasDescriptor="true">
+        <ActionDescriptor key="select" count="2">
+          <DescValueType.REFERENCETYPE key="1853189228" id="1853189228" symname="Null" sym="null">
+            <ActionReference key="1853189228" id="1853189228" symname="Null" sym="null" count="1">
+              <ReferenceFormType.OFFSET key="1147366766" id="1147366766" symname="Document" sym="Dcmn" desiredClassString="Document" desiredClass="Dcmn" offset="1"/>
+            </ActionReference>
+          </DescValueType.REFERENCETYPE>
+          <DescValueType.INTEGERTYPE key="1148150601" id="1148150601" symname="DocumentID" sym="DocI" integer="217"/>
+        </ActionDescriptor>
+      </ActionItem>
+      <ActionItem key="TEXT" expanded="false" enabled="true" withDialog="false" dialogOptions="2" identifier="TEXT" event="delete" name="Delete" hasDescriptor="true">
+        <ActionDescriptor key="delete" count="1">
+          <DescValueType.REFERENCETYPE key="1853189228" id="1853189228" symname="Null" sym="null">
+            <ActionReference key="1853189228" id="1853189228" symname="Null" sym="null" count="1">
+              <ReferenceFormType.INDEX key="1349808750" id="1349808750" symname="Pattern" sym="Ptrn" desiredClassString="Pattern" desiredClass="Ptrn" index="29"/>
+            </ActionReference>
+          </DescValueType.REFERENCETYPE>
+        </ActionDescriptor>
+      </ActionItem>
+      <ActionItem key="TEXT" expanded="false" enabled="true" withDialog="false" dialogOptions="0" identifier="TEXT" event="set" name="Set" hasDescriptor="true">
+        <ActionDescriptor key="set" count="2">
+          <DescValueType.REFERENCETYPE key="1853189228" id="1853189228" symname="Null" sym="null">
+            <ActionReference key="1853189228" id="1853189228" symname="Null" sym="null" count="2">
+              <ReferenceFormType.PROPERTY key="1349677170" id="1349677170" symname="Property" sym="Prpr" desiredClassString="Property" desiredClass="Prpr" property="1281713784" propertyName="LayerEffects" propertySym="Lefx"/>
+              <ReferenceFormType.ENUMERATED key="1283027488" id="1283027488" symname="Layer" sym="Lyr " desiredClassString="Layer" desiredClass="Lyr " enumeratedTypeString="Ordinal" enumeratedType="Ordn" enumeratedValueString="Target" enumeratedValue="Trgt"/>
+            </ActionReference>
+          </DescValueType.REFERENCETYPE>
+          <DescValueType.OBJECTTYPE key="1411391520" id="1411391520" symname="To" sym="T   " objectTypeString="LayerEffects" objectType="Lefx" count="2">
+            <ActionDescriptor key="1411391520" id="1411391520" symname="To" sym="T   " count="2">
+              <DescValueType.UNITDOUBLE key="1399024672" id="1399024672" symname="Scale" sym="Scl " unitDoubleTypeString="Percent" unitDoubleType="#Prc" unitDoubleValue="100"/>
+              <DescValueType.OBJECTTYPE key="1563" id="1563" symname="patternFill" sym="patternFill" objectTypeString="patternFill" objectType="patternFill" count="9">
+                <ActionDescriptor key="1563" id="1563" symname="patternFill" sym="patternFill" count="9">
+                  <DescValueType.BOOLEANTYPE key="1701732706" id="1701732706" symname="Enabled" sym="enab" boolean="true"/>
+                  <DescValueType.BOOLEANTYPE key="2677" id="2677" symname="present" sym="present" boolean="true"/>
+                  <DescValueType.BOOLEANTYPE key="2678" id="2678" symname="showInDialog" sym="showInDialog" boolean="true"/>
+                  <DescValueType.ENUMERATEDTYPE key="1298407456" id="1298407456" symname="Mode" sym="Md  " enumeratedTypeString="BlendMode" enumeratedType="BlnM" enumeratedValueString="Normal" enumeratedValue="Nrml"/>
+                  <DescValueType.UNITDOUBLE key="1332765556" id="1332765556" symname="Opacity" sym="Opct" unitDoubleTypeString="Percent" unitDoubleType="#Prc" unitDoubleValue="100"/>
+                  <DescValueType.OBJECTTYPE key="1349808750" id="1349808750" symname="Pattern" sym="Ptrn" objectTypeString="Pattern" objectType="Ptrn" count="2">
+                    <ActionDescriptor key="1349808750" id="1349808750" symname="Pattern" sym="Ptrn" count="2">
+                      <DescValueType.STRINGTYPE key="1315774496" id="1315774496" symname="Name" sym="Nm  " string="TILE_PATTERN_TEXTURE"/>
+                      <DescValueType.STRINGTYPE key="1231318644" id="1231318644" symname="Identifier" sym="Idnt" string="e0cf28b3-78a2-2842-a7d8-44bdea23402c"/>
+                    </ActionDescriptor>
+                  </DescValueType.OBJECTTYPE>
+                  <DescValueType.UNITDOUBLE key="1399024672" id="1399024672" symname="Scale" sym="Scl " unitDoubleTypeString="Percent" unitDoubleType="#Prc" unitDoubleValue="100"/>
+                  <DescValueType.BOOLEANTYPE key="1097623406" id="1097623406" symname="Align" sym="Algn" boolean="true"/>
+                  <DescValueType.OBJECTTYPE key="1497" id="1497" symname="phase" sym="phase" objectTypeString="Point" objectType="Pnt " count="2">
+                    <ActionDescriptor key="1497" id="1497" symname="phase" sym="phase" count="2">
+                      <DescValueType.DOUBLETYPE key="1215461998" id="1215461998" symname="Horizontal" sym="Hrzn" double="0"/>
+                      <DescValueType.DOUBLETYPE key="1450341475" id="1450341475" symname="Vertical" sym="Vrtc" double="0"/>
+                    </ActionDescriptor>
+                  </DescValueType.OBJECTTYPE>
+                </ActionDescriptor>
+              </DescValueType.OBJECTTYPE>
+            </ActionDescriptor>
+          </DescValueType.OBJECTTYPE>
+        </ActionDescriptor>
+      </ActionItem>
+      <ActionItem key="TEXT" expanded="false" enabled="true" withDialog="false" dialogOptions="2" identifier="TEXT" event="select" name="Select" hasDescriptor="true">
+        <ActionDescriptor key="select" count="2">
+          <DescValueType.REFERENCETYPE key="1853189228" id="1853189228" symname="Null" sym="null">
+            <ActionReference key="1853189228" id="1853189228" symname="Null" sym="null" count="1">
+              <ReferenceFormType.OFFSET key="1147366766" id="1147366766" symname="Document" sym="Dcmn" desiredClassString="Document" desiredClass="Dcmn" offset="-1"/>
+            </ActionReference>
+          </DescValueType.REFERENCETYPE>
+          <DescValueType.INTEGERTYPE key="1148150601" id="1148150601" symname="DocumentID" sym="DocI" integer="202"/>
+        </ActionDescriptor>
+      </ActionItem>
+    </Action>
+  </ActionSet>
+</ActionFile>

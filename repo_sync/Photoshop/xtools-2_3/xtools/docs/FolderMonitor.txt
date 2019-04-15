@@ -1,0 +1,36 @@
+There are a couple of different ways to run this. The Advanced Mode is something I implemented for another project. I extended that framework by adding the Basic Mode for this project.
+
+Basic Mode:
+To set this up, copy the .ini file to your home directory and edit it:
+1) Specify the folder where the images will be:
+     hotFolder: c:\tmp\images
+2) Specify the action to execute on each image:
+   action: no-op
+   actionSet: Set2
+3) Specify the number of seconds to sleep between executions:
+   sleep: 5
+
+After these are set, you just run the script from PS. When the script is running, it updates hotfolder.log so you have a record of what's going on. In Basic Mode, the script creates a file in the hotFolder with a .lck extension. This is a lock file. The only way to stop the script when it is running in Basic Mode is to delete this file. If the script can't find this file the next time it executes, it will stop.
+
+
+Advanced Mode:
+You can also use the WinXP Task Scheduler to fire off the script. I attached a sample task definition.
+To do this go through these steps:
+1) Open up the WinXP Task Scheduler:
+ Start->All Programs->Accessories->System Tools->Scheduled Tasks
+2) Copy the attached HotFolder.job file to the list of scheduled tasks.
+3) Double click on the HotFolder task to edit its properties.
+3.1) Run:  Change the path to PS (if needed) and change the path to the HotFolder script.
+3.2) The Start in: setting doesn't matter, but you may want to set it to the hotfolder.
+3.3) Run as: Set this to your hostname and userid
+3.4) On the Schedule panel, set the Start time to some appropriate value
+3.5) On the Schedule panel, Press the Advanced button
+3.6) On the Schedule->Advanced panel Check 'Repeat task'  and set the interval and total duration
+       to appropriate values.
+4.0) Change the sleep setting in hotfolder.ini to 0. This will cause the script to execute only once which
+       is the right thing to do if this script is scheduled.
+
+I typically start and stop the scheduled task by enabling and disabling it in the Scheduled Task list.
+
+
+-X

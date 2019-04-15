@@ -1,0 +1,30 @@
+XTools Applications
+
+This document describes a set of application scripts developed using XTools.
+
+ActionFileFromXML
+This script creates an Action file (.atn) from an XML file.
+
+Usage:
+
+ActionFileToXML
+This script creates an XML file that represents the an Action file.
+
+Usage:
+
+ActionSetRunner
+
+Usage:
+
+ActionToJavascript
+
+Usage:
+
+ActionsPalleteToFiles
+
+Usage:
+
+DropletDecompiler
+
+Usage:
+

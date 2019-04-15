@@ -1,0 +1,84 @@
+$Id: INSTALLATION,v 1.7 2007/04/22 17:40:07 anonymous Exp $
+
+There are a couple different ways of installing XToolkit. You can:
+1) Unbundle the zip file and use it as is. All of the non-library scripts
+   can be found in single file versions in the xtools/apps directory. You
+   can execute them from there or copy them to your Presets/Scripts folder.
+   For the most part, it doesn't really matter. However, the XToolkit.atn
+   file will not be automatically created.
+
+2) Do a full install (instructions below). This will install the toolkit
+   parallel to your Photoshop application directory, modify the scripts in
+   xtools/xapps so that their 'includepath' directories point to the right
+   place, and generate and load a new XToolkit.atn file that is modified
+   to point to the directory where the toolkit has been installed. You should
+   only do this if you want the atn file or you want to do script development
+   with the toolkit.
+
+Installation Instructions for XToolkit
+
+1) Extract the zip file to wherever your want, like c:\temp or /tmp, for
+   instance. We'll call that directory EXDIR.
+
+2) From within Photoshop, execute the script EXDIR/xtools/xapps/Install.jsx.
+   This script will do the following:
+
+   2.1) Open a Folder selection dialog. Select the xtools directory
+      extracted in Step 1). This step will only occur if Install.jsx gets
+      confused about the location where you unzipped the package.
+
+   2.2) Install scripts and other files into the following directories:
+      On Windows XP APPDIR, is the folder where Photoshop was installed,
+         e.g. app.path.parent, c:\Program Files\Adobe
+      On MacOSX, APPDIR is /Developer
+      PSDIR (referenced later) is the Photoshop folder.
+
+      APPDIR/
+      APPDIR/xtools/xapps
+      APPDIR/xtools/xlib
+      APPDIR/xtools/xlib/xml
+      APPDIR/xtools/docs
+      APPDIR/xtools/etc
+
+      Note that the scripts are modified during the installation process so
+      that the '//@includepath' directives point to this directory tree.
+
+   2.3) Modify the Action file "xtools/etc/XToolkit-in.atn" to create
+      "xtools/etc/XToolkit.atn" so that the paths to the scripts invoked in
+      the actions point to the correct directory. This new Action file is then
+      loaded into the Actions Palette.
+
+      The actions in this file refer to the scripts in xtools/xapps. They
+      require the APPDIR/xtools folders to be in place in order to work.
+
+3) When the Install.jsx script completes (it should take about 10-15 seconds),
+   the Actions are ready to be invoked.
+
+4) To verify that the installation was successful:
+   a) Load a document.
+   b) Run the Action "jsh".
+   c) In the lower pane, type in 'listProps(doc)' (without the quotes,
+      naturally) and press the 'Eval' button.
+   d) You should see immediately see a list of the Document properties
+      for the current document.
+
+5) The files that were extracted to EXDIR can now be deleted.
+
+6) Single file, standalone versions of all of the scripts in
+   APPDIR/xtools/xapps can be found in APPDIR/xtools/apps.
+
+7) You may wish to copy some of the files from APPDIR/xtools/apps to your
+   PSDIR/Presets/Scripts directory if you want them to appear in your
+   File->Scripts menu.
+
+8) If you want to give one of the scripts to someone else, be sure that
+   you give them one from APPDIR/xtools/apps since that don't require
+   anything else from the toolkit.
+
+
+To Uninstall the toolkit:
+1) Delete the APPDIR/xtools directory tree.
+2) Remove any files that were manually copied to PSDIR/Presets/Scripts.
+3) Remove the XToolkit actions from the Actions Palette
+
+EOF

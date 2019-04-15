@@ -1,0 +1,475 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- saved from url=(0065)http://ps-scripts.sourceforge.net/xtools.html#Anchor-Toolki-19514 -->
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		
+		<meta name="generator" content="Adobe GoLive">
+		<title>xtools</title>
+	</head>
+
+	<body bgcolor="#e1e1e1">
+		<p><a name="Anchor-10724" id="Anchor-10724"></a><img src="./xtools_files/xtools.png" alt="" width="300" height="100" border="0"></p>
+		<p><em>xtools</em> is a JavaScript toolkit that
+		facilitates scripting Adobe&nbsp;Photoshop. Photoshop has
+		supported scripting since version 7.0 of the
+		product.&nbsp;Each new verion adds more and more
+		capabilities for scripters. However, not all of the
+		changes that have been made are backwards
+		compatible. Starting with PSCS, for instance,
+		scripters had the APIs needed to create graphical user
+		interfaces that weren't present in PS7.</p>
+		<p>Many of the <a href="http://ps-scripts.sourceforge.net/xtools.html#Anchor-Th-22764">scripts</a>
+		in xtools support PS7, though that number is
+		decreasing over time. It is possible, however, to
+		write reasonably sophisticated scripts that run
+		equally well on CS and later. Going forward, the focus
+		will be on support the current a previous version of
+		PS but there will not be any gratuitous backwards
+		incompatiblity.</p>
+		<p><font size="+2"><strong><em>xtools</em> is intended
+		for script writers.</strong>&nbsp;</font>While some of
+		these scripts may be useful to more typical Photoshop
+		users, that is not their intent. As such, the User
+		Interface and documentation is less polished than it
+		would be if it were intended for that broader
+		audience.</p>
+		<p>This document
+		contains <a href="http://ps-scripts.sourceforge.net/xtools.html#Anchor-Installatio-31946">installation
+		instructions</a> and descriptions
+		of <a href="http://ps-scripts.sourceforge.net/xtools.html#Anchor-Th-22764">executable
+		scripts</a>. PDF documentation
+		for <a href="http://ps-scripts.cvs.sourceforge.net/*checkout*/ps-scripts/xtools/docs/Stdlib.pdf">stdlib.js</a>
+		and <a href="http://ps-scripts.cvs.sourceforge.net/*checkout*/ps-scripts/xtools/docs/GenericUI.pdf">GenericUI.jsx</a>
+		are also available.</p>
+		<p></p>
+		<p><font size="+2"><em>xtools v1.5</em> is now
+		available.</font> You can download
+		it <a href="http://sourceforge.net/project/showfiles.php?group_id=173281&amp;package_id=207620">here</a>. Thanks
+		go out to Mike Hale for help with the
+		documentation.</p>
+		<p></p>
+		<h1><a name="Anchor-Installatio-31946" id="Anchor-Installatio-31946"></a>Installation</h1>
+		<p>There are a couple different ways of installing XToolkit. You can:</p>
+		<ol>
+			<li>Unbundle the zip file and use it as
+				is. All of the non-library scripts can
+				be found in single file versions in
+				the xtools/apps directory. You can
+				execute them from there or copy them
+				to
+				your <tt><font size="-1">Presets/Scripts</font></tt>
+				folder. For the most part, it doesn't
+				really matter. However,
+				the <tt><font size="1">XToolkit.atn</font></tt>
+				file will not be automatically
+				created.<br>  <br>
+			</li>
+			<li>Do a full install (instructions
+			below). This will install the toolkit parallel
+			to your Photoshop application directory,
+			modify the scripts in xtools/xapps so that
+			their 'includepath' directories point to the
+			right place, and generate and load a
+			new <tt><font size="1">XToolkit.atn</font></tt>
+			file that is modified to point to the
+			directory where the toolkit has been
+			installed. You should only do this if you want
+			the atn file or you want to do script
+			development with the toolkit.</li>
+		</ol>
+		<p></p>
+		<h2>Installation Instructions for XToolkit</h2>
+		<ol>
+			<li> Extract the zip file to wherever your want, like c:\temp or /tmp, for instance. We'll call that directory EXDIR.<br>
+				<br>
+			</li>
+			<li>From within Photoshop, execute the script EXDIR/xtools/xapps/Install.jsx. Under Vista, you will need to temporarily run Photoshop as Administrator. This script will do the following:
+				<ol>
+					<li>   Open a Folder selection dialog. Select the xtools directory extracted in Step 1). This step will only occur if Install.jsx gets confused about the location where you unzipped the package.<br>
+						<br>
+					</li>
+					<li>   Install scripts and other files into the following directories:<br>
+						      On Windows XP APPDIR, is the folder where Photoshop was installed,<br>
+						         e.g. app.path.parent, c:\Program Files\Adobe<br>
+						      On MacOSX, APPDIR is /Developer<br>
+						      PSDIR (referenced later) is the Photoshop folder.<br>
+						<br>
+						      APPDIR/<br>
+						      APPDIR/xtools/xapps<br>
+						      APPDIR/xtools/xlib<br>
+						      APPDIR/xtools/xlib/xml<br>
+						      APPDIR/xtools/docs<br>
+						      APPDIR/xtools/etc<br>
+						<br>
+						Note that the scripts are modified during the installation process so that the '//@includepath' directives point to this directory tree.</li>
+					<li>Modify the Action file "xtools/etc/XToolkit-in.atn" to create "xtools/etc/XToolkit.atn" so that the paths to the scripts invoked in the actions point to the correct directory. This new Action file is then loaded into the Actions Palette.<br>
+						<br>
+						The actions in this file refer to the scripts in xtools/xapps. They require the APPDIR/xtools folders to be in place in order to work.<br>
+						<br>
+					</li>
+				</ol>
+			</li>
+			<li>When the Install.jsx script completes (it should take about 10-15 seconds), the Actions are ready to be invoked.<br>
+				<br>
+			</li>
+			<li>To verify that the installation was successful:<br>
+				   a) Load a document.<br>
+				   b) Run the Action "jsh".<br>
+				   c) In the lower pane, type in 'listProps(doc)' (without the quotes,<br>
+				      naturally) and press the 'Eval' button.<br>
+				   d) You should see immediately see a list of the Document properties<br>
+				      for the current document.<br>
+				<br>
+			</li>
+			<li>The files that were extracted to EXDIR can now be deleted.<br>
+				<br>
+			</li>
+			<li>Single file, standalone versions of all of the scripts in APPDIR/xtools/xapps can be found in APPDIR/xtools/apps.<br>
+				<br>
+			</li>
+			<li>You may wish to copy some of the files from APPDIR/xtools/apps to your PSDIR/Presets/Scripts directory if you want them to appear in your  File-&gt;Scripts menu.<br>
+				<br>
+			</li>
+			<li>If you want to give one of the scripts to someone else, be sure that you give them one from APPDIR/xtools/apps since that don't require  anything else from the toolkit.</li>
+		</ol>
+		<p></p>
+		<h3>To Uninstall the toolkit</h3>
+		<ol>
+			<li>Delete the<tt><font size="-1"> APPDIR/xtools</font></tt> directory tree.</li>
+			<li>Remove any files that were manually copied to <tt><font size="-1">PSDIR/Presets/Scripts</font></tt>.</li>
+			<li>Remove the XToolkit actions from the Actions Palette</li>
+		</ol>
+		<p></p>
+		<h1><a name="Anchor-Th-22764" id="Anchor-Th-22764"></a>The Scripts</h1>
+                <p>The images captured here were from xtools with CS3
+                on XP. There may have been some minor changes in
+                layout and behavior as part of the port to CS4.</p>
+		<p>As part of the installation, the XToolkit action
+		set was installed. This set of actions contains
+		convenient wrappers for a set of scripts that can be
+		used directly. These script are divided
+		into <a href="http://ps-scripts.sourceforge.net/xtools.html#Anchor-Toolki-19514">Toolkit
+		Scripts</a>, <a href="http://ps-scripts.sourceforge.net/xtools.html#Anchor-Dem-43404">Demo
+		Scripts</a>,
+		and <a href="http://ps-scripts.sourceforge.net/xtools.html#Anchor-Applicatio-58248">Application
+		Scripts</a>. The remainder of the scripts are call
+		Library Scripts and are not meant to be used
+		directly.</p>
+		<h2><a name="Anchor-Toolki-19514" id="Anchor-Toolki-19514"></a>Toolkit Scripts</h2>
+		<p>The Toolkit Scripts are ones that should be of help to someone writing scripts. The would likely be of no use to typical Photoshop users. Some of these should probably be in the <a href="http://ps-scripts.sourceforge.net/xtools.html#Anchor-Dem-43404">Demo Scripts</a> section.</p>
+		<h4>jsh</h4>
+		<p><img src="./xtools_files/jsh.jpg" alt="" width="646" height="505" border="0"></p>
+		<p><a href="http://ps-scripts.cvs.sourceforge.net/*checkout*/ps-scripts/xtools/apps/jsh.jsx">jsh.jsx</a></p>
+		<p>The JavaScript Shell. This script is at the top of the list for a reason. I use it more than any other script in the toolkit. jsh provides a console-like interface to Photoshop. When you launch jsh, the window above opens up. Both panels are initially empty. You type text into the lower panel, press the <strong>Eval</strong> button and the text is evaluated as a JavaScript expression. In the image above, the text '<em>listProps(doc)</em>' was entered into the lower panel and the results of evaluating that expression are added to the upper panel. In this case, a function called '<em>listProps</em>' returns a string containing all of the properties of the object that is passed to it.</p>
+		<p><em>jsh</em> is the fastest way to test out code for Photoshop making it a great tool for experimentation. If you only use one script in xtools, make it this one.</p>
+		<p>Compatibility: CS+. There is a minor problem with multiline text widgets in ScriptUI in CS3. Pressing the Enter key never results in a newline in the text widget. The only way to get a line-break is to press Ctrl-Enter. A&nbsp;bug report has been filed.</p>
+		<p></p>
+		<h4>ActionFileToXML</h4>
+		<p><img src="./xtools_files/ActionFileToXML.jpg" alt="" width="476" height="345" border="0"></p>
+		<p><a href="http://ps-scripts.cvs.sourceforge.net/*checkout*/ps-scripts/xtools/apps/ActionFileToXML.jsx">ActionFileToXML.jsx</a></p>
+		<p>Photoshop provides the ability to get a text listing of an Action. While this is nice, it could be better. This script is better. This script translates an Action (.atn) file into an XML&nbsp;file. The XML that comes out is a complete and accurate description of the Actions that are in an Action file. When I say <em>complete</em> I mean that the XML&nbsp;has enough information that you can recreate the Action file from the XML. Of course, this means that you can make changes to the XML and recreate the Action file. You can, in a manner of speaking, edit an Action file with a text editor.</p>
+		<p>However, as this example shows, the XML is not necessarily pretty or easy to read. Here is what and HSL adjustment looks like:</p>
+		<p><code><font size="-1">&lt;ActionDescriptor key="hueSaturation" count="2"&gt;<br>
+					&lt;DescValueType.BOOLEANTYPE key="1131180666" id="1131180666" symname="Colorize" sym="Clrz" boolean="false"&gt;<br>
+					&lt;/DescValueType.BOOLEANTYPE&gt;<br>
+					&lt;DescValueType.LISTTYPE key="1097099891" id="1097099891" symname="Adjustment" sym="Adjs"&gt;<br>
+					&lt;ActionList key="1097099891" id="1097099891" symname="Adjustment" sym="Adjs" count="1"&gt;<br>
+					&lt;DescValueType.OBJECTTYPE key="0" objectTypeString="HueSatAdjustmentV2" objectType="Hst2" count="3"&gt;<br>
+					&lt;ActionDescriptor key="0" count="3"&gt;<br>
+					&lt;DescValueType.INTEGERTYPE key="1210064928" id="1210064928" symname="Hue" sym="H " integer="0"&gt;<br>
+					&lt;/DescValueType.INTEGERTYPE&gt;<br>
+					&lt;DescValueType.INTEGERTYPE key="1400140404" id="1400140404" symname="Saturation" sym="Strt" integer="-27"&gt;<br>
+					&lt;/DescValueType.INTEGERTYPE&gt;<br>
+					&lt;DescValueType.INTEGERTYPE key="1281845364" id="1281845364" symname="Lightness" sym="Lght" integer="0"&gt;<br>
+					&lt;/DescValueType.INTEGERTYPE&gt;<br>
+					&lt;/ActionDescriptor&gt;<br>
+				</font></code></p>
+		<p>A more common use of converting an Action to and from XML would be to change the paths of documents or scripts. This example shows an Action that simply calls a script. It would be relatively easy to edit this XML so that the path reflects the new location of the script.</p>
+		<p><code><font size="-1">&lt;Action key="2" name="ActionToJavascript" expanded="false" count="1"&gt;<br>
+					&lt;ActionItem key="TEXT" expanded="false" enabled="true" withDialog="false" dialogOptions="0" identifier="TEXT" event="AdobeScriptAutomation Scripts" name="Scripts" hasDescriptor="true"&gt;<br>
+					&lt;ActionDescriptor key="AdobeScriptAutomation Scripts" count="2"&gt;<br>
+					&lt;DescValueType.ALIASTYPE key="1785938804" id="1785938804" sym="jsCt" path="/c/work/scratch/ActionToJavascript.jsx"&gt;<br>
+					&lt;/DescValueType.ALIASTYPE&gt;<br>
+					&lt;DescValueType.STRINGTYPE key="1785941363" id="1785941363" sym="jsMs" string="ActionToJavascript.jsx"&gt;<br>
+					&lt;/DescValueType.STRINGTYPE&gt;<br>
+					&lt;/ActionDescriptor&gt;<br>
+					&lt;/ActionItem&gt;<br>
+					&lt;/Action&gt;<br>
+				</font></code></p>
+		<p>Compatibility: CS2+</p>
+		<p></p>
+		<h4>ActionFileFromXML</h4>
+		<p><img src="./xtools_files/ActionFileFromXML.jpg" alt="" width="476" height="295" border="0"></p>
+		<p><a href="http://ps-scripts.cvs.sourceforge.net/*checkout*/ps-scripts/xtools/apps/ActionFileFromXML.jsx">ActionFileFromXML.jsx</a></p>
+		<p>This script is the mirror of the previous one. It converts an XML&nbsp;file back into an Action file.</p>
+		<p>Compatibility: CS2+</p>
+		<p></p>
+		<h4>ActionFileToJavascript</h4>
+		<p><img src="./xtools_files/ActionFileToJavascript.jpg" alt="" width="496" height="375" border="0"></p>
+		<p><a href="http://ps-scripts.cvs.sourceforge.net/*checkout*/ps-scripts/xtools/apps/ActionFileToJavascript.jsx">ActionFileToJavascript.jsx</a></p>
+		<p>This script converts an Action file into JavaScript code. If you choose the 'Separate Files' option, a complete JavaScript file will be generated for each Action in the Action file. You can then execute those scripts from Photoshop. This particular script is really handy when you have an Action that does almost everything you want, but not quite. The option you now have is that you can create a JavaScript file and add whatever additional functionality you need. I find this useful when helping other people who have Actions that need functionality that you can only get from scripting.</p>
+		<p>Compatibility: CS2+</p>
+		<p></p>
+		<h4>ActionToJavascript</h4>
+		<p><img src="./xtools_files/ActionToJavascript.jpg" alt="" width="306" height="185" border="0"></p>
+		<p><a href="http://ps-scripts.cvs.sourceforge.net/*checkout*/ps-scripts/xtools/apps/ActionToJavascript.jsx">ActionToJavascript.jsx</a></p>
+		<p>This script is like the one before except that instead of converting an entire Action file to JavaScript, it converts a single Action from the runtime Palette.</p>
+		<p>Compatibility: CS2+</p>
+		<p></p>
+		<h4>ActionLister</h4>
+		<p><img src="./xtools_files/ActionLister.jpg" alt="" width="646" height="505" border="0"></p>
+		<p><a href="http://ps-scripts.cvs.sourceforge.net/*checkout*/ps-scripts/xtools/apps/ActionLister.js">ActionLister.js</a></p>
+		<p>This is a rather simple script that lists the current Action Sets and Actions in the runtime Palette.</p>
+		<p>Compatibility: PS7+</p>
+		<p></p>
+		<h4>ActionSetRunner</h4>
+		<p><img src="./xtools_files/ActionSetRunner.jpg" alt="" width="506" height="665" border="0"></p>
+		<p><a href="http://ps-scripts.cvs.sourceforge.net/*checkout*/ps-scripts/xtools/apps/ActionSetRunner.js">ActionSetRunner.js</a></p>
+		<p>This is a rather interesting script that I wrote when I wanted to run a bunch of actions against an image.&nbsp;In the example above, I've selected three actions from the Image Effects action set. By default, the script will run each action against the current document. After it runs an action it saves the document off to the indicated folder. It then reverts the document and moves on to the next document. It's a great way of testing out a bunch of effects on a particular image. The script also allows you to run the all of the actions in one pass on the image. This option, however, doesn't prove to be that interesting.</p>
+		<p>Compatibility: CS2+</p>
+		<p></p>
+		<h4>DropletDecompiler</h4>
+		<p><img src="./xtools_files/DropletDecompiler.jpg" alt="" width="451" height="320" border="0"></p>
+		<p><a href="http://ps-scripts.cvs.sourceforge.net/*checkout*/ps-scripts/xtools/apps/DropletDecompiler.jsx">DropletDecompiler.jsx</a></p>
+		<p>This script is one that is invaluable if you need it. It will convert a droplet back into the Action that it was generated from. And, if your like me, if you accidentally delete an Action but happen to have its droplet laying around, this will save you. You can also generate JavaScript from the droplet, which might come in handy.</p>
+		<p>Compatibility: CS2+</p>
+		<p></p>
+		<h4>FontLister</h4>
+		<p><img src="./xtools_files/FontLister.jpg" alt="" width="646" height="505" border="0"></p>
+		<p><a href="http://ps-scripts.cvs.sourceforge.net/*checkout*/ps-scripts/xtools/apps/FontLister.js">FontLister.js</a></p>
+		<p>Here's a simple way to get a CSV listing of all of the fonts that Photoshop knows about.</p>
+		<p>Compatibility: CS+</p>
+		<p></p>
+		<h4>SLCFix</h4>
+		<p><img src="./xtools_files/SLCFix.jpg" alt="" width="506" height="525" border="0"></p>
+		<p><a href="http://ps-scripts.cvs.sourceforge.net/*checkout*/ps-scripts/xtools/apps/SLCFix.js">SLCFix.js</a></p>
+		<p>Anyone that does anything more than casual scripting with Photoshop eventually runs into the need to use the ScriptingListener plugin. This plugin writes JavaScript (and VB) code to log files as events occur in the application. The code that it generates is not very easy to understand let alone use in the context of a larger script. This script fixes that problem. It converts ScriptingListener output into a series of JavaScript functions that are easily integrated into a script.</p>
+		<p>Here's an example of the code transformation that takes place when you run this script.</p>
+		<p>This is some code written into ScriptingListenerJS.log</p>
+		<p><code><font size="-1">// =======================================================<br>
+					var id344 = charIDToTypeID( "slct" );<br>
+					var desc74 = new ActionDescriptor();<br>
+					var id345 = charIDToTypeID( "null" );<br>
+					var ref72 = new ActionReference();<br>
+					var id346 = charIDToTypeID( "Lyr " );<br>
+					ref72.putName( id346, "Background copy 2" );<br>
+					desc74.putReference( id345, ref72 );<br>
+					var id347 = stringIDToTypeID( "selectionModifier" );<br>
+					var id348 = stringIDToTypeID( "selectionModifierType" );<br>
+					var id349 = stringIDToTypeID( "addToSelection" );<br>
+					desc74.putEnumerated( id347, id348, id349 );<br>
+					var id350 = charIDToTypeID( "MkVs" );<br>
+					desc74.putBoolean( id350, false );<br>
+					executeAction( id344, desc74, DialogModes.NO );</font></code></p>
+		<p><code><font size="-1">// =======================================================<br>
+					var id351 = charIDToTypeID( "Dlt " );<br>
+					var desc75 = new ActionDescriptor();<br>
+					var id352 = charIDToTypeID( "null" );<br>
+					var ref73 = new ActionReference();<br>
+					var id353 = charIDToTypeID( "Lyr " );<br>
+					var id354 = charIDToTypeID( "Ordn" );<br>
+					var id355 = charIDToTypeID( "Trgt" );<br>
+					ref73.putEnumerated( id353, id354, id355 );<br>
+					desc75.putReference( id352, ref73 );<br>
+					executeAction( id351, desc75, DialogModes.NO );<br>
+				</font></code></p>
+		<p>And here is what this code becomes when this script is run:</p>
+		<p><code><font size="-1">function ftn1() {<br>
+					// =======================================================<br>
+					var desc74 = new ActionDescriptor();<br>
+					var ref72 = new ActionReference();<br>
+					ref72.putName( cTID('Lyr '), "Background copy 2" );<br>
+					desc74.putReference( cTID('null'), ref72 );<br>
+					desc74.putEnumerated( sTID('selectionModifier'), sTID('selectionModifierType'), sTID('addToSelection') );<br>
+					desc74.putBoolean( cTID('MkVs'), false );<br>
+					executeAction( cTID('slct'), desc74, DialogModes.NO );<br>
+					};</font></code></p>
+		<p><code><font size="-1">// =======================================================<br>
+					function ftn2() {<br>
+					var desc75 = new ActionDescriptor();<br>
+					var ref73 = new ActionReference();<br>
+					ref73.putEnumerated( cTID('Lyr '), cTID('Ordn'), cTID('Trgt') );<br>
+					desc75.putReference( cTID('null'), ref73 );<br>
+					executeAction( cTID('Dlt '), desc75, DialogModes.NO );<br>
+					};</font></code></p>
+		<p>While still somewhat enigmatic, this code is significantly easier to read after the transformation.</p>
+		<p>Compatibility: PS7+</p>
+		<p></p>
+		<h4>PresetLister</h4>
+		<p><img src="./xtools_files/PresetLister.jpg" alt="" width="646" height="505" border="0"></p>
+		<p><a href="http://ps-scripts.cvs.sourceforge.net/*checkout*/ps-scripts/xtools/apps/PresetLister.js">PresetLister.js</a></p>
+		<p>Here's another simple script that just lists out all of the presets. The list of presets probably not all that useful. The code that shows how to get the lists of presets, on the otherhand...</p>
+		<p>Compatibility: PS7+</p>
+		<p></p>
+		<h4>FlattenJS</h4>
+		<p><img src="./xtools_files/FlattenJS.jpg" alt="" width="481" height="375" border="0"></p>
+		<p><a href="http://ps-scripts.cvs.sourceforge.net/*checkout*/ps-scripts/xtools/apps/Flatten.js">Flatten.js</a></p>
+		<p>The JavaScript implementaion used in Adobe products has a feature that allows one file to be 'included' in another. What this means is that when the interpreter runs across a line in a JavaScript file that looks like this:</p>
+		<p><code><font size="-1">//@include "stdlib.js"</font></code></p>
+		<p>the interepreter will read the contents of the file stdlib.js as if they had been copied in. This makes it easier to write resuable script components. For instance, in this toolkit there are several scripts that deal with handling Actions. When it comes time to write a new script, that script just includes the reusable Action scripts instead of having to copy the contents into the new file.</p>
+		<p>This presents problems when sending a copy of a script to someone else.&nbsp;Since they may not have the same <em>include</em> files laying around, it's best if you just send a single file with everything in it. That's what this script does. When you run this script, you specifiy the top-level file. <em>FlattenJS</em> will read that file and, wherever it finds an <em>include</em> file, it will read in the contents of that file. The end result is that instead of a 100 line script with a couple of include files, you might end up with a script that's several thousand lines long.</p>
+		<p>In <em>xtools</em>, the <em>xtools/xapps</em> contains a set of top-level script files. The folder <em>xtools/app</em> contains the same scripts in flattened form. If you want to send a script from <em>xtools</em> to somebody, you would typically want to send them the <em>xtools/apps</em> version of the file.</p>
+		<p>Compatibility: CS+</p>
+		<p></p>
+		<h4>BackupActionsPalette</h4>
+		<p><img src="./xtools_files/BackupActionsPalette.jpg" alt="" width="584" height="412" border="0"></p>
+		<p><a href="http://ps-scripts.cvs.sourceforge.net/*checkout*/ps-scripts/xtools/apps/BackupActions.js">BackupActions.js</a></p>
+		<p>I've damaged my Actions Palette more times than&nbsp;I care to remember. So I wrote this script to backup the Actions&nbsp;Palette. Since this is reading the palette from your hard drive, it save the palette as it was when you started you current Photoshop session.</p>
+		<p>Compatibility: CS2+</p>
+		<p></p>
+		<h4>LastLogEntry</h4>
+		<p><img src="./xtools_files/LastLogEntry.jpg" alt="" width="646" height="505" border="0"></p>
+		<p><a href="http://ps-scripts.cvs.sourceforge.net/*checkout*/ps-scripts/xtools/apps/LastLogEntry.jsx">LastLogEntry.jsx</a></p>
+		<p>Since much of Photoshop's functionality is only available via Action&nbsp;Manager/ScriptingListener code I wrote this script. The idea is that when you need to know how to call something from JavaScript, you do whatever it is in Photoshop (like, open a file), then run this script.&nbsp;This script displays the last entry in the ScriptingListener log. Very handy. And, if you don't like the way the code looks, you can hit the <em>Fix</em> button and the code is automatically run through the SLCFix script. You can then copy and paste it into your script.</p>
+		<p>Compatibility: CS+</p>
+		<p></p>
+		<h4>PackScript</h4>
+		<p><img src="./xtools_files/PackScript.jpg" alt="" width="526" height="275" border="0"></p>
+		<p><a href="http://ps-scripts.cvs.sourceforge.net/*checkout*/ps-scripts/xtools/apps/PackScript.jsx">PackScript.jsx</a></p>
+		<p>This script will probably be of no use to anyone out there except me. I write a lot of scripts for a lot of people. As part of being a good little software engineer, I use a version control system for my scripts called CVS.&nbsp;CVS let's you keep a history of versions of files and I've used it on ealmost very significant project I've been involved with.</p>
+		<p>When&nbsp;I have finished a script and I'm ready to send it out to somebody, I go through the following steps:</p>
+		<ol>
+			<li>Check the file into CVS with a comment about the changes&nbsp;I've made.</li>
+			<li>Flatten the file with&nbsp;<em>FlattenJS</em> so all of the include files are now in one big script.</li>
+			<li>I name the new script with the version information in the file name (eg RemoveAlphaChannels-1_1.jsx).</li>
+			<li>I zip up the flattened script.</li>
+		</ol>
+		<p>Doing this manually got to be a bit tedious. So I wrote this script which automates the whole process. All&nbsp;I have to do is specify the script I want to package up and a comment for CVS. I use this nearly every day along with <em>jsh</em> and <em>LastLogEntry</em>.</p>
+		<p>Compatibility: CS2+</p>
+		<h4></h4>
+		<h4>ActionDescriptorToXML</h4>
+		<p><img src="./xtools_files/ActionDescriptorToXML.jpg" alt="" width="584" height="435" border="0"></p>
+		<p><a href="http://ps-scripts.cvs.sourceforge.net/*checkout*/ps-scripts/xtools/apps/ActionDescriptorToXML.jsx">ActionDescriptorToXML.jsx</a></p>
+		<p>Low-level programming in&nbsp;the Photoshop world means Action Manager programming. This can be a painful and tediuos process. This script helps out. Since Action&nbsp;Manager programming means working with&nbsp;ActionDescriptor objects, it's helpful to know what's in an ActionDescriptor. If you are able to save an ActionDescriptor to disk, this script will let you read that file and convert it to XML. You can then open up the descriptor in a web browser or some other XML reader and get a nice structured view of the contents of the ActionDescriptor.</p>
+		<p>Compatibility: CS2+</p>
+		<p></p>
+		<h2><a name="Anchor-Dem-43404" id="Anchor-Dem-43404"></a>Demo Scripts</h2>
+		<h2></h2>
+		<h4>SampleUI</h4>
+		<p><img src="./xtools_files/SampleUI.jpg" alt="" width="526" height="385" border="0"></p>
+		<p><a href="http://ps-scripts.cvs.sourceforge.net/*checkout*/ps-scripts/xtools/apps/SampleUI.jsx">SampleUI.jsx</a></p>
+		<p>One of the most heavily re-used components in the toolkit is <em>GenericUI.jsx,</em> a script/framework simpilfies the task of creating a user interface in JavaScript.</p>
+		<p>This script is built on <em>GenericUI</em>. It converts a color image to a black and white using a Lab conversion technique.&nbsp;I got the conversion code from Trevor Morris and put a UI&nbsp;on the front of it.</p>
+		<p>This UI&nbsp;also illustrates a couple of components that come with the framework.&nbsp;The first is a Font selector widget. The second is the Settings panel. As with other scripts, the interesting stuff is in the code not in the UI.</p>
+		<p>Compatibility: CS+</p>
+		<p></p>
+		<h4>ActionEvalDemo</h4>
+		<p><img src="./xtools_files/ActionEvalDemo.jpg" alt="" width="396" height="225" border="0"></p>
+		<p><a href="http://ps-scripts.cvs.sourceforge.net/*checkout*/ps-scripts/xtools/apps/ActionEvalDemo.jsx">ActionEvalDemo.jsx</a></p>
+		<p>This script reads an Action from an Action file and executes the steps in the action one at a time in JavaScript. This may not sound like something useful, but it makes it possible to call an action from a script that, in turn, calls another script. This capability does not exist in any version of Photoshop before CS3. There are a lot of other things that become possible such as having JavaScript embedded in an Action. This is just the tip of the iceberg.</p>
+		<p>Compatibility: CS2+</p>
+		<p></p>
+		<h4>ColorBook</h4>
+		<p><img src="./xtools_files/ColorBookBrowse.jpg" alt="" width="563" height="412" border="0"></p>
+		<p></p>
+		<p><img src="./xtools_files/ColorBook.jpg" alt="" width="646" height="505" border="0"></p>
+		<p><a href="http://ps-scripts.cvs.sourceforge.net/*checkout*/ps-scripts/xtools/apps/ColorBookDemo.js">ColorBookDemo.js</a></p>
+		<p>This demo lets you select a ColorBook file and displays the contents of that file in great detail. The underlying code is a good example of how to read binary data files using the Stream script.</p>
+		<p>Compatibility: PS7+</p>
+		<p></p>
+		<h4>Getter</h4>
+		<p><img src="./xtools_files/GetterSelector.jpg" alt="" width="206" height="345" border="0"></p>
+		<p></p>
+		<p><img src="./xtools_files/GetterLog.jpg" alt="" width="646" height="505" border="0"></p>
+		<p><a href="http://ps-scripts.cvs.sourceforge.net/*checkout*/ps-scripts/xtools/apps/GetterDemo.jsx">GetterDemo.jsx</a></p>
+		<p>This script is another invaluable tool for people doing Action Manager programming. With this, you can read Action Descriptors containing various kinds of information about objects in Photoshop. The Action Descriptors are converted to XML&nbsp;to make reading them significantly easier. Using this tool, I along with Mike Hale and others can now do things in JavaScript that had previously only been possible in plugins. There are limitations to what is possible in JavaScript but this script does a lot towards finding out what those boundaries actually are.</p>
+		<p>Compatibility: CS2+</p>
+		<p></p>
+		<h4>LogWindow</h4>
+		<p><img src="./xtools_files/LogWindow.jpg" alt="" width="646" height="505" border="0"></p>
+		<p><a href="http://ps-scripts.cvs.sourceforge.net/*checkout*/ps-scripts/xtools/apps/LogWindowDemo.js">LogWindowDemo.js</a></p>
+		<p>The <em>LogWindow</em> component is used quite a bit by other scripts in the toolkit. This is the code for displaying this window:</p>
+		<p><code><font size="-1">var logwin = new LogWindow('Test Log Window');<br>
+					logwin.append('Start');<br>
+					logwin.append(logwin.bounds);<br>
+				</font></code></p>
+		<p>Compatibility: CS+</p>
+		<p></p>
+		<h2><a name="Anchor-Applicatio-58248" id="Anchor-Applicatio-58248"></a>Application Scripts</h2>
+		<p></p>
+		<h4>xbatch</h4>
+		<p><img src="./xtools_files/xbatch.jpg" alt="" width="406" height="415" border="0"></p>
+		<p><a href="http://ps-scripts.cvs.sourceforge.net/*checkout*/ps-scripts/xtools/apps/xbatch.jsx">xbatch.jsx</a></p>
+		<p><em>xbatch</em> is a script that I wrote with Uwe Steinmueller over at <a href="http://www.outbackphoto.com/">Digital Outback Photo</a>. It works like the native Batch facilities in Photoshop except that the folder structure of the source images is duplicated in the targer directory. Plus, you can specify a script that gets run before the Action.</p>
+		<p>For more information on this script checkout this <a href="http://www.outbackphoto.com/workflow/wf_a104/essay.html">article</a>.</p>
+		<p>Compatibility: CS2+</p>
+		<p></p>
+		<h4>xscan</h4>
+		<p><img src="./xtools_files/xscan.jpg" alt="" width="426" height="325" border="0"></p>
+		<p><a href="http://ps-scripts.cvs.sourceforge.net/*checkout*/ps-scripts/xtools/apps/xscan.jsx">xscan.jsx</a></p>
+		<p><em>xbatch</em> is another script that I wrote with Uwe Steinmueller. This script looks a a folder full of images and opens and closes each one in turn. The purpose is to quickly locate possible corrupt images. Uwe also wrote an <a href="http://www.outbackphoto.com/workflow/wf_a116/essay.html">article</a> for this script.</p>
+		<p>Compatibility: CS+</p>
+		<p></p>
+		<p>The rest of these scripts do not have a User Interface.</p>
+		<h4>RemoveAlphaChannels</h4>
+		<p><a href="http://ps-scripts.cvs.sourceforge.net/*checkout*/ps-scripts/xtools/apps/RemoveAlphaChannels.jsx">RemoveAlphaChannels.jsx</a></p>
+		<p>This is a simple little script that removes all of the alpha channels in the current document.</p>
+		<p>Compatibility: PS7+</p>
+		<p></p>
+		<h4>AddWatermark</h4>
+		<p><a href="http://ps-scripts.cvs.sourceforge.net/*checkout*/ps-scripts/xtools/apps/AddWatermark.js">AddWatermark.js</a></p>
+		<p>There are hundreds of actions and scripts out there that add some kind of watermark to a document. This is one of the ones that I wrote and it the one that I currently use.</p>
+		<p>Compatibility: CS+</p>
+		<p></p>
+		<h4>AdjustLevels</h4>
+		<p><a href="http://ps-scripts.cvs.sourceforge.net/*checkout*/ps-scripts/xtools/apps/AdjustLevels.js">AdjustLevels.js</a></p>
+		<p>This script automatically adjusts the composite level in a document by trimming the histogram tails. The amount that is trimmed is configurable.</p>
+		<p>Compatibility: PS7+</p>
+		<p></p>
+		<h4>AdjustRGBLevels</h4>
+		<p><a href="http://ps-scripts.cvs.sourceforge.net/*checkout*/ps-scripts/xtools/apps/AdjustRGBLevels.js">AdjustRGBLevels.js</a></p>
+		<p>This script automatically adjusts the component RGB levels in a document by trimming the histogram tails. The amount that is trimmed is configurable.</p>
+		<p>Compatibility: PS7+</p>
+		<p></p>
+		<h4>Convert</h4>
+		<p><a href="http://ps-scripts.cvs.sourceforge.net/*checkout*/ps-scripts/xtools/apps/Cnvt.js">Cnvt.js</a></p>
+		<p>This script imports jpegs of questionable quality into my workflows.&nbsp;Various formats are saved of for different future uses.</p>
+		<p>Compatibility: PS7+</p>
+		<p></p>
+		<h4>Normalize</h4>
+		<p><a href="http://ps-scripts.cvs.sourceforge.net/*checkout*/ps-scripts/xtools/apps/Normalize.js">Normalize.js</a></p>
+		<p>This is another script that imports images into my workflow. This does auto-level adjustment and noise reduction.</p>
+		<p>Compatibility: PS7+</p>
+		<p></p>
+		<h4>Resize</h4>
+		<p><a href="http://ps-scripts.cvs.sourceforge.net/*checkout*/ps-scripts/xtools/apps/Resize.js">Resize.js</a></p>
+		<p>The toolkit contains a set of resizing routine in <em>ResizeImage.js</em>. This script calls one of them to resize the current image.</p>
+		<p>Compatibility: PS7+</p>
+		<p></p>
+		<h4>UpdateMetadata</h4>
+		<p><a href="http://ps-scripts.cvs.sourceforge.net/*checkout*/ps-scripts/xtools/apps/UpdateMetadata.js">UpdateMetadata.js</a></p>
+		<p>This is a basic script for updating a set of metadata fields in an object.</p>
+		<p>Compatibility: PS7+</p>
+		<p></p>
+		<h4>InsertImage</h4>
+		<p><a href="http://ps-scripts.cvs.sourceforge.net/*checkout*/ps-scripts/xtools/apps/InsertImage.jsx">InsertImage.jsx</a></p>
+		<p>I've run into a lot of people that want to insert images into a template. I wrote this in response to that need. When this script runs, it checks to see if the layer has 'Image' in its name, if it has a layer mask, and if it's a normal content layer. If so, it prompts for an image file. The selected image is then inserted into the document using the layer mask to determine location and size.</p>
+		<p>Compatibility: CS2+</p>
+		<p></p>
+		<address>xbytor@gmail.com<br>2008-10-28<br>
+		</address>
+		<a href="http://ps-scripts.sourceforge.net/index.html"><img src="./xtools_files/logo-sm.png" alt="" width="138" height="32" border="0"></a><a href="http://sourceforge.net/"><img src="./xtools_files/sflogo.php" width="88" height="31" border="0" alt="SourceForge.net Logo"></a>  <!-- Creative Commons License --><a href="http://creativecommons.org/licenses/LGPL/2.1/"><img alt="CC-GNU LGPL" border="0" src="./xtools_files/cc-LGPL-a.png"></a> This software is licensed under the <a href="http://creativecommons.org/licenses/LGPL/2.1/">CC-GNU LGPL</a>.<!-- /Creative Commons License --><!--
+
+<rdf:RDF xmlns="http://web.resource.org/cc/"
+    xmlns:dc="http://purl.org/dc/elements/1.1/"
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+<Work rdf:about="">
+   <license rdf:resource="http://creativecommons.org/licenses/LGPL/2.1/" />
+   <dc:type rdf:resource="http://purl.org/dc/dcmitype/Software" />
+</Work>
+
+<License rdf:about="http://creativecommons.org/licenses/LGPL/2.1/">
+<permits rdf:resource="http://web.resource.org/cc/Reproduction" />
+   <permits rdf:resource="http://web.resource.org/cc/Distribution" />
+   <requires rdf:resource="http://web.resource.org/cc/Notice" />
+   <permits rdf:resource="http://web.resource.org/cc/DerivativeWorks" />
+   <requires rdf:resource="http://web.resource.org/cc/ShareAlike" />
+   <requires rdf:resource="http://web.resource.org/cc/SourceCode" />
+</License>
+
+</rdf:RDF>
+
+-->
+	
+
+
+</body></html>
