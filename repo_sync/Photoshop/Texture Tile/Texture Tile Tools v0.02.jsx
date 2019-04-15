@@ -1,4 +1,4 @@
-﻿/*
+/*
 DOCUMENTATION
 http://scripting345.rssing.com/chan-20965412/all_p1.html
 http://estk.aenhancers.com/4%20-%20User-Interface%20Tools/scriptui-programming-model.html //interface
@@ -41,10 +41,10 @@ function WinObject() {
 //~     var btn_pre_tile = win.add ("button", undefined, "Preview Tile");
     var btn_close = win.add('button', undefined, 'Close', {name:'close'});
     var btn_init = win.add ("button", undefined, "INITIALIZE");
-    var btn_offset_xf = win.add ("button", undefined, "Offset X ⯈");
-    var btn_offset_xb = win.add ("button", undefined, "Offset X ⯇");
-    var btn_offset_yf = win.add ("button", undefined, "Offset Y ⯆");
-    var btn_offset_yb = win.add ("button", undefined, "Offset Y ⯅");
+    var btn_offset_xf = win.add ("button", undefined, "Offset X ►");
+    var btn_offset_xb = win.add ("button", undefined, "Offset X ◄");
+    var btn_offset_yf = win.add ("button", undefined, "Offset Y ▼");
+    var btn_offset_yb = win.add ("button", undefined, "Offset Y ▲");
     var btn_update = win.add ("button", undefined, "UPDATE");
     
     //Assign Functions
