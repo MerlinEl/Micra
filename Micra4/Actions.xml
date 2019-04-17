@@ -210,6 +210,7 @@
     <Get_Edges_Length icon="262" cmd="mcAction.getEdgesLength()" tooltip="Get Edges Length" />
     <Live_Measure icon="30" cmd="mcFile.fileInVersion Live_Measure" tooltip="Live Measure" />
     <Live_Modeling icon="146" cmd="mcFile.fileInVersion Live_Modeling" tooltip="Live Modeling" />
+    <Vertex_Snap icon="267" cmd="mcAction.snapVertex()" tooltip="Vertex Snap" />
   </Helpers>
   <Animation>
     <Merge_Animation icon="130" cmd="mcFile.fileInVersion Merge_Animation" tooltip="Merge Animation" />
@@ -230,5 +231,6 @@
     <Vertex_Alpha_Blend icon="261" cmd="mcFile.fileInVersion Vertex_Alpha_Blend" tooltip="Vertex Alpha Blend" />
     <DirectX_LS3D_Switch icon="263" cmd="mcActionsTukej.directXLS3DSwitch()" tooltip="DirectX LS3D Switch" />
     <Normal_Map_Tester icon="61" cmd="mcActionsTukej.testNormalMapToggle()" tooltip="Normal Map Tester" />
+    <Cross_Road_Generator icon="266" cmd="mcFile.fileInVersion Cross_Road_Generator" tooltip="Cross Road Generator" />
   </TuKej>
 </ACTIONS>

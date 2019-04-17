@@ -144,12 +144,14 @@ rollout mc3DGalleryDialog " 3DGallery III: 0/0" width:754 height:608
 		mc3DGalleryDialog.title = " 3DGallery II: "+selected_thumbs.count as string+"/"+ (flp_cat.controls).count as string
 		ctrl.forecolor = mcGall.dotnetColor red
 	)
-	fn textBox = (
+	fn textBox default_text:"" = (
+		
+		mcGM.setParam "MC_TEXTBOX_DIALOG_DEFAULT_TEXT" default_text --transfer text in to dialog
 		try (DestroyDialog mcTextBoxDialog) catch()
 		rollout mcTextBoxDialog " Command Box v0.1" width:320 height:36
 		(
 			-->locals
-			local theName = ""
+			local theName = mcGM.getParam "MC_TEXTBOX_DIALOG_DEFAULT_TEXT" --pickup text from global variable
 			local bgColor   = ((colorMan.getColor #background)*255)as color
 			local winColor  = ((colorMan.getColor #window)*255)as color
 			local textColor = ((colorMan.getColor #text)*255)as color
@@ -193,12 +195,14 @@ rollout mc3DGalleryDialog " 3DGallery III: 0/0" width:754 height:608
 			)
 			on mcTextBoxDialog open do
 			(
-				local dnfontlarge = dotNetObject "System.Drawing.Font" "Verdana" 14 ((dotNetClass "System.Drawing.FontStyle").bold)
+				local dnfontlarge = dotNetObject "System.Drawing.Font" "Verdana" 12 ((dotNetClass "System.Drawing.FontStyle").bold)
 				edtBox.font = dnfontlarge
 				edtBox.BackColor= mcGall.dotnetColor winColor
 				edtBox.ForeColor= mcGall.dotnetColor (color 42 113 124) --textColor
 				edtBox.AcceptsTab = true
-				edtBox.Multiline = true
+				edtBox.Multiline = true --for enter to works
+				--edtBox.MaxLength = 500
+				edtBox.Text = theName
 				edtBox.focus()
 			)
 			on edtBox keyPress a s do (textBoxControll a s method:#KeyPress)
@@ -216,7 +220,7 @@ rollout mc3DGalleryDialog " 3DGallery III: 0/0" width:754 height:608
 
 		local subPath = (mc3DGalleryRootDir+lastMainCat+"\\"+lastSubCat+"\\")
 		local existingNames = (for i in (getFiles (subPath+"*.*")) collect (getFilenameFile i)) --check for duplicate names
-		local textFromBox = textBox()		
+		local textFromBox = textBox default_text:selected_thumbs[1].text		
 		--format "the text:%\n" textFromBox
 		if textFromBox == "" do return false 
 
@@ -301,7 +305,7 @@ rollout mc3DGalleryDialog " 3DGallery III: 0/0" width:754 height:608
 		if checkForSave() do loadMaxFile max_file --[useFileUnits:<bool>] [quiet:<bool>] 
 		--check if is link or max file name
 	)
-	fn mergeModels = (
+	fn mergeModels unique:false = (
 		if selected_thumbs.count == 0 do return false
 		progbar.foreColor = mcGall.dotnetColor (color 176 196 222) 
 		local merged_models = #()
@@ -313,7 +317,7 @@ rollout mc3DGalleryDialog " 3DGallery III: 0/0" width:754 height:608
 				try   (mergeMAXFile f #useSceneMtlDups #mergeDups #select ) 
 				catch (messagebox ( "Merging model:<" + selected_thumbs[i].text + "> is failed.\nFile is mising or is corupted." ) title: " Warning!")
 				--prevent dupplicate names in scene
-				if not keyboard.controlPressed then (for o in selection do o.name = uniqueName (o.name))
+				if unique then (for o in selection do o.name = uniqueName (o.name))
 			)
 			progbar.value = 100.*i/selected_thumbs.count 
 			merged_models += selection as array
@@ -384,7 +388,8 @@ rollout mc3DGalleryDialog " 3DGallery III: 0/0" width:754 height:608
 
 			rcMenu thumbMenu
 			(
-				menuItem new_1 "Merge..." --"Add To Scene..."
+				menuItem new_1 "Merge..." --"Add To Scene with original names"
+				menuItem new_8 "Merge Unique..." --"Add To Scene with unique names"
 				menuItem new_7 "Open..." --"Open Scene..."
 				separator file_menu_1
 				menuItem new_5 "Select All.."
@@ -395,6 +400,7 @@ rollout mc3DGalleryDialog " 3DGallery III: 0/0" width:754 height:608
 				menuItem new_3 "Delete..."
 				
 				on new_1 picked do mergeModels()
+				on new_8 picked do mergeModels unique:true
 				on new_2 picked do renameModel()
 				on new_3 picked do mcGall.deleteSelectedItems()
 				on new_4 picked do clearSelectedItems() 
@@ -522,19 +528,25 @@ rollout mc3DGalleryDialog " 3DGallery III: 0/0" width:754 height:608
 			GroupBox grpScene "Choice" pos:[4,4] width:268 height:108
 			radiobuttons rdoCopySwitch "" pos:[28,60] width:222 height:16 labels:#("Copy Scene", "Create Shortcut") default:1 columns:2
 			editText edtFileName "" pos:[24,28] width:228 height:24
-			fn saveSceneCopy max_path img_path = (
+			fn saveSceneCopy source_path img_path = (
 		
+				if not (doesFileExist source_path) do (
+
+					messageBox "Scene must be saved. Operation Aborted." title:"3DGallery"
+					return false
+				)
 				if (edtFileName.text.count == 0) do (
 				
 					mcGall.errorMsg 7
 					return false
 				)
 				local target_path = Current_Dir + edtFileName.text + ".max"
-				--format "saveSceneCopy from:%  --> to:%\n " max_path target_path
-				--copyFile max_path target_path
+				format "saveSceneCopy from:%  --> to:%\n " source_path target_path
+				--copyFile source_path target_path
 				if (not (doesFileExist target_path)) or querybox ("filename: "+edtFileName.text+ "\nexists. Overwrite?") then(
 					
-					saveMaxFile target_path quiet:true 
+					copyFile source_path target_path
+					--saveMaxFile target_path quiet:true --removed because of changing save location of current scene
 				) else (
 				
 					return false
@@ -545,17 +557,17 @@ rollout mc3DGalleryDialog " 3DGallery III: 0/0" width:754 height:608
 				mcGall.saveIniData edtFileName.text type:#scene
 				return true
 			)
-			fn saveSceneLink max_path img_path = (
+			fn saveSceneLink source_path img_path = (
 			
-				--format "saveSceneLink max_path:%\n " max_path
-				if not doesFileExist max_path do (
+				--format "saveSceneLink source_path:%\n " source_path
+				if not doesFileExist source_path do (
 					mcGall.errorMsg 6
 					return false
 				)	
 				--save thumbnail
 				renderScene fpath:img_path render_type:#normal thumb_stamp:#link
 				--store INI data with Max File path
-				mcGall.saveIniData edtFileName.text type:#scene link:max_path
+				mcGall.saveIniData edtFileName.text type:#scene link:source_path
 				return true
 			)
 			on mc3DGallerySceneDialog open do (

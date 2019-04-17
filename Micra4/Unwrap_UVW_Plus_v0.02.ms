@@ -8,10 +8,11 @@
 
 try (destroyDialog mcUnwrapEditorDialog) catch ()
 
-rollout mcUnwrapEditorDialog "UV+" width:96 height:456
+rollout mcUnwrapEditorDialog "UV+" width:96 height:592
 (
 	-->Locals
 	local gco
+	local vertex_position
 	--<
 	GroupBox grp6 "Selection" pos:[4,4] width:88 height:128
 	button btn_verts "V" pos:[8,24] width:24 height:24 images:(mcCall.getIcon 103)  tooltip:"Convert Selection to Vertices"
@@ -41,18 +42,25 @@ rollout mcUnwrapEditorDialog "UV+" width:96 height:456
 	button btn_align_r "R" pos:[64,292] width:24 height:24 images:(mcCall.getIcon 235) toolTip:"Align Right"
 	button btn_align_c "C" pos:[36,292] width:24 height:24 images:(mcCall.getIcon 236) toolTip:"Align Center"
 	
-	button btn_rotate_v "V" pos:[8,324] width:24 height:24 toolTip:"Rotate Vertical"
-	button btn_rotate_h "H" pos:[64,324] width:24 height:24 toolTip:"Rotate Horizontal"
-	
 	GroupBox 'grp12' "Complex" pos:[4,356] width:88 height:96 align:#left
 	button 'btn_lm' "p1" pos:[8,372] width:24 height:24 images:(mcCall.getIcon 116) toolTip:"Add Lightmap"
-	
 	button 'btn_stitch' "St" pos:[34,372] width:24 height:24 toolTip:"Stitch Selected Edges (Experimental)"
-	button 'btn_fit' "St" pos:[64,372] width:24 height:24 toolTip:"Fit To Rect (Experimental)"
-	
+	button 'btn_fit' "St" pos:[64,372] width:24 height:24 toolTip:"Fit To Rect" align:#left
+	button 'btn25' "..." pos:[36,504] width:24 height:24 toolTip:"ReformUV CV (Rotate Vertices Around Shape)" align:#left
+	button 'btn_29' "..." pos:[60,504] width:24 height:24 toolTip:"ReformUV CV (Rotate Vertices Around Shape)" align:#left
 	button 'btn_randomize_x' "RandX" pos:[8,400] width:36 height:24 toolTip:"Move Elements Random X" align:#left
 	button 'btn_randomize_y' "RandY" pos:[48,400] width:36 height:24 toolTip:"Move Elements Random Y" align:#left
 	spinner 'spn_randomize' "" pos:[8,428] width:80 height:16 range:[0,100,0.5] align:#left
+	button 'btn_rotate_verts' "R" pos:[12,504] width:24 height:24 toolTip:"ReformUV CV (Rotate Vertices Around Shape)" align:#left
+	button 'btn_rotate_v' "All Vertical" pos:[12,448] width:72 height:24 toolTip:"Rotate Vertical" align:#left
+	button 'btn_rotate_h' "All Horizontal" pos:[12,476] width:72 height:24 toolTip:"Rotate Horizontal" align:#left
+	
+	GroupBox 'grp5' "Copy Paste" pos:[4,540] width:88 height:48 align:#left
+	button 'btn_copy_pos' "C" pos:[8,556] width:24 height:24 toolTip:"Copy Vertex Position" align:#left
+	button 'btn_paste_posx' "Px" pos:[36,556] width:24 height:24 toolTip:"Paste X" align:#left
+	button 'btn_paste_posy' "Py" pos:[64,556] width:24 height:24 toolTip:"Paste Y" align:#left
+	
+
 
 	--> Functions
 	fn errorCheck = --if error found do return true
@@ -348,6 +356,40 @@ rollout mcUnwrapEditorDialog "UV+" width:96 height:456
 		)
 		messageBox "Stitching was Finnished." title:micra.version
 	)	
+	fn rotateVertices way = (
+		
+		local sel_verts = getCurentSelectionAs #verts --this procedure also define gco and select vertices
+		if sel_verts.count == 0 do return false
+		local vertices_pos = for i in sel_verts collect (gco.getVertexPosition 0 i)
+		format "A verts:%\n" vertices_pos
+		mcArray.rotateItems vertices_pos 1 way:way
+		format "B verts:%\n" vertices_pos
+		undo "Reform" on for i=1 to sel_verts.count do (
+			
+			local vert_index =  sel_verts[i]
+			--gco.selectVertices (#(vert_index) as BitArray)
+			--gco.moveSelectedVertices vertices_pos[i]
+			gco.setVertexPosition 0 vert_index vertices_pos[i]
+		)
+	)
+	fn copyVertexPos = (
+		
+		local sel_verts = getCurentSelectionAs #verts --this procedure also define gco and select vertices
+		if sel_verts.count == 0 do return false
+		vertex_position = gco.getVertexPosition 0 sel_verts[1]
+	)
+	fn pastePos way = (
+	
+		if vertex_position == undefined do return false
+		local sel_verts = getCurentSelectionAs #verts --this procedure also define gco and select vertices
+		if sel_verts.count == 0 do return false
+		undo "Paste UVW Position" on for i in sel_verts do (
+			
+			local p = gco.getVertexPosition 0 i
+			if way == #X then p.x = vertex_position.x else p.y = vertex_position.y
+			gco.setVertexPosition 0 i p
+		)
+	)
 	/**	
 	*@ Created by br0t 2014
 	*@ Modified by MerlinEl 2019
@@ -438,6 +480,10 @@ rollout mcUnwrapEditorDialog "UV+" width:96 height:456
 	on btn_rotate_h pressed do alignElements #horizontal
 	on btn_stitch pressed do stitchSelectedEdges()
 	on btn_fit pressed do stretchUvsToFitSquare()
+	on btn_rotate_verts pressed do rotateVertices #right
+	on btn_copy_pos pressed do copyVertexPos()
+	on btn_paste_posx pressed do pastePos #X
+	on btn_paste_posy pressed do pastePos #Y
 	--<
 )
 

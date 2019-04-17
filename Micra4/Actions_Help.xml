@@ -166,6 +166,7 @@
   <Helpers>
     <Lode_Tester val="Stridave zobrazuje dva lody." />
     <Link_Plus val="Linkovani objektu trochu jinak. Neni dokonceno." />
+    <Vertex_Snap val="Copy - Paste vertex position" />
   </Helpers>
   <Animation>
     <Merge_Animation val="Nastavte si adresar s animacemi , ktere se  pak zobrazi v seznamu. Animace pak muzete ruzne kombinovat. (pri aplikaci je nutno mit selektlou kostru)" />
