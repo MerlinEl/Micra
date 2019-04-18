@@ -10,7 +10,7 @@ rollout mcObjIDDialog "" width:144 height:84
 	--Locals:----------------------------------------
 	local dMove = false, DmPos
 	-------------------------------------------------
-	spinner spn_id "" pos:[76,24] width:60 height:16 range:[1,100,1] type:#integer scale:1
+	spinner spn_id "" pos:[76,24] width:60 height:16 range:[1,1000,1] type:#integer scale:1
 	GroupBox grp1 "Material ID:" pos:[4,4] width:136 height:76
 	label 'lbl1' "et - Set:" pos:[26,24] width:47 height:16
 	button btn_close "*" pos:[128,4] width:12 height:12

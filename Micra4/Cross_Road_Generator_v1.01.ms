@@ -1,4 +1,6 @@
---> MerlinEl
+-------------------------
+--> MerlinEl 1.3.2019
+-------------------------
 /* Mod List:
 
 --Modifications
@@ -6,8 +8,8 @@
 	setVertexColor fill_poly red 0	
 	
 --Functions
-	reloadPrefabs()
-	setVertexColor()
+	reloadPrefabs
+	setVertexColor
 */
 Global floaterGenerator
 fn deleteLayerByName layer_name forceDelete:false=  (
@@ -42,8 +44,60 @@ fn setVertexColor obj clr map_channel = (
 )
 --< MerlinEl
 
+-------------------------
+--> Jiří Bičík 18.4.2019
+-------------------------
+/* Mod List:
 
-
+--Modifications
+	on bt_fixBrokenCrossroad pressed do fixBrokenCrossroad selection[1]
+	
+--Functions
+	fixBrokenCrossroad
+*/
+fn fixBrokenCrossroad cross_road = (
+		
+	if cross_road == undefined do return false 
+	local road_helpers =  for kid in cross_road.CrossRoadKids.kids where isValidNode kid collect kid --get all helpers from nodeTab
+	if road_helpers.count != 8 do (
+		
+		format "fixBrokenCrossroad > Unable to fix Cross Road [ % ]. Missing some helper(s)" cross_road.name
+		return false
+	)
+	local tangent_helpers = #()
+	for i = 1 to 4 do tangent_helpers[i] = road_helpers[i] --get tangent helpers
+	cross_road.CrossRoadKids.kids = #() --clear nodeTab data	
+	for i = 1 to 4 do (
+		tangent_helpers[i].parent = cross_road
+		road_helpers[i+4].parent = tangent_helpers[i]
+	)
+	cross_road.CrossRoadKids.kids = road_helpers
+	format "fixBrokenCrossroad >  Cross Road  [ % ] has been fixed." cross_road.name
+	max select none --refresh
+	select cross_road --reselect (auto switch bac to creation mode)
+)
+fn fixBrokenRoad road = (
+		
+	if road == undefined do return false 
+	local road_helpers =  for kid in road.CrossRoadKids.kids where isValidNode kid collect kid --get all helpers from nodeTab
+	if road_helpers.count != 8 do (
+		
+		format "fixBrokenCrossroad > Unable to fix Road [ % ]. Missing some helper(s)" road.name
+		return false
+	)
+	local tangent_helpers = #()
+	for i = 1 to 4 do tangent_helpers[i] = road_helpers[i] --get tangent helpers
+	road.CrossRoadKids.kids = #() --clear nodeTab data	
+	for i = 1 to 4 do (
+		tangent_helpers[i].parent = road
+		road_helpers[i+4].parent = tangent_helpers[i]
+	)
+	road.CrossRoadKids.kids = road_helpers
+	format "fixBrokenCrossroad >  Road  [ % ] has been fixed." road.name
+	max select none --refresh
+	select road --reselect (auto switch bac to creation mode)
+)
+--< Jiří Bičík
 
 gRoadGenCa = attributes RoadGenCa
 attribID:#(0x2949a7a0, 0x5246449a)
@@ -2130,7 +2184,7 @@ rollout dlgCrossroadGenerator2 "Crossroad Generator"
   (
     gCrossroadGeneratorUI = undefined
   )
-  
+   
   on btn_generate pressed do
   ( 
 	undo off(
@@ -4403,7 +4457,8 @@ rollout dlgPickObjectType "Menu"
 	radiobuttons rb_type labels:#("CROSSROAD    ",  "ROAD               ", "UTILITIES") default:1 align:#left  columns:1   --"TURN                           "
 	dropdownlist dd_crossroad_types "" items:#("2 Side Roads", "2 Different Side Roads", "1 Side Road" ) height:6  offset:[100,-50] width:140
 	button bt_createColl "Create Collisions" offset:[55,-3] width:140 height:25
-	button bt_copyUnique "Copy Unique CrossRoad" offset:[55,-3] width:140 height:25  
+	button bt_copyUnique "Copy Unique CrossRoad" offset:[55,-3] width:140 height:25
+	button bt_fixBrokenCrossroad "Fix Crossroad" offset:[-72,-30] width:100 height:25 toolTip:"When helpers are unlinked"	
 	
 -- 	label fill ""
 	
@@ -4449,6 +4504,7 @@ rollout dlgPickObjectType "Menu"
 -- 					addRollout dlgCrossroadGenerator floaterGenerator
 					dd_crossroad_types.visible = True
 					bt_copyUnique.visible = True
+					bt_fixBrokenCrossroad.visible = True
 					bt_createColl.visible = True
 					bt_createColl.pos = [113,30]
 					dlgPickObjectType.height = 90
@@ -4458,6 +4514,7 @@ rollout dlgPickObjectType "Menu"
 					addRollout RoadGeneratorTool floaterGenerator
 					dd_crossroad_types.visible = False
 					bt_copyUnique.visible = false
+					bt_fixBrokenCrossroad.visible = false
 					bt_createColl.visible = True
 					bt_createColl.pos = [113,30]
 					dlgPickObjectType.height = 65
@@ -4467,6 +4524,7 @@ rollout dlgPickObjectType "Menu"
 					addRollout rGeneratorUtilities floaterGenerator
 					dd_crossroad_types.visible = False
 					bt_copyUnique.visible = false
+					bt_fixBrokenCrossroad.visible = false
 					bt_createColl.visible = false
 					dlgPickObjectType.height = 65
 			)
@@ -4491,6 +4549,7 @@ rollout dlgPickObjectType "Menu"
 		callbacks.removeScripts id:#removeCAs
 	)
 	
+	on bt_fixBrokenCrossroad pressed do fixBrokenCrossroad selection[1]
 	
 	on bt_copyUnique pressed do (
 		CopyUniqueCrossRoad $

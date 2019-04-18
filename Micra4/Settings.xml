@@ -106,7 +106,7 @@
     <Soft_Selection val="0.01" />
     <Struct_Action val="0.04" />
     <Time_Break val="0.01" />
-    <Transformer val="0.08" />
+    <Transformer val="0.09" />
     <UE_Model_Importer val="0.07" />
     <Uni_Poly_Counter val="0.18" />
     <UVW_Wizard_Tool val="0.02" />
