@@ -42,6 +42,13 @@ fn setVertexColor obj clr map_channel = (
 	for i = 1 to num_verts do polyOp.setVertColor obj map_channel i clr
 	update obj
 )
+fn fixBrokenRoad obj = (
+		
+	if obj == undefined or findString obj.name "generator_connect_road" == undefined do return false 
+	local fpath = getSourceFileName()
+	local local_dir = getFilenamePath fpath
+	fileIn (local_dir+"Road_Generator_Anatomy.ms")
+)
 --< MerlinEl
 
 -------------------------
@@ -55,49 +62,29 @@ fn setVertexColor obj clr map_channel = (
 --Functions
 	fixBrokenCrossroad
 */
-fn fixBrokenCrossroad cross_road = (
+fn fixBrokenCrossroad obj = (
 		
-	if cross_road == undefined do return false 
-	local road_helpers =  for kid in cross_road.CrossRoadKids.kids where isValidNode kid collect kid --get all helpers from nodeTab
+	if obj == undefined or findString obj.name "generator_crossroad" == undefined do return false 
+	local road_helpers =  for kid in obj.CrossRoadKids.kids where isValidNode kid collect kid --get all helpers from nodeTab
 	if road_helpers.count != 8 do (
 		
-		format "fixBrokenCrossroad > Unable to fix Cross Road [ % ]. Missing some helper(s)" cross_road.name
+		format "fixBrokenCrossroad > Unable to fix Cross Road [ % ]. Some helpers is missing." obj.name
 		return false
 	)
 	local tangent_helpers = #()
 	for i = 1 to 4 do tangent_helpers[i] = road_helpers[i] --get tangent helpers
-	cross_road.CrossRoadKids.kids = #() --clear nodeTab data	
+	obj.CrossRoadKids.kids = #() --clear nodeTab data	
 	for i = 1 to 4 do (
-		tangent_helpers[i].parent = cross_road
+		tangent_helpers[i].parent = obj
 		road_helpers[i+4].parent = tangent_helpers[i]
 	)
-	cross_road.CrossRoadKids.kids = road_helpers
-	format "fixBrokenCrossroad >  Cross Road  [ % ] has been fixed." cross_road.name
+	obj.CrossRoadKids.kids = road_helpers
+	format "fixBrokenCrossroad >  Cross Road  [ % ] has been fixed." obj.name
 	max select none --refresh
-	select cross_road --reselect (auto switch bac to creation mode)
-)
-fn fixBrokenRoad road = (
-		
-	if road == undefined do return false 
-	local road_helpers =  for kid in road.CrossRoadKids.kids where isValidNode kid collect kid --get all helpers from nodeTab
-	if road_helpers.count != 8 do (
-		
-		format "fixBrokenCrossroad > Unable to fix Road [ % ]. Missing some helper(s)" road.name
-		return false
-	)
-	local tangent_helpers = #()
-	for i = 1 to 4 do tangent_helpers[i] = road_helpers[i] --get tangent helpers
-	road.CrossRoadKids.kids = #() --clear nodeTab data	
-	for i = 1 to 4 do (
-		tangent_helpers[i].parent = road
-		road_helpers[i+4].parent = tangent_helpers[i]
-	)
-	road.CrossRoadKids.kids = road_helpers
-	format "fixBrokenCrossroad >  Road  [ % ] has been fixed." road.name
-	max select none --refresh
-	select road --reselect (auto switch bac to creation mode)
+	select obj --reselect (auto switch bac to creation mode)
 )
 --< Jiří Bičík
+
 
 gRoadGenCa = attributes RoadGenCa
 attribID:#(0x2949a7a0, 0x5246449a)
@@ -4372,12 +4359,16 @@ fn FixDuplicitNames =
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 rollout rGeneratorUtilities "Generator Utilities"
 (
-	button bt_hidePoints 			"Hide Help Points" offset:[80,0] width:90 height:25 
-	button bt_SelectVisuals 		"Select Visuals" 	offset:[-90,-30] width:80 height:25 
-	button bt_FixDuplicitNames 	"Unique Names" 	offset:[-7,-30] width:80 height:25 
-	button bt_SelectColls 			"Select Colls    " 	offset:[-90,0] width:80 height:25 
-	button bt_SelectChildren 		"Select Children" 	offset:[-90,0] width:80 height:25 
-	button bt_ReloadPrefabs 	"Reload Prefabs" 	offset:[80,-30] width:90 height:25 
+	button bt_SelectVisuals 		"Select Visuals" 	offset:[-90,0] width:90 height:25 
+	button bt_SelectColls 			"Select Colls    " 	offset:[-90,0] width:90 height:25 
+	button bt_SelectChildren 		"Select Children" 	offset:[-90,0] width:90 height:25 
+	
+	button bt_FixDuplicitNames		"Unique Names" 	offset:[0,-90] width:90 height:25 toolTip:"Fix duple names"
+	button bt_fixBrokenCrossroad	"Fix Crossroad"	offset:[0,0] width:90 height:25 toolTip:"Repair helpers hierarchy"	
+	button bt_fixBrokenRoad			"Fix Road"		offset:[0,0] width:90 height:25 toolTip:"Repair helpers hierarchy"	
+	
+	button bt_hidePoints 			"Hide Help Points"	offset:[90,-90] width:90 height:25 
+	button bt_ReloadPrefabs			"Reload Prefabs"	offset:[90,0] width:90 height:25 toolTip:"Delete old prefabs and load new ones"
 
 	on bt_hidePoints pressed do (
 		HideHelpPoint()
@@ -4400,6 +4391,8 @@ rollout rGeneratorUtilities "Generator Utilities"
 		FixDuplicitNames()
 	)
 	
+	on bt_fixBrokenCrossroad pressed do fixBrokenCrossroad selection[1]
+	on bt_fixBrokenRoad pressed do fixBrokenRoad selection[1]
 	on bt_ReloadPrefabs pressed do reloadPrefabs()
 )
 
@@ -4458,8 +4451,7 @@ rollout dlgPickObjectType "Menu"
 	dropdownlist dd_crossroad_types "" items:#("2 Side Roads", "2 Different Side Roads", "1 Side Road" ) height:6  offset:[100,-50] width:140
 	button bt_createColl "Create Collisions" offset:[55,-3] width:140 height:25
 	button bt_copyUnique "Copy Unique CrossRoad" offset:[55,-3] width:140 height:25
-	button bt_fixBrokenCrossroad "Fix Crossroad" offset:[-72,-30] width:100 height:25 toolTip:"When helpers are unlinked"	
-	
+
 -- 	label fill ""
 	
 	fn switchRadioButton index crossRoadType: 1=
@@ -4504,7 +4496,6 @@ rollout dlgPickObjectType "Menu"
 -- 					addRollout dlgCrossroadGenerator floaterGenerator
 					dd_crossroad_types.visible = True
 					bt_copyUnique.visible = True
-					bt_fixBrokenCrossroad.visible = True
 					bt_createColl.visible = True
 					bt_createColl.pos = [113,30]
 					dlgPickObjectType.height = 90
@@ -4514,7 +4505,6 @@ rollout dlgPickObjectType "Menu"
 					addRollout RoadGeneratorTool floaterGenerator
 					dd_crossroad_types.visible = False
 					bt_copyUnique.visible = false
-					bt_fixBrokenCrossroad.visible = false
 					bt_createColl.visible = True
 					bt_createColl.pos = [113,30]
 					dlgPickObjectType.height = 65
@@ -4524,33 +4514,27 @@ rollout dlgPickObjectType "Menu"
 					addRollout rGeneratorUtilities floaterGenerator
 					dd_crossroad_types.visible = False
 					bt_copyUnique.visible = false
-					bt_fixBrokenCrossroad.visible = false
 					bt_createColl.visible = false
 					dlgPickObjectType.height = 65
 			)
 		)
 	)
 	
-	
 	on dd_crossroad_types selected  arg do (
 		ClearRollFloater floaterGenerator
 		SetCrosroadRoll arg
 	)	
 	
-	
 	on dlgPickObjectType open do (
 		dlgPickObjectType.height = 90
 	)
 	
-
 	on dlgPickObjectType close do (
 		callbacks.removeScripts id:#crossGenRoll
 		callbacks.removeScripts id:#crossGenDell
 		callbacks.removeScripts id:#removeCAs
 	)
-	
-	on bt_fixBrokenCrossroad pressed do fixBrokenCrossroad selection[1]
-	
+
 	on bt_copyUnique pressed do (
 		CopyUniqueCrossRoad $
 	)

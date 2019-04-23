@@ -14,7 +14,7 @@
   </Properties_1>
   <Properties_2>
     <mcMicraDialog active="true" pos="[2172,222]" size="[148,66]" title="" />
-    <mcCustomizeDialog active="false" pos="[1270,470]" size="[600,404]" title="" />
+    <mcCustomizeDialog active="false" pos="[1270,470]" size="[224,404]" title="" />
     <mcProgramDialog active="undefined" pos="[2298,0]" size="[256,232]" title="" />
     <mcisoDialog active="false" pos="[181,152]" size="[140,400]" title="" />
     <mcModifierDialog active="undefined" pos="[100,100]" size="[400,400]" title="" />
@@ -209,7 +209,7 @@
     <btn_C8 action="Pivot_To_Zero" icon="264" />
     <btn_J14 action="Create_3PGrid" icon="81" />
     <btn_J22 action="Normal_Map_Tester" icon="61" />
-    <btn_J21 action="Cross_Road_Generator" icon="266" />
+    <btn_J21 action="Road_Generator_Tool" icon="266" />
     <btn_J4 action="Vertex_Snap" icon="267" />
   </Buttons>
 </USER>
