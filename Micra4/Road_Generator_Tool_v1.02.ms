@@ -66,26 +66,25 @@ fn fixBrokenRoad obj = (
 fn fixBrokenCrossroad obj = (
 		
 	if obj == undefined or findString obj.name "generator_crossroad" == undefined do return false 
-	local road_helpers =  for kid in obj.CrossRoadKids.kids where isValidNode kid collect kid --get all helpers from nodeTab
+	--collect all helpers
+	local road_helpers =  for kid in obj.CrossRoadKids.kids where isValidNode kid collect kid 
 	if road_helpers.count != 8 do (
 		
 		format "fixBrokenCrossroad > Unable to fix Cross Road [ % ]. Some helpers is missing.\n" obj.name
 		return false
 	)
-	local joint_helpers = #()
-	for i = 1 to 4 do joint_helpers[i] = road_helpers[i] --get tangent helpers
-	obj.CrossRoadKids.kids = #() --clear nodeTab data	
+	obj.CrossRoadKids.kids = #() --clear data
+	--link all in hierarchy
 	for i = 1 to 4 do (
 	
-		local joint_helper = joint_helpers[i]
+		local joint_helper = road_helpers[i]
 		local tangent_helper = road_helpers[i+4]
-		joint_helper.parent = obj
-		tangent_helper.parent = joint_helpers[i]
+		joint_helper.parent = obj --link joint in to road
+		tangent_helper.parent = road_helpers[i] --link tangent helper in to joint
 	)
+	--fill data
 	obj.CrossRoadKids.kids = road_helpers
 	format "fixBrokenCrossroad >  Cross Road  [ % ] has been fixed.\n" obj.name
-	max select none --refresh
-	select obj --reselect (auto switch bac to creation mode)
 )
 --< Petr Čapek
 

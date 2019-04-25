@@ -34,6 +34,7 @@
     <mcDialog val="on" />
     <mcDraw val="on" />
     <mcPoly val="on" />
+    <mcNode val="on" />
     <mcSnap val="on" />
     <mcSystem val="on" />
     <mcTransform val="on" />
@@ -116,7 +117,7 @@
     <Dialog_Template val="0.05" />
     <Dialog_Default_Net val="0.29" />
     <Actions_Editor val="0.01" />
-    <Vertex_Color val="1.03" />
+    <Vertex_Color val="1.04" />
     <Object_Inspector val="0.02" />
     <Vertex_Alpha_Blend val="0.01" />
     <Pivot_Planter_Manip val="2.05" />
