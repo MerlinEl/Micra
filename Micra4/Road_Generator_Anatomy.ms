@@ -1,4 +1,5 @@
 Global roadAnatomyToolDialog
+Global roadAnatomyToolObjectSelChange
 if roadAnatomyToolDialog != undefined do DestroyDialog roadAnatomyToolDialog
 rollout roadAnatomyToolDialog "Road Anatomy:" width:336 height:752
 (
@@ -61,7 +62,7 @@ rollout roadAnatomyToolDialog "Road Anatomy:" width:336 height:752
 	button 'btn_cr_p2' "P2" pos:[36,594] width:36 height:24 toolTip:"Tangent Start" align:#left
 	button 'btn_cr_p3' "P3" pos:[36,654] width:36 height:24 toolTip:"Tangent Start" align:#left
 	button 'btn_cr_p4' "P4" pos:[36,714] width:36 height:24 toolTip:"Tangent Start" align:#left
-	button 'btn_cr_reset' "reset" pos:[284,272] width:40 height:16 align:#left
+	button 'btn_cr_reset' "reset" pos:[284,272] width:40 height:16 align:#left ToolTip:" Clear road.CrossRoadKids.kids"
 	
 	pickbutton 'pbtn_cr_d1' "pick" pos:[288,508] width:36 height:24 align:#left
 	pickbutton 'pbtn_cr_d2' "pick" pos:[288,568] width:36 height:24 align:#left
@@ -327,7 +328,7 @@ rollout roadAnatomyToolDialog "Road Anatomy:" width:336 height:752
 		if is_cross_road do active_road.CrossRoadKids.kids = #() --clear data
 	)
 	
-	fn init = (
+	fn getObjectInfo a s = (
 	
 		clearRoadFields() 
 		clearCrossRoadFields() 
@@ -364,9 +365,18 @@ rollout roadAnatomyToolDialog "Road Anatomy:" width:336 height:752
 			)
 		)
 	)
+	fn init = (
 
+		getObjectInfo null null
+		roadAnatomyToolObjectSelChange = nodeEventCallback selectionChanged:getObjectInfo
+	)
+	fn clean = (
+	
+		roadAnatomyToolObjectSelChange = undefined
+		gc light:true
+	)
 	on roadAnatomyToolDialog open do (init())
-		
+	on roadAnatomyToolDialog close do (clean())
 	--Road Controlls
 	on pbtn_d1 picked obj do (addRoadComponent obj #d1)
 	on pbtn_d2 picked obj do (addRoadComponent obj #d2)

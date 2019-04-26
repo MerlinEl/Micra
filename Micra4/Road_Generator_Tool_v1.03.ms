@@ -3,17 +3,16 @@
 -------------------------
 /* Mod List:
 
---Modifications
-	fill_material = MaterialModifier materialId:7 name:"fill_material"
-	setVertexColor fill_poly red 0	
-	button bt_fixBrokenCrossroad	"Fix Crossroad"	offset:[0,0] width:90 height:25 toolTip:"Repair helpers hierarchy"	
-	button bt_roadAnatomy			"Road Anatomy"		offset:[0,0] width:90 height:25 toolTip:"Show - Repair (cross)road hierarchy"	
-	
---Functions
-	reloadPrefabs
-	setVertexColor
-*/
+*@Modifications
 
+	fill_material = MaterialModifier materialId:7 name:"fill_material"
+	roGenStruct.setVertexColor fill_poly red 0		
+	on bt_fixBrokenCrossroad pressed do roGenStruct.fixBrokenCrossroad selection[1]
+	on bt_roadAnatomy pressed do runLocalScript "Road_Generator_Anatomy"
+	on bt_showRoadColorTable pressed do runLocalScript "Road_Generator_Colors"
+	if not (roGenStruct.isRoad road) do (
+	FinishCrossRoadSetups road_1 dlgCrossroadGenerator3 controlsArr finalPos #ThreeR sw:sw weldThreshold: 1.0 ---1.5  (2x)
+*/
 
 /**
 *@Example
@@ -34,74 +33,9 @@ fn runLocalScript script_name = (
 		messageBox ("Script ["+script_file+"] Not Found.") title:"Road Generator:"
 	)
 )
-
-fn deleteLayerByName layer_name forceDelete:false=  (
-	
-	local layerToDelete = LayerManager.getLayerFromName layer_name--find layer that you need to delate
-	if layerToDelete == undefined then (messagebox ("Layer *"+layer_name+"* don't exist!!!") title:"DeleteLayerByName" beep:false) else (
-		
-		if (LayerManager.current.name) == layer_name do (layermanager.getlayer 0).current = true	--if desired layer is current make default as current
-		local layer_nodes
-		layerToDelete.nodes &layer_nodes --get layer nodes
-		if layer_nodes.count != 0 and not forceDelete then  (messagebox ("Layer *"+layer_name+"* is not empty!!!") title:"DeleteLayerByName" beep:false) else (
-			
-			for o in layer_nodes do delete o
-			LayerManager.deleteLayerbyname layer_name
-		)
-	)
-)
-fn reloadPrefabs = (
-	--close road tool
-	local road_tool_file = getSourceFileName()
-	try(closeRolloutFloater  ::floaterGenerator)catch()
-	--delete layer with components
-	deleteLayerByName "---noexport---terrain_generator_modules" forceDelete:true
-	--start road tool
-	fileIn road_tool_file
-)
-fn setVertexColor obj clr map_channel = (
-
-	local num_verts = polyop.getNumVerts obj
-	for i = 1 to num_verts do polyOp.setVertColor obj map_channel i clr
-	update obj
-)
+--Load all functions
+runLocalScript "Road_Generator_Struct"
 --< MerlinEl
-
--------------------------
---> Petr Čapek 18.4.2019
--------------------------
-/* Mod List:
-
---Modifications
-	on bt_fixBrokenCrossroad pressed do fixBrokenCrossroad selection[1]
-	
---Functions
-	fixBrokenCrossroad
-*/
-fn fixBrokenCrossroad obj = (
-		
-	if obj == undefined or findString obj.name "generator_crossroad" == undefined do return false 
-	--collect all helpers
-	local road_helpers =  for kid in obj.CrossRoadKids.kids where isValidNode kid collect kid 
-	if road_helpers.count != 8 do (
-		
-		format "fixBrokenCrossroad > Unable to fix Cross Road [ % ]. Some helpers is missing.\n" obj.name
-		return false
-	)
-	obj.CrossRoadKids.kids = #() --clear data
-	--link all in hierarchy
-	for i = 1 to 4 do (
-	
-		local joint_helper = road_helpers[i]
-		local tangent_helper = road_helpers[i+4]
-		joint_helper.parent = obj --link joint in to road
-		tangent_helper.parent = road_helpers[i] --link tangent helper in to joint
-	)
-	--fill data
-	obj.CrossRoadKids.kids = road_helpers
-	format "fixBrokenCrossroad >  Cross Road  [ % ] has been fixed.\n" obj.name
-)
---< Petr Čapek
 
 
 gRoadGenCa = attributes RoadGenCa
@@ -1055,7 +989,7 @@ fn CreateConnectingRoad road_2 bb_1 bb_2 corner bb_corner angle_road placed_item
 	fill_poly = ConvertTo fill_mesh Editable_poly
 	
 	--ser vertex color to red (show base texture in 3 blend material) MerlinEl 2019
-	setVertexColor fill_poly red 0	
+	roGenStruct.setVertexColor fill_poly red 0	
 	
 	return #(#(left_corner, right_corner, fill_poly, pt), #(sign * left_offset, sign * right_offset, difference, middle.x))
 )
@@ -1591,7 +1525,8 @@ fn CreateRoadWithPL  roads parkingLanes crossroadIndex &spec leftPL rightPL &ori
 -- 	copyRoad.attach copyLeftPl copyRoad 
 -- 	copyRoad.attach copyRighttPl copyRoad 
 
-	WeldEditPoly copyRoad 1.0	
+	--MerlinEl 26.4.2019
+	WeldEditPoly copyRoad 0.1	
 	
 	
 -- 	if origPivot != undefined then (
@@ -1720,6 +1655,7 @@ rollout dlgCrossroadGenerator "Crossroad Generator"
 		InitFirstOpenRollout  &roads &sidewalks &corners &parking_lanes	
 		initialized = true
     )
+	whenSelecteRoad()
   )
   
   on dlgCrossroadGenerator close do
@@ -3035,7 +2971,7 @@ rollout dlgCrossroadGenerator3 "Crossroad Generator"
 		road_1.attach attributes_1[1][3] attributes_1[1][3]
 		
 		
-		FinishCrossRoadSetups road_1 dlgCrossroadGenerator3 controlsArr finalPos #ThreeR sw:sw weldThreshold: 1.5 
+		FinishCrossRoadSetups road_1 dlgCrossroadGenerator3 controlsArr finalPos #ThreeR sw:sw weldThreshold:1.0 -- 1.5 
 	)
   )
   
@@ -3354,7 +3290,7 @@ rollout dlgCrossroadGenerator3 "Crossroad Generator"
 		road_1.attach bottom_corners[2] road_1
 		road_1.attach attributes_2[1][3] attributes_2[1][3]
 		
-		FinishCrossRoadSetups road_1 dlgCrossroadGenerator3 controlsArr finalPos #ThreeFR sw:sw weldThreshold: 1.5 
+		FinishCrossRoadSetups road_1 dlgCrossroadGenerator3 controlsArr finalPos #ThreeFR sw:sw weldThreshold: 1.0 -- 1.5 
 	)
   )
 )
@@ -4137,13 +4073,19 @@ format "btn_generate :%\n" btn_generate
 	on btn_edit_tangents pressed do
 	(
 		road = selection[1]
-		max modify mode
-		select road.roadSpline
-		subobjectLevel = 1
-		macros.run "Tools" "SmartScale"
-
+		-->MerlinEL 26.4.2019
+		if not (roGenStruct.isRoad road) then (
+			
+			format "btn_edit_tangents > Unable edit Tangents on:%\n" road.name
+			
+		) else (
+		--<
+			max modify mode
+			select road.roadSpline
+			subobjectLevel = 1
+			macros.run "Tools" "SmartScale"
+		)
 	)
-	
 	
 	on btn_sync_spline pressed do
 	(
@@ -4151,6 +4093,13 @@ format "btn_generate :%\n" btn_generate
 		
 		for road in sel do (
 		
+			-->MerlinEL 26.4.2019
+			if not (roGenStruct.isRoad road) do (
+			
+				format "btn_sync_spline > Unable sync Spline on:%\n" road.name
+				continue
+			)
+			--<
 			rSpline 	= road.roadSpline
 			startPoint = road.startPoint
 			endPoint = road.endPoint
@@ -4413,10 +4362,10 @@ rollout rGeneratorUtilities "Generator Utilities"
 		FixDuplicitNames()
 	)
 	
-	on bt_fixBrokenCrossroad pressed do fixBrokenCrossroad selection[1]
+	on bt_fixBrokenCrossroad pressed do roGenStruct.fixBrokenCrossroad selection[1]
 	on bt_roadAnatomy pressed do runLocalScript "Road_Generator_Anatomy"
 	on bt_showRoadColorTable pressed do runLocalScript "Road_Generator_Colors"
-	on bt_ReloadPrefabs pressed do reloadPrefabs()
+	on bt_ReloadPrefabs pressed do roGenStruct.reloadPrefabs(getSourceFileName())
 )
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

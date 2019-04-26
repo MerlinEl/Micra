@@ -1,4 +1,5 @@
 Global mcVertexColorDialog
+Global mcVertexAlphaVertsSelChange
 if ::mcVertexColorDialog != undefined do try(destroyDialog mcVertexColorDialog)catch()
 rollout mcVertexColorDialog "Vertex Color v1.02" width:408 height:348
 (
@@ -555,12 +556,11 @@ rollout mcVertexColorDialog "Vertex Color v1.02" width:408 height:348
 		)
 		--callbacks.removeScripts id:#VertexAlphaCallbacks
 		--callbacks.addScript #selectionSetChanged "try( getSelectedVertexAlpha() )catch()" id:#VertexAlphaCallbacks
-		global nodeVertsChange
-		nodeVertsChange = nodeEventCallback subobjectSelectionChanged:getSelectedVertexAlpha
+		mcVertexAlphaVertsSelChange = nodeEventCallback subobjectSelectionChanged:getSelectedVertexAlpha
 	)
 	on mcVertexColorDialog close do (
 		
-		nodeVertsChange = undefined
+		mcVertexAlphaVertsSelChange = undefined
 		gc light:true
 		--callbacks.removeScripts id:#VertexAlphaCallbacks
 	)	
