@@ -342,6 +342,22 @@ rollout mcVertexColorDialog "Vertex Color v1.02" width:408 height:348
 		update $	
 		task_progress = false	
 	)
+	fn getSelectedVertexAlpha s a = (
+		
+		format "sel changed\n"
+		local obj = selection[1]
+		if  subobjectLevel != 1 or classOf obj != Editable_Poly or  not (polyOp.getMapSupport obj -2) do return false
+		local vsel = (getVertSelection obj) as Array
+		if vsel.count == 0 then (
+			
+			spn_alpha.value = 0
+			sld_alpha.value = 0
+			return false
+		) else if vsel.count > 1 do return false
+		local col = polyOp.getMapVert obj -2 vsel[1]
+		spn_alpha.value = col[1]*100
+		sld_alpha.value = col[1]*100
+	)
 	fn setSelectedVerticesAlpha val = (
 		
 		local obj = selection[1]
@@ -351,7 +367,7 @@ rollout mcVertexColorDialog "Vertex Color v1.02" width:408 height:348
 		if subobjectLevel != 1 or vsel.count == 0 do return false
 		local col = [1,1,1] * (val / 100.0)
 		--format "vsel:% val:% col:%\n" vsel val col
-		for v in  vsel do polyOp.setMapVert obj -2 v col
+		with redraw off (for v in  vsel do polyOp.setMapVert obj -2 v col)
 		--update --not works in script but manual yes
 		
 		obj.vertexColorType = 0 -- #color
@@ -362,7 +378,7 @@ rollout mcVertexColorDialog "Vertex Color v1.02" width:408 height:348
 		if not task_progress do (
 			
 			local delayTimer= dotnetobject "Windows.Forms.Timer"
-			delayTimer.Interval=100
+			delayTimer.Interval=200
 			dotnet.AddEventHandler delayTimer "Tick" PerformDelayedTasks
 			delayTimer.enabled = true
 		)	
@@ -375,9 +391,6 @@ rollout mcVertexColorDialog "Vertex Color v1.02" width:408 height:348
 		polyop.setVDataChannelSupport obj 3 true
 		polyop.resetVData obj 3
 		polyop.freeVData obj 3
-		
-		callbacks.removeScripts id:#alpha_test_1
-		callbacks.addScript #selectionSetChanged "try( My_alpha_test() )catch()" id:#alpha_test_1
 		*/
 	
 	/* --Not works
@@ -406,8 +419,7 @@ rollout mcVertexColorDialog "Vertex Color v1.02" width:408 height:348
 		meshop.setVertAlpha obj -2 vsel val
 		update obj
 	)*/
-	)
-	
+	)	
 	fn setSelectionAlpha val src = (
 		
 		if src == #sld then (
@@ -518,15 +530,7 @@ rollout mcVertexColorDialog "Vertex Color v1.02" width:408 height:348
 	on btn_r pressed do ( setSelectionColor red )
 	on btn_g pressed do ( setSelectionColor green )
 	on btn_b pressed do ( setSelectionColor blue )
-	on mcVertexColorDialog open do
-	(
-		--set buttons color
-		for i = 1 to color_buttons.count do  (
-			
-			local color_bmp =  (bitmap 50 50 color:bmp_colors[ i ])
-			color_buttons[ i ].images = #(color_bmp, undefined, 1,1,1,1,1 )
-		)
-	)
+
 	--ALPHA
 	on sld_alpha changed val do (setSelectionAlpha val #sld)
 	on spn_alpha changed val do (setSelectionAlpha val #spn)
@@ -540,9 +544,25 @@ rollout mcVertexColorDialog "Vertex Color v1.02" width:408 height:348
 	on spn_alpha buttondown  do ()
 	on spn_alpha buttonup  do ()*/
 	--OPEN-CLOSE
-	on mcVertexColorDialog close do
+	on mcVertexColorDialog open do
 	(
+		format "open\n"
+		--set buttons color
+		for i = 1 to color_buttons.count do  (
+			
+			local color_bmp =  (bitmap 50 50 color:bmp_colors[ i ])
+			color_buttons[ i ].images = #(color_bmp, undefined, 1,1,1,1,1 )
+		)
+		--callbacks.removeScripts id:#VertexAlphaCallbacks
+		--callbacks.addScript #selectionSetChanged "try( getSelectedVertexAlpha() )catch()" id:#VertexAlphaCallbacks
+		global nodeVertsChange
+		nodeVertsChange = nodeEventCallback subobjectSelectionChanged:getSelectedVertexAlpha
+	)
+	on mcVertexColorDialog close do (
 		
+		nodeVertsChange = undefined
+		gc light:true
+		--callbacks.removeScripts id:#VertexAlphaCallbacks
 	)	
 )
 createDialog mcVertexColorDialog
