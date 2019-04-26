@@ -53,6 +53,7 @@ rollout mcVertexColorDialog "Vertex Color v1.02" width:408 height:348
 	spinner 'spn_alpha' "" pos:[324,312] width:68 height:16 range:[0,100,0] type:#integer align:#left
 
 	--local variables
+	local task_progress = false
 	local radio_buttons = #(rdo_1, rdo_2, rdo_3, rdo_4, rdo_5, rdo_6, rdo_7, rdo_8, rdo_9)
 	local color_buttons = #(btn_1, btn_2, btn_3, btn_4, btn_5, btn_6, btn_7, btn_8, btn_9)
 	local bmp_colors = #(
@@ -331,39 +332,71 @@ rollout mcVertexColorDialog "Vertex Color v1.02" width:408 height:348
 			"default"		: (undefined)
 		)	
 	)
-	
+	function PerformDelayedTasks s a = (
+		
+		task_progress = true
+		s.enabled = false -- important: don't repeat this timer event
+		dotnet.RemoveEventHandler s "Elapsed" PerformDelayedTasks --for sanity and cleanup        
+		-- put all your tasks below   
+		$.vertexColorType = 2 --#alpha
+		update $	
+		task_progress = false	
+	)
 	fn setSelectedVerticesAlpha val = (
 		
+		local obj = selection[1]
+		if classOf obj != Editable_Poly do return false
+		if  not (polyOp.getMapSupport obj -2) do polyOp.setMapSupport obj -2 true
+		local vsel = (getVertSelection obj) as Array
+		if subobjectLevel != 1 or vsel.count == 0 do return false
+		local col = [1,1,1] * (val / 100.0)
+		--format "vsel:% val:% col:%\n" vsel val col
+		for v in  vsel do polyOp.setMapVert obj -2 v col
+		--update --not works in script but manual yes
+		
+		obj.vertexColorType = 0 -- #color
+		update obj
+		
+		/*obj.vertexColorType = 2 --#alpha
+		update obj*/
+		if not task_progress do (
+			
+			local delayTimer= dotnetobject "Windows.Forms.Timer"
+			delayTimer.Interval=100
+			dotnet.AddEventHandler delayTimer "Tick" PerformDelayedTasks
+			delayTimer.enabled = true
+		)	
+		
 		/*
-		polyOp.setMapSupport $ -2 true
-		all_vertexs=polyop.getNumMapVerts $ -2
-		for i = 1 to  all_vertexs do ( format "vert:% alpha:%\n" i ((polyOp.getMapVert $ -2 i)[1] * 100.0 )  )
-		for i = 1 to  all_vertexs do ( format "vert:% alpha:%\n" i (polyOp.setMapVert $ -2 i [0.2, 0.2, 0.2])  )
-		update $
+		polyop.getMapVert <Poly poly> <int mapChannel> <int index>
+		polyop.setMapVert <Poly poly> <int mapChannel> <int index> <Point3 uvw>
+		polyop.setMapFace <Poly poly> <int mapChannel> <int map face index> <map vertex array>
+		
+		polyop.setVDataChannelSupport obj 3 true
+		polyop.resetVData obj 3
+		polyop.freeVData obj 3
 		
 		callbacks.removeScripts id:#alpha_test_1
 		callbacks.addScript #selectionSetChanged "try( My_alpha_test() )catch()" id:#alpha_test_1
 		*/
-		
-		--not works
-	/*
-channel 1: Soft Selection
-channel 2: Vertex weights (for NURMS MeshSmooth)
-channel 3: Vertex Alpha values
-channel 4: Cornering values for subdivision use
-channel_index = 1
-vertex_index = 7
-alpha_value = 0.5
-polyop.setVDataChannelSupport $ channel_index true
-polyop.getVDataChannelSupport $ channel_index
-polyop.getVDataValue $ channel_index vertex_index
-polyop.setVDataValue $ channel_index #(vertex_index) alpha_value
-update $
+	
+	/* --Not works
+	channel 1: Soft Selection
+	channel 2: Vertex weights (for NURMS MeshSmooth)
+	channel 3: Vertex Alpha values
+	channel 4: Cornering values for subdivision use
+	channel_index = 1
+	vertex_index = 7
+	alpha_value = 0.5
+	polyop.setVDataChannelSupport $ channel_index true
+	polyop.getVDataChannelSupport $ channel_index
+	polyop.getVDataValue $ channel_index vertex_index
+	polyop.setVDataValue $ channel_index #(vertex_index) alpha_value
+	update $
 	*/
 		
-	)
-	
-	/*fn setSelectedVerticesAlpha val = (
+	/* --Works for Ediatble Mesh
+	fn setSelectedVerticesAlpha val = (
 
 		local obj = (selection as array)[1]
 		if obj == undefined do return false
@@ -373,6 +406,7 @@ update $
 		meshop.setVertAlpha obj -2 vsel val
 		update obj
 	)*/
+	)
 	
 	fn setSelectionAlpha val src = (
 		
@@ -384,6 +418,7 @@ update $
 			
 			sld_alpha.value = val			
 		)
+		setSelectedVerticesAlpha val
 	)
 	------------------------------------------------------------------------------
 	--< DXShader
@@ -479,11 +514,10 @@ update $
 		for o in selection do o.vertexColorsShaded = false
 		completeRedraw()
 	)
+	--COLOR
 	on btn_r pressed do ( setSelectionColor red )
 	on btn_g pressed do ( setSelectionColor green )
 	on btn_b pressed do ( setSelectionColor blue )
-	on sld_alpha changed val do (setSelectionAlpha val #sld)
-	on spn_alpha changed val do (setSelectionAlpha val #spn)
 	on mcVertexColorDialog open do
 	(
 		--set buttons color
@@ -493,6 +527,19 @@ update $
 			color_buttons[ i ].images = #(color_bmp, undefined, 1,1,1,1,1 )
 		)
 	)
+	--ALPHA
+	on sld_alpha changed val do (setSelectionAlpha val #sld)
+	on spn_alpha changed val do (setSelectionAlpha val #spn)
+	/*on sld_alpha buttonup  do (
+		
+		$.vertexColorType = 2 --#alpha
+		update $
+	)*/
+	/*on sld_alpha buttondown  do ()
+	on spn_alpha entered text do ()
+	on spn_alpha buttondown  do ()
+	on spn_alpha buttonup  do ()*/
+	--OPEN-CLOSE
 	on mcVertexColorDialog close do
 	(
 		
