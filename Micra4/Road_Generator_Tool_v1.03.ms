@@ -102,6 +102,7 @@ global generated_road = undefined
 ------------------------------------------------------------------------------
 
 C_LAYER_NAME = "---noexport---terrain_generator_modules"
+-- C_COMPONENTS_PATH = "E:\\Aprog\\Orien\Micra\\repo_sync\\_NEW\\Road Tool\\terrain_generator_components.max"
 -- C_COMPONENTS_PATH = LS3DGUP.LS3DGUP.UtilsPath+"terrain_generator_components.max"
 C_COMPONENTS_PATH = "D:\\!2K_Games\\scotch_dev\\resources\\graphics\\_data_\\3dsmax\\terrain_generator_components.max"
 
