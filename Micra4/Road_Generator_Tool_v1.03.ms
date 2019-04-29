@@ -1655,7 +1655,6 @@ rollout dlgCrossroadGenerator "Crossroad Generator"
 		InitFirstOpenRollout  &roads &sidewalks &corners &parking_lanes	
 		initialized = true
     )
-	whenSelecteRoad()
   )
   
   on dlgCrossroadGenerator close do
@@ -4421,7 +4420,8 @@ rollout dlgPickObjectType "Menu"
 (
 	radiobuttons rb_type labels:#("CROSSROAD    ",  "ROAD               ", "UTILITIES") default:1 align:#left  columns:1   --"TURN                           "
 	dropdownlist dd_crossroad_types "" items:#("2 Side Roads", "2 Different Side Roads", "1 Side Road" ) height:6  offset:[100,-50] width:140
-	button bt_createColl "Create Collisions" offset:[55,-3] width:140 height:25
+	button bt_createColl "Create Collisions" offset:[55,-90] width:140 height:25
+	button bt_createShortcut "Create Shortcut" offset:[55,0] width:140 height:25
 	button bt_copyUnique "Copy Unique CrossRoad" offset:[55,-3] width:140 height:25
 
 -- 	label fill ""
@@ -4469,7 +4469,8 @@ rollout dlgPickObjectType "Menu"
 					dd_crossroad_types.visible = True
 					bt_copyUnique.visible = True
 					bt_createColl.visible = True
-					bt_createColl.pos = [113,30]
+					bt_createColl.pos = [113,60]
+					bt_createShortcut.visible = false
 					dlgPickObjectType.height = 90
 				)
 			2 :(
@@ -4479,6 +4480,7 @@ rollout dlgPickObjectType "Menu"
 					bt_copyUnique.visible = false
 					bt_createColl.visible = True
 					bt_createColl.pos = [113,30]
+					bt_createShortcut.visible = True
 					dlgPickObjectType.height = 65
 				)
 			3 :(
@@ -4487,6 +4489,7 @@ rollout dlgPickObjectType "Menu"
 					dd_crossroad_types.visible = False
 					bt_copyUnique.visible = false
 					bt_createColl.visible = false
+					bt_createShortcut.visible = false
 					dlgPickObjectType.height = 65
 			)
 		)
@@ -4510,6 +4513,7 @@ rollout dlgPickObjectType "Menu"
 	on bt_copyUnique pressed do (
 		CopyUniqueCrossRoad $
 	)
+	on bt_createShortcut pressed do roGenStruct.createCrossroadFromRoad selection[1]
 	-------------------------------------------------	COLLS -------------------------------------------------------------------------
 -- 	#### Prasecina na ENTOU:] kdyz rychle tak rychle########################################################
 	on bt_createColl pressed do (
@@ -5765,8 +5769,8 @@ callbacks.addscript #postNodesCloned "CleanCAs()" id:#removeCAs
 --###################################################################################
 
 
-
-
+-- setup rollouts on start (depends on selection [nothing, road, crossroad]) MerlinEl 2019
+whenSelecteRoad()
 
 
 -- removeRollout  dlgCrossroadGenerator theNewFloater

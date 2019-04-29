@@ -28,6 +28,7 @@ struct ROAD_GENERATOR_STRUCTURE	(
 	*/
 	fn hasCustomAttribute obj attr = (
 
+		if not (isValidNode obj) do return false 
 		local defs = custAttributes.getDefs obj
 		if defs == undefined do return false
 		for a in defs where a.name == attr do return true
@@ -36,6 +37,10 @@ struct ROAD_GENERATOR_STRUCTURE	(
 	fn isRoad obj = (
 		
 		hasCustomAttribute obj #RoadGenCa
+	),
+	fn isCrossRoad obj = (
+		
+		hasCustomAttribute obj #CrossRoadKids
 	),
 	fn deleteLayerByName layer_name forceDelete:false=  (
 	
@@ -93,7 +98,15 @@ struct ROAD_GENERATOR_STRUCTURE	(
 		--fill data
 		obj.CrossRoadKids.kids = road_helpers
 		format "fixBrokenCrossroad >  Cross Road  [ % ] has been fixed.\n" obj.name
-	)
+	),
+	/**
+	*@Usage > make short version of selected road with two connection dummies and convert it to corssroad
+	*/
+	fn createCrossroadFromRoad obj = (
+
+
+		format "is road:%\n" (isRoad obj)
+	)	
 	/*<end>*/
 )	
  --create instance

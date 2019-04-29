@@ -221,9 +221,12 @@ struct MICRA_NEW_STRUCTURE	(
 		mcPopUp.progeressbar 100 msg:"Downoad Finished:" close:true
 		dotNet.removeEventHandler s "DownloadProgressChanged" mcNet.downloadProgress
 		dotNet.removeEventHandler s "DownloadFileCompleted" mcNet.downloadCompleted
+		s.dispose()
+		/* remove this line if all is OK
+		dotNet.removeEventHandler mcNet.WebClient "DownloadProgressChanged" mcNet.downloadProgress
+		dotNet.removeEventHandler mcNet.WebClient "DownloadFileCompleted" mcNet.downloadCompleted
 		WebClient.dispose()
-		/*dotNet.removeEventHandler mcNet.WebClient "DownloadProgressChanged" mcNet.downloadProgress
-		dotNet.removeEventHandler mcNet.WebClient "DownloadFileCompleted" mcNet.downloadCompleted*/
+		*/
 		if a.Error != undefined then (
 		
 			format "mcNet > downloadCompleted > Error:%\n" (a.Error.toString())

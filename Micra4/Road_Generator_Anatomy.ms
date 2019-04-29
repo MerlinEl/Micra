@@ -77,7 +77,11 @@ rollout roadAnatomyToolDialog "Road Anatomy:" width:336 height:752
 	--Road Functions
 	fn addRoadComponent obj type = (
 		
-		if not (isValidNode active_road) do return false
+		if not (roGenStruct.isRoad active_road) do (
+			
+			messageBox "Select Road first." title:"Road Generator"
+			return false
+		)
 		case type of (
 			
 			#d1:	(
@@ -167,7 +171,11 @@ rollout roadAnatomyToolDialog "Road Anatomy:" width:336 height:752
 	--CrossRoad Functions
 	fn addCrossRoadComponent  obj type = (
 		
-		if not (isValidNode active_road) do return false
+		if not (roGenStruct.isCrossRoad active_road) do (
+			
+			messageBox "Select Crossroad first." title:"Road Generator"
+			return false
+		)
 		case type of (
 			
 			#d1:	(
@@ -330,12 +338,12 @@ rollout roadAnatomyToolDialog "Road Anatomy:" width:336 height:752
 	
 	fn getObjectInfo a s = (
 	
+		active_road = selection[1]
+		if active_road == undefined or classOf active_road != Editable_Poly do return false  --if nothing selected, reset fields
+			
 		clearRoadFields() 
 		clearCrossRoadFields() 
 		
-		active_road = selection[1]
-		if active_road == undefined do return false  --if nothing selected, reset fields
-
 		local is_road = findString active_road.name "generator_connect_road" != undefined
 		local is_cross_road = findString active_road.name "generator_crossroad" != undefined
 		if  is_road then (
