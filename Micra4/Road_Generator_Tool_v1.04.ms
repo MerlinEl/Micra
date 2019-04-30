@@ -38,37 +38,44 @@ runLocalScript "Road_Generator_Struct"
 --< MerlinEl
 
 
-gRoadGenCa = attributes RoadGenCa
-attribID:#(0x2949a7a0, 0x5246449a)
-(
+--###################################################################################
+--															Custom Attributes
+--###################################################################################
+Global gRoadGenCa = attributes RoadGenCa attribID:#(0x2949a7a0, 0x5246449a) ( --genClassID()
+
 	parameters params(
+		
 		roadSpline 		type:#node
 		startPoint		type:#node
-		endPoint			type:#node
+		endPoint		type:#node
 		controlsStr		type:#string
 	)
 )
-
 -------------------------------------------------------------------------------------
-gSplineGenCa = attributes SplineGenCa
-attribID:#(0x2d6fe027, 0x4236cbe9)  ---- buuuuu
-(
+Global gSplineGenCa = attributes SplineGenCa attribID:#(0x2d6fe027, 0x4236cbe9) ( ---- buuuuu
+
 	parameters params(
+	
 		road 			type:#string
 	)
 )
+-------------------------------------------------------------------------------------
+Global gCACrossRoadKids = attributes CrossRoadKids attribID:#(0x449b771a, 0x1d589bab) (
 
-
--------------------------------------------------------------------------------------  <<<<<<<<<
-gCACrossRoadKids = attributes CrossRoadKids
-attribID:#(0x449b771a, 0x1d589bab)
-(
 	parameters params(
+	
 		kids 			type:#nodeTab tabSizeVariable:true
 		controlsStr type:#string
 	)
 )
+-------------------------------------------------------------------------------------
+Global gShortcutCa = attributes ShortcutCa attribID:#(0x1635194a, 0x171142a1)(
 
+	parameters params( 
+	
+		controlsStr		type:#string
+	)
+)
 
 --###################################################################################
 -- 															ASCII SIGNS
@@ -233,17 +240,6 @@ fn RMax a b =
 (
 	if a < b then return b else return a
 )	
-
-fn ReverseArray arr =
-(
-	new_arr = #()
-	for i in arr.count to 1 by -1 do
-	(
-		--swap_items arr[i] arr[arr.count-i+1]
-		append new_arr arr[i]
-	)
-	return new_arr
-)
 
 fn GetSign boolean =
 (
@@ -792,7 +788,7 @@ fn GetRoadCornerVertices corner fromBottom bb =
 	
 	if fromBottom == true then
 	(
-		vertices = ReverseArray vertices
+		vertices = roGenStruct.reverseArray vertices
 	)
 	
 	return vertices
@@ -900,7 +896,7 @@ fn CreateConnectingRoad road_2 bb_1 bb_2 corner bb_corner angle_road placed_item
 	road_vertices = GetRoadVertices sliced_road
 	road_vertices = RotateVertices road_vertices (angle_road+rotate_angle)
 	road_vertices = TranslateVertices road_vertices [sign*offset, 0.0, 0.0]
-	road_vertices = ReverseArray road_vertices
+	road_vertices = roGenStruct.reverseArray road_vertices
 			
 	right_verts = GetRoadCornerVertices right_corner true bb_corner	
 	right_verts = RotateVertices right_verts (180+rotate_angle)
@@ -1065,80 +1061,6 @@ fn WeldEditPoly epoly precision =
 --###################################################################################
 --														NEW ADDTIONAL FUNCTIONS 
 --###################################################################################
------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-fn GetRestOfKids kids =
-(
-	joiningKids = #()				-- hidden points from tangents
-	for kid in kids do(
-		if kid != undefined then append joiningKids kid.children[1]
-		else append joiningKids undefined
-	)
-	join kids joiningKids
-)
-
------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-fn GetKidsOfCrossRoad children =
-(
-	childCount = children.count
-	yPoses = #()
-	kids = #() -- list containing normal road points and hidden points
-	
-	if childCount < 4 then(
-		for p in children do append yPoses p.pos.y
-		
-		thirdPointPos = yPoses[3]
-		if thirdPointPos > yPoses[2] then(
-			kids[1] = children[1]
-			kids[2] = children[2]
-			kids[3] = children[3]
-			kids[4] = undefined
-		)else(
-			kids[1] = children[1]
-			kids[2] = children[2]
-			kids[3] = undefined
-			kids[4] = children[3]
-		)
-	)else(
-		select children
-		kids = selection as Array
-	)
-	kids = GetRestOfKids kids
-	kids 
-	
-)
------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-fn GetCAControlsSTR dialog controlsArr =
-(	
-	result = ""
-	subStr = ""
-	
-	for cntr in controlsArr do (
-		if classof cntr == SpinnerControl then ( 	-- spinner
-			subStr = dialog.name  + "." + cntr.name + ".value = " + (cntr.value as string)
-		)
-		
-		if classof cntr == CheckBoxControl or classof cntr == RadioControl then( -- checkbox, radiobutton
-			subStr = dialog.name  + "." + cntr.name + ".state = " + (cntr.state as string)
-		)
-		
-		if classof cntr == ComboBoxControl then (
-			subStr = dialog.name  + "." + cntr.name + ".selection = " + (cntr.selection as string)
-		)
-		
-		result += subStr
-		result += ";"
-	)
-	result
-)
-
------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-fn SetCrossRoadCA obj dialog controlsArr=
-(
-	custAttributes.add obj gCACrossRoadKids #unique
-	obj.kids = GetKidsOfCrossRoad obj.children
-	obj.controlsStr = GetCAControlsSTR dialog controlsArr
-)
 
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 fn DeleteCrossRoadChildren obj =
@@ -1384,7 +1306,7 @@ fn FinishCrossRoadSetups road dialog controlsArr finalPos roadType sw:undefined 
 	
 
 	
-	SetCrossRoadCA road dialog controlsArr
+	roGenStruct.setCrossRoadCA road dialog controlsArr
 -- 	CreateNameBuffer road
 	
 -- 	when road deleted id:#CrossDelete obj do --define a when construct
@@ -1409,7 +1331,7 @@ fn FinishCrossRoadSetups road dialog controlsArr finalPos roadType sw:undefined 
 
     generated_road = road
 	
-	SetCrossRoadWireColor generated_road oldColor:oldWireColor
+	roGenStruct.SetCrossRoadWireColor generated_road oldColor:oldWireColor
     select generated_road
 	
 -- 	generated_road.name = uniqueName (road.name)
@@ -1705,6 +1627,7 @@ rollout dlgCrossroadGenerator "Crossroad Generator"
 		pRight 	= undefined
 		pLeft 	= undefined
 		if generated_road != undefined then (
+		
 			pTop 	= generated_road.kids[3]
 			pBot 		= generated_road.kids[4]
 			pRight 	= generated_road.kids[1]
@@ -1739,33 +1662,9 @@ rollout dlgCrossroadGenerator "Crossroad Generator"
 		AddRoadSlicer road_1 (max_dist_left) 3
 		AddRoadSlicer road_1 (max_dist_right) 2
 		
-			
-		if generated_road == undefined then (
-			pt1 = point()
-			roGenStruct.SetPointAppearance pt1
-			tn1 = point()
-			hide tn1
-			append pt1.children tn1
-			pt2 = point()
-			roGenStruct.SetPointAppearance pt2
-			tn2 = point()
-			hide tn2
-			append pt2.children tn2
-		)else(
-			pt1 = pRight
-			tn1 = pRight.children[1]
-			pt2 = pLeft
-			tn2 = pLeft.children[1]
-		)
-		pt1.position = [max_dist_right, 0, 0]/*+road_1.position*/
-		tn1.position = [max_dist_right+C_TANGENT_OFFSET, 0, 0]
-		pt2.position = [max_dist_left, 0, 0]/*+road_1.position*/
-		tn2.position = [max_dist_left-C_TANGENT_OFFSET, 0, 0]
-
-		
-		
-		append road_1.children pt1
-		append road_1.children pt2
+		local pts = roGenStruct.setUpCrossRoadPoints max_dist_left max_dist_right c_tangent_offset road:generated_road
+		append road_1.children pts[1]
+		append road_1.children pts[2]
 		append road_1.children attributes_1[1][4]
 		append road_1.children attributes_2[1][4]
 		
@@ -3786,15 +3685,7 @@ fn ConstructRoadPrototype road specs placeParkingLeft placeParkingRight placeSid
 
 
 ---------------------------------------------------------------------------------------------------------------------
-fn SetCustomAttrForRoad road rSpline sPoint ePoint dialog controlsArr = 
-(
-	custAttributes.add road gRoadGenCa #unique --BaseObject:True
-	road.roadSpline 	= rSpline
-	road.startPoint 	= sPoint
-	road.endPoint 		= ePoint
-	road.controlsStr	= GetCAControlsSTR dialog controlsArr
-	True
-)
+
 
 ---------------------------------------------------------------------------------------------------------------------
 
@@ -3847,8 +3738,8 @@ rollout RoadGeneratorTool "Road Generator"
 	button btn_sync_spline "Sync Spline" width: 100 height: 35 offset:[50, -40] align:#center
 -- 	button btn_update "Update Road" width: 160 height: 28 offset:[0, -5] align:#center
 	button btn_generate "Generate Road" width: 200 height: 35 offset:[0, 10] align:#center
-	
-	
+	button bt_generateShortcut "Generate Shortcut" width:200 height:35 offset:[0,0]
+
 	
 	local controlsArr = #(dd_road_prefabs_1, cb_parking_lane_left, cb_parking_lane_right, cb_sidewalks_left, cb_sidewalks_right, spinner_tangent)
 	
@@ -3906,10 +3797,9 @@ rollout RoadGeneratorTool "Road Generator"
 		append specs $generator_sidewalk_left
 		append specs $generator_sidewalk_right
 	)
-	
+	on bt_generateShortcut pressed do roGenStruct.generateRoadShortcut()
 	on btn_generate pressed do
-	(
-format "btn_generate :%\n" btn_generate	
+	(	
 		undo off(
 			sel = selection as Array
 			selCount = sel.count
@@ -3922,7 +3812,6 @@ format "btn_generate :%\n" btn_generate
 				t1 = sel[1].children[1].position
 				p2 = sel[2].position
 				t2 = sel[2].children[1].position
-						
 				-- create spline from selected points
 				local sp = splineShape()
 				addNewSpline sp
@@ -3946,14 +3835,14 @@ format "btn_generate :%\n" btn_generate
 				finalRoad.name = replace finalRoad.name 11 6 "connect_road"
 				finalRoad.name = uniquename(finalRoad.name)
 				
-				SetCustomAttrForRoad finalRoad sp $[1] $[2] RoadGeneratorTool controlsArr
+				roGenStruct.setRoadCA finalRoad sp $[1] $[2] RoadGeneratorTool controlsArr
 				custAttributes.add sp gSplineGenCa #unique
 				sp.road = finalRoad.name
 				--sp.parent = finalRoad --MerlinEl (2.24.2019) --can't do this, depency loop
 				------------------------------------------------------------------
 				delete road
 
-				SetCrossRoadWireColor finalRoad
+				roGenStruct.SetCrossRoadWireColor finalRoad
 				select finalRoad				
 			)
 
@@ -4007,7 +3896,7 @@ format "btn_generate :%\n" btn_generate
 						finalRoad.name = replace finalRoad.name 11 6 "connect_road"
 						finalRoad.name = uniquename(finalRoad.name)
 						
-						SetCustomAttrForRoad finalRoad spline road.startPoint road.endPoint RoadGeneratorTool controlsArr
+						roGenStruct.setRoadCA finalRoad spline road.startPoint road.endPoint RoadGeneratorTool controlsArr
 						spline.road = finalRoad.name
 						-- delete old road
 						
@@ -4016,7 +3905,7 @@ format "btn_generate :%\n" btn_generate
 						delete road
 						delete selected_road
 						
-						SetCrossRoadWireColor finalRoad oldColor:oldWireColor
+						roGenStruct.SetCrossRoadWireColor finalRoad oldColor:oldWireColor
 						finalRoad.parent = prevParent
 						select finalRoad
 					)
@@ -4087,14 +3976,6 @@ format "btn_generate :%\n" btn_generate
 -- 														DIALOG FLOATER
 --###################################################################################
 
-
-
-
-
-
-
-
-
 -- createDialog dlgPickObjectType
 Global floaterGenerator
 try(closeRolloutFloater  floaterGenerator)catch()
@@ -4148,7 +4029,7 @@ fn CopyUniqueCrossRoad  crossroad= (
 		kidsShift = 4
 		
 		newCR = copy crossroad
-		SetCrossRoadWireColor newCR oldColor:crossroad.wirecolor
+		roGenStruct.SetCrossRoadWireColor newCR oldColor:crossroad.wirecolor
 		
 		originalCRChildren = crossroad.children
 		childrenCount = originalCRChildren.count
@@ -4378,8 +4259,7 @@ rollout dlgPickObjectType "Menu"
 (
 	radiobuttons rb_type labels:#("CROSSROAD    ",  "ROAD               ", "UTILITIES") default:1 align:#left  columns:1   --"TURN                           "
 	dropdownlist dd_crossroad_types "" items:#("2 Side Roads", "2 Different Side Roads", "1 Side Road" ) height:6  offset:[100,-50] width:140
-	button bt_createColl "Create Collisions" offset:[55,-90] width:140 height:25
-	button bt_createShortcut "Create Shortcut" offset:[55,0] width:140 height:25
+	button bt_createColl "Create Collisions" offset:[55,-3] width:140 height:25
 	button bt_copyUnique "Copy Unique CrossRoad" offset:[55,-3] width:140 height:25
 
 -- 	label fill ""
@@ -4427,18 +4307,16 @@ rollout dlgPickObjectType "Menu"
 					dd_crossroad_types.visible = True
 					bt_copyUnique.visible = True
 					bt_createColl.visible = True
-					bt_createColl.pos = [113,60]
-					bt_createShortcut.visible = false
+					bt_createColl.pos = [113,30]
 					dlgPickObjectType.height = 90
 				)
 			2 :(
-					floaterGenerator.size = [270,360]
+					floaterGenerator.size = [270,400]
 					addRollout RoadGeneratorTool floaterGenerator
 					dd_crossroad_types.visible = False
 					bt_copyUnique.visible = false
 					bt_createColl.visible = True
 					bt_createColl.pos = [113,30]
-					bt_createShortcut.visible = True
 					dlgPickObjectType.height = 65
 				)
 			3 :(
@@ -4447,7 +4325,6 @@ rollout dlgPickObjectType "Menu"
 					dd_crossroad_types.visible = False
 					bt_copyUnique.visible = false
 					bt_createColl.visible = false
-					bt_createShortcut.visible = false
 					dlgPickObjectType.height = 65
 			)
 		)
@@ -4471,7 +4348,6 @@ rollout dlgPickObjectType "Menu"
 	on bt_copyUnique pressed do (
 		CopyUniqueCrossRoad $
 	)
-	on bt_createShortcut pressed do roGenStruct.createCrossroadFromRoad selection[1]
 	-------------------------------------------------	COLLS -------------------------------------------------------------------------
 -- 	#### Prasecina na ENTOU:] kdyz rychle tak rychle########################################################
 	on bt_createColl pressed do (
@@ -4754,7 +4630,7 @@ rollout dlgPickObjectType "Menu"
 			
 						generated_road = road_1
 						
-						SetCrossRoadWireColor generated_road
+						roGenStruct.SetCrossRoadWireColor generated_road
 						
 						
 						append toSelect generated_road
@@ -5101,7 +4977,7 @@ rollout dlgPickObjectType "Menu"
 			
 						generated_road = road_1
 						
-						SetCrossRoadWireColor generated_road
+						roGenStruct.SetCrossRoadWireColor generated_road
 						
 						append toSelect generated_road
 						
@@ -5305,7 +5181,7 @@ rollout dlgPickObjectType "Menu"
 			
 						generated_road = road_1
 						
-						SetCrossRoadWireColor generated_road
+						roGenStruct.SetCrossRoadWireColor generated_road
 						
 						append toSelect generated_road
 						
@@ -5513,7 +5389,7 @@ rollout dlgPickObjectType "Menu"
 			
 						generated_road = road_1
 						
-						SetCrossRoadWireColor generated_road
+						roGenStruct.SetCrossRoadWireColor generated_road
 						
 						append toSelect generated_road
 						
@@ -5582,7 +5458,7 @@ rollout dlgPickObjectType "Menu"
 								delete selected_road
 								
 								
-								SetCrossRoadWireColor finalRoad --oldColor:oldWireColor
+								roGenStruct.SetCrossRoadWireColor finalRoad --oldColor:oldWireColor
 	-- 							finalRoad.parent = prevParent
 								
 								MoveCollToLayer finalRoad
@@ -5681,6 +5557,7 @@ fn ReadControlsFromRoad roadObj=
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 fn whenSelecteRoad =
 (
+	if not roGenStruct.SLECT_OBJECT_CALLBACK_ENABLED do return OK
 	sel = (selection as array)[1]
 	if selection.count == 1 then (
 		if classof sel == editable_poly and (matchPattern sel.name pattern:"generator_*road_*") then (

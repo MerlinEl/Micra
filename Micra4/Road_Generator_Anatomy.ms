@@ -98,7 +98,7 @@ rollout roadAnatomyToolSubDialogB "CrossRoad"
 	on btn_cr_p2 pressed  do (roadAnatomyToolDialog.selCrossRoadComponent #p2)
 	on btn_cr_p3 pressed  do (roadAnatomyToolDialog.selCrossRoadComponent #p3)
 	on btn_cr_p4 pressed  do (roadAnatomyToolDialog.selCrossRoadComponent #p4)
-	on btn_cr_reset pressed do (rroadAnatomyToolDialog.esetCrossRoad())
+	on btn_cr_reset pressed do (rroadAnatomyToolDialog.resetCrossRoad())
 )
  
 rollout roadAnatomyToolDialog "Road Anatomy:" width:352 height:280
