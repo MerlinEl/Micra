@@ -88,6 +88,46 @@ struct MICRA_MATH (
 		value = amin #(value, max_val) --max
 	),
 	fn degTorad deg = (PI/deg),
+	/**
+	*@Usage Kružnice vepsaná do trojúhelníku TEST
+	
+	--TRIGON  --by gazybara
+	local spl = splineshape()
+	addNewSpline spl
+	addKnot spl 1 #corner #line [-50,-30,0]
+	addKnot spl 1 #corner #line [0,100,0]
+	addKnot spl 1 #corner #line [60,40,0]
+	close spl 1
+	spl.pivot = spl.center
+	updateshape spl
+	p1 = getknotpoint spl 1 1
+	p2 = getknotpoint spl 1 2
+	p3 = getknotpoint spl 1 3
+	A = distance p1 p2
+	B = distance p2 p3
+	C = distance p1 p3
+	S = (A+B+C)/2
+	P = sqrt(S*(S-A)*(S-B)*(S-C))
+	circle_radius = P/S
+	circle_center = ((p1+p2+p3)/(A+B+C))*spl.transform
+	--circle_center = mcMath.circumCenter p1 p2 p3
+	circle pos:circle_center radius:circle_radius
+	
+	--center calculation --by Swordslayer
+	fn barycentricToWorld p1 p2 p3 u v w = ( (u*p1 + v*p2 + w*p3) / (u + v + w) ),
+	fn circumCenter p1 p2 p3 = ( --by Swordslayer
+		
+		local a = p3 - p2
+		local b = p1 - p3
+		local c = p2 - p1
+	 
+		local u = (dot a a) * (dot c b)
+		local v = (dot b b) * (dot c a)
+		local w = (dot c c) * (dot b a)
+	 
+		barycentricToWorld p1 p2 p3 u v w
+	),
+	*/
 	fn getVectorsAngle v1 v2 = (acos(dot (normalize v1) (normalize v2))),
 	fn getLinesAngle pA pB pC pD = (
 	
