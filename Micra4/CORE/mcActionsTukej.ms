@@ -28,7 +28,7 @@ struct MICRA_TUKEJ_STRUCTURE	(
 	),
 	fn directXLS3DSwitch = (
 		
-		if gLS3DDXSupport != undefined do gLS3DDXSupport.OpenConfigDialog()
+		if ::gLS3DDXSupport != undefined do ::gLS3DDXSupport.OpenConfigDialog()
 	),
 	fn testNormalMapToggle = (
 		

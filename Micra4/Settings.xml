@@ -125,7 +125,7 @@
     <Live_Measure val="0.09" />
     <Live_Modeling val="0.02" />
     <Micra_Update val="0.05" />
-    <Road_Generator_Tool val="1.04" />
+    <Road_Generator_Tool val="1.05" />
   </Version>
   <SystemFiles val="Micra's Settings Files">
     <Actions val="Contains all accesible Micra's actions" />

@@ -6,7 +6,7 @@
     <mc_Dialog_C active="true" pos="[2170,450]" size="[148,66]" title="Pivot:" btnCount="[6,2]" />
     <mc_Dialog_D active="true" pos="[2172,516]" size="[148,90]" title="Select:" btnCount="[6,3]" />
     <mc_Dialog_E active="true" pos="[2090,1190]" size="[244,42]" title="Animation:" btnCount="[10,1]" />
-    <mc_Dialog_F active="true" pos="[1976,222]" size="[196,90]" title="Modifiers:" btnCount="[8,3]" />
+    <mc_Dialog_F active="true" pos="[1970,220]" size="[196,90]" title="Modifiers:" btnCount="[8,3]" />
     <mc_Dialog_G active="true" pos="[2172,606]" size="[148,114]" title="Modify:" btnCount="[6,4]" />
     <mc_Dialog_H active="true" pos="[2172,720]" size="[148,66]" title="Materials:" btnCount="[6,2]" />
     <mc_Dialog_I active="true" pos="[2170,930]" size="[148,66]" title="Programming:" btnCount="[6,2]" />
@@ -14,7 +14,7 @@
   </Properties_1>
   <Properties_2>
     <mcMicraDialog active="true" pos="[2172,222]" size="[148,66]" title="" />
-    <mcCustomizeDialog active="false" pos="[1270,470]" size="[224,404]" title="" />
+    <mcCustomizeDialog active="false" pos="[1280,510]" size="[224,404]" title="" />
     <mcProgramDialog active="undefined" pos="[2298,0]" size="[256,232]" title="" />
     <mcisoDialog active="false" pos="[181,152]" size="[140,400]" title="" />
     <mcModifierDialog active="undefined" pos="[100,100]" size="[400,400]" title="" />
@@ -211,5 +211,6 @@
     <btn_J22 action="Normal_Map_Tester" icon="61" />
     <btn_J21 action="Road_Generator_Tool" icon="266" />
     <btn_J4 action="Vertex_Snap" icon="267" />
+    <btn_J8 action="Create_Point_At_Vertex" icon="268" />
   </Buttons>
 </USER>

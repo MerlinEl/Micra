@@ -2435,6 +2435,16 @@ struct mcAction (
 			)
 		)
 		CreateDialog mcVertexSnapDialog
+	),
+	fn createPointAtVertex = (
+		
+		local obj = selection[1]
+		if obj == undefined do return false
+		local vert = (polyop.getVertSelection obj as array)[1]
+		if vert == undefined do return false
+		local po = point pos:(polyop.getVert obj vert)
+		subobjectlevel = 0
+		select po
 	)
 	/*<end>*/
 )

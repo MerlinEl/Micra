@@ -19,6 +19,7 @@ struct ROAD_GENERATOR_STRUCTURE	(
 	
 	--variables
 	SLECT_OBJECT_CALLBACK_ENABLED = true,
+	All_CALLBACKS_ENABLED = true,
 	
 	--functions
 	fn getSource = getSourceFileName(), --get path of this script
@@ -127,6 +128,17 @@ struct ROAD_GENERATOR_STRUCTURE	(
 	-------------------------------------------------------------
 	------                   SET                           ------
 	-------------------------------------------------------------
+	fn fixDuplicitNames debug:false = (
+	-- 		SelectVisuals()
+		local sel = selection as Array
+		for o in sel do (
+			
+			local new_name = uniquename o.name
+			if debug do format "fixDuplicitNames > from:% to:%\n" o.name new_name
+			o.name = new_name
+			if isRoad o do o.roadSpline.road = new_name --update spline attribute
+		)
+	),
 	fn setRoadCA road rSpline sPoint ePoint dialog controlsArr = (
 	
 		custAttributes.add road gRoadGenCa #unique --BaseObject:True
@@ -186,6 +198,15 @@ struct ROAD_GENERATOR_STRUCTURE	(
 	*@Example
 		removeCustomAttribute $ #RoadGenCa
 	*/
+	fn deleteCrossRoadChildren obj = (
+	
+		local crossChildren = obj.kids
+		local crossCount = crossChildren.count
+		for i in crossCount to 1 by -1 do(
+			if isValidNode crossChildren[i] then delete crossChildren[i]
+
+		)
+	),
 	fn removeCustomAttribute obj attr = (
 	
 		if not (hasCustomAttribute obj attr) do return false
@@ -208,6 +229,50 @@ struct ROAD_GENERATOR_STRUCTURE	(
 				for o in layer_nodes where isValidNode o do delete o
 				LayerManager.deleteLayerbyname layer_name
 			)
+		)
+	),
+	-------------------------------------------------------------
+	------                   CREATE                        ------
+	-------------------------------------------------------------
+	fn copyUniqueShortcut shortcut = (
+
+		if shortcut == undefined do return false
+		format "copyUniqueShortcut > todo\n"
+	),
+	fn copyUniqueCrossRoad crossroad = (
+	
+		if crossroad != undefined then (
+			
+			kidsShift = 4
+			newCR = copy crossroad
+			SetCrossRoadWireColor newCR oldColor:crossroad.wirecolor
+			originalCRChildren = crossroad.children
+			childrenCount = originalCRChildren.count
+			
+			for i =1 to childrenCount do (
+				origPt 	= originalCRChildren[i]
+				origTn 	= origPt.children[1]
+				
+				newPt = copy origPt
+				newTn = copy origTn
+				
+				roGenStruct.SetPointAppearance newPt
+				hide newTn
+				
+				newTn.parent = newPt
+				append newCR.children newPt
+				
+				
+				newCR.kids[i] = newPt
+				newCR.kids[i +kidsShift] = newTn
+				
+			)
+
+			when newCR deleted id:#CrossDelete obj do --define a when construct
+			(
+				deleteCrossRoadChildren obj
+			)
+			select newCR
 		)
 	),
 	-------------------------------------------------------------
@@ -353,7 +418,7 @@ struct ROAD_GENERATOR_STRUCTURE	(
 			max select none
 		)
 		--create new controll points
-		if pts.count != 2 do pts = setUpCrossRoadPoints -road_thickness road_thickness 500 hidden_tn:false	
+		if pts.count != 2 do pts = setUpCrossRoadPoints -road_thickness road_thickness 500 --hidden_tn:false	
 		--reverse tangents to inner
 		swapPoints pts[1] pts[2]
 		if not (isShortcut road) do moveTangetPoints pts[1] pts[2] min_tangent_dist --move tangent points close
