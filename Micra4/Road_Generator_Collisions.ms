@@ -3,12 +3,16 @@ if roadGeneratorCollisionDialog != undefined do DestroyDialog roadGeneratorColli
 rollout roadGeneratorCollisionDialog "Road Collision Generator:" width:544 height:88
 (
 	groupBox 'grp1' "Set-Up:" pos:[4,8] width:400 height:72 align:#left
-	label 'lbl1' "Collision Node:" pos:[16,36] width:76 height:16 align:#left
-	editText 'edt_coll_node' "" pos:[96,32] width:292 height:20 align:#left
-	label 'lbl2' "Collision Layer:" pos:[16,56] width:76 height:16 align:#left
-	editText 'edt_coll_layer' "" pos:[96,52] width:292 height:20 align:#left
+	label 'lbl2' "Collision Layer:" pos:[16,36] width:76 height:16 align:#left
+	editText 'edt_coll_layer' "" pos:[96,32] width:292 height:20 align:#left
+	label 'lbl1' "Collision Node:" pos:[16,56] width:76 height:16 align:#left
+	editText 'edt_coll_node' "" pos:[96,52] width:292 height:20 align:#left
 	button 'btn_create_colls' "GENERATE" pos:[408,12] width:132 height:68 align:#left
-	--for o in selection do o.parent = $lh_02_little_italy_block_h_roads_coll
+	checkbox chk_auto "Auto" pos:[100,8] width:44 height:16 toolTip:"Work's also for multiple objects"
+	local default_layer_name	= "lh_02_little_italy_roads_coll" 
+	local default_node_name	= "lh_02_little_italy_block_h_roads_coll"
+	local typed_layer_name		= default_layer_name
+	local typed_node_name		= default_node_name
 	fn matIdToSemanticId id = (
 		
 		case id of (
@@ -211,18 +215,44 @@ rollout roadGeneratorCollisionDialog "Road Collision Generator:" width:544 heigh
 		--attach rails back to instance
 		polyOp.attach road_coll obj_rails
 	)
+	fn getCollisionLayer obj = (
+	
+		local layer_name = if chk_auto.checked then (obj.layer.name + "_coll") else edt_coll_layer.text
+		local collision_layer = LayerManager.getLayerFromName layer_name
+		if collision_layer == undefined do collision_layer = LayerManager.newLayerFromName layer_name
+		collision_layer
+	)
+	fn getExportNode obj = (
+	
+		local node_name = if chk_auto.checked then (
+			
+			if o.parent != undefined do o.parent.name + "_coll" 
+		
+		) else (
+		
+			edt_coll_node.text
+		)
+		if node_name == undefined do (
+				
+			format "Unable to create collision from [ % ] . Object is not linked." obj.name
+			return undefined
+		)
+		getNodeByName node_name
+	)
 	fn createRoadsCollisions = (
 		
-		local export_coll_node = getNodeByName edt_coll_node.text 
-		if not isValidNode export_coll_node do (
 		
-			messageBox ("Node [ "+edt_coll_node.text+" ] is not exists:") title:"Road Generator:"
-			return false
-		)
-		local collision_layer = LayerManager.getLayerFromName edt_coll_layer.text
 		local s_mat = meditmaterials["semantic_materials"]
 		for o in selection do (
 
+			local collision_layer = getCollisionLayer o
+			local export_coll_node = getExportNode o
+			if export_coll_node == undefined do 
+			if not isValidNode export_coll_node do (
+			
+				format "Unable to create collision from [ % ] . Object is not linked." o.name
+				continue
+			)
 			local o_instance = cloneRoad o "coll"  --create road clone
 			o_instance.wirecolor = color 176 26 26
 			o_instance.material = s_mat
@@ -250,11 +280,34 @@ rollout roadGeneratorCollisionDialog "Road Collision Generator:" width:544 heigh
 	)
 	fn init = (
 		
-		edt_coll_layer.text = "lh_02_little_italy_roads_coll" 
-		edt_coll_node.text ="lh_02_little_italy_block_h_roads_coll"
+		edt_coll_layer.text = default_layer_name
+		edt_coll_node.text = default_node_name
+	)
+	fn setAutoTraceTo state = (
+		
+		edt_coll_layer.enabled = not state
+		edt_coll_node.enabled = not state
+		case state of (
+			
+			true: ( --generate texts from selected node
+				
+				local obj = selection[1]
+				if obj == undefined do return false
+				edt_coll_layer.text = obj.layer.name + "_coll"
+				edt_coll_node.text = if obj.parent != undefined then obj.parent.name + "_coll" else "undefined"
+			)
+			false:( --restore previous texts
+				
+				edt_coll_layer.text = typed_layer_name
+				edt_coll_node.text = typed_node_name
+			)
+		)
 	)
 	on roadGeneratorCollisionDialog open do init()
 	on btn_create_colls pressed  do createRoadsCollisions()
+	on chk_auto changed state do setAutoTraceTo state
+	on edt_coll_layer changed str do typed_layer_name = str	
+	on edt_coll_node changed str do typed_node_name = str
 )
 CreateDialog roadGeneratorCollisionDialog
 
@@ -270,6 +323,7 @@ custAttributes.count $
 */
 
 /*
+for o in selection do o.parent = $lh_02_little_italy_block_h_roads_coll
 --select rails collisions
 select(for o in selection where findString o.name "rails" != undefined collect o)
 */
