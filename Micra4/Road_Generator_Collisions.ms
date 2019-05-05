@@ -11,8 +11,8 @@ rollout roadGeneratorCollisionDialog "Road Collision Generator:" width:544 heigh
 	checkbox chk_auto "Auto" pos:[100,8] width:44 height:16 toolTip:"Work's also for multiple objects"
 	local default_layer_name	= "lh_02_little_italy_roads_coll" 
 	local default_node_name	= "lh_02_little_italy_block_h_roads_coll"
-	local typed_layer_name		= default_layer_name
-	local typed_node_name		= default_node_name
+	local typed_layer_name	= default_layer_name
+	local typed_node_name	= default_node_name
 	fn matIdToSemanticId id = (
 		
 		case id of (
@@ -81,10 +81,9 @@ rollout roadGeneratorCollisionDialog "Road Collision Generator:" width:544 heigh
 		local new_o = copy obj
 		new_o.name = prefix+"_"+ obj.name
 		--for c in new_o.children do c.parent = undefined --dont need (a clone have no children)
-		--hasProperty $ "CrossRoadKids" --not works
-		for i = custAttributes.count new_o to 1 by -1 do custAttributes.delete new_o i --delete all custom attributes
-		--select new_o
-		--custAttributes.count new_o
+		 --delete all custom attributes
+		for i = custAttributes.count new_o to 1 by -1 do custAttributes.delete new_o i
+		--select new_o; custAttributes.count new_o
 		new_o
 	)
 	fn detachRail obj faces = (
@@ -190,8 +189,7 @@ rollout roadGeneratorCollisionDialog "Road Collision Generator:" width:544 heigh
 	)
 	fn generateNavmeshFromRails obj = (
 	
-	format "generateNavmeshFromRails > obj:%\n" obj.name
-		
+		format "generateNavmeshFromRails > obj:%\n" obj.name
 		addModifier obj (Push Push_Value:4.5)
 		convertToPoly obj
 		skewNavmeshRailTop obj
@@ -205,7 +203,7 @@ rollout roadGeneratorCollisionDialog "Road Collision Generator:" width:544 heigh
 	fn createRailsCollisions road_coll rail_faces export_coll_node = (
 		
 		local obj_rails = detachRail road_coll rail_faces
-		format "detach:\n\trails:%\n\tfrom:%\n" obj_rails.name road_coll.name
+		--format "detach:\n\trails:%\n\tfrom:%\n" obj_rails.name road_coll.name
 		optimizeRails obj_rails
 		--generate navmesh helper
 		local obj_navmesh = copy obj_rails
@@ -218,8 +216,8 @@ rollout roadGeneratorCollisionDialog "Road Collision Generator:" width:544 heigh
 	fn getCollisionLayer obj = (
 	
 		local layer_name = if chk_auto.checked then (obj.layer.name + "_coll") else edt_coll_layer.text
-		local collision_layer = LayerManager.getLayerFromName layer_name
-		if collision_layer == undefined do collision_layer = LayerManager.newLayerFromName layer_name
+		local collision_layer = LayerManager.getLayerFromName layer_name --pick layer by name
+		if collision_layer == undefined do collision_layer = LayerManager.newLayerFromName layer_name --create layer if not exists
 		collision_layer
 	)
 	fn getExportNode obj = (
@@ -250,7 +248,7 @@ rollout roadGeneratorCollisionDialog "Road Collision Generator:" width:544 heigh
 			if export_coll_node == undefined do 
 			if not isValidNode export_coll_node do (
 			
-				format "Unable to create collision from [ % ] . Object is not linked." o.name
+				format "Unable to create collision from [ % ] . Collision Node not exists." o.name
 				continue
 			)
 			local o_instance = cloneRoad o "coll"  --create road clone
