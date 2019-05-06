@@ -1,44 +1,3 @@
--------------------------
---> MerlinEl 1.3.2019
--------------------------
-/* Mod List:
-
-*@Modifications
-
-	fill_material = MaterialModifier materialId:7 name:"fill_material"
-	roGenStruct.setVertexColor fill_poly red 0		
-	on bt_fixBrokenCrossroad pressed do roGenStruct.fixBrokenCrossroad selection[1]
-	on bt_roadAnatomy pressed do runLocalScript "Road_Generator_Anatomy"
-	on bt_showRoadColorTable pressed do runLocalScript "Road_Generator_Colors"
-	if not (roGenStruct.isRoad road) do (
-	FinishCrossRoadSetups road_1 dlgCrossroadGenerator3 controlsArr finalPos #ThreeR sw:sw weldThreshold: 1.0 ---1.5  (2x)
-*/
-
-/**
-*@Example
-	runLocalScript "Road_Generator_Anatomy"
-	runLocalScript "Road_Generator_Colors"
-*/
-fn runLocalScript script_name = (
-
-	local fpath = getSourceFileName()
-	local local_dir = getFilenamePath fpath
-	local script_file = local_dir+script_name+".ms"
-	if doesFileExist script_file then (
-	
-		fileIn script_file
-		
-	) else (
-	
-		messageBox ("Script ["+script_file+"] Not Found.") title:"Road Generator:"
-	)
-)
---Load all functions
-Global roGenStruct
-runLocalScript "Road_Generator_Struct_v1.05"
---< MerlinEl
-
-
 --###################################################################################
 --															Custom Attributes
 --###################################################################################
@@ -77,6 +36,49 @@ Global gShortcutCa = attributes ShortcutCa attribID:#(0x1635194a, 0x171142a1)(
 		controlsStr		type:#string
 	)
 )
+
+-------------------------
+--> MerlinEl 1.3.2019
+-------------------------
+/* Mod List:
+
+*@Modifications
+
+	fill_material = MaterialModifier materialId:7 name:"fill_material"
+	roGenStruct.setVertexColor fill_poly red 0		
+	on bt_fixBrokenCrossroad pressed do roGenStruct.fixBrokenCrossroad selection[1]
+	on bt_roadAnatomy pressed do runLocalScript "Road_Generator_Anatomy"
+	on bt_showRoadColorTable pressed do runLocalScript "Road_Generator_Colors"
+	if not (roGenStruct.isRoad road) do (
+	FinishCrossRoadSetups road_1 dlgCrossroadGenerator3 controlsArr finalPos #ThreeR sw:sw weldThreshold: 1.0 ---1.5  (2x)
+*/
+
+/**
+*@Example
+	runLocalScript "Road_Generator_Anatomy"
+	runLocalScript "Road_Generator_Colors"
+*/
+fn runLocalScript script_name = (
+
+	local fpath = getSourceFileName()
+	local local_dir = getFilenamePath fpath
+	local script_file = local_dir+script_name+".ms"
+	if doesFileExist script_file then (
+	
+		fileIn script_file
+		
+	) else (
+	
+		messageBox ("Script ["+script_file+"] Not Found.") title:"Road Generator:"
+	)
+)
+--Load all functions
+Global roGenStruct
+runLocalScript "Road_Generator_Struct_v1.06"
+--< MerlinEl
+
+
+
 
 --###################################################################################
 -- 															ASCII SIGNS
@@ -284,77 +286,10 @@ fn FullDelete item =
 	)
 )
 
---get width of bounding box
-fn GetWidthBB bb =
-(
-	return abs(bb[2].x - bb[1].x)
-)
 
---get length of bounding box
-fn GetLengthBB bb =
-(
-	return abs (bb[2].y - bb[1].y)
-)
 
---get height of bounding box
-fn GetHeightBB bb =
-(
-	return abs (bb[2].z - bb[1].z)
-)
 
-fn GetBottomBB bb =
-(
-	return bb[1].z
-)
 
-fn GetTopBB bb =
-(
-	return bb[2].z
-)
-
-fn GetFrontBB bb =
-(
-	return bb[1].y
-)
-
-fn GetLeftBB bb =
-(
-	return bb[1].x
-)
-
-fn GetRightBB bb =
-(
-	return bb[2].x
-)	
-
-fn GetBoundingBox &poly = 
-(
-	local p_min = [C_FLOAT_MAX, C_FLOAT_MAX, C_FLOAT_MAX]
-	local p_max = [-C_FLOAT_MAX, -C_FLOAT_MAX, -C_FLOAT_MAX]
-
-	--go through all vertices and find min and max
-	local numVert = poly.GetNumVertices()
-	for i in 1 to numVert do
-	(
-		if not (polyop.isVertDead poly i) then (
-			v = poly.GetVertex i
-			p_min = [RMin p_min.x v.x, RMin p_min.y v.y, RMin p_min.z v.z]
-			p_max = [RMax p_max.x v.x, RMax p_max.y v.y, RMax p_max.z v.z]
-		)
-	)
-	
-	bb = #(p_min, p_max)
-	
-	--print ("BB: "+(GetWidthBB bb as string)+" "+(GetLengthBB bb as string)+" "+(GetHeightBB bb as string))
-	--print ("Bottom: "+(GetBottomBB bb as string)+" "+(GetTopBB bb as string))
-			
-	return bb
-)
-
-fn DrawBoundingBox pos bb =
-(
-	bb_box = box pos:pos width:(GetWidthBB bb) length:(GetLengthBB bb) height:(GetHeightBB bb)
-)
 
 --get angle between two vectors
 fn GetVectorsAngle v1 v2 =
@@ -773,13 +708,13 @@ fn GetRoadEdgeIndices road =
 --returns all vertices 
 fn GetRoadCornerVertices corner fromBottom bb =
 (
-	radius = GetWidthBB bb
+	radius = roGenStruct.getWidthBB bb
 	vertices = #()
 	
 	for i in 1 to corner.GetNumVertices() do
 	(
 		v = corner.GetVertex i
-		if (distance v [0, 0, 0]) > (radius*0.95) and v.z < (GetBottomBB bb + (GetHeightBB bb)/2) and (not (polyop.isVertDead corner i)) then 
+		if (distance v [0, 0, 0]) > (radius*0.95) and v.z < (roGenStruct.getBottomBB bb + (roGenStruct.getHeightBB bb)/2) and (not (polyop.isVertDead corner i)) then 
 		(
 			append vertices v
 		)
@@ -811,10 +746,10 @@ fn CreateConnectingRoad road_2 bb_1 bb_2 corner bb_corner angle_road placed_item
 
 	right_corner = CreateRoadCorner corner (180-angle_road) bb_corner
 	
-	radius = (GetWidthBB bb_corner)
+	radius = (roGenStruct.getWidthBB bb_corner)
 	--print ("Radius:"+(radius as string))
-	l1 = (GetLengthBB bb_1)/2 + radius
-	l2 = (GetLengthBB bb_2)/2 + radius
+	l1 = (roGenStruct.getLengthBB bb_1)/2 + radius
+	l2 = (roGenStruct.getLengthBB bb_2)/2 + radius
 	--print ("L1:"+(l1 as string))
 	--print ("L2:"+(l2 as string))
 	a = l1/(tan angle_road)
@@ -845,8 +780,8 @@ fn CreateConnectingRoad road_2 bb_1 bb_2 corner bb_corner angle_road placed_item
 	left_offset += offset
 	right_offset += offset
 		
-	left_position =  [left_offset, l1, GetHeightBB bb_corner]
-	right_position = [right_offset, l1, GetHeightBB bb_corner]
+	left_position =  [left_offset, l1, roGenStruct.getHeightBB bb_corner]
+	right_position = [right_offset, l1, roGenStruct.getHeightBB bb_corner]
 
 	left_corner.position = copy left_position
 	right_corner.position = copy right_position
@@ -922,7 +857,7 @@ fn CreateConnectingRoad road_2 bb_1 bb_2 corner bb_corner angle_road placed_item
 	vertices = join left_verts road_vertices
 	vertices = join vertices right_verts
 	
-	py = (GetLengthBB bb_1)/2*sign
+	py = (roGenStruct.getLengthBB bb_1)/2*sign
 	dir = [1, 0, 0] * (rotateZMatrix (rotate_angle+angle_road))
 	t = py/dir.y
 	
@@ -1046,19 +981,6 @@ fn AddRoadSlicer road dist slice_type =
 
 
 
-fn WeldEditPoly epoly precision =
-(
-	vert_count = (polyop.getNumVerts epoly)
-    all_vert_list = #{1..vert_count}
-    
-	--weld all vertices
-    epoly.weldThreshold = precision
-    polyop.weldVertsByThreshold epoly all_vert_list
-)
-
-
-
-
 --###################################################################################
 --														NEW ADDTIONAL FUNCTIONS 
 --###################################################################################
@@ -1127,35 +1049,7 @@ fn ShowHidePoints roadType road =
 			HideUnhidePoints #(True,false) road
 		)
 	)
-	
-	
-	
-	
 )
------------------------------------------------------------------------------------------------------------------------------------------------------------------------
--- NEW PREFAB SELECT:
------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-fn PickRoadPrefab roads dd_selection spec =
-(	
-	roadPointer = dd_selection
-	
--- 	roadPointer = ((dd_selection - 1) + dd_selection)
--- 	if spec then roadPointer += 1
--- 		
--- 	print roads[roadPointer]
-	roads[roadPointer]
-)
-
-
-
-
-
-
-
-
-
-
-
 
 --###################################################################################
 --														FUNCTIONS FROM ROLLOUTS
@@ -1342,7 +1236,7 @@ fn FinishCrossRoadSetups road dialog controlsArr finalPos roadType sw:undefined 
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 fn CreateRoadWithPL  roads parkingLanes crossroadIndex &spec leftPL rightPL &originalPivot=
 (
-	normalRoad = PickRoadPrefab roads crossroadIndex false
+	normalRoad = roGenStruct.pickRoadPrefab roads crossroadIndex false
 	pl_Left =  parkingLanes[1]
 	pl_Right = parkingLanes[2]
 			
@@ -1398,7 +1292,7 @@ fn CreateRoadWithPL  roads parkingLanes crossroadIndex &spec leftPL rightPL &ori
 -- 	copyRoad.attach copyRighttPl copyRoad 
 
 	--MerlinEl 26.4.2019
-	WeldEditPoly copyRoad 0.1	
+	roGenStruct.weldEditPoly copyRoad 0.1	
 	
 	
 -- 	if origPivot != undefined then (
@@ -1563,21 +1457,21 @@ rollout dlgCrossroadGenerator "Crossroad Generator"
 			plRoad1 = True
 			plTopBot = false
 		)
-		else road_1_model = PickRoadPrefab roads dd_crossroad_prefabs_1.selection spec_1
+		else road_1_model = roGenStruct.pickRoadPrefab roads dd_crossroad_prefabs_1.selection spec_1
 		
 		if spec_1 != false then(
 			road_2_model = CreateRoadWithPL roads parking_lanes dd_crossroad_prefabs_2.selection &spec_2 True True &origPivot
 			plRoad2 = True
 			plTopBot = false
 		)
-		else road_2_model = PickRoadPrefab roads dd_crossroad_prefabs_2.selection spec_2
+		else road_2_model = roGenStruct.pickRoadPrefab roads dd_crossroad_prefabs_2.selection spec_2
 		
 		if spec_1 != false or spec_2 != false then corner_model  = corners[1]
 		else corner_model = SelectCorner corners (bit.or cb_parking_lane_1.triState cb_parking_lane_2.triState)
 		
 		------------------------------------------------------------------------------------------------------------
--- 		road_1_model = PickRoadPrefab roads dd_crossroad_prefabs_1.selection spec_1
--- 		road_2_model = PickRoadPrefab roads dd_crossroad_prefabs_2.selection spec_2
+-- 		road_1_model = roGenStruct.pickRoadPrefab roads dd_crossroad_prefabs_1.selection spec_1
+-- 		road_2_model = roGenStruct.pickRoadPrefab roads dd_crossroad_prefabs_2.selection spec_2
 		
 
 -- 		format "%\n%\n" road_1_model road_2_model
@@ -1609,7 +1503,7 @@ rollout dlgCrossroadGenerator "Crossroad Generator"
 		road_1_bb = GetBoundingBox road_1
 		road_2_bb = GetBoundingBox road_2_a
 		
-		road_1_length = GetLengthBB road_1_bb
+		road_1_length = roGenStruct.getLengthBB road_1_bb
 		
 		corner_bb = GetBoundingBox corner_model
 		
@@ -1710,9 +1604,9 @@ rollout dlgCrossroadGenerator "Crossroad Generator"
 		append pts_to_connect_top [attributes_1[2][4], road_1_length/2, 0.0]
 		append pts_to_connect_bottom[attributes_2[2][4], -road_1_length/2, 0.0]
 		  
-		road_width = (GetWidthBB cutted_road_bb)
-		road_left = (GetLeftBB cutted_road_bb)
-		road_right = (GetRightBB cutted_road_bb)
+		road_width = (roGenStruct.getWidthBB cutted_road_bb)
+		road_left = (roGenStruct.getLeftBB cutted_road_bb)
+		road_right = (roGenStruct.getRightBB cutted_road_bb)
 		--top side
 		if tri_right_top_further == -1 then
 		(
@@ -2001,9 +1895,9 @@ rollout dlgCrossroadGenerator2 "Crossroad Generator"
 		
 		
 		if spec_1 == True and spec_2 == True and spec_3 == True then (
-			road_1_model 	= PickRoadPrefab roads dd_crossroad_prefabs_1.selection spec_1
-			road_2_model 	= PickRoadPrefab roads dd_crossroad_prefabs_2.selection spec_2
-			road_3_model 	= PickRoadPrefab roads dd_crossroad_prefabs_3.selection spec_3
+			road_1_model 	= roGenStruct.pickRoadPrefab roads dd_crossroad_prefabs_1.selection spec_1
+			road_2_model 	= roGenStruct.pickRoadPrefab roads dd_crossroad_prefabs_2.selection spec_2
+			road_3_model 	= roGenStruct.pickRoadPrefab roads dd_crossroad_prefabs_3.selection spec_3
 			corner_model 		= corners[2]
 			corner_model_2 	= corners[2]
 			plTop = True
@@ -2011,9 +1905,9 @@ rollout dlgCrossroadGenerator2 "Crossroad Generator"
 		)
 		
 		else if spec_1 == false and spec_2 == false and spec_3 == false then (
-			road_1_model 	= PickRoadPrefab roads dd_crossroad_prefabs_1.selection spec_1
-			road_2_model 	= PickRoadPrefab roads dd_crossroad_prefabs_2.selection spec_2
-			road_3_model 	= PickRoadPrefab roads dd_crossroad_prefabs_3.selection spec_3
+			road_1_model 	= roGenStruct.pickRoadPrefab roads dd_crossroad_prefabs_1.selection spec_1
+			road_2_model 	= roGenStruct.pickRoadPrefab roads dd_crossroad_prefabs_2.selection spec_2
+			road_3_model 	= roGenStruct.pickRoadPrefab roads dd_crossroad_prefabs_3.selection spec_3
 			corner_model 		= corners[1]
 			corner_model_2 	= corners[1]
 		)
@@ -2022,8 +1916,8 @@ rollout dlgCrossroadGenerator2 "Crossroad Generator"
 			road_1_model 		= CreateRoadWithPL roads parking_lanes dd_crossroad_prefabs_1.selection &spec_1 True True &origPivot
 			corner_model 		= corners[1]
 			corner_model_2 	= corners[1]
-			road_2_model 		= PickRoadPrefab roads dd_crossroad_prefabs_2.selection spec_2
-			road_3_model 		= PickRoadPrefab roads dd_crossroad_prefabs_3.selection spec_3
+			road_2_model 		= roGenStruct.pickRoadPrefab roads dd_crossroad_prefabs_2.selection spec_2
+			road_3_model 		= roGenStruct.pickRoadPrefab roads dd_crossroad_prefabs_3.selection spec_3
 			plRoad = road_1_model
 		)
 		
@@ -2031,8 +1925,8 @@ rollout dlgCrossroadGenerator2 "Crossroad Generator"
 			road_1_model 		= CreateRoadWithPL roads parking_lanes dd_crossroad_prefabs_1.selection &spec_1 false True &origPivot
 			corner_model 		= corners[2]
 			corner_model_2 	= corners[1]
-			road_2_model 		= PickRoadPrefab roads dd_crossroad_prefabs_2.selection spec_2
-			road_3_model 		= PickRoadPrefab roads dd_crossroad_prefabs_3.selection spec_3
+			road_2_model 		= roGenStruct.pickRoadPrefab roads dd_crossroad_prefabs_2.selection spec_2
+			road_3_model 		= roGenStruct.pickRoadPrefab roads dd_crossroad_prefabs_3.selection spec_3
 			
 			plTop = True
 			plRoad = road_1_model
@@ -2042,8 +1936,8 @@ rollout dlgCrossroadGenerator2 "Crossroad Generator"
 			road_1_model 		= CreateRoadWithPL roads parking_lanes dd_crossroad_prefabs_1.selection &spec_1 True false &origPivot
 			corner_model 		= corners[1]
 			corner_model_2 	= corners[2]
-			road_2_model 		= PickRoadPrefab roads dd_crossroad_prefabs_2.selection spec_2
-			road_3_model 		= PickRoadPrefab roads dd_crossroad_prefabs_3.selection spec_3
+			road_2_model 		= roGenStruct.pickRoadPrefab roads dd_crossroad_prefabs_2.selection spec_2
+			road_3_model 		= roGenStruct.pickRoadPrefab roads dd_crossroad_prefabs_3.selection spec_3
 			
 			plBot = True
 			plRoad = road_1_model
@@ -2053,16 +1947,16 @@ rollout dlgCrossroadGenerator2 "Crossroad Generator"
 			road_2_model 		= CreateRoadWithPL roads parking_lanes dd_crossroad_prefabs_2.selection &spec_2 True True &origPivot
 			corner_model 		= corners[1]
 			corner_model_2 	= corners[1]
-			road_1_model 		= PickRoadPrefab roads dd_crossroad_prefabs_1.selection spec_1
-			road_3_model 		= PickRoadPrefab roads dd_crossroad_prefabs_3.selection spec_3
+			road_1_model 		= roGenStruct.pickRoadPrefab roads dd_crossroad_prefabs_1.selection spec_1
+			road_3_model 		= roGenStruct.pickRoadPrefab roads dd_crossroad_prefabs_3.selection spec_3
 			plRoad = road_2_model
 		)
 		
 -- 		print spec_1
 		else if spec_1 == false and spec_2 == false and spec_3 == True then (
 			road_3_model 		= CreateRoadWithPL roads parking_lanes dd_crossroad_prefabs_3.selection &spec_3 True True &origPivot
-			road_1_model 		= PickRoadPrefab roads dd_crossroad_prefabs_1.selection spec_1
-			road_2_model 		= PickRoadPrefab roads dd_crossroad_prefabs_2.selection spec_2
+			road_1_model 		= roGenStruct.pickRoadPrefab roads dd_crossroad_prefabs_1.selection spec_1
+			road_2_model 		= roGenStruct.pickRoadPrefab roads dd_crossroad_prefabs_2.selection spec_2
 			corner_model 		= corners[1]
 			corner_model_2 	= corners[1]
 			plRoad = road_3_model
@@ -2070,7 +1964,7 @@ rollout dlgCrossroadGenerator2 "Crossroad Generator"
 		
 		else if spec_1 == false and spec_2 == True and spec_3 == True then (
 			
-			road_1_model 		= PickRoadPrefab roads dd_crossroad_prefabs_1.selection spec_1
+			road_1_model 		= roGenStruct.pickRoadPrefab roads dd_crossroad_prefabs_1.selection spec_1
 			road_2_model 		= CreateRoadWithPL roads parking_lanes dd_crossroad_prefabs_2.selection &spec_2 True True &origPivot
 			road_3_model 		= CreateRoadWithPL roads parking_lanes dd_crossroad_prefabs_3.selection &spec_3 True True &origPivot
 			corner_model 		= corners[1]
@@ -2084,21 +1978,21 @@ rollout dlgCrossroadGenerator2 "Crossroad Generator"
 -- 			road_1_model = CreateRoadWithPL roads parking_lanes dd_crossroad_prefabs_1.selection &spec_1
 -- 			plRoad1 = True
 -- 		)
--- 		else road_1_model = PickRoadPrefab roads dd_crossroad_prefabs_1.selection spec_1
+-- 		else road_1_model = roGenStruct.pickRoadPrefab roads dd_crossroad_prefabs_1.selection spec_1
 -- 		
 -- 		
 -- 		if spec_2 != false then(
 -- 			road_2_model = CreateRoadWithPL roads parking_lanes dd_crossroad_prefabs_2.selection &spec_2
 -- 			plRoad2 = True
 -- 		)
--- 		else road_2_model = PickRoadPrefab roads dd_crossroad_prefabs_2.selection spec_2
+-- 		else road_2_model = roGenStruct.pickRoadPrefab roads dd_crossroad_prefabs_2.selection spec_2
 -- 		
 -- 		
 -- 		if spec_3 != false then(
 -- 			road_3_model = CreateRoadWithPL roads parking_lanes dd_crossroad_prefabs_3.selection &spec_3
 -- 			plRoad3 = True
 -- 		)
--- 		else road_3_model = PickRoadPrefab roads dd_crossroad_prefabs_3.selection spec_3
+-- 		else road_3_model = roGenStruct.pickRoadPrefab roads dd_crossroad_prefabs_3.selection spec_3
 
 
 -- 		if spec_1 != false or spec_2 != false then corner_model  = corners[1]
@@ -2108,9 +2002,9 @@ rollout dlgCrossroadGenerator2 "Crossroad Generator"
 -- 		else corner_model_2 = SelectCorner corners (bit.or cb_parking_lane_1.triState cb_parking_lane_2.triState)
 		-------------------------------------------------------------------------------------------------------------------------------------------------------
 
--- 		road_1_model = PickRoadPrefab roads dd_crossroad_prefabs_1.selection spec_1
--- 		road_2_model = PickRoadPrefab roads dd_crossroad_prefabs_2.selection spec_2
--- 		road_3_model = PickRoadPrefab roads dd_crossroad_prefabs_3.selection spec_3
+-- 		road_1_model = roGenStruct.pickRoadPrefab roads dd_crossroad_prefabs_1.selection spec_1
+-- 		road_2_model = roGenStruct.pickRoadPrefab roads dd_crossroad_prefabs_2.selection spec_2
+-- 		road_3_model = roGenStruct.pickRoadPrefab roads dd_crossroad_prefabs_3.selection spec_3
 		
 		
 				
@@ -2167,7 +2061,7 @@ rollout dlgCrossroadGenerator2 "Crossroad Generator"
 		road_2_bb = GetBoundingBox road_2_a
 		road_3_bb = GetBoundingBox road_2_b
 		
-		road_1_length = GetLengthBB road_1_bb
+		road_1_length = roGenStruct.getLengthBB road_1_bb
 		
 		corner_bb = GetBoundingBox corner_model
 		corner_2_bb = GetBoundingBox corner_model_2
@@ -2306,9 +2200,9 @@ rollout dlgCrossroadGenerator2 "Crossroad Generator"
 		append pts_to_connect_top [attributes_1[2][4], road_1_length/2, 0.0]
 		append pts_to_connect_bottom[attributes_2[2][4], -road_1_length/2, 0.0]
 		  
-		road_width = (GetWidthBB cutted_road_bb)
-		road_left = (GetLeftBB cutted_road_bb)
-		road_right = (GetRightBB cutted_road_bb)
+		road_width = (roGenStruct.getWidthBB cutted_road_bb)
+		road_left = (roGenStruct.getLeftBB cutted_road_bb)
+		road_right = (roGenStruct.getRightBB cutted_road_bb)
 		--top side
 		if tri_right_top_further == -1 then
 		(
@@ -2524,14 +2418,14 @@ rollout dlgCrossroadGenerator3 "Crossroad Generator"
 			plRoad1 = True
 			plTopBot = false
 		)
-		else road_1_model = PickRoadPrefab roads dd_crossroad_prefabs_1.selection spec_1
+		else road_1_model = roGenStruct.pickRoadPrefab roads dd_crossroad_prefabs_1.selection spec_1
 		
 		if spec_1 != false then(
 			road_2_model = CreateRoadWithPL roads parking_lanes dd_crossroad_prefabs_2.selection &spec_2 True True &origPivot
 			plRoad2 = True
 			plTopBot = false
 		)
-		else road_2_model = PickRoadPrefab roads dd_crossroad_prefabs_2.selection spec_2
+		else road_2_model = roGenStruct.pickRoadPrefab roads dd_crossroad_prefabs_2.selection spec_2
 		
 		if spec_1 != false or spec_2 != false then corner_model  = corners[1]
 		else corner_model = SelectCorner corners (bit.or cb_parking_lane_1.triState cb_parking_lane_2.triState)
@@ -2563,8 +2457,8 @@ rollout dlgCrossroadGenerator3 "Crossroad Generator"
 -- 		road_1_model = SelectRoad roads rb_lane_number_1.state rb_lane_width_1.state rb_lane_width_1_1.state spec_1
 -- 		road_2_model = SelectRoad roads rb_lane_number_2.state rb_lane_width_2.state rb_lane_width_2_1.state spec_2
 		
--- 		road_1_model = PickRoadPrefab roads dd_crossroad_prefabs_1.selection spec_1
--- 		road_2_model = PickRoadPrefab roads dd_crossroad_prefabs_2.selection spec_2
+-- 		road_1_model = roGenStruct.pickRoadPrefab roads dd_crossroad_prefabs_1.selection spec_1
+-- 		road_2_model = roGenStruct.pickRoadPrefab roads dd_crossroad_prefabs_2.selection spec_2
 -- 		
 -- 		
 -- 		corner_model = SelectCorner corners (bit.or cb_parking_lane_1.triState cb_parking_lane_2.triState)
@@ -2595,7 +2489,7 @@ rollout dlgCrossroadGenerator3 "Crossroad Generator"
 		road_1_bb = GetBoundingBox road_1
 		road_2_bb = GetBoundingBox road_2_a
 		
-		road_1_length = GetLengthBB road_1_bb
+		road_1_length = roGenStruct.getLengthBB road_1_bb
 		
 		corner_bb = GetBoundingBox corner_model
 		
@@ -2676,9 +2570,9 @@ rollout dlgCrossroadGenerator3 "Crossroad Generator"
 	-- 	format "%\n" pts_to_connect_top
 	--     append pts_to_connect_bottom[attributes_2[2][4], -road_1_length/2, 0.0]
 		  
-		road_width = (GetWidthBB cutted_road_bb)
-		road_left = (GetLeftBB cutted_road_bb)
-		road_right = (GetRightBB cutted_road_bb)
+		road_width = (roGenStruct.getWidthBB cutted_road_bb)
+		road_left = (roGenStruct.getLeftBB cutted_road_bb)
+		road_right = (roGenStruct.getRightBB cutted_road_bb)
 		
 	-- 	print road_left
 		
@@ -2714,8 +2608,8 @@ rollout dlgCrossroadGenerator3 "Crossroad Generator"
 		--bottom side
 	-- 	print sidewalk_bb
 		roadBotBB =  cutted_road_bb[1][2]
-		sidewalkBBLenght = GetLengthBB sidewalk_bb
-		parkLineBBLenght = GetLengthBB parking_lane_bb
+		sidewalkBBLenght = roGenStruct.getLengthBB sidewalk_bb
+		parkLineBBLenght = roGenStruct.getLengthBB parking_lane_bb
 		
 	-- 	format "%\n%\n%\n" roadBotBB sidewalkTopBB parkLineTopBB
 	-- 	copy road_1
@@ -2855,14 +2749,14 @@ rollout dlgCrossroadGenerator3 "Crossroad Generator"
 			plRoad1 = True
 			plTopBot = false
 		)
-		else road_1_model = PickRoadPrefab roads dd_crossroad_prefabs_1.selection spec_1
+		else road_1_model = roGenStruct.pickRoadPrefab roads dd_crossroad_prefabs_1.selection spec_1
 		
 		if spec_1 != false then(
 			road_2_model = CreateRoadWithPL roads parking_lanes dd_crossroad_prefabs_2.selection &spec_2 True True &origPivot
 			plRoad2 = True
 			plTopBot = false
 		)
-		else road_2_model = PickRoadPrefab roads dd_crossroad_prefabs_2.selection spec_2
+		else road_2_model = roGenStruct.pickRoadPrefab roads dd_crossroad_prefabs_2.selection spec_2
 		
 		if spec_1 != false or spec_2 != false then corner_model  = corners[1]
 		else corner_model = SelectCorner corners (bit.or cb_parking_lane_1.triState cb_parking_lane_2.triState)
@@ -2877,8 +2771,8 @@ rollout dlgCrossroadGenerator3 "Crossroad Generator"
 		
 		
 		
--- 		road_1_model = PickRoadPrefab roads dd_crossroad_prefabs_1.selection spec_1
--- 		road_2_model = PickRoadPrefab roads dd_crossroad_prefabs_2.selection spec_2
+-- 		road_1_model = roGenStruct.pickRoadPrefab roads dd_crossroad_prefabs_1.selection spec_1
+-- 		road_2_model = roGenStruct.pickRoadPrefab roads dd_crossroad_prefabs_2.selection spec_2
 		
 -- 		corner_model = SelectCorner corners (bit.or cb_parking_lane_1.triState cb_parking_lane_2.triState)
 			
@@ -2904,7 +2798,7 @@ rollout dlgCrossroadGenerator3 "Crossroad Generator"
 		road_1_bb = GetBoundingBox road_1
 		road_2_bb = GetBoundingBox road_2_b
 		
-		road_1_length = GetLengthBB road_1_bb
+		road_1_length = roGenStruct.getLengthBB road_1_bb
 		
 		corner_bb = GetBoundingBox corner_model
 		
@@ -2996,9 +2890,9 @@ rollout dlgCrossroadGenerator3 "Crossroad Generator"
 	-- 	format "%\n" pts_to_connect_top
 		append pts_to_connect_bottom[attributes_2[2][4], -road_1_length/2, 0.0]
 		  
-		road_width = (GetWidthBB cutted_road_bb)
-		road_left = (GetLeftBB cutted_road_bb)
-		road_right = (GetRightBB cutted_road_bb)
+		road_width = (roGenStruct.getWidthBB cutted_road_bb)
+		road_left = (roGenStruct.getLeftBB cutted_road_bb)
+		road_right = (roGenStruct.getRightBB cutted_road_bb)
 		
 	-- 	print road_left
 		
@@ -3006,8 +2900,8 @@ rollout dlgCrossroadGenerator3 "Crossroad Generator"
 		-- 	print sidewalk_bb
 	-- 	format "%\n" cutted_road_bb
 		roadTopYBB =  cutted_road_bb[2][2]
-		sidewalkBBLenght = GetLengthBB sidewalk_bb
-		parkLineBBLenght = GetLengthBB parking_lane_bb
+		sidewalkBBLenght = roGenStruct.getLengthBB sidewalk_bb
+		parkLineBBLenght = roGenStruct.getLengthBB parking_lane_bb
 		
 		
 		--bottom side
@@ -3239,8 +3133,6 @@ rollout dlgCrossroadGenerator3 "Crossroad Generator"
 --###################################################################################
 
 
-TANGENT_TEST_COUNT = 100
-
 -- some functions are shared with croasroad generator
 
 fn HasObjProperty obj prop_name prop =
@@ -3253,329 +3145,12 @@ fn HasObjProperty obj prop_name prop =
 	return ((stricmp (item_prop as string) (prop as string)) == 0)
 )
 
--- fn WeldEditPoly epoly precision =
--- (
--- 	vert_count = (polyop.getNumVerts epoly)
---     all_vert_list = #{1..vert_count}
---     
--- 	--weld all vertices
---     epoly.weldThreshold = precision
---     polyop.weldVertsByThreshold epoly all_vert_list
--- )
-
-fn GetFaceCenter editable verts =
-(
-	point_avg = [0,0,0]
-	for i in 1 to verts.count do
-	(
-		pt = polyop.getVert editable verts[i]
-		point_avg += pt
--- 		print("pt to sum: "+pt as string)
-	)
--- 	print("pt sum: "+point_avg as string)
-	point_avg /= verts.count
--- 	print ("Face vert count: "+verts.count as string)
-	return point_avg
-)
-
-fn GetRoadFaceCenterDistances editable =
-(
-	face_count = polyop.getNumFaces editable
-	face_offsets = #()
-	for i in 1 to face_count do
-	(
-		face_center = GetFaceCenter editable (polyop.getFaceVerts editable i)
-		--pt = point()
-		--pt.position = face_center
--- 		print ("Face center: "+pt as string)
-		dist = length (editable.position-face_center)
-		append face_offsets ((dot (normalize(editable.position-face_center)) [0,1,0]) * dist)
-	)
-	return face_offsets
-)
-
-fn GetRoadFaceCenters editable =
-(
-	face_count = polyop.getNumFaces editable
-	face_offsets = #()
-	for i in 1 to face_count do
-	(
-		face_center = GetFaceCenter editable (polyop.getFaceVerts editable i)
-		--pt = point()
-		--pt.position = face_center
--- 		print ("Face center: "+pt as string)
-		face_center_origin = (face_center-editable.position)
-		normal = polyop.getFaceNormal editable i
-		append face_offsets #(face_center_origin+5.0*normal, -polyop.getFaceNormal editable i)
-	)
-	return face_offsets
-)
-
-fn GetMeshFaceToPoly epoly mesh_face =
-(
--- 	print ("Mesh available: "+(epoly.mesh != undefined) as string)
-	-- get polys for this face
-	local mesh_polys = meshop.getpolysusingface epoly.mesh #{mesh_face} threshhold:360
-	-- get verts using these polys
-	local mesh_verts = meshop.getvertsusingface epoly.mesh mesh_polys
-
-	-- get polys in editable_poly using these verts
-	local vert_polys = (polyop.getfacesusingvert epoly mesh_verts) as array
-	local p = 1
-	local poly_verts
-
-	-- poly index returned by this function
-	local poly = undefined
-
-	-- find poly
-	while p <= vert_polys.count do
-	(
-		-- get verts from poly
-		poly_verts = polyop.getvertsusingface epoly vert_polys[p]
-		
-		-- same number of vertices?
-		if (poly_verts as array).count == (mesh_verts as array).count do
-		(
-			-- intersecting the bitarray should result in array of identical size
-			if ((poly_verts + mesh_verts) as array).count == (mesh_verts as array).count then
-			(
-				-- poly found!
-				poly = vert_polys[p]
-				-- exit the loop
-				p = vert_polys.count + 1
-			)
-		)
-
-		-- check next poly
-		p += 1
-	)
-
-	-- return the found poly (undefined if not found)
-	poly
-)
-
-fn GetMeshFacesToPoly epoly mesh_faces =
-(
-	face_indices = #()
-	for i in 1 to mesh_faces.count do
-	(
-		append face_indices (GetMeshFaceToPoly epoly mesh_faces[i])
-	)
-	
-	return face_indices
-)
 
 
-fn drawLineBetweenTwoPoints pointA pointB col =
-(
-  ss = SplineShape pos:pointA
-  addNewSpline ss
-  addKnot ss 1 #corner #line PointA
-  addKnot ss 1 #corner #line PointB
-  updateShape ss
-  ss.wirecolor = col
-)
 
-fn FindAllIntersectionsUsingRays mpoly rays =
-(
-	rm = RayMeshGridIntersect()
-	rm.Initialize 10
-	rm.AddNode mpoly
-	rm.buildGrid()
-	
-	hit_array = #()
-	for i in 1 to rays.count do
-	(
-		hit_count = rm.intersectRay rays[i].pos rays[i].dir true
-		--drawLineBetweenTwoPoints rayOrigin (rayOrigin+dir*50.0) (color 0 0 255)
--- 		print("Hit count: "+hit_count as string)
-		if(hit_count > 0) then (
-			hit_index = rm.getClosestHit()
-			face_index = rm.getHitFace hit_index
-			append hit_array face_index
-		)
-	)
-	--free all resources
-	rm.Free()
-	--return result
-	return hit_array
-)
 
-fn CreateRoadFromSpline road_prefabric spline adaption =
-(
-	disableSceneRedraw() 
-	-- get segment length
-	segment_lengths = (getSegLengths spline 1 cum:false)
-	spline_length = segment_lengths[segment_lengths.count]
-	
-	-- get knots position
-	knot_count = numKnots spline 1
-	pt1 = getKnotPoint spline 1 1
-	tn1 = getOutVec spline 1 1
-	pt2 = getKnotPoint spline 1 knot_count
-	tn2 = getInVec spline 1 knot_count
-	
-	-- create road assembled from number of parts to cover whole spline
-	road_bb = GetBoundingBox road_prefabric
-	road_length = GetWidthBB road_bb
-			
-	road_sum = copy road_prefabric
-	road_sum.pivot -= road_prefabric.transform.row1 * 0.5 * road_length
-	road_count = spline_length/road_length as integer
-	road_sum_length = road_length
--- 	print ("Road count: "+(road_count as string))
-	for i in 1 to road_count do
-	(
-		copy_road = copy road_prefabric
-		copy_road.position += copy_road.transform.row1 * road_length * i
-		road_sum.attach copy_road road_sum
-		road_sum_length += road_length
-	)
-	road_sum.position = pt1
-	
-	WeldEditPoly road_sum 1.0
-	
-	-- cut road along spline
-	tangent_fst = tangentCurve3D spline 1 ((1 as double)/TANGENT_TEST_COUNT)
-	last_i = 1
-	sum_d = 0.0
-	for i in 2 to TANGENT_TEST_COUNT do
-	(
-		tangent_snd = tangentCurve3D spline 1 ((i as double)/TANGENT_TEST_COUNT)
-		d = acos (dot (normalize tangent_fst) (normalize tangent_snd))
-		sum_d += d
--- 		print ("Angle sum: "+sum_d as string)
-		if sum_d > adaption then (
--- 			print("Diff: "+(i-last_i) as string)
-			-- compute params
-			param = (((i+last_i)/2.0)/TANGENT_TEST_COUNT)
-			pt = interpCurve3D spline 1 param pathParam:true
-			--p = point ()
-			--p.position = pt
-			--add slice modifier
-			slice = sliceModifier()
-			addModifier road_sum slice 
-			--setup modifier
-			slice.slice_type = 1
-			slice.slice_plane.position = [0.0, 0.0, param*spline_length-road_length*0.5]
-			slice.slice_plane.rotation = (angleaxis (90) [0, 1, 0]) as quat
-			
-			-- save for next iteration
-			last_i = i
-			sum_d = 0.0
-		)
-		
-		tangent_fst = tangent_snd
-	)
-	
-	
-	
-	slice = sliceModifier()
-	addModifier road_sum slice 
-	--setup modifier
-	slice.slice_type = 2
-	slice.slice_plane.position = [0.0, 0.0, spline_length-road_length*0.5]
-	slice.slice_plane.rotation = (angleaxis (90) [0, 1, 0]) as quat
-	
-	road_sum = ConvertTo road_sum editable_poly
-	
-	-- transform matrix vectors for road
-	t_x = normalize (tn1-pt1)
-	t_y = normalize([-t_x.y, t_x.x, 0.0])
-	t_z = cross t_x t_y
-	
-	road_transform = road_sum.transform
-	road_transform.row1 = t_x
-	road_transform.row2 = t_y
-	road_transform.row3 = t_z
-		
-	road_sum.transform = road_transform
-	
-	-- update path deform gizmo to be at start of road (calculation translate world position to object space of road)
-	path_deform = pathDeform()
-	addModifier road_sum path_deform
-	
-	path_deform.axis = 0
-	path_deform.path = spline
-	path_deform.gizmo.position = pt1 * (getModContextTM road_sum path_deform) * (inverse road_sum.objecttransform)
-	
-	road_sum_mesh = ConvertTo road_sum editable_mesh
-	road_sum = ConvertTo road_sum editable_poly
-	
-	-- compute face distances, 
-	--face_distances = GetRoadFaceCenterDistances road_prefabric
-	face_centers = GetRoadFaceCenters road_prefabric
-	t2_x = normalize(tn2-pt2)
-	t2_y = normalize([-t2_x.y, t2_x.x, 0.0])
-	t2_z = normalize(cross t2_x t2_y)
-	
-	t_matrix = matrix3 0
-	t_matrix.row1 = t2_x
-	t_matrix.row2 = t2_y
-	t_matrix.row3 = t2_z
-	
-	rays = #()
-	for i in 1 to face_centers.count do
-	(
-		--rayOrigin = (pt2+t2_y*face_distances[i]+t2_z*100.0)
-		--dir = (-t2_z)
-		rayOrigin = face_centers[i][1] * t_matrix + pt2
-		dir = face_centers[i][2] * t_matrix
-		--drawLineBetweenTwoPoints rayOrigin (rayOrigin+dir*20.0) (Color 255 0 0)
-		append rays (ray rayOrigin dir)
-	)
-	hitArray = FindAllIntersectionsUsingRays road_sum_mesh rays
-		
-	--slice
-	polyop.slice road_sum (GetMeshFacesToPoly road_sum hitArray) (ray pt2 t2_x)
-	
-	road_sum_mesh = ConvertTo road_sum editable_mesh
-	--rebuild ray mesh intersect with updated data
-	
-	rays = #()
-	for i in 1 to face_centers.count do
-	(
-		--rayOrigin = (pt2+t2_y*face_distances[i]+t2_z*10.0-t2_x*10.0)
-		--dir = (-t2_z)
-		rayOrigin = face_centers[i][1] * t_matrix + pt2 - t2_x*10.0
-		dir = face_centers[i][2] * t_matrix
-		--drawLineBetweenTwoPoints rayOrigin (rayOrigin+dir*20.0) (Color 0 255 0)
-		append rays (ray rayOrigin dir)
-	)
-	hitArray = FindAllIntersectionsUsingRays road_sum_mesh rays
-	
-	road_sum = ConvertTo road_sum editable_poly
-	
-	--remove all wrong faces
-	polyop.deleteFaces road_sum (GetMeshFacesToPoly road_sum hitArray)
-	
-	WeldEditPoly road_sum 1.0
-		
-	--polyop.detachFaces road_sum hitArray
-	
-	--Slice modifier removes overlapping part
-	/*sl = sliceModifier()
-	addModifier road_sum sl
-	
-	slice_transform_matrix = (getModContextTM road_sum sl) * (inverse road_sum.objecttransform)
-	
-	--place slice to the end of spline
-	s_z = normalize(tn2 * slice_transform_matrix - pt2 * slice_transform_matrix)
-	s_y = normalize([-s_z.y, s_z.x, 0.0])
-	s_x = cross s_z s_y
-	
-	slice_matrix = matrix3 0
-	slice_matrix.row1 = s_x
-	slice_matrix.row2 = s_y
-	slice_matrix.row3 = s_z
-	slice_matrix.row4 = pt2 * slice_transform_matrix
-	
-	--sl.Faces___Polygons_Toggle = 1
-	sl.slice_type = 3
-	sl.slice_plane.transform = slice_matrix*/
-	enableSceneRedraw()
-	return road_sum
-)
+
+
 
 fn CheckResource file fileName =
 (
@@ -3585,95 +3160,6 @@ fn CheckResource file fileName =
 		throw fileName
 	)
 )
-
--- fn SelectRoad roads lane_number lane_width_1 lane_width_2 spec =
--- (	
--- 	lane_width = 0
--- 	if lane_width_1 == 0 then
--- 		lane_width = lane_width_2 + 1
--- 	else 
--- 		lane_width = lane_width_1
--- 	
--- 	offset = 0
--- 	if spec then (
--- 		offset = 1
--- 	)		
--- 	if lane_number == 2 then (
--- 		lane_width -= 1
--- 	)
--- 	return roads[(lane_number-1)*6 + (lane_width-1)*2 + offset + 1]
--- )
-
---specs(parking_left, parking_right, sidewalk_left, sidewalk_right)
-fn ConstructRoadPrototype road specs placeParkingLeft placeParkingRight placeSidewalkLeft placeSidewalkRight =
-(
-	--
-	bb = GetBoundingBox road
-	bb_parking = GetBoundingBox specs[1]
-	bb_sidewalk = GetBoundingBox specs[3]
-	cpy_road = copy road
-	offset = GetLengthBB bb_sidewalk
-	
-	offsetLeft 	= offset
-	offsetRight	= offset
-	
-	if(placeParkingLeft) 		then offsetLeft += GetLengthBB bb_parking
-	if(placeParkingRight) 	then offsetRight += GetLengthBB bb_parking
-
-	
-	
-	--	
-	left_pivot = road.position - (GetWidthBB bb)/2.0 * road.transform.row1 + ((GetLengthBB bb)/2.0 + offsetLeft) * road.transform.row2 + (GetHeightBB bb_sidewalk) * road.transform.row3
-	right_pivot = road.position - (GetWidthBB bb)/2.0 * road.transform.row1 - ((GetLengthBB bb)/2.0 + offsetRight) * road.transform.row2 + (GetHeightBB bb_sidewalk) * road.transform.row3
-	
-	-- parking left
-	if (placeParkingLeft) then
-	(
-		parking_left = copy specs[1]
-		parking_left.position = left_pivot
-		cpy_road.attach parking_left cpy_road
-	)
-	-- parking right
-	if (placeParkingRight) then
-	(
-		parking_right = copy specs[2]
-		parking_right.position = right_pivot
-		cpy_road.attach parking_right cpy_road
-	)
-	--place sidewalk Left
-	if (placeSidewalkLeft) then
-	(
-		sidewalk_left = copy specs[3]
-		sidewalk_left.position = left_pivot
-		cpy_road.attach sidewalk_left cpy_road
-	)
-	--place sidewalk Right
-	if (placeSidewalkRight) then
-	(
-		sidewalk_right = copy specs[4]
-		sidewalk_right.position = right_pivot
-		cpy_road.attach sidewalk_right cpy_road
-	)
-	
-	
-	--
-	--WeldEditPoly road_sum 1.0
-	
-	
-	--return road
-	return cpy_road
-	
-)
-
-
-
-
-
-
-
-
-
-
 
 
 ---------------------------------------------------------------------------------------------------------------------
@@ -3698,13 +3184,7 @@ fn EditSplineTangents road =
 --															ROADS
 --###################################################################################
 
-rollout RoadGeneratorTool "Road Generator"
-(	
-
-	local roads = #()
-	local specs = #()
-	local dummies = #()
-	
+rollout RoadGeneratorTool "Road Generator" (	
 	group ""
 	(
 	dropdownlist dd_road_prefabs_1 "" items:#(	"(1-6)                      " + one_six ,
@@ -3732,33 +3212,14 @@ rollout RoadGeneratorTool "Road Generator"
 	button btn_generate "Generate Road" width: 200 height: 35 offset:[0, 10] align:#center
 	button bt_generateShortcut "Generate Shortcut" width:200 height:35 offset:[0,0]
 
-	
+	local roads = #()
+	local specs = #()
+	local dummies = #()
 	local controlsArr = #(dd_road_prefabs_1, cb_parking_lane_left, cb_parking_lane_right, cb_sidewalks_left, cb_sidewalks_right, spinner_tangent)
 	
 	on RoadGeneratorTool open do
 	(
-		--check resource
--- 		try (
--- 			CheckResource $generator_road_2_4 "generator_road_2_4"
--- 			CheckResource $generator_road_2_4_spec "generator_road_2_4_spec"
--- 			CheckResource $generator_road_2_5 "generator_road_2_5"
--- 			CheckResource $generator_road_2_5_spec "generator_road_2_5_spec"
--- 			CheckResource $generator_road_2_6 "generator_road_2_6"
--- 			CheckResource $generator_road_2_6_spec "generator_road_2_6_spec"
--- 			CheckResource $generator_road_4_5 "generator_road_4_5"
--- 			CheckResource $generator_road_4_5_spec "generator_road_4_5_spec"
--- 			CheckResource $generator_road_4_6 "generator_road_4_6"
--- 			CheckResource $generator_road_4_6_spec "generator_road_4_6_spec"
--- 			CheckResource $generator_sidewalk_left "generator_sidewalk_left"
--- 			CheckResource $generator_sidewalk_right "generator_sidewalk_right"
--- 			CheckResource $generator_corner "generator_corner"
--- 			CheckResource $generator_corner_p "generator_corner_p"
--- 			CheckResource $generator_parking_lane_left "generator_parking_lane_left"
--- 			CheckResource $generator_parking_lane_right "generator_parking_lane_right"
--- 		) catch (
--- 			destroyDialog CrossroadGenerator
--- 		)
-		
+
 		--load road types
 		append roads $generator_road_1_6
 -- 		append roads $generator_road_1_6     		--<< instead of spec just For NOW
@@ -3789,123 +3250,9 @@ rollout RoadGeneratorTool "Road Generator"
 		append specs $generator_sidewalk_left
 		append specs $generator_sidewalk_right
 	)
-	on bt_generateShortcut pressed do roGenStruct.generateRoadShortcut()
-	on btn_generate pressed do
-	(	
-		undo off(
-			sel = selection as Array
-			selCount = sel.count
-			---------------------------------------------------------------------------
--- 			TWO POINTS  (Create)
-			---------------------------------------------------------------------------
-			if selCount == 2 and classof sel[1] == Point and classof sel[2] == Point then (
-				
-				p1 = sel[1].position
-				t1 = sel[1].children[1].position
-				p2 = sel[2].position
-				t2 = sel[2].children[1].position
-				-- create spline from selected points
-				local sp = splineShape()
-				addNewSpline sp
-				addKnot sp 1 #corner #curve p1
-				addKnot sp 1 #corner #curve p2
-				setKnotType sp 1 1 #bezierCorner
-				setKnotType sp 1 2 #bezierCorner
-				setOutVec sp 1 1 (t1)
-				setInVec sp 1 2 (t2)
-				updateShape sp
-				sp.adaptive = true
-				sp.pivot = [0, 0, 0]
-				
-				sp.wirecolor = color 7 206 224
-				
-				selected_road = PickRoadPrefab roads dd_road_prefabs_1.selection false
-
-				road = ConstructRoadPrototype selected_road specs cb_parking_lane_left.state cb_parking_lane_right.state cb_sidewalks_left.state cb_sidewalks_right.state
-				finalRoad = CreateRoadFromSpline road sp spinner_tangent.value
-				------------------------------------------------------------------
-				finalRoad.name = replace finalRoad.name 11 6 "connect_road"
-				finalRoad.name = uniquename(finalRoad.name)
-				
-				roGenStruct.setRoadCA finalRoad sp $[1] $[2] RoadGeneratorTool controlsArr
-				custAttributes.add sp gSplineGenCa #unique
-				sp.road = finalRoad.name
-				--sp.parent = finalRoad --MerlinEl (2.24.2019) --can't do this, depency loop
-				------------------------------------------------------------------
-				delete road
-
-				roGenStruct.SetCrossRoadWireColor finalRoad
-				select finalRoad				
-			)
-
-			---------------------------------------------------------------------------
--- 			ROAD or SPLINE  (Update)
-			---------------------------------------------------------------------------
-			if selCount == 1 then(
-				obj = sel[1]
-				if classOf obj == SplineShape then (
-					spline = obj
-					road = getNodeByName spline.road
-				)else(
-					spline = obj.roadSpline
-					road = obj
-				)
-				
-				fSel = #(road, spline)
-				
-				oldWireColor = road.wirecolor
-				
-				prevParent = undefined
-				
-				if fSel[1] != undefined and fSel[2] != undefined then(
-					select fSel
-					selected_road = PickRoadPrefab roads dd_road_prefabs_1.selection false
-					selected_road = ConstructRoadPrototype selected_road specs cb_parking_lane_left.state cb_parking_lane_right.state cb_sidewalks_left.state cb_sidewalks_right.state
-					road = undefined
-					spline = undefined
-					-- get items from selection
-					for i in 1 to $.count do
-					(
--- 						print ("ClassOf "+(classOf $[i] as string))
-						if (classOf $[i] == Editable_Poly) or (classOf $[i] == PolyMeshObject) then
-						(
-							road = $[i]
--- 							print ("Road was detected.")
-						)
-						if (classOf $[i] == SplineShape) then
-						(
-							spline = $[i]
--- 							print ("Spline was detected.")
-						)
-					)
-					if(road == undefined or spline == undefined) then
-					(
-						messageBox "Road or spline wasn't selected."
-					) else 
-					(
-						--create road
-						finalRoad = CreateRoadFromSpline selected_road spline spinner_tangent.value
-						finalRoad.name = replace finalRoad.name 11 6 "connect_road"
-						finalRoad.name = uniquename(finalRoad.name)
-						
-						roGenStruct.setRoadCA finalRoad spline road.startPoint road.endPoint RoadGeneratorTool controlsArr
-						spline.road = finalRoad.name
-						-- delete old road
-						
-						prevParent = road.parent
-											
-						delete road
-						delete selected_road
-						
-						roGenStruct.SetCrossRoadWireColor finalRoad oldColor:oldWireColor
-						finalRoad.parent = prevParent
-						select finalRoad
-					)
-					
-				)
-			)
-		)
-	)
+	on bt_generateShortcut pressed do (roGenStruct.generateRoadShortcut RoadGeneratorTool)
+	on btn_generate pressed do (roGenStruct.generateRoad RoadGeneratorTool roads specs)
+	
 
 	-----------------------------------------------------------------------------------
 	on btn_edit_tangents pressed do
@@ -3921,7 +3268,8 @@ rollout RoadGeneratorTool "Road Generator"
 			max modify mode
 			select road.roadSpline
 			subobjectLevel = 1
-			macros.run "Tools" "SmartScale"
+			toolMode.uniformScale()
+			--macros.run "Tools" "SmartScale"
 		)
 	)
 	
@@ -4198,8 +3546,8 @@ rollout dlgPickObjectType "Menu"
 	radiobuttons rb_type labels:#("CROSSROAD    ",  "ROAD               ", "UTILITIES") default:1 align:#left  columns:1   --"TURN                           "
 	dropdownlist dd_crossroad_types "" items:#("2 Side Roads", "2 Different Side Roads", "1 Side Road" ) height:6  offset:[100,-50] width:140
 	button bt_createColl "Create Collisions" offset:[55,-3] width:140 height:25 visible:false
-	button bt_copyUniqueCrossRoad "Copy Unique CrossRoad" offset:[55,-3] width:140 height:25
-	button bt_copyUniqueShortcut "Copy Unique Shortcut" offset:[55,-90] width:140 height:25
+	button bt_copyUniqueCrossRoad "Copy Unique CrossRoad" offset:[55,-3] width:140 height:25 visible:false
+	button bt_copyUniqueShortcut "Copy Unique Shortcut" offset:[55,-90] width:140 height:25 visible:false
 
 -- 	label fill ""
 	
@@ -4290,6 +3638,7 @@ rollout dlgPickObjectType "Menu"
 	on bt_copyUniqueShortcut pressed do (roGenStruct.copyUniqueShortcut $)
 	-------------------------------------------------	COLLS -------------------------------------------------------------------------
 	on bt_createColl pressed do (
+	
 		roGenStruct.All_CALLBACKS_ENABLED = false
 		runLocalScript "Road_Generator_Collisions"
 		roGenStruct.All_CALLBACKS_ENABLED = true
