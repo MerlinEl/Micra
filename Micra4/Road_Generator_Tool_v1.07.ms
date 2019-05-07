@@ -25,19 +25,35 @@ Global gCACrossRoadKids = attributes CrossRoadKids attribID:#(0x449b771a, 0x1d58
 	parameters params(
 	
 		kids 			type:#nodeTab tabSizeVariable:true
-		controlsStr type:#string
+		controlsStr 	type:#string
 	)
 )
 -------------------------------------------------------------------------------------
 Global gShortcutCa = attributes ShortcutCa attribID:#(0x1635194a, 0x171142a1)(
 
-	parameters params( 
+	parameters params ( 
 		
-		roadSpline 		type:#node
-		startPoint		type:#node
-		endPoint		type:#node
+		roadSpline 		type:#maxObject
+		startPoint		type:#maxObject
+		endPoint		type:#maxObject
 		controlsStr		type:#string
 	)
+	on update do format "updated: %\n" this
+	on create do format "created: %\n" this
+	on clone orig do (
+	
+		format "cloned a:% b:%\n" this orig	
+	)
+	on deleted do (
+	
+		format "deleted:%\n" this
+	)
+	--on attachedToNode <nodeVar> do ...
+	--on detachedFromNode <node> do ...
+	/*when transform $Body changes do (
+	
+		print "moved"
+	)*/
 )
 
 -------------------------
@@ -77,7 +93,7 @@ fn runLocalScript script_name = (
 )
 --Load all functions
 Global roGenStruct
-runLocalScript "Road_Generator_Struct_v1.06"
+runLocalScript "Road_Generator_Struct_v1.07"
 --< MerlinEl
 
 

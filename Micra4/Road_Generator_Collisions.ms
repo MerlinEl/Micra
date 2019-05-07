@@ -9,27 +9,37 @@ rollout roadGeneratorCollisionDialog "Road Collision Generator:" width:544 heigh
 	editText 'edt_coll_node' "" pos:[96,52] width:292 height:20 align:#left
 	button 'btn_create_colls' "GENERATE" pos:[408,12] width:132 height:68 align:#left
 	checkbox chk_auto "Auto" pos:[100,8] width:44 height:16 toolTip:"Work's also for multiple objects"
+/*
+lh_02_little_italy_block_h_roads_geometry
+lh_02_little_italy_block_h_roads_coll
+lh_04_central_island_north_h_roads_coll
+lh_04_central_island_north_h_roads_geometry
+lh_04_central_island_south_e_roads_coll
+lh_04_central_island_south_e_roads_geometry
+*/
 	local default_layer_name	= "lh_02_little_italy_roads_coll" 
 	local default_node_name	= "lh_02_little_italy_block_h_roads_coll"
 	local typed_layer_name	= default_layer_name
 	local typed_node_name	= default_node_name
+	local collision_wirecolor = color 176 26 26
 	fn matIdToSemanticId id = (
 		
 		case id of (
 
-			2:  65  --rails
-			3:  52  --cobblestone
-			4: 56   --crub
-			5: 50   --road
-			6: 50   --road side
-			7: 50   --road tile
-			8: 53   --pavement
-			9: 53	--concrete blocks
+			2: 	65  --rails
+			3:	52  --cobblestone
+			4:	56  --crub
+			5: 	50  --road
+			6: 	50  --road side
+			7:	50  --road tile
+			8: 	53  --pavement
+			9: 	53	--concrete blocks
 			15: 53	--pavement
 			16: 53	--pavement
 			17: 53	--pavement
 			22: 53	--pavement
 			23: 50	--damaged road (shortcuts)
+			24: 50	--asfalt road / usable for parking spots
 			default: 1
 		)
 	)
@@ -79,7 +89,7 @@ rollout roadGeneratorCollisionDialog "Road Collision Generator:" width:544 heigh
 	fn cloneRoad obj prefix = (
 		
 		local new_o = copy obj
-		new_o.name = prefix+"_"+ obj.name
+		new_o.name = uniqueName (prefix+"_"+ obj.name)
 		--for c in new_o.children do c.parent = undefined --dont need (a clone have no children)
 		 --delete all custom attributes
 		for i = custAttributes.count new_o to 1 by -1 do custAttributes.delete new_o i
@@ -89,7 +99,7 @@ rollout roadGeneratorCollisionDialog "Road Collision Generator:" width:544 heigh
 	fn detachRail obj faces = (
 		
 		--detach,  rename
-		local rails_name =  (obj.name + "_rails")
+		local rails_name = uniqueName (obj.name + "_rails")
 		polyOp.detachFaces obj faces delete:true asNode:true name:rails_name --node:&obj_rails
 		--add collision params
 		getNodeByName rails_name
@@ -210,6 +220,7 @@ rollout roadGeneratorCollisionDialog "Road Collision Generator:" width:544 heigh
 		generateNavmeshFromRails obj_navmesh
 		--set link and collision params
 		obj_navmesh.parent = export_coll_node
+		obj_navmesh.wirecolor = collision_wirecolor
 		--attach rails back to instance
 		polyOp.attach road_coll obj_rails
 	)
@@ -220,39 +231,53 @@ rollout roadGeneratorCollisionDialog "Road Collision Generator:" width:544 heigh
 		if collision_layer == undefined do collision_layer = LayerManager.newLayerFromName layer_name --create layer if not exists
 		collision_layer
 	)
-	fn getExportNode obj = (
+	fn getCollisionNode geometry_obj = (
 	
-		local node_name = if chk_auto.checked then (
+		local node_name = undefined
+		if chk_auto.checked then (
+		
+			if geometry_obj.parent != undefined do (
 			
-			if o.parent != undefined do o.parent.name + "_coll" 
+				local geometry_node_name = geometry_obj.parent.name
+				local suffix_geometry_index = findString geometry_node_name "_geometry"
+				if suffix_geometry_index != undefined then (
+				
+					node_name = (subString geometry_node_name 1 suffix_geometry_index) + "coll" 	
+					--format "node_name:%\n" node_name
+				)
+			)
 		
 		) else (
 		
-			edt_coll_node.text
+			node_name = edt_coll_node.text
 		)
 		if node_name == undefined do (
 				
-			format "Unable to create collision from [ % ] . Object is not linked." obj.name
+			format "Unable to create collision from [ % ] . Object is not linked." geometry_obj.name
 			return undefined
 		)
 		getNodeByName node_name
 	)
 	fn createRoadsCollisions = (
 		
-		
 		local s_mat = meditmaterials["semantic_materials"]
-		for o in selection do (
+		escapeEnable = true 						--Progress Bar
+		progressStart "Grenerating Road Collisions...."	--Progress Bar
+		local sel = selection as array
+		local progress_total = sel.count
+		with redraw off for i=1 to sel.count do (
 
-			local collision_layer = getCollisionLayer o
-			local export_coll_node = getExportNode o
-			if export_coll_node == undefined do 
+			if (getProgressCancel()) do exit		--Progress Bar
+			local obj = sel[i]
+			local collision_layer = getCollisionLayer obj
+			local export_coll_node = getCollisionNode obj
 			if not isValidNode export_coll_node do (
 			
-				format "Unable to create collision from [ % ] . Collision Node not exists." o.name
+				format "Unable to create collision from [ % ] . Collision Node not exists.\n" obj.name
 				continue
 			)
-			local o_instance = cloneRoad o "coll"  --create road clone
-			o_instance.wirecolor = color 176 26 26
+			local o_instance = cloneRoad obj "coll"  --create road clone
+			o_instance.wirecolor = collision_wirecolor
 			o_instance.material = s_mat
 			AddCustomAttributeByName o_instance "CollisionMesh"
 			o_instance.parent = export_coll_node --link to export collision node
@@ -272,7 +297,10 @@ rollout roadGeneratorCollisionDialog "Road Collision Generator:" width:544 heigh
 			
 				createRailsCollisions o_instance rail_faces export_coll_node 
 			)
+			--format "Generated Collisions for:%\n" obj.name
+			progressUpdate (progress_total/100.0*i) --Progress Bar
 		)
+		progressEnd()								--Progress Bar 
 		max select none
 		completeRedraw()
 	)
@@ -291,8 +319,9 @@ rollout roadGeneratorCollisionDialog "Road Collision Generator:" width:544 heigh
 				
 				local obj = selection[1]
 				if obj == undefined do return false
+				local export_coll_node = getCollisionNode obj
 				edt_coll_layer.text = obj.layer.name + "_coll"
-				edt_coll_node.text = if obj.parent != undefined then obj.parent.name + "_coll" else "undefined"
+				edt_coll_node.text = if export_coll_node != undefined then export_coll_node.name else "undefined"
 			)
 			false:( --restore previous texts
 				

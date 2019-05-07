@@ -276,7 +276,7 @@ struct ROAD_GENERATOR_STRUCTURE	(
 		rm.Free()
 		--return result
 		return hit_array
-	),
+	),	
 	fn getConstraintObject obj_target node_type = (
 	
 		local all_dependents = refs.dependents obj_target
@@ -319,10 +319,19 @@ struct ROAD_GENERATOR_STRUCTURE	(
 	*/
 	fn setShortcutCA road rSpline sPoint ePoint dialog controlsArr = (
 	
+		--daDependents = (refs.dependents $)
+	
 		custAttributes.add road gShortcutCa #unique
-		sPoint.parent = road
+		road.roadSpline = nodeTransformMonitor node:rSpline forwardTransformChangeMsgs:false
+		road.startPoint = nodeTransformMonitor node:sPoint forwardTransformChangeMsgs:false
+		road.endPoint  = nodeTransformMonitor node:ePoint forwardTransformChangeMsgs:false
+		/*road.roadSpline 	= rSpline
+		road.startPoint 	= sPoint
+		road.endPoint 		= ePoint*/
+
+		/*sPoint.parent = road
 		ePoint.parent = road
-		--rSpline.parent = road
+		rSpline.parent = road*/
 		road.controlsStr = getCAControlsSTR dialog controlsArr
 	),
 	fn setVertexColor obj clr map_channel = (
@@ -1002,19 +1011,3 @@ linkConstraint road sp
 )	
  --create instance
 Global roGenStruct = ROAD_GENERATOR_STRUCTURE()
-
-
-
-/*
-for o in slection do print o.name
-for o in selection do o.name = uniqueName o.name
-sh = for o in selection where roGenStruct.isShortcut o collect o
-select sh
-for o in sh do (
-
-
-	sp = o.children[3]
-	sp.parent = undefined
-	roGenStruct.linkConstraint s sp
-)
-*/

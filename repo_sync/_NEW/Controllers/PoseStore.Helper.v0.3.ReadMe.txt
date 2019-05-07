@@ -1,0 +1,69 @@
+=============================================================================================
+
+			    ####  POSE STORE HELPER PLUGIN  ####
+
+=============================================================================================
+
+Version 0.3
+Version Release Date - 20 April 2011
+
+Created by Jeremy Massey - http://www.jeremymassey.com/
+Compatible with 3ds Max 2008+
+
+=============================================================================================
+
+INSTALLATION: Copy the "PoseStore.Helper.v0.3.ms" file to your <<3ds Max>>\Scripts\Startup
+directory. This will load the script on startup. If you have a previously installed version
+you must remove it before copying the current version.
+
+Pose Store is a scripted helper plugin, and can be found under Helpers >> Pose Store within
+the Command Panel >> Create.
+
+=============================================================================================
+
+BUG REPORTS: Please submit any bug reports via the contact page at the above web address,
+with as much information about the bug as possible.
+
+=============================================================================================
+
+VERSION HISTORY
+
+Version 0.3	NEW FEATURE	- Ability to mirror poses.
+		IMPROVEMENT	- Substantial rewrite of existing functionality, improving
+				reliability and performance.
+		BUG FIX		- Cloning a pose store helper now resets the helpers
+				properties to the defaults, preventing errors with multiple
+				helpers affecting the same control objects.
+		BUG FIX		- Added check preventing adding a control object which is
+				already a control object of another pose store helper.
+
+Version 0.24	BUG FIX		- Improved handling of control objects which have been
+				deleted from the scene.
+
+Version 0.23	IMPROVEMENT	- Shortened duplicate pose header to reduce the space used in
+				the saved poses list.
+                BUG FIX		- Add Control Objects button is now disabled until the helper
+				is created in the scene.
+		BUG FIX		- Modified selection filter to also exclude tape helpers, as
+				their transforms cannot be frozen.
+
+Version 0.22	NEW FEATURE 	- Ability to duplicate poses based on the current multiplier.
+		BUG FIX		- Multiplier slider now updates after deleting a pose.
+
+Version 0.21	NEW FEATURE	- Ability to rename saved poses.
+		NEW FEATURE	- Ability to remove control objects.
+		BUG FIX		- setMesh error on loading file in new Max session resolved.
+		BUG FIX		- AnimTrack controller not being set active after editing a
+				pose.
+
+=============================================================================================
+
+DISCLAIMER: THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
+ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
+MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE
+COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE
+GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED
+AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED
+OF THE POSSIBILITY OF SUCH DAMAGE.
