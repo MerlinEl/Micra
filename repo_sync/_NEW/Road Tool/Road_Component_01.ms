@@ -1,4 +1,7 @@
-CA_MxsNETConnect = attributes CA_MxsNETConnect attribID:#(0x11aa99ff, 0x1234abcd)
+
+
+
+Road_Generator_Shortcut = attributes Road_Generator_Shortcut attribID:#(0x11aa99ff, 0x1234abcd)
 (
 	parameters main rollout:params 
 	(
@@ -18,19 +21,22 @@ CA_MxsNETConnect = attributes CA_MxsNETConnect attribID:#(0x11aa99ff, 0x1234abcd
 		
 		try( (classof obj.mesh == triMesh) and (getnumverts obj.mesh) > 0 and (getnumfaces obj.mesh) > 0 ) catch( false ) 
 	)
+	fn filterDummy obj = (classof obj == Dummy)
+	
 	rollout params "Parameters" (
 			
-		multiListBox lbxNodeList "Objects: " items:#("a", "b", "c") selection:0
+		multiListBox lbxNodeList "Objects: " items:#() selection:0
 		button btn1 "Edit profile" width:160 height:20 align:#center
 		label lblAxis "Axis : " across:2
 		radiobuttons rdoAxis "" labels:#("X","Y","Z") align:#right columns:3
 		spinner spnTwist "Twist : " type:#float range:[-2000,2000,20] fieldWidth:50 align:#right
 		GroupBox grp5 "Position:" width:156 height:40 align:#center
-		spinner sp_rot_x "x" width:74 height:16  range:[-9999,9999,0] align:#left
+		spinner sp_rot_x "x" width:74 height:16 range:[-9999,9999,0] align:#left
         spinner sp_rot_y "y" width:74 height:16 range:[-9999,9999,0] align:#left
         spinner sp_rot_z "z" width:74 height:16 range:[-9999,9999,0] align:#left
 		edittext edt1 "" width:149 height:50 align:#center
-		pickbutton pk "Pick Shape" width:116 height:24  toolTip:"#center" filter:filterObject
+		pickbutton btn_start "Pick Start" width:116 height:24  toolTip:"#center" filter:filterDummy
+		pickbutton btn_end "Pick End" width:116 height:24  toolTip:"#center" filter:filterDummy
 		fn linkNode obj = (
 		    
 			/*obj.fpos.controller = point3_script()
@@ -40,13 +46,19 @@ CA_MxsNETConnect = attributes CA_MxsNETConnect attribID:#(0x11aa99ff, 0x1234abcd
 			obj.fpos.controller.addTarget "tpos" pos_pt.pos.controller
 			obj.fpos.controller.script = "tpos"*/
 		)
-		fn addObjectInToList obj = ()
+		fn addObjectInToList obj = (
+			
+			local item_exists = findItem lbxNodeList.items obj.name == undefined
+			format "picked Dummy name:%\n" obj.name
+			format "picked Dummy exists:%\n" item_exists
+			if not item_exists do lbxNodeList.items += #(obj.name)
+		)
 		fn init = (
 			
-			
+			format "init.....\n"
 		)
 		on params open do init()	
-		on pk picked obj do addObjectInToList obj
+		on btn_start picked obj do addObjectInToList obj
 		on attachedToNode obj do linkNode obj
 		/*on nodeTab set val index do format "set nodeTab: % : %\n" val index
 		on nodeTab get val index do (format "get nodeTab: % : %\n" val index;val)
@@ -58,5 +70,5 @@ CA_MxsNETConnect = attributes CA_MxsNETConnect attribID:#(0x11aa99ff, 0x1234abcd
 		on intVal get val do (format "get intVal: %\n" val;val)*/
 	)
 )
-try (custAttributes.delete $ CA_MxsNETConnect baseObject:false) catch ()
-custAttributes.add $ CA_MxsNETConnect --baseObject:false
+try (custAttributes.delete $ Road_Generator_Shortcut baseObject:false) catch ()
+custAttributes.add $ Road_Generator_Shortcut --baseObject:false
