@@ -1,8 +1,16 @@
+/*  bad header
 plugin simpleSpline pulleyBelt
 	name:"Pulley Belt"
 	classID:#(0x2820e52d, 0x26a35901)
 	category:"Examples"
+	usePBValidity:true*/
+	
+plugin shape pulleyBelt
+	name:"Pulley Belt"
+	classID:#(0x2820e52d, 0x26a35901)
+	category:"Examples"
 	usePBValidity:true
+	extends:line	
 (
 	local kappa = 4 * (sqrt 2 - 1)/3
 	local bezierShapeClass = dotNetClass "Autodesk.Max.MaxPlus.BezierShape"
@@ -13,20 +21,11 @@ plugin simpleSpline pulleyBelt
 	local curveLine = (dotNetClass "Autodesk.Max.MaxPlus.SplineKnot+LineType").CurveLineType
 	local initialized = true
 
-	fn vec3 x y z =
-		dotNetObject vector3 x y z
-
-	fn getSplineKnot pos inVec outVec =
-		dotNetObject splineKnot bezierKnot curveLine pos inVec outVec
-
-	fn getPointPlaneProjection pos pTM =
-		pos + dot (pTM.translation - pos) pTM.row3 * pTM.row3
-
-	fn getExternalHomotheticCenter radius1 radius2 dist =
-		dist / (1 - radius2 / radius1)
-
-	fn adjustBy angle =
-		if angle < 90 then 0 else 0.23 * (angle - 90)/90.
+	fn vec3 x y z = dotNetObject vector3 x y z
+	fn getSplineKnot pos inVec outVec = dotNetObject splineKnot bezierKnot curveLine pos inVec outVec
+	fn getPointPlaneProjection pos pTM = pos + dot (pTM.translation - pos) pTM.row3 * pTM.row3
+	fn getExternalHomotheticCenter radius1 radius2 dist = dist / (1 - radius2 / radius1)
+	fn adjustBy angle = if angle < 90 then 0 else 0.23 * (angle - 90)/90.
 
     parameters main rollout:params
 	(
