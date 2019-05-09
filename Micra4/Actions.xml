@@ -108,6 +108,7 @@
     <Weld_And_Smooth icon="208" cmd="mcAction.weldAndAutoSmooth()" tooltip="Weld And Smooth" />
     <Weld_Verts icon="60" cmd="mcAction.weldVerts()" tooltip="Weld Verts" />
     <Vertex_Color icon="258" cmd="mcFile.fileInVersion Vertex_Color" tooltip="Vertex Color" />
+    <Delete_Empty_Layers icon="269" cmd="mcInterface.deleteEmptyLayers()" tooltip="Delete Empty Layers" />
   </Modify>
   <Creation>
     <Create_3PGrid icon="81" cmd="mcCreate.grid3p()" tooltip="Create_3PGrid" />

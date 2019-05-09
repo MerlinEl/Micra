@@ -221,6 +221,8 @@ lh_04_central_island_south_e_roads_geometry
 		--set link and collision params
 		obj_navmesh.parent = export_coll_node
 		obj_navmesh.wirecolor = collision_wirecolor
+		--move navmesh in to road collision layer
+		road_coll.layer.addNode obj_navmesh
 		--attach rails back to instance
 		polyOp.attach road_coll obj_rails
 	)

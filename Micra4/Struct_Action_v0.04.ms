@@ -2688,6 +2688,22 @@ struct mcInterface
 			#squash :(max scale)
 			#select :(max select)
 		)
+	),
+	fn deleteEmptyLayers = (
+	
+		if not (queryBox "You are sure to Delete Empty Layers?" title:micra.version) do return false
+		local counter = 0
+		for id = LayerManager.count - 1 to 1 by -1 do (
+		
+			local layer = LayerManager.getLayer id
+			local contains_nodes = LayerManager.doesLayerHierarchyContainNodes layer.name
+			if not contains_nodes then (
+			
+				local deleted = LayerManager.deleteLayerByName layer.name
+				if deleted then counter += 1
+			)
+		)
+		return counter
 	)
 	/*<end>*/	
 )

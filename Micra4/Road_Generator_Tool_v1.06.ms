@@ -818,7 +818,7 @@ fn CreateConnectingRoad road_2 bb_1 bb_2 corner bb_corner angle_road placed_item
 		roGenStruct.SetPointAppearance pt		
 		/*helper point for tangent determination*/
 		tn = point()
-		hide tn
+		-- hide tn
 	-- 	format "%\n%\n%\n%\n" offset_point direction cut_offset C_TANGENT_OFFSET
 		append pt.children tn
 	)else(
@@ -1551,7 +1551,7 @@ rollout dlgCrossroadGenerator "Crossroad Generator"
 		AddRoadSlicer road_1 (max_dist_left) 3
 		AddRoadSlicer road_1 (max_dist_right) 2
 		
-		local pts = roGenStruct.setUpCrossRoadPoints max_dist_left max_dist_right c_tangent_offset road:generated_road
+		local pts = roGenStruct.setUpCrossRoadPoints max_dist_left max_dist_right c_tangent_offset road:generated_road hidden_tn:false
 		append road_1.children pts[1]
 		append road_1.children pts[2]
 		append road_1.children attributes_1[1][4]
@@ -2125,12 +2125,12 @@ rollout dlgCrossroadGenerator2 "Crossroad Generator"
 			pt1 = point()
 			roGenStruct.SetPointAppearance pt1
 			tn1 = point()
-			hide tn1
+			-- hide tn1
 			append pt1.children tn1
 			pt2 = point()
 			roGenStruct.SetPointAppearance pt2
 			tn2 = point()
-			hide tn2
+			-- hide tn2
 			append pt2.children tn2
 		)else(
 			pt1 = pRight
@@ -2644,12 +2644,12 @@ rollout dlgCrossroadGenerator3 "Crossroad Generator"
 			pt1 = point()
 			roGenStruct.SetPointAppearance pt1
 			tn1 = point()
-			hide tn1
+			-- hide tn1
 			append pt1.children tn1
 			pt2 = point()
 			roGenStruct.SetPointAppearance pt2
 			tn2 = point()
-			hide tn2
+			-- hide tn2
 			append pt2.children tn2
 		)else(
 			pt1 = pRight
@@ -2667,7 +2667,7 @@ rollout dlgCrossroadGenerator3 "Crossroad Generator"
 			pBot = point()
 			roGenStruct.SetPointAppearance pBot
 			tnBot = point()
-			hide tnBot
+			-- hide tnBot
 			append pBot.children tnBot
 		)else(
 			tnBot = pBot.children[1]
@@ -2965,12 +2965,12 @@ rollout dlgCrossroadGenerator3 "Crossroad Generator"
 			pt1 = point()
 			roGenStruct.SetPointAppearance pt1
 			tn1 = point()
-			hide tn1
+			-- hide tn1
 			append pt1.children tn1
 			pt2 = point()
 			roGenStruct.SetPointAppearance pt2
 			tn2 = point()
-			hide tn2
+			-- hide tn2
 			append pt2.children tn2
 		)else(
 			pt1 = pRight
@@ -2989,7 +2989,7 @@ rollout dlgCrossroadGenerator3 "Crossroad Generator"
 			pTop = point()
 			roGenStruct.SetPointAppearance pTop
 			tnTop= point()
-			hide tnTop
+			-- hide tnTop
 			append pTop.children tnTop
 		)else(
 			tnTop = pTop.children[1]
@@ -3637,8 +3637,8 @@ rollout dlgPickObjectType "Menu"
 		callbacks.removeScripts id:#removeCAs
 	)
 
-	on bt_copyUniqueCrossRoad pressed do (roGenStruct.copyUniqueCrossRoad $)
-	on bt_copyUniqueShortcut pressed do (roGenStruct.copyUniqueShortcut $)
+	on bt_copyUniqueCrossRoad pressed do (roGenStruct.copyUniqueCrossRoad $ hidden_tn:false)
+	on bt_copyUniqueShortcut pressed do (roGenStruct.copyUniqueShortcut $ hidden_tn:false)
 	-------------------------------------------------	COLLS -------------------------------------------------------------------------
 	on bt_createColl pressed do (
 	

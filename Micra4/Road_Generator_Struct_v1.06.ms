@@ -499,7 +499,7 @@ struct ROAD_GENERATOR_STRUCTURE	(
 		obj.CrossRoadKids.kids = road_helpers
 		format "fixBrokenCrossroad >  Cross Road  [ % ] has been fixed.\n" obj.name
 	),
-	fn setUpCrossRoadPoints max_dist_left max_dist_right c_tangent_offset road:undefined hidden_tn:true= (
+	fn setUpCrossRoadPoints max_dist_left max_dist_right c_tangent_offset road:undefined hidden_tn:true = (
 	
 		local dp1, dp2, tp1, tp2, pRight, pLeft -- dp > dummy(point) tp > tangent(point)
 		if road == undefined then ( --create controll points
@@ -549,7 +549,7 @@ struct ROAD_GENERATOR_STRUCTURE	(
 	  ss.wirecolor = col
 	  ss
 	),
-	fn copyUniqueShortcut obj = (
+	fn copyUniqueShortcut obj hidden_tn:false = (
 
 		if not (isShortcut obj) do return false
 		
@@ -575,10 +575,10 @@ local src_spline = getConstraintObject obj Shape
 linkConstraint new_obj rSpline
 		tn1.parent = sPoint
 		tn1.parent = ePoint
-	
+		if hidden_tn do hide #(tn1, tn2)
 		select new_obj
 	),
-	fn copyUniqueCrossRoad obj = (
+	fn copyUniqueCrossRoad obj hidden_tn:false = (
 	
 		if not (isCrossRoad obj) do return false
 		local kidsShift = 4
@@ -596,7 +596,7 @@ linkConstraint new_obj rSpline
 			newTn = copy origTn
 			
 			roGenStruct.SetPointAppearance newPt
-			hide newTn
+			if hidden_tn do hide newTn
 			
 			newTn.parent = newPt
 			append new_obj.children newPt
@@ -847,7 +847,7 @@ linkConstraint new_obj rSpline
 			max select none
 		)
 		--create new controll points
-		if pts.count != 2 do pts = setUpCrossRoadPoints -road_thickness road_thickness 500 --hidden_tn:false	
+		if pts.count != 2 do pts = setUpCrossRoadPoints -road_thickness road_thickness 500 hidden_tn:false	
 		--reverse tangents to inner
 		swapPoints pts[1] pts[2]
 		if not (isShortcut road) do moveTangetPoints pts[1] pts[2] min_tangent_dist --move tangent points close
@@ -1006,6 +1006,7 @@ Global roGenStruct = ROAD_GENERATOR_STRUCTURE()
 
 
 /*
+----------A procedure in shortcuts only
 for o in slection do print o.name
 for o in selection do o.name = uniqueName o.name
 sh = for o in selection where roGenStruct.isShortcut o collect o
@@ -1017,4 +1018,24 @@ for o in sh do (
 	sp.parent = undefined
 	roGenStruct.linkConstraint s sp
 )
+
+----------Check cross road children
+invalid_roads = #()
+for o in selection do (
+
+	local ch = o.children
+	format "Check CorssRoad:% children:%\n" o.name o.children.count
+	if o.children.count != 4 do (
+
+		format "missing children....."
+		append invalid_roads o
+		continue
+	)
+	for ch in o.children do format "\tpoints a:% b:%\n" o.children[1].name o.children[1].children[1].name
+)
+select invalid_roads
+
+----------Select empty points
+po = for o in objects where classOf o == Point collect o
+select (for o in po where o.parent == undefined collect o)
 */
