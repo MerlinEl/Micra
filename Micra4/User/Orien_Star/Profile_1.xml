@@ -2,7 +2,7 @@
 <USER val="Default">
   <Properties_1>
     <mc_Dialog_A active="true" pos="[1572,818]" size="[148,66]" title="Menu:" btnCount="[6,2]" />
-    <mc_Dialog_B active="true" pos="[1572,278]" size="[148,162]" title="Object:" btnCount="[6,6]" />
+    <mc_Dialog_B active="true" pos="[1570,280]" size="[148,162]" title="Object:" btnCount="[6,6]" />
     <mc_Dialog_C active="true" pos="[1572,440]" size="[148,66]" title="Pivot:" btnCount="[6,2]" />
     <mc_Dialog_D active="true" pos="[1572,506]" size="[148,90]" title="Select:" btnCount="[6,3]" />
     <mc_Dialog_E active="false" pos="[100,843]" size="[244,42]" title="Animation:" btnCount="[10,1]" />
@@ -14,7 +14,7 @@
   </Properties_1>
   <Properties_2>
     <mcMicraDialog active="true" pos="[1570,210]" size="[148,66]" title="" />
-    <mcCustomizeDialog active="false" pos="[1330,270]" size="[224,404]" title="" />
+    <mcCustomizeDialog active="false" pos="[1040,260]" size="[224,404]" title="" />
     <mcProgramDialog active="false" pos="[100,0]" size="[256,232]" title="" />
     <mcisoDialog active="false" pos="[100,152]" size="[140,400]" title="" />
     <mcModifierDialog active="false" pos="[100,100]" size="[400,400]" title="" />
@@ -195,5 +195,6 @@
     <btn_J5 action="Live_Measure" icon="30" />
     <btn_C8 action="Align_To_Face" icon="265" />
     <btn_J18 action="Road_Generator_Tool" icon="266" />
+    <btn_B34 action="Align_Objects_3D" icon="270" />
   </Buttons>
 </USER>
