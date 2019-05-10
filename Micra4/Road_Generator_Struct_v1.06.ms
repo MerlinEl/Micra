@@ -283,6 +283,33 @@ struct ROAD_GENERATOR_STRUCTURE	(
 		local filter_objects = for ref in all_dependents where (superClassOf ref == node_type) collect ( ref )
 		filter_objects[1]
 	),
+	fn getRoadComponents obj = (
+	
+		if not (isRoad o) do return #()
+		local sp = o.roadSpline
+		local p1 = o.startPoint
+		local p2 = o.endPoint
+		local t1 = p1.children[1]
+		local t2 = p2.children[1]
+		#(p1, p2, t1, t2)
+	),
+	/**
+	*@Usage > Collect all components from given objects
+	*@Example 
+		roGenStruct.getAllComponents (selection as Array)
+	*/
+	fn getAllComponents obj_arr = (
+
+		local all_components = #()
+		for o in selection do (
+
+			append all_components o
+			if isRoad o do join all_components (getRoadComponents o)
+			if isCrossRoad do ()
+			if isShortcut do ()
+		)
+		for o in all_components where isValidNode o collect o --return only validated objects
+	),
 	-------------------------------------------------------------
 	-------------------------------------------------------------
 	------                   SET                           ------
@@ -1020,20 +1047,23 @@ for o in sh do (
 )
 
 ----------Check cross road children
-invalid_roads = #()
-for o in selection do (
+cr = for o in selection where findString o.name "generator_crossroad" != undefined collect o
+select cr
+invalid_cross_roads = #()
+for o in cr do (
 
 	local ch = o.children
 	format "Check CorssRoad:% children:%\n" o.name o.children.count
 	if o.children.count != 4 do (
 
 		format "missing children....."
-		append invalid_roads o
+		append invalid_cross_roads o
 		continue
 	)
 	for ch in o.children do format "\tpoints a:% b:%\n" o.children[1].name o.children[1].children[1].name
 )
-select invalid_roads
+format "invalid_cross_roads count:%\n" invalid_cross_roads.count
+select invalid_cross_roads
 
 ----------Select empty points
 po = for o in objects where classOf o == Point collect o
