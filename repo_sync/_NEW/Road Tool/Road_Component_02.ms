@@ -119,6 +119,10 @@ on <name> tabChanged < arg1 > < arg2 > < arg3 > do < expr >
 			if startT 	!= undefined do updateLabel btn_start_t  startT
 			if endT 	!= undefined do updateLabel btn_end_t  endT
 			if lineObj != undefined do updateLabel btn_line  lineObj
+			/*when transform this changes do (
+	
+				print "moved"
+			)*/
 		)
 		on params open do init()	
 		on btn_start_p picked obj do (addComponent obj #start_p)
@@ -127,7 +131,7 @@ on <name> tabChanged < arg1 > < arg2 > < arg3 > do < expr >
 		on btn_end_t picked obj do (addComponent obj #end_t)
 		on btn_line    picked obj do (addComponent obj #line)
 	)
-	on update do format "updated: %\n" this -- when definition of the scripted plug-in is changed
+	on update do format "updated: %\n" this -- when plugin version is changed
 	on create do format "created: %\n" this --when first time attribute aded in to object
 	on clone orig do (
 	
