@@ -126,7 +126,7 @@
     <Live_Modeling val="0.02" />
     <Micra_Update val="0.05" />
     <Road_Generator_Tool val="1.06" />
-    <Align_Objects_3D val="0.03" />
+    <Align_Objects_3D val="0.04" />
   </Version>
   <SystemFiles val="Micra's Settings Files">
     <Actions val="Contains all accesible Micra's actions" />

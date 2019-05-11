@@ -159,6 +159,61 @@ Struct mcCube
 	fn si =(ma - mi       )  --size
 )
 
+/**
+*@Usage > get bounding box params (coords word)
+*@Example
+	
+	bm = BOX_MATRIX selection[1]
+	point pos:bm.left_center	wirecolor:yellow  --left center
+	point pos:bm.right_center	wirecolor:yellow --right center
+	point pos:bm.top_center		wirecolor:yellow --top center
+	point pos:bm.bottom_center	wirecolor:yellow --bottom center
+	point pos:bm.front_center	wirecolor:yellow --front center
+	point pos:bm.back_center	wirecolor:yellow --back center
+*/
+struct mcBoxMatrix (
+public
+	obj,	--geometry object
+	pos,	--pivot position(point)
+	mi, ma,	--min(point), max(point)
+	width, height, depth,	--widht(x), height(z), depth(y)
+	center,					--box center(point)
+	left, right, top, bottom, front, back, --border(value)
+	left_center, right_center, front_center, back_center, top_center, bottom_center, --border cross(point)
+	of_left, of_right, of_front, of_back, of_top, of_bottom, --pivot offset(value) from center
+private
+	fn onCreate = (
+		
+		if not (isValidNode obj) do return false
+		pos 			= obj.pos
+		mi   			= obj.min
+		ma  			= obj.max
+		width 			= abs (ma.x-mi.x)
+		height			= abs (mi.z-ma.z)
+		depth 			= abs (mi.y-ma.y)
+		center 			= (mi + ma) / 2
+		left 			= mi.x
+		right 			= ma.x
+		front 			= mi.y
+		back			= ma.y
+		top 			= ma.z
+		bottom 			= mi.z
+		left_center 	= [mi.x, center.y, center.z]
+		right_center	= [ma.x, center.y, center.z]
+		front_center	= [center.x, mi.y, center.z]
+		back_center		= [center.x, ma.y, center.z]
+		top_center		= [center.x, center.y, ma.z]
+		bottom_center	= [center.x, center.y, mi.z]
+		of_left 		= abs (pos.x - left)
+		of_right		= abs (pos.x - right)
+		of_front		= abs (pos.y - front)
+		of_back 		= abs (pos.y - back)
+		of_top 			= abs (pos.z - top)
+		of_bottom		= abs (pos.z - bottom)
+	),
+	c = onCreate()
+)
+
 /* --3d bounding box
 		for v = 1 to verts.count do
 		(
