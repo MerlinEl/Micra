@@ -163,7 +163,7 @@ Struct mcCube
 *@Usage > get bounding box params (coords word)
 *@Example
 	
-	bm = BOX_MATRIX selection[1]
+	bm = mcBoxMatrix selection[1]
 	point pos:bm.left_center	wirecolor:yellow  --left center
 	point pos:bm.right_center	wirecolor:yellow --right center
 	point pos:bm.top_center		wirecolor:yellow --top center
