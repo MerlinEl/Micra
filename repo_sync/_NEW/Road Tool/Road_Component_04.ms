@@ -1,15 +1,16 @@
 --****************************************************************************************************--
---		Road Joint
+--		Road Joint 
  --jo = roGen_Joint pos:[0,0,0] size:2 name:(uniqueName "Road_Joint")
 --****************************************************************************************************--
 if classOf roGen_Joint != Helper do (
 	
 	plugin Helper roGen_Joint
-	name:"Road_Handle"
-	classID:#(0x753a97d6, 0x50f2e011)
+	name:"RoadJoint"
+	classID:#(0x753a97d6, 0x50f2e011) --genClassID()
 	category:"Standard"
 	extends:dummy
 	(
+		local lastSize, meshObj
 		parameters pblock rollout:params (
 			
 			size type:#float animatable:true ui:amount default:0
@@ -27,7 +28,7 @@ if classOf roGen_Joint != Helper do (
 			(
 				spinner amount "Size:" range:[0, 1e9, 0] align:#left
 			)
-			group "Function:" (
+			group "Settings:" (
 				
 				label lbl_type "Joint Type:" align:#left
 				dropDownList 'ddl_type' "" width:170 height:21 items:#("1-6", "2-2", "2-4", "2-4", "2-5", "4-4", "4-5") align:#left
@@ -39,10 +40,21 @@ if classOf roGen_Joint != Helper do (
 				checkbox 'chk_sidewalk_l' "Left" width:40 height:14 align:#right
 				checkbox 'chk_sidewalk_r' "Right" width:40 height:14 align:#right
 			)
+			group "About:"
+			(
+				label lbl1 "Road Joint Helper" align:#left
+			)
 		)
 		on getDisplayMesh do (
 			
-			meshObj = createInstance pyramid depth:size width:size height:size mapCoords:false wirecolor:green
+			if (meshObj == undefined) do (
+				
+				meshObj = createInstance pyramid depth:size width:size height:size mapCoords:false wirecolor:green
+			)
+			 if size != lastSize do (
+				 
+				lastSize = meshObj.depth = meshObj.width = meshObj.height = size
+			)
 			meshObj.mesh
 		)
 		tool create (
@@ -67,6 +79,39 @@ if classOf roGen_Joint != Helper do (
 	)
 )
 
+--****************************************************************************************************--
+--		Road Tangent
+ --ta = roGen_Tangent pos:[0,0,0] size:2 name:(uniqueName "Road_Tangent")
+--****************************************************************************************************--
+if classOf roGen_Tangent != Helper do (
+
+	plugin Helper roGen_Tangent
+	name:"RoadTangent"
+	classID:#(0x7fcacacd, 0x6c3d781b) --genClassID()
+	category:"Standard"
+	extends:point
+	--replaceUI:true 
+	--version:1
+	(
+		/*parameters pblock rollout:params (
+			
+			linked_to type:#string default:"None"
+		)
+		rollout params "Parameters" (
+			
+			group "About:"
+			(
+				label lbl1 "Road Tangent Helper" align:#left
+			)
+		)*/
+		fn init = (
+				
+				centermarker = true
+				constantscreensize = true
+		)
+		on create do init()
+	)
+)
 
 --****************************************************************************************************--
 --		Road Attributes
@@ -222,9 +267,12 @@ on <name> tabChanged < arg1 > < arg2 > < arg3 > do < expr >
 				print "moved"
 			)*/
 	)
-	on attachedToNode obj do format "B attached node: %\n" obj
+	 on getDisplayMesh do format "on display:%\n" this
+	on attachedToNode obj do format "B attached node: %\n" obj --target = obj.target
 	on update do format "updated: %\n" this -- when plugin version is changed
 	on create do init()  --when first time attribute aded in to object
+	on load do format "load > load node: %\n" (getNode())
+	on postCreate do format "postCreate > postCreate node: %\n" (getNode())
 	on clone orig do (
 	
 		format "cloned a:% b:%\n" this orig	
