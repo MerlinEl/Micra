@@ -25,35 +25,19 @@ Global gCACrossRoadKids = attributes CrossRoadKids attribID:#(0x449b771a, 0x1d58
 	parameters params(
 	
 		kids 			type:#nodeTab tabSizeVariable:true
-		controlsStr 	type:#string
+		controlsStr type:#string
 	)
 )
 -------------------------------------------------------------------------------------
 Global gShortcutCa = attributes ShortcutCa attribID:#(0x1635194a, 0x171142a1)(
 
-	parameters params ( 
+	parameters params( 
 		
-		roadSpline 		type:#maxObject
-		startPoint		type:#maxObject
-		endPoint		type:#maxObject
+		roadSpline 		type:#node
+		startPoint		type:#node
+		endPoint		type:#node
 		controlsStr		type:#string
 	)
-	on update do format "updated: %\n" this
-	on create do format "created: %\n" this
-	on clone orig do (
-	
-		format "cloned a:% b:%\n" this orig	
-	)
-	on deleted do (
-	
-		format "deleted:%\n" this
-	)
-	--on attachedToNode <nodeVar> do ...
-	--on detachedFromNode <node> do ...
-	/*when transform $Body changes do (
-	
-		print "moved"
-	)*/
 )
 
 -------------------------
@@ -830,11 +814,11 @@ fn CreateConnectingRoad road_2 bb_1 bb_2 corner bb_corner angle_road placed_item
 	
 	
 	if prevPt == undefined then(
-		pt = point()
+		pt = point wirecolor:red
 		roGenStruct.SetPointAppearance pt		
 		/*helper point for tangent determination*/
-		tn = point()
-		hide tn
+		tn = point wirecolor:red
+		-- hide tn
 	-- 	format "%\n%\n%\n%\n" offset_point direction cut_offset C_TANGENT_OFFSET
 		append pt.children tn
 	)else(
@@ -1567,7 +1551,7 @@ rollout dlgCrossroadGenerator "Crossroad Generator"
 		AddRoadSlicer road_1 (max_dist_left) 3
 		AddRoadSlicer road_1 (max_dist_right) 2
 		
-		local pts = roGenStruct.setUpCrossRoadPoints max_dist_left max_dist_right c_tangent_offset road:generated_road
+		local pts = roGenStruct.setUpCrossRoadPoints max_dist_left max_dist_right c_tangent_offset road:generated_road hidden_tn:false
 		append road_1.children pts[1]
 		append road_1.children pts[2]
 		append road_1.children attributes_1[1][4]
@@ -2138,15 +2122,15 @@ rollout dlgCrossroadGenerator2 "Crossroad Generator"
 		
 		
 		if generated_road == undefined then (
-			pt1 = point()
+			pt1 = point wirecolor:red
 			roGenStruct.SetPointAppearance pt1
-			tn1 = point()
-			hide tn1
+			tn1 = point wirecolor:red
+			-- hide tn1
 			append pt1.children tn1
-			pt2 = point()
+			pt2 = point wirecolor:red
 			roGenStruct.SetPointAppearance pt2
-			tn2 = point()
-			hide tn2
+			tn2 = point wirecolor:red
+			-- hide tn2
 			append pt2.children tn2
 		)else(
 			pt1 = pRight
@@ -2452,27 +2436,6 @@ rollout dlgCrossroadGenerator3 "Crossroad Generator"
 		
 		
 		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
 -- 		road_1_model = SelectRoad roads rb_lane_number_1.state rb_lane_width_1.state rb_lane_width_1_1.state spec_1
 -- 		road_2_model = SelectRoad roads rb_lane_number_2.state rb_lane_width_2.state rb_lane_width_2_1.state spec_2
 		
@@ -2657,15 +2620,15 @@ rollout dlgCrossroadGenerator3 "Crossroad Generator"
 		
 		
 		if generated_road == undefined then (
-			pt1 = point()
+			pt1 = point wirecolor:red
 			roGenStruct.SetPointAppearance pt1
-			tn1 = point()
-			hide tn1
+			tn1 = point wirecolor:red
+			-- hide tn1
 			append pt1.children tn1
-			pt2 = point()
+			pt2 = point wirecolor:red
 			roGenStruct.SetPointAppearance pt2
-			tn2 = point()
-			hide tn2
+			tn2 = point wirecolor:red
+			-- hide tn2
 			append pt2.children tn2
 		)else(
 			pt1 = pRight
@@ -2680,10 +2643,10 @@ rollout dlgCrossroadGenerator3 "Crossroad Generator"
 		
 		--Bottom Point and Tangent:
 		if pBot == undefined then(
-			pBot = point()
+			pBot = point wirecolor:red
 			roGenStruct.SetPointAppearance pBot
-			tnBot = point()
-			hide tnBot
+			tnBot = point wirecolor:red
+			-- hide tnBot
 			append pBot.children tnBot
 		)else(
 			tnBot = pBot.children[1]
@@ -2978,15 +2941,15 @@ rollout dlgCrossroadGenerator3 "Crossroad Generator"
 		
 		
 		if generated_road == undefined then (
-			pt1 = point()
+			pt1 = point wirecolor:red
 			roGenStruct.SetPointAppearance pt1
-			tn1 = point()
-			hide tn1
+			tn1 = point wirecolor:red
+			-- hide tn1
 			append pt1.children tn1
-			pt2 = point()
+			pt2 = point wirecolor:red
 			roGenStruct.SetPointAppearance pt2
-			tn2 = point()
-			hide tn2
+			tn2 = point wirecolor:red
+			-- hide tn2
 			append pt2.children tn2
 		)else(
 			pt1 = pRight
@@ -3002,10 +2965,10 @@ rollout dlgCrossroadGenerator3 "Crossroad Generator"
 		
 		--Top Point and Tangent:
 		if pTop == undefined then(
-			pTop = point()
+			pTop = point wirecolor:red
 			roGenStruct.SetPointAppearance pTop
-			tnTop= point()
-			hide tnTop
+			tnTop= point wirecolor:red
+			-- hide tnTop
 			append pTop.children tnTop
 		)else(
 			tnTop = pTop.children[1]
@@ -3225,8 +3188,8 @@ rollout RoadGeneratorTool "Road Generator" (
 
 	)
 	
-	button btn_edit_tangents "Edit Tangents" width: 100 height: 35 offset:[-50, 10] align:#center
-	button btn_sync_spline "Sync Spline" width: 100 height: 35 offset:[50, -40] align:#center
+	button btn_edit_tangents "Edit Tangents" width: 100 height: 35 offset:[-50, 10] align:#center toolTip:"Edit Tangents\nHint:Insert new wertices on spline if you need."
+	button btn_sync_spline "Sync Spline" width: 100 height: 35 offset:[50, -40] align:#center toolTip:"Sync Spline\nHint:Use Adjust Tangents Lenght for better result."
 -- 	button btn_update "Update Road" width: 160 height: 28 offset:[0, -5] align:#center
 	button btn_generate "Generate Road" width: 200 height: 35 offset:[0, 10] align:#center
 	button bt_generateShortcut "Generate Shortcut" width:200 height:35 offset:[0,0]
@@ -3379,100 +3342,6 @@ fn SetCrosroadRoll index =
 		)
 	)
 )
-
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-fn HideHelpPoint =
-(
-	for obj in geometry do(
-		if matchPattern obj.name pattern:"generator_crossroad_4*" or matchPattern obj.name pattern:"generator_crossroad_3*"then(
-			crossChildren = obj.children
-			for kid in crossChildren do(
-				hide kid.children
-			)
-		)
-	)	
-)
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-fn SelectVisuals =
-(
-		
-	roadsCrossToselect = #()
-
-	for obj in geometry do(
-		crossForuCheck 	= matchPattern obj.name pattern:"generator_crossroad_4*"
-		crossThreeCheck	= matchPattern obj.name pattern:"generator_crossroad_3*"
-		roadCheck			= matchPattern obj.name pattern:"generator_connect_road*"
-		
-		if  crossForuCheck or crossThreeCheck or roadCheck then(
-			append roadsCrossToselect obj
-		)
-	)
-	
-	if keyboard.controlPressed then(
-		sel = selection as Array
-		join roadsCrossToselect sel
-		select roadsCrossToselect
-	)
-	
-	select roadsCrossToselect
-)
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-fn SelectCollisions =
-(
-	roadsCollsToselect = #()
-
-	for obj in geometry do(
-		crossForuCheck 	= matchPattern obj.name pattern:"coll_generator_crossroad_4*"
-		crossThreeCheck	= matchPattern obj.name pattern:"coll_generator_crossroad_3*"
-		roadCheck			= matchPattern obj.name pattern:"coll_generator_connect_road*"
-		
-		if  crossForuCheck or crossThreeCheck or roadCheck then(
-			append roadsCollsToselect obj
-		)
-	)
-	
-	if keyboard.controlPressed then(
-		sel = selection as Array
-		join roadsCollsToselect sel
-		select roadsCollsToselect
-	)
-	
-	select roadsCollsToselect
-)
-
-
-
-
-
-
-
-
-
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-fn SelectChildren =
-(
-	sel = selection as Array
-	addSel = #()
-	
-	for obj in sel do (
-		crossForuCheck 	= matchPattern obj.name pattern:"generator_crossroad_4*"
-		crossThreeCheck	= matchPattern obj.name pattern:"generator_crossroad_3*"
-		roadCheck			= matchPattern obj.name pattern:"generator_connect_road*"
-		
-		if crossForuCheck or crossThreeCheck then(
-			objChildren = obj.children
-			for child in objChildren do(
-				append addSel child
-				append addSel child.children[1]
-			)			
-		)
-		
-		if roadCheck then append addSel obj.roadSpline
-	)
-	
-	join sel addSel
-	select sel
-)
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 rollout rGeneratorUtilities "Generator Utilities"
 (
@@ -3480,35 +3349,23 @@ rollout rGeneratorUtilities "Generator Utilities"
 	button bt_SelectColls 			"Select Colls    " 	offset:[-90,0] width:90 height:25 
 	button bt_SelectChildren 		"Select Children" 	offset:[-90,0] width:90 height:25 
 	
-	button bt_FixDuplicitNames		"Unique Names" 	offset:[0,-90] width:90 height:25 toolTip:"Fix duple names"
-	button bt_fixBrokenCrossroad	"Fix Crossroad"	offset:[0,0] width:90 height:25 toolTip:"Repair helpers hierarchy"	
+	button bt_FixDuplicitNames		"Unique Names" 		offset:[0,-90] width:90 height:25 toolTip:"Fix duple names"
+	button bt_UnhideRoadsFull		"Unhide Roads Full"	offset:[0,0] width:90 height:25 toolTip:"Repair helpers hierarchy"	
 	button bt_roadAnatomy			"Road Anatomy"		offset:[0,0] width:90 height:25 toolTip:"Show - Repair (cross)road hierarchy"	
 	
 	button bt_hidePoints 			"Hide Help Points"	offset:[90,-90] width:90 height:25 
 	button bt_showRoadColorTable	"Road Colors"	offset:[90,0] width:90 height:25 toolTip:"Road Color Types"
 	button bt_ReloadPrefabs			"Reload Prefabs"	offset:[90,0] width:90 height:25 toolTip:"Delete old prefabs and load new ones"
 
-	on bt_hidePoints pressed do (
-		HideHelpPoint()
-	)
-	
-	on bt_SelectVisuals pressed do (
-		SelectVisuals()
-	)
-	
-	on bt_SelectColls pressed do (
-		SelectCollisions()
-	)
-	
-	on bt_SelectChildren pressed do ( 
-		SelectChildren()
-	)
-	
-	on bt_FixDuplicitNames pressed do (roGenStruct.fixDuplicitNames())
-	on bt_fixBrokenCrossroad pressed do roGenStruct.fixBrokenCrossroad selection[1]
-	on bt_roadAnatomy pressed do runLocalScript "Road_Generator_Anatomy"
-	on bt_showRoadColorTable pressed do runLocalScript "Road_Generator_Colors"
-	on bt_ReloadPrefabs pressed do roGenStruct.reloadPrefabs(getSourceFileName())
+	on bt_hidePoints			pressed do ( roGenStruct.hideHelpPoints()					)
+	on bt_SelectVisuals			pressed do ( roGenStruct.selectVisuals()					)
+	on bt_SelectColls			pressed do ( roGenStruct.selectCollisions()					)
+	on bt_SelectChildren		pressed do ( roGenStruct.selectChildren()					)
+	on bt_FixDuplicitNames		pressed do ( roGenStruct.fixDuplicitNames()					)
+	on bt_UnhideRoadsFull		pressed do ( roGenStruct.unhideRoadsFull()					)
+	on bt_roadAnatomy			pressed do ( runLocalScript "Road_Generator_Anatomy"			)
+	on bt_showRoadColorTable	pressed do ( runLocalScript "Road_Generator_Colors"			)
+	on bt_ReloadPrefabs			pressed do ( roGenStruct.reloadPrefabs(getSourceFileName())	)
 )
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -3564,10 +3421,10 @@ rollout dlgPickObjectType "Menu"
 (
 	radiobuttons rb_type labels:#("CROSSROAD    ",  "ROAD               ", "UTILITIES") default:1 align:#left  columns:1   --"TURN                           "
 	dropdownlist dd_crossroad_types "" items:#("2 Side Roads", "2 Different Side Roads", "1 Side Road" ) height:6  offset:[100,-50] width:140
-	button bt_createColl "Create Collisions" offset:[55,-3] width:140 height:25 visible:false
+	button bt_createColl "Create Collisions" offset:[55, -10] width:140 height:25 visible:false
 	button bt_copyUniqueCrossRoad "Copy Unique CrossRoad" offset:[55,-3] width:140 height:25 visible:false
-	button bt_copyUniqueShortcut "Copy Unique Shortcut" offset:[55,-90] width:140 height:25 visible:false
-
+	button bt_adjustTangentsLength "Adjust Tangets Length" offset:[55,-80] width:140 height:25 visible:false
+	button bt_copyUniqueShortcut "Copy Unique Shortcut" offset:[55,0] width:140 height:25 visible:false
 -- 	label fill ""
 	
 	fn switchRadioButton index crossRoadType: 1=
@@ -3613,8 +3470,9 @@ rollout dlgPickObjectType "Menu"
 					dd_crossroad_types.visible = True
 					bt_copyUniqueCrossRoad.visible = True
 					bt_copyUniqueShortcut.visible = false
+					bt_adjustTangentsLength.visible = false
 					bt_createColl.visible = false
-					dlgPickObjectType.height = 90
+					dlgPickObjectType.height = 90 --Menu dialog height
 				)
 			2 :(
 					floaterGenerator.size = [270,400]
@@ -3622,8 +3480,9 @@ rollout dlgPickObjectType "Menu"
 					dd_crossroad_types.visible = False
 					bt_copyUniqueCrossRoad.visible = false
 					bt_copyUniqueShortcut.visible = true
+					bt_adjustTangentsLength.visible = true
 					bt_createColl.visible = false
-					dlgPickObjectType.height = 65
+					dlgPickObjectType.height = 65 --Menu dialog height
 				)
 			3 :(
 					floaterGenerator.size = [270,220]
@@ -3631,9 +3490,10 @@ rollout dlgPickObjectType "Menu"
 					dd_crossroad_types.visible = False
 					bt_copyUniqueCrossRoad.visible = false
 					bt_copyUniqueShortcut.visible = false
+					bt_adjustTangentsLength.visible = false
 					bt_createColl.visible = True
-					bt_createColl.pos = [113,30]
-					dlgPickObjectType.height = 65
+					--bt_createColl.pos = [113,30]
+					dlgPickObjectType.height = 65 --Menu dialog height
 			)
 		)
 	)
@@ -3653,8 +3513,9 @@ rollout dlgPickObjectType "Menu"
 		callbacks.removeScripts id:#removeCAs
 	)
 
-	on bt_copyUniqueCrossRoad pressed do (roGenStruct.copyUniqueCrossRoad $)
-	on bt_copyUniqueShortcut pressed do (roGenStruct.copyUniqueShortcut $)
+	on bt_copyUniqueCrossRoad pressed do (roGenStruct.copyUniqueCrossRoad $ hidden_tn:false)
+	on bt_adjustTangentsLength pressed do (roGenStruct.adjustTangentsLength())
+	on bt_copyUniqueShortcut pressed do (roGenStruct.copyUniqueShortcut $ hidden_tn:false)
 	-------------------------------------------------	COLLS -------------------------------------------------------------------------
 	on bt_createColl pressed do (
 	

@@ -276,12 +276,39 @@ struct ROAD_GENERATOR_STRUCTURE	(
 		rm.Free()
 		--return result
 		return hit_array
-	),	
+	),
 	fn getConstraintObject obj_target node_type = (
 	
 		local all_dependents = refs.dependents obj_target
 		local filter_objects = for ref in all_dependents where (superClassOf ref == node_type) collect ( ref )
 		filter_objects[1]
+	),
+	fn getRoadComponents obj = (
+	
+		if not (isRoad obj) do return #()
+		local sp = obj.roadSpline
+		local p1 = obj.startPoint
+		local p2 = obj.endPoint
+		local t1 = p1.children[1]
+		local t2 = p2.children[1]
+		#(p1, p2, t1, t2, sp)
+	),
+	/**
+	*@Usage > Collect all components from given objects
+	*@Example 
+		roGenStruct.getAllComponents (selection as Array)
+	*/
+	fn getAllComponents obj_arr = (
+
+		local all_components = #()
+		for o in selection do (
+
+			append all_components o
+			if isRoad o do join all_components (getRoadComponents o)
+			if isCrossRoad do ()
+			if isShortcut do ()
+		)
+		for o in all_components where isValidNode o collect o --return only validated objects
 	),
 	-------------------------------------------------------------
 	-------------------------------------------------------------
@@ -319,19 +346,10 @@ struct ROAD_GENERATOR_STRUCTURE	(
 	*/
 	fn setShortcutCA road rSpline sPoint ePoint dialog controlsArr = (
 	
-		--daDependents = (refs.dependents $)
-	
 		custAttributes.add road gShortcutCa #unique
-		road.roadSpline = nodeTransformMonitor node:rSpline forwardTransformChangeMsgs:false
-		road.startPoint = nodeTransformMonitor node:sPoint forwardTransformChangeMsgs:false
-		road.endPoint  = nodeTransformMonitor node:ePoint forwardTransformChangeMsgs:false
-		/*road.roadSpline 	= rSpline
-		road.startPoint 	= sPoint
-		road.endPoint 		= ePoint*/
-
-		/*sPoint.parent = road
+		sPoint.parent = road
 		ePoint.parent = road
-		rSpline.parent = road*/
+		--rSpline.parent = road
 		road.controlsStr = getCAControlsSTR dialog controlsArr
 	),
 	fn setVertexColor obj clr map_channel = (
@@ -377,6 +395,176 @@ struct ROAD_GENERATOR_STRUCTURE	(
 		lc = link_constraint() --create a Link Constraint instance
 		or i = 1 to lc.getNumTargets() do format "%: Frame:% - Target:% \n" i (lc.getFrameNo i) (lc.getNode  i) 
 		*/
+	),
+	fn hideHelpPoints = (
+	
+		for obj in geometry do(
+		
+			if matchPattern obj.name pattern:"generator_crossroad*"do (
+			
+				for kid in obj.children do hide kid.children
+			)
+		)	
+	),
+	fn selectVisuals = (
+			
+		local roadsCrossToselect = #()
+		for obj in geometry do(
+		
+			crossForuCheck 	= matchPattern obj.name pattern:"generator_crossroad_4*"
+			crossThreeCheck	= matchPattern obj.name pattern:"generator_crossroad_3*"
+			roadCheck			= matchPattern obj.name pattern:"generator_connect_road*"
+			
+			if  crossForuCheck or crossThreeCheck or roadCheck then(
+				append roadsCrossToselect obj
+			)
+		)
+		if keyboard.controlPressed then(
+			sel = selection as Array
+			join roadsCrossToselect sel
+			select roadsCrossToselect
+		)
+		
+		select roadsCrossToselect
+	),
+	fn selectCollisions = (
+	
+		local roadsCollsToselect = #()
+		for obj in geometry do(
+			crossForuCheck 	= matchPattern obj.name pattern:"coll_generator_crossroad_4*"
+			crossThreeCheck	= matchPattern obj.name pattern:"coll_generator_crossroad_3*"
+			roadCheck		= matchPattern obj.name pattern:"coll_generator_connect_road*"
+			
+			if  crossForuCheck or crossThreeCheck or roadCheck then(
+				append roadsCollsToselect obj
+			)
+		)
+		
+		if keyboard.controlPressed then(
+			sel = selection as Array
+			join roadsCollsToselect sel
+			select roadsCollsToselect
+		)
+		
+		select roadsCollsToselect
+	),
+	fn selectChildren = (
+		
+		local sel = selection as Array
+		local addSel = #()
+		for obj in sel do (
+		
+			crossForuCheck 	= matchPattern obj.name pattern:"generator_crossroad_4*"
+			crossThreeCheck	= matchPattern obj.name pattern:"generator_crossroad_3*"
+			roadCheck		= matchPattern obj.name pattern:"generator_connect_road*"
+			if crossForuCheck or crossThreeCheck then(
+				objChildren = obj.children
+				for child in objChildren do(
+					append addSel child
+					append addSel child.children[1]
+				)			
+			)
+			
+			if roadCheck then append addSel obj.roadSpline
+		)
+		join sel addSel
+		select sel
+	),
+	fn unhideRoadsFull = (
+		
+		undo "Unhide Roads" on (
+		
+			selectVisuals()
+			for o in selection do (
+
+				o.isHidden = false --unhide roads geometry
+				for c1 in o.children do (
+
+					c1.isHidden = false --unhide joint dummyes
+					for c2 in c1.children do (
+
+						c2.isHidden = false --unhide tangent points
+					)
+				)
+			)
+		)
+	),
+	/**
+	*@Usage 
+		check for missing roads components
+		move existing components in same layer
+	*@Example
+		roGenStruct.validateSelectedRoads()
+	*/
+	fn validateSelectedRoads = (
+	
+		for o in selection do (
+				
+			local layer = o.layer
+			format "Check road:% status:" o.name
+			if isRoad o then (
+			
+				local spline = o.roadSpline
+				if spline == undefined then (
+				
+					format "Error > Missing spline in road:[ % ]\n" o.name
+					
+					)else (
+					
+					layer.addNode spline
+					format "OK\n"
+				)
+				
+			) else if isCrossRoad o then (
+			
+				local joints = o.children
+				if joints.count != 4 then (
+				
+					format "Error > Missing joints in cross_road:[ % ]\n" o.name
+					
+				) else (
+				
+					for jo in joints do (
+						
+						layer.addNode jo
+						local tangent_point = jo.children[1]
+						if tangent_point == undefined then (
+						
+							format "Error > Missing tangents in cross_road:[ % ]\n" o.name
+							
+						) else (
+						
+							layer.addNode tangent_point
+						)
+					)
+					format "OK\n"
+				)
+			) else if isShortcut o do (
+				
+				local joints = o.children
+				if joints.count != 2 then (
+				
+					format "Error > Missing joints in shortcut_road:[ % ]\n" o.name
+					
+				) else (
+					
+					for jo in joints do (
+						
+						layer.addNode jo
+						local tangent_point = jo.children[1]
+						if tangent_point == undefined then (
+						
+							format "Error > Missing tangents in shortcut_road:[ % ]\n" o.name
+							
+						) else (
+						
+							layer.addNode tangent_point
+						)
+					)
+					format "OK\n"
+				)
+			)
+		)
 	),
 	-------------------------------------------------------------
 	-------------------------------------------------------------
@@ -508,7 +696,7 @@ struct ROAD_GENERATOR_STRUCTURE	(
 		obj.CrossRoadKids.kids = road_helpers
 		format "fixBrokenCrossroad >  Cross Road  [ % ] has been fixed.\n" obj.name
 	),
-	fn setUpCrossRoadPoints max_dist_left max_dist_right c_tangent_offset road:undefined hidden_tn:true= (
+	fn setUpCrossRoadPoints max_dist_left max_dist_right c_tangent_offset road:undefined hidden_tn:true = (
 	
 		local dp1, dp2, tp1, tp2, pRight, pLeft -- dp > dummy(point) tp > tangent(point)
 		if road == undefined then ( --create controll points
@@ -539,6 +727,52 @@ struct ROAD_GENERATOR_STRUCTURE	(
 		tp2.position = [max_dist_left-c_tangent_offset, 0, 0]
 		#(dp1, dp2)
 	),
+	fn adjustTangentsLength = (
+		
+		local joints = #()
+		local spline_path = undefined
+		local sel = selection as Array
+		if sel.count == 1 and isRoad sel[1] then (
+		
+			local comp = getRoadComponents sel[1]
+			if comp.count != 5 do (
+			
+				format "Error 1: Unble Adjust tangent. Missing tanget Points. Components:%\n" comp
+				return false
+			)
+			joints = #(comp[1], comp[2])
+			spline_path = comp[5]
+			
+		) else (
+	
+			joints = sel
+		) 
+		if joints.count != 2 do (
+		
+			format "Error 2: Unble Adjust tangent. Missing tanget Points. Components:%\n" joints
+			return false
+		)
+		local d1 = joints[1]
+		local d2 = joints[2]
+		local t1 = d1.children[1]
+		local t2 = d2.children[1]
+		if t1 == undefined or t2 == undefined do (
+		
+			format "Error 3: Unble Adjust tangent. Missing tanget Points\n"
+			return false
+		)
+		local joints_dist = distance joints[1].pos joints[2].pos
+		local tangent_dist = joints_dist / 6
+		local v1 = normalize(t1.pos - d1.pos)
+		local v2 = normalize(t2.pos - d2.pos)
+		t1.pos = d1.pos + v1 * tangent_dist
+		t2.pos = d2.pos + v2 * tangent_dist
+		if spline_path != undefined do ( --adjust spline handles
+		
+			
+		)
+		format "finished adjust tangents in:%\n" #(joints[1].name, joints[2].name)
+	),
 	-------------------------------------------------------------
 	-------------------------------------------------------------
 	------                   CREATE                        ------
@@ -558,7 +792,7 @@ struct ROAD_GENERATOR_STRUCTURE	(
 	  ss.wirecolor = col
 	  ss
 	),
-	fn copyUniqueShortcut obj = (
+	fn copyUniqueShortcut obj hidden_tn:false = (
 
 		if not (isShortcut obj) do return false
 		
@@ -584,10 +818,10 @@ local src_spline = getConstraintObject obj Shape
 linkConstraint new_obj rSpline
 		tn1.parent = sPoint
 		tn1.parent = ePoint
-	
+		if hidden_tn do hide #(tn1, tn2)
 		select new_obj
 	),
-	fn copyUniqueCrossRoad obj = (
+	fn copyUniqueCrossRoad obj hidden_tn:false = (
 	
 		if not (isCrossRoad obj) do return false
 		local kidsShift = 4
@@ -605,7 +839,7 @@ linkConstraint new_obj rSpline
 			newTn = copy origTn
 			
 			roGenStruct.SetPointAppearance newPt
-			hide newTn
+			if hidden_tn do hide newTn
 			
 			newTn.parent = newPt
 			append new_obj.children newPt
@@ -856,7 +1090,7 @@ linkConstraint new_obj rSpline
 			max select none
 		)
 		--create new controll points
-		if pts.count != 2 do pts = setUpCrossRoadPoints -road_thickness road_thickness 500 --hidden_tn:false	
+		if pts.count != 2 do pts = setUpCrossRoadPoints -road_thickness road_thickness 500 hidden_tn:false	
 		--reverse tangents to inner
 		swapPoints pts[1] pts[2]
 		if not (isShortcut road) do moveTangetPoints pts[1] pts[2] min_tangent_dist --move tangent points close
@@ -942,18 +1176,18 @@ linkConstraint road sp
 			---------------------------------------------------------------------------
 			if selCount == 1 then(
 				
-				local obj = sel[1], road
-				if classOf obj == SplineShape then (
+				local obj = sel[1], road, layer
+				if classOf obj == SplineShape then ( --if path is selected
 				
 					spline = obj
 					road = getNodeByName spline.road
 					
-				)else(
+				)else( --if road is selected
 				
 					spline = obj.roadSpline
 					road = obj
 				)
-				
+				layer = road.layer
 				local fSel = #(road, spline)
 				local oldWireColor = road.wirecolor
 				local prevParent = undefined
@@ -989,7 +1223,13 @@ linkConstraint road sp
 						finalRoad = createRoadFromSpline selected_road spline tangent_deg
 						finalRoad.name = replace finalRoad.name 11 6 "connect_road"
 						finalRoad.name = uniquename(finalRoad.name)
+						--move road to initial layer if is Rebuilding from old one
+						if layer != undefined do (
 						
+							layer.addNode finalRoad
+							layer.addNode spline
+						)
+						--set custom attributes
 						setRoadCA finalRoad spline road.startPoint road.endPoint dialog dialog.controlsArr
 						spline.road = finalRoad.name
 						-- delete old road
@@ -1011,3 +1251,43 @@ linkConstraint road sp
 )	
  --create instance
 Global roGenStruct = ROAD_GENERATOR_STRUCTURE()
+
+
+
+/*
+----------A procedure in shortcuts only
+for o in slection do print o.name
+for o in selection do o.name = uniqueName o.name
+sh = for o in selection where roGenStruct.isShortcut o collect o
+select sh
+for o in sh do (
+
+
+	sp = o.children[3]
+	sp.parent = undefined
+	roGenStruct.linkConstraint s sp
+)
+
+----------Check cross road children
+cr = for o in selection where findString o.name "generator_crossroad" != undefined collect o
+select cr
+invalid_cross_roads = #()
+for o in cr do (
+
+	local ch = o.children
+	format "Check CorssRoad:% children:%\n" o.name o.children.count
+	if o.children.count != 4 do (
+
+		format "missing children....."
+		append invalid_cross_roads o
+		continue
+	)
+	for ch in o.children do format "\tpoints a:% b:%\n" o.children[1].name o.children[1].children[1].name
+)
+format "invalid_cross_roads count:%\n" invalid_cross_roads.count
+select invalid_cross_roads
+
+----------Select empty points
+po = for o in objects where classOf o == Point collect o
+select (for o in po where o.parent == undefined collect o)
+*/

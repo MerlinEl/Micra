@@ -8,7 +8,7 @@ if classOf roGen_Joint != Helper do (
 	name:"RoadJoint"
 	classID:#(0x753a97d6, 0x50f2e011) --genClassID()
 	category:"Standard"
-	extends:dummy
+	extends:Dummy
 	(
 		local lastSize, meshObj
 		parameters pblock rollout:params (
@@ -51,7 +51,7 @@ if classOf roGen_Joint != Helper do (
 				
 				meshObj = createInstance pyramid depth:size width:size height:size mapCoords:false wirecolor:green
 			)
-			 if size != lastSize do (
+			if size != lastSize do (
 				 
 				lastSize = meshObj.depth = meshObj.width = meshObj.height = size
 			)
@@ -89,11 +89,12 @@ if classOf roGen_Tangent != Helper do (
 	name:"RoadTangent"
 	classID:#(0x7fcacacd, 0x6c3d781b) --genClassID()
 	category:"Standard"
-	extends:point
+	extends:Dummy
 	--replaceUI:true 
 	--version:1
 	(
-		/*parameters pblock rollout:params (
+		local meshObj
+		parameters pblock rollout:params (
 			
 			linked_to type:#string default:"None"
 		)
@@ -103,11 +104,35 @@ if classOf roGen_Tangent != Helper do (
 			(
 				label lbl1 "Road Tangent Helper" align:#left
 			)
-		)*/
+		)
+		fn createPoint pos:[0, 0, 0] size:10 = (
+
+			local sps = SplineShape wirecolor:green
+			addNewSpline sps
+			addKnot sps 1 #corner #line [-size/2, 0, 0]
+			addKnot sps 1 #corner #line [size/2, 0, 0]
+			addNewSpline sps
+			addKnot sps 2 #corner #line [0, -size/2, 0]
+			addKnot sps 2 #corner #line [0, size/2, 0]
+			addNewSpline sps
+			addKnot sps 3 #corner #line [0, 0, -size/2]
+			addKnot sps 3 #corner #line [0, 0, size/2]
+			sps.render_renderable = false
+			sps.render_displayRenderMesh = false
+			updateShape sps
+			sps.pos = pos
+		)
+		on getDisplayMesh do ( 
+			
+			if (meshObj == undefined) do (
+				
+				createPoint()
+			)
+		)
 		fn init = (
 				
-				centermarker = true
-				constantscreensize = true
+				--centermarker = true
+				--constantscreensize = true
 		)
 		on create do init()
 	)
