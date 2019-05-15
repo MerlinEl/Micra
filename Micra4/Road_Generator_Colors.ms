@@ -47,11 +47,11 @@ rollout roadGeneratorColorDialog "Types:" width:104 height:308
 	fn setMarkerTo color_index = (
 		
 			local obj = selection[1]
-			if obj == undefined or classOf obj.baseObject != text do return false 
+			if obj == undefined do return false 
 			undo "Change Marker"on (
 				
 				obj.wirecolor = colors[color_index].clr
-				obj.baseObject.text = colors[color_index].txt
+				if classOf obj.baseObject == text do obj.baseObject.text = colors[color_index].txt
 			)
 	)
 	on btn_1 pressed do setMarkerTo 1

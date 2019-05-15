@@ -326,6 +326,10 @@ struct ROAD_GENERATOR_STRUCTURE	(
 			if isRoad o do o.roadSpline.road = new_name --update spline attribute
 		)
 	),
+	fn hideObjectsByNamePart obj_array name_part = (
+		
+		for o in obj_array where findString o.name name_part != undefined do o.isHidden = true
+	),
 	fn setRoadCA road rSpline sPoint ePoint dialog controlsArr = (
 	
 		custAttributes.add road gRoadGenCa #unique --BaseObject:True
