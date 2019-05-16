@@ -128,6 +128,7 @@
     <Road_Generator_Tool val="1.07" />
     <Align_Objects_3D val="0.05" />
     <Vertex_Snap val="0.01" />
+    <City_Manager val="1.04" />
   </Version>
   <SystemFiles val="Micra's Settings Files">
     <Actions val="Contains all accesible Micra's actions" />

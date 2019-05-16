@@ -14,7 +14,7 @@
   </Properties_1>
   <Properties_2>
     <mcMicraDialog active="true" pos="[-388,222]" size="[148,66]" title="" />
-    <mcCustomizeDialog active="false" pos="[1240,480]" size="[224,404]" title="" />
+    <mcCustomizeDialog active="false" pos="[1720,370]" size="[600,404]" title="" />
     <mcProgramDialog active="undefined" pos="[2298,0]" size="[256,232]" title="" />
     <mcisoDialog active="false" pos="[181,152]" size="[140,400]" title="" />
     <mcModifierDialog active="undefined" pos="[100,100]" size="[400,400]" title="" />
@@ -186,7 +186,6 @@
     <btn_I7 action="Quadrangulate" icon="195" />
     <btn_B33 action="Create_Bounding_Box" icon="16" />
     <btn_I8 action="Time_Break" icon="200" />
-    <btn_B36 action="LS3D_Model_Manager" icon="254" />
     <btn_B35 action="Space" icon="256" />
     <btn_H12 action="Set_Obj_ID" icon="167" />
     <btn_B34 action="Align_By_2Edges" icon="198" />
@@ -202,7 +201,6 @@
     <btn_J5 action="Vertex_Color" icon="258" />
     <btn_J6 action="Vertex_Alpha_Blend" icon="261" />
     <btn_J7 action="Get_Edges_Length" icon="262" />
-    <btn_J16 action="Lode_Tester" icon="129" />
     <btn_J15 action="Live_Measure" icon="30" />
     <btn_C10 action="Pivot_Align_3P" icon="5" />
     <btn_C5 action="Pivot_Planter_2" icon="59" />
@@ -214,5 +212,7 @@
     <btn_J8 action="Create_Point_At_Vertex" icon="268" />
     <btn_J9 action="Delete_Empty_Layers" icon="269" />
     <btn_J20 action="Align_Objects_3D" icon="270" />
+    <btn_J18 action="LS3D_Model_Manager" icon="254" />
+    <btn_J17 action="City_Manager" icon="241" />
   </Buttons>
 </USER>

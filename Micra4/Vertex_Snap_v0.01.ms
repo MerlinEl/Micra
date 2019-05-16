@@ -2,7 +2,7 @@ Global mcVertexSnapDialog
 if mcVertexSnapDialog != undefined do destroyDialog mcVertexSnapDialog
 rollout mcVertexSnapDialog "Vertex Snap" width:320 height:152
 (
-	local metric_type = units.MetricType as String
+	local metric_type = units.SystemType as String
 	pickbutton 'btn_pick_trgt' "None" pos:[96,92] width:212 height:20 align:#left
 	label 'lbl5' "Target Object:" pos:[16,96] width:76 height:16 align:#left
 	button 'btn_snap' "Snap" pos:[228,116] width:80 height:24 align:#left

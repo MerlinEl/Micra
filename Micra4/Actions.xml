@@ -232,5 +232,6 @@
     <DirectX_LS3D_Switch icon="263" cmd="mcActionsTukej.directXLS3DSwitch()" tooltip="DirectX LS3D Switch" />
     <Normal_Map_Tester icon="61" cmd="mcActionsTukej.testNormalMapToggle()" tooltip="Normal Map Tester" />
     <Road_Generator_Tool icon="266" cmd="mcFile.fileInVersion Road_Generator_Tool" tooltip="Road Generator Tool" />
+    <City_Manager icon="241" cmd="mcFile.fileInVersion City_Manager" tooltip="City Manager" />
   </TuKej>
 </ACTIONS>
