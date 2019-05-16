@@ -212,7 +212,7 @@
     <Get_Edges_Length icon="262" cmd="mcAction.getEdgesLength()" tooltip="Get Edges Length" />
     <Live_Measure icon="30" cmd="mcFile.fileInVersion Live_Measure" tooltip="Live Measure" />
     <Live_Modeling icon="146" cmd="mcFile.fileInVersion Live_Modeling" tooltip="Live Modeling" />
-    <Vertex_Snap icon="267" cmd="mcAction.snapVertex()" tooltip="Vertex Snap" />
+    <Vertex_Snap icon="267" cmd="mcFile.fileInVersion Vertex_Snap" tooltip="Vertex Snap" />
     <Create_Point_At_Vertex icon="268" cmd="mcAction.createPointAtVertex()" tooltip="Create Point At Vertex" />
   </Helpers>
   <Animation>

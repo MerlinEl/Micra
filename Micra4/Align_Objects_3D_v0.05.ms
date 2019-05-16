@@ -1,13 +1,22 @@
 Global mcAlignObjectsDialog
 if mcAlignObjectsDialog != undefined do DestroyDialog mcAlignObjectsDialog
-rollout mcAlignObjectsDialog "Align Objects:" width:156 height:108
+rollout mcAlignObjectsDialog "Align Objects:" width:156 height:192
 (
-	GroupBox grp1 "Settings:" pos:[4,4] width:148 height:56
-	radiobuttons rdo_axis "" pos:[48,32] width:97 height:16 labels:#("X", "Y", "Z") columns:3
-	button btn_min "MIN" pos:[8,64] width:40 height:40
-	button btn_max "MAX" pos:[108,64] width:40 height:40
-	button btn_center "CENTER" pos:[52,64] width:52 height:40
-	label lbl1 "Axis:" pos:[12,32] width:32 height:16
+	local axis_labels = #("X", "Y", "Z")
+	GroupBox 'grp9' "Axis:" pos:[4,4] width:148 height:46 align:#left
+	radiobuttons 'rdo_axis' "" pos:[28,22] width:97 height:16 labels:#("X", "Y", "Z") columns:3 align:#left
+	
+	GroupBox 'grp1' "Align:" pos:[4,56] width:148 height:52 align:#left
+	button 'btn_min' "MIN" pos:[8,76] width:40 height:24 align:#left
+	button 'btn_max' "MAX" pos:[104,76] width:40 height:24 align:#left
+	button 'btn_center' "CENTER" pos:[48,76] width:52 height:24 align:#left
+	
+	GroupBox 'grp2' "Copy - Paste:" pos:[4,112] width:148 height:76 align:#left
+	button 'btn_Copy' "COPY" pos:[8,156] width:66 height:24 align:#left
+	button 'btn_paste' "PASTE" pos:[80,156] width:66 height:24 align:#left
+	dropdownList 'ddl_way' "" pos:[8,132] width:136 height:21 items:#("X", "Y", "Z", "MIN", "MAX", "CENTER") align:#left
+	struct NODE_TM (pos, mi, ma)
+	local saved_tm = NODE_TM [0, 0, 0]  [0, 0, 0]  [0, 0, 0]
 	fn getObjectsBB obj_arr = (
 		
 		local mi = obj_arr[1].min
@@ -72,27 +81,56 @@ rollout mcAlignObjectsDialog "Align Objects:" width:156 height:108
 		for o in obj_arr where o.min.z < min_z do min_z = o.min.z
 		min_z
 	)
-	fn offsetObjects way = (
+	
+	fn centerObjects sel = (
+		
+		if sel.count < 2 do return false
+		local center = getObjectsCenter sel
+		with redraw off for o in sel do (
+			
+			local offset = getPivotOffset o
+			local axis = axis_labels[rdo_axis.state]
+			case axis of (
+				
+				"X": o.pos.x =  center.x - offset.x
+				"Y": o.pos.y =  center.y - offset.y
+				"Z": o.pos.z =  center.z - offset.z
+			)
+		)
+		completeRedraw()
+	)
+	fn getObjectsBorder sel way = ( --get (min or max) (x or y or z) of objects bounding box
+		
+		local axis = axis_labels[rdo_axis.state]
+		local border_pos = case axis of (
+			
+			"X": if way == #min then getMinX sel else  getMaxX sel
+			"Y": if way == #min then getMinY sel else  getMaxY sel
+			"Z": if way == #min then getMinZ sel else  getMaxZ sel
+		)
+		border_pos
+	)
+	
+	fn offsetObjects way border_pos:undefined= (
 		--get current selected objects
 		local sel = selection as Array
 		if sel.count < 2 do return false
-		--get (min or max) (x or y or z) of objects bounding box	
-		local border_pos = case rdo_axis.state of (
-			
-			1: if way == #min then getMinX sel else  getMaxX sel
-			2: if way == #min then getMinY sel else  getMaxY sel
-			3: if way == #min then getMinZ sel else  getMaxZ sel
+		if way == #center do (
+				
+			centerObjects sel
+			return OK
 		)
-		
+		if border_pos == undefined do border_pos = getObjectsBorder sel way
+			
 		--> debug only
-		local border = (selection.min + selection.max) / 2
+		/*local border = (selection.min + selection.max) / 2
 		case rdo_axis.state of (
 		
 			1: border.x = border_pos
 			2: border.y = border_pos
 			3: border.z = border_pos
 		)
-		point pos:border wirecolor:yellow
+		point pos:border wirecolor:yellow*/
 		--< debug only
 		
 		with redraw off for o in sel do (
@@ -134,28 +172,56 @@ rollout mcAlignObjectsDialog "Align Objects:" width:156 height:108
 		)
 		completeRedraw()
 	)
-	fn centerObjects = (
+
+	fn copyPosition = (
 		
-		local sel = selection as Array
-		if sel.count < 2 do return false
-		local center = getObjectsCenter sel
+		local obj = selection[1]
+		if obj == undefined do return false
+		saved_tm = NODE_TM obj.pos obj.min obj.max
+	)
+	fn pastePosition = (
 		
-		with redraw off for o in sel do (
-			
-			local offset = getPivotOffset o
-			case rdo_axis.state of (
+		if saved_tm == undefined do return false
+		with redraw off for o in selection do (
 				
-				1: o.pos.x =  center.x - offset.x
-				2: o.pos.y =  center.y - offset.y
-				3: o.pos.z =  center.z - offset.z
+			case ddl_way.selected of (
+				
+				"X": o.pos.x = saved_tm.pos.x	
+				"Y": o.pos.y = saved_tm.pos.y	
+				"Z": o.pos.z = saved_tm.pos.z	
+				"CENTER": (
+						
+					local center = (saved_tm.mi + saved_tm.ma) / 2
+					offsetObjects #center border_pos:center
+					/*local offset = getPivotOffset o
+					case axis of (
+						
+						"X": o.pos.x =  center.x - offset.x
+						"Y": o.pos.y =  center.y - offset.y
+						"Z": o.pos.z =  center.z - offset.z
+					)*/
+				)
+				"MIN": (
+					
+					local mi = getObjectsBorder #(o) #min --depends on selected axis 
+					offsetObjects #min	border_pos:mi
+				)
+				"MAX": (
+					
+					local ma = getObjectsBorder #(o) #max --depends on selected axis 
+					offsetObjects #min	border_pos:ma
+				)
 			)
 		)
 		completeRedraw()
 	)
 	
-	on btn_min		pressed	do	undo "Align Objects Min" on offsetObjects #min
-	on btn_max	pressed	do	undo "Align Objects Max" on offsetObjects #max	
-	on btn_center	pressed	do	undo "Align Objects Center" on centerObjects()
+	on btn_min				pressed	do	( undo "Align Objects Min" on offsetObjects #min				)
+	on btn_max			pressed	do	( undo "Align Objects Max" on offsetObjects #max				)
+	on btn_center			pressed	do	( undo "Align Objects Center" on offsetObjects #center		)
+	on btn_copy			pressed 	do	( copyPosition()																		)
+	on btn_paste			pressed 	do	( undo "Align Objects" on pastePosition()							)
+
 )
 CreateDialog mcAlignObjectsDialog
 

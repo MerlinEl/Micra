@@ -46,13 +46,11 @@ rollout roadGeneratorColorDialog "Types:" width:104 height:308
 	button 'btn_12' "" pos:[8,277] width:32 height:23 images:(imgIcon colors[12].clr)
 	fn setMarkerTo color_index = (
 		
-			local obj = selection[1]
-			if obj == undefined do return false 
-			undo "Change Marker"on (
-				
-				obj.wirecolor = colors[color_index].clr
-				if classOf obj.baseObject == text do obj.baseObject.text = colors[color_index].txt
-			)
+		undo "Change Marker"on for o in selection do (
+			
+			o.wirecolor = colors[color_index].clr
+			if classOf o.baseObject == text do o.baseObject.text = colors[color_index].txt
+		)
 	)
 	on btn_1 pressed do setMarkerTo 1
 	on btn_2 pressed do setMarkerTo 2

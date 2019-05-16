@@ -1,0 +1,43 @@
+	-------------------
+	Prefab Components
+	-------------------
+	
+	
+	CheckResource $generator_road_1_6 "generator_road_1_6"   						--<<
+	
+	CheckResource $generator_road_2_2_rail "generator_road_2_2_rail"				--<<
+	
+	CheckResource $generator_road_2_4 "generator_road_2_4"
+	CheckResource $generator_road_2_4_spec "generator_road_2_4_spec"
+	
+	CheckResource $generator_road_2_4_rail "generator_road_2_4_rail"				--<<
+	
+	CheckResource $generator_road_2_5 "generator_road_2_5"
+	CheckResource $generator_road_2_5_spec "generator_road_2_5_spec"
+-- 	CheckResource $generator_road_2_6 "generator_road_2_6"
+-- 	CheckResource $generator_road_2_6_spec "generator_road_2_6_spec"
+	CheckResource $generator_road_4_4 "generator_road_4_4"
+	CheckResource $generator_road_4_5 "generator_road_4_5"
+	CheckResource $generator_road_4_5_spec "generator_road_4_5_spec"
+-- 	CheckResource $generator_road_4_6 "generator_road_4_6"
+-- 	CheckResource $generator_road_4_6_spec "generator_road_4_6_spec"
+	CheckResource $generator_sidewalk_left "generator_sidewalk_left"
+	CheckResource $generator_sidewalk_right "generator_sidewalk_right"
+	CheckResource $generator_corner "generator_corner"
+	CheckResource $generator_corner_p "generator_corner_p"
+	CheckResource $generator_parking_lane_left "generator_parking_lane_left"
+	CheckResource $generator_parking_lane_right "generator_parking_lane_right"
+	
+	
+	-------------------
+	
+	-------------------
+	
+	
+	
+	
+	
+		
+	-------------------
+	
+	-------------------

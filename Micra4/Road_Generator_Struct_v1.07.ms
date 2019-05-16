@@ -326,9 +326,9 @@ struct ROAD_GENERATOR_STRUCTURE	(
 			if isRoad o do o.roadSpline.road = new_name --update spline attribute
 		)
 	),
-	fn hideObjectsByNamePart obj_array name_part = (
+	fn showObjectsByNamePart obj_array name_part state = (
 		
-		for o in obj_array where findString o.name name_part != undefined do o.isHidden = true
+		for o in obj_array where findString o.name name_part != undefined do o.isHidden = not state
 	),
 	fn setRoadCA road rSpline sPoint ePoint dialog controlsArr = (
 	

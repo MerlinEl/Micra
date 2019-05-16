@@ -2,7 +2,7 @@
 <SETTINGS>
   <Micra>
     <born val="04.25.2006" />
-    <version val="4.63" />
+    <version val="4.64" />
   </Micra>
   <Structures val="All registred Micra's Structures">
     <!--independent classes-->
@@ -127,6 +127,7 @@
     <Micra_Update val="0.05" />
     <Road_Generator_Tool val="1.07" />
     <Align_Objects_3D val="0.05" />
+    <Vertex_Snap val="0.01" />
   </Version>
   <SystemFiles val="Micra's Settings Files">
     <Actions val="Contains all accesible Micra's actions" />
