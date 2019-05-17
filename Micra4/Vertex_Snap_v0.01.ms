@@ -73,6 +73,9 @@ rollout mcVertexSnapDialog "Vertex Snap" width:320 height:152
 				polyOP.setVertSelection obj #{} 
 			)
 		)
+		local total_cnt = vsel.numberset
+		local failed_cnt = failed_snap_vertices.numberset
+		messageBox ("Snapped:" + (total_cnt - failed_cnt) as String + " Total:" + total_cnt as String + " Remains:" + failed_cnt as String) title:"Vertex Snap:"
 	)
 	on btn_get_pos pressed  do (
 		

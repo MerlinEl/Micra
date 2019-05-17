@@ -572,3 +572,22 @@ join coll_roads coll_rails
 select coll_roads
 
 */
+
+/*
+--link each collision mesh to collision node
+missess = #()
+for o in selection do (
+
+	if o.parent == undefined do (
+	append missess o
+	format "node:% was not parented.\n" o.name
+	continue
+)
+	local geo_node_name = o.parent.name
+	local coll_node = subString geo_node_name 1 (findString geo_node_name "_geometry") 
+	o.parent = getNodeByName (coll_node + "coll")
+)
+select missess
+$.parent
+
+*/

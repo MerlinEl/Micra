@@ -248,7 +248,6 @@ lh_04_central_island_south_e_roads_geometry
 					--format "node_name:%\n" node_name
 				)
 			)
-		
 		) else (
 		
 			node_name = edt_coll_node.text
@@ -313,8 +312,8 @@ lh_04_central_island_south_e_roads_geometry
 	)
 	fn setAutoTraceTo state = (
 		
-		edt_coll_layer.enabled = not state
-		edt_coll_node.enabled = not state
+		edt_coll_layer.enabled = not state --enable disable writing in to edit box
+		edt_coll_node.enabled = not state --enable disable writing in to edit box
 		case state of (
 			
 			true: ( --generate texts from selected node
