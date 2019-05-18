@@ -452,3 +452,15 @@ with redraw off
 	for k=0 to 4 do sphere pos:[k*30,80,0] radius:10
 )
 */
+
+
+/*
+--Link_Constraint
+LinkCtrl.getLinkCount <controller>
+LinkCtrl.getLinkTime <controller> <index>
+LinkCtrl.setLinkTime <controller> <index> <time>
+LinkCtrl.getLinkNode <controller> <index>
+LinkCtrl.setLinkNode <controller> <index> <node>
+LinkCtrl.addLink <controller> <node> <time>
+LinkCtrl.deleteLink <controller> <index>
+*/

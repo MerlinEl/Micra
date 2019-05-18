@@ -14,7 +14,7 @@
   </Properties_1>
   <Properties_2>
     <mcMicraDialog active="true" pos="[1570,210]" size="[148,66]" title="" />
-    <mcCustomizeDialog active="false" pos="[1040,260]" size="[600,404]" title="" />
+    <mcCustomizeDialog active="false" pos="[850,240]" size="[224,404]" title="" />
     <mcProgramDialog active="false" pos="[100,0]" size="[256,232]" title="" />
     <mcisoDialog active="false" pos="[100,152]" size="[140,400]" title="" />
     <mcModifierDialog active="false" pos="[100,100]" size="[400,400]" title="" />
@@ -197,5 +197,6 @@
     <btn_J18 action="Road_Generator_Tool" icon="266" />
     <btn_B34 action="Align_Objects_3D" icon="270" />
     <btn_J6 action="Align_Objects_3D" icon="270" />
+    <btn_J4 action="Patcher" icon="109" />
   </Buttons>
 </USER>
