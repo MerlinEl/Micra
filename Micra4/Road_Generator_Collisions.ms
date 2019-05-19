@@ -10,12 +10,9 @@ rollout roadGeneratorCollisionDialog "Road Collision Generator:" width:544 heigh
 	button 'btn_create_colls' "GENERATE" pos:[408,12] width:132 height:68 align:#left
 	checkbox chk_auto "Auto" pos:[100,8] width:44 height:16 toolTip:"Work's also for multiple objects"
 /*
+Node naming convences
 lh_02_little_italy_block_h_roads_geometry
 lh_02_little_italy_block_h_roads_coll
-lh_04_central_island_north_h_roads_coll
-lh_04_central_island_north_h_roads_geometry
-lh_04_central_island_south_e_roads_coll
-lh_04_central_island_south_e_roads_geometry
 */
 	local default_layer_name	= "lh_02_little_italy_roads_coll" 
 	local default_node_name	= "lh_02_little_italy_block_h_roads_coll"

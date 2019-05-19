@@ -1,6 +1,6 @@
---###################################################################################
---															Custom Attributes
---###################################################################################
+--###################################################################################--
+--	                               Custom Attributes                                 --
+--###################################################################################--
 Global gRoadGenCa = attributes RoadGenCa attribID:#(0x2949a7a0, 0x5246449a) ( --genClassID()
 
 	parameters params(
@@ -81,25 +81,22 @@ runLocalScript "Road_Generator_Struct_v1.07"
 --< MerlinEl
 
 
-
-
---###################################################################################
--- 															ASCII SIGNS
---###################################################################################
-one_six 		= bit.intAsChar 9604 + bit.intAsChar 9604 + bit.intAsChar 9604 + bit.intAsChar 9604 + bit.intAsChar 9604 + bit.intAsChar 9604
-two_two	= bit.intAsChar 9604 + bit.intAsChar 9604 + bit.intAsChar 12140 +" "+ bit.intAsChar 12140 + bit.intAsChar 9604 + bit.intAsChar 9604
+--###################################################################################--
+--	                                 ASCII SIGNS                                     --
+--###################################################################################--
+one_six		= bit.intAsChar 9604 + bit.intAsChar 9604 + bit.intAsChar 9604 + bit.intAsChar 9604 + bit.intAsChar 9604 + bit.intAsChar 9604
+two_two		= bit.intAsChar 9604 + bit.intAsChar 9604 + bit.intAsChar 12140 +" "+ bit.intAsChar 12140 + bit.intAsChar 9604 + bit.intAsChar 9604
 two_four	= bit.intAsChar 9604 + bit.intAsChar 9604 + bit.intAsChar 9604 + bit.intAsChar 9604 + " "+ bit.intAsChar 9604 + bit.intAsChar 9604 + bit.intAsChar 9604 + bit.intAsChar 9604
 two_four_r	= bit.intAsChar 9604 + bit.intAsChar 9604 + bit.intAsChar 9604 + bit.intAsChar 12140 + " "+ bit.intAsChar 12140 + bit.intAsChar 9604 + bit.intAsChar 9604 + bit.intAsChar 9604
-two_five		= bit.intAsChar 9604 + bit.intAsChar 9604 + bit.intAsChar 9604 + bit.intAsChar 9604 + bit.intAsChar 9604 + " "+ bit.intAsChar 9604 + bit.intAsChar 9604 + bit.intAsChar 9604 + bit.intAsChar 9604 + bit.intAsChar 9604
+two_five	= bit.intAsChar 9604 + bit.intAsChar 9604 + bit.intAsChar 9604 + bit.intAsChar 9604 + bit.intAsChar 9604 + " "+ bit.intAsChar 9604 + bit.intAsChar 9604 + bit.intAsChar 9604 + bit.intAsChar 9604 + bit.intAsChar 9604
 
 four_four	= bit.intAsChar 9604 + bit.intAsChar 9604 + bit.intAsChar 9604 + bit.intAsChar 9604 + " "+ bit.intAsChar 9604 + bit.intAsChar 9604 + bit.intAsChar 9604 + bit.intAsChar 9604 + " " + bit.intAsChar 9604 + bit.intAsChar 9604 + bit.intAsChar 9604 + bit.intAsChar 9604  + " "+ bit.intAsChar 9604 + bit.intAsChar 9604 + bit.intAsChar 9604 + bit.intAsChar 9604 
 four_five 	= bit.intAsChar 9604 + bit.intAsChar 9604 + bit.intAsChar 9604 + bit.intAsChar 9604 + bit.intAsChar 9604 + " " + bit.intAsChar 9604 + bit.intAsChar 9604 + bit.intAsChar 9604 + bit.intAsChar 9604 + bit.intAsChar 9604 + " "+ bit.intAsChar 9604 + bit.intAsChar 9604 + bit.intAsChar 9604 + bit.intAsChar 9604 + bit.intAsChar 9604 + " " + bit.intAsChar 9604 + bit.intAsChar 9604 + bit.intAsChar 9604 + bit.intAsChar 9604 + bit.intAsChar 9604 + " "
 
 main_sign 	= bit.intAsChar 10134
 top_sign 	= bit.intAsChar 10200
-bot_sign		= bit.intAsChar 10201
+bot_sign	= bit.intAsChar 10201
 side_sign	= bit.intAsChar 10073
-
 
 
 
@@ -3019,97 +3016,6 @@ rollout dlgCrossroadGenerator3 "Crossroad Generator"
   )
 )
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-------------------------------------------------------------------------------
--- Struct Crossroad Generator
-------------------------------------------------------------------------------
-
--- struct sCrossroadGenerator
--- (
---   fn openDialog =
---   (
---     if gCrossroadGeneratorUI == undefined then
---     (
---       gCrossroadGeneratorUI = createDialog dlgCrossroadGenerator modal:false
---     )
---     else
---       destroyDialog dlgCrossroadGenerator
---   ),
---   
---   fn init =
---   (
---   )
--- )
-
-------------------------------------------------------------------------------
--- INIT
-------------------------------------------------------------------------------
-
--- if (gCrossroadGenerator == undefined) do
--- (
--- 	gCrossroadGenerator = sCrossroadGenerator()
--- 	gCrossroadGenerator.init()
--- )
-
-------------------------------------------------------------------------------
--- MACRO SCRIPTS
-------------------------------------------------------------------------------
-
--- macroScript CrossroadGenerator 
--- category:"LS3D Engine" 
--- tooltip:"Crossroad generator" 
--- Icon:#("Patches",1)
--- (	
---   gCrossroadGenerator.openDialog()
--- )
-
--- createDialog dlgCrossroadGenerator
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 --###################################################################################
 --															HELP FN ROADS and TURNS
 --###################################################################################
@@ -3533,42 +3439,7 @@ rollout dlgPickObjectType "Menu"
 		roGenStruct.All_CALLBACKS_ENABLED = true
 	)
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
 	
 )
 -- createDialog dlgPickObjectType
