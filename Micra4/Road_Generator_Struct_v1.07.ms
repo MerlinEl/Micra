@@ -390,6 +390,46 @@ struct ROAD_GENERATOR_STRUCTURE	(
 		roadPointer = dd_selection
 		roads[roadPointer]
 	),
+	/** TEMPORALILY
+	*@Info > get objects which are constrained to obj, for now with this long way (will be changed later)
+	*Research 
+		getclassinstances Link_Constraint target:$ astrackviewpick:on
+		
+		
+		Global gSho = attributes Sho attribID:#(0x313ba12a, 0x509e4080) ( --genClassID()
+			parameters params(
+				
+				splineController type:#maxObject
+				startPoint		type:#node
+				endPoint		type:#node
+			)
+		)
+		custAttributes.add $Box001 gSho #unique
+		$Dummy001.parent = $Box001
+		$Dummy002.parent = $Box001
+		$Box001.startPoint = $Box001.children[1]
+		$Box001.endPoint = $Box001.children[2]
+		co =  link_constraint()
+		$Line001.controller =co
+		co.addTarget $Box001 1 --at frame 1
+		$Box001.splineController = co --dependency loop!!!
+		$Box001.startPoint = $Line001 --dependency loop!!!
+	*/
+	fn getShortcutPath obj = ( 
+	
+		local spline_path
+		for o in objects where classOf o == SplineShape and classOf o.controller == Link_Constraint do (
+
+			if o.controller.getNumTargets() == 0 do continue 
+			local shortcut = o.controller.getNode 1
+			if shortcut.name == obj.name do (
+			
+				spline_path = o
+				exit
+			)
+		)
+		spline_path
+	),
 	fn linkConstraint obj_target obj_source = (
 		
 		obj_source.controller = link_constraint()
@@ -676,6 +716,8 @@ struct ROAD_GENERATOR_STRUCTURE	(
 	),
 	/** 
 	*@Author Petr Čapek 18.4.2019
+	*@Example
+		roGenStruct.fixBrokenCrossroad $
 	*/
 	fn fixBrokenCrossroad obj = (
 			
@@ -1076,15 +1118,17 @@ linkConstraint new_obj rSpline
 		--Check if Shortcut or geometry is selected
 		if isShortcut road then ( --recreate current road
 		
-			if (road.children.count != 3) do ( 
+			if (road.children.count != 2) do ( 
 				
-				format "roGenStruct > generateRoadShortcut > Invalid components, use Rad Anatomy to see issues\n" road.name
+				format "roGenStruct > generateRoadShortcut > Invalid components, use Road Anatomy to see issues\n" road.name
 				return false
 			)
 			pts = #(road.children[1], road.children[2])
 			moveTangetPoints pts[1] pts[2] min_tangent_dist --move tangent points close
 			finalPos = road.pos --keep road position
-			delete road.children[3] -- delete old spline
+			--delete road.children[3] -- delete old spline
+local old_path = getShortcutPath road
+if old_path != undefined do delete old_path
 			delete road -- delete old road
 			
 		) else if subobjectlevel == 4 do ( --face(s) is selected (build at place)

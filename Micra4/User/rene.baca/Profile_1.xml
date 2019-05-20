@@ -13,7 +13,7 @@
     <mc_Dialog_J active="true" pos="[1780,1230]" size="[532,42]" title="Experimental:" btnCount="[22,1]" />
   </Properties_1>
   <Properties_2>
-    <mcMicraDialog active="true" pos="[-388,222]" size="[148,66]" title="" />
+    <mcMicraDialog active="true" pos="[2170,220]" size="[148,66]" title="" />
     <mcCustomizeDialog active="false" pos="[1720,370]" size="[224,404]" title="" />
     <mcProgramDialog active="undefined" pos="[2298,0]" size="[256,232]" title="" />
     <mcisoDialog active="false" pos="[181,152]" size="[140,400]" title="" />

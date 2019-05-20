@@ -1,12 +1,11 @@
 Global mcCityManDialog
 if ::mcCityManDialog != undefined do try(destroyDialog mcCityManDialog)catch()
-rollout mcCityManDialog "City Manager v1.04" width:500 height:812
+rollout mcCityManDialog "City Manager v1.04" width:500 height:896
 (
 	--Interface components
 	GroupBox 'grp1' "..." pos:[4,20] width:492 height:628 align:#left
 	GroupBox 'grp2' "Wire Color:" pos:[4,732] width:88 height:72 align:#left
-	GroupBox 'grp3' "Selection:" pos:[104,732] width:88 height:72 align:#left
-	GroupBox 'grp4' "..." pos:[196,732] width:300 height:72 align:#left
+	GroupBox 'grp3' "Selection:" pos:[104,732] width:388 height:72 align:#left
 	GroupBox 'grp5' "Node:" pos:[8,652] width:88 height:72 align:#left
 	GroupBox 'grp6' "Linked:" pos:[100,652] width:396 height:72 align:#left
 	
@@ -16,10 +15,12 @@ rollout mcCityManDialog "City Manager v1.04" width:500 height:812
 	multiListBox 'cbx_node_list' "Nodes List:" pos:[14,36] width:236 height:45 align:#left
 	multiListBox 'cbx_children_list' "Linked Objects:" pos:[258,36] width:236 height:45 align:#left
 	checkbox 'chk_auto_trace_node' "Auto Select" pos:[132,32] width:116 height:20 align:#left
-	dropdownList 'ddl_display_filter' "Display Filter:" pos:[260,676] width:128 height:40 items:#("Children", "AllRoads") align:#left
+	dropdownList 'ddl_display_filter' "Display Filter:" pos:[260,676] width:128 height:40 items:#("Children", "AllRoads", "All") align:#left
 	
 	button 'btn_select_linked' "Select Linked" pos:[108,672] width:70 height:20 toolTip:"Select Object(s)" align:#left
 	button 'btn_select_visible' "Select Visible" pos:[108,696] width:70 height:20 toolTip:"Select Visible Object(s)" align:#left 
+ 
+ 
 	button 'btn_select_nodes' "Select Node(s)" pos:[14,672] width:76 height:20 toolTip:"Select Node(s)" align:#left
 	button 'btn_get_nodes' "Get Node(s)" pos:[14,696] width:76 height:20 toolTip:"Get Nodes From Selected Objects" align:#left
 	button 'btn_link_selection' "Link Selected" pos:[400,672] width:84 height:20 align:#left
@@ -30,15 +31,20 @@ rollout mcCityManDialog "City Manager v1.04" width:500 height:812
 	button 'btn_load_sel' "Restore" pos:[112,776] width:70 height:20 align:#left
 	button 'btn_hide_children' "Hide" pos:[184,696] width:70 height:20 align:#left
 	button 'btn_show_children' "Show" pos:[184,672] width:70 height:20 align:#left
-	button 'btn_export_selection' "EXPORT" pos:[288,748] width:200 height:44 align:#left
-	button 'btn_zoom_selected' "FOCUS" pos:[204,748] width:80 height:44 toolTip:"Zoom to Location" align:#left
+	button 'btn_export_selection' "EXPORT" pos:[412,748] width:70 height:48 align:#left
+	button 'btn_zoom_selected' "Focus" pos:[188,752] width:70 height:20 toolTip:"Zoom to Location" align:#left
 	button 'btn_init' "UPDATE" pos:[4,4] width:492 height:16 toolTip:"Zoom to Location" align:#left
-	
+	GroupBox 'grp7' "Actions:" pos:[4,808] width:492 height:84 align:#left
+	button 'btn_move_colls_to_layers' "Distribute Collisions" pos:[12,826] width:112 height:20 toolTip:"Move each Collision in to separate Layer" align:#left
+	button 'btn_select_visible_nodes' "Select Visible Nodes" pos:[12,848] width:112 height:20 toolTip:"Select All visible nodes" align:#left
+	button 'btn_filter_visible_nodes' "Filter Visible Nodes" pos:[12,870] width:112 height:20 toolTip:"Filter visible nodes from selection" align:#left
+	button 'btn_generate_coll' "Gen Simple Collisions" pos:[126,870] width:112 height:20 toolTip:"Genarate collisions from selection, ID:1, " align:#left
 	--Local variables
 	local autosel = on
 	local last_wire_color = yellow
 	local last_selection = #()
 	local callbacks_id = #micra_callbacks_cityman	
+	local collision_wirecolor = color 176 26 26
 	--Functions
 	fn clearList list =
 	(
@@ -247,6 +253,88 @@ rollout mcCityManDialog "City Manager v1.04" width:500 height:812
 		cbx_children_list.selection = 0 --select none
 		autosel = on
 	)
+	--------------------------------------------------------------------------------------------------------------------------------------------------
+	-- Generic Fn
+	--------------------------------------------------------------------------------------------------------------------------------------------------
+	--distribute collisions in to layers
+	fn moveCollisionsInToSeparateLayer = (
+		
+		for o in selection do (
+
+			if o.parent == undefined do (
+
+				format "Error > Unable move collision [ % ] which is not linked\n" o.name
+			)
+			local layer_name = substring o.parent.name 1 (findString o.parent.name "_coll")
+			layer_name += "terrain_coll"
+			local layer = layerManager.getLayerFromName layer_name
+			if layer == undefined do (
+
+				format "Error > Unable move collision [ % ] in to layer [ % ] which not exists\n" o.name layer_name
+				continue
+			)
+			
+			format "Move collision [ % ] in to layer [ % ]\n" o.name layer_name
+			layer.addNode o
+		)
+	)
+	fn cloneObject obj prefix = (
+		
+		local new_o = copy obj
+		new_o.name = uniqueName (prefix+"_"+ obj.name)
+		--for c in new_o.children do c.parent = undefined --dont need (a clone have no children)
+		 --delete all custom attributes
+		for i = custAttributes.count new_o to 1 by -1 do custAttributes.delete new_o i
+		--select new_o; custAttributes.count new_o
+		new_o
+	)
+	fn getCollisionLayer obj = (
+	
+		local layer_name = obj.layer.name + "_coll"
+		local collision_layer = LayerManager.getLayerFromName layer_name --pick layer by name
+		if collision_layer == undefined do collision_layer = LayerManager.newLayerFromName layer_name --create layer if not exists
+		collision_layer
+	)
+	fn getCollisionNode obj = (
+	
+		local node_name
+		if obj.parent != undefined do (
+		
+			local geometry_node_name = obj.parent.name
+			local suffix_geometry_index = findString geometry_node_name "_geometry"
+			if suffix_geometry_index != undefined do (
+			
+				node_name = (subString geometry_node_name 1 suffix_geometry_index) + "coll" 	
+			)
+		)
+		if node_name != undefined  then getNodeByName node_name else undefined
+	)
+	fn generateSimpleCollisions = (
+		
+		local s_mat = meditmaterials["semantic_materials"]
+		for o in selection where superClassOf o == GeometryClass do (
+			
+			local coll_layer = getCollisionLayer o
+			local coll_export_node = getCollisionNode o
+			if coll_export_node == undefined do (
+				
+				format "Unable to create collision from [ % ]. Export node not found.\n" o.name
+				continue
+			)
+			--clone object
+			local o_instance = cloneObject o "coll" 
+			coll_layer.addNode o_instance --ad to coll laer
+			o_instance.parent = coll_export_node -- link to coll node
+			--assign semantic material
+			o_instance.wirecolor = collision_wirecolor
+			o_instance.material = s_mat
+			--change material id to 1 (uni hard)
+			for f=1 to o_instance.numFaces do ( polyop.setFaceMatID o_instance f 1 )
+			---set obj clone as collision node
+			AddCustomAttributeByName o_instance "CollisionMesh"
+			o_instance.'~layer' = -1
+		)
+	)
 	fn closeDialog = 
 	(
 		destroyDialog mcCityManDialog
@@ -448,6 +536,10 @@ rollout mcCityManDialog "City Manager v1.04" width:500 height:812
 				thenodes.isHidden = true
 				return OK
 			)
+			"All": (
+			
+				undo "Hide All" on ( hide objects )
+			)
 		)
 	)
 	
@@ -484,6 +576,10 @@ rollout mcCityManDialog "City Manager v1.04" width:500 height:812
 				--undo "CityMan - Unhide" on 
 				thenodes.isHidden = false
 				return OK
+			)
+			"All": (
+			
+				undo "Show All" on ( unhide objects )
 			)
 		)
 	)
@@ -560,6 +656,10 @@ rollout mcCityManDialog "City Manager v1.04" width:500 height:812
 	(
 		callbacks.removescripts id:#micra_callbacks_cityman		
 	)
+	on btn_move_colls_to_layers pressed do ( moveCollisionsInToSeparateLayer() )
+	on btn_select_visible_nodes pressed do ( select(for o in objects where not o.ishidden collect o) )
+	on btn_filter_visible_nodes pressed do ( select(for o in selection where not o.ishidden collect o) )
+	on btn_generate_coll pressed do generateSimpleCollisions()
 )
 createDialog mcCityManDialog
 
