@@ -310,6 +310,20 @@ struct ROAD_GENERATOR_STRUCTURE	(
 		)
 		for o in all_components where isValidNode o collect o --return only validated objects
 	),
+	/**
+	*@Usage > Get layer by name. If not found and create is set to true create new one.
+	*@Example
+		roGenStruct.getLayerByName "01_test" create:true
+	*/
+	fn getLayerByName layer_name create:false = (
+	
+		local layer = LayerManager.getLayerFromName layer_name --pick layer by name
+		if layer == undefined and create then (
+		
+			layer = LayerManager.newLayerFromName layer_name --create layer
+		)
+		layer
+	),
 	-------------------------------------------------------------
 	-------------------------------------------------------------
 	------                   SET                           ------
@@ -415,7 +429,7 @@ struct ROAD_GENERATOR_STRUCTURE	(
 		$Box001.splineController = co --dependency loop!!!
 		$Box001.startPoint = $Line001 --dependency loop!!!
 	*/
-	fn getShortcutPath obj = ( 
+	fn getShortcutSpline obj = ( 
 	
 		local spline_path
 		for o in objects where classOf o == SplineShape and classOf o.controller == Link_Constraint do (
@@ -586,12 +600,18 @@ struct ROAD_GENERATOR_STRUCTURE	(
 			) else if isShortcut o do (
 				
 				local joints = o.children
-				if joints.count != 2 then (
+local spline_path = getShortcutSpline o
+				if spline_path == undefined then (
+				
+					format "Error > Missing spline in shortcut_road:[ % ]\n" o.name
+					
+				) else if joints.count != 2 then (
 				
 					format "Error > Missing joints in shortcut_road:[ % ]\n" o.name
 					
 				) else (
 					
+					layer.addNode spline_path
 					for jo in joints do (
 						
 						layer.addNode jo
@@ -608,6 +628,42 @@ struct ROAD_GENERATOR_STRUCTURE	(
 					format "OK\n"
 				)
 			)
+		)
+	),
+	/**
+	*@Usage > Move each object in to layer(name is teaken from node name)
+	*@Info
+		jmenové konvence
+		
+		layer_model	= lh_06_downtown_block_h_terrain
+		layer_coll	= lh_06_downtown_block_h_terrain_coll
+		
+		node_model	= lh_06_downtown_block_h_geometry
+		node_coll	= lh_06_downtown_block_h_coll
+	*/
+	fn distributeRoadsInToLayers = (
+	
+		for o in selection do (
+		
+			local parent_node = o.parent --lh_07_hoboken_block_c_geometry
+			if classOf parent_node != LS3DModel do (
+			
+				format "Skipped road [ % ] which is not linked to node.\n" o.name 
+				continue
+			)
+			--bug
+			-- trimRight "lh_07_hoboken_block_e_geometry" "_geometry"
+			-- lh_07_hoboken_block --missing _e
+			--input = "     lh_07_hoboken_block_e_geometry      "
+			--Regex.Replace(input, "(( )*|_geometry)( )*$", "");
+			--^( )*|(( )*|prefix_)|(( )*|_geometry)( )*$
+			--https://regex101.com/
+			--recreate this function TODO
+			local layer_name = trimRight parent_node.name "geometry" --lh_07_hoboken_block_c
+			layer_name += "terrain"
+			format "Validate road [ % ]\n\tmoving to layer:%\n\tlinked to node:%\n" o.name layer_name parent_node.name
+			local layer = getLayerByName layer_name create:true
+			layer.addNode o
 		)
 	),
 	-------------------------------------------------------------
@@ -1127,7 +1183,7 @@ linkConstraint new_obj rSpline
 			moveTangetPoints pts[1] pts[2] min_tangent_dist --move tangent points close
 			finalPos = road.pos --keep road position
 			--delete road.children[3] -- delete old spline
-local old_path = getShortcutPath road
+local old_path = getShortcutSpline road
 if old_path != undefined do delete old_path
 			delete road -- delete old road
 			

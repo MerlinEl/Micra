@@ -112,6 +112,7 @@ global generated_road = undefined
 ------------------------------------------------------------------------------
 
 C_LAYER_NAME = "---noexport---terrain_generator_modules"
+H_LAYER_NAME = "---noexport---terrain_generator_helpers"
 -- C_COMPONENTS_PATH = "E:\\Aprog\\Orien\Micra\\repo_sync\\_NEW\\Road Tool\\terrain_generator_components.max"
 -- C_COMPONENTS_PATH = LS3DGUP.LS3DGUP.UtilsPath+"terrain_generator_components.max"
 C_COMPONENTS_PATH = "D:\\!2K_Games\\scotch_dev\\resources\\graphics\\_data_\\3dsmax\\terrain_generator_components.max"
@@ -3262,7 +3263,8 @@ rollout rGeneratorUtilities "Generator Utilities"
 	button bt_hidePoints 			"Hide Help Points"	offset:[90,-90] width:90 height:25 
 	button bt_showRoadColorTable	"Road Colors"	offset:[90,0] width:90 height:25 toolTip:"Road Color Types"
 	button bt_ReloadPrefabs			"Reload Prefabs"	offset:[90,0] width:90 height:25 toolTip:"Delete old prefabs and load new ones"
-	button bt_distr_by_laers 		"Redistribute Selected"	offset:[0,0] width:120 height:25 toolTip:"Move children to road layers"
+	button bt_validate_roads 		"Validate Sel Roads"	offset:[0,0] width:120 height:25 toolTip:"Validate Roads Structure"
+	button bt_distr_to_laers 		"Redistribute Sel"	offset:[0,0] width:120 height:25 toolTip:"Move road in to layers(name is teaken from Node)"
 	
 	label lbl_1 "Show - Hide objects which contains Word:" offset:[-10, 0] width:284 height:14 align:#left
 	button btn_show_objs "Show" offset:[-14,-0] width:56 height:17 align:#left across:4
@@ -3280,7 +3282,8 @@ rollout rGeneratorUtilities "Generator Utilities"
 	on bt_ReloadPrefabs			pressed do ( roGenStruct.reloadPrefabs(getSourceFileName())						)
 	on btn_show_objs 			pressed do ( roGenStruct.showObjectsByNamePart objects edt_sh_name.text true	)
 	on btn_hide_objs 			pressed do ( roGenStruct.showObjectsByNamePart objects edt_sh_name.text false	)
-	on bt_distr_by_laers		pressed do ( roGenStruct.validateSelectedRoads()								)
+	on bt_validate_roads		pressed do ( roGenStruct.validateSelectedRoads()								)
+	on bt_distr_to_laers		pressed do ( roGenStruct.distributeRoadsInToLayers()							)
 )
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
