@@ -152,7 +152,62 @@ public
 		)
 		data_str
 	),
-	fn trimLeftRight str = (trimLeft(trimRight str)),
+	/**
+	*@Source > clone from mcString
+	*/
+	fn cutLeft str trimChars:"" = (
+		
+		if str == undefined do return ""
+		local rgx, pattern
+		if trimChars.count != 0 then (		--remove word from begin
+			
+			pattern = "^"+trimChars+"+" 
+			rgx = dotnetObject "System.Text.RegularExpressions.Regex" pattern
+			rgx.Replace str ""
+			
+		) else (	--remove all spaces from left
+			
+			pattern = "^\s+" 
+			local rgx = dotnetObject "System.Text.RegularExpressions.Regex" pattern
+			rgx.Replace str ""
+		)
+	), 
+	/**
+	*@Source > clone from mcString
+	*/
+	fn cutRight str trimChars:"" = (
+		
+		if str == undefined do return ""
+		local rgx, pattern
+		if trimChars.count != 0 then (		--remove word from begin
+			
+			pattern = trimChars+"+$" 
+			rgx = dotnetObject "System.Text.RegularExpressions.Regex" pattern
+			rgx.Replace str ""
+			
+		) else (	--remove all spaces from left
+			
+			pattern = "\s+$" 
+			local rgx = dotnetObject "System.Text.RegularExpressions.Regex" pattern
+			rgx.Replace str ""
+		)
+	), 
+	/**
+	*@Source > clone from mcString
+	*/
+	fn cutLeftRight str trimChars:undefined = (
+	
+		if str == undefined do return ""
+		if trimChars == undefined then (
+		
+			cutLeft (cutRight str)
+
+		) else (
+		
+			cutLeft (cutRight str trimChars:trimChars) trimChars:trimChars
+		)
+	),
+	--fn trimLeftRight str = (trimLeft(trimRight str)),
 	fn getData head key = (
 	
 		if not loaded do (print "You must load INI file first"; return undefined)
@@ -164,7 +219,7 @@ public
 	),
 	fn getParseMethod str = (
 		
-		str = trimLeftRight str
+		str = cutLeftRight str
 		if str[1] == "[" then "default" else --[1572,818]
 		if findString str ":\\" != undefined then "default" else  --"E:\Aprog\Orien\Micra\Micra4\Default\"
 		if findString str ":/" != undefined then "default" else  --"E:/Aprog/Orien/Micra/Micra4/Default/"
@@ -175,7 +230,7 @@ public
 	),
 	fn parseObject str = ( --action:Move_To_X icon:28
 		
-		local ini_data = trimLeftRight str --remove white space left and right
+		local ini_data = cutLeftRight str --remove white space left and right
 		--local rgx = dotnetObject "System.Text.RegularExpressions.Regex" ini_data
 		--ini_data = rgx.Replace ":" "="
 		local data_array = filterString ini_data " " --split string in to array
@@ -196,8 +251,8 @@ public
 		local attribs_str = ""
 		for i=1 to keys.count do (
 			
-			local key_str = trimLeftRight (keys[i] as String)
-			local val_str = trimLeftRight (values[i] as String)
+			local key_str = cutLeftRight (keys[i] as String)
+			local val_str = cutLeftRight (values[i] as String)
 			attribs_str +=	key_str + "=\"" + val_str + "\" "
 		)
 		attribs_str = trimRight attribs_str --remove last space

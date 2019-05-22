@@ -153,7 +153,7 @@ struct MICRA_ACTIONS_EDITOR	(
 	
 		local first_space = (findString action_with_cmd " ") --find first space
 		local params = substring action_with_cmd first_space -1 --get rest (params)
-		params = mcString.trimLeftRight params --trim white spaces left right
+		params = mcString.cutLeftRight params --trim white spaces left right
 		params
 	),
 	/**
@@ -326,7 +326,7 @@ struct MICRA_ACTIONS_EDITOR	(
 	fn splitCommand action_cmd = (
 				
 		--format "splitCommand > action_cmd:%\n" action_cmd
-		action_cmd = mcString.trimLeftRight action_cmd --remove left right spaces
+		action_cmd = mcString.cutLeftRight action_cmd --remove left right spaces
 		local dot_pos = findString action_cmd "."
 		if dot_pos == undefined do return undefined --wrong command format
 		local struct_name = substring action_cmd 1 (dot_pos-1) --get structure name > mcAction
@@ -381,7 +381,7 @@ struct MICRA_ACTIONS_EDITOR	(
 	fn editOrCreateAction category_key action_key action_cmd icon_index = (
 		
 		--fix action name string
-		action_key = mcString.trimLeftRight action_key --remove left right spaces
+		action_key = mcString.cutLeftRight action_key --remove left right spaces
 		
 		--get action type
 		local action_type = getActionType action_cmd

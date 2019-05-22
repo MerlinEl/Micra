@@ -385,11 +385,11 @@ try ( mcMicraDialog.close() ) catch()
 		local tip = #("Help", "Customize", "Toolbars", "Profiles")
 		for i in lbl do (
 		
-			i.size = netDrSize [(gw.getTextExtent "Micra III   ").x, btn_size]
+			i.size = netDrSize [(gw.getTextExtent "Micra IV   ").x, btn_size]
 			i.BackColor = netDrColor (mcUIColors.get #back)
 			i.ForeColor = netDrColor (mcUIColors.get #text)
 			i.margin =  dotnetobject "padding" 0
-			i.text = "Micra III" 
+			i.text = "Micra IV" 
 			i.TextAlign = i.TextAlign.MiddleCenter
 		)
 		local cnt = 0

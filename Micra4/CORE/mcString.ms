@@ -73,19 +73,79 @@ Public
 	fn split str value = (filterString str value), --mcString.split mcString.testr " "
 	fn dSplit str value = ((dotnetObject "System.String" str).split value), --dotnet version Test Not used
 	/**
+		*@Usage 
+		Trims all leading characters specified in trimChars from BEGIN of the given string and returns it. 
+		If trimChars is not specified, basic whitespace characters (space, tab, and newlines) are trimmed.
+	*@Example
+		test_str_1 = "    lh_07_hoboken_block_e_geometry     "
+		test_str_2 = "lh_07_hoboken_block_e_geometry"
+		mcString.cutLeft test_str_1									--without parameter remove all front spaces
+		mcString.cutLeft test_str_2 trimChars:"lh_07"				--with parameter remove first word
+	*/
+	fn cutLeft str trimChars:"" = (
+		
+		if str == undefined do return ""
+		local rgx, pattern
+		if trimChars.count != 0 then (		--remove word from begin
+			
+			pattern = "^"+trimChars+"+" 
+			rgx = dotnetObject "System.Text.RegularExpressions.Regex" pattern
+			rgx.Replace str ""
+			
+		) else (	--remove all spaces from left
+			
+			pattern = "^\s+" 
+			local rgx = dotnetObject "System.Text.RegularExpressions.Regex" pattern
+			rgx.Replace str ""
+		)
+	), 
+	/**
+	*@Usage 
+		Trims all leading characters specified in trimChars from END of the given string and returns it. 
+		If trimChars is not specified, basic whitespace characters (space, tab, and newlines) are trimmed.
+	*@Example
+		test_str_1 = "    lh_07_hoboken_block_e_geometry     "
+		test_str_2 = "lh_07_hoboken_block_e_geometry"
+		mcString.cutRight test_str_1									--without parameter remove all end spaces
+		mcString.cutRight test_str_2 trimChars:"_geometry"	--with parameter remove last word
+	*/
+	fn cutRight str trimChars:"" = (
+		
+		if str == undefined do return ""
+		local rgx, pattern
+		if trimChars.count != 0 then (		--remove word from begin
+			
+			pattern = trimChars+"+$" 
+			rgx = dotnetObject "System.Text.RegularExpressions.Regex" pattern
+			rgx.Replace str ""
+			
+		) else (	--remove all spaces from left
+			
+			pattern = "\s+$" 
+			local rgx = dotnetObject "System.Text.RegularExpressions.Regex" pattern
+			rgx.Replace str ""
+		)
+	), 
+	/**
 	*@Usage 
 		Trims all leading characters specified in trimChars from the given string and returns it. 
 		If trimChars is not specified, basic whitespace characters (space, tab, and newlines) are trimmed.
+	*@Example
+		test_str_1 = "    lh_07_hoboken_block_e_geometry     "
+		test_str_3 = "lh_07_hoboken_block_e_geometry_lh"
+		mcString.cutLeftRight test_str_1
+		mcString.cutLeftRight test_str_3 trimChars:"lh"
 	*/
-	fn trimLeftRight str trimChars:undefined = (
+	fn cutLeftRight str trimChars:undefined = (
 	
+		if str == undefined do return ""
 		if trimChars == undefined then (
 		
-			trimLeft (trimRight str)
+			cutLeft (cutRight str)
 
 		) else (
 		
-			trimLeft (trimRight str trimChars) trimChars
+			cutLeft (cutRight str trimChars:trimChars) trimChars:trimChars
 		)
 	),
 	/**
@@ -222,8 +282,8 @@ Public
 				return false
 			) else (
 			
-				local key = trimLeftRight arr[1]
-				local val = trimLeftRight arr[2] --for now only String,  (TODO > [ fn toValue ]> int, number, point2, point3, array, bitarray)
+				local key = cutLeftRight arr[1]
+				local val = cutLeftRight arr[2] --for now only String,  (TODO > [ fn toValue ]> int, number, point2, point3, array, bitarray)
 				--format "key:% val:%\n" key val
 				obj.add key val
 			)
@@ -312,4 +372,11 @@ REGEX
 	print match_patern
 	
 	----------------------------------------------------------------------------------------------------------------------
+*/
+
+
+/*
+str = "maps/nature/water_canals_water2_0_0_1009_depth_39"
+rgx = dotnetObject "System.Text.RegularExpressions.Regex" ""
+found = rgx.IsMatch str ".+_-?\\d+_-?\\d+_-?\\d+_depth_-?\\d+$"
 */
