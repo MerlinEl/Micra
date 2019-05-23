@@ -39,6 +39,7 @@ struct MICRA_STRUCTURE (
 	AppsDir				= RootDir + "App\\",
 	ImagesPath 			= RootDir + "Img\\", --all images here
 	UserDir				= RootDir + "User\\" + username + "\\",
+	MicraMacro 			= RootDir + "Micra_Macro.mcr",
 	MaxRootDir			= getDir #maxroot,
 	MaxUserDir			= pathConfig.removePathLeaf (getDir #userMacros),
 	MaxPluginsDir		= MaxUserDir + "\\MicraPlugins\\", --all plugins goes here, also Micra's autorun file	
@@ -172,13 +173,17 @@ struct MICRA_STRUCTURE (
 		loadUserProfile()
 		return true
 	),
-	--> Add Micra's macro to 3DsMax set plug-ins directory
+	--> Copy Micra's macro to 3DsMax dir
 	fn installMacro force:false = (
 		
-		if not doesFileExist MaxMacro or force do (
+		if doesFileExist MaxMacro and force do deleteFile MaxMacro 
+		if not doesFileExist MaxMacro then (
+	
+			local success = copyFile MicraMacro MaxMacro
+			format "% > installMacro > with result:%\n" version success 
+		) else (
 		
-			local success = copyFile (RootDir+"Micra_Macro.mcr") MaxMacro --override works only with max closed, or try something else
-			format "% > Micra_Macro has ben Installed. %\n." version success
+			format "Unable to override old Macro version.\n\tsource:%\t\n\ttarget:%\n" MicraMacro MaxMacro
 		)
 	),
 	fn isInstaled = (

@@ -562,9 +562,67 @@ Tooltip:"Slect Camera Target Switch"
 		if classOf selection[1] == Targetobject then select selection[1].lookat else select selection[1].target
 	)
 )
+
+MacroScript MC_SubObject_1
+ButtonText:"SubobjectLevel 1"
+Category:"Micra"
+Tooltip:"Set SubobjectLevel to 1"
+Icon:#("SubObjectIcons",1)
+(
+	On IsEnabled Return (classOf mcAction == StructDef)
+	On Execute do  (mcAction.setSubobjectLevel 1)
+) 
+MacroScript MC_SubObject_2
+ButtonText:"SubobjectLevel 2"
+Category:"Micra"
+Tooltip:"Set SubobjectLevel to 2"
+Icon:#("SubObjectIcons",2)
+(
+	On IsEnabled Return (classOf mcAction == StructDef)
+	On Execute do  (mcAction.setSubobjectLevel 2)
+) 
+MacroScript MC_SubObject_3
+ButtonText:"SubobjectLevel 3"
+Category:"Micra"
+Tooltip:"Set SubobjectLevel to 3"
+Icon:#("SubObjectIcons",3)
+(
+	On IsEnabled Return (classOf mcAction == StructDef)
+	On Execute do  (mcAction.setSubobjectLevel 3)
+) 
+MacroScript MC_SubObject_4
+ButtonText:"SubobjectLevel 4"
+Category:"Micra" 
+Tooltip:"Set SubobjectLevel to 4"
+Icon:#("SubObjectIcons",4)
+(
+	On IsEnabled Return (classOf mcAction == StructDef)
+	On Execute do  (mcAction.setSubobjectLevel 4)
+) 
+
+MacroScript MC_SubObject_5
+ButtonText:"SubobjectLevel 5"
+Category:"Micra" 
+Tooltip:"Set SubobjectLevel to 5"
+Icon:#("SubObjectIcons",5)
+(
+	On IsEnabled Return (classOf mcAction == StructDef)
+	On Execute do  (mcAction.setSubobjectLevel 5)
+) 
 /*
 C:\Documents and Settings\rbaca\Local Settings\Application Data\Autodesk\3dsmax\9 - 32bit\enu\UI\usermacros
 
 sysInfo.tempdir
 "C:\DOCUME~1\rbaca\LOCALS~1\Temp\"
 */
+
+
+
+
+
+
+
+
+
+
+

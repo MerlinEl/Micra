@@ -19,6 +19,7 @@
 		<item standard="22" semantic="53" info="pavement" />
 		<item standard="23" semantic="50" info="damaged road (shortcuts)" />
 		<item standard="24" semantic="50" info="asfalt road / usable for parking spots" />	  	 
+		<item standard="26" semantic="53" info="salieris backyard ground" />	
 	</Materials>
 	<Layers>
 		<prefabs val= "---noexport---terrain_generator_modules" />

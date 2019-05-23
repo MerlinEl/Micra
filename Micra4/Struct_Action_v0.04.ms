@@ -2308,6 +2308,17 @@ struct mcAction (
 		)
 		format "Set objects(%) data:\n\tlink:%\n\tlayer:%\n" sel.count parent_name layer_name
 	),
+	fn setSubobjectLevel level_index = (
+	
+		--switch to mmodify mode
+		if subObjectLevel == undefined then max modify mode
+		--if modifier not support levels go to base
+		if numSubObjectLevels == 0 and selection.count != 0 do modPanel.setCurrentObject $.baseObject -- Select the base object in the modifier stack
+		--if is already in wanted level or num levels is less exit
+		if subObjectLevel == level_index or numSubObjectLevels < level_index do return false
+		--activate subobject level
+		subObjectLevel = level_index
+	),
 	fn getEdgesLength = ( --todo for multiple edges selected
 	
 		local obj = (selection as array)[1]

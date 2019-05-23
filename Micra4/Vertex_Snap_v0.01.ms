@@ -7,7 +7,7 @@ rollout mcVertexSnapDialog "Vertex Snap" width:320 height:152
 	label 'lbl5' "Target Object:" pos:[16,96] width:76 height:16 align:#left
 	button 'btn_snap' "Snap" pos:[228,116] width:80 height:24 align:#left
 	label 'lbl6' "Range:" pos:[16,120] width:76 height:16 align:#left
-	spinner 'spn_offset' "" pos:[96,120] width:72 height:16 range:[0,100,0.1] align:#left
+	spinner 'spn_offset' "" pos:[96,120] width:72 height:16 range:[0,100,1] type:#float scale:0.1 align:#left
 	label 'lbl_units' "meters" pos:[172,120] width:52 height:16 align:#left
 	
 	GroupBox 'grp2' "Single:" pos:[8,4] width:308 height:56 align:#left

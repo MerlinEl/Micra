@@ -37,6 +37,7 @@ lh_02_little_italy_block_h_roads_coll
 			22: 53	--pavement
 			23: 50	--damaged road (shortcuts)
 			24: 50	--asfalt road / usable for parking spots
+			26: 53  --salieris backyard ground
 			default: 1
 		)
 	)

@@ -106,7 +106,7 @@
     <Space val="1.03" />
     <Spline_Magnet val="0.05" />
     <Soft_Selection val="0.01" />
-    <Struct_Action val="0.04" />
+    <Struct_Action val="0.05" />
     <Time_Break val="0.01" />
     <Transformer val="0.09" />
     <UE_Model_Importer val="0.07" />
