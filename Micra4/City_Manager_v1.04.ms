@@ -323,6 +323,7 @@ rollout mcCityManDialog "City Manager v1.04" width:500 height:896
 			)
 			--clone object
 			local o_instance = cloneObject o "coll" 
+			convertToPoly o_instance --collapse all modifiers
 			coll_layer.addNode o_instance --ad to coll laer
 			o_instance.parent = coll_export_node -- link to coll node
 			--assign semantic material
