@@ -2353,9 +2353,7 @@ struct mcAction (
 	),
 	fn pivotToZero = (
 		
-		local obj = (selection as array)[1]
-		if obj == undefined or  superClassOf obj != GeometryClass do return false
-		undo "Pivot To Zero" on obj.pivot = [0, 0, 0]	
+		undo "Pivot To Zero" on try (for o in selection do o.pivot = [0, 0, 0]) catch(format "Pivot To Zero was Failed.")
 	),
 	/**
 	*@Author	Martijn(magicm)

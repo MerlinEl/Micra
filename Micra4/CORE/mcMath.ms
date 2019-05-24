@@ -194,6 +194,14 @@ struct MICRA_MATH (
 		p.z = roundToDecimals p.z dec
 	),
 	/**
+	*@Author > Nikolay Litvinov (gniklit@gmail.com) 2014
+
+	*/
+	fn viewDirectionZ = (
+	
+		(inverse(getViewTM())).row3
+	),
+	/**
 	*@Author > Joshua Newman (2004)
 	*@Usage > Get Normal from 3 points
 	*/
