@@ -404,55 +404,21 @@ struct ROAD_GENERATOR_STRUCTURE	(
 		roadPointer = dd_selection
 		roads[roadPointer]
 	),
-	/** TEMPORALILY
-	*@Info > get objects which are constrained to obj, for now with this long way (will be changed later)
-	*Research 
-		getclassinstances Link_Constraint target:$ astrackviewpick:on
-		
-		
-		Global gSho = attributes Sho attribID:#(0x313ba12a, 0x509e4080) ( --genClassID()
-			parameters params(
-				
-				splineController type:#maxObject
-				startPoint		type:#node
-				endPoint		type:#node
-			)
-		)
-		custAttributes.add $Box001 gSho #unique
-		$Dummy001.parent = $Box001
-		$Dummy002.parent = $Box001
-		$Box001.startPoint = $Box001.children[1]
-		$Box001.endPoint = $Box001.children[2]
-		co =  link_constraint()
-		$Line001.controller =co
-		co.addTarget $Box001 1 --at frame 1
-		$Box001.splineController = co --dependency loop!!!
-		$Box001.startPoint = $Line001 --dependency loop!!!
+	/** 
+	*@Usage > get constrained [ spline path ] from [ shortcut or road ]
 	*/
 	fn getShortcutSpline obj = ( 
 	
-		local spline_path
-		for o in objects where classOf o == SplineShape and classOf o.controller == Link_Constraint do (
-
-			if o.controller.getNumTargets() == 0 do continue 
-			local shortcut = o.controller.getNode 1
-			if shortcut.name == obj.name do (
-			
-				spline_path = o
-				exit
-			)
-		)
-		spline_path
+		local spline_path = for o in refs.dependentnodes obj where classOf o == SplineShape do exit with o
+		if isValidNode spline_path then spline_path else undefined
 	),
+	/** 
+	*@Usage > link constrain [ spline path ] to [ shortcut or road ]
+	*/
 	fn linkConstraint obj_target obj_source = (
 		
 		obj_source.controller = link_constraint()
 		obj_source.controller.addTarget obj_target 1 --at frame 1
-		/*
-		--print all keys' index, time and target
-		lc = link_constraint() --create a Link Constraint instance
-		or i = 1 to lc.getNumTargets() do format "%: Frame:% - Target:% \n" i (lc.getFrameNo i) (lc.getNode  i) 
-		*/
 	),
 	fn hideHelpPoints = (
 	
@@ -651,15 +617,12 @@ local spline_path = getShortcutSpline o
 				format "Skipped road [ % ] which is not linked to node.\n" o.name 
 				continue
 			)
-			--bug
+			--bug (do not use as parameter "_ge" only "ge")
 			-- trimRight "lh_07_hoboken_block_e_geometry" "_geometry"
 			-- lh_07_hoboken_block --missing _e
-			--input = "     lh_07_hoboken_block_e_geometry      "
-			--Regex.Replace(input, "(( )*|_geometry)( )*$", "");
-			--^( )*|(( )*|prefix_)|(( )*|_geometry)( )*$
 			--https://regex101.com/
 			--recreate this function TODO
-			local layer_name = trimRight parent_node.name "geometry" --lh_07_hoboken_block_c
+			local layer_name = trimRight parent_node.name "geometry" --lh_07_hoboken_block_c_
 			layer_name += "terrain"
 			format "Validate road [ % ]\n\tmoving to layer:%\n\tlinked to node:%\n" o.name layer_name parent_node.name
 			local layer = getLayerByName layer_name create:true

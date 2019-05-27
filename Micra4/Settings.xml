@@ -51,7 +51,7 @@
     <ActorX_Multi_Exporter val="0.01" />
     <Advanced_Edge_Loop val="1.05" />
     <ASCII_Multi_Exporter val="0.09" />
-    <Bridge_Spline val="0.01" />
+    <Bridge_Spline val="0.02" />
     <Box_Builder val="0.01" />
     <Character_Pose val="0.17" />
     <Character_Tool val="0.10" />

@@ -98,22 +98,14 @@ if classOf roGen_Joint != Helper do (
 --****************************************************************************************************--
 --		Road Attributes
 --****************************************************************************************************--
+--if classOf roGen_Road_Attributes != AttributeDef do (
 roGen_Road_Attributes = attributes roGen_Road_Attributes attribID:#(0x11aa99ff, 0x1234abcd)
 (
 	fn getNode = (refs.dependentnodes (custattributes.getowner this) firstonly:on)
-	fn linkConstraint obj_src obj_trgt = (
-		
-		if isValidNode obj_src and isValidNode  obj_trgt do (
-			
-			format "roGen_Road_Attributes > linkNode [ % ] to  [ % ]\n" obj_src obj_trgt
-			obj_src.controller = link_constraint()
-			obj_src.controller.addTarget obj_trgt 1 --at frame 1
-		)
-	)
 	local thisNode, handler
 	parameters main rollout:params 
 	(
-		node_list type:#nodeTab tabSizeVariable:true
+-- 		node_list type:#nodeTab tabSizeVariable:true
 		sp_start_len	type:#float animatable:true default:1 ui:sp_start_len
 		sp_end_len		type:#float animatable:true default:1 ui:sp_end_len
 		--points_list type:#point3tab tabSizeVariable:true
@@ -121,24 +113,39 @@ roGen_Road_Attributes = attributes roGen_Road_Attributes attribID:#(0x11aa99ff, 
 	
 -- 		on sp_start_len set val do format "set start len:%\n" val
 -- 		on sp_end_len set val do format "set end len:%\n" val
-		on node_list set obj index do (
-			
-			format "roGen_Road_Attributes > set nodeTab: % : %\n" obj index
-			linkConstraint obj thisNode
-		)
+-- 		on node_list set obj index do (format "roGen_Road_Attributes > set nodeTab: % : %\n" obj index)
 -- 		on node_list get val index do (format "get nodeTab: % : %\n" val index;val)	
-		on node_list tabChanged change tabIndex tabCount do this.params.updateList()
+-- 		on node_list tabChanged change tabIndex tabCount do this.params.updateList()
 	)
 
 	rollout params "Road Parameters:" (
 		
-		fn isUnique obj = findItem this.node_list obj == 0
-		---TODO recognize if two points and onespline added
-		fn filterRoadComponents obj = (isUnique obj and (classof obj == roGen_Joint or classof obj == SplineShape))
+		--Pick object Filters
+		fn isUnique obj = (
+			
+			local is_unique  = ( for itm in params.lbx.items where findString itm obj.name != undefined do exit with false )
+			is_unique == OK
+		)
+		fn isEmptySlot slot_index = (
+		
+			if slot_index > params.lbx.items.count do return false
+			findString params.lbx.items[slot_index] "None" != undefined
+		)
+		fn filterRoadComponents obj = (
+			
+			if not ( isUnique obj ) or not ( isEmptySlot this.params.lbx.selection ) do return false
+			local is_valid_type = case this.params.lbx.selection of (
+				
+				1: classOf obj == roGen_Joint --"start"
+				2: classOf obj == roGen_Joint --"end"
+				3: classOf obj == SplineShape --"path"
+			)
+			is_valid_type
+		)
 		
 		group "Components:"
 		(
-			listbox lbx1 "node_list" pos:[8,5] width:170 height:4 align:#center items:#("Start:None", "End:None", "Path:None")  --multiListBox
+			listbox lbx "node_list" pos:[8,5] width:155 height:4 align:#center items:#("Start:None", "End:None", "Path:None")  --multiListBox
 			pickbutton btn_add "Add" width:80 height:20  toolTip:"Add Component" filter:filterRoadComponents  align:#left across:2
 			button btn_rem "Remove" width:80 height:20  toolTip:"Remove Component" align:#left
 		)
@@ -147,7 +154,7 @@ roGen_Road_Attributes = attributes roGen_Road_Attributes attribID:#(0x11aa99ff, 
 			checkbox tndisplay "Show"  width:150 height:14 align:#left
 			spinner sp_start_len "Start length" width:150 height:16 range:[1,9999,1] type:#float align:#left
 			spinner sp_end_len "End   length" width:150 height:16 range:[1,9999,1] type:#float align:#left
-			button btn_auto_tangents "Auto" width:170  toolTip:"Automatic Tangents Adjustment"
+			button btn_auto_tangents "Auto" width:155  toolTip:"Automatic Tangents Adjustment"
 		)
 		fn updateLabel btn max_obj = (
 			
@@ -157,46 +164,58 @@ roGen_Road_Attributes = attributes roGen_Road_Attributes attribID:#(0x11aa99ff, 
 		fn updateList = (
 			
 			format "roGen_Road_Attributes > updateList...\n" 
-			local joints = #()
-			local path_obj
-			--filter nodes by type
-			for n in node_list do (
+			if not (isValidNode thisNode) do return false 
+			local lbx_items = #("Start:None", "End:None", "Path:None") --default items
+			for n in (refs.dependentnodes thisNode) do (
 				
-				if classOf n == roGen_Joint do append joints n 
-				if  classOf n == SplineShape do path_obj = n
+				case classOf n of (
+						
+					roGen_Joint: (
+						
+						if findString n.name "Start" != undefined do lbx_items[1] = "Start:" + n.name
+						if findString n.name "End" != undefined do lbx_items[2] = "End:" + n.name
+					)
+					SplineShape: (
+						
+						lbx_items[3] = "Path:" + n.name
+					)
+				)
 			)
-			--get names
-			local lbx_items = #()
-			lbx_items[1] = "Start:" + (if joints.count > 0 then joints[1].name else "None")
-			lbx_items[2] = "End :" + (if joints.count > 1 then joints[2].name else "None")
-			lbx_items[3] = "Path:" + (if path_obj != undefined then path_obj.name else "None")
-			--fill listbox
-			lbx1.items = lbx_items
---             lbx1.items = for n in node_list collect n.name
+			lbx.items = lbx_items
         )
+		fn linkConstraint obj_src obj_trgt = (
+		
+			if isValidNode obj_src and isValidNode  obj_trgt do (
+				
+				format "roGen_Road_Attributes > linkNode [ % ] to  [ % ]\n" obj_src obj_trgt
+				obj_src.controller = link_constraint()
+				obj_src.controller.addTarget obj_trgt 1 --at frame 1
+			)
+		)
 		fn removeComponent = (
 					
-			if lbx1.selection == 0 do return false
+			if not (isValidNode thisNode) do return false 
 			--get node name
-			local start_index = findString lbx1.selected ":"
-			local node_name = subString lbx1.selected (start_index+1) -1
+			local start_index = findString lbx.selected ":"
+			local node_name = subString lbx.selected (start_index+1) -1
 			--remove node callbacks	
 --TODO
 			--remove node from list
-			format "roGen_Road_Attributes > remove ( % ) node:%\n" lbx1.selection node_name
-			for i=1 to node_list.count where node_list[i].name == node_name do (
+			format "roGen_Road_Attributes > remove ( % ) node:%\n" lbx.selection node_name
+			local components =  refs.dependentnodes thisNode
+			for i=1 to components.count where components[i].name == node_name do (
 				
-				--format "remove node by index:%\n" node_list[i]	
-				deleteItem node_list i
+				components[i].transform.controller.deleteTarget 1
 				exit
 			)
 			updateList()	
 		)
 		fn addComponent obj = (
 			
-			append node_list obj	
+			linkConstraint obj thisNode
+			updateList()
 		)
-		on params open do updateList()
+		on params open do ( updateList() )
 		on btn_add picked obj	do ( addComponent obj 	)
 		on btn_rem pressed		do ( removeComponent() 	)
 		on btn_auto_tangents pressed do (
@@ -204,12 +223,77 @@ roGen_Road_Attributes = attributes roGen_Road_Attributes attribID:#(0x11aa99ff, 
 			format "roGen_Road_Attributes > Automatic Tangents Adjustment:%\n" (getNode())	
 		)
 	)
-	fn updateList = ( params.updateList() )
+	fn updateList = ( params.updateList() ) --public shortcut
+	fn isEmptySlot slot_index = ( params.isEmptySlot slot_index ) --public shortcut
+	fn addComponent obj = ( params.addComponent obj ) --public shortcut
+	fn drawLineBetweenTwoPoints pointA pointB = (
+		
+	  local ss = SplineShape pos:pointA
+	  addNewSpline ss
+	  addKnot ss 1 #corner #line PointA
+	  addKnot ss 1 #corner #line PointB
+	  updateShape ss
+	  ss
+	)
+	fn missingComponets = ( 
+		
+		(refs.dependentNodes thisNode).count == 0
+	) 
+	fn removeAttribute components:false = (
+		
+		format "roGen_Road_Attributes > removeAttribute this:% b:%\n" this thisNode	
+		with undo "Delete Road" on ( with redraw off (
+			
+			try (custAttributes.delete thisNode roGen_Road_Attributes baseObject:true) catch (format "roGen_Road_Attributes > Error: % n" (getCurrentException()))	
+
+				if components do (
+				
+					local children = for o in (refs.dependentnodes thisNode) where isValidNode o collect o
+					for o in children do o.transform.controller.deleteTarget 1 --break constraint link
+					if isValidNode 	thisNode do delete thisNode --delete road mesh and break all dependency links	
+					delete children
+			)
+		))
+		CompleteRedraw()
+	)
 	fn init = (
 
 		thisNode = getNode()
+		
 		format "roGen_Road_Attributes > init > Attribute applied to node: %\n" thisNode
 		--https://forums.cgsociety.org/t/when-object-deleted-delete-children-huh/1585895/88
+		if not ( missingComponets() ) do return false
+		--Generate Components
+		local jo_start = roGen_Joint pos:[thisNode.min.x, (thisNode.min.y + thisNode.max.y) / 2, thisNode.min.z] size:2 name:(uniqueName "Road_Joint_Start_")
+		local jo_end = roGen_Joint pos:[thisNode.max.x, (thisNode.min.y + thisNode.max.y) / 2, thisNode.min.z] size:2 name:(uniqueName "Road_Joint_End_")
+		local line_path = drawLineBetweenTwoPoints jo_start.pos jo_end.pos
+		jo_start.wirecolor = jo_end.wirecolor = line_path.wirecolor = green
+		thisNode.addComponent jo_start
+		thisNode.addComponent jo_end
+		thisNode.addComponent line_path
+		--Add Delete Callback
+		if handler != undefined do deleteChangeHandler handler
+		--gc()	
+		handler = when (refs.dependentNodes thisNode) deleted obj do (
+		
+			format "Collection was destroyed by deleting a component:%\n" obj
+			deleteChangeHandler handler
+			--gc()
+			
+			removeAttribute components:true
+			handler = undefined
+			/*--format "Deleting nodes:%\n" node_list
+			local nodes_for_delete = for n in this.node_list where isValidNode n collect n
+			this.node_list = #()	
+			delete nodes_for_delete
+			
+			local owner = custAttributes.getOwner this
+			format "Deleting owner:%\n" owner
+			local thisNode = refs.dependentNodes owner firstonly:on	
+			format "Deleting thisNode:%\n" thisNode
+			if isValidNode thisNode do delete thisNode
+			--*/
+		)
 	)
 	on clone orig do (
 	
@@ -227,37 +311,21 @@ roGen_Road_Attributes = attributes roGen_Road_Attributes attribID:#(0x11aa99ff, 
 --------------
 (
 	
-	fn drawLineBetweenTwoPoints pointA pointB = (
-		
-	  local ss = SplineShape pos:pointA
-	  addNewSpline ss
-	  addKnot ss 1 #corner #line PointA
-	  addKnot ss 1 #corner #line PointB
-	  updateShape ss
-	  ss
-	)
-	
 	fn addAttribute obj = (
 	
-		try (custAttributes.delete obj roGen_Road_Attributes baseObject:false) catch ()
-		custAttributes.add obj roGen_Road_Attributes --baseObject:false
+		try (obj.removeAttribute()) catch ()
+		custAttributes.add obj roGen_Road_Attributes baseObject:true
 		obj.init() --must after creation
 	)
-	
 	--ADD ATTRIBUTE
-	local obj = selection[1]	
-	addAttribute	obj
-
-	--FILL ATTRIBUTE OBJECTS	
-	local jo_start = roGen_Joint pos:[obj.min.x, (obj.min.y + obj.max.y) / 2, obj.min.z] size:2 name:(uniqueName "Road_Joint_Start")
-	local jo_end = roGen_Joint pos:[obj.max.x, (obj.min.y + obj.max.y) / 2, obj.min.z] size:2 name:(uniqueName "Road_Joint_End")
-	local line_path = drawLineBetweenTwoPoints jo_start.pos jo_end.pos
-	jo_start.wirecolor = jo_end.wirecolor = line_path.wirecolor = green
-	obj.node_list[1] = jo_start
-	obj.node_list[2] = jo_end
-	obj.node_list[3] = line_path
-	obj.updateList()
+	addAttribute	selection[1]
 )
+
+
+
+
+
+
 
 			--when select $ changes id:#roGen_Joint_Callback meshObj do format "changed obj:%\n" meshObj.name	
 			/*when obj deleted id:#roGen_Joint_Callback obj  do ( 
@@ -265,8 +333,6 @@ roGen_Road_Attributes = attributes roGen_Road_Attributes attribID:#(0x11aa99ff, 
 				format "obj deleted:%\n" obj	
 				deleteAllChangeHandlers id:#roGen_Joint_Callback
 			)*/
-
-
 /*
 
 			obj.controller = link_constraint()
