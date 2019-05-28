@@ -8,13 +8,14 @@ rollout mcSplineBridgeDialog "Spline Bridge:" width:192 height:240
 	button 'btn_generate' "Generate" pos:[4,4] width:184 height:36 align:#left
 	pickbutton 'btn_pickA' "None..." pos:[60,68] width:124 height:24 align:#left
 	GroupBox 'grp2' "Edit:" pos:[4,48] width:184 height:184 align:#left
-	pickbutton 'btn_rebuild' "Rebuild" pos:[8,172] width:176 height:24 align:#left
+	button 'btn_rebuild' "Rebuild" pos:[8,172] width:176 height:24 align:#left
 	pickbutton 'btn_pickB' "None..." pos:[60,96] width:124 height:24 align:#left
 	pickbutton 'btn_pickS' "None..." pos:[60,124] width:124 height:24 align:#left
 	label 'lbl2' "Point A:" pos:[12,72] width:48 height:16 align:#left
 	label 'lbl3' "Point B:" pos:[12,100] width:48 height:16 align:#left
 	label 'lbl4' "Spline:" pos:[12,128] width:48 height:16 align:#left
 	checkbox 'chk_debug' "Debug" pos:[16,204] width:164 height:16 align:#left
+	local multi = 0.55
 	local test_point_c
 	local test_point_t1
 	local test_point_t2
@@ -87,8 +88,8 @@ rollout mcSplineBridgeDialog "Spline Bridge:" width:192 height:240
 		local p2 = objB.pos
 		local p3 = getThirdPointCoordinates p1 p2 up:up
 
-		local v1 = (p3 - p1) * 0.5
-		local v2 = (p3 - p2) * 0.5
+		local v1 = (p3 - p1) * multi
+		local v2 = (p3 - p2) * multi
 		local t1 = p1 + v1
 		local t2 = p2 + v2
 		
@@ -120,8 +121,8 @@ rollout mcSplineBridgeDialog "Spline Bridge:" width:192 height:240
 		local p2 = points_arr[2].pos
 		local p3 = getThirdPointCoordinates p1 p2 up:(way == 1)
 
-		local v1 = (p3 - p1) * 0.5
-		local v2 = (p3 - p2) * 0.5
+		local v1 = (p3 - p1) * multi
+		local v2 = (p3 - p2) * multi
 		local t1 = p1 + v1
 		local t2 = p2 + v2
 				
@@ -164,7 +165,7 @@ rollout mcSplineBridgeDialog "Spline Bridge:" width:192 height:240
 			createSplineBridge obj poly
 		)
 	)
-	fn rebuildShapeBridge = ( --create new bridge and delete old one
+	fn rebuildShapeBridge way = ( --create new bridge and delete old one
 		
 		if classOf arc_shape !=  SplineShape or points_arr.count != 2 do return false
 			
@@ -172,11 +173,13 @@ rollout mcSplineBridgeDialog "Spline Bridge:" width:192 height:240
 		local p2 = points_arr[2].pos
 		local p3 = getThirdPointCoordinates p1 p2 up:(way == 1)
 
-		local v1 = (p3 - p1) * 0.5
-		local v2 = (p3 - p2) * 0.5
+		local v1 = (p3 - p1) * multi
+		local v2 = (p3 - p2) * multi
 		local t1 = p1 + v1
 		local t2 = p2 + v2
 				
+		format "rebuildShapeBridge >  p1:% p2:% p3:%\n" p1 p2 p3
+		
 		if debug do (
 
 			test_point_t1.pos=t1
@@ -184,16 +187,16 @@ rollout mcSplineBridgeDialog "Spline Bridge:" width:192 height:240
 			test_point_c.pos =p3
 		)
 		
-		addNewSpline arc_shape
-		addKnot arc_shape 2 #corner #curve p1
-		addKnot arc_shape 2 #corner #curve p2
-		setKnotType arc_shape 2 1 #bezierCorner
-		setKnotType arc_shape 2 2 #bezierCorner
-		setOutVec arc_shape 2 1 (t1)
-		setInVec arc_shape 2 2 (t2)
-		--delete old spline
+		--delete old vertices
 		deleteKnot arc_shape 1 2
 		deleteKnot arc_shape 1 1
+		--create new vertices
+		addKnot arc_shape 1 #corner #curve p1
+		addKnot arc_shape 1 #corner #curve p2
+		setKnotType arc_shape 1 1 #bezierCorner
+		setKnotType arc_shape 1 2 #bezierCorner
+		setOutVec arc_shape 1 1 (t1)
+		setInVec arc_shape 1 2 (t2)
 		updateShape arc_shape
 		arc_shape.adaptive = true
 	)
@@ -247,6 +250,6 @@ rollout mcSplineBridgeDialog "Spline Bridge:" width:192 height:240
 			arc_shape = obj
 		)
 	)	
-	on btn_rebuild picked obj do (rebuildShapeBridge())
+	on btn_rebuild pressed do (rebuildShapeBridge rdo_updown.state)
 )
 CreateDialog mcSplineBridgeDialog
