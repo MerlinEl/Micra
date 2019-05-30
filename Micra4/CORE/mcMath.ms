@@ -279,3 +279,42 @@ struct MICRA_MATH (
 )
 --create instance
 Global mcMath = mcStructMan.instanceStructure MICRA_MATH "mcMath"
+
+
+/*
+--
+--@Usage > Here is the hermite that I use for a multiplier of values to generate ease in and out setups.
+	-- Tangent 1
+	-- Tangent 2
+	-- Input value from 0 to 1
+--
+fn hermite t1:3.0 t2:2.0 v:0.0 = (
+
+	h1 = -2*v^t1 + 3*v^t2
+)
+---------------------------------------------------------------------------------
+
+t = 0.5 -- our value in time between 0 and 1 
+p = #(10,20,30,40) -- our array or knot vectors and tangents
+n = 3 -- our nth degree generalizarion
+fn factorial n = (
+
+	if n <=0 then 1 else n * factorial(n-1)
+)
+e = 0
+for i = 0 to n do (
+	bc = (factorial n)/((factorial (n-i)) * (factorial i))
+	e = e + p[(i+1)]*(bc*t^i*(1-t)^(n-i))
+)
+
+
+---------------------------------------------------------------------------------
+
+fn getBezInterp p1 v1 v2 p2 val = (
+
+  local a = val
+  local b = 1 - val
+ ( p1*b^3 + 3*v1*b^2*a + 3*v2*b*a^2 + p2*a^3  )
+)
+getBezInterp  $point01.pos $point02.pos $point03.pos $point04.pos 0.3333
+*/

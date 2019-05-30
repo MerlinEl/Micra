@@ -609,6 +609,17 @@ Icon:#("SubObjectIcons",5)
 	On IsEnabled Return (classOf mcAction == StructDef)
 	On Execute do  (mcAction.setSubobjectLevel 5)
 ) 
+
+MacroScript MC_Poly_Bridge
+ButtonText:"CreateBridge"
+Category:"Micra" 
+Tooltip:"Create bridge between selection"
+(
+	On IsEnabled Return (selection.count == 1 and classOf selection[1] == Editable_Poly)
+	On Execute do  (selection[1].Bridge ())
+) 
+
+
 /*
 C:\Documents and Settings\rbaca\Local Settings\Application Data\Autodesk\3dsmax\9 - 32bit\enu\UI\usermacros
 

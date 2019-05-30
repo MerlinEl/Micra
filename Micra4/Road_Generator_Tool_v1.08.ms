@@ -1129,20 +1129,29 @@ fn AppendPrefabsToArrays &roads &sidewalks &corners &parking_lanes =
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------
   fn InitFirstOpenRollout &roads &sidewalks &corners &parking_lanes = 
   (
-    layer = LayerManager.getLayerFromName C_LAYER_NAME
+    local layer_components	= LayerManager.getLayerFromName C_LAYER_NAME
+    local layer_helpers		= LayerManager.getLayerFromName H_LAYER_NAME
 --     print ("Layer = "+(layer as string))
-    if layer == undefined then (
+    if layer_components == undefined then (
 --       print ("Merging "+C_COMPONENTS_PATH)
 		
-      mergemaxfile C_COMPONENTS_PATH
-      
-      try (
-		CheckPrefabsOfRoads()				-- check if prefabs are accessible
-      ) catch (
-        destroyDialog CrossroadGenerator
-      )
+		mergemaxfile C_COMPONENTS_PATH
+
+		try (
+
+			layer_components	= LayerManager.getLayerFromName C_LAYER_NAME
+			layer_helpers 		= LayerManager.getLayerFromName H_LAYER_NAME
+			CheckPrefabsOfRoads()	-- check if prefabs are accessible
+
+		) catch (
+
+			destroyDialog CrossroadGenerator
+		)
     )
-    
+	
+	if layer_components == undefined do layer_components.isHidden	= true
+	if layer_helpers 	== undefined do layer_helpers.isHidden 		= true
+	
 	AppendPrefabsToArrays &roads &sidewalks &corners &parking_lanes	
   )
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------

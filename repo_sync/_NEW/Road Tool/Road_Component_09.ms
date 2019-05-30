@@ -22,6 +22,7 @@ if classOf roGen_Joint != Helper do (
 			sidewalkR type:#boolean animateable:false default:false ui:chk_sidewalk_r
 			is_linked type:#boolean animateable:false default:false
 			tangent_pos type:#point3 animateable:false default:[0,0,0]
+			parent_node type:#maxObject
 		)
 		rollout params "Parameters" (
 			
@@ -61,13 +62,16 @@ if classOf roGen_Joint != Helper do (
 			meshObj.mesh
 		)
 		--on create do (format "Dummy was created:% \n" this) --call before getDisplayMesh
-		on attachedToNode obj do ( --when node is assinged in to attribute
+		on attachedToNode obj do ( --when node is created
 			
-			format "roGen_Joint > attachedToNode > node:% this:%\n" obj.name this
+-- 			if classOf obj.controller == Link_Constraint do (parent_node = obj.controller.getNode 1)
+			format "roGen_Joint > attachedToNode > node:%\n" obj
 		)
-		on detachedFromNode obj do ( --when node is deleted or detached from attribute
+		on detachedFromNode obj do ( --when node is deleted
 			
-			format "roGen_Joint > detachedFromNode > node:% this:%\n" obj this
+			format "Deleting master node:% is valid:% class:%\n" parent_node (isValidNode parent_node) (classOf parent_node)
+			if isValidNode parent_node do delete parent_node --when joint dleted delete also master obj
+			format "roGen_Joint > detachedFromNode > node:% from:%\n" obj parent_node
 		)
 		on deleted do (
 			
@@ -112,6 +116,7 @@ roGen_Road_Attributes = attributes roGen_Road_Attributes attribID:#(0x11aa99ff, 
 -- 		node_list type:#nodeTab tabSizeVariable:true
 		sp_start_len	type:#float animatable:true default:1 ui:sp_start_len
 		sp_end_len		type:#float animatable:true default:1 ui:sp_end_len
+		components_tab type:#MaxObjectTab tabSize:0 tabSizeVariable:true
 		--points_list type:#point3tab tabSizeVariable:true
 		--destroy_self type:#boolTab default:false
 	
@@ -160,6 +165,10 @@ roGen_Road_Attributes = attributes roGen_Road_Attributes attribID:#(0x11aa99ff, 
 			spinner sp_end_len "End   length" width:150 height:16 range:[1,9999,1] type:#float align:#left
 			button btn_auto_tangents "Auto" width:155  toolTip:"Automatic Tangents Adjustment"
 		)
+		group "Debug:"
+		(
+			button btn_test_1 "Print Components" width:140 height:20 align:#center
+		)
 		fn updateLabel btn max_obj = (
 			
 			local lbl = if (isValidNode max_obj.node) then max_obj.node.name else "None"
@@ -198,26 +207,32 @@ roGen_Road_Attributes = attributes roGen_Road_Attributes attribID:#(0x11aa99ff, 
 		)
 		fn removeComponent = (
 					
-			if not (isValidNode thisNode) do return false 
 			--get node name
 			local start_index = findString lbx.selected ":"
 			local node_name = subString lbx.selected (start_index+1) -1
 			--remove node self  callbacks	
-			--remove node from this callback
 --TODO
-			--remove node from list
+			--remove node from list and components_tab
 			format "roGen_Road_Attributes > removeComponent >  ( % ) node:%\n" lbx.selection node_name
-			local components =  refs.dependentnodes thisNode
-			for i=1 to components.count where components[i].name == node_name do (
+			for i=1 to components_tab.count do (
 				
-				components[i].transform.controller.deleteTarget 1
-				exit
-			)
+				local obj = components_tab[i].node
+				if obj.name ==  node_name do (
+				
+					obj.transform.controller.deleteTarget 1 --remove constraint
+					obj.parent_node = undefined
+					deleteItem components_tab i
+					exit
+				)
+			)	
 			updateList()	
 		)
 		fn addComponent obj = (
 			
+			if hasProperty obj "parent_node" do obj.parent_node = thisNode
 			linkConstraint obj thisNode
+			format "roGen_Road_Attributes > addComponent node:% to:%\n" obj components_tab
+			append components_tab (nodeTransformMonitor node:obj forwardTransformChangeMsgs:false)
 			updateList()
 		)
 		on params open do ( updateList() )
@@ -226,6 +241,11 @@ roGen_Road_Attributes = attributes roGen_Road_Attributes attribID:#(0x11aa99ff, 
 		on btn_auto_tangents pressed do (
 			
 			format "roGen_Road_Attributes > Automatic Tangents Adjustment:%\n" (getNode())	
+		)
+		--debug
+		on btn_test_1 pressed do (
+				
+			for n in components_tab do format "component:%\n" n.node 
 		)
 	)
 	fn updateList = ( params.updateList() ) --public shortcut
@@ -247,6 +267,7 @@ roGen_Road_Attributes = attributes roGen_Road_Attributes attribID:#(0x11aa99ff, 
 	
 	fn unregisterCallbacks = (
 		
+		format "roGen_Road_Attributes > unregisterCallbacks..."
 		deleteChangeHandler handler
 		handler = undefined
 		gc()		
@@ -270,13 +291,18 @@ roGen_Road_Attributes = attributes roGen_Road_Attributes attribID:#(0x11aa99ff, 
 	)
 	fn selfDestroy = (
 		
-		if isValidNode 	thisNode do delete thisNode --delete road geometry and break all constraint links 	
-		format "self destroy root_node:%\n" thisNode
+-- 		if isValidNode 	thisNode do delete thisNode --delete road geometry and break all constraint links 	
+		format "roGen_Road_Attributes > selfDestroy > nodes:%\n" components_tab
+		local children = for o in components_tab where isValidNode o.node collect o.node	
+		delete children
 	)
 	fn registerCallbacks = (
 		
+			format "roGen_Road_Attributes > registerCallbacks..."
+-- 			components_tab = #() -- resets the #maxobjecttab array
 			if handler != undefined do unregisterCallbacks()
-			handler = when (refs.dependentNodes thisNode) deleted obj do (
+			--handler = when (refs.dependentNodes thisNode) deleted obj do (
+			handler = when thisNode deleted obj do (
 		
 			format "Collection was destroyed by deleting a component:%\n" obj
 			unregisterCallbacks()
@@ -295,9 +321,9 @@ roGen_Road_Attributes = attributes roGen_Road_Attributes attribID:#(0x11aa99ff, 
 		local jo_end = roGen_Joint pos:[thisNode.max.x, (thisNode.min.y + thisNode.max.y) / 2, thisNode.min.z] size:2 name:(uniqueName "Road_Joint_End_")
 		local line_path = drawLineBetweenTwoPoints jo_start.pos jo_end.pos
 		jo_start.wirecolor = jo_end.wirecolor = line_path.wirecolor = green
-		thisNode.addComponent jo_start
-		thisNode.addComponent jo_end
-		thisNode.addComponent line_path
+		addComponent jo_start
+		addComponent jo_end
+		addComponent line_path
 		--AddCallbacks
 		registerCallbacks()	
 	)
@@ -316,9 +342,9 @@ roGen_Road_Attributes = attributes roGen_Road_Attributes attribID:#(0x11aa99ff, 
 --APPLY
 --------------
 (
-	
 	fn addAttribute obj = (
 	
+		if obj == undefined do return false
 		try (obj.removeAttribute()) catch ()
 		custAttributes.add obj roGen_Road_Attributes baseObject:true
 		obj.init() --must after creation

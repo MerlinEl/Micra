@@ -19,6 +19,7 @@ lh_02_little_italy_block_h_roads_coll
 	local typed_layer_name	= default_layer_name
 	local typed_node_name	= default_node_name
 	local collision_wirecolor = color 176 26 26
+	local materal_id_offset = 1000 --ofset all mat ID to prevent replacement
 	fn matIdToSemanticId id = (
 		
 		case id of (
@@ -39,16 +40,17 @@ lh_02_little_italy_block_h_roads_coll
 			24: 50	--asfalt road / usable for parking spots
 			26: 53  --salieris backyard ground
 			27:	2 	--universal concrete 1
+			28:	2 	--universal concrete tiled 1
 			default: 1
 		)
 	)
 	fn offsetMaterialsIDs obj offset:1000 = ( --incerase all materials id by 1000
 	
 		local all_faces = #{1..(polyop.getNumFaces obj)} 
-		for face_index in faces_arr do (
+		for f in all_faces do (
 			
-			local mat_id = polyOp.getFaceMatID obj face_index
-			polyOp.setFaceMatID obj face_index (mat_id+offset)
+			local mat_id = polyOp.getFaceMatID obj f
+			polyOp.setFaceMatID obj f (mat_id+offset)
 		)
 	)
 	fn getObjectFaces obj = (
@@ -292,9 +294,8 @@ lh_02_little_italy_block_h_roads_coll
 			o_instance.parent = export_coll_node --link to export collision node
 			collision_layer.addNode o_instance --add instance to collision layer
 			local rail_faces = #{}
---for whole object offset ids by 1000 to avoid chaos (need test)
-local materal_id_offset = 1000
-offsetMaterialsIDs o_instance offset:materal_id_offset
+			--for whole object offset ids by 1000 to avoid replacment
+			offsetMaterialsIDs o_instance offset:materal_id_offset
 			for f=1 to o_instance.numFaces do ( --replace ids with semantic material
 				
 				local mat_id = polyop.getFaceMatID o_instance f

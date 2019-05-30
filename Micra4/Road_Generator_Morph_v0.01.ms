@@ -10,7 +10,7 @@ fn getEdgeLength obj edge_index = (
 )
 fn getShortestEdge obj edges_arr = (
 
-	local shortest_edge_index = 1
+	local shortest_edge_index = (edges_arr as array)[1]
 	local shortest_edge_len = getEdgeLength obj shortest_edge_index
 	
 	for e_index in edges_arr do (
@@ -26,7 +26,7 @@ fn getShortestEdge obj edges_arr = (
 )
 fn getLongestEdge obj edges_arr = (
 
-	local longest_edge_index = 1
+	local longest_edge_index = (edges_arr as array)[1]
 	local longest_edge_len = getEdgeLength obj longest_edge_index
 	
 	for e_index in edges_arr do (
@@ -74,19 +74,31 @@ fn getSimilarEdges obj edges_arr edge_index offset:0.1 = (
 	)
 	similar_edges
 )
+fn replaceMatID obj src_id trgt_id = (
+	
+	local all_faces = #{1..(polyop.getNumFaces obj)}
+	for f in all_faces where polyOp.getFaceMatID obj f == src_id do polyOp.setFaceMatID obj f trgt_id
+)
 
 
 obj = $
-
+elevation_asphalt = 10
+elevation_center = 16
 asphalt_id = 5
+pavement_id = 8
 undo "Morph Road" on (
 	
+	convertToPoly obj
+	
+	max modify mode
+	subObjectLevel = 4
 	--get shortest edge
 	all_edges = #{1..(polyop.getNumEdges obj)}
 	shortest_edge_index = getShortestEdge obj all_edges
 	--select all edges with shortest edge length +- offset
 	tiny_edges = getSimilarEdges obj all_edges shortest_edge_index offset:0.5
 	polyOp.setEdgeSelection obj tiny_edges
+	subObjectLevel = 2
 	--select loop +- 1
 	obj.setLoopShift -1 false true
 	obj.setLoopShift 1 false true
@@ -94,7 +106,7 @@ undo "Morph Road" on (
 	obj.SelectEdgeRing()
 	--collapse edges
 	obj.collapse #Edge
-	--find first pavement face
+	--find two pavement faces
 	all_faces = #{1..(polyop.getNumFaces obj)} 
 	big_pavement_face_a = getBigestFaceById obj all_faces faces_id:asphalt_id
 	--get both pavement faces
@@ -102,13 +114,24 @@ undo "Morph Road" on (
 	polyOp.setEdgeSelection obj longest_edge
 	obj.SelectEdgeRing()
 	edges_faces = polyOp.getFacesUsingEdge obj (polyOp.getEdgeSelection obj)
-	two_pavement_faces = getFacesById obj edges_faces asphalt_id
-	polyOp.setFaceSelection obj two_pavement_faces
+	two_asphalt_faces = getFacesById obj edges_faces asphalt_id
+	polyOp.setFaceSelection obj two_asphalt_faces
 	--get shortest edges from faces
-	shortest_edge_1 = getShortestEdge obj (polyOp.getEdgesUsingFace obj two_pavement_faces[1])
-	shortest_edge_2 = getShortestEdge obj (polyOp.getEdgesUsingFace obj two_pavement_faces[2])
+	--FIX IT
+	/*
+-- 	alternative
+	shortest_edge_1 = getShortestEdge obj (polyOp.getEdgesUsingFace obj 5
+	shortest_edge_2 = getShortestEdge obj (polyOp.getEdgesUsingFace obj 4
+	
+	*/
+	
+	
+	shortest_edge_1 = getShortestEdge obj (polyOp.getEdgesUsingFace obj two_asphalt_faces[1])
+	shortest_edge_2 = getShortestEdge obj (polyOp.getEdgesUsingFace obj two_asphalt_faces[2])
 	
 	--for both edges make ring and split it at 70%
+	obj.connectEdgeSegments = 1
+	obj.connectEdgePinch = 0
 	--first
 	polyOp.setEdgeSelection obj shortest_edge_1
 	obj.SelectEdgeRing()
@@ -123,9 +146,46 @@ undo "Morph Road" on (
 	 --move the asphalt edge little bit up
 	 all_faces = #{1..(polyop.getNumFaces obj)} 
 	 asphalt_faces = getFacesById obj all_faces asphalt_id
+	subObjectLevel = 4
 	polyOp.setFaceSelection obj asphalt_faces
 	obj.EditablePoly.ShrinkSelection ()
-	move obj.selectedFaces [0,0,5]
+	move obj.selectedFaces [0,0,elevation_asphalt]
+	
+	--move center edge up
+	subobjectLevel = 2
+	obj.ConvertSelection #Face #Edge
+	obj.ShrinkSelection ()
+	move obj.selectedEdges [0,0,elevation_center]
+	
+	--slice sides 3 -18 -96
+	
+	--end 
+	subobjectLevel = 0
+	replaceMatID obj 8 11
 )
+
+/*
+$.connectEdgeSegments = 3
+$.connectEdgePinch = 18
+$.connectEdgeSlide = -96
+$.EditablePoly.ConnectEdges ()
+
+
+
+$.connectEdgeSegments = 3
+$.connectEdgePinch = -18
+$.connectEdgeSlide = 96
+$.EditablePoly.ConnectEdges ()
+
+$.connectEdgeSegments = 3
+$.connectEdgePinch = -18
+$.connectEdgeSlide = -96
+$.EditablePoly.ConnectEdges ()
+
+
+
+modPanel.addModToSelection (VertexPaint ()) ui:on
+*/
+
 completeRedraw()
 

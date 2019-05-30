@@ -56,6 +56,35 @@ struct ROAD_GENERATOR_STRUCTURE	(
 		if obj == undefined do return false
 		hasCustomAttribute obj #ShortcutCa
 	),
+	/** 
+	*@Usage > get constrained object by type [ spline path ] from [ shortcut or road ]
+	*@Example	
+		roGenStruct.getConstraintObject obj SplineShape
+	*/
+	fn getConstraintObject obj_src node_type = (
+	
+		local obj = for o in refs.dependentnodes obj_src where classOf o == node_type do exit with o
+		if isValidNode obj then obj else undefined
+	),
+	fn isValidShortcut obj = (
+	
+		local sPoint	= obj.children[1]
+		local ePoint	= obj.children[2]
+		local rSpline	= getConstraintObject obj SplineShape
+		if rSpline == undefined or sPoint == undefined or ePoint == undefined do (
+		
+			format "Error: Unable to clone Shortcut: Missing components A.\n"
+			return false
+		)
+		local tn1		= sPoint.children[1]
+		local tn2		= ePoint.children[1]
+		if tn1 == undefined or tn2 == undefined do (
+		
+			format "Error: Unable to clone Shortcut: Missing components B.\n"
+			return false
+		)
+		true
+	),
 	fn getRestOfKids kids = (
 	
 		local joiningKids = #() -- hidden points from tangents
@@ -277,12 +306,6 @@ struct ROAD_GENERATOR_STRUCTURE	(
 		--return result
 		return hit_array
 	),
-	fn getConstraintObject obj_target node_type = (
-	
-		local all_dependents = refs.dependents obj_target
-		local filter_objects = for ref in all_dependents where (superClassOf ref == node_type) collect ( ref )
-		filter_objects[1]
-	),
 	fn getRoadComponents obj = (
 	
 		if not (isRoad obj) do return #()
@@ -403,14 +426,6 @@ struct ROAD_GENERATOR_STRUCTURE	(
 	
 		roadPointer = dd_selection
 		roads[roadPointer]
-	),
-	/** 
-	*@Usage > get constrained [ spline path ] from [ shortcut or road ]
-	*/
-	fn getShortcutSpline obj = ( 
-	
-		local spline_path = for o in refs.dependentnodes obj where classOf o == SplineShape do exit with o
-		if isValidNode spline_path then spline_path else undefined
 	),
 	/** 
 	*@Usage > link constrain [ spline path ] to [ shortcut or road ]
@@ -566,7 +581,7 @@ struct ROAD_GENERATOR_STRUCTURE	(
 			) else if isShortcut o do (
 				
 				local joints = o.children
-local spline_path = getShortcutSpline o
+				local spline_path = getConstraintObject o SplineShape
 				if spline_path == undefined then (
 				
 					format "Error > Missing spline in shortcut_road:[ % ]\n" o.name
@@ -888,31 +903,42 @@ local spline_path = getShortcutSpline o
 	  ss
 	),
 	fn copyUniqueShortcut obj hidden_tn:false = (
+	
+		if not (isShortcut obj) or not (isValidShortcut obj) do return false
+		
+		--collect source components
+		local src_spline = getConstraintObject obj SplineShape
+		local src_sPoint = obj.children[1]
+		local src_ePoint = obj.children[2]
+		local src_tn1 = src_sPoint.children[1]
+		local src_tn2 = src_ePoint.children[1]
 
-		if not (isShortcut obj) do return false
+		--format "copyUniqueShortcut >\n\tspline:%\n\tsPoint:%\n\tePoint:%\n\ttn1:%\n\ttn2:%\n" src_spline src_sPoint src_ePoint src_tn1 src_tn2
 		
-		local new_obj = copy obj
-local src_spline = getConstraintObject obj Shape
-		new_obj.wirecolor = obj.wirecolor
+		--clone components
+		local new_obj	= copy obj
+		local sPoint	= copy src_sPoint
+		local ePoint	= copy src_ePoint
+		local rSpline	= copy src_spline
+		local tn1		= copy src_tn1
+		local tn2		= copy src_tn2
 		
-		local sPoint = copy obj.children[1]
-		local ePoint = copy obj.children[2]
-		local rSpline = copy src_spline
-		local tn1 = copy obj.children[1].children[1]
-		local tn2 = copy obj.children[2].children[1]
+		--setup clones
+		new_obj.wirecolor	= obj.wirecolor
+		sPoint.wirecolor	= src_sPoint.wirecolor
+		ePoint.wirecolor	= src_ePoint.wirecolor
+		rSpline.wirecolor	= src_spline.wirecolor
+		tn1.wirecolor		= src_tn1.wirecolor
+		tn2.wirecolor		= src_tn2.wirecolor
 		
-		sPoint.wirecolor = obj.children[1].wirecolor
-		ePoint.wirecolor = obj.children[2].wirecolor
-		rSpline.wirecolor = src_spline.wirecolor
-		tn1.wirecolor = obj.children[1].children[1].wirecolor
-		tn2.wirecolor = obj.children[2].children[1].wirecolor
-		
+		--link clones
 		sPoint.parent = new_obj
 		ePoint.parent = new_obj
-		-- rSpline.parent = new_obj
-linkConstraint new_obj rSpline
+		linkConstraint new_obj rSpline
+		rSpline.pos = src_spline.pos --restore pos
 		tn1.parent = sPoint
-		tn1.parent = ePoint
+		tn2.parent = ePoint
+		
 		if hidden_tn do hide #(tn1, tn2)
 		select new_obj
 	),
@@ -1160,31 +1186,38 @@ linkConstraint new_obj rSpline
 		local road = selection[1]
 		if isRoad road do return false 		--not applicable for Road
 		if isCrossRoad road do return false	--not applicable for CrossRoad
+		--Disable all Road Tool callbacks at Begin
+		All_CALLBACKS_ENABLED = false
 		--Define Variables
 		local road_thickness = 200
 		local min_tangent_dist = 50
 		local max_tangent_dist = 1000
 		local pts = #(), sp = undefined, finalPos = [0,0,0], dp1, dp2, tp1, tp2 -- dp > dummy(point) tp > tangent(point)
 		--Check if Shortcut or geometry is selected
-		if isShortcut road then ( --recreate current road
-		
-			if (road.children.count != 2) do ( 
+		if isShortcut road then ( --rebuild current shortcut
+			
+			if not (isValidShortcut road) do (
 				
 				format "roGenStruct > generateRoadShortcut > Invalid components, use Road Anatomy to see issues\n" road.name
+				All_CALLBACKS_ENABLED = true
 				return false
 			)
 			pts = #(road.children[1], road.children[2])
 			moveTangetPoints pts[1] pts[2] min_tangent_dist --move tangent points close
 			finalPos = road.pos --keep road position
-			--delete road.children[3] -- delete old spline
-local old_path = getShortcutSpline road
-if old_path != undefined do delete old_path
-			delete road -- delete old road
+			local old_path = getConstraintObject road SplineShape
+			delete road -- delete old road first to prevent crash (after deleting road, constraints will be also removed)
+			if old_path != undefined do delete old_path
 			
-		) else if subobjectlevel == 4 do ( --face(s) is selected (build at place)
+		) else if subobjectlevel == 4 then ( --face(s) is selected (build at place)
 		
 			finalPos = roGenStruct.getSelectedFacesCenter road --try to get selected faces position
 			subobjectlevel = 0 
+			max select none
+			
+		) else if selection.count == 1 do ( --dummy or other object are selected
+		
+			finalPos = selection[1].pos
 			max select none
 		)
 		--create new controll points
@@ -1192,11 +1225,9 @@ if old_path != undefined do delete old_path
 		--reverse tangents to inner
 		swapPoints pts[1] pts[2]
 		if not (isShortcut road) do moveTangetPoints pts[1] pts[2] min_tangent_dist --move tangent points close
-		SLECT_OBJECT_CALLBACK_ENABLED = false --disable callback before selection
 		select pts
 		--generate road geometry
 		dialog.btn_generate.pressed() --generate road
-		SLECT_OBJECT_CALLBACK_ENABLED = true --enable callback
 		--collect components
 		road = selection[1]
 		sp  = road.roadSpline
@@ -1210,8 +1241,10 @@ if old_path != undefined do delete old_path
 		--remove custom attribute
 		removeCustomAttribute road #RoadGenCa
 		setShortcutCA road sp dp1 dp2 dialog dialog.controlsArr
-linkConstraint road sp
+		linkConstraint road sp
 		road.pos = finalPos
+		--Reenable all Road Tool callbacks at End
+		All_CALLBACKS_ENABLED = true
 	),	
 	fn generateRoad dialog roads specs = (
 	
