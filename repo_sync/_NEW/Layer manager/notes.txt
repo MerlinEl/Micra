@@ -1,0 +1,227 @@
+
+------------- NEW FEATURES / FIXES beta 01.60 ---------------
+
+- fixed a bug. adding a layer to world layer now removes it from the layer it was previously on
+
+- added feature: select objects on layer.  opens selectin dialog with only object contained on the layer.
+
+------------- NEW FEATURES / FIXES beta 01.50 ---------------
+
+- fixed a bug in merge layer
+- fixed a bug that was causing light color to go black when added to a layer...
+
+NOTE: Because of this bug I have changed some internal structures of layer manager that
+will cause problems with old files.  The problems will exist with Alternate Materials...
+ie turning them on/off, editing them, etc.  The only way to aleviate this problem is to 
+destory the layer manager data and rebuild the layers. Do the following:
+1) More Options --> Manage Layers --> Create Selection Sets
+2) More Options --> Destory Layer Manager Data
+3) More Options --> Manage Layers --> Aquire Selection Sets
+This will rebuild your layers and place appropriate objects on them.
+You will loose any layer data ( alt material, render settings, etc.)
+
+ALSO NOTE: If a file has a layer which is in alternate material mode, I would suggest
+returning those layers to normal mode prior to upgrading.  However if it is too late, 
+each of the alternate materials for the objects store the old material as the second material
+in a blend...So you can retrieve them with some work.
+I appologize for the inconvience.
+
+
+------------- NEW FEATURES / FIXES beta 01.40 ---------------
+
+- fixed the "gather objects" method...again.
+
+- fixed some of the delete group ui re-draw problems
+
+- added Aquire selection set and create selection sets.
+
+- made a fix to alt material assignment that was causing problems if your file 
+crashed.
+
+- fixed a problem with a conflict between alt materaial "recieve shadows" and 
+layer propererty "recieve shadows"
+
+- fixed the world layer menu
+
+------------- NEW FEATURES / FIXES 01.30 ---------------
+
+- extended menus on groups updated with more appropriate options.
+
+- fixed some layer properties "tab" problems
+
+- fixed the bug in autoassignment that permitted it from being disabled.
+
+- fixed the "gather objects" method.
+
+- added: shift click on extended menu selects the layer
+
+- added: select layer to right click layer menu
+
+- added: inital test of drag and drop features in objects list.
+	note: after dragging, the view doesn't update, groups are not supported and it's real simple right now.
+
+- fixed destroy lm data..now deletes change handler too...ooops.
+
+- modified the when statement that enabled autoassignment.  If you're autoassigning
+objects to a hidden layer, the layer is now unhidden.  
+
+- found a bug that was destroying LM data...but a restriction in max prevents me from fixing:
+DETAILS: If you have a file that contains LM data and it is opened on a machine that doesn't
+have the LayerManger Structures file in the stdplugs/stdscript directory, this LM data is destroyed.
+So, if you hand files off and you want the LM data to remain, make sure you have this file on the
+persons computer.
+
+- made some tweaks to help there always be an active layers selected.
+
+
+
+------------- NEW FEATURES / FIXES 02.00 ---------------
+
+- Objects menu in properties has been created.  The active x
+	controller lists the layers and the objects in that layer.
+	The item can be clicked or shift clicked to select it.
+	RENAMING DOESN"T WORK.
+
+- 'Remove Empty Layers' is enabled and working.
+
+- 'Alphebetize Layers' is enabled and working.
+	note - when the sort happends all capitals are placed
+	before lowercase so "Layer1" comes before "apple Layer"
+
+- Fixed 'Select Layer'
+
+- Increased the time for for a large group of selected objects to be turned
+	into a layer.  test case 2000 objs 35seconds to 8seconds.
+
+- Alternate Material enabled and working ( i think )
+
+- created the method for adding atmospherics and elements to rendering parameters.
+
+- set the save flag to dirty after a layer has been made and many other opertations.
+
+- adding selected objects to a hidden layer, objects are deselected now.
+
+- set render settings enabled and working.  The new atmosphics and effects selections now
+	work.  When enabled, all atmospherics are turned off except those in the list.
+
+- Xref Scenes as layers enabled and working.
+
+- added 'gather objects' to the main extende menu. This option can be used to import old
+	lm data, or to update a scene that contain objects that don't appear to be on any
+	layer.  This function is different than the Gather Merge data, which only should be
+	used after a file merge has taken place.   However, this operation will place objects
+	on a layers, but will not get any of there data like the merge operation will.
+
+
+
+
+
+
+
+
+
+
+	   LAYER MANAGER 3.0 SCIPT INFO
+		  October 11, 2001
+-------------------------------------------------------
+
+The code for this version of LM is basicly rewriten to be faster, more efficent,
+cleaner, and solve old max & maxscript problems.
+
+The storage method -persisant globals- is the same, however the structure
+for the storage is different.  
+
+The persistent global is re-defined at each launch of LM with different name.
+the variable LM references this p-glob variable.
+The actual p-glob variable name is stored in appdata globaltracks[1] 9901
+This string is gathered and executed at launch.
+
+Several different structures are used to store the data.
+
+Struct Layer - includes all the data for an individual layer. this includes
+	layer properties, rendering information, object information,etc.
+	objects are stored by both a unique id string and a node handle id.
+	both methods are used to facilitate merging.
+
+Struct Layer_manager - contains functions and data for the system.
+
+
+Struct LM_UI - contains a few funtions to create and maintain the ui and it's friends.
+
+rollout_creator.ms has been expanded to include a struct for rcmenu creation.
+
+
+To find properties of Layermanager:
+	getPropNames LM
+
+to find properties of a layer
+	getPropNames LM.Layers[2]
+
+
+
+
+
+
+
+
+
+
+
+
+
+-------------------------------------------------------
+	LAYER MANAGER 3.0 NOTES - ALPHA 01.00
+		  October 11, 2001
+-------------------------------------------------------
+
+- Please send all bugs, comments or suggestions to david@rezn8
+
+- This new version of LM is NOT compatible with the previous version!
+	They can both reside on your system at the same time, but launching
+	the old version will kill the ability to launch the new version.
+
+- Many features that were in the old versions are not enabled yet. 
+	They will be added in future versions.
+
+------------- NEW FEATURES / FIXES 01.00 ---------------
+- Updated UI
+
+- Added Groups.  Accessed through individual layer extended menus.
+	Actions on groups cascade down to layers inside that group.
+	If a property on the group level is changed, that property will be
+	changed on all sub layers. 
+	
+	To create a Layer: click on a layers extended menu > group > make new group
+
+	To added a layer to a group: > group > select the group name from the list
+
+- Updated World Layer functionality. 
+	World layer now includes all properties that a normal layer has.  The world
+	layer cannot be deleted.  Any object not included on another layer is contained on 
+	the world layer.  Objects by default do not assume the world layer properties. This
+	can be enabled in the properties dialog.
+
+- AutoAssigment Default is now ON.  This means objects created will be placed on the
+	active layer. Autoassigment can still be disabled through the 'more options' 
+	extended menu
+
+- Layer Properties now include all object properties and a gaggle of rendering properties.
+	The object and other areas have not been addressed.
+
+- Rendering Properties now includes an area for atmospheric and effects to be added.  THIS IS ONLY 
+	STAND IN.  IT IS NOT WORKING IN ANY WAY.  IT IS JUST A UI SPACE FILLER.  
+
+- 'Automatic Layer Setting Assignment' is now on by default.  When enabled, objects added to a
+	layer automaticaly assume all the properties of that layer.
+
+- Merging: When a merge happens, any LM data that exists in the merging file will be imported, 
+	but will not overwrite the existing data.  I have removed all merge callbacks because of 
+	multiple problems they were causeing, and have replaced them with a MANUAL method.  
+	> More Options > Manager Layers > Gather Merge Data.  This command will scan the scene for 
+	new objects and new layer information and create new layers for objects that have layer data
+	that isn't represented in the current LM.  While this method may not be as seemless as the 
+	previous method, my hope is that it will be much more reliable. 
+
+- Right Click Menu - add objects to a layer, or create a new layer from selected.
+	I would have much prefered to make this part of the standard quad menu, but maxscript 
+	(as far as i can tell) doesn't allow you to create dynamic quad menu items.

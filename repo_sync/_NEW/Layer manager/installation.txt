@@ -1,0 +1,21 @@
+
+1) the files in the appropriate locations:
+
+
+rolloutCreator.ms 		- 3dsmax4\stdplugs\stdscripts
+REZN8_LayerStructures.ms	- 3dsmax4\stdplugs\stdscripts
+
+REZN8_LayerManager.mcr		- 3dsmax4\ui\macroscripts
+REZN8_LayerManager_RCMenu.mcr	- 3dsmax4\ui\macroscripts
+
+REZN8_Icon*			- 3dsmax4\ui\icons
+
+LM_v3_*.bmp			- 3dsmax4\scripts\rezn8
+
+
+2) start max
+
+3) cutomize your interface to include 'Layer Manager 3.00' - located in REZN8 Tools.
+
+4) add Layer_Manager_RC menu to a quad menu 
+	you can change it's display name by right clicking on it...

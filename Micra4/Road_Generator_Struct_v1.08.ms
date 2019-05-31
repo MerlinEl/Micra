@@ -644,6 +644,24 @@ struct ROAD_GENERATOR_STRUCTURE	(
 			layer.addNode o
 		)
 	),
+	/**
+	*@Example
+		roGenStruct.selectAllRoads()
+		roGenStruct.selectAllCrossroads()
+		roGenStruct.selectAllShortcuts()
+	*/
+	fn selectAllRoads = (
+	
+		select(for o in objects where isRoad o collect o)
+	),
+	fn selectAllCrossroads = (
+	
+		select(for o in objects where isCrossroad o collect o)
+	),
+	fn selectAllShortcuts = (
+	
+		select(for o in objects where isShortcut o collect o)
+	),
 	-------------------------------------------------------------
 	-------------------------------------------------------------
 	------                   REMOVE                        ------
@@ -775,6 +793,46 @@ struct ROAD_GENERATOR_STRUCTURE	(
 		--fill data
 		obj.CrossRoadKids.kids = road_helpers
 		format "fixBrokenCrossroad >  Cross Road  [ % ] has been fixed.\n" obj.name
+	),
+	/**
+	*@Example
+		roGenStruct.fixBrokenShortcut sp:$Shape401
+	*/
+	fn fixBrokenShortcut obj:undefined dp1:undefined dp2:undefined sp:undefined = (
+
+		local dialog = RoadGeneratorTool
+		--check model
+		if classOf obj != Editable_poly do obj = selection[1] --try to pic selected shortcut
+		if classOf obj != Editable_poly do (
+
+			format "fixShortcut > Unable to fix shortcut. Shortcut mesh not found."
+			return false
+		)
+		--check joints
+		if classOf dp1 != Point do if obj.children.count > 0 do dp1 = obj.children[1]
+		if classOf dp2 != Point do if obj.children.count > 1 do dp2 = obj.children[2]
+		if classOf dp1 != Point or classOf dp2 != Point do (
+
+			format "fixShortcut > Unable to fix shortcut. Joints are not found."
+			return false
+		)
+		--check spline
+		if classOf sp != SplineShape do sp = getConstraintObject obj SplineShape
+		if classOf sp != SplineShape do (
+
+			format "fixShortcut > Unable to fix shortcut. Spline are not found."
+			return false
+		)
+		--add attribute
+		-- removeCustomAttribute obj #RoadGenCa
+		roGenStruct.removeAllCustomAttributes obj
+		setShortcutCA obj sp dp1 dp2 dialog dialog.controlsArr
+		if classOf sp.controller == Link_Constraint do ( --remove all links
+			
+			sp.transform.controller = prs ()
+		)
+		--link spline
+		linkConstraint obj sp
 	),
 	fn setUpCrossRoadPoints max_dist_left max_dist_right c_tangent_offset road:undefined hidden_tn:true = (
 	

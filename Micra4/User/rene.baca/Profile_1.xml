@@ -14,7 +14,7 @@
   </Properties_1>
   <Properties_2>
     <mcMicraDialog active="true" pos="[2170,220]" size="[148,66]" title="" />
-    <mcCustomizeDialog active="false" pos="[1720,370]" size="[600,404]" title="" />
+    <mcCustomizeDialog active="false" pos="[1720,370]" size="[224,404]" title="" />
     <mcProgramDialog active="undefined" pos="[2298,0]" size="[256,232]" title="" />
     <mcisoDialog active="false" pos="[181,152]" size="[140,400]" title="" />
     <mcModifierDialog active="undefined" pos="[100,100]" size="[400,400]" title="" />
@@ -51,6 +51,7 @@
     <IsolateFaceDialog active="undefined" pos="[100,100]" size="[100,100]" title="" />
     <mcTemplateDialog active="true" pos="[420,320]" size="[304,181]" title="" />
     <mcSpaceDialog active="true" pos="[1647,410]" size="[392,184]" title="" />
+    <mcDotnetVisualEditorDialog active="true" pos="[708,516]" size="[600,400]" />
   </Properties_2>
   <Buttons>
     <btn_B2 action="Move_To_X" icon="28" />
