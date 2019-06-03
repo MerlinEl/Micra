@@ -69,9 +69,9 @@ if classOf roGen_Joint != Helper do (
 		)
 		on detachedFromNode obj do ( --when node is deleted
 			
--- 			format "Deleting master node:% is valid:% class:%\n" parent_node.node (isValidNode parent_node) (classOf parent_node)
--- 			if classOf parent_node == NodeTransformMonitor and isValidNode parent_node.node do delete parent_node.node --when joint dleted delete also master obj
--- 			format "roGen_Joint > detachedFromNode > node:% from:%\n" obj parent_node
+			format "Deleting master node:% is valid:% class:%\n" parent_node.node (isValidNode parent_node) (classOf parent_node)
+			if classOf parent_node == NodeTransformMonitor and isValidNode parent_node.node do delete parent_node.node --when joint dleted delete also master obj
+			format "roGen_Joint > detachedFromNode > node:% from:%\n" obj parent_node
 		)
 		on deleted do (
 			
@@ -229,7 +229,7 @@ roGen_Road_Attributes = attributes roGen_Road_Attributes attribID:#(0x11aa99ff, 
 		)
 		fn addComponent obj = (
 			
--- 			if hasProperty obj "parent_node" do obj.parent_node = ( nodeTransformMonitor node:thisNode forwardTransformChangeMsgs:false )
+			if hasProperty obj "parent_node" do obj.parent_node = ( nodeTransformMonitor node:thisNode forwardTransformChangeMsgs:false )
 			linkConstraint obj thisNode
 			format "roGen_Road_Attributes > addComponent node:% to:%\n" obj components_tab
 			append components_tab (nodeTransformMonitor node:obj forwardTransformChangeMsgs:false)
