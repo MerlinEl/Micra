@@ -69,6 +69,7 @@ if classOf roGen_Joint != Helper do (
 		)
 		on detachedFromNode obj do ( --when node is deleted
 			
+-- 			if classOf sp.controller == Link_Constraint do  sp.transform.controller = prs () --remove Link_Constraint
 -- 			format "Deleting master node:% is valid:% class:%\n" parent_node.node (isValidNode parent_node) (classOf parent_node)
 -- 			if classOf parent_node == NodeTransformMonitor and isValidNode parent_node.node do delete parent_node.node --when joint dleted delete also master obj
 -- 			format "roGen_Joint > detachedFromNode > node:% from:%\n" obj parent_node
@@ -219,7 +220,8 @@ roGen_Road_Attributes = attributes roGen_Road_Attributes attribID:#(0x11aa99ff, 
 				local obj = components_tab[i].node
 				if obj.name ==  node_name do (
 				
-					obj.transform.controller.deleteTarget 1 --remove constraint
+-- 					obj.transform.controller.deleteTarget 1 --remove constraint
+					obj.transform.controller = prs () --replace Link_Constraint with Position_Rotation_Scale
 					obj.parent_node = undefined
 					deleteItem components_tab i
 					exit
@@ -303,7 +305,7 @@ roGen_Road_Attributes = attributes roGen_Road_Attributes attribID:#(0x11aa99ff, 
 			if handler != undefined do unregisterCallbacks()
 			--handler = when (refs.dependentNodes thisNode) deleted obj do (
 			handler = when thisNode deleted obj do (
-		
+				
 			format "Collection was destroyed by deleting a component:%\n" obj
 			unregisterCallbacks()
 			selfDestroy()

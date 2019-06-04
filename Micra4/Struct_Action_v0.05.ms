@@ -2438,10 +2438,24 @@ struct mcAction (
 	fn createPointAtVertex = (
 		
 		local obj = selection[1]
-		if obj == undefined do return false
-		local vert = (polyop.getVertSelection obj as array)[1]
-		if vert == undefined do return false
-		local po = point pos:(polyop.getVert obj vert)
+		local p1 = case (classOf obj) of (
+			
+				Editable_Poly:(
+					
+					local vert_index = (polyop.getVertSelection obj as array)[1]
+					if vert_index == undefined do return false
+					polyop.getVert obj vert_index
+				)
+				SplineShape:(
+					
+					local knot_index =  (getKnotSelection obj 1)[1]
+					if knot_index == undefined do return false
+					getKnotPoint obj 1 knot_index
+				)
+				Undefined: undefined
+		)
+		if p1 == undefiend do return false
+		local po = point pos:p1
 		subobjectlevel = 0
 		select po
 	)

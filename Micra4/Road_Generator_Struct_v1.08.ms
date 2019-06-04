@@ -696,7 +696,11 @@ struct ROAD_GENERATOR_STRUCTURE	(
 	fn deleteLayerByName layer_name forceDelete:false=  (
 	
 		local layerToDelete = LayerManager.getLayerFromName layer_name--find layer that you need to delate
-		if layerToDelete == undefined then (messagebox ("Layer *"+layer_name+"* don't exist!!!") title:"DeleteLayerByName" beep:false) else (
+		if layerToDelete == undefined then (
+		
+			format ("deleteLayerByName > Layer *"+layer_name+"* don't exist!!!")
+			
+		) else (
 			
 			if (LayerManager.current.name) == layer_name do (layermanager.getlayer 0).current = true	--if desired layer is current make default as current
 			local layer_nodes
@@ -793,6 +797,38 @@ struct ROAD_GENERATOR_STRUCTURE	(
 		--fill data
 		obj.CrossRoadKids.kids = road_helpers
 		format "fixBrokenCrossroad >  Cross Road  [ % ] has been fixed.\n" obj.name
+	),
+	/**
+	*@Example
+		roGenStruct.fixBrokenRoad dp1:$Point819 dp2:$Point805 sp:$Shape394
+	*/
+	fn fixBrokenRoad obj:undefined dp1:undefined dp2:undefined sp:undefined = (
+
+		local dialog = RoadGeneratorTool
+		--check model
+		if classOf obj != Editable_poly do obj = selection[1] --try to pic selected shortcut
+		if classOf obj != Editable_poly do (
+
+			format "fixShortcut > Unable to fix shortcut. Shortcut mesh not found."
+			return false
+		)
+		--check joints
+		if classOf dp1 != Point or classOf dp2 != Point do (
+
+			format "fixShortcut > Unable to fix shortcut. Joints are not found."
+			return false
+		)
+		--check spline
+		if classOf sp != SplineShape do (
+
+			format "fixShortcut > Unable to fix shortcut. Spline are not found."
+			return false
+		)
+		--add attribute
+		roGenStruct.removeAllCustomAttributes obj
+		setRoadCA obj sp dp1 dp2 dialog dialog.controlsArr
+		custAttributes.add sp gSplineGenCa #unique
+		sp.road = obj.name
 	),
 	/**
 	*@Example
@@ -1307,6 +1343,7 @@ struct ROAD_GENERATOR_STRUCTURE	(
 	fn generateRoad dialog roads specs = (
 	
 		if isCrossRoad selection[1] or isShortcut selection[1] do return false
+		subobjectlevel = 0	--protection to assign different spline (Test only)
 		undo off (
 		
 			local sel = selection as Array
@@ -1320,7 +1357,7 @@ struct ROAD_GENERATOR_STRUCTURE	(
 			local sw_right_state	= dialog.cb_sidewalks_right.state
 			
 			---------------------------------------------------------------------------
--- 			TWO POINTS  (Create)
+-- 			TWO POINTS ARE SELECTED (Create new road)
 			---------------------------------------------------------------------------
 			if selCount == 2 and classof sel[1] == Point and classof sel[2] == Point then (
 				
@@ -1340,7 +1377,8 @@ struct ROAD_GENERATOR_STRUCTURE	(
 				setInVec sp 1 2 (t2)
 				updateShape sp
 				sp.adaptive = true
-				sp.pivot = [0, 0, 0]
+				-- sp.pivot = [0, 0, 0]
+				sp.pivot = (sp.min + sp.max)/2 --center pivot to spline
 				sp.wirecolor = color 7 206 224
 				
 				local selected_road = pickRoadPrefab roads prefabs_sel false
@@ -1350,7 +1388,7 @@ struct ROAD_GENERATOR_STRUCTURE	(
 				finalRoad.name = replace finalRoad.name 11 6 "connect_road"
 				finalRoad.name = uniquename(finalRoad.name)
 				
-				setRoadCA finalRoad sp $[1] $[2] dialog dialog.controlsArr
+				setRoadCA finalRoad sp sel[1] sel[2] dialog dialog.controlsArr
 				custAttributes.add sp gSplineGenCa #unique
 				sp.road = finalRoad.name
 				--sp.parent = finalRoad --MerlinEl (2.24.2019) --can't do this, depency loop
@@ -1362,7 +1400,7 @@ struct ROAD_GENERATOR_STRUCTURE	(
 			)
 
 			---------------------------------------------------------------------------
--- 			ROAD or SPLINE  (Update)
+-- 			ROAD or SPLINE SELECTED (Update road)
 			---------------------------------------------------------------------------
 			if selCount == 1 then(
 				
