@@ -138,6 +138,7 @@
 			addKnot meshObj 1 #corner #line PointA
 			addKnot meshObj 1 #corner #line PointB
 			updateShape meshObj
+			meshObj.wirecolor = green
 		)
 		parameters main rollout:params (
 			
@@ -179,7 +180,7 @@
 				)
 			)
 		)
-		
+
 		on deleted do (
 				
 			is_deleted = true
@@ -439,7 +440,9 @@
 			local jo_start = roGen_Joint pos:[thisNode.min.x, (thisNode.min.y + thisNode.max.y) / 2, thisNode.min.z] size:2 name:(uniqueName "Road_Joint_Start_")
 			local jo_end = roGen_Joint pos:[thisNode.max.x, (thisNode.min.y + thisNode.max.y) / 2, thisNode.min.z] size:2 name:(uniqueName "Road_Joint_End_")
 			local line_path = roGen_Path startP:jo_start.pos endP: jo_end.pos name:(uniqueName "Road_Path_")  build:true
-			jo_start.wirecolor = jo_end.wirecolor = line_path.wirecolor = green
+			format "line_path:%\n" line_path
+			global rpath = line_path
+			jo_start.wirecolor = jo_end.wirecolor =  green
 			addComponent jo_start
 			addComponent jo_end
 			addComponent line_path
