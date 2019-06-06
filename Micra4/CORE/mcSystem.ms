@@ -97,7 +97,7 @@ struct mcSystem (
 			then ps.open i.filename
 			else messageBox ("The file: ["+i.filename+"] is not Exist.") title:"Micra..."
 		)
-	),
+	), 
 	fn show arg  =
 	(
 		print "---------------------------------------------------------------------------" 
@@ -114,6 +114,28 @@ struct mcSystem (
 		try (format "Interface: %\n"   (showInterface  arg)) catch (format "No Interface for %\n" arg)
 		try (format "Constructors: %\n" (dotNet.showConstructors arg)) catch (format "No Constructors for %\n" arg)
 		try (format "GetInterface: %\n" (getInterface arg)) catch (format "No GetInterface for %\n" arg)
+		try (
+			local interfaces = getInterfaces arg
+			if classOf interfaces == Array do (
+				
+				for i in interfaces do (
+					
+					format "GetInterface: %\n" i
+					showinterface i
+				)
+			)
+		) catch (format "No GetInterfaces for %\n" arg)
+		try (
+			local currentClass = arg
+			local parentClass = undefined
+			while parentClass != currentClass do
+			(
+				format "% Properties:\n" currentClass as string 
+				for prop in getPropNames currentClass do format "\t%\n" (prop as string) 
+				currentClass = classof currentClass 
+				parentClass = classof currentClass
+			)	
+		) catch ()
 	),
 	fn getAllDialogsHWND = ( for i in UIAccessor.GetPopupDialogs() collect (UIAccessor.GetWindowText i) ),
 	fn closeDialogByTitle window_text =

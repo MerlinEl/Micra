@@ -1,0 +1,82 @@
+Chain Rigger
+============
+version 1.2
+created by Mayec Rancel
+
+
+#DESCRIPTION:
+This tool creates a simulation rig for a chain (free or constrained) with a few simple steps. The rig is an optimized one, very stable and fast to simulate, based on a reactor rope.
+
+
+#NOTES:
+	- Due to the optimized natures of the rig, it is more suited for certain types of chains (eg, the ball-joint chain in the example scene). For other types (like the usual ring-linked chain), if the rings are loose, the simulation may not have the needed freedom between links. In such cases, a brute-force all-rigid-bodies solution may be needed for a more realistic (although much slower and potentially unstable) simulation.
+	- By default, the rigged chain will not collide with the constraining objects. But since it is using reactor, you can add any rigid bodies, constraints or any other entities to your simulation.
+	- This tool can rig a chain that has been modeled/placed in a specific position, or it can rig it in a neutral straight shape, and then bring it to a natural position with a simulation runup (and tricks like colliding objects to shape it, if you need a specific shape).
+
+
+#COMPATIBILITY:
+This script has been tested in 3ds max 2010 x64, running on Windows Vista.
+
+
+#SETUP:
+Copy "chainRigger_v1.0.ms" to your scripts folder (e.g. "C:\Program Files\Autodesk\3ds Max 2010\Scripts")
+
+
+#USAGE/TUTORIAL:
+
+To follow this tutorial, you can open the example scene (chainRigger_example.max) included with the downloaded script.
+
+You have to start from a scene with your modeled chain. Your chain must be composed of separate objects for each links, all named following a numbered pattern such as "linkName_#" (eg: chainLink_01, chainLink_02, chainLink_03, etc.). The numbers have to follow the order of how those links are connected to each other.
+
+Then execute the script. The script's UI will appear.
+
+
+1.Link Name:
+First thing you have to do is define the Link Name pattern. You can either "pick" one of the link objects, and the script will try to guess the pattern by replacing the numbers with a "*" wildcard, or you can type the pattern yourself using wildcards such as "#" and "?".
+
+If the Link Name pattern is correct, the script will tell you how many links it found with that name (eg "match: 20 links"). If it says it found 0 links, check the name to make sure it is correct.
+
+
+2.Constraints
+If you want, you can add constraints to the beginning and/or end of the chain. These will be constrained to a specific object. To do this, select the desired constraint (start/end/both/none) and then pick the corresponding object with the "Pick Start Obj" and "Pick End Obj" buttons.
+
+In the example scene, you can try both (Start Ob:"dog" -the box-, End Obj:"stake" -the cylinder-), or only one of them if you prefer.
+
+
+3.Place Chain End (optional)
+This is not necessary. If you don't place the chain end manually, the script will try to guess it automatically when creating the rig. In many cases the script will be right, usually when all the chain links are the same size. In other cases (like in the example scene), where you have links with different shapes, you may want to place the end helper manually for more precission. For this, just press "place Chain End" and then move the "end_of_chain" locator that appears to the desired location.
+
+In the example scene, you should move the locator down a bit, to the center of the small sphere at the bottom tip of the chain. This will define where that last links is constrained to the stake.
+
+
+4. Set link/chain mass
+To get the proper behavior for the chain, you have to set either its link or chain mass accordingly. Both are related, so if you change one, the other will change automatically. (chain mass = link mass * number of links).
+
+
+5. Rig it!
+Press the button and the rig will be created.
+
+
+6. Simulate
+Now you can go to Reactor and press "Create Animation" to simulate the chain.
+IMPORTANT NOTE: As always when using Reactor, to get good realistic simulations, make sure your units and scale are set right for the size of your objects.
+
+
+VERSION HISTORY
+===============
+
+Chain Rigger v.1.0
+==================
+
+Chain Rigger v.1.1
+==================
+- Bug Fixes: "place Chain End" errors the first time script is used in a session.
+- Features: when using "place Chain End", end locator will automatically be selected and in move mode for easier placement.
+
+Chain Rigger v.1.2
+==================
+- Bug Fixes: "Type error: Call needs function or class, got: undefined" when running the script for the first time in a fresh 3ds max.
+
+========================================================
+
+For this script and more, visit http://www.mayec.eu/

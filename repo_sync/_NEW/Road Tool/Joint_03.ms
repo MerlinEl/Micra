@@ -49,6 +49,25 @@
 -- 				format "params_rt open thisNode:%\n" thisNode
 			)
 		)
+
+		fn attachParent obj_trgt = (
+				
+			if not (isValidNode thisNode) or not (isValidNode obj_trgt) do return false		
+			format "roGen_Joint > attachParent > src:[ % ] to  trgt:[ % ]\n" thisNode obj_trgt
+			parent_node = ( nodeTransformMonitor node:obj_trgt forwardTransformChangeMsgs:false )		
+			thisNode.controller = link_constraint()
+			thisNode.controller.addTarget obj_trgt 1 --at frame 1
+		)
+		
+		fn detachParent = (
+
+			if not (isValidNode thisNode) do return false		
+			format "roGen_Joint > detachParent > src:[ % ] to  trgt:[ % ]\n" thisNode parent_node
+-- 			thisNode.transform.controller.deleteTarget 1 --remove constraint
+			thisNode.transform.controller = prs () --replace Link_Constraint with Position_Rotation_Scale
+			parent_node = undefined
+		)	
+		
 		fn deleteParent = (
 			
 			if is_deleted do return false --prevent depency loop crash
@@ -67,7 +86,6 @@
 		fn onSelfDeleted = (
 			
 				format "roGen_Joint_CA > register callback onSelfDeleted\n"
-				if handler != undefined do return false
 				handler = when thisNode deleted obj do (
 					
 				deleteChangeHandler handler
@@ -75,10 +93,17 @@
 				deleteParent()
 			)	
 		)
-		fn init = (
+		
+		fn registerCallbacks = (
+			
+			if handler != undefined or  thisNode == undefined do return false
+			onSelfDeleted()	
+		)	
+		
+		fn init parent_obj:undefined = (
 			
 			thisNode = getNode()
-			thisNode.name = uniqueName "roGen_Joint_"
+			thisNode.wirecolor = green
 			thisNode.radius = 10
 			thisNode.segs = 4
 			thisNode.smooth = false
@@ -87,12 +112,13 @@
 			thisNode.chop = 1
 			thisNode.slice = false
 			thisNode.recenter = false
-			onSelfDeleted()	
+			node_name = thisNode.name
+			registerCallbacks()
 		)
 		on load do (
 			
 			format "roGen_Joint > load\n"
-			init()
+			registerCallbacks()
 		)
 		on create do (
 
@@ -106,10 +132,14 @@
 			
 			format "roGen_Joint > deleted node:%\n"  node_name
 		)
-)
+	)
 
-
-du = Sphere pos:[0,0,0] radius:10 wirecolor:green
-custAttributes.add du roGen_Joint_CA baseObject:true #unique
-du.init()
-select du
+--****************************************************************************************************--
+--Road Joint 
+/*
+jo = Sphere pos:[0,0,0] name:(uniqueName "Road_Joint_Start_")
+custAttributes.add jo roGen_Joint_CA baseObject:true #unique
+jo.init()
+jo.attachParent $Sphere001	
+*/
+--****************************************************************************************************--
