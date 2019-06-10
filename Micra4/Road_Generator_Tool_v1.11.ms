@@ -1,3 +1,8 @@
+
+-------------------------
+-->modyfy by MerlinEl 1.3.2019
+-------------------------
+
 --###################################################################################--
 --	                               Custom Attributes                                 --
 --###################################################################################--
@@ -40,27 +45,7 @@ Global gShortcutCa = attributes ShortcutCa attribID:#(0x1635194a, 0x171142a1)(
 	)
 )
 
--------------------------
---> MerlinEl 1.3.2019
--------------------------
-/* Mod List:
 
-*@Modifications
-
-	fill_material = MaterialModifier materialId:7 name:"fill_material"
-	roGenStruct.setVertexColor fill_poly red 0		
-	on bt_fixBrokenCrossroad pressed do roGenStruct.fixBrokenCrossroad selection[1]
-	on bt_roadAnatomy pressed do runLocalScript "Road_Generator_Anatomy"
-	on bt_showRoadColorTable pressed do runLocalScript "Road_Generator_Colors"
-	if not (roGenStruct.isRoad road) do (
-	FinishCrossRoadSetups road_1 dlgCrossroadGenerator3 controlsArr finalPos #ThreeR sw:sw weldThreshold: 1.0 ---1.5  (2x)
-*/
-
-/**
-*@Example
-	runLocalScript "Road_Generator_Anatomy"
-	runLocalScript "Road_Generator_Colors"
-*/
 fn runLocalScript script_name = (
 
 	local fpath = getSourceFileName()
@@ -84,20 +69,10 @@ runLocalScript "Road_Generator_Struct_v1.08"
 --###################################################################################--
 --	                                 ASCII SIGNS                                     --
 --###################################################################################--
-one_six		= bit.intAsChar 9604 + bit.intAsChar 9604 + bit.intAsChar 9604 + bit.intAsChar 9604 + bit.intAsChar 9604 + bit.intAsChar 9604
-two_two		= bit.intAsChar 9604 + bit.intAsChar 9604 + bit.intAsChar 12140 +" "+ bit.intAsChar 12140 + bit.intAsChar 9604 + bit.intAsChar 9604
-two_four	= bit.intAsChar 9604 + bit.intAsChar 9604 + bit.intAsChar 9604 + bit.intAsChar 9604 + " "+ bit.intAsChar 9604 + bit.intAsChar 9604 + bit.intAsChar 9604 + bit.intAsChar 9604
-two_four_r	= bit.intAsChar 9604 + bit.intAsChar 9604 + bit.intAsChar 9604 + bit.intAsChar 12140 + " "+ bit.intAsChar 12140 + bit.intAsChar 9604 + bit.intAsChar 9604 + bit.intAsChar 9604
-two_five	= bit.intAsChar 9604 + bit.intAsChar 9604 + bit.intAsChar 9604 + bit.intAsChar 9604 + bit.intAsChar 9604 + " "+ bit.intAsChar 9604 + bit.intAsChar 9604 + bit.intAsChar 9604 + bit.intAsChar 9604 + bit.intAsChar 9604
-
-four_four	= bit.intAsChar 9604 + bit.intAsChar 9604 + bit.intAsChar 9604 + bit.intAsChar 9604 + " "+ bit.intAsChar 9604 + bit.intAsChar 9604 + bit.intAsChar 9604 + bit.intAsChar 9604 + " " + bit.intAsChar 9604 + bit.intAsChar 9604 + bit.intAsChar 9604 + bit.intAsChar 9604  + " "+ bit.intAsChar 9604 + bit.intAsChar 9604 + bit.intAsChar 9604 + bit.intAsChar 9604 
-four_five 	= bit.intAsChar 9604 + bit.intAsChar 9604 + bit.intAsChar 9604 + bit.intAsChar 9604 + bit.intAsChar 9604 + " " + bit.intAsChar 9604 + bit.intAsChar 9604 + bit.intAsChar 9604 + bit.intAsChar 9604 + bit.intAsChar 9604 + " "+ bit.intAsChar 9604 + bit.intAsChar 9604 + bit.intAsChar 9604 + bit.intAsChar 9604 + bit.intAsChar 9604 + " " + bit.intAsChar 9604 + bit.intAsChar 9604 + bit.intAsChar 9604 + bit.intAsChar 9604 + bit.intAsChar 9604 + " "
-
 main_sign 	= bit.intAsChar 10134
 top_sign 	= bit.intAsChar 10200
 bot_sign	= bit.intAsChar 10201
 side_sign	= bit.intAsChar 10073
-
 
 
 -- because of delete callback  
@@ -157,11 +132,6 @@ struct PlaneGeometry
     position = pos
   ),
   
-  fn SetNormal nor =
-  (
-	  normal = nor
-  ),
-
   fn RotatePlane q =
   (
     normal = [0, 0, 1] * q
@@ -188,20 +158,6 @@ struct PlaneGeometry
 	  ) else (
 		  return 0
 	  )
-  ),  
-  
-  fn PrintParams =
-  (
-		print ("Plane pos: "+(position as string)+"nor: "+(normal as string))
-  ),
-  
-  fn Project pt =
-  (
-	  w = -(normal.x * position.x + normal.y * position.y + normal.z * position.z)
-	  t = -(w + normal.x * pt.x + normal.y * pt.y + normal.z * pt.z)/(normal.x*normal.x + normal.y*normal.y + normal.z*normal.z)
-	  --print ("w: "+(w as string)+" t: "+(t as string)) 
-	  new_pt = pt + normal * t
-	  return new_pt
   )
 )
 
@@ -225,15 +181,6 @@ fn IsLesserEqual val1 val2 =
 		return false
 )
 
-fn CompareFloat val1 val2 =
-(
-	if (abs (val1 - val2)) < 0.01 then
-		return 0
-	else if val1 > val2 then
-		return 1
-	else
-		return -1
-)
 
 fn RMin a b =
 (
@@ -262,15 +209,6 @@ fn PackArrays arr1 arr2 arr3 arr4 arr5 =
 	return packed_arr
 )
 
---print vertices
-fn PrintVertices edit_pol =
-(
-	for i in 1 to edit_pol.GetNumVertices() do
-	(
-		v = edit_pol.GetVertex i
--- 		print v
-	)
-)
 
 /*delete all children items*/
 fn FullDelete item =
@@ -286,10 +224,6 @@ fn FullDelete item =
 		delete item
 	)
 )
-
-
-
-
 
 
 --get angle between two vectors
@@ -412,17 +346,6 @@ fn TranslateVertices verts vec =
 		append new_verts (v + vec)
 	)
 	return new_verts
-)
-
-
---returns arrays with unique values
-fn UniqueArr arr =
-(
-	new_arr = #()
-	for o in arr do (
-		appendIfUnique new_arr o
-	)
-	return new_arr
 )
 
 --linear interpolation
@@ -730,16 +653,6 @@ fn GetRoadCornerVertices corner fromBottom bb =
 	
 	return vertices
 )
-
-fn CheckResource file fileName =
-(
-	if file == undefined then
-	(
-		MessageBox (fileName+" resources is missing")
-		throw fileName
-	)
-)
-
 
 fn CreateConnectingRoad road_2 bb_1 bb_2 corner bb_corner angle_road placed_items rotate_angle offset prevPt:undefined=
 (
@@ -1055,64 +968,23 @@ fn ShowHidePoints roadType road =
 --###################################################################################
 --														FUNCTIONS FROM ROLLOUTS
 --###################################################################################
-fn CheckPrefabsOfRoads = 
-(
--- 	to do add spec files for new prefabs
-	
-	CheckResource $generator_road_1_6 "generator_road_1_6"   						--<<
-	
-	CheckResource $generator_road_2_2_rail "generator_road_2_2_rail"				--<<
-	
-	CheckResource $generator_road_2_4 "generator_road_2_4"
-	CheckResource $generator_road_2_4_spec "generator_road_2_4_spec"
-	
-	CheckResource $generator_road_2_4_rail "generator_road_2_4_rail"				--<<
-	
-	CheckResource $generator_road_2_5 "generator_road_2_5"
-	CheckResource $generator_road_2_5_spec "generator_road_2_5_spec"
--- 	CheckResource $generator_road_2_6 "generator_road_2_6"
--- 	CheckResource $generator_road_2_6_spec "generator_road_2_6_spec"
-	CheckResource $generator_road_4_4 "generator_road_4_4"
-	CheckResource $generator_road_4_5 "generator_road_4_5"
-	CheckResource $generator_road_4_5_spec "generator_road_4_5_spec"
--- 	CheckResource $generator_road_4_6 "generator_road_4_6"
--- 	CheckResource $generator_road_4_6_spec "generator_road_4_6_spec"
-	CheckResource $generator_sidewalk_left "generator_sidewalk_left"
-	CheckResource $generator_sidewalk_right "generator_sidewalk_right"
-	CheckResource $generator_corner "generator_corner"
-	CheckResource $generator_corner_p "generator_corner_p"
-	CheckResource $generator_parking_lane_left "generator_parking_lane_left"
-	CheckResource $generator_parking_lane_right "generator_parking_lane_right"
-)
 
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-  fn InitFirstOpenRollout &roads &sidewalks &corners &parking_lanes = 
-  (
-    local layer_components	= LayerManager.getLayerFromName C_LAYER_NAME
-    local layer_helpers		= LayerManager.getLayerFromName H_LAYER_NAME
---     print ("Layer = "+(layer as string))
-    if layer_components == undefined then (
---       print ("Merging "+C_COMPONENTS_PATH)
-		
-		mergemaxfile C_COMPONENTS_PATH
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+fn InitFirstOpenRollout &roads &sidewalks &corners &parking_lanes = (
 
-		try (
-
-			layer_components	= LayerManager.getLayerFromName C_LAYER_NAME
-			layer_helpers 		= LayerManager.getLayerFromName H_LAYER_NAME
-			CheckPrefabsOfRoads()	-- check if prefabs are accessible
-
-		) catch (
-
-			destroyDialog CrossroadGenerator
-		)
-    )
+	--check prefabs 
+	-- try (roGenStruct.validatePrefabs C_COMPONENTS_PATH) catch (destroyDialog dialog)
+	local succes = roGenStruct.validatePrefabs C_COMPONENTS_PATH
+	if not succes do (
 	
-	if layer_components == undefined do layer_components.isHidden	= true
-	if layer_helpers 	== undefined do layer_helpers.isHidden 		= true
-	
-	collectAllPrefabs &roads &sidewalks &corners &parking_lanes	
-  )
+		try (destroyDialog ::dlgCrossroadGenerator) catch()
+		return false
+	)
+	--collect components
+	roGenStruct.collectAllPrefabs &roads &sidewalks &corners &parking_lanes	
+	true
+)
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 fn PreSetupAndChecks &generated_road &finalPos=
 (
@@ -1284,100 +1156,43 @@ fn CreateRoadWithPL  roads parkingLanes crossroadIndex &spec leftPL rightPL &ori
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 --###################################################################################
 --														1. 	ROLLOUT  TWO SIDEROADS
 --###################################################################################
 
 rollout dlgCrossroadGenerator "Crossroad Generator"
 (
-  group " ROAD" 
-  (
-	label mainRoad main_sign offset:[-100,0]
--- 	dropdownlist dd_crossroad_prefabs "" items:#(	"L: 1 W: 6" ,
--- 																				"L: 2 W: 4 ",
--- 																				"L: 2 W: 5 ",
--- 																				"L: 4 W: 4 ",
--- 																				"L: 4 W: 5 ",
--- 																				"L: 2 W: 4 ",
--- 																				"L: 2 W: 2 + Train ",
--- 																				"L: 2 W: 4 + Train") height:9
-	dropdownlist dd_crossroad_prefabs_1 "" items:#(	"(1-6)                      " + one_six ,
-																		"(2-2)R                   " + two_two ,
-																		"(2-4)                   "  + two_four,
-																		"(2-4)R                " + two_four_r ,
-																		"(2-5)                " + two_five,
-																		"(4-4)       " + four_four ,
-																		"(4-5)  " + four_five) height:8 
---     label label_1 "Lane number: " align:#left
---     radiobuttons rb_lane_number_1 labels:#("2", "4") default:1 align:#left
---     label label_2 "Lane width: " align:#left
---     radiobuttons rb_lane_width_1 labels:#("4") default:0 align:#left across:2
---     radiobuttons rb_lane_width_1_1 labels:#("5", "6") default:1 align:#left offset:[-38, 0]
-    checkbox  cb_parking_lane_1 "Parking lane" checked:true align:#right
-  )
+	local list_items = roGenStruct.getUIPrefabsIcons()
+	group " ROAD" 
+	(
+		label mainRoad main_sign offset:[-100,0]
+		dropdownlist dd_crossroad_prefabs_1 "" items:list_items height:list_items.count
+		checkbox  cb_parking_lane_1 "Parking lane" checked:true align:#right
+	)
 
+	group " SIDE ROADS"
+	(
+		label sideRoad  side_sign offset:[-100,0]
+		dropdownlist dd_crossroad_prefabs_2 "" items:list_items height:list_items.count 
+		checkbox  cb_parking_lane_2 "Parking lane" checked:true align:#right
+		spinner spnr_angle_1 "Top Angle: " type:#float range:[24, 156, 90] scale:1.0 align:#left offset:[0,15] width:70
+		spinner spnr_angle_2 "Bot. Angle:" type:#float range:[24, 156, 90] scale:1.0 align:#left offset:[0,5] width:70
+		spinner spnr_offset_1 "Top Offset:" type:#float range:[-1.0e6, 1.0e6, 0] align:#right offset:[0,-47] width:70
+		spinner spnr_offset_2 "Bot. Offset:" type:#float range:[-1.0e6, 1.0e6, 0] align:#right offset:[0,6] width:70
+	)
 
-  group " SIDE ROADS"
-  (
-	label sideRoad  side_sign offset:[-100,0]
---     label label_3 "Lane number: " align:#left
---     radiobuttons rb_lane_number_2 labels:#("2", "4") default:1 align:#left
---     label label_4 "Lane width: " align:#left
---     radiobuttons rb_lane_width_2 labels:#("4") default:0 align:#left across:2
---     radiobuttons rb_lane_width_2_1 labels:#("5", "6") default:1 align:#left offset:[-38, 0]
-	  
-	dropdownlist dd_crossroad_prefabs_2 "" items:#(	"(1-6)                      " + one_six ,
-																		"(2-2)R                   " + two_two ,
-																		"(2-4)                   "  + two_four,
-																		"(2-4)R                " + two_four_r ,
-																		"(2-5)                " + two_five,
-																		"(4-4)       " + four_four ,
-																		"(4-5)  " + four_five) height:8 
-																		
-																		
-    checkbox  cb_parking_lane_2 "Parking lane" checked:true align:#right
-	  
-	spinner spnr_angle_1 "Top Angle: " type:#float range:[24, 156, 90] scale:1.0 align:#left offset:[0,15] width:70
-	spinner spnr_angle_2 "Bot. Angle:" type:#float range:[24, 156, 90] scale:1.0 align:#left offset:[0,5] width:70
-	
-	spinner spnr_offset_1 "Top Offset:" type:#float range:[-1.0e6, 1.0e6, 0] align:#right offset:[0,-47] width:70
-    spinner spnr_offset_2 "Bot. Offset:" type:#float range:[-1.0e6, 1.0e6, 0] align:#right offset:[0,6] width:70
-  )
-	
 	button btn_generate "Generate Cross Road" width: 200 height: 35 offset:[0, 10] 
   
-  
-  
 --   button btn_done "Done"
-  
 --   global generated_road = undefined   				-- Global because of delete callback
   
-  local initialized = false
-  local roads = #()
-  local sidewalks = #()
-  local corners = #()
-  local parking_lanes = #()
-  local layer = undefined
-  
-    
---   local controlsArr = #(rb_lane_number_1, rb_lane_width_1, rb_lane_width_1_1, cb_parking_lane_1, 
--- 								rb_lane_number_2, rb_lane_width_2, rb_lane_width_2_1, cb_parking_lane_2, spnr_angle_1, spnr_offset_1, spnr_angle_2, spnr_offset_2,dd_crossroad_prefabs)
-   local controlsArr = #(dd_crossroad_prefabs_1, cb_parking_lane_1, dd_crossroad_prefabs_2, cb_parking_lane_2, spnr_angle_1, spnr_offset_1, spnr_angle_2, spnr_offset_2)
-  
+	local initialized = false
+	local roads = #()
+	local sidewalks = #()
+	local corners = #()
+	local parking_lanes = #()
+	local layer = undefined
+	local controlsArr = #(dd_crossroad_prefabs_1, cb_parking_lane_1, dd_crossroad_prefabs_2, cb_parking_lane_2, spnr_angle_1, spnr_offset_1, spnr_angle_2, spnr_offset_2)
   
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	--   EVENT HANDLERS :
@@ -1438,16 +1253,6 @@ rollout dlgCrossroadGenerator "Crossroad Generator"
 		if spec_1 != false or spec_2 != false then corner_model  = corners[1]
 		else corner_model = SelectCorner corners (bit.or cb_parking_lane_1.triState cb_parking_lane_2.triState)
 		
-		------------------------------------------------------------------------------------------------------------
--- 		road_1_model = roGenStruct.pickRoadPrefab roads dd_crossroad_prefabs_1.selection spec_1
--- 		road_2_model = roGenStruct.pickRoadPrefab roads dd_crossroad_prefabs_2.selection spec_2
-		
-
--- 		format "%\n%\n" road_1_model road_2_model
--- 		road_1_model = SelectRoad roads rb_lane_number_1.state rb_lane_width_1.state rb_lane_width_1_1.state spec_1e
--- 		road_2_model = SelectRoad roads rb_lane_number_2.state rb_lane_width_2.state rb_lane_width_2_1.state spec_2
-		
--- 		corner_model = SelectCorner corners (bit.or cb_parking_lane_1.triState cb_parking_lane_2.triState)
 			
 		road_1 = copy road_1_model
 
@@ -1541,28 +1346,12 @@ rollout dlgCrossroadGenerator "Crossroad Generator"
 		  tri_right_top_further = 1
 		else
 		  tri_right_top_further = -1
-		  
-		--print ("Left top"+((attributes_1[2][1])  as string)) 
-		--print ("Right top"+((attributes_1[2][2])  as string)) 
-		--print ("Left bottom"+((attributes_2[2][2])  as string)) 
-		--print ("Right bottom"+((attributes_2[2][1])  as string)) 
-		  
-		--print ("Tri state left "+(tri_left_top_further  as string)) 
-		--print ("Tri state right "+(tri_right_top_further as string))
+
 		
 		sidewalk_bb = GetBoundingBox sidewalks[C_SIDEWALK_LEFT]
 		parking_lane_bb = GetBoundingBox parking_lanes[C_PARKING_LANE_LEFT]
 		  
--- 		place_pl_1 = cb_parking_lane_1.state or cb_parking_lane_2.state
--- 		place_pl_2 = cb_parking_lane_1.state or cb_parking_lane_2.state
-		
--- 		place_pl_1 = True
--- 		place_pl_2 = True
-		
--- 		if plTopBot == false then(
--- 			place_pl_1 = false
--- 			place_pl_2 = false
--- 		)
+
 		place_pl_1 = cb_parking_lane_1.state or cb_parking_lane_2.state
 		place_pl_2 = cb_parking_lane_1.state or cb_parking_lane_2.state
 		
@@ -1688,54 +1477,6 @@ rollout dlgCrossroadGenerator "Crossroad Generator"
 -- 		format "Processing took % seconds\n" ((end - start) / 1000.0)
 	)
   )
-  
-  
-  --first
---   on rb_lane_number_1 changed arg do (
---     if arg == 1 then (
---       rb_lane_width_1.visible = true
---     ) else (
---       rb_lane_width_1.visible = false
---       if rb_lane_width_1.state == 1 then (
---         rb_lane_width_1.state = 0
---         rb_lane_width_1_1.state = 1
---       )
---     )
---   )
---   
---   on rb_lane_width_1 changed arg do (
---     print "is called 1"
---     rb_lane_width_1_1.state = 0
---   )
---   
---   on rb_lane_width_1_1 changed arg do (
---     print "is called 2"
---     rb_lane_width_1.state = 0
---   )
---   
---   --second
---   on rb_lane_number_2 changed arg do (
---     if arg == 1 then (
---       rb_lane_width_2.visible = true
---     ) else (
---       rb_lane_width_2.visible = false
---       if rb_lane_width_2.state == 1 then (
---         rb_lane_width_2.state = 0
---         rb_lane_width_2_1.state = 1
---       )
---     )
---   )
---   
---   on rb_lane_width_2 changed arg do (
---     print "is called 1"
---     rb_lane_width_2_1.state = 0
---   )
---   
---   on rb_lane_width_2_1 changed arg do (
---     print "is called 2"
---     rb_lane_width_2.state = 0
---   )
-  
 )
 
 
@@ -1752,54 +1493,31 @@ rollout dlgCrossroadGenerator "Crossroad Generator"
 
 rollout dlgCrossroadGenerator2 "Crossroad Generator"
 (
-  group " ROAD"
-  (
-	label mainRoad  main_sign offset:[-100,0]
-	dropdownlist dd_crossroad_prefabs_1 "" items:#(	"(1-6)                      " + one_six ,
-																		"(2-2)R                   " + two_two ,
-																		"(2-4)                   "  + two_four,
-																		"(2-4)R                " + two_four_r ,
-																		"(2-5)                " + two_five,
-																		"(4-4)       " + four_four ,
-																		"(4-5)  " + four_five) height:8 
-																		
-    checkbox  cb_parking_lane_1 "Parking lane" checked:true align:#right
-  )
+	local list_items = roGenStruct.getUIPrefabsIcons()
+	group " ROAD"
+	(
+		label mainRoad  main_sign offset:[-100,0]
+		dropdownlist dd_crossroad_prefabs_1 "" items:list_items height:list_items.count																	
+		checkbox  cb_parking_lane_1 "Parking lane" checked:true align:#right
+	)
 
-  group " TOP ROAD"
-  (
-	label topRoad  top_sign offset:[-100,0]
-	dropdownlist dd_crossroad_prefabs_2 "" items:#(	"(1-6)                      " + one_six ,
-																		"(2-2)R                   " + two_two ,
-																		"(2-4)                   "  + two_four,
-																		"(2-4)R                " + two_four_r ,
-																		"(2-5)                " + two_five,
-																		"(4-4)       " + four_four ,
-																		"(4-5)  " + four_five) height:8 
-																		
-																		
-    checkbox  cb_parking_lane_2 "Parking lane" checked:true align:#right
-	  
-	spinner spnr_angle_1 "Top Angle: " type:#float range:[24, 156, 90] scale:1.0 align:#left offset:[0,10] width:70
-	spinner spnr_offset_1 "Top Offset:" type:#float range:[-1.0e6, 1.0e6, 0] align:#right offset:[0,-22] width:70
-  )
-  
-  group " BOTTOM ROAD" 
-  (
-	label botRoad  bot_sign offset:[-100,0]
-	dropdownlist dd_crossroad_prefabs_3 "" items:#(	"(1-6)                      " + one_six ,
-																		"(2-2)R                   " + two_two ,
-																		"(2-4)                   "  + two_four,
-																		"(2-4)R                " + two_four_r ,
-																		"(2-5)                " + two_five,
-																		"(4-4)       " + four_four ,
-																		"(4-5)  " + four_five) height:8 
-																		
-																		
-    checkbox  cb_parking_lane_3 "Parking lane" checked:true align:#right
-	spinner spnr_angle_2 "Bot. Angle:" type:#float range:[24, 156, 90] scale:1.0 align:#left offset:[0,10] width:70
-	spinner spnr_offset_2 "Bot. Offset:" type:#float range:[-1.0e6, 1.0e6, 0] align:#right offset:[0,-22] width:70
-  )
+	group " TOP ROAD"
+	(
+		label topRoad  top_sign offset:[-100,0]
+		dropdownlist dd_crossroad_prefabs_2 "" items:list_items height:list_items.count 																
+		checkbox  cb_parking_lane_2 "Parking lane" checked:true align:#right
+		spinner spnr_angle_1 "Top Angle: " type:#float range:[24, 156, 90] scale:1.0 align:#left offset:[0,10] width:70
+		spinner spnr_offset_1 "Top Offset:" type:#float range:[-1.0e6, 1.0e6, 0] align:#right offset:[0,-22] width:70
+	)
+
+	group " BOTTOM ROAD" 
+	(
+		label botRoad  bot_sign offset:[-100,0]
+		dropdownlist dd_crossroad_prefabs_3 "" items:list_items height:list_items.count																	
+		checkbox  cb_parking_lane_3 "Parking lane" checked:true align:#right
+		spinner spnr_angle_2 "Bot. Angle:" type:#float range:[24, 156, 90] scale:1.0 align:#left offset:[0,10] width:70
+		spinner spnr_offset_2 "Bot. Offset:" type:#float range:[-1.0e6, 1.0e6, 0] align:#right offset:[0,-22] width:70
+	)
   
   button btn_generate "Generate" width: 200 height: 35 offset:[0, 5]
 --   button btn_done "Done"
@@ -1827,7 +1545,7 @@ rollout dlgCrossroadGenerator2 "Crossroad Generator"
 --     print "--Crossroad Generator--"
     
     if initialized == false then (
-		collectAllPrefabs &roads &sidewalks &corners &parking_lanes
+		roGenStruct.collectAllPrefabs &roads &sidewalks &corners &parking_lanes
 		initialized = true
     )
   )
@@ -1942,64 +1660,7 @@ rollout dlgCrossroadGenerator2 "Crossroad Generator"
 			plRoad2 	= road_2_model
 		)
 		
-		
--- 		if spec_1 != false then(
--- 			road_1_model = CreateRoadWithPL roads parking_lanes dd_crossroad_prefabs_1.selection &spec_1
--- 			plRoad1 = True
--- 		)
--- 		else road_1_model = roGenStruct.pickRoadPrefab roads dd_crossroad_prefabs_1.selection spec_1
--- 		
--- 		
--- 		if spec_2 != false then(
--- 			road_2_model = CreateRoadWithPL roads parking_lanes dd_crossroad_prefabs_2.selection &spec_2
--- 			plRoad2 = True
--- 		)
--- 		else road_2_model = roGenStruct.pickRoadPrefab roads dd_crossroad_prefabs_2.selection spec_2
--- 		
--- 		
--- 		if spec_3 != false then(
--- 			road_3_model = CreateRoadWithPL roads parking_lanes dd_crossroad_prefabs_3.selection &spec_3
--- 			plRoad3 = True
--- 		)
--- 		else road_3_model = roGenStruct.pickRoadPrefab roads dd_crossroad_prefabs_3.selection spec_3
-
-
--- 		if spec_1 != false or spec_2 != false then corner_model  = corners[1]
--- 		else corner_model = SelectCorner corners (bit.or cb_parking_lane_1.triState cb_parking_lane_2.triState)
--- 		
--- 		if spec_1 != false or spec_3 != false then corner_model_2  = corners[1]
--- 		else corner_model_2 = SelectCorner corners (bit.or cb_parking_lane_1.triState cb_parking_lane_2.triState)
-		-------------------------------------------------------------------------------------------------------------------------------------------------------
-
--- 		road_1_model = roGenStruct.pickRoadPrefab roads dd_crossroad_prefabs_1.selection spec_1
--- 		road_2_model = roGenStruct.pickRoadPrefab roads dd_crossroad_prefabs_2.selection spec_2
--- 		road_3_model = roGenStruct.pickRoadPrefab roads dd_crossroad_prefabs_3.selection spec_3
-		
-		
-				
-		
--- 		road_1_model = SelectRoad roads rb_lane_number_1.state rb_lane_width_1.state rb_lane_width_1_1.state spec_1
--- 		road_2_model = SelectRoad roads rb_lane_number_2.state rb_lane_width_2.state rb_lane_width_2_1.state spec_2
--- 		road_3_model = SelectRoad roads rb_lane_number_3.state rb_lane_width_3.state rb_lane_width_3_1.state spec_3
-		
-	-- 	format "%\n" spec_3
-		
-		
-		
--- 		corner_model = SelectCorner corners (bit.or cb_parking_lane_1.triState cb_parking_lane_2.triState)
--- 		corner_model_2 = SelectCorner corners (bit.or cb_parking_lane_1.triState cb_parking_lane_3.triState)
-		
-
-
-
-
-	-- 	format "%\n%\n%\n%\n" roads rb_lane_number_1.state rb_lane_width_1.state rb_lane_width_1_1.state
-		
-		  
-
 		road_1 = copy road_1_model
-	-- 	road_1.name = replace road_1.name 11 4 "crossroad"
-
 		road_1.name = replace road_1.name 11 6 "crossroad_4DR"
 		road_1.name = uniquename(road_1.name)	
 		
@@ -2051,7 +1712,7 @@ rollout dlgCrossroadGenerator2 "Crossroad Generator"
 		
 		attributes_1 = CreateConnectingRoad road_2_a road_1_bb road_2_bb corner_model corner_bb spnr_angle_1.value placed_items 0 spnr_offset_1.value prevPt:pTop
 		attributes_2 = CreateConnectingRoad road_2_b road_1_bb road_3_bb corner_model_2 corner_2_bb spnr_angle_2.value placed_items 180 spnr_offset_2.value prevPt:pBot
-		
+		format "attributes_1:%\n" attributes_1
 		delete road_2_a
 		delete road_2_b
 		
@@ -2286,64 +1947,44 @@ rollout dlgCrossroadGenerator2 "Crossroad Generator"
 
 rollout dlgCrossroadGenerator3 "Crossroad Generator"
 (
-  group " ROAD"
-  (
-	label mainRoad main_sign offset:[-100,0]
-	dropdownlist dd_crossroad_prefabs_1 "" items:#(	"(1-6)                      " + one_six ,
-																		"(2-2)R                   " + two_two ,
-																		"(2-4)                   "  + two_four,
-																		"(2-4)R                " + two_four_r ,
-																		"(2-5)                " + two_five,
-																		"(4-4)       " + four_four ,
-																		"(4-5)  " + four_five) height:8 
+	local list_items = roGenStruct.getUIPrefabsIcons()
+	group " ROAD"
+	(
+		label mainRoad main_sign offset:[-100,0]
+		dropdownlist dd_crossroad_prefabs_1 "" items:list_items height:list_items.count
+		checkbox  cb_parking_lane_1 "Parking lane" checked:true align:#right
+	)
 
-    checkbox  cb_parking_lane_1 "Parking lane" checked:true align:#right
-  )
+	group " SIDE ROAD"
+	(
+		label topRoad top_sign offset:[-100,0]
+		label botRoad bot_sign offset:[-85,-18]
+		dropdownlist dd_crossroad_prefabs_2 "" items:list_items height:list_items.count
+		checkbox  cb_parking_lane_2 "Parking lane" checked:true align:#right																
+		spinner spnr_angle_1 "Angle: " type:#float range:[24, 156, 90] scale:1.0 align:#left offset:[0,0] width:70
+	)
 
-  group " SIDE ROAD"
-  (
-	label topRoad top_sign offset:[-100,0]
-	label botRoad bot_sign offset:[-85,-18]
-	dropdownlist dd_crossroad_prefabs_2 "" items:#(	"(1-6)                      " + one_six ,
-																		"(2-2)R                   " + two_two ,
-																		"(2-4)                   "  + two_four,
-																		"(2-4)R                " + two_four_r ,
-																		"(2-5)                " + two_five,
-																		"(4-4)       " + four_four ,
-																		"(4-5)  " + four_five) height:8 
-
-    checkbox  cb_parking_lane_2 "Parking lane" checked:true align:#right
-																		
-	spinner spnr_angle_1 "Angle: " type:#float range:[24, 156, 90] scale:1.0 align:#left offset:[0,0] width:70
-  )
-	
-    
---     spinner spnr_angle_2 "Angle 2: " type:#float range:[1, 180, 90] scale:1.0 align:#left
-    spinner spnr_offset_1 "Offset 1: " type:#float range:[-1.0e6, 1.0e6, 0] align:#right
---     spinner spnr_offset_2 "Offset 2: " type:#float range:[-1.0e6, 1.0e6, 0] align:#left
-
+	--     spinner spnr_angle_2 "Angle 2: " type:#float range:[1, 180, 90] scale:1.0 align:#left
+	spinner spnr_offset_1 "Offset 1: " type:#float range:[-1.0e6, 1.0e6, 0] align:#right
+	--     spinner spnr_offset_2 "Offset 2: " type:#float range:[-1.0e6, 1.0e6, 0] align:#left
 
 	local buttGenText = top_sign + "   Generate" 
 	local buttFlipGenText = bot_sign + "    Generate Flipped"  
-  
---   button btn_generate2 "Generate Flipped Version"
-  button btn_generate2 buttFlipGenText width: 200 height: 30 offset:[0, -15]
-  button btn_generate buttGenText width: 200 height: 30 offset:[0, -5]
---   button btn_done "Done"
-  
---   global generated_road = undefined
-  
-  local initialized = false
-  local roads = #()
-  local sidewalks = #()
-  local corners = #()
-  local parking_lanes = #()
-  local layer = undefined
-  
-  
-  local controlsArr = #(dd_crossroad_prefabs_1, cb_parking_lane_1, 
-								dd_crossroad_prefabs_2, cb_parking_lane_2, spnr_angle_1)
 
+	--   button btn_generate2 "Generate Flipped Version"
+	button btn_generate2 buttFlipGenText width: 200 height: 30 offset:[0, -15]
+	button btn_generate buttGenText width: 200 height: 30 offset:[0, -5]
+	--   button btn_done "Done"
+
+	--   global generated_road = undefined
+
+	local initialized = false
+	local roads = #()
+	local sidewalks = #()
+	local corners = #()
+	local parking_lanes = #()
+	local layer = undefined
+	local controlsArr = #(dd_crossroad_prefabs_1, cb_parking_lane_1, dd_crossroad_prefabs_2, cb_parking_lane_2, spnr_angle_1)
 
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	--   EVENT HANDLERS :
@@ -2353,7 +1994,7 @@ rollout dlgCrossroadGenerator3 "Crossroad Generator"
 --     print "--Crossroad Generator--"
     
     if initialized == false then (
-		collectAllPrefabs &roads &sidewalks &corners &parking_lanes
+		roGenStruct.collectAllPrefabs &roads &sidewalks &corners &parking_lanes
 		initialized = true
 		spnr_offset_1.visible = False
     )
@@ -3003,22 +2644,6 @@ fn HasObjProperty obj prop_name prop =
 )
 
 
-
-
-
-
-
-
-fn CheckResource file fileName =
-(
-	if file == undefined then
-	(
-		MessageBox (fileName+" resources is missing")
-		throw fileName
-	)
-)
-
-
 ---------------------------------------------------------------------------------------------------------------------
 
 
@@ -3036,39 +2661,27 @@ fn EditSplineTangents road =
 
 
 
-
 --###################################################################################
 --															ROADS
 --###################################################################################
 
 rollout RoadGeneratorTool "Road Generator" (	
-	group ""
-	(
-	dropdownlist dd_road_prefabs_1 "" items:#(	"(1-6)                      " + one_six ,
-																		"(2-2)R                   " + two_two ,
-																		"(2-4)                   "  + two_four,
-																		"(2-4)R                " + two_four_r ,
-																		"(2-5)                " + two_five,
-																		"(4-4)       " + four_four ,
-																		"(4-5)  " + four_five) height:8 
 
+	local list_items = roGenStruct.getUIPrefabsIcons()
+	group "" (
+	
+		dropdownlist dd_road_prefabs_1 "" items:list_items height:list_items.count
 		checkbox  cb_parking_lane_left "Parking lane Left" checked:true align:#left offset:[0,5]
 		checkbox  cb_parking_lane_right "Parking lane Right" checked:true align:#right offset:[3,-22]
--- 		checkbox  cb_narrow_road_1 "Narrow road:" checked:false align:#right
-		
-		
 		checkbox  cb_sidewalks_right "Sidewalks Right   " checked:true align:#right offset:[0,5]
 		checkbox  cb_sidewalks_left "Sidewalks Left" checked:true align:#left offset:[0,-17]
 		spinner spinner_tangent "Density: " range:[0,90.0,4.0] scale:0.05 type:#float allign:#center offset:[0,10] width:70 across:2 
 		spinner spinner_twist "Twist: " range:[-90,90.0,0.0] scale:0.5 type:#float allign:#center offset:[0,10] width:70
-
 	)
 	
 	button btn_edit_tangents "Edit Tangents" width: 100 height: 35 offset:[-50, 10] align:#center toolTip:"Edit Tangents\nHint:Insert new wertices on spline if you need."
 	button btn_sync_spline "Sync Spline" width: 100 height: 35 offset:[50, -40] align:#center toolTip:"Snap spline Start, End points and Rebuild curve."
 	checkbox cb_update_curve "Sync Curve" checked:true align:#right offset:[0,5]
-
-
 	button btn_generate "Generate Road" width: 200 height: 35 offset:[0, 10] align:#center
 	button bt_generateShortcut "Generate Shortcut" width:200 height:35 offset:[0,0]
 
@@ -3077,38 +2690,9 @@ rollout RoadGeneratorTool "Road Generator" (
 	local dummies = #()
 	local controlsArr = #(dd_road_prefabs_1, cb_parking_lane_left, cb_parking_lane_right, cb_sidewalks_left, cb_sidewalks_right, spinner_tangent, spinner_twist)
 	
-	on RoadGeneratorTool open do
-	(
-
-		--load road types
-		append roads $generator_road_1_6
--- 		append roads $generator_road_1_6     		--<< instead of spec just For NOW
-		
-		append roads $generator_road_2_2_rail
--- 		append roads $generator_road_2_2_rail	--<< instead of spec just For NOW
-		
-		append roads $generator_road_2_4
--- 		append roads $generator_road_2_4_spec
-		
-		append roads $generator_road_2_4_rail
--- 		append roads $generator_road_2_4_rail	--<< instead of spec just For NOW		
-		
-		append roads $generator_road_2_5
--- 		append roads $generator_road_2_5_spec
-		
-	--     append roads $generator_road_2_6
-	--     append roads $generator_road_2_6_spec
-		append roads $generator_road_4_4
--- 		append roads $generator_road_4_4 			--<< instead of spec just For NOW
-		
-		append roads $generator_road_4_5
--- 		append roads $generator_road_4_5_spec
-		
-		--load sidewalks and parking places
-		append specs $generator_parking_lane_left
-		append specs $generator_parking_lane_right
-		append specs $generator_sidewalk_left
-		append specs $generator_sidewalk_right
+	on RoadGeneratorTool open do (
+	
+		roGenStruct.collectRoadPrefabs &roads &specs
 	)
 	on bt_generateShortcut pressed do (roGenStruct.generateRoadShortcut RoadGeneratorTool)
 	on btn_generate pressed do (roGenStruct.generateRoad RoadGeneratorTool roads specs)
@@ -3224,55 +2808,6 @@ rollout rGeneratorUtilities "Generator Utilities"
 	on bt_validate_roads		pressed do ( roGenStruct.validateSelectedRoads()								)
 	on bt_distr_to_laers		pressed do ( roGenStruct.distributeRoadsInToLayers()							)
 )
-
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-fn AppendCollsToArrays &collsRoads &collsSidewalks &collsCorners &collsParking_lanes =
-(
-	--load roads coll prefabs
-	append collsRoads $coll_generator_road_1_6
-	append collsRoads $coll_generator_road_2_2_rail
-	append collsRoads $coll_generator_road_2_4
-	append collsRoads $coll_generator_road_2_4_rail
-    append collsRoads $coll_generator_road_2_5
-	append collsRoads $coll_generator_road_4_4
-    append collsRoads $coll_generator_road_4_5
-
-    --load sidewalks coll prefabs
-    append collsSidewalks $coll_generator_sidewalk_left
-    append collsSidewalks $coll_generator_sidewalk_right
-	
-    --load corners coll prefabs
-    append collsCorners $coll_generator_corner
-    append collsCorners $coll_generator_corner_p
-	
-    --load parking lanes coll prefabs
-    append collsParking_lanes $coll_generator_parking_lane_left
-    append collsParking_lanes $coll_generator_parking_lane_right
-	
-	True
-)
-
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-fn GetSpecsForRoadGenerator =
-(
-	specs = #()
-	append specs $coll_generator_parking_lane_left
-	append specs $coll_generator_parking_lane_right
-	append specs $coll_generator_sidewalk_left
-	append specs $coll_generator_sidewalk_right
-	specs
-)
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-fn MoveCollToLayer obj =
-(
-	local collLayer = LayerManager.getLayerFromName "[CrossRoad_Generator_Colls]"
-
-	if collLayer == undefined then collLayer = LayerManager.newLayer()
-	collLayer.setname "[CrossRoad_Generator_Colls]"
-		
-	collLayer.addNode obj
-)
-
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 rollout dlgPickObjectType "Menu"
 (
@@ -3380,9 +2915,6 @@ rollout dlgPickObjectType "Menu"
 		runLocalScript "Road_Generator_Collisions"
 		roGenStruct.All_CALLBACKS_ENABLED = true
 	)
-	
-
-	
 )
 -- createDialog dlgPickObjectType
 

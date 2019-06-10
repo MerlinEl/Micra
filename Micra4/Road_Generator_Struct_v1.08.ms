@@ -21,7 +21,8 @@ struct ROAD_GENERATOR_STRUCTURE	(
 	SLECT_OBJECT_CALLBACK_ENABLED = true,
 	All_CALLBACKS_ENABLED = true,
 	TANGENT_TEST_COUNT = 100,
-	
+	C_LAYER_NAME = "---noexport---terrain_generator_modules",
+	H_LAYER_NAME = "---noexport---terrain_generator_helpers",
 	--functions
 	fn getSource = getSourceFileName(), --get path of this script
 	-------------------------------------------------------------
@@ -84,6 +85,133 @@ struct ROAD_GENERATOR_STRUCTURE	(
 			return false
 		)
 		true
+	),
+	/**
+	*@Usage  ASCII Signs Generator
+	*@Example
+		getRoadSymbol #("a", "a", "r", "s", "r", "a", "a")
+		"▄▄⽬⽬▄▄"
+	*/
+	fn getRoadSymbol arr = (
+
+		local str = ""
+		for char in arr do (
+
+			case char of (
+			
+				"a"	:	str += bit.intAsChar 9604 --road
+				"r"	:	str += bit.intAsChar 12140 --rails
+				"s"	:	str += " "
+			)
+		)
+		str
+	),
+	/**
+	*@Usage	> Generate ASCII Icons List
+		a = road
+		r = rails
+		s = space
+	*/
+	fn getUIPrefabsIcons = (
+
+		#(	--constant lengths
+			"(1-6)     "	+ getRoadSymbol #("a", "a") ,								   
+			"(1-6)D   "	+ getRoadSymbol #("a", "a") ,								   
+			"(2-2)R   "	+ getRoadSymbol #("a", "a", "r", "s", "r", "a", "a") ,
+			"(2-4)     "	+ getRoadSymbol #("a", "a", "s", "a", "a") ,
+			"(2-4)R   "	+ getRoadSymbol #("a", "a", "r", "s", "r", "a", "a") ,
+			"(2-5)     "	+ getRoadSymbol #("a", "a", "s", "a", "a"),
+			"(2-6)D  "		+ getRoadSymbol #("a", "a", "s", "a", "a"),
+			"(2-6)C  "		+ getRoadSymbol #("a", "a", "s", "a", "a"),
+			"(4-4)    "		+ getRoadSymbol #("a", "a", "s", "a", "a", "s", "a", "a", "s", "a", "a") ,
+			"(4-5)    "		+ getRoadSymbol #("a", "a", "s", "a", "a", "s", "a", "a", "s", "a", "a")
+		)	
+		/*
+		#(	--different lengths
+			"(1-6)                      "	+ getRoadSymbol #("a", "a", "a", "a", "a", "a") ,								   
+			"(1-6D)                      "	+ getRoadSymbol #("a", "a", "a", "a", "a", "a") ,								   
+			"(2-2)R                   "	+ getRoadSymbol #("a", "a", "r", "s", "r", "a", "a") ,
+			"(2-4)                   "		+ getRoadSymbol #("a", "a", "a", "a", "s", "a", "a", "a", "a") ,
+			"(2-4)R                "		+ getRoadSymbol #("a", "a", "a", "a", "r", "s", "r", "a", "a", "a", "a") ,
+			"(2-5)                "		+ getRoadSymbol #("a", "a", "a", "a", "a", "s", "a", "a", "a", "a", "a"),
+			"(2-6D)                "		+ getRoadSymbol #("a", "a", "a", "a", "a", "a", "s", "a", "a", "a", "a", "a", "a"),
+			"(2-6C)                "		+ getRoadSymbol #("a", "a", "a", "a", "a", "a", "s", "a", "a", "a", "a", "a", "a"),
+			"(4-4)       "			+ getRoadSymbol #("a", "a", "a", "a", "s", "a", "a", "a", "a", "s", "a", "a", "a", "a", "s", "a", "a", "a", "a") ,
+			"(4-5)  "				+ getRoadSymbol #("a", "a", "a", "a", "a", "s", "a", "a", "a", "a", "a", "s", "a", "a", "a", "a", "a", "s", "a", "a", "a", "a", "a")
+		)	
+		*/
+	),
+	fn getMissingPrefabs = (
+	
+		local prefabs_list = #( -- to do add spec files for new prefabs
+		
+			--road types
+			"generator_road_1_6", 
+			"generator_road_1_6d",
+			"generator_road_2_2_rail",
+			"generator_road_2_4",
+			"generator_road_2_4_spec",
+			"generator_road_2_4_rail",
+			"generator_road_2_5",
+			"generator_road_2_5_spec",
+			"generator_road_2_6d",
+			"generator_road_2_6c",
+			"generator_road_4_4",
+			"generator_road_4_5",
+			"generator_road_4_5_spec",
+			--sidewalks
+			"generator_sidewalk_left",
+			"generator_sidewalk_right",
+			--corners
+			"generator_corner",
+			"generator_corner_p",
+			--parking lanes
+			"generator_parking_lane_left",
+			"generator_parking_lane_right"
+		)
+		for n in prefabs_list where (getNodeByName n == undefined) collect n
+	),
+	fn collectAllPrefabs &roads &sidewalks &corners &parking_lanes = (
+	
+		--road types
+		append roads $generator_road_1_6
+		append roads $generator_road_1_6d
+		append roads $generator_road_2_2_rail
+		append roads $generator_road_2_4
+		append roads $generator_road_2_4_rail	
+		append roads $generator_road_2_5
+		append roads $generator_road_2_6d
+		append roads $generator_road_2_6c
+		append roads $generator_road_4_4
+		append roads $generator_road_4_5
+		--sidewalks
+		append sidewalks $generator_sidewalk_left
+		append sidewalks $generator_sidewalk_right
+		--corners
+		append corners $generator_corner
+		append corners $generator_corner_p
+		--parking lanes
+		append parking_lanes $generator_parking_lane_left
+		append parking_lanes $generator_parking_lane_right
+	),
+	fn collectRoadPrefabs &roads &specs = ( --order must be same like in rollout RoadGeneratorTool > dd_road_prefabs_1
+
+		--load road types
+		append roads $generator_road_1_6
+		append roads $generator_road_1_6d
+		append roads $generator_road_2_2_rail
+		append roads $generator_road_2_4
+		append roads $generator_road_2_4_rail
+		append roads $generator_road_2_5
+		append roads $generator_road_2_6d
+		append roads $generator_road_2_6c
+		append roads $generator_road_4_4	
+		append roads $generator_road_4_5
+		--load sidewalks and parking places
+		append specs $generator_parking_lane_left
+		append specs $generator_parking_lane_right
+		append specs $generator_sidewalk_left
+		append specs $generator_sidewalk_right
 	),
 	fn getRestOfKids kids = (
 	
@@ -696,20 +824,19 @@ struct ROAD_GENERATOR_STRUCTURE	(
 	fn deleteLayerByName layer_name forceDelete:false=  (
 	
 		local layerToDelete = LayerManager.getLayerFromName layer_name--find layer that you need to delate
-		if layerToDelete == undefined then (
+		if layerToDelete != undefined then (
 		
-			format ("deleteLayerByName > Layer *"+layer_name+"* don't exist!!!")
-			
-		) else (
-			
 			if (LayerManager.current.name) == layer_name do (layermanager.getlayer 0).current = true	--if desired layer is current make default as current
 			local layer_nodes
 			layerToDelete.nodes &layer_nodes --get layer nodes
 			if layer_nodes.count != 0 and not forceDelete then  (messagebox ("Layer *"+layer_name+"* is not empty!!!") title:"DeleteLayerByName" beep:false) else (
 				
 				for o in layer_nodes where isValidNode o do delete o
-				LayerManager.deleteLayerbyname layer_name
+				LayerManager.deleteLayerbyname layer_name --return true or false
 			)
+		) else (
+		
+			false --return false if layer not found
 		)
 	),
 	-------------------------------------------------------------
@@ -717,6 +844,12 @@ struct ROAD_GENERATOR_STRUCTURE	(
 	------                 TRANSFORM                       ------
 	-------------------------------------------------------------
 	-------------------------------------------------------------
+	fn arrayToString arr formated:true = ( --for debug or message
+
+		local str = ""
+		for o in arr do str += ("\t" + o as string +"\n")
+		str
+	),
 	fn weldEditPoly epoly precision = (
 	
 		local all_vert_list = #{1..(polyop.getNumVerts epoly)}
@@ -739,15 +872,54 @@ struct ROAD_GENERATOR_STRUCTURE	(
 		p1.pos = p2.pos
 		p2.pos = p
 	),
+	fn loadPrefabs road_tool_file = (
+	
+		local layer_components	= LayerManager.getLayerFromName C_LAYER_NAME
+		local layer_helpers		= LayerManager.getLayerFromName H_LAYER_NAME
+		deleteLayerByName C_LAYER_NAME forceDelete:true --clear old layer if exist
+		deleteLayerByName H_LAYER_NAME forceDelete:true --clear old layer if exist
+		
+		mergemaxfile road_tool_file --merge prefabs from file
+		
+		--check it again
+		layer_components	= LayerManager.getLayerFromName roGenStruct.C_LAYER_NAME
+		layer_helpers 		= LayerManager.getLayerFromName roGenStruct.H_LAYER_NAME
+		missing_prefabs 	= roGenStruct.getMissingPrefabs()
+
+		if layer_components == undefined or layer_helpers == undefined or missing_prefabs.count > 0 do (
+		
+			return missing_prefabs --return missing prefabs array
+		
+		)
+		--hide prefabs layers
+		layer_components.isHidden	= true
+		layer_helpers.isHidden 		= true
+		#() --return missing 0
+	),
 	fn reloadPrefabs road_tool_file = (
 	
 		--close road tool
 		try(closeRolloutFloater  ::floaterGenerator)catch()
 		--delete layer with components
-		deleteLayerByName "---noexport---terrain_generator_helpers" forceDelete:true
-		deleteLayerByName "---noexport---terrain_generator_modules" forceDelete:true
+		deleteLayerByName H_LAYER_NAME forceDelete:true
+		deleteLayerByName C_LAYER_NAME forceDelete:true
 		--start tool and load all prefab components
 		fileIn road_tool_file
+	),
+	fn validatePrefabs road_tool_file = (
+	
+		local missing_prefabs	 = getMissingPrefabs()
+		if missing_prefabs.count > 0 do (
+
+			missing_prefabs = loadPrefabs road_tool_file --merge prefabs from file
+			if missing_prefabs.count > 0 do (
+
+				MessageBox ("( "+missing_prefabs.count as string+" ) Missing prefabs >\n" + (arrayToString missing_prefabs)) title:"Unable start Road Tool:"
+				return false
+			)
+		)
+		format "roGenStruct > validatePrefabs > Success!\n"
+		true
 	),
 	/**
 	*@Usage > move tangents from dumy along vector by given distance
@@ -1348,9 +1520,9 @@ struct ROAD_GENERATOR_STRUCTURE	(
 		
 			local sel = selection as Array
 			local selCount = sel.count
-			local tangent_deg		= dialog.spinner_tangent.value
+			local tangent_deg	= dialog.spinner_tangent.value
 			local twist_deg		= dialog.spinner_twist.value
-			local prefabs_sel		= dialog.dd_road_prefabs_1.selection
+			local prefabs_sel	= dialog.dd_road_prefabs_1.selection
 			local pl_left_state	= dialog.cb_parking_lane_left.state 
 			local pl_right_state	= dialog.cb_parking_lane_right.state 
 			local sw_left_state	= dialog.cb_sidewalks_left.state 
