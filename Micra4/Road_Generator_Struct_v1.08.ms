@@ -424,7 +424,7 @@ struct ROAD_GENERATOR_STRUCTURE	(
 	),
 	fn pickRoadPrefab roads dd_selection spec = (	
 	
-		roadPointer = dd_selection
+		local roadPointer = dd_selection
 		roads[roadPointer]
 	),
 	/** 

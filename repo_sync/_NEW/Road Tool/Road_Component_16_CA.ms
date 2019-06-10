@@ -61,12 +61,14 @@
 -- 				format "params open thisNode:%\n" thisNode
 			)
 		)
+		
 		fn attachParent obj_trgt = (
 				
 			if not (isValidNode thisNode) or not (isValidNode obj_trgt) do return false		
 			format "roGen_Joint_CA > attachParent > src:%  trgt:%\n" thisNode obj_trgt
 			parent_node = ( nodeTransformMonitor node:obj_trgt forwardTransformChangeMsgs:false )	
-			thisNode.controller = link_constraint()
+			thisNode.transform.controller = prs () --set default controller
+			thisNode.controller = link_constraint() --set link constraint controller
 			thisNode.controller.addTarget obj_trgt 1 --at frame 1
 		)
 		
@@ -104,7 +106,7 @@
 		
 		fn registerCallbacks = (
 			
-				format "roGen_Joint_CA > register callback onSelfDeleted\n"
+				format "roGen_Joint_CA > register callback onSelfDeleted [ % ]\n" node_name
 				if thisNode == undefined do return false
 				if handler != undefined do unregisterCallbacks()
 				handler = when thisNode deleted obj do (
@@ -135,10 +137,10 @@
 			thisNode = getNode()
 			registerCallbacks()
 		)
-		on create do (
+-- 		on create do (
 
-			format "roGen_Joint_CA > created this:%\n"  this
-		)
+-- 			format "roGen_Joint_CA > created this:% name:%\n"  this node_name
+-- 		)
 		on update do (
 			
 -- 			format "roGen_Joint_CA > update this:%\n"  this	
@@ -146,101 +148,6 @@
 		on deleted do (
 			
 			format "roGen_Joint_CA > deleted node:%\n"  node_name
-		)
-	)
--- )
-	
---****************************************************************************************************--
---		Road Path 
- --line_path = roGen_Path startP:selection[1].pos endP: selection[2].pos name:(uniqueName "Road_Path_") build:true
---****************************************************************************************************--
--- if classOf roGen_Path != Shape do (
-	
-	plugin shape roGen_Path
-	name:"RoadPath"
-	classID:#(0x13a5b2ee, 0x319bf3a8)
-	extends:line version:1
-	category:"Road Tool"
-	(
-		local meshObj
-		local thisNode, handler, wire_color = green --(color 196 88 225)
-		fn getNode = (
-				
-			refs.dependentnodes this firstonly:on
-		)
-		fn drawLineBetweenTwoPoints pointA pointB = (
-
-			meshObj = getNode()
-			if meshObj == undefined do meshObj = SplineShape pos:pointA
-			addNewSpline meshObj
-			addKnot meshObj 1 #corner #line PointA
-			addKnot meshObj 1 #corner #line PointB
-			updateShape meshObj
-			meshObj.wirecolor = wire_color
-		)
-		parameters main rollout:params (
-			
-			parent_node type:#maxObject
-			startP type:#point3 animateable:false default:[0,0,0]
-			endP type:#point3 animateable:false default:[0,0,0]
-			is_deleted type:#boolean animateable:false default:false
-			build type:#boolean animateable:false default:false
-			node_name  type:#string animateable:false default:""
-			
-			on build set val do (
-				
-				if build do (
-					
-					format "build shape: % \n" val
-					drawLineBetweenTwoPoints startP endP
-				)
-			)
-		)
-		rollout params "RoadTool:"  (
-			
-			group "About:" (
-				
-				label lbl1 "Road Spline Helper" align:#left
-			)
-		)
-		on detachedFromNode obj do ( --when node is deleted
-			
-			format  "roGen_Path > detachedFromNode > node_name:%\n"  node_name
-			if is_deleted do return false --prevent depency loop crash
-			format  "roGen_Path > detachedFromNode > parent:% is_deleted:%\n"  parent_node is_deleted
-			is_deleted = true
-			if classOf parent_node == NodeTransformMonitor do ( --when spline is dleted delete also master obj
-				local obj = parent_node.node
-				if isValidNode obj and not (isDeleted obj) and not (obj.is_deleted) do (
-					
-					format "roGen_Path > detachedFromNode > Deleting parent node:%\n" obj.name
-					try (delete parent_node.node) catch (format "roGen_Path > detachedFromNode > Error:%\n" (getCurrentException()))
-				)
-			)
-		)
-
-		on deleted do (
-				
-			is_deleted = true
-			format "roGen_Path > deleted node:%\n"  node_name
-		)
-		
-		tool create numPoints:3 (
-
-			on mousePoint click do case click of (
-
-				2: (
-					startP = gridPoint
-					nodeTM.translation = startP
-				)
-				3: (
-					
-					endP = gridPoint
-					drawLineBetweenTwoPoints startP endP
-					--meshObj.pivot = (meshObj.min + meshObj.max) / 2
-					#stop
-				)
-			)
 		)
 	)
 -- )
@@ -337,28 +244,35 @@
 			fn updateList = (
 				
 				if not (isValidNode thisNode) do return false 
-				local linked_nodes =  (refs.dependentnodes thisNode) 
-				format "roGen_Road_CA > updateList > dependents:\n" 
+-- 				local linked_nodes =  (refs.dependentnodes thisNode) 
+				format "roGen_Road_CA > updateList > node [ % ] components > \n" node_name
 				local lbx_items = #("Start:None", "End:None", "Path:None") --default items
-				for n in linked_nodes do (
-				
+				for c in components_tab do (
+					
+					local n = c.node
 					format "\t%\n" n.name
-					if findString n.name "Start" != undefined then (
+					if findString n.name "Road_Joint_Start" != undefined then (
 						
 						lbx_items[1] = "Start:" + n.name
 						
-					) else if findString n.name "End" != undefined then (
+					) else if findString n.name "Road_Joint_End" != undefined then (
 						
 						lbx_items[2] = "End:" + n.name
 					)
-					else if findString n.name "Start" != undefined do (
+					else if findString n.name "Road_Path" != undefined do (
 						
 						lbx_items[3] = "Path:" + n.name
 					)
 				)
 				lbx.items = lbx_items
 			)
-
+			fn removeAll = (
+				
+				for c in components_tab do (c.node.detachParent())
+				components_tab	= #()
+				updateList()	
+				OK
+			)
 			fn removeComponent = (
 						
 				--get node name
@@ -400,9 +314,16 @@
 				for n in components_tab do format "component:%\n" n.node 
 			)
 		)
+		fn removeAll = ( params.removeAll() ) --public shortcut
 		fn updateList = ( params.updateList() ) --public shortcut
 		fn isEmptySlot slot_index = ( params.isEmptySlot slot_index ) --public shortcut
 		fn addComponent obj = ( params.addComponent obj ) --public shortcut
+		fn getLastCreatedObj = (
+			
+			rootnode.children[rootnode.children.count]
+			/*local objID = amax (for o in objects collect o.inode.handle) 
+			maxOps.getNodeByHandle objID*/
+		)
 -- 		fn missingComponets = ( 
 -- 			
 -- 			(refs.dependentNodes thisNode).count == 0
@@ -428,50 +349,11 @@
 				) catch (format "roGen_Road_CA > selfDestroy > Error during delete:% %\n" o (getCurrentException()))
 			)
 			gc()	
+			format "DELETED--------------------------------------------------[ % ]------------------------------------------------------------\n" node_name
 		)
-		fn cloneComponents obj_src obj_trgt = (
-			
-			if obj_src == undefined or not (isProperty obj_trgt "object_type") or obj_trgt.object_type != "road" do return false
-			format "roGen_Road_CA > cloneComponents > obj_src:% obj_trgt:%\n" obj_src.node_name obj_trgt.name
-			try (custAttributes.delete obj_trgt roGen_Road_CA baseObject:true) catch (format "roGen_Road_CA > cloneComponents > Error: % n" (getCurrentException()))	
-			custAttributes.add obj_trgt roGen_Road_CA baseObject:true #unique
-			local new_objects = for obj in obj_src.components_tab collect (copy obj.node)
-			for obj in new_objects do (
-				
-				obj.node_name = obj.name
-				obj.wirecolor = wire_color
-				obj.parent_node = obj_trgt
-				obj.controller.addTarget obj_trgt 1 --relink to new node
-				append obj_trgt.components_tab (nodeTransformMonitor node:obj forwardTransformChangeMsgs:false)
-				obj.init()
-			)
-			obj_trgt.init()
-			obj_trgt.updateList()	
-		)
--- 		fn cloneComponents obj_src obj_trgt = (
--- 			
--- 			if obj_src == undefined or not (isProperty obj_trgt "object_type") or obj_trgt.object_type != "road" do return false
--- 			format "roGen_Road_CA > cloneComponents > obj_src:% obj_trgt:%\n" obj_src.node_name obj_trgt.name
--- 			try (custAttributes.delete obj_trgt roGen_Road_CA baseObject:true) catch (format "roGen_Road_CA > cloneComponents > Error: % n" (getCurrentException()))	
--- 			custAttributes.add obj_trgt roGen_Road_CA baseObject:true #unique
--- 			obj_trgt.init() --must after creation
--- 			for obj in obj_src.components_tab do ( --clone components
--- 				
--- 				local new_obj = copy obj.node
--- 				try (custAttributes.delete new_obj roGen_Joint_CA baseObject:true) catch (format "roGen_Road_CA > cloneComponents > Error: % n" (getCurrentException()))	
--- 				custAttributes.add new_obj roGen_Joint_CA baseObject:true #unique
--- 				new_obj.init()
--- 				format "roGen_Road_CA > cloneComponents > src:% trgt:%\n" obj.node.name new_obj.name
--- 				new_obj.wirecolor = wire_color
--- 				new_obj.parent_node = obj_trgt
--- 				new_obj.controller.addTarget obj_trgt 1 --relink to new node
--- 				append obj_trgt.components_tab (nodeTransformMonitor node:new_obj forwardTransformChangeMsgs:false)
--- 			)
--- 			obj_trgt.updateList()	
--- 		)
 		fn registerCallbacks = (
 			
-				format "roGen_Road_CA > registerCallbacks > thisNode:%\n" thisNode
+				format "roGen_Road_CA >  register callback onSelfDeleted [ % ]\n" node_name
 				if thisNode == undefined do return false
 				if handler != undefined do unregisterCallbacks()
 				handler = when thisNode deleted obj do (
@@ -480,14 +362,95 @@
 				unregisterCallbacks()
 				selfDestroy()
 			)	
+			format "REGISTRED--------------------------------------------------[ % ]------------------------------------------------------------\n" node_name
 		)
+		fn selfClone obj_src  = ( --unable empty target node
+			
+			local obj_trgt = getLastCreatedObj()
+			if obj_src == undefined or not (isProperty obj_trgt "object_type") or obj_trgt.object_type != "road" do return false
+			format "roGen_Road_CA > selfClone > [ % ] to [ % ]\n" obj_src.thisNode obj_trgt
+			--link current components to target obj
+			try (custAttributes.delete obj_src roGen_Road_CA baseObject:true) catch (format "roGen_Road_CA > selfClone > Error: % n" (getCurrentException()))	
+			try (custAttributes.delete obj_trgt roGen_Road_CA baseObject:true) catch (format "roGen_Road_CA > selfClone > Error: % n" (getCurrentException()))	
+-- 			custAttributes.add obj_trgt roGen_Road_CA baseObject:true #unique
+-- 			for c in obj_trgt.components_tab do (
+-- 				
+-- 				c.node.attachParent obj_trgt
+-- 				c.node.init()
+-- 			)
+			--create new components for source obj
+-- 			local new_objects = for obj in obj_src.components_tab collect (copy obj.node)
+-- 			for n in new_objects do (
+-- 				
+-- 				obj_src.addComponent n
+-- 				n.init()
+-- 			)
+-- 			for c in obj_src.components_tab do  format "src component:%\n" c.node
+-- 			for c in obj_trgt.components_tab do  format "trgt component:%\n" c.node
+				
+			
+-- 			local new_objects = for obj in obj_src.components_tab collect (copy obj.node)
+		)	
+		/*fn selfClone obj_src  = ( --you can manipulate only source object the clone is disabled
+			
+			local obj_trgt = getLastCreatedObj()
+			if obj_src == undefined or not (isProperty obj_trgt "object_type") or obj_trgt.object_type != "road" do return false
+-- 			obj_src.components_tab = obj_trgt.components_tab 
+			format "roGen_Road_CA > selfClone > [ % ] to [ % ]\n" obj_src.name obj_trgt
+-- 			obj_src.components_tab = # ()
+			format "src components:%\n" obj_src.components_tab
+-- 			obj_trgt.components_tab = #()
+-- 			format "trgt components:%\n" obj_trgt.components_tab
+-- 			$.components_tab = #()
+			try (custAttributes.delete obj_trgt roGen_Road_CA baseObject:true) catch (format "roGen_Road_CA > selfClone > Error: % n" (getCurrentException()))	
+-- 			custAttributes.add obj_trgt roGen_Road_CA baseObject:true #unique
+			format "trgt components:%\n" obj_trgt.components_tab	
+-- 			obj_trgt.removeAll()
+-- 			local new_objects = for obj in obj_src.components_tab collect (copy obj.node)
+-- 			for obj in new_objects do (
+				
+-- 				try (custAttributes.delete obj roGen_Joint_CA baseObject:true) catch (format "roGen_Road_CA > selfClone > Error: % n" (getCurrentException()))	
+-- 				custAttributes.add obj roGen_Joint_CA baseObject:true #unique
+-- 				obj.node_name = obj.name
+-- 				obj.wirecolor = wire_color
+-- 				obj.parent_node = obj_trgt
+-- 				obj.controller.addTarget obj_trgt 1 --relink to new node
+-- 				obj.init()
+-- 				append obj_trgt.components_tab (nodeTransformMonitor node:obj forwardTransformChangeMsgs:false)		
+-- 				obj.attachParent obj_trgt	
+-- 			)
+-- 			obj_trgt.init()
+-- 			obj_trgt.updateList()
+		)*/
+-- 		fn selfClone obj_src obj_trgt = (
+-- 			
+-- 			if obj_src == undefined or not (isProperty obj_trgt "object_type") or obj_trgt.object_type != "road" do return false
+-- 			format "roGen_Road_CA > selfClone > obj_src:% obj_trgt:%\n" obj_src.node_name obj_trgt.name
+-- 			try (custAttributes.delete obj_trgt roGen_Road_CA baseObject:true) catch (format "roGen_Road_CA > selfClone > Error: % n" (getCurrentException()))	
+-- 			custAttributes.add obj_trgt roGen_Road_CA baseObject:true #unique
+-- 			obj_trgt.init() --must after creation
+-- 			for obj in obj_src.components_tab do ( --clone components
+-- 				
+-- 				local new_obj = copy obj.node
+-- 				try (custAttributes.delete new_obj roGen_Joint_CA baseObject:true) catch (format "roGen_Road_CA > selfClone > Error: % n" (getCurrentException()))	
+-- 				custAttributes.add new_obj roGen_Joint_CA baseObject:true #unique
+-- 				new_obj.init()
+-- 				format "roGen_Road_CA > selfClone > src:% trgt:%\n" obj.node.name new_obj.name
+-- 				new_obj.wirecolor = wire_color
+-- 				new_obj.parent_node = obj_trgt
+-- 				new_obj.controller.addTarget obj_trgt 1 --relink to new node
+-- 				append obj_trgt.components_tab (nodeTransformMonitor node:new_obj forwardTransformChangeMsgs:false)
+-- 			)
+-- 			obj_trgt.updateList()	
+-- 		)
 		fn init = (
 
 			thisNode = getNode()
 			thisNode.name = uniqueName "Road_"
 			node_name = thisNode.name
-			format "roGen_Road_CA > init > Attribute applied to node: %\n" thisNode
+			format "roGen_Road_CA > init > Attribute applied to node [ % ]\n" node_name
 			registerCallbacks()	
+-- 			format "INITIALIZED--------------------------------------------------[ % ]------------------------------------------------------------\n" node_name
 		)
 		on load do (
 			
@@ -496,7 +459,7 @@
 			registerCallbacks()
 			updateList()	
 		)
-		on clone obj_src do ( cloneComponents obj_src $)
+		on clone orig do ( selfClone orig )
 		on deleted do ( ---when the undo stack is cleared, such file new or reset.
 		
 			format "roGen_Road_CA > deleted node:%\n" node_name
@@ -538,6 +501,31 @@
 	
 	
 	/*
+	fn selectionChanged a b = (format "selectionChanged:% a:% b:%\n" (callbacks.notificationParam())[1] a b )
+fn nodeDeleted a b = (format "nodeDeleted:% a:% b:%\n" (callbacks.notificationParam())[1] a b )
+fn nodeCloned = (format "nodeCloned src:% trgt:%\n" (callbacks.notificationParam())[1] (callbacks.notificationParam())[2])
+
+handler_all = NodeEventCallback mouseUp:true delay:1000 \
+selectionChanged:selectionChanged \
+deleted:nodeDeleted --\
+cloned:nodeCloned	
+
+handler_all = undefined --unregister selection change callbacks
+gc light:true
+	
+	
+	
+	
+callbacks.removeScripts id:#testCallback
+callbacks.addScript #filePreOpenProcess "print (callbacks.notificationParam())" id:#testCallback	
+	
+callbacks.addScript #postNodesCloned "XrefClone()" id:#XClone
+	OrigNodes=(callbacks.notificationParam())[1]
+	CloneNodes=(callbacks.notificationParam())[2]
+	
+callbacks.addScript #nodePreDelete "XrefDelete()" id:#XDelete
+	DeleteNodes=callbacks.notificationParam()
+
 	if isProperty $ "object_type" and $.object_type == "road" do print "is road"
 	if isProperty $ "getType" and $.getType() == "road" do 
  do animate off undo off
