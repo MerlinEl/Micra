@@ -114,32 +114,32 @@ struct ROAD_GENERATOR_STRUCTURE	(
 	*/
 	fn getUIPrefabsIcons = (
 
-		#(	--constant lengths
-			"(1-6)     "	+ getRoadSymbol #("a", "a") ,								   
-			"(1-6)D   "	+ getRoadSymbol #("a", "a") ,								   
+		/*#(
+			"(1-6)     "	+ getRoadSymbol #("a", "a") ,								   							   
 			"(2-2)R   "	+ getRoadSymbol #("a", "a", "r", "s", "r", "a", "a") ,
 			"(2-4)     "	+ getRoadSymbol #("a", "a", "s", "a", "a") ,
 			"(2-4)R   "	+ getRoadSymbol #("a", "a", "r", "s", "r", "a", "a") ,
 			"(2-5)     "	+ getRoadSymbol #("a", "a", "s", "a", "a"),
-			"(2-6)D  "		+ getRoadSymbol #("a", "a", "s", "a", "a"),
-			"(2-6)C  "		+ getRoadSymbol #("a", "a", "s", "a", "a"),
 			"(4-4)    "		+ getRoadSymbol #("a", "a", "s", "a", "a", "s", "a", "a", "s", "a", "a") ,
-			"(4-5)    "		+ getRoadSymbol #("a", "a", "s", "a", "a", "s", "a", "a", "s", "a", "a")
-		)	
-		/*
-		#(	--different lengths
-			"(1-6)                      "	+ getRoadSymbol #("a", "a", "a", "a", "a", "a") ,								   
-			"(1-6D)                      "	+ getRoadSymbol #("a", "a", "a", "a", "a", "a") ,								   
+			"(4-5)    "		+ getRoadSymbol #("a", "a", "s", "a", "a", "s", "a", "a", "s", "a", "a"),
+			--new 2019
+			"(1-6)D   "	+ getRoadSymbol #("a", "a") ,	
+			"(2-6)D  "		+ getRoadSymbol #("a", "a", "s", "a", "a"),
+			"(2-6)C  "		+ getRoadSymbol #("a", "a", "s", "a", "a")
+		)*/
+		
+		#(
+			"(1-6)                      "	+ getRoadSymbol #("a", "a", "a", "a", "a", "a") ,								   							   
 			"(2-2)R                   "	+ getRoadSymbol #("a", "a", "r", "s", "r", "a", "a") ,
 			"(2-4)                   "		+ getRoadSymbol #("a", "a", "a", "a", "s", "a", "a", "a", "a") ,
 			"(2-4)R                "		+ getRoadSymbol #("a", "a", "a", "a", "r", "s", "r", "a", "a", "a", "a") ,
 			"(2-5)                "		+ getRoadSymbol #("a", "a", "a", "a", "a", "s", "a", "a", "a", "a", "a"),
-			"(2-6D)                "		+ getRoadSymbol #("a", "a", "a", "a", "a", "a", "s", "a", "a", "a", "a", "a", "a"),
-			"(2-6C)                "		+ getRoadSymbol #("a", "a", "a", "a", "a", "a", "s", "a", "a", "a", "a", "a", "a"),
 			"(4-4)       "			+ getRoadSymbol #("a", "a", "a", "a", "s", "a", "a", "a", "a", "s", "a", "a", "a", "a", "s", "a", "a", "a", "a") ,
-			"(4-5)  "				+ getRoadSymbol #("a", "a", "a", "a", "a", "s", "a", "a", "a", "a", "a", "s", "a", "a", "a", "a", "a", "s", "a", "a", "a", "a", "a")
+			"(4-5)  "				+ getRoadSymbol #("a", "a", "a", "a", "a", "s", "a", "a", "a", "a", "a", "s", "a", "a", "a", "a", "a", "s", "a", "a", "a", "a", "a"),
+			"(1-6D)                      "	+ getRoadSymbol #("a", "a", "a", "a", "a", "a") ,	
+			"(2-6D)                "		+ getRoadSymbol #("a", "a", "a", "a", "a", "a", "s", "a", "a", "a", "a", "a", "a"),
+			"(2-6C)                "		+ getRoadSymbol #("a", "a", "a", "a", "a", "a", "s", "a", "a", "a", "a", "a", "a")
 		)	
-		*/
 	),
 	fn getMissingPrefabs = (
 	
@@ -147,18 +147,19 @@ struct ROAD_GENERATOR_STRUCTURE	(
 		
 			--road types
 			"generator_road_1_6", 
-			"generator_road_1_6d",
 			"generator_road_2_2_rail",
 			"generator_road_2_4",
 			"generator_road_2_4_spec",
 			"generator_road_2_4_rail",
 			"generator_road_2_5",
 			"generator_road_2_5_spec",
-			"generator_road_2_6d",
-			"generator_road_2_6c",
 			"generator_road_4_4",
 			"generator_road_4_5",
 			"generator_road_4_5_spec",
+			--road types new 2019
+			"generator_road_1_6d",
+			"generator_road_2_6d",
+			"generator_road_2_6c",
 			--sidewalks
 			"generator_sidewalk_left",
 			"generator_sidewalk_right",
@@ -175,15 +176,16 @@ struct ROAD_GENERATOR_STRUCTURE	(
 	
 		--road types
 		append roads $generator_road_1_6
-		append roads $generator_road_1_6d
 		append roads $generator_road_2_2_rail
 		append roads $generator_road_2_4
 		append roads $generator_road_2_4_rail	
 		append roads $generator_road_2_5
-		append roads $generator_road_2_6d
-		append roads $generator_road_2_6c
 		append roads $generator_road_4_4
 		append roads $generator_road_4_5
+		--road types new 2019
+		append roads $generator_road_1_6d
+		append roads $generator_road_2_6d
+		append roads $generator_road_2_6c
 		--sidewalks
 		append sidewalks $generator_sidewalk_left
 		append sidewalks $generator_sidewalk_right
