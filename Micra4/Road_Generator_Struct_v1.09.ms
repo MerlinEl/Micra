@@ -142,7 +142,8 @@ struct ROAD_GENERATOR_STRUCTURE	(
 			"(4-5)  "				+ getRoadSymbol #("a", "a", "a", "a", "a", "s", "a", "a", "a", "a", "a", "s", "a", "a", "a", "a", "a", "s", "a", "a", "a", "a", "a"),	--7
 			"(1-6D)                      "	+ getRoadSymbol #("a", "a", "a", "a", "a", "a") ,																		--8
 			"(2-6D)                "		+ getRoadSymbol #("a", "a", "a", "a", "a", "a", "s", "a", "a", "a", "a", "a", "a"),												--9
-			"(2-6C)                "		+ getRoadSymbol #("a", "a", "a", "a", "a", "a", "s", "a", "a", "a", "a", "a", "a")												--10
+			"(2-6C)                "		+ getRoadSymbol #("a", "a", "a", "a", "a", "a", "s", "a", "a", "a", "a", "a", "a"),												--10
+			"(2-4S)                "		+ getRoadSymbol #("a", "a", "a", "a", "s", "a", "a", "a", "a")																--11
 		)	
 	),
 	fn getMissingPrefabs = (
@@ -164,6 +165,7 @@ struct ROAD_GENERATOR_STRUCTURE	(
 			"generator_road_1_6d",
 			"generator_road_2_6d",
 			"generator_road_2_6c",
+			"generator_road_2_4s",
 			--sidewalks
 			"generator_sidewalk_left",
 			"generator_sidewalk_right",
@@ -190,6 +192,7 @@ struct ROAD_GENERATOR_STRUCTURE	(
 		append roads $generator_road_1_6d		--8
 		append roads $generator_road_2_6d		--9
 		append roads $generator_road_2_6c		--10
+		append roads $generator_road_2_4s		--11
 		--sidewalks
 		append sidewalks $generator_sidewalk_left
 		append sidewalks $generator_sidewalk_right
@@ -214,6 +217,7 @@ struct ROAD_GENERATOR_STRUCTURE	(
 		append roads $generator_road_1_6d		--8
 		append roads $generator_road_2_6d		--9
 		append roads $generator_road_2_6c		--10
+		append roads $generator_road_2_4s		--11
 		--sidewalks and parking places
 		append specs $generator_parking_lane_left
 		append specs $generator_parking_lane_right
