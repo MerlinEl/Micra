@@ -1591,14 +1591,19 @@ struct ROAD_GENERATOR_STRUCTURE	(
 					return false
 				)
 				local sp = createSplineFromJoints sel[1] sel[2]
+				
+				--get road core	
 				local selected_road = pickRoadPrefab roads prefabs_sel false
+				--assembly road from components
 				local road = constructRoadPrototype selected_road specs pl_left_state pl_right_state sw_left_state sw_right_state
+				--conform-slice road along spline
 				local finalRoad = createRoadFromSpline road sp tangent_deg twist_deg
 				---replace prefab name
 				finalRoad.name = replace finalRoad.name 11 6 "connect_road" --"generator_road_2_6d" > "generator_connect_road_6d"
 				finalRoad.name = uniqueName finalRoad.name
-				
+				--set custom attributes
 				setRoadCA finalRoad sp sel[1] sel[2] dialog dialog.controlsArr
+				
 				custAttributes.add sp gSplineGenCa #unique
 				sp.road = finalRoad.name
 --sp.parent = finalRoad --MerlinEl (2.24.2019) --can't do this, depency loop TODO:(try to use link constraints)
@@ -1637,35 +1642,34 @@ struct ROAD_GENERATOR_STRUCTURE	(
 				subobjectlevel = 0
 				max select none
 	
-				--pick road layer and link
+				--pick road data
 				local layer = road.layer
 				local wire_clr = road.wirecolor
 				local export_node = road.parent
+				local startPoint = road.startPoint
+				local endPoint = road.endPoint
+				delete road -- delete old road
 				
-				--construct new road	
+				
+				--get road core	
 				local selected_road = pickRoadPrefab roads prefabs_sel false --get road prefab core
-				selected_road = constructRoadPrototype selected_road specs pl_left_state pl_right_state sw_left_state sw_right_state --assembly road from components
-				
+				--assembly road from components
+				road = constructRoadPrototype selected_road specs pl_left_state pl_right_state sw_left_state sw_right_state
 				--conform-slice road along spline
-				finalRoad = createRoadFromSpline selected_road spline tangent_deg twist_deg
+				finalRoad = createRoadFromSpline road spline tangent_deg twist_deg
 				--replace prefab name
 				finalRoad.name = replace finalRoad.name 11 6 "connect_road" --"generator_road_2_6d" > "generator_connect_road_6d"
 				finalRoad.name = uniqueName finalRoad.name 
-				
-				--move road to initial layer if is Rebuilding from old one
-				layer.addNode finalRoad
-				layer.addNode spline
-				
 				--set custom attributes
-				setRoadCA finalRoad spline road.startPoint road.endPoint dialog dialog.controlsArr
+				setRoadCA finalRoad spline startPoint endPoint dialog dialog.controlsArr
 				spline.road = finalRoad.name
 				
-				-- delete old road
 				delete road
-				delete selected_road
 				
 				setCrossRoadWireColor finalRoad oldColor:wire_clr
 				finalRoad.parent = export_node
+				layer.addNode finalRoad
+				layer.addNode spline
 				select finalRoad
 			)
 		)
