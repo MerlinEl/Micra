@@ -32,7 +32,7 @@ struct ROAD_GENERATOR_STRUCTURE	(
 	-------------------------------------------------------------
 	/**
 	*@Example
-		hasCustomAttribute $ #RoadGenCa
+		roGenStruct.hasCustomAttribute $ #RoadGenCa
 	*/
 	fn hasCustomAttribute obj attr = (
 
@@ -42,6 +42,9 @@ struct ROAD_GENERATOR_STRUCTURE	(
 		for a in defs where a.name == attr do return true
 		false
 	),
+	fn isJoint obj = (
+
+		classOf obj == Point and obj.children.count == 1
 	fn isRoad obj = (
 		
 		if obj == undefined do return false
@@ -129,16 +132,16 @@ struct ROAD_GENERATOR_STRUCTURE	(
 		)*/
 		
 		#(
-			"(1-6)                      "	+ getRoadSymbol #("a", "a", "a", "a", "a", "a") ,								   							   
-			"(2-2)R                   "	+ getRoadSymbol #("a", "a", "r", "s", "r", "a", "a") ,
-			"(2-4)                   "		+ getRoadSymbol #("a", "a", "a", "a", "s", "a", "a", "a", "a") ,
-			"(2-4)R                "		+ getRoadSymbol #("a", "a", "a", "a", "r", "s", "r", "a", "a", "a", "a") ,
-			"(2-5)                "		+ getRoadSymbol #("a", "a", "a", "a", "a", "s", "a", "a", "a", "a", "a"),
-			"(4-4)       "			+ getRoadSymbol #("a", "a", "a", "a", "s", "a", "a", "a", "a", "s", "a", "a", "a", "a", "s", "a", "a", "a", "a") ,
-			"(4-5)  "				+ getRoadSymbol #("a", "a", "a", "a", "a", "s", "a", "a", "a", "a", "a", "s", "a", "a", "a", "a", "a", "s", "a", "a", "a", "a", "a"),
-			"(1-6D)                      "	+ getRoadSymbol #("a", "a", "a", "a", "a", "a") ,	
-			"(2-6D)                "		+ getRoadSymbol #("a", "a", "a", "a", "a", "a", "s", "a", "a", "a", "a", "a", "a"),
-			"(2-6C)                "		+ getRoadSymbol #("a", "a", "a", "a", "a", "a", "s", "a", "a", "a", "a", "a", "a")
+			"(1-6)                      "	+ getRoadSymbol #("a", "a", "a", "a", "a", "a") ,																		--1					   							   
+			"(2-2)R                   "	+ getRoadSymbol #("a", "a", "r", "s", "r", "a", "a") ,																		--2
+			"(2-4)                   "		+ getRoadSymbol #("a", "a", "a", "a", "s", "a", "a", "a", "a") ,															--3
+			"(2-4)R                "		+ getRoadSymbol #("a", "a", "a", "a", "r", "s", "r", "a", "a", "a", "a") ,													--4
+			"(2-5)                "		+ getRoadSymbol #("a", "a", "a", "a", "a", "s", "a", "a", "a", "a", "a"),														--5
+			"(4-4)       "			+ getRoadSymbol #("a", "a", "a", "a", "s", "a", "a", "a", "a", "s", "a", "a", "a", "a", "s", "a", "a", "a", "a") ,					--6
+			"(4-5)  "				+ getRoadSymbol #("a", "a", "a", "a", "a", "s", "a", "a", "a", "a", "a", "s", "a", "a", "a", "a", "a", "s", "a", "a", "a", "a", "a"),	--7
+			"(1-6D)                      "	+ getRoadSymbol #("a", "a", "a", "a", "a", "a") ,																		--8
+			"(2-6D)                "		+ getRoadSymbol #("a", "a", "a", "a", "a", "a", "s", "a", "a", "a", "a", "a", "a"),												--9
+			"(2-6C)                "		+ getRoadSymbol #("a", "a", "a", "a", "a", "a", "s", "a", "a", "a", "a", "a", "a")												--10
 		)	
 	),
 	fn getMissingPrefabs = (
@@ -146,7 +149,7 @@ struct ROAD_GENERATOR_STRUCTURE	(
 		local prefabs_list = #( -- to do add spec files for new prefabs
 		
 			--road types
-			"generator_road_1_6", 
+			"generator_road_1_6",
 			"generator_road_2_2_rail",
 			"generator_road_2_4",
 			"generator_road_2_4_spec",
@@ -175,17 +178,17 @@ struct ROAD_GENERATOR_STRUCTURE	(
 	fn collectAllPrefabs &roads &sidewalks &corners &parking_lanes = (
 	
 		--road types
-		append roads $generator_road_1_6
-		append roads $generator_road_2_2_rail
-		append roads $generator_road_2_4
-		append roads $generator_road_2_4_rail	
-		append roads $generator_road_2_5
-		append roads $generator_road_4_4
-		append roads $generator_road_4_5
+		append roads $generator_road_1_6		--1
+		append roads $generator_road_2_2_rail	--2
+		append roads $generator_road_2_4		--3
+		append roads $generator_road_2_4_rail	--4	
+		append roads $generator_road_2_5		--5
+		append roads $generator_road_4_4		--6
+		append roads $generator_road_4_5		--7
 		--road types new 2019
-		append roads $generator_road_1_6d
-		append roads $generator_road_2_6d
-		append roads $generator_road_2_6c
+		append roads $generator_road_1_6d		--8
+		append roads $generator_road_2_6d		--9
+		append roads $generator_road_2_6c		--10
 		--sidewalks
 		append sidewalks $generator_sidewalk_left
 		append sidewalks $generator_sidewalk_right
@@ -198,18 +201,19 @@ struct ROAD_GENERATOR_STRUCTURE	(
 	),
 	fn collectRoadPrefabs &roads &specs = ( --order must be same like in rollout RoadGeneratorTool > dd_road_prefabs_1
 
-		--load road types
-		append roads $generator_road_1_6
-		append roads $generator_road_1_6d
-		append roads $generator_road_2_2_rail
-		append roads $generator_road_2_4
-		append roads $generator_road_2_4_rail
-		append roads $generator_road_2_5
-		append roads $generator_road_2_6d
-		append roads $generator_road_2_6c
-		append roads $generator_road_4_4	
-		append roads $generator_road_4_5
-		--load sidewalks and parking places
+		--road types
+		append roads $generator_road_1_6		--1
+		append roads $generator_road_2_2_rail	--2
+		append roads $generator_road_2_4		--3
+		append roads $generator_road_2_4_rail	--4
+		append roads $generator_road_2_5		--5
+		append roads $generator_road_4_4		--6
+		append roads $generator_road_4_5		--7
+		--road types new 2019
+		append roads $generator_road_1_6d		--8
+		append roads $generator_road_2_6d		--9
+		append roads $generator_road_2_6c		--10
+		--sidewalks and parking places
 		append specs $generator_parking_lane_left
 		append specs $generator_parking_lane_right
 		append specs $generator_sidewalk_left

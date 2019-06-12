@@ -62,7 +62,7 @@ fn runLocalScript script_name = (
 )
 --Load all functions
 Global roGenStruct
-runLocalScript "Road_Generator_Struct_v1.08"
+runLocalScript "Road_Generator_Struct_v1.09"
 --< MerlinEl
 
 
