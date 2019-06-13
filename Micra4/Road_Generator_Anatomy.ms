@@ -1,33 +1,37 @@
 Global roadAnatomyToolDialog
 Global roadAnatomyToolSubDialogA
 Global roadAnatomyToolSubDialogB
-
+Global roadAnatomyToolSubDialogA_Height = 354
+Global roadAnatomyToolSubDialogB_Height = 536
 if classOf ::roadAnatomyToolDialog == RolloutClass do DestroyDialog ::roadAnatomyToolDialog
 rollout roadAnatomyToolSubDialogA "Road" 
 (
-	GroupBox grp1 "" pos:[52,28] width:236 height:56 
-	GroupBox grp2 "" pos:[12,56] width:312 height:2 
-	GroupBox grp9 "Road:" pos:[4,8] width:328 height:236 
-	label lbl1 "D1" pos:[16,32] width:16 height:16 
-	label lbl2 "D2" pos:[304,32] width:16 height:16 
-	label lbl3 "P1" pos:[120,36] width:16 height:16 
-	label lbl4 "P2" pos:[212,36] width:16 height:16 
-	label lbl5 "S1" pos:[168,66] width:16 height:16 
-	label lbl_d1 "" pos:[48,128] width:240 height:16 
-	label lbl_d2 "" pos:[48,180] width:240 height:16 
-	label lbl_p1 "" pos:[80,152] width:204 height:16 
-	label lbl_p2 "" pos:[80,208] width:208 height:16 
-	label lbl_s1 "" pos:[48,100] width:240 height:16 
-	button btn_d1 "D1" pos:[8,124] width:36 height:24 toolTip:"Start Point" 
-	button btn_d2 "D2" pos:[8,176] width:36 height:24 toolTip:"End Point" 
-	button btn_p1 "P1" pos:[40,148] width:36 height:24 toolTip:"Tangent Start" 
-	button btn_p2 "P2" pos:[40,204] width:36 height:24 toolTip:"Tangent End" 
-	button btn_s1 "S1" pos:[8,92] width:36 height:24 toolTip:"Path Spline" 
-	pickbutton pbtn_d1 "pick" pos:[292,122] width:36 height:24 
-	pickbutton pbtn_d2 "pick" pos:[292,174] width:36 height:24 
-	pickbutton pbtn_p1 "pick" pos:[292,148] width:36 height:24 
-	pickbutton pbtn_p2 "pick" pos:[292,200] width:36 height:24 
-	pickbutton pbtn_s1 "pick" pos:[292,96] width:36 height:24 
+	GroupBox 'grp1' "" pos:[52,28] width:236 height:56 align:#left 
+	GroupBox 'grp2' "" pos:[12,56] width:312 height:2 align:#left 
+	GroupBox 'grp9' "Road:" pos:[4,8] width:328 height:236 align:#left 
+	label 'lbl1' "D1" pos:[16,32] width:16 height:16 align:#left 
+	label 'lbl2' "D2" pos:[304,32] width:16 height:16 align:#left 
+	label 'lbl3' "P1" pos:[120,36] width:16 height:16 align:#left 
+	label 'lbl4' "P2" pos:[212,36] width:16 height:16 align:#left 
+	label 'lbl5' "S1" pos:[168,66] width:16 height:16 align:#left 
+	label 'lbl_d1' "" pos:[48,128] width:240 height:16 align:#left 
+	label 'lbl_d2' "" pos:[48,180] width:240 height:16 align:#left 
+	label 'lbl_p1' "" pos:[80,152] width:204 height:16 align:#left 
+	label 'lbl_p2' "" pos:[80,208] width:208 height:16 align:#left 
+	label 'lbl_s1' "" pos:[48,100] width:240 height:16 align:#left 
+	button 'btn_d1' "D1" pos:[8,124] width:36 height:24 toolTip:"Start Point" align:#left 
+	button 'btn_d2' "D2" pos:[8,176] width:36 height:24 toolTip:"End Point" align:#left 
+	button 'btn_p1' "P1" pos:[40,148] width:36 height:24 toolTip:"Tangent Start" align:#left 
+	button 'btn_p2' "P2" pos:[40,204] width:36 height:24 toolTip:"Tangent End" align:#left 
+	button 'btn_s1' "S1" pos:[8,92] width:36 height:24 toolTip:"Path Spline" align:#left 
+	pickbutton 'pbtn_d1' "pick" pos:[292,122] width:36 height:24 align:#left 
+	pickbutton 'pbtn_d2' "pick" pos:[292,174] width:36 height:24 align:#left 
+	pickbutton 'pbtn_p1' "pick" pos:[292,148] width:36 height:24 align:#left 
+	pickbutton 'pbtn_p2' "pick" pos:[292,200] width:36 height:24 align:#left 
+	pickbutton 'pbtn_s1' "pick" pos:[292,96] width:36 height:24 align:#left 
+ 	GroupBox 'grp4' "Advanced:" pos:[4,248] width:328 height:80 align:#left
+-- 	button 'btn_revert_to_shortcut' "Rebuild Shortcut" pos:[12,268] width:100 height:24 toolTip:"Select Spline to Rebuild Shortcut" align:#left
+-- 	button 'btn_unique_name' "Unique Name" pos:[12,295] width:100 height:24 toolTip:"Set Object Unique Name" align:#left
 	--Road Controlls
 	on pbtn_d1 picked obj do (roadAnatomyToolDialog.addRoadComponent obj #d1)
 	on pbtn_d2 picked obj do (roadAnatomyToolDialog.addRoadComponent obj #d2)
@@ -40,6 +44,9 @@ rollout roadAnatomyToolSubDialogA "Road"
 	on btn_p1 pressed  do (roadAnatomyToolDialog.selRoadComponent #p1)
 	on btn_p2 pressed  do (roadAnatomyToolDialog.selRoadComponent #p2)
 	on btn_s1 pressed  do (roadAnatomyToolDialog.selRoadComponent #s1)
+	
+-- 	on btn_revert_to_shortcut pressed do (roGenStruct.rebuildBrokenShortcut selection[1])
+-- 	on btn_unique_name pressed do (roGenStruct.fixDuplicitNames ())
 )
  
 rollout roadAnatomyToolSubDialogB "CrossRoad"
@@ -101,9 +108,9 @@ rollout roadAnatomyToolSubDialogB "CrossRoad"
 	on btn_cr_reset pressed do (rroadAnatomyToolDialog.resetCrossRoad())
 )
  
-rollout roadAnatomyToolDialog "Road Anatomy:" width:352 height:280
+rollout roadAnatomyToolDialog "Road Anatomy:" width:352 height:(amax #(roadAnatomyToolSubDialogA_Height, roadAnatomyToolSubDialogB_Height))
 (
-	subRollout roSubA "" width:346 height:280 pos:[4,4]
+	subRollout roSubA "" width:346 height:roadAnatomyToolSubDialogA_Height pos:[4,4]
 	subRollout roSubB "" width:346 height:536 visible:false pos:[4,4]
  	local active_road
 	--Road Functions
@@ -172,7 +179,7 @@ rollout roadAnatomyToolDialog "Road Anatomy:" width:352 height:280
 					messageBox "Invalid operation. Target must be Shape."
 					return false
 				)
-				obj.SplineGenCa.road = active_road.name
+				obj.road = active_road.name
 				active_road.roadSpline = obj
 				ro.lbl_s1.text = obj.name
 			)
@@ -376,14 +383,14 @@ rollout roadAnatomyToolDialog "Road Anatomy:" width:352 height:280
 	
 	fn showInterfaceRoad = (
 
-		roadAnatomyToolDialog.height = 280
+		roadAnatomyToolDialog.height = roadAnatomyToolSubDialogA_Height + 4
 		roadAnatomyToolDialog.roSubA.visible = true
 		roadAnatomyToolDialog.roSubB.visible = false
 	)
  
 	fn showInterfaceCrossRoad = ( 
 	
-		roadAnatomyToolDialog.height = 540
+		roadAnatomyToolDialog.height = roadAnatomyToolSubDialogB_Height + 4
 		roadAnatomyToolDialog.roSubA.visible = false
 		roadAnatomyToolDialog.roSubB.visible = true
 	)

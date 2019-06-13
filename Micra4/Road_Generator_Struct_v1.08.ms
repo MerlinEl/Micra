@@ -1048,6 +1048,11 @@ struct ROAD_GENERATOR_STRUCTURE	(
 		--link spline
 		linkConstraint obj sp
 	),
+	fn fixRevertRoadBackToShortcut obj = (
+	
+	
+	
+	),
 	fn setUpCrossRoadPoints max_dist_left max_dist_right c_tangent_offset road:undefined hidden_tn:true = (
 	
 		local dp1, dp2, tp1, tp2, pRight, pLeft -- dp > dummy(point) tp > tangent(point)
