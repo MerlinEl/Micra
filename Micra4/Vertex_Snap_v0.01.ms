@@ -1,6 +1,6 @@
 Global mcVertexSnapDialog
 if mcVertexSnapDialog != undefined do destroyDialog mcVertexSnapDialog
-rollout mcVertexSnapDialog "Vertex Snap" width:320 height:176
+rollout mcVertexSnapDialog "Vertex Snap" width:320 height:192
 (
 	local metric_type = units.SystemType as String
 	pickbutton 'btn_pick_trgt' "None" pos:[96,92] width:212 height:20 align:#left
@@ -13,8 +13,8 @@ rollout mcVertexSnapDialog "Vertex Snap" width:320 height:176
 	GroupBox 'grp2' "Single:" pos:[8,4] width:308 height:56 align:#left
 	button 'btn_get_pos' "Get Position" pos:[16,24] width:136 height:24 align:#left
 	button 'btn_set_pos' "Set Position" pos:[160,24] width:148 height:24 align:#left
-	GroupBox 'grp3' "Multiple:" pos:[8,72] width:308 height:100 align:#left
-	radioButtons 'rdo_offset' "" pos:[60,148] width:248 height:16 labels:#("1", "2", "3", "4", "5", "6", "7", "8") columns:8 align:#left
+	GroupBox 'grp3' "Multiple:" pos:[8,72] width:308 height:116 align:#left
+	radiobuttons 'rdo_offset' "" pos:[60,148] width:245 height:32 labels:#("1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14") columns:7 align:#left
 	label 'lbl4' "quick:" pos:[12,148] width:40 height:16 align:#left
 			
 	local target_object

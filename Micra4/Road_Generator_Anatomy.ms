@@ -113,6 +113,7 @@ rollout roadAnatomyToolDialog "Road Anatomy:" width:352 height:(amax #(roadAnato
 	subRollout roSubA "" width:346 height:roadAnatomyToolSubDialogA_Height pos:[4,4]
 	subRollout roSubB "" width:346 height:536 visible:false pos:[4,4]
  	local active_road
+	local handler 
 	--Road Functions
 	fn addRoadComponent obj type = (
 		
@@ -399,13 +400,13 @@ rollout roadAnatomyToolDialog "Road Anatomy:" width:352 height:(amax #(roadAnato
 	
 		active_road = selection[1]
 		if active_road == undefined or classOf active_road != Editable_Poly do return false  --if nothing selected, reset fields
-			
+
 		clearRoadFields() 
 		clearCrossRoadFields() 
 		
 		local is_road = roGenStruct.isRoad active_road --findString active_road.name "generator_connect_road" != undefined
 		local is_cross_road = roGenStruct.isCrossRoad active_road --findString active_road.name "generator_crossroad" != undefined
-	
+		
 		if  is_road then (
 			
 			format "selected road\n"
@@ -437,20 +438,28 @@ rollout roadAnatomyToolDialog "Road Anatomy:" width:352 height:(amax #(roadAnato
 			)
 		)
 	)
+	fn registerCalbacks = (
+		
+		handler = nodeEventCallback selectionChanged:getObjectInfo
+	)
+	fn unregisterCalbacks = (
+	
+		handler = undefined
+		gc light:true
+	)
 	fn init = (
 
 		AddSubRollout roadAnatomyToolDialog.roSubA roadAnatomyToolSubDialogA
 		AddSubRollout roadAnatomyToolDialog.roSubB roadAnatomyToolSubDialogB
 		getObjectInfo null null
-		roadAnatomyToolObjectSelChange = nodeEventCallback selectionChanged:getObjectInfo
+		registerCalbacks()
 	)
-	fn clean = (
-	
-		roadAnatomyToolObjectSelChange = undefined
-		gc light:true
+	fn shut = (
+		
+		unregisterCalbacks()
 	)
 	on roadAnatomyToolDialog open do (init())
-	on roadAnatomyToolDialog close do (clean())
+	on roadAnatomyToolDialog close do (shut())
 )
 createDialog roadAnatomyToolDialog
 
