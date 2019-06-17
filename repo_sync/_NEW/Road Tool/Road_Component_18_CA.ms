@@ -33,7 +33,6 @@
 			is_deleted type:#boolean animateable:false default:false
 			node_name  type:#string animateable:false default:""
 			tangent_pos type:#point3 animateable:false default:[0,0,0]
-			parent_node type:#maxObject
 			
 			on sidewalkL set val do (
 				
@@ -64,61 +63,21 @@
 -- 				format "params open thisNode:%\n" thisNode
 			)
 		)
-		fn getParentNode = (if parent_node != undefined then parent_node.node else undefined)
+		fn getParentNode = (thisNode.controller.getNode 1)
 		fn attachParent obj_trgt = (
 				
 			if not (isValidNode thisNode) or not (isValidNode obj_trgt) do return false		
-			format "roGen_Joint_CA > attachParent > src:%  trgt:%\n" thisNode obj_trgt
-			parent_node = ( nodeTransformMonitor node:obj_trgt forwardTransformChangeMsgs:false )	
+			format "roGen_Joint_CA > attachParent > src:%  trgt:%\n" thisNode obj_trgt	
 			thisNode.transform.controller = prs () --set default controller
 			thisNode.controller = link_constraint() --set link constraint controller
 			thisNode.controller.addTarget obj_trgt 1 --at frame 1
 		)
-		
 		fn detachParent = (
 			
 			if not (isValidNode thisNode) or (isDeleted thisNode) do return false	
-			format "roGen_Joint_CA > detachParent > src:[ % ] to  trgt:[ % ]\n" thisNode parent_node
--- 			thisNode.transform.controller.deleteTarget 1 --remove constraint
+			format "roGen_Joint_CA > detachParent > obj:[ % ]\n" thisNode
 			thisNode.transform.controller = prs () --replace Link_Constraint with Position_Rotation_Scale
-			parent_node = undefined
 		)	
-		
-		fn deleteParent = (
-		
-			if is_deleted or not (isValidNode thisNode) or (isDeleted thisNode) do return false --prevent depency loop crash
-			format  "roGen_Joint_CA > detachedFromNode > parent:% is_deleted:%\n"  parent_node is_deleted
-			is_deleted = true
-			if classOf parent_node == NodeTransformMonitor do ( --when spline is dleted delete also master obj
-				local obj = parent_node.node
-				if isValidNode obj and not (isDeleted obj) and not (obj.is_deleted) do (
-					
-					format "roGen_Joint_CA > detachedFromNode > Deleting parent node:%\n" obj.name
-					try (delete parent_node.node) catch (format "roGen_Joint_CA > detachedFromNode > Error:%\n" (getCurrentException()))
-				)
-			)
-		)
-		
-		/*fn unregisterCallbacks = (
-			
-			format "roGen_Joint_CA > unregisterCallbacks...\n"
-			deleteChangeHandler handler_del
-			handler_del = undefined
-			gc()		
-		)*/
-		
-		/*fn registerCallbacks = (
-			
-			format "roGen_Joint_CA > register callback onSelfDeleted [ % ]\n" node_name
-			if thisNode == undefined do return false
-			if handler_del != undefined do unregisterCallbacks()
-			handler_del = when thisNode deleted obj do (
-				
-				unregisterCallbacks()
-				deleteParent()
-			)	
-		)*/
-
 		fn init parent_obj:undefined = (
 			
 			thisNode = getNode()
@@ -132,25 +91,6 @@
 			thisNode.slice = false
 			thisNode.recenter = false
 			node_name = thisNode.name
--- 			registerCallbacks()
-		)
-		on load do (
-			
-			format "roGen_Joint_CA > load\n"
-			thisNode = getNode()
--- 			registerCallbacks()
-		)
--- 		on create do (
-
--- 			format "roGen_Joint_CA > created this:% name:%\n"  this node_name
--- 		)
-		on update do (
-			
--- 			format "roGen_Joint_CA > update this:%\n"  this	
-		)
-		on deleted do (
-			
-			format "roGen_Joint_CA > deleted node:%\n"  node_name
 		)
 	)
 -- )
@@ -323,10 +263,16 @@
 		fn updateList = ( params.updateList() ) --public shortcut
 		fn isEmptySlot slot_index = ( params.isEmptySlot slot_index ) --public shortcut
 		fn addComponent obj = ( params.addComponent obj ) --public shortcut
+		fn getComponents = (
+		
+			for o in components_tab where isValidNode o.node and not (isDeleted o.node) and not (o.node.is_deleted) collect o.node	
+		),
 		fn registerEvents = (
 			
+			if RtCMS != undefined do return OK
 			local script_path =  getFilenamePath ( getSourceFileName() )
-			fileIn (script_path + "Road_Generator_Callbacks.ms")
+			format "roGen_Road_CA > registerEvents > file:%\n" script_path
+			if doesFileExist script_path do fileIn (script_path + "Road_Generator_Callbacks.ms")
 		)
 		fn init = (
 			
@@ -334,7 +280,7 @@
 			thisNode.name = uniqueName "Road_"
 			node_name = thisNode.name
 			format "roGen_Road_CA > init > Attribute applied to node [ % ]\n" node_name
-			if RtCMS == undefined do registerEvents()
+			registerEvents()
 			format "INITIALIZED--------------------------------------------------[ % ]------------------------------------------------------------\n" node_name
 		)
 		on load do (
@@ -342,7 +288,7 @@
 			format "roGen_Road_CA > load\n"
 			thisNode = getNode()
 			updateList()	
-			if RtCMS == undefined do registerEvents()
+			registerEvents()
 		)
 	)
 -- )
@@ -373,59 +319,7 @@
 	--init
 	jo_start.init()
 	jo_end.init()
-
 	
 	road.addComponent jo_start
 	road.addComponent jo_end
 -- )
-
-
--- 		fn missingComponets = ( 
--- 			
--- 			(refs.dependentNodes thisNode).count == 0
--- 		) 
-
-
-/*
-fn PostDelete_Callback event handles = 
-(
-	nodes = for node in NodesForDeletion where isvalidnode node collect node
-	NodesForDeletion = #()
-	if nodes.count > 0 do	undo "Post Delete" on delete nodes
-	redrawViews()
-)
-
-fn preDeleteWholeClass =
-(
-	if not PostDelete_NodeEventCallback.enabled do
-		NodesForDeletion = #()
-
-	if not theHold.Redoing() do
-	(
-		node = callbacks.notificationParam()
-		if isvalidnode node do
-		(
-			join NodesForDeletion (for n in (getclassinstances (classof node) astrackviewpick:on) where isvalidnode n.client and n != n.client collect n.client)
-		)
-	)
-)
-
-
-callbacks.addScript #sceneUndo "undo_Callback()" id:#undo
-callbacks.addScript #sceneRedo "redo_Callback()" id:#redo
-
-
---register callbacks
-mcLiveMeasureCallbacks = NodeEventCallback mouseUp:true delay:1000 \
-selectionChanged:selectionChanged \
-deleted:nodeDeleted \
-geometryChanged:geometryChanged \
-callbackBegin: cbBegin \
-callbackEnd: cbEnd
-
-hasProperty $ "roGen_Road_CA"
-hasProperty $ "roGen_Joint_CA"
-hasAttribute
-mcLiveMeasureCallbacks = undefined --unregister selection change callbacks
-gc()-- light:true
-*/

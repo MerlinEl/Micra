@@ -1,7 +1,12 @@
- Global RtCMS
- Global roGen_Road_CA
- Global roGen_Joint_CA
- 
+Global RtCMS
+Global roGen_Road_CA
+Global roGen_Joint_CA
+Global roGen_Spline_CA
+  /**
+  *@TODO
+	-when delete more than one object and make undo road components hirarchy is shuffled
+	--when road clone cancelled components of original road are deleted
+  */
  struct Road_Tool_Component_Manager_Struct (
 	 
 	DELETED_CALLBACKS_ENABLED = true,
@@ -16,9 +21,10 @@
 	),
 	fn isRoad obj = (hasCustomAttribute obj #roGen_Road_CA),
 	fn isJoint obj = (hasCustomAttribute obj #roGen_Joint_CA),
+	fn isPath obj = (hasCustomAttribute obj #roGen_Spline_CA),
 	fn isValidComponent obj = (
 		
-		isRoad obj or isJoint obj --or isPath <--- TODO
+		isRoad obj or isJoint obj or isPath obj
 	),
 	fn findItemByName arr obj_name = (
 		
@@ -28,10 +34,6 @@
 	fn addObjectsInCollection arr = (
 		
 		for o in arr where (findItemByName arr o.name) == 0 do append rest_objects_for_delete o
-	),
-	fn getRoadChildren obj = (
-		
-		for o in obj.components_tab where isValidNode o.node and not (isDeleted o.node) and not (o.node.is_deleted) collect o.node	
 	),
 	fn onPreDeleteObject = (
 		
@@ -43,15 +45,18 @@
 			if ( isRoad o ) then (
 				
 				format "onPreDeleteObject > isRoad get children...\n"
-				addObjectsInCollection ( getRoadChildren o )
+				addObjectsInCollection ( o.getComponents() )
 				
-			) else if ( isJoint o ) then (
+			) else if ( isJoint o ) or  ( isPath o ) then (
 				
-				format "onPreDeleteObject > isJoint get parent...\n"
+				format "onPreDeleteObject > isJoint or isPath get parent...\n"
 				local parent_node = o.getParentNode()
-				addObjectsInCollection #( parent_node )
-				addObjectsInCollection ( getRoadChildren parent_node)
-			)
+				if parent_node != undefined do (
+					
+					addObjectsInCollection #( parent_node )
+					addObjectsInCollection   ( parent_node.getComponents() )
+				)
+			) 
 		)
 	),
 	fn onPostDeleteObject = (
@@ -68,14 +73,11 @@
 		local params = callbacks.notificationParam()
 		local src_arr = params[1]
 		local trgt_arr = params[2]
-		format "onCloneObject > src_arr:%\n" src_arr
-		format "onCloneObject > trgt_arr:%\n" trgt_arr
-		return false
 		for i=1 to src_arr.count do (
 		
 			local obj_src = src_arr[i]
 			local obj_trgt = trgt_arr[i]
-			if not (isValidComponent obj_src) do continue  --filter only objects which belongs to Road_Tool 
+			if not (isRoad obj_src) do continue  --filter only objects which belongs to Road_Tool 
 			 --recreate  attribute
 			custattributes.delete obj_trgt (custattributes.getdefs obj_trgt baseobject:on)[1]
 			custAttributes.add obj_trgt ::roGen_Road_CA baseObject:true #unique
@@ -88,13 +90,16 @@
 			--redefine components
 			for obj in components_clones do (
 		
--- 				obj_src.addComponent o
--- 				o.init()
-				 --recreate  attribute
-				custattributes.delete obj (custattributes.getdefs obj baseobject:on)[1]
-				custAttributes.add obj ::roGen_Joint_CA baseObject:true #unique
+				local node_type = if isJoint obj then "joint" else "path"
+				if not ( isJoint obj ) and not ( isPath obj ) do continue
+				format "\tclone %:%  attach to parent:%\n" node_type obj.name obj_trgt.name
+				custattributes.delete obj (custattributes.getdefs obj baseobject:on)[1] --remove old attribute	
+				case node_type of ( --add new  attribute
+					
+					"joint" : ( custAttributes.add obj ::roGen_Joint_CA baseObject:true #unique )
+					"path": ( custAttributes.add obj ::roGen_Spline_CA baseObject:true #unique )
+				)
 				obj.init()
-				--link contraint and register callbacks
 				obj.controller.addTarget obj_trgt 1 --relink to new node (for reposition only)
 				obj.attachParent obj_trgt
 				--append in to parent tab
@@ -104,16 +109,15 @@
 		)
 	),
 	fn init = (
-		
+		--unregister events
 		callbacks.RemoveScripts #postNodesCloned id:#roGen_Road_onClone_Callbacks	
 		callbacks.RemoveScripts #selectedNodesPreDelete id:#roGen_Road_onPreDelete_Callbacks
 		callbacks.RemoveScripts #selectedNodesPostDelete  id:#roGen_Road_onPostDelete_Callbacks
 		gc()
+		--register events
 		callbacks.addScript #postNodesCloned "RtCMS.onCloneObject()" id:#roGen_Road_onClone_Callbacks
 		callbacks.addScript #selectedNodesPreDelete "RtCMS.onPreDeleteObject()" id:#roGen_Road_onPreDelete_Callbacks
 		callbacks.addScript #selectedNodesPostDelete "RtCMS.onPostDeleteObject()" id:#roGen_Road_onPostDelete_Callbacks
-		--#nodePreDelete: Node 
-		--#nodePostDelete: undefined 
 	),
 	register = init()
  )
