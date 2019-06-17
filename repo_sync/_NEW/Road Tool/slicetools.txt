@@ -1,0 +1,29 @@
+Slice Modifier Tools
+
+By Shawn Olson (http://www.shawnolson.net)
+
+Get latest version at https://wallworm.com/ww_destinations.php?destination=slicetools
+
+This script will add a new set of functions and buttons to the Slice Modifier when you add a slice modifier to an object.
+
+To install, copy slice_tools.ms to your scripts/startup folder and restart 3ds Max. Now new instances of the Slice modifier will get a new rollout called Slice Tools.
+
+This tool is also included with the latest version of Wall Worm and Wall Worm Pro. If you have WW 3.07+ installed, you already have this functionality.
+
+Changelog
+
+V1.2
+
+	* Fixed functions when using a Slice modifier instanced across multiple objects and the methods were offsetting slice results.
+	
+	* Added Undo to collapse functions.
+
+V1.1
+
+	* Added new Cap option to make the automatic capping optional.
+	
+	* Added new button to Cap-Collapse-Explode which will explode all the pieces into separate objects.
+
+V1.0
+
+	* Initial Release
