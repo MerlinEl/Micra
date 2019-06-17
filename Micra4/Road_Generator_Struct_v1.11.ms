@@ -75,6 +75,7 @@ struct ROAD_GENERATOR_STRUCTURE	(
 	*/
 	fn getConstraintObject obj_src node_type = (
 	
+	-- obj_src.controller.getNode 1
 		local obj = for o in refs.dependentnodes obj_src where classOf o == node_type do exit with o
 		if isValidNode obj then obj else undefined
 	),
@@ -1734,9 +1735,11 @@ format "< ......................................................................
 				layer.addNode finalRoad
 				layer.addNode spline
 				
---debug			
+--debug	
+local dupe = (isObjectWithDuplicateName finalRoad)	
+if dupe do messageBox ("Road with dupplicate Name was created.\nPlease fix road with name:"+finalRoad.name) title:"Alert:"	
 format "B DEBUG > Rebuild road after:............................................. [ % ]........................................................................\n" finalRoad.name
-format "Dupplicates found:%\n" (isObjectWithDuplicateName finalRoad)
+format "Dupplicates found:%\n" dupe
 for o in objects where findString o.name "generator_connect_road" != undefined do print o.name 
 format "<  ..................................................................................................................................\n"
 
