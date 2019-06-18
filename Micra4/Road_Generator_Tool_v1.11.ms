@@ -2753,44 +2753,24 @@ fn ClearRollFloater floater =
 )
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-fn SetCrosroadRoll index = 
-(
-	Case (index) of (
-		1: (
-			floaterGenerator.size = [270,440]
-			addRollout dlgCrossroadGenerator floaterGenerator
-			
-		)
-		2 :(
-			floaterGenerator.size = [270,430]
-			addRollout dlgCrossroadGenerator2 floaterGenerator
-			
-		)
-		3 : (
-			floaterGenerator.size = [270,470]
-			addRollout dlgCrossroadGenerator3 floaterGenerator
-		)
-	)
-)
+
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 rollout rGeneratorUtilities "Generator Utilities"
 (
-	group "Tools" (
+	group "Advanced Tools:" (
 	
-		button bt_showRoadColorTable "Road Colors" offset:[0,0] width:90 height:25 toolTip:"Road Color Types"
+		button bt_show_road_color_table "Road Colors" offset:[0,0] width:100 height:25 toolTip:"Road Color Types"
+		button bt_generate_custom_road "Custom Road Gnerator" offset:[0,0] width:140 height:25 toolTip:"Generate road from prefab and spline"
 	)
-	group "Repair" (
+	group "Analiysis and Repair:" (
 	
-		button bt_FixDuplicitNames "Unique Names" offset:[0,0] width:90 height:25 toolTip:"Fix duple names" across:2
-		button bt_roadAnatomy "Road Anatomy" offset:[0,0] width:90 height:25 toolTip:"Show - Repair roads hierarchy"
-	)
-	group "Analiysis" (
-	
+		button bt_FixDuplicitNames "Unique Names" offset:[0,0] width:100 height:25 toolTip:"Fix duple names" across:2
+		button bt_roadAnatomy "Road Anatomy" offset:[0,0] width:100 height:25 toolTip:"Show - Repair roads hierarchy"
 		button bt_ReloadPrefabs "Reload Prefabs" offset:[0,0] width:100 height:25 toolTip:"Delete old prefabs and load new ones" across:2
 		button bt_validate_roads "Validate Sel Roads" offset:[0,0] width:100 height:25 toolTip:"Validate Roads Structure"
 		button bt_distr_to_laers "Redistribute Sel" offset:[0,0] width:100 height:25 toolTip:"Move road in to layers(name is teaken from Node)"
 	)
-	group "Manage" (
+	group "Manage:" (
 	
 		label lbl_1 "Show - Hide objects which contains a Word:" offset:[0, 0] width:284 height:14 align:#left
 		button btn_show_objs "Show" offset:[0,0] width:56 height:17 align:#left across:3 toolTip:"Unhide Objects By Name"
@@ -2809,16 +2789,19 @@ rollout rGeneratorUtilities "Generator Utilities"
 	on bt_FixDuplicitNames		pressed do ( roGenStruct.fixDuplicitNames()										)
 	on bt_UnhideRoadsFull		pressed do ( roGenStruct.unhideRoadsFull()										)
 	on bt_roadAnatomy			pressed do ( runLocalScript "Road_Generator_Anatomy"								)
-	on bt_showRoadColorTable	pressed do ( runLocalScript "Road_Generator_Colors"								)
+	on bt_show_road_color_table	pressed do ( runLocalScript "Road_Generator_Colors"								)
 	on bt_ReloadPrefabs			pressed do ( roGenStruct.reloadPrefabs(getSourceFileName())						)
 	on btn_show_objs 			pressed do ( roGenStruct.showObjectsByNamePart objects edt_sh_name.text true	)
 	on btn_hide_objs 			pressed do ( roGenStruct.showObjectsByNamePart objects edt_sh_name.text false	)
 	on bt_validate_roads		pressed do ( roGenStruct.validateSelectedRoads()								)
 	on bt_distr_to_laers		pressed do ( roGenStruct.distributeRoadsInToLayers()							)
+	on bt_generate_custom_road	pressed do ( runLocalScript	"Road_Generator_Custom"								)
 )
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 rollout dlgPickObjectType "Menu"
 (
+	local roll_all_size = #([270,440], [270,420], [270,450]) --"CROSSROAD",  "ROAD", "UTILITIES"
+	local roll_crossroad_size = #([270,440], [270,520], [270,420]) --"CROSSROAD",  "ROAD", "UTILITIES"
 	radiobuttons rb_type labels:#("CROSSROAD    ",  "ROAD               ", "UTILITIES") default:1 align:#left  columns:1   --"TURN                           "
 	dropdownlist dd_crossroad_types "" items:#("2 Side Roads", "2 Different Side Roads", "1 Side Road" ) height:6  offset:[100,-50] width:140
 	button bt_createColl "Create Collisions" offset:[55, -10] width:140 height:25 visible:false
@@ -2826,7 +2809,16 @@ rollout dlgPickObjectType "Menu"
 	button bt_adjustTangentsLength "Adjust Tangets Length" offset:[55,-80] width:140 height:25 visible:false
 	button bt_copyUniqueShortcut "Copy Unique Shortcut" offset:[55,0] width:140 height:25 visible:false
 -- 	label fill ""
+	fn setCrosroadRoll index arr_sizes = (
 	
+		floaterGenerator.size = arr_sizes[index]
+		Case (index) of (
+		
+			1 : addRollout dlgCrossroadGenerator floaterGenerator
+			2 : addRollout dlgCrossroadGenerator2 floaterGenerator
+			3 : addRollout dlgCrossroadGenerator3 floaterGenerator
+		)
+	)
 	fn switchRadioButton index crossRoadType: 1=
 	(
 		BM_SETCHECK = 241		-- checkbutton toggle message ID
@@ -2859,14 +2851,13 @@ rollout dlgPickObjectType "Menu"
 	)
 
 	on rb_type changed arg do (
--- 		print arg
+
 		ClearRollFloater floaterGenerator
--- 		rb_lane_width_2_1.state = 0
+		Case (arg) of ( --"CROSSROAD",  "ROAD", "UTILITIES"
 		
-		Case (arg) of ( --crossroad menu group
-			1: (
-					SetCrosroadRoll dd_crossroad_types.selection
--- 					addRollout dlgCrossroadGenerator floaterGenerator
+			1: (--crossroad menu group
+			
+					setCrosroadRoll dd_crossroad_types.selection roll_crossroad_size
 					dd_crossroad_types.visible = True
 					bt_copyUniqueCrossRoad.visible = True
 					bt_copyUniqueShortcut.visible = false
@@ -2875,7 +2866,8 @@ rollout dlgPickObjectType "Menu"
 					dlgPickObjectType.height = 90 --Menu dialog height
 				)
 			2 :(	--road menu group
-					floaterGenerator.size = [270,430]
+			
+					floaterGenerator.size = roll_all_size[arg]
 					addRollout RoadGeneratorTool floaterGenerator
 					dd_crossroad_types.visible = False
 					bt_copyUniqueCrossRoad.visible = false
@@ -2885,25 +2877,27 @@ rollout dlgPickObjectType "Menu"
 					dlgPickObjectType.height = 65 --Menu dialog height
 				)
 			3 :(	--utilites menu group
-					floaterGenerator.size = [270,470]
+			
+					floaterGenerator.size = roll_all_size[arg]
 					addRollout rGeneratorUtilities floaterGenerator
 					dd_crossroad_types.visible = False
 					bt_copyUniqueCrossRoad.visible = false
 					bt_copyUniqueShortcut.visible = false
 					bt_adjustTangentsLength.visible = false
 					bt_createColl.visible = True
-					--bt_createColl.pos = [113,30]
 					dlgPickObjectType.height = 65 --Menu dialog height
 			)
 		)
 	)
 	
-	on dd_crossroad_types selected  arg do (
+	on dd_crossroad_types selected  arg do ( --"2 Side Roads", "2 Different Side Roads", "1 Side Road"
+	
 		ClearRollFloater floaterGenerator
-		SetCrosroadRoll arg
+		setCrosroadRoll arg roll_crossroad_size
 	)	
 	
 	on dlgPickObjectType open do (
+	
 		dlgPickObjectType.height = 90
 	)
 	
