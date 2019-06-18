@@ -2767,7 +2767,7 @@ fn SetCrosroadRoll index =
 			
 		)
 		3 : (
-			floaterGenerator.size = [270,520]
+			floaterGenerator.size = [270,470]
 			addRollout dlgCrossroadGenerator3 floaterGenerator
 		)
 	)
@@ -2775,25 +2775,33 @@ fn SetCrosroadRoll index =
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 rollout rGeneratorUtilities "Generator Utilities"
 (
-	button bt_SelectVisuals 		"Select Visuals" 	offset:[-90,0] width:90 height:25 
-	button bt_SelectColls 			"Select Colls    " 	offset:[-90,0] width:90 height:25 
-	button bt_SelectChildren 		"Select Children" 	offset:[-90,0] width:90 height:25 toolTip:"Select road componets"
+	group "Tools" (
 	
-	button bt_FixDuplicitNames		"Unique Names" 		offset:[0,-90] width:90 height:25 toolTip:"Fix duple names"
-	button bt_UnhideRoadsFull		"Unhide All"	offset:[0,0] width:90 height:25 toolTip:"Unhide full roads hierarchy"	
-	button bt_roadAnatomy			"Road Anatomy"		offset:[0,0] width:90 height:25 toolTip:"Show - Repair roads hierarchy"	
+		button bt_showRoadColorTable "Road Colors" offset:[0,0] width:90 height:25 toolTip:"Road Color Types"
+	)
+	group "Repair" (
 	
-	button bt_hidePoints 			"Hide Help Points"	offset:[90,-90] width:90 height:25 
-	button bt_showRoadColorTable	"Road Colors"	offset:[90,0] width:90 height:25 toolTip:"Road Color Types"
-	button bt_ReloadPrefabs			"Reload Prefabs"	offset:[90,0] width:90 height:25 toolTip:"Delete old prefabs and load new ones"
-	button bt_validate_roads 		"Validate Sel Roads"	offset:[0,0] width:120 height:25 toolTip:"Validate Roads Structure"
-	button bt_distr_to_laers 		"Redistribute Sel"	offset:[0,0] width:120 height:25 toolTip:"Move road in to layers(name is teaken from Node)"
+		button bt_FixDuplicitNames "Unique Names" offset:[0,0] width:90 height:25 toolTip:"Fix duple names" across:2
+		button bt_roadAnatomy "Road Anatomy" offset:[0,0] width:90 height:25 toolTip:"Show - Repair roads hierarchy"
+	)
+	group "Analiysis" (
 	
-	label lbl_1 "Show - Hide objects which contains Word:" offset:[-10, 0] width:284 height:14 align:#left
-	button btn_show_objs "Show" offset:[-14,-0] width:56 height:17 align:#left across:4
-	button btn_hide_objs "Hide" offset:[-8,-0] width:56 height:17 align:#left
-	editText edt_sh_name "" offset:[-8,-0] width:135 height:17 align:#left text:"building"
-
+		button bt_ReloadPrefabs "Reload Prefabs" offset:[0,0] width:100 height:25 toolTip:"Delete old prefabs and load new ones" across:2
+		button bt_validate_roads "Validate Sel Roads" offset:[0,0] width:100 height:25 toolTip:"Validate Roads Structure"
+		button bt_distr_to_laers "Redistribute Sel" offset:[0,0] width:100 height:25 toolTip:"Move road in to layers(name is teaken from Node)"
+	)
+	group "Manage" (
+	
+		label lbl_1 "Show - Hide objects which contains a Word:" offset:[0, 0] width:284 height:14 align:#left
+		button btn_show_objs "Show" offset:[0,0] width:56 height:17 align:#left across:3 toolTip:"Unhide Objects By Name"
+		button btn_hide_objs "Hide" offset:[-20,0] width:56 height:17 align:#left toolTip:"Hide Objects By Name"
+		editText edt_sh_name "" offset:[-40,0] width:120 height:17 align:#left text:"building"
+		button bt_hidePoints "Hide Help Points"	width:100 height:25 align:#left toolTip:"Hide Road Help Points" across:2 
+		button bt_UnhideRoadsFull "Unhide Help Points"	width:100 height:25 align:#right toolTip:"Unhide Roads Help Points"
+		button bt_SelectVisuals "Select Roads" width:100 height:25 align:#left toolTip:"Select Roads Geometry" across:2
+		button bt_SelectColls 	"Select Collisions" width:100 height:25 align:#right toolTip:"Select Road Collisions"
+		button bt_SelectChildren "Select Help points" 	width:100 height:25 toolTip:"Select Road Help Points"
+	)
 	on bt_hidePoints			pressed do ( roGenStruct.hideHelpPoints()										)
 	on bt_SelectVisuals			pressed do ( roGenStruct.selectVisuals()										)
 	on bt_SelectColls			pressed do ( roGenStruct.selectCollisions()										)
@@ -2877,7 +2885,7 @@ rollout dlgPickObjectType "Menu"
 					dlgPickObjectType.height = 65 --Menu dialog height
 				)
 			3 :(	--utilites menu group
-					floaterGenerator.size = [270,400]
+					floaterGenerator.size = [270,470]
 					addRollout rGeneratorUtilities floaterGenerator
 					dd_crossroad_types.visible = False
 					bt_copyUniqueCrossRoad.visible = false
