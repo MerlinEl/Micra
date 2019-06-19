@@ -173,6 +173,7 @@ rollout RoadCustomGeneratorDialog "Road Custom Generator:" width:428 height:332
 		subobjectLevel = 0
 		suspendEditing()
 		local finalRoad = roGenStruct.createRoadFromSpline obj_prefab obj_path spn_density.value spn_twist.value
+		finalRoad.name = uniqueName "road_custom_"
 		resumeEditing()
 	)
 	on btn_gen_points pressed do createTwoPoints()

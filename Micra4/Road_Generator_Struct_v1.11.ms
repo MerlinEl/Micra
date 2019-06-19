@@ -639,11 +639,12 @@ struct ROAD_GENERATOR_STRUCTURE	(
 		local roadsCrossToselect = #()
 		for obj in geometry do(
 		
-			crossForuCheck 	= matchPattern obj.name pattern:"generator_crossroad_4*"
-			crossThreeCheck	= matchPattern obj.name pattern:"generator_crossroad_3*"
-			roadCheck			= matchPattern obj.name pattern:"generator_connect_road*"
+			local crossForuCheck 	= matchPattern obj.name pattern:"generator_crossroad_4*"
+			local crossThreeCheck	= matchPattern obj.name pattern:"generator_crossroad_3*"
+			local roadCheck			= matchPattern obj.name pattern:"generator_connect_road*"
+			local customRoadCheck	= matchPattern obj.name pattern:"custom_road*"
 			
-			if  crossForuCheck or crossThreeCheck or roadCheck then(
+			if crossForuCheck or crossThreeCheck or roadCheck or customRoadCheck then(
 				append roadsCrossToselect obj
 			)
 		)
@@ -659,11 +660,13 @@ struct ROAD_GENERATOR_STRUCTURE	(
 	
 		local roadsCollsToselect = #()
 		for obj in geometry do(
-			crossForuCheck 	= matchPattern obj.name pattern:"coll_generator_crossroad_4*"
-			crossThreeCheck	= matchPattern obj.name pattern:"coll_generator_crossroad_3*"
-			roadCheck		= matchPattern obj.name pattern:"coll_generator_connect_road*"
+		
+			local crossForuCheck 	= matchPattern obj.name pattern:"coll_generator_crossroad_4*"
+			local crossThreeCheck	= matchPattern obj.name pattern:"coll_generator_crossroad_3*"
+			local roadCheck			= matchPattern obj.name pattern:"coll_generator_connect_road*"
+			local customRoadCheck	= matchPattern obj.name pattern:"coll_custom_road*"
 			
-			if  crossForuCheck or crossThreeCheck or roadCheck then(
+			if  crossForuCheck or crossThreeCheck or roadCheck or customRoadCheck then(
 				append roadsCollsToselect obj
 			)
 		)
@@ -697,6 +700,16 @@ struct ROAD_GENERATOR_STRUCTURE	(
 		)
 		join sel addSel
 		select sel
+	),
+	fn selectUnlinkedRoads = (
+
+		selectVisuals()
+		local orphaned_roads = for o in selection where o.parent == undefined collect o
+		max select none
+		select orphaned_roads
+		local msg = ""
+		for o in orphaned_roads do msg += (o.name + "\n")
+		messageBox ("Selected Orphaned Roads("+orphaned_roads.count as String+")\n"+msg) title:"Search Orphaned Roads:"
 	),
 	fn unhideRoadsFull = (
 		
@@ -1420,7 +1433,7 @@ struct ROAD_GENERATOR_STRUCTURE	(
 		local road_length = getWidthBB road_bb
 				
 		local road_sum = copy road_prefabric
-		road_sum.pivot -= road_prefabric.transform.row1 * 0.5 * road_length
+		road_sum.pivot -= road_prefabric.transform.row1 * 0.5 * road_length --set pivot to border center
 		local road_count = spline_length/road_length as integer
 		local road_sum_length = road_length
 	-- 	print ("Road count: "+(road_count as string))

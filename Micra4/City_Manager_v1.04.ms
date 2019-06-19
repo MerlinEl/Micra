@@ -36,7 +36,9 @@ rollout mcCityManDialog "City Manager v1.04" width:500 height:896
 	button 'btn_init' "UPDATE" pos:[4,4] width:492 height:16 toolTip:"Zoom to Location" align:#left
 	GroupBox 'grp7' "Actions:" pos:[4,808] width:492 height:84 align:#left
 	button 'btn_move_colls_to_layers' "Distribute Collisions" pos:[12,826] width:112 height:20 toolTip:"Move each Collision in to separate Layer" align:#left
+	button 'btn_sel_colls' "Select Collisions" pos:[128,826] width:112 height:20 toolTip:"Select All Collision" align:#left
 	button 'btn_select_visible_nodes' "Select Visible Nodes" pos:[12,848] width:112 height:20 toolTip:"Select All visible nodes" align:#left
+	button 'btn_select_empty_objects' "Select Empty Objects" pos:[128,848] width:112 height:20 toolTip:"Select All Editable_Poly objects without geometry" align:#left
 	button 'btn_filter_visible_nodes' "Filter Visible Nodes" pos:[12,870] width:112 height:20 toolTip:"Filter visible nodes from selection" align:#left
 	button 'btn_generate_coll' "Gen Simple Collisions" pos:[126,870] width:112 height:20 toolTip:"Genarate collisions from selection, ID:1, " align:#left
 	--Local variables
@@ -444,6 +446,28 @@ rollout mcCityManDialog "City Manager v1.04" width:500 height:896
 		fillChildrenList node_names[1]	
 		updateSelection()
 	)
+	fn selectAllCollisions = (
+		
+-- 		local visible_objects = for o in objects where not o.isHidden collect o
+		local colls = for o in objects where findString o.name "coll_"	!= undefined collect o
+		select colls
+	)
+	fn selectObjectsWithoutGeometry = (
+
+	local empty_geometry = #()
+	local msg = ""
+	for o in geometry where classOf o == Editable_poly do (
+
+			if o.numVerts == 0 do (
+				
+				o.isHidden = false
+				msg += o.name + "\n"
+				append empty_geometry o	
+			)
+		)
+		select empty_geometry
+		messageBox ("Selected Empty Geometry("+empty_geometry.count as String+")\n"+msg) title:"Search Geometry:"
+	)
 	--load node children
 	on cbx_node_list selected sel do
 	(
@@ -661,6 +685,8 @@ rollout mcCityManDialog "City Manager v1.04" width:500 height:896
 	on btn_select_visible_nodes pressed do ( select(for o in objects where not o.ishidden collect o) )
 	on btn_filter_visible_nodes pressed do ( select(for o in selection where not o.ishidden collect o) )
 	on btn_generate_coll pressed do generateSimpleCollisions()
+	on btn_sel_colls pressed do selectAllCollisions()
+	on btn_select_empty_objects pressed do selectObjectsWithoutGeometry()
 )
 createDialog mcCityManDialog
 

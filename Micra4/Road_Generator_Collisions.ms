@@ -32,6 +32,7 @@ lh_02_little_italy_block_h_roads_coll
 			7:	50  --road tile
 			8: 	53  --pavement
 			9: 	53	--concrete blocks
+			10: 51	--dirt road
 			15: 53	--pavement
 			16: 53	--pavement
 			17: 53	--pavement

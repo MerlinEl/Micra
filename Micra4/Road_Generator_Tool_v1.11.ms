@@ -2764,11 +2764,12 @@ rollout rGeneratorUtilities "Generator Utilities"
 	)
 	group "Analiysis and Repair:" (
 	
-		button bt_FixDuplicitNames "Unique Names" offset:[0,0] width:100 height:25 toolTip:"Fix duple names" across:2
-		button bt_roadAnatomy "Road Anatomy" offset:[0,0] width:100 height:25 toolTip:"Show - Repair roads hierarchy"
-		button bt_ReloadPrefabs "Reload Prefabs" offset:[0,0] width:100 height:25 toolTip:"Delete old prefabs and load new ones" across:2
-		button bt_validate_roads "Validate Sel Roads" offset:[0,0] width:100 height:25 toolTip:"Validate Roads Structure"
-		button bt_distr_to_laers "Redistribute Sel" offset:[0,0] width:100 height:25 toolTip:"Move road in to layers(name is teaken from Node)"
+		button bt_FixDuplicitNames "Unique Names" offset:[0,0] width:100 height:25 align:#left toolTip:"Fix duple names" across:2
+		button bt_roadAnatomy "Road Anatomy" offset:[0,0] width:100 height:25 align:#right toolTip:"Show - Repair roads hierarchy"
+		button bt_ReloadPrefabs "Reload Prefabs" offset:[0,0] width:100 height:25 align:#left toolTip:"Delete old prefabs and load new ones" across:2
+		button bt_validate_roads "Validate Sel Roads" offset:[0,0] width:100 height:25 align:#right toolTip:"Validate Roads Structure"
+		button bt_distr_to_laers "Redistribute Sel" offset:[0,0] width:100 height:25 align:#left toolTip:"Move road in to layers(name is teaken from Node)" across:2
+		button bt_sel_unlinked_roads "Sel Orphan Roads" offset:[0,0] width:100 height:25 align:#right toolTip:"Select roads which are not linked"
 	)
 	group "Manage:" (
 	
@@ -2780,7 +2781,7 @@ rollout rGeneratorUtilities "Generator Utilities"
 		button bt_UnhideRoadsFull "Unhide Help Points"	width:100 height:25 align:#right toolTip:"Unhide Roads Help Points"
 		button bt_SelectVisuals "Select Roads" width:100 height:25 align:#left toolTip:"Select Roads Geometry" across:2
 		button bt_SelectColls 	"Select Collisions" width:100 height:25 align:#right toolTip:"Select Road Collisions"
-		button bt_SelectChildren "Select Help points" 	width:100 height:25 toolTip:"Select Road Help Points"
+		button bt_SelectChildren "Select Help points" width:100 height:25 toolTip:"Select Road Help Points"
 	)
 	on bt_hidePoints			pressed do ( roGenStruct.hideHelpPoints()										)
 	on bt_SelectVisuals			pressed do ( roGenStruct.selectVisuals()										)
@@ -2796,11 +2797,12 @@ rollout rGeneratorUtilities "Generator Utilities"
 	on bt_validate_roads		pressed do ( roGenStruct.validateSelectedRoads()								)
 	on bt_distr_to_laers		pressed do ( roGenStruct.distributeRoadsInToLayers()							)
 	on bt_generate_custom_road	pressed do ( runLocalScript	"Road_Generator_Custom"								)
+	on bt_sel_unlinked_roads	pressed do ( roGenStruct.selectUnlinkedRoads()									)
 )
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 rollout dlgPickObjectType "Menu"
 (
-	local roll_all_size = #([270,440], [270,420], [270,450]) --"CROSSROAD",  "ROAD", "UTILITIES"
+	local roll_all_size = #([270,440], [270,420], [270,470]) --"CROSSROAD",  "ROAD", "UTILITIES"
 	local roll_crossroad_size = #([270,440], [270,520], [270,420]) --"CROSSROAD",  "ROAD", "UTILITIES"
 	radiobuttons rb_type labels:#("CROSSROAD    ",  "ROAD               ", "UTILITIES") default:1 align:#left  columns:1   --"TURN                           "
 	dropdownlist dd_crossroad_types "" items:#("2 Side Roads", "2 Different Side Roads", "1 Side Road" ) height:6  offset:[100,-50] width:140
