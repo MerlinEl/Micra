@@ -1414,7 +1414,180 @@ struct ROAD_GENERATOR_STRUCTURE	(
 		sp.wirecolor = color 7 206 224
 		sp
 	),
-	fn createRoadFromSpline road_prefabric spline adaption twist = (
+	/**
+	*@Usage > Create road assembled from number of parts to cover whole spline
+	*/
+	fn adjustRoadLength spline_length road_prefabric pt1_pos &road_sum &road_length  = (
+
+		local road_bb = getBoundingBox road_prefabric
+		road_length = getWidthBB road_bb
+		road_sum = copy road_prefabric --clone prefab
+		road_sum.pivot -= road_prefabric.transform.row1 * 0.5 * road_length --set pivot to border center
+		local road_count = (spline_length/road_length) as integer
+		local road_sum_length = road_length
+		for i in 1 to road_count do (
+		
+			local copy_road = copy road_prefabric
+			copy_road.position += copy_road.transform.row1 * road_length * i
+			road_sum.attach copy_road road_sum
+			road_sum_length += road_length
+		)
+		road_sum.position = pt1_pos
+		weldEditPoly road_sum 1.0
+	),
+	/**
+	*@Usage > Slice road along spline with constant distances | | | | | | | | | | |
+	*/
+	fn cutRoadAlongSpline road_sum spline spline_length road_length adaption = (
+
+		local tangent_fst = tangentCurve3D spline 1 ((1 as double)/TANGENT_TEST_COUNT)
+		local last_i = 1
+		local sum_d = 0.0
+		with redraw off (
+		
+			for i in 2 to TANGENT_TEST_COUNT do ( --trun off redraw for this loop
+			
+				local tangent_snd = tangentCurve3D spline 1 ((i as double)/TANGENT_TEST_COUNT)
+				local d = acos (dot (normalize tangent_fst) (normalize tangent_snd))
+				sum_d += d
+		-- 		print ("Angle sum: "+sum_d as string)
+				if sum_d > adaption then (
+		-- 			print("Diff: "+(i-last_i) as string)
+					-- compute params
+					local param = (((i+last_i)/2.0)/TANGENT_TEST_COUNT)
+					local pt = interpCurve3D spline 1 param pathParam:true
+					--p = point ()
+					--p.position = pt
+					--add slice modifier
+					local slice = sliceModifier()
+					addModifier road_sum slice 
+					--setup modifier
+					slice.slice_type = 1
+					slice.slice_plane.position = [0.0, 0.0, param*spline_length-road_length*0.5]
+					slice.slice_plane.rotation = (angleaxis (90) [0, 1, 0]) as quat
+					-- save for next iteration
+					last_i = i
+					sum_d = 0.0
+				)
+				tangent_fst = tangent_snd
+			)
+			--cut road length
+			slice = sliceModifier()
+			addModifier road_sum slice 
+			slice.slice_type = 2
+			slice.slice_plane.position = [0.0, 0.0, spline_length-road_length*0.5]
+			slice.slice_plane.rotation = (angleaxis (90) [0, 1, 0]) as quat
+			ConvertTo road_sum editable_poly
+		)
+	),
+	fn conformRoadToSpline road_sum spline twsit_deg pt1 tn1 = (
+		
+		-- transform matrix vectors for road
+		local t_x = normalize (tn1-pt1)
+		local t_y = normalize([-t_x.y, t_x.x, 0.0])
+		local t_z = cross t_x t_y
+		
+		local road_transform = road_sum.transform
+		road_transform.row1 = t_x
+		road_transform.row2 = t_y
+		road_transform.row3 = t_z
+			
+		road_sum.transform = road_transform
+		
+		-- update path deform gizmo to be at start of road (calculation translate world position to object space of road)
+		local path_deform = pathDeform()
+		addModifier road_sum path_deform
+		
+		path_deform.twist = twsit_deg
+		path_deform.axis = 0
+		path_deform.path = spline
+		path_deform.gizmo.position = pt1 * (getModContextTM road_sum path_deform) * (inverse road_sum.objecttransform)
+	),
+	/**
+	*@Usage > cut exxcess part of road and adjust angle of second road edge at connection
+	*/
+	fn cutExcessPartOfRoad  road_sum road_prefabric pt2 tn2  debug:false = (
+		
+		--convert back forward to get triangles later
+		local road_sum_mesh = ConvertTo road_sum editable_mesh
+		local road_sum = ConvertTo road_sum editable_poly
+		-- compute face distances, 
+		--face_distances = GetRoadFaceCenterDistances road_prefabric
+		local face_centers = getRoadFaceCenters road_prefabric
+		local t2_x = normalize(tn2-pt2)
+		local t2_y = normalize([-t2_x.y, t2_x.x, 0.0])
+		local t2_z = normalize(cross t2_x t2_y)
+		
+		local t_matrix = matrix3 0
+		t_matrix.row1 = t2_x
+		t_matrix.row2 = t2_y
+		t_matrix.row3 = t2_z
+		
+		local rays = #()
+		for i in 1 to face_centers.count do
+		(
+			--rayOrigin = (pt2+t2_y*face_distances[i]+t2_z*100.0)
+			--dir = (-t2_z)
+			local rayOrigin = face_centers[i][1] * t_matrix + pt2
+			local dir = face_centers[i][2] * t_matrix
+			if debug do  drawLineBetweenTwoPoints rayOrigin (rayOrigin+dir*20.0) (Color 255 0 0)
+			append rays (ray rayOrigin dir)
+		)		
+		local hitArray = findAllIntersectionsUsingRays road_sum rays
+			
+		--slice (gismo orientation pt2 t2_x)
+		local poly_faces = getMeshFacesToPoly road_sum hitArray 
+		polyop.slice road_sum poly_faces (ray pt2 t2_x)
+		
+		--Select faces for delete
+		rays = #()
+		for i in 1 to face_centers.count do
+		(
+			--rayOrigin = (pt2+t2_y*face_distances[i]+t2_z*10.0-t2_x*10.0)
+			--dir = (-t2_z)
+			local rayOrigin = face_centers[i][1] * t_matrix + pt2 - t2_x*10.0
+			local dir = face_centers[i][2] * t_matrix
+			if debug do  drawLineBetweenTwoPoints rayOrigin (rayOrigin+dir*20.0) (Color 0 255 0)		
+			append rays (ray rayOrigin dir)
+		)	
+		hitArray = findAllIntersectionsUsingRays road_sum rays
+		ConvertTo road_sum editable_poly
+		--remove all wrong faces
+		polyop.deleteFaces road_sum (getMeshFacesToPoly road_sum hitArray)
+		weldEditPoly road_sum 1.0	
+	),
+	fn createRoadFromSpline road_prefabric spline adaption twsit_deg = (
+	
+		disableSceneRedraw()
+		-- get segment length
+		local segment_lengths = (getSegLengths spline 1 cum:false)
+		local spline_length = segment_lengths[segment_lengths.count]
+
+		-- get knots position
+		local knot_count = numKnots spline 1
+		local pt1 = getKnotPoint spline 1 1
+		local tn1 = getOutVec spline 1 1
+		local pt2 = getKnotPoint spline 1 knot_count
+		local tn2 = getInVec spline 1 knot_count
+		
+		-- create road assembled from number of parts to cover whole spline
+		local road_sum, road_length
+		roGenStruct.adjustRoadLength spline_length road_prefabric pt1 &road_sum &road_length
+		
+		-- cut road along spline
+		roGenStruct.cutRoadAlongSpline road_sum spline spline_length road_length adaption
+	
+		--conform road to spline
+		roGenStruct.conformRoadToSpline road_sum spline twsit_deg pt1 tn1
+		
+		--Cut excess part of road mesh (p2)
+		--Adjust coonection angle with crossroad
+		roGenStruct.cutExcessPartOfRoad road_sum road_prefabric pt2 tn2
+		
+		enableSceneRedraw()
+		return road_sum
+	),
+	/*fn createRoadFromSpline_old road_prefabric spline adaption twsit_deg = (
 	
 		disableSceneRedraw() 
 		-- get segment length
@@ -1506,7 +1679,7 @@ struct ROAD_GENERATOR_STRUCTURE	(
 		path_deform = pathDeform()
 		addModifier road_sum path_deform
 		
-		path_deform.twist = twist
+		path_deform.twist = twsit_deg
 		path_deform.axis = 0
 		path_deform.path = spline
 		path_deform.gizmo.position = pt1 * (getModContextTM road_sum path_deform) * (inverse road_sum.objecttransform)
@@ -1562,7 +1735,7 @@ struct ROAD_GENERATOR_STRUCTURE	(
 			
 		enableSceneRedraw()
 		return road_sum
-	),
+	),*/
 	/**
 	*@Usage > make short version of selected road with two connection dummies and convert it to corssroad
 	*/
@@ -1735,10 +1908,10 @@ struct ROAD_GENERATOR_STRUCTURE	(
 				local old_name = road.name
 				
 --debug			
-format "A DEBUG > Rebuild road before:............................................... [ % ]........................................................................\n" road.name
-format "Dupplicates found:%\n" (isObjectWithDuplicateName road)
-for o in objects where findString o.name "generator_connect_road" != undefined do print o.name
-format "< ..................................................................................................................................\n"						
+-- format "A DEBUG > Rebuild road before:............................................... [ % ]........................................................................\n" road.name
+-- format "Dupplicates found:%\n" (isObjectWithDuplicateName road)
+-- for o in objects where findString o.name "generator_connect_road" != undefined do print o.name
+-- format "< ..................................................................................................................................\n"						
 				
 				delete road -- delete old road
 
@@ -1751,10 +1924,10 @@ format "< ......................................................................
 --debug	
 local dupe = (isObjectWithDuplicateName finalRoad)	
 if dupe do messageBox ("Road with dupplicate Name was created.\nPlease fix road with name:"+finalRoad.name) title:"Alert:"	
-format "B DEBUG > Rebuild road after:............................................. [ % ]........................................................................\n" finalRoad.name
-format "Dupplicates found:%\n" dupe
-for o in objects where findString o.name "generator_connect_road" != undefined do print o.name 
-format "<  ..................................................................................................................................\n"
+-- format "B DEBUG > Rebuild road after:............................................. [ % ]........................................................................\n" finalRoad.name
+-- format "Dupplicates found:%\n" dupe
+-- for o in objects where findString o.name "generator_connect_road" != undefined do print o.name 
+-- format "<  ..................................................................................................................................\n"
 
 			)
 		)

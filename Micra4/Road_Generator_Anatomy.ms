@@ -79,6 +79,7 @@ rollout roadAnatomyToolSubDialogB "CrossRoad"
 	button btn_cr_p3 "P3" pos:[40,406] width:36 height:24 toolTip:"Tangent Start"
 	button btn_cr_p4 "P4" pos:[40,466] width:36 height:24 toolTip:"Tangent Start"
 	button btn_cr_reset "reset" pos:[284,24] width:40 height:16 toolTip:" Clear road.CrossRoadKids.kids"
+	button btn_cr_fix "fix" pos:[284,44] width:40 height:16 toolTip:" Relink Crossroad Hierarchy"
 	pickbutton pbtn_cr_d1 "pick" pos:[292,260] width:36 height:24
 	pickbutton pbtn_cr_d2 "pick" pos:[292,320] width:36 height:24
 	pickbutton pbtn_cr_d3 "pick" pos:[292,380] width:36 height:24	
@@ -106,6 +107,7 @@ rollout roadAnatomyToolSubDialogB "CrossRoad"
 	on btn_cr_p3 pressed  do (roadAnatomyToolDialog.selCrossRoadComponent #p3)
 	on btn_cr_p4 pressed  do (roadAnatomyToolDialog.selCrossRoadComponent #p4)
 	on btn_cr_reset pressed do (rroadAnatomyToolDialog.resetCrossRoad())
+	on btn_cr_fix pressed do (if roGenStruct != undefined do roGenStruct.fixBrokenCrossroad $)
 )
  
 rollout roadAnatomyToolDialog "Road Anatomy:" width:352 height:(amax #(roadAnatomyToolSubDialogA_Height, roadAnatomyToolSubDialogB_Height))
