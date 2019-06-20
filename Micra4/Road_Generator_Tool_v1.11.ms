@@ -2682,8 +2682,10 @@ rollout RoadGeneratorTool "Road Generator" (
 	button btn_edit_tangents "Edit Tangents" width: 100 height: 35 offset:[-50, 10] align:#center toolTip:"Edit Tangents\nHint:Insert new wertices on spline if you need."
 	button btn_sync_spline "Sync Spline" width: 100 height: 35 offset:[50, -40] align:#center toolTip:"Snap spline Start, End points and Rebuild curve."
 	checkbox cb_update_curve "Sync Curve" checked:true align:#right offset:[0,5]
-	button btn_generate "Generate Road" width: 200 height: 35 offset:[0, 10] align:#center
-	button bt_generateShortcut "Generate Shortcut" width:200 height:35 offset:[0,0]
+	button btn_generate_old "Generate Road Old" width: 120 height: 35 align:#left offset:[0, 10] align:#center across:2 
+	button btn_generate "Generate Road" width: 120 height: 35 offset:[0, 10] align:#right
+	button bt_gen_shortcut_old "Generate Shortcut Old" width:120 height:35 offset:[0,0] align:#left across:2
+	button bt_gen_shortcut "Generate Shortcut" width:120 height:35 offset:[0,0] align:#right
 
 	local roads = #()
 	local specs = #()
@@ -2694,8 +2696,10 @@ rollout RoadGeneratorTool "Road Generator" (
 	
 		roGenStruct.collectRoadPrefabs &roads &specs
 	)
-	on bt_generateShortcut pressed do (roGenStruct.generateRoadShortcut RoadGeneratorTool)
-	on btn_generate pressed do (roGenStruct.generateRoad RoadGeneratorTool roads specs)
+	on bt_gen_shortcut_old pressed do (roGenStruct.generateRoadShortcut RoadGeneratorTool old_way:true)
+	on bt_gen_shortcut pressed do (roGenStruct.generateRoadShortcut RoadGeneratorTool old_way:false)
+	on btn_generate_old pressed do (roGenStruct.generateRoad RoadGeneratorTool roads specs old_way:true)
+	on btn_generate     pressed do (roGenStruct.generateRoad RoadGeneratorTool roads specs old_way:false)
 	
 
 	-----------------------------------------------------------------------------------

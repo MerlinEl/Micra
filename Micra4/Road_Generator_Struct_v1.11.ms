@@ -349,6 +349,31 @@ struct ROAD_GENERATOR_STRUCTURE	(
 	-- 	print ("Face vert count: "+verts.count as string)
 		return point_avg
 	),
+	fn getClosestVert obj_poly pos =
+	(
+		local vert, dist = 1e9
+		local d, obj_mesh = snapshotasmesh obj_poly
+		local verts = #{1..obj_mesh.numverts}
+		for v in verts where (d = distance (getvert obj_mesh v) pos) < dist do (
+			
+			vert = v
+			dist = d
+		)
+		#(vert, dist)
+	),
+	fn isBorderEdge obj e_index = (
+	
+		local everts = (polyop.getEdgeVerts obj e_index) as Array
+		local edges_1 = polyop.getEdgesUsingVert obj everts[1]
+		local edges_2 = polyop.getEdgesUsingVert obj everts[2]
+		-- format "ei:% e1:% e2:%\n" e_index edges_1.numberset edges_2.numberset
+		edges_1.numberset < 4 and edges_2.numberset < 4
+	),
+	fn getBorderEdgesFromVertex obj v_index = (
+		
+		local edges = polyop.getEdgesUsingVert obj v_index
+		for ei in edges where isBorderEdge obj ei collect ei	
+	),
 	fn getRoadFaceCenterDistances editable =
 	(
 		face_count = polyop.getNumFaces editable
@@ -1478,11 +1503,30 @@ struct ROAD_GENERATOR_STRUCTURE	(
 			slice.slice_plane.position = [0.0, 0.0, spline_length-road_length*0.5]
 			slice.slice_plane.rotation = (angleaxis (90) [0, 1, 0]) as quat
 			ConvertTo road_sum editable_poly
+			weldEditPoly road_sum 1.0
 		)
 	),
-	fn conformRoadToSpline road_sum spline twsit_deg pt1 tn1 = (
+	fn conformRoadToSpline road_sum spline twsit_deg = (
+format "---Used Path_Deform_2 ------------------------------------------------------------------\n"
+		local pd = Path_Deform2 ()
+		addModifier road_sum pd 
+		pd.Spline = spline
+		pd.axis = 0
+		pd.percent_along_path = 0
+		pd.stretch = 1
+		pd.rotation = 0
+		pd.twist = twsit_deg
+		pd.uniform = true
+		pd.auto_stretch = false
+		pd.UsePivotPoint = true
+		pd.PreserveForm = false
+		pd.UpVector = 1
+		pd.AcrossShapes = 1
+		pd.flip = false
+	),
+	/*fn conformRoadToSpline_old road_sum spline twsit_deg pt1 tn1 = (
 		
-		-- transform matrix vectors for road
+		-- transform matrix vectors for road 
 		local t_x = normalize (tn1-pt1)
 		local t_y = normalize([-t_x.y, t_x.x, 0.0])
 		local t_z = cross t_x t_y
@@ -1491,7 +1535,7 @@ struct ROAD_GENERATOR_STRUCTURE	(
 		road_transform.row1 = t_x
 		road_transform.row2 = t_y
 		road_transform.row3 = t_z
-			
+		--adjust road position and rotation	
 		road_sum.transform = road_transform
 		
 		-- update path deform gizmo to be at start of road (calculation translate world position to object space of road)
@@ -1502,7 +1546,7 @@ struct ROAD_GENERATOR_STRUCTURE	(
 		path_deform.axis = 0
 		path_deform.path = spline
 		path_deform.gizmo.position = pt1 * (getModContextTM road_sum path_deform) * (inverse road_sum.objecttransform)
-	),
+	),*/
 	/**
 	*@Usage > cut exxcess part of road and adjust angle of second road edge at connection
 	*/
@@ -1556,7 +1600,7 @@ struct ROAD_GENERATOR_STRUCTURE	(
 		polyop.deleteFaces road_sum (getMeshFacesToPoly road_sum hitArray)
 		weldEditPoly road_sum 1.0	
 	),
-	fn createRoadFromSpline road_prefabric spline adaption twsit_deg = (
+	fn createRoadFromSpline road_prefabric spline adaption twsit_deg collapsed:true = (
 	
 		disableSceneRedraw()
 		-- get segment length
@@ -1578,16 +1622,17 @@ struct ROAD_GENERATOR_STRUCTURE	(
 		roGenStruct.cutRoadAlongSpline road_sum spline spline_length road_length adaption
 	
 		--conform road to spline
-		roGenStruct.conformRoadToSpline road_sum spline twsit_deg pt1 tn1
+		-- roGenStruct.conformRoadToSpline road_sum spline twsit_deg pt1 tn1
+		roGenStruct.conformRoadToSpline road_sum spline twsit_deg
 		
 		--Cut excess part of road mesh (p2)
 		--Adjust coonection angle with crossroad
-		roGenStruct.cutExcessPartOfRoad road_sum road_prefabric pt2 tn2
+		if collapsed do roGenStruct.cutExcessPartOfRoad road_sum road_prefabric pt2 tn2
 		
 		enableSceneRedraw()
 		return road_sum
 	),
-	/*fn createRoadFromSpline_old road_prefabric spline adaption twsit_deg = (
+	fn createRoadFromSplineOld road_prefabric spline adaption twsit_deg = (
 	
 		disableSceneRedraw() 
 		-- get segment length
@@ -1674,7 +1719,7 @@ struct ROAD_GENERATOR_STRUCTURE	(
 		road_transform.row3 = t_z
 			
 		road_sum.transform = road_transform
-		
+format "---Used Path_Deform_1 ------------------------------------------------------------------\n"		
 		-- update path deform gizmo to be at start of road (calculation translate world position to object space of road)
 		path_deform = pathDeform()
 		addModifier road_sum path_deform
@@ -1735,11 +1780,11 @@ struct ROAD_GENERATOR_STRUCTURE	(
 			
 		enableSceneRedraw()
 		return road_sum
-	),*/
+	),
 	/**
 	*@Usage > make short version of selected road with two connection dummies and convert it to corssroad
 	*/
-	fn generateRoadShortcut dialog = (
+	fn generateRoadShortcut dialog old_way:true = (
 		
 		--Compatibility Check
 		if (selection as Array).count > 1 do return false		--not applicable if two dummies is selected (this is for road creation)
@@ -1787,7 +1832,7 @@ struct ROAD_GENERATOR_STRUCTURE	(
 		if not (isShortcut road) do moveTangetPoints pts[1] pts[2] min_tangent_dist --move tangent points close
 		select pts
 		--generate road geometry
-		dialog.btn_generate.pressed() --generate road
+		if old_way then dialog.btn_generate_old.pressed() else dialog.btn_generate.pressed()--generate road
 		--collect components
 		road = selection[1]
 		sp  = road.roadSpline
@@ -1806,7 +1851,7 @@ struct ROAD_GENERATOR_STRUCTURE	(
 		--Reenable all Road Tool callbacks at End
 		All_CALLBACKS_ENABLED = true
 	),	
-	fn createRoadFromRolloutSettings dialog roads specs spline startPoint endPoint road_clr:undefined road_name:undefined= (
+	fn createRoadFromRolloutSettings dialog roads specs spline startPoint endPoint road_clr:undefined road_name:undefined old:true= (
 	
 		--deselect all (speed up progress)
 		subobjectlevel = 0 --exit from edit mode
@@ -1825,9 +1870,15 @@ struct ROAD_GENERATOR_STRUCTURE	(
 		local selected_road = pickRoadPrefab roads prefabs_sel false
 		--assembly road from components
 		local road = constructRoadPrototype selected_road specs pl_left_state pl_right_state sw_left_state sw_right_state
-		--conform-slice road along spline
-		local finalRoad = createRoadFromSpline road spline tangent_deg twist_deg
+--conform-slice road along spline
+local finalRoad = if old then (
 
+	createRoadFromSplineOld road spline tangent_deg twist_deg
+	
+) else (
+
+	createRoadFromSpline road spline tangent_deg twist_deg collapsed:false
+)
 		if road_name == undefined then ( --genereate new name from prefab name (when create new road)
 		
 			finalRoad.name = replace finalRoad.name 11 6 "connect_road" --"generator_road_2_6d" > "generator_connect_road_6d"
@@ -1852,7 +1903,7 @@ struct ROAD_GENERATOR_STRUCTURE	(
 	/**
 	*@Usage >  create road from two points or rebuild selected road( select road or spline )
 	*/
-	fn generateRoad dialog roads specs = (
+	fn generateRoad dialog roads specs old_way:true = (
 	
 		local sel = selection as Array
 		local obj = sel[1]
@@ -1874,7 +1925,7 @@ struct ROAD_GENERATOR_STRUCTURE	(
 				)
 				--create road
 				spline = createSplineFromJoints sel[1] sel[2]
-				finalRoad = createRoadFromRolloutSettings dialog roads specs spline sel[1] sel[2]
+				finalRoad = createRoadFromRolloutSettings dialog roads specs spline sel[1] sel[2] old:old_way
 			)
 			---------------------------------------------------------------------------
 -- 			ROAD or SPLINE SELECTED (keep spline and Rebuild road)
@@ -1916,7 +1967,7 @@ struct ROAD_GENERATOR_STRUCTURE	(
 				delete road -- delete old road
 
 				--create new road
-				finalRoad = createRoadFromRolloutSettings dialog roads specs spline startPoint endPoint road_clr:wire_clr road_name:old_name
+				finalRoad = createRoadFromRolloutSettings dialog roads specs spline startPoint endPoint road_clr:wire_clr road_name:old_name old:old_way
 				finalRoad.parent = export_node
 				layer.addNode finalRoad
 				layer.addNode spline
