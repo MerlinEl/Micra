@@ -295,14 +295,93 @@ struct ROAD_GENERATOR_STRUCTURE	(
 		)
 		result
 	),
+	fn getVertsCenter obj verts = (
+	
+		local center = [0,0,0]
+		for v in verts do center += polyop.getVert obj v
+		center /= verts.count
+		center
+	),
+	fn getFaceCenter obj f_index = (
+		
+		local verts = polyop.getFaceVerts obj f_index
+		getVertsCenter obj verts
+	),
 	fn getSelectedFacesCenter obj = (
 	
-		if (classof obj != Editable_poly) do return false
+		if (classof obj != Editable_poly) do return undefined
 		local fsel = (polyOp.getFaceSelection obj) as Array
-		if fsel.count == 0 do return false
+		if fsel.count == 0 do return undefined
 		local faceCenter = [0,0,0]
 		for f in fsel do faceCenter += polyop.getFaceCenter obj f
 		faceCenter / fsel.count
+	),
+	fn getClosestVert obj_poly pos maxDist:undefined = (
+	
+		local vert, dist = if maxDist != undefined then maxDist else 1e9
+		local d, obj_mesh = snapshotasmesh obj_poly
+		local verts = #{1..obj_mesh.numverts}
+		for v in verts where (d = distance (getvert obj_mesh v) pos) < dist do (
+			
+			vert = v
+			dist = d
+		)
+		#(vert, dist)
+	),
+	fn isBorderEdge obj e_index = (
+	
+		local efaces = polyop.getFacesUsingEdge obj e_index
+		efaces.numberset == 1
+	),
+	fn getBorderEdgesFromVertex obj v_index = (
+		
+		local edges = polyop.getEdgesUsingVert obj v_index
+		for ei in edges where isBorderEdge obj ei collect ei	
+	),
+	fn alignRoadToNormal obj joint_pos tangent_pos = (
+	
+		--snap road to joint (adjust pivot to start midle vertex)
+		local center_vert = (getClosestVert obj joint_pos)[1] 
+		obj.pivot = polyop.getVert obj center_vert
+		obj.pos = joint_pos
+		-- transform matrix vectors for road (align road to tangent)
+		local t_x = normalize (tangent_pos-joint_pos)
+		local t_y = normalize([-t_x.y, t_x.x, 0.0])
+		local t_z = cross t_x t_y
+		
+		local tm = obj.transform
+		tm.row1 = t_x
+		tm.row2 = t_y
+		tm.row3 = t_z	
+		obj.transform = tm
+	),
+	/**
+	*@Usage > get road edge(at start or end) vertices and positions
+	*/
+	fn getRoadEdge obj joint_pos = (
+		
+		local center_vert = (getClosestVert obj joint_pos)[1] 
+		local border_edges = getBorderEdgesFromVertex obj center_vert
+		obj.selectedEdges = border_edges
+		obj.SelectEdgeLoop() --border edges
+		local border_vertices = polyop.getVertsUsingEdge obj (polyOp.getEdgeSelection obj) --get border vertices
+		local vd = struct VERTEX_DATA (index, pos)
+		for v in border_vertices collect vd v (polyOp.getVert obj v) --gather verts_data
+	),
+	fn getLongestEdge obj edges = ( --Not Used
+
+		local ed = ( struct EDGE_DATA (index, length) ; EDGE_DATA() ) --quick object instance build
+		for edge_index in edges do (
+
+			local everts = polyOp.getEdgeVerts obj edge_index
+			local len = distance (polyOp.getVert obj everts[1]) (polyOp.getVert obj everts[2])
+			if ed.length < len do (
+			
+				ed.index = edge_index
+				ed.length = len
+			)
+		)
+		ed --return edge index and length
 	),
 	fn getBoundingBox &poly = (
 	
@@ -336,51 +415,26 @@ struct ROAD_GENERATOR_STRUCTURE	(
 	fn getFrontBB bb		=(return bb[1].y),
 	fn getLeftBB bb		=(return bb[1].x),
 	fn getRightBB bb		=(return bb[2].x),
-	fn getFaceCenter editable verts = (
-		point_avg = [0,0,0]
-		for i in 1 to verts.count do
-		(
-			pt = polyop.getVert editable verts[i]
-			point_avg += pt
-	-- 		print("pt to sum: "+pt as string)
-		)
-	-- 	print("pt sum: "+point_avg as string)
-		point_avg /= verts.count
-	-- 	print ("Face vert count: "+verts.count as string)
-		return point_avg
-	),
-	fn getClosestVert obj_poly pos =
-	(
-		local vert, dist = 1e9
-		local d, obj_mesh = snapshotasmesh obj_poly
-		local verts = #{1..obj_mesh.numverts}
-		for v in verts where (d = distance (getvert obj_mesh v) pos) < dist do (
-			
-			vert = v
-			dist = d
-		)
-		#(vert, dist)
-	),
-	fn isBorderEdge obj e_index = (
+	fn getNeighborsVertsOnLoop obj verts_arr vertMask:#{} = (
 	
-		local everts = (polyop.getEdgeVerts obj e_index) as Array
-		local edges_1 = polyop.getEdgesUsingVert obj everts[1]
-		local edges_2 = polyop.getEdgesUsingVert obj everts[2]
-		-- format "ei:% e1:% e2:%\n" e_index edges_1.numberset edges_2.numberset
-		edges_1.numberset < 4 and edges_2.numberset < 4
+		local vert_a_edges = polyop.getEdgesUsingVert obj verts_arr[1]
+		local vert_b_edges = polyop.getEdgesUsingVert obj verts_arr[2]
+		local everts_a = polyop.getVertsUsingEdge obj vert_a_edges
+		local everts_b = polyop.getVertsUsingEdge obj vert_b_edges
+		local two_verts = everts_a + everts_b
+		if vertMask.numberset > 0 do two_verts *= vertMask	
+		two_verts -= verts_arr as BitArray --remove previous verts	
+		-- format "mask:%\ntwo_verts:%\n" vertMask two_verts	
+		two_verts as Array
 	),
-	fn getBorderEdgesFromVertex obj v_index = (
-		
-		local edges = polyop.getEdgesUsingVert obj v_index
-		for ei in edges where isBorderEdge obj ei collect ei	
-	),
+	fn getVectorsAngle v1 v2 = ( acos(dot (normalize v1) (normalize v2))),
 	fn getRoadFaceCenterDistances editable =
 	(
 		face_count = polyop.getNumFaces editable
 		face_offsets = #()
 		for i in 1 to face_count do
 		(
-			face_center = getFaceCenter editable (polyop.getFaceVerts editable i)
+			face_center = getFaceCenter editable i
 			--pt = point()
 			--pt.position = face_center
 	-- 		print ("Face center: "+pt as string)
@@ -395,7 +449,7 @@ struct ROAD_GENERATOR_STRUCTURE	(
 		face_offsets = #()
 		for i in 1 to face_count do
 		(
-			face_center = getFaceCenter editable (polyop.getFaceVerts editable i)
+			face_center = getFaceCenter editable i
 			--pt = point()
 			--pt.position = face_center
 	-- 		print ("Face center: "+pt as string)
@@ -613,6 +667,13 @@ struct ROAD_GENERATOR_STRUCTURE	(
 		for i = 1 to num_verts do polyOp.setVertColor obj map_channel i clr
 		update obj
 	),
+	fn setRoadBoundVerts obj verts_data = (
+	
+		ConvertTo obj Editable_Poly
+		for v in verts_data do polyOp.setVert obj v.index v.pos
+		
+		completeRedraw()
+	),
 	fn setPointAppearance p = (
 	
 		p.size = 600
@@ -753,6 +814,7 @@ struct ROAD_GENERATOR_STRUCTURE	(
 					)
 				)
 			)
+			for o in objects where classOf o == SplineShape do unhide o
 		)
 	),
 	/**
@@ -970,6 +1032,36 @@ struct ROAD_GENERATOR_STRUCTURE	(
 		local p = p1.pos
 		p1.pos = p2.pos
 		p2.pos = p
+	),
+	fn rotateVectorAroundNormal v deg = (
+	
+		local rm = rotateZMatrix deg --create a rotation matrix from the value
+		v * rm --transform the original vector using the matrix
+	),
+	fn rotateVertexAroundZBackward obj v_index center p2 = (
+		
+		local p1 = polyop.getVert obj v_index
+		local v1 = p1 - center
+		local v2 = p2 - center
+		local vert_angle = getVectorsAngle v1 v2
+		local rotated_vector = rotateVectorAroundNormal v1 -vert_angle
+		polyOp.setVert obj v_index ( center + rotated_vector)
+	),	
+	/**
+	*@Example 
+		roGenStruct.rotateVerticesAroundPoint $ (polyop.getVertSelection $) 20
+	*/
+	fn rotateVerticesAroundPoint obj verts deg center:undefined = (
+		
+		--if center is not defined, calculate vertex center
+		if center == undefined do getVertsCenter obj verts
+		local tm = obj.transform --get the node's TM 
+		tm.row4 = center  --move the TM to the center Orientation of local Z remains the same!
+		local rot_mat = (rotateZMatrix deg) * tm  --rotation matrix is now in local coords!
+		for v in verts do  (
+			in coordsys tm vertex_position = (polyop.getVert obj v) 
+			polyop.setVert obj v (vertex_position * rot_mat ) 
+		)
 	),
 	fn loadPrefabs road_tool_file = (
 	
@@ -1458,7 +1550,7 @@ struct ROAD_GENERATOR_STRUCTURE	(
 			road_sum_length += road_length
 		)
 		road_sum.position = pt1_pos
-		weldEditPoly road_sum 1.0
+		weldEditPoly road_sum 0.5
 	),
 	/**
 	*@Usage > Slice road along spline with constant distances | | | | | | | | | | |

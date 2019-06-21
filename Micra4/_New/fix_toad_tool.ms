@@ -21,9 +21,17 @@ twsit_deg = 0
 		-- cut road along spline
 		roGenStruct.cutRoadAlongSpline road_sum spline spline_length road_length adaption
 	
+		--snap - align road to joint
+		roGenStruct.alignRoadToNormal road_sum pt1 tn1
+		
+		---store start border vertices with positions
+		start_border_vertices = roGenStruct.getRoadEdge road_sum pt1 type:#start
+
 		--conform road to spline
--- 		roGenStruct.conformRoadToSpline road_sum spline twsit_deg pt1 tn1 --old way
 		roGenStruct.conformRoadToSpline road_sum spline twsit_deg
+		
+		--restore start border pos
+		roGenStruct.setRoadBoundVerts road_sum start_border_vertices
 		
 		--Cut excess part of road mesh (p2)
 		--Adjust coonection angle with crossroad
@@ -46,19 +54,8 @@ twsit_deg = 0
 	)
 
 	
--- A translation that brings point 1 to the origin
--- Rotation around the origin by the required angle
--- A translation that brings point 1 back to its original position	
-fn rotateVertexAroundpoint obj v_index angle_deg = (
-	
-	newX = centerX + (point2x-centerX)*Math.cos(angle_deg) - (point2y-centerY)*Math.sin(angle_deg)
-	newY = centerY + (point2x-centerX)*Math.sin(angle_deg) + (point2y-centerY)*Math.cos(angle_deg)
-)
-
 		spline = selection[2]
 		road_sum = selection[1]
-
-
 
 		-- update path deform gizmo to be at start of road (calculation translate world position to object space of road)
 		pd = Path_Deform2 ()
@@ -77,32 +74,150 @@ fn rotateVertexAroundpoint obj v_index angle_deg = (
 		pd.AcrossShapes = 1
 		pd.flip = false
 		
+		
+		--convert back forward to get triangles later
+		 road_sum_mesh = ConvertTo road_sum editable_mesh
+		 road_sum = ConvertTo road_sum editable_poly
+		
 		------------------------------		
-		--fix start border line
+		--FIX ROAD START
 		------------------------------
+		select (point pos:pt1)
+		--get start border
 		vert_at_start = (roGenStruct.getClosestVert road_sum pt1)[1] 
 		border_edges = roGenStruct.getBorderEdgesFromVertex road_sum vert_at_start
 		road_sum.selectedEdges = border_edges
 		road_sum.SelectEdgeLoop() --border edges
 		border_vertices = polyop.getVertsUsingEdge road_sum (polyOp.getEdgeSelection road_sum)
 		road_sum.selectedVertices = border_vertices --border vertices
-		--get tangent vector
-		v1 = tn1 - pt1
+		--calculate border line (guideline)
+		v1 = (normalize (tn1 - pt1) ) * 10000--get tangent vector
 		--get right point
-		rm = rotateZMatrix 90 --create a rotation matrix from the value
-		rv1 = v1 * rm --transform the original vector using the matrix
-		right_point = pt1 + rv1
-		right_point.z = pt1.z --if is tangent rotated make it straight
-		--get left point
 		rm = rotateZMatrix -90 --create a rotation matrix from the value
-		rv2 = v1 * rm --transform the original vector using the matrix
-		left_point =  pt1 + rv2
+		v_left = v1 * rm --transform the original vector using the matrix
+		left_point = pt1 + v_left --move vector to pt1
 		left_point.z = pt1.z --if is tangent rotated make it straight
+		--get left point
+		rm = rotateZMatrix 90 --create a rotation matrix from the value
+		v_right = v1 * rm --transform the original vector using the matrix
+		right_point =  pt1 + v_right --move vector to pt1
+		right_point.z = pt1.z --if is tangent rotated make it straight
 
-po1 = point pos:right_point
-po2 = point pos:left_point
-sp1 = roGenStruct.drawLineBetweenTwoPoints po1.pos po2.pos  yellow
-select #(po1, po2, sp1)
+--visualize (Debug)
+-- sp_right = roGenStruct.drawLineBetweenTwoPoints pt1 right_point  yellow
+-- sp_left = roGenStruct.drawLineBetweenTwoPoints pt1 left_point  yellow
+-- select #(sp_left, sp_right)
+
+--pick bot vertices one by one from center and rotate them to guideline (vector left or right)
+last_verts = #(vert_at_start, vert_at_start)
+next_verts = roGenStruct.getNeighborsVertsOnLoop road_sum last_verts vertMask:(border_vertices)
+while next_verts.count == 2  and not keyboard.escPressed do (
+	
+	-- 	road_sum.selectedVertices =  next_verts
+	last_verts = join (copy next_verts #nomap) last_verts
+	--get left and rifht vert
+	local left_vert, right_vert 
+	if distance left_point (polyop.getVert road_sum next_verts[1]) < distance left_point (polyop.getVert road_sum next_verts[2]) then  (
+		
+		left_vert = next_verts[1] 
+		right_vert = next_verts[2] 
+		
+	) else (
+		
+		left_vert = next_verts[2] 
+		right_vert = next_verts[1] 
+	)
+	--snap roatate left vert
+	roGenStruct.rotateVertexAroundZBackward road_sum left_vert pt1 left_point
+	--snap roatate right vert
+	roGenStruct.rotateVertexAroundZBackward road_sum right_vert pt1 right_point
+	--pick nex two vertices
+	next_verts = roGenStruct.getNeighborsVertsOnLoop road_sum last_verts vertMask:(border_vertices)
+)
+
+
+
+
+
+		
+		local p_left_vert = polyop.getVert road_sum left_vert
+		local v_left_vert = p_left_vert - pt1
+		local vert_angle = getLinesAngle pt1 p_left_vert pt1 left_point
+		local rotated_vector = rotateVectorAroundNormal v_left_vert -vert_angle
+		polyOp.setVert road_sum left_vert ( pt1 + rotated_vector)
+
+select (point pos:p_left_vert)
+select (point pos:(pt1 + rotatedVector))
+
+
+	
+	
+	
+	-- A translation that brings point 1 to the origin
+-- Rotation around the origin by the required angle
+-- A translation that brings point 1 back to its original position	
+fn rotateVertexAroundpoint obj v_index angle_deg = (
+	
+	newX = centerX + (point2x-centerX)*Math.cos(angle_deg) - (point2y-centerY)*Math.sin(angle_deg)
+	newY = centerY + (point2x-centerX)*Math.sin(angle_deg) + (point2y-centerY)*Math.cos(angle_deg)
+)
+
+	
+final_angle  = [0,0,1] * inverse ($.rotation as matrix3)
+--rotate vector - angle
+staticVector = [0,0,1]
+rotatingVector = v_left_vert
+centerOfRotatoin = pt1
+
+finalVector= cross staticVector rotatingVector
+tm = matrix3 staticVector rotatingVector finalVector centerOfRotatoin
+rotateX tm (degToRad -vert_angle)
+rotatedVector = tm.row2
+polyOp.setVert road_sum left_vert ( pt1 + rotatedVector)
+
+
+
+
+
+
+
+rotateVertexAroundpoint road_sum left_vert -vert_angle axis:#z
+fn rotateVertexAroundpoint obj v_index angle_deg axis:#z = (
+	
+	local newX = centerX + (point2x-centerX)*Math.cos(angle_deg) - (point2y-centerY)*Math.sin(angle_deg)
+	local newY = centerY + (point2x-centerX)*Math.sin(angle_deg) + (point2y-centerY)*Math.cos(angle_deg)
+	local vert_pos = polyop.getVert obj v_index
+	polyOp.setVert obj v_index [newX, newY, vert_pos.z]
+)
+
+fn rotateVertexAroundpoint obj v_index angle_deg axis:#z = (
+	
+	--use static vector and rotating vector to derive a 3rd axis.
+	finalVector= cross(staticVector,rotatingVector)
+	--contruct a matrix 3
+	-- rotating vector is in row2
+	tm = matrix 3 staticVector rotatingVector finalVector centerOfRotatoin
+	--rotate
+	rotateX tm 90
+	--extract the new vector
+	rotatedVector = tm.row2
+)
+
+
+
+select (point pos:v_left_vert)
+
+road_sum.selectedVertices  = #{157}
+v_right_vert = polyop.getVert road_sum right_vert
+
+
+
+
+
+
+roGenStruct.rotateVerticesAroundPoint $ (polyop.getVertSelection $) 20
+
+
 
 		--convert back forward to get triangles later
 		 road_sum_mesh = ConvertTo road_sum editable_mesh
