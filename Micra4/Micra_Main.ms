@@ -174,10 +174,10 @@ struct MICRA_STRUCTURE (
 		return true
 	),
 	--> Copy Micra's macro to 3DsMax dir
-	fn installMacro force:false = (
+	fn installMacro = (
 		
-		if doesFileExist MaxMacro and force do deleteFile MaxMacro 
-		if not doesFileExist MaxMacro then (
+		if doesFileExist MaxMacro and mcFile.isFileOlder MaxMacro MicraMacro do deleteFile MaxMacro 
+		if not doesFileExist MaxMacro then ( --copy macro to max user folder
 	
 			local success = copyFile MicraMacro MaxMacro
 			format "% > installMacro > with result:%\n" version success 

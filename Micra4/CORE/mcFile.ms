@@ -52,6 +52,12 @@ struct MICRA_FILE (
 			(now.Subtract last).Seconds
 		)
 	),
+	fn isFileOlder src_path trgt_path = (
+	
+		local src_sec = secondsSinceFileWritten src_path
+		local trgt_sec = secondsSinceFileWritten trgt_path
+		src_sec < trgt_sec
+	),
 	/**
 	*@Usage
 		script_name	: String > 

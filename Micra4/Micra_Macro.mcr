@@ -4,8 +4,9 @@
 								                --MICRA--
 
 ----------------------------------------------------------------------------------------------------------
-MacroScript SuperExpertMode             
+MacroScript SuperExpertMode            
 category:"Micra"
+ButtonText:"Super Expert Mode" 
 toolTip:""
 (
 	On IsEnabled Return (classOf mcInterface == StructDef)
@@ -14,8 +15,8 @@ toolTip:""
 ----------------------------------------------------------------------------------------------------------		
 MacroScript SubObject_0
 --enabledIn:#("max", "viz", "vizr") --pfb: 2003.12.12 added product switch
-ButtonText:"Element"
 category:"Micra" 
+ButtonText:"Exit Editing"
 Tooltip:"Sub-object Level 0"
 -- internalCategory:"Modifier Stack"
 (
@@ -29,8 +30,8 @@ Tooltip:"Sub-object Level 0"
 ----------------------------------------------------------------------------------------------------------	
 MacroScript EPoly_NURMS_Toggle2
 --enabledIn:#("max", "viz") --pfb: 2003.12.12 added product switch
-ButtonText:"NURMS Toggle"
 category:"Micra" 
+ButtonText:"NURMS Toggle"
 Tooltip:"NURMS Toggle (Poly)2"
 -- internalCategory:"Editable Polygon Object" 
 (
@@ -40,6 +41,7 @@ Tooltip:"NURMS Toggle (Poly)2"
 ----------------------------------------------------------------------------------------------------------		
 macroScript DivideEdges
 category:"Micra"
+ButtonText:"Divide Edges"
 toolTip:""
 (
 	On IsEnabled Return (classOf mcAction == StructDef)
@@ -48,6 +50,7 @@ toolTip:""
 ----------------------------------------------------------------------------------------------------------	
 macroScript CreatePoly
 category:"Micra"
+ButtonText:"Create Poly"
 toolTip:""
 (
 	On IsEnabled Return (classOf mcAction == StructDef)
@@ -56,6 +59,7 @@ toolTip:""
 ----------------------------------------------------------------------------------------------------------	
 macroScript CleanEdges
 category:"Micra"
+ButtonText:"Clean Edges"
 toolTip:""
 (
 	On IsEnabled Return (classOf mcAction == StructDef)
@@ -64,6 +68,7 @@ toolTip:""
 ----------------------------------------------------------------------------------------------------------	
 macroScript TriangleCounter
 category:"Micra"
+ButtonText:"Triangle Counter"
 toolTip:""
 (
 	On IsEnabled Return (classOf mcAction == StructDef)
@@ -83,6 +88,7 @@ toolTip:""
 ----------------------------------------------------------------------------------------------------------	
 macroScript PaintWeights
 category:"Micra"
+ButtonText:"Paint Weights"
 toolTip:""
 (
 	On IsEnabled Return (selection.count == 1 and modPanel.getCurrentObject() == selection[1].modifiers[#Skin] and subobjectLevel == 1)
@@ -91,6 +97,7 @@ toolTip:""
 ----------------------------------------------------------------------------------------------------------
 macroScript SoftSelIncerase
 category:"Micra"
+ButtonText:"Soft Sel Incerase"
 toolTip:""
 (
 	On IsEnabled Return (classOf mcAction == StructDef and mcPoly.isInPoly() and subobjectLevel > 0 and selection[1].useSoftSel == on)
@@ -98,6 +105,7 @@ toolTip:""
 )
 macroScript SoftSelDecerase
 category:"Micra"
+ButtonText:"Soft Sel Decerase"
 toolTip:""
 (
 	On IsEnabled Return (classOf mcAction == StructDef and mcPoly.isInPoly() and subobjectLevel > 0 and selection[1].useSoftSel == on)
@@ -106,14 +114,16 @@ toolTip:""
 ----------------------------------------------------------------------------------------------------------
 MacroScript SplineMagnet
 category:"Micra"
+ButtonText:"Spline Magnet"
 toolTip:"Spline Magnet"
 (
 	On IsEnabled Return (classOf mcAction == StructDef and mcPoly.isInPoly()) 
 	On Execute Do (Micra.fileInVersion "Spline_Magnet")
 )
 ----------------------------------------------------------------------------------------------------------	
-MacroScript HideUni             
+MacroScript HideUni           
 category:"Micra"
+ButtonText:"Hide Uni"  
 toolTip:""
 (
 	On IsEnabled Return (classOf mcAction == StructDef)
@@ -121,16 +131,18 @@ toolTip:""
 
 )
 ----------------------------------------------------------------------------------------------------------
-MacroScript UnhideUni             
+MacroScript UnhideUni               
 category:"Micra"
+ButtonText:"Unhide Uni" 
 toolTip:""
 (
 	On IsEnabled Return (classOf mcAction == StructDef)
 	On Execute Do (mcAction.unhide_sel())
 )
 ----------------------------------------------------------------------------------------------------------
-MacroScript ShowHideCage             
+MacroScript ShowHideCage              
 category:"Micra"
+ButtonText:"Show Hide Cage" 
 toolTip:""
 (
 	On IsEnabled Return (Micra != undefined and mcPoly.isInPoly())
@@ -139,8 +151,9 @@ toolTip:""
 	)
 )
 ----------------------------------------------------------------------------------------------------------
-MacroScript SoftSelection             
+MacroScript SoftSelection               
 category:"Micra"
+ButtonText:"Soft Selection" 
 toolTip:""
 (
 	On IsEnabled Return (Micra != undefined and mcPoly.isInPoly() and Micra.fileInVersion != undefined)
@@ -149,8 +162,8 @@ toolTip:""
 )
 ----------------------------------------------------------------------------------------------------------
 MacroScript CharacterTool
-ButtonText:"Character_Tool"
 category:"Micra" 
+ButtonText:"Character_Tool"
 Tooltip:"Character_Tool"
 (
 	On IsEnabled Return (Micra.fileInVersion != undefined)
@@ -160,16 +173,18 @@ Tooltip:"Character_Tool"
 	)
 )	
 ----------------------------------------------------------------------------------------------------------
-MacroScript MakePlanarInX             
+MacroScript MakePlanarInX            
 category:"Micra"
+ButtonText:"Make Planar In X"
 toolTip:""
 (
 	On IsEnabled Return (classOf mcAction == StructDef and mcPoly.isInPoly())
 	On Execute do  (mcAction.make #PlanarInX)
 )
 ----------------------------------------------------------------------------------------------------------	
-MacroScript MakePlanarInY             
+MacroScript MakePlanarInY           
 category:"Micra"
+ButtonText:"Make Planar In Y"
 toolTip:""
 (
 	On IsEnabled Return (classOf mcAction == StructDef and mcPoly.isInPoly())
@@ -179,6 +194,7 @@ toolTip:""
 ----------------------------------------------------------------------------------------------------------	
 MacroScript MakePlanarInZ             
 category:"Micra"
+ButtonText:"Make Planar In Z"
 toolTip:""
 (
 	On IsEnabled Return (classOf mcAction == StructDef and mcPoly.isInPoly())
@@ -187,6 +203,7 @@ toolTip:""
 ----------------------------------------------------------------------------------------------------------
 MacroScript PolyRelax             
 category:"Micra"
+ButtonText:"Poly Relax"
 toolTip:""
 (
 	On IsEnabled Return (classOf mcAction == StructDef and mcPoly.isInPoly())
@@ -195,14 +212,16 @@ toolTip:""
 ----------------------------------------------------------------------------------------------------------	
 MacroScript Reinstancer             
 category:"Micra"
+ButtonText:"Reinstancer"
 toolTip:""
 (
 	On IsEnabled Return  (classOf mcAction == StructDef)
 	On Execute Do (mcAction.reinstance())
 )	
 ----------------------------------------------------------------------------------------------------------
-MacroScript CenterPivotToObject             
+MacroScript CenterPivotToObject            
 category:"Micra"
+ButtonText:"Center Pivot To Object" 
 toolTip:""
 (
 	On IsEnabled Return  (classOf mcAction == StructDef)
@@ -211,22 +230,25 @@ toolTip:""
 ----------------------------------------------------------------------------------------------------------
 MacroScript CompleteRepairObject            
 category:"Micra"
+ButtonText:"Complete Repair Object"
 toolTip:""
 (
 	On IsEnabled Return (Micra.fileInVersion != undefined)
 	On Execute Do (Micra.fileInVersion "Repair_Object")
 )
 ----------------------------------------------------------------------------------------------------------	
-MacroScript ResetMatEditor            
+MacroScript ResetMatEditor         
 category:"Micra"
+ButtonText:"Reset Mat Editor"   
 toolTip:""
 (
 	On IsEnabled Return (mcAction != undefined)
 	On Execute Do (mcAction.reset_mat_editor())
 )
 ----------------------------------------------------------------------------------------------------------
-MacroScript CreateSplineFromPoints            
+MacroScript CreateSplineFromPoints          
 category:"Micra"
+ButtonText:"Create Spline From Points"  
 toolTip:""
 (
 	On IsEnabled Return (mcCreate != undefined)
@@ -242,14 +264,16 @@ toolTip:""
 ----------------------------------------------------------------------------------------------------------
 MacroScript DeepIsolateHide            
 category:"Micra"
+ButtonText:"Deep Isolate Hide"
 toolTip:""
 (
 	On IsEnabled Return (mcDeepIsolate != undefined)
 	On Execute Do (mcDeepIsolate lvl:#upper)
 )
 ----------------------------------------------------------------------------------------------------------
-MacroScript DeepIsolateShow            
+MacroScript DeepIsolateShow          
 category:"Micra"
+ButtonText:"Deep Isolate Show"  
 toolTip:""
 (
 	On IsEnabled Return (mcDeepIsolate != undefined)
@@ -257,24 +281,27 @@ toolTip:""
 )
 ----------------------------------------------------------------------------------------------------------
 
-MacroScript MicraQuit            
+MacroScript MicraQuit          
 category:"Micra"
+ButtonText:"Quit Micra"  
 toolTip:""
 (
 	On IsEnabled Return (mcMicraDialog != undefined)
 	On Execute Do (mcMicraDialog.quit_micra())
 )
 ----------------------------------------------------------------------------------------------------------
-MacroScript MicraRun            
+MacroScript MicraRun          
 category:"Micra"
+ButtonText:"Run Micra"  
 toolTip:""
 (
 	On IsEnabled Return (mcPath != undefined)
 	On Execute Do (fileIn (mcPath()+ "_Loader.ms"  ))
 )
 ----------------------------------------------------------------------------------------------------------
-MacroScript Gallery          
+MacroScript Gallery         
 category:"Micra"
+ButtonText:"Gallery 3D" 
 toolTip:"Gallery3D"
 Icon:#("mcDGallery",1)
 (
@@ -284,6 +311,7 @@ Icon:#("mcDGallery",1)
 ----------------------------------------------------------------------------------------------------------
 macroScript UVW_Align_U
 category:"Micra"
+ButtonText:"UVW Align U"
 toolTip:""
 (
 	local gco=modpanel.getcurrentobject()
@@ -298,6 +326,7 @@ toolTip:""
 ----------------------------------------------------------------------------------------------------------
 macroScript UVW_Align_V
 category:"Micra"
+ButtonText:"UVW Align V"
 toolTip:""
 (
 	local gco=modpanel.getcurrentobject()
@@ -312,6 +341,7 @@ toolTip:""
 ----------------------------------------------------------------------------------------------------------
 macroScript Move2
 category:"Micra"
+ButtonText:"Move2"
 toolTip:""
 (
 	local gco=modpanel.getcurrentobject()
@@ -322,6 +352,7 @@ toolTip:""
 ----------------------------------------------------------------------------------------------------------
 macroScript Rotate2
 category:"Micra"
+ButtonText:"Rotate2"
 toolTip:""
 (
 	local gco=modpanel.getcurrentobject()
@@ -332,6 +363,7 @@ toolTip:""
 ----------------------------------------------------------------------------------------------------------
 macroScript Scale2
 category:"Micra"
+ButtonText:"Scale2"
 toolTip:""
 (
 	local gco=modpanel.getcurrentobject()
@@ -342,6 +374,7 @@ toolTip:""
 ----------------------------------------------------------------------------------------------------------
 macroScript Select2
 category:"Micra"
+ButtonText:"Select2"
 toolTip:""
 (
 	local gco=modpanel.getcurrentobject()
@@ -352,6 +385,7 @@ toolTip:""
 ----------------------------------------------------------------------------------------------------------
 macroScript OpenUnwrapUVW
 category:"Micra"
+ButtonText:"Open Unwrap UVW"
 toolTip:""
 (
 	try 
@@ -372,6 +406,7 @@ toolTip:""
 ----------------------------------------------------------------------------------------------------------
 macroScript Loop2
 category:"Micra"
+ButtonText:"Loop2"
 toolTip:""
 (
 	try (Max modify mode) catch()
@@ -393,6 +428,7 @@ toolTip:""
 ----------------------------------------------------------------------------------------------------------
 macroScript Ring2
 category:"Micra"
+ButtonText:"Ring2"
 toolTip:""
 (
 	try (Max modify mode) catch()
@@ -414,14 +450,16 @@ toolTip:""
 ----------------------------------------------------------------------------------------------------------
 macroScript BackupMaxFile
 category:"Micra"
+ButtonText:"Backup Max File"
 toolTip:""
 (
 	On IsEnabled Return (classOf mcFile == StructDef)
 	On Execute Do (mcFile.backupMaxFile())
 )
 ----------------------------------------------------------------------------------------------------------
-MacroScript WalkCyrcleToolsUEStyle             
+MacroScript WalkCyrcleToolsUEStyle   
 category:"Micra"
+ButtonText:"Walk Cyrcle Tools UE Style"
 toolTip:""
 (
 	On execute do undo off 
@@ -454,6 +492,7 @@ toolTip:""
 ----------------------------------------------------------------------------------------------------------
 macroScript PolySplitRing
 category:"Micra"
+ButtonText:"PolySplitRing"
 toolTip:""
 (
 	On IsEnabled Return (mcPath != undefined)
@@ -462,6 +501,7 @@ toolTip:""
 ----------------------------------------------------------------------------------------------------------
 macroScript Transformer
 category:"Micra"
+ButtonText:"Transformer"
 toolTip:""
 (
 	On IsEnabled Return (mcPath != undefined)
@@ -470,6 +510,7 @@ toolTip:""
 ----------------------------------------------------------------------------------------------------------
 macroScript UVW_Align_Center
 category:"Micra"
+ButtonText:"UVW Align Center"
 toolTip:""
 (
 	local gco=modpanel.getcurrentobject()
@@ -485,6 +526,7 @@ toolTip:""
 ----------------------------------------------------------------------------------------------------------
 macroScript Toggle_Coordinates
 category:"Micra"
+ButtonText:"Toggle Coordinates"
 toolTip:"Toggle Coordinates"
 (
 	local old_tool = toolmode.commandmode
@@ -511,8 +553,8 @@ toolTip:"Toggle Coordinates"
 )
 ----------------------------------------------------------------------------------------------------------
 MacroScript MCselectPrevious
-ButtonText:"Select Previous Bone"
 Category:"Micra" 
+ButtonText:"Select Previous Bone"
 internalCategory:"Bones" 
 Tooltip:"Select Previous Bone" 
 -- Needs Icon
@@ -532,8 +574,8 @@ Tooltip:"Select Previous Bone"
 )
 
 MacroScript MCselectNext
-ButtonText:"Select Next Bone"
 Category:"Micra" 
+ButtonText:"Select Next Bone"
 internalCategory:"Bones" 
 Tooltip:"Select Next Bone" 
 -- Needs Icon
@@ -553,8 +595,8 @@ Tooltip:"Select Next Bone"
 )
 
 MacroScript SelectCamTS
-ButtonText:"Slect Camera Target Switch"
 category:"Micra" 
+ButtonText:"Slect Camera Target Switch"
 Tooltip:"Slect Camera Target Switch"
 (
 	On Execute do
@@ -564,8 +606,8 @@ Tooltip:"Slect Camera Target Switch"
 )
 
 MacroScript MC_SubObject_1
-ButtonText:"SubobjectLevel 1"
 Category:"Micra"
+ButtonText:"SubobjectLevel 1"
 Tooltip:"Set SubobjectLevel to 1"
 Icon:#("SubObjectIcons",1)
 (
@@ -573,8 +615,8 @@ Icon:#("SubObjectIcons",1)
 	On Execute do  (mcAction.setSubobjectLevel 1)
 ) 
 MacroScript MC_SubObject_2
-ButtonText:"SubobjectLevel 2"
 Category:"Micra"
+ButtonText:"SubobjectLevel 2"
 Tooltip:"Set SubobjectLevel to 2"
 Icon:#("SubObjectIcons",2)
 (
@@ -582,8 +624,8 @@ Icon:#("SubObjectIcons",2)
 	On Execute do  (mcAction.setSubobjectLevel 2)
 ) 
 MacroScript MC_SubObject_3
-ButtonText:"SubobjectLevel 3"
 Category:"Micra"
+ButtonText:"SubobjectLevel 3"
 Tooltip:"Set SubobjectLevel to 3"
 Icon:#("SubObjectIcons",3)
 (
@@ -591,8 +633,8 @@ Icon:#("SubObjectIcons",3)
 	On Execute do  (mcAction.setSubobjectLevel 3)
 ) 
 MacroScript MC_SubObject_4
-ButtonText:"SubobjectLevel 4"
 Category:"Micra" 
+ButtonText:"SubobjectLevel 4"
 Tooltip:"Set SubobjectLevel to 4"
 Icon:#("SubObjectIcons",4)
 (
@@ -601,8 +643,8 @@ Icon:#("SubObjectIcons",4)
 ) 
 
 MacroScript MC_SubObject_5
-ButtonText:"SubobjectLevel 5"
 Category:"Micra" 
+ButtonText:"SubobjectLevel 5"
 Tooltip:"Set SubobjectLevel to 5"
 Icon:#("SubObjectIcons",5)
 (
@@ -611,8 +653,8 @@ Icon:#("SubObjectIcons",5)
 ) 
 
 MacroScript MC_Poly_Bridge
-ButtonText:"CreateBridge"
 Category:"Micra" 
+ButtonText:"Create Bridge"
 Tooltip:"Create bridge between selection"
 (
 	On IsEnabled Return (selection.count == 1 and classOf selection[1] == Editable_Poly)
