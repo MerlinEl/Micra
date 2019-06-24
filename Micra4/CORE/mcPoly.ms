@@ -12,6 +12,11 @@
 struct MICRA_POLY
 (
 	fn getSource = getSourceFileName(), --get path of this script
+	-------------------------------------------------------------
+	-------------------------------------------------------------
+	------              		GET    	                   ------
+	-------------------------------------------------------------
+	-------------------------------------------------------------
 	fn isClass arg obj =
 	(
 		case arg of
@@ -33,89 +38,8 @@ struct MICRA_POLY
 		local mod = Filters.GetModOrObj()
 		getCommandPanelTaskMode() == #modify and classOf mod == Editable_Poly or classOf mod == Edit_Poly
 	),
-	fn isQuads obj faceSel =
-	(
-		if classOf obj != Editable_Poly and faceSel.count == 0 do return false
-		for f in faceSel where (polyOp.getVertsUsingFace obj.baseobject f).numberSet != 4 do return false
-		return true
-	),
-	fn selectSimilarFacesByNormal = (
+	fn get what = (
 	
-		--Select similar faces by normal
-		local obj = (selection as array)[1]
-		if obj == undefined do return false
-		local sel_faces = polyOp.getFaceSelection obj
-		local n1 = polyOp.getFaceNormal obj (sel_faces as array)[1]
-		local faces_by_normal = #()
-		for f=1 to polyop.getNumFaces obj do(
-
-			local n2 = polyOp.getFaceNormal obj f
-			local normals_angle = acos(dot n1 n2)-- get the angle between the vectors
-			if normals_angle < 2 do faces_by_normal += #(f)
-		)
-		polyOp.setFaceSelection obj faces_by_normal
-	),
-	fn intersectionExists obj =
-	(
-		local objBase = obj.baseobject
-		local edgesBA = #{}
-		local intEdges = #{}
-		for i in (polyOp.getFaceSelection objBase) do
-		(
-			local faceEdges = polyOp.getEdgesUsingFace objBase i
-			for f in faceEdges do
-			(
-				if (findItem edgesBA f) == 0 then
-				(
-					append edgesBA f
-				)
-				else
-				(
-					append intEdges f
-				)
-			)
-		)
-		intEdges
-	),
-	fn getEdgesFrom vert =
-	(
-		local edge = 1
-		local step = 1 
-		local edges = #{}
-		while edge != 0 do 
-		(
-			edge = (modPanel.getCurrentObject()).GetVertexEdge vert step
-			append edges edge 
-			step +=1
-		)
-		
-		return edges
-	),
-	fn getVertsFrom edge =
-	(
-		local vert = 1
-		local step = 1 
-		local verts = #{}
-		while vert != 0 do 
-		(
-			vert = (modPanel.getCurrentObject()).GetEdgeVertex edge step
-			append verts vert 
-			step +=1
-		)
-		return verts
-	),
-	fn getEdgeLength poly_obj edge_index = (
-		
-        local edge_verts = polyOp.getEdgeVerts poly_obj edge_index
-        local verts_pos = for v in edge_verts collect polyOp.getVert poly_obj v
-        return (distance verts_pos[1] verts_pos[2])
-    ),
-	--function getVectorDistance dx dy=
-	--(
-	--	return sqrt(dx*dx+dy*dy)
-	--),
-	fn get what =
-	(
 		local obj = selection[1]
 		if obj == undefined do return #()
 		local enabled = 
@@ -149,6 +73,92 @@ struct MICRA_POLY
 			#obj:     objects   as array
 		)
 	),
+	fn isQuads obj faceSel =
+	(
+		if classOf obj != Editable_Poly and faceSel.count == 0 do return false
+		for f in faceSel where (polyOp.getVertsUsingFace obj.baseobject f).numberSet != 4 do return false
+		return true
+	),
+	fn intersectionExists obj =
+	(
+		local objBase = obj.baseobject
+		local edgesBA = #{}
+		local intEdges = #{}
+		for i in (polyOp.getFaceSelection objBase) do
+		(
+			local faceEdges = polyOp.getEdgesUsingFace objBase i
+			for f in faceEdges do
+			(
+				if (findItem edgesBA f) == 0 then
+				(
+					append edgesBA f
+				)
+				else
+				(
+					append intEdges f
+				)
+			)
+		)
+		intEdges
+	),
+	fn getEdgesFrom vert = (
+	
+		local edge = 1
+		local step = 1 
+		local edges = #{}
+		while edge != 0 do 
+		(
+			edge = (modPanel.getCurrentObject()).GetVertexEdge vert step
+			append edges edge 
+			step +=1
+		)
+		return edges
+	),
+	fn getVertsFrom edge =
+	(
+		local vert = 1
+		local step = 1 
+		local verts = #{}
+		while vert != 0 do 
+		(
+			vert = (modPanel.getCurrentObject()).GetEdgeVertex edge step
+			append verts vert 
+			step +=1
+		)
+		return verts
+	),
+	fn getClosestVert obj_poly pos maxDist:undefined = (
+	
+		local vert, dist = if maxDist != undefined then maxDist else 1e9
+		local d, obj_mesh = snapshotasmesh obj_poly
+		local verts = #{1..obj_mesh.numverts}
+		for v in verts where (d = distance (getvert obj_mesh v) pos) < dist do (
+			
+			vert = v
+			dist = d
+		)
+		#(vert, dist)
+	),
+	fn isBorderEdge obj e_index = (
+	
+		local efaces = polyop.getFacesUsingEdge obj e_index
+		efaces.numberset == 1
+	),
+	fn getBorderEdgesFromVertex obj v_index = (
+		
+		local edges = polyop.getEdgesUsingVert obj v_index
+		for ei in edges where isBorderEdge obj ei collect ei	
+	),
+	fn getEdgeLength poly_obj edge_index = (
+		
+        local edge_verts = polyOp.getEdgeVerts poly_obj edge_index
+        local verts_pos = for v in edge_verts collect polyOp.getVert poly_obj v
+        return (distance verts_pos[1] verts_pos[2])
+    ),
+	--function getVectorDistance dx dy=
+	--(
+	--	return sqrt(dx*dx+dy*dy)
+	--),
 	fn getHitNode =
 	(
 		local view_mouse_pos = mouse.pos --get current mouse pos based on active view pos
@@ -175,6 +185,136 @@ struct MICRA_POLY
 		local hitRay=intersectRayEx meshObj theRay	
 		delete meshObj
 		return hitRay
+	),
+	fn getObjectsCenter sel = (
+	
+		local center = [0,0,0] 
+		for o in sel do center += o.pos
+		center /= sel.count
+		center
+	),
+	fn getVertsCenter obj verts = (
+	
+		local center = [0,0,0]
+		for v in verts do center += polyop.getVert obj v
+		center /= (verts as array).count
+		center
+	),
+	fn getFacesCenter obj faces = (
+		
+		local center = [0,0,0]
+		for f in faces do center += polyop.getFaceCenter obj f
+		center /= (faces as array).count
+		center
+	),
+	-------------------------------------------------------------
+	-------------------------------------------------------------
+	------              		SET    	                   ------
+	-------------------------------------------------------------
+	-------------------------------------------------------------
+	fn alignObjectToTwoPoints obj p1 p2 = (
+	
+		local dir = normalize (p2 - p1)
+		local tm = matrixFromNormal dir
+		tm.row4 = (p1 + p2) / 2
+		obj.transform = tm 
+	),
+	fn alignObjectToSelection obj_src = (
+
+		local sel = selection as array
+		local obj_trgt = sel[1]
+		if obj_trgt == undefined do return false
+		case subObjectLevel of (
+
+			0: undo "Align Object To Object(s)" on (
+			
+				obj_src.pos = if sel.count == 1 then obj_trgt.pos else getObjectsCenter sel
+			)
+			1: undo "Align Object To Vertex(s)" on (
+			
+				obj_src.pos = getVertsCenter obj_trgt (polyOp.getVertSelection obj_trgt) 
+			)
+			2: (
+				local obj_trgt = (selection as Array)[1]
+				if classOf obj_trgt != Editable_Poly do return false
+				local edges = (polyOp.getEdgeSelection obj_trgt) as Array
+				if edges.count == 0 do return false
+				local everts = (polyOp.getVertsUsingEdge obj_trgt edges[1]) as Array
+				local p1 = polyOp.getVert obj_trgt everts[1]
+				local p2 = polyOp.getVert obj_trgt everts[2]
+				undo "Align Object To Edge" on alignObjectToTwoPoints obj_src p1 p2
+			)
+			4: undo "Align Object To Face(s)" on (
+			
+				obj_src.pos = getFacesCenter obj_trgt (polyOp.getFaceSelection obj_trgt) 
+			)
+			5: undo "Align Object To Face(s)" on (
+			
+				obj_src.pos = getFacesCenter obj_trgt (polyOp.getFaceSelection obj_trgt) 
+			)
+		)
+	),
+	fn selectSimilarFacesByNormal = (
+	
+		--Select similar faces by normal
+		local obj = (selection as array)[1]
+		if obj == undefined do return false
+		local sel_faces = polyOp.getFaceSelection obj
+		local n1 = polyOp.getFaceNormal obj (sel_faces as array)[1]
+		local faces_by_normal = #()
+		for f=1 to polyop.getNumFaces obj do(
+
+			local n2 = polyOp.getFaceNormal obj f
+			local normals_angle = acos(dot n1 n2)-- get the angle between the vectors
+			if normals_angle < 2 do faces_by_normal += #(f)
+		)
+		polyOp.setFaceSelection obj faces_by_normal
+	),
+	/**
+	*@Example 
+		roGenStruct.rotateVerticesAroundPoint $ (polyop.getVertSelection $) 20
+	*/
+	fn rotateVerticesAroundPoint obj verts axis deg center:undefined = (
+		
+		--if center is not defined, calculate vertex center
+		if center == undefined do getVertsCenter obj verts
+		local tm = obj.transform --get the node's TM 
+		tm.row4 = center  --move the TM to the center
+		local rot_mat = ( --roatate TM around axis
+		
+			case axis of (
+				#X: rotateXMatrix deg
+				#Y: rotateYMatrix deg
+				#Z: rotateZMatrix deg
+			) 
+		) * tm
+		for v in verts do  ( --use TM for each vertex
+		
+			in coordsys tm vertex_position = (polyop.getVert obj v) 
+			polyop.setVert obj v (vertex_position * rot_mat ) 
+		)
+	),
+	fn rotateFacesAroundPoint obj faces axis deg center:undefined = (
+	
+		--if center is not defined, calculate vertex center
+		if center == undefined do getFacesCenter obj faces
+		local fverts = polyOp.getVertsUsingFace obj faces
+		
+		--rotate faces along axis
+		for v in fverts do
+		(
+			local vpos = polyOp.getVert obj v
+			local v1 = vpos - center
+			local v2 = v1 * ( case axis of (
+			
+					#X:(quat deg [1,0,0])
+					#Y:(quat deg [0,1,0])
+					#Z:(quat deg [0,0,1])
+				)
+			)
+			local v3 = v2 + center
+			polyOp.setVert obj v v3
+		)
 	)
 	/*<end>*/
 )

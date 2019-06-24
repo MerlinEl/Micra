@@ -1,3 +1,4 @@
+fileIn (micra.rootDir + "Road_Generator_Struct_v1.11.ms")
 spline = selection[2]
 road_prefabric = selection[1]
 adaption = 4
@@ -30,12 +31,19 @@ twsit_deg = 0
 		--conform road to spline
 		roGenStruct.conformRoadToSpline road_sum spline twsit_deg
 		
-		--restore start border pos
+		-------------------------------------
+		--  FIX START BORDER   --
+		-------------------------------------
 		roGenStruct.setRoadBoundVerts road_sum start_border_vertices
+		
+		-------------------------------------
+		--  FIX END BORDER   --
+		-------------------------------------
+		roGenStruct.fixRoadEndBorder road_sum pt2 tn2
 		
 		--Cut excess part of road mesh (p2)
 		--Adjust coonection angle with crossroad
-		roGenStruct.cutExcessPartOfRoad road_sum road_prefabric pt2 tn2
+-- 		roGenStruct.cutExcessPartOfRoad road_sum road_prefabric pt2 tn2
 
 
 	fn getClosestVert obj p verts:#{} = (
@@ -136,6 +144,60 @@ while next_verts.count == 2  and not keyboard.escPressed do (
 )
 
 
+fn fixRoadEndBorder obj pt2 tn2 = (
+
+	--get start border
+	local center_vert = (getClosestVert obj pt2)[1] 
+	local border_edges = getBorderEdgesFromVertex obj center_vert
+	obj.selectedEdges = border_edges
+	obj.SelectEdgeLoop() --border edges
+	local border_vertices = polyop.getVertsUsingEdge obj (polyOp.getEdgeSelection obj)
+	obj.selectedVertices = border_vertices --border vertices
+	--calculate border line (guideline)
+	local v1 = (normalize (tn2 - pt2) ) * 10000--get tangent vector
+	--get right point
+	local rm = rotateZMatrix -90 --create a rotation matrix from the value
+	local v_left = v1 * rm --transform the original vector using the matrix
+	local left_point = pt2 + v_left --move vector to pt1
+	left_point.z = pt2.z --if is tangent rotated make it straight
+	--get left point
+	local rm = rotateZMatrix 90 --create a rotation matrix from the value
+	local v_right = v1 * rm --transform the original vector using the matrix
+	local right_point =  pt2 + v_right --move vector to pt1
+	right_point.z = pt2.z --if is tangent rotated make it straight
+
+	--Debug
+	-- sp_right = drawLineBetweenTwoPoints pt2 right_point  yellow
+	-- sp_left = drawLineBetweenTwoPoints pt2 left_point  yellow
+	-- select #(sp_left, sp_right)
+
+	--pick bot vertices one by one from center and rotate them to guideline (vector left or right)
+	local last_verts = #(center_vert, center_vert)
+	local next_verts = getNeighborsVertsOnLoop obj last_verts vertMask:(border_vertices)
+	while next_verts.count == 2  and not keyboard.escPressed do (
+		
+		-- 	obj.selectedVertices =  next_verts
+		last_verts = join (copy next_verts #nomap) last_verts
+		--get left and rifht vert
+		local left_vert, right_vert 
+		if distance left_point (polyop.getVert obj next_verts[1]) < distance left_point (polyop.getVert obj next_verts[2]) then  (
+			
+			left_vert = next_verts[1] 
+			right_vert = next_verts[2] 
+			
+		) else (
+			
+			left_vert = next_verts[2] 
+			right_vert = next_verts[1] 
+		)
+		--snap roatate left vert
+		rotateVertexAroundZBackward obj left_vert pt2 left_point
+		--snap roatate right vert
+		rotateVertexAroundZBackward obj right_vert pt2 right_point
+		--pick nex two vertices
+		next_verts = getNeighborsVertsOnLoop obj last_verts vertMask:(border_vertices)
+	)
+)
 
 
 

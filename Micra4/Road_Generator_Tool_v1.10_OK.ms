@@ -62,17 +62,27 @@ fn runLocalScript script_name = (
 )
 --Load all functions
 Global roGenStruct
-runLocalScript "Road_Generator_Struct_v1.11"
+runLocalScript "Road_Generator_Struct_v1.08"
 --< MerlinEl
 
 
 --###################################################################################--
 --	                                 ASCII SIGNS                                     --
 --###################################################################################--
+one_six		= bit.intAsChar 9604 + bit.intAsChar 9604 + bit.intAsChar 9604 + bit.intAsChar 9604 + bit.intAsChar 9604 + bit.intAsChar 9604
+two_two		= bit.intAsChar 9604 + bit.intAsChar 9604 + bit.intAsChar 12140 +" "+ bit.intAsChar 12140 + bit.intAsChar 9604 + bit.intAsChar 9604
+two_four	= bit.intAsChar 9604 + bit.intAsChar 9604 + bit.intAsChar 9604 + bit.intAsChar 9604 + " "+ bit.intAsChar 9604 + bit.intAsChar 9604 + bit.intAsChar 9604 + bit.intAsChar 9604
+two_four_r	= bit.intAsChar 9604 + bit.intAsChar 9604 + bit.intAsChar 9604 + bit.intAsChar 12140 + " "+ bit.intAsChar 12140 + bit.intAsChar 9604 + bit.intAsChar 9604 + bit.intAsChar 9604
+two_five	= bit.intAsChar 9604 + bit.intAsChar 9604 + bit.intAsChar 9604 + bit.intAsChar 9604 + bit.intAsChar 9604 + " "+ bit.intAsChar 9604 + bit.intAsChar 9604 + bit.intAsChar 9604 + bit.intAsChar 9604 + bit.intAsChar 9604
+
+four_four	= bit.intAsChar 9604 + bit.intAsChar 9604 + bit.intAsChar 9604 + bit.intAsChar 9604 + " "+ bit.intAsChar 9604 + bit.intAsChar 9604 + bit.intAsChar 9604 + bit.intAsChar 9604 + " " + bit.intAsChar 9604 + bit.intAsChar 9604 + bit.intAsChar 9604 + bit.intAsChar 9604  + " "+ bit.intAsChar 9604 + bit.intAsChar 9604 + bit.intAsChar 9604 + bit.intAsChar 9604 
+four_five 	= bit.intAsChar 9604 + bit.intAsChar 9604 + bit.intAsChar 9604 + bit.intAsChar 9604 + bit.intAsChar 9604 + " " + bit.intAsChar 9604 + bit.intAsChar 9604 + bit.intAsChar 9604 + bit.intAsChar 9604 + bit.intAsChar 9604 + " "+ bit.intAsChar 9604 + bit.intAsChar 9604 + bit.intAsChar 9604 + bit.intAsChar 9604 + bit.intAsChar 9604 + " " + bit.intAsChar 9604 + bit.intAsChar 9604 + bit.intAsChar 9604 + bit.intAsChar 9604 + bit.intAsChar 9604 + " "
+
 main_sign 	= bit.intAsChar 10134
 top_sign 	= bit.intAsChar 10200
 bot_sign	= bit.intAsChar 10201
 side_sign	= bit.intAsChar 10073
+
 
 
 -- because of delete callback  
@@ -1162,37 +1172,61 @@ fn CreateRoadWithPL  roads parkingLanes crossroadIndex &spec leftPL rightPL &ori
 
 rollout dlgCrossroadGenerator "Crossroad Generator"
 (
-	local list_items = roGenStruct.getUIPrefabsIcons()
-	group " ROAD" 
-	(
-		label mainRoad main_sign offset:[-100,0]
-		dropdownlist dd_crossroad_prefabs_1 "" items:list_items height:list_items.count
-		checkbox  cb_parking_lane_1 "Parking lane" checked:true align:#right
-	)
+  group " ROAD" 
+  (
+	label mainRoad main_sign offset:[-100,0]
+	dropdownlist dd_crossroad_prefabs_1 "" items:#(	"(1-6)                      " + one_six ,
+																		"(2-2)R                   " + two_two ,
+																		"(2-4)                   "  + two_four,
+																		"(2-4)R                " + two_four_r ,
+																		"(2-5)                " + two_five,
+																		"(4-4)       " + four_four ,
+																		"(4-5)  " + four_five) height:8 
+    checkbox  cb_parking_lane_1 "Parking lane" checked:true align:#right
+  )
 
-	group " SIDE ROADS"
-	(
-		label sideRoad  side_sign offset:[-100,0]
-		dropdownlist dd_crossroad_prefabs_2 "" items:list_items height:list_items.count 
-		checkbox  cb_parking_lane_2 "Parking lane" checked:true align:#right
-		spinner spnr_angle_1 "Top Angle: " type:#float range:[24, 156, 90] scale:1.0 align:#left offset:[0,15] width:70
-		spinner spnr_angle_2 "Bot. Angle:" type:#float range:[24, 156, 90] scale:1.0 align:#left offset:[0,5] width:70
-		spinner spnr_offset_1 "Top Offset:" type:#float range:[-1.0e6, 1.0e6, 0] align:#right offset:[0,-47] width:70
-		spinner spnr_offset_2 "Bot. Offset:" type:#float range:[-1.0e6, 1.0e6, 0] align:#right offset:[0,6] width:70
-	)
 
+  group " SIDE ROADS"
+  (
+	label sideRoad  side_sign offset:[-100,0]
+	dropdownlist dd_crossroad_prefabs_2 "" items:#(	"(1-6)                      " + one_six ,
+																		"(2-2)R                   " + two_two ,
+																		"(2-4)                   "  + two_four,
+																		"(2-4)R                " + two_four_r ,
+																		"(2-5)                " + two_five,
+																		"(4-4)       " + four_four ,
+																		"(4-5)  " + four_five) height:8 
+																		
+																		
+    checkbox  cb_parking_lane_2 "Parking lane" checked:true align:#right
+	  
+	spinner spnr_angle_1 "Top Angle: " type:#float range:[24, 156, 90] scale:1.0 align:#left offset:[0,15] width:70
+	spinner spnr_angle_2 "Bot. Angle:" type:#float range:[24, 156, 90] scale:1.0 align:#left offset:[0,5] width:70
+	
+	spinner spnr_offset_1 "Top Offset:" type:#float range:[-1.0e6, 1.0e6, 0] align:#right offset:[0,-47] width:70
+    spinner spnr_offset_2 "Bot. Offset:" type:#float range:[-1.0e6, 1.0e6, 0] align:#right offset:[0,6] width:70
+  )
+	
 	button btn_generate "Generate Cross Road" width: 200 height: 35 offset:[0, 10] 
   
+  
+  
 --   button btn_done "Done"
+  
 --   global generated_road = undefined   				-- Global because of delete callback
   
-	local initialized = false
-	local roads = #()
-	local sidewalks = #()
-	local corners = #()
-	local parking_lanes = #()
-	local layer = undefined
-	local controlsArr = #(dd_crossroad_prefabs_1, cb_parking_lane_1, dd_crossroad_prefabs_2, cb_parking_lane_2, spnr_angle_1, spnr_offset_1, spnr_angle_2, spnr_offset_2)
+  local initialized = false
+  local roads = #()
+  local sidewalks = #()
+  local corners = #()
+  local parking_lanes = #()
+  local layer = undefined
+  
+    
+--   local controlsArr = #(rb_lane_number_1, rb_lane_width_1, rb_lane_width_1_1, cb_parking_lane_1, 
+-- 								rb_lane_number_2, rb_lane_width_2, rb_lane_width_2_1, cb_parking_lane_2, spnr_angle_1, spnr_offset_1, spnr_angle_2, spnr_offset_2,dd_crossroad_prefabs)
+   local controlsArr = #(dd_crossroad_prefabs_1, cb_parking_lane_1, dd_crossroad_prefabs_2, cb_parking_lane_2, spnr_angle_1, spnr_offset_1, spnr_angle_2, spnr_offset_2)
+  
   
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	--   EVENT HANDLERS :
@@ -1493,31 +1527,54 @@ rollout dlgCrossroadGenerator "Crossroad Generator"
 
 rollout dlgCrossroadGenerator2 "Crossroad Generator"
 (
-	local list_items = roGenStruct.getUIPrefabsIcons()
-	group " ROAD"
-	(
-		label mainRoad  main_sign offset:[-100,0]
-		dropdownlist dd_crossroad_prefabs_1 "" items:list_items height:list_items.count																	
-		checkbox  cb_parking_lane_1 "Parking lane" checked:true align:#right
-	)
+  group " ROAD"
+  (
+	label mainRoad  main_sign offset:[-100,0]
+	dropdownlist dd_crossroad_prefabs_1 "" items:#(	"(1-6)                      " + one_six ,
+																		"(2-2)R                   " + two_two ,
+																		"(2-4)                   "  + two_four,
+																		"(2-4)R                " + two_four_r ,
+																		"(2-5)                " + two_five,
+																		"(4-4)       " + four_four ,
+																		"(4-5)  " + four_five) height:8 
+																		
+    checkbox  cb_parking_lane_1 "Parking lane" checked:true align:#right
+  )
 
-	group " TOP ROAD"
-	(
-		label topRoad  top_sign offset:[-100,0]
-		dropdownlist dd_crossroad_prefabs_2 "" items:list_items height:list_items.count 																
-		checkbox  cb_parking_lane_2 "Parking lane" checked:true align:#right
-		spinner spnr_angle_1 "Top Angle: " type:#float range:[24, 156, 90] scale:1.0 align:#left offset:[0,10] width:70
-		spinner spnr_offset_1 "Top Offset:" type:#float range:[-1.0e6, 1.0e6, 0] align:#right offset:[0,-22] width:70
-	)
-
-	group " BOTTOM ROAD" 
-	(
-		label botRoad  bot_sign offset:[-100,0]
-		dropdownlist dd_crossroad_prefabs_3 "" items:list_items height:list_items.count																	
-		checkbox  cb_parking_lane_3 "Parking lane" checked:true align:#right
-		spinner spnr_angle_2 "Bot. Angle:" type:#float range:[24, 156, 90] scale:1.0 align:#left offset:[0,10] width:70
-		spinner spnr_offset_2 "Bot. Offset:" type:#float range:[-1.0e6, 1.0e6, 0] align:#right offset:[0,-22] width:70
-	)
+  group " TOP ROAD"
+  (
+	label topRoad  top_sign offset:[-100,0]
+	dropdownlist dd_crossroad_prefabs_2 "" items:#(	"(1-6)                      " + one_six ,
+																		"(2-2)R                   " + two_two ,
+																		"(2-4)                   "  + two_four,
+																		"(2-4)R                " + two_four_r ,
+																		"(2-5)                " + two_five,
+																		"(4-4)       " + four_four ,
+																		"(4-5)  " + four_five) height:8 
+																		
+																		
+    checkbox  cb_parking_lane_2 "Parking lane" checked:true align:#right
+	  
+	spinner spnr_angle_1 "Top Angle: " type:#float range:[24, 156, 90] scale:1.0 align:#left offset:[0,10] width:70
+	spinner spnr_offset_1 "Top Offset:" type:#float range:[-1.0e6, 1.0e6, 0] align:#right offset:[0,-22] width:70
+  )
+  
+  group " BOTTOM ROAD" 
+  (
+	label botRoad  bot_sign offset:[-100,0]
+	dropdownlist dd_crossroad_prefabs_3 "" items:#(	"(1-6)                      " + one_six ,
+																		"(2-2)R                   " + two_two ,
+																		"(2-4)                   "  + two_four,
+																		"(2-4)R                " + two_four_r ,
+																		"(2-5)                " + two_five,
+																		"(4-4)       " + four_four ,
+																		"(4-5)  " + four_five) height:8 
+																		
+																		
+    checkbox  cb_parking_lane_3 "Parking lane" checked:true align:#right
+	spinner spnr_angle_2 "Bot. Angle:" type:#float range:[24, 156, 90] scale:1.0 align:#left offset:[0,10] width:70
+	spinner spnr_offset_2 "Bot. Offset:" type:#float range:[-1.0e6, 1.0e6, 0] align:#right offset:[0,-22] width:70
+  )
   
   button btn_generate "Generate" width: 200 height: 35 offset:[0, 5]
 --   button btn_done "Done"
@@ -1712,7 +1769,7 @@ rollout dlgCrossroadGenerator2 "Crossroad Generator"
 		
 		attributes_1 = CreateConnectingRoad road_2_a road_1_bb road_2_bb corner_model corner_bb spnr_angle_1.value placed_items 0 spnr_offset_1.value prevPt:pTop
 		attributes_2 = CreateConnectingRoad road_2_b road_1_bb road_3_bb corner_model_2 corner_2_bb spnr_angle_2.value placed_items 180 spnr_offset_2.value prevPt:pBot
-		format "attributes_1:%\n" attributes_1
+		
 		delete road_2_a
 		delete road_2_b
 		
@@ -1947,44 +2004,64 @@ rollout dlgCrossroadGenerator2 "Crossroad Generator"
 
 rollout dlgCrossroadGenerator3 "Crossroad Generator"
 (
-	local list_items = roGenStruct.getUIPrefabsIcons()
-	group " ROAD"
-	(
-		label mainRoad main_sign offset:[-100,0]
-		dropdownlist dd_crossroad_prefabs_1 "" items:list_items height:list_items.count
-		checkbox  cb_parking_lane_1 "Parking lane" checked:true align:#right
-	)
+  group " ROAD"
+  (
+	label mainRoad main_sign offset:[-100,0]
+	dropdownlist dd_crossroad_prefabs_1 "" items:#(	"(1-6)                      " + one_six ,
+																		"(2-2)R                   " + two_two ,
+																		"(2-4)                   "  + two_four,
+																		"(2-4)R                " + two_four_r ,
+																		"(2-5)                " + two_five,
+																		"(4-4)       " + four_four ,
+																		"(4-5)  " + four_five) height:8 
 
-	group " SIDE ROAD"
-	(
-		label topRoad top_sign offset:[-100,0]
-		label botRoad bot_sign offset:[-85,-18]
-		dropdownlist dd_crossroad_prefabs_2 "" items:list_items height:list_items.count
-		checkbox  cb_parking_lane_2 "Parking lane" checked:true align:#right																
-		spinner spnr_angle_1 "Angle: " type:#float range:[24, 156, 90] scale:1.0 align:#left offset:[0,0] width:70
-	)
+    checkbox  cb_parking_lane_1 "Parking lane" checked:true align:#right
+  )
 
-	--     spinner spnr_angle_2 "Angle 2: " type:#float range:[1, 180, 90] scale:1.0 align:#left
-	spinner spnr_offset_1 "Offset 1: " type:#float range:[-1.0e6, 1.0e6, 0] align:#right
-	--     spinner spnr_offset_2 "Offset 2: " type:#float range:[-1.0e6, 1.0e6, 0] align:#left
+  group " SIDE ROAD"
+  (
+	label topRoad top_sign offset:[-100,0]
+	label botRoad bot_sign offset:[-85,-18]
+	dropdownlist dd_crossroad_prefabs_2 "" items:#(	"(1-6)                      " + one_six ,
+																		"(2-2)R                   " + two_two ,
+																		"(2-4)                   "  + two_four,
+																		"(2-4)R                " + two_four_r ,
+																		"(2-5)                " + two_five,
+																		"(4-4)       " + four_four ,
+																		"(4-5)  " + four_five) height:8 
+
+    checkbox  cb_parking_lane_2 "Parking lane" checked:true align:#right
+																		
+	spinner spnr_angle_1 "Angle: " type:#float range:[24, 156, 90] scale:1.0 align:#left offset:[0,0] width:70
+  )
+	
+    
+--     spinner spnr_angle_2 "Angle 2: " type:#float range:[1, 180, 90] scale:1.0 align:#left
+    spinner spnr_offset_1 "Offset 1: " type:#float range:[-1.0e6, 1.0e6, 0] align:#right
+--     spinner spnr_offset_2 "Offset 2: " type:#float range:[-1.0e6, 1.0e6, 0] align:#left
+
 
 	local buttGenText = top_sign + "   Generate" 
 	local buttFlipGenText = bot_sign + "    Generate Flipped"  
+  
+--   button btn_generate2 "Generate Flipped Version"
+  button btn_generate2 buttFlipGenText width: 200 height: 30 offset:[0, -15]
+  button btn_generate buttGenText width: 200 height: 30 offset:[0, -5]
+--   button btn_done "Done"
+  
+--   global generated_road = undefined
+  
+  local initialized = false
+  local roads = #()
+  local sidewalks = #()
+  local corners = #()
+  local parking_lanes = #()
+  local layer = undefined
+  
+  
+  local controlsArr = #(dd_crossroad_prefabs_1, cb_parking_lane_1, 
+								dd_crossroad_prefabs_2, cb_parking_lane_2, spnr_angle_1)
 
-	--   button btn_generate2 "Generate Flipped Version"
-	button btn_generate2 buttFlipGenText width: 200 height: 30 offset:[0, -15]
-	button btn_generate buttGenText width: 200 height: 30 offset:[0, -5]
-	--   button btn_done "Done"
-
-	--   global generated_road = undefined
-
-	local initialized = false
-	local roads = #()
-	local sidewalks = #()
-	local corners = #()
-	local parking_lanes = #()
-	local layer = undefined
-	local controlsArr = #(dd_crossroad_prefabs_1, cb_parking_lane_1, dd_crossroad_prefabs_2, cb_parking_lane_2, spnr_angle_1)
 
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	--   EVENT HANDLERS :
@@ -2666,41 +2743,50 @@ fn EditSplineTangents road =
 --###################################################################################
 
 rollout RoadGeneratorTool "Road Generator" (	
-
-	local list_items = roGenStruct.getUIPrefabsIcons()
-	group "" (
-	
-		dropdownlist dd_road_prefabs_1 "" items:list_items height:list_items.count
+	group ""
+	(
+	dropdownlist dd_road_prefabs_1 "" items:#(	"(1-6)                      " + one_six ,
+ 
+										   
+																		"(2-2)R                   " + two_two ,
+																		"(2-4)                   "  + two_four,
+																		"(2-4)R                " + two_four_r ,
+																		"(2-5)                " + two_five,
+																		"(4-4)       " + four_four ,
+																		"(4-5)  " + four_five) height:8 
+  
+			
 		checkbox  cb_parking_lane_left "Parking lane Left" checked:true align:#left offset:[0,5]
 		checkbox  cb_parking_lane_right "Parking lane Right" checked:true align:#right offset:[3,-22]
+-- 		checkbox  cb_narrow_road_1 "Narrow road:" checked:false align:#right
+		
+		
 		checkbox  cb_sidewalks_right "Sidewalks Right   " checked:true align:#right offset:[0,5]
 		checkbox  cb_sidewalks_left "Sidewalks Left" checked:true align:#left offset:[0,-17]
-		spinner spinner_tangent "Density: " range:[0,90.0,4.0] scale:0.05 type:#float allign:#left offset:[0,10] width:70 across:3 
-		spinner spinner_rotate "Rotate: " range:[-90,90.0,0.0] scale:0.5 type:#float allign:#center offset:[0,10] width:70
-		spinner spinner_twist "Twist: " range:[-90,90.0,0.0] scale:0.5 type:#float allign:#right offset:[0,10] width:70
+		spinner spinner_tangent "Density: " range:[0,90.0,4.0] scale:0.05 type:#float allign:#center offset:[0,10] width:70 across:2 
+		spinner spinner_twist "Twist: " range:[-90,90.0,0.0] scale:0.5 type:#float allign:#center offset:[0,10] width:70
+
 	)
 	
 	button btn_edit_tangents "Edit Tangents" width: 100 height: 35 offset:[-50, 10] align:#center toolTip:"Edit Tangents\nHint:Insert new wertices on spline if you need."
 	button btn_sync_spline "Sync Spline" width: 100 height: 35 offset:[50, -40] align:#center toolTip:"Snap spline Start, End points and Rebuild curve."
 	checkbox cb_update_curve "Sync Curve" checked:true align:#right offset:[0,5]
-	button btn_generate_old "Generate Road Old" width: 120 height: 35 align:#left offset:[0, 10] align:#center across:2 
-	button btn_generate "Generate Road" width: 120 height: 35 offset:[0, 10] align:#right
-	button bt_gen_shortcut_old "Generate Shortcut Old" width:120 height:35 offset:[0,0] align:#left across:2
-	button bt_gen_shortcut "Generate Shortcut" width:120 height:35 offset:[0,0] align:#right
+
+
+	button btn_generate "Generate Road" width: 200 height: 35 offset:[0, 10] align:#center
+	button bt_generateShortcut "Generate Shortcut" width:200 height:35 offset:[0,0]
 
 	local roads = #()
 	local specs = #()
 	local dummies = #()
-	local controlsArr = #(dd_road_prefabs_1, cb_parking_lane_left, cb_parking_lane_right, cb_sidewalks_left, cb_sidewalks_right, spinner_tangent, spinner_twist, spinner_rotate)
+	local controlsArr = #(dd_road_prefabs_1, cb_parking_lane_left, cb_parking_lane_right, cb_sidewalks_left, cb_sidewalks_right, spinner_tangent, spinner_twist)
 	
 	on RoadGeneratorTool open do (
 	
 		roGenStruct.collectRoadPrefabs &roads &specs
 	)
-	on bt_gen_shortcut_old pressed do (roGenStruct.generateRoadShortcut RoadGeneratorTool old_way:true)
-	on bt_gen_shortcut pressed do (roGenStruct.generateRoadShortcut RoadGeneratorTool old_way:false)
-	on btn_generate_old pressed do (roGenStruct.generateRoad RoadGeneratorTool roads specs old_way:true)
-	on btn_generate     pressed do (roGenStruct.generateRoad RoadGeneratorTool roads specs old_way:false)
+	on bt_generateShortcut pressed do (roGenStruct.generateRoadShortcut RoadGeneratorTool)
+	on btn_generate pressed do (roGenStruct.generateRoad RoadGeneratorTool roads specs)
 	
 
 	-----------------------------------------------------------------------------------
@@ -2736,7 +2822,7 @@ rollout RoadGeneratorTool "Road Generator" (
 -- createDialog dlgPickObjectType
 Global floaterGenerator
 try(closeRolloutFloater  floaterGenerator)catch()
-floaterGenerator = newRolloutFloater "" 320 440
+floaterGenerator = newRolloutFloater "" 270 440
 
 floaterGenerator.pos = [400,250]
 
@@ -2758,36 +2844,47 @@ fn ClearRollFloater floater =
 )
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-
+fn SetCrosroadRoll index = 
+(
+	Case (index) of (
+		1: (
+			floaterGenerator.size = [270,440]
+			addRollout dlgCrossroadGenerator floaterGenerator
+			
+		)
+		2 :(
+			floaterGenerator.size = [270,430]
+			addRollout dlgCrossroadGenerator2 floaterGenerator
+			
+		)
+		3 : (
+			floaterGenerator.size = [270,520]
+			addRollout dlgCrossroadGenerator3 floaterGenerator
+		)
+	)
+)
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 rollout rGeneratorUtilities "Generator Utilities"
 (
-	group "Advanced Tools:" (
+	button bt_SelectVisuals 		"Select Visuals" 	offset:[-90,0] width:90 height:25 
+	button bt_SelectColls 			"Select Colls    " 	offset:[-90,0] width:90 height:25 
+	button bt_SelectChildren 		"Select Children" 	offset:[-90,0] width:90 height:25 toolTip:"Select road componets"
 	
-		button bt_show_road_color_table "Road Colors" offset:[0,0] width:100 height:25 toolTip:"Road Color Types"
-		button bt_generate_custom_road "Custom Road Gnerator" offset:[0,0] width:140 height:25 toolTip:"Generate road from prefab and spline"
-	)
-	group "Analiysis and Repair:" (
+	button bt_FixDuplicitNames		"Unique Names" 		offset:[0,-90] width:90 height:25 toolTip:"Fix duple names"
+	button bt_UnhideRoadsFull		"Unhide All"	offset:[0,0] width:90 height:25 toolTip:"Unhide full roads hierarchy"	
+	button bt_roadAnatomy			"Road Anatomy"		offset:[0,0] width:90 height:25 toolTip:"Show - Repair roads hierarchy"	
 	
-		button bt_FixDuplicitNames "Unique Names" offset:[0,0] width:100 height:25 align:#left toolTip:"Fix duple names" across:2
-		button bt_roadAnatomy "Road Anatomy" offset:[0,0] width:100 height:25 align:#right toolTip:"Show - Repair roads hierarchy"
-		button bt_ReloadPrefabs "Reload Prefabs" offset:[0,0] width:100 height:25 align:#left toolTip:"Delete old prefabs and load new ones" across:2
-		button bt_validate_roads "Validate Sel Roads" offset:[0,0] width:100 height:25 align:#right toolTip:"Validate Roads Structure"
-		button bt_distr_to_laers "Redistribute Sel" offset:[0,0] width:100 height:25 align:#left toolTip:"Move road in to layers(name is teaken from Node)" across:2
-		button bt_sel_unlinked_roads "Sel Orphan Roads" offset:[0,0] width:100 height:25 align:#right toolTip:"Select roads which are not linked"
-	)
-	group "Manage:" (
+	button bt_hidePoints 			"Hide Help Points"	offset:[90,-90] width:90 height:25 
+	button bt_showRoadColorTable	"Road Colors"	offset:[90,0] width:90 height:25 toolTip:"Road Color Types"
+	button bt_ReloadPrefabs			"Reload Prefabs"	offset:[90,0] width:90 height:25 toolTip:"Delete old prefabs and load new ones"
+	button bt_validate_roads 		"Validate Sel Roads"	offset:[0,0] width:120 height:25 toolTip:"Validate Roads Structure"
+	button bt_distr_to_laers 		"Redistribute Sel"	offset:[0,0] width:120 height:25 toolTip:"Move road in to layers(name is teaken from Node)"
 	
-		label lbl_1 "Show - Hide objects which contains a Word:" offset:[0, 0] width:284 height:14 align:#left
-		button btn_show_objs "Show" offset:[0,0] width:56 height:17 align:#left across:3 toolTip:"Unhide Objects By Name"
-		button btn_hide_objs "Hide" offset:[-20,0] width:56 height:17 align:#left toolTip:"Hide Objects By Name"
-		editText edt_sh_name "" offset:[-40,0] width:120 height:17 align:#left text:"building"
-		button bt_hidePoints "Hide Help Points"	width:100 height:25 align:#left toolTip:"Hide Road Help Points" across:2 
-		button bt_UnhideRoadsFull "Unhide Help Points"	width:100 height:25 align:#right toolTip:"Unhide Roads Help Points"
-		button bt_SelectVisuals "Select Roads" width:100 height:25 align:#left toolTip:"Select Roads Geometry" across:2
-		button bt_SelectColls 	"Select Collisions" width:100 height:25 align:#right toolTip:"Select Road Collisions"
-		button bt_SelectChildren "Select Help points" width:100 height:25 toolTip:"Select Road Help Points"
-	)
+	label lbl_1 "Show - Hide objects which contains Word:" offset:[-10, 0] width:284 height:14 align:#left
+	button btn_show_objs "Show" offset:[-14,-0] width:56 height:17 align:#left across:4
+	button btn_hide_objs "Hide" offset:[-8,-0] width:56 height:17 align:#left
+	editText edt_sh_name "" offset:[-8,-0] width:135 height:17 align:#left text:"building"
+
 	on bt_hidePoints			pressed do ( roGenStruct.hideHelpPoints()										)
 	on bt_SelectVisuals			pressed do ( roGenStruct.selectVisuals()										)
 	on bt_SelectColls			pressed do ( roGenStruct.selectCollisions()										)
@@ -2795,20 +2892,16 @@ rollout rGeneratorUtilities "Generator Utilities"
 	on bt_FixDuplicitNames		pressed do ( roGenStruct.fixDuplicitNames()										)
 	on bt_UnhideRoadsFull		pressed do ( roGenStruct.unhideRoadsFull()										)
 	on bt_roadAnatomy			pressed do ( runLocalScript "Road_Generator_Anatomy"								)
-	on bt_show_road_color_table	pressed do ( runLocalScript "Road_Generator_Colors"								)
+	on bt_showRoadColorTable	pressed do ( runLocalScript "Road_Generator_Colors"								)
 	on bt_ReloadPrefabs			pressed do ( roGenStruct.reloadPrefabs(getSourceFileName())						)
 	on btn_show_objs 			pressed do ( roGenStruct.showObjectsByNamePart objects edt_sh_name.text true	)
 	on btn_hide_objs 			pressed do ( roGenStruct.showObjectsByNamePart objects edt_sh_name.text false	)
 	on bt_validate_roads		pressed do ( roGenStruct.validateSelectedRoads()								)
 	on bt_distr_to_laers		pressed do ( roGenStruct.distributeRoadsInToLayers()							)
-	on bt_generate_custom_road	pressed do ( runLocalScript	"Road_Generator_Custom"								)
-	on bt_sel_unlinked_roads	pressed do ( roGenStruct.selectUnlinkedRoads()									)
 )
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 rollout dlgPickObjectType "Menu"
 (
-	local roll_all_size = #([320,440], [320,420], [320,470]) --"CROSSROAD",  "ROAD", "UTILITIES"
-	local roll_crossroad_size = #([320,440], [320,520], [320,420]) --"CROSSROAD",  "ROAD", "UTILITIES"
 	radiobuttons rb_type labels:#("CROSSROAD    ",  "ROAD               ", "UTILITIES") default:1 align:#left  columns:1   --"TURN                           "
 	dropdownlist dd_crossroad_types "" items:#("2 Side Roads", "2 Different Side Roads", "1 Side Road" ) height:6  offset:[100,-50] width:140
 	button bt_createColl "Create Collisions" offset:[55, -10] width:140 height:25 visible:false
@@ -2816,16 +2909,7 @@ rollout dlgPickObjectType "Menu"
 	button bt_adjustTangentsLength "Adjust Tangets Length" offset:[55,-80] width:140 height:25 visible:false
 	button bt_copyUniqueShortcut "Copy Unique Shortcut" offset:[55,0] width:140 height:25 visible:false
 -- 	label fill ""
-	fn setCrosroadRoll index arr_sizes = (
 	
-		floaterGenerator.size = arr_sizes[index]
-		Case (index) of (
-		
-			1 : addRollout dlgCrossroadGenerator floaterGenerator
-			2 : addRollout dlgCrossroadGenerator2 floaterGenerator
-			3 : addRollout dlgCrossroadGenerator3 floaterGenerator
-		)
-	)
 	fn switchRadioButton index crossRoadType: 1=
 	(
 		BM_SETCHECK = 241		-- checkbutton toggle message ID
@@ -2858,13 +2942,14 @@ rollout dlgPickObjectType "Menu"
 	)
 
 	on rb_type changed arg do (
-
+-- 		print arg
 		ClearRollFloater floaterGenerator
-		Case (arg) of ( --"CROSSROAD",  "ROAD", "UTILITIES"
+-- 		rb_lane_width_2_1.state = 0
 		
-			1: (--crossroad menu group
-			
-					setCrosroadRoll dd_crossroad_types.selection roll_crossroad_size
+		Case (arg) of ( --crossroad menu group
+			1: (
+					SetCrosroadRoll dd_crossroad_types.selection
+-- 					addRollout dlgCrossroadGenerator floaterGenerator
 					dd_crossroad_types.visible = True
 					bt_copyUniqueCrossRoad.visible = True
 					bt_copyUniqueShortcut.visible = false
@@ -2873,8 +2958,7 @@ rollout dlgPickObjectType "Menu"
 					dlgPickObjectType.height = 90 --Menu dialog height
 				)
 			2 :(	--road menu group
-			
-					floaterGenerator.size = roll_all_size[arg]
+					floaterGenerator.size = [270,430]
 					addRollout RoadGeneratorTool floaterGenerator
 					dd_crossroad_types.visible = False
 					bt_copyUniqueCrossRoad.visible = false
@@ -2884,27 +2968,25 @@ rollout dlgPickObjectType "Menu"
 					dlgPickObjectType.height = 65 --Menu dialog height
 				)
 			3 :(	--utilites menu group
-			
-					floaterGenerator.size = roll_all_size[arg]
+					floaterGenerator.size = [270,400]
 					addRollout rGeneratorUtilities floaterGenerator
 					dd_crossroad_types.visible = False
 					bt_copyUniqueCrossRoad.visible = false
 					bt_copyUniqueShortcut.visible = false
 					bt_adjustTangentsLength.visible = false
 					bt_createColl.visible = True
+					--bt_createColl.pos = [113,30]
 					dlgPickObjectType.height = 65 --Menu dialog height
 			)
 		)
 	)
 	
-	on dd_crossroad_types selected  arg do ( --"2 Side Roads", "2 Different Side Roads", "1 Side Road"
-	
+	on dd_crossroad_types selected  arg do (
 		ClearRollFloater floaterGenerator
-		setCrosroadRoll arg roll_crossroad_size
+		SetCrosroadRoll arg
 	)	
 	
 	on dlgPickObjectType open do (
-	
 		dlgPickObjectType.height = 90
 	)
 	
@@ -2924,6 +3006,9 @@ rollout dlgPickObjectType "Menu"
 		runLocalScript "Road_Generator_Collisions"
 		roGenStruct.All_CALLBACKS_ENABLED = true
 	)
+	
+
+	
 )
 -- createDialog dlgPickObjectType
 

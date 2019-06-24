@@ -30,13 +30,6 @@ struct ROAD_GENERATOR_STRUCTURE	(
 	------              		GET    	                   ------
 	-------------------------------------------------------------
 	-------------------------------------------------------------
-	fn isObjectWithDuplicateName obj = (
-	
-	
-		local identical_names =  0
-		for o in objects where obj.name == o.name do identical_names += 1
-		identical_names > 1
-	),
 	/**
 	*@Example
 		roGenStruct.hasCustomAttribute $ #RoadGenCa
@@ -75,7 +68,6 @@ struct ROAD_GENERATOR_STRUCTURE	(
 	*/
 	fn getConstraintObject obj_src node_type = (
 	
-	-- obj_src.controller.getNode 1
 		local obj = for o in refs.dependentnodes obj_src where classOf o == node_type do exit with o
 		if isValidNode obj then obj else undefined
 	),
@@ -295,93 +287,14 @@ struct ROAD_GENERATOR_STRUCTURE	(
 		)
 		result
 	),
-	fn getVertsCenter obj verts = (
-	
-		local center = [0,0,0]
-		for v in verts do center += polyop.getVert obj v
-		center /= verts.count
-		center
-	),
-	fn getFaceCenter obj f_index = (
-		
-		local verts = polyop.getFaceVerts obj f_index
-		getVertsCenter obj verts
-	),
 	fn getSelectedFacesCenter obj = (
 	
-		if (classof obj != Editable_poly) do return undefined
+		if (classof obj != Editable_poly) do return false
 		local fsel = (polyOp.getFaceSelection obj) as Array
-		if fsel.count == 0 do return undefined
+		if fsel.count == 0 do return false
 		local faceCenter = [0,0,0]
 		for f in fsel do faceCenter += polyop.getFaceCenter obj f
 		faceCenter / fsel.count
-	),
-	fn getClosestVert obj_poly pos maxDist:undefined = (
-	
-		local vert, dist = if maxDist != undefined then maxDist else 1e9
-		local d, obj_mesh = snapshotasmesh obj_poly
-		local verts = #{1..obj_mesh.numverts}
-		for v in verts where (d = distance (getvert obj_mesh v) pos) < dist do (
-			
-			vert = v
-			dist = d
-		)
-		#(vert, dist)
-	),
-	fn isBorderEdge obj e_index = (
-	
-		local efaces = polyop.getFacesUsingEdge obj e_index
-		efaces.numberset == 1
-	),
-	fn getBorderEdgesFromVertex obj v_index = (
-		
-		local edges = polyop.getEdgesUsingVert obj v_index
-		for ei in edges where isBorderEdge obj ei collect ei	
-	),
-	fn alignRoadToNormal obj joint_pos tangent_pos = (
-	
-		--snap road to joint (adjust pivot to start midle vertex)
-		local center_vert = (getClosestVert obj joint_pos)[1] 
-		obj.pivot = polyop.getVert obj center_vert
-		obj.pos = joint_pos
-		-- transform matrix vectors for road (align road to tangent)
-		local t_x = normalize (tangent_pos-joint_pos)
-		local t_y = normalize([-t_x.y, t_x.x, 0.0])
-		local t_z = cross t_x t_y
-		
-		local tm = obj.transform
-		tm.row1 = t_x
-		tm.row2 = t_y
-		tm.row3 = t_z	
-		obj.transform = tm
-	),
-	/**
-	*@Usage > get road edge(at start or end) vertices and positions
-	*/
-	fn getRoadEdge obj joint_pos = (
-		
-		local center_vert = (getClosestVert obj joint_pos)[1] 
-		local border_edges = getBorderEdgesFromVertex obj center_vert
-		obj.selectedEdges = border_edges
-		obj.SelectEdgeLoop() --border edges
-		local border_vertices = polyop.getVertsUsingEdge obj (polyOp.getEdgeSelection obj) --get border vertices
-		local vd = struct VERTEX_DATA (index, pos)
-		for v in border_vertices collect vd v (polyOp.getVert obj v) --gather verts_data
-	),
-	fn getLongestEdge obj edges = ( --Not Used
-
-		local ed = ( struct EDGE_DATA (index, length) ; EDGE_DATA() ) --quick object instance build
-		for edge_index in edges do (
-
-			local everts = polyOp.getEdgeVerts obj edge_index
-			local len = distance (polyOp.getVert obj everts[1]) (polyOp.getVert obj everts[2])
-			if ed.length < len do (
-			
-				ed.index = edge_index
-				ed.length = len
-			)
-		)
-		ed --return edge index and length
 	),
 	fn getBoundingBox &poly = (
 	
@@ -415,26 +328,26 @@ struct ROAD_GENERATOR_STRUCTURE	(
 	fn getFrontBB bb		=(return bb[1].y),
 	fn getLeftBB bb		=(return bb[1].x),
 	fn getRightBB bb		=(return bb[2].x),
-	fn getNeighborsVertsOnLoop obj verts_arr vertMask:#{} = (
-	
-		local vert_a_edges = polyop.getEdgesUsingVert obj verts_arr[1]
-		local vert_b_edges = polyop.getEdgesUsingVert obj verts_arr[2]
-		local everts_a = polyop.getVertsUsingEdge obj vert_a_edges
-		local everts_b = polyop.getVertsUsingEdge obj vert_b_edges
-		local two_verts = everts_a + everts_b
-		if vertMask.numberset > 0 do two_verts *= vertMask	
-		two_verts -= verts_arr as BitArray --remove previous verts	
-		-- format "mask:%\ntwo_verts:%\n" vertMask two_verts	
-		two_verts as Array
+	fn getFaceCenter editable verts = (
+		point_avg = [0,0,0]
+		for i in 1 to verts.count do
+		(
+			pt = polyop.getVert editable verts[i]
+			point_avg += pt
+	-- 		print("pt to sum: "+pt as string)
+		)
+	-- 	print("pt sum: "+point_avg as string)
+		point_avg /= verts.count
+	-- 	print ("Face vert count: "+verts.count as string)
+		return point_avg
 	),
-	fn getVectorsAngle v1 v2 = ( acos(dot (normalize v1) (normalize v2))),
 	fn getRoadFaceCenterDistances editable =
 	(
 		face_count = polyop.getNumFaces editable
 		face_offsets = #()
 		for i in 1 to face_count do
 		(
-			face_center = getFaceCenter editable i
+			face_center = getFaceCenter editable (polyop.getFaceVerts editable i)
 			--pt = point()
 			--pt.position = face_center
 	-- 		print ("Face center: "+pt as string)
@@ -449,7 +362,7 @@ struct ROAD_GENERATOR_STRUCTURE	(
 		face_offsets = #()
 		for i in 1 to face_count do
 		(
-			face_center = getFaceCenter editable i
+			face_center = getFaceCenter editable (polyop.getFaceVerts editable i)
 			--pt = point()
 			--pt.position = face_center
 	-- 		print ("Face center: "+pt as string)
@@ -578,58 +491,16 @@ struct ROAD_GENERATOR_STRUCTURE	(
 	------                   SET                           ------
 	-------------------------------------------------------------
 	-------------------------------------------------------------
-	/**
-	*@Example	
-		roGenStruct.setObjectUniqueName $
-	*/
-	fn setObjectUniqueName obj debug:false = (
-	
-		local old_name = obj.name
-		local new_name = uniqueName old_name
-		obj.name = new_name
-		if debug do format "setObjectUniqueName > Node: [ % ] has been Renamed to  [ % ]\n" old_name new_name
-		new_name
-	),
 	fn fixDuplicitNames debug:false = (
 	-- 		SelectVisuals()
 		local sel = selection as Array
-		local succes = 0
-		local failed = #()
 		for o in sel do (
 			
-			setObjectUniqueName o debug:debug 
-			
-			--update spline attribute
-			if isRoad o and isProperty o "roadSpline" then (
-			
-				local spline = o.roadSpline
-				if spline != undefined and isProperty spline "road" then (spline.road = o.name) else (
-				
-					append failed o
-					format "fixDuplicitNames > failed at:%\n" o.name
-					continue
-				) 
-				
-			) else if isShortcut o then (
-			
-				local spline = roGenStruct.getConstraintObject o SplineShape
-				if spline != undefined and isProperty spline "road" then (spline.road = o.name) else (
-				
-					append failed o
-					format "fixDuplicitNames > failed at:%\n" o.name
-					continue
-				)
-				
-			) else (
-		
-				append failed o
-				format "fixDuplicitNames > failed at:%\n" o.name
-				continue
-			)
-			succes += 1
+			local new_name = uniquename o.name
+			if debug do format "fixDuplicitNames > from:% to:%\n" o.name new_name
+			o.name = new_name
+			if isRoad o do o.roadSpline.road = new_name --update spline attribute
 		)
-		select failed
-		MessageBox ("Finished with  result:"+succes as string + " / " + sel.count as string) title:"Fix Duplicit Names:"
 	),
 	fn showObjectsByNamePart obj_array name_part state = (
 		
@@ -666,13 +537,6 @@ struct ROAD_GENERATOR_STRUCTURE	(
 		local num_verts = polyop.getNumVerts obj
 		for i = 1 to num_verts do polyOp.setVertColor obj map_channel i clr
 		update obj
-	),
-	fn setRoadBoundVerts obj verts_data = (
-	
-		ConvertTo obj Editable_Poly
-		for v in verts_data do polyOp.setVert obj v.index v.pos
-		
-		completeRedraw()
 	),
 	fn setPointAppearance p = (
 	
@@ -725,12 +589,11 @@ struct ROAD_GENERATOR_STRUCTURE	(
 		local roadsCrossToselect = #()
 		for obj in geometry do(
 		
-			local crossForuCheck 	= matchPattern obj.name pattern:"generator_crossroad_4*"
-			local crossThreeCheck	= matchPattern obj.name pattern:"generator_crossroad_3*"
-			local roadCheck			= matchPattern obj.name pattern:"generator_connect_road*"
-			local customRoadCheck	= matchPattern obj.name pattern:"custom_road*"
+			crossForuCheck 	= matchPattern obj.name pattern:"generator_crossroad_4*"
+			crossThreeCheck	= matchPattern obj.name pattern:"generator_crossroad_3*"
+			roadCheck			= matchPattern obj.name pattern:"generator_connect_road*"
 			
-			if crossForuCheck or crossThreeCheck or roadCheck or customRoadCheck then(
+			if  crossForuCheck or crossThreeCheck or roadCheck then(
 				append roadsCrossToselect obj
 			)
 		)
@@ -746,13 +609,11 @@ struct ROAD_GENERATOR_STRUCTURE	(
 	
 		local roadsCollsToselect = #()
 		for obj in geometry do(
-		
-			local crossForuCheck 	= matchPattern obj.name pattern:"coll_generator_crossroad_4*"
-			local crossThreeCheck	= matchPattern obj.name pattern:"coll_generator_crossroad_3*"
-			local roadCheck			= matchPattern obj.name pattern:"coll_generator_connect_road*"
-			local customRoadCheck	= matchPattern obj.name pattern:"coll_custom_road*"
+			crossForuCheck 	= matchPattern obj.name pattern:"coll_generator_crossroad_4*"
+			crossThreeCheck	= matchPattern obj.name pattern:"coll_generator_crossroad_3*"
+			roadCheck		= matchPattern obj.name pattern:"coll_generator_connect_road*"
 			
-			if  crossForuCheck or crossThreeCheck or roadCheck or customRoadCheck then(
+			if  crossForuCheck or crossThreeCheck or roadCheck then(
 				append roadsCollsToselect obj
 			)
 		)
@@ -787,16 +648,6 @@ struct ROAD_GENERATOR_STRUCTURE	(
 		join sel addSel
 		select sel
 	),
-	fn selectUnlinkedRoads = (
-
-		selectVisuals()
-		local orphaned_roads = for o in selection where o.parent == undefined collect o
-		max select none
-		select orphaned_roads
-		local msg = ""
-		for o in orphaned_roads do msg += (o.name + "\n")
-		messageBox ("Selected Orphaned Roads("+orphaned_roads.count as String+")\n"+msg) title:"Search Orphaned Roads:"
-	),
 	fn unhideRoadsFull = (
 		
 		undo "Unhide Roads" on (
@@ -814,7 +665,6 @@ struct ROAD_GENERATOR_STRUCTURE	(
 					)
 				)
 			)
-			for o in objects where classOf o == SplineShape do unhide o
 		)
 	),
 	/**
@@ -1033,36 +883,6 @@ struct ROAD_GENERATOR_STRUCTURE	(
 		p1.pos = p2.pos
 		p2.pos = p
 	),
-	fn rotateVectorAroundNormal v deg = (
-	
-		local rm = rotateZMatrix deg --create a rotation matrix from the value
-		v * rm --transform the original vector using the matrix
-	),
-	fn rotateVertexAroundZBackward obj v_index center p2 = (
-		
-		local p1 = polyop.getVert obj v_index
-		local v1 = p1 - center
-		local v2 = p2 - center
-		local vert_angle = getVectorsAngle v1 v2
-		local rotated_vector = rotateVectorAroundNormal v1 -vert_angle
-		polyOp.setVert obj v_index ( center + rotated_vector)
-	),	
-	/**
-	*@Example 
-		roGenStruct.rotateVerticesAroundPoint $ (polyop.getVertSelection $) 20
-	*/
-	fn rotateVerticesAroundPoint obj verts deg center:undefined = (
-		
-		--if center is not defined, calculate vertex center
-		if center == undefined do getVertsCenter obj verts
-		local tm = obj.transform --get the node's TM 
-		tm.row4 = center  --move the TM to the center Orientation of local Z remains the same!
-		local rot_mat = (rotateZMatrix deg) * tm  --rotation matrix is now in local coords!
-		for v in verts do  (
-			in coordsys tm vertex_position = (polyop.getVert obj v) 
-			polyop.setVert obj v (vertex_position * rot_mat ) 
-		)
-	),
 	fn loadPrefabs road_tool_file = (
 	
 		local layer_components	= LayerManager.getLayerFromName C_LAYER_NAME
@@ -1199,7 +1019,7 @@ struct ROAD_GENERATOR_STRUCTURE	(
 	*/
 	fn fixBrokenShortcut obj:undefined dp1:undefined dp2:undefined sp:undefined = (
 
-		local dialog = ::RoadGeneratorTool
+		local dialog = RoadGeneratorTool
 		--check model
 		if classOf obj != Editable_poly do obj = selection[1] --try to pic selected shortcut
 		if classOf obj != Editable_poly do (
@@ -1233,31 +1053,6 @@ struct ROAD_GENERATOR_STRUCTURE	(
 		--link spline
 		linkConstraint obj sp
 	),
-	/**
-	*@Usage > 
-		delete old shortcut and spline 
-		select two dummyes
-		setup rollout
-		generate new shortcut
-	*/
-	/*fn rebuildBrokenShortcut obj = (	--temp fix broken shortcut (when road tool stole a shortcut)
-	
-		format "todo"
-		local sel = selection as array
-		if sel.count == 2  then (
-		
-			All_CALLBACKS_ENABLED = false
-			if not ( isJoint sel[1] ) or not ( isJoint sel[2] ) do (
-		
-				messageBox "Unable to create Shortcut. Two Joints wasn't selected or missing components."
-				All_CALLBACKS_ENABLED = true
-				return false
-			)
-			--create shortcut
-			moveTangetPoints pts[1] pts[2] min_tangent_dist --move tangent points close
-			dialog.btn_generate.pressed() --generate road
-		)
-	),*/
 	fn setUpCrossRoadPoints max_dist_left max_dist_right c_tangent_offset road:undefined hidden_tn:true = (
 	
 		local dp1, dp2, tp1, tp2, pRight, pLeft -- dp > dummy(point) tp > tangent(point)
@@ -1363,7 +1158,6 @@ struct ROAD_GENERATOR_STRUCTURE	(
 				setInVec rSpline 1 knot_count (tOut)
 			)
 			updateShape rSpline
-			subobjectLevel = 0 --exit editing spline
 		)
 	),
 	-------------------------------------------------------------
@@ -1531,261 +1325,7 @@ struct ROAD_GENERATOR_STRUCTURE	(
 		sp.wirecolor = color 7 206 224
 		sp
 	),
-	/**
-	*@Usage > Create road assembled from number of parts to cover whole spline
-	*/
-	fn assemblyRoadFromPrefabs spline_length road_prefabric pt1_pos &road_sum &road_length  = (
-
-		local road_bb = getBoundingBox road_prefabric
-		road_length = getWidthBB road_bb
-		road_sum = copy road_prefabric --clone prefab
-		road_sum.pivot -= road_prefabric.transform.row1 * 0.5 * road_length --set pivot to border center
-		local road_count = (spline_length/road_length) as integer
-		local road_sum_length = road_length
-		for i in 1 to road_count do (
-		
-			local copy_road = copy road_prefabric
-			copy_road.position += copy_road.transform.row1 * road_length * i
-			road_sum.attach copy_road road_sum
-			road_sum_length += road_length
-		)
-		road_sum.position = pt1_pos
-		weldEditPoly road_sum 0.5
-	),
-	/**
-	*@Usage > Slice road along spline with constant distances | | | | | | | | | | |
-	*/
-	fn cutRoadAlongSpline road_sum spline spline_length road_length adaption = (
-
-		local tangent_fst = tangentCurve3D spline 1 ((1 as double)/TANGENT_TEST_COUNT)
-		local last_i = 1
-		local sum_d = 0.0
-		with redraw off (
-		
-			for i in 2 to TANGENT_TEST_COUNT do ( --trun off redraw for this loop
-			
-				local tangent_snd = tangentCurve3D spline 1 ((i as double)/TANGENT_TEST_COUNT)
-				local d = acos (dot (normalize tangent_fst) (normalize tangent_snd))
-				sum_d += d
-		-- 		print ("Angle sum: "+sum_d as string)
-				if sum_d > adaption then (
-		-- 			print("Diff: "+(i-last_i) as string)
-					-- compute params
-					local param = (((i+last_i)/2.0)/TANGENT_TEST_COUNT)
-					local pt = interpCurve3D spline 1 param pathParam:true
-					--p = point ()
-					--p.position = pt
-					--add slice modifier
-					local slice = sliceModifier()
-					addModifier road_sum slice 
-					--setup modifier
-					slice.slice_type = 1
-					slice.slice_plane.position = [0.0, 0.0, param*spline_length-road_length*0.5]
-					slice.slice_plane.rotation = (angleaxis (90) [0, 1, 0]) as quat
-					-- save for next iteration
-					last_i = i
-					sum_d = 0.0
-				)
-				tangent_fst = tangent_snd
-			)
-			--cut road length
-			slice = sliceModifier()
-			addModifier road_sum slice 
-			slice.slice_type = 2
-			slice.slice_plane.position = [0.0, 0.0, spline_length-road_length*0.5]
-			slice.slice_plane.rotation = (angleaxis (90) [0, 1, 0]) as quat
-			ConvertTo road_sum editable_poly
-			weldEditPoly road_sum 1.0
-		)
-	),
-	fn conformRoadToSpline road_sum spline twsit_deg rotation_deg = (
-format "---Used Path_Deform_2 ------------------------------------------------------------------\n"
-		local pd = Path_Deform2 ()
-		addModifier road_sum pd 
-		pd.Spline = spline
-		pd.axis = 0
-		pd.percent_along_path = 0
-		pd.stretch = 1
-		pd.rotation = 0
-		pd.rotation = rotation_deg
-		pd.twist = twsit_deg
-		pd.uniform = true
-		pd.auto_stretch = false
-		pd.UsePivotPoint = true
-		pd.PreserveForm = false
-		pd.UpVector = 1
-		pd.AcrossShapes = 1
-		pd.flip = false
-	),
-	fn fixRoadEndBorder obj joint_pos tangent_pos = ( --left (pt1 tn1) right (pt2 tn2)
-
-		--get start border
-		local center_vert = (getClosestVert obj joint_pos)[1] 
-		local border_edges = getBorderEdgesFromVertex obj center_vert
-		obj.selectedEdges = border_edges
-		obj.SelectEdgeLoop() --border edges
-		local border_vertices = polyop.getVertsUsingEdge obj (polyOp.getEdgeSelection obj)
-		obj.selectedVertices = border_vertices --border vertices
-		--calculate border line (guideline)
-		local v1 = (normalize (tangent_pos - joint_pos) ) * 10000--get tangent vector
-		--get right point
-		local rm = rotateZMatrix -90 --create a rotation matrix from the value
-		local v_left = v1 * rm --transform the original vector using the matrix
-		local left_point = joint_pos + v_left --move vector to pt1
-		left_point.z = joint_pos.z --if is tangent rotated make it straight
-		--get left point
-		local rm = rotateZMatrix 90 --create a rotation matrix from the value
-		local v_right = v1 * rm --transform the original vector using the matrix
-		local right_point =  joint_pos + v_right --move vector to pt1
-		right_point.z = joint_pos.z --if is tangent rotated make it straight
-
-		--Debug
-		-- sp_right = drawLineBetweenTwoPoints joint_pos right_point  yellow
-		-- sp_left = drawLineBetweenTwoPoints joint_pos left_point  yellow
-		-- select #(sp_left, sp_right)
-
-		--pick bot vertices one by one from center and rotate them to guideline (vector left or right)
-		local last_verts = #(center_vert, center_vert)
-		local next_verts = getNeighborsVertsOnLoop obj last_verts vertMask:(border_vertices)
-		while next_verts.count == 2  and not keyboard.escPressed do (
-			
-			-- 	obj.selectedVertices =  next_verts
-			last_verts = join (copy next_verts #nomap) last_verts
-			--get left and rifht vert
-			local left_vert, right_vert 
-			if distance left_point (polyop.getVert obj next_verts[1]) < distance left_point (polyop.getVert obj next_verts[2]) then  (
-				
-				left_vert = next_verts[1] 
-				right_vert = next_verts[2] 
-				
-			) else (
-				
-				left_vert = next_verts[2] 
-				right_vert = next_verts[1] 
-			)
-			--snap roatate left vert
-			rotateVertexAroundZBackward obj left_vert joint_pos left_point
-			--snap roatate right vert
-			rotateVertexAroundZBackward obj right_vert joint_pos right_point
-			--pick nex two vertices
-			next_verts = getNeighborsVertsOnLoop obj last_verts vertMask:(border_vertices)
-		)
-	),
-	fn createRoadFromSpline road_prefabric spline adaption twsit_deg rotation_deg collapsed:true = (
-	
-		disableSceneRedraw()
-		-- get segment length
-		local segment_lengths = (getSegLengths spline 1 cum:false)
-		local spline_length = segment_lengths[segment_lengths.count]
-
-		-- get joints and tangents
-		local knot_count = numKnots spline 1
-		local pt1 = getKnotPoint spline 1 1
-		local tn1 = getOutVec spline 1 1
-		local pt2 = getKnotPoint spline 1 knot_count
-		local tn2 = getInVec spline 1 knot_count
-		
-		-- create road assembled from number of parts to cover whole spline
-		local road_sum, road_length
-		assemblyRoadFromPrefabs spline_length road_prefabric pt1 &road_sum &road_length
-		
-		-- cut road along spline
-		cutRoadAlongSpline road_sum spline spline_length road_length adaption
-	
-		--align road to joint tangent
-		alignRoadToNormal road_sum pt1 tn1
-	
-		---store start border vertices with positions
-		start_border_vertices = roGenStruct.getRoadEdge road_sum pt1 type:#start
-
-		--conform road to spline
-		conformRoadToSpline road_sum spline twsit_deg rotation_deg
-		
-		-- fix START and END borders
-		setRoadBoundVerts road_sum start_border_vertices
-		fixRoadEndBorder road_sum pt2 tn2
-		
-		enableSceneRedraw()
-		return road_sum
-	),
-	fn conformRoadToSplineOld road_sum spline twsit_deg rotation_deg pt1 tn1 = (	
-format "---Used Path_Deform_1 ------------------------------------------------------------------\n"	
-		-- transform matrix vectors for road 
-		local t_x = normalize (tn1-pt1)
-		local t_y = normalize([-t_x.y, t_x.x, 0.0])
-		local t_z = cross t_x t_y
-		
-		local road_transform = road_sum.transform
-		road_transform.row1 = t_x
-		road_transform.row2 = t_y
-		road_transform.row3 = t_z
-		--adjust road position and rotation	
-		road_sum.transform = road_transform
-		
-		-- update path deform gizmo to be at start of road (calculation translate world position to object space of road)
-		local path_deform = pathDeform()
-		addModifier road_sum path_deform
-		
-		path_deform.rotation = rotation_deg
-		path_deform.twist = twsit_deg
-		path_deform.axis = 0
-		path_deform.path = spline
-		path_deform.gizmo.position = pt1 * (getModContextTM road_sum path_deform) * (inverse road_sum.objecttransform)
-	),
-	/**
-	*@Usage > cut excess part of road and adjust angle of second road connection border
-	*/
-	fn cutExcessPartOfRoad  road_sum road_prefabric pt2 tn2 debug:false = (
-		
-		--convert back forward to get triangles later
-		local road_sum_mesh = ConvertTo road_sum editable_mesh
-		local road_sum = ConvertTo road_sum editable_poly
-		-- compute face distances, 
-		--face_distances = GetRoadFaceCenterDistances road_prefabric
-		local face_centers = getRoadFaceCenters road_prefabric
-		local t2_x = normalize(tn2-pt2)
-		local t2_y = normalize([-t2_x.y, t2_x.x, 0.0])
-		local t2_z = normalize(cross t2_x t2_y)
-		
-		local t_matrix = matrix3 0
-		t_matrix.row1 = t2_x
-		t_matrix.row2 = t2_y
-		t_matrix.row3 = t2_z
-		
-		local rays = #()
-		for i in 1 to face_centers.count do
-		(
-			--rayOrigin = (pt2+t2_y*face_distances[i]+t2_z*100.0)
-			--dir = (-t2_z)
-			local rayOrigin = face_centers[i][1] * t_matrix + pt2
-			local dir = face_centers[i][2] * t_matrix
-			if debug do  drawLineBetweenTwoPoints rayOrigin (rayOrigin+dir*20.0) (Color 255 0 0)
-			append rays (ray rayOrigin dir)
-		)		
-		local hitArray = findAllIntersectionsUsingRays road_sum rays
-			
-		--slice (gismo orientation pt2 t2_x)
-		local poly_faces = getMeshFacesToPoly road_sum hitArray 
-		polyop.slice road_sum poly_faces (ray pt2 t2_x)
-		
-		--Select faces for delete
-		rays = #()
-		for i in 1 to face_centers.count do
-		(
-			--rayOrigin = (pt2+t2_y*face_distances[i]+t2_z*10.0-t2_x*10.0)
-			--dir = (-t2_z)
-			local rayOrigin = face_centers[i][1] * t_matrix + pt2 - t2_x*10.0
-			local dir = face_centers[i][2] * t_matrix
-			if debug do  drawLineBetweenTwoPoints rayOrigin (rayOrigin+dir*20.0) (Color 0 255 0)		
-			append rays (ray rayOrigin dir)
-		)	
-		hitArray = findAllIntersectionsUsingRays road_sum rays
-		ConvertTo road_sum editable_poly
-		--remove all wrong faces
-		polyop.deleteFaces road_sum (getMeshFacesToPoly road_sum hitArray)
-		weldEditPoly road_sum 1.0	
-	),
-	fn createRoadFromSplineOld road_prefabric spline adaption twsit_deg rotation_deg = (
+	fn createRoadFromSpline road_prefabric spline adaption twist = (
 	
 		disableSceneRedraw() 
 		-- get segment length
@@ -1800,31 +1340,136 @@ format "---Used Path_Deform_1 --------------------------------------------------
 		local tn2 = getInVec spline 1 knot_count
 		
 		-- create road assembled from number of parts to cover whole spline
-		local road_sum, road_length
-		assemblyRoadFromPrefabs spline_length road_prefabric pt1 &road_sum &road_length
+		local road_bb = getBoundingBox road_prefabric
+		local road_length = getWidthBB road_bb
+				
+		local road_sum = copy road_prefabric
+		road_sum.pivot -= road_prefabric.transform.row1 * 0.5 * road_length
+		local road_count = spline_length/road_length as integer
+		local road_sum_length = road_length
+	-- 	print ("Road count: "+(road_count as string))
+		for i in 1 to road_count do (
+		
+			copy_road = copy road_prefabric
+			copy_road.position += copy_road.transform.row1 * road_length * i
+			road_sum.attach copy_road road_sum
+			road_sum_length += road_length
+		)
+		road_sum.position = pt1
+		
+		weldEditPoly road_sum 1.0
 		
 		-- cut road along spline
-		cutRoadAlongSpline road_sum spline spline_length road_length adaption
-		
-		--align road to joint tangent
-		-- alignRoadToNormal road_sum pt1 tn1
+		local tangent_fst = tangentCurve3D spline 1 ((1 as double)/TANGENT_TEST_COUNT)
+		local last_i = 1
+		local sum_d = 0.0
+		for i in 2 to TANGENT_TEST_COUNT do 
+		(
+			tangent_snd = tangentCurve3D spline 1 ((i as double)/TANGENT_TEST_COUNT)
+			d = acos (dot (normalize tangent_fst) (normalize tangent_snd))
+			sum_d += d
+	-- 		print ("Angle sum: "+sum_d as string)
+			if sum_d > adaption then (
+	-- 			print("Diff: "+(i-last_i) as string)
+				-- compute params
+				param = (((i+last_i)/2.0)/TANGENT_TEST_COUNT)
+				pt = interpCurve3D spline 1 param pathParam:true
+				--p = point ()
+				--p.position = pt
+				--add slice modifier
+				local slice = sliceModifier()
+				addModifier road_sum slice 
+				--setup modifier
+				slice.slice_type = 1
+				slice.slice_plane.position = [0.0, 0.0, param*spline_length-road_length*0.5]
+				slice.slice_plane.rotation = (angleaxis (90) [0, 1, 0]) as quat
 				
+				-- save for next iteration
+				last_i = i
+				sum_d = 0.0
+			)
+			
+			tangent_fst = tangent_snd
+		)
+		
+		local slice = sliceModifier()
+		addModifier road_sum slice 
+		--setup modifier
+		slice.slice_type = 2
+		slice.slice_plane.position = [0.0, 0.0, spline_length-road_length*0.5]
+		slice.slice_plane.rotation = (angleaxis (90) [0, 1, 0]) as quat
+		
+		road_sum = ConvertTo road_sum editable_poly
+		
 		-- transform matrix vectors for road
-		local t_x = normalize (tn1-pt1)
-		local t_y = normalize([-t_x.y, t_x.x, 0.0])
-		local t_z = cross t_x t_y
-		local road_transform = road_sum.transform
+		t_x = normalize (tn1-pt1)
+		t_y = normalize([-t_x.y, t_x.x, 0.0])
+		t_z = cross t_x t_y
+		
+		road_transform = road_sum.transform
 		road_transform.row1 = t_x
 		road_transform.row2 = t_y
 		road_transform.row3 = t_z
+			
 		road_sum.transform = road_transform
 		
-
-		--conform road to spline
-		conformRoadToSplineOld road_sum spline twsit_deg rotation_deg pt1 tn1
-
-		--slice road end and delete rest
-		cutExcessPartOfRoad road_sum road_prefabric pt2 tn2
+		-- update path deform gizmo to be at start of road (calculation translate world position to object space of road)
+		path_deform = pathDeform()
+		addModifier road_sum path_deform
+		
+		path_deform.twist = twist
+		path_deform.axis = 0
+		path_deform.path = spline
+		path_deform.gizmo.position = pt1 * (getModContextTM road_sum path_deform) * (inverse road_sum.objecttransform)
+		
+		road_sum_mesh = ConvertTo road_sum editable_mesh
+		road_sum = ConvertTo road_sum editable_poly
+		
+		-- compute face distances, 
+		--face_distances = GetRoadFaceCenterDistances road_prefabric
+		face_centers = getRoadFaceCenters road_prefabric
+		t2_x = normalize(tn2-pt2)
+		t2_y = normalize([-t2_x.y, t2_x.x, 0.0])
+		t2_z = normalize(cross t2_x t2_y)
+		
+		t_matrix = matrix3 0
+		t_matrix.row1 = t2_x
+		t_matrix.row2 = t2_y
+		t_matrix.row3 = t2_z
+		
+		rays = #()
+		for i in 1 to face_centers.count do
+		(
+			--rayOrigin = (pt2+t2_y*face_distances[i]+t2_z*100.0)
+			--dir = (-t2_z)
+			rayOrigin = face_centers[i][1] * t_matrix + pt2
+			dir = face_centers[i][2] * t_matrix
+			--drawLineBetweenTwoPoints rayOrigin (rayOrigin+dir*20.0) (Color 255 0 0)
+			append rays (ray rayOrigin dir)
+		)
+		hitArray = findAllIntersectionsUsingRays road_sum_mesh rays
+			
+		--slice
+		polyop.slice road_sum (getMeshFacesToPoly road_sum hitArray) (ray pt2 t2_x)
+		
+		road_sum_mesh = ConvertTo road_sum editable_mesh
+		--rebuild ray mesh intersect with updated data
+		
+		rays = #()
+		for i in 1 to face_centers.count do
+		(
+			--rayOrigin = (pt2+t2_y*face_distances[i]+t2_z*10.0-t2_x*10.0)
+			--dir = (-t2_z)
+			rayOrigin = face_centers[i][1] * t_matrix + pt2 - t2_x*10.0
+			dir = face_centers[i][2] * t_matrix
+			--drawLineBetweenTwoPoints rayOrigin (rayOrigin+dir*20.0) (Color 0 255 0)
+			append rays (ray rayOrigin dir)
+		)
+		hitArray = findAllIntersectionsUsingRays road_sum_mesh rays
+		road_sum = ConvertTo road_sum editable_poly
+		--remove all wrong faces
+		polyop.deleteFaces road_sum (getMeshFacesToPoly road_sum hitArray)
+		weldEditPoly road_sum 1.0
 			
 		enableSceneRedraw()
 		return road_sum
@@ -1832,11 +1477,29 @@ format "---Used Path_Deform_1 --------------------------------------------------
 	/**
 	*@Usage > make short version of selected road with two connection dummies and convert it to corssroad
 	*/
-	fn generateRoadShortcut dialog old_way:true = (
+	fn generateRoadShortcut dialog = (
 		
 		--Compatibility Check
 		if (selection as Array).count > 1 do return false		--not applicable if two dummies is selected (this is for road creation)
-		local road = selection[1] 
+		local road, obj = selection[1] 
+		if classOf obj == SplineShape then ( --if path is selected
+		
+			road = getNodeByName obj.road
+--temp fix broken shortcut
+			if queryBox "woul you like to fix boken shortcut?" title:"Shortcut FIX:" do (
+			
+				local sp=road.roadSpline 
+				local dp1=road.startPoint 
+				local dp2=road.endPoint
+				removeCustomAttribute road #RoadGenCa
+				setShortcutCA road sp dp1 dp2 dialog dialog.controlsArr
+				linkConstraint road sp
+			)
+			
+		)else( --if road is selected
+		
+			road = obj
+		)
 		if isRoad road do return false 		--not applicable for Road
 		if isCrossRoad road do return false	--not applicable for CrossRoad
 		--Disable all Road Tool callbacks at Begin
@@ -1880,7 +1543,7 @@ format "---Used Path_Deform_1 --------------------------------------------------
 		if not (isShortcut road) do moveTangetPoints pts[1] pts[2] min_tangent_dist --move tangent points close
 		select pts
 		--generate road geometry
-		if old_way then dialog.btn_generate_old.pressed() else dialog.btn_generate.pressed()--generate road
+		dialog.btn_generate.pressed() --generate road
 		--collect components
 		road = selection[1]
 		sp  = road.roadSpline
@@ -1899,68 +1562,23 @@ format "---Used Path_Deform_1 --------------------------------------------------
 		--Reenable all Road Tool callbacks at End
 		All_CALLBACKS_ENABLED = true
 	),	
-	fn createRoadFromRolloutSettings dialog roads specs spline startPoint endPoint road_clr:undefined road_name:undefined old:true= (
-	
-		--deselect all (speed up progress)
-		subobjectlevel = 0 --exit from edit mode
-		max select none
-		
-		--collect current rollout settings
-		local tangent_deg	= dialog.spinner_tangent.value
-		local rotation_deg	= if isProperty dialog "spinner_rotate" then dialog.spinner_rotate.value else 0
-		local twist_deg		= if isProperty dialog "spinner_twist" then dialog.spinner_twist.value else 0
-		local prefabs_sel	= dialog.dd_road_prefabs_1.selection
-		local pl_left_state	= dialog.cb_parking_lane_left.state 
-		local pl_right_state	= dialog.cb_parking_lane_right.state 
-		local sw_left_state	= dialog.cb_sidewalks_left.state 
-		local sw_right_state	= dialog.cb_sidewalks_right.state
-
-		--get road core	
-		local selected_road = pickRoadPrefab roads prefabs_sel false
-		--assembly road from components
-		local road = constructRoadPrototype selected_road specs pl_left_state pl_right_state sw_left_state sw_right_state
---conform-slice road along spline
-local finalRoad = if old then (
-
-	createRoadFromSplineOld road spline tangent_deg twist_deg rotation_deg
-	
-) else (
-
-	createRoadFromSpline road spline tangent_deg twist_deg rotation_deg collapsed:false
-)
-		if road_name == undefined then ( --genereate new name from prefab name (when create new road)
-		
-			finalRoad.name = replace finalRoad.name 11 6 "connect_road" --"generator_road_2_6d" > "generator_connect_road_6d"
-			finalRoad.name = uniqueName finalRoad.name
-			
-		) else ( --use original road name (when rebuild a road)
-		
-			finalRoad.name = road_name
-		)
-		--set custom attributes
-		setRoadCA finalRoad spline startPoint endPoint dialog dialog.controlsArr
-
-		custAttributes.add spline gSplineGenCa #unique
-		spline.road = finalRoad.name
-		--sp.parent = finalRoad --MerlinEl (2.24.2019) --can't do this, depency loop TODO:(try to use link constraints)
-		------------------------------------------------------------------
-		delete road
-
-		setCrossRoadWireColor finalRoad oldColor:road_clr
-		finalRoad
-	),
-	/**
-	*@Usage >  create road from two points or rebuild selected road( select road or spline )
-	*/
-	fn generateRoad dialog roads specs old_way:true = (
+	fn generateRoad dialog roads specs = (
 	
 		local sel = selection as Array
 		local obj = sel[1]
-		local road, spline, finalRoad
 		if isCrossRoad sel[1] or isShortcut sel[1] do return false --not applicable for crossroad or shortcut
 		All_CALLBACKS_ENABLED = false
 		undo off (
 		
+			--collect current rollout settings
+			local tangent_deg	= dialog.spinner_tangent.value
+			local twist_deg		= dialog.spinner_twist.value
+			local prefabs_sel	= dialog.dd_road_prefabs_1.selection
+			local pl_left_state	= dialog.cb_parking_lane_left.state 
+			local pl_right_state	= dialog.cb_parking_lane_right.state 
+			local sw_left_state	= dialog.cb_sidewalks_left.state 
+			local sw_right_state	= dialog.cb_sidewalks_right.state
+			
 			---------------------------------------------------------------------------
 -- 			TWO POINTS ARE SELECTED (Create new road)
 			---------------------------------------------------------------------------
@@ -1968,20 +1586,41 @@ local finalRoad = if old then (
 				
 				if not ( isJoint sel[1] ) or not ( isJoint sel[2] ) do (
 			
-					messageBox "Unable to create road. Two Joints wasn't selected or missing components."
+					messageBox "Unable to create road. Two Joints wasn't selected."
 					All_CALLBACKS_ENABLED = true
 					return false
 				)
-				--create road
-				spline = createSplineFromJoints sel[1] sel[2]
-				finalRoad = createRoadFromRolloutSettings dialog roads specs spline sel[1] sel[2] old:old_way
+				local sp = createSplineFromJoints sel[1] sel[2]
+				
+				--get road core	
+				local selected_road = pickRoadPrefab roads prefabs_sel false
+				--assembly road from components
+				local road = constructRoadPrototype selected_road specs pl_left_state pl_right_state sw_left_state sw_right_state
+				--conform-slice road along spline
+				local finalRoad = createRoadFromSpline road sp tangent_deg twist_deg
+				---replace prefab name
+				finalRoad.name = replace finalRoad.name 11 6 "connect_road" --"generator_road_2_6d" > "generator_connect_road_6d"
+				finalRoad.name = uniqueName finalRoad.name
+				--set custom attributes
+				setRoadCA finalRoad sp sel[1] sel[2] dialog dialog.controlsArr
+				
+				custAttributes.add sp gSplineGenCa #unique
+				sp.road = finalRoad.name
+--sp.parent = finalRoad --MerlinEl (2.24.2019) --can't do this, depency loop TODO:(try to use link constraints)
+				------------------------------------------------------------------
+				delete road
+
+				setCrossRoadWireColor finalRoad
+				select finalRoad	
 			)
+
 			---------------------------------------------------------------------------
 -- 			ROAD or SPLINE SELECTED (keep spline and Rebuild road)
 			---------------------------------------------------------------------------
 			if sel.count == 1 then(
 				
 				--pick road components
+				local road, spline 
 				if classOf obj == SplineShape then ( --if path is selected
 				
 					spline = obj
@@ -1999,39 +1638,41 @@ local finalRoad = if old then (
 					return false
 				)
 				
-				--pick old road data
+				--deselect all (speed up progress)
+				subobjectlevel = 0
+				max select none
+	
+				--pick road data
 				local layer = road.layer
 				local wire_clr = road.wirecolor
 				local export_node = road.parent
 				local startPoint = road.startPoint
 				local endPoint = road.endPoint
-				local old_name = road.name
-				
---debug			
--- format "A DEBUG > Rebuild road before:............................................... [ % ]........................................................................\n" road.name
--- format "Dupplicates found:%\n" (isObjectWithDuplicateName road)
--- for o in objects where findString o.name "generator_connect_road" != undefined do print o.name
--- format "< ..................................................................................................................................\n"						
-				
 				delete road -- delete old road
-
-				--create new road
-				finalRoad = createRoadFromRolloutSettings dialog roads specs spline startPoint endPoint road_clr:wire_clr road_name:old_name old:old_way
+				
+				
+				--get road core	
+				local selected_road = pickRoadPrefab roads prefabs_sel false --get road prefab core
+				--assembly road from components
+				road = constructRoadPrototype selected_road specs pl_left_state pl_right_state sw_left_state sw_right_state
+				--conform-slice road along spline
+				finalRoad = createRoadFromSpline road spline tangent_deg twist_deg
+				--replace prefab name
+				finalRoad.name = replace finalRoad.name 11 6 "connect_road" --"generator_road_2_6d" > "generator_connect_road_6d"
+				finalRoad.name = uniqueName finalRoad.name 
+				--set custom attributes
+				setRoadCA finalRoad spline startPoint endPoint dialog dialog.controlsArr
+				spline.road = finalRoad.name
+				
+				delete road
+				
+				setCrossRoadWireColor finalRoad oldColor:wire_clr
 				finalRoad.parent = export_node
 				layer.addNode finalRoad
 				layer.addNode spline
-				
---debug	
-local dupe = (isObjectWithDuplicateName finalRoad)	
-if dupe do messageBox ("Road with dupplicate Name was created.\nPlease fix road with name:"+finalRoad.name) title:"Alert:"	
--- format "B DEBUG > Rebuild road after:............................................. [ % ]........................................................................\n" finalRoad.name
--- format "Dupplicates found:%\n" dupe
--- for o in objects where findString o.name "generator_connect_road" != undefined do print o.name 
--- format "<  ..................................................................................................................................\n"
-
+				select finalRoad
 			)
 		)
-		select finalRoad
 		All_CALLBACKS_ENABLED = true
 	)
 	/*<end>*/
