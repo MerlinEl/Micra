@@ -1,31 +1,24 @@
 Global mcVertexSnapDialog
 if mcVertexSnapDialog != undefined do destroyDialog mcVertexSnapDialog
-rollout mcVertexSnapDialog "Vertex Snap" width:320 height:272
+rollout mcVertexSnapDialog "Vertex Snap" width:320 height:232
 (
     local metric_type = units.SystemType as String
 	pickbutton 'btn_pick_trgt' "None" pos:[96,92] width:208 height:20 align:#left
 	label 'lbl5' "Target Object:" pos:[16,96] width:76 height:16 align:#left
-	button 'btn_snap' "Snap Object" pos:[224,116] width:80 height:24 align:#left
 	label 'lbl6' "Range:" pos:[16,120] width:76 height:16 align:#left
 	spinner 'spn_offset' "" pos:[96,120] width:72 height:16 range:[0,100,1] type:#float scale:0.1 align:#left
-	label 'lbl_units' "meters" pos:[172,120] width:44 height:16 align:#left
+	label 'lbl_units' "meters" pos:[172,120] width:132 height:16 align:#left
     
 	GroupBox 'grp2' "Single:" pos:[8,4] width:308 height:56 align:#left
 	button 'btn_get_pos' "Get Position" pos:[16,24] width:136 height:24 align:#left
 	button 'btn_set_pos' "Srangeet Position" pos:[160,24] width:148 height:24 align:#left
-	GroupBox 'grp3' "Multiple:" pos:[8,72] width:308 height:184 align:#left
-	radiobuttons 'rdo_offset' "" pos:[64,208] width:245 height:32 labels:#("1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14") columns:7 align:#left
-	label 'lbl4' "quick:" pos:[16,208] width:40 height:16 align:#left
-	button 'btnSnapMore' "Snap Objects" pos:[224,176] width:80 height:24 align:#left
-	label 'lblStep' "Step:" pos:[16,176] width:76 height:16 align:#left
-	checkbox 'chckIncreaseRange' "Increase Range" pos:[16,144] width:96 height:24 align:#left
-	spinner 'spnStep' "" pos:[96,176] width:72 height:16 range:[0,100,1] type:#float scale:0.1 align:#left
-	label 'lblMeters' "meters" pos:[176,176] width:40 height:16 align:#left
-            
+	GroupBox 'grp3' "Multiple:" pos:[8,72] width:308 height:156 align:#left
+	radiobuttons 'rdo_offset' "" pos:[64,148] width:245 height:32 labels:#("1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14") columns:7 align:#left
+	label 'lbl4' "quick:" pos:[16,148] width:40 height:16 align:#left
+	button 'btnSnapMore' "Snap Objects" pos:[12,184] width:296 height:36 align:#left
     local target_object
     local vert_pos
     
-	
 	function GetVertexSelection obj =
 	(
 		case classof(obj) of
@@ -35,6 +28,30 @@ rollout mcVertexSnapDialog "Vertex Snap" width:320 height:272
 			default: return undefined
 		)
 	)
+	
+	function FilterBorderVerts obj onlySelectedVerts:true=
+	(
+		local verts
+		if(onlySelectedVerts)then
+		(
+			verts = polyop.getVertSelection obj
+		)
+		else
+		(
+			verts = #{1..(polyop.getNumVerts obj)}
+		)
+		edges = polyop.getOpenEdges obj
+		local newVerts = #{}
+		for edg in edges do
+		(
+			for edgeVert in (polyop.getEdgeVerts obj edg) do
+			(
+				if((findItem verts edgeVert)!=0)then append newVerts edgeVert
+			)
+		)
+		newVerts
+	)
+	
 
 	function MoveVertex obj v vEndLocation =
 	(
@@ -49,12 +66,11 @@ rollout mcVertexSnapDialog "Vertex Snap" width:320 height:272
 		)
 	)
 
-	function GetClosestPosition originObj vertexSourcePos spnOffsetValue =
+	function GetClosestPosition originObj arrTargetObjBorderVerts vertexSourcePos spnOffsetValue =
 	(
-		local all_vert_list = #{1..(polyop.getNumVerts originObj)}
 		local closest_pos
 		local smalest_dist = 9999999
-		for v in all_vert_list do  (
+		for v in arrTargetObjBorderVerts do  (
 			
 			local trgt_pos = polyOp.getVert originObj v
 			
@@ -70,7 +86,7 @@ rollout mcVertexSnapDialog "Vertex Snap" width:320 height:272
 	)
 
 
-	function AlignVerticesToObject targetObj objToAlign rangeValue &failedVertices=
+	function AlignVerticesToObject targetObj arrTargetObjBorderVerts objToAlign rangeValue &failedVertices=
 	(
 		local isAllGood = true
 
@@ -78,7 +94,7 @@ rollout mcVertexSnapDialog "Vertex Snap" width:320 height:272
 		
 		if (classOf(objToAlign) != Editable_Poly) then convertTo objToAlign Editable_Poly
 		
-		local vSel = GetVertexSelection objToAlign
+		local vSel = FilterBorderVerts objToAlign
 		if vSel == undefined then isAllGood = false
 		
 		if(isAllGood)then
@@ -87,13 +103,12 @@ rollout mcVertexSnapDialog "Vertex Snap" width:320 height:272
 			for v in vSel do
 			(
 				local vertexPos = polyOp.getVert objToAlign v
-				local closestPosInRange = GetClosestPosition targetObj vertexPos rangeValue
+				local closestPosInRange = GetClosestPosition targetObj arrTargetObjBorderVerts vertexPos rangeValue
 				if closestPosInRange == undefined do 
 				(
 					failedVertices += #{v}
 					continue
 				)
-				
 				polyOp.setVert objToAlign v closestPosInRange
 			)
 		)
@@ -106,27 +121,14 @@ rollout mcVertexSnapDialog "Vertex Snap" width:320 height:272
 		max create mode
 		undo "Snap vertices" on
 		(
+			targetObjVerts = FilterBorderVerts targetObj onlySelectedVerts:false		-- optimalization, we can select only from border verts -> quicker times hell yeah
 			for obj in arrObjsToAlign do
 			(
 				local failedVerts = #{}
 				
 				if(stepValue == undefined)then
 				(
-					AlignVerticesToObject targetObj obj rangeValue &failedVerts
-				)
-				else
-				(
-					
-					local counter = 1
-					
-					do
-					(
-						failedVerts = #{}
-						AlignVerticesToObject targetObj obj (rangeValue + (stepValue * counter)) &failedVerts
-						counter += counter
-						polyop.setVertSelection obj failedVerts
-					)
-					while ((counter <= 5) or (failedVerts.count != 0))
+					AlignVerticesToObject targetObj targetObjVerts obj rangeValue &failedVerts
 				)
 			)
 		)
@@ -151,9 +153,9 @@ rollout mcVertexSnapDialog "Vertex Snap" width:320 height:272
 			if(selObjects.count == 0) then MessageBox("Please select Objects for vertex alignment")
 			else
 			(
-				local step = undefined
-				if chckIncreaseRange.checked then step = spnStep.value
-				AlignObjectsVerticesToObject sourceObj selObjects spn_offset.value step
+-- 				local step = undefined
+-- 				if chckIncreaseRange.checked then step = spnStep.value
+				AlignObjectsVerticesToObject sourceObj selObjects spn_offset.value undefined
 			)
 		)
 	)

@@ -1,6 +1,6 @@
 Global mcAlignObjectsDialog
 if mcAlignObjectsDialog != undefined do DestroyDialog mcAlignObjectsDialog
-rollout mcAlignObjectsDialog "Align Objects:" width:156 height:192
+rollout mcAlignObjectsDialog "Align Objects:" width:156 height:268
 (
 	local axis_labels = #("X", "Y", "Z")
 	GroupBox 'grp9' "Axis:" pos:[4,4] width:148 height:46 align:#left
@@ -15,6 +15,10 @@ rollout mcAlignObjectsDialog "Align Objects:" width:156 height:192
 	button 'btn_Copy' "COPY" pos:[8,156] width:66 height:24 align:#left
 	button 'btn_paste' "PASTE" pos:[80,156] width:66 height:24 align:#left
 	dropdownList 'ddl_way' "" pos:[8,132] width:136 height:21 items:#("X", "Y", "Z", "MIN", "MAX", "CENTER") align:#left
+	groupBox 'grp4' "Snap:" pos:[4,192] width:148 height:72 align:#left
+	pickbutton 'btn_pick_obj' "pick..." pos:[8,208] width:36 height:24 align:#left
+	label 'lbl_obj_name' "..." pos:[48,212] width:96 height:20 align:#left
+	button 'btn_snap_obj' "SNAP" pos:[8,236] width:136 height:24 align:#left
 	struct NODE_TM (pos, mi, ma)
 	local saved_tm = NODE_TM [0, 0, 0]  [0, 0, 0]  [0, 0, 0]
 	fn getObjectsBB obj_arr = (
@@ -221,7 +225,12 @@ rollout mcAlignObjectsDialog "Align Objects:" width:156 height:192
 	on btn_center			pressed	do	( undo "Align Objects Center" on offsetObjects #center		)
 	on btn_copy			pressed 	do	( copyPosition()																		)
 	on btn_paste			pressed 	do	( undo "Align Objects" on pastePosition()							)
-
+	on btn_pick_obj picked obj 	do 	(lbl_obj_name.text = obj.name												)
+	on btn_snap_obj		pressed 	do	( 
+		
+		local obj = getNodeByName lbl_obj_name.text
+		if isValidnode obj do mcPoly.alignObjectToSelection obj
+	)
 )
 CreateDialog mcAlignObjectsDialog
 

@@ -40,7 +40,9 @@ rollout mcCityManDialog "City Manager v1.04" width:500 height:896
 	button 'btn_select_visible_nodes' "Select Visible Nodes" pos:[12,848] width:112 height:20 toolTip:"Select All visible nodes" align:#left
 	button 'btn_select_empty_objects' "Select Empty Objects" pos:[128,848] width:112 height:20 toolTip:"Select All Editable_Poly objects without geometry" align:#left
 	button 'btn_filter_visible_nodes' "Filter Visible Nodes" pos:[12,870] width:112 height:20 toolTip:"Filter visible nodes from selection" align:#left
-	button 'btn_generate_coll' "Gen Simple Collisions" pos:[126,870] width:112 height:20 toolTip:"Genarate collisions from selection, ID:1, " align:#left
+	button 'btn_generate_coll' "Gen Simple Collisions" pos:[376,870] width:112 height:20 toolTip:"Genarate collisions from selection, ID:1, " align:#left
+	button 'btn_unique_check' "Unique Names Check" pos:[126,870] width:112 height:20 toolTip:"Check Scene For Duple Names" align:#left
+	button 'btn_unique_fix' "Unique Names Fix" pos:[250,870] width:112 height:20 toolTip:"Fix Duple Names In Scene" align:#left
 	button 'btn_inspect_nodes' "Inpect Nodes Paths" pos:[376,824] width:112 height:20 toolTip:"Select All Collision" align:#left
 	--Local variables
 	local autosel = on
@@ -473,6 +475,23 @@ rollout mcCityManDialog "City Manager v1.04" width:500 height:896
 	
 		for o in selection where classOf o == LS3DModel do format "Export Path:%\n" o.OutputPath
 	)
+	fn checkForDupplicatedNamesInScene = (
+
+		local nd = struct NAME_DATA (obj, index)
+		local database = #()
+		for o in objects do (
+
+			local found = false
+			for d in database where d.obj.name == o.name do (d.index += 1; found = true)
+			if not found do append database (nd o 1)
+		)
+		local dupplicate_objs = for d in database where d.index  > 1 collect d.obj
+		local msg = "Dupplicated Objects Found ("+dupplicate_objs.count as string+")\n"
+		for o in dupplicate_objs do msg += ("\t" + o.name + "\n")
+		messageBox msg title:"Dupple Inspector"
+		format "%\n" msg
+		select dupplicate_objs
+	)
 	--load node children
 	on cbx_node_list selected sel do
 	(
@@ -693,6 +712,8 @@ rollout mcCityManDialog "City Manager v1.04" width:500 height:896
 	on btn_sel_colls pressed do selectAllCollisions()
 	on btn_select_empty_objects pressed do selectObjectsWithoutGeometry()
 	on btn_inspect_nodes pressed do inspectNodesPath()
+	on btn_unique_check pressed do checkForDupplicatedNamesInScene()
+	on btn_unique_fix pressed do (for o in selection do o.name = uniqueName o.name)
 )
 createDialog mcCityManDialog
 

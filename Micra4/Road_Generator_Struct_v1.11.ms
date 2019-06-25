@@ -30,6 +30,11 @@ struct ROAD_GENERATOR_STRUCTURE	(
 	------              		GET    	                   ------
 	-------------------------------------------------------------
 	-------------------------------------------------------------
+	fn isAnyUndefined obj_arr = (
+	
+		for o in obj_arr where o == undefined do exit with true
+		false
+	),
 	fn isObjectWithDuplicateName obj = (
 	
 	
@@ -532,6 +537,20 @@ struct ROAD_GENERATOR_STRUCTURE	(
 		--return result
 		return hit_array
 	),
+	/**
+	*@Usage find which splines using same road
+	*@Example
+		select (roGenStruct.getSplinesUsingRoad $)
+	*/
+	fn getSplinesUsingRoad road = (
+
+		for o in objects where (
+
+			classOf o == SplineShape and 
+				isProperty o "road" and 
+					o.road == road.name
+		) collect o
+	),
 	fn getRoadComponents obj = (
 	
 		if not (isRoad obj) do return #()
@@ -650,15 +669,9 @@ struct ROAD_GENERATOR_STRUCTURE	(
 		road.kids = getKidsOfCrossRoad road.children
 		road.controlsStr = getCAControlsSTR dialog controlsArr
 	),
-	/** 
-	*@STATE In Progress....
-	*/
-	fn setShortcutCA road rSpline sPoint ePoint dialog controlsArr = (
+	fn setShortcutCA road dialog controlsArr = (
 	
 		custAttributes.add road gShortcutCa #unique
-		sPoint.parent = road
-		ePoint.parent = road
-		--rSpline.parent = road
 		road.controlsStr = getCAControlsSTR dialog controlsArr
 	),
 	fn setVertexColor obj clr map_channel = (
@@ -877,7 +890,7 @@ struct ROAD_GENERATOR_STRUCTURE	(
 					
 				) else if joints.count != 2 then (
 				
-					format "Error > Missing joints in shortcut_road:[ % ]\n" o.name
+					format "Error > Missing joints [ % ] in shortcut_road:[ % ]\n" joints o.name
 					
 				) else (
 					
@@ -1194,8 +1207,25 @@ struct ROAD_GENERATOR_STRUCTURE	(
 		sp.road = obj.name
 	),
 	/**
+	*@Usage Revert Road back in to Shortcut when is STOLEN.
+	*/
+	fn convertRoadToShortcut road joint_start joint_end path_spline = (
+	
+		if isAnyUndefined #(road, joint_start, joint_end, path_spline) do return false 
+		road.name = uniqueName road.name--create unique name
+		path_spline.road = road.name --replace road name
+		roGenStruct.removeAllCustomAttributes obj --remove all attributes
+		local dialog = ::RoadGeneratorTool
+		setShortcutCA road dialog dialog.controlsArr --add shortcut attribute
+		--link spline and joints
+		linkConstraint road path_spline	
+		joint_start.parent = road
+		joint_end.parent = road
+	),
+	/**
 	*@Example
 		roGenStruct.fixBrokenShortcut sp:$Shape401
+		roGenStruct.fixBrokenShortcut obj:$
 	*/
 	fn fixBrokenShortcut obj:undefined dp1:undefined dp2:undefined sp:undefined = (
 
@@ -1223,15 +1253,16 @@ struct ROAD_GENERATOR_STRUCTURE	(
 			return false
 		)
 		--add attribute
-		-- removeCustomAttribute obj #RoadGenCa
 		roGenStruct.removeAllCustomAttributes obj
-		setShortcutCA obj sp dp1 dp2 dialog dialog.controlsArr
+		setShortcutCA obj dialog dialog.controlsArr
 		if classOf sp.controller == Link_Constraint do ( --remove all links
 			
 			sp.transform.controller = prs ()
 		)
-		--link spline
+		--link spline and joints
 		linkConstraint obj sp
+		dp1.parent = obj
+		dp2.parent = obj
 	),
 	/**
 	*@Usage > 
@@ -1864,7 +1895,7 @@ format "---Used Path_Deform_1 --------------------------------------------------
 			
 		) else if subobjectlevel == 4 then ( --face(s) is selected (build at place)
 		
-			finalPos = roGenStruct.getSelectedFacesCenter road --try to get selected faces position
+			finalPos = getSelectedFacesCenter road --try to get selected faces position
 			subobjectlevel = 0 
 			max select none
 			
@@ -1893,8 +1924,11 @@ format "---Used Path_Deform_1 --------------------------------------------------
 		moveTangetPoints dp1 dp2 max_tangent_dist --move tangent points far
 		--remove custom attribute
 		removeCustomAttribute road #RoadGenCa
-		setShortcutCA road sp dp1 dp2 dialog dialog.controlsArr
-		linkConstraint road sp
+		setShortcutCA road dialog dialog.controlsArr
+		--link spline and joints
+		linkConstraint road sp	
+		dp1.parent = road
+		dp2.parent = road
 		road.pos = finalPos
 		--Reenable all Road Tool callbacks at End
 		All_CALLBACKS_ENABLED = true

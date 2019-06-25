@@ -13,8 +13,8 @@
     <mc_Dialog_J active="true" pos="[1560,1240]" size="[532,42]" title="Experimental:" btnCount="[22,1]" />
   </Properties_1>
   <Properties_2>
-    <mcMicraDialog active="true" pos="[2830,210]" size="[148,66]" title="" />
-    <mcCustomizeDialog active="false" pos="[1720,370]" size="[600,404]" title="" />
+    <mcMicraDialog active="true" pos="[2190,220]" size="[148,66]" title="" />
+    <mcCustomizeDialog active="false" pos="[1720,370]" size="[224,404]" title="" />
     <mcProgramDialog active="undefined" pos="[2298,0]" size="[256,232]" title="" />
     <mcisoDialog active="false" pos="[181,152]" size="[140,400]" title="" />
     <mcModifierDialog active="undefined" pos="[100,100]" size="[400,400]" title="" />
@@ -216,5 +216,6 @@
     <btn_J18 action="LS3D_Model_Manager" icon="254" />
     <btn_J17 action="City_Manager" icon="241" />
     <btn_G21 action="Patcher" icon="109" />
+    <btn_B36 action="Distributor" icon="160" />
   </Buttons>
 </USER>

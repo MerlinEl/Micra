@@ -38,9 +38,9 @@ Global gShortcutCa = attributes ShortcutCa attribID:#(0x1635194a, 0x171142a1)(
 
 	parameters params( 
 		
-		roadSpline 		type:#node
-		startPoint		type:#node
-		endPoint		type:#node
+		-- roadSpline 		type:#node --not used maybe ?
+		-- startPoint		type:#node --not used maybe ?
+		-- endPoint		type:#node --not used maybe ?
 		controlsStr		type:#string
 	)
 )

@@ -127,7 +127,7 @@
     <Micra_Update val="0.05" />
     <Road_Generator_Tool val="1.11" />
     <Align_Objects_3D val="0.05" />
-    <Vertex_Snap val="0.02" />
+    <Vertex_Snap val="0.03" />
     <City_Manager val="1.05" />
     <Patcher val="0.03" />
   </Version>

@@ -1,8 +1,10 @@
 Global roadAnatomyToolDialog
 Global roadAnatomyToolSubDialogA
 Global roadAnatomyToolSubDialogB
+Global roadAnatomyToolSubDialogC
 Global roadAnatomyToolSubDialogA_Height = 354
 Global roadAnatomyToolSubDialogB_Height = 536
+Global roadAnatomyToolSubDialogC_Height = 536
 if classOf ::roadAnatomyToolDialog == RolloutClass do DestroyDialog ::roadAnatomyToolDialog
 rollout roadAnatomyToolSubDialogA "Road" 
 (
@@ -30,9 +32,11 @@ rollout roadAnatomyToolSubDialogA "Road"
 	pickbutton 'pbtn_p2' "pick" pos:[292,200] width:36 height:24 align:#left 
 	pickbutton 'pbtn_s1' "pick" pos:[292,96] width:36 height:24 align:#left 
  	GroupBox 'grp4' "Advanced:" pos:[4,248] width:328 height:80 align:#left
+	button 'btn_convert_to_shortcut' "Convert Road To Shortcut" pos:[12,268] width:140 height:24 toolTip:"Convert to Shortcut" align:#left
 -- 	button 'btn_revert_to_shortcut' "Rebuild Shortcut" pos:[12,268] width:100 height:24 toolTip:"Select Spline to Rebuild Shortcut" align:#left
 -- 	button 'btn_unique_name' "Unique Name" pos:[12,295] width:100 height:24 toolTip:"Set Object Unique Name" align:#left
 	--Road Controlls
+
 	on pbtn_d1 picked obj do (roadAnatomyToolDialog.addRoadComponent obj #d1)
 	on pbtn_d2 picked obj do (roadAnatomyToolDialog.addRoadComponent obj #d2)
 	on pbtn_p1 picked obj do (roadAnatomyToolDialog.addRoadComponent obj #p1)
@@ -45,6 +49,7 @@ rollout roadAnatomyToolSubDialogA "Road"
 	on btn_p2 pressed  do (roadAnatomyToolDialog.selRoadComponent #p2)
 	on btn_s1 pressed  do (roadAnatomyToolDialog.selRoadComponent #s1)
 	
+	on btn_convert_to_shortcut pressed do roGenStruct.convertRoadToShortcut selection[1] pbtn_d1.object  pbtn_d2.object  pbtn_s1.object 
 -- 	on btn_revert_to_shortcut pressed do (roGenStruct.rebuildBrokenShortcut selection[1])
 -- 	on btn_unique_name pressed do (roGenStruct.fixDuplicitNames ())
 )
@@ -109,6 +114,35 @@ rollout roadAnatomyToolSubDialogB "CrossRoad"
 	on btn_cr_reset pressed do (rroadAnatomyToolDialog.resetCrossRoad())
 	on btn_cr_fix pressed do (if roGenStruct != undefined do roGenStruct.fixBrokenCrossroad $)
 )
+ 
+rollout roadAnatomyToolSubDialogC "Shortcut" width:336 height:332
+(
+	GroupBox 'grp1' "" pos:[108,28] width:128 height:56 align:#left 
+	GroupBox 'grp2' "" pos:[92,56] width:168 height:2 align:#left 
+	GroupBox 'grp9' "Shortcut:" pos:[4,8] width:328 height:236 align:#left 
+	label 'lbl1' "D1" pos:[72,36] width:16 height:16 align:#left 
+	label 'lbl2' "D2" pos:[260,32] width:16 height:16 align:#left 
+	label 'lbl3' "P1" pos:[120,36] width:16 height:16 align:#left 
+	label 'lbl4' "P2" pos:[212,36] width:16 height:16 align:#left 
+	label 'lbl5' "S1" pos:[168,66] width:16 height:16 align:#left 
+	label 'lbl_d1' "" pos:[48,128] width:240 height:16 align:#left 
+	label 'lbl_d2' "" pos:[48,180] width:240 height:16 align:#left 
+	label 'lbl_p1' "" pos:[80,152] width:204 height:16 align:#left 
+	label 'lbl_p2' "" pos:[80,208] width:208 height:16 align:#left 
+	label 'lbl_s1' "" pos:[48,100] width:240 height:16 align:#left 
+	button 'btn_d1' "D1" pos:[8,124] width:36 height:24 toolTip:"Start Point" align:#left 
+	button 'btn_d2' "D2" pos:[8,176] width:36 height:24 toolTip:"End Point" align:#left 
+	button 'btn_p1' "P1" pos:[40,148] width:36 height:24 toolTip:"Tangent Start" align:#left 
+	button 'btn_p2' "P2" pos:[40,204] width:36 height:24 toolTip:"Tangent End" align:#left 
+	button 'btn_s1' "S1" pos:[8,92] width:36 height:24 toolTip:"Path Spline" align:#left 
+	pickbutton 'pbtn_d1' "pick" pos:[292,122] width:36 height:24 align:#left 
+	pickbutton 'pbtn_d2' "pick" pos:[292,174] width:36 height:24 align:#left 
+	pickbutton 'pbtn_p1' "pick" pos:[292,148] width:36 height:24 align:#left 
+	pickbutton 'pbtn_p2' "pick" pos:[292,200] width:36 height:24 align:#left 
+	pickbutton 'pbtn_s1' "pick" pos:[292,96] width:36 height:24 align:#left 
+	GroupBox 'grp4' "Advanced:" pos:[4,248] width:328 height:80 align:#left
+) 
+ 
  
 rollout roadAnatomyToolDialog "Road Anatomy:" width:352 height:(amax #(roadAnatomyToolSubDialogA_Height, roadAnatomyToolSubDialogB_Height))
 (
