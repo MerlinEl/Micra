@@ -707,7 +707,7 @@ struct ROAD_GENERATOR_STRUCTURE	(
 			
 		) else (
 		
-		 crossRoad.wirecolor = color 7 206 224
+			crossRoad.wirecolor = color 7 206 224
 		)
 	),
 	fn pickRoadPrefab roads dd_selection spec = (	

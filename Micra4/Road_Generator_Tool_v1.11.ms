@@ -90,7 +90,9 @@ C_LAYER_NAME = "---noexport---terrain_generator_modules"
 H_LAYER_NAME = "---noexport---terrain_generator_helpers"
 -- C_COMPONENTS_PATH = "E:\\Aprog\\Orien\Micra\\repo_sync\\_NEW\\Road Tool\\terrain_generator_components.max"
 -- C_COMPONENTS_PATH = LS3DGUP.LS3DGUP.UtilsPath+"terrain_generator_components.max"
-C_COMPONENTS_PATH = "D:\\!2K_Games\\scotch_dev\\resources\\graphics\\_data_\\3dsmax\\terrain_generator_components.max"
+-- C_COMPONENTS_PATH = "D:\\!2K_Games\\scotch_dev\\resources\\graphics\\_data_\\3dsmax\\terrain_generator_components.max"
+-- C_COMPONENTS_PATH = "D:\\ReneBaca\\3DsMax\\terrain_generator_components.max"
+C_COMPONENTS_PATH = "D:\\!2k_games\scotch_dev\\resources\\utilities\\3dsmax\\terrain_generator_components.max"
 
 C_SIDEWALK_LEFT = 1
 C_SIDEWALK_RIGHT = 2
@@ -1020,7 +1022,7 @@ fn DeleteWrongParkingLines coll:false=  -- stupid workaround :(
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 fn FinishCrossRoadSetups road dialog controlsArr finalPos roadType sw:undefined weldThreshold: 1.0 =
 (
-	roadParent = undefined
+	local oldWireColor = roadParent = undefined
 -- 	road = ConvertTo road Editable_poly
     if sw != undefined then road.EditablePoly.attach sw road
 	
@@ -1043,17 +1045,16 @@ fn FinishCrossRoadSetups road dialog controlsArr finalPos roadType sw:undefined 
 -- 	)
 	
 	if generated_road != undefined then (
+	
 		road.transform = generated_road.transform
-		
 		oldWireColor = generated_road.wirecolor
-		
 		if generated_road.parent != undefined then roadParent = generated_road.parent
-		
 		generated_road.kids = #()
 		FullDelete generated_road
 
     )else(
-		if finalPos != false then road.pos = finalPos
+	
+		if finalPos != undefined then road.pos = finalPos
 	)
 
     generated_road = road

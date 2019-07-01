@@ -41,7 +41,7 @@ rollout mcCityManDialog "City Manager v1.04" width:500 height:896
 	button 'btn_select_empty_objects' "Select Empty Objects" pos:[128,848] width:112 height:20 toolTip:"Select All Editable_Poly objects without geometry" align:#left
 	button 'btn_filter_visible_nodes' "Filter Visible Nodes" pos:[12,870] width:112 height:20 toolTip:"Filter visible nodes from selection" align:#left
 	button 'btn_generate_coll' "Gen Simple Collisions" pos:[376,870] width:112 height:20 toolTip:"Genarate collisions from selection, ID:1, " align:#left
-	button 'btn_unique_check' "Unique Names Check" pos:[126,870] width:112 height:20 toolTip:"Check Scene For Duple Names" align:#left
+	button 'btn_unique_check' "Unique Names Check" pos:[128,870] width:112 height:20 toolTip:"Check Scene For Duple Names" align:#left
 	button 'btn_unique_fix' "Unique Names Fix" pos:[250,870] width:112 height:20 toolTip:"Fix Duple Names In Scene" align:#left
 	button 'btn_inspect_nodes' "Inpect Nodes Paths" pos:[376,824] width:112 height:20 toolTip:"Select All Collision" align:#left
 	--Local variables

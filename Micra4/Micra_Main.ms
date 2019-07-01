@@ -310,7 +310,7 @@ struct MICRA_STRUCTURE (
 	
 		increaseMemory 30 -->Set Memory Allocation to 30MB
 		if loaded do unload()--> Unregister Micra's Callbacks and close all dialogs
-		loadStructures() --init system structures
+		loadStructures force:true --init system structures (always force or update may crash on unknown functions)
 		if not initUserProfile() do return false
 		installMacro() --add micra macro to 3DsMax 
 		fileIn MaxMacro --> Reload Macroscript , bug in 3DsMax 1012
