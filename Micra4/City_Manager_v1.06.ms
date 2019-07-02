@@ -466,7 +466,15 @@ rollout mcCityManDialog "City Manager v1.04" width:500 height:896
 		fillChildrenList node_names[1]	
 		updateSelection()
 	)
-	fn selectAllCollisions = (
+	fn isRoadCollision obj = (
+	
+		local crossForuCheck 		= matchPattern obj.name pattern:"coll_generator_crossroad_4*"
+		local crossThreeCheck		= matchPattern obj.name pattern:"coll_generator_crossroad_3*"
+		local roadCheck					= matchPattern obj.name pattern:"coll_generator_connect_road*"
+		local customRoadCheck	= matchPattern obj.name pattern:"coll_custom_road*"
+		if  crossForuCheck or crossThreeCheck or roadCheck or customRoadCheck then true else false
+	)
+	fn selectCollisionsByType = (
 		
 -- 		local visible_objects = for o in objects where not o.isHidden collect o
 -- 		local colls = for o in objects where findString o.name "coll_"	!= undefined collect o
@@ -480,9 +488,22 @@ rollout mcCityManDialog "City Manager v1.04" width:500 height:896
 		for o in objects do ( --filter collisions by type
 			
 			if findString o.name "coll_"	== undefined do continue
-			if not chk_sel_coll_terrain.checked and findString o.name "generator_" == undefined do continue
-			if not chk_sel_coll_roads.checked and findString o.name "generator_" != undefined do continue
-			append colls o
+			if chk_sel_coll_roads.checked and ( isRoadCollision o ) do  (
+				
+				append colls o
+				continue
+			)	
+			
+			if chk_sel_coll_terrain.checked and not ( isRoadCollision o ) do  (
+				
+				append colls o
+				continue
+			)	
+			
+-- 			if findString o.name "coll_"	== undefined do continue
+-- 			if not chk_sel_coll_terrain.checked and findString o.name "generator_" == undefined do continue
+-- 			if not chk_sel_coll_roads.checked and findString o.name "generator_" != undefined do continue
+-- 			append colls o
 		)
 		select colls
 	)
@@ -747,7 +768,7 @@ rollout mcCityManDialog "City Manager v1.04" width:500 height:896
 	on btn_select_visible_nodes pressed do ( select(for o in objects where not o.ishidden collect o) )
 	on btn_filter_visible_nodes pressed do ( select(for o in selection where not o.ishidden collect o) )
 	on btn_generate_coll pressed do generateSimpleCollisions()
-	on btn_sel_colls pressed do selectAllCollisions()
+	on btn_sel_colls pressed do selectCollisionsByType()
 	on btn_select_empty_objects pressed do selectObjectsWithoutGeometry()
 	on btn_inspect_nodes pressed do inspectNodesPath()
 	on btn_unique_check pressed do checkForDupplicatedNamesInScene()

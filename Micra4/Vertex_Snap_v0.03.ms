@@ -104,13 +104,16 @@ rollout mcVertexSnapDialog "Vertex Snap" width:320 height:232
 			(
 				local vertexPos = polyOp.getVert objToAlign v
 				local closestPosInRange = GetClosestPosition targetObj arrTargetObjBorderVerts vertexPos rangeValue
-				if closestPosInRange == undefined do 
-				(
+				if closestPosInRange == undefined then ( 
+				
 					failedVertices += #{v}
-					continue
+
+				) else (
+					
+					polyOp.setVert objToAlign v closestPosInRange
 				)
-				polyOp.setVert objToAlign v closestPosInRange
 			)
+			polyOP.setVertSelection objToAlign failedVertices
 		)
 	)
 	

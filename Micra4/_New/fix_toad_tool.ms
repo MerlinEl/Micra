@@ -1,8 +1,9 @@
-fileIn (micra.rootDir + "Road_Generator_Struct_v1.11.ms")
+fileIn (micra.rootDir + "Road_Generator_Struct_v1.12.ms")
 spline = selection[2]
 road_prefabric = selection[1]
 adaption = 4
 twsit_deg = 0
+rotation_deg = 0
 
 		-- get segment length
 		 segment_lengths = (getSegLengths spline 1 cum:false)
@@ -17,8 +18,7 @@ twsit_deg = 0
 		
 		-- create road assembled from number of parts to cover whole spline
 		global road_sum, road_length
-		roGenStruct.adjustRoadLength spline_length road_prefabric pt1 &road_sum &road_length
-		
+		roGenStruct.fitRoadLengtnToSpline spline_length road_prefabric pt1 &road_sum &road_length
 		-- cut road along spline
 		roGenStruct.cutRoadAlongSpline road_sum spline spline_length road_length adaption
 	
@@ -29,8 +29,7 @@ twsit_deg = 0
 		start_border_vertices = roGenStruct.getRoadEdge road_sum pt1 type:#start
 
 		--conform road to spline
-		roGenStruct.conformRoadToSpline road_sum spline twsit_deg
-		
+		roGenStruct.conformRoadToSpline road_sum spline twsit_deg rotation_deg
 		-------------------------------------
 		--  FIX START BORDER   --
 		-------------------------------------

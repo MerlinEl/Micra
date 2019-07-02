@@ -770,7 +770,7 @@ struct ROAD_GENERATOR_STRUCTURE	(
 			)
 		)
 		
-		if keyboard.controlPressed then(
+		if keyboard.controlPressed then( --append to current selection
 			sel = selection as Array
 			join roadsCollsToselect sel
 			select roadsCollsToselect
@@ -1562,6 +1562,36 @@ struct ROAD_GENERATOR_STRUCTURE	(
 		sp.wirecolor = color 7 206 224
 		sp
 	),
+	fn scaleUVMapping obj scale_uv scale_center:[0, 0, 0] uv_channel:1 = (
+
+		for v=1 to (polyop.getNumMapVerts obj uv_channel) do (
+
+			local pos = polyop.getMapVert obj uv_channel v
+			pos = (pos - scale_center)*[scale_uv[1], scale_uv[2], 1] + scale_center
+			polyop.setMapVert obj uv_channel v pos
+		)
+		update obj
+	),
+	fn fitRoadLengtnToSpline spline_length road_prefabric pt1_pos &road_sum &road_length = (
+	
+		--scale road to spline length
+		local road_count = ((spline_length/road_length) as integer)+2
+		road_sum = copy road_prefabric --clone prefab
+		scale road_sum [road_count, 1, 1]
+		resetXform road_sum
+		convertToPoly road_sum
+		scaleUVMapping road_sum [road_count, 1]
+		--move pivot to border center
+		local road_bb = getBoundingBox road_sum
+		road_length = getWidthBB road_bb
+		road_sum.pivot -= road_sum.transform.row1 * 0.5 * road_length --set pivot to border center
+		road_sum.position = pt1_pos
+	),
+	/*fn cleanSewings obj = (
+	
+	
+		--weldEditPoly road_sum 0.5
+	),*/
 	/**
 	*@Usage > Create road assembled from number of parts to cover whole spline
 	*/
