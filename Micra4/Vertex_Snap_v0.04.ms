@@ -87,22 +87,26 @@ rollout mcVertexSnapDialog "Vertex Snap" width:320 height:232
 	)
 
 
-	function AlignVerticesToObject targetObj arrTargetObjBorderVerts objToAlign rangeValue &failedVertices=
+	function AlignVerticesToObject targetObj arrTargetObjBorderVerts objToAlign rangeValue =
 	(
 		local isAllGood = true
 
-		select objToAlign
+-- 		select objToAlign
+-- 		format "AlignVerticesToObject > targetObj:%tobjToAlign:%\n\tarrTargetObjBorderVerts:%\n\trangeValue:%\n" targetObj.name objToAlign.name arrTargetObjBorderVerts  rangeValue
+		
 
-		local vSel = FilterBorderVerts objToAlign
+		local vSel = FilterBorderVerts objToAlign.baseObject --quick fix
+-- 		format "tarrSourceObjBorderVerts:%\n" vSel
 		if vSel == undefined then isAllGood = false
+		local failedVertices = #{}
 		
 		if(isAllGood)then
 		(
-			failedVertices = #{}
 			for v in vSel do
 			(
 				local vertexPos = polyOp.getVert objToAlign v
 				local closestPosInRange = GetClosestPosition targetObj arrTargetObjBorderVerts vertexPos rangeValue
+-- 				format "closest pos:%\n" closestPosInRange
 				if closestPosInRange == undefined then ( 
 				
 					failedVertices += #{v}
@@ -112,14 +116,14 @@ rollout mcVertexSnapDialog "Vertex Snap" width:320 height:232
 					polyOp.setVert objToAlign v closestPosInRange
 				)
 			)
--- 			format "Remains vertices to snap:%\n" failedVertices
+			format "Remains vertices to snap:%\n" failedVertices
 			polyOP.setVertSelection objToAlign failedVertices
 		)
 	)
 	function AlignObjectsVerticesToObject targetObj arrObjsToAlign rangeValue stepValue =
 	(	
 		DisableSceneRedraw()
-		local gco = modPanel.getCurrentObject()
+		local gco = modPanel.getCurrentObject() --store current modifier selection
 		if (classOf gco != Editable_Poly and classOf gco != Edit_Poly) do (
 					
 			MessageBox "Selected objects must be Editable_Poly or have Edit_Poly modifier." title:title_msg
@@ -129,23 +133,19 @@ rollout mcVertexSnapDialog "Vertex Snap" width:320 height:232
 		max create mode
 		undo "Snap vertices" on (
 			
-			targetObjVerts = FilterBorderVerts targetObj onlySelectedVerts:false		-- optimalization, we can select only from border verts -> quicker times hell yeah
+			local targetObjVerts = FilterBorderVerts targetObj onlySelectedVerts:false		-- optimalization, we can select only from border verts -> quicker times hell yeah
 			for obj in arrObjsToAlign do
 			(
-				local failedVerts = #{}
-				
 				if(stepValue == undefined)then
 				(
-					AlignVerticesToObject targetObj targetObjVerts obj rangeValue &failedVerts
+					AlignVerticesToObject targetObj targetObjVerts obj rangeValue
 				)
 			)
 		)
 		max modify mode
-		while modPanel.getCurrentObject() != gco do 
-		(			
-			max prev mod
-		)
-		subobjectlevel = 1
+		local max_try = 100
+		while modPanel.getCurrentObject() != gco and max_try > 0 do  ( max prev mod; max_try -=1 ) --restore modifier selection
+		subobjectlevel = 1 --restore vertex  subobject level
 		EnableSceneRedraw()
 	)
 
