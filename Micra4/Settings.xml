@@ -2,7 +2,7 @@
 <SETTINGS>
   <Micra>
     <born val="04.25.2006" />
-    <version val="4.78" />
+    <version val="4.79" />
   </Micra>
   <Structures val="All registred Micra's Structures">
     <!--independent classes-->
@@ -127,7 +127,7 @@
     <Micra_Update val="0.05" />
     <Road_Generator_Tool val="1.12" />
     <Align_Objects_3D val="0.05" />
-    <Vertex_Snap val="0.03" />
+    <Vertex_Snap val="0.04" />
     <City_Manager val="1.07" />
     <Patcher val="0.03" />
   </Version>

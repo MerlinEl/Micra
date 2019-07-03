@@ -2,7 +2,7 @@ Global mcCityManDialog
 if ::mcCityManDialog != undefined do try(destroyDialog mcCityManDialog)catch()
 rollout mcCityManDialog "City Manager v1.07" width:500 height:920
 (
-	local msg_title = "City Manager v1.07"
+	local title_msg = mcCityManDialog.title
 	--Interface components
 	GroupBox 'grp1' "..." pos:[4,20] width:492 height:588 align:#left
 	GroupBox 'grp2' "Wire Color:" pos:[4,688] width:88 height:72 align:#left
@@ -383,7 +383,7 @@ rollout mcCityManDialog "City Manager v1.07" width:500 height:920
 	)
 	fn generateTerrainCollisions = (
 	
-		messageBox "Preparing.... will be sun..." title:msg_title
+		messageBox "Preparing.... will be sun..." title:title_msg
 	)
 	fn generateRoadsCollisions = (
 	
