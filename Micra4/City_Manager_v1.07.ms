@@ -41,12 +41,17 @@ rollout mcCityManDialog "City Manager v1.07" width:500 height:920
 	button 'btn_inspect_nodes' "Inpect Nodes Paths" pos:[128,826] width:112 height:20 toolTip:"Select Collision" align:#left
 	checkbox 'chk_sel_coll_roads' "roads" pos:[316,784] width:52 height:16 checked:true align:#left
 	checkbox 'chk_sel_coll_terrain' "terrain" pos:[256,784] width:52 height:16 checked:true align:#left
-	button 'btn_hide_sel' "Hide Selected" pos:[12,888] width:112 height:20 toolTip:"Hide Selected Objects" align:#left
-	button 'btn_unhide_sel' "Unhide Selected" pos:[128,888] width:112 height:20 toolTip:"Unhide Selected Objects" align:#left
+	button 'btn_hide_sel' "Hide Selected" pos:[12,848] width:112 height:20 toolTip:"Hide Selected Objects" align:#left
+	button 'btn_unhide_sel' "Unhide Selected" pos:[128,848] width:112 height:20 toolTip:"Unhide Selected Objects" align:#left
 	GroupBox 'grp13' "Collisions:" pos:[252,764] width:244 height:152 align:#left
 	button 'btn_generate_coll' "Gen Simple Collisions" pos:[380,780] width:112 height:40 toolTip:"Genarate simple collisions from selection, ID:1, " align:#left
 	button 'btn_generate_terrain_coll' "Gen Terrain Collisions" pos:[380,824] width:112 height:40 toolTip:"Genarate terrain collisions from selection, ID:Auto, " align:#left
 	button 'btn_generate_roads_coll' "Gen Road Collisions" pos:[380,868] width:112 height:40 toolTip:"Genarate roads collisions from selection, ID:Auto, " align:#left
+	label 'lbl_sh' "Show - Hide objects which contains a Word:" pos:[12,872] width:220 height:14 align:#left
+	button 'btn_show_objs' "Show" pos:[13,892] width:56 height:17 toolTip:"Unhide Objects By Name" across:3 align:#left
+	button 'btn_hide_objs' "Hide" pos:[72,892] width:56 height:17 toolTip:"Hide Objects By Name" align:#left
+	editText 'edt_sh_name' "" pos:[132,892] width:104 height:16 align:#left text:"building"
+	
 	--Local variables
 	local autosel = on
 	local last_wire_color = yellow
@@ -577,6 +582,10 @@ rollout mcCityManDialog "City Manager v1.07" width:500 height:920
 		local is_hidden= sel[1].isHidden
 		for o in sel do o.isHidden = not is_hidden
 	)
+	fn showObjectsByNamePart obj_array name_part state = (
+		
+		for o in obj_array where findString o.name name_part != undefined do o.isHidden = not state
+	)
 	--load node children
 	on cbx_node_list selected sel do
 	(
@@ -803,6 +812,8 @@ rollout mcCityManDialog "City Manager v1.07" width:500 height:920
 	on btn_unhide_sel pressed do (for o in selection do o.isHidden = false)
 	on btn_generate_terrain_coll pressed do generateTerrainCollisions()
 	on btn_generate_roads_coll pressed do generateRoadsCollisions()
+	on btn_show_objs 	pressed do ( showObjectsByNamePart objects edt_sh_name.text true	)
+	on btn_hide_objs pressed do ( showObjectsByNamePart objects edt_sh_name.text false	)
 )
 createDialog mcCityManDialog
 
