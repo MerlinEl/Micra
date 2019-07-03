@@ -2076,13 +2076,6 @@ local finalRoad = if old then (
 				local endPoint = road.endPoint
 				local old_name = road.name
 				
---debug		
--- format "Generate Road from:%\n" old_name	
--- format "A DEBUG > Rebuild road before:............................................... [ % ]........................................................................\n" road.name
--- format "Dupplicates found:%\n" (isObjectWithDuplicateName road)
--- for o in objects where findString o.name "generator_connect_road" != undefined do print o.name
--- format "< ..................................................................................................................................\n"						
-				
 				delete road -- delete old road
 
 				--create new road
@@ -2090,17 +2083,15 @@ local finalRoad = if old then (
 				finalRoad.parent = export_node
 				layer.addNode finalRoad
 				layer.addNode spline
-				
---debug	
-local dupe = (isObjectWithDuplicateName finalRoad)	
-if dupe do messageBox ("Road with dupplicate Name was created.\nPlease fix road with name:"+finalRoad.name) title:"Alert:"	
--- format "B DEBUG > Rebuild road after:............................................. [ % ]........................................................................\n" finalRoad.name
--- format "Dupplicates found:%\n" dupe
--- for o in objects where findString o.name "generator_connect_road" != undefined do print o.name 
--- format "<  ..................................................................................................................................\n"
--- format "Generated Road name:%\n" finalRoad.name
 			)
 		)
+		
+		-->debug	
+		local dupe = (isObjectWithDuplicateName finalRoad)	
+		if dupe do messageBox ("Road with dupplicate Name was created.\nPlease fix road with name:"+finalRoad.name) title:"Alert:"	
+		format "Generated Road:%\n" finalRoad.name
+		-->debug	
+		
 		select finalRoad
 		All_CALLBACKS_ENABLED = true
 	)

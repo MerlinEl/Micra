@@ -256,12 +256,18 @@ try ( mcMicraDialog.close() ) catch()
 		mcs.lblT.text = (" " + mcs.dateTime.now.ToString "ddd. dd MMMM  HH:mm")
 		mcs.ToolTip.SetToolTip mcs.lblT (mcs.dateTime.now.ToString "dddd, dd MMMM yyyy HH:mm")
 	)
-	fn showHideForm s a = 
-	(
+	fn showHideForm s a = (
+	
 		local dia = execute s.tag
-		if classOf dia == dotNetObject and not dia.isDisposed 
-		then ( if dia.visible then dia.hide() else dia.show() )
-		else (mcCreateNetDynamicDialog s.tag)
+		if classOf dia == dotNetObject and not dia.isDisposed then ( 
+		
+			if dia.visible then dia.hide() else dia.show() 
+			mcFile.saveDialogSettings dia.name "Properties_1"
+			
+		) else (
+		
+			mcCreateNetDynamicDialog s.tag
+		)	
 	)
 	fn quitMicra s a = ( Micra.unload() ) --> Shut Down Micra
 	fn reloadMicra s a =( Micra.reload() ) --> Restart Micra

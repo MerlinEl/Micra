@@ -464,7 +464,12 @@ if debug == 5 do format "name:%\t tag:%\n" s.name s.tag
 	)
 	fn changeBackcolor s a = (s.backColor = netDrColor (mcUIColors.get #fore))
 --|	--Menu
-	fn hideForm s a = ((s.GetCurrentParent()).tag.hide())
+	fn hideForm s a = (
+	
+		local form = (s.GetCurrentParent()).tag
+		form.hide()
+		mcFile.saveDialogSettings form.name "Properties_1"	
+	)
 	fn editForm s a form: =
 	(
 		if form == unsupplied do form  =  (s.GetCurrentParent()).tag

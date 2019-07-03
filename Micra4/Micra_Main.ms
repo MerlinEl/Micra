@@ -176,15 +176,26 @@ struct MICRA_STRUCTURE (
 	--> Copy Micra's macro to 3DsMax dir
 	fn installMacro = (
 		
-		if doesFileExist MaxMacro and mcFile.isFileOlder MaxMacro MicraMacro do deleteFile MaxMacro 
-		if not doesFileExist MaxMacro then ( --copy macro to max user folder
-	
-			local success = copyFile MicraMacro MaxMacro
-			format "% > installMacro > with result:%\n" version success 
-		) else (
+		local need_install	= not doesFileExist MaxMacro
+		local need_update 	= doesFileExist MaxMacro and mcFile.isFileOlder MaxMacro MicraMacro 
+		local result			= "Unchanged"
+		if need_install then ( 		--copy macro to max user folder
 		
-			format "Unable to override old Macro version.\n\tsource:%\t\n\ttarget:%\n" MicraMacro MaxMacro
+			result = copyFile MicraMacro MaxMacro
+		
+		) else if need_update do (	--override macro in max user folder
+		
+			deleteFile MaxMacro
+			if not doesFileExist MaxMacro then (
+			
+				result = copyFile MicraMacro MaxMacro
+				
+			) else (
+		
+				format "Unable to override old Macro version.\n\tsource:%\t\n\ttarget:%\n" MicraMacro MaxMacro
+			)
 		)
+		format "% > installMacro > with result:%\n" version result 
 	),
 	fn isInstaled = (
 	
