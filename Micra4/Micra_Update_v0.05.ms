@@ -27,7 +27,7 @@
 struct MICRA_UPDATER_STRUCTURE	(
 	
 	--variables
-	debug = true,
+	debug = false,
 	chossen_version = "undefined",
 	user_dir   = (pathConfig.removePathLeaf Micra.UserDir) + "\\",
 	server_dir = "https://github.com/MerlinEl/Micra/raw/master/Micra4_Release/",
@@ -142,7 +142,7 @@ struct MICRA_UPDATER_STRUCTURE	(
 				--get server micra version
 				local xml = mcXML()				
 				local xml_str = mcNet.readFile server_xml
-				format "getMicraVersion > xml_str:%\n" xml_str
+				if debug do format "getMicraVersion > xml_str:%\n" xml_str
 				if xml_str == undefined do (
 
 					format "mcUpdater > getMicraVersion > Unable to Read:[ % ]\n" server_xml

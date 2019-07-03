@@ -2919,12 +2919,7 @@ rollout dlgPickObjectType "Menu"
 	on bt_adjustTangentsLength pressed do (roGenStruct.adjustTangentsLength())
 	on bt_copyUniqueShortcut pressed do (roGenStruct.copyUniqueShortcut $ hidden_tn:false)
 	-------------------------------------------------	COLLS -------------------------------------------------------------------------
-	on bt_createColl pressed do (
-	
-		roGenStruct.All_CALLBACKS_ENABLED = false
-		runLocalScript "Road_Generator_Collisions"
-		roGenStruct.All_CALLBACKS_ENABLED = true
-	)
+	on bt_createColl pressed do (runLocalScript "Road_Generator_Collisions")
 )
 -- createDialog dlgPickObjectType
 

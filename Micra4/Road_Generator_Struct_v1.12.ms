@@ -25,6 +25,19 @@ struct ROAD_GENERATOR_STRUCTURE	(
 	H_LAYER_NAME = "---noexport---terrain_generator_helpers",
 	--functions
 	fn getSource = getSourceFileName(), --get path of this script
+	fn runLocalScript script_name = (
+
+		local local_dir = getFilenamePath getSource
+		local script_file = local_dir+script_name+".ms"
+		if doesFileExist script_file then (
+		
+			fileIn script_file
+			
+		) else (
+		
+			messageBox ("Script ["+script_file+"] Not Found.") title:"Road Generator:"
+		)
+	),
 	-------------------------------------------------------------
 	-------------------------------------------------------------
 	------              		GET    	                   ------

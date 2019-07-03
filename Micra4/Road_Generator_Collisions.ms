@@ -2,6 +2,8 @@ Global roadGeneratorCollisionDialog
 if roadGeneratorCollisionDialog != undefined do DestroyDialog roadGeneratorCollisionDialog
 rollout roadGeneratorCollisionDialog "Road Collision Generator:" width:544 height:88
 (
+	local msg_title = "Road Collision Generator:"
+	local generator_struct = "Road_Generator_Struct_v1.12"
 	groupBox 'grp1' "Set-Up:" pos:[4,8] width:400 height:72 align:#left
 	label 'lbl2' "Collision Layer:" pos:[16,36] width:76 height:16 align:#left
 	editText 'edt_coll_layer' "" pos:[96,32] width:292 height:20 align:#left
@@ -43,6 +45,20 @@ lh_02_little_italy_block_h_roads_coll
 			27:	2 	--universal concrete 1
 			28:	2 	--universal concrete tiled 1
 			default: 1
+		)
+	)
+	fn runLocalScript script_name = (
+
+		local fpath = getSourceFileName()
+		local local_dir = getFilenamePath fpath
+		local script_file = local_dir+script_name+".ms"
+		if doesFileExist script_file then (
+		
+			fileIn script_file
+			
+		) else (
+		
+			messageBox ("Script ["+script_file+"] Not Found.") title:"Road Generator:"
 		)
 	)
 	fn offsetMaterialsIDs obj offset:1000 = ( --incerase all materials id by 1000
@@ -272,6 +288,8 @@ lh_02_little_italy_block_h_roads_coll
 	)
 	fn createRoadsCollisions = (
 		
+		roGenStruct.All_CALLBACKS_ENABLED = false
+		
 		local s_mat = meditmaterials["semantic_materials"]
 		escapeEnable = true 						--Progress Bar
 		progressStart "Grenerating Road Collisions...."	--Progress Bar
@@ -316,10 +334,18 @@ lh_02_little_italy_block_h_roads_coll
 		)
 		progressEnd()								--Progress Bar 
 		max select none
+		
+		roGenStruct.All_CALLBACKS_ENABLED = true
 		completeRedraw()
 	)
 	fn init = (
 		
+		if superClassOf roGenStruct != StructDef do runLocalScript generator_struct
+		if superClassOf roGenStruct != StructDef do (
+		
+			messageBox "Collisions can't be created\n.Unable to find Road Structures." title:msg_title
+			destroyDialog roadGeneratorCollisionDialog
+		)
 		edt_coll_layer.text = default_layer_name
 		edt_coll_node.text = default_node_name
 	)
