@@ -4,6 +4,7 @@ rollout mcVertexSnapDialog "" width:320 height:232
 (
 	local form_title = "Vertex Snap"
     local metric_type = units.SystemType as String
+	local offset_list = #("1", "2", "3", "4", "5", "10", "15", "20", "25", "30", "40", "50", "70", "99")
 	pickbutton 'btn_pick_trgt' "None" pos:[96,92] width:208 height:20 align:#left
 	label 'lbl5' "Target Object:" pos:[16,96] width:76 height:16 align:#left
 	label 'lbl6' "Range:" pos:[16,120] width:76 height:16 align:#left
@@ -13,7 +14,7 @@ rollout mcVertexSnapDialog "" width:320 height:232
 	button 'btn_get_pos' "Get Position" pos:[16,24] width:136 height:24 align:#left
 	button 'btn_set_pos' "Srangeet Position" pos:[160,24] width:148 height:24 align:#left
 	GroupBox 'grp3' "Multiple:" pos:[8,72] width:308 height:156 align:#left
-	radiobuttons 'rdo_offset' "" pos:[64,148] width:245 height:32 labels:#("1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14") columns:7 align:#left
+	radiobuttons 'rdo_offset' "" pos:[64,148] width:245 height:32 labels:offset_list columns:7 align:#left
 	label 'lbl4' "quick:" pos:[16,148] width:40 height:16 align:#left
 	button 'btnSnapMore' "Snap Objects" pos:[12,184] width:296 height:36 align:#left
     local target_object
@@ -258,7 +259,7 @@ rollout mcVertexSnapDialog "" width:320 height:232
 	            undo "Snap vertex" on polyop.setVert obj vert vert_pos
 	        )
 	    )
-	on rdo_offset changed index do (spn_offset.value = index)
+	on rdo_offset changed index do (spn_offset.value = execute offset_list[index])
 	on mcVertexSnapDialog open do ( init() )
 )
 

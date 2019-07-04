@@ -52,7 +52,11 @@ rollout mcPatcher2PDialog "" width:348 height:168
 -- 			meshOp.unifyNormals obj #all	
 -- 			convertTopoly obj
 		),
-		fn getClosestVertex obj verts pos offset = (
+		fn getVertsPositions obj verts = (
+			
+			for v in verts collect polyOp.getVert obj v
+		),
+		fn getClosestVertex obj verts pos maxRange:undefined = (
 	
 			local closest_vert  = (verts as array)[1]
 			local smalest_dist = distance pos (polyOp.getVert obj closest_vert) --get first vertex distance
@@ -60,7 +64,7 @@ rollout mcPatcher2PDialog "" width:348 height:168
 				
 				local trgt_pos = polyOp.getVert obj v
 				local verts_dist = distance pos trgt_pos
-				if offset > -1 do if verts_dist > offset do continue
+				if maxRange != undefined and maxRange < verts_dist do continue
 				if smalest_dist > verts_dist do (
 					
 					smalest_dist = verts_dist
@@ -69,38 +73,7 @@ rollout mcPatcher2PDialog "" width:348 height:168
 			)
 			closest_vert
 		),
-		fn triangulate obj top_positions = (
-			
-			if top_positions.count != 0 then (
-				
-				local border_edges = polyOp.getOpenEdges obj --get all open edges
-				local source_verts = polyop.getVertsUsingEdge obj border_edges
-				local target_verts = #{}
-				for pos in top_positions do (
-				
-					local vert_index = getClosestVertex obj source_verts pos 4
-					if vert_index == undefined do continue
-					target_verts += #{vert_index}
-				)
-				if target_verts.numberset == 0 do return false
-				source_verts -= target_verts --remove top verts from loop
--- 				format "triangulate obj:%\n\tsource_verts:%\n\ttarget_verts:%\n" obj.name source_verts target_verts
-				for v in source_verts do (
-			
-					local vpos = polyOp.getVert obj v
-					local vert_index = getClosestVertex obj target_verts vpos -1
--- 					format "\t\tconnecting vertA:% vetrB:%\n" vert_index v
-					if vert_index == undefined do continue
-					polyop.setVertSelection obj #{vert_index, v}
-					obj.ConnectVertices()
-				)
-			) else (
-				
-				convertTo obj Editable_Patch
-				convertTopoly obj
-			)
-		),
-		fn getClosestEdgeTo obj edges vert_a vert_b = (
+		fn getClosestEdge obj edges vert_a vert_b = (
 	
 			local edges_arr = edges as array
 			local everts_a = polyop.getVertsUsingEdge obj edges_arr[1]
@@ -118,6 +91,37 @@ rollout mcPatcher2PDialog "" width:348 height:168
 			) else (
 				
 				#(edges_arr[2], evert_b)
+			)
+		),
+		fn triangulate obj top_positions = (
+			
+			if top_positions.count != 0 then (
+				
+				local border_edges = polyOp.getOpenEdges obj --get all open edges
+				local source_verts = polyop.getVertsUsingEdge obj border_edges
+				local target_verts = #{}
+				for pos in top_positions do (
+				
+					local vert_index = getClosestVertex obj source_verts pos maxRange:4
+					if vert_index == undefined do continue
+					target_verts += #{vert_index}
+				)
+				if target_verts.numberset == 0 do return false
+				source_verts -= target_verts --remove top verts from loop
+-- 				format "triangulate obj:%\n\tsource_verts:%\n\ttarget_verts:%\n" obj.name source_verts target_verts
+				for v in source_verts do (
+			
+					local vpos = polyOp.getVert obj v
+					local vert_index = getClosestVertex obj target_verts vpos
+-- 					format "\t\tconnecting vertA:% vetrB:%\n" vert_index v
+					if vert_index == undefined do continue
+					polyop.setVertSelection obj #{vert_index, v}
+					obj.ConnectVertices()
+				)
+			) else (
+				
+				convertTo obj Editable_Patch
+				convertTopoly obj
 			)
 		),
 		fn isLastEdge obj ei vi = (
@@ -139,7 +143,7 @@ rollout mcPatcher2PDialog "" width:348 height:168
 				local vertex_edges = polyOp.getEdgesUsingVert obj next_vert
 				local two_edges = border_edges * vertex_edges
 -- 				format "vertex_edges:% two_edges:%\n" vertex_edges two_edges
-				local next_edge_and_vert = getClosestEdgeTo obj two_edges next_vert vert_b
+				local next_edge_and_vert = getClosestEdge obj two_edges next_vert vert_b
 -- 				format "next_edge_and_vert:%\n" next_edge_and_vert
 				next_edge	= next_edge_and_vert[1]
 				next_vert		= next_edge_and_vert[2]
@@ -169,7 +173,7 @@ rollout mcPatcher2PDialog "" width:348 height:168
 -- 			modPanel.setCurrentObject obj_base.baseObject
 			polyOp.attach obj_base obj_new
 		),
-		fn weldVertices obj offset:0.001 = (
+		fn weldVertices obj offset:0.01 = (
 			
 -- 			format "weldVertices obj:% offset:%\n" obj offset
 -- 			modPanel.setCurrentObject obj_base.baseObject
@@ -237,8 +241,8 @@ rollout mcPatcher2PDialog "" width:348 height:168
 		local target_border_verts = polyop.getVertsUsingEdge target_mesh target_border_edges --get border vertices
 		local pos_a = polyop.getVert source_mesh source_vert_a
 		local pos_b = polyop.getVert source_mesh source_vert_b
-		local target_vert_a = em.getClosestVertex target_mesh target_border_verts pos_a 10
-		local target_vert_b = em.getClosestVertex target_mesh target_border_verts pos_b 10
+		local target_vert_a = em.getClosestVertex target_mesh target_border_verts pos_a maxRange:10
+		local target_vert_b = em.getClosestVertex target_mesh target_border_verts pos_b maxRange:10
 if target_vert_a == undefined or target_vert_b == undefined do ( --when one of two target vertices not found (too far)
 	
 		em.cleanSnapshots #(source_mesh, target_mesh)
@@ -260,7 +264,12 @@ if target_vert_a == undefined or target_vert_b == undefined do ( --when one of t
 			
 			local new_surface = em.createSurfaceFromPoints border_positions 
 			em.unifyNormals new_surface
-			if chk_triangulate.checked do em.triangulate new_surface tirangulate_top_positions
+			if chk_triangulate.checked do (
+				
+				local mid_verts = ((source_vertex_loop as bitarray) - #{source_vert_a}) - #{source_vert_b}
+				local tirangulate_top_positions = em.getVertsPositions source_obj mid_verts
+				em.triangulate new_surface tirangulate_top_positions
+			)
 			if chk_attach.checked do em.attachObject source_obj new_surface
 			if chk_weld.checked   do em.weldVertices source_obj
 		)
