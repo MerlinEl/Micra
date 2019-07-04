@@ -1,8 +1,8 @@
 Global roadGeneratorCollisionDialog
 if roadGeneratorCollisionDialog != undefined do DestroyDialog roadGeneratorCollisionDialog
-rollout roadGeneratorCollisionDialog "Road Collision Generator:" width:544 height:88
+rollout roadGeneratorCollisionDialog "" width:544 height:88
 (
-	local title_msg = roadGeneratorCollisionDialog.title
+	local form_title = "Road Collision Generator:"
 	local generator_struct = "Road_Generator_Struct_v1.12"
 	groupBox 'grp1' "Set-Up:" pos:[4,8] width:400 height:72 align:#left
 	label 'lbl2' "Collision Layer:" pos:[16,36] width:76 height:16 align:#left
@@ -340,10 +340,11 @@ lh_02_little_italy_block_h_roads_coll
 	)
 	fn init = (
 		
+		roadGeneratorCollisionDialog.title = form_title
 		if superClassOf roGenStruct != StructDef do runLocalScript generator_struct
 		if superClassOf roGenStruct != StructDef do (
 		
-			messageBox "Collisions can't be created\n.Unable to find Road Structures." title:title_msg
+			messageBox "Collisions can't be created\n.Unable to find Road Structures." title:form_title
 			destroyDialog roadGeneratorCollisionDialog
 		)
 		edt_coll_layer.text = default_layer_name

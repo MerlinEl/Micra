@@ -111,6 +111,7 @@
     <Vertex_Color icon="258" cmd="mcFile.fileInVersion Vertex_Color" tooltip="Vertex Color" />
     <Delete_Empty_Layers icon="269" cmd="mcInterface.deleteEmptyLayers()" tooltip="Delete Empty Layers" />
     <Patcher icon="109" cmd="mcFile.fileInVersion Patcher" tooltip="Patcher" />
+    <Patcher2P icon="271" cmd="mcFile.fileInVersion Patcher2P" tooltip="Patcher2P" />
   </Modify>
   <Creation>
     <Create_3PGrid icon="81" cmd="mcCreate.grid3p()" tooltip="Create_3PGrid" />

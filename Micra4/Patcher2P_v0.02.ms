@@ -1,29 +1,64 @@
 Global mcPatcher2PDialog --not used yet
 if ::mcPatcher2PDialog != undefined do try(destroyDialog mcPatcher2PDialog)catch()
-rollout mcPatcher2PDialog "Patcher 2P:" width:432 height:68
+rollout mcPatcher2PDialog "" width:348 height:168
 (
--- 	local title_msg = mcPatcher2PDialog.title
+	local form_title = "Patcher 2P:"
+	local metric_type = units.SystemType as String
 	local target_obj = undefined
+	local target_vert_pos = undefined
+	pickbutton 'btn_trgt_obj' "Pick..." pos:[84,22] width:52 height:20 align:#left
+	GroupBox 'grp16' "Setup:" pos:[4,4] width:340 height:156 align:#left
+	label 'lbl5' "Target Object:" pos:[8,26] width:76 height:16 align:#left
+	label 'lbl_trgt_obj' "..." pos:[140,23] width:196 height:16 align:#left
+	button 'btn_stitch' "STITCH" pos:[8,116] width:328 height:36 align:#left
+	label 'lbl3' "Jionts Offset:" pos:[8,52] width:76 height:16 align:#left
+	label 'lbl_units' "units..." pos:[156,51] width:180 height:16 align:#left
+	spinner 'spn_offset' "" pos:[84,50] width:68 height:16 range:[0,100,1] type:#float scale:0.1 align:#left
+	checkbox 'chk_attach' "Attach" pos:[8,72] width:64 height:16 checked:true align:#left
+	checkbox 'chk_weld' "Weld" pos:[88,72] width:72 height:16 checked:true align:#left
+	checkbox 'chk_triangulate' "Triangulate to Vertex:" pos:[8,96] width:132 height:16 checked:true align:#left
+	pickbutton 'btn_trgt_vert' "Pick..." pos:[144,92] width:52 height:20 align:#left
+	label 'lbl_vert' "..." pos:[200,95] width:136 height:16 align:#left
 	struct EDIT_MODEL (
 		
-		fn isValidObject obj = (classOf obj.baseObject == Editable_Poly or classOf obj.baseObject == Editable_Mesh),
-		fn snapshotAasPoly obj = (
+		fn isValidObject obj = (
+
+			obj != undefined and classOf obj.baseObject == Editable_Poly -- or classOf obj.baseObject == Editable_Mesh
+		),
+		fn isValidSelection obj = (
+			
+			(polyop.getVertSelection obj).numberset == 2
+		),
+		fn snapshotAsPoly obj obj_name = (
 			
 			local theTMesh = snapshotAsMesh obj --snapshot as TriMesh to memory
 			local theNewMesh = Editable_mesh() --create an empty EMesh
 			theNewMesh.mesh = theTMesh --assign TriMesh value to the EMesh
 			convertTo theNewMesh Editable_Poly --collapse to EPoly
 			delete theTMesh --free up memory
+			theNewMesh.name = obj_name
 			theNewMesh
+		),
+		fn unifyNormals obj = (
+			
+			if obj.numFaces == 0 do return false
+			local first_polygon_normal = polyOp.getFaceNormal obj 1
+			if first_polygon_normal.z < 0 do (
+				
+				addModifier obj (Normalmodifier flip:true)
+				collapseStack obj
+			)
+-- 			converttoMesh obj
+-- 			meshOp.unifyNormals obj #all	
+-- 			convertTopoly obj
 		),
 		fn getClosestVertex obj verts pos offset = (
 	
 			local closest_vert
-			local smalest_dist = 9999999
+			local smalest_dist = distance pos (polyOp.getVert obj (verts as array)[1]) --get first vertex distance
 			for v in verts do  (
 				
 				local trgt_pos = polyOp.getVert obj v
-				
 				local verts_dist = distance pos trgt_pos
 				if verts_dist > offset do continue
 				if smalest_dist > verts_dist do (
@@ -33,6 +68,28 @@ rollout mcPatcher2PDialog "Patcher 2P:" width:432 height:68
 				)
 			)
 			closest_vert
+		),
+		fn triangulate obj vert_pos = (
+			
+			if vert_pos != undefined then (
+				
+				local border_edges = polyOp.getOpenEdges obj --get all open edges
+				local verts = polyop.getVertsUsingEdge obj border_edges
+				local vert_index = getClosestVertex obj verts vert_pos 4
+-- 				format "triangulate > \n\tborder_edges:%\n\tverts:%\n\tvert_index:%\n" border_edges verts vert_index
+				if vert_index == undefined do return false
+				for v in verts do (
+			
+					if v == vert_index do continue --skip self
+					polyop.setVertSelection obj #{vert_index, v}
+-- 					obj.buttonOp #ConnectVertices
+					obj.ConnectVertices()
+				)
+			) else (
+				
+				convertTo obj Editable_Patch
+				convertTopoly obj
+			)
 		),
 		fn getClosestEdgeTo obj edges vert_a vert_b = (
 	
@@ -95,19 +152,41 @@ rollout mcPatcher2PDialog "Patcher 2P:" width:432 height:68
 			base_mesh.pivot = (base_mesh.min + base_mesh.max) / 2
 			base_mesh.wirecolor = blue
 			subobjectLevel = 0
-			select base_mesh
+			base_mesh
+		),
+		fn attachObject obj_base obj_new = (
+		
+-- 			format "attachObject base:% new:%\n" obj_base obj_new
+-- 			modPanel.setCurrentObject obj_base.baseObject
+			polyOp.attach obj_base obj_new
+		),
+		fn weldVertices obj offset:0.001 = (
+			
+-- 			format "weldVertices obj:% offset:%\n" obj offset
+-- 			modPanel.setCurrentObject obj_base.baseObject
+			local all_vert_list = #{1..(polyop.getNumVerts obj)}
+			obj.weldThreshold = offset
+			polyop.weldVertsByThreshold obj all_vert_list --weld all vertices
+		),
+		fn cleanSnapshots objs = (
+			
+			with undo off ( delete objs )	
 		)
 	)
 	local em = EDIT_MODEL()
-	pickButton 'btn_trgt_obj' "Pick..." pos:[84,28] width:52 height:20 align:#left
-	groupBox 'grp16' "Setup:" pos:[4,4] width:424 height:60 align:#left
-	label 'lbl5' "Target Object:" pos:[8,32] width:76 height:16 align:#left
-	label 'lbl_trgt_obj' "..." pos:[140,29] width:196 height:16 align:#left
-	button 'btn_stitch' "STITCH" pos:[340,20] width:80 height:36 align:#left
 	fn getTargetObject obj = (
-	
+		
 		target_obj = obj
 		lbl_trgt_obj.text = obj.name	
+	)
+	fn getTargetVertex obj = (
+			
+		local sel_vert = (polyOp.getVertSelection obj as Array)[1]
+		if sel_vert != undefined do (
+			
+			target_vert_pos = polyOp.getVert obj sel_vert
+			lbl_vert.text = sel_vert as String
+		)
 	)
 	fn stitchSurfaces = (
 		
@@ -115,10 +194,17 @@ rollout mcPatcher2PDialog "Patcher 2P:" width:432 height:68
 		local source_obj = selection[1]	
 		if not em.isValidObject source_obj do return false
 		if not em.isValidObject target_obj do return false
+		if not em.isValidSelection source_obj do return false 
 		--make snapshot for calculations (speed up with collapsed modifiers)
-		local source_mesh	= em.snapshotAasPoly source_obj
-		local target_mesh		= em.snapshotAasPoly target_obj
-		hide #(source_mesh, target_mesh)
+		local source_mesh, target_mesh
+		with undo off (
+			
+			source_mesh	= em.snapshotAsPoly source_obj (uniqueName "Patcher_2P_Temp_Mesh")
+			target_mesh	= em.snapshotAsPoly target_obj (uniqueName "Patcher_2P_Temp_Mesh")
+			source_mesh.wirecolor = target_mesh.wirecolor = orange
+			modPanel.setCurrentObject source_obj.baseObject --return back to base object
+		)
+-- 		hide #(source_mesh, target_mesh)
 -- 		select #(source_mesh, targe_mesh)
 		
 		--get two vertex selection from source
@@ -126,7 +212,12 @@ rollout mcPatcher2PDialog "Patcher 2P:" width:432 height:68
 		if source_vsel.numberset != 2 do return false
 		local source_vert_a = (source_vsel as array)[1]
 		local source_vert_b = (source_vsel as array)[2]
-		
+-- if source_vert_a == undefined or source_vert_b == undefined do ( 
+-- 	
+-- 		em.cleanSnapshots #(source_mesh, target_mesh)
+-- 		format "Operation was aborted. Unable get all data >\n\tsource_vert_a:%\n\tsource_vert_b:%\n" source_vert_a source_vert_b
+-- 		return false
+-- )
 -- 		format "verts a:% b:%\n" source_vert_a source_vert_b
 		--get source border lop from vert A to vert B
 		local source_vertex_loop = em.getLoopBetweenTwoVertices source_mesh source_vert_a source_vert_b
@@ -140,6 +231,12 @@ rollout mcPatcher2PDialog "Patcher 2P:" width:432 height:68
 		local pos_b = polyop.getVert source_mesh source_vert_b
 		local target_vert_a = em.getClosestVertex target_mesh target_border_verts pos_a 10
 		local target_vert_b = em.getClosestVertex target_mesh target_border_verts pos_b 10
+if target_vert_a == undefined or target_vert_b == undefined do ( --when one of two target vertices not found (too far)
+	
+		em.cleanSnapshots #(source_mesh, target_mesh)
+		format "Operation was aborted. Unable get target joints. Is too far >\n\target_vert_a:%\n\ttarget_vert_b:%\n" target_vert_a target_vert_b
+		return false
+)
 		--get target border lop from vert A to vert B
 		local target_vertex_loop = em.getLoopBetweenTwoVertices target_mesh target_vert_b target_vert_a
 -- 		polyop.setEdgeSelection target_mesh target_border_loop
@@ -150,10 +247,24 @@ rollout mcPatcher2PDialog "Patcher 2P:" width:432 height:68
 		for v in target_vertex_loop do append border_positions (polyop.getVert target_mesh v)
 -- 		for i=1 to border_positions.count do te = text size:10 text:(i as String) pos:(border_positions[i])
 		
-		delete #(source_mesh, target_mesh)
-		em.createSurfaceFromPoints border_positions
+		em.cleanSnapshots #(source_mesh, target_mesh)
+		undo "Create Patch 2P" on ( 
+			
+			local new_surface = em.createSurfaceFromPoints border_positions 
+			em.unifyNormals new_surface
+			if chk_triangulate.checked do em.triangulate new_surface target_vert_pos
+			if chk_attach.checked do em.attachObject source_obj new_surface
+			if chk_weld.checked   do em.weldVertices source_obj
+		)
+	)
+	fn init = (
+		
+		lbl_units.text = metric_type
+		mcPatcher2PDialog.title = form_title
 	)
 	on btn_trgt_obj picked obj do getTargetObject obj
+	on btn_trgt_vert picked obj do getTargetVertex obj
 	on btn_stitch pressed  do stitchSurfaces()
+	on  mcPatcher2PDialog open do (init())
 )
 createDialog mcPatcher2PDialog

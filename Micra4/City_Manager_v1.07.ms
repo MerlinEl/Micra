@@ -1,8 +1,9 @@
 Global mcCityManDialog
 if ::mcCityManDialog != undefined do try(destroyDialog mcCityManDialog)catch()
-rollout mcCityManDialog "City Manager v1.07" width:500 height:920
+rollout mcCityManDialog "" width:500 height:920
 (
-	local title_msg = mcCityManDialog.title
+	
+	local form_title = "City Manager v1.07"
 	--Interface components
 	GroupBox 'grp1' "..." pos:[4,20] width:492 height:588 align:#left
 	GroupBox 'grp2' "Wire Color:" pos:[4,688] width:88 height:72 align:#left
@@ -383,7 +384,7 @@ rollout mcCityManDialog "City Manager v1.07" width:500 height:920
 	)
 	fn generateTerrainCollisions = (
 	
-		messageBox "Preparing.... will be sun..." title:title_msg
+		messageBox "Preparing.... will be sun..." title:form_title
 	)
 	fn generateRoadsCollisions = (
 	
@@ -776,6 +777,7 @@ rollout mcCityManDialog "City Manager v1.07" width:500 height:920
 	)
 	on mcCityManDialog open do
 	(
+		mcCityManDialog.title = form_title
 		--fill first list with nodes
 		initializeInterface()
 		--add callbacks

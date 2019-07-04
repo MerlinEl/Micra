@@ -1,20 +1,20 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <USER>
   <Properties_1>
-    <mc_Dialog_A active="true" pos="[2190,800]" size="[148,66]" title="Menu:" btnCount="[6,2]" />
-    <mc_Dialog_B active="true" pos="[2190,290]" size="[148,162]" title="Object:" btnCount="[6,6]" />
-    <mc_Dialog_C active="true" pos="[2190,450]" size="[148,66]" title="Pivot:" btnCount="[6,2]" />
-    <mc_Dialog_D active="true" pos="[2190,520]" size="[148,90]" title="Select:" btnCount="[6,3]" />
-    <mc_Dialog_E active="true" pos="[2100,1240]" size="[244,42]" title="Animation:" btnCount="[10,1]" />
-    <mc_Dialog_F active="true" pos="[1970,220]" size="[196,90]" title="Modifiers:" btnCount="[8,3]" />
-    <mc_Dialog_G active="true" pos="[2190,610]" size="[148,114]" title="Modify:" btnCount="[6,4]" />
-    <mc_Dialog_H active="true" pos="[2190,730]" size="[148,66]" title="Materials:" btnCount="[6,2]" />
-    <mc_Dialog_I active="true" pos="[2190,870]" size="[148,66]" title="Programming:" btnCount="[6,2]" />
-    <mc_Dialog_J active="true" pos="[1560,1240]" size="[532,42]" title="Experimental:" btnCount="[22,1]" />
+    <mc_Dialog_A active="true" pos="[2130,820]" size="[148,66]" title="Menu:" btnCount="[6,2]" />
+    <mc_Dialog_B active="true" pos="[2130,300]" size="[148,162]" title="Object:" btnCount="[6,6]" />
+    <mc_Dialog_C active="true" pos="[2130,470]" size="[148,66]" title="Pivot:" btnCount="[6,2]" />
+    <mc_Dialog_D active="true" pos="[2130,540]" size="[148,90]" title="Select:" btnCount="[6,3]" />
+    <mc_Dialog_E active="true" pos="[2030,1240]" size="[244,42]" title="Animation:" btnCount="[10,1]" />
+    <mc_Dialog_F active="true" pos="[1900,290]" size="[196,90]" title="Modifiers:" btnCount="[8,3]" />
+    <mc_Dialog_G active="true" pos="[2130,630]" size="[148,114]" title="Modify:" btnCount="[6,4]" />
+    <mc_Dialog_H active="true" pos="[2130,750]" size="[148,66]" title="Materials:" btnCount="[6,2]" />
+    <mc_Dialog_I active="true" pos="[2140,890]" size="[148,66]" title="Programming:" btnCount="[6,2]" />
+    <mc_Dialog_J active="true" pos="[1490,1240]" size="[532,42]" title="Experimental:" btnCount="[22,1]" />
   </Properties_1>
   <Properties_2>
     <mcMicraDialog active="true" pos="[2190,220]" size="[148,66]" title="" />
-    <mcCustomizeDialog active="false" pos="[1720,370]" size="[224,404]" title="" />
+    <mcCustomizeDialog active="true" pos="[1720,460]" size="[224,404]" title="" />
     <mcProgramDialog active="undefined" pos="[2298,0]" size="[256,232]" title="" />
     <mcisoDialog active="false" pos="[181,152]" size="[140,400]" title="" />
     <mcModifierDialog active="undefined" pos="[100,100]" size="[400,400]" title="" />
@@ -217,5 +217,6 @@
     <btn_J17 action="City_Manager" icon="241" />
     <btn_G21 action="Patcher" icon="109" />
     <btn_B36 action="Distributor" icon="160" />
+    <btn_G22 action="Patcher2P" icon="271" />
   </Buttons>
 </USER>

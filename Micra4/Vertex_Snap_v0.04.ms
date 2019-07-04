@@ -1,15 +1,14 @@
 Global mcVertexSnapDialog
 if mcVertexSnapDialog != undefined do destroyDialog mcVertexSnapDialog
-rollout mcVertexSnapDialog "Vertex Snap" width:320 height:232
+rollout mcVertexSnapDialog "" width:320 height:232
 (
-	local title_msg = mcVertexSnapDialog.title
+	local form_title = "Vertex Snap"
     local metric_type = units.SystemType as String
 	pickbutton 'btn_pick_trgt' "None" pos:[96,92] width:208 height:20 align:#left
 	label 'lbl5' "Target Object:" pos:[16,96] width:76 height:16 align:#left
 	label 'lbl6' "Range:" pos:[16,120] width:76 height:16 align:#left
-	spinner 'spn_offset' "" pos:[96,120] width:72 height:16 range:[0,100,1] type:#float scale:0.1 align:#left
-	label 'lbl_units' "meters" pos:[172,120] width:132 height:16 align:#left
-    
+	spinner 'spn_offset' "" pos:[96,120] width:72 height:16 range:[0,1000000,1] type:#float scale:0.1 align:#left
+	label 'lbl_units' "units..." pos:[172,120] width:132 height:16 align:#left
 	GroupBox 'grp2' "Single:" pos:[8,4] width:308 height:56 align:#left
 	button 'btn_get_pos' "Get Position" pos:[16,24] width:136 height:24 align:#left
 	button 'btn_set_pos' "Srangeet Position" pos:[160,24] width:148 height:24 align:#left
@@ -126,7 +125,7 @@ rollout mcVertexSnapDialog "Vertex Snap" width:320 height:232
 		local gco = modPanel.getCurrentObject() --store current modifier selection
 		if (classOf gco != Editable_Poly and classOf gco != Edit_Poly) do (
 					
-			MessageBox "Selected objects must be Editable_Poly or have Edit_Poly modifier." title:title_msg
+			MessageBox "Selected objects must be Editable_Poly or have Edit_Poly modifier." title:form_title
 			return false
 		)
 		subobjectlevel = 0
@@ -148,7 +147,11 @@ rollout mcVertexSnapDialog "Vertex Snap" width:320 height:232
 		subobjectlevel = 1 --restore vertex  subobject level
 		EnableSceneRedraw()
 	)
-
+	fn init = (
+		
+		lbl_units.text = metric_type
+		mcVertexSnapDialog.title = form_title
+	)
 -- 	-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 -- 	ROLLOUT EVENTS START
 -- 	-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -255,8 +258,8 @@ rollout mcVertexSnapDialog "Vertex Snap" width:320 height:232
 	            undo "Snap vertex" on polyop.setVert obj vert vert_pos
 	        )
 	    )
-	on rdo_offset changed index do
-		(spn_offset.value = index)
+	on rdo_offset changed index do (spn_offset.value = index)
+	on mcVertexSnapDialog open do ( init() )
 )
 
 createDialog mcVertexSnapDialog

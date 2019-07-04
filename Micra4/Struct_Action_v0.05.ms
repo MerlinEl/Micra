@@ -1826,7 +1826,7 @@ struct mcAction (
 			)
 			else opos  = center
 			
-			local bbox = box pos:opos
+			local bbox = box pos:opos lengthsegs:0 widthsegs:0 heightsegs:0
 			convertToPoly bbox
 			local bmin = if bmin == undefiend then sel.min else bmin
 			local bmax = if bmax == undefiend then sel.max else bmax
