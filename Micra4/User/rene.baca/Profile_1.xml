@@ -38,7 +38,7 @@
     <mcColorPaleteDialog active="false" pos="[2304,236]" size="[244,60]" title="" />
     <mcSelVertsInXDialog active="undefined" pos="[100,100]" size="[100,100]" title="" />
     <mcELOpDialog active="true" pos="[100,100]" size="[220,60]" title="" />
-    <mcObjIDDialog active="true" pos="[1641,764]" size="[144,84]" title="" />
+    <mcObjIDDialog active="true" pos="[2146,976]" size="[144,84]" title="" />
     <mcRenderToTextureModDialog active="undefined" pos="[100,100]" size="[100,100]" title="" />
     <mcSendUVWToPsDialog active="true" pos="[76,244]" size="[148,212]" title="" />
     <mcRotateObjectDialog active="undefined" pos="[100,100]" size="[100,100]" title="" />
