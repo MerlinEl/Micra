@@ -2,7 +2,7 @@
 <SETTINGS>
   <Micra>
     <born val="04.25.2006" />
-    <version val="4.83" />
+    <version val="4.84" />
   </Micra>
   <Structures val="All registred Micra's Structures">
     <!--independent classes-->
@@ -130,7 +130,7 @@
     <Vertex_Snap val="0.04" />
     <City_Manager val="1.07" />
     <Patcher val="0.03" />
-    <Patcher2P val="0.03" />
+    <Patcher2P val="0.05" />
   </Version>
   <SystemFiles val="Micra's Settings Files">
     <Actions val="Contains all accesible Micra's actions" />

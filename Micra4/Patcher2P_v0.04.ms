@@ -13,9 +13,11 @@ rollout mcPatcher2PDialog "" width:348 height:140
 	label 'lbl3' "Jionts Offset:" pos:[8,52] width:76 height:16 align:#left
 	label 'lbl_units' "units..." pos:[156,51] width:180 height:16 align:#left
 	spinner 'spn_offset' "" pos:[84,50] width:68 height:16 range:[0,100,40] type:#float scale:0.1 align:#left
-	checkbox 'chk_attach' "Attach" pos:[12,76] width:64 height:16 checked:true align:#left
-	checkbox 'chk_weld' "Weld" pos:[80,76] width:68 height:16 checked:true align:#left
-	checkbox 'chk_triangulate' "Triangulate" pos:[152,76] width:76 height:16 checked:true align:#left
+	checkbox 'chk_attach' "Attach" pos:[12,75] width:64 height:16 checked:true align:#left
+	checkbox 'chk_weld' "Weld" pos:[168,76] width:44 height:16 checked:true align:#left
+	checkbox 'chk_triangulate' "Triangulate" pos:[80,75] width:76 height:16 checked:true align:#left
+	label 'lbl_weld' "Treshold:" pos:[226,77] width:48 height:16 align:#left
+	spinner 'spn_weld_offset' "" pos:[272,76] width:64 height:16 range:[0,100,0.01] type:#float scale:0.1 align:#left
 	struct EDIT_MODEL (
 		
 		fn isValidObject obj = (
@@ -260,7 +262,7 @@ if target_vert_a == undefined or target_vert_b == undefined do ( --when one of t
 				em.triangulate new_surface tirangulate_top_positions
 			)
 			if chk_attach.checked do em.attachObject source_obj new_surface
-			if chk_weld.checked   do em.weldVertices source_obj
+			if chk_weld.checked   do em.weldVertices source_obj offset:spn_weld_offset.value
 		)
 	)
 	fn init = (

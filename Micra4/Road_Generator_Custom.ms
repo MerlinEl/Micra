@@ -41,13 +41,14 @@ rollout RoadCustomGeneratorDialog "Road Custom Generator:" width:1052 height:220
 	label 'lbl_path' "..." pos:[160,164] width:176 height:20 align:#left
 	GroupBox 'grp1' "Joints:" pos:[4,4] width:1044 height:104 align:#left
 	GroupBox 'grp2' "Road:" pos:[568,120] width:480 height:96 align:#left
-	button 'btn_gen_road' "Generate Road" pos:[832,140] width:208 height:68 align:#left
+	button 'btn_gen_road' "Generate Road" pos:[864,140] width:176 height:68 align:#left
 	pickbutton 'btn_prefab' "Prefab..." pos:[572,140] width:64 height:20 align:#left
-	label 'lbl_prefab' "..." pos:[644,140] width:180 height:20 align:#left
-	spinner 'spn_density' "" pos:[664,188] width:84 height:16 range:[0,90,4] type:#float scale:0.05 align:#left
-	label 'lbl_density' "Density:" pos:[576,188] width:80 height:16 align:#left
-	spinner 'spn_twist' "" pos:[664,168] width:84 height:16 range:[-90,90,0] type:#float scale:0.5 align:#left
-	label 'lbl_twist' "Twist:" pos:[576,168] width:80 height:16 align:#left
+	label 'lbl_prefab' "..." pos:[644,140] width:212 height:20 align:#left
+	spinner 'spn_density' "" pos:[628,192] width:84 height:16 range:[0,90,4] type:#float scale:0.05 align:#left
+	label 'lbl_density' "Density:" pos:[576,192] width:48 height:16 align:#left
+	spinner 'spn_twist' "" pos:[628,168] width:84 height:16 range:[-90,90,0] type:#float scale:0.5 align:#left
+	spinner 'spn_rotation' "" pos:[772,168] width:84 height:16 range:[-90,90,0] type:#float scale:0.5 align:#left
+	label 'lbl_twist' "Twist:" pos:[576,168] width:48 height:16 align:#left
 	button 'btn_gen_points' "Create" pos:[12,28] width:68 height:68 align:#left
 	GroupBox 'grp3' "Path:" pos:[4,116] width:556 height:100 align:#left
 	button 'btn_sync_spline' "Sync" pos:[364,156] width:92 height:36 toolTip:"Snap spline Start, End points and Rebuild curve." align:#left
@@ -79,6 +80,7 @@ rollout RoadCustomGeneratorDialog "Road Custom Generator:" width:1052 height:220
 	label 'lbl13' "angle z:" pos:[920,49] width:44 height:16 align:#left
 	spinner 'spn_t2_angle_z' "" pos:[964,69] width:68 height:16 range:[0,100,100] type:#float scale:0.1 align:#left
 	label 'lbl14' "angle z:" pos:[920,70] width:44 height:16 align:#left
+	label 'lbl15' "Rotation:" pos:[720,168] width:48 height:16 align:#left
 	fn rotateBetweenTwoPoints trgt_obj inverted:false = (
 		
 		local src_obj = selection[1]
@@ -237,8 +239,8 @@ rollout RoadCustomGeneratorDialog "Road Custom Generator:" width:1052 height:220
 		
 		subobjectLevel = 0
 		suspendEditing()
-		local finalRoad = roGenStruct.createRoadFromSpline obj_prefab obj_path spn_density.value spn_twist.value
-		finalRoad.name = uniqueName "road_custom_"
+		local finalRoad = roGenStruct.createRoadFromSpline obj_prefab obj_path spn_density.value spn_twist.value spn_rotation.value
+		finalRoad.name = uniqueName "custom_road_"
 		resumeEditing()
 	)
 	on btn_gen_points pressed do createTwoPoints()

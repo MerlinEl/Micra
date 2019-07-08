@@ -2,7 +2,6 @@ Global mcCityManDialog
 if ::mcCityManDialog != undefined do try(destroyDialog mcCityManDialog)catch()
 rollout mcCityManDialog "" width:500 height:920
 (
-	
 	local form_title = "City Manager v1.07"
 	--Interface components
 	GroupBox 'grp1' "..." pos:[4,20] width:492 height:588 align:#left
@@ -14,7 +13,7 @@ rollout mcCityManDialog "" width:500 height:920
 	label 'lbl_objects' "()" pos:[336,36] width:60 height:14 align:#left
 	multiListBox 'cbx_node_list' "Nodes List:" pos:[10,36] width:236 height:42 align:#left
 	multiListBox 'cbx_children_list' "Linked Objects:" pos:[254,36] width:236 height:42 align:#left
-	checkbox 'chk_auto_trace_node' "Auto Select" pos:[132,32] width:116 height:20 align:#left
+	checkbox 'chk_auto_trace_node' "Auto Select" pos:[128,32] width:70 height:20 align:#left
 	dropdownList 'ddl_display_filter' "Display Filter:" pos:[256,636] width:128 height:40 items:#("Children", "AllRoads", "All") align:#left
 	button 'btn_select_linked' "Select Linked" pos:[104,632] width:70 height:20 toolTip:"Select Object(s)" align:#left
 	button 'btn_select_visible' "Select Visible" pos:[104,656] width:70 height:20 toolTip:"Select Visible Object(s)" align:#left
@@ -51,7 +50,9 @@ rollout mcCityManDialog "" width:500 height:920
 	label 'lbl_sh' "Show - Hide objects which contains a Word:" pos:[12,872] width:220 height:14 align:#left
 	button 'btn_show_objs' "Show" pos:[13,892] width:56 height:17 toolTip:"Unhide Objects By Name" across:3 align:#left
 	button 'btn_hide_objs' "Hide" pos:[72,892] width:56 height:17 toolTip:"Hide Objects By Name" align:#left
-	editText 'edt_sh_name' "" pos:[132,892] width:104 height:16 align:#left text:"building"
+	edittext 'edt_sh_name' "building" pos:[132,892] width:104 height:16 align:#left
+	button 'btn_sel_geo_nodes' "G" pos:[204,32] width:20 height:20 toolTip:"Select Geometry Nodes" align:#left
+	button 'btn_sel_coll_nodes' "C" pos:[224,32] width:20 height:20 toolTip:"Select Collision Nodes" align:#left
 	
 	--Local variables
 	local autosel = on
@@ -134,6 +135,21 @@ rollout mcCityManDialog "" width:500 height:920
 			)
 		)
 		list.selection = index_arr
+	)
+	--select list nodes by type
+	fn selectNodesByType type = (
+	
+		local key = case type of (
+		
+			"coll": "_coll"
+			"geo": "_geometry"
+		)
+		local index_arr = for i = 1 to cbx_node_list.items.count where (
+		
+			findString cbx_node_list.items[i] key != undefined
+			
+		) collect i
+		cbx_node_list.selection = index_arr
 	)
 	fn fillNodesList = 
 	(
@@ -816,6 +832,8 @@ rollout mcCityManDialog "" width:500 height:920
 	on btn_generate_roads_coll pressed do generateRoadsCollisions()
 	on btn_show_objs 	pressed do ( showObjectsByNamePart objects edt_sh_name.text true	)
 	on btn_hide_objs pressed do ( showObjectsByNamePart objects edt_sh_name.text false	)
+	on btn_sel_geo_nodes pressed do ( selectNodesByType "geo"	)
+	on btn_sel_coll_nodes pressed do ( selectNodesByType "coll")
 )
 createDialog mcCityManDialog
 
