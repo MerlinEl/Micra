@@ -6,7 +6,7 @@
     <mc_Dialog_C active="true" pos="[2130,470]" size="[148,66]" title="Pivot:" btnCount="[6,2]" />
     <mc_Dialog_D active="true" pos="[2130,540]" size="[148,90]" title="Select:" btnCount="[6,3]" />
     <mc_Dialog_E active="true" pos="[2030,1240]" size="[244,42]" title="Animation:" btnCount="[10,1]" />
-    <mc_Dialog_F active="true" pos="[1900,290]" size="[196,90]" title="Modifiers:" btnCount="[8,3]" />
+    <mc_Dialog_F active="true" pos="[1920,220]" size="[196,90]" title="Modifiers:" btnCount="[8,3]" />
     <mc_Dialog_G active="true" pos="[2130,630]" size="[148,114]" title="Modify:" btnCount="[6,4]" />
     <mc_Dialog_H active="true" pos="[2130,750]" size="[148,66]" title="Materials:" btnCount="[6,2]" />
     <mc_Dialog_I active="true" pos="[2140,890]" size="[148,66]" title="Programming:" btnCount="[6,2]" />
@@ -14,7 +14,7 @@
   </Properties_1>
   <Properties_2>
     <mcMicraDialog active="true" pos="[2190,220]" size="[148,66]" title="" />
-    <mcCustomizeDialog active="false" pos="[1720,460]" size="[224,404]" title="" />
+    <mcCustomizeDialog active="false" pos="[1720,460]" size="[600,404]" title="" />
     <mcProgramDialog active="undefined" pos="[2298,0]" size="[256,232]" title="" />
     <mcisoDialog active="false" pos="[181,152]" size="[140,400]" title="" />
     <mcModifierDialog active="undefined" pos="[100,100]" size="[400,400]" title="" />

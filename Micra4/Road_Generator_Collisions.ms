@@ -10,7 +10,7 @@ rollout roadGeneratorCollisionDialog "" width:544 height:88
 	label 'lbl1' "Collision Node:" pos:[16,56] width:76 height:16 align:#left
 	editText 'edt_coll_node' "" pos:[96,52] width:292 height:20 align:#left
 	button 'btn_create_colls' "GENERATE" pos:[408,12] width:132 height:68 align:#left
-	checkbox chk_auto "Auto" pos:[100,8] width:44 height:16 toolTip:"Work's also for multiple objects"
+	checkbox chk_auto "Auto" pos:[100,8] width:44 height:16 toolTip:"Work's also for multiple objects" --checked:true dont do it
 /*
 Node naming convences
 lh_02_little_italy_block_h_roads_geometry
@@ -338,18 +338,6 @@ lh_02_little_italy_block_h_roads_coll
 		roGenStruct.All_CALLBACKS_ENABLED = true
 		completeRedraw()
 	)
-	fn init = (
-		
-		roadGeneratorCollisionDialog.title = form_title
-		if superClassOf roGenStruct != StructDef do runLocalScript generator_struct
-		if superClassOf roGenStruct != StructDef do (
-		
-			messageBox "Collisions can't be created\n.Unable to find Road Structures." title:form_title
-			destroyDialog roadGeneratorCollisionDialog
-		)
-		edt_coll_layer.text = default_layer_name
-		edt_coll_node.text = default_node_name
-	)
 	fn setAutoTraceTo state = (
 		
 		edt_coll_layer.enabled = not state --enable disable writing in to edit box
@@ -370,6 +358,19 @@ lh_02_little_italy_block_h_roads_coll
 				edt_coll_node.text = typed_node_name
 			)
 		)
+	)
+	fn init = (
+		
+		roadGeneratorCollisionDialog.title = form_title
+		if superClassOf roGenStruct != StructDef do runLocalScript generator_struct
+		if superClassOf roGenStruct != StructDef do (
+		
+			messageBox "Collisions can't be created\n.Unable to find Road Structures." title:form_title
+			destroyDialog roadGeneratorCollisionDialog
+		)
+		edt_coll_layer.text = default_layer_name
+		edt_coll_node.text = default_node_name
+		-- setAutoTraceTo true
 	)
 	on roadGeneratorCollisionDialog open do init()
 	on btn_create_colls pressed  do createRoadsCollisions()
