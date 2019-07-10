@@ -1,4 +1,4 @@
-Global mcPatcher2PDialog --not used yet
+Global mcPatcher2PDialog
 if ::mcPatcher2PDialog != undefined do try(destroyDialog mcPatcher2PDialog)catch()
 rollout mcPatcher2PDialog "" width:348 height:140
 (
