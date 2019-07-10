@@ -139,6 +139,7 @@ Struct MICRA_DIALOG (
 		)
 	),
 	/*
+	*@Credits > many tanks to Corneliu Tusnea for C# version
 	*@Usage	> snap form to other panels or window borders (sticky snapp)
 	*@Example
 
