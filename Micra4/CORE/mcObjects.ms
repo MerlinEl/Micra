@@ -135,13 +135,46 @@ Struct mcBounds (pos, size)
 	rct.he()
 	rct.si()
 */
-Struct mcRect 
-(
-	mi, ma,                  --min, max 
-	fn wi =(abs(ma.x-mi.x)), --width 
-	fn he =(abs(mi.y-ma.y)), --height  
-	fn si =(ma - mi       )  --size
+Struct mcRect (
+
+	mi, ma,						--min, max 
+	fn wi = (abs(ma.x-mi.x)	),	--width 
+	fn he = (abs(mi.y-ma.y)	),	--height  
+	fn si = (ma - mi			),	--size
+	fn le = (mi.x			),	--left
+	fn ri = (ma.x			),	--right
+	fn tp = (mi.y			),	--top
+	fn bt = (ma.y			)	--bottom
 )
+
+/**
+*@Usage > get rectangle from pos and size
+*@Example
+	
+	rect = mcRect2D pos size
+*/
+Struct mcRect2D (
+
+	pos, size, --input params
+	mi, ma, left, right, top, bottom, width, height,
+	fn onCreate = (
+	
+		if classOf pos != Point2 or classOf size != Point2 do return undefined
+		mi = pos
+		ma = [mi.x + size.x, mi.y + size.y]
+		width 	= (abs(ma.x-mi.x))
+		height 	= (abs(mi.y-ma.y))  
+		size 	= (ma - mi		 )
+		left 	= (mi.x			 )
+		right	= (ma.x			 )	
+		top 	= (mi.y			 )
+		bottom	= (ma.y			 )
+		OK
+	),
+	c = onCreate()
+)
+
+
 /*
 	cu = cube2()
 	cub = cu mi:$.min ma:$.max
@@ -210,6 +243,7 @@ private
 		of_back 		= abs (pos.y - back)
 		of_top 			= abs (pos.z - top)
 		of_bottom		= abs (pos.z - bottom)
+		true
 	),
 	c = onCreate()
 )

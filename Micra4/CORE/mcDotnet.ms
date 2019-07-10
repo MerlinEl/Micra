@@ -13,12 +13,13 @@
 */
 Struct MICRA_DOTNET (
 	
-	ByteClass   = (dotNetClass "System.Byte"),
-	Cursors     = (dotNetClass "Cursors"),
-	DragDropEffect = (dotNetClass "DragDropEffects"),
-	PointClass  = (dotnetClass "Drawing.Point"),
-	Keys        = (dotNetClass "Keys"),
-	File       = (dotnetClass "IO.File"),
+	ByteClass   	= (dotNetClass "System.Byte"),
+	Cursors     	= (dotNetClass "Cursors"),
+	DragDropEffect 	= (dotNetClass "DragDropEffects"),
+	PointClass		= (dotnetClass "Drawing.Point"),
+	Keys			= (dotNetClass "Keys"),
+	File			= (dotnetClass "IO.File"),
+	Screen			= (dotnetClass "System.Windows.Forms.Screen"),
 	/**
 	*@Example
 		ns = "http://test"

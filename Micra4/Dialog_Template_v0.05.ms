@@ -19,15 +19,15 @@ public
 	btnMin = dotNetObject "button",
 	tlp = dotNetObject "TableLayoutPanel",
 	--private variables
-	pos					= [0, 0],
-	size					= [320, 220],
-	start_mouse_pos, --mouse pos on dialog
+	pos				= [0, 0],
+	size			= [320, 220],
 	minimized		= false, 
 	old_height, 
 	bar_height		= 14,
 	border_offset	= 2,
-	btn_size			= 24,
-	debug				= 0,
+	btn_size		= 24,
+	debug			= 0,
+	netDMove = false,
 public
 	--Open / Close (with default setup, save position to INI)
 	fn open = (if iskindof form dotnetobject do mcDotnet.dShow form),
@@ -35,33 +35,37 @@ public
 	fn getName = ( title ),
 	fn getPos = ( [form.location.x, form.location.y] ),
 	fn getSize = ( [form.width, form.height] ),
+	fn setPos pos = ( form.location = mcDotnet.dPoint pos ),
 private
 	--Move / Snap Dialog /
 	fn onLblTMouseMove s a = (  --drag form
 	
 		local _mcs = mcTemplateDialog --struct instance
-		if a.Button == a.Button.left do  mcDialog.snapForm _mcs.form _mcs.start_mouse_pos
+		if _mcs.netDMove do  mcDialog.moveAndSnap _mcs.form
 	),
 	fn onLblTMouseDown s a = ( --start drag
 			
 		local _mcs = mcTemplateDialog --struct instance
 		_mcs.form.cursor.current = netCursors.Hand
 		if a.Button == a.Button.left do ( --enable drag
-			_mcs.start_mouse_pos = [_mcs.form.MousePosition.x, _mcs.form.MousePosition.y] - [_mcs.form.left, _mcs.form.top]  
+		
+			mcDialog.init _mcs.form
+			_mcs.netDMove = true 
 		)
 	),
 	fn onLblTMouseUp s a = --stop drag
 	(
-		local form = s.parent
+		local _mcs = mcTemplateDialog --struct instance
+		_mcs.netDMove = false 
 		case a.Button.ToString() of (
 		
 			"Left"	: (
 				--format " save form:%  pos:% size:%\n" form.name (form.location.toString()) (form.size.toString())
-				mcFile.saveDialogSettings form.name "Properties_2" --save form position after drag
+				mcFile.saveDialogSettings _mcs.form.name "Properties_2" --save form position after drag
 			)
 			"Right"	: (
 			
-				form.close()
+				_mcs.form.close()
 			)
 			"Middle"	: (
 			

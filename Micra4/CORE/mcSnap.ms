@@ -2,6 +2,7 @@
 /* mcSnap by Orien 2019 */
 --------------------------------------------------------------------------------
 /*
+*@Usage > get - set Max snap settings
 *@Used Structures
 	Micra
 *

@@ -14,7 +14,245 @@
 */
 Struct MICRA_DIALOG (
 
-	fn getSource = getSourceFileName(), --get path of this script
+	Registred_Windows = #(), 						-- all visible forms and rollouts
+	Mouse_Point = mcDotnet.PointClass.empty,		-- mouse screen pos
+	Offset_Point = mcDotnet.PointClass.empty,		-- primary offset
+	Form_Offset_Point = mcDotnet.PointClass.empty,	-- calculated offset rect to be added !! (min distances in all directions!!)
+	Stick_Gap = 10,									-- distance to stick
+	fn getSource = getSourceFileName(),				-- get path of this script
+	fn isValidDialog form = (
+	
+		form != undefined and (
+		
+			superClassOf 	form == StructDef or 
+			classOf 		form == RolloutClass or 
+			classOf 		form == dotNetObject
+		)
+	),
+	fn init form = (
+	
+		Mouse_Point		= mcDotnet.dPoint mouse.screenPos
+		local formRect	= form.Bounds
+		Offset_Point	= Mouse_Point
+		Offset_Point.offset (mcDotnet.dPoint [-formRect.Left, -formRect.Top])
+		--[src_form.MousePosition.x, src_form.MousePosition.y]
+		--get all Micra Dialog names
+		local form_names	= mcFile.readSettings Micra.UserProfile "Properties_1" type:"keys" 
+		--filter only visible forms
+		join form_names (mcFile.readSettings Micra.UserProfile "Properties_2" type:"keys")	 
+		Registred_Windows = for i in form_names where (
+		
+			local form = execute i
+			if form != undefined then (
+			
+				if superClassOf form == StructDef then (
+					
+					form.form.visible
+					
+				) else if classOf form == dotNetObject then (
+					
+					form.visible 
+					
+				) else if classOf form == RolloutClass then (
+				
+					form.isDisplayed
+					
+				) else (
+				
+					false
+				)
+				
+			) else false
+			
+		) collect form
+		-- format "mcDialog > getActiveDialogs > Registred_Windows:\n\t%\n" Registred_Windows
+	),
+	fn snapTo formRect toRect inside_stick:false = (
+	
+		-- compare distance from toRect to formRect
+		-- and then with the found distances, compare the most closed position
+		if ( formRect.Bottom >= (toRect.Top - Stick_Gap) and formRect.Top <= (toRect.Bottom + Stick_Gap) ) do (
+		
+			if ( inside_stick ) do (
+				-- left 2 right
+				if ( (abs(formRect.Left - toRect.Right) <= abs(Form_Offset_Point.X) ) ) do (	
+				
+					Form_Offset_Point.X = toRect.Right - formRect.Left
+				)
+				-- right 2 left
+				if ( (abs(formRect.Left + formRect.Width - toRect.Left) <= abs(Form_Offset_Point.X) ) ) do (
+				
+					Form_Offset_Point.X = toRect.Left - formRect.Width - formRect.Left
+				)
+			)
+			-- snap left 2 left
+			if ( abs(formRect.Left - toRect.Left) <= abs(Form_Offset_Point.X) ) do (
+			
+				Form_Offset_Point.X = toRect.Left - formRect.Left
+			)
+			-- snap right 2 right
+			if ( abs(formRect.Left + formRect.Width - toRect.Left - toRect.Width ) <= abs(Form_Offset_Point.X)) do (
+			
+				Form_Offset_Point.X = toRect.Left + toRect.Width - formRect.Width - formRect.Left
+			)
+		)
+		if ( formRect.Right >= (toRect.Left - Stick_Gap) and formRect.Left <= (toRect.Right + Stick_Gap) ) do (
+		
+			if ( inside_stick ) do (
+			
+				-- Stick Top to Bottom
+				if (abs(formRect.Top - toRect.Bottom) <= abs(Form_Offset_Point.Y) and inside_stick ) do (	
+				
+					Form_Offset_Point.Y = toRect.Bottom - formRect.Top
+				)
+				-- snap Bottom to Top
+				if (abs(formRect.Top + formRect.Height - toRect.Top) <= abs(Form_Offset_Point.Y) and inside_stick ) do (	
+				
+					Form_Offset_Point.Y =  toRect.Top - formRect.Height - formRect.Top
+				)
+			)
+
+			-- try to snap top 2 top also
+			if (abs(formRect.Top - toRect.Top) <= abs(Form_Offset_Point.Y)) do ( 
+				-- top 2 top
+				Form_Offset_Point.Y =  toRect.Top - formRect.Top
+			)
+			if ( abs(formRect.Top + formRect.Height - toRect.Top - toRect.Height ) <= abs(Form_Offset_Point.Y)) do (
+				-- bottom 2 bottom
+				Form_Offset_Point.Y =  toRect.Top + toRect.Height - formRect.Height - formRect.Top
+			)
+		)
+	),
+	fn normalizeInside iP1 iM1 iM2 = (
+	
+		if iP1 <= iM1 then (
+
+			iM1
+
+		) else if iP1 >= iM2 then ( 
+
+			iM2 
+			
+		) else (
+
+			iP1
+		)
+	),
+	/*
+	*@Usage	> snap form to other panels or window borders (sticky snapp)
+	*@Example
+
+		onMouseDown --> mcDialog.init form
+		onMouseMove --> mcDialog.moveAndSnap form
+	*/
+	fn moveAndSnap src_form = (
+	
+		Mouse_Point = mcDotnet.dPoint mouse.screenPos
+		local p = Mouse_Point --src_form.PointToScreen Mouse_Point
+		local activeScr = mcDotnet.Screen.FromPoint ( p ) -- get the screen from the point !!
+
+		if ( not activeScr.WorkingArea.Contains ( p ) ) do (
+		
+			p.X = normalizeInside p.X activeScr.WorkingArea.Left activeScr.WorkingArea.Right
+			p.Y = normalizeInside p.Y activeScr.WorkingArea.Top activeScr.WorkingArea.Bottom
+		)
+
+		p.Offset (mcDotnet.dPoint [-Offset_Point.X, -Offset_Point.Y])
+
+		-- p is the exact location of the frame - so we can play with it
+		-- to detect the new position acording to different bounds
+		local formRect = src_form.Bounds
+		formRect.Location = p	-- this is the new positon of the form
+
+		Form_Offset_Point.X	= Stick_Gap + 1	-- (more than) maximum gaps
+		Form_Offset_Point.Y	= Stick_Gap + 1
+		-- First try snap to creen edges
+		snapTo formRect activeScr.WorkingArea inside_stick:false
+		-- Now try to snap to other windows (skip self)
+		for w in Registred_Windows where w != src_form do (
+		
+			local target_bounds = if superClassOf w == StructDef then ( --structure with dotnet form inside
+			
+				w.form.bounds --if form is inside struct
+				
+			) else if classOf w == dotNetObject then ( --dotnet form
+			
+				w.Bounds
+				
+			) else if classOf w == RolloutClass then ( --max rollout
+			
+				local pos  = getDialogPos w
+				local size = (getDialogSize w) + [4, 4]
+				mcRect2D pos size
+			)
+			if target_bounds == undefined do continue
+			snapTo formRect target_bounds inside_stick:true
+		)
+		--
+		if ( Form_Offset_Point.X == Stick_Gap+1 ) do Form_Offset_Point.X = 0
+		if ( Form_Offset_Point.Y == Stick_Gap+1 ) do Form_Offset_Point.Y = 0
+		--
+		formRect.Offset ( Form_Offset_Point )
+		src_form.Bounds = formRect
+	),
+	fn getPos form = (
+	
+		if superClassOf form == StructDef then ( --structure with dotnet form inside
+			
+			[form.form.location.x, form.form.location.y]
+			
+		) else if classOf form == dotNetObject then ( --dotnet form
+			
+			[form.location.x, form.location.y]
+			
+		) else if classOf form == RolloutClass then ( --max rollout
+		
+			getDialogPos form
+			
+		) else ( --none
+		
+			undefined
+		)
+	),
+	fn setPos form pos = (
+	
+		if superClassOf form == StructDef then (
+			
+			form.form.location = mcDotnet.dPoint pos
+			
+		) else if classOf form == dotNetObject then (
+			
+			form.location = mcDotnet.dPoint pos
+			
+		) else if classOf form == RolloutClass then (
+		
+			setDialogPos form pos
+			
+		) else (
+		
+			undefined
+		)
+	),
+	fn getSize form = (
+	
+		if superClassOf form == StructDef then (
+			
+			[form.form.width, form.form.height]
+			
+		) else if classOf form == dotNetObject then (
+			
+			[form.width, form.height]
+			
+		) else if classOf form == RolloutClass then (
+		
+			getDialogSize form
+			
+		) else (
+		
+			undefined
+		)
+	),
+	--Old way will be deleted
 	--> TODO test > Make grid with size 01  to snap dialogs, Rene (2018)
 	fn snapForm formA pos =
 	(
@@ -30,97 +268,6 @@ Struct MICRA_DIALOG (
 		--final move action
 		formA.location = mcDotnet.dPoint [formA_newpos.x, formA_newpos.y]
 	),	
-	/*
-	* mcDialog.snapForm
-	*/
-	fn snapForm_old formA pos =
-	(
-		if classOf formA != dotNetObject or pos == undefined do return false
-		local current_monitor = 1 --mcScreen.active() //causing ** system exception **
-		local desktop_size = mcScreen.fullsize()
-		desktop_size.y = (mcScreen.size num:current_monitor).y --sysInfo.DesktopSize
-		local desktop_pos = mcScreen.pos num:current_monitor --[0, 0]
-		local formA_pos = [formA.location.x, formA.location.y] --A form pos
-		local formA_size = [formA.width, formA.height] --A form size
-		local desktop_rect   = mcRect mi:desktop_pos ma:desktop_size --min/max from windows size
-		local formA_rect   = mcRect (p=copy formA_pos) (p+formA_size+[0,4])--min max from picked form
-		
-		--get bounds rect from picked form
-		local x = formA_rect.mi.x
-		local y = formA_rect.mi.y
-		
-		--Zadr
-		local formA_newpos = mouse.screenpos - pos
-		--round pos to grid size
-		--format "form pos A:%\n" formA_newpos
-	formA_newpos.x = (mcMath.roundToInt formA_newpos.x 10)+2 -- 2(border size)
-	formA_newpos.y = (mcMath.roundToInt formA_newpos.y 10)+2
-		--formA_newpos.x = mcMath.roundToEven formA_newpos.x
-		--formA_newpos.y = mcMath.roundToEven formA_newpos.y
-		--format "form pos B:%\n" formA_newpos
-		--fill rect
-		formA_rect.mi.x = formA_newpos.x
-		formA_rect.ma.x = x + formA_size.x
-		formA_rect.mi.y = formA_newpos.y
-		formA_rect.ma.y = y + formA_size.y
-		
-		local sDist = desktop_rect.ma.x / 200-- set snap distance
-		
-		--get visible form names
-		local all_forms = mcFile.readSettings Micra.UserProfile "Properties_1" type:"keys"
-			 join all_forms (mcFile.readSettings Micra.UserProfile "Properties_2" type:"keys")
-		local visible_forms = for i in all_forms where (execute ("classOf "+ i +"== dotNetObject")) and (execute(i+".Visible")) collect i
-		
-		for i in visible_forms do
-		(
-			local formB = (execute i)
-			local formB_pos  = [formB.location.x, formB.location.y]
-			local formB_size = [formB.width, formB.height]
-			--min max from B (visible) forms
-			local formB_rect = mcRect formB_pos (formB_pos+formB_size)
-			
-			--Left
-			if formA_rect.mi.x < formB_rect.ma.x+sDist and formA_rect.mi.x > formB_rect.ma.x-sDist and 
-			formA_rect.ma.y > formB_rect.mi.y and formA_rect.mi.y < formB_rect.ma.y
-			then formA_rect.mi.x = formB_rect.ma.x
-			--Zadr???
-			formA_rect.ma.x = formA_rect.mi.x + formA_size.x
-			--Right
-			if formA_rect.ma.x > formB_rect.mi.x-sDist and formA_rect.ma.x < formB_rect.mi.x+sDist and 
-			formA_rect.ma.y > formB_rect.mi.y and formA_rect.mi.y < formB_rect.ma.y
-			then formA_rect.mi.x = (formB_rect.mi.x-formA_size.x)
-			--Top
-			if formA_rect.ma.y > formB_rect.mi.y-sDist and formA_rect.ma.y < formB_rect.mi.y+sDist and 
-			formA_rect.ma.x > formB_rect.mi.x and formA_rect.mi.x < formB_rect.ma.x 
-			then formA_rect.mi.y = (formB_rect.mi.y-formA_size.y)
-			--Zadr
-			formA_rect.ma.y = formA_rect.mi.y + formA_size.y
-			--Bottom
-			if formA_rect.mi.y < formB_rect.ma.y+sDist and formA_rect.mi.y > formB_rect.ma.y-sDist and 
-			formA_rect.ma.x > formB_rect.mi.x and formA_rect.mi.x < formB_rect.ma.x 
-			then formA_rect.mi.y = formB_rect.ma.y
-		)
-
-		--if is in Left bound
-		if formA_rect.mi.x < desktop_rect.mi.x+sDist 
-		then x = 0 
-		else 
-		--if is in Right bound
-		if formA_rect.mi.x+formA_size.x > desktop_rect.ma.x-sDist 
-		then x = (desktop_rect.ma.x-formA_size.x) 
-		else x = formA_rect.mi.x		
-		--if is in Top bound
-		if formA_rect.mi.y < desktop_rect.mi.y+sDist 
-		then y = 0 
-		else 
-		--if is in Bottom bound
-		if formA_rect.mi.y+formA_size.y > desktop_rect.ma.y-sDist 
-		then y = (desktop_rect.ma.y-formA_size.y)
-		else y = formA_rect.mi.y
-		
-		--final move action
-		if (formA_pos.x != x or formA_pos.y != y) do formA.location = mcDotnet.dPoint [x, y]
-	),
 	/*
 	* mcDialog.snapDialog
 	*/

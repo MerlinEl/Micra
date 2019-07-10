@@ -902,6 +902,7 @@ rollout mcLpWizardDialog "" width:528 height:84
 		(
 			--print "stop"
 			--format "PolygonCanceled:%\n" drw.PolygonCanceled
+			if drw.PolygonCanceled == undefined do return false --nothing happens (open close tool only)
 			if drw.PolygonCanceled do --jestlize polygon neni potvrzen , smazat
 			(
 				polyOp.deleteVerts drw.LowpolyModel drw.ActiveVertices

@@ -32,7 +32,7 @@ try ( mcMicraDialog.close() ) catch()
 (
 	-->Locals-----------------------------------------------------------------
 	local sec = 60000
-	local netDMove = false, netDmPos
+	local netDMove = false
 	local bar_height = 14
 	local form_bounds  = 2
 	local form_offset  = 4
@@ -228,14 +228,15 @@ try ( mcMicraDialog.close() ) catch()
 --|	--Form move
 	fn onLblTMouseMove s a = 
 	(
-		if netDMove do ( mcDialog.snapForm s.parent netDmPos ) --dragForm
+		if netDMove do mcDialog.moveAndSnap s.parent --dragForm
 	)
 	fn onLblTMouseDown s a = 
 	(
 		if a.Button == a.Button.left do --enableDrag
 		(
-			s.parent.cursor.current = netCursors.Hand
-			netDmPos = [s.parent.MousePosition.x, s.parent.MousePosition.y] - [s.parent.left, s.parent.top] 
+			local form = s.parent
+			mcDialog.init form
+			form.cursor.current = netCursors.Hand
 			netDMove = true 
 		)
 	)

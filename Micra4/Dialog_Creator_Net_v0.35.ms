@@ -379,15 +379,16 @@ if debug == 5 do format "name:%\t tag:%\n" s.name s.tag
 	fn onLblTMouseMove s a = 
 	(
 		local form = s.parent
-		if form.tag.value.netDMove do (mcDialog.snapForm form form.tag.value.netDmPos) --dragForm
+		if form.tag.value.netDMove do (mcDialog.moveAndSnap form) --dragForm
 	)
 	fn onLblTMouseDown s a = 
 	(
 		if a.Button == a.Button.left do --enableDrag
 		(
+			
 			local form = s.parent
+			mcDialog.init form
 			form.cursor.current = netCursors.Hand
-			form.tag.value.netDmPos = [form.MousePosition.x, form.MousePosition.y] - [form.left, form.top] 
 			form.tag.value.netDMove = true 
 		)
 	)
@@ -669,8 +670,7 @@ if debug == 5 do format "name:%\t tag:%\n" s.name s.tag
 			minimized = false, 
 			edit_mode = false, 
 			bobjects=#(), 
-			netDMove = false,
-			netDmPos
+			netDMove = false
 			--bnames=#(), 
 			--bactions=#(), 
 			--bicons=#(), 
