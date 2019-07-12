@@ -14,7 +14,7 @@
   </Properties_1>
   <Properties_2>
     <mcMicraDialog active="true" pos="[2158,216]" size="[148,66]" title="" />
-    <mcCustomizeDialog active="false" pos="[1720,380]" size="[224,404]" title="" />
+    <mcCustomizeDialog active="false" pos="[1180,420]" size="[600,404]" title="" />
     <mcProgramDialog active="undefined" pos="[2298,0]" size="[256,232]" title="" />
     <mcisoDialog active="false" pos="[181,152]" size="[140,400]" title="" />
     <mcModifierDialog active="undefined" pos="[100,100]" size="[400,400]" title="" />
@@ -23,7 +23,7 @@
     <mcMoveTowardsDialog active="undefined" pos="[441,377]" size="[200,76]" title="" />
     <mcClonerDialog active="true" pos="[1707,440]" size="[164,296]" title="" />
     <mcRenameDialog active="true" pos="[265,280]" size="[224,312]" title="" />
-    <mcObjectPlanterDialog active="undefined" pos="[266,201]" size="[356,92]" title="" />
+    <mcObjectPlanterDialog active="true" pos="[266,201]" size="[356,92]" title="" />
     <mcPivotPlanterDialog active="undefined" pos="[362,308]" size="[116,141]" title="" />
     <mcRepairDialog active="undefined" pos="[357,307]" size="[144,152]" title="" />
     <mcEdgeScaleDialog active="undefined" pos="[357,307]" size="[144,152]" title="" />
@@ -45,7 +45,7 @@
     <mcViewportRecorderDialog active="true" pos="[100,100]" size="[316,124]" title="" />
     <mcGifCompillerDialog active="undefined" pos="[100,100]" size="[100,100]" title="" />
     <mcScriptManDialog active="true" pos="[71,316]" size="[400,624]" title="" />
-    <mcColorPickerDialog active="true" pos="[690,350]" size="[328,276]" title="" />
+    <mcColorPickerDialog active="true" pos="[510,340]" size="[328,276]" title="" />
     <mcQuickColorPickerDialog active="undefined" pos="[100,100]" size="[100,100]" title="" />
     <mcInterfaceColorDilaog active="undefined" pos="[1445,427]" size="[299,130]" title="" />
     <IsolateFaceDialog active="undefined" pos="[100,100]" size="[100,100]" title="" />

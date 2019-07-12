@@ -50,6 +50,15 @@ rollout mcRepairDialog "" width:332 height:128
 				n.parent = if p == undefined then undefined else p
 		)
 	)
+	fn selLocked = (
+		
+		local selectionlock = false
+		local sel = selection as array
+		clearselection()
+		if selection.count != 0 then selectionlock = true else selectionlock = false
+		select sel
+		selectionlock
+	)
 	on mcRepairDialog open do (
 	
 		grp_1.text = " Repair Object v"+ver
@@ -75,6 +84,7 @@ rollout mcRepairDialog "" width:332 height:128
 		(
 			if (selection.count != 0) then
 			(
+				if selLocked()  do (max spacebar) --unlock selection to prevent endless loop
 				local n, p, s, w, c, oldSel = $selection as array, newSel = #()
 				local links_data, node_layer , gHead = false
 				for o in oldSel do

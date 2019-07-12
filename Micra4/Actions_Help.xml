@@ -154,7 +154,7 @@
     <Show_Materials val="Zobrazi nazvy materialu a textur prirazenych k objektu." />
     <Show_Texture val="Zapne zobrazeni materialu na objektech." />
     <Hide_Texture val="Vypne zobrazeni materialu na objektech." />
-    <Image_To_Plane val="Vlozi do sceny obrazek na placku. Rozmery 1:1." />
+    <Image_To_Plane val="Vlozi do sceny obrazek(y) na placku. Rozmery 1:1." />
     <Color_To_Material val="Prevede barvu objektu do materialu." />
     <Set_Obj_ID val="Nastavi material ID oznacenym objektum nebo polygonum." />
     <Add_Checker val="Prida Checker na oznacene objekty." />

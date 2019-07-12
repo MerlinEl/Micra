@@ -1699,16 +1699,47 @@ struct mcAction (
 			)
 		)
 	),
-	fn image_to_plane =
-	(
+	fn image_to_plane = (
+		
+		local imageBrowser = dotNetObject "System.Windows.Forms.OpenFileDialog" --create a OpenFileDialog 
+		imageBrowser.title = "Please select one or more Images" --set the title
+		imageBrowser.Multiselect = true --allow multiple files to be selected
+		imageBrowser.Filter = "Image Files(*.BMP;*.JPG;*.PNG)|*.BMP;*.JPG;*.PNG|All files (*.*)|*.*" --specify the filter
+		imageBrowser.FilterIndex = 2 --set the filter drop-down list to All Files
+		local result = imageBrowser.showDialog() --display the dialog, get result into variable
+		if result.Equals result.Cancel do return false
+		local theFilenames = imageBrowser.fileNames --the selected filenames will be returned as an array
+		if theFilenames.count == 0 do return false
+		local offset = 200
+		undo "Image(s) To Plane" on for i = 1 to  theFilenames.count do (
+			--Get texture info
+			local fpath = theFilenames[i]
+			local img_name="Plane_"+(getfilenamefile fpath)
+			local bmp_info = getBitmapInfo  imageBrowser.fileNames[1]
+			local w = bmp_info[3]
+			local h = bmp_info[4]
+			--Create plane
+			local new_plane=Plane width:w length:h  pos:[0,0,0] lengthsegs:1 widthsegs:1 wirecolor:(color 250 200 150) name:(img_name) 
+			new_plane.rotation =eulerangles -90 0 0
+			new_plane.pos.y = offset*i
+			--Assing texture
+			local mat = Standardmaterial ()
+			mat.name = img_name
+			mat.diffuseMap = Bitmaptexture fileName:(fpath)
+			new_plane.Material = mat
+			showTextureMap new_plane.material new_plane.material.diffusemap on
+		)
+		/*
+		--OLD
 		--Get texture info
 		local img=selectbitmap()
-		local obj_plane
 		if img == undefined do return false
-
+			
+		
+		local obj_plane
 		local img_name="Plane_"+(getfilenamefile img.filename)
 		local BPath = (replace (img as string) 1 7 "")
-		--Create plane
+		
 		undo "Create plane" on
 		(
 			obj_plane=Plane length:(img.height) width:(img.width) pos:[0,0,0] lengthsegs:1 widthsegs:1 \ 
@@ -1719,7 +1750,7 @@ struct mcAction (
 		mat.name = img_name
 		mat.diffuseMap = Bitmaptexture fileName:(BPath)
 		obj_plane.Material = mat
-		showTextureMap obj_plane.material obj_plane.material.diffusemap on
+		showTextureMap obj_plane.material obj_plane.material.diffusemap on*/
 	),
 	fn color_to_material =
 	(
@@ -1979,7 +2010,7 @@ struct mcAction (
 							gco.Commit () --important to update changes
 						)
 					)
--- 					subobjectlevel = 1
+					subobjectlevel = 1
 				)	else if eSel.count > 1 do ( --Split More Edges in ring
 					
 					gco.ButtonOp #ConnectEdges
@@ -1988,7 +2019,7 @@ struct mcAction (
 -- 				max modify mode
 -- 				local max_try = 100
 -- 				while modPanel.getCurrentObject() != gco and max_try > 0 do  ( max prev mod; max_try -=1 ) --restore modifier selection
-				subobjectlevel = 1
+				
 			)
 			4:
 			(
