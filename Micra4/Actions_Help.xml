@@ -66,6 +66,7 @@
     <Select_Half_Left val="Selektne levou polovinu objektu." />
     <Select_Half_Right val="Selektne pravou polovinu objektu." />
     <Select_Objects_By_Material val="Selektne objekty, ktere pouzivaji stejny material." />
+    <Select_Objects_By_Wirecolor val="Selektne objekty, ktere pouzivaji stejny wireframe color." />
     <Select_Unsmoth_Faces val="Oznaci polygony, ktere nemaji prirazenou smooth grupu." />
     <Verts_Loop val="Multiselekce vertexu. (vyber dva sousedici vertexy)" />
   </Select>

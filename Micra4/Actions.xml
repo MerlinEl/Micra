@@ -78,6 +78,7 @@
     <Select_Objects_By_Material icon="127" cmd="mcAction.select_objects_by_material()" tooltip="Select Objects By Material" />
     <Select_Unsmoth_Faces icon="139" cmd="mcAction.selectUnsmoothFaces()" tooltip="Select Unsmoth Faces" />
     <Verts_Loop icon="37" cmd="mcAction.select_verts #loop" tooltip="Verts Loop" />
+    <Select_Objects_By_Wirecolor icon="272" cmd="mcAction.selectObjectsByWirecolor()" tooltip="Select Objects By Wireframe Color" />
   </Select>
   <Modify>
     <Breake_To_Elements icon="128" cmd="mcAction.breake_to_elements()" tooltip="Breake To Elements" />

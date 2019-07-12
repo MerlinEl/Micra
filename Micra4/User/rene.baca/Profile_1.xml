@@ -14,7 +14,7 @@
   </Properties_1>
   <Properties_2>
     <mcMicraDialog active="true" pos="[2158,216]" size="[148,66]" title="" />
-    <mcCustomizeDialog active="false" pos="[1180,420]" size="[600,404]" title="" />
+    <mcCustomizeDialog active="false" pos="[1180,420]" size="[224,404]" title="" />
     <mcProgramDialog active="undefined" pos="[2298,0]" size="[256,232]" title="" />
     <mcisoDialog active="false" pos="[181,152]" size="[140,400]" title="" />
     <mcModifierDialog active="undefined" pos="[100,100]" size="[400,400]" title="" />
@@ -45,7 +45,7 @@
     <mcViewportRecorderDialog active="true" pos="[100,100]" size="[316,124]" title="" />
     <mcGifCompillerDialog active="undefined" pos="[100,100]" size="[100,100]" title="" />
     <mcScriptManDialog active="true" pos="[71,316]" size="[400,624]" title="" />
-    <mcColorPickerDialog active="true" pos="[510,340]" size="[328,276]" title="" />
+    <mcColorPickerDialog active="true" pos="[290,280]" size="[328,276]" title="" />
     <mcQuickColorPickerDialog active="undefined" pos="[100,100]" size="[100,100]" title="" />
     <mcInterfaceColorDilaog active="undefined" pos="[1445,427]" size="[299,130]" title="" />
     <IsolateFaceDialog active="undefined" pos="[100,100]" size="[100,100]" title="" />
@@ -138,7 +138,6 @@
     <btn_B17 action="Reinstance" icon="122" />
     <btn_H1 action="Reset_Mat_Editor" icon="4" />
     <btn_H2 action="Remove_Materials" icon="49" />
-    <btn_H3 action="Show_Materials" icon="27" />
     <btn_A1 action="Hold_Scene" icon="47" />
     <btn_A7 action="Fetch_Scene" icon="48" />
     <btn_A5 action="Merge" icon="52" />
@@ -218,5 +217,6 @@
     <btn_G21 action="Patcher" icon="109" />
     <btn_B36 action="Distributor" icon="160" />
     <btn_G22 action="Patcher2P" icon="271" />
+    <btn_D16 action="Select_Objects_By_Wirecolor" icon="272" />
   </Buttons>
 </USER>

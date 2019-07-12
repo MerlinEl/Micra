@@ -2501,6 +2501,12 @@ struct mcAction (
 		local po = point pos:p1
 		subobjectlevel = 0
 		select po
+	),
+	fn selectObjectsByWirecolor = (
+		
+		local obj = selection[1]
+		if obj == undefined do return false
+		select(for o in objects where o.wirecolor == obj.wirecolor collect o)
 	)
 	/*<end>*/
 )
