@@ -20,7 +20,7 @@
     <mcModifierDialog active="undefined" pos="[100,100]" size="[400,400]" title="" />
     <mcIconMakerDialog active="false" pos="[1300,330]" size="[730,500]" title="" />
     <mcDeepIsolateDialog active="true" pos="[1118,86]" size="[84,44]" title="" />
-    <mcMoveTowardsDialog active="undefined" pos="[441,377]" size="[200,76]" title="" />
+    <mcMoveTowardsDialog active="true" pos="[441,377]" size="[200,76]" title="" />
     <mcClonerDialog active="true" pos="[1707,440]" size="[164,296]" title="" />
     <mcRenameDialog active="true" pos="[265,280]" size="[224,312]" title="" />
     <mcObjectPlanterDialog active="true" pos="[266,201]" size="[356,92]" title="" />
@@ -218,5 +218,6 @@
     <btn_B36 action="Distributor" icon="160" />
     <btn_G22 action="Patcher2P" icon="271" />
     <btn_D16 action="Select_Objects_By_Wirecolor" icon="272" />
+    <btn_G24 action="Smooth_Hard" icon="110" />
   </Buttons>
 </USER>

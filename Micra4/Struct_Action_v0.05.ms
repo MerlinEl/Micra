@@ -2507,6 +2507,13 @@ struct mcAction (
 		local obj = selection[1]
 		if obj == undefined do return false
 		select(for o in objects where o.wirecolor == obj.wirecolor collect o)
+	),
+	fn smoothPolyHard = (
+		
+		local obj = selection[1]
+		if classOf obj != Editable_Poly do return false
+		obj.autoSmoothThreshold = 5
+		obj.EditablePoly.autosmooth ()
 	)
 	/*<end>*/
 )
