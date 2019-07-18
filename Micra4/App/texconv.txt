@@ -1,0 +1,61 @@
+https://docs.microsoft.com/en-us/previous-versions//bb206243(v=vs.85)
+
+
+A command line tool that converts textures between the following formats: BMP, DDS, JPEG, HDR, PFM or PNG.
+
+Compatibility Chart
+Direct3D 9	Direct3D 10	64-bit Native Mode	Windows XP	Windows Vista
+Yes
+
+No
+
+Yes
+
+Yes
+
+Yes
+
+ 
+
+Path
+The executable file, Texconv.exe, is in the following platform-dependent locations:
+
+Item	Description
+32-bit
+
+DirectX SDK root\Utilities\Bin\x86
+
+64-bit
+
+DirectX SDK root\Utilities\Bin\x64
+
+ 
+
+Syntax
+Texconv.exe uses the following command syntax:
+
+texconv [-w number] [-h number] [-d number] [-m number] [-f format] [-if filter] [-mf filter] [-c color] [-srgbi] [-srgbo] [-px string] [-sx string] [-o directory] [-ft file-type] [-nologo] file-name
+
+The file-name parameter indicates the file to convert.
+
+The optional command-line switches are described in the following table.
+
+Optional Switches	Description
+-c   color	Colorkey value. Wherever this color appears in the source texture it is replaced with a transparent black value (0x000000) in the output texture. If an alpha channel is present in the output texture, this makes the specified color transparent. If no alpha channel is present it is changed to black. When specifying this color, always include an alpha value (use FF if the color is opaque). For example, -c FFFE02A5 sets the colorkey value to a solid magenta.
+-d   number	Depth of the output texture. This setting applies only to volume textures.
+-f   format	Output format. Use any of the formats in D3DFORMAT without the D3DFMT_ prefix (except: D3DFMT_MULTI2_ARGB8).
+-ft   file-type	A file type for the output texture. Use one of the following: bmp, dds, jpg, hdr, pfm, png, or tga. The default value is dds.
+-h   number	Height of the output texture in pixels.
+-w   number	Width of the output texture in pixels.
+-if   filter	Image filter. Use one of the following: NONE, POINT, LINEAR, TRIANGLE, BOX, NONE_DITHER, POINT_DITHER, LINEAR_DITHER, TRIANGLE_DITHER, or BOX_DITHER. Filters with DITHER in their name indicate that a 4×4 ordered dither algorithm is also applied. See D3DX_FILTER for descriptions of the filters.
+-m   number	Number of mipmap levels to generate in the output texture. This setting only applies to DDS output. For more information, see Texture Filtering with Mipmaps (Direct3D 9).
+-mf   filter	Mipmap filter value described in D3DX_FILTER.
+-o   directory	Output directory.
+-px   string	Text string to attach to the front of the resulting texture's name.
+-srgbi or
+
+-srgbo
+
+Use -sRGBi to indicate that the input data is in the sRGB (gamma 2.2) color format. Use -sRGBo to indicate that the output data should be in sRGB color format.
+-sx   string	Text string to attach to the end of the resulting texture's name.
+-nologo	Suppress copyright message.

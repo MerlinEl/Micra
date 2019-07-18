@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <SETTINGS>
   <SELECTION>
-    <perforce_path val="10" />
+    <perforce_path val="5" />
   </SELECTION>
   <PERFORCE>
     <loc_1 val="models\city\lost_heaven\districts" />
@@ -14,6 +14,7 @@
     <loc_8 val="missions\_test_rene" />
     <loc_9 val="models\city\lost_heaven\districts\lh_10_countryside" />
     <loc_10 val="models\city\lost_heaven\districts\lh_00_generic" />
+    <loc_11 val="missions\lh_07_hoboken\" />
   </PERFORCE>
   <FBX>
     <import val="D:\!2k_games\scotch_dev\exported" />

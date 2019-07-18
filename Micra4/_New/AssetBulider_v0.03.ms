@@ -1,4 +1,6 @@
 /*
+Asset Name
+//lh_08_family_house_a_v1
 Photoshop
 //Scotch/dev/resources/graphics/city/lost_heaven/districts/lh_08_oakwood/static_objects/maps/lh_08_family_house_c_v1.psd
 //Scotch/dev/edit/maps/city/lost_heaven/districts/lh_08_oakwood/lh_08_family_house_c_v1---d.dds
@@ -24,47 +26,49 @@ rollout mcAssetGeneratorDialog "Asset Builder:" width:832 height:352
 	local temp_edt_path	= "models\\city\\lost_heaven\\districts\lh_08_oakwood\\"
 	local temp_res_path	= "city\\lost_heaven\districts\\lh_08_oakwood\\static_objects\\"
 	local temp_asset_name= "lh_08_family_house_a_v1"
-	GroupBox 'grp1' "3DsMax:" pos:[4,204] width:128 height:100 align:#left
-	label 'lbl1' "Create Material:" pos:[12,242] width:84 height:16 align:#left
-	label 'lbl2' "Create Material:" pos:[420,230] width:84 height:16 align:#left
-	checkbox 'chk_create_fussion_mat' "" pos:[504,228] width:23 height:20 enabled:true checked:true align:#left
-	label 'lbl3' "Create PSD:" pos:[148,226] width:84 height:16 align:#left
-	checkbox 'chk_create_psd' "" pos:[237,224] width:23 height:20 enabled:true checked:true align:#left
-	label 'lbl4' "width:" pos:[148,254] width:36 height:16 align:#left
-	spinner 'spn_psd_h' "" pos:[189,276] width:72 height:16 range:[0,10000,2048] align:#left
-	label 'lbl5' "height:" pos:[148,276] width:36 height:16 align:#left
-	spinner 'spn_psd_w' "" pos:[189,252] width:72 height:16 range:[0,10000,1024] align:#left
+	GroupBox 'grp1' "3DsMax:" pos:[4,204] width:144 height:100 align:#left
+	label 'lbl1' "Create Material:" pos:[12,242] width:100 height:16 align:#left
+	label 'lbl2' "Create Material:" pos:[436,230] width:84 height:16 align:#left
+	checkbox 'chk_create_fussion_mat' "" pos:[520,228] width:23 height:20 enabled:true checked:true align:#left
+	label 'lbl3' "Create PSD:" pos:[164,226] width:84 height:16 align:#left
+	checkbox 'chk_create_psd' "" pos:[253,224] width:23 height:20 enabled:true checked:true align:#left
+	label 'lbl4' "width:" pos:[164,254] width:36 height:16 align:#left
+	spinner 'spn_psd_h' "" pos:[205,276] width:72 height:16 range:[0,10000,2048] type:#integer scale:1 align:#left
+	label 'lbl5' "height:" pos:[164,276] width:36 height:16 align:#left
+	spinner 'spn_psd_w' "" pos:[205,252] width:72 height:16 range:[0,10000,1024] type:#integer scale:1 align:#left
 	label 'lbl_r' "Max Path ( Resource ):" pos:[12,68] width:110 height:16 align:#left
-	label 'lbl_e' "Models Path ( Edit )" pos:[12,48] width:110 height:16 align:#left tooltip:"IRES Path"
+	label 'lbl_e' "Models Path ( Edit )" pos:[12,48] width:110 height:16 toolTip:"IRES Path" align:#left
 	edittext 'edt_edt_path' "" pos:[116,48] width:676 height:16 align:#left
 	edittext 'edt_res_path' "" pos:[116,68] width:676 height:16 align:#left
-	label 'lbl7' "Create Node:" pos:[12,262] width:84 height:16 align:#left
+	label 'lbl7' "Create Node:" pos:[12,262] width:100 height:16 align:#left
 	button 'btn_browse_edt_path' "..." pos:[796,48] width:20 height:16 align:#left
-	GroupBox 'grp2' "Photoshop:" pos:[140,204] width:264 height:100 align:#left
-	checkbox 'chk_export_psd_diffuse' "" pos:[372,244] width:23 height:20 checked:true align:#left
-	label 'lbl10' "Export Diffuse:" pos:[284,246] width:84 height:16 align:#left
-	checkbox 'chk_generate_psd_layers' "" pos:[372,220] width:23 height:20 checked:true align:#left
-	label 'lbl11' "Generate Layers:" pos:[284,222] width:84 height:16 align:#left
-	GroupBox 'grp3' "Fussion:" pos:[412,208] width:416 height:96 align:#left
-	label 'lbl12' "Assign Diffuse:" pos:[420,254] width:84 height:16 align:#left
-	checkbox 'chk7' "" pos:[504,252] width:23 height:20 enabled:true checked:true align:#left
+	GroupBox 'grp2' "Photoshop:" pos:[156,204] width:264 height:100 align:#left
+	checkbox 'chk_export_psd_diffuse' "" pos:[388,244] width:23 height:20 checked:true align:#left
+	label 'lbl10' "Export Diffuse:" pos:[300,246] width:84 height:16 align:#left
+	checkbox 'chk_generate_psd_layers' "" pos:[388,220] width:23 height:20 checked:true align:#left
+	label 'lbl11' "Generate Layers:" pos:[300,222] width:84 height:16 align:#left
+	GroupBox 'grp3' "Fussion:" pos:[428,208] width:400 height:96 align:#left
+	label 'lbl12' "Assign Diffuse:" pos:[436,254] width:84 height:16 align:#left
+	checkbox 'chk7' "" pos:[520,252] width:23 height:20 enabled:true checked:true align:#left
 	button 'btn2' "GENERATE ASSET" pos:[4,308] width:824 height:40 align:#left
 	GroupBox 'grp19' "Global:" pos:[4,4] width:824 height:192 align:#left
 	button 'btn_browse_res_path' "..." pos:[796,68] width:20 height:16 align:#left
 	label 'lbl74' "Asset Name" pos:[12,26] width:110 height:16 align:#left
 	edittext 'edt_asset_name' "" pos:[116,24] width:676 height:16 align:#left
-	checkbox 'chk_create_max_mat' "" pos:[100,240] width:23 height:20 enabled:true checked:true align:#left
-	checkbox 'chk_create_max_node' "" pos:[100,260] width:23 height:20 enabled:true checked:true align:#left
+	checkbox 'chk_create_max_mat' "" pos:[116,240] width:23 height:20 enabled:true checked:true align:#left
+	checkbox 'chk_create_max_node' "" pos:[116,260] width:23 height:20 enabled:true checked:true align:#left
 	label 'lbl_psd_path' "PSD Path:" pos:[12,112] width:804 height:16 align:#left
 	label 'lbl_dds_path' "DDS Path:" pos:[12,132] width:804 height:16 align:#left
 	label 'lbl_mat_path' "Materials Path:" pos:[12,152] width:804 height:16 align:#left
 	-- label 'lbl_ires_path' "IRES Path:" pos:[12,172] width:804 height:16 align:#left
-	dropdownList 'ddl1' "" pos:[532,228] width:284 height:21 items:#("base/general", "base/facade_colored") align:#left
+	dropdownList 'ddl1' "" pos:[548,228] width:268 height:21 items:#("base/general", "base/facade_colored") align:#left
 	-- label 'lbl61' "MAX Path:" pos:[12,88] width:84 height:16 align:#left
 	-- edittext 'edt_max_path' "" pos:[96,88] width:696 height:16 align:#left
 	-- button 'btn_browse_max_path' "..." pos:[796,88] width:20 height:16 align:#left
-	label 'lbl96' "Create Max File:" pos:[12,222] width:84 height:16 align:#left
-	checkbox 'chk_create_max_file' "" pos:[100,220] width:23 height:20 enabled:true checked:true align:#left
+	label 'lbl96' "Create Max File:" pos:[12,222] width:100 height:16 align:#left
+	checkbox 'chk_create_max_file' "" pos:[116,220] width:23 height:20 enabled:true checked:true align:#left
+	label 'lbl17' "Create Placeholder:" pos:[12,282] width:100 height:16 align:#left
+	checkbox 'chk_create_max_mesh' "" pos:[116,280] width:23 height:20 enabled:true checked:true align:#left
 
 	fn generatePathsFromEdit e_path = (
 	

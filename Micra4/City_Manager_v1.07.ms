@@ -50,7 +50,7 @@ rollout mcCityManDialog "" width:500 height:920
 	label 'lbl_sh' "Show - Hide objects which contains a Word:" pos:[12,872] width:220 height:14 align:#left
 	button 'btn_show_objs' "Show" pos:[13,892] width:56 height:17 toolTip:"Unhide Objects By Name" across:3 align:#left
 	button 'btn_hide_objs' "Hide" pos:[72,892] width:56 height:17 toolTip:"Hide Objects By Name" align:#left
-	edittext 'edt_sh_name' "building" pos:[132,892] width:104 height:16 align:#left
+	edittext 'edt_sh_name' pos:[132,892] width:104 height:16 align:#left
 	button 'btn_sel_geo_nodes' "G" pos:[204,32] width:20 height:20 toolTip:"Select Geometry Nodes" align:#left
 	button 'btn_sel_coll_nodes' "C" pos:[224,32] width:20 height:20 toolTip:"Select Collision Nodes" align:#left
 	
@@ -793,6 +793,7 @@ rollout mcCityManDialog "" width:500 height:920
 	)
 	on mcCityManDialog open do
 	(
+		edt_sh_name.text = "building" 
 		mcCityManDialog.title = form_title
 		--fill first list with nodes
 		initializeInterface()
