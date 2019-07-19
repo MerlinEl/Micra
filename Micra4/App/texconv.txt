@@ -1,5 +1,9 @@
 https://docs.microsoft.com/en-us/previous-versions//bb206243(v=vs.85)
 
+d:\ReneBaca\3DsMax\Micra\Micra4\App\texconv.exe c:\temp\test.png -ft dds -o c:\temp
+d:\ReneBaca\3DsMax\Micra\Micra4\App\texconv32.exe c:\temp\test.png -w 512 -h 512 -ft dds -o c:\temp -c b1b1b1
+d:\ReneBaca\3DsMax\Micra\Micra4\App\texconv32.exe c:\temp\test2.bmp -ft dds -o c:\temp
+
 
 A command line tool that converts textures between the following formats: BMP, DDS, JPEG, HDR, PFM or PNG.
 

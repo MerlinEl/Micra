@@ -116,6 +116,7 @@ lh_02_little_italy_block_h_roads_coll
 	fn cloneRoad obj prefix = (
 		
 		local new_o = copy obj
+		convertToPoly new_o --collapse modifiers
 		new_o.name = uniqueName (prefix+"_"+ obj.name)
 		--for c in new_o.children do c.parent = undefined --dont need (a clone have no children)
 		 --delete all custom attributes
@@ -289,6 +290,7 @@ lh_02_little_italy_block_h_roads_coll
 	fn createRoadsCollisions = (
 		
 		roGenStruct.All_CALLBACKS_ENABLED = false
+		sliderTime = 0 --some roads have linkedXform with animated dummy. Collision must be genereted at frame 0
 		
 		local s_mat = meditmaterials["semantic_materials"]
 		escapeEnable = true 						--Progress Bar

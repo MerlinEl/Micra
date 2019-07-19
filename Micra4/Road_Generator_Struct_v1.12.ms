@@ -2069,11 +2069,12 @@ local finalRoad = if old then (
 					spline = obj
 					road = getNodeByName spline.road
 					
-				)else( --if road is selected
+				) else if isRoad obj do ( --if road is selected
 				
 					spline = obj.roadSpline
 					road = obj
 				)
+				
 				if classOf spline != SplineShape or classOf road != Editable_Poly do (
 				
 					messageBox "Unable to create road.  Road or spline wasn't selected."

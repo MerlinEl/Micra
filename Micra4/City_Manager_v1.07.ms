@@ -603,6 +603,13 @@ rollout mcCityManDialog "" width:500 height:920
 		
 		for o in obj_array where findString o.name name_part != undefined do o.isHidden = not state
 	)
+	fn fixDupplicetedNamesInSelection = (
+		
+		needUpdate()
+		for o in selection do o.name = uniqueName o.name
+		messageBox "Dupplicated names has been fixed on selection" title:form_title
+	)
+	
 	--load node children
 	on cbx_node_list selected sel do
 	(
@@ -826,7 +833,7 @@ rollout mcCityManDialog "" width:500 height:920
 	on btn_select_empty_objects pressed do selectObjectsWithoutGeometry()
 	on btn_inspect_nodes pressed do inspectNodesPath()
 	on btn_unique_check pressed do checkForDupplicatedNamesInScene()
-	on btn_unique_fix pressed do undo "Hide Selected" on (for o in selection do o.name = uniqueName o.name)
+	on btn_unique_fix pressed do undo "Hide Selected" on fixDupplicetedNamesInSelection()
 	on btn_hide_sel pressed do undo "Unhide Selected" on (for o in selection do o.isHidden = true)
 	on btn_unhide_sel pressed do (for o in selection do o.isHidden = false)
 	on btn_generate_terrain_coll pressed do generateTerrainCollisions()

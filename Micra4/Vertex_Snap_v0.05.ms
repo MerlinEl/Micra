@@ -12,7 +12,7 @@ rollout mcVertexSnapDialog "" width:320 height:232
 	label 'lbl_units' "units..." pos:[152,120] width:68 height:16 align:#left
 	GroupBox 'grp2' "Single:" pos:[8,4] width:308 height:56 align:#left
 	button 'btn_get_pos' "Get Position" pos:[16,24] width:136 height:24 align:#left
-	button 'btn_set_pos' "Srangeet Position" pos:[160,24] width:148 height:24 align:#left
+	button 'btn_set_pos' "Set Position" pos:[160,24] width:148 height:24 align:#left
 	GroupBox 'grp3' "Multiple:" pos:[8,72] width:308 height:156 align:#left
 	radiobuttons 'rdo_offset' "" pos:[64,148] width:245 height:32 labels:#("1", "2", "3", "4", "5", "10", "15", "20", "25", "30", "40", "50", "70", "99") columns:7 align:#left
 	label 'lbl4' "quick:" pos:[16,148] width:40 height:16 align:#left

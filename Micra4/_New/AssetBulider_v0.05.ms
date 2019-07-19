@@ -139,6 +139,19 @@ rollout mcAssetGeneratorDialog "Asset Builder:" width:712 height:352
 		)
 		return result
 	)
+	--createDDSImage @"c:\temp\" "test_file3" 512 240 gray
+	fn createDDSImage save_dir file_name size_w size_h bg_color = (
+
+		local bmp_path = save_dir + file_name + ".bmp"
+		local temp_b = bitmap size_w size_h filename:(bmp_path) color:bg_color
+		save temp_b; close temp_b
+		local tc = micra.AppsDir + "texconv32.exe"
+		local cmd = tc + " " + bmp_path + " -ft dds -o " + save_dir
+		-- format "createDDSImage >\n\tcmd:%\n" cmd
+		HiddenDOSCommand cmd startpath:save_dir exitCode:&exitcode --donotwait:true 
+		if doesFileExist bmp_path do deleteFile bmp_path --remove temporalily image
+		exitcode == 0
+	)
 	fn MatXML_ModifyGUID path newGUID = (
 	
 		local result = false
@@ -374,15 +387,3 @@ createDialog mcAssetGeneratorDialog
 "Layer002"
 	*/
 	
-	
-	/*
-	fn createDDSImage dir file_name size bg_color = (
-
-	local newBM = bitmap size.x size.y color:bg_color
-	newBM.fileName = dir + file_name + ".dds"
-	local success = save newBM
-	format "fpath:% saved:%\n" newBM.fileName success
-	close newBM
-)
-createDDSImage "c:\\temp\\" "test.dds" [320, 240] gray
-	*/
