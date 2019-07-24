@@ -1,0 +1,11 @@
+name "Photoshop tool"
+version 3.2
+description "Photosop tool."
+
+copy	"*.bmp" to "$ui\Icons"
+copy	"*.mcr" to "$macroscripts"
+
+run	done.ms
+drop	done.ms
+
+clear temp

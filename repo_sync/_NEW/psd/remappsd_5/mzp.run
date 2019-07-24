@@ -1,0 +1,9 @@
+name "remap_psd"
+version 0.8
+
+
+copy *.ms* to $userScripts\
+copy *.bmp* to $userIcons\
+
+drop $userScripts\remapPSD.ms
+run $userScripts\remapPSD.ms

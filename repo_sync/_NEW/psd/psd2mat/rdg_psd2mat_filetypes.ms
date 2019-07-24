@@ -1,0 +1,1 @@
+rdgPSD2MATfunctions.validFileTypes = #(#("jpeg", ".jpg"), #("PNG", ".png"), #("TIF", ".tif"), #("Targa", ".tga"), #("Bitmap", ".bmp"))
