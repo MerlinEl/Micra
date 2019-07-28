@@ -70,7 +70,7 @@
     <btn_13 val="(color 112 112 0)" />
   </ColorPalete>
   <Gallery3D>
-    <Root_Dir E="" />
+    <Root_Dir E="" val="E:\Aprog\Orien\Micra\Gallery3D\" />
   </Gallery3D>
   <Gallery3DDefault>
     <Plant_Distance val="24" />
