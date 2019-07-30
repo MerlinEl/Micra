@@ -45,15 +45,16 @@ rollout mcCityManDialog "" width:500 height:920
 	button 'btn_unhide_sel' "Unhide Selected" pos:[128,848] width:112 height:20 toolTip:"Unhide Selected Objects" align:#left
 	GroupBox 'grp13' "Collisions:" pos:[252,764] width:244 height:152 align:#left
 	button 'btn_generate_coll' "Gen Simple Collisions" pos:[380,780] width:112 height:40 toolTip:"Genarate simple collisions from selection, ID:1, " align:#left
-	button 'btn_generate_terrain_coll' "Gen Terrain Collisions" pos:[380,824] width:112 height:40 toolTip:"Genarate terrain collisions from selection, ID:Auto, " align:#left
+	button 'btn_generate_terrain_coll' "Gen Terrain Collisions" pos:[380,824] width:112 height:40 toolTip:"Genarate terrain collisions from selection, ID:Auto, " align:#left enabled:false
 	button 'btn_generate_roads_coll' "Gen Road Collisions" pos:[380,868] width:112 height:40 toolTip:"Genarate roads collisions from selection, ID:Auto, " align:#left
 	label 'lbl_sh' "Show - Hide objects which contains a Word:" pos:[12,872] width:220 height:14 align:#left
 	button 'btn_show_objs' "Show" pos:[13,892] width:56 height:17 toolTip:"Unhide Objects By Name" across:3 align:#left
 	button 'btn_hide_objs' "Hide" pos:[72,892] width:56 height:17 toolTip:"Hide Objects By Name" align:#left
-	edittext 'edt_sh_name' pos:[132,892] width:104 height:16 align:#left
+	edittext 'edt_sh_name' "" pos:[132,892] width:104 height:16 align:#left
 	button 'btn_sel_geo_nodes' "G" pos:[204,32] width:20 height:20 toolTip:"Select Geometry Nodes" align:#left
 	button 'btn_sel_coll_nodes' "C" pos:[224,32] width:20 height:20 toolTip:"Select Collision Nodes" align:#left
-	
+	label 'lbl_dcoll' "Collision Type:" pos:[260,860] width:112 height:20 toolTip:"Move each Collision in to separate Layer" align:#left
+	dropdownList 'ddl_collision_type' "" pos:[256,884] width:116 height:21 items:#("Two Nodes", "Single Node") align:#left
 	--Local variables
 	local autosel = on
 	local last_wire_color = yellow
@@ -381,7 +382,11 @@ rollout mcCityManDialog "" width:500 height:920
 		for o in selection where superClassOf o == GeometryClass do (
 			
 			local coll_layer = getCollisionLayer o
-			local coll_export_node = getCollisionNode o
+			local coll_export_node = case ddl_collision_type.selected of ( --get collision node or mosh lod0
+				
+				"Two Nodes" : getCollisionNode o --link collision to second node
+				"Single Node" : o --link collision to  lod0
+			)
 			if coll_export_node == undefined do continue
 			--clone object
 			local o_instance = cloneObject o "coll" 
