@@ -124,6 +124,50 @@ struct PSD_MANAGER (
 	fn selectRegion = (
 -- 		app.activeDocument.selection.deselect()
 -- 		app.activeDocument.selection.select(selRegion, SelectionType.EXTEND)
+	),
+	fn setupPsdFoldersList settings_ini = (
+		
+		if mcAssetGeneratorLayersDialog != undefined do DestroyDialog mcAssetGeneratorLayersDialog
+		rollout mcAssetGeneratorLayersDialog "PSD Folders Setup:" width:172 height:252
+		(
+			local SettingsINI = ""
+			button 'btn_accept' "Accept" pos:[108,220] width:49 height:21 align:#left
+			button 'btn_cancel' "Cancel" pos:[12,220] width:48 height:21 align:#left
+			dotNetControl 'clb_mods' "CheckedListBox" pos:[12,24] width:144 height:191 align:#left 
+			groupBox 'grp6' "Active List:" pos:[4,4] width:164 height:244 align:#left
+			fn loadPsdFoldersSettings = (
+				
+				if clb_mods.Items.count != 0 do clb_mods.Items.Clear()
+				local folder_names = getINISetting SettingsINI "PSD_Folders"
+				for item_name in folder_names do (
+					
+					local is_checked = (getINISetting SettingsINI "PSD_Folders" item_name) == "true"
+					clb_mods.Items.Add item_name is_checked
+				) 
+			)
+			fn savePsdFoldersSettings = (
+
+				for i=0 to clb_mods.Items.count-1 do (
+					
+					local is_checked = (clb_mods.GetItemChecked i) as string
+					local item_name = clb_mods.items.item[ i ]
+					setINISetting SettingsINI "PSD_Folders" item_name is_checked
+				)
+				DestroyDialog  mcAssetGeneratorLayersDialog
+			)
+			on mcAssetGeneratorLayersDialog open do (
+				
+				clb_mods.BackColor = (dotNetClass "System.Drawing.Color").FromArgb 40 40 40
+				clb_mods.ForeColor = (dotNetClass "System.Drawing.Color").FromArgb 200 200 200
+				clb_mods.BorderStyle = (dotNetClass "BorderStyle").FixedSingle
+				clb_mods.HorizontalScrollbar = clb_mods.MultiColumn = false ; clb_mods.CheckOnClick = true
+			)
+			on btn_accept pressed do savePsdFoldersSettings()
+			on btn_cancel pressed do DestroyDialog  mcAssetGeneratorLayersDialog
+		)
+		CreateDialog mcAssetGeneratorLayersDialog  pos:[mouse.screenpos.x, mouse.screenpos.y - 252 / 2]
+		mcAssetGeneratorLayersDialog.SettingsINI = settings_ini
+		mcAssetGeneratorLayersDialog.loadPsdFoldersSettings()
 	)
 )
 

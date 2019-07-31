@@ -2,6 +2,13 @@
 
 filein "AssetBulider_DDS_Manager.ms"
 filein "AssetBulider_PSD_Manager.ms"
+filein "AssetBulider_P4V_Manager.ms"
+filein "AssetBulider_MAT_Manager.ms"
+/*
+append p4FileList (newPSDPath + newPSDFileName)
+
+
+*/
 
 
 /*
@@ -20,12 +27,14 @@ Fusion
 //Scotch/dev/edit/models/city/lost_heaven/districts/lh_08_oakwood/lh_08_family_house_c_v1.xds
 */
 
-
 Global mcAssetGeneratorDialog
+Global mcAssetGeneratorLayersDialog
+Global mcAssetGeneratorDDSDialog
 if mcAssetGeneratorDialog != undefined do destroyDialog mcAssetGeneratorDialog
-rollout mcAssetGeneratorDialog "Asset Builder:" width:712 height:352
+rollout mcAssetGeneratorDialog "Asset Builder:" width:712 height:332
 (
-	local SettingsINI = Micra.UserDir + "LS3D_Asset_Generator.xml"
+	local script_dir = getFilenamePath (getSourceFileName())
+	local SettingsINI = script_dir + "LS3D_Asset_Generator.ini"
 	local utils_path	= toLower (LS3DGUP.LS3DGUP.UtilsPath)
 	local edt_path	= toLower (LS3DGUP.LS3DGUP.EnginePath )
 	local res_path	= toLower (LS3DGUP.LS3DGUP.ResourcesPath)
@@ -37,61 +46,83 @@ rollout mcAssetGeneratorDialog "Asset Builder:" width:712 height:352
 	local source_template_file_material = "template_general.xml"
 	local source_template_files_models = #("template_model.ires", "template_model.xds")
 	local source_template_file_psd = "template_texture.psd"
+-- 	local psd_folder_names = #(
+-- 		
+-- 		"diffuse", 
+-- 		"alpha", 
+-- 		"glossiness", 
+-- 		"roughness", 
+-- 		"metalness", 
+-- 		"emissive", 
+-- 		"emissive mask", 
+-- 		"normal", 
+-- 		"detail mask", 
+-- 		"blend mask"
+-- 	)
 	local fussion_mats	= #(
+	
 		"base/general", 
+		"base/general_2uv", 
 		"base/terrain", 
 		"base/terrain_2blend", 
 		"base/terrain_3blend", 
-		"base/facade_colored"
+		"base/facade_colored",
+		"base/facade_basic",
+		"base/facade_blend",
+		"base/facade_colored_2uv",
+		"base/roads",
+		"base/terrain_shore"
 	)
-	
-	GroupBox 'grp1' "3DsMax:" pos:[4,204] width:156 height:144 align:#left
-	label 'lbl1' "Create Material:" pos:[12,242] width:116 height:16 align:#left
+	local texture_sizes		= #("8", "16", "32", "64", "128", "256", "512", "1024", "2048", "4096")
+	local maps_types			= #("---d.dds", "---dm.dds", "---e.dds", "---g.dds", "---n.dds")
+	local tamplates_maps		= @"asset_management\maps\" --"T000_DiffuseTexture", "T027_DetailNormalMaskTexture", "T011_EmissiveTexture", "T002_GlossinessMetalTexture", "T001_NormalTexture"
+	local tamplates_materials = @"asset_management\materials\" --"template_general.xml"
+	local tamplates_models	= @"asset_management\models\" --"template_model.ires", "template_model.xds"
+	local tamplates_psd		= @"asset_management\psd\" --template_texture.psd
+	GroupBox 'grp1' "3DsMax:" pos:[4,204] width:156 height:124 align:#left
 	label 'lbl2' "Create Material:" pos:[408,230] width:84 height:16 align:#left
 	checkbox 'chk_create_fussion_mat' "" pos:[492,228] width:23 height:20 enabled:true checked:true align:#left
 	label 'lbl3' "Create PSD:" pos:[176,226] width:84 height:16 align:#left
 	checkbox 'chk_create_psd' "" pos:[265,224] width:23 height:20 enabled:true checked:true align:#left
 	label 'lbl4' "width:" pos:[176,254] width:36 height:16 align:#left
-	spinner 'spn_psd_h' "" pos:[325,252] width:59 height:16 range:[0,10000,2048] type:#integer scale:1 align:#left
-	label 'lbl5' "height:" pos:[284,252] width:36 height:16 align:#left
-	spinner 'spn_psd_w' "" pos:[217,252] width:59 height:16 range:[0,10000,1024] type:#integer scale:1 align:#left
+	dropdownList 'ddl_psd_w' "" pos:[217,250] width:59 height:21 items:texture_sizes selection:1 align:#left
+	label 'lbl5' "height:" pos:[284,254] width:36 height:16 align:#left
+	dropdownList 'ddl_psd_h' "" pos:[325,250] width:59 height:21 items:texture_sizes selection:1 align:#left
 	label 'lbl_r' "Max Path:" pos:[12,144] width:72 height:16 align:#left
 	label 'lbl_e' "Models Path:" pos:[12,48] width:72 height:16 toolTip:"IRES Path" align:#left
 	edittext 'edt_edt_path' "" pos:[88,48] width:584 height:16 align:#left
 	edittext 'edt_res_path' "" pos:[88,144] width:584 height:16 align:#left
-	label 'lbl7' "Create Node:" pos:[12,282] width:116 height:16 align:#left
-	checkbox 'chk_create_node' "" pos:[128,280] width:23 height:20 enabled:true checked:true align:#left
+	label 'lbl7' "Create Node:" pos:[12,262] width:116 height:16 align:#left
+	checkbox 'chk_create_node' "" pos:[128,260] width:23 height:20 enabled:true checked:true align:#left
 	button 'btn_browse_edt_path' "..." pos:[676,48] width:20 height:16 align:#left
-	GroupBox 'grp2' "Photoshop:" pos:[168,204] width:224 height:144 align:#left
-	checkbox 'chk_export_psd_diffuse' "" pos:[264,300] width:23 height:20 checked:true align:#left
-	label 'lbl10' "Export Diffuse:" pos:[176,302] width:84 height:16 align:#left
-	checkbox 'chk_generate_psd_layers' "" pos:[264,276] width:23 height:20 checked:true align:#left
-	label 'lbl11' "Generate Layers:" pos:[176,278] width:84 height:16 align:#left
-	GroupBox 'grp3' "Fussion:" pos:[400,204] width:308 height:76 align:#left
-	label 'lbl12' "Assign Diffuse:" pos:[408,254] width:84 height:16 align:#left
-	checkbox 'chk7' "" pos:[492,252] width:23 height:20 enabled:true checked:true align:#left
-	button 'btn_gen_asset' "GENERATE" pos:[400,284] width:308 height:64 align:#left
-	-- GroupBox 'grp19' "Global:" pos:[4,4] width:824 height:216 align:#left
+	GroupBox 'grp2' "Photoshop:" pos:[168,204] width:224 height:124 align:#left
+	label 'lbl10' "Export DDS:" pos:[176,302] width:84 height:16 align:#left enabled:false
+	checkbox 'chk_psd_export_dds' "" pos:[264,300] width:23 height:20 checked:true align:#left enabled:false
+	button 'btn_psd_export_dds_settings' "DDS SetUp" pos:[284,300] width:100 height:20 checked:true align:#left
+	label 'lbl11' "Generate Folders:" pos:[176,278] width:84 height:16 align:#left enabled:false
+	checkbox 'chk_generate_psd_layers' "" pos:[264,276] width:23 height:20 checked:true align:#left enabled:false
+	button 'btn_psd_folders_settings' "Folders SetUp" pos:[284,276] width:100 height:20 checked:true align:#left
+	GroupBox 'grp3' "Fusion:" pos:[400,204] width:308 height:76 align:#left
+	label 'lbl12' "Assign DDS:" pos:[408,254] width:84 height:16 enabled:false align:#left
+	checkbox 'chk_assign_fusion_dds' "" pos:[492,252] width:23 height:20 enabled:false checked:true align:#left
+	button 'btn_gen_asset' "GENERATE" pos:[400,284] width:308 height:44 align:#left
 	button 'btn_browse_res_path' "..." pos:[676,144] width:20 height:16 align:#left
 	label 'lbl74' "Asset Name:" pos:[8,6] width:72 height:16 align:#left
 	edittext 'edt_asset_name' "" pos:[88,6] width:308 height:16 align:#left
-	checkbox 'chk_create_max_mat' "" pos:[128,240] width:23 height:20 enabled:true checked:true align:#left
+	label 'lbl1' "Create Material:" pos:[12,302] width:116 height:16 align:#left
+	checkbox 'chk_create_max_mat' "" pos:[128,300] width:23 height:20 enabled:true checked:true align:#left
 	label 'lbl_psd_path' "PSD Path:" pos:[12,168] width:684 height:16 enabled:false align:#left
 	label 'lbl_dds_path' "DDS Path:" pos:[12,72] width:684 height:16 enabled:false align:#left
 	label 'lbl_mat_path' "Materials Path:" pos:[12,92] width:684 height:16 enabled:false align:#left
-	-- label 'lbl_ires_path' "IRES Path:" pos:[12,172] width:804 height:16 align:#left
-	dropdownList 'ddl1' "" pos:[520,228] width:180 height:21 items:#("base/general", "base/terrain", "base/terrain_2blend", "base/terrain_3blend", "base/facade_colored") align:#left
-	-- label 'lbl61' "MAX Path:" pos:[12,88] width:84 height:16 align:#left
-	-- edittext 'edt_max_path' "" pos:[96,88] width:696 height:16 align:#left
-	-- button 'btn_browse_max_path' "..." pos:[796,88] width:20 height:16 align:#left
+	dropdownList 'ddl1' "" pos:[520,228] width:180 height:21 items:fussion_mats align:#left
 	label 'lbl96' "Create Max File:" pos:[12,222] width:116 height:16 align:#left
 	checkbox 'chk_create_max_file' "" pos:[128,220] width:23 height:20 enabled:true checked:true align:#left
-	label 'lbl17' "Create Placeholder:" pos:[12,322] width:116 height:16 align:#left
-	checkbox 'chk_create_max_mesh' "" pos:[128,320] width:23 height:20 enabled:true checked:true align:#left
+	label 'lbl17' "Create Placeholder:" pos:[12,282] width:116 height:16 align:#left
+	checkbox 'chk_create_max_mesh' "" pos:[128,280] width:23 height:20 enabled:true checked:true align:#left
 	GroupBox 'grp25' "EDIT:" pos:[4,28] width:704 height:88 align:#left
 	GroupBox 'grp26' "RESOURCES:" pos:[4,124] width:704 height:68 align:#left
-	label 'lbl19' "Create Layers:" pos:[12,262] width:116 height:16 align:#left
-	checkbox 'chk_create_max_layers' "" pos:[128,260] width:23 height:20 enabled:true checked:true align:#left
+	label 'lbl19' "Create Layers:" pos:[12,242] width:116 height:16 align:#left
+	checkbox 'chk_create_max_layers' "" pos:[128,240] width:23 height:20 enabled:true checked:true align:#left
 	dropdownList 'ddl_asset_type' "" pos:[564,4] width:144 height:21 items:#("House", "Crash Object") align:#left
 	label 'lbl39' "Asset type:" pos:[496,6] width:64 height:16 align:#left
 	fn showLog msg = (
@@ -127,44 +158,6 @@ rollout mcAssetGeneratorDialog "Asset Builder:" width:712 height:352
 		edt_res_path.text = r_path
 		lbl_psd_path.text = "PSD Path:             "		+ r_path + "\\maps\\"
 	)
-	--material id example > 0x7d50757b, 0x55000dd1
-	fn generateMaterialGuid seed_number = ( --for i=1 to 10 do GenerateMaterialGuid i
-
-		local lt = GetLocalTime()
-		seed ((seed_number + lt[8]) * (lt[7] + lt[6]) * lt[8])
-		local result = "0x"
-		for i = 1 to 8 do (
-			local num = random 0 15
-			result += ((bit.intAsHex num) as string)
-		)
-		result += ", 0x"
-		for i = 1 to 8 do (
-			local num = random 0 15
-			result += ((bit.intAsHex num) as string)
-		)
-		return result
-	)
-	fn MatXML_ModifyGUID path newGUID = (
-	
-		local result = false
-		try (
-			local xDoc = XMLDocument()										--Create an XMLDcoument
-			xDoc.LoadXML path												--Load XML from file
-			local rNode = xDoc.GetRootNode()									--Get the Root Node THIS MUST BE CALLED!		
-			
-			local guidNode = rNode.GetChild 0
-			if (guidNode.GetTag() != "guid") then (
-				print ("Unable to find <guid> in material xml. Invalid format. Skipping. -> " + path as string)
-			) else (
-				guidNode.SetText newGUID
-				xDoc.SaveXML()
-				result = true
-			)
-		) catch (
-			print ("Unknown error while reading material XML. Invalid format. Skipping. -> " + path as string + ", new material GUID: " + newGUID as string)
-		)		
-		return result
-	)
 	fn generateLayers asset_type = (
 	
 		case asset_type of (
@@ -173,25 +166,6 @@ rollout mcAssetGeneratorDialog "Asset Builder:" width:712 height:352
 			"Crash Object": gLS3DLayerUtils.CleanFile "CO"
 		)
 		"Generated layers type:" + asset_type
-	)
-	fn loadSemanticMaterial = (
-
-		macros.run "Medit Tools" "clear_medit_slots"
-		local fpath = LS3DGUP.LS3DGUP.UtilsPath + "semantic_materials.mat"
-		if not doesFileExist fpath do return false
-		local mat_lib = loadTempMaterialLibrary fpath
-		meditMaterials[2] = mat_lib[1]
-		-- loadMaterialLibrary LS3DGUP.LS3DGUP.UtilsPath + "semantic_materials.mat"
-		-- newMat = currentMaterialLibrary["semantic_materials"]
-	)
-	fn createMaterial mat_name &new_mat &new_guid = (
-	
-		if mat_name == "" do return undefined
-		new_guid = generateMaterialGuid (random 1 100)
-		local new_mat = ls3dMaterial()
-		new_mat.matguid = new_guid
-		new_mat.name = mat_name
-		meditMaterials[1] = new_mat
 	)
 	fn saveMaxFileAs output_dir file_name &max_file = (
 	
@@ -279,6 +253,8 @@ rollout mcAssetGeneratorDialog "Asset Builder:" width:712 height:352
 		)
 		return true
 	)
+
+--Main FN
 	fn generateNewAsset = (
 	
 
@@ -325,35 +301,43 @@ rollout mcAssetGeneratorDialog "Asset Builder:" width:712 height:352
 			output = createPlaceholder edt_asset_name.text ddl_asset_type.selected new_mat
 			output_log += "\n\t" + output	
 		) 
-
-		---firat create fussion material to get identical ID
-		if chk_create_max_mat.checked do (
-		
-			loadSemanticMaterial()
-			-- createMaterial edt_asset_name.text &new_mat &new_guid
+--CREATE FUSION MATERIAL BASED ON SELECTED TEMPLATE AND RETURN NEW UID
+		if chk_create_fussion_mat.checked do (
+			
+			local mm = MAT_MANAGER()
+			mm.loadMaxSemanticMaterial()
+-- 			local mat_guid =  mm.createFusionMaterial edt_asset_name.text edt_path
+-- 			if chk_create_max_mat.checked do  mm.createMaxMaterial edt_asset_name.text mat_guid
 		)
 
 		showLog output_log
 		max tool zoomextents all
 	)
+--UI
 	fn saveSettings = (
 
 		if isValidPath edt_edt_path.text do setINISetting SettingsINI "Settings" "Edit_Path" (trimRight edt_edt_path.text @"\")
 		if isValidPath edt_res_path.text do setINISetting SettingsINI "Settings" "Resource_Path" (trimRight edt_res_path.text @"\")
 		if edt_asset_name.text != "" do setINISetting SettingsINI "Settings" "Asset_Name" edt_asset_name.text
+		setINISetting SettingsINI "PSD_Size" "width_index" (ddl_psd_w.selection as string)
+		setINISetting SettingsINI "PSD_Size" "height_index" (ddl_psd_h.selection as string)
 	)
 	fn loadSettings = (
 		
-		local edit_path = resources_path = "...", asset_name = ""
+		local edit_path = resources_path = "...", asset_name = "", width_index = "8", height_index = "9"
 		if doesFileExist SettingsINI do (
 		
 			edit_path		= getINISetting SettingsINI "Settings" "Edit_Path"
 			resources_path	= getINISetting SettingsINI "Settings" "Resource_Path"
 			asset_name		= getINISetting SettingsINI "Settings" "Asset_Name"
+			width_index		= getINISetting SettingsINI "PSD_Size" "width_index"
+			height_index		= getINISetting SettingsINI "PSD_Size" "height_index"
 		) 
 		edt_edt_path.text	= if isValidPath edit_path then  edit_path else "..."
 		edt_res_path.text	= if isValidPath resources_path then  resources_path else "..."
 		edt_asset_name.text	= if asset_name != "" then  asset_name else "lh_"
+		ddl_psd_w.selection = execute width_index
+		ddl_psd_h.selection = execute height_index
 		if isValidPath edit_path do generatePathsFromEdit (toLower edit_path)
 		generatePathsFromResources (toLower resources_path)
 	)
@@ -377,6 +361,8 @@ rollout mcAssetGeneratorDialog "Asset Builder:" width:712 height:352
 	fn fin = (
 	
 		saveSettings()
+		if mcAssetGeneratorLayersDialog != undefined do DestroyDialog mcAssetGeneratorLayersDialog
+		if mcAssetGeneratorDDSDialog != undefined do DestroyDialog mcAssetGeneratorDDSDialog
 	)
 	on btn_browse_edt_path pressed do (
 	
@@ -391,6 +377,8 @@ rollout mcAssetGeneratorDialog "Asset Builder:" width:712 height:352
 	on btn_gen_asset pressed do generateNewAsset()
 	on edt_edt_path entered text do generatePathsFromEdit (toLower edt_edt_path.text)
 	on edt_res_path entered text do generatePathsFromResources (toLower edt_res_path.text)
+	on btn_psd_folders_settings pressed do (local ps = PSD_MANAGER(); ps.setupPsdFoldersList SettingsINI)
+	on btn_psd_export_dds_settings pressed do (local dd = DDS_MANAGER(); dd.setupPsdDdsList SettingsINI)
 	on mcAssetGeneratorDialog open do init()
 	on mcAssetGeneratorDialog close do fin()
 
