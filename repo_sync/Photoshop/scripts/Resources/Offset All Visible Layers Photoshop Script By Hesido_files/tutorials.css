@@ -1,0 +1,546 @@
+html  {
+font-size: 62.5%;
+}
+
+body {
+	background-color: #989898;
+	margin: 0;
+	padding: 0;
+	font-family: "Trebuchet MS", Trebuchet, Verdana, Sans-Serif;
+/*	font-size: 14px; */
+}
+
+#header, #footer, #contentbody {
+	position: relative;
+	width: 98%; 
+	max-width: 100rem;
+	margin: 0 auto;
+
+}
+body {
+	font-size: 1.6rem;
+}
+
+@media all and (max-width: 90rem) {
+body {
+	font-size: 1.5rem;
+}
+
+#header, #footer, #contentbody {
+	max-width: 80rem;
+}
+
+
+}
+
+@media all and (max-width: 80rem) {
+body {
+	font-size: 1.4rem;
+}
+#header, #footer, #contentbody {
+	max-width: 74rem;
+}
+}
+
+@media all and (max-width: 40rem) {
+body {
+	font-size: 1.2rem;
+}
+}
+
+h1, h2, h3, h4, h5, h6 {
+clear: both;
+}
+
+
+pre {
+	padding: 0.2em 0.5em 0.5em 0.5em;
+	display: block;
+	width: 80%;
+	margin: 1em auto;
+	border: 2px dotted #A22;
+}
+
+pre.titled {
+	margin-top: -1em;
+	padding-top: 1.2em;
+	}
+
+span.pretitle, h5.pretitle {
+	background-color: #411;
+	background-image: none;
+	width: 18em;
+	padding: 0 0.6em;
+	margin: 0 0 0 13%;
+	border: 4px solid #A22;
+	position: relative;
+	display:block;
+	color: white;
+	}
+
+
+
+form {
+	width: 80%;
+	margin: 1em auto;
+	}
+
+#header {
+	padding-top: 10px;
+}
+
+#footer {
+	padding-top: 1em;
+	padding-bottom: 0.8em;
+	}
+
+#contentbody {
+	background-color: white;
+	border-radius: 2rem;
+	}
+
+#contentbefore, #contentafter {
+	background-color: #FFFFFF;
+	margin: 0;
+	padding: 0;
+	width: 100%;
+	height: 35px;
+	background-image: url(/tutorials/images/headerstars.png);
+	background-position: top left;
+	background-repeat: repeat-x;
+	border-radius: 3rem;
+	background-size: 75%;
+}
+
+
+#contentafter {
+	background-image: url(/tutorials/images/headerstars.png);
+	-webkit-transform:scaleY(-1);
+	-moz-transform:scaleY(-1);
+	-ms-transform:scaleY(-1);
+	-o-transform:scaleY(-1);
+	transform:scaleY(-1);
+	}
+
+#content {
+	margin: 0px;
+	padding: 0.2rem;
+	background-color: white;
+	color: #003333;
+}
+
+h1, h2 {
+	font-variant: small-caps;
+	text-align: center;
+	font-size: 180%;
+	width: 95%;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+h2 {
+	font-size: 160%;
+	}
+
+h3, h4 {
+	font-family: Garamond, Serif;
+	text-align: left;
+	width: 91%;
+	font-size: 140%;
+	margin-left: auto;
+	margin-right: auto;
+	border-bottom: medium dashed #A22;
+	border-left: medium solid #A22;
+	padding: 0.3em 0.3em 0.3em 1em;
+	letter-spacing: 0.3em;
+	font-variant: small-caps;
+	border-radius: 0 0 0 1rem;
+	}
+
+
+
+h4 {
+	font-size: 120%;
+	font-variant: normal;
+	border-left: none;
+	border-bottom: thin solid #22A;
+	width: 90%;
+	padding-left: 3em;
+	letter-spacing: 0.25em;
+}
+
+
+p {
+	position: relative;
+	display: block;
+	text-indent: 2rem;
+	padding: 0 2rem;
+	margin: 0.8em auto;
+	text-align: justify;
+	line-height: 135%;
+}
+
+
+.imagealigner, .imagelister {
+	text-align: center;
+	margin-bottom: 1em;
+}
+
+.imagelister img {
+	display: block;
+	margin: 0 auto 1em auto;
+}
+
+
+.imagepadder {
+	border: 5px solid #FFFFFF;
+	vertical-align: middle;
+}
+.menudescriptor {
+	font-style: italic;
+	color: #0066CC;
+}
+
+a {
+	color: #990000;
+}
+a:hover {
+	color: #990066;
+}
+a:visited {
+	color: #885151;
+}
+.names {
+	font-size: 110%;
+	color: #0099FF;
+}
+.note {
+	font-size: 80%;
+	text-align: right;
+	width: 96%;
+	text-indent: 0;
+	margin: 0.3em 0.6em;
+	color:#990000;
+	padding: 0;
+}
+.stronger {
+	color: #000066;
+	font-weight: bold;
+}
+.copyrightnotice {
+	font-size: 70%;
+	font-weight: bold;
+	display: block;
+	text-align: center;
+	font-family: Arial, Helvetica, sans-serif;
+	text-indent: 0;
+}
+
+.noindent {
+	text-indent: 0;
+	}
+
+.center {
+	text-align: center;
+	text-indent: 0;
+}
+.tipdiv {
+	background-color: #F3F5E3;
+	border: medium dashed #D5D3B7;
+	padding: 0.3em 1em 0.5em 1em;
+	font-size: 90%;
+	width: 79%;
+	margin: 0 auto;
+}
+
+.tipdiv span.tiptitle {
+	background-color: #CEC7C6;
+	background-image: none;
+	float: left;
+	padding: 0 0.6em;
+	margin: -1.2em 1em 0 -3em;
+	border: 4px solid #DFDBDA;
+	position: relative;
+	display:block;
+	}
+
+.tipdiv p {
+	margin: 0;
+	padding: 0;
+	text-align: justify;
+	width: 98%;
+	text-indent: 0;
+}
+
+.person {
+
+	font-style: italic;
+	color: #0066CC;
+}
+.imagealignerleft {
+	text-align: center;
+	display: inline;
+	vertical-align: top;
+	background-position: left top;
+	float: left;
+
+}
+
+.bottomlinks {
+	font-size: 80%;
+}
+
+.bottomlinks p {
+	text-indent: 0;
+	width: auto;
+	margin: 0 auto;
+	text-align:center;
+	}
+
+.optionaldiv {
+	background-color: #FFFFCC;
+	border: medium solid #BADFAA;
+	padding: 0.6em;
+	width: 90%;
+	margin: 1em auto;
+}
+
+.smallcaps {
+	font-variant: small-caps;
+	}
+
+ul {
+	display:block;
+	padding:1em;
+	width: 75%;
+	margin: auto;
+}
+
+#topnavigation {
+	font-size: 12px;
+	padding: 0;
+	margin: 0 auto;
+	line-height: 1.3em;
+}
+
+#topnavigation ul {
+	margin: 0;
+	padding: 0 0 0 15em ;
+	margin-top: -1.3em;
+}
+
+#topnavigation_r {
+	width: auto;
+	font-size: 12px;
+	list-style-type: none;
+	padding: 0;
+	margin: 0;
+	font-variant: small-caps;
+}
+
+#topnavigation_r li {
+	text-align: center;
+	display: block;
+	float: left;
+	width: 135px;
+	margin-right: 10px;
+}
+
+#topnavigation_r ul {
+	display: none;
+}
+
+#topnavigation_r li span {
+	display: block;
+	height: 25px;
+	line-height: 25px;
+	overflow: hidden;
+	background-color: white;
+	background-image: url(/nimages/topnavspan.png)
+}
+
+#contentbody {
+	clear: both;
+}
+
+#navwrap {
+	padding: 0;
+}
+
+#header {
+	padding-bottom: 0.5em;
+}
+
+
+#menucontainer {
+	height: auto;
+	width: 240px;
+	border: 2px solid red;
+	z-index: 100;
+	filter: alpha(opacity=92);
+	opacity: .92;
+}
+
+#menucontent {
+	height: auto;
+	width: auto;
+	font-family: "Trebuchet MS", Trebuchet, Verdana, Sans-Serif;
+	font-size: 11px;
+	color: #051105;
+	position: relative;
+	top: 0px;
+	left: 0px;
+	padding: 0.4em 1em 0.4em 1.5em !important;
+	border: none;
+	background-color: white;
+	background-image: url(/nimages/navmenumiddle.png);
+	background-repeat: repeat-y;
+
+}
+
+.hoveredspan {
+	color: #222277;
+	background-image: url(/nimages/topnavspanhover.png) !important;
+	line-height: 27px !important;
+}
+
+#menutop {
+	position: relative;
+	width: 240px;
+	height: 9px;
+	background-image: url(/nimages/navmenutop.png);
+	font-size:1px;
+	line-height:0px;
+}
+
+* html #menutop {
+	filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(enabled=true, sizingMethod=crop src='/nimages/navmenutop.png');
+	background-image: none;
+}
+
+#menubottom {
+	position: relative;
+	width: 240px;
+	height: 12px;
+	background-image: url(/nimages/navmenubottom.png);
+	font-size:1px;
+	line-height:0px;
+	background-position:top;
+	background-repeat:no-repeat;
+}
+
+* html #menubottom {
+	filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(enabled=true, sizingMethod=crop src='/nimages/navmenubottom.png');
+	background-image: none;
+}
+
+#menucontent ul, #earlymenu ul {
+	list-style-type: none;
+	padding: 0;
+	margin: 0;
+	width: auto;
+}
+
+#menucontent ul li, #earlymenu ul li {
+	padding: 0 0 0.6em 0;
+}
+
+
+#menucontent ul ul li, #earlymenu ul ul li {
+	padding: 0 0 0.4em 1em;
+}
+
+.topper {
+	font-size: x-small;
+	font-family: Arial, serif;
+	float: right;
+	font-variant: normal;
+}
+
+.hoverimage {
+	border: 2px solid #722;
+}
+
+.hoverimage:hover {
+	border: 2px solid #F22;
+}
+
+
+.validator {
+float: right;
+font-size: 10px;
+margin-top: -1.2em;
+margin-right: 1em;
+}
+
+.validator a {
+display: block;
+text-decoration: none;
+color: #422;
+}
+
+.w3c {
+background-color: white;
+padding:0.2em;
+}
+.spec {
+background-color: #CCC;
+padding:0.2em;
+}
+
+dl {
+margin: 0 auto;
+width: 80%;
+}
+
+dt {
+text-align: right;
+float: left;
+clear: both;
+width: 20%;
+margin: 0;
+display: inline;
+padding: 0.1em 1% 0.1em 1%;
+background-color: #666;
+color: white;
+}
+
+dd {
+width: auto;
+margin-left: 23%;
+margin-bottom: 0.1em;
+padding: 0.1em;
+}
+
+
+dd::after {
+    content: "."; 
+    display: block; 
+    height: 0; 
+    clear: both; 
+    visibility: hidden;
+}
+
+.flexdemo #noteholder {
+	position: relative;
+	padding-left:200px;
+	min-height:100px;
+	background: url(/web/images/logoflexcroll.png) no-repeat 5% 50%;
+	}
+
+* html .flexdemo #noteholder {
+	height: 100px;
+	}
+
+@media all and (max-width: 40rem) {
+.flexdemo #noteholder {
+	background: url(/web/images/logoflexcroll.png) no-repeat 5% 50%;
+	background-size: 27%;
+	padding-left:29%;
+	}
+}
+
+.imagealigner img {
+    max-width: 100%;
+    height: auto;
+}

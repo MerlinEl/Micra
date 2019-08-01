@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<!-- saved from url=(0059)http://www.hesido.com/base.php?page=tutorials&sub=offsetall -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="description" content="Adobe Photoshop CS CS2 Script for texture work, script to offset several visible layers at once.">
+<meta name="keywords" content="photoshop, tutorial, script, fast, easy, offset, script, texture seam, seamless, fix texture seam">
+<title>Offset All Visible Layers Photoshop Script By Hesido</title>
+
+<meta name="author" content="Emrah BASKAYA">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="./Offset All Visible Layers Photoshop Script By Hesido_files/tutorials.css" rel="stylesheet" type="text/css">
+<link rel="shortcut icon" href="http://www.hesido.com/favicon.ico" type="image/x-icon">
+<link rel="alternate" type="application/atom+xml" href="http://www.hesido.com/atom.php">
+<script src="./Offset All Visible Layers Photoshop Script By Hesido_files/saved_resource" type="text/javascript"></script><script type="text/javascript" src="./Offset All Visible Layers Photoshop Script By Hesido_files/saved_resource(1)"></script>
+<script src="./Offset All Visible Layers Photoshop Script By Hesido_files/mainscripts.js.download" type="text/javascript"></script>
+</head>
+<body style="margin: 0px;">
+<div id="header">
+<div id="navwrap">
+<ul id="topnavigation_r">
+	<li><span>Photoshop Related</span>
+		
+	</li>
+	<li><span>3d Related</span>
+		
+	</li>
+	<li><span>Web Programming</span>
+		
+	</li>
+	<li><span>Other</span>
+		
+	</li>
+<li><span>Page Content</span></li></ul>
+<div style="clear:both"></div>
+</div>
+</div>
+<script type="text/javascript">
+<!--
+writeEarlyDrop();
+applyDropDownF('early','topnavigation','topnavigation_r',true,1,-10,0,'hoveredspan',450,150);
+-->
+</script>
+<div id="contentbody">
+<div id="contentbefore"></div>
+<div id="content">
+<h1>How to Fix Texture Seams When Several Layers Are Involved</h1>
+<h2>With a script to apply offset to several layers at once with ease.</h2>
+		  <p class="note">Updated: 02.06.2016 - Tested with Photoshop CS3, the script works.</p>
+		  <p class="note">Updated: 08.03.2012 - Tested with Photoshop CS5.1 trial version, and it seems to work.</p>
+		  <p class="note">Updated: 25.05.2005 - New Version (1.1) Now with Photoshop 7 support.</p>
+		  <p class="note">created on 03.05.2005</p>
+
+<h3 id="header_0"><a href="http://www.hesido.com/base.php?page=tutorials&amp;sub=offsetall#header" class="topper">Top</a>Introduction</h3>
+		  <p>Hi all. This time I'm going to provide you with a nice little script that will bring happiness to your household. I hope this may prove useful to at least some of you. I know you're somewhere out there.</p>
+		  <p>It is quite bit of a nuisance that the wonderful guys at Adobe do not let us swing around our canvas ever so freely. I think it would not be that hard for them to code a continuous canvas on edges so strokes at one edge affect the opposite side, and you could be panning around an infinite tile of your canvas (of course all of them being optional). Some texture maker programs has this superb functionality, with one little disadvantage: They are not Photoshop.</p>
+		  <p>We can use Offset filter in Photoshop to offset out layers and fix the seams. But this is tedious when several layers are involved. It can't be properly saved as a Photoshop Action either, as there are variables that change with each document. With this script, you'll find it much easier to make your textures seamless.</p>
+		  <p>Now this is where scripting comes in. PS7, CS and CS2 comes with scripting functionality. CS2 seems to have improved on it. It is still somewhat lacking important features for my own good tho. The reference they provide is really good, the possibilities are endless. I thought I could improve my scripting skills while providing a nice new function to Photoshop users, so I came up with the Offset All Visible Layers Script.</p>
+		  <p>You can <a href="http://www.hesido.com/tutorials/files/offsetallvisiblepsscriptlatest.zip">download the Offset All Visible Layers PS7/CS/CS2 script v1.1</a> here.</p>
+		  <p>Extract the contents somewhere on your harddisk</p>
+<h3 id="header_1"><a href="http://www.hesido.com/base.php?page=tutorials&amp;sub=offsetall#header" class="topper">Top</a>Usage</h3>
+		  <p><span class="stronger">For Photoshop CS2 and onward (Tested with CS2, CS3 and CS5.1), you can just double click the file and it will work from anywhere if Photoshop is open</span>.</p>
+		  <p>You can run the respective versions of the scripts for PS7, CS or CS2 from <span class="menudescriptor">Photoshop -&gt; File -&gt; Scripts -&gt; Browse</span>. There are three versions, one for PS7, one for CS and the last for CS2. Please do not use CS2 version with Photoshop CS, as this would crash the script (But not anything else hopefully).</p>
+		  <p>You can also copy the appropriate version for your Photoshop to your <span class="menudescriptor">Photoshop folder on your harddisk -&gt; Presets -&gt; Scripts</span> </p>
+		  <p>These scripts should work also on Macintosh computers.</p>
+		  <p>I am so tired I won't write anymore! Here is what it does (The user interface seen here is for CS and CS2 versions, for PS7, see the notes at the bottom of the page): </p>
+<h3 id="header_2"><a href="http://www.hesido.com/base.php?page=tutorials&amp;sub=offsetall#header" class="topper">Top</a>What it does</h3>
+		  <div class="imagealigner">
+			<img src="./Offset All Visible Layers Photoshop Script By Hesido_files/boxtex1.png" alt="Three Layered Box Texture" width="300" height="309"></div>
+		  <div class="imagealigner">
+			<img src="./Offset All Visible Layers Photoshop Script By Hesido_files/boxtex2.png" alt="Using Offset All Visible Layers Script with default settings" width="420" height="201"></div>
+		  <div class="imagealigner">
+			<img src="./Offset All Visible Layers Photoshop Script By Hesido_files/boxtex3.png" alt="Seam Areas that need to fixed" width="300" height="309"></div>
+		  <div class="imagealigner">
+			<img src="./Offset All Visible Layers Photoshop Script By Hesido_files/boxtex4.png" alt="After fixing and running the script again" width="300" height="566"></div>
+		  <p>This comes in real handy when you are doing seamless texture work and you can fix your multi layered texture's seams without going out of Photoshop. This could be done by hand per layer but it is tedious and this script computes half of the canvas by default so you needn't worry about calculating.</p>
+		  <p>Another good use for this is fixing the seam for a cylindirical UV map. Here's a rough example: </p>
+		  <div class="imagealigner">
+			<img src="./Offset All Visible Layers Photoshop Script By Hesido_files/uvtexture.jpg" alt="Working with a cylindical UV map" width="380" height="685"></div>
+<h3 id="header_3"><a href="http://www.hesido.com/base.php?page=tutorials&amp;sub=offsetall#header" class="topper">Top</a>Important Notes</h3>
+<h4 id="header_4"><a href="http://www.hesido.com/base.php?page=tutorials&amp;sub=offsetall#header" class="topper">Top</a>General Condsiderations</h4>
+		  <ul>
+			<li><span class="stronger"> With its defaults settings, when run twice, the layers are restored to their normal positions, </span>so do not freak out if your layers look haywire when you run the script the first time. Just run the script with the same layers visible, and everything snaps back to normal. </li>
+			<li class="stronger">Make a snapshot of your document or save it just in case, and run the script twice to see if your document is correctly offset. If everything is normal, then your document is ok to use with the script.</li>
+			<li>The script only works for visible layers. This is not a bug, but a feature.</li>
+			<li>The script does not move text layers (PS7/CS/CS2) and smartobjects (CS2) as they need to be rasterized before offsetting.</li>
+			<li>The script will attempt to rasterize any vector mask layers that are visible. If you do not want the script to work halfway through because you cancel a rasterize operation, simply hide those layers..</li>
+			<li>If there are visible layers that has pixels outside the canvas, the script will ask whether to crop-fix the issue or cancel the operation. Such layers cannot be properly offset along with the other layers. (CS and CS2 only)</li>
+			<li><span class="stronger">ALWAYS BACKUP YOUR WORK.</span> I can't be held responsible for the malfunction of the script.</li>
+			<li>There are clear instructions for you to tweak the scripts in the script file. You do not have to know scripting to customize the script to your needs.</li>
+		  </ul>
+<h4 id="header_5"><a href="http://www.hesido.com/base.php?page=tutorials&amp;sub=offsetall#header" class="topper">Top</a>Differences in PS7 version:</h4>
+		  <ul>
+			<li>Because of the limitations of PS7 scripting, the user cannot give specific pixel input to the script. The script does offset by half of document size by default if the user confirms two offset dialouge boxes. </li>
+			<li>Because there is no way to determine layer size and position, the script cannot check for layers out of the canvas, so it does a crop by default. (But you can tweak the script so it doesn't.)</li>
+			<li>Only for PS7, for the script to work, you may have to install the <a href="http://www.adobe.com/support/downloads/detail.jsp?ftpID=1535">Photoshop 7.0 Scripting Plugin for Mac</a>, and <a href="http://www.adobe.com/support/downloads/detail.jsp?ftpID=1536">Photoshop 7.0 Scripting Plugin for Windows</a>.</li>
+		  </ul>
+<h3 id="header_6"><a href="http://www.hesido.com/base.php?page=tutorials&amp;sub=offsetall#header" class="topper">Top</a>Final Words</h3>
+		  <p>Thanks to GregMallick and Aurora @ <a href="http://www.spinquad.com/">Spinquad Forums</a> and my really nice friend <a href="http://www.munlayt.com/">Mun</a> for testing my script for PS7.0.</p>
+		  <p>Feel free to <a href="http://www.hesido.com/base.php?page=general&amp;sub=contact">email me</a> comments and critiques and even some fresh ideas :) Bug reports and feature suggestions are welcome.</p>
+		  <p><span class="names">Prepared by Emrah BASKAYA</span> ( a.k.a. <span class="names">Hesido</span>, a.k.a <span class="names">EmDo</span> ) </p>
+	  <p class="center smallcaps"><a href="http://www.hesido.com/">Back To Home For More Tutorials</a></p>
+</div>
+<div id="contentafter"></div>
+</div>
+
+<div id="footer">
+<div class="copyrightnotice">© 2004-2015 by Emrah BASKAYA</div>
+<div class="validator"><a href="http://validator.w3.org/check/referer"><span class="w3c">W3C</span><span class="spec">HTML</span></a></div>
+<div style="clear:both;">
+</div></div>
+
+
+
+<div id="menucontainer" style="margin: 0px; padding: 0px; border: 0px; top: 0px; left: 0px; visibility: hidden; position: absolute;"><div id="menutop">&nbsp;</div><div id="menucontent" style="overflow: hidden;"><div id="menucontdouble" style="margin: 0px; padding: 0px; border: 0px; top: 0px; left: 0px; position: relative; width: 100%;"><ul style="display: none;">
+			<li><a href="http://www.hesido.com/base.php?page=tutorials&amp;sub=repimagenoise">Reproducing image noise tutorial</a></li>
+			<li><a href="http://www.hesido.com/base.php?page=tutorials&amp;sub=wavingflag">Making a 3d looking wavy flag tutorial</a></li>
+			<li><a href="http://www.hesido.com/base.php?page=tutorials&amp;sub=glassfont">Make a glassy font tutorial</a></li>
+			<li><a href="http://www.hesido.com/base.php?page=tutorials&amp;sub=offsetall">Script to fix texture seams</a></li>
+		</ul><ul style="display: none;">
+			<li><a href="http://www.hesido.com/base.php?page=tutorials&amp;sub=fakegi">Fake Global Illumination (Lightwave)</a></li>
+		</ul><ul style="display: none;">
+		<li><a href="http://www.hesido.com/web.php?page=multipopup">Multipopup UserJavascript For Opera and Firefox</a></li>
+		<li><a href="http://www.hesido.com/web.php?page=customscrollbar">fleXcroll, a Cross-Browser Custom Scroll Bar script for all</a></li>
+		<li><a href="http://www.hesido.com/web.php?page=javascriptanimation" title="Article">An introduction to javascript animation with example code</a></li>
+		<li><a href="http://www.hesido.com/web.php?page=imageswapping">Image Swapping with no HTML markup</a></li>
+		<li><a href="http://www.hesido.com/web.php?page=atomidtimestamp">Atom Feed ID and RFC3339 time stamp generator</a></li>
+		<li><a href="http://www.hesido.com/web.php?page=animatedmenus">Frame / Motion animated menus</a></li>
+		</ul><ul style="display: none;">
+			<li><a href="http://www.hesido.com/">Home</a></li>
+			<li><a href="http://www.hesido.com/base.php?page=general&amp;sub=contact">Contact Page</a></li>
+		</ul><ul style="display: none;"><li><a href="http://www.hesido.com/base.php?page=tutorials&amp;sub=offsetall#header">Top</a></li><li><a href="http://www.hesido.com/base.php?page=tutorials&amp;sub=offsetall#header_0">Introduction</a></li><li><a href="http://www.hesido.com/base.php?page=tutorials&amp;sub=offsetall#header_1">Usage</a></li><li><a href="http://www.hesido.com/base.php?page=tutorials&amp;sub=offsetall#header_2">What it does</a></li><li><a href="http://www.hesido.com/base.php?page=tutorials&amp;sub=offsetall#header_3">Important Notes</a><ul><li><a href="http://www.hesido.com/base.php?page=tutorials&amp;sub=offsetall#header_4">General Condsiderations</a></li><li><a href="http://www.hesido.com/base.php?page=tutorials&amp;sub=offsetall#header_5">Differences in PS7 version:</a></li></ul></li><li><a href="http://www.hesido.com/base.php?page=tutorials&amp;sub=offsetall#header_6">Final Words</a></li></ul></div></div><div id="menubottom">&nbsp;</div></div></body></html>

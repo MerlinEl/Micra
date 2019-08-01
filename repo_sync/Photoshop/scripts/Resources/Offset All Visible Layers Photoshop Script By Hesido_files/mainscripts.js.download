@@ -1,0 +1,380 @@
+﻿//Hesido.com Javascript Master Functions File
+//Some rights reserved. Please consult Emrah BASKAYA
+//before applying the code to your pages.
+
+if (document.createElement && document.getElementsByTagName && document.getElementById) {
+if (window.addEventListener) window.addEventListener('load', setupScripts, false);
+else if (window.attachEvent) window.attachEvent('onload', setupScripts);
+}
+
+function setupScripts() {
+//ContentList
+var lN = insertLi(document.getElementById('topnavigation_r'), 'Page Content', '', 'span');
+TOCList(lN,document.getElementById('content'),'Top','#header','topper',true,true)
+
+//Dropdown Menu
+applyDropDownF('full','topnavigation_r','',true,1,-10,0,'hoveredspan',450,150,1,20,10);
+
+//ImageSwap
+if (!document.usePageSpecificHover) prepareImageSwap(document.body);
+}
+
+/*
+Drop Down Menu Script V2 internal release;
+Emrah BASKAYA  (hesido - www.hesido.com)
+emrahbaskaya@hesido.com
+Release Date 01/09/2005
+
+You cannot use this code for commercial purposes without
+permission of the author. You are not allowed to earn money
+from this script or any work that is derived from this script.
+
+Free to use for non-commercial purposes. A link to www.hesido.com
+is most welcome, in a page on your site.
+
+For other usage options, please contact the author.
+
+Do not redistribute, refer to www.hesido.com instead.
+*/
+
+var apP = new Array() , pcdR = new Array();
+apP.earlyDivId = 'earlymenu';
+apP.earlyStyle = 'position:absolute;width:240px;height:auto;padding:1em;border:3px solid black;background-color:white;font-size:12px;z-index:100;visibility:hidden;'
+apP.preload = true;
+apP.divIds = new Array ("menucontainer","menucontent","menucontdouble","menubottom","menuboxmodeltest","menutop");
+
+
+function writeEarlyDrop() {
+document.write("<div id='"+apP.earlyDivId+"' style='"+apP.earlyStyle+"'></div>");
+}
+
+function applyDropDownF(procType,tElId,navIdRep,fxBdMrgn,mLoc,xOf,yOf,hvrCl,hiDly,whiDly,rSty,rStps,rvInt)
+{
+	if (document.getElementById(tElId)) {
+		var dGv = new Array(), dOb = new Array(), revSteps, early;
+		dOb.revStep = 0;
+		dOb.revInt = new Array();
+
+
+		if (fxBdMrgn == true && document.body.style) document.body.style.margin = '0px';
+		if (pcdR.hoverParent) {pcdR.hoverParent.className = pcdR.hoverParent.revClass;}
+		var BMdependency = new Array (true,true,false);
+		early = (procType != 'early') ? false : true;
+		var targetList = document.getElementById(tElId);
+		var ulLis = targetList.getElementsByTagName("ul");
+		var spLis = targetList.getElementsByTagName("span");
+		if (navIdRep != '') targetList.id = navIdRep;
+		if (procType != 'early') var bMO = addDropdownDiv();
+		else {	pcdR.tDiv = document.getElementById(apP.earlyDivId); pcdR.cDiv = pcdR.tDiv;
+				pcdR.tDiv.onmouseover = keepAlive; pcdR.tDiv.onmouseout = hideDrop;}
+		if (targetList.listHolder) {
+			var cTM = targetList.listHolder.childNodes, tE = cTM.length
+			for (var i = 0; i < tE; i++) {pcdR.cDiv.appendChild(cTM[0]);}
+		}
+		targetList.listHolder = pcdR.cDiv;
+		for (var i=0; i<spLis.length; i++) {
+			var newBranch = spLis[i].parentNode.getElementsByTagName('ul');
+			if (newBranch.length > 0 || spLis[i].processed) {
+				if (!spLis[i].processed) spLis[i].expcol = newBranch[0];
+				spLis[i].expcol.style.display = 'none'
+				spLis[i].revClass = spLis[i].className;
+				if (mLoc == 2) spLis[i].positionSubMenu = posRight;
+				else spLis[i].positionSubMenu = posUnder;
+				spLis[i].onmouseover = showDrop;
+				spLis[i].onmouseout = hideDrop;
+				if (!early) {
+					if (bMO == true && BMdependency[rSty] == true) revSteps = 0;
+					else revSteps = rStps;
+					if (rSty == 2) spLis[i].reveal = sliderInit;
+					else if (rSty == 1) spLis[i].reveal = warperInit;
+					else spLis[i].reveal = placeDrop;
+					if (revSteps == 0) spLis[i].reveal = placeDrop;
+				} else {
+					spLis[i].reveal = placeDrop; revSteps = 0;
+				}
+				if (!spLis[i].processed) pcdR.cDiv.appendChild(newBranch[0]);
+
+				spLis[i].processed = true;
+			}
+		}
+	} else return;
+
+
+function showDrop() {
+	window.clearTimeout(dOb.hidetimer);
+	clearRevIntervals();
+	dOb.revStep = 0;
+	if (pcdR.hoverParent) pcdR.hoverParent.className = pcdR.hoverParent.revClass;
+	this.className = hvrCl; pcdR.tDiv.style.clip = 'rect(auto auto auto auto)';
+	if (pcdR.displayed) pcdR.displayed.style.display = 'none';
+	pcdR.displayed = this.expcol;
+	this.expcol.style.display = 'block';
+	pcdR.hoverParent = this;
+	dOb.subMenuPos = this.positionSubMenu();
+	document.body.style.cursor = 'pointer';
+	this.reveal();
+}
+
+function placeDrop() {
+	if (revSteps == 0 && !early) pcdR.dDiv.style.height = pcdR.cDiv.offsetHeight+'px';
+	pcdR.tDiv.style.left = dOb.subMenuPos[0]+"px";
+	pcdR.tDiv.style.top =  dOb.subMenuPos[1]+"px";
+	pcdR.tDiv.style.visibility = 'visible';
+}
+
+function warperInit() {
+	placeDrop();
+	pcdR.dDiv.style.height = '0px';
+	dOb.tHeight = pcdR.cDiv.offsetHeight;
+	dOb.revInt[dOb.revInt.length] = window.setInterval(
+		function(){
+			if (dOb.revStep < revSteps+1) {
+			pcdR.dDiv.style.height = easeInOut(0,dOb.tHeight,revSteps,dOb.revStep,0.5) + "px";
+			dOb.revStep++;
+			} else clearRevIntervals();
+		},rvInt);
+}
+
+function sliderInit() {
+	pcdR.tDiv.style.clip = 'rect(0 0 0 0)';
+	placeDrop();
+	pcdR.dDiv.style.height = 'auto';
+	dOb.tWidth = pcdR.tDiv.offsetWidth;
+	dOb.tHeight = pcdR.tDiv.offsetHeight;
+	if (!early) pcdR.dDiv.style.height = pcdR.cDiv.offsetHeight;
+	dOb.revInt[dOb.revInt.length] = window.setInterval(
+		function() {
+			if (dOb.revStep < revSteps) {
+			var yLevel = easeInOut(0,dOb.tHeight,revSteps,dOb.revStep,0.5);
+			pcdR.tDiv.style.clip = 'rect(0px '+dOb.tWidth+'px '+yLevel+'px 0px)';
+			dOb.revStep++;
+			} else {pcdR.tDiv.style.clip = 'rect(auto auto auto auto)'; clearRevIntervals();}
+		},rvInt)
+
+}
+
+function hideDrop() {
+	if (!pcdR.hoverParent) return;
+	document.body.style.cursor = 'auto';
+	var hideDelay = (revSteps > 0 && dOb.revStep < revSteps && revSteps != 0) ? whiDly : hiDly
+	dOb.hidetimer = window.setTimeout(function() {
+		if (revSteps > 0) clearRevIntervals();
+		pcdR.tDiv.style.visibility = 'hidden';
+		pcdR.hoverParent.className = pcdR.hoverParent.revClass;
+		},hideDelay);
+}
+
+
+function keepAlive() {
+window.clearTimeout(dOb.hidetimer);
+}
+
+function posUnder() {
+var elmPos = findPos(this);
+return Array (elmPos[0]+xOf,elmPos[1]+this.offsetHeight+yOf)
+}
+
+function posRight() {
+var elmPos = findPos(this);
+return Array (elmPos[0]+xOf+this.offsetWidth,elmPos[1]+yOf)
+}
+
+function clearRevIntervals() {
+for (i=0;i<dOb.revInt.length;i++) window.clearInterval(dOb.revInt[i]);
+dOb.revInt = new Array();
+}
+
+function addDropdownDiv() {
+	if (document.getElementById(apP.earlyDivId)) document.getElementById(apP.earlyDivId).parentNode.removeChild(document.getElementById(apP.earlyDivId));
+	var ttDiv = new Array(), prefix = "", boxModelOld = false;
+	if (apP.useDefStyle==true) prefix = "M_"
+	for (var i=0;i<apP.divIds.length;i++) {
+		if (document.getElementById(apP.divIds[i]) != null) document.getElementById(apP.divIds[i]).parentNode.removeChild(document.getElementById(apP.divIds[i]));
+		ttDiv[i]=document.createElement('div');
+		ttDiv[i].id = prefix + apP.divIds[i];
+		ttDiv[i].activeStyle = dGetActiveStyle;
+	}
+	var c = new Array("margin","padding","border","top","left")
+	for (i=0;i<c.length;i++) {eval("ttDiv[2].style."+c[i]+" = '0px'");eval("ttDiv[4].style."+c[i]+" = '0px'");eval("ttDiv[0].style."+c[i]+" = '0px'")}
+	ttDiv[2].style.position = "relative"; ttDiv[2].style.width = "100%";
+	ttDiv[4].style.visibility = "hidden"; ttDiv[4].style.position = "absolute";
+	ttDiv[0].style.visibility = "hidden"; ttDiv[0].style.position = "absolute";
+	ttDiv[1].appendChild(ttDiv[2]); ttDiv[0].appendChild(ttDiv[1]); ttDiv[0].appendChild(ttDiv[3]);
+	ttDiv[0].insertBefore(ttDiv[5],ttDiv[1]);
+	document.body.appendChild(ttDiv[0]);
+	
+	for (var i=0;i<apP.divIds.length;i++) {
+		var bgIm = ttDiv[i].activeStyle("background-image","backgroundImage");
+		if (bgIm.indexOf("url") > -1 && apP.preload == true) dPreLoadImage(dStripURL(bgIm))
+	}
+	document.body.appendChild(ttDiv[4])
+	ttDiv[1].style.overflow = "hidden";
+	ttDiv[4].style.padding = "10px"; ttDiv[4].style.height = "100px";
+	if (ttDiv[4].offsetHeight == 100) boxModelOld = true;
+	document.body.removeChild(ttDiv[4]);
+	
+	for(var i=3;i<6;i+=2){
+	ttDiv[i].innerHTML = "&nbsp;";
+	if (window.getComputedStyle && ttDiv[i].activeStyle('background-image','').indexOf("url") == -1)
+		ttDiv[0].removeChild(ttDiv[i]);
+	else if (ttDiv[i].currentStyle && (ttDiv[i].currentStyle.backgroundImage.indexOf("url") == -1 && ttDiv[i].currentStyle.filter.indexOf("AlphaImageLoader") == -1))
+		ttDiv[0].removeChild(ttDiv[i]);
+	}
+	if (apP.useDefStyle == true) {
+		ttDiv[0].style.width = apP.defWidth;
+		ttDiv[0].style.zIndex = apP.defZindex;
+		for (var i=0;i<apP.defCSS.length;i+=2) eval("ttDiv[1].style."+apP.defCSS[i]+"='"+apP.defCSS[i+1]+"'");
+	}
+	pcdR.cDiv = ttDiv[2]; pcdR.tDiv = ttDiv[0]; pcdR.dDiv = ttDiv[1];
+	pcdR.tDiv.onmouseover = keepAlive;
+	pcdR.tDiv.onmouseout = hideDrop;
+	
+	return boxModelOld;
+}
+
+
+function dGetActiveStyle(style,stylecc) {
+if (window.getComputedStyle) return window.getComputedStyle(this,null).getPropertyValue(style);
+if (this.currentStyle) return eval("this.currentStyle."+stylecc);
+return '';
+}
+
+function dStripURL(s) {
+s = s.substring(s.indexOf("url(")+4,s.lastIndexOf(")"));if (s.indexOf('"')>-1) s = s.substring(s.indexOf('"')+1,s.lastIndexOf('"'));return s;
+}
+
+function dPreLoadImage(imageurl) {var img = new Image();img.src = imageurl;	return img;}
+
+function findPos(obj) {
+//function modified from www.quirksmode.org
+var curleft = 0;
+var curtop = 0;
+if (obj.offsetParent) {
+	while (obj.offsetParent) {
+		curleft += obj.offsetLeft
+		curtop += obj.offsetTop
+		obj = obj.offsetParent;
+	}
+} else if (obj.x && obj.y) {curleft += obj.x; curtop += obj.y;}
+return Array(curleft,curtop);
+}
+
+
+}
+
+//FleXiTOC Content List Generator By Hesido
+//All rights reserved
+function TOCList(appeN,tEL,tTxt,tPid,tPcl,tHs,doFade) {
+// FleXiTOC Content List v0.5 javascript by www.hesido.com
+// public configurable release will soon follow.
+// inspired by TOC from www.quirksmode.org
+
+var tS, lNN, lid, aUL, cUL, lN, hL, nN, tL = new Array();
+hL = tEL.childNodes; cUL = document.createElement('ul');
+aUL = cUL;
+insertLi(aUL,tTxt,tPid,'a')
+
+for (var i=0; i<hL.length; i++) {
+	nN = hL[i].nodeName;
+	if (nN == 'H3'|| nN == 'H4' ) tL[tL.length]=hL[i];
+}
+
+for (var i=0; i<tL.length; i++) {
+	nN = tL[i].nodeName;
+	if (nN == 'H3'|| nN == 'H4' ) {
+		if (nN == 'H4' && lNN == 'H3') {
+		aUL = document.createElement('ul');
+		lN.appendChild(aUL);
+		}
+	if (nN == 'H3') aUL = cUL;
+	if (tL[i].id == '') tL[i].id = 'header_'+i;
+	lN = insertLi(aUL,tL[i].innerHTML,'#'+tL[i].id,'a',doFade,tL[i]);
+	if (tHs) {
+		tS = document.createElement('a');
+		tS.innerHTML = tTxt; tS.href = tPid; tS.className = tPcl;
+		tL[i].insertBefore(tS, tL[i].firstChild);
+	}
+	lNN = nN;
+	}
+}
+appeN.appendChild(cUL);
+}
+
+function insertLi(aUL,inHTM,lnk,tG,doFade,fadeElem){
+var lN = document.createElement('li');
+var lil = document.createElement(tG);
+lil.innerHTML = inHTM; lil.href = lnk;
+lN.appendChild(lil); aUL.appendChild(lN);
+if (doFade) lil.onclick = function() {doBGFade(fadeElem,[190,220,190],[255,255,255],'transparent',25,70,1)}
+return lN;
+}
+
+//FleXiFade Lite By Hesido
+function doBGFade(elem,startRGB,endRGB,finalColor,steps,intervals,powr){
+//FleXiFade Lite v1.0
+//BG Fader by www.hesido.com
+if (elem.bgFadeInt) window.clearInterval(elem.bgFadeInt);
+var actStep = 0;
+elem.bgFadeInt = window.setInterval(
+	function() {
+		elem.style.backgroundColor = "rgb("+
+			easeInOut(startRGB[0],endRGB[0],steps,actStep,powr)+","+
+			easeInOut(startRGB[1],endRGB[1],steps,actStep,powr)+","+
+			easeInOut(startRGB[2],endRGB[2],steps,actStep,powr)+")";
+		actStep++;
+		if (actStep > steps) {
+		elem.style.backgroundColor = finalColor;
+		window.clearInterval(elem.bgFadeInt);
+		}
+	}
+	,intervals)
+}
+
+function easeInOut(minValue,maxValue,totalSteps,actualStep,powr){
+//Generic Animation Step Value Generator By www.hesido.com
+var delta = maxValue - minValue;
+var stepp = minValue+(Math.pow(((1 / totalSteps)*actualStep),powr)*delta);
+return Math.ceil(stepp)
+}
+
+
+//ImageSwapper Script by Hesido.
+
+function prepareImageSwap(elem,mouseOver,mouseOutRestore,mouseDown,mouseUpRestore,mouseOut,mouseUp) {
+//Non-Obtrusive Image Swap Script by Hesido.com
+//V1.1
+	if (typeof(elem) == 'string') elem = document.getElementById(elem);
+	if (elem == null) return;
+	var regg = /(.*)(_nm\.)([^\.]{3,4})$/
+	var prel = new Array(), img, imgList, imgsrc, mtchd;
+	imgList = elem.getElementsByTagName('img');
+
+	for (var i=0; img = imgList[i]; i++) {
+		if (!img.rolloverSet && img.src.match(regg)) {
+			mtchd = img.src.match(regg);
+			img.hoverSRC = mtchd[1]+'_hv.'+ mtchd[3];
+			img.outSRC = img.src;
+			if (typeof(mouseOver) != 'undefined') {
+				img.hoverSRC = (mouseOver) ? mtchd[1]+'_hv.'+ mtchd[3] : false;
+				img.outSRC = (mouseOut) ? mtchd[1]+'_ou.'+ mtchd[3] : (mouseOver && mouseOutRestore) ? img.src : false;
+				img.mdownSRC = (mouseDown) ? mtchd[1]+'_md.' + mtchd[3] : false;
+				img.mupSRC = (mouseUp) ? mtchd[1]+'_mu.' + mtchd[3] : (mouseOver && mouseDown && mouseUpRestore) ? img.hoverSRC : (mouseDown && mouseUpRestore) ? img.src : false;
+				}
+			if (img.hoverSRC) {preLoadImg(img.hoverSRC); img.onmouseover = imgHoverSwap;}
+			if (img.outSRC) {preLoadImg(img.outSRC); img.onmouseout = imgOutSwap;}
+			if (img.mdownSRC) {preLoadImg(img.mdownSRC); img.onmousedown = imgMouseDownSwap;}
+			if (img.mupSRC) {preLoadImg(img.mupSRC); img.onmouseup = imgMouseUpSwap;}
+			img.rolloverSet = true;
+		}
+	}
+
+	function preLoadImg(imgSrc) {
+		prel[prel.length] = new Image(); prel[prel.length-1].src = imgSrc;
+	}
+
+}
+
+function imgHoverSwap() {this.src = this.hoverSRC;}
+function imgOutSwap() {this.src = this.outSRC;}
+function imgMouseDownSwap() {this.src = this.mdownSRC;}
+function imgMouseUpSwap() {this.src = this.mupSRC;}
