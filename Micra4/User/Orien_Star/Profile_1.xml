@@ -10,7 +10,7 @@
     <mc_Dialog_G active="true" pos="[1570,660]" size="[148,90]" title="Modify:" btnCount="[6,3]" />
     <mc_Dialog_H active="true" pos="[1572,752]" size="[148,66]" title="Materials:" btnCount="[6,2]" />
     <mc_Dialog_I active="true" pos="[1572,884]" size="[148,66]" title="Programming:" btnCount="[6,2]" />
-    <mc_Dialog_J active="true" pos="[1180,950]" size="[460,42]" title="Experimental:" btnCount="[19,1]" />
+    <mc_Dialog_J active="true" pos="[1260,950]" size="[460,42]" title="Experimental:" btnCount="[19,1]" />
   </Properties_1>
   <Properties_2>
     <mcMicraDialog active="true" pos="[1570,210]" size="[148,66]" title="" />
@@ -21,7 +21,7 @@
     <mcIconMakerDialog active="false" pos="[210,330]" size="[730,500]" title="" />
     <mcDeepIsolateDialog active="false" pos="[100,86]" size="[84,44]" title="" />
     <mcMoveTowardsDialog active="false" pos="[100,377]" size="[200,76]" title="" />
-    <mcClonerDialog active="false" pos="[671,202]" size="[164,296]" title="" />
+    <mcClonerDialog active="true" pos="[126,185]" size="[164,296]" title="" />
     <mcRenameDialog active="false" pos="[100,280]" size="[224,312]" title="" />
     <mcObjectPlanterDialog active="false" pos="[100,201]" size="[356,92]" title="" />
     <mcPivotPlanterDialog active="false" pos="[100,308]" size="[116,141]" title="" />
