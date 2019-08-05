@@ -1969,80 +1969,86 @@ struct mcAction (
 	fn divide_edges =
 	(	
 		DisableSceneRedraw()
--- suspendEditing which:#modify alwaysSuspend:true
--- 		max create mode
-		local gco = modPanel.getCurrentObject()
-		if gco == undefined or not mcPoly.isInPoly() do return false
-		local sub_level = subobjectlevel
-		if sub_level == 2 do gco.connectEdgeSegments = 1 --set divide count to 1
+		try (
+	-- suspendEditing which:#modify alwaysSuspend:true
+	-- 		max create mode
+			local gco = modPanel.getCurrentObject()
+			if gco == undefined or not mcPoly.isInPoly() do return false
+			local sub_level = subobjectlevel
+			if sub_level == 2 do gco.connectEdgeSegments = 1 --set divide count to 1
 
-		local eSel = mcPoly.get #eSel
-		local fSel = mcPoly.get #fSel
-		local vSel = mcPoly.get #vSel
-		
-		fn isLoop eSel =
-		(
-			Local fEdge = mcPoly.get #fuEdge
-			Local vEdge = mcPoly.get #vuEdge
-			if (eSel.count*2 == fEdge.count or vEdge.count < 4)
-			then return true  --#loop
-			else return false --#ring
-		)
-		case sub_level of
-		(
-			1: (--Conect Vertices
-				
-				if vSel.count > 1 do gco.ButtonOp #ConnectVertices
--- 				if vSel.count > 1 do actionMan.executeAction 369982487 "40061"  -- Editable Poly: Connect
-			)
-			2: (--Split One or More Edges in loop --vNum == 2
-				
--- 				max create mode
-				if eSel.count > 0 and (isLoop eSel) then (	
-					
-					gco.setSelection #Vertex #{} --deselect vertices
-					case classOf gco of (
-						
-						Editable_Poly: (for i in eSel do gco.divideEdge i 0.5 select:on)
-						Edit_Poly: (
-								
-							for i in eSel do gco.divideEdge i 0.5 ---node:$
-							gco.Commit () --important to update changes
-						)
-					)
-					subobjectlevel = 1
-				)	else if eSel.count > 1 do ( --Split More Edges in ring
-					
-					gco.ButtonOp #ConnectEdges
-					--actionMan.executeAction 369982487 "40061"  -- Editable Poly: Connect
-				)
--- 				max modify mode
--- 				local max_try = 100
--- 				while modPanel.getCurrentObject() != gco and max_try > 0 do  ( max prev mod; max_try -=1 ) --restore modifier selection
-				
-			)
-			4:
+			local eSel = mcPoly.get #eSel
+			local fSel = mcPoly.get #fSel
+			local vSel = mcPoly.get #vSel
+			
+			fn isLoop eSel =
 			(
-				--Divide one Face
-				if fSel.count > 0 do
-				(
-					local vFace_1 = (mcPoly.get #vuFace) as BitArray
-					for f in fSel do 
-					( 
-						polyOp.divideFace gco f (polyOp.getFaceCenter gco f)
+				Local fEdge = mcPoly.get #fuEdge
+				Local vEdge = mcPoly.get #vuEdge
+				if (eSel.count*2 == fEdge.count or vEdge.count < 4)
+				then return true  --#loop
+				else return false --#ring
+			)
+			case sub_level of
+			(
+				1: (--Conect Vertices
+					
+					if vSel.count > 1 do gco.ButtonOp #ConnectVertices
+	-- 				if vSel.count > 1 do actionMan.executeAction 369982487 "40061"  -- Editable Poly: Connect
+				)
+				2: (--Split One or More Edges in loop --vNum == 2
+					
+	-- 				max create mode
+					if eSel.count > 0 and (isLoop eSel) then (	
+						
+						gco.setSelection #Vertex #{} --deselect vertices
+						case classOf gco of (
+							
+							Editable_Poly: (for i in eSel do gco.divideEdge i 0.5 select:on)
+							Edit_Poly: (
+									
+								for i in eSel do gco.divideEdge i 0.5 ---node:$
+								gco.Commit () --important to update changes
+							)
+						)
+						subobjectlevel = 1
+					)	else if eSel.count > 1 do ( --Split More Edges in ring
+						
+						gco.ButtonOp #ConnectEdges
+						--actionMan.executeAction 369982487 "40061"  -- Editable Poly: Connect
 					)
-					local vFace_2 =  (mcPoly.get #vuFace) as BitArray
-				
-					subobjectlevel = 1
-					polyOp.setVertselection gco (vFace_2 - vFace_1) 
+	-- 				max modify mode
+	-- 				local max_try = 100
+	-- 				while modPanel.getCurrentObject() != gco and max_try > 0 do  ( max prev mod; max_try -=1 ) --restore modifier selection
+					
+				)
+				4:
+				(
+					--Divide one Face
+					if fSel.count > 0 do
+					(
+						local vFace_1 = (mcPoly.get #vuFace) as BitArray
+						for f in fSel do 
+						( 
+							polyOp.divideFace gco f (polyOp.getFaceCenter gco f)
+						)
+						local vFace_2 =  (mcPoly.get #vuFace) as BitArray
+					
+						subobjectlevel = 1
+						polyOp.setVertselection gco (vFace_2 - vFace_1) 
+					)
 				)
 			)
+	-- 		max modify mode
+	-- resumeEditing which:#modify alwaysSuspend:true
+	-- 		if sub_level == 2 do subobjectlevel = 1
+			EnableSceneRedraw()
+			CompleteRedraw()
+		) catch (
+		
+				EnableSceneRedraw()
+				CompleteRedraw()
 		)
--- 		max modify mode
--- resumeEditing which:#modify alwaysSuspend:true
--- 		if sub_level == 2 do subobjectlevel = 1
-		EnableSceneRedraw()
-		CompleteRedraw()
 	),
 	fn detriangulate =
 	(
