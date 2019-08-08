@@ -96,15 +96,11 @@ rollout mcAssetGeneratorDialog "Asset Builder:" width:712 height:332
 	checkbox 'chk_create_node' "" pos:[128,260] width:23 height:20 enabled:true checked:true align:#left
 	button 'btn_browse_edt_path' "..." pos:[676,48] width:20 height:16 align:#left
 	GroupBox 'grp2' "Photoshop:" pos:[168,204] width:224 height:124 align:#left
-	label 'lbl10' "Export DDS:" pos:[176,302] width:84 height:16 align:#left enabled:false
-	checkbox 'chk_psd_export_dds' "" pos:[264,300] width:23 height:20 checked:true align:#left enabled:false
-	button 'btn_psd_export_dds_settings' "DDS SetUp" pos:[284,300] width:100 height:20 checked:true align:#left
-	label 'lbl11' "Generate Folders:" pos:[176,278] width:84 height:16 align:#left enabled:false
-	checkbox 'chk_generate_psd_layers' "" pos:[264,276] width:23 height:20 checked:true align:#left enabled:false
-	button 'btn_psd_folders_settings' "Folders SetUp" pos:[284,276] width:100 height:20 checked:true align:#left
-	GroupBox 'grp3' "Fusion:" pos:[400,204] width:308 height:76 align:#left
-	label 'lbl12' "Assign DDS:" pos:[408,254] width:84 height:16 enabled:false align:#left
-	checkbox 'chk_assign_fusion_dds' "" pos:[492,252] width:23 height:20 enabled:false checked:true align:#left
+		label 'lbl11' "Generate Folders:" pos:[176,278] width:88 height:16 align:#left
+		button 'btn_psd_folders_settings' "[ ... ]" pos:[264,274] width:40 height:20 checked:true align:#left
+		GroupBox 'grp3' "Fusion:" pos:[400,204] width:308 height:76 align:#left
+		label 'lbl12' "Assign DDS:" pos:[408,254] width:60 height:16 align:#left
+		button 'btn_fussion_dds_list' "[ ... ]" pos:[468,250] width:40 height:20 checked:true align:#left
 	button 'btn_gen_asset' "GENERATE" pos:[400,284] width:308 height:44 align:#left
 	button 'btn_browse_res_path' "..." pos:[676,144] width:20 height:16 align:#left
 	label 'lbl74' "Asset Name:" pos:[8,6] width:72 height:16 align:#left
@@ -378,7 +374,7 @@ rollout mcAssetGeneratorDialog "Asset Builder:" width:712 height:332
 	on edt_edt_path entered text do generatePathsFromEdit (toLower edt_edt_path.text)
 	on edt_res_path entered text do generatePathsFromResources (toLower edt_res_path.text)
 	on btn_psd_folders_settings pressed do (local ps = PSD_MANAGER(); ps.setupPsdFoldersList SettingsINI)
-	on btn_psd_export_dds_settings pressed do (local dd = DDS_MANAGER(); dd.setupPsdDdsList SettingsINI)
+	on btn_fussion_dds_list pressed do (local dd = DDS_MANAGER(); dd.setupPsdDdsList SettingsINI)
 	on mcAssetGeneratorDialog open do init()
 	on mcAssetGeneratorDialog close do fin()
 

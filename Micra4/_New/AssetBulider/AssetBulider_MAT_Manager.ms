@@ -2,6 +2,9 @@ Global MAT_MANAGER
 
 struct MAT_MANAGER (
 
+	gUtilsPath = toLower LS3DGUP.LS3DGUP.UtilsPath,
+	sourceTemplatesPaths = #(@"asset_management\maps\", @"asset_management\materials\", @"asset_management\models\", @"asset_management\psd\"),
+	sourceTemplateFilesMaps = #("---d.dds", "---dm.dds", "---e.dds", "---g.dds", "---n.dds"),
 	--material id example > 0x7d50757b, 0x55000dd1
 	fn generateMaterialGuid seed_number = ( --for i=1 to 10 do GenerateMaterialGuid i
 
@@ -78,9 +81,33 @@ struct MAT_MANAGER (
 		)		
 		return result
 	),
-	fn createFusionMaterial asset_name edit_path = (
+	--sourceTemplateFilesMaps = #("---d.dds", "---dm.dds", "---e.dds", "---g.dds", "---n.dds")
+	fn generateDDSTextures targetPath fileName ddsList = (
 	
+		local sourcePath = gUtilsPath + sourceTemplatesPaths[1]
+		local struct FILE_DATA (fname, fpath);
+		local new_textures = #()
+		for index in ddsList do (
+		
+			local dds_sufix = sourceTemplateFilesMaps[index]
+			local source_file = sourcePath + "template" + dds_sufix
+			local newFileName = fileName + dds_sufix
+			local target_file = targetPath + newFileName
+			local result = CopyFile source_file target_file
+			append new_textures (FILE_DATA newFileName target_file)
+		)
+		new_textures
+	),
+	fn createFusionMaterial asset_name edit_path dds_list = (
 	
+		local textures = generateDDSTextures edit_path asset_name dds_list
+		for t in textures do ( append p4FileList (t.fpath + t.fname) );
+		
+		/*
+		local newMaterialFileName = asset_name + ".xml"
+		GenerateLS3DMaterial newMaterialPath newMaterialFileName randomSeed newTextureNames conversionTable
+	
+		*/
 	)
 )
 
