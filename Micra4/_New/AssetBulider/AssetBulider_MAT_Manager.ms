@@ -2,9 +2,9 @@ Global MAT_MANAGER
 
 struct MAT_MANAGER (
 
-	gUtilsPath = toLower LS3DGUP.LS3DGUP.UtilsPath,
-	sourceTemplatesPaths = #(@"asset_management\maps\", @"asset_management\materials\", @"asset_management\models\", @"asset_management\psd\"),
-	sourceTemplateFilesMaps = #("---d.dds", "---dm.dds", "---e.dds", "---g.dds", "---n.dds"),
+	SettingsINI = "",
+	maps_templates_path = @"asset_management\maps\",
+	material_templates_path = @"asset_management\materials\",
 	--material id example > 0x7d50757b, 0x55000dd1
 	fn generateMaterialGuid seed_number = ( --for i=1 to 10 do GenerateMaterialGuid i
 
@@ -81,27 +81,43 @@ struct MAT_MANAGER (
 		)		
 		return result
 	),
-	--sourceTemplateFilesMaps = #("---d.dds", "---dm.dds", "---e.dds", "---g.dds", "---n.dds")
-	fn generateDDSTextures targetPath fileName ddsList = (
+	--dds_names_list = #("---d.dds", "---dm.dds", "---e.dds", "---g.dds", "---n.dds")
+	fn getDDSTypeByName dds_name = (
 	
-		local sourcePath = gUtilsPath + sourceTemplatesPaths[1]
-		local struct FILE_DATA (fname, fpath);
-		local new_textures = #()
-		for index in ddsList do (
+		case dds_name of (
 		
-			local dds_sufix = sourceTemplateFilesMaps[index]
+		"diffuse"		: "---d.dds"
+		"detail_mask"	:	"---dm.dds"
+		"emissive"	:	"---e.dds"
+		"glossiness"	:	"---g.dds"
+		"roughness"	:	"---g.dds"
+		"normal"		: "---n.dds"
+		)
+	),
+	fn generateDDSTextures utils_path edit_maps_path asset_name dds_names_list = (
+	
+		local sourcePath = utils_path + maps_templates_path
+		struct FILE_DATA (fname, fpath)
+		local new_textures = #()
+		for dds_name in dds_names_list do (
+		
+			local dds_sufix = getDDSTypeByName dds_name
 			local source_file = sourcePath + "template" + dds_sufix
-			local newFileName = fileName + dds_sufix
-			local target_file = targetPath + newFileName
-			local result = CopyFile source_file target_file
-			append new_textures (FILE_DATA newFileName target_file)
+			local new_file_name = asset_name + dds_sufix
+			local target_file = edit_maps_path + new_file_name
+format "MAT_MANAGER > generateDDSTextures >\n\tsource_file:%\n\ttarget_file:%\n" source_file target_file			
+--disable for test
+--local result = CopyFile source_file target_file
+			append new_textures (FILE_DATA new_file_name target_file)
 		)
 		new_textures
 	),
-	fn createFusionMaterial asset_name edit_path dds_list = (
+	fn createFusionMaterial utils_path edit_maps_path asset_name dds_names_list = (
 	
-		local textures = generateDDSTextures edit_path asset_name dds_list
-		for t in textures do ( append p4FileList (t.fpath + t.fname) );
+		local new_textures = generateDDSTextures utils_path edit_maps_path asset_name dds_names_list
+		format "MAT_MANAGER > createFusionMaterial > :%.xds with (%) textures.\n" asset_name new_textures.count 
+		
+		--Onle collect, p4 will be aded all together > for t in new_textures do ( append p4FileList (t.fpath + t.fname) );
 		
 		/*
 		local newMaterialFileName = asset_name + ".xml"

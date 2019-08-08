@@ -11,6 +11,7 @@ struct PHOTOSHOP_ELEMENT_PLACEMENT (
 )
 struct PSD_MANAGER (
 
+	SettingsINI = "",
 	psd_fpath,
 	app,
 	was_open,
@@ -125,7 +126,7 @@ struct PSD_MANAGER (
 -- 		app.activeDocument.selection.deselect()
 -- 		app.activeDocument.selection.select(selRegion, SelectionType.EXTEND)
 	),
-	fn setupPsdFoldersList settings_ini = (
+	fn setupPsdFoldersList = (
 		
 		if mcAssetGeneratorLayersDialog != undefined do DestroyDialog mcAssetGeneratorLayersDialog
 		rollout mcAssetGeneratorLayersDialog "PSD Folders Setup:" width:172 height:252
@@ -166,7 +167,7 @@ struct PSD_MANAGER (
 			on btn_cancel pressed do DestroyDialog  mcAssetGeneratorLayersDialog
 		)
 		CreateDialog mcAssetGeneratorLayersDialog  pos:[mouse.screenpos.x, mouse.screenpos.y - 252 / 2]
-		mcAssetGeneratorLayersDialog.SettingsINI = settings_ini
+		mcAssetGeneratorLayersDialog.SettingsINI = SettingsINI
 		mcAssetGeneratorLayersDialog.loadPsdFoldersSettings()
 	)
 )

@@ -3,6 +3,7 @@ Global DDS_MANAGER
 
 struct DDS_MANAGER (
 
+	SettingsINI = "",
 	app = getFilenamePath  (getSourceFileName()) + "texconv32.exe",
 	fn createDDSFile save_dir file_name size_w size_h bg_color = (
 
@@ -15,7 +16,18 @@ struct DDS_MANAGER (
 		if doesFileExist bmp_path do deleteFile bmp_path --remove temporalily image
 		exitcode == 0
 	),
-	fn setupPsdDdsList settings_ini = (
+	fn getCheckedList = (
+			
+		local folder_names = getINISetting SettingsINI "DDS_Textures"
+		local checked_list = #()
+		for item_name in folder_names do (
+				
+			local is_checked = (getINISetting SettingsINI "DDS_Textures" item_name) == "true"
+			if is_checked do append checked_list item_name
+		)
+		checked_list	
+	),
+	fn setupPsdDdsList = (
 		
 		if mcAssetGeneratorDDSDialog != undefined do DestroyDialog mcAssetGeneratorDDSDialog
 		rollout mcAssetGeneratorDDSDialog "DDS Export Setup:" width:172 height:252
@@ -56,7 +68,7 @@ struct DDS_MANAGER (
 			on btn_cancel pressed do DestroyDialog  mcAssetGeneratorDDSDialog
 		)
 		CreateDialog mcAssetGeneratorDDSDialog  pos:[mouse.screenpos.x, mouse.screenpos.y - 252 / 2]
-		mcAssetGeneratorDDSDialog.SettingsINI = settings_ini
+		mcAssetGeneratorDDSDialog.SettingsINI = SettingsINI
 		mcAssetGeneratorDDSDialog.loadDDSTexturesSettings()
 	)
 )

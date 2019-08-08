@@ -46,6 +46,10 @@ rollout mcAssetGeneratorDialog "Asset Builder:" width:712 height:332
 	local source_template_file_material = "template_general.xml"
 	local source_template_files_models = #("template_model.ires", "template_model.xds")
 	local source_template_file_psd = "template_texture.psd"
+	local psd_man = PSD_MANAGER(SettingsINI)
+	local dds_man = DDS_MANAGER(SettingsINI)
+	local mat_man = MAT_MANAGER(SettingsINI)
+	local P4V_COMPOMENTS = #()
 -- 	local psd_folder_names = #(
 -- 		
 -- 		"diffuse", 
@@ -249,7 +253,6 @@ rollout mcAssetGeneratorDialog "Asset Builder:" width:712 height:332
 		)
 		return true
 	)
-
 --Main FN
 	fn generateNewAsset = (
 	
@@ -297,13 +300,18 @@ rollout mcAssetGeneratorDialog "Asset Builder:" width:712 height:332
 			output = createPlaceholder edt_asset_name.text ddl_asset_type.selected new_mat
 			output_log += "\n\t" + output	
 		) 
+		print "xvxcxc"
 --CREATE FUSION MATERIAL BASED ON SELECTED TEMPLATE AND RETURN NEW UID
 		if chk_create_fussion_mat.checked do (
-			
-			local mm = MAT_MANAGER()
-			mm.loadMaxSemanticMaterial()
--- 			local mat_guid =  mm.createFusionMaterial edt_asset_name.text edt_path
--- 			if chk_create_max_mat.checked do  mm.createMaxMaterial edt_asset_name.text mat_guid
+		
+			-- load semantic material at MaterialEditor slot 2
+			mat_man.loadMaxSemanticMaterial() 
+			local dds_checked = dds_man.getCheckedList() --#("diffuse", "glossiness", "normal")
+			format "asign dds in fusion material:%\n" dds_checked
+			local fusion_mat = mat_man.createFusionMaterial utils_path edt_edt_path.text edt_asset_name.text dds_checked
+--format "fusion material:%\n" fusion_mat
+-- 			local mat_guid =  mat_man.createFusionMaterial edt_asset_name.text edt_path
+-- 			if chk_create_max_mat.checked do  mat_man.createMaxMaterial edt_asset_name.text mat_guid
 		)
 
 		showLog output_log
@@ -340,6 +348,7 @@ rollout mcAssetGeneratorDialog "Asset Builder:" width:712 height:332
 	fn init = (
 	
 		loadSettings()
+	
 		/*local sel = selection as array
 		local obj = sel[1]
 		edt_asset_name.text	= if classOf obj == LS3DModel then (
@@ -373,8 +382,8 @@ rollout mcAssetGeneratorDialog "Asset Builder:" width:712 height:332
 	on btn_gen_asset pressed do generateNewAsset()
 	on edt_edt_path entered text do generatePathsFromEdit (toLower edt_edt_path.text)
 	on edt_res_path entered text do generatePathsFromResources (toLower edt_res_path.text)
-	on btn_psd_folders_settings pressed do (local ps = PSD_MANAGER(); ps.setupPsdFoldersList SettingsINI)
-	on btn_fussion_dds_list pressed do (local dd = DDS_MANAGER(); dd.setupPsdDdsList SettingsINI)
+	on btn_psd_folders_settings pressed do (psd_man.setupPsdFoldersList ())
+	on btn_fussion_dds_list pressed do (dds_man.setupPsdDdsList ())
 	on mcAssetGeneratorDialog open do init()
 	on mcAssetGeneratorDialog close do fin()
 
