@@ -81,19 +81,16 @@ struct MAT_MANAGER (
 		)		
 		return result
 	),
-	--dds_names_list = #("---d.dds", "---dm.dds", "---e.dds", "---g.dds", "---n.dds")
-	fn getDDSTypeByName dds_name = (
+	--dds_suffix = #("---d.dds", "---dm.dds", "---e.dds", "---g.dds", "---n.dds")
+	fn getDdsSuiffixByName dds_name = (
 	
-		case dds_name of (
+		local pattern_names = getINISetting SettingsINI "DDS_Textures_Pattern"
+		for n in pattern_names where n == dds_name do return (
 		
-		"diffuse"		: "---d.dds"
-		"detail_mask"	:	"---dm.dds"
-		"emissive"	:	"---e.dds"
-		"glossiness"	:	"---g.dds"
-		"roughness"	:	"---g.dds"
-		"normal"		: "---n.dds"
+			getINISetting SettingsINI "DDS_Textures_Pattern" n
 		)
 	),
+	--clone templates to generete desired textures
 	fn generateDDSTextures utils_path edit_maps_path asset_name dds_names_list = (
 	
 		local sourcePath = utils_path + maps_templates_path
@@ -101,26 +98,32 @@ struct MAT_MANAGER (
 		local new_textures = #()
 		for dds_name in dds_names_list do (
 		
-			local dds_sufix = getDDSTypeByName dds_name
+			local dds_sufix = getDdsSuiffixByName dds_name
 			local source_file = sourcePath + "template" + dds_sufix
 			local new_file_name = asset_name + dds_sufix
 			local target_file = edit_maps_path + new_file_name
-format "MAT_MANAGER > generateDDSTextures >\n\tsource_file:%\n\ttarget_file:%\n" source_file target_file			
+format "MAT_MANAGER > generateDDSTextures >: file:%\n" target_file			
 --disable for test
 --local result = CopyFile source_file target_file
+--if doesFileExist target_file do 
 			append new_textures (FILE_DATA new_file_name target_file)
 		)
 		new_textures
 	),
 	fn createFusionMaterial utils_path edit_maps_path asset_name dds_names_list = (
 	
+		if gLS3DDXSupport == undefined or not gLS3DDXSupport.ShaderUpdateScriptInit() then (
+			
+			return undefined
+		)
 		local new_textures = generateDDSTextures utils_path edit_maps_path asset_name dds_names_list
-		format "MAT_MANAGER > createFusionMaterial > :%.xds with (%) textures.\n" asset_name new_textures.count 
+		local new_material_name = asset_name + ".xml"
+		format "MAT_MANAGER > createFusionMaterial > :% with (%) textures.\n" new_material_name new_textures.count 
 		
 		--Onle collect, p4 will be aded all together > for t in new_textures do ( append p4FileList (t.fpath + t.fname) );
 		
 		/*
-		local newMaterialFileName = asset_name + ".xml"
+		
 		GenerateLS3DMaterial newMaterialPath newMaterialFileName randomSeed newTextureNames conversionTable
 	
 		*/

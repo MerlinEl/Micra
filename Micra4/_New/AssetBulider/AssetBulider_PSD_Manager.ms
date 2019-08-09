@@ -139,10 +139,10 @@ struct PSD_MANAGER (
 			fn loadPsdFoldersSettings = (
 				
 				if clb_mods.Items.count != 0 do clb_mods.Items.Clear()
-				local folder_names = getINISetting SettingsINI "PSD_Folders"
+				local folder_names = getINISetting SettingsINI "PSD_Folders_List"
 				for item_name in folder_names do (
 					
-					local is_checked = (getINISetting SettingsINI "PSD_Folders" item_name) == "true"
+					local is_checked = (getINISetting SettingsINI "PSD_Folders_List" item_name) == "true"
 					clb_mods.Items.Add item_name is_checked
 				) 
 			)
@@ -152,7 +152,7 @@ struct PSD_MANAGER (
 					
 					local is_checked = (clb_mods.GetItemChecked i) as string
 					local item_name = clb_mods.items.item[ i ]
-					setINISetting SettingsINI "PSD_Folders" item_name is_checked
+					setINISetting SettingsINI "PSD_Folders_List" item_name is_checked
 				)
 				DestroyDialog  mcAssetGeneratorLayersDialog
 			)

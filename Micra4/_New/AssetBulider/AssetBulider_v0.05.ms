@@ -30,6 +30,8 @@ Fusion
 Global mcAssetGeneratorDialog
 Global mcAssetGeneratorLayersDialog
 Global mcAssetGeneratorDDSDialog
+Global mcResponse
+struct mcResponse (result, msg)
 if mcAssetGeneratorDialog != undefined do destroyDialog mcAssetGeneratorDialog
 rollout mcAssetGeneratorDialog "Asset Builder:" width:712 height:332
 (
@@ -158,25 +160,33 @@ rollout mcAssetGeneratorDialog "Asset Builder:" width:712 height:332
 		edt_res_path.text = r_path
 		lbl_psd_path.text = "PSD Path:             "		+ r_path + "\\maps\\"
 	)
-	fn generateLayers asset_type = (
+	fn generateLayers asset_type &output_log = (
 	
 		case asset_type of (
 		
 			"House": gLS3DLayerUtils.CleanFile "house"
 			"Crash Object": gLS3DLayerUtils.CleanFile "CO"
 		)
-		"Generated layers type:" + asset_type
+		output_log += "\n\tGenerated layers type:" + asset_type
 	)
-	fn saveMaxFileAs output_dir file_name &max_file = (
+	fn saveMaxFileAs output_dir file_name &output_log = (
 	
-		if not (doesDirectoryExist output_dir) do return "Error:: Unable Save Max File.\n\tDirectory: [ "+output_dir+" ] does not exists."
+		if not (doesDirectoryExist output_dir) do (
+		
+			output_log = "\n\tError:: Unable Save Max File.\n\tDirectory: [ "+output_dir+" ] does not exists."
+			return ""
+		)
 		local fpath = output_dir + file_name + ".max"
-		if doesFileExist fpath do return "Error:: Unable Override Max File.\n\tFile: [ "+fpath+" ] already exists."
+		if doesFileExist fpath do (
+		
+			output_log = "\n\tError:: Unable Override Max File.\n\tFile: [ "+fpath+" ] already exists."
+			return "" 
+		)
 		saveMaxFile fpath quiet:true
-		max_file = fpath
-		return "Max File Saved.\n\tPath:[ "+fpath+" ]"
+		output_log = "\n\tMax File Saved.\n\tPath:[ "+fpath+" ]"
+		fpath
 	)
-	fn createNodes output_path asset_name asset_type = (
+	fn createNodes output_path asset_name asset_type &output_log = (
 		
 		case asset_type of (
 			
@@ -211,9 +221,9 @@ rollout mcAssetGeneratorDialog "Asset Builder:" width:712 height:332
 				node_coll.OutputPath = output_path --set node output pat
 			)
 		)
-		"Created node(s) type:" + asset_type
+		output_log += "\n\tCreated node(s) type:" + asset_type
 	)
-	fn createPlaceholder asset_name asset_type new_mat = (
+	fn createPlaceholder asset_name asset_type new_mat &output_log = (
 		
 		local new_obj = box width:1000 height:1000 length:1000 pos:[0, 0, 0]
 		new_obj.name = "lod0"
@@ -231,7 +241,7 @@ rollout mcAssetGeneratorDialog "Asset Builder:" width:712 height:332
 			node_layer.setname lod0_layer_name
 			node_layer.addnode new_obj	--geometry node
 		)
-		"Created Placeholder type:" + asset_type
+		output_log += "\n\tCreated Placeholder type:" + asset_type
 	)
 	fn isValidFormFill &output_log = (
 		
@@ -257,8 +267,9 @@ rollout mcAssetGeneratorDialog "Asset Builder:" width:712 height:332
 	fn generateNewAsset = (
 	
 
-		local output_log = "\n--------------------\nASSET BUILDER LOG:\n--------------------",max_file = "", new_mat, new_obj, new_guid, export_node
-		if not isValidFormFill  &output_log do (
+		local output_log = "\n--------------------\nASSET BUILDER LOG:\n--------------------"
+		local max_file = "", new_mat, new_obj, new_guid, export_node
+		if not isValidFormFill &output_log do (
 			
 			messageBox ("Unable Create Asset. See trace log for details.") title:"Aborted:"
 			showLog output_log
@@ -268,8 +279,7 @@ rollout mcAssetGeneratorDialog "Asset Builder:" width:712 height:332
 --CREATE MAX FILE
 		if chk_create_max_file.checked then ( --create max file
 		
-			local output = saveMaxFileAs edt_res_path.text edt_asset_name.text &max_file 
-			output_log += "\n\t" + output
+			max_file = saveMaxFileAs edt_res_path.text edt_asset_name.text &output_log
 			
 		) else ( --get current max file
 		
@@ -284,21 +294,18 @@ rollout mcAssetGeneratorDialog "Asset Builder:" width:712 height:332
 --CREATE LAYERS
 		if chk_create_max_layers.checked do (
 	
-			local output = generateLayers ddl_asset_type.selected 
-			output_log += "\n\t" + output
+			generateLayers ddl_asset_type.selected &output_log
 		)		
 --CREATE NODES
 		if chk_create_node.checked do (
 			
-			output = createNodes edt_edt_path.text edt_asset_name.text ddl_asset_type.selected
-			output_log += "\n\t" + output
+			createNodes edt_edt_path.text edt_asset_name.text ddl_asset_type.selected &output_log
 		)
 --CREATE PLACEHOLDER
 		if chk_create_max_mesh.checked do (
 			
-			local new_mat = Standardmaterial() --TEMP
-			output = createPlaceholder edt_asset_name.text ddl_asset_type.selected new_mat
-			output_log += "\n\t" + output	
+local new_mat = Standardmaterial() --TEMP
+			createPlaceholder edt_asset_name.text ddl_asset_type.selected new_mat &output_log
 		) 
 		print "xvxcxc"
 --CREATE FUSION MATERIAL BASED ON SELECTED TEMPLATE AND RETURN NEW UID

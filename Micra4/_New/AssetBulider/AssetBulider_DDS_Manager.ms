@@ -18,11 +18,11 @@ struct DDS_MANAGER (
 	),
 	fn getCheckedList = (
 			
-		local folder_names = getINISetting SettingsINI "DDS_Textures"
+		local folder_names = getINISetting SettingsINI "DDS_Textures_List"
 		local checked_list = #()
 		for item_name in folder_names do (
 				
-			local is_checked = (getINISetting SettingsINI "DDS_Textures" item_name) == "true"
+			local is_checked = (getINISetting SettingsINI "DDS_Textures_List" item_name) == "true"
 			if is_checked do append checked_list item_name
 		)
 		checked_list	
@@ -40,10 +40,10 @@ struct DDS_MANAGER (
 			fn loadDDSTexturesSettings = (
 				
 				if clb_mods.Items.count != 0 do clb_mods.Items.Clear()
-				local folder_names = getINISetting SettingsINI "DDS_Textures"
+				local folder_names = getINISetting SettingsINI "DDS_Textures_List"
 				for item_name in folder_names do (
 					
-					local is_checked = (getINISetting SettingsINI "DDS_Textures" item_name) == "true"
+					local is_checked = (getINISetting SettingsINI "DDS_Textures_List" item_name) == "true"
 					clb_mods.Items.Add item_name is_checked
 				) 
 			)
@@ -53,7 +53,7 @@ struct DDS_MANAGER (
 					
 					local is_checked = (clb_mods.GetItemChecked i) as string
 					local item_name = clb_mods.items.item[ i ]
-					setINISetting SettingsINI "DDS_Textures" item_name is_checked
+					setINISetting SettingsINI "DDS_Textures_List" item_name is_checked
 				)
 				DestroyDialog  mcAssetGeneratorDDSDialog
 			)
