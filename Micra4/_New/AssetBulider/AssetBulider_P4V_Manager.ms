@@ -94,7 +94,7 @@ struct P4V_MANAGER (
 
 
 /*
-p4 = P4V_MANAGER()
+p4v_man = P4V_MANAGER()
 local p4FileList = #()
-p4.AddFileListToP4 p4FileList asset_name
+p4v_man.AddFileListToP4 p4FileList asset_name
 */

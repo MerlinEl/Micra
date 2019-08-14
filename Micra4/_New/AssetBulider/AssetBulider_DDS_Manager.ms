@@ -76,7 +76,7 @@ struct DDS_MANAGER (
 
 
 /*
-dm = DDS_MANAGER()
-dm.createDDSFile @"c:\temp\" "test_file8" 512 240 gray
+dds_man = DDS_MANAGER()
+dds_man.createDDSFile @"c:\temp\" "test_file8" 512 240 gray
 */
 

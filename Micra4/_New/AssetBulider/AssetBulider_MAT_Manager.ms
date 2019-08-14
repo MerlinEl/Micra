@@ -5,6 +5,7 @@ struct MAT_MANAGER (
 	SettingsINI = "",
 	maps_templates_path = @"asset_management\maps\",
 	material_templates_path = @"asset_management\materials\",
+	--new_guid = generateMaterialGuid (random 1 100)
 	--material id example > 0x7d50757b, 0x55000dd1
 	fn generateMaterialGuid seed_number = ( --for i=1 to 10 do GenerateMaterialGuid i
 
@@ -32,13 +33,13 @@ struct MAT_MANAGER (
 		-- loadMaterialLibrary LS3DGUP.LS3DGUP.UtilsPath + "semantic_materials.mat"
 		-- newMat = currentMaterialLibrary["semantic_materials"]
 	),
-	fn createMaxMaterial mat_name mat_guid slot_index:1 = (
+	fn createMaxMaterial asset_name mat_guid &output_log slot_index:1 = (
 	
-		if mat_name == "" do return undefined
-		local new_mat = ls3dMaterial()
-		new_mat.matguid = mat_guid
-		new_mat.name = mat_name
+		local new_mat = LS3DMaterial()
+		if mat_guid != undefined do new_mat.matguid = mat_guid
+		new_mat.name = asset_name
 		meditMaterials[slot_index] = new_mat
+		output_log += "\n\tCreated Max Material:" + asset_name
 		new_mat
 	),
 	fn modifyGuid path newGUID =
@@ -110,31 +111,33 @@ format "MAT_MANAGER > generateDDSTextures >: file:%\n" target_file
 		)
 		new_textures
 	),
-	fn createFusionMaterial utils_path edit_maps_path asset_name dds_names_list = (
+	fn createFusionMaterial utils_path edit_maps_path asset_name dds_names_list mat_guid = (
 	
 		if gLS3DDXSupport == undefined or not gLS3DDXSupport.ShaderUpdateScriptInit() then (
 			
 			return undefined
 		)
 		local new_textures = generateDDSTextures utils_path edit_maps_path asset_name dds_names_list
-		local new_material_name = asset_name + ".xml"
-		format "MAT_MANAGER > createFusionMaterial > :% with (%) textures.\n" new_material_name new_textures.count 
-		
-		--Onle collect, p4 will be aded all together > for t in new_textures do ( append p4FileList (t.fpath + t.fname) );
+		local new_mat_name = asset_name + ".xml"
+		local new_mat_path = edit_maps_path + new_mat_name
+		local mat_and_dds_paths = join #( new_mat_path ) new_textures
+		format "MAT_MANAGER > createFusionMaterial > :% with (%) textures.\n" new_mat_name new_textures.count 
 		
 		/*
 		
 		GenerateLS3DMaterial newMaterialPath newMaterialFileName randomSeed newTextureNames conversionTable
 	
 		*/
+		
+		output_log += "\n\tCreated DDS Textures:" + new_textures
+		output_log += "\n\tCreated Fusion Material:" + new_mat_name
+		mat_and_dds_paths
 	)
 )
 
 
 
 /*
-new_guid = generateMaterialGuid (random 1 100)
-
-mm = MAT_MANAGER()
-mm.loadMaxSemanticMaterial()
+mat_man = MAT_MANAGER()
+mat_man.loadMaxSemanticMaterial()
 */

@@ -4,6 +4,8 @@ filein "AssetBulider_DDS_Manager.ms"
 filein "AssetBulider_PSD_Manager.ms"
 filein "AssetBulider_P4V_Manager.ms"
 filein "AssetBulider_MAT_Manager.ms"
+filein "Progressbar_Log.ms"
+
 /*
 append p4FileList (newPSDPath + newPSDFileName)
 
@@ -44,7 +46,6 @@ rollout mcAssetGeneratorDialog "Asset Builder:" width:712 height:332
 	local temp_edt_path	= "models\\city\\lost_heaven\\districts\lh_08_oakwood\\"
 	local temp_res_path	= "city\\lost_heaven\districts\\lh_08_oakwood\\static_objects\\"
 	local temp_asset_name= "lh_08_family_house_a_v1_test" --"lh_"
-	local node_geo, node_coll 
 	local source_template_file_material = "template_general.xml"
 	local source_template_files_models = #("template_model.ires", "template_model.xds")
 	local source_template_file_psd = "template_texture.psd"
@@ -137,6 +138,11 @@ rollout mcAssetGeneratorDialog "Asset Builder:" width:712 height:332
 	
 		path[2] == ":"
 	)
+	fn addToP4V new_arr = (
+	
+	
+		join P4V_COMPOMENTS new_arr 
+	)
 	fn generatePathsFromEdit e_path = (
 	
 		if not isValidPath e_path do return false
@@ -148,7 +154,7 @@ rollout mcAssetGeneratorDialog "Asset Builder:" width:712 height:332
 		relative_path = substituteString relative_path "models\\" ""
 		edt_res_path.text = res_path + relative_path + "\\"
 		--d:\!2k_games\scotch_dev\edit\models\city\lost_heaven\districts\lh_08_oakwood\
-		edt_edt_path.text = e_path  + "\\"
+		edt_edt_path.text = e_path
 		--//Scotch/dev/resources/graphics/city/lost_heaven/districts/lh_08_oakwood/static_objects/maps/lh_08_family_house_c_v1.psd
 		lbl_psd_path.text = "PSD Path:             "	+ res_path	+ relative_path + "\\maps\\"
 		lbl_dds_path.text = "DDS Path:            "	+ edt_path	+ "maps\\" + relative_path + "\\"
@@ -187,7 +193,8 @@ rollout mcAssetGeneratorDialog "Asset Builder:" width:712 height:332
 		fpath
 	)
 	fn createNodes output_path asset_name asset_type &output_log = (
-		
+	
+		local node_geo, node_coll 
 		case asset_type of (
 			
 			"House" : (
@@ -222,13 +229,14 @@ rollout mcAssetGeneratorDialog "Asset Builder:" width:712 height:332
 			)
 		)
 		output_log += "\n\tCreated node(s) type:" + asset_type
+		#(node_geo, node_coll)
 	)
-	fn createPlaceholder asset_name asset_type new_mat &output_log = (
+	fn createPlaceholder asset_name asset_type node_geo new_mat &output_log = (
 		
 		local new_obj = box width:1000 height:1000 length:1000 pos:[0, 0, 0]
 		new_obj.name = "lod0"
 		new_obj.material = new_mat
-		if node_geo != undefined do new_obj.parent = node_geo
+		new_obj.parent = node_geo --node || undefined
 		local lod0_layer_name = case asset_type of (
 			
 			"House" : asset_name + "__LOD0" --"static_objects" +
@@ -242,6 +250,7 @@ rollout mcAssetGeneratorDialog "Asset Builder:" width:712 height:332
 			node_layer.addnode new_obj	--geometry node
 		)
 		output_log += "\n\tCreated Placeholder type:" + asset_type
+		new_obj
 	)
 	fn isValidFormFill &output_log = (
 		
@@ -263,12 +272,16 @@ rollout mcAssetGeneratorDialog "Asset Builder:" width:712 height:332
 		)
 		return true
 	)
---Main FN
+---------------------------------------------
+---------------------------------------------
+--                    RUN                  --
+---------------------------------------------
+---------------------------------------------
 	fn generateNewAsset = (
 	
 
 		local output_log = "\n--------------------\nASSET BUILDER LOG:\n--------------------"
-		local max_file = "", new_mat, new_obj, new_guid, export_node
+		local max_file = "", new_mat, new_obj, new_guid, node_geo, node_coll 
 		if not isValidFormFill &output_log do (
 			
 			messageBox ("Unable Create Asset. See trace log for details.") title:"Aborted:"
@@ -291,6 +304,21 @@ rollout mcAssetGeneratorDialog "Asset Builder:" width:712 height:332
 			showLog output_log
 			return false
 		)
+		addToP4V #(max_file)
+--CREATE PSD FILE
+		if chk_create_psd.checked do (
+		
+			local psd_man = PSD_MANAGER()
+			local w = execute ddl_psd_w.selected
+			local h = execute ddl_psd_h.selected
+			psd_man.createPSDFile (edt_res_path.text + "maps\\") edt_asset_name.text w h gray
+			local folders_checked = psd_man.getCheckedList() --#("diffuse", "alpha", "glossiness", ...)
+			local layers_names =	for i=1 to folders_checked.count collect "layer_1"
+			local layers_colors = for i=1 to folders_checked.count collect gray
+			psd_man.addFoldersWithLayers folders_checked layers_names layers_colors
+			psd_man.savePSDFile()
+			addToP4V #(edt_res_path.text + "maps\\" + edt_asset_name.text + ".psd")
+		)
 --CREATE LAYERS
 		if chk_create_max_layers.checked do (
 	
@@ -299,29 +327,39 @@ rollout mcAssetGeneratorDialog "Asset Builder:" width:712 height:332
 --CREATE NODES
 		if chk_create_node.checked do (
 			
-			createNodes edt_edt_path.text edt_asset_name.text ddl_asset_type.selected &output_log
+			local nodes = createNodes edt_edt_path.text edt_asset_name.text ddl_asset_type.selected &output_log
+			 node_geo = nodes[1]
+			 node_coll = nodes[2] 
 		)
---CREATE PLACEHOLDER
-		if chk_create_max_mesh.checked do (
-			
-local new_mat = Standardmaterial() --TEMP
-			createPlaceholder edt_asset_name.text ddl_asset_type.selected new_mat &output_log
-		) 
-		print "xvxcxc"
 --CREATE FUSION MATERIAL BASED ON SELECTED TEMPLATE AND RETURN NEW UID
 		if chk_create_fussion_mat.checked do (
 		
 			-- load semantic material at MaterialEditor slot 2
 			mat_man.loadMaxSemanticMaterial() 
+			new_guid = mat_man.generateMaterialGuid (random 1 100)
 			local dds_checked = dds_man.getCheckedList() --#("diffuse", "glossiness", "normal")
-			format "asign dds in fusion material:%\n" dds_checked
-			local fusion_mat = mat_man.createFusionMaterial utils_path edt_edt_path.text edt_asset_name.text dds_checked
---format "fusion material:%\n" fusion_mat
--- 			local mat_guid =  mat_man.createFusionMaterial edt_asset_name.text edt_path
--- 			if chk_create_max_mat.checked do  mat_man.createMaxMaterial edt_asset_name.text mat_guid
+			format "Create fusion Material and Asign DDS:%\n" dds_checked
+			local mat_and_dds_paths = mat_man.createFusionMaterial utils_path edt_edt_path.text edt_asset_name.text dds_checked new_guid
+			addToP4V mat_and_dds_paths
 		)
+--CREATE MAX MATERIAL AND ASSIGN GIUD
+		if chk_create_max_mat.checked do  (
+		
+			new_mat = meditMaterials[1] --pick up first material from material editor
+			if classOf new_mat != LS3DMaterial do ( --or create new one
+			
+				new_mat = mat_man.createMaxMaterial edt_asset_name.text new_guid &output_log slot_index:1
+			)
+		)
+--CREATE PLACEHOLDER
+		if chk_create_max_mesh.checked do (
+			
+			createPlaceholder edt_asset_name.text ddl_asset_type.selected node_geo new_mat &output_log
+		) 
 
 		showLog output_log
+		fomat "----------------\nADD FILES TO P4V:\n----------------\n"
+		for p in P4V_COMPOMENTS do format "\t%\n" p
 		max tool zoomextents all
 	)
 --UI

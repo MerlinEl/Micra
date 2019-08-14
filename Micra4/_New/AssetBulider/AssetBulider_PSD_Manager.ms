@@ -126,6 +126,17 @@ struct PSD_MANAGER (
 -- 		app.activeDocument.selection.deselect()
 -- 		app.activeDocument.selection.select(selRegion, SelectionType.EXTEND)
 	),
+	fn getCheckedList = (
+			
+		local folder_names = getINISetting SettingsINI "PSD_Folders_List"
+		local checked_list = #()
+		for item_name in folder_names do (
+				
+			local is_checked = (getINISetting SettingsINI "PSD_Folders_List" item_name) == "true"
+			if is_checked do append checked_list item_name
+		)
+		checked_list	
+	),
 	fn setupPsdFoldersList = (
 		
 		if mcAssetGeneratorLayersDialog != undefined do DestroyDialog mcAssetGeneratorLayersDialog
@@ -175,21 +186,21 @@ struct PSD_MANAGER (
 
 
 /*
-ps = PSD_MANAGER()
-ps.createPSDFile @"c:\temp\" "psd_test_10" 128 512 black
+psd_man = PSD_MANAGER()
+psd_man.createPSDFile @"c:\temp\" "psd_test_10" 128 512 black
 folder_names =	#("diffuse", "alpha", "glossiness", "metalness", "emissive", "emissive mask", "normal", "detail mask", "blend mask")
 layers_names =	for i=1 to folder_names.count collect "layer_1"
 layers_colors = for i=1 to folder_names.count collect gray
-ps.addFoldersWithLayers folder_names layers_names layers_colors
-ps.savePSDFile()
-ps.focus()
+psd_man.addFoldersWithLayers folder_names layers_names layers_colors
+psd_man.savePSDFile()
+psd_man.focus()
 
 action_fpath = @"C:\Program Files\Adobe\adobe photoshop cc 2014\presets\scripts\ls3d_generate_layers.jsx"
-ps.runScript action_fpath
+psd_man.runScript action_fpath
 
 
-ps.addFolder "test"
-ps.addFolders #("a", "b", "c")
-ps.addLayer "bg" green
-ps.addFolderWithLayer "new_folder_01" "new_layer_01" blue
+psd_man.addFolder "test"
+psd_man.addFolders #("a", "b", "c")
+psd_man.addLayer "bg" green
+psd_man.addFolderWithLayer "new_folder_01" "new_layer_01" blue
 */
