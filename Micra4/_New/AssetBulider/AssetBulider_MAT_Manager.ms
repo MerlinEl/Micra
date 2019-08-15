@@ -33,13 +33,15 @@ struct MAT_MANAGER (
 		-- loadMaterialLibrary LS3DGUP.LS3DGUP.UtilsPath + "semantic_materials.mat"
 		-- newMat = currentMaterialLibrary["semantic_materials"]
 	),
-	fn createMaxMaterial asset_name mat_guid &output_log slot_index:1 = (
+	fn createMaxMaterial asset_name mat_guid slot_index:1 = (
 	
+		mcPprogbUI.msg "Creating Max Material" ti:"3DsMax..." ty:"task_open"
 		local new_mat = LS3DMaterial()
 		if mat_guid != undefined do new_mat.matguid = mat_guid
 		new_mat.name = asset_name
 		meditMaterials[slot_index] = new_mat
 		output_log += "\n\tCreated Max Material:" + asset_name
+		mcPprogbUI.msg "Max Material are created" ti:"3DsMax..." ty:"task_close"
 		new_mat
 	),
 	fn modifyGuid path newGUID =

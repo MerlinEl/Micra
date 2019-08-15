@@ -1,10 +1,9 @@
 
-
+filein "Progressbar_With_Log.ms"
 filein "AssetBulider_DDS_Manager.ms"
 filein "AssetBulider_PSD_Manager.ms"
 filein "AssetBulider_P4V_Manager.ms"
 filein "AssetBulider_MAT_Manager.ms"
-filein "Progressbar_With_Log.ms"
 
 /*
 append p4FileList (newPSDPath + newPSDFileName)
@@ -37,12 +36,9 @@ struct mcResponse (result, msg)
 if mcAssetGeneratorDialog != undefined do destroyDialog mcAssetGeneratorDialog
 rollout mcAssetGeneratorDialog "Asset Builder:" width:712 height:332
 (
-	local pbUI = mcProgressBarLogDialog
-	local script_dir = getFilenamePath (getSourceFileName())
-	local SettingsINI = script_dir + "LS3D_Asset_Generator.ini"
-	local utils_path	= toLower (LS3DGUP.LS3DGUP.UtilsPath)
-	local edt_path	= toLower (LS3DGUP.LS3DGUP.EnginePath )
-	local res_path	= toLower (LS3DGUP.LS3DGUP.ResourcesPath)
+	local script_dir	= getFilenamePath (getSourceFileName())
+	local SettingsINI	= script_dir + "LS3D_Asset_Generator.ini"
+	local utils_path, edt_path, res_path
 	local max_path	= toLower (maxFilePath + maxFileName)
 	local temp_edt_path	= "models\\city\\lost_heaven\\districts\lh_08_oakwood\\"
 	local temp_res_path	= "city\\lost_heaven\districts\\lh_08_oakwood\\static_objects\\"
@@ -141,8 +137,12 @@ rollout mcAssetGeneratorDialog "Asset Builder:" width:712 height:332
 	)
 	fn generatePathsFromEdit e_path = (
 	
-		if not isValidPath e_path do return false
-		if (not doesFileExist res_path) then messagebox "Your exporter doesn't have correctly set paths. Please check: menu LS3D/Client Settings if all paths there are set correctly to existing folders."
+		if (not isValidPath e_path or not doesFileExist res_path) then (
+		
+			mcPprogbUI.msg "ASSET BUILDER LOG:" ti:"Initialize...." ty:"new_task"
+			mcPprogbUI.msg "Your exporter doesn't have correctly set paths. Please check: menu LS3D/Client Settings if all paths there are set correctly to existing folders." ti:"Aborted!" ty:"error"
+			return false
+		)
 		if (findString res_path @"d:\") == undefined then (			
 			res_path = substituteString res_path "d:" @"d:\"
 		)
@@ -162,36 +162,38 @@ rollout mcAssetGeneratorDialog "Asset Builder:" width:712 height:332
 		edt_res_path.text = r_path
 		lbl_psd_path.text = "PSD Path:             "		+ r_path + "\\maps\\"
 	)
-	fn generateLayers asset_type &output_log = (
+	fn generateLayers asset_type = (
 	
+		mcPprogbUI.msg "Creating Max Layers" ti:"3DsMax..." ty:"task_open"
 		case asset_type of (
 		
 			"House": gLS3DLayerUtils.CleanFile "house"
 			"Crash Object": gLS3DLayerUtils.CleanFile "CO"
 		)
-		output_log += "\n\tGenerated layers type:" + asset_type
+		mcPprogbUI.msg ("Generated layers type:" + asset_type) ty:"task_close"
 	)
 	fn saveMaxFileAs output_dir file_name = (
 	
-		pbUI.msg "Creating Max File" ti:"3DsMax..." ty:"dash2" tl:1
+		mcPprogbUI.msg "Creating Max File" ti:"3DsMax..." ty:"task_open"
 		if not (doesDirectoryExist output_dir) do (
 	
-			pbUI.msg ("Failed Save Max File. Unable to find Directory.\n\t\tPath:[ "+output_dir+" ]") ti:"Aborted!" ty:"error" tl:2
+			mcPprogbUI.msg ("Failed Save Max File. Unable to find Directory.\n\tPath:[ "+output_dir+" ]") ti:"Aborted!" ty:"error"
 			return ""
 		)
 		local fpath = output_dir + file_name + ".max"
 		if doesFileExist fpath do (
 		
-			pbUI.msg ("Failed Save Max File. Already exists.\n\t\tPath:[ "+fpath+" ]") ti:"Aborted!" ty:"error" tl:2
+			mcPprogbUI.msg ("Failed Save Max File. Already exists.\n\tPath:[ "+fpath+" ]") ti:"Aborted!" ty:"error"
 			return "" 
 		)
 		saveMaxFile fpath quiet:true
 
-		pbUI.msg ("Max File are Saved.\n\t\tPath:[ "+fpath+" ]") ti:"Save Max File:" ty:"confirm" tl:2
+		mcPprogbUI.msg ("Max File are Saved.\n\tPath:[ "+fpath+" ]") ty:"task_close"
 		fpath
 	)
-	fn createNodes output_path asset_name asset_type &output_log = (
+	fn createNodes output_path asset_name asset_type = (
 	
+		mcPprogbUI.msg "Creating Max Nodes" ti:"3DsMax..." ty:"task_open"
 		local node_geo, node_coll 
 		case asset_type of (
 			
@@ -226,11 +228,12 @@ rollout mcAssetGeneratorDialog "Asset Builder:" width:712 height:332
 				node_coll.OutputPath = output_path --set node output pat
 			)
 		)
-		output_log += "\n\tCreated node(s) type:" + asset_type
+		mcPprogbUI.msg ("Max Nodes are created type:" + asset_type) ty:"task_close"
 		#(node_geo, node_coll)
 	)
-	fn createPlaceholder asset_name asset_type node_geo new_mat &output_log = (
+	fn createPlaceholder asset_name asset_type node_geo new_mat = (
 		
+		mcPprogbUI.msg "Creating Max Placeholder" ti:"3DsMax..." ty:"task_open"
 		local new_obj = box width:1000 height:1000 length:1000 pos:[0, 0, 0]
 		new_obj.name = "lod0"
 		new_obj.material = new_mat
@@ -247,29 +250,29 @@ rollout mcAssetGeneratorDialog "Asset Builder:" width:712 height:332
 			node_layer.setname lod0_layer_name
 			node_layer.addnode new_obj	--geometry node
 		)
-		output_log += "\n\tCreated Placeholder type:" + asset_type
+		mcPprogbUI.msg ("Created Placeholder type:" + asset_type) ty:"task_close"
 		new_obj
 	)
 	fn isValidFormInput = (
 		
-		pbUI.msg "Check Paths and Asset Name" ti:"3DsMax..." ty:"dash2" tl:1
+		mcPprogbUI.msg "Check Paths and Asset Name" ti:"3DsMax..." ty:"task_open"
 		if edt_asset_name.text == "" do (
 			
-			pbUI.msg "Missing Asset Name." ti:"Aborted!" tl:2 ty:"error"
+			mcPprogbUI.msg "Missing Asset Name." ti:"Aborted!" ty:"error"
 			return false	
 		)
 		doesDirectoryExist
 		if not doesDirectoryExist edt_edt_path.text or findString edt_edt_path.text @"\models" == undefined do (
 			
-			pbUI.msg "Missing or Invalid Models Path." ti:"Aborted!" tl:2 ty:"error"
+			mcPprogbUI.msg "Missing or Invalid Models Path." ti:"Aborted!" ty:"error"
 			return false	
 		)
 		if not doesDirectoryExist edt_res_path.text or findString edt_res_path.text @"\graphics" == undefined  do (
 			
-			pbUI.msg "Missing or Invalid Resources Path." ti:"Aborted!" tl:2 ty:"error"
+			mcPprogbUI.msg "Missing or Invalid Resources Path." ti:"Aborted!" ty:"error"
 			return false	
 		)
-		pbUI.msg "Paths and Name is OK" ty:"confirm" tl:2
+		mcPprogbUI.msg "Paths and Name is OK" ty:"task_close"
 		return true
 	)
 ---------------------------------------------
@@ -279,10 +282,9 @@ rollout mcAssetGeneratorDialog "Asset Builder:" width:712 height:332
 ---------------------------------------------
 	fn generateNewAsset = (
 	
-		pbUI.show() --display progressbar with log
-		pbUI.msg "ASSET BUILDER LOG:" ti:"Initialize...." ty:"dash1"
+		mcPprogbUI.show() --display progressbar with log
+		mcPprogbUI.msg "ASSET BUILDER LOG:" ti:"Initialize...." ty:"new_task"
 		
-		local output_log = ""
 		local max_file = "", new_mat, new_obj, new_guid, node_geo, node_coll 
 		
 		if not isValidFormInput() do return false
@@ -317,12 +319,12 @@ rollout mcAssetGeneratorDialog "Asset Builder:" width:712 height:332
 --CREATE LAYERS
 		if chk_create_max_layers.checked do (
 	
-			generateLayers ddl_asset_type.selected &output_log
+			generateLayers ddl_asset_type.selected
 		)		
 --CREATE NODES
 		if chk_create_node.checked do (
 			
-			local nodes = createNodes edt_edt_path.text edt_asset_name.text ddl_asset_type.selected &output_log
+			local nodes = createNodes edt_edt_path.text edt_asset_name.text ddl_asset_type.selected
 			 node_geo = nodes[1]
 			 node_coll = nodes[2] 
 		)
@@ -343,17 +345,17 @@ rollout mcAssetGeneratorDialog "Asset Builder:" width:712 height:332
 			new_mat = meditMaterials[1] --pick up first material from material editor
 			if classOf new_mat != LS3DMaterial do ( --or create new one
 			
-				new_mat = mat_man.createMaxMaterial edt_asset_name.text new_guid &output_log slot_index:1
+				new_mat = mat_man.createMaxMaterial edt_asset_name.text new_guid slot_index:1
 			)
 		)
 --CREATE PLACEHOLDER
 		if chk_create_max_mesh.checked do (
 			
-			createPlaceholder edt_asset_name.text ddl_asset_type.selected node_geo new_mat &output_log
+			createPlaceholder edt_asset_name.text ddl_asset_type.selected node_geo new_mat
 		) 
 --ADD FILES TO PERFORCE
-		pbUI.msg "ADD FILES TO PERFORCE:" ti:"P4V...." ty:"dash2"  tl:1
-		for p in P4V_COMPOMENTS do pbUI.msg p tl:1 ty:"info"
+		mcPprogbUI.msg "ADD FILES TO PERFORCE:" ti:"P4V...." ty:"new_task"  tl:1
+		for p in P4V_COMPOMENTS do mcPprogbUI.msg p tl:1 ty:"proc"
 		/*
 p4v_man = P4V_MANAGER()
 local p4FileList = #()
@@ -392,7 +394,14 @@ p4v_man.AddFileListToP4 p4FileList asset_name
 		generatePathsFromResources (toLower resources_path)
 	)
 	fn init = (
-	
+		if LS3DGUP != undefined then (
+		
+			utils_path	= toLower (LS3DGUP.LS3DGUP.UtilsPath	)
+			edt_path	= toLower (LS3DGUP.LS3DGUP.EnginePath 	)
+			res_path	= toLower (LS3DGUP.LS3DGUP.ResourcesPath)
+			
+		) else utils_path = edt_path = res_path = ""
+		
 		loadSettings()
 	
 		/*local sel = selection as array
