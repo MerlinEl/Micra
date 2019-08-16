@@ -14,21 +14,21 @@ struct MICRA_COLOR (
 	alphaStr = "0123456789ABCDEF",
 	alphaArr = #("0","1","2","3","4","5","6","7","8","9","A","B","C","D","E","F"),
 	fn getSource = getSourceFileName(), --get path of this script
-	fn hexToDec num = -- used to convert single hex bit to 0-255 color value
-	(
-		n_ = findString alphaStr (substring num 1 1);
-		_n = findString alphaStr (substring num 2 1);
+	fn hexToDec num = ( -- used to convert single hex bit to 0-255 color value
+
+		local n_ = findString alphaStr (substring num 1 1)
+		local _n = findString alphaStr (substring num 2 1)
 		_n -= 1
 		n_ -= 1
-		return (n_ * 16 + _n);
+		(n_ * 16 + _n)
 	),
-	fn decToHex dec = -- used to convert single color value 0-255 to hex bit
-	(
-		n_ = floor (dec / 16)
-		_n = dec - n_ * 16
+	fn decToHex dec = ( -- used to convert single color value 0-255 to hex bit
+
+		local n_ = floor (dec / 16)
+		local _n = dec - n_ * 16
 		n_ += 1
 		_n += 1
-		return alphaArr[n_] + alphaArr[_n]
+		alphaArr[n_] + alphaArr[_n]
 	),
 	/**
 	* @example mcColor.rgbToHex (color 60 32 104)

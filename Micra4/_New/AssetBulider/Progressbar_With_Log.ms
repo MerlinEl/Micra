@@ -21,9 +21,11 @@ struct PROGRESSBAR_LOG_STRUCTURE (
 	
 	--variables
 	text_box,
-	pb_prog,
+	pb_sub_task,
+	pb_sum_task,
 	new_line = (dotNetClass "System.Environment").newline,
 	font_style = dotNetClass "System.Drawing.FontStyle",
+	alphaStr = "0123456789ABCDEF",
 	--functions
 	fn getSource = getSourceFileName(), --get path of this script
 	fn show = (
@@ -41,11 +43,19 @@ struct PROGRESSBAR_LOG_STRUCTURE (
 	fn close = (DestroyDialog mcProgressBarLogDialog),
 	/**
 	*@Example   
-		for i=1 to 1000 do mcPprogbUI.prog i 1000
+		for i=1 to 1000 do mcPprogbUI.progSub i 1000 clr:yellow
+		for i=1 to 1000 do mcPprogbUI.progSum i 1000
 	*/
-	fn prog val_step val_total color:green = (
+	fn progSub val_step val_total clr:(color 255 115 255) = ( --color 255 153 255, color 0 255 255
 		
-		pb_prog.value = 100.*val_step/val_total
+		
+		pb_sub_task.color = clr
+		pb_sub_task.value = 100.*val_step/val_total
+	),
+	fn progSum val_step val_total clr:(color 147 38 255) = ( --color 147 38 255, color 38 147 255
+		
+		pb_sum_task.color = clr
+		pb_sum_task.value = 100.*val_step/val_total
 	),
 	fn cloneChar char cnt = (local str = "";	for i=1 to cnt do str += char; str),
 	fn intTo32 int = (
@@ -55,12 +65,29 @@ struct PROGRESSBAR_LOG_STRUCTURE (
 		for i=0 to 5 do int_arr.SetValue (tab_size+=int) i
 		int_arr
 	),
+	fn hexToDec num = ( -- used to convert single hex bit to 0-255 color value
+
+		local n_ = findString alphaStr (substring num 1 1)
+		local _n = findString alphaStr (substring num 2 1)
+		_n -= 1
+		n_ -= 1
+		(n_ * 16 + _n)
+	),
+	fn hexToRGB hex_color= ( --thanks to Mark Tsang
+		
+		local hex_string = substituteString hex_color "#" "" -- audits string for pound sign and deletes it
+		hex_string = toUpper hex_string
+		local r = hexToDec (substring hex_string 1 2)
+		local g = hexToDec (substring hex_string 3 2)
+		local b = hexToDec (substring hex_string 5 2)
+		color r  g  b
+	),
 	fn netDrColor clr = (
 	
 		local dotnet_color = case classOf clr of (
 			
 			Name:(
-				local hex_as_color = mcColor.hexToRGB clr
+				local hex_as_color = hexToRGB clr
 				if hex_as_color == undefined do return undefined
 				(dotNetClass "Drawing.Color").fromArgb hex_as_color.r hex_as_color.g hex_as_color.b
 			)
@@ -76,30 +103,30 @@ struct PROGRESSBAR_LOG_STRUCTURE (
 		text_box.Select first (last - first)
 		text_box.SelectionBackColor = netDrColor clr
 	),
-	fn getTextWidth str f_name f_size f_style = (
+	fn getTextWidth str fname fsize fstyle = (
 	
-		local font = dotnetObject "System.Drawing.Font" f_name f_size f_style
+		local font = dotnetObject "System.Drawing.Font" fname fsize fstyle
 		((dotnetclass "TextRenderer").MeasureText str font).width
 	),
-	fn stylizeText p_start p_end clr bold italic f_size:8 f_name:"Times New Roman" = (
+	fn stylizeText start end clr bold italic fsize fname = (
 
-		local f_style = font_style.Regular
+		local fstyle = font_style.Regular
 		if bold and italic then (
 			
-			f_style = dotnet.combineenums font_style.bold font_style.italic
+			fstyle = dotnet.combineenums font_style.bold font_style.italic
 			
 		) else if bold then (
 			
-			f_style = font_style.Bold
+			fstyle = font_style.Bold
 			
 		) else if italic do (
 			
-			f_style = font_style.Italic
+			fstyle = font_style.Italic
 		) 
-		local netFont = dotnetObject "System.Drawing.Font" f_name f_size f_style
+		local netFont = dotnetObject "System.Drawing.Font" fname fsize fstyle
 		
 		text_box.SuspendLayout()
-		text_box.Select p_start p_end
+		text_box.Select start end
 		text_box.SelectionColor = netDrColor clr
 		text_box.SelectionFont = netFont
 		text_box.resumelayout()
@@ -124,17 +151,17 @@ struct PROGRESSBAR_LOG_STRUCTURE (
 		mcPprogbUI.msg "Welcome to trace log." nl:true tt:"Pass 1" ty:"head1"
 		mcPprogbUI.msg "progress 1" nl:true tl:1 ti:"Pass 1"
 	*/
-	fn msg str nl:true ti:"" ty:"info" clr:black bold:false italic:false fsize:9 = (
+	fn msg str nl:true ti:"" ty:"info" clr:black bold:false italic:false fsize:12 fname:"Times New Roman" = (
 		
 		if not (isDialogVisible mcProgressBarLogDialog) do show()
 		if str == "@" do (mcProgressBarLogDialog.clearLog(); return OK)
-		local f_name = "Times New Roman" --"Tahoma" --"Verdana"
-		local d1 = cloneChar "-" 194	--dash(1*  width)
+		--"Tahoma" --"Verdana"
+		local d1 = cloneChar "-" 234	--dash(1*  width)
 		-- local d2 = cloneChar "-" 115	--dash(3/4 width)
 		-- local d3 = cloneChar "-" 77	--dash(1/2 width)
 		-- local d4 = cloneChar "-" 38	--dash(1/4 width)
 		
-		format "str:%     type:%\n" str ty
+		-- format "str:%     type:%\n" str ty
 		case ty of ( --Stylyze str
 		
 			"new_task": ( --full line text
@@ -172,39 +199,39 @@ struct PROGRESSBAR_LOG_STRUCTURE (
 			"proc": ( --add in to current process
 				
 				clr = #36d900
-				italic = true
+				-- italic = true
 				str = replaceTabs str "\t" "\t\t"
 				str = "\t\t" + str
 			)
 			default: ()
 		)
 		if nl do str += new_line --New Line
-		local p_start = text_box.text.count
+		local start = text_box.text.count
 		text_box.AppendText str
-		local p_end = text_box.text.count
-		format "from:% to:% clr:% blod:% italic:%\n" p_start p_end clr bold italic
-		stylizeText p_start p_end clr bold italic fsize:fsize fname:f_name
+		local end = text_box.text.count
+		-- format "from:% to:% clr:% blod:% italic:%\n" start end clr bold italic
+		stylizeText start end clr bold italic fsize fname
 		mcProgressBarLogDialog.title =  "Proces: " + ti
 	),
 	fn init = (
 	
 		if mcProgressBarLogDialog != undefined do DestroyDialog mcProgressBarLogDialog
-		rollout mcProgressBarLogDialog "Proces:  ..." width:800 height:600 (
+		rollout mcProgressBarLogDialog "Proces:  ..." width:1200 height:600
+		(
 		
-			GroupBox grp1 "Log:" pos:[4,4] width:792 height:592
-			dotNetControl text_box "System.Windows.Forms.RichTextBox" pos:[8,20] width:784 height:536
-			progressBar pb_prog "ProgressBar" pos:[8,560] width:784 height:8
-			button btn_copy "Copy All" pos:[8,572] width:80 height:20
-			button btn_clear "Clear" pos:[92,572] width:80 height:20
-			button btn_close "Close" pos:[712,572] width:80 height:20
-			/*GroupBox 'grp1' "Log:" pos:[4,4] width:792 height:592 align:#left
-			dotnetcontrol 'text_box' "System.Windows.Forms.RichTextBox" pos:[8,24] width:780 height:544 align:#left
-			progressBar 'pb_prog' "ProgressBar" pos:[64,572] width:724 height:16 align:#left
-			label 'lbl_prog' "Progress:" pos:[12,572] width:48 height:16 align:#left*/
+			GroupBox 'grp1' "Log:" pos:[4,4] width:1192 height:592 align:#left
+			dotNetControl 'text_box' "System.Windows.Forms.RichTextBox" pos:[8,20] width:1180 height:520 align:#left
+			progressBar 'pb_sub_task' "Progress Bar Sub Task" pos:[8,544] width:1180 height:8 align:#left
+			progressBar 'pb_sum_task' "Progress Bar Summary Task" pos:[8,558] width:1180 height:8 align:#left
+			button 'btn_Copy' "Copy All" pos:[8,572] width:80 height:20 align:#left
+			button 'btn_Clear' "Clear" pos:[92,572] width:80 height:20 align:#left
+			button 'btn_close' "Close" pos:[1108,572] width:80 height:20 align:#left
 			fn clearLog = (
 	
 				text_box.text = ""
 				mcProgressBarLogDialog.title =  "Proces: "
+				pb_sub_task.value = 0
+				pb_sum_task.value = 0
 			)
 			-- on mcProgressBarLogDialog resized size do ()
 			on mcProgressBarLogDialog open do (
@@ -225,7 +252,8 @@ struct PROGRESSBAR_LOG_STRUCTURE (
 			on btn_copy pressed do setclipboardText text_box.text
 		)
 		text_box = mcProgressBarLogDialog.text_box --instance dialog
-		pb_prog  = mcProgressBarLogDialog.pb_prog
+		pb_sub_task  = mcProgressBarLogDialog.pb_sub_task
+		pb_sum_task  = mcProgressBarLogDialog.pb_sum_task
  	),
 	i = init()
 	/*<end>*/

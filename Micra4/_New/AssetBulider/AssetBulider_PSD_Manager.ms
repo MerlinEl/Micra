@@ -51,16 +51,19 @@ struct PSD_MANAGER (
 		app.Visible=false
 -- 		releaseOLEObject app
 	),
-	fn createPSDFile save_dir file_name size_w size_h bg_clr = (
+	fn createPSDFile fpath size_w size_h clr:white = (
 		
-		init()
+		local save_dir = getFilenamePath fpath
+		local file_name = getFilenameFile fpath
 		local bmp_fpath = save_dir + file_name + ".bmp"
-		psd_fpath = save_dir + file_name + ".psd"
-		local bm = bitmap size_w size_h color:bg_clr filename:bmp_fpath
+		psd_fpath = fpath
+		local bm = bitmap size_w size_h color:clr filename:bmp_fpath
 		save bm; close bm
 		if not doesFileExist bmp_fpath do return false
+		init()
 		app.open bmp_fpath
 		deleteFile bmp_fpath
+		true
 	),
 	fn isFolderExists folder_name = (
 		

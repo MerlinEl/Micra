@@ -49,7 +49,6 @@ rollout mcAssetGeneratorDialog "Asset Builder:" width:712 height:332
 	local psd_man = PSD_MANAGER(SettingsINI)
 	local dds_man = DDS_MANAGER(SettingsINI)
 	local mat_man = MAT_MANAGER(SettingsINI)
-	local P4V_COMPOMENTS = #()
 -- 	local psd_folder_names = #(
 -- 		
 -- 		"diffuse", 
@@ -100,20 +99,20 @@ rollout mcAssetGeneratorDialog "Asset Builder:" width:712 height:332
 	checkbox 'chk_create_node' "" pos:[128,260] width:23 height:20 enabled:true checked:true align:#left
 	button 'btn_browse_edt_path' "..." pos:[676,48] width:20 height:16 align:#left
 	GroupBox 'grp2' "Photoshop:" pos:[168,204] width:224 height:124 align:#left
-		label 'lbl11' "Generate Folders:" pos:[176,278] width:88 height:16 align:#left
-		button 'btn_psd_folders_settings' "[ ... ]" pos:[264,274] width:40 height:20 checked:true align:#left
-		GroupBox 'grp3' "Fusion:" pos:[400,204] width:308 height:76 align:#left
-		label 'lbl12' "Assign DDS:" pos:[408,254] width:60 height:16 align:#left
-		button 'btn_fussion_dds_list' "[ ... ]" pos:[468,250] width:40 height:20 checked:true align:#left
+	label 'lbl11' "Generate Folders:" pos:[176,278] width:88 height:16 align:#left
+	button 'btn_psd_folders_settings' "[ ... ]" pos:[264,274] width:40 height:20 checked:true align:#left
+	GroupBox 'grp3' "Fusion:" pos:[400,204] width:308 height:76 align:#left
+	label 'lbl12' "Assign DDS:" pos:[408,254] width:60 height:16 align:#left
+	button 'btn_fussion_dds_list' "[ ... ]" pos:[468,250] width:40 height:20 checked:true align:#left
 	button 'btn_gen_asset' "GENERATE" pos:[400,284] width:308 height:44 align:#left
 	button 'btn_browse_res_path' "..." pos:[676,144] width:20 height:16 align:#left
 	label 'lbl74' "Asset Name:" pos:[8,6] width:72 height:16 align:#left
 	edittext 'edt_asset_name' "" pos:[88,6] width:308 height:16 align:#left
 	label 'lbl1' "Create Material:" pos:[12,302] width:116 height:16 align:#left
 	checkbox 'chk_create_max_mat' "" pos:[128,300] width:23 height:20 enabled:true checked:true align:#left
-	label 'lbl_psd_path' "PSD Path:" pos:[12,168] width:684 height:16 enabled:false align:#left
-	label 'lbl_dds_path' "DDS Path:" pos:[12,72] width:684 height:16 enabled:false align:#left
-	label 'lbl_mat_path' "Materials Path:" pos:[12,92] width:684 height:16 enabled:false align:#left
+	label 'lbl_psd_path' "..." pos:[92,168] width:604 height:16 enabled:false align:#left
+	label 'lbl_dds_path' "..." pos:[92,72] width:604 height:16 enabled:false align:#left
+	label 'lbl_mat_path' "..." pos:[92,92] width:604 height:16 enabled:false align:#left
 	dropdownList 'ddl1' "" pos:[520,228] width:180 height:21 items:fussion_mats align:#left
 	label 'lbl96' "Create Max File:" pos:[12,222] width:116 height:16 align:#left
 	checkbox 'chk_create_max_file' "" pos:[128,220] width:23 height:20 enabled:true checked:true align:#left
@@ -125,13 +124,15 @@ rollout mcAssetGeneratorDialog "Asset Builder:" width:712 height:332
 	checkbox 'chk_create_max_layers' "" pos:[128,240] width:23 height:20 enabled:true checked:true align:#left
 	dropdownList 'ddl_asset_type' "" pos:[564,4] width:144 height:21 items:#("House", "Crash Object") align:#left
 	label 'lbl39' "Asset type:" pos:[496,6] width:64 height:16 align:#left
+	label 'lbl_dds_title' "DDS Path:" pos:[12,72] width:72 height:16 toolTip:"IRES Path" align:#left enabled:false
+	label 'lbl_mat_title' "Materials Path:" pos:[12,92] width:72 height:16 toolTip:"IRES Path" align:#left enabled:false
+	label 'lbl_psd_title' "PSD Path:" pos:[12,168] width:72 height:16 toolTip:"IRES Path" align:#left enabled:false
 	--file system
 	fn isValidPath path = (
 	
 		path[2] == ":"
 	)
-	fn addToP4V new_arr = (
-	
+	fn mergeArrays new_arr = (
 	
 		join P4V_COMPOMENTS new_arr 
 	)
@@ -143,24 +144,24 @@ rollout mcAssetGeneratorDialog "Asset Builder:" width:712 height:332
 			mcPprogbUI.msg "Your exporter doesn't have correctly set paths. Please check: menu LS3D/Client Settings if all paths there are set correctly to existing folders." ti:"Aborted!" ty:"error"
 			return false
 		)
-		if (findString res_path @"d:\") == undefined then (			
+		if (findString res_path @"d:\") == undefined then ( --force path location to drive D:\ 			
 			res_path = substituteString res_path "d:" @"d:\"
 		)
 		local relative_path = substituteString e_path edt_path ""
-		relative_path = substituteString relative_path "models\\" ""
-		edt_res_path.text = res_path + relative_path + "\\"
+		relative_path = substituteString relative_path "models" ""
+		edt_res_path.text = res_path + relative_path
 		--d:\!2k_games\scotch_dev\edit\models\city\lost_heaven\districts\lh_08_oakwood\
 		edt_edt_path.text = e_path
 		--//Scotch/dev/resources/graphics/city/lost_heaven/districts/lh_08_oakwood/static_objects/maps/lh_08_family_house_c_v1.psd
-		lbl_psd_path.text = "PSD Path:             "	+ res_path	+ relative_path + "\\maps\\"
-		lbl_dds_path.text = "DDS Path:            "	+ edt_path	+ "maps\\" + relative_path + "\\"
-		lbl_mat_path.text = "Materials Path:    "	+ edt_path	+ "materials\\" + relative_path  + "\\"
+		lbl_psd_path.text = res_path	+ relative_path + "\\maps"
+		lbl_dds_path.text = edt_path	+ "maps\\" + relative_path 
+		lbl_mat_path.text = edt_path	+ "materials\\" + relative_path
 	)
 	fn generatePathsFromResources r_path = (
 	
 		if not isValidPath r_path do return false
 		edt_res_path.text = r_path
-		lbl_psd_path.text = "PSD Path:             "		+ r_path + "\\maps\\"
+		lbl_psd_path.text = r_path + "\\maps"
 	)
 	fn generateLayers asset_type = (
 	
@@ -172,24 +173,27 @@ rollout mcAssetGeneratorDialog "Asset Builder:" width:712 height:332
 		)
 		mcPprogbUI.msg ("Generated layers type:" + asset_type) ty:"task_close"
 	)
-	fn saveMaxFileAs output_dir file_name = (
+	fn saveMaxFileAs fpath = (
 	
 		mcPprogbUI.msg "Creating Max File" ti:"3DsMax..." ty:"task_open"
-		if not (doesDirectoryExist output_dir) do (
-	
-			mcPprogbUI.msg ("Failed Save Max File. Unable to find Directory.\n\tPath:[ "+output_dir+" ]") ti:"Aborted!" ty:"error"
-			return ""
-		)
-		local fpath = output_dir + file_name + ".max"
-		if doesFileExist fpath do (
+		if not (saveMaxFile fpath quiet:true) do (
 		
-			mcPprogbUI.msg ("Failed Save Max File. Already exists.\n\tPath:[ "+fpath+" ]") ti:"Aborted!" ty:"error"
-			return "" 
+			mcPprogbUI.msg ("Failed Save Max File. Insufficient rights.\n\tPath:[ "+fpath+" ]") ty:"error"
+			return false
 		)
-		saveMaxFile fpath quiet:true
-
-		mcPprogbUI.msg ("Max File are Saved.\n\tPath:[ "+fpath+" ]") ty:"task_close"
-		fpath
+		mcPprogbUI.msg ("File was Created at:\n\tPath: [ "+fpath+" ]") ty:"task_close"
+		true
+	)
+	fn isMaxFileOpen fpath = (
+	
+		mcPprogbUI.msg "Get Current Max File" ti:"3DsMax..." ty:"task_open"
+		if not (doesFileExist fpath) or fpath != maxFilePath + maxFileName do (
+			
+			mcPprogbUI.msg ("Failed Max File check. Max File is not open or not saved.\n\tPath:[ "+fpath+" ]") ty:"error"
+			return false
+		)
+		mcPprogbUI.msg ("Max File is OK.\n\tPath: [ "+fpath+" ]") ty:"task_close"
+		true
 	)
 	fn createNodes output_path asset_name asset_type = (
 	
@@ -253,27 +257,154 @@ rollout mcAssetGeneratorDialog "Asset Builder:" width:712 height:332
 		mcPprogbUI.msg ("Created Placeholder type:" + asset_type) ty:"task_close"
 		new_obj
 	)
-	fn isValidFormInput = (
+	fn isValidFormInput asset_name models_path max_path = (
 		
-		mcPprogbUI.msg "Check Paths and Asset Name" ti:"3DsMax..." ty:"task_open"
-		if edt_asset_name.text == "" do (
+		mcPprogbUI.msg "Check Paths and Names" ti:"Input Check..." ty:"task_open"
+		local error_msg = "", success_msg = ""
+		if asset_name == "" then (
 			
-			mcPprogbUI.msg "Missing Asset Name." ti:"Aborted!" ty:"error"
-			return false	
+			error_msg += "\n\t" + "Asset Name: [ "+asset_name+" ] ... Failed"
+	
+		) else (
+		
+			success_msg += "\n\t" + "Asset Name: [ "+asset_name+" ] ... OK"
 		)
-		doesDirectoryExist
-		if not doesDirectoryExist edt_edt_path.text or findString edt_edt_path.text @"\models" == undefined do (
+		
+		if not doesDirectoryExist models_path or findString models_path @"\models" == undefined then (
 			
-			mcPprogbUI.msg "Missing or Invalid Models Path." ti:"Aborted!" ty:"error"
-			return false	
+			error_msg += "\n\t" + "Models Path: [ "+models_path+" ] ... Failed"
+	
+		) else (
+		
+			success_msg += "\n\t" + "Models Path: [ "+models_path+" ] ... OK"
 		)
-		if not doesDirectoryExist edt_res_path.text or findString edt_res_path.text @"\graphics" == undefined  do (
+		
+		if not doesDirectoryExist max_path or findString max_path @"\graphics" == undefined then (
 			
-			mcPprogbUI.msg "Missing or Invalid Resources Path." ti:"Aborted!" ty:"error"
-			return false	
+			error_msg += "\n\t" + "Max Path: [ "+max_path+" ] ... Failed"
+	
+		) else (
+		
+			success_msg += "\n\t" + "Max Path: [ "+max_path+" ] ... OK"
 		)
-		mcPprogbUI.msg "Paths and Name is OK" ty:"task_close"
-		return true
+		
+		if error_msg.count != 0 do (
+		
+			local new_line = if success_msg.count == 0 then true else false --remove last enter
+			mcPprogbUI.msg ("Missing or Invalid Path(s):" + error_msg) ti:"Aborted!" ty:"error" nl:new_line
+			return false
+		)
+		mcPprogbUI.msg success_msg ty:"task_close"
+		true
+	)
+	fn getDdsSuiffixByName dds_name = (
+	
+		local pattern_names = getINISetting SettingsINI "DDS_Textures_Pattern"
+		for n in pattern_names where n == dds_name do return (
+		
+			getINISetting SettingsINI "DDS_Textures_Pattern" n
+		)
+	)
+	fn collectDdsTextures edit_maps_path asset_name = (
+	
+		local dds_names_list = dds_man.getCheckedList() --#("diffuse", "glossiness", "normal")
+		if dds_names_list.count == 0 do return #()
+		for dds_name in dds_names_list collect (
+		
+			local dds_sufix = getDdsSuiffixByName dds_name
+			local new_file_name = asset_name + dds_sufix
+			edit_maps_path + @"\" + new_file_name
+		)
+	)
+	fn isFilesUnique max_file psd_file xds_mterial dds_textures = (
+	
+		mcPprogbUI.msg "Check Files" ti:"Files..." ty:"task_open"
+		local error_msg = "", success_msg = ""
+		if chk_create_max_file.checked do (
+		
+			if doesFileExist max_file then  (
+			
+				error_msg += "\n\t" + "3DsMax File: [ "+max_file+" ] ... Failed"
+				
+			) else (
+			
+				success_msg += "\n\t" + "3DsMax File: [ "+max_file+" ] ... OK"	
+			)
+		)
+		if chk_create_psd.checked do (
+		
+			if doesFileExist psd_file then  (
+			
+				error_msg += "\n\t" + "PSD File: [ "+psd_file+" ] ... Failed"
+				
+			) else (
+			
+				success_msg += "\n\t" + "PSD File: [ "+psd_file+" ]  ... OK"	
+			)
+		)
+		if chk_create_fussion_mat.checked do (
+		
+			if doesFileExist xds_mterial then  (
+			
+				error_msg += "\n\t" + "Fussion Material: [ "+xds_mterial+" ] ... Failed"
+				
+			) else (
+			
+				success_msg += "\n\t" + "Fussion Material: [ "+xds_mterial+" ] ... OK"	
+			)
+
+			for t in dds_textures do (
+			
+				if doesFileExist t then (
+				
+					error_msg += "\n\t" + "DDS Texture: [ "+t+" ] ... Failed"
+				)
+				else (
+				
+					success_msg += "\n\t" + "DDS Texture: [ "+t+" ] ... OK"	
+				)
+			)
+		)
+		if error_msg.count != 0 do (
+		
+			local new_line = if success_msg.count == 0 then true else false --remove last enter
+			mcPprogbUI.msg ("Unable override existsing File(s):" + error_msg) ti:"Aborted!" ty:"error" nl:new_line
+			return false
+		)
+		mcPprogbUI.msg success_msg ty:"task_close"
+		true
+	)
+	fn addFilesToPerforce p4v_compoments = (
+	
+		mcPprogbUI.msg "Add files to PERFORCE:" ti:"P4V...." ty:"task_open"
+		for c in p4v_compoments do mcPprogbUI.msg c ty:"proc"
+		mcPprogbUI.msg "Done!" ty:"task_close"
+		
+/*
+p4v_man = P4V_MANAGER()
+local p4FileList = #()
+p4v_man.AddFileListToP4 p4FileList asset_name
+*/
+	)
+	fn createPSDFile fpath = (
+	
+		mcPprogbUI.msg "Creating PSD File" ti:"Photoshop..." ty:"task_open"
+		mcPprogbUI.msg "Initializing Photoshop. Please Wait...." ty:"proc"
+		local w = execute ddl_psd_w.selected
+		local h = execute ddl_psd_h.selected
+		if not (psd_man.createPSDFile fpath w h clr:gray) then (
+		
+			mcPprogbUI.msg ("Failed Save PSD File. Insufficient rights.\n\tPath:[ "+fpath+" ]") ty:"error"
+			return false
+		)
+		local folders_checked = psd_man.getCheckedList() --#("diffuse", "alpha", "glossiness", ...)
+		local layers_names =	for i=1 to folders_checked.count collect "layer_1"
+		local layers_colors = for i=1 to folders_checked.count collect gray
+		for f in folders_checked do mcPprogbUI.msg ("Add Folder: [ " + f + " ]") ty:"proc"
+		psd_man.addFoldersWithLayers folders_checked layers_names layers_colors
+		psd_man.savePSDFile()
+		setFocus mcProgressBarLogDialog.text_box -- focus back to console
+		mcPprogbUI.msg ("File was Created at:\n\tPath: [ "+fpath+" ] ... OK") ty:"task_close"
 	)
 ---------------------------------------------
 ---------------------------------------------
@@ -282,40 +413,54 @@ rollout mcAssetGeneratorDialog "Asset Builder:" width:712 height:332
 ---------------------------------------------
 	fn generateNewAsset = (
 	
-		mcPprogbUI.show() --display progressbar with log
 		mcPprogbUI.msg "ASSET BUILDER LOG:" ti:"Initialize...." ty:"new_task"
 		
-		local max_file = "", new_mat, new_obj, new_guid, node_geo, node_coll 
+--CHECK PATHS AND NAMES
+		local asset_name = edt_asset_name.text
+		local models_path = edt_edt_path.text + @"\"
+		local dds_path = lbl_dds_path.text + @"\"
+		local mat_path = lbl_dds_path.text + @"\"
+		local max_path = edt_res_path.text + @"\"
+		local psd_path = lbl_psd_path.text + @"\"
+
+		if not (isValidFormInput asset_name models_path max_path) do return false --check typed paths and asset name
 		
-		if not isValidFormInput() do return false
+--CHECK FOR OVERRIDE FILES
+		local max_file = max_path + asset_name + ".max"
+		local psd_file = psd_path + asset_name + ".psd"
+		local xds_mterial = mat_path + asset_name + ".xds"
+		local dds_textures = collectDdsTextures dds_path asset_name
+		local new_mat, new_obj, new_guid, node_geo, node_coll
 		
+		if not (isFilesUnique max_file psd_file xds_mterial dds_textures) do return false --check for dupe files
+		
+		local P4V_COMPOMENTS = #()
 		
 --CREATE MAX FILE
 		if chk_create_max_file.checked then ( --create max file
 		
-			max_file = saveMaxFileAs edt_res_path.text edt_asset_name.text
+			if not (saveMaxFileAs max_file) do return false
 			
 		) else ( --get current max file
 		
-			max_file = maxFilePath + maxFileName
+			if not (isMaxFileOpen max_file) do return false
 		)
 		if max_file == "" do return false
-
-		addToP4V #(max_file)
---CREATE PSD FILE
-		if chk_create_psd.checked do (
 		
-			local psd_man = PSD_MANAGER()
-			local w = execute ddl_psd_w.selected
-			local h = execute ddl_psd_h.selected
-			psd_man.createPSDFile (edt_res_path.text + "maps\\") edt_asset_name.text w h gray
-			local folders_checked = psd_man.getCheckedList() --#("diffuse", "alpha", "glossiness", ...)
-			local layers_names =	for i=1 to folders_checked.count collect "layer_1"
-			local layers_colors = for i=1 to folders_checked.count collect gray
-			psd_man.addFoldersWithLayers folders_checked layers_names layers_colors
-			psd_man.savePSDFile()
-			addToP4V #(edt_res_path.text + "maps\\" + edt_asset_name.text + ".psd")
+		append P4V_COMPOMENTS max_file
+		
+--CREATE PSD FILE
+		if chk_create_psd.checked do ( 
+		
+			createPSDFile psd_file
+			append P4V_COMPOMENTS psd_file
 		)
+		
+--Check Point >>
+addFilesToPerforce P4V_COMPOMENTS
+return false 
+--<<	
+
 --CREATE LAYERS
 		if chk_create_max_layers.checked do (
 	
@@ -337,7 +482,7 @@ rollout mcAssetGeneratorDialog "Asset Builder:" width:712 height:332
 			local dds_checked = dds_man.getCheckedList() --#("diffuse", "glossiness", "normal")
 			format "Create fusion Material and Asign DDS:%\n" dds_checked
 			local mat_and_dds_paths = mat_man.createFusionMaterial utils_path edt_edt_path.text edt_asset_name.text dds_checked new_guid
-			addToP4V mat_and_dds_paths
+			append P4V_COMPOMENTS mat_and_dds_paths
 		)
 --CREATE MAX MATERIAL AND ASSIGN GIUD
 		if chk_create_max_mat.checked do  (
@@ -354,15 +499,8 @@ rollout mcAssetGeneratorDialog "Asset Builder:" width:712 height:332
 			createPlaceholder edt_asset_name.text ddl_asset_type.selected node_geo new_mat
 		) 
 --ADD FILES TO PERFORCE
-		mcPprogbUI.msg "ADD FILES TO PERFORCE:" ti:"P4V...." ty:"new_task"  tl:1
-		for p in P4V_COMPOMENTS do mcPprogbUI.msg p tl:1 ty:"proc"
-		/*
-p4v_man = P4V_MANAGER()
-local p4FileList = #()
-p4v_man.AddFileListToP4 p4FileList asset_name
-*/
-		
-		
+		addFilesToPerforce P4V_COMPOMENTS
+
 		max tool zoomextents all
 	)
 --UI
@@ -403,20 +541,6 @@ p4v_man.AddFileListToP4 p4FileList asset_name
 		) else utils_path = edt_path = res_path = ""
 		
 		loadSettings()
-	
-		/*local sel = selection as array
-		local obj = sel[1]
-		edt_asset_name.text	= if classOf obj == LS3DModel then (
-			
-			chk_create_max_node.checked = false
-			obj.name
-		) else temp_asset_name
-		if max_path != "" do (
-		
-			chk_create_max_file.checked = false
-			edt_max_path.text = max_path
-			lbl_psd_path.text = "PSD Path:               " + maxFilePath + @"maps\"
-		)*/
 	)
 	fn fin = (
 	
