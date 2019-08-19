@@ -131,9 +131,10 @@ struct PROGRESSBAR_LOG_STRUCTURE (
 		text_box.SelectionFont = netFont
 		text_box.resumelayout()
 	),
-	fn replaceTabs str old_str new_str = ( --"@_tab_@" --Not used
-		
-		local rgx = dotnetObject "System.Text.RegularExpressions.Regex" old_str
+	fn replaceTabs str new_str = ( --"@_tab_@" --Not used
+		 
+		--if findString str "\t" == undefined do return str
+		local rgx = dotnetObject "System.Text.RegularExpressions.Regex" "\t"
 		rgx.Replace str new_str
 	),
 	/**
@@ -193,14 +194,14 @@ struct PROGRESSBAR_LOG_STRUCTURE (
 				clr = #ff4c4d
 				bold = true
 				local head = "\t\t" + "ERROR >>"
-				str = replaceTabs str "\t" "\t\t\t"
+				str = replaceTabs str "\t\t\t"
 				str = head + "\n " + "\t\t\t" + str + "\n\t\t<<"
 			)
 			"proc": ( --add in to current process
 				
 				clr = #36d900
 				-- italic = true
-				str = replaceTabs str "\t" "\t\t"
+				str = replaceTabs str "\t\t"
 				str = "\t\t" + str
 			)
 			default: ()

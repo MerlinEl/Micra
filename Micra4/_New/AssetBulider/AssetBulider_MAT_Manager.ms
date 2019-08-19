@@ -33,18 +33,44 @@ struct MAT_MANAGER (
 		-- loadMaterialLibrary LS3DGUP.LS3DGUP.UtilsPath + "semantic_materials.mat"
 		-- newMat = currentMaterialLibrary["semantic_materials"]
 	),
-	fn createMaxMaterial asset_name mat_guid slot_index:1 = (
-	
-		mcPprogbUI.msg "Creating Max Material" ti:"3DsMax..." ty:"task_open"
-		local new_mat = LS3DMaterial()
-		if mat_guid != undefined do new_mat.matguid = mat_guid
-		new_mat.name = asset_name
-		meditMaterials[slot_index] = new_mat
-		output_log += "\n\tCreated Max Material:" + asset_name
-		mcPprogbUI.msg "Max Material are created" ti:"3DsMax..." ty:"task_close"
-		new_mat
-	),
-	fn modifyGuid path newGUID =
+	/*fn modifyXMLTexture path textureType newTexture = (
+		local result = false
+		try (
+			local xDoc = XMLDocument()										--Create an XMLDcoument
+			xDoc.LoadXML path														--Load XML from file
+			local rNode = xDoc.GetRootNode()									--Get the Root Node THIS MUST BE CALLED!		
+			
+			local nParam = rNode.GetChild 3
+			if (nParam.GetTag() != "parameters") then (
+				LogM ("Node 'parameters' not found. Invalid format. Skipping -> " + path + ", texture type: " + textureType as string + ", new texture name: " + newTexture as string) level:3
+			) else (
+				local nParamChildren = nParam.GetChildren()
+				local notFound = true
+				for child in nParamChildren while notFound do (
+					local nName = child.GetChild 0
+					if (nName.GetTag() == "name") then (
+						if (nName.GetText() == textureType) then (
+							local nValue = child.GetChild 1
+							if (nValue.GetTag() == "value") then (
+								nValue.SetText newTexture
+								notFound = false
+							) else (
+								LogM ("Unable to found node 'value'. Invalid Format. Skipping. -> " + path + ", texture type: " + textureType as string + ", new texture name: " + newTexture as string) level:3
+							)
+						)						
+					) else (
+						LogM ("Unable to found node 'name'. Invalid Format. Skipping. -> " + path + ", texture type: " + textureType as string + ", new texture name: " + newTexture as string) level:3
+					)
+				)
+				xDoc.SaveXML()		
+				result = true
+			)
+		) catch (
+			LogM ("Unknown error while reading material XML. Invalid format. Skipping. -> " + path + ", texture type: " + textureType as string + ", new texture name: " + newTexture as string) level:3
+		)
+		return result
+	),*/
+	fn modifyXMLGuid path newGUID =
 	(
 		local result = false
 		try (
@@ -54,18 +80,18 @@ struct MAT_MANAGER (
 			
 			local guidNode = rNode.GetChild 0
 			if (guidNode.GetTag() != "guid") then (
-				LogM ("Unable to find <guid> in material xml. Invalid format. Skipping. -> " + path as string) level:3
+				mcPprogbUI.msg ("Unable to find <guid> in material xml. Invalid format. Skipping. -> " + path as string) ty:"error" ti:"Aborted!"
 			) else (
 				guidNode.SetText newGUID
 				xDoc.SaveXML()
 				result = true
 			)
 		) catch (
-			LogM ("Unknown error while reading material XML. Invalid format. Skipping. -> " + path as string + ", new material GUID: " + newGUID as string) level:3
+			mcPprogbUI.msg ("Unknown error while reading material XML. Invalid format. Skipping. -> " + path as string + ", new material GUID: " + newGUID as string) ty:"error" ti:"Aborted!"
 		)		
 		return result
 	),
-	fn getGuid path =
+	fn getXMLGuid path =
 	(
 		local result = undefined
 		try (
@@ -75,14 +101,26 @@ struct MAT_MANAGER (
 			
 			local guidNode = rNode.GetChild 0
 			if (guidNode.GetTag() != "guid") then (
-				LogM ("Unable to find <guid> in material xml. Invalid format. Skipping. -> " + path as string) level:3
+				mcPprogbUI.msg ("Unable to find <guid> in material xml. Invalid format. Skipping. -> " + path as string) ty:"error" ti:"Aborted!"
 			) else (
 				result = guidNode.GetText()
 			)
 		) catch (
-			LogM ("Unknown error while reading material XML. Invalid format. Skipping. -> " + path as string) level:3
+			mcPprogbUI.msg ("Unknown error while reading material XML. Invalid format. Skipping. -> " + path as string) ty:"error" ti:"Aborted!"
 		)		
 		return result
+	),
+	fn createMaxMaterial asset_name mat_guid xds_mterial slot_index:1 = (
+	
+		mcPprogbUI.msg "Creating Max Material" ti:"3DsMax..." ty:"task_open"
+		local new_mat = LS3DMaterial()
+		if new_guid == undefined do new_guid = getXMLGuid xds_mterial
+		if mat_guid != undefined do new_mat.matguid = mat_guid
+		new_mat.name = asset_name
+		meditMaterials[slot_index] = new_mat
+		output_log += "\n\tCreated Max Material:" + asset_name
+		mcPprogbUI.msg "Max Material are created" ti:"3DsMax..." ty:"task_close"
+		new_mat
 	),
 	--dds_suffix = #("---d.dds", "---dm.dds", "---e.dds", "---g.dds", "---n.dds")
 	fn getDdsSuiffixByName dds_name = (
@@ -94,46 +132,51 @@ struct MAT_MANAGER (
 		)
 	),
 	--clone templates to generete desired textures
-	fn generateDDSTextures utils_path edit_maps_path asset_name dds_names_list = (
+	fn generateDDSTextures utils_path dds_textures = (
 	
 		local sourcePath = utils_path + maps_templates_path
-		struct FILE_DATA (fname, fpath)
-		local new_textures = #()
-		for dds_name in dds_names_list do (
+		for target_file in dds_textures do (
 		
-			local dds_sufix = getDdsSuiffixByName dds_name
-			local source_file = sourcePath + "template" + dds_sufix
-			local new_file_name = asset_name + dds_sufix
-			local target_file = edit_maps_path + new_file_name
-format "MAT_MANAGER > generateDDSTextures >: file:%\n" target_file			
+			mcPprogbUI.msg ("Create DDS Texture: "+ target_file) ty:"proc"			
 --disable for test
---local result = CopyFile source_file target_file
---if doesFileExist target_file do 
-			append new_textures (FILE_DATA new_file_name target_file)
+			--CopyFile source_file target_file
 		)
-		new_textures
 	),
-	fn createFusionMaterial utils_path edit_maps_path asset_name dds_names_list mat_guid = (
+	fn createFusionMaterial utils_path xds_mterial dds_textures = (
 	
+		mcPprogbUI.msg "Creating Fusion Material" ti:"Fusion..." ty:"task_open"
 		if gLS3DDXSupport == undefined or not gLS3DDXSupport.ShaderUpdateScriptInit() then (
 			
-			return undefined
+			mcPprogbUI.msg ("gLS3DDXSupport structure is Missing...") ti:"Aborted!" ty:"error"
+			return ""
 		)
-		local new_textures = generateDDSTextures utils_path edit_maps_path asset_name dds_names_list
-		local new_mat_name = asset_name + ".xml"
-		local new_mat_path = edit_maps_path + new_mat_name
-		local mat_and_dds_paths = join #( new_mat_path ) new_textures
-		format "MAT_MANAGER > createFusionMaterial > :% with (%) textures.\n" new_mat_name new_textures.count 
-		
-		/*
-		
-		GenerateLS3DMaterial newMaterialPath newMaterialFileName randomSeed newTextureNames conversionTable
+		generateDDSTextures utils_path dds_textures
+		local new_guid = mat_man.generateMaterialGuid (random 1 100)
+		mcPprogbUI.msg ("Generate New GUID: [ "+ new_guid + " ]") ty:"proc"
+	/*
+	local sourceFile = 
+	copyFile sourceFile xds_mterial
+	modifyXMLGuid xds_mterial new_guid
 	
-		*/
+	for i = 1 to textureNames.count do (
+			local texName = textureNames[i]
+			if (texName != "") then (
+				local texType = sourceTemplateMapTypes[i]
+				if (not(modifyXMLTexture targetFullPath texType texName)) then return undefined
+			)
+		)
+	*/	
 		
-		output_log += "\n\tCreated DDS Textures:" + new_textures
-		output_log += "\n\tCreated Fusion Material:" + new_mat_name
-		mat_and_dds_paths
+		
+	/*
+	local conversionTable = gShaderUpdateScript.GetConversionTableByIndex 1)
+	local shaderName = conversionTable.GetName()
+	materialTemplateName = GetTemplateNameFromShaderName shaderName
+	GenerateLS3DMaterial xds_mterial new_guid dds_textures shaderName
+	
+	*/
+		mcPprogbUI.msg ("Created XDS Material:"+ xds_mterial) ty:"proc"
+		new_guid
 	)
 )
 

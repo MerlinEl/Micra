@@ -30,7 +30,7 @@ struct DDS_MANAGER (
 	fn setupPsdDdsList = (
 		
 		if mcAssetGeneratorDDSDialog != undefined do DestroyDialog mcAssetGeneratorDDSDialog
-		rollout mcAssetGeneratorDDSDialog "DDS Export Setup:" width:172 height:252
+		rollout mcAssetGeneratorDDSDialog "DDS Assign Setup:" width:172 height:252
 		(
 			local SettingsINI = ""
 			button 'btn_accept' "Accept" pos:[108,220] width:49 height:21 align:#left

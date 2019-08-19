@@ -132,9 +132,9 @@ rollout mcAssetGeneratorDialog "Asset Builder:" width:712 height:332
 	
 		path[2] == ":"
 	)
-	fn mergeArrays new_arr = (
+	fn mergeArrays orig_arr new_arr = (
 	
-		join P4V_COMPOMENTS new_arr 
+		join orig_arr new_arr 
 	)
 	fn generatePathsFromEdit e_path = (
 	
@@ -153,9 +153,9 @@ rollout mcAssetGeneratorDialog "Asset Builder:" width:712 height:332
 		--d:\!2k_games\scotch_dev\edit\models\city\lost_heaven\districts\lh_08_oakwood\
 		edt_edt_path.text = e_path
 		--//Scotch/dev/resources/graphics/city/lost_heaven/districts/lh_08_oakwood/static_objects/maps/lh_08_family_house_c_v1.psd
-		lbl_psd_path.text = res_path	+ relative_path + "\\maps"
-		lbl_dds_path.text = edt_path	+ "maps\\" + relative_path 
-		lbl_mat_path.text = edt_path	+ "materials\\" + relative_path
+		lbl_psd_path.text = res_path	+ relative_path + "maps"
+		lbl_dds_path.text = edt_path	+ "maps" + relative_path 
+		lbl_mat_path.text = edt_path	+ "materials" + relative_path
 	)
 	fn generatePathsFromResources r_path = (
 	
@@ -195,15 +195,18 @@ rollout mcAssetGeneratorDialog "Asset Builder:" width:712 height:332
 		mcPprogbUI.msg ("Max File is OK.\n\tPath: [ "+fpath+" ]") ty:"task_close"
 		true
 	)
-	fn createNodes output_path asset_name asset_type = (
+	/**
+	*short_path	> 	models\env_location\_lh\lh_loc_bank\
+	*short_path > 	missions\lh_10_countryside_west\
+	*/
+	fn createNodes output_path asset_name asset_type &node_geo &node_coll = (
 	
-		mcPprogbUI.msg "Creating Max Nodes" ti:"3DsMax..." ty:"task_open"
-		local node_geo, node_coll 
+		mcPprogbUI.msg "Creating Max Node(s)" ti:"3DsMax..." ty:"task_open"
+		local short_path = substituteString output_path edt_path ""
 		case asset_type of (
 			
 			"House" : (
-				output_path = subString output_path ((findString output_path @"\models") + 1) -1
--- 				output_path = subString output_path ((findString output_path @"\missions") + 1) -1
+
 				node_geo = LS3DModel pos:[0, 0, 0] isSelected:off wirecolor: (color 225 88 199)
 				node_coll = LS3DModel pos:[0, 0, 0] isSelected:off wirecolor: (color 87 225 198)
 				node_coll.size = 27
@@ -211,12 +214,14 @@ rollout mcAssetGeneratorDialog "Asset Builder:" width:712 height:332
 				node_coll.pos.y += 5000
 				node_geo.name = asset_name + "_geometry"
 				node_coll.name = asset_name + "_coll"
+				mcPprogbUI.msg ("Create geometry Node: [ "+node_geo.name+" ]. Output File: [ " + short_path + " ]") ty:"proc"
+				mcPprogbUI.msg ("Create collision Node: [ "+node_coll.name+" ]. Output File: [ " + short_path + " ]") ty:"proc"
 			)
 			"Crash Object" : (
-				
-				output_path = subString output_path ((findString output_path @"\models") + 1) -1
+
 				node_geo = LS3DModel pos:[0, 0, 0] isSelected:off wirecolor: (color 225 88 199)
 				node_geo.name = asset_name
+				mcPprogbUI.msg ("Create geometry Node: [ "+node_geo.name+" ]. Output File: [ " + short_path + " ]") ty:"proc"
 			)
 		)
 		local node_layer = LayerManager.getLayerFromName "00__NODES__00"
@@ -225,15 +230,14 @@ rollout mcAssetGeneratorDialog "Asset Builder:" width:712 height:332
 			node_layer = LayerManager.newLayer()
 			node_layer.setname "00__NODES__00"
 			node_layer.addnode node_geo	--geometry node
-			node_geo.OutputPath = output_path --set node output pat
+			node_geo.OutputPath = short_path --set node output pat
 			if node_coll != undefined do (	--add collision node
 				
 				node_layer.addnode node_coll
-				node_coll.OutputPath = output_path --set node output pat
+				node_coll.OutputPath = short_path --set node output pat
 			)
 		)
-		mcPprogbUI.msg ("Max Nodes are created type:" + asset_type) ty:"task_close"
-		#(node_geo, node_coll)
+		mcPprogbUI.msg ("Max Node(s) are created type:" + asset_type) ty:"task_close"
 	)
 	fn createPlaceholder asset_name asset_type node_geo new_mat = (
 		
@@ -290,8 +294,8 @@ rollout mcAssetGeneratorDialog "Asset Builder:" width:712 height:332
 		
 		if error_msg.count != 0 do (
 		
-			local new_line = if success_msg.count == 0 then true else false --remove last enter
-			mcPprogbUI.msg ("Missing or Invalid Path(s):" + error_msg) ti:"Aborted!" ty:"error" nl:new_line
+			--local new_line = if success_msg.count == 0 then true else false --remove last enter
+			mcPprogbUI.msg ("Missing or Invalid Path(s):" + error_msg) ti:"Aborted!" ty:"error" --nl:new_line
 			return false
 		)
 		mcPprogbUI.msg success_msg ty:"task_close"
@@ -313,7 +317,7 @@ rollout mcAssetGeneratorDialog "Asset Builder:" width:712 height:332
 		
 			local dds_sufix = getDdsSuiffixByName dds_name
 			local new_file_name = asset_name + dds_sufix
-			edit_maps_path + @"\" + new_file_name
+			edit_maps_path + new_file_name
 		)
 	)
 	fn isFilesUnique max_file psd_file xds_mterial dds_textures = (
@@ -367,8 +371,8 @@ rollout mcAssetGeneratorDialog "Asset Builder:" width:712 height:332
 		)
 		if error_msg.count != 0 do (
 		
-			local new_line = if success_msg.count == 0 then true else false --remove last enter
-			mcPprogbUI.msg ("Unable override existsing File(s):" + error_msg) ti:"Aborted!" ty:"error" nl:new_line
+			--local new_line = if success_msg.count == 0 then true else false --remove last enter
+			mcPprogbUI.msg ("Unable override existsing File(s):" + error_msg) ti:"Aborted!" ty:"error" --nl:new_line
 			return false
 		)
 		mcPprogbUI.msg success_msg ty:"task_close"
@@ -408,7 +412,7 @@ p4v_man.AddFileListToP4 p4FileList asset_name
 	)
 ---------------------------------------------
 ---------------------------------------------
---                    RUN                  --
+--                   RUN                   --
 ---------------------------------------------
 ---------------------------------------------
 	fn generateNewAsset = (
@@ -417,9 +421,10 @@ p4v_man.AddFileListToP4 p4FileList asset_name
 		
 --CHECK PATHS AND NAMES
 		local asset_name = edt_asset_name.text
+		local asset_type = ddl_asset_type.selected
 		local models_path = edt_edt_path.text + @"\"
 		local dds_path = lbl_dds_path.text + @"\"
-		local mat_path = lbl_dds_path.text + @"\"
+		local mat_path = lbl_mat_path.text + @"\"
 		local max_path = edt_res_path.text + @"\"
 		local psd_path = lbl_psd_path.text + @"\"
 
@@ -440,15 +445,14 @@ p4v_man.AddFileListToP4 p4FileList asset_name
 		if chk_create_max_file.checked then ( --create max file
 		
 			if not (saveMaxFileAs max_file) do return false
+			append P4V_COMPOMENTS max_file --add new max file to perforce list
 			
 		) else ( --get current max file
 		
 			if not (isMaxFileOpen max_file) do return false
 		)
 		if max_file == "" do return false
-		
-		append P4V_COMPOMENTS max_file
-		
+	
 --CREATE PSD FILE
 		if chk_create_psd.checked do ( 
 		
@@ -456,46 +460,49 @@ p4v_man.AddFileListToP4 p4FileList asset_name
 			append P4V_COMPOMENTS psd_file
 		)
 		
---Check Point >>
-addFilesToPerforce P4V_COMPOMENTS
-return false 
---<<	
-
 --CREATE LAYERS
 		if chk_create_max_layers.checked do (
 	
-			generateLayers ddl_asset_type.selected
-		)		
+			generateLayers asset_type
+		)	
+		
 --CREATE NODES
 		if chk_create_node.checked do (
 			
-			local nodes = createNodes edt_edt_path.text edt_asset_name.text ddl_asset_type.selected
-			 node_geo = nodes[1]
-			 node_coll = nodes[2] 
+			createNodes models_path asset_name asset_type &node_geo &node_coll
 		)
+		
 --CREATE FUSION MATERIAL BASED ON SELECTED TEMPLATE AND RETURN NEW UID
 		if chk_create_fussion_mat.checked do (
 		
 			-- load semantic material at MaterialEditor slot 2
-			mat_man.loadMaxSemanticMaterial() 
-			new_guid = mat_man.generateMaterialGuid (random 1 100)
-			local dds_checked = dds_man.getCheckedList() --#("diffuse", "glossiness", "normal")
-			format "Create fusion Material and Asign DDS:%\n" dds_checked
-			local mat_and_dds_paths = mat_man.createFusionMaterial utils_path edt_edt_path.text edt_asset_name.text dds_checked new_guid
-			append P4V_COMPOMENTS mat_and_dds_paths
+			mat_man.loadMaxSemanticMaterial()
+			
+			
+			new_guid = mat_man.createFusionMaterial utils_path xds_mterial dds_textures
+			append P4V_COMPOMENTS xds_mterial
+			mergeArrays P4V_COMPOMENTS dds_textures
 		)
+			
+--Check Point >>
+addFilesToPerforce P4V_COMPOMENTS
+completeRedraw()
+max zoomext sel all
+return false 
+--<<			
+		
+		
 --CREATE MAX MATERIAL AND ASSIGN GIUD
 		if chk_create_max_mat.checked do  (
 		
-			new_mat = meditMaterials[1] --pick up first material from material editor
 			if classOf new_mat != LS3DMaterial do ( --or create new one
 			
-				new_mat = mat_man.createMaxMaterial edt_asset_name.text new_guid slot_index:1
+				new_mat = mat_man.createMaxMaterial asset_name new_guid xds_mterial slot_index:1
 			)
 		)
 --CREATE PLACEHOLDER
 		if chk_create_max_mesh.checked do (
-			
+			"lh_08_family_house_a_v1_test_lod0"
 			createPlaceholder edt_asset_name.text ddl_asset_type.selected node_geo new_mat
 		) 
 --ADD FILES TO PERFORCE
@@ -503,7 +510,11 @@ return false
 
 		max tool zoomextents all
 	)
---UI
+---------------------------------------------
+---------------------------------------------
+--                   UI                    --
+---------------------------------------------
+---------------------------------------------
 	fn saveSettings = (
 
 		if isValidPath edt_edt_path.text do setINISetting SettingsINI "Settings" "Edit_Path" (trimRight edt_edt_path.text @"\")
