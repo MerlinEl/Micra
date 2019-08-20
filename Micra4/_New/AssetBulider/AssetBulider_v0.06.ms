@@ -49,34 +49,8 @@ rollout mcAssetGeneratorDialog "Asset Builder:" width:712 height:332
 	local psd_man = PSD_MANAGER(SettingsINI)
 	local dds_man = DDS_MANAGER(SettingsINI)
 	local mat_man = MAT_MANAGER(SettingsINI)
--- 	local psd_folder_names = #(
--- 		
--- 		"diffuse", 
--- 		"alpha", 
--- 		"glossiness", 
--- 		"roughness", 
--- 		"metalness", 
--- 		"emissive", 
--- 		"emissive mask", 
--- 		"normal", 
--- 		"detail mask", 
--- 		"blend mask"
--- 	)
-	local fussion_mats	= #(
-	
-		"base/general", 
-		"base/general_2uv", 
-		"base/terrain", 
-		"base/terrain_2blend", 
-		"base/terrain_3blend", 
-		"base/facade_colored",
-		"base/facade_basic",
-		"base/facade_blend",
-		"base/facade_colored_2uv",
-		"base/roads",
-		"base/terrain_shore"
-	)
-	local texture_sizes		= #("8", "16", "32", "64", "128", "256", "512", "1024", "2048", "4096")
+	local fussion_materials 	= getIniSetting SettingsINI "Materials_Templates"
+	local texture_sizes		= getIniSetting SettingsINI "Texture_Sizes"
 	local maps_types			= #("---d.dds", "---dm.dds", "---e.dds", "---g.dds", "---n.dds")
 	local tamplates_maps		= @"asset_management\maps\" --"T000_DiffuseTexture", "T027_DetailNormalMaskTexture", "T011_EmissiveTexture", "T002_GlossinessMetalTexture", "T001_NormalTexture"
 	local tamplates_materials = @"asset_management\materials\" --"template_general.xml"
@@ -113,7 +87,7 @@ rollout mcAssetGeneratorDialog "Asset Builder:" width:712 height:332
 	label 'lbl_psd_path' "..." pos:[92,168] width:604 height:16 enabled:false align:#left
 	label 'lbl_dds_path' "..." pos:[92,72] width:604 height:16 enabled:false align:#left
 	label 'lbl_mat_path' "..." pos:[92,92] width:604 height:16 enabled:false align:#left
-	dropdownList 'ddl1' "" pos:[520,228] width:180 height:21 items:fussion_mats align:#left
+	dropdownList 'ddl1_fusion_mats' "" pos:[520,228] width:180 height:21 align:#left
 	label 'lbl96' "Create Max File:" pos:[12,222] width:116 height:16 align:#left
 	checkbox 'chk_create_max_file' "" pos:[128,220] width:23 height:20 enabled:true checked:true align:#left
 	label 'lbl17' "Create Placeholder:" pos:[12,282] width:116 height:16 align:#left
@@ -410,6 +384,16 @@ p4v_man.AddFileListToP4 p4FileList asset_name
 		setFocus mcProgressBarLogDialog.text_box -- focus back to console
 		mcPprogbUI.msg ("File was Created at:\n\tPath: [ "+fpath+" ] ... OK") ty:"task_close"
 	)
+	fn parseMaterialsToType mat_list = (
+	
+		local new_list = #()
+		for mat_name in mat_list do (
+			
+			local mat_type = (getIniSetting SettingsINI "Materials_Templates" mat_name)
+			append new_list (mat_type + "/" + mat_name) 
+		)
+		new_list
+	)
 ---------------------------------------------
 ---------------------------------------------
 --                   RUN                   --
@@ -478,8 +462,8 @@ p4v_man.AddFileListToP4 p4FileList asset_name
 			-- load semantic material at MaterialEditor slot 2
 			mat_man.loadMaxSemanticMaterial()
 			
-			
-			new_guid = mat_man.createFusionMaterial utils_path xds_mterial dds_textures
+			local mat_type = fussion_materials[ddl1_fusion_mats.selection]
+			new_guid = mat_man.createFusionMaterial utils_path xds_mterial mat_type dds_textures
 			append P4V_COMPOMENTS xds_mterial
 			mergeArrays P4V_COMPOMENTS dds_textures
 		)
@@ -550,6 +534,8 @@ return false
 			res_path	= toLower (LS3DGUP.LS3DGUP.ResourcesPath)
 			
 		) else utils_path = edt_path = res_path = ""
+		
+		ddl1_fusion_mats.items = parseMaterialsToType fussion_materials
 		
 		loadSettings()
 	)

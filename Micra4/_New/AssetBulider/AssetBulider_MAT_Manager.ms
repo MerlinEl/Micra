@@ -142,7 +142,7 @@ struct MAT_MANAGER (
 			--CopyFile source_file target_file
 		)
 	),
-	fn createFusionMaterial utils_path xds_mterial dds_textures = (
+	fn createFusionMaterial utils_path xds_mterial mat_type dds_textures = (
 	
 		mcPprogbUI.msg "Creating Fusion Material" ti:"Fusion..." ty:"task_open"
 		if gLS3DDXSupport == undefined or not gLS3DDXSupport.ShaderUpdateScriptInit() then (
@@ -151,11 +151,14 @@ struct MAT_MANAGER (
 			return ""
 		)
 		generateDDSTextures utils_path dds_textures
-		local new_guid = mat_man.generateMaterialGuid (random 1 100)
+		local new_guid = generateMaterialGuid (random 1 100)
 		mcPprogbUI.msg ("Generate New GUID: [ "+ new_guid + " ]") ty:"proc"
+		local source_file = utils_path +"template_"+ mat_type + ".xds"
+		local source_file_found = if doesFileExist source_file then "OK" else "Failed"
+		mcPprogbUI.msg ("Check source remplate: [ "+ source_file + " ] ..." + source_file_found) ty:"proc"
 	/*
-	local sourceFile = 
-	copyFile sourceFile xds_mterial
+	
+	copyFile source_file xds_mterial
 	modifyXMLGuid xds_mterial new_guid
 	
 	for i = 1 to textureNames.count do (
