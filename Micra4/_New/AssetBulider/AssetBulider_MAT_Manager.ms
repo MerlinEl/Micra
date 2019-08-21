@@ -153,9 +153,13 @@ struct MAT_MANAGER (
 		generateDDSTextures utils_path dds_textures
 		local new_guid = generateMaterialGuid (random 1 100)
 		mcPprogbUI.msg ("Generate New GUID: [ "+ new_guid + " ]") ty:"proc"
-		local source_file = utils_path +"template_"+ mat_type + ".xds"
-		local source_file_found = if doesFileExist source_file then "OK" else "Failed"
-		mcPprogbUI.msg ("Check source remplate: [ "+ source_file + " ] ..." + source_file_found) ty:"proc"
+		local source_file = utils_path + @"asset_management\materials\template_" + mat_type + ".xml"
+		if not (doesFileExist source_file) do (
+		
+			mcPprogbUI.msg ("Check template source [ "+ source_file + " ] ...Failed" ) ti:"Aborted!" ty:"error"
+			return ""
+		)
+		mcPprogbUI.msg ("Check template source : [ "+ source_file + " ] ...OK" + source_file_found) ty:"proc"
 	/*
 	
 	copyFile source_file xds_mterial
