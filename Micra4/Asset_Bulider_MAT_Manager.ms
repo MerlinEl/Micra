@@ -120,11 +120,14 @@ struct MAT_MANAGER (
 	fn createMaxMaterial asset_name mat_guid xds_mterial slot_index:1 = (
 	
 		mcPprogbUI.msg "Creating Max Material" ti:"3DsMax..." ty:"task_open"
+		--LS3DGUP.ReloadMaterialDatabase()
 		local new_mat = LS3DMaterial()
 		if new_guid == undefined do new_guid = getXMLGuid xds_mterial
 		if mat_guid != undefined do new_mat.matguid = mat_guid
 		new_mat.name = asset_name
 		meditMaterials[slot_index] = new_mat
+		new_mat.guessbindings()
+		new_mat.synchronize()
 		mcPprogbUI.msg "Max Material are created" ti:"3DsMax..." ty:"task_close"
 		new_mat
 	),
