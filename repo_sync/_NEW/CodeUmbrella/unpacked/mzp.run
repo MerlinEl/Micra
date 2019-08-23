@@ -1,0 +1,11 @@
+name "CodeUmbrella.CULoader"
+description "Ultimate sandbox .NET plugin loader"
+version 1.1
+
+treeCopy scripts to $max
+copy "CULoader.dll" to $max
+
+drop "CULoader-Installer.ms"
+
+clear temp on MAX exit
+clear temp on reset

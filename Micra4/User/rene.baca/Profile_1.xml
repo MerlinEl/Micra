@@ -10,15 +10,15 @@
     <mc_Dialog_G active="true" pos="[2171,598]" size="[148,114]" title="Modify:" btnCount="[6,4]" />
     <mc_Dialog_H active="true" pos="[2172,771]" size="[148,90]" title="Materials:" btnCount="[6,3]" />
     <mc_Dialog_I active="true" pos="[2172,927]" size="[148,66]" title="Programming:" btnCount="[6,2]" />
-    <mc_Dialog_J active="true" pos="[1775,1227]" size="[532,42]" title="Experimental:" btnCount="[22,1]" />
+    <mc_Dialog_J active="true" pos="[1792,1236]" size="[532,42]" title="Experimental:" btnCount="[22,1]" />
   </Properties_1>
   <Properties_2>
     <mcMicraDialog active="true" pos="[2171,214]" size="[148,66]" title="" />
-    <mcCustomizeDialog active="false" pos="[1180,420]" size="[224,404]" title="" />
+    <mcCustomizeDialog active="true" pos="[1770,420]" size="[224,404]" title="" />
     <mcProgramDialog active="undefined" pos="[2298,0]" size="[256,232]" title="" />
     <mcisoDialog active="false" pos="[181,152]" size="[140,400]" title="" />
     <mcModifierDialog active="undefined" pos="[100,100]" size="[400,400]" title="" />
-    <mcIconMakerDialog active="false" pos="[1300,330]" size="[730,500]" title="" />
+    <mcIconMakerDialog active="false" pos="[1130,510]" size="[730,500]" title="" />
     <mcDeepIsolateDialog active="true" pos="[1118,86]" size="[84,44]" title="" />
     <mcMoveTowardsDialog active="true" pos="[441,377]" size="[200,76]" title="" />
     <mcClonerDialog active="true" pos="[1707,440]" size="[164,296]" title="" />
@@ -44,8 +44,8 @@
     <mcRotateObjectDialog active="undefined" pos="[100,100]" size="[100,100]" title="" />
     <mcViewportRecorderDialog active="true" pos="[100,100]" size="[316,124]" title="" />
     <mcGifCompillerDialog active="undefined" pos="[100,100]" size="[100,100]" title="" />
-    <mcScriptManDialog active="true" pos="[71,316]" size="[400,624]" title="" />
-    <mcColorPickerDialog active="true" pos="[290,280]" size="[328,276]" title="" />
+    <mcScriptManDialog active="true" pos="[473,340]" size="[400,624]" title="" />
+    <mcColorPickerDialog active="true" pos="[560,420]" size="[328,276]" title="" />
     <mcQuickColorPickerDialog active="undefined" pos="[100,100]" size="[100,100]" title="" />
     <mcInterfaceColorDilaog active="undefined" pos="[1445,427]" size="[299,130]" title="" />
     <IsolateFaceDialog active="undefined" pos="[100,100]" size="[100,100]" title="" />
@@ -219,5 +219,6 @@
     <btn_G22 action="Patcher2P" icon="271" />
     <btn_D16 action="Select_Objects_By_Wirecolor" icon="272" />
     <btn_G24 action="Smooth_Hard" icon="110" />
+    <btn_J16 action="Asset_Builder" icon="273" />
   </Buttons>
 </USER>

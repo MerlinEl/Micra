@@ -189,6 +189,36 @@ rollout mcMaxScriptColorEditorDialog "MaxScript Theme Editor:"  width:680 height
 		)
 	*/
 	"
+	local NOTEPAD_XML = dotNetObject "system.xml.xmlDocument"
+	local NOTEPAD_XML_STR = (
+		"<Styles>
+			<WordsStyle name='DEFAULT' fgColor='400000' bgColor='112435' fontName='' fontStyle='0' nesting='0' />
+			<WordsStyle name='COMMENTS' fgColor='008040' bgColor='112435' fontName='' fontStyle='2' nesting='0' />
+			<WordsStyle name='LINE COMMENTS' fgColor='008040' bgColor='112435' fontName='' fontStyle='2' fontSize='10' nesting='0' />
+			<WordsStyle name='NUMBERS' fgColor='0000FF' bgColor='112435' fontName='' fontStyle='0' nesting='0' />
+			<WordsStyle name='KEYWORDS1' fgColor='0000FF' bgColor='112435' fontName='Arial' fontStyle='1' nesting='0' />
+			<WordsStyle name='KEYWORDS2' fgColor='C0C0C0' bgColor='112435' fontName='' fontStyle='1' nesting='0' />
+			<WordsStyle name='KEYWORDS3' fgColor='0080FF' bgColor='112435' fontName='' fontStyle='0' nesting='0' />
+			<WordsStyle name='KEYWORDS4' fgColor='8000FF' bgColor='112435' fontName='' fontStyle='1' nesting='0' />
+			<WordsStyle name='KEYWORDS5' fgColor='000000' bgColor='112435' fontName='' fontStyle='0' nesting='0' />
+			<WordsStyle name='KEYWORDS6' fgColor='000000' bgColor='112435' fontName='' fontStyle='0' nesting='0' />
+			<WordsStyle name='KEYWORDS7' fgColor='000000' bgColor='112435' fontName='' fontStyle='0' nesting='0' />
+			<WordsStyle name='KEYWORDS8' fgColor='000000' bgColor='112435' fontName='' fontStyle='0' nesting='0' />
+			<WordsStyle name='OPERATORS' fgColor='000000' bgColor='112435' fontName='' fontStyle='0' nesting='0' />
+			<WordsStyle name='FOLDER IN CODE1' fgColor='8000FF' bgColor='112435' fontName='' fontStyle='1' nesting='0' />
+			<WordsStyle name='FOLDER IN CODE2' fgColor='000000' bgColor='112435' fontName='' fontStyle='0' nesting='0' />
+			<WordsStyle name='FOLDER IN COMMENT' fgColor='000000' bgColor='112435' fontName='' fontStyle='0' nesting='0' />
+			<WordsStyle name='DELIMITERS1' fgColor='FF80C0' bgColor='112435' fontName='Lucida Sans Unicode' fontStyle='0' nesting='0' />
+			<WordsStyle name='DELIMITERS2' fgColor='000000' bgColor='112435' fontName='' fontStyle='0' nesting='0' />
+			<WordsStyle name='DELIMITERS3' fgColor='000000' bgColor='112435' fontName='' fontStyle='0' nesting='0' />
+			<WordsStyle name='DELIMITERS4' fgColor='000000' bgColor='112435' fontName='' fontStyle='0' nesting='0' />
+			<WordsStyle name='DELIMITERS5' fgColor='000000' bgColor='112435' fontName='' fontStyle='0' nesting='0' />
+			<WordsStyle name='DELIMITERS6' fgColor='000000' bgColor='112435' fontName='' fontStyle='0' nesting='0' />
+			<WordsStyle name='DELIMITERS7' fgColor='000000' bgColor='112435' fontName='' fontStyle='0' nesting='0' />
+			<WordsStyle name='DELIMITERS8' fgColor='000000' bgColor='112435' fontName='' fontStyle='0' nesting='0' />
+		</Styles>"
+	)
+	
 	--Create the dotNet listview control
 	dotNetControl lv_colors "listView" pos:[392,4] width:283 height:504
 	dotNetControl text_box "RichTextBox" pos:[8,4] width:380 height:428
@@ -214,7 +244,9 @@ rollout mcMaxScriptColorEditorDialog "MaxScript Theme Editor:"  width:680 height
 	*/
 	
 	--action components
-	button btn_gen "Generate" pos:[312,468] width:76 height:40
+	button 'btn_gen_notepad' "Generate For Notepad++" pos:[8,468] width:80 height:40 align:#left
+	button 'btn_gen_max' "Generate For 3DsMax" pos:[92,468] width:80 height:40 align:#left
+	button 'btn_copy_text' "Copy All" pos:[176,468] width:80 height:40 align:#left
 	
 	fn findStringInArray arr str =
 	(
@@ -239,7 +271,7 @@ rollout mcMaxScriptColorEditorDialog "MaxScript Theme Editor:"  width:680 height
 		(
 			local hex ="#" + getItemColor s.line
 			s. hex = hex
-			format "hex:%\n" s.hex
+			--format "hex:%\n" s.hex
 			s.clr = mcColor.hexToRGB hex
 		)
 		return user_data
@@ -517,6 +549,76 @@ rollout mcMaxScriptColorEditorDialog "MaxScript Theme Editor:"  width:680 height
 		
 		for i = 0 to list.Items.count-1 do list.Items.item[ i ].checked = false	
 	)
+	-----------
+	--XML--
+	-----------
+	fn getXMLItemByName xml head_str item_name = (
+
+		local children = NOTEPAD_XML.Item[head_str].ChildNodes
+		for i=0 to children.count - 1 do (
+
+			local child = children.ItemOf(i)
+			local attribs = child.Attributes
+			--format "%\n" attribs.Count
+			for i = 0 to (attribs.Count - 1) where (
+
+				local item = (attribs.ItemOf i)
+				--format "name:% value:%\n" item.Name item.Value
+				item.Value == item_name 
+				
+			) do return child
+		)
+		undefined
+	)
+	
+	fn maxNameToXML item_name = (
+		
+		case item_name of (
+			
+			--"colour.global.back" : "DEFAULT" --Removed from loop
+			"colour.global.fore" : "DEFAULT"
+			"colour.code.comment.box" : "COMMENTS"
+			"colour.code.comment.line" : "LINE COMMENTS"
+			"none" : "NUMBERS"
+			"none" : "KEYWORDS1"
+			"none" : "KEYWORDS2"
+			"none" : "KEYWORDS3"
+			"none" : "KEYWORDS4"
+			"none" : "KEYWORDS5"
+			"none" : "KEYWORDS6"
+			"none" : "KEYWORDS7"
+			"none" : "KEYWORDS8"
+			"none" : "OPERATORS"
+			"none" : "FOLDER IN CODE1"
+			"none" : "FOLDER IN CODE2"
+			"none" : "FOLDER IN COMMENT"
+			"none" : "DELIMITERS1"
+			"none" : "DELIMITERS2"
+			"none" : "DELIMITERS3"
+			"none" : "DELIMITERS4"
+			"none" : "DELIMITERS5"
+			"none" : "DELIMITERS6"
+			"none" : "DELIMITERS7"
+			"none" : "DELIMITERS8"
+			default : ""
+		)
+	)
+	
+	fn reformatXML xml_str = ( --add new lines and tabs
+		
+		local rgx = dotnetObject "System.Text.RegularExpressions.Regex" "/>"
+		rgx.Replace xml_str "/>\n"
+	)
+
+	fn setBackColorForAll xml head_str bg_color = (
+		
+		local children = xml.Item[head_str].ChildNodes
+		for i=0 to children.count - 1 do (
+
+			local child = children.ItemOf(i)
+			(child.Attributes.ItemOf "bgColor").value = bg_color
+		)
+	)
 	
 	fn inicializeInterface =
 	(
@@ -544,14 +646,14 @@ rollout mcMaxScriptColorEditorDialog "MaxScript Theme Editor:"  width:680 height
 		text_box.text=edit_text
 		str_stream= stringStream edit_text
 		inicializeColors()
-		
+	
 		local clr = user_data[sel_item_index+1].clr --get color from selected item
 		mcGM.setParam "color_picker_start_color" (netDrColor clr)
 		mcEvents.registerEvent "COLOR_PICKER_ADD_COLOR" setButtonColor
 		mcEvents.registerEvent "COLOR_PICKER_MOD_COLOR" colorizeCurrentText
 		mcFile.fileInVersion "Color_Picker"
 	)
-
+	
 	on lv_colors DoubleClick s a do ( --open color picker with selected color
 		
 		if mcColorPickerDialog != undefined and not mcColorPickerDialog.visible() do (
@@ -586,7 +688,7 @@ rollout mcMaxScriptColorEditorDialog "MaxScript Theme Editor:"  width:680 height
 	
 	--on lv_colors LostFocus s a do (s.Focus())	--selected item stay marked (or fill backcolor on selected item to stay)
 	
-	on btn_gen pressed do
+	on btn_gen_max pressed do
 	(
 		text_box.text = ""
 		for i in user_data do
@@ -598,6 +700,38 @@ rollout mcMaxScriptColorEditorDialog "MaxScript Theme Editor:"  width:680 height
 			text_box.text += i.line+"\n"
 		)
 	)
+	on btn_gen_notepad pressed do (
+		
+		text_box.text = ""
+		NOTEPAD_XML.LoadXml NOTEPAD_XML_STR --build notepad XML
+		local bg_color = (filterstring user_data[1].hex "#")[1]
+		for i in user_data do (
+			
+			--get data from max item
+			--user data:(TEXT_DATA checked:false pos:176 line:"colour.global.fore=#E4C590" hex:"#E4C590" clr:(color 228 197 144) hint:"foreground" ftype:"Arial" fstyle:"Regular" fsize:12)
+			local item_name = (filterstring i.line "=")[1] 	-- line:"colour.global.fore=#E4C590"
+			local fg_color = i.hex 									--hex:"#E4C590"
+			local ft_name = i.ftype 								--ftype:"Arial"					
+			local ft_style = i.fstyle 							--fstyle:"Regular"
+			
+			--format " MAX > name:% hex:% ftype:% fstyle:%\n" item_name fg_color ft_name ft_style
+			
+			--store data to notepad xml
+			-- <WordsStyle name="DEFAULT" fgColor="400000" bgColor="112435" fontName="" fontStyle="0" nesting="0" />
+			local xml_item_name = maxNameToXML item_name
+			if xml_item_name == "" do continue --skip unknown names
+			local xml_itm = getXMLItemByName NOTEPAD_XML "Styles" xml_item_name
+			
+			format " XML > name:% fgColor:% bgColor:% fontName:% fontStyle:%\n" xml_item_name fg_color bg_color ft_name ft_style
+			(xml_itm.Attributes.ItemOf "fgColor").value = fg_color
+			(xml_itm.Attributes.ItemOf "bgColor").value = bg_color
+			(xml_itm.Attributes.ItemOf "fontName").value = ft_name
+			(xml_itm.Attributes.ItemOf "fontStyle").value = ft_style
+		)
+		setBackColorForAll NOTEPAD_XML "Styles" bg_color --for sure
+		text_box.text = reformatXML NOTEPAD_XML.InnerXml
+	)
+	on btn_copy_text pressed do (setClipBoardText text_box.text)
 	on mcMaxScriptColorEditorDialog open do  inicializeInterface()
 	on mcMaxScriptColorEditorDialog close do ( --unregister events
 

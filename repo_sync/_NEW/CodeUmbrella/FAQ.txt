@@ -1,0 +1,114 @@
+
+#howto aka FAQ
+# CODEUMBRELLA.CULoader v1.0.1
+
+MXS to .NET
+
+	How do i load my compiled dll from MAXScript?
+
+		CULoader.loadNETLib (dllname:String, class:String)
+		CULoader.loadNETLib "dllname" "classname"
+
+	How to invoke a method by name in loaded dll?
+
+		CULoader.CallFunction (Lib:CULoader.NETLib, funcName:String, params:ParamArray)
+		CULoader.CallFunction (myLib) "Main" #()
+
+	How to send data from MAXScript to .NET?
+	
+		Use CULoader.callfunction method and pass your data as a parameter
+		Have in mind that only regular serializable objects are supported
+		Do not try to pass types that are not visible to your DLL
+		
+		If you are passing large arrays from MXS to .NET, it is best to create background 
+		worker to send data in smaller chunks. You can also create background worker 
+		in .NET library to process recieved data. This way you will not encounter any
+		stuttering in 3DS MAX when passing large amount of data.
+		
+		Make sure to manually collect any garbage in MAXScript to free used memory
+		
+		
+	How do i unload all DLL files from sandbox?
+	
+		CULoader.unloadAllNETLibs()
+	
+	
+	Can i check if my DLL has leaked outside of sandbox?
+	
+		CULoader.listLoadedAssemblies()
+		
+		
+.NET to MXS
+
+	How safe is to run .NET dll in sandbox?
+	
+		All .NET libraries run in sandbox AppDomain as good as in regular AppDomain. 
+		In most of situations,  exceptions are captured by CodeUmbrella, so you
+		will always know what went wrong, and where, without killing 3DSMAX. 
+		You can continue running your code even if it throws a serious security 
+		exception. You can use try/catch block to catch your local exceptions.
+				
+		
+	How to setup my DLL to be loaded in sandbox?
+	
+		When you mark a DLL for loading, MXLoader will try to invoke two methods,
+		a Connect and Main, so make sure that your compiled .NET
+		dlls have these two methods. Example:
+		
+			MyClass.Main()
+			MyClass.TopLevelCall(e : System.Object)
+
+	Can i call MAXScript function from loaded DLL?
+
+		You can execute any MAXScript code via proxy
+		proxy.executeMAXScript ("print \"Hello world!\"")
+		
+	What programming languages i can use?
+
+		You can build your .NET library in any programming language	
+
+	Can my DLL call MAXScript function that calls another .NET function?
+	
+		This will certainly create a security exception.
+		Workaround is to create managed background worker function in MAXScript
+		and call this function from .NET. This way you can return MXS value to .NET
+		(for example, create a timer that stops itself after executing .NET code)
+		Another workaround is to use CodeUmbrella.Globals to set/get data
+		
+	Can i create dialogs (eg. forms and controls) in my DLL?
+	
+		No, creating MessageBox dialogs or forms will create a security exception, 
+		that may lead to 3DS MAX crash. 
+		
+		This is default CLR security mechanism forced on all code executed in sandbox
+		Avoid any messageboxes, and if you need to debug your code, just print output 
+		to MXS listener.
+		
+		To use dialogs, create a MAXScript function that will handle dialogs for you.
+		You can then call any .NET method from MAXScript created forms. 
+		
+		If you really need better performance, then create separete GUI dll, and load
+		it directly to 3DSMAX. 
+		
+	What else i cannot do in my .NET DLL?
+	
+		You cannot call security critical methods outside of your library, for example
+		trying to invoke a method in kernell32.dll will most certainly throw security 
+		exception. You also cannot compile dlls at runtime. 
+		
+		You should never pass a unknwon type from your sandbox DLL to MAXScript. This may
+		cause your DLL types to leak into 3DSMAX appdomain, and your DLL will be locked.
+		
+		Do not try to call methods in other threads directly. Using System.Timers.Timer
+		to asynchroniously call functions in MXS from .NET, can cause security exceptions.
+		However, using System.Windows.Forms.Timer is thread safe, and you can safely
+		call a MXS function that creates this type of timer, directly from your tick event
+		handler.
+		
+		
+	Can i reference external DLL files?
+	
+		You can load any dll library that doesnt use security critical methods. For example
+		loading external SCRIPT parser, such is LUA is totaly safe.
+		
+

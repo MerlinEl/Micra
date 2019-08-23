@@ -237,5 +237,6 @@
     <Normal_Map_Tester icon="61" cmd="mcActionsTukej.testNormalMapToggle()" tooltip="Normal Map Tester" />
     <Road_Generator_Tool icon="266" cmd="mcFile.fileInVersion Road_Generator_Tool" tooltip="Road Generator Tool" />
     <City_Manager icon="241" cmd="mcFile.fileInVersion City_Manager" tooltip="City Manager" />
+    <Asset_Builder icon="273" cmd="mcFile.fileInVersion Asset_Bulider" tooltip="Asset Builder" />
   </TuKej>
 </ACTIONS>
