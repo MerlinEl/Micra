@@ -1,7 +1,8 @@
-Global PSD_MANAGER
-Global PHOTOSHOP_ELEMENT_PLACEMENT
+Global sPsdManager = undefined
+Global sPsdManagerDialog
+Global sPhotoshopElementPlacement
 
-struct PHOTOSHOP_ELEMENT_PLACEMENT (
+struct sPhotoshopElementPlacement (
 	
 -- 	INSIDE = ?,
 -- 	PLACEATBEGINNING = ?,
@@ -9,13 +10,22 @@ struct PHOTOSHOP_ELEMENT_PLACEMENT (
 	PLACEBEFORE = 2,
 	PLACEAFTER = 1
 )
-struct PSD_MANAGER (
 
-	SettingsINI = "",
+struct sPsdManager (
+
+	SettingsINI = (LS3DGUP.LS3DGUP.UtilsPath + "\\LS3D_Asset_Builder.ini"),
 	psd_fpath,
 	app,
 	was_open,
-	ElementPlacement = PHOTOSHOP_ELEMENT_PLACEMENT(),
+	ElementPlacement = sPhotoshopElementPlacement(),
+	pLog = mcProgLog,	
+	fn initLog = ( --validate output log window
+	
+		if SuperClassOf pLog != StructDef do (
+		
+			struct pLog (fn msg str = (format "%\n" str))
+		)
+	),
 	fn isPhotoshopRunning = (
 		
 		local process =  dotnetClass "System.Diagnostics.Process"
@@ -142,8 +152,8 @@ struct PSD_MANAGER (
 	),
 	fn setupPsdFoldersList = (
 		
-		if mcAssetGeneratorLayersDialog != undefined do DestroyDialog mcAssetGeneratorLayersDialog
-		rollout mcAssetGeneratorLayersDialog "PSD Folders Setup:" width:172 height:252
+		if sPsdManagerDialog != undefined do DestroyDialog sPsdManagerDialog
+		rollout sPsdManagerDialog "PSD Folders Setup:" width:172 height:252
 		(
 			local SettingsINI = ""
 			button 'btn_accept' "Accept" pos:[108,220] width:49 height:21 align:#left
@@ -168,9 +178,9 @@ struct PSD_MANAGER (
 					local item_name = clb_mods.items.item[ i ]
 					setINISetting SettingsINI "PSD_Folders_List" item_name is_checked
 				)
-				DestroyDialog  mcAssetGeneratorLayersDialog
+				DestroyDialog  sPsdManagerDialog
 			)
-			on mcAssetGeneratorLayersDialog open do (
+			on sPsdManagerDialog open do (
 				
 				clb_mods.BackColor = (dotNetClass "System.Drawing.Color").FromArgb 40 40 40
 				clb_mods.ForeColor = (dotNetClass "System.Drawing.Color").FromArgb 200 200 200
@@ -178,18 +188,18 @@ struct PSD_MANAGER (
 				clb_mods.HorizontalScrollbar = clb_mods.MultiColumn = false ; clb_mods.CheckOnClick = true
 			)
 			on btn_accept pressed do savePsdFoldersSettings()
-			on btn_cancel pressed do DestroyDialog  mcAssetGeneratorLayersDialog
+			on btn_cancel pressed do DestroyDialog  sPsdManagerDialog
 		)
-		CreateDialog mcAssetGeneratorLayersDialog  pos:[mouse.screenpos.x, mouse.screenpos.y - 252 / 2]
-		mcAssetGeneratorLayersDialog.SettingsINI = SettingsINI
-		mcAssetGeneratorLayersDialog.loadPsdFoldersSettings()
+		CreateDialog sPsdManagerDialog  pos:[mouse.screenpos.x, mouse.screenpos.y - 252 / 2]
+		sPsdManagerDialog.SettingsINI = SettingsINI
+		sPsdManagerDialog.loadPsdFoldersSettings()
 	)
 )
 
 
 
 /*
-psd_man = PSD_MANAGER()
+psd_man = sPsdManager()
 psd_man.createPSDFile @"c:\temp\" "psd_test_10" 128 512 black
 folder_names =	#("diffuse", "alpha", "glossiness", "metalness", "emissive", "emissive mask", "normal", "detail mask", "blend mask")
 layers_names =	for i=1 to folder_names.count collect "layer_1"

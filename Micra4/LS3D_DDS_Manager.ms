@@ -1,11 +1,19 @@
-Global DDS_MANAGER
+Global sDdsManager
+Global sDdsManagerDialog
 
 
-struct DDS_MANAGER (
+struct sDdsManager (
 
-	SettingsINI = "",
-	--app = getFilenamePath  (getSourceFileName()) + "texconv32.exe",
-	app = Micra.AppsDir + "texconv32.exe",
+	SettingsINI = (LS3DGUP.LS3DGUP.UtilsPath + "\\LS3D_Asset_Builder.ini"),
+	app = if (Micra != undefined) then (Micra.AppsDir + "texconv32.exe") else (getFilenamePath  (getSourceFileName()) + "texconv32.exe"),
+	pLog = mcProgLog,	
+	fn initLog = ( --validate output log window
+	
+		if SuperClassOf pLog != StructDef do (
+		
+			struct pLog (fn msg str = (format "%\n" str))
+		)
+	),
 	fn createDDSFile save_dir file_name size_w size_h bg_color = (
 
 		local bmp_path = save_dir + file_name + ".bmp"
@@ -30,8 +38,8 @@ struct DDS_MANAGER (
 	),
 	fn setupPsdDdsList = (
 		
-		if mcAssetGeneratorDDSDialog != undefined do DestroyDialog mcAssetGeneratorDDSDialog
-		rollout mcAssetGeneratorDDSDialog "DDS Assign Setup:" width:172 height:252
+		if sDdsManagerDialog != undefined do DestroyDialog sDdsManagerDialog
+		rollout sDdsManagerDialog "DDS Assign Setup:" width:172 height:252
 		(
 			local SettingsINI = ""
 			button 'btn_accept' "Accept" pos:[108,220] width:49 height:21 align:#left
@@ -56,9 +64,9 @@ struct DDS_MANAGER (
 					local item_name = clb_mods.items.item[ i ]
 					setINISetting SettingsINI "DDS_Textures_List" item_name is_checked
 				)
-				DestroyDialog  mcAssetGeneratorDDSDialog
+				DestroyDialog  sDdsManagerDialog
 			)
-			on mcAssetGeneratorDDSDialog open do (
+			on sDdsManagerDialog open do (
 				
 				clb_mods.BackColor = (dotNetClass "System.Drawing.Color").FromArgb 40 40 40
 				clb_mods.ForeColor = (dotNetClass "System.Drawing.Color").FromArgb 200 200 200
@@ -66,18 +74,18 @@ struct DDS_MANAGER (
 				clb_mods.HorizontalScrollbar = clb_mods.MultiColumn = false ; clb_mods.CheckOnClick = true
 			)
 			on btn_accept pressed do savePsdFoldersSettings()
-			on btn_cancel pressed do DestroyDialog  mcAssetGeneratorDDSDialog
+			on btn_cancel pressed do DestroyDialog  sDdsManagerDialog
 		)
-		CreateDialog mcAssetGeneratorDDSDialog  pos:[mouse.screenpos.x, mouse.screenpos.y - 252 / 2]
-		mcAssetGeneratorDDSDialog.SettingsINI = SettingsINI
-		mcAssetGeneratorDDSDialog.loadDDSTexturesSettings()
+		CreateDialog sDdsManagerDialog  pos:[mouse.screenpos.x, mouse.screenpos.y - 252 / 2]
+		sDdsManagerDialog.SettingsINI = SettingsINI
+		sDdsManagerDialog.loadDDSTexturesSettings()
 	)
 )
 
 
 
 /*
-dds_man = DDS_MANAGER()
+dds_man = sDdsManager()
 dds_man.createDDSFile @"c:\temp\" "test_file8" 512 240 gray
 */
 

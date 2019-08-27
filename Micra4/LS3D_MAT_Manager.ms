@@ -1,10 +1,18 @@
-Global MAT_MANAGER
+Global sMatManager = undefined
 
-struct MAT_MANAGER (
+struct sMatManager (
 
-	SettingsINI = "",
+	SettingsINI = (LS3DGUP.LS3DGUP.UtilsPath + "\\LS3D_Asset_Builder.ini"),
 	maps_templates_path = @"asset_management\maps\",
 	material_templates_path = @"asset_management\materials\",
+	pLog = mcProgLog,
+	fn initLog = ( --validate output log window
+	
+		if SuperClassOf pLog != StructDef do (
+		
+			struct pLog (fn msg str = (format "%\n" str))
+		)
+	),
 	--new_guid = generateMaterialGuid (random 1 100)
 	--material id example > 0x7d50757b, 0x55000dd1
 	fn generateMaterialGuid seed_number = ( --for i=1 to 10 do GenerateMaterialGuid i
@@ -43,7 +51,7 @@ struct MAT_MANAGER (
 			local nParam = rNode.GetChild 3
 			if (nParam.GetTag() != "parameters") then (
 			
-				mcPprogbUI.msg ("Node 'parameters' not found. Invalid format. Skipping -> -> [ " + path + " ] , texture: " + texture_fname) ti:"Failed!" ty:"error"
+				pLog.msg ("Node 'parameters' not found. Invalid format. Skipping -> -> [ " + path + " ] , texture: " + texture_fname) ti:"Failed!" ty:"error"
 				
 			) else (
 			
@@ -60,12 +68,12 @@ struct MAT_MANAGER (
 								notFound = false
 							) else (
 							
-								mcPprogbUI.msg  ("Unable to found node 'value'. Invalid Format. Skipping. -> " + path + ", texture type: " + param + ", new texture name: " + texture_fname) ti:"Failed!" ty:"error"
+								pLog.msg  ("Unable to found node 'value'. Invalid Format. Skipping. -> " + path + ", texture type: " + param + ", new texture name: " + texture_fname) ti:"Failed!" ty:"error"
 							)
 						)						
 					) else (
 					
-						mcPprogbUI.msg  ("Unable to found node 'name'. Invalid Format. Skipping. -> " + path + ", texture type: " + param + ", new texture name: " + texture_fname) ti:"Failed!" ty:"error"
+						pLog.msg  ("Unable to found node 'name'. Invalid Format. Skipping. -> " + path + ", texture type: " + param + ", new texture name: " + texture_fname) ti:"Failed!" ty:"error"
 					)
 				)
 				xDoc.SaveXML()		
@@ -73,7 +81,7 @@ struct MAT_MANAGER (
 			)
 		) catch (
 		
-			mcPprogbUI.msg ("Unknown error while reading material XML. Invalid format. Skipping. -> [ " + path + " ] , texture: " + texture_fname) ti:"Failed!" ty:"error"
+			pLog.msg ("Unknown error while reading material XML. Invalid format. Skipping. -> [ " + path + " ] , texture: " + texture_fname) ti:"Failed!" ty:"error"
 		)
 		result
 	),
@@ -87,14 +95,14 @@ struct MAT_MANAGER (
 			
 			local guidNode = rNode.GetChild 0
 			if (guidNode.GetTag() != "guid") then (
-				mcPprogbUI.msg ("Unable to find <guid> in material xml. Invalid format. Skipping. -> " + path as string) ty:"error" ti:"Aborted!"
+				pLog.msg ("Unable to find <guid> in material xml. Invalid format. Skipping. -> " + path as string) ty:"error" ti:"Aborted!"
 			) else (
 				guidNode.SetText newGUID
 				xDoc.SaveXML()
 				result = true
 			)
 		) catch (
-			mcPprogbUI.msg ("Unknown error while reading material XML. Invalid format. Skipping. -> " + path as string + ", new material GUID: " + newGUID as string) ty:"error" ti:"Aborted!"
+			pLog.msg ("Unknown error while reading material XML. Invalid format. Skipping. -> " + path as string + ", new material GUID: " + newGUID as string) ty:"error" ti:"Aborted!"
 		)		
 		return result
 	),
@@ -108,18 +116,18 @@ struct MAT_MANAGER (
 			
 			local guidNode = rNode.GetChild 0
 			if (guidNode.GetTag() != "guid") then (
-				mcPprogbUI.msg ("Unable to find <guid> in material xml. Invalid format. Skipping. -> " + path as string) ty:"error" ti:"Aborted!"
+				pLog.msg ("Unable to find <guid> in material xml. Invalid format. Skipping. -> " + path as string) ty:"error" ti:"Aborted!"
 			) else (
 				result = guidNode.GetText()
 			)
 		) catch (
-			mcPprogbUI.msg ("Unknown error while reading material XML. Invalid format. Skipping. -> " + path as string) ty:"error" ti:"Aborted!"
+			pLog.msg ("Unknown error while reading material XML. Invalid format. Skipping. -> " + path as string) ty:"error" ti:"Aborted!"
 		)		
 		return result
 	),
 	fn createMaxMaterial asset_name mat_guid xds_mterial slot_index:1 = (
 	
-		mcPprogbUI.msg "Creating Max Material" ti:"3DsMax..." ty:"task_open"
+		pLog.msg "Creating Max Material" ti:"3DsMax..." ty:"task_open"
 		--LS3DGUP.ReloadMaterialDatabase()
 		local new_mat = LS3DMaterial()
 		if new_guid == undefined do new_guid = getXMLGuid xds_mterial
@@ -128,7 +136,7 @@ struct MAT_MANAGER (
 		meditMaterials[slot_index] = new_mat
 		new_mat.guessbindings()
 		new_mat.synchronize()
-		mcPprogbUI.msg "Max Material are created" ti:"3DsMax..." ty:"task_close"
+		pLog.msg "Max Material are created" ti:"3DsMax..." ty:"task_close"
 		new_mat
 	),
 	--dds_suffix = #("---d.dds", "---dm.dds", "---e.dds", "---g.dds", "---n.dds")
@@ -149,11 +157,11 @@ struct MAT_MANAGER (
 			local source_file = utils_path + maps_templates_path + "template---" + ext
 			if not (doesFileExist source_file) do (
 		
-				mcPprogbUI.msg ("Pick  DDS Template [ "+ source_file + " ] ...Failed" ) ty:"error"
+				pLog.msg ("Pick  DDS Template [ "+ source_file + " ] ...Failed" ) ty:"error"
 				continue
 			)
-			mcPprogbUI.msg ("Pick  DDS Template: [ "+ source_file + " ] ...OK") ty:"proc"
-			mcPprogbUI.msg ("Create DDS Texture: "+ target_file) ty:"proc"
+			pLog.msg ("Pick  DDS Template: [ "+ source_file + " ] ...OK") ty:"proc"
+			pLog.msg ("Create DDS Texture: "+ target_file) ty:"proc"
 			CopyFile source_file target_file
 		)
 	),
@@ -220,30 +228,30 @@ struct MAT_MANAGER (
 	),
 	fn createFusionMaterial utils_path xds_mterial mat_type dds_textures = (
 	
-		mcPprogbUI.msg "Creating Fusion Material" ti:"Fusion..." ty:"task_open"
+		pLog.msg "Creating Fusion Material" ti:"Fusion..." ty:"task_open"
 		if gLS3DDXSupport == undefined or not gLS3DDXSupport.ShaderUpdateScriptInit() then (
 			
-			mcPprogbUI.msg ("gLS3DDXSupport structure is Missing...") ti:"Aborted!" ty:"error"
+			pLog.msg ("gLS3DDXSupport structure is Missing...") ti:"Aborted!" ty:"error"
 			return ""
 		)
 		generateDDSTextures utils_path dds_textures
 		local new_guid = generateMaterialGuid (random 1 100)
-		mcPprogbUI.msg ("Generate New GUID: [ "+ new_guid + " ]") ty:"proc"
+		pLog.msg ("Generate New GUID: [ "+ new_guid + " ]") ty:"proc"
 		local source_file = utils_path + @"asset_management\materials\template_" + mat_type + ".xml"
 		if not (doesFileExist source_file) do (
 		
-			mcPprogbUI.msg ("Pick  Material Template: [ "+ source_file + " ] ...Failed" ) ti:"Aborted!" ty:"error"
+			pLog.msg ("Pick  Material Template: [ "+ source_file + " ] ...Failed" ) ti:"Aborted!" ty:"error"
 			return ""
 		)
-		mcPprogbUI.msg ("Pick  Material Template: [ "+ source_file + " ] ...OK") ty:"proc"
+		pLog.msg ("Pick  Material Template: [ "+ source_file + " ] ...OK") ty:"proc"
 		local params = getTemplateParameters mat_type
-		mcPprogbUI.msg ("Template [ "+ mat_type+" ] params : [ "+ params as String + " ]") ty:"proc"
+		pLog.msg ("Template [ "+ mat_type+" ] params : [ "+ params as String + " ]") ty:"proc"
 		
 		--copy template to target location --
 		copyFile source_file xds_mterial
 		setFileAttribute xds_mterial #readOnly false 
 		--assign new GUID
-		mcPprogbUI.msg ("Assign Material [ "+ mat_type +" ] new  GUID : [ "+ new_guid + " ] ") ty:"proc"
+		pLog.msg ("Assign Material [ "+ mat_type +" ] new  GUID : [ "+ new_guid + " ] ") ty:"proc"
 		setXMLGuid xds_mterial new_guid
 		--assign each texture to XML parameter slot
 		for tpath in dds_textures do (
@@ -252,19 +260,19 @@ struct MAT_MANAGER (
 			local param = getParamByFname (getFilenameFile tpath) params
 			if param == undefined do (
 			
-				mcPprogbUI.msg ("Material [ "+mat_type+" ] are not Supporting texture: [ "+texture_fname+" ]") ti:"Failed!" ty:"error"
+				pLog.msg ("Material [ "+mat_type+" ] are not Supporting texture: [ "+texture_fname+" ]") ti:"Failed!" ty:"error"
 				continue
 			)
-			mcPprogbUI.msg ("Assign texture [ "+ texture_fname+" ] to Material : [ "+ mat_type + " ] param: [ " + param + " ]") ty:"proc"
+			pLog.msg ("Assign texture [ "+ texture_fname+" ] to Material : [ "+ mat_type + " ] param: [ " + param + " ]") ty:"proc"
 			--assign texture in to xml material slot
 			setTextureToXML xds_mterial param texture_fname
 		)	
-		mcPprogbUI.msg ("Created XDS Material:"+ xds_mterial) ty:"task_close"
+		pLog.msg ("Created XDS Material:"+ xds_mterial) ty:"task_close"
 		new_guid
 	)
 )
 
 /*
-mat_man = MAT_MANAGER()
+mat_man = sMatManager()
 mat_man.loadMaxSemanticMaterial()
 */

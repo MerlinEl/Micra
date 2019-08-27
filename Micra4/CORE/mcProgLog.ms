@@ -1,7 +1,7 @@
-Global mcPprogbUI
-Global mcProgressBarLogDialog
+Global mcProgLog
+Global mcProgLogDialog
 --------------------------------------------------------------------------------
-/* mcPprogbUI by Orien 2019 */
+/* mcProgLog by Orien 2019 */
 --------------------------------------------------------------------------------
 /*
 *@Used Structures
@@ -11,13 +11,20 @@ Global mcProgressBarLogDialog
 	undefined
 *
 *@Usage
-	undefined
+	display messages in new consloe window (info, warnings, errors, open close tasks)
 *
 *@Example	
-	undefined
+	mcProgLog.msg "@" --clear log
+	mcProgLog.msg "ASSET BUILDER LOG:" ti:"Initialize...." ty:"new_task"
+	mcProgLog.msg "Creating Max File" ti:"3DsMax..." ty:"task_open"
+	mcProgLog.msg "Paths and Name is OK" ty:"proc"
+	mcProgLog.msg "Name OK" ty:"proc"
+	output_dir = @"E:\Aprog\Orien\Micra\Micra4\_New\AssetBulider"
+	mcProgLog.msg ("Failed Save Max File. Unable to find Directory.\n\tPath:[ "+output_dir+" ]") ti:"Aborted!" ty:"error" tl:1
+	mcProgLog.msg "All Done" ty:"task_close"
 *
 */
-struct PROGRESSBAR_LOG_STRUCTURE (
+struct MC_PROG_LOG (
 	
 	--variables
 	text_box,
@@ -30,7 +37,7 @@ struct PROGRESSBAR_LOG_STRUCTURE (
 	--functions
 	fn getSource = getSourceFileName(), --get path of this script
 	fn show = (
-		CreateDialog mcProgressBarLogDialog style:#(
+		CreateDialog mcProgLogDialog style:#(
 		
 			-- #style_resizing,
 			#style_minimizebox,
@@ -39,24 +46,24 @@ struct PROGRESSBAR_LOG_STRUCTURE (
 			#style_sysmenu
 			-- #style_sunkenedge
 		)
-		-- if (MaxVersion())[1] >= 21000 do mcProgressBarLogDialog.autoLayoutOnResize = true 
+		-- if (MaxVersion())[1] >= 21000 do mcProgLogDialog.autoLayoutOnResize = true 
 	),
 	fn focus scrollDown:false = (
 	
-		windows.SendMessage mcProgressBarLogDialog.hwnd WM_SETFOCUS 0 0 --set focus to mcProgressBarLogDialog
+		windows.SendMessage mcProgLogDialog.hwnd WM_SETFOCUS 0 0 --set focus to mcProgLogDialog
 		if scrollDown do (
 		
 			text_box.SelectionStart = text_box.TextLength --get text end
 			text_box.ScrollToCaret() --move carret to end
 			text_box.Focus() --set focus to textbox
 		)
-		-- format "Set Focus To mcProgressBarLogDialog...\n"
+		-- format "Set Focus To mcProgLogDialog...\n"
 	),
-	fn close = (DestroyDialog mcProgressBarLogDialog),
+	fn close = (DestroyDialog mcProgLogDialog),
 	/**
 	*@Example   
-		for i=1 to 1000 do mcPprogbUI.progSub i 1000 clr:yellow
-		for i=1 to 1000 do mcPprogbUI.progSum i 1000
+		for i=1 to 1000 do mcProgLog.progSub i 1000 clr:yellow
+		for i=1 to 1000 do mcProgLog.progSum i 1000
 	*/
 	fn progSub val_step val_total clr:(color 255 115 255) = ( --color 255 153 255, color 0 255 255
 		
@@ -161,13 +168,13 @@ struct PROGRESSBAR_LOG_STRUCTURE (
 		italic	= text size 
 		fsize	= text size
 	*@Example   
-		mcPprogbUI.msg "Welcome to trace log." nl:true tt:"Pass 1" ty:"head1"
-		mcPprogbUI.msg "progress 1" nl:true tl:1 ti:"Pass 1"
+		mcProgLog.msg "Welcome to trace log." nl:true tt:"Pass 1" ty:"head1"
+		mcProgLog.msg "progress 1" nl:true tl:1 ti:"Pass 1"
 	*/
 	fn msg str nl:true ti:"" ty:"proc" clr:black bold:false italic:false fsize:12 fname:"Times New Roman" = (
 		
-		if not (isDialogVisible mcProgressBarLogDialog) do show()
-		if str == "@" do (mcProgressBarLogDialog.clearLog(); return OK)
+		if not (isDialogVisible mcProgLogDialog) do show()
+		if str == "@" do (mcProgLogDialog.clearLog(); return OK)
 		--"Tahoma" --"Verdana"
 		local d1 = cloneChar "-" 234	--dash(1*  width)
 		-- local d2 = cloneChar "-" 115	--dash(3/4 width)
@@ -232,12 +239,12 @@ struct PROGRESSBAR_LOG_STRUCTURE (
 		local end = text_box.text.count
 		-- format "from:% to:% clr:% blod:% italic:%\n" start end clr bold italic
 		stylizeText start end clr bold italic fsize fname
-		mcProgressBarLogDialog.title =  "Proces: " + ti
+		mcProgLogDialog.title =  "Proces: " + ti
 	),
 	fn init = (
 	
-		if mcProgressBarLogDialog != undefined do DestroyDialog mcProgressBarLogDialog
-		rollout mcProgressBarLogDialog "Proces:  ..." width:1200 height:600
+		if mcProgLogDialog != undefined do DestroyDialog mcProgLogDialog
+		rollout mcProgLogDialog "Proces:  ..." width:1200 height:600
 		(
 		
 			GroupBox 'grp1' "Log:" pos:[4,4] width:1192 height:592 align:#left
@@ -250,12 +257,12 @@ struct PROGRESSBAR_LOG_STRUCTURE (
 			fn clearLog = (
 	
 				text_box.text = ""
-				mcProgressBarLogDialog.title =  "Proces: "
+				mcProgLogDialog.title =  "Proces: "
 				pb_sub_task.value = 0
 				pb_sum_task.value = 0
 			)
-			-- on mcProgressBarLogDialog resized size do ()
-			on mcProgressBarLogDialog open do (
+			-- on mcProgLogDialog resized size do ()
+			on mcProgLogDialog open do (
 			
 				text_box.ReadOnly		= true
 				text_box.Multiline		= true
@@ -269,33 +276,38 @@ struct PROGRESSBAR_LOG_STRUCTURE (
 				text_box.refresh()
 			)
 			on btn_clear pressed do clearLog()
-			on btn_close pressed do DestroyDialog mcProgressBarLogDialog
+			on btn_close pressed do DestroyDialog mcProgLogDialog
 			on btn_copy pressed do setclipboardText text_box.text
 		)
-		text_box = mcProgressBarLogDialog.text_box --instance dialog
-		pb_sub_task  = mcProgressBarLogDialog.pb_sub_task
-		pb_sum_task  = mcProgressBarLogDialog.pb_sum_task
+		text_box = mcProgLogDialog.text_box --instance dialog
+		pb_sub_task  = mcProgLogDialog.pb_sub_task
+		pb_sum_task  = mcProgLogDialog.pb_sum_task
  	),
 	i = init()
 	/*<end>*/
 )	
+
 --create instance
-mcPprogbUI = PROGRESSBAR_LOG_STRUCTURE()
+if (mcProgLog == undefined) do (
+
+	mcProgLog = MC_PROG_LOG()
+)
+
 
 ---test
 /*
-mcPprogbUI.msg "@" --clear log
-mcPprogbUI.msg "ASSET BUILDER LOG:" ti:"Initialize...." ty:"new_task"
-mcPprogbUI.msg "Creating Max File" ti:"3DsMax..." ty:"task_open"
-mcPprogbUI.msg "Paths and Name is OK" ty:"proc"
-mcPprogbUI.msg "Name OK" ty:"proc"
+mcProgLog.msg "@" --clear log
+mcProgLog.msg "ASSET BUILDER LOG:" ti:"Initialize...." ty:"new_task"
+mcProgLog.msg "Creating Max File" ti:"3DsMax..." ty:"task_open"
+mcProgLog.msg "Paths and Name is OK" ty:"proc"
+mcProgLog.msg "Name OK" ty:"proc"
 output_dir = @"E:\Aprog\Orien\Micra\Micra4\_New\AssetBulider"
-mcPprogbUI.msg ("Failed Save Max File. Unable to find Directory.\n\tPath:[ "+output_dir+" ]") ti:"Aborted!" ty:"error" tl:1
-mcPprogbUI.msg "All Done" ty:"task_close"
+mcProgLog.msg ("Failed Save Max File. Unable to find Directory.\n\tPath:[ "+output_dir+" ]") ti:"Aborted!" ty:"error" tl:1
+mcProgLog.msg "All Done" ty:"task_close"
 
-mcPprogbUI.msg "ADD FILES TO PERFORCE:" ti:"P4V...." ty:"new_task" 
-for i=1 to 1000 do mcPprogbUI.prog i 1000
-mcPprogbUI.prog 0 0	
+mcProgLog.msg "ADD FILES TO PERFORCE:" ti:"P4V...." ty:"new_task" 
+for i=1 to 1000 do mcProgLog.prog i 1000
+mcProgLog.prog 0 0	
 */
 
 
@@ -339,7 +351,7 @@ text_box.selectionstart = p_start
 text_box.Selectionlength = p_end
 */
 /*
-mcProgressBarLogDialog.show()
-mcProgressBarLogDialog.close()
+mcProgLogDialog.show()
+mcProgLogDialog.close()
 */
 

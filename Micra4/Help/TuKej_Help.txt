@@ -1,0 +1,64 @@
+------------------
+Scripts
+------------------
+D:\!2k_games\scotch_dev\code\srcTools\modules\ToolMAX2018\3dsmax\scripts\LS3DUtils
+
+Asset_Builder.mcr
+Asset_Bulider.ms
+Asset_Bulider_DDS_Manager.ms
+Asset_Bulider_MAT_Manager.ms
+Asset_Bulider_P4V_Manager.ms
+Asset_Bulider_PSD_Manager.ms
+LS3D_Asset_Generator.ini
+Progressbar_With_Log.ms
+
+
+------------------
+--Macro File
+------------------
+--c:\Program Files\Autodesk\3ds Max 2018\scripts\ls3dutils\
+--Asset_Bulider.mcr
+
+
+-------------------
+Macro Registration
+------------------
+d:\!2K_Games\scotch_dev\code\srcTools\modules\ToolMAX2018\3dsmax\scripts\startup\LS3D.ms
+
+line:111
+	"Asset_Builder.mcr"
+
+test override: c:\Program Files\Autodesk\3ds Max 2018\scripts\Startup\LS3D.ms
+
+------------------------
+Menu and Fn Registration 
+------------------------
+d:\!2K_Games\scotch_dev\code\srcTools\modules\ToolMAX2018\3dsmax\scripts\LS3DUtils\LS3DCustomization.ms
+
+line:357
+	item = menuMan.createActionItem "LS3D_Asset_Builder" "LS3D Engine"
+	if item == undefined then throw "Asset Builder macro not available"
+	item.setUseCustomTitle(true)
+	item.setTitle "Asset Builder"
+	menu.addItem item -1
+
+test override: c:\Program Files\Autodesk\3ds Max 2018\scripts\ls3dutils\LS3DCustomization.ms
+
+
+
+
+---------------------------
+MAXScript 
+---------------------------
+Something went wrong when constructing menu. Some functions may not be available.
+Check your instalation of LS3D utilities.
+
+Exception:
+-- Runtime error: Asset Builder macro not available
+
+---------------------------
+OK   
+---------------------------
+
+mcAssetGeneratorDialog.openDialog()
+DDS_MANAGER = undefined

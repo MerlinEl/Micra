@@ -7,6 +7,7 @@
   <Structures val="All registred Micra's Structures">
     <!--independent classes-->
     <mcStructMan val="on" info="structure manager" />
+	<mcProgLog val="on" info="progressbar with log" />
     <mcWinMsg val="on" />
     <mcWin32 val="on" info="denisT great work!" />
     <mcUser32 val="on" info="denisT great work!" />
@@ -131,7 +132,7 @@
     <City_Manager val="1.07" />
     <Patcher val="0.03" />
     <Patcher2P val="0.05" />
-    <Asset_Bulider val="0.06" />
+    <LS3D_Asset_Builder val="0.06" />
   </Version>
   <SystemFiles val="Micra's Settings Files">
     <Actions val="Contains all accesible Micra's actions" />
