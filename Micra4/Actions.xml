@@ -119,6 +119,7 @@
     <Create_3PGrid icon="81" cmd="mcCreate.grid3p()" tooltip="Create_3PGrid" />
     <Create_Ambient_Lights icon="1" cmd="mcAction.create_ambient_lights()" tooltip="Create Ambient Lights" />
     <Box_Builder icon="16" cmd="mcFile.fileInVersion Box_Builder" tooltip="Box Builder" />
+    <Create_PolygonGrid icon="274" cmd="mcCreate.gridFromPlygon()" tooltip="Create PolygonGrid" />
   </Creation>
   <Experimental>
     <Holder icon="118" cmd="mcHoldSelection()" tooltip="Holder Experimental" />

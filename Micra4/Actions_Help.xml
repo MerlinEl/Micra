@@ -105,6 +105,7 @@
     <Create_3PGrid val="Vytvori naklonenou mrizku podle tri bodu." />
     <Create_Ambient_Lights val="Vytvori ambientni nasvetleni pro vypekani difusni mapy." />
     <Box_Builder val="Vytvori box na povrchu jineho modelu orientovaný podle normály polygonu." />
+    <Create_PolygonGrid />
   </Creation>
   <Experimental>
     <Isolate_Plus val="Manazer objektu na Scene.Selekce, zobrazovani, hromadna uprava nazvu..." />

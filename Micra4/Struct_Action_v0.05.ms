@@ -2651,6 +2651,36 @@ struct mcCreate (
 	(	
 		mcFile.fileInVersion "Create_3PGrid"
 	),
+	fn gridFromPlygon = (
+		
+		local obj = selection[1]
+		if classOf Obj != Editable_Poly do return false
+		local face_index = (polyOp.getFaceSelection obj as array)[1]
+		if face_index == undefined do return false
+		local face_verts = polyOp.getVertsUsingFace obj face_index
+		local face_edges = polyOp.getEdgesUsingFace obj face_index
+		--get two neigbour edges
+		local vert_index = (face_verts as array)[1]
+		local vert_edges = polyOp.getEdgesUsingVert obj vert_index
+		local two_edges = (face_edges * vert_edges) as array--remove thrid edge if exists
+		local verts_e1 = polyOp.getVertsUsingEdge obj two_edges[1]
+		local verts_e2 = polyOp.getVertsUsingEdge obj two_edges[2]
+		--get triangle vertices
+		local thre_verts = (verts_e1 + verts_e2) as array
+		local p1 = polyOp.getVert obj thre_verts[1] 
+		local p2 = polyOp.getVert obj thre_verts[2] 
+		local p3 = polyOp.getVert obj thre_verts[3]
+		--create tm from 3 points
+		local tm = mcTransform.getLocalMatrix p1 p2 p3
+		tm.Row4 = polyop.getfacecenter obj face_index
+		local space    = getGridSpacing()
+		local lines    = getGridMajorLines()
+		local gname    = uniqueName "Grid_Polygon_"
+		local new_grid
+		undo label:"Create 3P Grid" on new_grid = grid length:150 width:150 grid:space transform:tm name:gname wirecolor:black --isSelected:on
+		Try (ActiveGrid = new_grid) Catch()
+		Toolmode.coordsys #Grid -- change view coordinates to grid
+	),
 	fn cereateChecker color1:blue color2:white =
 	(
 		if selection.count == 0 do return false

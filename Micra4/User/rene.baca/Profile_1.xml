@@ -14,16 +14,16 @@
   </Properties_1>
   <Properties_2>
     <mcMicraDialog active="true" pos="[2171,214]" size="[148,66]" title="" />
-    <mcCustomizeDialog active="false" pos="[1770,420]" size="[224,404]" title="" />
+    <mcCustomizeDialog active="false" pos="[1700,340]" size="[600,404]" title="" />
     <mcProgramDialog active="undefined" pos="[2298,0]" size="[256,232]" title="" />
     <mcisoDialog active="false" pos="[181,152]" size="[140,400]" title="" />
     <mcModifierDialog active="undefined" pos="[100,100]" size="[400,400]" title="" />
-    <mcIconMakerDialog active="false" pos="[1130,510]" size="[730,500]" title="" />
+    <mcIconMakerDialog active="false" pos="[700,430]" size="[730,500]" title="" />
     <mcDeepIsolateDialog active="true" pos="[1118,86]" size="[84,44]" title="" />
     <mcMoveTowardsDialog active="true" pos="[441,377]" size="[200,76]" title="" />
-    <mcClonerDialog active="true" pos="[1707,440]" size="[164,296]" title="" />
+    <mcClonerDialog active="true" pos="[1062,309]" size="[164,296]" title="" />
     <mcRenameDialog active="true" pos="[265,280]" size="[224,312]" title="" />
-    <mcObjectPlanterDialog active="true" pos="[266,201]" size="[356,92]" title="" />
+    <mcObjectPlanterDialog active="true" pos="[850,268]" size="[356,92]" title="" />
     <mcPivotPlanterDialog active="undefined" pos="[362,308]" size="[116,141]" title="" />
     <mcRepairDialog active="undefined" pos="[357,307]" size="[144,152]" title="" />
     <mcEdgeScaleDialog active="undefined" pos="[357,307]" size="[144,152]" title="" />
@@ -32,7 +32,7 @@
     <mcLpWizardDialog active="true" pos="[1120,431]" size="[528,84]" title="" />
     <mcCharSelectDialog active="undefined" pos="[180,390]" size="[212,388]" title="" />
     <mcCharPoseDialog active="undefined" pos="[184,304]" size="[146,388]" title="" />
-    <mcSaveProfileAsDialog active="true" pos="[1840,370]" size="[240,66]" title="" />
+    <mcSaveProfileAsDialog active="true" pos="[1840,320]" size="[240,66]" title="" />
     <mcDgalleryDialog active="undefined" pos="[-993,148]" size="[875,850]" title="" />
     <mcRandomizeDialog active="true" pos="[709,157]" size="[152,332]" title="" />
     <mcColorPaleteDialog active="false" pos="[2304,236]" size="[244,60]" title="" />
@@ -44,7 +44,7 @@
     <mcRotateObjectDialog active="undefined" pos="[100,100]" size="[100,100]" title="" />
     <mcViewportRecorderDialog active="true" pos="[100,100]" size="[316,124]" title="" />
     <mcGifCompillerDialog active="undefined" pos="[100,100]" size="[100,100]" title="" />
-    <mcScriptManDialog active="true" pos="[473,340]" size="[400,624]" title="" />
+    <mcScriptManDialog active="true" pos="[139,278]" size="[400,624]" title="" />
     <mcColorPickerDialog active="true" pos="[560,420]" size="[328,276]" title="" />
     <mcQuickColorPickerDialog active="undefined" pos="[100,100]" size="[100,100]" title="" />
     <mcInterfaceColorDilaog active="undefined" pos="[1445,427]" size="[299,130]" title="" />
@@ -60,7 +60,6 @@
     <btn_B5 action="Reset_Transform" icon="33" />
     <btn_B7 action="Move_To_Ground" icon="54" />
     <btn_B8 action="Clone_2" icon="62" />
-    <btn_B9 action="Rename" icon="67" />
     <btn_B10 action="Align" icon="63" />
     <btn_B11 action="Repair_Object" icon="76" />
     <btn_B13 action="Group_Create" icon="70" />
@@ -220,5 +219,7 @@
     <btn_D16 action="Select_Objects_By_Wirecolor" icon="272" />
     <btn_G24 action="Smooth_Hard" icon="110" />
     <btn_J16 action="Asset_Builder" icon="273" />
+    <btn_B12 action="Rename" icon="67" />
+    <btn_B9 action="Create_PolygonGrid" icon="274" />
   </Buttons>
 </USER>

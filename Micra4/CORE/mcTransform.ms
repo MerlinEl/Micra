@@ -58,6 +58,13 @@ struct mcTransform (
 	(
 		obj.min - obj.max
 	),
+	fn getLocalMatrix p1 p2 p3 = (
+
+		v1 = normalize (p2 - p1)
+		v3 = normalize (cross v1 (normalize (p3 - p1)))
+		v2 = normalize (cross v3 v1)
+		matrix3 v1 v2 v3 p1
+	),
 	fn getLocalSize obj type =
 	(
 	 	/*
