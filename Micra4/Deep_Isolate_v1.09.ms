@@ -60,15 +60,20 @@ fn mcDeepIsolate lvl:#upper =
 			(
 				for i in objects where not i.isHidden collect i.name
 			),
-			fn unhide_all_isolated =
-			(
+			fn unhide_all_isolated = (
+				
 				local old_selection = selection as array
 				local hidden_obj       = #()
-				for l in objects_by_lvl do for n in l do
-				(
-					local obj = getNodeByName n
-					if obj != undefined do hidden_obj += #(obj)
+				for names in objects_by_lvl do (
+					
+					if names == undefined do continue
+					for n in names do (
+						
+						local obj = getNodeByName n
+						if obj != undefined do hidden_obj += #(obj)
+					)
 				)
+				current_level = 1
 				unhide hidden_obj dolayer:true
 				selectmore hidden_obj
 				max zoomext sel 
@@ -222,7 +227,7 @@ fn mcDeepIsolate lvl:#upper =
 			)
 			--||
 			--|	--Form actions	
-			fn setBackcolor s a = (s.backcolor = netDrColor s.tag.value.clr_btn)
+			fn setBackcolor s a = (s.backcolor = mcDotnet.uiColor #back)
 			fn onOpenForm s a = 
 			(			
 				--print "open form"
@@ -261,9 +266,8 @@ fn mcDeepIsolate lvl:#upper =
 			--form.MaximumSize = netDrSize [btn_size*10, btn_size*10]
 			--form.BackColor = netDrColor blue--clr_back  --wont work
 			form.ShowInTaskbar = false
-			form.opacity = mcDotnet.uiColor #opacity
-			
-			
+			form.opacity = mcUIColors.get #opacity
+		
 			mcs.lblT.bounds = netDrRect [mcs.form_offset, mcs.form_offset] [mcs.form_size.x - mcs.form_offset*2 , mcs.bar_height]
 			mcs.lblT.BackColor = mcDotnet.uiColor #back
 			mcs.lblT.ForeColor = mcDotnet.uiColor #text
@@ -322,7 +326,7 @@ fn mcDeepIsolate lvl:#upper =
 	)
 	else if mcDeepIsolateDialog != undefined do --Isolate / Unisolate
 	(
-		print "manipulace"
+		--print "DeepIsolate switch"
 		mcDeepIsolateDialog.tag.value.isolateByLevel lvl
 	)
 )

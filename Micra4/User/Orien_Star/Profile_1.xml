@@ -19,7 +19,7 @@
     <mcisoDialog active="false" pos="[100,152]" size="[140,400]" title="" />
     <mcModifierDialog active="false" pos="[100,100]" size="[400,400]" title="" />
     <mcIconMakerDialog active="false" pos="[210,330]" size="[730,500]" title="" />
-    <mcDeepIsolateDialog active="false" pos="[100,86]" size="[84,44]" title="" />
+    <mcDeepIsolateDialog active="false" pos="[1090,180]" size="[84,44]" title="" />
     <mcMoveTowardsDialog active="false" pos="[100,377]" size="[200,76]" title="" />
     <mcClonerDialog active="true" pos="[126,185]" size="[164,296]" title="" />
     <mcRenameDialog active="false" pos="[100,280]" size="[224,312]" title="" />
