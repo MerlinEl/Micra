@@ -1,30 +1,24 @@
 Global mcAction
-Global mcSkin
 Global mcCreate
-Global mcMax
-Global mcShell
-Global mcInterface
-
 
 --fix this
 Global mcSelVertsInXDialog
 Global mcSilhouetteSelection
 Global mcSilhouetteWirecolors
 
-
 struct mcAction (
 
 	url = getSourceFileName(),
 	fn getSource = getSourceFileName(), --get path of this script
-	fn add_modifier mod =
+	fn addModToSel mod_name = --add modifier to selection
 	(
 		local sel = selection as array
 		if sel.count == 0      do return false
-		if classof mod != name do return false 
+		if classof mod_name != name do return false 
 		
 		undo label:"Add Modifier" on try
 		(
-			case mod of
+			case mod_name of
 			(
 				#Extrude       : modPanel.addModToSelection (Extrude       ()) ui:on
 				#Lathe         : modPanel.addModToSelection (Lathe         ()) ui:on
@@ -84,7 +78,7 @@ struct mcAction (
 				)
 			)
 		)
-		catch (format "Failed to add modifier: %\n" mod)
+		catch (format "Failed to add modifier: %\n" mod_name)
 		
 		local active = mcFile.readSettings Micra.UserProfile "Properties_1/mc_Dialog_F" type:"pos" == "true" --if modifiers dialog was opened in last session
 		--if not keyboard.shiftPressed and not active and mc_Dialog_F != undefined do destroyDialog mc_Dialog_F
@@ -2407,86 +2401,17 @@ struct mcAction (
 		
 		undo "Pivot To Zero" on try (for o in selection do o.pivot = [0, 0, 0]) catch(format "Pivot To Zero was Failed.")
 	),
-	/**
-	*@Author	Martijn(magicm)
-	*@Exceptions	negative or non-uniform objects scale
-	*@Examples
-		mcAction.alignPivotToObject $Box01 $Point01
-		mcAction.alignPivotToObject $Box02 (matrix3 1)
-	*/
 	fn alignPivotToObject src_obj trg_obj = (
 		
-		-- Get matrix from object
-		if classOf trg_obj != matrix3 then trg_obj = trg_obj.transform
-		-- Store child transforms
-		local ChldTms = in coordSys trg_obj ( for Chld in src_obj.children collect Chld.transform )
-		-- Current offset transform matrix
-		local TmScale = scaleMatrix src_obj.objectOffsetScale
-		local TmRot = src_obj.objectOffsetRot as matrix3
-		local TmPos = transMatrix src_obj.objectOffsetPos
-		local TmOffset = TmScale * TmRot * TmPos
-		-- New offset transform matrix
-		TmOffset *= src_obj.transform * inverse trg_obj
-		-- Apply matrix
-		src_obj.transform = trg_obj
-		-- Restore offsets
-		src_obj.objectOffsetPos = TmOffset.translation
-		src_obj.objectOffsetRot = TmOffset.rotation
-		src_obj.objectOffsetScale = TmOffset.scale
-		-- Restore child transforms
-		for i = 1 to src_obj.children.count do src_obj.children[i].transform = ChldTms[i] * inverse trg_obj * src_obj.transform
+		mcPoly.alignPivotToObject src_obj trg_obj
 	),
-	/*fn alignPivotToFace obj face_index way:#up = ( --by miauu (not works)
-		  
-		local c = polyop.getfacecenter obj face_index
-		local n = polyop.getfacenormal obj face_index
-		local ftm = translate (matrixfromnormal n) c
-		case type of 
-		(
-			#x_up: prerotateY ftm -90
-			#y_up: prerotateX ftm 90
-		)
-
-		itm = ftm*(inverse obj.transform)
-		obj.transform = ftm
-		obj.objectOffsetPos *= inverse itm
-		obj.objectOffsetRot *= inverse itm.rotation
-		obj.transform
-	),*/
 	fn alignPivotToSelectedFace = (
 	
 		local obj = (selection as array)[1]
-		if obj == undefined or  classOf obj != Editable_Poly do return false
+		if obj == undefined or classOf obj != Editable_Poly do return false
 		local face_index = (polyop.getFaceSelection obj as Array)[1]	 
-		if face_index == undefined do return false  
-		local face_normal = polyop.getFaceNormal obj face_index
-		local face_center = polyop.getFaceCenter obj face_index
-		--rotate by face normal
-		local rot = (matrixFromNormal face_normal*obj.transform ) as quat
-		local rotValInv = inverse rot
-		animate off in coordsys local obj.rotation*= rotValInv
-		obj.objectoffsetrot*=RotValInv
-		obj.objectoffsetpos*=RotValInv
-		--move pivot ot face center
-		obj.pivot = face_center
+		mcPoly.alignPivotToFace obj face_index
 	),
-	/*fn alignPivotToSelectedFace = (
-	
-		local obj = (selection as array)[1]
-		if obj == undefined or  classOf obj != Editable_Poly do return false
-		local face_index = (polyop.getFaceSelection obj as Array)[1]	 
-		if face_index == undefined do return false  
-		local face_normal = in coordsys obj  (polyop.getFaceNormal obj face_index) 
-		local world_up_vector = [0,0,1] 
-		local right_vector = normalize (cross world_up_vector face_normal) 
-		local up_vector = normalize ( cross right_vector face_normal )
-		local tm = matrix3 right_vector up_vector face_normal [0,0,0] 
-		local point_helper=point()
-		point_helper.transform = tm
-		point_helper.position = polyOp.getFaceCenter obj face_index
-		mcAction.alignPivotToObject obj point_helper
-		delete point_helper
-	)*/
 	fn createPointAtVertex = (
 		
 		local obj = selection[1]
@@ -2657,22 +2582,11 @@ struct mcCreate (
 		if classOf Obj != Editable_Poly do return false
 		local face_index = (polyOp.getFaceSelection obj as array)[1]
 		if face_index == undefined do return false
-		local face_verts = polyOp.getVertsUsingFace obj face_index
-		local face_edges = polyOp.getEdgesUsingFace obj face_index
-		--get two neigbour edges
-		local vert_index = (face_verts as array)[1]
-		local vert_edges = polyOp.getEdgesUsingVert obj vert_index
-		local two_edges = (face_edges * vert_edges) as array--remove thrid edge if exists
-		local verts_e1 = polyOp.getVertsUsingEdge obj two_edges[1]
-		local verts_e2 = polyOp.getVertsUsingEdge obj two_edges[2]
-		--get triangle vertices
-		local thre_verts = (verts_e1 + verts_e2) as array
-		local p1 = polyOp.getVert obj thre_verts[1] 
-		local p2 = polyOp.getVert obj thre_verts[2] 
-		local p3 = polyOp.getVert obj thre_verts[3]
+		local corner_vertices = mcPoly.getFaceCornerVertices obj face_index
+		local points = for v in corner_vertices collect polyOp.getVert obj v
 		--create tm from 3 points
-		local tm = mcTransform.getLocalMatrix p1 p2 p3
-		tm.Row4 = polyop.getfacecenter obj face_index
+		local tm = mcTransform.getLocalMatrix points[1] points[2] points[3]
+		--tm.Row4 = polyop.getfacecenter obj face_index --not realy need
 		local space    = getGridSpacing()
 		local lines    = getGridMajorLines()
 		local gname    = uniqueName "Grid_Polygon_"
@@ -2732,164 +2646,6 @@ struct mcCreate (
 			) 
 			--link bones
 			for i=bones_array.count to 1 by -1 do if i > 1 do bones_array[i].parent = bones_array[i-1] 
-		)
-	)
-	/*<end>*/
-)
-struct mcInterface
-(
-	fn getSource = getSourceFileName(), --get path of this script
-	fn super_expert_mode =
-	(
-		local state = not(timeslider.isVisible()) 
-		trackbar.visible = state
-		timeSlider.setVisible state
-		if state then cui.expertModeOff() else cui.expertModeOn()
-		statusPanel.visible = state
-/*
-		if trackbar.visible and timeSlider.isVisible() then
-		(
-			timeSlider.setVisible off ; trackbar.visible =off --; statusPanel.visible = off
-			cui.expertModeOn()
-		)
-		else
-		(
-			timeSlider.setVisible on ; trackbar.visible=on --;statusPanel.visible = on   
-			cui.expertModeOff()
-		)
-*/
-	),
-	fn loadCustomUiScheme type:#MaxStart =
-	(
-		local custom_ui = getdir(#UI) + 
-		(
-			case type of
-			(
-				#MaxStart:"\\MaxStartUI.ui"
-				#Default :"\\DefaultUI.ui"
-			)
-		)
-		if not doesFileExist custom_ui do return false
-		EscapeEnable=false -- Disable Esacpe Key
-		loadCUIScheme custom_ui
-		EscapeEnabled = true -- Enable ESC Key
-	),
-	fn setCoordsys coord = --#view,#screen,#world,#parent,#local,#Grid,#Gimbal
-	(
-		local old_tool = toolmode.commandmode
-		
-		max move
-		Toolmode.coordsys coord 
-		max rotate
-		Toolmode.coordsys coord 
-		max scale	
-		Toolmode.coordsys coord 
-		max select
-		Toolmode.coordsys coord 
-		
-		case old_tool of
-		(
-			#move   :(max move)
-			#rotate :(max rotate)
-			#uscale :(max scale)
-			#nscale :(max scale)
-			#squash :(max scale)
-			#select :(max select)
-		)
-	),
-	fn deleteEmptyLayers = (
-	
-		if not (queryBox "You are sure to Delete Empty Layers?" title:micra.version) do return false
-		local counter = 0
-		for id = LayerManager.count - 1 to 1 by -1 do (
-		
-			local layer = LayerManager.getLayer id
-			local contains_nodes = LayerManager.doesLayerHierarchyContainNodes layer.name
-			if not contains_nodes then (
-			
-				local deleted = LayerManager.deleteLayerByName layer.name
-				if deleted then counter += 1
-			)
-		)
-		return counter
-	)
-	/*<end>*/	
-)
-struct mcSkin (
-
-	fn getSource = getSourceFileName(), --get path of this script
-	fn getBoneByName mod_obj name =
-	(
-		local bones_count = skinOps.GetNumberBones mod_obj
-		local bone_names= for i=1 to bones_count collect skinOps.GetBoneName mod_obj i 0
-		return (findItem bone_names "bone_body_01") -- return bone num
-	),
-	fn addBoneByName mod_obj name =
-	(
-		local root_bone = getNodeByName "bone_body_01"
-		if root_bone == undefined do return 0
-		skinOps.addBone mod_obj root_bone 1
-		return (mcSkin.getBoneByName mod_obj "bone_body_01") -- return bone num
-	),
-	fn wpnSetupSkin = --WEAPONS SKIN SETUP
-	(
-		max modify mode
-		local obj = selection[1]
-		if obj == undefined do return false
-		local mod_obj = modPanel.getCurrentObject()-- select multiple objects to multi unwrap
-		if classof mod_obj != Skin do 
-		(
-			mod_obj = (Skin())
-			modPanel.addModToSelection mod_obj
-		)
-		--enter to skin mode
-		subobjectLevel = 1
-		toolMode.coordsys #view
-		mod_obj.filter_vertices = on --verts enabled on
-		--setup skin
-		mod_obj.effect = 1
-		local bones_count = skinOps.GetNumberBones mod_obj
-		local root_bone_num = 0
-		if bones_count == 0 
-		then
-		(
-			root_bone_num = mcSkin.addBoneByName mod_obj "bone_body_01" --if no bones assinged
-			if root_bone_num == 0 do return false
-		)
-		else
-		(
-			root_bone_num = mcSkin.getBoneByName mod_obj "bone_body_01" 
-			if root_bone_num == 0 do root_bone_num = mcSkin.addBoneByName mod_obj "bone_body_01"
-			if root_bone_num == 0 do return false
-		)
-		skinOps.SelectBone mod_obj root_bone_num  --select bone 1
-		max select all --select all vertices
-		skinOps.setWeight mod_obj 1 --set selected verts to veight 1
-		mod_obj.bone_Limit = 4
-		--exit skin mode
-		subobjectLevel = 0
-		obj.parent = (getNodeByName "bone_body_01")
-		return OK
-	)
-	/*<end>*/
-)
-
-struct mcMax (
-
-	fn getSource = getSourceFileName(), --get path of this script
-	fn alignObject = (max align)
-	/*<end>*/
-)
-
-struct mcShell (
-
-	fn getSource = getSourceFileName(), --get path of this script
-	fn openApp app_name = (
-		
-		--format "app name:%\n" app_name
-		case app_name of(
-		
-			"calc": ShellLaunch "C:\\WINDOWS\\system32\\calc.exe"
 		)
 	)
 	/*<end>*/

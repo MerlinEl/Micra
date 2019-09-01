@@ -2,7 +2,7 @@
 <USER val="Default">
   <Properties_1>
     <mc_Dialog_A active="true" pos="[1572,818]" size="[148,66]" title="Menu:" btnCount="[6,2]" />
-    <mc_Dialog_B active="true" pos="[1570,280]" size="[148,162]" title="Object:" btnCount="[6,6]" />
+    <mc_Dialog_B active="true" pos="[1570,278]" size="[148,162]" title="Object:" btnCount="[6,6]" />
     <mc_Dialog_C active="true" pos="[1572,440]" size="[148,66]" title="Pivot:" btnCount="[6,2]" />
     <mc_Dialog_D active="true" pos="[1572,506]" size="[148,90]" title="Select:" btnCount="[6,3]" />
     <mc_Dialog_E active="false" pos="[100,843]" size="[244,42]" title="Animation:" btnCount="[10,1]" />
@@ -60,10 +60,8 @@
     <btn_B5 action="Reset_Transform" icon="33" />
     <btn_B7 action="Move_To_Ground" icon="54" />
     <btn_B8 action="Clone_2" icon="62" />
-    <btn_B9 action="Rename" icon="67" />
     <btn_B10 action="Align" icon="63" />
     <btn_B11 action="Repair_Object" icon="76" />
-    <btn_B12 action="Color_Palete" icon="66" />
     <btn_B13 action="Group_Create" icon="70" />
     <btn_B14 action="Group_Open" icon="73" />
     <btn_B15 action="Group_Close" icon="74" />
@@ -198,5 +196,7 @@
     <btn_B34 action="Align_Objects_3D" icon="270" />
     <btn_J6 action="Align_Objects_3D" icon="270" />
     <btn_J4 action="Patcher" icon="109" />
+    <btn_B12 action="Rename" icon="67" />
+    <btn_B9 action="Create_PolygonGrid" icon="274" />
   </Buttons>
 </USER>

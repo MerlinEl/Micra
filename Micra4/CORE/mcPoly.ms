@@ -139,12 +139,12 @@ struct MICRA_POLY
 		)
 		#(vert, dist)
 	),
-	fn isBorderEdge obj e_index = (
+	fn isBorderEdge obj e_index = ( --if edge have one neighbour face is border edge
 	
 		local efaces = polyop.getFacesUsingEdge obj e_index
 		efaces.numberset == 1
 	),
-	fn getBorderEdgesFromVertex obj v_index = (
+	fn getBorderEdgesFromVertex obj v_index = ( 
 		
 		local edges = polyop.getEdgesUsingVert obj v_index
 		for ei in edges where isBorderEdge obj ei collect ei	
@@ -315,8 +315,104 @@ struct MICRA_POLY
 			local v3 = v2 + center
 			polyOp.setVert obj v v3
 		)
+	),
+	/**
+	*@Author	Martijn(magicm)
+	*@Exceptions	negative or non-uniform objects scale
+	*@Examples
+		mcAction.alignPivotToObject $Box01 $Point01
+		mcAction.alignPivotToObject $Box02 (matrix3 1)
+	*/
+	fn alignPivotToObject src_obj trg_obj = (
+		
+		-- Get matrix from object
+		if classOf trg_obj != matrix3 then trg_obj = trg_obj.transform
+		-- Store child transforms
+		local ChldTms = in coordSys trg_obj ( for Chld in src_obj.children collect Chld.transform )
+		-- Current offset transform matrix
+		local TmScale = scaleMatrix src_obj.objectOffsetScale
+		local TmRot = src_obj.objectOffsetRot as matrix3
+		local TmPos = transMatrix src_obj.objectOffsetPos
+		local TmOffset = TmScale * TmRot * TmPos
+		-- New offset transform matrix
+		TmOffset *= src_obj.transform * inverse trg_obj
+		-- Apply matrix
+		src_obj.transform = trg_obj
+		-- Restore offsets
+		src_obj.objectOffsetPos = TmOffset.translation
+		src_obj.objectOffsetRot = TmOffset.rotation
+		src_obj.objectOffsetScale = TmOffset.scale
+		-- Restore child transforms
+		for i = 1 to src_obj.children.count do src_obj.children[i].transform = ChldTms[i] * inverse trg_obj * src_obj.transform
+	),
+	fn alignPivotToFace obj face_index = (
+	
+		if classOf obj != Editable_Poly or face_index == undefined do return false  
+		local face_normal = polyop.getFaceNormal obj face_index
+		local face_center = polyop.getFaceCenter obj face_index
+		--rotate by face normal
+		local rot = (matrixFromNormal face_normal*obj.transform) as quat
+		local rotValInv = inverse rot
+		animate off in coordsys local obj.rotation*= rotValInv
+		obj.objectoffsetrot*=RotValInv
+		obj.objectoffsetpos*=RotValInv
+		--move pivot ot face center
+		obj.pivot = face_center
+	),
+	fn getFaceCornerVertices obj face_index = ( --get three vertices from face (1 = corner , 2 = first handle, 3 = second handle)
+	
+		if not (isPoly obj) do return false
+		local face_vertices = polyOp.getVertsUsingFace obj face_index
+		if face_vertices.numberset == 3 do return face_vertices as array --is triangle face
+		local vertex_index = (face_vertices as array)[1]
+		local vetrex_edges = polyOp.getEdgesUsingVert obj vertex_index --two or more edges
+		local face_edges = polyop.getEdgesUsingFace obj face_index
+		local two_edges = vetrex_edges*face_edges --remove edge(s) whch is not in face
+		local edges_verts = polyOp.getVertsUsingEdge obj two_edges
+		edges_verts = (edges_verts - #{vertex_index}) as array
+		#(vertex_index, edges_verts[1], edges_verts[2])
 	)
 	/*<end>*/
 )
 --create instance
 Global mcPoly = mcStructMan.instanceStructure MICRA_POLY "mcPoly"
+
+
+
+	/*
+	fn alignPivotToFace obj face_index way:#up = ( --by miauu (not works)
+		  
+		local c = polyop.getfacecenter obj face_index
+		local n = polyop.getfacenormal obj face_index
+		local ftm = translate (matrixfromnormal n) c
+		case type of 
+		(
+			#x_up: prerotateY ftm -90
+			#y_up: prerotateX ftm 90
+		)
+
+		itm = ftm*(inverse obj.transform)
+		obj.transform = ftm
+		obj.objectOffsetPos *= inverse itm
+		obj.objectOffsetRot *= inverse itm.rotation
+		obj.transform
+	)
+	
+	fn alignPivotToSelectedFace = (
+	
+		local obj = (selection as array)[1]
+		if obj == undefined or  classOf obj != Editable_Poly do return false
+		local face_index = (polyop.getFaceSelection obj as Array)[1]	 
+		if face_index == undefined do return false  
+		local face_normal = in coordsys obj  (polyop.getFaceNormal obj face_index) 
+		local world_up_vector = [0,0,1] 
+		local right_vector = normalize (cross world_up_vector face_normal) 
+		local up_vector = normalize ( cross right_vector face_normal )
+		local tm = matrix3 right_vector up_vector face_normal [0,0,0] 
+		local point_helper=point()
+		point_helper.transform = tm
+		point_helper.position = polyOp.getFaceCenter obj face_index
+		mcAction.alignPivotToObject obj point_helper
+		delete point_helper
+	)
+	*/

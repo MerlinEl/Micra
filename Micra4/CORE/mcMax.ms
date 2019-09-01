@@ -1,5 +1,5 @@
 --------------------------------------------------------------------------------
-/* mcInterface by Orien 2019 */
+/* mcMax by Orien 2019 */
 --------------------------------------------------------------------------------
 /*
 *@Used Structures
@@ -15,14 +15,15 @@
 	undefined
 *
 */
-struct MICRA_INTERFACE_STRUCTURE	(
+struct MICRA_MAX_STRUCTURE	(
 	
 	--variables
 
 	
 	--functions
 	fn getSource = getSourceFileName(), --get path of this script
+	fn alignObject = (max align)
 	/*<end>*/
 )	
  --create instance
-Global mcInterface = mcStructMan.instanceStructure MICRA_INTERFACE_STRUCTURE "mcInterface"
+Global mcMax = mcStructMan.instanceStructure MICRA_MAX_STRUCTURE "mcMax"

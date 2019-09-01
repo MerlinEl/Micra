@@ -134,32 +134,32 @@
     <Set_Object_Props icon="253" cmd="mcAction.setObjectProps()" tooltip="Set_Object_Props" />
   </Experimental>
   <Modifiers>
-    <Bend icon="19" cmd="mcAction.add_modifier #Bend" tooltip="Bend" />
-    <CameraMap icon="75" cmd="mcAction.add_modifier #CameraMap" tooltip="CameraMap" />
-    <Conform icon="93" cmd="mcAction.add_modifier #Conform" tooltip="Conform" />
-    <Extrude icon="18" cmd="mcAction.add_modifier #Extrude" tooltip="Extrude" />
-    <Lathe icon="17" cmd="mcAction.add_modifier #Lathe" tooltip="Lathe" />
-    <mbFracture icon="120" cmd="mcAction.add_modifier #mbFracture" tooltip="mbFracture" />
-    <Melt icon="43" cmd="mcAction.add_modifier #Melt" tooltip="Melt" />
-    <MeshSmooth icon="8" cmd="mcAction.add_modifier #MeshSmooth" tooltip="MeshSmooth" />
-    <Mirror icon="64" cmd="mcAction.add_modifier #Mirror" tooltip="Mirror" />
-    <Noise icon="21" cmd="mcAction.add_modifier #Noise" tooltip="Noise" />
-    <Projection icon="65" cmd="mcAction.add_modifier #Projection" tooltip="Projection" />
-    <Push icon="25" cmd="mcAction.add_modifier #Push" tooltip="Push" />
-    <Relax icon="91" cmd="mcAction.add_modifier #Relax" tooltip="Relax" />
-    <ResetXForm icon="16" cmd="mcAction.add_modifier #ResetXForm" tooltip="ResetXForm" />
-    <Shell icon="44" cmd="mcAction.add_modifier #Shell" tooltip="Shell" />
-    <Skew icon="23" cmd="mcAction.add_modifier #Skew" tooltip="Skew" />
-    <Slice icon="11" cmd="mcAction.add_modifier #Slice" tooltip="Slice" />
-    <Skin icon="130" cmd="mcAction.add_modifier #Skin" tooltip="Skin" />
-    <STL_Check icon="56" cmd="mcAction.add_modifier #StlCheck" tooltip="STL Check" />
-    <Stretch icon="24" cmd="mcAction.add_modifier #Stretch" tooltip="Stretch" />
-    <Symmetry icon="6" cmd="mcAction.add_modifier #Symmetry" tooltip="Symmetry" />
-    <Taper icon="20" cmd="mcAction.add_modifier #Taper" tooltip="Taper" />
-    <Tessellate icon="26" cmd="mcAction.add_modifier #Tessellate" tooltip="Tessellate" />
-    <Twist icon="22" cmd="mcAction.add_modifier #Twist" tooltip="Twist" />
-    <Unwrap_UVW icon="46" cmd="mcAction.add_modifier #Unwrap_UVW" tooltip="Unwrap UVW" />
-    <UvwMap icon="45" cmd="mcAction.add_modifier #UvwMap" tooltip="UvwMap" />
+    <Bend icon="19" cmd="mcAction.addModToSel #Bend" tooltip="Bend" />
+    <CameraMap icon="75" cmd="mcAction.addModToSel #CameraMap" tooltip="CameraMap" />
+    <Conform icon="93" cmd="mcAction.addModToSel #Conform" tooltip="Conform" />
+    <Extrude icon="18" cmd="mcAction.addModToSel #Extrude" tooltip="Extrude" />
+    <Lathe icon="17" cmd="mcAction.addModToSel #Lathe" tooltip="Lathe" />
+    <mbFracture icon="120" cmd="mcAction.addModToSel #mbFracture" tooltip="mbFracture" />
+    <Melt icon="43" cmd="mcAction.addModToSel #Melt" tooltip="Melt" />
+    <MeshSmooth icon="8" cmd="mcAction.addModToSel #MeshSmooth" tooltip="MeshSmooth" />
+    <Mirror icon="64" cmd="mcAction.addModToSel #Mirror" tooltip="Mirror" />
+    <Noise icon="21" cmd="mcAction.addModToSel #Noise" tooltip="Noise" />
+    <Projection icon="65" cmd="mcAction.addModToSel #Projection" tooltip="Projection" />
+    <Push icon="25" cmd="mcAction.addModToSel #Push" tooltip="Push" />
+    <Relax icon="91" cmd="mcAction.addModToSel #Relax" tooltip="Relax" />
+    <ResetXForm icon="16" cmd="mcAction.addModToSel #ResetXForm" tooltip="ResetXForm" />
+    <Shell icon="44" cmd="mcAction.addModToSel #Shell" tooltip="Shell" />
+    <Skew icon="23" cmd="mcAction.addModToSel #Skew" tooltip="Skew" />
+    <Slice icon="11" cmd="mcAction.addModToSel #Slice" tooltip="Slice" />
+    <Skin icon="130" cmd="mcAction.addModToSel #Skin" tooltip="Skin" />
+    <STL_Check icon="56" cmd="mcAction.addModToSel #StlCheck" tooltip="STL Check" />
+    <Stretch icon="24" cmd="mcAction.addModToSel #Stretch" tooltip="Stretch" />
+    <Symmetry icon="6" cmd="mcAction.addModToSel #Symmetry" tooltip="Symmetry" />
+    <Taper icon="20" cmd="mcAction.addModToSel #Taper" tooltip="Taper" />
+    <Tessellate icon="26" cmd="mcAction.addModToSel #Tessellate" tooltip="Tessellate" />
+    <Twist icon="22" cmd="mcAction.addModToSel #Twist" tooltip="Twist" />
+    <Unwrap_UVW icon="46" cmd="mcAction.addModToSel #Unwrap_UVW" tooltip="Unwrap UVW" />
+    <UvwMap icon="45" cmd="mcAction.addModToSel #UvwMap" tooltip="UvwMap" />
   </Modifiers>
   <Mapping>
     <Weld_Treshold_UVW icon="1" cmd="mcAction.setWeldTresholdUVW()" tooltip="Weld Treshold UVW" />

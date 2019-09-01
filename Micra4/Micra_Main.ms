@@ -297,7 +297,7 @@ struct MICRA_STRUCTURE (
 		format "% > loadStructures > total [ % ]\n" version cnt
 		
 		--> Load Actions
-		mcFile.fileInVersion "Struct_Action"
+		mcFile.fileInVersion "Micra_Actions"
 		mcFile.fileInVersion "Actions_Editor"
 		
 		-->Load DotNet Components

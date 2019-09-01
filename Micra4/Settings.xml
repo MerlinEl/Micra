@@ -15,6 +15,9 @@
     <mcMath val="on" />
     <mcString val="on" />
     <mcDate val="on" />
+    <mcShell val="on" />
+    <mcInterface val="on" />
+    <mcMax val="on" />
     <!--dependent classes-->
     <mcMaterial val="on" />
     <mcColor val="on" info="color conversion tool" />
@@ -44,6 +47,7 @@
     <mcCall val="on" />
     <mcMsx val="on" />
     <mcNet val="on" info="Internet and Network Functions" />
+    <mcSkin val="on" />
     <mcActionsTukej val="on" />
   </Structures>
   <Version val="All registred Micra's Scripts">
@@ -107,7 +111,7 @@
     <Space val="1.03" />
     <Spline_Magnet val="0.05" />
     <Soft_Selection val="0.01" />
-    <Struct_Action val="0.05" />
+    <Micra_Actions val="0.05" />
     <Time_Break val="0.01" />
     <Transformer val="0.09" />
     <UE_Model_Importer val="0.07" />
