@@ -2,12 +2,12 @@
 <SETTINGS>
   <Micra>
     <born val="04.25.2006" />
-    <version val="4.9" />
+    <version val="4.91" />
   </Micra>
   <Structures val="All registred Micra's Structures">
     <!--independent classes-->
     <mcStructMan val="on" info="structure manager" />
-	<mcProgLog val="on" info="progressbar with log" />
+    <mcProgLog val="on" info="progressbar with log" />
     <mcWinMsg val="on" />
     <mcWin32 val="on" info="denisT great work!" />
     <mcUser32 val="on" info="denisT great work!" />

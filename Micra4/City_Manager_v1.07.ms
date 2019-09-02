@@ -759,30 +759,37 @@ rollout mcCityManDialog "" width:500 height:920
 	on btn_zoom_selected pressed do (if selection.count > 0 do max zoomext sel)
 	
 	on btn_export_selection pressed  do
-	(
-		--get selecten nodes fom list
-		local sel_names = getSelectedItems cbx_node_list
-		if sel_names.count == 0 do return false
-		--backup selection
-		max create mode
-		local old_selection = selection as array
-		clearSelection()
-		--select nodes
-		local export_nodes = #()
-		for n in sel_names do 
-		(
-			--format " select node:%\n" n
-			local the_node = getNodeByName n 
-			if classOf the_node != LS3DModel do continue
-			export_nodes = append export_nodes the_node
-		)
-		if export_nodes.count == 0 do return false
-		select export_nodes
-		format "exporting(%) nodes:%\n" export_nodes.count export_nodes
-		--gLS3DSmartExport.exportScene()
-		macros.run "LS3D Engine" "LS3DSelExport"
-		select old_selection
-	)
+    (
+        --get selecten nodes fom list
+        local sel_names = getSelectedItems cbx_node_list
+        if sel_names.count == 0 do return false
+        --backup selection
+        local old_sublevel = if subObjectLevel == undefined then -1 else subObjectLevel
+        max create mode
+        local old_selection = selection as array
+        clearSelection()
+        --select nodes
+        local export_nodes = #()
+        for n in sel_names do
+        (
+            --format " select node:%\n" n
+            local the_node = getNodeByName n
+            if classOf the_node != LS3DModel do continue
+            export_nodes = append export_nodes the_node
+        )
+        if export_nodes.count == 0 do return false
+        select export_nodes
+        format "exporting(%) nodes:%\n" export_nodes.count export_nodes
+        --gLS3DSmartExport.exportScene()
+        macros.run "LS3D Engine" "LS3DSelExport"
+        select old_selection
+        if old_sublevel > -1 do (
+        
+            max modify mode
+            subObjectLevel = old_sublevel
+        )
+    )
+	
 	--get node from selection
 	on btn_get_nodes pressed do
 	(
