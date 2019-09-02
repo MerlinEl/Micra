@@ -8,18 +8,18 @@
     <mc_Dialog_E active="false" pos="[1776,1171]" size="[244,42]" title="Animation:" btnCount="[10,1]" />
     <mc_Dialog_F active="true" pos="[1975,210]" size="[196,90]" title="Modifiers:" btnCount="[8,3]" />
     <mc_Dialog_G active="true" pos="[2171,598]" size="[148,114]" title="Modify:" btnCount="[6,4]" />
-    <mc_Dialog_H active="true" pos="[2172,771]" size="[148,90]" title="Materials:" btnCount="[6,3]" />
+    <mc_Dialog_H active="true" pos="[2172,795]" size="[148,66]" title="Materials:" btnCount="[6,2]" />
     <mc_Dialog_I active="true" pos="[2172,927]" size="[148,66]" title="Programming:" btnCount="[6,2]" />
     <mc_Dialog_J active="true" pos="[1792,1236]" size="[532,42]" title="Experimental:" btnCount="[22,1]" />
   </Properties_1>
   <Properties_2>
     <mcMicraDialog active="true" pos="[2171,214]" size="[148,66]" title="" />
-    <mcCustomizeDialog active="false" pos="[1700,340]" size="[224,404]" title="" />
+    <mcCustomizeDialog active="false" pos="[1160,400]" size="[224,404]" title="" />
     <mcProgramDialog active="undefined" pos="[2298,0]" size="[256,232]" title="" />
     <mcisoDialog active="false" pos="[181,152]" size="[140,400]" title="" />
     <mcModifierDialog active="undefined" pos="[100,100]" size="[400,400]" title="" />
     <mcIconMakerDialog active="false" pos="[700,430]" size="[730,500]" title="" />
-    <mcDeepIsolateDialog active="false" pos="[1118,86]" size="[84,44]" title="" />
+    <mcDeepIsolateDialog active="false" pos="[1770,240]" size="[84,44]" title="" />
     <mcMoveTowardsDialog active="true" pos="[441,377]" size="[200,76]" title="" />
     <mcClonerDialog active="true" pos="[1062,309]" size="[164,296]" title="" />
     <mcRenameDialog active="true" pos="[265,280]" size="[224,312]" title="" />
@@ -221,5 +221,6 @@
     <btn_J16 action="Asset_Builder" icon="273" />
     <btn_B12 action="Rename" icon="67" />
     <btn_B9 action="Create_PolygonGrid" icon="274" />
+    <btn_H3 action="Quick_Materials" icon="275" />
   </Buttons>
 </USER>
