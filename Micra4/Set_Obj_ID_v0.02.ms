@@ -69,12 +69,12 @@ rollout mcObjIDDialog "" width:144 height:84
 			local obj = sel[1]
 			if classOf obj != Editable_Poly do return false
 			local fsel = polyOp.getFaceSelection obj
-			polyop.setFaceMatID obj fsel id	
+			undo "Set Face(s) Material ID" on polyop.setFaceMatID obj fsel id	
 		)
-		else if sel.count != 0 do
-		(
-			for i in sel where classOf i == Editable_Poly do
-			(
+		else if sel.count != 0 do (
+			
+			undo "Set Object(s) Material ID" on  for i in sel where classOf i == Editable_Poly do (
+				
 				local fcount = i.faces.count
 				if fcount != 0 do polyop.setFaceMatID i #{1..fcount} id
 			)

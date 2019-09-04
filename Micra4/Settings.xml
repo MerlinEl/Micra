@@ -2,7 +2,7 @@
 <SETTINGS>
   <Micra>
     <born val="04.25.2006" />
-    <version val="4.94" />
+    <version val="4.95" />
   </Micra>
   <Structures val="All registred Micra's Structures">
     <!--independent classes-->
@@ -106,7 +106,7 @@
     <Manage_Profiles val="0.06" />
     <Script_Manager val="0.14" />
     <Send_UVW_To_Ps val="0.03" />
-    <Set_Obj_ID val="0.02" />
+    <Set_Obj_ID val="0.03" />
     <Skin_Tool val="0.01" />
     <Space val="1.03" />
     <Spline_Magnet val="0.05" />
