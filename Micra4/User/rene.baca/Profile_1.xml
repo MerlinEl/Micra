@@ -14,7 +14,7 @@
   </Properties_1>
   <Properties_2>
     <mcMicraDialog active="true" pos="[2171,214]" size="[148,66]" title="" />
-    <mcCustomizeDialog active="false" pos="[1160,400]" size="[224,404]" title="" />
+    <mcCustomizeDialog active="false" pos="[660,410]" size="[224,404]" title="" />
     <mcProgramDialog active="undefined" pos="[2298,0]" size="[256,232]" title="" />
     <mcisoDialog active="false" pos="[181,152]" size="[140,400]" title="" />
     <mcModifierDialog active="undefined" pos="[100,100]" size="[400,400]" title="" />
@@ -60,7 +60,6 @@
     <btn_B5 action="Reset_Transform" icon="33" />
     <btn_B7 action="Move_To_Ground" icon="54" />
     <btn_B8 action="Clone_2" icon="62" />
-    <btn_B10 action="Align" icon="63" />
     <btn_B11 action="Repair_Object" icon="76" />
     <btn_B13 action="Group_Create" icon="70" />
     <btn_B14 action="Group_Open" icon="73" />
@@ -222,5 +221,6 @@
     <btn_B12 action="Rename" icon="67" />
     <btn_B9 action="Create_PolygonGrid" icon="274" />
     <btn_H3 action="Quick_Materials" icon="275" />
+    <btn_B10 action="Offset_Rotate_Object" icon="276" />
   </Buttons>
 </USER>
