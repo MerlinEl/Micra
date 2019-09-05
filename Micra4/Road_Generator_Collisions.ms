@@ -364,8 +364,8 @@ lh_02_little_italy_block_h_roads_coll
 	fn init = (
 		
 		roadGeneratorCollisionDialog.title = form_title
-		if superClassOf roGenStruct != StructDef do runLocalScript generator_struct
-		if superClassOf roGenStruct != StructDef do (
+		if superClassOf roGenStruct != ::StructDef do runLocalScript generator_struct
+		if superClassOf roGenStruct != ::StructDef do (
 		
 			messageBox "Collisions can't be created\n.Unable to find Road Structures." title:form_title
 			destroyDialog roadGeneratorCollisionDialog

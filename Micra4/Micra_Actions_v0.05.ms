@@ -2591,7 +2591,7 @@ struct mcCreate (
 		local lines    = getGridMajorLines()
 		local gname    = uniqueName "Grid_Polygon_"
 		local new_grid
-		undo label:"Create 3P Grid" on new_grid = grid length:150 width:150 grid:space transform:tm name:gname wirecolor:black --isSelected:on
+		undo label:"Create 3P Grid" on new_grid = grid length:1500 width:1500 grid:space transform:tm name:gname wirecolor:black --isSelected:on
 		Try (ActiveGrid = new_grid) Catch()
 		Toolmode.coordsys #Grid -- change view coordinates to grid
 	),

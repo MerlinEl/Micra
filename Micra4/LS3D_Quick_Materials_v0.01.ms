@@ -107,8 +107,14 @@ rollout mcQuickMaterialsDialog "Quick Materials:" width:288 height:288
 		mod_uvw.utile = u_tile	--length is in generic units
 		mod_uvw.vtile = v_tile	--width is in generic units
 		modPanel.addModToSelection  mod_matid	
-		if chk_collapse.checked do maxOps.CollapseNodeTo obj 1 true
-		if sublevel != undefined do subobjectLevel = sublevel
+		if chk_collapse.checked then(
+			
+			maxOps.CollapseNodeTo obj 1 true
+			
+		) else if sublevel != undefined do (
+			
+			subobjectLevel = sublevel
+		)
 	)
 	fn stretchBitmapTo bm w h = (
 		
