@@ -126,7 +126,7 @@ rollout LS3DModelManagerDialog "LS3D Model Manager v1.0" width:764 height:284 (
 		if (asset_name.count == 0) do ((format "Undefined Asset Name! [Micra] \n"); return false)
 		local import_path = edt_import.text
 		if (import_path.count == 0) do ((format "Undefined Import Path! [Micra] \n"); return false)
-		format "import file:%\n" ((import_path+"\\"+asset_name+".FBX"))littleitaly_street_01
+		format "import file:%\n" ((import_path+"\\"+asset_name+".FBX"))
 		importfile (import_path+"\\"+asset_name+".FBX") #noPrompt using:FBXIMP
 	)
 	
