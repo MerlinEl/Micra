@@ -38,13 +38,13 @@
     <mcColorPaleteDialog active="false" pos="[2304,236]" size="[244,60]" title="" />
     <mcSelVertsInXDialog active="undefined" pos="[100,100]" size="[100,100]" title="" />
     <mcELOpDialog active="true" pos="[2785,219]" size="[220,60]" title="" />
-    <mcObjIDDialog active="true" pos="[2197,1004]" size="[100,164]" title="" />
+    <mcObjIDDialog active="true" pos="[2173,1003]" size="[144,124]" title="" />
     <mcRenderToTextureModDialog active="undefined" pos="[100,100]" size="[100,100]" title="" />
     <mcSendUVWToPsDialog active="true" pos="[76,244]" size="[148,212]" title="" />
     <mcRotateObjectDialog active="undefined" pos="[100,100]" size="[100,100]" title="" />
     <mcViewportRecorderDialog active="true" pos="[100,100]" size="[316,124]" title="" />
     <mcGifCompillerDialog active="undefined" pos="[100,100]" size="[100,100]" title="" />
-    <mcScriptManDialog active="true" pos="[122,284]" size="[400,624]" title="" />
+    <mcScriptManDialog active="true" pos="[1503,428]" size="[400,624]" title="" />
     <mcColorPickerDialog active="true" pos="[560,420]" size="[328,276]" title="" />
     <mcQuickColorPickerDialog active="undefined" pos="[100,100]" size="[100,100]" title="" />
     <mcInterfaceColorDilaog active="undefined" pos="[1445,427]" size="[299,130]" title="" />

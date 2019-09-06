@@ -138,7 +138,7 @@
     <Patcher2P val="0.05" />
     <LS3D_Asset_Builder val="0.06" />
     <LS3D_Quick_Materials val="0.02" />
-    <FBX_Quick_Import_Export val="0.01" />
+    <FBX_Quick_Import_Export val="0.02" />
   </Version>
   <SystemFiles val="Micra's Settings Files">
     <Actions val="Contains all accesible Micra's actions" />

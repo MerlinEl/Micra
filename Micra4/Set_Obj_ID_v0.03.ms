@@ -5,26 +5,26 @@ Global mcSetFaceIDCalbacks
 
 
 if mcObjIDDialog != undefined do destroyDialog mcObjIDDialog
-rollout mcObjIDDialog "" width:100 height:164
+rollout mcObjIDDialog "" width:144 height:124
 (
 	--Locals:----------------------------------------
 	local dMove = false, DmPos
 	-------------------------------------------------
-	spinner 'spn_id' "" pos:[8,24] width:80 height:16 enabled:true range:[0,1000,0] type:#integer scale:1 align:#left
-	GroupBox 'grp1' "Material ID:" pos:[4,4] width:92 height:128 align:#left
-	button 'btn_00' "0" pos:[8,108] width:24 height:16 align:#left
-	button 'btn_01' "1" pos:[8,88] width:24 height:16 align:#left
-	button 'btn_02' "2" pos:[36,88] width:24 height:16 align:#left
-	button 'btn_03' "3" pos:[64,88] width:24 height:16 align:#left
-	button 'btn_04' "4" pos:[8,68] width:24 height:16 align:#left
-	button 'btn_05' "5" pos:[36,68] width:24 height:16 align:#left
-	button 'btn_06' "6" pos:[64,68] width:24 height:16 align:#left
-	button 'btn_07' "7" pos:[8,48] width:24 height:16 align:#left
-	button 'btn_08' "8" pos:[36,48] width:24 height:16 align:#left
-	button 'btn_09' "9" pos:[64,48] width:24 height:16 align:#left
-	button 'btn_get_sel' "Get" pos:[52,136] width:44 height:24 align:#left
-	button 'btn_set_sel' "Set" pos:[4,136] width:44 height:24 align:#left
-	button 'btn_Clear' "Clear" pos:[36,108] width:52 height:16 align:#left
+	spinner 'spn_id' "" pos:[8,20] width:80 height:16 enabled:true range:[0,1000,0] type:#integer scale:1 align:#left
+	GroupBox 'grp1' "Material ID:" pos:[4,4] width:136 height:116 align:#left
+	button 'btn_00' "0" pos:[8,100] width:24 height:16 align:#left
+	button 'btn_01' "1" pos:[8,80] width:24 height:16 align:#left
+	button 'btn_02' "2" pos:[36,80] width:24 height:16 align:#left
+	button 'btn_03' "3" pos:[64,80] width:24 height:16 align:#left
+	button 'btn_04' "4" pos:[8,60] width:24 height:16 align:#left
+	button 'btn_05' "5" pos:[36,60] width:24 height:16 align:#left
+	button 'btn_06' "6" pos:[64,60] width:24 height:16 align:#left
+	button 'btn_07' "7" pos:[8,40] width:24 height:16 align:#left
+	button 'btn_08' "8" pos:[36,40] width:24 height:16 align:#left
+	button 'btn_09' "9" pos:[64,40] width:24 height:16 align:#left
+	button 'btn_get_sel' "Get" pos:[92,44] width:44 height:24 align:#left
+	button 'btn_set_sel' "Set" pos:[92,16] width:44 height:24 align:#left
+	button 'btn_Clear' "Clear" pos:[36,100] width:52 height:16 align:#left
 	--button 'btn_close' "*" pos:[92,4] width:12 height:12 align:#left
 	fn getFaceID =
 	(
