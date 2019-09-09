@@ -31,8 +31,8 @@ rollout mcCityManDialog "" width:500 height:920
 	button 'btn_zoom_selected' "Focus" pos:[180,708] width:70 height:20 toolTip:"Zoom to Selection" align:#left
 	button 'btn_init' "UPDATE" pos:[4,4] width:492 height:16 toolTip:"Get scene data..." align:#left
 	GroupBox 'grp7' "Actions:" pos:[4,764] width:240 height:152 align:#left
-	button 'btn_move_colls_to_layers' "Distribute Collisions" pos:[256,828] width:112 height:20 toolTip:"Move each Collision in to separate Layer" align:#left
-	button 'btn_sel_colls' "Select Collisions" pos:[256,804] width:112 height:20 toolTip:"Select All Collision" align:#left
+	button 'btn_move_colls_to_layers' "Distribute Collisions" pos:[256,852] width:112 height:20 toolTip:"Move each Collision in to separate Layer" align:#left
+	button 'btn_sel_colls' "Select Collisions" pos:[256,804] width:112 height:20 toolTip:"Select All Collisions" align:#left
 	button 'btn_select_visible_nodes' "Select Visible Nodes" pos:[12,804] width:112 height:20 toolTip:"Select All visible nodes" align:#left
 	button 'btn_select_empty_objects' "Select Empty Objects" pos:[128,804] width:112 height:20 toolTip:"Select All Editable_Poly objects without geometry" align:#left
 	button 'btn_filter_visible_nodes' "Filter Visible Nodes" pos:[12,826] width:112 height:20 toolTip:"Filter visible nodes from selection" align:#left
@@ -45,7 +45,7 @@ rollout mcCityManDialog "" width:500 height:920
 	button 'btn_unhide_sel' "Unhide Selected" pos:[128,848] width:112 height:20 toolTip:"Unhide Selected Objects" align:#left
 	GroupBox 'grp13' "Collisions:" pos:[252,764] width:244 height:152 align:#left
 	button 'btn_generate_coll' "Gen Simple Collisions" pos:[380,780] width:112 height:40 toolTip:"Genarate simple collisions from selection, ID:1, " align:#left
-	button 'btn_generate_terrain_coll' "Gen Terrain Collisions" pos:[380,824] width:112 height:40 toolTip:"Genarate terrain collisions from selection, ID:Auto, " align:#left enabled:false
+	button 'btn_generate_terrain_coll' "Gen Terrain Collisions" pos:[380,824] width:112 height:40 enabled:false toolTip:"Genarate terrain collisions from selection, ID:Auto, " align:#left
 	button 'btn_generate_roads_coll' "Gen Road Collisions" pos:[380,868] width:112 height:40 toolTip:"Genarate roads collisions from selection, ID:Auto, " align:#left
 	label 'lbl_sh' "Show - Hide objects which contains a Word:" pos:[12,872] width:220 height:14 align:#left
 	button 'btn_show_objs' "Show" pos:[13,892] width:56 height:17 toolTip:"Unhide Objects By Name" across:3 align:#left
@@ -53,8 +53,8 @@ rollout mcCityManDialog "" width:500 height:920
 	edittext 'edt_sh_name' "" pos:[132,892] width:104 height:16 align:#left
 	button 'btn_sel_geo_nodes' "G" pos:[204,32] width:20 height:20 toolTip:"Select Geometry Nodes" align:#left
 	button 'btn_sel_coll_nodes' "C" pos:[224,32] width:20 height:20 toolTip:"Select Collision Nodes" align:#left
-	label 'lbl_dcoll' "Collision Type:" pos:[260,860] width:112 height:20 toolTip:"Move each Collision in to separate Layer" align:#left
-	dropdownList 'ddl_collision_type' "" pos:[256,884] width:116 height:21 items:#("Two Nodes", "Single Node") align:#left
+	dropdownList 'ddl_collision_type' "Collision Type:" pos:[256,876] width:116 height:40 items:#("Two Nodes", "Single Node") align:#left
+	button 'btn_sel_vis_colls' "Select Visible Collisions" pos:[256,828] width:112 height:20 toolTip:"Select Visible Collisions" align:#left
 	--Local variables
 	local autosel = on
 	local last_wire_color = yellow
@@ -527,9 +527,17 @@ rollout mcCityManDialog "" width:500 height:920
 		local customRoadCheck	= matchPattern obj.name pattern:"coll_custom_road*"
 		if  crossForuCheck or crossThreeCheck or roadCheck or customRoadCheck then true else false
 	)
-	fn selectCollisionsByType = (
+	fn selectCollisionsByType onlyVisisble:false = (
 		
--- 		local visible_objects = for o in objects where not o.isHidden collect o
+		local objs = #()
+		if onlyVisisble then (
+			
+			objs = for o in objects where not o.isHidden collect o
+				
+		) else (
+		
+			objs = objects	
+		)
 -- 		local colls = for o in objects where findString o.name "coll_"	!= undefined collect o
 		if not chk_sel_coll_terrain.checked and not chk_sel_coll_roads.checked do (
 			
@@ -538,7 +546,7 @@ rollout mcCityManDialog "" width:500 height:920
 				return OK
 		)
 		local colls = #()
-		for o in objects do ( --filter collisions by type
+		for o in objs do ( --filter collisions by type
 			
 			if findString o.name "coll_"	== undefined do continue
 			if chk_sel_coll_roads.checked and ( isRoadCollision o ) do  (
@@ -560,6 +568,7 @@ rollout mcCityManDialog "" width:500 height:920
 		)
 		select colls
 	)
+	
 	fn selectObjectsWithoutGeometry = (
 
 	local empty_geometry = #()
@@ -837,11 +846,12 @@ rollout mcCityManDialog "" width:500 height:920
 	(
 		callbacks.removescripts id:#micra_callbacks_cityman		
 	)
-	on btn_move_colls_to_layers pressed do ( moveCollisionsInToSeparateLayer() )
+	on btn_move_colls_to_layers pressed do (if queryBox "Distribute Collisions in to separate layers?" title:"Organize:" do moveCollisionsInToSeparateLayer() )
 	on btn_select_visible_nodes pressed do ( select(for o in objects where not o.ishidden collect o) )
 	on btn_filter_visible_nodes pressed do ( select(for o in selection where not o.ishidden collect o) )
 	on btn_generate_coll pressed do generateSimpleCollisions()
 	on btn_sel_colls pressed do selectCollisionsByType()
+	on btn_sel_vis_colls pressed do selectCollisionsByType onlyVisisble:true
 	on btn_select_empty_objects pressed do selectObjectsWithoutGeometry()
 	on btn_inspect_nodes pressed do inspectNodesPath()
 	on btn_unique_check pressed do checkForDupplicatedNamesInScene()

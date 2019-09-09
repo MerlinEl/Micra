@@ -20,7 +20,7 @@ rollout mcQuickMaterialsDialog "Quick Materials:" width:288 height:292
 	label 'lbl1' "Add material" pos:[16,28] width:64 height:12 align:#left
 	GroupBox 'grp1' "Set-Up:" pos:[4,4] width:280 height:284 align:#left
 	label 'lbl2' "to selected faces." pos:[192,28] width:92 height:12 align:#left
-	button 'btn_close' "Close" pos:[200,252] width:76 height:28 align:#left
+	button 'btn_unwrap' "Unwrap UVW" pos:[200,252] width:76 height:28 align:#left
 	checkbox 'chk_collapse' "collapse" pos:[96,252] width:56 height:16 checked:true align:#left
 	bitmap 'bmp_preview' "Bitmap" pos:[12,48] width:264 height:200 align:#left
 	checkbox 'chk_autoorient' "orientation auto" pos:[96,268] width:100 height:16 checked:false align:#left
@@ -220,6 +220,12 @@ rollout mcQuickMaterialsDialog "Quick Materials:" width:288 height:292
 		)
 		if classOf bm == BitMap do bmp_preview.bitmap = stretchBitmapTo bm 264 200
 	)
+	fn applyUnwrapUVW = (
+		
+			local mo = 	Unwrap_UVW ()
+			modPanel.addModToSelection mo ui:on
+			mo.edit()	
+	)
 	fn init = (
 		
 		ddl_mat_names.items = for itm in items_pattern collect itm.key
@@ -228,6 +234,6 @@ rollout mcQuickMaterialsDialog "Quick Materials:" width:288 height:292
 	on mcQuickMaterialsDialog open do init()
 	on ddl_mat_names selected sel do previewMaterial (getMatIDByName ddl_mat_names.items[ sel ])
 	on btn_apply pressed do (addTempMaterial $ ddl_mat_names.selected)
-	on btn_close pressed do (destroyDialog mcQuickMaterialsDialog)
+	on btn_unwrap pressed do (applyUnwrapUVW())
 )
 createDialog mcQuickMaterialsDialog

@@ -1,9 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <UPDATE>
-  <VERSIONS latest="4.99">
+  <VERSIONS latest="5">
     <item_1 version="4.98" date="9_9_2019_11_22_50_AM" />
     <item_2 version="4.99" date="9_9_2019_1_23_11_PM" />
-    <item_3 version="4.92" date="9_2_2019_12_54_08_PM" />
+    <item_3 version="5" date="9_9_2019_2_28_05_PM" />
     <item_4 version="4.93" date="9_2_2019_1_59_39_PM" />
     <item_5 version="4.94" date="9_2_2019_3_52_06_PM" />
     <item_6 version="4.95" date="9_4_2019_5_06_28_PM" />
