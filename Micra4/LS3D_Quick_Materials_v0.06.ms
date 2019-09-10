@@ -4,6 +4,7 @@ rollout mcQuickMaterialsDialog "Quick Materials:" width:556 height:428
 (
 	--variables and structures
 	struct MAT_ITEM (key, id, sid, tile_u, tile_v)
+	local settings_xml =  getFileNamePath (getSourceFileName()) + "coll_bourbon_table.xml"
 	local material_color_types = #(color 90 200 200, color 255 136 213, color 173 136 255)
 	local mat_items = #(
 		
@@ -267,6 +268,18 @@ rollout mcQuickMaterialsDialog "Quick Materials:" width:556 height:428
 			matchPattern itm_name pattern:pat
 		) collect itm
 	)
+	
+	fn markItem itm = (
+		
+		local hc = (dotnetClass "System.Windows.SystemColors").HighlightColor
+		itm.BackColor = drawingColor.fromArgb hc.r hc.g hc.b
+	)
+	
+	fn unmarkItem itm = (
+		
+		local cc= material_color_types[rdo_mat_type.state]
+		itm.BackColor = drawingColor.fromArgb cc.r cc.g cc.b
+	)
 
 	fn filterListView lv ignoreCase:true = (
 			
@@ -285,6 +298,8 @@ rollout mcQuickMaterialsDialog "Quick Materials:" width:556 height:428
 		if filtered_list.count == 0 do return false -- no matches found
 		lv.items.addrange filtered_list --fill list with all  matched items
 		lv.items.item[ 0 ].selected = true --select first item
+		for i=0 to lv.items.count - 1 do unmarkItem lv.items.item[ i ] --un hilight item
+		markItem lv.items.item[ 0 ] --hilight item
 	)
 	
 	fn fillListView lv items = (
@@ -339,7 +354,7 @@ rollout mcQuickMaterialsDialog "Quick Materials:" width:556 height:428
 		list_items = all_items --copy array all_items --for i = 0 to lv.Items.count-1 collect lv.Items.item[ i ] --recolect list items
 		filterListView lv
   	)
-
+	
 	fn  selectSimillarFaces =(
 		
 		local obj = selection[1]
@@ -352,7 +367,32 @@ rollout mcQuickMaterialsDialog "Quick Materials:" width:556 height:428
 		local newFaceSel = for f = 1 to obj.numfaces where polyop.getFaceMatID obj f == id collect f
 		setFaceSelection obj newFaceSel --set the selection when the loop is done!
 	)
+	--MAT_ITEM key:"grass"				id:140		sid:81		tile_u:0.4		tile_v:0.4,
+	fn parseXmlTable xml_file = (
+		
+		if not (doesFileExist settings_xml) do return false
+		local xDoc = XMLDocument()			--Create an XMLDcoument
+		xDoc.LoadXML settings_xml		--Load XML from file
+		local rNode = xDoc.GetRootNode()		--Get the Root Node THIS MUST BE CALLED!
+		local reindex_items = (rNode.GetChildren())[1].GetChildren() --Get All Reindex Keys
+		mat_items = for itm in reindex_items collect (
+			
+			local mat_name = trimRight (itm.GetAttribute "Comment") ".xml"
+			local mat_id = execute (itm.GetAttribute "VisualMatIndex")
+			local mat_sid = execute (itm.GetAttribute "SemanticMatIndex")
+			local mat_tile_u = execute (itm.GetAttribute "tile_u")
+			local mat_tile_v = execute (itm.GetAttribute "tile_v")
+			MAT_ITEM key:mat_name			id:mat_id		sid:mat_sid		tile_u:mat_tile_u		tile_v:mat_tile_v
+		)
+		format "mat_items:\n" 
+		print mat_items
+		--item.GetAllAttributes()
+	)
+	
 	fn init = (
+		
+		--materials table from xml
+		--parseXmlTable settings_xml
 		--Info materials 
 		bmp_mat_type_1.bitmap = bitmap bmp_mat_type_1.width bmp_mat_type_1.height color:material_color_types[1] 
 		bmp_mat_type_2.bitmap = bitmap bmp_mat_type_1.width bmp_mat_type_1.height color:material_color_types[2] 
@@ -365,12 +405,15 @@ rollout mcQuickMaterialsDialog "Quick Materials:" width:556 height:428
 		--List View
 		local column_names=#("Name", "ID", "SID")
 		lv_mat_names.BackColor = drawingColor.fromArgb winColor.r winColor.g winColor.b
+		--dot net controls work with the system in-focus and out-focus color schemes.
+		-- using of the system menu color as listview backcolor instead of default (or custom).
+		--lv_mat_names.BackColor = (dotnetclass "System.Drawing.SystemColors").Menu
 		lv_mat_names.ForeColor = drawingColor.fromArgb textColor.r textColor.g textColor.b
-		lv_mat_names.MultiSelect = false
-		lv_mat_names.FullRowSelect=true		--Set so full width of listView is selected and not just first column.
+		lv_mat_names.MultiSelect = false --Allow for multiple selections.
 		lv_mat_names.GridLines=true			--Show lines between the items.
 		lv_mat_names.CheckBoxes=false
-		lv_mat_names.HideSelection=false
+		lv_mat_names.HideSelection=true
+		lv_mat_names.FullRowSelect=true		--Set so full width of listView is selected and not just first column.
 		lv_mat_names.LabelEdit = false
 		lv_mat_names.LabelWrap = false
 		lv_mat_names.sorting = lv_mat_names.sorting.ascending
@@ -404,6 +447,9 @@ rollout mcQuickMaterialsDialog "Quick Materials:" width:556 height:428
 	on btn_clear_text pressed do (edt_filter_names.text = ""; filterListView lv_mat_names)
 	on btn_get_sel pressed  do (selectSimillarFaces())
 	on rdo_mat_type changed state do (filterListView lv_mat_names) ---TODO
+	--add event to fix decolor selecrtion on lost focus
+	on lv_mat_names GotFocus args  do  ( unmarkItem  lv_mat_names.SelectedItems.item[0] )
+	on lv_mat_names LostFocus args do ( markItem  lv_mat_names.SelectedItems.item[0] )
 )
 createDialog mcQuickMaterialsDialog
 
