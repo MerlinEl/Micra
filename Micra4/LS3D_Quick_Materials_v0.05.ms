@@ -3,18 +3,24 @@ if mcQuickMaterialsDialog != undefined do destroyDialog mcQuickMaterialsDialog
 rollout mcQuickMaterialsDialog "Quick Materials:" width:556 height:428
 (
 	--variables and structures
-	struct MAT_ITEM (key, id, tile_u, tile_v)
+	struct MAT_ITEM (key, id, sid, tile_u, tile_v)
+	local material_color_types = #(color 90 200 200, color 255 136 213, color 173 136 255)
 	local mat_items = #(
 		
-		MAT_ITEM "grass" 140 0.4 0.4,
-		MAT_ITEM "pavement1" 53 0.16 0.32,
-		MAT_ITEM "pavement2" 58 0.25 0.25,
-		MAT_ITEM "pavement3" 50 0.12 0.25, 
-		MAT_ITEM "bricks1" 54 0.4 0.4, 
-		MAT_ITEM "bricks2" 59 0.4 0.4,  
-		MAT_ITEM "bricks3" 51 0.9 0.9, 
-		MAT_ITEM "dirt" 103 0.4 0.4,
-		MAT_ITEM "asphalt" 3 0.4 0.4
+		MAT_ITEM key:"grass"				id:140		sid:81		tile_u:0.4		tile_v:0.4,
+		MAT_ITEM key:"pavement1"		id:53		sid:53		tile_u:0.16	tile_v:0.32,
+		MAT_ITEM key:"pavement2"		id:58		sid:53		tile_u:0.25	tile_v:0.25,
+		MAT_ITEM key:"pavement3"		id:50		sid:53		tile_u:0.12	tile_v:0.25, 
+		MAT_ITEM key:"bricks1"			id:54		sid:27		tile_u:0.4		tile_v:0.4, 
+		MAT_ITEM key:"bricks2"			id:59		sid:27		tile_u:0.4		tile_v:0.4,  
+		MAT_ITEM key:"bricks3"			id:51		sid:27		tile_u:0.9		tile_v:0.9, 
+		MAT_ITEM key:"dirt"					id:7			sid:81		tile_u:0.4		tile_v:0.4,
+		MAT_ITEM key:"asphalt"			id:3		sid:81		tile_u:0.4		tile_v:0.4,
+		--test only
+		MAT_ITEM key:"asphalt"			id:3		sid:250		tile_u:0.4		tile_v:0.4,
+		MAT_ITEM key:"asphalt"			id:3		sid:450		tile_u:0.4		tile_v:0.4,
+		MAT_ITEM key:"bricks2"			id:59		sid:259		tile_u:0.4		tile_v:0.4,
+		MAT_ITEM key:"bricks2"			id:59		sid:459		tile_u:0.4		tile_v:0.4
 	)
 	local drawingColor   = dotNetClass "drawing.color"
 	local bgColor   = ((colorMan.getColor #background)*255)as color
@@ -24,19 +30,26 @@ rollout mcQuickMaterialsDialog "Quick Materials:" width:556 height:428
 	local list_items = #() --backup collection for search bar (edt_filter_names)
 	local list_names = #() --backup collection for search bar (edt_filter_names)
 	--UI
-	button 'btn_apply' "Assign" pos:[108,392] width:84 height:28 toolTip:"Aply material to selected faces" align:#left
+	button 'btn_apply' "Assign Material" pos:[148,236] width:136 height:24 toolTip:"Aply material to selected faces" align:#left
 	GroupBox 'grp1' "Preview:" pos:[4,4] width:280 height:228 align:#left
-	button 'btn_unwrap' "Unwrap UVW" pos:[204,392] width:76 height:28 align:#left
-	checkbox 'chk_collapse' "Collapse Modifier" pos:[12,256] width:100 height:16 checked:true align:#left
+	button 'btn_unwrap' "Unwrap UVW" pos:[148,292] width:136 height:24 align:#left
+	checkbox 'chk_collapse' "Collapse Modifier" pos:[12,364] width:100 height:16 checked:true align:#left
 	bitmap 'bmp_preview' "Bitmap" pos:[12,24] width:264 height:200 align:#left
-	checkbox 'chk_autoorient' "Orientation Auto" pos:[12,276] width:100 height:16 checked:false align:#left
+	checkbox 'chk_autoorient' "Orientation Auto" pos:[12,384] width:100 height:16 checked:false align:#left
 	dotNetControl 'edt_filter_names' "textbox" pos:[320,24] width:204 height:20 align:#left
 	dotNetControl 'lv_mat_names' "listView" pos:[292,48] width:252 height:368 align:#left
 	button 'btn_clear_text' "<" pos:[526,24] width:18 height:20 toolTip:"Clear Text" align:#left
 	GroupBox 'grp4' "Materials:" pos:[288,4] width:264 height:420 align:#left
 	label 'lbl7' "filter:" pos:[292,28] width:28 height:12 align:#left
-	GroupBox 'grp5' "Settings:" pos:[4,236] width:280 height:152 align:#left
-	button 'btn_get_sel' "Get Simmilar" pos:[8,392] width:84 height:28 align:#left
+	GroupBox 'grp5' "Settings:" pos:[4,340] width:136 height:84 align:#left
+	button 'btn_get_sel' "Select Simmilar Faces" pos:[148,264] width:136 height:24 align:#left
+	GroupBox 'grp_mi' "Material Info:" pos:[4,236] width:136 height:96 align:#left
+	label 'lbl2' "Basic:" pos:[12,260] width:64 height:12 align:#left
+	bitmap 'bmp_mat_type_1' "Bitmap" pos:[80,256] width:52 height:20 align:#left
+	label 'lbl3' "No Ground:" pos:[12,284] width:64 height:12 align:#left
+	bitmap 'bmp_mat_type_2' "Bitmap" pos:[80,280] width:52 height:20 align:#left
+	label 'lbl4' "Havok:" pos:[12,308] width:64 height:12 align:#left
+	bitmap 'bmp_mat_type_3' "Bitmap" pos:[80,304] width:52 height:20 align:#left
 	
 	fn UVWMapFit theObj theMap useSel:#none = (
 		--RESET THE GIZMO SCALE FIRST:
@@ -137,9 +150,10 @@ rollout mcQuickMaterialsDialog "Quick Materials:" width:556 height:428
 		
 		local fsel = polyop.getFaceSelection obj as Array
 		if (fsel.count == 0) do return false
-		local faces_normals = in coordsys obj (polyop.getFaceNormal obj fsel[1]) --get first normal
+		/*local faces_normals = in coordsys obj (polyop.getFaceNormal obj fsel[1]) --get first normal
 		for f=2 to fsel.count do faces_normals +=  in coordsys obj (polyop.getFaceNormal obj f) --get rest normals
-		local faceNormal = faces_normals / fsel.count
+		local faceNormal = faces_normals / fsel.count*/
+		local faceNormal =  in coordsys obj (polyop.getFaceNormal obj fsel[1]) --get first normal
 		local worldUpVector = [0,0,1]
 		local rightVector	= normalize (cross worldUpVector faceNormal)
 		local upVector	= normalize ( cross rightVector faceNormal )
@@ -216,7 +230,7 @@ rollout mcQuickMaterialsDialog "Quick Materials:" width:556 height:428
 			)
 			LS3DMaterial: (
 
-				local dm = mt.diffuseMap
+				local dm = mat.diffuseMap
 				if dm != undefined then dm.bitmap else undefined
 			)
 			default: undefined
@@ -229,21 +243,41 @@ rollout mcQuickMaterialsDialog "Quick Materials:" width:556 height:428
 			modPanel.addModToSelection mo ui:on
 			mo.edit()	
 	)
+	
 	fn fillListView lv items = (
 		
 		lv.BeginUpdate()
 		lv.items.Clear()
 		local all_items = #()
-		for itm in items do ( 
+		for itm in items do (
 			
-			local li = dotNetObject "ListViewItem" itm.key
+			local clr, suffix
+			(
+				
+				if itm.sid - 400 > 0 then (
+					
+					clr = material_color_types[3]
+					suffix = "_H"
+					
+				) else if itm.sid - 200 > 0 then (
+					
+					clr =	material_color_types[2] 
+					suffix = "_N"
+					
+				) else (
+					
+					clr =	material_color_types[1] 
+					suffix = "_B"
+				)
+			)
+			local li = dotNetObject "ListViewItem" (itm.key+suffix)
 			li.UseItemStyleForSubItems=true
-			li.BackColor= drawingColor.fromArgb 90 200 200
-			format "add item name:% id:%\n" itm.key itm.id
+			li.BackColor= drawingColor.fromArgb clr.r clr.g clr.b
+			format "add item name:% id:% sid:% clr:%\n" itm.key itm.id itm.sid clr
 			li.tag = dotnetMxsValue  itm  --DotNet value holding the MAXScript value
 			
 			li.subitems.add (itm.id as String)
-            li.subitems.add "NaN"
+            li.subitems.add (itm.sid as String)
 			li.subitems.item[0].name="0"
 			li.subitems.item[1].name="1"
 			
@@ -258,9 +292,45 @@ rollout mcQuickMaterialsDialog "Quick Materials:" width:556 height:428
 		--lv.focus()
   	)
 	
+	/*
+	fn fillListView lv items = (
+		
+		lv.BeginUpdate()
+		lv.items.Clear()
+		local all_items = #()
+		for itm in items do ( 
+			
+			local li = dotNetObject "ListViewItem" itm.key
+			li.UseItemStyleForSubItems=true
+			local clr = (
+			
+				if itm.sid - 400 > 0 then material_color_types[3] else 
+					if itm.sid - 200 > 0 then material_color_types[2] else 
+						material_color_types[1] 
+			)
+			li.BackColor= drawingColor.fromArgb clr.r clr.g clr.b
+			format "add item name:% id:% sid:% clr:%\n" itm.key itm.id itm.sid clr
+			li.tag = dotnetMxsValue  itm  --DotNet value holding the MAXScript value
+			
+			li.subitems.add (itm.id as String)
+            li.subitems.add (itm.sid as String)
+			li.subitems.item[0].name="0"
+			li.subitems.item[1].name="1"
+			
+			append all_items li 
+		)
+		format "lv:% items:% all_items:%\n" lv items.count all_items.count
+		lv.Items.AddRange all_items
+		lv.items.item[ 0 ].selected = true --select first item
+		lv.EndUpdate()
+		lv.Refresh()
+		lv.Update()
+		--lv.focus()
+  	)
+	*/
 	fn filterListView lv ignoreCase:true = (
 			
-		local search_str = edt_filter_names.text
+		local search_str = if ignoreCase then toLower edt_filter_names.text else edt_filter_names.text
 		--collect all items before filtering. They canbe restored when filter changes
 		if list_items.count < lv.items.count do (
 		
@@ -306,7 +376,10 @@ rollout mcQuickMaterialsDialog "Quick Materials:" width:556 height:428
 		setFaceSelection obj newFaceSel --set the selection when the loop is done!
 	)
 	fn init = (
-		
+		--Info materials 
+		bmp_mat_type_1.bitmap = bitmap bmp_mat_type_1.width bmp_mat_type_1.height color:material_color_types[1] 
+		bmp_mat_type_2.bitmap = bitmap bmp_mat_type_1.width bmp_mat_type_1.height color:material_color_types[2] 
+		bmp_mat_type_3.bitmap = bitmap bmp_mat_type_1.width bmp_mat_type_1.height color:material_color_types[3] 
 		--Text Box
 		edt_filter_names.BackColor = drawingColor.fromArgb winColor.r winColor.g winColor.b
 		edt_filter_names.ForeColor = drawingColor.fromArgb textColor.r textColor.g textColor.b
