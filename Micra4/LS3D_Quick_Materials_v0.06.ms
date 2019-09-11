@@ -9,19 +9,19 @@ rollout mcQuickMaterialsDialog "Quick Materials:" width:556 height:428
 	local mat_items = #(
 		
 		MAT_ITEM key:"grass"				id:140		sid:81		tile_u:0.4		tile_v:0.4,
-		MAT_ITEM key:"pavement1"		id:53		sid:53		tile_u:0.16	tile_v:0.32,
-		MAT_ITEM key:"pavement2"		id:58		sid:53		tile_u:0.25	tile_v:0.25,
-		MAT_ITEM key:"pavement3"		id:50		sid:53		tile_u:0.12	tile_v:0.25, 
+		MAT_ITEM key:"pavement1"			id:53		sid:53		tile_u:0.16		tile_v:0.32,
+		MAT_ITEM key:"pavement2"			id:58		sid:53		tile_u:0.25		tile_v:0.25,
+		MAT_ITEM key:"pavement3"			id:50		sid:53		tile_u:0.12		tile_v:0.25, 
 		MAT_ITEM key:"bricks1"			id:54		sid:27		tile_u:0.4		tile_v:0.4, 
 		MAT_ITEM key:"bricks2"			id:59		sid:27		tile_u:0.4		tile_v:0.4,  
 		MAT_ITEM key:"bricks3"			id:51		sid:27		tile_u:0.9		tile_v:0.9, 
-		MAT_ITEM key:"dirt"					id:7			sid:81		tile_u:0.4		tile_v:0.4,
-		MAT_ITEM key:"asphalt"			id:3		sid:81		tile_u:0.4		tile_v:0.4,
+		MAT_ITEM key:"dirt"				id:103		sid:7		tile_u:0.4		tile_v:0.4,
+		MAT_ITEM key:"asphalt"			id:3		sid:81		tile_u:0.4		tile_v:0.4
 		--test only
-		MAT_ITEM key:"asphalt"			id:3		sid:250		tile_u:0.4		tile_v:0.4,
+		/*MAT_ITEM key:"asphalt"			id:3		sid:250		tile_u:0.4		tile_v:0.4,
 		MAT_ITEM key:"asphalt"			id:3		sid:450		tile_u:0.4		tile_v:0.4,
 		MAT_ITEM key:"bricks2"			id:59		sid:259		tile_u:0.4		tile_v:0.4,
-		MAT_ITEM key:"bricks2"			id:59		sid:459		tile_u:0.4		tile_v:0.4
+		MAT_ITEM key:"bricks2"			id:59		sid:459		tile_u:0.4		tile_v:0.4*/
 	)
 	local drawingColor   = dotNetClass "drawing.color"
 	local bgColor   = ((colorMan.getColor #background)*255)as color
@@ -160,16 +160,35 @@ rollout mcQuickMaterialsDialog "Quick Materials:" width:556 height:428
 		mod_uvw.gizmo.transform = theMatrix
 		UVWMapFit obj mod_uvw useSel:#none
 	) 
-	fn addTempMaterial obj sel_item = (
+	fn setMaterialIdToPoly obj mat_id = (
+	
+		if subobjectLevel == undefined or subobjectLevel == 0  then ( --whole object
+				
+			local fcount = obj.faces.count
+			if fcount != 0 do polyop.setFaceMatID obj #{1..fcount} mat_id
 		
-		if classOf obj != Editable_Poly do (
+		) else if subobjectLevel == 4 or subobjectLevel == 5 do ( --selected faces only
+		
+			local fsel = polyOp.getFaceSelection obj
+			polyop.setFaceMatID obj fsel mat_id	
+		)
+	)
+	fn addTempMaterial obj  = (
+	
+		if lv_mat_names.selectedItems.count == 0 do return false
+		local sel_item = lv_mat_names.selectedItems.item[0]
+		
+		if  classOf obj != Editable_Poly do (
 			
 			messageBox "Object must be Editable Poly." title:"Aborted:"
 			return false
 		)
-		local mod_matid, sublevel = subobjectLevel
+		local sublevel = subobjectLevel
 		max modify mode
-		--all terrains must use one multimaterial
+		--set object or faces material ID
+		local mat_data = sel_item.tag.value
+		setMaterialIdToPoly obj mat_data.id
+		--Apply Terrain Multi Material (all terrains must use the same multimaterial)
 		if obj.material == undefined or obj.material.name != "lh_terain" do ( 
 			
 			local terrain_mat = meditMaterials["lh_terain"]
@@ -191,19 +210,17 @@ rollout mcQuickMaterialsDialog "Quick Materials:" width:556 height:428
 			modPanel.addModToSelection mod_uvw ui: on -- Add UVW Map Modifier to selection 	
 		)
 		--format "mo w:% h:% name:%\n" mod_uvw.width mod_uvw.length sel_item
-		local mat_data = sel_item.tag.value
 		local u_tile = mod_uvw.width *  (mat_data.tile_u / 100) --default mod_uvw.width * 0.0016
 		local v_tile = mod_uvw.length * (mat_data.tile_v / 100) --default mod_uvw.length * 0.0032
-		local mat_id = mat_data.id
-
-		mod_matid = Materialmodifier materialID:mat_id
 		mod_uvw.utile = u_tile	--length is in generic units
 		mod_uvw.vtile = v_tile	--width is in generic units
-		modPanel.addModToSelection  mod_matid	
+		--local mod_matid = Materialmodifier materialID:mat_id
+		--modPanel.addModToSelection  mod_matid	
+		
 		if chk_collapse.checked do (
 			
 			maxOps.CollapseNodeTo obj 1 true
-			if sublevel != undefined do subobjectLevel = sublevel
+			if sublevel != undefined then subobjectLevel = sublevel else max create mode
 		) 
 	)
 	fn stretchBitmapTo bm w h = (
@@ -441,7 +458,7 @@ rollout mcQuickMaterialsDialog "Quick Materials:" width:556 height:428
 			previewMaterial mat_id
 		)
 	)
-	on btn_apply pressed do (if lv_mat_names.selectedItems.count > 0 do addTempMaterial $ lv_mat_names.selectedItems.item[0])
+	on btn_apply pressed do (undo "Assign Material" on  addTempMaterial $)
 	on btn_unwrap pressed do (applyUnwrapUVW())
 	on edt_filter_names keyUp arg do (filterListView lv_mat_names)
 	on btn_clear_text pressed do (edt_filter_names.text = ""; filterListView lv_mat_names)
