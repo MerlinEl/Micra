@@ -723,6 +723,16 @@ struct ROAD_GENERATOR_STRUCTURE	(
 			crossRoad.wirecolor = color 7 206 224
 		)
 	),
+	fn switchRoadMaterials set_index = (
+	
+		case set_index of (
+		
+			1: ()
+			2: ()
+			3: ()
+		)
+		format "switchRoadMaterials > set:%\n" set_index
+	),
 	fn pickRoadPrefab roads dd_selection spec = (	
 	
 		local roadPointer = dd_selection

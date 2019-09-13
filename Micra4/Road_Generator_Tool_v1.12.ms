@@ -2684,10 +2684,10 @@ rollout RoadGeneratorTool "Road Generator" (
 	button btn_edit_tangents "Edit Tangents" width: 100 height: 35 offset:[-50, 10] align:#center toolTip:"Edit Tangents\nHint:Insert new wertices on spline if you need."
 	button btn_sync_spline "Sync Spline" width: 100 height: 35 offset:[50, -40] align:#center toolTip:"Snap spline Start, End points and Rebuild curve."
 	checkbox cb_update_curve "Sync Curve" checked:true align:#right offset:[0,5]
-	button btn_generate_old "Generate Road Old" width: 120 height: 35 align:#left offset:[0, 10] align:#center across:2 
-	button btn_generate "Generate Road" width: 120 height: 35 offset:[0, 10] align:#right
-	button bt_gen_shortcut_old "Generate Shortcut Old" width:120 height:35 offset:[0,0] align:#left across:2
-	button bt_gen_shortcut "Generate Shortcut" width:120 height:35 offset:[0,0] align:#right
+	button btn_generate_old "Generate Road" width: 120 height: 35 align:#left offset:[0, 10] align:#center across:2 
+	button btn_generate "Generate Road New" width: 120 height: 35 offset:[0, 10] align:#right enabled:false
+	button bt_gen_shortcut_old "Generate Shortcut" width:120 height:35 offset:[0,0] align:#left across:2
+	button bt_gen_shortcut "Generate Shortcut New" width:120 height:35 offset:[0,0] align:#right enabled:false
 
 	local roads = #()
 	local specs = #()
@@ -2808,14 +2808,16 @@ rollout rGeneratorUtilities "Generator Utilities"
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 rollout dlgPickObjectType "Menu"
 (
+ 
 	local roll_all_size = #([320,440], [320,420], [320,470]) --"CROSSROAD",  "ROAD", "UTILITIES"
 	local roll_crossroad_size = #([320,440], [320,520], [320,420]) --"CROSSROAD",  "ROAD", "UTILITIES"
 	radiobuttons rb_type labels:#("CROSSROAD    ",  "ROAD               ", "UTILITIES") default:1 align:#left  columns:1   --"TURN                           "
 	dropdownlist dd_crossroad_types "" items:#("2 Side Roads", "2 Different Side Roads", "1 Side Road" ) height:6  offset:[100,-50] width:140
-	button bt_createColl "Create Collisions" offset:[55, -10] width:140 height:25 visible:false
+	button bt_createColl "Create Collisions" offset:[55, -5] width:140 height:25 visible:false
 	button bt_copyUniqueCrossRoad "Copy Unique CrossRoad" offset:[55,-3] width:140 height:25 visible:false
 	button bt_adjustTangentsLength "Adjust Tangets Length" offset:[55,-80] width:140 height:25 visible:false
 	button bt_copyUniqueShortcut "Copy Unique Shortcut" offset:[55,0] width:140 height:25 visible:false
+	dropDownList ddl_material_sets "" offset:[-15, -70] width:140 height:21 align:#right items:#("Road Material Set 1", "Road Material Set 2", "Road Material Set 3") visible:false
 -- 	label fill ""
 	fn setCrosroadRoll index arr_sizes = (
 	
@@ -2871,6 +2873,7 @@ rollout dlgPickObjectType "Menu"
 					bt_copyUniqueShortcut.visible = false
 					bt_adjustTangentsLength.visible = false
 					bt_createColl.visible = false
+					ddl_material_sets.visible = false
 					dlgPickObjectType.height = 90 --Menu dialog height
 				)
 			2 :(	--road menu group
@@ -2882,6 +2885,7 @@ rollout dlgPickObjectType "Menu"
 					bt_copyUniqueShortcut.visible = true
 					bt_adjustTangentsLength.visible = true
 					bt_createColl.visible = false
+					ddl_material_sets.visible = false
 					dlgPickObjectType.height = 65 --Menu dialog height
 				)
 			3 :(	--utilites menu group
@@ -2893,10 +2897,13 @@ rollout dlgPickObjectType "Menu"
 					bt_copyUniqueShortcut.visible = false
 					bt_adjustTangentsLength.visible = false
 					bt_createColl.visible = True
+					ddl_material_sets.visible = True
 					dlgPickObjectType.height = 65 --Menu dialog height
 			)
 		)
 	)
+	
+	on ddl_material_sets selected sel do roGenStruct.switchRoadMaterials sel
 	
 	on dd_crossroad_types selected  arg do ( --"2 Side Roads", "2 Different Side Roads", "1 Side Road"
 	
