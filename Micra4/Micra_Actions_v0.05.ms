@@ -2498,6 +2498,56 @@ struct mcAction (
 			on btn_rotate_src pressed  do rotateObjectByEdgesAngleOffset()
 		)
 		createDialog mcOffsetRotationDialog
+	),
+	fn replaceMaterialID = (
+		
+		Global replaceMateialIDdialog
+		if replaceMateialIDdialog != undefined do destroyDialog replaceMateialIDdialog
+		rollout replaceMateialIDdialog "Material ID Replace:" width:284 height:56
+		(
+			GroupBox 'grp1' "" pos:[4,1] width:276 height:48 align:#left
+			button 'btn_go' "GO" pos:[226,13] width:46 height:28 align:#left
+			spinner 'spn_from' "From ID:" pos:[12,21] width:60 height:16 range:[1,100000,1] type:#integer scale:1 align:#left
+			spinner 'spn_to' "To ID:" pos:[124,21] width:70 height:16 range:[1,100000,1] type:#integer scale:1 align:#left
+			fn getFacesByMatID obj mat_id = (
+			
+				local all_faces = #{1..(polyop.getNumFaces obj)}
+				for f in all_faces where polyop.getFaceMatID obj f == mat_id collect f
+			)
+
+			fn replaceObjectID obj fom_index to_index = ( 
+
+				local id_faces = getFacesByMatID obj fom_index
+				if id_faces.count == 0 do return false
+				polyop.setFaceMatID obj id_faces to_index
+			)
+
+			fn replaceObjectsID objs fom_index to_index prog_debug:false = (
+				
+				fn isValidClass obj = (classOf obj == Editable_Poly or classOf obj == PolyMeshObject)
+				local replaced_count = 0
+				with redraw off for o in objs do ( 
+
+					if not ( isValidClass o ) do (format "Skip!. Not valid type of object:%" o.name; continue)
+					local result =replaceObjectID o fom_index to_index 
+					if prog_debug do format "Replaced object [ % ] ID status:%\n"  o.name result
+				)
+				format "Replaced objects ( % ) mat ID from:% to:%\n" replaced_count fom_index to_index 
+			)
+
+			on btn_go pressed do
+			(
+				local sel = selection as array
+				if sel.count > 0 then (
+					
+					undo "Material ID Replace" on (replaceObjectsID sel spn_from.value spn_to.value prog_debug:false)
+					
+				) else (
+					messageBox "Nothing is selected" title:"Abotred"
+				)
+			)
+		)
+		createDialog replaceMateialIDdialog
 	)
 	/*<end>*/
 )

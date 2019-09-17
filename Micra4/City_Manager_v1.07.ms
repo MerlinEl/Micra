@@ -548,7 +548,7 @@ rollout mcCityManDialog "" width:500 height:920
 		local colls = #()
 		for o in objs do ( --filter collisions by type
 			
-			if findString o.name "coll_"	== undefined do continue
+			if findString o.name "coll_"	== undefined and findString o.name "_coll"	== undefined do continue
 			if chk_sel_coll_roads.checked and ( isRoadCollision o ) do  (
 				
 				append colls o

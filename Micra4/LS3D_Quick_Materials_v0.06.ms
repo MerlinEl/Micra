@@ -4,8 +4,9 @@ rollout mcQuickMaterialsDialog "Quick Materials:" width:556 height:428
 (
 	--variables and structures
 	struct MAT_ITEM (key, id, sid, tile_u, tile_v)
-	local settings_xml =  getFileNamePath (getSourceFileName()) + "coll_bourbon_table.xml"
-	local material_color_types = #(color 90 200 200, color 255 136 213, color 173 136 255)
+	local xml_materials_table = (LS3DGUP.LS3DGUP.UtilsPath + "coll_bourbon_table.xml")	
+	local terrain_mat_lib_path = (LS3DGUP.LS3DGUP.UtilsPath + @"ground_material\bc_terrain.mat")
+	local material_color_types = #(color 173 136 255, color 90 200 200, color 255 136 213)
 	local mat_items = #(
 		
 		MAT_ITEM key:"grass"				id:140		sid:81		tile_u:0.4		tile_v:0.4,
@@ -29,6 +30,7 @@ rollout mcQuickMaterialsDialog "Quick Materials:" width:556 height:428
 	local textColor = ((colorMan.getColor #text)*255)as color
 	local current_mat_id = 140
 	local list_items = #() --backup collection for search bar (edt_filter_names)
+	local terrain_mat = undefined
 	--UI
 	button 'btn_apply' "Assign Material" pos:[148,236] width:136 height:24 toolTip:"Aply material to selected faces" align:#left
 	GroupBox 'grp1' "Preview:" pos:[4,4] width:280 height:228 align:#left
@@ -43,10 +45,10 @@ rollout mcQuickMaterialsDialog "Quick Materials:" width:556 height:428
 	label 'lbl7' "filter:" pos:[292,28] width:28 height:12 align:#left
 	GroupBox 'grp5' "Show Material Type:" pos:[4,236] width:136 height:76 align:#left
 	button 'btn_get_sel' "Select Simmilar Faces" pos:[148,264] width:136 height:24 align:#left
-	bitmap 'bmp_mat_type_1' "Bitmap" pos:[82,256] width:50 height:16 align:#left
-	bitmap 'bmp_mat_type_2' "Bitmap" pos:[82,272] width:50 height:16 align:#left
-	bitmap 'bmp_mat_type_3' "Bitmap" pos:[82,288] width:50 height:16 align:#left
-	radioButtons 'rdo_mat_type' "" pos:[8,256] width:75 height:48 labels:#("Basic", "No Ground", "Havok") columns:1 align:#left
+	bitmap 'bmp_mat_type_1' "Bitmap" pos:[92,256] width:40 height:16 align:#left
+	bitmap 'bmp_mat_type_2' "Bitmap" pos:[92,272] width:40 height:16 align:#left
+	bitmap 'bmp_mat_type_3' "Bitmap" pos:[92,288] width:40 height:16 align:#left
+	radioButtons 'rdo_mat_type' "" pos:[8,256] width:75 height:48 labels:#("Spawn NPC", "No Spawn", "No Entry") columns:1 align:#left
 	GroupBox 'grp10' "Set - Up:" pos:[4,316] width:136 height:108 align:#left
 	
 	fn UVWMapFit theObj theMap useSel:#none = (
@@ -191,7 +193,7 @@ rollout mcQuickMaterialsDialog "Quick Materials:" width:556 height:428
 		--Apply Terrain Multi Material (all terrains must use the same multimaterial)
 		if obj.material == undefined or obj.material.name != "lh_terain" do ( 
 			
-			local terrain_mat = meditMaterials["lh_terain"]
+			--local terrain_mat = meditMaterials["lh_terain"]
 			if terrain_mat == undefined do (
 					
 				messageBox "Terrain Material Not Found" title:"Aborted"
@@ -230,9 +232,51 @@ rollout mcQuickMaterialsDialog "Quick Materials:" width:556 height:428
 		rendermap tx into:bb size:[bb.width,bb.height] filter:on display:off	
 		bb
 	)
+	
+	fn getTerrainMaterial = (
+		
+		--first get material if is loaded
+		if superClassOf gLS3D_TMM == StructDef do (
+			
+			if classOf gLS3D_TMM.correctTerrainMaterial  == Multimaterial do (
+				
+				terrain_mat = gLS3D_TMM.correctTerrainMaterial
+				return OK
+			)
+		)
+		--else load material
+		if doesFileExist terrain_mat_lib_path do (
+			
+			local result = loadMaterialLibrary terrain_mat_lib_path
+			if result do  terrain_mat = currentMaterialLibrary[1]
+		)
+	)
+	
+	fn getBitmapFrom dm = (
+		
+		/*
+		allusedbitmaps = getClassInstances bitmaptex
+bmpNamesArr = #()
+bmpFileNamesArr = #()
+for b in allusedbitmaps do
+(
+    append bmpNamesArr b.name
+    append bmpFileNamesArr b.filename
+)
+for n in bmpNamesArr do print n
+for p in bmpFileNamesArr do print p
+		*/
+		
+		try (dm.bitmap) catch ( --Runtime error: Error opening bitmap: 
+			
+			format "getBitmapFrom % failed:%\n" dm  (getCurrentException())
+			undefined
+		)
+	)
+	
 	fn previewMaterial mat_id = (
 		
-		local terrain_mat = meditMaterials["lh_terain"]
+		--local terrain_mat = meditMaterials["lh_terain"]
 		if terrain_mat == undefined do return false
 		local mat = terrain_mat[mat_id]
 		local bm = case classOf mat of (
@@ -241,7 +285,7 @@ rollout mcQuickMaterialsDialog "Quick Materials:" width:556 height:428
 				
 				local mt = mat.renderMaterial
 				local dm = if classOf mt == LS3DMaterial then mt.diffuseMap else undefined
-				if dm != undefined then dm.bitmap else undefined
+				if dm != undefined then getBitmapFrom dm else undefined
 			)
 			LS3DMaterial: (
 
@@ -259,21 +303,21 @@ rollout mcQuickMaterialsDialog "Quick Materials:" width:556 height:428
 			mo.edit()	
 	)
 	
-	fn getMaterialType semantic_id = (
+	fn getMaterialType visual_id = (
 		
-		if  semantic_id - 400 > 0 then "havok"
-			else if semantic_id - 200 > 0 then "noground"
+		if  visual_id - 400 > 0 then "havok"
+			else if visual_id - 200 > 0 then "noground"
 				else "basic"
 	)
 	
 	fn getCurrentMaterialType = (
 
-		#("basic", "noground", "havok")[rdo_mat_type.state]
+		#("havok", "basic", "noground")[rdo_mat_type.state]
 	)
 	
 	fn filterItemsByType list mat_type = (
 		
-		for itm in list where (getMaterialType  itm.tag.value.sid == mat_type) collect itm
+		for itm in list where (getMaterialType  itm.tag.value.id == mat_type) collect itm
 	)
 	
 	fn filterItemsByName list mat_name ignoreCase:true = (
@@ -387,9 +431,9 @@ rollout mcQuickMaterialsDialog "Quick Materials:" width:556 height:428
 	--MAT_ITEM key:"grass"				id:140		sid:81		tile_u:0.4		tile_v:0.4,
 	fn parseXmlTable xml_file = (
 		
-		if not (doesFileExist settings_xml) do return false
+		if not (doesFileExist xml_materials_table) do return false
 		local xDoc = XMLDocument()			--Create an XMLDcoument
-		xDoc.LoadXML settings_xml		--Load XML from file
+		xDoc.LoadXML xml_materials_table		--Load XML from file
 		local rNode = xDoc.GetRootNode()		--Get the Root Node THIS MUST BE CALLED!
 		local reindex_items = (rNode.GetChildren())[1].GetChildren() --Get All Reindex Keys
 		mat_items = for itm in reindex_items collect (
@@ -397,19 +441,21 @@ rollout mcQuickMaterialsDialog "Quick Materials:" width:556 height:428
 			local mat_name = trimRight (itm.GetAttribute "Comment") ".xml"
 			local mat_id = execute (itm.GetAttribute "VisualMatIndex")
 			local mat_sid = execute (itm.GetAttribute "SemanticMatIndex")
-			local mat_tile_u = execute (itm.GetAttribute "tile_u")
-			local mat_tile_v = execute (itm.GetAttribute "tile_v")
+			local mat_tile_u = execute (itm.GetAttribute "Tile_U")
+			local mat_tile_v = execute (itm.GetAttribute "Tile_V")
 			MAT_ITEM key:mat_name			id:mat_id		sid:mat_sid		tile_u:mat_tile_u		tile_v:mat_tile_v
 		)
-		format "mat_items:\n" 
+		format "Aviable materials:%\n"  mat_items.count
 		print mat_items
 		--item.GetAllAttributes()
 	)
 	
 	fn init = (
 		
+		--load material library
+		getTerrainMaterial()
 		--materials table from xml
-		--parseXmlTable settings_xml
+		parseXmlTable xml_materials_table
 		--Info materials 
 		bmp_mat_type_1.bitmap = bitmap bmp_mat_type_1.width bmp_mat_type_1.height color:material_color_types[1] 
 		bmp_mat_type_2.bitmap = bitmap bmp_mat_type_1.width bmp_mat_type_1.height color:material_color_types[2] 

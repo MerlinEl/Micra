@@ -1,9 +1,0 @@
-<GeneratedCollisions>
-  <Materials>
-    <Reindex VisualMatIndex="7" SemanticMatIndex="1" Comment="lh_clay_b_v1.xml" tile_u="1" tile_v="1" />
-    <Reindex VisualMatIndex="8" SemanticMatIndex="1" Comment="lh_clay_a_v1.xml" tile_u="1" tile_v="1" />
-    <Reindex VisualMatIndex="9" SemanticMatIndex="1" Comment="lh_pavement_f_v1.xml" tile_u="1" tile_v="1" />
-    <Reindex VisualMatIndex="10" SemanticMatIndex="1" Comment="lh_pavement_e_v1.xml" tile_u="1" tile_v="1" />
-    <Reindex VisualMatIndex="11" SemanticMatIndex="1" Comment="lh_pavement_d_v1.xml" tile_u="1" tile_v="1" />
-  </Materials>
-</GeneratedCollisions>

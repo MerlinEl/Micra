@@ -1,4 +1,4 @@
-
+--TEST ONLY - Not Used
 Global materialSetManager
 if materialSetManager != undefined do DestroyDialog materialSetManager
 rollout materialSetManager "Material Set Manager:" width:244 height:436
