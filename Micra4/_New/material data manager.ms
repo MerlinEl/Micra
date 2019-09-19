@@ -556,6 +556,14 @@ rollout materialDataManagerDialog "Material Data Manager:" width:564 height:780
 		saveMaterialLibrary terrain_mat_lib_path
 	)
 	
+	fn getStandardMaterial = (
+		
+		local new_mat = StandardMaterial()
+		new_mat.name = "uni_color_green"
+		new_mat.diffuse  = green
+		new_mat
+	)
+	
 	fn getDefaultLs3DMaterial = (
 		
 		local new_mat = LS3DMaterial()
@@ -566,34 +574,63 @@ rollout materialDataManagerDialog "Material Data Manager:" width:564 height:780
 		new_mat
 	)
 	
-	fn isBadMaterialName m = (
-
-		findString m.name "uni_metrics_grid_light_grey" != undefined or findString m.name "uni_color_grey_medium" != undefined or m.name == "none"
+	fn isNotAllowedMaterial m = (
+		--conditions
+		m == undefined or
+			classOf m == Missing_Mtl or
+				classOf m == Standardmaterial or 
+					classOf m == DirectX_9_Shader and classOf m.renderMaterial == Missing_Mtl or 
+						findString m.name "uni_metrics_grid_light_grey" != undefined or 
+							findString m.name "uni_color_grey_medium" != undefined or 
+								m.name == "none"
 	) 
 	
-	fn replaceMaterial obj src_mat trgt_mat = (
+	/**
+	*@Usage Replace all unwanted materials with default material [uni_color_gray]
+	*	src	 -- first input must be an Object
+	*		 -- recurse with Multimaterial only
+	*	trgt -- new material
+	*/
+	fn replaceMaterial src trgt = ( 
 		
-		format "replaceMaterial > src:% trgt:% id:\n" src_mat.name trgt_mat.name id
+		format "process with ITEM:% CLASS:%\n" src.name (classOf src)
 		case of (
-		
-			(classOf src_mat != MultiMaterial) : ( --single material
-
-				if isBadMaterialName src_mat then obj.material = trgt_mat
-			) 
-			(classOf src_mat == MultiMaterial) :  (
-
-				for i = 1 to src_mat.count where isBadMaterialName src_mat[i] do (
+			(superClassOf src == GeometryClass) : ( --object with material
 					
-					obj.material[i] = trgt_mat
+					format "\tcheck mat:%\n" src.material.name
+ 					if classOf src.material == MultiMaterial then ( --recurse only with multimaterial
+					
+						replaceMaterial src.material trgt
+					
+					) else if isNotAllowedMaterial src.material do ( --replace material
+					
+						format "\t\tReplace Material >  ID:% MAT:%\n" 0 src.name
+						src.material = trgt
+					)
+			) 
+			(classOf src == MultiMaterial)		:  ( --multimaterial
+
+				for i = 1 to src.count where isNotAllowedMaterial src[i] do (
+					
+					format "\t\tReplace Material >  ID:% MAT:%\n" i (if src[i] != undefined then src[i].name else "undefined")
+					src[i] = trgt
 				)
 			)
 		)
 	)
 	
-	fn replaceUnwantedMaterials  = (
+	fn replaceUnwantedMaterials  objs = (
 
 		local new_mat = getDefaultLs3DMaterial()
-		for o in selection where o.material != undefined do replaceMaterial o o.material new_mat
+		local unique_materials = #()
+		for o in objs where o.material != undefined do (
+			
+			local mat = o.material
+			if findItem unique_materials mat != 0 do continue
+			append unique_materials mat
+			replaceMaterial o new_mat	
+		)
+		format "Materials Collected:%\n" unique_materials.count
 	)
 
 	fn runCommandByName cmd_name = (
@@ -601,7 +638,7 @@ rollout materialDataManagerDialog "Material Data Manager:" width:564 height:780
 		format "run cmd:%\n" cmd_name
 		case cmd_name of (
 			
-			"Replace Unwanted Materials" : replaceUnwantedMaterials()
+			"Replace Unwanted Materials" : replaceUnwantedMaterials selection
 			
 		)
 	)

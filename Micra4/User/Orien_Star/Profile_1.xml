@@ -198,5 +198,6 @@
     <btn_J4 action="Patcher" icon="109" />
     <btn_B12 action="Rename" icon="67" />
     <btn_B9 action="Create_PolygonGrid" icon="274" />
+    <btn_I12 action="Autosave_Switch" icon="3" />
   </Buttons>
 </USER>
