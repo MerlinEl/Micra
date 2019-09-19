@@ -1,6 +1,6 @@
 Global roadGeneratorCollisionDialog
 if roadGeneratorCollisionDialog != undefined do DestroyDialog roadGeneratorCollisionDialog
-rollout roadGeneratorCollisionDialog "" width:544 height:88
+rollout roadGeneratorCollisionDialog "Road Collisions Generator:" width:544 height:88
 (
 	local form_title = "Road Collision Generator:"
 	local generator_struct = "Road_Generator_Struct_v1.12"
@@ -22,7 +22,7 @@ lh_02_little_italy_block_h_roads_coll
 	local typed_node_name	= default_node_name
 	local collision_wirecolor = color 176 26 26
 	local materal_id_offset = 1000 --ofset all mat ID to prevent replacement
-	fn matIdToSemanticId id = (
+	/*fn matIdToSemanticId id = (
 		
 		case id of (
 
@@ -46,7 +46,7 @@ lh_02_little_italy_block_h_roads_coll
 			28:	2 	--universal concrete tiled 1
 			default: 1
 		)
-	)
+	)*/
 	fn runLocalScript script_name = (
 
 		local fpath = getSourceFileName()
@@ -261,6 +261,7 @@ lh_02_little_italy_block_h_roads_coll
 		if collision_layer == undefined do collision_layer = LayerManager.newLayerFromName layer_name --create layer if not exists
 		collision_layer
 	)
+	
 	fn getCollisionNode geometry_obj = (
 	
 		local node_name = undefined
@@ -287,12 +288,50 @@ lh_02_little_italy_block_h_roads_coll
 		)
 		getNodeByName node_name
 	)
+	
+	fn getSIDByID xml_data id = (
+	
+		for itm in xml_data where itm.id == id do return itm.sid
+		1 -- else retrun unihard
+	)
+	
+	fn parseXmlTable xml_file = (
+		
+		if not (doesFileExist xml_file) do return false
+		struct ID_DATA (id, sid)
+		local xDoc = XMLDocument()			--Create an XMLDcoument
+		xDoc.LoadXML xml_file				--Load XML from file
+		local rNode = xDoc.GetRootNode()		--Get the Root Node THIS MUST BE CALLED!
+		local reindex_items = (rNode.GetChildren())[1].GetChildren() --Get All Reindex Keys
+		for itm in reindex_items collect (
+			
+			local mat_id = execute (itm.GetAttribute "VisualMatIndex")
+			local mat_sid = execute (itm.GetAttribute "SemanticMatIndex")
+			ID_DATA id:mat_id sid:mat_sid
+		)
+	)
+	
 	fn createRoadsCollisions = (
 		
 		roGenStruct.All_CALLBACKS_ENABLED = false
 		sliderTime = 0 --some roads have linkedXform with animated dummy. Collision must be genereted at frame 0
 		
-		local s_mat = meditmaterials["semantic_materials"]
+		local s_mat = currentMaterialLibrary["semantic_materials"]
+		if s_mat == undefined do  s_mat = meditmaterials["semantic_materials"]
+		if s_mat == undefined do (
+			
+			format "Unable to create collisions. Semantic Material not found.\n"
+			--gProgLog.msg ("Unable to create collisions. Semantic Material not found.") ty:"error"
+			return false
+		)
+		local xml_file = (LS3DGUP.LS3DGUP.UtilsPath + "coll_bourbon_table.xml")
+		if not (doesFileExist xml_file) do (
+		
+			format "Unable to Locate coll_bourbon_table.xml.\n"
+			--gProgLog.msg ("Unable to Locate coll_bourbon_table.xml.") ty:"error"
+			return false
+		)
+		local xml_data = parseXmlTable xml_file
 		escapeEnable = true 						--Progress Bar
 		progressStart "Grenerating Road Collisions...."	--Progress Bar
 		local sel = selection as array
@@ -320,7 +359,8 @@ lh_02_little_italy_block_h_roads_coll
 			for f=1 to o_instance.numFaces do ( --replace ids with semantic material
 				
 				local mat_id = polyop.getFaceMatID o_instance f
-				local sem_id = matIdToSemanticId (mat_id - materal_id_offset)
+				-- local sem_id = matIdToSemanticId (mat_id - materal_id_offset)
+				local sem_id = getSIDByID xml_data (mat_id - materal_id_offset)
 				--format "face:% mat_id:% sem_id:%\n" f mat_id sem_id
 				polyop.setFaceMatID o_instance f sem_id	
 				--if face is rail add to collection
@@ -364,8 +404,8 @@ lh_02_little_italy_block_h_roads_coll
 	fn init = (
 		
 		roadGeneratorCollisionDialog.title = form_title
-		if superClassOf roGenStruct != ::StructDef do runLocalScript generator_struct
-		if superClassOf roGenStruct != ::StructDef do (
+		if superClassOf ::roGenStruct != StructDef do runLocalScript generator_struct
+		if superClassOf ::roGenStruct != StructDef do (
 		
 			messageBox "Collisions can't be created\n.Unable to find Road Structures." title:form_title
 			destroyDialog roadGeneratorCollisionDialog

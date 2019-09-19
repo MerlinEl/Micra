@@ -306,8 +306,8 @@ mcProgLog.msg ("Failed Save Max File. Unable to find Directory.\n\tPath:[ "+outp
 mcProgLog.msg "All Done" ty:"task_close"
 
 mcProgLog.msg "ADD FILES TO PERFORCE:" ti:"P4V...." ty:"new_task" 
-for i=1 to 1000 do mcProgLog.prog i 1000
-mcProgLog.prog 0 0	
+for i=1 to 1000 do gProgLog.progSub i 1000
+gProgLog.progSub 0 0	
 */
 
 

@@ -18,11 +18,6 @@ rollout mcQuickMaterialsDialog "Quick Materials:" width:556 height:428
 		MAT_ITEM key:"bricks3"			id:51		sid:27		tile_u:0.9		tile_v:0.9, 
 		MAT_ITEM key:"dirt"				id:103		sid:7		tile_u:0.4		tile_v:0.4,
 		MAT_ITEM key:"asphalt"			id:3		sid:81		tile_u:0.4		tile_v:0.4
-		--test only
-		/*MAT_ITEM key:"asphalt"			id:3		sid:250		tile_u:0.4		tile_v:0.4,
-		MAT_ITEM key:"asphalt"			id:3		sid:450		tile_u:0.4		tile_v:0.4,
-		MAT_ITEM key:"bricks2"			id:59		sid:259		tile_u:0.4		tile_v:0.4,
-		MAT_ITEM key:"bricks2"			id:59		sid:459		tile_u:0.4		tile_v:0.4*/
 	)
 	local drawingColor   = dotNetClass "drawing.color"
 	local bgColor   = ((colorMan.getColor #background)*255)as color
@@ -39,7 +34,7 @@ rollout mcQuickMaterialsDialog "Quick Materials:" width:556 height:428
 	bitmap 'bmp_preview' "Bitmap" pos:[12,24] width:264 height:200 align:#left
 	checkbox 'chk_autoorient' "Orientation Auto" pos:[12,360] width:100 height:16 checked:false align:#left
 	dotNetControl 'edt_filter_names' "textbox" pos:[320,24] width:204 height:20 align:#left
-	dotNetControl 'lv_mat_names' "listView" pos:[292,48] width:252 height:368 align:#left
+	dotNetControl 'lv_mat_data' "listView" pos:[292,48] width:252 height:368 align:#left
 	button 'btn_clear_text' "<" pos:[526,24] width:18 height:20 toolTip:"Clear Text" align:#left
 	GroupBox 'grp4' "Materials:" pos:[288,4] width:264 height:420 align:#left
 	label 'lbl7' "filter:" pos:[292,28] width:28 height:12 align:#left
@@ -177,8 +172,8 @@ rollout mcQuickMaterialsDialog "Quick Materials:" width:556 height:428
 	)
 	fn addTempMaterial obj  = (
 	
-		if lv_mat_names.selectedItems.count == 0 do return false
-		local sel_item = lv_mat_names.selectedItems.item[0]
+		if lv_mat_data.selectedItems.count == 0 do return false
+		local sel_item = lv_mat_data.selectedItems.item[0]
 		
 		if  classOf obj != Editable_Poly do (
 			
@@ -294,7 +289,7 @@ for p in bmpFileNamesArr do print p
 			)
 			default: undefined
 		)
-		if classOf bm == BitMap do bmp_preview.bitmap = stretchBitmapTo bm 264 200
+		if classOf bm == BitMap do bmp_preview.bitmap = stretchBitmapTo bm bmp_preview.width bmp_preview.height
 	)
 	fn applyUnwrapUVW = (
 		
@@ -370,7 +365,7 @@ for p in bmpFileNamesArr do print p
 		local all_items = #()
 		for itm in items do (
 			
-			local mat_type = getMaterialType  itm.sid
+			local mat_type = getMaterialType itm.id
 			local clr, suffix
 			case mat_type of (
 				
@@ -431,9 +426,9 @@ for p in bmpFileNamesArr do print p
 	--MAT_ITEM key:"grass"				id:140		sid:81		tile_u:0.4		tile_v:0.4,
 	fn parseXmlTable xml_file = (
 		
-		if not (doesFileExist xml_materials_table) do return false
+		if not (doesFileExist xml_file) do return false
 		local xDoc = XMLDocument()			--Create an XMLDcoument
-		xDoc.LoadXML xml_materials_table		--Load XML from file
+		xDoc.LoadXML xml_file		--Load XML from file
 		local rNode = xDoc.GetRootNode()		--Get the Root Node THIS MUST BE CALLED!
 		local reindex_items = (rNode.GetChildren())[1].GetChildren() --Get All Reindex Keys
 		mat_items = for itm in reindex_items collect (
@@ -467,34 +462,34 @@ for p in bmpFileNamesArr do print p
 		edt_filter_names.Multiline = false
 		--List View
 		local column_names=#("Name", "ID", "SID")
-		lv_mat_names.BackColor = drawingColor.fromArgb winColor.r winColor.g winColor.b
+		lv_mat_data.BackColor = drawingColor.fromArgb winColor.r winColor.g winColor.b
 		--dot net controls work with the system in-focus and out-focus color schemes.
 		-- using of the system menu color as listview backcolor instead of default (or custom).
-		--lv_mat_names.BackColor = (dotnetclass "System.Drawing.SystemColors").Menu
-		lv_mat_names.ForeColor = drawingColor.fromArgb textColor.r textColor.g textColor.b
-		lv_mat_names.MultiSelect = false --Allow for multiple selections.
-		lv_mat_names.GridLines=true			--Show lines between the items.
-		lv_mat_names.CheckBoxes=false
-		lv_mat_names.HideSelection=true
-		lv_mat_names.FullRowSelect=true		--Set so full width of listView is selected and not just first column.
-		lv_mat_names.LabelEdit = false
-		lv_mat_names.LabelWrap = false
-		lv_mat_names.sorting = lv_mat_names.sorting.ascending
-		lv_mat_names.allowDrop = false
-		lv_mat_names.view = lv_mat_names.view.Details
-		lv_mat_names.HeaderStyle = lv_mat_names.HeaderStyle.Nonclickable
-		lv_mat_names.Columns.add column_names[1] 147
-		lv_mat_names.Columns.add column_names[2] 50
-		lv_mat_names.Columns.add column_names[3] 50
+		--lv_mat_data.BackColor = (dotnetclass "System.Drawing.SystemColors").Menu
+		lv_mat_data.ForeColor = drawingColor.fromArgb textColor.r textColor.g textColor.b
+		lv_mat_data.MultiSelect = false --Allow for multiple selections.
+		lv_mat_data.GridLines=true			--Show lines between the items.
+		lv_mat_data.CheckBoxes=false
+		lv_mat_data.HideSelection=true
+		lv_mat_data.FullRowSelect=true		--Set so full width of listView is selected and not just first column.
+		lv_mat_data.LabelEdit = false
+		lv_mat_data.LabelWrap = false
+		lv_mat_data.sorting = lv_mat_data.sorting.ascending
+		lv_mat_data.allowDrop = false
+		lv_mat_data.view = lv_mat_data.view.Details
+		lv_mat_data.HeaderStyle = lv_mat_data.HeaderStyle.Nonclickable
+		lv_mat_data.Columns.add column_names[1] 147
+		lv_mat_data.Columns.add column_names[2] 50
+		lv_mat_data.Columns.add column_names[3] 50
 		--Fill List View
-		fillListView lv_mat_names mat_items
+		fillListView lv_mat_data mat_items
 		--Focus Text Box
 		setFocus edt_filter_names
 	)
 	on mcQuickMaterialsDialog open do init()
-	on lv_mat_names ItemSelectionChanged arg do (
+	on lv_mat_data ItemSelectionChanged arg do (
 		
-		local a = lv_mat_names.SelectedItems
+		local a = lv_mat_data.SelectedItems
 		if a.count > 0 do (
 			
 			--format "sel items:%\n" a.item[0].tag
@@ -506,13 +501,13 @@ for p in bmpFileNamesArr do print p
 	)
 	on btn_apply pressed do (undo "Assign Material" on  addTempMaterial $)
 	on btn_unwrap pressed do (applyUnwrapUVW())
-	on edt_filter_names keyUp arg do (filterListView lv_mat_names)
-	on btn_clear_text pressed do (edt_filter_names.text = ""; filterListView lv_mat_names)
+	on edt_filter_names keyUp arg do (filterListView lv_mat_data)
+	on btn_clear_text pressed do (edt_filter_names.text = ""; filterListView lv_mat_data)
 	on btn_get_sel pressed  do (selectSimillarFaces())
-	on rdo_mat_type changed state do (filterListView lv_mat_names) ---TODO
+	on rdo_mat_type changed state do (filterListView lv_mat_data) ---TODO
 	--add event to fix decolor selecrtion on lost focus
-	on lv_mat_names GotFocus args  do  ( unmarkItem  lv_mat_names.SelectedItems.item[0] )
-	on lv_mat_names LostFocus args do ( markItem  lv_mat_names.SelectedItems.item[0] )
+	on lv_mat_data GotFocus args  do  ( unmarkItem  lv_mat_data.SelectedItems.item[0] )
+	on lv_mat_data LostFocus args do ( markItem  lv_mat_data.SelectedItems.item[0] )
 )
 createDialog mcQuickMaterialsDialog
 

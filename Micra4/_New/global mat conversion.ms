@@ -192,8 +192,8 @@ fn convertOldIDStoNewIDS  prog_debug:false = (
 	
 		if prog_debug do format "OBJ:%\n" obj.name
 		local object_ids = getObjectIDS obj
-		local editPolyMod = Edit_Poly()
-		addModifier obj editPolyMod
+		local edit_poly_mod = Edit_Poly()
+		addModifier obj edit_poly_mod
 		offsetMaterialsIDs obj object_ids  offset:1000 --prevent override old ids
 		for id in object_ids do (
 		
