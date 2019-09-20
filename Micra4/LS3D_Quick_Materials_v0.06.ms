@@ -258,8 +258,8 @@ rollout mcQuickMaterialsDialog "Quick Materials:" width:556 height:428
 			modPanel.addModToSelection mod_uvw ui: on -- Add UVW Map Modifier to selection 	
 		)
 		--format "mo w:% h:% name:%\n" mod_uvw.width mod_uvw.length sel_item
-		local u_tile = mod_uvw.width *  (mat_data.tile_u / 100) --default mod_uvw.width * 0.0016
-		local v_tile = mod_uvw.length * (mat_data.tile_v / 100) --default mod_uvw.length * 0.0032
+		local u_tile = mod_uvw.width *  (mat_data.tile_u / 1000) --default mod_uvw.width * 0.0016
+		local v_tile = mod_uvw.length * (mat_data.tile_v / 1000) --default mod_uvw.length * 0.0032
 		format "sel tile u:% v:%\n" u_tile v_tile
 		mod_uvw.utile = u_tile	--length is in generic units
 		mod_uvw.vtile = v_tile	--width is in generic units
