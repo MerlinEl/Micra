@@ -26,6 +26,8 @@ rollout mcQuickMaterialsDialog "Quick Materials:" width:556 height:428
 	local current_mat_id = 140
 	local list_items = #() --backup collection for search bar (edt_filter_names)
 	local terrain_mat = undefined
+	local semantic_mat = undefined
+	local terrain_mat_name = "bc_terrain_main"
 	--UI
 	button 'btn_apply' "Assign Material" pos:[148,236] width:136 height:24 toolTip:"Aply material to selected faces" align:#left
 	GroupBox 'grp1' "Preview:" pos:[4,4] width:280 height:228 align:#left
@@ -45,7 +47,49 @@ rollout mcQuickMaterialsDialog "Quick Materials:" width:556 height:428
 	bitmap 'bmp_mat_type_3' "Bitmap" pos:[92,288] width:40 height:16 align:#left
 	radioButtons 'rdo_mat_type' "" pos:[8,256] width:75 height:48 labels:#("Spawn NPC", "No Spawn", "No Entry") columns:1 align:#left
 	GroupBox 'grp10' "Set - Up:" pos:[4,316] width:136 height:108 align:#left
+	/**
+	*@Usage add more material libraries in to Temporary Library
+	*@Example
+			--load
+			semantic_lib_path = (LS3DGUP.LS3DGUP.UtilsPath + "semantic_materials.mat")
+			terrain_lib_path = (LS3DGUP.LS3DGUP.UtilsPath + @"ground_material\bc_terrain.mat")
+			success = loadMaterialLibraryPlus semantic_lib_path
+			success = loadMaterialLibraryPlus terrain_lib_path
+			--read
+			currentMaterialLibrary.count
+			currentMaterialLibrary[1].name
+			currentMaterialLibrary[2].name
+			--get
+			semantic_mat = currentMaterialLibrary["semantic_materials"]
+			terrain_mat = currentMaterialLibrary["bc_terrain_main"]
+			--save all in one
+			all_lib_path = (LS3DGUP.LS3DGUP.UtilsPath + @"ground_material\mat_all.mat")
+			saveTempMaterialLibrary currentMaterialLibrary all_lib_path
+			loadMaterialLibraryPlus all_lib_path
+			--save separate library
+			terrain_lib = materialLibrary(currentMaterialLibrary["bc_terrain_main"])
+			saveTempMaterialLibrary terrain_lib terrain_lib_path
+	*/
+	fn loadMaterialLibraryPlus lib_path = ( --
+
+		if not (doesFileExist lib_path) do return false
+		local library_materials = for m in currentMaterialLibrary collect m
+		local success = loadMaterialLibrary lib_path
+		if not success do return false
+		local new_lib = currentMaterialLibrary[1]
+		for m in library_materials where m.name != new_lib.name do append currentMaterialLibrary m
+		true
+	)
 	
+	fn loadMateriaLibraries = (
+	
+		local semantic_lib_path = (LS3DGUP.LS3DGUP.UtilsPath + "semantic_materials.mat")
+		local terrain_lib_path = (LS3DGUP.LS3DGUP.UtilsPath + @"ground_material\bc_terrain.mat")
+		local success_s = loadMaterialLibraryPlus semantic_lib_path
+		local success_t = loadMaterialLibraryPlus terrain_lib_path
+		if success_s do semantic_mat = currentMaterialLibrary["semantic_materials"]
+		if success_t do terrain_mat = currentMaterialLibrary["bc_terrain_main"]
+	)
 	fn UVWMapFit theObj theMap useSel:#none = (
 		--RESET THE GIZMO SCALE FIRST:
 		--Multiply the gizmo's transformation with the inverse of a matrix created from its scale factor
@@ -161,20 +205,21 @@ rollout mcQuickMaterialsDialog "Quick Materials:" width:556 height:428
 	
 		if subobjectLevel == undefined or subobjectLevel == 0  then ( --whole object
 				
+			format "Set Material ID:% to Object:%\n" mat_id obj.name
 			local fcount = obj.faces.count
 			if fcount != 0 do polyop.setFaceMatID obj #{1..fcount} mat_id
 		
 		) else if subobjectLevel == 4 or subobjectLevel == 5 do ( --selected faces only
 		
 			local fsel = polyOp.getFaceSelection obj
+			format "Set Material ID:% to Faces:%\n" mat_id fsel
 			polyop.setFaceMatID obj fsel mat_id	
 		)
 	)
 	fn addTempMaterial obj  = (
 	
 		if lv_mat_data.selectedItems.count == 0 do return false
-		local sel_item = lv_mat_data.selectedItems.item[0]
-		
+		local sel_item = lv_mat_data.selectedItems.item[0]		
 		if  classOf obj != Editable_Poly do (
 			
 			messageBox "Object must be Editable Poly." title:"Aborted:"
@@ -184,17 +229,23 @@ rollout mcQuickMaterialsDialog "Quick Materials:" width:556 height:428
 		max modify mode
 		--set object or faces material ID
 		local mat_data = sel_item.tag.value
+		
+		format "Assign Material:% ID:% SID:% to TILE U:% V:% Obj:%\n" mat_data.key mat_data.id mat_data.sid mat_data.tile_u mat_data.tile_v obj.name 
 		setMaterialIdToPoly obj mat_data.id
 		--Apply Terrain Multi Material (all terrains must use the same multimaterial)
-		if obj.material == undefined or obj.material.name != "lh_terain" do ( 
+		if obj.material == undefined or obj.material.name != terrain_mat_name do ( 
 			
-			--local terrain_mat = meditMaterials["lh_terain"]
 			if terrain_mat == undefined do (
 					
 				messageBox "Terrain Material Not Found" title:"Aborted"
 				return false
 			)
+			format "Assign Material:%  to Obj:%\n" terrain_mat.name obj.name 
+			--assign terrain material at subobjectLevel 0 (if subobject is not zero material will be instanced with new name)
+			local sol = subobjectLevel
+			subobjectLevel = 0
 			obj.material = terrain_mat
+			subobjectLevel = sol
 		)
 		--continute to add and setup modifiers
 		local mod_uvw = uvwMap axis:2 maptype:0 mapChannel:1 realWorldMapSize:false --name:sel_item.key
@@ -209,6 +260,7 @@ rollout mcQuickMaterialsDialog "Quick Materials:" width:556 height:428
 		--format "mo w:% h:% name:%\n" mod_uvw.width mod_uvw.length sel_item
 		local u_tile = mod_uvw.width *  (mat_data.tile_u / 100) --default mod_uvw.width * 0.0016
 		local v_tile = mod_uvw.length * (mat_data.tile_v / 100) --default mod_uvw.length * 0.0032
+		format "sel tile u:% v:%\n" u_tile v_tile
 		mod_uvw.utile = u_tile	--length is in generic units
 		mod_uvw.vtile = v_tile	--width is in generic units
 		--local mod_matid = Materialmodifier materialID:mat_id
@@ -227,26 +279,6 @@ rollout mcQuickMaterialsDialog "Quick Materials:" width:556 height:428
 		rendermap tx into:bb size:[bb.width,bb.height] filter:on display:off	
 		bb
 	)
-	
-	fn getTerrainMaterial = (
-		
-		--first get material if is loaded
-		if superClassOf gLS3D_TMM == StructDef do (
-			
-			if classOf gLS3D_TMM.correctTerrainMaterial  == Multimaterial do (
-				
-				terrain_mat = gLS3D_TMM.correctTerrainMaterial
-				return OK
-			)
-		)
-		--else load material
-		if doesFileExist terrain_mat_lib_path do (
-			
-			local result = loadMaterialLibrary terrain_mat_lib_path
-			if result do  terrain_mat = currentMaterialLibrary[1]
-		)
-	)
-	
 	fn getBitmapFrom dm = (
 		
 		/*
@@ -271,8 +303,11 @@ for p in bmpFileNamesArr do print p
 	
 	fn previewMaterial mat_id = (
 		
-		--local terrain_mat = meditMaterials["lh_terain"]
-		if terrain_mat == undefined do return false
+		if terrain_mat == undefined do (
+					
+			messageBox "Terrain Material Not Found" title:"Aborted"
+			return false
+		)
 		local mat = terrain_mat[mat_id]
 		local bm = case classOf mat of (
 
@@ -434,10 +469,10 @@ for p in bmpFileNamesArr do print p
 		mat_items = for itm in reindex_items collect (
 			
 			local mat_name = trimRight (itm.GetAttribute "Comment") ".xml"
-			local mat_id = execute (itm.GetAttribute "VisualMatIndex")
-			local mat_sid = execute (itm.GetAttribute "SemanticMatIndex")
-			local mat_tile_u = execute (itm.GetAttribute "Tile_U")
-			local mat_tile_v = execute (itm.GetAttribute "Tile_V")
+			local mat_id =  (itm.GetAttribute "VisualMatIndex") as Integer
+			local mat_sid =  (itm.GetAttribute "SemanticMatIndex") as Integer
+			local mat_tile_u =  (itm.GetAttribute "Tile_U") as Float
+			local mat_tile_v =  (itm.GetAttribute "Tile_V") as Float
 			MAT_ITEM key:mat_name			id:mat_id		sid:mat_sid		tile_u:mat_tile_u		tile_v:mat_tile_v
 		)
 		format "Aviable materials:%\n"  mat_items.count
@@ -448,7 +483,7 @@ for p in bmpFileNamesArr do print p
 	fn init = (
 		
 		--load material library
-		getTerrainMaterial()
+		loadMateriaLibraries()	
 		--materials table from xml
 		parseXmlTable xml_materials_table
 		--Info materials 
