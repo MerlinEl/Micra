@@ -74,6 +74,8 @@ rollout mcQuickMaterialsDialog "Quick Materials:" width:556 height:428
 
 		if not (doesFileExist lib_path) do return false
 		local library_materials = for m in currentMaterialLibrary collect m
+		--need clear loadTempMaterialLibrary 
+		--while currentmateriallibrary.count > 0 do deleteitem currentmateriallibrary 1 --clean
 		local success = loadMaterialLibrary lib_path
 		if not success do return false
 		local new_lib = currentMaterialLibrary[1]
