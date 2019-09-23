@@ -19,10 +19,10 @@ fn getFacesByMatID obj mat_id = (
 )
 
 fn getMaterialXML mat = (
-	
+
 	case classOf mat of (
-		
-		DirectX_9_Shader : mat.name
+	
+		DirectX_9_Shader : if mat.renderMaterial != undefined then getMaterialXML mat.renderMaterial else "uni_color_grey.xml"
 		LS3DMaterial : filenameFromPath (mat.GetName())
 		default : "uni_color_grey.xml"
 	)	

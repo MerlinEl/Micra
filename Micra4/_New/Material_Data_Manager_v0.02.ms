@@ -38,6 +38,7 @@ struct sMaterialDataManager (
 			"uni_metrics_grid_light_grey.xml", 
 			"uni_metrics_grid_dark_grey.xml",
 			"uni_color_grey_medium.xml",
+			"uni_metrics_grid_blue.xml",
 			"gray.xml"
 		)
 			m == undefined or
@@ -133,7 +134,7 @@ struct sMaterialDataManager (
 		)
 	),
 	
-	fn listMaterialsOnObjects objs = (
+	fn listMaterialsFromObjects objs = (
 	
 		local unique_materials = #()
 		for o in objs do (
@@ -147,7 +148,20 @@ struct sMaterialDataManager (
 			listMaterial mat	
 		)
 		format "Materials Collected:%\n" unique_materials.count
-	)
+	),
+	
+	fn printUsedMaterials sel = (
+
+		local used_materials = #()
+		local undefined_materials = 0
+		for o in sel do (
+			
+			if o.material == undefined do (undefined_materials += 1; continue) 
+			appendIfUnique used_materials o.material.name
+		)
+		format "Materials Used : % Undefined: %\n" used_materials.count undefined_materials
+		print used_materials
+	) 
 )
 gMaterialDataManager = sMaterialDataManager()
 
@@ -183,7 +197,7 @@ rollout rMaterialDataManager "Material Data Manager:" width:564 height:780
 	spinner 'spn_target_id' "" pos:[32,684] width:60 height:16 range:[1,10000,1] type:#integer scale:1 align:#left
 	spinner 'spn_target_sid' "" pos:[124,684] width:60 height:16 range:[1,10000,1] type:#integer scale:1 align:#left
 	groupBox 'grp2' "Advanced Tools:" pos:[4,720] width:556 height:52 align:#left
-	dropDownList 'ddl_fn_list' "" pos:[12,742] width:472 height:21 items:#("Replace Unwanted Materials", "List Materials on Selection") align:#left
+	dropDownList 'ddl_fn_list' "" pos:[12,742] width:472 height:21 items:#("Replace Unwanted Materials", "List Materials on Selection", "Print Used Materials") align:#left
 	button 'btn_run_fn' "RUN" pos:[488,740] width:64 height:24 align:#left
 	--button 'btn_save_mat' "Save Material" pos:[84,300] width:80 height:28 align:#left
 	/**
@@ -722,7 +736,8 @@ rollout rMaterialDataManager "Material Data Manager:" width:564 height:780
 		case cmd_name of (
 			
 			"Replace Unwanted Materials" : gMaterialDataManager.replaceMaterialsOnObjects selection
-			"List Materials on Selection" : gMaterialDataManager.listMaterialsOnObjects selection
+			"List Materials on Selection" : gMaterialDataManager.listMaterialsFromObjects selection
+			"Print Used Materials" : gMaterialDataManager.printUsedMaterials selection
 		)
 	)
 	
