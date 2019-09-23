@@ -2,7 +2,7 @@
 <SETTINGS>
   <Micra>
     <born val="04.25.2006" />
-    <version val="5.06" />
+    <version val="5.07" />
   </Micra>
   <Structures val="All registred Micra's Structures">
     <!--independent classes-->

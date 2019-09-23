@@ -31,7 +31,7 @@ rollout mcCityManDialog "" width:500 height:964
 	button 'btn_zoom_selected' "Focus" pos:[180,708] width:70 height:20 toolTip:"Zoom to Selection" align:#left
 	button 'btn_init' "UPDATE" pos:[4,4] width:492 height:16 toolTip:"Get scene data..." align:#left
 	GroupBox 'grp7' "Actions:" pos:[4,764] width:240 height:152 align:#left
-	button 'btn_move_colls_to_layers' "Distribute Collisions" pos:[252,888] width:108 height:20 toolTip:"Move each Collision in to separate Layer" align:#left
+	button 'btn_move_colls_to_layers' "Distribute Collisions" pos:[252,888] width:108 height:20 toolTip:"Move Selected Collision in to separate Layer" align:#left
 	button 'btn_sel_colls' "Select Collisions" pos:[252,804] width:112 height:20 toolTip:"Select All Collisions" align:#left
 	button 'btn_select_visible_nodes' "Select Visible Nodes" pos:[12,804] width:112 height:20 toolTip:"Select All visible nodes" align:#left
 	button 'btn_select_empty_objects' "Select Empty Objects" pos:[128,804] width:112 height:20 toolTip:"Select All Editable_Poly objects without geometry" align:#left
@@ -60,6 +60,7 @@ rollout mcCityManDialog "" width:500 height:964
 	checkbox 'chk_sel_geo_terrain' "terrain" pos:[376,784] width:52 height:16 checked:true align:#left
 	GroupBox 'grp8' "Geometry:" pos:[372,764] width:120 height:152 align:#left
 	button 'btn_sel_vis_geo' "Select Visible Geometry" pos:[376,828] width:112 height:20 toolTip:"Select Visible Geometry" align:#left
+	button 'btn_move_geo_to_layers' "Distribute Geometry" pos:[376,888] width:108 height:20 toolTip:"Move Selected Objects in to separate Layer" align:#left
 	--Local variables
 	local autosel = on
 	local last_wire_color = yellow
@@ -325,6 +326,29 @@ rollout mcCityManDialog "" width:500 height:964
 			)
 			
 			format "Move collision [ % ] in to layer [ % ]\n" o.name layer_name
+			layer.addNode o
+		)
+	)
+	
+	--distribute geometry in to layers
+	fn moveGeometryInToSeparateLayer = (
+		
+		for o in selection do (
+
+			if o.parent == undefined do (
+
+				format "Error > Unable move geometry [ % ] which is not linked\n" o.name
+			)
+			local layer_name = substring o.parent.name 1 (findString o.parent.name "_geometry")
+			layer_name += "terrain"
+			local layer = layerManager.getLayerFromName layer_name
+			if layer == undefined do (
+
+				format "Error > Unable move geometry [ % ] in to layer [ % ] which not exists\n" o.name layer_name
+				continue
+			)
+			
+			format "Move geometry [ % ] in to layer [ % ]\n" o.name layer_name
 			layer.addNode o
 		)
 	)
@@ -839,6 +863,7 @@ rollout mcCityManDialog "" width:500 height:964
 		callbacks.removescripts id:#micra_callbacks_cityman		
 	)
 	on btn_move_colls_to_layers pressed do (if queryBox "Distribute Collisions in to separate layers?" title:"Organize:" do moveCollisionsInToSeparateLayer() )
+	on btn_move_geo_to_layers pressed do (if queryBox "Distribute Geometry in to separate layers?" title:"Organize:" do moveGeometryInToSeparateLayer() )
 	on btn_select_visible_nodes pressed do ( select(for o in objects where not o.ishidden collect o) )
 	on btn_filter_visible_nodes pressed do ( select(for o in selection where not o.ishidden collect o) )
 	on btn_generate_coll pressed do generateSimpleCollisions()

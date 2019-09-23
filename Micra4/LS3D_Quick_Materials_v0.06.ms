@@ -7,7 +7,7 @@ rollout mcQuickMaterialsDialog "Quick Materials:" width:556 height:428
 	local xml_materials_table = (LS3DGUP.LS3DGUP.UtilsPath + "coll_bourbon_table.xml")	
 	local terrain_mat_lib_path = (LS3DGUP.LS3DGUP.UtilsPath + @"ground_material\bc_terrain.mat")
 	local material_color_types = #(color 173 136 255, color 90 200 200, color 255 136 213)
-	local mat_items = #(
+	local mat_items = #( --temp table for test only
 		
 		MAT_ITEM key:"grass"				id:140		sid:81		tile_u:0.4		tile_v:0.4,
 		MAT_ITEM key:"pavement1"			id:53		sid:53		tile_u:0.16		tile_v:0.32,
@@ -324,7 +324,14 @@ for p in bmpFileNamesArr do print p
 			)
 			default: undefined
 		)
-		if classOf bm == BitMap do bmp_preview.bitmap = stretchBitmapTo bm bmp_preview.width bmp_preview.height
+		if classOf bm == BitMap then (
+		
+			bmp_preview.bitmap = stretchBitmapTo bm bmp_preview.width bmp_preview.height
+			
+		) else ( --if bitmap not found show green color in preview
+		
+			bmp_preview.bitmap = Bitmap bmp_preview.width bmp_preview.height color:green
+		)
 	)
 	fn applyUnwrapUVW = (
 		
