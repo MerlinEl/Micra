@@ -48,50 +48,105 @@ rollout mcQuickMaterialsDialog "Quick Materials:" width:556 height:428
 	radioButtons 'rdo_mat_type' "" pos:[8,256] width:75 height:48 labels:#("Spawn NPC", "No Spawn", "No Entry") columns:1 align:#left
 	GroupBox 'grp10' "Set - Up:" pos:[4,316] width:136 height:108 align:#left
 	/**
-	*@Usage add more material libraries in to Temporary Library
+	*@Usage add one or more material libraries in to Temporary Library
 	*@Example
 			--load
 			semantic_lib_path = (LS3DGUP.LS3DGUP.UtilsPath + "semantic_materials.mat")
 			terrain_lib_path = (LS3DGUP.LS3DGUP.UtilsPath + @"ground_material\bc_terrain.mat")
-			success = loadMaterialLibraryPlus semantic_lib_path
-			success = loadMaterialLibraryPlus terrain_lib_path
+			loadMaterialsToLibrary #(semantic_lib_path, terrain_lib_path)
 			--read
 			currentMaterialLibrary.count
 			currentMaterialLibrary[1].name
 			currentMaterialLibrary[2].name
-			--get
 			semantic_mat = currentMaterialLibrary["semantic_materials"]
 			terrain_mat = currentMaterialLibrary["bc_terrain_main"]
-			--save all in one
-			all_lib_path = (LS3DGUP.LS3DGUP.UtilsPath + @"ground_material\mat_all.mat")
-			saveTempMaterialLibrary currentMaterialLibrary all_lib_path
-			loadMaterialLibraryPlus all_lib_path
-			--save separate library
-			terrain_lib = materialLibrary(currentMaterialLibrary["bc_terrain_main"])
-			saveTempMaterialLibrary terrain_lib terrain_lib_path
 	*/
-	fn loadMaterialLibraryPlus lib_path = ( --
+	fn loadMaterialsToLibrary libs_path_arr getLatest:true = (
 
-		if not (doesFileExist lib_path) do return false
-		local library_materials = for m in currentMaterialLibrary collect m
-		--need clear loadTempMaterialLibrary 
-		--while currentmateriallibrary.count > 0 do deleteitem currentmateriallibrary 1 --clean
-		local success = loadMaterialLibrary lib_path
-		if not success do return false
-		local new_lib = currentMaterialLibrary[1]
-		for m in library_materials where m.name != new_lib.name do append currentMaterialLibrary m
-		true
+		--clean current library
+		while currentmateriallibrary.count > 0 do deleteitem currentmateriallibrary 1 
+		--load libraries from disk
+		local mats = #()
+		for lib_path in libs_path_arr where doesFileExist lib_path do (
+		
+			if getLatest do gP4.P4_GetLatest #(lib_path) --fetch latest revision of file
+			local success = loadMaterialLibrary lib_path
+			if not success do (
+			
+				format "Unable to load terrain material library:%\n " lib_path
+				continue
+			)
+			append mats currentMaterialLibrary[1]
+		)
+		--clean current library again
+		while currentmateriallibrary.count > 0 do deleteitem currentmateriallibrary 1 
+		--apend materials in to library
+		for m in mats do append currentMaterialLibrary m
 	)
 	
+	/**
+	@Usage save single material library to file ( check in perforce switch )
+	*@Example
+		--save all libraries in one
+		all_lib_path = (LS3DGUP.LS3DGUP.UtilsPath + @"ground_material\mat_all.mat")
+		saveMaterialFromLibrary all_lib_path "" allInOne:true 
+	
+		--save single library
+		terrain_lib_path = (LS3DGUP.LS3DGUP.UtilsPath + @"ground_material\bc_terrain.mat")
+		saveMaterialFromLibrary terrain_lib_path "bc_terrain_main"
+	*/
+	fn saveMaterialFromLibrary lib_path lib_name checkInPerforce:true allInOne:false = (
+	
+		if checkInPerforce do (
+		
+			local fileStatus = gP4.P4_CheckFileStatus lib_path
+			if (fileStatus != 4) then (
+				local changelist = gP4.P4_CreateChangelist "MOD: Terrain Material Library"
+				format "Creating changelist:%\n " changelist
+				if (changelist == -1) then (
+					format ("Unable to create changelist for material library. I'll try to use default changelist.\n")
+				)
+				format "P4 Checkout of material library :%\n" lib_path
+				gP4.P4_Checkout #(lib_path) changelist
+			)
+		)
+		format "Mat Lib [ % ] are Saved.\n" lib_path
+		if allInOne then (
+		
+			saveTempMaterialLibrary currentMaterialLibrary lib_path
+			
+		) else (
+				
+			local mat = currentMaterialLibrary[lib_name] --get material from library
+			if mat == undefined do return false
+			local mat_lib = materialLibrary(mat) --instance material library
+			saveTempMaterialLibrary mat_lib lib_path
+		)
+	)
+
 	fn loadMateriaLibraries = (
 	
-		local semantic_lib_path = (LS3DGUP.LS3DGUP.UtilsPath + "semantic_materials.mat")
-		local terrain_lib_path = (LS3DGUP.LS3DGUP.UtilsPath + @"ground_material\bc_terrain.mat")
-		local success_s = loadMaterialLibraryPlus semantic_lib_path
-		local success_t = loadMaterialLibraryPlus terrain_lib_path
-		if success_s do semantic_mat = currentMaterialLibrary["semantic_materials"]
-		if success_t do terrain_mat = currentMaterialLibrary["bc_terrain_main"]
+		--get materials
+		semantic_mat = currentMaterialLibrary["semantic_materials"]
+		terrain_mat = currentMaterialLibrary["bc_terrain_main"]
+	
+		if semantic_mat == undefined or terrain_mat == undefined do ( --if materials not found reload them
+	
+			--load latest materials
+			local semantic_lib_path = (LS3DGUP.LS3DGUP.UtilsPath + "semantic_materials.mat")
+			local terrain_lib_path = (LS3DGUP.LS3DGUP.UtilsPath + @"ground_material\bc_terrain.mat")
+			loadMaterialsToLibrary #(semantic_lib_path, terrain_lib_path)
+			--define variables
+			semantic_mat = currentMaterialLibrary["semantic_materials"]
+			terrain_mat = currentMaterialLibrary["bc_terrain_main"]
+		
+		)
+		
+		--replace materials in Material Editor
+		meditMaterials[1] = terrain_mat
+		meditMaterials[2] = semantic_mat
 	)
+	
 	fn UVWMapFit theObj theMap useSel:#none = (
 		--RESET THE GIZMO SCALE FIRST:
 		--Multiply the gizmo's transformation with the inverse of a matrix created from its scale factor
@@ -485,7 +540,7 @@ for p in bmpFileNamesArr do print p
 			MAT_ITEM key:mat_name			id:mat_id		sid:mat_sid		tile_u:mat_tile_u		tile_v:mat_tile_v
 		)
 		format "Aviable materials:%\n"  mat_items.count
-		print mat_items
+		--print mat_items
 		--item.GetAllAttributes()
 	)
 	

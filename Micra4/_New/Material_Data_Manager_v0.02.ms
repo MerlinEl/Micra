@@ -39,6 +39,7 @@ struct sMaterialDataManager (
 			"uni_metrics_grid_dark_grey.xml",
 			"uni_color_grey_medium.xml",
 			"uni_metrics_grid_blue.xml",
+			"uni_color_grey_dark.xml",
 			"gray.xml"
 		)
 			m == undefined or
@@ -199,60 +200,92 @@ rollout rMaterialDataManager "Material Data Manager:" width:564 height:780
 	groupBox 'grp2' "Advanced Tools:" pos:[4,720] width:556 height:52 align:#left
 	dropDownList 'ddl_fn_list' "" pos:[12,742] width:472 height:21 items:#("Replace Unwanted Materials", "List Materials on Selection", "Print Used Materials") align:#left
 	button 'btn_run_fn' "RUN" pos:[488,740] width:64 height:24 align:#left
-	--button 'btn_save_mat' "Save Material" pos:[84,300] width:80 height:28 align:#left
+	button 'btn_save_mat' "Save Material" pos:[84,300] width:80 height:28 align:#left
 	/**
-	*@Usage add more material libraries in to Temporary Library
+	*@Usage add one or more material libraries in to Temporary Library
 	*@Example
 			--load
 			semantic_lib_path = (LS3DGUP.LS3DGUP.UtilsPath + "semantic_materials.mat")
 			terrain_lib_path = (LS3DGUP.LS3DGUP.UtilsPath + @"ground_material\bc_terrain.mat")
-			success = loadMaterialLibraryPlus semantic_lib_path
-			success = loadMaterialLibraryPlus terrain_lib_path
+			loadMaterialsToLibrary #(semantic_lib_path, terrain_lib_path)
 			--read
 			currentMaterialLibrary.count
 			currentMaterialLibrary[1].name
 			currentMaterialLibrary[2].name
-			--get
 			semantic_mat = currentMaterialLibrary["semantic_materials"]
 			terrain_mat = currentMaterialLibrary["bc_terrain_main"]
-			--save all in one
-			all_lib_path = (LS3DGUP.LS3DGUP.UtilsPath + @"ground_material\mat_all.mat")
-			saveTempMaterialLibrary currentMaterialLibrary all_lib_path
-			loadMaterialLibraryPlus all_lib_path
-			--save separate library
-			terrain_lib = materialLibrary(currentMaterialLibrary["bc_terrain_main"])
-			saveTempMaterialLibrary terrain_lib terrain_lib_path
 	*/
-	fn loadMaterialLibraryPlus lib_path = ( --
+	fn loadMaterialsToLibrary libs_path_arr getLatest:true = (
 
-		if not (doesFileExist lib_path) do return false
-		local library_materials = for m in currentMaterialLibrary collect m
-		local success = loadMaterialLibrary lib_path
-		if not success do return false
-		local new_lib = currentMaterialLibrary[1]
-		for m in library_materials where m.name != new_lib.name do append currentMaterialLibrary m
-		true
+		--clean current library
+		while currentmateriallibrary.count > 0 do deleteitem currentmateriallibrary 1 
+		--load libraries from disk
+		local mats = #()
+		for lib_path in libs_path_arr where doesFileExist lib_path do (
+		
+			if getLatest do gP4.P4_GetLatest #(lib_path) --fetch latest revision of file
+			local success = loadMaterialLibrary lib_path
+			if not success do (
+			
+				format "Unable to load terrain material library:%\n " lib_path
+				continue
+			)
+			append mats currentMaterialLibrary[1]
+		)
+		--clean current library again
+		while currentmateriallibrary.count > 0 do deleteitem currentmateriallibrary 1 
+		--apend materials in to library
+		for m in mats do append currentMaterialLibrary m
+	)
+	
+	/**
+	@Usage save single material library to file ( check in perforce switch )
+	*@Example
+		--save all libraries in one
+		all_lib_path = (LS3DGUP.LS3DGUP.UtilsPath + @"ground_material\mat_all.mat")
+		saveMaterialFromLibrary all_lib_path "" allInOne:true 
+	
+		--save single library
+		terrain_lib_path = (LS3DGUP.LS3DGUP.UtilsPath + @"ground_material\bc_terrain.mat")
+		saveMaterialFromLibrary terrain_lib_path "bc_terrain_main"
+	*/
+	fn saveMaterialFromLibrary lib_path lib_name checkInPerforce:true allInOne:false = (
+	
+		if checkInPerforce do (
+		
+			local fileStatus = gP4.P4_CheckFileStatus lib_path
+			if (fileStatus != 4) then (
+				local changelist = gP4.P4_CreateChangelist "MOD: Terrain Material Library"
+				format "Creating changelist:%\n " changelist
+				if (changelist == -1) then (
+					format ("Unable to create changelist for material library. I'll try to use default changelist.\n")
+				)
+				format "P4 Checkout of material library :%\n" lib_path
+				gP4.P4_Checkout #(lib_path) changelist
+			)
+		)
+		format "Mat Lib [ % ] are Saved.\n" lib_path
+		if allInOne then (
+		
+			saveTempMaterialLibrary currentMaterialLibrary lib_path
+			
+		) else (
+				
+			local mat = currentMaterialLibrary[lib_name] --get material from library
+			if mat == undefined do return false
+			local mat_lib = materialLibrary(mat) --instance material library
+			saveTempMaterialLibrary mat_lib lib_path
+		)
 	)
 	
 	fn loadMateriaLibraries = (
 	
 		local semantic_lib_path = (LS3DGUP.LS3DGUP.UtilsPath + "semantic_materials.mat")
 		local terrain_lib_path = (LS3DGUP.LS3DGUP.UtilsPath + @"ground_material\bc_terrain.mat")
-		local success_s = loadMaterialLibraryPlus semantic_lib_path
-		local success_t = loadMaterialLibraryPlus terrain_lib_path
-		if success_s do semantic_mat = currentMaterialLibrary["semantic_materials"]
-		if success_t do terrain_mat = currentMaterialLibrary["bc_terrain_main"]
-		/*
-		--terrain_mat = currentMaterialLibrary["bc_terrain_main"] --always get actual version
-		if terrain_mat == undefined and doesFileExist terrain_mat_lib_path do (
-			
-			local result = loadMaterialLibrary terrain_mat_lib_path
-			if result do  (
-				
-				terrain_mat = currentMaterialLibrary["bc_terrain_main"]
-				ddl_mat_lib.items = #(terrain_mat.name)	
-			)
-		)*/
+		loadMaterialsToLibrary #(semantic_lib_path, terrain_lib_path)
+		
+		semantic_mat = currentMaterialLibrary["semantic_materials"]
+		terrain_mat = currentMaterialLibrary["bc_terrain_main"]
 	)
 	
 	fn getMaterialType visual_id = (
@@ -695,8 +728,13 @@ rollout rMaterialDataManager "Material Data Manager:" width:564 height:780
 		xDoc.SaveXML()
 		true
 	)
+	
+	fn saveMatLib = (
+		
+		saveMaterialFromLibrary terrain_mat_lib_path "bc_terrain_main" 
+		
+	)
 
-	fn saveMatLib = (saveMaterialLibrary terrain_mat_lib_path; format "Mat Lib [ % ] are Saved.\n" terrain_mat_lib_path)
 	fn saveMaterialAndXML = (
 		
 		if materials_for_save.count == 0 do (
@@ -711,7 +749,7 @@ rollout rMaterialDataManager "Material Data Manager:" width:564 height:780
 			addNewItemToXML item
 		)
 		--save mat lib
-		saveMaterialLibrary terrain_mat_lib_path
+		saveMatLib()
 		--clear variable
 		materials_for_save = #()
 	)
@@ -938,8 +976,8 @@ rollout rMaterialDataManager "Material Data Manager:" width:564 height:780
 		)
 	)
 	on btn_compare_xml_lib pressed do (compareXmlLib())
-	on btn_save_mat pressed do (saveMatLib())
 	on rMaterialDataManager open do init()
+	on btn_save_mat pressed do (saveMatLib())
 	on btn_run_fn pressed do (runCommandByName ddl_fn_list.selected )
 )
 if classOf LS3DGUP == GlobalUtilityPlugin then (
