@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <UPDATE>
-  <VERSIONS latest="5.14">
+  <VERSIONS latest="5.15">
     <item_1 version="5.14" date="9_25_2019_4_40_56_PM" />
-    <item_2 version="5.07" date="9_23_2019_1_30_23_PM" />
+    <item_2 version="5.15" date="9_25_2019_5_41_57_PM" />
     <item_3 version="5.08" date="9_24_2019_2_38_18_PM" />
     <item_4 version="5.09" date="9_25_2019_9_58_56_AM" />
     <item_5 version="5.1" date="9_25_2019_10_42_51_AM" />

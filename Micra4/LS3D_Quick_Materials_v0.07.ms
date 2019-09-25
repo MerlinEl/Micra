@@ -328,7 +328,7 @@ rollout mcQuickMaterialsDialog "Quick Materials:" width:556 height:428
 		local sublevel = subobjectLevel
 		max modify mode
 		--set object or faces material ID
-		local mat_data = sel_item.tag.value
+		local mat_data = sel_item.tag.value 
 		--if not correct terrain material assigned add it to selection
 		for obj in valid_objects do (
 		
@@ -456,9 +456,18 @@ for p in bmpFileNamesArr do print p
 	)
 	fn applyUnwrapUVW = (
 		
-			local mo = 	Unwrap_UVW ()
-			modPanel.addModToSelection mo ui:on
-			mo.edit()	
+		--mod_uvw = $.modifiers[#unwrap_uvw]
+		local mod_uvw = 	Unwrap_UVW ()
+		modPanel.addModToSelection mod_uvw ui:on
+		mod_uvw.edit()	
+			
+		if lv_mat_data.selectedItems.count == 0 do return false
+		local sel_item = lv_mat_data.selectedItems.item[0]
+		local mat_data = sel_item.tag.value
+		local map_id = mat_data.id
+		local id_lsit = mod_uvw.texMapIDList 
+		local item_index = findItem id_lsit map_id
+		if item_index != 0 do mod_uvw.unwrap.setCurrentMap item_index
 	)
 	
 	fn getMaterialType visual_id = (
