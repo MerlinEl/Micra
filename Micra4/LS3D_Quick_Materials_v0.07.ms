@@ -312,7 +312,9 @@ rollout mcQuickMaterialsDialog "Quick Materials:" width:556 height:428
 		classOf obj == Editable_Poly or classOf obj == PolyMeshObject
 	)
 	
-	fn addTempMaterial objs applyMapping:true = (
+	fn assignMaterial objs applyMapping:true = (
+	
+		format "assign material:%\n" objs
 	
 		if lv_mat_data.selectedItems.count == 0 do return false
 		local sel_item = lv_mat_data.selectedItems.item[0]	
@@ -338,7 +340,7 @@ rollout mcQuickMaterialsDialog "Quick Materials:" width:556 height:428
 					messageBox "Terrain Material Not Found" title:"Aborted"
 					return false
 				)
-				format "Reassign Material:%  to Obj:% Mat:%\n" terrain_mat.name obj.name
+				format "Reassign Material:%  to Obj:%\n" terrain_mat.name obj.name
 				--assign terrain material at subobjectLevel 0 (if subobject is not zero material will be instanced with new name)
 				local sol = subobjectLevel --first get out of editing mode
 				subobjectLevel = 0
@@ -385,7 +387,10 @@ rollout mcQuickMaterialsDialog "Quick Materials:" width:556 height:428
 		
 			modPanel.addModToSelection (Edit_Poly ()) ui:on
 		)
-		if sublevel != undefined then subobjectLevel = sublevel else max create mode
+		if  chk_collapse.checked do ( --else is in uvwMap modifier
+            
+            if sublevel != undefined then subobjectLevel = sublevel else max create mode
+        )
 	)
 
 	fn stretchBitmapTo bm w h = (
@@ -657,8 +662,8 @@ for p in bmpFileNamesArr do print p
 			previewMaterial mat_id
 		)
 	)
-	on btn_apply_mat pressed do (undo "Assign Material" on  addTempMaterial (selection as Array) applyMapping:true)
-	on btn_apply_id pressed do (undo "Change Material ID" on  addTempMaterial (selection as Array) applyMapping:false)
+	on btn_apply_mat pressed do (undo "Assign Material" on  assignMaterial (selection as Array) applyMapping:true)
+	on btn_apply_id pressed do (undo "Change Material ID" on  assignMaterial (selection as Array) applyMapping:false)
 	on btn_unwrap pressed do (applyUnwrapUVW())
 	on edt_filter_names keyUp arg do (filterListView lv_mat_data)
 	on btn_clear_text pressed do (edt_filter_names.text = ""; filterListView lv_mat_data)
