@@ -29,24 +29,32 @@ rollout mcQuickMaterialsDialog "Quick Materials:" width:556 height:428
 	local semantic_mat = undefined
 	local terrain_mat_name = "bc_terrain_main"
 	--UI
-	button 'btn_apply' "Assign Material" pos:[148,236] width:136 height:24 toolTip:"Aply material to selected faces" align:#left
 	GroupBox 'grp1' "Preview:" pos:[4,4] width:280 height:228 align:#left
-	button 'btn_unwrap' "Unwrap UVW" pos:[148,292] width:136 height:24 align:#left
-	checkbox 'chk_collapse' "Collapse Modifier" pos:[12,340] width:100 height:16 checked:true align:#left
-	bitmap 'bmp_preview' "Bitmap" pos:[12,24] width:264 height:200 align:#left
-	checkbox 'chk_autoorient' "Orientation Auto" pos:[12,360] width:100 height:16 checked:false align:#left
-	dotNetControl 'edt_filter_names' "textbox" pos:[320,24] width:204 height:20 align:#left
-	dotNetControl 'lv_mat_data' "listView" pos:[292,48] width:252 height:368 align:#left
-	button 'btn_clear_text' "<" pos:[526,24] width:18 height:20 toolTip:"Clear Text" align:#left
 	GroupBox 'grp4' "Materials:" pos:[288,4] width:264 height:420 align:#left
-	label 'lbl7' "filter:" pos:[292,28] width:28 height:12 align:#left
 	GroupBox 'grp5' "Show Material Type:" pos:[4,236] width:136 height:76 align:#left
-	button 'btn_get_sel' "Select Simmilar Faces" pos:[148,264] width:136 height:24 align:#left
+	GroupBox 'grp10' "Set - Up:" pos:[4,316] width:136 height:108 align:#left
+	
+	button 'btn_clear_text' "<" pos:[526,24] width:18 height:20 toolTip:"Clear Text" align:#left
+	button 'btn_apply_mat' "Assign Material" pos:[148,236] width:136 height:24 toolTip:"Aply material to selected faces" align:#left
+	button 'btn_apply_id' "Change Material ID" pos:[148,264] width:136 height:24 toolTip:"Change material ID on selected faces" align:#left
+	button 'btn_unwrap' "Unwrap UVW" pos:[148,320] width:136 height:24 align:#left
+	button 'btn_get_sel' "Select Simmilar Faces" pos:[148,292] width:136 height:24 align:#left
+
+	checkbox 'chk_collapse' "Collapse Modifier" pos:[12,340] width:100 height:16 checked:true align:#left
+	checkbox 'chk_autoorient' "Orientation Auto" pos:[12,360] width:100 height:16 checked:false align:#left
+	
+	bitmap 'bmp_preview' "Bitmap" pos:[12,24] width:264 height:200 align:#left
 	bitmap 'bmp_mat_type_1' "Bitmap" pos:[92,256] width:40 height:16 align:#left
 	bitmap 'bmp_mat_type_2' "Bitmap" pos:[92,272] width:40 height:16 align:#left
 	bitmap 'bmp_mat_type_3' "Bitmap" pos:[92,288] width:40 height:16 align:#left
+	
+	dotNetControl 'edt_filter_names' "textbox" pos:[320,24] width:204 height:20 align:#left
+	dotNetControl 'lv_mat_data' "listView" pos:[292,48] width:252 height:368 align:#left
+	
+	label 'lbl7' "filter:" pos:[292,28] width:28 height:12 align:#left
+
 	radioButtons 'rdo_mat_type' "" pos:[8,256] width:75 height:48 labels:#("Spawn NPC", "No Spawn", "No Entry") columns:1 align:#left
-	GroupBox 'grp10' "Set - Up:" pos:[4,316] width:136 height:108 align:#left
+	
 	/**
 	*@Usage add one or more material libraries in to Temporary Library
 	*@Example
@@ -273,65 +281,106 @@ rollout mcQuickMaterialsDialog "Quick Materials:" width:556 height:428
 			polyop.setFaceMatID obj fsel mat_id	
 		)
 	)
-	fn addTempMaterial objs  = (
+	
+	fn setMaterialIdToSelection sel mat_id = (
+	
+		if sel.count == 1 and classOf sel[1] == Editable_Poly then (
+		
+			setMaterialIdToPoly sel[1] mat_id
+			
+		) else if subobjectLevel == undefined or subobjectLevel == 0  then ( --change material id in whole obj
+		
+			local mat_mod = Materialmodifier ()
+			modPanel.addModToSelection mat_mod ui:on
+			mat_mod.materialID = mat_id
+			for o in sel do maxOps.CollapseNodeTo o 1 true
+			return true
+
+		) else ( --oi is one or more objects with Edit_Poly modifier
+		
+			local gco = modPanel.getCurrentObject()
+			if classOf gco != Edit_Poly do return false
+			gco.SetOperation #SetMaterial
+			gco.MaterialIDtoSet = (mat_id - 1)
+			gco.Commit ()
+		)
+		true
+	)
+	
+	fn isValidObject obj = (
+	
+		classOf obj == Editable_Poly or classOf obj == PolyMeshObject
+	)
+	
+	fn addTempMaterial objs applyMapping:true = (
 	
 		if lv_mat_data.selectedItems.count == 0 do return false
 		local sel_item = lv_mat_data.selectedItems.item[0]	
-		local bad_objects_count = for o in objs where classOf o != Editable_Poly and classOf o != PolyMeshObject collect o 	
-		if bad_objects_count > 0 do (
+		local valid_objects = for o in objs where (isValidObject o) collect o 	
+		if valid_objects.count == 0 do (
 			
-			messageBox "Object(s) must be Editable Poly." title:"Aborted:"
+			messageBox "Object(s) must be Editable Poly or Edit Poly." title:"Aborted:"
 			return false
 		)
+		local gco = modPanel.getCurrentObject()
 		local sublevel = subobjectLevel
 		max modify mode
 		--set object or faces material ID
 		local mat_data = sel_item.tag.value
+		--if not correct terrain material assigned add it to selection
+		for obj in valid_objects do (
 		
-		format "Assign Material:% ID:% SID:% to TILE U:% V:% Obj:%\n" mat_data.key mat_data.id mat_data.sid mat_data.tile_u mat_data.tile_v obj.name 
-		
-		setMaterialIdToPoly obj mat_data.id
-		
-		--Apply Terrain Multi Material (all terrains must use the same multimaterial)
-		if obj.material == undefined or obj.material.name != terrain_mat_name do ( 
-			
-			if terrain_mat == undefined do (
-					
-				messageBox "Terrain Material Not Found" title:"Aborted"
-				return false
+			format "Assign Material:% ID:% SID:% to TILE U:% V:% Objects:%\n" mat_data.key mat_data.id mat_data.sid mat_data.tile_u mat_data.tile_v obj.name 
+			if obj.material == undefined or obj.material.name != terrain_mat_name do ( 
+				
+				if terrain_mat == undefined do (
+						
+					messageBox "Terrain Material Not Found" title:"Aborted"
+					return false
+				)
+				format "Reassign Material:%  to Obj:% Mat:%\n" terrain_mat.name obj.name
+				--assign terrain material at subobjectLevel 0 (if subobject is not zero material will be instanced with new name)
+				local sol = subobjectLevel --first get out of editing mode
+				subobjectLevel = 0
+				obj.material = terrain_mat
+				subobjectLevel = sol --return back to editing mode
 			)
-			format "Assign Material:%  to Obj:%\n" terrain_mat.name obj.name 
-			--assign terrain material at subobjectLevel 0 (if subobject is not zero material will be instanced with new name)
-			local sol = subobjectLevel
-			subobjectLevel = 0
-			obj.material = terrain_mat
-			subobjectLevel = sol
 		)
-		--continute to add and setup modifiers
-		local mod_uvw = uvwMap axis:2 maptype:0 mapChannel:1 realWorldMapSize:false --name:sel_item.key
-		if (chk_autoorient.checked and sublevel == 4) then (
-			
-			alignUVGizmoToSelectedFaces obj mod_uvw
-			
-		)  else (
-			
-			modPanel.addModToSelection mod_uvw ui: on -- Add UVW Map Modifier to selection 	
-		)
-		--format "mo w:% h:% name:%\n" mod_uvw.width mod_uvw.length sel_item
-		local u_tile = mod_uvw.width *  (mat_data.tile_u / 1000) --default mod_uvw.width * 0.0016
-		local v_tile = mod_uvw.length * (mat_data.tile_v / 1000) --default mod_uvw.length * 0.0032
-		format "sel tile u:% v:%\n" u_tile v_tile
-		mod_uvw.utile = u_tile	--length is in generic units
-		mod_uvw.vtile = v_tile	--width is in generic units
-		--local mod_matid = Materialmodifier materialID:mat_id
-		--modPanel.addModToSelection  mod_matid	
 		
-		if chk_collapse.checked do (
+		setMaterialIdToSelection valid_objects mat_data.id
+		
+		
+		if applyMapping do (
+		
+			--continute to add mapping
+			local mod_uvw = uvwMap axis:2 maptype:0 mapChannel:1 realWorldMapSize:false --name:sel_item.key
+			if (chk_autoorient.checked and sublevel == 4) then (
+				
+				alignUVGizmoToSelectedFaces obj mod_uvw
+				
+			)  else (
+				
+				modPanel.addModToSelection mod_uvw ui: on -- Add UVW Map Modifier to selection 	
+			)
+			--format "mo w:% h:% name:%\n" mod_uvw.width mod_uvw.length sel_item
+			local u_tile = mod_uvw.width *  (mat_data.tile_u / 1000) --default mod_uvw.width * 0.0016
+			local v_tile = mod_uvw.length * (mat_data.tile_v / 1000) --default mod_uvw.length * 0.0032
+			format "sel tile u:% v:%\n" u_tile v_tile
+			mod_uvw.utile = u_tile	--length is in generic units
+			mod_uvw.vtile = v_tile	--width is in generic units
+			if chk_collapse.checked do (
 			
-			maxOps.CollapseNodeTo obj 1 true
-			if sublevel != undefined then subobjectLevel = sublevel else max create mode
-		) 
+				for o in valid_objects do maxOps.CollapseNodeTo o 1 true
+			)
+		)
+		--if was before with Edit_Poly modifier and now is without, Add it tback.
+		if classOf gco == Edit_Poly and classOf (modPanel.getCurrentObject()) != Edit_Poly do (
+		
+			modPanel.addModToSelection (Edit_Poly ()) ui:on
+		)
+		if sublevel != undefined then subobjectLevel = sublevel else max create mode
 	)
+
 	fn stretchBitmapTo bm w h = (
 		
 		local bb= bitmap w h color:black 
@@ -601,7 +650,8 @@ for p in bmpFileNamesArr do print p
 			previewMaterial mat_id
 		)
 	)
-	on btn_apply pressed do (undo "Assign Material" on  addTempMaterial selection)
+	on btn_apply_mat pressed do (undo "Assign Material" on  addTempMaterial (selection as Array) applyMapping:true)
+	on btn_apply_id pressed do (undo "Change Material ID" on  addTempMaterial (selection as Array) applyMapping:false)
 	on btn_unwrap pressed do (applyUnwrapUVW())
 	on edt_filter_names keyUp arg do (filterListView lv_mat_data)
 	on btn_clear_text pressed do (edt_filter_names.text = ""; filterListView lv_mat_data)

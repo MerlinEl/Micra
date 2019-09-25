@@ -607,13 +607,13 @@ rollout mcCityManDialog "" width:500 height:964
 	)
 	fn checkForDupplicatedNamesInScene = (
 
-		local nd = struct NAME_DATA (obj, dupes)
+		local OD = struct OBJECT_DATA (obj, dupes)
 		local database = #()
 		for o in objects do (
 
 			local found = false
 			for d in database where d.obj.name == o.name do (append d.dupes o; found = true)
-			if not found do append database (nd o #(o))
+			if not found do append database (OD o #(o))
 		)
 		local dupplicate_objs = #()
 		for d in database where d.dupes.count  > 1 do join dupplicate_objs d.dupes

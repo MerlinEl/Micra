@@ -2,7 +2,7 @@
 <SETTINGS>
   <Micra>
     <born val="04.25.2006" />
-    <version val="5.1" />
+    <version val="5.11" />
   </Micra>
   <Structures val="All registred Micra's Structures">
     <!--independent classes-->
@@ -137,7 +137,7 @@
     <Patcher val="0.03" />
     <Patcher2P val="0.05" />
     <LS3D_Asset_Builder val="0.06" />
-    <LS3D_Quick_Materials val="0.06" />
+    <LS3D_Quick_Materials val="0.07" />
     <FBX_Quick_Import_Export val="0.02" />
   </Version>
   <SystemFiles val="Micra's Settings Files">
