@@ -175,6 +175,7 @@ rollout rMaterialDataManager "Material Data Manager:" width:564 height:780
 	local winColor  = ((colorMan.getColor #window)*255)as color
 	local textColor = ((colorMan.getColor #text)*255)as color
 	local terrain_mat = undefined
+	local semantic_mat = undefined
 	local picked_mat = undefined
 	local mat_items = #()
 	local materials_for_save = #()
@@ -188,7 +189,7 @@ rollout rMaterialDataManager "Material Data Manager:" width:564 height:780
 	button 'btn_add_mat' "ADD >" pos:[188,678] width:48 height:28 align:#left
 	GroupBox 'grp1' "Setup:" pos:[4,4] width:556 height:712 align:#left
 	button 'btn_load_mat_lib' "Load XML" pos:[12,300] width:68 height:28 align:#left
-	dropdownList 'ddl_mat_lib' "Mat lib" pos:[12,256] width:224 height:40 align:#left
+	dropdownList 'ddl_mat_lib' "Mat lib" pos:[12,256] width:224 height:40 align:#left items:#("bc_terrain.mat")
 	button 'btn_save_all' "Save ALL" pos:[168,300] width:68 height:28 align:#left
 	button 'btn_get_mat' "Get Material From Selection" pos:[12,396] width:224 height:28 align:#left
 	button 'btn_convert_sel' "Convert Selection To New MatLib" pos:[12,364] width:224 height:28 align:#left
@@ -280,12 +281,25 @@ rollout rMaterialDataManager "Material Data Manager:" width:564 height:780
 	
 	fn loadMateriaLibraries = (
 	
-		local semantic_lib_path = (LS3DGUP.LS3DGUP.UtilsPath + "semantic_materials.mat")
-		local terrain_lib_path = (LS3DGUP.LS3DGUP.UtilsPath + @"ground_material\bc_terrain.mat")
-		loadMaterialsToLibrary #(semantic_lib_path, terrain_lib_path)
-		
+		--get materials
 		semantic_mat = currentMaterialLibrary["semantic_materials"]
 		terrain_mat = currentMaterialLibrary["bc_terrain_main"]
+	
+		if semantic_mat == undefined or terrain_mat == undefined do ( --if materials not found reload them
+	
+			--load latest materials
+			local semantic_lib_path = (LS3DGUP.LS3DGUP.UtilsPath + "semantic_materials.mat")
+			local terrain_lib_path = (LS3DGUP.LS3DGUP.UtilsPath + @"ground_material\bc_terrain.mat")
+			loadMaterialsToLibrary #(semantic_lib_path, terrain_lib_path)
+			--define variables
+			semantic_mat = currentMaterialLibrary["semantic_materials"]
+			terrain_mat = currentMaterialLibrary["bc_terrain_main"]
+		
+		)
+		
+		--replace materials in Material Editor
+		meditMaterials[1] = terrain_mat
+		meditMaterials[2] = semantic_mat
 	)
 	
 	fn getMaterialType visual_id = (
@@ -817,7 +831,7 @@ rollout rMaterialDataManager "Material Data Manager:" width:564 height:780
 				--for i = 0 to sel_items.count - 1 collect do format "item:%\n" sel_items.item[i].text
 
 				local selected_items_names = ""
-				for i = 0 to sel_items.count - 1 do selected_items_names += sel_items.item[i].text
+				for i = 0 to sel_items.count - 1 do selected_items_names += sel_items.item[i].text  + "\n"
                 setclipboardText selected_items_names
             )
 			"Copy To": (
@@ -835,7 +849,7 @@ rollout rMaterialDataManager "Material Data Manager:" width:564 height:780
 					fn copyItemsTo = (
 					
 					
-						--copy xml data with selantic id and u v tile (but changed visual ID)
+						--copy xml data with semantic id and u v tile (but changed visual ID)
 						--copy material in library
 					)
 					on btn_copyto pressed do (
@@ -874,6 +888,8 @@ rollout rMaterialDataManager "Material Data Manager:" width:564 height:780
 	
 	fn init = (
 		
+		--load material library
+		loadMateriaLibraries()		
 		--load materials in to list
 		local column_names=#("Name", "ID", "SID")
 		lv_xml_data.BackColor = drawingColor.fromArgb winColor.r winColor.g winColor.b
@@ -919,8 +935,7 @@ rollout rMaterialDataManager "Material Data Manager:" width:564 height:780
 	on btn_add_mat pressed do (addNewMaterial())
 	on btn_load_mat_lib pressed do (
 		
-		--load material library
-		loadMateriaLibraries()	
+
 		--materials table from xml
 		parseXmlTable xml_materials_table
 		fillListView lv_xml_data mat_items

@@ -607,15 +607,23 @@ rollout mcCityManDialog "" width:500 height:964
 	)
 	fn checkForDupplicatedNamesInScene = (
 
-		local nd = struct NAME_DATA (obj, index)
+		/*local all_objects_names = for o in objects collect o.name
+		local dupe_objs = #()
+		for o in objects where findItem all_objects_names o.name do append dupe_objs o
+		if dupe_objs.count > 0 do select dupe_objs
+		format "Dulicated Objects List:\n"
+		for o in dupe_objs do format "\t%\n" o.name
+		messageBox ("Found ( "+dupe_objs.count as string+" )  duplicated objects.") title:"Dupple Inspector"*/
+
+		local nd = struct NAME_DATA (obj, cnt)
 		local database = #()
 		for o in objects do (
 
 			local found = false
-			for d in database where d.obj.name == o.name do (d.index += 1; found = true)
+			for d in database where d.obj.name == o.name do (d.cnt += 1; found = true)
 			if not found do append database (nd o 1)
 		)
-		local dupplicate_objs = for d in database where d.index  > 1 collect d.obj
+		local dupplicate_objs = for d in database where d.cnt  > 1 collect d.obj
 		local msg = "Dupplicated Objects Found ("+dupplicate_objs.count as string+")\n"
 		for o in dupplicate_objs do msg += ("\t" + o.name + "\n")
 		messageBox msg title:"Dupple Inspector"
@@ -643,15 +651,20 @@ rollout mcCityManDialog "" width:500 height:964
 	--load node children
 	on cbx_node_list selected sel do
 	(
-		local node_name = cbx_node_list.items[sel]
+	
+	
 		local sel_items = cbx_node_list.selection as array
-		--format "selected items:% sel:% name:%\n"  sel_items.count sel node_name
-		if sel_items.count == 1 then 
-		(
-			fillChildrenList node_name
-		) else (
+		if sel_items.count > 1 then (
+		
+			format "MULTI  > sel:%\n" sel_items.count
 			cbx_children_list.items = #()	
 			lbl_objects.text = "()"
+		
+		) else if sel_items.count == 1 do (
+		
+			local node_name = cbx_node_list.items[sel_items[1]]
+			fillChildrenList node_name
+			format "SINGLE  > sel:%\n" node_name
 		)
 	)
 	--focus node children
@@ -879,7 +892,7 @@ rollout mcCityManDialog "" width:500 height:964
 	on btn_unhide_sel pressed do (for o in selection do o.isHidden = false)
 	on btn_generate_terrain_coll pressed do generateTerrainCollisions()
 	on btn_generate_roads_coll pressed do generateRoadsCollisions()
-	on btn_show_objs 	pressed do ( showObjectsByNamePart objects edt_sh_name.text true	)
+	on btn_show_objs pressed do ( showObjectsByNamePart objects edt_sh_name.text true	)
 	on btn_hide_objs pressed do ( showObjectsByNamePart objects edt_sh_name.text false	)
 	on btn_sel_geo_nodes pressed do ( selectNodesByType "geo"	)
 	on btn_sel_coll_nodes pressed do ( selectNodesByType "coll")

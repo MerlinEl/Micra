@@ -313,7 +313,7 @@ lh_02_little_italy_block_h_roads_coll
 	
 	fn createRoadsCollisions = (
 		
-		roGenStruct.All_CALLBACKS_ENABLED = false
+		::roGenStruct.All_CALLBACKS_ENABLED = false
 		sliderTime = 0 --some roads have linkedXform with animated dummy. Collision must be genereted at frame 0
 		
 		local s_mat = currentMaterialLibrary["semantic_materials"]
@@ -377,7 +377,7 @@ lh_02_little_italy_block_h_roads_coll
 		progressEnd()								--Progress Bar 
 		max select none
 		
-		roGenStruct.All_CALLBACKS_ENABLED = true
+		::roGenStruct.All_CALLBACKS_ENABLED = true
 		completeRedraw()
 	)
 	fn setAutoTraceTo state = (
