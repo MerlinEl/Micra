@@ -10,7 +10,7 @@
     <mc_Dialog_G active="true" pos="[2171,598]" size="[148,114]" title="Modify:" btnCount="[6,4]" />
     <mc_Dialog_H active="true" pos="[2172,795]" size="[148,66]" title="Materials:" btnCount="[6,2]" />
     <mc_Dialog_I active="true" pos="[2172,927]" size="[148,66]" title="Programming:" btnCount="[6,2]" />
-    <mc_Dialog_J active="true" pos="[1792,1236]" size="[532,42]" title="Experimental:" btnCount="[22,1]" />
+    <mc_Dialog_J active="true" pos="[1632,1242]" size="[532,42]" title="Experimental:" btnCount="[22,1]" />
   </Properties_1>
   <Properties_2>
     <mcMicraDialog active="true" pos="[2171,214]" size="[148,66]" title="" />

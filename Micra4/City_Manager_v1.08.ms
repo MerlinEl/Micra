@@ -607,27 +607,19 @@ rollout mcCityManDialog "" width:500 height:964
 	)
 	fn checkForDupplicatedNamesInScene = (
 
-		/*local all_objects_names = for o in objects collect o.name
-		local dupe_objs = #()
-		for o in objects where findItem all_objects_names o.name do append dupe_objs o
-		if dupe_objs.count > 0 do select dupe_objs
-		format "Dulicated Objects List:\n"
-		for o in dupe_objs do format "\t%\n" o.name
-		messageBox ("Found ( "+dupe_objs.count as string+" )  duplicated objects.") title:"Dupple Inspector"*/
-
-		local nd = struct NAME_DATA (obj, cnt)
+		local nd = struct NAME_DATA (obj, dupes)
 		local database = #()
 		for o in objects do (
 
 			local found = false
-			for d in database where d.obj.name == o.name do (d.cnt += 1; found = true)
-			if not found do append database (nd o 1)
+			for d in database where d.obj.name == o.name do (append d.dupes o; found = true)
+			if not found do append database (nd o #(o))
 		)
-		local dupplicate_objs = for d in database where d.cnt  > 1 collect d.obj
-		local msg = "Dupplicated Objects Found ("+dupplicate_objs.count as string+")\n"
-		for o in dupplicate_objs do msg += ("\t" + o.name + "\n")
-		messageBox msg title:"Dupple Inspector"
-		format "%\n" msg
+		local dupplicate_objs = #()
+		for d in database where d.dupes.count  > 1 do join dupplicate_objs d.dupes
+		format "Dulicated Objects List:\n"
+		for o in dupplicate_objs do format "\t%\n" o.name
+		messageBox ("Found ( "+dupplicate_objs.count as string+" )  duplicated objects.\nPress Unique names Fix roe Repair.") title:"Dupple Inspector"
 		select dupplicate_objs
 	)
 	fn hideUnhideSelection = (
