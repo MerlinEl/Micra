@@ -40,6 +40,7 @@ struct sMaterialDataManager (
 			"uni_color_grey_medium.xml",
 			"uni_metrics_grid_blue.xml",
 			"uni_color_grey_dark.xml",
+			"dark_gray.xml",
 			"gray.xml"
 		)
 			m == undefined or
@@ -48,7 +49,8 @@ struct sMaterialDataManager (
 						classOf m == LS3DMaterial and findItem restricted_names (getMaterialXML m) != 0 or
 							classOf m == DirectX_9_Shader and classOf m.renderMaterial == Missing_Mtl or 
 								findItem restricted_names (getMaterialXML m) != 0 or
-									m.name == "none"
+									m.name == "none" or 
+										m.name == "uni_color_gray"
 	), 
 	
 	fn replaceMaterial multi_mat new_mat &tabs:"\t" &cnt:0 = ( 
@@ -61,7 +63,6 @@ struct sMaterialDataManager (
 			for i = 1 to multi_mat.count do (
 				
 				local mat = multi_mat[i]
-				local m_name = if mat != undefined then mat.name else "undefined"
 				if classOf mat == MultiMaterial then (
 				
 					cnt+= 1
@@ -69,7 +70,8 @@ struct sMaterialDataManager (
 					
 				) else if isNotAllowedMaterial mat do (
 				
-					format "%\tREPLACE ID:% MAT:%  CLASS:%\n" tab_str i m_name (classOf mat) 
+					local m_name = if mat != undefined then mat.name else "undefined"
+					format "%\tREPLACE ID:% MAT:%  CLASS:% IN MULTIMAT:%\n" tab_str i m_name (classOf mat) multi_mat.name
 					multi_mat[i] = new_mat
 				)
 			)
@@ -368,11 +370,22 @@ rollout rMaterialDataManager "Material Data Manager:" width:564 height:780
 	fn getMaterialsFromSelection = ( --only single object or single face
 		
 		local sel = selection as array
-		if sel.count > 1 do (
+		if sel.count > 1 do ( --multi selection
 			
 			local used_materials = #()
-			for o in sel where o.material != undefined do appendIfUnique  used_materials o.material
-			return used_materials
+			for o in sel where o.material != undefined do appendIfUnique used_materials o.material
+			local all_mats = #()
+			for mat in used_materials do (
+				
+				if classOf mat == MultimaTerial then (
+				
+					for m in mat do append all_mats m
+				) else (
+				
+					append all_mats mat
+				)
+			)
+			return all_mats
 		)
 		local obj = sel[1]
 -- 		format "getMaterialFromSelection > obj:%\n" obj
@@ -384,7 +397,7 @@ rollout rMaterialDataManager "Material Data Manager:" width:564 height:780
 			local mat_id = polyop.getFaceMatID obj face_index
 			#(obj.material[mat_id])
 			
-		) else (
+		) else ( --single selection
 			
 			if classOf obj.material == Multimaterial then obj.material else #(obj.material)
 		)

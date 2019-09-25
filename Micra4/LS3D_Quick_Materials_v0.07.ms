@@ -383,12 +383,12 @@ rollout mcQuickMaterialsDialog "Quick Materials:" width:556 height:428
 			)
 		)
 		--if was before with Edit_Poly modifier and now is without, Add it tback.
-		if classOf gco == Edit_Poly and classOf (modPanel.getCurrentObject()) != Edit_Poly do (
-		
-			modPanel.addModToSelection (Edit_Poly ()) ui:on
-		)
-		if  chk_collapse.checked do ( --else is in uvwMap modifier
+		if chk_collapse.checked do ( --else is in uvwMap modifier
             
+			if classOf gco == Edit_Poly and classOf (modPanel.getCurrentObject()) != Edit_Poly do (
+		
+				modPanel.addModToSelection (Edit_Poly ()) ui:on
+			)
             if sublevel != undefined then subobjectLevel = sublevel else max create mode
         )
 	)
