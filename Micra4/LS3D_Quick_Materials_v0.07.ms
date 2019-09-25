@@ -356,7 +356,14 @@ rollout mcQuickMaterialsDialog "Quick Materials:" width:556 height:428
 			local mod_uvw = uvwMap axis:2 maptype:0 mapChannel:1 realWorldMapSize:false --name:sel_item.key
 			if (chk_autoorient.checked and sublevel == 4) then (
 				
-				alignUVGizmoToSelectedFaces obj mod_uvw
+				if valid_objects.count > 1 or classOf valid_objects[1] != Editable_Poly then (
+				
+					messageBox "For now Auto Orientation works only in Editable_Poly single Object"
+				
+				) else (
+				
+					alignUVGizmoToSelectedFaces valid_objects[1] mod_uvw
+				)
 				
 			)  else (
 				

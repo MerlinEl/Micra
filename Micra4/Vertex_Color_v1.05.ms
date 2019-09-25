@@ -23,8 +23,8 @@ rollout mcVertexColorDialog "Vertex Color v1.02" width:408 height:348
 	button 'btn_hide_alpha' "OFF" pos:[320,140] width:80 height:24 align:#left
 	button 'btn_show_shaded' "ON" pos:[232,168] width:80 height:24 align:#left
 	button 'btn_hide_shaded' "OFF" pos:[320,168] width:80 height:24 align:#left
-	button 'btn_set' "Assign" pos:[116,20] width:140 height:42 align:#left
-	button 'btn_sel' "Select" pos:[116,64] width:140 height:42 align:#left
+	button 'btn_set' "Assign By Set" pos:[116,20] width:140 height:42 align:#left
+	button 'btn_sel' "Select By Set" pos:[116,64] width:140 height:42 align:#left
 	button 'btn_sel_simillar' "Select Simillar" pos:[260,20] width:140 height:42 align:#left
 	button 'btn18' "..." pos:[260,64] width:140 height:42 align:#left
 	--button 'btn_set_dx' "Set DX Shader to selection" pos:[120,200] width:276 height:24 align:#left
