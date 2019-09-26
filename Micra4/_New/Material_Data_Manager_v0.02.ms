@@ -169,7 +169,7 @@ struct sMaterialDataManager (
 gMaterialDataManager = sMaterialDataManager()
 
 if rMaterialDataManager != undefined do destroyDialog rMaterialDataManager
-rollout rMaterialDataManager "Material Data Manager:" width:564 height:780
+rollout rMaterialDataManager "Material Data Manager:" width:700 height:780
 (
 	struct MAT_ITEM (key, id, sid, tile_u, tile_v, mat)
 	local drawingColor   = dotNetClass "drawing.color"
@@ -185,13 +185,13 @@ rollout rMaterialDataManager "Material Data Manager:" width:564 height:780
 	local terrain_mat_lib_path = (LS3DGUP.LS3DGUP.UtilsPath + @"ground_material\bc_terrain.mat")
 	local xml_materials_table = (LS3DGUP.LS3DGUP.UtilsPath + "coll_bourbon_table.xml")
 	local rcmenu_xml = dotNetObject "System.Windows.Forms.ContextMenuStrip"
-	dotNetControl 'lv_xml_data' "listView" pos:[240,28] width:316 height:680 align:#left
+	dotNetControl 'lv_xml_data' "listView" pos:[240,28] width:448 height:680 align:#left
 	dotNetControl 'lv_new_mats' "listView" pos:[8,428] width:228 height:244 align:#left
 	bitmap 'bmp_preview' "Bitmap" pos:[12,28] width:224 height:224 align:#left
 	button 'btn_add_mat' "ADD >" pos:[188,678] width:48 height:28 align:#left
-	GroupBox 'grp1' "Setup:" pos:[4,4] width:556 height:712 align:#left
+	GroupBox 'grp1' "Setup:" pos:[4,4] width:692 height:712 align:#left
 	button 'btn_load_mat_lib' "Load XML" pos:[12,300] width:68 height:28 align:#left
-	dropdownList 'ddl_mat_lib' "Mat lib" pos:[12,256] width:224 height:40 align:#left items:#("bc_terrain.mat")
+	dropdownList 'ddl_mat_lib' "Mat lib" pos:[12,256] width:224 height:40 items:#("bc_terrain.mat") align:#left
 	button 'btn_save_all' "Save ALL" pos:[168,300] width:68 height:28 align:#left
 	button 'btn_get_mat' "Get Material From Selection" pos:[12,396] width:224 height:28 align:#left
 	button 'btn_convert_sel' "Convert Selection To New MatLib" pos:[12,364] width:224 height:28 align:#left
@@ -200,9 +200,9 @@ rollout rMaterialDataManager "Material Data Manager:" width:564 height:780
 	label 'lbl9' "SID:" pos:[100,684] width:20 height:16 align:#left
 	spinner 'spn_target_id' "" pos:[32,684] width:60 height:16 range:[1,10000,1] type:#integer scale:1 align:#left
 	spinner 'spn_target_sid' "" pos:[124,684] width:60 height:16 range:[1,10000,1] type:#integer scale:1 align:#left
-	groupBox 'grp2' "Advanced Tools:" pos:[4,720] width:556 height:52 align:#left
-	dropDownList 'ddl_fn_list' "" pos:[12,742] width:472 height:21 items:#("Replace Unwanted Materials", "List Materials on Selection", "Print Used Materials") align:#left
-	button 'btn_run_fn' "RUN" pos:[488,740] width:64 height:24 align:#left
+	GroupBox 'grp2' "Advanced Tools:" pos:[4,720] width:692 height:52 align:#left
+	dropdownList 'ddl_fn_list' "" pos:[12,742] width:608 height:21 items:#("Replace Unwanted Materials", "List Materials on Selection", "Print Used Materials") align:#left
+	button 'btn_run_fn' "RUN" pos:[624,740] width:64 height:24 align:#left
 	button 'btn_save_mat' "Save Material" pos:[84,300] width:80 height:28 align:#left
 	/**
 	*@Usage add one or more material libraries in to Temporary Library
@@ -513,6 +513,22 @@ rollout rMaterialDataManager "Material Data Manager:" width:564 height:780
 		false
 	)
 	
+	fn getRservedSlotsFromID visual_id = (
+	
+		if  visual_id - 400 > 0 then (
+		
+			#(visual_id - 200, visual_id - 400 , visual_id) as String
+		)
+		else if visual_id - 200 > 0 then (
+		
+			#(visual_id - 200, visual_id, visual_id + 400)	as String
+		)
+		else (
+				
+			#(visual_id, visual_id + 200, visual_id + 400)	as String
+		)
+	)
+	
 	fn fillListView lv items = (
 		
 		if items == undefined do return false
@@ -530,8 +546,10 @@ rollout rMaterialDataManager "Material Data Manager:" width:564 height:780
 			
 			li.subitems.add (itm.id as String)
             li.subitems.add (itm.sid as String)
+			li.subitems.add (getRservedSlotsFromID itm.id)
 			li.subitems.item[0].name="0"
 			li.subitems.item[1].name="1"
+			li.subitems.item[2].name="2"
 			append all_items li 
 		)
 		--format "lv:% items:% all_items:%\n" lv items.count all_items.count
@@ -630,8 +648,10 @@ rollout rMaterialDataManager "Material Data Manager:" width:564 height:780
 		li.tag = dotnetMxsValue  itm  --DotNet value holding the MAXScript value
 		li.subitems.add (target_id as String)
 		li.subitems.add (target_sid as String)
+		li.subitems.add (getRservedSlotsFromID target_id)
 		li.subitems.item[0].name="0"
 		li.subitems.item[1].name="1"
+		li.subitems.item[2].name="2"
 		
 		lv_xml_data.BeginUpdate()
 		lv_xml_data.Items.Add li
@@ -904,7 +924,7 @@ rollout rMaterialDataManager "Material Data Manager:" width:564 height:780
 		--load material library
 		loadMateriaLibraries()		
 		--load materials in to list
-		local column_names=#("Name", "ID", "SID")
+		local column_names=#("Material Name", "ID", "SID", "RESERVED SLOTS")
 		lv_xml_data.BackColor = drawingColor.fromArgb winColor.r winColor.g winColor.b
 		--dot net controls work with the system in-focus and out-focus color schemes.
 		-- using of the system menu color as listview backcolor instead of default (or custom).
@@ -921,9 +941,10 @@ rollout rMaterialDataManager "Material Data Manager:" width:564 height:780
 		lv_xml_data.allowDrop = false
 		lv_xml_data.view = lv_xml_data.view.Details
 		lv_xml_data.HeaderStyle = lv_xml_data.HeaderStyle.Nonclickable
-		lv_xml_data.Columns.add column_names[1] 212
+		lv_xml_data.Columns.add column_names[1] 232
 		lv_xml_data.Columns.add column_names[2] 50
 		lv_xml_data.Columns.add column_names[3] 50
+		lv_xml_data.Columns.add column_names[4] 100
 		
 		--picked materials
 		column_names=#("Name", "ID")
