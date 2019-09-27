@@ -268,27 +268,64 @@ rollout mcQuickMaterialsDialog "Quick Materials:" width:556 height:428
 		mod_uvw.gizmo.transform = theMatrix
 		UVWMapFit obj mod_uvw useSel:#none
 	) 
+	
+	fn getMaterialIdFromPoly obj = (
+	
+		local face_id = undefined
+		if subobjectLevel == undefined or subobjectLevel == 0  then ( --whole object
+				
+			face_id = try (polyop.getFaceMatID obj 1) catch undefined --undefined if index is out of range
+		
+		) else if subobjectLevel == 4 or subobjectLevel == 5 do ( --selected faces only
+		
+			local face_index = (polyOp.getFaceSelection obj as Array)[1]	
+			if face_index != undefined do face_id = try (polyop.getFaceMatID obj face_index) catch undefined --undefined if index is out of range
+		)
+		face_id --output
+	)
+	
 	fn setMaterialIdToPoly obj mat_id = (
 	
 		if subobjectLevel == undefined or subobjectLevel == 0  then ( --whole object
 				
-			format "Set Material ID:% to Object:%\n" mat_id obj.name
+			--format "Set Material ID:% to Object:%\n" mat_id obj.name
 			local fcount = obj.faces.count
 			if fcount != 0 do polyop.setFaceMatID obj #{1..fcount} mat_id
 		
 		) else if subobjectLevel == 4 or subobjectLevel == 5 do ( --selected faces only
 		
 			local fsel = polyOp.getFaceSelection obj
-			format "Set Material ID:% to Faces:%\n" mat_id fsel
+			--format "Set Material ID:% to Faces:%\n" mat_id fsel
 			polyop.setFaceMatID obj fsel mat_id	
 		)
 	)
 	
+	fn getMaterialIdFromSelection sel = (
+	
+		local mat_id = undefined
+		local gco = modPanel.getCurrentObject()
+		if classOf gco == Editable_Poly then (
+		
+			mat_id = getMaterialIdFromPoly sel[1]
+			--format "Get Material ID:% from Editable_Poly:%\n" mat_id sel[1].name
+			
+		) else if classOf gco == Edit_Poly do ( --oi is one or more objects with Edit_Poly modifier
+		
+			local face_index = (gco.GetSelection #Face as Array)[1]
+			if face_index != undefined do mat_id = gco.EditPolyMod.GetFaceMaterial face_index
+			--format "Get Material ID:% to Edit_Poly:%\n" mat_id sel.count
+		)
+		mat_id --output
+	)
+	
 	fn setMaterialIdToSelection sel mat_id = (
 	
-		if sel.count == 1 and classOf sel[1] == Editable_Poly then (
+		local gco = modPanel.getCurrentObject()
+		local result = false
+		if classOf gco == Editable_Poly then (
 		
 			setMaterialIdToPoly sel[1] mat_id
+			result = true
 			
 		) else if subobjectLevel == undefined or subobjectLevel == 0  then ( --change material id in whole obj
 		
@@ -296,17 +333,16 @@ rollout mcQuickMaterialsDialog "Quick Materials:" width:556 height:428
 			modPanel.addModToSelection mat_mod ui:on
 			mat_mod.materialID = mat_id
 			for o in sel do maxOps.CollapseNodeTo o 1 true
-			return true
+			result = true
 
-		) else ( --oi is one or more objects with Edit_Poly modifier
+		) else if classOf gco == Edit_Poly do ( --oi is one or more objects with Edit_Poly modifier
 		
-			local gco = modPanel.getCurrentObject()
-			if classOf gco != Edit_Poly do return false
 			gco.SetOperation #SetMaterial
 			gco.MaterialIDtoSet = (mat_id - 1)
 			gco.Commit ()
+			result = true
 		)
-		true
+		result --output
 	)
 	
 	fn isValidObject obj = (
@@ -507,15 +543,21 @@ for p in bmpFileNamesArr do print p
 	
 	fn applyUnwrapUVW = (
 		
+		--get material ID from Selected Faces
+		local map_id = getMaterialIdFromSelection selection
+		--else getmaterial Id from Selected Item
+		if map_id == undefined do (
+		
+			if lv_mat_data.selectedItems.count == 0 do return false
+			local sel_item = lv_mat_data.selectedItems.item[0]
+			local mat_data = sel_item.tag.value
+			map_id = mat_data.id
+		)
+		
 		--mod_uvw = $.modifiers[#unwrap_uvw]
 		local mod_uvw = 	Unwrap_UVW ()
 		modPanel.addModToSelection mod_uvw ui:on
 		mod_uvw.edit()	
-			
-		if lv_mat_data.selectedItems.count == 0 do return false
-		local sel_item = lv_mat_data.selectedItems.item[0]
-		local mat_data = sel_item.tag.value
-		local map_id = mat_data.id
 		selectTextureInUnwrap mod_uvw selection[1].material map_id
 	)
 	
@@ -524,6 +566,13 @@ for p in bmpFileNamesArr do print p
 		if  visual_id - 400 > 0 then "havok"
 			else if visual_id - 200 > 0 then "noground"
 				else "basic"
+	)
+	
+	fn rotateMappingGizmo angle_val = (
+	
+		local mod_uvw  = modPanel.getCurrentObject()
+		if classOf mod_uvw != Uvwmap do return false
+		mod_uvw.Gizmo.Rotation = eulerAngles 0 0 angle_val
 	)
 	
 	fn getCurrentMaterialType = (
@@ -731,6 +780,7 @@ for p in bmpFileNamesArr do print p
 	--add event to fix decolor selecrtion on lost focus
 	on lv_mat_data GotFocus args  do  ( unmarkItem  lv_mat_data.SelectedItems.item[0] )
 	on lv_mat_data LostFocus args do ( markItem  lv_mat_data.SelectedItems.item[0] )
+	on spn_mapping_angle changed val do (rotateMappingGizmo val)
 )
 createDialog mcQuickMaterialsDialog
 
