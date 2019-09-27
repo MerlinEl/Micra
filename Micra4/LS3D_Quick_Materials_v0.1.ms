@@ -458,7 +458,9 @@ rollout mcQuickMaterialsDialog "Quick Materials:" width:556 height:428
 			local mat_data = itm.tag.value 
 			if mat_data.id == map_id do (
 			
+				unmarkItem lv_mat_data.selectedItems.item[0] --un hilight item
 				itm.selected = true
+				markItem lv_mat_data.items.item[ i ] --hilight item
 				exit
 			)
 		)
@@ -601,12 +603,33 @@ for p in bmpFileNamesArr do print p
 		)
 	)
 	
+	fn correctPath str = (
+
+		str = substituteString str "\n" "\\n"
+		str = substituteString str "\t" "\\t"
+		str = substituteString str "/" "\\"
+		str = substituteString str "\\\\" "\\"
+	) 
+	
+	fn getMaterialXmlPath ls3d_mat = (
+
+		/*local guid_Array = #()
+		local materialPath = ""
+		local edit_path = LS3DGUP.LS3DGUP.EnginePath
+		LS3D_GUIDToNumberArray ls3d_mat.materialGUID &guid_Array
+		LS3DGUP.LS3DGUP.GetMaterialVFSFullPath guid_Array[1] guid_Array[2] &materialPath
+		correctPath (edit_path + materialPath)*/
+		correctPath (edit_path + @"materials\" + ls3d_mat.GetName())
+	)
+	
 	fn readXmlData mat = (
 	
-	
-		--ls3d_mat = multi_mat[460].renderMaterial
-		--xml_file = ls3d_mat.GetName()
-	
+		local multi_mat = $.material
+		local ls3d_mat = ls3d_mat = multi_mat[460].renderMaterial
+		local xml_path = getMaterialXmlPath ls3d_mat
+		doesFileExist xml_path 
+		--gues material type if is 3blend 2blend or single
+		--read xml and pickup all diffuse map paths
 	)
 	
 	
