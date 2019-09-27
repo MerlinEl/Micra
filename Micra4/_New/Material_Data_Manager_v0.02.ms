@@ -1,6 +1,12 @@
 
 Global rMaterialDataManager
 Global gMaterialDataManager
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+--runCommandByName
 struct sMaterialDataManager (
 
 	fn getMaterialXML mat = (
@@ -164,9 +170,54 @@ struct sMaterialDataManager (
 		)
 		format "Materials Used : % Undefined: %\n" used_materials.count undefined_materials
 		print used_materials
-	) 
+	),
+	
+	fn usingBcMaterial obj = (
+		
+		local mat = obj.material
+		if mat == undefined do return false
+		local bc_materials = #(
+		
+			"bc_02_unique_water_lock_v1.xml", 
+			"bc_concrete_wall_02.xml", 
+			"bc_sidewalk_c.xml",
+			"bc_road_industrial.xml", 
+			"bc_concrete_wall_01.xml", 
+			"bc_curb_c.xml", 
+			"bc_02_unique_grain_silos_alpha_v1.xml"
+		)
+		if classOf mat == Multimaterial then (
+
+			--format "multi:%\n" mat.name
+			for m in mat do (
+
+				local mat_xml = getMaterialXML m
+				if (findItem bc_materials mat_xml != 0) do return true
+			) 
+
+		) else (
+		
+			local mat_xml = getMaterialXML mat
+			--format "single:% xml:%\n" mat.name mat_xml
+			findItem bc_materials mat_xml != 0
+			
+		)
+		false
+	),
+	
+	fn selectObjectsWithBcMaterial sel = (
+
+		local bc_objects = for o in sel where (usingBcMaterial o) collect o
+		format "( % ) Objects using BC Materials Found.\n" bc_objects.count
+		if bc_objects.count > 0 do select bc_objects
+
+	)
 )
 gMaterialDataManager = sMaterialDataManager()
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 if rMaterialDataManager != undefined do destroyDialog rMaterialDataManager
 rollout rMaterialDataManager "Material Data Manager:" width:700 height:780
@@ -201,9 +252,15 @@ rollout rMaterialDataManager "Material Data Manager:" width:700 height:780
 	spinner 'spn_target_id' "" pos:[32,684] width:60 height:16 range:[1,10000,1] type:#integer scale:1 align:#left
 	spinner 'spn_target_sid' "" pos:[124,684] width:60 height:16 range:[1,10000,1] type:#integer scale:1 align:#left
 	GroupBox 'grp2' "Advanced Tools:" pos:[4,720] width:692 height:52 align:#left
-	dropdownList 'ddl_fn_list' "" pos:[12,742] width:608 height:21 items:#("Replace Unwanted Materials", "List Materials on Selection", "Print Used Materials") align:#left
 	button 'btn_run_fn' "RUN" pos:[624,740] width:64 height:24 align:#left
 	button 'btn_save_mat' "Save Material" pos:[84,300] width:80 height:28 align:#left
+	dropdownList 'ddl_fn_list' "" pos:[12,742] width:608 height:21 items:#(
+	
+		"Replace Unwanted Materials", 
+		"List Materials on Selection", 
+		"Print Used Materials", 	
+		"Select Objects With Bc Material"
+	)
 	/**
 	*@Usage add one or more material libraries in to Temporary Library
 	*@Example
@@ -415,12 +472,17 @@ rollout rMaterialDataManager "Material Data Manager:" width:700 height:780
 		lv.items.Clear()
 		
 		local all_items = #()
+		local unique_names = #()
 		for i= 1 to picked_mat.count do (
 			
 			local m = picked_mat[i]
 			local xml_name = getMaterialXML m
 			if xml_name == "uni_color_grey.xml" do continue --skip default material
 			format "xml name:%\n" xml_name
+			
+			if findItem unique_names xml_name != 0 do continue --add only unique materials
+			append unique_names xml_name
+			
 			local li = dotNetObject "ListViewItem" xml_name
 			li.BackColor= drawingColor.fromArgb clr.r clr.g clr.b
 			local itm = m
@@ -814,7 +876,7 @@ rollout rMaterialDataManager "Material Data Manager:" width:700 height:780
 		removeNewItemFromXML item_data
 		saveMaterialLibrary terrain_mat_lib_path
 	)
-	
+
 	fn runCommandByName cmd_name = (
 		
 		format "RUN CMD:%\n" cmd_name
@@ -823,6 +885,7 @@ rollout rMaterialDataManager "Material Data Manager:" width:700 height:780
 			"Replace Unwanted Materials" : gMaterialDataManager.replaceMaterialsOnObjects selection
 			"List Materials on Selection" : gMaterialDataManager.listMaterialsFromObjects selection
 			"Print Used Materials" : gMaterialDataManager.printUsedMaterials selection
+			"Select Objects With Bc Material" : gMaterialDataManager.selectObjectsWithBcMaterial selection
 		)
 	)
 	

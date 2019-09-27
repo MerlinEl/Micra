@@ -403,6 +403,17 @@ rollout mcQuickMaterialsDialog "Quick Materials:" width:556 height:428
 		rendermap tx into:bb size:[bb.width,bb.height] filter:on display:off	
 		bb
 	)
+	
+	fn getDiffuseMapFromMaterial mat = (
+
+		case (classOf mat) of (
+
+			DirectX_9_Shader 	: if mat.renderMaterial != undefined then mat.renderMaterial.diffuseMap else undefined
+			LS3DMaterial		: mat.diffuseMap
+			Default				: undefined
+		)
+	)
+	
 	fn getBitmapFrom dm = (
 		
 		/*
@@ -468,9 +479,34 @@ for p in bmpFileNamesArr do print p
 		local sel_item = lv_mat_data.selectedItems.item[0]
 		local mat_data = sel_item.tag.value
 		local map_id = mat_data.id
-		local id_lsit = mod_uvw.texMapIDList 
-		local item_index = findItem id_lsit map_id
-		if item_index != 0 do mod_uvw.unwrap.setCurrentMap item_index
+		-- local id_lsit = mod_uvw.texMapIDList 
+		-- local id_lsit = for i=1 to mod_uvw.texMapIDList.count collect i
+		
+		local item_index = 0
+		for i=2 to mod_uvw.texMapIDList.count do ( --skip first Checker Pattern
+		
+			local list_id = mod_uvw.texMapIDList[i]
+			/*local tex_map = mod_uvw.texMapList[i]
+			try (
+			
+				local file_name = getFileNameFile tex_map.bitmap.filename 
+				if findString mat_data.key file_name != undefined do (
+				
+					item_index = i
+					exit
+				)
+				
+			) catch (format "Unable get ID from Texture:% Error:%\n" mat_data.key (getCurrentException()))*/
+		
+			--format "compare: % = %  %  texture:%\n" list_id map_id (list_id == map_id) tex_map
+			if list_id == map_id do (item_index = i; exit)
+		)
+		/*for i=1 to mod_uvw.texMapIDList.count where i == map_id do (
+		
+			item_index = i
+		)*/
+		format "Cossen ID:%. UnwrapUVW SlectedIndex:%\n " map_id item_index
+		if item_index > 0 do mod_uvw.unwrap.setCurrentMap item_index
 	)
 	
 	fn getMaterialType visual_id = (
@@ -492,11 +528,12 @@ for p in bmpFileNamesArr do print p
 	
 	fn filterItemsByName list mat_name ignoreCase:true = (
 		
-		local pat = mat_name + "*"
+		--local pat = mat_name + "*"
 		for itm in list where (
 			
 			local itm_name = if ignoreCase then toLower itm.text else itm.text
-			matchPattern itm_name pattern:pat
+			findString itm_name mat_name != undefined
+			--matchPattern itm_name pattern:pat
 		) collect itm
 	)
 	
