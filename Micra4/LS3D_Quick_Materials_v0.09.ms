@@ -42,6 +42,7 @@ rollout mcQuickMaterialsDialog "Quick Materials:" width:556 height:428
 
 	checkbox 'chk_collapse' "Collapse Modifier" pos:[12,340] width:100 height:16 checked:true align:#left
 	checkbox 'chk_autoorient' "Orientation Auto" pos:[12,360] width:100 height:16 checked:false align:#left
+	checkbox 'chk_assign_clone' "Assign Mat Clone" pos:[12,380] width:100 height:16 checked:false align:#left
 	
 	bitmap 'bmp_preview' "Bitmap" pos:[12,24] width:264 height:200 align:#left
 	bitmap 'bmp_mat_type_1' "Bitmap" pos:[92,256] width:40 height:16 align:#left
@@ -350,23 +351,44 @@ rollout mcQuickMaterialsDialog "Quick Materials:" width:556 height:428
 		classOf obj == Editable_Poly or classOf obj == PolyMeshObject
 	)
 	
+	fn getXmlItemByID mat_id = (
+	
+		local mat_data = for itm in mat_items where itm.id == mat_id do exit with itm 
+		if mat_data != undefined then mat_data else mat_data
+	)
+	
 	fn assignMaterial objs applyMapping:true = (
 	
 		format "assign material:%\n" objs
-	
-		if lv_mat_data.selectedItems.count == 0 do return false
-		local sel_item = lv_mat_data.selectedItems.item[0]	
 		local valid_objects = for o in objs where (isValidObject o) collect o 	
 		if valid_objects.count == 0 do (
 			
 			messageBox "Object(s) must be Editable Poly or Edit Poly." title:"Aborted:"
 			return false
 		)
+		--switch between assing materail from selected item or from clone form first face
+		local mat_data = undefined
+		if chk_assign_clone.checked then (
+		
+			local map_id = getMaterialIdFromSelection selection
+			if map_id == undefined do (
+			
+				messageBox "No faces Selected" title:"Warning"
+				return false
+			)
+			mat_data = getXmlItemByID map_id
+			
+		) else (
+	
+			if lv_mat_data.selectedItems.count == 0 do return false
+			local sel_item = lv_mat_data.selectedItems.item[0]	
+			mat_data = sel_item.tag.value 
+		)
+		
 		local gco = modPanel.getCurrentObject()
 		local sublevel = subobjectLevel
 		max modify mode
 		--set object or faces material ID
-		local mat_data = sel_item.tag.value 
 		--if not correct terrain material assigned add it to selection
 		for obj in valid_objects do (
 		
@@ -467,10 +489,19 @@ for p in bmpFileNamesArr do print p
 		
 		try (dm.bitmap) catch ( --Runtime error: Error opening bitmap: 
 			
-			format "getBitmapFromDiffuseMap % failed:%\n" dm  (getCurrentException())
+			format "getBitmapFromDiffuseMap % failed:%.\nPlease go to LS3D/MED/ and Reload Database.\n" dm  (getCurrentException())
 			undefined
 		)
 	)
+	
+	fn readXmlData mat = (
+	
+	
+		--ls3d_mat = multi_mat[460].renderMaterial
+		--xml_file = ls3d_mat.GetName()
+	
+	)
+	
 	
 	fn previewMaterial mat_id = (
 		
@@ -491,7 +522,7 @@ for p in bmpFileNamesArr do print p
 			LS3DMaterial: (
 
 				local dm = mat.diffuseMap
-				if dm != undefined then dm.bitmap else undefined
+				if dm != undefined then getBitmapFromDiffuseMap dm else undefined
 			)
 			default: undefined
 		)

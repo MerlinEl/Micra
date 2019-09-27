@@ -218,6 +218,7 @@ Public
 		str = substituteString str "\n" "\\n"
 		str = substituteString str "\t" "\\t"
 		str = substituteString str "/" "\\"
+		str = substituteString str "\\\\" "\\"
 	),
 	fn upperLowerCase str type = --replace uper case to lower ad vice versa 
 	( 
