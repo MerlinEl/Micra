@@ -627,7 +627,10 @@ for p in bmpFileNamesArr do print p
 		local multi_mat = $.material
 		local ls3d_mat = ls3d_mat = multi_mat[460].renderMaterial
 		local xml_path = getMaterialXmlPath ls3d_mat
-		doesFileExist xml_path 
+		--GetParamFromMaterial()
+		-- doesFileExist xml_path 
+		-- gShaderUpdateScript.SetMapsInShaderByType()
+		-- d:\!2k_games\scotch_dev\resources\utilities\3dsmax\dxshaders\
 		--gues material type if is 3blend 2blend or single
 		--read xml and pickup all diffuse map paths
 	)
