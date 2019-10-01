@@ -315,6 +315,28 @@ reqst = req.GetRequestStream(); //add data to request stream
 Print("Geting Request Stream");
 reqst.Write(buffer, 0, buffer.Length);// (buffer, 0, buffer.Length);
 */
+	),
+	--or use MSX pack - unpack
+	fn ConvertImageToBase64String filename = (
+	
+		if (doesfileexist filename) do (
+		
+			local memstream = dotnetobject "System.IO.MemoryStream"
+			local ImgLoaded = (dotNetClass "Drawing.Image").fromfile filename
+			ImgLoaded.save memstream ImgLoaded.rawformat
+			local Base64string = (dotNetClass "System.Convert").ToBase64String (memstream.ToArray())
+			memstream.close()
+			return Base64String
+		)
+	),
+	--""R0lGODlhAQABAIAAAAAAAAAAACH5BAAAAAAALAAAAAABAAEAAAICTAEAOw==""
+	fn ConvertBase64StringToImage str = (
+	
+		local bytearr =  (dotNetClass "System.Convert").FromBase64String str
+		local memstream = dotnetobject "System.IO.MemoryStream" bytearr
+		local DecodedImg = (dotNetClass "Drawing.Image").fromstream memstream
+		memstream.close()
+		return DecodedImg
 	)
 	/*<end>*/
 )	
@@ -406,4 +428,33 @@ webrequest with POST
 	request.DefaultCachePolicy = policy
 	local noCachePolicy = dotnetObject "System.Net.Cache.HttpRequestCachePolicy" policy.NoCacheNoStore
 	request.CachePolicy =  noCachePolicy
+*/
+
+
+/*
+b=selectbitmap() -- open image file browser
+bname="bitmap_"+(getfilenamefile b.filename) -- build name from filename
+w=b.width -- get properties of bitmap
+h=b.height
+format "----------nfn load_% = (n" bname -- start defining function
+format "local %=bitmap % %n" bname w h -- create bitmap in function
+-- write out a function that unpacks an integer into a pixel color
+format "fn unpack val = for p in val collect (r=p/256^2; g=p/256-r*256; b=mod p 256; color r g b)n"
+for r=0 to h-1 do -- for each row in the bitmap
+-- have function write the column of pixels to the bitmap
+( format "setpixels % [0,%] (unpack #(" bname r
+pixels=getpixels b [0,r] w -- read in the column of pixels
+for c=1 to w do -- loop through each pixel
+( p=pixels[c] -- get the pixel
+-- pack the pixel into an integer and write it out
+format "%" (((p.r as integer)*256+(p.g as integer))*256+(p.b as integer))
+if c != w then -- if not at end of data
+format ", " -- write a comma
+else
+format "))n" -- else close out the line
+)
+)
+format "return %n" bname -- function returns the bitmap
+format ")n----------n" -- finish off function definition
+)
 */
