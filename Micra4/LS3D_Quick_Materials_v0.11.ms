@@ -348,7 +348,7 @@ rollout mcQuickMaterialsDialog "Quick Materials:" width:556 height:428
 	
 	fn isValidObject obj = (
 	
-		(classOf obj == Editable_Poly or classOf obj == PolyMeshObject) and obj.modifiers.count == 0
+		(classOf obj == Editable_Poly or classOf obj == PolyMeshObject) and classOf obj.modifiers[1] != Uvwmap 
 	)
 	
 	fn getMaterialType visual_id = (

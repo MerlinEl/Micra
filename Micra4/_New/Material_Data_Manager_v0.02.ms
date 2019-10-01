@@ -220,7 +220,7 @@ gMaterialDataManager = sMaterialDataManager()
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 if rMaterialDataManager != undefined do destroyDialog rMaterialDataManager
-rollout rMaterialDataManager "Material Data Manager:" width:700 height:780
+rollout rMaterialDataManager "Material Data Manager: ( 0 - 200 | 200 - 400 | 400 - 600 )" width:700 height:780
 (
 	struct MAT_ITEM (key, id, sid, tile_u, tile_v, mat)
 	local drawingColor   = dotNetClass "drawing.color"
@@ -259,7 +259,8 @@ rollout rMaterialDataManager "Material Data Manager:" width:700 height:780
 		"Replace Unwanted Materials", 
 		"List Materials on Selection", 
 		"Print Used Materials", 	
-		"Select Objects With Bc Material"
+		"Select Objects With Bc Material",
+		"Semantic Materials Table"
 	)
 	/**
 	*@Usage add one or more material libraries in to Temporary Library
@@ -561,34 +562,34 @@ rollout rMaterialDataManager "Material Data Manager:" width:700 height:780
 		) do exit with i
 		format "itm index:%\n" item_index
 	)*/
+	fn getRservedSlotsFromID visual_id = (
+	
+		if  visual_id - 400 > 0 then (
+		
+			#(visual_id - 200, visual_id - 400 , visual_id)
+			
+		) else if visual_id - 200 > 0 then (
+		
+			#(visual_id - 200, visual_id, visual_id + 200)
+			
+		) else (
+				
+			#(visual_id, visual_id + 200, visual_id + 400)
+		)
+	)
 	
 	fn alreadyTeakenID mat_id = (
 		
 		local lv = lv_xml_data
 		if  lv.items.count  == 0 do return false
+		local mat_id_set = getRservedSlotsFromID mat_id
 		local item_index = for i= 0 to lv.items.count - 1 where (
 			
 			local itm = lv.items.item[i]	
 			local id = execute  (itm.subitems.item[1].text)
-			id == mat_id
+			findItem mat_id_set id != 0
 		) do return true
 		false
-	)
-	
-	fn getRservedSlotsFromID visual_id = (
-	
-		if  visual_id - 400 > 0 then (
-		
-			#(visual_id - 200, visual_id - 400 , visual_id) as String
-		)
-		else if visual_id - 200 > 0 then (
-		
-			#(visual_id - 200, visual_id, visual_id + 400)	as String
-		)
-		else (
-				
-			#(visual_id, visual_id + 200, visual_id + 400)	as String
-		)
 	)
 	
 	fn fillListView lv items = (
@@ -608,7 +609,9 @@ rollout rMaterialDataManager "Material Data Manager:" width:700 height:780
 			
 			li.subitems.add (itm.id as String)
             li.subitems.add (itm.sid as String)
-			li.subitems.add (getRservedSlotsFromID itm.id)
+			local reserved_slots = getRservedSlotsFromID itm.id
+			-- format "Add Item:% id:% sid:% reserved:%\n" itm.key itm.id itm.sid reserved_slots
+			li.subitems.add (reserved_slots as String)
 			li.subitems.item[0].name="0"
 			li.subitems.item[1].name="1"
 			li.subitems.item[2].name="2"
@@ -710,7 +713,7 @@ rollout rMaterialDataManager "Material Data Manager:" width:700 height:780
 		li.tag = dotnetMxsValue  itm  --DotNet value holding the MAXScript value
 		li.subitems.add (target_id as String)
 		li.subitems.add (target_sid as String)
-		li.subitems.add (getRservedSlotsFromID target_id)
+		li.subitems.add ((getRservedSlotsFromID target_id) as String)
 		li.subitems.item[0].name="0"
 		li.subitems.item[1].name="1"
 		li.subitems.item[2].name="2"
@@ -886,6 +889,7 @@ rollout rMaterialDataManager "Material Data Manager:" width:700 height:780
 			"List Materials on Selection" : gMaterialDataManager.listMaterialsFromObjects selection
 			"Print Used Materials" : gMaterialDataManager.printUsedMaterials selection
 			"Select Objects With Bc Material" : gMaterialDataManager.selectObjectsWithBcMaterial selection
+			"Semantic Materials Table" : ShellLaunch  "https://hub.gametools.dev/pages/viewpage.action?spaceKey=whsky&title=Mafia+III+Collision+layers+and+Semantic+Materials" ""
 		)
 	)
 	
