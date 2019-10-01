@@ -212,6 +212,7 @@
     <Silhouette icon="159" cmd="mcAction.silhouetteSwitch()" tooltip="Silhouette" />
     <Cube_Map_To_Away icon="246" cmd="mcAction.translateCubeMapToAway3D()" tooltip="Cube Map To Away" />
     <Quick_Materials icon="275" cmd="mcFile.fileInVersion LS3D_Quick_Materials" tooltip="Quick Materials" />
+    <LS3D_Material_Manager icon="279" cmd="mcFile.fileInVersion LS3D_Material_Manager" tooltip="LS3D Material Manager" />
   </Material>
   <Helpers>
     <Lode_Tester icon="129" cmd="mcFile.fileInVersion Lode_Tester" tooltip="Lode Tester" />

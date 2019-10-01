@@ -346,7 +346,7 @@ rollout mcQuickMaterialsDialog "Quick Materials:" width:556 height:428
 		result --output
 	)
 	
-	fn isValidObject obj = (
+	fn isValidObject obj = ( --Uvwmap restricted for secure work
 	
 		(classOf obj == Editable_Poly or classOf obj == PolyMeshObject) and classOf obj.modifiers[1] != Uvwmap 
 	)

@@ -164,6 +164,8 @@
     <Render_To_Texture_Mod val="Modifikovany render to texture pro grafiky." />
     <Send_UVW_To_Ps val="Otevre UVW z oznacenych polygonu v Photoshopu." />
     <Silhouette val="Zobrazi selektnute objekty bez odlesku jen v cerne barve." />
+    <LS3D_Material_Manager />
+    <Quick_Materials />
   </Material>
   <Helpers>
     <Lode_Tester val="Stridave zobrazuje dva lody." />
