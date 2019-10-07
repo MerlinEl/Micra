@@ -4,9 +4,9 @@ Global mcLS3DMaterialManagerStruct
 Global mcLS3DMaterialManagerRun
 
 if rMaterialDataManager != undefined do destroyDialog rMaterialDataManager
-rollout rMaterialDataManager "LS3D Material Manager: ( No Spawn: 0 - 200 | No Entry: 200 - 400 | Spawn NPC: 400 - 600 )" width:700 height:780
+rollout rMaterialDataManager "LS3D Material Manager: ( No Spawn: 1 - 200 | No Entry: 201 - 400 | Spawn NPC: 401 - 600 )" width:700 height:780
 (
-	struct MAT_ITEM (key, id, sid, tile_u, tile_v, mat, opt_id)
+	struct MAT_ITEM (key, id, sid, tile_u, tile_v, mat, opt_id) --, fn clone = ()
 	local script_dir = getfileNamePath (getSourceFileName())
 	local drawingColor   = dotNetClass "drawing.color"
 	local bgColor   = ((colorMan.getColor #background)*255)as color
@@ -70,13 +70,6 @@ rollout rMaterialDataManager "LS3D Material Manager: ( No Spawn: 0 - 200 | No En
 		--replace materials in Material Editor
 		meditMaterials[1] = terrain_mat
 		meditMaterials[2] = semantic_mat
-	)
-	
-	fn getMaterialType visual_id = (
-		
-		if  visual_id - 400 > 0 then "havok"
-			else if visual_id - 200 > 0 then "noground"
-				else "basic"
 	)
 	
 	fn getMaterialXML mat = (
@@ -214,7 +207,7 @@ rollout rMaterialDataManager "LS3D Material Manager: ( No Spawn: 0 - 200 | No En
 
 	fn getItemColor mat_id = (
 		
-		local mat_type = getMaterialType mat_id
+		local mat_type = mcLS3DMaterialManagerStruct.getMaterialType mat_id
 		case mat_type of (
 			
 			"basic": (
@@ -315,11 +308,14 @@ rollout rMaterialDataManager "LS3D Material Manager: ( No Spawn: 0 - 200 | No En
 			li.UseItemStyleForSubItems=true
 			li.BackColor= drawingColor.fromArgb clr.r clr.g clr.b
 			--format "add item name:% id:% sid:% clr:%\n" itm.key itm.id itm.sid clr
-			li.tag = dotnetMxsValue  itm  --DotNet value holding the MAXScript value
+			
+			local reserved_slots = getRservedSlotsFromID itm.id
+			itm.opt_id = reserved_slots
+			li.tag = dotnetMxsValue itm  --DotNet value holding the MAXScript value
 			
 			li.subitems.add (itm.id as String)
             li.subitems.add (itm.sid as String)
-			local reserved_slots = getRservedSlotsFromID itm.id
+			
 			-- format "Add Item:% id:% sid:% reserved:%\n" itm.key itm.id itm.sid reserved_slots
 			li.subitems.add (reserved_slots as String)
 			li.subitems.item[0].name="0"
@@ -419,11 +415,12 @@ rollout rMaterialDataManager "LS3D Material Manager: ( No Spawn: 0 - 200 | No En
 		li.UseItemStyleForSubItems=true
 		li.BackColor= drawingColor.fromArgb clr.r clr.g clr.b
 		--format "add item name:% id:% sid:% clr:%\n" itm.key itm.id itm.sid clr
-		local itm = MAT_ITEM key:xml_name id:target_id sid:target_sid tile_u:1 tile_v:1
+		local reserved_slots = getRservedSlotsFromID target_id
+		local itm = MAT_ITEM key:xml_name id:target_id sid:target_sid tile_u:1 tile_v:1 opt_id:reserved_slots
 		li.tag = dotnetMxsValue itm  --DotNet value holding the MAXScript value
 		li.subitems.add (target_id as String)
 		li.subitems.add (target_sid as String)
-		li.subitems.add ((getRservedSlotsFromID target_id) as String)
+		li.subitems.add (reserved_slots as String)
 		li.subitems.item[0].name="0"
 		li.subitems.item[1].name="1"
 		li.subitems.item[2].name="2"
@@ -437,120 +434,13 @@ rollout rMaterialDataManager "LS3D Material Manager: ( No Spawn: 0 - 200 | No En
 		sortMatDataList()
 		
 		li.selected = true
-		--store material and id for later save
-	
+		--store ID and MATERIAL for later save
 		append materials_for_save (MAT_ITEM key:xml_name id:target_id sid:target_sid tile_u:1 tile_v:1 mat:mat)
 		--for m in materials_for_save do format "new materials:%\n" m.key
 		--picked_mat
 	)
 	
-	-- Function AddRowToXML adds new row with item values to xml
-	fn AddRowToXML xDoc nodeParent actChildIndex item newNodeInsertMethod:#FIRST_NODE = 
-	(
-		newChild = xDoc.GetNewNode "Reindex"
-		newChild.AddAttribute "VisualMatIndex" item.id as string
-		newChild.AddAttribute "SemanticMatIndex" item.sid as string
-		newChild.AddAttribute "Comment" item.key
-		newChild.AddAttribute "Tile_U" item.tile_u as string
-		newChild.AddAttribute "Tile_V" item.tile_v as string
-		
-		format "-------------------\n UVTILE: %, %\n--------------------------\n" item.tile_u item.tile_v
-		
-		if newNodeInsertMethod == #FIRST_NODE then 
-		(
-			nodeParent.DotNetNode.AppendChild newChild.DotNetNode				
-		)
-		
-		if newNodeInsertMethod == #INSERT_BEFORE then 
-		(
-			nodeParent.DotNetNode.InsertBefore newChild.DotNetNode actChildIndex.DotNetNode		
-		)
-		
-		if newNodeInsertMethod == #INSERT_AFTER then 
-		(
-			nodeParent.DotNetNode.InsertAfter newChild.DotNetNode actChildIndex.DotNetNode
-		)
-	)
 
-	
-	fn removeNewItemFromXML itm = (
-		
-		local xDoc = XMLDocument()
-		xDoc.LoadXML xml_materials_table
-		local rNode = xDoc.GetRootNode()
-		local nMaterials = rNode.GetChild 0	
-		local nMatChildren = nMaterials.GetChildren()
-		local childrenCount = nMatChildren.Count
-		
-		if childrenCount > 0 then	(
-			
-			for childIndex = 1 to childrenCount do (
-				
-				local activeChild = nMatChildren[childIndex]
-				local visualMatIndex = activeChild.GetAttribute "VisualMatIndex" as Integer
-				
-				if itm.id == visualMatIndex do (
-							
-					--format "remove id:% node:%\n" itm.id activeChild
-					nMaterials.DotNetNode.RemoveChild activeChild.DotNetNode
-					exit			
-				)
-			)
-		)
-		format "Node: % removed ID: % \n ------------------------------- \n" itm.key itm.id
-		xDoc.SaveXML()
-		true
-	)
-	
-	fn addNewItemToXML itm = (
-		
-		local xDoc = XMLDocument()
-		xDoc.LoadXML xml_materials_table
-		local rNode = xDoc.GetRootNode()
-		
-		local nMaterials = rNode.GetChild 0	
-		local nMatChildren = nMaterials.GetChildren()
-		local childrenCount = nMatChildren.Count
-		
-		local activeChild = undefined
-		local insertMethod = #NOT_INSERT
-		
-		if childrenCount > 0 then	(
-			
-			for childIndex = 1 to childrenCount do
-			(
-				activeChild = nMatChildren[childIndex]
-				local visualMatIndex = activeChild.GetAttribute "VisualMatIndex" as Integer
-				
-				if itm.id == visualMatIndex do (
-					format "Skip... item :% with id :%. Already exists.\n" itm.key itm.id
-					return false				
-				)
-				
-				-- Material node wasnt found and this index is higher  -> add before this node
-				if itm.id < visualMatIndex then
-				(
-					insertMethod = #INSERT_BEFORE
-					exit
-				)
-				
-				-- Material node not found in all children, will append to end
-				if childIndex == childrenCount then insertMethod = #INSERT_AFTER
-			)
-		)
-		else	-- no children in XML, add children on first position
-		(
-			insertMethod = #FIRST_NODE
-		)
-		
-		AddRowToXML xDoc nMaterials activeChild itm newNodeInsertMethod:insertMethod
-		
-		format "Node % inserted: % \n ------------------------------- \n" itm.key insertMethod
-
-		xDoc.SaveXML()
-		true
-	)
-	
 	fn saveMatLib = (
 		
 		::mcLS3DMaterialManagerStruct.saveMaterialFromLibrary terrain_mat_lib_path "bc_terrain_main" 
@@ -570,7 +460,7 @@ rollout rMaterialDataManager "LS3D Material Manager: ( No Spawn: 0 - 200 | No En
 		for item in materials_for_save do (
 			
 			terrain_mat[item.id] = item.mat	
-			addNewItemToXML item
+			mcLS3DMaterialManagerStruct.addNewItemToXML item
 		)
 		--save mat lib
 		saveMatLib()
@@ -580,7 +470,7 @@ rollout rMaterialDataManager "LS3D Material Manager: ( No Spawn: 0 - 200 | No En
 	
 	fn deleteSelectedItemsFromXmlAndLib = (
 			
-		local del_count = lv_xml_data.SelectedItems.cout
+		local del_count = lv_xml_data.SelectedItems.count
 		if del_count == 0 do return false
 		if not (queryBox ("You are sure to delete (  " + del_count as String + " ) Materials?") title:"Delete?") do return false
 		for i = 0 to del_count - 1 do (
@@ -590,7 +480,7 @@ rollout rMaterialDataManager "LS3D Material Manager: ( No Spawn: 0 - 200 | No En
 			local mat = terrain_mat[item_data.id]
 			format "Removed item:% id:% mat:%\n" next_item.text item_data.id mat.name
 			terrain_mat[item_data.id] = undefined
-			removeNewItemFromXML item_data
+			mcLS3DMaterialManagerStruct.removeNewItemFromXML item_data
 			saveMaterialLibrary terrain_mat_lib_path
 		)
 		format "Deleted ( % ) items from ( XML & LIB )\n" del_count
@@ -634,8 +524,22 @@ rollout rMaterialDataManager "LS3D Material Manager: ( No Spawn: 0 - 200 | No En
 		local sel_items = lv_xml_data.SelectedItems
 		if sel_items.count == 0 do return false
 		format "sel items:%\n" sel_items.count
-		local selected_items_ids = for i = 0 to sel_items.count - 1 collect sel_items.item[i].tag.value.id
-		mcLS3DMaterialManagerStruct.copyMaterialItemsTo selected_items_ids
+		local items_data = for i = 0 to sel_items.count - 1 collect sel_items.item[i].tag.value
+		--check if all selected items is in same set
+		local current_set = mcLS3DMaterialManagerStruct.getMaterialType items_data[1].id
+		local incorrect_items = for item in items_data where (
+		
+			mcLS3DMaterialManagerStruct.getMaterialType item.id != current_set 
+			
+		) collect 1
+	
+		if incorrect_items.count != 0 do (
+		
+			messageBox "Selected items must be in same category." title:"Aborted:"
+			return false
+		)
+		--copy items in to new id set
+		mcLS3DMaterialManagerStruct.copyMaterialItemsTo current_set items_data mat_items
 	)
 	
 	fn rcMenuXmlHandler s a = (

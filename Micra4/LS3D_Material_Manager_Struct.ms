@@ -27,6 +27,115 @@ struct LS3D_MATERIAL_MANAGER_STRUCT (
 	copyXmlItemsToCategoryDialog,
 	--functions
 	fn getSource = getSourceFileName(), --get path of this script
+	fn getMaterialType visual_id = (
+		
+		if  visual_id - 400 > 0 then "havok"
+			else if visual_id - 200 > 0 then "noground"
+				else "basic"
+	),
+	-- Function AddRowToXML adds new row with item values to xml
+	fn addRowToXML xDoc nodeParent actChildIndex item newNodeInsertMethod:#FIRST_NODE = 
+	(
+		newChild = xDoc.GetNewNode "Reindex"
+		newChild.AddAttribute "VisualMatIndex" item.id as string
+		newChild.AddAttribute "SemanticMatIndex" item.sid as string
+		newChild.AddAttribute "Comment" item.key
+		newChild.AddAttribute "Tile_U" item.tile_u as string
+		newChild.AddAttribute "Tile_V" item.tile_v as string
+		
+		format "-------------------\n UVTILE: %, %\n--------------------------\n" item.tile_u item.tile_v
+		
+		if newNodeInsertMethod == #FIRST_NODE then 
+		(
+			nodeParent.DotNetNode.AppendChild newChild.DotNetNode				
+		)
+		
+		if newNodeInsertMethod == #INSERT_BEFORE then 
+		(
+			nodeParent.DotNetNode.InsertBefore newChild.DotNetNode actChildIndex.DotNetNode		
+		)
+		
+		if newNodeInsertMethod == #INSERT_AFTER then 
+		(
+			nodeParent.DotNetNode.InsertAfter newChild.DotNetNode actChildIndex.DotNetNode
+		)
+	),
+	fn removeNewItemFromXML itm = (
+		
+		local xDoc = XMLDocument()
+		xDoc.LoadXML xml_materials_table
+		local rNode = xDoc.GetRootNode()
+		local nMaterials = rNode.GetChild 0	
+		local nMatChildren = nMaterials.GetChildren()
+		local childrenCount = nMatChildren.Count
+		
+		if childrenCount > 0 then	(
+			
+			for childIndex = 1 to childrenCount do (
+				
+				local activeChild = nMatChildren[childIndex]
+				local visualMatIndex = activeChild.GetAttribute "VisualMatIndex" as Integer
+				
+				if itm.id == visualMatIndex do (
+							
+					--format "remove id:% node:%\n" itm.id activeChild
+					nMaterials.DotNetNode.RemoveChild activeChild.DotNetNode
+					exit			
+				)
+			)
+		)
+		format "Node: % removed ID: % \n ------------------------------- \n" itm.key itm.id
+		xDoc.SaveXML()
+		true
+	),
+	fn addNewItemToXML itm = (
+		
+		local xDoc = XMLDocument()
+		xDoc.LoadXML xml_materials_table
+		local rNode = xDoc.GetRootNode()
+		
+		local nMaterials = rNode.GetChild 0	
+		local nMatChildren = nMaterials.GetChildren()
+		local childrenCount = nMatChildren.Count
+		
+		local activeChild = undefined
+		local insertMethod = #NOT_INSERT
+		
+		if childrenCount > 0 then	(
+			
+			for childIndex = 1 to childrenCount do
+			(
+				activeChild = nMatChildren[childIndex]
+				local visualMatIndex = activeChild.GetAttribute "VisualMatIndex" as Integer
+				
+				if itm.id == visualMatIndex do (
+					format "Skip... item :% with id :%. Already exists.\n" itm.key itm.id
+					return false				
+				)
+				
+				-- Material node wasnt found and this index is higher  -> add before this node
+				if itm.id < visualMatIndex then
+				(
+					insertMethod = #INSERT_BEFORE
+					exit
+				)
+				
+				-- Material node not found in all children, will append to end
+				if childIndex == childrenCount then insertMethod = #INSERT_AFTER
+			)
+		)
+		else	-- no children in XML, add children on first position
+		(
+			insertMethod = #FIRST_NODE
+		)
+		
+		AddRowToXML xDoc nMaterials activeChild itm newNodeInsertMethod:insertMethod
+		
+		format "Node % inserted: % \n ------------------------------- \n" itm.key insertMethod
+
+		xDoc.SaveXML()
+		true
+	),
 	/**
 	*@Usage add file in to pending list 
 	*/
@@ -204,7 +313,7 @@ struct LS3D_MATERIAL_MANAGER_STRUCT (
 		createDialog editXmlItemDialog pos:spawn_pos
 		editXmlItemDialog.loadDataFromXML xml_materials_table item_name 
 	),
-	fn copyMaterialItemsTo items_id_list = (
+	fn copyMaterialItemsTo current_set items_data mat_items = (
 
 		if copyXmlItemsToCategoryDialog != undefined do destroyDialog copyXmlItemsToCategoryDialog
 		rollout copyXmlItemsToCategoryDialog "CopyTo:" width:120 height:108
@@ -213,37 +322,91 @@ struct LS3D_MATERIAL_MANAGER_STRUCT (
 			button 'btn_copyto' "Accept" pos:[8,72] width:100 height:24 align:#left
 			GroupBox 'grp1' "Category:" pos:[4,4] width:112 height:100 align:#left
 			
-			local items_id_list = #()
-
-			fn getTargetIDByCategory source_id category_index = (
+			local start_index  = 1
+			local items_data  = #()
+			local mat_items  = #()
+			local mat_types   = #("havok", "basic", "noground") 
 			
-				/*local cat_offset = getCategoryOffset rdo_category.state
-				case category_index of (
+			fn copyMaterialData source_id target_id item = (
+			
+				format "copyMaterialData >  from ID: % to % DATA:%\n" source_id target_id item
+				--create xml item with new ID
+				--local new_item = MAT_ITEM key:itm.key id:target_id sid:item.sid tile_u:item.tile_u tile_v:item.tile_v opt_id:item.opt_id
+				--or 
+				-- local new_item = copy item
+				-- new_item.id = target_id
+				--add new item to xml
 				
-					1 : 200
-					2 : 400
-					3 : 600
-				) */
-				0
+				--clone material in library (to target ID)
 			)
 			
-			fn copyItemTo source_id target_id = (
+			fn getTargetID slots = (
+				--no spawn(1-200) | no entry(201-400) | spawn(401-600) 
+				local index = case rdo_category.state of (
+				
+					1: 3--spawn(401-600),		havok
+					2: 1--no spawn(1-200),		basic
+					3: 2--no entry(201-400), 	noground
+				)
+				slots[index]
+			)
 			
-				format "copyMaterialItemsTo > from ID:% to ID:%\n" source_id target_id
-				--first check if target id is empty
-				--copy xml data with semantic id and u v tile (but changed visual ID)
-				--copy material in library
+			fn isEmptyXmlSlot mat_id = (
+			
+				result = true
+				for itm in mat_items do (
+				
+					local is_empty = itm.id != mat_id
+					--format "isEmptyXmlSlot > id src:% trgt:% is_empty:%\n" mat_id itm.id is_empty
+					if not is_empty do (
+					
+						result = false 
+						exit
+					)
+				) 
+				return result 
+			)
+			
+			fn init cset cdata mitems = (
+			
+				items_data = cdata
+				mat_items  = mitems
+				start_index = findItem mat_types cset
+				rdo_category.state = start_index
 			)
 			
 			on btn_copyto pressed do (
 			
-				format "copy ( % )  Items to matlib and xml.\n" items_id_list.count
-				for id in items_id_list do copyItemTo id (getTargetIDByCategory id rdo_category.state)
+				--check for category changed
+				if rdo_category.state == start_index do (
+				
+					messageBox "Category is not changed." title:"Aborted:"
+					return false
+				)
+				format "copy ( % )  Items.\n" items_data.count
+				--gather source and target id
+				local source_and_target_slots = #()
+				for item in items_data do (
+				
+					local source_id = item.id
+					local reserved_slots = item.opt_id
+					local target_id = getTargetID reserved_slots
+					append source_and_target_slots #(source_id, target_id, item)
+				)
+				--check if target id is empty
+				local full_slots = for data in source_and_target_slots where not (isEmptyXmlSlot data[2]) collect data[2] 
+				if full_slots.count != 0 do (
+				
+					messageBox ("Some slots are already teaken:\n" + full_slots as Sring) title:"Aborted:"
+					return false
+				)
+				--finaly copy items in to new empty slots
+				for data in source_and_target_slots do copyMaterialData data[1] data[2] data[3]
 				destroyDialog copyXmlItemsToCategoryDialog
 			)
 		)
 		createDialog copyXmlItemsToCategoryDialog
-		copyXmlItemsToCategoryDialog.items_id_list = items_id_list
+		copyXmlItemsToCategoryDialog.init current_set items_data mat_items
 	),
 	fn closeChildrenDialogs = (
 	
