@@ -360,7 +360,11 @@ lh_02_little_italy_block_h_roads_coll
 				
 				local mat_id = polyop.getFaceMatID o_instance f
 				-- local sem_id = matIdToSemanticId (mat_id - materal_id_offset)
-				local sem_id = getSIDByID xml_data (mat_id - materal_id_offset)
+--temp fix for cobblestones
+				local sem_id = ( --exception for now 52 for cobblestones_car
+				
+					if mat_id == (425+1000) then 52 else getSIDByID xml_data (mat_id - materal_id_offset)
+				)
 				--format "face:% mat_id:% sem_id:%\n" f mat_id sem_id
 				polyop.setFaceMatID o_instance f sem_id	
 				--if face is rail add to collection

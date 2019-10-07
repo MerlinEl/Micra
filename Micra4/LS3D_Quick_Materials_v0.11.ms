@@ -253,6 +253,7 @@ rollout mcQuickMaterialsDialog "Quick Materials:" width:556 height:428
 		theTM.row4 = theCenter --set the translation part of the matrix to the new center
 		theMap.gizmo.transform = theTM --and assign the matrix back to the gizmo transformation
 	)--end function
+	
 	fn alignUVGizmoToSelectedFaces obj mod_uvw = (
 		
 		local fsel = polyop.getFaceSelection obj as Array
@@ -270,7 +271,7 @@ rollout mcQuickMaterialsDialog "Quick Materials:" width:556 height:428
 		UVWMapFit obj mod_uvw useSel:#none
 	) 
 	
-	fn getMaterialIdFromPoly obj = (
+		fn getMaterialIdFromPoly obj = (
 	
 		local face_id = undefined
 		if subobjectLevel == undefined or subobjectLevel == 0  then ( --whole object
@@ -301,31 +302,31 @@ rollout mcQuickMaterialsDialog "Quick Materials:" width:556 height:428
 		)
 	)
 	
-	fn getMaterialIdFromSelection sel = (
+	fn getMaterialIdFromSelection objs = (
 	
 		local mat_id = undefined
 		local gco = modPanel.getCurrentObject()
 		if classOf gco == Editable_Poly then (
 		
-			mat_id = getMaterialIdFromPoly sel[1]
-			--format "Get Material ID:% from Editable_Poly:%\n" mat_id sel[1].name
+			mat_id = getMaterialIdFromPoly objs[1]
+			--format "Get Material ID:% from Editable_Poly:%\n" mat_id objs[1].name
 			
 		) else if classOf gco == Edit_Poly do ( --oi is one or more objects with Edit_Poly modifier
 		
 			local face_index = (gco.GetSelection #Face as Array)[1]
 			if face_index != undefined do mat_id = gco.EditPolyMod.GetFaceMaterial face_index
-			--format "Get Material ID:% to Edit_Poly:%\n" mat_id sel.count
+			--format "Get Material ID:% to Edit_Poly:%\n" mat_id objs.count
 		)
 		mat_id --output
 	)
 	
-	fn setMaterialIdToSelection sel mat_id = (
+	fn setMaterialIdToSelection objs mat_id = (
 	
 		local gco = modPanel.getCurrentObject()
 		local result = false
 		if classOf gco == Editable_Poly then (
 		
-			setMaterialIdToPoly sel[1] mat_id
+			setMaterialIdToPoly objs[1] mat_id
 			result = true
 			
 		) else if subobjectLevel == undefined or subobjectLevel == 0  then ( --change material id in whole obj
@@ -333,14 +334,34 @@ rollout mcQuickMaterialsDialog "Quick Materials:" width:556 height:428
 			local mat_mod = Materialmodifier ()
 			modPanel.addModToSelection mat_mod ui:on
 			mat_mod.materialID = mat_id
-			for o in sel do maxOps.CollapseNodeTo o 1 true
+			for o in objs do maxOps.CollapseNodeTo o 1 true
 			result = true
 
-		) else if classOf gco == Edit_Poly do ( --oi is one or more objects with Edit_Poly modifier
+		) else if classOf gco == Edit_Poly do ( --one or more objects with Edit_Poly modifier
 		
 			gco.SetOperation #SetMaterial
 			gco.MaterialIDtoSet = (mat_id - 1)
 			gco.Commit ()
+			result = true
+		)
+		result --output
+	)
+	
+	fn selectFacesByMatID obj mat_id = (
+	
+		local gco = modPanel.getCurrentObject()
+		local result = false
+		if classOf gco == Editable_Poly then (
+		
+			local faces_with_id = for f = 1 to obj.numfaces where polyop.getFaceMatID obj f == mat_id collect f
+			polyop.setFaceSelection obj faces_with_id --set the selection when the loop is done!
+			result = true
+			
+		) else if classOf gco == Edit_Poly do ( --one object with Edit_Poly modifier
+	
+			local fcount = getnumfaces obj	--             obj.Edit_Poly.GetFaceMaterial f
+			local faces_with_id = for f = 1 to fcount where gco.EditPolyMod.GetFaceMaterial f == mat_id collect f
+			gco.EditPolyMod.select #Face (faces_with_id as BitArray)
 			result = true
 		)
 		result --output
@@ -436,7 +457,7 @@ rollout mcQuickMaterialsDialog "Quick Materials:" width:556 height:428
 			return false
 		)
 		--pick first face id
-		local map_id = getMaterialIdFromSelection selection
+		local map_id = getMaterialIdFromSelection valid_objects
 		if map_id == undefined do (
 		
 			messageBox "No faces Selected" title:"Warning"
@@ -871,19 +892,32 @@ rollout mcQuickMaterialsDialog "Quick Materials:" width:556 height:428
 		list_items = all_items --copy array all_items --for i = 0 to lv.Items.count-1 collect lv.Items.item[ i ] --recolect list items
 		filterListView lv
   	)
-	
-	fn  selectSimillarFaces =(
+
+	fn  selectSimillarFaces objs = (
 		
-		local obj = selection[1]
-		if classOf obj != Editable_Poly do return false
+		format "selectSimillarFaces > :%\n" objs
 		if subobjectLevel != 4 and subobjectLevel != 5 do return false
-		local fsel = polyOp.getFaceSelection obj as Array
-		if fsel.count < 1 do return false
-		local id  = polyop.getFaceMatID obj fsel[1] --get first face Mat ID
-		if id == undefined do return false
-		local newFaceSel = for f = 1 to obj.numfaces where polyop.getFaceMatID obj f == id collect f
-		setFaceSelection obj newFaceSel --set the selection when the loop is done!
+		if objs.count > 1 do (
+				
+			messageBox "Only One Object can be Selected." title:"Aborted:"
+			return false
+		)
+		local obj = objs[1]	
+		if not (isValidObject obj) do (
+			
+			messageBox "Object(s) must be Editable Poly or Edit Poly." title:"Aborted:"
+			return false
+		)
+		local map_id = getMaterialIdFromSelection #(obj)
+		if map_id == undefined do (
+		
+			messageBox "No faces Selected" title:"Warning"
+			return false
+		)
+		selectFacesByMatID obj map_id
+		completeRedraw()
 	)
+	
 	--MAT_ITEM key:"grass"				id:140		sid:81		tile_u:0.4		tile_v:0.4,
 	fn parseXmlTable xml_file = (
 		
@@ -966,7 +1000,7 @@ rollout mcQuickMaterialsDialog "Quick Materials:" width:556 height:428
 	on btn_unwrap pressed do (applyUnwrapUVW())
 	on edt_filter_names keyUp arg do (filterListView lv_mat_data)
 	on btn_clear_text pressed do (edt_filter_names.text = ""; filterListView lv_mat_data)
-	on btn_sel_simillar pressed  do (selectSimillarFaces())
+	on btn_sel_simillar pressed  do (undo "Select Simmilar Faces" on selectSimillarFaces (selection as Array))
 	on rdo_mat_type changed state do (filterListView lv_mat_data)
 	--add event to fix decolor selecrtion on lost focus
 	on lv_mat_data GotFocus args  do  ( unmarkItem  lv_mat_data.SelectedItems.item[0] )

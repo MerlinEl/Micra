@@ -23,6 +23,8 @@ struct LS3D_MATERIAL_MANAGER_STRUCT (
 	c_P4Desc_editMatLibrary  	= "MOD: Terrain Material Library",
 	xml_materials_table = (LS3DGUP.LS3DGUP.UtilsPath + "coll_bourbon_table.xml")	,
 	terrain_mat_lib_path = (LS3DGUP.LS3DGUP.UtilsPath + @"ground_material\bc_terrain.mat"),
+	editXmlItemDialog,
+	copyXmlItemsToCategoryDialog,
 	--functions
 	fn getSource = getSourceFileName(), --get path of this script
 	/**
@@ -122,11 +124,139 @@ struct LS3D_MATERIAL_MANAGER_STRUCT (
 			local mat_lib = materialLibrary(mat) --instance material library
 			saveTempMaterialLibrary mat_lib lib_path
 		)
+	),
+	fn editMaterialItem item_name spawn_pos = (
+	
+		if editXmlItemDialog != undefined do destroyDialog editXmlItemDialog
+		rollout editXmlItemDialog "Edit Material :" width:304 height:104 (
+			GroupBox 'grp1' "Settings:" pos:[4,4] width:296 height:96 align:#left
+			spinner 'spn_visual_id' "" pos:[76,28] width:72 height:16 enabled:false range:[0,10000,1] type:#integer scale:1 align:#left
+			label 'lbl1' "Visual ID:" pos:[12,28] width:60 height:16 enabled:false align:#left
+			spinner 'spn_semantic_id' "" pos:[224,28] width:72 height:16 range:[0,10000,1] type:#integer scale:1 align:#left
+			label 'lbl2' "Semantic ID:" pos:[160,28] width:64 height:16 align:#left
+			spinner 'spnU' "" pos:[76,48] width:72 height:16 range:[0,10000,1] type:#float scale:1 align:#left
+			label 'lbl3' "U Tile:" pos:[12,48] width:60 height:16 align:#left
+			spinner 'spnV' "" pos:[224,48] width:72 height:16 range:[0,10000,1] type:#float scale:1 align:#left
+			label 'lbl5' "V Tile:" pos:[160,48] width:60 height:16 align:#left
+			button 'btn_pick_from_object' "Pick Tile From Object" pos:[8,72] width:140 height:24 align:#left
+			button 'btn_save_xml' "Save" pos:[156,72] width:140 height:24 align:#left
+			
+			local xDoc = undefined 
+			local activeChild = undefined
+			
+			fn loadDataFromXML xml_path item_name = (
+			
+				editXmlItemDialog.title = "Edit Material : ( " + item_name + " )"
+				xDoc = XMLDocument()
+				xDoc.LoadXML xml_path
+				local rNode = xDoc.GetRootNode()
+				local nMaterials = rNode.GetChild 0	
+				local nMatChildren = nMaterials.GetChildren()
+				local childrenCount = nMatChildren.Count
+				if childrenCount == 0 do return false	
+				for childIndex = 1 to childrenCount do
+				(	
+					activeChild = nMatChildren[childIndex]
+					local comment = activeChild.GetAttribute "Comment" as String
+					
+					if comment != item_name do continue --pick single child with item_name
+
+					local visualMatIndex = activeChild.GetAttribute "VisualMatIndex" as Integer
+					local semanticMatIndex = activeChild.GetAttribute "SemanticMatIndex" as Integer
+					local tileUIndex = activeChild.GetAttribute "Tile_U" as Integer
+					local tileVIndex = activeChild.GetAttribute "Tile_V" as Integer
+					
+					if visualMatIndex != undefined do spn_visual_id.value = visualMatIndex
+					if semanticMatIndex != undefined do spn_semantic_id.value = semanticMatIndex
+					if tileUIndex != undefined do spnU.value = tileUIndex
+					if tileVIndex != undefined do spnV.value = tileVIndex
+					exit
+				)
+			)
+
+			fn saveDataToXml = (
+			
+				if activeChild == undefined do return false
+				format "Saved Material:%\n" (activeChild.GetAttribute "Comment" as String)
+				activeChild.SetAttributeValue "VisualMatIndex"		spn_visual_id.value
+				activeChild.SetAttributeValue "SemanticMatIndex"	spn_semantic_id.value
+				activeChild.SetAttributeValue "Tile_U"			spnU.value
+				activeChild.SetAttributeValue "Tile_V"			spnV.value
+				xDoc.SaveXML()
+			)
+
+			on btn_pick_from_object pressed do (
+				local obj = selection[1]
+				if obj != undefined and classOf obj.modifiers[1] == Uvwmap do 
+				(
+					local uv_mod = obj.modifiers[1]     
+					spnU.value = uv_mod.utile
+					spnV.value = uv_mod.vtile
+				)
+			)
+			on btn_save_xml pressed do (
+			
+				DestroyDialog editXmlItemDialog
+				saveDataToXml()
+			)
+			-- on editXmlItemDialog open do ()
+		)
+		createDialog editXmlItemDialog pos:spawn_pos
+		editXmlItemDialog.loadDataFromXML xml_materials_table item_name 
+	),
+	fn copyMaterialItemsTo items_id_list = (
+
+		if copyXmlItemsToCategoryDialog != undefined do destroyDialog copyXmlItemsToCategoryDialog
+		rollout copyXmlItemsToCategoryDialog "CopyTo:" width:120 height:108
+		(
+			radiobuttons 'rdo_category' "" pos:[8,20] width:81 height:48 labels:#("Spawn NPC", "No Spawn", "No Entry") align:#left
+			button 'btn_copyto' "Accept" pos:[8,72] width:100 height:24 align:#left
+			GroupBox 'grp1' "Category:" pos:[4,4] width:112 height:100 align:#left
+			
+			local items_id_list = #()
+
+			fn getTargetIDByCategory source_id category_index = (
+			
+				/*local cat_offset = getCategoryOffset rdo_category.state
+				case category_index of (
+				
+					1 : 200
+					2 : 400
+					3 : 600
+				) */
+				0
+			)
+			
+			fn copyItemTo source_id target_id = (
+			
+				format "copyMaterialItemsTo > from ID:% to ID:%\n" source_id target_id
+				--first check if target id is empty
+				--copy xml data with semantic id and u v tile (but changed visual ID)
+				--copy material in library
+			)
+			
+			on btn_copyto pressed do (
+			
+				format "copy ( % )  Items to matlib and xml.\n" items_id_list.count
+				for id in items_id_list do copyItemTo id (getTargetIDByCategory id rdo_category.state)
+				destroyDialog copyXmlItemsToCategoryDialog
+			)
+		)
+		createDialog copyXmlItemsToCategoryDialog
+		copyXmlItemsToCategoryDialog.items_id_list = items_id_list
+	),
+	fn closeChildrenDialogs = (
+	
+		if editXmlItemDialog != undefined do destroyDialog editXmlItemDialog
+		if copyXmlItemsToCategoryDialog != undefined do destroyDialog copyXmlItemsToCategoryDialog
 	)
 	/*<end>*/
 )	
  --create instance
 
+-------------------------------------------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------------------------------------------------------
 
 --runCommandByName
 struct LS3D_MATERIAL_MANAGER_RUN (

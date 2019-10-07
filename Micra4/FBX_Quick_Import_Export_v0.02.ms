@@ -36,7 +36,8 @@ rollout FBXQuickImportExportDialog "FBX Quick Import - Export v0.02" width:472 h
 	)
 	fn exportFBX = (
 		
-		 if selection.count == 0 do  ((format "Nothig Selected! [Micra] \n"); return false)
+		FBXExporterSetParam "TRIANGULATE" false --http://docs.autodesk.com/3DSMAX/15/ENU/MAXScript-Help/index.html?url=files/GUID-54B1F140-B304-48A2-9829-C68B345E2044.htm,topicNumber=d30e665654
+		if selection.count == 0 do  ((format "Nothig Selected! [Micra] \n"); return false)
 		local asset_name = edt_asset_name.text
 		local export_path = edt_import.text
 		if (export_path.count == 0) do ((format "Undefined Export Path! [Micra] \n"); return false)

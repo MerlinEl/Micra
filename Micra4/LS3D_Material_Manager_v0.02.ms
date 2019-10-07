@@ -6,7 +6,7 @@ Global mcLS3DMaterialManagerRun
 if rMaterialDataManager != undefined do destroyDialog rMaterialDataManager
 rollout rMaterialDataManager "LS3D Material Manager: ( No Spawn: 0 - 200 | No Entry: 200 - 400 | Spawn NPC: 400 - 600 )" width:700 height:780
 (
-	struct MAT_ITEM (key, id, sid, tile_u, tile_v, mat)
+	struct MAT_ITEM (key, id, sid, tile_u, tile_v, mat, opt_id)
 	local script_dir = getfileNamePath (getSourceFileName())
 	local drawingColor   = dotNetClass "drawing.color"
 	local bgColor   = ((colorMan.getColor #background)*255)as color
@@ -26,9 +26,9 @@ rollout rMaterialDataManager "LS3D Material Manager: ( No Spawn: 0 - 200 | No En
 	bitmap 'bmp_preview' "Bitmap" pos:[12,28] width:224 height:224 align:#left
 	button 'btn_add_mat' "ADD >" pos:[188,678] width:48 height:28 align:#left
 	GroupBox 'grp1' "Setup:" pos:[4,4] width:692 height:712 align:#left
-	button 'btn_load_mat_lib' "Load XML" pos:[12,300] width:68 height:28 align:#left
+	button 'btn_load_mat_lib' "Load XML" pos:[12,300] width:68 height:28 align:#left toolTip:"Load ( XML ) materials data."
 	dropdownList 'ddl_mat_lib' "Mat lib" pos:[12,256] width:224 height:40 items:#("bc_terrain.mat") align:#left
-	button 'btn_save_all' "Save ALL" pos:[168,300] width:68 height:28 align:#left
+	button 'btn_save_all' "Save ALL" pos:[168,300] width:68 height:28 align:#left toolTip:"Save ( XML & LIB ) Only new added Materials."
 	button 'btn_get_mat' "Get Material From Selection" pos:[12,396] width:224 height:28 align:#left
 	-- button 'btn_convert_sel' "Convert Selection To New MatLib" pos:[12,364] width:224 height:28 align:#left
 	button 'btn_compare_xml_lib' "Compare XML and LIBRARY" pos:[12,332] width:224 height:28 align:#left
@@ -419,8 +419,8 @@ rollout rMaterialDataManager "LS3D Material Manager: ( No Spawn: 0 - 200 | No En
 		li.UseItemStyleForSubItems=true
 		li.BackColor= drawingColor.fromArgb clr.r clr.g clr.b
 		--format "add item name:% id:% sid:% clr:%\n" itm.key itm.id itm.sid clr
-		local itm = MAT_ITEM key:xml_name id:target_id sid:target_sid tile_u:1  tile_v:1
-		li.tag = dotnetMxsValue  itm  --DotNet value holding the MAXScript value
+		local itm = MAT_ITEM key:xml_name id:target_id sid:target_sid tile_u:1 tile_v:1
+		li.tag = dotnetMxsValue itm  --DotNet value holding the MAXScript value
 		li.subitems.add (target_id as String)
 		li.subitems.add (target_sid as String)
 		li.subitems.add ((getRservedSlotsFromID target_id) as String)
@@ -578,18 +578,34 @@ rollout rMaterialDataManager "LS3D Material Manager: ( No Spawn: 0 - 200 | No En
 		materials_for_save = #()
 	)
 	
-	fn deleteSelectedMaterialAndXML s a = (
+	fn deleteSelectedItemsFromXmlAndLib = (
+			
+		local del_count = lv_xml_data.SelectedItems.cout
+		if del_count == 0 do return false
+		if not (queryBox ("You are sure to delete (  " + del_count as String + " ) Materials?") title:"Delete?") do return false
+		for i = 0 to del_count - 1 do (
 		
-				
-		local first_item = s.SelectedItems.item[0]
-		if first_item == undefined do return false
-		local item_data = first_item.tag.value
-		if not (queryBox ("You are sure to delete Material \n[ "+ first_item.text +" ] ?") title:"Delete:") do return false
-		local mat = terrain_mat[item_data.id]
-		format "remove item:% id:% mat:%\n" first_item.text item_data.id mat
-		terrain_mat[item_data.id] = undefined
-		removeNewItemFromXML item_data
-		saveMaterialLibrary terrain_mat_lib_path
+			local next_item = lv_xml_data.SelectedItems.item[i] 
+			local item_data = next_item.tag.value
+			local mat = terrain_mat[item_data.id]
+			format "Removed item:% id:% mat:%\n" next_item.text item_data.id mat.name
+			terrain_mat[item_data.id] = undefined
+			removeNewItemFromXML item_data
+			saveMaterialLibrary terrain_mat_lib_path
+		)
+		format "Deleted ( % ) items from ( XML & LIB )\n" del_count
+	)
+	
+	fn editSelectedItemXML = (
+	
+		local sel_items = lv_xml_data.SelectedItems
+		if sel_items.count != 1 do return false
+		local item_name = sel_items.item[0].text
+		local item_rect = sel_items.item[0].bounds
+		-- local list_rect = lv_xml_data.bounds --pos:[240,28] --not works
+		local dia_pos = getDialogPos rMaterialDataManager
+		local cursor_pos = [dia_pos.x + 250 + item_rect.x, dia_pos.y + 80 + item_rect.y]
+		mcLS3DMaterialManagerStruct.editMaterialItem item_name cursor_pos
 	)
 
 	fn runCommandByName cmd_name = (
@@ -605,74 +621,32 @@ rollout rMaterialDataManager "LS3D Material Manager: ( No Spawn: 0 - 200 | No En
 		)
 	)
 	
+	fn copySelectedItemsNames = (
+	
+		local sel_items = lv_xml_data.SelectedItems
+		local selected_items_names = ""
+		for i = 0 to sel_items.count - 1 do selected_items_names += sel_items.item[i].text  + "\n"
+		setclipboardText selected_items_names
+	)
+	
+	fn copySelectedItemsToCategory = (
+	
+		local sel_items = lv_xml_data.SelectedItems
+		if sel_items.count == 0 do return false
+		format "sel items:%\n" sel_items.count
+		local selected_items_ids = for i = 0 to sel_items.count - 1 collect sel_items.item[i].tag.value.id
+		mcLS3DMaterialManagerStruct.copyMaterialItemsTo selected_items_ids
+	)
+	
 	fn rcMenuXmlHandler s a = (
     
         format "lbxMatLib rcMenuHandler > s:%  cmd:%\n" s  s.text
         case s.text of (
         
-            "Edit": (
-                
-                /*local clicked_row = s.tag
-                if clicked_row == undefined do return false
-                
-                local app_pos = getDialogPos ::gLS3D_MaterialLibraryDesignerUI
-                local app_size = getDialogSize ::gLS3D_MaterialLibraryDesignerUI
-                local dia_size = getDialogSize rXmlMatSettings
-                local app_center_pos = [
-                    app_pos.x + (app_size.x / 2)  - (dia_size.x / 2), 
-                    app_pos.y + (app_size.y / 2)  - (dia_size.y / 2) \
-                ]
-                
-                CreateDialog rXmlMatSettings pos:app_center_pos
-                rXmlMatSettings.loadDataFromXML clicked_row.value*/
-            )
-            "Delete": (
-            
-                /*local clicked_row = s.tag
-                if clicked_row == undefined do return false
-            
-                if QueryBox ("You Are Sure to Delete Material ( " + clicked_row.value + " )") title:"Delete" do 
-                (
-                    format "TODO... delete item from libraty and xml ( if found )\n"
-                )*/
-            )
-            "Copy Name(s)" : (
-            
-				local sel_items = lv_xml_data.SelectedItems
-				format "sel_items:%\n" sel_items.count
-				--for i = 0 to sel_items.count - 1 collect do format "item:%\n" sel_items.item[i].text
-
-				local selected_items_names = ""
-				for i = 0 to sel_items.count - 1 do selected_items_names += sel_items.item[i].text  + "\n"
-                setclipboardText selected_items_names
-            )
-			"Copy To": (
-			
-				local sel_items = lv_xml_data.SelectedItems
-				if sel_items.count == 0 do return false
-				Global rCopyXmlItemsToCategory
-				if rCopyXmlItemsToCategory != undefined do destroyDialog rCopyXmlItemsToCategory
-				rollout rCopyXmlItemsToCategory "CopyTo:" width:120 height:108
-				(
-					local xml_items = #()
-					radiobuttons 'rdo_category' "" pos:[8,20] width:81 height:48 labels:#("Spawn NPC", "No Spawn", "No Entry") align:#left
-					button 'btn_copyto' "Accept" pos:[8,72] width:100 height:24 align:#left
-					GroupBox 'grp1' "Category:" pos:[4,4] width:112 height:100 align:#left
-					fn copyItemsTo = (
-					
-					
-						--copy xml data with semantic id and u v tile (but changed visual ID)
-						--copy material in library
-					)
-					on btn_copyto pressed do (
-					
-						format "copy items(  % ) to matlib and xml.\n" xml_items.count
-						destroyDialog rCopyXmlItemsToCategory
-					)
-				)
-				createDialog rCopyXmlItemsToCategory
-				rCopyXmlItemsToCategory.xml_items = for i = 0 to sel_items.count - 1 collect sel_items.item[i].text
-			)
+            "Edit": editSelectedItemXML()
+            "Delete": deleteSelectedItemsFromXmlAndLib()
+            "Copy Name(s)" : copySelectedItemsNames()
+			"Copy To": copySelectedItemsToCategory()
         )
     )
 	
@@ -747,10 +721,14 @@ rollout rMaterialDataManager "LS3D Material Manager: ( No Spawn: 0 - 200 | No En
 		--xml rc menu
 		initXmlMenu()
 	)
+	fn fin = (
+	
+		mcLS3DMaterialManagerStruct.closeChildrenDialogs()
+	)
 	on btn_add_mat pressed do (addNewMaterial())
 	on btn_load_mat_lib pressed do (
 		
-
+		materials_for_save = #() --clear new added materials
 		--materials table from xml
 		parseXmlTable xml_materials_table
 		fillListView lv_xml_data mat_items
@@ -760,7 +738,6 @@ rollout rMaterialDataManager "LS3D Material Manager: ( No Spawn: 0 - 200 | No En
 		
 	)
 	on btn_save_all pressed do (saveMaterialAndXML())
-	--on btn_delete_mat pressed do (deleteSelectedMaterialAndXML())
 	on btn_get_mat pressed do (loadMaterialsFromSelection lv_new_mats)
 	on btn_convert_sel pressed do
 	(
@@ -783,7 +760,7 @@ rollout rMaterialDataManager "LS3D Material Manager: ( No Spawn: 0 - 200 | No En
 			bmp_preview.bitmap = Bitmap bmp_preview.width bmp_preview.height color:gray
 		)
 	)
-	on lv_xml_data DoubleClick s a do (deleteSelectedMaterialAndXML s a)
+	on lv_xml_data DoubleClick s a do (editSelectedMaterialXML())
 	on lv_xml_data mouseclick s a do (showXmlMenu s a)
 	
 	on lv_new_mats DoubleClick s a do (
@@ -807,6 +784,7 @@ rollout rMaterialDataManager "LS3D Material Manager: ( No Spawn: 0 - 200 | No En
 	)
 	on btn_compare_xml_lib pressed do (compareXmlLib())
 	on rMaterialDataManager open do init()
+	on rMaterialDataManager close do fin()
 	on btn_save_mat pressed do (saveMatLib())
 	on btn_run_fn pressed do (runCommandByName ddl_fn_list.selected )
 )
