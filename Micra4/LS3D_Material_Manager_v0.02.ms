@@ -6,6 +6,16 @@ Global mcLS3DMaterialManagerRun
 if rMaterialDataManager != undefined do destroyDialog rMaterialDataManager
 rollout rMaterialDataManager "LS3D Material Manager: ( No Spawn: 1 - 200 | No Entry: 201 - 400 | Spawn NPC: 401 - 600 )" width:700 height:780
 (
+	/**
+	*@Usage	
+		key		= xml name
+		id		= material visual id
+		sid		= material semantic id
+		tile_u	= u titing
+		tile_v	= v tiling
+		mat		= material at current id
+		opt_id	= reserved (optional) id slots 
+	*/
 	struct MAT_ITEM (key, id, sid, tile_u, tile_v, mat, opt_id) --, fn clone = ()
 	local script_dir = getfileNamePath (getSourceFileName())
 	local drawingColor   = dotNetClass "drawing.color"
@@ -38,7 +48,7 @@ rollout rMaterialDataManager "LS3D Material Manager: ( No Spawn: 1 - 200 | No En
 	spinner 'spn_target_sid' "" pos:[124,684] width:60 height:16 range:[1,10000,1] type:#integer scale:1 align:#left
 	GroupBox 'grp2' "Advanced Tools:" pos:[4,720] width:692 height:52 align:#left
 	button 'btn_run_fn' "RUN" pos:[624,740] width:64 height:24 align:#left
-	-- button 'btn_save_mat' "Save Material" pos:[84,300] width:80 height:28 align:#left
+	button 'btn_save_mat' "Save Material" pos:[84,300] width:80 height:28 align:#left
 	dropdownList 'ddl_fn_list' "" pos:[12,742] width:608 height:21 items:#(
 		
 		"Semantic Materials Table",

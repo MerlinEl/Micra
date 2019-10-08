@@ -60,7 +60,8 @@ rollout mcUnwrapEditorDialog "UV+" width:96 height:592
 	button 'btn_paste_posx' "Px" pos:[36,556] width:24 height:24 toolTip:"Paste X" align:#left
 	button 'btn_paste_posy' "Py" pos:[64,556] width:24 height:24 toolTip:"Paste Y" align:#left
 	
-
+	spinner 'spn_offset_steps' "" pos:[60,164] width:32 height:16 range:[1,99,1] type:#integer scale:1 align:#left
+	label 'lbl_offset_steps' "step:" pos:[8,164] width:24 height:16 align:#left
 
 	--> Functions
 	fn errorCheck = --if error found do return true
@@ -143,12 +144,13 @@ rollout mcUnwrapEditorDialog "UV+" width:96 height:592
 	fn offsetResizeSelection type =
 	(
 		if errorCheck() do return false
+		local offset_steps = spn_offset_steps.value
 		case type of
 		(	
-			#right:   ( if keyboard.controlPressed then resizeUVW 2 #x else undo "Offset Right" on gco.MoveSelected [1,0,0])
-			#left:     ( if keyboard.controlPressed then resizeUVW 0.5 #x else undo "Offset Left"  on gco.MoveSelected [-1,0,0])
-			#up:      ( if keyboard.controlPressed then resizeUVW 2 #y else undo "Offset Up"    on gco.MoveSelected [0,1,0])
-			#down:  ( if keyboard.controlPressed then resizeUVW 0.5 #y else undo "Offset Down" on gco.MoveSelected [0,-1,0])
+			#right:   ( if keyboard.controlPressed then resizeUVW 2 #x else undo "Offset Right" on gco.MoveSelected [offset_steps,0,0])
+			#left:     ( if keyboard.controlPressed then resizeUVW 0.5 #x else undo "Offset Left"  on gco.MoveSelected [-offset_steps,0,0])
+			#up:      ( if keyboard.controlPressed then resizeUVW 2 #y else undo "Offset Up"    on gco.MoveSelected [0,offset_steps,0])
+			#down:  ( if keyboard.controlPressed then resizeUVW 0.5 #y else undo "Offset Down" on gco.MoveSelected [0,-offset_steps,0])
 			#center: 
 			( 
 				if keyboard.controlPressed then resizeUVW 2 #xy else

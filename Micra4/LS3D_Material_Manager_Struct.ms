@@ -330,11 +330,9 @@ struct LS3D_MATERIAL_MANAGER_STRUCT (
 			fn copyMaterialData source_id target_id item = (
 			
 				format "copyMaterialData >  from ID: % to % DATA:%\n" source_id target_id item
-				--create xml item with new ID
-				--local new_item = MAT_ITEM key:itm.key id:target_id sid:item.sid tile_u:item.tile_u tile_v:item.tile_v opt_id:item.opt_id
-				--or 
-				-- local new_item = copy item
-				-- new_item.id = target_id
+				--clone xml item with new ID
+				local new_item = copy item
+				new_item.id = target_id
 				--add new item to xml
 				
 				--clone material in library (to target ID)
