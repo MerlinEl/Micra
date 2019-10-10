@@ -53,6 +53,10 @@ fn mcDeepIsolate lvl:#upper =
 			debug = 0,
 			--<
 			-->Isolate Functions
+			fn isInPolygonEditMode = (
+			
+				subobjectlevel != undefined and (subobjectlevel == 4 or subobjectlevel == 5)
+			),
 			fn collectVisibleObjectsHandles = (
 	
 				for i in objects where not i.isHidden collect (getHandleByAnim i)
@@ -130,7 +134,7 @@ fn mcDeepIsolate lvl:#upper =
 							current_level   -= 1
 							unhideAllIsolatedObjects()
 							mcDeepIsolateDialog.hide() 
-							return OK	
+							return true	
 						)
 					)
 				)
@@ -140,15 +144,14 @@ fn mcDeepIsolate lvl:#upper =
 				local obj = selection[1]
 				if classOf obj != Editable_Poly do return false
 --format "Deep isolate > sel obj:% state:%" obj type
-				case type of
-				(
+				case type of (
 					#hide :
 					(
-						local face_sel = polyOp.getFaceSelection obj
+						local face_sel = polyOp.getFaceSelection obj --store current face selection
 						if face_sel.numberset == 0 do return false
-						max select invert
-						obj.hide #Face
-						polyop.setFaceSelection obj face_sel
+						max select invert --select other faces
+						obj.hide #Face --hide other faces
+						polyop.setFaceSelection obj face_sel --reselect original faces
 					)
 					#show:
 					(
@@ -158,9 +161,10 @@ fn mcDeepIsolate lvl:#upper =
 						polyop.setFaceSelection obj #()
 						--completeRedraw()
 						max zoomext sel
-						polyop.setFaceSelection obj face_sel
+						polyop.setFaceSelection obj face_sel --reselect original faces
 					)
 				)
+				completeRedraw() --update viewports
 				return true
 			),
 			fn isolateByLevel lvl =
@@ -174,18 +178,15 @@ fn mcDeepIsolate lvl:#upper =
 						#upper: -- deepest isolation
 						(
 							--print "isoluji"
-							if subobjectlevel != undefined and (subobjectlevel == 4 or subobjectlevel == 5)
-							then (if not manageGeometry #hide do return false)
-							else  (if not manageObjects #hide do return false)
-	
+							local success = if isInPolygonEditMode() then (manageGeometry #hide) else (manageObjects #hide)
+							if not success do return false
 							max zoomext sel  --max tool zoomextents all
 						)
 						#lower:
 						(
 							--print "unisoluji"
-							if subobjectlevel != undefined and (subobjectlevel == 4 or subobjectlevel == 5)
-							then manageGeometry #show
-							else manageObjects #show
+							local success = if isInPolygonEditMode() then (manageGeometry #show) else (manageObjects #show)
+							if not success do return false
 							--print current_level
 						)
 					)
