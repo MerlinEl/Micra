@@ -67,7 +67,7 @@ fn mcDeepIsolate lvl:#upper =
 					for handle in handles do (
 						
 						local obj = getAnimByHandle handle
-						if obj != undefined do hidden_obj += #(obj)
+						if obj != undefined and not (isDeleted obj) do hidden_obj += #(obj)
 					)
 				)
 				current_level = 1
@@ -91,7 +91,7 @@ fn mcDeepIsolate lvl:#upper =
 				for handle in hidden_obj_handles do 
 				(
 					local obj = getAnimByHandle handle
-					if obj != undefined do hidden_obj += #(obj)
+					if obj != undefined and not (isDeleted obj) do hidden_obj += #(obj)
 				)
 				unhide hidden_obj dolayer:true
 				selectmore hidden_obj
