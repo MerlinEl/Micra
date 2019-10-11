@@ -20,7 +20,7 @@
     <Lock_Object icon="88" cmd="mcAction.lockObjects true" tooltip="Lock Object" />
     <Mirror_2 icon="64" cmd="mcAction.mirror_2()" tooltip="Mirror 2" />
     <Move_To_Center icon="9" cmd="mcAction.object_move_to_center()" tooltip="Move To Center" />
-    <Move_To_Ground icon="54" cmd="mcAction.object_move_to_ground()" tooltip="Move To Ground" />
+    <Move_To_Ground icon="54" cmd="mcAction.moveObjectToGround()" tooltip="Move To Ground" />
     <Move_To_X icon="28" cmd="mcAction.object_move_to_grid()" tooltip="Move To X" />
     <Randomize icon="131" cmd="mcFile.fileInVersion Randomize" tooltip="Randomize" />
     <Random_Wirecolor icon="222" cmd="mcAction.randomWirecolor()" tooltip="Random Wirecolor" />

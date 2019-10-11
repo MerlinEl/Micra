@@ -661,7 +661,14 @@ Tooltip:"Create bridge between selection"
 	On Execute do  (selection[1].Bridge ())
 ) 
 
-
+MacroScript MC_Move_To_Ground
+Category:"Micra" 
+ButtonText:"MC Move To Ground"
+Tooltip:"Move Selected object to picked Face"
+(
+	On IsEnabled Return (selection.count == 1)
+	On Execute do  (mcAction.moveObjectToGround())
+)
 /*
 C:\Documents and Settings\rbaca\Local Settings\Application Data\Autodesk\3dsmax\9 - 32bit\enu\UI\usermacros
 

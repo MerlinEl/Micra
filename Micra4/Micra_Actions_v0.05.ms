@@ -321,17 +321,47 @@ struct mcAction (
 			)
 		)
 	),
-	fn object_move_to_ground =
+	fn moveObjectToGround =
 	(
 		undo "Object's to Ground" on
 		(
-			if keyboard.shiftPressed 
-			then (mcFile.fileInVersion "Object_Planter")
-			else if selection.count != 0 then
-			(
-				for i in selection do (i.pos.z = i.pivot.z - i.min.z)
+			
+			if selection.count == 1 then (--aim snap object
+				
+				local obj = selection[1]
+				if obj == undefined do return false
+				--Store Snap Settings
+				local type = snapMode.type
+				local mode = snapMode.Active
+				local UserFaceSnap = mcSnap.isActive "Face"
+				
+				completeredraw()
+				
+				--Enable 3D Snap only in Faces
+				snapMode.type = #3D
+				snapMode.Active = on
+				mcSnap.setItems off
+				mcSnap.enabled #("Face") on
+				
+				--Get aim point from picked surface
+				local aimp = pickPoint snap:#3D
+				if classOf aimp == Point3 do obj.pos = aimp
+
+				--Restore Snap Settings
+				snapMode.type = (if type != undefined then type else #3D)
+				snapMode.Active = mode
+				if not UserFaceSnap do mcSnap.enabled #("Face") off
 			)
-			else (mcCall.displayMsg "Selektni si nejdrive nejake objeky." green)
+			/*if keyboard.shiftPressed then ( --show planter tool
+				
+				 mcFile.fileInVersion "Object_Planter"
+				
+			) else if keyboard.controlPressed then (  --snap selected objwcts to z min
+				
+				for i in selection do (i.pos.z = i.pivot.z - i.min.z)
+	
+			) */
+			--else (mcCall.displayMsg "Selektni si nejdrive nejake objeky." green)
 		)
 	),
 	fn mergeMaxFileByPath =

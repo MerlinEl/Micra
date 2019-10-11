@@ -14,12 +14,12 @@
   </Properties_1>
   <Properties_2>
     <mcMicraDialog active="true" pos="[2171,214]" size="[148,66]" title="" />
-    <mcCustomizeDialog active="false" pos="[570,260]" size="[600,404]" title="" />
+    <mcCustomizeDialog active="false" pos="[110,130]" size="[600,404]" title="" />
     <mcProgramDialog active="undefined" pos="[2298,0]" size="[256,232]" title="" />
     <mcisoDialog active="false" pos="[181,152]" size="[140,400]" title="" />
     <mcModifierDialog active="undefined" pos="[100,100]" size="[400,400]" title="" />
     <mcIconMakerDialog active="false" pos="[1180,530]" size="[730,500]" title="" />
-    <mcDeepIsolateDialog active="false" pos="[1160,170]" size="[84,44]" title="" />
+    <mcDeepIsolateDialog active="true" pos="[1160,170]" size="[84,44]" title="" />
     <mcMoveTowardsDialog active="true" pos="[441,377]" size="[200,76]" title="" />
     <mcClonerDialog active="true" pos="[1062,309]" size="[164,296]" title="" />
     <mcRenameDialog active="true" pos="[265,280]" size="[224,312]" title="" />
@@ -225,5 +225,6 @@
     <btn_G23 action="Replace_Material_ID" icon="278" />
     <btn_H13 action="Quick_Materials" icon="275" />
     <btn_H14 action="LS3D_Material_Manager" icon="279" />
+    <btn_C6 action="Align_To_Face" icon="265" />
   </Buttons>
 </USER>

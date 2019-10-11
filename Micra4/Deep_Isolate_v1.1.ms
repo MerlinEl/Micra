@@ -118,7 +118,6 @@ fn mcDeepIsolate lvl:#upper =
 						current_level  += 1
 						lbl_lvl.text  = current_level as string
 						hideUnselected vis_obj_handles sel
-						return true
 					)
 					#show:
 					(
@@ -134,10 +133,10 @@ fn mcDeepIsolate lvl:#upper =
 							current_level   -= 1
 							unhideAllIsolatedObjects()
 							mcDeepIsolateDialog.hide() 
-							return true	
 						)
 					)
 				)
+				true
 			),
 			fn manageGeometry type =
 			(
@@ -165,7 +164,7 @@ fn mcDeepIsolate lvl:#upper =
 					)
 				)
 				completeRedraw() --update viewports
-				return true
+				true
 			),
 			fn isolateByLevel lvl =
 			(
