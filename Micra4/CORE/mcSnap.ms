@@ -58,6 +58,17 @@ struct MICRA_SNAP
 				)
 			)
 		)
+	),
+	fn getSnapSettings = (
+		
+		#(snapMode.type, snapMode.Active, getActiveItems()) --return stored_settings
+	),
+	fn setSnapSettings stored_settings = (
+		
+		snapMode.type = stored_settings[1]
+		snapMode.Active =  stored_settings[2]
+		setItems false --diasble all
+		mcSnap.enabled stored_settings[3] on
 	)
 	/*<end>*/
 )

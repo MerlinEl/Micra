@@ -331,10 +331,8 @@ struct mcAction (
 				local obj = selection[1]
 				if obj == undefined do return false
 				--Store Snap Settings
-				local type = snapMode.type
-				local mode = snapMode.Active
-				local UserFaceSnap = mcSnap.isActive "Face"
-				
+				local snap_settings = mcSnap.getSnapSettings()
+
 				completeredraw()
 				
 				--Enable 3D Snap only in Faces
@@ -348,9 +346,7 @@ struct mcAction (
 				if classOf aimp == Point3 do obj.pos = aimp
 
 				--Restore Snap Settings
-				snapMode.type = (if type != undefined then type else #3D)
-				snapMode.Active = mode
-				if not UserFaceSnap do mcSnap.enabled #("Face") off
+				mcSnap.setSnapSettings snap_settings
 			)
 			/*if keyboard.shiftPressed then ( --show planter tool
 				
@@ -491,10 +487,8 @@ struct mcAction (
 			local iVal = mcFile.readSettings Micra.UserSettings "Settings/AimScaleFactor"
 			
 			--Store Snap Settings
-			local type = snapMode.type
-			local mode = snapMode.Active
-			local UserFaceSnap = mcSnap.isActive "Face"
-			
+			local snap_settings = mcSnap.getSnapSettings()
+
 			completeredraw()
 			
 			--Enable 3D Snap only in Faces
@@ -515,9 +509,7 @@ struct mcAction (
 			)
 			
 			--Restore Snap Settings
-			snapMode.type = (if type != undefined then type else #3D)
-			snapMode.Active = mode
-			if not UserFaceSnap do mcSnap.enabled #("Face") off
+			mcSnap.setSnapSettings snap_settings
 		)
 		--**\ Created by Merlin el' 9.6.2006 10:11:23 /**--
 	),
@@ -537,8 +529,8 @@ struct mcAction (
 		local p1, p2, p3, UserSnap, UserVertSnap
 		
 		--Store  snap property
-		UserSnap = snapMode.Active
-		UserVertSnap = mcSnap.isActive "Face"
+		local snap_settings = mcSnap.getSnapSettings()
+
 		
 		--Set snap property
 		snapMode.Active = on
@@ -570,9 +562,7 @@ struct mcAction (
 			)
 		)
 		--Restore snap property
-		if not UserVertSnap do mcSnap.enabled #("Vertex") off
-		if UserSnap then (snapMode.Active = true)
-		else  (snapMode.Active = off)
+		mcSnap.setSnapSettings snap_settings
 	),
 	fn pivot_align_to_edge =		
 	(		
