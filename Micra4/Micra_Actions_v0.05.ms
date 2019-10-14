@@ -321,43 +321,25 @@ struct mcAction (
 			)
 		)
 	),
-	fn moveObjectToGround =
-	(
-		undo "Object's to Ground" on
-		(
+	fn moveObjectToGround = (
+		
+		undo "Object's to Ground" on (
 			
-			if selection.count == 1 then (--aim snap object
+			if selection.count == 1 then ( --aim snap object
 				
-				local obj = selection[1]
-				if obj == undefined do return false
-				--Store Snap Settings
-				local snap_settings = mcSnap.getSnapSettings()
-
-				completeredraw()
+				if keyboard.shiftPressed then ( --show planter tool
 				
-				--Enable 3D Snap only in Faces
-				snapMode.type = #3D
-				snapMode.Active = on
-				mcSnap.setItems off
-				mcSnap.enabled #("Face") on
+					 mcFile.fileInVersion "Object_Planter"
+					
+				) else (  --snap selected objwcts to z min
+					
+					for i in selection do (i.pos.z = i.pivot.z - i.min.z)
+				)
 				
-				--Get aim point from picked surface
-				local aimp = pickPoint snap:#3D
-				if classOf aimp == Point3 do obj.pos = aimp
-
-				--Restore Snap Settings
-				mcSnap.setSnapSettings snap_settings
+			) else (
+				
+				mcCall.displayMsg "Selektni si nejdrive nejake objeky." green
 			)
-			/*if keyboard.shiftPressed then ( --show planter tool
-				
-				 mcFile.fileInVersion "Object_Planter"
-				
-			) else if keyboard.controlPressed then (  --snap selected objwcts to z min
-				
-				for i in selection do (i.pos.z = i.pivot.z - i.min.z)
-	
-			) */
-			--else (mcCall.displayMsg "Selektni si nejdrive nejake objeky." green)
 		)
 	),
 	fn mergeMaxFileByPath =
@@ -2568,6 +2550,35 @@ struct mcAction (
 			)
 		)
 		createDialog replaceMateialIDdialog
+	),
+	fn moveObjectToSurface = (
+		
+		undo "Object's to Surface" on
+		(
+			
+			if selection.count == 1 then (--aim snap object
+				
+				local obj = selection[1]
+				if obj == undefined do return false
+				--Store Snap Settings
+				local snap_settings = mcSnap.getSnapSettings()
+
+				completeredraw()
+				
+				--Enable 3D Snap only in Faces
+				snapMode.type = #3D
+				snapMode.Active = on
+				mcSnap.setItems off
+				mcSnap.enabled #("Face") on
+				
+				--Get aim point from picked surface
+				local aimp = pickPoint snap:#3D
+				if classOf aimp == Point3 do obj.pos = aimp
+
+				--Restore Snap Settings
+				mcSnap.setSnapSettings snap_settings
+			)
+		)
 	)
 	/*<end>*/
 )

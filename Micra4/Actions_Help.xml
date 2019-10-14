@@ -33,6 +33,7 @@
     <UE_Model_Importer val="Importuje static a skeletal meshe z Unreal Editoru." />
     <Quad_Check val="Oznaci vsechny polygony ,ktere nejsou ctvercoveho tvaru." />
     <Create_Bounding_Box val="Vytvori mesh z bounding boxu u vybraneho objektu." />
+    <Move_To_Surface val="Move selected object in to surface" />
   </Object>
   <Pivot>
     <Afect_Pivot_Only val="Zapina / Vypina pohyblivost pivotu." />

@@ -42,6 +42,7 @@
     <Align_Objects_3D icon="270" cmd="mcFile.fileInVersion Align_Objects_3D" tooltip="Align Objects 3D" />
     <Offset_Rotate_Object icon="276" cmd="mcAction.OffsetRotateObject()" tooltip="Offset Rotate Object" />
     <FBX_Quick_Import_Export icon="277" cmd="mcFile.fileInVersion FBX_Quick_Import_Export" tooltip="FBX Quick Import Export" />
+    <Move_To_Surface icon="280" cmd="mcAction.moveObjectToSurface()" tooltip="Move To Surface" />
   </Object>
   <Pivot>
     <Afect_Pivot_Only icon="51" cmd="mcAction.pivot_affect_only()" tooltip="Afect Pivot Only" />
