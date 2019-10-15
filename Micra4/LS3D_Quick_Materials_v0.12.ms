@@ -946,6 +946,12 @@ rollout mcQuickMaterialsDialog "Quick Materials:" width:556 height:428
 		--item.GetAllAttributes()
 	)
 	
+	fn clearItemsFilter = (
+		
+		edt_filter_names.text = ""
+		filterListView lv_mat_data
+	)
+	
 	fn init = (
 		
 		--load material library
@@ -1002,10 +1008,10 @@ rollout mcQuickMaterialsDialog "Quick Materials:" width:556 height:428
 	)
 	on btn_apply_mat pressed do (undo "Assign Material" on  assignMaterial (selection as Array) applyMapping:true)
 	on btn_apply_id pressed do (undo "Change Material ID" on  assignMaterial (selection as Array) applyMapping:false)
-	on btn_get_sel pressed do (pickMaterialFromSelection (selection as Array))
+	on btn_get_sel pressed do (clearItemsFilter(); pickMaterialFromSelection (selection as Array))
 	on btn_unwrap pressed do (applyUnwrapUVW())
 	on edt_filter_names keyUp arg do (filterListView lv_mat_data)
-	on btn_clear_text pressed do (edt_filter_names.text = ""; filterListView lv_mat_data)
+	on btn_clear_text pressed do (clearItemsFilter())
 	on btn_sel_simillar pressed  do (undo "Select Simmilar Faces" on selectSimillarFaces (selection as Array))
 	on rdo_mat_type changed state do (filterListView lv_mat_data)
 	--add event to fix decolor selecrtion on lost focus

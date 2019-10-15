@@ -26,6 +26,10 @@ rollout FBXQuickImportExportDialog "FBX Quick Import - Export v0.02" width:472 h
 	)
 	fn importFBX = (
 		
+-- 		FBXImporterSetParam "Mode" #merge
+-- 		FBXImporterSetParam "SmoothingGroups" true
+-- 		FBXImporterSetParam "ShowWarnings" false
+		
 		local asset_name = edt_asset_name.text
 		if (asset_name.count == 0) do ((format "Undefined Asset Name! [Micra] \n"); return false)
 		local import_path = edt_import.text

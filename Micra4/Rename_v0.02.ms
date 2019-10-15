@@ -31,11 +31,31 @@ if mcRenameDialog != undefined then destroyDialog mcRenameDialog
 		checkbox suf_num "Numbered" pos:[12,199] width:73 height:16
 		spinner base_num "Base Number: " pos:[62,219] width:90 height:16 range:[0,9999,0] type:#integer 
 		spinner num_step "Step: " pos:[85,240] width:68 height:16 range:[-999,999,1] type:#integer 
-		button do_rename "Rename" pos:[12,273] width:200 height:30
+		button btn_rename "Rename" pos:[8,272] width:100 height:30
+		button btn_unique_rename "Unique Name" pos:[112,272] width:100 height:30 align:#left
 	
 		label lbl16 "Digits" pos:[149,109] width:40 height:16
 		label lbl17 "Digits" pos:[149,166] width:40 height:16
 		-----------------------------------------------------------------------------------------------		
+		fn uniqueRenameSelection = (
+			
+			local base_name = if base.state do (
+				
+				if base_text.text.count == 0 then (
+					
+					messagebox "Base name is empty." Title:"Warning"
+					return false
+				)
+				base_text.text
+			)
+			
+			for o in selection do (
+				
+				if base_name == undefined do base_name = o.name
+				o.name = uniqueName base_name
+			)
+		)
+		
 		on mcRenameDialog rbuttonup pos do (destroyDialog mcRenameDialog )
 		on mcRenameDialog close do 
 		(
@@ -60,7 +80,7 @@ if mcRenameDialog != undefined then destroyDialog mcRenameDialog
 			print MyAry
 			)
 		)
-		on do_rename pressed do with undo on
+		on btn_rename pressed do with undo on
 		(	
 			if objs.state==1 then MyAry=selection
 			findErrors=0
@@ -133,6 +153,7 @@ its name to remove the requested number. Rename cancelled." Title:"Suffix Rename
 					)
 			)
 		)
+		on btn_unique_rename pressed do uniqueRenameSelection()
 	)
 on execute do
 	(
