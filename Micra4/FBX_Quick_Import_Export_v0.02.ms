@@ -30,6 +30,11 @@ rollout FBXQuickImportExportDialog "FBX Quick Import - Export v0.02" width:472 h
 -- 		FBXImporterSetParam "SmoothingGroups" true
 -- 		FBXImporterSetParam "ShowWarnings" false
 		
+		--get all visible objects
+		--local old_visible_obj_handles = for o in objects where (not o.isHidden) collect (o.inode.handle)
+		if subobjectlevel != undefined do (subobjectlevel = 0; max create mode)
+		max select none
+
 		local asset_name = edt_asset_name.text
 		if (asset_name.count == 0) do ((format "Undefined Asset Name! [Micra] \n"); return false)
 		local import_path = edt_import.text
@@ -37,6 +42,18 @@ rollout FBXQuickImportExportDialog "FBX Quick Import - Export v0.02" width:472 h
 		format "import file:%\n" ((import_path+"\\"+asset_name+".FBX"))
 		importfile (import_path+"\\"+asset_name+".FBX") #noPrompt using:FBXIMP
 		print "FBX IMPORTED"
+		
+		--rename new imported objs
+		if selection.count > 0 do for o in selection do o.name = uniqueName "helpobject_"
+		
+		--select new imported objs
+		/*local new_visible_obj_handles = for o in objects where  not o.isHidden collect (o.inode.handle)
+		local new_objects = for h in new_visible_obj_handles where (findItem old_visible_obj_handles h) == 0 collect o
+		if new_objects.count > 0 do (
+			
+			for o in new_objects do o.name = uniqueName "helpobject_"
+			select new_objects	
+		)*/
 	)
 	fn exportFBX = (
 		
