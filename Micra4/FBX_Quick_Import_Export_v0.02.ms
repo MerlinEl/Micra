@@ -44,7 +44,11 @@ rollout FBXQuickImportExportDialog "FBX Quick Import - Export v0.02" width:472 h
 		print "FBX IMPORTED"
 		
 		--rename new imported objs
-		if selection.count > 0 do for o in selection do o.name = uniqueName "helpobject_"
+		if selection.count > 0 do (
+		
+			for o in selection do o.name = uniqueName "helpobject_"
+			max zoomext sel
+		)
 		
 		--select new imported objs
 		/*local new_visible_obj_handles = for o in objects where  not o.isHidden collect (o.inode.handle)

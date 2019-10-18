@@ -1,0 +1,8 @@
+
+
+gLS3DSmartExport.setModelProfileFromProps listViewHitTestInfo.Item.Subitems.Item[1].Text -1
+profileID = gLS3DSmartExport.getModelProfileFromProps modelName
+profileID = LS3DGUP.XDSExporter.GetSelectedProfile()
+
+
+				LS3DGUP.XDSExporter.SupressPrompts = true

@@ -1,3 +1,7 @@
+--TODO Add warning for  Assign Material  and  Change Material ID 
+--if  subobjectlevel == undefined or subobjectlevel == 0 and object has more than one mat ID
+
+
 Global mcQuickMaterialsDialog
 if mcQuickMaterialsDialog != undefined do destroyDialog mcQuickMaterialsDialog
 rollout mcQuickMaterialsDialog "Quick Materials:" width:556 height:428
@@ -55,7 +59,7 @@ rollout mcQuickMaterialsDialog "Quick Materials:" width:556 height:428
 	label 'lbl7' "filter:" pos:[292,28] width:28 height:12 align:#left
 
 	radiobuttons 'rdo_mat_type' "" pos:[8,256] width:81 height:48 labels:#("Spawn NPC", "No Spawn", "No Entry") columns:1 align:#left
-	spinner 'spn_mapping_angle' "" pos:[228,264] width:60 height:16 range:[0,360,0] type:#float scale:0.1 align:#left
+	spinner 'spn_mapping_angle' "" pos:[228,264] width:60 height:16 range:[-360,360,0] type:#float scale:0.1 align:#left
 	label 'lbl2' "Mapping Angle:" pos:[152,264] width:72 height:16 align:#left
 	radioButtons 'rdo_mappig_type' "Mapping:" pos:[12,384] width:114 height:30 labels:#("Planar", "Box") columns:2 align:#left toolTip:"Experimental Mode. Is not Finished yet."
 		
