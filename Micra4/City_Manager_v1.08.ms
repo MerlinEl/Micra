@@ -469,10 +469,15 @@ rollout mcCityManDialog "" width:500 height:964
 	)
 	fn nodeRenamed =
 	(
-		if cbx_node_list.items.count == 0 do return false
+		if cbx_children_list.items.count == 0 do return false
 		local data = callbacks.notificationParam()	
 		local new_name = data[1]
-		cbx_node_list.selected = new_name
+		local sel_index = (cbx_children_list.selection as array)[1]
+		if sel_index != undefined do (
+			
+			cbx_children_list.items[sel_index] = new_name
+			cbx_children_list.items = cbx_children_list.items --refresh list
+		)
 	)
 	fn initializeInterface =
 	(
@@ -643,7 +648,6 @@ rollout mcCityManDialog "" width:500 height:964
 	--load node children
 	on cbx_node_list selected sel do
 	(
-	
 	
 		local sel_items = cbx_node_list.selection as array
 		if sel_items.count > 1 then (
