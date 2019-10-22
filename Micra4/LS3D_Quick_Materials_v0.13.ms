@@ -37,12 +37,14 @@ rollout mcQuickMaterialsDialog "Quick Materials:" width:556 height:428
 	button 'btn_clear_text' "<" pos:[526,24] width:18 height:20 toolTip:"Clear Text" align:#left
 	button 'btn_apply_mat' "Assign Material" pos:[148,236] width:136 height:24 toolTip:"Aply material to selected faces" align:#left
 	button 'btn_apply_id' "Change Material ID" pos:[148,288] width:136 height:24 toolTip:"Change material ID on selected faces" align:#left
-	button 'btn_get_sel' "Pick Material" pos:[148,344] width:136 height:24 checked:false toolTip:"Pick Material From Face" align:#left
-	button 'btn_sel_simillar' "Select Simmilar Faces" pos:[148,316] width:136 height:24 align:#left
-	button 'btn_unwrap' "Unwrap UVW" pos:[148,372] width:136 height:24 align:#left
+	button 'btn_get_sel' "Pick Material" pos:[148,372] width:136 height:24 checked:false toolTip:"Pick Material From Face" align:#left
+	button 'btn_sel_simillar' "Select Simillar Faces" pos:[148,316] width:136 height:24 align:#left
+	button 'btn_sel_grow' "Grow Simillar" pos:[148,344] width:136 height:24 align:#left
+	button 'btn_unwrap' "Unwrap UVW" pos:[148,400] width:136 height:24 align:#left
 
-	checkbox 'chk_collapse' "Collapse Modifier" pos:[12,340] width:100 height:16 checked:true align:#left
-	checkbox 'chk_autoorient' "Orientation Auto" pos:[12,360] width:100 height:16 checked:false align:#left
+	checkbox 'chk_collapse' "Collapse Modifier" pos:[12,332] width:100 height:16 checked:true align:#left
+	checkbox 'chk_autoorient' "Orientation Auto" pos:[12,352] width:100 height:16 checked:false align:#left
+	--checkbox 'chk_clear_selection' "Clear Selection" pos:[12,372] width:100 height:16 checked:true align:#left --REMOVED(dont really need this)
 
 	bitmap 'bmp_preview' "Bitmap" pos:[12,24] width:264 height:200 align:#left
 	bitmap 'bmp_mat_type_1' "Bitmap" pos:[92,256] width:40 height:16 align:#left
@@ -56,8 +58,8 @@ rollout mcQuickMaterialsDialog "Quick Materials:" width:556 height:428
 
 	radiobuttons 'rdo_mat_type' "" pos:[8,256] width:81 height:48 labels:#("Spawn NPC", "No Spawn", "No Entry") columns:1 align:#left
 	spinner 'spn_mapping_angle' "" pos:[228,264] width:60 height:16 range:[-360,360,0] type:#float scale:0.1 align:#left
-	label 'lbl2' "Mapping Angle:" pos:[152,264] width:72 height:16 align:#left
-	radioButtons 'rdo_mappig_type' "Mapping:" pos:[12,384] width:114 height:30 labels:#("Planar", "Box") columns:2 align:#left toolTip:"Experimental Mode. Is not Finished yet."
+	label 'lbl2' "Mapping Angle:" pos:[152,265] width:72 height:16 align:#left
+	radioButtons 'rdo_mappig_type' "Mapping:" pos:[12,390] width:114 height:30 labels:#("Planar", "Box") columns:2 align:#left toolTip:"Experimental Mode. Is not Finished yet."
 		
 	/**
 	*@Usage add one or more material libraries in to Temporary Library
@@ -272,7 +274,26 @@ rollout mcQuickMaterialsDialog "Quick Materials:" width:556 height:428
 		UVWMapFit obj mod_uvw useSel:#none
 	) 
 	
-		fn getMaterialIdFromPoly obj = (
+	fn getObjectMaterialIDS obj = (
+	
+		local ids = #{}
+		local mesh_obj = snapshotasmesh obj
+		for f=1 to mesh_obj.numfaces do ids[getFaceMatID mesh_obj f] = on
+		delete mesh_obj
+		ids
+	)
+	
+	fn getFacesMaterialIDS obj = (
+	
+		local ids = #{}
+		local mesh_obj = snapshotasmesh obj
+		local fsel = getFaceSelection mesh_obj
+		for f in fsel do ids[getFaceMatID mesh_obj f] = on
+		delete mesh_obj
+		ids
+	)
+	
+	fn getMaterialIdFromPoly obj = (
 	
 		local face_id = undefined
 		if subobjectLevel == undefined or subobjectLevel == 0  then ( --whole object
@@ -348,20 +369,29 @@ rollout mcQuickMaterialsDialog "Quick Materials:" width:556 height:428
 		result --output
 	)
 	
-	fn selectFacesByMatID obj mat_id = (
+	fn selectFacesByMatID obj mat_ids clearSelection:true = (
 	
 		local gco = modPanel.getCurrentObject()
 		local result = false
+		--if clearSelection do mat_ids = #((mat_ids as array)[1]) --REMOVED(dont really need this)
 		if classOf gco == Editable_Poly then (
 		
-			local faces_with_id = for f = 1 to obj.numfaces where polyop.getFaceMatID obj f == mat_id collect f
+			local faces_with_id = #{}
+			for id in mat_ids do (
+			
+				for f = 1 to obj.numfaces where polyop.getFaceMatID obj f == id do faces_with_id += #{f}
+			)
 			polyop.setFaceSelection obj faces_with_id --set the selection when the loop is done!
 			result = true
 			
 		) else if classOf gco == Edit_Poly do ( --one object with Edit_Poly modifier
 	
 			local fcount = getnumfaces obj	--             obj.Edit_Poly.GetFaceMaterial f
-			local faces_with_id = for f = 1 to fcount where gco.EditPolyMod.GetFaceMaterial f == mat_id collect f
+			local faces_with_id = #{}
+			for id in mat_ids do (
+			
+				for f = 1 to fcount where gco.EditPolyMod.GetFaceMaterial f == id do faces_with_id += #{f}
+			)
 			gco.EditPolyMod.select #Face (faces_with_id as BitArray)
 			result = true
 		)
@@ -484,16 +514,7 @@ rollout mcQuickMaterialsDialog "Quick Materials:" width:556 height:428
 			)
 		)
 	)
-	
-	fn getMaterialIdsCount obj = (
-	
-		local ids = #{}
-		local mesh_obj = snapshotasmesh obj
-		for f=1 to mesh_obj.numfaces do ids[getFaceMatID mesh_obj f] = on
-		delete mesh_obj
-		ids.numberset
-	)
-	
+
 	fn assignMaterial objs applyMapping:true = (
 	
 		format "assign material:%\n" objs
@@ -509,7 +530,8 @@ rollout mcQuickMaterialsDialog "Quick Materials:" width:556 height:428
 			local secure_question_override_materials = false
 			for obj in valid_objects do (
 			
-				if getMaterialIdsCount obj > 1 then (
+				local material_ids = getObjectMaterialIDS obj --as bitarray
+				if material_ids.numberset > 1 then (
 				
 					secure_question_override_materials = true
 					exit
@@ -940,14 +962,47 @@ rollout mcQuickMaterialsDialog "Quick Materials:" width:556 height:428
 			messageBox "Object(s) must be Editable Poly or Edit Poly." title:"Aborted:"
 			return false
 		)
-		local map_id = getMaterialIdFromSelection #(obj)
-		if map_id == undefined do (
+		local mat_ids = getFacesMaterialIDS obj
+		if mat_ids.numberset == 0 do (
 		
 			messageBox "No faces Selected" title:"Warning"
 			return false
 		)
-		selectFacesByMatID obj map_id
+		selectFacesByMatID obj mat_ids --clearSelection:chk_clear_selection.checked --REMOVED(dont really need this)
 		completeRedraw()
+	)
+	
+	fn selectFacesGrowByID objs = ( --maybe double click method
+		
+		-- format "selectFacesGrowByID > :%\n" objs
+		if subobjectLevel != 4 and subobjectLevel != 5 do return false
+		if objs.count > 1 do (
+				
+			messageBox "Only One Object can be Selected." title:"Aborted:"
+			return false
+		)
+		local obj = objs[1]	
+		-- if not (isValidObject obj) do (
+		if classOf obj != Editable_Poly do (
+			
+			-- messageBox "Object(s) must be Editable Poly or Edit Poly." title:"Aborted:"
+			messageBox "Object(s) must be Editable Poly ." title:"Aborted:"
+			return false
+		)
+		local sel_faces = polyOp.getFaceSelection obj
+		if sel_faces.numberset == 0 do (
+		
+			messageBox "No faces Selected" title:"Warning"
+			return false
+		)
+		local face_id = polyOp.getFaceMatID obj (sel_faces as array)[1]
+		obj.buttonOp #GrowSelection 
+		local grow_faces = polyOp.getFaceSelection obj
+		for f in grow_faces where polyOp.getFaceMatID obj f == face_id do appendIfUnique sel_faces f
+		polyOp.setFaceSelection obj sel_faces
+		--TODO maybe is better collect faces in MESH and then select in Editable_Poly or Edit_Poly
+		--getFaceMatID <mesh> <face_index_integer>
+		--$.selectByMaterial 421
 	)
 	
 	--MAT_ITEM key:"grass"				id:140		sid:81		tile_u:0.4		tile_v:0.4,
@@ -1039,6 +1094,7 @@ rollout mcQuickMaterialsDialog "Quick Materials:" width:556 height:428
 	on edt_filter_names keyUp arg do (filterListView lv_mat_data)
 	on btn_clear_text pressed do (clearItemsFilter())
 	on btn_sel_simillar pressed  do (undo "Select Simmilar Faces" on selectSimillarFaces (selection as Array))
+	on btn_sel_grow pressed  do (undo "Select Floof Faces" on selectFacesGrowByID (selection as Array))
 	on rdo_mat_type changed state do (filterListView lv_mat_data)
 	--add event to fix decolor selecrtion on lost focus
 	on lv_mat_data GotFocus args  do  ( unmarkItem  lv_mat_data.SelectedItems.item[0] )
@@ -1074,3 +1130,10 @@ createDialog mcQuickMaterialsDialog
 		LS3D_GUIDToNumberArray ls3d_mat.materialGUID &guid_Array
 		LS3DGUP.LS3DGUP.GetMaterialVFSFullPath guid_Array[1] guid_Array[2] &materialPath
 		correctPath (edit_path + materialPath)*/
+		
+		/*
+			local faces_with_id = #{}
+			for f = 1 to obj.numfaces where polyop.getFaceMatID obj f == mat_id do append faces_with_id f
+			if not clearSelection do = faces_with_id + (polyop.getFaceSelection obj)
+			--obj.selectByMaterial faces_with_id clearCurrentSelection:clearSelection
+		*/
