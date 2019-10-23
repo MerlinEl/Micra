@@ -118,6 +118,7 @@
     <Patcher2P icon="271" cmd="mcFile.fileInVersion Patcher2P" tooltip="Patcher2P" />
     <Smooth_Hard icon="110" cmd="mcAction.smoothPolyHard()" tooltip="Smooth Hard" />
     <Replace_Material_ID icon="278" cmd="mcAction.replaceMaterialID()" tooltip="Replace Material ID" />
+    <Slice_Plane_2 icon="285" cmd="mcFile.fileInVersion Slice_Plane2" tooltip="Slice Plane 2" />
   </Modify>
   <Creation>
     <Create_3PGrid icon="81" cmd="mcCreate.grid3p()" tooltip="Create_3PGrid" />

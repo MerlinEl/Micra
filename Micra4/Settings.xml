@@ -2,7 +2,7 @@
 <SETTINGS>
   <Micra>
     <born val="04.25.2006" />
-    <version val="5.35" />
+    <version val="5.36" />
   </Micra>
   <Structures val="All registred Micra's Structures">
     <!--independent classes-->
@@ -140,6 +140,7 @@
     <LS3D_Quick_Materials val="0.13" />
     <FBX_Quick_Import_Export val="0.02" />
     <LS3D_Material_Manager val="0.02" />
+    <Slice_Plane2 val="0.01" />
   </Version>
   <SystemFiles val="Micra's Settings Files">
     <Actions val="Contains all accesible Micra's actions" />

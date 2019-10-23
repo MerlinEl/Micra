@@ -7,7 +7,7 @@
     <mc_Dialog_D active="true" pos="[2171,508]" size="[148,90]" title="Select:" btnCount="[6,3]" />
     <mc_Dialog_E active="false" pos="[1776,1171]" size="[244,42]" title="Animation:" btnCount="[10,1]" />
     <mc_Dialog_F active="true" pos="[1975,210]" size="[196,90]" title="Modifiers:" btnCount="[8,3]" />
-    <mc_Dialog_G active="true" pos="[2171,598]" size="[148,114]" title="Modify:" btnCount="[6,4]" />
+    <mc_Dialog_G active="true" pos="[2171,598]" size="[148,138]" title="Modify:" btnCount="[6,5]" />
     <mc_Dialog_H active="true" pos="[2172,771]" size="[148,90]" title="Materials:" btnCount="[6,3]" />
     <mc_Dialog_I active="true" pos="[2172,927]" size="[148,66]" title="Programming:" btnCount="[6,2]" />
     <mc_Dialog_J active="true" pos="[1632,1242]" size="[532,42]" title="Experimental:" btnCount="[22,1]" />
@@ -226,5 +226,6 @@
     <btn_H14 action="LS3D_Material_Manager" icon="279" />
     <btn_C6 action="Align_To_Face" icon="265" />
     <btn_B6 action="Move_To_Surface" icon="280" />
+    <btn_G25 action="Slice_Plane_2" icon="285" />
   </Buttons>
 </USER>
