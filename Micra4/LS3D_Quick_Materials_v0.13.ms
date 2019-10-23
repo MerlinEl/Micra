@@ -880,10 +880,18 @@ rollout mcQuickMaterialsDialog "Quick Materials:" width:556 height:428
 		)
 		
 		--mod_uvw = $.modifiers[#unwrap_uvw]
-		local mod_uvw = 	Unwrap_UVW ()
-		modPanel.addModToSelection mod_uvw ui:on
-		mod_uvw.edit()	
-		selectTextureInUnwrap mod_uvw selection[1].material map_id
+		local mod_uvw  = modPanel.getCurrentObject()
+		if classOf mod_uvw == Unwrap_UVW then ( -- reopen existing unwrap
+		
+			mod_uvw.edit()
+
+		) else ( -- add new unwrap
+		
+			mod_uvw = Unwrap_UVW () 
+			modPanel.addModToSelection mod_uvw ui:on
+			mod_uvw.edit()	
+			selectTextureInUnwrap mod_uvw selection[1].material map_id
+		)
 	)
 	
 	fn rotateMappingGizmo angle_val = (
