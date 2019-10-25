@@ -203,20 +203,24 @@ rollout mcVertexSnapDialog "" width:320 height:232
 	(
 	        
 	        local obj = selection[1]
-	        if obj == undefined do return false
+	        if obj == undefined or classOf obj != Editable_Poly do (
+				
+				messageBox "Object must be Editable_Poly" title:"Aborted"
+				return false
+			)
 	        local vert = (polyop.getVertSelection obj as array)[1]
 	        if vert == undefined do return false
 	        vert_pos = polyop.getVert obj vert  
 	        format "vert pos:%\n" vert_pos
 	    )
-	on btn_set_pos pressed do
-	(
-	            
+	on btn_set_pos pressed do (
+		
 	        if vert_pos == undefined do return false
 	        local obj = selection[1]
 	        if obj == undefined do return false
-	        if subobjectLevel == 0 then ( --snap object to pos
-	            obj.pos = vert_pos
+	        if subobjectLevel == undefined or subobjectLevel == 0 then ( --snap object to pos
+	            
+				obj.pos = vert_pos
 	            
 	        ) else ( --snap vertex to pos
 	            

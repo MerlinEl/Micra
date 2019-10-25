@@ -67,6 +67,7 @@ rollout mcCityManDialog "" width:500 height:964
 	local last_selection = #()
 	local callbacks_id = #micra_callbacks_cityman	
 	local collision_wirecolor = color 176 26 26
+	local CALLBACKS_ENABLED = true
 	--Functions
 	fn runLocalScript script_name = (
 
@@ -386,6 +387,7 @@ rollout mcCityManDialog "" width:500 height:964
 	)
 	fn needUpdate =
 	(
+		if not CALLBACKS_ENABLED do return false
 		--btn_init
 		autosel = off --keep unlinked objects selected
 		clearList cbx_children_list
@@ -469,6 +471,7 @@ rollout mcCityManDialog "" width:500 height:964
 	)
 	fn nodeRenamed =
 	(
+		if not CALLBACKS_ENABLED do return false
 		if cbx_children_list.items.count == 0 do return false
 		local data = callbacks.notificationParam()	
 		local new_name = data[1]
@@ -794,6 +797,7 @@ rollout mcCityManDialog "" width:500 height:964
 	
 	on btn_export_selection pressed  do
     (
+		CALLBACKS_ENABLED = false
         --get selecten nodes fom list
         local sel_names = getSelectedItems cbx_node_list
         if sel_names.count == 0 do return false
@@ -822,6 +826,7 @@ rollout mcCityManDialog "" width:500 height:964
             max modify mode
             subObjectLevel = old_sublevel
         )
+		CALLBACKS_ENABLED = true
     )
 	
 	--get node from selection
@@ -842,7 +847,11 @@ rollout mcCityManDialog "" width:500 height:964
 	on btn_init pressed do 
 	(
 		initializeInterface()
-		if chk_auto_trace_node.checked do autosel = on
+		if chk_auto_trace_node.checked do (
+			
+			autosel = on
+			updateSelection()	
+		)
 	)
 	on mcCityManDialog open do
 	(

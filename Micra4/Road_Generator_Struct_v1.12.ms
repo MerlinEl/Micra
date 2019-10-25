@@ -144,32 +144,19 @@ struct ROAD_GENERATOR_STRUCTURE	(
 	*/
 	fn getUIPrefabsIcons = (
 
-		/*#(
-			"(1-6)     "	+ getRoadSymbol #("a", "a") ,								   							   
-			"(2-2)R   "	+ getRoadSymbol #("a", "a", "r", "s", "r", "a", "a") ,
-			"(2-4)     "	+ getRoadSymbol #("a", "a", "s", "a", "a") ,
-			"(2-4)R   "	+ getRoadSymbol #("a", "a", "r", "s", "r", "a", "a") ,
-			"(2-5)     "	+ getRoadSymbol #("a", "a", "s", "a", "a"),
-			"(4-4)    "		+ getRoadSymbol #("a", "a", "s", "a", "a", "s", "a", "a", "s", "a", "a") ,
-			"(4-5)    "		+ getRoadSymbol #("a", "a", "s", "a", "a", "s", "a", "a", "s", "a", "a"),
-			--new 2019
-			"(1-6)D   "	+ getRoadSymbol #("a", "a") ,	
-			"(2-6)D  "		+ getRoadSymbol #("a", "a", "s", "a", "a"),
-			"(2-6)C  "		+ getRoadSymbol #("a", "a", "s", "a", "a")
-		)*/
-		
 		#(
 			"(1-6)                      "	+ getRoadSymbol #("a", "a", "a", "a", "a", "a") ,																		--1					   							   
 			"(2-2)R                   "	+ getRoadSymbol #("a", "a", "r", "s", "r", "a", "a") ,																		--2
-			"(2-4)                   "		+ getRoadSymbol #("a", "a", "a", "a", "s", "a", "a", "a", "a") ,															--3
-			"(2-4)R                "		+ getRoadSymbol #("a", "a", "a", "a", "r", "s", "r", "a", "a", "a", "a") ,													--4
+			"(2-4)                   "		+ getRoadSymbol #("a", "a", "a", "a", "s", "a", "a", "a", "a") ,														--3
+			"(2-4)R                "		+ getRoadSymbol #("a", "a", "a", "a", "r", "s", "r", "a", "a", "a", "a") ,												--4
 			"(2-5)                "		+ getRoadSymbol #("a", "a", "a", "a", "a", "s", "a", "a", "a", "a", "a"),														--5
 			"(4-4)       "			+ getRoadSymbol #("a", "a", "a", "a", "s", "a", "a", "a", "a", "s", "a", "a", "a", "a", "s", "a", "a", "a", "a") ,					--6
 			"(4-5)  "				+ getRoadSymbol #("a", "a", "a", "a", "a", "s", "a", "a", "a", "a", "a", "s", "a", "a", "a", "a", "a", "s", "a", "a", "a", "a", "a"),	--7
 			"(1-6D)                      "	+ getRoadSymbol #("a", "a", "a", "a", "a", "a") ,																		--8
-			"(2-6D)                "		+ getRoadSymbol #("a", "a", "a", "a", "a", "a", "s", "a", "a", "a", "a", "a", "a"),												--9
-			"(2-6C)                "		+ getRoadSymbol #("a", "a", "a", "a", "a", "a", "s", "a", "a", "a", "a", "a", "a"),												--10
-			"(2-4S)                "		+ getRoadSymbol #("a", "a", "a", "a", "s", "a", "a", "a", "a")																--11
+			"(2-6D)                "		+ getRoadSymbol #("a", "a", "a", "a", "a", "a", "s", "a", "a", "a", "a", "a", "a"),										--9
+			"(2-6C)                "		+ getRoadSymbol #("a", "a", "a", "a", "a", "a", "s", "a", "a", "a", "a", "a", "a"),										--10
+			"(3-6C)                "		+ getRoadSymbol #("a", "a", "a", "a", "a", "a", "s", "a", "a", "a", "a", "a", "a", "s", "a", "a", "a", "a", "a", "a"),			--11										--10
+			"(2-4S)                "		+ getRoadSymbol #("a", "a", "a", "a", "s", "a", "a", "a", "a")																--12
 		)	
 	),
 	fn getMissingPrefabs = (
@@ -191,6 +178,7 @@ struct ROAD_GENERATOR_STRUCTURE	(
 			"generator_road_1_6d",
 			"generator_road_2_6d",
 			"generator_road_2_6c",
+			"generator_road_3_6c",
 			"generator_road_2_4s",
 			--sidewalks
 			"generator_sidewalk_left",
@@ -218,7 +206,8 @@ struct ROAD_GENERATOR_STRUCTURE	(
 		append roads $generator_road_1_6d		--8
 		append roads $generator_road_2_6d		--9
 		append roads $generator_road_2_6c		--10
-		append roads $generator_road_2_4s		--11
+		append roads $generator_road_3_6c		--11
+		append roads $generator_road_2_4s		--12
 		--sidewalks
 		append sidewalks $generator_sidewalk_left
 		append sidewalks $generator_sidewalk_right
@@ -243,7 +232,8 @@ struct ROAD_GENERATOR_STRUCTURE	(
 		append roads $generator_road_1_6d		--8
 		append roads $generator_road_2_6d		--9
 		append roads $generator_road_2_6c		--10
-		append roads $generator_road_2_4s		--11
+		append roads $generator_road_3_6c		--11
+		append roads $generator_road_2_4s		--12
 		--sidewalks and parking places
 		append specs $generator_parking_lane_left
 		append specs $generator_parking_lane_right
