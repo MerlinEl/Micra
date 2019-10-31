@@ -44,7 +44,8 @@ rollout mcQuickMaterialsDialog "Quick Materials:" width:556 height:428
 
 	checkbox 'chk_collapse' "Collapse Modifier" pos:[12,332] width:100 height:16 checked:true align:#left
 	checkbox 'chk_autoorient' "Orientation Auto" pos:[12,352] width:100 height:16 checked:false align:#left
-	--checkbox 'chk_clear_selection' "Clear Selection" pos:[12,372] width:100 height:16 checked:true align:#left --REMOVED(dont really need this)
+	-- 	checkbox 'chk_preserve_uv' "Preserve UVs" pos:[12,372] width:100 height:16 checked:true align:#left
+	--  checkbox 'chk_clear_selection' "Clear Selection" pos:[12,372] width:100 height:16 checked:true align:#left --REMOVED(dont really need this)
 
 	bitmap 'bmp_preview' "Bitmap" pos:[12,24] width:264 height:200 align:#left
 	bitmap 'bmp_mat_type_1' "Bitmap" pos:[92,256] width:40 height:16 align:#left

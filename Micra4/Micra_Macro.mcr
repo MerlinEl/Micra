@@ -655,10 +655,26 @@ Icon:#("SubObjectIcons",5)
 MacroScript MC_Poly_Bridge
 Category:"Micra" 
 ButtonText:"Create Bridge"
-Tooltip:"Create bridge between selection"
+Tooltip:"Create Bridge between Edges"
 (
-	On IsEnabled Return (selection.count == 1 and classOf selection[1] == Editable_Poly)
-	On Execute do  (selection[1].Bridge ())
+	On IsEnabled Return (selection.count == 1)
+	On Execute do  (		
+		local obj = modPanel.getCurrentObject()
+		case classOf obj of (
+			
+			Editable_Poly : (
+				
+				obj.bridgeSelected = 1
+				if subObjectLevel == 2 or subObjectLevel == 3 do obj.Bridge()
+			)
+			Edit_Poly :  (
+				
+				if subObjectLevel == 2 then obj.ButtonOp #BridgeEdge
+				else if subObjectLevel == 3 then obj.ButtonOp #BridgeBorder
+				obj.Commit()
+			)
+		)
+	)
 ) 
 
 MacroScript MC_Move_To_Surface
@@ -669,6 +685,7 @@ Tooltip:"Move selected object to Surface"
 	On IsEnabled Return (selection.count == 1)
 	On Execute do  (mcAction.moveObjectToSurface())
 )
+
 /*
 C:\Documents and Settings\rbaca\Local Settings\Application Data\Autodesk\3dsmax\9 - 32bit\enu\UI\usermacros
 
