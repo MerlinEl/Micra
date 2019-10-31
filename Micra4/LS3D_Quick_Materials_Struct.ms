@@ -27,6 +27,7 @@ struct sLs3dQuickMaterials	(
 		local msg = case msg_key of (
 
 			"not_poly"		: "Editable Poly object must be selected."
+			"not_spline"		: "Spline object must be selected."
 			"not_vsel"		: "Select some vertices to progress."
 			"not_esel"		: "Select some edges to progress."
 			"not_fsel"		: "Select some faces to progress."
@@ -77,16 +78,26 @@ struct sLs3dQuickMaterials	(
 		crub_spline.pivot = (crub_spline.min+crub_spline.max)/2 --move pivot to center
 		crub_spline
 	),
-	fn createCrub obj mat_id collapsed:true = (
+	fn createCrub obj mat_id collapsed:true customSpline:false = (
 		
 		undo "Create Crub" on (
 		
-			--validation check
-			if classOf obj != Editable_Poly do return (warningMsg "not_poly")
-			local esel = polyOp.getEdgeSelection obj 
-			if esel.numberset == 0 do return (warningMsg "not_esel")
-			--create spline from selected edges
-			local crub_spline = createSplineFromEdges obj
+			local crub_spline = undefined
+			if customSpline then (
+				
+				--validation check
+				if classOf obj != SplineShape and classOf obj != Line  do return (warningMsg "not_spline")
+				crub_spline = obj
+				
+			) else (
+			
+				--validation check
+				if classOf obj != Editable_Poly do return (warningMsg "not_poly")
+				local esel = polyOp.getEdgeSelection obj 
+				if esel.numberset == 0 do return (warningMsg "not_esel")
+				--create spline from selected edges
+				crub_spline = createSplineFromEdges obj
+			)
 			--create crub profile if not exists
 			local crub_profile = getNodeByName "crub_01_profile"
 			if crub_profile == undefined do crub_profile = createCrubProfile "crub_01_profile"
