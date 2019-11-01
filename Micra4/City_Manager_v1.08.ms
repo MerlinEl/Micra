@@ -29,7 +29,7 @@ rollout mcCityManDialog "" width:500 height:964
 	button 'btn_show_children' "Show" pos:[180,632] width:70 height:20 align:#left
 	button 'btn_export_selection' "EXPORT" pos:[384,708] width:106 height:40 align:#left
 	button 'btn_zoom_selected' "Focus" pos:[180,708] width:70 height:20 toolTip:"Zoom to Selection" align:#left
-	button 'btn_init' "UPDATE" pos:[4,4] width:492 height:16 toolTip:"Get scene data..." align:#left
+	button 'btn_update' "UPDATE" pos:[4,4] width:492 height:16 toolTip:"Get scene data..." align:#left
 	GroupBox 'grp7' "Actions:" pos:[4,764] width:240 height:152 align:#left
 	button 'btn_move_colls_to_layers' "Distribute Collisions" pos:[252,888] width:108 height:20 toolTip:"Move Selected Collision in to separate Layer" align:#left
 	button 'btn_sel_colls' "Select Collisions" pos:[252,804] width:112 height:20 toolTip:"Select All Collisions" align:#left
@@ -353,7 +353,25 @@ rollout mcCityManDialog "" width:500 height:964
 			layer.addNode o
 		)
 	)
-
+	
+	fn initializeInterface = (
+		
+		local node_names = fillNodesList()
+		if node_names.count == 0 do return false
+		fillChildrenList node_names[1]	
+		updateSelection()
+	)
+	
+	fn updateScene = (
+		
+		initializeInterface()
+		if chk_auto_trace_node.checked do (
+			
+			autosel = on
+			updateSelection()	
+		)	
+	)
+	
 	fn generateSimpleCollisions = (
 		
 		if ::gTerrainGeneratorCollision == undefined  do runLocalScript "LS3D_Terrain_Collisions_Generator"
@@ -361,6 +379,7 @@ rollout mcCityManDialog "" width:500 height:964
 		
 			gTerrainGeneratorCollision.generateSimpleCollisions()
 		)
+		updateScene()
 	)
 	fn generateTerrainCollisions = (
 	
@@ -369,6 +388,7 @@ rollout mcCityManDialog "" width:500 height:964
 		
 			gTerrainGeneratorCollision.generateTerrainCollisions()
 		)
+		updateScene()
 	)
 	fn generateRoadsCollisions = (
 	
@@ -388,7 +408,7 @@ rollout mcCityManDialog "" width:500 height:964
 	fn needUpdate =
 	(
 		if not CALLBACKS_ENABLED do return false
-		--btn_init
+		--btn_update
 		autosel = off --keep unlinked objects selected
 		clearList cbx_children_list
 		clearList cbx_node_list
@@ -482,13 +502,7 @@ rollout mcCityManDialog "" width:500 height:964
 			cbx_children_list.items = cbx_children_list.items --refresh list
 		)
 	)
-	fn initializeInterface =
-	(
-		local node_names = fillNodesList()
-		if node_names.count == 0 do return false
-		fillChildrenList node_names[1]	
-		updateSelection()
-	)
+
 	fn isCollision obj = ( --at start or end is _coll_
 		
 		findString obj.name "coll_" != undefined or findString obj.name "_coll"	!= undefined 
@@ -844,15 +858,7 @@ rollout mcCityManDialog "" width:500 height:964
 			cbx_children_list.items = #()
 		)	
 	)
-	on btn_init pressed do 
-	(
-		initializeInterface()
-		if chk_auto_trace_node.checked do (
-			
-			autosel = on
-			updateSelection()	
-		)
-	)
+	on btn_update pressed do (updateScene())
 	on mcCityManDialog open do
 	(
 		edt_sh_name.text = "building" 
