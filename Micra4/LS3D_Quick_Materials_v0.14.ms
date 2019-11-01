@@ -62,7 +62,7 @@ rollout mcQuickMaterialsDialog "Quick Materials:" width:556 height:456
 	label 'lbl2' "Mapping Angle:" pos:[152,265] width:72 height:16 align:#left
 	radiobuttons 'rdo_mappig_type' "Mapping:" pos:[10,380] width:114 height:30 labels:#("Planar", "Box") columns:2 toolTip:"Experimental Mode. Is not Finished yet." align:#left
 	button 'btn_run_fn' "GO" pos:[256,428] width:24 height:20 align:#left
-	dropDownList 'ddl_fn_list' "" pos:[4,428] width:248 height:21 items:#("Create Crub Custom", "Create Crub From Edges", "Create Crub From Spline", "Redraw Spline At Zero") align:#left
+	dropDownList 'ddl_fn_list' "" pos:[4,428] width:248 height:21 items:#("Create Curb Custom", "Create Curb From Edges", "Create Curb From Spline", "Redraw Spline At Zero") align:#left
 
 	/**
 	*@Usage add one or more material libraries in to Temporary Library
@@ -1049,14 +1049,14 @@ rollout mcQuickMaterialsDialog "Quick Materials:" width:556 height:456
 		format "RUN CMD:%\n" cmd_name
 		case cmd_name of (
 			
-			"Create Crub Custom" : (
+			"Create Curb Custom" : (
 			
 				if lv_mat_data.selectedItems.count == 0 do return false
 				local sel_item = lv_mat_data.selectedItems.item[0]	
-				::gLs3dQuickMaterials.createCustomCrub() --sel_item.tag.value.id
+				::gLs3dQuickMaterials.createCustomCurb() --sel_item.tag.value.id
 			)
-			"Create Crub From Edges" : ::gLs3dQuickMaterials.createCrub selection[1] 442 collapsed:true
-			"Create Crub From Spline" : ::gLs3dQuickMaterials.createCrub selection[1] 442 customSpline:true
+			"Create Curb From Edges" : ::gLs3dQuickMaterials.createCurb selection[1] 442 collapsed:true
+			"Create Curb From Spline" : ::gLs3dQuickMaterials.createCurb selection[1] 442 customSpline:true
 			"Redraw Spline At Zero" : ::gLs3dQuickMaterials.redrawSplineAtZero selection[1]
 		)
 	)

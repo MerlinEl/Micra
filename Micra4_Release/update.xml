@@ -1,10 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <UPDATE>
-  <VERSIONS latest="5.4">
+  <VERSIONS latest="5.41">
     <item_1 version="5.38" date="11_1_2019_11_20_24_AM" />
     <item_2 version="5.39" date="11_1_2019_11_47_22_AM" />
     <item_3 version="5.4" date="11_1_2019_1_45_06_PM" />
-    <item_4 version="5.33" date="10_21_2019_2_12_25_PM" />
+    <item_4 version="5.41" date="11_1_2019_2_58_25_PM" />
     <item_5 version="5.34" date="10_21_2019_3_26_14_PM" />
     <item_6 version="5.35" date="10_22_2019_3_37_18_PM" />
     <item_7 version="5.36" date="10_23_2019_10_36_23_AM" />
