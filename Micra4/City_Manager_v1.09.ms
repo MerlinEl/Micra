@@ -167,6 +167,7 @@ rollout mcCityManDialog "" width:500 height:964
 		lbl_nodes.text = "("+cbx_node_list.items.count as string+")"
 		return node_names
 	)
+	
 	fn fillChildrenList node_name= 
 	(
 		local first_node = getNodeByName node_name
@@ -175,7 +176,52 @@ rollout mcCityManDialog "" width:500 height:964
 		--cbx_children_list.name = "Linked Objects:("+cbx_children_list.items.count as string+")"
 		lbl_objects.text = "("+cbx_children_list.items.count as string+")"
 	)
-
+	
+	fn updateSelection = 
+	(
+		if not autosel or not chk_auto_trace_node.checked do return false
+		if selection.count == 0 do 
+		(
+			deselectList cbx_node_list
+			deselectList cbx_children_list
+			return false
+		)
+		local node_names = getNodesFromSelection()
+		if node_names.count == 0 then (
+			
+			deselectList cbx_children_list
+			return false
+			
+		) else if node_names.count == 1 then (
+			
+			selectItemByName cbx_node_list node_names[1]
+			fillChildrenList node_names[1]
+			selectItemsByName cbx_children_list (for o in selection collect o.name)
+		) else (
+			
+			selectItemsByName cbx_node_list node_names
+			clearList cbx_children_list
+		)	
+	)
+	
+	fn initializeInterface = (
+		
+		local node_names = fillNodesList()
+		if node_names.count == 0 do return false
+		fillChildrenList node_names[1]	
+		updateSelection()
+	)
+	
+	fn updateScene = (
+		
+		initializeInterface()
+		if chk_auto_trace_node.checked do (
+			
+			autosel = on
+			updateSelection()	
+		)	
+	)
+	
 	--select nodes childrens
 	fn selectListNodesChildren visible_only =
 	(
@@ -327,51 +373,6 @@ rollout mcCityManDialog "" width:500 height:964
 			format "Move geometry [ % ] in to layer [ % ]\n" o.name layer_name
 			layer.addNode o
 		)
-	)
-	
-	fn updateSelection = 
-	(
-		if not autosel or not chk_auto_trace_node.checked do return false
-		if selection.count == 0 do 
-		(
-			deselectList cbx_node_list
-			deselectList cbx_children_list
-			return false
-		)
-		local node_names = getNodesFromSelection()
-		if node_names.count == 0 then (
-			
-			deselectList cbx_children_list
-			return false
-			
-		) else if node_names.count == 1 then (
-			
-			selectItemByName cbx_node_list node_names[1]
-			fillChildrenList node_names[1]
-			selectItemsByName cbx_children_list (for o in selection collect o.name)
-		) else (
-			
-			selectItemsByName cbx_node_list node_names
-			clearList cbx_children_list
-		)	
-	)
-	
-	fn initializeInterface = (
-		
-		local node_names = fillNodesList()
-		if node_names.count == 0 do return false
-		fillChildrenList node_names[1]	
-		updateSelection()
-	)
-	
-	fn updateScene = (
-		
-		initializeInterface()
-		if chk_auto_trace_node.checked do (
-			
-			autosel = on
-			updateSelection()	
-		)	
 	)
 	
 	fn generateSimpleCollisions = (
