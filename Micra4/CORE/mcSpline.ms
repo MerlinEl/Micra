@@ -109,7 +109,7 @@ struct MICRA_NEW_STRUCTURE	(
 			)
 		)
 	),
-	fn splinesFromPoints points_array type:#corner color:green = --created by Merlin in "6.2.2007 13:27:34"
+	fn splinesFromPoints points_array type:#corner color:green centerPivot:true = --created by Merlin in "6.2.2007 13:27:34"
 	(
 		if classOf points_array != Array do return false
 		local sps
@@ -126,7 +126,7 @@ struct MICRA_NEW_STRUCTURE	(
 		)
 		updateShape sps
 		sps.wirecolor = color
-		sps.pivot = (sps.min+sps.max)/2
+		if centerPivot do sps.pivot = (sps.min+sps.max)/2
 		return sps
 	),
 	fn rebuildSpline type:#corner = --type:#smooth

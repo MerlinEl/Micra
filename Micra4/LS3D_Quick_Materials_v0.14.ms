@@ -62,7 +62,7 @@ rollout mcQuickMaterialsDialog "Quick Materials:" width:556 height:456
 	label 'lbl2' "Mapping Angle:" pos:[152,265] width:72 height:16 align:#left
 	radiobuttons 'rdo_mappig_type' "Mapping:" pos:[10,380] width:114 height:30 labels:#("Planar", "Box") columns:2 toolTip:"Experimental Mode. Is not Finished yet." align:#left
 	button 'btn_run_fn' "GO" pos:[256,428] width:24 height:20 align:#left
-	dropDownList 'ddl_fn_list' "" pos:[4,428] width:248 height:21 items:#("Create Crub From Edges", "Create Crub From Spline") align:#left
+	dropDownList 'ddl_fn_list' "" pos:[4,428] width:248 height:21 items:#("Create Crub Custom", "Create Crub From Edges", "Create Crub From Spline", "Redraw Spline At Zero") align:#left
 
 	/**
 	*@Usage add one or more material libraries in to Temporary Library
@@ -1049,11 +1049,18 @@ rollout mcQuickMaterialsDialog "Quick Materials:" width:556 height:456
 		format "RUN CMD:%\n" cmd_name
 		case cmd_name of (
 			
+			"Create Crub Custom" : (
+			
+				if lv_mat_data.selectedItems.count == 0 do return false
+				local sel_item = lv_mat_data.selectedItems.item[0]	
+				::gLs3dQuickMaterials.createCustomCrub() --sel_item.tag.value.id
+			)
 			"Create Crub From Edges" : ::gLs3dQuickMaterials.createCrub selection[1] 442 collapsed:true
 			"Create Crub From Spline" : ::gLs3dQuickMaterials.createCrub selection[1] 442 customSpline:true
+			"Redraw Spline At Zero" : ::gLs3dQuickMaterials.redrawSplineAtZero selection[1]
 		)
 	)
-	
+
 	fn init = (
 		
 		--load advanced actions
@@ -1097,7 +1104,14 @@ rollout mcQuickMaterialsDialog "Quick Materials:" width:556 height:456
 		--Focus Text Box
 		setFocus edt_filter_names
 	)
+	
+	fn fin = (
+	
+		::gLs3dQuickMaterials.closeAllComponents()
+	
+	)
 	on mcQuickMaterialsDialog open do init()
+	on mcQuickMaterialsDialog close do fin()
 	on lv_mat_data ItemSelectionChanged arg do (
 		
 		local a = lv_mat_data.SelectedItems
