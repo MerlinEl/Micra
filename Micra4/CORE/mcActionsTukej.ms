@@ -33,6 +33,11 @@ struct MICRA_TUKEJ_STRUCTURE	(
 	fn testNormalMapToggle = (
 		
 		mcMaterial.normalmapTesterToggle tile_uv:[4, 4]
+	),
+	fn selectPlayer = (
+		
+		local player_obj =  (for o in objects where findString o.name "player" != undefined collect o)[1]
+		if player_obj != undefined do (select player_obj; player_obj.isidden = false)
 	)
 	/*<end>*/
 )	
