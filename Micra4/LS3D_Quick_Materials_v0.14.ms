@@ -1057,7 +1057,10 @@ rollout mcQuickMaterialsDialog "Quick Materials:" width:556 height:456
 			)
 			"Create Curb From Edges" : ::gLs3dQuickMaterials.createCurb selection[1] 442 collapsed:true
 			"Create Curb From Spline" : ::gLs3dQuickMaterials.createCurb selection[1] 442 customSpline:true
-			"Redraw Spline At Zero" : ::gLs3dQuickMaterials.redrawSplineAtZero selection[1]
+			"Redraw Spline At Zero" : if (queryBox "Redraw Spline?" title:"Warning") do (
+			
+				 undo "Redraw Spline" on ::gLs3dQuickMaterials.redrawSplineAtZero selection[1]
+			)
 		)
 	)
 

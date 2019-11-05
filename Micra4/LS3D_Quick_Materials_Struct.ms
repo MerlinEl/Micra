@@ -149,9 +149,11 @@ struct sLs3dQuickMaterials	(
 			GroupBox 'grp3' "Material:" pos:[4,252] width:220 height:48 align:#left
 			label 'lbl2' "ID:" pos:[12,276] width:20 height:16 align:#left
 			spinner 'spn_mat_id' "" pos:[132,276] width:84 height:16 range:[0,1000,442] type:#integer scale:1 align:#left
+			button 'btn_return' "Return <" pos:[168,84] width:56 height:16 align:#left
 			local spline_path = undefined
 			local spline_profile = undefined
 			local poly_object = undefined
+			local old_sel = undefined
 			fn warningMsg msg_key = (::gLs3dQuickMaterials.warningMsg msg_key)
 			fn isSpline obj = (classOf obj == SplineShape or classOf obj == Line)
 			fn isCurbProfile obj = (
@@ -199,8 +201,10 @@ struct sLs3dQuickMaterials	(
 				if lbx_profiles.items.count == 0 do return (warningMsg "no_profile")
 				local sp = (getNodeByName lbx_profiles.selected)
 				if not (isSpline sp) do return (warningMsg "not_spline")
-				if subobjectlevel != undefined do subobjectlevel = 0
+				if subobjectlevel != undefined do subobjectlevel = 0 --exit from any subobject level before select another obj
+				if old_sel == undefined do old_sel = selection as Array --keep old selection in memory
 				select sp
+				sp.isHidden = false
 				max zoomext sel
 			)
 			fn setupUi type state = (
@@ -222,6 +226,7 @@ struct sLs3dQuickMaterials	(
 			on lbx_profiles selected sel do (getSplineProfile())
 			on lbx_profiles doubleClicked sel do (focusSplineProfile())
 			on btn_create_curb pressed do (createCurb())
+			on btn_return pressed do (if old_sel != undefined do (select old_sel; max zoomext sel))
 		)
 		createDialog mcCurbCreatorDialog
 	)

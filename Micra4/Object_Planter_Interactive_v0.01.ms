@@ -37,7 +37,7 @@ struct sPlantObjectOnSurface (
 		case msg of
 		(
 			#mouseAbort: (
-
+				format "mouseTracking Finished\n"
 				gPlantObjectOnSurface.stopTrace()
 			)
 			#freeMove: (
@@ -57,6 +57,8 @@ struct sPlantObjectOnSurface (
 
 					selection[1].pos = ir.pos
 					if keyboard.controlPressed do selection[1].dir = ir.dir
+					gPlantObjectOnSurface.stopTrace()
+					#abort
 				)
 			)
 			#mouseMove: ()
@@ -69,7 +71,7 @@ struct sPlantObjectOnSurface (
 		local visible_geo_objects = for o in objects where not o.isHidden and superClassOf o == GeometryClass collect o
 		registerRedrawViewsCallback drawCross
 		mcSystem.setFocusToMaxActiveViewport()
-		mouseTrack trackCallback:mouseTracking on:visible_geo_objects
+		mouseTrack trackCallback:mouseTracking prompt:"Pick target location..." on:visible_geo_objects
 		completeRedraw()
 	),
 	public fn stopTrace = (
