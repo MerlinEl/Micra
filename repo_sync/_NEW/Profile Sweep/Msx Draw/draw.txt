@@ -1,0 +1,114 @@
+--circle
+
+(
+global CircleDraw_Dialog
+try(destroyDialog CircleDraw_Dialog)catch()
+local theSize = 150.0
+rollout CircleDraw_Dialog "Draw Circle"
+(
+	local thePaper, theBmp --local variables to hold the image buffers
+	
+	--User Interface Controls
+	bitmap bmp_display width:theSize height:theSize
+	colorpicker clr_forecolor "F:" color:red modal:false across:2 align:#right
+	colorpicker clr_backcolor "B:" color:white modal:false align:#right
+	spinner spn_radius "Radius X:" type:#integer range:[0,theSize*0.5,30] fieldwidth:40 align:#right offset:[-12,0]
+	spinner spn_radius2 "Radius Y:" type:#integer range:[0,theSize*0.5,30] fieldwidth:40 align:#right offset:[-12,0]
+	checkbutton chk_lockRadius "]" height:37 width:20 align:#right offset:[9,-42] checked:true
+
+	fn updateBitmap updatePaper:false =
+	(	
+		if updatePaper do  --reset paper if needed
+			thePaper = bitmap theSize theSize color:clr_backcolor.color
+		copy thePaper theBmp --copy paper into image buffer
+		for i = -90 to 90 by (55.0/spn_radius2.value) do --loop half a circle with adjusted step
+		(
+			local theX = spn_radius.value * (cos i) 
+			setPixels theBmp [0.5*theSize - theX, 0.5*theSize + spn_radius2.value *(sin i)] (for j = 1 to theX*2 collect clr_forecolor.color)
+		)
+		bmp_display.bitmap = theBmp --display the image buffer
+	)
+	--Event handlers:
+	on spn_radius changed val do 
+	(
+		if chk_lockRadius.checked do spn_radius2.value = val
+		updateBitmap()
+	)
+	on spn_radius2 changed val do 
+	(
+		if chk_lockRadius.checked do spn_radius.value = val
+		updateBitmap()
+	)
+	on chk_lockRadius changed state do 
+	(
+		if state do spn_radius2.value = spn_radius.value 
+		updateBitmap()
+	)		
+	on clr_forecolor changed val do updateBitmap()
+	on clr_backcolor changed val do updateBitmap updatePaper:true
+	on CircleDraw_Dialog open do 
+	(
+		theBmp = bitmap theSize theSize
+		updateBitmap updatePaper:true
+	)
+)--end rollout
+createDialog CircleDraw_Dialog theSize (theSize+90)
+)
+
+
+--elipse
+
+(
+global CircleDraw_Dialog
+try(destroyDialog CircleDraw_Dialog)catch()
+local theSize = 150.0
+rollout CircleDraw_Dialog "Draw Circle"
+(
+	local thePaper, theBmp --local variables to hold the image buffers
+	
+	--User Interface Controls
+	bitmap bmp_display width:theSize height:theSize
+	colorpicker clr_forecolor "F:" color:red modal:false across:2 align:#right
+	colorpicker clr_backcolor "B:" color:white modal:false align:#right
+	spinner spn_radius "Radius X:" type:#integer range:[0,theSize*0.5,30] fieldwidth:40 align:#right offset:[-12,0]
+	spinner spn_radius2 "Radius Y:" type:#integer range:[0,theSize*0.5,30] fieldwidth:40 align:#right offset:[-12,0]
+	checkbutton chk_lockRadius "]" height:37 width:20 align:#right offset:[9,-42] checked:true
+
+	fn updateBitmap updatePaper:false =
+	(	
+		if updatePaper do  --reset paper if needed
+			thePaper = bitmap theSize theSize color:clr_backcolor.color
+		copy thePaper theBmp --copy paper into image buffer
+		for i = -90 to 90 by (55.0/spn_radius2.value) do --loop half a circle with adjusted step
+		(
+			local theX = spn_radius.value * (cos i) 
+			setPixels theBmp [0.5*theSize - theX, 0.5*theSize + spn_radius2.value *(sin i)] (for j = 1 to theX*2 collect clr_forecolor.color)
+		)
+		bmp_display.bitmap = theBmp --display the image buffer
+	)
+	--Event handlers:
+	on spn_radius changed val do 
+	(
+		if chk_lockRadius.checked do spn_radius2.value = val
+		updateBitmap()
+	)
+	on spn_radius2 changed val do 
+	(
+		if chk_lockRadius.checked do spn_radius.value = val
+		updateBitmap()
+	)
+	on chk_lockRadius changed state do 
+	(
+		if state do spn_radius2.value = spn_radius.value 
+		updateBitmap()
+	)		
+	on clr_forecolor changed val do updateBitmap()
+	on clr_backcolor changed val do updateBitmap updatePaper:true
+	on CircleDraw_Dialog open do 
+	(
+		theBmp = bitmap theSize theSize
+		updateBitmap updatePaper:true
+	)
+)--end rollout
+createDialog CircleDraw_Dialog theSize (theSize+90)
+)

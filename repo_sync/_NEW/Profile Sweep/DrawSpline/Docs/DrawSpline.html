@@ -1,0 +1,101 @@
+<HTML>
+<HEAD>
+	<LINK REL="stylesheet" TYPE="text/css" HREF="../../BFD.css">
+	<LINK REL="stylesheet" TYPE="text/css" HREF="BFD.css">
+	<TITLE>DrawSpline</TITLE>
+</HEAD>
+
+<BODY>
+
+<A NAME="top"></A>
+<H1>DrawSpline</H1>
+<UL>
+	<LI CLASS="compact"><A HREF="#usage">General Usage</A></LI>
+	<LI CLASS="compact"><A HREF="#options">Options</A></LI>
+	<LI CLASS="compact"><A HREF="#bugs">Known Bugs/Limitations</A></LI>
+	<LI CLASS="compact"><A HREF="#history">History</A></LI>
+</UL>
+
+<A NAME="usage"></A>
+<HR>
+<H3>General Usage:</H3>
+<UL>
+	<LI>Select the surface you want to draw on (the surface should be a mesh, and ideally have all modifiers temporarily turned off).</LI>
+	<LI>Set the options below as needed.</LI>
+	<LI>Hit "<I>Draw</I>", and trace along the selected surface.<BR>
+		You can draw multiple splines, one after the other, and change any of the options below while drawing.
+	</LI>
+	<LI>Right click to end the drawing session, and the actual splines will be constructed and attached to the surface (if needed).</LI>
+</UL>
+<P><A HREF="#top">Back To Top...</A></P>
+
+<A NAME="options"></A>
+<HR>
+<H3>Options:</H3>
+<DIV ALIGN="center">
+	<IMG SRC="./Images/UI_DrawSpline.gif" ALT="User Interface">
+</DIV>
+<UL>
+	<LI><B>Spline Group:</B><BR>
+		<UL>
+			<LI><B>Linear/Smooth:</B><BR>
+				Sets whether the drawn spline will be smooth or not.
+			</LI>
+			<LI><B>Link Spline To Surface:</B><BR>
+				If on, the drawn spline will be attached to the surface so it will follow it while animating.  This can cause spline creation to take a while if on.
+			</LI>
+		</UL>
+	</LI>
+	<LI><B>Drawing Group:</B><BR>
+		<UL>
+			<LI><B>Line/Knot:</B><BR>
+				These color swatches set what color the spline and its link points will be (the link points will only be created if "Link Spline To Surface" is on).<BR>
+				You can use the dropdown arrows next to the swatches to quickly choose a color.
+			</LI>
+			<LI><B>Drawing Accuracy:</B><BR>
+				Sets the minimum amount of space between knots as the spline is drawn.<BR>
+				Settings this to a larger number will keep the number of knots to a minimum.
+			</LI>
+		</UL>
+	</LI>
+	<LI><B>Erase Last Line:</B><BR>
+		Erases the last line drawn.<BR>
+	</LI>
+	<LI><B>Draw:</B><BR>
+		Click to begin drawing.<BR>
+		Right click in the viewport to stop drawing, and actually create the splines that were drawn (this step can take a while, so there are two progress bars provided.  The top one shows total progress for all splines, and the bottom one shows progress for the current spline).<BR>
+	</LI>
+</UL>
+<P><A HREF="#top">Back To Top...</A></P>
+
+<HR>
+<A NAME="bugs"></A>
+<H3>Known Bugs/Limitations:</H3>
+<UL>
+	<LI>Probably will only work well for objects that have all modifiers temporarily turned off.</LI>
+</UL>
+<P><A HREF="#top">Back To Top...</A></P>
+
+<A NAME="history"></A>
+<HR>
+<H3>History:</H3>
+<PRE>
+06.22.2000 - Created.
+06.26.2000 - Uses skin, added minDelta option.
+06.28.2000 - Added ticks, linear/smooth toggle.
+06.29.2000 - Made line options changeable while drawing.
+             Added color swatches
+             Verts bound to bones specifically now
+             Progress bars
+08.07.2000 - Allowed an object with spacewarps to be drawn on, but only if the
+             spacewarps are first disabled.
+10.30.2000 - Added "Erase Last Line"
+           - Added redraw callback for arc-rotate/pan support while drawing
+</PRE>
+<P><A HREF="#top">Back To Top...</A></P>
+
+<HR>
+Bug reports/comments/suggestions: <A HREF="MAILTO:john@johnburnett.com">john@johnburnett.com</A><BR>
+<HR>
+</BODY>
+</HTML>

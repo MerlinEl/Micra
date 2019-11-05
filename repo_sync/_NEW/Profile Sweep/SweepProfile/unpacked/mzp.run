@@ -1,0 +1,11 @@
+name "SweepProfile"
+version 1.2
+
+treeCopy TrackScripts to $userScripts
+treeCopy usericons to $ui
+treeCopy usericons to "$usericons\..\"
+
+run TrackScripts.ms
+drop TrackScripts.ms
+
+clear temp

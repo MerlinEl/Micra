@@ -1,0 +1,111 @@
+--bell-shaped-cardinal-spline
+
+Point[] points = {
+   new Point(0, 100),
+   new Point(50, 80),
+   new Point(100, 20),
+   new Point(150, 80),
+   new Point(200, 100)};
+
+Pen pen = new Pen(Color.FromArgb(255, 0, 0, 255));
+e.Graphics.DrawCurve(pen, points);
+
+
+
+
+--closed-cardinal-spine
+
+Point[] points = {
+   new Point(60, 60),
+   new Point(150, 80),
+   new Point(200, 40),
+   new Point(180, 120),
+   new Point(120, 100),
+   new Point(80, 160)};
+
+Pen pen = new Pen(Color.FromArgb(255, 0, 0, 255));
+e.Graphics.DrawClosedCurve(pen, points);
+
+
+
+
+--three-cardinal-splines
+
+Point[] points = {
+   new Point(20, 50),
+   new Point(100, 10),
+   new Point(200, 100),
+   new Point(300, 50),
+   new Point(400, 80)};
+
+Pen pen = new Pen(Color.FromArgb(255, 0, 0, 255));
+e.Graphics.DrawCurve(pen, points, 0.0f);
+e.Graphics.DrawCurve(pen, points, 0.6f);
+e.Graphics.DrawCurve(pen, points, 1.0f);
+
+
+
+--bezier-spline-seven-points
+
+
+Point[] p = {
+   new Point(10, 100),   // start point of first spline
+   new Point(75, 10),    // first control point of first spline
+   new Point(80, 50),    // second control point of first spline
+
+   new Point(100, 150),  // endpoint of first spline and 
+                         // start point of second spline
+
+   new Point(125, 80),   // first control point of second spline
+   new Point(175, 200),  // second control point of second spline
+   new Point(200, 80)};  // endpoint of second spline
+
+Pen pen = new Pen(Color.Blue);
+e.Graphics.DrawBeziers(pen, p);
+
+
+
+
+
+SolidBrush mySolidBrush = new SolidBrush(Color.Aqua);
+GraphicsPath myGraphicsPath = new GraphicsPath();
+
+Point[] myPointArray = 
+{
+    new Point(15, 20), 
+    new Point(20, 40), 
+    new Point(50, 30)
+};
+
+FontFamily myFontFamily = new FontFamily("Times New Roman");
+PointF myPointF = new PointF(50, 20);
+StringFormat myStringFormat = new StringFormat();
+
+myGraphicsPath.AddArc(0, 0, 30, 20, -90, 180);
+myGraphicsPath.AddCurve(myPointArray);
+myGraphicsPath.AddString("a string in a path", myFontFamily,
+   0, 24, myPointF, myStringFormat);
+myGraphicsPath.AddPie(230, 10, 40, 40, 40, 110);
+
+myGraphics.FillPath(mySolidBrush, myGraphicsPath);
+myGraphics.DrawPath(myPen, myGraphicsPath);
+
+
+
+
+
+
+Joysticks[i].ForeColor		= (dotNetClass "System.Drawing.Color").FromARGB 164 164 164
+   				Joysticks[i].BackColor		= (dotNetClass "System.Drawing.Color").FromARGB 255 255 255
+   				Joysticks[i].BorderStyle	= (dotNetClass "System.Windows.Forms.BorderStyle").FixedSingle
+   				Joysticks[i].Padding		= dotNetObject "System.Windows.Forms.Padding" 2 2 2 2
+   				Joysticks[i].TextAlign		= (dotNetClass "System.Drawing.ContentAlignment").TopCenter
+   				Joysticks[i].Text			= JoystickTitles[i]
+   				
+   				-- Setup "stick".
+   				Stick = dotNetObject "System.Windows.Forms.Label"
+   				Stick.Enabled		= false
+   				Stick.Size			= dotNetObject "System.Drawing.Size" 8 8
+   				Stick.BackColor		= (dotNetClass "System.Drawing.Color").FromARGB 255 128 0
+   				Stick.BorderStyle	= (dotNetClass "System.Windows.Forms.BorderStyle").FixedSingle
+   				Stick.Location		= dotNetObject "System.Drawing.Point" (((Joysticks[i].Width - 2) / 2) - 4) (((Joysticks[i].Height - 2) / 2) - 4)
