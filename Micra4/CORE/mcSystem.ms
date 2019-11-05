@@ -12,6 +12,7 @@
 Global mcSystem
 struct mcSystem (
 
+	maxHandle =  Windows.GetMAXHWND(),
 	fn getSource = getSourceFileName(), --get path of this script
 	--local uType = mcSystem.unitsType()
 	fn unitsType = (
@@ -186,12 +187,44 @@ struct mcSystem (
 	),
 	fn getMaxPos = (
 		
-		return windows.getWindowPos (windows.getMAXHWND())
+		return windows.getWindowPos maxHandle
 	),
 	fn getMaxCenter = (
 	
 		local max_pos = mcSystem.getMaxPos()
 		return [max_pos.w/2 + max_pos.x /2, max_pos.h/2 + max_pos.y /2]
+	),
+	--set focus to Max Application Window
+	fn setFocusToMaxApp = (
+	
+		windows.SendMessage maxHandle mcWinMsg.WM_SETFOCUS 0 0
+	),
+	/**
+	*@Usage
+		set focus to any max window
+	*@Example
+		setFocusTo mcProgLogDialog.hwnd --set focus to mcProgLogDialog
+		setFocusTo hForm.handle --set Focus To TextboxForm
+		setFocusTo (Windows.GetMAXHWND()) --set focus to Max App
+		mxse_hwnd = (dotNetClass "Autodesk.Max.GlobalInterface").Instance.TheMxsEditorInterface.EditorGetEditHWND
+		setFocusTo mxse_hwnd --Set Focus To Max Script Editor
+	*/
+	fn setFocusTo hwnd = ( --Not used Yet
+	
+		windows.SendMessage hwnd WM_SETFOCUS 0 0
+	),
+	/**
+	*@Author denisT 2011
+	*@Usage	
+		I simulate middle mouse click in view
+		I don’t send activation message because i don’t want accidentally change the active window.
+	*/
+	fn setFocusToMaxActiveViewport = (
+
+		local hwnd = for w in (windows.getChildrenHWND #max) where w[4] == "ViewPanel" do exit with w[1]
+		hwnd = (windows.getChildrenHWND hwnd)[1][1]
+		mcUser32.postmessage hwnd mcWinMsg.WM_MBUTTONDOWN 0 0
+		mcUser32.postmessage hwnd mcWinMsg.WM_MBUTTONUP 0 0
 	)
 	/*<end>*/
 )

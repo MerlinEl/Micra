@@ -2553,7 +2553,10 @@ struct mcAction (
 	),
 	fn moveObjectToSurface = (
 		
-		undo "Object's to Surface" on
+		mcSystem.setFocusToMaxActiveViewport()
+		if superClassOf ::gPlantObjectOnSurface != StructDef do mcFile.fileInVersion "Object_Planter_Interactive"
+		if superClassOf ::gPlantObjectOnSurface == StructDef do gPlantObjectOnSurface.startTrace()
+		/*undo "Object's to Surface" on
 		(
 			
 			if selection.count == 1 then (--aim snap object
@@ -2578,7 +2581,7 @@ struct mcAction (
 				--Restore Snap Settings
 				mcSnap.setSnapSettings snap_settings
 			)
-		)
+		)*/
 	)
 	/*<end>*/
 )

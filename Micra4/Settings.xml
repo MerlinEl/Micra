@@ -2,7 +2,7 @@
 <SETTINGS>
   <Micra>
     <born val="04.25.2006" />
-    <version val="5.42" />
+    <version val="5.44" />
   </Micra>
   <Structures val="All registred Micra's Structures">
     <!--independent classes-->
@@ -17,6 +17,7 @@
     <mcDate val="on" />
     <mcShell val="on" />
     <mcInterface val="on" />
+    <mcMouse val="on" />
     <mcMax val="on" />
     <!--dependent classes-->
     <mcMaterial val="on" />
@@ -109,7 +110,7 @@
     <Set_Obj_ID val="0.03" />
     <Skin_Tool val="0.01" />
     <Space val="1.03" />
-    <Spline_Magnet val="0.05" />
+    <Spline_Magnet val="0.06" />
     <Soft_Selection val="0.01" />
     <Micra_Actions val="0.05" />
     <Time_Break val="0.01" />
@@ -141,6 +142,7 @@
     <FBX_Quick_Import_Export val="0.02" />
     <LS3D_Material_Manager val="0.02" />
     <Slice_Plane2 val="0.01" />
+    <Object_Planter_Interactive val="0.01" />
   </Version>
   <SystemFiles val="Micra's Settings Files">
     <Actions val="Contains all accesible Micra's actions" />
