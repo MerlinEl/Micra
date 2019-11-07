@@ -153,7 +153,7 @@ struct sLs3dQuickMaterials	(
 			GroupBox 'grp3' "3 ) Type Material ID:" pos:[4,196] width:220 height:48 align:#left
 			label 'lbl2' "ID:" pos:[12,220] width:20 height:16 align:#left
 			spinner 'spn_mat_id' "" pos:[132,220] width:84 height:16 range:[0,1000,442] type:#integer scale:1 align:#left
-			button 'btn_return' "Return <" pos:[168,28] width:56 height:16 align:#left
+			button 'btn_focus' "Focus" pos:[168,8] width:56 height:16 align:#left
 			button 'btn_sweep_curb' "SWEEP" pos:[8,248] width:96 height:24 align:#left
 			label 'lbl3' "and" pos:[108,252] width:20 height:16 align:#left
 			button 'btn_map_curb' "MAP" pos:[128,248] width:96 height:24 align:#left
@@ -166,6 +166,13 @@ struct sLs3dQuickMaterials	(
 			fn isCurbProfile obj = (
 				
 				isSpline obj and findString obj.name "curb" != undefined
+			)
+			fn focusToOldSel = (
+			
+				if old_sel != undefined then (
+				
+					select old_sel; max zoomext sel
+				)  
 			)
 			fn getSplinePath obj = (
 				
@@ -228,7 +235,7 @@ struct sLs3dQuickMaterials	(
 			on btn_create_curb pressed do (createCurb())
 			on btn_map_curb pressed do ( undo "Map Curb" on (::gLs3dQuickMaterials.mapCurb selection[1] spn_mat_id.value collapsed:true) )
 			on btn_sweep_curb pressed do (createCurb mapping:false)
-			on btn_return pressed do (if old_sel != undefined do (select old_sel; max zoomext sel))
+			on btn_focus pressed do (focusToOldSel())
 		)
 		createDialog mcCurbCreatorDialog
 	)
