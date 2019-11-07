@@ -221,12 +221,12 @@ struct sLs3dQuickMaterials	(
 				if spline_path != undefined then ( --path from custom spline
 					
 					if not (isSpline spline_path) or not (isSpline spline_profile) do return (warningMsg "call_help")
-					::gLs3dQuickMaterials.createCurb spline_path spn_mat_id.value customSpline:true profileObj:spline_profile mapping:true 
+					::gLs3dQuickMaterials.createCurb spline_path spn_mat_id.value customSpline:true profileObj:spline_profile mapping:mapping 
 				
 				) else ( --path from edges
 	
 					if not (isSpline spline_profile) do  return (warningMsg "no_profile")
-					::gLs3dQuickMaterials.createCurb poly_object spn_mat_id.value customSpline:false profileObj:spline_profile mapping:true 
+					::gLs3dQuickMaterials.createCurb poly_object spn_mat_id.value customSpline:false profileObj:spline_profile mapping:mapping 
 				)
 			)
 			fn init = (
