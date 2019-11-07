@@ -52,6 +52,7 @@
     <mcTemplateDialog active="false" pos="[402,362]" size="[730,500]" title="" />
     <mcSpaceDialog active="false" pos="[100,100]" size="[392,184]" title="" />
     <mcDotnetVisualEditorDialog active="true" pos="[724,233]" size="[600,400]" />
+    <gMcDrawBezierDialog active="true" pos="[-734,424]" size="[644,502]" />
   </Properties_2>
   <Buttons>
     <btn_B2 action="Move_To_X" icon="28" />

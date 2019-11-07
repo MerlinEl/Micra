@@ -134,20 +134,26 @@ private
 	
 		local _mcs = gMcDrawBezierDialog --struct instance
 		_mcs.canvas.Controls.Clear()
+		-- _mcs.canvas.Grapgics.Clear()
+		-- _mcs.form.backColor = mcDotnet.dColor (mcUIColors.get #fore)
 	),
 	fn drawOnCanvas s a = (
 	
+		local dot_size = 9
+		local handle_size = 5
+		local canvas_margins = 4
 		local sp = selection[1]
 		local _mcs = gMcDrawBezierDialog --struct instance
+		_mcs.clearCanvas s a
 		if classOf sp != SplineShape and classOf sp != Line do return false
 		local sp_data = mcSpline.splineToScript sp
 		local rect = sp_data.rect
-		_mcs.canvas.width = rect.wi
-		_mcs.canvas.height = rect.he
+		_mcs.canvas.width = rect.wi + dot_size + canvas_margins --rect.ma.x - rect.mi.x --
+		_mcs.canvas.height = rect.he + dot_size + canvas_margins --rect.ma.y - rect.mi.y --
 		-- local zero_offset = sp_data.pos + [] --move spline to center
-		local zero_offset = sp_data.pos --move spline center to top left corner
-		zero_offset.x += rect.wi / 2--move spline to center x
-		zero_offset.y -= rect.he / 2--move spline to center y	
+		local zero_offset = sp_data.pos - canvas_margins / 2 --move spline center to top left corner
+		zero_offset.x -= rect.wi / 2 --move spline to center x
+		zero_offset.y -= rect.he / 2 --move spline to center y	
 		local sp_verts = sp_data.splines[1]
 		local spline_ui_points = #()
 		for i=1 to sp_verts.count do (
@@ -155,20 +161,20 @@ private
 			local v = sp_verts[i]
 			local pos = v.pos - zero_offset--translate pos to zero
 			local inVect = v.inVec - zero_offset --translate pos to zero
-			local OutVec = v.OutVec - zero_offset --translate pos to zero
-			format "vert:% type:% pos:% zero_offset:%  inVect:% outVect:%\n" i v.type pos zero_offset inVec OutVec
+			local outVec = v.outVec - zero_offset --translate pos to zero
+			format "vert:% type:% pos:% zero_offset:%  inVect:% outVect:%\n" i v.type pos zero_offset inVec outVec
 			
 			local spline_point	= dotnetobject "UserControl"
 			local handle_in		= dotnetobject "UserControl"
 			local handle_out		= dotnetobject "UserControl"
 			
-			spline_point.Bounds = dotnetobject "System.Drawing.Rectangle" pos.x pos.y 9 9
+			spline_point.Bounds = dotnetobject "System.Drawing.Rectangle" pos.x pos.y dot_size dot_size
 			spline_point.Backcolor = spline_point.Backcolor.Red
 			
-			handle_in.Bounds = dotnetobject "System.Drawing.Rectangle" inVect.x inVect.y 5 5
+			handle_in.Bounds = dotnetobject "System.Drawing.Rectangle" inVect.x inVect.y handle_size handle_size
 			handle_in.Backcolor = handle_in.Backcolor.Green
 
-			handle_out.Bounds = dotnetobject "System.Drawing.Rectangle" OutVec.x OutVec.y 5 5
+			handle_out.Bounds = dotnetobject "System.Drawing.Rectangle" outVec.x outVec.y handle_size handle_size
 			handle_out.Backcolor = handle_in.Backcolor.Green
 			
 			dotnet.addEventHandler spline_point "MouseDown" _mcs.onMouseDown
@@ -180,23 +186,48 @@ private
 		)
 		_mcs.canvas.Controls.AddRange spline_ui_points
 		--e.Graphics.ScaleTransform(1.75f, 0.5f);
+		/*
+		grp.ScaleTransform(1, 2) 'zvětším vše v Y směru dvakrát
+		grp.DrawString(sHodnota, pFont, pBrush, posX, posY * 0.5, sf) 
+		'tady manipuluji s Y souřadnicí výchozího bodu, 
+		protože transformace ji ovlivní také ale pořád je text jinde než očekávám
+		'nebo obdobně s objektem RectangleF grp.DrawString(sHodnota, pFont, pBrush, rect, sf)
+		grp.ResetTransform()
+		*/
 		-- messageBox "Drawing a Shape." title:"Warning:"
 	), 
 	fn onPaint s a = ( -- s:Forms.UserControl	a:Forms.PaintEventArgs
 		
-		format "controls count:%\n"  s.Controls.count
-		if s.Controls.count == 0 do return false
+		format "controls count:%\n" s.Controls.count
+		if s.Controls.count < 2 do return false
 		local _mcs = gMcDrawBezierDialog --struct instance
 		fn cpoint s id = (
 		
 			local c = s.Controls.Item[id]
 			dotnetobject "System.Drawing.Point" (c.Location.x + c.Size.width/2) (c.Location.y + c.Size.height/2) 
 		)
-		g = a.Graphics
+		local g = a.Graphics
 		g.SmoothingMode = g.SmoothingMode.HighQuality
-		g.DrawBezier _mcs.cPen (cpoint s 0) (cpoint s 1) (cpoint s 2) (cpoint s 3)
-		g.DrawLine _mcs.aPen (cpoint s 0) (cpoint s 1) 
-		g.DrawLine _mcs.bPen (cpoint s 2) (cpoint s 3)
+		--g.Clear(_mcs.canvas.Backcolor)
+		struct POINT_DATA (pos, inVect, outVec)
+		local points_data = for i = 0 to s.Controls.count - 1 by 3 collect POINT_DATA (cpoint s i) (cpoint s (i+1)) (cpoint s (i+2)) 
+		-- mcArray.reverseArray points_data
+		for i = 1 to points_data.count by 2 do ( -- 
+			
+			local d1 = points_data[i]
+			local d2 = (
+			
+				if (i < points_data.count) then points_data[i+1] else points_data[1]
+			)
+			local spline_point_a	= d1.pos
+			local spline_point_b	= d2.pos
+			local point_a_out	= d1.outVec 
+			local point_b_in		= d2.inVect 
+			
+			g.DrawBezier _mcs.cPen spline_point_a point_a_out point_b_in spline_point_b
+			-- g.DrawLine _mcs.aPen spline_point_a point_a_out
+			-- g.DrawLine _mcs.bPen spline_point_b point_b_in
+		)
 	),
 	-->
 	

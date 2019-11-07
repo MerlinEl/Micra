@@ -103,7 +103,7 @@ struct sLs3dQuickMaterials	(
 		fixTextureStretch terrain_mat mat_id
 		if collapsed do convertToPoly obj
 	),
-	fn createCurb obj mat_id collapsed:true customSpline:false profileObj:undefined mapping:false = (
+	fn createCurb obj mat_id collapsed:true customSpline:false profileObj:undefined mapping:true = (
 		
 		undo "Create Curb" on (
 		
@@ -211,7 +211,7 @@ struct sLs3dQuickMaterials	(
 				sp.isHidden = false
 				max zoomext sel
 			)
-			fn createCurb mapping:false = (
+			fn createCurb mapping:true = (
 			
 								
 				getSplinePath selection[1]
