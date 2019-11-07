@@ -66,7 +66,11 @@ struct sLs3dQuickMaterials	(
 		sweep_mod.GenerateMappingCoords = on
 		sweep_mod.realWorldMapSize = on
 	),
-	fn fixTextureStretch mat_id = (
+	fn fixTextureStretch terrain_mat mat_id = (
+
+		--TODO 
+		-- calculate stretch X- Y of mapping by texture propotion
+		-- calculate mapping size from pixel density (or from polygon area)
 
 		local mod_uvw = Unwrap_UVW () 
 		modPanel.addModToSelection mod_uvw ui:on
@@ -96,7 +100,7 @@ struct sLs3dQuickMaterials	(
 		modPanel.addModToSelection mat_mod ui:on
 		mat_mod.materialID = mat_id
 		--add unwrap modifier and fix texure stretch
-		fixTextureStretch mat_id
+		fixTextureStretch terrain_mat mat_id
 		if collapsed do convertToPoly obj
 	),
 	fn createCurb obj mat_id collapsed:true customSpline:false profileObj:undefined mapping:false = (

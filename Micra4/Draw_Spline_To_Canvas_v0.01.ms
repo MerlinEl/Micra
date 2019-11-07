@@ -179,6 +179,7 @@ private
 			join spline_ui_points #(spline_point, handle_in, handle_out) 
 		)
 		_mcs.canvas.Controls.AddRange spline_ui_points
+		--e.Graphics.ScaleTransform(1.75f, 0.5f);
 		-- messageBox "Drawing a Shape." title:"Warning:"
 	), 
 	fn onPaint s a = ( -- s:Forms.UserControl	a:Forms.PaintEventArgs
