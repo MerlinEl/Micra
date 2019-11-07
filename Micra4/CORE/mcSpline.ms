@@ -47,12 +47,11 @@ struct MICRA_NEW_STRUCTURE	(
 		local r = distance p3 p1
 		arc radius:r from:angle_start to:angle_end pos:p3
 	),
-	--> TODO  Redefine this functions about scripts
 	fn splineToScript sp =
 	(
 		if classOf sp != SplineShape and classOf sp != line do return false
 		local SPLINE_DATA, VERTEX_DATA
-		struct SPLINE_DATA (pos, steps, clr, splines, closed = #())
+		struct SPLINE_DATA (pos, rect, steps, clr, splines, closed = #())
 		struct VERTEX_DATA (pos, type, invec, outvec)
 		local splines =#() --collect verts for each spline
 		for s=1 to (numSplines sp) do --for all splines
@@ -64,24 +63,24 @@ struct MICRA_NEW_STRUCTURE	(
 			)
 			append splines points_array
 		)
-		local SD = SPLINE_DATA sp.pos sp.steps sp.wirecolor splines
+		local rect = mcRect sp.min sp.max
+		local SD = SPLINE_DATA sp.pos rect sp.steps sp.wirecolor splines
 		for s=1 to (numSplines sp) do SD.closed += #(isClosed sp s) -- collect if spline is closed
 		return SD
 	),
-	fn scriptToSpline str =
+	fn scriptToSpline sp_data =
 	(
-		local sps = SplineShape pos:str.pos wirecolor:str.clr --create spline
-		for s=1 to str.splines.count do --for all splines
+		local sps = SplineShape pos:sp_data.pos wirecolor:sp_data.clr --create spline
+		for sp_index = 1 to sp_data.splines.count do --for all splines
 		(	
-			addNewSpline sps
-			--for verts in current spline
-			for v in str.splines[s] do (addKnot sps s v.type #curve v.pos v.inVec v.OutVec)
-			if str.closed[s] do close sps s
+			addNewSpline sps --add new spline in shape
+			local sp_verts = sp_data.splines[sp_index] --pick spline verts
+			for v in sp_verts do (addKnot sps sp_index v.type #curve v.pos v.inVec v.OutVec)
+			if sp_data.closed[sp_index] do close sps sp_index
 		)
 		updateShape sps
 		return sps
 	),
-	--< TODO redefine structures script spline
 	fn pointsFromSpline sp =
 	(
 		if classOf sp != SplineShape and classOf sp != line do return false

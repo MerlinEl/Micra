@@ -34,6 +34,8 @@ struct sLs3dQuickMaterials	(
 			"not_fsel"			: "Select some faces to progress."
 			"not_termat"		: "Missing terrain material."
 			"no_profile"		: "Missing spline profile.\nFirst create one spline(profile) with name curb_"
+			"not_edge_level"	: "Subobject level must be in Edges."
+			"not_sweep"		: "Must be Spline with sweep Modifier applyed."
 			default			: "Unknown Error...."
 		)
 		messageBox msg title:"Warning:"
@@ -84,7 +86,20 @@ struct sLs3dQuickMaterials	(
 		curb_spline.pivot = (curb_spline.min+curb_spline.max)/2 --move pivot to center
 		curb_spline
 	),
-	fn createCurb obj mat_id collapsed:true customSpline:false profileObj: undefined = (
+	fn mapCurb obj mat_id collapsed:false = (
+	
+		if (classOf (modPanel.getCurrentObject()) != sweep)  do return (warningMsg "not_sweep")
+		local terrain_mat = currentMaterialLibrary["bc_terrain_main"]
+		if terrain_mat == undefined do return return (warningMsg "not_termat")
+		obj.material = terrain_mat
+		local mat_mod = Materialmodifier()
+		modPanel.addModToSelection mat_mod ui:on
+		mat_mod.materialID = mat_id
+		--add unwrap modifier and fix texure stretch
+		fixTextureStretch mat_id
+		if collapsed do convertToPoly obj
+	),
+	fn createCurb obj mat_id collapsed:true customSpline:false profileObj:undefined mapping:false = (
 		
 		undo "Create Curb" on (
 		
@@ -110,16 +125,7 @@ struct sLs3dQuickMaterials	(
 			--add sweep and convert to poly
 			addSweepMod curb_spline curb_profile
 			--add terrain material with wanted id
-			local terrain_mat = currentMaterialLibrary["bc_terrain_main"]
-			if terrain_mat == undefined do return return (warningMsg "not_termat")
-			curb_profile.material = terrain_mat
-			local mat_mod = Materialmodifier()
-			modPanel.addModToSelection mat_mod ui:on
-			mat_mod.materialID = mat_id
-			--add unwrap modifier and fix texure stretch
-			fixTextureStretch mat_id
-			if collapsed do convertToPoly curb_spline
-			--curb_profile = $ --pick current selected Poly object
+			if mapping do mapCurb curb_spline mat_id collapsed:collapsed
 		)
 	),
 	fn redrawSplineAtZero sp = (
@@ -138,18 +144,19 @@ struct sLs3dQuickMaterials	(
 	fn createCustomCurb = ( --mat_id
 	
 		if mcCurbCreatorDialog != undefined do destroyDialog mcCurbCreatorDialog
-		rollout mcCurbCreatorDialog "Curb Creator" width:228 height:332
+		rollout mcCurbCreatorDialog "Curb Creator" width:228 height:304
 		(
-			GroupBox 'grp1' "Path:" pos:[4,4] width:220 height:72 align:#left
-			radiobuttons 'rdo_path_type' "" pos:[12,24] width:202 height:16 labels:#("From Edges", "From Spline") default:1 columns:2 align:#left
-			listbox 'lbx_profiles' "" pos:[8,104] width:208 height:10 align:#left
-			button 'btn_get_spline' "Get Spline Path" pos:[12,44] width:204 height:24 enabled:false align:#left
-			GroupBox 'grp2' "Profiles:" pos:[4,84] width:220 height:164 align:#left
-			button 'btn_create_curb' "CREATE" pos:[8,304] width:216 height:24 align:#left
-			GroupBox 'grp3' "Material:" pos:[4,252] width:220 height:48 align:#left
-			label 'lbl2' "ID:" pos:[12,276] width:20 height:16 align:#left
-			spinner 'spn_mat_id' "" pos:[132,276] width:84 height:16 range:[0,1000,442] type:#integer scale:1 align:#left
-			button 'btn_return' "Return <" pos:[168,84] width:56 height:16 align:#left
+			GroupBox 'grp1' "1 ) Select Edges or Spline:" pos:[4,4] width:220 height:20 align:#left
+			listbox 'lbx_profiles' "" pos:[8,48] width:208 height:10 align:#left
+			GroupBox 'grp2' "2 ) Chosse a Profile:" pos:[4,28] width:220 height:164 align:#left
+			button 'btn_create_curb' "SWEEP            and            MAP  " pos:[8,276] width:216 height:24 align:#left
+			GroupBox 'grp3' "3 ) Type Material ID:" pos:[4,196] width:220 height:48 align:#left
+			label 'lbl2' "ID:" pos:[12,220] width:20 height:16 align:#left
+			spinner 'spn_mat_id' "" pos:[132,220] width:84 height:16 range:[0,1000,442] type:#integer scale:1 align:#left
+			button 'btn_return' "Return <" pos:[168,28] width:56 height:16 align:#left
+			button 'btn_sweep_curb' "SWEEP" pos:[8,248] width:96 height:24 align:#left
+			label 'lbl3' "and" pos:[108,252] width:20 height:16 align:#left
+			button 'btn_map_curb' "MAP" pos:[128,248] width:96 height:24 align:#left
 			local spline_path = undefined
 			local spline_profile = undefined
 			local poly_object = undefined
@@ -160,32 +167,18 @@ struct sLs3dQuickMaterials	(
 				
 				isSpline obj and findString obj.name "curb" != undefined
 			)
-			fn createCurb = (
-			
-				format "createCurb >\n\tspline_profile:%\n\tspline_path:%\n\tpoly_object:%\n" spline_profile spline_path poly_object
-				if spline_path != undefined then ( --path from custom spline
-					
-					if not (isSpline spline_path) or not (isSpline spline_profile) do return (warningMsg "call_help")
-					::gLs3dQuickMaterials.createCurb spline_path spn_mat_id.value customSpline:true profileObj:spline_profile
-				
-				) else ( --path from edges
-	
-					if not (isSpline spline_profile) do  return (warningMsg "no_profile")
-					::gLs3dQuickMaterials.createCurb poly_object spn_mat_id.value customSpline:false profileObj:spline_profile
-				)
-			)
 			fn getSplinePath obj = (
 				
-				case rdo_path_type.state of (
+				case classOf selection[1] of (
 				
-					1 : (
+					Editable_Poly : (
 			
+						if (subobjectlevel != 2 and subobjectlevel != 3) do return (warningMsg "not_edge_level")
 						poly_object = obj
 					)
-					2 : (
+					SplineShape : (
 								
 						if not (isSpline obj) do return (warningMsg "not_spline")
-						btn_get_spline.text = obj.name
 						spline_path = obj
 					) 
 				)
@@ -207,25 +200,34 @@ struct sLs3dQuickMaterials	(
 				sp.isHidden = false
 				max zoomext sel
 			)
-			fn setupUi type state = (
-				--format "type:% state:%\n" type state
-				case type of (
+			fn createCurb mapping:false = (
+			
+								
+				getSplinePath selection[1]
+				getSplineProfile()
+			
+				format "createCurb >\n\tspline_profile:%\n\tspline_path:%\n\tpoly_object:%\n" spline_profile spline_path poly_object
+				if spline_path != undefined then ( --path from custom spline
 					
-					#path :  btn_get_spline.enabled = (state == 2)
-				) 
+					if not (isSpline spline_path) or not (isSpline spline_profile) do return (warningMsg "call_help")
+					::gLs3dQuickMaterials.createCurb spline_path spn_mat_id.value customSpline:true profileObj:spline_profile
+				
+				) else ( --path from edges
+	
+					if not (isSpline spline_profile) do  return (warningMsg "no_profile")
+					::gLs3dQuickMaterials.createCurb poly_object spn_mat_id.value customSpline:false profileObj:spline_profile
+				)
 			)
 			fn init = (
 				
 				lbx_profiles.items = for o in objects where isCurbProfile o collect o.name 
-				getSplinePath selection[1]
-				getSplineProfile()
 			)
 			on mcCurbCreatorDialog open do init()
-			on rdo_path_type changed state do (setupUi #path state)
-			on btn_get_spline pressed do (getSplinePath selection[1])
-			on lbx_profiles selected sel do (getSplineProfile())
+			-- on lbx_profiles selected sel do ()
 			on lbx_profiles doubleClicked sel do (focusSplineProfile())
 			on btn_create_curb pressed do (createCurb())
+			on btn_map_curb pressed do ( undo "Map Curb" on (::gLs3dQuickMaterials.mapCurb selection[1] spn_mat_id.value collapsed:true) )
+			on btn_sweep_curb pressed do (createCurb mapping:false)
 			on btn_return pressed do (if old_sel != undefined do (select old_sel; max zoomext sel))
 		)
 		createDialog mcCurbCreatorDialog

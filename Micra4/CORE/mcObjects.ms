@@ -129,28 +129,29 @@ Struct mcSize (w, h)
 Struct mcBounds (pos, size)
 
 /*
-	re = rect()
-	rct = re mi:[0,10] ma:[40,60]
-	rct.wi()
-	rct.he()
-	rct.si()
+	rct = mcRect mi:[0,10] ma:[40,60]
+	rct.wi
+	rct.he
+	rct.si
 */
 Struct mcRect (
 
-	mi, ma,						--min, max 
-	fn wi = (abs(ma.x-mi.x)	),	--width 
-	fn he = (abs(mi.y-ma.y)	),	--height  
-	fn si = (ma - mi			),	--size
-	fn le = (mi.x			),	--left
-	fn ri = (ma.x			),	--right
-	fn tp = (mi.y			),	--top
-	fn bt = (ma.y			)	--bottom
+	mi, ma,					--input params 
+	-- private fn isValid val = (classOf val == Point2),
+	wi = (abs(ma.x-mi.x)),	--width 
+	he = (abs(mi.y-ma.y)),	--height  
+	si = (ma - mi		),	--size
+	le = (mi.x			),	--left
+	ri = (ma.x			),	--right
+	tp = (mi.y			),	--top
+	bt = (ma.y			)	--bottom
 )
 
 /**
 *@Usage > get rectangle from pos and size
 *@Example
 	
+	rect = mcRect2D $.pos ($.max-$.min)
 	rect = mcRect2D pos size
 */
 Struct mcRect2D (

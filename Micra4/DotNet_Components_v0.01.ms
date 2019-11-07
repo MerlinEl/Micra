@@ -45,7 +45,6 @@ fn netDrFont font:"Arial" size:12 style:"Regular" =
 ) 
 fn netString str        = (dotNetObject "System.String" str)
 
-Global mcRect
 Global getIconDotNet
 
 fn getIconDotNet icnNum icnSize:24 =

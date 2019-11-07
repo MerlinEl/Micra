@@ -37,7 +37,12 @@ struct MICRA_TUKEJ_STRUCTURE	(
 	fn selectPlayer = (
 		
 		local player_obj =  (for o in objects where findString o.name "player" != undefined collect o)[1]
-		if player_obj != undefined do (select player_obj; player_obj.isidden = false)
+		if player_obj != undefined do (
+			
+			select player_obj
+			player_obj.isHidden = false
+			if keyboard.controlPressed do max zoomext sel
+		)
 	)
 	/*<end>*/
 )	

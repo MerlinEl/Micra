@@ -14,7 +14,7 @@
   </Properties_1>
   <Properties_2>
     <mcMicraDialog active="true" pos="[2171,214]" size="[148,66]" title="" />
-    <mcCustomizeDialog active="false" pos="[1380,250]" size="[224,404]" title="" />
+    <mcCustomizeDialog active="false" pos="[1230,320]" size="[224,404]" title="" />
     <mcProgramDialog active="undefined" pos="[2298,0]" size="[256,232]" title="" />
     <mcisoDialog active="false" pos="[181,152]" size="[140,400]" title="" />
     <mcModifierDialog active="undefined" pos="[100,100]" size="[400,400]" title="" />
@@ -49,9 +49,11 @@
     <mcQuickColorPickerDialog active="undefined" pos="[100,100]" size="[100,100]" title="" />
     <mcInterfaceColorDilaog active="undefined" pos="[1445,427]" size="[299,130]" title="" />
     <IsolateFaceDialog active="undefined" pos="[100,100]" size="[100,100]" title="" />
-    <mcTemplateDialog active="true" pos="[1615,490]" size="[304,181]" title="" />
+    <mcTemplateDialog active="true" pos="[737,442]" size="[304,181]" title="" />
     <mcSpaceDialog active="true" pos="[1647,410]" size="[392,184]" title="" />
     <mcDotnetVisualEditorDialog active="true" pos="[708,516]" size="[600,400]" />
+    <mcDrawBezierDialog active="true" pos="[201,305]" size="[644,501]" />
+    <gMcDrawBezierDialog active="true" pos="[961,242]" size="[644,501]" />
   </Properties_2>
   <Buttons>
     <btn_B2 action="Move_To_X" icon="28" />
