@@ -154,17 +154,20 @@ private
 		zero_offset.x -= rect.wi / 2 --move spline to center x
 		zero_offset.y -= rect.he / 2 --move spline to center y	
 		local sp_verts = sp_data.splines[1]
-		sp_verts = mcArray.reverseArray sp_verts
+		-- sp_verts = mcArray.reverseArray sp_verts
 		local spline_ui_points = #()
 		local colors = #(red, green ,blue , orange, brown, black, black, black, black)
 		format "onBtnDrawClick > verts count:%\n" sp_verts.count
+		local vertex_data = #()
 		for i=1 to sp_verts.count do (
 		
 			local v = sp_verts[i]
 			local pos = v.pos - zero_offset--translate pos to zero
 			local inVect = v.inVec - zero_offset --translate pos to zero
 			local outVec = v.outVec - zero_offset --translate pos to zero
-			format "onBtnDrawClick > vert:% type:% pos:% zero_offset:%  inVect:% outVect:%\n" i v.type pos zero_offset inVec outVec
+			format "onBtnDrawClick > vert:% type:% pos:% zero_offset:%  inVect:% outVect:%\n" v.index v.type pos zero_offset inVec outVec
+			
+			append vertex_data (dotNetMXSValue v)
 			
 			local spline_point	= dotnetobject "UserControl"
 			local handle_in		= dotnetobject "UserControl"
@@ -182,65 +185,66 @@ private
 			
 			-- dotnet.addEventHandler spline_point "MouseDown" _mcs.onMouseDown
 			-- dotnet.addEventHandler spline_point "MouseMove" _mcs.onMouseMove1
-			
-			--dotNet.setLifeTimeControl spline_point #dotNet
+			-- dotNet.setLifeTimeControl spline_point #dotNet
 			
 			join spline_ui_points #(spline_point, handle_in, handle_out) 
 		)
 		_mcs.canvas.Controls.AddRange spline_ui_points
-		--_mcs.canvas.Controls.tag = dotNet.ValueToDotNetObject 
-		--e.Graphics.ScaleTransform(1.75f, 0.5f);
-		/*
-		grp.ScaleTransform(1, 2) 'zvětším vše v Y směru dvakrát
-		grp.DrawString(sHodnota, pFont, pBrush, posX, posY * 0.5, sf) 
-		'tady manipuluji s Y souřadnicí výchozího bodu, 
-		protože transformace ji ovlivní také ale pořád je text jinde než očekávám
-		'nebo obdobně s objektem RectangleF grp.DrawString(sHodnota, pFont, pBrush, rect, sf)
-		grp.ResetTransform()
-		*/
-		-- messageBox "Drawing a Shape." title:"Warning:"
+		format "vertex data array\n" 
+		for v in vertex_data do format "\t%\n" v
+		local type = dotnetclass "System.Object[]"
+		_mcs.canvas.tag = vertex_data --DotNet value holding the MAXScript value
+		--_mcs.canvas.tag = dotNet.ValueToDotNetObject vertex_data type --DotNet value holding the MAXScript value
+		-- local type = dotnetclass "System.Single[][]"
+		--_mcs.canvas.tag = dotnet.ValueToDotNetObject vertex_data typefa --DotNet value holding the MAXScript value
 	), 
 	fn onPaint s a = ( -- s:Forms.UserControl	a:Forms.PaintEventArgs
-		
-		format "controls count:%\n" s.Controls.count
-		if s.Controls.count < 2 do return false
+
+		format "onPaint > controls count:%\n" s.Controls.count
 		local _mcs = gMcDrawBezierDialog --struct instance
-		--format "canvas vertex data:%\n" _mcs.canvas.tag
-		fn cpoint s id = (
-		
-			local c = s.Controls.Item[id]
-			dotnetobject "System.Drawing.Point" (c.Location.x + c.Size.width/2) (c.Location.y + c.Size.height/2) 
-		)
+		if s.Controls.count < 2 or _mcs.canvas.tag == undefined do return false
+
+/*local vertex_data = _mcs.canvas.tag--.value		
+for i = 1 to vertex_data.count do  (
+
+	local vd = vertex_data[i].value
+	format "vertex_data:%\n" vd
+)
+return ok*/
 		local g = a.Graphics
 		g.SmoothingMode = g.SmoothingMode.HighQuality
 		-- g.SmoothingMode = g.SmoothingMode.AntiAlias
 		-- g.Clear(_mcs.canvas.Backcolor)
-		struct POINT_DATA (pos, inVect, outVec, type)
-		local points_data = for i = 0 to s.Controls.count - 1 by 3 collect POINT_DATA (cpoint s i) (cpoint s (i+1)) (cpoint s (i+2)) s.Controls.Item[i]
+			format "onPaint >_mcs.canvas.tag:%\n" _mcs.canvas.tag
+		local vertex_data = _mcs.canvas.tag
+		fn point3DtoXY p = ( [p.x, p.y] )
 		-- _mcs.cPen.Width = 6.0F
-		for i = 1 to points_data.count by 2 do ( -- 
+		for i = 1 to vertex_data.count by 2 do ( -- 
 			
-			local d1 = points_data[i]
+			local d1 = vertex_data[i].value
 			local d2 = (
 			
-				if (i < points_data.count) then points_data[i+1] else points_data[1]
+				if (i < vertex_data.count) then vertex_data[i+1].value else vertex_data[1].value
 			)
-			local spline_point_a	= d1.pos
-			local spline_point_b	= d2.pos
-			local point_a_out	= d1.outVec 
-			local point_b_in		= d2.inVect 
+			format "onPaint > d1:%\n" d1
+			format "onPaint > d2:%\n" d2
+			
+			local spline_point_a	= point3DtoXY d1.pos
+			local spline_point_b	= point3DtoXY d2.pos
+			local point_a_out	= point3DtoXY d1.outVec 
+			local point_b_in		= point3DtoXY d2.inVec 
 			local type_a			= d1.type
 			local type_b			= d2.type
-			format "onPaint > vert( % ) type a:% b:%\n" (i+1) type_a.tag type_b.tag
+			format "onPaint > vert_a( % ) pos:% type:% vert_b( % ) pos:% type:%\n" d1.index spline_point_a type_a d2.index spline_point_b type_b
 			
-			c1 = s.Controls.Item[i]
+			/*c1 = s.Controls.Item[i]
 			c2 = s.Controls.Item[i+3]
-			format "c1:% c2:%\n" c1 c2
+			format "c1:% c2:%\n" c1 c2*/
 			--c1.Backcolor = c1.Backcolor.Yellow
 			--c2.Backcolor = c2.Backcolor.Blue
 			
-			g.DrawLine _mcs.cPen spline_point_a spline_point_b
-			-- g.DrawBezier _mcs.cPen spline_point_a point_a_out point_b_in spline_point_b
+			-- g.DrawLine _mcs.cPen spline_point_a spline_point_b
+			g.DrawBezier _mcs.cPen spline_point_a point_a_out point_b_in spline_point_b
 			-- g.DrawLine _mcs.aPen spline_point_a point_a_out
 			-- g.DrawLine _mcs.bPen spline_point_b point_b_in
 		)
@@ -322,7 +326,16 @@ private
 
 
 /*
+			--e.Graphics.ScaleTransform(1.75f, 0.5f);
 		
+		grp.ScaleTransform(1, 2) 'zvětším vše v Y směru dvakrát
+		grp.DrawString(sHodnota, pFont, pBrush, posX, posY * 0.5, sf) 
+		'tady manipuluji s Y souřadnicí výchozího bodu, 
+		protože transformace ji ovlivní také ale pořád je text jinde než očekávám
+		'nebo obdobně s objektem RectangleF grp.DrawString(sHodnota, pFont, pBrush, rect, sf)
+		grp.ResetTransform()
+		
+		-- messageBox "Drawing a Shape." title:"Warning:"	
 --_mcs.canvas "System.Drawing.Rectangle" outVec.x outVec.y handle_size handle_size
 -- _mcs.canvas.Grapgics.Clear()
 -- _mcs.form.backColor = mcDotnet.dColor (mcUIColors.get #fore)

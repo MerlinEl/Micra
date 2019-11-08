@@ -52,14 +52,14 @@ struct MICRA_NEW_STRUCTURE	(
 		if classOf sp != SplineShape and classOf sp != line do return false
 		local SPLINE_DATA, VERTEX_DATA
 		struct SPLINE_DATA (pos, rect, steps, clr, splines, closed = #())
-		struct VERTEX_DATA (pos, type, invec, outvec)
+		struct VERTEX_DATA (index, pos, type, invec, outvec)
 		local splines =#() --collect verts for each spline
 		for s=1 to (numSplines sp) do --for all splines
 		(
 			local points_array = #()
 			for v=1 to (numKnots sp s) do --for verts in current spline
 			(
-				points_array += #(VERTEX_DATA (getKnotPoint sp s v) (getKnotType sp s v) (getInVec sp s v) (getOutVec sp s v))
+				points_array += #(VERTEX_DATA v (getKnotPoint sp s v) (getKnotType sp s v) (getInVec sp s v) (getOutVec sp s v))
 			)
 			append splines points_array
 		)
