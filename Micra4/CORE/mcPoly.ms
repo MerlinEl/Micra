@@ -9,6 +9,16 @@
 
 *
 */
+struct FACE_DATA (index	, ed = #()	, vd = #(),
+	
+	fn getVertDataByGeoIndex geo_vert_index = (
+		
+		for d in vd where d.index == geo_vert_index do return d
+		undefined
+	)
+)
+struct VERT_DATA (index	, uvVerts = #{}) --faces = #{}, edges = #{}
+struct EDGE_DATA (index, uvEdges = #{}) 	--, faces = #{}, edges = #{}
 struct MICRA_POLY
 (
 	fn getSource = getSourceFileName(), --get path of this script
@@ -371,6 +381,50 @@ struct MICRA_POLY
 		local edges_verts = polyOp.getVertsUsingEdge obj two_edges
 		edges_verts = (edges_verts - #{vertex_index}) as array
 		#(vertex_index, edges_verts[1], edges_verts[2])
+	),
+	/**
+	*@Usage	collect geometry data
+	*/
+	fn getGeometryData obj = (
+
+		if classOf obj != Editable_Poly do return false
+		local faces_data = #()
+		for face_index = 1 to obj.faces.count do (
+			
+-- 			format "face:%\n" face_index	
+			local face_verts = polyop.getVertsUsingFace obj face_index
+			local face_edges = polyop.getEdgesUsingFace obj face_index
+			local vd = for vi in face_verts collect VERT_DATA vi --(polyop.getFacesUsingVert obj vi)
+			local fd  = for ei in face_edges collect EDGE_DATA ei ---(polyop.getFacesUsingEdge obj ei)
+			local fd = FACE_DATA face_index fd vd
+			append faces_data fd
+		)
+		faces_data
+	),
+	fn geoVertsToMapVerts geo_verts geo_data = (
+		
+		local uv_verts = #{}
+		for v in geo_verts do (
+			
+			for fd in geo_data do (
+				
+				local vert_data = fd.getVertDataByGeoIndex v
+				--format "vert_data:%\n" vert_data 
+				if vert_data != undefined do uv_verts += vert_data.uvVerts
+			)
+		)
+		uv_verts
+	),
+	fn printGeometryData geo_data = (
+	
+		for fd in geo_data do (
+		
+			format "Face:%\n" fd.index
+			for d in fd.vd do (
+			
+				format "\tVerts:% uvVerts:%\n" d.index d.uvVerts
+			)
+		)
 	)
 	/*<end>*/
 )

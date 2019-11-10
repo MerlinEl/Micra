@@ -22,25 +22,6 @@ struct sLs3dQuickMaterials	(
 	
 	--functions
 	fn getSource = getSourceFileName(), --get path of this script
-	fn warningMsg msg_key = (
-	
-		local msg = case msg_key of (
-
-			"call_help"		: "Something wierd was happen. Call Merlin to help you :-)"
-			"not_poly"		: "Editable Poly object must be selected."
-			"not_spline"		: "Spline object must be selected."
-			"not_vsel"		: "Select some vertices to progress."
-			"not_esel"		: "Select some edges to progress."
-			"not_fsel"			: "Select some faces to progress."
-			"not_termat"		: "Missing terrain material."
-			"no_profile"		: "Missing spline profile.\nFirst create one spline(profile) with name curb_"
-			"not_edge_level"	: "Subobject level must be in Edges."
-			"not_sweep"		: "Must be Spline with sweep Modifier applyed."
-			default			: "Unknown Error...."
-		)
-		messageBox msg title:"Warning:"
-		false
-	),
 	fn closeAllComponents = (
 	
 		if mcCurbCreatorDialog != undefined do destroyDialog mcCurbCreatorDialog
@@ -92,9 +73,9 @@ struct sLs3dQuickMaterials	(
 	),
 	fn mapCurb obj mat_id collapsed:false = (
 	
-		if (classOf (modPanel.getCurrentObject()) != sweep)  do return (warningMsg "not_sweep")
+		if (classOf (modPanel.getCurrentObject()) != sweep)  do return (mcMsgList.warn "not_sweep")
 		local terrain_mat = currentMaterialLibrary["bc_terrain_main"]
-		if terrain_mat == undefined do return return (warningMsg "not_termat")
+		if terrain_mat == undefined do return return (mcMsgList.warn "not_termat")
 		obj.material = terrain_mat
 		local mat_mod = Materialmodifier()
 		modPanel.addModToSelection mat_mod ui:on
@@ -111,15 +92,15 @@ struct sLs3dQuickMaterials	(
 			if customSpline then (
 				
 				--validation check
-				if classOf obj != SplineShape and classOf obj != Line  do return (warningMsg "not_spline")
+				if classOf obj != SplineShape and classOf obj != Line  do return (mcMsgList.warn "not_spline")
 				curb_spline = obj
 				
 			) else (
 			
 				--validation check
-				if classOf obj != Editable_Poly do return (warningMsg "not_poly")
+				if classOf obj != Editable_Poly do return (mcMsgList.warn "not_poly")
 				local esel = polyOp.getEdgeSelection obj 
-				if esel.numberset == 0 do return (warningMsg "not_esel")
+				if esel.numberset == 0 do return (mcMsgList.warn "not_esel")
 				--create spline from selected edges
 				curb_spline = createSplineFromEdges obj
 			)
@@ -134,7 +115,7 @@ struct sLs3dQuickMaterials	(
 	),
 	fn redrawSplineAtZero sp = (
 	
-		if classOf sp != SplineShape and classOf sp != Line do return (warningMsg "not_spline")
+		if classOf sp != SplineShape and classOf sp != Line do return (mcMsgList.warn "not_spline")
 		local shape_name = sp.name
 		local points_array = mcSpline.pointsFromSpline sp
 		local new_sp = mcSpline.splinesFromPoints points_array type:#corner color:green centerPivot:false
@@ -165,7 +146,6 @@ struct sLs3dQuickMaterials	(
 			local spline_profile = undefined
 			local poly_object = undefined
 			local old_sel = undefined
-			fn warningMsg msg_key = (::gLs3dQuickMaterials.warningMsg msg_key)
 			fn isSpline obj = (classOf obj == SplineShape or classOf obj == Line)
 			fn isCurbProfile obj = (
 				
@@ -184,27 +164,27 @@ struct sLs3dQuickMaterials	(
 				
 					Editable_Poly : (
 			
-						if (subobjectlevel != 2 and subobjectlevel != 3) do return (warningMsg "not_edge_level")
+						if (subobjectlevel != 2 and subobjectlevel != 3) do return (mcMsgList.warn "not_edge_level")
 						poly_object = obj
 					)
 					SplineShape : (
 								
-						if not (isSpline obj) do return (warningMsg "not_spline")
+						if not (isSpline obj) do return (mcMsgList.warn "not_spline")
 						spline_path = obj
 					) 
 				)
 			)
 			fn getSplineProfile = (
 				
-				if lbx_profiles.items.count == 0 do return (warningMsg "no_profile")
+				if lbx_profiles.items.count == 0 do return (mcMsgList.warn "no_profile")
 				spline_profile = (getNodeByName lbx_profiles.selected)
-				if not (isSpline spline_profile) do return (warningMsg "not_spline")
+				if not (isSpline spline_profile) do return (mcMsgList.warn "not_spline")
 			)
 			fn focusSplineProfile = (
 			
-				if lbx_profiles.items.count == 0 do return (warningMsg "no_profile")
+				if lbx_profiles.items.count == 0 do return (mcMsgList.warn "no_profile")
 				local sp = (getNodeByName lbx_profiles.selected)
-				if not (isSpline sp) do return (warningMsg "not_spline")
+				if not (isSpline sp) do return (mcMsgList.warn "not_spline")
 				if subobjectlevel != undefined do subobjectlevel = 0 --exit from any subobject level before select another obj
 				if old_sel == undefined do old_sel = selection as Array --keep old selection in memory
 				select sp
@@ -220,12 +200,12 @@ struct sLs3dQuickMaterials	(
 				format "createCurb >\n\tspline_profile:%\n\tspline_path:%\n\tpoly_object:%\n" spline_profile spline_path poly_object
 				if spline_path != undefined then ( --path from custom spline
 					
-					if not (isSpline spline_path) or not (isSpline spline_profile) do return (warningMsg "call_help")
+					if not (isSpline spline_path) or not (isSpline spline_profile) do return (mcMsgList.warn "call_help")
 					::gLs3dQuickMaterials.createCurb spline_path spn_mat_id.value customSpline:true profileObj:spline_profile mapping:mapping 
 				
 				) else ( --path from edges
 	
-					if not (isSpline spline_profile) do  return (warningMsg "no_profile")
+					if not (isSpline spline_profile) do  return (mcMsgList.warn "no_profile")
 					::gLs3dQuickMaterials.createCurb poly_object spn_mat_id.value customSpline:false profileObj:spline_profile mapping:mapping 
 				)
 			)

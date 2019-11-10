@@ -11,7 +11,6 @@ try (destroyDialog mcUnwrapEditorDialog) catch ()
 rollout mcUnwrapEditorDialog "UV+" width:96 height:592
 (
 	-->Locals
-	local gco
 	local vertex_position
 	--<
 	GroupBox grp6 "Selection" pos:[4,4] width:88 height:128
@@ -64,121 +63,30 @@ rollout mcUnwrapEditorDialog "UV+" width:96 height:592
 	label 'lbl_offset_steps' "step:" pos:[8,164] width:24 height:16 align:#left
 
 	--> Functions
-	fn errorCheck = --if error found do return true
-	(
-		gco = modpanel.getcurrentobject()	
-		if classOf gco != Unwrap_UVW do return true
-		return false
-	)
-		
-	fn convetrSelectionTo type =
-	(
-		if errorCheck() do return false
-		local lvl = subobjectLevel
-		case type of
-		(	
-			#verts:  
-			(
-				subobjectLevel = 1
-				--if keyboard.controlPressed do
-				(if lvl == 3 then gco.faceToVertSelect() else if lvl == 2 do gco.edgeToVertSelect())
-			)
-			#edges: 
-			(
-				subobjectLevel = 2
-				--if keyboard.controlPressed do
-				(if lvl == 3 then gco.faceToEdgeSelect() else if lvl == 1 do gco.vertToEdgeSelect())
-			)
-			#faces:  
-			(
-				subobjectLevel =3
-				--if keyboard.controlPressed do
-				(if lvl == 2 then gco.edgeToFaceSelect() else if lvl == 1 do gco.vertToFaceSelect())
-			)
-		)
-	)
-	fn getCurentSelectionAs type = ( --conver selection to desired type and return as array
+	fn offsetResizeSelection type  = (
 	
-		if (convetrSelectionTo type == false) do return #()
-		case type of (
-		
-			#verts: gco.getSelectedVertices() as Array
-			#edges: gco.getSelectedEdges() as Array
-			#faces: gco.getSelectedFaces() as Array	
-		)
-	)
-	fn selectBorder =
-	(
-		if errorCheck() do return false
-		if subobjectLevel !=2 do return false
-		gco.openEdgeSelect()
-	)
-	fn packInPlace = 
-	(
-		if errorCheck() do return false
-		local sel_center = gco.getSelCenter()
-		local sel_faces = gco.getSelectedFaces()
-		if sel_faces.numberset < 2 do return false
-		local excluded_faces = #()
-		for i in sel_faces do
-		(
-			if findItem excluded_faces i  != 0 do continue
-			format "fcount:%\n" sel_faces.numberset
-			gco.SelectFaces #{i}
-			gco.selectElement()
-			gco.MoveSelected (sel_center - (gco.getSelCenter()) )
-			excluded_faces += gco.getSelectedFaces()
-		)
-	)
-	fn resizeUVW val axis =
-	(
-		if errorCheck() do return false
-		local axis = case axis of
-		(
-			#x: 1 
-			#y: 2
-			#xy: 0
-		)
-		undo "Resize_UVW" on gco.scaleSelectedCenter val axis
-	)
-	fn offsetResizeSelection type =
-	(
-		if errorCheck() do return false
+		if not (mcPolyMap.isValidMod()) do return (mcMsgList.warn "not_unwrap")
+		local gco = modpanel.getcurrentobject()
 		local offset_steps = spn_offset_steps.value
-		case type of
-		(	
-			#right:   ( if keyboard.controlPressed then resizeUVW 2 #x else undo "Offset Right" on gco.MoveSelected [offset_steps,0,0])
-			#left:     ( if keyboard.controlPressed then resizeUVW 0.5 #x else undo "Offset Left"  on gco.MoveSelected [-offset_steps,0,0])
-			#up:      ( if keyboard.controlPressed then resizeUVW 2 #y else undo "Offset Up"    on gco.MoveSelected [0,offset_steps,0])
-			#down:  ( if keyboard.controlPressed then resizeUVW 0.5 #y else undo "Offset Down" on gco.MoveSelected [0,-offset_steps,0])
-			#center: 
-			( 
-				if keyboard.controlPressed then resizeUVW 2 #xy else
-				if keyboard.altPressed       then resizeUVW 0.5 #xy else
+		case type of (	
+		
+			#right:		( if keyboard.controlPressed then undo "Resize_UVW" on mcPolyMap.resizeUVW gco 2 #x else undo "Offset Right" on gco.MoveSelected [offset_steps,0,0])
+			#left:		( if keyboard.controlPressed then undo "Resize_UVW" on mcPolyMap.resizeUVW gco 0.5 #x else undo "Offset Left"  on gco.MoveSelected [-offset_steps,0,0])
+			#up:			( if keyboard.controlPressed then undo "Resize_UVW" on mcPolyMap.resizeUVW gco 2 #y else undo "Offset Up"    on gco.MoveSelected [0,offset_steps,0])
+			#down:	( if keyboard.controlPressed then undo "Resize_UVW" on mcPolyMap.resizeUVW gco 0.5 #y else undo "Offset Down" on gco.MoveSelected [0,-offset_steps,0])
+			#center:	( 
+			
+				if keyboard.controlPressed then undo "Resize_UVW" on  mcPolyMap.resizeUVW gco 2 #xy else
+				if keyboard.altPressed     then undo "Resize_UVW" on  mcPolyMap.resizeUVW gco 0.5 #xy else
 				undo "Offset Center" on gco.MoveSelected (0.5 - (gco.getSelCenter() ) ) 
 			)
 		)
 	)
-	fn getElements gco faces_array =
-	(
-		struct ELEMENTS (faces=#{}, area=0)
-		local el = #()
-		while faces_array.count != 0 do --or not keyboard.controlPressed 
-		(
-			local next_face = faces_array[1]
-			gco.selectFaces #{next_face}
-			gco.selectElement()
-			local el_faces = gco.getSelectedFaces()
-			local areaUVW
-			gco.getArea el_faces &x &y &width &height &areaUVW &areaGeom 
-			el += #(ELEMENTS el_faces areaUVW) 
-			faces_array = (faces_array as bitarray - el_faces) as array --remove faces from array
-		)
-		return el
-	)
+
 	fn selectUVWElementsBySize min_treeshold:0.5 max_treeshold:0.5 =
 	(
-		if errorCheck() do return false
+		if not (mcPolyMap.isValidMod()) do return (mcMsgList.warn "not_unwrap")
+		local gco = modpanel.getcurrentobject()	
 		case gco.getTVSubObjectMode() of
 		(
 			1: gco.selectVertices #{(gco.getSelectedVertices() as array)[1]}
@@ -201,7 +109,7 @@ rollout mcUnwrapEditorDialog "UV+" width:96 height:592
 		local all_faces = gco.getSelectedFaces() 
 		all_faces -= first_element --remove first element
 		--circle trough all faces to make elements
-		local all_elements = getElements gco (all_faces as array)
+		local all_elements = mcPolyMap.getElements gco (all_faces as array)
 		--filter only elements with treeshold
 		local chosen_faces = #{}
 		format "elements found:%\n" (all_elements.count+1)
@@ -220,9 +128,11 @@ rollout mcUnwrapEditorDialog "UV+" width:96 height:592
 		format "faces found in min:%\n"  chosen_faces.numberset
 		if chosen_faces.numberset != 0 do (gco.selectFaces chosen_faces)
 	)
+	
 	fn selectOverlapped =
 	(
-		if errorCheck() do return false
+		if not (mcPolyMap.isValidMod()) do return (mcMsgList.warn "not_unwrap")
+		local gco = modpanel.getcurrentobject()	
 		if keyboard.controlPressed then gco.selectElement()
 		else
 		(
@@ -232,9 +142,11 @@ rollout mcUnwrapEditorDialog "UV+" width:96 height:592
 			gco.updateView()
 		)
 	)
+	
 	fn alignTo type=
 	(
-		if errorCheck() do return false
+		if not (mcPolyMap.isValidMod()) do return (mcMsgList.warn "not_unwrap")
+		local gco = modpanel.getcurrentobject()	
 		local sel_center = gco.getSelCenter()
 		local sel_faces = gco.getSelectedFaces()
 		if sel_faces.numberset < 2 do return false
@@ -265,9 +177,10 @@ rollout mcUnwrapEditorDialog "UV+" width:96 height:592
 			gco.SelectFaces sel_faces
 		)
 	)
+	
 	fn randomizeElements axis = ( --works OK
 		
-		gco = modpanel.getcurrentobject()
+		local gco = modpanel.getcurrentobject()
 		local sel_faces = gco.getSelectedFaces()
 		local excluded_faces = #()
 		undo "Shift Uv Elements" on for i in sel_faces do
@@ -292,7 +205,7 @@ rollout mcUnwrapEditorDialog "UV+" width:96 height:592
 	
 	fn alignElements way = ( --works ok
 		
-		gco = modpanel.getcurrentobject()	
+		local gco = modpanel.getcurrentobject()	
 		local sel_faces = gco.getSelectedFaces()
 		local excluded_faces = #()
 		undo "Align Elements V-H" on for i in sel_faces do (
@@ -312,8 +225,10 @@ rollout mcUnwrapEditorDialog "UV+" width:96 height:592
 		)
 		print "Align Elements > Done!"
 	)
+	
 	fn getEdgePos edge_index = (
 	
+		local gco = modpanel.getcurrentobject()
 		gco.SelectEdges #{edge_index}
 		gco.edgeToVertSelect() 	
 		local vsel = (gco.getSelectedVertices()) as Array
@@ -321,8 +236,10 @@ rollout mcUnwrapEditorDialog "UV+" width:96 height:592
 		local p2 = gco.getVertexPosition 0 vsel[2]
 		(p1 + p2) / 2
 	)
+	
 	fn getEdgeByPos pos = (
 		
+		local gco = modpanel.getcurrentobject()
 		local all_vertices = #{1..(gco.NumberVertices())} 
 		gco.selectVertices all_vertices
 		gco.vertToEdgeSelect()
@@ -334,6 +251,7 @@ rollout mcUnwrapEditorDialog "UV+" width:96 height:592
 		)
 		return -1
 	)
+	
 	fn stitchSelectedEdges = (
 		
 		--stitching cause reindex edges, then wee ned to > 
@@ -342,7 +260,7 @@ rollout mcUnwrapEditorDialog "UV+" width:96 height:592
 		--edges will change scale while using gco.stitchVertsNoParams() 
 		--thiss may cause missing conections 
 		--to keep edge position same , disable scale cluster >  gco.stitchVerts true 0.0
-		gco = modpanel.getcurrentobject()	
+		local gco = modpanel.getcurrentobject()	
 		local sel_edges = gco.getSelectedEdges()
 		format "stored selected edges:%\n" sel_edges
 		local edges_pos = for i in sel_edges collect getEdgePos i
@@ -358,9 +276,11 @@ rollout mcUnwrapEditorDialog "UV+" width:96 height:592
 		)
 		messageBox "Stitching was Finnished." title:micra.version
 	)	
+	
 	fn rotateVertices way = (
 		
-		local sel_verts = getCurentSelectionAs #verts --this procedure also define gco and select vertices
+		local gco = modpanel.getcurrentobject()
+		local sel_verts = mcPolyMap.getCurentSelectionAs #verts --this procedure also define gco and select vertices
 		if sel_verts.count == 0 do return false
 		local vertices_pos = for i in sel_verts collect (gco.getVertexPosition 0 i)
 		format "A verts:%\n" vertices_pos
@@ -374,17 +294,21 @@ rollout mcUnwrapEditorDialog "UV+" width:96 height:592
 			gco.setVertexPosition 0 vert_index vertices_pos[i]
 		)
 	)
+	
 	fn copyVertexPos = (
 		
-		local sel_verts = getCurentSelectionAs #verts --this procedure also define gco and select vertices
+		local gco = modpanel.getcurrentobject()
+		local sel_verts = mcPolyMap.getCurentSelectionAs #verts --this procedure also define gco and select vertices
 		if sel_verts.count == 0 do return false
 		vertex_position = gco.getVertexPosition 0 sel_verts[1]
 	)
+	
 	fn pastePos way = (
 	
 		if vertex_position == undefined do return false
-		local sel_verts = getCurentSelectionAs #verts --this procedure also define gco and select vertices
+		local sel_verts = mcPolyMap.getCurentSelectionAs #verts --this procedure also define gco and select vertices
 		if sel_verts.count == 0 do return false
+		local gco = modpanel.getcurrentobject()	
 		undo "Paste UVW Position" on for i in sel_verts do (
 			
 			local p = gco.getVertexPosition 0 i
@@ -392,6 +316,7 @@ rollout mcUnwrapEditorDialog "UV+" width:96 height:592
 			gco.setVertexPosition 0 i p
 		)
 	)
+
 	/**	
 	*@ Created by br0t 2014
 	*@ Modified by MerlinEl 2019
@@ -399,7 +324,8 @@ rollout mcUnwrapEditorDialog "UV+" width:96 height:592
 	*/
 	fn stretchUvsToFitSquare = (
 
-		local sel_verts = getCurentSelectionAs #verts --this procedure also define gco and select vertices
+		local gco = modpanel.getcurrentobject()
+		local sel_verts = mcPolyMap.getCurentSelectionAs #verts --this procedure also define gco and select vertices
 		if sel_verts.count == 0 do return false
 		local vertices_pos = for i in sel_verts collect (gco.getVertexPosition 0 i)
 		-- Get left/lower limit
@@ -459,17 +385,17 @@ rollout mcUnwrapEditorDialog "UV+" width:96 height:592
 	--<
 	
 	-->Actions
-	on btn_verts pressed do convetrSelectionTo #verts
-	on btn_edges pressed do convetrSelectionTo #edges
-	on btn_faces pressed do convetrSelectionTo #faces
+	on btn_verts pressed do mcPolyMap.convetrSelectionTo #verts
+	on btn_edges pressed do mcPolyMap.convetrSelectionTo #edges
+	on btn_faces pressed do mcPolyMap.convetrSelectionTo #faces
 	on btn_sel_similar pressed do selectUVWElementsBySize min_treeshold:spn_min.value max_treeshold:spn_max.value
 	on btn_sel_over pressed do selectOverlapped()
-	on btn_border pressed do undo "Select Border" on selectBorder()
-	on btn_move_r pressed do offsetResizeSelection #right
-	on btn_move_l pressed  do offsetResizeSelection #left
-	on btn_move_u pressed do offsetResizeSelection #up
-	on btn_move_d pressed do offsetResizeSelection #down
-	on btn_move_c pressed do offsetResizeSelection #center
+	on btn_border pressed do (undo "Select Border" on mcPolyMap.selectBorder())
+	on btn_move_r pressed do (offsetResizeSelection #right)
+	on btn_move_l pressed  do (offsetResizeSelection #left	)
+	on btn_move_u pressed do (offsetResizeSelection #up	)
+	on btn_move_d pressed do (offsetResizeSelection #down)
+	on btn_move_c pressed do (offsetResizeSelection #center)
 	on btn_align_l pressed do alignTo #left
 	on btn_align_r pressed do alignTo #right
 	on btn_align_t pressed do alignTo #top

@@ -7,6 +7,7 @@
   <Structures val="All registred Micra's Structures">
     <!--independent classes-->
     <mcStructMan val="on" info="structure manager" />
+    <mcMsgList val="on" info="all info messages" />
     <mcProgLog val="on" info="progressbar with log" />
     <mcWinMsg val="on" />
     <mcWin32 val="on" info="denisT great work!" />
@@ -40,6 +41,8 @@
     <mcDraw val="on" />
     <mcSpline val="on" />
     <mcPoly val="on" />
+	<mcPolyMap val="on" />
+	<mcMeshMap val="on" />
     <mcNode val="on" />
     <mcSnap val="on" />
     <mcSystem val="on" />
@@ -49,6 +52,7 @@
     <mcMsx val="on" />
     <mcNet val="on" info="Internet and Network Functions" />
     <mcSkin val="on" />
+
     <mcActionsTukej val="on" />
   </Structures>
   <Version val="All registred Micra's Scripts">

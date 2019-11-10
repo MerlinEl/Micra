@@ -1,152 +1,72 @@
-struct FACE_DATA (index	, ed = #()	, vd = #(),
-	
-	fn getVertDataByGeoIndex geo_vert_index = (
-		
-		for d in vd where d.index == geo_vert_index do return d
-		undefined
-	)
-)
-struct VERT_DATA (index	, uvVerts = #{}) --faces = #{}, edges = #{}
-struct EDGE_DATA (index, uvEdges = #{}) 	--, faces = #{}, edges = #{}
-struct sUnwrap_Data_Manager (
-	
-	fn getGeometryData obj = (
+--select corner edges and run script
+fn fixCornerMapping obj = (
 
-		if classOf obj != Editable_Poly do return false
-		local faces_data = #()
-		for face_index = 1 to obj.faces.count do (
-			
--- 			format "face:%\n" face_index	
-			local face_verts = polyop.getVertsUsingFace obj face_index
-			local face_edges = polyop.getEdgesUsingFace obj face_index
-			local vd = for vi in face_verts collect VERT_DATA vi --(polyop.getFacesUsingVert obj vi)
-			local fd  = for ei in face_edges collect EDGE_DATA ei ---(polyop.getFacesUsingEdge obj ei)
-			local fd = FACE_DATA face_index fd vd
-			append faces_data fd
-		)
-		faces_data
-	),
-	fn clearUnwrapData geo_data = (
-		
-		local gco = modPanel.getCurrentObject()
-		if classOf gco != Unwrap_UVW do return false
-		for fd in geo_data do (
-			
-			local uv_face_verts_count = gco.numberPointsInFace fd.index
-			for vetr_handle = 1 to uv_face_verts_count do (
-				
-				local geo_vert_index	= gco.getVertexGeomIndexFromFace	fd.index vetr_handle
-				local vert_data =  fd.getVertDataByGeoIndex geo_vert_index
-				vert_data.uvVerts = #{}
-			)
-		)
-	),
-	fn collectUnwrapData geo_data = (
-		
-		local gco = modPanel.getCurrentObject()
-		if classOf gco != Unwrap_UVW do return false
-		for fd in geo_data do (
-			
-			--gather vertex UV data
-			local uv_face_verts_count = gco.numberPointsInFace fd.index
-			for vetr_handle = 1 to uv_face_verts_count do (
-					
-				local uv_vert_index	= gco.getVertexIndexFromFace				fd.index vetr_handle
-				local geo_vert_index	= gco.getVertexGeomIndexFromFace	fd.index vetr_handle
-				
-				local vert_data =  fd.getVertDataByGeoIndex geo_vert_index
-				vert_data.uvVerts += #{uv_vert_index}
-			)
-			--gather edges UV data --mybe later
-		)
-	),
-	fn printGeometryData geo_data = (
-		for fd in geo_data do (
-			format "Face:%\n" fd.index
-			for d in fd.vd do (
-				format "\tVerts:% uvVerts:%\n" d.index d.uvVerts
-			)
-		)
-	),
-	fn geoVertsToMapVerts geo_verts geo_data = (
-		
-		local uv_verts = #{}
-		for v in geo_verts do (
-			
-			for fd in geo_data do (
-				
-				local vert_data = fd.getVertDataByGeoIndex v
-				--format "vert_data:%\n" vert_data 
-				if vert_data != undefined do uv_verts += vert_data.uvVerts
-			)
-		)
-		uv_verts
-	),
-	fn fixUvDistortion mod_uvw uv_verts angle_deg = (
-	
+	sublvl = subObjectLevel
+	--store Editable_Poly geometry data
+	geo_data = mcPoly.getGeometryData obj
+	esel = polyop.getEdgeSelection obj 
+	everts = polyop.getVertsUsingEdge obj esel
+	efaces = polyop.getFacesUsingEdge obj esel
+	--select faces for mapping
+	subObjectLevel = 4
+	polyop.setFaceSelection obj efaces
+	--add unwrap modifier
+	mod_uvw = Unwrap_UVW () 
+	modPanel.addModToSelection mod_uvw ui:on
+	mod_uvw.edit()	
+	mod_uvw.fit()
+	--gather vertex uv data
+	mcPolyMap.collectUnwrapData geo_data
+	subObjectLevel = 1
+	--convert geometry vert selection to UV vetr selection
+	uv_verts = mcPoly.geoVertsToMapVerts everts geo_data
+	format "verts geo:% uv:%\n" everts.numberset  uv_verts.numberset
+	vsel_left = vsel_right = #{}
+	if everts.numberset == uv_verts.numberset - 1 then ( --split edges
+
 		mod_uvw.selectVertices uv_verts
-		local verts_pos = for v in uv_verts collect mod_uvw.getVertexPosition 1 v
-		mod_uvw.unwrap2.rotateSelectedCenter (degToRad  angle_deg)
-		for i=1 to uv_verts.numberset do (
-
-			local vert_index = (uv_verts as array)[i]
-			local new_pos = mod_uvw.getVertexPosition 1 vert_index
-			new_pos.y = verts_pos[i].y
-			mod_uvw.setVertexPosition 1 vert_index new_pos
-		)
-	),
-	--select corner edges and run script
-	fn fixCornerMapping obj = (
-	
-		local sublvl = subObjectLevel
-		--store Editable_Poly geometry data
-		local geo_data = getGeometryData obj
-		local esel = polyop.getEdgeSelection obj 
-		local everts = polyop.getVertsUsingEdge obj esel
-		local efaces = polyop.getFacesUsingEdge obj esel
-		--select faces for mapping
-		subObjectLevel = 4
-		polyop.setFaceSelection obj efaces
-		--add unwrap modifier
-		local mod_uvw = Unwrap_UVW () 
-		modPanel.addModToSelection mod_uvw ui:on
-		mod_uvw.edit()	
-		mod_uvw.fit()
-		--gather vertex uv data
-		collectUnwrapData geo_data
-		-- printGeometryData geo_data
-		subObjectLevel = 1
-		--convert geometry vert selection to UV vetr selection
-		mod_uvw.selectVertices (geoVertsToMapVerts everts geo_data)
 		--select edges from verts and break them
 		mod_uvw.vertToEdgeSelect()
 		subObjectLevel = 2
 		mod_uvw.breakSelected()
 		subObjectLevel = 1	
-
 		--remove old UV data
-		clearUnwrapData geo_data
+		mcPolyMap.clearUnwrapData geo_data
 		--recolect new UV data
-		collectUnwrapData geo_data
+		mcPolyMap.collectUnwrapData geo_data
 		--gather left and right vertices from splited edge
-		local vsel_left = mod_uvw.getSelectedVertices()
-		mod_uvw.selectVertices (geoVertsToMapVerts everts geo_data)
-		local vsel_right = (mod_uvw.getSelectedVertices()) - vsel_left
-		--fix UV distortion on left vertices
-		fixUvDistortion mod_uvw vsel_left 75
-		--fix UV distortion on left vertices
-		fixUvDistortion mod_uvw vsel_right -75	
-		--
-		--maxOps.CollapseNodeTo obj 1 true
-		--subObjectLevel = sublvl
+		vsel_left = mod_uvw.getSelectedVertices()
+		mod_uvw.selectVertices (mcPoly.geoVertsToMapVerts everts geo_data)
+		vsel_right = (mod_uvw.getSelectedVertices()) - vsel_left
+	) else ( --split vertices in to two groups
+		
+		min_x = (mod_uvw.getVertexPosition 1 (uv_verts as Array)[1]).x
+		for v in uv_verts do (
+			
+			pos_x = (mod_uvw.getVertexPosition 1 v).x
+			if 	pos_x < min_x do min_x = pos_x
+		)	
+		for v in uv_verts do (
+			
+			pos_x = (mod_uvw.getVertexPosition 1 v).x	
+			if pos_x <= min_x then vsel_right += #{v} else vsel_left +=#{v}
+		)
 	)
+	--fix UV distortion on left vertices
+	mcPolyMap.skewVerticesUvs mod_uvw vsel_left 75
+	--fix UV distortion on left vertices
+	mcPolyMap.skewVerticesUvs mod_uvw vsel_right -75	
+	--
+	maxOps.CollapseNodeTo obj 1 true
+	subObjectLevel = sublvl
 )
-gUnwrap_Data_Manager = sUnwrap_Data_Manager()
-gUnwrap_Data_Manager.fixCornerMapping $
+undo "Fix Corner Mapping" on fixCornerMapping $
 
 
 /*
+obj = $
 mod_uvw = modPanel.getCurrentObject()
+mcPoly.printGeometryData geo_data
 mod_uvw.getSelectedGeomEdgesByNode $ --maybe works only mesh object
 */
 
@@ -301,25 +221,6 @@ mod_uvw.selectEdges (gUnwrap_Data_Manager.geoEdgesToMapEdges everts geo_data)
 $.baseobject.numfaces
 $.faces.count
 
-struct UVW_FACE_DATA (uvFace, uvVerts = #{}, geoVerts = #{})
-fn collectUnwrapData gco = (
-
-	local uv_faces_count = gco.numberPolygons()
-	local uv_data = #()
-	for uv_face_index = 1 to uv_faces_count do (
-		
-		local uv_face_verts_count = gco.numberPointsInFace uv_face_index
-		format "uv_face:%\n" uv_face_index
--- 		local uv_face = UVW_FACE_DATA uv_face_index
-		for vetr_handle = 1 to uv_face_verts_count do (
-			
-			local uv_vert_index	= gco.getVertexIndexFromFace 		uv_face_index vetr_handle
-			local geo_vert_index	= gco.getVertexGeomIndexFromFace 	uv_face_index vetr_handle
-			format "\tuv_vert:% geo_vert:%\n" uv_vert_index geo_vert_index
-		)
-		append uv_data uv_face
-	)
-)
 mod_uvw.getVertexIndexFromFace 1 5
 uv_data = collectUnwrapData mod_uvw
 
