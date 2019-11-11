@@ -2,7 +2,7 @@
 <SETTINGS>
   <Micra>
     <born val="04.25.2006" />
-    <version val="5.49" />
+    <version val="5.5" />
   </Micra>
   <Structures val="All registred Micra's Structures">
     <!--independent classes-->
@@ -41,8 +41,8 @@
     <mcDraw val="on" />
     <mcSpline val="on" />
     <mcPoly val="on" />
-	<mcPolyMap val="on" />
-	<mcMeshMap val="on" />
+    <mcPolyMap val="on" />
+    <mcMeshMap val="on" />
     <mcNode val="on" />
     <mcSnap val="on" />
     <mcSystem val="on" />
@@ -52,7 +52,6 @@
     <mcMsx val="on" />
     <mcNet val="on" info="Internet and Network Functions" />
     <mcSkin val="on" />
-
     <mcActionsTukej val="on" />
   </Structures>
   <Version val="All registred Micra's Scripts">

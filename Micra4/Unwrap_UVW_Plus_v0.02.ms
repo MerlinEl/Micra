@@ -8,7 +8,7 @@
 
 try (destroyDialog mcUnwrapEditorDialog) catch ()
 
-rollout mcUnwrapEditorDialog "UV+" width:96 height:592
+rollout mcUnwrapEditorDialog "UV+" width:96 height:648
 (
 	-->Locals
 	local vertex_position
@@ -61,6 +61,11 @@ rollout mcUnwrapEditorDialog "UV+" width:96 height:592
 	
 	spinner 'spn_offset_steps' "" pos:[60,164] width:32 height:16 range:[1,99,1] type:#integer scale:1 align:#left
 	label 'lbl_offset_steps' "step:" pos:[8,164] width:24 height:16 align:#left
+
+	button 'button_skew_verts_minus' "-" pos:[8,612] width:24 height:24 align:#left
+	button 'button_skew_verts_plus' "+" pos:[34,612] width:24 height:24 align:#left
+	GroupBox 'grp17' "Skew Verts" pos:[4,596] width:88 height:48 align:#left toolTip: "Skew Selected Vertices"
+	spinner 'spn_skev_angle' "" pos:[60,616] width:32 height:16 range:[-360,360,5] type:#integer scale:1 align:#left
 
 	--> Functions
 	fn offsetResizeSelection type  = (
@@ -295,6 +300,22 @@ rollout mcUnwrapEditorDialog "UV+" width:96 height:592
 		)
 	)
 	
+	fn skewSelectedVertices way = (	--disable angle snap for more accurate
+	
+		local gco = modpanel.getcurrentobject()
+		if not (mcPolyMap.isValidMod()) do return (mcMsgList.warn "not_unwrap")
+		local sel_verts = gco.getSelectedVertices()
+		local step = spn_skev_angle.value
+		local snap_state = mcSnap.getAngleSnapState()
+		if snap_state do mcSnap.setAngleSnapState false
+		case way of (
+			
+				#plus		: 	mcPolyMap.skewVerticesUvs gco sel_verts -step
+				#minus	: 	mcPolyMap.skewVerticesUvs gco sel_verts step
+		)
+		if snap_state do mcSnap.setAngleSnapState true
+	)
+	
 	fn copyVertexPos = (
 		
 		local gco = modpanel.getcurrentobject()
@@ -412,6 +433,9 @@ rollout mcUnwrapEditorDialog "UV+" width:96 height:592
 	on btn_copy_pos pressed do copyVertexPos()
 	on btn_paste_posx pressed do pastePos #X
 	on btn_paste_posy pressed do pastePos #Y
+	on button_skew_verts_plus pressed do (undo "Skew Vertices" on skewSelectedVertices #plus)
+	on button_skew_verts_minus pressed do (undo "Skew Vertices" on skewSelectedVertices #minus)
+	--on spn_skew_verts changed val do  (undo "Skew Vertices" on skewSelectedVertices val)
 	--<
 )
 

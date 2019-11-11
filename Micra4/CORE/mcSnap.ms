@@ -12,6 +12,10 @@
 */
 struct MICRA_SNAP
 (
+	private
+	maxglobal,
+	ip,
+	public
 	fn getSource = getSourceFileName(), --get path of this script
 	fn getActiveItems =
 	(
@@ -69,6 +73,32 @@ struct MICRA_SNAP
 		snapMode.Active =  stored_settings[2]
 		setItems false --diasble all
 		mcSnap.enabled stored_settings[3] on
+	),
+	--SNAP ANGLE
+	fn getAngleSnapState = (this.ip.ASnapStatus > 0),
+	fn setAngleSnapState state = 
+	(
+		if not isKindOf state BooleanClass then throw "Supplied value is not a boolean!"
+		if state then
+		(
+			if not this.getAngleSnapState() then this.ip.ToggleASnap()
+		)
+		else
+		(
+			if this.getAngleSnapState() then this.ip.ToggleASnap()			
+		)			
+		OK
+	),
+	fn getSnapAngle = (this.ip.SnapAngle_),
+	fn setSnapAngle ang = 
+	(
+		if not isKindOf ang Number then throw "Supplied value is not a number!"
+		this.ip.SnapAngle_ = ang as float -- return value	
+	),
+	on create do (
+	
+		this.maxglobal = (dotNetClass "Autodesk.Max.GlobalInterface").Instance
+		this.ip = maxglobal.COREInterface7
 	)
 	/*<end>*/
 )

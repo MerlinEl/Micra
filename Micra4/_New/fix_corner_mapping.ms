@@ -1,3 +1,6 @@
+-- global vsel_left
+-- global vsel_right
+-- global mod_uvw
 --select corner edges and run script
 fn fixCornerMapping obj = (
 
@@ -7,9 +10,11 @@ fn fixCornerMapping obj = (
 	esel = polyop.getEdgeSelection obj 
 	everts = polyop.getVertsUsingEdge obj esel
 	efaces = polyop.getFacesUsingEdge obj esel
-	--select faces for mapping
+	--select edge faces
 	subObjectLevel = 4
 	polyop.setFaceSelection obj efaces
+	--select whole element for mapping to prevent split uvs
+	obj.selectElement()
 	--add unwrap modifier
 	mod_uvw = Unwrap_UVW () 
 	modPanel.addModToSelection mod_uvw ui:on
@@ -38,7 +43,7 @@ fn fixCornerMapping obj = (
 		vsel_left = mod_uvw.getSelectedVertices()
 		mod_uvw.selectVertices (mcPoly.geoVertsToMapVerts everts geo_data)
 		vsel_right = (mod_uvw.getSelectedVertices()) - vsel_left
-	) else ( --split vertices in to two groups
+	) else ( --divide vertices in to two groups
 		
 		min_x = (mod_uvw.getVertexPosition 1 (uv_verts as Array)[1]).x
 		for v in uv_verts do (
@@ -52,18 +57,24 @@ fn fixCornerMapping obj = (
 			if pos_x <= min_x then vsel_right += #{v} else vsel_left +=#{v}
 		)
 	)
+return ok
 	--fix UV distortion on left vertices
 	mcPolyMap.skewVerticesUvs mod_uvw vsel_left 75
 	--fix UV distortion on left vertices
 	mcPolyMap.skewVerticesUvs mod_uvw vsel_right -75	
 	--
 	maxOps.CollapseNodeTo obj 1 true
-	subObjectLevel = sublvl
+	subObjectLevel = sublvl	
 )
 undo "Fix Corner Mapping" on fixCornerMapping $
 
 
 /*
+mcPolyMap.skewVerticesUvs mod_uvw vsel_left -4
+mcPolyMap.skewVerticesUvs mod_uvw vsel_right 4
+
+
+
 obj = $
 mod_uvw = modPanel.getCurrentObject()
 mcPoly.printGeometryData geo_data
