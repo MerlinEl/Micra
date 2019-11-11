@@ -300,20 +300,20 @@ rollout mcUnwrapEditorDialog "UV+" width:96 height:648
 		)
 	)
 	
-	fn skewSelectedVertices way = (	--disable angle snap for more accurate
+	fn skewSelectedVertices cv = (
 	
 		local gco = modpanel.getcurrentobject()
 		if not (mcPolyMap.isValidMod()) do return (mcMsgList.warn "not_unwrap")
 		local sel_verts = gco.getSelectedVertices()
 		local step = spn_skev_angle.value
-		local snap_state = mcSnap.getAngleSnapState()
-		if snap_state do mcSnap.setAngleSnapState false
-		case way of (
+		--local snap_state = mcSnap.getAngleSnapState()
+		--if snap_state do mcSnap.setAngleSnapState false	--disable angle snap for avoid max rotation steps
+		case cv of (
 			
 				#plus		: 	mcPolyMap.skewVerticesUvs gco sel_verts -step
 				#minus	: 	mcPolyMap.skewVerticesUvs gco sel_verts step
 		)
-		if snap_state do mcSnap.setAngleSnapState true
+		--if snap_state do mcSnap.setAngleSnapState true
 	)
 	
 	fn copyVertexPos = (
