@@ -5,7 +5,10 @@ rollout mcQuickMaterialsDialog "Quick Materials:" width:556 height:456
 	--variables and structures
 	struct MAT_ITEM (key, id, sid, tile_u, tile_v)
 -- hotfix > restricted_textures > 
--- prevent 2blend materials displayed as 3blend	(lh_plaster_a_v3_N. ID 305, lh_02_wall_bricks_v1_N, ID 302)
+-- prevent 2blend materials displayed as 3blend	(
+-- lh_plaster_a_v3_N, ID: 305, d:\!2k_games\scotch_dev\edit\materials\city\lost_heaven\terrain\ground\lh_grass_mud_gravel_a_v1.xml
+-- lh_02_wall_bricks_v1_N, ID: 302, d:\!2k_games\scotch_dev\edit\materials\city\lost_heaven\districts\lh_02_little_italy\lh_02_wall_bricks_v1.xml
+-- )
 	local restricted_textures = #("t033_diffusetexture3")	--always use lowercase
 	local xml_materials_table = (LS3DGUP.LS3DGUP.UtilsPath + "coll_bourbon_table.xml")	
 	local terrain_mat_lib_path = (LS3DGUP.LS3DGUP.UtilsPath + @"ground_material\bc_terrain.mat")

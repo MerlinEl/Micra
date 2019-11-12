@@ -112,6 +112,46 @@ struct MICRA_POLY_MAP_STRUCTURE	(
 		)
 		return el
 	),
+	/**
+	*@Usage Split object by uv islands
+	*@Example
+		mcPolyMap.splitObjectByUVElements $ --> split object by uv to seprate meshes
+		mcPolyMap.splitObjectByUVElements $ Expand:false -->split object by uv inside
+	*/
+	fn splitObjectByUVElements obj channel:1 Expand:true = (
+	
+		local mesh_obj = copy obj--copy the original object
+		mesh_obj.name = uniquename (obj.name +"_UVsplit")
+		convertToMesh mesh_obj--convert to editable mesh
+		local num_faces = mesh_obj.numfaces
+		while num_faces > 0 do ( --repeat until all elements have been detached
+
+		  local face_array = #(1)--init. an array including only face 1
+		  local cnt = 0--init. a counter  --repeat until the counter is higher than the faces stored in the array
+		  while cnt < face_array.count do (
+	
+			cnt += 1 --increase the counter --get all map vertices used by the current map face in the collection array:
+			local theVerts = meshop.getMapVertsUsingMapFace mesh_obj channel #(face_array[cnt])
+			--get all map faces used by these map vertices - --this gives us all neighbours of the current map face
+			local theFaces = meshop.getMapFacesUsingMapVert mesh_obj channel theVerts
+			--make sure only unique faces are written to the array
+			for f in theFaces where findItem face_array f == 0 do append face_array f
+		  )--end while cnt --once all connected faces in an element are collected, --create a new empty EMesh:
+		  --detach the collected faces
+		  num_faces -= face_array.count --get remain faces for detach
+		  local detached_faces = meshop.detachFaces mesh_obj face_array delete:true asMesh:Expand
+		  if Expand do (
+		  
+			  local new_emesh = Editable_mesh()		
+			  new_emesh.mesh = detached_faces					--Assign detached_faces to the EMesh's TriMesh
+			  new_emesh.transform = obj.transform				--Copy the transformation of the original object
+			  new_emesh.name = uniquename (obj.name +"_UVsplit")	--Assign a unique name based on the original one
+		  )
+		)--end while numfaces
+		--delete the clone which has no faces at this point or
+		--return new object with splited elements inside
+		if Expand then delete mesh_obj else mesh_obj 
+	),
 	fn skewVerticesUvs mod_uvw uv_verts angle_deg = (
 
 		mod_uvw.selectVertices uv_verts

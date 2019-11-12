@@ -49,8 +49,8 @@ struct MICRA_UV_TO_MESH_STRUCTURE	(
   			face = getmapface m1 channel j
   			setface m1 j face[1] face[2] face[3]
   		)
-  
-  		if fixelements do
+
+  		if fixelements == true do
   		(
   			local m2 = snapshotasmesh obj
   			local m3 = copy m1
@@ -64,24 +64,29 @@ struct MICRA_UV_TO_MESH_STRUCTURE	(
   				setvert m3 (f1[3]) (getvert m2 f2[3])
   			)
   			
-  			uv_mesh mesh:m3
+  			uv_mesh = mesh mesh:m3 pos:obj.pos
   			delete m2
   			delete m3
   		)
-  		
-  		/*if realscale do (
+
+  		if realscale  == true do (
 		
   			local uvwarea = meshop.getfacearea m1 #{1..m1.numfaces}
   			local factor = sqrt (geoarea/uvwarea)
   			scale m1 [factor,factor,0]
-  		)*/
+  		)	
 		
-  		uv_mesh mesh:m1
-  		delete m1
-  		gc light:true	
+		uv_mesh = mesh mesh:m1 pos:obj.pos
+		delete m1
+		gc light:true	
+		--add morpher modifier
+		local morph_mod = Morpher ()
+		select uv_mesh
+		modPanel.addModToSelection morph_mod ui:on
+		WM3_MC_BuildFromNode morph_mod 1 obj
 		uv_mesh
   	),
-	fn extractSelectedGeometryUVs uv_channel:1 = undo "Extract Geometry UVs" on (
+	fn morpSelectedObjectsToUvs uv_channel:1 = undo "Extract Geometry UVs" on (
 	
 		if selection.count == 0 do return (mcMsgList.warn "not_sel")
 		setwaitcursor()
@@ -97,8 +102,7 @@ struct MICRA_UV_TO_MESH_STRUCTURE	(
 				continue
 			)
 			--clone all selected object 
-			local obj_clone = copy o
-			obj_clone.name = uniqueName (o.name + "_UVs")
+			local obj_clone = mcPolyMap.splitObjectByUVElements o Expand:false
 			obj_clone.pos.x = sel_max_x + (sel_max_x / 3) -- move clone to right from original
 			--build uvs meshes
 			buildUvMesh obj_clone channel:uv_channel fixelements:fix size:100.0 realscale:real_scale
@@ -111,3 +115,7 @@ struct MICRA_UV_TO_MESH_STRUCTURE	(
 )	
  --create instance
 Global mcUvToMesh = mcStructMan.instanceStructure MICRA_UV_TO_MESH_STRUCTURE "mcUvToMesh"
+
+/*
+mcUvToMesh.morpSelectedObjectsToUvs()
+*/
