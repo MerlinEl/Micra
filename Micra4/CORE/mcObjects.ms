@@ -130,6 +130,7 @@ Struct mcBounds (pos, size)
 
 /*
 	rct = mcRect mi:[0,10] ma:[40,60]
+	rct = mcRect selection.min selection.max
 	rct.wi
 	rct.he
 	rct.si
@@ -177,11 +178,11 @@ Struct mcRect2D (
 
 
 /*
-	cu = cube2()
-	cub = cu mi:$.min ma:$.max
-	cub.mi
-	cub.he()
-	cub.si()
+	cu = mcCube obj.min obj.max
+	cu = mcCube selection.min selection.max
+	cu.mi
+	cu.he()
+	cu.si()
 */
 
 Struct mcCube

@@ -4,6 +4,9 @@ rollout mcQuickMaterialsDialog "Quick Materials:" width:556 height:456
 (
 	--variables and structures
 	struct MAT_ITEM (key, id, sid, tile_u, tile_v)
+-- hotfix > restricted_textures > 
+-- prevent 2blend materials displayed as 3blend	(lh_plaster_a_v3_N. ID 305, lh_02_wall_bricks_v1_N, ID 302)
+	local restricted_textures = #("t033_diffusetexture3")	--always use lowercase
 	local xml_materials_table = (LS3DGUP.LS3DGUP.UtilsPath + "coll_bourbon_table.xml")	
 	local terrain_mat_lib_path = (LS3DGUP.LS3DGUP.UtilsPath + @"ground_material\bc_terrain.mat")
 	local material_color_types = #(color 173 136 255, color 90 200 200, color 255 136 213)
@@ -669,9 +672,20 @@ rollout mcQuickMaterialsDialog "Quick Materials:" width:556 height:456
 		str = substituteString str "\\\\" "\\"
 	) 
 	
+	/**
+	*@Example > 
+		node_name >
+			D686_DiffuseTextureScale	<-- skip
+			T000_DiffuseTexture			<-- OK
+			T015_DiffuseTexture1		<-- OK
+			T033_DiffuseTexture3		<-- OK
+		tex_type > 
+			DiffuseTexture
+	*/
 	fn isNodeType node_name tex_type = (
-
-		local key_str = (filterString node_name "_")[2] --cut prefix
+	
+		if findItem restricted_textures node_name != 0 do return false --hotfix(textures which will not be in preview)
+		local key_str = (filterString node_name "_")[2] --cut prefix ex: T015_
 		--cut last integer
 		local num_str = "0123456789"
 		if findString num_str key_str[key_str.count] != undefined do (

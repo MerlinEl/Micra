@@ -24,19 +24,25 @@ struct MICRA_MESSAGE_LIST_STRUCTURE	(
 	fn getSource = getSourceFileName(), --get path of this script
 	/**
 	*@Usage list of all posible mesages
+		msg_key	key shortcut for message
+		pre		string which will be added to message prefix
+		suf		string which will be added to message suffix
+		mbox	if true then show messagebox else print message to listener
 	*@Example
 		if not (isValidObject obj_mesh) do return (mcMsgList.warn "not_mesh")
 	*/
-	fn warn msg_key = (
+	fn warn msg_key pre:"" suf:"" mbox:true = (
 	
 		local msg = case msg_key of (
 
 			"call_help"		: "Something wierd was happen. Call Merlin to help you :-)"
 			"not_mesh"		: "Editable Mesh must be selected."
 			"not_poly"		: "Editable Poly must be selected."
-			"not_mesh_or_poly": "Editable Poly or Editable Mesh must be selected."
+			"not_geo"			: "Editable Poly or Editable Mesh must be selected."
 			"not_unwrap"		: "Object must have Unwrap Modifier."
+			"not_map"		: "Object must have some UVW Channels."
 			"not_spline"		: "Spline must be selected."
+			"not_sel"			: "Select some object(s) to progress."
 			"not_vsel"		: "Select some vertices to progress."
 			"not_esel"		: "Select some edges to progress."
 			"not_fsel"			: "Select some faces to progress."
@@ -46,7 +52,14 @@ struct MICRA_MESSAGE_LIST_STRUCTURE	(
 			"not_sweep"		: "Must be Spline with sweep Modifier applyed."
 			default			: "Unknown Error...."
 		)
-		messageBox msg title:"Warning:"
+		if mbox then (
+		
+			messageBox (pre + msg + suf) title:"Warning:"
+			
+		) else (
+		
+			format "Warning > \n\t%\n" (pre + msg + suf)
+		)
 		false
 	),
 	fn info msg_key = (
