@@ -152,7 +152,7 @@ struct MICRA_POLY_MAP_STRUCTURE	(
 		--return new object with splited elements inside
 		if Expand then delete mesh_obj else mesh_obj 
 	),
-	fn skewVerticesUvs mod_uvw uv_verts angle_deg = (
+	fn skewVerticesUvs mod_uvw uv_verts angle_deg = ( --TODO add parameter axis X Y
 
 		mod_uvw.selectVertices uv_verts
 		local verts_pos = for v in uv_verts collect mod_uvw.getVertexPosition 1 v
@@ -164,6 +164,15 @@ struct MICRA_POLY_MAP_STRUCTURE	(
 			new_pos.y = verts_pos[i].y
 			mod_uvw.setVertexPosition 1 vert_index new_pos
 		)
+	),
+	fn centerSelectionByOffset = (
+	
+		if not (isValidMod()) do return (mcMsgList.warn "not_unwrap")
+		local gco = modPanel.getCurrentObject()
+		local sel_center = gco.getSelCenter()
+		local shift_x = int ( floor sel_center.x )
+		local shift_y = int ( floor sel_center.y )
+		gco.MoveSelected [-shift_x, -shift_y, 0]
 	),
 	/**
 	*@Usage	GEOMETRY DATABASE >  Remove unwrap data for each face

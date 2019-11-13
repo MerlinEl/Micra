@@ -68,7 +68,14 @@ rollout mcQuickMaterialsDialog "Quick Materials:" width:556 height:456
 	label 'lbl2' "Mapping Angle:" pos:[152,265] width:72 height:16 align:#left
 	radiobuttons 'rdo_mappig_type' "Mapping:" pos:[10,380] width:114 height:30 labels:#("Planar", "Box") columns:2 toolTip:"Experimental Mode. Is not Finished yet." align:#left
 	button 'btn_run_fn' "GO" pos:[256,428] width:24 height:20 align:#left
-	dropDownList 'ddl_fn_list' "" pos:[4,428] width:248 height:21 items:#("Create Curb Custom", "Create Curb From Edges", "Create Curb From Spline", "Redraw Spline At Zero") align:#left
+	dropDownList 'ddl_fn_list' "" pos:[4,428] width:248 height:21 items:#(
+	
+		"Create Curb Custom", 
+		"Create Curb From Edges", 
+		"Create Curb From Spline", 
+		"Redraw Spline At Zero",
+		"Center UVs By Offset" 
+	)
 
 	/**
 	*@Usage add one or more material libraries in to Temporary Library
@@ -1078,6 +1085,7 @@ rollout mcQuickMaterialsDialog "Quick Materials:" width:556 height:456
 			
 				 undo "Redraw Spline" on ::gLs3dQuickMaterials.redrawSplineAtZero selection[1]
 			)
+			"Center UVs By Offset" : undo "Center UVs By Offset" on ::mcPolyMap.centerSelectionByOffset()
 		)
 	)
 

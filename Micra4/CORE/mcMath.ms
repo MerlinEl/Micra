@@ -13,6 +13,18 @@ struct MICRA_MATH (
 
 	fn getSource = getSourceFileName(), --get path of this script
 	fn isInteger num = (mod num 1 == 0),
+	/**
+	*@Usage	> get number of digits
+	*@Example
+		numDigits 0.56456 --> 0
+		numDigits 45.56456 --> 2
+		numDigits 454.56456 --> 3
+	*/
+	fn numDigits num = (
+
+		num = ( floor ( log10 (abs num) ) ) + 1
+		int (amax num 0)
+	),
 	--usage:	mcMath.roundToInt 25.45 10
 	--receives the number 120 435 it return 120 000 wich is the nearest ten thousand etc..
 	fn roundToInt num round = (
