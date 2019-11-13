@@ -67,49 +67,6 @@ struct sTerrainGeneratorCollision (
 		)
 	),
 	
-	private fn getCollisionLayer obj = (
-	
-		local layer_name = obj.layer.name + "_coll"
-		local collision_layer = LayerManager.getLayerFromName layer_name --pick layer by name
-		if collision_layer == undefined do collision_layer = LayerManager.newLayerFromName layer_name --create layer if not exists
-		collision_layer
-	),
-
-	private fn getCollisionNode obj = (
-	
-		local node_name
-		if obj.parent != undefined then (
-		
-			local geometry_node_name = obj.parent.name
-			local suffix_geometry_index = findString geometry_node_name "_geometry"
-			if suffix_geometry_index != undefined then (
-			
-				node_name = (subString geometry_node_name 1 suffix_geometry_index) + "coll" 	
-				
-			) else (
-				
-				--format "Unable to create collision from [ % ]. Export Node has invalid name [ % ].\n" obj.name obj.parent.name
-				gProgLog.msg ("Unable to create collision from [ "+obj.name+" ]. Export Node has invalid name [ "+obj.parent.name+" ].") ty:"error"
-				return undefined
-			)
-		)  else (
-			
-			-- format "Unable to create collision from [ % ]. Object is not linked to Export Node.\n" obj.name
-			gProgLog.msg ("Unable to create collision from [ "+obj.name+" ]. Object is not linked to Export Node.") ty:"error"
-			return undefined
-		)
-		local coll_export_node = getNodeByName node_name
-		if coll_export_node == undefined then (
-			
-			-- format "Unable to create collision from [ % ]. Missing collision node [ % ].\n" obj.name node_name
-			gProgLog.msg ("Unable to create collision from [ "+obj.name+" ]. Missing collision node [ "+node_name+" ].") ty:"error"
-			undefined
-		) else (
-			
-			coll_export_node
-		)
-	),
-	
 	private fn cloneObject obj suffix = (
 		
 		local tri_mesh = snapshotAsMesh obj --snapshot as TriMesh to memory
@@ -143,8 +100,8 @@ struct sTerrainGeneratorCollision (
 		for i = 1 to sel_count where superClassOf selection[i] == GeometryClass do (
 		
 			local o = selection[i]
-			local coll_layer = getCollisionLayer o
-			local coll_export_node = getCollisionNode o
+			local coll_layer = ::gCityManager.getCollisionLayer o
+			local coll_export_node = ::gCityManager.getCollisionNode o
 			if coll_export_node == undefined do (
 			
 				-- format "Unable create collision for object:%. Missing collision Node.\n" o.name
@@ -202,8 +159,8 @@ struct sTerrainGeneratorCollision (
 		for i = 1 to sel_count where superClassOf selection[i] == GeometryClass do (
 		
 			local o = selection[i]
-			local coll_layer = getCollisionLayer o
-			local coll_export_node = getCollisionNode o
+			local coll_layer = ::gCityManager.getCollisionLayer o
+			local coll_export_node = ::gCityManager.getCollisionNode o
 			if coll_export_node == undefined do (
 			
 				--format "Unable create collision for object:%. Missing collision Node.\n" o.name

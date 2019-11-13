@@ -88,7 +88,7 @@ struct sCityManager	(
 		update new_obj
 		new_obj
 	),
-	fn createCarAndPlayerCollisions CCV:true = (
+	fn createCarAndPlayerCollisions CCV:true SPIN:false = (
 
 		local obj = selection[1]
 		if classOf obj != Editable_Poly do return false
@@ -118,8 +118,9 @@ struct sCityManager	(
 			vert_2 = polyOp.getVert obj everts_b[1]
 		) 
 		--check CCV points order
-		
+		--TODO
 		local verts_pos = if CCV then #(vert_1, vert_2, vert_3, vert_4) else #(vert_4, vert_3, vert_2, vert_1)
+		if SPIN do verts_pos = #(verts_pos[1], verts_pos[2], verts_pos[4], verts_pos[3])
 		subobjectLevel = 0 --exit from current selection
 		local player_coll = createStairsCollision obj verts_pos 100 7	--player
 		local car_coll 	 = createStairsCollision obj verts_pos 100 29		--car
@@ -129,3 +130,39 @@ struct sCityManager	(
 )	
  --create instance
 Global gCityManager = mcStructMan.instanceStructure sCityManager "gCityManager"
+
+
+
+/*
+obj = $
+esel = polyOp.getEdgeSelection obj as Array
+everts_a = (polyOp.getVertsUsingEdge obj esel[1] as Array)
+everts_b = (polyOp.getVertsUsingEdge obj esel[2] as Array)
+vert_1 = polyOp.getVert obj everts_b[2]
+vert_2 = polyOp.getVert obj everts_b[1]
+vert_3 = polyOp.getVert obj everts_a[2]
+vert_4 = polyOp.getVert obj everts_a[1]
+v1 = vert_1 - vert_2
+v2 = vert_2 - vert_3
+--check if both vectors directing in same way
+if (dot v1 v2) < 0 then (
+	--swap vertices
+	v = everts_b[1]
+	everts_b[1] = everts_b[2]
+	everts_b[2] = v
+	vert_1 = polyOp.getVert obj everts_b[2]
+	vert_2 = polyOp.getVert obj everts_b[1]
+	v1 = vert_1 - vert_2
+	v2 = vert_2 - vert_3
+) 
+--now is both paralel vectors directing in same way
+dot v1 v2
+verts_pos = #(everts_b[2], everts_b[1], everts_a[2], everts_a[1])
+
+polyop.createPolygon $ verts_pos
+update $
+
+v3 = vert_2 - vert_3
+cross v1 v3
+
+*/
