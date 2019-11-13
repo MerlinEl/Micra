@@ -64,20 +64,28 @@ struct sCityManager	(
 	),
 	fn createStairsCollision obj verts_pos mat_id layer_index = (
 	
-		local new_obj = mcpoly.createPolygonObject verts_pos
-		new_obj.name = uniqueName (obj.name+"stairs_coll_")
-		--set material ID
-		for f=1 to new_obj.numFaces do ( polyOp.setFaceMatID new_obj f mat_id )
-		--add semantic material	
-		local s_mat = currentMaterialLibrary["semantic_materials"]
-		new_obj.material = s_mat
-		--add collision prameter (Data Manager)
-		AddCustomAttributeByName new_obj "CollisionMesh"
-		new_obj.'~layer' = layer_index
-		local coll_layer = getCollisionLayer obj
-		local coll_export_node = getCollisionNode obj
-		coll_layer.addNode new_obj --ad to coll laer
-		new_obj.parent = coll_export_node -- link to coll node
+		local new_obj = Editable_mesh()
+		undo off (
+		
+			convertToPoly new_obj
+			for p in verts_pos do polyop.createVert new_obj p -- node:<node=unsupplied>
+			polyop.createPolygon new_obj #(1,2,4,3)	
+			new_obj.pivot = (new_obj.min + new_obj.max) / 2 --center pivot
+			new_obj.name = uniqueName (obj.name+"stairs_coll_")
+			--set material ID
+			for f=1 to new_obj.numFaces do ( polyOp.setFaceMatID new_obj f mat_id )
+			--add semantic material	
+			local s_mat = currentMaterialLibrary["semantic_materials"]
+			new_obj.material = s_mat
+			--add collision prameter (Data Manager)
+			AddCustomAttributeByName new_obj "CollisionMesh"
+			new_obj.'~layer' = layer_index
+			local coll_layer = getCollisionLayer obj
+			local coll_export_node = getCollisionNode obj
+			coll_layer.addNode new_obj --ad to coll laer
+			new_obj.parent = coll_export_node -- link to coll node
+		)
+		update new_obj
 		new_obj
 	),
 	fn createCarAndPlayerCollisions = (
@@ -90,9 +98,9 @@ struct sCityManager	(
 		if everts.numberset != 4 do return false
 		subobjectLevel = 0 --exit from current selection
 		local verts_pos = for v in everts collect polyop.getVert obj v
-		
-		local player_coll= createStairsCollision obj verts_pos 100 7	--player
-		local car_coll 	= createStairsCollision obj verts_pos 100 29		--car
+
+		local player_coll = createStairsCollision obj verts_pos 100 7	--player
+		local car_coll 	 = createStairsCollision obj verts_pos 100 29		--car
 		select player_coll
 	)
 	/*<end>*/

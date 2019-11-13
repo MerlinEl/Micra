@@ -89,16 +89,6 @@ struct MICRA_POLY
 		for f in faceSel where (polyOp.getVertsUsingFace obj.baseobject f).numberSet != 4 do return false
 		return true
 	),
-	fn createPolygonObject verts_pos_arr = (
-	
-		local new_emesh = mesh numverts:4
-		convertToPoly new_emesh
-		for i=1 to 4 do polyOp.setVert new_emesh i verts_pos_arr[i]	
-		polyop.createPolygon new_emesh #(1,2,4,3)
-		update new_emesh	
-		new_emesh.pivot = (new_emesh.min + new_emesh.max) / 2 --center pivot
-		new_emesh
-	),
 	fn intersectionExists obj =
 	(
 		local objBase = obj.baseobject
