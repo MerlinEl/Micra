@@ -69,7 +69,7 @@ struct sCityManager	(
 		
 			convertToPoly new_obj
 			for p in verts_pos do polyop.createVert new_obj p -- node:<node=unsupplied>
-			polyop.createPolygon new_obj #(1,2,4,3)	
+			polyop.createPolygon new_obj #(1,2,3,4)	
 			new_obj.pivot = (new_obj.min + new_obj.max) / 2 --center pivot
 			new_obj.name = uniqueName (obj.name+"stairs_coll_")
 			--set material ID
@@ -88,17 +88,39 @@ struct sCityManager	(
 		update new_obj
 		new_obj
 	),
-	fn createCarAndPlayerCollisions = (
+	fn createCarAndPlayerCollisions CCV:true = (
 
 		local obj = selection[1]
 		if classOf obj != Editable_Poly do return false
-		local esel = polyOp.getEdgeSelection obj
-		if esel.numberset != 2 do return false
-		local everts = polyOp.getVertsUsingEdge obj esel
-		if everts.numberset != 4 do return false
+		local esel = polyOp.getEdgeSelection obj as Array
+		if esel.count != 2 do return false
+		--------------------------
+		-- reorder 4 vertices CCV
+		--------------------------
+		--get edges vertices
+		local everts_a = (polyOp.getVertsUsingEdge obj esel[1] as Array)
+		local everts_b = (polyOp.getVertsUsingEdge obj esel[2] as Array)
+		local vert_1 = polyOp.getVert obj everts_b[2]
+		local vert_2 = polyOp.getVert obj everts_b[1]
+		local vert_3 = polyOp.getVert obj everts_a[2]
+		local vert_4 = polyOp.getVert obj everts_a[1]
+		--get edges vectors
+		local v1 = vert_1 - vert_2
+		local v2 = vert_2 - vert_3
+		--check if both vectors directing in same way (if not switch)
+		if (dot v1 v2) < 0 then (
+			--swap vertices
+			local v = everts_b[1]
+			everts_b[1] = everts_b[2]
+			everts_b[2] = v
+			--get positoins again
+			vert_1 = polyOp.getVert obj everts_b[2]
+			vert_2 = polyOp.getVert obj everts_b[1]
+		) 
+		--check CCV points order
+		
+		local verts_pos = if CCV then #(vert_1, vert_2, vert_3, vert_4) else #(vert_4, vert_3, vert_2, vert_1)
 		subobjectLevel = 0 --exit from current selection
-		local verts_pos = for v in everts collect polyop.getVert obj v
-
 		local player_coll = createStairsCollision obj verts_pos 100 7	--player
 		local car_coll 	 = createStairsCollision obj verts_pos 100 29		--car
 		select player_coll

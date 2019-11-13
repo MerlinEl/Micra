@@ -62,7 +62,7 @@ rollout mcCityManDialog "" width:500 height:988
 	button 'btn_sel_vis_geo' "Select Visible Geometry" pos:[376,828] width:112 height:20 toolTip:"Select Visible Geometry" align:#left
 	button 'btn_move_geo_to_layers' "Distribute Geometry" pos:[376,888] width:108 height:20 toolTip:"Move Selected Objects in to separate Layer" align:#left
 	button 'btn_run_fn' "GO" pos:[456,964] width:36 height:20 align:#left
-	dropDownList 'ddl_fn_list' "" pos:[148,964] width:304 height:21 items:#("Generate Player and Car Collisions") align:#left
+	dropDownList 'ddl_fn_list' "" pos:[148,964] width:304 height:21 items:#("Generate Player and Car Collisions CCV", "Generate Player and Car Collisions CV") align:#left
 	label 'lbl_advanced_tools' "Advanced Tools:" pos:[12,964] width:132 height:20 align:#left
 	--Local variables
 	local autosel = on
@@ -673,7 +673,11 @@ rollout mcCityManDialog "" width:500 height:988
 		format "RUN CMD:%\n" cmd_name
 		case cmd_name of (
 			
-			"Generate Player and Car Collisions" : (
+			"Generate Player and Car Collisions CV" : (
+				
+				undo "Create Car and Player Collision" on ::gCityManager.createCarAndPlayerCollisions CCV:false 
+			)
+			"Generate Player and Car Collisions CCV" : (
 				
 				undo "Create Car and Player Collision" on ::gCityManager.createCarAndPlayerCollisions() 
 			)
