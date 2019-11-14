@@ -65,7 +65,8 @@ rollout mcCityManDialog "" width:500 height:988
 	dropDownList 'ddl_fn_list' "" pos:[148,964] width:304 height:21 items:#(
 	
 		"Generate Player and Car Collisions",
-		"Select Visible Lodes 2" 
+		"Select Visible Lodes 2" ,
+		"Add Lodes 2 and Fix Pivot"
 	) 
 	label 'lbl_advanced_tools' "Advanced Tools:" pos:[12,964] width:132 height:20 align:#left
 	--Local variables
@@ -677,13 +678,17 @@ rollout mcCityManDialog "" width:500 height:988
 		format "RUN CMD:%\n" cmd_name
 		case cmd_name of (
 			
-			"Generate Player and Car Collisions" : (
+			"Generate Player and Car Collisions" : if queryBox "Generate Player and Car Collisions?" title:"Organize:" do (
 				
 				undo "Create Car and Player Collision" on ::gCityManager.createCarAndPlayerCollisions()
 			)
 			"Select Visible Lodes 2"  : (
 				
 				undo "Create Car and Player Collision" on ::gCityManager.selectVisibleNodesByName "lod2"
+			)
+			"Add Lodes 2 and Fix Pivot"  : if queryBox "Add Lodes 2 and Fix Pivot in Selection?" title:"Organize:" do (
+				
+				undo off ::gCityManager.addLodes2AndFixPivot (selection as array)
 			)
 		)
 	)

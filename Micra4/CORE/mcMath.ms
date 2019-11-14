@@ -239,6 +239,12 @@ struct MICRA_MATH (
 		local v2=normalize (p2-p1)
 		normalize (cross v2 v3)
 	),
+	fn getPointsCenter pos_arr = (
+	
+		local points_center = [0,0,0]
+		for p in pos_arr do points_center += p
+		points_center /= pos_arr.count
+	),
 	function get2DBoundingBox pos_array =
 	(
 		local bmin, bmax

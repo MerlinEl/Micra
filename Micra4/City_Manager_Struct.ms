@@ -96,20 +96,21 @@ struct sCityManager	(
 		with redraw off  try(
 		
 			local esel = polyOp.getEdgeSelection obj
+			/*local everts_a = polyOp.getVertsUsingEdge obj (esel as array)[1]
+			local everts_b = polyOp.getVertsUsingEdge obj (esel as array)[2]*/
 			local everts = polyOp.getVertsUsingEdge obj esel
 			local verts_pos = for v in everts collect (polyOp.getVert obj v) 
-			local points_center = [0,0,0]
-			for p in verts_pos do points_center += p
-			points_center /= verts_pos.count
+			local points_center = mcMath.getPointsCenter verts_pos
 			--point size:10 pos:points_center wirecolor:red
 			local first_v = verts_pos[1] - points_center 
+			--presort vertices by center (not works perfect, TODO fix it)
 			qsort verts_pos mcPoly.sortVertsByCenter center:points_center p:first_v CW:false
 			--FLIP > check if both vectors directing in same way (if not switch)
 			local v1 = verts_pos[1] - verts_pos[2]
 			local v2 = verts_pos[4] - verts_pos[3]
-			format "dot:%\n" (dot v1 v2)
-			if (dot v1 v2) < 0 then (
-				--swap vert pos
+			--format "dot:%\n" (dot v1 v2)
+			if (dot v1 v2) < 0 then ( --swap verts pos in edge
+				
 				local v = verts_pos[1]
 				verts_pos[1] = verts_pos[2]
 				verts_pos[2] = v
@@ -150,7 +151,64 @@ struct sCityManager	(
 		
 		local objs = (for o in objects where not o.isHidden and findString o.name node_name != undefined collect o)
 		if objs.count != 0 do select objs
-	)
+	),
+	fn rebuildObject obj = (   
+
+		if (classOf obj != Editable_Poly) then (convertToPoly obj)
+		local obj_name = obj.name 
+		local obj_layer = obj.layer
+		local obj_parent = obj.parent
+		local obj_wirecolor = obj.wirecolor
+		local obj_pivot = obj.pivot
+		obj.name = uniqueName "Object For Delete"
+		polyOp.detachFaces obj obj.faces delete:true asNode:true name:obj_name
+		select obj --prevent error msg
+		if (LS3DGUP.LODU.GetNumLODs()) != 0 do (LS3DGUP.LODU.DestroySet())
+		delete obj
+		local new_obj = getNodeByName obj_name
+		obj_layer.addNode new_obj
+		new_obj.parent = obj_parent
+		new_obj.wirecolor = obj_wirecolor
+		new_obj.pivot = obj_pivot
+		update new_obj
+		select new_obj
+		new_obj
+	),
+	fn addLodes2AndFixPivot objs = (
+	
+		if objs.count < 2 do return (mcMsgList.warn "not_sel")
+		local geo_objs = for o in objs where findString o.name "lod0" != undefined collect o
+		local failed_atempts = 0
+		for o in geo_objs do (
+
+			local lod2_name = substituteString o.name "lod0" "lod2"
+			--format "lod 0:% 2:%\n" o.name lod2_name
+			local lod2_obj = getNodeByName lod2_name
+			if classOf lod2_obj != Editable_Poly do (
+
+				format "unable to setup  lod2 for:%\n" o.name
+				failed_atempts += 1
+				continue
+			)
+			o.pivot = (o.min + o.max) / 2 --center pivot
+			lod2_obj = rebuildObject lod2_obj
+			--add lod2
+			try (
+				select o
+				if (LS3DGUP.LODU.GetNumLODs()) != 0 do (LS3DGUP.LODU.DestroySet())
+				LS3DGUP.LODU.CreateSet()
+				LS3DGUP.LODU.AddNodesToSet #(lod2_obj)
+				LS3DGUP.LODU.SetSelectedLOD 0
+				LS3DGUP.LODU.SetDistance 150
+				LS3DGUP.LODU.SetSelectedLOD 1
+				LS3DGUP.LODU.SetDistance 250
+			) catch (
+			
+				failed_atempts += 1
+			)
+		)
+		if failed_atempts > 0 do MessageBox "Some Lods was not aded. See trace log for more details." title:"Warning"
+	) 
 	/*<end>*/
 )	
  --create instance
