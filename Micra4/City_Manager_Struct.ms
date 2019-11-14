@@ -174,7 +174,7 @@ struct sCityManager	(
 		select new_obj
 		new_obj
 	),
-	fn addLodes2AndFixPivot objs = (
+	fn addTerrainLodes2AndFixPivot objs = (
 	
 		if objs.count < 2 do return (mcMsgList.warn "not_sel")
 		local geo_objs = for o in objs where findString o.name "lod0" != undefined collect o
@@ -182,6 +182,39 @@ struct sCityManager	(
 		for o in geo_objs do (
 
 			local lod2_name = substituteString o.name "lod0" "lod2"
+			--format "lod 0:% 2:%\n" o.name lod2_name
+			local lod2_obj = getNodeByName lod2_name
+			if classOf lod2_obj != Editable_Poly do (
+
+				format "unable to setup  lod2 for:%\n" o.name
+				failed_atempts += 1
+				continue
+			)
+			o.pivot = (o.min + o.max) / 2 --center pivot
+			lod2_obj = rebuildObject lod2_obj
+			--add lod2
+			try (
+				select o
+				if (LS3DGUP.LODU.GetNumLODs()) != 0 do (LS3DGUP.LODU.DestroySet())
+				LS3DGUP.LODU.CreateSet()
+				LS3DGUP.LODU.AddNodesToSet #(lod2_obj)
+				LS3DGUP.LODU.SetSelectedLOD 0
+				LS3DGUP.LODU.SetDistance 250
+			) catch (
+			
+				failed_atempts += 1
+			)
+		)
+		if failed_atempts > 0 do MessageBox "Some Lods was not aded. See trace log for more details." title:"Warning"
+	),
+	fn addCustomLodes2AndFixPivot objs = (
+	
+		if objs.count < 2 do return (mcMsgList.warn "not_sel")
+		local geo_objs = for o in objs where findString o.name "lod0" != undefined collect o
+		local failed_atempts = 0
+		for o in geo_objs do (
+
+			local lod2_name = substituteString o.name "lod0" "lod1"
 			--format "lod 0:% 2:%\n" o.name lod2_name
 			local lod2_obj = getNodeByName lod2_name
 			if classOf lod2_obj != Editable_Poly do (
@@ -208,7 +241,7 @@ struct sCityManager	(
 			)
 		)
 		if failed_atempts > 0 do MessageBox "Some Lods was not aded. See trace log for more details." title:"Warning"
-	) 
+	)
 	/*<end>*/
 )	
  --create instance
