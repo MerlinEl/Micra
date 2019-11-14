@@ -62,69 +62,94 @@ struct sCityManager	(
 			coll_export_node
 		)
 	),
-	fn createStairsCollision obj verts_pos mat_id layer_index = (
+	fn createStairsCollision verts_pos mat_id coll_index coll_layer coll_node mat obj_name= (
 	
-		local new_obj = Editable_mesh()
+		new_obj = mcPoly.createPolygonObj verts_pos obj_name
 		undo off (
 		
-			convertToPoly new_obj
-			for p in verts_pos do polyop.createVert new_obj p -- node:<node=unsupplied>
-			polyop.createPolygon new_obj #(1,2,3,4)	
-			new_obj.pivot = (new_obj.min + new_obj.max) / 2 --center pivot
-			new_obj.name = uniqueName (obj.name+"stairs_coll_")
 			--set material ID
 			for f=1 to new_obj.numFaces do ( polyOp.setFaceMatID new_obj f mat_id )
 			--add semantic material	
-			local s_mat = currentMaterialLibrary["semantic_materials"]
-			new_obj.material = s_mat
+			new_obj.material = mat
 			--add collision prameter (Data Manager)
 			AddCustomAttributeByName new_obj "CollisionMesh"
-			new_obj.'~layer' = layer_index
-			local coll_layer = getCollisionLayer obj
-			local coll_export_node = getCollisionNode obj
+			new_obj.'~layer' = coll_index
 			coll_layer.addNode new_obj --ad to coll laer
-			new_obj.parent = coll_export_node -- link to coll node
+			new_obj.parent = coll_node -- link to coll node
 		)
-		update new_obj
 		new_obj
 	),
-	fn createCarAndPlayerCollisions CCV:true SPIN:false = (
+	fn createCarAndPlayerCollisions = (
 
 		local obj = selection[1]
 		if classOf obj != Editable_Poly do return false
 		local esel = polyOp.getEdgeSelection obj as Array
 		if esel.count != 2 do return false
-		--------------------------
-		-- reorder 4 vertices CCV
-		--------------------------
-		--get edges vertices
-		local everts_a = (polyOp.getVertsUsingEdge obj esel[1] as Array)
-		local everts_b = (polyOp.getVertsUsingEdge obj esel[2] as Array)
-		local vert_1 = polyOp.getVert obj everts_b[2]
-		local vert_2 = polyOp.getVert obj everts_b[1]
-		local vert_3 = polyOp.getVert obj everts_a[2]
-		local vert_4 = polyOp.getVert obj everts_a[1]
-		--get edges vectors
-		local v1 = vert_1 - vert_2
-		local v2 = vert_2 - vert_3
-		--check if both vectors directing in same way (if not switch)
-		if (dot v1 v2) < 0 then (
-			--swap vertices
-			local v = everts_b[1]
-			everts_b[1] = everts_b[2]
-			everts_b[2] = v
-			--get positoins again
-			vert_1 = polyOp.getVert obj everts_b[2]
-			vert_2 = polyOp.getVert obj everts_b[1]
-		) 
-		--check CCV points order
-		--TODO
-		local verts_pos = if CCV then #(vert_1, vert_2, vert_3, vert_4) else #(vert_4, vert_3, vert_2, vert_1)
-		if SPIN do verts_pos = #(verts_pos[1], verts_pos[2], verts_pos[4], verts_pos[3])
-		subobjectLevel = 0 --exit from current selection
-		local player_coll = createStairsCollision obj verts_pos 100 7	--player
-		local car_coll 	 = createStairsCollision obj verts_pos 100 29		--car
+			
+		local coll_layer = getCollisionLayer obj
+		local coll_export_node = getCollisionNode obj
+		local s_mat = currentMaterialLibrary["semantic_materials"]
+		if coll_export_node == undefined or s_mat == undefined do return false
+		
+		SuspendEditing()
+		local player_coll = #()
+		with redraw off  try(
+		
+			local esel = polyOp.getEdgeSelection obj
+			local everts = polyOp.getVertsUsingEdge obj esel
+			local verts_pos = for v in everts collect (polyOp.getVert obj v) 
+			local points_center = [0,0,0]
+			for p in verts_pos do points_center += p
+			points_center /= verts_pos.count
+			--point size:10 pos:points_center wirecolor:red
+			local first_v = verts_pos[1] - points_center 
+			qsort verts_pos mcPoly.sortVertsByCenter center:points_center p:first_v CW:false
+			--FLIP > check if both vectors directing in same way (if not switch)
+			local v1 = verts_pos[1] - verts_pos[2]
+			local v2 = verts_pos[4] - verts_pos[3]
+			format "dot:%\n" (dot v1 v2)
+			if (dot v1 v2) < 0 then (
+				--swap vert pos
+				local v = verts_pos[1]
+				verts_pos[1] = verts_pos[2]
+				verts_pos[2] = v
+			)
+			--CW to CCV > always sort vertices by CCW
+			local normal_angle = cross (verts_pos[1] - verts_pos[2]) (verts_pos[3] - verts_pos[2])
+			if normal_angle.z > 0 do verts_pos = mcArray.reverseArray verts_pos
+			--format "normal:%\n"	normal_angle
+			--visualize + info
+			/*local vcolors = #(red, green, blue, yellow)
+			local scolors = #("red", "green", "blue", "yellow")
+			for i=1 to verts_pos.count do (
+
+				local p1 = verts_pos[i]
+				local p2 = if i < verts_pos.count then verts_pos[i+1] else verts_pos[1] --next or first
+				local v1 = p1 - points_center
+				local v2 = p2 - points_center
+				ang = mcMath.getVectorsAngle first_v v1
+				format "vectors % - % angle:%\n" scolors[1] scolors[i] ang 
+
+				local te = text size:20 kerning:0 leading:0 pos:p1 wirecolor:vcolors[i]
+				te.text = i as string
+				te.rotation.x_rotation += 90
+				te.rotation.z_rotation -= 90
+				mcSpline.drawArrow points_center p1 head_size:4 clr:vcolors[i]
+			)*/
+			subobjectLevel = 0 --exit from current selection
+			local player_name = uniqueName (obj.name+"_stairs_player_coll_")
+			local car_name = uniqueName (obj.name+"_stairs_car_coll_")
+			player_coll = createStairsCollision verts_pos 100 7  coll_layer coll_export_node s_mat player_name --player
+			local car_coll 	= createStairsCollision verts_pos 100 29 coll_layer coll_export_node s_mat car_name	--car
+
+		) catch (ResumeEditing())
+		ResumeEditing()
 		select player_coll
+	),
+	fn selectVisibleNodesByName node_name = (
+		
+		local objs = (for o in objects where not o.isHidden and findString o.name node_name != undefined collect o)
+		if objs.count != 0 do select objs
 	)
 	/*<end>*/
 )	

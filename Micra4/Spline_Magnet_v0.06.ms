@@ -153,7 +153,6 @@ struct splineMagnetStruct
 			on start do
 			(
 				-- print "start tool"
-				mcSystem.setFocusToMaxActiveViewport()
 				if acs.errorCheck() do #stop
 			)
 			on mousePoint clickno do --undo label:"create spline" on

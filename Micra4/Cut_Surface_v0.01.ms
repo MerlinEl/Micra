@@ -153,7 +153,6 @@ struct sCutSurfaceInteractive
 			on start do
 			(
 				--print "start tool"
-				mcSystem.setFocusToMaxActiveViewport()
 				if csi.errorCheck() do #stop
 			)
 			on mousePoint clickno do --undo label:"create spline" on

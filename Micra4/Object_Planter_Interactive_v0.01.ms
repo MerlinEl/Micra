@@ -70,7 +70,6 @@ struct sPlantObjectOnSurface (
 		unRegisterRedrawViewsCallback drawCross
 		local visible_geo_objects = for o in objects where not o.isHidden and superClassOf o == GeometryClass collect o
 		registerRedrawViewsCallback drawCross
-		mcSystem.setFocusToMaxActiveViewport()
 		mouseTrack trackCallback:mouseTracking prompt:"Pick target location..." on:visible_geo_objects
 		completeRedraw()
 	),

@@ -140,13 +140,29 @@ struct MICRA_MATH (
 		barycentricToWorld p1 p2 p3 u v w
 	),
 	*/
-	fn getVectorsAngle v1 v2 = (acos(dot (normalize v1) (normalize v2))),
+	fn getVectorsAngle v1 v2 = (
+	
+		local angle = acos(dot (normalize v1) (normalize v2))
+		if angle<90.0 then angle else (180.0-angle)
+	),
 	fn getLinesAngle pA pB pC pD = (
 	
 		local vAB=pB-pA
 		local vCD=pD-pC
-		local angle=acos (dot (normalize vAB) (normalize vCD))
+		local angle = acos (dot (normalize vAB) (normalize vCD))
 		if angle<90.0 then angle else (180.0-angle)
+	),
+	fn isClockwise vertices = (
+
+		local sum = 0.0
+		for i = 1 to vertices.count do (
+			
+			local p1 = vertices[i]
+			---local p2 = vertices[(i + 1) % vertices.count] --C# style
+			local p2 = if i < vertices.count then vertices[i+1] else vertices[1] --MXS style
+			sum += (p2.x - p1.x) * (p2.y + p1.y)
+		)
+		sum > 0.0
 	),
 	fn movePointAlongVector p v val = ( p + (normalize v) * val ),
 	/**

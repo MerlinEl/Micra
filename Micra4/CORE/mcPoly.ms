@@ -217,6 +217,52 @@ struct MICRA_POLY
 		center /= (faces as array).count
 		center
 	),
+	fn getFaceCornerVertices obj face_index = ( --get three vertices from face (1 = corner , 2 = first handle, 3 = second handle)
+	
+		if not (isPoly obj) do return false
+		local face_vertices = polyOp.getVertsUsingFace obj face_index
+		if face_vertices.numberset == 3 do return face_vertices as array --is triangle face
+		local vertex_index = (face_vertices as array)[1]
+		local vetrex_edges = polyOp.getEdgesUsingVert obj vertex_index --two or more edges
+		local face_edges = polyop.getEdgesUsingFace obj face_index
+		local two_edges = vetrex_edges*face_edges --remove edge(s) whch is not in face
+		local edges_verts = polyOp.getVertsUsingEdge obj two_edges
+		edges_verts = (edges_verts - #{vertex_index}) as array
+		#(vertex_index, edges_verts[1], edges_verts[2])
+	),
+	/**
+	*@Usage	collect geometry data
+	*/
+	fn getGeometryData obj = (
+
+		if classOf obj != Editable_Poly do return false
+		local faces_data = #()
+		for face_index = 1 to obj.faces.count do (
+			
+-- 			format "face:%\n" face_index	
+			local face_verts = polyop.getVertsUsingFace obj face_index
+			local face_edges = polyop.getEdgesUsingFace obj face_index
+			local vd = for vi in face_verts collect VERT_DATA vi --(polyop.getFacesUsingVert obj vi)
+			local fd  = for ei in face_edges collect EDGE_DATA ei ---(polyop.getFacesUsingEdge obj ei)
+			local fd = FACE_DATA face_index fd vd
+			append faces_data fd
+		)
+		faces_data
+	),
+	fn geoVertsToMapVerts geo_verts geo_data = (
+		
+		local uv_verts = #{}
+		for v in geo_verts do (
+			
+			for fd in geo_data do (
+				
+				local vert_data = fd.getVertDataByGeoIndex v
+				--format "vert_data:%\n" vert_data 
+				if vert_data != undefined do uv_verts += vert_data.uvVerts
+			)
+		)
+		uv_verts
+	),
 	-------------------------------------------------------------
 	-------------------------------------------------------------
 	------              		SET    	                   ------
@@ -369,52 +415,64 @@ struct MICRA_POLY
 		--move pivot ot face center
 		obj.pivot = face_center
 	),
-	fn getFaceCornerVertices obj face_index = ( --get three vertices from face (1 = corner , 2 = first handle, 3 = second handle)
-	
-		if not (isPoly obj) do return false
-		local face_vertices = polyOp.getVertsUsingFace obj face_index
-		if face_vertices.numberset == 3 do return face_vertices as array --is triangle face
-		local vertex_index = (face_vertices as array)[1]
-		local vetrex_edges = polyOp.getEdgesUsingVert obj vertex_index --two or more edges
-		local face_edges = polyop.getEdgesUsingFace obj face_index
-		local two_edges = vetrex_edges*face_edges --remove edge(s) whch is not in face
-		local edges_verts = polyOp.getVertsUsingEdge obj two_edges
-		edges_verts = (edges_verts - #{vertex_index}) as array
-		#(vertex_index, edges_verts[1], edges_verts[2])
-	),
 	/**
-	*@Usage	collect geometry data
+	*@Usage >	sort vertices by vectors p - center
+		p1 - p2 compare point A with point B
+		center 	vertices center
+		CW		sort order  false(couter clockwise) true(clockwise)
+	*@Example
+		qsort verts_pos mcPoly.sortVertsByCenter center:points_center
 	*/
-	fn getGeometryData obj = (
+	/*fn sortVertsByCenter p1 p2 center:[0,0,0] vect:[0,0,0] CW:true = (
 
-		if classOf obj != Editable_Poly do return false
-		local faces_data = #()
-		for face_index = 1 to obj.faces.count do (
-			
--- 			format "face:%\n" face_index	
-			local face_verts = polyop.getVertsUsingFace obj face_index
-			local face_edges = polyop.getEdgesUsingFace obj face_index
-			local vd = for vi in face_verts collect VERT_DATA vi --(polyop.getFacesUsingVert obj vi)
-			local fd  = for ei in face_edges collect EDGE_DATA ei ---(polyop.getFacesUsingEdge obj ei)
-			local fd = FACE_DATA face_index fd vd
-			append faces_data fd
+		-- format "sortVertsPos > p1:% p2:%\n" p1 p2
+		local a1 = mcMath.getVectorsAngle vect (p1 - center)
+		local a2 = mcMath.getVectorsAngle vect (p2 - center)
+		format "\ta1:% a2:%\n" a1 a2
+		case of (
+
+		 (a1 > a2)	: (if CW then -1 else 1)
+		 (a1 < a2)	: (if CW then 1 else -1)
+		 default	: 0
 		)
-		faces_data
+	),*/
+	fn sortVertsByCenter p1 p2 center:[0,0,0] vect:[0,0,0] CW:true = ( --not works perfect but used as presort for now in City_Manager_Struct.ms
+
+		local a1 = radToDeg ( atan2 (p1.x - center.x) (p1.y - center.y) )
+		local a2 = radToDeg ( atan2 (p2.x - center.x) (p2.y - center.y) )
+		a1 = mod (a1+360) 360	
+		a2 = mod (a2+360) 360	
+		case of (
+
+		 (a1 > a2)	: (if CW then -1 else 1)
+		 (a1 < a2)	: (if CW then 1 else -1)
+		 default	: 0
+		)
 	),
-	fn geoVertsToMapVerts geo_verts geo_data = (
+	-------------------------------------------------------------
+	-------------------------------------------------------------
+	------              	CREATE   	                   ------
+	-------------------------------------------------------------
+	-------------------------------------------------------------
+	fn createPolygonObj verts_pos obj_name = (
+
+		local new_obj = Editable_mesh()
+		undo off (
 		
-		local uv_verts = #{}
-		for v in geo_verts do (
-			
-			for fd in geo_data do (
-				
-				local vert_data = fd.getVertDataByGeoIndex v
-				--format "vert_data:%\n" vert_data 
-				if vert_data != undefined do uv_verts += vert_data.uvVerts
-			)
+			convertToPoly new_obj
+			for p in verts_pos do polyop.createVert new_obj p
+			polyop.createPolygon new_obj (for i = 1 to verts_pos.count collect i)
+			new_obj.pivot = (new_obj.min + new_obj.max) / 2 --center pivot
+			new_obj.name = obj_name
 		)
-		uv_verts
+		update new_obj
+		new_obj
 	),
+	-------------------------------------------------------------
+	-------------------------------------------------------------
+	------              	OTHER    	                   ------
+	-------------------------------------------------------------
+	-------------------------------------------------------------
 	fn printGeometryData geo_data = (
 	
 		for fd in geo_data do (

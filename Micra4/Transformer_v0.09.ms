@@ -678,7 +678,6 @@ if mc_OBJECT_TRANSFORMER != undefined do stopTool mc_OBJECT_TRANSFORMER
 	)
 
 	fn mcObjectTransformer = (if selection.count != 0 do (while OTD.aborted < 1 do startTool mc_OBJECT_TRANSFORMER) )
-	mcSystem.setFocusToMaxActiveViewport()
 	mcObjectTransformer() 
 )
 

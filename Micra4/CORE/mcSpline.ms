@@ -24,7 +24,7 @@ struct MICRA_NEW_STRUCTURE	(
 	fn getSource = getSourceFileName(), --get path of this script
 	/**
 	*@Example
-		new_spline = drawLineBetweenTwoPoints [10,20,30] [100,200,10]
+		new_spline = mcSpline.drawLineBetweenTwoPoints [10,20,30] [100,200,10]
 		new_spline = drawLineBetweenTwoPoints selection[1].pos selection[1].pos
 	*/
 	fn drawLineBetweenTwoPoints p1 p2 = (
@@ -35,6 +35,39 @@ struct MICRA_NEW_STRUCTURE	(
 	  addKnot ss 1 #corner #line p2
 	  updateShape ss
 	  ss
+	),
+	/**
+	*@Usage >	draw spline arrow helper
+	*@Example
+		mcSpline.drawArrow [0,0,0] [100,0,0]
+		mcSpline.drawArrow selection[1].pos selection[2].pos
+	*/
+	fn drawArrow p_start p_end clr:green head_size:4 arrow_name:"Arrow_Helper_" = (
+
+		local sp_arrow = line()
+		local dist = distance p_start p_end
+		local z_end = [0,0,dist]
+		--create arrow body ( -- ) in coords word at zero
+		addnewspline sp_arrow
+		addKnot sp_arrow 1 #corner  #line [0,0,0]
+		addKnot sp_arrow 1 #corner  #line z_end
+		--create arrow head ( > )
+		local p1=[0, -head_size, -head_size] + z_end
+		local p2=[0, 0, 0] + z_end
+		local p3=[0, head_size, -head_size] + z_end
+		addnewspline sp_arrow
+		addKnot sp_arrow 2 #corner  #line p1
+		addKnot sp_arrow 2 #corner  #line p2
+		addKnot sp_arrow 2 #corner  #line p3
+		--final setup
+		updateshape sp_arrow
+		sp_arrow.wirecolor = clr
+		--add custom name or default unique name
+		sp_arrow.name = if arrow_name == "Arrow_Helper_" then uniqueName arrow_name else arrow_name
+		--move arrow to start and align
+		sp_arrow.pos = p_start
+		sp_arrow.dir = normalize (p_end - p_start)
+		sp_arrow
 	),
 	/**
 	*@Example

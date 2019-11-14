@@ -2553,7 +2553,6 @@ struct mcAction (
 	),
 	fn moveObjectToSurface = (
 		
-		mcSystem.setFocusToMaxActiveViewport()
 		if superClassOf ::gPlantObjectOnSurface != StructDef do mcFile.fileInVersion "Object_Planter_Interactive"
 		if superClassOf ::gPlantObjectOnSurface == StructDef do gPlantObjectOnSurface.startTrace()
 		/*undo "Object's to Surface" on

@@ -64,9 +64,10 @@ Global mcCreateNetDynamicDialog
 	(
 		
 	)
-	--fn onBtnMouseUp s a = (enableAccelerators = true; print "mouse up") --set focus to viewport
+	--fn onBtnMouseUp s a = (enableAccelerators = true; print "mouse up")
 	fn onBtnMouseClick s a = --execute action
 	(
+		::mcSystem.setFocusToMaxActiveViewport() --set focus to viewport
 		--if mouse is not on button return false
 		local tlp = s.parent
 		local picked_node = (tlp.GetChildAtPoint a.location)
@@ -281,8 +282,8 @@ if debug == 5 do format "name:%\t tag:%\n" s.name s.tag
 			
 			dotNet.addEventHandler btn "MouseClick"   onBtnMouseClick --"MouseClick" 
 			dotNet.addEventHandler btn "MouseDown" onMousedown
-			--dotNet.addEventHandler btn "MouseUp" onBtnMouseUp
---dotNet.addEventHandler btn "MouseEnter" onMouseEnter  --test mouse enter
+-- 			dotNet.addEventHandler btn "MouseUp" onBtnMouseUp
+-- 			dotNet.addEventHandler btn "MouseEnter" onMouseEnter  --test mouse enter
 			dotNet.addEventHandler btn "DragEnter"  onDragenter
 			dotNet.addEventHandler btn "DragDrop"  onDragDrop
 			mcs.bobjects += #(btn)

@@ -64,9 +64,8 @@ rollout mcCityManDialog "" width:500 height:988
 	button 'btn_run_fn' "GO" pos:[456,964] width:36 height:20 align:#left
 	dropDownList 'ddl_fn_list' "" pos:[148,964] width:304 height:21 items:#(
 	
-		"Generate Player and Car Collisions CCV",
-		"Generate Player and Car Collisions CV", 
-		"Generate Player and Car Collisions SPIN"
+		"Generate Player and Car Collisions",
+		"Select Visible Lodes 2" 
 	) 
 	label 'lbl_advanced_tools' "Advanced Tools:" pos:[12,964] width:132 height:20 align:#left
 	--Local variables
@@ -678,17 +677,13 @@ rollout mcCityManDialog "" width:500 height:988
 		format "RUN CMD:%\n" cmd_name
 		case cmd_name of (
 			
-			"Generate Player and Car Collisions CV" : (
+			"Generate Player and Car Collisions" : (
 				
-				undo "Create Car and Player Collision" on ::gCityManager.createCarAndPlayerCollisions CCV:false 
+				undo "Create Car and Player Collision" on ::gCityManager.createCarAndPlayerCollisions()
 			)
-			"Generate Player and Car Collisions CCV" : (
+			"Select Visible Lodes 2"  : (
 				
-				undo "Create Car and Player Collision" on ::gCityManager.createCarAndPlayerCollisions() 
-			)
-			"Generate Player and Car Collisions SPIN" : (
-				
-				undo "Create Car and Player Collision" on ::gCityManager.createCarAndPlayerCollisions SPIN:true
+				undo "Create Car and Player Collision" on ::gCityManager.selectVisibleNodesByName "lod2"
 			)
 		)
 	)
