@@ -108,6 +108,7 @@ struct sCityManager	(
 		local coll_layer = getCollisionLayer obj
 		local coll_export_node = getCollisionNode obj
 		local s_mat = currentMaterialLibrary["semantic_materials"]
+		if s_mat == undefined do return (mcMsgList.warn "not_semat")
 		if coll_export_node == undefined or s_mat == undefined do return false
 		
 		SuspendEditing()

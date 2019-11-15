@@ -21,7 +21,8 @@ rollout ls3dLodManagerDialog  "LS3D LOD Manager:" width:184 height:116
 	)
 	fn addLodTo data = (
 		
-		local lod1_obj = if data[]
+return false
+		/*local lod1_obj = undefined --if data[]
 		local lod2_obj = undefined
 		
 		for d in data do (
@@ -55,10 +56,13 @@ rollout ls3dLodManagerDialog  "LS3D LOD Manager:" width:184 height:116
 			return false
 		)
 
-		true
+		true*/
 	)
 	fn addLodes = (
 		
+		messageBox "Work in Progress....... will be sun ;-) " title:"Info:"
+		return OK
+		if not (queryBox "Add Road Lodes and Fix Pivot in Selection?" title:"Organize:") do return false
 		local objs =  selection as array
 		if objs.count == 1 do return (mcMsgList.warn "not_sel")
 		gProgLog.progSub 0 0
@@ -68,9 +72,9 @@ rollout ls3dLodManagerDialog  "LS3D LOD Manager:" width:184 height:116
 		local failed_atempts = 0
 		for i=1 to geo_objs.count do (
 
-			gProgLog.progSub i geo_objs.count
-			gProgLog.msg ("progress obj:"+o.name) ty:"proc"
 			local obj = geo_objs[i]
+			gProgLog.progSub i geo_objs.count
+			gProgLog.msg ("progress obj:"+obj.name) ty:"proc"
 			obj.pivot = (obj.min + obj.max) / 2 --center pivot of original object
 			local lod1_obj = getNodeByName lod1_name
 			local lod2_obj = getNodeByName lod2_name
@@ -78,30 +82,33 @@ rollout ls3dLodManagerDialog  "LS3D LOD Manager:" width:184 height:116
 			local lod2_name = substituteString obj.name "lod0" "lod2"
 			local data = #()
 			local lod_index = 1
-			if classOf lod1_obj == Editable_Poly then append data ( LOD_DATA \
-				
-				parent_obj:	o \
-				lod_obj:		lod1_obj \
-				lod_name:	lod1_name \
-				dist_val:		spn_lod1.value \
-				lod_index:	lod_index
-				infinite:			chk_infinite_1.checked
-				
+			if classOf lod1_obj == Editable_Poly then (
+			
+				append data ( LOD_DATA \
+					parent_obj:	obj \
+					lod_obj:	lod1_obj \
+					lod_name:	lod1_name \
+					dist_val:	spn_lod1.value \
+					lod_index:	lod_index \
+					infinite:	chk_infinite_1.checked
+				)
 				lod_index += 1
 				
-			) else gProgLog.msg ("Skip lod1 for object:"+obj.name+". Missing Lod Node.") ty:"error"
+			) else (gProgLog.msg ("Skip lod1 for object:"+obj.name+". Missing Lod Node.") ty:"error")
 			
-			if classOf lod2_obj == Editable_Poly then append data ( LOD_DATA \
+			if classOf lod2_obj == Editable_Poly then (
 				
-				parent_obj:	o \
-				lod_obj:		lod2_obj \
-				lod_name:	lod2_name \
-				dist_val:		spn_lod2.value \
-				lod_index:	lod_index
-				infinite:			chk_infinite_2.checked
-			) else gProgLog.msg ("Skip lod2 for object:"+obj.name+". Missing Lod Node.") ty:"error"
+				append data ( LOD_DATA \
+					parent_obj:	obj \
+					lod_obj:	lod2_obj \
+					lod_name:	lod2_name \
+					dist_val:	spn_lod2.value \
+					lod_index:	lod_index \
+					infinite:	chk_infinite_2.checked
+				)
+			) else (gProgLog.msg ("Skip lod2 for object:"+obj.name+". Missing Lod Node.") ty:"error")
 			
-			local success = addLodTo o data
+			local success = addLodTo obj data
 			if not success do failed_atempts += 1
 		)
 		if failed_atempts > 0 do gProgLog.msg ("( "+failed_atempts as string +" ) Lods was not aded. See trace log for more details.") ty:"proc"
