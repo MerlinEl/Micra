@@ -200,13 +200,12 @@ struct sCityManager	(
 		local failed_atempts = 0
 		for o in geo_objs do (
 
-			local lod2_name = substituteString o.name "lod0" "lod2"
+			local lod2_name = substituteString (toLower o.name) "lod0" "lod2"
 			--format "lod 0:% 2:%\n" o.name lod2_name
 			local lod2_obj = getNodeByName lod2_name
 			if classOf lod2_obj != Editable_Poly do (
 
-				format "unable to setup  lod2 for:%\n" o.name
-				failed_atempts += 1
+				format "Skip object:% without lod2\n" o.name
 				continue
 			)
 			o.pivot = (o.min + o.max) / 2 --center pivot
@@ -214,6 +213,7 @@ struct sCityManager	(
 			lod2_obj.pivot = o.pivot --copy pivot from orig obj
 			--add lod2
 			try (
+				format "Progress object:% with lod2\n" o.name
 				select o
 				if (LS3DGUP.LODU.GetNumLODs()) != 0 do (LS3DGUP.LODU.DestroySet())
 				LS3DGUP.LODU.CreateSet()

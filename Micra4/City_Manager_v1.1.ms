@@ -694,7 +694,7 @@ rollout mcCityManDialog "" width:500 height:988
 			)
 			"Add Lodes Custom"  : if queryBox "Add Road Lodes 2 and Fix Pivot in Selection?" title:"Organize:" do (
 				
-				undo off ::gCityManager.addLodesCustom()
+				fileIn (micra.RootDir + "LS3D_LOD_Manager.ms")
 			)
 		)
 	)
