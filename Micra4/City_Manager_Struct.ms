@@ -237,7 +237,11 @@ struct sCityManager	(
  --create instance
 Global gCityManager = mcStructMan.instanceStructure sCityManager "gCityManager"
 
-
+/*
+for o in selection do format "%\n" (o.'~layer')
+select (for o in selection where (o.'~layer') == 29 collect o)
+select (for o in objects where findString o.name "lod2" != undefined collect o)
+*/
 
 /*
 obj = $
