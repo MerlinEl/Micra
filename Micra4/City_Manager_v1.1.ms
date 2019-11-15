@@ -3,6 +3,7 @@ if ::mcCityManDialog != undefined do try(destroyDialog mcCityManDialog)catch()
 rollout mcCityManDialog "" width:500 height:988
 (
 	local form_title = "City Manager v1.07"
+	local force_load_structures = true
 	--Interface components
 	GroupBox 'grp1' "..." pos:[4,20] width:492 height:588 align:#left
 	GroupBox 'grp2' "Wire Color:" pos:[4,688] width:88 height:72 align:#left
@@ -66,8 +67,8 @@ rollout mcCityManDialog "" width:500 height:988
 	
 		"Generate Player and Car Collisions",
 		"Select Visible Lodes 2" ,
-		"Add Terrain Lodes 2 and Fix Pivot"--,
-		-- "Add Road Lodes 2 and Fix Pivot"
+		"Add Terrain Lodes 2 and Fix Pivot",
+		"Add Lodes Custom"
 	) 
 	label 'lbl_advanced_tools' "Advanced Tools:" pos:[12,964] width:132 height:20 align:#left
 	--Local variables
@@ -691,17 +692,17 @@ rollout mcCityManDialog "" width:500 height:988
 				
 				undo off ::gCityManager.addTerrainLodes2AndFixPivot (selection as array)
 			)
-			/*"Add Road Lodes 2 and Fix Pivot"  : if queryBox "Add Road Lodes 2 and Fix Pivot in Selection?" title:"Organize:" do (
+			"Add Lodes Custom"  : if queryBox "Add Road Lodes 2 and Fix Pivot in Selection?" title:"Organize:" do (
 				
-				undo off ::gCityManager.addRoadLodes2AndFixPivot (selection as array)
-			)*/
+				undo off ::gCityManager.addLodesCustom()
+			)
 		)
 	)
 	
 	fn init = (
 		
 		--load advanced actions
-		if superClassOf gCityManager != StructDef do fileIn (micra.RootDir + "City_Manager_Struct.ms")
+		if superClassOf gCityManager != StructDef or force_load_structures do fileIn (micra.RootDir + "City_Manager_Struct.ms")
 		edt_sh_name.text = "building" 
 		mcCityManDialog.title = form_title
 		--fill first list with nodes

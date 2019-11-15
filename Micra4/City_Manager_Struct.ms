@@ -21,6 +21,25 @@ struct sCityManager	(
 	
 	--functions
 	fn getSource = getSourceFileName(), --get path of this script
+	/**
+	*@Usage > clone an object as new geometry with rotation 
+	*/
+	fn cloneObject obj suffix = (
+		
+		if superClassOf obj != GeometryClass do return undefined
+		local obj_rotation = mcTransform.getRotation obj
+		mcTransform.setRotation obj [0,0,0] --temporaly reset rotation of original objec
+		local tri_mesh = snapshotAsMesh obj --snapshot as TriMesh to memory
+		local new_o = Editable_mesh() --create an empty EMesh
+		new_o.mesh = tri_mesh --assign TriMesh value to the EMesh
+		convertTo new_o Editable_Poly --collapse to EPoly
+		delete tri_mesh --free up memory
+		new_o.name = obj.name +"_"+ suffix
+		new_o.pivot = obj.pivot
+		mcTransform.setRotation new_o obj_rotation
+		mcTransform.setRotation obj obj_rotation --return original object rotation back
+		new_o
+	),
 	fn getCollisionLayer obj = (
 	
 		local layer_name = obj.layer.name + "_coll"
@@ -176,7 +195,7 @@ struct sCityManager	(
 	),
 	fn addTerrainLodes2AndFixPivot objs = (
 	
-		if objs.count < 2 do return (mcMsgList.warn "not_sel")
+		if objs.count == 0 do return (mcMsgList.warn "not_sel")
 		local geo_objs = for o in objs where findString o.name "lod0" != undefined collect o
 		local failed_atempts = 0
 		for o in geo_objs do (
@@ -192,6 +211,7 @@ struct sCityManager	(
 			)
 			o.pivot = (o.min + o.max) / 2 --center pivot
 			lod2_obj = rebuildObject lod2_obj
+			lod2_obj.pivot = o.pivot --copy pivot from orig obj
 			--add lod2
 			try (
 				select o
@@ -207,40 +227,9 @@ struct sCityManager	(
 		)
 		if failed_atempts > 0 do MessageBox "Some Lods was not aded. See trace log for more details." title:"Warning"
 	),
-	fn addCustomLodes2AndFixPivot objs = (
+	fn addLodesCustom = (
 	
-		if objs.count < 2 do return (mcMsgList.warn "not_sel")
-		local geo_objs = for o in objs where findString o.name "lod0" != undefined collect o
-		local failed_atempts = 0
-		for o in geo_objs do (
 
-			local lod2_name = substituteString o.name "lod0" "lod1"
-			--format "lod 0:% 2:%\n" o.name lod2_name
-			local lod2_obj = getNodeByName lod2_name
-			if classOf lod2_obj != Editable_Poly do (
-
-				format "unable to setup  lod2 for:%\n" o.name
-				failed_atempts += 1
-				continue
-			)
-			o.pivot = (o.min + o.max) / 2 --center pivot
-			lod2_obj = rebuildObject lod2_obj
-			--add lod2
-			try (
-				select o
-				if (LS3DGUP.LODU.GetNumLODs()) != 0 do (LS3DGUP.LODU.DestroySet())
-				LS3DGUP.LODU.CreateSet()
-				LS3DGUP.LODU.AddNodesToSet #(lod2_obj)
-				LS3DGUP.LODU.SetSelectedLOD 0
-				LS3DGUP.LODU.SetDistance 150
-				LS3DGUP.LODU.SetSelectedLOD 1
-				LS3DGUP.LODU.SetDistance 250
-			) catch (
-			
-				failed_atempts += 1
-			)
-		)
-		if failed_atempts > 0 do MessageBox "Some Lods was not aded. See trace log for more details." title:"Warning"
 	)
 	/*<end>*/
 )	

@@ -67,18 +67,6 @@ struct sTerrainGeneratorCollision (
 		)
 	),
 	
-	private fn cloneObject obj suffix = (
-		
-		local tri_mesh = snapshotAsMesh obj --snapshot as TriMesh to memory
-		local new_o = Editable_mesh() --create an empty EMesh
-		new_o.mesh = tri_mesh --assign TriMesh value to the EMesh
-		convertTo new_o Editable_Poly --collapse to EPoly
-		delete tri_mesh --free up memory
-		new_o.name = obj.name +"_"+ suffix
-		new_o.pivot = obj.pivot
-		new_o
-	),
-	
 	public fn generateSimpleCollisions = (
 		
 		local s_mat = currentMaterialLibrary["semantic_materials"]
@@ -112,19 +100,19 @@ struct sTerrainGeneratorCollision (
 			gProgLog.msg ("progress obj:"+o.name) ty:"proc"
 			
 			--clone object
-			local o_instance = cloneObject o "coll" 
-			convertToPoly o_instance --collapse all modifiers
-			coll_layer.addNode o_instance --ad to coll laer
-			o_instance.parent = coll_export_node -- link to coll node
+			local o_coll = ::gCityManager.cloneObject o "coll" 
+			convertToPoly o_coll --collapse all modifiers
+			coll_layer.addNode o_coll --ad to coll laer
+			o_coll.parent = coll_export_node -- link to coll node
 			--set wirecolor
-			o_instance.wirecolor = collision_wirecolor
+			o_coll.wirecolor = collision_wirecolor
 			--change material id to 1 (uni hard)
-			for f=1 to o_instance.numFaces do ( polyOp.setFaceMatID o_instance f 1 )
+			for f=1 to o_coll.numFaces do ( polyOp.setFaceMatID o_coll f 1 )
 			--assign semantic material
-			o_instance.material = s_mat
+			o_coll.material = s_mat
 			--add collision prameter (Data Manager)
-			AddCustomAttributeByName o_instance "CollisionMesh"
-			o_instance.'~layer' = -1
+			AddCustomAttributeByName o_coll "CollisionMesh"
+			o_coll.'~layer' = -1
 		)
 		
 		gProgLog.progSub sel_count sel_count
@@ -156,6 +144,7 @@ struct sTerrainGeneratorCollision (
 		gProgLog.msg "Proces Start" ti:"3DsMax..." ty:"task_open"
 
 		local sel_count = selection.count
+		local instanced_collisions_handles = #()
 		for i = 1 to sel_count where superClassOf selection[i] == GeometryClass do (
 		
 			local o = selection[i]
@@ -167,25 +156,40 @@ struct sTerrainGeneratorCollision (
 				gProgLog.msg ("Unable create collision for object:"+o.name+". Missing collision Node.") ty:"error"
 				continue
 			)
-			
 			gProgLog.progSub i sel_count
 			gProgLog.msg ("progress obj:"+o.name) ty:"proc"
-
+			if findItem instanced_collisions_handles o.handle do continue --skip instanced collisions which is already done
+			
 			--clone object
-			local o_instance = cloneObject o "coll" 
-			convertToPoly o_instance --collapse all modifiers
-			coll_layer.addNode o_instance --ad to coll laer
-			o_instance.parent = coll_export_node -- link to coll node
+			local o_coll = ::gCityManager.cloneObject o "coll" 
+			convertToPoly o_coll --collapse all modifiers
+			coll_layer.addNode o_coll --ad to coll laer
+			o_coll.parent = coll_export_node -- link to coll node
 			--set wirecolor
-			o_instance.wirecolor = collision_wirecolor
-			setObjectIDSbyXMLtable o_instance xml_data
+			o_coll.wirecolor = collision_wirecolor
+			setObjectIDSbyXMLtable o_coll xml_data
 			--assign semantic material
-			o_instance.material = s_mat
+			o_coll.material = s_mat
 			--add collision prameter (Data Manager)
-			AddCustomAttributeByName o_instance "CollisionMesh"
-			o_instance.'~layer' = -1
+			AddCustomAttributeByName o_coll "CollisionMesh"
+			o_coll.'~layer' = -1
+			
+			--check if object is instanced and create instanced collision for all instances
+			local object_instances = #()
+			InstanceMgr.GetInstances o &object_instances
+			if object_instances.count > 1 do (
+			
+				append instanced_collisions_handles o.handle --mark as done
+				for oi in object_instances where oi.handle != o.handle do ( --do all except first one
+				
+					append instanced_collisions_handles oi.handle --mark as done
+					local coll_instance = instance o_coll --instance collision
+					coll_layer.addNode coll_instance --move to layer
+					coll_instance.pos = oi.pos	--copy pos		
+					mcTransform.setRotation coll_instance (mcTransform.getRotation oi) --copy rotation
+				)
+			)
 		)
-		
 		gProgLog.progSub sel_count sel_count
 		gProgLog.msg "All Done" ty:"task_close"
 	)
