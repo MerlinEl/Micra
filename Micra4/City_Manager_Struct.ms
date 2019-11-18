@@ -21,6 +21,50 @@ struct sCityManager	(
 	
 	--functions
 	fn getSource = getSourceFileName(), --get path of this script
+	fn parseXmlTable xml_file = (
+		
+		if not (doesFileExist xml_file) do return false
+		struct ID_DATA (id, sid)
+		local xDoc = XMLDocument()			--Create an XMLDcoument
+		xDoc.LoadXML xml_file				--Load XML from file
+		local rNode = xDoc.GetRootNode()		--Get the Root Node THIS MUST BE CALLED!
+		local reindex_items = (rNode.GetChildren())[1].GetChildren() --Get All Reindex Keys
+		for itm in reindex_items collect (
+			
+			local mat_id = execute (itm.GetAttribute "VisualMatIndex")
+			local mat_sid = execute (itm.GetAttribute "SemanticMatIndex")
+			ID_DATA id:mat_id sid:mat_sid
+		)
+	),
+	fn getObjectIDS obj = (
+	
+		local mats_id = #{}
+		local all_faces = #{1..(polyop.getNumFaces obj)}
+		for f in all_faces do (
+			
+			mats_id += #{polyop.getFaceMatID obj f}	--get unique ids
+		)
+		mats_id
+	),
+	fn getFacesByMatID obj mat_id = (
+		
+		local all_faces = #{1..(polyop.getNumFaces obj)}
+		for f in all_faces where polyop.getFaceMatID obj f == mat_id collect f
+	),
+	fn offsetMaterialsIDs obj object_ids offset:1000 = ( --incerase all materials id by 1000
+
+		for id in object_ids do (
+			
+			local id_faces = getFacesByMatID obj id
+			local offset_id = id+1000
+			polyop.setFaceMatID obj id_faces offset_id
+		)
+	),
+	fn getSIDByID xml_data id = (
+	
+		for itm in xml_data where itm.id == id do return itm.sid
+		1 -- else retrun unihard
+	),
 	/**
 	*@Usage > clone an object as new geometry with rotation 
 	*/
@@ -180,6 +224,7 @@ struct sCityManager	(
 		local obj_parent = obj.parent
 		local obj_wirecolor = obj.wirecolor
 		local obj_pivot = obj.pivot
+		local obj_material = obj.material
 		obj.name = uniqueName "Object For Delete"
 		polyOp.detachFaces obj obj.faces delete:true asNode:true name:obj_name
 		select obj --prevent error msg
@@ -190,9 +235,35 @@ struct sCityManager	(
 		new_obj.parent = obj_parent
 		new_obj.wirecolor = obj_wirecolor
 		new_obj.pivot = obj_pivot
+		new_obj.material = obj_material
 		update new_obj
 		select new_obj
 		new_obj
+	),
+	fn filterObjectsInstances objs = (
+	
+		local instanced_collisions_handles = #()
+		local unique_instance_objs = #()
+		for o in objs do (
+		
+			if findItem instanced_collisions_handles o.handle do continue --skip object instances
+			--check if object is instanced
+			local object_instances = #()
+			InstanceMgr.GetInstances o &object_instances
+			if object_instances.count > 1 do for oi in object_instances do append instanced_collisions_handles oi.handle
+			append unique_instance_objs o
+		)
+		unique_instance_objs
+	),
+	fn destroyLodsInSelection = (
+
+		local sel = selection as array
+		max select none
+		for o in sel where superClassOf o == GeometryClass do (
+
+			select o 
+			if (LS3DGUP.LODU.GetNumLODs()) != 0 do LS3DGUP.LODU.DestroySet()
+		)
 	),
 	fn addTerrainLodes2AndFixPivot objs = (
 	

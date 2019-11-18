@@ -2,71 +2,21 @@ Global gTerrainGeneratorCollision
 struct sTerrainGeneratorCollision (
 
 	collision_wirecolor = color 176 26 26,
-	
-	private fn parseXmlTable xml_file = (
-		
-		if not (doesFileExist xml_file) do return false
-		struct ID_DATA (id, sid)
-		local xDoc = XMLDocument()			--Create an XMLDcoument
-		xDoc.LoadXML xml_file				--Load XML from file
-		local rNode = xDoc.GetRootNode()		--Get the Root Node THIS MUST BE CALLED!
-		local reindex_items = (rNode.GetChildren())[1].GetChildren() --Get All Reindex Keys
-		for itm in reindex_items collect (
-			
-			local mat_id = execute (itm.GetAttribute "VisualMatIndex")
-			local mat_sid = execute (itm.GetAttribute "SemanticMatIndex")
-			ID_DATA id:mat_id sid:mat_sid
-		)
-	),
-	
-	private fn getObjectIDS obj = (
-	
-		local mats_id = #{}
-		local all_faces = #{1..(polyop.getNumFaces obj)}
-		for f in all_faces do (
-			
-			mats_id += #{polyop.getFaceMatID obj f}	--get unique ids
-		)
-		mats_id
-	),
-	
-	private fn getFacesByMatID obj mat_id = (
-		
-		local all_faces = #{1..(polyop.getNumFaces obj)}
-		for f in all_faces where polyop.getFaceMatID obj f == mat_id collect f
-	),
-
-	fn offsetMaterialsIDs obj object_ids offset:1000 = ( --incerase all materials id by 1000
-
-		for id in object_ids do (
-			
-			local id_faces = getFacesByMatID obj id
-			local offset_id = id+1000
-			polyop.setFaceMatID obj id_faces offset_id
-		)
-	),
-	
-	private fn getSIDByID xml_data id = (
-	
-		for itm in xml_data where itm.id == id do return itm.sid
-		1 -- else retrun unihard
-	),
-	
+	materal_id_offset = 1000, --ofset all mat ID to prevent replacement
 	private fn setObjectIDSbyXMLtable obj xml_data = (
 	
-		local object_ids = getObjectIDS obj
-		offsetMaterialsIDs obj object_ids offset:1000 --prevent override old ids
+		local object_ids = ::gCityManager.getObjectIDS obj
+		::gCityManager.offsetMaterialsIDs obj object_ids offset:materal_id_offset --prevent override old ids
 		for id in object_ids do (
 		
 			--format "setObjectIDSbyXMLtable > obj:%\n" obj.name
-			local new_mat_id = getSIDByID xml_data id
-			local offset_id = id+1000
-			local id_faces = getFacesByMatID obj offset_id
+			local new_mat_id = ::gCityManager.getSIDByID xml_data id
+			local offset_id = id+materal_id_offset
+			local id_faces = ::gCityManager.getFacesByMatID obj offset_id
 			--format "\told_id:% new_id:% offset_id:%\n" id new_mat_id offset_id
 			polyOp.setFaceMatID obj id_faces new_mat_id	
 		)
 	),
-	
 	public fn generateSimpleCollisions = (
 		
 		local s_mat = currentMaterialLibrary["semantic_materials"]
@@ -118,7 +68,6 @@ struct sTerrainGeneratorCollision (
 		gProgLog.progSub sel_count sel_count
 		gProgLog.msg "All Done" ty:"task_close"
 	),
-	
 	public fn generateTerrainCollisions = (
 	
 		local s_mat = currentMaterialLibrary["semantic_materials"]
@@ -136,7 +85,7 @@ struct sTerrainGeneratorCollision (
 			gProgLog.msg ("Unable to Locate coll_bourbon_table.xml.") ty:"error"
 			return false
 		)
-		local xml_data = parseXmlTable xml_file
+		local xml_data = ::gCityManager.parseXmlTable xml_file
 		
 		gProgLog.msg "@" --clear log
 		gProgLog.progSub 0 0
@@ -161,8 +110,7 @@ struct sTerrainGeneratorCollision (
 			if findItem instanced_collisions_handles o.handle do continue --skip instanced collisions which is already done
 			
 			--clone object
-			local o_coll = ::gCityManager.cloneObject o "coll" 
-			convertToPoly o_coll --collapse all modifiers
+			local o_coll = ::gCityManager.cloneObject o "coll"
 			coll_layer.addNode o_coll --ad to coll laer
 			o_coll.parent = coll_export_node -- link to coll node
 			--set wirecolor

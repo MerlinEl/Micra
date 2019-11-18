@@ -83,6 +83,99 @@ struct MICRA_POLY
 			#obj:     objects   as array
 		)
 	),
+	fn getObjectFaces obj = (
+	
+		if classOf obj != Editable_Poly do return #{}
+		#{1..(obj.getnumfaces())}
+	),
+	fn getObjectElements obj = (
+	
+		if classOf obj != Editable_Poly do return #()
+		local all_faces = getObjectFaces obj
+		local all_elements = #()
+		while all_faces.numberset > 0 do (
+			
+			obj.SetSelection #Face #{(all_faces as array)[1]} --select next face
+			obj.selectElement()
+			local fsel = polyOp.getFaceSelection obj
+			append all_elements fsel
+			all_faces -= fsel
+		)
+		all_elements
+	),
+	fn getLongestEdge obj edges = (
+
+		if classOf obj != Editable_Poly do return undefined
+		local edge_data = #(0,0)
+		for edge_index in edges do (
+
+			local everts = polyOp.getEdgeVerts obj edge_index
+			local len = distance (polyOp.getVert obj everts[1]) (polyOp.getVert obj everts[2])
+			if edge_data[1] < len do (
+			
+				edge_data[1] = len
+				edge_data[2] = edge_index
+			)
+		)
+		edge_data[2]
+	),
+	fn getShortestEdge obj edges = (
+
+		if classOf obj != Editable_Poly do return undefined
+		local edge_data = #(9999999,0)
+		for edge_index in edges do (
+
+			local everts = polyOp.getEdgeVerts obj edge_index
+			local len = distance (polyOp.getVert obj everts[1]) (polyOp.getVert obj everts[2])
+			if edge_data[1] > len do (
+			
+				edge_data[1] = len
+				edge_data[2] = edge_index
+			)
+		)
+		edge_data[2]
+	),
+	fn removeEdges obj edges = (	
+
+		if classOf obj != Editable_Poly do return false
+		polyop.setEdgeSelection obj edges
+		local deadVerts = #{}
+		local verts = polyop.getVertsUsingEdge obj edges
+		for v in verts do (
+			
+			local euVert = polyOp.getEdgesUsingVert obj #{v}
+			euVert -= edges
+			if (euVert.numberset == 2) or (euVert.numberset == 0) do (append deadVerts v)
+		)
+		polyOp.setVertSelection obj deadVerts	
+		obj.remove selLevel:#edge
+		obj.remove selLevel:#vertex
+	),
+	fn scaleEdgeTo obj edge_index val = ( -- val = 1% - 100%
+	
+		if classOf obj != Editable_Poly do return false
+		local verts = polyOp.getEdgeVerts obj edge_index
+		local p1 = polyOp.getVert obj verts[1]
+		local p2 = polyOp.getVert obj verts[2]
+		local center = (p1+p2)/2
+		local len = distance p1 p2
+		local mod_dist = len*(val/100.0) 
+		local half_dist = mod_dist/2
+		local v1 = normalize (p1 - center)
+		local v2 = normalize (p2 - center)
+		polyOp.setVert obj verts[1] (center+(v1*half_dist))
+		polyOp.setVert obj verts[2] (center+(v2*half_dist))
+	),
+	fn setObjectId obj mat_id = (
+
+		if classOf obj != Editable_Poly do return false
+		polyop.setFaceMatID obj (getObjectFaces obj) mat_id
+	),
+	fn setObjectSMG obj smg_index= (
+
+		if classOf obj != Editable_Poly do return false
+		polyOp.setFaceSmoothGroup obj (getObjectFaces obj) smg_index
+	),
 	fn isQuads obj faceSel =
 	(
 		if classOf obj != Editable_Poly and faceSel.count == 0 do return false

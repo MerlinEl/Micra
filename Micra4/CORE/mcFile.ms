@@ -72,6 +72,33 @@ struct MICRA_FILE (
 		if xml_node == undefined do return ""
 		xml_node.getAttribute "val"
 	),
+	fn runScript script_name root:true = (
+
+		local base_dir = if root then micra.RootDir else micra.CoreDir
+		local script_file = base_dir+script_name+".ms"
+		if doesFileExist script_file then (
+		
+			fileIn script_file
+			
+		) else (
+		
+			messageBox ("Script ["+script_file+"] Not Found.") title:"Warning:"
+			return false
+		)
+		true
+	),
+	/**
+	*@Example
+		mcFile.initStruct gTerrainGeneratorCollision "LS3D_Terrain_Collisions_Generator" force:true
+	*/
+	fn initStruct struct_name script_name force:false root:true = (
+
+		if superClassOf struct_name != StructDef or force do (
+		
+			format "Initialize Structure: [ % ] \n" script_name
+			runScript script_name root:root
+		)
+	),
 	/**
 	*@Usage > run a RootDir(file) as application(tool)
 		script_name	: String > "Clone2"
