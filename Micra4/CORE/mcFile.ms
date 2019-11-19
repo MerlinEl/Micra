@@ -95,7 +95,7 @@ struct MICRA_FILE (
 
 		if superClassOf struct_name != StructDef or force do (
 		
-			format "Initialize Structure: [ % ] \n" script_name
+			format "mcFile > initStruct > [ % ] \n" script_name
 			runScript script_name root:root
 		)
 	),

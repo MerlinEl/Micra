@@ -1278,23 +1278,52 @@ struct mcAction (
 	),
 	fn scale_to_zb = undo "Scale To ZBrush" on (
 		
+		local cnt = 1
 		 for o in selection where superClassOf o == GeometryClass do (
 			
+			if o.scale.x != 1 do (
+				
+				format "Skiped object: [ % ] Scale must be 1\n" o.name
+				continue
+			)
+			 --strore original pos in placeholder
+			local s = sphere pos:o.pos name:("ZB_Placeholder_0" + cnt as string) radius:10000 wirecolor:green
+			 o.pos = [0,0,0]
+			--change scale for zb
 			case units.SystemType of ( --ZB default cube is 5x5 cm
 				
 				#meters: o.scale = [0.1, 0.1, 0.1]
-				#centimeters: o.scale = [0.01, 0.01, 0.01]
+				#centimeters: o.scale = [0.0001, 0.0001, 0.0001]
 			)	
 		)
+		cnt +=1
 	),	
 	fn scale_from_zb = undo "Scale From ZBrush" on (
 		
-		 for o in selection where superClassOf o == GeometryClass do (
-			case units.SystemType of (	
+		local cnt = 1 
+		for o in selection where superClassOf o == GeometryClass do (
+			 			
+			--restore original pos
+			local s = getNodeByName ("ZB_Placeholder_0" + cnt as string)	
+			if s != udefined do (
 				
-				#meters: o.scale = [10, 10, 10]
-				#centimeters: o.scale = [100, 100, 100]
+					o.pos = s.pos
+					delete s
 			)
+			if o.scale.x != 1 do (
+				
+				o.scale = [1,1,1]
+				continue
+			)
+			--restore original scale
+			case units.SystemType of (	
+
+				#meters: o.scale = [10, 10, 10]
+				#centimeters: o.scale = [10000, 10000, 10000]
+			)
+			resetTransform o
+			convertToPoly o
+			cnt +=1
 		)
 	),	
 	fn concaveCheck = -- <> convex >< concave

@@ -686,7 +686,7 @@ rollout mcCityManDialog "" width:500 height:988
 			)
 			"Add Lodes Custom"  : (
 				---TODO
-				--mcFile.initStruct gCityManager "LS3D_LOD_Manager" force:force_load_structures
+				--mcFile.initStruct ls3dLodManagerDialog "LS3D_LOD_Manager" force:force_load_structures
 				fileIn (micra.RootDir + "LS3D_LOD_Manager.ms")
 			)
 			"Destroy Lods in Selection" : (

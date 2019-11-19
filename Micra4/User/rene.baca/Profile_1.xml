@@ -14,7 +14,7 @@
   </Properties_1>
   <Properties_2>
     <mcMicraDialog active="true" pos="[2171,214]" size="[148,66]" title="" />
-    <mcCustomizeDialog active="false" pos="[580,420]" size="[224,404]" title="" />
+    <mcCustomizeDialog active="false" pos="[320,360]" size="[224,404]" title="" />
     <mcProgramDialog active="undefined" pos="[2298,0]" size="[256,232]" title="" />
     <mcisoDialog active="false" pos="[181,152]" size="[140,400]" title="" />
     <mcModifierDialog active="undefined" pos="[100,100]" size="[400,400]" title="" />
@@ -230,5 +230,7 @@
     <btn_G25 action="Slice_Plane_2" icon="285" />
     <btn_B37 action="Select_Player" icon="286" />
     <btn_B38 action="Move_To_Surface" icon="280" />
+    <btn_B41 action="ZB_Scale_From" icon="251" />
+    <btn_B40 action="ZB_Scale_To" icon="250" />
   </Buttons>
 </USER>
