@@ -230,7 +230,9 @@
     <btn_G25 action="Slice_Plane_2" icon="285" />
     <btn_B37 action="Select_Player" icon="286" />
     <btn_B38 action="Move_To_Surface" icon="280" />
-    <btn_B41 action="ZB_Scale_From" icon="251" />
-    <btn_B40 action="ZB_Scale_To" icon="250" />
+    <btn_B42 action="ZB_Scale_From" icon="251" />
+    <btn_B41 action="ZB_Scale_To" icon="250" />
+    <btn_B40 action="Unlock_Object" icon="89" />
+    <btn_B39 action="Lock_Object" icon="88" />
   </Buttons>
 </USER>
