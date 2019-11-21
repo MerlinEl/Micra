@@ -638,7 +638,7 @@ rollout mcMaxScriptColorEditorDialog "MaxScript Theme Editor:"  width:680 height
 		text_box.SelectAll()
 		text_box.SelectionTabs = int_arr
 		--
-		--mcSystem.show text_box
+		--mcSystem.getObjectInfo text_box
 		text_box.ShowSelectionMargin = true
 		--text_box.RightMargin = text_box.width
 		--text_box.Margin = dotnetObject "Padding" 0

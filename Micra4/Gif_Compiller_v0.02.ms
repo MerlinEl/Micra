@@ -59,7 +59,7 @@ rollout mcGifCompillerDialog "Untitled" width:284 height:52
 				if not doesFileExist fpath do return false
 				dimg = image_class.FromFile fpath
 				frames_count = dimg.GetFrameCount frame_dimension.time
-				--mcsystem.Show dimg
+				--mcSystem.getObjectInfo dimg
 				mcGifCompillerDialog.lbl_frame.text = "0/"+frames_count as string+"fr"
 				win_form.width     = dimg.width
 				win_form.height    = dimg.height

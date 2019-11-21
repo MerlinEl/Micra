@@ -44,6 +44,7 @@ Struct MICRA_POPUP (
 		::messageBox msg title:title beep:false
 	),
 	/**
+	*TODO Escape causing error
 	* @example 
 		typed_text = mcPopup.textBox title:"New Profile Name:" saved_pos:"Micra_TextBox"
 		format "typed_text:%\n" typed_text

@@ -38,8 +38,8 @@ rollout mcActorXBatchExporterDialog "ActorX Batch Exporter:" width:880 height:54
 		listbox.ShowItemToolTips  = true
 		listbox.HideSelection = false
 		listbox.CheckBoxes = true
-		--mcSystem.show  listbox
-		--mcSystem.show listbox.Container--.ItemContainerStyle --using a Setter for IsSelected
+		--mcSystem.getObjectInfo  listbox
+		--mcSystem.getObjectInfo listbox.Container--.ItemContainerStyle --using a Setter for IsSelected
 		dnNewColumn = listbox.Columns.add ("Enabled:") 60
 		dnNewColumn = listbox.Columns.add ("Model Name:") 200
 		dnNewColumn = listbox.Columns.add ("Max File Path:") 600

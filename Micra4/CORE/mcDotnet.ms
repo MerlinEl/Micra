@@ -20,6 +20,7 @@ Struct MICRA_DOTNET (
 	Keys			= (dotNetClass "Keys"),
 	File			= (dotnetClass "IO.File"),
 	Screen			= (dotnetClass "System.Windows.Forms.Screen"),
+	SysTime			= (dotnetClass "System.DateTime"),
 	/**
 	*@Example
 		ns = "http://test"

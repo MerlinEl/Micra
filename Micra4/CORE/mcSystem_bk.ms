@@ -9,7 +9,8 @@
 
 *
 */
-struct MICRA_SYSTEM (
+Global mcSystem
+struct mcSystem (
 
 	maxHandle =  Windows.GetMAXHWND(),
 	fn getSource = getSourceFileName(), --get path of this script
@@ -98,8 +99,7 @@ struct MICRA_SYSTEM (
 			else messageBox ("The file: ["+i.filename+"] is not Exist.") title:"Micra..."
 		)
 	), 
-	--creating instance caused endless loop
-	fn getObjectInfo arg  =
+	fn show arg  =
 	(
 		print "---------------------------------------------------------------------------" 
 		format "Info:%\n" arg 
@@ -115,7 +115,7 @@ struct MICRA_SYSTEM (
 		try (format "Interface: %\n"   (showInterface  arg)) catch (format "No Interface for %\n" arg)
 		try (format "Constructors: %\n" (dotNet.showConstructors arg)) catch (format "No Constructors for %\n" arg)
 		try (format "GetInterface: %\n" (getInterface arg)) catch (format "No GetInterface for %\n" arg)
-		/*try ( --crash
+		try (
 			local interfaces = getInterfaces arg
 			if classOf interfaces == Array do (
 				
@@ -136,7 +136,7 @@ struct MICRA_SYSTEM (
 				currentClass = classof currentClass 
 				parentClass = classof currentClass
 			)	
-		) catch ()*/
+		) catch ()
 	),
 	fn getAllDialogsHWND = ( for i in UIAccessor.GetPopupDialogs() collect (UIAccessor.GetWindowText i) ),
 	fn closeDialogByTitle window_text =
@@ -173,9 +173,6 @@ struct MICRA_SYSTEM (
 			exit
 		)
 	),
-	/**
-	*Not used anymore --delete or redefine also in Actions.xml
-	*/
 	fn getSHGameVersion =
 	(
 		local ifile = "c:/Dev/SilentHill/SHGame/Build-info.txt"
@@ -194,7 +191,7 @@ struct MICRA_SYSTEM (
 	),
 	fn getMaxCenter = (
 	
-		local max_pos = getMaxPos()
+		local max_pos = mcSystem.getMaxPos()
 		return [max_pos.w/2 + max_pos.x /2, max_pos.h/2 + max_pos.y /2]
 	),
 	--set focus to Max Application Window
@@ -231,4 +228,5 @@ struct MICRA_SYSTEM (
 	)
 	/*<end>*/
 )
-Global mcSystem = mcStructMan.instanceStructure MICRA_SYSTEM "mcSystem"
+ --creating instance caused endless loop
+--Global mcSystem = mcStructMan.instanceStructure MICRA_SYSTEM "mcSystem"

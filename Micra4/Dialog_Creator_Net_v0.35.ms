@@ -395,9 +395,9 @@ if debug == 5 do format "name:%\t tag:%\n" s.name s.tag
 	)
 	fn onLblTMouseUp s a = 
 	(
-		--mcSystem.show s
-		--mcSystem.show a
-		--mcSystem.show a.Button
+		--mcSystem.getObjectInfo s
+		--mcSystem.getObjectInfo a
+		--mcSystem.getObjectInfo a.Button
 		
 		local form = s.parent
 		form.tag.value.netDMove = false --disableDrag

@@ -674,7 +674,7 @@
 	)
 --|| --Drag & Drop effect
 --| --Action Buttons
-	on btn_show pressed do mcSystem.show (execute edt_cmd.text)
+	on btn_show pressed do mcSystem.getObjectInfo (execute edt_cmd.text)
 	on btn_reload_micra pressed do (fileIn (Micra.RootDir+ "_Loader.ms"))
 	on btn_reload_scripts pressed do (reloadScripts())
 	on btn_show_source  pressed do (try (ShowSource (execute edt_cmd.text)) Catch () ; edt_cmd.text = "")

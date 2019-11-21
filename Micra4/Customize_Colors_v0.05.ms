@@ -196,7 +196,7 @@ try ( mcInterfaceColorDilaog.close() ) catch()
 		local fillColor = mcDotnet.uiColor #back
 		local rect = (dotnetobject "System.Drawing.Rectangle" (posX-4) 0 8 bar_height)
 		
-		--mcSystem.show a.graphics
+		--mcSystem.getObjectInfo a.graphics
 		a.graphics.FillRectangle fillBrush rect
 		(dotnetclass "ControlPaint").DrawBorder a.graphics rect fillColor (dotnetclass "ButtonBorderStyle").Solid	
 	)
