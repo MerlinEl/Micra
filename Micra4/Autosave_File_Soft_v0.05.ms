@@ -1,3 +1,6 @@
+--TODO
+--1 compare files size before backup or comething do not backup same file again and again or clear undo histrory or memory mouse clicks
+--2 after wait seeuence finished leave form opened with mesage SAWING NOW! and close it after is finished
 --------------------------------------------------------------------------------
 /* gAutosaveFileSoft by Orien 2019 */
 --------------------------------------------------------------------------------
@@ -15,6 +18,7 @@
 	undefined
 *
 */
+--
 if isStruct gAutosaveFileSoft do gAutosaveFileSoft.enabled false
 --Interface	
 struct sAutosaveFileSoftUI	(
@@ -23,17 +27,27 @@ struct sAutosaveFileSoftUI	(
 	lbl_info	= dotNetObject "label",
 	btn_cancel	= dotnetobject "Button",
 	btn_save	= dotnetobject "Button",	
+	btn_abort	= dotnetobject "Button",	
 	font1		= dotnetobject "System.Drawing.Font" "Impact" 20,
 	font2		= dotnetobject "System.Drawing.Font" "Impact" 12,
-	timer_sec 	= dotnetobject "system.timers.timer",
-	timer_min 	= dotnetobject "system.timers.timer",
+	timer_sec 	= dotnetobject "System.Windows.Threading.DispatcherTimer",
+	timer_main 	= dotnetobject "System.Windows.Threading.DispatcherTimer",
 	--vars2
 	backups_count = Autosave.NumberOfFiles, -- 1 to 99
-	autosave_fname = Autosave.filename,
+	autosave_dir = (getdir #autoback) + "\\", 
+	autosave_fname = Autosave.FileName,
+	autosave_interval = 10, --Autosave.Interval*60,
 	seconds_passed = 0,
 	cancel_delay = 6, --6 sec to cancell backup
+	saving = false,
 	canceled = false,
+	abort_pressed = false, --When Micra Autosave is disabled by user , Max AutoBackup is remains Disabled too
+	backup_notifications_params = #(),
 	--functions
+	fn isReadyToBackup = (
+		
+		maxFileName.count != 0 and getSaveRequired()
+	),
 	fn closeForm = (form.close()),
 	fn hideForm = (form.hide()),
 	fn showForm = (form.showmodeless()),
@@ -41,20 +55,50 @@ struct sAutosaveFileSoftUI	(
 	
 		lbl_info.text = "Autosave After\n( " + str_num + " )"
 	),
-	fn stopTimer = (
+	fn stopTimerMain = (
+	
+		timer_main.stop()
+		timer_main.IsEnabled = false
+	),
+	fn stopTimerSec = (
 	
 		timer_sec.stop()
-		dotnet.removeAllEventHandlers timer_sec
-		hideForm()
+		timer_main.IsEnabled = false
+	),
+	fn restartMainTimer = (
+		
+		timer_main.stop()
+		timer_main.start()
 	),
 	fn cancelBackup = (
 	
-		format "\tBackup was canceled\n"
-		stopTimer()
+		format "\tBackup was Postponed\n"
+		stopTimerSec()
+		hideForm()
+		gAutosaveFileSoftUI.startMainTimer()
 	),
 	fn backupMaxFile = (
 		
-		format "\tBackup Max File:\n\t[ % ]\n\tNow!\n" maxFileName	
+		local afsUI = gAutosaveFileSoftUI	
+--autosave.isactive()
+		if (afsUI.saving) do return false
+		afsUI.stopTimerSec()
+		afsUI.hideForm()
+		afsUI.saving = true
+		backup_notifications_params = #()
+		format "\tBackup Max File:\n\t[ % ]\n\tNow!\n" maxFileName
+		
+		---saveAsVersion:<integer>
+		--saveMaxFile (autosave_dir + autosave_fname + next_index) clearNeedSaveFlag:false useNewFile:false quiet:true
+		/*Autosave.resetTimer()
+		AutoBackup.Time = 0.01 --start Max autosave Now!
+		Autosave.Interval = 0.01*/
+		
+		if (isProperty Autosave "BailoutEnabled")  do Autosave.BailoutEnabled = false --disable slowdown escape backup fn
+		Autosave.resetTimer()
+		AutoBackup.Enabled = true
+		Autosave.Enable = true
+		autosave.autoBackupNow()
 	),
 	fn onBackColorChanged s a = (
 
@@ -66,12 +110,16 @@ struct sAutosaveFileSoftUI	(
 		gAutosaveFileSoftUI.cancelBackup()
 		s.parent.hide()
 	),
-	fn onAcceptPressed s a = (
+	fn onAbortPressed s a = (
+		
+		gAutosaveFileSoftUI.abort_pressed = true
+		gAutosaveFileSoft.enabled false
+	),
+	fn onBackupNowPressed s a = (
 		
 		gAutosaveFileSoftUI.backupMaxFile()
-		s.parent.hide()
 	),
-	fn timerTick s a = ( --get current time ---> (a.SignalTime.toString())
+	fn timerTickSec s a = (
 		
 		local afsUI = gAutosaveFileSoftUI	
 		if (afsUI.canceled) then (
@@ -80,37 +128,54 @@ struct sAutosaveFileSoftUI	(
 
 		) else (
 		
-			if afsUI.seconds_passed < afsUI.cancel_delay then (
+			if afsUI.seconds_passed < afsUI.cancel_delay then ( --count down seconds
 			
 				afsUI.seconds_passed += 1	
 				local remain_time = (afsUI.cancel_delay - afsUI.seconds_passed)
-				format "\tsutosave after [ % ] sec...\n" remain_time
 				afsUI.setText (remain_time as string)
-				if afsUI.seconds_passed >= afsUI.cancel_delay do ( --when is ready to Backup
-					
-					afsUI.stopTimer()
-					afsUI.backupMaxFile()
-				)
+				format "\tsutosave after [ % ] sec...\n" remain_time
 				
-			) else (
+			) else (  --is ready to Backup
 			
-				afsUI.stopTimer()
+					afsUI.stopTimerSec()
+					afsUI.hideForm()
+					afsUI.backupMaxFile()
 			)
 		)
 	),	
-	fn startTimer = (
-	
+	fn startTimerSec = (
+		
 		seconds_passed = 0
 		setText (cancel_delay as String)
-		dotNet.addeventhandler timer_sec "Elapsed" timerTick --register seconds timer
 		timer_sec.start()
 	),
 	fn showFormLimited duration_sec = (
 	
-		format "Backup Max File. Press ABORT to cancel Backup.\n" 
+		format "Backup Max File.\n\tpress POSTPONE to wait for another Backup.\n\tpress ABORT to disable backup Manager. \n" 
 		cancel_delay = duration_sec
 		showForm()
-		startTimer()
+		startTimerSec()
+	),
+	fn timerTickMain s a = (
+		
+		local afsUI = gAutosaveFileSoftUI	
+		if not (afsUI.isReadyToBackup()) do(
+			
+			format "Is not Ready To Backup. Restarting Main Timer...\n"
+			afsUI.restartMainTimer()
+			return OK
+		)
+		afsUI.stopTimerMain()
+		afsUI.showFormLimited afsUI.cancel_delay
+	),	
+	fn startMainTimer = ( --restart Timer Main
+		
+		timer_main.start()
+	),
+	fn unregisterTimers = (
+		
+		dotnet.removeAllEventHandlers timer_sec
+		dotnet.removeAllEventHandlers timer_main
 	),
 	fn initForm = (
 
@@ -120,11 +185,17 @@ struct sAutosaveFileSoftUI	(
 		btn_save.backColor = mcDotnet.dColor green
 		btn_save.Dock = btn_save.Dock.Top
 	
-		btn_cancel.text = "ABORT"
+		btn_cancel.text = "POSTPONE"
 		btn_cancel.font = font2
 		btn_cancel.foreColor = mcDotnet.dColor  (color 9 102 51)
 		btn_cancel.backColor = mcDotnet.dColor green
 		btn_cancel.Dock = btn_cancel.Dock.Bottom
+		
+		btn_abort.text = "ABORT"
+		btn_abort.font = font2
+		btn_abort.foreColor = mcDotnet.dColor  (color 9 102 51)
+		btn_abort.backColor = mcDotnet.dColor green
+		btn_abort.Dock = btn_abort.Dock.Bottom
 		
 		lbl_info.text = "Autosave After\n( 5 )"
 		lbl_info.font = font1
@@ -138,20 +209,23 @@ struct sAutosaveFileSoftUI	(
 		form.StartPosition = form.StartPosition.Manual
 		form.ShowInTaskBar = false
 		form.FormBorderStyle = form.FormBorderStyle.None
-		form.Controls.addrange #(btn_save, btn_cancel, lbl_info)
+		form.Controls.addrange #(btn_save, btn_cancel, btn_abort, lbl_info)
 		form.StartPosition = form.StartPosition.Manual
 		form.location = mcDotnet.dPoint (mcSystem.getMaxCenter() - [form.width, form.height] / 2)
+		form.opacity = 0.8
 
-		timer_sec.Interval = 4000 --1000 --1 sec	
-		timer_min.Interval = 10000 --(1000 * 60) * Autosave.Interval,  -- ( 1 sec * 60 sec = 1min * Autosave Interval)
-		timer_sec.Enabled = false
-		timer_min.Enabled = false
-		timer_sec.AutoReset = true	-- timer fire repeated events
-		timer_min.AutoReset = false	-- timer fire single event
+		timer_sec.Interval = mcDotnet.secondsToTimeSpan 1	
+		timer_sec.IsEnabled = false
 
-		dotNet.addEventHandler btn_save "MouseUp" onAcceptPressed
+		timer_main.Interval = mcDotnet.secondsToTimeSpan autosave_interval
+		timer_main.IsEnabled = false
+
+		dotNet.addEventHandler btn_save "MouseUp" onBackupNowPressed
 		dotNet.addEventHandler btn_cancel "MouseUp" onCancelPressed
-		dotnet.AddEventHandler form "BackColorChanged" onBackColorChanged
+		dotNet.addEventHandler btn_abort "MouseUp" onAbortPressed
+		dotnet.addEventHandler form "BackColorChanged" onBackColorChanged
+		dotNet.addEventHandler timer_main "Tick" timerTickMain --register minutes timer	
+		dotNet.addEventHandler timer_sec "Tick" timerTickSec --register seconds timer
 	),
 	on create do (initForm())
 )
@@ -165,63 +239,67 @@ struct sAutosaveFileSoft	(
 
 	--functions
 	fn getSource = getSourceFileName(), --get path of this script
-	fn isRuning = (gAutosaveFileSoftUI.timer_min.Enabled),
+	fn isRuning = (gAutosaveFileSoftUI.timer_main.IsEnabled),
 	fn startCounter = ( --only first time
 		
-		gAutosaveFileSoftUI.timer_min.start()
+		if gAutosaveFileSoftUI.saving do (
+			
+			format "saving:%\n" (autosave.isactive())
+			gAutosaveFileSoftUI.backup_notifications_params = callbacks.notificationParam()	
+			format "Autosave Params:\n\t%\n" gAutosaveFileSoftUI.backup_notifications_params
+			AutoBackup.Enabled = false
+			Autosave.Enable = false
+-- 			Autosave.Interval = gAutosaveFileSoftUI.autosave_interval
+-- 			AutoBackup.Time = gAutosaveFileSoftUI.autosave_interval
+			if (isProperty Autosave "BailoutEnabled")  do Autosave.BailoutEnabled = true --enable escape backup fn	
+			gAutosaveFileSoftUI.saving = false
+		)
+		gAutosaveFileSoftUI.startMainTimer()
 		format "Autosave Monitor Started at:%\n" (mcDotnet.SysTime.Now.toString())
 	),
-	fn stopCounter = ( --only first time
+	fn stopCounters = ( --only first time
 		
-		gAutosaveFileSoftUI.timer_min.stop()
-		gAutosaveFileSoftUI.stopTimer()
-		format "Autosave Timer Stoped\n"
+		gAutosaveFileSoftUI.stopTimerSec()
+		gAutosaveFileSoftUI.stopTimerMain()
+		format "Autosave Monitor Stoped at:%\n" (mcDotnet.SysTime.Now.toString())
 	),
-	fn timerTick s a = (
-		
-		format "Backup Max File at {%}\n\tpress ABORT to cancel Backup \n" (a.SignalTime.toString())	
-		--test thread free
-		callbacks.removeScripts id:#cAutosaveFileSoft
-		dotNet.removeAllEventHandlers gAutosaveFileSoftUI.timer_min --disable Micra Autosave
-		s.stop()
-		gAutosaveFileSoftUI.timer_min.Enabled = false					
-		local afsUI = gAutosaveFileSoftUI	
-		afsUI.showFormLimited afsUI.cancel_delay			
-	),	
 	fn unregisterAFS = (
-
-		local afsUI = gAutosaveFileSoftUI
+		
+		gAutosaveFileSoftUI.unregisterTimers()
 		callbacks.removeScripts id:#cAutosaveFileSoft
--- 		dotNet.removeEventHandler tm "Elapsed" timerTick --disable Micra Autosave
-		dotNet.removeAllEventHandlers afsUI.timer_min --disable Micra Autosave
 	),
 	fn registerAFS = (
 
-		local afsUI = gAutosaveFileSoftUI
 		callbacks.removeScripts id:#cAutosaveFileSoft
-		callbacks.addScript #filePreOpen "stopCounter()" id:#cAutosaveFileSoft
-		callbacks.addScript #filePostOpenProcess "startCounter()" id:#cAutosaveFileSoft
-		callbacks.addScript #filePreSave "stopCounter()" id:#cAutosaveFileSoft
-		callbacks.addScript #filePostSave "startCounter()" id:#cAutosaveFileSoft
-		callbacks.addScript #systemPreReset "stopCounter()" id:#cAutosaveFileSoft
-		dotNet.addeventhandler afsUI.timer_min "Elapsed" timerTick --register minutes timer
+		callbacks.addScript #filePreOpen "gAutosaveFileSoft.stopCounters()" id:#cAutosaveFileSoft
+		callbacks.addScript #filePostOpenProcess "gAutosaveFileSoft.startCounter()" id:#cAutosaveFileSoft
+		callbacks.addScript #filePreSave "gAutosaveFileSoft.stopCounters()" id:#cAutosaveFileSoft
+		callbacks.addScript #filePostSave "gAutosaveFileSoft.startCounter()" id:#cAutosaveFileSoft
+		callbacks.addScript #systemPreReset "gAutosaveFileSoft.stopCounters()" id:#cAutosaveFileSoft
 	),
-	fn enabled state = (
+	fn enabled state = ( -- Start / Stop Autosave Monitor App  from Micra Customize. 
 	
-		local afsUI = gAutosaveFileSoftUI
+		local is_running = isRuning()
 		case state of (
 		
 			true:(
-		
+				
+				if is_running do return false
+				AutoBackup.Enabled = false	
 				Autosave.Enable = false --disable 3DsMax Autosave
 				registerAFS()
-				if maxFileName.count != 0 do startCounter() --start counter if max file is opened
+				startCounter()
 			)
 			false: ( 
-			
-				stopCounter()
+		
+				stopCounters()
 				unregisterAFS()
-				Autosave.Enable = true --enable 3DsMax Autosave
+				gAutosaveFileSoftUI.hideForm()
+				if not gAutosaveFileSoftUI.abort_pressed do (
+					
+					AutoBackup.Enabled = true
+					Autosave.Enable = true --enable 3DsMax Autosave
+				)
 			)
 		)
 		OK
@@ -242,6 +320,7 @@ gAutosaveFileSoft.enabled true
 gAutosaveFileSoft.isRuning()
 gAutosaveFileSoft.enabled false
 gAutosaveFileSoftUI.showForm()
+C:\Users\Orien Star\Documents\3dsMax\autoback
 */
 
 /*

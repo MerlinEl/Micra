@@ -140,6 +140,16 @@ Struct MICRA_DOTNET (
 		)
 		net_array
 	),
+	/**
+	*@Usage	> convert sconds in to TimeSpan
+	*@Example
+		(mcDotnet.secondsToTimeSpan 61).toString()
+	*/
+	fn secondsToTimeSpan sec_val = (
+	
+		local ts = dotnetObject "System.TimeSpan" 0
+		ts.FromSeconds sec_val
+	),
 	fn maxHW = (
 			local hv = DotNetObject "NativeWindow"
 			hv.AssignHandle (DotNetObject "System.IntPtr" (Windows.GetMaxHWND())) 
@@ -147,7 +157,7 @@ Struct MICRA_DOTNET (
 	),
 	fn focusViewport = ( 
 
-		local WM_MBUTTONDOWN 	= 0x0207
+		local WM_MBUTTONDOWN = 0x0207
 		local WM_MBUTTONUP 	= 0x0208
 		local hwnd = for w in (windows.getChildrenHWND #max) where w[4] == "ViewPanel" do exit with w[1]
 		hwnd = (windows.getChildrenHWND hwnd)[1][1]
