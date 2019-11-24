@@ -18,7 +18,9 @@
 	undefined
 *
 */
---
+Global gAutosaveFileSoft 
+Global gAutosaveFileSoftUI 
+
 if isStruct gAutosaveFileSoft do gAutosaveFileSoft.enabled false
 --Interface	
 struct sAutosaveFileSoftUI	(
@@ -210,7 +212,6 @@ struct sAutosaveFileSoftUI	(
 		form.ShowInTaskBar = false
 		form.FormBorderStyle = form.FormBorderStyle.None
 		form.Controls.addrange #(btn_save, btn_cancel, btn_abort, lbl_info)
-		form.StartPosition = form.StartPosition.Manual
 		form.location = mcDotnet.dPoint (mcSystem.getMaxCenter() - [form.width, form.height] / 2)
 		form.opacity = 0.8
 
@@ -229,7 +230,7 @@ struct sAutosaveFileSoftUI	(
 	),
 	on create do (initForm())
 )
-Global gAutosaveFileSoftUI = sAutosaveFileSoftUI()
+gAutosaveFileSoftUI = sAutosaveFileSoftUI()
 
 
 --Functions
@@ -311,7 +312,7 @@ struct sAutosaveFileSoft	(
 	/*<end>*/
 )	
  --create instance
-Global gAutosaveFileSoft = mcStructMan.instanceStructure sAutosaveFileSoft "gAutosaveFileSoft"
+gAutosaveFileSoft = mcStructMan.instanceStructure sAutosaveFileSoft "gAutosaveFileSoft"
 
 /*
 gAutosaveFileSoftUI.showFormLimited 5

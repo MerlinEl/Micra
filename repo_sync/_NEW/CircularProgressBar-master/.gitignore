@@ -1,0 +1,10 @@
+*.suo
+*/bin/*
+*/obj/*
+*.nupkg
+packages/*
+*.user
+/.vs/*
+/Debug/*
+/Release/*
+*.pfx

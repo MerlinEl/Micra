@@ -164,6 +164,18 @@ Struct MICRA_DOTNET (
 		mcUser32.postmessage hwnd WM_MBUTTONDOWN 0 0
 		mcUser32.postmessage hwnd WM_MBUTTONUP 0 0
 	),
+	fn getFormItemByName form item_name = (
+		
+		if classOf form != dotNetObject do return undefined
+		local controls = form.controls
+		for i=0 to controls.count - 1  do (
+			
+			local itm = controls.item[i]
+			if not (isProperty itm "name") do continue
+			if itm.name == item_name do return itm
+		)
+		undefined
+	),
 	/*
 		@Usage	open dotnet form with max handle implementation
 		@Example	mcDotnet.dShow form saved_pos:false
