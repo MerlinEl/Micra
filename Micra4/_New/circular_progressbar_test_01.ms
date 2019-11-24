@@ -85,8 +85,8 @@ struct sProgressBarTest (
 		form.FormBorderStyle = form.FormBorderStyle.None
 		form.AllowTransparency=false
 		form.TransparencyKey = transparent_color
-		form.width = 300
-		form.height = 400
+		form.width = 200
+		form.height = 300
 		form.location = mcDotnet.dPoint (mcSystem.getMaxCenter() - [form.width, form.height] / 2)
 		form.opacity = 0.6
 		
@@ -112,7 +112,7 @@ struct sProgressBarTest (
 		circ_bar.Text = "0"
 		circ_bar.SuperscriptText = "%"
 		circ_bar.SuperscriptColor = mcDotnet.dColor green --(color 0 200 200)
-		circ_bar.SuperscriptMargin = mcDotnet.dPadding 10 70 0 0
+		circ_bar.SuperscriptMargin = mcDotnet.dPadding 10 55 0 0
 		circ_bar.SubscriptText = ""
 -- 		circ_bar.SubscriptColor = ""
 		circ_bar.outerColor = mcDotnet.dColor (color 0 120 120)
@@ -121,8 +121,9 @@ struct sProgressBarTest (
 		circ_bar.foreColor = mcDotnet.dColor green --(color 0 200 200)
 		circ_bar.minimum = 0
 		circ_bar.maximum = 100
-		circ_bar.MaximumSize = mcDotnet.dSize [250, 250]
-		circ_bar.Font = mcDotnet.dFont font:"Tahoma" size:50 style:"Bold"
+		circ_bar.ProgressWidth = 20
+		circ_bar.MaximumSize = mcDotnet.dSize [200, 200]
+		circ_bar.Font = mcDotnet.dFont font:"Tahoma" size:35 style:"Bold"
 		circ_bar.location = mcDotnet.dPoint (([form.width , form.height] - [circ_bar.width , circ_bar.height]) / 2)
 		circ_bar.value =  0
 		circ_bar.AutoSize = true
