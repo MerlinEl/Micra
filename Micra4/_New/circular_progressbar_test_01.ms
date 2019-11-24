@@ -11,14 +11,22 @@ struct sProgressBarTest (
 	btn_start	= dotnetobject "Button",
 	btn_close= dotnetobject "Button",	
 	circ_bar	= undefined,
-	transparent_color = (color 0 50 50),
-	fn showForm = (gProgressBarTest.form.showmodeless()),
-	fn hideForm = (gProgressBarTest.form.hide()),
-	fn closeForm = (gProgressBarTest.form.close()),
-	fn onBackColorChanged s a = (
-
-		s.backColor = mcDotnet.dColor gProgressBarTest.transparent_color
+	transparent_color = mcDotnet.dColor (color 0 50 50),
+	fn onBackColorChanged s a = ( --set form transparency
+		
+		s.backColor = gProgressBarTest.transparent_color
 		s.TransparencyKey = s.BackColor
+	),
+	fn OnPaint s = ( --set form antialiasing
+			--draw rect test
+			--arg.graphics.clear((dotNetClass "system.drawing.color")fromargb 255 255 255)
+--     		rec=dotNetObject "system.drawing.rectangle" 2 2 200 200
+--     		bgColor=(dotNetClass "system.drawing.color").fromargb 255 255 0 0 
+--     		brush=dotnetobject "System.Drawing.SolidBrush" bgColor
+--     		s.graphics.FillRectangle brush rec
+		local g = s.Graphics
+		g.SmoothingMode = g.SmoothingMode.HighQuality
+		g.CompositingQuality = g.CompositingQuality.HighQuality
 	),
 	fn startTimer =
 	(
@@ -57,8 +65,17 @@ struct sProgressBarTest (
 			)
 		)
 	),
+	fn showForm = (
+		
+		local p = DotNetObject "System.IntPtr" ( Windows.GetMAXHWND() )
+		local maxHwnd = DotNetObject "MaxCustomControls.Win32HandleWrapper" p
+		gProgressBarTest.form.show(maxHwnd)
+	),
+	fn hideForm = (gProgressBarTest.form.hide()),
+	fn closeForm = (gProgressBarTest.form.close()),
 	fn onHideFormPressed s a = (
 		
+		gProgressBarTest.stopTimer()
 		gProgressBarTest.hideForm()
 	),
 	fn initForm = (
@@ -66,18 +83,15 @@ struct sProgressBarTest (
 		form.StartPosition = form.StartPosition.Manual
 		form.ShowInTaskBar = false
 		form.FormBorderStyle = form.FormBorderStyle.None
--- 		form.Controls.addrange #(btn_start, btn_stop, circ_bar)
-		form.width = 400
+		form.AllowTransparency=false
+		form.TransparencyKey = transparent_color
+		form.width = 300
 		form.height = 400
 		form.location = mcDotnet.dPoint (mcSystem.getMaxCenter() - [form.width, form.height] / 2)
-		form.opacity = 0.8
+		form.opacity = 0.6
 		
-	-- 	doesFileExist cp_path
-	-- 	doesFileExist wf_path
-		a = dotnet.LoadAssembly cp_path 
-	-- 	b = dotnet.LoadAssembly wf_path 
+		local a = dotnet.LoadAssembly cp_path 
 	-- 	a.GetTypes()
-	-- 	b.GetTypes()
 		circ_bar = dotnetObject "CircularProgressBar.CircularProgressBar"
 		
 		btn_start.text = "RUN"
@@ -97,29 +111,30 @@ struct sProgressBarTest (
 		circ_bar.Name = "circ_bar"
 		circ_bar.Text = "0"
 		circ_bar.SuperscriptText = "%"
-		circ_bar.SuperscriptColor = mcDotnet.dColor (color 0 120 120)
+		circ_bar.SuperscriptColor = mcDotnet.dColor green --(color 0 200 200)
+		circ_bar.SuperscriptMargin = mcDotnet.dPadding 10 70 0 0
 		circ_bar.SubscriptText = ""
 -- 		circ_bar.SubscriptColor = ""
 		circ_bar.outerColor = mcDotnet.dColor (color 0 120 120)
 		circ_bar.progressColor = mcDotnet.dColor green
-		circ_bar.innerColor = mcDotnet.dColor transparent_color
-		circ_bar.foreColor = mcDotnet.dColor (color 0 120 120)
+		circ_bar.innerColor = transparent_color
+		circ_bar.foreColor = mcDotnet.dColor green --(color 0 200 200)
 		circ_bar.minimum = 0
 		circ_bar.maximum = 100
-		circ_bar.width = 300
-		circ_bar.height = 300
+		circ_bar.MaximumSize = mcDotnet.dSize [250, 250]
+		circ_bar.Font = mcDotnet.dFont font:"Tahoma" size:50 style:"Bold"
 		circ_bar.location = mcDotnet.dPoint (([form.width , form.height] - [circ_bar.width , circ_bar.height]) / 2)
-		--circ_bar.AutoSize = true
+		circ_bar.value =  0
+		circ_bar.AutoSize = true
 		--circ_bar.Dock = circ_bar.Dock.Top
 		  
 		tm.Interval = 100
 		tm.Enabled = false
-		--tm.radius = 100
--- 		tm.bounds = mcDotnet.drect
-		
+
 		form.Controls.addrange #(btn_start, btn_close, circ_bar)
 		
 		dotnet.addEventHandler form "BackColorChanged" onBackColorChanged
+		dotnet.addEventHandler form "Paint" OnPaint
 		dotnet.addeventhandler tm "Elapsed" timerTick
 		dotNet.addEventHandler btn_start "MouseUp" onStartTimerPressed
 		dotNet.addEventHandler btn_close "MouseUp" onHideFormPressed

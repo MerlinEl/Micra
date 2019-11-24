@@ -45,6 +45,7 @@ struct sAutosaveFileSoftUI	(
 	canceled = false,
 	abort_pressed = false, --When Micra Autosave is disabled by user , Max AutoBackup is remains Disabled too
 	backup_notifications_params = #(),
+	transparent_color = mcDotnet.dColor (color 0 50 50),
 	--functions
 	fn isReadyToBackup = (
 		
@@ -52,7 +53,12 @@ struct sAutosaveFileSoftUI	(
 	),
 	fn closeForm = (form.close()),
 	fn hideForm = (form.hide()),
-	fn showForm = (form.showmodeless()),
+	fn showForm = (
+		
+		local p = DotNetObject "System.IntPtr" ( Windows.GetMAXHWND() )
+		local maxHwnd = DotNetObject "MaxCustomControls.Win32HandleWrapper" p
+		gAutosaveFileSoftUI.form.show(maxHwnd)
+	),
 	fn setText str_num = (
 	
 		lbl_info.text = "Autosave After\n( " + str_num + " )"
@@ -102,10 +108,16 @@ struct sAutosaveFileSoftUI	(
 		Autosave.Enable = true
 		autosave.autoBackupNow()
 	),
-	fn onBackColorChanged s a = (
+	fn onBackColorChanged s a = (  --set form transparency
 
-		s.backColor = mcDotnet.dColor red
+		s.backColor = gAutosaveFileSoftUI.transparent_color
 		s.TransparencyKey = s.BackColor
+	),
+	fn OnPaint s = ( --set form antialiasing
+		
+		local g = s.Graphics
+		g.SmoothingMode = g.SmoothingMode.HighQuality
+		g.CompositingQuality = g.CompositingQuality.HighQuality
 	),
 	fn onCancelPressed s a = (
 		
@@ -205,11 +217,13 @@ struct sAutosaveFileSoftUI	(
 		lbl_info.width = 200
 		lbl_info.height = 200
 		lbl_info.foreColor=mcDotnet.dColor yellow
-		lbl_info.backColor=mcDotnet.dColor red
+		lbl_info.backColor=mcDotnet.dColor transparent_color
 		lbl_info.Location = mcDotnet.dPoint [form.Width / 2 - lbl_info.Width / 2, form.Height / 2 - lbl_info.Height / 2]
 		
 		form.StartPosition = form.StartPosition.Manual
 		form.ShowInTaskBar = false
+		form.AllowTransparency=false
+		form.TransparencyKey = transparent_color
 		form.FormBorderStyle = form.FormBorderStyle.None
 		form.Controls.addrange #(btn_save, btn_cancel, btn_abort, lbl_info)
 		form.location = mcDotnet.dPoint (mcSystem.getMaxCenter() - [form.width, form.height] / 2)
@@ -225,6 +239,7 @@ struct sAutosaveFileSoftUI	(
 		dotNet.addEventHandler btn_cancel "MouseUp" onCancelPressed
 		dotNet.addEventHandler btn_abort "MouseUp" onAbortPressed
 		dotnet.addEventHandler form "BackColorChanged" onBackColorChanged
+		dotnet.addEventHandler form "Paint" OnPaint
 		dotNet.addEventHandler timer_main "Tick" timerTickMain --register minutes timer	
 		dotNet.addEventHandler timer_sec "Tick" timerTickSec --register seconds timer
 	),

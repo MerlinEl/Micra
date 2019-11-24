@@ -60,6 +60,7 @@ Struct MICRA_DOTNET (
 	),
 	fn dRect pos size   = (dotnetObject "Drawing.Rectangle" pos.x pos.y size.x size.y),
 	fn dSize size       = (dotNetObject "Drawing.Size" size.x size.y),
+	fn dPadding left top right bottom = (dotnetObject "System.Windows.Forms.Padding" left top right bottom),
 	fn dFont font:"Arial" size:12 style:"Regular" =
 	(
 		local f_style=execute ( "(dotNetClass \"Drawing.FontStyle\")."+style)
