@@ -1,6 +1,15 @@
 --TODO
 --1 compare files size before backup or comething do not backup same file again and again or clear undo histrory or memory mouse clicks
 --2 after wait seeuence finished leave form opened with mesage SAWING NOW! and close it after is finished
+/*
+if checkForSave() do resetMaxFile()
+saveNodes b "foo.max"
+saveNodes b "foo.max"
+saveMaxFile "foo.max"
+clearUndoBuffer() 
+getSaveRequired()
+setSaveRequired false
+*/
 --------------------------------------------------------------------------------
 /* gAutosaveFileSoft by Orien 2019 */
 --------------------------------------------------------------------------------
