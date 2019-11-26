@@ -4,6 +4,7 @@ struct sRoadGeneratorCollision (
 	collision_wirecolor = color 176 26 26,
 	force_load_structures = true,
 	materal_id_offset = 1000, --ofset all mat ID to prevent replacement
+	materals_with_exception = #(425, 469, 470), --materials which wil have collision 52
 	fn detachRail obj faces = (
 		
 		--detach,  rename
@@ -89,6 +90,10 @@ struct sRoadGeneratorCollision (
 		--attach rails back to instance
 		polyOp.attach road_coll obj_rails
 	),
+	fn isMaterialWithException mat_id = (
+	
+		findItem materals_with_exception (mat_id-materal_id_offset) != 0
+	),
 	fn generateRoadCollisions = (
 		
 		gProgLog.msg "@" --clear log
@@ -144,10 +149,10 @@ struct sRoadGeneratorCollision (
 				
 				local mat_id = polyop.getFaceMatID o_instance f
 				-- local sem_id = matIdToSemanticId (mat_id - materal_id_offset)
---temp fix for cobblestones
-				local sem_id = ( --exception for now 52 for cobblestones_car
-				
-					if mat_id == (425+materal_id_offset) then 52 else ::gCityManager.getSIDByID xml_data (mat_id - materal_id_offset)
+
+				local sem_id = ( --exception for cobblestones_car and other [rail road] side geometry
+
+					if (isMaterialWithException mat_id) then 52 else ::gCityManager.getSIDByID xml_data (mat_id - materal_id_offset)
 				)
 				--format "face:% mat_id:% sem_id:%\n" f mat_id sem_id
 				polyop.setFaceMatID o_instance f sem_id	

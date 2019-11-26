@@ -71,8 +71,10 @@ struct sCityManager	(
 	fn cloneObject obj suffix = (
 		
 		if superClassOf obj != GeometryClass do return undefined
-		local obj_rotation = mcTransform.getRotation obj
-		mcTransform.setRotation obj [0,0,0] --temporaly reset rotation of original objec
+		local obj_rotation = mcTransform.getRotation obj --store original object rotation
+		local obj_material = obj.material
+		obj.material = undefined --remove material (snapshot obj with material generate bad geometry)
+		mcTransform.setRotation obj [0,0,0] --reset rotation of clone object
 		local tri_mesh = snapshotAsMesh obj --snapshot as TriMesh to memory
 		local new_o = Editable_mesh() --create an empty EMesh
 		new_o.mesh = tri_mesh --assign TriMesh value to the EMesh
@@ -82,6 +84,7 @@ struct sCityManager	(
 		new_o.pivot = obj.pivot
 		mcTransform.setRotation new_o obj_rotation
 		mcTransform.setRotation obj obj_rotation --return original object rotation back
+		obj.material = obj_material --return material back
 		new_o
 	),
 	fn getCollisionLayer obj = (
