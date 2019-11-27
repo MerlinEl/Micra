@@ -19,6 +19,37 @@ struct FACE_DATA (index	, ed = #()	, vd = #(),
 )
 struct VERT_DATA (index	, uvVerts = #{}) --faces = #{}, edges = #{}
 struct EDGE_DATA (index, uvEdges = #{}) 	--, faces = #{}, edges = #{}
+struct EDGE_LOOP ( --inteligent loop object
+
+	obj = undefined,
+	edges=#{}, 
+	verts=#{},
+	fn isNeigbour el = (
+		
+		local everts = el.verts
+		local remain = everts - verts
+		remain.numberset < everts.numberset
+	),
+	fn addToLoop el = (
+		
+		edges += el.edges
+		verts += el.verts
+	),
+	fn offsetBy offset_xyz = (
+	
+		for v in verts do (
+		
+			local vpos = polyOp.getVert obj v
+			vpos += offset_xyz
+			polyOp.setVert obj v vpos
+		)
+	),
+	fn selectLoop = (
+
+		polyop.setEdgeSelection obj edges
+		redrawViews()
+	)
+)
 struct MICRA_POLY
 (
 	fn getSource = getSourceFileName(), --get path of this script
@@ -103,14 +134,18 @@ struct MICRA_POLY
 		)
 		all_elements
 	),
+	fn getEdgeLength obj edge_index = (
+	
+		local everts = polyOp.getEdgeVerts obj edge_index
+		distance (polyOp.getVert obj everts[1]) (polyOp.getVert obj everts[2])
+	),
 	fn getLongestEdge obj edges = (
 
 		if classOf obj != Editable_Poly do return undefined
 		local edge_data = #(0,0)
 		for edge_index in edges do (
 
-			local everts = polyOp.getEdgeVerts obj edge_index
-			local len = distance (polyOp.getVert obj everts[1]) (polyOp.getVert obj everts[2])
+			local len = getEdgeLength obj edge_index
 			if edge_data[1] < len do (
 			
 				edge_data[1] = len
@@ -125,8 +160,7 @@ struct MICRA_POLY
 		local edge_data = #(9999999,0)
 		for edge_index in edges do (
 
-			local everts = polyOp.getEdgeVerts obj edge_index
-			local len = distance (polyOp.getVert obj everts[1]) (polyOp.getVert obj everts[2])
+			local len = getEdgeLength obj edge_index
 			if edge_data[1] > len do (
 			
 				edge_data[1] = len
@@ -165,6 +199,38 @@ struct MICRA_POLY
 		local v2 = normalize (p2 - center)
 		polyOp.setVert obj verts[1] (center+(v1*half_dist))
 		polyOp.setVert obj verts[2] (center+(v2*half_dist))
+	),
+	/**
+	*Usage > split edge selection in to loop groups
+	*/
+	fn getLoopsFromEdges obj edges = (
+		
+		local edges_el = for ei in edges collect (EDGE_LOOP obj #{ei} (polyOp.getVertsUsingEdge obj ei))
+		local eloops = #()
+		for a in edges_el do (
+
+			local found = false
+			for b in eloops where b.isNeigbour a do (
+				
+				b.addToLoop a
+				found = true
+			)
+			if not found do append eloops a
+		)
+		--hotfix is not universal (depend on edges in loop, TODO must pass it more times) 
+		--final merge elements if have identical vertices
+		local eloops2 = #()
+		for a in eloops do (
+			
+			local found = false
+			for b in eloops2 where b.isNeigbour a do (
+				
+				b.addToLoop a
+				found = true
+			)
+			if not found do append eloops2 a
+		)
+		eloops2
 	),
 	fn setObjectId obj mat_id = (
 
