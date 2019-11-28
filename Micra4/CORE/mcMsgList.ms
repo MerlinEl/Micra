@@ -38,6 +38,7 @@ struct MICRA_MESSAGE_LIST_STRUCTURE	(
 			"call_help"		: "Something wierd was happen. Call Merlin to help you :-)"
 			"not_mesh"		: "Editable Mesh must be selected."
 			"not_poly"		: "Editable Poly must be selected."
+			"not_poly_trgt"	: "Target Editable Poly must be defined."
 			"not_poly_2"		: "Both Object must be Editable Poly."
 			"not_geo"			: "Editable Poly or Editable Mesh must be selected."
 			"not_unwrap"		: "Object must have Unwrap Modifier."

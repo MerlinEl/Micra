@@ -216,7 +216,8 @@ struct EDIT_MODEL (
 		
 		--validate souurce and target object
 		local source_obj = selection[1]	
-		if not em.isValidObject source_obj or not em.isValidObject target_obj do return (mcMsgList.warn "not_poly_2")
+		if not em.isValidObject source_obj do return (mcMsgList.warn "not_poly")
+		if not em.isValidObject target_obj do return (mcMsgList.warn "not_poly_trgt")
 		if not em.isValidSelection source_obj do return (mcMsgList.warn "not_vsel_2")
 		--make snapshot for calculations (speed up with collapsed modifiers)
 		local source_mesh, target_mesh
