@@ -201,6 +201,8 @@ struct MICRA_POLY
 	),
 	/**
 	*@Usage > Edge Loop Functions
+	*@Example
+		local edge_loop = mcPoly.getEdgeLoop obj edge_index --get loop from given edge
 	*/
 	fn getEdgeLoop obj edge_index = (
 			
