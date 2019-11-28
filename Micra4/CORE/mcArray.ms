@@ -22,6 +22,11 @@ struct MCRA_ARRAY (
 	 	if (not elementExists) then
 		append inArray newElement
 	),
+	fn prepend inArray newElement = (
+	
+		insertItem newElement inArray 1
+		inArray
+	), 
 	/**
 	*@Author	denisT
 	*@Usage		find duplicates in an array

@@ -1000,7 +1000,7 @@ struct mcAction (
 		(
 			#loop   : undo "Edges Loop"   on obj.SelectEdgeLoop()
 			#ring   : undo "Edges Ring"   on obj.SelectEdgeRing()
-			#border : undo "Edges Border" on obj.SelectBorder  ()
+			#border : undo "Edges Border" on obj.SelectBorder()
 		)
 	),
 	fn select_quads type =

@@ -19,7 +19,7 @@ struct FACE_DATA (index	, ed = #()	, vd = #(),
 )
 struct VERT_DATA (index	, uvVerts = #{}) --faces = #{}, edges = #{}
 struct EDGE_DATA (index, uvEdges = #{}) 	--, faces = #{}, edges = #{}
-struct EDGE_LOOP ( --inteligent loop object
+/*struct EDGE_LOOP ( --inteligent loop object NOT USED FOR NOW
 
 	obj = undefined,
 	edges=#{}, 
@@ -49,7 +49,7 @@ struct EDGE_LOOP ( --inteligent loop object
 		polyop.setEdgeSelection obj edges
 		redrawViews()
 	)
-)
+)*/
 struct MICRA_POLY
 (
 	fn getSource = getSourceFileName(), --get path of this script
@@ -169,6 +169,68 @@ struct MICRA_POLY
 		)
 		edge_data[2]
 	),
+	/**
+	*@Usage > Edge Loop Functions
+		filter vert edges to return only loop edges
+	*/
+	fn filterEdgesInLoop obj vert_edges edge_index = (
+		
+		local edge_faces = polyop.getFacesUsingEdge obj edge_index
+		local face_edges = polyop.getEdgesUsingFace obj edge_faces
+		((vert_edges -  face_edges) as array)[1] 
+	),
+	/**
+	*@Usage > Edge Loop Functions
+	*/
+	fn getNextEdgeLoop obj &next_edge &next_vert = (
+		
+		local edge_verts = polyop.getVertsUsingEdge obj next_edge
+		next_vert    = ((edge_verts - #{next_vert}) as Array)[1]
+		local vert_edges = polyop.getEdgesUsingVert obj next_vert
+		next_edge = filterEdgesInLoop obj vert_edges next_edge
+	),
+	/**
+	*@Usage > Edge Loop Functions
+	*/
+	fn getPrevEdgeLoop obj &prev_edge &prev_vert = (
+		
+		local edge_verts = polyop.getVertsUsingEdge obj prev_edge
+		prev_vert    = ((edge_verts - #{prev_vert}) as Array)[1]
+		local vert_edges = polyop.getEdgesUsingVert obj prev_vert
+		prev_edge = filterEdgesInLoop obj vert_edges prev_edge
+	),
+	/**
+	*@Usage > Edge Loop Functions
+	*/
+	fn getEdgeLoop obj edge_index = (
+			
+		local prev_edge = edge_index
+		local next_edge = edge_index
+		
+		local edge_verts = (polyop.getVertsUsingEdge obj prev_edge as array)
+		next_vert  = edge_verts[1]
+		prev_vert  = edge_verts[2]
+		
+		local eloop = #(prev_edge)
+		
+		--if wee still have progress in one of twoo directions (back - forward)
+		while next_edge != undefined or prev_edge != undefined do ( 
+			
+			--forward step
+			if next_edge != undefined do (
+				
+				getNextEdgeLoop obj &next_edge &next_vert 
+				if next_edge != undefined and findItem eloop next_edge == 0 then append eloop next_edge else next_edge = undefined
+			)
+			--backward step
+			if prev_edge != undefined do (
+				
+				getPrevEdgeLoop obj &prev_edge &prev_vert 
+				if prev_edge != undefined and findItem eloop prev_edge == 0 then mcArray.prepend eloop prev_edge else prev_edge = undefined
+			)
+		)
+		eloop
+	),
 	fn removeEdges obj edges = (	
 
 		if classOf obj != Editable_Poly do return false
@@ -199,38 +261,6 @@ struct MICRA_POLY
 		local v2 = normalize (p2 - center)
 		polyOp.setVert obj verts[1] (center+(v1*half_dist))
 		polyOp.setVert obj verts[2] (center+(v2*half_dist))
-	),
-	/**
-	*Usage > split edge selection in to loop groups
-	*/
-	fn getLoopsFromEdges obj edges = (
-		
-		local edges_el = for ei in edges collect (EDGE_LOOP obj #{ei} (polyOp.getVertsUsingEdge obj ei))
-		local eloops = #()
-		for a in edges_el do (
-
-			local found = false
-			for b in eloops where b.isNeigbour a do (
-				
-				b.addToLoop a
-				found = true
-			)
-			if not found do append eloops a
-		)
-		--hotfix is not universal (depend on edges in loop, TODO must pass it more times) 
-		--final merge elements if have identical vertices
-		local eloops2 = #()
-		for a in eloops do (
-			
-			local found = false
-			for b in eloops2 where b.isNeigbour a do (
-				
-				b.addToLoop a
-				found = true
-			)
-			if not found do append eloops2 a
-		)
-		eloops2
 	),
 	fn setObjectId obj mat_id = (
 
@@ -628,7 +658,7 @@ struct MICRA_POLY
 		new_obj
 	),
 	/**
-	*@Usage > 	detach all faces to create a new object
+	*@Usage > 	detach all faces to create a new object with specific properties
 	*/
 	fn rebuildObject obj = (   
 

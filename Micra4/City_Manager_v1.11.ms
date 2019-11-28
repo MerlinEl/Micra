@@ -69,7 +69,8 @@ rollout mcCityManDialog "" width:500 height:988
 		"Select Visible Lodes 2" ,
 		"Add Terrain Lodes 2 and Fix Pivot",
 		"Add Lodes Custom",
-		"Destroy Lods in Selection"
+		"Destroy Lods in Selection",
+		"Curb Crumple"
 	) 
 	label 'lbl_advanced_tools' "Advanced Tools:" pos:[12,964] width:132 height:20 align:#left
 	--Local variables
@@ -692,6 +693,10 @@ rollout mcCityManDialog "" width:500 height:988
 			"Destroy Lods in Selection" : (
 
 				undo off ::gCityManager.destroyLodsInSelection()
+			)
+			"Curb Crumple" : (
+
+				fileIn (micra.RootDir + "LS3D_Curb_Crumple.ms")
 			)
 		)
 	)
