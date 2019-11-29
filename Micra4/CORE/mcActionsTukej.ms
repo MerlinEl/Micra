@@ -36,7 +36,7 @@ struct MICRA_TUKEJ_STRUCTURE	(
 	),
 	fn selectPlayer = (
 		
-		local player_obj =  (for o in objects where findString o.name "player" != undefined collect o)[1]
+		local player_obj =  (for o in objects where findString o.name "temp_player_lincoln_ruler" != undefined collect o)[1]
 		if player_obj != undefined do (
 			
 			select player_obj

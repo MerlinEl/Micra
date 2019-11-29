@@ -662,7 +662,7 @@ struct MICRA_POLY
 	/**
 	*@Usage > 	detach all faces to create a new object with specific properties
 	*/
-	fn rebuildObject obj = (   
+	fn rebuildObject obj withMaterial:false = (   
 
 		if (classOf obj != Editable_Poly) then (convertToPoly obj)
 		local obj_name = obj.name 
@@ -670,6 +670,7 @@ struct MICRA_POLY
 		local obj_parent = obj.parent
 		local obj_wirecolor = obj.wirecolor
 		local obj_pivot = obj.pivot
+		local obj_material = obj.material
 		obj.name = uniqueName "Object For Delete"
 		polyOp.detachFaces obj obj.faces delete:true asNode:true name:obj_name
 		delete obj
@@ -678,6 +679,7 @@ struct MICRA_POLY
 		new_obj.parent = obj_parent
 		new_obj.wirecolor = obj_wirecolor
 		new_obj.pivot = obj_pivot
+		if withMaterial do new_obj.material = obj_material
 		update new_obj
 		select new_obj
 		new_obj

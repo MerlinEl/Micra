@@ -1,28 +1,37 @@
 Global mcPatcher2PDialog
 if ::mcPatcher2PDialog != undefined do try(destroyDialog mcPatcher2PDialog)catch()
-rollout mcPatcher2PDialog "" width:348 height:140
+rollout mcPatcher2PDialog "" width:348 height:156
 (
 	local form_title = "Patcher 2P:"
 	local metric_type = units.SystemType as String
 	local target_obj = undefined
 	pickbutton 'btn_trgt_obj' "Pick..." pos:[84,22] width:52 height:20 align:#left
-	GroupBox 'grp16' "Setup:" pos:[4,4] width:340 height:132 align:#left
+	GroupBox 'grp16' "Setup:" pos:[4,4] width:340 height:148 align:#left
 	label 'lbl5' "Target Object:" pos:[8,26] width:76 height:16 align:#left
 	label 'lbl_trgt_obj' "..." pos:[140,23] width:196 height:16 align:#left
-	button 'btn_stitch' "STITCH" pos:[8,96] width:328 height:36 align:#left
+	button 'btn_stitch' "STITCH" pos:[216,72] width:120 height:72 align:#left
 	label 'lbl3' "Jionts Offset:" pos:[8,52] width:76 height:16 align:#left
 	label 'lbl_units' "units..." pos:[156,51] width:180 height:16 align:#left
 	spinner 'spn_offset' "" pos:[84,50] width:68 height:16 range:[0,100,40] type:#float scale:0.1 align:#left
-	checkbox 'chk_attach' "Attach" pos:[12,75] width:64 height:16 checked:true align:#left
-	checkbox 'chk_weld' "Weld" pos:[168,76] width:44 height:16 checked:true align:#left
-	checkbox 'chk_triangulate' "Triangulate" pos:[80,75] width:76 height:16 checked:true align:#left
-	label 'lbl_weld' "Treshold:" pos:[226,77] width:48 height:16 align:#left
-	spinner 'spn_weld_offset' "" pos:[272,76] width:64 height:16 range:[0,100,0.01] type:#float scale:0.1 align:#left
+	checkbox 'chk_attach' "Attach" pos:[12,92] width:64 height:16 checked:true align:#left
+	checkbox 'chk_weld' "Weld" pos:[12,112] width:44 height:16 checked:true align:#left
+	checkbox 'chk_triangulate' "Triangulate" pos:[12,72] width:76 height:16 checked:true align:#left
+	label 'lbl_weld' "Treshold:" pos:[70,113] width:48 height:16 align:#left
+	spinner 'spn_weld_offset' "" pos:[116,112] width:64 height:16 range:[0,100,0.01] type:#float scale:0.1 align:#left
+	checkbox 'chk_automap' "Automap" pos:[12,132] width:60 height:16 checked:true align:#left
 struct EDIT_MODEL (
 		
-		fn isValidObject obj = (
+		fn isValidObject obj modPoly:false = (
 
-			obj != undefined and classOf obj.baseObject == Editable_Poly -- or classOf obj.baseObject == Editable_Mesh
+			local is_poly_obj = obj != undefined and classOf obj.baseObject == Editable_Poly
+			if modPoly then (
+			
+				classOf obj == PolyMeshObject or is_poly_obj
+				
+			) else (
+			
+				is_poly_obj
+			)
 		),
 		fn isValidSelection obj = (
 			
@@ -144,6 +153,16 @@ struct EDIT_MODEL (
 			)
 			loop_vertices
 		),
+		fn getVertsOpenEdges obj verts = (
+		
+			local edges_loop = #{}
+			for vi in verts do (
+				
+				local vedges = polyOp.getEdgesUsingVert obj vi
+				for ei in vedges where mcPoly.isBorderEdge obj ei do edges_loop += #{ei} 
+			)
+			edges_loop
+		),
 		fn triangulate obj top_positions = (
 			
 			if top_positions.count != 0 then (
@@ -186,6 +205,19 @@ struct EDIT_MODEL (
 			base_mesh.wirecolor = blue
 			subobjectLevel = 0
 			base_mesh
+		),
+		fn mapObjectPlanar obj = (
+		
+			local uv_mod = Uvwmap ()
+			uv_mod.maptype = 0
+			uv_mod.axis = 2
+			uv_mod.realWorldMapSize = off
+			uv_mod.utile = 1
+			uv_mod.vtile = 1
+			uv_mod.wtile = 1
+			uv_mod.channel = 0
+			addModifier obj uv_mod
+			maxOps.CollapseNode obj off
 		),
 		fn attachObject obj_base obj_new = (
 		
@@ -285,12 +317,41 @@ if target_vert_a == undefined or target_vert_b == undefined do ( --when one of t
 			em.unifyNormals new_surface
 			if chk_triangulate.checked do (
 				
-				local mid_verts = ((source_vertex_loop as bitarray) - #{source_vert_a}) - #{source_vert_b}
+				local mid_verts = (source_vertex_loop as bitarray) - #{source_vert_a, source_vert_b} --get verts without first and last
 				local tirangulate_top_positions = em.getVertsPositions source_obj mid_verts
 				em.triangulate new_surface tirangulate_top_positions
 			)
-			if chk_attach.checked do em.attachObject source_obj new_surface
-			if chk_weld.checked   do em.weldVertices source_obj offset:spn_weld_offset.value
+			--map new surface 
+			if chk_automap.checked do em.mapObjectPlanar new_surface
+			if chk_attach.checked do (
+			
+				em.attachObject source_obj new_surface
+				if chk_automap.checked do (
+				
+					-------------------
+					--STITCH MAPPING--
+					-------------------
+					--get border edge from source object	
+					local mid_verts = (source_vertex_loop as bitarray) - #{source_vert_a, source_vert_b} --get verts without first and last
+					local source_border_loop = em.getVertsOpenEdges source_obj mid_verts
+					polyop.setEdgeSelection source_obj source_border_loop
+--collect edgefaces data
+-- gd = mcPoly.getGeometryData source_obj useFaces:faces_bitarray
+--add unwrap
+
+--collect map data
+-- mcPolyMap.collectUnwrapData gd
+
+--select edges in unwrap
+
+--stitch edges
+
+--realx new object mapping if need ????
+--collapse stack all
+-- maxOps.CollapseNode obj off
+				)
+				if chk_weld.checked do em.weldVertices source_obj offset:spn_weld_offset.value
+			)
 		)
 	)
 	fn init = (

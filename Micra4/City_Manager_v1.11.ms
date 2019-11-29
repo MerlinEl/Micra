@@ -396,7 +396,7 @@ rollout mcCityManDialog "" width:500 height:988
 		mcFile.initStruct gRoadGeneratorCollision "LS3D_Road_Collisions_Generator" force:force_load_structures
 		if ::gRoadGeneratorCollision != undefined and queryBox "Do you want to generate Road Collisions?" title:"Warning:" do (
 		
-			gRoadGeneratorCollision.generateRoadCollisions()
+			::gRoadGeneratorCollision.generateRoadCollisions()
 		)
 		updateScene()
 	)
