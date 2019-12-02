@@ -174,7 +174,7 @@ struct MICRA_POLY_MAP_STRUCTURE	(
 		local shift_y = int ( floor sel_center.y )
 		gco.MoveSelected [-shift_x, -shift_y, 0]
 	),
-	/**
+	/** TEST
 	*@Usage	GEOMETRY DATABASE >  Remove unwrap data for each face
 	*/
 	fn clearUnwrapData geo_data = (
@@ -192,18 +192,35 @@ struct MICRA_POLY_MAP_STRUCTURE	(
 			)
 		)
 	),
-	fn collectUnwrapData geo_data = (
+	/**  TEST
+	
+	*@Example
+		obj = $
+		geo_faces = polyOp.getFaceSelection obj
+		geo_data = mcPoly.getGeometryData obj faces:fsel
+		mcPolyMap.collectUnwrapData obj geo_data
 		
-		local gco = modPanel.getCurrentObject()
-		if classOf gco != Unwrap_UVW do return false
+		geo_verts = polyOp.getVertSelection obj
+		mcPoly.geoVertsToMapVerts geo_verts geo_data 
+		print geo_data
+	*/
+	fn collectUnwrapData obj geo_data = (
+		
+		local mod_uvw = obj.modifiers[#unwrap_uvw]
+		if classOf mod_uvw != Unwrap_UVW do (
+		
+			mod_uvw = Unwrap_UVW ()
+			subobjectLevel = 0
+			addModifier obj mod_uvw
+		)
 		for fd in geo_data do (
 			
 			--gather vertex UV data
-			local uv_face_verts_count = gco.numberPointsInFace fd.index
+			local uv_face_verts_count = mod_uvw.numberPointsInFace fd.index
 			for vetr_handle = 1 to uv_face_verts_count do (
 					
-				local uv_vert_index	= gco.getVertexIndexFromFace				fd.index vetr_handle
-				local geo_vert_index	= gco.getVertexGeomIndexFromFace	fd.index vetr_handle
+				local uv_vert_index	= mod_uvw.getVertexIndexFromFace		fd.index vetr_handle
+				local geo_vert_index	= mod_uvw.getVertexGeomIndexFromFace	fd.index vetr_handle
 				
 				local vert_data =  fd.getVertDataByGeoIndex geo_vert_index
 				vert_data.uvVerts += #{uv_vert_index}

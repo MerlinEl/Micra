@@ -333,22 +333,30 @@ if target_vert_a == undefined or target_vert_b == undefined do ( --when one of t
 					-------------------
 					--get border edge from source object	
 					local mid_verts = (source_vertex_loop as bitarray) - #{source_vert_a, source_vert_b} --get verts without first and last
-					local source_border_loop = em.getVertsOpenEdges source_obj mid_verts
-					polyop.setEdgeSelection source_obj source_border_loop
+					local verts_faces = polyOp.getFacesUsingVert obj mid_verts
+					polyOp.setFaceSelection source_obj verts_faces --get verts faces
+					subobjectLevel = 0 --exit from subobject mode to teake whole object in to unwrap
+					local mod_uvw = Unwrap_UVW ()
+					addModifier obj mod_uvw --add unwrap mod (face selection is alsoo transfered from poly object)
+					--stitch edges
+					subobjectLevel = 3
+					macros.run "UVW Unwrap" "UVWUnwrap_Stitch"
+					--realx new object mapping if need ????
+					maxOps.CollapseNode obj off --collapse stack all
+			
+			
+-- local source_border_loop = em.getVertsOpenEdges source_obj mid_verts
+--polyOp.setEdgeSelection source_obj source_border_loop
 --collect edgefaces data
--- gd = mcPoly.getGeometryData source_obj useFaces:faces_bitarray
+-- faces_bitarray = polyOp.getFacesUsingVert obj mid_verts
+-- gd = mcPoly.getGeometryData source_obj faces:faces_bitarray
 --add unwrap
-
 --collect map data
--- mcPolyMap.collectUnwrapData gd
-
+-- mcPolyMap.collectUnwrapData obj gd
 --select edges in unwrap
-
 --stitch edges
-
 --realx new object mapping if need ????
---collapse stack all
--- maxOps.CollapseNode obj off
+
 				)
 				if chk_weld.checked do em.weldVertices source_obj offset:spn_weld_offset.value
 			)

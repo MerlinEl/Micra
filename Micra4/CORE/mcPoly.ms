@@ -421,14 +421,22 @@ struct MICRA_POLY
 		edges_verts = (edges_verts - #{vertex_index}) as array
 		#(vertex_index, edges_verts[1], edges_verts[2])
 	),
-	/**
+	/** TEST
 	*@Usage	collect geometry data
+		obj		Editable_Poly Object
+		faces	add bitarray faces to spped up calculations
+	*@Example 
+		obj = $
+		fsel = polyOp.getFaceSelection obj
+		gd = mcPoly.getGeometryData obj faces:fsel
+		print gd
 	*/
-	fn getGeometryData obj = (
+	fn getGeometryData obj faces:#{}= (
 
 		if classOf obj != Editable_Poly do return false
 		local faces_data = #()
-		for face_index = 1 to obj.faces.count do (
+		if faces.numberset == 0 do faces = #{1..obj.faces.count}
+		for face_index in faces do (
 			
 -- 			format "face:%\n" face_index	
 			local face_verts = polyop.getVertsUsingFace obj face_index
@@ -440,6 +448,17 @@ struct MICRA_POLY
 		)
 		faces_data
 	),
+	/** TEST
+	*@Example
+		obj = $
+		geo_faces = polyOp.getFaceSelection obj
+		geo_data = mcPoly.getGeometryData obj faces:fsel
+		mcPolyMap.collectUnwrapData obj geo_data
+		
+		geo_verts = polyOp.getVertSelection obj
+		mcPoly.geoVertsToMapVerts geo_verts geo_data 
+		print geo_data
+	*/
 	fn geoVertsToMapVerts geo_verts geo_data = (
 		
 		local uv_verts = #{}
@@ -606,7 +625,7 @@ struct MICRA_POLY
 		--move pivot ot face center
 		obj.pivot = face_center
 	),
-	/**
+	/** NOT REALLY WORKS should be replaced with other method like "dot" and "cross" product 
 	*@Usage >	sort vertices by vectors p - center
 		p1 - p2 compare point A with point B
 		center 	vertices center

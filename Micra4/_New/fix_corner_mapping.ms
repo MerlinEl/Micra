@@ -38,7 +38,7 @@ fn fixCornerMapping obj = (
 		--remove old UV data
 		mcPolyMap.clearUnwrapData geo_data
 		--recolect new UV data
-		mcPolyMap.collectUnwrapData geo_data
+		mcPolyMap.collectUnwrapData obj geo_data
 		--gather left and right vertices from splited edge
 		vsel_left = mod_uvw.getSelectedVertices()
 		mod_uvw.selectVertices (mcPoly.geoVertsToMapVerts everts geo_data)
