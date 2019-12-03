@@ -140,27 +140,32 @@ rollout smgDialog "Smoothing Groups & ID" width:144 height:240
 				smgDialog.spn2.value = 0 ; smgDialog.spn2.Indeterminate = true
 			)
 		),
-		fn setTo ckb smg_index = (
-		
+		--TODO implement -- > mcPoly.setFacesSMG obj faces smg_index 
+		--https://forums.cgsociety.org/t/polyop-smoothinggroups/1139701/8
+		fn setTo ckbNum bit =
+		(
 			setFocus smgDialog
-			local obj = selection[1]
-			if not (mcSMG.isEditPoly obj) do return false
-			local fsel = polyOp.getFaceSelection $ as array
-			if fsel.count == 0 do (ckb.checked = off ; return false)
+			local ckb = execute ("smgDialog.ckb_"+ckbNum as string)
+			if (polyOp.getFaceSelection $ as array).count == 0 do (ckb.checked = off ; return false)
 			
-			if ckb.checked then ( --add smg_index
-			
-				mcPoly.setFacesSMG obj fsel smg_index add:true
-				ckb.caption = smg_index as string
+			if ckb.checked
+			then 
+			(
+				polyOp.setFaceSmoothGroup $ (polyOp.getFaceSelection $.baseobject as array) bit add:true
+				ckb.caption = ckbNum as string
+				--print ("Bit:"+ bit as string)
+			)
+			else 
+			(
+				local smgArray = #(1,2,4,8,16,32,64,128,256,512,1024,2048,4096,8192,16384,32768,65536,131072,262144,524288,1048576,
+				2097152,4194304,8388608,16777216,33554432,67108864,134217728,268435456,536870912,1073741824,-2147483648)
 				
-			) else ( --remove smg_index
-			
-				local bits = mcPoly.getBitsFromSMG smg_index
-				for f in fSel do (
-				
-					local fbits = polyOp.getFaceSmoothGroup obj f
-					local fsmg = (fbits - bits as integer) 
-					polyOp.setFaceSmoothGroup obj f fsmg
+				local fSel = (polyOp.getFaceSelection $) as array
+				for f in 1 to fSel.count do 
+				(
+					local fSmg = (polyOp.getFaceSmoothGroup $ fSel[f] - smgArray[ckbNum] as integer) 
+					polyOp.setFaceSmoothGroup $ fSel[f] fSmg
+					--print ("Bit: " + fSmg as string )
 				)
 			)
 		),
@@ -174,9 +179,12 @@ rollout smgDialog "Smoothing Groups & ID" width:144 height:240
 	(
 		--DestroyDialog smgDialog if subobjectlevel 4 is false
 		registerRedrawViewsCallback mcSMG.isInPolygonLevel		
+
 		mcSMG.updateInterface()
+		
 		--ID update
 		when select selection[1] changes id:#IDsmgSelection do (mcSMG.updateInterface())
+		
 	)
 	on smgDialog close  do
 	(
@@ -213,38 +221,38 @@ rollout smgDialog "Smoothing Groups & ID" width:144 height:240
 		$.buttonOp #Autosmooth
 		mcSMG.updateInterface()
 	)
-	on ckb_1  changed state do mcSMG.setTo ckb_1  1
-	on ckb_2  changed state do mcSMG.setTo ckb_2  2
-	on ckb_3  changed state do mcSMG.setTo ckb_3  3
-	on ckb_4  changed state do mcSMG.setTo ckb_4  4
-	on ckb_5  changed state do mcSMG.setTo ckb_5  5
-	on ckb_6  changed state do mcSMG.setTo ckb_6  6
-	on ckb_7  changed state do mcSMG.setTo ckb_7  7
-	on ckb_8  changed state do mcSMG.setTo ckb_8  8
-	on ckb_9  changed state do mcSMG.setTo ckb_9  9
-	on ckb_10 changed state do mcSMG.setTo ckb_10 10 
-	on ckb_11 changed state do mcSMG.setTo ckb_11 11 
-	on ckb_12 changed state do mcSMG.setTo ckb_12 12 
-	on ckb_13 changed state do mcSMG.setTo ckb_13 13 
-	on ckb_14 changed state do mcSMG.setTo ckb_14 14 
-	on ckb_15 changed state do mcSMG.setTo ckb_15 15 
-	on ckb_16 changed state do mcSMG.setTo ckb_16 16 
-	on ckb_17 changed state do mcSMG.setTo ckb_17 17 
-	on ckb_18 changed state do mcSMG.setTo ckb_18 18 
-	on ckb_19 changed state do mcSMG.setTo ckb_19 19 
-	on ckb_20 changed state do mcSMG.setTo ckb_20 20 
-	on ckb_21 changed state do mcSMG.setTo ckb_21 21 
-	on ckb_22 changed state do mcSMG.setTo ckb_22 22 
-	on ckb_23 changed state do mcSMG.setTo ckb_23 23 
-	on ckb_24 changed state do mcSMG.setTo ckb_24 24 
-	on ckb_25 changed state do mcSMG.setTo ckb_25 25 
-	on ckb_26 changed state do mcSMG.setTo ckb_26 26 
-	on ckb_27 changed state do mcSMG.setTo ckb_27 27 
-	on ckb_28 changed state do mcSMG.setTo ckb_28 28 
-	on ckb_29 changed state do mcSMG.setTo ckb_29 29 
-	on ckb_30 changed state do mcSMG.setTo ckb_30 30 
-	on ckb_31 changed state do mcSMG.setTo ckb_31 31 
-	on ckb_32 changed state do mcSMG.setTo ckb_32 32 
+	on ckb_1  changed state do mcSMG.setTo 1 1
+	on ckb_2  changed state do mcSMG.setTo 2 2
+	on ckb_3  changed state do mcSMG.setTo 3 4
+	on ckb_4  changed state do mcSMG.setTo 4 8
+	on ckb_5  changed state do mcSMG.setTo 5 16
+	on ckb_6  changed state do mcSMG.setTo 6 32
+	on ckb_7  changed state do mcSMG.setTo 7 64
+	on ckb_8  changed state do mcSMG.setTo 8 128
+	on ckb_9  changed state do mcSMG.setTo 9 256
+	on ckb_10 changed state do mcSMG.setTo 10 512
+	on ckb_11 changed state do mcSMG.setTo 11 1024
+	on ckb_12 changed state do mcSMG.setTo 12 2048
+	on ckb_13 changed state do mcSMG.setTo 13 4096
+	on ckb_14 changed state do mcSMG.setTo 14 8192
+	on ckb_15 changed state do mcSMG.setTo 15 16384
+	on ckb_16 changed state do mcSMG.setTo 16 32768
+	on ckb_17 changed state do mcSMG.setTo 17 65536
+	on ckb_18 changed state do mcSMG.setTo 18 131072
+	on ckb_19 changed state do mcSMG.setTo 19 262144
+	on ckb_20 changed state do mcSMG.setTo 20 524288
+	on ckb_21 changed state do mcSMG.setTo 21 1048576
+	on ckb_22 changed state do mcSMG.setTo 22 2097152
+	on ckb_23 changed state do mcSMG.setTo 23 4194304
+	on ckb_24 changed state do mcSMG.setTo 24 8388608
+	on ckb_25 changed state do mcSMG.setTo 25 16777216
+	on ckb_26 changed state do mcSMG.setTo 26 33554432
+	on ckb_27 changed state do mcSMG.setTo 27 67108864
+	on ckb_28 changed state do mcSMG.setTo 28 134217728
+	on ckb_29 changed state do mcSMG.setTo 29 268435456
+	on ckb_30 changed state do mcSMG.setTo 30 536870912
+	on ckb_31 changed state do mcSMG.setTo 31 1073741824
+	on ckb_32 changed state do mcSMG.setTo 32 -2147483648
 )
 --~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~--
 --o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o--

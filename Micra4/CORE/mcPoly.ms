@@ -272,23 +272,30 @@ struct MICRA_POLY
 		/**
 	*@Usage --> convert smg in to bits
 	*@Example
-		smg_list = #{24..25, 31}
-		mcPoly.getBitsFromSMG smg_list
+		smgs = #{24..25, 31}
+		bits = mcPoly.getBitsFromSMG smgs
 		--> 1098907648
 	*/
 	fn getBitsFromSMG smgs = (
 	
 		local bits = 0
-		for i in smgs do bits = bit.set bits i True
+		if classOf smgs != Array then (
+		
+			bits = bit.set 0 smgs True
+			
+		) else (
+		
+			for i in smgs do bits = bit.set bits i True
+		)
 		bits
 	),
 	/**
-	*@Usage --> get smooth groups from bit
+	*@Usage --> convert bits in to smg
 	*@Example
-		smg_bit = bit.set 0 24 True 		--set 24 bit to true
-		smg_bit = bit.set smg_bit 25 True	--append 25 bit
-		smg_bit = bit.set smg_bit 31 True	--append 31 bit
-		mcPoly.getSMGfromBits smg_bit
+		bits = bit.set 0 24 True 		--set 24 bit to true
+		bits = bit.set bits 25 True	--append 25 bit
+		bits = bit.set bits 31 True	--append 31 bit
+		smgs = mcPoly.getSMGfromBits bits
 		--> #{24..25, 31}
 	*/
 	fn getSMGfromBits bits = (
@@ -298,57 +305,25 @@ struct MICRA_POLY
 		return arr;
 	),
 	/**
-	smg_bit = bit.set 0 24 True 		--set 24 bit to true
-	smg_bit = bit.set smg_bit 25 True	--append 25 bit
-	smg_bit = bit.set smg_bit 31 True	--append 31 bit
-	faces = polyOp.getFaceSelection $
-	polyOp.setFaceSmoothGroup $ faces smg_bit --set SMG 24, 25 and 31
+	*@Usage --> get smooth groups from bit
+	*@Example
+		bits = bit.set 0 24 True 		--set 24 bit to true
+		bits = bit.set bits 25 True	--append 25 bit
+		bits = bit.set bits 31 True	--append 31 bit
+		faces = polyOp.getFaceSelection $
+		mcPoly.setFacesSMG $ faces bits --set SMG 24, 25 and 31
 	
-	for i = 0 to 32 do format "%\t-->\t%\n" i (int((pow 2 i)/2))
-	0	-->	0
-	1	-->	1
-	2	-->	2
-	3	-->	4
-	4	-->	8
-	5	-->	16
-	6	-->	32
-	7	-->	64
-	8	-->	128
-	9	-->	256
-	10	-->	512
-	11	-->	1024
-	12	-->	2048
-	13	-->	4096
-	14	-->	8192
-	15	-->	16384
-	16	-->	32768
-	17	-->	65536
-	18	-->	131072
-	19	-->	262144
-	20	-->	524288
-	21	-->	1048576
-	22	-->	2097152
-	23	-->	4194304
-	24	-->	8388608
-	25	-->	16777216
-	26	-->	33554432
-	27	-->	67108864
-	28	-->	134217728
-	29	-->	268435456
-	30	-->	536870912
-	31	-->	1073741824
-	32	-->	-2147483648
 	*/
-	fn setFacesSMG obj faces smg_index = (
+	fn setFacesSMG obj faces smgs add:false = (
 
 		if classOf obj != Editable_Poly do return false
-		local smg_id = (int((pow 2 smg_index)/2)) --int to bit conversion
-		polyOp.setFaceSmoothGroup obj faces smg_id
+		local bits = mcPoly.getBitsFromSMG smgs
+		polyOp.setFaceSmoothGroup obj faces bits add:add
 	),
-	fn setObjectSMG obj smg_index= (
+	fn setObjectSMG obj smgs add:false = (
 
 		if classOf obj != Editable_Poly do return false
-		setFacesSMG obj (getObjectFaces obj) smg_index
+		setFacesSMG obj (getObjectFaces obj) smgs add:add
 	),
 	fn isQuads obj faceSel =
 	(

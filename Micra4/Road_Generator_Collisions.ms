@@ -95,10 +95,6 @@ lh_02_little_italy_block_h_roads_coll
 
 		polyop.setFaceMatID obj (getObjectFaces obj) mat_id
 	)
-	fn setObjectSMG obj smg_index= (
-
-		polyOp.setFaceSmoothGroup obj (getObjectFaces obj) smg_index
-	)
 	fn scaleEdgeTo obj edge_index val = ( -- val = 1% - 100%
 	
 		local verts = polyOp.getEdgeVerts obj edge_index
@@ -201,7 +197,7 @@ lh_02_little_italy_block_h_roads_coll
 		undo "Optimize Rails" on (
 		
 			removeEdges obj edges_to_remove
-			setObjectSMG obj 1
+			::mcPoly.setObjectSMG obj 1
 		)
 		true --if all is ok return true
 	)
@@ -232,7 +228,7 @@ lh_02_little_italy_block_h_roads_coll
 		convertToPoly obj
 		skewNavmeshRailTop obj
 		setObjectId obj 50
-		setObjectSMG obj 1
+		::mcPoly.setObjectSMG obj 1
 		local collision_layer = LayerManager.getLayerFromName edt_coll_layer.text
 		collision_layer.addNode obj
 		AddCustomAttributeByName obj "CollisionMesh"

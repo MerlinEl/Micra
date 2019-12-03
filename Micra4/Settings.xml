@@ -146,6 +146,7 @@
     <LS3D_Material_Manager val="0.02" />
     <Slice_Plane2 val="0.01" />
     <Object_Planter_Interactive val="0.01" />
+    <Smoothing_Groups val="0.04" />
   </Version>
   <SystemFiles val="Micra's Settings Files">
     <Actions val="Contains all accesible Micra's actions" />
