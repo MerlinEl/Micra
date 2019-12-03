@@ -269,10 +269,86 @@ struct MICRA_POLY
 		if classOf obj != Editable_Poly do return false
 		polyop.setFaceMatID obj (getObjectFaces obj) mat_id
 	),
+		/**
+	*@Usage --> convert smg in to bits
+	*@Example
+		smg_list = #{24..25, 31}
+		mcPoly.getBitsFromSMG smg_list
+		--> 1098907648
+	*/
+	fn getBitsFromSMG smgs = (
+	
+		local bits = 0
+		for i in smgs do bits = bit.set bits i True
+		bits
+	),
+	/**
+	*@Usage --> get smooth groups from bit
+	*@Example
+		smg_bit = bit.set 0 24 True 		--set 24 bit to true
+		smg_bit = bit.set smg_bit 25 True	--append 25 bit
+		smg_bit = bit.set smg_bit 31 True	--append 31 bit
+		mcPoly.getSMGfromBits smg_bit
+		--> #{24..25, 31}
+	*/
+	fn getSMGfromBits bits = (
+
+		local arr = #{}
+		for i = 1 to 32 do (arr[i] = bit.get bits i)
+		return arr;
+	),
+	/**
+	smg_bit = bit.set 0 24 True 		--set 24 bit to true
+	smg_bit = bit.set smg_bit 25 True	--append 25 bit
+	smg_bit = bit.set smg_bit 31 True	--append 31 bit
+	faces = polyOp.getFaceSelection $
+	polyOp.setFaceSmoothGroup $ faces smg_bit --set SMG 24, 25 and 31
+	
+	for i = 0 to 32 do format "%\t-->\t%\n" i (int((pow 2 i)/2))
+	0	-->	0
+	1	-->	1
+	2	-->	2
+	3	-->	4
+	4	-->	8
+	5	-->	16
+	6	-->	32
+	7	-->	64
+	8	-->	128
+	9	-->	256
+	10	-->	512
+	11	-->	1024
+	12	-->	2048
+	13	-->	4096
+	14	-->	8192
+	15	-->	16384
+	16	-->	32768
+	17	-->	65536
+	18	-->	131072
+	19	-->	262144
+	20	-->	524288
+	21	-->	1048576
+	22	-->	2097152
+	23	-->	4194304
+	24	-->	8388608
+	25	-->	16777216
+	26	-->	33554432
+	27	-->	67108864
+	28	-->	134217728
+	29	-->	268435456
+	30	-->	536870912
+	31	-->	1073741824
+	32	-->	-2147483648
+	*/
+	fn setFacesSMG obj faces smg_index = (
+
+		if classOf obj != Editable_Poly do return false
+		local smg_id = (int((pow 2 smg_index)/2)) --int to bit conversion
+		polyOp.setFaceSmoothGroup obj faces smg_id
+	),
 	fn setObjectSMG obj smg_index= (
 
 		if classOf obj != Editable_Poly do return false
-		polyOp.setFaceSmoothGroup obj (getObjectFaces obj) smg_index
+		setFacesSMG obj (getObjectFaces obj) smg_index
 	),
 	fn isQuads obj faceSel =
 	(

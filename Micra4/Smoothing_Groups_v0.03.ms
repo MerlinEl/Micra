@@ -140,6 +140,8 @@ rollout smgDialog "Smoothing Groups & ID" width:144 height:240
 				smgDialog.spn2.value = 0 ; smgDialog.spn2.Indeterminate = true
 			)
 		),
+		--TODO implement -- > mcPoly.setFacesSMG obj faces smg_index 
+		--https://forums.cgsociety.org/t/polyop-smoothinggroups/1139701/8
 		fn setTo ckbNum bit =
 		(
 			setFocus smgDialog

@@ -206,19 +206,6 @@ struct EDIT_MODEL (
 			subobjectLevel = 0
 			base_mesh
 		),
-		fn mapObjectPlanar obj = (
-		
-			local uv_mod = Uvwmap ()
-			uv_mod.maptype = 0
-			uv_mod.axis = 2
-			uv_mod.realWorldMapSize = off
-			uv_mod.utile = 1
-			uv_mod.vtile = 1
-			uv_mod.wtile = 1
-			uv_mod.channel = 0
-			addModifier obj uv_mod
-			maxOps.CollapseNode obj off
-		),
 		fn attachObject obj_base obj_new = (
 		
 -- 			format "attachObject base:% new:%\n" obj_base obj_new
@@ -277,10 +264,16 @@ struct EDIT_MODEL (
 -- 		format "verts a:% b:%\n" source_vert_a source_vert_b
 		--get source border lop from vert A to vert B
 		local source_vertex_loop = em.getLoopBetweenTwoVertices source_mesh source_vert_a source_vert_b
--- 		polyop.setEdgeSelection source_mesh source_border_loop
--- 		completeRedraw()
-		
-		
+		local mid_verts = (source_vertex_loop as bitarray) - #{source_vert_a, source_vert_b} --get verts without first and last
+		--change border faces SMG (later can be selected from Unwrap_UVW)
+		local smg_index_28 = 28
+		local smg_index_29 = 29
+		local verts_faces = polyOp.getFacesUsingVert source_obj mid_verts
+		mcPoly.setFacesSMG source_obj verts_faces smg_index_28 --> smg_index 28
+		-- polyop.setFaceSelection source_obj verts_faces
+		-- polyop.setEdgeSelection source_obj source_border_loop
+		-- polyop.setVertSelection source_obj mid_verts
+
 		local target_border_edges = polyOp.getOpenEdges target_mesh --get all open edges
 		local target_border_verts = polyop.getVertsUsingEdge target_mesh target_border_edges --get border vertices
 		local pos_a = polyop.getVert source_mesh source_vert_a
@@ -315,50 +308,39 @@ if target_vert_a == undefined or target_vert_b == undefined do ( --when one of t
 			
 			local new_surface = em.createSurfaceFromPoints border_positions 
 			em.unifyNormals new_surface
+			mcPoly.setObjectSMG new_surface smg_index_29 --> smg_index 29
 			if chk_triangulate.checked do (
 				
-				local mid_verts = (source_vertex_loop as bitarray) - #{source_vert_a, source_vert_b} --get verts without first and last
 				local tirangulate_top_positions = em.getVertsPositions source_obj mid_verts
 				em.triangulate new_surface tirangulate_top_positions
 			)
 			--map new surface 
-			if chk_automap.checked do em.mapObjectPlanar new_surface
+			local verts_faces = #{}
+			if chk_automap.checked do (mcPolyMap.mapPlanar new_surface alignTo:#x)
+
 			if chk_attach.checked do (
 			
 				em.attachObject source_obj new_surface
+				if chk_weld.checked do em.weldVertices source_obj offset:spn_weld_offset.value
 				if chk_automap.checked do (
 				
 					-------------------
 					--STITCH MAPPING--
 					-------------------
-					--get border edge from source object	
-					local mid_verts = (source_vertex_loop as bitarray) - #{source_vert_a, source_vert_b} --get verts without first and last
-					local verts_faces = polyOp.getFacesUsingVert obj mid_verts
-					polyOp.setFaceSelection source_obj verts_faces --get verts faces
-					subobjectLevel = 0 --exit from subobject mode to teake whole object in to unwrap
-					local mod_uvw = Unwrap_UVW ()
-					addModifier obj mod_uvw --add unwrap mod (face selection is alsoo transfered from poly object)
-					--stitch edges
-					subobjectLevel = 3
-					macros.run "UVW Unwrap" "UVWUnwrap_Stitch"
-					--realx new object mapping if need ????
-					maxOps.CollapseNode obj off --collapse stack all
-			
-			
--- local source_border_loop = em.getVertsOpenEdges source_obj mid_verts
---polyOp.setEdgeSelection source_obj source_border_loop
---collect edgefaces data
--- faces_bitarray = polyOp.getFacesUsingVert obj mid_verts
--- gd = mcPoly.getGeometryData source_obj faces:faces_bitarray
---add unwrap
---collect map data
--- mcPolyMap.collectUnwrapData obj gd
---select edges in unwrap
---stitch edges
---realx new object mapping if need ????
-
+subobjectLevel = 0 --exit from subobject mode to teake whole object in to unwrap
+local mod_uvw = Unwrap_UVW ()
+addModifier source_obj mod_uvw --add unwrap mod
+-- stitch edges
+subobjectLevel = 3
+mod_uvw.unwrap2.selectBySG smg_index_28
+macros.run "UVW Unwrap" "UVWUnwrap_Stitch"
+mod_uvw.unwrap2.selectBySG smg_index_29
+-- realx new object mapping if need ????
+mod_uvw.relax2() 				
+maxOps.CollapseNode source_obj off --collapse stack all
+-- autosmooth geometry
+polyOp.setFaceSmoothGroup source_obj #{1..(source_obj.faces.count)} 1 add:false
 				)
-				if chk_weld.checked do em.weldVertices source_obj offset:spn_weld_offset.value
 			)
 		)
 	)

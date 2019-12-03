@@ -215,6 +215,13 @@ struct MICRA_MATH (
 		local d=1.0-abs(dot (normalize vAB) (normalize vAC))
 		if d<=tol then true else false
 	),
+	/**
+	*@Usage > round Point3 to decimals
+	*@Example
+		po = [0.02564, 265.2655, 3.45646] 
+		mcMath.roundPoint3 po 10
+		po --> [0,265.3,3.5]
+	*/
 	fn roundPoint3 p dec = (
 	
 		p.x = roundToDecimals p.x dec

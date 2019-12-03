@@ -24,6 +24,17 @@ struct MICRA_POLY_MAP_STRUCTURE	(
 	--functions
 	fn getSource = getSourceFileName(), --get path of this script
 	fn isValidMod = ( classOf (modpanel.getcurrentobject()) == Unwrap_UVW ),
+	fn mapPlanar obj alignTo:#x collapseMod:true = (
+		
+		local uv_mod = Uvwmap ()
+		uv_mod.maptype = case alignTo of (#x:0; #y:1; #z:2; default:0)
+		uv_mod.axis = 2
+		uv_mod.realWorldMapSize = off
+		uv_mod.utile = uv_mod.vtile = uv_mod.wtile =1
+		uv_mod.channel = 0
+		addModifier obj uv_mod
+		if collapseMod do maxOps.CollapseNode obj off
+	),
 	/**
 	*@Usage
 		mcPolyMap.convetrSelectionTo #verts
