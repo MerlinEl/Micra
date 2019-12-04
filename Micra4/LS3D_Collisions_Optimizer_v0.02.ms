@@ -31,6 +31,7 @@ obj = $
 		if classOf obj != Editable_Poly do return (mcMsgList.warn "not_poly") 
 		local edges_ring = polyOp.getEdgeSelection obj
 		if edges_ring.numberset == 0 do return (mcMsgList.warn "not_esel")
+--		for each split in middle
 obj.setLoopShift 1 false true
 obj.setLoopShift -1 false true
 	)
