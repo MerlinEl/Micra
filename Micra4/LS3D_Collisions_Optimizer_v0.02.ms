@@ -24,16 +24,82 @@ rollout mcCollisionOptimizeDialog "Collisions Optimizer:" width:328 height:248
 	spinner 'spn_chamfer_len' "" pos:[72,24] width:60 height:16 range:[0,1e+06,3] type:#float align:#left
 	spinner 'spn_hard_dist' "" pos:[240,24] width:60 height:16 range:[0,1e+06,3] align:#left
 	spinner 'spn_lop_each' "" pos:[84,188] width:34 height:16 range:[0,99,1] type:#integer align:#left
-	
+
+	fn getTwoEdgesInLoop obj edge_index = (
+		
+		--get one or two neigbour faces from edge
+		local edge_faces = polyop.getFacesUsingEdge obj edge_index
+		--get edges used by faces
+		local faces_edges = polyOp.getEdgesUsingFace obj edge_faces
+		--get two  vertices from edge
+		local edge_verts2x = polyop.getVertsUsingEdge obj edge_index
+		--get faces from 2 verts
+		local vert_faces =  polyop.getFacesUsingVert obj edge_verts2x
+-- 		113 = 6 --middle OK
+-- 		102 = 3 --end without face OK
+-- 		101 = 4 --end with face --Need Condition
+		local diff_edges = #{}
+		if vert_faces.numberset == 4 then ( --chosse face which have different size of uncommon edge
+			
+			local f1 = (edge_faces as array)[1]
+			local f2 = (edge_faces as array)[2]
+			local e1 = polyOp.getEdgesUsingFace obj f1
+			local e2 = polyOp.getEdgesUsingFace obj f2
+			local uncommon_edges_1 = for ei in e1 where not (mcPoly.isNeigbourEdges obj ei edge_index) collect ei
+			local uncommon_edges_2 = for ei in e2 where not (mcPoly.isNeigbourEdges obj ei edge_index) collect ei
+			local edge_len = mcPoly.getEdgeLength obj edge_index
+			local edge_1_len = mcPoly.getEdgeLength obj (uncommon_edges_1 as array)[1]
+			local edge_2_len = mcPoly.getEdgeLength obj (uncommon_edges_2 as array)[1]
+			if edge_len - edge_1_len < edge_len - edge_2_len then ( --face 1 edges
+				
+				diff_edges =  e1 - #{edge_index}
+				
+			) else ( --face 2 edges
+				
+				diff_edges = e2 - #{edge_index}
+			)
+			
+		) else (
+			
+			--get edges from faces
+			local vert_faces_edges = polyOp.getEdgesUsingFace obj vert_faces
+			--make edges intersection
+			diff_edges = vert_faces_edges - faces_edges
+		)
+		--collect only edges with common vertex to edge_index
+		for ei in diff_edges where mcPoly.isNeigbourEdges obj ei edge_index collect ei
+	)
 	fn unchamferEdges obj  = (
-		--http://www.scriptspot.com/3ds-max/scripts/maxunchamfer
-obj = $
+
 		if classOf obj != Editable_Poly do return (mcMsgList.warn "not_poly") 
 		local edges_ring = polyOp.getEdgeSelection obj
 		if edges_ring.numberset == 0 do return (mcMsgList.warn "not_esel")
---		for each split in middle
-obj.setLoopShift 1 false true
-obj.setLoopShift -1 false true
+--		for each edge in ring move vertices to middle (at local)
+		local verts_for_weld = #{}
+		for next_edge in edges_ring do (
+			
+			local neighbour_loop_edges = getTwoEdgesInLoop obj next_edge
+			local edge_a = neighbour_loop_edges[1]
+			local edge_b = neighbour_loop_edges[2]
+			
+			if 	edge_a == undefined or edge_b == undefined do continue
+				
+			local verts_a = polyOp.getVertsUsingEdge obj edge_a
+			local verts_b = polyOp.getVertsUsingEdge obj edge_b	
+			local pos_a = for v in verts_a collect polyOp.getVert obj v
+			local pos_b = for v in verts_b collect polyOp.getVert obj v		
+			local mid_point = mcMath.intersectionLineLine pos_a[1] pos_a[2] pos_b[1] pos_b[2]	
+
+			local next_verts = polyOp.getVertsUsingEdge obj next_edge
+			for v in next_verts do polyOp.setVert obj v mid_point
+			verts_for_weld += next_verts
+		)
+		if verts_for_weld.numberset > 0 do (
+			
+			obj.weldThreshold = 0.001
+			polyOp.weldVertsByThreshold obj verts_for_weld
+			polyOp.setEdgeSelection obj #{}
+		)
 	)
 	fn selectEachEdgeInLoop obj skip_each = (
 	
@@ -105,3 +171,43 @@ obj.setLoopShift -1 false true
 	on btn_unchamfer_edges pressed  do undo label:"Unchamfer Edges " on (unchamferEdges (selection as array)[1])
 )
 createDialog mcCollisionOptimizeDialog
+
+
+
+/*
+	fn unchamferEdges obj  = (
+
+		if classOf obj != Editable_Poly do return (mcMsgList.warn "not_poly") 
+		local edges_ring = polyOp.getEdgeSelection obj
+		if edges_ring.numberset == 0 do return (mcMsgList.warn "not_esel")
+--		for each edge in ring move vertices to middle (at local)
+		local verts_for_weld = #{}
+		for next_edge in edges_ring do (
+			
+			polyOp.setEdgeSelection obj next_edge
+			obj.setLoopShift 1 true false
+			local edge_a = (polyOp.getEdgeSelection obj as array)[1]
+			polyOp.setEdgeSelection obj next_edge
+			obj.setLoopShift -1 true false
+			local edge_b = (polyOp.getEdgeSelection obj as array)[1]	
+			
+			if 	edge_a == undefined or edge_b == undefined do continue
+				
+			local verts_a = polyOp.getVertsUsingEdge obj edge_a
+			local verts_b = polyOp.getVertsUsingEdge obj edge_b	
+			local pos_a = for v in verts_a collect polyOp.getVert obj v
+			local pos_b = for v in verts_b collect polyOp.getVert obj v		
+			local mid_point = mcMath.intersectionLineLine pos_a[1] pos_a[2] pos_b[1] pos_b[2]	
+
+			local next_verts = polyOp.getVertsUsingEdge obj next_edge
+			for v in next_verts do polyOp.setVert obj v mid_point
+			verts_for_weld += 	next_verts
+		)
+		if verts_for_weld.numberset > 0 do (
+			
+			obj.weldThreshold = 0.001
+			polyOp.weldVertsByThreshold obj verts_for_weld
+			polyOp.setEdgeSelection obj #{}
+		)
+	)
+*/

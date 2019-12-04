@@ -530,6 +530,24 @@ struct MICRA_POLY
 		local efaces = polyop.getFacesUsingEdge obj e_index
 		efaces.numberset == 1
 	),
+	/**
+	*@Usage > when both edges have one comon vertex 
+	*/
+	fn isNeigbourEdges obj edge_a edge_b = (
+		
+		local verts_a = polyop.getVertsUsingEdge obj edge_a
+		local verts_b = polyop.getVertsUsingEdge obj edge_b
+		(verts_a + verts_b).numberset < verts_a.numberset + verts_b.numberset
+	),
+	/**
+	*@Usage > when whole edge is part of a face 
+	*/
+	fn isEdgeInFace obj edge_index face_index  = (
+		
+		faces_verts = polyOp.getVertsUsingFace obj face_index
+		edge_verts  = polyOp.getVertsUsingEdge obj edge_index
+		(faces_verts - edge_verts).numberset == faces_verts.numberset - 2
+	),
 	fn getBorderEdgesFromVertex obj v_index = ( 
 		
 		local edges = polyop.getEdgesUsingVert obj v_index
