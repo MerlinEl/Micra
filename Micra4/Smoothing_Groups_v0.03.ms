@@ -172,7 +172,7 @@ rollout smgDialog "Smoothing Groups & ID" width:144 height:240
 	on smgDialog rbuttonup pos do (DestroyDialog smgDialog)
 	on smgDialog open  do
 	(
-		--DestroyDialog smgDialog if subobjectlevel 4 is false
+		--DestroyDialog smgDialog if subobjectlevel 4 or 5 is false
 		registerRedrawViewsCallback mcSMG.isInPolygonLevel		
 		mcSMG.updateInterface()
 		--ID update

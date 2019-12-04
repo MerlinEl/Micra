@@ -338,7 +338,7 @@ rollout mcVertexColorDialog "Vertex Color v1.02" width:408 height:348
 	)
 	fn getSelectedVertexAlpha s a = (
 		
-		format "sel changed\n"
+		--format "sel changed\n"
 		local obj = selection[1]
 		if  subobjectLevel != 1 or classOf obj != Editable_Poly or  not (polyOp.getMapSupport obj -2) do return false
 		local vsel = (getVertSelection obj) as Array

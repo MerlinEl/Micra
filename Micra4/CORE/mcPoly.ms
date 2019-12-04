@@ -139,6 +139,11 @@ struct MICRA_POLY
 		local everts = polyOp.getEdgeVerts obj edge_index
 		distance (polyOp.getVert obj everts[1]) (polyOp.getVert obj everts[2])
 	),
+	fn getEdgeCenter obj edge_index = (
+	
+		local everts = polyOp.getEdgeVerts obj edge_index
+		( (polyOp.getVert obj everts[1]) + (polyOp.getVert obj everts[2]) ) / 2
+	),
 	fn getLongestEdge obj edges = (
 
 		if classOf obj != Editable_Poly do return undefined
@@ -206,6 +211,8 @@ struct MICRA_POLY
 	*/
 	fn getEdgeLoop obj edge_index = (
 			
+		if classOf obj != Editable_Poly do return #()
+		
 		local prev_edge = edge_index
 		local next_edge = edge_index
 		
@@ -233,6 +240,127 @@ struct MICRA_POLY
 		)
 		eloop
 	),
+	/**
+	*@Example
+		obj = $
+		two_edges = polyOp.getEdgeSelection obj
+		eloop = mcPoly.getLoopBetweenTwoEdges obj two_edges
+		polyOp.setEdgeSelection obj eloop skipEach:1
+		redrawViews()
+	*/
+	fn getLoopBetweenTwoEdges obj two_edges skipEach:0 = (
+
+		if classOf obj != Editable_Poly or (two_edges as array).count != 2 do return #()
+		local first_edge = (two_edges as array)[1]
+		local last_edge = (two_edges as array)[2]
+
+		local first_verts = polyOp.getVertsUsingEdge obj first_edge as array
+		local last_verts = polyOp.getVertsUsingEdge obj last_edge as array
+
+		local first_pos = for v in first_verts collect polyOp.getVert obj v
+		local last_pos = for v in last_verts collect polyOp.getVert obj v
+		local cross_point = mcMath.intersectionLineLine first_pos[1] first_pos[2] last_pos[1] last_pos[2]
+
+		polyOp.setEdgeSelection obj first_edge
+		obj.setLoopShift 1 true false --forward loop by 1
+		local last_edge_a = (polyOp.getEdgeSelection obj as array)[1]
+		local dist_a = distance cross_point (mcPoly.getEdgeCenter obj last_edge_a)
+
+		polyOp.setEdgeSelection obj first_edge
+		obj.setLoopShift -1 true false --backward loop by 1
+		local last_edge_b = (polyOp.getEdgeSelection obj as array)[1]
+		local dist_b = distance cross_point (mcPoly.getEdgeCenter obj last_edge_b)
+
+		polyOp.setEdgeSelection obj first_edge 
+		--chosse way to follow loop
+		local way = if dist_a < dist_b then 1 else -1 --forward or backward loop
+		local loop_between = #(first_edge)
+		local loop_in_progress = true
+		while loop_in_progress and not keyboard.escpressed do (
+
+			obj.setLoopShift way true false --add new edge to current loop
+			local next_edge = (polyOp.getEdgeSelection obj as array)[1]
+			--check if next loop edfe found and if wee rach last edge
+			local reach_end = next_edge == last_edge or findItem loop_between next_edge > 0
+			--format "reach_end:% next_edge:%\n" reach_end next_edge
+			loop_in_progress = not reach_end
+			append loop_between next_edge
+		)
+		if skipEach > 0 do (
+		
+			loop_between = for i = 1 to loop_between.count by (skipEach+1) collect loop_between[i]
+		)
+		loop_between
+	),
+	/**
+	---------------------------TODO--> for Patcher2P_v0.05.ms 
+	*@Usage > Vertex Loop Functions
+	*/
+	/*fn getFirstEdge obj edges vert_a vert_b = (
+		
+		--vector AB
+		local vert_a_pos = polyop.getVert obj vert_a
+		local vert_b_pos = polyop.getVert obj vert_b
+		local v1 = vert_b_pos - vert_a_pos
+		
+		--get two border vert edges
+		local vedges = polyOp.getEdgesUsingVert obj vert_a
+		vedges =  edges * vedges  --remain only two border edges
+		--compare angle of each edge
+		vedges = vedges as array
+		local v2 = getEdgeVector obj vert_a vedges[1] 
+		local v3 = getEdgeVector obj vert_a vedges[2] 
+		local a1 = getVectorsAngle v1 v2
+		local a2 = getVectorsAngle v1 v3
+		--return edge with smalest angle
+		if a1 < a2 then (
+		
+			format "last two edges:% final edge:%\n" vedges vedges[1]
+			#(vedges[1], getNextVert obj vert_a vedges[1]) 
+			
+		)else (
+		
+			format "last two edges:% final edge:%\n" vedges vedges[2]
+			#(vedges[2], getNextVert obj vert_a vedges[2])
+		)
+	),*/
+	/**
+	*@Usage > Vertex Loop Functions
+	*/
+	/*fn getNextEdge obj edge_a vert_a edges = (
+	
+		local vedges = polyOp.getEdgesUsingVert obj vert_a
+		vedges *= edges --remain only two border edges
+		local edge_b = ((vedges - #{edge_a}) as array)[1] --remove edge_a
+		local vert_b = getNextVert obj vert_a edge_b
+		#( edge_b, vert_b )  
+	),*/
+	/**
+	*@Usage > Vertex Loop Functions
+	*/
+	/*fn isLastEdge obj ei vi = (
+	
+		local verts = (polyOp.getVertsUsingEdge obj ei)	as array	
+-- 			format "\tverts:% ei:% vi:%\n" verts ei vi
+		verts[1] == vi or verts[2] == vi
+	),*/
+	/**
+	*@Usage > Vertex Loop Functions
+	*/
+	/*fn getLoopBetweenTwoVertices obj vert_a vert_b = (
+	
+		local border_edges = polyOp.getOpenEdges obj --get all open edges
+		local last_vert = vert_a
+		local next_edge_data = getFirstEdge obj border_edges vert_a vert_b
+		local loop_vertices = #(vert_a, next_edge_data[2]) --pick next vertex
+		for i=1 to border_edges.count do (
+		
+			next_edge_data = getNextEdge obj next_edge_data[1] next_edge_data[2] border_edges
+			append loop_vertices next_edge_data[2]
+			if isLastEdge obj next_edge_data[1] vert_b do exit
+		)
+		loop_vertices
+	),*/
 	fn removeEdges obj edges = (	
 
 		if classOf obj != Editable_Poly do return false
@@ -269,12 +397,18 @@ struct MICRA_POLY
 		if classOf obj != Editable_Poly do return false
 		polyop.setFaceMatID obj (getObjectFaces obj) mat_id
 	),
+	fn getFacesByIDs obj id_list = (
+	
+		for f = 1 to obj.faces.count where findItem id_list (polyop.getFaceMatID obj f) > 0 collect f
+	),
 		/**
 	*@Usage --> convert smg in to bits
 	*@Example
 		smgs = #{24..25, 31}
 		bits = mcPoly.getBitsFromSMG smgs
 		--> 1098907648
+		or
+		smgs = (int((pow 2 smg_index)/2)) --smg to bit conversion
 	*/
 	fn getBitsFromSMG smgs = (
 	

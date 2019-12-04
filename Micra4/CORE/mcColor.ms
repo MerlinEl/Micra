@@ -116,7 +116,25 @@ struct MICRA_COLOR (
 		(r=int/256^2; g=int/256-r*256; bmp=mod int 256; color r g bmp)
 	),
 	fn blendColors c1 c2 = ((c1+c2)/2),
-	fn randomColor=(color (random 1 255)  (random 1 255) (random 1 255)) 
+	fn randomColor=(color (random 1 255)  (random 1 255) (random 1 255))
+	/*fn HSVtoRGB hsv = ( --not tested
+	
+		hsv /= 255
+		h = hsv.x*6
+		i = h as integer
+		k = if (mod i 2) == 1 then (h-i) else (1-h+i)
+		m = hsv.z*(1-hsv.y)
+		n = hsv.z*(1-hsv.y*k)
+		case i of
+		(
+				1: [n, hsv.z, m]*255
+				2: [m, hsv.z, n]*255
+				3: [m, n, hsv.z]*255
+				4: [n, m, hsv.z]*255
+				5: [hsv.z, m, n]*255
+		  default: [hsv.z, n, m]*255
+		)
+	),*/
 	/*<end>*/
 )
 --create instance
