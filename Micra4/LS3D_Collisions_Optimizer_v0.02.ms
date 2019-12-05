@@ -1,31 +1,36 @@
 
 Global mcCollisionOptimizeDialog
 if mcCollisionOptimizeDialog != undefined do destroyDialog mcCollisionOptimizeDialog
-rollout mcCollisionOptimizeDialog "Collisions Optimizer:" width:328 height:248
+rollout mcCollisionOptimizeDialog "Collisions Optimizer:" width:328 height:256
 (
 	local units_type = mcSystem.unitsType()
-	GroupBox 'grp1' "Optimize Chamfers:" pos:[0,4] width:160 height:68 align:#left
-	GroupBox 'grp2' "Optimize Hard Smooths:" pos:[164,4] width:160 height:68 align:#left
-	GroupBox 'grp11' "Automatic Multiple Obj:" pos:[0,76] width:324 height:84 align:#left
-	GroupBox 'grp7' "Manual Single Obj:" pos:[0,164] width:324 height:80 align:#left
-
-	label 'lbl5' "Select loop by:" pos:[8,188] width:76 height:16 align:#left
+	GroupBox 'grp1' "Method 1:" pos:[0,4] width:160 height:68 align:#left
+	GroupBox 'grp2' "Method 2:" pos:[164,4] width:160 height:68 align:#left
+	GroupBox 'grp11' "Method 3:" pos:[0,76] width:160 height:176 align:#left
+	GroupBox 'grp7' "Method 4:" pos:[164,76] width:160 height:60 align:#left
+	GroupBox 'grp5' "Selections:" pos:[164,140] width:160 height:56 align:#left
+	
+	label 'lbl5' "Select loop by:" pos:[172,164] width:76 height:16 align:#left
 	label 'lbl1' "Max length:" pos:[12,24] width:60 height:16 align:#left
 	label 'lbl_units_01' "cm" pos:[136,24] width:16 height:16 align:#left
 	label 'lbl3' "Max distance:" pos:[176,24] width:60 height:16 align:#left
 	label 'lbl_units_02' "cm" pos:[304,24] width:16 height:16 align:#left
 	
-	button 'btn_optimize_chamfers' "Optimize Chamfer Edges" pos:[8,44] width:144 height:24 align:#left
+	button 'btn_optimize_chamfers' "Optimize by eRing" pos:[8,44] width:144 height:24 align:#left
 	button 'btn_optimize_hard' "Optimize Hard Edges" pos:[172,44] width:144 height:24 align:#left	
-	button 'btn_unchamfer_edges' "Unchamfer Edges Ring" pos:[8,212] width:144 height:24 align:#left
-	button 'btn_opt_curb_and_fences' "Optimize Curbs and Fences" pos:[8,96] width:144 height:24 align:#left
-	button 'btn_opt_loop_by_n' "GO" pos:[124,184] width:28 height:24 align:#left
+	button 'btn_opt_flat' "Optimize Flat Top" pos:[172,228] width:144 height:24 align:#left
+	button 'btn_unchamfer_edges' "Unchamfer eRing" pos:[172,100] width:144 height:24 align:#left
+	button 'btn_opt_curb_and_fences' "Optimize" pos:[8,96] width:144 height:24 align:#left
+	button 'btn_opt_loop_by_n' "GO" pos:[288,160] width:28 height:24 align:#left
+	button 'btn_opt_crossroad' "Optimize Cross Road" pos:[172,200] width:144 height:24 align:#left
 	
 	spinner 'spn_chamfer_len' "" pos:[72,24] width:60 height:16 range:[0,1e+06,3] type:#float align:#left
 	spinner 'spn_hard_dist' "" pos:[240,24] width:60 height:16 range:[0,1e+06,3] align:#left
-	spinner 'spn_lop_each' "" pos:[84,188] width:34 height:16 range:[0,99,1] type:#integer align:#left
+	spinner 'spn_lop_each' "" pos:[248,164] width:34 height:16 range:[0,99,1] type:#integer align:#left
 
-	fn getTwoEdgesInLoop obj edge_index = (
+	listbox 'lbx_auto_list' "" pos:[8,124] width:144 height:9 enabled:false items:#("Fences", "Curbs") align:#left
+
+	/*fn getTwoEdgesInLoop obj edge_index = (
 		
 		--get one or two neigbour faces from edge
 		local edge_faces = polyop.getFacesUsingEdge obj edge_index
@@ -100,7 +105,7 @@ rollout mcCollisionOptimizeDialog "Collisions Optimizer:" width:328 height:248
 			polyOp.weldVertsByThreshold obj verts_for_weld
 			polyOp.setEdgeSelection obj #{}
 		)
-	)
+	)*/
 	fn selectEachEdgeInLoop obj skip_each = (
 	
 		if classOf obj != Editable_Poly do return (mcMsgList.warn "not_poly") 
@@ -144,7 +149,7 @@ rollout mcCollisionOptimizeDialog "Collisions Optimizer:" width:328 height:248
 		
 		if classOf obj != Editable_Poly do return (mcMsgList.warn "not_poly")
 		local sel_faces = polyOp.getFaceSelection obj
-		if sel_faces.numberset == 0 do return (mcMsgList.warn "not_fsel")
+		if sel_faces.numberset == 0 do sel_faces = #{1..obj.faces.count}
 		local max_len = spn_chamfer_len.value
 		local fedges = polyOp.getEdgesUsingFace obj sel_faces
 		subobjectlevel = 0
@@ -153,10 +158,74 @@ rollout mcCollisionOptimizeDialog "Collisions Optimizer:" width:328 height:248
 		setCommandPanelTaskMode mode:#modify
 		subobjectlevel = 4
 	)
-	fn optimizeHardSurfaces sel = (
+	fn optimizeHardSurfaces obj = (
 		
-		if sel.count == 0 do return (mcMsgList.warn "not_sel")
+		return (mcMsgList.warn "wait_todo") 
+		if classOf obj != Editable_Poly do return (mcMsgList.warn "not_poly") 
 		
+	)
+	fn optimizeCrossroad obj = (
+	
+		if classOf obj != Editable_Poly do return (mcMsgList.warn "not_poly")
+		local vert = (polyOp.getVertSelection obj as array)[1]
+		-- local vert_pos = polyOp.getVert obj vert
+		if vert == undefined do return (mcMsgList.warn "not_vsel_1")
+		local vert_edges = polyOp.getEdgesUsingVert obj vert
+		polyOp.setEdgeSelection obj vert_edges
+		obj.EditablePoly.SelectEdgeLoop ()
+		vert_edges = polyOp.getEdgeSelection obj
+		local vert_faces = polyOp.getFacesUsingEdge obj vert_edges
+		vert_faces = mcPoly.getFacesByIDs obj #(50) faces:vert_faces
+		--polyOp.setFaceSelection obj vert_faces
+		--detach crossroad faces for optimize process
+		polyOp.detachFaces obj vert_faces delete:true asNode:true name:"Cross_Road_Detached_Faces_For_Optimize_1"
+		local road_piece_1 = getNodeByName "Cross_Road_Detached_Faces_For_Optimize_1"
+		--get bigest face
+		local piece_faces = #{1..road_piece_1.faces.count}
+		local bigest_face = mcPoly.getLargestFace road_piece_1
+		piece_faces -= #{bigest_face}
+		--polyOp.setFaceSelection road_piece piece_faces
+		polyOp.detachFaces road_piece_1 piece_faces delete:true asNode:true name:"Cross_Road_Detached_Faces_For_Optimize_2"
+		local road_piece_2 = getNodeByName "Cross_Road_Detached_Faces_For_Optimize_2"
+		--get initial vert
+		vert = (polyOp.getVertSelection road_piece_2 as array)[1]
+		--get edges for optimize
+		vert_edges = polyOp.getEdgesUsingVert road_piece_2 vert
+		polyOp.setEdgeSelection road_piece_2 vert_edges
+		road_piece_2.EditablePoly.SelectEdgeLoop ()
+		--get vert edges
+		vert_edges = polyOp.getEdgeSelection road_piece_2
+		--get border edges
+		local border_edges = polyOp.getOpenEdges road_piece_2
+		local del_edges = vert_edges - border_edges
+		::mcPoly.removeEdges road_piece_2 del_edges
+		--attach road_pieces back to road
+		polyOp.attach road_piece_1 road_piece_2
+		polyOp.attach obj road_piece_1
+		obj.weldThreshold = 0.001
+		polyOp.weldVertsByThreshold obj obj.verts
+	)
+	/**
+	*Usage > Delete all faces except top
+	*/
+	fn optimizeFlatTop obj = (
+	
+		if classOf obj != Editable_Poly do return (mcMsgList.warn "not_poly")
+		local faces = polyOp.getFaceSelection obj
+		if faces.numberset == 0 do return (mcMsgList.warn "not_fsel")
+		local del_faces = #()
+		for f in faces do (
+		
+			local n = polyOp.getFaceNormal obj f
+			if n.z < 0.8 do append del_faces f
+			--format "f:% n:%\n" f n
+		)
+		if del_faces.count > 0 do (
+		
+			polyOp.setFaceSelection obj del_faces
+			obj.EditablePoly.delete #Face
+			redrawViews()
+		)
 	)
 	fn init = (
 	
@@ -168,11 +237,35 @@ rollout mcCollisionOptimizeDialog "Collisions Optimizer:" width:328 height:248
 	on btn_optimize_hard pressed  do undo label:"Optimize Hard Surfaces" on (optimizeHardSurfaces (selection as array)[1])
 	on btn_opt_curb_and_fences pressed  do undo label:"Optimize Curbs And Fences" on (optimizeCurbsAndFences (selection as array))
 	on btn_opt_loop_by_n pressed  do undo label:"Optimize Loop By 2" on (selectEachEdgeInLoop (selection as array)[1] spn_lop_each.value)
-	on btn_unchamfer_edges pressed  do undo label:"Unchamfer Edges " on (unchamferEdges (selection as array)[1])
+	on btn_unchamfer_edges pressed  do undo label:"Unchamfer Edges " on (mcPoly.unchamferEdges (selection as array)[1] (polyOp.getEdgeSelection (selection as array)[1]))
+	on btn_opt_crossroad pressed  do undo label:"Optimize Cross Road " on (optimizeCrossroad (selection as array)[1])
+	on btn_opt_flat pressed  do undo label:"Optimize Flat Top " on (optimizeFlatTop (selection as array)[1])
 )
 createDialog mcCollisionOptimizeDialog
 
+/*
+obj = $
+del_edges = #{4..18, 25..39}
+--del_edges = polyOp.getEdgeSelection $
+--polyOp.setEdgeSelection $ del_edges
 
+for o in selection where classOf o == Editable_Poly do (
+
+	local faces = mcPoly.getFacesByIDs o 50
+	local face_verts = 
+	for v = 1 to obj.verts.count do (
+
+		local vert_edges = polyOp.getEdgesUsingVert obj v
+		if vert_edges.numberset != 37 do continue
+		local vert_faces = polyOp.getFacesUsingVert obj v
+		polyOp.detachFaces obj vert_faces delete:true asNode:true name:"Cross_Road_Detached_Faces_For_Optimize"
+		local road_piece = getNodeByName "Cross_Road_Detached_Faces_For_Optimize"
+		::mcPoly.removeEdges road_piece del_edges
+		--attach road_piece back to road
+		polyOp.attach obj road_piece
+	)
+)
+*/
 
 /*
 	fn unchamferEdges obj  = (

@@ -35,6 +35,7 @@ struct MICRA_MESSAGE_LIST_STRUCTURE	(
 	
 		local msg = case msg_key of (
 
+			"wait_todo"		: "This function is under construction.\nPlese wait. Will be finished soon :-)"
 			"call_help"		: "Something wierd was happen. Call Merlin to help you :-)"
 			"not_mesh"		: "Editable Mesh must be selected."
 			"not_poly"		: "Editable Poly must be selected."
@@ -45,6 +46,7 @@ struct MICRA_MESSAGE_LIST_STRUCTURE	(
 			"not_map"		: "Object must have some UVW Channels."
 			"not_spline"		: "Spline must be selected."
 			"not_sel"			: "Select some object(s) to progress."
+			"not_vsel_1"		: "Select one vertex to progress."
 			"not_vsel"		: "Select some vertices to progress."
 			"not_vsel_2"		: "Select two vertices to progress."
 			"not_esel"		: "Select some edges to progress."

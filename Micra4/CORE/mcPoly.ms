@@ -9,7 +9,7 @@
 
 *
 */
-struct FACE_DATA (index	, ed = #()	, vd = #(),
+struct FACE_DATA (index	, ed = #()	, vd = #(), area = 0,
 	
 	fn getVertDataByGeoIndex geo_vert_index = (
 		
@@ -376,6 +376,10 @@ struct MICRA_POLY
 		polyOp.setVertSelection obj deadVerts	
 		obj.remove selLevel:#edge
 		obj.remove selLevel:#vertex
+		--or some day test this
+		-- iFlag = bit.set 0 32 true
+		-- polyOp.setVertFlags EditPoly baVertToRemove iFlag mask:iFlag undoable:true
+		-- EditPoly.remove selLevel:#Vertex flag:iFlag
 	),
 	fn scaleEdgeTo obj edge_index val = ( -- val = 1% - 100%
 	
@@ -397,9 +401,10 @@ struct MICRA_POLY
 		if classOf obj != Editable_Poly do return false
 		polyop.setFaceMatID obj (getObjectFaces obj) mat_id
 	),
-	fn getFacesByIDs obj id_list = (
+	fn getFacesByIDs obj id_list faces:#{} = (
 	
-		for f = 1 to obj.faces.count where findItem id_list (polyop.getFaceMatID obj f) > 0 collect f
+		local faces_list = if faces.numberset != 0 then faces else #{1..obj.faces.count}
+		for f in faces_list where findItem id_list (polyop.getFaceMatID obj f) > 0 collect f
 	),
 		/**
 	*@Usage --> convert smg in to bits
@@ -610,6 +615,23 @@ struct MICRA_POLY
 		for f in faces do center += polyop.getFaceCenter obj f
 		center /= (faces as array).count
 		center
+	),
+	fn getFacesNormal obj faces = ( --Average Normals
+		
+		local fnormal = [0,0,0]
+		for f in faces do fnormal += polyop.getFaceNormal obj f
+		normalize fnormal
+	),
+	fn getLargestFace obj = (
+	
+		local faces_data = #()
+		for f = 1 to obj.faces.count do (
+		
+			append faces_data (FACE_DATA index:f area:(polyOp.getFaceArea obj f))
+		)
+		fn sortByArea n1 n2 = if n1.area > n2.area then -1 else if n1.area < n2.area then 1 else 0 
+		qsort faces_data sortByArea
+		faces_data[1].index
 	),
 	fn getFaceCornerVertices obj face_index = ( --get three vertices from face (1 = corner , 2 = first handle, 3 = second handle)
 	
@@ -906,6 +928,57 @@ struct MICRA_POLY
 		select new_obj
 		new_obj
 	),
+	fn unchamferEdges obj edges debug:false = (
+
+		if (classOf obj != Editable_Poly) do return (mcMsgList.warn "not_poly") 
+		if (edges.numberset == 0) do return (mcMsgList.warn "not_esel")  
+		for ei in edges do (
+
+			local edge_verts = polyOp.getVertsUsingEdge obj ei
+			local edge_faces = polyOp.getFacesUsingEdge obj ei
+			local verts_pos = for v in edge_verts collect polyOp.getVert obj v
+			local edge_center = getEdgeCenter obj ei
+			local faces_normal = getFacesNormal obj edge_faces
+			local vector_lengtn = distance verts_pos[1] edge_center
+			local new_point = edge_center + (faces_normal*vector_lengtn)
+			if debug do point pos:new_point wirecolor:green
+			for v in edge_verts do polyOp.setVert obj v new_point
+		)
+	),
+	/**
+	*@Usage Average Normals is a MAXScript that averages all the vertex normals for each selected faces, 
+		so they all point the same direction. On Editable poly, select a face and run the script	
+	*/
+	fn averageNormals sel = (	
+
+		if classOf sel != Array or sel.count == 0 do return (mcMsgList.warn "not_sel")
+		for obj in sel where classOf obj == Editable_Poly do (
+			
+			local faces = if obj.count == 1 and (subobjectLevel = 4 or subobjectLevel = 5) then (
+				
+				polyOp.getFaceSelection obj
+				
+			) else (
+				
+				#{1..obj.faces.count}
+			)
+			if not faces.isEmpty do (
+					
+				local mody = EditNormals name:"AverageNormals" selectBy:3
+				addModifier obj mody
+				with redraw off for f in faces do (
+					
+					local normals = #{}
+					mody.ConvertFaceSelection #{f} normals
+					mody.Reset selection:normals node:obj
+					mody.SetSelection normals
+					mody.Average selection:normals node:obj
+				)
+			)
+			collapseStack obj
+			if sel.count == 1 do subobjectLevel = 4
+		)
+	),
 	-------------------------------------------------------------
 	-------------------------------------------------------------
 	------              	OTHER    	                   ------
@@ -928,6 +1001,14 @@ struct MICRA_POLY
 Global mcPoly = mcStructMan.instanceStructure MICRA_POLY "mcPoly"
 
 
+
+/*
+	local faces = if obj.modifiers.count == 0 then getFaceSelection obj else (
+		
+		if matchPattern obj.modifiers[1].name pattern:"*Mesh*" or \
+		matchPattern obj.modifiers[1].name pattern:"*Poly*" do getFaceSelection obj obj.modifiers[1]
+	)
+*/
 
 	/*
 	fn alignPivotToFace obj face_index way:#up = ( --by miauu (not works)

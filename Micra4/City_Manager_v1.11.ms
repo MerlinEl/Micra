@@ -70,7 +70,8 @@ rollout mcCityManDialog "" width:500 height:988
 		"Add Terrain Lodes 2 and Fix Pivot",
 		"Add Lodes Custom",
 		"Destroy Lods in Selection",
-		"Curb Crumple"
+		"Curb Crumple",
+		"Collision Optimizer" 
 	) 
 	label 'lbl_advanced_tools' "Advanced Tools:" pos:[12,964] width:132 height:20 align:#left
 	--Local variables
@@ -697,6 +698,10 @@ rollout mcCityManDialog "" width:500 height:988
 			"Curb Crumple" : (
 
 				fileIn (micra.RootDir + "LS3D_Curb_Crumple.ms")
+			)			
+				"Collision Optimizer" : (
+
+				fileIn (micra.RootDir + "LS3D_Collisions_Optimizer_v0.02.ms")
 			)
 		)
 	)
