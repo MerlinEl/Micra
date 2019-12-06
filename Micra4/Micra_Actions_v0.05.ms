@@ -1301,7 +1301,7 @@ struct mcAction (
 		)
 	),	
 	fn scale_from_zb = undo "Scale From ZBrush" on (
-		
+
 		local cnt = 1 
 		for o in selection where superClassOf o == GeometryClass do (
 			 			
