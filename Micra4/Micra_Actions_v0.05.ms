@@ -1278,14 +1278,16 @@ struct mcAction (
 	),
 	fn scale_to_zb = undo "Scale To ZBrush" on (
 		
+		--Global BEFORE_TO_ZB_DATA = mcObject()
 		local cnt = 1
-		 for o in selection where superClassOf o == GeometryClass do (
+		for o in selection where superClassOf o == GeometryClass do (
 			
 			if o.scale.x != 1 do (
 				
 				format "Skiped object: [ % ] Scale must be 1\n" o.name
 				continue
 			)
+			--BEFORE_TO_ZB_DATA.add o.name o.material
 			 --strore original pos in placeholder
 			local s = sphere pos:o.pos name:("ZB_Placeholder_0" + cnt as string) radius:10000 wirecolor:green
 			 o.pos = [0,0,0]
@@ -1295,8 +1297,8 @@ struct mcAction (
 				#meters: o.scale = [0.1, 0.1, 0.1]
 				#centimeters: o.scale = [0.0001, 0.0001, 0.0001]
 			)	
+			cnt +=1
 		)
-		cnt +=1
 	),	
 	fn scale_from_zb = undo "Scale From ZBrush" on (
 		
@@ -1323,6 +1325,10 @@ struct mcAction (
 			)
 			resetTransform o
 			convertToPoly o
+-- 			o = mcPoly.rebuildObject o keepScale:false
+-- 			local mat = BEFORE_TO_ZB_DATA.get o.name
+-- 			if superClassOf mat == material do o.material = mat
+			max zoomext sel
 			cnt +=1
 		)
 	),	

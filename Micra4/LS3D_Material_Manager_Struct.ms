@@ -27,6 +27,15 @@ struct LS3D_MATERIAL_MANAGER_STRUCT (
 	copyXmlItemsToCategoryDialog,
 	--functions
 	fn getSource = getSourceFileName(), --get path of this script
+	fn getMaterialGUID mat_file = (
+	
+		if not (doesFileExist mat_file) do (
+		
+			format "Unable find material FIle:%\n" mat_file
+			return undefined
+		)
+		gLS3D_OT.MatXML_GetGUID mat_file
+	),
 	fn getMaterialType visual_id = (
 		
 		if  visual_id - 400 > 0 then "havok"

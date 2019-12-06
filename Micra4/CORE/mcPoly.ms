@@ -905,8 +905,12 @@ struct MICRA_POLY
 	),
 	/**
 	*@Usage > 	detach all faces to create a new object with specific properties
+	*@Example
+		mcPoly.rebuildObject $
+		mcPoly.rebuildObject $ keepMat:false
+		mcPoly.rebuildObject $ keepMat:false keepRotation:false
 	*/
-	fn rebuildObject obj withMaterial:false = (   
+	fn rebuildObject obj keepMat:true keepRotation:true keepScale:true = (   
 
 		if (classOf obj != Editable_Poly) then (convertToPoly obj)
 		local obj_name = obj.name 
@@ -915,7 +919,7 @@ struct MICRA_POLY
 		local obj_wirecolor = obj.wirecolor
 		local obj_pivot = obj.pivot
 		local obj_material = obj.material
-		obj.name = uniqueName "Object For Delete"
+		obj.name = uniqueName "Object_For_Delete"
 		polyOp.detachFaces obj obj.faces delete:true asNode:true name:obj_name
 		delete obj
 		local new_obj = getNodeByName obj_name
@@ -923,7 +927,9 @@ struct MICRA_POLY
 		new_obj.parent = obj_parent
 		new_obj.wirecolor = obj_wirecolor
 		new_obj.pivot = obj_pivot
-		if withMaterial do new_obj.material = obj_material
+		if not keepMat do new_obj.material = undefined
+		if not keepRotation do WorldAlignPivot new_obj
+		if not keepScale do resetScale new_obj
 		update new_obj
 		select new_obj
 		new_obj

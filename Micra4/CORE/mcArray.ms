@@ -121,6 +121,9 @@ struct MCRA_ARRAY (
 			)
 		)
 	),
+	/**
+	*@Usage > join two arrays in to new one
+	*/
 	fn mergeClone arr1 arr2 = (
 		
 		local new_arr = #()
