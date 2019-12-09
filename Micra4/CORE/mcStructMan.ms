@@ -23,22 +23,38 @@ struct MICRA_STRUCTURE_MANAGER	(
 	--functions
 	fn getSource = getSourceFileName(), --get path of this script
 	/**
-	*@Usage
-		import a sturcture(class) from CoreDir(file) as Global
-	*@Example 
-		mcStructMan.import "mcMsxInterface" --force:true
+	*@Usage > import structure(class) from RootDir(file) or CoreDir(file) as Global --if is not inicialized
+	*@Example
+		mcStructMan.import "mcMsxInterface" "mcMsxInterface" dir:#Core force:true 
+		mcStructMan.import "mcLS3DMaterialManagerStruct" "LS3D_Material_Manager_Struct" dir:#Root debug:true
 	*/
-	fn import struct_name force:false = (
+	fn import struct_name file_name dir:#Core force:false debug:false = (
 		
 		--check if structure is already loaded
-		if execute struct_name != undefined and not force do return OK
-		--find structure file and load it as global variable
-		local file = CoreDir + struct_name + ".ms"
-		if doesFileExist file then (
+		local struct_object = execute struct_name
+		if isStruct struct_object and not force do (
+		
+			if debug do format "mcStructMan > import > [  %  ]  was already loaded!\n" struct_name
+			return OK
+		)
+		--find file and load his structure as global variable
+		local file = case dir of (
+		
+			#Core : (
+			
+				micra.CoreDir + struct_name + ".ms"
+			)
+			#Root : (
+			
+				local file_versions = getFiles (micra.RootDir + file_name + "*.ms")
+				file_versions[file_versions.count] --get latest file version
+			)
+		)
+		if doesFileExist (file as string) then (
 		
 			try (
 				fileIn file
-				format "mcStructMan > import > structure [  %  ]  was success!\n" struct_name
+				if debug do format "mcStructMan > import > structure [  %  ]  was success!\n" struct_name
 			
 			) catch (
 			

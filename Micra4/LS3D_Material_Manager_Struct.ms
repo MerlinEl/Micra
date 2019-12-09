@@ -42,6 +42,34 @@ struct LS3D_MATERIAL_MANAGER_STRUCT (
 			else if visual_id - 200 > 0 then "noground"
 				else "basic"
 	),
+	/*fn readMaterialParams xml_path = (
+			
+		local xDoc = XMLDocument()
+		local xDoc.LoadXML xml_path
+		local rNode = xDoc.GetRootNode()
+		local nMaterials = rNode.GetChild 0	
+		local nMatChildren = nMaterials.GetChildren()
+		local childrenCount = nMatChildren.Count
+		if childrenCount == 0 do return false	
+		for childIndex = 1 to childrenCount do (	
+		
+			activeChild = nMatChildren[childIndex]
+			local comment = activeChild.GetAttribute "Comment" as String
+			
+			if comment != item_name do continue --pick single child with item_name
+
+			local visualMatIndex = activeChild.GetAttribute "VisualMatIndex" as Integer
+			local semanticMatIndex = activeChild.GetAttribute "SemanticMatIndex" as Integer
+			local tileUIndex = activeChild.GetAttribute "Tile_U" as Integer
+			local tileVIndex = activeChild.GetAttribute "Tile_V" as Integer
+			
+			if visualMatIndex != undefined do spn_visual_id.value = visualMatIndex
+			if semanticMatIndex != undefined do spn_semantic_id.value = semanticMatIndex
+			if tileUIndex != undefined do spnU.value = tileUIndex
+			if tileVIndex != undefined do spnV.value = tileVIndex
+			exit
+		)
+	),*/
 	-- Function AddRowToXML adds new row with item values to xml
 	fn addRowToXML xDoc nodeParent actChildIndex item newNodeInsertMethod:#FIRST_NODE = 
 	(
