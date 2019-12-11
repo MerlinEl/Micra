@@ -596,11 +596,10 @@ rollout mcQuickMaterialsDialog "Quick Materials:" width:656 height:456
 		local sublevel = subobjectLevel
 		max modify mode
 		--set object or faces material ID
-		--if not correct terrain material assigned add it to selection
 		if rdo_use_clone_mat.state == 1 then (
 			
 			for obj in valid_objects do (
-			
+				--if not correct terrain material assigned add it to selection
 				format "Assign Material:% ID:% SID:% to TILE U:% V:% Objects:%\n" mat_data.key mat_data.id mat_data.sid mat_data.tile_u mat_data.tile_v obj.name 
 				if obj.material == undefined or obj.material.name != terrain_mat_name do ( 
 					
