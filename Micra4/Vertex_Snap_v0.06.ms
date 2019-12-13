@@ -18,7 +18,7 @@ rollout mcVertexSnapDialog "" width:320 height:232
 	label 'lbl4' "quick:" pos:[16,148] width:40 height:16 align:#left
 	button 'btnSnapMore' "Snap Vertices" pos:[80,184] width:228 height:36 align:#left
 	checkbox 'chk_borders_only' "Borders only" pos:[228,117] width:76 height:20 enabled:true checked:true align:#left
-	button 'btn5' "Split Face" pos:[12,184] width:64 height:36 align:#left
+	button 'btn_split_face' "Split Face" pos:[12,184] width:64 height:36 align:#left
     local target_object
     local vert_pos
     
@@ -157,6 +157,40 @@ rollout mcVertexSnapDialog "" width:320 height:232
 		subobjectlevel = 1 --restore vertex  subobject level
 		EnableSceneRedraw()
 	)
+	fn multiSliceFaces = (
+
+		tool SplitEdgePoints (
+		
+			local p, start_point, split_points = #(), mark_points = #()
+			on mousePoint click do coordsys grid (
+			
+				if click == 1 then (
+				
+					start_point = gridPoint
+					p = point pos:gridPoint wirecolor:green centermarker:off axistripod:off cross:on box:off constantscreensize:on drawontop:on
+					append mark_points p
+					
+				) else if click > 2 do (
+				
+					append split_points gridPoint
+					p = point pos:gridPoint wirecolor:green centermarker:off axistripod:off cross:on box:off constantscreensize:on drawontop:on
+					append mark_points p
+				)
+			)
+			on stop do (
+			
+				--format "start_point:% split_points:%\n" start_point split_points
+				delete mark_points
+				
+				local obj = selection[1]
+				if classOf obj != Editable_Poly do return (mcMsgList.warn "not_poly")
+				local fsel = polyOp.getFaceSelection obj
+				if fsel.numberset == 0 do return (mcMsgList.warn "not_fsel")
+				mcPoly.sliceFacesBy2Points obj fsel start_point split_points
+			)
+		)
+		starttool SplitEdgePoints
+	)
 	fn init = (
 		
 		lbl_units.text = metric_type
@@ -231,6 +265,7 @@ rollout mcVertexSnapDialog "" width:320 height:232
 	        )
 	    )
 	on rdo_offset changed index do (spn_offset.value = execute offset_list[index])
+	on btn_split_face pressed do undo label:"Mulit Slice Face" on (multiSliceFaces())
 	on mcVertexSnapDialog open do ( init() )
 )
 

@@ -50,6 +50,7 @@ struct MICRA_MESSAGE_LIST_STRUCTURE	(
 			"not_vsel"		: "Select some vertices to progress."
 			"not_vsel_2"		: "Select two vertices to progress."
 			"not_esel"		: "Select some edges to progress."
+			"not_esel_1"		: "Select one edge to progress."
 			"not_esel_2"		: "Select two edges to progress."
 			"not_fsel"			: "Select some faces to progress."
 			"not_termat"		: "Missing terrain material."

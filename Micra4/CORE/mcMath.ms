@@ -8,6 +8,9 @@
 *@Used Objects
 
 *
+*@Study
+http://www.illusioncatalyst.com/3dsmax_files/snippets/geometry.php
+https://forums.cgsociety.org/t/geometrical-calculations-points-lines-planes-intersections-distances-angles/906269
 */
 struct MICRA_MATH (
 

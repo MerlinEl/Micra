@@ -1240,11 +1240,7 @@ struct mcAction (
 		(
 			local vSel = polyOp.getVertSelection obj
 			local forRemove = #()
-			for v in vSel where 
-			(
-				(polyOp.getEdgesUsingVert obj v).numberset < 3
-			)
-			do (append forRemove v)
+			for v in vSel where (mcPoly.isOrphanEdgeVert obj v) do (append forRemove v)
 			polyOp.setVertSelection obj forRemove
 			undo "Clean Verts in Line" on obj.EditablePoly.Remove()
 		)

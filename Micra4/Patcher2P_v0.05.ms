@@ -97,7 +97,7 @@ struct EDIT_MODEL (
 		),
 		fn getVectorsAngle v1 v2 = ( acos(dot (normalize v1) (normalize v2))),
 		fn getFirstEdge obj edges vert_a vert_b = (
-		
+print "a getFirstEdge"		
 			--vector AB
 			local vert_a_pos = polyop.getVert obj vert_a
 			local vert_b_pos = polyop.getVert obj vert_b
@@ -125,7 +125,7 @@ struct EDIT_MODEL (
 			)
 		),
 		fn getNextEdge obj edge_a vert_a edges = (
-		
+print "d getNextEdge"		
 			local vedges = polyOp.getEdgesUsingVert obj vert_a
 			vedges *= edges --remain only two border edges
 			local edge_b = ((vedges - #{edge_a}) as array)[1] --remove edge_a
@@ -133,20 +133,24 @@ struct EDIT_MODEL (
 			#( edge_b, vert_b )  
 		),
 		fn isLastEdge obj ei vi = (
-		
+print "e isLastEdge"		
 			local verts = (polyOp.getVertsUsingEdge obj ei)	as array	
 -- 			format "\tverts:% ei:% vi:%\n" verts ei vi
 			verts[1] == vi or verts[2] == vi
 		),
-		fn getLoopBetweenTwoVertices obj vert_a vert_b = (
+		fn getLoopBetweenTwoVertices obj vert_a vert_b maxRange:100 = (
 		
 			local border_edges = polyOp.getOpenEdges obj --get all open edges
 			local last_vert = vert_a
 			local next_edge_data = getFirstEdge obj border_edges vert_a vert_b
+print "b getLoopBetweenTwoVertices"
 			local loop_vertices = #(vert_a, next_edge_data[2]) --pick next vertex
 			for i=1 to border_edges.count do (
-			
-				
+print "c for i=1 to border_edges.count"	
+if i >= maxRange do (
+	format "Stitch failed! Loop excess limit:%.  check geometry for fixes." i
+	exit 
+)
 				next_edge_data = getNextEdge obj next_edge_data[1] next_edge_data[2] border_edges
 				append loop_vertices next_edge_data[2]
 				if isLastEdge obj next_edge_data[1] vert_b do exit
@@ -232,7 +236,7 @@ struct EDIT_MODEL (
 		lbl_trgt_obj.text = obj.name	
 	)
 	fn stitchSurfaces = (
-		
+print 1		
 		--validate souurce and target object
 		local source_obj = selection[1]	
 		if not em.isValidObject source_obj do return (mcMsgList.warn "not_poly")
@@ -247,6 +251,7 @@ struct EDIT_MODEL (
 			source_mesh.wirecolor = target_mesh.wirecolor = orange
 			modPanel.setCurrentObject source_obj.baseObject --return back to base object
 		)
+print 2
 -- 		hide #(source_mesh, target_mesh)
 -- 		select #(source_mesh, targe_mesh)
 		
@@ -273,7 +278,7 @@ struct EDIT_MODEL (
 		-- polyop.setFaceSelection source_obj verts_faces
 		-- polyop.setEdgeSelection source_obj source_border_loop
 		-- polyop.setVertSelection source_obj mid_verts
-
+print 3
 		local target_border_edges = polyOp.getOpenEdges target_mesh --get all open edges
 		local target_border_verts = polyop.getVertsUsingEdge target_mesh target_border_edges --get border vertices
 		local pos_a = polyop.getVert source_mesh source_vert_a
@@ -287,6 +292,7 @@ if target_vert_a == undefined or target_vert_b == undefined do ( --when one of t
 		messageBox "Out of Range. Joints are too far." title:form_title
 		return false
 )
+print 4
 		--get target border lop from vert A to vert B
 		local target_vertex_loop = em.getLoopBetweenTwoVertices target_mesh target_vert_b target_vert_a
 -- 		polyop.setEdgeSelection target_mesh target_border_loop
@@ -301,9 +307,9 @@ if target_vert_a == undefined or target_vert_b == undefined do ( --when one of t
 	-- local te = text size:100 text:(i as String) pos:(border_positions[i])
 	-- te.name = (uniqueName "Test_Text")
 	-- append debug_text te
--- )
-		
+-- )	
 		em.cleanSnapshots #(source_mesh, target_mesh)
+print 5	
 		undo "Create Patch 2P" on ( 
 			
 			local new_surface = em.createSurfaceFromPoints border_positions 
@@ -323,7 +329,7 @@ if target_vert_a == undefined or target_vert_b == undefined do ( --when one of t
 				em.attachObject source_obj new_surface
 				if chk_weld.checked do em.weldVertices source_obj offset:spn_weld_offset.value
 				if chk_automap.checked do (
-				
+print 6				
 					-------------------
 					--STITCH MAPPING--
 					-------------------

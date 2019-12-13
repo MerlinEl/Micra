@@ -396,6 +396,29 @@ struct MICRA_POLY
 		polyOp.setVert obj verts[1] (center+(v1*half_dist))
 		polyOp.setVert obj verts[2] (center+(v2*half_dist))
 	),
+	/**
+	*@Usage > create clice on face(s) by two points center and direction
+	*@Example
+		local fsel = polyOp.getFaceSelection obj
+		mcPoly.sliceFacesBy2Points obj fsel start_point split_points
+	*/
+	fn sliceFacesBy2Points obj fsel start_point split_points = (
+	
+		if (polyOp.getFaceSelection obj).numberset == 0 do return false
+		for p in split_points do (
+		
+			local plane_ray = (
+
+				local center = (p + start_point) / 2 
+				local dir = normalize (p - start_point) --get direction from two points
+				dir = cross dir [0,0,1] --rotate dir by 90
+				ray center (dir * obj.objectoffsetrot) --get plane ray
+			)
+			--plane pos:((start_point + p)/2) dir:plane_ray.dir
+			polyop.slice obj fsel plane_ray --cut face(s) in plane ray
+			fsel = polyOp.getFaceSelection obj --append new faces in to selection
+		)
+	),
 	fn setObjectId obj mat_id = (
 
 		if classOf obj != Editable_Poly do return false
@@ -518,6 +541,10 @@ struct MICRA_POLY
 		)
 		return verts
 	),
+	/**
+	*@Example
+		mcPoly.getClosestVert obj [10,10,10] 20
+	*/
 	fn getClosestVert obj_poly pos maxDist:undefined = (
 	
 		local vert, dist = if maxDist != undefined then maxDist else 1e9
@@ -549,10 +576,36 @@ struct MICRA_POLY
 	*/
 	fn isEdgeInFace obj edge_index face_index  = (
 		
-		faces_verts = polyOp.getVertsUsingFace obj face_index
-		edge_verts  = polyOp.getVertsUsingEdge obj edge_index
+		local faces_verts = polyOp.getVertsUsingFace obj face_index
+		local edge_verts  = polyOp.getVertsUsingEdge obj edge_index
 		(faces_verts - edge_verts).numberset == faces_verts.numberset - 2
 	),
+	/**
+	*@Usage > when vertex on edge is not connected to other vertices ( ----x---- )
+	*/
+	fn isOrphanEdgeVert obj vert_index = (
+	
+		(polyOp.getEdgesUsingVert obj vert_index).numberset < 3
+	),
+	/* Experimental (make connection on for orphan edge verts)
+	fn triangulateVerticesOnEdge obj = (
+
+		local vsel = polyOp.getVertSelection obj
+		local faces_for_triangulate = #{}
+		for v in vsel where (mcPoly.isOrphanEdgeVert obj v) do (
+
+			local vfaces = (polyOp.getFacesUsingVert obj v as array)
+			faces_for_triangulate += vfaces as Bitarray
+		)
+		polyOp.detachFaces obj faces_for_triangulate delete:true asNode:true name:"Faces_For_Triangulate"
+		local obj_tri = getNodeByName "Faces_For_Triangulate"
+		local Triangulate = Turn_to_Mesh()
+		addModifier obj_tri Triangulate
+		Triangulate.useInvisibleEdges = off
+		polyOp.attach obj obj_tri
+		obj.weldThreshold = 0.001
+		polyOp.weldVertsByThreshold obj obj.verts
+	)*/
 	fn getBorderEdgesFromVertex obj v_index = ( 
 		
 		local edges = polyop.getEdgesUsingVert obj v_index

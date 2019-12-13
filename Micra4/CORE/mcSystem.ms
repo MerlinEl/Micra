@@ -188,14 +188,17 @@ struct MICRA_SYSTEM (
 		flush f
 		close f
 	),
-	fn getMaxPos = (
-		
-		return windows.getWindowPos maxHandle
-	),
-	fn getMaxCenter = (
+	/**
+	*@Usage > manage all windows applications
+	*@Example
+		mcSystem.minMaxApp "notepad" #min
+		mcSystem.minMaxApp "notepad" #max
+	*/
+	fn getAppHandle app_name = (
 	
-		local max_pos = getMaxPos()
-		return [max_pos.w/2 + max_pos.x /2, max_pos.h/2 + max_pos.y /2]
+		local processes = (dotnetclass "System.Diagnostics.Process").GetProcesses()
+		--collect all running applications(using app name) handles
+		for j in processes where j.ProcessName == app_name collect j.MainWindowHandle
 	),
 	--set focus to Max Application Window
 	fn setFocusToMaxApp = (
@@ -214,7 +217,30 @@ struct MICRA_SYSTEM (
 	*/
 	fn setFocusTo hwnd = ( --Not used Yet
 	
-		windows.SendMessage hwnd WM_SETFOCUS 0 0
+		windows.SendMessage hwnd mcWinMsg.WM_SETFOCUS 0 0
+	),
+	fn minMaxApp app_name state = (
+	
+		local app_handle = (mcSystem.getAppHandle app_name)[1]
+		if app_handle == undefined do return false
+		if state == #max then (
+		
+			windows.sendmessage app_handle mcWinMsg.WM_SYSCOMMAND mcWinMsg.WM_MINIMIZE  0
+			windows.sendmessage app_handle mcWinMsg.WM_SYSCOMMAND mcWinMsg.WM_RESTORE  0
+			
+		) else (
+	
+			windows.sendmessage app_handle mcWinMsg.WM_SYSCOMMAND mcWinMsg.WM_MINIMIZE  0
+		)
+	),
+	fn getMaxPos = (
+		
+		return windows.getWindowPos maxHandle
+	),
+	fn getMaxCenter = (
+	
+		local max_pos = getMaxPos()
+		return [max_pos.w/2 + max_pos.x /2, max_pos.h/2 + max_pos.y /2]
 	),
 	/**
 	*@Author denisT 2011
