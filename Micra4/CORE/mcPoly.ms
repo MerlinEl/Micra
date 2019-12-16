@@ -361,6 +361,11 @@ struct MICRA_POLY
 		)
 		loop_vertices
 	),*/
+	fn deselectObject obj = (
+	
+		if subobjectLevel != undefined do subobjectLevel = 0 --if is in edit mode then exit first
+		deselect obj
+	),
 	fn removeEdges obj edges = (	
 
 		if classOf obj != Editable_Poly do return false

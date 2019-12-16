@@ -120,32 +120,32 @@ rollout mcVertexSnapDialog "" width:320 height:232
 			polyOP.setVertSelection objToAlign failedVertices
 		)
 	)
-	function AlignObjectsVerticesToObject targetObj arrObjsToAlign rangeValue stepValue =
+	function AlignObjectsVerticesToObject target_object source_objects rangeValue stepValue =
 	(	
 		DisableSceneRedraw()
+		-- mcPoly.deselectObject target_object
 		local gco = modPanel.getCurrentObject() --store current modifier selection
 		if (classOf gco != Editable_Poly and classOf gco != Edit_Poly) do (
 					
 			MessageBox "Selected objects must be Editable_Poly or have Edit_Poly modifier." title:form_title
 			return false
 		)
-		subobjectlevel = 0
-		max create mode
+		subobjectlevel = 0; max create mode --speed up
 		undo "Snap vertices" on (
 			
 			local targetObjVerts = if chk_borders_only.checked then (
 				
-				FilterBorderVerts targetObj onlySelectedVerts:false		-- optimalization, we can select only from border verts -> quicker times hell yeah
+				FilterBorderVerts target_object onlySelectedVerts:false		-- optimalization, we can select only from border verts -> quicker times hell yeah
 				
 			) else (
 				
-				#{1..(polyop.getNumVerts targetObj)}	
+				#{1..(polyop.getNumVerts target_object)}	
 			)
-			for obj in arrObjsToAlign do
+			for obj in source_objects do
 			(
 				if(stepValue == undefined)then
 				(
-					AlignVerticesToObject targetObj targetObjVerts obj rangeValue
+					AlignVerticesToObject target_object targetObjVerts obj rangeValue
 				)
 			)
 		)
@@ -167,12 +167,11 @@ rollout mcVertexSnapDialog "" width:320 height:232
 	
 	on btnSnapMore pressed do (
 	
-		local targetObj = getNodeByName btn_pick_trgt.text
-		if targetObj == undefined do return (mcMsgList.warn "not_poly_src")
-		mcPoly.deselectObject targetObj
-		local selObjects = selection as array
-		if(selObjects.count == 0) do return (mcMsgList.warn "not_sel")
-		AlignObjectsVerticesToObject targetObj selObjects spn_offset.value undefined
+		local target_object = getNodeByName btn_pick_trgt.text
+		if superClassOf target_object != GeometryClass do return (mcMsgList.warn "not_geo_trgt")
+		local source_objects = selection as array
+		if (source_objects.count == 0) do return (mcMsgList.warn "not_sel")
+		AlignObjectsVerticesToObject target_object source_objects spn_offset.value undefined
 	)
 	on chckIncreaseRange changed theState do
 	(

@@ -242,6 +242,7 @@ print 1
 		if not em.isValidObject source_obj do return (mcMsgList.warn "not_poly")
 		if not em.isValidObject target_obj do return (mcMsgList.warn "not_poly_trgt")
 		if not em.isValidSelection source_obj do return (mcMsgList.warn "not_vsel_2")
+		local presserve_uvs = source_obj.preserveUVs
 		--make snapshot for calculations (speed up with collapsed modifiers)
 		local source_mesh, target_mesh
 		with undo off (
@@ -327,6 +328,7 @@ print 5
 			if chk_attach.checked do (
 			
 				em.attachObject source_obj new_surface
+				update source_obj
 				if chk_weld.checked do em.weldVertices source_obj offset:spn_weld_offset.value
 				if chk_automap.checked do (
 print 6				
@@ -344,6 +346,7 @@ mod_uvw.unwrap2.selectBySG smg_index_29
 -- realx new object mapping if need ????
 mod_uvw.relax2() 				
 maxOps.CollapseNode source_obj off --collapse stack all
+source_obj.preserveUVs = presserve_uvs
 -- autosmooth geometry
 polyOp.setFaceSmoothGroup source_obj #{1..(source_obj.faces.count)} 1 add:false
 				)
