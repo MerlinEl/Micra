@@ -24,6 +24,59 @@ struct MICRA_POLY_MAP_STRUCTURE	(
 	--functions
 	fn getSource = getSourceFileName(), --get path of this script
 	fn isValidMod = ( classOf (modpanel.getcurrentobject()) == Unwrap_UVW ),
+	fn getNumUVChannels obj debug:false = (
+
+		if classof obj != Editable_Poly and classof obj != PolyMeshObject do return 0
+		local cnt = 0
+		if debug do format "Object [ % ] Channels:\n" obj.name
+		for i = 0 to (polyOp.getNumMaps obj) - 1 do (
+
+			if polyOp.getMapSupport obj i then (
+			
+				if debug do format "\t%\n" i
+				cnt+=1
+			)
+		)
+		cnt
+	),
+	/**
+	*@Example
+		mcPolyMap.clearChannels $ 10
+		for o in selection do mcPolyMap.clearChannels o 10
+	*/
+	fn clearChannels obj indexTo =
+	(
+		if subobjectLevel != undefined do subobjectLevel = 0; max create mode; --speed up
+		if superclassof obj != GeometryClass then return false
+		for i = 99 to indexTo by -1 do with redraw off (
+		
+			ChannelInfo.ClearChannel obj i 
+		)
+		maxOps.CollapseNodeTo obj 1 off
+	),
+	/** Not WORKS (only deleting data not channels use > clearChannels)
+	*@Example
+		mcPolyMap.clearMapChannels selection except:#{1..10}
+	*/
+	/*fn clearMapChannels objs except:#{0..10} = (
+
+		for o in objs do (
+		
+			if superclassof o != GeometryClass do (
+			
+				format "Skip Object: [ % ]. Must be Geometry Class\n" o.name
+				continue
+			)
+			for i = (polyOp.getNumMaps o) - 1 to 1 by -1 do ( --never delete Zero channel
+
+				if polyOp.getMapSupport o i and (findItem except i == 0) do (
+
+					channelInfo.ClearChannel o i
+				)
+			)
+			maxOps.CollapseNodeTo o 1 off
+		)
+	),*/
 	fn mapPlanar obj alignTo:#x collapseMod:true = (
 		
 		local uv_mod = Uvwmap ()
