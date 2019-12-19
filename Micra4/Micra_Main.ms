@@ -31,7 +31,8 @@ struct MICRA_STRUCTURE (
 	callbacksID			= #mcGeneralCallbacks, --micra callbacks ID
 	--> Directory structure
 	RootDir				= getFilenamePath (getSourceFileName()), --here is current version of Micra
-	CoreDir				= RootDir + "CORE\\", --here is all sturctures(classes)
+	CoreDir				= RootDir + "CORE\\", --here is all MSX sturctures(classes)
+	CorePyDir			= RootDir + "CORE_PY\\", --here is all PYTHON sturctures(classes)
 	TempDir				= RootDir + "Temp\\",
 	AutorunDir			= RootDir + "Autorun\\", --all plugins goes here, also Micra's autorun file	
 	RepositoryDir		= (pathConfig.removePathLeaf RootDir) + "\\", --here is all Micra's versions and other Resources
@@ -65,6 +66,10 @@ struct MICRA_STRUCTURE (
 	
 		local hsize = mb*1000000
 		if heapSize < hsize do heapSize = hsize
+	),
+	fn initPython = (
+	
+		python.ExecuteFile (CorePyDir + "mcLoader.py")
 	),
 	--> Clean and Close Micra
 	fn unload self:true = (
@@ -323,6 +328,7 @@ struct MICRA_STRUCTURE (
 		if loaded do unload()--> Unregister Micra's Callbacks and close all dialogs
 		loadStructures force:true --init system structures (always force or update may crash on unknown functions)
 		if not initUserProfile() do return false
+		if classOf python == Interface do initPython() --if python is supported(Max 2017+) init PYTHON
 		installMacro() --add micra macro to 3DsMax 
 		fileIn MaxMacro --> Reload Macroscript , bug in 3DsMax 1012
 		run() --> Run Micra
