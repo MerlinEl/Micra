@@ -19,7 +19,7 @@ if blender_app != None:
 	print ("Bring Blender in to Front")
 	blender_app.activate() 
 	print ("blender:", blender_app)
-else: print ("Blender is not Found")	
+else: print ("Blender is not Open")	
 	
 	
 #~ import [ test_obj_01.fbx ] in to Blender	
