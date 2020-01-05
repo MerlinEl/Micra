@@ -69,7 +69,8 @@ struct MICRA_STRUCTURE (
 	),
 	fn initPython = (
 	
-		python.ExecuteFile (CorePyDir + "mcLoader.py")
+		local autorun_py = mcFile.readSettings Micra.UserSettings "Settings/BlenderBridgeAutorun"
+		if autorun_py == "true" do python.ExecuteFile (CorePyDir + "mcLoader.py")
 	),
 	--> Clean and Close Micra
 	fn unload self:true = (

@@ -6,9 +6,10 @@ def getBlenderApp():
 	print ("Got ({})Windows with Blender Name.".format(len(app_process_list)))
 	if len(app_process_list) > 0: 
 		for w in app_process_list:
-			is_blender = w.title.startswith ("Blender")	
-			# print ("window name:{} is Blender:{}".format(w.title, is_blender))
+			app_title = w.title.encode('utf-8').strip() #UnicodeEncodeError Hot Fix
+			is_blender = app_title.startswith("Blender")
+			print ("\tName:{} is Blender:{}".format(app_title, is_blender))
 			if is_blender: 
 				blender_window = w
-				break
+				# break # speed up if enabled, but we did not get list of all windows (keep disabled for debug now)
 	return blender_window

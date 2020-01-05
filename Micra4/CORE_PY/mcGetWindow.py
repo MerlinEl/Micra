@@ -1,6 +1,6 @@
 import ctypes
 from ctypes import wintypes # We can't use ctypes.wintypes, we must import wintypes this way.
-from mcGeom import Rect, Point, Size
+from mcObject import Rect, Point, Size
 from mcWindow import PyGetWindowException, pointInRect, BaseWindow
 
 class POINT(ctypes.Structure):
@@ -292,7 +292,9 @@ class Win32Window(BaseWindow):
         """Return ``True`` if the window is currently visible."""
         return isWindowVisible(self._hWnd)
 
-
+	# def __getitem__(self, item):
+		# return getattr(self, item)
+		
 def cursor():
     """Returns the current xy coordinates of the mouse cursor as a two-integer
     tuple by calling the GetCursorPos() win32 function.

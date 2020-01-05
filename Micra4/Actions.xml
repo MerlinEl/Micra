@@ -186,6 +186,7 @@
     <Merge icon="52" cmd="mcAction.mergeMaxFileByPath()" tooltip="Merge Objects'" />
     <Reload icon="7" cmd="mcFile.reloadLastFile()" tooltip="Reload" />
     <Save_Selection icon="57" cmd="mcFile.saveSelectedObjects()" tooltip="Save Selection" />
+    <Max_To_Blender icon="287" cmd="mcFile.fileInVersion Max_To_Blender" tooltip="Max To Blender" />
   </Menu>
   <Programming>
     <Draw_Line_Between_Meshes icon="196" cmd="mcAction.drawLineBetweenTwoMeshes()" tooltip="Draw Line Between Meshes" />

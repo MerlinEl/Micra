@@ -1,35 +1,55 @@
 #~ import classes
-import mcMax, mcSystem, mcFile
+import mcMax, mcSystem, mcFile, MaxPlus, mcBridge
+from mcLoader import BLENDER_PORT
 
 #~ reimport classes while is in progress
 from mcFile import reimport
 reimport(["mcMax", "mcSystem", "mcFile"])
 
-#~ variables
-py_core_dir = mcFile.getPythonCoreDir()
-fbx_file = py_core_dir + "\\test_obj_01.fbx"
-print ("\tpy_core_dir:{}\n\tfbx_file:{}".format( py_core_dir, fbx_file ))
+def sendSelectionToBlender(objs):
+	#~ selection check
+	if objs.GetCount() == 0:
+		print ("Nothing is selected for Export.")
+		return False
+	print ("Process ({})Objects:".format(objs.GetCount()))	
+	#~ variables
+	py_core_dir = mcFile.getPythonCoreDir()
+	xml_file = py_core_dir + "\\blender\\blender_max_transfer_info.xml"
+	fbx_file = py_core_dir + "\\blender\\blender_max_transfer_scene.fbx"
+	
+	#~ Save selected objects data in to XML (obj_name, mat_name, parent_name
+	mcFile.saveObjectsDataToXML(objs, xml_file)
+	print ("\tSave XML Data:\n\t\t{}".format(xml_file))
 
-#~ export selected object as FBX
-mcMax.exportSelectionAsFBX (fbx_file)
+	#~ Export selected object as FBX
+	print ("\tExport FBX File:\n\t\t{}".format(fbx_file))
+	mcMax.exportSelectionAsFBX (fbx_file)
+	
+	#~ Bring Blender in to front or open new Instance	
+	blender_app = mcSystem.getBlenderApp()
+	if blender_app != None: 
+		print ("Bring {} in to Front".format(blender_app.title))
+		blender_app.activate()
+	else: 
+		print ("Blender is not Open.")
+		import os
+		blender_app_path = mcFile.getBlenderAppPath()
+		if os.path.isfile (blender_app_path): 
+			print ("Try To start Blender App:\n\t", blender_app_path)
+			os.startfile(blender_app_path)
+	
+	#~ Wait for Blender app is open(if not)
+	if blender_app == None:
+		import time
+		time.sleep(3)
+		
+	#~ Send event to Blender
+	mcBridge.sendMessageToPort({'type':'Export', 'xml':xml_file, 'fbx':fbx_file}, BLENDER_PORT)
 
-#~ Bring Blender in to front or open new Instance	
-blender_app = mcSystem.getBlenderApp()
-if blender_app != None: 
-	print ("Bring Blender in to Front")
-	blender_app.activate() 
-	print ("blender:", blender_app)
-else: print ("Blender is not Open")	
+#~ EXECUTE
+sendSelectionToBlender(MaxPlus.SelectionManager.GetNodes())
 	
 	
-#~ import [ test_obj_01.fbx ] in to Blender	
-	#~ blender test.blend -P test.py
 	
-	
-#~ import pymxs
-#~ from pymxs import runtime as rt
-#~ myfile = 'C:\\Users\\avisd\\Desktop\\Sample+House.skp'
-#~ rt.importFile(myfile, using=rt.sketchUp)
-
-#~ https://help.autodesk.com/view/3DSMAX/2017/ENU/?guid=__py_ref_demo_materials_8py_example_html
-#~ https://digitalrune.github.io/DigitalRune-Documentation/html/6f749972-9cb2-4274-b283-c327ba45e379.htm
+#~ sendMessageToPort({'type':'quit'}, BLENDER_PORT) 
+#~ print ("\tparent:{}".format( o.GetNumChildren()))

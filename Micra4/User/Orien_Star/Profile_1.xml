@@ -13,7 +13,7 @@
     <mc_Dialog_J active="true" pos="[1205,917]" size="[460,42]" title="Experimental:" btnCount="[19,1]" />
   </Properties_1>
   <Properties_2>
-    <mcMicraDialog active="true" pos="[1570,210]" size="[148,66]" title="" />
+    <mcMicraDialog active="true" pos="[1505,143]" size="[148,66]" title="" />
     <mcCustomizeDialog active="false" pos="[850,240]" size="[224,404]" title="" />
     <mcProgramDialog active="false" pos="[100,0]" size="[256,232]" title="" />
     <mcisoDialog active="false" pos="[100,152]" size="[140,400]" title="" />
@@ -201,5 +201,6 @@
     <btn_B9 action="Create_PolygonGrid" icon="274" />
     <btn_I12 action="Autosave_Switch" icon="3" />
     <btn_I11 action="Keyboard_Switch" icon="257" />
+    <btn_J13 action="Max_To_Blender" icon="287" />
   </Buttons>
 </USER>

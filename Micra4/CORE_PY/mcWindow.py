@@ -22,7 +22,7 @@ __version__ = "0.0.8"
 import sys
 import mcPyRect as pyrect
 
-# from mcGeom import Rect, Point, Size
+# from mcObject import Rect, Point, Size
 
 class PyGetWindowException(Exception):
     """
@@ -317,6 +317,9 @@ class BaseWindow:
     def box(self, value):
         self._rect.box  # Run rect's onRead to update the Rect object.
         self._rect.box = value
+
+	# def __getitem__(self, item):
+		# return getattr(self, item)
 
 # if sys.platform == "win32":
     # from .mcGetWindow import (

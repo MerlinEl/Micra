@@ -7,9 +7,7 @@ def getSelection():
 def deselectAll():
 	MaxPlus.SelectionManager.ClearNodeSelection()
 
-
 def exportSelectionAsFBX(fpath):
-
 	mxs.runtime.exportFile (
 		#r''+fpath,
 		fpath,
@@ -20,6 +18,8 @@ def exportSelectionAsFBX(fpath):
 	)
 
 """	
+http://help.autodesk.com/view/3DSMAX/2016/ENU/
+
 def exportSelectionToFBX(fpath, fname):
 	MaxPlus.Core.EvalMAXScript("pluginManager.loadClass FBXEXPORTER")
 	MaxPlus.Core.EvalMAXScript("FBXExporterSetParam \"BakeAnimation\" False")
@@ -29,8 +29,40 @@ def exportSelectionToFBX(fpath, fname):
 	MaxPlus.Core.EvalMAXScript('FBXExporterSetParam "ASCII" True')
 	MaxPlus.Core.EvalMAXScript('FBXExporterSetParam "Animation" False')
 	MaxPlus.Core.EvalMAXScript('FBXExporterSetParam "EmbedTextures" False')
-
-
+--Geometry------------------------------------------------------------------------
+	FBXExporterSetParam "SmoothingGroups" true
+	FBXExporterSetParam "NormalsPerPoly" false
+	FBXExporterSetParam "TangentSpaceExport" true
+	FBXExporterSetParam "SmoothMeshExport" false
+	FBXExporterSetParam "Preserveinstances" false
+	FBXExporterSetParam "SelectionSetExport" false
+	FBXExporterSetParam "GeomAsBone" false
+	FBXExporterSetParam "ColladaTriangulate" true
+	FBXExporterSetParam "PreserveEdgeOrientation" true
+--Animation------------------------------------------------------------------------
+	FBXExporterSetParam "Animation" false
+--Cameras------------------------------------------------------------------------
+	FBXExporterSetParam "Cameras" false
+--Lights------------------------------------------------------------------------
+	FBXExporterSetParam "Lights" false
+--Embed Media--------------------------------------------------------------------
+	FBXExporterSetParam "EmbedTextures" false
+--Units----------------------------------------------------------------------------
+--Axis Conversion-----------------------------------------------------------------
+	FBXExporterSetParam "AxisConversionMethod" "None"
+	FBXExporterSetParam "UpAxis" "Y" 
+--UI----------------------------------------------------------------
+	FBXExporterSetParam "ShowWarnings" true
+	FBXExporterSetParam "GenerateLog" false
+--FBX File Format----------------------------------------------------------------
+	FBXExporterSetParam "ASCII" true
+	FBXExporterSetParam "FileVersion" "FBX201200"
+--Path and file name stuff
+	makeDir (maxFilePath + "FBX")
+	FBXSavePath = (maxFilePath + "FBX\\" + $.name)
+	exportFile FBXSavePath #noPrompt selectedOnly:true using:FBXEXP 
+--to prevent the export of the cameras:
+	FBXExporterSetParam "Cameras" False
 
 MaxPlus.FileManager.ExportSelected
 

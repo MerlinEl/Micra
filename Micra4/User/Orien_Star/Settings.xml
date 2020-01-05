@@ -11,6 +11,9 @@
     <AimScaleFactor val="10" />
     <SaveWirecolor val="off" />
     <SaveLinks val="on" />
+    <BlenderAppPath val="E:\Aprog\Blender\blender.exe" />
+    <BlenderScriptsPath val="E:\Aprog\Blender\2.81\scripts\startup\" />
+    <BlenderBridgeAutorun val="true" />
   </Settings>
   <Profiles>
     <menu_1 val="Default" />
