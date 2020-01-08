@@ -572,7 +572,7 @@ Tooltip:"Select Previous Bone"
 		)
 	)
 )
-
+----------------------------------------------------------------------------------------------------------
 MacroScript MCselectNext
 Category:"Micra" 
 ButtonText:"Select Next Bone"
@@ -593,7 +593,7 @@ Tooltip:"Select Next Bone"
 		)
 	)
 )
-
+----------------------------------------------------------------------------------------------------------
 MacroScript SelectCamTS
 category:"Micra" 
 ButtonText:"Slect Camera Target Switch"
@@ -604,7 +604,7 @@ Tooltip:"Slect Camera Target Switch"
 		if classOf selection[1] == Targetobject then select selection[1].lookat else select selection[1].target
 	)
 )
-
+----------------------------------------------------------------------------------------------------------
 MacroScript MC_SubObject_1
 Category:"Micra"
 ButtonText:"SubobjectLevel 1"
@@ -614,6 +614,7 @@ Icon:#("SubObjectIcons",1)
 	On IsEnabled Return (classOf mcAction == StructDef)
 	On Execute do  (mcAction.setSubobjectLevel 1)
 ) 
+----------------------------------------------------------------------------------------------------------
 MacroScript MC_SubObject_2
 Category:"Micra"
 ButtonText:"SubobjectLevel 2"
@@ -623,6 +624,7 @@ Icon:#("SubObjectIcons",2)
 	On IsEnabled Return (classOf mcAction == StructDef)
 	On Execute do  (mcAction.setSubobjectLevel 2)
 ) 
+----------------------------------------------------------------------------------------------------------
 MacroScript MC_SubObject_3
 Category:"Micra"
 ButtonText:"SubobjectLevel 3"
@@ -631,7 +633,8 @@ Icon:#("SubObjectIcons",3)
 (
 	On IsEnabled Return (classOf mcAction == StructDef)
 	On Execute do  (mcAction.setSubobjectLevel 3)
-) 
+)
+---------------------------------------------------------------------------------------------------------- 
 MacroScript MC_SubObject_4
 Category:"Micra" 
 ButtonText:"SubobjectLevel 4"
@@ -641,7 +644,7 @@ Icon:#("SubObjectIcons",4)
 	On IsEnabled Return (classOf mcAction == StructDef)
 	On Execute do  (mcAction.setSubobjectLevel 4)
 ) 
-
+----------------------------------------------------------------------------------------------------------
 MacroScript MC_SubObject_5
 Category:"Micra" 
 ButtonText:"SubobjectLevel 5"
@@ -651,7 +654,7 @@ Icon:#("SubObjectIcons",5)
 	On IsEnabled Return (classOf mcAction == StructDef)
 	On Execute do  (mcAction.setSubobjectLevel 5)
 ) 
-
+----------------------------------------------------------------------------------------------------------
 MacroScript MC_Poly_Bridge
 Category:"Micra" 
 ButtonText:"Create Bridge"
@@ -676,7 +679,7 @@ Tooltip:"Create Bridge between Edges"
 		)
 	)
 ) 
-
+----------------------------------------------------------------------------------------------------------
 MacroScript MC_Move_To_Surface
 Category:"Micra" 
 ButtonText:"MC Move To Surface"
@@ -685,6 +688,26 @@ Tooltip:"Move selected object to Surface"
 	On IsEnabled Return (selection.count == 1)
 	On Execute do  (mcAction.moveObjectToSurface())
 )
+----------------------------------------------------------------------------------------------------------	
+macroScript MC_RemEdgesToFixMapping
+category:"Micra"
+ButtonText:"Remove Edges Fix Mapping"
+toolTip:"Remove Edges Fix Mapping"
+(
+	On IsEnabled Return (classOf mcAction == StructDef)
+	On Execute Do (mcAction.removeEdgesToFixMapping())
+)
+----------------------------------------------------------------------------------------------------------
+macroScript MC_RecFixedMappingEdges
+category:"Micra"
+ButtonText:"Reconnect Edges Fix Mapping"
+toolTip:"Reconnect Edges Fix Mapping"
+(
+	On IsEnabled Return (classOf mcAction == StructDef)
+	On Execute Do (mcAction.reconnectFixedMappingEdges())
+)
+----------------------------------------------------------------------------------------------------------
+
 
 /*
 C:\Documents and Settings\rbaca\Local Settings\Application Data\Autodesk\3dsmax\9 - 32bit\enu\UI\usermacros

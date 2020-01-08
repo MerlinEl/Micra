@@ -382,8 +382,19 @@ struct MICRA_FILE (
 		if not doesFileExist fpath do return false
 		if isMaxFile fpath do try (loadMaxFile fpath useFileUnits:true quiet:false) catch()
 	),
-	fn createNewFile file_path file_text:"" = (
+	/**
+	*@Example
+		mcFile.createNewFile @"c:\temp\test_001.txt" file_text:"abc" override:true
+	*/
+	fn createNewFile file_path file_text:"" override:false= (
 	
+		if doesFileExist file_path do (
+			if override then deleteFile file_path else (
+			
+				format "Failed! File is already exist. Use override:true to progress.\n"
+				return false
+			)
+		)
 		local out_file = createFile file_path --create file at given file path
 		if file_text.count > 0 do format "%" file_text to:out_file --write data in to file
 		close out_file --important to close else file can't be deleted

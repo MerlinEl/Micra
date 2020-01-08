@@ -12,6 +12,8 @@
     <SaveWirecolor val="on" />
     <SaveLinks val="on" />
     <SaveLayer val="on" />
+    <BlenderAppPath val="D:\ReneBaca\Aprog\Blender\v2.81a-win64\blender.exe" />
+    <BlenderScriptsPath val="D:\ReneBaca\Aprog\Blender\v2.81a-win64\2.81\scripts\startup\" />
   </Settings>
   <Profiles>
     <menu_1 val="Merlin" />

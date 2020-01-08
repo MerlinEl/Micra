@@ -147,7 +147,7 @@
     <Slice_Plane2 val="0.01" />
     <Object_Planter_Interactive val="0.01" />
     <Smoothing_Groups val="0.04" />
-    <Max_To_Blender val="1.01" />
+    <Max_To_Blender val="1.02" />
   </Version>
   <SystemFiles val="Micra's Settings Files">
     <Actions val="Contains all accesible Micra's actions" />

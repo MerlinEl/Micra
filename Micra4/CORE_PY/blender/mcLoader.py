@@ -1,5 +1,5 @@
 import sys
-Micra_Blender_Dir = 'E:\\Aprog\\Orien\\Micra\\Micra4\\CORE_PY\\blender'
+Micra_Blender_Dir = 'D:\\ReneBaca\\3DsMax\\Micra\\Micra4\\CORE_PY\\blender'
 MAX_PORT = 5688
 BLENDER_PORT = 2489
 #~ add Micra Core Python Dir in to system paths( if need )

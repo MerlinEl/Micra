@@ -1,5 +1,2 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<root>
-  <item material="None" name="Sphere001" parent="Dummy001" />
-  <item material="None" name="Sphere005" parent="None" />
-</root>
+<root />

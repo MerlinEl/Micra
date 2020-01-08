@@ -234,5 +234,6 @@
     <btn_B41 action="ZB_Scale_To" icon="250" />
     <btn_B40 action="Unlock_Object" icon="89" />
     <btn_B39 action="Lock_Object" icon="88" />
+    <btn_J11 action="Max_To_Blender" icon="287" />
   </Buttons>
 </USER>

@@ -169,10 +169,12 @@ Public
 	*/
 	fn replaceAll str old_str new_str = (
 		
-		local rgx = dotnetObject "System.Text.RegularExpressions.Regex" old_str
-		rgx.Replace str new_str
+		--local rgx = dotnetObject "System.Text.RegularExpressions.Regex" old_str
+		--rgx.Replace str new_str
+		--replaced code with new one (old was unable to replace slashes in path)
+		local dstr = dotnetObject "System.String" str
+		dstr.replace old_str new_str
 	),
-	fn dRreplaceAll str old_str new_str = (local dstr = dotnetObject "System.String" str; dstr.replace old_str new_str), --dotnet version Test
 	/**
 	*Still Testing 2019
 	*@Example

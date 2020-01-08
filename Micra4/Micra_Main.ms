@@ -67,9 +67,9 @@ struct MICRA_STRUCTURE (
 		local hsize = mb*1000000
 		if heapSize < hsize do heapSize = hsize
 	),
-	fn initPython = (
+	fn initPython = ( --disabled, max silent crash on start
 	
-		local autorun_py = mcFile.readSettings Micra.UserSettings "Settings/BlenderBridgeAutorun"
+		local autorun_py = mcFile.readSettings UserSettings "Settings/BlenderBridgeAutorun"
 		if autorun_py == "true" do python.ExecuteFile (CorePyDir + "mcLoader.py")
 	),
 	--> Clean and Close Micra
@@ -180,17 +180,19 @@ struct MICRA_STRUCTURE (
 		return true
 	),
 	--> Copy Micra's macro to 3DsMax dir
-	fn installMacro = (
+	fn installMacro force:false = (
 		
-		local need_install	= not doesFileExist MaxMacro
-		local need_update 	= doesFileExist MaxMacro and mcFile.isFileOlder MaxMacro MicraMacro 
+		local need_install	= (not doesFileExist MaxMacro)
+		local need_update 	= (doesFileExist MaxMacro) and (mcFile.isFileOlder MaxMacro MicraMacro) 
 		local result			= "Unchanged"
 		if need_install then ( 		--copy macro to max user folder
 		
+			format "Instaling Micra Macro...\n"
 			result = copyFile MicraMacro MaxMacro
 		
-		) else if need_update do (	--override macro in max user folder
+		) else if need_update or force do (	--override macro in max user folder
 		
+			format "Updating Micra Macro...\n"
 			deleteFile MaxMacro
 			if not doesFileExist MaxMacro then (
 			
@@ -201,6 +203,7 @@ struct MICRA_STRUCTURE (
 				format "Unable to override old Macro version.\n\tsource:%\t\n\ttarget:%\n" MicraMacro MaxMacro
 			)
 		)
+		if result == true do filein MaxMacro
 		format "% > installMacro > with result:%\n" version result 
 	),
 	fn isInstaled = (
@@ -329,7 +332,7 @@ struct MICRA_STRUCTURE (
 		if loaded do unload()--> Unregister Micra's Callbacks and close all dialogs
 		loadStructures force:true --init system structures (always force or update may crash on unknown functions)
 		if not initUserProfile() do return false
-		if classOf python == Interface do initPython() --if python is supported(Max 2017+) init PYTHON
+		--if classOf python == Interface do initPython() --if python is supported(Max 2017+) init PYTHON --DISABLED
 		installMacro() --add micra macro to 3DsMax 
 		fileIn MaxMacro --> Reload Macroscript , bug in 3DsMax 1012
 		run() --> Run Micra

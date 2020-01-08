@@ -1043,6 +1043,18 @@ struct MICRA_POLY
 			if sel.count == 1 do subobjectLevel = 4
 		)
 	),
+	/** Not Used
+	*@Usage 
+		Remove edge to fix mapping and reconect edge back
+	*/
+	fn fixEdgeMappingFlow obj = (
+
+		local esel = polyOp.getEdgeSelection obj 
+		local everts = polyOp.getVertsUsingEdge obj esel
+		obj.Remove()
+		polyOp.setVertSelection obj everts
+		obj.ConnectVertices()
+	),
 	-------------------------------------------------------------
 	-------------------------------------------------------------
 	------              	OTHER    	                   ------

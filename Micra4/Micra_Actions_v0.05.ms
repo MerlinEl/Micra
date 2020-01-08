@@ -6,6 +6,9 @@ Global mcSelVertsInXDialog
 Global mcSilhouetteSelection
 Global mcSilhouetteWirecolors
 
+Global MCPOLY_FIX_MAP_VERT_SETS = #() ---array from bittarrays (fixMappingEdgeRemove)
+
+
 struct mcAction (
 
 	url = getSourceFileName(),
@@ -2196,6 +2199,26 @@ struct mcAction (
 			)--2:	
 		)
 		redrawViews()
+	),
+	fn removeEdgesToFixMapping = (
+
+		local obj = (selection as array)[1]
+		if classOf obj != editable_poly do return false
+		local esel = polyOp.getEdgeSelection obj 
+		local everts = polyOp.getVertsUsingEdge obj esel
+		append MCPOLY_FIX_MAP_VERT_SETS everts
+		obj.Remove()
+	),
+	fn reconnectFixedMappingEdges = (
+		
+		local obj = (selection as array)[1]
+		if classOf obj != editable_poly do return false
+		for vpair in MCPOLY_FIX_MAP_VERT_SETS do (
+			
+			polyOp.setVertSelection obj vpair
+			obj.ConnectVertices()
+		)
+		MCPOLY_FIX_MAP_VERT_SETS = #()
 	),
 	fn optimizeSpline num:2 = --optimizeSpline num:2 
 	(
