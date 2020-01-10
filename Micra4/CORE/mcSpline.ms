@@ -22,6 +22,16 @@ struct MICRA_NEW_STRUCTURE	(
 	
 	--functions
 	fn getSource = getSourceFileName(), --get path of this script
+	fn createSplineObject start_pos:[0, 0, 0] selected:false = (
+	
+		local sps = SplineShape pos:start_pos
+		if selected do (
+		
+			mcMax.deselectAll()
+			select sps
+		)
+		sps
+	),
 	/**
 	*@Example
 		new_spline = mcSpline.drawLineBetweenTwoPoints [10,20,30] [100,200,10]

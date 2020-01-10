@@ -285,7 +285,7 @@ rollout mcUnwrapEditorDialog "UV+" width:96 height:648
 	fn rotateVertices way = (
 		
 		local gco = modpanel.getcurrentobject()
-		local sel_verts = mcPolyMap.getCurentSelectionAs #verts --this procedure also define gco and select vertices
+		local sel_verts = mcPolyMap.getCurentSelectionAs gco #verts --this procedure also define gco and select vertices
 		if sel_verts.count == 0 do return false
 		local vertices_pos = for i in sel_verts collect (gco.getVertexPosition 0 i)
 		format "A verts:%\n" vertices_pos
@@ -319,7 +319,7 @@ rollout mcUnwrapEditorDialog "UV+" width:96 height:648
 	fn copyVertexPos = (
 		
 		local gco = modpanel.getcurrentobject()
-		local sel_verts = mcPolyMap.getCurentSelectionAs #verts --this procedure also define gco and select vertices
+		local sel_verts = mcPolyMap.getCurentSelectionAs gco #verts --this procedure also define gco and select vertices
 		if sel_verts.count == 0 do return false
 		vertex_position = gco.getVertexPosition 0 sel_verts[1]
 	)
@@ -327,7 +327,7 @@ rollout mcUnwrapEditorDialog "UV+" width:96 height:648
 	fn pastePos way = (
 	
 		if vertex_position == undefined do return false
-		local sel_verts = mcPolyMap.getCurentSelectionAs #verts --this procedure also define gco and select vertices
+		local sel_verts = mcPolyMap.getCurentSelectionAs gco #verts --this procedure also define gco and select vertices
 		if sel_verts.count == 0 do return false
 		local gco = modpanel.getcurrentobject()	
 		undo "Paste UVW Position" on for i in sel_verts do (
@@ -346,7 +346,7 @@ rollout mcUnwrapEditorDialog "UV+" width:96 height:648
 	fn stretchUvsToFitSquare = (
 
 		local gco = modpanel.getcurrentobject()
-		local sel_verts = mcPolyMap.getCurentSelectionAs #verts --this procedure also define gco and select vertices
+		local sel_verts = mcPolyMap.getCurentSelectionAs gco #verts --this procedure also define gco and select vertices
 		if sel_verts.count == 0 do return false
 		local vertices_pos = for i in sel_verts collect (gco.getVertexPosition 0 i)
 		-- Get left/lower limit
@@ -406,9 +406,9 @@ rollout mcUnwrapEditorDialog "UV+" width:96 height:648
 	--<
 	
 	-->Actions
-	on btn_verts pressed do mcPolyMap.convetrSelectionTo #verts
-	on btn_edges pressed do mcPolyMap.convetrSelectionTo #edges
-	on btn_faces pressed do mcPolyMap.convetrSelectionTo #faces
+	on btn_verts pressed do mcPolyMap.convetrSelectionTo (modpanel.getcurrentobject()) #verts
+	on btn_edges pressed do mcPolyMap.convetrSelectionTo (modpanel.getcurrentobject()) #edges
+	on btn_faces pressed do mcPolyMap.convetrSelectionTo (modpanel.getcurrentobject()) #faces
 	on btn_sel_similar pressed do selectUVWElementsBySize min_treeshold:spn_min.value max_treeshold:spn_max.value
 	on btn_sel_over pressed do selectOverlapped()
 	on btn_border pressed do (undo "Select Border" on mcPolyMap.selectBorder())

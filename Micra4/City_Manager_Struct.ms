@@ -90,9 +90,7 @@ struct sCityManager	(
 	fn getCollisionLayer obj = (
 	
 		local layer_name = obj.layer.name + "_coll"
-		local collision_layer = LayerManager.getLayerFromName layer_name --pick layer by name
-		if collision_layer == undefined do collision_layer = LayerManager.newLayerFromName layer_name --create layer if not exists
-		collision_layer
+		mcMax.getetOrCreateLayer layer_name
 	),
 	fn getCollisionNode obj = (
 	

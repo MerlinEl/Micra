@@ -34,7 +34,8 @@ rollout mcVertexColorDialog "Vertex Color v1.02" width:408 height:348
 	button 'btn_g' "G" pos:[140,248] width:20 height:20 toolTip:"Set Color To Green" align:#left
 	button 'btn_b' "B" pos:[160,248] width:20 height:20 toolTip:"Set Color To Blue" align:#left
 	button 'btn_r1' "R1" pos:[220,248] width:20 height:20 toolTip:"Set Color To Red" align:#left
-	button 'btn_g1' "G1" pos:[240,248] width:20 height:20 toolTip:"Set Color To Red" align:#left
+	button 'btn_r2' "R2" pos:[240,248] width:20 height:20 toolTip:"Set Color To Brown" align:#left
+	button 'btn_g1' "G1" pos:[260,248] width:20 height:20 toolTip:"Set Color To Green" align:#left
 
 	radiobuttons 'rdo_1' "" pos:[12,28] width:31 height:16 labels:#("1") default:1 align:#left
 	radiobuttons 'rdo_2' "" pos:[12,56] width:31 height:16 labels:#("2") default:0 align:#left
@@ -56,8 +57,8 @@ rollout mcVertexColorDialog "Vertex Color v1.02" width:408 height:348
 	spinner 'spn_alpha' "" pos:[324,312] width:68 height:16 range:[0,100,0] type:#integer align:#left
 
 	--local variables
-	local btn_set2_colors = #(red, green, blue, color 216 0 71, color 0 133 63)
-	local btn_set2 = #(btn_r, btn_g, btn_b, btn_r1, btn_g1)
+	local btn_set2_colors = #(red, green, blue, color 216 0 71, color 255 0 50, color 0 133 63)
+	local btn_set2 = #(btn_r, btn_g, btn_b, btn_r1, btn_r2, btn_g1)
 	local radio_buttons = #(rdo_1, rdo_2, rdo_3, rdo_4, rdo_5, rdo_6, rdo_7, rdo_8, rdo_9)
 	local color_buttons = #(btn_1, btn_2, btn_3, btn_4, btn_5, btn_6, btn_7, btn_8, btn_9)
 	local bmp_colors = #(
@@ -496,7 +497,8 @@ rollout mcVertexColorDialog "Vertex Color v1.02" width:408 height:348
 	on btn_g pressed do ( setSelectionColor btn_set2_colors[2]  )
 	on btn_b pressed do ( setSelectionColor btn_set2_colors[3]  )
 	on btn_r1 pressed do ( setSelectionColor btn_set2_colors[4]  )
-	on btn_g1 pressed do ( setSelectionColor btn_set2_colors[5]  )
+	on btn_r2 pressed do ( setSelectionColor btn_set2_colors[5]  )
+	on btn_g1 pressed do ( setSelectionColor btn_set2_colors[6]  )
 
 	--ALPHA
 	on sld_alpha changed val do (setSelectionAlpha val #sld)

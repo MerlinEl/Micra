@@ -79,51 +79,70 @@ struct MICRA_POLY_MAP_STRUCTURE	(
 	),*/
 	fn mapPlanar obj alignTo:#x collapseMod:true = (
 		
-		local uv_mod = Uvwmap ()
-		uv_mod.maptype = case alignTo of (#x:0; #y:1; #z:2; default:0)
-		uv_mod.axis = 2
-		uv_mod.realWorldMapSize = off
-		uv_mod.utile = uv_mod.vtile = uv_mod.wtile =1
-		uv_mod.channel = 0
-		addModifier obj uv_mod
+		local mod_uvw = Uvwmap ()
+		mod_uvw.maptype = case alignTo of (#x:0; #y:1; #z:2; default:0)
+		mod_uvw.axis = 2
+		mod_uvw.realWorldMapSize = off
+		mod_uvw.utile = mod_uvw.vtile = mod_uvw.wtile =1
+		mod_uvw.channel = 0
+		addModifier obj mod_uvw
 		if collapseMod do maxOps.CollapseNode obj off
 	),
 	/**
 	*@Usage
-		mcPolyMap.convetrSelectionTo #verts
+		mcPolyMap.convetrSelectionTo (modpanel.getcurrentobject()) #verts
 	*/
-	fn convetrSelectionTo type = (
+	fn convetrSelectionTo mod_uvw type = (
 	
-		if not (isValidMod()) do return (mcMsgList.warn "not_unwrap")
+		if classOf  mod_uvw!= Unwrap_UVW do return false
 		local lvl = subobjectLevel
-		local gco = modpanel.getcurrentobject()
 		case type of
 		(	
 			#verts: (
-				subobjectLevel = 1
-				(if lvl == 3 then gco.faceToVertSelect() else if lvl == 2 do gco.edgeToVertSelect())
+				-- subobjectLevel = 1
+				(if lvl == 3 then mod_uvw.faceToVertSelect() else if lvl == 2 do mod_uvw.edgeToVertSelect())
 			)
 			#edges:(
-				subobjectLevel = 2
-				(if lvl == 3 then gco.faceToEdgeSelect() else if lvl == 1 do gco.vertToEdgeSelect())
+				-- subobjectLevel = 2
+				(if lvl == 3 then mod_uvw.faceToEdgeSelect() else if lvl == 1 do mod_uvw.vertToEdgeSelect())
 			)
 			#faces:(
-				subobjectLevel = 3
-				(if lvl == 2 then gco.edgeToFaceSelect() else if lvl == 1 do gco.vertToFaceSelect())
+				-- subobjectLevel = 3
+				(if lvl == 2 then mod_uvw.edgeToFaceSelect() else if lvl == 1 do mod_uvw.vertToFaceSelect())
 			)
 		)
 	),
-	fn getCurentSelectionAs type = ( --conver selection to desired type and return as array
+	fn getCurentSelectionAs mod_uvw type = ( --conver selection to desired type and return as array
 		
-		if not (isValidMod()) do return (mcMsgList.warn "not_unwrap")
-		if (convetrSelectionTo type == false) do return #()
-		local gco = modpanel.getcurrentobject()
+		if classOf mod_uvw != Unwrap_UVW do return #()
+		if (convetrSelectionTo mod_uvw type == false) do return #()
 		case type of (
 		
-			#verts: gco.getSelectedVertices() as Array
-			#edges: gco.getSelectedEdges() as Array
-			#faces: gco.getSelectedFaces() as Array	
+			#verts: mod_uvw.getSelectedVertices() as Array
+			#edges: mod_uvw.getSelectedEdges() as Array
+			#faces: mod_uvw.getSelectedFaces() as Array	
 		)
+	),
+	fn getSelectedUvsBB mod_uvw = (
+
+		if classOf mod_uvw != Unwrap_UVW do return undefined
+		local sel_verts = getCurentSelectionAs mod_uvw #verts 
+		local vertices_pos = for i in sel_verts collect (mod_uvw.getVertexPosition 0 i)
+		-- Get left/lower limit and right/upper limit
+		local min_pos = copy vertices_pos[1] 
+		local max_pos = copy vertices_pos[1]
+		for p in vertices_pos do (
+			
+			if p.x < min_pos.x do min_pos.x = p.x
+			if p.y < min_pos.z do min_pos.y = p.y
+
+			if p.x > max_pos.x do max_pos.x = p.x
+			if p.y > max_pos.z do max_pos.y = p.y
+
+		)
+		if min_pos == undefined or max_pos == undefined do return undefined
+		-- format "min:% max:%\n" min_pos max_pos
+		mcRect min_pos max_pos
 	),
 	fn selectBorder = (
 	
@@ -290,6 +309,85 @@ struct MICRA_POLY_MAP_STRUCTURE	(
 				vert_data.uvVerts += #{uv_vert_index}
 			)
 			--gather edges UV data --mybe later
+		)
+	),
+	fn alignSelectionTo mod_uvw type = (
+	
+		if classOf  mod_uvw!= Unwrap_UVW do return false	
+		local sel_center = mod_uvw.getSelCenter()
+		local sel_faces = mod_uvw.getSelectedFaces()
+		if sel_faces.count == 0 do return false
+		local excluded_faces = #() --removed element faces
+		for i in sel_faces do (
+		
+			if findItem excluded_faces i  != 0 do continue
+			--format "fcount:%\n" sel_faces.numberset
+			mod_uvw.SelectFaces #{i}
+			mod_uvw.selectElement()
+			local fsel = mod_uvw.getSelectedFaces()
+			local pos_x, pos_y, width, height
+			local the_area = mod_uvw.getArea fsel &pos_x &pos_y &width &height &area_uvw &area_geom 
+			--format "pos_x:%\t pos_y:%|n" pos_x pos_y
+			local new_pos = case type of
+			(
+				#left:([-pos_x , 0, 0])
+				#right:([1-pos_x-width, 0, 0])
+				#top:([0 , 1-pos_y-height, 0])
+				#bottom:([0 , -pos_y, 0])
+				#center:(sel_center - (mod_uvw.getSelCenter()))
+			)
+			mod_uvw.MoveSelected new_pos
+			excluded_faces += mod_uvw.getSelectedFaces()
+		)
+		mod_uvw.SelectFaces sel_faces
+	),
+	fn stretchUvsToFitSquare mod_uvw = (
+
+		if classOf  mod_uvw!= Unwrap_UVW do return false
+		local sel_verts = getCurentSelectionAs mod_uvw #verts --this procedure also define gco and select vertices
+		if sel_verts.count == 0 do return false
+		local vertices_pos = for i in sel_verts collect (mod_uvw.getVertexPosition 0 i)
+		-- Get left/lower limit
+		local minY = minX = 999999
+		for p in vertices_pos do (
+			
+			if p.x < minX do minX = p.x
+			if p.y < minY do minY = p.y
+		)--end if
+		-- Move all to lower left corner of UV square	
+		moveX = minX * -1
+		moveY = minY * -1
+		mod_uvw.moveSelectedVertices [moveX, moveY, 0]
+
+		-- Verts have been changed so update the array
+		vertices_pos = for i in sel_verts collect (mod_uvw.getVertexPosition 0 i)
+
+		-- Get right/upper limit
+		maxY = maxX = -999999
+		for texVert in vertices_pos do (
+			
+			if texVert.x > maxX do maxX = texVert.x
+			if texVert.y > maxY do maxY = texVert.y
+		)--end if
+
+		-- Stretch to upper right corner of UV square
+		local scaleX = 1.0 / maxX
+		local scaleY = 1.0 / maxY
+		uvOrigin = [0, 0, 0]
+		mod_uvw.scaleSelectedXY scaleX scaleY uvOrigin
+	),
+	fn stretchUvsToSquareProportionally mod_uvw move_zero:false = (
+	
+		if classOf mod_uvw != Unwrap_UVW do return false
+		local bb = getSelectedUvsBB mod_uvw
+		if bb == undefined do return false
+		local ratio = 1.0 / bb.he
+		resizeUVW mod_uvw ratio #x
+		resizeUVW mod_uvw ratio #y
+		if move_zero do (
+		
+			alignSelectionTo mod_uvw #left
+			alignSelectionTo mod_uvw #bottom
 		)
 	)
 	/*<end>*/
