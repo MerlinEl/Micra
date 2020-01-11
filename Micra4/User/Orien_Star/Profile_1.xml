@@ -14,11 +14,11 @@
   </Properties_1>
   <Properties_2>
     <mcMicraDialog active="true" pos="[1505,143]" size="[148,66]" title="" />
-    <mcCustomizeDialog active="false" pos="[850,240]" size="[224,404]" title="" />
+    <mcCustomizeDialog active="false" pos="[970,210]" size="[224,404]" title="" />
     <mcProgramDialog active="false" pos="[100,0]" size="[256,232]" title="" />
     <mcisoDialog active="false" pos="[100,152]" size="[140,400]" title="" />
     <mcModifierDialog active="false" pos="[100,100]" size="[400,400]" title="" />
-    <mcIconMakerDialog active="false" pos="[210,330]" size="[730,500]" title="" />
+    <mcIconMakerDialog active="false" pos="[170,180]" size="[730,500]" title="" />
     <mcDeepIsolateDialog active="false" pos="[1090,180]" size="[84,44]" title="" />
     <mcMoveTowardsDialog active="false" pos="[100,377]" size="[200,76]" title="" />
     <mcClonerDialog active="true" pos="[126,185]" size="[164,296]" title="" />
@@ -202,5 +202,6 @@
     <btn_I12 action="Autosave_Switch" icon="3" />
     <btn_I11 action="Keyboard_Switch" icon="257" />
     <btn_J13 action="Max_To_Blender" icon="287" />
+    <btn_J17 action="Road_Markings" icon="288" />
   </Buttons>
 </USER>

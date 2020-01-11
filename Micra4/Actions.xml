@@ -248,5 +248,6 @@
     <City_Manager icon="241" cmd="mcFile.fileInVersion City_Manager" tooltip="City Manager" />
     <Asset_Builder icon="273" cmd="mcFile.fileInVersion LS3D_Asset_Builder" tooltip="Asset Builder" />
     <Select_Player icon="286" cmd="mcActionsTukej.selectPlayer()" tooltip="Select Player" />
+    <Road_Markings icon="288" cmd="mcFile.fileInVersion Road_Generator_Marking" tooltip="Road Markings" />
   </TuKej>
 </ACTIONS>

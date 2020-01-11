@@ -1055,6 +1055,104 @@ struct MICRA_POLY
 		polyOp.setVertSelection obj everts
 		obj.ConnectVertices()
 	),
+	/**
+	*@Usage get sorted vertices from edges
+	*/
+	fn getChainVertsFromEdges obj edges =(
+
+		local chain_edges = edges
+		local esges_count = edges.numberSet
+		local everts = (polyop.getVertsUsingEdge obj edges)
+		local inner_verts = copy everts
+		local sorted_verts = #()
+		-- Sort out if it is a closed edge loop
+		if (esges_count != everts.numberSet) then (
+		
+			-- Get chain extreme vertices
+			-- The for loop runs through all selected edges, gets their vertices,
+			-- then inverts their bit value in the inner_verts bitArray. Each vertex
+			-- is inverted two times [true -> false -> true], with the exception
+			-- of the extremes, which are inverted only once [true -> false],
+			-- taking them away from the bitArray.
+			-- Obtain extreme vertices by subtracting inner_verts from all
+			-- everts bitArray.
+			
+			for iEdge in chain_edges do (
+			
+				local baEdgeVerts = (polyop.getVertsUsingEdge obj iEdge)
+				for iVert in baEdgeVerts do
+				(
+					inner_verts[iVert] = not inner_verts[iVert]
+				)
+			)
+			local baExtremeVerts = (everts - inner_verts)
+			-- Choose the extreme vertex to start from to collect vertices.
+			-- This determines the direction of the vertices chain collection, but
+			-- since it comes from a bitArray, it's quite random.
+			local iExtremeStartVert = (baExtremeVerts as Array)[1] -- or [2]
+			-- Init array for vertices collection
+			sorted_verts = #(iExtremeStartVert)
+			-- Init current vertex index
+			local iCurrentVert = iExtremeStartVert
+			-- Init bitArray of processed edges to avoid walking back in the chain
+			local baCrossedEdges = #{}
+			-- Collect Vertices
+			for i = 1 to esges_count do
+			(
+				-- do one step
+				local baEdgesFromVert = (polyop.getEdgesUsingVert obj iCurrentVert)
+				local baStepEdge = ((baEdgesFromVert * chain_edges) - baCrossedEdges)
+				
+				-- non linear chain error catching
+				if (baStepEdge.numberSet == 1) then
+				(
+					baCrossedEdges += baStepEdge
+			
+					-- collect the vertex
+					local iCurrentVert = (((polyop.getVertsUsingEdge obj baStepEdge) - (sorted_verts as BitArray)) as Array)[1]
+					sorted_verts[i+1] = iCurrentVert				
+				)
+				else
+				(
+					sorted_verts = #()
+					format "Edge Selection is not a linear chain.\n"
+					exit
+				)
+			)
+		) else (
+			-- Choose a vertex to start the collection
+			local iStartVert = (everts as Array)[1]
+			-- Init array for vertices collection
+			sorted_verts = #(iStartVert)
+			-- Init current vertex index
+			local iCurrentVert = iStartVert
+			-- Init bitArray of processed edges to avoid walking back in the chain
+			local iStartEdge = (((polyop.getEdgesUsingVert obj iCurrentVert) * chain_edges) as Array)[1]
+			local baCrossedEdges = #{iStartEdge}
+			-- Collect Vertices
+			for i = 1 to (esges_count - 1) do (
+			
+				-- do one step
+				local baEdgesFromVert = (polyop.getEdgesUsingVert obj iCurrentVert)
+				local baStepEdge = ((baEdgesFromVert * chain_edges) - baCrossedEdges)
+				-- non linear chain error catching
+				if (baStepEdge.numberSet == 1) then (
+				
+					baCrossedEdges += baStepEdge
+					-- collect the vertex
+					local iCurrentVert = (((polyop.getVertsUsingEdge obj baStepEdge) - (sorted_verts as BitArray)) as Array)[1]
+					sorted_verts[i+1] = iCurrentVert
+				)
+				else (
+				
+					sorted_verts = #()
+					format "Edge Selection is not a linear chain.\n"
+					exit
+				)
+			)	
+		)
+		return sorted_verts
+	),
 	-------------------------------------------------------------
 	-------------------------------------------------------------
 	------              	OTHER    	                   ------
