@@ -9,7 +9,7 @@ rollout mcRoadMarkingGeneratorDialog "Road Marking Generator:" width:296 height:
 	button 'btn_fix_corner' "Fix Corner Mapping" pos:[128,180] width:84 height:36 align:#left
 	
 	spinner 'spn_width' "" pos:[228,32] width:56 height:16 range:[2,100,15] align:#left
-	spinner 'spn_offset' "" pos:[228,56] width:56 height:16 range:[0.2,0.4,0.2] align:#left
+	spinner 'spn_offset' "" pos:[228,56] width:56 height:16 range:[0.1,0.4,0.2] align:#left
 	spinner 'spn_mat_id' "" pos:[228,80] width:56 height:16 range:[0,1000,15] type:#integer scale:1 align:#left
 	spinner 'spn_ratio_x' "" pos:[228,102] width:56 height:16 range:[0,1000,15] type:#integer scale:1 align:#left
 	
