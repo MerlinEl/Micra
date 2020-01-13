@@ -13,7 +13,7 @@ rollout mcRoadMarkingGeneratorDialog "Road Marking Generator:" width:296 height:
 	spinner 'spn_mat_id' "" pos:[228,80] width:56 height:16 range:[0,1000,15] type:#integer scale:1 align:#left
 	spinner 'spn_ratio_x' "" pos:[228,102] width:56 height:16 range:[0,1000,15] type:#integer scale:1 align:#left
 	
-	radiobuttons 'rdo_texture' "" pos:[12,20] width:101 height:144 labels:#("Full", "Full Stop", "Full Double", "Full Double Dots", "Simple", "Zebra", "Dots", "Gap Thin", "Gap Fat") default:1 columns:1 align:#left
+	radiobuttons 'rdo_texture' "" pos:[12,20] width:101 height:144 labels:#("Full", "Full Stop", "Full Double", "Full Double Dash", "Simple", "Zebra", "Dashed", "Gap Thin", "Gap Fat") default:1 columns:1 align:#left
 	
 	label 'lbl5' "Marking Width:" pos:[140,32] width:84 height:16 align:#left
 	label 'lbl8' "Bottom Offset:" pos:[140,56] width:84 height:16 align:#left
@@ -37,6 +37,7 @@ rollout mcRoadMarkingGeneratorDialog "Road Marking Generator:" width:296 height:
 			local corner_edges = polyOp.getEdgesUsingVert obj corner_vert
 			corner_edges -=  #{eindex} --get only two edges
 			local edges_angle = (mcPoly.getAngleBetweenTwoEdges obj corner_edges )/10
+			format "edges angle:%\n" edges_angle
 			--exit from edit mode
 			subObjectLevel = 0
 			--add unwrap modifier
@@ -185,10 +186,10 @@ rollout mcRoadMarkingGeneratorDialog "Road Marking Generator:" width:296 height:
 			mcRMItem key:"Full"			mat_id:477	bottom_offset:0.2	marking_width:18 scale_x_ratio:16,
 			mcRMItem key:"Full Stop"		mat_id:477	bottom_offset:0.3	marking_width:23 scale_x_ratio:16,
 			mcRMItem key:"Full Double"		mat_id:479	bottom_offset:0.4	marking_width:34 scale_x_ratio:16,
-			mcRMItem key:"Full Double Dots"	mat_id:478	bottom_offset:0.2	marking_width:45 scale_x_ratio:8,
+			mcRMItem key:"Full Double Dash"	mat_id:478	bottom_offset:0.2	marking_width:45 scale_x_ratio:8,
 			mcRMItem key:"Simple"			mat_id:477	bottom_offset:0.3	marking_width:15 scale_x_ratio:16,
 			mcRMItem key:"Zebra"			mat_id:477	bottom_offset:0.3	marking_width:15 scale_x_ratio:16,
-			mcRMItem key:"Dots"			mat_id:480	bottom_offset:0.2	marking_width:15 scale_x_ratio:16,
+			mcRMItem key:"Dashed"			mat_id:480	bottom_offset:0.2	marking_width:15 scale_x_ratio:16,
 			mcRMItem key:"Gap Thin"		mat_id:482	bottom_offset:0.1	marking_width:7.5 scale_x_ratio:32,
 			mcRMItem key:"Gap Fat"		mat_id:481	bottom_offset:0.1	marking_width:20 scale_x_ratio:16
 		)
