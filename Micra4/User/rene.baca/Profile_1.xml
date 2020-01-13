@@ -10,7 +10,7 @@
     <mc_Dialog_G active="true" pos="[2172,660]" size="[148,138]" title="Modify:" btnCount="[6,5]" />
     <mc_Dialog_H active="true" pos="[2172,798]" size="[148,90]" title="Materials:" btnCount="[6,3]" />
     <mc_Dialog_I active="true" pos="[2172,954]" size="[148,66]" title="Programming:" btnCount="[6,2]" />
-    <mc_Dialog_J active="true" pos="[1632,1242]" size="[532,42]" title="Experimental:" btnCount="[22,1]" />
+    <mc_Dialog_J active="true" pos="[1632,1242]" size="[556,42]" title="Experimental:" btnCount="[23,1]" />
   </Properties_1>
   <Properties_2>
     <mcMicraDialog active="true" pos="[2171,214]" size="[148,66]" title="" />
@@ -205,8 +205,6 @@
     <btn_C5 action="Pivot_Planter_2" icon="59" />
     <btn_C8 action="Pivot_To_Zero" icon="264" />
     <btn_J14 action="Create_3PGrid" icon="81" />
-    <btn_J22 action="Normal_Map_Tester" icon="61" />
-    <btn_J21 action="Road_Generator_Tool" icon="266" />
     <btn_J4 action="Vertex_Snap" icon="267" />
     <btn_J8 action="Create_Point_At_Vertex" icon="268" />
     <btn_J9 action="Delete_Empty_Layers" icon="269" />
@@ -235,5 +233,8 @@
     <btn_B40 action="Unlock_Object" icon="89" />
     <btn_B39 action="Lock_Object" icon="88" />
     <btn_J11 action="Max_To_Blender" icon="287" />
+    <btn_J23 action="Normal_Map_Tester" icon="61" />
+    <btn_J22 action="Road_Generator_Tool" icon="266" />
+    <btn_J21 action="Road_Markings" icon="288" />
   </Buttons>
 </USER>

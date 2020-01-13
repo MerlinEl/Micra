@@ -231,7 +231,7 @@ rollout mcRoadMarkingGeneratorDialog "Road Marking Generator:" width:296 height:
 	)
 	on mcRoadMarkingGeneratorDialog open do (
 	
-		struct mcRMItem ( key, mat_id, offset, w )
+		struct mcRMItem ( key, mat_id, offset, w ) --(R)oad (M)arking Item
 		/*
 			1 texture full, simple, full stop (18, 15, 23)	id 477
 			2 texture zebra (15)

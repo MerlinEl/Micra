@@ -240,6 +240,21 @@ struct MICRA_POLY
 		)
 		eloop
 	),
+	fn getAngleBetweenTwoEdges obj two_edges asRadians:false = (
+	
+		--from 2 edges get 4 vertices
+		local everts_1 = polyOp.getEdgeVerts obj (two_edges as array)[1] as BitArray
+		local everts_2 = polyOp.getEdgeVerts obj (two_edges as array)[2] as BitArray
+		--get corner vertices and side vertices
+		local center_vert = ((everts_1 * everts_2) as array)[1]  
+		local side_verts  = (everts_1 + everts_2) - #{center_vert}
+		--get three points
+		local center_pos = polyOp.getVert obj center_vert 
+		local p1 = polyOp.getVert obj (side_verts as array)[1]
+		local p2 = polyOp.getVert obj (side_verts as array)[2]
+		local angle_deg = mcMath.getVectorsAngle (p1 - center_pos) (p2 - center_pos)
+		if asRadians then mcMath.degTorad angle_deg else angle_deg
+	),
 	/**
 	*@Example
 		obj = $

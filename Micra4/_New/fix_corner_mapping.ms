@@ -21,7 +21,7 @@ fn fixCornerMapping obj = (
 	mod_uvw.edit()	
 	mod_uvw.fit()
 	--gather vertex uv data
-	mcPolyMap.collectUnwrapData geo_data
+	mcPolyMap.collectUnwrapData obj geo_data
 	subObjectLevel = 1
 	--convert geometry vert selection to UV vetr selection
 	uv_verts = mcPoly.geoVertsToMapVerts everts geo_data
