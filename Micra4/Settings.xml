@@ -2,7 +2,7 @@
 <SETTINGS>
   <Micra>
     <born val="04.25.2006" />
-    <version val="5.7" />
+    <version val="5.71" />
   </Micra>
   <Structures val="All registred Micra's Structures">
     <!--independent classes-->
@@ -148,7 +148,7 @@
     <Object_Planter_Interactive val="0.01" />
     <Smoothing_Groups val="0.04" />
     <Max_To_Blender val="1.02" />
-    <Road_Generator_Marking val="0.03" />
+    <Road_Generator_Marking val="0.05" />
   </Version>
   <SystemFiles val="Micra's Settings Files">
     <Actions val="Contains all accesible Micra's actions" />

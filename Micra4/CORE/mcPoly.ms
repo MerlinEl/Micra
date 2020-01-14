@@ -1007,6 +1007,74 @@ struct MICRA_POLY
 		select new_obj
 		new_obj
 	),
+	/**
+	*@Usage
+		cast rays in radius to find surface point
+		return Ray
+	*/
+	fn intersectRayInRadius src_obj trgt_obj start_pos dir rad:5 rays:5 = (
+	
+		local ir = undefined
+		local positions = mcMath.rotatePointAroundCenter start_pos dir rad steps:rays
+		for p in positions do (
+		
+			local ray_top_bottom = Ray p dir
+			ir = (IntersectRay trgt_obj ray_top_bottom)
+			if ir != undefined do exit
+		)
+		ir
+	),
+	/**
+	*@Usage
+		Snap each vertex from source object in to surface of target object
+		src_obj		source object
+		trgt_obj	target object
+		dir			direction of projected ray (default Z)
+		offset		distance from target object surface <--TODO if need
+		mbox		true = show warnings in message box, false = in listenner
+		debug		true = create points in ray path and print distances
+		rad_offset	search for point in radius if not found at first hit	 
+	*@Example
+		mcPoly.conformToSurface $Plane001 $Sphere001 offset:2 mbox:true
+		mcPoly.conformToSurface $ $arking_Temp_Surface offset:0.5 warning:true debug:true
+	*/
+	fn conformToSurface src_obj trgt_obj dir:[0,0,-1] offset:0 mbox:false debug:false rad_offset:0.5 = (
+
+		if classOf src_obj != Editable_Poly or classOf trgt_obj != Editable_Poly do return (mcMsgList.warn "not_poly_2" mbox:mbox)
+		local src_verts_count = polyOp.getNumVerts src_obj 
+		for i=1 to src_verts_count do (
+			 
+			local ray_top_bottom = Ray (polyOp.getVert src_obj i) dir
+			local intersection_ray = (IntersectRay trgt_obj ray_top_bottom)
+			if intersection_ray == undefined do ( --try to pick surface in radius
+			
+				local start_pos = polyOp.getVert src_obj i
+				intersection_ray = intersectRayInRadius src_obj trgt_obj start_pos dir rad:rad_offset rays:5
+			)
+			if intersection_ray != undefined do (
+
+				if offset == 0 then (
+				
+					polyOp.setVert src_obj i intersection_ray.pos
+					
+				) else (
+				
+					local p1 = ray_top_bottom.pos
+					local p2 = intersection_ray.pos 
+					local v1 = normalize (p1 - p2)
+					local new_pos = ((v1*offset) + p2)
+					if debug do (
+					
+						point pos:p1 wirecolor:red
+						point pos:p2 wirecolor:green
+						point pos:new_pos wirecolor:blue
+						format "offset:% distance:%\n" offset (distance p2 new_pos)
+					)
+					polyOp.setVert src_obj i new_pos
+				)
+			)
+		)
+	),
 	fn unchamferEdges obj edges debug:false = (
 
 		if (classOf obj != Editable_Poly) do return (mcMsgList.warn "not_poly") 
