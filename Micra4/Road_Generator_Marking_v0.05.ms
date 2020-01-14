@@ -220,15 +220,15 @@ rollout mcRoadMarkingGeneratorDialog "Road Marking Generator:" width:464 height:
 		--build data
 		markings_data = #(
 
-			mcRMItem key:"Full Line"			mat_id:477	bottom_offset:0.2	marking_width:18 scale_x_ratio:16,
-			mcRMItem key:"Full Double"			mat_id:479	bottom_offset:0.4	marking_width:34 scale_x_ratio:16,
-			mcRMItem key:"Full Double Dots"		mat_id:478	bottom_offset:0.2	marking_width:45 scale_x_ratio:8,
-			mcRMItem key:"Full Stop"			mat_id:477	bottom_offset:0.3	marking_width:26 scale_x_ratio:16,
-			mcRMItem key:"Full Simple"				mat_id:477	bottom_offset:0.3	marking_width:15 scale_x_ratio:16,
-			mcRMItem key:"Dashed"			mat_id:480	bottom_offset:0.2	marking_width:15 scale_x_ratio:32,
-			mcRMItem key:"Gap Small"			mat_id:482	bottom_offset:0.1	marking_width:7.5 scale_x_ratio:32,
-			mcRMItem key:"Gap Medium"		mat_id:481	bottom_offset:0.1	marking_width:20 scale_x_ratio:16,
-			mcRMItem key:"Gap Large"			mat_id:483	bottom_offset:0.1	marking_width:26 scale_x_ratio:16
+			mcRMItem key:"Full Line"			mat_id:477	bottom_offset:0.3	marking_width:18 scale_x_ratio:16,
+			mcRMItem key:"Full Double"			mat_id:479	bottom_offset:0.5	marking_width:34 scale_x_ratio:16,
+			mcRMItem key:"Full Double Dots"		mat_id:478	bottom_offset:0.3	marking_width:45 scale_x_ratio:8,
+			mcRMItem key:"Full Stop"			mat_id:477	bottom_offset:0.4	marking_width:26 scale_x_ratio:16,
+			mcRMItem key:"Full Simple"			mat_id:477	bottom_offset:0.4	marking_width:15 scale_x_ratio:16,
+			mcRMItem key:"Dashed"			mat_id:480	bottom_offset:0.3	marking_width:15 scale_x_ratio:32,
+			mcRMItem key:"Gap Small"			mat_id:482	bottom_offset:0.2	marking_width:7.5 scale_x_ratio:32,
+			mcRMItem key:"Gap Medium"		mat_id:481	bottom_offset:0.2	marking_width:20 scale_x_ratio:16,
+			mcRMItem key:"Gap Large"			mat_id:489	bottom_offset:0.2	marking_width:26 scale_x_ratio:16
 		)
 		setupParams 1
 	)
