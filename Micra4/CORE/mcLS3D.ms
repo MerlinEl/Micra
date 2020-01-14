@@ -23,6 +23,15 @@ struct MICRA_LS3D_STRUCTURE	(
 	
 	--functions
 	fn getSource = getSourceFileName(), --get path of this script
+	fn getLs3DMaterial mat = (
+	
+		case classOf mat of (
+		
+			DirectX_9_Shader : if mat.renderMaterial != undefined then mat.renderMaterial else undefined
+			LS3DMaterial : mat
+			default : undefined
+		)
+	),
 	fn getMaterialXML mat = (
 	
 		case classOf mat of (
