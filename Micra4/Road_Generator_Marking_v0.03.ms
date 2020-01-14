@@ -183,15 +183,15 @@ rollout mcRoadMarkingGeneratorDialog "Road Marking Generator:" width:296 height:
 		--build data
 		markings_data = #(
 
-			mcRMItem key:"Full"			mat_id:477	bottom_offset:0.2	marking_width:18 scale_x_ratio:16,
-			mcRMItem key:"Full Stop"		mat_id:477	bottom_offset:0.3	marking_width:23 scale_x_ratio:16,
-			mcRMItem key:"Full Double"		mat_id:479	bottom_offset:0.4	marking_width:34 scale_x_ratio:16,
+			mcRMItem key:"Full"				mat_id:477	bottom_offset:0.2	marking_width:18 scale_x_ratio:16,
+			mcRMItem key:"Full Stop"			mat_id:477	bottom_offset:0.3	marking_width:23 scale_x_ratio:16,
+			mcRMItem key:"Full Double"			mat_id:479	bottom_offset:0.4	marking_width:34 scale_x_ratio:16,
 			mcRMItem key:"Full Double Dash"	mat_id:478	bottom_offset:0.2	marking_width:45 scale_x_ratio:8,
-			mcRMItem key:"Simple"			mat_id:477	bottom_offset:0.3	marking_width:15 scale_x_ratio:16,
-			mcRMItem key:"Zebra"			mat_id:477	bottom_offset:0.3	marking_width:15 scale_x_ratio:16,
-			mcRMItem key:"Dashed"			mat_id:480	bottom_offset:0.2	marking_width:15 scale_x_ratio:16,
-			mcRMItem key:"Gap Thin"		mat_id:482	bottom_offset:0.1	marking_width:7.5 scale_x_ratio:32,
-			mcRMItem key:"Gap Fat"		mat_id:481	bottom_offset:0.1	marking_width:20 scale_x_ratio:16
+			mcRMItem key:"Simple"				mat_id:477	bottom_offset:0.3	marking_width:15 scale_x_ratio:16,
+			mcRMItem key:"Zebra"				mat_id:477	bottom_offset:0.3	marking_width:15 scale_x_ratio:16,
+			mcRMItem key:"Dashed"			mat_id:480	bottom_offset:0.2	marking_width:15 scale_x_ratio:32,
+			mcRMItem key:"Gap Thin"			mat_id:482	bottom_offset:0.1	marking_width:7.5 scale_x_ratio:32,
+			mcRMItem key:"Gap Fat"			mat_id:481	bottom_offset:0.1	marking_width:20 scale_x_ratio:16
 		)
 		setupParams 1
 	)
