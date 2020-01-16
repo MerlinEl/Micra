@@ -257,18 +257,15 @@ struct MICRA_MATH (
 	),
 	function get2DBoundingBox pos_array =
 	(
-		local bmin, bmax
-		for v in pos_array do
-		(
-			if bmin != undefined then
-			(
-				bmin.x = amin #(v.x, bmin.x)
-				bmin.y = amin #(v.y, bmin.y)
-				
-				bmax.x = amax #(v.x, bmax.x)
-				bmax.y = amax #(v.y, bmax.y)
-			)
-			else bmin = copy (bmax = v)
+		local bmin = copy pos_array[1]
+		local bmax = copy pos_array[1]
+		for p in pos_array do (
+		
+			bmin.x = amin #(p.x, bmin.x)
+			bmin.y = amin #(p.y, bmin.y)
+			
+			bmax.x = amax #(p.x, bmax.x)
+			bmax.y = amax #(p.y, bmax.y)
 		)
 		return #(bmin, bmax)
 	),
@@ -326,6 +323,7 @@ Global mcMath = mcStructMan.instanceStructure MICRA_MATH "mcMath"
 
 
 /*
+
 --
 --@Usage > Here is the hermite that I use for a multiplier of values to generate ease in and out setups.
 	-- Tangent 1
@@ -361,4 +359,26 @@ fn getBezInterp p1 v1 v2 p2 val = (
  ( p1*b^3 + 3*v1*b^2*a + 3*v2*b*a^2 + p2*a^3  )
 )
 getBezInterp  $point01.pos $point02.pos $point03.pos $point04.pos 0.3333
+*/
+
+
+/*
+--old
+	function get2DBoundingBox pos_array =
+	(
+		local bmin, bmax
+		for v in pos_array do (
+		
+			if bmin != undefined then (
+			
+				bmin.x = amin #(v.x, bmin.x)
+				bmin.y = amin #(v.y, bmin.y)
+				
+				bmax.x = amax #(v.x, bmax.x)
+				bmax.y = amax #(v.y, bmax.y)
+			)
+			else bmin = copy (bmax = v)
+		)
+		return #(bmin, bmax)
+	),
 */

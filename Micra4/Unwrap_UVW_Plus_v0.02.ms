@@ -45,7 +45,7 @@ rollout mcUnwrapEditorDialog "UV+" width:96 height:648
 	button 'btn_lm' "p1" pos:[8,372] width:24 height:24 images:(mcCall.getIcon 116) toolTip:"Add Lightmap"
 	button 'btn_stitch' "St" pos:[34,372] width:24 height:24 toolTip:"Stitch Selected Edges (Experimental)"
 	button 'btn_fit' "St" pos:[64,372] width:24 height:24 toolTip:"Fit To Rect" align:#left
-	button 'btn25' "..." pos:[36,504] width:24 height:24 toolTip:"ReformUV CV (Rotate Vertices Around Shape)" align:#left
+	button 'btn_distr_x' "Dx" pos:[36,504] width:24 height:24 toolTip:"Distribute Elements At X" align:#left
 	button 'btn_29' "..." pos:[60,504] width:24 height:24 toolTip:"ReformUV CV (Rotate Vertices Around Shape)" align:#left
 	button 'btn_randomize_x' "RandX" pos:[8,400] width:36 height:24 toolTip:"Move Elements Random X" align:#left
 	button 'btn_randomize_y' "RandY" pos:[48,400] width:36 height:24 toolTip:"Move Elements Random Y" align:#left
@@ -318,66 +318,59 @@ rollout mcUnwrapEditorDialog "UV+" width:96 height:648
 	
 	fn copyVertexPos = (
 		
-		local gco = modpanel.getcurrentobject()
-		local sel_verts = mcPolyMap.getCurentSelectionAs gco #verts --this procedure also define gco and select vertices
+		local mod_uvw = modpanel.getcurrentobject()
+		local sel_verts = mcPolyMap.getCurentSelectionAs mod_uvw #verts --this procedure also define gco and select vertices
 		if sel_verts.count == 0 do return false
-		vertex_position = gco.getVertexPosition 0 sel_verts[1]
+		vertex_position = mod_uvw.getVertexPosition 0 sel_verts[1]
 	)
 	
 	fn pastePos way = (
-	
+-- 	format "vpos:%\n" vertex_position
 		if vertex_position == undefined do return false
-		local sel_verts = mcPolyMap.getCurentSelectionAs gco #verts --this procedure also define gco and select vertices
+		local mod_uvw = modpanel.getcurrentobject()
+		local sel_verts = mcPolyMap.getCurentSelectionAs mod_uvw #verts --this procedure also define gco and select vertices
 		if sel_verts.count == 0 do return false
-		local gco = modpanel.getcurrentobject()	
+		local mod_uvw = modpanel.getcurrentobject()	
 		undo "Paste UVW Position" on for i in sel_verts do (
 			
-			local p = gco.getVertexPosition 0 i
+			local p = mod_uvw.getVertexPosition 0 i
 			if way == #X then p.x = vertex_position.x else p.y = vertex_position.y
-			gco.setVertexPosition 0 i p
+			mod_uvw.setVertexPosition 0 i p
 		)
 	)
+	fn distributeElementsToX obj gap:1 = (
+		
+		---TODO sort elements by geometry position
+		---<void><Unwrap_UVW>.getAreaByNode <bitArray>faceSelection <&float>x <&float>y <&float>width <&float>height <node>node
+		
+		if subobjectLevel != 3 or obj == undefined do return false
+		local mod_uvw = obj.modifiers[1]
+		if classOf mod_uvw != Unwrap_UVW do return (mcMsgList.warn "not_unwrap") 
+		local fsel = mod_uvw.getSelectedFaces()
+		if fsel.numberset == 0 do return (mcMsgList.warn "not_fsel")
+		local uv_faces = mcPolyMap.getCurentSelectionAs mod_uvw #faces
+		local uv_faces_elements = mcPolyMap.getElements mod_uvw uv_faces
+		--print uv_faces_elements
+		--for el in uv_faces_elements do format "el left:%\n" el.bbox.le
+		--sort by left value
+		mcArray.sortByParam uv_faces_elements "left"
+	-- 	for el in uv_faces_elements do format "el left:%\n" el.bbox.le
+		--move elements by offset from first element in to right
+		local next_bound = 0
+		for el in uv_faces_elements do (
 
-	/**	
-	*@ Created by br0t 2014
-	*@ Modified by MerlinEl 2019
-	*@ Usage > Distorts all UVs to fit into the UV square (0 to 1 in UV space).
-	*/
+			if next_bound > 0 do el.moveTo [next_bound - el.left, 0, 0] --move element to x bound
+			next_bound = el.right + gap --get right bound
+			--format "next bound:%\n" next_bound
+		)
+	)
 	fn stretchUvsToFitSquare = (
 
-		local gco = modpanel.getcurrentobject()
-		local sel_verts = mcPolyMap.getCurentSelectionAs gco #verts --this procedure also define gco and select vertices
-		if sel_verts.count == 0 do return false
-		local vertices_pos = for i in sel_verts collect (gco.getVertexPosition 0 i)
-		-- Get left/lower limit
-		local minY = minX = 999999
-		for p in vertices_pos do (
-			
-			if p.x < minX do minX = p.x
-			if p.y < minY do minY = p.y
-		)--end if
-		-- Move all to lower left corner of UV square	
-		moveX = minX * -1
-		moveY = minY * -1
-		gco.moveSelectedVertices [moveX, moveY, 0]
-
-		-- Verts have been changed so update the array
-		vertices_pos = for i in sel_verts collect (gco.getVertexPosition 0 i)
-
-		-- Get right/upper limit
-		maxY = maxX = -999999
-		for texVert in vertices_pos do (
-			
-			if texVert.x > maxX do maxX = texVert.x
-			if texVert.y > maxY do maxY = texVert.y
-		)--end if
-
-		-- Stretch to upper right corner of UV square
-		local scaleX = 1.0 / maxX
-		local scaleY = 1.0 / maxY
-		uvOrigin = [0, 0, 0]
-		gco.scaleSelectedXY scaleX scaleY uvOrigin
-	)--end fn
+		local mod_uvw = modpanel.getcurrentobject()
+		if classOf  mod_uvw!= Unwrap_UVW do return false
+		local sel_verts = mcPolyMap.getCurentSelectionAs mod_uvw #verts --this procedure also define gco and select vertices
+		mcPolyMap.fitToSquare mod_uvw sel_verts
+	)
 	/*
 		not works because of edges reindexing
 		undo "Stitch Selected Edges" on for i in sel_edges do (
@@ -435,6 +428,7 @@ rollout mcUnwrapEditorDialog "UV+" width:96 height:648
 	on btn_paste_posy pressed do pastePos #Y
 	on button_skew_verts_plus pressed do (undo "Skew Vertices" on skewSelectedVertices #plus)
 	on button_skew_verts_minus pressed do (undo "Skew Vertices" on skewSelectedVertices #minus)
+	on btn_distr_x pressed do undo "Distribute Shells To X" on (distributeElementsToX selection[1])
 	--on spn_skew_verts changed val do  (undo "Skew Vertices" on skewSelectedVertices val)
 	--<
 )

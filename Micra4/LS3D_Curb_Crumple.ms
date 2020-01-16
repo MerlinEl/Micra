@@ -21,7 +21,6 @@ rollout mcCurbCrumpleDialog "Curb Crumple:" width:400 height:140
 	button 'btn_noise_to_side' "Noise To Side" pos:[8,76] width:100 height:24 align:#left
 	button 'noise_up_down' "Noise Up Down" pos:[8,104] width:100 height:24 align:#left
 	button 'btn_extend_bottom_edge' "Extend Curb" pos:[8,20] width:100 height:24 enabled:false align:#left
-	radiobuttons 'rdo_noise_side_axis' "" pos:[304,80] width:65 height:16 labels:#("X", "Y") default:1 columns:2 align:#left
 	checkbox 'chk_freeze_bottom' "freeze bottom" pos:[304,108] width:84 height:16 checked:true align:#left
 	label 'lbl7' "max:" pos:[208,80] width:24 height:16 align:#left
 	label 'lbl8' "max:" pos:[208,108] width:24 height:16 align:#left
@@ -74,7 +73,30 @@ rollout mcCurbCrumpleDialog "Curb Crumple:" width:400 height:140
 		edges_loops
 	)
 	
-	fn offsetLoopBy obj el offset_xyz = (
+	fn getDirFromLongestEdge obj edges = (
+
+		local longest_edge = mcPoly.getLongestEdge obj edges
+		local everts = polyOp.getVertsUsingEdge obj longest_edge
+		local verts_pos = for v in everts collect polyop.getvert obj v
+		local p1 = (verts_pos as array)[1]
+		local p2 = (verts_pos as array)[2]
+		normalize (p1 - p2)
+	)
+
+	fn offsetLoopInLocal obj el val = (
+
+		local dir = getDirFromLongestEdge obj el
+		--format "dir%\n" dir
+		local el_verts = polyop.getVertsUsingEdge obj el
+		for v in el_verts do (
+		
+			local vpos = polyOp.getVert obj v
+			local new_pos = vpos + (dir * val)
+			polyOp.setVert obj v new_pos
+		)
+	)
+	
+	fn offsetLoopInWorld obj el offset_xyz = (
 	
 		local el_verts = polyop.getVertsUsingEdge obj el
 		for v in el_verts do (
@@ -114,7 +136,7 @@ rollout mcCurbCrumpleDialog "Curb Crumple:" width:400 height:140
 			
 			local random_val = random offset_val[1] offset_val[2]
 			local offset =  [0, 0, random_val]
-			offsetLoopBy obj el offset
+			offsetLoopInWorld obj el offset
 		)
 		--restore position of bottom vertices
 		if freezeBottom do for bv in bottom_vertices do polyOp.setVert obj bv[1] bv[2]
@@ -127,10 +149,10 @@ rollout mcCurbCrumpleDialog "Curb Crumple:" width:400 height:140
 		elo[2].selectLoop()
 		elo[2].offsetBy [0,20,0]
 	*/
-	fn noiseToSide obj offset_val axis_str = (
+	fn noiseToSide obj offset_val = (
 
 		if classOf obj != Editable_Poly do return false
-		format "noise side obj:% offset:% axis:%\n" obj.name offset_val axis_str 
+		format "noise side obj:% offset:%\n" obj.name offset_val 
 		--split edge selection to loop grpups
 		local esel = polyop.getEdgeSelection obj
 		if esel.numberset == 0 do return false
@@ -138,8 +160,7 @@ rollout mcCurbCrumpleDialog "Curb Crumple:" width:400 height:140
 		for el in esel_loops do (
 			
 			local random_val = random offset_val[1] offset_val[2]
-			local offset = if axis_str == "x" then [random_val, 0, 0] else [0, random_val, 0] 
-			offsetLoopBy obj el offset
+			offsetLoopInLocal obj el random_val
 		)
 	)
 
@@ -151,7 +172,7 @@ rollout mcCurbCrumpleDialog "Curb Crumple:" width:400 height:140
 	on btn_noise_to_side pressed do
 	(
 			
-			undo label:"Noise To Side" on noiseToSide $ [spn_noise_to_side_min.value, spn_noise_to_side_max.value] (#("x", "y")[rdo_noise_side_axis.state])
+			undo label:"Noise To Side" on noiseToSide $ [spn_noise_to_side_min.value, spn_noise_to_side_max.value]
 		)
 		
 		on noise_up_down pressed do

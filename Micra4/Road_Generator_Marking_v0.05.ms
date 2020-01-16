@@ -72,6 +72,16 @@ rollout mcRoadMarkingGeneratorDialog "Road Marking Generator:" width:464 height:
 				mod_uvw.selectVertices (mcPoly.geoVertsToMapVerts everts geo_data)
 				vsel_right = (mod_uvw.getSelectedVertices()) - vsel_left
 			) 
+			
+			--test for auto invert ---> result: tis cant be checked because all vertices is on same line
+			 --check if is left side on right nad vice versa
+			-- local left_verts_bb = mcPolyMap.getVertsBoundingBox mod_uvw vsel_left
+			-- local right_verts_bb = mcPolyMap.getVertsBoundingBox mod_uvw vsel_right
+			
+			-- format "first vert from left:% right:%\n" left_verts_bb right_verts_bb
+			-- format "inverted? :%\n" (left_verts_bb.left > right_verts_bb.left)
+			-- inverted = left_verts_bb.left > right_verts_bb.left
+			
 			--fix UV distortion on left vertices
 			mcPolyMap.skewVerticesUvs mod_uvw vsel_left (if inverted then -edges_angle/2 else edges_angle/2)
 			--fix UV distortion on left vertices
@@ -132,7 +142,8 @@ rollout mcRoadMarkingGeneratorDialog "Road Marking Generator:" width:464 height:
 		mod_uvw.unwrap2.setTVSubObjectMode 3
 		mod_uvw.selectByMatID mat_id --TODO 0001 check it for deselected object, may not work
 		--fit size to texture
-		mcPolyMap.stretchUvsToSquareProportionally mod_uvw move_zero:true
+		local face_verts = mcPolyMap.getCurentSelectionAs mod_uvw #verts
+		mcPolyMap.fitToSquareProportionally mod_uvw face_verts move_zero:true
 		--remove x stretch 
 		mcPolyMap.resizeUVW mod_uvw (1.0/ratio_x) #x
 		mcPolyMap.alignSelectionTo mod_uvw #left	

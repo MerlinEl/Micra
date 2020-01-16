@@ -139,10 +139,62 @@ struct MCRA_ARRAY (
 		--format "rest of arr:%\n" arr
 		true
 	),
+	/**
+		mcArray.getValueInPath arr "box.top"
+	*/
+	fn getValueInPath obj key_path = (
+	
+		local keys = filterString key_path "."
+		local out_val = copy obj
+		for k in keys do (
+		
+			if isProperty out_val k do out_val = getProperty out_val k
+		)
+		out_val
+	),
 	fn sortByName arr = ( --not used not tested
 	
 		fn compareNames str1 str2 = stricmp str1.name str2.name
 		qSort arr compareNames
+	),
+	/**
+	*@Example
+		mcArray.sortByParam arr "top"
+	*/
+	fn sortByParam arr key = (
+	
+		fn compareParams obj_a obj_b param:  =  (
+		
+			local a = getProperty obj_a param
+			local b = getProperty obj_b param
+			case of (
+			
+				(a < b) : -1 
+				(a > b) : 1
+				default: 0
+			)
+		)
+		qSort arr compareParams param:key
+	),
+	/**
+	*@Example
+		mcArray.sortByParams arr "box.top"
+	*/
+	fn sortByParams arr key_path = (
+	
+		fn compareParams obj_a obj_b params:"" =  (
+		
+			local a = getValueInPath obj_a params
+			local b = getValueInPath obj_b params
+			-- format "compare a:% b:% a < b :%\n" a b (a < b)
+			case of (
+			
+				(a < b) : -1 
+				(a > b) : 1
+				default: 0
+			)
+		)
+		qSort arr compareParams params:key_path
 	),
 	-- compare generic Arrays
 	fn isEqualArrays ar1 ar2 = (

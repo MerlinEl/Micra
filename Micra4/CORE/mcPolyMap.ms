@@ -14,8 +14,52 @@
 *@Example	
 	undefined
 *
+*@API	
+	https://help.autodesk.com/view/3DSMAX/2017/ENU/?guid=__files_GUID_496CE46A_EBD3_40C2_9637_3F21E0F0B0FB_htm
+	http://www.gritengine.com/maxscript_html/unwrap_uvw_modifier.htm
+*
 */
-struct UV_ELEMENTS (faces=#{}, area=0)
+
+/**
+*@Example
+	local uv_faces = mcPolyMap.getCurentSelectionAs mod_uvw #faces
+	local uv_faces_elements = mcPolyMap.getElements mod_uvw uv_faces
+*/
+struct UV_ELEMENT (
+
+	mod_uvw	= undefined, 
+	faces	= #{}, 
+	area_uv	= 0,
+	area_geo= 0,
+	width	= 0,
+	height	= 0,
+	left	= 0,
+	right	= 0, 
+	top		= 0, 
+	bottom	= 0, 
+	pos		= [0, 0],
+	fn init = (
+
+		local el_x, el_y, mi, ma
+		mod_uvw.getArea faces &el_x &el_y &width &height &uv_area &area_geo
+		pos  = [el_x, el_y]
+		mi = pos
+		ma = [el_x + width, el_y + height]
+		left	= mi.x
+		right	= ma.x
+		top		= mi.y
+		bottom	= ma.y
+	),
+	fn moveTo new_pos = (
+	
+		--<void><Unwrap_UVW>.SetVertexPosition <time>time <integer>index <point3>pos 
+		local current_fsel = mod_uvw.getSelectedFaces() --store faces selection
+		mod_uvw.selectFaces faces
+		mod_uvw.MoveSelected new_pos
+		if current_fsel.numberset > 0 do mod_uvw.selectFaces current_fsel --restore faces selection
+		init() --simplyfi posible
+	)
+)
 struct MICRA_POLY_MAP_STRUCTURE	(
 	
 	--variables
@@ -123,11 +167,18 @@ struct MICRA_POLY_MAP_STRUCTURE	(
 			#faces: mod_uvw.getSelectedFaces() as Array	
 		)
 	),
-	fn getSelectedUvsBB mod_uvw = (
+	fn getVertsBoundingBox mod_uvw verts = ( --not tested, not used
+	
+		local vert_pos = for v in verts collect mod_uvw.getVertexPosition 0 v --slider time, vert index
+		local min_max = mcMath.get2DBoundingBox vert_pos
+		local bottom_left_pos = min_max[1] --zero pos
+		local box_size = min_max[1] + min_max[2] --?? test this
+		mcRect2D [bottom_left_pos.x, bottom_left_pos.y] [box_size.x, box_size.y]
+	),
+	fn getVertsBB mod_uvw verts_arr = (
 
 		if classOf mod_uvw != Unwrap_UVW do return undefined
-		local sel_verts = getCurentSelectionAs mod_uvw #verts 
-		local vertices_pos = for i in sel_verts collect (mod_uvw.getVertexPosition 0 i)
+		local vertices_pos = for i in verts_arr collect (mod_uvw.getVertexPosition 0 i)
 		-- Get left/lower limit and right/upper limit
 		local min_pos = copy vertices_pos[1] 
 		local max_pos = copy vertices_pos[1]
@@ -143,6 +194,22 @@ struct MICRA_POLY_MAP_STRUCTURE	(
 		if min_pos == undefined or max_pos == undefined do return undefined
 		-- format "min:% max:%\n" min_pos max_pos
 		mcRect min_pos max_pos
+	),
+	/**
+	*@Example
+		mod_uvw = selection[1].modifiers[1]
+		uv_faces = mcPolyMap.getCurentSelectionAs mod_uvw #faces
+		uv_faces_elements = mcPolyMap.getElements mod_uvw uv_faces
+		el_bbs = for el in uv_faces_elements collect mcPolyMap.getFacesBB mod_uvw el.faces
+		print el_bbs
+	*/
+	fn getFacesBB mod_uvw faces_arr = (
+	
+		local current_fsel = mod_uvw.getSelectedFaces() --store faces selection
+		mod_uvw.selectFaces faces_arr
+		local verts_arr = getCurentSelectionAs mod_uvw #verts
+		if current_fsel.numberset > 0 do mod_uvw.selectFaces current_fsel --restore faces selection
+		getVertsBB mod_uvw verts_arr
 	),
 	fn selectBorder = (
 	
@@ -181,19 +248,21 @@ struct MICRA_POLY_MAP_STRUCTURE	(
 	),
 	fn getElements mod_uvw faces_array = (
 		
-		local el = #()
+		local current_fsel = mod_uvw.getSelectedFaces() --store faces selection
+		local els = #()
 		while faces_array.count != 0 do --or not keyboard.controlPressed 
 		(
 			local next_face = faces_array[1]
 			mod_uvw.selectFaces #{next_face}
 			mod_uvw.selectElement()
 			local el_faces = mod_uvw.getSelectedFaces()
-			local areaUVW
-			mod_uvw.getArea el_faces &x &y &width &height &areaUVW &areaGeom 
-			el += #(UV_ELEMENTS el_faces areaUVW) 
+			local el = UV_ELEMENT mod_uvw el_faces
+			el.init()
+			append els el
 			faces_array = (faces_array as bitarray - el_faces) as array --remove faces from array
 		)
-		return el
+		if current_fsel.numberset > 0 do mod_uvw.selectFaces current_fsel --restore faces selection
+		return els
 	),
 	/**
 	*@Usage Split object by uv islands
@@ -341,12 +410,16 @@ struct MICRA_POLY_MAP_STRUCTURE	(
 		)
 		mod_uvw.SelectFaces sel_faces
 	),
-	fn stretchUvsToFitSquare mod_uvw = (
+	/**	
+	*@ Created by br0t 2014
+	*@ Modified by MerlinEl 2019
+	*@ Usage > Distorts all UVs to fit into the UV square (0 to 1 in UV space).
+	*/
+	fn fitToSquare mod_uvw verts_arr = (
 
 		if classOf  mod_uvw!= Unwrap_UVW do return false
-		local sel_verts = getCurentSelectionAs mod_uvw #verts --this procedure also define gco and select vertices
-		if sel_verts.count == 0 do return false
-		local vertices_pos = for i in sel_verts collect (mod_uvw.getVertexPosition 0 i)
+		if verts_arr.count == 0 do return false
+		local vertices_pos = for i in verts_arr collect (mod_uvw.getVertexPosition 0 i)
 		-- Get left/lower limit
 		local minY = minX = 999999
 		for p in vertices_pos do (
@@ -360,7 +433,7 @@ struct MICRA_POLY_MAP_STRUCTURE	(
 		mod_uvw.moveSelectedVertices [moveX, moveY, 0]
 
 		-- Verts have been changed so update the array
-		vertices_pos = for i in sel_verts collect (mod_uvw.getVertexPosition 0 i)
+		vertices_pos = for i in verts_arr collect (mod_uvw.getVertexPosition 0 i)
 
 		-- Get right/upper limit
 		maxY = maxX = -999999
@@ -376,10 +449,11 @@ struct MICRA_POLY_MAP_STRUCTURE	(
 		uvOrigin = [0, 0, 0]
 		mod_uvw.scaleSelectedXY scaleX scaleY uvOrigin
 	),
-	fn stretchUvsToSquareProportionally mod_uvw move_zero:false = (
+	fn fitToSquareProportionally mod_uvw verts_arr move_zero:false = (
 	
 		if classOf mod_uvw != Unwrap_UVW do return false
-		local bb = getSelectedUvsBB mod_uvw
+		if verts_arr.count == 0 do return false
+		local bb = getVertsBB mod_uvw verts_arr
 		if bb == undefined do return false
 		local ratio = 1.0 / bb.he
 		resizeUVW mod_uvw ratio #x
