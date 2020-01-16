@@ -75,11 +75,18 @@ rollout mcVertexColorDialog "Vertex Color v1.02" width:408 height:348
 	local current_color_index = 1
 
 	--local functions
-	fn getSelectionType sel= (
+	fn getSelectionType sel = (
 		
-		if sel.count > 0 and  (subobjectLevel == undefined or subobjectLevel == 0) do return "objects"
-		if subobjectLevel == 1 do return "verts"	
-		if subobjectLevel == 4 or subobjectLevel == 5 do return "faces"	
+		case subobjectLevel of (
+			
+			0	: if sel.count > 0 then "objects" else "undefined"
+			1	: "verts"	
+			2	: "edges"	
+			3	: "edges"
+			4	: "faces"
+			5	: "faces"
+			undefined	: if sel.count > 0 then "objects" else "undefined"
+		)
 	)
 	fn isValidObject obj = (
 	
@@ -157,23 +164,9 @@ rollout mcVertexColorDialog "Vertex Color v1.02" width:408 height:348
 			update o
 		)
 	)
-	fn setFacesColor obj verts_color = (
-		
-		format "setFacesColor > obj:% verts_color:%\n"  obj.name verts_color
-		undo "Set face color" on obj.SetFaceColor verts_color #VertexColor
-		/*undo "Set face color" on (
-			
-			local base_object =  obj.baseObject
-			case (classOf base_object) of (
-
-				Editable_Poly: polyOp.setFaceColor base_object 0 (getFaceSelection base_object.mesh) verts_color
-				Editable_Mesh: meshOp.setFaceColor base_object 0 (getFaceSelection base_object.mesh) verts_color
-			)
-		)*/
-	)
 	fn setVertsColor obj verts_color = (
 		
-		--format "setVertsColor > obj:% verts_color:%\n"  obj.name verts_color
+		format "setVertsColor > obj:% verts_color:%\n"  obj.name verts_color
 		--obj.SetVertexColor verts_color #VertexColor
 		undo "Set vertex color" on (
 			
@@ -184,6 +177,30 @@ rollout mcVertexColorDialog "Vertex Color v1.02" width:408 height:348
 				Editable_Mesh: meshOp.setVertColor base_object 0 (getVertSelection base_object.mesh) verts_color
 			)
 		)
+	)
+	fn setEdgesColor obj verts_color = (
+	
+		format "setEdgesColor > obj:% color:%\n"  obj.name verts_color
+		undo "Set Edges color" on (
+			
+			local esel = polyOp.getEdgeSelection obj
+			local everts = polyOp.getVertsUsingEdge obj esel
+			polyOp.setVertColor obj 0 everts verts_color
+		)
+	)
+	fn setFacesColor obj verts_color = (
+		
+		format "setFacesColor > obj:% color:%\n"  obj.name verts_color
+		undo "Set face color" on obj.SetFaceColor verts_color #VertexColor
+		/*undo "Set face color" on (
+			
+			local base_object =  obj.baseObject
+			case (classOf base_object) of (
+
+				Editable_Poly: polyOp.setFaceColor base_object 0 (getFaceSelection base_object.mesh) verts_color
+				Editable_Mesh: meshOp.setFaceColor base_object 0 (getFaceSelection base_object.mesh) verts_color
+			)
+		)*/
 	)
 	fn rdoSwitchTo index force_enable= (
 		
@@ -332,9 +349,10 @@ rollout mcVertexColorDialog "Vertex Color v1.02" width:408 height:348
 		case sel_type of (
 			
 			"objects"	: setObjectsColor sel clr map_channel
-			"faces"		: setFacesColor sel[1] clr
-			"verts"		: setVertsColor  sel[1] clr
-			"default"		: (undefined)
+			"faces"	: setFacesColor sel[1] clr
+			"edges"	: setEdgesColor sel[1] clr 	
+			"verts"	: setVertsColor  sel[1] clr
+			"default"	: (undefined)
 		)	
 	)
 	fn getSelectedVertexAlpha s a = (
