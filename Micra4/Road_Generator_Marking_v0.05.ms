@@ -120,8 +120,11 @@ rollout mcRoadMarkingGeneratorDialog "Road Marking Generator:" width:464 height:
 		addModifier sp_path sweep_mod ui:on
 		sweep_mod.CustomShape = 1
 		sweep_mod.shapes[1] = sp_profile.baseObject
+		sweep_mod.MirrorXZPlane = off
+		sweep_mod.MirrorXYPlane = off
+		sweep_mod.XOffset = 0
 		sweep_mod.yOffset = btm_offset
-		-- $.modifiers[#Sweep].yOffset = 0.2
+		sweep_mod.angle = 0
 		sweep_mod.PivotAlignment = 5
 		sweep_mod.GenerateMappingCoords = on
 		sweep_mod.realWorldMapSize = on

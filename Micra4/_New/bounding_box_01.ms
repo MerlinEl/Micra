@@ -1,7 +1,6 @@
 /**
 *@Author d3coy 2006
 *@Mod Merlin El 2020
-not works on some terrains
 */
 fn getBoundingBoxFromVerts obj verts = (
 	 
@@ -78,9 +77,9 @@ fn getBoundingBoxFromVerts obj verts = (
  
  
 obj = $
---snapshotAsMesh obj
-vsel = polyOp.getVertSelection obj
-bo = getBoundingBoxFromVerts obj vsel
+esel =  polyOp.getEdgeSelection obj
+verts = polyOp.getVertsUsingEdge obj esel
+bo = getBoundingBoxFromVerts obj verts
  
  
  
