@@ -359,7 +359,7 @@ rollout mcUnwrapEditorDialog "UV+" width:96 height:648
 		local next_bound = 0
 		for el in uv_faces_elements do (
 
-			if next_bound > 0 do el.moveTo [next_bound - el.left, 0, 0] --move element to x bound
+			if next_bound > 0 do el.moveTo [next_bound, 0, 0] axis:"x" --move element to x bound
 			next_bound = el.right + gap --get right bound
 			--format "next bound:%\n" next_bound
 		)

@@ -26,6 +26,7 @@ rollout mcCurbCrumpleDialog "Curb Crumple:" width:400 height:140
 	label 'lbl8' "max:" pos:[208,108] width:24 height:16 align:#left
 	spinner 'spn_noise_to_side_max' "" pos:[232,80] width:64 height:16 range:[0,100000,4] type:#float scale:0.1 align:#left
 	spinner 'spn_up_down_max' "" pos:[232,108] width:64 height:16 range:[0,100000,1] type:#float scale:0.1 align:#left
+	radioButtons 'rdo_connect_edges' "" pos:[260,52] width:141 height:16 labels:#("600", "400", "200") columns:3 align:#left
 	
 	fn extendEdgeToBottom obj offset_val = (
 		
@@ -171,24 +172,28 @@ rollout mcCurbCrumpleDialog "Curb Crumple:" width:400 height:140
 	on btn_connect_edges pressed do
 	(
 
-			undo label:"Connect Edges By Distance" on conectEdgesByDistance $ spn_connect_edges.value
-		)
+		undo label:"Connect Edges By Distance" on conectEdgesByDistance $ spn_connect_edges.value
+	)
 	on btn_noise_to_side pressed do
 	(
 			
-			undo label:"Noise To Side" on noiseToSide $ [spn_noise_to_side_min.value, spn_noise_to_side_max.value]
-		)
+		undo label:"Noise To Side" on noiseToSide $ [spn_noise_to_side_min.value, spn_noise_to_side_max.value]
+	)
 		
-		on noise_up_down pressed do
+	on noise_up_down pressed do
 	(
 			
-			undo label:"Noise Up Down" on noiseUpDown $ [spn_up_down_min.value, spn_up_down_max.value] freezeBottom:chk_freeze_bottom.state
-		)	
+		undo label:"Noise Up Down" on noiseUpDown $ [spn_up_down_min.value, spn_up_down_max.value] freezeBottom:chk_freeze_bottom.state
+	)	
 	on btn_extend_bottom_edge pressed do
 	(
 			
-			undo label:"Extend Edge To Bottom" on extendEdgeToBottom $ spn_extend_bottom_edge.value
-		)
+		undo label:"Extend Edge To Bottom" on extendEdgeToBottom $ spn_extend_bottom_edge.value
+	)
+	on rdo_connect_edges changed state do (
+	
+		spn_connect_edges.value = case state of (1 : 600; 2 : 400; 3 : 200)
+	)
 )
 createDialog mcCurbCrumpleDialog
 

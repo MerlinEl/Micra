@@ -29,6 +29,7 @@ struct UV_ELEMENT (
 
 	mod_uvw	= undefined, 
 	faces	= #{}, 
+	verts	= #{}, 
 	area_uv	= 0,
 	area_geo= 0,
 	width	= 0,
@@ -37,27 +38,58 @@ struct UV_ELEMENT (
 	right	= 0, 
 	top		= 0, 
 	bottom	= 0, 
-	pos		= [0, 0],
+	pos		= [0, 0, 0],
 	fn init = (
 
-		local el_x, el_y, mi, ma
-		mod_uvw.getArea faces &el_x &el_y &width &height &uv_area &area_geo
-		pos  = [el_x, el_y]
-		mi = pos
-		ma = [el_x + width, el_y + height]
-		left	= mi.x
-		right	= ma.x
-		top		= mi.y
-		bottom	= ma.y
+		mod_uvw.getArea faces &left &bottom &width &height &uv_area &area_geo
+		pos  = [left, bottom, 0]
+		right = left + width
+		top	= bottom + height
 	),
-	fn moveTo new_pos = (
+	/*
+	obj = $
+	mod_uvw = obj.modifiers[1]
+	uv_faces = mcPolyMap.getCurentSelectionAs mod_uvw #faces
+	uv_faces_elements = mcPolyMap.getElements mod_uvw uv_faces
+	mcArray.sortByParam uv_faces_elements "left"
+	print uv_faces_elements
+	uv_faces_elements[1].moveTo [0,0,0] axis:"x"
+	uv_faces_elements[2].moveTo [0,0,0] axis:"x"
+	uv_faces_elements[3].moveTo [0,0,0] axis:"x"
+	uv_faces_elements[4].moveTo [0,0,0] axis:"x"
+
+	uv_faces_elements[1].moveTo [0,0,0] axis:"y"
+	uv_faces_elements[2].moveTo [0,0,0] axis:"y"
+
+	uv_faces_elements[2].moveTo [uv_faces_elements[1].right,0,0] axis:"x"
+	uv_faces_elements[2].moveTo [0,0,0] axis:"x"
+
+	uv_faces_elements[1].left ????
+	uv_faces_elements[1].right ???
+
+	uv_faces_elements[3].moveTo [0,0,0] axis:"y"
+	uv_faces_elements[4].moveTo [0,0,0] axis:"y"
+	*/
+	fn moveTo new_pos axis:"xy" = (
 	
-		--<void><Unwrap_UVW>.SetVertexPosition <time>time <integer>index <point3>pos 
-		local current_fsel = mod_uvw.getSelectedFaces() --store faces selection
-		mod_uvw.selectFaces faces
-		mod_uvw.MoveSelected new_pos
-		if current_fsel.numberset > 0 do mod_uvw.selectFaces current_fsel --restore faces selection
-		init() --simplyfi posible
+		for v in verts do (
+		
+			local vert_pos = mod_uvw.getVertexPosition 0 v --<time>time <integer>index
+			case axis of (
+			
+				"x"	: vert_pos.x	-= pos.x + new_pos.x --offset vertex to zero and add new pos
+				"y"	: vert_pos.y	-= pos.y + new_pos.y --offset vertex to zero and add new pos
+				"xy"	: vert_pos		-= pos   + new_pos --offset vertex to zero and add new pos
+			)
+			mod_uvw.setVertexPosition 0 v vert_pos --<time>time <integer>index <point3>pos 
+		)
+		init() --update transformation
+	),
+	fn rotateTo new_angle = (
+	
+	
+	
+	
 	)
 )
 struct MICRA_POLY_MAP_STRUCTURE	(
@@ -131,6 +163,22 @@ struct MICRA_POLY_MAP_STRUCTURE	(
 		mod_uvw.channel = 0
 		addModifier obj mod_uvw
 		if collapseMod do maxOps.CollapseNode obj off
+	),
+	/**
+	*@Usage Get faces verts faces in uvs
+	*/
+	fn getUvFaceUvVerts mod_uvw faces = (
+	
+		local uv_verts = #{}
+		for f in faces do (
+
+			uv_face_verts_count = mod_uvw.numberPointsInFace f
+			for vetr_handle = 1 to uv_face_verts_count do (
+
+				append uv_verts (mod_uvw.getVertexIndexFromFace f vetr_handle)
+			)
+		)
+		uv_verts
 	),
 	/**
 	*@Usage
@@ -256,7 +304,8 @@ struct MICRA_POLY_MAP_STRUCTURE	(
 			mod_uvw.selectFaces #{next_face}
 			mod_uvw.selectElement()
 			local el_faces = mod_uvw.getSelectedFaces()
-			local el = UV_ELEMENT mod_uvw el_faces
+			local el_verts = getUvFaceUvVerts mod_uvw el_faces
+			local el = UV_ELEMENT mod_uvw el_faces el_verts
 			el.init()
 			append els el
 			faces_array = (faces_array as bitarray - el_faces) as array --remove faces from array
