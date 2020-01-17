@@ -110,7 +110,9 @@ rollout mcCurbCrumpleDialog "Curb Crumple:" width:400 height:140
 	fn noiseUpDown obj offset_val freezeBottom:false= (
 
 		if classOf obj != Editable_Poly do return false
-		format "noise side obj:% offset:% axis:%\n" obj.name offset_val axis_str 
+		format "noise side obj:% offset:% axis:%\n" obj.name offset_val axis_str
+		if obj.constrainType != 0 do obj.constrainType = 0 --disable contains first		
+		if obj.preserveUVs do obj.preserveUVs = off --disable preserve uvs
 		--split edge selection to loop grpups
 		local esel = polyop.getEdgeSelection obj
 		if esel.numberset == 0 do return false
@@ -153,6 +155,8 @@ rollout mcCurbCrumpleDialog "Curb Crumple:" width:400 height:140
 
 		if classOf obj != Editable_Poly do return false
 		format "noise side obj:% offset:%\n" obj.name offset_val 
+		if obj.constrainType != 0 do obj.constrainType = 0 --disable contains first
+		if obj.preserveUVs do obj.preserveUVs = off --disable preserve uvs
 		--split edge selection to loop grpups
 		local esel = polyop.getEdgeSelection obj
 		if esel.numberset == 0 do return false

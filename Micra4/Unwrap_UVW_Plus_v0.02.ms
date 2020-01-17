@@ -45,8 +45,8 @@ rollout mcUnwrapEditorDialog "UV+" width:96 height:648
 	button 'btn_lm' "p1" pos:[8,372] width:24 height:24 images:(mcCall.getIcon 116) toolTip:"Add Lightmap"
 	button 'btn_stitch' "St" pos:[34,372] width:24 height:24 toolTip:"Stitch Selected Edges (Experimental)"
 	button 'btn_fit' "St" pos:[64,372] width:24 height:24 toolTip:"Fit To Rect" align:#left
-	button 'btn_distr_x' "Dx" pos:[36,504] width:24 height:24 toolTip:"Distribute Elements At X" align:#left
-	button 'btn_29' "..." pos:[60,504] width:24 height:24 toolTip:"ReformUV CV (Rotate Vertices Around Shape)" align:#left
+	button 'btn_distr_x_plus' "Dx+" pos:[36,504] width:24 height:24 toolTip:"Distribute Elements At X Expand" align:#left
+	button 'btn_distr_x_zero' "Dx-" pos:[60,504] width:24 height:24 toolTip:"Distribute Elements At X Contract" align:#left
 	button 'btn_randomize_x' "RandX" pos:[8,400] width:36 height:24 toolTip:"Move Elements Random X" align:#left
 	button 'btn_randomize_y' "RandY" pos:[48,400] width:36 height:24 toolTip:"Move Elements Random Y" align:#left
 	spinner 'spn_randomize' "" pos:[8,428] width:80 height:16 range:[0,100,0.5] align:#left
@@ -428,7 +428,8 @@ rollout mcUnwrapEditorDialog "UV+" width:96 height:648
 	on btn_paste_posy pressed do pastePos #Y
 	on button_skew_verts_plus pressed do (undo "Skew Vertices" on skewSelectedVertices #plus)
 	on button_skew_verts_minus pressed do (undo "Skew Vertices" on skewSelectedVertices #minus)
-	on btn_distr_x pressed do undo "Distribute Shells To X" on (distributeElementsToX selection[1])
+	on btn_distr_x_plus pressed do undo "Distribute Shells To X Expand" on (distributeElementsToX selection[1] gap:1)
+	on btn_distr_x_zero pressed do undo "Distribute Shells To X Contract" on (distributeElementsToX selection[1] gap:0)
 	--on spn_skew_verts changed val do  (undo "Skew Vertices" on skewSelectedVertices val)
 	--<
 )

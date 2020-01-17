@@ -108,9 +108,13 @@ rollout mcRoadMarkingGeneratorDialog "Road Marking Generator:" width:464 height:
 	)
 	fn detachFacesFromEdgeSelection obj new_name = (
 	
-	
+		--get selected edges and convert them in to polygons
 		local sel_edges = polyOp.getEdgeSelection obj
 		local efaces = polyOp.getFacesUsingEdge obj sel_edges
+		--grow edge selection to get more polygons for hit detection
+		local fverts =  polyOp.getVertsUsingFace obj efaces
+		efaces = polyOp.getFacesUsingVert obj fverts
+		--detach geomtry as object
 		polyOp.detachFaces obj efaces delete:false asNode:true name:new_name
 		getNodeByName new_name
 	)
