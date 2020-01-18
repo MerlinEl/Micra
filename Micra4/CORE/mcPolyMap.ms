@@ -38,37 +38,17 @@ struct UV_ELEMENT (
 	right	= 0, 
 	top		= 0, 
 	bottom	= 0, 
-	pos		= [0, 0, 0],
+	pos		= [0, 0],
 	fn init = (
 
 		mod_uvw.getArea faces &left &bottom &width &height &uv_area &area_geo
-		pos  = [left, bottom, 0]
+		pos  = [left, bottom]
 		right = left + width
 		top	= bottom + height
 	),
-	/*
-	obj = $
-	mod_uvw = obj.modifiers[1]
-	uv_faces = mcPolyMap.getCurentSelectionAs mod_uvw #faces
-	uv_faces_elements = mcPolyMap.getElements mod_uvw uv_faces
-	mcArray.sortByParam uv_faces_elements "left"
-	print uv_faces_elements
-	uv_faces_elements[1].moveTo [0,0,0] axis:"x"
-	uv_faces_elements[2].moveTo [0,0,0] axis:"x"
-	uv_faces_elements[3].moveTo [0,0,0] axis:"x"
-	uv_faces_elements[4].moveTo [0,0,0] axis:"x"
-
-	uv_faces_elements[1].moveTo [0,0,0] axis:"y"
-	uv_faces_elements[2].moveTo [0,0,0] axis:"y"
-
-	uv_faces_elements[2].moveTo [uv_faces_elements[1].right,0,0] axis:"x"
-	uv_faces_elements[2].moveTo [0,0,0] axis:"x"
-
-	uv_faces_elements[1].left ????
-	uv_faces_elements[1].right ???
-
-	uv_faces_elements[3].moveTo [0,0,0] axis:"y"
-	uv_faces_elements[4].moveTo [0,0,0] axis:"y"
+	/**
+	*@Warn
+		on undo recolect
 	*/
 	fn moveTo new_pos axis:"xy" = (
 	
@@ -77,9 +57,9 @@ struct UV_ELEMENT (
 			local vert_pos = mod_uvw.getVertexPosition 0 v --<time>time <integer>index
 			case axis of (
 			
-				"x"	: vert_pos.x	-= pos.x + new_pos.x --offset vertex to zero and add new pos
-				"y"	: vert_pos.y	-= pos.y + new_pos.y --offset vertex to zero and add new pos
-				"xy"	: vert_pos		-= pos   + new_pos --offset vertex to zero and add new pos
+				"x"	: vert_pos.x	= vert_pos.x - pos.x + new_pos.x --offset vertex to zero and add new pos
+				"y"	: vert_pos.y	= vert_pos.y - pos.y + new_pos.y --offset vertex to zero and add new pos
+				"xy"	: vert_pos		= vert_pos - [pos.x, pos.y, 0] + [new_pos.x, new_pos.y, 0] --offset vertex to zero and add new pos
 			)
 			mod_uvw.setVertexPosition 0 v vert_pos --<time>time <integer>index <point3>pos 
 		)
@@ -180,6 +160,16 @@ struct MICRA_POLY_MAP_STRUCTURE	(
 		)
 		uv_verts
 	),
+	fn isCurrentLevel type = (
+	
+		local level_index = case type of (
+		
+			#verts : 1
+			#edges : 2
+			#faces : 3	
+		)
+		subobjectLevel == level_index
+	),
 	/**
 	*@Usage
 		mcPolyMap.convetrSelectionTo (modpanel.getcurrentobject()) #verts
@@ -204,10 +194,15 @@ struct MICRA_POLY_MAP_STRUCTURE	(
 			)
 		)
 	),
+	/**
+	*@Usage
+		get or convert selection to vertex faces or edges
+	*/
 	fn getCurentSelectionAs mod_uvw type = ( --conver selection to desired type and return as array
 		
 		if classOf mod_uvw != Unwrap_UVW do return #()
-		if (convetrSelectionTo mod_uvw type == false) do return #()
+		-- need convert ? 
+		if not (isCurrentLevel type) do convetrSelectionTo mod_uvw type
 		case type of (
 		
 			#verts: mod_uvw.getSelectedVertices() as Array
