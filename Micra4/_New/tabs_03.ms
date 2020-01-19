@@ -1,61 +1,75 @@
-Global mcUnwrapEditorDialog
-if mcUnwrapEditorDialog != undefined do destroyDialog mcUnwrapEditorDialog
+Global mcUnwrapEditorDialog_test
+-- global rollout_01
+if mcUnwrapEditorDialog_test != undefined do destroyDialog mcUnwrapEditorDialog_test
 (	
-	rollout first_rollout "Selection" category:1
+	rollout rollout_01 "Select - Convert" category:1
 	(
-		button btn_verts "V" pos:[8,24] width:24 height:24 images:(mcCall.getIcon 103)  tooltip:"Convert Selection to Vertices"
-		button btn_edges "E" pos:[36,24] width:24 height:24 images:(mcCall.getIcon 216) tooltip:"Convert Selection to Edges"
-		button btn_faces "F" pos:[64,24] width:24 height:24 images:(mcCall.getIcon 40) tooltip:"Convert Selection to Faces"
-		button btn_border "B" pos:[8,52] width:24 height:24 images:(mcCall.getIcon 41) tooltip:"Select Edge border"
-		button btn_sel_similar "B" pos:[64,52] width:24 height:24 images:(mcCall.getIcon 220) tooltip:"Select Similar Faces"
-		label lbl_min "min:" pos:[8,84] width:24 height:16
-		spinner spn_min "" pos:[32,84] width:44 height:16 range:[0,100,100] type:#float
-		label lbl_max "max:" pos:[8,104] width:24 height:16
-		spinner spn_max "" pos:[32,104] width:44 height:16 range:[0,10000,20] type:#float
-		label lbl6 "%" pos:[76,104] width:12 height:16
-		label lbl7 "%" pos:[76,84] width:12 height:16
-		button btn_sel_over "B" pos:[36,52] width:24 height:24 images:(mcCall.getIcon 240) toolTip:"Select Overlapped Faces (+Ctrl Grow to Element)"
--- 		on first_rollout open do format "1 is opened\n"
--- 		on first_rollout close do format "1 is closed\n"
-		on first_rollout changed state do
-		(	
-		print ( state as string)
-		)
+		button btn_verts "V" pos:[8,4] width:24 height:24 images:(mcCall.getIcon 103) toolTip:"Convert Selection to Vertices"
+		button btn_edges "E" pos:[36,4] width:24 height:24 images:(mcCall.getIcon 216) toolTip:"Convert Selection to Edges"
+		button btn_faces "F" pos:[64,4] width:24 height:24 images:(mcCall.getIcon 40) toolTip:"Convert Selection to Faces"
+		button btn_border "B" pos:[8,32] width:24 height:24 images:(mcCall.getIcon 41) toolTip:"Select Edge border"
+		button btn_sel_similar "B" pos:[64,32] width:24 height:24 images:(mcCall.getIcon 220) toolTip:"Select Similar Faces"
+		label lbl_min "min:" pos:[96,12] width:24 height:16
+		spinner spn_min "" pos:[120,12] width:50 height:16 range:[0,100,100] type:#float
+		label lbl_max "max:" pos:[96,32] width:24 height:16
+		spinner spn_max "" pos:[120,32] width:50 height:16 range:[0,10000,20] type:#float
+		label lbl6 "%" pos:[172,32] width:12 height:16
+		label lbl7 "%" pos:[172,12] width:12 height:16
+		button btn_sel_over "B" pos:[36,32] width:24 height:24 images:(mcCall.getIcon 240) toolTip:"Select Overlapped Faces (+Ctrl Grow to Element)"
+		
+		on rollout_01 rolledUp state do (::mcUnwrapEditorDialog_test.updateDialogHeight())
 	)
-	rollout second_rollout "Move / Resize" category:2
+	rollout rollout_02 "Move - Resize" category:2
 	(
-		label second "Second"
+		button btn_move_r "R" pos:[60,32] width:24 height:24 images:(mcCall.getIcon 177) tooltip:"Move Selection Right (+Ctrl Double Size In X)"
+		button btn_move_l "L" pos:[4,32] width:24 height:24 images:(mcCall.getIcon 176)  tooltip:"Move Selection Left (+Ctrl Half Size In X)"
+		button btn_move_u "U" pos:[32,4] width:24 height:24 images:(mcCall.getIcon 218) tooltip:"Move Selection Up (+Ctrl Double Size In Y)"
+		button btn_move_d "D" pos:[32,60] width:24 height:24 images:(mcCall.getIcon 217) tooltip:"Move Selection Down (+Ctrl Half Size In Y)"
+		button btn_move_c "c" pos:[32,32] width:24 height:24 images:(mcCall.getIcon 31) tooltip:"Move Selection Center (+Ctrl Double Size, +Alt Half Size)"
+		
+		on rollout_02 rolledUp state do (::mcUnwrapEditorDialog_test.updateDialogHeight())
+	)
+	rollout rollout_03 "Align" category:3
+	(
+		
+		button btn_align_l "L" pos:[4,32] width:24 height:24 images:(mcCall.getIcon 289) toolTip:"Align Left"
+		button btn_align_t "T" pos:[32,4] width:24 height:24 images:(mcCall.getIcon 291) toolTip:"Align Top"
+		button btn_align_b "B" pos:[32,64] width:24 height:24 images:(mcCall.getIcon 292) toolTip:"Align Bottom"
+		button btn_align_r "R" pos:[60,32] width:24 height:24 images:(mcCall.getIcon 290) toolTip:"Align Right"
+		button btn_align_c "C" pos:[32,32] width:24 height:24 images:(mcCall.getIcon 303) toolTip:"Align Center"
+		
+		on rollout_03 rolledUp state do (::mcUnwrapEditorDialog_test.updateDialogHeight())
 	)
 	local all_rollouts = #(
 		
-		#(first_rollout, true),
-		#(second_rollout, false)
+		#(rollout_01, true),
+		#(rollout_02, false),
+		#(rollout_03, false)
 	)
-	rollout mcUnwrapEditorDialog "UV+" width:96 height:648 (
+	rollout mcUnwrapEditorDialog_test "UVW+" width:96 height:648 (
 
 			subRollout theSubRollout width:202 height:140 align:#center
-			fn resizeDialogHeight = (
+			local roffset = 26
+			fn updateDialogHeight = (
 				
 				local total_height = 0
-				for rdata in all_rollouts do (	
-					
--- 					if rdata[1].open do total_height += rdata[1].height	
-					if rdata[2] do total_height += rdata[1].height	
-				)
-				mcUnwrapEditorDialog.height = total_height
-			)
-			on mcUnwrapEditorDialog open do
-			(	
 				for rdata in all_rollouts do (
 					
-					addSubRollout theSubRollout rdata[1]	rolledUp:rdata[2]
+					local r = rdata[1]
+					format "rollout: [ %  ] height:% open:%\n" r.title r.height r.open 
+					total_height += if r.open then r.height+roffset else roffset
 				)
-				resizeDialogHeight()
+				mcUnwrapEditorDialog_test.height = total_height
+				theSubRollout.height = total_height
+			)
+			on mcUnwrapEditorDialog_test open do
+			(	
+				for rdata in all_rollouts do addSubRollout theSubRollout rdata[1] rolledUp:rdata[2]
+				updateDialogHeight()
 			)
 	)
--- 	createDialog mcUnwrapEditorDialog 202 150
-	if (MaxVersion())[1] >= 21000 do mcUnwrapEditorDialog.autoLayoutOnResize = true 
-	createDialog mcUnwrapEditorDialog 200 648
+-- 	if (MaxVersion())[1] >= 21000 do mcUnwrapEditorDialog_test.autoLayoutOnResize = true 
+	createDialog mcUnwrapEditorDialog_test 202 648
 )
 
 
@@ -81,31 +95,3 @@ for el in uv_faces_elements do el.moveTo [1,0,0] axis:"x"
 for el in uv_faces_elements do el.moveTo [0,1,0] axis:"y"
 for el in uv_faces_elements do el.moveTo [0,0,0] axis:"y"
 */
-
--- Global mcUnwrapEditorDialog
--- if mcUnwrapEditorDialog != undefined do closerolloutfloater mcUnwrapEditorDialog
--- (
--- 	rollout first_rollout "Selection" category:2
--- 	(
--- 		label rights "First"
--- 	)
--- 	rollout second_rollout "Move / Resize" category:1
--- 	(
--- 		label second "Second"
--- 	)
--- 	mcUnwrapEditorDialog = newRolloutFloater  "UV+" 100 648
--- 	addRollout first_rollout mcUnwrapEditorDialog
--- 	addRollout second_rollout mcUnwrapEditorDialog
--- )
-
-
--- (
--- 	local parentUVW = windows.getChildHWND 0 "Edit UVWs"
--- 	if parentUVW != undefined then (
--- 		
--- 		createdialog mcUnwrapEditorDialog  parent:parentUVW[1]
--- 	
--- 	) else (
--- 		createdialog mcUnwrapEditorDialog
--- 	)
--- )
