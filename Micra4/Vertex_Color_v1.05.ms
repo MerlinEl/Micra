@@ -36,6 +36,10 @@ rollout mcVertexColorDialog "Vertex Color v1.02" width:408 height:348
 	button 'btn_r1' "R1" pos:[220,248] width:20 height:20 toolTip:"Set Color To Red" align:#left
 	button 'btn_r2' "R2" pos:[240,248] width:20 height:20 toolTip:"Set Color To Brown" align:#left
 	button 'btn_g1' "G1" pos:[260,248] width:20 height:20 toolTip:"Set Color To Green" align:#left
+	
+	bitmap 'bmp_color_prev' "" pos:[116,196] width:112 height:24 align:#left bitmap:(bitmap 112 24 color:gray)
+	button 'btn_clr_copy' "Copy Color" pos:[232,196] width:80 height:24 align:#left
+	button 'btn_clr_paste' "Paste Color" pos:[320,196] width:80 height:24 align:#left
 
 	radiobuttons 'rdo_1' "" pos:[12,28] width:31 height:16 labels:#("1") default:1 align:#left
 	radiobuttons 'rdo_2' "" pos:[12,56] width:31 height:16 labels:#("2") default:0 align:#left
@@ -219,22 +223,30 @@ rollout mcVertexColorDialog "Vertex Color v1.02" width:408 height:348
 			)
 		)
  	)
-	fn getObjectColor obj = (
-	
-		obj.SetSelection #Vertex #{1}
-		obj.getFaceColor #VertexColor --get current selected vertex color (#VertexColor|#Illumination|#Alpha)
-	)
-	fn getFaceColor obj = (
-	
-		local fsel = obj.getSelection #face as Array
-		if fsel.count == 0 do return undefined
-		obj.getFaceColor #VertexColor --get current selected face color (#VertexColor|#Illumination|#Alpha)
-	)
 	fn getVerticeColor obj = (
 	
 		local vsel = obj.getSelection #Vertex as Array
 		if vsel.count == 0 do return undefined
 		obj.getVertexColor #VertexColor --get current selected vertex color (#VertexColor|#Illumination|#Alpha)
+	)
+	fn getEdgeColor obj = (
+	
+		local esel = obj.getSelection #Edge as Array
+		if esel.count == 0 do return undefined
+		local everts = polyOp.getVertsUsingEdge obj esel
+		polyOp.setVertSelection obj everts
+		obj.getVertexColor #VertexColor --get current selected face color (#VertexColor|#Illumination|#Alpha)
+	)
+	fn getFaceColor obj = (
+	
+		local fsel = obj.getSelection #Face as Array
+		if fsel.count == 0 do return undefined
+		obj.getFaceColor #VertexColor --get current selected face color (#VertexColor|#Illumination|#Alpha)
+	)
+	fn getObjectColor obj = (
+	
+		obj.SetSelection #Vertex #{1}
+		obj.getFaceColor #VertexColor --get current selected vertex color (#VertexColor|#Illumination|#Alpha)
 	)
 	fn faceHaveColor obj f clr = (
 	
@@ -352,8 +364,28 @@ rollout mcVertexColorDialog "Vertex Color v1.02" width:408 height:348
 			"faces"	: setFacesColor sel[1] clr
 			"edges"	: setEdgesColor sel[1] clr 	
 			"verts"	: setVertsColor  sel[1] clr
-			"default"	: (undefined)
+			"default"	: undefined
 		)	
+	)
+	fn getSelectionColor = (
+	
+		local sel = selection as array
+		if (sel.count == 0) do (
+		
+			MessageBox "Nothing is selected." title:"Warning:" beep:off	
+			return gray
+		)
+		local map_channel = 0
+		local sel_type = getSelectionType sel
+		format "sel_type:% objects:%\n" sel_type sel.count
+		case sel_type of (
+			
+			"objects"	: getObjectColor sel[1]
+			"faces"	: getFaceColor sel[1]
+			"edges"	: getEdgeColor sel[1]
+			"verts"	: getVerticeColor sel[1]
+			"default"	: gray
+		)
 	)
 	fn getSelectedVertexAlpha s a = (
 		
@@ -396,6 +428,15 @@ rollout mcVertexColorDialog "Vertex Color v1.02" width:408 height:348
 			sld_alpha.value = val			
 		)
 		setSelectedVerticesAlpha val
+	)
+	fn getUiBimapColor item = (
+	
+		local pixel_colors = getPixels item.bitmap [4, 4] 1
+		pixel_colors[1]
+	)
+	fn setUiBimapColor item clr = (
+	
+		item.bitmap = bitmap item.width item.height color:clr
 	)
 	fn init = (
 		
@@ -524,6 +565,8 @@ rollout mcVertexColorDialog "Vertex Color v1.02" width:408 height:348
 	on btn_r1 pressed do ( setSelectionColor btn_set2_colors[4]  )
 	on btn_r2 pressed do ( setSelectionColor btn_set2_colors[5]  )
 	on btn_g1 pressed do ( setSelectionColor btn_set2_colors[6]  )
+	on btn_clr_copy pressed do ( setUiBimapColor bmp_color_prev (getSelectionColor()))
+	on btn_clr_paste pressed do undo "Paste Color" on ( setSelectionColor (getUiBimapColor bmp_color_prev))
 
 	--ALPHA
 	on sld_alpha changed val do (setSelectionAlpha val #sld)
