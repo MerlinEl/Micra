@@ -416,6 +416,13 @@ rollout mcVertexColorDialog "Vertex Color v1.02" width:408 height:348
 		--callbacks.addScript #selectionSetChanged "try( getSelectedVertexAlpha() )catch()" id:#VertexAlphaCallbacks
 		mcVertexAlphaVertsSelChange = nodeEventCallback subobjectSelectionChanged:getSelectedVertexAlpha	
 	)
+	fn fin = (
+	
+		mcFile.saveDialogSettings "mcVertexColorDialog" "Properties_2" --save form position after close
+		mcVertexAlphaVertsSelChange = undefined
+		gc light:true
+		--callbacks.removeScripts id:#VertexAlphaCallbacks
+	)
 	------------------------------------------------------------------------------
 	--< DXShader
 	------------------------------------------------------------------------------
@@ -531,19 +538,22 @@ rollout mcVertexColorDialog "Vertex Color v1.02" width:408 height:348
 	on spn_alpha buttondown  do ()
 	on spn_alpha buttonup  do ()*/
 	--OPEN-CLOSE
-	on mcVertexColorDialog open do
-	(
-		format "open\n"
-		init()
-	)
-	on mcVertexColorDialog close do (
-		
-		mcVertexAlphaVertsSelChange = undefined
-		gc light:true
-		--callbacks.removeScripts id:#VertexAlphaCallbacks
-	)	
+	on mcVertexColorDialog open do (init())
+	on mcVertexColorDialog close do (fin())
 )
-createDialog mcVertexColorDialog
+
+--Open dialog at pos
+(
+	local form_settings = mcFile.readDialogSettings "mcVertexColorDialog" "Properties_2" --get saved pos and size
+	if form_settings != undefined then (
+
+		createDialog mcVertexColorDialog pos:(execute (form_settings.get "pos"))
+		
+	) else (
+	
+		createDialog mcVertexColorDialog
+	)
+)
 
 
 	/*

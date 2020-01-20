@@ -723,13 +723,19 @@ rollout mcCityManDialog "" width:500 height:988
 		callbacks.addScript #filePreOpenProcess			"mcCityManDialog.closeDialog()"					id:callbacks_id
 		callbacks.addScript #systemPreReset				"mcCityManDialog.closeDialog()"					id:callbacks_id
 		callbacks.addScript #systemPreNew				"mcCityManDialog.closeDialog()"					id:callbacks_id
-		callbacks.addScript #selectedNodesPreDelete	"mcCityManDialog.needUpdate()"					id:callbacks_id
-		callbacks.addScript #nodeCreated					"mcCityManDialog.needUpdate()"					id:callbacks_id
+		callbacks.addScript #selectedNodesPreDelete		"mcCityManDialog.needUpdate()"					id:callbacks_id
+		callbacks.addScript #nodeCreated				"mcCityManDialog.needUpdate()"					id:callbacks_id
 		callbacks.addScript #nodeCloned					"mcCityManDialog.needUpdate()"					id:callbacks_id
 		callbacks.addScript #sceneNodeAdded				"mcCityManDialog.needUpdate()"					id:callbacks_id
-		callbacks.addScript #nodeRenamed					"mcCityManDialog.nodeRenamed()"				id:callbacks_id
+		callbacks.addScript #nodeRenamed				"mcCityManDialog.nodeRenamed()"					id:callbacks_id
 		--select node in list
 		updateSelection()	
+	)
+	
+	fn fin = (
+	
+		callbacks.removescripts id:#micra_callbacks_cityman		
+		mcFile.saveDialogSettings "mcCityManDialog" "Properties_2" --save form position after close
 	)
 	
 	--load node children
@@ -930,10 +936,8 @@ rollout mcCityManDialog "" width:500 height:988
 	)
 	on btn_update pressed do (updateScene())
 	on mcCityManDialog open do (init())
-	on mcCityManDialog close do 
-	(
-		callbacks.removescripts id:#micra_callbacks_cityman		
-	)
+	on mcCityManDialog close do (fin())
+
 	on btn_move_colls_to_layers pressed do (if queryBox "Distribute Collisions in to separate layers?" title:"Organize:" do moveCollisionsInToSeparateLayer() )
 	on btn_move_geo_to_layers pressed do (if queryBox "Distribute Geometry in to separate layers?" title:"Organize:" do moveGeometryInToSeparateLayer() )
 	on btn_select_visible_nodes pressed do ( select(for o in objects where not o.ishidden collect o) )
@@ -957,7 +961,19 @@ rollout mcCityManDialog "" width:500 height:988
 	on btn_sel_coll_nodes pressed do ( selectNodesByType "coll")
 	on btn_run_fn pressed do (runCommandByName ddl_fn_list.selected )
 )
-createDialog mcCityManDialog
+
+--Open dialog at pos
+(
+	local form_settings = mcFile.readDialogSettings "mcCityManDialog" "Properties_2" --get saved pos and size
+	if form_settings != undefined then (
+
+		createDialog mcCityManDialog pos:(execute (form_settings.get "pos"))
+		
+	) else (
+	
+		createDialog mcCityManDialog
+	)
+)
 
 /*
 <dropdownlist>.items = append <dropdownlist>.items item

@@ -1156,7 +1156,7 @@ rollout mcQuickMaterialsDialog "Quick Materials:" width:656 height:456
 	fn fin = (
 	
 		::gLs3dQuickMaterials.closeAllComponents()
-	
+		mcFile.saveDialogSettings "mcQuickMaterialsDialog" "Properties_2" --save form position after close
 	)
 	on mcQuickMaterialsDialog open do init()
 	on mcQuickMaterialsDialog close do fin()
@@ -1187,8 +1187,19 @@ rollout mcQuickMaterialsDialog "Quick Materials:" width:656 height:456
 	on spn_mapping_angle changed val do (rotateMappingGizmo val)
 	on btn_run_fn pressed do (runCommandByName ddl_fn_list.selected )
 )
-createDialog mcQuickMaterialsDialog
 
+--Open dialog at pos
+(
+	local form_settings = mcFile.readDialogSettings "mcQuickMaterialsDialog" "Properties_2" --get saved pos and size
+	if form_settings != undefined then (
+
+		createDialog mcQuickMaterialsDialog pos:(execute (form_settings.get "pos"))
+		
+	) else (
+	
+		createDialog mcQuickMaterialsDialog
+	)
+)
 
 /*
    private void listView1_MouseClick(object sender, MouseEventArgs e)

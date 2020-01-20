@@ -119,6 +119,11 @@ rollout mcObjectInpectorDialog "Object Inspector:" width:344 height:464
 		)
 		updateInterfaceParams obj
 	)	
+	fn fin = (
+	
+		callbacks.removeScripts #selectionSetChanged id:#objectInpectorCallbackID
+		mcFile.saveDialogSettings "mcObjectInpectorDialog" "Properties_2" --save form position after close
+	)
 	on mcObjectInpectorDialog open do (
 		
 		callbacks.addScript #selectionSetChanged "mcObjectInpectorDialog.getObjectParams()" id:#objectInpectorCallbackID
@@ -126,11 +131,23 @@ rollout mcObjectInpectorDialog "Object Inspector:" width:344 height:464
 		local version = " v" + (mcFile.getScriptVersion "Object_Inspector") --get cript version
 		mcObjectInpectorDialog.title = "Object Inspector:" +(if version != undefined then version else "")
 	)
-	on mcObjectInpectorDialog close do (callbacks.removeScripts #selectionSetChanged id:#objectInpectorCallbackID)
+	on mcObjectInpectorDialog close do (fin())
 	on btn_copy pressed do copyObjectData()
 	on btn_paste pressed do pasteObjectData()
 )
-CreateDialog mcObjectInpectorDialog
+
+--Open dialog at pos
+(
+	local form_settings = mcFile.readDialogSettings "mcObjectInpectorDialog" "Properties_2" --get saved pos and size
+	if form_settings != undefined then (
+
+		createDialog mcObjectInpectorDialog pos:(execute (form_settings.get "pos"))
+		
+	) else (
+	
+		createDialog mcObjectInpectorDialog
+	)
+)
 
 --see if your callback has been registered:
 --callbacks.show()
