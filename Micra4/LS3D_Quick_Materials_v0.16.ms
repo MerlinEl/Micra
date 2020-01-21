@@ -1143,7 +1143,9 @@ rollout mcQuickMaterialsDialog "Quick Materials:" width:656 height:456
 		lv_mat_data.sorting = lv_mat_data.sorting.ascending
 		lv_mat_data.allowDrop = false
 		lv_mat_data.view = lv_mat_data.view.Details
-		lv_mat_data.HeaderStyle = lv_mat_data.HeaderStyle.Nonclickable
+		lv_mat_data.HeaderStyle = lv_mat_data.HeaderStyle.Clickable --Nonclickable
+		-- lv_mat_data.headerStyle = lv_mat_data.headerStyle.none --hide the columnheader
+		lv_mat_data.BorderStyle = lv_mat_data.BorderStyle.None --no border around the control  
 		lv_mat_data.Columns.add column_names[1] 270
 		lv_mat_data.Columns.add column_names[2] 30
 		lv_mat_data.Columns.add column_names[3] 30
@@ -1160,6 +1162,11 @@ rollout mcQuickMaterialsDialog "Quick Materials:" width:656 height:456
 	)
 	on mcQuickMaterialsDialog open do init()
 	on mcQuickMaterialsDialog close do fin()
+	on lv_mat_data columnClick columnHeader do ( --sort items by header click
+	
+		lv_mat_data.ListViewItemSorter = dotnetobject "MXS_dotNet.ListViewItemComparer" columnHeader.column
+		lv_mat_data.ListViewItemSorter = undefined
+	)
 	on lv_mat_data ItemSelectionChanged arg do (
 		
 		local a = lv_mat_data.SelectedItems

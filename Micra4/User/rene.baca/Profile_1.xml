@@ -56,7 +56,7 @@
     <gMcDrawBezierDialog active="true" pos="[387,308]" size="[644,501]" />
     <mcCityManDialog active="true" pos="[2556,246]" size="[500,988]" />
     <mcObjectInpectorDialog active="true" pos="[3072,773]" size="[344,464]" />
-    <mcQuickMaterialsDialog active="true" pos="[-902,280]" size="[656,456]" />
+    <mcQuickMaterialsDialog active="true" pos="[229,298]" size="[656,456]" />
     <mcVertexColorDialog active="true" pos="[-700,791]" size="[408,348]" />
   </Properties_2>
   <Buttons>
