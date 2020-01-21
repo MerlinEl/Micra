@@ -494,6 +494,11 @@ rollout mcQuickMaterialsDialog "Quick Materials:" width:656 height:456
 		markItem lv.items.item[ 0 ] --hilight item
 	)
 	
+	fn getSelectedItems lv = ( --not used yet
+	
+		for i = 0 to lv.selectedIndices.count-1 collect lv.selectedIndices.item[i]
+	)
+	
 	fn pickMaterialFromSelection objs = (
 	
 		if lv_mat_data.items.count == 0 do return false		
@@ -526,6 +531,8 @@ rollout mcQuickMaterialsDialog "Quick Materials:" width:656 height:456
 			
 				unmarkItem lv_mat_data.selectedItems.item[0] --un hilight item
 				itm.selected = true
+				--current_top_index = .TopItem.Index -- lv_mat_data.TopItem --alternative
+				itm.EnsureVisible() --focus - scroll to selected item
 				markItem lv_mat_data.items.item[ i ] --hilight item
 				exit
 			)
