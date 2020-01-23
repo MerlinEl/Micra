@@ -40,6 +40,7 @@ rollout mcVertexColorDialog "Vertex Color v1.02" width:408 height:348
 	bitmap 'bmp_color_prev' "" pos:[116,196] width:112 height:24 align:#left bitmap:(bitmap 112 24 color:gray)
 	button 'btn_clr_copy' "Copy Color" pos:[232,196] width:80 height:24 align:#left
 	button 'btn_clr_paste' "Paste Color" pos:[320,196] width:80 height:24 align:#left
+	button 'btn_color_mixer' "Color Mixer" pos:[320,244] width:80 height:24 align:#left
 
 	radiobuttons 'rdo_1' "" pos:[12,28] width:31 height:16 labels:#("1") default:1 align:#left
 	radiobuttons 'rdo_2' "" pos:[12,56] width:31 height:16 labels:#("2") default:0 align:#left
@@ -567,6 +568,7 @@ rollout mcVertexColorDialog "Vertex Color v1.02" width:408 height:348
 	on btn_g1 pressed do ( setSelectionColor btn_set2_colors[6]  )
 	on btn_clr_copy pressed do ( setUiBimapColor bmp_color_prev (getSelectionColor()))
 	on btn_clr_paste pressed do undo "Paste Color" on ( setSelectionColor (getUiBimapColor bmp_color_prev))
+	on btn_color_mixer pressed do (mcFile.fileInVersion "Vertex_Color_Mixer")
 
 	--ALPHA
 	on sld_alpha changed val do (setSelectionAlpha val #sld)
