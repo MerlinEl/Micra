@@ -1,7 +1,7 @@
 Global mcVertexColorDialog
 Global mcVertexAlphaVertsSelChange
 if ::mcVertexColorDialog != undefined do try(destroyDialog mcVertexColorDialog)catch()
-rollout mcVertexColorDialog "Vertex Color v1.02" width:408 height:348
+rollout mcVertexColorDialog "Vertex Color v1.05" width:408 height:348
 (
 	--interface
 	GroupBox 'grp1' "Color Sets:" pos:[4,4] width:104 height:276 align:#left
@@ -33,14 +33,11 @@ rollout mcVertexColorDialog "Vertex Color v1.02" width:408 height:348
 	button 'btn_r' "" pos:[120,248] width:20 height:20 toolTip:"Set Color To Red" align:#left
 	button 'btn_g' "G" pos:[140,248] width:20 height:20 toolTip:"Set Color To Green" align:#left
 	button 'btn_b' "B" pos:[160,248] width:20 height:20 toolTip:"Set Color To Blue" align:#left
-	button 'btn_r1' "R1" pos:[220,248] width:20 height:20 toolTip:"Set Color To Red" align:#left
-	button 'btn_r2' "R2" pos:[240,248] width:20 height:20 toolTip:"Set Color To Brown" align:#left
-	button 'btn_g1' "G1" pos:[260,248] width:20 height:20 toolTip:"Set Color To Green" align:#left
-	
+
 	bitmap 'bmp_color_prev' "" pos:[116,196] width:112 height:24 align:#left bitmap:(bitmap 112 24 color:gray)
 	button 'btn_clr_copy' "Copy Color" pos:[232,196] width:80 height:24 align:#left
 	button 'btn_clr_paste' "Paste Color" pos:[320,196] width:80 height:24 align:#left
-	button 'btn_color_mixer' "Color Mixer" pos:[320,244] width:80 height:24 align:#left
+	button 'btn_color_mixer' "Color Mixer" pos:[232,244] width:80 height:24 align:#left
 
 	radiobuttons 'rdo_1' "" pos:[12,28] width:31 height:16 labels:#("1") default:1 align:#left
 	radiobuttons 'rdo_2' "" pos:[12,56] width:31 height:16 labels:#("2") default:0 align:#left
@@ -62,8 +59,8 @@ rollout mcVertexColorDialog "Vertex Color v1.02" width:408 height:348
 	spinner 'spn_alpha' "" pos:[324,312] width:68 height:16 range:[0,100,0] type:#integer align:#left
 
 	--local variables
-	local btn_set2_colors = #(red, green, blue, color 216 0 71, color 255 0 50, color 0 133 63)
-	local btn_set2 = #(btn_r, btn_g, btn_b, btn_r1, btn_r2, btn_g1)
+	local btn_set2_colors = #(red, green, blue)
+	local btn_set2 = #(btn_r, btn_g, btn_b)
 	local radio_buttons = #(rdo_1, rdo_2, rdo_3, rdo_4, rdo_5, rdo_6, rdo_7, rdo_8, rdo_9)
 	local color_buttons = #(btn_1, btn_2, btn_3, btn_4, btn_5, btn_6, btn_7, btn_8, btn_9)
 	local bmp_colors = #(
@@ -82,6 +79,11 @@ rollout mcVertexColorDialog "Vertex Color v1.02" width:408 height:348
 	--local functions
 	fn getSelectionType sel = (
 		
+		--hotfix (on undefined case Return 1 ?????)
+		if subobjectLevel == undefined do (
+		
+			return (if sel.count > 0 then "objects" else  "undefined")
+		)
 		case subobjectLevel of (
 			
 			0	: if sel.count > 0 then "objects" else "undefined"
@@ -152,6 +154,7 @@ rollout mcVertexColorDialog "Vertex Color v1.02" width:408 height:348
 	)
 	fn setObjectsColor sel verts_color map_channel = (
 		
+		if not (queryBox "You are sure to change vertex color in whole Object(s) ? " title:"Warning:") do return false
 		undo "Set objects color" on for o in sel do (
 
 			local base_object =  o.baseObject
@@ -563,9 +566,6 @@ rollout mcVertexColorDialog "Vertex Color v1.02" width:408 height:348
 	on btn_r pressed do ( setSelectionColor btn_set2_colors[1] )
 	on btn_g pressed do ( setSelectionColor btn_set2_colors[2]  )
 	on btn_b pressed do ( setSelectionColor btn_set2_colors[3]  )
-	on btn_r1 pressed do ( setSelectionColor btn_set2_colors[4]  )
-	on btn_r2 pressed do ( setSelectionColor btn_set2_colors[5]  )
-	on btn_g1 pressed do ( setSelectionColor btn_set2_colors[6]  )
 	on btn_clr_copy pressed do ( setUiBimapColor bmp_color_prev (getSelectionColor()))
 	on btn_clr_paste pressed do undo "Paste Color" on ( setSelectionColor (getUiBimapColor bmp_color_prev))
 	on btn_color_mixer pressed do (mcFile.fileInVersion "Vertex_Color_Mixer")

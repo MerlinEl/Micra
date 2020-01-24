@@ -134,10 +134,15 @@ struct MICRA_POLY
 		)
 		all_elements
 	),
-	fn getEdgeLength obj edge_index = (
+	fn getEdgePoints obj edge_index = (
 	
 		local everts = polyOp.getEdgeVerts obj edge_index
-		distance (polyOp.getVert obj everts[1]) (polyOp.getVert obj everts[2])
+		#(polyOp.getVert obj everts[1], polyOp.getVert obj everts[2])
+	),
+	fn getEdgeLength obj edge_index = (
+	
+		local edge_points = getEdgePoints obj edge_index
+		distance edge_points[1] edge_points[2]
 	),
 	fn getEdgeCenter obj edge_index = (
 	

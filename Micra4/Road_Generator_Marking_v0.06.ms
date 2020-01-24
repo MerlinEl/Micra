@@ -17,7 +17,7 @@ rollout mcRoadMarkingGeneratorDialog "Road Marking Generator:" width:464 height:
 	
 	radiobuttons 'rdo_texture' "" pos:[12,20] width:104 height:144 labels:#("Full Line", "Full Double", "Full Double Dots", "Full Stop", "Full Simple", "Dashed", "Gap Small", "Gap Medium", "Gap Large")	default:1 columns:1 align:#left
 	radiobuttons 'rdo_surface_type' "Surface Type:" pos:[8,180] width:111 height:30 labels:#("Flat", "Conform") columns:2 align:#left
-	radiobuttons 'rdo_inverted' "inverted:" pos:[388,28] width:66 height:30 enabled:true labels:#("Y", "N") default:2 columns:2 align:#left
+	--radiobuttons 'rdo_inverted' "inverted:" pos:[388,28] width:66 height:30 enabled:true labels:#("Y", "N") default:2 columns:2 align:#left
 	
 	label 'lbl5' "Marking Width:" pos:[140,32] width:84 height:16 align:#left
 	label 'lbl8' "Bottom Offset:" pos:[140,56] width:84 height:16 align:#left
@@ -28,7 +28,7 @@ rollout mcRoadMarkingGeneratorDialog "Road Marking Generator:" width:464 height:
 	fn fixCornerMapping obj = (
 
 		try with redraw off (
-			local inverted = rdo_inverted.state == 1
+
 			if subObjectLevel != 2 do return (mcMsgList.warn "not_esel_1")
 			local sublvl = subObjectLevel	
 			local eindex = (polyop.getEdgeSelection obj as array)[1]
@@ -47,8 +47,8 @@ rollout mcRoadMarkingGeneratorDialog "Road Marking Generator:" width:464 height:
 			--add unwrap modifier
 			local mod_uvw = Unwrap_UVW () 
 			modPanel.addModToSelection mod_uvw ui:on
-			mod_uvw.edit()	
-			mod_uvw.fit()
+			-- mod_uvw.edit()	
+			-- mod_uvw.fit()
 			--gather vertex uv data
 			mcPolyMap.collectUnwrapData obj geo_data
 			subObjectLevel = 1
@@ -73,15 +73,17 @@ rollout mcRoadMarkingGeneratorDialog "Road Marking Generator:" width:464 height:
 				vsel_right = (mod_uvw.getSelectedVertices()) - vsel_left
 			) 
 			
-			--test for auto invert ---> result: tis cant be checked because all vertices is on same line
-			 --check if is left side on right nad vice versa
-			-- local left_verts_bb = mcPolyMap.getVertsBoundingBox mod_uvw vsel_left
-			-- local right_verts_bb = mcPolyMap.getVertsBoundingBox mod_uvw vsel_right
-			
-			-- format "first vert from left:% right:%\n" left_verts_bb right_verts_bb
-			-- format "inverted? :%\n" (left_verts_bb.left > right_verts_bb.left)
-			-- inverted = left_verts_bb.left > right_verts_bb.left
-			
+			--local inverted = rdo_inverted.state == 1
+			--test for auto invert
+			local corner_pos = polyOp.getVert obj corner_vert
+			local edge_1_points = mcPoly.getEdgePoints obj (corner_edges as array)[1]
+			local edge_2_points = mcPoly.getEdgePoints obj (corner_edges as array)[2]
+			local v1 = if corner_pos == edge_1_points[1] then edge_1_points[2] - edge_1_points[1] else edge_1_points[1] - edge_1_points[2]
+			local v2 = if corner_pos == edge_2_points[1] then edge_2_points[2] - edge_2_points[1] else edge_2_points[1] - edge_2_points[2]
+			local cross_product = cross v1 v2
+			--format "cross:%\n" cross_product
+			local inverted = cross_product.z > 0
+
 			--fix UV distortion on left vertices
 			mcPolyMap.skewVerticesUvs mod_uvw vsel_left (if inverted then -edges_angle/2 else edges_angle/2)
 			--fix UV distortion on left vertices
