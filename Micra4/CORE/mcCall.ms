@@ -175,10 +175,32 @@ struct MICRA_CALL
 
 		if not doesFileExist img or not doesFileExist msk do return blank
 		
-		local icon = mcFile.getIconFromFile img icn_num icSize:icSize imgSize:imgSize
+		local icn = mcFile.getIconFromFile img icn_num icSize:icSize imgSize:imgSize
 		local mask = mcFile.getIconFromFile msk icn_num icSize:icSize imgSize:imgSize
 
-		return #(icon, mask, 1, 1, 1, 1, 1)
+		return #(icn, mask, 1, 1, 1, 1, 1)
+	),
+	fn getIconDn icn_num icn_size:24 = (
+		
+		if icn_num == 0 do return undefined
+		local img_lib = (dotNetClass "Drawing.Image").FromFile Micra.IconI --get the saved image from file as bitmap
+		local w = h = icn_size
+		local img_lib_size = [img_lib.width, img_lib.height]
+		local icnCount  = (img_lib_size/icn_size)
+		icn_num -= 1
+		local X = (mod icn_num icnCount.x)
+		local Y = (icn_num / icnCount.y) as integer	
+		local pix_x = X * icn_size
+		local pix_y = Y * icn_size
+		local pos = [pix_x, pix_y]
+		local bmp_dn = (dotNetObject "Drawing.Bitmap" w h) --Create new bitmap object
+		--bmp_dn.ColorDepth = bmp_dn.ColorDepth.Depth24Bit
+		local gra  = (dotNetClass "Drawing.Graphics").fromImage bmp_dn --Create new Graphics object
+		local newRect = netDrRect [ -1, -1 ] [icn_size, icn_size]  --adjust icon offset X in button 
+		gra.DrawImage img_lib newRect pos.x pos.y w h (dotNetClass "Drawing.GraphicsUnit").Pixel	
+		img_lib.dispose()
+		bmp_dn.MakeTransparent (netDrColor black)--(color 75 75 75)) --gray
+		bmp_dn
 	),
 	fn time = 
 	(

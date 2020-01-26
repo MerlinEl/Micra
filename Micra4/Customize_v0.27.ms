@@ -36,10 +36,10 @@ local debug = 0
 -->Components---------------------------------------------------------------------
 --local form = dotNetObject "Form" 
 local form = dotNetObject "MaxCustomControls.Maxform"
-struct TAB1_COMPONENTS_STRUCT ( created = false, category_list, actions_list, edt_info, lbl_sizer, selected_item = undefined )
-struct TAB2_COMPONENTS_STRUCT ( created = false, checkboxes = #() , buttons = #(), labels = #(), titles = #() )
-struct TAB3_COMPONENTS_STRUCT ( created = false, about_items = #(), pic_box)
-struct MICRA_COMPONENTS_STRUCT
+struct CUSTOMIZE_COMPONENTS_TAB1_STRUCT ( created = false, category_list, actions_list, edt_info, lbl_sizer, selected_item = undefined )
+struct CUSTOMIZE_COMPONENTS_TAB2_STRUCT ( created = false, checkboxes = #() , buttons = #(), labels = #(), titles = #() )
+struct CUSTOMIZE_COMPONENTS_TAB3_STRUCT ( created = false, about_items = #(), pic_box)
+struct CUSTOMIZE_COMPONENTS_STRUCT
 (
 	--variables
 	lblT    = dotNetObject "label" ,
@@ -49,15 +49,14 @@ struct MICRA_COMPONENTS_STRUCT
 	tlp_edit = dotNetObject "TableLayoutPanel",
 	tab     = dotNetObject "TableLayoutPanel",
 	tab_buttons = #(),
-	tab_1 = TAB1_COMPONENTS_STRUCT(),
-	tab_2 = TAB2_COMPONENTS_STRUCT(),
-	tab_3 = TAB3_COMPONENTS_STRUCT(),
+	tab_1 = CUSTOMIZE_COMPONENTS_TAB1_STRUCT(),
+	tab_2 = CUSTOMIZE_COMPONENTS_TAB2_STRUCT(),
+	tab_3 = CUSTOMIZE_COMPONENTS_TAB3_STRUCT(),
 	start_mouse_pos, --mouse pos on dialog
 	edit_mode = false
 	--interface
 )
-
-form.tag = dotNetMXSValue (MICRA_COMPONENTS_STRUCT()) --store structure here for events use
+form.tag = dotNetMXSValue (CUSTOMIZE_COMPONENTS_STRUCT()) --store structure here for events use
 
 --|	--Form move
 fn onLblTMouseMove s a = (  --drag form
