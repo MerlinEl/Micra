@@ -795,6 +795,10 @@ struct MICRA_POLY
 		if obj_trgt == undefined do return false
 		case subObjectLevel of (
 
+			undefined : undo "Align Object To Object(s)" on (
+			
+				obj_src.pos = if sel.count == 1 then obj_trgt.pos else getObjectsCenter sel
+			)
 			0: undo "Align Object To Object(s)" on (
 			
 				obj_src.pos = if sel.count == 1 then obj_trgt.pos else getObjectsCenter sel

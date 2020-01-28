@@ -1,0 +1,7 @@
+name "UV Strip Straightener"
+version 2.5
+
+copy "UVW Unwrap-straightenUVstrip.mcr" to "$userMacros"
+drop install.ms
+
+clear temp

@@ -30,12 +30,13 @@ struct MC_LIVE_MEASURE_COLLECTOR (
 		if not isValidObject obj do return #{}
 		case subobjectlevel of (
 			
-			0: #{}
-			1: obj.getSelection #Vertex
-			2: obj.getSelection #Edge
-			3: obj.getSelection #Edge
-			4: obj.getSelection #Face
-			5: obj.getSelection #Face
+			undefined : #{}
+			0 : #{}
+			1 : obj.getSelection #Vertex
+			2 : obj.getSelection #Edge
+			3 : obj.getSelection #Edge
+			4 : obj.getSelection #Face
+			5 : obj.getSelection #Face
 			default:#{}
 		)
 	),
@@ -178,6 +179,7 @@ struct MC_LIVE_MEASURE_COLLECTOR (
 		if subsel.count == 0 do return undefined 
 		case subobjectlevel of (
 					
+			undefined : undefined			
 			1: moveVertexAlongVector active_measure subsel[1] snap_step
 			2: moveEdgeAlongVector active_measure subsel[1] snap_step
 			3: undefined
@@ -351,6 +353,7 @@ struct mcLiveMeasureDraw	(
 		_obj = obj
 		case subobjectlevel of (
 			
+			undefined : undefined
 			1: getSelVertices()
 			2: getSelEdgeVertices()
 			3: undefined

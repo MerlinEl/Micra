@@ -23,6 +23,21 @@ struct MICRA_MAX_STRUCTURE	(
 	--functions
 	fn getSource = getSourceFileName(), --get path of this script
 	fn alignObject = (max align),
+	fn getSelectionType = (
+		
+		if selection.count == 0 do return "undefined" 
+		case subobjectLevel of (
+			
+			undefined : "objects"
+			0	:  "objects"
+			1	: "verts"	
+			2	: "edges"	
+			3	: "edges"
+			4	: "faces"
+			5	: "faces"
+			default : "undefined"
+		)
+	),
 	fn deselectAll = (
 		--first exit from any editing mode
 		if selection.count > 0 and subObjectLevel != undefined do (

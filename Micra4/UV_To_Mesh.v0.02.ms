@@ -2,6 +2,9 @@
 /* mcUvToMesh by Orien 2019 */
 --------------------------------------------------------------------------------
 /*
+*@Usage 
+	unfold vws to mesh
+
 *@Author	Jorge Rodríguez | jorge@polytools3d.com	
 *@Modify	MerlinEl 2019
 

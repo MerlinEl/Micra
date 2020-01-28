@@ -80,6 +80,10 @@ if mcPolyCount == undefined do
 			--Get subobject segment selection count as string (view_text)
 			case subObjectLevel of 
 			(
+				undefined : ( --#createmode
+				
+					return (" " + obj.name)
+				)
 				1:--#vertex
 				(
 					local vSel = try (mcPoly.get #vSel) catch (#())

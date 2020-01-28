@@ -77,24 +77,6 @@ rollout mcVertexColorDialog "Vertex Color v1.05" width:408 height:348
 	local current_color_index = 1
 
 	--local functions
-	fn getSelectionType sel = (
-		
-		--hotfix (on undefined case Return 1 ?????)
-		if subobjectLevel == undefined do (
-		
-			return (if sel.count > 0 then "objects" else  "undefined")
-		)
-		case subobjectLevel of (
-			
-			0	: if sel.count > 0 then "objects" else "undefined"
-			1	: "verts"	
-			2	: "edges"	
-			3	: "edges"
-			4	: "faces"
-			5	: "faces"
-			undefined	: if sel.count > 0 then "objects" else "undefined"
-		)
-	)
 	fn isValidObject obj = (
 	
 		return classOf obj == Editable_Poly or classOf obj == Editable_Mesh	
@@ -306,7 +288,7 @@ rollout mcVertexColorDialog "Vertex Color v1.05" width:408 height:348
 		)
 		local obj = sel[1]
 		if not (isValidObject obj) do return false
-		local sel_type = getSelectionType #(obj)
+		local sel_type = mcMax.getSelectionType()
 		case sel_type of (
 			
 			"objects"	: selectObjectsByColor obj (getObjectColor obj )
@@ -360,7 +342,7 @@ rollout mcVertexColorDialog "Vertex Color v1.05" width:408 height:348
 			return false
 		)
 		local map_channel = 0
-		local sel_type = getSelectionType sel
+		local sel_type = mcMax.getSelectionType()
 		format "sel_type:% objects:%\n" sel_type sel.count
 		case sel_type of (
 			
@@ -380,7 +362,7 @@ rollout mcVertexColorDialog "Vertex Color v1.05" width:408 height:348
 			return gray
 		)
 		local map_channel = 0
-		local sel_type = getSelectionType sel
+		local sel_type = mcMax.getSelectionType()
 		format "sel_type:% objects:%\n" sel_type sel.count
 		case sel_type of (
 			
@@ -391,32 +373,34 @@ rollout mcVertexColorDialog "Vertex Color v1.05" width:408 height:348
 			"default"	: gray
 		)
 	)
-	fn getSelectedVertexAlpha s a = (
+	fn getSelectedVertexAlpha s a map_channel:-2 = (
 		
 		--format "sel changed\n"
 		local obj = selection[1]
-		if  subobjectLevel != 1 or classOf obj != Editable_Poly or  not (polyOp.getMapSupport obj -2) do return false
+		if  subobjectLevel != 1 or classOf obj != Editable_Poly or  not (polyOp.getMapSupport obj map_channel) do return false
 		local vsel = (getVertSelection obj) as Array
-		if vsel.count == 0 then (
+		local map_verts_count = polyOp.getNumMapVerts obj map_channel
+		if vsel.count == 0 or map_verts_count < vsel[1] then (
 			
 			spn_alpha.value = 0
 			sld_alpha.value = 0
 			return false
 		) else if vsel.count > 1 do return false
-		local col = polyOp.getMapVert obj -2 vsel[1]
+		local col = polyOp.getMapVert obj map_channel vsel[1] --poly object, channel, vertex map index
 		spn_alpha.value = col[1]*100
 		sld_alpha.value = col[1]*100
 	)
-	fn setSelectedVerticesAlpha val = (
+	fn setSelectedVerticesAlpha val map_channel:-2 = (
 		
 		local obj = selection[1]
 		if classOf obj != Editable_Poly do return false
-		if  not (polyOp.getMapSupport obj -2) do polyOp.setMapSupport obj -2 true
+		if  not (polyOp.getMapSupport obj map_channel) do polyOp.setMapSupport obj map_channel true
 		local vsel = (getVertSelection obj) as Array
-		if subobjectLevel != 1 or vsel.count == 0 do return false
+		local map_verts_count = polyOp.getNumMapVerts obj map_channel
+		if subobjectLevel != 1 or vsel.count == 0 or map_verts_count < vsel[1]  do return false
 		local col = [1,1,1] * (val / 100.0)
 		--format "vsel:% val:% col:%\n" vsel val col
-		with redraw off (for v in  vsel do polyOp.setMapVert obj -2 v col)
+		with redraw off (for v in  vsel do polyOp.setMapVert obj map_channel v col)
 		 --update changes (without this no alpha change is visible)
 		obj.SetVertexColor (color 0 0 0) 3 --Channel enums: {#VertexColor|#Illumination|#Alpha}
 		update obj
@@ -510,7 +494,7 @@ rollout mcVertexColorDialog "Vertex Color v1.05" width:408 height:348
 			return false
 		)
 		local verts_color =  bmp_colors[ current_color_index ]
-		local sel_type = getSelectionType sel
+		local sel_type = mcMax.getSelectionType()
 		format "sel_type:% objects:%\n" sel_type sel.count
 		case sel_type of (
 			
@@ -600,6 +584,74 @@ rollout mcVertexColorDialog "Vertex Color v1.05" width:408 height:348
 	)
 )
 
+
+/*
+obj = $
+chnl = -2
+if polyop.getMapSupport obj chnl do (
+
+	vsel = (polyOp.getVertSelection obj) as array
+	vfaces = polyOp.getFacesUsingVert obj vsel
+	map_vers = for f in vfaces collect (polyOp.getMapFace obj chnl f)
+	v = vsel[1]
+	polyOp.getMapVert obj chnl v
+)
+
+
+
+
+polyOp.getVertFlags obj v
+faces = obj.faces as bitarray
+polyop.getNumMapFaces obj chnl
+polyOp.getMapFace obj chnl 1131
+
+
+
+$.Unwrap_UVW.getVertexIndexFromFace 1 1
+$.Unwrap_UVW.getSelectedVertices() 
+
+
+obj = $
+obj_verts = obj.verts as bitarray
+obj_faces = obj.faces as bitarray
+polyop.setNumMapFaces obj -2 obj_faces.count keep:true
+polyop.defaultMapFaces obj -2
+
+
+obj = $
+polyOp.getMapSupport obj -2
+vert = (polyOp.getVertSelection obj as array)[1]
+polyOp.getFacesUsingVert obj vert
+
+
+polyOp.getVertFlags obj vert
+polyOp.setMapSupport obj -2 true
+map_verts = polyOp.getNumMapVerts obj -2 --channel
+obj_verts = obj.verts as bitarray
+*/
+
+
+
+
+/*
+
+map_verts = polyOp.getNumMapVerts obj -2 --channel
+for i = 1 to map_verts do  format "Map Vertex % = %\n" i (polyOp.getMapVert obj -2 i)
+
+polyOp.getMapFace obj theChannel 200
+
+theChannel = -2
+faces = obj.faces as bitarray
+for f in (faces) do
+(
+	map_verts = polyOp.getMapFace obj theChannel f
+	for v in map_verts do
+	(
+		uv = polyOp.getMapVert obj theChannel v
+		format "%\n" uv
+	)
+)
+*/
 
 	/*
 		$.SetSelection #Vertex #{322}

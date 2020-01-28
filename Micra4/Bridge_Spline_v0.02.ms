@@ -82,11 +82,11 @@ rollout mcSplineBridgeDialog "Spline Bridge:" width:192 height:240
 		select sp
 		subObjectLevel = 1
 	)
-	fn drawArcBetweenTwoPoints objA objB up:false = ( 
+	fn drawArcBetweenTwoPoints p1 p2 up:false = ( 
 
-		local p1 = objA.pos
-		local p2 = objB.pos
 		local p3 = getThirdPointCoordinates p1 p2 up:up
+
+p3.z = p1.z --hotfix for top projection
 
 		local v1 = (p3 - p1) * multi
 		local v2 = (p3 - p2) * multi
@@ -120,12 +120,16 @@ rollout mcSplineBridgeDialog "Spline Bridge:" width:192 height:240
 		local p1 = points_arr[1].pos
 		local p2 = points_arr[2].pos
 		local p3 = getThirdPointCoordinates p1 p2 up:(way == 1)
-
+	
+p3.z = p1.z --hotfix for top projection	
+	
 		local v1 = (p3 - p1) * multi
 		local v2 = (p3 - p2) * multi
 		local t1 = p1 + v1
 		local t2 = p2 + v2
-				
+		
+		t1.z = t2.z = 0
+
 		if debug do (
 
 			test_point_t1.pos=t1
@@ -147,7 +151,7 @@ rollout mcSplineBridgeDialog "Spline Bridge:" width:192 height:240
 			points_arr = sel
 			btn_pickA.text = sel[1].name
 			btn_pickB.text = sel[2].name
-			arc_shape = drawArcBetweenTwoPoints sel[1] sel[2] up:true
+			arc_shape = drawArcBetweenTwoPoints sel[1].pos sel[2].pos up:true
 			btn_pickS.text = arc_shape.name
 			select arc_shape
 			max modify mode
@@ -156,10 +160,27 @@ rollout mcSplineBridgeDialog "Spline Bridge:" width:192 height:240
 
 		) else if isEditPoly obj do (
 			
-			case subObjectLevel of
-			(
-				2:(capHoles obj)
-				3:(capHoles obj)
+			case subObjectLevel of (
+			
+				undefined : ()
+				1 : (
+				
+					local vsel = polyOp.getVertSelection obj
+					if vsel.numberSet == 2 do (
+					
+						local points = for v in vsel collect polyOp.getVert obj v
+						subObjectLevel = 0
+						arc_shape = drawArcBetweenTwoPoints points[1] points[2] up:true
+						btn_pickS.text = arc_shape.name
+						select arc_shape
+						max modify mode
+						subObjectLevel = 1
+						CompleteRedraw()
+						return OK
+					)
+				)
+				2 : (capHoles obj)
+				3 : (capHoles obj)
 			)
 			subObjectLevel = 4
 			createSplineBridge obj poly

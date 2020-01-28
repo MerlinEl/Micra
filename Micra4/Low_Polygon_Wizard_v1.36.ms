@@ -226,8 +226,9 @@ rollout mcLpWizardDialog "" width:528 height:84
 		(
 			case subObjectLevel of --independ of subobject level
 			(
-				1:--vertices
-				(
+				undefiend : () --create mode
+				1 : ( --vertices
+				
 					pushPrompt " Selecting Verts"
 					local num
 					ActiveVert = getHitVert()
@@ -248,10 +249,8 @@ rollout mcLpWizardDialog "" width:528 height:84
 					)
 					--format "activeVert:%\tActiveVertices:%\n" ActiveVert ActiveVertices
 				)
-				2:--edges
-				()
-				4:--faces
-				()
+				2 : () --edges
+				4 : () --faces
 			)
 			redrawViews()
 		),
