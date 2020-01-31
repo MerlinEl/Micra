@@ -57,7 +57,7 @@
     <mcCityManDialog active="true" pos="[-1356,415]" size="[500,988]" />
     <mcObjectInpectorDialog active="true" pos="[-1735,894]" size="[344,464]" />
     <mcQuickMaterialsDialog active="true" pos="[-1231,187]" size="[656,456]" />
-    <mcVertexColorDialog active="true" pos="[-577,327]" size="[408,348]" />
+    <mcVertexColorDialog active="true" pos="[590,438]" size="[408,348]" />
   </Properties_2>
   <Buttons>
     <btn_B2 action="Move_To_X" icon="28" />
