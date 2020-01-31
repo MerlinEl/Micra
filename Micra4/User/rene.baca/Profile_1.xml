@@ -54,10 +54,10 @@
     <mcDotnetVisualEditorDialog active="true" pos="[708,516]" size="[600,400]" />
     <mcDrawBezierDialog active="true" pos="[201,305]" size="[644,501]" />
     <gMcDrawBezierDialog active="true" pos="[387,308]" size="[644,501]" />
-    <mcCityManDialog active="true" pos="[-1356,415]" size="[500,988]" />
+    <mcCityManDialog active="true" pos="[-1352,415]" size="[500,988]" />
     <mcObjectInpectorDialog active="true" pos="[-1735,894]" size="[344,464]" />
-    <mcQuickMaterialsDialog active="true" pos="[-1231,187]" size="[656,456]" />
-    <mcVertexColorDialog active="true" pos="[590,438]" size="[408,348]" />
+    <mcQuickMaterialsDialog active="true" pos="[-1229,187]" size="[656,456]" />
+    <mcVertexColorDialog active="true" pos="[-486,502]" size="[408,348]" />
   </Properties_2>
   <Buttons>
     <btn_B2 action="Move_To_X" icon="28" />

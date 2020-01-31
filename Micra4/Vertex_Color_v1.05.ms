@@ -374,7 +374,10 @@ rollout mcVertexColorDialog "Vertex Color v1.05" width:408 height:348
 			"default"	: gray
 		)
 	)
-	
+	/**
+	*@Usage 
+		extract face verts alpha values
+	*/
 	fn getObjectAlphaData obj = (
 
 		local chnl = -2
@@ -390,7 +393,10 @@ rollout mcVertexColorDialog "Vertex Color v1.05" width:408 height:348
 		)
 		faces_data
 	)	
-
+	/**
+	*@Usage 
+		set face verts alpha values
+	*/
 	fn setObjectAlphaData obj faces_data = (
 
 		if obj.faces.count != faces_data.count do (
@@ -414,7 +420,10 @@ rollout mcVertexColorDialog "Vertex Color v1.05" width:408 height:348
 		convertToMesh obj
 		convertToPoly obj
 	)	
-	
+	/**
+	*@Usage 
+		fix imported geometry (from other applications) alpha map
+	*/
 	fn fixAlphaMap sel = (
 		
 		--maybe later add functionality to remember vertices value by vertex pos
