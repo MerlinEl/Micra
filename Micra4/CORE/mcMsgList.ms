@@ -37,6 +37,7 @@ struct MICRA_MESSAGE_LIST_STRUCTURE	(
 
 			"wait_todo"		: "This function is under construction.\nPlese wait. Will be finished soon :-)"
 			"call_help"		: "Something wierd was happen. Call Merlin to help you :-)"
+			"not_lod"			: "Selected Object must have lods."
 			"not_mesh"		: "Editable Mesh must be selected."
 			"not_poly"		: "Editable Poly must be selected."
 			"not_poly_src"	: "Source Editable Poly must be defined."

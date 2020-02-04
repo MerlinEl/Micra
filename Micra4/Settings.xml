@@ -2,12 +2,13 @@
 <SETTINGS>
   <Micra>
     <born val="04.25.2006" />
-    <version val="5.83" />
+    <version val="5.84" />
   </Micra>
   <Structures val="All registred Micra's Structures">
     <!--independent classes-->
     <mcStructMan val="on" info="structure manager" />
     <mcMsgList val="on" info="all info messages" />
+    <mcDisplay val="on" info="show message on screen with defined duration" />
     <mcProgLog val="on" info="progressbar with log" />
     <mcWinMsg val="on" />
     <mcWin32 val="on" info="denisT great work!" />
@@ -106,7 +107,7 @@
     <Randomize val="0.01" />
     <Rename val="0.02" />
     <Render_To_Texture_Mod val="0.04" />
-    <Repair_Object val="1.08" />
+    <Repair_Object val="1.09" />
     <Manage_Profiles val="0.06" />
     <Script_Manager val="0.14" />
     <Send_UVW_To_Ps val="0.03" />

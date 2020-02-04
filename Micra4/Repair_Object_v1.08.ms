@@ -8,22 +8,22 @@
 ----------------------------------------------------------------------------
 if mcRepairDialog != undefined do DestroyDialog mcRepairDialog
 ----------------------------------------------------------------------------
-rollout mcRepairDialog "" width:332 height:128
+rollout mcRepairDialog "" width:324 height:144
 (
 	-------------------------------------------------------------------------
 	local n, p, s, tmp, sel,oName_1, cfgPath, AutExe, f
 	local ver = mcFile.getScriptVersion "Repair_Object" 
 	local dMove = false, DmPos
 	-------------------------------------------------------------------------
-	GroupBox grp_1 "" pos:[4,4] width:324 height:120
-	radiobuttons rdo_1 "" pos:[20,40] width:126 height:48 labels:#("Standart Micra Repair", "Export/Import", "Merge to New Scene") default:1 columns:1
-	button btn_1 "Cancel" pos:[12,96] width:60 height:20 
-	button btn_2 "Accept" pos:[260,96] width:60 height:20
-	GroupBox grp2 "Chose Type:" pos:[12,20] width:152 height:72
-	GroupBox grp3 "Standart Custom:" pos:[168,20] width:152 height:72
-	checkbox chkSaveLinks "Save Links" pos:[180,40] width:100 height:16 checked:true
-	checkbox chkSaveWire "Save Wirecolor" pos:[180,56] width:100 height:16
-	checkbox chkSaveLayer "Save Layer" pos:[180,72] width:100 height:16 checked:true
+	GroupBox 'grp_1' "" pos:[4,4] width:316 height:136 align:#left
+	radiobuttons 'rdo_1' "" pos:[16,40] width:126 height:64 labels:#("Standart Micra Repair", "Export/Import", "Merge to New Scene", "Lod Object Repair") default:1 columns:1 align:#left
+	button 'btn_1' "Cancel" pos:[12,112] width:60 height:20 align:#left 
+	button 'btn_2' "Accept" pos:[248,112] width:60 height:20 align:#left
+	GroupBox 'grp2' "Chose Type:" pos:[12,20] width:140 height:88 align:#left
+	GroupBox 'grp3' "Standart Custom:" pos:[160,20] width:152 height:88 align:#left
+	checkbox 'chkSaveLinks' "Save Links" pos:[172,40] width:100 height:16 checked:true align:#left
+	checkbox 'chkSaveWire' "Save Wirecolor" pos:[172,56] width:100 height:16 align:#left
+	checkbox 'chkSaveLayer' "Save Layer" pos:[172,72] width:100 height:16 checked:true align:#left
 	fn saveLinks nodes =
 	(
 		if nodes.count == 0 do return #()

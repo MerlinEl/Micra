@@ -3,7 +3,7 @@ Global ls3dLodManagerDialog
 if ls3dLodManagerDialog != undefined do destroyDialog ls3dLodManagerDialog
 rollout ls3dLodManagerDialog "LS3D LOD Manager:" width:480 height:116
 (
-	struct LOD_DATA (lod0, lod1, lod2)
+	struct LOD_OBJECTS (lod0, lod1, lod2)
 	local force_load_structures = true
 	GroupBox 'grp1' "Columns" pos:[4,4] width:112 height:84 align:#left
 	label 'lbl1' "Lod0:" pos:[12,24] width:32 height:16 align:#left
@@ -125,7 +125,7 @@ rollout ls3dLodManagerDialog "LS3D LOD Manager:" width:480 height:116
 			local obj_lod2 = getNodeByName lod2_name
 			format "n1:% n2:% l1:% l2:%\n" lod1_name lod2_name obj_lod1 obj_lod2
 			
-			local ld = LOD_DATA lod0:obj_lod0
+			local ld = LOD_OBJECTS lod0:obj_lod0
 			if classOf obj_lod1 == Editable_Poly do ld.lod1 = obj_lod1
 			if classOf obj_lod2 == Editable_Poly do ld.lod2 = obj_lod2
 			if not (addLod ld) do failed_atempts += 1

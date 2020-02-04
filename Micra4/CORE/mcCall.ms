@@ -30,21 +30,9 @@ struct MICRA_CALL
 			)
 		)
 	),
-	fn displayMsg str col =
-	(
-		if classOf str != string do return false
-		
-		local viewSize = getviewsize()
-		local textSize = gw.getTextExtent str
-		local CoordX = (viewSize.x - textSize.x)/2
-			
-		completeredraw()
-		gw.wtext [CoordX,16,0] str color:col
-		gw.enlargeUpdateRect #whole
-		gw.updateScreen()
-	),
-	fn fileNameInScreen =
-	(
+	fn displayMsg str col = (mcDisplay.show str col duration:2000),
+	fn fileNameInScreen = (
+	
 		local viewSize, fName, textSize, View_X
 		viewSize = getviewsize()
 		fName = " " + (getFilenameFile maxFileName)-- put a space before name ,because max is crashing if first leter is "z"

@@ -1,13 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <UPDATE>
-  <VERSIONS latest="5.83">
+  <VERSIONS latest="5.84">
     <item_1 version="5.78" date="1_21_2020_9_00_50_AM" />
     <item_2 version="5.79" date="1_21_2020_9_26_23_AM" />
     <item_3 version="5.8" date="1_23_2020_3_39_06_PM" />
     <item_4 version="5.81" date="1_24_2020_12_16_41_PM" />
     <item_5 version="5.82" date="1_24_2020_4_43_05_PM" />
     <item_6 version="5.83" date="1_31_2020_10_40_48_AM" />
-    <item_7 version="5.76" date="1_20_2020_10_26_04_AM" />
+    <item_7 version="5.84" date="2_4_2020_4_19_13_PM" />
     <item_8 version="5.77" date="1_20_2020_1_33_59_PM" />
   </VERSIONS>
 </UPDATE>

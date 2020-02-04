@@ -57,7 +57,6 @@ rollout mcVertexColorDialog "Vertex Color v1.05" width:408 height:348
 	label 'lbl4' "value:" pos:[12,316] width:36 height:20 align:#left
 	slider 'sld_alpha' "" pos:[48,304] width:280 height:25 range:[0,100,0] type:#integer align:#left
 	spinner 'spn_alpha' "" pos:[328,316] width:68 height:16 range:[0,100,0] type:#integer align:#left
-	button 'btn_fix_alpha_map' "Fix Map" pos:[330,284] width:68 height:24 align:#left toolTip:"Fix Alpha Mapping Channel (-2)"
 
 	--local variables
 	local btn_set2_colors = #(red, green, blue)
@@ -374,67 +373,6 @@ rollout mcVertexColorDialog "Vertex Color v1.05" width:408 height:348
 			"default"	: gray
 		)
 	)
-	/**
-	*@Usage 
-		extract face verts alpha values
-	*/
-	fn getObjectAlphaData obj = (
-
-		local chnl = -2
-		struct FACE_ALPHA_DATA (verts = #(), alpha_values=#())
-		local faces_data = #()
-		for f=1 to obj.faces.count do (
-
-			local map_vers = polyOp.getMapFace obj chnl f
-			local face_verts = (polyOp.getFaceVerts obj f) as array
-			local alpha_values = for v in map_vers collect int((polyOp.getMapVert obj chnl v)[1]*100)
-			--format "(%)map verts:% (%)face verts:% alpha:%\n" map_vers.count map_vers face_verts.count face_verts alpha_values
-			append faces_data (FACE_ALPHA_DATA face_verts alpha_values)
-		)
-		faces_data
-	)	
-	/**
-	*@Usage 
-		set face verts alpha values
-	*/
-	fn setObjectAlphaData obj faces_data = (
-
-		if obj.faces.count != faces_data.count do (
-
-			format "Aborted! Objects must have identical topology.\n"
-			return false
-		)
-		local chnl = -2
-		for f=1 to obj.faces.count do with redraw off (
-
-			local alpha_values = faces_data[f].alpha_values
-			local map_vers = polyOp.getMapFace obj chnl f
-			for i=1 to map_vers.count do (
-				
-				local col = [1,1,1] * (alpha_values[i] / 100.0)
-				--format "set color:%\n" col
-				polyOp.setMapVert obj chnl map_vers[i] col
-			)
-		)
-		update obj
-		convertToMesh obj
-		convertToPoly obj
-	)	
-	/**
-	*@Usage 
-		fix imported geometry (from other applications) alpha map
-	*/
-	fn fixAlphaMap sel = (
-		
-		--maybe later add functionality to remember vertices value by vertex pos
-		for o in sel where classOf o == Editable_Poly do (
-		
-			local ad = getObjectAlphaData o
-			polyop.defaultMapFaces o -2
-			setObjectAlphaData o ad
-		)
-		completeRedraw()
-	)
 	fn getSelectedVertexAlpha s a map_channel:-2 = (
 		
 		--format "sel changed\n"
@@ -618,7 +556,6 @@ rollout mcVertexColorDialog "Vertex Color v1.05" width:408 height:348
 		for o in selection do o.vertexColorsShaded = false
 		completeRedraw()
 	)
-	on btn_fix_alpha_map pressed do undo "Fix Alpha Map" off (fixAlphaMap selection)
 	--COLOR
 	on btn_r pressed do ( setSelectionColor btn_set2_colors[1] )
 	on btn_g pressed do ( setSelectionColor btn_set2_colors[2]  )

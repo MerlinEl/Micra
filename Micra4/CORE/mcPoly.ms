@@ -1245,6 +1245,124 @@ struct MICRA_POLY
 		)
 		return sorted_verts
 	),
+	/**
+	*@Usage 
+		extract face verts alpha values
+	*/
+	fn getObjectAlphaData obj = (
+
+		local chnl = -2
+		struct FACE_ALPHA_DATA (verts = #(), alpha_values=#())
+		local faces_data = #()
+		for f=1 to obj.faces.count do (
+
+			local map_vers = polyOp.getMapFace obj chnl f
+			local face_verts = (polyOp.getFaceVerts obj f) as array
+			local alpha_values = for v in map_vers collect int((polyOp.getMapVert obj chnl v)[1]*100)
+			--format "(%)map verts:% (%)face verts:% alpha:%\n" map_vers.count map_vers face_verts.count face_verts alpha_values
+			append faces_data (FACE_ALPHA_DATA face_verts alpha_values)
+		)
+		faces_data
+	),	
+	/**
+	*@Usage 
+		set face verts alpha values
+	*/
+	fn setObjectAlphaData obj faces_data = (
+
+		if obj.faces.count != faces_data.count do (
+
+			format "Aborted! Objects must have identical topology.\n"
+			return false
+		)
+		local chnl = -2
+		for f=1 to obj.faces.count do with redraw off (
+
+			local alpha_values = faces_data[f].alpha_values
+			local map_vers = polyOp.getMapFace obj chnl f
+			for i=1 to map_vers.count do (
+				
+				local col = [1,1,1] * (alpha_values[i] / 100.0)
+				--format "set color:%\n" col
+				polyOp.setMapVert obj chnl map_vers[i] col
+			)
+		)
+		update obj
+		convertToMesh obj
+		convertToPoly obj
+	),	
+	/**
+	*@Usage 
+		fix imported geometry (from other applications) alpha map(-2)
+	*/
+	fn fixObjectAlphaMap objs = (
+		
+		--maybe later add functionality to remember vertices value by vertex pos
+		for o in objs where classOf o == Editable_Poly do (
+		
+			local ad = getObjectAlphaData o
+			polyop.defaultMapFaces o -2
+			setObjectAlphaData o ad
+		)
+		completeRedraw()
+	),
+	/**
+	*@Usage 
+		extract face verts color values
+	*/
+	fn getObjectColorData obj = (
+
+		local chnl = 0
+		struct FACE_COLOR_DATA (verts = #(), color_values=#())
+		local faces_data = #()
+		for f=1 to obj.faces.count do (
+
+			local map_vers = polyOp.getMapFace obj chnl f
+			local face_verts = (polyOp.getFaceVerts obj f) as array
+			local color_values = for v in map_vers collect (polyOp.getMapVert obj chnl v)
+			append faces_data (FACE_COLOR_DATA face_verts color_values)
+		)
+		faces_data
+	),	
+	/**
+	*@Usage 
+		set face verts color values
+	*/
+	fn setObjectColorData obj faces_data = (
+
+		if obj.faces.count != faces_data.count do (
+
+			format "Aborted! Objects must have identical topology.\n"
+			return false
+		)
+		local chnl = 0
+		for f=1 to obj.faces.count do with redraw off (
+
+			local color_values = faces_data[f].color_values
+			local map_vers = polyOp.getMapFace obj chnl f
+			for i=1 to map_vers.count do (
+				
+				polyOp.setMapVert obj chnl map_vers[i] color_values[i]
+			)
+		)
+		update obj
+		convertToMesh obj
+		convertToPoly obj
+	),	
+	/**
+	*@Usage 
+		fix imported geometry (from other applications) color map(0)
+	*/
+	fn fixObjectColorMap objs = (
+	
+		for o in objs where classOf o == Editable_Poly do (
+		
+			local ad = getObjectColorData o
+			polyop.defaultMapFaces o 0
+			setObjectColorData o ad
+		)
+		completeRedraw()
+	),
 	-------------------------------------------------------------
 	-------------------------------------------------------------
 	------              	OTHER    	                   ------
