@@ -61,10 +61,11 @@ Struct MICRA_POPUP (
 		::messageBox msg title:title beep:false
 	),
 	/**
-	* @example 
+	*@example 
 		typed_text = mcPopup.textBox title:"New Profile Name:" saved_pos:"Micra_TextBox"
 		format "typed_text:%\n" typed_text
-	@info this code can't be executed by enter (he would close immediately). For call, use  menu, buttons, etc...
+	*@Warning 
+		this code can't be executed by enter (he would close immediately). For call, use  menu, buttons, etc...
 	*/
 	fn textBox title:"Type a text here:" form_name:"MaxCenter" crypt:false = ( --if form_name is not "MaxCenter" save - load  pos at defined Name
 	
@@ -165,9 +166,9 @@ Struct MICRA_POPUP (
 		return _typed_text
 	),
 	/**
-	* @example 
+	*@Example 
 		mcPopUp.msgBox "Ahoj" duration:1.5 
-	* @info if duration is set, window will apear in compact mode
+	*@Info if duration is set, window will apear in compact mode
 	*/
 	fn msgBox msg title:"Micra:" duration:undefined pos:undefined = (
 	 	

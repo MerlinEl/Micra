@@ -44,7 +44,7 @@ rollout mcUnwrapEditorDialog "UV+" width:96 height:648
 	GroupBox 'grp12' "Complex" pos:[4,356] width:88 height:96 align:#left
 	button 'btn_lm' "p1" pos:[8,372] width:24 height:24 images:(mcCall.getIcon 116) toolTip:"Add Lightmap"
 	button 'btn_stitch' "St" pos:[34,372] width:24 height:24 toolTip:"Stitch Selected Edges (Experimental)"
-	button 'btn_fit' "St" pos:[64,372] width:24 height:24 toolTip:"Fit To Rect" align:#left
+	button 'btn_fit' "St" pos:[64,372] width:24 height:24 toolTip:"Fit To Rect (+Ctrl Proportionaly)" align:#left
 	button 'btn_distr_x_plus' "Dx+" pos:[36,504] width:24 height:24 toolTip:"Distribute Elements At X Expand" align:#left
 	button 'btn_distr_x_zero' "Dx-" pos:[60,504] width:24 height:24 toolTip:"Distribute Elements At X Contract" align:#left
 	button 'btn_randomize_x' "RandX" pos:[8,400] width:36 height:24 toolTip:"Move Elements Random X" align:#left
@@ -364,12 +364,19 @@ rollout mcUnwrapEditorDialog "UV+" width:96 height:648
 			--format "next bound:%\n" next_bound
 		)
 	)
-	fn stretchUvsToFitSquare = (
+	fn fitUVS = (
 
 		local mod_uvw = modpanel.getcurrentobject()
 		if classOf  mod_uvw!= Unwrap_UVW do return false
 		local sel_verts = mcPolyMap.getCurentSelectionAs mod_uvw #verts --this procedure also define gco and select vertices
-		mcPolyMap.fitToSquare mod_uvw sel_verts
+		if keyboard.controlPressed then undo "Resize_UVW"  on (
+			
+			mcPolyMap.fitToSquareProportionally mod_uvw sel_verts move_zero:true
+			
+		) else undo  "Resize_UVW"  on (
+
+			mcPolyMap.fitToSquare mod_uvw sel_verts
+		)
 	)
 	/*
 		not works because of edges reindexing
@@ -421,7 +428,7 @@ rollout mcUnwrapEditorDialog "UV+" width:96 height:648
 	on btn_rotate_v pressed do alignElements #vertical
 	on btn_rotate_h pressed do alignElements #horizontal
 	on btn_stitch pressed do stitchSelectedEdges()
-	on btn_fit pressed do stretchUvsToFitSquare()
+	on btn_fit pressed do fitUVS()
 	on btn_rotate_verts pressed do rotateVertices #right
 	on btn_copy_pos pressed do copyVertexPos()
 	on btn_paste_posx pressed do pastePos #X

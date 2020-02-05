@@ -1,0 +1,9 @@
+name "Advanced UV Normalizer"
+version 1.4
+
+extract to $temp\auvnormalizer
+
+run  advanced_uv_normalizer_1.4.mse
+drop advanced_uv_normalizer_1.4.mse
+
+clear temp
