@@ -19,26 +19,26 @@ global gTexelRatioTools = undefined
 
 struct sTexelRatioTools
 (	
+	texture_sizes = #("64", "128","256","512","1024","2048","4096", "8192"),
+	map_channels = #("1","2","3","4"),
 	isHold = false,
-	myItems = #("128","256","512","1024","2048","4096", "8192"),
-	myUVs = #("1","2","3","4"),
 	cmLengthSize = 100.0,
 	
-	public function GetUVs &ddlUVs =
+	public function initUIChannels &ddl =
 	(
-		ddlUVs.Items = myUVs
+		ddl.Items = map_channels
+	),
+	
+	public function initUITextureSizes &ddl =
+	(
+		ddl.Items = texture_sizes
 	),
 	
 	public function GetConfigProperty propName default type=
 	(
 		return ((::gSaveConfig.GetConfigProperty "P3DTexelRatioTools" propName default:default) as type)
 	),
-	
-	public function GetPixelSizes &ddlPixels=
-	(
-		--ddlPixels.items = myItems
-	),
-	
+
 	public function ExistsModifier obj modClass =
 	(
 		for m in obj.modifiers do
@@ -62,10 +62,29 @@ struct sTexelRatioTools
 		else false
 	),
 	
-	public function GetTexelDensity obj pixelSize_x pixelSize_y lengthSize mapChannel isCollapseStack=
+	public function FilterInstances &inSelection =
 	(
--- 		pixelSize_x = 1024													-- this is not nice, but its fixed so what? Sue me universe!
--- 		print pixelSize_x
+		mySelection = inSelection
+		newSelection = #()
+		for obj in mySelection do
+		(
+			myInstances = #()
+			
+			if InstanceMgr.GetInstances obj &myInstances > 0 then
+			(
+				if findItem newSelection myInstances[1] == 0 do
+				(
+					append newSelection myInstances[1]
+					continue
+				)
+			)
+		)
+		inSelection = #()
+		inSelection = newSelection
+	),
+	
+	public function GetTexelDensity obj pixelSize_x pixelSize_y mapChannel isCollapseStack=
+	(
 		setCommandPanelTaskMode #modify
 		maxOps.CollapseNodeTo obj 1 off
 		unwrapUVWMod = Unwrap_UVW()
@@ -87,7 +106,7 @@ struct sTexelRatioTools
 		unwrapUVWMod.getAreaByNode selPolys &areaUVW &areaGeom obj
 		subObjectLevel = 0
 		sqrResolution = pixelSize_x * pixelSize_y * 1.0			-- px
-		sqrRealLength = lengthSize * lengthSize * 1.0		-- cm
+		sqrRealLength = cmLengthSize * cmLengthSize * 1.0		-- cm
 		avgAreaGeom = areaGeom / sqrRealLength
 		avgAreaUVW = areaUVW/*/obj.numFaces*/
 		
@@ -102,27 +121,20 @@ struct sTexelRatioTools
 		return texelDensity
 	),
 	
-	public function SetTexelDensityOnSelection inObjects newTexelDensity pixelSize_x pixelSize_y lengthSize mapChannel collapseMod=
+	public function SetTexelDensityOnSelection inObjects newTexelDensity pixelSize_x pixelSize_y mapChannel collapseMod=
 	(
--- 		pixelSize_x = 512													-- this is not nice, but its fixed so what? Sue me universe!
-		
--- 		print newTexelDensity
--- 		print pixelSize_x
+
 		backupObjects = inObjects
 		setCommandPanelTaskMode #modify
 		maxOps.CollapseNodeTo obj 1 off
-		::gP3DChannelInfoTools.FilterInstances &inObjects		-- filters Instance Objects
+		filterInstances &inObjects		-- filters Instance Objects
 		
 		
-		for obj in inObjects do
-		(
+		for obj in inObjects do (
 			
 			select obj
-			
-			oldTexelDensity = GetTexelDensity obj  pixelSize_x pixelSize_y lengthSize mapChannel false
-			
-			--oldTexelDensity = GetTexelDensity obj  pixelSize_x lengthSize mapChannel false
-			
+			oldTexelDensity = GetTexelDensity obj  pixelSize_x pixelSize_y mapChannel false
+		
 			newScale = newTexelDensity / oldTexelDensity
 			
 			subObjectLevel = 3
@@ -141,52 +153,36 @@ struct sTexelRatioTools
 		)
 		
 		select backupObjects
+		oldTexelDensity
 	),
 	
-	public function PackSelection inObjects spacing isNormalized isRotate isFillHoles mapChannel collapseMod isRescale=
-	(
-		setCommandPanelTaskMode #modify
-		::gP3DChannelInfoTools.FilterInstances &inObjects
+	--UVW
+	public function GetTexelDensityUV mod_uvw fsel pixelSize_x pixelSize_y mapChannel =(
+	
+		subObjectLevel = 3
 		
-		for obj in inObjects do
-		(
-			select obj
-			unwrapUVWMod
-			if(ExistsModifier obj Unwrap_UVW == false)then
-			(
-				unwrapUVWMod = Unwrap_UVW()
-				addModifier obj unwrapUVWMod	
-			)
-			else
-			(
-				unwrapUVWMod = obj.modifiers[#unwrap_uvw]
-			)
-			
-			dialogMonitorOps.unRegisterNotification id:#unwrap_reset
-				unwrapUVWMod.SetMapChannel mapChannel
-				dialogMonitorOps.enabled = true
-				dialogMonitorOps.interactive = false
-			dialogMonitorOps.RegisterNotification confirmReset id:#unwrap_reset
-			unwrapUVWMod.reset()
-			dialogMonitorOps.enabled = false
-			
-			subObjectLevel = 3
-			unwrapUVWMod.selectFacesByNode #{} obj
-			unwrapUVWMod.selectFacesByNode #{1..obj.numFaces} obj
-			
-			
-			unwrapUVWMod.SetPackRescaleCluster isRescale
-			unwrapUVWMod.pack 2 spacing isNormalized isRotate isFillHoles
-			
-			
-			subObjectLevel = 0
-			
-			if(collapseMod)then
-			(
-				maxOps.CollapseNodeTo obj 1 off
-			)
-		)
-		select inObjects
+		mod_uvw.getArea fsel &left &bottom &width &height &uv_area &area_geo
+		
+		sqrResolution = pixelSize_x * pixelSize_y * 1.0			-- px
+		sqrRealLength = cmLengthSize * cmLengthSize * 1.0		-- cm
+		avgAreaGeom = area_geo / sqrRealLength
+		avgAreaUVW = uv_area
+		
+		texelDensity = sqrt ((sqrResolution * avgAreaUVW) / (sqrRealLength * avgAreaGeom))
+		
+		return texelDensity
+	),
+	
+	public function SetTexelDensityUV mod_uvw fsel newTexelDensity pixelSize_x pixelSize_y mapChannel = (
+	
+		subObjectLevel = 3
+		local first_uv_face =  #{(fsel as array)[1]}
+		oldTexelDensity = GetTexelDensityUV mod_uvw first_uv_face pixelSize_x pixelSize_y mapChannel
+	
+		newScale = newTexelDensity / oldTexelDensity
+		
+		mod_uvw.scaleSelectedCenter (newScale) 0
+		oldTexelDensity
 	),
 	
 	public function SaveConfig =
@@ -214,7 +210,6 @@ struct sTexelRatioTools
 	
 	public function OpenDialog =
 	(
-		::P3DLogL "START: TexelRatioTools"
 		createDialog ::gTexelRatioToolsUI
 	),
 	
@@ -238,16 +233,3 @@ if(::gTexelRatioTools == undefined)then
 	::gTexelRatioTools = sTexelRatioTools()
 	::gTexelRatioTools.Init()
 )
-
-
-
-macroScript TexelRatioTools
-category:"Pivo3D"
-tooltip:"Texel Ratio Tools"
-buttonText:"Texel Ratio Tools"
-Icon:#("P3DIcons",10)
-(
-	on execute do ::gTexelRatioTools.OpenDialog()
-)
-
--- gTexelRatioTools.OpenDialog()

@@ -42,7 +42,7 @@ rollout mcUnwrapEditorDialog "UV+" width:96 height:648
 	button btn_align_c "C" pos:[36,292] width:24 height:24 images:(mcCall.getIcon 236) toolTip:"Align Center"
 	
 	GroupBox 'grp12' "Complex" pos:[4,356] width:88 height:96 align:#left
-	button 'btn_lm' "p1" pos:[8,372] width:24 height:24 images:(mcCall.getIcon 116) toolTip:"Add Lightmap"
+	button 'btn_texel_density' "p1" pos:[8,372] width:24 height:24 images:(mcCall.getIcon 116) toolTip:"Texel Density"
 	button 'btn_stitch' "St" pos:[34,372] width:24 height:24 toolTip:"Stitch Selected Edges (Experimental)"
 	button 'btn_fit' "St" pos:[64,372] width:24 height:24 toolTip:"Fit To Rect (+Ctrl Proportionaly)" align:#left
 	button 'btn_distr_x_plus' "Dx+" pos:[36,504] width:24 height:24 toolTip:"Distribute Elements At X Expand" align:#left
@@ -422,7 +422,7 @@ rollout mcUnwrapEditorDialog "UV+" width:96 height:648
 	on btn_align_t pressed do alignTo #top
 	on btn_align_b pressed do alignTo #bottom
 	on btn_align_c pressed do alignTo #center
-	on btn_lm pressed do undo "Add Lightmap" on mcAction.addLightMap 2
+	on btn_texel_density pressed do mcFile.fileInVersion "LS3D_Texel_Density" 
 	on btn_randomize_x pressed do randomizeElements #X
 	on btn_randomize_y pressed do randomizeElements #Y	
 	on btn_rotate_v pressed do alignElements #vertical
