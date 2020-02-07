@@ -6,36 +6,42 @@ Global mcTemplateDialog
 	mcTemplateDialog.open()
 	mcTemplateDialog.close()
 	mcTemplateDialog.moveTo [100, 200]
+	icons 
+		? = 306
+		! = 307
+		ok = 308
+		x = 309
 	atd...
 */
 if ::mcTemplateDialog != undefined do try(mcTemplateDialog.close())catch()
 struct DOTNET_MAIN_STRUCT  (
 	
 public	
-	title,
+	formName,
 	--define interface components
 	form = dotNetObject "MaxCustomControls.MaxForm",
 	lblT = dotNetObject "Label",
+	btnOK = dotNetObject "button",
 	btnClose = dotNetObject "button",
 	tlp = dotNetObject "TableLayoutPanel",
 	lblMsg = dotNetObject "Label",
 	--private variables
 	pos				= [0, 0],
-	size			= [200, 100],
+	size			= [100, 28],
 	minimized		= false, 
-	bar_height		= 14,
+	bar_height		= 18,
 	border_offset	= 2,
-	btn_size		= 24,
+	btn_size		= 22,
 	debug			= 0,
 	netDMove = false,
-	msg_min_size = [200, 40],
+	msg_min_size = [100, 28],
 	msg_max_size = [800, 600],
 	
 public
 	--Open / Close (with default setup, save position to INI)
 	fn open = (if iskindof form dotnetobject do mcDotnet.dShow form),
 	fn close = (if iskindof form dotnetobject do form.Close()),
-	fn getName = ( title ),
+	fn getName = ( formName ),
 	fn getPos = ( [form.location.x, form.location.y] ),
 	fn getSize = ( [form.width, form.height] ),
 	fn setPos pos = ( form.location = mcDotnet.dPoint pos ),
@@ -88,8 +94,7 @@ private
 	),
 	fn closeForm s a = (
 		
-		local form = s.parent
-		mcFile.saveDialogSettings form.name "Properties_2" --save form position after close
+		local form = if s.name == "btn_close" then s.parent else s.parent.parent
 		form.Close()
 	),
 	-- Custom  Functions
@@ -97,12 +102,13 @@ private
 	
 		form.width = tlp.width + border_offset * 2
 		form.height = tlp.height + bar_height + border_offset * 3
-		btnClose.location = mcDotnet.dPoint [form.width - btnClose.width - border_offset  , border_offset]
-		lblT.width = form.width - border_offset*10
+		lblT.width = form.width - border_offset * 2
+		btnClose.location = mcDotnet.dPoint [form.width - btnClose.width  , 0]
 	),
-	public fn addText msg = (
+	public fn msgBox msg tille:"Message Box:" = (
 	
 		lblMsg.Text = msg
+		lblT.Text = " " + tille --add little offset from start
 	),
 	-->
 	
@@ -110,16 +116,16 @@ private
 	fn init  =  (
 		
 		--setup interface
-		local form_settings = mcFile.readDialogSettings title "Properties_2" --get saved pos and size
+		local form_settings = mcFile.readDialogSettings formName "Properties_2" --get saved pos and size
 		if form_settings != undefined do (
 		
 			pos = execute (form_settings.get "pos")
 			--size = execute (form_settings.get "pos") --causeing trouble
 		)
 		--size = from_data.size (when loaded every time is les and less....????)
-		--format " load form:%  pos:% size:%\n" title pos size
+		--format " load form:%  pos:% size:%\n" formName pos size
 		
-		form.name = form.text = title
+		form.name = form.text = formName
 		form.ControlBox  = false --hide main bar
 		form.ShowInTaskbar = false
 		form.StartPosition = form.StartPosition.Manual
@@ -132,19 +138,28 @@ private
 		--toolbar
 		lblT.bounds = mcDotnet.dRect [border_offset, border_offset] [size.x - border_offset*10 , bar_height]
 		lblT.BackColor = mcDotnet.uiColor #back
-		lblT.ForeColor = mcDotnet.uiColor #text
-		lblT.textAlign = lblMsg.textAlign.MiddleCenter
-		lblT.Text = "Dialog Template v" + (mcFile.getScriptVersion "Dialog_Template") --update script title with version
+		lblT.ForeColor = mcDotnet.dColor (color 255 116 234)
+		--lblT.textAlign = lblMsg.textAlign.MiddleCenter
+		lblT.font = mcDotnet.dFont font:"Arial" size:10 style:"Bold"
+		lblT.Text = "..."
 		
-		--min max button
+		--OK buton
+		btnOK.name = "btn_icon"
+		btnOK.FlatStyle = btnOK.FlatStyle.flat
+		btnOK.BackColor = mcDotnet.uiColor #btn
+		btnOK.ForeColor = mcDotnet.uiColor #fore
+		btnOK.Image = mcCall.getIconDn 308
+		btnOK.bounds = mcDotnet.dRect [0, 0] [btn_size, btn_size]
+		
+		--Close button
 		btnClose.name = "btn_close"
 		btnClose.FlatStyle = btnClose.FlatStyle.flat
 		btnClose.BackColor = mcDotnet.uiColor #btn
-		btnClose.ForeColor = mcDotnet.uiColor #text
-		btnClose.Image = mcCall.getIconDn 42
-		--btnClose.text = "x"
-		btnClose.Size = mcDotnet.dSize [btn_size, bar_height]
-
+		btnClose.ForeColor = mcDotnet.uiColor #fore
+		btnClose.Image = mcCall.getIconDn 309
+		btnClose.bounds = mcDotnet.dRect [0, 0] [btn_size, btn_size]
+		btnClose.visible = false
+		
 		--Componnts Layout
 		tlp.Bounds  = mcDotnet.dRect [border_offset, bar_height + border_offset * 2] [size.x - 20, size.y - 58]
 		tlp.backColor = mcDotnet.uiColor #btn
@@ -160,8 +175,8 @@ private
 		lblMsg.MinimumSize = mcDotnet.dSize msg_min_size	
 		lblMsg.MaximumSize = mcDotnet.dSize msg_max_size
 		lblMsg.AutoSize = true
-		lblMsg.foreColor = mcDotnet.dColor white
-		lblMsg.font = mcDotnet.dFont font:"Arial" size:12 style:"Regular"
+		lblMsg.foreColor = mcDotnet.dColor (color 180 180 255)
+		lblMsg.font = mcDotnet.dFont font:"Verdana" size:12 style:"Regular"
 		lblMsg.Text = "..."
 		-->
 		
@@ -169,10 +184,14 @@ private
 		dotnet.addEventHandler form "Shown" onFormCreated
 		dotnet.addEventHandler form "Closed" onCloseForm
 		dotnet.AddEventHandler form "BackColorChanged" changeBackcolor --override form backcolor (without this form color is default)
-		dotNet.addEventHandler btnClose "MouseClick" closeForm
 		dotNet.addEventHandler lblT   "MouseMove" onLblTMouseMove
 		dotNet.addEventHandler lblT   "MouseDown" onLblTMouseDown 
 		dotNet.addEventHandler lblT   "MouseUp" onLblTMouseUp
+		dotNet.addEventHandler lblMsg  "MouseUp" closeForm
+		
+-- 		dotNet.addEventHandler btnOK  "MouseUp" onAccept
+-- 		dotNet.addEventHandler btnClose  "MouseUp" onCancel
+		dotNet.addEventHandler btnClose  "MouseUp" closeForm
 		
 		--Custom Events
 		dotNet.addEventHandler tlp  "Resize" onLblMsgTextChanged
@@ -181,19 +200,21 @@ private
 		
 		--Add Controls
 		tlp.Controls.Add(lblMsg)
-		form.controls.addRange ( #(tlp, btnClose, lblT)  )
+		form.controls.addRange ( #(btnClose, tlp, lblT)  ) --btnOK, btnClose
 		OK
 	),
 	initialized = init()  --strange think but works
 )
-::mcTemplateDialog = DOTNET_MAIN_STRUCT title:"mcTemplateDialog"
+::mcTemplateDialog = DOTNET_MAIN_STRUCT formName:"mcTemplateDialog"
 ::mcTemplateDialog.open()
-::mcTemplateDialog.addText "In this post we shall learn how to write a simple socket server in python. This has already been covered in the previous tutorial. In this post we shall learn few more things about programming server sockets like handling multiple connections with the select method."
+tx = "In this post we shall learn how to write a simple socket server in python. This has already been covered in the previous tutorial. In this post we shall learn few more things about programming server sockets like handling multiple connections with the select method."
+tt = "Micra Update:"
+::mcTemplateDialog.msgBox tx title:tt type:info
 
 /*
-::mcTemplateDialog.addText "Text contents"
-::mcTemplateDialog.addText "But this also aligns the label control to the centre"
-::mcTemplateDialog.addText "DotNet controls cannot only be placed inside 3ds Max Dialogs and Rollouts, but they can also be used to generate user interfaces implemented completely using DotNet Forms."
+::mcTemplateDialog.msgBox "Text contents"
+::mcTemplateDialog.msgBox "But this also aligns the label control to the centre"
+::mcTemplateDialog.msgBox "DotNet controls cannot only be placed inside 3ds Max Dialogs and Rollouts, but they can also be used to generate user interfaces implemented completely using DotNet Forms."
 */
 
 

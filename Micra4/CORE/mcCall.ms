@@ -184,7 +184,7 @@ struct MICRA_CALL
 		local bmp_dn = (dotNetObject "Drawing.Bitmap" w h) --Create new bitmap object
 		--bmp_dn.ColorDepth = bmp_dn.ColorDepth.Depth24Bit
 		local gra  = (dotNetClass "Drawing.Graphics").fromImage bmp_dn --Create new Graphics object
-		local newRect = netDrRect [ -1, -1 ] [icn_size, icn_size]  --adjust icon offset X in button 
+		local newRect = mcDotnet.dRect [ -1, -1 ] [icn_size, icn_size]  --adjust icon offset X in button 
 		gra.DrawImage img_lib newRect pos.x pos.y w h (dotNetClass "Drawing.GraphicsUnit").Pixel	
 		img_lib.dispose()
 		bmp_dn.MakeTransparent (netDrColor black)--(color 75 75 75)) --gray

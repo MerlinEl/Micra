@@ -12,27 +12,30 @@ if ::mcTemplateDialog != undefined do try(mcTemplateDialog.close())catch()
 struct DOTNET_MAIN_STRUCT  (
 	
 public	
-	formName,
+	title,
 	--define interface components
 	form = dotNetObject "MaxCustomControls.MaxForm",
-	lblT = dotNetObject "label",
-	btnMin = dotNetObject "button",
+	lblT = dotNetObject "Label",
+	btnIcon = dotNetObject "button",
 	tlp = dotNetObject "TableLayoutPanel",
+	lblMsg = dotNetObject "Label",
 	--private variables
 	pos				= [0, 0],
-	size			= [320, 220],
+	size			= [200, 100],
 	minimized		= false, 
-	old_height, 
-	bar_height		= 14,
+	bar_height		= 18,
 	border_offset	= 2,
 	btn_size		= 24,
 	debug			= 0,
 	netDMove = false,
+	msg_min_size = [200, 40],
+	msg_max_size = [800, 600],
+	
 public
 	--Open / Close (with default setup, save position to INI)
 	fn open = (if iskindof form dotnetobject do mcDotnet.dShow form),
 	fn close = (if iskindof form dotnetobject do form.Close()),
-	fn getName = ( formName ),
+	fn getName = ( title ),
 	fn getPos = ( [form.location.x, form.location.y] ),
 	fn getSize = ( [form.width, form.height] ),
 	fn setPos pos = ( form.location = mcDotnet.dPoint pos ),
@@ -73,24 +76,6 @@ private
 			)
 		)
 	),
-	-- min max form
-	fn minMaxForm s a = ( -- s = Button, a = MouseEventArgs
-		
-		local _mcs = mcTemplateDialog --struct instance
-		if _mcs.old_height == undefined do _mcs.old_height = _mcs.form.height
-		local minimized = _mcs.form.height < _mcs.old_height
-		--format "height old:% current:% was minimized:%\n"  _mcs.old_height _mcs.form.height minimized
-		if minimized then ( --maximize
-			
-			s.text = "+"
-			_mcs.form.height = _mcs.old_height --restore height
-		) else ( --minimize
-			
-			s.text = "-"
-			_mcs.old_height		=	_mcs.form.height --store max size
-			_mcs.form.height	= _mcs.bar_height + _mcs.border_offset*2 --minimize
-		)
-	),		
 	fn changeBackcolor s a = (s.backColor = mcDotnet.dColor (mcUIColors.get #fore)), --override form backcolor
 	fn onFormCreated s a = (
 		
@@ -102,22 +87,32 @@ private
 		mcFile.saveDialogSettings s.name "Properties_2" --save form position after close
 	),
 	-- Custom  Functions
+	fn onLblMsgTextChanged s a = (
+	
+		form.width = tlp.width + border_offset * 2
+		form.height = tlp.height + bar_height + border_offset * 3
+		lblT.width = form.width - border_offset * 2
+	),
+	public fn addText msg = (
+	
+		lblMsg.Text = msg
+	),
 	-->
 	
 	-- main function
 	fn init  =  (
 		
 		--setup interface
-		local form_settings = mcFile.readDialogSettings formName "Properties_2" --get saved pos and size
+		local form_settings = mcFile.readDialogSettings title "Properties_2" --get saved pos and size
 		if form_settings != undefined do (
 		
 			pos = execute (form_settings.get "pos")
 			--size = execute (form_settings.get "pos") --causeing trouble
 		)
 		--size = from_data.size (when loaded every time is les and less....????)
-		--format " load form:%  pos:% size:%\n" formName pos size
+		--format " load form:%  pos:% size:%\n" title pos size
 		
-		form.name = form.text = formName
+		form.name = form.text = title
 		form.ControlBox  = false --hide main bar
 		form.ShowInTaskbar = false
 		form.StartPosition = form.StartPosition.Manual
@@ -130,74 +125,97 @@ private
 		--toolbar
 		lblT.bounds = mcDotnet.dRect [border_offset, border_offset] [size.x - border_offset*10 , bar_height]
 		lblT.BackColor = mcDotnet.uiColor #back
-		lblT.ForeColor = mcDotnet.uiColor #text
-		lblT.Text = "Dialog Template v" + (mcFile.getScriptVersion "Dialog_Template") --update script formName with version
+		lblT.ForeColor = mcDotnet.dColor (color 255 116 234)
+		lblT.textAlign = lblMsg.textAlign.MiddleCenter
+		lblT.font = mcDotnet.dFont font:"Arial" size:10 style:"Bold"
+		lblT.Text = "Dialog Template v" + (mcFile.getScriptVersion "Dialog_Template") --update script title with version
 		
 		--min max button
-		btnMin.FlatStyle = btnMin.FlatStyle.flat
-		btnMin.BackColor = mcDotnet.uiColor #btn
-		btnMin.ForeColor = mcDotnet.uiColor #text
-		btnMin.text = "-"
-		btnMin.Bounds = mcDotnet.dRect [size.x - (btnMin.width /2) - (border_offset*2) - 1 , border_offset] [btn_size, bar_height]
-		
+		btnIcon.name = "btn_close"
+		btnIcon.FlatStyle = btnIcon.FlatStyle.flat
+		btnIcon.BackColor = mcDotnet.uiColor #btn
+		btnIcon.ForeColor = mcDotnet.uiColor #fore
+		btnIcon.Image = mcCall.getIconDn 306
+		--btnIcon.text = "x"
+		btnIcon.bounds = mcDotnet.dRect [0, 0] [24, 24]
+
 		--Componnts Layout
 		tlp.Bounds  = mcDotnet.dRect [border_offset, bar_height + border_offset * 2] [size.x - 20, size.y - 58]
 		tlp.backColor = mcDotnet.uiColor #btn
-		
+		tlp.AutoSize = true
+				
 		--Custom Components
+		--lblMsg.Anchor = dotnet.combineEnums mcDotnet.AnchorStyles.Left mcDotnet.AnchorStyles.Right
+		lblMsg.TabIndex = 0
+		lblMsg.textAlign = lblMsg.textAlign.MiddleCenter
+		lblMsg.Size = mcDotnet.dSize [10, 10]
+		lblMsg.Location = mcDotnet.dPoint [border_offset, bar_height + border_offset * 2]
+		--WordWrap, MultiLine 
+		lblMsg.MinimumSize = mcDotnet.dSize msg_min_size	
+		lblMsg.MaximumSize = mcDotnet.dSize msg_max_size
+		lblMsg.AutoSize = true
+-- 		lblMsg.foreColor = mcDotnet.dColor (color 138 146 255)
+-- 		lblMsg.foreColor = mcDotnet.dColor (color 200 200 255)
+		lblMsg.foreColor = mcDotnet.dColor (color 180 180 255)
+		lblMsg.font = mcDotnet.dFont font:"Verdana" size:12 style:"Regular"
+		lblMsg.Text = "..."
 		-->
 		
 		-- Default Events
 		dotnet.addEventHandler form "Shown" onFormCreated
 		dotnet.addEventHandler form "Closed" onCloseForm
 		dotnet.AddEventHandler form "BackColorChanged" changeBackcolor --override form backcolor (without this form color is default)
-		dotNet.addEventHandler btnMin "MouseClick" minMaxForm
 		dotNet.addEventHandler lblT   "MouseMove" onLblTMouseMove
 		dotNet.addEventHandler lblT   "MouseDown" onLblTMouseDown 
 		dotNet.addEventHandler lblT   "MouseUp" onLblTMouseUp
-	
+		
 		--Custom Events
+		dotNet.addEventHandler tlp  "Resize" onLblMsgTextChanged
+		-- dotNet.addEventHandler lblMsg  "TextChanged" onLblMsgTextChanged
 		-->
 		
 		--Add Controls
-		form.controls.addRange ( #(tlp, btnMin, lblT)  )
+		tlp.Controls.Add(lblMsg)
+		form.controls.addRange ( #(btnIcon, tlp, lblT)  )
 		OK
 	),
 	initialized = init()  --strange think but works
 )
-::mcTemplateDialog = DOTNET_MAIN_STRUCT formName:"mcTemplateDialog"
+::mcTemplateDialog = DOTNET_MAIN_STRUCT title:"mcTemplateDialog"
 ::mcTemplateDialog.open()
+::mcTemplateDialog.addText "In this post we shall learn how to write a simple socket server in python. This has already been covered in the previous tutorial. In this post we shall learn few more things about programming server sockets like handling multiple connections with the select method."
 
-
---test TopMost
 /*
-Global User32
-fn CreateUser32Assembly = (
-
-	local source = "using System;\n"
-	source += "using System.Runtime.InteropServices;\n"
-	source += "class User32\n"
-	source += "{\n"
-	source += " [DllImport(\"user32.dll\")]\n"
-	source += " public static extern bool SetWindowPos(Int64 hWnd, int hWndArg, int Left, int Top, int Width, int Height, int hWndFlags);\n"
-	source += "}\n"
-	csharpProvider = dotnetobject "Microsoft.CSharp.CSharpCodeProvider"
-	compilerParams = dotnetobject "System.CodeDom.Compiler.CompilerParameters"			
-	compilerParams.GenerateInMemory = on
-	compilerResults = csharpProvider.CompileAssemblyFromSource compilerParams #(source)
-	compilerResults.CompiledAssembly.CreateInstance "User32"
-)
-User32 = CreateUser32Assembly()
-
-fn showTopmost name act:on = if (hwnd = windows.getChildHWND 0 name) != undefined do  (
-	
-	local HWND_TOPMOST 	= -1
-	local HWND_NOTOPMOST 	= -2
-	User32.setWindowPos hwnd[1] (if act then HWND_TOPMOST else HWND_NOTOPMOST) 0 0 0 0 0x3 -- (SWP_NOSIZE = 0x1, SWP_NOMOVE = 0x2)
-	act
-)
+::mcTemplateDialog.addText "Text contents"
+::mcTemplateDialog.addText "But this also aligns the label control to the centre"
+::mcTemplateDialog.addText "DotNet controls cannot only be placed inside 3ds Max Dialogs and Rollouts, but they can also be used to generate user interfaces implemented completely using DotNet Forms."
 */
+
+
+
 /*
-showTopmost "mcTemplateDialog" act:on
-showTopmost "mcTemplateDialog" act:off
+		--tlp.Anchor = dotnet.combineEnums mcDotnet.AnchorStyles.Top mcDotnet.AnchorStyles.Left
+		-- tlp.Margin = mcDotnet.dPadding 8 8 8 8--border_offset border_offset border_offset border_offset
+		
+			-- form.width = tlp.width + border_offset * 2
+		-- form.height = tlp.height + bar_height + border_offset * 2
+		
+		-- local text_size = mcDotnet.TextRenderer.MeasureText s.text s.Font
+		-- local ratio_x = text_size.width / msg_max_size.x
+		-- format "ratio:%\n" ratio_x
+		-- tlp.width = text_size.width / ratio_x
+		-- tlp.height = text_size.height * (ratio_x+1)
+		-- form.width = tlp.width = s.width
+		-- form.height = tlp.height = s.height
+		
+		local text_size = mcDotnet.TextRenderer.MeasureText s.text s.Font
+		if (s.Width < msg_max_width) then (
+
+			s.Width =  text_size.Width
+			
+		) else (
+		
+			s.Width = msg_max_width 
+			s.Height = text_size.Height
+		)
 */
