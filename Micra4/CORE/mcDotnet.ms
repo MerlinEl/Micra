@@ -21,6 +21,9 @@ Struct MICRA_DOTNET (
 	File			= (dotnetClass "IO.File"),
 	Screen			= (dotnetClass "System.Windows.Forms.Screen"),
 	SysTime			= (dotnetClass "System.DateTime"),
+	AnchorStyles	= (dotnetClass "System.Windows.Forms.AnchorStyles"),
+	--@Example > text_size = mcDotnet.TextRenderer.MeasureText "abc" (mcDotnet.dFont())
+	TextRenderer	= (dotnetClass "System.Windows.Forms.TextRenderer"),
 	/**
 	*@Example
 		ns = "http://test"
