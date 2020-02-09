@@ -215,10 +215,10 @@ struct MICRA_NEW_STRUCTURE	(
 		)
 		undefined
 	),
-	fn downloadProgress s a = (mcPopUp.progeressbar a.ProgressPercentage msg:"Downoading..."),
+	fn downloadProgress s a = (mcSecurity.progeressbar a.ProgressPercentage msg:"Downoading..."),
 	fn downloadCompleted s a = ( -- s(dotNetObject:System.Net.WebClient) a(dotNetObject:System.ComponentModel.AsyncCompletedEventArgs) #cancelled, #error, #UserState, #empty
 	
-		mcPopUp.progeressbar 100 msg:"Downoad Finished:" close:true
+		mcSecurity.progeressbar 100 msg:"Downoad Finished:" close:true
 		dotNet.removeEventHandler s "DownloadProgressChanged" mcNet.downloadProgress
 		dotNet.removeEventHandler s "DownloadFileCompleted" mcNet.downloadCompleted
 		s.dispose()

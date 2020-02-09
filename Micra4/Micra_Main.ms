@@ -115,7 +115,10 @@ struct MICRA_STRUCTURE (
 			-->Unload Calbacks
 				--Micra.ms > onOpenForm (line 187 )
 				callbacks.removeScripts id:callbacksID 
+				
+				------------------------------------------------------------------
 				--Customize.ms > onCheckerChanges (line 460) --fix it cause error
+				------------------------------------------------------------------
 				--if mcPolyCount != undefined do unregisterRedrawViewsCallback mcPolyCount.Count		
 				--if mcCall != undefined do unregisterRedrawViewsCallback mcCall.fileNameInScreen 
 				--if mcAction != undefined do unregisterRedrawViewsCallback mcAction.triangle_counter

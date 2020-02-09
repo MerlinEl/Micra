@@ -24,6 +24,7 @@ Struct MICRA_DOTNET (
 	AnchorStyles	= (dotnetClass "System.Windows.Forms.AnchorStyles"),
 	--@Example > text_size = mcDotnet.TextRenderer.MeasureText "abc" (mcDotnet.dFont())
 	TextRenderer	= (dotnetClass "System.Windows.Forms.TextRenderer"),
+	DockStyle		= (dotnetClass "System.Windows.Forms.DockStyle"),
 	/**
 	*@Example
 		ns = "http://test"
@@ -35,7 +36,9 @@ Struct MICRA_DOTNET (
 	fn getSource = getSourceFileName(), --get path of this script
 	/*
 	*@Usage		convert max color to dotnet
-	*@Example 	btn.BackColor = mcDotnet.dColor red
+	*@Example 	
+		btn.BackColor = mcDotnet.dColor (color 15 254 251)
+		btn.BackColor = mcDotnet.dColor #ffefbf
 	*/
 	fn dColor clr = (
 	
@@ -80,32 +83,31 @@ Struct MICRA_DOTNET (
 		local ui_color = mcUIColors.get color_name
 		dColor ui_color
 	),
-	fn dGetIcon icnNum icnSize:24 = (
-		if icnNum == 0 do return undefined
+	/**
+	*@Example
+		mcDotnet.getIcon 308
+	*/
+	fn getIcon icn_num icn_size:24 = (
+		
+		if icn_num == 0 do return undefined
 		local img_lib = (dotNetClass "Drawing.Image").FromFile Micra.IconI --get the saved image from file as bitmap
-		local w = h = icnSize
+		local w = h = icn_size
 		local img_lib_size = [img_lib.width, img_lib.height]
-		local icnCount  = (img_lib_size/icnSize)
-		icnNum -= 1
-	if debug == 5 do format "mcDotnet > lib size:% icn count:%\n"	img_lib_size icnCount	
-		local X = (mod icnNum icnCount.x)
-		local Y = (icnNum / icnCount.y) as integer
-	if debug == 5 do format "mcDotnet > x:% y:%\n" x y		
-		local pix_x = X * icnSize
-		local pix_y = Y * icnSize
-		
+		local icnCount  = (img_lib_size/icn_size)
+		icn_num -= 1
+		local X = (mod icn_num icnCount.x)
+		local Y = (icn_num / icnCount.y) as integer	
+		local pix_x = X * icn_size
+		local pix_y = Y * icn_size
 		local pos = [pix_x, pix_y]
-		
-	if debug == 5 do format "mcDotnet > ic_num:%\ticon pos in img_lib:%\n" icnNum pos
-
-		local icon = (dotNetObject "Drawing.Bitmap" w h) --Create new bitmap object
-		--icon.ColorDepth = icon.ColorDepth.Depth24Bit
-		local gra  = (dotNetClass "Drawing.Graphics").fromImage icon --Create new Graphics object
-		local newRect = netDrRect [ -1, -1 ] [icnSize, icnSize]  --adjust icon offset X in button 
+		local bmp_dn = (dotNetObject "Drawing.Bitmap" w h) --Create new bitmap object
+		--bmp_dn.ColorDepth = bmp_dn.ColorDepth.Depth24Bit
+		local gra  = (dotNetClass "Drawing.Graphics").fromImage bmp_dn --Create new Graphics object
+		local newRect = dRect [ -1, -1 ] [icn_size, icn_size]  --adjust icon offset X in button 
 		gra.DrawImage img_lib newRect pos.x pos.y w h (dotNetClass "Drawing.GraphicsUnit").Pixel	
 		img_lib.dispose()
-		icon.MakeTransparent (netDrColor black)--(color 75 75 75)) --gray
-		icon
+		bmp_dn.MakeTransparent (dColor (color 0 0 0)) -- 75 75 75  --gray
+		bmp_dn
 	),
 	/**
 	TODO > check this method instead
@@ -184,7 +186,7 @@ Struct MICRA_DOTNET (
 		@Usage	open dotnet form with max handle implementation
 		@Example	mcDotnet.dShow form saved_pos:false
 	*/
-	fn dShow form saved_pos:true = (
+	fn dShow form saved_pos:true modal:false = (
 		
 		if form == undefined or form.IsDisposed or form.visible do return false
 		--get last position from Properties_2
@@ -206,7 +208,9 @@ Struct MICRA_DOTNET (
 			return OK
 		)
 		local hv = maxHW ()
-		form.show(hv) -- Shows the form with the specified owner (MAX) to the user (creatd by lo)
+		 -- Shows the form with the specified owner (MAX) to the user (creatd by lo)
+		if modal then form.ShowModal() else form.Show(hv)
+		
 		hv.ReleaseHandle()
 		--form.show(WindowWrapper) --good one try it later
 		--form.showModeless()

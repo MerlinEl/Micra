@@ -138,7 +138,7 @@ private
 		--toolbar
 		lblT.bounds = mcDotnet.dRect [border_offset, border_offset] [size.x - border_offset*10 , bar_height]
 		lblT.BackColor = mcDotnet.uiColor #back
-		lblT.ForeColor = mcDotnet.dColor (color 255 116 234)
+		lblT.ForeColor = mcDotnet.dColor (color 116 255 234)
 		--lblT.textAlign = lblMsg.textAlign.MiddleCenter
 		lblT.font = mcDotnet.dFont font:"Arial" size:10 style:"Bold"
 		lblT.Text = "..."
@@ -175,7 +175,7 @@ private
 		lblMsg.MinimumSize = mcDotnet.dSize msg_min_size	
 		lblMsg.MaximumSize = mcDotnet.dSize msg_max_size
 		lblMsg.AutoSize = true
-		lblMsg.foreColor = mcDotnet.dColor (color 180 180 255)
+		lblMsg.foreColor = mcDotnet.dColor (color 255 255 116)
 		lblMsg.font = mcDotnet.dFont font:"Verdana" size:12 style:"Regular"
 		lblMsg.Text = "..."
 		-->

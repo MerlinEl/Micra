@@ -4,6 +4,7 @@
 /*
 *@Used Structures
 	Micra
+	mcColor
 	mcFile
 *
 *@Used Objects
@@ -15,14 +16,14 @@
 	mcDotnet.uiColor #back
 */
 Struct MICRA_UI_COLORS(
-
-Public
+public
 	fn getSource = getSourceFileName(), --get path of this script
-	fn get clr = (
+	fn get clr_name = (
+	
 		local last_profile = execute (mcFile.readSettings Micra.UserSettings "Interface/lastprofile")
 		local profiles = #("DefaultColor", "UserColor", "ForestColor", "EarthColor", "MoonColor", "SeaColor", "SunColor")
 		local head_str = profiles[last_profile]
-		case clr of (
+		local clr = case clr_name of (
 			
 			#back		: execute (mcFile.readSettings Micra.UserSettings (head_str +"/backcolor"))
 			#fore		: execute (mcFile.readSettings Micra.UserSettings (head_str +"/forecolor"))
@@ -36,6 +37,7 @@ Public
 			#edtback	: execute (mcFile.readSettings Micra.UserSettings (head_str +"/editback" ))
 			#edtfore	: execute (mcFile.readSettings Micra.UserSettings (head_str +"/editfore" ))
 		)
+		if classOf clr == Name then mcColor.hexToRGB clr else clr --always return RGB
 	)
 	/*<end>*/
 )

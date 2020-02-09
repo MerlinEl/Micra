@@ -67,11 +67,13 @@ struct MICRA_MESSAGE_LIST_STRUCTURE	(
 			"no_profile"		: "Missing spline profile.\nFirst create one spline(profile) with name curb_"
 			"not_edge_level"	: "Subobject level must be in Edges."
 			"not_sweep"		: "Must be Spline with sweep Modifier applyed."
+			"im_idiot"		: "I'm an Idiot"
 			default			: "Unknown Error...."
 		)
 		if mbox then (
 		
-			messageBox (pre + msg + suf) title:"Warning:"
+			-- messageBox (pre + msg + suf) title:"Warning:"
+			::mcPopUp2.show (pre + msg + suf) type:#Warning
 			
 		) else (
 		

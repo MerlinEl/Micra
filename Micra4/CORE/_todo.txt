@@ -1,38 +1,23 @@
 ----
 TODO
 ----
+	Transfer all functions
+	mcPopUp ---> mcPopUp2	
+
+mcSecurity.progeressBar
+	mcNet.ms > downloadProgress, downloadCompleted
+	Micra_Actions_v0.05.ms > collapse_objects, breake_to_elements
+mcSecurity.textBox
+	Micra_Update_v0.05.ms > sendMicraVersion
+
+
 
 Holder_v0.02.ms -- Expolre
-
-mcCall > move functions to mcPopup
-popUp
-teleportText
-progeressbar
-
 mcTransform > remake and check
-
 mcDotnet >
 --new dotnet structure 2019 --TODO repalce all in micra scripts
-
-
-
-
-
-
-
-
 
 
 ----
 DONE
 ----
-
-remove / replace files
-Dialog_Creator_v0.10.ms > removed
-Struct_Call_v0.05.ms > to removed
-Global_Memory_v0.01.ms > removed
-Event_Manager_v0.03.ms > removed
-
-replace
-mcDialogSnap > mcDialog.snapDialog
-mcFormSnap > mcDialog.snapForm

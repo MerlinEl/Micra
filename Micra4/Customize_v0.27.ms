@@ -152,7 +152,7 @@ fn addNewCategory = (
 		category_list.SelectedIndex = new_index--select new item
 	) else (
 	
-		mcPopUp.msgBox ("Category [ "+category_name+" ] already exists. Operation Aborted.") title:"Customize"
+		::mcPopUp2.show ("Category [ "+category_name+" ] already exists. Operation Aborted.") delay:2000 --title:"Customize"
 	)
 )
 fn delCurrentCategory = (
@@ -162,7 +162,7 @@ fn delCurrentCategory = (
 	local category_name = category_list.selectedItem
 	if actions_list.items.count > 0 do (
 		
-		mcPopUp.msgBox ("Category [ "+category_name+" ] must be empty. Operation Aborted.") title:"Customize"
+		::mcPopUp2.show ("Category [ "+category_name+" ] must be empty. Operation Aborted.") delay:2000 --title:"Customize"
 		return false
 	)
 	format "Customize > delCurrentCategory > name:%\n " category_name
@@ -444,27 +444,27 @@ fn onCheckerChanges s a =
 		(
 			Micra.setAutorunTo s.checked 
 		)
-		"ShowFileName":
+		"ShowFileName": --not works
 		(
-			if s.checked
-			then
-			(
-				unregisterRedrawViewsCallback mcCall.fileNameInScreen
-				registerRedrawViewsCallback mcCall.fileNameInScreen 
-			)
-			else (unregisterRedrawViewsCallback mcCall.fileNameInScreen )
+			-- if s.checked
+			-- then
+			-- (
+				-- unregisterRedrawViewsCallback mcCall.fileNameInScreen
+				-- registerRedrawViewsCallback mcCall.fileNameInScreen 
+			-- )
+			-- else (unregisterRedrawViewsCallback mcCall.fileNameInScreen )
 		)
-		"UniversalCounter":
+		"UniversalCounter": --not works
 		(
-			if s.checked
-			then (mcFile.fileInVersion "Uni_Poly_Counter")
-			else (unregisterRedrawViewsCallback mcPolyCount.Count; mcPolyCount = undefined)
+			-- if s.checked
+			-- then (mcFile.fileInVersion "Uni_Poly_Counter")
+			-- else (unregisterRedrawViewsCallback mcPolyCount.Count; mcPolyCount = undefined)
 		)
-		"UC_ShowSize": --universal counter missing
+		"UC_ShowSize": --not works
 		(
-			if s.checked
-			then()
-			else()
+			-- if s.checked
+			-- then()
+			-- else()
 		)
 		"UseLargeVertexDots":
 		(

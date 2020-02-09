@@ -341,7 +341,7 @@ struct mcAction (
 				
 			) else (
 				
-				mcCall.displayMsg "Selektni si nejdrive nejake objeky." green
+				::mcPopUp2.show ">< Selektni si nejdrive nejake objeky. ><" type:#Warning delay:2000
 			)
 		)
 	),
@@ -720,38 +720,44 @@ struct mcAction (
 				(
 					if sel.count > 0 do undo "Group" on
 					(
-						local data = mcCall.teleportText title:"Group Name"
-						if data[1] do group sel name:data[2] select:true
+						local group_name = mcPopUp2.show "" title:"Type Group Name:" type:#Input
+						if classOf group_name == String and group_name.count > 0 do (
+						
+							group sel name:group_name select:true
+							::mcPopUp2.show ">< Is Done ><" delay:2000
+						)
 					) 
 				)
 				#destroy: (undo "Ungroup"     on ungroup sel    )
 				#open:    (undo "Group Close" on max group open )
 				#close:   (undo "Group Open"  on max group close)
-		)
-				
+		)	
 	),
-	fn triCount =
-	(
-		local obj      =  selection as array
-		local sel      =  false
-		local TriCount =  0
-		if obj.count   == 0 then 
-		(
-			obj = for o in objects where not o.isHidden and classOf o.baseObject == Editable_Poly collect o
+	fn triCount = (
+	
+		local objs = #()
+		local type = #none
+		if selection.count > 0 then (
+		
+			type = #sel
+			objs = for o in selection where superClassOf o.baseObject == GeometryClass collect o
+			
+		) else (
+			
+			type = #visible
+			objs = for o in objects where not o.isHidden and superClassOf o.baseObject == GeometryClass collect o
 		)
-		else
-		(
-			obj = for o in obj where classOf o.baseObject == Editable_Poly collect o
-			sel = true	
-		)
-		if obj.count == 0 do return false
-		for o in obj do try (TriCount+= o.mesh.numfaces ) catch (TriCount = "")
-		local click_pos = mouse.screenpos
-		if sel 
-		then mcCall.popUp ("Poly objects selected: "+ obj.count as string + " / " + "Triangles: " +TriCount as string) 10 dPos:[click_pos.x, click_pos.y - 50]
-		else mcCall.popUp ("Poly objects in scene: "+ obj.count as string + " / " + "Triangles: " +TriCount as string) 10 dPos:[click_pos.x, click_pos.y - 50]
-		--then mcCall.displayMsg ("Poly objects selected: "+ obj.count as string + " / " + "Triangles: " +TriCount as string) green
-		--else mcCall.displayMsg ("Poly objects in scene: "+ obj.count as string + " / " + "Triangles: " +TriCount as string) green
+		if objs.count == 0 do return (mcMsgList.warn "im_idiot")
+		local tris_count = 0
+		for o in objs do try (tris_count += o.mesh.numfaces ) catch ()
+		--local click_pos = mouse.screenpos
+		--local dpos = [click_pos.x, click_pos.y - 50]
+		local msg = " objects: ( "+ (objs.count as string) + " ) " + "triangles: ( " + (tris_count as string) + " )"
+		if type == #sel 
+		then 
+			::mcPopUp2.show ("Selected" + msg) --pos:dpos delay:3000 
+		else 
+			::mcPopUp2.show ("Visible" + msg) --pos:dpos delay:3000 
 	),
 	fn lockObjects state =
 	(
@@ -765,8 +771,8 @@ struct mcAction (
 			)
 		)
 	),
-	fn cleanEmptyGeometry =
-	(
+	fn cleanEmptyGeometry = (
+
 		local Obj = for i in objects where classOf i.baseobject == Editable_Poly or classOf i.baseobject == Editable_Mesh or classOf i.baseObject == Editable_Patch collect i
 		local EmptyGeometry = for i in Obj where i.Faces.count == 0 collect i
 		if EmptyGeometry.count != 0 
@@ -777,7 +783,7 @@ struct mcAction (
 			for i in EmptyGeometry do print i.name to:info
 	  		try undo "Clean Scene" on (delete EmptyGeometry) catch messagebox " Medic!" title:" Micra"
 		)
-		else (mcCall.popUp "Empty Geometry is not found." 100)
+		else (::mcPopUp2.show ">< Empty Geometry is not found. ><" delay:2000)
 	),
 	fn showObjectNames = --registerRedrawViewsCallback mcAction.showObjectNames ; completeredraw()
 	(
@@ -1268,12 +1274,12 @@ struct mcAction (
 	fn quad_check =	
 	(	
 		local obj = Selection[1]
-		if obj == undefined and classOf obj!= Editable_Poly do return false
+		if classOf obj!= Editable_Poly do return false
 		local triangles = #()
 		for f=1 to obj.faces.count where (polyOp.getVertsUsingFace obj f ).numberset != 4 do append triangles f
 		if triangles.count != 0 
-		then (polyOp.setFaceSelection obj triangles; mcCall.popUp (">> "+triangles.count as string+" << Non Quad polygons is found and selected!") 5 )
-		else (mcCall.popUp "All is Quad!" 3)
+		then (polyOp.setFaceSelection obj triangles; ::mcPopUp2.show ("( "+triangles.count as string+" ) Non Quad polygons is found and selected."))
+		else (::mcPopUp2.show ">< All is Quad! >< " delay:2000)
 	),
 	fn scale_to_zb = undo "Scale To ZBrush" on (
 		
@@ -1407,20 +1413,22 @@ struct mcAction (
 		(
 			local sel_geometry = for i in selection where superClassOf i == GeometryClass collect i
 			if sel_geometry.count < 2 do return false
-			try undo "Collapse" on
-			(
-				convertToPoly sel_geometry
-				local first_obj = sel_geometry[1]
-				for i=2 to sel_geometry.count do 
-				(
-					polyOp.attach first_obj sel_geometry[i]
-					mcPopUp.progeressbar (100.*i/sel_geometry.count) msg:"Objects Collapsed:"
+			try (
+				undo "Collapse" on (
+				
+					convertToPoly sel_geometry
+					local first_obj = sel_geometry[1]
+					for i=2 to sel_geometry.count do 
+					(
+						polyOp.attach first_obj sel_geometry[i]
+						mcSecurity.progeressbar (100.*i/sel_geometry.count) msg:"Objects Collapsed:"
+					)
+					mcSecurity.progeressbar 100 msg:"Objects Collapsed:" close:true
+					select first_obj
 				)
-				mcPopUp.progeressbar 100 msg:"Objects Collapsed:" close:true
-				select first_obj
-				messagebox "Collapse Objects Is Finished!" title:Micra.version
+				::mcPopUp2.show ">< Collapse Objects Is Finished! >< " delay:2000
 			) 
-			catch (mcCall.popUp "Incorrect objecs!" 3)	
+			catch (::mcPopUp2.show ">< Incorrect objecs! ><" type:#Warning delay:2000)
 		)
 		else -- Attach Objects With Unique ID
 		(
@@ -1450,10 +1458,10 @@ struct mcAction (
 					local next_obj_faces =  all_obj_faces - obj_faces
 					polyOp.setFaceMatID obj next_obj_faces i
 					obj_faces = all_obj_faces
-					mcPopUp.progeressbar (100.*i/sel.count) msg:"Objects Collapsed:"
+					mcSecurity.progeressbar (100.*i/sel.count) msg:"Objects Collapsed:"
 				)
 			)
-			mcPopUp.progeressbar 100 msg:"Objects Collapsed:" close:true
+			mcSecurity.progeressbar 100 msg:"Objects Collapsed:" close:true
 			messagebox "Packed By ID" title:" Finished"
 		)
 		completeRedraw()
@@ -1969,14 +1977,14 @@ struct mcAction (
 					local obj_name = uniqueName obj.name
 					polyop.detachFaces obj element asNode:true name:obj_name
 					elements += #(getNodeByName obj_name)
-					mcPopUp.progeressbar (100.*prog/obj.faces.count) msg:"Elements Breaked:"
+					mcSecurity.progeressbar (100.*prog/obj.faces.count) msg:"Elements Breaked:"
 					prog += 1
 				)
 				delete obj
 				select elements
 				mcAction.objectGradient red blue
 			--)
-			mcPopUp.progeressbar 100 msg:"Elements Breaked:" close:true
+			mcSecurity.progeressbar 100 msg:"Elements Breaked:" close:true
 			messagebox "Break By Elements Is Finished!" title:Micra.version
 		)
 		completeRedraw()

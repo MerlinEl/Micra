@@ -208,7 +208,7 @@ if doesFileExist (Micra.RootDir+"Img\\ColorBySat.png") and doesFileExist (Micra.
 		),
 		fn showHelp = (
 			
-			mcPopUp.messageBox "To change image press Mouse RC." title:"Help:"
+			::mcPopUp2.show ">< To change image press Mouse RC. >< " delay:2000 --title:"Help:"
 		),
 		--Move / Snap Dialog
 		fn onLblTMouseMove s a = ( if a.Button == a.Button.left do  mcDialog.snapForm dia mcs.netDmPos), --drag form

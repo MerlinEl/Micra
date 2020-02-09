@@ -130,11 +130,11 @@ rollout mcRepairDialog "" width:324 height:144
 					if chkSaveLinks.checked do (loadLinks links_data)
 					select newSel
 					DestroyDialog mcRepairDialog
-					mcCall.popUp ">< Is Done ><" 2
+					::mcPopUp2.show ">< Is Done ><" delay:2000 compact:true
 				)
-				else (mcCall.displayMsg "Groups is not allowed" green)
+				else (::mcPopUp2.show ">< Groups is not allowed ><" type:#Warning delay:2000 compact:true)
 			)
-			else (mcCall.displayMsg "Select some object." green)  
+			else (::mcPopUp2.show ">< Select some object. ><" type:#Warning delay:2000 compact:true)  
 		)
 		else if (rdo_1.state == 2 and selection.count != 0) then
 		(
@@ -161,14 +161,13 @@ rollout mcRepairDialog "" width:324 height:144
 					max zoomext sel
 					for o in selection do o.name = substring o.name 4 -1 --delete 'ojb' from names (objBox01)
 					DestroyDialog mcRepairDialog
-					mcCall.displayMsg "Import/Expotr is finished Succesfully." green
-						
+					::mcPopUp2.show ">< Import/Expotr is finished Succesfully. ><" delay:2000 compact:true
 				)
 			catch (print "reimport failed")
 		)
 		else if (rdo_1.state == 3 and selection.count != 0) then
 		(
-			if (queryBox "Do you want create a 'New Scene'?" title: "Micra") == true do
+			if (::mcPopUp2.show "Do you want create a 'New Scene'?." title:"Micra:" type:#YesNo) == true do
 			(
 				tmp = ((GetDir #export) + "\mRepair.max")
 				sel = $selection as array
@@ -177,11 +176,11 @@ rollout mcRepairDialog "" width:324 height:144
 				mergeMAXFile tmp #useSceneMtlDups #mergeDups #select --merge
 				max zoomext sel
 				DestroyDialog mcRepairDialog
-				mcCall.displayMsg "Operation is finished." green
+				::mcPopUp2.show ">< Operation is finished. ><" delay:2000 compact:true
 			)
 		)	
 		
-		else (mcCall.displayMsg "You must selct some object." green)
+		else (::mcPopUp2.show ">< You must selct some object. ><" type:#Warning delay:2000 compact:true)
 		--delete undo states
 		clearUndoBuffer()
 	)--btn_2

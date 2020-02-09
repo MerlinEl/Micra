@@ -1,1 +1,1 @@
-mcDisplay.hide()
+mcPopUp2.form.hide()

@@ -12,26 +12,7 @@
 struct MICRA_CALL
 (
 	fn getSource = getSourceFileName(), --get path of this script
-	fn errorMsg block =
-	(
-		print
-		(
-			case block of
-			(
-				001:""
-				002:""
-				003:""
-				004:""
-				005:""
-				006:""
-				007:""
-				008:""
-				009:""
-			)
-		)
-	),
-	fn displayMsg str col = (mcDisplay.show str col duration:2000),
-	fn fileNameInScreen = (
+	fn fileNameInScreen = ( --used > Customize_v0.27 > onCheckerChanges
 	
 		local viewSize, fName, textSize, View_X
 		viewSize = getviewsize()
@@ -41,79 +22,6 @@ struct MICRA_CALL
 		gw.hText [View_X,5,1000]  fName  color:(color 120 255 120)--color:(color 255 234 0)
 		gw.enlargeUpdateRect #whole 
 		gw.updateScreen()
-	),
---TODO move this to mcPopup struct
-	fn popUp str tim dPos:undefined =
-	(
-	 	if mcPopUpDialog != undefined then destroyDialog mcPopUpDialog
-
-		Global popStr  = str
-		Global popTime = tim
-		Global txtSize = gw.getTextExtent popStr
-		
-		rollout mcPopUpDialog "" width:80 height:44
-		(
-		 	-->Local
-			Local sec = 500
-			Local elapsedTime = 0 
-			GroupBox grp_1 "" pos:[6,2] width:(txtSize.x+20) height:36
-			label lbl_1 "" pos:[16,16] width:(txtSize.x) height:16
-			timer popTick "" pos:[12,12] width:24 height:24 interval:sec active:true
-		 	on mcPopUpDialog rbuttonup pos do destroyDialog mcPopUpDialog
-			on mcPopUpDialog lbuttonup pos do destroyDialog mcPopUpDialog
-			on mcPopUpDialog open do 
-		 	(  
-				mcPopUpDialog.width  = (txtSize.x+32)
-				mcPopUpDialog.height = (txtSize.y+32)
-				lbl_1.text = popStr
-			)
-		 	on mcPopUpDialog close do 
-		 	( 
-		 	 	popStr  = undefined
-				popTime = undefined
-				txtSize = undefined
-			)
-		 	on popTick tick  do
-		 	(
-				elapsedTime += 0.5
-				if elapsedTime >= popTime do destroyDialog mcPopUpDialog
-		 	)
-		)
-		if classof dPos == Point2
-		then CreateDialog mcPopUpDialog pos:dPos style:#(#style_border)
-		else CreateDialog mcPopUpDialog style:#(#style_border)
-		--**\ Created by Merlin el' 9.4.2006 12:59:28 /**--
-		/* mcCall.popUp "Ahoj" 1.5 */ 
-	),
-	fn teleportText title:"" =
-	(
-		if mcTeleportTextDialog != undefined then destroyDialog mcTeleportTextDialog
-		rollout mcTeleportTextDialog title width:444 height:40
-		(
-			local apply = false
-			edittext edtBox "12345678910" pos:[12,12] width:312 height:16 bold:true
-		 	button btnAcpt "Accept" pos:[332,12] width:48 height:16
-		 	button btnCncl "Cancel" pos:[384,12] width:48 height:16
-		 	groupBox gr_1 "" pos:[4,0] width:436 height:36
-			on mcTeleportTextDialog open    do 
-			(
-				edtBox.caption = mcTeleportTextDialog.title + ":"
-				setFocus edtBox
-			)
-			on btnAcpt pressed           do 
-			(
-				if edtBox.text.count > 0 do
-				( 
-					DestroyDialog mcTeleportTextDialog
-					apply = true 
-				)
-			)
-			on btnCncl pressed           do (DestroyDialog mcTeleportTextDialog)
-			on edtBox entered text       do (btnAcpt.pressed())
-		)
-		CreateDialog mcTeleportTextDialog style:#(#style_border) modal:true
-		
-		return #(mcTeleportTextDialog.apply, mcTeleportTextDialog.edtBox.text)
 	),
 	/**
 	*@Usage
@@ -187,7 +95,7 @@ struct MICRA_CALL
 		local newRect = mcDotnet.dRect [ -1, -1 ] [icn_size, icn_size]  --adjust icon offset X in button 
 		gra.DrawImage img_lib newRect pos.x pos.y w h (dotNetClass "Drawing.GraphicsUnit").Pixel	
 		img_lib.dispose()
-		bmp_dn.MakeTransparent (netDrColor black)--(color 75 75 75)) --gray
+		bmp_dn.MakeTransparent (mcDotnet.dColor black)--(color 75 75 75)) --gray
 		bmp_dn
 	),
 	fn time = 
