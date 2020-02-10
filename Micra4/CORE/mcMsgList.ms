@@ -73,7 +73,7 @@ struct MICRA_MESSAGE_LIST_STRUCTURE	(
 		if mbox then (
 		
 			-- messageBox (pre + msg + suf) title:"Warning:"
-			::mcPopUp2.show (pre + msg + suf) type:#Warning
+			::mcPopUp.show (pre + msg + suf) type:#Warning
 			
 		) else (
 		

@@ -2,13 +2,13 @@
 <SETTINGS>
   <Micra>
     <born val="04.25.2006" />
-    <version val="5.85" />
+    <version val="5.86" />
   </Micra>
   <Structures val="All registred Micra's Structures">
     <!--independent classes-->
     <mcStructMan val="on" info="structure manager" />
-	<mcXML val="on" info="XML parser" /> 
-	<mcINI val="on" info="INI parser" />
+    <mcXML val="on" info="XML parser" />
+    <mcINI val="on" info="INI parser" />
     <mcMsgList val="on" info="all info messages" />
     <mcDisplay val="on" info="show message on screen with defined duration" />
     <mcProgLog val="on" info="progressbar with log" />
@@ -30,7 +30,7 @@
     <mcFile val="on" info="read - write functions" />
     <mcUIColors val="on" info="save-load ui colors" />
     <mcDotnet val="on" info="dotnet functions" />
-	<mcPopUp2 val="on" info="popup windows of any type (TODO reamke to Independent Class)" />
+    <mcPopUp val="on" info="popup windows of any type (TODO reamke to Independent Class)" />
     <mcSecurity val="on" info="popup windows of any type" />
     <mcGM val="on" />
     <mcAnimation val="on" />

@@ -341,7 +341,7 @@ struct mcAction (
 				
 			) else (
 				
-				::mcPopUp2.show ">< Selektni si nejdrive nejake objeky. ><" type:#Warning delay:2000
+				::mcPopUp.show "Selektni si nejdrive nejake objeky." type:#Warning delay:2000
 			)
 		)
 	),
@@ -714,23 +714,22 @@ struct mcAction (
 	fn groups action =
 	(
 		local sel = selection as array
-		case action of
-		(		
-				#create: 
-				(
-					if sel.count > 0 do undo "Group" on
-					(
-						local group_name = mcPopUp2.show "" title:"Type Group Name:" type:#Input
-						if classOf group_name == String and group_name.count > 0 do (
-						
-							group sel name:group_name select:true
-							::mcPopUp2.show ">< Is Done ><" delay:2000
-						)
-					) 
-				)
-				#destroy: (undo "Ungroup"     on ungroup sel    )
-				#open:    (undo "Group Close" on max group open )
-				#close:   (undo "Group Open"  on max group close)
+		case action of (	
+		
+			#create: (
+				if sel.count > 0 do undo "Group" on (
+				
+					local group_name = mcPopUp.show "" title:"Type Group Name:" type:#Input
+					if classOf group_name == String and group_name.count > 0 do (
+					
+						group sel name:group_name select:true
+						::mcPopUp.show "Group has been created." delay:2000
+					)
+				) 
+			)
+			#destroy: (undo "Ungroup"     on ungroup sel    )
+			#open:    (undo "Group Close" on max group open )
+			#close:   (undo "Group Open"  on max group close)
 		)	
 	),
 	fn triCount = (
@@ -755,9 +754,9 @@ struct mcAction (
 		local msg = " objects: ( "+ (objs.count as string) + " ) " + "triangles: ( " + (tris_count as string) + " )"
 		if type == #sel 
 		then 
-			::mcPopUp2.show ("Selected" + msg) --pos:dpos delay:3000 
+			::mcPopUp.show ("Selected" + msg) --pos:dpos delay:3000 
 		else 
-			::mcPopUp2.show ("Visible" + msg) --pos:dpos delay:3000 
+			::mcPopUp.show ("Visible" + msg) --pos:dpos delay:3000 
 	),
 	fn lockObjects state =
 	(
@@ -783,7 +782,7 @@ struct mcAction (
 			for i in EmptyGeometry do print i.name to:info
 	  		try undo "Clean Scene" on (delete EmptyGeometry) catch messagebox " Medic!" title:" Micra"
 		)
-		else (::mcPopUp2.show ">< Empty Geometry is not found. ><" delay:2000)
+		else (::mcPopUp.show "Empty Geometry is not found." delay:2000)
 	),
 	fn showObjectNames = --registerRedrawViewsCallback mcAction.showObjectNames ; completeredraw()
 	(
@@ -1278,8 +1277,8 @@ struct mcAction (
 		local triangles = #()
 		for f=1 to obj.faces.count where (polyOp.getVertsUsingFace obj f ).numberset != 4 do append triangles f
 		if triangles.count != 0 
-		then (polyOp.setFaceSelection obj triangles; ::mcPopUp2.show ("( "+triangles.count as string+" ) Non Quad polygons is found and selected."))
-		else (::mcPopUp2.show ">< All is Quad! >< " delay:2000)
+		then (polyOp.setFaceSelection obj triangles; ::mcPopUp.show ("( "+triangles.count as string+" ) Non Quad polygons is found and selected."))
+		else (::mcPopUp.show "All is Quad!" delay:2000)
 	),
 	fn scale_to_zb = undo "Scale To ZBrush" on (
 		
@@ -1426,9 +1425,9 @@ struct mcAction (
 					mcSecurity.progeressbar 100 msg:"Objects Collapsed:" close:true
 					select first_obj
 				)
-				::mcPopUp2.show ">< Collapse Objects Is Finished! >< " delay:2000
+				::mcPopUp.show "Collapse Objects Is Finished!" delay:2000
 			) 
-			catch (::mcPopUp2.show ">< Incorrect objecs! ><" type:#Warning delay:2000)
+			catch (::mcPopUp.show "Incorrect objecs!" type:#Warning delay:2000)
 		)
 		else -- Attach Objects With Unique ID
 		(

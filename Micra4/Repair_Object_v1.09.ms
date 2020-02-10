@@ -107,18 +107,18 @@ rollout mcRepairDialog "" width:324 height:156
 			if chkSaveLinks.checked do (loadLinks links_data)
 			select newSel
 			DestroyDialog mcRepairDialog
-			::mcPopUp2.show ">< Is Done ><" delay:2000
+			::mcPopUp.show "Object(s) is Fixed." delay:2000
 			true
 			
 		) else (
 		
 			DestroyDialog mcRepairDialog
-			::mcPopUp2.show ">< Groups is not allowed ><" type:#Warning delay:2000
+			::mcPopUp.show "Groups is not allowed" type:#Warning delay:2000
 		)
 	)
 	fn repairExportImport = (
 	
-		if (::mcPopUp2.show "This Operation is not undoable.\nDo you want Export/Import Selected object(s) ?" title:"Repair:" type:#YesNo) == true then (
+		if (::mcPopUp.show "This Operation is not undoable.\nDo you want Export/Import Selected object(s) ?" title:"Repair:" type:#YesNo) == true then (
 			try (
 				--Configurate max2obj.cfg
 				local cfgPath = (GetDir #plugcfg +"\max2obj.cfg")
@@ -141,19 +141,19 @@ rollout mcRepairDialog "" width:324 height:156
 				max zoomext sel
 				for o in selection do o.name = substring o.name 4 -1 --delete 'ojb' from names (objBox01)
 				DestroyDialog mcRepairDialog
-				::mcPopUp2.show ">< Export/Import is finished Succesfully. ><" delay:3000
+				::mcPopUp.show "Export/Import is finished Succesfully." delay:3000
 				true
 						
-			) catch (::mcPopUp2.show ">< Repair Failed. ><" type:#Warning delay:2000)
+			) catch (::mcPopUp.show "Repair Failed." type:#Warning delay:2000)
 		) else (
 		
 			DestroyDialog mcRepairDialog
-			::mcPopUp2.show ">< Repair Canceled. ><" type:#Abort delay:2000
+			::mcPopUp.show "Repair Canceled." type:#Abort delay:2000
 		)
 	)
 	fn repairToNewScene = (
 	
-		if (::mcPopUp2.show "This Operation is not undoable.\nDo you want move Selected object(s) in to New Scene ?" title:"Repair:" type:#YesNo) == true then (
+		if (::mcPopUp.show "This Operation is not undoable.\nDo you want move Selected object(s) in to New Scene ?" title:"Repair:" type:#YesNo) == true then (
 		
 			local tmp = ((GetDir #export) + "\mRepair.max")
 			local sel = selection as array
@@ -162,12 +162,12 @@ rollout mcRepairDialog "" width:324 height:156
 			mergeMAXFile tmp #useSceneMtlDups #mergeDups #select --merge
 			max zoomext sel
 			DestroyDialog mcRepairDialog
-			::mcPopUp2.show ">< Object(s) was moved. ><" delay:2000
+			::mcPopUp.show "Object(s) was moved." delay:2000
 			true
 		) else (
 		
 			DestroyDialog mcRepairDialog
-			::mcPopUp2.show ">< Repair Canceled. ><" type:#Abort delay:2000
+			::mcPopUp.show "Repair Canceled." type:#Abort delay:2000
 		)
 	)
 	fn repairLode = (
@@ -177,7 +177,7 @@ rollout mcRepairDialog "" width:324 height:156
 			mcStructMan.import "mcLodes" "mcLodes" dir:#Core force:false 
 			mcLodes.repairLodObject()
 			DestroyDialog mcRepairDialog
-			::mcPopUp2.show ">< Object with lodes was Fixed. ><" delay:2000
+			::mcPopUp.show "Lodes was Fixed." delay:2000
 			true
 			
 		) catch (
@@ -190,7 +190,7 @@ rollout mcRepairDialog "" width:324 height:156
 		mcPoly.fixObjectAlphaMap (selection as array)
 		mcPoly.fixObjectColorMap (selection as array)
 		DestroyDialog mcRepairDialog
-		::mcPopUp2.show ">< Object Alpha and Color was Fixed. ><" delay:2000
+		::mcPopUp.show "Alpha and Color was Fixed." delay:2000
 		true	
 	)
 	fn repairObjects = (
@@ -198,7 +198,7 @@ rollout mcRepairDialog "" width:324 height:156
 		if selection.count == 0 do (
 		
 			DestroyDialog mcRepairDialog
-			::mcPopUp2.show ">< Aborted! Select some object(s) first. ><" type:#Warning delay:2000
+			::mcPopUp.show "Aborted! Select some object(s) first." type:#Warning delay:2000
 			return false
 		)
 		local success = case rdo_1.state of  (

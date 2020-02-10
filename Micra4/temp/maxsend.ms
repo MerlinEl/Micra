@@ -1,1 +1,1 @@
-mcPopUp2.form.hide()
+mcPopUp.form.hide()

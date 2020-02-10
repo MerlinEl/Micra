@@ -152,7 +152,7 @@ fn addNewCategory = (
 		category_list.SelectedIndex = new_index--select new item
 	) else (
 	
-		::mcPopUp2.show ("Category [ "+category_name+" ] already exists. Operation Aborted.") delay:2000 --title:"Customize"
+		::mcPopUp.show ("Category [ "+category_name+" ] already exists. Operation Aborted.") delay:2000 --title:"Customize"
 	)
 )
 fn delCurrentCategory = (
@@ -162,7 +162,7 @@ fn delCurrentCategory = (
 	local category_name = category_list.selectedItem
 	if actions_list.items.count > 0 do (
 		
-		::mcPopUp2.show ("Category [ "+category_name+" ] must be empty. Operation Aborted.") delay:2000 --title:"Customize"
+		::mcPopUp.show ("Category [ "+category_name+" ] must be empty. Operation Aborted.") delay:2000 --title:"Customize"
 		return false
 	)
 	format "Customize > delCurrentCategory > name:%\n " category_name

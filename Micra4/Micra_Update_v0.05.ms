@@ -183,9 +183,9 @@ struct MICRA_UPDATER_STRUCTURE	(
 		downloadMicra chossen_version
 	),
 	fn sendMicraVersion = (
-	
-		-- local typed_text = mcSecurity.textBox title:"Type Password:" crypt:true
-		local typed_text = mcPopUp2.show "..." title:"Type Password:" type:#Input crypt:true
+
+		local typed_text = mcPopUp.show "" title:"Type Password:" type:#Input crypt:true
+		format "pass:% correct:%\n" typed_text (typed_text == "orien")
 		if classOf typed_text != String or typed_text != "orien" do return false
 		uploadMicra()
 	),

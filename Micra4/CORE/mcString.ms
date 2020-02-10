@@ -175,7 +175,7 @@ Public
 		local dstr = dotnetObject "System.String" str
 		dstr.replace old_str new_str
 	),
-	fn filterInvalidChars str filter_list:"^[]()\\/*{}-+><=;:,.%@#&?!$\n\r " =	(
+	fn filterInvalidChars str filter_list:"^[]()\\/*{}-+><=;:,.%@#&?!$ " =	(
 		
 		if str.count == 0 do return ""
 		local new_str = ""

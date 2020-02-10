@@ -7,7 +7,7 @@ TODO
 mcSecurity.progeressBar
 	mcNet.ms > downloadProgress, downloadCompleted
 	Micra_Actions_v0.05.ms > collapse_objects, breake_to_elements
-mcSecurity.textBox
+mcSecurity.textBox --> OK
 	Micra_Update_v0.05.ms > sendMicraVersion
 
 
