@@ -76,7 +76,7 @@ struct MICRA_STRUCTURE (
 	fn unload self:true = (
 	
 		--> Close Micra
-		if mcMicraDialog != undefined and self then ( --after Micra closed skip tjhis step (prevent endless loop)
+		if mcMicraDialog != undefined and self then ( --after Micra closed skip this step (prevent endless loop)
 		
 			format "closing micra main dialog:%\n" mcMicraDialog.name
 			mcMicraDialog.close()
@@ -93,24 +93,23 @@ struct MICRA_STRUCTURE (
 				case classOf d of (
 				
 					dotNetObject:(
+					
 							if d.visible do (
 					
 								format "closing dotnet dialog:% \n" n
-								--Save active for Properties_1 and Properties_2 separate
-								--mcFile.saveSettings UserProfile ("Properties_1/"+n) "true" type:"active" --add-replace node with parameter > cnt = "true"
 								d.close() 
 							)
 					)
 					RolloutClass:(
+					
 							if d.isDisplayed do (
 							
 							format "closing rollout dialog:% \n" n
-							--Save active for Properties_1 and Properties_2 separate
-							--mcFile.saveSettings UserProfile ("Properties_1/"+n) "true" type:"active" --add-replace node with parameter > cnt = "true"
 							destroyDialog d
 						)
 					)
 				)
+				d = undefined --< set dialog to undefined / mod: (2.10.2020)
 			)
 			-->Unload Calbacks
 				--Micra.ms > onOpenForm (line 187 )
@@ -280,20 +279,28 @@ struct MICRA_STRUCTURE (
 			unload()
 		)
 	),
+	fn unregisterClass class_name = (
+	
+		execute (class_name + " = undefined")
+	),
 	/**
 	*@Example
-		Micra.loadStructures force:true
+		Micra.loadClasses force:true
 	*/
-	fn loadStructures force:false = (
+	fn loadClasses force:false = (
 	
 		-->Load MaxCustomControls.dll (dont know if is need)
 		max_custom_controls = dotNet.loadAssembly "MaxCustomControls.dll"
 		local cnt = 0
+		local struct_instance = undefined
 		-->Load Base Structures (init mcFile structure)
 		for i in #("mcStructMan", "mcDate", "mcString", "mcObjects", "mcXML", "mcFile") do (
 		
-			if debug == 4 do format "% > loadStructures > [ % ]\n" version i
-			local struct_instance = execute i
+			if debug == 4 do format "% > loadClass > [ % ]\n" version i
+			if force then unregisterClass i else (
+			
+				struct_instance = execute i --check if structure is initialized
+			)
 			if struct_instance == undefined or force do fileIn (CoreDir+i+".ms")
 			cnt+=1
 		)
@@ -301,12 +308,15 @@ struct MICRA_STRUCTURE (
 		local struct_names = mcFile.readSettings DefaultSettings "Structures" type:"keys"
 		for i in struct_names do (
 		
-			if debug == 4 do format "% > loadStructures > [ % ]\n" version i
-			local struct_instance = execute i
+			if debug == 4 do format "% > loadClass > [ % ]\n" version i
+			if force then unregisterClass i else (
+			
+				struct_instance = execute i --check if structure is initialized
+			)
 			if struct_instance == undefined or force do fileIn (CoreDir+i+".ms") 
 			cnt+=1
 		)
-		format "% > loadStructures > total [ % ]\n" version cnt
+		format "% > loadClasses > total [ % ]\n" version cnt
 		
 		--> Load Actions
 		mcFile.fileInVersion "Micra_Actions"
@@ -333,7 +343,7 @@ struct MICRA_STRUCTURE (
 	
 		increaseMemory 30 -->Set Memory Allocation to 30MB
 		if loaded do unload()--> Unregister Micra's Callbacks and close all dialogs
-		loadStructures force:true --init system structures (always force or update may crash on unknown functions)
+		loadClasses force:true --init system structures (always force or update may crash on unknown functions)
 		if not initUserProfile() do return false
 		--if classOf python == Interface do initPython() --if python is supported(Max 2017+) init PYTHON --DISABLED
 		installMacro() --add micra macro to 3DsMax 
