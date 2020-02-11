@@ -1,6 +1,6 @@
-Global gProgressBarTest
-if isStruct gProgressBarTest do gProgressBarTest.closeForm()
-struct sProgressBarTest (	
+Global mcProgRad
+if isStruct mcProgRad do mcProgRad.closeForm()
+struct MICRA_PROGRESSBAR_STRUCT (	
 	
 	form = dotNetObject "MaxCustomControls.MaxForm",
 	tm = dotnetobject "system.timers.timer",
@@ -14,7 +14,7 @@ struct sProgressBarTest (
 	transparent_color = mcDotnet.dColor (color 0 50 50),
 	fn onBackColorChanged s a = ( --set form transparency
 		
-		s.backColor = gProgressBarTest.transparent_color
+		s.backColor = mcProgRad.transparent_color
 		s.TransparencyKey = s.BackColor
 	),
 	fn OnPaint s = ( --set form antialiasing
@@ -40,13 +40,13 @@ struct sProgressBarTest (
 	),
 	fn timerTick s a = (
 		
-		if gProgressBarTest.circ_bar.value >= gProgressBarTest.circ_bar.maximum do (
+		if mcProgRad.circ_bar.value >= mcProgRad.circ_bar.maximum do (
 			
-			gProgressBarTest.stopTimer()
+			mcProgRad.stopTimer()
 			return OK
 		)
-		gProgressBarTest.circ_bar.value += 1
-		gProgressBarTest.circ_bar.text = gProgressBarTest.circ_bar.value as String
+		mcProgRad.circ_bar.value += 1
+		mcProgRad.circ_bar.text = mcProgRad.circ_bar.value as String
 	),
 	fn onStartTimerPressed s a = (
 		
@@ -56,12 +56,12 @@ struct sProgressBarTest (
 			"RUN":(
 			
 				s.text = "PAUSE"
-				gProgressBarTest.startTimer()
+				mcProgRad.startTimer()
 			)
 			"PAUSE":(
 			
 				s.text = "RUN"	
-				gProgressBarTest.stopTimer()
+				mcProgRad.stopTimer()
 			)
 		)
 	),
@@ -73,18 +73,15 @@ struct sProgressBarTest (
 	),
 	fn showForm = (
 		
-	--	local p = DotNetObject "System.IntPtr" ( Windows.GetMAXHWND() )
-	--	local maxHwnd = DotNetObject "MaxCustomControls.Win32HandleWrapper" p
-		--gProgressBarTest.form.show(maxHwnd)
 		local hw = maxHW()
-		gProgressBarTest.form.show(hw)
+		mcProgRad.form.show(hw)
 	),
-	fn hideForm = (gProgressBarTest.form.hide()),
-	fn closeForm = (gProgressBarTest.form.close()),
+	fn hideForm = (mcProgRad.form.hide()),
+	fn closeForm = (mcProgRad.form.close()),
 	fn onHideFormPressed s a = (
 		
-		gProgressBarTest.stopTimer()
-		gProgressBarTest.hideForm()
+		mcProgRad.stopTimer()
+		mcProgRad.hideForm()
 	),
 	fn initForm = (
 		
@@ -150,5 +147,5 @@ struct sProgressBarTest (
 	),
 	on create do (initForm())
 )
-gProgressBarTest = sProgressBarTest()
-gProgressBarTest.showForm()
+mcProgRad = MICRA_PROGRESSBAR_STRUCT()
+mcProgRad.showForm()

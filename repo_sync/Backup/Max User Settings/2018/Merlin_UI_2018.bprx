@@ -1,0 +1,212 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ADSK_BPR>
+    <BrushPresets_Config iconMin="5.000000" iconMax="40.000000">
+        <Context name="VertexPaint" contextID="(0x0,0x216EF0E)" pluginClassID="(0x43616D86,0x216EF0E)" pluginSuperclassID="2912" />
+        <Context name="Standard Brush Params" contextID="(0x0,0x5FB1707C)" pluginClassID="(0x2F2EF7E9,0x78FFE181)" pluginSuperclassID="512" />
+        <Context name="Paint Skin Weights" contextID="(0x0,0x5ECD700D)" pluginClassID="(0x95C723,0x15666)" pluginSuperclassID="2064" />
+        <Context name="PaintDeform" contextID="(0x0,0x36764F94)" pluginClassID="(0x1BF8338D,0x192F6098)" pluginSuperclassID="16" />
+        <Context name="PaintSoftSel" contextID="(0x0,0x4B70352B)" pluginClassID="(0x1BF8338D,0x192F6098)" pluginSuperclassID="16" />
+    </BrushPresets_Config>
+    <PresetList>
+        <Preset>
+            <Context contextID="(0x0,0x216EF0E)">
+                <Context_Param name="Mode" type="INT" value="1" />
+                <Context_Param name="Color" type="INT" value="1563637184" />
+                <Context_Param name="Opacity" type="FLOAT" value="100.000" />
+                <Context_Param name="BlurStrength" type="FLOAT" value="100.000" />
+            </Context>
+            <Context contextID="(0x0,0x5FB1707C)">
+                <Context_Param name="Falloff Curve" type="CURVEPTS">
+                    <Point x="0.000" inX="0.000" outX="0.571" y="1.000" inY="0.000" outY="0.000" flags="275" />
+                    <Point x="1.000" inX="-0.330" outX="0.000" y="0.000" inY="0.000" outY="0.000" flags="259" />
+                </Context_Param>
+                <Context_Param name="Name" type="STRING" value="Small 10" />
+                <Context_Param name="Min Size" type="FLOAT" value="0.000" />
+                <Context_Param name="Max Size" type="WORLD" value="10.000" />
+                <Context_Param name="Min Strength" type="FLOAT" value="0.000" />
+                <Context_Param name="Max Strength" type="WORLD" value="1.000" />
+                <Context_Param name="Pressure Sensitivity" type="BOOL" value="1" />
+                <Context_Param name="Pressure Affects" type="INT" value="1" />
+                <Context_Param name="Mirror" type="BOOL" value="0" />
+                <Context_Param name="Mirror Axis" type="INT" value="0" />
+                <Context_Param name="Mirror Offset" type="FLOAT" value="0.000" />
+                <Context_Param name="Mirror Gizmo Size" type="FLOAT" value="0.000" />
+            </Context>
+            <Context contextID="(0x0,0x5ECD700D)">
+                <Context_Param name="Mode" type="INT" value="1" />
+            </Context>
+            <Context contextID="(0x0,0x36764F94)">
+                <Context_Param name="" type="INT" value="4" />
+                <Context_Param name="" type="INT" value="1" />
+                <Context_Param name="" type="WORLD" value="6.000" />
+            </Context>
+            <Context contextID="(0x0,0x4B70352B)">
+                <Context_Param name="" type="INT" value="1" />
+                <Context_Param name="" type="FLOAT" value="0.800" />
+            </Context>
+        </Preset>
+        <Preset>
+            <Context contextID="(0x0,0x216EF0E)">
+                <Context_Param name="Mode" type="INT" value="1" />
+                <Context_Param name="Color" type="INT" value="1563637376" />
+                <Context_Param name="Opacity" type="FLOAT" value="100.000" />
+                <Context_Param name="BlurStrength" type="FLOAT" value="100.000" />
+            </Context>
+            <Context contextID="(0x0,0x5FB1707C)">
+                <Context_Param name="Falloff Curve" type="CURVEPTS">
+                    <Point x="0.000" inX="0.000" outX="0.330" y="1.000" inY="0.000" outY="0.000" flags="259" />
+                    <Point x="1.000" inX="-0.316" outX="0.000" y="0.000" inY="0.381" outY="0.000" flags="275" />
+                </Context_Param>
+                <Context_Param name="Name" type="STRING" value="Med 20" />
+                <Context_Param name="Min Size" type="FLOAT" value="0.000" />
+                <Context_Param name="Max Size" type="WORLD" value="20.000" />
+                <Context_Param name="Min Strength" type="FLOAT" value="0.000" />
+                <Context_Param name="Max Strength" type="WORLD" value="1.000" />
+                <Context_Param name="Pressure Sensitivity" type="BOOL" value="1" />
+                <Context_Param name="Pressure Affects" type="INT" value="1" />
+                <Context_Param name="Mirror" type="BOOL" value="0" />
+                <Context_Param name="Mirror Axis" type="INT" value="0" />
+                <Context_Param name="Mirror Offset" type="FLOAT" value="0.000" />
+                <Context_Param name="Mirror Gizmo Size" type="FLOAT" value="0.000" />
+            </Context>
+            <Context contextID="(0x0,0x5ECD700D)">
+                <Context_Param name="Mode" type="INT" value="1" />
+            </Context>
+            <Context contextID="(0x0,0x36764F94)">
+                <Context_Param name="" type="INT" value="4" />
+                <Context_Param name="" type="INT" value="1" />
+                <Context_Param name="" type="WORLD" value="8.000" />
+            </Context>
+            <Context contextID="(0x0,0x4B70352B)">
+                <Context_Param name="" type="INT" value="1" />
+                <Context_Param name="" type="FLOAT" value="0.800" />
+            </Context>
+        </Preset>
+        <Preset>
+            <Context contextID="(0x0,0x216EF0E)">
+                <Context_Param name="Mode" type="INT" value="1" />
+                <Context_Param name="Color" type="INT" value="1563637856" />
+                <Context_Param name="Opacity" type="FLOAT" value="100.000" />
+                <Context_Param name="BlurStrength" type="FLOAT" value="100.000" />
+            </Context>
+            <Context contextID="(0x0,0x5FB1707C)">
+                <Context_Param name="Falloff Curve" type="CURVEPTS">
+                    <Point x="0.000" inX="0.000" outX="0.524" y="1.000" inY="0.000" outY="-0.265" flags="275" />
+                    <Point x="1.000" inX="-0.341" outX="0.000" y="0.000" inY="0.579" outY="0.000" flags="259" />
+                </Context_Param>
+                <Context_Param name="Name" type="STRING" value="Large 40" />
+                <Context_Param name="Min Size" type="FLOAT" value="0.000" />
+                <Context_Param name="Max Size" type="WORLD" value="40.000" />
+                <Context_Param name="Min Strength" type="FLOAT" value="0.000" />
+                <Context_Param name="Max Strength" type="WORLD" value="1.000" />
+                <Context_Param name="Pressure Sensitivity" type="BOOL" value="1" />
+                <Context_Param name="Pressure Affects" type="INT" value="1" />
+                <Context_Param name="Mirror" type="BOOL" value="0" />
+                <Context_Param name="Mirror Axis" type="INT" value="0" />
+                <Context_Param name="Mirror Offset" type="FLOAT" value="0.000" />
+                <Context_Param name="Mirror Gizmo Size" type="FLOAT" value="0.000" />
+            </Context>
+            <Context contextID="(0x0,0x5ECD700D)">
+                <Context_Param name="Mode" type="INT" value="1" />
+            </Context>
+            <Context contextID="(0x0,0x36764F94)">
+                <Context_Param name="" type="INT" value="4" />
+                <Context_Param name="" type="INT" value="1" />
+                <Context_Param name="" type="WORLD" value="10.000" />
+            </Context>
+            <Context contextID="(0x0,0x4B70352B)">
+                <Context_Param name="" type="INT" value="1" />
+                <Context_Param name="" type="FLOAT" value="0.800" />
+            </Context>
+        </Preset>
+        <Preset>
+            <Context contextID="(0x0,0x216EF0E)">
+                <Context_Param name="Mode" type="INT" value="9" />
+                <Context_Param name="Color" type="INT" value="1563639040" />
+                <Context_Param name="Opacity" type="FLOAT" value="100.000" />
+                <Context_Param name="BlurStrength" type="FLOAT" value="100.000" />
+            </Context>
+            <Context contextID="(0x0,0x5FB1707C)">
+                <Context_Param name="Falloff Curve" type="CURVEPTS">
+                    <Point x="0.000" inX="0.000" outX="0.000" y="1.000" inY="0.000" outY="0.000" flags="259" />
+                    <Point x="0.781" inX="0.000" outX="0.000" y="0.707" inY="0.000" outY="0.000" flags="18" />
+                    <Point x="1.000" inX="-0.008" outX="0.000" y="0.000" inY="0.000" outY="0.000" flags="259" />
+                </Context_Param>
+                <Context_Param name="Name" type="STRING" value="Blend 40" />
+                <Context_Param name="Min Size" type="FLOAT" value="0.000" />
+                <Context_Param name="Max Size" type="WORLD" value="40.000" />
+                <Context_Param name="Min Strength" type="FLOAT" value="0.000" />
+                <Context_Param name="Max Strength" type="WORLD" value="1.000" />
+                <Context_Param name="Pressure Sensitivity" type="BOOL" value="1" />
+                <Context_Param name="Pressure Affects" type="INT" value="1" />
+                <Context_Param name="Mirror" type="BOOL" value="0" />
+                <Context_Param name="Mirror Axis" type="INT" value="0" />
+                <Context_Param name="Mirror Offset" type="FLOAT" value="0.000" />
+                <Context_Param name="Mirror Gizmo Size" type="FLOAT" value="0.000" />
+            </Context>
+            <Context contextID="(0x0,0x5ECD700D)">
+                <Context_Param name="Mode" type="INT" value="2" />
+            </Context>
+            <Context contextID="(0x0,0x36764F94)">
+                <Context_Param name="" type="INT" value="5" />
+                <Context_Param name="" type="INT" value="1" />
+                <Context_Param name="" type="WORLD" value="10.000" />
+            </Context>
+            <Context contextID="(0x0,0x4B70352B)">
+                <Context_Param name="" type="INT" value="3" />
+                <Context_Param name="" type="FLOAT" value="0.000" />
+            </Context>
+        </Preset>
+        <Preset>
+            <Context contextID="(0x0,0x216EF0E)">
+                <Context_Param name="Mode" type="INT" value="2" />
+                <Context_Param name="Color" type="INT" value="1563639360" />
+                <Context_Param name="Opacity" type="FLOAT" value="100.000" />
+                <Context_Param name="BlurStrength" type="FLOAT" value="100.000" />
+            </Context>
+            <Context contextID="(0x0,0x5FB1707C)">
+                <Context_Param name="Falloff Curve" type="CURVEPTS">
+                    <Point x="0.000" inX="0.000" outX="0.000" y="1.000" inY="0.000" outY="0.000" flags="258" />
+                    <Point x="0.758" inX="0.000" outX="0.119" y="1.003" inY="-0.005" outY="-0.023" flags="3" />
+                    <Point x="1.000" inX="-0.080" outX="0.000" y="0.000" inY="0.695" outY="0.000" flags="275" />
+                </Context_Param>
+                <Context_Param name="Name" type="STRING" value="Erase 40" />
+                <Context_Param name="Min Size" type="FLOAT" value="0.000" />
+                <Context_Param name="Max Size" type="WORLD" value="40.000" />
+                <Context_Param name="Min Strength" type="FLOAT" value="0.000" />
+                <Context_Param name="Max Strength" type="WORLD" value="1.000" />
+                <Context_Param name="Pressure Sensitivity" type="BOOL" value="1" />
+                <Context_Param name="Pressure Affects" type="INT" value="1" />
+                <Context_Param name="Mirror" type="BOOL" value="0" />
+                <Context_Param name="Mirror Axis" type="INT" value="0" />
+                <Context_Param name="Mirror Offset" type="FLOAT" value="0.000" />
+                <Context_Param name="Mirror Gizmo Size" type="FLOAT" value="0.000" />
+            </Context>
+            <Context contextID="(0x0,0x5ECD700D)">
+                <Context_Param name="Mode" type="INT" value="0" />
+            </Context>
+            <Context contextID="(0x0,0x36764F94)">
+                <Context_Param name="" type="INT" value="6" />
+                <Context_Param name="" type="INT" value="1" />
+                <Context_Param name="" type="WORLD" value="10.000" />
+            </Context>
+            <Context contextID="(0x0,0x4B70352B)">
+                <Context_Param name="" type="INT" value="2" />
+                <Context_Param name="" type="FLOAT" value="0.000" />
+            </Context>
+        </Preset>
+    </PresetList>
+    <CUIWindows>
+        <Window objectName="Brush Presets" name="Brush Presets" type="N" cType="1" toolbarRows="1">
+            <Items>
+                <Item typeID="1" type="CTB_CHECKBUTTON" controlID="10052" helpID="0" orientation="31" captionVisibility="0" iconName="BrushPresets/BrushPresetManager" />
+                <Item typeID="0" type="CTB_PUSHBUTTON" controlID="10051" helpID="0" orientation="31" captionVisibility="0" iconName="BrushPresets/AddNewPreset" />
+                <Item typeID="1" type="CTB_CHECKBUTTON" controlID="10001" helpID="0" orientation="31" fileIconIndex="0" outEnabledIndex="-1" outDisabledIndex="-1" inDisabledIndex="-1" captionVisibility="0" />
+                <Item typeID="1" type="CTB_CHECKBUTTON" controlID="10002" helpID="0" orientation="31" fileIconIndex="0" outEnabledIndex="-1" outDisabledIndex="-1" inDisabledIndex="-1" captionVisibility="0" />
+                <Item typeID="1" type="CTB_CHECKBUTTON" controlID="10003" helpID="0" orientation="31" fileIconIndex="0" outEnabledIndex="-1" outDisabledIndex="-1" inDisabledIndex="-1" captionVisibility="0" />
+                <Item typeID="1" type="CTB_CHECKBUTTON" controlID="10004" helpID="0" orientation="31" fileIconIndex="0" outEnabledIndex="-1" outDisabledIndex="-1" inDisabledIndex="-1" captionVisibility="0" />
+                <Item typeID="1" type="CTB_CHECKBUTTON" controlID="10005" helpID="0" orientation="31" fileIconIndex="0" outEnabledIndex="-1" outDisabledIndex="-1" inDisabledIndex="-1" captionVisibility="0" />
+            </Items>
+        </Window>
+    </CUIWindows>
+</ADSK_BPR>
