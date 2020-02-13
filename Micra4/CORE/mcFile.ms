@@ -382,11 +382,69 @@ struct MICRA_FILE (
 		if not doesFileExist fpath do return false
 		if isMaxFile fpath do try (loadMaxFile fpath useFileUnits:true quiet:false) catch()
 	),
+	fn exportFBX objs export_dir file_name ignoreLinks:false = (
+	
+		if objs.count == 0 do return false
+		--Geometry------------------------------------------------------------------------
+		FBXExporterSetParam "SmoothingGroups" false
+		FBXExporterSetParam "NormalsPerPoly" false
+		FBXExporterSetParam "TangentSpaceExport" false
+		FBXExporterSetParam "SmoothMeshExport" false
+		FBXExporterSetParam "Preserveinstances" false
+		FBXExporterSetParam "SelectionSetExport" false
+		FBXExporterSetParam "GeomAsBone" false
+		FBXExporterSetParam "ColladaTriangulate" false
+		FBXExporterSetParam "PreserveEdgeOrientation" false
+		FBXExporterSetParam "Triangulate" false 
+		--Animation------------------------------------------------------------------------
+		FBXExporterSetParam "Animation" false
+		--Cameras------------------------------------------------------------------------
+		FBXExporterSetParam "Cameras" false
+		--Lights------------------------------------------------------------------------
+		FBXExporterSetParam "Lights" false
+		--Embed Media--------------------------------------------------------------------
+		FBXExporterSetParam "EmbedTextures" false
+		--Units----------------------------------------------------------------------------
+		--Axis Conversion-----------------------------------------------------------------
+		FBXExporterSetParam "AxisConversionMethod" "None" --"None", "Animation", or "Fbx_Root".
+		FBXExporterSetParam "UpAxis" "Y" 
+		--UI----------------------------------------------------------------
+		FBXExporterSetParam "ShowWarnings" true
+		FBXExporterSetParam "GenerateLog" false
+		--FBX File Format----------------------------------------------------------------
+		FBXExporterSetParam "ASCII" false
+		FBXExporterSetParam "FileVersion" "FBX201400"
+		local sel_clones = #()
+		if (ignoreLinks) do (
+			
+			with redraw off  (
+				
+				maxOps.CloneNodes objs cloneType:#copy newNodes:&sel_clones
+				select sel_clones
+				for o in sel_clones do o.parent = undefined
+			)
+		)
+		exportFile (export_dir+file_name+".FBX") #noPrompt selectedOnly:true using:FBXEXP
+		if (ignoreLinks) do delete sel_clones
+	),
+	/**
+	*@Usage
+		import_dir ex: "c:\\temp\\"
+		file_name ex: "test_0001"
+		replaceObjects : list of object names which will be deleted beore import begins
+	*/
+	fn importFBX import_dir file_name uniqueNames:true = (
+	
+		if subobjectlevel != undefined do (subobjectlevel = 0; max create mode)
+		max select none
+		importfile (import_dir+file_name+".FBX") #noPrompt using:FBXIMP
+		max zoomext sel
+	),
 	/**
 	*@Example
 		mcFile.createNewFile @"c:\temp\test_001.txt" file_text:"abc" override:true
 	*/
-	fn createNewFile file_path file_text:"" override:false= (
+	fn createNewFile file_path file_text:"" override:false = (
 	
 		if doesFileExist file_path do (
 			if override then deleteFile file_path else (

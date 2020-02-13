@@ -61,7 +61,35 @@ rollout FBXQuickImportExportDialog "FBX Quick Import - Export v0.02" width:472 h
 	)
 	fn exportFBX = (
 		
-		FBXExporterSetParam "TRIANGULATE" false --http://docs.autodesk.com/3DSMAX/15/ENU/MAXScript-Help/index.html?url=files/GUID-54B1F140-B304-48A2-9829-C68B345E2044.htm,topicNumber=d30e665654
+		FBXExporterSetParam "SmoothingGroups" false
+		FBXExporterSetParam "NormalsPerPoly" false
+		FBXExporterSetParam "TangentSpaceExport" false
+		FBXExporterSetParam "SmoothMeshExport" false
+		FBXExporterSetParam "Preserveinstances" false
+		FBXExporterSetParam "SelectionSetExport" false
+		FBXExporterSetParam "GeomAsBone" false
+		FBXExporterSetParam "ColladaTriangulate" false
+		FBXExporterSetParam "PreserveEdgeOrientation" false
+		FBXExporterSetParam "Triangulate" false 
+		--Animation------------------------------------------------------------------------
+		FBXExporterSetParam "Animation" false
+		--Cameras------------------------------------------------------------------------
+		FBXExporterSetParam "Cameras" false
+		--Lights------------------------------------------------------------------------
+		FBXExporterSetParam "Lights" false
+		--Embed Media--------------------------------------------------------------------
+		FBXExporterSetParam "EmbedTextures" false
+		--Units----------------------------------------------------------------------------
+		--Axis Conversion-----------------------------------------------------------------
+		FBXExporterSetParam "AxisConversionMethod" "None" --"None", "Animation", or "Fbx_Root".
+		FBXExporterSetParam "UpAxis" "Y" 
+		--UI----------------------------------------------------------------
+		FBXExporterSetParam "ShowWarnings" true
+		FBXExporterSetParam "GenerateLog" false
+		--FBX File Format----------------------------------------------------------------
+		FBXExporterSetParam "ASCII" false
+		FBXExporterSetParam "FileVersion" "FBX201400"
+		--
 		if selection.count == 0 do  ((format "Nothig Selected! [Micra] \n"); return false)
 		local asset_name = edt_asset_name.text
 		local export_path = edt_import.text
@@ -82,7 +110,6 @@ rollout FBXQuickImportExportDialog "FBX Quick Import - Export v0.02" width:472 h
 			
 			delete sel_clones
 		)
-		print "FBX EXPORTED"
 	)
 	on FBXQuickImportExportDialog open do (
 		

@@ -20,10 +20,11 @@ rollout mcRepairDialog "" width:324 height:156
 	button 'btn_1' "Cancel" pos:[12,124] width:60 height:20 align:#left 
 	button 'btn_2' "Accept" pos:[252,124] width:60 height:20 align:#left
 	GroupBox 'grp2' "Chose Type:" pos:[12,20] width:140 height:100 align:#left
-	GroupBox 'grp3' "Standart Custom:" pos:[160,20] width:152 height:100 align:#left
+	GroupBox 'grp3' "Custom:" pos:[160,20] width:148 height:100 align:#left
 	checkbox 'chkSaveLinks' "Save Links" pos:[172,40] width:100 height:16 checked:true align:#left
 	checkbox 'chkSaveWire' "Save Wirecolor" pos:[172,56] width:100 height:16 align:#left
 	checkbox 'chkSaveLayer' "Save Layer" pos:[172,72] width:100 height:16 checked:true align:#left
+	radioButtons 'rdo_export_import' "" pos:[172,92] width:100 height:16 enabled:true labels:#("OBJ", "FBX") default:1 columns:2 align:#left toolTip:"Import - Export method"
 	fn saveLinks nodes =
 	(
 		if nodes.count == 0 do return #()
@@ -116,38 +117,118 @@ rollout mcRepairDialog "" width:324 height:156
 			::mcPopUp.show "Groups is not allowed" type:#Warning delay:2000
 		)
 	)
+	fn getObjectsSettings objs = (
+	
+		--TODO
+		--MAYBE ITS TIME TO BUILD A SMART DICTIONARY WITH SEARCH ITEM FUNCTIONALITY
+		--store links(parents) and layer and object name  
+		struct OBJECT_IMPEXP_DATA (obj_name, parent_name, layer_name, wire_color, obj_pivot)
+		local objs_data = for o in objs collect (
+				
+			local parent_name = if o.parent != undefined do o.parent.name				
+			OBJECT_IMPEXP_DATA o.name parent_name o.layer.name o.wirecolor o.pos
+		)
+		objs_data
+	)
+	fn resoreObjectsSettings objs data type:#OBJ= (
+	
+		
+			case type of (
+			
+				#OBJ : (
+				
+					for o in objs do o.name = substring o.name 4 -1 --delete 'ojb' from names (objBox01)
+				)
+				#FBX : 					
+				--import fixed objects
+				for o in objs do ( --return original names back (get objects by position and faces.count ?)
+				
+					--find same object in saved database
+					--assing old name back
+				)
+			
+			)
+	
+			--TODO
+			--MAYBE ITS TIME TO BUILD A SMART DICTIONARY WITH SEARCH ITEM FUNCTIONALITY
+			--restore links, layers, wirecolor (match by object name)
+			-- fn getItemByName data obj_name = (
+				
+				-- for d in data where d.obj_name == obj_name do exit with d
+			-- )
+			-- fn linkToParent obj parent_name = (
+			
+				-- local obj_parent = getNodeByName parent_name
+				-- obj.parent = obj_parent
+			-- )
+			-- fn moveToLayer obj layer_name = (
+			
+				-- local obj_layer = LayerManager.getLayerFromName layer_name
+				-- if obj_layer != undefined do obj_layer.addnode obj
+			-- )
+			-- for o in selection do (
+			
+				-- local od = getItemByName objs_data o.name
+				-- if not (isStruct od) do continue
+				-- if chkSaveLinks.checked do linkToParent o od.parent_name
+				-- if chkSaveLayer.checked do moveToLayer o od.layer_name
+				-- if chkSaveWire.checked do o.wirecolor = od.wire_color
+				-- obj.pivot = od.obj_pivot
+			-- )
+			
+		::mcPopUp.show "Export/Import is finished Succesfully." delay:3000
+		max zoomext sel
+	)
 	fn repairExportImport = (
 	
 		if (::mcPopUp.show "This Operation is not undoable.\nDo you want Export/Import Selected object(s) ?" title:"Repair:" type:#YesNo) == true then (
-			try (
-				--Configurate max2obj.cfg
-				local cfgPath = (GetDir #plugcfg +"\max2obj.cfg")
-				if doesFileExist cfgPath do deleteFile cfgPath
-				local f = createFile cfgPath
-				AutExe = "\n" 
-				AutExe += "[Max2Obj] \n"
-				AutExe += "GroupFrom=0 \n" + "Materials=1 \n" + "MtlCreate=0 \n" + "Rotate=0 \n"
-				AutExe += "Texture=1 \n" + "Normals=1 \n" + "Smooth=1 \n" + "Facetype=2 \n"
-				AutExe += "Scale=1.000000 \n" + "Digits=12 \n" + "Compress=0 \n" + "Relative=0 \n"
-				format AutExe to:f
-				close f
+			
+			local import_export_dir = GetDir #import + "\\"
+			local objs = selection as array
+			local objs_data = getObjectsSettings objs
+			
+			DestroyDialog mcRepairDialog
+			case rdo_export_import.state of (
 				
-				local importDir = GetDir #import + "\\"
-				--Export and Import
-				exportFile (importDir+"mRepair.obj") #noPrompt selectedOnly:true 
-				delete $
-				importFile (importDir+"mRepair.obj") #noPrompt
-				convertToPoly $
-				max zoomext sel
-				for o in selection do o.name = substring o.name 4 -1 --delete 'ojb' from names (objBox01)
-				DestroyDialog mcRepairDialog
-				::mcPopUp.show "Export/Import is finished Succesfully." delay:3000
-				true
-						
-			) catch (::mcPopUp.show "Repair Failed." type:#Warning delay:2000)
+				1: try (
+					--Configurate max2obj.cfg (permanently save obj export settings)
+					local cfgPath = (GetDir #plugcfg +"\max2obj.cfg")
+					if doesFileExist cfgPath do deleteFile cfgPath
+					local f = createFile cfgPath
+					AutExe = "\n" 
+					AutExe += "[Max2Obj] \n"
+					AutExe += "GroupFrom=0 \n" + "Materials=1 \n" + "MtlCreate=0 \n" + "Rotate=0 \n"
+					AutExe += "Texture=1 \n" + "Normals=1 \n" + "Smooth=1 \n" + "Facetype=2 \n"
+					AutExe += "Scale=1.000000 \n" + "Digits=12 \n" + "Compress=0 \n" + "Relative=0 \n"
+					format AutExe to:f
+					close f			
+					--Export and Import
+					exportFile (import_export_dir+"mRepair.obj") #noPrompt selectedOnly:true 
+					delete objs
+					importFile (import_export_dir+"mRepair.obj") #noPrompt
+					objs = selection as array --recollect imported objects
+					convertToPoly objs
+					resoreObjectsSettings objs objs_data type:#OBJ
+					true
+							
+				) catch (::mcPopUp.show "Repair Failed > method:OBJ." type:#Warning delay:4000)
+				
+				2: try (
+					
+					--export bad objects
+					mcFile.exportFBX objs import_export_dir "mRepair" ignoreLinks:true
+					delete objs --delete bad objects
+					mcFile.importFBX import_export_dir "mRepair"
+					objs = selection as array --recollect imported objects
+					convertToPoly objs
+					resoreObjectsSettings objs objs_data type:#FBX
+					true
+					
+				) catch  (::mcPopUp.show "Repair Failed > method:FBX." type:#Warning delay:4000)
+			)
+
 		) else (
 		
-			DestroyDialog mcRepairDialog
 			::mcPopUp.show "Repair Canceled." type:#Abort delay:2000
 		)
 	)
