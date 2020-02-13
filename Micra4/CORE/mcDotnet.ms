@@ -13,18 +13,20 @@
 */
 Struct MICRA_DOTNET (
 	
-	ByteClass   	= (dotNetClass "System.Byte"),
-	Cursors     	= (dotNetClass "Cursors"),
-	DragDropEffect 	= (dotNetClass "DragDropEffects"),
-	PointClass		= (dotnetClass "Drawing.Point"),
-	Keys			= (dotNetClass "Keys"),
-	File			= (dotnetClass "IO.File"),
-	Screen			= (dotnetClass "System.Windows.Forms.Screen"),
-	SysTime			= (dotnetClass "System.DateTime"),
-	AnchorStyles	= (dotnetClass "System.Windows.Forms.AnchorStyles"),
+	ByteClass   	= dotNetClass "System.Byte",
+	Cursor			= dotNetClass "System.Windows.Forms.Cursor",
+	Cursors     	= dotNetClass "Cursors",
+	DragDropEffect 	= dotNetClass "DragDropEffects",
+	PointClass		= dotnetClass "Drawing.Point",
+	Keys			= dotNetClass "Keys",
+	File			= dotnetClass "IO.File",
+	Screen			= dotnetClass "System.Windows.Forms.Screen",
+	SysTime			= dotnetClass "System.DateTime",
+	AnchorStyles	= dotnetClass "System.Windows.Forms.AnchorStyles",
 	--@Example > text_size = mcDotnet.TextRenderer.MeasureText "abc" (mcDotnet.dFont())
-	TextRenderer	= (dotnetClass "System.Windows.Forms.TextRenderer"),
-	DockStyle		= (dotnetClass "System.Windows.Forms.DockStyle"),
+	TextRenderer	= dotnetClass "System.Windows.Forms.TextRenderer",
+	DockStyle		= dotnetClass "System.Windows.Forms.DockStyle",
+	MouseButton	= dotnetClass "System.Windows.Input.MouseButton",
 	/**
 	*@Example
 		ns = "http://test"
