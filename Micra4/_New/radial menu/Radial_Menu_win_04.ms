@@ -6,6 +6,7 @@ struct MICRA_RADIAL_MENU (
 	
 	window,
 	canvas,
+	center_pos = [0, 0],
 	drag_pos = [0,0,0], --form mouse pos
 	circle_1_radius, circle_2_radius, button_1_size, button_2_size,
 	fn createButton btn_name pos2P size2P = (
@@ -33,11 +34,16 @@ struct MICRA_RADIAL_MENU (
 		ball.Fill = radBrush
 		ball
 	),	
-	fn generateArcButtons radius cnt angle_from angle_to center:[0,0] size:[32, 32] = (
+	fn executeAction s a = (
+		
+		
+		format "Execute Action:%\n" s.name
+		
+	),
+	fn generateArcButtons cnt radius angle_from angle_to center:[0,0] size:[32, 32] = (
 		
 		local arc_angle = angle_to - angle_from
 		local step = arc_angle / cnt --(cnt - 1)
-		lbl_step.text = step as string + " ?"
 		local step_angle = angle_from
 		--collect points in arc trajectory
 		for i = 1 to cnt collect (
@@ -47,7 +53,7 @@ struct MICRA_RADIAL_MENU (
 			step_angle += step
 			local p = center + [px, py]
 			local btn = createButton ("btn_2_0" + i as string) p size
-			dotnet.addeventhandler btn "MouseUp" onMouseUp
+			dotnet.addeventhandler btn "MouseUp" executeAction
 			btn
 		)
 	),
@@ -79,7 +85,18 @@ struct MICRA_RADIAL_MENU (
 			)
 			default : (
 				
-				generateArcButtons radius cnt angle_from angle_to center:[0,0] 
+				local mcs = mcMenuRad
+				local radial_buttons = mcs.generateArcButtons 5 mcs.circle_2_radius 0 130 center:mcs.center_pos
+				for btn in radial_buttons do ( --distribute buttons to canvas
+
+					local pos = btn.tag
+					if pos != undefined do (
+						
+						mcs.canvas.SetLeft btn pos.x
+						mcs.canvas.SetTop btn pos.y
+					)
+					mcs.canvas.Children.Add btn
+				)
 			)
 		)
 		format "mouse up... btn:%\n" s.name 
@@ -101,15 +118,18 @@ struct MICRA_RADIAL_MENU (
 	fn buildRadialMenu btns_count  rad:50 size_1:48 size_2:32 = (
 		
 		circle_1_radius = rad
-		circle_2_radius = rad + 5 + size_2 * 2 --first radius + offset + button size *2
+		circle_2_radius = rad + 8 + size_2 --first radius + offset + button size *2
 		button_1_size = size_1
 		button_2_size = size_2
 		
 		local min_size = (size_1 + size_2) / 2
 		if  min_size > rad do rad = min_size
 		--local rad = size_1 + size_2 * 2 
-		local pos_1 = [rad - size_1 / 2, rad - size_1 / 2]
-		local pos_2 = [rad - size_2 / 2, rad - size_2 / 2]
+		local pos_1 = [circle_2_radius - size_1 / 2, circle_2_radius - size_1 / 2]
+		local pos_2 = [circle_2_radius - size_2 / 2, circle_2_radius - size_2 / 2]
+		
+		center_pos = pos_1
+		
 		local mcolor = dotnetclass "System.Windows.Media.Color"
 		
 		local center_button = createButton "btn_start" pos_1 [size_1, size_1]
@@ -121,8 +141,8 @@ struct MICRA_RADIAL_MENU (
 		append radial_buttons center_button
 		
 		local cv = dotnetobject "System.Windows.Controls.Canvas"
-		cv.Width = rad*2
-		cv.Height = rad*2
+		cv.Width = circle_2_radius*2
+		cv.Height = circle_2_radius*2
 		
 		for btn in radial_buttons do ( --distribute buttons to canvas
 
@@ -136,8 +156,8 @@ struct MICRA_RADIAL_MENU (
 		)
 		--create window component
 		local wp = dotnetobject "System.Windows.Window"
-		wp.Width = rad*2 + size_2
-		wp.Height = rad*2 + size_2
+		wp.Width = circle_2_radius*2 + size_2
+		wp.Height = circle_2_radius*2 + size_2
 		--open window at mouse cursor
 		wp.WindowStartupLocation = wp.WindowStartupLocation.Manual
 		local mouse_hit = mouse.screenpos - ( [rad, rad]  / 2 )
