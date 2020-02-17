@@ -16,6 +16,10 @@ Struct MICRA_DOTNET (
 	ByteClass   	= dotNetClass "System.Byte",
 	Cursor			= dotNetClass "System.Windows.Forms.Cursor",
 	Cursors     	= dotNetClass "Cursors",
+	Brushes 		= dotNetClass "System.Drawing.Brushes", --many colors (Aqua, Violet, Turquoise, Transparent...)
+	Graphics 		= dotNetClass "System.Drawing.Graphics",
+	Drawing2D		= dotNetClass "System.Drawing.Drawing2D", --InterpolationMode, CompositingQuality, PixelOffsetMode, SmoothingMode
+	LineCap			= dotnetClass "System.Drawing.Drawing2D.LineCap", --Round, Flat
 	DragDropEffect 	= dotNetClass "DragDropEffects",
 	PointClass		= dotnetClass "Drawing.Point",
 	Keys			= dotNetClass "Keys",

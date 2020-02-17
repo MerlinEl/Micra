@@ -33,21 +33,35 @@ fn netDrawCircle radius offset:[0, 0] thickness:10 clr:blue = (
 )
 fn netDrawArc radius start_angle end_angle  offset:[0, 0] thickness:10 clr:blue = (
 	
-	local brush = dotNetObject "System.Drawing.SolidBrush" (mcDotnet.dColor clr)
-	local pen = dotNetObject "system.drawing.pen" brush thickness  
+	local brush_1 = dotNetObject "System.Drawing.SolidBrush" (mcDotnet.dColor gray) --background
+	local brush_2 = dotNetObject "System.Drawing.SolidBrush" (mcDotnet.dColor clr) --fill arc
+	local brush_3 = dotNetObject "System.Drawing.SolidBrush" (mcDotnet.dColor red) --border
+	local pen_1 = dotNetObject "system.drawing.pen" brush_1 thickness  
+	local pen_2 = dotNetObject "system.drawing.pen" brush_2 thickness  
+	local pen_3 = dotNetObject "system.drawing.pen" brush_3 2  
 	local bm = dotNetObject "System.Drawing.Bitmap" (radius*2) (radius*2)
 	local g = mcDotnet.Graphics.FromImage bm 
+	g.Clear(mcDotnet.dColor black) --(color 0 50 50))
 	g.SmoothingMode = g.SmoothingMode.AntiAlias
+	
+-- graphics.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBilinear;
+-- graphics.CompositingQuality = System.Drawing.Drawing2D.CompositingQuality.HighQuality;
+-- graphics.PixelOffsetMode = System.Drawing.Drawing2D.PixelOffsetMode.HighQuality;
+-- graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
+	
     --Create rectangle to bound ellipse.
-	local pos = [offset.x/2 - thickness, offset.y/2 - thickness]
+	local pos = [thickness, thickness]
     local rect = mcDotnet.dRect pos ([radius*2, radius*2] - thickness*2)
+    local rect_out = mcDotnet.dRect [0,0] ([radius*2, radius*2] - thickness*2)
    --Draw arc to screen.
-    g.drawArc pen rect start_angle end_angle
+	g.DrawEllipse pen_1 rect
+    g.DrawArc pen_2 rect start_angle end_angle
+	g.DrawEllipse pen_3 rect_out	
 	bm
 )
 fn createDotnetProgressBar radius thickness percent = (
 	
-	local margins = 2
+	local margins = 0
 	local form_size =  radius*2 + margins*2
 	local form = dotNetObject "MaxCustomControls.MaxForm"
 	local canvas = dotNetObject  "System.Windows.Forms.PictureBox"
@@ -65,20 +79,24 @@ fn createDotnetProgressBar radius thickness percent = (
 	
 -- 	canvas.Image = netDrawCircle radius offset:[radius, radius]  thickness:thickness clr:green
 	local percent_to_angle = (360.0 / 100.0) * percent
-	canvas.Image = netDrawArc radius -90 percent_to_angle offset:[radius, radius]  thickness:thickness clr:green
+	canvas.Image = netDrawArc radius -90 percent_to_angle offset:([form_size, form_size]/2) thickness:thickness clr:green
 	
 	
 	canvas.BorderStyle = canvas.BorderStyle.None
-	canvas.bounds = mcDotnet.dRect [margins/2 - thickness/2, margins/2- thickness/2] [radius*2 + thickness, radius*2 + thickness]
+	canvas.bounds = mcDotnet.dRect [margins,  margins] [form_size, form_size]
+	--canvas.bounds = mcDotnet.dRect [margins - thickness/2, margins- thickness/2] [radius*2 + thickness, radius*2 + thickness]
 	canvas.backColor = transparent_color
 	
 	--dotnet.addEventHandler canvas "Paint" onCanvasPaint
 	
-	form.controls.add canvas
 	
-	uiDotNetPictureBox = form
-	local hv = DotNetObject "NativeWindow"
-	hv.AssignHandle (DotNetObject "System.IntPtr" (Windows.GetMaxHWND())) 
-	uiDotNetPictureBox.show(hv)
+	--if uiDotNetPictureBox == undefined or not uiDotNetPictureBox.visible do (
+		
+		form.controls.add canvas
+		uiDotNetPictureBox = form
+		local hv = DotNetObject "NativeWindow"
+		hv.AssignHandle (DotNetObject "System.IntPtr" (Windows.GetMaxHWND())) 
+		uiDotNetPictureBox.show(hv)
+	--)
 )
-createDotnetProgressBar 148 30 80
+createDotnetProgressBar 148 30 90 --progress percentage

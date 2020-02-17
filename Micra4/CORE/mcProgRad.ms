@@ -1,126 +1,168 @@
-Global mcProgRad
-/**
-*@Usage
-	val = 1
-	mcProgRad.progeressbar val msg:"Downoading Update:"
-	if val >= 100 do mcProgRad.progeressbar 100 msg:"Downoad Finished:" close:true 
-	
-	
-		mcProgRad.progeressbar i msg:"Downoading Update:"
-	if i >= 100 do mcProgRad.progeressbar 100 msg:"Downoad Finished:" close:true 
+--------------------------------------------------------------------------------
+/* mcProgRad by Orien 2020 */
+--------------------------------------------------------------------------------
+/*
+*@Used Structures
+	mcDotnet
+*
+*@Used Objects
 
-	mcProgRad.openForm()
-	mcProgRad.hideForm()
+*
+*@Example
+	mcProgRad.progeressTo a.ProgressPercentage msg:"Downoading Update:"
+	if a.ProgressPercentage >= 100 do mcProgRad.progeressTo 100 msg:"Downoad Finished:" close:true 
 	
 	
-	
+	mcProgRad.progeressTo 25 msg:"Downoading..."
+	mcProgRad.progeressTo 45 msg:"Downoading..."
+	mcProgRad.progeressTo 65 msg:"Downoading..."
+	mcProgRad.progeressTo 100 msg:"Downoad Finished:" close:true 
 */
+Global mcProgRad
 if isStruct mcProgRad do mcProgRad.closeForm()
 struct MICRA_PROGRESSBAR_STRUCT (	
 	
 	form = dotNetObject "MaxCustomControls.MaxForm",
-	cp_path = micra.AppsDir +@"Assembly\CircularProgressBar.dll",
--- 	wf_path = micra.AppsDir +@"Assembly\WinFormAnimation.dll",
-	font1		= dotnetobject "System.Drawing.Font" "Impact" 20,
-	font2		= dotnetobject "System.Drawing.Font" "Impact" 12,
-	btn_ok		= dotnetobject "Button",	
+	canvas = dotNetObject  "System.Windows.Forms.PictureBox",
+	lbl_title = dotnetObject "Label",
+	lbl_info = dotnetObject "Label",
+	btn_close= dotnetobject "Button",	
+	font1		= mcDotnet.dFont font:"Impact" size:20 style:"Regular",
+	font2		= mcDotnet.dFont font:"Impact" size:16 style:"Regular",
+	font3		= mcDotnet.dFont font:"Impact" size:30 style:"Regular",
 	circ_bar	= undefined,
 	transparent_color = mcDotnet.dColor (color 0 50 50),
-	fn onBackColorChanged s a = ( --set form transparency
-		
-		s.backColor = mcProgRad.transparent_color
-		s.TransparencyKey = s.BackColor
-	),
-	fn OnPaint s = ( --set form antialiasing
-		
-		local g = s.Graphics
-		g.SmoothingMode = g.SmoothingMode.HighQuality
-		g.CompositingQuality = g.CompositingQuality.HighQuality
-	),
-	fn isFormHidden = (not mcProgRad.form.visible),
-	fn closeForm = (mcProgRad.form.close()),
+	border_color = color 50 50 50,
 	fn showForm = (
-		
+
 		local hv = DotNetObject "NativeWindow"
 		hv.AssignHandle (DotNetObject "System.IntPtr" (Windows.GetMaxHWND())) 
-		mcProgRad.form.show(hv)	
+		mcProgRad.form.show(hv)
 	),
-	fn hideForm = (
-		
-		mcProgRad.hideForm()
-		mcProgRad.circ_bar.value = 0
-		mcProgRad.circ_bar.text =  "0"
-	),
-	fn onOkPressed s a = (
+	fn hideForm = (mcProgRad.form.hide()),
+	fn closeForm = (mcProgRad.form.close()),
+	fn onHideFormPressed s a = (
 		
 		mcProgRad.hideForm()
 	),
-	fn progeressBar val color:(color 255 200 18) msg:"Progress..." image:"default" close:false = (
-		
-		if mcProgRad.isFormHidden() do showForm()
-		local img_path = case image of (
-			
-			"default" : Micra.RootDir+"Img\\3DGall_Loader_01.bmp"	
-		)
-		if mcProgRad.circ_bar.value < mcProgRad.circ_bar.maximum then (
-			
-			mcProgRad.circ_bar.value  = val
-			mcProgRad.circ_bar.text = mcProgRad.circ_bar.value as String
-			--mcProgressBarDialog.grp_info.text = msg +"( "+ ((val as integer) as string) + " )%"
-		) else (
+	fn onFormPaint s a = (
+	
+		s.backColor = mcDotnet.dColor (color 0 50 50) --get rid off remains untranspared areas
+	),
+	-- fn onLabelPaint s a = (
 
-			if close do (sleep 0.3; mcProgRad.hideForm())
-		)
+		-- local g = a.Graphics
+		-- ControlPaint.DrawBorder(e.Graphics, label1.DisplayRectangle, Color.Blue, ButtonBorderStyle.Solid);
+	-- ),
+	fn onFormShow s a = ( --realign info text  component
+		
+		format "form shown\n"
+		local canvas = mcProgRad.canvas
+		local lbl_info = mcProgRad.lbl_info
+		local canvas_center = [canvas.width, canvas.height]/2 + [canvas.location.x, canvas.location.y]
+		lbl_info.location = mcDotnet.dPoint (canvas_center - [lbl_info.width/2, lbl_info.height/2])
+		
+		-- mcProgRad.form.AllowTransparency=false
+		-- mcProgRad.form.TransparencyKey = mcProgRad.transparent_color
+	),
+	fn drawProgressBar radius start_angle end_angle thickness:10 fill_clr:blue border_clr:black= (
+	
+		local brush_1 = dotNetObject "System.Drawing.SolidBrush" (mcDotnet.dColor gray) --background
+		local brush_2 = dotNetObject "System.Drawing.SolidBrush" (mcDotnet.dColor fill_clr) --fill arc
+		local brush_3 = dotNetObject "System.Drawing.SolidBrush" (mcDotnet.dColor border_clr) --border
+		local pen_1 = dotNetObject "system.drawing.pen" brush_1 thickness  
+		local pen_2 = dotNetObject "system.drawing.pen" brush_2 thickness  
+		local pen_3 = dotNetObject "system.drawing.pen" brush_3 2  
+		local bm = dotNetObject "System.Drawing.Bitmap" (radius*2) (radius*2)
+		local g = mcDotnet.Graphics.FromImage bm 
+		g.Clear(mcDotnet.dColor (color 0 50 50))
+		-- g.Clear(mcDotnet.dColor blue)
+		--set best quality
+		g.InterpolationMode = g.InterpolationMode.HighQualityBilinear
+		g.CompositingQuality = g.CompositingQuality.HighQuality
+		g.PixelOffsetMode = g.PixelOffsetMode.HighQuality
+		g.SmoothingMode = g.SmoothingMode.AntiAlias
+		--Create rectangle to bound ellipse. (in ,out, center)
+		local pos_1 = [thickness, thickness]/2 + 1
+		local pos_2 = [1, 1]
+		local pos_3 = [1, 1] + thickness
+		local rect = mcDotnet.dRect pos_1 ([radius*2, radius*2] - thickness-2)
+		local rect_out = mcDotnet.dRect pos_2 ([radius*2, radius*2]-2)
+		local rect_in = mcDotnet.dRect pos_3 ([radius*2, radius*2]-2 - thickness*2)
+	   --Draw arc to screen.
+		pen_1.StartCap = mcDotnet.LineCap.Round
+        pen_1.EndCap = mcDotnet.LineCap.Round
+		g.DrawEllipse pen_1 rect --draw circle background
+		g.DrawArc pen_2 rect start_angle end_angle --draw arc fill
+		g.DrawEllipse pen_3 rect_out --draw outer border
+		g.DrawEllipse pen_3 rect_in	--draw inner border
+		bm
+	),
+	fn progeressTo percent msg:"Loading..." close:false = (
+	
+		
 	),
 	fn initForm = (
 		
+		local margins = 2
+		local radius = 124
+		local percent = 90
+		local thickness = 30
+		local form_size = radius*2
+		local form_center = [form_size, form_size]/2
 		form.StartPosition = form.StartPosition.Manual
 		form.ShowInTaskBar = false
 		form.FormBorderStyle = form.FormBorderStyle.None
-		form.AllowTransparency=false
+		form.AllowTransparency = true
 		form.TransparencyKey = transparent_color
-		form.width = 200
-		form.height = 300
+		form.Size = mcDotnet.dSize [form_size, form_size + 64]
 		form.location = mcDotnet.dPoint (mcSystem.getMaxCenter() - [form.width, form.height] / 2)
-		form.opacity = 0.9
+		form.opacity = 0.8
 		
-		btn_ok.text = "OK"
-		btn_ok.name = "btn_ok"
-		btn_ok.font = font2
-		btn_ok.foreColor = mcDotnet.dColor  (color 9 102 51)
-		btn_ok.backColor = mcDotnet.dColor green
-		btn_ok.Dock = btn_ok.Dock.Bottom
+		lbl_title.text = "Loading..."
+		lbl_title.name = "lbl_title"
+		lbl_title.BorderStyle = lbl_title.BorderStyle.None
+		lbl_title.textAlign = lbl_title.textAlign.MiddleCenter
+		lbl_title.font = font2
+		lbl_title.foreColor = mcDotnet.dColor (color 215 247 122)
+		lbl_title.backColor = mcDotnet.dColor green
+		lbl_title.Dock = lbl_title.Dock.Top
+		lbl_title.backColor = transparent_color
 		
-		local a = dotnet.LoadAssembly cp_path 
-	-- 	a.GetTypes()
-		circ_bar = dotnetObject "CircularProgressBar.CircularProgressBar"
-		circ_bar.Name = "circ_bar"
-		circ_bar.Text = "0"
-		circ_bar.SuperscriptText = "%"
-		circ_bar.SuperscriptColor = mcDotnet.dColor green --(color 0 200 200)
-		circ_bar.SuperscriptMargin = mcDotnet.dPadding 10 55 0 0
-		circ_bar.SubscriptText = ""
--- 		circ_bar.SubscriptColor = ""
-		circ_bar.outerColor = mcDotnet.dColor (color 0 120 120)
-		circ_bar.progressColor = mcDotnet.dColor green
-		circ_bar.innerColor = transparent_color
-		circ_bar.foreColor = mcDotnet.dColor green --(color 0 200 200)
-		circ_bar.minimum = 0
-		circ_bar.maximum = 100
-		circ_bar.ProgressWidth = 20
-		circ_bar.MaximumSize = mcDotnet.dSize [200, 200]
-		circ_bar.Font = mcDotnet.dFont font:"Tahoma" size:35 style:"Bold"
-		circ_bar.location = mcDotnet.dPoint (([form.width , form.height] - [circ_bar.width , circ_bar.height]) / 2)
-		circ_bar.value =  0
-		circ_bar.AutoSize = true
-		--circ_bar.Dock = circ_bar.Dock.Top
+		local percent_to_angle = (360.0 / 100.0) * percent
+		canvas.Image = drawProgressBar radius -90 percent_to_angle thickness:thickness fill_clr:green border_clr:border_color
+		canvas.BorderStyle = canvas.BorderStyle.None
+		canvas.bounds = mcDotnet.dRect [0, lbl_info.height+8] [form_size, form_size]
+		canvas.backColor = transparent_color
+		canvas.Dock = canvas.Dock.None
 
-		form.Controls.addrange #(circ_bar)
+		lbl_info.text = "( 100% )"
+		lbl_info.name = "lbl_title"
+		lbl_info.AutoSize = true
+		lbl_info.BorderStyle = lbl_info.BorderStyle.None
+		lbl_info.textAlign = lbl_info.textAlign.MiddleCenter
+		lbl_info.font = font3
+		lbl_info.foreColor = mcDotnet.dColor (color 215 247 122)
+		lbl_info.backColor = mcDotnet.dColor green
+		lbl_info.Dock = lbl_info.Dock.None
+		lbl_info.backColor = transparent_color
 		
-		dotnet.addEventHandler form "BackColorChanged" onBackColorChanged
-		dotnet.addEventHandler form "Paint" OnPaint
-		dotNet.addEventHandler btn_ok "MouseUp" onOkPressed
+		btn_close.text = "OK"
+		btn_close.name = "btn_close"
+		btn_close.font = font1
+		btn_close.foreColor = mcDotnet.dColor border_color
+		btn_close.backColor = mcDotnet.dColor green
+		btn_close.Dock = btn_close.Dock.None
+		-- btn_close.Dock = btn_close.Dock.Bottom
+		btn_close.Bounds = mcDotnet.dRect [form_center.x-30, form_center.y+80] [60, 32]
+		-- btn_close.backColor = transparent_color
+
+		form.Controls.addrange #(lbl_info, lbl_title, btn_close, canvas)
+		dotNet.addEventHandler form "Paint" onFormPaint
+		dotNet.addEventHandler btn_close "MouseUp" onHideFormPressed
+		dotNet.addEventHandler form "Shown" onFormShow
 	),
 	on create do (initForm())
 )
 mcProgRad = MICRA_PROGRESSBAR_STRUCT()
+mcProgRad.showForm()

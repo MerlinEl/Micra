@@ -1,0 +1,14 @@
+/*
+ * Downloaded from Csharpens.com
+ * Dated : 12-12-2014
+ * http://www.csharpens.com/2014/12/winforms-circular-progress-bar-c-sharp-download.html
+ */
+
+If you have some issues with it plz contact me on -> www.csharpens.com/p/contact.html
+
+for more open source C# Programs & Applications : http://www.csharpens.com/p/programs.html
+
+free C# eBooks : http://www.csharpens.com/p/ebooks.html
+
+Facebook Page    : Facebook.com/Csharpens.com
+Admin Profile : Facebook.com/founderofWSC
