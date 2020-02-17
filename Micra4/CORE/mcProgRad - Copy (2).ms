@@ -9,23 +9,15 @@
 
 *
 *@Example
-	Single >
+	mcProgRad.progressTo a.ProgressPercentage msg:"Downoading Update:"
+	if a.ProgressPercentage >= 100 do mcProgRad.progressTo 100 msg:"Downoad Finished:" close:true 
+	
 	mcProgRad.progressTo 0 msg:"..."
+	mcProgRad.progressTo 25 msg:"Downoading..."
 	mcProgRad.progressTo 45 msg:"Downoading..."
+	mcProgRad.progressTo 65 msg:"Downoading..."
 	mcProgRad.progressTo 100 msg:"Downoad Finished:"
-	Loop >
-	mcProgRad.progressTo 0 msg:"Processing..."
-	max_count = 500
-	for i = 1 to max_count do (
-
-		local percent = (100.0 / max_count * i)
-		--format "i:% percent:%\n" i percent
-		mcProgRad.progressTo percent msg:"Processing..."
-		if i >= max_count do (
-
-			mcProgRad.progressTo 100 msg:"Finished:" close:true 
-		)
-	)
+	mcProgRad.progressTo 100 msg:"Downoad Finished:" close:true 
 */
 Global mcProgRad
 if isStruct mcProgRad do mcProgRad.closeForm()
@@ -59,6 +51,18 @@ struct MICRA_PROGRESSBAR_STRUCT (
 	fn onFormPaint s a = (
 	
 		s.backColor = mcDotnet.dColor (color 0 50 50) --get rid off remains untranspared areas
+	),
+	-- fn onLabelPaint s a = (
+
+		-- local g = a.Graphics
+		-- ControlPaint.DrawBorder(e.Graphics, label1.DisplayRectangle, Color.Blue, ButtonBorderStyle.Solid);
+	-- ),
+	fn onInfoChanged s a = ( --realign info text  component
+		
+		local canvas = mcProgRad.canvas
+		local lbl_info = mcProgRad.lbl_info
+		local canvas_center = [canvas.width, canvas.height]/2 + [canvas.location.x, canvas.location.y]
+		lbl_info.location = mcDotnet.dPoint (canvas_center - [lbl_info.width/2, lbl_info.height/2])
 	),
 	fn onFormShown s a = (
 		
@@ -99,20 +103,12 @@ struct MICRA_PROGRESSBAR_STRUCT (
 	),
 	fn progressTo percent msg:"Loading..." close:false = (
 	
-		if percent < 1 or percent > 100 do return false
 		local start_angle = -90
-		local end_angle = (360 / 100.0) * percent
+		local end_angle = (360.0 / 100.0) * percent
 		lbl_title.text = msg
-		lbl_info.text = "( "+int(percent) as string+"% )"
+		lbl_info.text = "( "+percent as string+"% )"
 		canvas.Image = drawProgressBar bar_radius  start_angle end_angle thickness:bar_thickness fill_clr:green border_clr:border_color
-		canvas.update()
-		lbl_info.update()
-		if not form.visible do (
-			
-			showForm()
-			form.backColor = transparent_color --remove form untransparent artefact
-			form.update()
-		)
+		if not form.visible do showForm()
 		if close do (sleep 0.3;hideForm())
 	),
 	fn initForm = (
@@ -147,7 +143,7 @@ struct MICRA_PROGRESSBAR_STRUCT (
 
 		lbl_info.text = "( 100% )"
 		lbl_info.name = "lbl_title"
-		lbl_info.AutoSize = false
+		lbl_info.AutoSize = true
 		lbl_info.BorderStyle = lbl_info.BorderStyle.None
 		lbl_info.textAlign = lbl_info.textAlign.MiddleCenter
 		lbl_info.font = font3
@@ -155,9 +151,6 @@ struct MICRA_PROGRESSBAR_STRUCT (
 		lbl_info.backColor = mcDotnet.dColor green
 		lbl_info.Dock = lbl_info.Dock.None
 		lbl_info.backColor = transparent_color
-		local canvas_center = [canvas.width, canvas.height]/2 + [canvas.location.x, canvas.location.y]
-		lbl_info.Size = mcDotnet.dSize [164, 58]
-		lbl_info.location = mcDotnet.dPoint (canvas_center - [lbl_info.width/2, lbl_info.height/2])
 		
 		btn_close.text = "OK"
 		btn_close.name = "btn_close"
@@ -174,6 +167,8 @@ struct MICRA_PROGRESSBAR_STRUCT (
 
 		dotNet.addEventHandler form "Paint" onFormPaint
 		dotNet.addEventHandler btn_close "MouseUp" onHideFormPressed
+		dotNet.addEventHandler form "Shown" onFormShown
+		dotNet.addEventHandler lbl_info "TextChanged" onInfoChanged
 	),
 	on create do (initForm())
 )
