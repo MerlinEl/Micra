@@ -1417,15 +1417,15 @@ struct mcAction (
 				
 					convertToPoly sel_geometry
 					local first_obj = sel_geometry[1]
-					for i=2 to sel_geometry.count do 
-					(
+					for i=2 to sel_geometry.count do (
+						
 						polyOp.attach first_obj sel_geometry[i]
-						mcSecurity.progeressbar (100.*i/sel_geometry.count) msg:"Objects Collapsed:"
+						mcProgRad.progressTo (100.*i/sel_geometry.count) msg:"Processing...please wait..." confirm:true showButton:false clr:green
 					)
-					mcSecurity.progeressbar 100 msg:"Objects Collapsed:" close:true
 					select first_obj
 				)
-				::mcPopUp.show "Collapse Objects Is Finished!" delay:2000
+				--allow acces OK button after process is done
+				mcProgRad.progressTo 100 msg:"Collapsing is Finished!" confirm:true showButton:true clr:green
 			) 
 			catch (::mcPopUp.show "Incorrect objecs!" type:#Warning delay:2000)
 		)

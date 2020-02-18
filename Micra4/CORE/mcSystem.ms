@@ -4,6 +4,7 @@
 /*
 *@Used Structures
 	Micra
+	mcUser32
 *
 *@Used Objects
 

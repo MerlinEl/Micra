@@ -24,12 +24,14 @@
     <mcMouse val="on" />
     <mcMax val="on" />
     <!--dependent classes-->
+	<mcSystem val="on" />
     <mcMaterial val="on" />
     <mcColor val="on" info="color conversion tool" />
     <mcZip val="on" info="zip - unzip functions" />
     <mcFile val="on" info="read - write functions" />
     <mcUIColors val="on" info="save-load ui colors" />
     <mcDotnet val="on" info="dotnet functions" />
+    <mcProgRad val="on" info="circular progressbar" />
     <mcPopUp val="on" info="popup windows of any type (TODO reamke to Independent Class)" />
     <mcSecurity val="on" info="popup windows of any type" />
     <mcGM val="on" />
@@ -47,7 +49,6 @@
     <mcMeshMap val="on" />
     <mcNode val="on" />
     <mcSnap val="on" />
-    <mcSystem val="on" />
     <mcTransform val="on" />
     <mcEvents val="on" />
     <mcCall val="on" />

@@ -4,28 +4,49 @@
 /*
 *@Used Structures
 	mcDotnet
+	mcSystem
 *
 *@Used Objects
 
 *
 *@Example
-	Single >
-	mcProgRad.progressTo 0 msg:"..."
-	mcProgRad.progressTo 45 msg:"Downoading..."
-	mcProgRad.progressTo 100 msg:"Downoad Finished:"
-	Loop >
-	mcProgRad.progressTo 0 msg:"Processing..."
+	------------------------------------
+	Close when finished >
+	------------------------------------
 	max_count = 500
 	for i = 1 to max_count do (
 
-		local percent = (100.0 / max_count * i)
-		--format "i:% percent:%\n" i percent
+		local percent = (100.*i/max_count) --or (100.0/max_count*i)
 		mcProgRad.progressTo percent msg:"Processing..."
-		if i >= max_count do (
-
-			mcProgRad.progressTo 100 msg:"Finished:" close:true 
-		)
 	)
+	------------------------------------
+	Stay visible when finished witn OK Button >
+	------------------------------------
+	max_count = 500
+	for i = 1 to max_count do (
+
+		local percent = (100.*i/max_count)
+		mcProgRad.progressTo percent msg:"Processing..." confirm:true
+	)
+	------------------------------------
+	Stay visible when finished without OK Button (last line will allow acces to OK button) >
+	------------------------------------
+	max_count = 500
+	for i = 1 to max_count do (
+
+		local percent = (100.*i/max_count)
+		mcProgRad.progressTo percent msg:"Processing...please wait..." confirm:true showButton:false clr:green
+	)
+	--allow acces OK button after process is done
+	mcProgRad.progressTo 100 msg:"Collapse Objects Is Finished!" confirm:true showButton:true clr:green
+	------------------------------------
+	Debug >
+	------------------------------------
+	mcProgRad.progressTo 0 msg:"..."
+	mcProgRad.progressTo 45 msg:"Processing..."
+	mcProgRad.progressTo 100 msg:"Processing Finished:"
+	mcProgRad.progressTo 100 msg:"Processing...please wait..." confirm:true showButton:false clr:green
+	mcProgRad.progressTo 100 msg:"Collapse Objects Is Finished!" confirm:true showButton:true clr:green
 */
 Global mcProgRad
 if isStruct mcProgRad do mcProgRad.closeForm()
@@ -36,19 +57,22 @@ struct MICRA_PROGRESSBAR_STRUCT (
 	lbl_title = dotnetObject "Label",
 	lbl_info = dotnetObject "Label",
 	btn_close= dotnetobject "Button",	
-	font1		= mcDotnet.dFont font:"Impact" size:20 style:"Regular",
-	font2		= mcDotnet.dFont font:"Impact" size:16 style:"Regular",
-	font3		= mcDotnet.dFont font:"Impact" size:30 style:"Regular",
+	font_button	= mcDotnet.dFont font:"Impact" size:20 style:"Regular",
+	font_title	= mcDotnet.dFont font:"Arial" size:12 style:"Regular",
+	font_percent= mcDotnet.dFont font:"Impact" size:30 style:"Regular",
 	circ_bar	= undefined,
 	bar_radius= 124,
-	bar_thickness = 30,
+	bar_thickness = 20,
 	transparent_color = mcDotnet.dColor (color 0 50 50),
 	border_color = color 50 50 50,
-	fn showForm = (
+	fn showForm modal:true = (
 
-		local hv = DotNetObject "NativeWindow"
-		hv.AssignHandle (DotNetObject "System.IntPtr" (Windows.GetMaxHWND())) 
-		mcProgRad.form.show(hv)
+		-- local hv = DotNetObject "NativeWindow"
+		-- hv.AssignHandle (DotNetObject "System.IntPtr" (Windows.GetMaxHWND())) 
+		local form = mcProgRad.form
+		form.location = mcDotnet.dPoint (mcSystem.getMaxCenter() - [form.width, form.height] / 2)
+		form.show(hv) --ShowDialog , ShowModal
+		-- if modal then form.ShowDialog(mcMicraDialog) else form.Show(mcMicraDialog)
 	),
 	fn hideForm = (mcProgRad.form.hide()),
 	fn closeForm = (mcProgRad.form.close()),
@@ -89,31 +113,43 @@ struct MICRA_PROGRESSBAR_STRUCT (
 		local rect_out = mcDotnet.dRect pos_2 ([radius*2, radius*2]-2)
 		local rect_in = mcDotnet.dRect pos_3 ([radius*2, radius*2]-2 - thickness*2)
 	   --Draw arc to screen.
-		pen_1.StartCap = mcDotnet.LineCap.Round
-        pen_1.EndCap = mcDotnet.LineCap.Round
 		g.DrawEllipse pen_1 rect --draw circle background
+		pen_2.StartCap = mcDotnet.LineCap.Round
+        pen_2.EndCap = mcDotnet.LineCap.Round
 		g.DrawArc pen_2 rect start_angle end_angle --draw arc fill
 		g.DrawEllipse pen_3 rect_out --draw outer border
 		g.DrawEllipse pen_3 rect_in	--draw inner border
 		bm
 	),
-	fn progressTo percent msg:"Loading..." close:false = (
+	/**
+	*@Usage
+		percent		: number in range 1 - 100
+		msg			: title message
+		confirm		: will not close at end and display OK button
+		showButton	: manage whwen is button ok accesible (if need delay before process finished use false)
+		clr			: progressbar color
+	*/
+	fn progressTo percent msg:"Processing..." confirm:false showButton:true clr:green = (
 	
-		if percent < 1 or percent > 100 do return false
+		percent = mcMath.minMax percent 1 100 --min max value correction
 		local start_angle = -90
 		local end_angle = (360 / 100.0) * percent
 		lbl_title.text = msg
-		lbl_info.text = "( "+int(percent) as string+"% )"
-		canvas.Image = drawProgressBar bar_radius  start_angle end_angle thickness:bar_thickness fill_clr:green border_clr:border_color
+		lbl_info.text = int(percent) as string + "%"
+		canvas.Image = drawProgressBar bar_radius  start_angle end_angle thickness:bar_thickness fill_clr:clr border_clr:border_color
 		canvas.update()
 		lbl_info.update()
 		if not form.visible do (
 			
+			btn_close.visible = false
 			showForm()
 			form.backColor = transparent_color --remove form untransparent artefact
 			form.update()
 		)
-		if close do (sleep 0.3;hideForm())
+		if percent == 100 do (
+
+			if confirm then btn_close.visible = showButton else (sleep 0.3; hideForm())
+		)
 	),
 	fn initForm = (
 		
@@ -134,23 +170,23 @@ struct MICRA_PROGRESSBAR_STRUCT (
 		lbl_title.name = "lbl_title"
 		lbl_title.BorderStyle = lbl_title.BorderStyle.None
 		lbl_title.textAlign = lbl_title.textAlign.MiddleCenter
-		lbl_title.font = font2
-		lbl_title.foreColor = mcDotnet.dColor (color 215 247 122)
-		lbl_title.backColor = mcDotnet.dColor green
+		lbl_title.font = font_title
+		lbl_title.BackColor = mcDotnet.uiColor #back
+		lbl_title.ForeColor = mcDotnet.uiColor #text
 		lbl_title.Dock = lbl_title.Dock.Top
-		lbl_title.backColor = transparent_color
+		-- lbl_title.backColor = transparent_color
 		
 		canvas.BorderStyle = canvas.BorderStyle.None
 		canvas.bounds = mcDotnet.dRect [0, lbl_info.height+8] [form_size, form_size]
 		canvas.backColor = transparent_color
 		canvas.Dock = canvas.Dock.None
 
-		lbl_info.text = "( 100% )"
+		lbl_info.text = "100%"
 		lbl_info.name = "lbl_title"
 		lbl_info.AutoSize = false
 		lbl_info.BorderStyle = lbl_info.BorderStyle.None
 		lbl_info.textAlign = lbl_info.textAlign.MiddleCenter
-		lbl_info.font = font3
+		lbl_info.font = font_percent
 		lbl_info.foreColor = mcDotnet.dColor (color 215 247 122)
 		lbl_info.backColor = mcDotnet.dColor green
 		lbl_info.Dock = lbl_info.Dock.None
@@ -161,7 +197,7 @@ struct MICRA_PROGRESSBAR_STRUCT (
 		
 		btn_close.text = "OK"
 		btn_close.name = "btn_close"
-		btn_close.font = font1
+		btn_close.font = font_button
 		btn_close.foreColor = mcDotnet.dColor border_color
 		btn_close.backColor = mcDotnet.dColor green
 		btn_close.Dock = btn_close.Dock.None
@@ -179,3 +215,46 @@ struct MICRA_PROGRESSBAR_STRUCT (
 )
 mcProgRad = MICRA_PROGRESSBAR_STRUCT()
 
+
+
+/*
+using System;
+using System.ComponentModel;
+using System.Threading;
+using System.Windows;
+
+namespace WpfTutorialSamples.Misc_controls
+{
+	public partial class ProgressBarTaskOnWorkerThread : Window
+	{
+		public ProgressBarTaskOnWorkerThread()
+		{
+			InitializeComponent();
+		}
+
+		private void Window_ContentRendered(object sender, EventArgs e)
+		{
+			BackgroundWorker worker = new BackgroundWorker();
+			worker.WorkerReportsProgress = true;
+			worker.DoWork += worker_DoWork;
+			worker.ProgressChanged += worker_ProgressChanged;
+
+			worker.RunWorkerAsync();
+		}
+
+		void worker_DoWork(object sender, DoWorkEventArgs e)
+		{
+			for(int i = 0; i < 100; i++)
+			{
+				(sender as BackgroundWorker).ReportProgress(i);
+				Thread.Sleep(100);
+			}
+		}
+
+		void worker_ProgressChanged(object sender, ProgressChangedEventArgs e)
+		{
+			pbStatus.Value = e.ProgressPercentage;
+		}
+	}
+}
+*/
