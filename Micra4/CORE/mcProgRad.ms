@@ -71,7 +71,7 @@ struct MICRA_PROGRESSBAR_STRUCT (
 		-- hv.AssignHandle (DotNetObject "System.IntPtr" (Windows.GetMaxHWND())) 
 		local form = mcProgRad.form
 		form.location = mcDotnet.dPoint (mcSystem.getMaxCenter() - [form.width, form.height] / 2)
-		form.show(hv) --ShowDialog , ShowModal
+		form.show(hv) --ShowDialog , ShowModal (modal can only be used for math operations not for geometry changes)
 		-- if modal then form.ShowDialog(mcMicraDialog) else form.Show(mcMicraDialog)
 	),
 	fn hideForm = (mcProgRad.form.hide()),
@@ -130,7 +130,7 @@ struct MICRA_PROGRESSBAR_STRUCT (
 		clr			: progressbar color
 	*/
 	fn progressTo percent msg:"Processing..." confirm:false showButton:true clr:green = (
-	
+format "progressTo > percent:%\n" percent
 		percent = mcMath.minMax percent 1 100 --min max value correction
 		local start_angle = -90
 		local end_angle = (360 / 100.0) * percent
