@@ -14,6 +14,13 @@ struct MICRA_SYSTEM (
 
 	maxHandle =  Windows.GetMAXHWND(),
 	fn getSource = getSourceFileName(), --get path of this script
+	fn getMaxWindow = (
+	
+		local hv = DotNetObject "NativeWindow"
+		hv.AssignHandle (DotNetObject "System.IntPtr" maxHandle) 
+		hv
+	),
+	fn getMicraWindow = (mcMicraDialog),
 	--local uType = mcSystem.unitsType()
 	fn unitsType = (
 	
@@ -234,13 +241,13 @@ struct MICRA_SYSTEM (
 			windows.sendmessage app_handle mcWinMsg.WM_SYSCOMMAND mcWinMsg.WM_MINIMIZE  0
 		)
 	),
-	fn getMaxPos = (
+	fn getMaxBounds = (
 		
 		return windows.getWindowPos maxHandle
 	),
 	fn getMaxCenter = (
 	
-		local max_pos = getMaxPos()
+		local max_pos = getMaxBounds()
 		return [max_pos.w/2 + max_pos.x /2, max_pos.h/2 + max_pos.y /2]
 	),
 	/**

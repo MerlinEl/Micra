@@ -19,6 +19,9 @@ Struct MICRA_DOTNET (
 	Brushes 		= dotNetClass "System.Drawing.Brushes", --many colors (Aqua, Violet, Turquoise, Transparent...)
 	Graphics 		= dotNetClass "System.Drawing.Graphics",
 	Drawing2D		= dotNetClass "System.Drawing.Drawing2D", --InterpolationMode, CompositingQuality, PixelOffsetMode, SmoothingMode
+	ControlPaint 	= dotnetClass "System.Windows.Forms.ControlPaint",
+	ButtonBorderStyle= dotnetClass "System.Windows.Forms.ButtonBorderStyle",
+	FrameStyle		= dotnetClass "System.Windows.Forms.FrameStyle",
 	LineCap			= dotnetClass "System.Drawing.Drawing2D.LineCap", --Round, Flat
 	DragDropEffect 	= dotNetClass "DragDropEffects",
 	PointClass		= dotnetClass "Drawing.Point",
@@ -59,6 +62,8 @@ Struct MICRA_DOTNET (
 		)
 		return dotnet_color
 	),
+	fn dBrush clr = (dotnetobject "System.Drawing.SolidBrush" (dColor clr)),
+	fn dPen clr size = (dotnetobject "System.Drawing.Pen" (dColor clr) size),
 	/*
 	*@Usage	convert dotnet color to max color <r> <g> <b> [ <a> ]
 	*@Example 	clr = mcDotnet.mColor net_color

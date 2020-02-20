@@ -63,14 +63,16 @@ struct MICRA_PROGRESSBAR_STRUCT (
 	circ_bar	= undefined,
 	bar_radius= 124,
 	bar_thickness = 20,
-	border_thickness = 4,
 	transparent_color = mcDotnet.dColor (color 0 50 50),
 	border_color = color 50 50 50,
-	form_center = [0, 0],
 	fn showForm modal:true = (
 
+		-- local hv = DotNetObject "NativeWindow"
+		-- hv.AssignHandle (DotNetObject "System.IntPtr" (Windows.GetMaxHWND())) 
 		local form = mcProgRad.form
-		form.show(mcMicraDialog)
+		form.location = mcDotnet.dPoint (mcSystem.getMaxCenter() - [form.width, form.height] / 2)
+		form.show(hv) --ShowDialog , ShowModal (modal can only be used for math operations not for geometry changes)
+		-- if modal then form.ShowDialog(mcMicraDialog) else form.Show(mcMicraDialog)
 	),
 	fn hideForm = (mcProgRad.form.hide()),
 	fn closeForm = (mcProgRad.form.close()),
@@ -79,19 +81,13 @@ struct MICRA_PROGRESSBAR_STRUCT (
 		mcProgRad.hideForm()
 	),
 	fn onFormPaint s a = (
-
-		s.backColor = mcDotnet.dColor (color 0 50 50) --set form transparent
-		--draw border
-		local thickness = mcProgRad.border_thickness
-		local clr = (dotNetClass "Drawing.Color").fromArgb 255 81 68
-		local rect = copy s.ClientRectangle
-		rect.Inflate -thickness -thickness --crop rect by line thickness
-		local pen = dotnetobject  "Drawing.Pen" clr thickness
-		a.Graphics.DrawRectangle pen rect
+	
+		s.backColor = mcDotnet.dColor (color 0 50 50) --get rid off remains untranspared areas
 	),
-	-- fn onFormShown s a = (
+	fn onFormShown s a = (
 		
-	-- ),
+		mcProgRad.onInfoChanged undefined undefined
+	),
 	fn drawProgressBar radius start_angle end_angle thickness:10 fill_clr:blue border_clr:black= (
 	
 		local brush_1 = dotNetObject "System.Drawing.SolidBrush" (mcDotnet.dColor gray) --background
@@ -134,13 +130,11 @@ struct MICRA_PROGRESSBAR_STRUCT (
 		clr			: progressbar color
 	*/
 	fn progressTo percent msg:"Processing..." confirm:false showButton:true clr:green = (
-	
-		-- format "progressTo > percent:%\n" percent
+format "progressTo > percent:%\n" percent
 		percent = mcMath.minMax percent 1 100 --min max value correction
 		local start_angle = -90
 		local end_angle = (360 / 100.0) * percent
 		lbl_title.text = msg
-		lbl_title.location = mcDotnet.dPoint (form_center - ([lbl_title.width, lbl_title.height] /2) - [0, bar_radius + 20] )
 		lbl_info.text = int(percent) as string + "%"
 		canvas.Image = drawProgressBar bar_radius  start_angle end_angle thickness:bar_thickness fill_clr:clr border_clr:border_color
 		canvas.update()
@@ -161,36 +155,29 @@ struct MICRA_PROGRESSBAR_STRUCT (
 		
 		local margins = 2
 		local percent = 90
-		local max_bounds = mcSystem.getMaxBounds()
-		max_bounds.x += border_thickness + 1
-		max_bounds.y += border_thickness + 1
-		max_bounds.w -= border_thickness*2 - 2
-		max_bounds.h -= border_thickness*2 - 2
-		form_center = [max_bounds.x + max_bounds.w/2, max_bounds.y + max_bounds.h/2]
+		local form_size = bar_radius*2
+		local form_center = [form_size, form_size]/2
+		form.StartPosition = form.StartPosition.Manual
 		form.ShowInTaskBar = false
 		form.FormBorderStyle = form.FormBorderStyle.None
-		form.StartPosition = form.StartPosition.Manual
-		form.Location = mcDotnet.dPoint [max_bounds.x, max_bounds.y]
-		form.Size = mcDotnet.dSize [max_bounds.w, max_bounds.h]
 		form.AllowTransparency = true
 		form.TransparencyKey = transparent_color
+		form.Size = mcDotnet.dSize [form_size, form_size + 64]
+		form.location = mcDotnet.dPoint (mcSystem.getMaxCenter() - [form.width, form.height] / 2)
 		form.opacity = 0.8
 		
 		lbl_title.text = "Loading..."
 		lbl_title.name = "lbl_title"
 		lbl_title.BorderStyle = lbl_title.BorderStyle.None
 		lbl_title.textAlign = lbl_title.textAlign.MiddleCenter
-		lbl_title.AutoSize = true
 		lbl_title.font = font_title
 		lbl_title.BackColor = mcDotnet.uiColor #back
 		lbl_title.ForeColor = mcDotnet.uiColor #text
-		lbl_title.location = mcDotnet.dPoint (form_center - ([lbl_title.width, lbl_title.height] /2) - [0, bar_radius + 20] )
-		lbl_title.backColor = transparent_color
+		lbl_title.Dock = lbl_title.Dock.Top
+		-- lbl_title.backColor = transparent_color
 		
-		local canvas_size = bar_radius*2
-		local canvas_center = form_center - canvas_size /2 
 		canvas.BorderStyle = canvas.BorderStyle.None
-		canvas.bounds = mcDotnet.dRect canvas_center [canvas_size, canvas_size]
+		canvas.bounds = mcDotnet.dRect [0, lbl_info.height+8] [form_size, form_size]
 		canvas.backColor = transparent_color
 		canvas.Dock = canvas.Dock.None
 
@@ -202,27 +189,72 @@ struct MICRA_PROGRESSBAR_STRUCT (
 		lbl_info.font = font_percent
 		lbl_info.foreColor = mcDotnet.dColor (color 215 247 122)
 		lbl_info.backColor = mcDotnet.dColor green
+		lbl_info.Dock = lbl_info.Dock.None
 		lbl_info.backColor = transparent_color
+		local canvas_center = [canvas.width, canvas.height]/2 + [canvas.location.x, canvas.location.y]
 		lbl_info.Size = mcDotnet.dSize [164, 58]
-		lbl_info.location = mcDotnet.dPoint (form_center - [lbl_info.width, lbl_info.height] / 2)
+		lbl_info.location = mcDotnet.dPoint (canvas_center - [lbl_info.width/2, lbl_info.height/2])
 		
 		btn_close.text = "OK"
 		btn_close.name = "btn_close"
 		btn_close.font = font_button
 		btn_close.foreColor = mcDotnet.dColor border_color
 		btn_close.backColor = mcDotnet.dColor green
-		btn_close.Bounds = mcDotnet.dRect [form_center.x-30, form_center.y+50] [60, 32]
+		btn_close.Dock = btn_close.Dock.None
+		-- btn_close.Dock = btn_close.Dock.Bottom
+		btn_close.Bounds = mcDotnet.dRect [form_center.x-30, form_center.y+80] [60, 32]
 		-- btn_close.backColor = transparent_color
 		btn_close.visible = false
-		btn_close.visible = true
 
 		form.Controls.addrange #(lbl_info, lbl_title, btn_close, canvas)
 
 		dotNet.addEventHandler form "Paint" onFormPaint
-		-- dotNet.addEventHandler form "Shown" onFormShown
 		dotNet.addEventHandler btn_close "MouseUp" onHideFormPressed
 	),
 	on create do (initForm())
 )
 mcProgRad = MICRA_PROGRESSBAR_STRUCT()
--- mcProgRad.progressTo 45 msg:"Processing..."
+
+
+
+/*
+using System;
+using System.ComponentModel;
+using System.Threading;
+using System.Windows;
+
+namespace WpfTutorialSamples.Misc_controls
+{
+	public partial class ProgressBarTaskOnWorkerThread : Window
+	{
+		public ProgressBarTaskOnWorkerThread()
+		{
+			InitializeComponent();
+		}
+
+		private void Window_ContentRendered(object sender, EventArgs e)
+		{
+			BackgroundWorker worker = new BackgroundWorker();
+			worker.WorkerReportsProgress = true;
+			worker.DoWork += worker_DoWork;
+			worker.ProgressChanged += worker_ProgressChanged;
+
+			worker.RunWorkerAsync();
+		}
+
+		void worker_DoWork(object sender, DoWorkEventArgs e)
+		{
+			for(int i = 0; i < 100; i++)
+			{
+				(sender as BackgroundWorker).ReportProgress(i);
+				Thread.Sleep(100);
+			}
+		}
+
+		void worker_ProgressChanged(object sender, ProgressChangedEventArgs e)
+		{
+			pbStatus.Value = e.ProgressPercentage;
+		}
+	}
+}
+*/
