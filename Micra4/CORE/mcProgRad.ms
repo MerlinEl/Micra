@@ -84,10 +84,43 @@ struct MICRA_PROGRESSBAR_STRUCT (
 		--draw border
 		local thickness = mcProgRad.border_thickness
 		local clr = (dotNetClass "Drawing.Color").fromArgb 255 81 68
-		local rect = copy s.ClientRectangle
+		local rect =  s.ClientRectangle --copy
 		rect.Inflate -thickness -thickness --crop rect by line thickness
 		local pen = dotnetobject  "Drawing.Pen" clr thickness
 		a.Graphics.DrawRectangle pen rect
+	),
+	fn onTitlePaint s a = (
+		
+		local g = a.Graphics
+		g.TextRenderingHint = g.TextRenderingHint.AntiAlias
+		g.SmoothingMode = g.SmoothingMode.AntiAlias	
+		local rect = s.ClientRectangle
+		rect.X = rect.X + 1
+        rect.Y = rect.Y + 1
+        rect.Width -= 2
+        rect.Height -= 2
+		format "onTitlePaint > rect:%\n" rect
+		/*
+		local fillBrush = dotNetObject "System.Drawing.SolidBrush" (mcDotnet.dColor blue)
+		local outLinePen =dotNetObject "system.drawing.pen" (mcDotnet.dColor black) 3	
+		format "onTitlePaint > brush:%\n" fillBrush
+		local graphic2D = dotNetobject "System.Drawing.Drawing2D.GraphicsPath"
+-- 		graphic2D.AddRectangle rect
+		------------------------------------------------
+		string_text = "test"
+		font_family =  dotNetObject "System.Drawing.FontFamily" "Arial Black"
+		font_style = 1		
+		font_size = 50
+		startPoint = dotNetObject "system.drawing.point" 2 2		
+		font_format = (dotNetclass "System.Drawing.StringFormat").GenericTypographic
+		graphic2D.AddString string_text font_family font_style font_size startPoint font_format
+		------------------------------------------------
+		g.FillPath fillBrush graphic2D
+		g.DrawPath outLinePen graphic2D		
+		*/
+-- 		local clr = (dotNetClass "Drawing.Color").fromArgb 255 81 68
+-- 		local pen = dotnetobject  "Drawing.Pen" clr
+-- 		g.DrawEllipse (mcDotnet.uiColor #back) rect
 	),
 	-- fn onFormShown s a = (
 		
@@ -185,7 +218,7 @@ struct MICRA_PROGRESSBAR_STRUCT (
 		lbl_title.BackColor = mcDotnet.uiColor #back
 		lbl_title.ForeColor = mcDotnet.uiColor #text
 		lbl_title.location = mcDotnet.dPoint (form_center - ([lbl_title.width, lbl_title.height] /2) - [0, bar_radius + 20] )
-		lbl_title.backColor = transparent_color
+-- 		lbl_title.backColor = transparent_color
 		
 		local canvas_size = bar_radius*2
 		local canvas_center = form_center - canvas_size /2 
@@ -219,6 +252,7 @@ struct MICRA_PROGRESSBAR_STRUCT (
 		form.Controls.addrange #(lbl_info, lbl_title, btn_close, canvas)
 
 		dotNet.addEventHandler form "Paint" onFormPaint
+		dotNet.addEventHandler lbl_title "Paint" onTitlePaint
 		-- dotNet.addEventHandler form "Shown" onFormShown
 		dotNet.addEventHandler btn_close "MouseUp" onHideFormPressed
 	),
@@ -226,3 +260,59 @@ struct MICRA_PROGRESSBAR_STRUCT (
 )
 mcProgRad = MICRA_PROGRESSBAR_STRUCT()
 -- mcProgRad.progressTo 45 msg:"Processing..."
+
+
+/*
+        protected override void OnPaint(PaintEventArgs e)
+        {
+            base.OnPaint(e);
+            using (GraphicsPath graphicsPath = _getRoundRectangle(this.ClientRectangle))
+            {
+                e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
+                using (SolidBrush solidBrush = new SolidBrush(_BackColor))
+                    e.Graphics.FillPath(solidBrush, graphicsPath);
+                using (Pen pen = new Pen(_BackColor, 1.0f))
+                    e.Graphics.DrawPath(pen, graphicsPath);
+                TextRenderer.DrawText(e.Graphics, Text, this.Font, this.ClientRectangle, this.ForeColor);
+            }
+        }
+
+        private GraphicsPath _getRoundRectangle(Rectangle rectangle)
+        {
+            int cornerRadius = 15;
+            int diminisher = 1;
+            GraphicsPath path = new GraphicsPath();
+            path.AddArc(rectangle.X, rectangle.Y, cornerRadius, cornerRadius, 180, 90);
+            path.AddArc(rectangle.X + rectangle.Width - cornerRadius - diminisher, rectangle.Y, cornerRadius, cornerRadius, 270, 90);
+            path.AddArc(rectangle.X + rectangle.Width - cornerRadius - diminisher, rectangle.Y + rectangle.Height - cornerRadius - diminisher, cornerRadius, cornerRadius, 0, 90);
+            path.AddArc(rectangle.X, rectangle.Y + rectangle.Height - cornerRadius - diminisher, cornerRadius, cornerRadius, 90, 90);
+            path.CloseAllFigures();
+            return path;
+        }
+*/
+
+
+/*
+
+protected override void OnPaint(PaintEventArgs e)
+        {
+            e.Graphics.InterpolationMode = InterpolationMode.HighQualityBilinear;
+            e.Graphics.CompositingQuality = CompositingQuality.HighQuality;
+            e.Graphics.PixelOffsetMode = PixelOffsetMode.HighQuality;
+            e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
+
+            LinearGradientBrush brush = new LinearGradientBrush(this.ClientRectangle, Color.Aqua, Color.Blue, 90);
+
+            using (GraphicsPath gp = new GraphicsPath())
+            {
+                gp.AddArc(new Rectangle(new Point(0, 0), new Size(this.Height, this.Height)), 90, 180);
+                gp.AddLine(new Point(this.Height / 2, 0), new Point(this.Width - (this.Height / 2), 0));
+                gp.AddArc(new Rectangle(new Point(this.Width - this.Height, 0), new Size(this.Height, this.Height)), -90, 180);
+                gp.CloseFigure();
+
+                e.Graphics.FillPath(brush, gp);
+            }
+
+            base.OnPaint(e);
+        }
+*/
