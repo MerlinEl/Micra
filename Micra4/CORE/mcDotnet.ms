@@ -19,6 +19,7 @@ Struct MICRA_DOTNET (
 	Brushes 		= dotNetClass "System.Drawing.Brushes", --many colors (Aqua, Violet, Turquoise, Transparent...)
 	Graphics 		= dotNetClass "System.Drawing.Graphics",
 	Drawing2D		= dotNetClass "System.Drawing.Drawing2D", --InterpolationMode, CompositingQuality, PixelOffsetMode, SmoothingMode
+	PenAlignment 	= dotnetClass "System.Drawing.Drawing2D.PenAlignment",
 	ControlPaint 	= dotnetClass "System.Windows.Forms.ControlPaint",
 	ButtonBorderStyle= dotnetClass "System.Windows.Forms.ButtonBorderStyle",
 	FrameStyle		= dotnetClass "System.Windows.Forms.FrameStyle",
@@ -93,6 +94,31 @@ Struct MICRA_DOTNET (
 		
 		local ui_color = mcUIColors.get color_name
 		dColor ui_color
+	),
+	/**
+	*@Usage > create rounded rectangle graphic path
+	*@Example
+		fn OnLabelPaint s a = (
+			local gpath = mcDotnet.createRoundRectanglePath s.ClientRectangle radius:22
+			local gra = a.graphics
+			gra.SmoothingMode = gra.SmoothingMode.AntiAlias
+			local fillBrush = dotNetObject "System.Drawing.SolidBrush" s.BackColor
+			local outLinePen = dotNetObject "system.drawing.pen" s.ForeColor 2	--color and thickness
+			gra.FillPath fillBrush gpath
+			gra.DrawPath outLinePen gpath
+			mcDotnet.TextRenderer.DrawText gra s.text s.Font s.ClientRectangle s.ForeColor
+		)
+	*/
+	fn createRoundRectanglePath rect radius:15 = (
+
+		local diminisher = 1
+		local gpath = dotNetobject "System.Drawing.Drawing2D.GraphicsPath"
+		gpath.AddArc rect.X rect.Y radius  radius  180  90 
+		gpath.AddArc (rect.X + rect.Width - radius - diminisher) rect.Y  radius radius 270 90
+		gpath.AddArc (rect.X + rect.Width - radius - diminisher) (rect.Y + rect.Height - radius - diminisher) radius radius 0 90
+		gpath.AddArc rect.X (rect.Y + rect.Height - radius - diminisher) radius radius 90 90
+		gpath.CloseAllFigures()
+		return gpath
 	),
 	/**
 	*@Example

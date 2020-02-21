@@ -58,7 +58,7 @@ struct MICRA_PROGRESSBAR_STRUCT (
 	lbl_info = dotnetObject "Label",
 	btn_close= dotnetobject "Button",	
 	font_button	= mcDotnet.dFont font:"Impact" size:20 style:"Regular",
-	font_title	= mcDotnet.dFont font:"Arial" size:12 style:"Regular",
+	font_title	= mcDotnet.dFont font:"Arial" size:16 style:"Regular",
 	font_percent= mcDotnet.dFont font:"Impact" size:30 style:"Regular",
 	circ_bar	= undefined,
 	bar_radius= 124,
@@ -74,7 +74,7 @@ struct MICRA_PROGRESSBAR_STRUCT (
 	),
 	fn hideForm = (mcProgRad.form.hide()),
 	fn closeForm = (mcProgRad.form.close()),
-	fn onHideFormPressed s a = (
+	fn onOkButtonPressed s a = (
 		
 		mcProgRad.hideForm()
 	),
@@ -85,42 +85,25 @@ struct MICRA_PROGRESSBAR_STRUCT (
 		local thickness = mcProgRad.border_thickness
 		local clr = (dotNetClass "Drawing.Color").fromArgb 255 81 68
 		local rect =  s.ClientRectangle --copy
-		rect.Inflate -thickness -thickness --crop rect by line thickness
+		rect.Inflate -thickness -thickness --crop rect by line thickness --PenAlignment.Inset replacement
 		local pen = dotnetobject  "Drawing.Pen" clr thickness
+		-- pen.Alignment = mcDotnet.PenAlignment.Inset --not accurated
 		a.Graphics.DrawRectangle pen rect
 	),
 	fn onTitlePaint s a = (
 		
-		local g = a.Graphics
-		g.TextRenderingHint = g.TextRenderingHint.AntiAlias
-		g.SmoothingMode = g.SmoothingMode.AntiAlias	
-		local rect = s.ClientRectangle
-		rect.X = rect.X + 1
-        rect.Y = rect.Y + 1
-        rect.Width -= 2
-        rect.Height -= 2
-		format "onTitlePaint > rect:%\n" rect
-		/*
-		local fillBrush = dotNetObject "System.Drawing.SolidBrush" (mcDotnet.dColor blue)
-		local outLinePen =dotNetObject "system.drawing.pen" (mcDotnet.dColor black) 3	
-		format "onTitlePaint > brush:%\n" fillBrush
-		local graphic2D = dotNetobject "System.Drawing.Drawing2D.GraphicsPath"
--- 		graphic2D.AddRectangle rect
-		------------------------------------------------
-		string_text = "test"
-		font_family =  dotNetObject "System.Drawing.FontFamily" "Arial Black"
-		font_style = 1		
-		font_size = 50
-		startPoint = dotNetObject "system.drawing.point" 2 2		
-		font_format = (dotNetclass "System.Drawing.StringFormat").GenericTypographic
-		graphic2D.AddString string_text font_family font_style font_size startPoint font_format
-		------------------------------------------------
-		g.FillPath fillBrush graphic2D
-		g.DrawPath outLinePen graphic2D		
-		*/
--- 		local clr = (dotNetClass "Drawing.Color").fromArgb 255 81 68
--- 		local pen = dotnetobject  "Drawing.Pen" clr
--- 		g.DrawEllipse (mcDotnet.uiColor #back) rect
+		local gpath = mcDotnet.createRoundRectanglePath s.ClientRectangle radius:22
+		local gra = a.graphics
+		gra.SmoothingMode = gra.SmoothingMode.AntiAlias
+		-- gra.InterpolationMode = gra.InterpolationMode.HighQualityBilinear
+        -- gra.CompositingQuality = gra.CompositingQuality.HighQuality
+        -- gra.PixelOffsetMode = gra.PixelOffsetMode.HighQuality
+		-- gra.TextRenderingHint = gra.TextRenderingHint.AntiAlias
+		local fillBrush = dotNetObject "System.Drawing.SolidBrush" s.BackColor
+		local outLinePen = dotNetObject "system.drawing.pen" s.ForeColor 1	--color and thickness
+		gra.FillPath fillBrush gpath
+		gra.DrawPath outLinePen gpath
+		mcDotnet.TextRenderer.DrawText gra s.text s.Font s.ClientRectangle s.ForeColor
 	),
 	-- fn onFormShown s a = (
 		
@@ -251,10 +234,10 @@ struct MICRA_PROGRESSBAR_STRUCT (
 
 		form.Controls.addrange #(lbl_info, lbl_title, btn_close, canvas)
 
+		-- dotNet.addEventHandler form "Shown" onFormShown
 		dotNet.addEventHandler form "Paint" onFormPaint
 		dotNet.addEventHandler lbl_title "Paint" onTitlePaint
-		-- dotNet.addEventHandler form "Shown" onFormShown
-		dotNet.addEventHandler btn_close "MouseUp" onHideFormPressed
+		dotNet.addEventHandler btn_close "MouseUp" onOkButtonPressed
 	),
 	on create do (initForm())
 )
