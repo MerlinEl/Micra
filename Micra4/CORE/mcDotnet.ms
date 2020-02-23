@@ -264,6 +264,7 @@ Struct MICRA_DOTNET (
 Global mcDotnet = mcStructMan.instanceStructure MICRA_DOTNET "mcDotnet"
 
 
+
 /*
 mystring = DotNetObject "System.String" "my_string_literate"
 mystring.split "_"

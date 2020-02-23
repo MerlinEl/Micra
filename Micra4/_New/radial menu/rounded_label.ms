@@ -1,6 +1,7 @@
 global testRoll
 try( testRoll.close(); testRoll.dispose() )catch()
 (
+	local transparent_color = (dotNetClass "system.drawing.color").fromArgb 0 50 50
 
 	local button_fill_default_color = mcDotnet.dColor green
 	local button_fill_hover_color = mcDotnet.dColor (color 153 228 114)
@@ -70,6 +71,8 @@ try( testRoll.close(); testRoll.dispose() )catch()
 		
 		local gpath = createRoundRectanglePath s.ClientRectangle radius:22
 		local gra = a.graphics
+		gra.clear transparent_color
+		
 		gra.SmoothingMode = gra.SmoothingMode.AntiAlias
 		gra.InterpolationMode = gra.InterpolationMode.HighQualityBilinear
         gra.CompositingQuality = gra.CompositingQuality.HighQuality
@@ -87,7 +90,7 @@ try( testRoll.close(); testRoll.dispose() )catch()
 -- 		format "paint button IsHovered :%\n" s.IsHovered 
 		local gpath = createRoundRectanglePath s.ClientRectangle radius:22
 		local gra = a.graphics
-		gra.clear ( (dotNetClass "system.drawing.color").fromArgb 0 50 50)
+		gra.clear transparent_color
 		gra.SmoothingMode = gra.SmoothingMode.AntiAlias
 		gra.InterpolationMode = gra.InterpolationMode.HighQualityBilinear
         gra.CompositingQuality = gra.CompositingQuality.HighQuality
@@ -137,7 +140,7 @@ try( testRoll.close(); testRoll.dispose() )catch()
 	testLbl.font = mcDotnet.dFont font:"Arial" size:20 style:"Regular"
 	testLbl.BackColor = mcDotnet.uiColor #back
 	testLbl.ForeColor = mcDotnet.uiColor #text
-	testLbl.BorderStyle = testLbl.BorderStyle.None
+-- 	testLbl.BorderStyle = testLbl.BorderStyle.None
 	testLbl.textAlign = testLbl.textAlign.MiddleCenter
 	testLbl.autosize = true
 	testLbl.location = mcDotnet.dPoint [10, 150]
@@ -145,13 +148,15 @@ try( testRoll.close(); testRoll.dispose() )catch()
 	testBtn = dotNetObject "Button"
 	testBtn.text = "OK"
 	testBtn.font  = mcDotnet.dFont font:"Impact" size:20 style:"Regular"
-	testBtn.foreColor = mcDotnet.dColor black
-	testBtn.backColor = mcDotnet.dColor green
+-- 	testBtn.foreColor = mcDotnet.dColor black
+-- 	testBtn.backColor = mcDotnet.dColor green
 	testBtn.Bounds = mcDotnet.dRect [10, 200] [60, 32]
 -- 	testBtn.FlatStyle = testBtn.FlatStyle.Flat
 -- 	testBtn.FlatAppearance.BorderSize = 0
 -- 	testBtn.FlatAppearance.MouseOverBackColor = (dotNetClass "system.drawing.color").fromArgb 0 50 50
 		
+
+
 	testRoll.controls.addRange #( testLbl, testBtn)
 	
  	dotnet.addEventHandler testRoll "Paint" OnFormPaint

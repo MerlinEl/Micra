@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CODES>
+  <Rectangle2D code="
+using System;
+public class Rectangle2D {
+	public int length, width;
+	public Rectangle2D() {}
+	public int Area() { 
+		return length * width; 
+	} 
+}
+  ">
+  <Circle2D code="
+  MEYBE or not who knows?
+  ">
+</CODES>

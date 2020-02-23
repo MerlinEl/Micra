@@ -13,6 +13,7 @@
     <mcDisplay val="on" info="show message on screen with defined duration" />
     <mcProgLog val="on" info="progressbar with log" />
     <mcWinMsg val="on" />
+    <mcCSharp val="on" info="csharp compiller"/>
     <mcWin32 val="on" info="denisT great work!" />
     <mcUser32 val="on" info="denisT great work!" />
     <mcObjects val="on" info="database object CORE BASE" />
