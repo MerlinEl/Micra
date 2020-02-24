@@ -2,7 +2,7 @@
 	source = "
 	using System;
 	using System.Drawing;
-	using System.Drawing.Drawing2D;
+	using System.Drawing.Drawing2D; //internal
 	using System.Windows.Forms;
 	namespace mcDotnetInterface {
 		public class LabelRoundCorners2 : Label {
@@ -57,7 +57,8 @@
 			}
 		}
 	}"
-	mcCSharp.compile source using:#("System", "Forms", "Drawing")
+-- 	mcCSharp.getUsedResources source
+	mcCSharp.compile "mcDotnetInterface.LabelRoundCorners2" source:source
 --)
 
 

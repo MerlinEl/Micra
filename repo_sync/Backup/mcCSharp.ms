@@ -19,15 +19,20 @@
 	setting up the assembly in memory
 *
 *@Example
+		--TODO trace these in source and import those modules
+		--split first string from first USING in to last USING
+		--split them by new line and import them each one by one
+	using System;
+	using System.Collections.Generic;
+	using System.Linq;
+	using System.Text;
+
 	----------------------------------------------------
-	r1 = mcCSharp.new "Rectangle2D"  params:#(10, 122)
-	r1.Area()
+	csharp_object = mcCSharp.compile "MyNameSpace.MyClassWithArg" using:#("System") params:#("Pased arguments in to C# Class. Cool!!!")
+	csharp_object.sayArg()
 	----------------------------------------------------
-	r2 = mcCSharp.new "Rectangle2D"  params:#(100, 400)
-	r2.Area()
-	----------------------------------------------------
-	r = mcCSharp.new "MyNameSpace.MyClassWithArg" params:#("pass")
-	r.sayArg()
+	rect = mcCSharp.compile "Rectangle2D" using:#("System") params:#(154, 45)
+	rect.Area()
 	----------------------------------------------------
 	source = mcCSharpUI.getClass "Circle2D"
 *
@@ -35,50 +40,25 @@
 struct MICRA_CSHARP_STRUCTURE	(
 	
 	--variables
-	debug = true,
+	debug=true,
 	activator = dotNetClass "System.Activator",
 	csharpProvider = dotnetobject "Microsoft.CSharp.CSharpCodeProvider",
 	--functions
 	fn getSource = getSourceFileName(), --get path of this script
-	/**
-	*@Example
-		src = mcCSharpUI.getClass "Rectangle2D"
-		dll_filenames = mcCSharp.getUsedResources src
-		--> #("System.dll", "System.Drawing.dll")
-	*/
-	fn getUsedResources src = (
+	fn getUsingResources src = (
 	
-		local ss = src as stringStream 
-		skipToString ss "\n" --pass first enter
-		local using_arr =#()
-		while not eof ss do (
-
-			local line_str = readLine ss
-			if findString line_str "using" == undefined do exit
-			if findString line_str "//internal" == undefined do ( --skip internal assemblies
-			
-				local dll_name = trimLeft line_str	--remove spaces at begin
-				dll_name = trimRight dll_name		--remove spaces at end
-				dll_name = trimLeft dll_name "using "	--remove using at begin
-				dll_name = trimRight dll_name ";"	--remove last semicolon
-				dll_name += ".dll"					--add dll extension
-				append using_arr dll_name
-			)
-		)
-		close ss
-		using_arr
+		local begin = findString src "using"
+		
 	),
 	fn loadReferences using = (
 	
 		local cp = dotnetobject "System.CodeDom.Compiler.CompilerParameters"
-		--Add dll names in to Refetenced Assemblies 
-		if using.count > 0 do try (
+		if using.count > 0 do (
 		
-			cp.ReferencedAssemblies.AddRange using
-			
-		) catch (
-		
-			format "Unable Load References:\n\t%\n"  (getCurrentException())
+			if findItem using "System"	> 0 do cp.ReferencedAssemblies.AddRange #("System.dll")
+			if findItem using "Core"		> 0 do cp.ReferencedAssemblies.Add("System.Core.dll");
+			if findItem using "Forms"	> 0 do cp.ReferencedAssemblies.AddRange #("System.Drawing.dll")
+			if findItem using "Drawing"	> 0 do cp.ReferencedAssemblies.AddRange #("System.Windows.Forms.dll")
 		)
 		--Print loaded Assemblies
 		if debug do (
@@ -91,17 +71,9 @@ struct MICRA_CSHARP_STRUCTURE	(
 		)
 		cp
 	),
-	/**
-	*@Usage
-		compile c# code in to max memory
-	*@Example
-		mcCSharp.compile "MyNameSpace.MyClassWithArg"
-		mcCSharp.compile "Rectangle2D"
-	*/
-	fn compile className source:"" = (
+	fn compile className using:#() params:#() instanced:true source:"" = (
 		
 		local src = if source == "" then mcCSharpUI.getClass className else source
-		local using = getUsedResources src
 		try (
 		
 			local compilerParams = loadReferences using --Create compiller parameters and load desired Assemblies
@@ -120,9 +92,28 @@ struct MICRA_CSHARP_STRUCTURE	(
 				MessageBox (errs as string) title: "Errors encountered while compiling C# code"
 				return undefined
 			)
-			format "mcCSharp > compile > In mem\n"
-			compilerResults.CompiledAssembly --return compiled assembly
+			
+			if not instanced then ( --load object in to memory (register only)
+				format "mcCSharp > compile > In mem\n"
+				compilerResults.CompiledAssembly
 				
+			) else ( --return object as instance
+			
+				if params.count == 0 then ( --object instance
+					format "mcCSharp > compile > As Instance\n"
+					compilerResults.CompiledAssembly.CreateInstance className
+					
+				) else ( --object instance with pased parameters
+					format "mcCSharp > compile > As Instance with params\n"			
+					local a = compilerResults.CompiledAssembly
+					local cls_type = a.getType className  --or dotNet.getType className
+					format "\tcls_type:%\n" cls_type
+					local args = dotNet.ValueToDotNetObject params (dotNetObject "System.Object")
+					format "\targs:%\n" args
+					activator.CreateInstance cls_type args
+				)
+			)
+			
 		) catch (
 			
 			format "Unable to compile Assembly:\n\t%\n"  (getCurrentException())
@@ -130,8 +121,6 @@ struct MICRA_CSHARP_STRUCTURE	(
 		)
 	),	
 	/**
-	*@Usage
-		create c# classes ir instances
 	*@Example
 		r1 = mcCSharp.new "Rectangle2D"  params:#(10, 122)
 		r1.Area()
@@ -144,11 +133,11 @@ struct MICRA_CSHARP_STRUCTURE	(
 	*/
 	fn new className params:#() = (
 	
-		local cls_type = dotNet.getType className --pickup class from memory
+		local cls_type = dotNet.getType className
 		if cls_type == undefined do (
 			format "mcCSharp > new > compile\n"
-			mcCSharp.compile className
-			cls_type = dotNet.getType className --pickup class from memory
+			mcCSharp.compile className params:params
+			cls_type = dotNet.getType className
 		)
 		if params.count > 0 then (
 		
@@ -166,20 +155,52 @@ struct MICRA_CSHARP_STRUCTURE	(
 Global mcCSharp = mcStructMan.instanceStructure MICRA_CSHARP_STRUCTURE "mcCSharp"
 
 /*
-if params.count == 0 then ( --object instance
-	format "mcCSharp > compile > As Instance\n"
-	compilerResults.CompiledAssembly.CreateInstance className
-	
-) else ( --object instance with pased parameters
-	format "mcCSharp > compile > As Instance with params\n"			
-	local a = compilerResults.CompiledAssembly
-	local cls_type = a.getType className  --or dotNet.getType className
-	format "\tcls_type:%\n" cls_type
-	local args = dotNet.ValueToDotNetObject params (dotNetObject "System.Object")
-	format "\targs:%\n" args
-	activator.CreateInstance cls_type args
-)
+
+// C# Program to show the use 
+// of the new Operator 
+using System; 
+  
+namespace NewOperator { 
+  
+class Rectangle { 
+  
+    public int length, breadth; 
+  
+    // Parameterized Constructor 
+    // User defined 
+    public Rectangle(int l, int b) 
+    { 
+        length = l; 
+        breadth = b; 
+    } 
+  
+    // Method to Calculate Area 
+    // of the rectangle 
+    public int Area() 
+    { 
+        return length * breadth; 
+    } 
+} 
+  
+// Driver Class 
+class Program { 
+  
+    // Main Method 
+    static void Main(string[] args) 
+    { 
+        // Creating an object using 'new' 
+        // Calling the parameterized constructor 
+        // With parameters 10 and 12 
+        Rectangle rect1 = new Rectangle(10, 12); 
+        int area = rect1.Area(); 
+        Console.WriteLine("The area of the"+ 
+                   " Rectangle is " + area); 
+    } 
+} 
+} 
 */
+
+
 
 /*{
 	// Get a MethodInfo object describing the SayHi method.
@@ -288,7 +309,7 @@ fn compile_experimental src className:"" using:#() params:#() = (
 
 
 /*
-rect = mcCSharp.compile "Rectangle2D" instanced:false
+rect = mcCSharp.compile "Rectangle2D" using:#("System") instanced:false
 cls_type = dotNet.getType "Rectangle2D"
 cls_type.Attributes
 cls_type.BaseType

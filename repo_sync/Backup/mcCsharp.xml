@@ -9,8 +9,8 @@ public class Rectangle2D {
 		return length * width; 
 	} 
 }
-  ">
+"/>
   <Circle2D code="
   MEYBE or not who knows?
-  ">
+"/>
 </CODES>
