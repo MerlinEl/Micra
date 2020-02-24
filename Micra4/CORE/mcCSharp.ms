@@ -71,7 +71,7 @@ struct MICRA_CSHARP_STRUCTURE	(
 	fn loadReferences using = (
 	
 		local cp = dotnetobject "System.CodeDom.Compiler.CompilerParameters"
-		--Add dll names in to Refetenced Assemblies 
+		--Add dll names in to Referenced Assemblies 
 		if using.count > 0 do try (
 		
 			cp.ReferencedAssemblies.AddRange using
