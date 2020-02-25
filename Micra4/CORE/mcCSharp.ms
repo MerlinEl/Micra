@@ -1,13 +1,7 @@
 --------------------------------------------------------------------------------
-/* mcCSharp by Orien 2019 */
+/* mcCSharp by Orien 2020 */
 --------------------------------------------------------------------------------
 /*
-*@Created by MerlinEl 2020
-*@Thanks to
-	Mambo4 2014 http://discourse.techart.online/t/3ds-max-c-iterating-on-a-dll-using-visual-studio-unload-assemblies-in-max/4265/7
-	ninianne98 2013 https://forums.asp.net/t/1905021.aspx?How+to+pass+your+constructor+parameters+using+System+Reflection
-	Rod Stephens 2016 http://csharphelper.com/blog/2016/11/run-user-entered-code-in-c/
-	
 *@Used Structures
 	mcStructMan
 	mcCSharpUI
@@ -20,17 +14,22 @@
 *
 *@Example
 	----------------------------------------------------
-	r1 = mcCSharp.new "Rectangle2D"  params:#(10, 122)
-	r1.Area()
+	rect_1 = mcCSharp.new "Orien.Math.Rectangle2D"  params:#(10, 122)
+	rect_1.Area()
 	----------------------------------------------------
-	r2 = mcCSharp.new "Rectangle2D"  params:#(100, 400)
-	r2.Area()
+	rect_2 = mcCSharp.new "Orien.Math.Rectangle2D"  params:#(100, 400)
+	rect_2.Area()
 	----------------------------------------------------
-	r = mcCSharp.new "MyNameSpace.MyClassWithArg" params:#("pass")
-	r.sayArg()
+	lbl_01 = mcCSharp.new "Orien.DotnetUI.LabelRoundCorners" 
 	----------------------------------------------------
-	source = mcCSharpUI.getClass "Circle2D"
+	source = mcCSharpUI.getClass "Orien.Math.Rectangle2D"
+	----------------------------------------------------
 *
+*@Thanks to
+	Mambo4 2014 http://discourse.techart.online/t/3ds-max-c-iterating-on-a-dll-using-visual-studio-unload-assemblies-in-max/4265/7
+	ninianne98 2013 https://forums.asp.net/t/1905021.aspx?How+to+pass+your+constructor+parameters+using+System+Reflection
+	Rod Stephens 2016 http://csharphelper.com/blog/2016/11/run-user-entered-code-in-c/
+	
 */
 struct MICRA_CSHARP_STRUCTURE	(
 	
@@ -93,10 +92,10 @@ struct MICRA_CSHARP_STRUCTURE	(
 	),
 	/**
 	*@Usage
-		compile c# code in to max memory
+		compile C# code(string) in to Max memory
 	*@Example
-		mcCSharp.compile "MyNameSpace.MyClassWithArg"
-		mcCSharp.compile "Rectangle2D"
+		mcCSharp.compile "Orien.Math.Rectangle2D"
+		mcCSharp.compile "Orien.DotnetUI.LabelRoundCorners"
 	*/
 	fn compile className source:"" = (
 		
@@ -133,14 +132,11 @@ struct MICRA_CSHARP_STRUCTURE	(
 	*@Usage
 		create c# classes ir instances
 	*@Example
-		r1 = mcCSharp.new "Rectangle2D"  params:#(10, 122)
-		r1.Area()
+		rect_1 = mcCSharp.new "Orien.Math.Rectangle2D"  params:#(10, 122)
+		rect_1.Area()
 
-		r2 = mcCSharp.new "Rectangle2D"  params:#(100, 400)
-		r2.Area()
-
-		r = mcCSharp.new "MyNameSpace.MyClassWithArg"  params:#("pass")
-		r.sayArg()
+		rect_2 = mcCSharp.new "Orien.Math.Rectangle2D"  params:#(100, 400)
+		rect_2.Area()
 	*/
 	fn new className params:#() = (
 	

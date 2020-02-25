@@ -38,6 +38,7 @@ struct MICRA_STRUCTURE (
 	RepositoryDir		= (pathConfig.removePathLeaf RootDir) + "\\", --here is all Micra's versions and other Resources
 	ResourcesDir 	= RepositoryDir + "repo_sync\\", --Micra's Shared Resources, Backups, Max Icons, Ms Library, ...
 	AppsDir				= RootDir + "App\\",
+	AssemblyDir			= RootDir + "App\\Assembly\\",
 	ImagesPath 			= RootDir + "Img\\", --all images here
 	UserDir				= RootDir + "User\\" + username + "\\",
 	MicraMacro 			= RootDir + "Micra_Macro.mcr",

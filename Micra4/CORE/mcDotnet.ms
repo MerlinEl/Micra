@@ -44,6 +44,47 @@ Struct MICRA_DOTNET (
 	*/
 	Format = (dotnetClass "System.String").format,
 	fn getSource = getSourceFileName(), --get path of this script
+	/**
+	*@Usage
+		Load Dll libraries from C#
+	*@Example
+		--------
+		MATH
+		--------
+		Global _mcMath = loadAssembly "Orien.Tools" "Orien.Tools.mcMath"
+		_mcMath.minMax 100	1	50	--> 50
+		_mcMath.minMax -1	1	50	--> 1
+		_mcMath.minMax 100	1	200	--> 100
+		--------
+		XML
+		--------
+		Global _mcXml = loadAssembly "Orien.Tools" "Orien.Tools.mcXml" params:#(micra.RootDir + "Actions_test.xml")
+		net_xml_node = _mcXml.GetNode "/ACTIONS/Object/Clone_2"
+		net_xml_node.GetAttribute "icon"
+		net_xml_node.SetAttribute "icon" "89"
+		_mcXml.Save()
+	*/
+	fn loadAssembly dll_name class_name params:#() forceLoad:false = (
+		
+		local cls = dotNet.getType class_name  --pickup class from memory
+		if cls == undefined or forceLoad do (  --if dll is not loaded 
+			
+			dotNet.loadAssembly (micra.AssemblyDir + dll_name + ".dll") --load dll in to memory
+		)
+		cls = dotNet.getType class_name  --pickup class from memory
+		if cls == undefined do return undefined
+		local activator = (dotNetClass "System.Activator")
+		try (
+			if params.count == 0 then (
+				
+				activator.CreateInstance cls --create class instance
+			) else (
+				
+				local args = dotNet.ValueToDotNetObject params (dotNetObject "System.Object")
+				activator.CreateInstance cls args
+			)
+		) catch (format "Unable to init Class:%\n\t%\n" class_name (getCurrentException()))
+	),
 	/*
 	*@Usage		convert max color to dotnet
 	*@Example 	
