@@ -1,9 +1,20 @@
-Global _mcString = loadAssembly "Orien.Tools" "Orien.Tools.mcString"
-Global _mcMath = loadAssembly "Orien.Tools" "Orien.Tools.mcMath"
-Global _mcXml = loadAssembly "Orien.Tools" "Orien.Tools.mcXml"
+--TEST--->
+dotNet.loadAssembly (micra.AssemblyDir + "Orien.Tools.dll") --load dll in to memory
+cls = dotNet.getType "Orien.Tools.mcMath"
+_mcMath = (dotNetClass "System.Activator").CreateInstance cls --create class instance 
+
+cls = dotNet.getType "Orien.Tools.mcString"
+_mcString = (dotNetClass "System.Activator").CreateInstance cls --create class instance 
+--TEST<---
+
+
+Global _mcString = mcDotnet.loadAssembly "Orien.Tools" "Orien.Tools.mcString"
+Global _mcArray = mcDotnet.loadAssembly "Orien.Tools" "Orien.Tools.mcArray"
+Global _mcMath = mcDotnet.loadAssembly "Orien.Tools" "Orien.Tools.mcMath"
+Global xml = mcDotnet.loadAssembly "Orien.Tools" "Orien.Tools.mcXml" params:#(micra.RootDir + "Actions.xml")
 showMethods _mcString
 showMethods _mcMath
-showMethods _mcXml
+showMethods xml
 
 
 str = "abababaertyfddfkofopersdf"
@@ -16,10 +27,10 @@ _mcMath.minMax -1	1	50	--> 1
 _mcMath.minMax 100	1	200	--> 100
 
 --READ - WRITE XML
-Global _mcXml = loadAssembly "Orien.Tools" "Orien.Tools.mcXml" params:#(micra.RootDir + "Actions_test.xml")
+
 
 --Get Multiple Nodes from path
-xml_nodes_list = _mcXml.GetNodes "/ACTIONS/Object"
+xml_nodes_list = xml.GetNodes "/ACTIONS/Object"
 string_aqn = (dotNet.getType "Orien.Tools.MaxXmlNode").AssemblyQualifiedName
 type = dotnetobject ("System.Collections.Generic.List`1[[" + string_aqn + "]]")
 xml_nodes = dotnet.ValueToDotNetObject xml_nodes_list type
@@ -33,7 +44,7 @@ for i = 0 to xml_nodes.count - 1  do (
 )
 
 --Get Single Node from path
-net_xml_node = _mcXml.GetNode "/ACTIONS/Object/Clone_2"
+net_xml_node = xml.GetNode "/ACTIONS/Object/Clone_2"
 net_xml_node.url --get current node path
 net_xml_node.Text --get node text
 net_xml_node.Text ="45654" --add - replace text
@@ -43,5 +54,5 @@ net_xml_node.GetAttribute "abcd" --undefined
 net_xml_node.SetAttribute "abcd" "123" --add - replace attribute
 net_xml_node.Body --"<Clone_2 icon="62" cmd="mcFile.fileInVersion Clone2" tooltip="Clone 2" abcd="123">45654</Clone_2>"
 net_xml_node.Parent.Name --Object
-_mcXml.Save()
+xml.Save()
 
