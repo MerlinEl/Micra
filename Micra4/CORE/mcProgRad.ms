@@ -192,6 +192,8 @@ struct MICRA_PROGRESSBAR_STRUCT (
 		form.TransparencyKey = transparent_color
 		form.opacity = 0.8
 		
+		--form1.StartPosition = FormStartPosition.CenterScreen;
+		
 		lbl_title.text = "Loading..."
 		lbl_title.name = "lbl_title"
 		lbl_title.BorderStyle = lbl_title.BorderStyle.None
