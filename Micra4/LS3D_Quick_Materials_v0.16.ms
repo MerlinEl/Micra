@@ -542,15 +542,54 @@ rollout mcQuickMaterialsDialog "Quick Materials:" width:656 height:456
 	fn addMaterialToNewSet obj mat_id terrain_mat = (	
 
 		local new_mat=terrain_mat[mat_id]
-		local obj_mat = obj.material
-		local exist_mat_index = for i = 1 to obj_mat.count where obj_mat[i].name == new_mat.name do exit with i
-		local free_mat_index = exist_mat_index
-		if classOf exist_mat_index != Integer do (
+		local obj_multi_mat = obj.material
+		local mat_id = -1
+		--if object have single material assinged, then create new multimaterial
+		if classOf obj_multi_mat != Multimaterial then (
+			obj_multi_mat = multiMaterial numSubs:10 name:("Material_"+obj.name)
+			if classOf obj.material != UndefinedClass then ( --add first and second material
+			
+				obj_multi_mat[1] = obj.material -- add first material
+				obj_multi_mat[2] = new_mat -- add new material as second
+				mat_id = 2 --set id to 2
+			) else ( --add only first material
+			
+				obj_multi_mat[1] = new_mat -- add new material as second
+				mat_id = 1 --set id to 1
+			)
+			
+			local slev = suobjectlevel
+			if slev != undefined do ( --if is in edit mode, store level
+			
+				suobjectlevel = 0
+				max create mode
+			)
+			obj.material = obj_multi_mat --reassign material to obj (nver in edit mode, else will be cloned)
+			if slev != undefined do ( --if was in edit mode, then restore level
+			
+				suobjectlevel = slev
+				max modify mode
+			)
+		--search if material already exists (if found return index else return OK)	
+		) else (
+	
+			local exist_mat_index = for i = 1 to obj_multi_mat.count where obj_multi_mat[i].name == new_mat.name do exit with i
+			mat_id = exist_mat_index
+			--if material not found, pick any free StandardMaterial slot
+			if classOf mat_id != Integer do (
 
-			free_mat_index = for i = 1 to obj_mat.count where classOf obj_mat[i] == Standardmaterial do exit with i
+				mat_id = for i = 1 to obj_multi_mat.count where classOf obj_multi_mat[i] == Standardmaterial do exit with i
+			)
+			--if all slots are full, then add new one at the end
+			if classOf mat_id != Integer do (
+			
+				mat_id = obj_multi_mat.count + 1
+				obj_multi_mat.numsubs = mat_id
+			)
+			obj_multi_mat[mat_id] = new_mat --insert new material in free slot
 		)
-		polyOp.setFaceMatID obj (polyOp.getFaceSelection obj) free_mat_index
-		obj.material = new_mat
+		--assign material id in to selected faces
+		polyOp.setFaceMatID obj (polyOp.getFaceSelection obj) mat_id
 	)
 	
 	fn assignMaterial objs applyMapping:true = (
