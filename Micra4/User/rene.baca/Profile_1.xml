@@ -44,7 +44,7 @@
     <mcRotateObjectDialog active="undefined" pos="[100,100]" size="[100,100]" title="" />
     <mcViewportRecorderDialog active="true" pos="[100,100]" size="[316,124]" title="" />
     <mcGifCompillerDialog active="undefined" pos="[100,100]" size="[100,100]" title="" />
-    <mcScriptManDialog active="true" pos="[691,591]" size="[400,624]" title="" />
+    <mcScriptManDialog active="true" pos="[1142,222]" size="[400,624]" title="" />
     <mcColorPickerDialog active="true" pos="[560,420]" size="[328,276]" title="" />
     <mcQuickColorPickerDialog active="undefined" pos="[100,100]" size="[100,100]" title="" />
     <mcInterfaceColorDilaog active="undefined" pos="[1445,427]" size="[299,130]" title="" />
