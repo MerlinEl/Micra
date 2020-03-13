@@ -20,7 +20,7 @@ rollout mcUnwrapEditorDialog "UV+" width:96 height:648
 	button btn_border "B" pos:[8,52] width:24 height:24 images:(mcCall.getIcon 41) tooltip:"Select Edge border"
 	button btn_sel_similar "B" pos:[64,52] width:24 height:24 images:(mcCall.getIcon 220) tooltip:"Select Similar Faces"
 	label lbl_min "min:" pos:[8,84] width:24 height:16
-	spinner spn_min "" pos:[32,84] width:44 height:16 range:[0,100,100] type:#float
+	spinner spn_min "" pos:[32,84] width:44 height:16 range:[0,100,10] type:#float
 	label lbl_max "max:" pos:[8,104] width:24 height:16
 	spinner spn_max "" pos:[32,104] width:44 height:16 range:[0,10000,20] type:#float
 	label lbl6 "%" pos:[76,104] width:12 height:16
@@ -51,8 +51,8 @@ rollout mcUnwrapEditorDialog "UV+" width:96 height:648
 	button 'btn_randomize_y' "RandY" pos:[48,400] width:36 height:24 toolTip:"Move Elements Random Y  (+Ctrl Random + -)" align:#left
 	spinner 'spn_randomize' "" pos:[8,428] width:80 height:16 range:[0,100,0.5] align:#left
 	button 'btn_rotate_verts' "R" pos:[12,504] width:24 height:24 toolTip:"ReformUV CV (Rotate Vertices Around Shape)" align:#left
-	button 'btn_rotate_v' "All Vertical" pos:[12,448] width:72 height:24 toolTip:"Rotate Vertical" align:#left
-	button 'btn_rotate_h' "All Horizontal" pos:[12,476] width:72 height:24 toolTip:"Rotate Horizontal" align:#left
+	button 'btn_rotate_v' "Rot V" pos:[4,452] width:40 height:20 toolTip:"Rotate each UV element in selection Vertical" align:#left
+	button 'btn_rotate_h' "Rot H" pos:[48,452] width:44 height:20 toolTip:"Rotate each UV element in selection Horizontal" align:#left
 	
 	GroupBox 'grp5' "Copy Paste" pos:[4,540] width:88 height:48 align:#left
 	button 'btn_copy_pos' "C" pos:[8,556] width:24 height:24 toolTip:"Copy Vertex Position" align:#left
@@ -66,6 +66,9 @@ rollout mcUnwrapEditorDialog "UV+" width:96 height:648
 	button 'button_skew_verts_plus' "+" pos:[34,612] width:24 height:24 align:#left
 	GroupBox 'grp17' "Skew Verts" pos:[4,596] width:88 height:48 align:#left toolTip: "Skew Selected Vertices"
 	spinner 'spn_skev_angle' "" pos:[60,616] width:32 height:16 range:[-360,360,5] type:#integer scale:1 align:#left
+	button 'btn_sel_random' "Sel" pos:[5,476] width:28 height:20 toolTip:"Select random UV elements" align:#left
+	spinner 'spn_sel_random' "" pos:[36,478] width:44 height:16 range:[1,100,10] type:#integer align:#left
+	label 'lbl_sel_random' "%" pos:[80,479] width:12 height:16 align:#left
 
 	--> Functions
 	fn offsetResizeSelection type  = (
@@ -387,6 +390,17 @@ rollout mcUnwrapEditorDialog "UV+" width:96 height:648
 			mcPolyMap.fitToSquare mod_uvw sel_verts
 		)
 	)
+	fn selectRandomElements percent = (
+	
+		local mod_uvw = modpanel.getcurrentobject()
+		if classOf  mod_uvw!= Unwrap_UVW do return false	
+		--get all faces
+		local all_vertices = #{1..(mod_uvw.NumberVertices())} 
+		mod_uvw.selectVertices all_vertices
+		mod_uvw.vertToFaceSelect()
+		local all_faces = mod_uvw.getSelectedFaces()	
+		--filter only visible faces
+	)
 	/*
 		not works because of edges reindexing
 		undo "Stitch Selected Edges" on for i in sel_edges do (
@@ -436,6 +450,7 @@ rollout mcUnwrapEditorDialog "UV+" width:96 height:648
 	on btn_randomize_y pressed do randomizeElements #Y	
 	on btn_rotate_v pressed do alignElements #vertical
 	on btn_rotate_h pressed do alignElements #horizontal
+	on btn_sel_random pressed do undo "Select Random UV Elements" on (selectRandomElements spn_sel_random.value)
 	on btn_stitch pressed do stitchSelectedEdges()
 	on btn_fit pressed do fitUVS()
 	on btn_rotate_verts pressed do rotateVertices #right
