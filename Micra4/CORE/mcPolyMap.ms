@@ -41,7 +41,7 @@ struct UV_ELEMENT (
 	pos		= [0, 0],
 	fn init = (
 
-		mod_uvw.getArea faces &left &bottom &width &height &uv_area &area_geo
+		mod_uvw.getArea faces &left &bottom &width &height &area_uv &area_geo
 		pos  = [left, bottom]
 		right = left + width
 		top	= bottom + height

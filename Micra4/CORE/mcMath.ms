@@ -15,6 +15,7 @@ https://forums.cgsociety.org/t/geometrical-calculations-points-lines-planes-inte
 struct MICRA_MATH (
 
 	fn getSource = getSourceFileName(), --get path of this script
+	fn randomBoolean = (random 0.0 1 >= 0.5),
 	fn isInteger num = (mod num 1 == 0),
 	/**
 	*@Usage	> get number of digits

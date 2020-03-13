@@ -2,7 +2,7 @@
 <SETTINGS>
   <Micra>
     <born val="04.25.2006" />
-    <version val="5.87" />
+    <version val="5.88" />
   </Micra>
   <Structures val="All registred Micra's Structures">
     <!--independent classes-->
@@ -13,8 +13,8 @@
     <mcDisplay val="on" info="show message on screen with defined duration" />
     <mcProgLog val="on" info="progressbar with log" />
     <mcWinMsg val="on" />
-    <mcCSharpUI val="on" info="csharp interface and objects components"/>
-    <mcCSharp val="on" info="csharp compiller"/>
+    <mcCSharpUI val="on" info="csharp interface and objects components" />
+    <mcCSharp val="on" info="csharp compiller" />
     <mcWin32 val="on" info="denisT great work!" />
     <mcUser32 val="on" info="denisT great work!" />
     <mcObjects val="on" info="database object CORE BASE" />
@@ -26,7 +26,7 @@
     <mcMouse val="on" />
     <mcMax val="on" />
     <!--dependent classes-->
-	<mcSystem val="on" />
+    <mcSystem val="on" />
     <mcMaterial val="on" />
     <mcColor val="on" info="color conversion tool" />
     <mcZip val="on" info="zip - unzip functions" />

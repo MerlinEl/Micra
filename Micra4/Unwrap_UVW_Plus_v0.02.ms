@@ -47,8 +47,8 @@ rollout mcUnwrapEditorDialog "UV+" width:96 height:648
 	button 'btn_fit' "St" pos:[64,372] width:24 height:24 toolTip:"Fit To Rect (+Ctrl Proportionaly)" align:#left
 	button 'btn_distr_x_plus' "Dx+" pos:[36,504] width:24 height:24 toolTip:"Distribute Elements At X Expand" align:#left
 	button 'btn_distr_x_zero' "Dx-" pos:[60,504] width:24 height:24 toolTip:"Distribute Elements At X Contract" align:#left
-	button 'btn_randomize_x' "RandX" pos:[8,400] width:36 height:24 toolTip:"Move Elements Random X" align:#left
-	button 'btn_randomize_y' "RandY" pos:[48,400] width:36 height:24 toolTip:"Move Elements Random Y" align:#left
+	button 'btn_randomize_x' "RandX" pos:[8,400] width:36 height:24 toolTip:"Move Elements Random X (+Ctrl Random + -)" align:#left
+	button 'btn_randomize_y' "RandY" pos:[48,400] width:36 height:24 toolTip:"Move Elements Random Y  (+Ctrl Random + -)" align:#left
 	spinner 'spn_randomize' "" pos:[8,428] width:80 height:16 range:[0,100,0.5] align:#left
 	button 'btn_rotate_verts' "R" pos:[12,504] width:24 height:24 toolTip:"ReformUV CV (Rotate Vertices Around Shape)" align:#left
 	button 'btn_rotate_v' "All Vertical" pos:[12,448] width:72 height:24 toolTip:"Rotate Vertical" align:#left
@@ -124,7 +124,7 @@ rollout mcUnwrapEditorDialog "UV+" width:96 height:648
 		local max_val = areaUVW + (areaUVW/100)*max_treeshold
 		
 		format "min:%\tmax:%\n" min_val max_val 
-		for a in all_elements where (a.area >= min_val ) and (a.area <= max_val) do --min max
+		for a in all_elements where (a.area_uv >= min_val ) and (a.area_uv <= max_val) do --min max
 		(
 			chosen_faces += a.faces
 		)
@@ -195,7 +195,16 @@ rollout mcUnwrapEditorDialog "UV+" width:96 height:648
 			gco.SelectFaces #{i}
 			gco.selectElement()
 			local element_pos = gco.getPivotOffset()
-			local random_val = random 0.1 spn_randomize.value
+			local random_val = (
+				if keyboard.controlPressed then ( --offset + or -
+				
+					if mcMath.randomBoolean() then spn_randomize.value else -spn_randomize.value
+					
+				) else (
+				
+					random 0.1 spn_randomize.value
+				)
+			)
 			case axis of (
 				
 				#X:element_pos.x += random_val
