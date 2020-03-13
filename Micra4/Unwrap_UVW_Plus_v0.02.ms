@@ -394,12 +394,28 @@ rollout mcUnwrapEditorDialog "UV+" width:96 height:648
 	
 		local mod_uvw = modpanel.getcurrentobject()
 		if classOf  mod_uvw!= Unwrap_UVW do return false	
+		if subObjectLevel != 3 do (messageBox "Works only in UV Faces." title:"Warning"; return false)
+		local sel_faces = mod_uvw.getSelectedFaces()
+		max select all
+		local visible_faces = mod_uvw.getSelectedFaces()
+		local percentage = spn_sel_random.value
+		local sel_count = (percentage / 100.0) * visible_faces.numberset 
+		--format "selectRandomElements > percentage:% select:%/% visible faces" percentage sel_count visible_faces.numberset 
+		local faces_indexes = for f in visible_faces collect f
+		mcArray.shuffle faces_indexes
+		local faces_to_select = for i = 1 to sel_count collect faces_indexes[i]
+		mod_uvw.selectFaces (faces_to_select as BitArray)
+		
+		-- mod_uvw.unwrap2.getDisplayHiddenEdges()
+		-- mod_uvw.unwrap3.setDisplayHiddenEdges false
+		-- mod_uvw.unhideAllPolygons() 
+		
 		--get all faces
-		local all_vertices = #{1..(mod_uvw.NumberVertices())} 
+		/*local all_vertices = #{1..(mod_uvw.NumberVertices())} 
 		mod_uvw.selectVertices all_vertices
 		mod_uvw.vertToFaceSelect()
-		local all_faces = mod_uvw.getSelectedFaces()	
-		--filter only visible faces
+		local all_faces = mod_uvw.getSelectedFaces()*/
+
 	)
 	/*
 		not works because of edges reindexing

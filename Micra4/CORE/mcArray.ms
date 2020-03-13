@@ -196,6 +196,14 @@ struct MCRA_ARRAY (
 		)
 		qSort arr compareParams params:key_path
 	),
+	fn shuffle arr =(
+	
+		for counter = arr.count to 1 by -1 collect(
+		
+			local swapIndex = random 1 counter
+			swap arr[swapIndex] arr[counter]
+		)
+	),
 	-- compare generic Arrays
 	fn isEqualArrays ar1 ar2 = (
 		with printAllElements on (ar1 as string == ar2 as string)
