@@ -409,6 +409,8 @@ rollout mcUnwrapEditorDialog "UV+" width:96 height:648
 		-- mod_uvw.unwrap2.getDisplayHiddenEdges()
 		-- mod_uvw.unwrap3.setDisplayHiddenEdges false
 		-- mod_uvw.unhideAllPolygons() 
+		-- <void><Unwrap_UVW>.hide() 
+		-- <void><Unwrap_UVW>.unhide() 
 		
 		--get all faces
 		/*local all_vertices = #{1..(mod_uvw.NumberVertices())} 

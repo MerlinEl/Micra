@@ -241,5 +241,6 @@
     <btn_J23 action="Normal_Map_Tester" icon="61" />
     <btn_J22 action="Road_Generator_Tool" icon="266" />
     <btn_J21 action="Road_Markings" icon="288" />
+    <btn_B6 action="Create_3PGrid" icon="81" />
   </Buttons>
 </USER>
