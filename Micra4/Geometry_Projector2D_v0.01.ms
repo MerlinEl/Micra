@@ -10,13 +10,23 @@ rollout mcProjector2DDialog "Geometry Projector 2D:" width:180 height:160
 		)
 	)
 	GroupBox 'grp1' "Settings:" pos:[4,4] width:172 height:68 align:#left
-	label 'lbl1' "scanner density:" pos:[12,28] width:84 height:16 align:#left
-	spinner 'spn_scan_density' "" pos:[100,28] width:72 height:16 range:[1,1e+07,1000] type:#integer align:#left
-	label 'lbl2' "shape precision:" pos:[12,48] width:84 height:16 align:#left
-	spinner 'spn_shape_precision' "" pos:[100,48] width:72 height:16 range:[1,1e+07,10000] type:#integer align:#left
+	label 'lbl1' "points reduction:" pos:[12,28] width:84 height:16 align:#left toolTip:"Higest value less vertices" 
+	spinner 'spn_scan_density' "" pos:[100,28] width:72 height:16 range:[1,1e+07,800] type:#integer align:#left align:#left
+	label 'lbl2' "shape precision:" pos:[12,48] width:84 height:16 align:#left toolTip:"Lowest value better result"
+	spinner 'spn_shape_precision' "" pos:[100,48] width:72 height:16 range:[1,1e+07,10000] type:#integer align:#left  align:#left
 	button 'btn_build_shape' "Build Shape" pos:[4,96] width:172 height:28 align:#left
-	checkbox 'chk_debug' "debug mode" pos:[8,76] width:164 height:16 align:#left
-	button 'btn_build_geom' "Build Geometry" pos:[4,128] width:172 height:28 align:#left
+	checkbox 'chk_debug' "debug" pos:[8,76] width:48 height:16 align:#left
+	button 'btn_build_geom' "Build Geometry" pos:[4,128] width:128 height:28 align:#left
+	label 'lbl3' "mat ID:" pos:[80,76] width:40 height:16 align:#left
+	spinner 'spn_mat_id' "" pos:[124,76] width:52 height:16 range:[1,1000,452] type:#integer align:#left
+	button 'btn_flip_normals' "flip " pos:[136,132] width:36 height:20 toolTip:"Flip Normals" align:#left
+	fn flipNormals objs = (
+		
+		local normalMod = normalModifier()
+		normalMod.flip = true	
+		addModifier objs normalMod
+		convertToPoly objs
+	)
 	fn getFlattenPoints obj density = (
 
 	local tri_mesh = snapshotAsMesh obj --snapshot as TriMesh to memory
@@ -153,20 +163,56 @@ rollout mcProjector2DDialog "Geometry Projector 2D:" width:180 height:160
 			if debug do test_points = for p in fp collect (point pos:p size:2 wirecolor:green)
 			local edata_array = alphaShape fp spn_shape_precision.value
 			local verts_pos = sortEdgesAsPoints edata_array
-			local new_name = o.name + "_ocplane"
+			local new_name = o.name + "_occ"
 			local new_o = case type of (
 				
 				#shape	: mcSpline.splinesFromPoints verts_pos	shpName:new_name
-				#geom	: mcPoly.createPolygonObj verts_pos objName:new_name
+				#geom		: mcPoly.createPolygonObj verts_pos objName:new_name
 			)
 			if new_o != undefined do (
-
-				new_o.parent = o.parent --copy linkage
-				select new_o
+				--if is for oclusion planes creation
+				local terrain_mat = currentMaterialLibrary["bc_terrain_main"]
+				if terrain_mat == undefined do  terrain_mat = meditmaterials["semantic_materials"]
+				if type == #geom and terrain_mat != undefined do (
+					
+					--link to same parent as lod0
+					new_o.parent = o.parent --copy linkage
+					--add to new layer
+					local new_layer_name_arr = filterString  o.layer.name "_"
+					local new_layer_name = ""
+					for i = 1 to new_layer_name_arr.count-1 do new_layer_name += new_layer_name_arr[i] + "_"
+					new_layer_name += "OCC"
+					local new_layer = mcMax.getetOrCreateLayer new_layer_name
+					new_layer.addNode new_o
+					--add mapping
+					local mod_uvw = uvwMap axis:2 maptype:0 mapChannel:1 realWorldMapSize:false
+					select new_o ---must be selected to get map width and length
+-- 					addModifier new_o mod_uvw ui:on --not works (width and length == 0)
+					modPanel.addModToSelection mod_uvw ui:on
+-- 					format "w:% h:%\n" mod_uvw.width mod_uvw.length
+					local u_tile = mod_uvw.width *  (4.0 / 1000) --default mod_uvw.width * 0.0016
+					local v_tile = mod_uvw.length * (4.0 / 1000) --default mod_uvw.length * 0.0032
+					mod_uvw.utile = u_tile	--length is in generic units
+					mod_uvw.vtile = v_tile	--width is in generic units
+					--set material id
+					new_o.material = terrain_mat
+					local mat_mod = Materialmodifier()
+					addModifier new_o mat_mod
+					mat_mod.materialID = spn_mat_id.value	
+					--set vertex color to red
+					maxops.CollapseNodeTo new_o 1 false
+					if  not (polyOp.getMapSupport new_o 0) do polyOp.setMapSupport new_o 0 true
+					for i=1 to (polyOp.getNumMapVerts new_o 0) do (
+						
+						polyOp.setMapVert new_o 0 i red
+					)
+					--add push modifier to adjust offset --(not works need to push outline)
+				)
 			)
 		)
 	)
 	on btn_build_shape pressed do projectObjs (selection as array) type:#shape
 	on btn_build_geom pressed do projectObjs (selection as array)  type:#geom
+	on btn_flip_normals pressed do undo "Flip Normals" on flipNormals (selection as array)
 )
 createDialog mcProjector2DDialog

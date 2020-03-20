@@ -974,8 +974,9 @@ struct MICRA_POLY
 	fn createPolygonObj verts_pos objName:"" = (
 		
 		if verts_pos.count < 3 do return false
-		if not (mcMath.isClockwise3P verts_pos[1] verts_pos[2] verts_pos[3]) do verts_pos = reverseArray verts_pos
-		format "is clockwise:%\n" (mcMath.isClockwise3P verts_pos[1] verts_pos[2] verts_pos[3])
+		--local is_cv = mcMath.isClockwise3P verts_pos[1] verts_pos[2] verts_pos[3]
+		--if not is_cv do verts_pos = reverseArray verts_pos
+		--format "createPolygonObj > is clockwise:%\n" (mcMath.isClockwise3P verts_pos[1] verts_pos[2] verts_pos[3])
 		local new_obj = Editable_mesh()
 		undo off (
 		
