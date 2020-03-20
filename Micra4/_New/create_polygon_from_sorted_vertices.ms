@@ -36,7 +36,7 @@
 				mcSpline.drawArrow points_center p1 head_size:1 clr:vcolors[i]
 			)*/
 			local new_name = uniqueName (obj.name+"stairs_coll_")
-			new_obj = mcPoly.createPolygonObj verts_pos new_name
+			new_obj = mcPoly.createPolygonObj verts_pos objName:new_name
 		) catch ResumeEditing()
 		ResumeEditing()
 		select new_obj

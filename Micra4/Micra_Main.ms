@@ -142,18 +142,45 @@ struct MICRA_STRUCTURE (
 	),
 	fn restoreToDefault = (
 	
-		mcFile.saveSettings Micra.UserSettings "Settings/CurrentProfile" "8" -- Set start profile to default
+		mcFile.saveSettings UserSettings "Settings/CurrentProfile" "8" -- Set start profile to default
 		reload()
 	),
 	fn setProfile index = (
 	
-		mcFile.saveSettings Micra.UserSettings "Settings/CurrentProfile" (index as string) -- Set start profile to index(1-8)
+		mcFile.saveSettings UserSettings "Settings/CurrentProfile" (index as string) -- Set start profile to index(1-8)
 		reload()
+	),
+	fn giveBackMyDialogs = (
+
+		local last_profile_index = mcFile.readSettings UserSettings "Settings/CurrentProfile"
+		local last_profile_name = "Profile_"+ last_profile_index + ".xml"
+		local user_xml = UserDir + last_profile_name
+		local dialogs_names_1 = mcFile.readSettings user_xml "Properties_1" type:"keys"
+		local dialogs_names_2 = mcFile.readSettings user_xml "Properties_2" type:"keys"
+		local max_size = getMaxWindowSize() -500
+		fn restorePos dname dpath user_xml max_size = (
+			
+			local dpos = execute (mcFile.readSettings user_xml dpath type:"pos")
+			if dpos.x > max_size.x or dpos.x < 0  then (
+
+				format "MOVE > dialog% from:% to:%\n" dname dpos.x max_size.x
+				dpos.x = max_size.x
+			) else (
+
+				format "SKIP > dialog:% pos:%\n" dname dpos
+			)
+			mcFile.saveSettings user_xml dpath (dpos as string) type:"pos"
+		)
+		for n in dialogs_names_1 do restorePos n ("Properties_1/"+n) user_xml max_size
+		for n in dialogs_names_2 do restorePos n ("Properties_2/"+n) user_xml max_size
+		if mcMicraDialog.location.x  > max_size.x or mcMicraDialog.location.x < 0 do  mcMicraDialog.location.x = max_size.x
+		load()
+		messageBox "Done!" title:"Micra:"
 	),
 	--Get last used Profile ( Profile_1.xml, ..., Profile_8.xml)
 	fn loadUserProfile = (
 	
-		local last_profile_index = mcFile.readSettings Micra.UserSettings "Settings/CurrentProfile"
+		local last_profile_index = mcFile.readSettings UserSettings "Settings/CurrentProfile"
 		local last_profile_name = "Profile_"+ last_profile_index + ".xml"
 		format "% > loadUserProfile > profile( % ) user( % )\n" version last_profile_index username
 		UserProfile = UserDir + last_profile_name
@@ -413,3 +440,37 @@ if execute (getINISetting UserSettings "Settings" "ShowFileName") do
 		format "% > System files(%) checked succesfully!\n" version files_list.count
 */		
 	
+	
+	/*
+		fn giveBackMyDialogs = (
+		--> Close Micra's Dialogs
+		local dialogs_names	= mcFile.readSettings micra.DefaultProfile "Properties_1" type:"keys"
+		join dialogs_names (mcFile.readSettings micra.DefaultProfile "Properties_2" type:"keys")
+		for n in dialogs_names do (
+
+			if n == "mcMicraDialog" do continue --close all except Micra dialog (prevent endless loop)
+			local d = execute n
+			case classOf d of (
+			
+				dotNetObject:(
+				
+						if d.visible do (
+				
+							d.location.x = 0
+						)
+				)
+				RolloutClass:(
+				
+						if d.isDisplayed do (
+						
+						local pos = getDialogPos d
+						pos.x = 0
+						setDialogPos d pos
+					)
+				)
+			)
+			d = undefined --< set dialog to undefined / mod: (2.10.2020)
+		)
+		mcMicraDialog.location.x = 0
+	),
+	*/

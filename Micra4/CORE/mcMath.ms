@@ -168,6 +168,10 @@ struct MICRA_MATH (
 		)
 		sum > 0.0
 	),
+	fn isClockwise3P p1 p2 p3 = ( --not tested
+	
+		((p2.x - p1.x) * (p3.y - p1.y) - (p2.y - p1.y) * (p3.x - p1.x)) < 1e-9
+	),
 	fn movePointAlongVector p v val = ( p + (normalize v) * val ),
 	/**
 	*@Usage > get circular road of points around a center

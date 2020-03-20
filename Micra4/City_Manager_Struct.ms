@@ -128,7 +128,7 @@ struct sCityManager	(
 	),
 	fn createStairsCollision verts_pos mat_id coll_index coll_layer coll_node mat obj_name= (
 	
-		new_obj = mcPoly.createPolygonObj verts_pos obj_name
+		new_obj = mcPoly.createPolygonObj verts_pos objName:obj_name
 		undo off (
 		
 			--set material ID

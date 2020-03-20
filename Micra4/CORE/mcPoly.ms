@@ -971,8 +971,11 @@ struct MICRA_POLY
 	------              	CREATE   	                   ------
 	-------------------------------------------------------------
 	-------------------------------------------------------------
-	fn createPolygonObj verts_pos obj_name = (
-
+	fn createPolygonObj verts_pos objName:"" = (
+		
+		if verts_pos.count < 3 do return false
+		if not (mcMath.isClockwise3P verts_pos[1] verts_pos[2] verts_pos[3]) do verts_pos = reverseArray verts_pos
+		format "is clockwise:%\n" (mcMath.isClockwise3P verts_pos[1] verts_pos[2] verts_pos[3])
 		local new_obj = Editable_mesh()
 		undo off (
 		
@@ -980,7 +983,7 @@ struct MICRA_POLY
 			for p in verts_pos do polyop.createVert new_obj p
 			polyop.createPolygon new_obj (for i = 1 to verts_pos.count collect i)
 			new_obj.pivot = (new_obj.min + new_obj.max) / 2 --center pivot
-			new_obj.name = obj_name
+			if objName.count > 0 do new_obj.name = objName
 		)
 		update new_obj
 		new_obj

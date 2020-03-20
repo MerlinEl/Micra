@@ -2,7 +2,7 @@
 <SETTINGS>
   <Micra>
     <born val="04.25.2006" />
-    <version val="5.89" />
+    <version val="5.9" />
   </Micra>
   <Structures val="All registred Micra's Structures">
     <!--independent classes-->
@@ -156,6 +156,7 @@
     <Road_Generator_Marking val="0.06" />
     <Vertex_Color_Mixer val="1.09" />
     <LS3D_Texel_Density val="0.02" />
+    <Geometry_Projector2D val="0.01" />
   </Version>
   <SystemFiles val="Micra's Settings Files">
     <Actions val="Contains all accesible Micra's actions" />
