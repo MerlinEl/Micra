@@ -43,7 +43,7 @@
     <Offset_Rotate_Object icon="276" cmd="mcAction.OffsetRotateObject()" tooltip="Offset Rotate Object" />
     <FBX_Quick_Import_Export icon="277" cmd="mcFile.fileInVersion FBX_Quick_Import_Export" tooltip="FBX Quick Import Export" />
     <Move_To_Surface icon="280" cmd="mcAction.moveObjectToSurface()" tooltip="Move To Surface" />
-    <Geometry_Projector_2D icon="139" cmd="mcFile.fileInVersion Geometry_Projector2D" tooltip="Geometry Projector 2D" />
+    <Geometry_Projector_2D icon="11" cmd="mcFile.fileInVersion Geometry_Projector2D" tooltip="Geometry Projector 2D" />
   </Object>
   <Pivot>
     <Afect_Pivot_Only icon="51" cmd="mcAction.pivot_affect_only()" tooltip="Afect Pivot Only" />
