@@ -1,5 +1,5 @@
 if mcProjector2DDialog != undefined do DestroyDialog mcProjector2DDialog
-rollout mcProjector2DDialog "Geometry Projector 2D:" width:180 height:172
+rollout mcProjector2DDialog "Geometry Projector 2D:" width:180 height:192
 (
 	struct EDGE_DATA (id, a, b,
 		fn swapPoints = (
@@ -24,6 +24,20 @@ rollout mcProjector2DDialog "Geometry Projector 2D:" width:180 height:172
 	spinner 'spn_line_width' "" pos:[124,84] width:52 height:16 range:[2,10000,500] type:#integer align:#left
 	button 'btn_map_sel' "Map" pos:[4,140] width:68 height:28 toolTip:"Flip Normals" align:#left
 	label 'lbl9' "normals:" pos:[80,113] width:40 height:16 align:#left
+	button 'btn_select_all_occ' "Select all OCC" pos:[4,172] width:172 height:16 align:#left
+	fn setRandomWirecolor objs = (
+	
+		for o in objs do o.wirecolor = color (random 0 255) (random 0 255) (random 0 255)
+	)
+	fn selectAllOcc = (
+	
+		select (for o in objects where (
+		
+			local arr = filterString o.name "_"
+			arr[arr.count] == "occ"
+			
+		) collect o)
+	)
 	fn flipNormals objs = (
 		
 		local normalMod = normalModifier()
@@ -231,7 +245,7 @@ rollout mcProjector2DDialog "Geometry Projector 2D:" width:180 height:172
 				
 				--link to same parent as lod0
 				new_o.parent = o.parent --copy linkage
-				new_o.wirecolor = orange
+				new_o.wirecolor = o.wirecolor
 				--add red material
 				local red_mat = meditmaterials["red_material"]
 				if red_mat == undefined do  (
@@ -264,5 +278,6 @@ rollout mcProjector2DDialog "Geometry Projector 2D:" width:180 height:172
 	on btn_build_geom pressed do projectObjs (selection as array)  type:#geom
 	on btn_map_sel pressed do mapObjs (selection as array)
 	on btn_flip_normals pressed do undo "Flip Normals" on flipNormals (selection as array)
+	on btn_select_all_occ pressed do undo "Select All OCC" on selectAllOcc ()
 )
 createDialog mcProjector2DDialog
