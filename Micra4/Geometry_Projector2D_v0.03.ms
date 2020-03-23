@@ -247,15 +247,17 @@ rollout mcProjector2DDialog "Geometry Projector 2D:" width:180 height:192
 				new_o.parent = o.parent --copy linkage
 				new_o.wirecolor = o.wirecolor
 				--add red material
-				local red_mat = meditmaterials["red_material"]
-				if red_mat == undefined do  (
+				local ls3d_red_mat = meditmaterials["red_material"]
+				if classOf ls3d_red_mat != LS3DMaterial do  (
 				
-					red_mat = standardMaterial()
-					red_mat.name = "red_material"
-					red_mat.diffuseColor = red;
-					meditmaterials[meditmaterials.count] = red_mat
+					ls3d_red_mat = LS3DMaterial ()
+					ls3d_red_mat.name = "red_material"
+					ls3d_red_mat.matguid = "0x75a27025, 0x25335b76"
+					ls3d_red_mat.guessbindings()
+					ls3d_red_mat.synchronize()
+					meditMaterials[meditmaterials.count] = ls3d_red_mat
 				)
-				new_o.material = red_mat
+				new_o.material = ls3d_red_mat
 				--add to new layer
 				local new_layer_name_arr = filterString  o.layer.name "_"
 				local new_layer_name = ""
