@@ -256,6 +256,7 @@ rollout mcProjector2DDialog "Geometry Projector 2D:" width:180 height:172
 					
 					polyOp.setMapVert new_o 0 i red
 				)
+				select new_o
 			)
 		)
 	)
