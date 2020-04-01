@@ -115,7 +115,7 @@ struct MICRA_POLY
 		)
 	),
 	--set selected object (geo selection)
-	fn setOsel type sel = (
+	fn setOsel type sel = ( --not used yet
 		
 		local obj = selection[1]
 		if obj == undefined or classOf sel != BitArray do return false
@@ -135,7 +135,8 @@ struct MICRA_POLY
 	/*
 	TODO
 	*@ Usage
-		universal get selection method (Editable_Poly, Editable_Mesh, Edit_Poly modifier[maybe multilselected objs])
+		universal get selection method 
+		(Editable_Poly, Editable_Mesh, Edit_Poly modifier[maybe multilselected objs])
 	*/
 	fn getSel obj type = (
 	
@@ -144,7 +145,8 @@ struct MICRA_POLY
 	/*
 	TODO
 	*@ Usage
-		universal set selection method (Editable_Poly, Editable_Mesh, Edit_Poly modifier[maybe multilselected objs])
+		universal set selection method 
+		(Editable_Poly, Editable_Mesh, Edit_Poly modifier[maybe multilselected objs])
 	*/
 	fn setSel obj type = (
 	
