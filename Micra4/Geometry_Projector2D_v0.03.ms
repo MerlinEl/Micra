@@ -168,7 +168,7 @@ rollout mcProjector2DDialog "Geometry Projector 2D:" width:180 height:192
 		sqrt ( (a.x - b.x) * (a.x - b.x)  +  (a.y - b.y)  *  (a.y - b.y) )  
 	)
 	fn alphaCirc alp dist a b = (   
-		sqrt (alp - (dist / 2) * (dist / 2)) * (a - b) / dist
+		( sqrt (alp - (dist / 2) * (dist / 2)) ) * (a - b) / dist 
 	)
 	fn alphaShape points alpha_radius = (
 

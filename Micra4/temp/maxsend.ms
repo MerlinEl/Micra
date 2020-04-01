@@ -6,4 +6,4 @@
 	-- mcProgRad.progressTo 100 msg:"Collapse Objects Is Finished!" confirm:true showButton:true clr:green
 	
 -- mousehook.mouseops.release()
-print 123
+mcPopUp.close()

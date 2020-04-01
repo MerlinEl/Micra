@@ -129,6 +129,12 @@ struct MICRA_FILE (
 			format "mcFile > fileInVersion >  [  %  ]  was failed!\n\tUnable locate file [ % ]\n" script_name file
 		)
 	),
+	fn isPath str =  ( --check if string is path type
+	
+		if classOf str == string and
+			str.count > 0 and 
+				str[2] == ":" then true else false
+	),
 	fn isFilePath _path =  (
 		
 		_path = pathConfig.normalizePath _path

@@ -51,13 +51,24 @@ struct MICRA_SYSTEM (
 	),
 	fn keyboardSwitch = (
 	
+		local settings_dir = mcFile.readSettings Micra.UserSettings "USER/Settings/MaxSavedSettings" --read default type "val"
+		if not (mcFile.isPath settings_dir) do (
+			settings_dir = mcPopUp.show "" title:"Settings:" type:#Input
+			if not (mcFile.isPath settings_dir) do return false
+			mcFile.saveSettings Micra.UserSettings "USER/Settings/MaxSavedSettings" settings_dir --add-replace type "val"
+		)
+
 		local current_shortcuts = actionMan.getKeyboardFile() 
-		local merlin_shortcuts = "D:\ReneBaca\3DsMax\Merlin_UI_2018.kbdx"
-		local default_shortcuts = "D:\ReneBaca\3DsMax\DefaultUI.kbdx"
+		local user_shortcuts = settings_dir + @"\Merlin_UI_2018.kbdx"
+		local default_shortcuts = settings_dir + @"\DefaultUI.kbdx"
 		
-		local sortcuts_file = if current_shortcuts == merlin_shortcuts then default_shortcuts else merlin_shortcuts
+-- 		format "shortcuts:\n\tcurrent:%\n\tnuser  :%\n\tdefault:%\n" current_shortcuts user_shortcuts default_shortcuts
+-- 		format "user:%\n" (current_shortcuts == user_shortcuts)
+-- 		format "default:%\n" (current_shortcuts == default_shortcuts)
+		
+		local sortcuts_file = if current_shortcuts == user_shortcuts then default_shortcuts else user_shortcuts
 		actionMan.loadKeyboardFile sortcuts_file
-		local state = if sortcuts_file == merlin_shortcuts then "Merlin" else "Default"
+		local state = if sortcuts_file == user_shortcuts then "User" else "Default"
 		messageBox ("Shortcuts was set to:" + state) title:" Micra:"
 	),
 	fn editTexturesInPhotoshop = 

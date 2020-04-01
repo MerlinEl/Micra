@@ -648,7 +648,8 @@ rollout mcCityManDialog "" width:500 height:988
 		for d in database where d.dupes.count  > 1 do join dupplicate_objs d.dupes
 		format "Dulicated Objects List:\n"
 		for o in dupplicate_objs do format "\t%\n" o.name
-		messageBox ("Found ( "+dupplicate_objs.count as string+" )  duplicated objects.\nPress Unique names Fix roe Repair.") title:"Dupple Inspector"
+		local hint = if dupplicate_objs.count > 0 then "\nPress Unique names Fix or Repair." else ""
+		messageBox ("Found ( "+dupplicate_objs.count as string+" )  duplicated objects." + hint) title:"Dupple Inspector:"
 		select dupplicate_objs
 	)
 	fn hideUnhideSelection = (

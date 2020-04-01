@@ -14,6 +14,7 @@
     <SaveLayer val="on" />
     <BlenderAppPath val="D:\ReneBaca\Aprog\Blender\v2.81a-win64\blender.exe" />
     <BlenderScriptsPath val="D:\ReneBaca\Aprog\Blender\v2.81a-win64\2.81\scripts\startup\" />
+    <MaxSavedSettings val="D:\ReneBaca\3DsMax" />
   </Settings>
   <Profiles>
     <menu_1 val="Merlin" />
@@ -73,7 +74,7 @@
     <btn_13 val="(color 112 112 0)" />
   </ColorPalete>
   <Gallery3D>
-    <Root_Dir E="" val="D:\ReneBaca\3DsMax\Micra\3DGallery\" />
+    <Root_Dir E="" val="D:\ReneBaca\Aprog\Micra\3DGallery\" />
   </Gallery3D>
   <Gallery3DDefault>
     <Plant_Distance val="24" />
