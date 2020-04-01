@@ -2041,14 +2041,19 @@ struct mcAction (
 						gco.setSelection #Vertex #{} --deselect vertices
 						case classOf gco of (
 							
-							Editable_Poly: (for i in eSel do gco.divideEdge i 0.5 select:on)
+							Editable_Poly: (
+							
+								for i in eSel do gco.divideEdge i 0.5 select:on
+								polyOp.getVertSelection $ --select vertices (they looks like selected, but is not)
+							)
 							Edit_Poly: (
 									
 								for i in eSel do gco.divideEdge i 0.5 ---node:$
 								gco.Commit () --important to update changes
 							)
 						)
-						subobjectlevel = 1
+						subobjectlevel = 1 --go to vertex mode
+						
 					)	else if eSel.count > 1 do ( --Split More Edges in ring
 						
 						gco.ButtonOp #ConnectEdges
@@ -2083,8 +2088,8 @@ struct mcAction (
 			CompleteRedraw()
 		) catch (
 		
-				EnableSceneRedraw()
-				CompleteRedraw()
+			EnableSceneRedraw()
+			CompleteRedraw()
 		)
 	),
 	fn detriangulate =

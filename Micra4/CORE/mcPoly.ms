@@ -58,8 +58,8 @@ struct MICRA_POLY
 	------              		GET    	                   ------
 	-------------------------------------------------------------
 	-------------------------------------------------------------
-	fn isClass arg obj =
-	(
+	fn isClass arg obj = (
+		
 		case arg of
 		(
 			#mod     : getCommandPanelTaskMode() == #modify
@@ -79,12 +79,12 @@ struct MICRA_POLY
 		local mod = Filters.GetModOrObj()
 		getCommandPanelTaskMode() == #modify and classOf mod == Editable_Poly or classOf mod == Edit_Poly
 	),
-	fn get what = (
+	--get selected object (geo selection)
+	fn get what = ( --TODO replace with  > getOsel what
 	
 		local obj = selection[1]
 		if obj == undefined do return #()
-		local enabled = 
-		(
+		local enabled = (
 			mcPoly.isClass #mod obj and (mcPoly.isClass #modPoly obj or mcPoly.isClass #poly obj and mcPoly.isClass #inBase obj)
 		)
 		local gco = modPanel.getCurrentObject()
@@ -113,6 +113,42 @@ struct MICRA_POLY
 			--All objects in scene
 			#obj:     objects   as array
 		)
+	),
+	--set selected object (geo selection)
+	fn setOsel type sel = (
+		
+		local obj = selection[1]
+		if obj == undefined or classOf sel != BitArray do return false
+		local enabled = (
+			mcPoly.isClass #mod obj and (mcPoly.isClass #modPoly obj or mcPoly.isClass #poly obj and mcPoly.isClass #inBase obj)
+		)
+		local gco = modPanel.getCurrentObject()
+		case type of (
+			--VertSelection
+			#verts:   if enabled then (try (gco.setSelection #Vertex sel) catch false) else false
+			--EdgeSelection
+			#edges:   if enabled then (try (gco.setSelection #Edge   sel) catch false) else false
+			--FaceSelection
+			#faces:   if enabled then (try (gco.setSelection #Face   sel) catch false) else false
+		)
+	),
+	/*
+	TODO
+	*@ Usage
+		universal get selection method (Editable_Poly, Editable_Mesh, Edit_Poly modifier[maybe multilselected objs])
+	*/
+	fn getSel obj type = (
+	
+	
+	),
+	/*
+	TODO
+	*@ Usage
+		universal set selection method (Editable_Poly, Editable_Mesh, Edit_Poly modifier[maybe multilselected objs])
+	*/
+	fn setSel obj type = (
+	
+	
 	),
 	fn getObjectFaces obj = (
 	
