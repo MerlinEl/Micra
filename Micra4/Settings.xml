@@ -146,7 +146,7 @@
     <Patcher val="0.03" />
     <Patcher2P val="0.05" />
     <LS3D_Asset_Builder val="0.06" />
-    <LS3D_Quick_Materials val="0.16" />
+    <LS3D_Quick_Materials val="0.17" />
     <FBX_Quick_Import_Export val="0.02" />
     <LS3D_Material_Manager val="0.02" />
     <Slice_Plane2 val="0.01" />

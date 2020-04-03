@@ -274,21 +274,89 @@ rollout mcQuickMaterialsDialog "Quick Materials:" width:656 height:456
 		theMap.gizmo.transform = theTM --and assign the matrix back to the gizmo transformation
 	)--end function
 	
-	fn alignUVGizmoToSelectedFaces obj mod_uvw = (
+	fn computeAverageOfNormals obj faces = (
+	
+		if faces.count == 1 then (
 		
-		local fsel = polyop.getFaceSelection obj as Array
+			polyop.getFaceNormal obj 1
+			
+		) else (
+		
+			local avg_normal = [0, 0, 0]
+			--Add each normal to our "avg_normal"
+			for f=1 to faces.count do avg_normal += in coordsys obj (polyop.getFaceNormal obj f) --get normals
+			--Divide by the total number of faces to get the average
+			avg_normal 	/= faces.count
+		)
+	)
+	
+	fn dlMatrixFromNormal normal = (
+	
+		local tm	= matrix3 1	
+		-- Get an orthogonal vector to "normal"
+		local Point3_orthoToNormal = point3 -normal.y normal.x 0
+
+		-- Deal with degenerate case
+		if ( Point3_orthoToNormal.x == 0.0 and Point3_orthoToNormal.y == 0.0 ) then
+			Point3_orthoToNormal.x = 1.0;
+
+		--Reset matrix (the identity <matrix3> function doens't seem to wor).
+		tm.row1 = point3 1 0 0
+		tm.row2 = point3 0 1 0
+		tm.row3 = point3 0 0 1
+		tm.row4 = point3 0 0 0
+
+		--Compute orthogonal vector to orthonormalize matrix (= make a rotation 3x3 matrix).
+		local point3_orthovec = cross normal Point3_orthoToNormal
+
+		--Build the matrix with these 3 orthogonal and normalized vectors
+		tm.row1 = Point3_orthoToNormal
+		tm.row2 = point3_orthovec
+		tm.row3 = normal
+		tm
+	)
+	
+	fn alignUVGizmoToSelectedFaces obj mod_uvw = (
+	format "alignUVGizmoToSelectedFaces\n"
+		-- Computes the average of normals from selected faces. -- thanks to David Lanier, 3D Tools Freelance Developer
+		local fsel = (
+			if subobjectLevel == undefined or subobjectLevel == 0 then (#{1..obj.faces.count} as Array) 
+			else polyop.getFaceSelection obj as Array
+		)
+		format "fsel:%\n" fsel
 		if (fsel.count == 0) do return false
-		/*local faces_normals = in coordsys obj (polyop.getFaceNormal obj fsel[1]) --get first normal
-		for f=2 to fsel.count do faces_normals +=  in coordsys obj (polyop.getFaceNormal obj f) --get rest normals
-		local faceNormal = faces_normals / fsel.count*/
-		local faceNormal		=  in coordsys obj (polyop.getFaceNormal obj fsel[1]) --get first normal
-		local worldUpVector	= [0,0,1]
-		local rightVector	= normalize (cross worldUpVector faceNormal)
-		local upVector		= normalize ( cross rightVector faceNormal )
-		local theMatrix		= matrix3 rightVector upVector faceNormal [0,0,0]
-		modPanel.addModToSelection mod_uvw ui: on -- Add UVW Map Modifier to selection 
-		mod_uvw.gizmo.transform = matrixFromNormal ((polyop.getFaceNormal obj fsel[1])) --theMatrix
-		UVWMapFit obj mod_uvw useSel:#none
+		
+		--TODO Fix > make one unique method
+		if obj.faces.count == 1 then (
+		
+		
+			local g_point3_avgnormal 	= computeAverageOfNormals obj fsel	-- The point2 that is the average of selected faces normals
+			local g_matrix3_avgnormal	= dlMatrixFromNormal g_point3_avgnormal -- Rotation matrix for orienting the UVWMap gizmo
+			-- local mfn = matrixFromNormal g_point3_avgnormal
+			-- format "tm A:%\n" g_matrix3_avgnormal
+			-- format "tm B:%\n" mfn
+			
+			-- Set our transform into gizmo
+			prerotateZ g_matrix3_avgnormal 180 --This line is added to orientate gizmo with Y up.
+			modPanel.addModToSelection mod_uvw ui: on -- Add UVW Map Modifier to selection 
+			mod_uvw.gizmo.transform = g_matrix3_avgnormal
+
+		
+		) else (
+		
+		
+			if (fsel.count == 0) do return false
+			local faceNormal		=  in coordsys obj (polyop.getFaceNormal obj fsel[1]) --get first normal
+			local worldUpVector	= [0,0,1]
+			local rightVector	= normalize (cross worldUpVector faceNormal)
+			local upVector		= normalize ( cross rightVector faceNormal )
+			local theMatrix		= matrix3 rightVector upVector faceNormal [0,0,0]
+			
+			modPanel.addModToSelection mod_uvw ui: on -- Add UVW Map Modifier to selection 
+			mod_uvw.gizmo.transform = theMatrix
+			UVWMapFit obj mod_uvw useSel:#none
+		
+		)
 	) 
 	
 	fn getObjectMaterialIDS obj = (
@@ -594,6 +662,7 @@ rollout mcQuickMaterialsDialog "Quick Materials:" width:656 height:456
 	
 	fn assignMaterial objs applyMapping:true = (
 	
+		--if subobjectlevel != 4 and not (queryBox "Aply Mapping To whole Object(s)?" title:"Warning:") do return false
 		format "assign material:%\n" objs
 		local valid_objects = for o in objs where (isValidObject o) collect o 	
 		if valid_objects.count == 0 do (
@@ -674,8 +743,8 @@ rollout mcQuickMaterialsDialog "Quick Materials:" width:656 height:456
 		
 			--continute to add mapping
 			local map_type = case rdo_mappig_type.state of (1 : 0; 2 : 4)
-			local mod_uvw = uvwMap axis:2 maptype:map_type mapChannel:1 realWorldMapSize:false --name:sel_item.key
-			if (chk_autoorient.checked and sublevel == 4) then (
+			local mod_uvw = uvwMap axis:2 maptype:map_type mapChannel:1 realWorldMapSize:false --name:sel_item.key  
+			if (chk_autoorient.checked) then (
 				
 				if valid_objects.count > 1 or classOf valid_objects[1] != Editable_Poly then (
 				
