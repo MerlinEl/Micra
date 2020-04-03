@@ -213,7 +213,7 @@ struct MICRA_PROGRESSBAR_STRUCT (
 		canvas.Dock = canvas.Dock.None
 
 		lbl_info.text = "100%"
-		lbl_info.name = "lbl_title"
+		lbl_info.name = "lbl_info"
 		lbl_info.AutoSize = false
 		lbl_info.BorderStyle = lbl_info.BorderStyle.None
 		lbl_info.textAlign = lbl_info.textAlign.MiddleCenter

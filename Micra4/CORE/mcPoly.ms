@@ -1009,12 +1009,29 @@ struct MICRA_POLY
 	------              	CREATE   	                   ------
 	-------------------------------------------------------------
 	-------------------------------------------------------------
-	fn createPolygonObj verts_pos objName:"" = (
+	/**
+	*@Usage create geometry from points
+		sortStyle > vertex sorting method (#none, #reverse, #auto)
+	*/
+	fn createPolygonObj verts_pos objName:"" sortStyle:#none = (
 		
 		if verts_pos.count < 3 do return false
-		--local is_cv = mcMath.isClockwise3P verts_pos[1] verts_pos[2] verts_pos[3]
-		--if not is_cv do verts_pos = reverseArray verts_pos
-		--format "createPolygonObj > is clockwise:%\n" (mcMath.isClockwise3P verts_pos[1] verts_pos[2] verts_pos[3])
+		case sortStyle of (
+		
+			#reverse : (
+				-- format "createPolygonObj > reversed\n\tverts A:%\n" verts_pos 
+				verts_pos = mcArray.reverseArray verts_pos
+				-- format "\tverts B:%\n" verts_pos
+			)
+			#auto : ( --Not works yet! -- Under Testing
+			
+				local is_cv = mcMath.isClockwise3P verts_pos[1] verts_pos[2] verts_pos[3]
+				format "createPolygonObj > is clockwise A:%\n" is_cv
+				if not is_cv do verts_pos = mcArray.reverseArray verts_pos
+				format "createPolygonObj > is clockwise B:%\n" (mcMath.isClockwise3P verts_pos[1] verts_pos[2] verts_pos[3])
+			)
+		)
+		
 		local new_obj = Editable_mesh()
 		undo off (
 		

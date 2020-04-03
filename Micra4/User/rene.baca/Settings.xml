@@ -15,6 +15,7 @@
     <BlenderAppPath val="D:\ReneBaca\Aprog\Blender\v2.81a-win64\blender.exe" />
     <BlenderScriptsPath val="D:\ReneBaca\Aprog\Blender\v2.81a-win64\2.81\scripts\startup\" />
     <MaxSavedSettings val="D:\ReneBaca\3DsMax" />
+    <ZBrushScaleFactor val="0.001" />
   </Settings>
   <Profiles>
     <menu_1 val="Merlin" />

@@ -108,6 +108,7 @@
     <Create_Ambient_Lights val="Vytvori ambientni nasvetleni pro vypekani difusni mapy." />
     <Box_Builder val="Vytvori box na povrchu jineho modelu orientovaný podle normály polygonu." />
     <Create_PolygonGrid />
+    <Geometry_Builder val="Create polygon(s) from two selected edges or 3 and more selected vertices" />
   </Creation>
   <Experimental>
     <Isolate_Plus val="Manazer objektu na Scene.Selekce, zobrazovani, hromadna uprava nazvu..." />

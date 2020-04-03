@@ -211,7 +211,7 @@ private
 
 				if s.text.count > 0 do (
 					
-					s.text = mcString.filterInvalidChars s.text --remove invalid characters
+					s.text = mcString.filterInvalidChars s.text filter_list:"^[]()\\/*{}-+><=;:%@#&?!$"--remove invalid characters
 					s.SelectionStart = s.text.count --move cursor at end
 				)
 			)

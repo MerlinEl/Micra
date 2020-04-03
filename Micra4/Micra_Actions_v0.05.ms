@@ -1281,7 +1281,27 @@ struct mcAction (
 		else (::mcPopUp.show "All is Quad!" delay:2000)
 	),
 	fn scale_to_zb = undo "Scale To ZBrush" on (
-		
+		--todo create boundinjg box with correct size not sphere
+		local scale_ratio = 0.0001
+		if keyboard.controlPressed do (
+			--load ratio from xml
+			scale_ratio = execute (mcFile.readSettings micra.UserSettings "USER/Settings/ZBrushScaleFactor")
+			if ClassOf scale_ratio != Float and  ClassOf scale_ratio != Integer do (
+				
+				local str = (mcPopUp.show "0.0001" title:"Change Scale Ratio in Cm:" type:#Input)
+				if ClassOf str != String do return false
+				scale_ratio = execute str
+				if ClassOf scale_ratio == Float or  ClassOf scale_ratio == Integer then (
+					--save new ratio to xml
+					mcFile.saveSettings micra.UserSettings "USER/Settings/ZBrushScaleFactor" str	
+					
+				) else (
+
+					scale_ratio = 0.0001
+				)
+			) 
+		)
+		format "scale to ZB in ratio:%\n" scale_ratio
 		--Global BEFORE_TO_ZB_DATA = mcObject()
 		local cnt = 1
 		for o in selection where superClassOf o == GeometryClass do (
@@ -1293,28 +1313,32 @@ struct mcAction (
 			)
 			--BEFORE_TO_ZB_DATA.add o.name o.material
 			 --strore original pos in placeholder
-			local s = sphere pos:o.pos name:("ZB_Placeholder_0" + cnt as string) radius:10000 wirecolor:green
+			local d = dummy pos:o.pos dir:o.dir name:("ZB_Placeholder_0" + cnt as string)
 			 o.pos = [0,0,0]
 			--change scale for zb
 			case units.SystemType of ( --ZB default cube is 5x5 cm
 				
-				#meters: o.scale = [0.1, 0.1, 0.1]
-				#centimeters: o.scale = [0.0001, 0.0001, 0.0001]
+				#meters: o.scale = [scale_ratio*1000, scale_ratio*1000, scale_ratio*1000]
+				#centimeters: o.scale = [scale_ratio, scale_ratio, scale_ratio]
 			)	
 			cnt +=1
 		)
 	),	
 	fn scale_from_zb = undo "Scale From ZBrush" on (
 
+		--load ratio from xml
+		local scale_ratio = execute (mcFile.readSettings micra.UserSettings "USER/Settings/ZBrushScaleFactor")
+		if ClassOf scale_ratio != Float and  ClassOf scale_ratio != Integer do scale_ratio = 0.0001
+		format "scale from ZB in ratio:%\n" scale_ratio
 		local cnt = 1 
 		for o in selection where superClassOf o == GeometryClass do (
 			 			
 			--restore original pos
-			local s = getNodeByName ("ZB_Placeholder_0" + cnt as string)	
-			if s != udefined do (
+			local d = getNodeByName ("ZB_Placeholder_0" + cnt as string)	
+			if d != udefined do (
 				
-					o.pos = s.pos
-					delete s
+					o.pos = d.pos
+					delete d
 			)
 			if o.scale.x != 1 do (
 				
@@ -1324,8 +1348,8 @@ struct mcAction (
 			--restore original scale
 			case units.SystemType of (	
 
-				#meters: o.scale = [10, 10, 10]
-				#centimeters: o.scale = [10000, 10000, 10000]
+				#meters: o.scale = [scale_ratio* 10000, scale_ratio* 10000, scale_ratio* 10000]
+				#centimeters: o.scale = [scale_ratio * 10000000, scale_ratio * 10000000, scale_ratio * 10000000]
 			)
 			resetTransform o
 			convertToPoly o
