@@ -350,12 +350,12 @@ struct MICRA_POLY_MAP_STRUCTURE	(
 	),
 	fn skewVerticesUvs mod_uvw uv_verts angle_deg = ( --TODO add parameter axis X Y
 
-		mod_uvw.selectVertices uv_verts
+		mod_uvw.selectVertices (uv_verts as bitarray)
 		local verts_pos = for v in uv_verts collect mod_uvw.getVertexPosition 1 v
 		mod_uvw.unwrap2.rotateSelectedCenter (degToRad  angle_deg)
-		for i = 1 to uv_verts.numberset do (
+		for i = 1 to uv_verts.count do (
 
-			local vert_index = (uv_verts as array)[i]
+			local vert_index = uv_verts[i]
 			local new_pos = mod_uvw.getVertexPosition 1 vert_index
 			new_pos.y = verts_pos[i].y
 			mod_uvw.setVertexPosition 1 vert_index new_pos

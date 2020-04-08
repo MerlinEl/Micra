@@ -62,8 +62,8 @@ rollout mcUnwrapEditorDialog "UV+" width:96 height:648
 	spinner 'spn_offset_steps' "" pos:[60,164] width:32 height:16 range:[1,99,1] type:#integer scale:1 align:#left
 	label 'lbl_offset_steps' "step:" pos:[8,164] width:24 height:16 align:#left
 
-	button 'button_skew_verts_minus' "-" pos:[8,612] width:24 height:24 align:#left
-	button 'button_skew_verts_plus' "+" pos:[34,612] width:24 height:24 align:#left
+	button 'button_skew_verts_minus' "-" pos:[8,612] width:24 height:24 align:#left toolTip:"Shew vertices CCW"
+	button 'button_skew_verts_plus' "+" pos:[34,612] width:24 height:24 align:#left toolTip:"Shew vertices CW"
 	GroupBox 'grp17' "Skew Verts" pos:[4,596] width:88 height:48 align:#left toolTip: "Skew Selected Vertices"
 	spinner 'spn_skev_angle' "" pos:[60,616] width:32 height:16 range:[-360,360,5] type:#integer scale:1 align:#left
 	button 'btn_sel_random' "Sel" pos:[5,476] width:28 height:20 toolTip:"Select random UV elements" align:#left
@@ -316,14 +316,14 @@ rollout mcUnwrapEditorDialog "UV+" width:96 height:648
 	
 		local gco = modpanel.getcurrentobject()
 		if not (mcPolyMap.isValidMod()) do return (mcMsgList.warn "not_unwrap")
-		local sel_verts = gco.getSelectedVertices()
+		local sel_verts = mcPolyMap.getCurentSelectionAs gco #verts
 		local step = spn_skev_angle.value
 		--local snap_state = mcSnap.getAngleSnapState()
 		--if snap_state do mcSnap.setAngleSnapState false	--disable angle snap for avoid max rotation steps
 		case cv of (
 			
-				#plus		: 	mcPolyMap.skewVerticesUvs gco sel_verts -step
-				#minus	: 	mcPolyMap.skewVerticesUvs gco sel_verts step
+			#plus	: 	mcPolyMap.skewVerticesUvs gco sel_verts -step
+			#minus	: 	mcPolyMap.skewVerticesUvs gco sel_verts step
 		)
 		--if snap_state do mcSnap.setAngleSnapState true
 	)
