@@ -2,19 +2,19 @@
 <USER>
   <Properties_1>
     <mc_Dialog_A active="false" pos="[900,440]" size="[148,66]" title="Menu:" btnCount="[6,2]" />
-    <mc_Dialog_B active="true" pos="[100,310]" size="[148,162]" title="Object:" btnCount="[6,6]" />
-    <mc_Dialog_C active="true" pos="[100,480]" size="[148,66]" title="Pivot:" btnCount="[6,2]" />
+    <mc_Dialog_B active="false" pos="[2171,280]" size="[148,162]" title="Object:" btnCount="[6,6]" />
+    <mc_Dialog_C active="true" pos="[2171,280]" size="[148,42]" title="Pivot:" btnCount="[6,1]" />
     <mc_Dialog_D active="false" pos="[640,420]" size="[148,90]" title="Select:" btnCount="[6,3]" />
     <mc_Dialog_E active="false" pos="[100,843]" size="[244,42]" title="Animation:" btnCount="[10,1]" />
     <mc_Dialog_F active="false" pos="[270,210]" size="[196,90]" title="Modifiers:" btnCount="[8,3]" />
     <mc_Dialog_G active="false" pos="[820,340]" size="[148,90]" title="Modify:" btnCount="[6,3]" />
-    <mc_Dialog_H active="true" pos="[100,550]" size="[148,66]" title="Materials:" btnCount="[6,2]" />
+    <mc_Dialog_H active="false" pos="[2171,508]" size="[148,66]" title="Materials:" btnCount="[6,2]" />
     <mc_Dialog_I active="false" pos="[750,530]" size="[148,66]" title="Programming:" btnCount="[6,2]" />
     <mc_Dialog_J active="false" pos="[100,510]" size="[460,42]" title="Experimental:" btnCount="[19,1]" />
   </Properties_1>
   <Properties_2>
-    <mcMicraDialog active="true" pos="[100,240]" size="[148,66]" title="" />
-    <mcCustomizeDialog active="false" pos="[260,240]" size="[224,404]" title="" />
+    <mcMicraDialog active="true" pos="[2171,214]" size="[148,66]" title="" />
+    <mcCustomizeDialog active="false" pos="[1940,210]" size="[224,404]" title="" />
     <mcProgramDialog active="undefined" pos="[100,0]" size="[256,232]" title="" />
     <mcisoDialog active="undefined" pos="[100,152]" size="[140,400]" title="" />
     <mcModifierDialog active="undefined" pos="[100,100]" size="[400,400]" title="" />
@@ -52,5 +52,7 @@
     <mcTemplateDialog active="undefined" pos="[402,362]" size="[730,500]" title="" />
     <mcSpaceDialog active="undefined" pos="[100,100]" size="[392,184]" title="" />
   </Properties_2>
-  <Buttons></Buttons>
+  <Buttons>
+    <btn_C1 action="Create_Bounding_Box" icon="16" />
+  </Buttons>
 </USER>

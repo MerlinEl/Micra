@@ -109,14 +109,21 @@ Public
 		mcString.cutRight test_str_1									--without parameter remove all end spaces
 		mcString.cutRight test_str_2 trimChars:"_geometry"	--with parameter remove last word
 	*/
-	fn cutRight str trimChars:"" = (
+	fn cutRight str trimChars:"" ignoreCase:false = (
 		
 		if str == undefined do return ""
 		local rgx, pattern
 		if trimChars.count != 0 then (		--remove word from begin
 			
 			pattern = trimChars+"+$" 
-			rgx = dotnetObject "System.Text.RegularExpressions.Regex" pattern
+			if ignoreCase then (
+			
+				local option = dotnetClass "System.Text.RegularExpressions.RegexOptions"
+				rgx = dotnetObject "System.Text.RegularExpressions.Regex" pattern option.IgnoreCase
+			) else (
+			
+				rgx = dotnetObject "System.Text.RegularExpressions.Regex" pattern
+			)	
 			rgx.Replace str ""
 			
 		) else (	--remove all spaces from left
