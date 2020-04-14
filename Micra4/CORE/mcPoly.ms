@@ -132,23 +132,93 @@ struct MICRA_POLY
 			#faces:   if enabled then (try (gco.setSelection #Face   sel) catch false) else false
 		)
 	),
+	fn isCurrentLevel type = (
+	
+		local result = false
+		local slev = subobjectLevel
+		if type == #verts and slev == 1 then (
+			result = true 
+		) else if type == #edges and (slev == 2 or slev == 3) then (
+			result = true
+		) else if type == #faces and (slev == 4 or slev == 5) do (
+			result = true
+		)
+		result
+	),
+	/**
+	*@Usage 
+		convert selection to desired type
+		can be called only by function getCurentSelectionAs
+	*/
+	fn convetrCurrentSelectionTo obj cur_sel type = (
+	
+		if classOf obj != Editable_Poly do return false
+		local lvl = subobjectLevel
+		case type of
+		(	
+			#verts: ( -- get from subobjectLevel = 2, 3, 4, 5
+			
+				case lvl of (
+				
+					2 : polyOp.getVertsUsingEdge obj cur_sel as Array
+					3 : polyOp.getVertsUsingEdge obj cur_sel as Array
+					4 : polyOp.getVertsUsingFace obj cur_sel as Array
+					5 : polyOp.getVertsUsingFace obj cur_sel as Array
+				)
+			)
+			#edges:( -- get from subobjectLevel = 1, 4, 5
+				
+				case lvl of (
+				
+					1 : polyOp.getEdgesUsingVert obj cur_sel as Array
+					4 : polyOp.getEdgesUsingFace obj cur_sel as Array
+					5 : polyOp.getEdgesUsingFace obj cur_sel as Array
+				)
+			)
+			#faces:( -- get from subobjectLevel = 1, 2, 3
+				
+				case lvl of (
+				
+					1 : polyOp.getFacesUsingVert obj cur_sel as Array
+					2 : polyOp.getFacesUsingEdge obj cur_sel as Array
+					3 : polyOp.getFacesUsingEdge obj cur_sel as Array
+				)
+			)
+		)
+	),
 	/*
-	TODO
 	*@ Usage
 		universal get selection method 
 		(Editable_Poly, Editable_Mesh, Edit_Poly modifier[maybe multilselected objs])
+	*@ Example
+		mcPoly.getCurentSelectionAs obj #verts
 	*/
-	fn getSel obj type = (
+	fn getCurentSelectionAs obj type = (
 	
-	
+		if classOf obj != Editable_Poly do return #()
+		local cur_sel = case subobjectLevel of (
+		
+			1 : polyOp.getVertSelection obj as Array
+			1 : polyOp.getVertSelection obj as Array
+			2 : polyOp.getEdgeSelection obj as Array
+			3 : polyOp.getEdgeSelection obj as Array
+			4 : polyOp.getFaceSelection obj as Array
+			5 : polyOp.getFaceSelection obj as Array
+		)
+		if cur_sel.count == 0 do return #()
+		if not (isCurrentLevel type) then (
+		
+			convetrCurrentSelectionTo obj cur_sel type
+		
+		) else cur_sel
 	),
 	/*
-	TODO
+	--TODO
 	*@ Usage
 		universal set selection method 
 		(Editable_Poly, Editable_Mesh, Edit_Poly modifier[maybe multilselected objs])
 	*/
-	fn setSel obj type = (
+	fn setCurentSelectionAs obj wish_sel type = (
 	
 	
 	),
@@ -1044,6 +1114,26 @@ struct MICRA_POLY
 		update new_obj
 		new_obj
 	),
+	
+	fn createBoundingBox bmin bmax opos box_name = (
+	
+		local bbox = box pos:opos lengthsegs:0 widthsegs:0 heightsegs:0
+		convertToPoly bbox
+		polyOp.setVert bbox 1 bmin
+		polyOp.setVert bbox 2 [bmax.x, bmin.y, bmin.z]
+		polyOp.setVert bbox 3 [bmin.x, bmax.y, bmin.z]
+		polyOp.setVert bbox 4 [bmax.x, bmax.y, bmin.z]
+		
+		polyOp.setVert bbox 5 [bmin.x, bmin.y, bmax.z]
+		polyOp.setVert bbox 6 [bmax.x, bmin.y, bmax.z]
+		polyOp.setVert bbox 7 [bmin.x, bmax.y, bmax.z]
+		polyOp.setVert bbox 8 bmax
+		local mat = standardMaterial opacity:24 diffuse:(color 196 37 248) selfIllumAmount:64
+		bbox.material = mat
+		bbox.name = uniqueName box_name
+		bbox
+	),
+	
 	/**
 	*@Usage > 	detach all faces to create a new object with specific properties
 	*@Example

@@ -180,16 +180,16 @@ struct MICRA_POLY_MAP_STRUCTURE	(
 		local lvl = subobjectLevel
 		case type of
 		(	
-			#verts: (
-				-- subobjectLevel = 1
+			#verts: ( -- subobjectLevel = 1
+				
 				(if lvl == 3 then mod_uvw.faceToVertSelect() else if lvl == 2 do mod_uvw.edgeToVertSelect())
 			)
-			#edges:(
-				-- subobjectLevel = 2
+			#edges:( -- subobjectLevel = 2
+				
 				(if lvl == 3 then mod_uvw.faceToEdgeSelect() else if lvl == 1 do mod_uvw.vertToEdgeSelect())
 			)
-			#faces:(
-				-- subobjectLevel = 3
+			#faces:( -- subobjectLevel = 3
+				
 				(if lvl == 2 then mod_uvw.edgeToFaceSelect() else if lvl == 1 do mod_uvw.vertToFaceSelect())
 			)
 		)
