@@ -1,4 +1,104 @@
 Global mcObjectInpectorDialog
+Global mcObjectInpectorMenu
+rcmenu   mcObjectInpectorMenu (
+
+	local used_id = -1
+	local used_objs = #()
+	local used_faces = #()
+	subMenu "Materials"(
+		menuItem m1_4 "Show Used Materials"
+		menuItem m1_5 "Select Objects By Material Name"
+		menuItem m1_2 "Select Objects By Material ID"
+		separator sep1
+		menuItem m1_3 "Get Faces Count"
+		--menuItem m1_1 "Pick Face Material ID"
+	)
+	subMenu "Selections" (
+		menuItem m2_1 "Slelect All Nodes Children"
+		menuItem m2_2 "Unhide Selection"
+		menuItem m2_3 "Hide Selection"
+		separator sep2
+		menuItem m2_4 "Show Linked Parents"
+	)
+	--1------------------------------------------------------------------------------------------------
+	/*on m1_1 picked do (
+		local obj = selection[1]
+		if classOf obj != Editable_Poly do return false 
+		local sel_face = (polyOp.getFaceSelection obj as array)[1]
+		if sel_face != undefined do (
+			used_id  = polyOp.getFaceMatID obj sel_face
+			m1_1.text = "Pick Face Material ID:" + used_id as string
+			m1_1.checked=true
+			messageBox  ("Picked Material ID:" + used_id as string) title:"Info:"
+		)
+	)*/
+	on m1_2 picked do (
+		used_objs  = #()
+		used_faces = #()
+		used_id = typeBox "Type Material ID:"
+		if used_id != undefined do used_id = execute used_id
+		if classOf used_id != Integer do return false
+		for o in selection  do (
+
+			if classOf o != Editable_Poly do (
+				format "skip nonpoly object:%\n" o.name
+				continue
+			)
+			for f=1 to o.faces.count where polyOp.getFaceMatID o f == used_id do (
+
+				append used_faces f
+				appendIfUnique used_objs o 
+			)	
+		)
+		messageBox  ("Found > Objects:" + used_objs.count as string + "\tFaces:" + used_faces.count as string) title:"Info:"
+		format "found objs:%\n" used_objs.count
+		format "found glass faces:%\n" used_faces.count
+		select used_objs
+	)
+	on m1_3 picked do ( format "found glass faces:%\n" used_faces.count)
+	on m1_4 picked do (
+		
+			local used_materials = #()
+			for o in selection where superClassOf o == GEometryClass do (
+				/*if classOf o != Editable_Poly do (
+					format "skip nonpoly object:%\n" o.name
+					continue
+				)*/
+				/*for f=1 to o.faces.count do (
+
+					
+					append glass_faces f
+					appendIfUnique used_objs o 
+				)*/	
+				appendIfUnique used_materials o.material.name 
+			)
+			messageBox  ("Used Materials:\n\t" +  used_materials as string) title:"Info:"
+			format  "Found > Used Materials:\n\t%\n"  used_materials
+	)
+	on m1_5 picked do (
+		
+		local mat_name = typeBox "Type Material Name:"
+		if mat_name == undefined do return false
+		local objs = for o in selection where (superClassOf o == GEometryClass and o.material.name == mat_name) collect o
+		select objs
+		messageBox ("Selected ( " + objs.count as string + " ) objects") title:"Info:"
+	)
+	---2------------------------------------------------------------------------------------------------
+	on m2_1 picked do (
+
+		local nodes_children = #()
+		for o in selection do join nodes_children o.children
+		select nodes_children
+	)
+	on m2_2 picked do (for o in selection do o.isHidden = false)
+	on m2_3 picked do (for o in selection do o.isHidden = true)
+	on m2_4 picked do (
+		local used_parents = #()
+		for o in selection where o.parent != undefined do appendIfUnique  used_parents o.parent.name
+		messageBox  ("Used Parents:\n\t" +  used_parents as string) title:"Info:"
+		format  "Found > Used Parents:\n\t%\n"  used_parents
+	)
+)
 
 if mcObjectInpectorDialog != undefined do DestroyDialog mcObjectInpectorDialog
 rollout mcObjectInpectorDialog "Object Inspector:" width:344 height:464
@@ -27,6 +127,7 @@ rollout mcObjectInpectorDialog "Object Inspector:" width:344 height:464
 	label 'lbl_scale' "..." pos:[92,218] width:236 height:24 align:#left
 	
 	label 'lbl_buffer' "..." pos:[8,304] width:324 height:120 align:#left
+
 	local params_data
 	fn getRotation obj = 
 	(
@@ -140,8 +241,8 @@ rollout mcObjectInpectorDialog "Object Inspector:" width:344 height:464
 (
 	local form_settings = mcFile.readDialogSettings "mcObjectInpectorDialog" "Properties_2" --get saved pos and size
 	if form_settings != undefined then (
-
-		createDialog mcObjectInpectorDialog pos:(execute (form_settings.get "pos"))
+		
+		createDialog mcObjectInpectorDialog pos:(execute (form_settings.get "pos")) menu:mcObjectInpectorMenu
 		
 	) else (
 	

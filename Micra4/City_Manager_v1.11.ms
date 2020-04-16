@@ -379,7 +379,7 @@ rollout mcCityManDialog "" width:500 height:988
 		mcFile.initStruct gTerrainGeneratorCollision "LS3D_Terrain_Collisions_Generator" force:force_load_structures
 		if ::gTerrainGeneratorCollision != undefined and queryBox "Do you want to generate Simple Collisions?" title:"Warning:" do (
 		
-			gTerrainGeneratorCollision.generateSimpleCollisions()
+			::gTerrainGeneratorCollision.generateSimpleCollisions(ddl_collision_type.selection == 1)
 		)
 		updateScene()
 	)
@@ -388,7 +388,7 @@ rollout mcCityManDialog "" width:500 height:988
 		mcFile.initStruct gTerrainGeneratorCollision "LS3D_Terrain_Collisions_Generator" force:force_load_structures
 		if ::gTerrainGeneratorCollision != undefined and queryBox "Do you want to generate Terrain Collisions?" title:"Warning:" do (
 		
-			gTerrainGeneratorCollision.generateTerrainCollisions()
+			::gTerrainGeneratorCollision.generateTerrainCollisions()
 		)
 		updateScene()
 	)
