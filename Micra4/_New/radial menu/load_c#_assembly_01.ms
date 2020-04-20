@@ -1,30 +1,63 @@
---TEST--->
-dotNet.loadAssembly (micra.AssemblyDir + "Orien.Tools.dll") --load dll in to memory
+--> Test
+--Load Assemblies
+dotNet.loadAssembly (micra.AssemblyDir + "Orien.Tools.dll")
+dotNet.loadAssembly (micra.AssemblyDir + "Orien.NetUi.dll")
+--Pickup Class
+--method 1
 cls = dotNet.getType "Orien.Tools.mcMath"
 _mcMath = (dotNetClass "System.Activator").CreateInstance cls --create class instance 
-
 cls = dotNet.getType "Orien.Tools.mcString"
 _mcString = (dotNetClass "System.Activator").CreateInstance cls --create class instance 
---TEST<---
+--method 2
+cls = dotNet.getType "Orien.NetUi.mcPopUp" 
+activator = (dotNetClass "System.Activator")
+inst = activator.CreateInstance cls
 
 
+params = #("Processing geometry calculations", true, true, true)
+args = dotNet.ValueToDotNetObject params (dotNetObject "System.Object")
+inst.ProgBar
+dotNet.getType "Orien.NetUi.mcPopUp.ProgBar" 
+inst.GetType "Orien.NetUi.mcPopUp.ProgBar"
+.<System.Type>GetType()
+cls.getType "Orien.NetUi.ProgBar"
+--< Test
+
+
+--> Start Here 
 Global _mcString = mcDotnet.loadAssembly "Orien.Tools" "Orien.Tools.mcString"
 Global _mcArray = mcDotnet.loadAssembly "Orien.Tools" "Orien.Tools.mcArray"
 Global _mcMath = mcDotnet.loadAssembly "Orien.Tools" "Orien.Tools.mcMath"
-Global xml = mcDotnet.loadAssembly "Orien.Tools" "Orien.Tools.mcXml" params:#(micra.RootDir + "Actions.xml")
-showMethods _mcString
-showMethods _mcMath
-showMethods xml
 
-
+--String Operations
 str = "abababaertyfddfkofopersdf"
 str.count
 _mcString.LastIndexOf str "d"
 
-
+--Math operations
 _mcMath.minMax 100	1	50	--> 50
 _mcMath.minMax -1	1	50	--> 1
 _mcMath.minMax 100	1	200	--> 100
+
+
+--PopUp operations NOW!
+_mcPopUp = mcDotnet.loadAssembly "Orien.NetUi.dll" "Orien.NetUi.mcPopUp.ProgBar" 
+params:#("Processing geometry calculations", true, true, true)
+Orien.NetUi.mcPopUp
+_mcPopUp.ProgBar
+progb = mcPopUp.ProgBar("Processing geometry calculations", true, true, true);
+
+
+
+
+
+
+
+--XML operations (load save data) TODO
+Global xml = mcDotnet.loadAssembly "Orien.Tools" "Orien.Tools.mcXml" params:#(micra.RootDir + "Actions.xml")
+showMethods _mcString
+showMethods _mcMath
+showMethods xml
 
 --READ - WRITE XML
 

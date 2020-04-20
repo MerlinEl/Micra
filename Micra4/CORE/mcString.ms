@@ -155,6 +155,10 @@ Public
 			cutLeft (cutRight str trimChars:trimChars) trimChars:trimChars
 		)
 	),
+	fn replaceEnd src_str str_a str_b ignoreCase:false = (
+
+		(cutRight src_str trimChars:str_a ignoreCase:ignoreCase) + str_b
+	),
 	/**
 	*@Usage	Find and replace first identicle word
 	*@Example

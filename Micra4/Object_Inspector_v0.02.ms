@@ -1,6 +1,6 @@
 Global mcObjectInpectorDialog
 Global mcObjectInpectorMenu
-rcmenu   mcObjectInpectorMenu (
+rcmenu mcObjectInpectorMenu (
 
 	local used_id = -1
 	local used_objs = #()
@@ -246,7 +246,7 @@ rollout mcObjectInpectorDialog "Object Inspector:" width:344 height:464
 		
 	) else (
 	
-		createDialog mcObjectInpectorDialog
+		createDialog mcObjectInpectorDialog menu:mcObjectInpectorMenu
 	)
 )
 

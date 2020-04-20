@@ -77,6 +77,21 @@ struct MICRA_LOD_STRUCTURE	(
 			LS3DGUP.LODU.SetInfinite lod_child.infinite
 			LS3DGUP.LODU.SetStrategy lod_child.strategy
 		)
+	),
+	fn getLodFromObject obj lod_index = (
+	
+		select obj
+		local lodes_count = LS3DGUP.LODU.GetNumLODs()
+		if (lodes_count == 0) do (
+			format "Missing LOD% on:%\n" lod_index obj.name
+			return undefined
+		)
+		if (lodes_count < lod_index + 1) do (
+			format "Missing LOD% on:%\n" lod_index obj.name
+			return undefined
+		)
+		LS3DGUP.LODU.SetSelectedLOD lod_index
+		return LS3DGUP.LODU.GetNode()
 	)
 	/*<end>*/
 )	

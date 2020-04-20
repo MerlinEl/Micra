@@ -103,8 +103,8 @@ rollout ls3dLodManagerDialog "LS3D LOD Manager:" width:480 height:116
 		gProgLog.msg "TLS3D LOD MANAGER:" ti:"Initialize...." ty:"new_task"
 		gProgLog.msg "Proces Start" ti:"3DsMax..." ty:"task_open"
 		
-		 --collect visible lod0
-		local geo_objs = for o in objs where findString o.name "lod0" != undefined collect o
+		 --collect visible lod0 (ignoreCase:true)
+		local geo_objs = for o in objs where findString (toUpper o.name) "LOD0" != undefined collect o
 		--take out object instances
 		--TODO > find which object from instances have a lod with same name (name_ + lod1 or lod2)
 		geo_objs = ::gCityManager.filterObjectsInstances geo_objs
@@ -118,8 +118,8 @@ rollout ls3dLodManagerDialog "LS3D LOD Manager:" width:480 height:116
 			obj_lod0.pivot = (obj_lod0.min + obj_lod0.max) / 2 --center pivot of original object
 			--try to get lod1 and lod2
 			local lod0_name = obj_lod0.name
-			local lod1_name = substituteString lod0_name "lod0" "lod1"
-			local lod2_name = substituteString lod0_name "lod0" "lod2"
+			local lod1_name = mcString.replaceEnd lod0_name "lod0" "lod1" ignoreCase:true
+			local lod2_name = mcString.replaceEnd lod0_name "lod0" "lod2" ignoreCase:true
 
 			local obj_lod1 = getNodeByName lod1_name
 			local obj_lod2 = getNodeByName lod2_name

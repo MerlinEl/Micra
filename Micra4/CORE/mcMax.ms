@@ -46,6 +46,19 @@ struct MICRA_MAX_STRUCTURE	(
 		)
 		max select none
 	),
+	fn hideAll = (if (queryBox "Hide All Objects?" title:"Action:") do hide objects; max zoomext sel all),
+	fn unhideAll = (if (queryBox "Unhide All Objects?" title:"Action:") do unhide objects; max zoomext sel all),
+	fn hideSelected = (hide selection),
+	fn unhideSelected = (unhide selection; max zoomext sel),
+	fn selectObjectsByName str visibleOnly:true ignoreCase:true method:#any = (
+
+		select ( for o in objects where (
+		
+			(if visibleOnly then not o.isHidden else true) and
+			findString (toUpper o.name) str != undefined
+			
+		) collect o )
+	),
 	fn getetOrCreateLayer layer_name make_active:false = (
 
 		local layer_item = LayerManager.getLayerFromName layer_name --pick layer by name
