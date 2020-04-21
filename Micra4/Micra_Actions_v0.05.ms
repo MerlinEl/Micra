@@ -1840,6 +1840,7 @@ struct mcAction (
 	),
 	fn create_bounding_box = (
 	
+		local new_obj
 		local sel = selection, obj = selection[1]
 		local bmin, bmax, center, slev = subobjectLevel
 		--Create dummy based on vertices center or object pivot
@@ -1864,14 +1865,16 @@ struct mcAction (
 					
 					center   = (o.min + o.max)/2 
 					center.z = o.min.z
-					mcPoly.CreateBoundingBox o.min o.max center "C_"
+					new_obj = mcPoly.CreateBoundingBox o.min o.max center "C_"
+					new_obj.name = new_obj.name + "_coll"
 				)
 				
 			) else undo "Create Bounding Box" on  with redraw off  ( --create single bounding box around selected objects
 				
 				center   = (sel.min + sel.max)/2 
 				center.z = sel.min.z
-				mcPoly.CreateBoundingBox sel.min sel.max center "C_"
+				new_obj = mcPoly.CreateBoundingBox sel.min sel.max center "C_"
+				new_obj.name = new_obj.name + "_coll"
 			)
 			
 		) else if classOf obj == Editable_Poly do undo "Create Bounding Box" on with redraw off ( --create bounding box from geometry selection
@@ -1905,7 +1908,8 @@ struct mcAction (
 					)
 					center = sum/vsel.count
 				)
-				mcPoly.CreateBoundingBox bmin bmax center "C_"
+				new_obj = mcPoly.CreateBoundingBox bmin bmax center "C_"
+				new_obj.name = new_obj.name + "_coll"
 		)
 		if slev != undefined do subobjectLevel = slev
 		completeRedraw()	
