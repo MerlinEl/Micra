@@ -35,6 +35,15 @@ rcmenu mcCityManDialogMenu (
 		menuItem m3_3 "Generate Occ Custom"
 		menuItem m3_4 "Setup Occ Data Manager"
 	)
+	subMenu "Collisions"(
+		menuItem m4_1 "Select All Collisions "
+		menuItem m4_2 "Select Visible Collisions"
+		separator m4_sep_1
+		menuItem m4_3 "Generate Player and Stairs Collisions ( Link to Node )" tooltip:"Two Nodes" --checked:true checked = Two Nodes  else Single Node
+		menuItem m4_4 "Generate Player and Stairs Collisions ( Link to Object )" tooltip:"Single Node"
+		separator m4_sep_2
+		menuItem m4_5 "Quick Semantic Materials"
+	)
 	fn getLodByName obj lod_index = (
 	
 		local lod_name = mcString.replaceEnd obj.name "lod0" ("lod"+ lod_index as string) ignoreCase:true
@@ -118,16 +127,20 @@ rcmenu mcCityManDialogMenu (
 	--sep2
 	on m2_3 picked do undo label:(m2_3.Text) on mcMax.hideSelected()
 	on m2_4 picked do undo label:(m2_4.Text) on mcMax.unhideSelected()
-	--m2------------------------------------------------------------------------------------------------
+	--m3------------------------------------------------------------------------------------------------
 	on m3_1 picked do undo label:(m3_1.Text) on mcMax.selectObjectsByName "OCC" visibleOnly:false
 	on m3_2 picked do undo label:(m3_2.Text) on mcMax.selectObjectsByName "OCC"
 	on m3_3 picked do  mcFile.fileInVersion "Geometry_Projector2D"
 	on m3_4 picked do if (queryBox "Setup OCC Data Manager?" title:"Warning:") do undo off addAttributeShadowTo (selection as array) false
+	--m4------------------------------------------------------------------------------------------------
+	on m4_1 picked do undo label:(m4_1.Text) on mcMax.selectObjectsByName "COLL" visibleOnly:false
+	on m4_2 picked do undo label:(m4_2.Text) on mcMax.selectObjectsByName "COLL"
+	--sep1
+	on m4_3 picked do if queryBox "Generate Stairs Collisions?" title:"Create:" do undo label:(m4_3.Text) on ::gCityManager.createCarAndPlayerCollisions twoNodes:true
+	on m4_4 picked do if queryBox "Generate Stairs Collisions?" title:"Create:" do undo label:(m4_4.Text) on ::gCityManager.createCarAndPlayerCollisions twoNodes:false
+	--sep2
+	on m4_5 picked do fileIn (micra.RootDir + "LS3D_Quick_Semantics.ms")
 )
-
-
-
-
 
 if ::mcCityManDialog != undefined do try(destroyDialog mcCityManDialog)catch()
 rollout mcCityManDialog "" width:500 height:988
@@ -195,7 +208,6 @@ rollout mcCityManDialog "" width:500 height:988
 	button 'btn_run_fn' "GO" pos:[456,964] width:36 height:20 align:#left
 	dropDownList 'ddl_fn_list' "" pos:[148,964] width:304 height:21 items:#(
 	
-		"Generate Player and Car Collisions",
 		"Add Terrain Lodes 2 and Fix Pivot",
 		"Curb Crumple",
 		"Collision Optimizer" 
@@ -802,10 +814,6 @@ rollout mcCityManDialog "" width:500 height:988
 		format "RUN CMD:%\n" cmd_name
 		case cmd_name of (
 			
-			"Generate Player and Car Collisions" : if queryBox "Generate Player and Car Collisions?" title:"Organize:" do (
-				
-				undo "Create Car and Player Collision" on ::gCityManager.createCarAndPlayerCollisions()
-			)
 			"Add Terrain Lodes 2 and Fix Pivot"  : if queryBox "Add Terrain Lodes 2 and Fix Pivot in Selection?" title:"Organize:" do (
 				
 				undo off ::gCityManager.addTerrainLodes2AndFixPivot (selection as array)

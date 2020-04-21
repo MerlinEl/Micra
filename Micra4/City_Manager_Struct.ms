@@ -143,7 +143,7 @@ struct sCityManager	(
 		)
 		new_obj
 	),
-	fn createCarAndPlayerCollisions = (
+	fn createCarAndPlayerCollisions twoNodes:true = (
 
 		local obj = selection[1]
 		if classOf obj != Editable_Poly do return false
@@ -151,10 +151,10 @@ struct sCityManager	(
 		if esel.count != 2 do return false
 			
 		local coll_layer = getCollisionLayer obj
-		local coll_export_node = getCollisionNode obj
+		local coll_export_node = if twoNodes then getCollisionNode obj else obj
 		local s_mat = currentMaterialLibrary["semantic_materials"]
 		if s_mat == undefined do return (mcMsgList.warn "not_semat")
-		if coll_export_node == undefined or s_mat == undefined do return false
+		if coll_export_node == undefined do return false
 		
 		SuspendEditing()
 		local player_coll = #()
