@@ -100,11 +100,17 @@ rollout ls3dLodManagerDialog "LS3D LOD Manager:" width:480 height:116
 		if objs.count == 0 do return (mcMsgList.warn "not_sel")
 		
 		gProgLog.progSub 0 0
-		gProgLog.msg "TLS3D LOD MANAGER:" ti:"Initialize...." ty:"new_task"
+		gProgLog.msg "LS3D LOD MANAGER:" ti:"Initialize...." ty:"new_task"
 		gProgLog.msg "Proces Start" ti:"3DsMax..." ty:"task_open"
 		
 		 --collect visible lod0 (ignoreCase:true)
 		local geo_objs = for o in objs where findString (toUpper o.name) "LOD0" != undefined collect o
+		if geo_objs.count == 0 do (
+		
+			gProgLog.msg ("Unable to setup Lodes. Objects name must contains _lod0.") ti:"Aborted!" ty:"warn"
+			gProgLog.msg "All Done" ty:"task_close"
+			return false
+		)
 		--take out object instances
 		--TODO > find which object from instances have a lod with same name (name_ + lod1 or lod2)
 		geo_objs = ::gCityManager.filterObjectsInstances geo_objs

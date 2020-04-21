@@ -20,7 +20,7 @@ Global mcProgLogDialog
 	mcProgLog.msg "Paths and Name is OK" ty:"proc"
 	mcProgLog.msg "Name OK" ty:"proc"
 	output_dir = @"E:\Aprog\Orien\Micra\Micra4\_New\AssetBulider"
-	mcProgLog.msg ("Failed Save Max File. Unable to find Directory.\n\tPath:[ "+output_dir+" ]") ti:"Aborted!" ty:"error" tl:1
+	mcProgLog.msg ("Failed Save Max File. Unable to find Directory.\n\tPath:[ "+output_dir+" ]") ti:"Aborted!" ty:"error"
 	mcProgLog.msg "All Done" ty:"task_close"
 *
 */
