@@ -8,7 +8,7 @@ rollout ls3dLodManagerDialog "LS3D LOD Manager:" width:480 height:116
 	GroupBox 'grp1' "Columns" pos:[4,4] width:112 height:84 align:#left
 	label 'lbl1' "Lod0:" pos:[12,24] width:32 height:16 align:#left
 	spinner 'spn_a_lod0' "" pos:[40,24] width:68 height:16 range:[0,10000,250] type:#integer scale:1 align:#left
-	button 'btn_build_rebuild' "BUILD - REBUILD" pos:[4,92] width:472 height:20 align:#left
+	button 'btn_build_rebuild' "BUILD - REBUILD" pos:[124,92] width:352 height:20 align:#left
 	GroupBox 'grp2' "Fences" pos:[124,4] width:112 height:84 align:#left
 	label 'lbl4' "Lod0:" pos:[132,24] width:32 height:16 align:#left
 	spinner 'spn_b_lod0' "" pos:[160,24] width:68 height:16 range:[0,10000,50] type:#integer scale:1 align:#left
@@ -26,6 +26,7 @@ rollout ls3dLodManagerDialog "LS3D LOD Manager:" width:480 height:116
 	spinner 'spn_d_lod1' "" pos:[400,44] width:68 height:16 range:[0,10000,150] type:#integer scale:1 align:#left
 	label 'lbl18' "Lod2:" pos:[372,64] width:32 height:16 align:#left
 	spinner 'spn_d_lod2' "" pos:[400,64] width:68 height:16 range:[0,10000,250] type:#integer scale:1 align:#left
+	checkbox 'chk_center_pivot' "Center Pivots" pos:[4,92] width:112 height:16 enabled:true checked:true align:#left
 	--functions
 	fn addLod ld = (
 		
@@ -44,8 +45,8 @@ rollout ls3dLodManagerDialog "LS3D LOD Manager:" width:480 height:116
 			
 				obj_lod1 = gCityManager.rebuildObject obj_lod1 --recreate lod
 				obj_lod2 = gCityManager.rebuildObject obj_lod2 --recreate lod
-				obj_lod1.pivot = obj_lod0.pivot --copy pivot from lod0
-				obj_lod2.pivot = obj_lod0.pivot --copy pivot from lod0
+				if chk_center_pivot.checked do obj_lod1.pivot = obj_lod0.pivot --copy pivot from lod0
+				if chk_center_pivot.checked do obj_lod2.pivot = obj_lod0.pivot --copy pivot from lod0
 			select obj_lod0
 				LS3DGUP.LODU.SetSelectedLOD 0
 				LS3DGUP.LODU.SetDistance spn_d_lod0.value
@@ -62,7 +63,7 @@ rollout ls3dLodManagerDialog "LS3D LOD Manager:" width:480 height:116
 			) else if obj_lod2 != undefined then ( --C ) create lod set and only first distance
 			
 				obj_lod2 = gCityManager.rebuildObject obj_lod2
-				obj_lod2.pivot = obj_lod0.pivot --copy pivot from lod0
+				if chk_center_pivot.checked do obj_lod2.pivot = obj_lod0.pivot --copy pivot from lod0
 			select obj_lod0
 				LS3DGUP.LODU.SetSelectedLOD 0
 				LS3DGUP.LODU.SetDistance spn_c_lod0.value
@@ -71,7 +72,7 @@ rollout ls3dLodManagerDialog "LS3D LOD Manager:" width:480 height:116
 			) else if obj_lod1 != undefined then ( --B ) create lod set and add both distances
 						
 				obj_lod1 = gCityManager.rebuildObject obj_lod1 --recreate lod	
-				obj_lod1.pivot = obj_lod0.pivot --copy pivot from lod0
+				if chk_center_pivot.checked do obj_lod1.pivot = obj_lod0.pivot --copy pivot from lod0
 			select obj_lod0			
 				LS3DGUP.LODU.SetSelectedLOD 0
 				LS3DGUP.LODU.SetDistance spn_b_lod0.value
@@ -121,7 +122,7 @@ rollout ls3dLodManagerDialog "LS3D LOD Manager:" width:480 height:116
 			local obj_lod0 = geo_objs[i]
 			gProgLog.progSub i geo_objs.count
 			gProgLog.msg ("progress with obj:"+obj_lod0.name) ty:"proc"
-			obj_lod0.pivot = (obj_lod0.min + obj_lod0.max) / 2 --center pivot of original object
+			if chk_center_pivot.checked do obj_lod0.pivot = (obj_lod0.min + obj_lod0.max) / 2 --center pivot of original object
 			--try to get lod1 and lod2
 			local lod0_name = obj_lod0.name
 			local lod1_name = mcString.replaceEnd lod0_name "lod0" "lod1" ignoreCase:true

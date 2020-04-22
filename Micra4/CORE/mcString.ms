@@ -34,6 +34,10 @@ Private
 Public
 	fn getSource = getSourceFileName(), --get path of this script
 	fn charAt str index = (str[index]), --mcString.charAt mcString.testr 5
+	fn joinStr arr delimiter = (
+	
+		(dotnetClass "System.String").Join delimiter arr
+	),
 	--fn indexOf str value = (findstring str value), --mcString.indexOf mcString.testr "we"
 	/**
 	*@Usage 
@@ -41,16 +45,16 @@ Public
 		value:String		search string
 		startIndex:int		search start index
 		count:int			how many chars will step forward from startIndex (startIndex + count !> str.count)
-		ignore_case:Boolean	ignore case	
+		ignoreCase:Boolean	ignore case	
 		return:int			index or undefined
 	*@Example
-		first_index = mcString.indexOf mcString.testr "we" ignore_case:true  --> 10 
-		first_index = mcString.indexOf mcString.testr "WE" ignore_case:false --> undefined 
+		first_index = mcString.indexOf mcString.testr "we" ignoreCase:true  --> 10 
+		first_index = mcString.indexOf mcString.testr "WE" ignoreCase:false --> undefined 
 		next_index  = mcString.indexOf mcString.testr "we" startIndex:(first_index+"we".count) count:2 --> undefined
 		next_index  = mcString.indexOf mcString.testr "we" startIndex:(first_index+"we".count) count:-1 --> 22
 		next_index  = mcString.indexOf mcString.testr "we" startIndex:(first_index+"we".count) count:12 --> 22
 	*/
-	fn indexOf str value startIndex:0 count:-1 ignore_case:true = (	
+	fn indexOf str value startIndex:0 count:-1 ignoreCase:true = (	
 	
 		if startIndex == undefined do startIndex = 0
 		if count == undefined do count = -1
@@ -58,11 +62,11 @@ Public
 		startIndex = minMax startIndex 0 (str.count-1) --min max cap		
 		if count < 0 do count = str.count-1 -- if cnt == -1 then set max count
 		count = amin #(count, str.count - startIndex - 1) --max cap
-		--format "mcString > findStringAt >\n\tstr:%\n\tvalue:% startIndex:% count:% ignore_case:%\n" str value startIndex count ignore_case
+		--format "mcString > findStringAt >\n\tstr:%\n\tvalue:% startIndex:% count:% ignoreCase:%\n" str value startIndex count ignoreCase
 		global ds = dotnetObject "System.String" str
 		local find_index = (
 			local comp = dotnetClass "System.StringComparison"
-			if ignore_case
+			if ignoreCase
 				then ds.indexOf value startIndex count comp.CurrentCultureIgnoreCase
 				else ds.indexOf value startIndex count comp.Ordinal
 		)
@@ -178,7 +182,7 @@ Public
 		mcString.replaceAll str "we" "she"
 		--> "So after she did that she copy the files to the following directories:"
 	*/
-	fn replaceAll str old_str new_str = (
+	fn replaceAll str old_str new_str = ( --todo  ignoreCase:false
 		
 		--local rgx = dotnetObject "System.Text.RegularExpressions.Regex" old_str
 		--rgx.Replace str new_str

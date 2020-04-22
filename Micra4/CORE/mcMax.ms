@@ -59,6 +59,40 @@ struct MICRA_MAX_STRUCTURE	(
 			
 		) collect o )
 	),
+	fn selectObjectsByMaterial visibleOnly:true = (
+	
+		local obj = selection[1]
+		if obj == undefined or obj.material == undefined do return false
+		select ( for o in objects where (
+		
+			(if visibleOnly then not o.isHidden else true) and
+			o.material != undefined and o.material.name == obj.material.name
+			
+		) collect o )
+	),
+	fn selectObjectsByMaterialID visibleOnly:true = ( 
+	
+		local obj = selection[1]
+		if obj == undefined or classOf obj != Editable_Poly do return false
+		local mat_id = if subobjectLevel == undefined or subObjectLevel == 0 then ( --pick first face matid
+		
+			polyOp.getFaceMatID obj 1
+			
+		) else ( --if face selected pick her id 
+			
+			local fsel = polyOp.getFaceSelection obj as array 
+			if fsel.count > 0 then polyOp.getFaceMatID obj fsel[1] else polyOp.getFaceMatID obj 1
+		)
+		select ( for o in objects where (
+		
+			(if visibleOnly then not o.isHidden else true) and
+			classOf o == Editable_Poly and (
+						--format "obj:% a:% b:%\n" o.name mat_id (polyOp.getFaceMatID o 1)
+				polyOp.getFaceMatID o 1 == mat_id
+			)
+			
+		) collect o )
+	),
 	fn getetOrCreateLayer layer_name make_active:false = (
 
 		local layer_item = LayerManager.getLayerFromName layer_name --pick layer by name

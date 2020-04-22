@@ -44,12 +44,19 @@ rcmenu mcCityManDialogMenu (
 		separator m4_sep_2
 		menuItem m4_5 "Quick Semantic Materials"
 		separator m4_sep_3
+		menuItem m4_8 "Filter Unlinked Objects"
 		menuItem m4_6 "Link Collision(s) to closest Object and Fix Name"
 		menuItem m4_7 "Instance Collision to Selected Models"
 	)
 	subMenu "Advanced"(
 	
-		menuItem m9_1 "test_01"
+		menuItem m9_1 "Select All Objects By Material"
+		menuItem m9_2 "Select All Objects By Material ID"
+		separator m9_sep_1
+		menuItem m9_3 "Select Visible Objects By Material"
+		menuItem m9_4 "Select Visible Objects By Material ID"
+		separator m9_sep_2
+		menuItem m9_5 "Fix Names Suffix"
 	)
 	fn getLodByName obj lod_index = (
 	
@@ -147,10 +154,12 @@ rcmenu mcCityManDialogMenu (
 			local coll_obj = undefined
 			fn getCollision = (
 				local sel_obj = selection[1]
-				if 	sel_obj != undefined and findString (toUpper sel_obj.name) "_COLL" != undefined do (
+				if 	sel_obj != undefined and superClassOf sel_obj == GeometryClass and sel_obj.material.name == "semantic_materials"  then (
 					
 					coll_obj = sel_obj
-					lbl_coll.text = sel_obj.name	
+					lbl_coll.text = "Collision: " + sel_obj.name	
+				) else (
+					messageBox "Invalid Object or Object without Semantic Material" title:"Warning"
 				)
 			)
 			fn distributeCollisionsOnSelection = (
@@ -169,6 +178,56 @@ rcmenu mcCityManDialogMenu (
 			on btn_distribute_cols pressed do undo "Instance Collisions" on distributeCollisionsOnSelection()
 		)
 		createDialog mcCollisionInsancerDialog
+	)
+	fn fixNamesSuffix undo_lbl = (
+	
+		Global suffixNameFixerDialog
+		if suffixNameFixerDialog != undefined do destroyDialog suffixNameFixerDialog
+		rollout suffixNameFixerDialog "Suffix Name Fixer" width:248 height:56
+		(
+			groupBox 'grp2' "Actions:" pos:[4,4] width:240 height:48 align:#left
+			dropDownList 'ddl_suffix' "" pos:[52,22] width:100 height:21 items:#("lod0", "lod1", "lod2", "lod3", "coll", "occ") align:#left
+			label 'lbl2' "suffix:" pos:[12,25] width:36 height:20 align:#left
+			button 'btn_fix_names' "Fix" pos:[160,20] width:76 height:24 align:#left
+			local undo_lbl
+			fn fixNames  = (
+				if not (queryBox "Fix Names Suffix" title:"Warning:") do return false
+				mcCityManDialog.CALLBACKS_ENABLED = false
+				undo label:undo_lbl on with redraw off(
+					local suff = toLower ddl_suffix.selected
+					for o in selection do (
+					
+						local name_arr = filterString o.name "_" --break name in to lelements
+						if name_arr.count > 1 then (
+						
+							local filtered_names = for s in name_arr where (
+								
+								local found_count = 0
+								--format "items:%\n" ddl_suffix.items
+								for f in ddl_suffix.items do (
+									
+									--format "\ts:% f:%  found:%\n" s f (findString s f != undefined)
+									if findString s f != undefined do found_count +=1
+								)
+								found_count == 0
+								--(mcArray.findArrayItemsInString ddl_suffix.items s ignoreCase:true) == undefined
+							) collect s
+							--format "name:% filtered_names:%\n" o.name filtered_names
+							local new_name = mcString.joinStr filtered_names "_"
+							o.name = new_name +"_"+ suff --add desired suffix
+						) else (
+						
+							o.name = o.name +"_"+ suff --add desired suffix
+						)
+					)
+				)
+				mcCityManDialog.CALLBACKS_ENABLED = true
+				completeRedraw()
+			)
+			on btn_fix_names pressed  do fixNames()
+		)
+		createDialog suffixNameFixerDialog
+		suffixNameFixerDialog.undo_lbl = undo_lbl
 	)
 	--m1------------------------------------------------------------------------------------------------
 	on m1_0 picked do undo label:(m1_0.Text) on selectLods(#("LOD1", "LOD2"))
@@ -210,9 +269,15 @@ rcmenu mcCityManDialogMenu (
 	--sep3
 	on m4_6 picked do if (queryBox "Link Selected Collision(s) to closest LOD0 and Rename?" title:"Warning:") do undo label:(m4_6.Text) on linkCollisionsByClosestObjectAndFixName()
 	on m4_7 picked do distributeInstancesInToSelection()
+	on m4_8 picked do undo label:(m4_8.Text) on select (for o in selection where o.parent == undefined collect o)
 	--m9------------------------------------------------------------------------------------------------
-	on m9_1 picked do MessageBox "Nothing hapens :-)" title:"Test:"
-	
+	on m9_1 picked do undo label:(m9_1.Text) on mcMax.selectObjectsByMaterial visibleOnly:false
+	on m9_2 picked do undo label:(m9_2.Text) on mcMax.selectObjectsByMaterialID visibleOnly:false --pick first id if not face selected
+	--sep1
+	on m9_3 picked do undo label:(m9_3.Text) on mcMax.selectObjectsByMaterial()
+	on m9_4 picked do undo label:(m9_4.Text) on mcMax.selectObjectsByMaterialID() --pick first id if not face selected
+	--sep2
+	on m9_5 picked do fixNamesSuffix m9_5.Text
 )
 
 if ::mcCityManDialog != undefined do try(destroyDialog mcCityManDialog)catch()
@@ -1198,4 +1263,39 @@ for o in selection do (
 select missess
 $.parent
 
+*/
+
+
+/*
+fn fixNames  = (
+				if not (queryBox "Fix Names Suffix" title:"Warning:") do return false
+				mcCityManDialog.CALLBACKS_ENABLED = false
+				undo label:undo_lbl on with redraw off(
+					local suff = toLower ddl_suffix.selected
+					for o in selection do (
+					
+						local new_name = o.name + "_"
+						local name_arr = filterString new_name "_" --break name in to lelements
+						if name_arr.count > 1 do ( --check each element for suffix exists
+						
+							new_name = ""
+							for str in name_arr where (
+							
+								local match_count = 0
+								for su in ddl_suffix.items where ( --check all suffixes
+								
+									(mcString.indexOf str su ignoreCase:true) != undefined
+									
+								) do match_count+=1
+								
+								match_count == 0
+								
+							) do new_name += str + "_"
+						)
+						o.name = new_name + suff --add desired suffix
+					)
+				)
+				mcCityManDialog.CALLBACKS_ENABLED = true
+				completeRedraw()
+			)
 */

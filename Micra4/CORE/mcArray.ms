@@ -64,6 +64,13 @@ struct MCRA_ARRAY (
 		if ignoreCase do pattern = "(?i)" + pattern
 		for j = 1 to arr.count where ((regex.match arr[j] pattern).success) collect j
 	),
+	/*fn findArrayItemsInString arr str ignoreCase:false = (
+	
+		for i=1 to arr.count where (
+			mcString.indexOf arr[i] str ignoreCase:ignoreCase != undefined
+		) do return i
+		undefined
+	),*/
 	/*
 	*@Usage > Search for an item in multiarray
 	*@Example
