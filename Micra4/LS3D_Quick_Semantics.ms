@@ -29,6 +29,14 @@ rollout ls3dQuickSemantics "LS3D Quick Semantics Materials:" width:236 height:72
 			--format "Set Material ID:% to Faces:%\n" mat_id fsel
 			polyop.setFaceMatID obj fsel mat_id	
 		)
+		if obj.material == undefined or obj.material.name != "semantic_materials" do (
+
+			local cur_lvl = subobjectLevel
+			subobjectLevel = 0
+			obj.material = semantic_mat
+			if cur_lvl != undefined do subobjectLevel = cur_lvl
+		)
+		obj.showVertexColors = false
 	)
 	
 	fn assignMaterial objs = (
@@ -38,6 +46,10 @@ rollout ls3dQuickSemantics "LS3D Quick Semantics Materials:" width:236 height:72
 		--format "sel_item:% id:%\n" sel_item sel_item.tag
 		if objs.count == 1 and classOf objs[1] == Editable_Poly then (
 			
+			if subobjectLevel == undefined or subobjectLevel == 0 do (
+			
+				if not queryBox "Replace Semantic Material on Whole object?" title:"Replace?" do return OK
+			)
 			 setMaterialIdToPoly objs[1] sel_item.tag
 		
 		) else if objs.count > 1 and queryBox "Replace Semantic Material on Whole objects?" title:"Replace?" do (
