@@ -106,8 +106,8 @@ Public
 	*@Example
 		test_str_1 = "    lh_07_hoboken_block_e_geometry     "
 		test_str_2 = "lh_07_hoboken_block_e_geometry"
-		mcString.cutRight test_str_1									--without parameter remove all end spaces
-		mcString.cutRight test_str_2 trimChars:"_geometry"	--with parameter remove last word
+		mcString.cutRight test_str_1						--without parameter remove all end spaces
+		mcString.cutRight test_str_2 trimChars:"_geometry" ignoreCase:true --with parameter remove last word
 	*/
 	fn cutRight str trimChars:"" ignoreCase:false = (
 		

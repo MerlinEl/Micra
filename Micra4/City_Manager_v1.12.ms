@@ -43,6 +43,13 @@ rcmenu mcCityManDialogMenu (
 		menuItem m4_4 "Generate Player and Stairs Collisions ( Link to Object )" tooltip:"Single Node"
 		separator m4_sep_2
 		menuItem m4_5 "Quick Semantic Materials"
+		separator m4_sep_3
+		menuItem m4_6 "Link Collision(s) to closest Object and Fix Name"
+		menuItem m4_7 "Instance Collision to Selected Models"
+	)
+	subMenu "Advanced"(
+	
+		menuItem m9_1 "test_01"
 	)
 	fn getLodByName obj lod_index = (
 	
@@ -103,6 +110,66 @@ rcmenu mcCityManDialogMenu (
 		gProgLog.progSub objs.count objs.count
 		gProgLog.msg "All Done" ty:"task_close"
 	)
+	fn linkCollisionsByClosestObjectAndFixName = (
+
+		local visible_objs = for o in objects where not o.isHidden collect o
+		for ocol in selection do (
+
+			local closest_obj = undefined
+			local closest_dist = 9999999
+			for omod in visible_objs do (
+				if (findString (toUpper omod.name) "LOD0" == undefined or ocol.name == omod.name) do continue
+				local dist = distance ocol.pos omod.pos
+				if dist < closest_dist do (
+
+					closest_obj = omod
+					closest_dist = dist
+				)
+			)
+			if closest_obj == undefined do (
+				format "Skiped collision obj:% dist:%\n" closest_obj.name closest_dist
+				continue
+			)
+			local base_name = mcString.cutRight closest_obj.name trimChars:"_lod0" ignoreCase:true
+			ocol.name = base_name + "_coll"
+			ocol.parent = closest_obj
+		)
+	)
+	fn distributeInstancesInToSelection = (
+	
+			Global mcCollisionInsancerDialog
+			if mcCollisionInsancerDialog != undefined do destroyDialog mcCollisionInsancerDialog
+			rollout mcCollisionInsancerDialog "Collision Instancer:" width:516 height:84 (
+			groupBox 'grp1' "Actions:" pos:[4,4] width:508 height:76 align:#left
+			button 'btn_get_coll' "Get Collision Prototype" pos:[8,20] width:128 height:24 align:#left
+			button 'btn_distribute_cols' "Instance Collision to Selected Models" pos:[8,48] width:496 height:24 align:#left
+			label 'lbl_coll' "undefined" pos:[140,24] width:364 height:20 align:#left
+			local coll_obj = undefined
+			fn getCollision = (
+				local sel_obj = selection[1]
+				if 	sel_obj != undefined and findString (toUpper sel_obj.name) "_COLL" != undefined do (
+					
+					coll_obj = sel_obj
+					lbl_coll.text = sel_obj.name	
+				)
+			)
+			fn distributeCollisionsOnSelection = (
+				if coll_obj == undefined do return false
+				for o in selection do (
+					
+					local new_coll_obj = instance coll_obj
+					local base_name = mcString.cutRight o.name trimChars:"_lod0" ignoreCase:true
+					new_coll_obj.name = base_name + "_coll"
+					new_coll_obj.pos = o.pos
+					mcTransform.setRotation new_coll_obj (mcTransform.getRotation o)
+					new_coll_obj.parent = o
+				)	
+			)
+			on btn_get_coll pressed do getCollision()
+			on btn_distribute_cols pressed do undo "Instance Collisions" on distributeCollisionsOnSelection()
+		)
+		createDialog mcCollisionInsancerDialog
+	)
 	--m1------------------------------------------------------------------------------------------------
 	on m1_0 picked do undo label:(m1_0.Text) on selectLods(#("LOD1", "LOD2"))
 	on m1_1 picked do undo label:(m1_1.Text) on mcMax.selectObjectsByName "LOD0" visibleOnly:false
@@ -140,6 +207,12 @@ rcmenu mcCityManDialogMenu (
 	on m4_4 picked do if queryBox "Generate Stairs Collisions?" title:"Create:" do undo label:(m4_4.Text) on ::gCityManager.createCarAndPlayerCollisions twoNodes:false
 	--sep2
 	on m4_5 picked do fileIn (micra.RootDir + "LS3D_Quick_Semantics.ms")
+	--sep3
+	on m4_6 picked do if (queryBox "Link Selected Collision(s) to closest LOD0 and Rename?" title:"Warning:") do undo label:(m4_6.Text) on linkCollisionsByClosestObjectAndFixName()
+	on m4_7 picked do distributeInstancesInToSelection()
+	--m9------------------------------------------------------------------------------------------------
+	on m9_1 picked do MessageBox "Nothing hapens :-)" title:"Test:"
+	
 )
 
 if ::mcCityManDialog != undefined do try(destroyDialog mcCityManDialog)catch()
