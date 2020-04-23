@@ -48,6 +48,11 @@ rcmenu mcCityManDialogMenu (
 		menuItem m4_6 "Link Collision(s) to closest Object and Fix Name"
 		menuItem m4_7 "Instance Collision to Selected Models"
 	)
+	subMenu "Modify" (
+	
+		menuItem m5_1 "Geometry Optimizer" 
+		menuItem m5_2 "Curb Crumple"
+	)
 	subMenu "Advanced"(
 	
 		menuItem m9_1 "Select All Objects By Material"
@@ -57,6 +62,7 @@ rcmenu mcCityManDialogMenu (
 		menuItem m9_4 "Select Visible Objects By Material ID"
 		separator m9_sep_2
 		menuItem m9_5 "Fix Names Suffix"
+		
 	)
 	fn getLodByName obj lod_index = (
 	
@@ -198,25 +204,11 @@ rcmenu mcCityManDialogMenu (
 					for o in selection do (
 					
 						local name_arr = filterString o.name "_" --break name in to lelements
-						if name_arr.count > 1 then (
-						
-							local filtered_names = for s in name_arr where (
-								
-								local found_count = 0
-								--format "items:%\n" ddl_suffix.items
-								for f in ddl_suffix.items do (
-									
-									--format "\ts:% f:%  found:%\n" s f (findString s f != undefined)
-									if findString s f != undefined do found_count +=1
-								)
-								found_count == 0
-								--(mcArray.findArrayItemsInString ddl_suffix.items s ignoreCase:true) == undefined
-							) collect s
-							--format "name:% filtered_names:%\n" o.name filtered_names
-							local new_name = mcString.joinStr filtered_names "_"
+						if name_arr.count > 1 then ( --remove elements contains pattern(ddl_suffix.items)
+							local filtered_name = mcArray.filterWords name_arr ddl_suffix.items ignoreCase:true
+							local new_name = mcArray.joinToString filtered_name "_" --condense array in to string
 							o.name = new_name +"_"+ suff --add desired suffix
 						) else (
-						
 							o.name = o.name +"_"+ suff --add desired suffix
 						)
 					)
@@ -270,6 +262,9 @@ rcmenu mcCityManDialogMenu (
 	on m4_6 picked do if (queryBox "Link Selected Collision(s) to closest LOD0 and Rename?" title:"Warning:") do undo label:(m4_6.Text) on linkCollisionsByClosestObjectAndFixName()
 	on m4_7 picked do distributeInstancesInToSelection()
 	on m4_8 picked do undo label:(m4_8.Text) on select (for o in selection where o.parent == undefined collect o)
+	--m5------------------------------------------------------------------------------------------------
+	on m5_1 picked do fileIn (micra.RootDir + "LS3D_Geometry_Optimizer_v0.03.ms")
+	on m5_2 picked do fileIn (micra.RootDir + "LS3D_Curb_Crumple.ms") 
 	--m9------------------------------------------------------------------------------------------------
 	on m9_1 picked do undo label:(m9_1.Text) on mcMax.selectObjectsByMaterial visibleOnly:false
 	on m9_2 picked do undo label:(m9_2.Text) on mcMax.selectObjectsByMaterialID visibleOnly:false --pick first id if not face selected
@@ -347,8 +342,7 @@ rollout mcCityManDialog "" width:500 height:988
 	dropDownList 'ddl_fn_list' "" pos:[148,964] width:304 height:21 items:#(
 	
 		"Add Terrain Lodes 2 and Fix Pivot",
-		"Curb Crumple",
-		"Collision Optimizer" 
+		"All was moved in to Top Menu"
 	) 
 	label 'lbl_advanced_tools' "Advanced Tools:" pos:[12,964] width:132 height:20 align:#left
 	--Local variables
@@ -956,14 +950,6 @@ rollout mcCityManDialog "" width:500 height:988
 				
 				undo off ::gCityManager.addTerrainLodes2AndFixPivot (selection as array)
 			)
-			"Curb Crumple" : (
-
-				fileIn (micra.RootDir + "LS3D_Curb_Crumple.ms")
-			)			
-				"Collision Optimizer" : (
-
-				fileIn (micra.RootDir + "LS3D_Collisions_Optimizer_v0.02.ms")
-			)
 		)
 	)
 	
@@ -1298,4 +1284,26 @@ fn fixNames  = (
 				mcCityManDialog.CALLBACKS_ENABLED = true
 				completeRedraw()
 			)
+*/
+
+/*
+if name_arr.count > 1 then (
+
+	local filtered_name = for s in name_arr where (
+		
+		local found_count = 0
+		for f in ddl_suffix.items do (
+			
+			if findString s f != undefined do found_count +=1
+		)
+		found_count == 0
+		-- not (mcArray.isAnyArrayItemInString ddl_suffix.items s ignoreCase:true)
+	) collect s
+	--format "name:% filtered_name:%\n" o.name filtered_name
+	local new_name = mcArray.joinToString filtered_name "_"
+	o.name = new_name +"_"+ suff --add desired suffix
+) else (
+
+	o.name = o.name +"_"+ suff --add desired suffix
+)
 */

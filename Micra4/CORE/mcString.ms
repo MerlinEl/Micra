@@ -34,10 +34,6 @@ Private
 Public
 	fn getSource = getSourceFileName(), --get path of this script
 	fn charAt str index = (str[index]), --mcString.charAt mcString.testr 5
-	fn joinStr arr delimiter = (
-	
-		(dotnetClass "System.String").Join delimiter arr
-	),
 	--fn indexOf str value = (findstring str value), --mcString.indexOf mcString.testr "we"
 	/**
 	*@Usage 
@@ -53,17 +49,19 @@ Public
 		next_index  = mcString.indexOf mcString.testr "we" startIndex:(first_index+"we".count) count:2 --> undefined
 		next_index  = mcString.indexOf mcString.testr "we" startIndex:(first_index+"we".count) count:-1 --> 22
 		next_index  = mcString.indexOf mcString.testr "we" startIndex:(first_index+"we".count) count:12 --> 22
+	*@Info
+		public int IndexOf (string value, int startIndex, int count);
 	*/
 	fn indexOf str value startIndex:0 count:-1 ignoreCase:true = (	
 	
 		if startIndex == undefined do startIndex = 0
 		if count == undefined do count = -1
 		startIndex -= 1 --conversion field start( max = 1 , dotnet = 0 )
-		startIndex = minMax startIndex 0 (str.count-1) --min max cap		
-		if count < 0 do count = str.count-1 -- if cnt == -1 then set max count
-		count = amin #(count, str.count - startIndex - 1) --max cap
+		startIndex = minMax startIndex 0 (str.count) --min max cap		
+		if count < 0 do count = str.count -- if cnt == -1 then set max count
+		count = amin #(count, str.count - startIndex) --max cap
 		--format "mcString > findStringAt >\n\tstr:%\n\tvalue:% startIndex:% count:% ignoreCase:%\n" str value startIndex count ignoreCase
-		global ds = dotnetObject "System.String" str
+		local ds = dotnetObject "System.String" str
 		local find_index = (
 			local comp = dotnetClass "System.StringComparison"
 			if ignoreCase
@@ -404,4 +402,25 @@ REGEX
 str = "maps/nature/water_canals_water2_0_0_1009_depth_39"
 rgx = dotnetObject "System.Text.RegularExpressions.Regex" ""
 found = rgx.IsMatch str ".+_-?\\d+_-?\\d+_-?\\d+_depth_-?\\d+$"
+*/
+
+/*
+	fn indexOf str value startIndex:0 count:-1 ignoreCase:true = (	
+	
+		if startIndex == undefined do startIndex = 0
+		if count == undefined do count = -1
+		startIndex -= 1 --conversion field start( max = 1 , dotnet = 0 )
+		startIndex = minMax startIndex 0 (str.count-1) --min max cap		
+		if count < 0 do count = str.count-1 -- if cnt == -1 then set max count
+		count = amin #(count, str.count - startIndex - 1) --max cap
+		--format "mcString > findStringAt >\n\tstr:%\n\tvalue:% startIndex:% count:% ignoreCase:%\n" str value startIndex count ignoreCase
+		local ds = dotnetObject "System.String" str
+		local find_index = (
+			local comp = dotnetClass "System.StringComparison"
+			if ignoreCase
+				then ds.indexOf value startIndex count comp.CurrentCultureIgnoreCase
+				else ds.indexOf value startIndex count comp.Ordinal
+		)
+		if find_index == -1 then undefined else find_index+1
+	),
 */

@@ -161,6 +161,17 @@ Struct MICRA_DOTNET (
 		gpath.CloseAllFigures()
 		return gpath
 	),
+	fn getBitmapFromFile fpath = (
+	
+		local img = (dotNetClass "Drawing.Image").FromFile fpath
+		local size = [img.width, img.height]
+		local bm = (dotNetObject "Drawing.Bitmap" size.x size.y) --Create new bitmap object
+		local rect = dotNetObject "System.Drawing.Rectangle" 0 0 size.x size.y
+		local gra  = (dotNetClass "Drawing.Graphics").fromImage bm --Create new Graphics object
+	    gra.DrawImage bm rect
+		img.dispose()
+		bm
+	),
 	/**
 	*@Example
 		mcDotnet.getIcon 308
@@ -186,6 +197,21 @@ Struct MICRA_DOTNET (
 		img_lib.dispose()
 		bmp_dn.MakeTransparent (dColor (color 0 0 0)) -- 75 75 75  --gray
 		bmp_dn
+	),
+	fn addButtonToolTip dbtn show_text img_name = (
+	
+		local tltp = mcDotnet.loadAssembly "Orien.NetUi.dll" "Orien.NetUi.mcImageTooltip" 
+		tltp.AutoSize = false
+		--Set up the delays for the ToolTip.
+	   /*tltp.AutoPopDelay = 5000;
+	   tltp.InitialDelay = 1000;
+	   tltp.ReshowDelay = 500;*/
+		--#002040
+		tltp.SetFont "Verdana" 14 (::mcGetCs.FontStyles()).Regular (::mcGetCs.NewColor 0 32 64)
+		tltp.BorderColor = (::mcGetCs.NewColor 1 247 46)
+		--tltp.Size 200 64
+		tltp.SetToolTip dbtn show_text
+		dbtn.Tag = (dotNetClass "Drawing.Image").FromFile  (micra.ImagesPath + "TooltipIcons\\" + img_name + ".png")
 	),
 	/**
 	TODO > check this method instead
@@ -298,11 +324,26 @@ Struct MICRA_DOTNET (
 	
 		if form == undefined or form.IsDisposed or not form.visible do return false
 		form.close()
-	)
+	),
+	fn init = (
+	
+		--Load Assemblies (future replacement for mcDotnet)
+		/**
+		*@Usage Contains new Libraries , Methods , UI components
+		*@Examples
+			mcGetCs.newColor 2 3 2
+			mcGetCs.NewFont "Impact" 20 (mcGetCs.FontStyles()).Bold
+		*/
+		dotNet.loadAssembly (micra.AssemblyDir + "Orien.Tools.dll")
+		dotNet.loadAssembly (micra.AssemblyDir + "Orien.NetUi.dll")
+		Global mcGetCs = loadAssembly "Orien.Tools.dll" "Orien.Tools.mcGetCs" 
+	),
+	_init = init()
 	/*<end>*/
 )	
  --create instance
 Global mcDotnet = mcStructMan.instanceStructure MICRA_DOTNET "mcDotnet"
+
 
 
 

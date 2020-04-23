@@ -49,3 +49,16 @@ circle_size = dotnetObject "System.Drawing.Size" 80 80
 	<System.Single>delay 
 	<System.Drawing.Point>pos 
 	<System.Boolean>crypt*/
+	
+
+	--Tooltip Test
+	test_form = dotNetObject "MaxCustomControls.MaxForm"
+	test_btn = dotNetObject "button"
+	test_btn.text = "Tooltip Test"
+	test_tptp = mcDotnet.loadAssembly "Orien.NetUi.dll" "Orien.NetUi.mcImageTooltip" 
+	test_tptp.AutoSize = false
+	--test_tptp.Size 200 64
+    test_tptp.SetToolTip test_btn "Button 1. ToolTip with Image"
+	test_btn.Tag = (dotNetClass "Drawing.Image").FromFile  (micra.ImagesPath + "TooltipIcons\\tltp_flatten_01.png")
+	test_form.controls.add test_btn
+	mcDotnet.dShow test_form

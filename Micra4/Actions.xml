@@ -24,7 +24,7 @@
     <Move_To_X icon="28" cmd="mcAction.object_move_to_grid()" tooltip="Move To X" />
     <Randomize icon="131" cmd="mcFile.fileInVersion Randomize" tooltip="Randomize" />
     <Random_Wirecolor icon="222" cmd="mcAction.randomWirecolor()" tooltip="Random Wirecolor" />
-    <Reinstance icon="122" cmd="mcAction.reinstance()" tooltip="Reinstance" />
+    <Reinstance icon="122" cmd="mcAction.reinstance()" tooltip="Instance - Reinstance" />
     <Rename icon="67" cmd="mcFile.fileInVersion Rename" tooltip="Rename" />
     <Repair_Object icon="76" cmd="mcFile.fileInVersion Repair_Object" tooltip="Repair Object" />
     <Reset_Transform icon="33" cmd="mcAction.reset_transform()" tooltip="Reset Transform" />

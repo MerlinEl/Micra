@@ -64,13 +64,39 @@ struct MCRA_ARRAY (
 		if ignoreCase do pattern = "(?i)" + pattern
 		for j = 1 to arr.count where ((regex.match arr[j] pattern).success) collect j
 	),
-	/*fn findArrayItemsInString arr str ignoreCase:false = (
+	/**
+	*@Usage search in string by pattern array (is nay pattern item intersect string)
+	*@Return bool
+	*/
+	fn wordFind pattern str ignoreCase:false = ( --Need test
 	
-		for i=1 to arr.count where (
-			mcString.indexOf arr[i] str ignoreCase:ignoreCase != undefined
-		) do return i
-		undefined
-	),*/
+		for p in pattern where ( 
+			mcString.indexOf str p ignoreCase:ignoreCase != undefined
+		) do return true
+		false
+	),
+	/**
+	*@Usage Collect only items which is not intersect by any intem in pattern
+	*@Example
+		pattern = #("exe", "bat", "vbs")
+		files = #("file1.txt", "file2.txt", "run.bat", "app.exe", "update.vbs", "file3.txt")
+		new_arr = mcArray.filterWords files pattern ignoreCase:false
+		new_arr = mcArray.filterWords files pattern ignoreCase:true
+		--> #("file1.txt", "file2.txt", "run.bat", "file3.txt")
+		--> #("file1.txt", "file2.txt", "file3.txt")
+	*/
+	fn filterWords arr pattern ignoreCase:false = (
+	
+		for n in arr where not (wordFind pattern n ignoreCase:ignoreCase) collect n
+	),
+	/**
+	*@Usage Condense string array with a delimiter
+	*@Example
+		date_arr = #("05", "21", "2015")
+		date_str = mcArray.joinToString date_arr "."
+		--> "05.21.2015"
+	*/
+	fn joinToString arr delimiter = ((dotnetClass "System.String").Join delimiter arr),
 	/*
 	*@Usage > Search for an item in multiarray
 	*@Example

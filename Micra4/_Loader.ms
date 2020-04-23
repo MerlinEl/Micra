@@ -6,6 +6,7 @@
 --xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx--
 --                       Created by MerlinEl 2018                         --
 ----------------------------------------------------------------------------
+--Add public functions 
 Global TypeBox
 fn TypeBox msg = (
 
