@@ -4,8 +4,8 @@ dotNet.loadAssembly (micra.AssemblyDir + "Orien.NetUi.dll")
 
 --instance  mcPopUp and WindowType classes
 _mcPopUp = mcDotnet.loadAssembly "Orien.NetUi.dll" "Orien.NetUi.McPopUp" 
-p_types =  dotnetClass "Orien.NetUi.mcPopup+WindowType" --works on enum
-p_options = dotNetClass "Orien.NetUi.McPopup+Options>"	--not works on calss
+p_types =  dotnetClass "Orien.NetUi.McPopup+WindowType" --works on enum
+p_options = dotnetClass "Orien.NetUi.McPopup+Options>"	--not works on calss
 
 p_types = _mcPopUp.GetTypes() --works on enum
 p_options =  _mcPopUp.GetOptions() --works on calss
@@ -24,11 +24,63 @@ progb.close()
 
 --<<<<< WORKS :-D nice
 
-cls = dotNet.getType "Orien.NetUi.mcPopUp" 
+
+---->>>>>> Next Method Without Locking DLL
+
+--Loading a dll by bytes in 3dsMax
+--Test1 >
+assembly_path1 = micra.AssemblyDir + "Orien.Tools.dll"
+assemblyBytes = (dotnetClass "System.IO.File").ReadAllBytes assembly_path1
+myAssembly = (dotnetClass "System.Reflection.Assembly").Load assemblyBytes
+cls = dotNet.getType "Orien.Tools.mcMath" 
 activator = (dotNetClass "System.Activator")
-mcPopUp_Instance = activator.CreateInstance cls --> dotNetObject:Orien.NetUi.mcPopUp
+mcMath_Instance = activator.CreateInstance cls
+--Math operations
+mcMath_Instance.minMax 100	1	50	--> 50
+mcMath_Instance.minMax -1	1	50	--> 1
+mcMath_Instance.minMax 100	1	200	--> 100
+--Test2 >
+assembly_path2 = micra.AssemblyDir + "Orien.NetUi.dll"
+assemblyBytes = (dotnetClass "System.IO.File").ReadAllBytes assembly_path2
+myAssembly = (dotnetClass "System.Reflection.Assembly").Load assemblyBytes
+cls = dotNet.GetType( "Orien.NetUi.mcPopUp"  )
+
+
+mcPopUp_Instance = (dotNetClass "System.Activator").CreateInstance cls
+p_types = mcPopUp_Instance.GetTypes() --works on enum
+p_options =  mcPopUp_Instance.GetOptions() --works on calss
+p_options.ConfirmToClose = true
+progb = mcPopUp_Instance.Create "Progress To" ""  p_types.E_Progress p_options --Trouble here (cant find Orien.Tools)
+progb.Show(mcMicraDialog)	
+progb.close()
+
+progb = mcPopUp_Instance.Create "A" "B"
+progb.Show()
+
+--Test3 >
+assembly_path1 = micra.AssemblyDir + "Orien.NetUi.dll"
+assemblyBytes = (dotnetClass "System.IO.File").ReadAllBytes assembly_path1
+myAssembly = (dotnetClass "System.Reflection.Assembly").Load assemblyBytes
+cls = myAssembly.getType "Orien.NetUi.McConsole" 
+McConsole_Instance = (dotNetClass "System.Activator").CreateInstance cls
+	McConsole_Instance.show()
+	McConsole_Instance.Log "hello"
+	McConsole_Instance.Log "hello Rene" "Personal"
+	McConsole_Instance.Log "hello Rene a:{0} b:{1}" "Formated" (new object[] { 15, "Custom String" })
+
+--McConsole_Instance = (dotNetClass "System.Activator").CreateInstance cls mcMicraDialog
+  .Log <System.String>msg <System.String>tabName
+  .Log <System.String>msg <System.String>tabName <System.Object[]>args
+
+/*
+A disadvantage however is this assembly can’t access another assembly, 
+even if I’ve set up the references in Visual Studio correctly. 
+It will work in Visual Studio but it won’t in 3dsMax. Bummer! 
+This article covers a workaround albeit a rather laborious one.*/
+---------------------------------------------------------------------------------------------------------
+
 --call progressbar
-mcPopUp_Instance.ProgBar
+
 -- Unknown property: "ProgBar" in dotNetObject:Orien.NetUi.mcPopUp
 
 
