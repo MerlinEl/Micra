@@ -328,7 +328,7 @@ Struct MICRA_DOTNET (
 		form.close()
 	),
 	fn init = (
-	
+		if not doesFileExist micra.AssemblyDir do return ok
 		--Load Assemblies (future replacement for mcDotnet)
 		/**
 		*@Usage Contains new Libraries , Methods , UI components
