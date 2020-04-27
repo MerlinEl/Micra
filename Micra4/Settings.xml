@@ -2,7 +2,7 @@
 <SETTINGS>
   <Micra>
     <born val="04.25.2006" />
-    <version val="6.07" />
+    <version val="6.08" />
   </Micra>
   <Structures val="All registred Micra's Structures">
     <!--independent classes-->
@@ -34,7 +34,6 @@
     <mcFile val="on" info="read - write functions" />
     <mcUIColors val="on" info="save-load ui colors" />
     <mcDotnet val="on" info="dotnet functions" />
-    <mcProgRad val="on" info="circular progressbar" />
     <mcPopUp val="on" info="popup windows of any type (TODO reamke to Independent Class)" />
     <mcSecurity val="on" info="popup windows of any type" />
     <mcGM val="on" />
