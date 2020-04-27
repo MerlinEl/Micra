@@ -808,6 +808,11 @@ struct MICRA_POLY
 		for f in faces do fnormal += polyop.getFaceNormal obj f
 		normalize fnormal
 	),
+	fn getFacesArea obj faces = (
+		local total_area = 0
+		for f in faces do total_area += polyOp.getFaceArea obj f
+		total_area
+	),
 	fn getLargestFace obj = (
 	
 		local faces_data = #()
@@ -950,6 +955,15 @@ struct MICRA_POLY
 			if normals_angle < 2 do faces_by_normal += #(f)
 		)
 		polyOp.setFaceSelection obj faces_by_normal
+	),
+	fn selectSimilarElements obj = (
+	
+		local fsel = get #fsel
+		fsel_area = getFacesArea obj fsel
+		face_elements = getObjectElements obj
+		similar_area_objects_faces = #{}
+		for el in face_elements where getFacesArea obj el <= fsel_area do similar_area_objects_faces += el as Bitarray
+		polyOp.SetFaceSelection obj similar_area_objects_faces
 	),
 	/**
 	*@Example 
@@ -1132,6 +1146,21 @@ struct MICRA_POLY
 		bbox.material = mat
 		bbox.name = uniqueName box_name
 		bbox
+	),
+	
+	fn doBridgeAndCollapse obj = (
+	
+		if classOf obj != Editable_Poly do return false;
+		local esel = mcPoly.get #esel
+		if esel.count == 0 do return false
+		obj.Bridge()
+		obj.GrowSelection()
+		esel2 = mcPoly.get #esel
+		esel3 = (esel2 as Bitarray) - (esel as Bitarray)
+		eindex = mcPoly.getShortestEdge obj esel3
+		polyOp.SetEdgeSelection obj eindex
+		obj.SelectEdgeRing ()
+		obj.collapse #Edge
 	),
 	
 	/**

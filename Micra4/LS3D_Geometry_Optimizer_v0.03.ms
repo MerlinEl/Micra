@@ -1,7 +1,7 @@
 
 Global mcCollisionOptimizeDialog
 if mcCollisionOptimizeDialog != undefined do destroyDialog mcCollisionOptimizeDialog
-rollout mcCollisionOptimizeDialog "Collisions Optimizer:" width:328 height:256
+rollout mcCollisionOptimizeDialog "Geometry Optimizer:" width:328 height:256
 (
 	local units_type = mcSystem.unitsType()
 	GroupBox 'grp1' "Method 1:" pos:[0,4] width:160 height:68 align:#left
@@ -17,12 +17,14 @@ rollout mcCollisionOptimizeDialog "Collisions Optimizer:" width:328 height:256
 	label 'lbl_units_02' "cm" pos:[304,24] width:16 height:16 align:#left  enabled:false
 	
 	button 'btn_optimize_hard' "Optimize Hard Edges" pos:[172,44] width:144 height:24 align:#left	 enabled:false 
-	
+
 	dotNetControl btn_optimize_chamfers "Button" text: "Optimize by eRing" pos:[8,44] width:144 height:24 align:#left
+	dotNetControl btn_opt_bridge "Button" text:"Do Bridge And Wipe" pos:[172,200] width:144 height:24 align:#left
 	dotNetControl btn_opt_flat "Button" text:"Flatten Top" pos:[172,228] width:144 height:24 align:#left
 	dotNetControl btn_unchamfer_edges "Button" text:"Unchamfer eRing" pos:[172,100] width:144 height:24 align:#left
+	dotNetControl btn_sel_sim_els "Button" text:"Select Simillar Elements" pos:[8,96] width:144 height:24 align:#left
 	
-	button 'btn_opt_curb_and_fences' "Optimize" pos:[8,96] width:144 height:24 align:#left  enabled:false
+	--button 'btn_opt_curb_and_fences' "" pos:[8,96] width:144 height:24 align:#left
 	button 'btn_opt_loop_by_n' "GO" pos:[288,160] width:28 height:24 align:#left
 	--button 'btn_opt_crossroad' "Optimize Cross Road" pos:[172,200] width:144 height:24 align:#left
 	
@@ -242,13 +244,15 @@ rollout mcCollisionOptimizeDialog "Collisions Optimizer:" width:328 height:256
 	on mcCollisionOptimizeDialog open do init()
 	on btn_opt_flat click do undo label:"Optimize Flat Top " on (optimizeFlatTop (selection as array)[1])
 	on btn_optimize_chamfers click  do undo label:"Optimize Chamfers" on (optimizeChamfers (selection as array)[1])
-	on btn_unchamfer_edges click  do undo label:"Unchamfer Edges " on (mcPoly.unchamferEdges (selection as array)[1] (polyOp.getEdgeSelection (selection as array)[1]))
+	on btn_unchamfer_edges click  do undo label:"Unchamfer Edges" on (mcPoly.unchamferEdges (selection as array)[1] (polyOp.getEdgeSelection (selection as array)[1]))
+	on btn_opt_bridge click  do undo label:"Bridge Wipe" on (mcPoly.doBridgeAndCollapse (selection as array)[1])
+	on btn_sel_sim_els click  do undo label:"Select simillar Elements" on (mcPoly.selectSimilarElements selection[1])
 	
-	on btn_optimize_hard pressed  do undo label:"Optimize Hard Surfaces" on (optimizeHardSurfaces (selection as array)[1])
+	on btn_optimize_hard pressed  do undo label:"Optimize Hard Surfaces" on (optimizeHardSurfaces selection[1])
 	on btn_opt_curb_and_fences pressed  do undo label:"Optimize Curbs And Fences" on (optimizeCurbsAndFences (selection as array))
-	on btn_opt_loop_by_n pressed  do undo label:"Optimize Loop By 2" on (selectEachEdgeInLoop (selection as array)[1] spn_lop_each.value)
+	on btn_opt_loop_by_n pressed  do undo label:"Optimize Loop By 2" on (selectEachEdgeInLoop selection[1] spn_lop_each.value)
 
-	on btn_opt_crossroad pressed  do undo label:"Optimize Cross Road " on (optimizeCrossroad (selection as array)[1])
+	on btn_opt_crossroad pressed  do undo label:"Optimize Cross Road " on (optimizeCrossroad selection[1])
 	
 )
 createDialog mcCollisionOptimizeDialog

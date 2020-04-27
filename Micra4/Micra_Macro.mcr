@@ -668,7 +668,22 @@ Tooltip:"Create Bridge between Edges"
 			Editable_Poly : (
 				
 				obj.bridgeSelected = 1
-				if subObjectLevel == 2 or subObjectLevel == 3 do obj.Bridge()
+				if subObjectLevel == 2 then obj.Bridge() else if subObjectLevel == 3 do (
+					--test if two borders are selected(>border()) or single(>cap())
+					local esel = mcPoly.get #esel
+					if esel.count > 1 do (
+					
+						local first_border = (polyop.getBorderFromEdge obj esel[1])
+						if first_border.numberset == esel.count then (
+						
+							obj.capHoles #Edge
+						
+						) else (
+						
+							obj.Bridge()
+						) 
+					)
+				)
 			)
 			Edit_Poly :  (
 				

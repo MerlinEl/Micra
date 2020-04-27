@@ -17,17 +17,17 @@ inst = activator.CreateInstance cls
 params = #("Processing geometry calculations", true, true, true)
 args = dotNet.ValueToDotNetObject params (dotNetObject "System.Object")
 inst.ProgBar
-dotNet.getType "Orien.NetUi.mcPopUp.ProgBar" 
-inst.GetType "Orien.NetUi.mcPopUp.ProgBar"
+dotNet.getType "Orien.NetUi.McPopUp.ProgBar" 
+inst.GetType "Orien.NetUi.McPopUp.ProgBar"
 .<System.Type>GetType()
 cls.getType "Orien.NetUi.ProgBar"
 --< Test
 
 
 --> Start Here 
-Global _mcString = mcDotnet.loadAssembly "Orien.Tools" "Orien.Tools.mcString"
-Global _mcArray = mcDotnet.loadAssembly "Orien.Tools" "Orien.Tools.mcArray"
-Global _mcMath = mcDotnet.loadAssembly "Orien.Tools" "Orien.Tools.mcMath"
+Global _mcString = mcDotnet.loadAssembly "Orien.Tools" "Orien.Tools.McString"
+Global _mcArray = mcDotnet.loadAssembly "Orien.Tools" "Orien.Tools.McArray"
+Global _mcMath = mcDotnet.loadAssembly "Orien.Tools" "Orien.Tools.McMath"
 
 --String Operations
 str = "abababaertyfddfkofopersdf"
@@ -41,7 +41,7 @@ _mcMath.minMax 100	1	200	--> 100
 
 
 --PopUp operations NOW!
-_mcPopUp = mcDotnet.loadAssembly "Orien.NetUi.dll" "Orien.NetUi.mcPopUp.ProgBar" 
+_mcPopUp = mcDotnet.loadAssembly "Orien.NetUi.dll" "Orien.NetUi.McPopUp.ProgBar" 
 params:#("Processing geometry calculations", true, true, true)
 Orien.NetUi.mcPopUp
 _mcPopUp.ProgBar
@@ -54,7 +54,7 @@ progb = mcPopUp.ProgBar("Processing geometry calculations", true, true, true);
 
 
 --XML operations (load save data) TODO
-Global xml = mcDotnet.loadAssembly "Orien.Tools" "Orien.Tools.mcXml" params:#(micra.RootDir + "Actions.xml")
+Global xml = mcDotnet.loadAssembly "Orien.Tools" "Orien.Tools.McXml" params:#(micra.RootDir + "Actions.xml")
 showMethods _mcString
 showMethods _mcMath
 showMethods xml

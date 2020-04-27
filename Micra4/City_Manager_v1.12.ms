@@ -53,6 +53,11 @@ rcmenu mcCityManDialogMenu (
 		menuItem m5_1 "Geometry Optimizer" 
 		menuItem m5_2 "Curb Crumple"
 	)
+	subMenu "Select" (
+	
+		menuItem m6_1 "Select Instances Unique"
+		menuItem m6_2 "Select Instances and Objects Unique"
+	)
 	subMenu "Advanced"(
 	
 		menuItem m9_1 "Select All Objects By Material"
@@ -62,7 +67,7 @@ rcmenu mcCityManDialogMenu (
 		menuItem m9_4 "Select Visible Objects By Material ID"
 		separator m9_sep_2
 		menuItem m9_5 "Fix Names Suffix"
-		
+		separator m9_sep_3
 	)
 	fn getLodByName obj lod_index = (
 	
@@ -265,6 +270,9 @@ rcmenu mcCityManDialogMenu (
 	--m5------------------------------------------------------------------------------------------------
 	on m5_1 picked do fileIn (micra.RootDir + "LS3D_Geometry_Optimizer_v0.03.ms")
 	on m5_2 picked do fileIn (micra.RootDir + "LS3D_Curb_Crumple.ms") 
+	--m6------------------------------------------------------------------------------------------------
+	on m6_1 picked do undo label:(m6_1.Text) on mcMax.selectUniqueInstances selection
+	on m6_2 picked do undo label:(m6_2.Text) on mcMax.selectUniqueInstances selection appendSingles:true
 	--m9------------------------------------------------------------------------------------------------
 	on m9_1 picked do undo label:(m9_1.Text) on mcMax.selectObjectsByMaterial visibleOnly:false
 	on m9_2 picked do undo label:(m9_2.Text) on mcMax.selectObjectsByMaterialID visibleOnly:false --pick first id if not face selected
@@ -659,7 +667,7 @@ rollout mcCityManDialog "" width:500 height:988
 		mcFile.initStruct gTerrainGeneratorCollision "LS3D_Terrain_Collisions_Generator" force:force_load_structures
 		if ::gTerrainGeneratorCollision != undefined and queryBox "Do you want to generate Terrain Collisions?" title:"Warning:" do (
 		
-			::gTerrainGeneratorCollision.generateTerrainCollisions()
+			::gTerrainGeneratorCollision.generateTerrainCollisions(ddl_collision_type.selection == 1)
 		)
 		updateScene()
 	)

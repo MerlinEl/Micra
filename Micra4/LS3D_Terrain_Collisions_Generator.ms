@@ -68,7 +68,7 @@ struct sTerrainGeneratorCollision (
 		gProgLog.progSub sel_count sel_count
 		gProgLog.msg "All Done" ty:"task_close"
 	),
-	public fn generateTerrainCollisions = (
+	public fn generateTerrainCollisions two_nodes = (
 	
 		local s_mat = currentMaterialLibrary["semantic_materials"]
 		if s_mat == undefined do  s_mat = meditmaterials["semantic_materials"]
@@ -98,7 +98,8 @@ struct sTerrainGeneratorCollision (
 		
 			local o = selection[i]
 			local coll_layer = ::gCityManager.getCollisionLayer o
-			local coll_export_node = ::gCityManager.getCollisionNode o
+			--local coll_export_node = ::gCityManager.getCollisionNode o
+			local coll_export_node = if two_nodes then ::gCityManager.getCollisionNode o else o
 			if coll_export_node == undefined do (
 			
 				--format "Unable create collision for object:%. Missing collision Node.\n" o.name

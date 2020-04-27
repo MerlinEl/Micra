@@ -93,6 +93,34 @@ struct MICRA_MAX_STRUCTURE	(
 			
 		) collect o )
 	),
+	fn isUniqueInstancesSet collection instances = (
+		
+		local dupes = 0
+		for o in instances where findItem collection o do dupes += 1
+		dupes == 0
+	),
+	fn selectUniqueInstances objs appendSingles: false = (
+		local collection = #() --all used
+		local unique_objs = #() --collect only single objects (no multiple instances)
+		if objs.count < 2 do return false
+		for o in objs do (
+			local object_instances = #()
+			InstanceMgr.GetInstances o &object_instances
+			--check if we added a instance member already
+			if object_instances.count > 1 then ( --add one instance from objects
+
+				if  (isUniqueInstancesSet collection object_instances) do (
+					
+					append unique_objs (instance o)
+				)
+				join collection object_instances -- exclude instances from search
+			) else (
+				if appendSingles do appendIfUnique unique_objs o
+				appendIfUnique collection o  -- exclude object from search
+			)
+		)
+		select unique_objs
+	),
 	fn getetOrCreateLayer layer_name make_active:false = (
 
 		local layer_item = LayerManager.getLayerFromName layer_name --pick layer by name

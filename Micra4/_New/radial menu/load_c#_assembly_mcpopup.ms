@@ -3,29 +3,26 @@ dotNet.loadAssembly (micra.AssemblyDir + "Orien.Tools.dll")
 dotNet.loadAssembly (micra.AssemblyDir + "Orien.NetUi.dll")
 
 --instance  mcPopUp and WindowType classes
-_mcPopUp = mcDotnet.loadAssembly "Orien.NetUi.dll" "Orien.NetUi.mcPopUp" 
+_mcPopUp = mcDotnet.loadAssembly "Orien.NetUi.dll" "Orien.NetUi.McPopUp" 
+p_types =  dotnetClass "Orien.NetUi.mcPopup+WindowType" --works on enum
+p_options = dotNetClass "Orien.NetUi.McPopup+Options>"	--not works on calss
+
+p_types = _mcPopUp.GetTypes() --works on enum
+p_options =  _mcPopUp.GetOptions() --works on calss
+_mcPopUp.Awesome --works on constant string
+
+p_types.E_Progress
+p_options.ConfirmToClose = true
 
 
-p_types = (_mcPopUp.GetTypes())
-p_types = (dotnetClass ("Orien.NetUi.mcPopup+WindowType"))
-	
-	
-_mcPopUp.Options
-p_options = dotNetClass "Orien.NetUi.mcPopup+Options>"
-	
-_mcPopUp.Awesome
+progb = _mcPopUp.Create "A" "B"
+progb.Show()
 
-
---progb = _mcPopUp.Create type msg title delay dpos crypt
-confirm_box = _mcPopUp.Create "A" "B"
 progb = _mcPopUp.Create "Progress To" ""  p_types.E_Progress p_options
 progb.Show(mcMicraDialog)	
 progb.close()
 
-
-.[static]<System.Windows.Forms.Form>Create <System.String>msg <System.String>title
-.[static]<System.Windows.Forms.Form>Create <System.String>msg <System.String>title <Orien.NetUi.mcPopup+WindowType>type <Orien.NetUi.mcPopup+Options>options
-
+--<<<<< WORKS :-D nice
 
 cls = dotNet.getType "Orien.NetUi.mcPopUp" 
 activator = (dotNetClass "System.Activator")
