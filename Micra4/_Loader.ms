@@ -6,19 +6,6 @@
 --xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx--
 --                       Created by MerlinEl 2018                         --
 ----------------------------------------------------------------------------
---Add public functions 
-Global TypeBox
-fn TypeBox msg = (
-
-	local rdia = dotNetObject "MaxCustomControls.RenameInstanceDialog" ""
-	rdia.text = msg
-	local DialogResult = rdia.Showmodal()
-	local OK_CLASS = (dotnetclass "System.Windows.Forms.DialogResult").OK
-	if dotnet.compareenums rdia.DialogResult OK_CLASS and rdia.InstanceName.count != 0 then (
-		rdia.InstanceName 
-	) else undefined
-)
-
 Global Micra
 (
 	--> Get Micra_Main File In Current Directory

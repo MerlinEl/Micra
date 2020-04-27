@@ -1437,19 +1437,23 @@ struct mcAction (
 			local sel_geometry = for i in selection where superClassOf i == GeometryClass collect i
 			if sel_geometry.count < 2 do return false
 			try (
-				undo "Collapse" on (
-				
+				undo "Collapse" on  with redraw off (
+					
+					mcProgLog.msg "@" --clear log
+					mcProgLog.msg "COLLAPSE SELECETED GEOMETRY:" ti:"Initialize...." ty:"new_task"
+					mcProgLog.msg "Collapsing Start" ti:"3DsMax..." ty:"task_open"
+					
 					convertToPoly sel_geometry
 					local first_obj = sel_geometry[1]
 					for i=2 to sel_geometry.count do (
 						
+						mcProgLog.msg ("object:"+sel_geometry[i].name) ty:"proc"
+						mcProgLog.progSub i sel_geometry.count clr:yellow
 						polyOp.attach first_obj sel_geometry[i]
-						mcProgRad.progressTo (100.*i/sel_geometry.count) msg:"Processing...please wait..." confirm:true showButton:false clr:green
 					)
 					select first_obj
 				)
-				--allow acces OK button after process is done
-				mcProgRad.progressTo 100 msg:"Collapsing is Finished!" confirm:true showButton:true clr:green
+				mcProgLog.msg "All Done" ty:"task_close"
 			) 
 			catch (::mcPopUp.show "Incorrect objecs!" type:#Warning delay:2000)
 		)

@@ -200,18 +200,20 @@ Struct MICRA_DOTNET (
 	),
 	fn addButtonToolTip dbtn show_text img_name = (
 	
-		local tltp = mcDotnet.loadAssembly "Orien.NetUi.dll" "Orien.NetUi.mcImageTooltip" 
-		tltp.AutoSize = false
-		--Set up the delays for the ToolTip.
-	   /*tltp.AutoPopDelay = 5000;
-	   tltp.InitialDelay = 1000;
-	   tltp.ReshowDelay = 500;*/
-		--#002040
-		tltp.SetFont "Verdana" 14 (::mcGetCs.FontStyles()).Regular (::mcGetCs.NewColor 0 32 64)
-		tltp.BorderColor = (::mcGetCs.NewColor 1 247 46)
-		--tltp.Size 200 64
-		tltp.SetToolTip dbtn show_text
-		dbtn.Tag = (dotNetClass "Drawing.Image").FromFile  (micra.ImagesPath + "TooltipIcons\\" + img_name + ".png")
+		try (
+			local tltp = mcDotnet.loadAssembly "Orien.NetUi.dll" "Orien.NetUi.McImageTooltip" 
+			tltp.AutoSize = false
+			--Set up the delays for the ToolTip.
+		   /*tltp.AutoPopDelay = 5000;
+		   tltp.InitialDelay = 1000;
+		   tltp.ReshowDelay = 500;*/
+			--#002040
+			tltp.SetFont "Verdana" 14 (::mcGetCs.FontStyles()).Regular (::mcGetCs.NewColor 0 32 64)
+			tltp.BorderColor = (::mcGetCs.NewColor 1 247 46)
+			--tltp.Size 200 64
+			tltp.SetToolTip dbtn show_text
+			dbtn.Tag = (dotNetClass "Drawing.Image").FromFile  (micra.ImagesPath + "TooltipIcons\\" + img_name + ".png")
+		) catch ()
 	),
 	/**
 	TODO > check this method instead
@@ -334,9 +336,12 @@ Struct MICRA_DOTNET (
 			mcGetCs.newColor 2 3 2
 			mcGetCs.NewFont "Impact" 20 (mcGetCs.FontStyles()).Bold
 		*/
-		dotNet.loadAssembly (micra.AssemblyDir + "Orien.Tools.dll")
-		dotNet.loadAssembly (micra.AssemblyDir + "Orien.NetUi.dll")
-		Global mcGetCs = loadAssembly "Orien.Tools.dll" "Orien.Tools.mcGetCs" 
+		try (
+			dotNet.loadAssembly (micra.AssemblyDir + "Orien.Tools.dll")
+			dotNet.loadAssembly (micra.AssemblyDir + "Orien.NetUi.dll")
+			
+		) catch (format "Unable to load Orien Assemblies > %\n" (getCurrentException()))
+		Global mcGetCs = loadAssembly "Orien.Tools.dll" "Orien.Tools.McGetCs" 
 	),
 	_init = init()
 	/*<end>*/

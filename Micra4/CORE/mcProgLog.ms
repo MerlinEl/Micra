@@ -66,8 +66,7 @@ struct MC_PROG_LOG (
 		for i=1 to 1000 do mcProgLog.progSum i 1000
 	*/
 	fn progSub val_step val_total clr:(color 255 115 255) = ( --color 255 153 255, color 0 255 255
-		
-		
+	
 		pb_sub_task.color = clr
 		pb_sub_task.value = 100.*val_step/val_total
 	),
@@ -240,6 +239,10 @@ struct MC_PROG_LOG (
 		-- format "from:% to:% clr:% blod:% italic:%\n" start end clr bold italic
 		stylizeText start end clr bold italic fsize fname
 		mcProgLogDialog.title =  "Proces: " + ti
+		--scroll to bottom
+		text_box.SelectionStart = text_box.Text.Count-1
+		text_box.ScrollToCaret()
+		--text_box.update()
 	),
 	fn init = (
 	
