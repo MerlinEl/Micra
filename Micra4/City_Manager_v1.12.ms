@@ -52,12 +52,13 @@ rcmenu mcCityManDialogMenu (
 		menuItem m5_1 "Geometry Optimizer" 
 		menuItem m5_2 "Curb Crumple"
 	)
-	subMenu "Select" (
+	subMenu "Find" (
 	
-		menuItem m6_0 "Filter Unlinked Objects"
-		menuItem m6_3 "Filter Objects Without Lods"
-		menuItem m6_1 "Select Instances Unique"
-		menuItem m6_2 "Select Instances and Objects Unique"
+		menuItem m6_0 "Find Unlinked Objects"
+		menuItem m6_3 "Find Objects Without Lods"
+		menuItem m6_4 "Find Duplicated Objects"
+		menuItem m6_1 "Find Instances Unique"
+		menuItem m6_2 "Find Instances and Objects Unique"
 	)
 	subMenu "Advanced"(
 	
@@ -132,26 +133,36 @@ rcmenu mcCityManDialogMenu (
 	fn linkCollisionsByClosestObjectAndFixName = (
 
 		local visible_objs = for o in objects where not o.isHidden collect o
-		for ocol in selection do (
+		local cols = selection as array
+		for c in cols do (
 
 			local closest_obj = undefined
 			local closest_dist = 9999999
-			for omod in visible_objs do (
-				if (findString (toUpper omod.name) "LOD0" == undefined or ocol.name == omod.name) do continue
-				local dist = distance ocol.pos omod.pos
+			for o in visible_objs where (
+			
+				findString (toUpper o.name) "LOD0" != undefined and
+				findString (toUpper o.name) "COLL" == undefined and
+				c.name != o.name
+			
+			) do (
+			
+				local dist = distance c.pos o.pos
 				if dist < closest_dist do (
 
-					closest_obj = omod
+					closest_obj = o
 					closest_dist = dist
 				)
 			)
-			if closest_obj == undefined do (
+			if closest_obj != undefined then  (
+			
+				local base_name = mcString.cutRight closest_obj.name trimChars:"_lod0" ignoreCase:true
+				c.name = base_name + "_coll"
+				c.parent = closest_obj
+				
+			) else (
+			
 				format "Skiped collision obj:% dist:%\n" closest_obj.name closest_dist
-				continue
 			)
-			local base_name = mcString.cutRight closest_obj.name trimChars:"_lod0" ignoreCase:true
-			ocol.name = base_name + "_coll"
-			ocol.parent = closest_obj
 		)
 	)
 	fn distributeInstancesInToSelection = (
@@ -166,7 +177,8 @@ rcmenu mcCityManDialogMenu (
 			local coll_obj = undefined
 			fn getCollision = (
 				local sel_obj = selection[1]
-				if 	sel_obj != undefined and superClassOf sel_obj == GeometryClass and sel_obj.material.name == "semantic_materials"  then (
+				if sel_obj != undefined and superClassOf sel_obj == GeometryClass and 
+				sel_obj.material.name == "semantic_materials"  then (
 					
 					coll_obj = sel_obj
 					lbl_coll.text = "Collision: " + sel_obj.name	
@@ -213,12 +225,15 @@ rcmenu mcCityManDialogMenu (
 						if name_arr.count > 1 then ( --remove elements contains pattern(ddl_suffix.items)
 							local filtered_name = mcArray.filterWords name_arr ddl_suffix.items ignoreCase:true
 							local new_name = mcArray.joinToString filtered_name "_" --condense array in to string
-							o.name = new_name +"_"+ suff --add desired suffix
+							o.name = uniqueName new_name
+							
 						) else (
-							o.name = o.name +"_"+ suff --add desired suffix
+							o.name = uniqueName o.name
 						)
 					)
 				)
+				--must be new loop else names result is not unique
+				for o in selection do o.name += "_"+ suff --add desired suffix 
 				mcCityManDialog.CALLBACKS_ENABLED = true
 				completeRedraw()
 			)
@@ -271,13 +286,36 @@ rcmenu mcCityManDialogMenu (
 	on m5_1 picked do fileIn (micra.RootDir + "LS3D_Geometry_Optimizer_v0.03.ms")
 	on m5_2 picked do fileIn (micra.RootDir + "LS3D_Curb_Crumple.ms") 
 	--m6------------------------------------------------------------------------------------------------
-	on m6_0 picked do undo label:(m6_0.Text) on select (for o in selection where o.parent == undefined collect o)
+	on m6_0 picked do undo label:(m6_0.Text) on (
+		local unlinked_objs = for o in selection where o.parent == undefined collect o
+		if unlinked_objs.count > 0 then select unlinked_objs else max select none
+	)
 	on m6_1 picked do undo label:(m6_1.Text) on mcMax.selectUniqueInstances selection
 	on m6_2 picked do undo label:(m6_2.Text) on mcMax.selectUniqueInstances selection appendSingles:true
-	on m6_3 picked do undo label:(m6_3.Text) on select (for o in selection where (
-		select o
-		LS3DGUP.LODU.GetNumLODs() == 0 
-	) collect o)
+	on m6_3 picked do undo label:(m6_3.Text) on (
+		local sel = selection as array
+		local no_lod_objs =  (for o in sel where (
+			select o
+			LS3DGUP.LODU.GetNumLODs() == 0 
+		) collect o)
+		if no_lod_objs.count > 0 then select no_lod_objs else max select none
+	)
+	on m6_4 picked do undo label:(m6_4.Text) on (
+	
+		local sel = selection as array
+		local dupe_objs = #()
+		for a in sel do (
+			local objs = for b in sel where (
+			
+				a.pos == b.pos and mcPoly.getObjectArea a == mcPoly.getObjectArea b 
+			) collect b
+			if objs.count > 1 do (
+				deleteItem objs 1
+				join dupe_objs objs
+			)
+		)
+		if dupe_objs.count > 0 then select dupe_objs else max select none
+	)
 	--m9------------------------------------------------------------------------------------------------
 	on m9_1 picked do undo label:(m9_1.Text) on mcMax.selectObjectsByMaterial visibleOnly:false
 	on m9_2 picked do undo label:(m9_2.Text) on mcMax.selectObjectsByMaterialID visibleOnly:false --pick first id if not face selected

@@ -813,6 +813,9 @@ struct MICRA_POLY
 		for f in faces do total_area += polyOp.getFaceArea obj f
 		total_area
 	),
+	fn getObjectArea obj = (
+		getFacesArea obj #{1..obj.faces.count}
+	),
 	fn getLargestFace obj = (
 	
 		local faces_data = #()
