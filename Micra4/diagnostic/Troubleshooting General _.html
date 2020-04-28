@@ -1,0 +1,1063 @@
+<!DOCTYPE html>
+<!-- saved from url=(0045)https://www.sigershop.eu/doc-troubleshooting/ -->
+<html xmlns="http://www.w3.org/1999/xhtml" prefix="" lang="en-US" class="js rgba boxshadow csstransitions wf-opensans-n3-active wf-roboto-n3-active wf-roboto-n4-active wf-opensans-n6-active wf-robotocondensed-n4-active wf-active"><head itemscope="" itemtype="http://schema.org/WebSite"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title itemprop="name">Troubleshooting General | </title>
+<meta name="viewport" content="width=device-width">
+
+
+
+
+
+<!-- BEGIN Metadata added by the Add-Meta-Tags WordPress plugin -->
+<meta name="keywords" content="3d, model, animation, texture, render, renderer, architecture, backgrounds, graphic, graphics, hdr, hdri, layer, seamless, tileable, visualization, viz, v-ray, corona, cg, studio, digital, art, regimantas, valiukas, max, maya, siger, studio, shader, material, sigershaders, sigertools">
+<!-- END Metadata added by the Add-Meta-Tags WordPress plugin -->
+
+                        <script async="" src="./Troubleshooting General __files/analytics.js.download"></script><script src="./Troubleshooting General __files/webfont.js.download" type="text/javascript" async=""></script><script>
+                            /* You can add more configuration options to webfontloader by previously defining the WebFontConfig with your options */
+                            if ( typeof WebFontConfig === "undefined" ) {
+                                WebFontConfig = new Object();
+                            }
+                            WebFontConfig['google'] = {families: ['Open+Sans:600,300', 'Roboto+Condensed:400', 'Roboto:300,400']};
+
+                            (function() {
+                                var wf = document.createElement( 'script' );
+                                wf.src = 'https://ajax.googleapis.com/ajax/libs/webfont/1.5.3/webfont.js';
+                                wf.type = 'text/javascript';
+                                wf.async = 'true';
+                                var s = document.getElementsByTagName( 'script' )[0];
+                                s.parentNode.insertBefore( wf, s );
+                            })();
+                        </script>
+                        <meta name="generator" content="This site uses EU VAT for EDD by Lyquidity (1.5.15) using 2015 rules"><link rel="dns-prefetch" href="https://js.stripe.com/">
+<link rel="dns-prefetch" href="https://fonts.googleapis.com/">
+<link rel="dns-prefetch" href="https://s.w.org/">
+<link rel="alternate" type="application/rss+xml" title="Siger Studio » Feed" href="https://www.sigershop.eu/feed/">
+<link rel="alternate" type="application/rss+xml" title="Siger Studio » Comments Feed" href="https://www.sigershop.eu/comments/feed/">
+<link rel="alternate" type="application/rss+xml" title="Siger Studio » Troubleshooting General Comments Feed" href="https://www.sigershop.eu/doc-troubleshooting/feed/">
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.4\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.4\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/www.sigershop.eu\/wp-includes\/js\/wp-emoji-release.min.js"}};
+			!function(a,b,c){function d(a,b){var c=String.fromCharCode;l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,a),0,0);var d=k.toDataURL();l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,b),0,0);var e=k.toDataURL();return d===e}function e(a){var b;if(!l||!l.fillText)return!1;switch(l.textBaseline="top",l.font="600 32px Arial",a){case"flag":return!(b=d([55356,56826,55356,56819],[55356,56826,8203,55356,56819]))&&(b=d([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]),!b);case"emoji":return b=d([55357,56692,8205,9792,65039],[55357,56692,8203,9792,65039]),!b}return!1}function f(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var g,h,i,j,k=b.createElement("canvas"),l=k.getContext&&k.getContext("2d");for(j=Array("flag","emoji"),c.supports={everything:!0,everythingExceptFlag:!0},i=0;i<j.length;i++)c.supports[j[i]]=e(j[i]),c.supports.everything=c.supports.everything&&c.supports[j[i]],"flag"!==j[i]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[j[i]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(h=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",h,!1),a.addEventListener("load",h,!1)):(a.attachEvent("onload",h),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),g=c.source||{},g.concatemoji?f(g.concatemoji):g.wpemoji&&g.twemoji&&(f(g.twemoji),f(g.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script><script src="./Troubleshooting General __files/wp-emoji-release.min.js.download" type="text/javascript" defer=""></script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel="stylesheet" id="jqueri_ui-css" href="./Troubleshooting General __files/jquery-ui.css" type="text/css" media="all">
+<link rel="stylesheet" id="dashicons-css" href="./Troubleshooting General __files/dashicons.min.css" type="text/css" media="all">
+<link rel="stylesheet" id="elusive-css" href="./Troubleshooting General __files/elusive.min.css" type="text/css" media="all">
+<link rel="stylesheet" id="font-awesome-css" href="./Troubleshooting General __files/font-awesome.min.css" type="text/css" media="all">
+<link rel="stylesheet" id="foundation-icons-css" href="./Troubleshooting General __files/foundation-icons.min.css" type="text/css" media="all">
+<link rel="stylesheet" id="genericons-css" href="./Troubleshooting General __files/genericons.min.css" type="text/css" media="all">
+<link rel="stylesheet" id="menu-icons-extra-css" href="./Troubleshooting General __files/extra.min.css" type="text/css" media="all">
+<link rel="stylesheet" id="edd-styles-css" href="./Troubleshooting General __files/edd.min.css" type="text/css" media="all">
+<link rel="stylesheet" id="easy_testimonials_webfonts-css" href="./Troubleshooting General __files/css" type="text/css" media="all">
+<link rel="stylesheet" id="easy_testimonial_style-css" href="./Troubleshooting General __files/style.css" type="text/css" media="all">
+<link rel="stylesheet" id="marketplace-edd-vcaddons-css" href="./Troubleshooting General __files/marketplace-edd-vcaddons-public.css" type="text/css" media="all">
+<link rel="stylesheet" id="kiwi-styling-slickslider-css" href="./Troubleshooting General __files/slick.css" type="text/css" media="all">
+<link rel="stylesheet" id="kiwi-styling-fontawesome-css" href="./Troubleshooting General __files/font-awesome.min(1).css" type="text/css" media="all">
+<link rel="stylesheet" id="kiwi-styling-bootstrap-css" href="./Troubleshooting General __files/bootstrap.min.css" type="text/css" media="all">
+<link rel="stylesheet" id="ubermenu-open-sans-css" href="./Troubleshooting General __files/css(1)" type="text/css" media="all">
+<link rel="stylesheet" id="ubermenu-roboto-css" href="./Troubleshooting General __files/css(2)" type="text/css" media="all">
+<link rel="stylesheet" id="kiwi-style-css" href="./Troubleshooting General __files/style(1).css" type="text/css" media="all">
+<link rel="stylesheet" id="bootstrap-css-css" href="./Troubleshooting General __files/bootstrap.min(1).css" type="text/css" media="all">
+<link rel="stylesheet" id="fontawesome-css-css" href="./Troubleshooting General __files/font-awesome.min(2).css" type="text/css" media="all">
+<link rel="stylesheet" id="marketplace-icons-css-css" href="./Troubleshooting General __files/Marketplace-Additional-Icons.css" type="text/css" media="all">
+<link rel="stylesheet" id="postformat-css-css" href="./Troubleshooting General __files/postformat.css" type="text/css" media="all">
+<link rel="stylesheet" id="navigation-css-css" href="./Troubleshooting General __files/navigation.css" type="text/css" media="all">
+<link rel="stylesheet" id="visualcomposer-css-css" href="./Troubleshooting General __files/visualcomposer.css" type="text/css" media="all">
+<link rel="stylesheet" id="marketplace-css-css" href="./Troubleshooting General __files/marketplace.css" type="text/css" media="all">
+<link rel="stylesheet" id="styled-css" href="./Troubleshooting General __files/styled.css" type="text/css" media="all">
+<link rel="stylesheet" id="tablepress-css-css" href="./Troubleshooting General __files/tablepress.css" type="text/css" media="all">
+<link rel="stylesheet" id="animate-css-css" href="./Troubleshooting General __files/animate.min.css" type="text/css" media="all">
+<link rel="stylesheet" id="vc_plugin_table_style_css-css" href="./Troubleshooting General __files/style(2).css" type="text/css" media="all">
+<link rel="stylesheet" id="vc_plugin_themes_css-css" href="./Troubleshooting General __files/themes.css" type="text/css" media="all">
+<link rel="stylesheet" id="tablepress-default-css" href="./Troubleshooting General __files/default.min.css" type="text/css" media="all">
+<style id="tablepress-default-inline-css" type="text/css">
+.tablepress .column-1{width:200px}.tablepress .column-2{width:120px}.tablepress .column-3{width:120px}.tablepress .column-4{width:120px}.tablepress thead th,.tablepress tfoot th{background-color:#939393;color:#f9f9f9}
+</style>
+<link rel="stylesheet" id="wpmenucart-icons-css" href="./Troubleshooting General __files/wpmenucart-icons-pro.css" type="text/css" media="all">
+<link rel="stylesheet" id="wpmenucart-fontawesome-css" href="./Troubleshooting General __files/wpmenucart-fontawesome.css" type="text/css" media="all">
+<link rel="stylesheet" id="wpmenucart-css" href="./Troubleshooting General __files/wpmenucart-main.css" type="text/css" media="all">
+<link rel="stylesheet" id="wpb_wmca_accordion_style-css" href="./Troubleshooting General __files/wpb_wmca_style.css" type="text/css" media="">
+<link rel="stylesheet" id="easy-image-gallery-css" href="./Troubleshooting General __files/easy-image-gallery.css" type="text/css" media="screen">
+<link rel="stylesheet" id="pretty-photo-css" href="./Troubleshooting General __files/prettyPhoto.css" type="text/css" media="screen">
+<link rel="stylesheet" id="ubermenu-css" href="./Troubleshooting General __files/ubermenu.min.css" type="text/css" media="all">
+<link rel="stylesheet" id="ubermenu-vanilla-css" href="./Troubleshooting General __files/vanilla.css" type="text/css" media="all">
+<link rel="stylesheet" id="ubermenu-black-silver-css" href="./Troubleshooting General __files/blacksilver.css" type="text/css" media="all">
+<link rel="stylesheet" id="ubermenu-font-awesome-all-css" href="./Troubleshooting General __files/fontawesome-all.min.css" type="text/css" media="all">
+<link rel="stylesheet" id="ubermenu-font-awesome-css" href="./Troubleshooting General __files/font-awesome.min(3).css" type="text/css" media="all">
+<script type="text/javascript" src="./Troubleshooting General __files/jquery.js.download"></script>
+<script type="text/javascript" src="./Troubleshooting General __files/jquery-migrate.min.js.download" defer="" onload=""></script>
+<script type="text/javascript" src="./Troubleshooting General __files/jquery-ui.min.js.download" defer="" onload=""></script>
+<script type="text/javascript" src="./Troubleshooting General __files/jquery.transit.js.download" defer="" onload=""></script>
+<script type="text/javascript" src="./Troubleshooting General __files/flash_detect.js.download" defer="" onload=""></script>
+<script type="text/javascript" src="./Troubleshooting General __files/marketplace-edd-vcaddons-public.js.download" defer="" onload=""></script>
+<script type="text/javascript" src="./Troubleshooting General __files/bootstrap.min.js.download" defer="" onload=""></script>
+<script type="text/javascript" src="./Troubleshooting General __files/jquery.mixitup.min.js.download" defer="" onload=""></script>
+<script type="text/javascript" src="./Troubleshooting General __files/slick.min.js.download" defer="" onload=""></script>
+<script type="text/javascript" src="./Troubleshooting General __files/trunk8.js.download" defer="" onload=""></script>
+<script type="text/javascript" src="./Troubleshooting General __files/jquery.matchHeight-min.js.download" defer="" onload=""></script>
+<script type="text/javascript" src="./Troubleshooting General __files/jquery.notifyBar.js.download" defer="" onload=""></script>
+<script type="text/javascript" src="./Troubleshooting General __files/js.cookie.js.download" defer="" onload=""></script>
+<script type="text/javascript" src="./Troubleshooting General __files/wow.min.js.download" defer="" onload=""></script>
+<script type="text/javascript">
+/* <![CDATA[ */
+var wpmenucart_ajax = {"ajaxurl":"https:\/\/www.sigershop.eu\/wp-admin\/admin-ajax.php","nonce":"e2c4a22474"};
+/* ]]> */
+</script>
+<script type="text/javascript" src="./Troubleshooting General __files/wpmenucart.js.download" defer="" onload=""></script>
+<script type="text/javascript">
+/* <![CDATA[ */
+var wpmenucart_ajax_assist = {"shop_plugin":"Easy Digital Downloads","always_display":"1"};
+/* ]]> */
+</script>
+<script type="text/javascript" src="./Troubleshooting General __files/wpmenucart-ajax-assist.js.download" defer="" onload=""></script>
+<script type="text/javascript" src="./Troubleshooting General __files/saved_resource"></script>
+<link rel="https://api.w.org/" href="https://www.sigershop.eu/wp-json/">
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://www.sigershop.eu/xmlrpc.php?rsd">
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://www.sigershop.eu/wp-includes/wlwmanifest.xml"> 
+<link rel="canonical" href="https://www.sigershop.eu/doc-troubleshooting/">
+<link rel="shortlink" href="https://www.sigershop.eu/?p=1117">
+<link rel="alternate" type="application/json+oembed" href="https://www.sigershop.eu/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.sigershop.eu%2Fdoc-troubleshooting%2F">
+<link rel="alternate" type="text/xml+oembed" href="https://www.sigershop.eu/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.sigershop.eu%2Fdoc-troubleshooting%2F&amp;format=xml">
+<style type="text/css" media="screen">div.testimonial_body {
+font-family: Roboto;
+font-weight: 300;
+font-style: normal;
+color: #777;
+font-size: 12px;
+line-height: 20px;
+}</style><style type="text/css" media="screen">@media (max-width: 728px) {}</style><style type="text/css" media="screen">@media (max-width: 320px) {}</style><style id="ubermenu-custom-generated-css">
+/** UberMenu Custom Menu Styles (Customizer) **/
+/* main */
+ .ubermenu-main .ubermenu-row { max-width:1100px; margin-left:auto; margin-right:auto; }
+ .ubermenu-main { background:#ffffff; border:1px solid #212121; }
+ .ubermenu.ubermenu-main { background:none; border:none; box-shadow:none; }
+ .ubermenu.ubermenu-main .ubermenu-item-level-0 > .ubermenu-target { border:none; box-shadow:none; border-radius:0px; background:#ffffff; }
+ .ubermenu-main .ubermenu-item-level-0 > .ubermenu-target { font-size:14px; text-transform:uppercase; color:#212121; border-left:1px solid #212121; -webkit-box-shadow:inset 1px 0 0 0 rgba(255,255,255,0); -moz-box-shadow:inset 1px 0 0 0 rgba(255,255,255,0); -o-box-shadow:inset 1px 0 0 0 rgba(255,255,255,0); box-shadow:inset 1px 0 0 0 rgba(255,255,255,0); }
+ .ubermenu-main .ubermenu-nav .ubermenu-item.ubermenu-item-level-0 > .ubermenu-target { font-weight:normal; }
+ .ubermenu.ubermenu-main .ubermenu-item-level-0:hover > .ubermenu-target, .ubermenu-main .ubermenu-item-level-0.ubermenu-active > .ubermenu-target { color:#f7f7f7; background:#212121; }
+ .ubermenu-main .ubermenu-item-level-0.ubermenu-current-menu-item > .ubermenu-target, .ubermenu-main .ubermenu-item-level-0.ubermenu-current-menu-parent > .ubermenu-target, .ubermenu-main .ubermenu-item-level-0.ubermenu-current-menu-ancestor > .ubermenu-target { color:#212121; background:#ffffff; }
+ .ubermenu-main .ubermenu-item.ubermenu-item-level-0 > .ubermenu-highlight { color:#212121; background:#ffffff; }
+ .ubermenu-main .ubermenu-item-level-0.ubermenu-active > .ubermenu-target,.ubermenu-main .ubermenu-item-level-0:hover > .ubermenu-target { -webkit-box-shadow:inset 1px 0 0 0 rgba(255,255,255,0); -moz-box-shadow:inset 1px 0 0 0 rgba(255,255,255,0); -o-box-shadow:inset 1px 0 0 0 rgba(255,255,255,0); box-shadow:inset 1px 0 0 0 rgba(255,255,255,0); }
+ .ubermenu-main .ubermenu-item-level-0 > .ubermenu-target, .ubermenu-main .ubermenu-item-level-0 > .ubermenu-custom-content.ubermenu-custom-content-padded { padding-top:6px 0px 6px 0px; padding-bottom:6px 0px 6px 0px; }
+ .ubermenu-main .ubermenu-submenu.ubermenu-submenu-drop { background-color:#212121; border:1px solid #212121; }
+ .ubermenu-main .ubermenu-item-level-0 > .ubermenu-submenu-drop { box-shadow:none; }
+ .ubermenu-main .ubermenu-submenu .ubermenu-highlight { color:#007acc; }
+ .ubermenu-main .ubermenu-item-normal > .ubermenu-target,.ubermenu-main .ubermenu-submenu .ubermenu-target,.ubermenu-main .ubermenu-submenu .ubermenu-nonlink,.ubermenu-main .ubermenu-submenu .ubermenu-widget,.ubermenu-main .ubermenu-submenu .ubermenu-custom-content-padded,.ubermenu-main .ubermenu-submenu .ubermenu-retractor,.ubermenu-main .ubermenu-submenu .ubermenu-colgroup .ubermenu-column,.ubermenu-main .ubermenu-submenu.ubermenu-submenu-type-stack > .ubermenu-item-normal > .ubermenu-target,.ubermenu-main .ubermenu-submenu.ubermenu-submenu-padded { padding:10px 10px 10px 10px; }
+ .ubermenu .ubermenu-grid-row { padding-right:10px 10px 10px 10px; }
+ .ubermenu .ubermenu-grid-row .ubermenu-target { padding-right:0; }
+ .ubermenu-main .ubermenu-submenu .ubermenu-item-header > .ubermenu-target, .ubermenu-main .ubermenu-tab > .ubermenu-target { font-size:12px; text-transform:uppercase; }
+ .ubermenu-main .ubermenu-submenu .ubermenu-item-header > .ubermenu-target { color:#f7f7f7; }
+ .ubermenu-main .ubermenu-submenu .ubermenu-item-header > .ubermenu-target:hover { color:#007acc; }
+ .ubermenu-main .ubermenu-submenu .ubermenu-item-header.ubermenu-current-menu-item > .ubermenu-target { color:#f7f7f7; }
+ .ubermenu-main .ubermenu-nav .ubermenu-submenu .ubermenu-item-header > .ubermenu-target { font-weight:normal; }
+ .ubermenu-main .ubermenu-submenu .ubermenu-item-header.ubermenu-has-submenu-stack > .ubermenu-target { border:none; }
+ .ubermenu-main .ubermenu-submenu-type-stack { padding-top:0; }
+ .ubermenu-main .ubermenu-item-normal > .ubermenu-target { color:#f7f7f7; font-size:12px; font-weight:normal; text-transform:none; }
+ .ubermenu.ubermenu-main .ubermenu-item-normal > .ubermenu-target:hover, .ubermenu.ubermenu-main .ubermenu-item-normal.ubermenu-active > .ubermenu-target { color:#007acc; }
+ .ubermenu-main .ubermenu-item-normal.ubermenu-current-menu-item > .ubermenu-target { color:#007acc; }
+ .ubermenu-main .ubermenu-submenu-type-flyout > .ubermenu-item-normal > .ubermenu-target { border-bottom:1px solid #212121; }
+ .ubermenu-main .ubermenu-target > .ubermenu-target-description { font-size:10px; text-transform:none; }
+ .ubermenu-main .ubermenu-target > .ubermenu-target-description, .ubermenu-main .ubermenu-submenu .ubermenu-target > .ubermenu-target-description { color:#c9c9c9; }
+ .ubermenu-main .ubermenu-item-level-0.ubermenu-has-submenu-drop > .ubermenu-target > .ubermenu-sub-indicator { color:#b7b7b7; }
+ .ubermenu-main .ubermenu-submenu .ubermenu-divider > hr { border-top-color:#212121; }
+ .ubermenu-main, .ubermenu-main .ubermenu-target, .ubermenu-main .ubermenu-nav .ubermenu-item-level-0 .ubermenu-target, .ubermenu-main div, .ubermenu-main p, .ubermenu-main input { font-family:'Roboto', sans-serif; font-weight:400; }
+/* textures */
+ .ubermenu-textures { background:#ffffff; border:1px solid #dbdbdb; }
+ .ubermenu-textures .ubermenu-item-level-0 > .ubermenu-target { text-transform:uppercase; color:#a5a5a5; }
+ .ubermenu-textures .ubermenu-nav .ubermenu-item.ubermenu-item-level-0 > .ubermenu-target { font-weight:normal; }
+ .ubermenu.ubermenu-textures .ubermenu-item-level-0:hover > .ubermenu-target, .ubermenu-textures .ubermenu-item-level-0.ubermenu-active > .ubermenu-target { color:#898989; }
+ .ubermenu-textures .ubermenu-item-level-0.ubermenu-current-menu-item > .ubermenu-target, .ubermenu-textures .ubermenu-item-level-0.ubermenu-current-menu-parent > .ubermenu-target, .ubermenu-textures .ubermenu-item-level-0.ubermenu-current-menu-ancestor > .ubermenu-target { color:#5b5b5b; }
+ .ubermenu-textures .ubermenu-item.ubermenu-item-level-0 > .ubermenu-highlight { color:#727272; }
+ .ubermenu.ubermenu-textures .ubermenu-item-level-0 > .ubermenu-target { border-radius:0px; }
+ .ubermenu-textures.ubermenu-vertical .ubermenu-item-level-0 > .ubermenu-target { -webkit-box-shadow:inset 1px 1px 0 0 rgba(255,255,255,0); -moz-box-shadow:inset 1px 1px 0 0 rgba(255,255,255,0); -o-box-shadow:inset 1px 1px 0 0 rgba(255,255,255,0); box-shadow:inset 1px 1px 0 0 rgba(255,255,255,0); }
+ .ubermenu-textures .ubermenu-submenu.ubermenu-submenu-drop { background-color:#f9f9f9; border:1px solid #dbdbdb; }
+ .ubermenu-textures, .ubermenu-textures .ubermenu-target, .ubermenu-textures .ubermenu-nav .ubermenu-item-level-0 .ubermenu-target, .ubermenu-textures div, .ubermenu-textures p, .ubermenu-textures input { font-family:'Open Sans', sans-serif; font-weight:400; }
+/* textures-2 */
+ .ubermenu-textures-2 .ubermenu-item-level-0 > .ubermenu-target { font-size:12px; text-transform:uppercase; color:#a5a5a5; }
+ .ubermenu-textures-2 .ubermenu-nav .ubermenu-item.ubermenu-item-level-0 > .ubermenu-target { font-weight:normal; }
+ .ubermenu.ubermenu-textures-2 .ubermenu-item-level-0:hover > .ubermenu-target, .ubermenu-textures-2 .ubermenu-item-level-0.ubermenu-active > .ubermenu-target { color:#898989; }
+ .ubermenu-textures-2 .ubermenu-item-level-0.ubermenu-current-menu-item > .ubermenu-target, .ubermenu-textures-2 .ubermenu-item-level-0.ubermenu-current-menu-parent > .ubermenu-target, .ubermenu-textures-2 .ubermenu-item-level-0.ubermenu-current-menu-ancestor > .ubermenu-target { color:#5b5b5b; }
+ .ubermenu-textures-2 .ubermenu-item.ubermenu-item-level-0 > .ubermenu-highlight { color:#727272; }
+ .ubermenu-textures-2 .ubermenu-submenu .ubermenu-highlight { color:#007acc; }
+ .ubermenu-textures-2 .ubermenu-submenu .ubermenu-item-header > .ubermenu-target, .ubermenu-textures-2 .ubermenu-tab > .ubermenu-target { font-size:11px; }
+ .ubermenu-textures-2 .ubermenu-submenu .ubermenu-item-header > .ubermenu-target { color:#878787; }
+ .ubermenu-textures-2 .ubermenu-submenu .ubermenu-item-header > .ubermenu-target:hover { color:#007acc; }
+ .ubermenu-textures-2 .ubermenu-submenu .ubermenu-item-header.ubermenu-current-menu-item > .ubermenu-target { color:#878787; }
+ .ubermenu-textures-2 .ubermenu-item-normal > .ubermenu-target { color:#878787; font-size:11px; }
+ .ubermenu.ubermenu-textures-2 .ubermenu-item-normal > .ubermenu-target:hover, .ubermenu.ubermenu-textures-2 .ubermenu-item-normal.ubermenu-active > .ubermenu-target { color:#57a64a; }
+ .ubermenu-textures-2 .ubermenu-item-normal.ubermenu-current-menu-item > .ubermenu-target { color:#57a64a; }
+ .ubermenu-textures-2, .ubermenu-textures-2 .ubermenu-target, .ubermenu-textures-2 .ubermenu-nav .ubermenu-item-level-0 .ubermenu-target, .ubermenu-textures-2 div, .ubermenu-textures-2 p, .ubermenu-textures-2 input { font-family:'Open Sans', sans-serif; font-weight:400; }
+ .ubermenu-textures-2, .ubermenu-textures-2 .ubermenu-target, .ubermenu-textures-2 .ubermenu-nav .ubermenu-item-level-0 .ubermenu-target { font:12px; }
+
+
+/** UberMenu Custom Menu Item Styles (Menu Item Settings) **/
+/* 45 */     .ubermenu .ubermenu-submenu-id-45 > .ubermenu-column + .ubermenu-column:not(.ubermenu-clear-row) { border-left:1px solid #212121; }
+
+/* Icons */
+.ubermenu .ubermenu-item-layout-icon_right > .ubermenu-target-title { margin-right: .6em; display: inline-block; }
+.ubermenu-sub-indicators .ubermenu-has-submenu-drop > .ubermenu-target.ubermenu-item-layout-icon_top:after, .ubermenu-sub-indicators .ubermenu-has-submenu-drop > .ubermenu-target.ubermenu-item-layout-icon_bottom:after{ top: auto; bottom:8px; right:auto; margin-left:-4px; }
+.ubermenu .ubermenu-target.ubermenu-item-layout-icon_top, .ubermenu .ubermenu-target.ubermenu-item-layout-icon_bottom{ text-align:center; padding:20px; }
+.ubermenu .ubermenu-target.ubermenu-item-layout-icon_top, .ubermenu .ubermenu-target.ubermenu-item-layout-icon_top > .ubermenu-target-text, .ubermenu .ubermenu-target.ubermenu-item-layout-icon_bottom > .ubermenu-target-text, .ubermenu .ubermenu-target.ubermenu-item-layout-icon_bottom > .ubermenu-icon{ text-align:center; display:block; width:100%; }
+.ubermenu .ubermenu-item-layout-icon_top > .ubermenu-icon { padding-bottom:5px; }
+.ubermenu .ubermenu-item-layout-icon_bottom > .ubermenu-icon { padding-top:5px; }
+
+/* Status: Loaded from Transient */
+
+</style><meta name="generator" content="EDD DP v1.4.8">
+<meta name="generator" content="Powered by WPBakery Page Builder - drag and drop page builder for WordPress.">
+<!--[if lte IE 9]><link rel="stylesheet" type="text/css" href="https://www.sigershop.eu/wp-content/plugins/js_composer/assets/css/vc_lte_ie9.min.css" media="screen"><![endif]-->
+<!-- Dynamic Widgets by QURL loaded - http://www.dynamic-widgets.com //-->
+<style type="text/css" title="dynamic-css" class="options-output">.page-container.boxed{border-top:0px none ;border-bottom:0px none ;border-left:0px none ;border-right:0px none ;}.kiwi-border{border-bottom:1px solid #212121;}.topbar .pull-left, .topbar ul li a, .topbar ul li{font-family:"Open Sans";line-height:9px;font-weight:600;font-style:normal;color:#888;font-size:9px;opacity: 1;visibility: visible;-webkit-transition: opacity 0.24s ease-in-out;-moz-transition: opacity 0.24s ease-in-out;transition: opacity 0.24s ease-in-out;}.wf-loading .topbar .pull-left, .topbar ul li a, .topbar ul li,{opacity: 0;}.ie.wf-loading .topbar .pull-left, .topbar ul li a, .topbar ul li,{visibility: hidden;}.topbar{background-color:#212121;}.pagetitle h1,.pagetitle h2,.pagetitle h3,.pagetitle h4,.pagetitle h5,.pagetitle h6{font-family:"Roboto Condensed";font-weight:400;font-style:normal;color:#6d6d6d;opacity: 1;visibility: visible;-webkit-transition: opacity 0.24s ease-in-out;-moz-transition: opacity 0.24s ease-in-out;transition: opacity 0.24s ease-in-out;}.wf-loading .pagetitle h1,.pagetitle h2,.pagetitle h3,.pagetitle h4,.pagetitle h5,.pagetitle h6,{opacity: 0;}.ie.wf-loading .pagetitle h1,.pagetitle h2,.pagetitle h3,.pagetitle h4,.pagetitle h5,.pagetitle h6,{visibility: hidden;}.pagetitle{background-color:#efefef;}.pagetitle{border-top:0px solid #e4e4e4;}.pagetitle{border-bottom:1px solid #e4e4e4;}.notificationbar{font-family:Roboto;text-align:center;line-height:Normalpx;font-weight:normal;font-style:normal;color:#ffffff;font-size:16px;opacity: 1;visibility: visible;-webkit-transition: opacity 0.24s ease-in-out;-moz-transition: opacity 0.24s ease-in-out;transition: opacity 0.24s ease-in-out;}.wf-loading .notificationbar,{opacity: 0;}.ie.wf-loading .notificationbar,{visibility: hidden;}.notificationbar{background-color:#fa5252;}.format-link .link-header{background-color:#2a2c33;}.format-quote .featured-image{background-color:#007acc;}body{font-family:Roboto;line-height:Normalpx;font-weight:300;font-style:normal;color:#555555;font-size:12px;opacity: 1;visibility: visible;-webkit-transition: opacity 0.24s ease-in-out;-moz-transition: opacity 0.24s ease-in-out;transition: opacity 0.24s ease-in-out;}.wf-loading body,{opacity: 0;}.ie.wf-loading body,{visibility: hidden;}.mainnav{font-family:Roboto;line-height:Normalpx;font-weight:400;font-style:normal;color:#555555;font-size:12px;opacity: 1;visibility: visible;-webkit-transition: opacity 0.24s ease-in-out;-moz-transition: opacity 0.24s ease-in-out;transition: opacity 0.24s ease-in-out;}.wf-loading .mainnav,{opacity: 0;}.ie.wf-loading .mainnav,{visibility: hidden;}.kiwi-nav li a{font-family:Roboto;text-transform:uppercase;font-weight:400;font-style:normal;color:#5e5e5e;font-size:12px;opacity: 1;visibility: visible;-webkit-transition: opacity 0.24s ease-in-out;-moz-transition: opacity 0.24s ease-in-out;transition: opacity 0.24s ease-in-out;}.wf-loading .kiwi-nav li a,{opacity: 0;}.ie.wf-loading .kiwi-nav li a,{visibility: hidden;}.footer{font-family:Roboto;line-height:Normalpx;font-weight:300;font-style:normal;color:#909090;font-size:12px;opacity: 1;visibility: visible;-webkit-transition: opacity 0.24s ease-in-out;-moz-transition: opacity 0.24s ease-in-out;transition: opacity 0.24s ease-in-out;}.wf-loading .footer,{opacity: 0;}.ie.wf-loading .footer,{visibility: hidden;}h1,h2,h3,h4,h5,h6{font-family:"Open Sans";font-weight:300;font-style:normal;color:#555555;opacity: 1;visibility: visible;-webkit-transition: opacity 0.24s ease-in-out;-moz-transition: opacity 0.24s ease-in-out;transition: opacity 0.24s ease-in-out;}.wf-loading h1,h2,h3,h4,h5,h6,{opacity: 0;}.ie.wf-loading h1,h2,h3,h4,h5,h6,{visibility: hidden;}.footer h1,.footer h2,.footer h3,.footer h4,.footer h5,.footer h6{font-family:"Roboto Condensed";font-weight:400;font-style:normal;color:#909090;opacity: 1;visibility: visible;-webkit-transition: opacity 0.24s ease-in-out;-moz-transition: opacity 0.24s ease-in-out;transition: opacity 0.24s ease-in-out;}.wf-loading .footer h1,.footer h2,.footer h3,.footer h4,.footer h5,.footer h6,{opacity: 0;}.ie.wf-loading .footer h1,.footer h2,.footer h3,.footer h4,.footer h5,.footer h6,{visibility: hidden;}body{background-color:#ffffff;}body.boxed{background-color:#ffffff;}.mainnav .header-row-two{background-color:#ffffff;}.footer{background-color:#212121;}.copyright{background-color:#1b1b1b;}.footer a, .footer a:visited, .footer .widget-mk-kiwi h3 a,.footer .widget_recent_entries ul li .post-widget-text a{color:#bababa;}.footer a:visited, .footer a:visited:visited, .footer .widget-mk-kiwi h3 a:visited,.footer .widget_recent_entries ul li .post-widget-text a:visited{color:#bababa;}.footer a:hover, .footer a:visited:hover, .footer .widget-mk-kiwi h3 a:hover,.footer .widget_recent_entries ul li .post-widget-text a:hover{color:#007acc;}.footer a:active, .footer a:visited:active, .footer .widget-mk-kiwi h3 a:active,.footer .widget_recent_entries ul li .post-widget-text a:active{color:#bababa;}body.page-template-page-blog{background-color:#ffffff;}#search-form,.search-form button{background-color:#e5e5e5;}.form-control,.search-form input[placeholder]{font-family:Arial,Helvetica,sans-serif;line-height:Normalpx;font-weight:700;font-style:normal;color:#666666;font-size:12px;opacity: 1;visibility: visible;-webkit-transition: opacity 0.24s ease-in-out;-moz-transition: opacity 0.24s ease-in-out;transition: opacity 0.24s ease-in-out;}.wf-loading .form-control,.search-form input[placeholder],{opacity: 0;}.ie.wf-loading .form-control,.search-form input[placeholder],{visibility: hidden;}.mp-social-buttons .demo a, .widget_marketplace_item_demolink a{background-color:#007acc;}.mp-social-buttons .demo:hover, .widget_marketplace_item_demolink a:hover{color:#007acc;}</style><noscript><style type="text/css"> .wpb_animate_when_almost_visible { opacity: 1; }</style></noscript>
+
+<style>
+.mainnav.stuckMenu.isStuck {background:!important;}
+	
+.dropdown-menu.purchases li.edd_download_thumbnail:nth-child(n+8) {display:none}
+	
+.metadata-single span.comments,
+.marketplace-commentform,
+.meta-category-single
+{
+    display:none;
+}
+.container.kiwi-content
+{
+    margin 20px auto 20px auto;
+}
+.metadata-single
+{
+    border-top: 0px;
+    font-size: 11px;
+    padding: 5px 0 5px 0;
+    margin: 5px 0 0 0;
+}
+.copyright .container .row
+{
+    font-size: 10px;
+}
+.full-description h4.mpdesc
+{
+    display:none;
+}
+/*EDD related*/
+.widget_edd_product_details .price
+{
+    font-size:15px;
+}
+.widget_edd_product_details.widget-style-two .price-button .mp-tax-disabled
+{
+    display:none;
+}
+.widget_edd_product_details.widget-style-two .price-button
+{
+    align-items: center;
+    color: #fff;
+    background: #838384;
+    display: block;
+    margin-bottom: 10px;
+    padding: 5px 10px 5px;
+    font-family: 'Roboto', sans-serif;
+    -webkit-border-radius: 0px;
+    -moz-border-radius: 0px;
+    border-radius: 0px;
+}
+.widget_edd_product_details.widget-style-two .edd_purchase_submit_wrapper a.edd-add-to-cart.edd-has-js
+{
+    display: block;
+    margin-bottom: 10px;
+    padding: 5px 10px;
+    font-family: 'Roboto', sans-serif;
+    -webkit-border-radius: 0px;
+    -moz-border-radius: 0px;
+    border-radius: 0px;
+    font-size: 12px;
+}
+textarea, input, select
+{
+    padding: 4px 0px 4px 4px;
+    border: 1px solid #ddddde;
+    font-size: 12px;
+    color: #555;
+    background: #fff;
+    -webkit-box-shadow: inset 0 0px 0px rgba(0, 0, 0, 0.1);
+    -moz-box-shadow: inset 0 0px 0px rgba(0, 0, 0, 0.1);
+    box-shadow: inset 0 0px 0px rgba(0, 0, 0, 0.1);
+}
+.marketplace .mp_author a, .marketplace .mp_author {
+    display:none;
+}
+.marketplace .iso-desc .categories {
+    display:none;
+}
+.listview .layout-sorting .iso-thumbnail {
+    float: left;
+    margin: 0;
+    display: inline-block;
+    width: 200px;
+}
+.wpmenucart-contents {
+    background: #fff;
+    color: #212121 !important;
+    -webkit-border-radius: 0px;
+    -moz-border-radius: 0px;
+    border-radius: 0px;
+}
+#wpmenucartli a:hover{
+    background: #f1f5f9;
+    color: #212121 !important;
+}
+.copyright .socialmedia a {
+    color: #c2c2c2;
+}
+/*ProdSlider*/
+.theme-default .nivoSlider {
+    -webkit-box-shadow: none !important;
+    -moz-box-shadow: none !important;
+    box-shadow: none !important;
+}
+.vc_toggle_title h4 {
+    font-size:14px;
+}
+h2.wpb_heading {
+    font-size:16px;
+    margin-top:5px;
+}
+.mp-vc-items .iso-thumbnail .styleblock span.viewmore {
+    background: #a6a6a6;
+}
+.nivoSlider a.nivo-imageLink {
+    background: #fff !important;
+}
+.nivoSlider {
+    background: url(loading.gif) 50% 50% no-repeat #fff !important;
+}		
+			@media (min-width:1200px) {.container.mp-full-dashboard{width:1070px!important; } }
+		
+		
+		.socialmedia li a i, button, a, .topbar .socialmedia li a i, .search-form button:before,.copyright .socialmedia a .fa, 
+		#backtotop, .marketplace-tags li, .edd-submit, input.edd-submit[type="submit"], .wpmenucart-contents,  
+		a.edd-wl-action.edd-wl-button span, a.edd-wl-action.edd-wl-button, .mp-fes-fullwidth .fes-vendor-menu ul li, .widget_edd_product_details .edd-wl-button:hover i, .widget_edd_product_details .edd-wl-button i,
+		.widget_edd_product_details a.edd-wl-action i, .widget_edd_product_details a.edd-wl-action span, ul.menu-filtre li,
+		.customer-dashboard-menu ul li, .mp-social-buttons .demo, .tour-style1 .vc_tta-tabs-list li, 
+		.slider-view .nav-arrow, .topbar li.menu-item-has-children ul li.menu-item a,  .dcjq-count.ver, .edd-currency-button-reset,
+		.topbar-features li li a, .topbar-features .pro-wishlist li.menu-item .edd-wl-item-count,.mp-license-status-deactivate
+		{transition:all .3s ease-in-out!important;-moz-transition:all .3s ease-in-out!important; -webkit-transition:all .3s ease-in-out!important;}				
+		
+
+			.mainnav.stuckMenu.isStuck {padding:10px 0px 10px 0px!important;} 
+		
+			
+			.footer .footer-widget ul li a:hover .dcjq-count.ver {color:#007acc}
+		
+			.pull-right.topmenu {padding:0px 0px 0px 0px!important;} 
+		
+			.topbar .pull-left {margin:8px 0px 8px 0px!important;} 
+		
+			.widget_marketplace_item_demolink a:hover {background:#007acc!important;} 
+			
+	
+			.kiwi-nav > li > ul, .kiwi-nav > li > ul ul, .kiwi-nav > li > ul ul ul, .kiwi-nav > li > ul ul ul ul {background:#4b4b4d!important;} 
+				.kiwi-nav > li > ul li a {color:#888888!important;} 
+		
+			.kiwi-nav > li li:hover, .kiwi-nav > li li li:hover, .kiwi-nav > li li li li:hover {background:#838384!important;} 
+				.kiwi-nav > li > ul li a:hover {color:#007acc!important;} 
+				
+			@media (min-width:1200px) {
+			.page-container {width:100%!important;margin:0 auto; }	
+			.page-container .container{width:1100px; }	
+		}
+		
+		@media (min-width:960px)  {
+			.page-container.boxed{width:1100px;			margin:0px auto 0px auto;}			
+		}
+		
+	
+		
+		
+		.mainnav {padding:0px 0px 0px 0px;}
+	
+			.column-one {
+			float:left!important; 
+			width:;			margin:0px 0px 0px 0px;			text-align:left;		}
+	
+			.column-two {
+			float:left!important;  
+			width:; 
+			margin:0px 0px 0px 0px; 
+			text-align:center;		}
+		
+			
+		.column-three {
+			float:right!important; 
+			width:; 
+			margin:0px 0px 0px 0px; 
+			text-align:center;		}	 
+		
+			.column-four {
+			float:right!important;			width:25%; 
+			margin:10px 0px 0px 0px; 
+			text-align:right;		}	 
+		
+			.column-one-row {
+			float:left!important;			
+			width:0%; 
+			margin:0px 0px 0px 0px; 
+			text-align:left;		}		
+		
+			.column-two-row {
+			float:left!important;			width:100%;  
+			margin:0px 0px 0px 0px; 
+			text-align:center;		}
+		
+			
+		.column-three-row {
+			float:left!important;			width:0%; 
+			margin:0px 0px 0px 0px; 
+			text-align:center;		}	 
+		
+			.column-four-row {
+			float:left!important;			width:0%; 
+			margin:0px 0px 0px 0px; 
+			text-align:right;		}	 
+		
+			.kiwi-content .vc_inline-link {display:none}
+		
+			.kiwi-content .post-edit-link {display:none}
+		
+	
+		
+	.topbar{margin:0px 0px 0px 0px;}
+		
+	.topbar {  
+				border:0!important;
+			}
+	
+	.copyright .copyright-border {
+					border:0!important;
+			
+	}
+	
+	.copyright-message {
+		margin:0px 0px 0px 0px; 
+	}
+	
+	.footer {
+		padding:30px 0px 15px 0px; 
+	}
+	
+	.pagetitle {
+		border-top:0px solid #e4e4e4;		border-bottom:1px solid #e4e4e4;		margin:0px 0px 20px 0px; 
+		padding:20px 0px 20px 0px; 
+		text-align:left;	}
+	
+	.pagetitle a {color:#6d6d6d;}
+	
+	.search-form button {color:#666666;}
+	.search-form .form-control::-moz-placeholder{color:#666666!important;}
+	.search-form .form-control:-ms-input-placeholder{color:#666666!important;}
+	.search-form .form-control::-webkit-input-placeholder{color:#666666!important;}
+ 
+		
+			.grid-masonry article{-webkit-box-shadow: 0px 2px 5px -1px rgba(218, 218, 218, 1); -moz-box-shadow: 0px 2px 5px -1px rgba(218, 218, 218, 1); box-shadow: 0px 2px 5px -1px rgba(218, 218, 218, 1);}
+		
+	
+		
+	
+	.breadcrumbs {margin:0px 0px 6px 0px; }
+	
+		
+	
+		
+	
+				
+		
+</style>	<link rel="shortcut icon" href="https://www.sigershop.eu/wp-content/uploads/2016/03/favicon.ico"><link rel="stylesheet" href="./Troubleshooting General __files/css(3)">
+
+</head>
+			<body data-rsssl="1" class="page-template-default page page-id-1117 mp-custom-edd-theme single-author no-avatars boxed styled-background wpb-js-composer js-comp-ver-5.4.7 vc_responsive">		
+	
+				
+			
+				
+
+
+
+	<div class="page-container boxed">
+
+
+
+<div class="mp-menu-combined">
+
+
+	
+				
+	
+			
+	
+					
+				
+
+		
+
+<div class="mainnav">
+
+	
+			<div class="header-row-one">
+		
+			<div class="container">
+				<div class="column-one kiwi-logo">		
+			
+			
+		
+							<div itemscope="" itemtype="http://schema.org/Organization">
+					<a itemprop="url" href="https://www.sigershop.eu/" rel="home"><img itemprop="logo" src="./Troubleshooting General __files/sslogo53_170_n.png" height="53" style="margin:5px 0px 10px 0px" class="main-logo" alt=""></a>
+				</div>
+						
+				
+			 
+			
+				
+				
+				
+				
+				
+				
+		
+				
+			
+		
+				
+		</div>
+				
+			  	
+				
+					</div>
+	</div>
+				<div class="clear"></div>
+		
+
+			
+	<div class="container-fluid header-row-two">		
+		<div class="container">
+		
+		
+				
+		
+				
+				<div class="column-two-row kiwi-mainnav">
+			
+				
+			
+						
+					 
+	 						
+<!-- UberMenu [Configuration:main] [Theme Loc:main_navigation] [Integration:auto] -->
+<a class="ubermenu-responsive-toggle ubermenu-responsive-toggle-main ubermenu-skin-black-silver ubermenu-loc-main_navigation ubermenu-responsive-toggle-content-align-left ubermenu-responsive-toggle-align-full " data-ubermenu-target="ubermenu-main-2-main_navigation-2"><i class="fas fa-bars"></i>Menu</a><nav id="ubermenu-main-2-main_navigation-2" class="ubermenu ubermenu-main ubermenu-menu-2 ubermenu-loc-main_navigation ubermenu-responsive ubermenu-responsive-default ubermenu-responsive-collapse ubermenu-horizontal ubermenu-transition-shift ubermenu-trigger-hover_intent ubermenu-skin-black-silver ubermenu-has-border ubermenu-bar-align-full ubermenu-items-align-left ubermenu-bound-inner ubermenu-disable-submenu-scroll ubermenu-retractors-responsive ubermenu-submenu-indicator-closes ubermenu-notouch"><ul id="ubermenu-nav-main-2-main_navigation" class="ubermenu-nav"><li id="menu-item-20614" class="ubermenu-item ubermenu-item-type-post_type ubermenu-item-object-page ubermenu-item-home ubermenu-item-20614 ubermenu-item-level-0 ubermenu-column ubermenu-column-auto"><a class="ubermenu-target ubermenu-item-layout-default ubermenu-item-layout-text_only" href="https://www.sigershop.eu/" tabindex="0"><span class="ubermenu-target-title ubermenu-target-text">Home</span></a></li><li id="menu-item-45" class="ubermenu-item ubermenu-item-type-custom ubermenu-item-object-custom ubermenu-current-menu-ancestor ubermenu-current-menu-parent ubermenu-item-has-children ubermenu-item-45 ubermenu-item-level-0 ubermenu-column ubermenu-column-auto ubermenu-has-submenu-drop ubermenu-has-submenu-mega"><a class="ubermenu-target ubermenu-item-layout-default ubermenu-item-layout-text_only" href="https://sigershop.eu/#" tabindex="0"><span class="ubermenu-target-title ubermenu-target-text">Support</span><span class="ubermenu-sub-indicator-close"><i class="fas fa-times"></i></span></a><ul class="ubermenu-submenu ubermenu-submenu-id-45 ubermenu-submenu-type-mega ubermenu-submenu-drop ubermenu-submenu-align-full_width"><li id="menu-item-49" class="ubermenu-item ubermenu-item-type-post_type ubermenu-item-object-page ubermenu-item-has-children ubermenu-item-49 ubermenu-item-auto ubermenu-item-header ubermenu-item-level-1 ubermenu-column ubermenu-column-auto ubermenu-has-submenu-stack"><a class="ubermenu-target ubermenu-target-with-icon ubermenu-item-layout-default ubermenu-item-layout-icon_left" href="https://www.sigershop.eu/documentation/"><i class="ubermenu-icon fas fa-briefcase"></i><span class="ubermenu-target-title ubermenu-target-text">Product Documentation</span></a><ul class="ubermenu-submenu ubermenu-submenu-id-49 ubermenu-submenu-type-auto ubermenu-submenu-type-stack"><li id="menu-item-20679" class="ubermenu-item ubermenu-item-type-custom ubermenu-item-object-custom ubermenu-item-20679 ubermenu-item-auto ubermenu-item-normal ubermenu-item-level-2 ubermenu-column ubermenu-column-auto"><a class="ubermenu-target ubermenu-target-with-icon ubermenu-item-layout-default ubermenu-item-layout-icon_left" href="https://www.sigershop.eu/mrpmax-rg-introduction/"><i class="ubermenu-icon fas fa-book"></i><span class="ubermenu-target-title ubermenu-target-text">MRPmax Reference Guide</span></a></li><li id="menu-item-20680" class="ubermenu-item ubermenu-item-type-custom ubermenu-item-object-custom ubermenu-item-20680 ubermenu-item-auto ubermenu-item-normal ubermenu-item-level-2 ubermenu-column ubermenu-column-auto"><a class="ubermenu-target ubermenu-target-with-icon ubermenu-item-layout-default ubermenu-item-layout-icon_left" href="https://www.sigershop.eu/cmppmax-rg-introduction/"><i class="ubermenu-icon fas fa-book"></i><span class="ubermenu-target-title ubermenu-target-text">CMPPmax Reference Guide</span></a></li><li id="menu-item-20681" class="ubermenu-item ubermenu-item-type-custom ubermenu-item-object-custom ubermenu-item-20681 ubermenu-item-auto ubermenu-item-normal ubermenu-item-level-2 ubermenu-column ubermenu-column-auto"><a class="ubermenu-target ubermenu-target-with-icon ubermenu-item-layout-default ubermenu-item-layout-icon_left" href="https://www.sigershop.eu/vmppmax-rg-introduction/"><i class="ubermenu-icon fas fa-book"></i><span class="ubermenu-target-title ubermenu-target-text">VMPPmax Reference Guide</span></a></li><li id="menu-item-20682" class="ubermenu-item ubermenu-item-type-custom ubermenu-item-object-custom ubermenu-item-20682 ubermenu-item-auto ubermenu-item-normal ubermenu-item-level-2 ubermenu-column ubermenu-column-auto"><a class="ubermenu-target ubermenu-target-with-icon ubermenu-item-layout-default ubermenu-item-layout-icon_left" href="https://www.sigershop.eu/vsspmax-rg-introduction/"><i class="ubermenu-icon fas fa-book"></i><span class="ubermenu-target-title ubermenu-target-text">VSSPmax Reference Guide</span></a></li></ul></li><li id="menu-item-1219" class="ubermenu-item ubermenu-item-type-post_type ubermenu-item-object-page ubermenu-item-1219 ubermenu-item-auto ubermenu-item-header ubermenu-item-level-1 ubermenu-column ubermenu-column-auto"><a class="ubermenu-target ubermenu-target-with-icon ubermenu-item-layout-default ubermenu-item-layout-icon_left" href="https://www.sigershop.eu/faq/"><i class="ubermenu-icon far fa-question-circle"></i><span class="ubermenu-target-title ubermenu-target-text">FAQ</span><span class="ubermenu-target-divider"> – </span><span class="ubermenu-target-description ubermenu-target-text">Frequently asked questions.</span></a></li><li id="menu-item-1119" class="ubermenu-item ubermenu-item-type-post_type ubermenu-item-object-page ubermenu-current-menu-item ubermenu-page_item ubermenu-page-item-1117 ubermenu-current_page_item ubermenu-item-1119 ubermenu-item-auto ubermenu-item-header ubermenu-item-level-1 ubermenu-column ubermenu-column-auto"><a class="ubermenu-target ubermenu-target-with-icon ubermenu-item-layout-default ubermenu-item-layout-icon_left" href="https://www.sigershop.eu/doc-troubleshooting/"><i class="ubermenu-icon fas fa-wrench"></i><span class="ubermenu-target-title ubermenu-target-text">Troubleshooting General</span><span class="ubermenu-target-divider"> – </span><span class="ubermenu-target-description ubermenu-target-text">Known Issues.</span></a></li><li id="menu-item-1215" class="ubermenu-item ubermenu-item-type-post_type ubermenu-item-object-page ubermenu-item-1215 ubermenu-item-auto ubermenu-item-header ubermenu-item-level-1 ubermenu-column ubermenu-column-auto"><a class="ubermenu-target ubermenu-target-with-icon ubermenu-item-layout-default ubermenu-item-layout-icon_left" href="https://www.sigershop.eu/contact-support/"><i class="ubermenu-icon far fa-envelope"></i><span class="ubermenu-target-title ubermenu-target-text">Contact Support</span></a></li><li class="ubermenu-retractor ubermenu-retractor-mobile"><i class="fas fa-times"></i> Close</li></ul></li><li id="menu-item-1181" class="ubermenu-item ubermenu-item-type-custom ubermenu-item-object-custom ubermenu-item-has-children ubermenu-item-1181 ubermenu-item-level-0 ubermenu-column ubermenu-column-auto ubermenu-has-submenu-drop ubermenu-has-submenu-flyout"><a class="ubermenu-target ubermenu-item-layout-default ubermenu-item-layout-text_only" href="https://www.sigershop.eu/doc-troubleshooting/#" tabindex="0"><span class="ubermenu-target-title ubermenu-target-text">Your Account</span><span class="ubermenu-sub-indicator-close"><i class="fas fa-times"></i></span></a><ul class="ubermenu-submenu ubermenu-submenu-id-1181 ubermenu-submenu-type-flyout ubermenu-submenu-drop ubermenu-submenu-align-left_edge_item"><li id="menu-item-20620" class="ubermenu-item ubermenu-item-type-post_type ubermenu-item-object-page ubermenu-item-20620 ubermenu-item-auto ubermenu-item-normal ubermenu-item-level-1"><a class="ubermenu-target ubermenu-target-with-icon ubermenu-item-layout-default ubermenu-item-layout-icon_left" href="https://www.sigershop.eu/login/"><i class="ubermenu-icon fas fa-sign-in-alt"></i><span class="ubermenu-target-title ubermenu-target-text">Login</span></a></li><li id="menu-item-1182" class="ubermenu-item ubermenu-item-type-post_type ubermenu-item-object-page ubermenu-item-1182 ubermenu-item-auto ubermenu-item-normal ubermenu-item-level-1"><a class="ubermenu-target ubermenu-target-with-icon ubermenu-item-layout-default ubermenu-item-layout-icon_left" href="https://www.sigershop.eu/checkout/purchase-history/"><i class="ubermenu-icon fas fa-archive"></i><span class="ubermenu-target-title ubermenu-target-text">Purchase History</span></a></li><li id="menu-item-1183" class="ubermenu-item ubermenu-item-type-post_type ubermenu-item-object-page ubermenu-item-1183 ubermenu-item-auto ubermenu-item-normal ubermenu-item-level-1"><a class="ubermenu-target ubermenu-target-with-icon ubermenu-item-layout-default ubermenu-item-layout-icon_left" href="https://www.sigershop.eu/edit-profile/"><i class="ubermenu-icon fas fa-cog"></i><span class="ubermenu-target-title ubermenu-target-text">Account Settings</span></a></li><li class="ubermenu-retractor ubermenu-retractor-mobile"><i class="fas fa-times"></i> Close</li></ul></li><li id="menu-item-21307" class="ubermenu-item ubermenu-item-type-custom ubermenu-item-object-custom ubermenu-item-has-children ubermenu-item-21307 ubermenu-item-level-0 ubermenu-column ubermenu-column-auto ubermenu-has-submenu-drop ubermenu-has-submenu-flyout"><a class="ubermenu-target ubermenu-item-layout-default ubermenu-item-layout-text_only" href="https://www.sigershop.eu/doc-troubleshooting/#" tabindex="0"><span class="ubermenu-target-title ubermenu-target-text">Downloads</span><span class="ubermenu-sub-indicator-close"><i class="fas fa-times"></i></span></a><ul class="ubermenu-submenu ubermenu-submenu-id-21307 ubermenu-submenu-type-flyout ubermenu-submenu-drop ubermenu-submenu-align-left_edge_item"><li id="menu-item-21308" class="ubermenu-item ubermenu-item-type-post_type ubermenu-item-object-page ubermenu-item-21308 ubermenu-item-auto ubermenu-item-normal ubermenu-item-level-1"><a class="ubermenu-target ubermenu-target-with-icon ubermenu-item-layout-default ubermenu-item-layout-icon_left" href="https://www.sigershop.eu/vmppmax-downloads/"><i class="ubermenu-icon fas fa-download"></i><span class="ubermenu-target-title ubermenu-target-text">VMPPmax</span><span class="ubermenu-target-divider"> – </span><span class="ubermenu-target-description ubermenu-target-text">Only logged in VMPPmax buyers can view downloads.</span></a></li><li id="menu-item-25729" class="ubermenu-item ubermenu-item-type-post_type ubermenu-item-object-page ubermenu-item-25729 ubermenu-item-auto ubermenu-item-normal ubermenu-item-level-1"><a class="ubermenu-target ubermenu-target-with-icon ubermenu-item-layout-default ubermenu-item-layout-icon_left" href="https://www.sigershop.eu/cmppmax-downloads/"><i class="ubermenu-icon fas fa-download"></i><span class="ubermenu-target-title ubermenu-target-text">CMPPmax</span><span class="ubermenu-target-divider"> – </span><span class="ubermenu-target-description ubermenu-target-text">Only logged in CMPPmax buyers can view downloads.</span></a></li><li id="menu-item-21856" class="ubermenu-item ubermenu-item-type-post_type ubermenu-item-object-page ubermenu-item-21856 ubermenu-item-auto ubermenu-item-normal ubermenu-item-level-1"><a class="ubermenu-target ubermenu-target-with-icon ubermenu-item-layout-default ubermenu-item-layout-icon_left" href="https://www.sigershop.eu/mrpmax-downloads/"><i class="ubermenu-icon fas fa-download"></i><span class="ubermenu-target-title ubermenu-target-text">MRPmax</span><span class="ubermenu-target-divider"> – </span><span class="ubermenu-target-description ubermenu-target-text">Only logged in MRPmax buyers can view downloads.</span></a></li><li class="ubermenu-retractor ubermenu-retractor-mobile"><i class="fas fa-times"></i> Close</li></ul></li><li id="menu-item-20618" class="ubermenu-item ubermenu-item-type-post_type ubermenu-item-object-page ubermenu-item-20618 ubermenu-item-level-0 ubermenu-column ubermenu-column-auto"><a class="ubermenu-target ubermenu-item-layout-default ubermenu-item-layout-text_only" href="https://www.sigershop.eu/contact-us/" tabindex="0"><span class="ubermenu-target-title ubermenu-target-text">Contact Us</span></a></li></ul></nav>
+<!-- End UberMenu -->
+		
+					  			
+							
+				
+				
+				
+				
+		
+				
+			
+		
+				</div>
+			  	
+				
+				
+		<div class="clear"></div>		
+		
+		
+	  	 </div>
+	</div>
+	
+	
+	
+	
+</div>
+	
+		
+	
+
+	
+				
+	
+
+</div>
+
+
+
+
+		
+
+		
+	<div class="container kiwi-content">		
+	
+	<div class="row">	
+	
+			
+			
+
+		<div class="container">
+			<div class="row" role="main">
+		
+							<div class="col-sm-12 col-md-12 fullwidth">
+						
+						
+			
+				
+										
+			
+						
+									
+			
+									
+				
+				
+		
+	
+				
+
+	<div class="entry-content kiwi-page">
+		<p>If you experience any problems not discussed below while using our products, please <a href="https://www.sigershop.eu/contact-us/" title="Contact Us">Contact Us</a>.</p>
+<h4>dotNET runtime error | 3ds Max</h4>
+<p>If at start VSSP, VMPP, CMPP or other product from SIGER STUDIO for 3ds Max you receive the error message:</p>
+<div class="box-content"><em>// runtime error : dotnet runtime exception: An attempt was made to load an assembly from a network location wich would have caused the assembly to be sandboxed in previous versions of the .NET Framework. This release of the .NET Framework does not enable CAS policy by default, so this load may be dangerous. If this load is not intended to sandbox the assembly, please enable the loadFromRemoteSources switch.” //</em></div>
+<p><strong>Do the following:</strong><br>
+<strong>1.</strong> Open in Notepad file “3dsmax.exe.config” from 3ds Max root directory.<br>
+<strong>2.</strong> Add the following lines to the 3dsmax.exe.config:</p>
+<pre><code>
+&lt;runtime&gt;
+&lt;loadFromRemoteSources enabled="true" /&gt;
+&lt;/runtime&gt;
+</code></pre>
+<p><strong>3.</strong> Our full 3dsmax.exe.config file looks like this:</p>
+<pre><code>
+&lt;?xml version="1.0"?&gt;
+&lt;configuration&gt;
+&lt;startup useLegacyV2RuntimeActivationPolicy="true"&gt;
+&lt;supportedRuntime version="v4.0"/&gt;
+&lt;/startup&gt;
+&lt;system.diagnostics&gt;
+&lt;assert assertuienabled="false"/&gt;
+&lt;sources&gt;
+&lt;!-- This removes Binding error messages coming from AdWindows components --&gt;
+&lt;source name="System.Windows.Data" switchName="SourceSwitch"&gt;
+&lt;listeners&gt;
+&lt;remove name="Default" /&gt;
+&lt;/listeners&gt;
+&lt;/source&gt;
+&lt;/sources&gt;
+&lt;switches&gt;
+&lt;add name="SourceSwitch" value="All" /&gt;
+&lt;/switches&gt;
+&lt;trace autoflush="true" indentsize="4"&gt;&lt;/trace&gt;
+&lt;/system.diagnostics&gt;
+<span style="color: #75a1bf;">&lt;runtime&gt;
+&lt;loadFromRemoteSources enabled="true" /&gt;
+&lt;/runtime&gt;</span>
+&lt;/configuration&gt;
+</code></pre>
+<p><strong>4.</strong> Save file and restart 3ds Max.</p>
+                <ul class="image-gallery  linked">
+                                    </ul>
+    			</div>
+	
+	<footer class="entry-meta">
+			</footer>				
+					
+				
+			
+							</div>		
+
+			
+						
+
+			
+
+	</div>
+</div>
+
+
+<!-- -->
+
+
+				</div>
+</div>
+
+
+
+	<div class="overlay overlay-data">	
+		<div type="button" class="overlay-close"></div>
+			<div class="site-search">
+				<div class="site-search-inner">
+					<div class="widget widget_search">	
+<form role="search" method="get" class="search-form" action="https://www.sigershop.eu/">
+	<div class="form-group">
+		<input type="hidden" name="post_types" value="page,post">
+		<input type="text" name="s" id="search-form" class="form-control" value="" placeholder="Search…">
+		<button type="submit" class="btn btn-default" value="Submit"><i class="fa fa-search"></i></button>
+	</div>
+	<div class="clear"></div>
+</form>
+
+</div>				</div>
+			</div>
+        </div>
+
+<div class="footer-combined">
+
+<div class="footer">
+	<div class="container">
+	
+				
+		<div class="row">	
+					
+									<div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">			
+						<div id="nav_menu-10" class="footer-widget widget_nav_menu"><div class="menu-footer-container"><ul id="menu-footer" class="menu"><li id="menu-item-28" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-28"><a href="https://www.sigershop.eu/imprint-and-legal-information/">Imprint</a></li>
+<li id="menu-item-4715" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-4715"><a href="https://www.sigershop.eu/about-us/">About Us</a></li>
+<li id="menu-item-35" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-35"><a href="https://www.sigershop.eu/siger-studio-end-user-license-agreement/">Terms and Conditions</a></li>
+<li id="menu-item-39" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-39"><a href="https://www.sigershop.eu/privacy-policy/">Privacy Policy</a></li>
+<li id="menu-item-1180" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1180"><a href="https://www.sigershop.eu/contact-us/">Contact Us</a></li>
+</ul></div></div>					
+					</div>
+					
+								
+									<div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">			
+						<div id="nav_menu-11" class="footer-widget widget_nav_menu"><div class="menu-support-container"><ul id="menu-support" class="menu"><li id="menu-item-20609" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-20609"><a href="https://www.sigershop.eu/documentation/">Product Documentation</a></li>
+<li id="menu-item-20610" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-20610"><a href="https://www.sigershop.eu/faq/">FAQ</a></li>
+<li id="menu-item-20611" class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-1117 current_page_item menu-item-20611"><a href="https://www.sigershop.eu/doc-troubleshooting/">Troubleshooting General</a></li>
+<li id="menu-item-20613" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-20613"><a href="https://www.sigershop.eu/contact-support/">Contact Support</a></li>
+</ul></div></div>					
+					</div>
+					
+								
+									<div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">			
+						<div id="text-3" class="footer-widget widget_text">			<div class="textwidget">Our goal at SIGER STUDIO is to provide good resource for designers and artists.
+As this resource is ALL about quality and NOT quantity there is currently only a limited amount of products but we will do best to keep the list of content growing.</div>
+		</div>					
+					</div>
+					
+								
+									<div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">			
+						<div id="nav_menu-12" class="footer-widget widget_nav_menu"><div class="menu-social-media-container"><ul id="menu-social-media" class="menu"><li id="menu-item-20704" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-20704"><a target="_blank" href="https://www.facebook.com/pages/Siger-Studio/185312571505874"><i class="_mi _before dashicons dashicons-facebook-alt" aria-hidden="true"></i><span>Facebook</span></a></li>
+<li id="menu-item-20705" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-20705"><a target="_blank" href="https://twitter.com/Sigerstudio"><i class="_mi _before dashicons dashicons-twitter" aria-hidden="true"></i><span>Twitter</span></a></li>
+<li id="menu-item-20706" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-20706"><a target="_blank" href="https://plus.google.com/+SIGERstudio"><i class="_mi _before dashicons dashicons-googleplus" aria-hidden="true"></i><span>Google+</span></a></li>
+<li id="menu-item-20707" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-20707"><a target="_blank" href="https://www.youtube.com/user/SIGERstudio"><i class="_mi _before fa fa-youtube-play" aria-hidden="true"></i><span>Youtube</span></a></li>
+</ul></div></div>					
+					</div>
+					
+									
+						
+				
+										
+				
+						
+		</div>
+			</div>
+	
+</div>
+
+
+<div class="copyright">
+	<div class="container">
+		
+		<div class="row">	
+		
+				
+				
+		<div class="copyright-message">
+		
+							
+						
+			© 2008 -<span class="description"> 2018 SIGER STUDIO
+</span>				
+		</div>	
+		
+		<!-- -->	
+			
+				
+		
+		
+				
+		
+			
+				<span class="pull-right" style="margin:0px 0px 0px 0px">			 
+					<img src="./Troubleshooting General __files/icons-payment.png" style="height:20px;">				</span>	
+				
+		
+				
+		
+		
+				
+			
+		</div>	
+				</div>
+	
+</div>
+		
+</div>
+
+
+			<div id="backtotop" style="display: none;"><i class="fa fa-arrow-up"></i></div>
+	
+	<!--[if lte IE 8]>
+		<script type="text/javascript" src="https://www.sigershop.eu/wp-content/themes/Kiwi/js/respond.min.js"></script>
+	<![endif]-->
+	
+	
+				
+			
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-49296732-2', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>              
+ jQuery(function() {
+	jQuery('.kiwi-nav, .top-menu').smartmenus({
+		keepInViewport: true,
+		mainMenuSubOffsetX: 0,
+		subMenusSubOffsetY: 0,
+		subIndicatorsText:''
+	});
+}); 
+ 
+ 
+// WOW ANIMATION
+new WOW().init();
+
+
+// Truncate titles
+	jQuery(function ($) {                
+		 $(window).load(function() {                   
+			$('.mp-vc-items .truncate.one-line h4 a, .widget-mk-kiwi h3 a').trunk8({
+			  lines: 1,
+			  fill: '...'
+			}); 
+
+			$('.mp-vc-items .truncate.two-lines h4 a').trunk8({
+			  lines: 2,
+			  fill: '...'
+			});	
+			
+			$('.mp-vc-items .truncate.three-lines h4 a').trunk8({
+			  lines: 3,
+			  fill: '...'
+			});
+			
+			$('.mp-vc-items .truncate.four-lines h4 a').trunk8({
+			  lines: 4,
+			  fill: '...'
+			});
+	 });               
+ });  
+</script>
+
+<script type="text/javascript">
+			jQuery( document ).ready( function($) {         
+				$(document).ready(function() {				  			  
+				   $('.flex-edd-images ul.slides').slick({
+					  infinite: false,
+					  slidesToShow: 4,
+					  slidesToScroll: 1,
+					  autoplay: false,
+					  rtl: false,
+					  autoplaySpeed: 2000,
+					  speed: 1000,
+					  prevArrow: $('.flex-edd-images .flex-direction-nav .flex-prev'),
+					  nextArrow: $('.flex-edd-images .flex-direction-nav .flex-next'),
+					  
+					  responsive: [
+						{
+						  breakpoint: 768,
+						  settings: {
+							slidesToShow: 2,
+							slidesToScroll: 1,
+						  }
+						},
+						{
+						  breakpoint: 480,
+						  settings: {
+							slidesToShow: 1,
+							slidesToScroll: 1,
+						  }
+						}
+					  ],
+					  
+					}); 
+			});
+		}
+);
+</script>
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript">
+			jQuery( document ).ready( function($) {         
+				$(document).ready(function() {				  			  
+				  $('.grid-masonry').masonry({ 
+					itemSelector: 'article',
+					singleMode: true,
+					originLeft: true,	  
+				}); 
+			});
+		}
+);
+</script>
+
+
+				
+
+
+
+
+
+
+<!-- Slick Slider -->
+<script type="text/javascript">
+			jQuery( document ).ready( function($) {         
+				$(document).ready(function() {				  			  
+				  $('.kiwi-slider-settings .slick-slider').slick({
+			  dots: false,
+			  adaptiveHeight: true,			  
+				  infinite: true,
+				  slidesToShow: 1,
+				  slidesToScroll: 1,
+				  autoplay: true,
+				  rtl: false,
+				  autoplaySpeed: 4000,
+				  speed: 1000,
+				  prevArrow: $('.post .flex-direction-nav .flex-prev'),
+				  nextArrow: $('.post .flex-direction-nav .flex-next'),
+				  
+				  responsive: [
+					{
+					  breakpoint: 768,
+					  settings: {
+						slidesToShow: 1,
+						slidesToScroll: 1,
+					  }
+					},
+					{
+					  breakpoint: 480,
+					  settings: {
+						slidesToShow: 1,
+						slidesToScroll: 1,
+					  }
+					}
+				  ],
+			  
+			}); 
+			});
+		}
+);
+</script>
+			
+<script> 
+  jQuery(function ($) {	
+	$(window).load(function() {		 
+		$( "#overlay-menu" ).click(function() {
+            $( ".overlay" ).addClass('overlay-open');
+        });
+        $( ".overlay-close" ).click(function() {
+            $( ".overlay" ).removeClass('overlay-open');
+        });
+	});
+});
+</script> 
+
+
+
+
+	<script>
+		jQuery(document).ready(function($) {
+			$('#edd-discount-code-wrap').show();
+		});
+	</script>
+<script type="text/javascript">
+/* <![CDATA[ */
+var edd_scripts = {"ajaxurl":"https:\/\/www.sigershop.eu\/wp-admin\/admin-ajax.php","position_in_cart":"","has_purchase_links":"","already_in_cart_message":"You have already added this item to your cart","empty_cart_message":"Your cart is empty","loading":"Loading","select_option":"Please select an option","is_checkout":"0","default_gateway":"paypal","redirect_to_checkout":"0","checkout_page":"https:\/\/www.sigershop.eu\/checkout\/","permalinks":"1","quantities_enabled":"1","taxes_enabled":"1"};
+/* ]]> */
+</script>
+<script type="text/javascript" src="./Troubleshooting General __files/edd-ajax.min.js.download" defer="" onload=""></script>
+<script type="text/javascript" src="./Troubleshooting General __files/jquery.cookie.js.download" defer="" onload=""></script>
+<script type="text/javascript" src="./Troubleshooting General __files/jquery.navgoco.min.js.download" defer="" onload=""></script>
+<script type="text/javascript" src="./Troubleshooting General __files/main.js.download" defer="" onload=""></script>
+<script type="text/javascript" src="./Troubleshooting General __files/imagesloaded.min.js.download" defer="" onload=""></script>
+<script type="text/javascript" src="./Troubleshooting General __files/modernizr.js.download" defer="" onload=""></script>
+<script type="text/javascript" src="./Troubleshooting General __files/theme-kiwi.js.download" defer="" onload=""></script>
+<script type="text/javascript" src="./Troubleshooting General __files/jquery.smartmenus.min.js.download" defer="" onload=""></script>
+<script type="text/javascript" src="./Troubleshooting General __files/jquery.smartmenus.bootstrap.min.js.download" defer="" onload=""></script>
+<script type="text/javascript" src="./Troubleshooting General __files/masonry.min.js.download" defer="" onload=""></script>
+<script type="text/javascript" src="./Troubleshooting General __files/jquery.prettyPhoto.js.download" defer="" onload=""></script>
+<script type="text/javascript">
+/* <![CDATA[ */
+var ubermenu_data = {"remove_conflicts":"on","reposition_on_load":"off","intent_delay":"300","intent_interval":"100","intent_threshold":"7","scrollto_offset":"50","scrollto_duration":"1000","responsive_breakpoint":"959","accessible":"on","retractor_display_strategy":"responsive","touch_off_close":"on","submenu_indicator_close_mobile":"on","collapse_after_scroll":"on","v":"3.4","configurations":["textures","textures-2","main"],"ajax_url":"https:\/\/www.sigershop.eu\/wp-admin\/admin-ajax.php","plugin_url":"https:\/\/www.sigershop.eu\/wp-content\/plugins\/ubermenu\/","disable_mobile":"off","prefix_boost":"","aria_role_navigation":"off","aria_expanded":"off","aria_hidden":"off","aria_controls":"","aria_responsive_toggle":"off","theme_locations":{"main_navigation":"Main Navigation","top_navigation":"Top Navigation","footer_navigation":"Footer Navigation","404_navigation":"404 Page Navigation","header_nav_first":"Header first half","header_nav_second":"Header second half","nonlogged_navigation":"Navigation for non-logged in users","logged_navigation":"Navigation for logged in users","vendor_navigation":"Navigation for logged in vendors"}};
+/* ]]> */
+</script>
+<script type="text/javascript" src="./Troubleshooting General __files/ubermenu.min.js.download" defer="" onload=""></script>
+<script type="text/javascript" src="./Troubleshooting General __files/jquery.cycle2.min.js.download" defer="" onload=""></script>
+<script type="text/javascript" src="./Troubleshooting General __files/wp-embed.min.js.download" defer="" onload=""></script>
+
+							
+					<script>
+					  jQuery(document).ready(function() {
+					    jQuery("a[rel^='prettyPhoto']").prettyPhoto({
+					    	social_tools : false,
+					    	show_title : false
+					    });
+					  });
+					</script>
+
+					
+				
+    
+
+
+
+</div><iframe name="stripeXDM_default35579_provider" id="stripeXDM_default35579_provider" aria-hidden="true" src="./Troubleshooting General __files/channel.html" frameborder="0" style="position: absolute; top: -2000px; left: 0px;"></iframe><iframe src="./Troubleshooting General __files/outer.html" frameborder="0" allowtransparency="true" scrolling="no" tabindex="-1" aria-hidden="true" style="width: 1px !important; height: 1px !important; position: fixed !important; visibility: hidden !important; pointer-events: none !important;"></iframe></body></html>

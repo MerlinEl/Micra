@@ -44,7 +44,6 @@ rcmenu mcCityManDialogMenu (
 		separator m4_sep_2
 		menuItem m4_5 "Quick Semantic Materials"
 		separator m4_sep_3
-		menuItem m4_8 "Filter Unlinked Objects"
 		menuItem m4_6 "Link Collision(s) to closest Object and Fix Name"
 		menuItem m4_7 "Instance Collision to Selected Models"
 	)
@@ -55,6 +54,8 @@ rcmenu mcCityManDialogMenu (
 	)
 	subMenu "Select" (
 	
+		menuItem m6_0 "Filter Unlinked Objects"
+		menuItem m6_3 "Filter Objects Without Lods"
 		menuItem m6_1 "Select Instances Unique"
 		menuItem m6_2 "Select Instances and Objects Unique"
 	)
@@ -228,13 +229,13 @@ rcmenu mcCityManDialogMenu (
 	)
 	--m1------------------------------------------------------------------------------------------------
 	on m1_0 picked do undo label:(m1_0.Text) on selectLods(#("LOD1", "LOD2"))
-	on m1_1 picked do undo label:(m1_1.Text) on mcMax.selectObjectsByName "LOD0" visibleOnly:false
-	on m1_2 picked do undo label:(m1_2.Text) on mcMax.selectObjectsByName "LOD1" visibleOnly:false
-	on m1_3 picked do undo label:(m1_3.Text) on mcMax.selectObjectsByName "LOD2" visibleOnly:false
+	on m1_1 picked do undo label:(m1_1.Text) on mcMax.selectObjectsByName "LOD0" visibleOnly:false exclude:#("coll", "occ")
+	on m1_2 picked do undo label:(m1_2.Text) on mcMax.selectObjectsByName "LOD1" visibleOnly:false exclude:#("coll", "occ")
+	on m1_3 picked do undo label:(m1_3.Text) on mcMax.selectObjectsByName "LOD2" visibleOnly:false exclude:#("coll", "occ")
 	--sep1
-	on m1_4 picked do undo label:(m1_4.Text) on mcMax.selectObjectsByName "LOD0"
-	on m1_5 picked do undo label:(m1_5.Text) on mcMax.selectObjectsByName "LOD1"
-	on m1_6 picked do undo label:(m1_6.Text) on mcMax.selectObjectsByName "LOD2"
+	on m1_4 picked do undo label:(m1_4.Text) on mcMax.selectObjectsByName "LOD0"  exclude:#("coll", "occ")
+	on m1_5 picked do undo label:(m1_5.Text) on mcMax.selectObjectsByName "LOD1"  exclude:#("coll", "occ")
+	on m1_6 picked do undo label:(m1_6.Text) on mcMax.selectObjectsByName "LOD2"  exclude:#("coll", "occ")
 	--sep2
 	on m1_7 picked do undo label:(m1_7.Text) on selectLodByIndex 1
 	on m1_8 picked do undo label:(m1_8.Text) on selectLodByIndex 2 --::gCityManager.selectVisibleNodesByName "lod2"
@@ -266,13 +267,17 @@ rcmenu mcCityManDialogMenu (
 	--sep3
 	on m4_6 picked do if (queryBox "Link Selected Collision(s) to closest LOD0 and Rename?" title:"Warning:") do undo label:(m4_6.Text) on linkCollisionsByClosestObjectAndFixName()
 	on m4_7 picked do distributeInstancesInToSelection()
-	on m4_8 picked do undo label:(m4_8.Text) on select (for o in selection where o.parent == undefined collect o)
 	--m5------------------------------------------------------------------------------------------------
 	on m5_1 picked do fileIn (micra.RootDir + "LS3D_Geometry_Optimizer_v0.03.ms")
 	on m5_2 picked do fileIn (micra.RootDir + "LS3D_Curb_Crumple.ms") 
 	--m6------------------------------------------------------------------------------------------------
+	on m6_0 picked do undo label:(m6_0.Text) on select (for o in selection where o.parent == undefined collect o)
 	on m6_1 picked do undo label:(m6_1.Text) on mcMax.selectUniqueInstances selection
 	on m6_2 picked do undo label:(m6_2.Text) on mcMax.selectUniqueInstances selection appendSingles:true
+	on m6_3 picked do undo label:(m6_3.Text) on select (for o in selection where (
+		select o
+		LS3DGUP.LODU.GetNumLODs() == 0 
+	) collect o)
 	--m9------------------------------------------------------------------------------------------------
 	on m9_1 picked do undo label:(m9_1.Text) on mcMax.selectObjectsByMaterial visibleOnly:false
 	on m9_2 picked do undo label:(m9_2.Text) on mcMax.selectObjectsByMaterialID visibleOnly:false --pick first id if not face selected

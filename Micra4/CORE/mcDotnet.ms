@@ -69,7 +69,7 @@ Struct MICRA_DOTNET (
 		local cls = dotNet.getType class_name  --pickup class from memory
 		if cls == undefined or forceLoad do (  --if dll is not loaded 
 			
-			dotNet.loadAssembly (micra.AssemblyDir + dll_name + ".dll") --load dll in to memory
+			dotNet.loadAssembly (micra.AssemblyDir + dll_name + ".dll") --load dll in to memory (but lock the dll file)
 		)
 		cls = dotNet.getType class_name  --pickup class from memory
 		if cls == undefined do return undefined

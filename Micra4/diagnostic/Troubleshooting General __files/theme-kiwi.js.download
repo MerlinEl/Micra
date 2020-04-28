@@ -1,0 +1,27 @@
+// Masonry
+/* jQuery(function ($) { 
+ var $container = $('.grid-masonry');
+	$container.imagesLoaded( function() {
+	$container.masonry({
+			itemSelector: 'article',
+			singleMode: true,
+		});
+	});  
+}); */
+
+// Scroll to top	
+jQuery(function ($) {	
+	$(window).scroll(function() {
+		if($(this).scrollTop() != 0) {
+			$('#backtotop').fadeIn();	
+		} else {
+			$('#backtotop').fadeOut();
+		}
+	});
+ 
+	$('#backtotop').click(function() {
+		$('body,html').animate({scrollTop:0},800);
+	});	
+});
+
+

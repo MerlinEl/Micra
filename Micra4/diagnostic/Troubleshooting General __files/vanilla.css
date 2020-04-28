@@ -1,0 +1,116 @@
+/* UberMenu - Copyright 2011-2017, SevenSpark */
+.ubermenu-skin-vanilla {
+  font-size: 12px;
+  color: #888888;
+}
+.ubermenu-skin-vanilla .ubermenu-target {
+  color: #999999;
+}
+.ubermenu-skin-vanilla .ubermenu-target-description {
+  color: #aaaaaa;
+}
+.ubermenu-skin-vanilla.ubermenu-responsive-toggle {
+  background: #f9f9f9;
+  color: #888888;
+  font-size: 12px;
+  text-transform: none;
+  font-weight: normal;
+}
+.ubermenu-skin-vanilla.ubermenu-responsive-toggle:hover {
+  background: #f0f0f0;
+  color: #444444;
+}
+.ubermenu-skin-vanilla {
+  border: none;
+  background: transparent;
+}
+.ubermenu-skin-vanilla .ubermenu-item-level-0.ubermenu-current-menu-item > .ubermenu-target,
+.ubermenu-skin-vanilla .ubermenu-item-level-0.ubermenu-current-menu-parent > .ubermenu-target,
+.ubermenu-skin-vanilla .ubermenu-item-level-0.ubermenu-current-menu-ancestor > .ubermenu-target {
+  color: #444444;
+  background: transparent;
+}
+.ubermenu-skin-vanilla .ubermenu-item.ubermenu-item-level-0 > .ubermenu-highlight {
+  color: #4d90fe;
+  background: transparent;
+}
+.ubermenu-skin-vanilla.ubermenu-vertical .ubermenu-item-level-0 > .ubermenu-target {
+  background: transparent;
+}
+.ubermenu-skin-vanilla .ubermenu-item-level-0 > .ubermenu-target {
+  font-weight: normal;
+  color: #888888;
+  text-transform: none;
+  border-left: none;
+}
+body:not(.rtl) .ubermenu-skin-vanilla.ubermenu-horizontal .ubermenu-item-level-0:first-child > .ubermenu-target {
+  box-shadow: none;
+}
+.ubermenu-skin-vanilla .ubermenu-item-level-0:hover > .ubermenu-target,
+.ubermenu-skin-vanilla .ubermenu-item-level-0.ubermenu-active > .ubermenu-target {
+  background: transparent;
+  color: #222222;
+}
+.ubermenu-skin-vanilla .ubermenu-item-level-0 > .ubermenu-submenu-type-stack > .ubermenu-item > .ubermenu-target {
+  color: #888888;
+}
+.ubermenu-skin-vanilla .ubermenu-item-level-0 > .ubermenu-submenu-type-stack > .ubermenu-item > .ubermenu-target:hover {
+  color: #222222;
+}
+.ubermenu-skin-vanilla .ubermenu-submenu.ubermenu-submenu-drop {
+  background: #f9f9f9;
+  border: 1px solid #e0e0e0;
+}
+.ubermenu-skin-vanilla.ubermenu-horizontal .ubermenu-item-level-0 > .ubermenu-submenu-drop {
+  border-top: 1px solid #e0e0e0;
+}
+.ubermenu-skin-vanilla .ubermenu-tab-content-panel {
+  background: #f9f9f9;
+}
+.ubermenu-skin-vanilla .ubermenu-submenu,
+.ubermenu-skin-vanilla .ubermenu-submenu .ubermenu-target {
+  color: #999999;
+}
+.ubermenu-skin-vanilla .ubermenu-submenu .ubermenu-highlight {
+  color: #4d90fe;
+}
+.ubermenu-skin-vanilla .ubermenu-submenu .ubermenu-target:hover,
+.ubermenu-skin-vanilla .ubermenu-submenu .ubermenu-active > .ubermenu-target {
+  color: #111111;
+}
+.ubermenu-skin-vanilla .ubermenu-submenu .ubermenu-target > .ubermenu-target-description {
+  color: #aaaaaa;
+}
+.ubermenu-skin-vanilla .ubermenu-submenu .ubermenu-active > .ubermenu-target > .ubermenu-target-description {
+  color: #666666;
+}
+.ubermenu-skin-vanilla .ubermenu-submenu .ubermenu-item-header > .ubermenu-target {
+  font-weight: bold;
+  color: #777777;
+}
+.ubermenu-skin-vanilla .ubermenu-submenu .ubermenu-item-header.ubermenu-has-submenu-stack > .ubermenu-target {
+  border-bottom: 1px solid #e9e9e9;
+}
+.ubermenu-skin-vanilla .ubermenu-submenu .ubermenu-item-header > .ubermenu-target:hover {
+  color: #222222;
+}
+.ubermenu-skin-vanilla .ubermenu-submenu .ubermenu-current-menu-item > .ubermenu-target {
+  color: #444444;
+  background: transparent;
+}
+.ubermenu-nojs.ubermenu-skin-vanilla .ubermenu-submenu .ubermenu-tabs .ubermenu-tab:hover > .ubermenu-target,
+.ubermenu-skin-vanilla .ubermenu-submenu .ubermenu-tab.ubermenu-active > .ubermenu-target {
+  background: #eeeeee;
+  color: #111111;
+}
+.ubermenu-skin-vanilla .ubermenu-tabs-group,
+.ubermenu-skin-vanilla .ubermenu-tab > .ubermenu-target,
+.ubermenu-skin-vanilla .ubermenu-tab-content-panel {
+  border-color: #eeeeee;
+}
+.ubermenu-skin-vanilla .ubermenu-submenu-drop {
+  border-bottom-width: 3px;
+}
+.ubermenu-skin-vanilla.ubermenu-transition-fade .ubermenu-item-level-0 > .ubermenu-submenu-drop {
+  margin-top: 0;
+}

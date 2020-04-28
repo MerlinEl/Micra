@@ -1,0 +1,72 @@
+(function( $ ) {
+	'use strict';
+
+	/**
+	 * All of the code for your public-facing JavaScript source
+	 * should reside in this file.
+	 *
+	 * Note: It has been assumed you will write jQuery code here, so the
+	 * $ function reference has been prepared for usage within the scope
+	 * of this function.
+	 *
+	 * This enables you to define handlers, for when the DOM is ready:
+	 *
+	 * $(function() {
+	 *
+	 * });
+	 *
+	 * When the window is loaded:
+	 *
+	 * $( window ).load(function() {
+	 *
+	 * });
+	 *
+	 * ...and/or other possibilities.
+	 *
+	 * Ideally, it is not considered best practise to attach more than a
+	 * single DOM-ready or window-load handler for a particular page.
+	 * Although scripts in the WordPress core, Plugins and Themes may be
+	 * practising this, we should strive to set a better example in our own work.
+	 */
+	 
+	 
+	// Tooltip 
+	$(window).load(function() {		 
+	$(".mp-vc-tooltip").tooltip({
+			html: true,
+			template: '<div class="tooltip mp-vc-items"><div class="tooltip-arrow"></div><div class="tooltip-inner"></div></div>',
+		});			  
+	});
+
+	// Truncate Titles               
+	 $(window).load(function() {                   
+		$('.mp-vc-items .truncate.one-line h4 a, .mp-checkout-edd-theme .mp-vc-items.mp-custom-theme .truncate.one-line h3 a, .mp-squarecode-edd-theme .mp-vc-items .truncate.one-line a.more-link').trunk8({
+		  lines: 1,
+		  fill: '...'
+		}); 
+
+		$('.mp-vc-items .truncate.two-lines h4 a, .mp-checkout-edd-theme .mp-vc-items.mp-custom-theme .truncate.two-lines h3 a, .mp-squarecode-edd-theme .mp-vc-items .truncate.two-lines a.more-link').trunk8({
+		  lines: 2,
+		  fill: '...'
+		});	
+		
+		$('.mp-vc-items .truncate.three-lines h4 a, .mp-checkout-edd-theme .mp-vc-items.mp-custom-theme .truncate.three-lines h3 a, .mp-squarecode-edd-theme .mp-vc-items .truncate.three-lines a.more-link').trunk8({
+		  lines: 3,
+		  fill: '...'
+		});
+		
+		$('.mp-vc-items .truncate.four-lines h4 a, .mp-checkout-edd-theme .mp-vc-items.mp-custom-theme .truncate.four-lines h3 a, .mp-squarecode-edd-theme .mp-vc-items .truncate.four-lines a.more-link').trunk8({
+		  lines: 4,
+		  fill: '...'
+		});
+	 });               
+	
+	
+	 // Matchheight js
+	$(document).ready(function() {
+		$('.mp-vc-items .mp-equal-heights').matchHeight();
+	});
+	 
+
+})( jQuery );
+

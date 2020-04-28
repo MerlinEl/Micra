@@ -1,0 +1,77 @@
+@font-face {
+  font-family: 'easy-image-gallery';
+  src: url('../fonts/easy-image-gallery.eot');
+  src: url('../fonts/easy-image-gallery.eot?#iefix') format('embedded-opentype'), url('../fonts/easy-image-gallery.woff') format('woff'), url('../fonts/easy-image-gallery.ttf') format('truetype'), url('../fonts/easy-image-gallery.svg#easy-image-gallery') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+.popup {
+  display: block;
+}
+.popup .icon-view:before {
+  content: "\e005";
+}
+.popup .icon-view {
+  font-family: 'easy-image-gallery';
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  font-size: 48px;
+  margin-left: -24px;
+  margin-top: -24px;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  color: #fff;
+  opacity: 0;
+  visibility: visible;
+  -webkit-transition: opacity 0.1s linear;
+  -moz-transition: opacity 0.1s linear;
+  -ms-transition: opacity 0.1s linear;
+  -o-transition: opacity 0.1s linear;
+  transition: opacity 0.1s linear;
+  z-index: 1;
+}
+.popup .overlay {
+  visibility: hidden;
+  display: block;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  opacity: 0.4;
+  -webkit-transition: all 0.1s linear;
+  -moz-transition: all 0.1s linear;
+  -ms-transition: all 0.1s linear;
+  -o-transition: all 0.1s linear;
+  transition: all 0.1s linear;
+}
+.popup:hover .overlay {
+  visibility: visible;
+  background: #000;
+}
+.popup:hover .icon-view {
+  opacity: 0.8;
+}
+.image-gallery {
+  margin: 0;
+  padding: 0;
+}
+.image-gallery li {
+  display: inline-block;
+  padding: 0 20px 20px 0;
+  margin: 0;
+}
+.image-gallery a {
+  position: relative;
+  display: block;
+}
+.image-gallery a img {
+  display: block;
+}
+.image-gallery ul {
+  margin-bottom: 0;
+}

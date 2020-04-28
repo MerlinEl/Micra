@@ -1,0 +1,76 @@
+@font-face {
+	font-family: 'cart';
+	src:url('../fonts/cart.eot');
+	src:url('../fonts/cart.eot?#iefix') format('embedded-opentype'),
+		url('../fonts/cart.woff') format('woff'),
+		url('../fonts/cart.ttf') format('truetype'),
+		url('../fonts/cart.svg#cart') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+
+.wpmenucart-icon-shopping-cart-0:before {
+	font-family: 'FontAwesome';
+	speak: none;
+	font-style: normal;
+	font-weight: normal;
+    display: inline;
+    width: auto;
+    height: auto;
+    line-height: normal;
+    text-decoration: inherit;
+	-webkit-font-smoothing: antialiased;
+    vertical-align: baseline;
+    background-image: none;
+    background-position: 0 0;
+    background-repeat: repeat;
+    margin-top: 0;
+    margin-right: 0.25em;
+}
+
+.wpmenucart-icon-shopping-cart-1:before,
+.wpmenucart-icon-shopping-cart-2:before,
+.wpmenucart-icon-shopping-cart-3:before,
+.wpmenucart-icon-shopping-cart-4:before,
+.wpmenucart-icon-shopping-cart-5:before,
+.wpmenucart-icon-shopping-cart-6:before,
+.wpmenucart-icon-shopping-cart-7:before,
+.wpmenucart-icon-shopping-cart-8:before,
+.wpmenucart-icon-shopping-cart-9:before,
+.wpmenucart-icon-shopping-cart-10:before,
+.wpmenucart-icon-shopping-cart-11:before,
+.wpmenucart-icon-shopping-cart-12:before,
+.wpmenucart-icon-shopping-cart-13:before {
+	font-family: 'cart';
+	speak: none;
+	font-style: normal;
+	font-weight: normal;
+    display: inline;
+    width: auto;
+    height: auto;
+    line-height: normal;
+    text-decoration: inherit;
+	-webkit-font-smoothing: antialiased;
+    vertical-align: baseline;
+    background-image: none;
+    background-position: 0 0;
+    background-repeat: repeat;
+    margin-top: 0;
+    margin-right: 0.25em;
+}
+
+.wpmenucart-icon-shopping-cart-0:before{content:"\f07a"}
+.wpmenucart-icon-shopping-cart-1:before{content:"\e000"}
+.wpmenucart-icon-shopping-cart-2:before{content:"\e001"}
+.wpmenucart-icon-shopping-cart-3:before{content:"\e002"}
+.wpmenucart-icon-shopping-cart-4:before{content:"\e003"}
+.wpmenucart-icon-shopping-cart-5:before{content:"\e004"}
+.wpmenucart-icon-shopping-cart-6:before{content:"\f07a"}
+.wpmenucart-icon-shopping-cart-7:before{content:"\e005"}
+.wpmenucart-icon-shopping-cart-8:before{content:"\e006"}
+.wpmenucart-icon-shopping-cart-9:before{content:"\e007"}
+.wpmenucart-icon-shopping-cart-10:before{content:"\e008"}
+.wpmenucart-icon-shopping-cart-11:before{content:"\e009"}
+.wpmenucart-icon-shopping-cart-12:before{content:"\e00a"}
+.wpmenucart-icon-shopping-cart-13:before{content:"\e00b"}

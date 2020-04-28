@@ -50,13 +50,13 @@ struct MICRA_MAX_STRUCTURE	(
 	fn unhideAll = (if (queryBox "Unhide All Objects?" title:"Action:") do unhide objects; max zoomext sel all),
 	fn hideSelected = (hide selection),
 	fn unhideSelected = (unhide selection; max zoomext sel),
-	fn selectObjectsByName str visibleOnly:true ignoreCase:true method:#any = (
+	fn selectObjectsByName str visibleOnly:true ignoreCase:true exclude:#() method:#any = (
 
 		select ( for o in objects where (
 		
-			(if visibleOnly then not o.isHidden else true) and
-			findString (toUpper o.name) str != undefined
-			
+			(if visibleOnly then not o.isHidden else true) and --if is visible
+			(findString (toUpper o.name) str != undefined) and --if name contains str
+			not (mcArray.wordFind exclude o.name ignoreCase:true) --if not excluded
 		) collect o )
 	),
 	fn selectObjectsByMaterial visibleOnly:true = (

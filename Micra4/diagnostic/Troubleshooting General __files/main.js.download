@@ -1,0 +1,42 @@
+jQuery(function($){ 
+
+	/**
+	 * Auto Open Parent with Sub Menu 
+	 */
+	
+	$('.wpb_category_n_menu_accordion.wpb_wcma_manu_parent_open_on > ul > li.wpb-wmca-menu-item-has-children > ul').show();
+	$('.wpb_category_n_menu_accordion.wpb_wcma_manu_parent_open_on > ul > li.wpb-wmca-menu-item-has-children').addClass('wpb-submenu-indicator-minus');
+
+
+	/**
+	 * Auto Open Parent Cat with Sub Cat
+	 */
+	
+	$('.wpb_category_n_menu_accordion.wpb_wcma_cat_parent_open_on > ul > li.cat-item-have-child > ul').show();
+	$('.wpb_category_n_menu_accordion.wpb_wcma_cat_parent_open_on > ul > li.cat-item-have-child').addClass('wpb-submenu-indicator-minus');
+
+
+	/**
+	 * Keep Current Menu Open
+	 */
+
+	$('.wpb_category_n_menu_accordion.wpb_wmca_current_menu_open_on > ul li.wpb-wmca-menu-item-has-children.current-menu-item > ul').show();
+	$('.wpb_category_n_menu_accordion.wpb_wmca_current_menu_open_on > ul li.wpb-wmca-menu-item-has-children.current-menu-item').addClass('wpb-submenu-indicator-minus');
+
+
+	/**
+	 * Keep Current Category Open
+	 */
+	
+	$('.wpb_category_n_menu_accordion.wpb_wmca_current_cat_open_on > ul li.cat-item-have-child.current-cat > ul').show();
+	$('.wpb_category_n_menu_accordion.wpb_wmca_current_cat_open_on > ul li.cat-item-have-child.current-cat').addClass('wpb-submenu-indicator-minus');
+
+
+	/**
+	 * Keep Selected Menu Open
+	 */
+	$('.wpb_category_n_menu_accordion.wpb_wmca_current_menu_open_on > ul li.wpb-wmca-menu-item-has-children.wpb_wmca_menu_item_keep_open > ul').show();
+	$('.wpb_category_n_menu_accordion.wpb_wmca_current_menu_open_on > ul li.wpb-wmca-menu-item-has-children.wpb_wmca_menu_item_keep_open').addClass('wpb-submenu-indicator-minus');
+	
+
+});
