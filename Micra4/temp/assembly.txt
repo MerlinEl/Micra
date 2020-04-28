@@ -1,0 +1,115 @@
+# Necessary imports to enable access to CSV reading component 
+from System.Reflection import Assembly
+assemblyPath = r"C:\CSVFramework\LumenWorks.Framework.IO.dll"
+assembly = Assembly.LoadFile(assemblyPath)
+clr.AddReference(assembly)
+from System.IO import StreamReader
+from LumenWorks.Framework.IO.Csv import CsvReader
+
+System.Reflection.Assembly.Load(System.IO.File.ReadAllBytes(path))
+
+using Microsoft.Cci;
+// [...]
+AssemblyNode assembly = AssemblyNode.GetAssembly(path);
+
+Demo application for ShadowCopy and cross AppDomain communication.
+https://github.com/Pondidum/PluginDemo
+
+
+
+
+
+You need to handle the CurrentDomain.ResolveEventHandler event as below, this event will be triggered whenever a reference is required:
+
+code to load assemblies:
+
+private void LoadAssem(){
+    AppDomain.CurrentDomain.AssemblyResolve += new ResolveEventHandler(CurrentDomain_AssemblyResolve);
+//use File.ReadAllBytes to avoid assembly locking
+    Assembly asm2 = Assembly.Load(File.ReadAllBytes("AssemblyPath"));
+    }
+Once a reference is needed it will call the below event:
+
+ private static string asmBase;
+//asmBase contains the folder where all your assemblies found.
+        public static Assembly CurrentDomain_AssemblyResolve(object sender, ResolveEventArgs args)
+        {
+            //This handler is called only when the common language runtime tries to bind to the assembly and fails.
+
+            //Retrieve the list of referenced assemblies in an array of AssemblyName.
+            Assembly MyAssembly, objExecutingAssemblies;
+            string strTempAssmbPath = "";
+            objExecutingAssemblies = args.RequestingAssembly;
+            AssemblyName[] arrReferencedAssmbNames = objExecutingAssemblies.GetReferencedAssemblies();
+
+            //Loop through the array of referenced assembly names.
+            foreach (AssemblyName strAssmbName in arrReferencedAssmbNames)
+            {
+                //Check for the assembly names that have raised the "AssemblyResolve" event.
+                if (strAssmbName.FullName.Substring(0, strAssmbName.FullName.IndexOf(",")) == args.Name.Substring(0, args.Name.IndexOf(",")))
+                {
+                    //Build the path of the assembly from where it has to be loaded.                
+                    strTempAssmbPath = asmBase + "\\" + args.Name.Substring(0, args.Name.IndexOf(",")) + ".dll";
+                    break;
+                }
+
+            }
+            //Load the assembly from the specified path.                    
+            MyAssembly = Assembly.Load(File.ReadAllBytes(strTempAssmbPath));
+
+            //Return the loaded assembly.
+            return MyAssembly;
+        }
+
+
+
+In DirectoryLoader, I added:
+
+public Assembly Load(byte [] asmBytes, byte [] symBytes = null)
+{
+    MemoryStream asm = new MemoryStream(asmBytes);
+    MemoryStream sym = new MemoryStream(symBytes);
+    return _context.LoadStream(asm, sym);
+}
+In the main method:
+
+                DirectoryLoader dLoader = new DirectoryLoader(@"C:\ClassLib\ClassLibrary1.dll", loadContext);
+                byte [] assembly = File.ReadAllBytes(@"C:\ClassLib\ClassLibrary1.dll");
+                // Can pass null if you lack symbols
+                byte [] symbols = File.ReadAllBytes(@"C:\ClassLib\ClassLibrary1.pdb");
+                Assembly loaded = dLoader.Load(assembly, symbols);
+                var class1 = loaded.GetType("ClassLibrary1.Class1" );
+                var method = class1.GetRuntimeMethod("GetValue", new Type[] { });
+                var result = method.Invoke(null, new object[] { });
+
+  .[static]<System.String>CreateQualifiedName <System.String>assemblyName <System.String>typeName
+  .[static]<System.Boolean>Equals <System.Object>objA <System.Object>objB
+  .[static]<System.Reflection.Assembly>GetAssembly <System.Type>type
+  .[static]<System.Reflection.Assembly>GetCallingAssembly()
+  .[static]<System.Reflection.Assembly>GetEntryAssembly()
+  .[static]<System.Reflection.Assembly>GetExecutingAssembly()
+  .[static]<System.Reflection.Assembly>Load <System.String>assemblyString
+  .[static]<System.Reflection.Assembly>Load <System.Reflection.AssemblyName>assemblyRef
+  .[static]<System.Reflection.Assembly>Load <System.Byte[]>rawAssembly
+  .[static]<System.Reflection.Assembly>Load <System.Byte[]>rawAssembly <System.Byte[]>rawSymbolStore
+  .[static]<System.Reflection.Assembly>Load <System.Reflection.AssemblyName>assemblyRef <System.Security.Policy.Evidence>assemblySecurity
+  .[static]<System.Reflection.Assembly>Load <System.String>assemblyString <System.Security.Policy.Evidence>assemblySecurity
+  .[static]<System.Reflection.Assembly>Load <System.Byte[]>rawAssembly <System.Byte[]>rawSymbolStore <System.Security.SecurityContextSource>securityContextSource
+  .[static]<System.Reflection.Assembly>Load <System.Byte[]>rawAssembly <System.Byte[]>rawSymbolStore <System.Security.Policy.Evidence>securityEvidence
+  .[static]<System.Reflection.Assembly>LoadFile <System.String>path
+  .[static]<System.Reflection.Assembly>LoadFile <System.String>path <System.Security.Policy.Evidence>securityEvidence
+  .[static]<System.Reflection.Assembly>LoadFrom <System.String>assemblyFile
+  .[static]<System.Reflection.Assembly>LoadFrom <System.String>assemblyFile <System.Security.Policy.Evidence>securityEvidence
+  .[static]<System.Reflection.Assembly>LoadFrom <System.String>assemblyFile <System.Byte[]>hashValue <System.Configuration.Assemblies.AssemblyHashAlgorithm>hashAlgorithm
+  .[static]<System.Reflection.Assembly>LoadFrom <System.String>assemblyFile <System.Security.Policy.Evidence>securityEvidence <System.Byte[]>hashValue <System.Configuration.Assemblies.AssemblyHashAlgorithm>hashAlgorithm
+  .[static]<System.Reflection.Assembly>LoadWithPartialName <System.String>partialName
+  .[static]<System.Reflection.Assembly>LoadWithPartialName <System.String>partialName <System.Security.Policy.Evidence>securityEvidence
+  .[static]<System.Boolean>ReferenceEquals <System.Object>objA <System.Object>objB
+  .[static]<System.Reflection.Assembly>ReflectionOnlyLoad <System.Byte[]>rawAssembly
+  .[static]<System.Reflection.Assembly>ReflectionOnlyLoad <System.String>assemblyString
+  .[static]<System.Reflection.Assembly>ReflectionOnlyLoadFrom <System.String>assemblyFile
+  .[static]<System.Reflection.Assembly>UnsafeLoadFrom <System.String>assemblyFile
+  
+  
+  
+  

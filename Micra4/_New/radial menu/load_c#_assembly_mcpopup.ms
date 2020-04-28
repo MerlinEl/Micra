@@ -111,3 +111,118 @@ circle_size = dotnetObject "System.Drawing.Size" 80 80
 	test_btn.Tag = (dotNetClass "Drawing.Image").FromFile  (micra.ImagesPath + "TooltipIcons\\tltp_flatten_01.png")
 	test_form.controls.add test_btn
 	mcDotnet.dShow test_form
+	
+	
+	
+	
+	
+	
+	
+global dynamicDll
+fn CreateDynamicDllClass = (
+
+  	if dynamicDll == undefined OR classof dynamicDll != dotnetobject OR NOT matchpattern ( dynamicDll.ToString() ) pattern:"Dynamics.DynamicDll" do
+  	(
+  		source = "
+using System;
+using System.Reflection;
+using System.IO;
+namespace Dynamics { // open namespace Dynamics
+	public class DynamicDll { // open class
+		public static Assembly GetAssembly(string filename) { //open GetAssembly Method
+			Assembly library = null;
+			using (FileStream fs = File.Open(filename, FileMode.Open)) { // open using FileStream
+				using (MemoryStream ms = new MemoryStream()) { // open using MemoryStream
+					byte[] buffer = new byte[1024];
+					int read = 0;
+					while ((read = fs.Read(buffer, 0, 1024)) > 0)
+					ms.Write(buffer, 0, read);
+					library = Assembly.Load(ms.ToArray());
+				} // end using MemoryStream
+			} // end using FileStream
+			return library;
+		} // end GetAssembly Method
+	} // end class
+} // end namespace Dynamics
+"
+  		csharpProvider = dotnetobject "Microsoft.CSharp.CSharpCodeProvider"
+  		compilerParams = dotnetobject "System.CodeDom.Compiler.CompilerParameters"
+  		compilerParams.GenerateInMemory = on
+  		compilerResults = csharpProvider.CompileAssemblyFromSource compilerParams #(source)
+  		dynamicDll = compilerResults.CompiledAssembly.CreateInstance "Dynamics.DynamicDll"
+  	)
+  	dynamicDll
+  )
+CreateDynamicDllClass()
+  --Test1 >  
+dynamicDll.GetAssembly (micra.AssemblyDir + "Orien.Tools.dll")
+cls = dotNet.getType "Orien.Tools.mcMath" 
+activator = (dotNetClass "System.Activator")
+mcMath_Instance = activator.CreateInstance cls
+--Math operations
+mcMath_Instance.minMax 100	1	50	--> 50
+mcMath_Instance.minMax -1	1	50	--> 1
+mcMath_Instance.minMax 100	1	200	--> 100
+  
+--Test2 >
+dynamicDll.GetAssembly ( micra.AssemblyDir + "Orien.NetUi.dll")
+cls = dotNet.GetType( "Orien.NetUi.mcPopUp"  )
+mcPopUp_Instance = (dotNetClass "System.Activator").CreateInstance cls
+p_types = mcPopUp_Instance.GetTypes() --works on enum
+p_options =  mcPopUp_Instance.GetOptions() --works on calss
+p_options.ConfirmToClose = true
+progb = mcPopUp_Instance.Create "Progress To" ""  p_types.E_Progress p_options --Trouble here (cant find Orien.Tools)
+progb.Show(mcMicraDialog)	
+progb.close()
+
+
+
+
+Global compilerParams
+fn CreateTestAssembly =
+(
+	source = ""
+	source += "using System;
+"
+	source += "using System.Linq;
+"
+	source += "public class testClass
+"
+	source += "{
+"
+	source += "}
+"
+
+	csharpProvider = dotnetobject "Microsoft.CSharp.CSharpCodeProvider"
+	compilerParams = dotnetobject "System.CodeDom.Compiler.CompilerParameters"
+
+	compilerParams.ReferencedAssemblies.Add "System.dll"
+    compilerParams.ReferencedAssemblies.Add "System.Core.dll"
+
+	compilerParams.GenerateInMemory = true
+	compilerResults = csharpProvider.CompileAssemblyFromSource compilerParams #(source)
+	
+	if (compilerResults.Errors.Count > 0 ) then
+	(
+		errs = stringstream ""
+		for i = 0 to (compilerResults.Errors.Count-1) do
+		(
+			err = compilerResults.Errors.Item[i]
+			format "Error:% Line:% Column:% %
+" err.ErrorNumber err.Line err.Column err.ErrorText to:errs 
+		)
+		MessageBox (errs as string) title: "Errors encountered while compiling C# code"
+		format "%
+" errs
+		undefined
+	)
+	else
+	(
+		compilerResults.CompiledAssembly.CreateInstance "testClass"
+	)
+)
+global testClass = CreateTestAssembly()
+compilerParams.ReferencedAssemblies.Add (micra.AssemblyDir + "Orien.Tools.dll")
+compilerParams.ReferencedAssemblies.Add ( micra.AssemblyDir + "Orien.NetUi.dll")
+
+	

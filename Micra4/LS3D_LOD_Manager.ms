@@ -26,7 +26,7 @@ rollout ls3dLodManagerDialog "LS3D LOD Manager:" width:480 height:116
 	spinner 'spn_d_lod1' "" pos:[400,44] width:68 height:16 range:[0,10000,150] type:#integer scale:1 align:#left
 	label 'lbl18' "Lod2:" pos:[372,64] width:32 height:16 align:#left
 	spinner 'spn_d_lod2' "" pos:[400,64] width:68 height:16 range:[0,10000,250] type:#integer scale:1 align:#left
-	checkbox 'chk_center_pivot' "Center Pivots" pos:[4,92] width:112 height:16 enabled:true checked:true align:#left
+	checkbox 'chk_center_pivot' "Center Pivots" pos:[4,92] width:112 height:16 enabled:true checked:false align:#left
 	--functions
 	fn addLod ld = (
 		

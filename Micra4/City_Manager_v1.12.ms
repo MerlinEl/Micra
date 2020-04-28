@@ -59,6 +59,7 @@ rcmenu mcCityManDialogMenu (
 		menuItem m6_4 "Find Duplicated Objects"
 		menuItem m6_1 "Find Instances Unique"
 		menuItem m6_2 "Find Instances and Objects Unique"
+		menuItem m6_5 "Find Lod 0"
 	)
 	subMenu "Advanced"(
 	
@@ -292,6 +293,16 @@ rcmenu mcCityManDialogMenu (
 	)
 	on m6_1 picked do undo label:(m6_1.Text) on mcMax.selectUniqueInstances selection
 	on m6_2 picked do undo label:(m6_2.Text) on mcMax.selectUniqueInstances selection appendSingles:true
+	on m6_5 picked do undo label:(m6_5.Text) on (
+	
+		local obj = selection[1]
+		if obj != undefined do (
+		
+			local base_name = mcString.cutRight obj.name trimChars:"_lod1" ignoreCase:true
+			local lod0_obj = getNodeByName(base_name + "_lod0")
+			if lod0_obj != undefined do select lod0_obj
+		)
+	)
 	on m6_3 picked do undo label:(m6_3.Text) on (
 		local sel = selection as array
 		local no_lod_objs =  (for o in sel where (
