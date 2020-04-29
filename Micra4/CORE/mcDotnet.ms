@@ -45,6 +45,7 @@ Struct MICRA_DOTNET (
 	Format = (dotnetClass "System.String").format,
 	fn getSource = getSourceFileName(), --get path of this script
 	/**
+	*@Replaced By mcCsharp.getClassInstance
 	*@Usage
 		Load Dll libraries from C#
 	*@Example
@@ -63,7 +64,7 @@ Struct MICRA_DOTNET (
 		net_xml_node.GetAttribute "icon"
 		net_xml_node.SetAttribute "icon" "89"
 		_mcXml.Save()
-	*/
+	
 	fn loadAssembly dll_name class_name params:#() forceLoad:false = (
 		
 		local cls = dotNet.getType class_name  --pickup class from memory
@@ -84,7 +85,7 @@ Struct MICRA_DOTNET (
 				activator.CreateInstance cls args
 			)
 		) catch (format "Unable to init Class:%\n\t%\n" class_name (getCurrentException()))
-	),
+	),*/
 	/*
 	*@Usage		convert max color to dotnet
 	*@Example 	
@@ -200,8 +201,9 @@ Struct MICRA_DOTNET (
 	),
 	fn addButtonToolTip dbtn show_text img_name = (
 	
+		if not mcCsharp.isLoaded() do return undefined
 		try (
-			local tltp = mcDotnet.loadAssembly "Orien.NetUi.dll" "Orien.NetUi.McImageTooltip" 
+			local tltp = mcCsharp.getClassInstance "Orien.NetUi.McImageTooltip" 
 			tltp.AutoSize = false
 			--Set up the delays for the ToolTip.
 		   /*tltp.AutoPopDelay = 5000;
@@ -326,17 +328,14 @@ Struct MICRA_DOTNET (
 	
 		if form == undefined or form.IsDisposed or not form.visible do return false
 		form.close()
-	),
+	)
+	/**
+	*@Replaced By mcCsharp.getClassInstance
+	*@Usage Load Assemblies
 	fn init = (
 		return OK --break for now (tsting another method)
 		if not doesFileExist micra.AssemblyDir do return ok
-		--Load Assemblies (future replacement for mcDotnet)
-		/**
-		*@Usage Contains new Libraries , Methods , UI components
-		*@Examples
-			mcGetCs.newColor 2 3 2
-			mcGetCs.NewFont "Impact" 20 (mcGetCs.FontStyles()).Bold
-		*/
+		
 		try (
 			dotNet.loadAssembly (micra.AssemblyDir + "Orien.Tools.dll")
 			dotNet.loadAssembly (micra.AssemblyDir + "Orien.NetUi.dll")
@@ -344,7 +343,7 @@ Struct MICRA_DOTNET (
 		) catch (format "Unable to load Orien Assemblies > %\n" (getCurrentException()))
 		Global mcGetCs = loadAssembly "Orien.Tools.dll" "Orien.Tools.McGetCs" 
 	),
-	_init = init()
+	_init = init()*/
 	/*<end>*/
 )	
  --create instance

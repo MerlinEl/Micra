@@ -1,3 +1,15 @@
+--FINAL TEST Coompilled assemby (merged all in to one)
+mcMath_cs = mcCSharp.getClassInstance "Orien.Tools.mcMath" 
+mcMath_Instance.minMax 100	1	50	--> 50
+mcMath_Instance.minMax -1	1	50	--> 1
+mcMath_Instance.minMax 100	1	200	--> 100
+
+mcConsole_cs = mcCSharp.instanceClass "Orien.NetUi.McConsole" 
+mcConsole_cs.show()
+mcConsole_cs.Log "hello"
+mcConsole_cs.Log "hello Rene" "Personal"
+mcConsole_cs.Log "hello Rene a:{0} b:{1}" "Formated" (dotnetArray #( 15, "Custom String" ))
+
 --Load Assemblies
 dotNet.loadAssembly (micra.AssemblyDir + "Orien.Tools.dll")
 dotNet.loadAssembly (micra.AssemblyDir + "Orien.NetUi.dll")
@@ -58,20 +70,43 @@ progb = mcPopUp_Instance.Create "A" "B"
 progb.Show()
 
 --Test3 >
-assembly_path1 = micra.AssemblyDir + "Orien.NetUi.dll"
-assemblyBytes = (dotnetClass "System.IO.File").ReadAllBytes assembly_path1
-myAssembly = (dotnetClass "System.Reflection.Assembly").Load assemblyBytes
-cls = myAssembly.getType "Orien.NetUi.McConsole" 
-McConsole_Instance = (dotNetClass "System.Activator").CreateInstance cls
+assembly_path1 = micra.AssemblyDir + "Orien.Tools.dll"
+assembly_path2 = micra.AssemblyDir + "Orien.NetUi.dll"
+assemblyBytes1 = (dotnetClass "System.IO.File").ReadAllBytes assembly_path1
+assemblyBytes2 = (dotnetClass "System.IO.File").ReadAllBytes assembly_path2
+myAssembly1 = (dotnetClass "System.Reflection.Assembly").Load assemblyBytes1
+myAssembly2 = (dotnetClass "System.Reflection.Assembly").Load assemblyBytes2
+
+cls2 = myAssembly2.getType "Orien.NetUi.McConsole" 
+McConsole_Instance = (dotNetClass "System.Activator").CreateInstance cls2
+
+cls1 = myAssembly1.getType "Orien.Tools.McDesktop" 
+McDesktop_Instance = (dotNetClass "System.Activator").CreateInstance cls1
+
 	McConsole_Instance.show()
 	McConsole_Instance.Log "hello"
 	McConsole_Instance.Log "hello Rene" "Personal"
-	McConsole_Instance.Log "hello Rene a:{0} b:{1}" "Formated" (new object[] { 15, "Custom String" })
+	McConsole_Instance.Log "hello Rene a:{0} b:{1}" "Formated" (dotnetArray #( 15, "Custom String" ))
 
---McConsole_Instance = (dotNetClass "System.Activator").CreateInstance cls mcMicraDialog
-  .Log <System.String>msg <System.String>tabName
-  .Log <System.String>msg <System.String>tabName <System.Object[]>args
-
+		
+--test4	
+assembly_path1 = micra.AssemblyDir + "Orien.Star.dll"
+assemblyBytes = (dotnetClass "System.IO.File").ReadAllBytes assembly_path1
+myAssembly = (dotnetClass "System.Reflection.Assembly").Load assemblyBytes
+cls = dotNet.getType "Orien.Tools.mcMath" 
+activator = (dotNetClass "System.Activator")
+mcMath_Instance = activator.CreateInstance cls
+--Math operations
+mcMath_Instance.minMax 100	1	50	--> 50
+mcMath_Instance.minMax -1	1	50	--> 1
+mcMath_Instance.minMax 100	1	200	--> 100		
+		
+cls2 = dotNet.getType "Orien.NetUi.McConsole" 
+McConsole_Instance = (dotNetClass "System.Activator").CreateInstance cls2		
+	McConsole_Instance.show()
+	McConsole_Instance.Log "hello"
+	McConsole_Instance.Log "hello Rene" "Personal"
+	McConsole_Instance.Log "hello Rene a:{0} b:{1}" "Formated" (dotnetArray #( 15, "Custom String" ))
 /*
 A disadvantage however is this assembly can’t access another assembly, 
 even if I’ve set up the references in Visual Studio correctly. 
@@ -115,8 +150,8 @@ circle_size = dotnetObject "System.Drawing.Size" 80 80
 	
 	
 	
-	
-	
+---------------------------------------------------
+---------------------------------------------------	
 	
 global dynamicDll
 fn CreateDynamicDllClass = (
@@ -154,19 +189,22 @@ namespace Dynamics { // open namespace Dynamics
   	dynamicDll
   )
 CreateDynamicDllClass()
+dynamicDll.GetAssembly (micra.AssemblyDir + "Orien.Tools.dll")  
+dynamicDll.GetAssembly ( micra.AssemblyDir + "Orien.NetUi.dll")  
+  
+  
   --Test1 >  
-dynamicDll.GetAssembly (micra.AssemblyDir + "Orien.Tools.dll")
+
 cls = dotNet.getType "Orien.Tools.mcMath" 
-activator = (dotNetClass "System.Activator")
-mcMath_Instance = activator.CreateInstance cls
+mcMath_Instance = (dotNetClass "System.Activator").CreateInstance cls
 --Math operations
 mcMath_Instance.minMax 100	1	50	--> 50
 mcMath_Instance.minMax -1	1	50	--> 1
 mcMath_Instance.minMax 100	1	200	--> 100
   
 --Test2 >
-dynamicDll.GetAssembly ( micra.AssemblyDir + "Orien.NetUi.dll")
-cls = dotNet.GetType( "Orien.NetUi.mcPopUp"  )
+
+cls = dotNet.GetType "Orien.NetUi.mcPopUp" 
 mcPopUp_Instance = (dotNetClass "System.Activator").CreateInstance cls
 p_types = mcPopUp_Instance.GetTypes() --works on enum
 p_options =  mcPopUp_Instance.GetOptions() --works on calss
@@ -175,54 +213,45 @@ progb = mcPopUp_Instance.Create "Progress To" ""  p_types.E_Progress p_options -
 progb.Show(mcMicraDialog)	
 progb.close()
 
+--Test3 >
+cls = dotNet.getType "Orien.NetUi.McConsole" 
+McConsole_Instance = (dotNetClass "System.Activator").CreateInstance cls
+	McConsole_Instance.show()
+	McConsole_Instance.Log "hello"
+	McConsole_Instance.Log "hello Rene" "Personal"
+	McConsole_Instance.Log "hello Rene a:{0} b:{1}" "Formated" (new object[] { 15, "Custom String" })
+---------------------------------------------------
+---------------------------------------------------	
 
-
-
-Global compilerParams
-fn CreateTestAssembly =
-(
-	source = ""
-	source += "using System;
+fn CreateTestAssembly = (
+	source = "
+using System;
+using System.Linq;
+using Orien.Tools.dll;
+using Orien.NetUi.dll;
+public class testClass{}
 "
-	source += "using System.Linq;
-"
-	source += "public class testClass
-"
-	source += "{
-"
-	source += "}
-"
-
-	csharpProvider = dotnetobject "Microsoft.CSharp.CSharpCodeProvider"
-	compilerParams = dotnetobject "System.CodeDom.Compiler.CompilerParameters"
-
+	local csharpProvider = dotnetobject "Microsoft.CSharp.CSharpCodeProvider"
+	local compilerParams = dotnetobject "System.CodeDom.Compiler.CompilerParameters"
 	compilerParams.ReferencedAssemblies.Add "System.dll"
     compilerParams.ReferencedAssemblies.Add "System.Core.dll"
-
+	compilerParams.ReferencedAssemblies.Add (micra.AssemblyDir + "Orien.Tools.dll")
+	compilerParams.ReferencedAssemblies.Add ( micra.AssemblyDir + "Orien.NetUi.dll")
 	compilerParams.GenerateInMemory = true
-	compilerResults = csharpProvider.CompileAssemblyFromSource compilerParams #(source)
+	local compilerResults = csharpProvider.CompileAssemblyFromSource compilerParams #(source)
 	
-	if (compilerResults.Errors.Count > 0 ) then
-	(
-		errs = stringstream ""
-		for i = 0 to (compilerResults.Errors.Count-1) do
-		(
+	if (compilerResults.Errors.Count > 0 ) then (
+		local errs = stringstream ""
+		for i = 0 to (compilerResults.Errors.Count-1) do (
 			err = compilerResults.Errors.Item[i]
-			format "Error:% Line:% Column:% %
-" err.ErrorNumber err.Line err.Column err.ErrorText to:errs 
+			format "Error:% Line:% Column:% %\n" err.ErrorNumber err.Line err.Column err.ErrorText to:errs 
 		)
 		MessageBox (errs as string) title: "Errors encountered while compiling C# code"
-		format "%
-" errs
+		format "%\n" errs
 		undefined
-	)
-	else
-	(
+	) else (
 		compilerResults.CompiledAssembly.CreateInstance "testClass"
 	)
 )
 global testClass = CreateTestAssembly()
-compilerParams.ReferencedAssemblies.Add (micra.AssemblyDir + "Orien.Tools.dll")
-compilerParams.ReferencedAssemblies.Add ( micra.AssemblyDir + "Orien.NetUi.dll")
 
-	

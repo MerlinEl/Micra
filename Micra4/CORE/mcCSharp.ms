@@ -31,6 +31,7 @@
 	Rod Stephens 2016 http://csharphelper.com/blog/2016/11/run-user-entered-code-in-c/
 	
 */
+
 struct MICRA_CSHARP_STRUCTURE	(
 	
 	--variables
@@ -39,6 +40,47 @@ struct MICRA_CSHARP_STRUCTURE	(
 	csharpProvider = dotnetobject "Microsoft.CSharp.CSharpCodeProvider",
 	--functions
 	fn getSource = getSourceFileName(), --get path of this script
+	-------------------------------------------------------------------
+	--LOADING ASSEMBLY FROM DLL (MEMORIZE CONTENT WITHOUT LOCK DLL)--
+	-------------------------------------------------------------------
+	/**
+	*@Usage
+	*@Example
+		if mcCSharp.isLoaded() then (
+			mcMath_Instance = mcCSharp.getClassInstance "Orien.Tools.mcMath" --without constructor parameters
+			mcMath_Instance.minMax 100	1	50	--> 50
+			mcMath_Instance.minMax -1	1	50	--> 1
+			mcMath_Instance.minMax 100	1	200	--> 100
+		)
+	*/
+	fn isLoaded = (classOf (dotNet.getType "Orien.Tools.McGetCs") == dotNetObject),
+	fn getClassInstance classPath constructorParams:#() forceLoad:false = (
+		local class_instance
+		if not doesFileExist (micra.AssemblyDir + "Orien.Star.dll") do return false
+		if not isLoaded() do try ( --load first time or if forceLoad
+		
+			local assembly_path = micra.AssemblyDir + "Orien.Star.dll"
+			local assembly_bytes = (dotnetClass "System.IO.File").ReadAllBytes assembly_path
+			local assembly = (dotnetClass "System.Reflection.Assembly").Load assembly_bytes
+
+		) catch (
+		
+			format "mcCSharp > getClassInstance > Unable to load Assembly:\n\t%\n"  (getCurrentException())
+			return false
+		)
+		try (
+			local dotnet_class = dotNet.getType classPath
+			--format "cls:% path:%\n" dotnet_class classPath
+			class_instance = (dotNetClass "System.Activator").CreateInstance dotnet_class	
+		
+		) catch (
+			format "mcCSharp > getClassInstance > Unable to load Class:\n\t%\n"  (getCurrentException())
+		)
+		class_instance
+	),
+	-------------------------------------------------------------------
+	--BUILDING ASSEMBLY FROM STRING--
+	-------------------------------------------------------------------
 	/**
 	*@Example
 		src = mcCSharpUI.getClass "Rectangle2D"
@@ -160,6 +202,7 @@ struct MICRA_CSHARP_STRUCTURE	(
 )	
  --create instance
 Global mcCSharp = mcStructMan.instanceStructure MICRA_CSHARP_STRUCTURE "mcCSharp"
+Global McGetCS = mcCSharp.getClassInstance "Orien.Tools.McGetCs"
 
 /*
 if params.count == 0 then ( --object instance
