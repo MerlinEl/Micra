@@ -57,8 +57,9 @@ struct MICRA_CSHARP_STRUCTURE	(
 	fn getClassInstance classPath constructorParams:#() forceLoad:false = (
 		local class_instance
 		if not doesFileExist (micra.AssemblyDir + "Orien.Star.dll") do return false
-		if not isLoaded() do try ( --load first time or if forceLoad
-		
+		if not isLoaded() or forceLoad do try ( --load first time or if forceLoad
+			--Orien.Tools and Orine.NetUi are mergetn in to > 
+			format "Assembly Orien.Star was loaded\n"
 			local assembly_path = micra.AssemblyDir + "Orien.Star.dll"
 			local assembly_bytes = (dotnetClass "System.IO.File").ReadAllBytes assembly_path
 			local assembly = (dotnetClass "System.Reflection.Assembly").Load assembly_bytes

@@ -132,6 +132,35 @@ rollout ls3dQuickSemantics "LS3D Quick Semantics Materials:" width:236 height:72
 		--lv.focus()
 		list_items = all_items --copy array all_items --for i = 0 to lv.Items.count-1 collect lv.Items.item[ i ] --recolect list items
 	)
+	--create class ListViewItemComparer
+	fn compileListItemSorter = (
+        source =  "using System;\n"
+        source += "using System.Windows.Forms;\n"
+        source += "using System.Collections;\n"
+        source += "class ListViewItemComparer : IComparer\n"
+        source += "{\n"
+        source += "    private int c;\n"
+        source += "    private bool num = false;\n"
+        source += "    private int dir = 1;\n"
+        source += "    public ListViewItemComparer() { c = 0; }\n"
+        source += "    public ListViewItemComparer(int column, bool numeric, bool reverse)\n"
+        source += "    { c = column; num = numeric; dir = reverse ? -1 : 1; }\n"
+        source += "    public int Compare(object x, object y)\n"
+        source += "    {\n"
+        source += "        if (num) return Convert.ToInt32(((ListViewItem)x).SubItems[c].Text).CompareTo(\n"
+        source += "            Convert.ToInt32(((ListViewItem)y).SubItems[c].Text)) * dir;\n"
+        source += "        else return String.Compare(((ListViewItem)x).SubItems[c].Text,\n"
+        source += "            ((ListViewItem)y).SubItems[c].Text) * dir;\n"
+        source += "    }\n"
+        source += "}"
+ 
+        local csharpProvider = dotNetObject "Microsoft.CSharp.CSharpCodeProvider"
+        local compilerParams = dotNetObject "System.CodeDom.Compiler.CompilerParameters"
+        compilerParams.GenerateInMemory = true
+        compilerParams.ReferencedAssemblies.Add("System.Windows.Forms.dll")
+        compilerResults = csharpProvider.CompileAssemblyFromSource compilerParams #(source)
+        compilerResults.CompiledAssembly
+    )
 	fn init = (
 			--Text Box
 		edt_filter_names.BackColor = drawingColor.fromArgb winColor.r winColor.g winColor.b
@@ -161,6 +190,8 @@ rollout ls3dQuickSemantics "LS3D Quick Semantics Materials:" width:236 height:72
 		lv_mat_data.Columns.add column_names[1] 136
 		lv_mat_data.Columns.add column_names[2] 30
 		lv_mat_data.Columns.add column_names[3] 32
+		--
+		compileListItemSorter()
 		--Fill List View
 		fillListView lv_mat_data
 		--Focus Text Box
@@ -170,6 +201,19 @@ rollout ls3dQuickSemantics "LS3D Quick Semantics Materials:" width:236 height:72
 		
 		edt_filter_names.text = ""
 		filterListView lv_mat_data
+	)
+	local lastColumn, reversed = false
+	on lv_mat_data columnClick columnHeader do ( --sort items by header click
+
+		--lv_mat_data.ListViewItemSorter = dotnetobject "MXS_dotNet.ListViewItemComparer" columnHeader.column (dotnetclass "System.Windows.Forms.SortOrder").Ascending
+		--lv_mat_data.ListViewItemSorter = undefined
+		
+		local column = columnHeader.Column
+        if column == lastColumn then reversed = NOT reversed else reversed = false
+        lv_mat_data.ListViewItemSorter = dotNetObject "ListViewItemComparer" column (column == 1) reversed
+        lv_mat_data.ListViewItemSorter = undefined
+ 
+        lastColumn = column
 	)
 	on btn_assign pressed  do undo "Change Semantic Material" on assignMaterial(selection as array)
 	on ls3dQuickSemantics open do init()

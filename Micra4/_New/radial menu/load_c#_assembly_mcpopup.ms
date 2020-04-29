@@ -1,15 +1,54 @@
+------------------	
+--NEW WAY 
+------------------	
 --FINAL TEST Coompilled assemby (merged all in to one)
+McGetCs.NewColor 20 20 20
+ 
 mcMath_cs = mcCSharp.getClassInstance "Orien.Tools.mcMath" 
-mcMath_Instance.minMax 100	1	50	--> 50
-mcMath_Instance.minMax -1	1	50	--> 1
-mcMath_Instance.minMax 100	1	200	--> 100
+mcMath_cs.minMax 100	1	50	--> 50
+mcMath_cs.minMax -1	1	50	--> 1
+mcMath_cs.minMax 100	1	200	--> 100
 
-mcConsole_cs = mcCSharp.instanceClass "Orien.NetUi.McConsole" 
+mcConsole_cs = mcCSharp.getClassInstance "Orien.NetUi.McConsole"  constructorParams:#(mcMicraDialog) forceLoad:true
+mcConsole_cs.owner = mcMicraDialog
+
+maxWindow=mcSystem.getMaxWindow()
+mcConsole_cs.owner = maxWindow --GetType()
+maxWindow.DefWndProc -- <System.Windows.Forms.Message&>m
+
 mcConsole_cs.show()
 mcConsole_cs.Log "hello"
 mcConsole_cs.Log "hello Rene" "Personal"
 mcConsole_cs.Log "hello Rene a:{0} b:{1}" "Formated" (dotnetArray #( 15, "Custom String" ))
 
+
+MaxCustomControls
+maxHandlePointer=(Windows.GetMAXHWND()) 
+sysPointer = DotNetObject "System.IntPtr" maxHandlePointer
+maxHwnd = DotNetObject "MaxCustomControls.Win32HandleWrapper" sysPointer
+
+	
+	
+	hv = DotNetObject "MaxCustomControls.MaxForm"
+	sysPointer = DotNetObject "System.IntPtr" mcSystem.maxHandle
+	hv.AssignHandle
+	windows.SendMessage mcSystem.maxHandle mcWinMsg.WM_SETFOCUS 0 0
+	
+	
+			assembly_path = micra.AssemblyDir + "Orien.Star.dll"
+			assembly_bytes = (dotnetClass "System.IO.File").ReadAllBytes assembly_path
+			assembly = (dotnetClass "System.Reflection.Assembly").Load assembly_bytes
+			dotnet_class = dotNet.getType  "Orien.NetUi.McConsole"
+			mcConsole_cs = (dotNetClass "System.Activator").CreateInstance dotnet_class	
+	
+	
+--https://help.autodesk.com/view/3DSMAX/2017/ENU/?guid=__files_GUID_F9BDCDFD_5C2D_42ED_A840_184795A2E057_htm
+enableAccelerators = false
+enableAccelerators = true
+------------------	
+--OLD WAY 
+------------------	
+	
 --Load Assemblies
 dotNet.loadAssembly (micra.AssemblyDir + "Orien.Tools.dll")
 dotNet.loadAssembly (micra.AssemblyDir + "Orien.NetUi.dll")
