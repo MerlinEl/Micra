@@ -53,7 +53,7 @@ struct MICRA_CSHARP_STRUCTURE	(
 			mcMath_Instance.minMax 100	1	200	--> 100
 		)
 	*/
-	fn isLoaded = (classOf (dotNet.getType "Orien.Tools.McGetCs") == dotNetObject),
+	fn isLoaded = (classOf (dotNet.getType "Orien.Tools.McGet") == dotNetObject),
 	fn getClassInstance classPath constructorParams:#() forceLoad:false = (
 		local class_instance
 		if not doesFileExist (micra.AssemblyDir + "Orien.Star.dll") do return false
@@ -202,7 +202,7 @@ struct MICRA_CSHARP_STRUCTURE	(
 )	
  --create instance
 Global mcCSharp = mcStructMan.instanceStructure MICRA_CSHARP_STRUCTURE "mcCSharp"
-Global McGetCS = mcCSharp.getClassInstance "Orien.Tools.McGetCs"
+Global McGetCS = mcCSharp.getClassInstance "Orien.Tools.McGet" forceLoad:true
 
 /*
 if params.count == 0 then ( --object instance

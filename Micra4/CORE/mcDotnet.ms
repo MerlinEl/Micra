@@ -201,9 +201,10 @@ Struct MICRA_DOTNET (
 	),
 	fn addButtonToolTip dbtn show_text img_name = (
 	
-		if not mcCsharp.isLoaded() do return undefined
+		if not mcCsharp.isLoaded() do return false
 		try (
 			local tltp = mcCsharp.getClassInstance "Orien.NetUi.McImageTooltip" 
+			if tltp == undefined do return false
 			tltp.AutoSize = false
 			--Set up the delays for the ToolTip.
 		   /*tltp.AutoPopDelay = 5000;
