@@ -1429,11 +1429,10 @@ struct mcAction (
 			subobjectlevel = 2
 		)
 	),
-	fn collapse_objects = 
-	(
-		if not keyboard.controlPressed 
-		then --clasic way
-		(
+	fn collapse_objects = (
+		
+		if not keyboard.controlPressed then ( --clasic way
+
 			local sel_geometry = for i in selection where superClassOf i == GeometryClass collect i
 			if sel_geometry.count < 2 do return false
 			try (
@@ -1449,16 +1448,18 @@ struct mcAction (
 						
 						mcProgLog.msg ("object:"+sel_geometry[i].name) ty:"proc"
 						mcProgLog.progSub i sel_geometry.count clr:yellow
-						polyOp.attach first_obj sel_geometry[i]
+						local next_obj = sel_geometry[i]
+						next_obj.material = undefined -- IMPORTANT! ( preventing max to auto merge materials )
+						polyOp.attach first_obj next_obj
 					)
 					select first_obj
 				)
 				mcProgLog.msg "All Done" ty:"task_close"
 			) 
 			catch (::mcPopUp.show "Incorrect objecs!" type:#Warning delay:2000)
-		)
-		else -- Attach Objects With Unique ID
-		(
+			
+		) else ( -- Attach Objects With Unique ID
+
 			local sel = selection as array
 			if sel.count != 0 do selection.material = sel[1].material
 			--filter non editable poly obj

@@ -91,10 +91,37 @@ rollout ls3dQuickSemantics "LS3D Quick Semantics Materials:" width:236 height:72
 		for i=0 to lv.items.count - 1 do unmarkItem lv.items.item[ i ] --un hilight item
 		markItem lv.items.item[ 0 ] --hilight item
 	)
+	fn loadMaterialsToLibrary libs_path_arr getLatest:true = (
+
+		--clean current library
+		while currentmateriallibrary.count > 0 do deleteitem currentmateriallibrary 1 
+		--load libraries from disk
+		local mats = #()
+		for lib_path in libs_path_arr where doesFileExist lib_path do (
+		
+			if getLatest do gP4.P4_GetLatest #(lib_path) --fetch latest revision of file
+			local success = loadMaterialLibrary lib_path
+			if not success do (
+			
+				format "Unable to load terrain material library:%\n " lib_path
+				continue
+			)
+			append mats currentMaterialLibrary[1]
+		)
+		--clean current library again
+		while currentmateriallibrary.count > 0 do deleteitem currentmateriallibrary 1 
+		--apend materials in to library
+		for m in mats do append currentMaterialLibrary m
+	)
 	fn fillListView lv = (
 		
 		semantic_mat = currentMaterialLibrary["semantic_materials"]
 		if semantic_mat == undefined do  s_mat = meditmaterials["semantic_materials"]
+		if semantic_mat == undefined do (
+		
+			loadMaterialsToLibrary #(LS3DGUP.LS3DGUP.UtilsPath + "semantic_materials.mat")
+			semantic_mat = currentMaterialLibrary["semantic_materials"]
+		)
 		if semantic_mat == undefined do (
 			gProgLog.msg ("Unable to inicialize. Semantic Material not found.") ty:"error"
 			return false
