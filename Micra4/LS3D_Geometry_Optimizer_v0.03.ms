@@ -23,6 +23,9 @@ rollout mcCollisionOptimizeDialog "Geometry Optimizer:" width:328 height:256
 	dotNetControl btn_opt_flat "Button" text:"Flatten Top" pos:[172,228] width:144 height:24 align:#left
 	dotNetControl btn_unchamfer_edges "Button" text:"Unchamfer eRing" pos:[172,100] width:144 height:24 align:#left
 	dotNetControl btn_sel_sim_els "Button" text:"Select Simillar Elements" pos:[8,96] width:144 height:24 align:#left
+	dotNetControl btn_select_faces_by_normal "Button" text:"Select Faces By Normal" pos:[8,124] width:144 height:24 align:#left
+	
+	dropDownList ddl_normal_way "" pos:[8,152] width:144 height:21 items:#("top", "bottom", "left", "right", "front", "back") align:#left
 	
 	--button 'btn_opt_curb_and_fences' "" pos:[8,96] width:144 height:24 align:#left
 	button 'btn_opt_loop_by_n' "GO" pos:[288,160] width:28 height:24 align:#left
@@ -32,7 +35,7 @@ rollout mcCollisionOptimizeDialog "Geometry Optimizer:" width:328 height:256
 	spinner 'spn_hard_dist' "" pos:[240,24] width:60 height:16 range:[0,1e+06,3] align:#left  enabled:false
 	spinner 'spn_lop_each' "" pos:[248,164] width:34 height:16 range:[0,99,1] type:#integer align:#left
 
-	listbox 'lbx_auto_list' "" pos:[8,124] width:144 height:9 enabled:false items:#("Fences", "Curbs") align:#left
+	--listbox 'lbx_auto_list' "" pos:[8,124] width:144 height:9 enabled:false items:#("Fences", "Curbs") align:#left
 
 	/*fn getTwoEdgesInLoop obj edge_index = (
 		
@@ -247,6 +250,7 @@ rollout mcCollisionOptimizeDialog "Geometry Optimizer:" width:328 height:256
 	on btn_unchamfer_edges click  do undo label:"Unchamfer Edges" on (mcPoly.unchamferEdges (selection as array)[1] (polyOp.getEdgeSelection (selection as array)[1]))
 	on btn_opt_bridge click  do undo label:"Bridge Wipe" on (mcPoly.doBridgeAndCollapse (selection as array)[1])
 	on btn_sel_sim_els click  do undo label:"Select simillar Elements" on (mcPoly.selectSimilarElements selection[1])
+	on btn_select_faces_by_normal click  do undo label:"Select Top Faces" on (mcPoly.selectFacesByAngle selection[1] ddl_normal_way.selected)
 	
 	on btn_optimize_hard pressed  do undo label:"Optimize Hard Surfaces" on (optimizeHardSurfaces selection[1])
 	on btn_opt_curb_and_fences pressed  do undo label:"Optimize Curbs And Fences" on (optimizeCurbsAndFences (selection as array))

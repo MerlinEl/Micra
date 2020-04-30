@@ -959,6 +959,27 @@ struct MICRA_POLY
 		)
 		polyOp.setFaceSelection obj faces_by_normal
 	),
+	fn selectFacesByAngle obj way max_angle:2 = (
+		
+		if classOf obj != Editable_Poly do return false
+		local faces_by_normal = #()
+		local compare_normal  = case way of (
+		
+			"top" : [0,0,1]
+			"bottom" : [0,0,-1]
+			"left" : [-1,0,0]
+			"right" : [1,0,0]
+			"front" : [0,-1,0]
+			"back" : [0,1,0]
+		)
+		for f=1 to polyop.getNumFaces obj do(
+
+			local n = polyOp.getFaceNormal obj f
+			local normals_angle = acos(dot compare_normal n)-- get the angle between the vectors
+			if normals_angle < max_angle do faces_by_normal += #(f)
+		)
+		polyOp.setFaceSelection obj faces_by_normal
+	),
 	fn selectSimilarElements obj = (
 	
 		local fsel = get #fsel
