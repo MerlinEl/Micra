@@ -979,6 +979,7 @@ struct MICRA_POLY
 			if normals_angle < max_angle do faces_by_normal += #(f)
 		)
 		polyOp.setFaceSelection obj faces_by_normal
+		completeRedraw()
 	),
 	fn selectSimilarElements obj = (
 	
