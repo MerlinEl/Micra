@@ -981,6 +981,19 @@ struct MICRA_POLY
 		polyOp.setFaceSelection obj faces_by_normal
 		completeRedraw()
 	),
+	fn selectFacesWithSmallEdge obj max_len = (
+	
+		if classOf obj != Editable_Poly do return false
+		local faces_with_small_edge = #()
+		for f=1 to polyop.getNumFaces obj do(
+
+			local fedges = polyOp.getFaceEdges obj f
+			local for_append = for ei in fedges where getEdgeLength obj ei <= max_len do exit with true
+			if for_append == true do append faces_with_small_edge f
+		)
+		polyOp.setFaceSelection obj faces_with_small_edge
+		completeRedraw()
+	),
 	fn selectSimilarElements obj = (
 	
 		local fsel = get #fsel
