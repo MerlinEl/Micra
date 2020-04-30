@@ -9,7 +9,7 @@ mcMath_cs.minMax 100	1	50	--> 50
 mcMath_cs.minMax -1	1	50	--> 1
 mcMath_cs.minMax 100	1	200	--> 100
 
-mcConsole_cs = mcCSharp.getClassInstance "Orien.NetUi.McConsole"  constructorParams:#(mcMicraDialog) forceLoad:true
+mcConsole_cs = mcCSharp.getClassInstance "Orien.NetUi.McMaxConsole"  constructorParams:#(mcMicraDialog) forceLoad:true
 mcConsole_cs.owner = mcMicraDialog
 
 maxWindow=mcSystem.getMaxWindow()
