@@ -988,8 +988,9 @@ struct MICRA_POLY
 		for f=1 to polyop.getNumFaces obj do(
 
 			local fedges = polyOp.getFaceEdges obj f
-			local for_append = for ei in fedges where getEdgeLength obj ei <= max_len do exit with true
-			if for_append == true do append faces_with_small_edge f
+			local small_edges = #{}
+			for ei in fedges where getEdgeLength obj ei <= max_len do small_edges += #{ei}
+			if small_edges.numberset > 1 do append faces_with_small_edge f
 		)
 		polyOp.setFaceSelection obj faces_with_small_edge
 		completeRedraw()
