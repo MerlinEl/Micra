@@ -1,14 +1,16 @@
 ------------------	
 --NEW WAY 
 ------------------	
+------------------------------------------------------------------------------------------
 --FINAL TEST Coompilled assemby (merged all in to one)
+------------------------------------------------------------------------------------------
 McGetCs.NewColor 20 20 20
- 
+ ------------------------------------------------------------------------------------------
 mcMath_cs = mcCSharp.getClassInstance "Orien.Tools.mcMath" 
 mcMath_cs.minMax 100	1	50	--> 50
 mcMath_cs.minMax -1	1	50	--> 1
 mcMath_cs.minMax 100	1	200	--> 100
-
+------------------------------------------------------------------------------------------
 mcConsole_cs = mcCSharp.getClassInstance "Orien.NetUi.McMaxConsole"  constructorParams:#(mcMicraDialog) forceLoad:true
 mcConsole_cs.owner = mcMicraDialog
 
@@ -45,6 +47,28 @@ maxHwnd = DotNetObject "MaxCustomControls.Win32HandleWrapper" sysPointer
 --https://help.autodesk.com/view/3DSMAX/2017/ENU/?guid=__files_GUID_F9BDCDFD_5C2D_42ED_A840_184795A2E057_htm
 enableAccelerators = false
 enableAccelerators = true
+------------------------------------------------------------------------------------------
+form = dotNetObject "MaxCustomControls.MaxForm"
+btn = dotNetObject "button"
+btn.text = "Action"
+
+--mcDotnet.addButtonToolTip btnMin1 "Delete other faces than in top." "tltp_flatten_01"
+
+tltp = mcCSharp.getClassInstance "Orien.NetUi.McTooltip"  forceLoad:true
+tltp.HeaderText = "Collapse"
+tltp.BodyText = "Collapse selected geometry"
+tltp.FooterText = "For help press H "
+tltp.BodyImageStretch = false
+tltp.ExtendedMode = true
+tltp.AutoHide = false
+img_name = "tltp_flatten_01"
+fpath = micra.ImagesPath + "TooltipIcons\\" + img_name + ".png"
+tltp.SetToolTip btn fpath
+
+form.Controls.Add btn
+form.show()
+
+
 ------------------	
 --OLD WAY 
 ------------------	

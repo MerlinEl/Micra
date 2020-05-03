@@ -45,7 +45,7 @@ Struct MICRA_DIALOG (
 			local form = execute i
 			if form != undefined then (
 			
-				if superClassOf form == StructDef then (
+				if superClassOf form == StructDef and form.form != undefined then (
 					
 					form.form.visible
 					

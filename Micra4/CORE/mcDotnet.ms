@@ -199,18 +199,26 @@ Struct MICRA_DOTNET (
 		bmp_dn.MakeTransparent (dColor (color 0 0 0)) -- 75 75 75  --gray
 		bmp_dn
 	),
+	
 	fn addButtonToolTip dbtn show_text img_name = (
 	
 		if not mcCsharp.isLoaded() do return false
 		try (
+			--TODO
+			--Not works on buttons in rollout only in Form
+			/*local tltp = mcCSharp.getClassInstance "Orien.NetUi.McTooltip" --forceLoad:true
+			tltp.HeaderText = "Info:"
+			tltp.BodyText = show_text
+			tltp.FooterText = "For help press F1"
+			tltp.BodyImageStretch = false
+			tltp.ExtendedMode = true
+			tltp.AutoHide = false
+			local fpath = micra.ImagesPath + "TooltipIcons\\" + img_name + ".png"
+			tltp.SetToolTip dbtn fpath*/
+
 			local tltp = mcCsharp.getClassInstance "Orien.NetUi.McImageTooltip" 
 			if tltp == undefined do return false
 			tltp.AutoSize = false
-			--Set up the delays for the ToolTip.
-		   /*tltp.AutoPopDelay = 5000;
-		   tltp.InitialDelay = 1000;
-		   tltp.ReshowDelay = 500;*/
-			--#002040
 			tltp.SetFont "Verdana" 14 (::mcGetCs.FontStyles()).Regular (::mcGetCs.NewColor 0 32 64)
 			tltp.BorderColor = (::mcGetCs.NewColor 1 247 46)
 			--tltp.Size 200 64

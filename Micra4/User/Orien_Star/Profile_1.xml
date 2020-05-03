@@ -6,11 +6,11 @@
     <mc_Dialog_C active="true" pos="[1505,371]" size="[148,66]" title="Pivot:" btnCount="[6,2]" />
     <mc_Dialog_D active="true" pos="[1505,437]" size="[148,90]" title="Select:" btnCount="[6,3]" />
     <mc_Dialog_E active="false" pos="[100,843]" size="[244,42]" title="Animation:" btnCount="[10,1]" />
-    <mc_Dialog_F active="true" pos="[1309,143]" size="[196,90]" title="Modifiers:" btnCount="[8,3]" />
+    <mc_Dialog_F active="true" pos="[1244,132]" size="[196,90]" title="Modifiers:" btnCount="[8,3]" />
     <mc_Dialog_G active="true" pos="[1507,566]" size="[148,90]" title="Modify:" btnCount="[6,3]" />
     <mc_Dialog_H active="true" pos="[1507,656]" size="[148,66]" title="Materials:" btnCount="[6,2]" />
     <mc_Dialog_I active="true" pos="[1507,788]" size="[148,66]" title="Programming:" btnCount="[6,2]" />
-    <mc_Dialog_J active="true" pos="[1205,917]" size="[460,42]" title="Experimental:" btnCount="[19,1]" />
+    <mc_Dialog_J active="true" pos="[1203,935]" size="[460,42]" title="Experimental:" btnCount="[19,1]" />
   </Properties_1>
   <Properties_2>
     <mcMicraDialog active="true" pos="[1505,143]" size="[148,66]" title="" />
@@ -56,6 +56,7 @@
     <mcUnwrapToolbardialog active="false" pos="[70,390]" size="[220,200]" />
     <mcPopUp active="true" pos="[90,313]" size="[810,68]" />
     <mcObjectInpectorDialog active="true" pos="[785,294]" size="[344,464]" />
+    <mcCityManDialog active="true" pos="[707,22]" size="[500,988]" />
   </Properties_2>
   <Buttons>
     <btn_B2 action="Move_To_X" icon="28" />
@@ -206,5 +207,6 @@
     <btn_I11 action="Keyboard_Switch" icon="257" />
     <btn_J13 action="Max_To_Blender" icon="287" />
     <btn_J17 action="Road_Markings" icon="288" />
+    <btn_J8 action="City_Manager" icon="241" />
   </Buttons>
 </USER>
