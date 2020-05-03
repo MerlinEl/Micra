@@ -204,9 +204,7 @@ Struct MICRA_DOTNET (
 	
 		if not mcCsharp.isLoaded() do return false
 		try (
-			--TODO
-			--Not works on buttons in rollout only in Form
-			/*local tltp = mcCSharp.getClassInstance "Orien.NetUi.McTooltip" --forceLoad:true
+			local tltp = mcCSharp.getClassInstance "Orien.NetUi.McTooltip" --forceLoad:true
 			tltp.HeaderText = "Info:"
 			tltp.BodyText = show_text
 			tltp.FooterText = "For help press F1"
@@ -214,8 +212,8 @@ Struct MICRA_DOTNET (
 			tltp.ExtendedMode = true
 			tltp.AutoHide = false
 			local fpath = micra.ImagesPath + "TooltipIcons\\" + img_name + ".png"
-			tltp.SetToolTip dbtn fpath*/
-
+			tltp.SetToolTip dbtn fpath
+			/*
 			local tltp = mcCsharp.getClassInstance "Orien.NetUi.McImageTooltip" 
 			if tltp == undefined do return false
 			tltp.AutoSize = false
@@ -223,7 +221,7 @@ Struct MICRA_DOTNET (
 			tltp.BorderColor = (::mcGetCs.NewColor 1 247 46)
 			--tltp.Size 200 64
 			tltp.SetToolTip dbtn show_text
-			dbtn.Tag = (dotNetClass "Drawing.Image").FromFile  (micra.ImagesPath + "TooltipIcons\\" + img_name + ".png")
+			dbtn.Tag = (dotNetClass "Drawing.Image").FromFile  (micra.ImagesPath + "TooltipIcons\\" + img_name + ".png")*/
 		) catch ()
 	),
 	/**

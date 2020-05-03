@@ -56,7 +56,7 @@
     <mcUnwrapToolbardialog active="false" pos="[70,390]" size="[220,200]" />
     <mcPopUp active="true" pos="[90,313]" size="[810,68]" />
     <mcObjectInpectorDialog active="true" pos="[785,294]" size="[344,464]" />
-    <mcCityManDialog active="true" pos="[707,22]" size="[500,988]" />
+    <mcCityManDialog active="true" pos="[480,76]" size="[500,988]" />
   </Properties_2>
   <Buttons>
     <btn_B2 action="Move_To_X" icon="28" />
