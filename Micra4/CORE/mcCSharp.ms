@@ -56,7 +56,7 @@ struct MICRA_CSHARP_STRUCTURE	(
 	fn isLoaded = (classOf (dotNet.getType "Orien.Tools.McGet") == dotNetObject),
 	--After test success ,finish the forceLoad paramter (know classes dont need to be loaded again)
 	fn getClassInstance classPath constructorParams:#() forceLoad:false = ( --ShadowCopy method by susanta
-	
+		if not doesFileExist (micra.AssemblyDir + "Orien.Star.dll") do return false
 		--Create dotnet class to use some useful static functions
 		local AppDomain = dotNetClass "System.AppDomain"
 		local Assembly = dotNetClass "System.Reflection.Assembly"
