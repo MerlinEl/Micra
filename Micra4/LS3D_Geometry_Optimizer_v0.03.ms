@@ -20,7 +20,7 @@ rollout mcCollisionOptimizeDialog "Geometry Optimizer:" width:328 height:256
 	button 'btn_optimize_hard' "Optimize Hard Edges" pos:[172,44] width:144 height:24 align:#left	 enabled:false 
 
 	dotNetControl btn_optimize_chamfers "Button" text: "Optimize by eRing" pos:[8,44] width:144 height:24 align:#left
-	dotNetControl btn_opt_bridge "Button" text:"Do Bridge And Wipe" pos:[172,200] width:144 height:24 align:#left
+	dotNetControl btn_fuse_edges "Button" text:"Fuse Edges" pos:[172,200] width:100 height:24 align:#left
 	dotNetControl btn_opt_flat "Button" text:"Flatten Top" pos:[172,228] width:144 height:24 align:#left
 	dotNetControl btn_unchamfer_edges "Button" text:"Unchamfer eRing" pos:[172,100] width:144 height:24 align:#left
 	dotNetControl btn_sel_sim_els "Button" text:"Select Simillar Elements" pos:[8,96] width:144 height:24 align:#left
@@ -28,6 +28,8 @@ rollout mcCollisionOptimizeDialog "Geometry Optimizer:" width:328 height:256
 	dotNetControl 'btn_select_faces_by_thickness' "Button" text:"Select Faces By Thickness" pos:[8,192] width:144 height:24 align:#left
 	
 	dropDownList ddl_normal_way "" pos:[8,152] width:144 height:21 items:#("fromface", "top", "bottom", "left", "right", "front", "back") align:#left
+	
+	checkbox chk_wipe "wipe" pos:[280,200] width:60 height:24 align:#left checked:false 
 	
 	--button 'btn_opt_curb_and_fences' "" pos:[8,96] width:144 height:24 align:#left
 	button 'btn_opt_loop_by_n' "GO" pos:[288,160] width:28 height:24 align:#left
@@ -251,7 +253,7 @@ rollout mcCollisionOptimizeDialog "Geometry Optimizer:" width:328 height:256
 	on btn_opt_flat click do undo label:"Optimize Flat Top " on (optimizeFlatTop (selection as array)[1])
 	on btn_optimize_chamfers click  do undo label:"Optimize Chamfers" on (optimizeChamfers (selection as array)[1])
 	on btn_unchamfer_edges click  do undo label:"Unchamfer Edges" on (mcPoly.unchamferEdges (selection as array)[1] (polyOp.getEdgeSelection (selection as array)[1]))
-	on btn_opt_bridge click  do undo label:"Bridge Wipe" on (mcPoly.doBridgeAndCollapse (selection as array)[1])
+	on btn_fuse_edges click  do undo label:"Fuse Edges" on (mcPoly.fuseEdges (selection as array)[1] wipe:chk_wipe.checked)
 	on btn_sel_sim_els click  do undo label:"Select simillar Elements" on (mcPoly.selectSimilarElements selection[1])
 	on btn_select_faces_by_normal click  do undo label:"Select Faces By Normal" on (mcPoly.selectFacesByAngle selection[1] ddl_normal_way.selected)
 	on btn_select_faces_by_thickness click  do undo label:"Select Faces By Thickness" on (mcPoly.selectFacesWithSmallEdge selection[1] spn_face_thickness.value)

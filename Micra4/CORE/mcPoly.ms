@@ -973,7 +973,8 @@ struct MICRA_POLY
 			"back" : [0,1,0]
 			"fromface" : (
 				local fsel = polyOp.getFaceSelection obj as array
-				if fsel.count > 0 then polyOp.getFaceNormal obj fsel[1] else [0,0,1]
+				if fsel.count == 0 do return false 
+				polyOp.getFaceNormal obj fsel[1]
 			)
 		)
 		for f=1 to polyop.getNumFaces obj do(
@@ -1191,19 +1192,55 @@ struct MICRA_POLY
 		bbox
 	),
 	
-	fn doBridgeAndCollapse obj = (
+	fn fuseEdges obj wipe:false = (
 	
 		if classOf obj != Editable_Poly do return false;
 		local esel = mcPoly.get #esel
 		if esel.count == 0 do return false
 		obj.Bridge()
 		obj.GrowSelection()
-		esel2 = mcPoly.get #esel
-		esel3 = (esel2 as Bitarray) - (esel as Bitarray)
-		eindex = mcPoly.getShortestEdge obj esel3
+		local esel2 = mcPoly.get #esel
+		local esel3 = (esel2 as Bitarray) - (esel as Bitarray)
+		local eindex = mcPoly.getShortestEdge obj esel3
 		polyOp.SetEdgeSelection obj eindex
 		obj.SelectEdgeRing ()
-		obj.collapse #Edge
+		if not wipe then (
+			obj.collapse #Edge
+		) else (
+			local esel_ring = mcPoly.get #esel
+			local fused_verts = #()
+			for ei in esel_ring do (
+			
+				local edge_verts = (polyOp.getVertsUsingEdge obj ei) as array
+				--get first ver with lowest index (it will remain same after fuse)
+				local v1, v2
+				if edge_verts[1] < edge_verts[2] then (
+				
+					v1 = edge_verts[1]
+					v2 = edge_verts[2]
+					
+				) else (
+				
+					v1 = edge_verts[2]
+					v2 = edge_verts[1]
+				)
+				--move both vertices in to middle
+				local p1 = polyOp.getVert obj v1
+				local p2 = polyOp.getVert obj v2
+				local center = (p1 + p2)/2
+				polyOp.setVert obj v1 center
+				polyOp.setVert obj v2 center
+				--weld vertices
+				polyOp.weldVerts Obj v1 v2
+				append fused_verts v1 --pick first and add it in to array
+			)
+			if fused_verts.count < 2 do return false
+			local edges_to_remove = polyOp.getEdgesUsingVert obj fused_verts
+			obj.ShrinkSelection()
+			edges_to_remove = mcPoly.get #esel
+			local iFlag = bit.set 0 32 true
+			polyOp.setEdgeFlags obj edges_to_remove iFlag mask:iFlag undoable:true
+		)
 	),
 	
 	/**
