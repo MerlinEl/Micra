@@ -20,8 +20,8 @@ maxWindow.DefWndProc -- <System.Windows.Forms.Message&>m
 
 mcConsole_cs.show()
 mcConsole_cs.Log "hello"
-mcConsole_cs.Log "hello Rene" "Personal"
-mcConsole_cs.Log "hello Rene a:{0} b:{1}" "Formated" (dotnetArray #( 15, "Custom String" ))
+mcConsole_cs.Log "Personal" "hello Rene" 
+mcConsole_cs.Log "Formated" "hello Rene a:{0} b:{1}" (dotnetArray #( 15, "Custom String" ))
 
 
 MaxCustomControls
@@ -165,8 +165,8 @@ McDesktop_Instance = (dotNetClass "System.Activator").CreateInstance cls1
 
 	McConsole_Instance.show()
 	McConsole_Instance.Log "hello"
-	McConsole_Instance.Log "hello Rene" "Personal"
-	McConsole_Instance.Log "hello Rene a:{0} b:{1}" "Formated" (dotnetArray #( 15, "Custom String" ))
+	McConsole_Instance.Log "Personal" "hello Rene" 
+	McConsole_Instance.Log "Formated" "hello Rene a:{0} b:{1}"  (dotnetArray #( 15, "Custom String" ))
 
 		
 --test4	
@@ -185,8 +185,8 @@ cls2 = dotNet.getType "Orien.NetUi.McConsole"
 McConsole_Instance = (dotNetClass "System.Activator").CreateInstance cls2		
 	McConsole_Instance.show()
 	McConsole_Instance.Log "hello"
-	McConsole_Instance.Log "hello Rene" "Personal"
-	McConsole_Instance.Log "hello Rene a:{0} b:{1}" "Formated" (dotnetArray #( 15, "Custom String" ))
+	McConsole_Instance.Log "Personal" "hello Rene" 
+	McConsole_Instance.Log "Formated" "hello Rene a:{0} b:{1}"  (dotnetArray #( 15, "Custom String" ))
 /*
 A disadvantage however is this assembly can’t access another assembly, 
 even if I’ve set up the references in Visual Studio correctly. 
