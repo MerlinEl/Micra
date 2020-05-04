@@ -1,0 +1,10 @@
+App folder is excluded from updates
+
+reason: when download and update micra
+
+all files except user is deleted 
+unzip must be excepted too (else we can't unzip downloaded files in Micra folder)
+
+sugestions:
+
+extract files in user download dir and move them in to Micra dir

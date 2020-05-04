@@ -38,7 +38,7 @@ struct MICRA_STRUCTURE (
 	RepositoryDir		= (pathConfig.removePathLeaf RootDir) + "\\", --here is all Micra's versions and other Resources
 	ResourcesDir 	= RepositoryDir + "repo_sync\\", --Micra's Shared Resources, Backups, Max Icons, Ms Library, ...
 	AppsDir				= RootDir + "App\\",
-	AssemblyDir			= RootDir + "App\\Assembly\\",
+	AssemblyDir			= RootDir + "Assembly\\",
 	ImagesPath 			= RootDir + "Img\\", --all images here
 	UserDir				= RootDir + "User\\" + username + "\\",
 	MicraMacro 			= RootDir + "Micra_Macro.mcr",
@@ -259,13 +259,16 @@ struct MICRA_STRUCTURE (
 		close f
 		true
 	),
+	/**
+	*@Usage > install Avguard Extensions if need
+		avg_dlx90.dlx (Larry Minton's Avguard MAXScript Extensions)
+	*/
 	fn installMaxPlugins = (
 	
-		--Avguard Extensions
 		--another way to check (some different function laike LocalTime)	
 		if avguardHelp == undefined do (
 
-			copyFile (AppsDir + "Avguard_Extensions\\avg_dlx90.dlx") (MaxPluginsDir + "avg_dlx90.dlx")
+			copyFile (AssemblyDir + "avg_dlx90.dlx") (MaxPluginsDir + "avg_dlx90.dlx")
 		)
 		--MXSEditor Global Utility (depends on max version and operating system 32)
 		local bit_version = if is64bitApplication() then "64" else "86"
@@ -278,8 +281,6 @@ struct MICRA_STRUCTURE (
 	/**
 	*@Usage: Add Micra's Plugins path in to 3DsMax (Autorun, Avguard, MSXEditor)
 		Micra_Autorun.ms	()
-		avg_dlx90.dlx		(Larry Minton's Avguard MAXScript Extensions)
-		MXSEditor_x64.gup	()
 	*/
 	fn setAutorunTo state = (
 	
