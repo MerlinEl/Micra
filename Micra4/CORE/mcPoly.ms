@@ -1195,51 +1195,55 @@ struct MICRA_POLY
 	fn fuseEdges obj wipe:false = (
 	
 		if classOf obj != Editable_Poly do return false;
-		local esel = mcPoly.get #esel
+		local esel = polyOp.getEdgeSelection obj
 		if esel.count == 0 do return false
+		local efaces = polyOp.getFacesUsingEdge obj esel
 		obj.Bridge()
-		obj.GrowSelection()
-		local esel2 = mcPoly.get #esel
-		local esel3 = (esel2 as Bitarray) - (esel as Bitarray)
-		local eindex = mcPoly.getShortestEdge obj esel3
-		polyOp.SetEdgeSelection obj eindex
-		obj.SelectEdgeRing ()
-		if not wipe then (
-			obj.collapse #Edge
+		local xfaces = polyOp.getFaceSelection obj
+		local fedges = polyOp.getEdgesUsingFace obj efaces
+		local xedges = polyOp.getEdgesUsingFace obj xfaces
+		local ering = xedges - fedges
+		polyOp.SetEdgeSelection obj ering
+		if not wipe then ( obj.collapse #Edge
 		) else (
-			local esel_ring = mcPoly.get #esel
-			local fused_verts = #()
-			for ei in esel_ring do (
+			local verts_to_weld = #{}
+			local centers = #()
+			for ei in ering do (
 			
 				local edge_verts = (polyOp.getVertsUsingEdge obj ei) as array
-				--get first ver with lowest index (it will remain same after fuse)
-				local v1, v2
-				if edge_verts[1] < edge_verts[2] then (
-				
-					v1 = edge_verts[1]
-					v2 = edge_verts[2]
-					
-				) else (
-				
-					v1 = edge_verts[2]
-					v2 = edge_verts[1]
-				)
+				local v1 = edge_verts[1]
+				local v2 = edge_verts[2]
 				--move both vertices in to middle
 				local p1 = polyOp.getVert obj v1
 				local p2 = polyOp.getVert obj v2
 				local center = (p1 + p2)/2
 				polyOp.setVert obj v1 center
 				polyOp.setVert obj v2 center
-				--weld vertices
-				polyOp.weldVerts Obj v1 v2 center
-				append fused_verts v1 --pick first and add it in to array
+				--polyOp.weldVerts obj v1 v2 center
+				verts_to_weld += #{v1, v2}
+				append centers center --pick first and add it in to array
 			)
-			if fused_verts.count < 2 do return false
-			local edges_to_remove = polyOp.getEdgesUsingVert obj fused_verts
+			obj.weldThreshold = 0.001
+			polyOp.weldVertsByThreshold obj verts_to_weld 
+			local welded_verts = for v in #{1..obj.verts.count} where (
+			
+				local p = polyOp.getVert obj v
+				findItem centers p != 0
+			) collect v
+			format "welded_verts:\n\t%\n" welded_verts
+			if welded_verts.count < 2 do return false
+			local edges_to_remove = polyOp.getEdgesUsingVert obj welded_verts
+			polyOp.setEdgeSelection obj edges_to_remove
 			obj.ShrinkSelection()
-			edges_to_remove = mcPoly.get #esel
+			obj.SelectEdgeLoop()
+			edges_to_remove = polyOp.getEdgeSelection obj
+			verts_to_remove = polyOp.getVertsUsingEdge obj edges_to_remove
+			format "edges_to_remove:\n\t%\n" edges_to_remove
+			obj.remove selLevel:#Edge
 			local iFlag = bit.set 0 32 true
-			polyOp.setEdgeFlags obj edges_to_remove iFlag mask:iFlag undoable:true
+			polyOp.setVertFlags obj verts_to_remove iFlag mask:iFlag undoable:true
+			obj.remove selLevel:#Vertex flag:iFlag
+			--polyop.weldEdges <Poly poly> <int edge1> <int edge2>
 		)
 	),
 	
