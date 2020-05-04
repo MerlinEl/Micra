@@ -1,6 +1,6 @@
---------------------------------------------------------------------------------
+------------------------------------------------------
 /* mcCSharp by Orien 2020 */
---------------------------------------------------------------------------------
+------------------------------------------------------
 /*
 *@Used Structures
 	mcStructMan
@@ -13,17 +13,17 @@
 	setting up the assembly in memory
 *
 *@Example
-	----------------------------------------------------
+	-----------------------------------
 	rect_1 = mcCSharp.new "Orien.Math.Rectangle2D"  params:#(10, 122)
 	rect_1.Area()
-	----------------------------------------------------
+	-----------------------------------
 	rect_2 = mcCSharp.new "Orien.Math.Rectangle2D"  params:#(100, 400)
 	rect_2.Area()
-	----------------------------------------------------
+	-----------------------------------
 	lbl_01 = mcCSharp.new "Orien.DotnetUI.LabelRoundCorners" 
-	----------------------------------------------------
+	-----------------------------------
 	source = mcCSharpUI.getClass "Orien.Math.Rectangle2D"
-	----------------------------------------------------
+	-----------------------------------
 *
 *@Thanks to
 	Mambo4 2014 http://discourse.techart.online/t/3ds-max-c-iterating-on-a-dll-using-visual-studio-unload-assemblies-in-max/4265/7
@@ -40,9 +40,9 @@ struct MICRA_CSHARP_STRUCTURE	(
 	csharpProvider = dotnetobject "Microsoft.CSharp.CSharpCodeProvider",
 	--functions
 	fn getSource = getSourceFileName(), --get path of this script
-	-------------------------------------------------------------------
+	---------------------------------------------
 	--LOADING ASSEMBLY FROM DLL (MEMORIZE CONTENT WITHOUT LOCK DLL)--
-	-------------------------------------------------------------------
+	---------------------------------------------
 	/**
 	*@Usage
 	*@Example
@@ -54,7 +54,44 @@ struct MICRA_CSHARP_STRUCTURE	(
 		)
 	*/
 	fn isLoaded = (classOf (dotNet.getType "Orien.Tools.McGet") == dotNetObject),
-	fn getClassInstance classPath constructorParams:#() forceLoad:false = (
+	--After test success ,finish the forceLoad paramter (know classes dont need to be loaded again)
+	fn getClassInstance classPath constructorParams:#() forceLoad:false = ( --ShadowCopy method by susanta
+	
+		--Create dotnet class to use some useful static functions
+		local AppDomain = dotNetClass "System.AppDomain"
+		local Assembly = dotNetClass "System.Reflection.Assembly"
+		local AssemblyName = dotNetClass "System.Reflection.AssemblyName"
+		--set the shadow copy so actually original assembly file can be overriten...SetShadowCopyFiles is obsoluted according to MSDN
+		--but that is the only way to enable ShadowCopy option for current AppDomain. Because through Maxscript
+		--creation of new appdomain is not possible so we have to use current AppDoamin and for 3dsMax2009 ShadowCopy for current Appdomain is false bydefault
+		-- whatever the dir we use with SetShadowCopyPath, all assembly loaded later from this directory automatically will be shadow copied by .net runtime
+		--I'm for demonstartion using "C:\Release" but you can use directly use yourVCSharpProject/Bin/Release or Debug folder
+		--make sure everytime you have differnt version number, In case of Visual Studio 2008 C# project version settings
+		--under project settings -> Application-->Assembly Information or you can change AssemblyInfo.cs file of your project manually
+		--or the addin I have specified for visual studio to autoincrement it you can use http://www.codeplex.com/autobuildversion
+
+		--using default cache path ensure delete of shadow copy files will be  handle by runtime automatically
+		--if you use your own cache path using AppDomain.CurrentDomain.SetCachePath then you have delete them manually
+		--So I'm not using that
+
+		AppDomain.CurrentDomain.SetShadowCopyPath (micra.AssemblyDir)
+		AppDomain.CurrentDomain.SetShadowCopyFiles()
+		--load the first version...again don't forget to use different version for every compile in visual studio
+		--AssemblyName.GetAssemblyName using this method we can query to the dll what the version number we have setted in visual studio
+		local assemName = AssemblyName.GetAssemblyName(micra.AssemblyDir + "Orien.Star.dll") --print assemName.FullName
+		print ("Assembly.FullName:" + assemName.FullName)
+		--result Orien.Star, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
+
+		--Now load it using assembly name, don't use LoadFromFile
+		local assem = Assembly.Load assemName
+		print ("Assembly.Location:" + assem.Location)
+		--will print the temp file path runtime used for shadow copy  somthing like "\Application Data\assembly\dl3\OAV6J36X.Q9J\1Z7DWQ44.552\0f496cae\004a3872_967cc901\Orien.Star.dll"
+
+		--use this way to create object of sepcific version instead of (dotNetObject "MYLib.MyClass")
+		class_instance = assem.CreateInstance classPath --create object of first version of MYLib.MyClass
+		class_instance --return class instance
+	),
+	fn getClassInstance_old classPath constructorParams:#() forceLoad:false = (
 		local class_instance
 		if not doesFileExist (micra.AssemblyDir + "Orien.Star.dll") do return false
 		if not isLoaded() or forceLoad do try ( --load first time or if forceLoad
@@ -79,9 +116,9 @@ struct MICRA_CSHARP_STRUCTURE	(
 		)
 		class_instance
 	),
-	-------------------------------------------------------------------
+	---------------------------------------------
 	--BUILDING ASSEMBLY FROM STRING--
-	-------------------------------------------------------------------
+	---------------------------------------------
 	/**
 	*@Example
 		src = mcCSharpUI.getClass "Rectangle2D"
@@ -203,7 +240,8 @@ struct MICRA_CSHARP_STRUCTURE	(
 )	
  --create instance
 Global mcCSharp = mcStructMan.instanceStructure MICRA_CSHARP_STRUCTURE "mcCSharp"
-Global McGetCS = mcCSharp.getClassInstance "Orien.Tools.McGet" forceLoad:true
+Global McGetCs = mcCSharp.getClassInstance "Orien.Tools.McGet" forceLoad:true
+Global McSetCs = mcCSharp.getClassInstance "Orien.Tools.McSet" forceLoad:true
 
 /*
 if params.count == 0 then ( --object instance

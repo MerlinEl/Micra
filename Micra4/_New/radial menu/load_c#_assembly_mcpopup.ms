@@ -48,6 +48,19 @@ maxHwnd = DotNetObject "MaxCustomControls.Win32HandleWrapper" sysPointer
 enableAccelerators = false
 enableAccelerators = true
 ------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------
+gc()
+--Force Load (not works)
+classPath = "Orien.NetUi.McTooltip" 
+assembly_path = micra.AssemblyDir + "Orien.Star.dll"
+assembly_bytes = (dotnetClass "System.IO.File").ReadAllBytes assembly_path
+assembly = (dotnetClass "System.Reflection.Assembly").Load assembly_bytes
+dotnet_class = dotNet.getType classPath
+class_instance = (dotNetClass "System.Activator").CreateInstance dotnet_class	
+------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------
 form = dotNetObject "MaxCustomControls.MaxForm"
 btn = dotNetObject "button"
 btn.text = "Action"
@@ -57,10 +70,14 @@ btn.text = "Action"
 tltp = mcCSharp.getClassInstance "Orien.NetUi.McTooltip"  forceLoad:true
 tltp.HeaderText = "Collapse"
 tltp.BodyText = "Collapse selected geometry"
+tltp.BodyTextFont = McGetCS.NewFont "Arial" 12 McGetCS.FontStyles.Regular
 tltp.FooterText = "For help press H "
 tltp.BodyImageStretch = false
 tltp.ExtendedMode = true
 tltp.AutoHide = false
+tltp.MaxSize = McGetCS.NewSize 400 400
+
+
 img_name = "tltp_flatten_01"
 fpath = micra.ImagesPath + "TooltipIcons\\" + img_name + ".png"
 tltp.SetToolTip btn fpath

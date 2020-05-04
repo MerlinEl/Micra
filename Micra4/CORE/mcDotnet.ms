@@ -200,14 +200,16 @@ Struct MICRA_DOTNET (
 		bmp_dn
 	),
 	
-	fn addButtonToolTip dbtn show_text img_name = (
+	fn addButtonToolTip dbtn body_text img_name = (
 	
 		if not mcCsharp.isLoaded() do return false
 		try (
-			local tltp = mcCSharp.getClassInstance "Orien.NetUi.McTooltip" --forceLoad:true
-			tltp.HeaderText = "Info:"
-			tltp.BodyText = show_text
-			tltp.FooterText = "For help press F1"
+			local tltp = mcCSharp.getClassInstance "Orien.NetUi.McTooltip" forceLoad:true
+			tltp.MaxSize = McGetCS.NewSize 400 400
+			tltp.HeaderText = dbtn.text
+			tltp.BodyText = body_text
+			tltp.BodyTextFont = McGetCS.NewFont "Arial" 12 McGetCS.FontStyles.Regular
+			tltp.FooterText = "Press F1 for more help."
 			tltp.BodyImageStretch = false
 			tltp.ExtendedMode = true
 			tltp.AutoHide = false
@@ -220,7 +222,7 @@ Struct MICRA_DOTNET (
 			tltp.SetFont "Verdana" 14 (::mcGetCs.FontStyles()).Regular (::mcGetCs.NewColor 0 32 64)
 			tltp.BorderColor = (::mcGetCs.NewColor 1 247 46)
 			--tltp.Size 200 64
-			tltp.SetToolTip dbtn show_text
+			tltp.SetToolTip dbtn body_text
 			dbtn.Tag = (dotNetClass "Drawing.Image").FromFile  (micra.ImagesPath + "TooltipIcons\\" + img_name + ".png")*/
 		) catch ()
 	),

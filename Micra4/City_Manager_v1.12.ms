@@ -71,6 +71,7 @@ rcmenu mcCityManDialogMenu (
 		separator m9_sep_2
 		menuItem m9_5 "Fix Names Suffix"
 		separator m9_sep_3
+		menuItem m9_6 "Reset Material Editor And Load Materials From Selection"
 	)
 	fn getLodByName obj lod_index = (
 	
@@ -243,6 +244,24 @@ rcmenu mcCityManDialogMenu (
 		createDialog suffixNameFixerDialog
 		suffixNameFixerDialog.undo_lbl = undo_lbl
 	)
+	fn resetMaterialEditorAndLoadMaterialsFromSelection = (
+	
+		local sel = selection as array
+		if sel.count == 0 do return false
+		mcMax.deselectAll()
+		local matedit_state = MatEditor.isOpen()
+		if matedit_state do MatEditor.Close()
+		for i = 1 to 24 do (											
+			--getMeditMaterial i					
+			setMeditMaterial i (standard())
+			mEditMaterials [i].name = i as string + " - Default"
+		)
+		local mats = #()
+		for o in sel where o.material != undefined do appendIfUnique mats o.material
+		for i = 1 to mats.count do setMeditMaterial i mats[i]
+		if matedit_state do MatEditor.Open()
+		select sel
+	)
 	--m1------------------------------------------------------------------------------------------------
 	on m1_0 picked do undo label:(m1_0.Text) on selectLods(#("LOD1", "LOD2"))
 	on m1_1 picked do undo label:(m1_1.Text) on mcMax.selectObjectsByName "LOD0" visibleOnly:false exclude:#("coll", "occ")
@@ -335,6 +354,8 @@ rcmenu mcCityManDialogMenu (
 	on m9_4 picked do undo label:(m9_4.Text) on mcMax.selectObjectsByMaterialID() --pick first id if not face selected
 	--sep2
 	on m9_5 picked do fixNamesSuffix m9_5.Text
+	--sep3
+	on m9_6 picked do undo label:(m9_6.Text) on resetMaterialEditorAndLoadMaterialsFromSelection()
 )
 
 if ::mcCityManDialog != undefined do try(destroyDialog mcCityManDialog)catch()
