@@ -29,7 +29,7 @@ rollout mcCollisionOptimizeDialog "Geometry Optimizer:" width:328 height:256
 	
 	dropDownList ddl_normal_way "" pos:[8,152] width:144 height:21 items:#("fromface", "top", "bottom", "left", "right", "front", "back") align:#left
 	
-	checkbox chk_wipe "wipe" pos:[280,200] width:60 height:24 align:#left checked:false 
+	checkbox chk_wipe "wipe" pos:[280,200] width:60 height:24 align:#left checked:false enabled:false
 	
 	--button 'btn_opt_curb_and_fences' "" pos:[8,96] width:144 height:24 align:#left
 	button 'btn_opt_loop_by_n' "GO" pos:[288,160] width:28 height:24 align:#left

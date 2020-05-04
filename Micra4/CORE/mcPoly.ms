@@ -1231,7 +1231,7 @@ struct MICRA_POLY
 				polyOp.setVert obj v1 center
 				polyOp.setVert obj v2 center
 				--weld vertices
-				polyOp.weldVerts Obj v1 v2
+				polyOp.weldVerts Obj v1 v2 center
 				append fused_verts v1 --pick first and add it in to array
 			)
 			if fused_verts.count < 2 do return false
