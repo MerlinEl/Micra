@@ -1230,7 +1230,7 @@ struct MICRA_POLY
 				local p = polyOp.getVert obj v
 				findItem centers p != 0
 			) collect v
-			format "welded_verts:\n\t%\n" welded_verts
+			--format "welded_verts:\n\t%\n" welded_verts
 			if welded_verts.count < 2 do return false
 			local edges_to_remove = polyOp.getEdgesUsingVert obj welded_verts
 			polyOp.setEdgeSelection obj edges_to_remove
@@ -1238,11 +1238,13 @@ struct MICRA_POLY
 			obj.SelectEdgeLoop()
 			edges_to_remove = polyOp.getEdgeSelection obj
 			verts_to_remove = polyOp.getVertsUsingEdge obj edges_to_remove
-			format "edges_to_remove:\n\t%\n" edges_to_remove
+			--format "edges_to_remove:\n\t%\n" edges_to_remove
 			obj.remove selLevel:#Edge
+			obj.remove selLevel:#Vertex
+			/*
 			local iFlag = bit.set 0 32 true
 			polyOp.setVertFlags obj verts_to_remove iFlag mask:iFlag undoable:true
-			obj.remove selLevel:#Vertex flag:iFlag
+			obj.remove selLevel:#Vertex flag:iFlag*/
 			--polyop.weldEdges <Poly poly> <int edge1> <int edge2>
 		)
 	),
