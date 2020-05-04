@@ -964,13 +964,17 @@ struct MICRA_POLY
 		if classOf obj != Editable_Poly do return false
 		local faces_by_normal = #()
 		local compare_normal  = case way of (
-		
+			
 			"top" : [0,0,1]
 			"bottom" : [0,0,-1]
 			"left" : [-1,0,0]
 			"right" : [1,0,0]
 			"front" : [0,-1,0]
 			"back" : [0,1,0]
+			"fromface" : (
+				local fsel = polyOp.getFaceSelection obj as array
+				if fsel.count > 0 then polyOp.getFaceNormal obj fsel[1] else [0,0,1]
+			)
 		)
 		for f=1 to polyop.getNumFaces obj do(
 

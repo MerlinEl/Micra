@@ -27,7 +27,7 @@ rollout mcCollisionOptimizeDialog "Geometry Optimizer:" width:328 height:256
 	dotNetControl 'btn_select_faces_by_normal' "Button" text:"Select Faces By Normal" pos:[8,128] width:144 height:24 align:#left
 	dotNetControl 'btn_select_faces_by_thickness' "Button" text:"Select Faces By Thickness" pos:[8,192] width:144 height:24 align:#left
 	
-	dropDownList ddl_normal_way "" pos:[8,152] width:144 height:21 items:#("top", "bottom", "left", "right", "front", "back") align:#left
+	dropDownList ddl_normal_way "" pos:[8,152] width:144 height:21 items:#("fromface", "top", "bottom", "left", "right", "front", "back") align:#left
 	
 	--button 'btn_opt_curb_and_fences' "" pos:[8,96] width:144 height:24 align:#left
 	button 'btn_opt_loop_by_n' "GO" pos:[288,160] width:28 height:24 align:#left
