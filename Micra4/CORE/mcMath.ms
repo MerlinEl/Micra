@@ -12,6 +12,7 @@
 http://www.illusioncatalyst.com/3dsmax_files/snippets/geometry.php
 https://forums.cgsociety.org/t/geometrical-calculations-points-lines-planes-intersections-distances-angles/906269
 */
+
 struct MICRA_MATH (
 
 	fn getSource = getSourceFileName(), --get path of this script
@@ -215,6 +216,18 @@ struct MICRA_MATH (
 		local vAC=pC-pA
 		local d=dot (normalize vAB) (normalize vAC)
 		(pA+(vAB*(d*(length vAC/length vAB))))
+	),
+	--find the point on the plane ABC which is the projection of the point D
+	fn pointPlaneProj pA pB pC pD = (
+	
+		local nABC=normalize (cross (pB-pA) (pC-pA))
+		pD+((dot (pA-pD) nABC)*nABC)
+	),
+	--find the distance between a plane and a point
+	fn pointPlaneDist pA pB pC pD = (
+	
+		local nABC=normalize (cross (pB-pA) (pC-pA))
+		length ((dot (pA-pD) nABC)*nABC)
 	),
 	fn isPointOnLine pA pB pC tol = 
 	(

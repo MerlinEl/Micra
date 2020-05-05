@@ -5,19 +5,19 @@ rollout mcCollisionOptimizeDialog "Geometry Optimizer:" width:328 height:256
 (
 	local units_type = mcSystem.unitsType()
 	GroupBox 'grp1' "Method 1:" pos:[0,4] width:160 height:68 align:#left
-	GroupBox 'grp2' "Method 2:" pos:[164,4] width:160 height:68 align:#left enabled:false
-	GroupBox 'grp11' "Method 3:" pos:[0,76] width:160 height:176 align:#left  enabled:false
+	GroupBox 'grp2' "Method 2:" pos:[164,4] width:160 height:68 align:#left
+	GroupBox 'grp11' "Method 3:" pos:[0,76] width:160 height:176 align:#left
 	GroupBox 'grp7' "Method 4:" pos:[164,76] width:160 height:60 align:#left
 	GroupBox 'grp5' "Selections:" pos:[164,140] width:160 height:56 align:#left
 	
 	label 'lbl5' "Limited loop by:" pos:[172,164] width:76 height:16 align:#left
 	label 'lbl1' "Max length:" pos:[12,24] width:60 height:16 align:#left
 	label 'lbl_units_01' "cm" pos:[136,24] width:16 height:16 align:#left
-	label 'lbl3' "Max distance:" pos:[176,24] width:60 height:16 align:#left  enabled:false
-	label 'lbl_units_02' "cm" pos:[304,24] width:16 height:16 align:#left  enabled:false
 	label 'lbl11' "cm" pos:[136,220] width:16 height:16 align:#left
 	
-	button 'btn_optimize_hard' "Optimize Hard Edges" pos:[172,44] width:144 height:24 align:#left	 enabled:false 
+	button 'btn_flatten_2d' "Flatten Object by Face N" pos:[172,18] width:144 height:24 align:#left
+	radioButtons 'rdo_offset_type' "" pos:[168,48] width:152 height:16 labels:#("front", "back", "mid") default:1 columns:3 align:#left
+	--button 'btn_projector_2d' "Projector 2D" pos:[172,44] width:144 height:24 align:#left enabled:false
 
 	dotNetControl btn_optimize_chamfers "Button" text: "Optimize by eRing" pos:[8,44] width:144 height:24 align:#left
 	dotNetControl btn_fuse_edges "Button" text:"Fuse Edges" pos:[172,200] width:100 height:24 align:#left
@@ -31,12 +31,9 @@ rollout mcCollisionOptimizeDialog "Geometry Optimizer:" width:328 height:256
 	
 	checkbox chk_wipe "wipe" pos:[280,200] width:60 height:24 align:#left checked:false --enabled:false
 	
-	--button 'btn_opt_curb_and_fences' "" pos:[8,96] width:144 height:24 align:#left
+
 	button 'btn_opt_loop_by_n' "GO" pos:[288,160] width:28 height:24 align:#left
-	--button 'btn_opt_crossroad' "Optimize Cross Road" pos:[172,200] width:144 height:24 align:#left
-	
 	spinner 'spn_chamfer_len' "" pos:[72,24] width:60 height:16 range:[0,1e+06,3] type:#float align:#left
-	spinner 'spn_hard_dist' "" pos:[240,24] width:60 height:16 range:[0,1e+06,3] align:#left  enabled:false
 	spinner 'spn_lop_each' "" pos:[248,164] width:34 height:16 range:[0,99,1] type:#integer align:#left
 	spinner 'spn_face_thickness' "" pos:[8,220] width:120 height:16 range:[0,1e+06,5] type:#float align:#left
 
@@ -170,12 +167,7 @@ rollout mcCollisionOptimizeDialog "Geometry Optimizer:" width:328 height:256
 		setCommandPanelTaskMode mode:#modify
 		subobjectlevel = 4
 	)
-	fn optimizeHardSurfaces obj = (
-		
-		return (mcMsgList.warn "wait_todo") 
-		if classOf obj != Editable_Poly do return (mcMsgList.warn "not_poly") 
-		
-	)
+
 	fn optimizeCrossroad obj = (
 	
 		if classOf obj != Editable_Poly do return (mcMsgList.warn "not_poly")
@@ -239,11 +231,32 @@ rollout mcCollisionOptimizeDialog "Geometry Optimizer:" width:328 height:256
 			redrawViews()
 		)
 	)
+	fn flttenObject obj = (
 	
-	
+		if classOf obj != Editable_Poly do return (mcMsgList.warn "not_poly")
+		local face_index = (polyOp.getFaceSelection obj as array)[1] 
+		if face_index == undefined do return (mcMsgList.warn "not_fsel_1")
+		local faceNormal = in coordsys obj polyOp.getFaceNormal obj face_index
+		local center = [0,0,0]
+		for v in obj.verts do center += (polyOp.getVert obj v.index)
+		center = center / obj.verts.count
+		for v in obj.verts do (
+
+			local planeOffset = (
+			
+				case rdo_offset_type.state of (
+				
+					1 : distance center (polyOp.getVert obj v.index)
+					2 : -(distance center (polyOp.getVert obj v.index))
+					3 : (distance center (polyOp.getVert obj v.index)) /2
+				)
+			)
+			polyop.moveVertsToPlane obj #{v.index} faceNormal planeOffset
+		)
+	)
 	fn init = (
 	
-		lbl_units_01.text = lbl_units_02.text = units_type
+		lbl_units_01.text = units_type
 		
 		mcDotnet.addButtonToolTip btn_opt_flat "Delete other faces than in top." "tltp_flatten_01"
 		mcDotnet.addButtonToolTip btn_optimize_chamfers "Remove all rings which have smal length." "tltp_unchamfer_03"
@@ -258,7 +271,8 @@ rollout mcCollisionOptimizeDialog "Geometry Optimizer:" width:328 height:256
 	on btn_select_faces_by_normal click  do undo label:"Select Faces By Normal" on (mcPoly.selectFacesByAngle selection[1] ddl_normal_way.selected)
 	on btn_select_faces_by_thickness click  do undo label:"Select Faces By Thickness" on (mcPoly.selectFacesWithSmallEdge selection[1] spn_face_thickness.value)
 	
-	on btn_optimize_hard pressed  do undo label:"Optimize Hard Surfaces" on (optimizeHardSurfaces selection[1])
+	on btn_flatten_2d pressed  do undo label:"Flatten Object" on flttenObject selection[1]
+	on btn_projector_2d pressed  do filein (micra.RootDir + "Projector2D_v0.01.ms")
 	on btn_opt_curb_and_fences pressed  do undo label:"Optimize Curbs And Fences" on (optimizeCurbsAndFences (selection as array))
 	on btn_opt_loop_by_n pressed  do undo label:"Optimize Loop By 2" on (selectEachEdgeInLoop selection[1] spn_lop_each.value)
 

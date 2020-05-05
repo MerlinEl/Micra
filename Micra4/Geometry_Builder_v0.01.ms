@@ -9,7 +9,7 @@ rollout mcGeometryBuilderDialog "Plygon Builder:" width:336 height:68
 	fn createPolygonFromPoints obj = (
 		
 		local sel_verts = polyOp.getVertSelection obj
-		local polygon_points = for vi in sel_verts collect  (polyOp.getVert vi)
+		local polygon_points = for vi in sel_verts collect  (polyOp.getVert obj vi)
 		local sort_style = if rdo_sort_order.state == 2	then #reverse else #none
 		active_obj = mcPoly.createPolygonObj polygon_points  sortStyle:sort_style
 	)

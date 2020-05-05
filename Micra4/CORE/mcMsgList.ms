@@ -61,6 +61,7 @@ struct MICRA_MESSAGE_LIST_STRUCTURE	(
 			"not_fseluv_1"		: "Select one UV face to progress."
 			"not_fseluv_x"		: "Select  UV face(s) to progress."
 			"not_fsel"			: "Select some faces to progress."
+			"not_fsel_1"		: "Select one face to progress."
 			"not_vsel_esel"	: "Select some vertices or edges to progress."
 			"not_termat"		: "Missing terrain material."
 			"not_semat"		: "Missing sementic material."
