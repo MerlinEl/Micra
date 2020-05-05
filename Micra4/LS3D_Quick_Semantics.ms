@@ -12,9 +12,15 @@ rollout ls3dQuickSemantics "LS3D Quick Semantics Materials:" width:236 height:72
 	button 'btn_assign' "Assign To Selection" pos:[4,4] width:228 height:20 toolTip:"Select Object(s) or Polygons" align:#left
 	GroupBox 'grp2' "Semantic Materials" pos:[4,28] width:228 height:696 align:#left
 	dotNetControl 'edt_filter_names' "textbox" pos:[8,48] width:196 height:20 align:#left
-	dotNetControl 'lv_mat_data' "listView" pos:[8,72] width:216 height:644 align:#left
-	button 'btn_clear' "<" pos:[208,46] width:20 height:22 align:#left
+	dotNetControl 'lv_mat_data' "listView" pos:[8,72] width:216 height:592 align:#left
+	button 'btn_Clear' "<" pos:[208,46] width:20 height:22 align:#left
+	button 'btn_sel_simillar' "Select Simillar Faces" pos:[8,696] width:216 height:24 align:#left
+	button 'btn_get_sel' "Pick Material" pos:[8,668] width:216 height:24 align:#left
 	--functions
+	fn isValidObject obj = ( --Uvwmap restricted for secure work
+	
+		(classOf obj == Editable_Poly or classOf obj == PolyMeshObject) and classOf obj.modifiers[1] != Uvwmap 
+	)
 	fn setMaterialIdToPoly obj mat_id = (
 	
 		if subobjectLevel == undefined or subobjectLevel == 0  then ( --whole object
@@ -37,6 +43,78 @@ rollout ls3dQuickSemantics "LS3D Quick Semantics Materials:" width:236 height:72
 			if cur_lvl != undefined do subobjectLevel = cur_lvl
 		)
 		obj.showVertexColors = false
+	)
+	
+	fn getMaterialIdFromPoly obj = (
+	
+		local face_id = undefined
+		if subobjectLevel == undefined or subobjectLevel == 0  then ( --whole object
+				
+			face_id = try (polyop.getFaceMatID obj 1) catch undefined --undefined if index is out of range
+		
+		) else if subobjectLevel == 4 or subobjectLevel == 5 do ( --selected faces only
+		
+			local face_index = (polyOp.getFaceSelection obj as Array)[1]	
+			if face_index != undefined do face_id = try (polyop.getFaceMatID obj face_index) catch undefined --undefined if index is out of range
+		)
+		face_id --output
+	)
+	
+	fn getMaterialIdFromSelection objs = (
+	
+		local mat_id = undefined
+		local gco = modPanel.getCurrentObject()
+		if classOf gco == Editable_Poly then (
+		
+			mat_id = getMaterialIdFromPoly objs[1]
+			--format "Get Material ID:% from Editable_Poly:%\n" mat_id objs[1].name
+			
+		) else if classOf gco == Edit_Poly do ( --oi is one or more objects with Edit_Poly modifier
+		
+			local face_index = (gco.GetSelection #Face as Array)[1]
+			if face_index != undefined do mat_id = gco.EditPolyMod.GetFaceMaterial face_index
+			--format "Get Material ID:% to Edit_Poly:%\n" mat_id objs.count
+		)
+		mat_id --output
+	)
+	
+	fn getFacesMaterialIDS obj = (
+	
+		local ids = #{}
+		local mesh_obj = snapshotasmesh obj
+		local fsel = getFaceSelection mesh_obj
+		for f in fsel do ids[getFaceMatID mesh_obj f] = on
+		delete mesh_obj
+		ids
+	)
+	
+	fn selectFacesByMatID obj mat_ids clearSelection:true = (
+	
+		local gco = modPanel.getCurrentObject()
+		local result = false
+		--if clearSelection do mat_ids = #((mat_ids as array)[1]) --REMOVED(dont really need this)
+		if classOf gco == Editable_Poly then (
+		
+			local faces_with_id = #{}
+			for id in mat_ids do (
+			
+				for f = 1 to obj.numfaces where polyop.getFaceMatID obj f == id do faces_with_id += #{f}
+			)
+			polyop.setFaceSelection obj faces_with_id --set the selection when the loop is done!
+			result = true
+			
+		) else if classOf gco == Edit_Poly do ( --one object with Edit_Poly modifier
+	
+			local fcount = getnumfaces obj	--             obj.Edit_Poly.GetFaceMaterial f
+			local faces_with_id = #{}
+			for id in mat_ids do (
+			
+				for f = 1 to fcount where gco.EditPolyMod.GetFaceMaterial f == id do faces_with_id += #{f}
+			)
+			gco.EditPolyMod.select #Face (faces_with_id as BitArray)
+			result = true
+		)
+		result --output
 	)
 	
 	fn assignMaterial objs = (
@@ -242,11 +320,70 @@ rollout ls3dQuickSemantics "LS3D Quick Semantics Materials:" width:236 height:72
  
         lastColumn = column
 	)
+	fn pickMaterialFromSelection objs = (
+	
+		if lv_mat_data.items.count == 0 do return false		
+		--collect valid objects only
+		local valid_objects = for o in objs where (isValidObject o) collect o 	
+		if valid_objects.count == 0 do (
+			
+			messageBox "Object(s) must be Editable Poly or Edit Poly." title:"Aborted:"
+			return false
+		)
+		--pick first face id
+		local map_id = getMaterialIdFromSelection valid_objects
+		if map_id == undefined do (
+		
+			messageBox "No faces Selected" title:"Warning"
+			return false
+		)
+		--select item from list
+		for i = 0 to lv_mat_data.items.count - 1 do (
+		
+			local itm = lv_mat_data.items.item[i]
+			local mat_data_id = itm.tag 
+			if mat_data_id == map_id do (
+			
+				unmarkItem lv_mat_data.selectedItems.item[0] --un hilight item
+				itm.selected = true
+				--current_top_index = .TopItem.Index -- lv_mat_data.TopItem --alternative
+				itm.EnsureVisible() --focus - scroll to selected item
+				markItem lv_mat_data.items.item[ i ] --hilight item
+				exit
+			)
+		)
+	)
+	fn  selectSimillarFaces objs = (
+		
+		format "selectSimillarFaces > :%\n" objs
+		if subobjectLevel != 4 and subobjectLevel != 5 do return false
+		if objs.count > 1 do (
+				
+			messageBox "Only One Object can be Selected." title:"Aborted:"
+			return false
+		)
+		local obj = objs[1]	
+		if not (isValidObject obj) do (
+			
+			messageBox "Object(s) must be Editable Poly or Edit Poly." title:"Aborted:"
+			return false
+		)
+		local mat_ids = getFacesMaterialIDS obj
+		if mat_ids.numberset == 0 do (
+		
+			messageBox "No faces Selected" title:"Warning"
+			return false
+		)
+		selectFacesByMatID obj mat_ids --clearSelection:chk_clear_selection.checked --REMOVED(dont really need this)
+		completeRedraw()
+	)
 	on btn_assign pressed  do undo "Change Semantic Material" on assignMaterial(selection as array)
 	on ls3dQuickSemantics open do init()
 	on edt_filter_names keyUp arg do (filterListView lv_mat_data)
 	on lv_mat_data GotFocus args  do  ( unmarkItem  lv_mat_data.SelectedItems.item[0] )
 	on lv_mat_data LostFocus args do ( markItem  lv_mat_data.SelectedItems.item[0] )
 	on btn_clear pressed do clearItemsFilter()
+	on btn_get_sel pressed do (clearItemsFilter(); pickMaterialFromSelection (selection as Array))
+	on btn_sel_simillar pressed  do (undo "Select Simmilar Faces" on selectSimillarFaces (selection as Array))
 )
 createDialog ls3dQuickSemantics
