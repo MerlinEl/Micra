@@ -1,12 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <UPDATE>
-  <VERSIONS latest="6.29">
+  <VERSIONS latest="6.31">
     <item_1 version="6.26" date="5_4_2020_1_26_49_PM" />
     <item_2 version="6.27" date="5_4_2020_2_22_48_PM" />
     <item_3 version="6.28" date="5_5_2020_8_12_07_AM" />
     <item_4 version="6.29" date="5_5_2020_4_06_25_PM" />
-    <item_5 version="6.22" date="5_4_2020_10_46_20_AM" />
-    <item_6 version="6.23" date="5_4_2020_11_28_19_AM" />
+    <item_5 version="6.3" date="5_6_2020_12_16_28_PM" />
+    <item_6 version="6.31" date="5_6_2020_12_22_02_PM" />
     <item_7 version="6.24" date="5_4_2020_12_08_01_PM" />
     <item_8 version="6.25" date="5_4_2020_1_24_56_PM" />
   </VERSIONS>

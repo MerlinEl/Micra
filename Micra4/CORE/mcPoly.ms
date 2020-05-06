@@ -1000,13 +1000,18 @@ struct MICRA_POLY
 		polyOp.setFaceSelection obj faces_with_small_edge
 		completeRedraw()
 	),
-	fn selectSimilarElements obj = (
+	fn selectSimilarElements obj offset:10 = (
 	
 		local fsel = get #fsel
 		fsel_area = getFacesArea obj fsel
 		face_elements = getObjectElements obj
 		similar_area_objects_faces = #{}
-		for el in face_elements where getFacesArea obj el <= fsel_area do similar_area_objects_faces += el as Bitarray
+		for el in face_elements where (
+		
+			local area = getFacesArea obj el 
+			area <= fsel_area + offset and area >= fsel_area - offset 
+		
+		) do similar_area_objects_faces += el as Bitarray
 		polyOp.SetFaceSelection obj similar_area_objects_faces
 	),
 	/**
@@ -1240,11 +1245,9 @@ struct MICRA_POLY
 			verts_to_remove = polyOp.getVertsUsingEdge obj edges_to_remove
 			--format "edges_to_remove:\n\t%\n" edges_to_remove
 			obj.remove selLevel:#Edge
-			obj.remove selLevel:#Vertex
-			/*
 			local iFlag = bit.set 0 32 true
 			polyOp.setVertFlags obj verts_to_remove iFlag mask:iFlag undoable:true
-			obj.remove selLevel:#Vertex flag:iFlag*/
+			obj.remove selLevel:#Vertex flag:iFlag
 			--polyop.weldEdges <Poly poly> <int edge1> <int edge2>
 		)
 	),

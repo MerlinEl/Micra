@@ -170,7 +170,7 @@ Struct MICRA_DOTNET (
 			tltp.FooterText = "Press F1 for more help."
 			tltp.BodyImageStretch = false
 			tltp.ExtendedMode = true
-			tltp.AutoHide = false
+			tltp.AutoHide = false --keep visible extended version while mouse is on button
 			local fpath = micra.ImagesPath + "TooltipIcons\\" + img_name + ".png"
 			tltp.SetToolTip dbtn fpath
 			/*

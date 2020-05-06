@@ -5,15 +5,13 @@ rollout mcCollisionOptimizeDialog "Geometry Optimizer:" width:328 height:256
 (
 	local units_type = mcSystem.unitsType()
 	GroupBox 'grp1' "Method 1:" pos:[0,4] width:160 height:68 align:#left
-	GroupBox 'grp2' "Method 2:" pos:[164,4] width:160 height:68 align:#left
-	GroupBox 'grp11' "Method 3:" pos:[0,76] width:160 height:176 align:#left
-	GroupBox 'grp7' "Method 4:" pos:[164,76] width:160 height:60 align:#left
 	GroupBox 'grp5' "Selections:" pos:[164,140] width:160 height:56 align:#left
 	
 	label 'lbl5' "Limited loop by:" pos:[172,164] width:76 height:16 align:#left
 	label 'lbl1' "Max length:" pos:[12,24] width:60 height:16 align:#left
 	label 'lbl_units_01' "cm" pos:[136,24] width:16 height:16 align:#left
 	label 'lbl11' "cm" pos:[136,220] width:16 height:16 align:#left
+	label 'lbl12' "cm" pos:[136,106] width:16 height:16 align:#left
 	
 	button 'btn_flatten_2d' "Flatten Object by Face N" pos:[172,18] width:144 height:24 align:#left
 	radioButtons 'rdo_offset_type' "" pos:[168,48] width:152 height:16 labels:#("front", "back", "mid") default:1 columns:3 align:#left
@@ -23,11 +21,11 @@ rollout mcCollisionOptimizeDialog "Geometry Optimizer:" width:328 height:256
 	dotNetControl btn_fuse_edges "Button" text:"Fuse Edges" pos:[172,200] width:100 height:24 align:#left
 	dotNetControl btn_opt_flat "Button" text:"Flatten Top" pos:[172,228] width:144 height:24 align:#left
 	dotNetControl btn_unchamfer_edges "Button" text:"Unchamfer eRing" pos:[172,100] width:144 height:24 align:#left
-	dotNetControl btn_sel_sim_els "Button" text:"Select Simillar Elements" pos:[8,96] width:144 height:24 align:#left
-	dotNetControl 'btn_select_faces_by_normal' "Button" text:"Select Faces By Normal" pos:[8,128] width:144 height:24 align:#left
+	dotNetControl btn_sel_sim_els "Button" text:"Select Simillar Elements" pos:[8,78] width:144 height:24 align:#left
+	dotNetControl 'btn_select_faces_by_normal' "Button" text:"Select Faces By Normal" pos:[8,132] width:144 height:24 align:#left
 	dotNetControl 'btn_select_faces_by_thickness' "Button" text:"Select Faces By Thickness" pos:[8,192] width:144 height:24 align:#left
 	
-	dropDownList ddl_normal_way "" pos:[8,152] width:144 height:21 items:#("fromface", "top", "bottom", "left", "right", "front", "back") align:#left
+	dropDownList ddl_normal_way "" pos:[8,160] width:144 height:21 items:#("fromface", "top", "bottom", "left", "right", "front", "back") align:#left
 	
 	checkbox chk_wipe "wipe" pos:[280,200] width:60 height:24 align:#left checked:false --enabled:false
 	
@@ -36,6 +34,7 @@ rollout mcCollisionOptimizeDialog "Geometry Optimizer:" width:328 height:256
 	spinner 'spn_chamfer_len' "" pos:[72,24] width:60 height:16 range:[0,1e+06,3] type:#float align:#left
 	spinner 'spn_lop_each' "" pos:[248,164] width:34 height:16 range:[0,99,1] type:#integer align:#left
 	spinner 'spn_face_thickness' "" pos:[8,220] width:120 height:16 range:[0,1e+06,5] type:#float align:#left
+	spinner 'spn_area_offset' "" pos:[8,106] width:120 height:16 range:[0,1e+06,10] type:#float align:#left
 
 	--listbox 'lbx_auto_list' "" pos:[8,124] width:144 height:9 enabled:false items:#("Fences", "Curbs") align:#left
 
@@ -261,13 +260,18 @@ rollout mcCollisionOptimizeDialog "Geometry Optimizer:" width:328 height:256
 		mcDotnet.addButtonToolTip btn_opt_flat "Delete other faces than in top." "tltp_flatten_01"
 		mcDotnet.addButtonToolTip btn_optimize_chamfers "Remove all rings which have smal length." "tltp_unchamfer_03"
 		mcDotnet.addButtonToolTip btn_unchamfer_edges "Remove Chamfer and restore object volume" "tltp_unchamfer_01"
+		mcDotnet.addButtonToolTip btn_fuse_edges "Connect edges and remove seam(optional)" "tltp_fuse_edges_01"
+		mcDotnet.addButtonToolTip btn_select_faces_by_normal "Select faces with same normal" "tltp_fsel_by_normal_01"
+		mcDotnet.addButtonToolTip btn_select_faces_by_thickness "Select faces with same edge thickness" "tltp_fsel_by_tickness_01"
+		mcDotnet.addButtonToolTip btn_sel_sim_els "Select elements with simmilar volume" "tltp_fsel_by_size_01"
+
 	)
 	on mcCollisionOptimizeDialog open do init()
 	on btn_opt_flat click do undo label:"Optimize Flat Top " on (optimizeFlatTop (selection as array)[1])
 	on btn_optimize_chamfers click  do undo label:"Optimize Chamfers" on (optimizeChamfers (selection as array)[1])
 	on btn_unchamfer_edges click  do undo label:"Unchamfer Edges" on (mcPoly.unchamferEdges (selection as array)[1] (polyOp.getEdgeSelection (selection as array)[1]))
 	on btn_fuse_edges click  do undo label:"Fuse Edges" on (mcPoly.fuseEdges (selection as array)[1] wipe:chk_wipe.checked)
-	on btn_sel_sim_els click  do undo label:"Select simillar Elements" on (mcPoly.selectSimilarElements selection[1])
+	on btn_sel_sim_els click  do undo label:"Select simillar Elements" on (mcPoly.selectSimilarElements selection[1] offset:spn_area_offset.value)
 	on btn_select_faces_by_normal click  do undo label:"Select Faces By Normal" on (mcPoly.selectFacesByAngle selection[1] ddl_normal_way.selected)
 	on btn_select_faces_by_thickness click  do undo label:"Select Faces By Thickness" on (mcPoly.selectFacesWithSmallEdge selection[1] spn_face_thickness.value)
 	
