@@ -145,10 +145,14 @@ struct MICRA_MATH (
 		barycentricToWorld p1 p2 p3 u v w
 	),
 	*/
-	fn getVectorsAngle v1 v2 = (
+	fn getVectorsAngle v1 v2 limited:true = ( --360
 	
 		local angle = acos(dot (normalize v1) (normalize v2))
-		if angle<90.0 then angle else (180.0-angle)
+		if limited then (
+		
+			if angle<90.0 then angle else (180.0-angle)
+			
+		) else angle
 	),
 	fn getLinesAngle pA pB pC pD = (
 	

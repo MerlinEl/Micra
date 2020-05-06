@@ -162,7 +162,7 @@ Struct MICRA_DOTNET (
 	
 		if not mcCsharp.isLoaded() do return false
 		try (
-			local tltp = mcCSharp.getClassInstance "Orien.NetUi.McTooltip" forceLoad:true
+			local tltp = mcCSharp.getClassInstance "Orien.NetUi.McTooltip" --forceLoad:true
 			tltp.MaxSize = McGetCS.NewSize 400 400
 			tltp.HeaderText = dbtn.text
 			tltp.BodyText = body_text

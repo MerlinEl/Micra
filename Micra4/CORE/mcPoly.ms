@@ -816,10 +816,11 @@ struct MICRA_POLY
 	fn getObjectArea obj = (
 		getFacesArea obj #{1..obj.faces.count}
 	),
-	fn getLargestFace obj = (
+	fn getLargestFace obj faces = (
 	
 		local faces_data = #()
-		for f = 1 to obj.faces.count do (
+		if faces.count == 0 do return 0
+		for f in faces do (
 		
 			append faces_data (FACE_DATA index:f area:(polyOp.getFaceArea obj f))
 		)
@@ -1178,7 +1179,7 @@ struct MICRA_POLY
 		new_obj
 	),
 	
-	fn createBoundingBox bmin bmax opos box_name = (
+	fn createBoundingBox bmin bmax opos box_name addMaterial:true = (
 	
 		local bbox = box pos:opos lengthsegs:0 widthsegs:0 heightsegs:0
 		convertToPoly bbox
@@ -1191,11 +1192,19 @@ struct MICRA_POLY
 		polyOp.setVert bbox 6 [bmax.x, bmin.y, bmax.z]
 		polyOp.setVert bbox 7 [bmin.x, bmax.y, bmax.z]
 		polyOp.setVert bbox 8 bmax
-		local mat = standardMaterial opacity:24 diffuse:(color 196 37 248) selfIllumAmount:64
-		bbox.material = mat
+		if addMaterial do (
+		
+			local mat = standardMaterial opacity:24 diffuse:(color 196 37 248) selfIllumAmount:64
+			bbox.material = mat
+		)
 		bbox.name = uniqueName box_name
 		bbox
 	),
+	
+	/*fn createBoundingPlane bmin bmax opos box_name = (
+	
+		
+	),*/
 	
 	fn fuseEdges obj wipe:false = (
 	

@@ -15,6 +15,7 @@ rollout mcCollisionOptimizeDialog "Geometry Optimizer:" width:328 height:256
 	
 	button 'btn_flatten_2d' "Flatten Object by Face N" pos:[172,18] width:144 height:24 align:#left
 	radioButtons 'rdo_offset_type' "" pos:[168,48] width:152 height:16 labels:#("front", "back", "mid") default:1 columns:3 align:#left
+	dotNetControl btn_bounding_plane  "Button" text: "Create Bounding Plane" pos:[172,70] width:144 height:24 align:#left
 	--button 'btn_projector_2d' "Projector 2D" pos:[172,44] width:144 height:24 align:#left enabled:false
 
 	dotNetControl btn_optimize_chamfers "Button" text: "Optimize by eRing" pos:[8,44] width:144 height:24 align:#left
@@ -185,7 +186,7 @@ rollout mcCollisionOptimizeDialog "Geometry Optimizer:" width:328 height:256
 		local road_piece_1 = getNodeByName "Cross_Road_Detached_Faces_For_Optimize_1"
 		--get bigest face
 		local piece_faces = #{1..road_piece_1.faces.count}
-		local bigest_face = mcPoly.getLargestFace road_piece_1
+		local bigest_face = mcPoly.getLargestFace road_piece_1 piece_faces
 		piece_faces -= #{bigest_face}
 		--polyOp.setFaceSelection road_piece piece_faces
 		polyOp.detachFaces road_piece_1 piece_faces delete:true asNode:true name:"Cross_Road_Detached_Faces_For_Optimize_2"
@@ -253,6 +254,60 @@ rollout mcCollisionOptimizeDialog "Geometry Optimizer:" width:328 height:256
 			polyop.moveVertsToPlane obj #{v.index} faceNormal planeOffset
 		)
 	)
+	fn createBoundingPlane obj = (
+	
+		if classOf obj != Editable_Poly do return (mcMsgList.warn "not_poly")
+		local selv = subobjectlevel
+		local fsel = mcPoly.getCurentSelectionAs obj #faces
+		if selv == undefined or selv == 0 or fsel.count == 0 do return (mcMsgList.warn "not_fsel")
+		local vsel = mcPoly.getCurentSelectionAs obj #verts
+		local sum = [0,0,0]
+		local bmin, bmax
+		for v in vsel do (
+			local p = polyOp.getVert obj v --vert pos				
+			sum += p
+			if bmin != undefined then (
+				
+				bmin.x = amin #(p.x, bmin.x)
+				bmin.y = amin #(p.y, bmin.y)
+				bmin.z = amin #(p.z, bmin.z)
+
+				bmax.x = amax #(p.x, bmax.x)
+				bmax.y = amax #(p.y, bmax.y)
+				bmax.z = amax #(p.z, bmax.z)
+			)
+			else bmin = copy (bmax = p)
+		)
+		local center = sum/vsel.count
+		local bbox = mcPoly.createBoundingBox bmin bmax center (uniqueName "Bounding_Plane") addMaterial:false
+		--delete all faces except one
+		local bigest_face = mcPoly.getLargestFace obj fsel
+		local face_normal = polyOp.getFaceNormal obj bigest_face
+		local face_mat_id = polyOp.getFaceMatID obj bigest_face
+		format "larget face:% normal:%\n" bigest_face face_normal
+		local keep_face = 1
+		local smalest_normal_angle = 9999999999
+		for f in bbox.faces do (
+		
+			local n = polyOp.getFaceNormal obj f.index
+			local a = mcMath.getVectorsAngle face_normal n limited:false
+			if a < smalest_normal_angle do (
+				keep_face = f.index
+				smalest_normal_angle = a
+			)
+		)
+		format "smalest angle:%\n" smalest_normal_angle
+		local faces_to_delete = for f in bbox.faces where f.index != keep_face collect f.index
+		polyop.deletefaces bbox faces_to_delete
+		polyOp.setFaceMatID bbox 1 face_mat_id
+		polyOp.attach obj bbox
+		subobjectlevel = slev
+	)
+	fn selectFacesByThickness = (
+		local obj = selection[1]
+		if classOf obj == editable_poly do subobjectlevel = 4
+		mcPoly.selectFacesWithSmallEdge obj spn_face_thickness.value
+	)
 	fn init = (
 	
 		lbl_units_01.text = units_type
@@ -264,6 +319,7 @@ rollout mcCollisionOptimizeDialog "Geometry Optimizer:" width:328 height:256
 		mcDotnet.addButtonToolTip btn_select_faces_by_normal "Select faces with same normal" "tltp_fsel_by_normal_01"
 		mcDotnet.addButtonToolTip btn_select_faces_by_thickness "Select faces with same edge thickness" "tltp_fsel_by_tickness_01"
 		mcDotnet.addButtonToolTip btn_sel_sim_els "Select elements with simmilar volume" "tltp_fsel_by_size_01"
+		mcDotnet.addButtonToolTip btn_bounding_plane "Create Bounding Plane from selected faces." "tltp_bb_plane_01"
 
 	)
 	on mcCollisionOptimizeDialog open do init()
@@ -273,7 +329,8 @@ rollout mcCollisionOptimizeDialog "Geometry Optimizer:" width:328 height:256
 	on btn_fuse_edges click  do undo label:"Fuse Edges" on (mcPoly.fuseEdges (selection as array)[1] wipe:chk_wipe.checked)
 	on btn_sel_sim_els click  do undo label:"Select simillar Elements" on (mcPoly.selectSimilarElements selection[1] offset:spn_area_offset.value)
 	on btn_select_faces_by_normal click  do undo label:"Select Faces By Normal" on (mcPoly.selectFacesByAngle selection[1] ddl_normal_way.selected)
-	on btn_select_faces_by_thickness click  do undo label:"Select Faces By Thickness" on (mcPoly.selectFacesWithSmallEdge selection[1] spn_face_thickness.value)
+	on btn_select_faces_by_thickness click  do undo label:"Select Faces By Thickness" on selectFacesByThickness()
+	on btn_bounding_plane click  do undo label:"Create Bounding Plane" on createBoundingPlane selection[1]
 	
 	on btn_flatten_2d pressed  do undo label:"Flatten Object" on flttenObject selection[1]
 	on btn_projector_2d pressed  do filein (micra.RootDir + "Projector2D_v0.01.ms")
