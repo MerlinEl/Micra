@@ -5,8 +5,6 @@ rollout mcCollisionOptimizeDialog "Geometry Optimizer:" width:328 height:256
 (
 	local units_type = mcSystem.unitsType()
 	GroupBox 'grp1' "Method 1:" pos:[0,4] width:160 height:68 align:#left
-	GroupBox 'grp5' "Selections:" pos:[164,140] width:160 height:56 align:#left
-	
 	label 'lbl5' "Limited loop by:" pos:[172,164] width:76 height:16 align:#left
 	label 'lbl1' "Max length:" pos:[12,24] width:60 height:16 align:#left
 	label 'lbl_units_01' "cm" pos:[136,24] width:16 height:16 align:#left
@@ -15,13 +13,14 @@ rollout mcCollisionOptimizeDialog "Geometry Optimizer:" width:328 height:256
 	
 	button 'btn_flatten_2d' "Flatten Object by Face N" pos:[172,18] width:144 height:24 align:#left
 	radioButtons 'rdo_offset_type' "" pos:[168,48] width:152 height:16 labels:#("front", "back", "mid") default:1 columns:3 align:#left
-	dotNetControl btn_bounding_plane  "Button" text: "Create Bounding Plane" pos:[172,70] width:144 height:24 align:#left
+	dotNetControl btn_bounding_box  "Button" text: "Create Bounding Box" pos:[172,70] width:144 height:24 align:#left
+	dotNetControl btn_bounding_plane  "Button" text: "Create Bounding Plane" pos:[172,100] width:144 height:24 align:#left
 	--button 'btn_projector_2d' "Projector 2D" pos:[172,44] width:144 height:24 align:#left enabled:false
 
 	dotNetControl btn_optimize_chamfers "Button" text: "Optimize by eRing" pos:[8,44] width:144 height:24 align:#left
 	dotNetControl btn_fuse_edges "Button" text:"Fuse Edges" pos:[172,200] width:100 height:24 align:#left
 	dotNetControl btn_opt_flat "Button" text:"Flatten Top" pos:[172,228] width:144 height:24 align:#left
-	dotNetControl btn_unchamfer_edges "Button" text:"Unchamfer eRing" pos:[172,100] width:144 height:24 align:#left
+	dotNetControl btn_unchamfer_edges "Button" text:"Unchamfer eRing" pos:[172,130] width:144 height:24 align:#left
 	dotNetControl btn_sel_sim_els "Button" text:"Select Simillar Elements" pos:[8,78] width:144 height:24 align:#left
 	dotNetControl 'btn_select_faces_by_normal' "Button" text:"Select Faces By Normal" pos:[8,132] width:144 height:24 align:#left
 	dotNetControl 'btn_select_faces_by_thickness' "Button" text:"Select Faces By Thickness" pos:[8,192] width:144 height:24 align:#left
@@ -254,6 +253,40 @@ rollout mcCollisionOptimizeDialog "Geometry Optimizer:" width:328 height:256
 			polyop.moveVertsToPlane obj #{v.index} faceNormal planeOffset
 		)
 	)
+	fn createBoundingBox obj = (
+	
+		if classOf obj != Editable_Poly do return (mcMsgList.warn "not_poly")
+		local slev = subobjectlevel
+		local fsel = mcPoly.getCurentSelectionAs obj #faces
+		if (slev != 4 and slev != 5) or fsel.count == 0 do return (mcMsgList.warn "not_fsel")
+		local vsel = mcPoly.getCurentSelectionAs obj #verts
+		local sum = [0,0,0]
+		local bmin, bmax
+		for v in vsel do (
+			local p = polyOp.getVert obj v --vert pos				
+			sum += p
+			if bmin != undefined then (
+				
+				bmin.x = amin #(p.x, bmin.x)
+				bmin.y = amin #(p.y, bmin.y)
+				bmin.z = amin #(p.z, bmin.z)
+
+				bmax.x = amax #(p.x, bmax.x)
+				bmax.y = amax #(p.y, bmax.y)
+				bmax.z = amax #(p.z, bmax.z)
+			)
+			else bmin = copy (bmax = p)
+		)
+		--create bounding box at center
+		local center = sum/vsel.count
+		local bbox = mcPoly.createBoundingBox bmin bmax center (uniqueName "Bounding_Plane") addMaterial:false
+		--from obj get material id and normal
+		local bigest_face = mcPoly.getLargestFace obj fsel
+		local face_mat_id = polyOp.getFaceMatID obj bigest_face
+		addModifier bbox (Materialmodifier materialID:face_mat_id) 
+		polyOp.attach obj bbox
+		subobjectlevel = slev
+	)
 	fn createBoundingPlane obj = (
 	
 		if classOf obj != Editable_Poly do return (mcMsgList.warn "not_poly")
@@ -337,6 +370,7 @@ rollout mcCollisionOptimizeDialog "Geometry Optimizer:" width:328 height:256
 		mcDotnet.addButtonToolTip btn_select_faces_by_normal "Select faces with same normal" "tltp_fsel_by_normal_01"
 		mcDotnet.addButtonToolTip btn_select_faces_by_thickness "Select faces with same edge thickness" "tltp_fsel_by_tickness_01"
 		mcDotnet.addButtonToolTip btn_sel_sim_els "Select elements with simmilar volume" "tltp_fsel_by_size_01"
+		mcDotnet.addButtonToolTip btn_bounding_box "Create Bounding Box from selected faces." "tltp_bb_box_01"
 		mcDotnet.addButtonToolTip btn_bounding_plane "Create Bounding Plane from selected faces." "tltp_bb_plane_01"
 
 	)
@@ -348,6 +382,7 @@ rollout mcCollisionOptimizeDialog "Geometry Optimizer:" width:328 height:256
 	on btn_sel_sim_els click  do undo label:"Select simillar Elements" on (mcPoly.selectSimilarElements selection[1] offset:spn_area_offset.value)
 	on btn_select_faces_by_normal click  do undo label:"Select Faces By Normal" on (mcPoly.selectFacesByAngle selection[1] ddl_normal_way.selected)
 	on btn_select_faces_by_thickness click  do undo label:"Select Faces By Thickness" on selectFacesByThickness()
+	on btn_bounding_box click  do undo label:"Create Bounding Plane" on createBoundingBox selection[1]
 	on btn_bounding_plane click  do undo label:"Create Bounding Plane" on createBoundingPlane selection[1]
 	
 	on btn_flatten_2d pressed  do undo label:"Flatten Object" on flttenObject selection[1]
