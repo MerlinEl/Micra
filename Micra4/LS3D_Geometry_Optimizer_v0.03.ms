@@ -257,9 +257,9 @@ rollout mcCollisionOptimizeDialog "Geometry Optimizer:" width:328 height:256
 	fn createBoundingPlane obj = (
 	
 		if classOf obj != Editable_Poly do return (mcMsgList.warn "not_poly")
-		local selv = subobjectlevel
+		local slev = subobjectlevel
 		local fsel = mcPoly.getCurentSelectionAs obj #faces
-		if selv == undefined or selv == 0 or fsel.count == 0 do return (mcMsgList.warn "not_fsel")
+		if slev == undefined or slev == 0 or fsel.count == 0 do return (mcMsgList.warn "not_fsel")
 		local vsel = mcPoly.getCurentSelectionAs obj #verts
 		local sum = [0,0,0]
 		local bmin, bmax
