@@ -16,9 +16,9 @@ struct MICRA_SYSTEM (
 	fn getSource = getSourceFileName(), --get path of this script
 	fn getMaxWindow = (
 	
-		local hv = DotNetObject "NativeWindow"
-		hv.AssignHandle (DotNetObject "System.IntPtr" maxHandle) 
-		hv
+		local nw = DotNetObject "NativeWindow"
+		nw.AssignHandle (DotNetObject "System.IntPtr" maxHandle) 
+		nw
 	),
 	fn getMicraWindow = (mcMicraDialog),
 	--local uType = mcSystem.unitsType()
@@ -277,3 +277,16 @@ struct MICRA_SYSTEM (
 	/*<end>*/
 )
 Global mcSystem = mcStructMan.instanceStructure MICRA_SYSTEM "mcSystem"
+
+
+
+/*
+namespace maxCustomControls
+{
+   public class Win32HandleWrapper : System.Windows.Forms.IWin32Window
+   {
+       public IntPtr Handle { get; set; }
+       public Win32HandleWrapper(IntPtr handle) { this.Handle = handle; }
+   }
+}
+*/

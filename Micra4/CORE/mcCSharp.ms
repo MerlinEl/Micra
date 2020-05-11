@@ -55,7 +55,7 @@ struct MICRA_CSHARP_STRUCTURE	(
 	*/
 	fn isLoaded = (classOf (dotNet.getType "Orien.Tools.McGet") == dotNetObject),
 	--forceLoad == false (know classes dont need to be loaded again)
-	fn getClassInstance classPath constructorParams:#() forceLoad:false = ( --ShadowCopy method by susanta
+	fn getClassInstanceShadowCopy classPath constructorParams:#() forceLoad:false = ( --ShadowCopy method by susanta
 	
 		local class_instance 
 		if not forceLoad do (
@@ -73,19 +73,22 @@ struct MICRA_CSHARP_STRUCTURE	(
 		local AppDomain = dotNetClass "System.AppDomain"
 		local Assembly = dotNetClass "System.Reflection.Assembly"
 		local AssemblyName = dotNetClass "System.Reflection.AssemblyName"
-		--set the shadow copy so actually original assembly file can be overriten...SetShadowCopyFiles is obsoluted according to MSDN
-		--but that is the only way to enable ShadowCopy option for current AppDomain. Because through Maxscript
-		--creation of new appdomain is not possible so we have to use current AppDoamin and for 3dsMax2009 ShadowCopy for current Appdomain is false bydefault
-		-- whatever the dir we use with SetShadowCopyPath, all assembly loaded later from this directory automatically will be shadow copied by .net runtime
-		--I'm for demonstartion using "C:\Release" but you can use directly use yourVCSharpProject/Bin/Release or Debug folder
-		--make sure everytime you have differnt version number, In case of Visual Studio 2008 C# project version settings
-		--under project settings -> Application-->Assembly Information or you can change AssemblyInfo.cs file of your project manually
-		--or the addin I have specified for visual studio to autoincrement it you can use http://www.codeplex.com/autobuildversion
-
-		--using default cache path ensure delete of shadow copy files will be  handle by runtime automatically
-		--if you use your own cache path using AppDomain.CurrentDomain.SetCachePath then you have delete them manually
-		--So I'm not using that
-
+		
+		-- -Set the shadow copy so actually original assembly file can be overriten...
+		-- SetShadowCopyFiles is obsoluted according to MSDN 
+		-- but that is the only way to enable ShadowCopy option for current AppDomain. Because through Maxscript
+		-- creation of new appdomain is not possible 
+		-- so we have to use current AppDoamin and for 3dsMax2009 ShadowCopy for current Appdomain is false bydefault
+		-- whatever the dir we use with SetShadowCopyPath, 
+		-- all assembly loaded later from this directory automatically will be shadow copied by .net runtime
+		-- -I'm for demonstartion using "C:\Release" but you can use directly use yourVCSharpProject/Bin/Release or Debug folder
+		-- make sure everytime you have differnt version number, In case of Visual Studio 2008 C# project version settings
+		-- under project settings -> Application-->Assembly Information or you can change AssemblyInfo.cs file of your project manually
+		-- or the addin I have specified for visual studio to autoincrement it you can use http://www.codeplex.com/autobuildversion
+		-- -Using default cache path, ensure delete of shadow copy files will be handle by runtime automatically
+		-- if you use your own cache path using AppDomain.CurrentDomain.SetCachePath then you have delete them manually
+		-- So I'm not using that
+		
 		AppDomain.CurrentDomain.SetShadowCopyPath (micra.AssemblyDir)
 		AppDomain.CurrentDomain.SetShadowCopyFiles()
 		--load the first version...again don't forget to use different version for every compile in visual studio
@@ -96,6 +99,12 @@ struct MICRA_CSHARP_STRUCTURE	(
 
 		--Now load it using assembly name, don't use LoadFromFile
 		local assem = Assembly.Load assemName
+--replacement test >		
+			/*local assembly_path = micra.AssemblyDir + "Orien.Star.dll"
+			local assembly_bytes = (dotnetClass "System.IO.File").ReadAllBytes assembly_path
+			local assem = (dotnetClass "System.Reflection.Assembly").Load assembly_bytes*/
+--replacement test <		
+		
 		print ("Assembly.Location:" + assem.Location)
 		--will print the temp file path runtime used for shadow copy  somthing like "\Application Data\assembly\dl3\OAV6J36X.Q9J\1Z7DWQ44.552\0f496cae\004a3872_967cc901\Orien.Star.dll"
 
@@ -103,7 +112,7 @@ struct MICRA_CSHARP_STRUCTURE	(
 		class_instance = assem.CreateInstance classPath --create object of first version of MYLib.MyClass
 		class_instance --return class instance
 	),
-	fn getClassInstance_old classPath constructorParams:#() forceLoad:false = (
+	fn getClassInstance classPath constructorParams:#() forceLoad:false = (
 	
 		local class_instance
 		if not doesFileExist (micra.AssemblyDir + "Orien.Star.dll") do return false
@@ -111,6 +120,9 @@ struct MICRA_CSHARP_STRUCTURE	(
 			--Orien.Tools and Orine.NetUi are mergetn in to > 
 			format "Assembly Orien.Star was loaded\n"
 			local assembly_path = micra.AssemblyDir + "Orien.Star.dll"
+			local AssemblyName = dotNetClass "System.Reflection.AssemblyName"
+			local assem_name = AssemblyName.GetAssemblyName(assembly_path)
+			format "Assembly.FullName:%\n" assem_name.FullName --print ddl name and version
 			local assembly_bytes = (dotnetClass "System.IO.File").ReadAllBytes assembly_path
 			local assembly = (dotnetClass "System.Reflection.Assembly").Load assembly_bytes
 
@@ -253,8 +265,8 @@ struct MICRA_CSHARP_STRUCTURE	(
 )	
  --create instance
 Global mcCSharp = mcStructMan.instanceStructure MICRA_CSHARP_STRUCTURE "mcCSharp"
-Global McGetCs = mcCSharp.getClassInstance "Orien.Tools.McGet" forceLoad:true
-Global McSetCs = mcCSharp.getClassInstance "Orien.Tools.McSet" forceLoad:true
+Global McGetCs = mcCSharp.getClassInstance "Orien.Tools.McGet" forceLoad:true --one force is enough for reload
+Global McSetCs = mcCSharp.getClassInstance "Orien.Tools.McSet"
 
 /*
 if params.count == 0 then ( --object instance

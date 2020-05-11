@@ -4,6 +4,7 @@
 /*
 *@Used Structures
 	Micra
+	mcSystem
 	mcUIColors
 	mcFile
 *
@@ -185,41 +186,36 @@ Struct MICRA_DOTNET (
 		) catch ()
 	),
 	/**
-	TODO > check this method instead
-		--Max array to dotnet array
-		arr = #("http://test", "http://www.example.com")
-		dotNetArg=dotNet.ValueToDotNetObject arr (dotNetObject "System.Object")
-		dotNetArg.Length
-		dotNetArg[1]
-		(dotnetClass "System.String").format "ww_1:{0} www_2:{1}"  dotNetArg
+	*@Usage convert max array in to dotnet object
+	*@Example
+		create:
+		num_arr = mcDotnet.dArray #( 20, 45, 8, 6 )
+		str_arr = mcDotnet.dArray #( "Santa", "Leon", "Linda", "Ben" )
+		all_arr = mcDotnet.dArray #( 15, "Custom String", 4568.486 )
+		
+		modify:
+		num_arr.Set (num_arr.Length-1) 45
+		num_arr.Get (num_arr.Length-1)
+		num_arr.SetValue 21 1
+		num_arr.GetValue 1
+		num_arr.IndexOf num_arr 8
+		num_arr.LastIndexOf num_arr 45
+		for i=0 to num_arr.Length-1 do print (num_arr.Get i)
+	*@Oldway
+		max_array = #(1, 2, 3)
+		net_array = dotNetObject "System.Object[]" max_array.count
+		for i=0 to max_array.count-1 do net_array.SetValue max_array[i+1] i
+		for i=0 to net_array.Length-1 do print (net_array.Get i)
+		
+		max_array = #("a", "b", "c")
+		net_array = dotNetObject "System.String[]" max_array.count
+		for i=0 to max_array.count-1 do net_array.SetValue max_array[i+1] i
+		for i=0 to net_array.Length-1 do print (net_array.Get i)
 	*/
-	fn dArray mxsArray byte:false = (
-		if classOf mxsArray != Array or mxsArray.count == 0 do return undefined
-		local net_array
-		case classOf mxsArray[1] of 
-		(
-			dotNetObject:
-			(
-				net_array = dotNetObject "System.Object[]" mxsArray.count
-				for i=1 to mxsArray.count do 
-				(
-					local obj = mxsArray[i]
-					local indx = if byte then dotNetObject "System.Byte" (i-1) else dotNetObject "System.Int32" (i-1)
-					net_array.SetValue obj indx
-				)
-			)
-			String:
-			(
-				net_array = dotNetObject "System.String[]" mxsArray.count
-				for i=1 to mxsArray.count do 
-				(
-					local str = dotNetObject "System.String" mxsArray[i]
-					local indx = if byte then dotNetObject "System.Byte" (i-1) else dotNetObject "System.Int32" (i-1)
-					net_array.SetValue str indx
-				)
-			)
-		)
-		net_array
+	fn dArray arr = (
+	
+		if classOf arr != Array or arr.count == 0 do return undefined
+		dotNet.ValueToDotNetObject arr (dotNetObject "System.Object")
 	),
 	/**
 	*@Usage	> convert sconds in to TimeSpan
@@ -230,11 +226,6 @@ Struct MICRA_DOTNET (
 	
 		local ts = dotnetObject "System.TimeSpan" 0
 		ts.FromSeconds sec_val
-	),
-	fn maxHW = (
-			local hv = DotNetObject "NativeWindow"
-			hv.AssignHandle (DotNetObject "System.IntPtr" (Windows.GetMaxHWND())) 
-			return hv
 	),
 	fn focusViewport = ( 
 
@@ -282,7 +273,7 @@ Struct MICRA_DOTNET (
 			format ("mcDotnet > form [ % ] start bounded in to windows.\n") form.name
 			return OK
 		)
-		local hv = maxHW ()
+		local hv = mcSystem.getMaxWindow()
 		 -- Shows the form with the specified owner (MAX) to the user (creatd by lo)
 		if modal then form.ShowModal() else form.Show(hv)
 		

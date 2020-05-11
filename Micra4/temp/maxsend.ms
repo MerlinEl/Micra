@@ -6,4 +6,5 @@
 	-- mcProgRad.progressTo 100 msg:"Collapse Objects Is Finished!" confirm:true showButton:true clr:green
 	
 -- mousehook.mouseops.release()
-mcPopUp.close()
+--mcPopUp.close()
+saveMaxFile "c:/temp/reco.max" useNewFile:false

@@ -11,38 +11,50 @@ mcMath_cs.minMax 100	1	50	--> 50
 mcMath_cs.minMax -1	1	50	--> 1
 mcMath_cs.minMax 100	1	200	--> 100
 ------------------------------------------------------------------------------------------
-mcConsole_cs = mcCSharp.getClassInstance "Orien.NetUi.McMaxConsole"  constructorParams:#(mcMicraDialog) forceLoad:true
-mcConsole_cs.owner = mcMicraDialog
+--TODO implement constructor parameters
+--TODO (release files > C:\Users\Rene.baca\AppData\Local\assembly)
+mcConsole_cs = mcCSharp.getClassInstance "Orien.NetUi.McMaxConsole" forceLoad:true --constructorParams:#(mcMicraDialog) 
+mcConsole_cs.owner = mcMicraDialog --not works (console is still independent)
 
+hv = mcSystem.getMaxWindow()
+mcConsole_cs.show(hv)
+hv.ReleaseHandle()
+
+/*
 maxWindow=mcSystem.getMaxWindow()
 mcConsole_cs.owner = maxWindow --GetType()
 maxWindow.DefWndProc -- <System.Windows.Forms.Message&>m
+mcConsole_cs.OnTop
+mcConsole_cs.ShowConsole(mcSystem.MaxHandle) --do not use this , it will close whole Max when console close
+*/
 
-mcConsole_cs.show()
 mcConsole_cs.Log "hello"
 mcConsole_cs.Log "Personal" "hello Rene" 
-mcConsole_cs.Log "Formated" "hello Rene a:{0} b:{1}" (dotnetArray #( 15, "Custom String" ))
+mcConsole_cs.Log "Formated" "hello Rene a:{0} b:{1}" (mcDotnet.dArray #( 15, "Custom String" ))
 
 
-MaxCustomControls
-maxHandlePointer=(Windows.GetMAXHWND()) 
-sysPointer = DotNetObject "System.IntPtr" maxHandlePointer
-maxHwnd = DotNetObject "MaxCustomControls.Win32HandleWrapper" sysPointer
-
+mcConsole_cs.Close() --finaly close console	
 	
 	
-	hv = DotNetObject "MaxCustomControls.MaxForm"
-	sysPointer = DotNetObject "System.IntPtr" mcSystem.maxHandle
-	hv.AssignHandle
+.Log <System.String>msg
+.Log <System.String>msg <System.Object[]>args
+.Log <System.String>tabName <System.String>msg
+.Log <System.String>tabName <System.String>msg <System.Object[]>args	
+	
+	
+--Typing TODO
 	windows.SendMessage mcSystem.maxHandle mcWinMsg.WM_SETFOCUS 0 0
-	
-	
 			assembly_path = micra.AssemblyDir + "Orien.Star.dll"
 			assembly_bytes = (dotnetClass "System.IO.File").ReadAllBytes assembly_path
 			assembly = (dotnetClass "System.Reflection.Assembly").Load assembly_bytes
 			dotnet_class = dotNet.getType  "Orien.NetUi.McConsole"
 			mcConsole_cs = (dotNetClass "System.Activator").CreateInstance dotnet_class	
 	
+	
+	// for lostfocus
+ManagedServices.AppSDK.EnableAccelerators();
+// for gotfocus
+ManagedServices.AppSDK.DisableAccelerators();
 	
 --https://help.autodesk.com/view/3DSMAX/2017/ENU/?guid=__files_GUID_F9BDCDFD_5C2D_42ED_A840_184795A2E057_htm
 enableAccelerators = false
