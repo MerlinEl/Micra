@@ -1,7 +1,7 @@
 
 Global mcCollisionOptimizeDialog
 if mcCollisionOptimizeDialog != undefined do destroyDialog mcCollisionOptimizeDialog
-rollout mcCollisionOptimizeDialog "Geometry Optimizer:" width:328 height:256
+rollout mcCollisionOptimizeDialog "Geometry Optimizer:" width:328 height:316
 (
 	local units_type = mcSystem.unitsType()
 	GroupBox 'grp1' "Method 1:" pos:[0,4] width:160 height:68 align:#left
@@ -10,6 +10,8 @@ rollout mcCollisionOptimizeDialog "Geometry Optimizer:" width:328 height:256
 	label 'lbl_units_01' "cm" pos:[136,24] width:16 height:16 align:#left
 	label 'lbl11' "cm" pos:[136,220] width:16 height:16 align:#left
 	label 'lbl12' "cm" pos:[136,106] width:16 height:16 align:#left
+	label 'lbl13' "vertlimit:" pos:[8,274] width:40 height:16 align:#left
+	label 'lbl14' "inflation:" pos:[8,294] width:40 height:16 align:#left
 	
 	button 'btn_flatten_2d' "Flatten Object by Face N" pos:[172,18] width:144 height:24 align:#left
 	radioButtons 'rdo_offset_type' "" pos:[168,48] width:152 height:16 labels:#("front", "back", "mid") default:1 columns:3 align:#left
@@ -18,8 +20,9 @@ rollout mcCollisionOptimizeDialog "Geometry Optimizer:" width:328 height:256
 	--button 'btn_projector_2d' "Projector 2D" pos:[172,44] width:144 height:24 align:#left enabled:false
 
 	dotNetControl btn_optimize_chamfers "Button" text: "Optimize by eRing" pos:[8,44] width:144 height:24 align:#left
-	dotNetControl btn_fuse_edges "Button" text:"Fuse Edges" pos:[172,200] width:100 height:24 align:#left
-	dotNetControl btn_opt_flat "Button" text:"Flatten Top" pos:[172,228] width:144 height:24 align:#left
+	dotNetControl btn_fuse_edges "Button" text:"Fuse Edges" pos:[172,186] width:100 height:24 align:#left
+	dotNetControl btn_opt_flat "Button" text:"Flatten Top" pos:[172,216] width:144 height:24 align:#left
+	dotNetControl btn_create_hull "Button" text:"Create Convex Hull" pos:[8,244] width:144 height:24 align:#left
 	dotNetControl btn_unchamfer_edges "Button" text:"Unchamfer eRing" pos:[172,130] width:144 height:24 align:#left
 	dotNetControl btn_sel_sim_els "Button" text:"Select Simillar Elements" pos:[8,78] width:144 height:24 align:#left
 	dotNetControl 'btn_select_faces_by_normal' "Button" text:"Select Faces By Normal" pos:[8,132] width:144 height:24 align:#left
@@ -27,14 +30,16 @@ rollout mcCollisionOptimizeDialog "Geometry Optimizer:" width:328 height:256
 	
 	dropDownList ddl_normal_way "" pos:[8,160] width:144 height:21 items:#("fromface", "top", "bottom", "left", "right", "front", "back") align:#left
 	
-	checkbox chk_wipe "wipe" pos:[280,200] width:60 height:24 align:#left checked:false --enabled:false
+	checkbox chk_wipe "wipe" pos:[280,186] width:60 height:24 align:#left checked:false --enabled:false
 	
 
 	button 'btn_opt_loop_by_n' "GO" pos:[288,160] width:28 height:24 align:#left
 	spinner 'spn_chamfer_len' "" pos:[72,24] width:60 height:16 range:[0,1e+06,3] type:#float align:#left
 	spinner 'spn_lop_each' "" pos:[248,164] width:34 height:16 range:[0,99,1] type:#integer align:#left
-	spinner 'spn_face_thickness' "" pos:[8,220] width:120 height:16 range:[0,1e+06,5] type:#float align:#left
 	spinner 'spn_area_offset' "" pos:[8,106] width:120 height:16 range:[0,1e+06,10] type:#float align:#left
+	spinner 'spn_face_thickness' "" pos:[8,220] width:120 height:16 range:[0,1e+06,5] type:#float align:#left
+	spinner 'spn_hull_vetlimnit' "" pos:[50,274] width:100 height:16 range:[0,1e+06,20] type:#float align:#left
+	spinner 'spn_hull_inflation' "" pos:[50,294] width:100 height:16 range:[0,1e+06,0.5] type:#float align:#left
 
 	--listbox 'lbx_auto_list' "" pos:[8,124] width:144 height:9 enabled:false items:#("Fences", "Curbs") align:#left
 
@@ -359,6 +364,51 @@ rollout mcCollisionOptimizeDialog "Geometry Optimizer:" width:328 height:256
 		if classOf obj == editable_poly do subobjectlevel = 4
 		mcPoly.selectFacesWithSmallEdge obj spn_face_thickness.value
 	)
+	fn getObjectCollision obj = (
+	
+		for o in obj.children where findString (toLower o.name) "_coll" != undefined do exit with o
+	)
+	fn createConvexHull objs = (
+	
+		local semantic_mat = currentMaterialLibrary["semantic_materials"]
+		if semantic_mat == undefined do (
+			gProgLog.msg ("Unable to inicialize. Semantic Material not found.") ty:"error"
+			return false
+		)
+	
+		for o in objs where superClassOf o == GeometryClass do with redraw off (
+		
+			--create convex hull trimesh
+			local tri_mesh=nvpx.CreateConvexHull o.mesh spn_hull_vetlimnit.value spn_hull_inflation.value
+			--check if o has already collision
+			local o_coll = getObjectCollision o
+			if classOf o_coll == Editable_Poly then ( --if yes replace trimesh
+			
+				convertToMesh o_coll
+				o_coll.mesh = tri_mesh--assign trimesh
+				update o_coll
+				convertToPoly o_coll
+			
+			) else ( --if not create new mesh
+			
+				o_coll = copy o
+				convertToMesh o_coll
+				o_coll.mesh = tri_mesh--assign trimesh
+				update o_coll
+				convertToPoly o_coll
+				o_coll.parent = o --link collision to object
+				o_coll.material = semantic_mat --assign semantic material
+				polyop.setFaceMatID o_coll #{1..o_coll.faces.count} 1 --set id to unihard
+				--add collision prameter (Data Manager)
+				AddCustomAttributeByName o_coll "CollisionMesh"
+				o_coll.'~layer' = -1
+				o_coll.name = o.name + "_coll"
+			)
+		)
+		completeREdraw()
+		--Returns a TriMesh value representing the convex bounding shape of the specified node
+		--<mesh>nvpx.CreateBoundingConvex <node>inode <integer>vertLimit <float>inflation
+	)
 	fn init = (
 	
 		lbl_units_01.text = units_type
@@ -384,6 +434,7 @@ rollout mcCollisionOptimizeDialog "Geometry Optimizer:" width:328 height:256
 	on btn_select_faces_by_thickness click  do undo label:"Select Faces By Thickness" on selectFacesByThickness()
 	on btn_bounding_box click  do undo label:"Create Bounding Plane" on createBoundingBox selection[1]
 	on btn_bounding_plane click  do undo label:"Create Bounding Plane" on createBoundingPlane selection[1]
+	on btn_create_hull click  do undo label:"Create Convex Hull" on createConvexHull (selection as array)
 	
 	on btn_flatten_2d pressed  do undo label:"Flatten Object" on flttenObject selection[1]
 	on btn_projector_2d pressed  do filein (micra.RootDir + "Projector2D_v0.01.ms")
