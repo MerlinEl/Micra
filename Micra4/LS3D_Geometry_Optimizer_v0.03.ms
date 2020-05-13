@@ -422,6 +422,7 @@ rollout mcCollisionOptimizeDialog "Geometry Optimizer:" width:328 height:316
 		mcDotnet.addButtonToolTip btn_sel_sim_els "Select elements with simmilar volume" "tltp_fsel_by_size_01"
 		mcDotnet.addButtonToolTip btn_bounding_box "Create Bounding Box from selected faces." "tltp_bb_box_01"
 		mcDotnet.addButtonToolTip btn_bounding_plane "Create Bounding Plane from selected faces." "tltp_bb_plane_01"
+		mcDotnet.addButtonToolTip btn_create_hull "Create Convex Hull from selected Objects" "tltp_convex_hull_01"
 
 	)
 	on mcCollisionOptimizeDialog open do init()
