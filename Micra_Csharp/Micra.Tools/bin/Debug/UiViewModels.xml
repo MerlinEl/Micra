@@ -1,0 +1,2430 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>UiViewModels</name>
+    </assembly>
+    <members>
+        <member name="T:UiViewModels.ActionContainer.GlobalSearchViewModel">
+            <summary>
+            Top-Level ViewModel object for Global Search floating widget.
+            </summary>
+        </member>
+        <member name="M:UiViewModels.ActionContainer.GlobalSearchViewModel.#ctor">
+            <summary>
+            default constructor
+            </summary>
+        </member>
+        <member name="F:UiViewModels.ActionContainer.GlobalSearchViewModel.SearchFilterPropertyName">
+            <summary>
+            SearchFilter Property Name
+            </summary>    
+        </member>
+        <member name="P:UiViewModels.ActionContainer.GlobalSearchViewModel.SearchFilter">
+            <summary>
+            Current Search Filter being applied
+            </summary>
+        </member>
+        <member name="F:UiViewModels.ActionContainer.GlobalSearchViewModel.ResultItemsPropertyName">
+            <summary>
+            ResultItems Property Name
+            </summary>    
+        </member>
+        <member name="P:UiViewModels.ActionContainer.GlobalSearchViewModel.ResultItems">
+            <summary>
+            The items that currently match the filter.
+            </summary>
+        </member>
+        <member name="F:UiViewModels.ActionContainer.GlobalSearchViewModel.IsFilterAppliedPropertyName">
+            <summary>
+            IsFilterApplied Property Name
+            </summary>    
+        </member>
+        <member name="P:UiViewModels.ActionContainer.GlobalSearchViewModel.IsFilterApplied">
+            <summary>
+            A value which indicates whether a filter is applied or not.
+            </summary>
+        </member>
+        <member name="P:UiViewModels.ActionContainer.GlobalSearchViewModel.ResultsThreshold">
+            <summary>
+            Threshold of items that we attempt to show to the user
+            </summary>
+        </member>
+        <member name="F:UiViewModels.ActionContainer.GlobalSearchViewModel.IsWithinResultsThresholdPropertyName">
+            <summary>
+            IsWithinResultsThreshold Property Name
+            </summary>    
+        </member>
+        <member name="P:UiViewModels.ActionContainer.GlobalSearchViewModel.IsWithinResultsThreshold">
+            <summary>
+            A boolean that checks whether we are within a prescibed threshold of results.
+            </summary>
+        </member>
+        <member name="F:UiViewModels.ActionContainer.GlobalSearchViewModel.HighlightedIndexPropertyName">
+            <summary>
+            IsHighlightedIndex Property Name
+            </summary>    
+        </member>
+        <member name="P:UiViewModels.ActionContainer.GlobalSearchViewModel.HighlightedIndex">
+            <summary>
+            The index of the highlighted item
+            </summary>
+        </member>
+        <member name="T:UiViewModels.ActionContainer.Toolbar">
+            <summary>
+            Toolbar VM representation
+            </summary>
+        </member>
+        <member name="M:UiViewModels.ActionContainer.Toolbar.#ctor">
+            <summary>
+            default constructor
+            </summary>
+        </member>
+        <member name="F:UiViewModels.ActionContainer.Toolbar.TabsPropertyName">
+            <summary>
+            Tabs Property Name
+            </summary>    
+        </member>
+        <member name="P:UiViewModels.ActionContainer.Toolbar.Tabs">
+            <summary>
+            Set of Tabs in toolbar
+            </summary>
+        </member>
+        <member name="M:UiViewModels.ActionContainer.Toolbar.CheckForBrowseMode">
+            <summary>
+            Sets browse mode to true if any of the Tabs are browsing.
+            </summary>
+        </member>
+        <member name="F:UiViewModels.ActionContainer.Toolbar.TitlePropertyName">
+            <summary>
+            Titles property name
+            </summary>
+        </member>
+        <member name="P:UiViewModels.ActionContainer.Toolbar.Title">
+            <summary>
+            The title of the toolbar, if it's floating
+            </summary>
+        </member>
+        <member name="F:UiViewModels.ActionContainer.Toolbar.IsBrowseModePropertyName">
+            <summary>
+            Titles property name
+            </summary>
+        </member>
+        <member name="P:UiViewModels.ActionContainer.Toolbar.IsBrowseMode">
+            <summary>
+            Returns true if in browser mode, false otherwise.
+            </summary>
+        </member>
+        <member name="M:UiViewModels.ActionContainer.Toolbar.ResetBrowseMode">
+            <summary>
+            Resets all toolbar IsBrowsing properties to false.
+            </summary>
+        </member>
+        <member name="F:UiViewModels.ActionContainer.Toolbar.ShowIconPropertyName">
+            <summary>
+            ShowIcon Property Name
+            </summary>    
+        </member>
+        <member name="P:UiViewModels.ActionContainer.Toolbar.ShowIcon">
+            <summary>
+            Toolbar shows icons at the top level
+            </summary>
+        </member>
+        <member name="F:UiViewModels.ActionContainer.Toolbar.ShowTextPropertyName">
+            <summary>
+            ShowText Property Name
+            </summary>    
+        </member>
+        <member name="P:UiViewModels.ActionContainer.Toolbar.ShowText">
+            <summary>
+            Toolbar shows text at the top level.
+            </summary>
+        </member>
+        <member name="F:UiViewModels.ActionContainer.Toolbar.ShowShortcutKeysPropertyName">
+            <summary>
+            ShowShortcutKeys Property Name
+            </summary>    
+        </member>
+        <member name="P:UiViewModels.ActionContainer.Toolbar.ShowShortcutKeys">
+            <summary>
+            Represents the state where the toolbar is displaying the top-level tab shortcut keys.
+            </summary>
+        </member>
+        <member name="M:UiViewModels.ActionContainer.Toolbar.BrowseToTabByHotkey(System.Char)">
+            <summary>
+            Browses to a specific tab using its hotkey
+            </summary>
+            <param name="hotkey"></param>
+        </member>
+        <member name="T:UiViewModels.ActionContainer.ToolbarItem">
+            <summary>
+            Represents an item in the toolbar
+            </summary>
+        </member>
+        <member name="M:UiViewModels.ActionContainer.ToolbarItem.#ctor">
+            <summary>
+            Standard constructor
+            </summary>
+        </member>
+        <member name="F:UiViewModels.ActionContainer.ToolbarItem.ActionPropertyName">
+            <summary>
+            Action Property Name
+            </summary>    
+        </member>
+        <member name="P:UiViewModels.ActionContainer.ToolbarItem.Action">
+            <summary>
+            The application action associated with this item
+            </summary>
+        </member>
+        <member name="F:UiViewModels.ActionContainer.ToolbarItem.OwnerPropertyName">
+            <summary>
+            Owner Property Name
+            </summary>    
+        </member>
+        <member name="P:UiViewModels.ActionContainer.ToolbarItem.Owner">
+            <summary>
+            The Owner of this item
+            </summary>
+        </member>
+        <member name="F:UiViewModels.ActionContainer.ToolbarItem.ImagePropertyName">
+            <summary>
+            Image Property Name
+            </summary>    
+        </member>
+        <member name="P:UiViewModels.ActionContainer.ToolbarItem.Image">
+            <summary>
+            The small image of the item
+            </summary>
+        </member>
+        <member name="F:UiViewModels.ActionContainer.ToolbarItem.ToolTipPropertyName">
+            <summary>
+            Tooltip Property Name
+            </summary>    
+        </member>
+        <member name="P:UiViewModels.ActionContainer.ToolbarItem.ToolTip">
+            <summary>
+            A tooltip of the item
+            </summary>
+        </member>
+        <member name="F:UiViewModels.ActionContainer.ToolbarItem.TitlePropertyName">
+            <summary>
+            Title of the item
+            Can be either Action.MenuText or MenuItem.Title depending on whether the menu
+            has a custom title
+            </summary>
+        </member>
+        <member name="P:UiViewModels.ActionContainer.ToolbarItem.Title">
+            <summary>
+            Title of the item
+            </summary>
+        </member>
+        <member name="F:UiViewModels.ActionContainer.ToolbarItem.UseCustomTitlePropertyName">
+            <summary>
+            UseCustomTitle Property Name
+            </summary>    
+        </member>
+        <member name="P:UiViewModels.ActionContainer.ToolbarItem.UseCustomTitle">
+            <summary>
+            Use the menu item's custom title instead of the action item MenuText property
+            </summary>
+        </member>
+        <member name="F:UiViewModels.ActionContainer.ToolbarItem.IsSeparatorPropertyName">
+            <summary>
+            IsSeparator Property Name
+            </summary>    
+        </member>
+        <member name="P:UiViewModels.ActionContainer.ToolbarItem.IsSeparator">
+            <summary>
+            Is a separator item rather than an action item
+            </summary>
+        </member>
+        <member name="F:UiViewModels.ActionContainer.ToolbarItem.IsInFilterConditionPropertyName">
+            <summary>
+            IsInFilterCondition Property Name
+            </summary>    
+        </member>
+        <member name="P:UiViewModels.ActionContainer.ToolbarItem.IsInFilterCondition">
+            <summary>
+            If this item conforms to the current filter.
+            </summary>
+        </member>
+        <member name="F:UiViewModels.ActionContainer.ToolbarItem.IsHighlightedPropertyName">
+            <summary>
+            IsHighlighted Property Name
+            </summary>    
+        </member>
+        <member name="P:UiViewModels.ActionContainer.ToolbarItem.IsHighlighted">
+            <summary>
+            Whether the item is highlighted for selection.
+            </summary>
+        </member>
+        <member name="F:UiViewModels.ActionContainer.ToolbarItem.HasAssignedIconPropertyName">
+            <summary>
+            HasAssignedIcon Property Name
+            </summary>    
+        </member>
+        <member name="P:UiViewModels.ActionContainer.ToolbarItem.HasAssignedIcon">
+            <summary>
+            Has an assigned icon (not the missing icon)
+            </summary>
+        </member>
+        <member name="M:UiViewModels.ActionContainer.ToolbarItem.Clone">
+            <summary>
+            Creates a shallow-copy of the item, where the resolved application
+            action is reference-copied.
+            </summary>
+            <returns>A shallow-copy of the item.</returns>
+        </member>
+        <member name="T:UiViewModels.ActionContainer.ToolbarPanel">
+            <summary>
+            A sub-panel of a toolbar
+            </summary>
+        </member>
+        <member name="M:UiViewModels.ActionContainer.ToolbarPanel.#ctor">
+            <summary>
+            constructor
+            </summary>
+        </member>
+        <member name="F:UiViewModels.ActionContainer.ToolbarPanel.ItemsPropertyName">
+            <summary>
+            The Items property name
+            </summary>
+        </member>
+        <member name="P:UiViewModels.ActionContainer.ToolbarPanel.Items">
+            <summary>
+            The collection of items this panel holds
+            </summary>
+        </member>
+        <member name="F:UiViewModels.ActionContainer.ToolbarPanel.NamePropertyName">
+            <summary>
+            Name Property Name
+            </summary>    
+        </member>
+        <member name="P:UiViewModels.ActionContainer.ToolbarPanel.Name">
+            <summary>
+            The Name of the Panel
+            </summary>
+        </member>
+        <member name="F:UiViewModels.ActionContainer.ToolbarPanel.StripTextPropertyName">
+            <summary>
+            StripText Property Name
+            </summary>    
+        </member>
+        <member name="P:UiViewModels.ActionContainer.ToolbarPanel.StripText">
+            <summary>
+            This panel should not display textual descriptions.
+            </summary>
+        </member>
+        <member name="F:UiViewModels.ActionContainer.ToolbarPanel.StripIconPropertyName">
+            <summary>
+            StripIcon Property Name
+            </summary>    
+        </member>
+        <member name="P:UiViewModels.ActionContainer.ToolbarPanel.StripIcon">
+            <summary>
+            Determines whether icons should be shown
+            </summary>
+        </member>
+        <member name="P:UiViewModels.ActionContainer.ToolbarPanel.IsIconsOnly">
+            <summary>
+            If panel show icons only
+            </summary>
+        </member>
+        <member name="F:UiViewModels.ActionContainer.ToolbarPanel.IsHoverWhenLockOnPropertyName">
+            <summary>
+            IsOverWhenLockOn Property Name
+            </summary>    
+        </member>
+        <member name="P:UiViewModels.ActionContainer.ToolbarPanel.IsHoverWhenLockOn">
+            <summary>
+            Mouse is over panel
+            </summary>
+        </member>
+        <member name="F:UiViewModels.ActionContainer.ToolbarPanel.IsHoverPropertyName">
+            <summary>
+            IsHover Property Name
+            </summary>    
+        </member>
+        <member name="P:UiViewModels.ActionContainer.ToolbarPanel.IsHover">
+            <summary>
+            Whether the flyout of the panel is showing or not
+            </summary>
+        </member>
+        <member name="F:UiViewModels.ActionContainer.ToolbarPanel.IsGestureLockForFlyoutPropertyName">
+            <summary>
+            IsGestureLockForFlyout Property Name
+            </summary>    
+        </member>
+        <member name="P:UiViewModels.ActionContainer.ToolbarPanel.IsGestureLockForFlyout">
+            <summary>
+            Determines if we currently in gesture lock state for determining whether the flyout
+            should be shown or fl
+            </summary>
+        </member>
+        <member name="F:UiViewModels.ActionContainer.ToolbarPanel.PostGestureLockForFlyoutPropertyName">
+            <summary>
+            PostGestureLockForFlyout Property Name
+            </summary>    
+        </member>
+        <member name="P:UiViewModels.ActionContainer.ToolbarPanel.PostGestureLockForFlyout">
+            <summary>
+            This property reflects the value IsGestureLockForFlyout but is set after
+            any change is made to IsGestureLockForFlyout.  We need this property because we
+            have an action which needs to take place deterministically after the processing of the state change for
+            IsGestureLockForFlyout is complete.
+            </summary>
+        </member>
+        <member name="F:UiViewModels.ActionContainer.ToolbarPanel.RequestCloseFlyoutPropertyName">
+            <summary>
+            StripText Property Name
+            </summary>    
+        </member>
+        <member name="P:UiViewModels.ActionContainer.ToolbarPanel.RequestCloseFlyout">
+            <summary>
+            This panel should not display textual descriptions.
+            </summary>
+        </member>
+        <member name="F:UiViewModels.ActionContainer.ToolbarPanel.IsFlyoutModePropertyName">
+            <summary>
+            IsFlyoutMode Property Name
+            </summary>    
+        </member>
+        <member name="P:UiViewModels.ActionContainer.ToolbarPanel.IsFlyoutMode">
+            <summary>
+            Whether the panel is in flyout mode or is being displayed linearly.
+            </summary>
+        </member>
+        <member name="F:UiViewModels.ActionContainer.ToolbarPanel.IsInFlyoutPropertyName">
+            <summary>
+            IsInFlyout Property Name
+            </summary>    
+        </member>
+        <member name="P:UiViewModels.ActionContainer.ToolbarPanel.IsInFlyout">
+            <summary>
+            Whether the flyout is being shown or not.
+            </summary>
+        </member>
+        <member name="F:UiViewModels.ActionContainer.ToolbarPanel.HasBeenVisitedPropertyName">
+            <summary>
+            HasBeenVisited Property Name
+            </summary>    
+        </member>
+        <member name="P:UiViewModels.ActionContainer.ToolbarPanel.HasBeenVisited">
+            <summary>
+            True if the panel has been visited by the user yet
+            </summary>
+        </member>
+        <member name="F:UiViewModels.ActionContainer.ToolbarPanel.IsDockedPropertyName">
+            <summary>
+            IsDocked Property Name
+            </summary>    
+        </member>
+        <member name="P:UiViewModels.ActionContainer.ToolbarPanel.IsDocked">
+            <summary>
+            IsDocked Property
+            </summary>
+        </member>
+        <member name="F:UiViewModels.ActionContainer.ToolbarPanel.IsDropOnTopPropertyName">
+            <summary>
+            IsDropOnTop Property Name
+            </summary>    
+        </member>
+        <member name="P:UiViewModels.ActionContainer.ToolbarPanel.IsDropOnTop">
+            <summary>
+            IsDropOnTop Property
+            </summary>
+        </member>
+        <member name="F:UiViewModels.ActionContainer.ToolbarPanel.IsDropOnBottomPropertyName">
+            <summary>
+            IsDropOnBottom Property Name
+            </summary>    
+        </member>
+        <member name="P:UiViewModels.ActionContainer.ToolbarPanel.IsDropOnBottom">
+            <summary>
+            IsDropOnBottom Property
+            </summary>
+        </member>
+        <member name="M:UiViewModels.ActionContainer.ToolbarPanel.ResetDropPositions">
+            <summary>
+            Reset drop positions (onTop and onBottom)
+            </summary>
+        </member>
+        <member name="F:UiViewModels.ActionContainer.ToolbarPanel.IsVisiblePropertyName">
+            <summary>
+            IsVisible Property Name
+            </summary>    
+        </member>
+        <member name="P:UiViewModels.ActionContainer.ToolbarPanel.IsVisible">
+            <summary>
+            IsVisible Property
+            </summary>
+        </member>
+        <member name="F:UiViewModels.ActionContainer.ToolbarPanel.IsSeparatorPropertyName">
+            <summary>
+            IsSeparator Property Name
+            </summary>    
+        </member>
+        <member name="P:UiViewModels.ActionContainer.ToolbarPanel.IsSeparator">
+            <summary>
+            IsSeparator Property
+            </summary>
+        </member>
+        <member name="M:UiViewModels.ActionContainer.ToolbarPanel.Clone">
+            <summary>
+            Creates a deep copy of the panel, where all the items are copied as well.
+            </summary>
+            <returns>A deep-copy version of the panel.</returns>
+        </member>
+        <member name="T:UiViewModels.ActionContainer.ToolbarTab">
+            <summary>
+            Class to hold a toolbar that goes on a tab.
+            </summary>
+        </member>
+        <member name="M:UiViewModels.ActionContainer.ToolbarTab.#ctor">
+            <summary>
+            Constructor
+            </summary>
+        </member>
+        <member name="F:UiViewModels.ActionContainer.ToolbarTab.ToolbarPropertyName">
+            <summary>
+            Toolbar Property Name
+            </summary>    
+        </member>
+        <member name="P:UiViewModels.ActionContainer.ToolbarTab.Toolbar">
+            <summary>
+            Gets the owning toolbar.
+            </summary>
+        </member>
+        <member name="F:UiViewModels.ActionContainer.ToolbarTab.PanelsPropertyName">
+            <summary>
+            Panels Property Name
+            </summary>    
+        </member>
+        <member name="P:UiViewModels.ActionContainer.ToolbarTab.Panels">
+            <summary>
+            Set of Panels in toolbar
+            </summary>
+        </member>
+        <member name="F:UiViewModels.ActionContainer.ToolbarTab.NamePropertyName">
+            <summary>
+            Name Property Name
+            </summary>    
+        </member>
+        <member name="P:UiViewModels.ActionContainer.ToolbarTab.Name">
+            <summary>
+            The Name of the Panel
+            </summary>
+        </member>
+        <member name="P:UiViewModels.ActionContainer.ToolbarTab.ShortcutKey">
+            <summary>
+            Gets the Shortcut key for this tab, or Char.MinValue if no shortcut key exists.
+            </summary>
+            <remarks>
+            By convention, the shortcut key is identified by placing an ampersand before it in the title.
+            </remarks>
+        </member>
+        <member name="F:UiViewModels.ActionContainer.ToolbarTab.ImagePropertyName">
+            <summary>
+            Image Property Name
+            </summary>    
+        </member>
+        <member name="P:UiViewModels.ActionContainer.ToolbarTab.Image">
+            <summary>
+            The small image of the item
+            </summary>
+        </member>
+        <member name="F:UiViewModels.ActionContainer.ToolbarTab.IsBrowsingPropertyName">
+            <summary>
+            IsBrowsing Property Name
+            </summary>    
+        </member>
+        <member name="P:UiViewModels.ActionContainer.ToolbarTab.IsBrowsing">
+            <summary>
+            When the tab is being browsed (is open).
+            </summary>
+        </member>
+        <member name="F:UiViewModels.ActionContainer.ToolbarTab.IsHoverPropertyName">
+            <summary>
+            IsHover Property Name
+            </summary>    
+        </member>
+        <member name="P:UiViewModels.ActionContainer.ToolbarTab.IsHover">
+            <summary>
+            Mouse hovering above tab
+            </summary>
+        </member>
+        <member name="F:UiViewModels.ActionContainer.ToolbarTab.TabFilterName">
+            <summary>
+            TabFilter Property Name
+            </summary>    
+        </member>
+        <member name="P:UiViewModels.ActionContainer.ToolbarTab.TabFilter">
+            <summary>
+            The current filter being applied to the tab.
+            </summary>
+        </member>
+        <member name="F:UiViewModels.ActionContainer.ToolbarTab.IsFilterAppliedPropertyName">
+            <summary>
+            IsFilterApplied Property Name
+            </summary>    
+        </member>
+        <member name="P:UiViewModels.ActionContainer.ToolbarTab.IsFilterApplied">
+            <summary>
+            Shows whether a filter is in effect on a particular tab.
+            </summary>
+        </member>
+        <member name="F:UiViewModels.ActionContainer.ToolbarTab.ShowTabShortcutKeyPropertyName">
+            <summary>
+            ShowTabShortcutKey Property Name
+            </summary>    
+        </member>
+        <member name="P:UiViewModels.ActionContainer.ToolbarTab.ShowTabShortcutKey">
+            <summary>
+            Indicates that tab should show its shortcut key, if it exists
+            </summary>
+        </member>
+        <member name="T:UiViewModels.ActionContainer.ToolbarTab.GestureTransitionState">
+            <summary>
+            States representing the various phases of the gesture
+            needed to "lock" a panel.
+            </summary>
+        </member>
+        <member name="F:UiViewModels.ActionContainer.ToolbarTab.GestureTransitionState.Start">
+            <summary>
+            The initial state, before any point is recorded
+            </summary>
+        </member>
+        <member name="F:UiViewModels.ActionContainer.ToolbarTab.GestureTransitionState.Hover">
+            <summary>
+            An in-between state when the user is moving towards a lock, 
+            but hasn't gotten there yet
+            </summary>
+        </member>
+        <member name="F:UiViewModels.ActionContainer.ToolbarTab.GestureTransitionState.Lock">
+            <summary>
+            The user is in a Lock state.
+            </summary>
+        </member>
+        <member name="F:UiViewModels.ActionContainer.ToolbarTab.CurrentTabFlyoutGestureStatePropertyName">
+            <summary>
+            CurrentTabFlyoutGestureState Property Name
+            </summary>    
+        </member>
+        <member name="P:UiViewModels.ActionContainer.ToolbarTab.CurrentTabFlyoutGestureState">
+            <summary>
+            The representative state for where we are in the gesture state machine.
+            </summary>
+        </member>
+        <member name="F:UiViewModels.ActionContainer.ToolbarTab.CurrentHighlightedSelectionPropertyName">
+            <summary>
+            CurrentTabFlyoutGestureState Property Name
+            </summary>    
+        </member>
+        <member name="P:UiViewModels.ActionContainer.ToolbarTab.CurrentHighlightedSelection">
+            <summary>
+            The current selected item.
+            </summary>
+        </member>
+        <member name="T:UiViewModels.ActionContainer.ToolbarTab.SelectionInputType">
+            <summary>
+            Input type of the last selection change.
+            </summary>
+        </member>
+        <member name="F:UiViewModels.ActionContainer.ToolbarTab.SelectionInputType.Mouse">
+            <summary>
+            Input by mouse
+            </summary>
+        </member>
+        <member name="F:UiViewModels.ActionContainer.ToolbarTab.SelectionInputType.Keyboard">
+            <summary>
+            Input by Keyboard
+            </summary>
+        </member>
+        <member name="P:UiViewModels.ActionContainer.ToolbarTab.CurrentSelectionType">
+            <summary>
+            The input type of the last selection change.
+            </summary>
+        </member>
+        <member name="M:UiViewModels.ActionContainer.ToolbarTab.GetVisibleItems">
+            <summary>
+            Gets all of the items currently being shown, filter included
+            </summary>
+            <returns>A list of items being shown</returns>
+        </member>
+        <member name="T:UiViewModels.Actions.ActionItemEventArgs">
+            <summary>
+            EventArgs containing the ICuiAction affected by the event.
+            </summary>
+        </member>
+        <member name="P:UiViewModels.Actions.ActionItemEventArgs.Action">
+            <summary>
+            The ICuiAction affected by the event.
+            </summary>
+        </member>
+        <member name="T:UiViewModels.Actions.ActionItemExtensionProperties">
+            <summary>
+            Additional properties of an action.
+            </summary>
+        </member>
+        <member name="P:UiViewModels.Actions.ActionItemExtensionProperties.TooltipKey">
+            <summary>
+            The item's TooltipKey
+            </summary>
+        </member>
+        <member name="P:UiViewModels.Actions.ActionItemExtensionProperties.IconPath16">
+            <summary>
+            The item's 16x16 path
+            </summary>
+        </member>
+        <member name="P:UiViewModels.Actions.ActionItemExtensionProperties.IconPath24">
+            <summary>
+            The item's 24x24 path
+            </summary>
+        </member>
+        <member name="P:UiViewModels.Actions.ActionItemExtensionProperties.IconPath30">
+            <summary>
+            The item's 30x30 path
+            </summary>
+        </member>
+        <member name="P:UiViewModels.Actions.ActionItemExtensionProperties.IconPath32">
+            <summary>
+            The item's 32x32 path
+            </summary>
+        </member>
+        <member name="P:UiViewModels.Actions.ActionItemExtensionProperties.IconPath36">
+            <summary>
+            The item's 36x36 path
+            </summary>
+        </member>
+        <member name="P:UiViewModels.Actions.ActionItemExtensionProperties.IconPath48">
+            <summary>
+            The item's 48x48 path
+            </summary>
+        </member>
+        <member name="P:UiViewModels.Actions.ActionItemExtensionProperties.MetaData">
+            <summary>
+            The item's metadata: a string with data separated by commas
+            </summary>
+        </member>
+        <member name="T:UiViewModels.Actions.CuiActionCommandAdapter">
+            <summary>
+            By deriving from this class (which includes ICommand and ICuiAction) and 
+            placing the DLL containing the implemented class in bin\assemblies, 3ds Max will dynamically
+            load an instance of this class as an action in its CUI interface.  When the 
+            action is executed, it will call ICommand.Execute().
+            </summary>
+            <remarks>
+            This is an adapter class.  A client only need to satisfy the ICuiActionCommand interface
+            for their class to be loaded by the managed assembly loading process.  However, this
+            class is easier to use.
+            </remarks>
+            <seealso cref="T:UiViewModels.Actions.ICuiAction"/>
+            <seealso cref="T:UiViewModels.Actions.ICuiActionCommand"/>
+        </member>
+        <member name="P:UiViewModels.Actions.CuiActionCommandAdapter.ActionText">
+            <summary>
+            The name of the action - to be used when browsing a list
+            of actions.
+            </summary>
+            <remarks>
+            Required for ICuiAction.
+            </remarks>
+            <seealso cref="T:UiViewModels.Actions.ICuiAction"/>
+        </member>
+        <member name="P:UiViewModels.Actions.CuiActionCommandAdapter.Category">
+            <summary>
+            The name of the category to which this action should belong.  
+            </summary>
+            <remarks>
+            Required for ICuiAction.
+            </remarks>
+            <seealso cref="T:UiViewModels.Actions.ICuiAction"/>
+        </member>
+        <member name="P:UiViewModels.Actions.CuiActionCommandAdapter.InternalActionText">
+            <summary>
+            This is internal text that is not used in the user interface anywhere,
+            but is used to uniquely identify the action.  This text should be
+            identical across all localized versions of the product.
+            </summary>
+            <remarks>
+            Required for ICuiAction.
+            </remarks>
+            <seealso cref="T:UiViewModels.Actions.ICuiAction"/>
+        </member>
+        <member name="P:UiViewModels.Actions.CuiActionCommandAdapter.InternalCategory">
+            <summary>
+            This is internal text that is not used in the user interface anywhere,
+            but is used to uniquely identify the action category.  This text should be
+            identical across all localized versions of the product.
+            </summary>
+            <remarks>
+            Required for ICuiAction.
+            </remarks>
+            <seealso cref="T:UiViewModels.Actions.ICuiAction"/>
+        </member>
+        <member name="P:UiViewModels.Actions.CuiActionCommandAdapter.ButtonText">
+            <summary>
+            The text that will be used if the action is instantiated in a toolbar button.
+            </summary>
+            <remarks>
+            By default implementation is to forward ActionText as the result.
+            </remarks>
+        </member>
+        <member name="P:UiViewModels.Actions.CuiActionCommandAdapter.MenuText">
+            <summary>
+            The text that will be used if the action is instantiated in the application menu or
+            a quad-menu.
+            </summary>
+            <remarks>
+            By default implementation is to forward ActionText as the result.
+            </remarks>
+        </member>
+        <member name="P:UiViewModels.Actions.CuiActionCommandAdapter.IsVisible">
+            <summary>
+            Marks whether this action should appear in a menu.  This condition is evaluated
+            whenever a menu is shown - meaning the result can be dynamic.  
+            </summary>
+            <remarks>
+            By default implementation is to return true.
+            </remarks>
+        </member>
+        <member name="P:UiViewModels.Actions.CuiActionCommandAdapter.IsEnabled">
+            <summary>
+            Marks when this action should be available for use.  This condition is evaluated
+            whenever a menu is shown - meaning the result can be dynamic.  If False, an item
+            will appear "grayed out".
+            </summary>
+            <remarks>
+            Implementation is to forward CanExecute(null) as the result.
+            This implementation is non-virtual.  To override the behaviour, 
+            override and implement CanExecute from the ICommand interface.
+            </remarks>
+            <seealso cref="M:UiViewModels.Actions.CuiActionCommandAdapter.CanExecute(System.Object)"/>
+        </member>
+        <member name="P:UiViewModels.Actions.CuiActionCommandAdapter.IsChecked">
+            <summary>
+            Implement this method if the action is "checked" (which means that the UI will show
+            the button as pressed, or the menu item as checked.)
+            </summary>
+            <remarks>
+            By default implementation is to return false.
+            </remarks>
+        </member>
+        <member name="M:UiViewModels.Actions.CuiActionCommandAdapter.CanExecute(System.Object)">
+            <summary>
+            See ICommand.CanExecute()
+            </summary>
+            <remarks>
+            By default implementation is to return true.
+            </remarks>
+        </member>
+        <member name="E:UiViewModels.Actions.CuiActionCommandAdapter.CanExecuteChanged">
+            <summary>
+            The event that is raised when the value of CanExecute changes.
+            </summary>
+            <remarks>
+            Deriving classes can call OnCanExecuteChanged(EventArgs.Empty) to 
+            raise this event when appropriate.
+            </remarks>
+        </member>
+        <member name="M:UiViewModels.Actions.CuiActionCommandAdapter.OnCanExecuteChanged(System.EventArgs)">
+            <summary>
+            This method will raise the CanExecuteChanged event.
+            </summary>
+            <param name="args">Should be EventArgs.Empty</param>
+        </member>
+        <member name="M:UiViewModels.Actions.CuiActionCommandAdapter.Execute(System.Object)">
+            <summary>
+            The method that is called when this action is executed.
+            </summary>
+            <param name="parameter">An optional parameter, usually
+            null when called from the 3ds Max CUI system.
+            </param>
+        </member>
+        <member name="P:UiViewModels.Actions.CuiActionCommandAdapter.TooltipKey">
+            <summary>
+            Gets access to the tooltip key which is assigned to the action
+            The key is used to connect the action and its rich tooltip which is prepared by 
+            Doc team.
+            </summary>
+        </member>
+        <member name="T:UiViewModels.Actions.CuiActionDesignStub">
+            <summary>
+            This is a stub implementation of a CUI action command, for design-time
+            purposes.  You can easily instantiate this class for designing Action-based
+            UI.
+            </summary>
+        </member>
+        <member name="M:UiViewModels.Actions.CuiActionDesignStub.#ctor">
+            <summary>
+            constructor
+            </summary>
+        </member>
+        <member name="M:UiViewModels.Actions.CuiActionDesignStub.CanExecute(System.Object)">
+            <summary>
+            Sample
+            </summary>
+            <param name="parameter"></param>
+            <returns></returns>
+        </member>
+        <member name="E:UiViewModels.Actions.CuiActionDesignStub.CanExecuteChanged">
+            <summary>
+            sample
+            </summary>
+        </member>
+        <member name="M:UiViewModels.Actions.CuiActionDesignStub.Execute(System.Object)">
+            <summary>
+            does nothing
+            </summary>
+            <param name="parameter"></param>
+        </member>
+        <member name="P:UiViewModels.Actions.CuiActionDesignStub.ActionText">
+            <summary>
+            ActionText to reflect
+            </summary>
+        </member>
+        <member name="P:UiViewModels.Actions.CuiActionDesignStub.Category">
+            <summary>
+            Category to reflect
+            </summary>
+        </member>
+        <member name="P:UiViewModels.Actions.CuiActionDesignStub.InternalActionText">
+            <summary>
+            ActionText
+            </summary>
+        </member>
+        <member name="P:UiViewModels.Actions.CuiActionDesignStub.InternalCategory">
+            <summary>
+            Category
+            </summary>
+        </member>
+        <member name="P:UiViewModels.Actions.CuiActionDesignStub.ButtonText">
+            <summary>
+            Actiontext
+            </summary>
+        </member>
+        <member name="P:UiViewModels.Actions.CuiActionDesignStub.MenuText">
+            <summary>
+            Actiontext
+            </summary>
+        </member>
+        <member name="P:UiViewModels.Actions.CuiActionDesignStub.IsVisible">
+            <summary>
+            true
+            </summary>
+        </member>
+        <member name="P:UiViewModels.Actions.CuiActionDesignStub.IsEnabled">
+            <summary>
+            Blank - set at construction
+            </summary>
+        </member>
+        <member name="P:UiViewModels.Actions.CuiActionDesignStub.IsChecked">
+            <summary>
+            Blank - set at construction
+            </summary>
+        </member>
+        <member name="P:UiViewModels.Actions.CuiActionDesignStub.TooltipKey">
+            <summary>
+            Gets access to the tooltip key which is assigned to the action
+            The key is used to connect the action and its rich tooltip which is prepared by 
+            Doc team.
+            </summary>
+        </member>
+        <member name="P:UiViewModels.Actions.CuiActionDesignStub.ShortcutString">
+            <summary>
+            Returns the human-readable string describing the hotkey associated with the action,
+            if it exists.
+            </summary>
+        </member>
+        <member name="T:UiViewModels.Actions.CuiDockableContentAdapter">
+            <summary>
+            An adapter for the ICuiDockableContent interface that provides default implementations
+            of many of the interface methods.
+            </summary>
+            <remarks>
+            This is an adapter class.  A client only need to satisfy the ICuiDockableContent interface
+            for their class to be loaded by the managed assembly loading process.  However, this
+            class is easier to use.
+            </remarks>
+            <seealso cref="T:UiViewModels.Actions.ICuiDockableContent"/>
+        </member>
+        <member name="M:UiViewModels.Actions.CuiDockableContentAdapter.#ctor">
+            <summary>
+            Constructor - initializes the DestroyOnClose property to true.
+            </summary>
+        </member>
+        <member name="P:UiViewModels.Actions.CuiDockableContentAdapter.ObjectName">
+            <summary>
+            The internal name of the docking frame.
+            </summary>
+            <remarks>
+            This property should be not localized since it acts as identifier
+            and is used by the docking layout for storing / restoring layout information.
+            </remarks>
+            <seealso cref="T:UiViewModels.Actions.ICuiDockableContent"/>
+        </member>
+        <member name="P:UiViewModels.Actions.CuiDockableContentAdapter.WindowTitle">
+            <summary>
+            The name that the CUIFrame should assume.
+            </summary>
+            <remarks>
+            This property should be localizable.
+            </remarks>
+            <seealso cref="T:UiViewModels.Actions.ICuiDockableContent"/>
+        </member>
+        <member name="P:UiViewModels.Actions.CuiDockableContentAdapter.ContentType">
+            <summary>
+            The Type of the user control that is created by this action.
+            </summary>
+            <seealso cref="T:UiViewModels.Actions.ICuiDockableContent"/>
+        </member>
+        <member name="P:UiViewModels.Actions.CuiDockableContentAdapter.InvalidateOnMoved">
+            <summary>
+            Return true if moving the CUIFrame should Invalidate the user control and 
+            force a repaint.
+            </summary>
+            <seealso cref="T:UiViewModels.Actions.ICuiDockableContent"/>
+        </member>
+        <member name="P:UiViewModels.Actions.CuiDockableContentAdapter.DestroyOnClose">
+            <summary>
+            Return true if, when the CUIFrame dialog is closed, it should call DestroyWindow()
+            on itself.  Alternatively, if false is returned here, the window will simply be 
+            closed, but not destroyed.  This would be useful if the content is expensive to
+            create.
+            </summary>
+            <remarks>
+            The default implementation does destroy the content on close.
+            </remarks>
+            <seealso cref="T:UiViewModels.Actions.ICuiDockableContent"/>
+        </member>
+        <member name="M:UiViewModels.Actions.CuiDockableContentAdapter.CreateDockableContent">
+            <summary>
+            This method is called by the managed assembly loading process process 
+            when it is ready to create and show the managed user control.
+            </summary>
+            <returns>
+            An instance of the Control to create and place as the root object
+            in a CUIFrame.
+            </returns>
+        </member>
+        <member name="M:UiViewModels.Actions.CuiDockableContentAdapter.SetContentDockMode(System.Object,UiViewModels.Actions.DockStates.Dock)">
+            <summary>
+            This is a callback function that 3ds Max calls when the CUI frame is docked
+            or floated from the main application frame.  
+            </summary>
+            <remarks>
+            By default, this fucntion does nothing.  Implement this method to notify content of 
+            docking changes.
+            </remarks>
+            <param name="dockableContent">An instance of a Control returned by CreateDockableContent().</param>
+            <param name="dockMode">The new dock state of the CUIFrame.</param>
+            <seealso cref="M:UiViewModels.Actions.CuiDockableContentAdapter.CreateDockableContent"/>
+        </member>
+        <member name="P:UiViewModels.Actions.CuiDockableContentAdapter.DockingModes">
+            <summary>
+            The dock modes that this control supports.  
+            </summary>
+            <remarks>
+            By default, this property is implemented to only return the Top docking
+            position as a possible dock mode.
+            </remarks>
+        </member>
+        <member name="E:UiViewModels.Actions.CuiDockableContentAdapter.ResettingConfiguration">
+            <summary>
+            This should be raised when this component is asked to reset its configuration
+            to factory defaults.
+            </summary>
+        </member>
+        <member name="M:UiViewModels.Actions.CuiDockableContentAdapter.RaiseResettingConfiguration">
+            <summary>
+            Raises the ResettingConfiguration event.
+            </summary>
+        </member>
+        <member name="M:UiViewModels.Actions.CuiDockableContentAdapter.OnResettingConfiguration(System.EventArgs)">
+            <summary>
+            Raises the ResettingConfiguration event with the passed in parameters.
+            </summary>
+            <param name="args">normally EventArgs.Empty</param>
+        </member>
+        <member name="E:UiViewModels.Actions.CuiDockableContentAdapter.SavingConfiguration">
+            <summary>
+            This should be raised when this component is currently saving out its current state.
+            </summary>
+        </member>
+        <member name="M:UiViewModels.Actions.CuiDockableContentAdapter.RaiseSavingConfiguration(System.String)">
+            <summary>
+            Raises the SavingConfiguration event with the passed in file name.
+            </summary>
+            <param name="aFilename">The full path of the file where the configuration is being saved.</param>
+        </member>
+        <member name="M:UiViewModels.Actions.CuiDockableContentAdapter.OnSavingConfiguration(UiViewModels.Actions.CuiDockableContentConfigEventArgs)">
+            <summary>
+            Raises the SavingConfiguration event with the passed in parameters.
+            </summary>
+            <param name="args">EventArgs that store the target filename</param>
+        </member>
+        <member name="E:UiViewModels.Actions.CuiDockableContentAdapter.LoadingConfiguration">
+            <summary>
+            This should be raised when this component is currently loading in a persisted state.
+            </summary>
+        </member>
+        <member name="M:UiViewModels.Actions.CuiDockableContentAdapter.RaiseLoadingConfiguration(System.String)">
+            <summary>
+            Raises the LoadingConfiguration event with the passed in file name.
+            </summary>
+            <param name="aFilename">The full path of the file where the configuration is being loaded from.</param>
+        </member>
+        <member name="M:UiViewModels.Actions.CuiDockableContentAdapter.OnLoadingConfiguration(UiViewModels.Actions.CuiDockableContentConfigEventArgs)">
+            <summary>
+            Raises the LoadingConfiguration event with the passed in parameters.
+            </summary>
+            <param name="args">EventArgs that store the target filename</param>
+        </member>
+        <member name="P:UiViewModels.Actions.CuiDockableContentAdapter.DocksMaximized">
+            <summary>
+            By default, control docks maximized.
+            </summary>
+        </member>
+        <member name="P:UiViewModels.Actions.CuiDockableContentAdapter.IsMainContent">
+            <summary>
+            By default, the control is not considered a main toolbar.
+            </summary>
+        </member>
+        <member name="P:UiViewModels.Actions.CuiDockableContentAdapter.ActionText">
+            <summary>
+            The name of the action - to be used when browsing a list
+            of actions.
+            </summary>
+            <remarks>
+            Required for ICuiAction.
+            </remarks>
+            <seealso cref="T:UiViewModels.Actions.ICuiAction"/>
+        </member>
+        <member name="P:UiViewModels.Actions.CuiDockableContentAdapter.Category">
+            <summary>
+            The name of the category to which this action should belong.  
+            </summary>
+            <remarks>
+            Required for ICuiAction.
+            </remarks>
+            <seealso cref="T:UiViewModels.Actions.ICuiAction"/>
+        </member>
+        <member name="P:UiViewModels.Actions.CuiDockableContentAdapter.InternalActionText">
+            <summary>
+            This is internal text that is not used in the user interface anywhere,
+            but is used to uniquely identify the action.  This text should be
+            identical across all localized versions of the product.
+            </summary>
+            <remarks>
+            Default implementation is to return ActionText, but should definitely be overriden for
+            any production-level code that requires localization.
+            </remarks>
+            <seealso cref="T:UiViewModels.Actions.ICuiAction"/>
+        </member>
+        <member name="P:UiViewModels.Actions.CuiDockableContentAdapter.InternalCategory">
+            <summary>
+            This is internal text that is not used in the user interface anywhere,
+            but is used to uniquely identify the action category.  This text should be
+            identical across all localized versions of the product.
+            </summary>
+            <remarks>
+            Default implementation is to return Category, but should definitely be overriden for
+            any production-level code that requires localization.
+            </remarks>
+            <seealso cref="T:UiViewModels.Actions.ICuiAction"/>
+        </member>
+        <member name="P:UiViewModels.Actions.CuiDockableContentAdapter.ButtonText">
+            <summary>
+            The text that will be used if the action is instantiated in a toolbar button.
+            </summary>
+            <remarks>
+            By default implementation is to forward ActionText as the result.
+            </remarks>
+        </member>
+        <member name="P:UiViewModels.Actions.CuiDockableContentAdapter.MenuText">
+            <summary>
+            The text that will be used if the action is instantiated in the application menu or
+            a quad-menu.
+            </summary>
+            <remarks>
+            By default implementation is to forward ActionText as the result.
+            </remarks>
+        </member>
+        <member name="P:UiViewModels.Actions.CuiDockableContentAdapter.IsVisible">
+            <summary>
+            Marks whether this action should appear in a menu.  This condition is evaluated
+            whenever a menu is shown - meaning the result can be dynamic.  
+            </summary>
+            <remarks>
+            By default implementation is to return true.
+            </remarks>
+        </member>
+        <member name="P:UiViewModels.Actions.CuiDockableContentAdapter.IsEnabled">
+            <summary>
+            Marks when this action should be available for use.  This condition is evaluated
+            whenever a menu is shown - meaning the result can be dynamic.  If False, an item
+            will appear "grayed out".
+            </summary>
+            <remarks>
+            By default implementation is to return true.
+            </remarks>		
+        </member>
+        <member name="P:UiViewModels.Actions.CuiDockableContentAdapter.IsChecked">
+            <summary>
+            Implement this method if the action is "checked" (which means that the UI will show
+            the button as pressed, or the menu item as checked.)
+            </summary>
+            <remarks>
+            By default implementation is to return false.
+            </remarks>
+        </member>
+        <member name="P:UiViewModels.Actions.CuiDockableContentAdapter.NeedsKeyboardFocus">
+            <summary>
+            Implement this method if your component does not capture keyboard focus when it activates.
+            </summary>
+            <remarks>Default implementation is to return true.</remarks>
+        </member>
+        <member name="P:UiViewModels.Actions.CuiDockableContentAdapter.TooltipKey">
+            <summary>
+            Gets access to the tooltip key which is assigned to the action
+            The key is used to connect the action and its rich tooltip which is prepared by 
+            Doc team.
+            </summary>
+        </member>
+        <member name="T:UiViewModels.Actions.CuiDockableContentConfigEventArgs">
+            <exclude />
+        </member>
+        <member name="M:UiViewModels.Actions.CuiDockableContentConfigEventArgs.#ctor(System.String)">
+            <exclude />
+        </member>
+        <member name="P:UiViewModels.Actions.CuiDockableContentConfigEventArgs.Filename">
+            <exclude />
+        </member>
+        <member name="T:UiViewModels.Actions.CuiDockableWindowConnector">
+            <summary>
+            Given a ICuiDockableWindow, provides an "action-like" interface to that
+            Window.
+            </summary>
+        </member>
+        <member name="M:UiViewModels.Actions.CuiDockableWindowConnector.#ctor(UiViewModels.Actions.ICuiDockableWindow)">
+            <summary>
+            Standard constructor.
+            </summary>
+            <param name="windowInterface">An object that implements the interface that needs to be 
+            adapted to the action system.
+            </param>
+        </member>
+        <member name="P:UiViewModels.Actions.CuiDockableWindowConnector.WindowContentInterface">
+            <summary>
+            Access to the wrapped interface object.
+            </summary>
+        </member>
+        <member name="P:UiViewModels.Actions.CuiDockableWindowConnector.ObjectName">
+            <summary>
+            The internal name of the docking frame.
+            </summary>
+        </member>
+        <member name="P:UiViewModels.Actions.CuiDockableWindowConnector.WindowTitle">
+            <summary>
+            An appropriate WindowTitle (though it likely won't be seen by the user).
+            </summary>
+        </member>
+        <member name="P:UiViewModels.Actions.CuiDockableWindowConnector.ContentType">
+            <summary>
+            The Wrapped ContentType of the internal object.
+            </summary>
+        </member>
+        <member name="M:UiViewModels.Actions.CuiDockableWindowConnector.CreateDockableContent">
+            <summary>
+            Access to the equivalent method of the wrapped interface.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:UiViewModels.Actions.CuiDockableWindowConnector.ActionText">
+            <summary>
+            Stub ActionText (won't be seen by user).
+            </summary>
+        </member>
+        <member name="P:UiViewModels.Actions.CuiDockableWindowConnector.Category">
+            <summary>
+            Stub category (won't be seen by user).
+            </summary>
+        </member>
+        <member name="P:UiViewModels.Actions.CuiDockableWindowConnector.DocksMaximized">
+            <summary>
+            By default, control docks maximized.
+            </summary>
+        </member>
+        <member name="P:UiViewModels.Actions.CuiDockableWindowConnector.DockingModes">
+            <summary>
+            Docking modes allowed by internal object.
+            </summary>
+        </member>
+        <member name="M:UiViewModels.Actions.CuiDockableWindowConnector.SetContentDockMode(System.Object,UiViewModels.Actions.DockStates.Dock)">
+            <summary>
+            Forwarded to internal interface.
+            </summary>
+            <param name="dockableContent">object that is being docked</param>
+            <param name="dockMode">The dock mode being set (not bit masked).</param>
+        </member>
+        <member name="P:UiViewModels.Actions.CuiDockableWindowConnector.DestroyOnClose">
+            <summary>
+            Fulfills control for CuiDockableContentAdapter.
+            </summary>
+        </member>
+        <member name="T:UiViewModels.Actions.DockStates">
+            <summary>
+            Contains the Dock enum values.
+            </summary>
+        </member>
+        <member name="T:UiViewModels.Actions.DockStates.Dock">
+            <summary>
+            These bit values match the CUI docking bit values found in custcont.h
+            </summary>
+        </member>
+        <member name="F:UiViewModels.Actions.DockStates.Dock.Top">
+            <summary>
+            Allows Dock to Top of application frame
+            </summary>
+        </member>
+        <member name="F:UiViewModels.Actions.DockStates.Dock.Bottom">
+            <summary>
+            Allows Dock to Bottom of application frame
+            </summary>
+        </member>
+        <member name="F:UiViewModels.Actions.DockStates.Dock.Left">
+            <summary>
+            Allows Dock to Left of application frame
+            </summary>
+        </member>
+        <member name="F:UiViewModels.Actions.DockStates.Dock.Right">
+            <summary>
+            Allows Dock to Right of application frame
+            </summary>
+        </member>
+        <member name="F:UiViewModels.Actions.DockStates.Dock.Floating">
+            <summary>
+            All docking content can be floated, but this is used to indicate
+            that the content has entered Floating mode.  
+            </summary>
+        </member>
+        <member name="F:UiViewModels.Actions.DockStates.Dock.Viewport">
+            <summary>
+            Allows Docking to viewport as an Extended View
+            </summary>
+        </member>
+        <member name="F:UiViewModels.Actions.DockStates.DockEdgeMask">
+            <summary>
+            The mask to apply to a Dock enum to only discover the edges that it docks to.
+            </summary>
+            <remarks>
+            Bits found beyond this mask are not related to the dock edge.
+            </remarks>
+        </member>
+        <member name="T:UiViewModels.Actions.ICuiAction">
+            <summary>
+            This base interface should be implemented if the user wants to expose a new 
+            CUI action whose entry-point is a .NET assembly.
+            </summary>
+            <remarks>
+            This is actually the root interface of two other important interfaces - 
+            ICuiActionExecuteNotifier and ICuiDockableContent.  By implementing those
+            interfaces in a DLL that targets the bin\assemblies folder of a 3ds Max 
+            install, you will see them appear in the standard CUI dialog under the 
+            category specified below.
+            </remarks>
+            <seealso cref="T:UiViewModels.Actions.CuiActionCommandAdapter"/>
+            <seealso cref="T:UiViewModels.Actions.ICuiDockableContent"/>
+        </member>
+        <member name="P:UiViewModels.Actions.ICuiAction.ActionText">
+            <summary>
+            The name of the action - to be used when browsing a list
+            of actions.
+            </summary>
+            <remarks>
+            This is equivalent to DescriptionText in the ActionItem C++ SDK class.
+            This property should be localized.
+            </remarks>
+        </member>
+        <member name="P:UiViewModels.Actions.ICuiAction.Category">
+            <summary>
+            The name of the category to which this action should belong.  
+            </summary>
+            <remarks>
+            When dynamically loading actions, a category will be created if an 
+            action is declared to be part of a, as of yet, undeclared category.
+            This property should be localized.
+            </remarks>
+        </member>
+        <member name="P:UiViewModels.Actions.ICuiAction.InternalActionText">
+            <summary>
+            This is internal text that is not used in the user interface anywhere,
+            but is used to uniquely identify the action.  This text should be
+            identical across all localized versions of the product.
+            </summary>
+            <remarks>
+            Normally you would have the ActionText property refer to a localized 
+            resource entry, while this text can and should be hardcoded into the code.
+            </remarks>
+        </member>
+        <member name="P:UiViewModels.Actions.ICuiAction.InternalCategory">
+            <summary>
+            This is internal text that is not used in the user interface anywhere,
+            but is used to uniquely identify the action category.  This text should be
+            identical across all localized versions of the product.
+            </summary>
+            <remarks>
+            Normally you would have the Category property refer to a localized 
+            resource entry, while this text can and should be hardcoded into the code.
+            </remarks>
+        </member>
+        <member name="P:UiViewModels.Actions.ICuiAction.ButtonText">
+            <summary>
+            The text that will be used if the action is instantiated in a toolbar button.
+            </summary>
+            <remarks>
+            Equivalent to ActionItem::ButtonText() in the C++ SDK.
+            This property should be localized.
+            </remarks>
+        </member>
+        <member name="P:UiViewModels.Actions.ICuiAction.MenuText">
+            <summary>
+            The text that will be used if the action is instantiated in the application menu or
+            a quad-menu.
+            </summary>
+            <remarks>
+            Equivalent to ActionItem::MenuText() in the C++ SDK.
+            This property should be localized.
+            </remarks>
+        </member>
+        <member name="P:UiViewModels.Actions.ICuiAction.IsVisible">
+            <summary>
+            Marks whether this action should appear in a menu.  This condition is evaluated
+            whenever a menu is shown - meaning the result can be dynamic.  
+            </summary>
+        </member>
+        <member name="P:UiViewModels.Actions.ICuiAction.IsEnabled">
+            <summary>
+            Marks when this action should be available for use.  This condition is evaluated
+            whenever a menu is shown - meaning the result can be dynamic.  If False, an item
+            will appear "grayed out".
+            </summary>
+        </member>
+        <member name="P:UiViewModels.Actions.ICuiAction.IsChecked">
+            <summary>
+            Implement this method if the action is "checked" (which means that the UI will show
+            the button as pressed, or the menu item as checked.)
+            </summary>
+        </member>
+        <member name="P:UiViewModels.Actions.ICuiAction.TooltipKey">
+            <summary>
+            Gets access to the tooltip key which is assigned to the action
+            The key is used to connect the action and its rich tooltip which is prepared by 
+            Doc team.
+            </summary>
+        </member>
+        <member name="T:UiViewModels.Actions.CuiActionAccessPoint">
+            <summary>
+            Static placeholder class.
+            </summary>
+        </member>
+        <member name="F:UiViewModels.Actions.CuiActionAccessPoint.SingletonMethodAccessPoint">
+            <summary>
+            If a class implements ICuiActionExecuteNotifier or ICuiDockableContent, the
+            bootstrap loader will look to see if a method with the name GetInstanceOfAction is 
+            declared (static, with no parameters.)  If so, it will assume that the action is
+            meant to be a singleton and will load it as such.
+            </summary>
+            <remarks>
+            Actions should be declared as singletons if they contain some system state that
+            is not serialized or discoverable using regular means.
+            </remarks>
+        </member>
+        <member name="T:UiViewModels.Actions.ICuiActionCommand">
+            <summary>
+            By implementing this interface and placing the DLL containing the implemented 
+            class in bin\assemblies, 3ds Max will, as a result, dynamically
+            load an instance of this class as an action in its CUI interface.  When the 
+            action is executed, it will call ICommand.Execute().
+            </summary>
+            <remarks>
+            A client only need to satisfy the ICuiActionCommand interface
+            for their class to be loaded by the managed assembly loading process.  However, 
+            The CuiActionCommandAdapter class exists to make this interface easier to use.
+            </remarks>
+            <seealso cref="T:UiViewModels.Actions.CuiActionCommandAdapter"/>
+        </member>
+        <member name="T:UiViewModels.Actions.ICuiActionCreator">
+            <summary>
+            An interface that allows the client to batch-create and declare CuiActions.
+            </summary>
+            <seealso cref="T:UiViewModels.Actions.ICuiAction"/>
+            <seealso cref="T:UiViewModels.Actions.CuiActionCommandAdapter"/>
+        </member>
+        <member name="M:UiViewModels.Actions.ICuiActionCreator.BatchCreateActionItems">
+            <summary>
+            Implementing this action will result in the bootstrap manager calling this
+            method on startup to declare a batch of action items.  This allows a plugin
+            to procedurally declare action items in bunches.
+            </summary>
+            <returns>An iterator of CuiActions to declare to the bootstrap manager.</returns>
+        </member>
+        <member name="T:UiViewModels.Actions.ICuiDockableContent">
+            <summary>
+            By implementing this interface (which includes ICuiAction),  and placing
+            the class in a DLL that is deposited in bin\assemblies, 3ds Max will dynamically
+            load this class as an action in its CUI interface.  When the action is executed, content
+            returned by ICuiDockableContent will be loaded into a CUIFrame Win32 dockable window and launched.
+            </summary>
+            <remarks>
+            <para>
+            This interface is provided as a means to quickly add a .NET WPF-based User Interface solution
+            to 3ds Max.  In particular, this method supports creating a WPF Control which can then be
+            instantiated within 3ds Max.
+            </para>
+            <para>
+            In brief, a developer can create a WPF Control project, model a control and program the 
+            functionality, and finally declare an action class that implements this interface and who
+            creates an instance of this Control.  The Control will fill the CUIFrame, but otherwise
+            will behave as if it was created within a WPF dialog.
+            </para>
+            </remarks>
+        </member>
+        <member name="P:UiViewModels.Actions.ICuiDockableContent.ObjectName">
+            <summary>
+            The internal name of the docking frame.
+            </summary>
+            <remarks>
+            This property should be not localized since it acts as identifier
+            and is used by the docking layout for storing / restoring layout information.
+            </remarks>
+        </member>
+        <member name="P:UiViewModels.Actions.ICuiDockableContent.WindowTitle">
+            <summary>
+            The name that the CUIFrame should assume.
+            </summary>
+            <remarks>
+            This property should be localizable.
+            </remarks>
+        </member>
+        <member name="P:UiViewModels.Actions.ICuiDockableContent.ContentType">
+            <summary>
+            The Type of the user control that is created by this action.
+            </summary>
+        </member>
+        <member name="P:UiViewModels.Actions.ICuiDockableContent.InvalidateOnMoved">
+            <summary>
+            Return true if moving the CUIFrame should Invalidate the user control and 
+            force a repaint.
+            </summary>
+        </member>
+        <member name="P:UiViewModels.Actions.ICuiDockableContent.DestroyOnClose">
+            <summary>
+            Return true if, when the CUIFrame dialog is closed, it should call DestroyWindow()
+            on itself.  Alternatively, if false is returned here, the window will simply be 
+            closed, but not destroyed.  This would be useful if the content is expensive to
+            create.
+            </summary>
+        </member>
+        <member name="M:UiViewModels.Actions.ICuiDockableContent.CreateDockableContent">
+            <summary>
+            This method is called by the managed assembly loading process process 
+            when it is ready to create and show the managed user control.
+            </summary>
+            <returns>
+            An instance of the Control to create and place as the root object
+            in a CUIFrame.
+            </returns>
+        </member>
+        <member name="M:UiViewModels.Actions.ICuiDockableContent.SetContentDockMode(System.Object,UiViewModels.Actions.DockStates.Dock)">
+            <summary>
+            This is a callback function that 3ds Max calls when the CUI frame is docked
+            or floated from the main application frame.  
+            </summary>
+            <param name="dockableContent">An instance of a Control returned by CreateDockableContent().</param>
+            <param name="dockMode">The new dock state of the CUIFrame.</param>
+            <seealso cref="M:UiViewModels.Actions.ICuiDockableContent.CreateDockableContent"/>
+        </member>
+        <member name="P:UiViewModels.Actions.ICuiDockableContent.DockingModes">
+            <summary>
+            The dock modes that this control supports.  
+            </summary>
+        </member>
+        <member name="P:UiViewModels.Actions.ICuiDockableContent.DocksMaximized">
+            <summary>
+            When docking on application edges, this control maximizes to fill the screen in the direction
+            of the dock.
+            </summary>
+        </member>
+        <member name="P:UiViewModels.Actions.ICuiDockableContent.NeedsKeyboardFocus">
+            <summary>
+            A content provider can decide whether it should always have keyboard focus, or
+            whether max's keyboard should still work while working with this user control.
+            </summary>
+            <remarks>
+            In some cases it may be more appropriate to control accelerators at a finer level 
+            of granularity.  For instance, you may want the main canvas area of your control to
+            accept max hotkey commands, while you want to obtain keyboard focus (disable accelerators)
+            when selecting a sub-control (i.e. a textbox).
+            </remarks>
+        </member>
+        <member name="P:UiViewModels.Actions.ICuiDockableContent.IsMainContent">
+            <summary>
+            If true, this content provider will be listed in the main toolbars context menu of the
+            application, and will be shown and hidden accordingly.
+            </summary>
+            <remarks>
+            Due to the requirements of this entry point, the DestroyOnClose property will always be treated
+            as being 'false' if this property is true.  A closed toolbar will only be hidden, not destroyed.
+            It will be destroyed on shutdown, as per usual.
+            </remarks>
+        </member>
+        <member name="E:UiViewModels.Actions.ICuiDockableContent.ResettingConfiguration">
+            <summary>
+            This should be raised when this component is asked to reset its configuration
+            to factory defaults.
+            </summary>
+        </member>
+        <member name="E:UiViewModels.Actions.ICuiDockableContent.SavingConfiguration">
+            <summary>
+            This should be raised when this component is currently saving out its current state.
+            </summary>
+        </member>
+        <member name="E:UiViewModels.Actions.ICuiDockableContent.LoadingConfiguration">
+            <summary>
+            This should be raised when this component is currently loading in a persisted state.
+            </summary>
+        </member>
+        <member name="T:UiViewModels.Actions.ICuiDockableWindow">
+            <summary>
+            An interface that a Window object can implement to interact with the 
+            Max CUI system to provide a dock-representation object.
+            </summary>
+            <remarks>
+            Often when a window is to dock in the main frame, it won't want to keep the exact
+            same representation of itself.  Instead, this interface allows the Application to
+            query the Window for a representation or UI control which is appropriate in a doc state.
+            Often, the same ViewModel can be used to plug-in to the new UI control.
+            </remarks>
+        </member>
+        <member name="P:UiViewModels.Actions.ICuiDockableWindow.ContentType">
+            <summary>
+            The Type of the user control that is created by this action.
+            </summary>
+        </member>
+        <member name="M:UiViewModels.Actions.ICuiDockableWindow.CreateDockableContent">
+            <summary>
+            This method is called by the managed assembly loading process process 
+            when it is ready to create and show the managed user control.
+            </summary>
+            <returns>
+            An instance of the Control to create and place as the root object
+            in a CUIFrame.
+            </returns>
+        </member>
+        <member name="M:UiViewModels.Actions.ICuiDockableWindow.SetContentDockMode(System.Object,UiViewModels.Actions.DockStates.Dock)">
+            <summary>
+            This is a callback function that 3ds Max calls when the CUI frame is docked
+            or floated from the main application frame.  
+            </summary>
+            <param name="dockableContent">An instance of a Control returned by CreateDockableContent().</param>
+            <param name="dockMode">The new dock state of the CUIFrame.</param>
+            <seealso cref="M:UiViewModels.Actions.ICuiDockableWindow.CreateDockableContent"/>
+        </member>
+        <member name="P:UiViewModels.Actions.ICuiDockableWindow.DockingModes">
+            <summary>
+            The dock modes that this control supports.  
+            </summary>
+        </member>
+        <member name="P:UiViewModels.Actions.ICuiDockableWindow.ObjectName">
+            <summary>
+            The internal name of the docking frame.
+            </summary>
+            <remarks>
+            This property should be not localized since it acts as identifier
+            and is used by the docking layout for storing / restoring layout information.
+            </remarks>
+        </member>
+        <member name="P:UiViewModels.Actions.ICuiDockableWindow.WindowTitle">
+            <summary>
+            The name that the CUIFrame should assume.
+            </summary>
+            <remarks>
+            This property should be localizable.
+            </remarks>
+        </member>
+        <member name="T:UiViewModels.Actions.IDynamicActionCreator">
+            <summary>
+            Notifies 3ds Max that a new ActionItem was created dynamically after the 
+            application initialization phase and must be published in the CUI system.
+            </summary>
+            <remarks>
+            To publish dynamic events from a managed plug-in placed in bin\assemblies,
+            create a public concrete singleton class implementing IDynamicActionCreator.
+            The plug-in loading system will listen for ActionItemCreated events, and
+            register the ICuiAction instance from the ActionItemEventArgs into 3ds Max's
+            action manager.
+            </remarks>
+        </member>
+        <member name="E:UiViewModels.Actions.IDynamicActionCreator.ActionItemCreated">
+            <summary>
+            Fires when a new ActionItem is instantiated to signal the plug-in loader
+            to register it within the CUI action manager.
+            </summary>
+        </member>
+        <member name="T:UiViewModels.IRequeryStates">
+            <summary>
+            This interface should be implemented when a class needs to allow 
+            callers to re-query its states (properties) to force binding
+            update. 
+            </summary>
+        </member>
+        <member name="M:UiViewModels.IRequeryStates.RequeryStates">
+            <summary>
+            This function should contain the functionality that requeries 
+            the states (properties)
+            </summary>
+        </member>
+        <member name="T:UiViewModels.ViewModelBase">
+            <summary>
+            Base class that supplies some boiler-plate for the
+            common ViewModel architectural patter, as used by
+            WPF.
+            </summary>
+        </member>
+        <member name="M:UiViewModels.ViewModelBase.RaisePropertyChanged(System.String)">
+            <summary>
+            Call this method to raise the PropertyChanged event.
+            </summary>
+            <param name="propertyName">name of property that changed</param>
+            <see cref="T:System.ComponentModel.INotifyPropertyChanged"/>
+        </member>
+        <member name="E:UiViewModels.ViewModelBase.PropertyChanged">
+            <summary>
+            Event for interface INotifyPropertyChanged.
+            </summary>
+            <see cref="T:System.ComponentModel.INotifyPropertyChanged"/>
+        </member>
+        <member name="T:UiViewModels.ViewportTabs.ShowEditingPopupCommand">
+            <summary>
+            A command implementation for putting a ViewportTab
+            into the editing state.
+            </summary>
+        </member>
+        <member name="M:UiViewModels.ViewportTabs.ShowEditingPopupCommand.Execute(System.Object)">
+            <summary>
+            Executes the command.
+            </summary>
+            <param name="parameter">the param (expected MouseEventArgs)</param>
+        </member>
+        <member name="T:UiViewModels.ViewportTabs.ViewportPreset">
+            <summary>
+            ViewModel class which represents a system ViewPanel preset.
+            </summary>
+        </member>
+        <member name="M:UiViewModels.ViewportTabs.ViewportPreset.#ctor">
+            <summary>
+            Constructor.
+            </summary>
+        </member>
+        <member name="F:UiViewModels.ViewportTabs.ViewportPreset.NamePropertyName">
+            <summary>
+            Property name for Name property.
+            </summary>
+        </member>
+        <member name="P:UiViewModels.ViewportTabs.ViewportPreset.Name">
+            <summary>
+            The name of the ViewPanel preset.
+            </summary>
+        </member>
+        <member name="F:UiViewModels.ViewportTabs.ViewportPreset.CreateViewportFromPresetCommandPropertyName">
+            <summary>
+            Property name for CreateViewportFromPresetCommand.
+            </summary>
+        </member>
+        <member name="P:UiViewModels.ViewportTabs.ViewportPreset.CreateViewportFromPresetCommand">
+            <summary>
+            The command to a new view panel using the current preset as a template.
+            </summary>
+        </member>
+        <member name="F:UiViewModels.ViewportTabs.ViewportPreset.DeletePresetCommandPropertyName">
+            <summary>
+            Property name for DeletePresetCommand.
+            </summary>
+        </member>
+        <member name="P:UiViewModels.ViewportTabs.ViewportPreset.DeletePresetCommand">
+            <summary>
+            The command to Delete a given preset from the system configuration.
+            </summary>
+        </member>
+        <member name="F:UiViewModels.ViewportTabs.ViewportPreset.LayoutPropertyName">
+            <summary>
+            Name of Layout property.
+            </summary>
+        </member>
+        <member name="P:UiViewModels.ViewportTabs.ViewportPreset.Layout">
+            <summary>
+            The base layout configuration of this viewport.
+            </summary>
+        </member>
+        <member name="F:UiViewModels.ViewportTabs.ViewportPreset.TypesInLayoutPropertyName">
+            <summary>
+            Property name for TypesInLayout
+            </summary>
+        </member>
+        <member name="P:UiViewModels.ViewportTabs.ViewportPreset.TypesInLayout">
+            <summary>
+            Retrieves an array of the type of viewports present in this preset.
+            The index of the type in the array corresponds to the viewport in the screen,
+            with index 0 being the top left corner, and the index increasing
+            in a clockwise direction from there.
+            </summary>
+        </member>
+        <member name="F:UiViewModels.ViewportTabs.ViewportPreset.IndexPropertyName">
+            <summary>
+            Property name for Index property.
+            </summary>
+        </member>
+        <member name="P:UiViewModels.ViewportTabs.ViewportPreset.Index">
+            <summary>
+            The current index of the ViewPanel preset in the model
+            </summary>
+        </member>
+        <member name="F:UiViewModels.ViewportTabs.ViewportPreset.IsEditingPropertyName">
+            <summary>
+            Property name for IsEditing property.
+            </summary>
+        </member>
+        <member name="P:UiViewModels.ViewportTabs.ViewportPreset.IsEditing">
+            <summary>
+            Whether or not we are currently editing the presets
+            </summary>
+        </member>
+        <member name="T:UiViewModels.ViewportTabs.Viewports">
+            <exclude />
+            <summary>
+            The VM for the ViewportTabs control.
+            </summary>
+        </member>
+        <member name="M:UiViewModels.ViewportTabs.Viewports.#ctor">
+            <summary>
+            Contructor.
+            </summary>
+        </member>
+        <member name="F:UiViewModels.ViewportTabs.Viewports.ViewsPropertyName">
+            <summary>
+            Property name for Views.
+            </summary>
+        </member>
+        <member name="P:UiViewModels.ViewportTabs.Viewports.Views">
+            <summary>
+            A collection of viewport tabs.
+            </summary>
+        </member>
+        <member name="F:UiViewModels.ViewportTabs.Viewports.PresetsPropertyName">
+            <summary>
+            Name of Presets property.
+            </summary>
+        </member>
+        <member name="P:UiViewModels.ViewportTabs.Viewports.Presets">
+            <summary>
+            A collection of the system ViewPanel presets.
+            </summary>
+        </member>
+        <member name="F:UiViewModels.ViewportTabs.Viewports.CanCreateMoreViewsPropertyName">
+            <summary>
+            Property name for CanCreateMoreViews.
+            </summary>
+        </member>
+        <member name="P:UiViewModels.ViewportTabs.Viewports.CanCreateMoreViews">
+            <summary>
+            A value which keeps track of whether the current Viewport tabbing system can create more
+            viewports.
+            </summary>
+        </member>
+        <member name="F:UiViewModels.ViewportTabs.Viewports.IsInAddingPropertyName">
+            <summary>
+            Property name for CanCreateMoreViews.
+            </summary>
+        </member>
+        <member name="P:UiViewModels.ViewportTabs.Viewports.IsInAdding">
+            <summary>
+            A value which keeps track of whever we are in new panel adding mode
+            </summary>
+        </member>
+        <member name="F:UiViewModels.ViewportTabs.Viewports.IsEditingPresetsPropertyName">
+            <summary>
+            Property name for IsEditingPresets.
+            </summary>
+        </member>
+        <member name="P:UiViewModels.ViewportTabs.Viewports.IsEditingPresets">
+            <summary>
+            A value which keeps tracks whether we are in the process of editing the presets or not
+            </summary>
+        </member>
+        <member name="F:UiViewModels.ViewportTabs.Viewports.CreateCommandPropertyName">
+            <summary>
+            Property name for CreateCommand.
+            </summary>
+        </member>
+        <member name="P:UiViewModels.ViewportTabs.Viewports.CreateCommand">
+            <summary>
+            The command to call to create a tab
+            </summary>
+        </member>
+        <member name="F:UiViewModels.ViewportTabs.Viewports.CreatePresetCommandPropertyName">
+            <summary>
+            Property name for CreatePresetCommand.
+            </summary>
+        </member>
+        <member name="P:UiViewModels.ViewportTabs.Viewports.CreatePresetCommand">
+            <summary>
+            The command to call to create a viewport preset based on
+            a given viewpanel configuration.
+            </summary>
+        </member>
+        <member name="F:UiViewModels.ViewportTabs.Viewports.MainWindowHwndPropertyName">
+            <summary>
+            Property name for MainWindowHwnd.
+            </summary>
+        </member>
+        <member name="P:UiViewModels.ViewportTabs.Viewports.MainWindowHwnd">
+            <summary>
+            The main application window handle.  Used for certain calculations relating
+            to dialog popups.
+            </summary>
+        </member>
+        <member name="F:UiViewModels.ViewportTabs.Viewports.IsTabSettingsPanelOpenPropertyName">
+            <summary>
+            IsTabSettingsPanelOpen Property Name
+            </summary>    
+        </member>
+        <member name="P:UiViewModels.ViewportTabs.Viewports.IsTabSettingsPanelOpen">
+            <summary>
+            Is true if any Tab Settings Panel is open.
+            </summary>
+        </member>
+        <member name="T:UiViewModels.ViewportTabs.ViewportTab">
+            <exclude />
+            <summary>
+            Acts a VM model for a Viewport Tab.
+            </summary>
+        </member>
+        <member name="T:UiViewModels.ViewportTabs.ViewportTab.ViewportTabStatus">
+            <summary>
+            Viewport Tab status enum
+            </summary>
+        </member>
+        <member name="F:UiViewModels.ViewportTabs.ViewportTab.ViewportTabStatus.NoStatus">
+            <summary>
+             There is no status for Viewport Tab
+             This value should be used as default
+            </summary>
+        </member>
+        <member name="F:UiViewModels.ViewportTabs.ViewportTab.ViewportTabStatus.PresetIsCreated">
+            <summary>
+            View Panel Preset is created successfully
+            </summary>
+        </member>
+        <member name="F:UiViewModels.ViewportTabs.ViewportTab.ViewportTabStatus.PresetIsNotCreated">
+            <summary>
+            View Panel Preset is not created
+            </summary>
+        </member>
+        <member name="F:UiViewModels.ViewportTabs.ViewportTab.NamePropertyName">
+            <summary>
+            Name property name.
+            </summary>
+        </member>
+        <member name="P:UiViewModels.ViewportTabs.ViewportTab.Name">
+            <summary>
+            The name of the Viewport.
+            </summary>
+        </member>
+        <member name="F:UiViewModels.ViewportTabs.ViewportTab.ViewIndexPropertyName">
+            <summary>
+            ViewIndex property name
+            </summary>
+        </member>
+        <member name="P:UiViewModels.ViewportTabs.ViewportTab.ViewIndex">
+            <summary>
+            The viewport index.
+            </summary>
+        </member>
+        <member name="T:UiViewModels.ViewportTabs.ViewportTab.ViewportType">
+            <summary>
+            Represents the different possibile types of 
+            viewports present in the layout
+            </summary>
+        </member>
+        <member name="F:UiViewModels.ViewportTabs.ViewportTab.ViewportType.Viewport3d">
+            <summary>
+            a 3D view
+            </summary>
+        </member>
+        <member name="F:UiViewModels.ViewportTabs.ViewportTab.ViewportType.ExtendedViewport">
+            <summary>
+            an extended view
+            </summary>
+        </member>
+        <member name="F:UiViewModels.ViewportTabs.ViewportTab.TypesInLayoutPropertyName">
+            <summary>
+            Property name for TypesInLayout
+            </summary>
+        </member>
+        <member name="P:UiViewModels.ViewportTabs.ViewportTab.TypesInLayout">
+            <summary>
+            Retrieves an array of the type of viewports present in this layout.
+            The index of the type in the array corresponds to the viewport in the screen,
+            with index 0 being the top left corner, and the index increasing
+            in a clockwise direction from there.
+            </summary>
+        </member>
+        <member name="T:UiViewModels.ViewportTabs.ViewportTab.ViewportLayout">
+            <summary>
+            ViewPanel layout configurations
+            </summary>
+        </member>
+        <member name="F:UiViewModels.ViewportTabs.ViewportTab.ViewportLayout.VP_LAYOUT_1">
+            <summary>
+            Single viewport
+            </summary>
+        </member>
+        <member name="F:UiViewModels.ViewportTabs.ViewportTab.ViewportLayout.VP_LAYOUT_2V">
+            <summary>
+            2 vertical viewports
+            </summary>
+        </member>
+        <member name="F:UiViewModels.ViewportTabs.ViewportTab.ViewportLayout.VP_LAYOUT_2H">
+            <summary>
+            2 horizontal viewports
+            </summary>
+        </member>
+        <member name="F:UiViewModels.ViewportTabs.ViewportTab.ViewportLayout.VP_LAYOUT_2HT">
+            <summary>
+            2 horizontal viewports, big on top
+            </summary>
+        </member>
+        <member name="F:UiViewModels.ViewportTabs.ViewportTab.ViewportLayout.VP_LAYOUT_2HB">
+            <summary>
+            2 horizontal viewports, big on bottom
+            </summary>
+        </member>
+        <member name="F:UiViewModels.ViewportTabs.ViewportTab.ViewportLayout.VP_LAYOUT_3VL">
+            <summary>
+            3 viewports, 2 vertical on left
+            </summary>
+        </member>
+        <member name="F:UiViewModels.ViewportTabs.ViewportTab.ViewportLayout.VP_LAYOUT_3VR">
+            <summary>
+            3 viewports, 2 vertical on right
+            </summary>
+        </member>
+        <member name="F:UiViewModels.ViewportTabs.ViewportTab.ViewportLayout.VP_LAYOUT_3HT">
+            <summary>
+            3 viewports, 2 horizontal on top
+            </summary>
+        </member>
+        <member name="F:UiViewModels.ViewportTabs.ViewportTab.ViewportLayout.VP_LAYOUT_3HB">
+            <summary>
+            3 viewports, 2 horizontal on bottom
+            </summary>
+        </member>
+        <member name="F:UiViewModels.ViewportTabs.ViewportTab.ViewportLayout.VP_LAYOUT_4">
+            <summary>
+            Default layout, four quadrant viewports
+            </summary>
+        </member>
+        <member name="F:UiViewModels.ViewportTabs.ViewportTab.ViewportLayout.VP_LAYOUT_4VL">
+            <summary>
+            4 viewports, 3 vertical on left
+            </summary>
+        </member>
+        <member name="F:UiViewModels.ViewportTabs.ViewportTab.ViewportLayout.VP_LAYOUT_4VR">
+            <summary>
+            4 viewports, 3 vertical on right
+            </summary>
+        </member>
+        <member name="F:UiViewModels.ViewportTabs.ViewportTab.ViewportLayout.VP_LAYOUT_4HT">
+            <summary>
+            4 viewports, 3 horizontal on top
+            </summary>
+        </member>
+        <member name="F:UiViewModels.ViewportTabs.ViewportTab.ViewportLayout.VP_LAYOUT_4HB">
+            <summary>
+            4 viewports, 3 horizontal on bottom
+            </summary>
+        </member>
+        <member name="F:UiViewModels.ViewportTabs.ViewportTab.ViewportLayout.VP_LAYOUT_1C">
+            <summary>
+            1 central viewport?
+            </summary>
+        </member>
+        <member name="F:UiViewModels.ViewportTabs.ViewportTab.CurrentLayoutPropertyName">
+            <summary>
+            Command property name
+            </summary>
+        </member>
+        <member name="P:UiViewModels.ViewportTabs.ViewportTab.CurrentLayout">
+            <summary>
+            The configuration of the viewports in this tab.
+            This variable defines how the viewports are laid out.
+            </summary>
+        </member>
+        <member name="F:UiViewModels.ViewportTabs.ViewportTab.CommandPropertyName">
+            <summary>
+            Command property name
+            </summary>
+        </member>
+        <member name="P:UiViewModels.ViewportTabs.ViewportTab.Command">
+            <summary>
+            Command associated with the viewport button.
+            </summary>
+        </member>
+        <member name="F:UiViewModels.ViewportTabs.ViewportTab.DeleteCommandPropertyName">
+            <summary>
+            Delete Command property name
+            </summary>
+        </member>
+        <member name="P:UiViewModels.ViewportTabs.ViewportTab.DeleteCommand">
+            <summary>
+            Delete Command associated with the viewport button.
+            </summary>
+        </member>
+        <member name="F:UiViewModels.ViewportTabs.ViewportTab.CreatePresetCommandPropertyName">
+            <summary>
+            Create Preset Command property name
+            </summary>
+        </member>
+        <member name="P:UiViewModels.ViewportTabs.ViewportTab.CreatePresetCommand">
+            <summary>
+            The command for creating a preset from this tab.
+            </summary>
+        </member>
+        <member name="F:UiViewModels.ViewportTabs.ViewportTab.IsActivePropertyName">
+            <summary>
+            IsActive property name
+            </summary>
+        </member>
+        <member name="P:UiViewModels.ViewportTabs.ViewportTab.IsActive">
+            <summary>
+            Represents whether this viewport is currently active.
+            </summary>
+        </member>
+        <member name="F:UiViewModels.ViewportTabs.ViewportTab.IsHighlightPropertyName">
+            <summary>
+            IsLocked property name
+            </summary>
+        </member>
+        <member name="P:UiViewModels.ViewportTabs.ViewportTab.IsHighlight">
+            <summary>
+            Represents whether this viewport is currently highlighted.
+            </summary>
+        </member>
+        <member name="F:UiViewModels.ViewportTabs.ViewportTab.IsLockedPropertyName">
+            <summary>
+            IsLocked property name
+            </summary>
+        </member>
+        <member name="P:UiViewModels.ViewportTabs.ViewportTab.IsLocked">
+            <summary>
+            Represents whether this viewport is locked, or undeletable.
+            </summary>
+        </member>
+        <member name="F:UiViewModels.ViewportTabs.ViewportTab.IsEditingPropertiesName">
+            <summary>
+            IsEditing Property name.
+            </summary>
+        </member>
+        <member name="P:UiViewModels.ViewportTabs.ViewportTab.IsEditingProperties">
+            <summary>
+            Determines whether the ViewportTab is an in editing state.
+            </summary>
+        </member>
+        <member name="P:UiViewModels.ViewportTabs.ViewportTab.ShowEditingPopupCommand">
+            <summary>
+            The command to run to show the editing popup.
+            </summary>
+        </member>
+        <member name="F:UiViewModels.ViewportTabs.ViewportTab.StatusName">
+            <summary>
+            Status Property name
+            </summary>
+        </member>
+        <member name="P:UiViewModels.ViewportTabs.ViewportTab.Status">
+            <summary>
+            Status of viewport tab like: preset is created, preset is not created, etc
+            </summary>
+        </member>
+        <member name="P:UiViewModels.ViewportTabs.ViewportTab.OwningViewportsViewModel">
+            <summary>
+            The owning Viewports VM object.
+            </summary>
+        </member>
+        <member name="T:UiViewModels.Workspaces.WorkspaceLoaderItem">
+            <summary>
+            Represents a Workspace loader
+            </summary>
+        </member>
+        <member name="F:UiViewModels.Workspaces.WorkspaceLoaderItem.NamePropertyName">
+            <summary>
+            Name property name.
+            </summary>
+        </member>
+        <member name="P:UiViewModels.Workspaces.WorkspaceLoaderItem.Name">
+            <summary>
+            The name of the Viewport.
+            </summary>
+        </member>
+        <member name="F:UiViewModels.Workspaces.WorkspaceLoaderItem.FullPathPropertyName">
+            <summary>
+            FullPath property name.
+            </summary>
+        </member>
+        <member name="P:UiViewModels.Workspaces.WorkspaceLoaderItem.FullPath">
+            <summary>
+            The full file path of the Workspace root file.
+            </summary>
+        </member>
+        <member name="F:UiViewModels.Workspaces.WorkspaceLoaderItem.IdentifierPropertyName">
+            <summary>
+            Identifier property name.
+            </summary>
+        </member>
+        <member name="P:UiViewModels.Workspaces.WorkspaceLoaderItem.Identifier">
+            <summary>
+            The workspace identifier (language-independent key)
+            </summary>
+        </member>
+        <member name="F:UiViewModels.Workspaces.WorkspaceLoaderItem.IsActivePropertyName">
+            <summary>
+            Whether or not this is the Active workspace (loaded).
+            </summary>
+        </member>
+        <member name="P:UiViewModels.Workspaces.WorkspaceLoaderItem.IsActive">
+            <summary>
+            The workspace identifier (language-independent key)
+            </summary>
+        </member>
+        <member name="F:UiViewModels.Workspaces.WorkspaceLoaderItem.RunScriptPropertyName">
+            <summary>
+            Run Script options.
+            </summary>
+        </member>
+        <member name="P:UiViewModels.Workspaces.WorkspaceLoaderItem.RunScript">
+            <summary>
+            Run script.
+            </summary>
+        </member>
+        <member name="F:UiViewModels.Workspaces.WorkspaceLoaderItem.RunScriptPathPropertyName">
+            <summary>
+            Run Script path options.
+            </summary>
+        </member>
+        <member name="P:UiViewModels.Workspaces.WorkspaceLoaderItem.RunScriptPath">
+            <summary>
+            Run script path.
+            </summary>
+        </member>
+        <member name="F:UiViewModels.Workspaces.WorkspaceLoaderItem.RunScriptExitPathPropertyName">
+            <summary>
+            Run Script exit path options.
+            </summary>
+        </member>
+        <member name="P:UiViewModels.Workspaces.WorkspaceLoaderItem.RunScriptExitPath">
+            <summary>
+            Run script exit path.
+            </summary>
+        </member>
+        <member name="F:UiViewModels.Workspaces.WorkspaceLoaderItem.SubsystemsPropertyName">
+            <summary>
+            Subsystem options.
+            </summary>
+        </member>
+        <member name="P:UiViewModels.Workspaces.WorkspaceLoaderItem.Subsystems">
+            <summary>
+            Subsystems.
+            </summary>
+        </member>
+        <member name="F:UiViewModels.Workspaces.WorkspaceLoaderItem.CommandPropertyName">
+            <summary>
+            Command property name
+            </summary>
+        </member>
+        <member name="P:UiViewModels.Workspaces.WorkspaceLoaderItem.Command">
+            <summary>
+            Loader Command parameter
+            </summary>
+        </member>
+        <member name="F:UiViewModels.Workspaces.WorkspaceLoaderItem.CommandParameterPropertyName">
+            <summary>
+            Command Parameter property name
+            </summary>
+        </member>
+        <member name="P:UiViewModels.Workspaces.WorkspaceLoaderItem.CommandParameter">
+            <summary>
+            Loader Command parameter
+            </summary>
+        </member>
+        <member name="F:UiViewModels.Workspaces.WorkspaceLoaderItem.DeleteCommandPropertyName">
+            <summary>
+            Command property name
+            </summary>
+        </member>
+        <member name="P:UiViewModels.Workspaces.WorkspaceLoaderItem.DeleteCommand">
+            <summary>
+            Delete workspace Command
+            </summary>
+        </member>
+        <member name="F:UiViewModels.Workspaces.WorkspaceLoaderItem.IsSystemWorkpacePropertyName">
+            <summary>
+            IsSystemWorkpace property name
+            </summary>
+        </member>
+        <member name="P:UiViewModels.Workspaces.WorkspaceLoaderItem.IsSystemWorkpace">
+            <summary>
+            Whether this is a system workspace or not
+            </summary>
+        </member>
+        <member name="M:UiViewModels.Workspaces.WorkspaceLoaderItem.Equals(UiViewModels.Workspaces.WorkspaceLoaderItem)">
+            <summary>
+            Equality checked for WorkspaceLoaderItems.  Equality is
+            based on FullPath and Name being equal.
+            </summary>
+            <param name="other">the item to compare</param>
+            <returns>true if equal</returns>
+        </member>
+        <member name="T:UiViewModels.Workspaces.WorkspaceLoaderItemSubsystem">
+            <summary>
+            Represents a Workspace's Subsystems
+            </summary>
+        </member>
+        <member name="F:UiViewModels.Workspaces.WorkspaceLoaderItemSubsystem.NamePropertyName">
+            <summary>
+            Name property Name
+            </summary>
+        </member>
+        <member name="P:UiViewModels.Workspaces.WorkspaceLoaderItemSubsystem.Name">
+            <summary>
+            The name of the subsystem.
+            </summary>
+        </member>
+        <member name="F:UiViewModels.Workspaces.WorkspaceLoaderItemSubsystem.DescriptionPropertyName">
+            <summary>
+            Description property Name
+            </summary>
+        </member>
+        <member name="P:UiViewModels.Workspaces.WorkspaceLoaderItemSubsystem.Description">
+            <summary>
+            The description of the subsystem.
+            </summary>
+        </member>
+        <member name="F:UiViewModels.Workspaces.WorkspaceLoaderItemSubsystem.ValuePropertyName">
+            <summary>
+            Value property Name
+            </summary>
+        </member>
+        <member name="P:UiViewModels.Workspaces.WorkspaceLoaderItemSubsystem.Value">
+            <summary>
+            The value of the subsystem.
+            </summary>
+        </member>
+        <member name="M:UiViewModels.Workspaces.WorkspaceLoaderItemSubsystem.Equals(UiViewModels.Workspaces.WorkspaceLoaderItemSubsystem)">
+            <summary>
+            Equality checked for WorkspaceLoaderItemSubsystem.  Equality is
+            based on FullPath and Name being equal.
+            </summary>
+            <param name="other">the item to compare</param>
+            <returns>true if equal</returns>
+        </member>
+        <member name="T:UiViewModels.Workspaces.WorkspaceManager">
+            <summary>
+            ViewModel for Workspace Manager dialog.
+            </summary>
+        </member>
+        <member name="M:UiViewModels.Workspaces.WorkspaceManager.#ctor">
+            <summary>
+            Default
+            </summary>
+        </member>
+        <member name="F:UiViewModels.Workspaces.WorkspaceManager.WorkspacesPropertyName">
+            <summary>
+            Workspaces property name
+            </summary>
+        </member>
+        <member name="P:UiViewModels.Workspaces.WorkspaceManager.Workspaces">
+            <summary>
+            Set of available workspaces.
+            </summary>
+        </member>
+        <member name="F:UiViewModels.Workspaces.WorkspaceManager.CurrentActiveWorkspacePropertyName">
+            <summary>
+            CurrentActiveWorkspace property name
+            </summary>
+        </member>
+        <member name="P:UiViewModels.Workspaces.WorkspaceManager.CurrentActiveWorkspace">
+            <summary>
+            The Active workspace, which also corresponds to the Loaded workspace.
+            </summary>
+        </member>
+        <member name="F:UiViewModels.Workspaces.WorkspaceManager.SaveAsNewCommandPropertyName">
+            <summary>
+            The SaveAsNewCommand property name
+            </summary>
+        </member>
+        <member name="P:UiViewModels.Workspaces.WorkspaceManager.SaveAsNewCommand">
+            <summary>
+            The command that is launched once Save As New is requested.
+            </summary>
+        </member>
+        <member name="F:UiViewModels.Workspaces.WorkspaceManager.SaveAsDefaultCommandPropertyName">
+            <summary>
+            The SaveAsDefaultCommand property name
+            </summary>
+        </member>
+        <member name="P:UiViewModels.Workspaces.WorkspaceManager.SaveAsDefaultCommand">
+            <summary>
+            The command that is launched once Save As Default is requested.
+            </summary>
+        </member>
+        <member name="F:UiViewModels.Workspaces.WorkspaceManager.RestoreToDefaultCommandPropertyName">
+            <summary>
+            The RestoreToDefaultCommand property name
+            </summary>
+        </member>
+        <member name="P:UiViewModels.Workspaces.WorkspaceManager.RestoreToDefaultCommand">
+            <summary>
+            The command that is launched once Restore to Default is requested.
+            </summary>
+        </member>
+        <member name="F:UiViewModels.Workspaces.WorkspaceManager.BrowseEntryScriptCommandPropertyName">
+            <summary>
+            The BrowseEntryScriptCommand property name
+            </summary>
+        </member>
+        <member name="P:UiViewModels.Workspaces.WorkspaceManager.BrowseEntryScriptCommand">
+            <summary>
+            The command that is launched once Restore to Default is requested.
+            </summary>
+        </member>
+        <member name="F:UiViewModels.Workspaces.WorkspaceManager.BrowseExitScriptCommandPropertyName">
+            <summary>
+            The BrowseExitScriptCommand property name
+            </summary>
+        </member>
+        <member name="P:UiViewModels.Workspaces.WorkspaceManager.BrowseExitScriptCommand">
+            <summary>
+            The command that is launched once Restore to Default is requested.
+            </summary>
+        </member>
+        <member name="F:UiViewModels.Workspaces.WorkspaceManager.ProcessSaveAsNewCommandPropertyName">
+            <summary>
+            ProcessSaveAsNewCommand Property Name
+            </summary>    
+        </member>
+        <member name="P:UiViewModels.Workspaces.WorkspaceManager.ProcessSaveAsNewCommand">
+            <summary>
+            The meta command that launches the Save As New interactive dialog.
+            </summary>
+        </member>
+    </members>
+</doc>

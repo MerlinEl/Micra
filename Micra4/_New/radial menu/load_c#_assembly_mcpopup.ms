@@ -16,9 +16,13 @@ mcMath_cs.minMax 100	1	200	--> 100
 mcConsole_cs = mcCSharp.getClassInstance "Orien.NetUi.McMaxConsole" forceLoad:true --constructorParams:#(mcMicraDialog) 
 mcConsole_cs.owner = mcMicraDialog --not works (console is still independent)
 
+
+--mcConsole_cs.owner = dotnetobject "IntPtr" (windows.getMAXHWND())
+/*
 hv = mcSystem.getMaxWindow()
 mcConsole_cs.show(hv)
 hv.ReleaseHandle()
+*/
 
 /*
 maxWindow=mcSystem.getMaxWindow()
@@ -44,7 +48,7 @@ mcConsole_cs.Close() --finaly close console
 	
 --Typing TODO
 	windows.SendMessage mcSystem.maxHandle mcWinMsg.WM_SETFOCUS 0 0
-			assembly_path = micra.AssemblyDir + "Orien.Star.dll"
+			assembly_path = micra.AssemblyDir + "Micra.Star.dll"
 			assembly_bytes = (dotnetClass "System.IO.File").ReadAllBytes assembly_path
 			assembly = (dotnetClass "System.Reflection.Assembly").Load assembly_bytes
 			dotnet_class = dotNet.getType  "Orien.NetUi.McConsole"
@@ -65,7 +69,7 @@ enableAccelerators = true
 gc()
 --Force Load (not works)
 classPath = "Orien.NetUi.McTooltip" 
-assembly_path = micra.AssemblyDir + "Orien.Star.dll"
+assembly_path = micra.AssemblyDir + "Micra.Star.dll"
 assembly_bytes = (dotnetClass "System.IO.File").ReadAllBytes assembly_path
 assembly = (dotnetClass "System.Reflection.Assembly").Load assembly_bytes
 dotnet_class = dotNet.getType classPath
@@ -182,7 +186,7 @@ McDesktop_Instance = (dotNetClass "System.Activator").CreateInstance cls1
 
 		
 --test4	
-assembly_path1 = micra.AssemblyDir + "Orien.Star.dll"
+assembly_path1 = micra.AssemblyDir + "Micra.Star.dll"
 assemblyBytes = (dotnetClass "System.IO.File").ReadAllBytes assembly_path1
 myAssembly = (dotnetClass "System.Reflection.Assembly").Load assemblyBytes
 cls = dotNet.getType "Orien.Tools.mcMath" 

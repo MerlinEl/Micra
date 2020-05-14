@@ -1,0 +1,1421 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>CoreManagedUiControls</name>
+    </assembly>
+    <members>
+        <member name="T:CoreManagedUiControls.MaxControls.Toolbar.ClearFilterCommand">
+            <summary>
+            Clear filter command for MenuFilterControl.
+            </summary>
+        </member>
+        <member name="T:CoreManagedUiControls.MaxControls.Toolbar.MenuItemVisibilityMultiConverter">
+            <summary>
+            Custom multi-converter for deciding visibility of ToolbarItems in MaxToolbar
+            </summary>
+            <remarks>
+            Internal class.
+            </remarks>
+        </member>
+        <member name="T:CoreManagedUiControls.MaxControls.Toolbar.MenuTabDisplayMultiConverter">
+            <summary>
+            Multiconverter used in setting the text on an IconTextButton that supports underlining.
+            </summary>
+        </member>
+        <member name="T:CoreManagedUiControls.MaxControls.Toolbar.PanelListToLongestPanelNameConverter">
+            <summary>
+            Converter returns the longest ToolbarPanel name from the list of ToolbarPanel.
+            It is used to calculate the optimal width of the menu. The return string is used as 
+            a context in a helper control PanelWidthWatcher. Its width is used to set up the width
+            of the menu.
+            </summary>
+        </member>
+        <member name="M:CoreManagedUiControls.MaxControls.Toolbar.PanelListToLongestPanelNameConverter.Convert(System.Object[],System.Type,System.Object,System.Globalization.CultureInfo)">
+            <summary>
+            Convert a collection of ToolbarPanel to the longest ToolbarPanel name taken from the collection
+            </summary>
+            <param name="values">ToolbarPanel collection and Control pair</param>
+            <param name="targetType">The type of the binding target property</param>
+            <param name="parameter">The converter parameter to use</param>
+            <param name="culture">The culture to use in the converter</param>
+            <returns>The longest ToolbarPanel name </returns>
+        </member>
+        <member name="M:CoreManagedUiControls.MaxControls.Toolbar.PanelListToLongestPanelNameConverter.ConvertBack(System.Object,System.Type[],System.Object,System.Globalization.CultureInfo)">
+            <summary>
+            Not implemented
+            </summary>
+            <param name="value">Ignored</param>
+            <param name="targetTypes">Ignored</param>
+            <param name="parameter">Ignored</param>
+            <param name="culture">Ignored</param>
+            <returns>Throws a NotImplementedException exception</returns>
+        </member>
+        <member name="T:CoreManagedUiControls.MaxControls.Toolbar.ToolbarItemListToLongestNameConverter">
+            <summary>
+            Converter returns the longest ToolbarItem name that belong to the expanded 
+            ToolbarPanel panel from the given list of ToolbarPanel.
+            It is used to calculate the optimal width of the menu. The return string is used as 
+            a context in a helper control ItemWidthWatcher. Its width is used to set up the width
+            of the menu.
+            </summary>
+        </member>
+        <member name="M:CoreManagedUiControls.MaxControls.Toolbar.ToolbarItemListToLongestNameConverter.Convert(System.Object,System.Type,System.Object,System.Globalization.CultureInfo)">
+            <summary>
+            Convert a collection of ToolbarPanel to the longest name of ToolbarItem which belongs to 
+            an expanded ToolbarPanel.
+            </summary>
+            <param name="value">ToolbarPanel collection</param>
+            <param name="targetType">The type of the binding target property</param>
+            <param name="parameter">The converter parameter to use</param>
+            <param name="culture">The culture to use in the converter</param>
+            <returns>The longest ToolbarPanel name </returns>
+        </member>
+        <member name="M:CoreManagedUiControls.MaxControls.Toolbar.ToolbarItemListToLongestNameConverter.ConvertBack(System.Object,System.Type,System.Object,System.Globalization.CultureInfo)">
+            <summary>
+            Not implemented
+            </summary>
+            <param name="value">Ignored</param>
+            <param name="targetType">Ignored</param>
+            <param name="parameter">Ignored</param>
+            <param name="culture">Ignored</param>
+            <returns>Throws a NotImplementedException exception</returns>
+        </member>
+        <member name="T:CoreManagedUiControls.MaxControls.Toolbar.UnderlineMenuTitlesConverter">
+            <summary>
+            Takes string with ampersand marker and produces a TextBlock with the menu hotkey
+            underlined.
+            </summary>
+            <remarks>
+            The converter parameter switches between underline and non-underline mode.
+            </remarks>
+        </member>
+        <member name="T:CoreManagedUiControls.MaxControls.Toolbar.GlobalSearchPopupWindow">
+            <summary>
+            Interaction logic for GlobalSearchPopupWindow.xaml
+            </summary>
+            <summary>
+            GlobalSearchPopupWindow
+            </summary>
+        </member>
+        <member name="F:CoreManagedUiControls.MaxControls.Toolbar.GlobalSearchPopupWindow.ViewModelProperty">
+            <summary>
+            ViewModel Dependency Property
+            </summary>
+        </member>
+        <member name="P:CoreManagedUiControls.MaxControls.Toolbar.GlobalSearchPopupWindow.ViewModel">
+            <summary>
+            Gets or sets the ViewModel property. This dependency property 
+            indicates ....
+            </summary>
+        </member>
+        <member name="M:CoreManagedUiControls.MaxControls.Toolbar.GlobalSearchPopupWindow.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+        <member name="T:CoreManagedUiControls.MaxControls.Toolbar.MaxToolbarCommonFunctions">
+            <summary>
+            Class holding common functions used in both
+            MAxFloatingToolbar and MaxToolbar classes
+            All the methods are static
+            </summary>
+        </member>
+        <member name="M:CoreManagedUiControls.MaxControls.Toolbar.MaxToolbarCommonFunctions.RepositionPopup(System.Object)">
+            <summary>
+            This code forces the popup to reposition itself next
+            to the placement target
+            </summary>
+            <param name="sender">A popup object</param>
+        </member>
+        <member name="M:CoreManagedUiControls.MaxControls.Toolbar.MaxToolbarCommonFunctions.RefreshBoundProperty(System.Windows.FrameworkElement,System.Windows.DependencyProperty)">
+            <summary>
+            Refresh a binding
+            </summary>
+            <param name="control">Control that has a binding</param>
+            <param name="prop">Type of the binding to refresh</param>
+        </member>
+        <member name="M:CoreManagedUiControls.MaxControls.Toolbar.MaxToolbarCommonFunctions.ForceContentBindingOnAll(System.Windows.DependencyObject)">
+            <summary>
+            Force Content binding refresh on all the children of the parent object
+            and on the parent itself
+            </summary>
+            <param name="parent">Parent object that needs the Content bindings to be refreshed</param>
+        </member>
+        <member name="M:CoreManagedUiControls.MaxControls.Toolbar.MaxToolbarCommonFunctions.ForceContentBinding(System.Windows.DependencyObject)">
+            <summary>
+            Force Content binding refresh on a control
+            </summary>
+            <param name="target">Control that needs the Content bindings to be refreshed</param>
+        </member>
+        <member name="M:CoreManagedUiControls.MaxControls.Toolbar.MaxToolbarCommonFunctions.ForceBindingOnCollection(System.Collections.ICollection)">
+            <summary>
+            Runs through a collection of DependencyObjects and forces a set of
+            bindings updates on them and their children.
+            </summary>
+            <param name="collection">a collection of DependencyObjects</param>
+        </member>
+        <member name="M:CoreManagedUiControls.MaxControls.Toolbar.MaxToolbarCommonFunctions.ForceBindingOnIconTextButtonAll(System.Windows.DependencyObject)">
+            <summary>
+            Force binding refresh on all the IconTextButton children of the parent object
+            and on the parent itself if it is a IconTextButton
+            </summary>
+            <param name="parent">Parent IconTextButton object that needs the bindings to be refreshed</param>
+        </member>
+        <member name="M:CoreManagedUiControls.MaxControls.Toolbar.MaxToolbarCommonFunctions.ForceBindingOnIconTextButton(System.Windows.DependencyObject)">
+            <summary>
+            Force binding refresh on a control which must be IconTextButton
+            </summary>
+            <param name="target">IconTextButton control that needs the bindings to be refreshed</param>
+        </member>
+        <member name="M:CoreManagedUiControls.MaxControls.Toolbar.MaxToolbarCommonFunctions.ForceIconTextButtonBindingIfTrue(System.Object,System.Windows.DependencyPropertyChangedEventArgs)">
+            <summary>
+            Refresh bindings of IconTextButton if the new value of the property is true
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:CoreManagedUiControls.MaxControls.Toolbar.MaxToolbarCommonFunctions.GetXamlResource(System.Windows.FrameworkElement,System.String)">
+            <summary>
+            Get a resource stored in a FrameworkElement object
+            </summary>
+            <param name="resorceHolder">a FrameworkElement object that stores the resource</param>
+            <param name="resourceName">the resource name</param>
+            <returns></returns>
+        </member>
+        <member name="M:CoreManagedUiControls.MaxControls.Toolbar.MaxToolbarCommonFunctions.GetXamlResource(System.Windows.FrameworkElement,System.String,System.Object)">
+            <summary>
+            Get a resource stored in a FrameworkElement object; if not found, return the default value
+            </summary>
+            <param name="resorceHolder">a FrameworkElement object that stores the resource</param>
+            <param name="resourceName">the resource name</param>
+            <param name="defaultValue">default value to return if resource is not found</param>
+            <returns></returns>
+        </member>
+        <member name="M:CoreManagedUiControls.MaxControls.Toolbar.MaxToolbarCommonFunctions.CheckMousePosForFloating(System.Windows.FrameworkElement,System.Windows.Point)">
+            <summary>
+            Check if the mouse position allows to do tear-off and make a panel float
+            </summary>
+            <param name="sender">The tear-off operation is being performed on this UI element </param>
+            <param name="initialMousePos">The mouse position (relative to the sender) acquired when 
+            the mouse left button click was performed on the sender</param>
+            <returns>True if the tear-off operation is allowed; otherwise false</returns>
+        </member>
+        <member name="M:CoreManagedUiControls.MaxControls.Toolbar.MaxToolbarCommonFunctions.ScreenToDesktop(System.Windows.Point)">
+            <summary>
+            Convert the screen coordinates into desktop coordinates.
+            </summary>
+            <param name="pos">The point in screen coordinate. (pixels)</param>
+            <returns>Returns desktop coordinates</returns>
+        </member>
+        <member name="M:CoreManagedUiControls.MaxControls.Toolbar.MaxToolbarCommonFunctions.CreateAndPrepareFloatingPanelForDrag(CoreManagedUiControls.MaxControls.Toolbar.MaxToolbar,CoreManagedUiControls.MaxControls.Toolbar.ToolbarPanelInfo,System.Windows.Point)">
+            <summary>
+            Create a new floating panel, initialize it and set up the needed parameters 
+            to allow it to be drag-able
+            </summary>
+            <param name="mainToolbar">The main toolbar where docked panels belong to</param>
+            <param name="panelInfo">Information about the panel which is about to be floating</param>
+            <param name="screenCoordinates">A mouse position in screen coordinates</param>
+            <returns></returns>
+        </member>
+        <member name="M:CoreManagedUiControls.MaxControls.Toolbar.MaxToolbarCommonFunctions.ForceHighlightButton(System.Windows.FrameworkElement,System.String)">
+            <summary>
+            Given a container element, finds the underlying button of the name
+            'buttonName' and makes it highlighted.
+            </summary>
+            <remarks>
+            This is necessary because of a weird quirk in WPF where disabled controls
+            receive no mouse input, ever.  Therefore we have to catch the MouseMove on the container element
+            above it to actually be able to highlight a disabled item (which is something that the legacy
+            menus themselves do, so the axiom that disabled controls should never receive mouse input is 
+            obviously faulty.)
+            </remarks>
+            <param name="element">The container element.</param>
+            <param name="buttonName">The Name of the button to find.</param>
+        </member>
+        <member name="T:CoreManagedUiControls.MaxControls.Toolbar.MenuFilterControl">
+            <summary>
+            Interaction logic for MenuFilterControl.xaml
+            </summary>
+            <summary>
+            MenuFilterControl
+            </summary>
+        </member>
+        <member name="F:CoreManagedUiControls.MaxControls.Toolbar.MenuFilterControl.CurrentFilterProperty">
+            <summary>
+            CurrentFilter dependency prop
+            </summary>
+        </member>
+        <member name="P:CoreManagedUiControls.MaxControls.Toolbar.MenuFilterControl.CurrentFilter">
+            <summary>
+            CurrentFilter Items
+            </summary>
+        </member>
+        <member name="P:CoreManagedUiControls.MaxControls.Toolbar.MenuFilterControl.DefaultText">
+            <summary>
+            Text that is displayed when the filter is empty
+            </summary>x
+        </member>
+        <member name="M:CoreManagedUiControls.MaxControls.Toolbar.MenuFilterControl.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+        <member name="T:CoreManagedUiControls.MaxControls.Toolbar.MenuFilterHeightConverter">
+            <summary>
+            Alternates between Auto and 0, for any arbitrary height or width property.
+            </summary>
+        </member>
+        <member name="T:CoreManagedUiControls.MaxControls.Toolbar.SearchPanel">
+            <summary>
+            Interaction logic for SearchPanel.xaml
+            </summary>
+            <summary>
+            SearchPanel
+            </summary>
+        </member>
+        <member name="F:CoreManagedUiControls.MaxControls.Toolbar.SearchPanel.SearchFilterProperty">
+            <summary>
+            SearchFilter Dependency Property
+            </summary>
+        </member>
+        <member name="P:CoreManagedUiControls.MaxControls.Toolbar.SearchPanel.SearchFilter">
+            <summary>
+            The search filter being represented.
+            </summary>
+        </member>
+        <member name="F:CoreManagedUiControls.MaxControls.Toolbar.SearchPanel.ResultItemsProperty">
+            <summary>
+            ResultItems Dependency Property
+            </summary>
+        </member>
+        <member name="P:CoreManagedUiControls.MaxControls.Toolbar.SearchPanel.ResultItems">
+            <summary>
+            The items being represented.
+            </summary>
+        </member>
+        <member name="M:CoreManagedUiControls.MaxControls.Toolbar.SearchPanel.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+        <member name="T:CoreManagedUiControls.MaxControls.Toolbar.SetTabModeCommand">
+            <summary>
+            Command for modifying top-level MGM display mode.
+            </summary>
+        </member>
+        <member name="T:CoreManagedUiControls.MaxControls.Toolbar.ToolbarCandidateToFloat">
+            <summary>
+            Class holding the info of the all elements
+            involved while making a panel floating
+            </summary>
+        </member>
+        <member name="M:CoreManagedUiControls.MaxControls.Toolbar.ToolbarCandidateToFloat.#ctor">
+            <summary>
+            Constructor
+            </summary>
+        </member>
+        <member name="P:CoreManagedUiControls.MaxControls.Toolbar.ToolbarCandidateToFloat.FloatingPanelInfo">
+            <summary>
+            FloatingPanelInfo Property
+            </summary>
+        </member>
+        <member name="P:CoreManagedUiControls.MaxControls.Toolbar.ToolbarCandidateToFloat.ViewElement">
+            <summary>
+            ViewElement Property
+            </summary>
+        </member>
+        <member name="P:CoreManagedUiControls.MaxControls.Toolbar.ToolbarCandidateToFloat.X">
+            <summary>
+            X coordinate property
+            </summary>
+        </member>
+        <member name="P:CoreManagedUiControls.MaxControls.Toolbar.ToolbarCandidateToFloat.Y">
+            <summary>
+            X coordinate property
+            </summary>
+        </member>
+        <member name="T:CoreManagedUiControls.MaxControls.Toolbar.ToolbarPanelInfo">
+            <summary>
+            Class holding the info of the toolbar  panel 
+            which is about to become floating
+            </summary>
+        </member>
+        <member name="M:CoreManagedUiControls.MaxControls.Toolbar.ToolbarPanelInfo.#ctor">
+            <summary>
+            Constructor
+            </summary>
+        </member>
+        <member name="M:CoreManagedUiControls.MaxControls.Toolbar.ToolbarPanelInfo.#ctor(CoreManagedUiControls.MaxControls.Toolbar.ToolbarPanelInfo)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="pi">A toolbar panel info to copy the data from</param>
+        </member>
+        <member name="P:CoreManagedUiControls.MaxControls.Toolbar.ToolbarPanelInfo.Panel">
+            <summary>
+            Panel Property
+            </summary>
+        </member>
+        <member name="P:CoreManagedUiControls.MaxControls.Toolbar.ToolbarPanelInfo.ParentTab">
+            <summary>
+            ParentTab Property
+            </summary>
+        </member>
+        <member name="P:CoreManagedUiControls.MaxControls.Toolbar.ToolbarPanelInfo.PanelIndex">
+            <summary>
+            PanelIndex Property
+            </summary>
+        </member>
+        <member name="M:CoreManagedUiControls.MaxControls.Toolbar.ToolbarPanelInfo.Reset">
+            <summary>
+            Reset panel info
+            </summary>
+        </member>
+        <member name="M:CoreManagedUiControls.MaxControls.Toolbar.ToolbarPanelInfo.IsEmpty">
+            <summary>
+            Check if panel info is empty
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CoreManagedUiControls.MaxControls.Toolbar.ToolbarPanelInfo.SaveSettings">
+            <summary>
+            Save panel info settings
+            </summary>
+        </member>
+        <member name="M:CoreManagedUiControls.MaxControls.Toolbar.ToolbarPanelInfo.RestoreSettings">
+            <summary>
+            Restore panel info settings
+            </summary>
+        </member>
+        <member name="T:CoreManagedUiControls.MaxControls.Toolbar.SimpleIconToolbar">
+            <summary>
+            A simple toolbar version of the hybrid menus.
+            </summary>
+            <see cref="T:CoreManagedUiControls.MaxControls.Toolbar.MaxToolbar"/>
+            <summary>
+            SimpleIconToolbar
+            </summary>
+        </member>
+        <member name="P:CoreManagedUiControls.MaxControls.Toolbar.SimpleIconToolbar.SimpleToolbarList">
+            <summary>
+            Centralized list of floating toolbars.
+            </summary>
+        </member>
+        <member name="P:CoreManagedUiControls.MaxControls.Toolbar.SimpleIconToolbar.Timer">
+            <summary>
+            Centralized refresh timer for open floating toolbars.
+            </summary>
+        </member>
+        <member name="F:CoreManagedUiControls.MaxControls.Toolbar.SimpleIconToolbar.ItemsProperty">
+            <summary>
+            Items dependency prop
+            </summary>
+        </member>
+        <member name="P:CoreManagedUiControls.MaxControls.Toolbar.SimpleIconToolbar.Items">
+            <summary>
+            Toolbar Items
+            </summary>
+        </member>
+        <member name="F:CoreManagedUiControls.MaxControls.Toolbar.SimpleIconToolbar.PanelOrientationProperty">
+            <summary>
+            Items dependency prop
+            </summary>
+        </member>
+        <member name="P:CoreManagedUiControls.MaxControls.Toolbar.SimpleIconToolbar.PanelOrientation">
+            <summary>
+            Toolbar Items
+            </summary>
+        </member>
+        <member name="M:CoreManagedUiControls.MaxControls.Toolbar.SimpleIconToolbar.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+        <member name="T:CoreManagedUiControls.MaxControls.Toolbar.ToolbarSeparatorVisibilityConverter">
+            <summary>
+            Logic for determining visibility of toolbar items in horizontal mode.
+            </summary>
+        </member>
+        <member name="T:CoreManagedUiControls.MaxControls.Toolbar.MaxFloatingToolbar">
+            <summary>
+            Interaction logic for MaxFloatingToolbar.xaml
+            </summary>
+            <summary>
+            MaxFloatingToolbar
+            </summary>
+        </member>
+        <member name="M:CoreManagedUiControls.MaxControls.Toolbar.MaxFloatingToolbar.LoadMenuSettingsFromXML(System.Xml.XmlDocument,CoreManagedUiControls.MaxControls.Toolbar.MaxToolbar)">
+            <summary>
+            Load floating menu settings from an XML document
+            </summary>
+            <param name="settings">XML document with settings</param>
+            <param name="mainToolbar">the main toolbar</param>
+        </member>
+        <member name="P:CoreManagedUiControls.MaxControls.Toolbar.MaxFloatingToolbar.Timer">
+            <summary>
+            Centralized refresh timer for open floating toolbars.
+            </summary>
+        </member>
+        <member name="P:CoreManagedUiControls.MaxControls.Toolbar.MaxFloatingToolbar.FloatingToolbarList">
+            <summary>
+            Centralized list of floating toolbars.
+            The list is used to do drops into floating menus
+            and to serialize floating panels
+            </summary>
+        </member>
+        <member name="M:CoreManagedUiControls.MaxControls.Toolbar.MaxFloatingToolbar.CloseAllFloatingToolbars">
+            <summary>
+            Close all floating toolbars
+            </summary>
+        </member>
+        <member name="M:CoreManagedUiControls.MaxControls.Toolbar.MaxFloatingToolbar.#ctor">
+            <summary>
+            Constructor
+            </summary>
+        </member>
+        <member name="P:CoreManagedUiControls.MaxControls.Toolbar.MaxFloatingToolbar.MainToolbar">
+            <summary>
+            MainToolbar  Property
+            </summary>
+        </member>
+        <member name="P:CoreManagedUiControls.MaxControls.Toolbar.MaxFloatingToolbar.InitialMousePos">
+            <summary>
+            InitialMousePos Property
+            </summary>
+        </member>
+        <member name="P:CoreManagedUiControls.MaxControls.Toolbar.MaxFloatingToolbar.OffsetForFloat">
+            <summary>
+             OffsetForFloat Property
+            </summary>
+        </member>
+        <member name="F:CoreManagedUiControls.MaxControls.Toolbar.MaxFloatingToolbar.PanelsProperty">
+            <summary>
+            Panels Dependency Property
+            </summary>
+        </member>
+        <member name="P:CoreManagedUiControls.MaxControls.Toolbar.MaxFloatingToolbar.Panels">
+            <summary>
+            Gets or sets the Panels property. This dependency property 
+            indicates ....
+            </summary>
+        </member>
+        <member name="M:CoreManagedUiControls.MaxControls.Toolbar.MaxFloatingToolbar.ShowPanel(CoreManagedUiControls.MaxControls.Toolbar.ToolbarPanelInfo)">
+            <summary>
+            Add one panel to the floating toolbar and show it. All other panels
+            will be removed from the toolbar
+            </summary>
+            <param name="panelInfo">Panel info with the panel to show</param>
+        </member>
+        <member name="M:CoreManagedUiControls.MaxControls.Toolbar.MaxFloatingToolbar.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+        <member name="T:CoreManagedUiControls.MaxControls.Toolbar.CycleMenuModeCommand">
+            <summary>
+            Command which implements cycling logic for the three-way button view mode in the
+            MaxToolbar.
+            </summary>
+            <remarks>
+            modes:
+            1. {Icon, Text} 
+            2. {Icon}
+            3. {Text}
+            </remarks>
+        </member>
+        <member name="P:CoreManagedUiControls.MaxControls.Toolbar.CycleMenuModeCommand.PanelWidthWatcher">
+            <summary>
+            PanelWidthWatcher Property
+            </summary>
+        </member>
+        <member name="P:CoreManagedUiControls.MaxControls.Toolbar.CycleMenuModeCommand.ItemWidthWatcher">
+            <summary>
+            ItemWidthWatcher Property
+            </summary>
+        </member>
+        <member name="T:CoreManagedUiControls.MaxControls.Toolbar.MaxToolbar">
+            <summary>
+            Interaction logic for a new main menu toolbar prototype
+            The toolbar behaves like a Ribbon: It can be docked 
+            under the regular main menu or under the Ribbon
+            It is only a prototype, so the class may radically change 
+            in the close future
+            </summary>
+            <summary>
+            MaxToolbar
+            </summary>
+        </member>
+        <member name="M:CoreManagedUiControls.MaxControls.Toolbar.MaxToolbar.#ctor">
+            <summary>
+            constructor
+            </summary>
+        </member>
+        <member name="T:CoreManagedUiControls.MaxControls.Toolbar.MaxToolbar.CreateFloatingPanelDelegate">
+            <summary>
+            Create a custom routed event by first registering a RoutedEventID
+            This event uses the bubbling routing strategy
+            </summary>
+        </member>
+        <member name="P:CoreManagedUiControls.MaxControls.Toolbar.MaxToolbar.ToolTipDictionary">
+            <summary>
+            Tooltip Dictionary
+            </summary>
+        </member>
+        <member name="M:CoreManagedUiControls.MaxControls.Toolbar.MaxToolbar.CloneTooltip(Autodesk.Windows.RibbonToolTip)">
+            <summary>
+            Returns a new allocated copy of a tooltip
+            </summary>
+        </member>
+        <member name="M:CoreManagedUiControls.MaxControls.Toolbar.MaxToolbar.UpdateToolbarItemToolTip(UiViewModels.ActionContainer.ToolbarItem,System.Windows.ResourceDictionary)">
+            <summary>
+            Look up a new ToolTip for the given ToolbarItem in the dictionary. 
+            A non-empty entry will override any tooltip set for the ToolbarItem. 
+            The ToolbarItem's Id is used to find the tooltip in this MaxToolbar 
+            ToolTipDictionary.
+            </summary>
+            <param name="item">Toolbar Item to update</param>
+            <param name="toolTipDictionary"></param>
+        </member>
+        <member name="M:CoreManagedUiControls.MaxControls.Toolbar.MaxToolbar.InitializeToolTips(System.Object)">
+            <summary>
+            Recursively applies the default toolbar item tooltip configuration to the
+            given resource object and its children.
+            </summary>
+            <remarks>
+            See InitializeRibbonItemToolTip for the default tooltip configuration.
+            </remarks>
+            <param name="target">
+            Resource element, e.g. a RibbonItem, ResourceDictionary, or other XAML
+            element, to which to apply the default tooltip configuration.
+            </param>
+        </member>
+        <member name="F:CoreManagedUiControls.MaxControls.Toolbar.MaxToolbar.OrientationProperty">
+            <summary>
+            Orientation dependency prop
+            </summary>
+        </member>
+        <member name="P:CoreManagedUiControls.MaxControls.Toolbar.MaxToolbar.Orientation">
+            <summary>
+            Orientation of toolbar
+            </summary>
+        </member>
+        <member name="P:CoreManagedUiControls.MaxControls.Toolbar.MaxToolbar.IsMenuOpen">
+            <summary>
+            Indicates the current state of the menus.  This value is meant to be bound
+            to a OneWay viewmodel property which tracks the open status.
+            </summary>
+        </member>
+        <member name="F:CoreManagedUiControls.MaxControls.Toolbar.MaxToolbar.TabsProperty">
+            <summary>
+            Tabs Dependency Property
+            </summary>
+        </member>
+        <member name="P:CoreManagedUiControls.MaxControls.Toolbar.MaxToolbar.Tabs">
+            <summary>
+            Gets or sets the Tabs property. This dependency property 
+            indicates ....
+            </summary>
+        </member>
+        <member name="F:CoreManagedUiControls.MaxControls.Toolbar.MaxToolbar.TitleProperty">
+            <summary>
+            Title Dependency Property
+            </summary>
+        </member>
+        <member name="P:CoreManagedUiControls.MaxControls.Toolbar.MaxToolbar.Title">
+            <summary>
+            Gets or sets the Title property. This dependency property 
+            indicates ....
+            </summary>
+        </member>
+        <member name="M:CoreManagedUiControls.MaxControls.Toolbar.MaxToolbar.TabContainer_MouseLeave(System.Object,System.Windows.Input.MouseEventArgs)">
+            <summary>
+            This is the handler which triggers the 'hide' delay when
+            the user moves the mouse off of the main toolbar UI.
+            </summary>
+            <param name="sender">not used</param>
+            <param name="e">not used</param>
+        </member>
+        <member name="M:CoreManagedUiControls.MaxControls.Toolbar.MaxToolbar.TabContainer_MouseEnter(System.Object,System.Windows.Input.MouseEventArgs)">
+            <summary>
+            Handles the case where the user re-enters boundaries of UI.  Kills
+            hide delay.
+            </summary>
+            <param name="sender">not used</param>
+            <param name="e">not used</param>
+        </member>
+        <member name="M:CoreManagedUiControls.MaxControls.Toolbar.MaxToolbar.EndBrowseModeTimer_Completed(System.Object,System.EventArgs)">
+            <summary>
+            Once the delay timer finishes, reset the browse mode on the main
+            ViewModel object.  This cascades the mode across all of the available
+            Panels.
+            </summary>
+            <param name="sender">not used</param>
+            <param name="e">not used</param>
+        </member>
+        <member name="P:CoreManagedUiControls.MaxControls.Toolbar.MaxToolbar.EndBrowseModeTimer">
+            <summary>
+            The timer used to implement the delay of moving the mouse off of the
+            main UI.
+            </summary>
+        </member>
+        <member name="M:CoreManagedUiControls.MaxControls.Toolbar.MaxToolbar.FireCreateFloatingPanelEvent(CoreManagedUiControls.MaxControls.Toolbar.MaxFloatingToolbar)">
+            <summary>
+            Fire an event that allows the floating window to become a part of 
+            the native window system of Max
+            </summary>
+            <param name="FloatingWindow">Floating panel to be incorporated into the Max</param>
+        </member>
+        <member name="M:CoreManagedUiControls.MaxControls.Toolbar.MaxToolbar.ShowOriginal(CoreManagedUiControls.MaxControls.Toolbar.ToolbarPanelInfo)">
+            <summary>
+            Dock the floating panel back to the main toolbar
+            </summary>
+            <param name="panelInfo">Info with the floating panel</param>
+        </member>
+        <member name="M:CoreManagedUiControls.MaxControls.Toolbar.MaxToolbar.OnPreviewKeyUp(System.Windows.Input.KeyEventArgs)">
+            <summary>
+            We handle key up when the menu has direct focus, mainly to handle Alt-navigation.
+            </summary>
+            <param name="e">the key up event args</param>
+        </member>
+        <member name="M:CoreManagedUiControls.MaxControls.Toolbar.MaxToolbar.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+        <member name="T:CoreManagedUiControls.MaxControls.Toolbar.MaxToolbarFloatEventArgs">
+            <summary>
+            Event argument class to provide access to a floating panel window
+            </summary>
+        </member>
+        <member name="M:CoreManagedUiControls.MaxControls.Toolbar.MaxToolbarFloatEventArgs.#ctor(System.Windows.Window)">
+            <summary>
+            MaxToolbarFloatEvent constructor
+            </summary>
+            <param name="floatingPanelWindow">floating panel window</param>
+        </member>
+        <member name="P:CoreManagedUiControls.MaxControls.Toolbar.MaxToolbarFloatEventArgs.FloatingPanelWindow">
+            <summary>
+            FloatingPanel Property
+            </summary>
+        </member>
+        <member name="T:CoreManagedUiControls.MaxControls.Toolbar.SwitchListBox">
+            <summary>
+            A list box class which can change a Toolbar panel orientation
+            </summary>
+        </member>
+        <member name="F:CoreManagedUiControls.MaxControls.Toolbar.SwitchListBox.PanelOrientationProperty">
+            <summary>
+            Panle orientation propeprty
+            </summary>
+        </member>
+        <member name="P:CoreManagedUiControls.MaxControls.Toolbar.SwitchListBox.PanelOrientation">
+            <summary>
+            panel orientation
+            </summary>
+        </member>
+        <member name="T:CoreManagedUiControls.MaxControls.Toolbar.MaxToolbarPanel">
+            <summary>
+            A very simple layout panel specifically for our menu
+            We want the menu to layout from left to right, and
+            if there is not enough space to include all children
+            equally, then we shrink every child by an equal amount
+            </summary>
+        </member>
+        <member name="T:CoreManagedUiControls.MaxControls.TrimmingTextBlock">
+            <summary>
+            A simple textblock control which allows trimming of text from the left or 
+            from the middle.
+            </summary>
+            <see cref="P:CoreManagedUiControls.MaxControls.TrimmingTextBlock.TrimmingStyle"/>
+            /// <see cref="P:CoreManagedUiControls.MaxControls.TrimmingTextBlock.Text"/>
+        </member>
+        <member name="P:CoreManagedUiControls.MaxControls.TrimmingTextBlock.Text">
+            <summary>
+            Gets or sets the Text DependencyProperty value. This is the text that will be displayed.
+            </summary>
+        </member>
+        <member name="F:CoreManagedUiControls.MaxControls.TrimmingTextBlock.TextProperty">
+            <summary>
+            Text DependencyProperty declaration.
+            </summary>
+        </member>
+        <member name="M:CoreManagedUiControls.MaxControls.TrimmingTextBlock.#ctor">
+            <summary>
+            Constructor
+            </summary>
+        </member>
+        <member name="P:CoreManagedUiControls.MaxControls.TrimmingTextBlock.InternalTextBlock">
+            <summary>
+            Internal control used to size and measure text.  
+            Actually takes care of displaying it as well.
+            </summary>
+        </member>
+        <member name="T:CoreManagedUiControls.MaxControls.TrimmingTextBlock.CharacterTrimmingStyle">
+            <summary>
+            Style of trimming to be applied to the textblock.
+            </summary>
+        </member>
+        <member name="F:CoreManagedUiControls.MaxControls.TrimmingTextBlock.CharacterTrimmingStyle.Left">
+            <summary>
+            Will trim the text from the left and insert the EllipsisText in its place to fit available space.
+            </summary>
+        </member>
+        <member name="F:CoreManagedUiControls.MaxControls.TrimmingTextBlock.CharacterTrimmingStyle.Middle">
+            <summary>
+            Will trim text from the middle and insert EllipsisText to fit available space.
+            </summary>
+        </member>
+        <member name="P:CoreManagedUiControls.MaxControls.TrimmingTextBlock.TrimmingStyle">
+            <summary>
+            Gets or sets the Text DependencyProperty. This is the text that will be displayed.
+            </summary>
+        </member>
+        <member name="F:CoreManagedUiControls.MaxControls.TrimmingTextBlock.TrimmingStyleProperty">
+            <summary>
+            TrimmingStyle dependency property
+            </summary>
+        </member>
+        <member name="P:CoreManagedUiControls.MaxControls.TrimmingTextBlock.TrimmingText">
+            <summary>
+            Text used to demark a trim.  Normally an ellipsis.
+            </summary>
+        </member>
+        <member name="M:CoreManagedUiControls.MaxControls.TrimmingTextBlock.MeasureOverride(System.Windows.Size)">
+            <summary>
+            Handles the measure part of the measure and arrange layout process. During this process
+            we measure the textBlock that we've created as content with increasingly smaller amounts
+            of text until we find text that fits.
+            </summary>
+            <param name="availableSize">the available size</param>
+            <returns>the base implementation of Measure after the resizing has been done</returns>
+        </member>
+        <member name="M:CoreManagedUiControls.MaxControls.TrimmingTextBlock.ReduceText(System.String,System.Int32@)">
+            <summary>
+            Reduces the length of the text. Derived classes can override this to use different techniques 
+            for reducing the text length.
+            </summary>
+            <param name="text">the original text</param>
+            <param name="charIndex">The index of the char that was removed from the string.</param>
+            <returns>the reduced length text</returns>
+        </member>
+        <member name="T:CoreManagedUiControls.MaxControls.IconTextButton">
+            <summary>
+            A button class which can show both icon and text
+            </summary>
+        </member>
+        <member name="P:CoreManagedUiControls.MaxControls.IconTextButton.LoadIconsAsynchronously">
+            <summary>
+            Set to true if the icons for the buttons should be loaded asynchronously by a 
+            worker thread.
+            </summary>
+            <remarks>
+            Note: This will cause the initialization of the buttons to be faster, but may result
+            in flickering while the icons are being loaded.
+            </remarks>
+        </member>
+        <member name="F:CoreManagedUiControls.MaxControls.IconTextButton.ShowIconProperty">
+            <summary>
+            Show Icon Property
+            </summary>
+        </member>
+        <member name="P:CoreManagedUiControls.MaxControls.IconTextButton.ShowIcon">
+            <summary>
+            Show Icon
+            </summary>
+        </member>
+        <member name="F:CoreManagedUiControls.MaxControls.IconTextButton.ShowTextProperty">
+            <summary>
+            Show Text property
+            </summary>
+        </member>
+        <member name="P:CoreManagedUiControls.MaxControls.IconTextButton.ShowText">
+            <summary>
+            Show Text
+            </summary>
+        </member>
+        <member name="F:CoreManagedUiControls.MaxControls.IconTextButton.IconProperty">
+            <summary>
+            Icon Property
+            </summary>
+        </member>
+        <member name="P:CoreManagedUiControls.MaxControls.IconTextButton.Icon">
+            <summary>
+            Icon
+            </summary>
+        </member>
+        <member name="F:CoreManagedUiControls.MaxControls.IconTextButton.SubTextProperty">
+            <summary>
+            SubText property
+            </summary>
+        </member>
+        <member name="P:CoreManagedUiControls.MaxControls.IconTextButton.SubText">
+            <summary>
+            Secondary text, normally displayed on the right side of the button
+            </summary>
+        </member>
+        <member name="F:CoreManagedUiControls.MaxControls.IconTextButton.IsHighlightedForSelectionProperty">
+            <summary>
+            IsHighlightedForSelection property
+            </summary>
+        </member>
+        <member name="P:CoreManagedUiControls.MaxControls.IconTextButton.IsHighlightedForSelection">
+            <summary>
+            Indicates that the button is in a highlight state and the visual should
+            reflect as much.
+            </summary>
+        </member>
+        <member name="F:CoreManagedUiControls.MaxControls.IconTextButton.IsHighlightedChangedEvent">
+            <summary>
+            Event declaration for IsHighlightedChanged
+            </summary>
+        </member>
+        <member name="E:CoreManagedUiControls.MaxControls.IconTextButton.IsHighlightedChanged">
+            <summary>
+            Raised when the value of IsHighlightedForSelection changes
+            </summary>
+        </member>
+        <member name="P:CoreManagedUiControls.MaxControls.IconTextButton.ShowUnderlinedShortcutKey">
+            <summary>
+            Shows underlined shortcut key
+            </summary>
+        </member>
+        <member name="P:CoreManagedUiControls.MaxControls.IconTextButton.CollapseToTextSize">
+            <summary>
+            When set to true, will collapse down to the required size of the text only.  If set to false,
+            will maintain the size of the item so that it stays even with items that might have an icon
+            set.
+            </summary>
+        </member>
+        <member name="T:CoreManagedUiControls.MaxControls.EnumSelector">
+            <summary>
+            A control which represents an Enum selection, but whose values can be localized and rendered
+            in human-readable form.
+            </summary>
+            <summary>
+            EnumSelector
+            </summary>
+        </member>
+        <member name="P:CoreManagedUiControls.MaxControls.EnumSelector.Items">
+            <summary>
+            The property that the combo-boxes contents are bound against.
+            </summary>
+        </member>
+        <member name="P:CoreManagedUiControls.MaxControls.EnumSelector.SelectedEnum">
+            <summary>
+            The output value from this control.  Clients can bind against this value
+            to extract an Enum value selection from this control.
+            </summary>
+        </member>
+        <member name="P:CoreManagedUiControls.MaxControls.EnumSelector.EnumValueList">
+            <summary>
+            An optional list of human-readable strings for the control to use.
+            </summary>
+            <remarks>
+            The control is expecting a comma-seperated list of strings.
+            </remarks>
+        </member>
+        <member name="M:CoreManagedUiControls.MaxControls.EnumSelector.SetComboContents">
+            <summary>
+            Sets the contents, regardless of whether they have been set previously.
+            </summary>
+        </member>
+        <member name="M:CoreManagedUiControls.MaxControls.EnumSelector.ArrangeComboContents">
+            <summary>
+            Sets up the final SelectedValue binding, and generates the Items member, if
+            it needs to be generated
+            </summary>
+        </member>
+        <member name="M:CoreManagedUiControls.MaxControls.EnumSelector.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+        <member name="T:CoreManagedUiControls.MaxControls.FlaggedEnumSelector">
+            <summary>
+            A control which represents a Flag-based Enum selection, but whose values can be localized and rendered
+            in human-readable form.
+            </summary>
+            <summary>
+            FlaggedEnumSelector
+            </summary>
+        </member>
+        <member name="P:CoreManagedUiControls.MaxControls.FlaggedEnumSelector.Items">
+            <summary>
+            The property that the combo-boxes contents are bound against.
+            </summary>
+        </member>
+        <member name="P:CoreManagedUiControls.MaxControls.FlaggedEnumSelector.Value">
+            <summary>
+            The output value from this control.  Clients can bind against this value
+            to extract an Enum value selection from this control.
+            </summary>
+        </member>
+        <member name="P:CoreManagedUiControls.MaxControls.FlaggedEnumSelector.EnumValueList">
+            <summary>
+            An optional list of human-readable strings for the control to use.
+            </summary>
+            <remarks>
+            The control is expecting a comma-seperated list of strings.
+            </remarks>
+        </member>
+        <member name="M:CoreManagedUiControls.MaxControls.FlaggedEnumSelector.SetComboContents">
+            <summary>
+            Sets the contents, regardless of whether they have been set previously.
+            </summary>
+        </member>
+        <member name="M:CoreManagedUiControls.MaxControls.FlaggedEnumSelector.ArrangeComboContents">
+            <summary>
+            Sets up the final SelectedValue binding, and generates the Items member, if
+            it needs to be generated
+            </summary>
+        </member>
+        <member name="P:CoreManagedUiControls.MaxControls.FlaggedEnumSelector.DefaultValue">
+            <summary>
+            The value to be used if nothing else is selected (checked).
+            Calculated at init time.
+            </summary>
+        </member>
+        <member name="P:CoreManagedUiControls.MaxControls.FlaggedEnumSelector.DefaultValueText">
+            <summary>
+            The text to be used if nothing else is selected (checked).
+            Calculated at init time.
+            </summary>
+        </member>
+        <member name="M:CoreManagedUiControls.MaxControls.FlaggedEnumSelector.EnumChanged(System.Object,System.EventArgs)">
+            <summary>
+            The handler that binds the CheckBox in the list to a Value change.
+            </summary>
+            <param name="sender">The selected CheckBox</param>
+            <param name="args">default</param>
+        </member>
+        <member name="M:CoreManagedUiControls.MaxControls.FlaggedEnumSelector.AdjustComboTitle">
+            <summary>
+            This method recalculates what should be the title of the combo.
+            </summary>
+        </member>
+        <member name="M:CoreManagedUiControls.MaxControls.FlaggedEnumSelector.GenerateAvailableValues">
+            <summary>
+            Called at init time to create the entries list.
+            </summary>
+        </member>
+        <member name="M:CoreManagedUiControls.MaxControls.FlaggedEnumSelector.EstablishDefaultValue(System.Collections.Generic.List{CoreManagedUiControls.MaxControls.FlaggedEnumSelector.EnumSelectionEntry})">
+            <summary>
+            Figures out what the Default value should be.  If a 0 doesn't exist, then
+            we take the first enum value as the default.
+            </summary>
+            <remarks>
+            The default value doesn't appear in the dropdown list.  The reason for this
+            is that we need a value that is selected if all checkboxes are selected off.
+            </remarks>
+            <param name="values">The complete list of entries.</param>
+        </member>
+        <member name="M:CoreManagedUiControls.MaxControls.FlaggedEnumSelector.GetLookupKey">
+            <summary>
+            Returns the localized Enum lookup key.
+            </summary>
+            <returns>The localized Enum lookup key.</returns>
+        </member>
+        <member name="T:CoreManagedUiControls.MaxControls.FlaggedEnumSelector.EnumSelectionEntry">
+            <summary>
+            The entry viewmodel object.  Contains the localized text, the selection state and 
+            the enum value as a string.
+            </summary>
+        </member>
+        <member name="M:CoreManagedUiControls.MaxControls.FlaggedEnumSelector.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+        <member name="T:CoreManagedUiControls.MaxControls.MaxTextBox">
+            <summary>
+            Extends the base WPF TextBox to add key bindings: Return and Enter commit the
+            current Text value to its binding source, Esc reverts the Text value to 
+            current value in the binding source.
+            </summary>
+        </member>
+        <member name="M:CoreManagedUiControls.MaxControls.MaxTextBox.#ctor">
+            <summary>
+            Constructor.
+            </summary>
+        </member>
+        <member name="F:CoreManagedUiControls.MaxControls.MaxTextBox.ClickSelectsAllProperty">
+            <summary>
+            ClickSelectsAll property
+            </summary>
+        </member>
+        <member name="P:CoreManagedUiControls.MaxControls.MaxTextBox.ClickSelectsAll">
+            <summary>
+            If true, clicking in the textbox will select the text in its entirety.
+            </summary>
+        </member>
+        <member name="F:CoreManagedUiControls.MaxControls.MaxTextBox.BindEnterToUpdateSourceCommandProperty">
+            <summary>
+            Controls if the Enter key is bound to the UpdateSourceCommand RoutedCommand.
+            </summary>
+            <remarks>
+            <para>
+            Defaults to true.
+            </para>
+            <para>
+            It may be desirable to set this to false if the TextField's parent 
+            container handles the enter key event to confirm the edited value.
+            </para>
+            </remarks>
+        </member>
+        <member name="P:CoreManagedUiControls.MaxControls.MaxTextBox.BindEnterToUpdateSourceCommand">
+            <summary>
+            Controls if the Enter key is bound to the UpdateSourceCommand RoutedCommand.
+            </summary>
+            <remarks>
+            <para>
+            Defaults to true.
+            </para>
+            <para>
+            It may be desirable to set this to false if the TextField's parent 
+            container handles the enter key event to confirm the edited value.
+            </para>
+            </remarks>
+        </member>
+        <member name="F:CoreManagedUiControls.MaxControls.MaxTextBox.BindKeystrokeToUpdateSourceCommandProperty">
+            <summary>
+            Controls if keystrokes update the source right away.
+            </summary>
+            <remarks>
+            <para>
+            Defaults to false.
+            </para>
+            </remarks>
+        </member>
+        <member name="P:CoreManagedUiControls.MaxControls.MaxTextBox.BindKeystrokeToUpdateSourceCommand">
+            <summary>
+            Controls if keystrokes update the source right away. 
+            </summary>
+            <remarks>
+            <para>
+            Defaults to false.
+            </para>
+            </remarks>
+        </member>
+        <member name="M:CoreManagedUiControls.MaxControls.NonSelectingComboBox.OnSelectionChanged(System.Windows.Controls.SelectionChangedEventArgs)">
+            <summary>
+            we don't want this combo to actually do anything on selection changed
+            </summary>
+            <param name="e">default</param>
+        </member>
+        <member name="T:CoreManagedUiControls.MaxControls.ViewportTabs.ViewExSingletonPlaceholderWnd">
+            <summary>
+            Interaction logic for ViewExSingletonPlaceholderWnd.xaml
+            </summary>
+            <summary>
+            ViewExSingletonPlaceholderWnd
+            </summary>
+        </member>
+        <member name="M:CoreManagedUiControls.MaxControls.ViewportTabs.ViewExSingletonPlaceholderWnd.#ctor">
+            <summary>
+            Constructor
+            </summary>
+        </member>
+        <member name="E:CoreManagedUiControls.MaxControls.ViewportTabs.ViewExSingletonPlaceholderWnd.LoadViewRequested">
+            <summary>
+            This event is raised with the Viewport button is clicked.
+            </summary>
+        </member>
+        <member name="P:CoreManagedUiControls.MaxControls.ViewportTabs.ViewExSingletonPlaceholderWnd.ViewportName">
+            <summary>
+            The name of the view port that has this placeholder
+            </summary>
+        </member>
+        <member name="M:CoreManagedUiControls.MaxControls.ViewportTabs.ViewExSingletonPlaceholderWnd.Button_Click(System.Object,System.Windows.RoutedEventArgs)">
+            <summary>
+            
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:CoreManagedUiControls.MaxControls.ViewportTabs.ViewExSingletonPlaceholderWnd.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+        <member name="T:CoreManagedUiControls.MaxControls.ViewportTabs.RightClickCommandBehaviour">
+            <summary>
+            A behaviour class that can be used to link a ViewModel Command to a particular UI event.
+            In this case, we are listengin to UIElement.PreviewMouseRightButtonUpEvent.
+            </summary>
+        </member>
+        <member name="T:CoreManagedUiControls.MaxControls.ViewportTabs.SamplePresetsData">
+            <summary>
+            Some sample data for presets to help the designers.
+            </summary>
+        </member>
+        <member name="T:CoreManagedUiControls.MaxControls.ViewportTabs.TabFlyoutControl">
+            <summary>
+            Interaction logic for TabFlyoutControl.xaml
+            </summary>
+            <summary>
+            TabFlyoutControl
+            </summary>
+        </member>
+        <member name="M:CoreManagedUiControls.MaxControls.ViewportTabs.TabFlyoutControl.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+        <member name="T:CoreManagedUiControls.MaxControls.ViewportTabs.ViewportConfigToBoolean">
+            <summary>
+            Converts a ViewportType to boolean: true if the view is Extended, false otherwise.
+            </summary>
+        </member>
+        <member name="T:CoreManagedUiControls.MaxControls.ViewportTabs.ViewportLayoutControl">
+            <summary>
+            A control which displays a visual choice of the various
+            ViewPanel layout configurations.
+            </summary>
+            <summary>
+            ViewportLayoutControl
+            </summary>
+        </member>
+        <member name="M:CoreManagedUiControls.MaxControls.ViewportTabs.ViewportLayoutControl.AdjustMaxHeight">
+            <summary>
+            Calculates the maximum height of the PresetsGrid so that it is always offset nicely 
+            the top of the screen
+            </summary>
+            <see cref="P:CoreManagedUiControls.MaxControls.ViewportTabs.ViewportLayoutControl.OffsetFromTopOfScreen"/>
+        </member>
+        <member name="F:CoreManagedUiControls.MaxControls.ViewportTabs.ViewportLayoutControl.CreateCommandProperty">
+            <summary>
+            Property for CreateCommand.
+            </summary>
+        </member>
+        <member name="P:CoreManagedUiControls.MaxControls.ViewportTabs.ViewportLayoutControl.CreateCommand">
+            <summary>
+            The creation command to call.
+            </summary>
+        </member>
+        <member name="F:CoreManagedUiControls.MaxControls.ViewportTabs.ViewportLayoutControl.IsEditingPresetsProperty">
+            <summary>
+            IsEditingPresets property name.
+            </summary>
+        </member>
+        <member name="P:CoreManagedUiControls.MaxControls.ViewportTabs.ViewportLayoutControl.IsEditingPresets">
+            <summary>
+            A state that represents that we are in an editing state.
+            </summary>
+        </member>
+        <member name="P:CoreManagedUiControls.MaxControls.ViewportTabs.ViewportLayoutControl.OffsetFromTopOfScreen">
+            <summary>
+            Property to determine how far from the top of the screen this user control
+            should get
+            </summary>
+        </member>
+        <member name="P:CoreManagedUiControls.MaxControls.ViewportTabs.ViewportLayoutControl.ParentPopup">
+            <summary>
+            Utility property for specifying the parent owner popup.  We use this to help adjust the 
+            height of this control so that it fits well on screen.
+            </summary>
+        </member>
+        <member name="M:CoreManagedUiControls.MaxControls.ViewportTabs.ViewportLayoutControl.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+        <member name="T:CoreManagedUiControls.MaxControls.ViewportTabs.ViewportLayoutRepresentationControl">
+            <summary>
+            A control which represents a single ViewPanel layout configuration.
+            </summary>
+            <summary>
+            ViewportLayoutRepresentationControl
+            </summary>
+        </member>
+        <member name="M:CoreManagedUiControls.MaxControls.ViewportTabs.ViewportLayoutRepresentationControl.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+        <member name="T:CoreManagedUiControls.MaxControls.ViewportTabs.ViewportRepresentationControl">
+            <summary>
+            Interaction logic for ViewportRepresentationControl.xaml
+            </summary>
+            <summary>
+            ViewportRepresentationControl
+            </summary>
+        </member>
+        <member name="M:CoreManagedUiControls.MaxControls.ViewportTabs.ViewportRepresentationControl.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+        <member name="T:CoreManagedUiControls.MaxControls.ViewportTabs.ViewportTabsControlVerticalMono">
+            <summary>
+            Interaction logic for ViewportTabsControlVerticalMono.xaml
+            </summary>
+            <summary>
+            ViewportTabsControlVerticalMono
+            </summary>
+        </member>
+        <member name="M:CoreManagedUiControls.MaxControls.ViewportTabs.ViewportTabsControlVerticalMono.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+        <member name="T:CoreManagedUiControls.MaxControls.StdViewWindowGrip">
+            <summary>
+            A standard ViewWindow grip control.  Not meant for public consumption.
+            </summary>
+            <summary>
+            StdViewWindowGrip
+            </summary>
+        </member>
+        <member name="P:CoreManagedUiControls.MaxControls.StdViewWindowGrip.ViewTitle">
+            <summary>
+            The current text in the Viewport View label.
+            </summary>
+        </member>
+        <member name="E:CoreManagedUiControls.MaxControls.StdViewWindowGrip.ViewLabelClicked">
+            <summary>
+            This event is raised with the Viewport View label is clicked.
+            </summary>
+        </member>
+        <member name="E:CoreManagedUiControls.MaxControls.StdViewWindowGrip.ViewportConfigLabelClicked">
+            <summary>
+            This event is raised when the viewport configuration label is clicked.
+            </summary>
+        </member>
+        <member name="M:CoreManagedUiControls.MaxControls.StdViewWindowGrip.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+        <member name="T:CoreManagedUiControls.MaxDialogs.ListDialog">
+            <summary>
+            Interaction logic for ListDialog.xaml
+            </summary>
+            <summary>
+            ListDialog
+            </summary>
+        </member>
+        <member name="M:CoreManagedUiControls.MaxDialogs.ListDialog.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+        <member name="T:CoreManagedUiControls.MaxDialogs.Workspaces.DeleteButtonStateMultiConverter">
+            <summary>
+            Converter for the workspace delete button in the workspaces dialog.  Custom logic, not for public consumption.
+            </summary>
+        </member>
+        <member name="T:CoreManagedUiControls.MaxDialogs.Workspaces.NewWorkspaceWindow">
+            <summary>
+            Interaction logic for NewWorkspaceWindow.xaml
+            </summary>
+            <summary>
+            NewWorkspaceWindow
+            </summary>
+        </member>
+        <member name="M:CoreManagedUiControls.MaxDialogs.Workspaces.NewWorkspaceWindow.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+        <member name="T:CoreManagedUiControls.MaxDialogs.Workspaces.WorkspaceManagement">
+            <summary>
+            Interaction logic for WorkspaceManagement.xaml
+            </summary>
+            <summary>
+            WorkspaceManagement
+            </summary>
+        </member>
+        <member name="M:CoreManagedUiControls.MaxDialogs.Workspaces.WorkspaceManagement.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+        <member name="T:CoreManagedUiControls.Properties.Resources">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:CoreManagedUiControls.Properties.Resources.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:CoreManagedUiControls.Properties.Resources.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+        <member name="T:CoreManagedUiControls.Resources.ViewportStringDictionary">
+            <summary>
+            Localizable String dictionary of the string resources of the assembly
+            </summary>
+        </member>
+        <member name="P:CoreManagedUiControls.Resources.ViewportStringDictionary.Resources">
+            <summary>
+            Resource property which gives the access to the resources
+            </summary>
+        </member>
+        <member name="T:CoreManagedUiControls.ThemeManager">
+            <summary>
+            Takes care of dynamically loading Dark vs. Light color resources.
+            </summary>
+            <remarks>
+            At runtime, the manager will load the color resources specified 
+            in the resource files supplied.  By adding this singleton's Resource property value
+            to the root of a control or window hierarchy, the client can participate in the application's theming system.
+            </remarks>
+        </member>
+        <member name="P:CoreManagedUiControls.ThemeManager.Instance">
+            <summary>
+            Singleton instance.
+            </summary>
+        </member>
+        <member name="F:CoreManagedUiControls.ThemeManager.ThemePropertyName">
+            <summary>
+            Theme Property Name
+            </summary>    
+        </member>
+        <member name="P:CoreManagedUiControls.ThemeManager.AppTheme">
+            <summary>
+            Reflects the current application theme
+            </summary>
+        </member>
+        <member name="P:CoreManagedUiControls.ThemeManager.Resources">
+            <summary>
+            The dictionary which dynamically switches its content according to which application
+            theme is currently running.
+            </summary>
+        </member>
+        <member name="T:XamlGeneratedNamespace.GeneratedInternalTypeHelper">
+            <summary>
+            GeneratedInternalTypeHelper
+            </summary>
+        </member>
+        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.CreateInstance(System.Type,System.Globalization.CultureInfo)">
+            <summary>
+            CreateInstance
+            </summary>
+        </member>
+        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.GetPropertyValue(System.Reflection.PropertyInfo,System.Object,System.Globalization.CultureInfo)">
+            <summary>
+            GetPropertyValue
+            </summary>
+        </member>
+        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.SetPropertyValue(System.Reflection.PropertyInfo,System.Object,System.Object,System.Globalization.CultureInfo)">
+            <summary>
+            SetPropertyValue
+            </summary>
+        </member>
+        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.CreateDelegate(System.Type,System.Object,System.String)">
+            <summary>
+            CreateDelegate
+            </summary>
+        </member>
+        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.AddEventHandler(System.Reflection.EventInfo,System.Object,System.Delegate)">
+            <summary>
+            AddEventHandler
+            </summary>
+        </member>
+    </members>
+</doc>

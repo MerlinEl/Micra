@@ -53,7 +53,7 @@ struct MICRA_CSHARP_STRUCTURE	(
 			mcMath_Instance.minMax 100	1	200	--> 100
 		)
 	*/
-	fn isLoaded = (classOf (dotNet.getType "Orien.Tools.McGet") == dotNetObject),
+	fn isLoaded = (classOf (dotNet.getType "Micra.Tools.MxGet") == dotNetObject),
 	--forceLoad == false (know classes dont need to be loaded again)
 	fn getClassInstanceShadowCopy classPath constructorParams:#() forceLoad:false = ( --ShadowCopy method by susanta
 	
@@ -68,7 +68,7 @@ struct MICRA_CSHARP_STRUCTURE	(
 			)
 		)
 	
-		if not doesFileExist (micra.AssemblyDir + "Orien.Star.dll") do return false
+		if not doesFileExist (micra.AssemblyDir + "Micra.Star.dll") do return false
 		--Create dotnet class to use some useful static functions
 		local AppDomain = dotNetClass "System.AppDomain"
 		local Assembly = dotNetClass "System.Reflection.Assembly"
@@ -93,20 +93,20 @@ struct MICRA_CSHARP_STRUCTURE	(
 		AppDomain.CurrentDomain.SetShadowCopyFiles()
 		--load the first version...again don't forget to use different version for every compile in visual studio
 		--AssemblyName.GetAssemblyName using this method we can query to the dll what the version number we have setted in visual studio
-		local assemName = AssemblyName.GetAssemblyName(micra.AssemblyDir + "Orien.Star.dll") --print assemName.FullName
+		local assemName = AssemblyName.GetAssemblyName(micra.AssemblyDir + "Micra.Star.dll") --print assemName.FullName
 		print ("Assembly.FullName:" + assemName.FullName)
-		--result Orien.Star, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
+		--result Micra.Star, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
 
 		--Now load it using assembly name, don't use LoadFromFile
 		local assem = Assembly.Load assemName
 --replacement test >		
-			/*local assembly_path = micra.AssemblyDir + "Orien.Star.dll"
+			/*local assembly_path = micra.AssemblyDir + "Micra.Star.dll"
 			local assembly_bytes = (dotnetClass "System.IO.File").ReadAllBytes assembly_path
 			local assem = (dotnetClass "System.Reflection.Assembly").Load assembly_bytes*/
 --replacement test <		
 		
 		print ("Assembly.Location:" + assem.Location)
-		--will print the temp file path runtime used for shadow copy  somthing like "\Application Data\assembly\dl3\OAV6J36X.Q9J\1Z7DWQ44.552\0f496cae\004a3872_967cc901\Orien.Star.dll"
+		--will print the temp file path runtime used for shadow copy  somthing like "\Application Data\assembly\dl3\OAV6J36X.Q9J\1Z7DWQ44.552\0f496cae\004a3872_967cc901\Micra.Star.dll"
 
 		--use this way to create object of sepcific version instead of (dotNetObject "MYLib.MyClass")
 		class_instance = assem.CreateInstance classPath --create object of first version of MYLib.MyClass
@@ -115,11 +115,11 @@ struct MICRA_CSHARP_STRUCTURE	(
 	fn getClassInstance classPath constructorParams:#() forceLoad:false = (
 	
 		local class_instance
-		if not doesFileExist (micra.AssemblyDir + "Orien.Star.dll") do return false
+		if not doesFileExist (micra.AssemblyDir + "Micra.Star.dll") do return false
 		if not isLoaded() or forceLoad do try ( --load first time or if forceLoad
 			--Orien.Tools and Orine.NetUi are mergetn in to > 
-			format "Assembly Orien.Star was loaded\n"
-			local assembly_path = micra.AssemblyDir + "Orien.Star.dll"
+			format "Assembly Micra.Star was loaded\n"
+			local assembly_path = micra.AssemblyDir + "Micra.Star.dll"
 			local AssemblyName = dotNetClass "System.Reflection.AssemblyName"
 			local assem_name = AssemblyName.GetAssemblyName(assembly_path)
 			format "Assembly.FullName:%\n" assem_name.FullName --print ddl name and version
@@ -265,8 +265,8 @@ struct MICRA_CSHARP_STRUCTURE	(
 )	
  --create instance
 Global mcCSharp = mcStructMan.instanceStructure MICRA_CSHARP_STRUCTURE "mcCSharp"
-Global McGetCs = mcCSharp.getClassInstance "Orien.Tools.McGet" forceLoad:true --one force is enough for reload
-Global McSetCs = mcCSharp.getClassInstance "Orien.Tools.McSet"
+Global McGetCs = mcCSharp.getClassInstance "Micra.Tools.MxGet" forceLoad:true --one force is enough for reload
+Global McSetCs = mcCSharp.getClassInstance "Micra.Tools.MxSet"
 
 /*
 if params.count == 0 then ( --object instance
@@ -474,6 +474,6 @@ cls_type.ToString()
 			dotNet.loadAssembly (micra.AssemblyDir + "Orien.NetUi.dll")
 			
 		) catch (format "Unable to load Orien Assemblies > %\n" (getCurrentException()))
-		Global mcGetCs = loadAssembly "Orien.Tools.dll" "Orien.Tools.McGetCs" 
+		Global mcGetCs = loadAssembly "Orien.Tools.dll" "Micra.Star.MxGet" 
 	),
 	_init = init()*/

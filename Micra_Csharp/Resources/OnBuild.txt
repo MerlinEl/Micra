@@ -1,0 +1,6 @@
+﻿$(ILMergeConsolePath) /log:ILMerge_Log.txt  /allowDup:* /ver:1.0.0.2 /out:Orien.Star.dll Orien.Tools.dll Orien.NetUi.dll
+xcopy $(ProjectDir)bin\Debug\Orien.Star.dll $(SolutionDir)..\..\Micra4\Assembly /Y /I
+
+
+
+$(ILMergeConsolePath) /log:ILMerge_Log.txt  /allowDup:* /ver:1.0.0.2 /out:Orien.Star.dll Orien.Tools.dll Orien.NetUi.dll Micra.Tools.dll

@@ -2,6 +2,9 @@
 --Load Assemblies
 dotNet.loadAssembly (micra.AssemblyDir + "Orien.Tools.dll")
 dotNet.loadAssembly (micra.AssemblyDir + "Orien.NetUi.dll")
+
+dotNet.loadAssembly (micra.AssemblyDir + "Micra.Star.dll")
+
 --Pickup Class
 --method 1
 cls = dotNet.getType "Orien.Tools.mcMath"
@@ -22,6 +25,10 @@ inst.GetType "Orien.NetUi.McPopUp.ProgBar"
 .<System.Type>GetType()
 cls.getType "Orien.NetUi.ProgBar"
 --< Test
+
+cls = dotNet.getType "Micra.Tools.Listener"
+_mcListener = (dotNetClass "System.Activator").CreateInstance cls --create class instance 
+_mcListener.Write ("This message was sended from C#\n")
 
 
 --> Start Here 

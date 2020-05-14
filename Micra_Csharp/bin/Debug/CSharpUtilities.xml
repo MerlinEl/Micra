@@ -1,0 +1,3963 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>CSharpUtilities</name>
+    </assembly>
+    <members>
+        <member name="T:CSharpUtilities.ArrayProducer">
+            <summary>
+            Contains static generic ToArray method for producing an Array from a 
+            collection.
+            </summary>
+        </member>
+        <member name="M:CSharpUtilities.ArrayProducer.ToArray``1(System.Collections.ICollection)">
+            <summary>
+            Static generic method produces a new array of the generic parameter type
+            from the given ICollection. 
+            </summary>
+            <typeparam name="T">Target array item type</typeparam>
+            <param name="collection">Source collection.  All items in this collection
+            will be placed in the returned array.</param>
+            <returns>A new array of Ts containing the items from collection.</returns>
+        </member>
+        <member name="M:CSharpUtilities.ArrayProducer.Slice``1(``0[],System.Int32)">
+            <summary>
+            Generates a new array from a subset of the source array.  This version
+            copies from the given index until the end of the array.
+            </summary>
+            <remarks>
+            <para>
+            Example:
+            <code>
+            int[] source = {0,1,2,3,4,5};
+            int[] result = ArrayProducer.Slice(source, 3);
+            // result is now: {3,4,5}
+            result = ArrayProducer.Slice(source, 6);
+            // result is now: {}
+            </code>
+            </para>
+            <para>
+            Slice can operate on multidimensional arrays, but it only considers the
+            first array.
+            </para>
+            </remarks>
+            <typeparam name="T">The array item type.</typeparam>
+            <param name="source">
+            Source array, the selected elements from here will be copied into the new
+            array.
+            </param>
+            <param name="fromIndex">
+            The index at which to start selecting elements.
+            </param>
+            <returns>
+            A new array of size <c>source.Length - fromIndex</c>, containing the
+            elements from <c>source[fromIndex]</c> until 
+            <c>source[source.Length - 1]</c>.
+            </returns>
+        </member>
+        <member name="M:CSharpUtilities.ArrayProducer.Slice``1(``0[],System.Int32,System.Int32)">
+            <summary>
+            Generates a new array from a subset of the source array.  This version
+            copies the given length of elements starting from the given index.
+            </summary>
+            <remarks>
+            <para>
+            Example:
+            <code>
+            int[] source = {0,1,2,3,4,5};
+            int[] result = ArrayProducer.Slice(source, 3, 2);
+            // result is now: {3,4}
+            result = ArrayProducer.Slice(source, 5, 2);
+            // result is now: {5, 0} 0 is the default value for int
+            result = ArrayProducer.Slice(source, 0, 0);
+            // result is now: {}
+            </code>
+            </para>
+            <para>
+            Slice can operate on multidimensional arrays, but it only considers the
+            first array.
+            </para>
+            </remarks>
+            <typeparam name="T">The array item type.</typeparam>
+            <param name="source">
+            Source array, the selected elements from here will be copied into the new
+            array.
+            </param>
+            <param name="fromIndex">
+            The index at which to start selecting elements.
+            </param>
+            <param name="length">
+            The desired length of the resulting array.  Up to this many elements
+            will be copied from the source array.  Fewer than length will be copied
+            if length exceeds the size of the array past fromIndex.  Any value less
+            than 0 will be clamped to 0.
+            </param>
+            <returns>
+            A new array of size <c>length</c>, containing the
+            elements from <c>source[fromIndex]</c> until 
+            <c>source[Math.Min(source.Length - 1, fromIndex + length - 1)]</c>
+            and padded with null or default values at the end as necessary.
+            </returns>
+        </member>
+        <member name="T:CSharpUtilities.Converters.AndMultiValueConverter">
+            <summary>
+            Converts a set of Boolean input values into a single Boolean output value
+            by performing a logical 'and.'
+            </summary>
+            <remarks>
+            May be used in XAML as a markup extension.
+            </remarks>
+        </member>
+        <member name="F:CSharpUtilities.Converters.AndMultiValueConverter.Converter">
+            <summary>
+            Common instance of this converter. May be shared to reduce memory demands,
+            and provided by the MarkupExtension.
+            </summary>
+        </member>
+        <member name="M:CSharpUtilities.Converters.AndMultiValueConverter.Convert(System.Object[],System.Type,System.Object,System.Globalization.CultureInfo)">
+            <summary>
+            Convert from multiple Boolean input values to a single Boolean output
+            using a logical 'and.'
+            </summary>
+            <param name="values">Input values, expected to be bool.</param>
+            <param name="targetType">
+            Type of the output value.  Must be assignable from bool.
+            </param>
+            <param name="parameter">Ignored.</param>
+            <param name="culture">Ignored.</param>
+            <returns>
+            The result of combining the input values using a logical 'and' operation.
+            </returns>
+        </member>
+        <member name="M:CSharpUtilities.Converters.AndMultiValueConverter.ConvertBack(System.Object,System.Type[],System.Object,System.Globalization.CultureInfo)">
+            <summary>
+            Not supported.  Throws a NotImplementedException.
+            </summary>
+            <param name="value">Ingored.</param>
+            <param name="targetTypes">Ignored.</param>
+            <param name="parameter">Ignored.</param>
+            <param name="culture">Ignored.</param>
+            <returns>Never returns.</returns>
+        </member>
+        <member name="M:CSharpUtilities.Converters.AndMultiValueConverter.ProvideValue(System.IServiceProvider)">
+            <summary>
+            Implements the MarkupExtension interface to return the shared Converter.
+            </summary>
+            <param name="serviceProvider">Not used.</param>
+            <returns>The Converter instance.</returns>
+        </member>
+        <member name="T:CSharpUtilities.Converters.BindingDebuggingConverter">
+            <exclude />
+            <summary>
+            This is not a real converter, but rather a useful stand-in to help you debug
+            a binding.
+            </summary>
+        </member>
+        <member name="M:CSharpUtilities.Converters.BindingDebuggingConverter.#ctor">
+            <summary>
+            Constructor.
+            </summary>
+        </member>
+        <member name="M:CSharpUtilities.Converters.BindingDebuggingConverter.Convert(System.Object,System.Type,System.Object,System.Globalization.CultureInfo)">
+            <summary>
+            Put breakpoint here.
+            </summary>
+            <param name="value">standard</param>
+            <param name="targetType">standard</param>
+            <param name="parameter">standard</param>
+            <param name="culture">standard</param>
+            <returns>standard</returns>
+        </member>
+        <member name="M:CSharpUtilities.Converters.BindingDebuggingConverter.ConvertBack(System.Object,System.Type,System.Object,System.Globalization.CultureInfo)">
+            <summary>
+            not used.
+            </summary>
+            <param name="value">standard</param>
+            <param name="targetType">standard</param>
+            <param name="parameter">standard</param>
+            <param name="culture">standard</param>
+            <returns>standard</returns>
+        </member>
+        <member name="M:CSharpUtilities.Converters.BindingDebuggingConverter.ProvideValue(System.IServiceProvider)">
+            <summary>
+            Provides the single static instance of this converter.
+            </summary>
+            <param name="serviceProvider"></param>
+            <returns></returns>
+        </member>
+        <member name="T:CSharpUtilities.Converters.BooleanToOrientationConverter">
+            <summary>
+            Convert a boolean value to an Orientation value and vice versa
+            true is converted horizontal
+            false is converted vertical
+            </summary>
+        </member>
+        <member name="M:CSharpUtilities.Converters.BooleanToOrientationConverter.Convert(System.Object,System.Type,System.Object,System.Globalization.CultureInfo)">
+            <summary>
+            Convert a boolean value to an Orientation value
+            </summary>
+        </member>
+        <member name="M:CSharpUtilities.Converters.BooleanToOrientationConverter.ConvertBack(System.Object,System.Type,System.Object,System.Globalization.CultureInfo)">
+            <summary>
+            Convert an Orientation value to a boolean value
+            </summary>
+        </member>
+        <member name="T:CSharpUtilities.Converters.BooleanToVisibilityAdapter">
+            <summary>
+            Adapts any converter that outputs a boolean into a Visibility value.
+            </summary>
+            <remarks>
+            Deals generically with the case where you need to bind the result of one converter's
+            calculation to a Visibility value.
+            </remarks>
+        </member>
+        <member name="M:CSharpUtilities.Converters.BooleanToVisibilityAdapter.#ctor">
+            <summary>
+            Constructor
+            </summary>
+        </member>
+        <member name="M:CSharpUtilities.Converters.BooleanToVisibilityAdapter.Convert(System.Object,System.Type,System.Object,System.Globalization.CultureInfo)">
+            <summary>
+            Forwards this call to SubConverter.Convert(object,Type,object,CultureInfo) and
+            turns the expected boolean value to a Visibility value.
+            </summary>
+            <remarks>
+            If the result is false, then IsNotVisibleTarget is returned.
+            </remarks>
+            <param name="value">see IValueConverter interface</param>
+            <param name="targetType">see IValueConverter interface</param>
+            <param name="parameter">see IValueConverter interface</param>
+            <param name="culture">see IValueConverter interface</param>
+            <returns>if SubConverter returns true, then Visible is returned, otherwise
+            IsNotVisibleTarget is returned.
+            </returns>
+        </member>
+        <member name="M:CSharpUtilities.Converters.BooleanToVisibilityAdapter.ConvertBack(System.Object,System.Type,System.Object,System.Globalization.CultureInfo)">
+            <summary>
+            Not implemented.
+            </summary>
+            <param name="value">see IValueConverter interface</param>
+            <param name="targetType">see IValueConverter interface</param>
+            <param name="parameter">see IValueConverter interface</param>
+            <param name="culture">see IValueConverter interface</param>
+            <returns>throws an exception if called</returns>
+        </member>
+        <member name="P:CSharpUtilities.Converters.BooleanToVisibilityAdapter.SubConverter">
+            <summary>
+            A Converter that outputs a boolean.
+            </summary>
+        </member>
+        <member name="P:CSharpUtilities.Converters.BooleanToVisibilityAdapter.IsNotVisibleTarget">
+            <summary>
+            The Visibility returned if the converter returns false.
+            </summary>
+            <remarks>
+            This property can be used to return Visibility.Hidden instead of 
+            Visibility.Collapsed.
+            </remarks>
+        </member>
+        <member name="T:CSharpUtilities.Converters.BooleanToVisibilityConverter">
+            <summary>
+            Same as the WPF standed BooleanToVisibilityConverter, except that you can specify the
+            visibility target when the bound value returns false.
+            </summary>
+        </member>
+        <member name="M:CSharpUtilities.Converters.BooleanToVisibilityConverter.#ctor">
+            <summary>
+            Constructor
+            </summary>
+        </member>
+        <member name="P:CSharpUtilities.Converters.BooleanToVisibilityConverter.TargetHiddenVisibility">
+            <summary>
+            When the property is bound to a boolean value, the value
+            that is targeted when the value is false.  By default, 
+            returns Visibility.Collapsed.
+            </summary>
+        </member>
+        <member name="M:CSharpUtilities.Converters.BooleanToVisibilityConverter.Convert(System.Object,System.Type,System.Object,System.Globalization.CultureInfo)">
+            <summary>
+            Converts from boolean value to Visibility value.  
+            </summary>
+            <remarks>
+            True will return Visibility.Visible, false will return the value of TargetHiddenVisibility.
+            </remarks>
+            <param name="value">bound value</param>
+            <param name="targetType">not used</param>
+            <param name="parameter">not used</param>
+            <param name="culture">not used</param>
+            <returns></returns>
+        </member>
+        <member name="M:CSharpUtilities.Converters.BooleanToVisibilityConverter.ConvertBack(System.Object,System.Type,System.Object,System.Globalization.CultureInfo)">
+            <summary>
+            Not implemented.
+            </summary>
+            <param name="value">Not implemented.</param>
+            <param name="targetType">Not implemented.</param>
+            <param name="parameter">Not implemented.</param>
+            <param name="culture">Not implemented.</param>
+            <returns></returns>
+        </member>
+        <member name="T:CSharpUtilities.Converters.BooleanToVisibilityInverter">
+            <summary>
+            An inverter version of a classic BooleanToVisibility converter.
+            </summary>
+        </member>
+        <member name="M:CSharpUtilities.Converters.BooleanToVisibilityInverter.Convert(System.Object,System.Type,System.Object,System.Globalization.CultureInfo)">
+            <summary>
+            Convert function.
+            </summary>
+            <param name="value">see docs</param>
+            <param name="targetType">see docs</param>
+            <param name="parameter">see docs</param>
+            <param name="culture">see docs</param>
+            <returns>If false, return Visible, else Collapsed.</returns>
+        </member>
+        <member name="M:CSharpUtilities.Converters.BooleanToVisibilityInverter.ConvertBack(System.Object,System.Type,System.Object,System.Globalization.CultureInfo)">
+            <summary>
+            Unconvert function.
+            </summary>
+            <param name="value">see docs</param>
+            <param name="targetType">see docs</param>
+            <param name="parameter">see docs</param>
+            <param name="culture">see docs</param>
+            <returns>If Visible, return false, else true.</returns>
+        </member>
+        <member name="T:CSharpUtilities.Converters.BooleanValueInverter">
+            <summary>
+            Converts a Boolean value by inverting it.
+            </summary>
+            <remarks>
+            May be used in XAML as a markup extension.
+            </remarks>
+        </member>
+        <member name="F:CSharpUtilities.Converters.BooleanValueInverter.Converter">
+            <summary>
+            Common instance of this converter. May be shared to reduce memory demands,
+            and provided by the MarkupExtension.
+            </summary>
+        </member>
+        <member name="M:CSharpUtilities.Converters.BooleanValueInverter.Convert(System.Object,System.Type,System.Object,System.Globalization.CultureInfo)">
+            <summary>
+            Invert the given value.
+            </summary>
+            <param name="value">Value to invert</param>
+            <param name="targetType">Target type of the conversion. Must be bool.</param>
+            <param name="parameter">Ignored.</param>
+            <param name="culture">Ignored.</param>
+            <returns>
+            true if value is false, false if value is true, and DependencyProperty.UnsetValue 
+            if value is DependencyProperty.UnsetValue.
+            </returns>
+        </member>
+        <member name="M:CSharpUtilities.Converters.BooleanValueInverter.ConvertBack(System.Object,System.Type,System.Object,System.Globalization.CultureInfo)">
+            <summary>
+            Invert the given value.
+            </summary>
+            <param name="value">Value to invert</param>
+            <param name="targetType">Target type of the conversion. Must be bool.</param>
+            <param name="parameter">Ignored.</param>
+            <param name="culture">Ignored.</param>
+            <returns>
+            true if value is false, false if value is true, and DependencyProperty.UnsetValue 
+            if value is DependencyProperty.UnsetValue.
+            </returns>
+        </member>
+        <member name="M:CSharpUtilities.Converters.BooleanValueInverter.ProvideValue(System.IServiceProvider)">
+            <summary>
+            Implements the MarkupExtension interface to return the shared Converter.
+            </summary>
+            <param name="serviceProvider">Not used.</param>
+            <returns>The Converter instance.</returns>
+        </member>
+        <member name="T:CSharpUtilities.Converters.ConvertersTest">
+            <summary>
+            Test fixture for general-purpose converters.
+            </summary>
+        </member>
+        <member name="T:CSharpUtilities.Converters.IsGreaterThanZeroConverter">
+            <summary>
+            Returns true if the value is greater than zero.  Only works with types that
+            are assignable to Int32.
+            </summary>
+        </member>
+        <member name="F:CSharpUtilities.Converters.IsGreaterThanZeroConverter.Converter">
+            <summary>
+            Common instance of this converter. May be shared to reduce memory demands,
+            and provided by the MarkupExtension.
+            </summary>
+        </member>
+        <member name="M:CSharpUtilities.Converters.IsGreaterThanZeroConverter.Convert(System.Object,System.Type,System.Object,System.Globalization.CultureInfo)">
+            <summary>
+            Returns true if the integer value passed in is greater than zero.
+            </summary>
+            <param name="value">see IValueConverter interface</param>
+            <param name="targetType">see IValueConverter interface</param>
+            <param name="parameter">see IValueConverter interface</param>
+            <param name="culture">see IValueConverter interface</param>
+            <returns>true if > 0.  Returns DependencyProperty.UnsetValue if an invalid value type is bound.</returns>
+        </member>
+        <member name="M:CSharpUtilities.Converters.IsGreaterThanZeroConverter.ConvertBack(System.Object,System.Type,System.Object,System.Globalization.CultureInfo)">
+            <summary>
+            Not implemented.
+            </summary>
+            <param name="value">see IValueConverter interface</param>
+            <param name="targetType">see IValueConverter interface</param>
+            <param name="parameter">see IValueConverter interface</param>
+            <param name="culture">see IValueConverter interface</param>
+            <returns>throws an exception if called</returns>
+        </member>
+        <member name="M:CSharpUtilities.Converters.IsGreaterThanZeroConverter.ProvideValue(System.IServiceProvider)">
+            <summary>
+            Implements the MarkupExtension interface to return the shared Converter.
+            </summary>
+            <param name="serviceProvider">Not used.</param>
+            <returns>The Converter instance.</returns>
+        </member>
+        <member name="T:CSharpUtilities.Converters.MultiBooleanToVisibilityConverter">
+            <summary>
+            Converts a sequence of booleans and returns Visible or Collapsed according to the logical
+            result.
+            </summary>
+            <remarks>
+            You can make this and AND gate, or an OR gate, by setting the LogicalAnd boolean property.
+            If you make it an AND gate, then we respect parameter ordering so that an effective null
+            check can be introduced earlier that will result in a later, possibly invalid argument being
+            skipped.  This is similar to:
+            <pre>if(null != ref AND ref.SomeProperty) {</pre>
+            Similarly, a true result on an OR will always result in an early exit.
+            </remarks>
+        </member>
+        <member name="M:CSharpUtilities.Converters.MultiBooleanToVisibilityConverter.#ctor">
+            <summary>
+            Default constructor
+            </summary>
+        </member>
+        <member name="M:CSharpUtilities.Converters.MultiBooleanToVisibilityConverter.Convert(System.Object[],System.Type,System.Object,System.Globalization.CultureInfo)">
+            <summary>
+            Converts from a sequence of boolean values to a visibility value.
+            </summary>
+            <remarks>
+            See Class description remarks for comments regarding parameter precedence.
+            </remarks>
+            <param name="values">series of booleans to evaluate</param>
+            <param name="targetType">standard</param>
+            <param name="parameter">not used</param>
+            <param name="culture">not used</param>
+            <returns>Visibility.Visible if true, Visibility.Collapsed if false</returns>
+        </member>
+        <member name="M:CSharpUtilities.Converters.MultiBooleanToVisibilityConverter.ConvertBack(System.Object,System.Type[],System.Object,System.Globalization.CultureInfo)">
+            <summary>
+            Not used.
+            </summary>
+            <param name="value">standard</param>
+            <param name="targetTypes">standard</param>
+            <param name="parameter">standard</param>
+            <param name="culture">standard</param>
+            <returns>not used</returns>
+        </member>
+        <member name="P:CSharpUtilities.Converters.MultiBooleanToVisibilityConverter.LogicalAnd">
+            <summary>
+            If true, this converter will perform a logical and on the parameters.  Otherwise
+            </summary>
+        </member>
+        <member name="T:CSharpUtilities.Converters.EnumConverter">
+            <summary>
+            Converts from Enum values to human-readable localizable Strings.
+            </summary>
+            <remarks>
+            The human-readable strings can be set directly, or can be inferred from a 
+            ReferenceDictionary.
+            </remarks>
+            <see cref="P:CSharpUtilities.Converters.EnumConverter.AvailableValues"/>
+            <see cref="P:CSharpUtilities.Converters.EnumConverter.ReferenceDictionary"/>
+        </member>
+        <member name="P:CSharpUtilities.Converters.EnumConverter.EnumType">
+            <summary>
+            The Enum type to perform conversions on.
+            </summary>
+        </member>
+        <member name="P:CSharpUtilities.Converters.EnumConverter.ReferenceDictionary">
+            <summary>
+            A Dictionary that contains the comma-seperated string definition of the enum
+            human-readable values to use.  These strings should also be localized.
+            </summary>
+            <remarks>
+            This value can either be set directly, or it can be inferred by setting the
+            ReferenceDictionary on the converter.  The converter will attempt to look for
+            value with a key equal to the Full class name of the Enum type being converted.
+            If the AvailableValues array cannot be constructed, then the converter will throw
+            an exception.
+            </remarks>
+        </member>
+        <member name="M:CSharpUtilities.Converters.EnumConverter.Convert(System.Object,System.Type,System.Object,System.Globalization.CultureInfo)">
+            <summary>
+            Converts from an Enum value to a corresponding human-readable string version of the
+            enum drawn from AvailableValues.
+            </summary>
+            <param name="value">The enum value.</param>
+            <param name="targetType">The target type is String.</param>
+            <param name="parameter">not used</param>
+            <param name="culture">not used</param>
+            <returns>The converted value.</returns>
+        </member>
+        <member name="M:CSharpUtilities.Converters.EnumConverter.ConvertBack(System.Object,System.Type,System.Object,System.Globalization.CultureInfo)">
+            <summary>
+            Converts from a human-readable string drawn from AvailableValues to a corresponding 
+            Enum value.
+            </summary>
+            <param name="value">The human-readable string value.</param>
+            <param name="targetType">The target Enum type.</param>
+            <param name="parameter">not used</param>
+            <param name="culture">not used</param>
+            <returns>The converted value.</returns>
+        </member>
+        <member name="P:CSharpUtilities.Converters.EnumConverter.AvailableValues">
+            <summary>
+            Contains the array of human-readable values.
+            </summary>
+            <remarks>
+            This value can either be set directly, or it can be inferred by setting the
+            ReferenceDictionary on the converter.  The converter will attempt to look for
+            value with a key equal to the Full class name of the Enum type being converted.
+            If the AvailableValues array cannot be constructed, then the converter will throw
+            an exception.
+            </remarks>
+        </member>
+        <member name="T:CSharpUtilities.Converters.NAndMultiConverter">
+            <summary>
+            Performs an AND on a list of booleans and returns the NOT value of this.
+            </summary>
+            <remarks>
+            May be used in XAML as a markup extension.
+            </remarks>
+        </member>
+        <member name="F:CSharpUtilities.Converters.NAndMultiConverter.Converter">
+            <summary>
+            Common instance of this converter. May be shared to reduce memory demands,
+            and provided by the MarkupExtension.
+            </summary>
+        </member>
+        <member name="M:CSharpUtilities.Converters.NAndMultiConverter.Convert(System.Object[],System.Type,System.Object,System.Globalization.CultureInfo)">
+            <summary>
+            Convert from multiple Boolean input values to a single Boolean output
+            using a logical 'and'.  Returns the NOT of this evaluation.
+            </summary>
+            <param name="values">Input values, expected to be bool.</param>
+            <param name="targetType">
+            Type of the output value.  Must be assignable from bool.
+            </param>
+            <param name="parameter">Ignored.</param>
+            <param name="culture">Ignored.</param>
+            <returns>
+            The result of combining the input values using a logical 'and' operation, NOT-ed.
+            </returns>
+        </member>
+        <member name="M:CSharpUtilities.Converters.NAndMultiConverter.ConvertBack(System.Object,System.Type[],System.Object,System.Globalization.CultureInfo)">
+            <summary>
+            Not supported.  Throws a NotImplementedException.
+            </summary>
+            <param name="value">Ingored.</param>
+            <param name="targetTypes">Ignored.</param>
+            <param name="parameter">Ignored.</param>
+            <param name="culture">Ignored.</param>
+            <returns>Never returns.</returns>
+        </member>
+        <member name="M:CSharpUtilities.Converters.NAndMultiConverter.ProvideValue(System.IServiceProvider)">
+            <summary>
+            Implements the MarkupExtension interface to return the shared Converter.
+            </summary>
+            <param name="serviceProvider">Not used.</param>
+            <returns>The Converter instance.</returns>
+        </member>
+        <member name="T:CSharpUtilities.Converters.NotNullToVisibilityConverter">
+            <summary>
+            Allows control to bind to a property and only be Visible if the property 
+            is not null.  When null, converter returns the value of VisibilityWhenNull, which
+            is Visibility.Collapsed by default.
+            </summary>
+        </member>
+        <member name="M:CSharpUtilities.Converters.NotNullToVisibilityConverter.#ctor">
+            <summary>
+            Constructor
+            </summary>
+        </member>
+        <member name="P:CSharpUtilities.Converters.NotNullToVisibilityConverter.VisibilityWhenNull">
+            <summary>
+            The Visibility returned by this converter when bound source is null.
+            </summary>
+        </member>
+        <member name="M:CSharpUtilities.Converters.NotNullToVisibilityConverter.Convert(System.Object,System.Type,System.Object,System.Globalization.CultureInfo)">
+            <summary>
+            Converts a bound source to Visibility, based on whether it's null or not.
+            </summary>
+            <param name="value">the binding source</param>
+            <param name="targetType">not used</param>
+            <param name="parameter">not used</param>
+            <param name="culture">not used</param>
+            <returns>Visibility.Visible if not null, or VisibilityWhenNull</returns>
+        </member>
+        <member name="M:CSharpUtilities.Converters.NotNullToVisibilityConverter.ConvertBack(System.Object,System.Type,System.Object,System.Globalization.CultureInfo)">
+            <summary>
+            Not implemented.
+            </summary>
+            <param name="value">Not implemented.</param>
+            <param name="targetType">Not implemented.</param>
+            <param name="parameter">Not implemented.</param>
+            <param name="culture">Not implemented.</param>
+            <returns>Not implemented.</returns>
+        </member>
+        <member name="M:CSharpUtilities.Converters.NotNullToVisibilityConverter.ProvideValue(System.IServiceProvider)">
+            <summary>
+            An instance of the converter.  Not static because the converter has a member variable.
+            </summary>
+            <param name="serviceProvider">not used</param>
+            <returns>An instance of the converter.</returns>
+        </member>
+        <member name="T:CSharpUtilities.Converters.OrMultiValueConverter">
+            <summary>
+            Converts a set of Boolean input values into a single Boolean output value
+            by performing a logical 'or.'
+            </summary>
+            <remarks>
+            May be used in XAML as a markup extension.
+            </remarks>
+        </member>
+        <member name="F:CSharpUtilities.Converters.OrMultiValueConverter.Converter">
+            <summary>
+            Common instance of this converter. May be shared to reduce memory demands,
+            and provided by the MarkupExtension.
+            </summary>
+        </member>
+        <member name="M:CSharpUtilities.Converters.OrMultiValueConverter.Convert(System.Object[],System.Type,System.Object,System.Globalization.CultureInfo)">
+            <summary>
+            Convert from multiple Boolean input values to a single Boolean output
+            using a logical 'or.'
+            </summary>
+            <param name="values">Input values, expected to be bool.</param>
+            <param name="targetType">
+            Type of the output value.  Must be assignable from bool.
+            </param>
+            <param name="parameter">Ignored.</param>
+            <param name="culture">Ignored.</param>
+            <returns>
+            The result of combining the input values using a logical 'or' operation.
+            </returns>
+        </member>
+        <member name="M:CSharpUtilities.Converters.OrMultiValueConverter.ConvertBack(System.Object,System.Type[],System.Object,System.Globalization.CultureInfo)">
+            <summary>
+            Not supported.  Throws a NotImplementedException.
+            </summary>
+            <param name="value">Ingored.</param>
+            <param name="targetTypes">Ignored.</param>
+            <param name="parameter">Ignored.</param>
+            <param name="culture">Ignored.</param>
+            <returns>Never returns.</returns>
+        </member>
+        <member name="M:CSharpUtilities.Converters.OrMultiValueConverter.ProvideValue(System.IServiceProvider)">
+            <summary>
+            Implements the MarkupExtension interface to return the shared Converter.
+            </summary>
+            <param name="serviceProvider">Not used.</param>
+            <returns>The Converter instance.</returns>
+        </member>
+        <member name="T:CSharpUtilities.Converters.SelectMaxDoubleConverter">
+            <summary>
+            SelectMaxDoubleConverter converts an array of doubles
+            to the max value from the array
+            </summary>
+        </member>
+        <member name="M:CSharpUtilities.Converters.SelectMaxDoubleConverter.Convert(System.Object[],System.Type,System.Object,System.Globalization.CultureInfo)">
+            <summary>
+            Choose the max value from the array of doubles
+            </summary>
+            <param name="values">List of doubles</param>
+            <param name="targetType">The type of the binding target property</param>
+            <param name="parameter">The converter parameter to use</param>
+            <param name="culture">The culture to use in the converter</param>
+            <returns>the max double value from the list</returns>
+        </member>
+        <member name="M:CSharpUtilities.Converters.SelectMaxDoubleConverter.ConvertBack(System.Object,System.Type[],System.Object,System.Globalization.CultureInfo)">
+            <summary>
+            Convert back is not implemented
+            It throws a NotImplementedException exception when is used
+            </summary>
+        </member>
+        <member name="M:CSharpUtilities.Converters.SelectMaxDoubleConverter.ProvideValue(System.IServiceProvider)">
+            <summary>
+            Implements the MarkupExtension interface to return the shared Converter.
+            </summary>
+            <param name="serviceProvider">Not used.</param>
+            <returns>The Converter instance.</returns>
+        </member>
+        <member name="T:CSharpUtilities.Converters.StringNotNullOrEmpty">
+            <summary>
+            Returns true if the passes in string is not null or empty.
+            </summary>
+        </member>
+        <member name="M:CSharpUtilities.Converters.StringNotNullOrEmpty.Convert(System.Object,System.Type,System.Object,System.Globalization.CultureInfo)">
+            <summary>
+            Returns true if the passes in string is not null or empty.
+            </summary>
+            <param name="value">standard</param>
+            <param name="targetType">standard</param>
+            <param name="parameter">standard</param>
+            <param name="culture">standard</param>
+            <returns>Converts passed in value to a string, 
+            returns true if the passes in string is not null or empty.
+            </returns>
+        </member>
+        <member name="M:CSharpUtilities.Converters.StringNotNullOrEmpty.ConvertBack(System.Object,System.Type,System.Object,System.Globalization.CultureInfo)">
+            <summary>
+            Not implemented.
+            </summary>
+            <param name="value">Not implemented.</param>
+            <param name="targetType">Not implemented.</param>
+            <param name="parameter">Not implemented.</param>
+            <param name="culture">Not implemented.</param>
+            <returns>Not implemented.</returns>
+        </member>
+        <member name="M:CSharpUtilities.Converters.StringNotNullOrEmpty.ProvideValue(System.IServiceProvider)">
+            <summary>
+            Provides the instance used by the markup extension syntax.
+            </summary>
+            <param name="serviceProvider">not used</param>
+            <returns>Provides the instance used by the markup extension syntax.</returns>
+        </member>
+        <member name="T:CSharpUtilities.Converters.StringNullOrEmpty">
+            <summary>
+            Returns true if the passes in string is null or empty.
+            </summary>
+        </member>
+        <member name="M:CSharpUtilities.Converters.StringNullOrEmpty.Convert(System.Object,System.Type,System.Object,System.Globalization.CultureInfo)">
+            <summary>
+            Returns true if the passes in string is null or empty.
+            </summary>
+            <param name="value">standard</param>
+            <param name="targetType">standard</param>
+            <param name="parameter">standard</param>
+            <param name="culture">standard</param>
+            <returns>Converts passed in value to a string, 
+            returns true if the passes in string is null or empty.
+            </returns>
+        </member>
+        <member name="M:CSharpUtilities.Converters.StringNullOrEmpty.ConvertBack(System.Object,System.Type,System.Object,System.Globalization.CultureInfo)">
+            <summary>
+            Not implemented.
+            </summary>
+            <param name="value">Not implemented.</param>
+            <param name="targetType">Not implemented.</param>
+            <param name="parameter">Not implemented.</param>
+            <param name="culture">Not implemented.</param>
+            <returns>Not implemented.</returns>
+        </member>
+        <member name="M:CSharpUtilities.Converters.StringNullOrEmpty.ProvideValue(System.IServiceProvider)">
+            <summary>
+            Provides the instance used by the markup extension syntax.
+            </summary>
+            <param name="serviceProvider">not used</param>
+            <returns>Provides the instance used by the markup extension syntax.</returns>
+        </member>
+        <member name="T:CSharpUtilities.Converters.StripMenuTextAmpersandsConverter">
+            <summary>
+            Removes ampersand hotkey markers from menu text.
+            </summary>
+        </member>
+        <member name="M:CSharpUtilities.Converters.StripMenuTextAmpersandsConverter.Convert(System.Object,System.Type,System.Object,System.Globalization.CultureInfo)">
+            <summary>
+            Takes menu text with potential ampersand hotkey markers and strips them.
+            </summary>
+            <param name="value">value to convert</param>
+            <param name="targetType">not used</param>
+            <param name="parameter">not used</param>
+            <param name="culture">not used</param>
+            <returns>Text without ampersands.</returns>
+        </member>
+        <member name="M:CSharpUtilities.Converters.StripMenuTextAmpersandsConverter.ConvertBack(System.Object,System.Type,System.Object,System.Globalization.CultureInfo)">
+            <summary>
+            Not implemented.
+            </summary>
+            <param name="value">not used</param>
+            <param name="targetType">not used</param>
+            <param name="parameter">not used</param>
+            <param name="culture">not used</param>
+            <returns>not used</returns>
+        </member>
+        <member name="M:CSharpUtilities.Converters.StripMenuTextAmpersandsConverter.ProvideValue(System.IServiceProvider)">
+            <summary>
+            Returns a static instance of the converter.
+            </summary>
+            <param name="serviceProvider">not used</param>
+            <returns>a static instance of the converter</returns>
+        </member>
+        <member name="T:CSharpUtilities.DisableAcceleratorOnFocusAttribute">
+            <summary>
+            Adding this attribute to a class that is instantiated via the Max bootstrapping
+            mechanism will provide 'natural' keyboard focus selection for elements that desire 
+            it.  This is mainly used to mark-up the MaxTextBox as being keyboard focus sensitive
+            (so that Max does not intercept keyboard commands and run that as command hotkeys).
+            Any other FrameworkElement that needs keyboard focus can add this attribute to the 
+            class declaration to have Max assign it automatically.
+            </summary>
+        </member>
+        <member name="T:CSharpUtilities.DPIUtilities">
+            <summary>
+            Static class that contains function useful for UI DPI scaling.
+            </summary>
+        </member>
+        <member name="M:CSharpUtilities.DPIUtilities.GetUIScaleFactor(System.Int32)">
+            <summary>
+            Return the dpi scale factor. 
+            </summary>
+            <param name="monitorID">monitor ID.</param>
+            <returns>
+            The dpi scale factor. 
+            </returns>
+        </member>
+        <member name="M:CSharpUtilities.DPIUtilities.GetUIScaleFactor">
+            <summary>
+            Return the dpi scale factor. 
+            </summary>
+            <returns>
+            The dpi scale factor. 
+            </returns>
+        </member>
+        <member name="M:CSharpUtilities.DPIUtilities.GetUIUserScaleFactor">
+            <summary>
+            Return the user scale factor. 
+            </summary>
+            <returns>
+            The user scale factor. 
+            </returns>
+        </member>
+        <member name="M:CSharpUtilities.DPIUtilities.DPIScaleDimension(System.Int32)">
+            <summary>
+            Scales the given measure according to DPI. 
+            </summary>
+            <param name="measureToScale">measurement to scale.</param>
+            <returns>
+            DPI scaled measure. 
+            </returns>
+        </member>
+        <member name="M:CSharpUtilities.DPIUtilities.DPIScaleSize(System.Drawing.Size)">
+            <summary>
+            Scales the given size according to DPI. 
+            </summary>
+            <param name="sizeToScale">size to scale.</param>
+            <returns>
+            DPI scaled size. 
+            </returns>
+        </member>
+        <member name="M:CSharpUtilities.DPIUtilities.DPIScaleSize(System.Int32,System.Int32)">
+            <summary>
+            Scales the given size according to DPI. 
+            </summary>
+            <param name="width">width to scale.</param>
+            <param name="height">height to scale.</param>
+            <returns>
+            DPI scaled System.Drawing.Size. 
+            </returns>
+        </member>
+        <member name="T:CSharpUtilities.SimpleCommand">
+            <summary>
+            A very simple abstract command which supplies a default 
+            implmentation for CanExecute, as well as a RaiseCanExecuteChanged
+            method.
+            </summary>
+        </member>
+        <member name="M:CSharpUtilities.SimpleCommand.CanExecute(System.Object)">
+            <summary>
+            Return true by default.
+            </summary>
+            <param name="parameter">The parameter to the command.</param>
+            <returns>true, by default</returns>
+        </member>
+        <member name="E:CSharpUtilities.SimpleCommand.CanExecuteChanged">
+            <summary>
+            Part of the ICommand interface
+            </summary>
+            <see cref="T:System.Windows.Input.ICommand"/>
+        </member>
+        <member name="M:CSharpUtilities.SimpleCommand.RaiseCanExecuteChanged(System.EventArgs)">
+            <summary>
+            A method for notifying interested parties that the
+            value of CanExecute has potentially changed.
+            </summary>
+            <param name="args"></param>
+        </member>
+        <member name="M:CSharpUtilities.SimpleCommand.Execute(System.Object)">
+            <summary>
+            Entry point for command execution.
+            </summary>
+            <param name="parameter">parameter to the command</param>
+            <see cref="T:System.Windows.Input.ICommand"/>
+        </member>
+        <member name="T:CSharpUtilities.Wpf.BindableToolTip">
+            <summary>
+            A static class which defines two useful attached properties: BindableToolTip.DataContext and BindableToolTip.ToolTip
+            </summary>
+            <remarks>
+            This class bypasses a very annoying trait of WPF, which is that the PlacementTarget of a Popup (which includes ToolTips) indirectly
+            sets the DataContext of the element to be inherited context from the Target.  This is very counter-intuitive, especially from the 
+            logical definition standpoint, but it as a result of how the Visual tree is calculated.
+            This class allows you define the DataContext for a tooltip more explicitly.  Given that this class is declared in the "CSharpWpf" 
+            Xaml namespace:
+            <code>
+            &lt;SomeControl
+                   ToolTipService.PlacementTarget=&quot;{Binding ElementName=SomeOtherElement}&quot;
+                   CSharpWpf:BindableToolTip.DataContext=&quot;{Binding}&quot;
+                   &gt;
+                   &lt;CSharpWpf:BindableToolTip.ToolTip&gt;
+                       &lt;ToolTip Content={Binding SomeMVVMPath} /&gt;
+                   &lt;/CSharpWpf:BindableToolTip.ToolTip&gt;
+            &lt;/SomeControl&gt;
+            </code>
+            
+            The result of this will be a tooltip who's DataContext is set to the context of SomeControl, and not the DataContext of the element
+            named "SomeOtherElement".  This allows you to bind Tooltip content or other properties relative to the logical context.
+            </remarks>
+        </member>
+        <member name="F:CSharpUtilities.Wpf.BindableToolTip.ToolTipProperty">
+            <summary>
+            Attached Property ToolTip declaration
+            </summary>
+        </member>
+        <member name="M:CSharpUtilities.Wpf.BindableToolTip.SetToolTip(System.Windows.DependencyObject,System.Windows.FrameworkElement)">
+            <summary>
+            Attached Property mutator for ToolTip.
+            </summary>
+            <param name="element">The element on which the property value is being set.</param>
+            <param name="value">The value to set.</param>
+        </member>
+        <member name="M:CSharpUtilities.Wpf.BindableToolTip.GetToolTip(System.Windows.DependencyObject)">
+            <summary>
+            Attached Property accessor for ToolTip.
+            </summary>
+            <param name="element">The element for which the property value is being retrieved.</param>
+            <returns>The value of the property for the given element.</returns>
+        </member>
+        <member name="F:CSharpUtilities.Wpf.BindableToolTip.DataContextProperty">
+            <summary>
+            Attached Property DataContext declaration
+            </summary>
+        </member>
+        <member name="M:CSharpUtilities.Wpf.BindableToolTip.SetDataContext(System.Windows.DependencyObject,System.Object)">
+            <summary>
+            Attached Property mutator for DataContext.
+            </summary>
+            <param name="element">The element on which the property value is being set.</param>
+            <param name="value">The value to set.</param>
+        </member>
+        <member name="M:CSharpUtilities.Wpf.BindableToolTip.GetDataContext(System.Windows.DependencyObject)">
+            <summary>
+            Attached Property accessor for DataContext.
+            </summary>
+            <param name="element">The element for which the property value is being retrieved.</param>
+            <returns>The value of the property for the given element.</returns>
+        </member>
+        <member name="T:CSharpUtilities.Wpf.EventToCommandFactory">
+            <summary>
+            A factory for generating attached properties that link specific routed
+            events to ICommands.
+            </summary>
+        </member>
+        <member name="M:CSharpUtilities.Wpf.EventToCommandFactory.CreateCommandExecutionEventBehaviour(System.Windows.RoutedEvent,System.String,System.Type)">
+            <summary>
+            Generates an attached dependency property for a class that can be used to 
+            hook up a specific event to a specific ICommand.
+            </summary>
+            <param name="routedEvent">RoutedEvent declaration to listen for.</param>
+            <param name="propertyName">The name of ths property to create.</param>
+            <param name="ownerType">The owning class of this generated property.</param>
+            <returns>An attached property declaration that has been registered correctly.</returns>
+        </member>
+        <member name="T:CSharpUtilities.Wpf.EventToCommandFactory.ExecuteCommandOnRoutedEventBehaviour">
+            <summary>
+            An internal class to handle listening for an event and executing a command,
+            when a Command is assigned to a particular DependencyProperty
+            </summary>
+        </member>
+        <member name="M:CSharpUtilities.Wpf.EventToCommandFactory.ExecuteCommandOnRoutedEventBehaviour.AdjustEventHandlers(System.Windows.DependencyObject,System.Object,System.Object)">
+            <summary>
+            Handles attaching or Detaching Event handlers when a Command is assigned or unassigned
+            </summary>
+            <param name="sender"></param>
+            <param name="oldValue"></param>
+            <param name="newValue"></param>
+        </member>
+        <member name="M:CSharpUtilities.Wpf.EventToCommandFactory.ExecuteCommandBehaviour.PropertyChangedHandler(System.Windows.DependencyObject,System.Windows.DependencyPropertyChangedEventArgs)">
+            <summary>
+            Listens for a change in the DependencyProperty that we are assigned to, and
+            adjusts the EventHandlers accordingly
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="T:CSharpUtilities.Wpf.MouseUtils">
+            <summary>
+            A collection of useful Mouse utility functions
+            </summary>
+        </member>
+        <member name="M:CSharpUtilities.Wpf.MouseUtils.GetMouseAbsoluteScreenPositionNative">
+            <summary>
+            Get the absolute mouse position using the native Win32 SDK
+            </summary>
+            <returns>The absolute mouse position on screen in pixels
+            </returns>
+        </member>
+        <member name="T:CSharpUtilities.Wpf.RangeObservableCollection`1">
+            <summary>
+            An extension of ObservableCollection which supports range adding and deleting
+            with only a single notification sent.
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="M:CSharpUtilities.Wpf.RangeObservableCollection`1.OnCollectionChanged(System.Collections.Specialized.NotifyCollectionChangedEventArgs)">
+            <summary>
+            Overriden to only raise notifications when notifications are not suppressed.
+            </summary>
+            <param name="e">event args</param>
+        </member>
+        <member name="M:CSharpUtilities.Wpf.RangeObservableCollection`1.AddRange(System.Collections.Generic.IEnumerable{`0})">
+            <summary>
+            Add a list of items to the collection.  Only one notification will be made at the
+            end of the addition (NotifyCollectionChangedAction.Reset).
+            </summary>
+            <param name="list">A list to add to the tail end of the collection.</param>
+        </member>
+        <member name="M:CSharpUtilities.Wpf.RangeObservableCollection`1.RemoveRange(System.Collections.Generic.IEnumerable{`0})">
+            <summary>
+            Remove a list of items to the collection.  Only one notification will be made at the
+            end of the removal (NotifyCollectionChangedAction.Reset).
+            </summary>
+            <remarks>Not the the list of items do not need to be sequential.  Each item passes through the 
+            Remove(T) function.
+            </remarks>
+            <param name="list">A list to add to the tail end of the collection.</param>
+        </member>
+        <member name="T:CSharpUtilities.WriteMethod">
+            <summary>
+            FileUtilities.SafeWrite passes control to this delegate to perform
+            specific writing.
+            </summary>
+            <param name="output">
+            Open stream to which the delegate may write. Note that the delegate 
+            should close this stream or any enclosing writer (e.g. StreamWriter) object
+            to ensure that the output is flushed.
+            </param>
+        </member>
+        <member name="T:CSharpUtilities.ValidateMethod">
+            <summary>
+            FileUtilities.SafeWrite passes control to this delegate to perform validation 
+            of the temporary output file. If validation fails, original file if present remains,
+            otherwise the original file is replaced by the temporary output file.
+            </summary>
+            <param name="tempFileName">
+            The file name of the temporary file to validate.
+            </param>
+            <param name="detinationFileName">
+            The file name of the temporary file to validate.
+            </param>
+            <returns>true if the validation succeeded.</returns>
+        </member>
+        <member name="T:CSharpUtilities.XmlWriteMethod">
+            <summary>
+            FileUtilities.SafeWriteXml passes control to this delegate to perform
+            specific writing.
+            </summary>
+            <param name="output">Open XmlWriter around an output stream.</param>
+        </member>
+        <member name="T:CSharpUtilities.TextWriteMethod">
+            <summary>
+            FileUtilities.SafeWriteText passes control to this delegate to perform
+            specific writing.
+            </summary>
+            <param name="output">Open StreamWriter around an output stream.</param>
+        </member>
+        <member name="T:CSharpUtilities.FileUtilities">
+            <summary>
+            Class that contains useful file-related operations.
+            </summary>
+        </member>
+        <member name="M:CSharpUtilities.FileUtilities.CopyAndMakeWriteable(System.String,System.String)">
+            <summary>
+            Copies source file to destination and makes it writeable.
+            </summary>
+            <param name="sourcePath">The file to copy.</param>
+            <param name="destinationPath">The place to copy it to.</param>
+        </member>
+        <member name="M:CSharpUtilities.FileUtilities.SafeWrite(System.String,CSharpUtilities.WriteMethod)">
+            <summary>
+            Wraps a delegate write method to ensure that any exception thrown
+            during the write process does not corrupt the original file.
+            </summary>
+            <remarks>
+            <para>
+            SafeWrite works by:
+            <list type="number">
+            <item>Opening a FileStream on a temporary file with write permissions</item>
+            <item>Passing the stream to the delegate to carry out the actual writing</item>
+            <item>Moving the successfully written file to the actual destination path</item>
+            </list>
+            </para>
+            <para>
+            The WriteMethod must close any enclosing writer it creates, and the stream
+            through that close, in order to guarantee that all its output is flushed to
+            the file.
+            </para>
+            </remarks>
+            <param name="destinationPath">Output location for the written file.</param>
+            <param name="write">Delegate to perform the specific writing.</param>
+        </member>
+        <member name="M:CSharpUtilities.FileUtilities.SafeWrite(System.String,CSharpUtilities.WriteMethod,CSharpUtilities.ValidateMethod)">
+            <summary>
+            Wraps a delegate write method to ensure that any exception thrown
+            during the write process does not corrupt the original file.
+            </summary>
+            <remarks>
+            <para>
+            SafeWrite works by:
+            <list type="number">
+            <item>Opening a FileStream on a temporary file with write permissions</item>
+            <item>Passing the stream to the delegate to carry out the actual writing</item>
+            <item>Moving the successfully written file to the actual destination path</item>
+            </list>
+            </para>
+            <para>
+            The WriteMethod must close any enclosing writer it creates, and the stream
+            through that close, in order to guarantee that all its output is flushed to
+            the file.
+            </para>
+            </remarks>
+            <param name="destinationPath">Output location for the written file.</param>
+            <param name="write">Delegate to perform the specific writing.</param>
+            <param name="validate">Delegate to perform validation.</param>
+        </member>
+        <member name="M:CSharpUtilities.FileUtilities.SafeWriteXml(System.String,CSharpUtilities.XmlWriteMethod)">
+            <summary>
+            Wraps a delegate write method to ensure that any exception thrown
+            during the write process does not corrupt the original file.
+            </summary>
+            <remarks>
+            <para>
+            SafeWriteXml is a convenience method around SafeWrite for writing
+            XML documents. It provides an XmlWriter to the delegate and ensures 
+            that the writer is flushed and closed after the delegate returns control.
+            <see cref="M:CSharpUtilities.FileUtilities.SafeWrite(System.String,CSharpUtilities.WriteMethod,CSharpUtilities.ValidateMethod)"/>
+            </para>
+            <para>
+            This version uses the default FileUtilities.XmlWriterSettings as the
+            XmlWriter's settings.
+            </para>
+            </remarks>
+            <param name="destinationPath">Output location for the written file.</param>
+            <param name="write">Delegate to perform the specific writing.</param>
+        </member>
+        <member name="M:CSharpUtilities.FileUtilities.SafeWriteXml(System.String,CSharpUtilities.XmlWriteMethod,System.Xml.XmlWriterSettings)">
+            <summary>
+            Wraps a delegate write method to ensure that any exception thrown
+            during the write process does not corrupt the original file.
+            </summary>
+            <remarks>
+            SafeWriteXml is a convenience method around SafeWrite for writing
+            XML documents. It provides an XmlWriter to the delegate and ensures 
+            that the writer is flushed and closed after the delegate returns control. It 
+            also provides an validator to ensure the written file is readable as an xml doc
+            <see cref="M:CSharpUtilities.FileUtilities.SafeWrite(System.String,CSharpUtilities.WriteMethod,CSharpUtilities.ValidateMethod)"/>
+            </remarks>
+            <param name="destinationPath">Output location for the written file.</param>
+            <param name="write">Delegate to perform the specific writing.</param>
+            <param name="settings">XmlWriterSettings to use in the XmlWriter</param>
+        </member>
+        <member name="M:CSharpUtilities.FileUtilities.SafeWriteText(System.String,CSharpUtilities.TextWriteMethod)">
+            <summary>
+            Wraps a delegate write method to ensure that any exception thrown
+            during the write process does not corrupt the original file.
+            </summary>
+            <remarks>
+            SafeWriteText is a convenience method around SafeWrite for writing
+            text output. It provides a StreamWriter to the delegate and ensures 
+            that the writer is flushed and closed after the delegate returns control.
+            <see cref="M:CSharpUtilities.FileUtilities.SafeWrite(System.String,CSharpUtilities.WriteMethod)"/>
+            </remarks>
+            <param name="destinationPath">Output location for the written file.</param>
+            <param name="write">Delegate to perform the specific writing.</param>
+        </member>
+        <member name="P:CSharpUtilities.FileUtilities.XmlWriterSettings">
+            <summary>
+            Recommended file settings for xml files written by the application.
+            </summary>
+        </member>
+        <member name="T:CSharpUtilities.IconTools">
+            <summary>
+            A utility class for converting Icon formats used in Windows Forms
+            and WPF.
+            </summary>
+        </member>
+        <member name="M:CSharpUtilities.IconTools.ConvertIconToImageSource(System.Drawing.Icon)">
+            <summary>
+            Converts a Icon object (used by Windows Forms) into an ImageSource
+            supported by WPF.
+            </summary>
+            <param name="aIcon">A valid Icon object.</param>
+            <returns>An ImageSource object.</returns>
+        </member>
+        <member name="T:CSharpUtilities.TestSingleEnum">
+            <summary>
+            Class that inherits from ExtendedEnum, used for testing purposes
+            </summary>
+        </member>
+        <member name="T:CSharpUtilities.TestDoubleEnum">
+            <summary>
+            Class that inherits from ExtendedEnum with 2 generic parameters
+            </summary>
+        </member>
+        <member name="T:CSharpUtilities.DelegateCaller">
+             <summary>
+             Convenient stand-in for the thread-safe delegate invocation idiom.
+             </summary>
+             <remarks>
+             For example, instead of invoking a Click event handler in a thread-safe 
+             manner by writing:
+             <code>
+             EventHandler&lt;EventArgs&gt; threadSafeDelegateCopy = Click;
+             if(null != threadSafeDelegateCopy)
+             {
+                threadSafeDelegateCopy(this, EventArgs.Empty);
+             }
+             </code>
+            
+             It can be invoked equivalently, but more simply using the DelegateCaller as:
+             <code>
+             DelegateCaller.Call(Click, this, EventArgs.Empty);
+             </code>
+             </remarks>
+        </member>
+        <member name="M:CSharpUtilities.DelegateCaller.#ctor(System.Delegate)">
+            <summary>
+            Construct a DelegateCaller to call the given Delegate d.
+            </summary>
+            <param name="d">The delegate to safely call.</param>
+        </member>
+        <member name="P:CSharpUtilities.DelegateCaller.Callable">
+            <summary>
+            Is the encapsulated delegate valid and callable?
+            </summary>
+        </member>
+        <member name="M:CSharpUtilities.DelegateCaller.Call(System.Object[])">
+             <summary>
+             Calls the encapsulated delegate (possibly a multicast delegate) and
+             returns the object returned by the delegate.
+             </summary>
+            
+             <remarks>
+             Traps any thrown exception.
+             </remarks>
+             <param name="args">Arguments passed to the delegate</param>
+             <returns>The delegate's return value.</returns>
+        </member>
+        <member name="M:CSharpUtilities.DelegateCaller.Call(System.Delegate,System.Object[])">
+            <summary>
+            Call the given delegate or event with the given arguments.
+            </summary>
+            <param name="d">The delegate to call.</param>
+            <param name="args">The C# params modifier is roughly equivalent to the C++ ellipsis (...).
+            It will build the args parameter array from the caller site parameter list.
+            In this case, the arguments must be of the type and in the order expected
+            by the delegate.</param>
+            <returns>The delgate's return value.</returns>
+        </member>
+        <member name="F:CSharpUtilities.DelegateCaller.mDelegate">
+            <summary>The encapsulated delegate.</summary>
+        </member>
+        <member name="T:CSharpUtilities.Enumerable`1">
+            <summary>
+            Dummy Enumerable to serve as a wrapper around an Enumerator for easy use
+            in a foreach loop.
+            </summary>
+            <remarks>
+            <para>
+            Given an enumerator for performing a custom iteration, this class serves to
+            spare the work of also creating an Enumerable just so that the enumerator
+            can be used in a foreach loop.
+            </para>
+            <para>
+            This class is generally used as:
+            <code>
+            foreach(object myobject in new Enumerable&lt;object&gt;(myCustomEnumerator))...
+            </code>
+            </para>
+            </remarks>
+            <typeparam name="T">Type over which the Enumerator enumerates.</typeparam>
+        </member>
+        <member name="M:CSharpUtilities.Enumerable`1.#ctor(System.Collections.Generic.IEnumerator{`0})">
+            <summary>
+            Constructor taking the target enumerator.
+            </summary>
+            <param name="enumerator">The enumerator to use for enumeration.</param>
+        </member>
+        <member name="M:CSharpUtilities.Enumerable`1.GetEnumerator">
+            <summary>
+            Get the encapsulated enumerator. 
+            </summary>
+            <returns>The encapsulated enumerator.</returns>
+        </member>
+        <member name="M:CSharpUtilities.Enumerable`1.System#Collections#IEnumerable#GetEnumerator">
+            <summary>
+            Get the encapsulated enumerator. 
+            </summary>
+            <returns>The encapsulated enumerator.</returns>
+        </member>
+        <member name="F:CSharpUtilities.Enumerable`1.mEnumerator">
+            <summary>The encapsulated enumerator.</summary>
+        </member>
+        <member name="T:CSharpUtilities.ExtendedEnumBase">
+            <summary>
+            Base class used to identify the classes that derive from ExtendedEnum
+            </summary>
+            <remarks>
+            Clients that want to identify which classes derive from the ExtendedEnum can do so,
+              by looking for this base class.
+            </remarks>
+        </member>
+        <member name="M:CSharpUtilities.ExtendedEnumBase.#ctor(System.Int32)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="id">
+            The id for each value in the ExtendedEnum
+            </param>
+        </member>
+        <member name="M:CSharpUtilities.ExtendedEnumBase.GetValues(System.Type)">
+            <summary>
+            Uses reflection to call the ExtendedEnum's Values property
+            </summary>
+            <param name="enumType">
+            The ExtendedEnum class type
+            </param>
+            <returns>
+            An array containing all the ExtendedEnum's members.
+            </returns>
+        </member>
+        <member name="M:CSharpUtilities.ExtendedEnumBase.CallStaticConstructor(System.Type)">
+            <summary>
+            Uses reflection to call the static constructor.
+            </summary>
+            <remarks>
+            According to the .Net specifications a static constructor cannot be called directly. 
+            However, using reflections to artificially reference one of the class' static variables,
+            its the static constructor will be automatically called.
+            </remarks>
+            <param name="type">
+            The class type whose static constructor needs to be called.
+            </param>
+        </member>
+        <member name="M:CSharpUtilities.ExtendedEnumBase.CheckCuriouslyRecursiveTemplatePattern(System.Type,System.Type)">
+            <summary>
+            Checks to see if the curiously recursive template pattern is being correctly
+            implemented between the two class types.
+            </summary>
+            <seealso cref="T:CSharpUtilities.ExtendedEnum`1"/>	
+            <param name="derivedType">
+            The derived type which should be or derive from the enumeratedType. 
+            </param>
+            <param name="enumeratedType">
+            The enumeratedType.
+            </param>
+        </member>
+        <member name="P:CSharpUtilities.ExtendedEnumBase.Id">
+            <summary>
+            The numerical Id for this ExtendedEnum within the enum's set.
+            </summary>
+            <remarks>
+            These Ids are used for ordering the members within the enum. 
+            </remarks>
+        </member>
+        <member name="F:CSharpUtilities.ExtendedEnumBase.mId">
+            <summary>
+            ExtendedEnum id.  This provides the ordering within the set.
+            </summary>
+        </member>
+        <member name="T:CSharpUtilities.ExternalBall">
+            <summary>
+            Test Class which inherits from an ExtendedEnum with 2 generic parameters.
+            </summary>
+            <remarks>
+            The second generic parameter is a complex type
+            </remarks>
+        </member>
+        <member name="T:CSharpUtilities.TestIntEnum">
+            <summary>
+            Test Class which inherits from an ExtendedEnum with 2 generic parameters.
+            </summary>
+            <remarks>
+            The second generic parameter is an integral type
+            </remarks>
+        </member>
+        <member name="T:CSharpUtilities.DuplicatedExternalBall">
+            <summary>
+            Test Class which inherits from an ExtendedEnum with 2 generic parameters.
+            </summary>
+            <remarks>
+            Used to test that ExtendedEnums built around the same underlying types (String)
+              do not have the same values.
+            </remarks>
+        </member>
+        <member name="T:CSharpUtilities.DerivedExternalBall">
+            <summary>
+            Test Class which inherits from an ExtendedEnum with 2 generic parameters.
+            </summary>
+            <remarks>
+            Used to test that ExtendedEnums built around the same underlying types (String)
+              do not have the same values.
+            </remarks>
+        </member>
+        <member name="T:CSharpUtilities.ExtendedResourceManager">
+            <summary>
+            This class extends standard ComponentResourceManager and adds the support to 
+            MultiIcon, Icon and Image resources. 
+            </summary>
+            <remarks>
+            C++/CLI projects can manage a single instance of this class and use it
+            to implement resource management for the assembly.  By providing static methods 
+            accessing a single instance of this class, the resources management class may more 
+            closely resemble the designer-generated resource management classes in C# projects.
+            </remarks>
+        </member>
+        <member name="M:CSharpUtilities.ExtendedResourceManager.#ctor">
+            <summary>
+            Constructor.
+            </summary>
+        </member>
+        <member name="M:CSharpUtilities.ExtendedResourceManager.#ctor(System.Type)">
+            <summary>
+            Construct a resource manager that looks up resources in statellite 
+            assemblies based on information from the specified type.
+            </summary>
+            <param name="type">
+            A Type from which the resource manager derives all information for 
+            finding resource files. 
+            </param>
+        </member>
+        <member name="M:CSharpUtilities.ExtendedResourceManager.GetMultiIcon(System.String)">
+            <summary>
+            Get a MultiIcon resource from the assembly's set of resources.
+            </summary>
+            <param name="key">
+            Key string used to identify the desired resource.
+            </param>
+            <returns>
+            The resource specified by the given key, or null if the resource is not
+            found.
+            </returns>
+        </member>
+        <member name="M:CSharpUtilities.ExtendedResourceManager.GetIcon(System.String)">
+            <summary>
+            Get an Icon resource from the assembly's set of resources.
+            </summary>
+            <param name="key">
+            Key string used to identify the desired resource.
+            </param>
+            <returns>
+            The resource specified by the given key, or null if the resource is not
+            found.
+            </returns>
+        </member>
+        <member name="M:CSharpUtilities.ExtendedResourceManager.GetImage(System.String)">
+            <summary>
+            Get an Image resource from the assembly's set of resources.
+            </summary>
+            <param name="key">
+            Key string used to identify the desired resource.
+            </param>
+            <returns>
+            The resource specified by the given key, or null if the resource is not
+            found.
+            </returns>
+        </member>
+        <member name="T:CSharpUtilities.ExtendedResourceManagerTestResources">
+            <summary>
+            Empty class paired to ExtendedResourceManagerTestResources.resx to allow
+            the resource manager instance in ExtendedResourceManagerTest to find
+            the resources through a type.
+            </summary>
+        </member>
+        <member name="T:CSharpUtilities.IconDeviceIndependentBitmap">
+            <summary>
+            A IconDeviceIndependentBitmap stores a device independent bitmap (DIB). 
+            This class makes the loading and saving of *.ico files much easier.
+            </summary>
+            <remarks>
+            The format of the wrapped bitmap in IconDeviceIndependentBitmap is a 
+            little bit different with standard windows bitmap: It contains a 
+            "xor mask" and an "and mask". 
+            
+            For more information about the icon DIB format, please reference msdn: 
+            http://msdn.microsoft.com/en-us/library/ms997538.aspx
+            </remarks>
+        </member>
+        <member name="M:CSharpUtilities.IconDeviceIndependentBitmap.#ctor(System.Int32,System.Int32,System.Int16)">
+            <summary>
+            Construct an empty IconDeviceIndependentBitmap with the given 
+            width, height and color bit count.
+            </summary>
+            <param name="width">
+            The width of the icon. This parameter must be ranged in [1, 255]
+            </param>
+            <param name="height">
+            The height of the icon. This parameter must be ranged in [1, 255]
+            </param>
+            <param name="colorBitCount">
+            The color bit count of the icon. This parameter must be greater than 
+            8 because we don't support palette colors for now. 
+            </param>
+            <exception cref="T:System.ArgumentException">
+            Throws if width or height is not ranged in [1, 255], or if 
+            colorBitCount is less than or equal to 8.
+            </exception>
+        </member>
+        <member name="M:CSharpUtilities.IconDeviceIndependentBitmap.#ctor(System.Drawing.Bitmap)">
+            <summary>
+            Construct an IconDeviceIndependentBitmap from the given bitmap.
+            </summary>
+            <param name="bitmap">
+            The given bitmap.
+            </param>
+            <exception cref="T:System.ArgumentException">
+            Throws if bitmap.Width or bitmap.Height exceeds 255, or if color bit 
+            count of the given bitmap is less than or equal to 8.
+            </exception>
+        </member>
+        <member name="M:CSharpUtilities.IconDeviceIndependentBitmap.#ctor(System.IO.Stream)">
+            <summary>
+            Load an IconDeviceIndependentBitmap from the given stream.
+            </summary>
+            <param name="stream">
+            The given stream.
+            </param>
+            <exception cref="T:System.ArgumentException">
+            Throws if the stream contains an invalid icon.
+            </exception>
+        </member>
+        <member name="M:CSharpUtilities.IconDeviceIndependentBitmap.Write(System.IO.Stream)">
+            <summary>
+            Write this IconDeviceIndependentBitmap to the given stream.
+            </summary>
+            <param name="stream">
+            The given stream.
+            </param>
+        </member>
+        <member name="M:CSharpUtilities.IconDeviceIndependentBitmap.CalculateTotalImageByteCount(System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Calculate the total bytes of a IconDeviceIndependentBitmap that 
+            will be stored in file, including the dib header (Notice the dib 
+            header is not icon file entry). 
+            </summary>
+            <param name="width">
+            The width of that dib.
+            </param>
+            <param name="height">
+            The height of that dib.
+            </param>
+            <param name="colorBitCount">
+            The color bit count of that dib.
+            </param>
+            <returns>
+            The total bytes of that dib.
+            </returns>
+        </member>
+        <member name="M:CSharpUtilities.IconDeviceIndependentBitmap.GetHeaderSize">
+            <summary>
+            Get the dib header size.
+            </summary>
+            <returns>
+            The dib header size.
+            </returns>
+        </member>
+        <member name="M:CSharpUtilities.IconDeviceIndependentBitmap.GetPaletteSize">
+            <summary>
+            Get the palette size of this dib.
+            </summary>
+            <returns>
+            The palette size of this dib.
+            </returns>
+        </member>
+        <member name="M:CSharpUtilities.IconDeviceIndependentBitmap.GetXorMaskBytes">
+            <summary>
+            Get the xor mask size.
+            </summary>
+            <returns>
+            The xor mask size.
+            </returns>
+        </member>
+        <member name="M:CSharpUtilities.IconDeviceIndependentBitmap.GetAndMaskBytes">
+            <summary>
+            Get the and mask size.
+            </summary>
+            <returns>
+            The and mask size.
+            </returns>
+        </member>
+        <member name="P:CSharpUtilities.IconDeviceIndependentBitmap.SizeImage">
+            <summary>
+            Get the total bytes of a IconDeviceIndependentBitmap that will be stored in file, 
+            including the dib header. 
+            </summary>
+        </member>
+        <member name="P:CSharpUtilities.IconDeviceIndependentBitmap.Width">
+            <summary>
+            The width of this dib.
+            </summary>
+        </member>
+        <member name="P:CSharpUtilities.IconDeviceIndependentBitmap.Height">
+            <summary>
+            The height of this dib.
+            </summary>
+        </member>
+        <member name="P:CSharpUtilities.IconDeviceIndependentBitmap.BitCount">
+            <summary>
+            The color bit count of this dib.
+            </summary>
+        </member>
+        <member name="P:CSharpUtilities.IconDeviceIndependentBitmap.XorMask">
+            <summary>
+            The xor mask array of this dib. In DEFAULT_COLOR_BIT_COUNT bit argb format. 
+            </summary>
+        </member>
+        <member name="P:CSharpUtilities.IconDeviceIndependentBitmap.AndMask">
+            <summary>
+            The and mask array of this dib. Each bit represents a pixel. 
+            </summary>
+        </member>
+        <member name="F:CSharpUtilities.IconDeviceIndependentBitmap.DEFAULT_COLOR_BIT_COUNT">
+            <summary>
+            Default color bit count of default pixel format.
+            </summary>
+        </member>
+        <member name="F:CSharpUtilities.IconDeviceIndependentBitmap.DEFAULT_PIXEL_FORMAT">
+            <summary>
+            Default pixel format.
+            </summary>
+        </member>
+        <member name="M:CSharpUtilities.IconDeviceIndependentBitmap.BitCountToAlignedByteCount(System.Int32)">
+            <summary>
+            Calculate the 4-bytes aligned byte count from the total bit count. 
+            </summary>
+            <param name="widthBits">
+            total bit count.
+            </param>
+            <returns>
+            corresponding 4-bytes aligned size. In bytes.
+            </returns>
+        </member>
+        <member name="M:CSharpUtilities.IconDeviceIndependentBitmap.CalculateBytesPerLine(System.Int32,System.Int32)">
+            <summary>
+            Calculate the 4-bytes aligned size of each line of the DIB. 
+            </summary>
+            <param name="width">
+            The width of the dib.
+            </param>
+            <param name="colorBitCount">
+            The color bit count of the dib.
+            </param>
+            <returns>
+            The 4-bytes aligned size of each line of the dib.
+            </returns>
+        </member>
+        <member name="M:CSharpUtilities.IconDeviceIndependentBitmap.GetRgbArray(System.Drawing.Bitmap)">
+            <summary>
+            Get the DEFAULT_COLOR_BIT_COUNT-bit rgb array from a given bitmap.
+            </summary>
+            <param name="bitmap">
+            The given bitmap.
+            </param>
+            <returns>
+            The DEFAULT_COLOR_BIT_COUNT-bit rgb array of the bitmap. If the bitmap 
+            is other format, we performed a temporary format conversion. If the 
+            conversion failed, this function returns null.
+            </returns>
+        </member>
+        <member name="M:CSharpUtilities.IconDeviceIndependentBitmap.CreateAndMask">
+            <summary>
+            Create an empty "and mask" for this DIB.
+            </summary>
+        </member>
+        <member name="M:CSharpUtilities.IconDeviceIndependentBitmap.CalculateUsedColorCount(System.Int32)">
+            <summary>
+            Calculate how many colors should be used in palette.
+            </summary>
+            <param name="colorBitCount">
+            The color bit count.
+            </param>
+            <returns>
+            How many colors should be used in palette.
+            </returns>
+        </member>
+        <member name="M:CSharpUtilities.IconDeviceIndependentBitmap.GetRgbQuadByteCount">
+            <summary>
+            Get the size of bytes of each color entry in palette.
+            </summary>
+            <returns>
+            The size of bytes of each color entry in palette.
+            </returns>
+        </member>
+        <member name="M:CSharpUtilities.IconDeviceIndependentBitmap.CalculatePaletteByteCount(System.Int32)">
+            <summary>
+            Get the size of bytes of color palette.
+            </summary>
+            <param name="usedColorCount">
+            How many colors are used?
+            </param>
+            <returns>
+            The size of bytes of color palette.
+            </returns>
+        </member>
+        <member name="M:CSharpUtilities.IconDeviceIndependentBitmap.IsValidIconBitmap">
+            <summary>
+            Check if the input parameters are valid.
+            </summary>
+            <returns>
+            true if the parameters are valid, false otherwise.
+            </returns>
+        </member>
+        <member name="M:CSharpUtilities.IconDeviceIndependentBitmap.CalculateTotalImageByteCount">
+            <summary>
+            Calculate the total bytes of this IconDeviceIndependentBitmap that 
+            will be stored in file, including the dib header (Notice the dib 
+            header is not icon file entry). 
+            </summary>
+        </member>
+        <member name="F:CSharpUtilities.IconDeviceIndependentBitmap.mHeaderSize">
+            <summary>
+            Specifies the number of bytes required by the header structure. 
+            </summary>
+        </member>
+        <member name="F:CSharpUtilities.IconDeviceIndependentBitmap.mWidth">
+            <summary>
+            Specifies the width of the bitmap, in pixels. 
+            </summary>
+        </member>
+        <member name="F:CSharpUtilities.IconDeviceIndependentBitmap.mHeight">
+            <summary>
+            Specifies the height of the bitmap, in pixels.
+            </summary>
+        </member>
+        <member name="F:CSharpUtilities.IconDeviceIndependentBitmap.mPlanes">
+            <summary>
+            Specifies the number of planes for the target device. 
+            This value must be set to 1.
+            </summary>
+        </member>
+        <member name="F:CSharpUtilities.IconDeviceIndependentBitmap.mColorBitCount">
+            <summary>
+            Specifies the number of bits-per-pixel. This determines the xor 
+            mask format. 
+            </summary>
+        </member>
+        <member name="F:CSharpUtilities.IconDeviceIndependentBitmap.mCompression">
+            <summary>
+            Specifies the type of compression of this bitmap. This is always 
+            zero in our case because we don't handle compressed bitmaps.
+            </summary>
+        </member>
+        <member name="F:CSharpUtilities.IconDeviceIndependentBitmap.mTotalImageByteCount">
+            <summary>
+            Specifies the size, in bytes, of the image. Including bitmap headers 
+            and palette. 
+            </summary>
+        </member>
+        <member name="F:CSharpUtilities.IconDeviceIndependentBitmap.mXPixelsPerMeter">
+            <summary>
+            Specifies the horizontal resolution, in pixels-per-meter, of the 
+            target device for the bitmap. An application can use this value to 
+            select a bitmap from a resource group that best matches the 
+            characteristics of the current device. 
+            </summary>
+        </member>
+        <member name="F:CSharpUtilities.IconDeviceIndependentBitmap.mYPixelsPerMeter">
+            <summary>
+            Specifies the vertical resolution, in pixels-per-meter, of the 
+            target device for the bitmap. 
+            </summary>
+        </member>
+        <member name="F:CSharpUtilities.IconDeviceIndependentBitmap.mUsedColorCount">
+            <summary>
+            Specifies the number of color indexes in the color table that are 
+            actually used by the bitmap. If this value is zero, the bitmap uses 
+            the maximum number of colors corresponding to the value of the 
+            mColorBitCount member for the compression mode specified by mCompression. 
+            </summary>
+        </member>
+        <member name="F:CSharpUtilities.IconDeviceIndependentBitmap.mImportantColorCount">
+            <summary>
+            Specifies the number of color indexes that are required for 
+            displaying the bitmap. If this value is zero, all colors are required. 
+            </summary>
+        </member>
+        <member name="F:CSharpUtilities.IconDeviceIndependentBitmap.mXorMask">
+            <summary>
+            The xor mask of this bitmap. Please see remarks of this class. 
+            </summary>
+        </member>
+        <member name="F:CSharpUtilities.IconDeviceIndependentBitmap.mAndMask">
+            <summary>
+            The and mask of this bitmap. Please see remarks of this class. 
+            </summary>
+        </member>
+        <member name="T:CSharpUtilities.IconUtilities">
+            <summary>
+            This utility class is used for manipulating icons. 
+            </summary>
+        </member>
+        <member name="M:CSharpUtilities.IconUtilities.FromBitmap(System.Drawing.Bitmap)">
+            <summary>
+            Convert a bitmap to an GDI+ Icon (32bit color). The returned icon 
+            supports transparent color and alpha channel. 
+            </summary>
+            <remarks>
+            <para>
+            This is much better than Icon.FromHandle(bitmap.GetHIcon()). If you 
+            used the Bitmap.GetHIcon, you must explicitly depose that handle 
+            by calling win32 api: DestroyIcon. However, using out method here you 
+            don't need to worry about GDI resource leak because we perform the 
+            conversion based on data stream but not on GDI handles. 
+            </para>
+            <para>
+            For more information, please reference: 
+            http://www.codeproject.com/dotnet/MultiIcon.asp
+            </para>
+            </remarks>
+        </member>
+        <member name="M:CSharpUtilities.IconUtilities.LoadMultipleIcons(System.IO.Stream)">
+            <summary>
+            Load all DIBs from the given stream, convert those DIBs to Icons, 
+            and then returns an array of those separate Icons.
+            </summary>
+            <param name="stream">
+            Stream containing one icon data.
+            </param>
+            <remarks>
+            An icon file may contains a set of DIBs for displaying under 
+            different resolution. This function just separates those DIBs and 
+            converts each DIB into an Icon.
+            </remarks>
+        </member>
+        <member name="M:CSharpUtilities.IconUtilities.BuildIcon(CSharpUtilities.IconUtilities.IconFileHeader,CSharpUtilities.IconUtilities.IconFileEntry,System.IO.Stream)">
+            <summary>
+            Build an Icon from the given Icon specification information: the
+            file header, entry specification data, and data stream.
+            </summary>
+            <param name="header">Header data from the icon file.</param>
+            <param name="entry">
+            Descriptor for the current icon entry to be extracted.
+            </param>
+            <param name="inputIconStream">Stream containing the icon data.</param>
+            <returns>A new Icon built from the given specification and data.</returns>
+        </member>
+        <member name="T:CSharpUtilities.IconUtilities.IconFileHeader">
+            <summary>
+            Storage for the header information from the .ico file.  
+            </summary>
+        </member>
+        <member name="P:CSharpUtilities.IconUtilities.IconFileHeader.StructureSize">
+            <summary>
+            The size of this structure.
+            </summary>
+        </member>
+        <member name="M:CSharpUtilities.IconUtilities.IconFileHeader.#ctor(System.IO.Stream)">
+            <summary>
+            Construct from an Icon data stream.
+            </summary>
+        </member>
+        <member name="M:CSharpUtilities.IconUtilities.IconFileHeader.#ctor(System.Int16)">
+            <summary>
+            Construct from icon count.
+            </summary>
+        </member>
+        <member name="M:CSharpUtilities.IconUtilities.IconFileHeader.Write(System.IO.Stream)">
+            <summary>
+            Write this header to a stream.
+            </summary>
+        </member>
+        <member name="T:CSharpUtilities.IconUtilities.IconFileEntry">
+            <summary>
+            Storage for entry information from the .ico file.
+            </summary>
+        </member>
+        <member name="P:CSharpUtilities.IconUtilities.IconFileEntry.StructureSize">
+            <summary>
+            The size of this structure.
+            </summary>
+        </member>
+        <member name="M:CSharpUtilities.IconUtilities.IconFileEntry.#ctor(System.Drawing.Bitmap,System.Int32)">
+            <summary>
+            Construct from a bitmap and the index of this icon entry. Notice 
+            that the index starts from zero.
+            </summary>
+        </member>
+        <member name="M:CSharpUtilities.IconUtilities.IconFileEntry.#ctor(System.IO.Stream)">
+            <summary>
+            Construct from an Icon data stream.
+            </summary>
+        </member>
+        <member name="M:CSharpUtilities.IconUtilities.IconFileEntry.Write(System.IO.Stream)">
+            <summary>
+            Write this structure to a stream.
+            </summary>
+        </member>
+        <member name="F:CSharpUtilities.IconUtilities.SINGLE_ICON_COUNT">
+            <summary>
+            Icon header information for individual Icons.
+            </summary>
+        </member>
+        <member name="F:CSharpUtilities.IconUtilities.SINGLE_ICON_OFFSET">
+            <summary>
+            Icon header information for individual Icons.
+            </summary>
+        </member>
+        <member name="T:CSharpUtilities.DesktopScreen">
+            <summary>
+            This is an adpater of System.Windows.Forms.Screen, in order to 
+            get rid of System.Windows.Forms dependency for WPF dlls. I choose
+            the name "DesktopScreen" just don't want to mess up with some existing
+            code that uses System.Windows.Forms.Screen(e.g. UserInterfaceUtilities).
+            </summary>
+        </member>
+        <member name="M:CSharpUtilities.DesktopScreen.FromPoint(System.Windows.Point)">
+            <summary>
+            Return an Screen object that contains a specified point.
+            </summary>
+            <param name="point">
+            The testing point.
+            </param>
+        </member>
+        <member name="P:CSharpUtilities.DesktopScreen.Bounds">
+            <summary>
+            Adapts System.Windows.Forms.Screen.Bounds.
+            </summary>
+        </member>
+        <member name="P:CSharpUtilities.DesktopScreen.DeviceName">
+            <summary>
+            Adapts System.Windows.Forms.Screen.DeviceName.
+            </summary>
+        </member>
+        <member name="M:CSharpUtilities.DesktopScreen.#ctor(System.Windows.Forms.Screen)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="aScreen">
+            The underlying System::Windows::Forms::Screen object.
+            </param>
+        </member>
+        <member name="F:CSharpUtilities.DesktopScreen.mScreen">
+            <summary>
+            the underlying System::Windows::Forms::Screen object
+            </summary>
+        </member>
+        <member name="T:CSharpUtilities.MaxBindingOperations">
+            <summary>
+            Collection of convenience methods for establishing data bindings in code.
+            </summary>
+        </member>
+        <member name="M:CSharpUtilities.MaxBindingOperations.CreateBinding(System.Object,System.String,System.Windows.DependencyObject,System.Windows.DependencyProperty)">
+            <summary>
+            Construct and set a Binding from the given source property to the target
+            DependencyProperty, using the default BindingMode.
+            </summary>
+            <param name="source">Source object.</param>
+            <param name="sourcePropertyName">Path to the source property.</param>
+            <param name="target">Target object.</param>
+            <param name="targetProperty">Target DependencyProperty.</param>
+            <returns>
+            BindingExpression for the newly established binding.
+            </returns>
+        </member>
+        <member name="M:CSharpUtilities.MaxBindingOperations.CreateBinding(System.Object,System.String,System.Windows.DependencyObject,System.Windows.DependencyProperty,System.Windows.Data.IValueConverter)">
+            <summary>
+            Construct and set a Binding from the given source property to the target
+            DependencyProperty, using the default BindingMode.
+            </summary>
+            <param name="source">Source object.</param>
+            <param name="sourcePropertyName">Path to the source property.</param>
+            <param name="target">Target object.</param>
+            <param name="targetProperty">Target DependencyProperty.</param>
+            <param name="converter">Converts from the source value to the target value.</param>
+            <returns>
+            BindingExpression for the newly established binding.
+            </returns>
+        </member>
+        <member name="M:CSharpUtilities.MaxBindingOperations.CreateBinding(System.Object,System.String,System.Windows.DependencyObject,System.Windows.DependencyProperty,System.Windows.Data.BindingMode)">
+            <summary>
+            Construct and set a Binding from the given source property to the target
+            DependencyProperty, using a specified BindingMode.
+            </summary>
+            <param name="source">Source object.</param>
+            <param name="sourcePropertyName">Path to the source property.</param>
+            <param name="target">Target object.</param>
+            <param name="targetProperty">Target DependencyProperty.</param>
+            <param name="mode">The desired BindingMode.</param>
+            <returns>
+            BindingExpression for the newly established binding.
+            </returns>
+        </member>
+        <member name="M:CSharpUtilities.MaxBindingOperations.CreateBinding(System.Object,System.String,System.Windows.DependencyObject,System.Windows.DependencyProperty,System.Windows.Data.IValueConverter,System.Windows.Data.BindingMode)">
+            <summary>
+            Construct and set a Binding from the given source property to the target
+            DependencyProperty, using a specified BindingMode.
+            </summary>
+            <param name="source">Source object.</param>
+            <param name="sourcePropertyName">Path to the source property.</param>
+            <param name="target">Target object.</param>
+            <param name="targetProperty">Target DependencyProperty.</param>
+            <param name="converter">Converts from the source value to the target value.</param>
+            <param name="mode">The desired BindingMode.</param>
+            <returns>
+            BindingExpression for the newly established binding.
+            </returns>
+        </member>
+        <member name="M:CSharpUtilities.MaxBindingOperations.CreateBinding(System.Object,System.String,System.Windows.DependencyObject,System.Windows.DependencyProperty,System.Windows.Data.IValueConverter,System.Object,System.Windows.Data.BindingMode)">
+            <summary>
+            Construct and set a Binding from the given source property to the target
+            DependencyProperty, using a specified BindingMode.
+            </summary>
+            <param name="source">Source object.</param>
+            <param name="sourcePropertyName">Path to the source property.</param>
+            <param name="target">Target object.</param>
+            <param name="targetProperty">Target DependencyProperty.</param>
+            <param name="converter">Converts from the source value to the target value.</param>
+            <param name="converterParameter">
+            Parameter passed to the converter's Convert and ConvertBack methods.
+            </param>
+            <param name="mode">The desired BindingMode.</param>
+            <returns>
+            BindingExpression for the newly established binding.
+            </returns>
+        </member>
+        <member name="T:CSharpUtilities.MemoryMarker">
+            <exclude/>
+            <summary>
+            Debugging class useful for finding memory leaks.
+            </summary>
+            <remarks>
+            <para>
+            If you think you are leaking instances of a class, but are having a hard 
+            time distinguishing valid instances from invalid ones in a memory profiler,
+            create a reference to a MemoryMarker object from your leaked object at a 
+            point just before the object should terminate.
+            </para>
+            <para>
+            For example, to find leaked instances of WPFCustomControls.MaxRibbonControl,
+            we can add a reference to a new MemoryMarker during HandleUnloaded.  We can
+            then identify the roots for the leaked MaxRibbonControl instance by looking
+            for the MemoryMarker instance.
+            </para>
+            </remarks>
+        </member>
+        <member name="T:CSharpUtilities.Set`1">
+            <summary>
+            Collection of distinct objects.
+            </summary>
+            <remarks>
+            <para>
+            Items in a Set are unique within the Set according to the 
+            EqualityComparer used.
+            </para>
+            <para>
+            Set is implemented in terms of a Dictionary&lt;T, Object&gt;, so its
+            performance matches that of Dictionary&lt;T, Object&gt;.
+            </para>
+            </remarks>
+            <typeparam name="T">Type of the Set's items.</typeparam>
+        </member>
+        <member name="M:CSharpUtilities.Set`1.#ctor">
+            <summary>
+            Construct an empty Set using the default equality comparer and default 
+            capacity.
+            </summary>
+            <remarks>
+            <para>
+            The default equality comparer is EqualityComparer&lt;T&gt;.Default.
+            </para>
+            <para>
+            Using a constructor to specify a capacity may improve efficiency by 
+            avoiding resizing while adding any initial objects.
+            </para>
+            </remarks>
+        </member>
+        <member name="M:CSharpUtilities.Set`1.#ctor(System.Int32)">
+            <summary>
+            Construct an empty Set with a given minimum capacity, and using the 
+            default equality comparer.
+            </summary>
+            <remarks>
+            <para>
+            The default equality comparer is EqualityComparer&lt;T&gt;.Default.
+            </para>
+            <para>
+            Using a constructor to specify a capacity may improve efficiency by 
+            avoiding resizing while adding any initial objects.
+            </para>
+            </remarks>
+            <param name="capacity">
+            The number of elements that can be added before resizing is necessary.
+            </param>
+        </member>
+        <member name="M:CSharpUtilities.Set`1.#ctor(System.Collections.Generic.ICollection{`0})">
+            <summary>
+            Construct a Set from a collection of items, using the default equality
+            comparer.
+            </summary>
+            <remarks>
+            The default equality comparer is EqualityComparer&lt;T&gt;.Default.
+            </remarks>
+            <param name="items">
+            Initial collection of items to add to this Set. Since the Set is 
+            guaranteed to contain unique items, any duplicate items in
+            the collection will be ignored.
+            </param>
+        </member>
+        <member name="M:CSharpUtilities.Set`1.#ctor(System.Collections.Generic.IEqualityComparer{`0})">
+            <summary>
+            Construct an empty Set with a specific equality comparer, using the 
+            default capacity.
+            </summary>
+            <param name="comparer">
+            Used when comparing items. Every item in the Set is unique according to
+            this comparer.
+            </param>
+        </member>
+        <member name="M:CSharpUtilities.Set`1.#ctor(System.Int32,System.Collections.Generic.IEqualityComparer{`0})">
+            <summary>
+            Construct an empty Set with a given capacity and a specific equality 
+            comparer.
+            </summary>
+            <param name="capacity">
+            The number of elements that can be added before resizing is necessary.
+            </param>
+            <param name="comparer">
+            Used when comparing items. Every item in the Set is unique according to
+            this comparer.
+            </param>
+        </member>
+        <member name="M:CSharpUtilities.Set`1.#ctor(System.Collections.Generic.ICollection{`0},System.Collections.Generic.IEqualityComparer{`0})">
+            <summary>
+            Construct a Set from a collection of items, using a specific comparer.
+            </summary>
+            <param name="items">
+            Initial collection of items to add to this Set. Since the Set is 
+            guaranteed to contain unique items, any duplicate items in
+            the collection will be ignored.
+            </param>
+            <param name="comparer">
+            Used when comparing items. Every item in the Set is unique according to
+            this comparer.
+            </param>
+        </member>
+        <member name="M:CSharpUtilities.Set`1.#ctor(CSharpUtilities.Set{`0})">
+            <summary>
+            Construct a new Set with the same items and comparer as an existing
+            Set.
+            </summary>
+            <param name="other">Set to copy.</param>
+        </member>
+        <member name="M:CSharpUtilities.Set`1.Add(`0)">
+            <summary>
+            Adds an item to the Set.
+            </summary>
+            <remarks>
+            If <c>this.Contains(item)</c>, item is ignored.
+            </remarks>
+            <param name="item">Item to add.</param>
+        </member>
+        <member name="M:CSharpUtilities.Set`1.AddRange(System.Collections.Generic.IEnumerable{`0})">
+            <summary>
+            Adds all items in a given collection to this set.
+            </summary>
+            <remarks>
+            Any duplicate items in <c>items</c> and any items already in this Set
+            will be ignored.
+            </remarks>
+            <param name="items">Collection of items to add.</param>
+        </member>
+        <member name="M:CSharpUtilities.Set`1.Clear">
+            <summary>
+            Removes all items from this Set.
+            </summary>
+        </member>
+        <member name="M:CSharpUtilities.Set`1.Contains(`0)">
+            <summary>
+            Determines if this Set contains the given item.
+            </summary>
+            <param name="item">Item to locate in this Set.</param>
+            <returns>true if the item is in this Set. false otherwise.</returns>
+        </member>
+        <member name="M:CSharpUtilities.Set`1.CopyTo(`0[],System.Int32)">
+            <summary>
+            Copies all of the items in this Set to the given array, starting at the 
+            specified base index in the array.
+            </summary>
+            <param name="array">
+            Destination one-dimensional array into which this Set's items will be 
+            copied.
+            </param>
+            <param name="baseIndex">
+            Starting index in the destination array at which to begin copying 
+            elements.
+            </param>
+            <exception cref="T:System.ArgumentException">
+            Throws if <c>array.Length - baseIndex &lt; this.Count</c>.
+            </exception>
+            <exception cref="T:System.ArgumentOutOfRangeException">
+            Throws if <c>baseIndex &lt; 0</c>
+            </exception>
+            <exception cref="T:System.ArgumentNullException">
+            Throws if <c>array</c> is null.
+            </exception>
+        </member>
+        <member name="P:CSharpUtilities.Set`1.Comparer">
+            <summary>
+            Used to determine the equality of items in this Set.
+            </summary>
+        </member>
+        <member name="P:CSharpUtilities.Set`1.Count">
+            <summary>
+            The current number of items in this Set.
+            </summary>
+        </member>
+        <member name="M:CSharpUtilities.Set`1.Remove(`0)">
+            <summary>
+            Removes an item from this Set.
+            </summary>
+            <remarks>
+            If the item is not a member of this Set, this Set remains unchanged.
+            </remarks>
+            <param name="item">
+            Item to remove from this Set.
+            </param>
+            <returns>
+            true if an item was removed.  false if the item was not present.
+            </returns>
+        </member>
+        <member name="M:CSharpUtilities.Set`1.GetEnumerator">
+            <summary>
+            Get an Enumerator for iterating over this Set's items.
+            </summary>
+            <returns>
+            An Enumerator for iterating over this Set's items.
+            </returns>
+        </member>
+        <member name="M:CSharpUtilities.Set`1.Union(System.Collections.Generic.IEnumerable{`0})">
+            <summary>
+            Replaces the current Set with the union of this Set and the given 
+            collection.
+            </summary>
+            <remarks>
+            After applying Union, this Set will have all the original items from this
+            Set, and all distinct items from the passed in collection.
+            </remarks>
+            <param name="items">Collection of items to unite with this Set.</param>
+        </member>
+        <member name="M:CSharpUtilities.Set`1.Intersection(System.Collections.Generic.IEnumerable{`0})">
+            <summary>
+            Replaces the current Set with the intersection of this Set and the
+            given collection.
+            </summary>
+            <remarks>
+            After applying Intersection, this Set will contain all distinct items 
+            that exist in both this original Set and in the given collection.
+            </remarks>
+            <param name="items">
+            Collection of items to intersect with this Set.
+            </param>
+        </member>
+        <member name="M:CSharpUtilities.Set`1.RemoveRange(System.Collections.Generic.IEnumerable{`0})">
+            <summary>
+            Removes all items in the given collection from this Set.
+            </summary>
+            <remarks>
+            Any items in the given collection that are not presented in this Set are
+            ignored.
+            </remarks>
+            <param name="items">Collection of items to remove from this Set.</param>
+        </member>
+        <member name="P:CSharpUtilities.Set`1.System#Collections#Generic#ICollection{T}#IsReadOnly">
+            <summary>
+            Is this collection read-only?  Always false.
+            </summary>
+        </member>
+        <member name="M:CSharpUtilities.Set`1.System#Collections#ICollection#CopyTo(System.Array,System.Int32)">
+            <summary>
+            Copies all of the items in this Set to the given array, starting at the 
+            specified base index in the array.
+            </summary>
+            <param name="array">
+            Destination one-dimensional array into which this Set's items will be 
+            copied.
+            </param>
+            <param name="baseIndex">
+            Starting index in the destination array at which to begin copying 
+            elements.
+            </param>
+            <exception cref="T:System.ArgumentException">
+            Throws if <c>array.Length - baseIndex &lt; this.Count</c>.
+            </exception>
+            <exception cref="T:System.ArgumentOutOfRangeException">
+            Throws if <c>baseIndex &lt; 0</c>
+            </exception>
+            <exception cref="T:System.ArgumentNullException">
+            Throws if <c>array</c> is null.
+            </exception>
+        </member>
+        <member name="P:CSharpUtilities.Set`1.System#Collections#ICollection#IsSynchronized">
+            <summary>
+            Indicates whether access to the collection is thread-safe.
+            </summary>
+        </member>
+        <member name="P:CSharpUtilities.Set`1.System#Collections#ICollection#SyncRoot">
+            <summary>
+            Object used to synchronize access to the collection.
+            </summary>
+        </member>
+        <member name="F:CSharpUtilities.Set`1.mStorage">
+            <summary>
+            Backing storage for this Set's elements.  For convenience, a Dictionary 
+            is used, but the Value elements are ignored.
+            </summary>
+        </member>
+        <member name="T:CSharpUtilities.Ball">
+            <summary>
+            Test Class which inherits from an ExtendedEnum with a single generic parameter.
+            </summary>
+        </member>
+        <member name="T:CSharpUtilities.BallNotYetReferenced">
+            <summary>
+            Test Class which inherits from an ExtendedEnum with a single generic parameter.
+            Used to test if the Extended enum's static constructor will successfully 
+            invoke this class' static constructor.
+            </summary>
+        </member>
+        <member name="T:CSharpUtilities.StringTrimmer">
+            <summary>
+            A value converter that simply calls Trim() on a string value.
+            </summary>
+        </member>
+        <member name="M:CSharpUtilities.StringTrimmer.Convert(System.Object,System.Type,System.Object,System.Globalization.CultureInfo)">
+            <summary>
+            Convert a String to its Trim()-ed version.  Implementation of interface method.
+            </summary>
+            <param name="value">The String to convert.</param>
+            <param name="targetType">The String type.</param>
+            <param name="parameter">A conversion parameter (should be empty.)</param>
+            <param name="culture">The current system culture.</param>
+            <returns>The trimmed string.</returns>
+        </member>
+        <member name="M:CSharpUtilities.StringTrimmer.ConvertBack(System.Object,System.Type,System.Object,System.Globalization.CultureInfo)">
+            <summary>
+            Not implemented, as it is impossible to untrim a trimmed string.
+            </summary>
+            <param name="value">empty</param>
+            <param name="targetType">empty</param>
+            <param name="parameter">empty</param>
+            <param name="culture">empty</param>
+            <returns>Throws an exception if used.</returns>
+        </member>
+        <member name="T:CSharpUtilities.StringUtilities">
+            <summary>
+            Useful general utilites for working with strings.
+            </summary>
+        </member>
+        <member name="M:CSharpUtilities.StringUtilities.Join(System.String,System.Collections.IList)">
+            <summary>
+            Joins the string representations of all Items in a list, separated
+            by a delimiter, into a single string.
+            </summary>
+            <remarks>
+            Works like System.String.Join, except on a list of arbitrary objects.
+            Each item the list is transformed into a string using ToString, and then
+            these string representations are joined as with System.String.Join.
+            </remarks>
+            <param name="delimiter">
+            String placed between each individual item in the list.
+            </param>
+            <param name="list">
+            List of objects whose string representations will be joined.
+            </param>
+            <returns>
+            A single string composed of the string representations of all Items in 
+            list, separated by delimiter.
+            </returns>
+        </member>
+        <member name="M:CSharpUtilities.StringUtilities.StrCmpLogicalW(System.String,System.String)">
+             <summary>
+             P/Invokes native method for string ordering like in Windows Explorer.
+             Compares two Unicode strings. Digits in the strings are considered as 
+             numerical content rather than text. This test is not case sensitive.
+             </summary>
+             <remarks>
+             Using P/Invoke here and letting the platform deal with marshalling the
+             strings in much simpler than trying to do everything manually.
+             </remarks>
+             <param name="psz1">
+             A pointer to the first null-terminated string to be compared.
+             </param>
+             <param name="psz2">
+             A pointer to the second null-terminated string to be compared.
+             </param>
+             <returns>Returns zero if the strings are identical.
+             Returns 1 if the string pointed to by psz1 has a greater value than that
+             pointed to by psz2.
+             Returns -1 if the string pointed to by psz1 has a lesser value than that
+             pointed to by psz2.
+            </returns>
+        </member>
+        <member name="M:CSharpUtilities.StringUtilities.GetHashID(System.String)">
+            <summary>
+            Convert the a string to a hash with UTF8 Encoding
+            </summary>
+            <param name="stringToHash">
+            A string which will be transformed into a hash
+            </param>
+            <returns>
+            Returns an integer with a hash value
+            </returns>
+        </member>
+        <member name="T:CSharpUtilities.SynchronizingBackgroundWorker">
+            <summary>
+            Replaces the standard BackgroundWorker provided by the .NET Framework to 
+            fix what seems to be a bug causing the BackgroundWorker to fire events in 
+            the wrong thread.
+            </summary>
+            <remarks>
+            We have encountered cases where the BackgroundWorker seems to lose track of
+            the main thread or just arbitrarily decide to fire ProgressChanged and
+            RunWorkerCompleted in a new thread rather than in the main thread.  This
+            causes synchronization errors.  This replacement class allows the client
+            to specify a ISynchronizeInvoke synchronizer object through which the events
+            will be fired.  All Controls implement ISynchronizeInvoke, so any Control
+            should be adequate to act as a synchronizer to invoke the events in the main
+            thread.
+            </remarks>
+        </member>
+        <member name="P:CSharpUtilities.SynchronizingBackgroundWorker.Synchronizer">
+            <summary>
+            The synchronizing context.
+            </summary>
+            <remarks>
+            If this object is given a Synchronizer, ProgressChanged and 
+            RunWorkerCompleted events will occur in the Synchronizer's thread.
+            </remarks>
+        </member>
+        <member name="M:CSharpUtilities.SynchronizingBackgroundWorker.OnProgressChanged(System.ComponentModel.ProgressChangedEventArgs)">
+            <summary>
+            Overrides the base OnProgressChanged to invoke ProgressChanged events
+            in the Synchronizer's thread.
+            </summary>
+            <param name="e">
+            EventArgs containing data for ProgressChanged listeners.
+            </param>
+        </member>
+        <member name="M:CSharpUtilities.SynchronizingBackgroundWorker.OnRunWorkerCompleted(System.ComponentModel.RunWorkerCompletedEventArgs)">
+            <summary>
+            Overrides the base OnRunWorkerCompleted to invoke RunWorkerCompleted
+            events in the Synchronizer's thread.
+            </summary>
+            <param name="e">
+            EventArgs containing data for RunWorkerCompleted listeners.
+            </param>
+        </member>
+        <member name="T:CSharpUtilities.SynchronizingBackgroundWorker.InvokeProgressChanged">
+            <summary>
+            Delegate type for ProgressChanged. 
+            </summary>
+            <param name="e">
+            EventArgs containing data for ProgressChanged listeners.
+            </param>
+        </member>
+        <member name="T:CSharpUtilities.SynchronizingBackgroundWorker.InvokeRunWorkerCompleted">
+            <summary>
+            Delegate type for RunWorkerCompleted.
+            </summary>
+            <param name="e">
+            EventArgs containing data for RunWorkerCompleted listeners.
+            </param>
+        </member>
+        <member name="F:CSharpUtilities.SynchronizingBackgroundWorker.mSynchronizer">
+            <summary>
+            The synchronizing context.
+            </summary>
+            <remarks>
+            If this object is given a Synchronizer, ProgressChanged and 
+            RunWorkerCompleted events will occur in the Synchronizer's thread.
+            </remarks>
+        </member>
+        <member name="T:CSharpUtilities.KeyState">
+            <summary>
+            A first-class object, bit masks and query functions for the 
+            DragEventArgs.KeyState and QueryContinueDragEventArgs.KeyState properties 
+            as defined in the msdn documentation.
+            </summary>
+            <remarks>These aren't formalised anywhere in the .NET framework.</remarks>
+        </member>
+        <member name="T:CSharpUtilities.KeyState.Mask">
+            <summary>Mask values taken from DragEventArgs.KeyState and 
+            QueryContinueDragEventArgs.KeyState properties as specified in the msdn
+            documentation.</summary>
+        </member>
+        <member name="F:CSharpUtilities.KeyState.Mask.LeftMouseButton">
+            <summary>Left mouse button bit field.</summary> 
+        </member>
+        <member name="F:CSharpUtilities.KeyState.Mask.RightMouseButton">
+            <summary>Right mouse button bit field.</summary>
+        </member>
+        <member name="F:CSharpUtilities.KeyState.Mask.Shift">
+            <summary>Shift key bit field.</summary>
+        </member>
+        <member name="F:CSharpUtilities.KeyState.Mask.Ctrl">
+            <summary>Ctrl key bit field.</summary>
+        </member>
+        <member name="F:CSharpUtilities.KeyState.Mask.MiddleMouseButton">
+            <summary>Middle mouse button bit field.</summary>
+        </member>
+        <member name="F:CSharpUtilities.KeyState.Mask.Alt">
+            <summary>Alt key bit field.</summary>
+        </member>
+        <member name="M:CSharpUtilities.KeyState.#ctor(System.Int32)">
+            <summary>
+            Constructor.  Takes the bitfield from DragEventArgs.KeyState or
+            QueryContinueDragEventArgs.KeyState. 
+            </summary>
+            <param name="keyStateBits">The bitfield from DragEventArgs.KeyState or
+            QueryContinueDragEventArgs.KeyState. </param>
+        </member>
+        <member name="P:CSharpUtilities.KeyState.Bits">
+            <summary>The encapsulated KeyState bit field.</summary>
+        </member>
+        <member name="M:CSharpUtilities.KeyState.Equals(System.Object)">
+            <summary>
+            Determine if this KeyState is equal to another KeyState value.  Two
+            KeyStates are equal if they have exactly equal Bits. 
+            </summary>
+            <param name="other">The object against which to compare.</param>
+            <returns>true if other is a KeyState and has exactly the same Bits as 
+            this.  false otherwise.</returns>
+        </member>
+        <member name="M:CSharpUtilities.KeyState.GetHashCode">
+            <summary>
+            Get a hash code for this KeyState value. 
+            </summary>
+            <returns>Hash code created from the Bits value.</returns>
+        </member>
+        <member name="P:CSharpUtilities.KeyState.LeftMousePressed">
+            <summary>
+            Is the left mouse button pressed? 
+            </summary>
+        </member>
+        <member name="P:CSharpUtilities.KeyState.RightMousePressed">
+            <summary>
+            Is the right mouse button pressed?
+            </summary>
+        </member>
+        <member name="P:CSharpUtilities.KeyState.MiddleMousePressed">
+            <summary>
+            Is the middle mouse button pressed?
+            </summary>
+        </member>
+        <member name="P:CSharpUtilities.KeyState.ShiftPressed">
+            <summary>
+            Is the Shift key pressed?
+            </summary>
+        </member>
+        <member name="P:CSharpUtilities.KeyState.CtrlPressed">
+            <summary>
+            Is the Ctrl key pressed?
+            </summary>
+        </member>
+        <member name="P:CSharpUtilities.KeyState.AltPressed">
+            <summary>
+            Is the Alt key pressed?
+            </summary>
+        </member>
+        <member name="F:CSharpUtilities.KeyState.mKeyStateBits">
+            <summary>
+            The encapsulated KeyState bit field.
+            </summary>
+        </member>
+        <member name="T:CSharpUtilities.MultiIcon">
+             <summary>
+             MultiIcon is a reader and container for icon resources.
+             </summary>
+            
+             <remarks>
+             <para>
+             Although an .ico file may be authored to include multiple icons, the .NET
+             Framework lacks any useful way to manage these files.  
+             </para>
+             <para>
+             This implementation is inspired by this article on CodeProject: 
+             http://www.codeproject.com/dotnet/MultiIcon.asp
+             The .ico file format is documented there as well.
+             </para>
+             <para>
+             CSharpUtilities.MultiIcon can be used as a ResXFileRef in a .resx file in C#,
+             but it doesn't seem to work in C++/CLI.  Until we solve that, the resource
+             can be typed as a System.IO.MemoryStream in the resx file, and then the
+             MultiIcon constructor will extract the icons from that stream.
+             </para>
+             </remarks>
+        </member>
+        <member name="M:CSharpUtilities.MultiIcon.#ctor(System.String)">
+            <summary>
+            Construct from a String specifying the path to the icon file. 
+            </summary>
+            <param name="filepath">Path pointing to the chosen icon file.</param>
+        </member>
+        <member name="M:CSharpUtilities.MultiIcon.#ctor(System.IO.Stream)">
+            <summary>
+            Construct from an object Stream holding the icons. 
+            </summary>
+            <param name="stream">Stream holding the icon data.</param>
+        </member>
+        <member name="M:CSharpUtilities.MultiIcon.#ctor(System.Drawing.Icon[])">
+            <summary>
+            Construct from an array of icons. 
+            </summary>
+            <param name="icons">Array of icons to package as a MultiIcon.</param>
+        </member>
+        <member name="M:CSharpUtilities.MultiIcon.#ctor(System.Drawing.Bitmap)">
+            <summary>
+            Construct from a single bitmap. 
+            </summary>
+            <param name="bitmap">Single bitmap to package as a MultiIcon.</param>
+        </member>
+        <member name="M:CSharpUtilities.MultiIcon.#ctor(System.Drawing.Icon)">
+            <summary>
+            Construct from a single Icon. 
+            </summary>
+            <param name="icon">Single icon to package as a MultiIcon.</param>
+        </member>
+        <member name="M:CSharpUtilities.MultiIcon.Finalize">
+            <summary>
+            Finalizer. 
+            </summary>
+        </member>
+        <member name="M:CSharpUtilities.MultiIcon.Sort">
+            <summary>
+            Sort icons in order of area 
+            </summary>
+        </member>
+        <member name="P:CSharpUtilities.MultiIcon.Icons">
+            <summary>
+            The list of Icons contained in this MultiIcon. 
+            </summary>
+        </member>
+        <member name="M:CSharpUtilities.MultiIcon.GetLargestIcon">
+            <summary>
+            Get the largest Icon contained in this MultiIcon. 
+            </summary>
+            <remarks>
+            The largest Icon size is determined by comparing the areas of each Icon.
+            </remarks>
+            <returns>
+            The largest Icon contained in this MultiIcon. 
+            </returns>
+        </member>
+        <member name="M:CSharpUtilities.MultiIcon.GetLargestImage">
+            <summary>
+            Get the largest Icon contained in this MultiIcon, converted to an Image. 
+            </summary>
+            <remarks>
+            The largest Icon size is determined by comparing the areas of each Icon.
+            This method is equivalent to <c>ConvertIconToImage(GetLargestIcon())</c>
+            </remarks>
+            <returns>
+            The largest Icon contained in this MultiIcon, converted to an Image. 
+            </returns>
+        </member>
+        <member name="M:CSharpUtilities.MultiIcon.GetSmallestIcon">
+            <summary>
+            Get the smallest Icon contained in this MultiIcon. 
+            </summary>
+            <remarks>
+            The smallest Icon size is determined by comparing the areas of each Icon.
+            </remarks>
+            <returns>
+            The smallest Icon contained in this MultiIcon. 
+            </returns>
+        </member>
+        <member name="M:CSharpUtilities.MultiIcon.GetSmallestImage">
+            <summary>
+            Get the smallest Icon contained in this MultiIcon, converted to an Image. 
+            </summary>
+            <remarks>
+            The smallest Icon size is determined by comparing the areas of each Icon.
+            This method is equivalent to <c>ConvertIconToImage(GetSmallestIcon())</c>
+            </remarks>
+            <returns>
+            The smallest Icon contained in this MultiIcon, converted to an Image. 
+            </returns>
+        </member>
+        <member name="M:CSharpUtilities.MultiIcon.GetLargestIconNotLargerThan(System.Drawing.Size)">
+            <summary>
+            Get the largest Icon from this MultiIcon that fits within the given
+            maximum Size.
+            </summary>
+            <remarks>
+            "Fits" means that Icon.Width &lt;= maximumSize.Width and
+            Icon.Height &lt;= maximumSize.Height.
+            </remarks>
+            <param name="maximumSize">
+            The constraint size.  The returned Icon must fit in this size.
+            </param>
+            <returns>
+            The largest icon from this MultiIcon that fits within maximumSize, or 
+            null if no such Icon is found.
+            </returns>
+        </member>
+        <member name="M:CSharpUtilities.MultiIcon.GetLargestImageNotLargerThan(System.Drawing.Size)">
+            <summary>
+            Get the largest Icon from this MultiIcon that fits within the given
+            maximum Size, converted to an Image.
+            </summary>
+            <remarks>
+            "Fits" means that Icon.Width &lt;= maximumSize.Width and
+            Icon.Height &lt;= maximumSize.Height.
+            Equivalent to ConvertIconToImage(GetLargestIconNotLargerThan(maximumSize)).
+            </remarks>
+            <param name="maximumSize">
+            The constraint size.  The returned Icon must fit in this size.
+            </param>
+            <returns>
+            The largest icon from this MultiIcon that fits within maximumSize, or 
+            null if no such Icon is found.
+            </returns>
+        </member>
+        <member name="M:CSharpUtilities.MultiIcon.GetSmallestIconNotSmallerThan(System.Drawing.Size)">
+            <summary>
+            Get the smallest Icon from this MultiIcon that completely covers the
+            given minimum Size.
+            </summary>
+            <remarks>
+            Covering the minimum size means that minimumSize.Width &lt;= Icon.Width 
+            and maximumSize.Height &lt;= Icon.Height.
+            </remarks>
+            <param name="minimumSize">
+            The constraint size.  Each of the icon's dimensions must be greater than
+            or equal to the corresponding dimension from this Size.
+            </param>
+            <returns>
+            The smallest Icon from this MultiIcon that covers minimumSize, or null
+            if no such Icon is found.
+            </returns>
+        </member>
+        <member name="M:CSharpUtilities.MultiIcon.GetSmallestImageNotSmallerThan(System.Drawing.Size)">
+            <summary>
+            Get the smallest Icon from this MultiIcon that completely covers the
+            given minimum Size, converted to an Image.
+            </summary>
+            <remarks>
+            Covering the minimum size means that minimumSize.Width &lt;= Icon.Width 
+            and maximumSize.Height &lt;= Icon.Height.
+            This method is equivalent to 
+            <c>ConvertIconToImage(GetSmallestIconNotSmallerThan(minimumSize)).</c>
+            </remarks>
+            <param name="minimumSize">
+            The constraint size.  Each of the icon's dimensions must be greater than
+            or equal to the corresponding dimension from this Size.
+            </param>
+            <returns>
+            The smallest Icon from this MultiIcon that covers minimumSize, or null
+            if no such Icon is found.
+            </returns>
+        </member>
+        <member name="M:CSharpUtilities.MultiIcon.GetDPIAwareIcon">
+            <summary>
+            Calculates the size of the icon according to dpi and returns the downscaled icon.
+            This function does not upscale the original icon, make sure the icon supports a size big enough to cover specific dpi. 
+            If there isn't an icon large enough to cover desired dpi, the largest icon available is returned.
+            Assumes that the base image size is 16x16 at 100% dpi, for a more customizable function, use GetDPIAwareIcon(int refWidth, int refHeight)
+            </summary>
+            <returns>
+            The scaled icon. 
+            </returns>
+        </member>
+        <member name="M:CSharpUtilities.MultiIcon.GetDPIAwareIcon(System.Int32,System.Int32)">
+            <summary>
+            Calculates the size of the icon according to dpi and returns the downscaled icon.
+            This function does not upscale the original icon, make sure the icon supports a size big enough to cover specific dpi. 
+            If there isn't an icon large enough to cover desired dpi, the largest icon available is returned.
+            </summary>
+            <param name="refWidth">
+            image width at 100% dpi. If refWidth is equal -1, the width of the smallest image available in the ico file is considered.
+            </param>
+            <param name="refHeight">
+            image height at 100% dpi. If refHeight is equal -1, the height of the smallest image available in the ico file is considered.
+            </param>
+            <returns>
+            The scaled icon. 
+            </returns>
+        </member>
+        <member name="M:CSharpUtilities.MultiIcon.GetDPIAwareImage">
+            <summary>
+            Calculates the size of the icon according to dpi and returns the downscaled icon converted to image.
+            This function does not upscale the original icon, make sure the icon supports a size big enough to cover specific dpi. 
+            </summary>
+            <returns>
+            The scaled image. 
+            </returns>
+        </member>
+        <member name="M:CSharpUtilities.MultiIcon.ConvertIconToImage(System.Drawing.Icon)">
+            <summary>
+            Converts the given Icon to a bitmap image.
+            </summary>
+            <param name="icon">Icon to convert to an Image.</param>
+            <returns>Image created from the given icon.</returns>
+        </member>
+        <member name="M:CSharpUtilities.MultiIcon.ScaleIcon(System.Drawing.Icon,System.Drawing.Size)">
+            <summary>
+            Scales the given Icon to finalSize, producing a new Icon instance.
+            </summary>
+            <param name="originalIcon">
+            The original Icon to resize.  This Icon instance will not be affected.
+            </param>
+            <param name="finalSize">
+            The desired final size for the resulting scaled Icon.
+            </param>
+            <returns>
+            A new Icon, created by scaling the originalIcon to finalSize.
+            </returns>
+        </member>
+        <member name="M:CSharpUtilities.MultiIcon.LoadIconFile(System.String)">
+            <summary>
+            Load all Icons from the file specified by the given path.
+            </summary>
+            <remarks>
+            Traps any thrown exceptions.
+            </remarks>
+        </member>
+        <member name="M:CSharpUtilities.MultiIcon.LoadPNGFile(System.String)">
+            <summary>
+            Load PNG Icons from the specified filepath. if filepath= Directory/filename.png, it loads all
+            files that are: directory/filename_XX.png.
+            </summary>
+        </member>
+        <member name="M:CSharpUtilities.MultiIcon.IsPNGFile(System.String)">
+            <summary>
+            Check wether specified file is png by testing the extension
+            </summary>
+            <param name="fileName">file name with or without path</param>
+            <returns>
+            True if file extension is png. False otherwise.
+            </returns>
+        </member>
+        <member name="T:CSharpUtilities.MultiIcon.SizeAreaComparer">
+            <summary>
+             Helper IComparer class for comparing two Sizes by area.
+            </summary>
+        </member>
+        <member name="M:CSharpUtilities.MultiIcon.SizeAreaComparer.Compare(System.Drawing.Size,System.Drawing.Size)">
+            <summary>
+            Compare the two given Sizes by area.
+            </summary>
+            <param name="lhs">left hand side operand</param>
+            <param name="rhs">right hand side operand</param>
+            <returns>
+            Less than zero if lhs is less than rhs.  
+            Zero if lhs and rhs equal.
+            Greater than zero if lhs is greater than rhs.
+            </returns>
+        </member>
+        <member name="T:CSharpUtilities.MultiIcon.IconSizeAreaComparer">
+            <summary>
+             Helper IComparer class for comparing two Icon Sizes by area.
+            </summary>
+        </member>
+        <member name="M:CSharpUtilities.MultiIcon.IconSizeAreaComparer.Compare(System.Drawing.Icon,System.Drawing.Icon)">
+            <summary>
+            Compare the two given Icon Sizes by area.
+            </summary>
+            <param name="lhs">left hand side operand</param>
+            <param name="rhs">right hand side operand</param>
+            <returns>
+            Less than zero if lhs is less than rhs.  
+            Zero if lhs and rhs equal.
+            Greater than zero if lhs is greater than rhs.
+            </returns>
+        </member>
+        <member name="M:CSharpUtilities.MultiIcon.IsSizeLessOrEqual(System.Drawing.Size,System.Drawing.Size)">
+            <summary>
+            Determine if the lhs Size is absolutely &lt;= the rhs Size.  That is,
+            lhs.Width &lt;= rhs.Width and lhs.Height &lt;= rhs.Height.
+            </summary>
+            <param name="lhs">Left hand side operand.</param>
+            <param name="rhs">Right hand side operand.</param>
+            <returns>
+            true if lhs is less than or equal to rhs. false otherwise.
+            </returns>
+        </member>
+        <member name="M:CSharpUtilities.MultiIcon.IsSizeGreaterOrEqual(System.Drawing.Size,System.Drawing.Size)">
+            <summary>
+            Determine if the lhs Size is absolutely &gt;= the rhs Size.  That is,
+            lhs.Width &gt;= rhs.Width and lhs.Height &gt;= rhs.Height.
+            </summary>
+            <param name="lhs">Left hand side operand.</param>
+            <param name="rhs">Right hand side operand.</param>
+            <returns>
+            true if lhs is greater than or equal to rhs. false otherwise.
+            </returns>
+        </member>
+        <member name="F:CSharpUtilities.MultiIcon.EMPTY_ICON_LIST">
+            <summary>
+            Share a single empty list for all empty MultiIcons.
+            </summary>
+        </member>
+        <member name="F:CSharpUtilities.MultiIcon.mIcons">
+            <summary>
+            The list of Icons contained in this MultiIcon.
+            </summary>
+        </member>
+        <member name="T:CSharpUtilities.Pair`2">
+            <summary>
+            Generic Pair structure, often useful for keeping ordered lists of 
+            associated objects.
+            </summary>
+            <typeparam name="TFirst">Type for the first item in the pair.</typeparam>
+            <typeparam name="TSecond">Type for the second item in the pair.</typeparam>
+        </member>
+        <member name="M:CSharpUtilities.Pair`2.#ctor(`0,`1)">
+            <summary>
+            Constructor.
+            </summary>
+            <param name="aFirst">First item</param>
+            <param name="aSecond">Second item</param>
+        </member>
+        <member name="P:CSharpUtilities.Pair`2.First">
+            <summary>
+            The first item in the Pair.
+            </summary>
+        </member>
+        <member name="P:CSharpUtilities.Pair`2.Second">
+            <summary>
+            The second item in the Pair.
+            </summary>
+        </member>
+        <member name="M:CSharpUtilities.Pair`2.GetHashCode">
+            <summary>
+            Get a hash code for this object.
+            </summary>
+            <returns>A hash code for this object.</returns>
+        </member>
+        <member name="M:CSharpUtilities.Pair`2.Equals(System.Object)">
+            <summary>
+            Determine if this Pair is equal to the passed in Object.
+            </summary>
+            <param name="o">Object to evaluate for equality with this Pair.</param>
+            <returns>true if this Pair is equal to the passed in Object.</returns>
+        </member>
+        <member name="F:CSharpUtilities.Pair`2.mFirst">
+            <summary>
+            The first item in the Pair.
+            </summary>
+        </member>
+        <member name="F:CSharpUtilities.Pair`2.mSecond">
+            <summary>
+            The second item in the Pair.
+            </summary>
+        </member>
+        <member name="T:CSharpUtilities.PairList`2">
+            <summary>
+            Ordered associative list.
+            </summary>
+            <typeparam name="TFirst">Type of the first item in each Pair.</typeparam>
+            <typeparam name="TSecond">Type of the second item in each Pair.</typeparam>
+        </member>
+        <member name="M:CSharpUtilities.PairList`2.CreateListOfFirstValues">
+            <summary>
+            Produce a List of the just the First items from each Pair in this 
+            PairList.
+            </summary>
+            <returns>
+            A List of the just the First items from each Pair in this 
+            PairList.
+            </returns>
+        </member>
+        <member name="M:CSharpUtilities.PairList`2.CreateListOfSecondValues">
+            <summary>
+            Produce a List of the just the Second items from each Pair in this 
+            PairList.
+            </summary>
+            <returns>
+            A List of the just the Second items from each Pair in this 
+            PairList.
+            </returns>
+        </member>
+        <member name="T:CSharpUtilities.RoutedKeyEventArgs">
+            <summary>
+            Encapsulates arguments for KeyDown, KeyUp and KeyPress .NET events
+            for events that may “bubble up” the source component's parent chain.
+            </summary>
+            <remarks> 
+            This is simply a convenience class whose main role is to allow for the
+            exposure of multiple key events via a single event.  This helps in 
+            situations where we're interested in bubbling up all significant key 
+            events without having to expose three new events on each parent component
+            through which the bubbling occurs.
+            </remarks>
+        </member>
+        <member name="T:CSharpUtilities.RoutedKeyEventArgs.KeyEvent">
+            <summary>
+            Corresponds to the KeyUp, KeyDown and KeyPress events in the Win32 API.
+            </summary>
+            <remarks>
+            These enum values have purposefully been set to match the 
+            corresponding Windows Message values (WM_KEYDOWN, WM_KEYUP, and 
+            WM_CHAR).
+            </remarks>
+        </member>
+        <member name="F:CSharpUtilities.RoutedKeyEventArgs.KeyEvent.KeyDown">
+            <summary>
+            Key Down event bit mask.
+            </summary>
+        </member>
+        <member name="F:CSharpUtilities.RoutedKeyEventArgs.KeyEvent.KeyUp">
+            <summary>
+            Key Up event bit mask.
+            </summary>
+        </member>
+        <member name="F:CSharpUtilities.RoutedKeyEventArgs.KeyEvent.KeyPress">
+            <summary>
+            Key Press bit mask (Down and then Up).
+            </summary>
+        </member>
+        <member name="M:CSharpUtilities.RoutedKeyEventArgs.#ctor(CSharpUtilities.RoutedKeyEventArgs.KeyEvent,System.Windows.Forms.KeyEventArgs)">
+            <summary> 
+            Constructor taking an event enum value and event args value.
+            </summary>
+            <param name="aEvent"> 
+            The key event type for this routed event.
+            </param>
+            <param name="e">
+            Arguments passed to event listeners.
+            </param>
+        </member>
+        <member name="P:CSharpUtilities.RoutedKeyEventArgs.Event">
+            <summary>
+            The key event type for this routed event.
+            </summary>
+        </member>
+        <member name="P:CSharpUtilities.RoutedKeyEventArgs.EventArgs">
+            <summary>
+            Event arguments intended for event listeners.
+            </summary>
+        </member>
+        <member name="F:CSharpUtilities.RoutedKeyEventArgs.mEvent">
+            <summary>
+            The key event type for this routed event.
+            </summary>
+        </member>
+        <member name="F:CSharpUtilities.RoutedKeyEventArgs.mArgs">
+            <summary>
+            Event arguments intended for event listeners.
+            </summary>
+        </member>
+        <member name="T:CSharpUtilities.TestFileCollection">
+            <summary>
+            Utility class helps unit tests find their data files, encapsulating the
+            different search schemes required on dev machines and on automation machines. 
+            Holds a collection of found pathnames.
+            </summary>
+            <remarks>
+            <para>
+            For developers writing tests, the convention is to put data files in a 
+            TestData folder next to the source code, inside the project's folder.
+            For example: \3dswin\src\dll\WeatherData\TestData.  When running unit tests 
+            inside a developer build (so in src\exe or src\x64\exe), the data in this 
+            location should be found automatically.
+            </para>
+            <para>
+            After the build is produced on a build machine, all TestData folders in the
+            source code are packaged up in a zip file.  When the automation machines run
+            the unit tests, they unzip this package and set up the environment so that
+            this class can find the data by searching in the following locations:
+            <list type="number">
+            <item>
+            Inside the build, below a TestData directory, with subdirectories organized
+            to match the source branch.
+            </item>
+            <item>
+            Below a directory indicated by a UNIT_TEST_DATA environment variable, again
+            with subdirectories organized to match the source branch.
+            </item>
+            </list>
+            </para>
+            <para>
+            Instantiate this class with a basic glob pattern indicating the expected
+            location for the files under 3dswin\src.
+            </para>
+            </remarks>
+        </member>
+        <member name="T:CSharpUtilities.UserInterfaceUtilities">
+            <summary>
+            Contains static utility methods related to UI and drawing.
+            </summary>
+        </member>
+        <member name="M:CSharpUtilities.UserInterfaceUtilities.IsPointOnScreen(System.Drawing.Point)">
+            <summary>
+            Determine if the given point is a valid screen location according to
+            the current monitor setup.
+            </summary>
+            <param name="aLocation">The screen location to examine.</param>
+            <returns>
+            true if aLocation is a valid screen location, false otherwise
+            </returns>
+        </member>
+        <member name="T:CSharpUtilities.ValueChangedEventArgs`1">
+            <summary>
+            EventArgs type indicating that a value has already changed from and old 
+            value to a new value.
+            </summary>
+            <remarks>
+            Contains the old and new values as properties.
+            </remarks>
+            <typeparam name="ValueType">Type of the changed value</typeparam>
+        </member>
+        <member name="M:CSharpUtilities.ValueChangedEventArgs`1.#ctor(`0,`0)">
+            <summary>
+            Construct from the old and new value.
+            </summary>
+            <param name="oldValue">The previous value for the changed property or
+            variable.</param>
+            <param name="newValue">The new current value for the changed property or
+            variable.</param>
+        </member>
+        <member name="T:CSharpUtilities.ValueChangeEventArgsBase`1">
+            <summary>
+            Abstract value change event args.  Serves as a base class for the more 
+            specific derived types
+            </summary>
+            <typeparam name="ValueType">The type of the value for which a change </typeparam>
+        </member>
+        <member name="M:CSharpUtilities.ValueChangeEventArgsBase`1.#ctor">
+            <summary>
+            Default constructor. Uses null values for OldValue and NewValue.
+            </summary>
+        </member>
+        <member name="M:CSharpUtilities.ValueChangeEventArgsBase`1.#ctor(`0,`0)">
+            <summary>
+            Construct with old and new values.
+            </summary>
+            <param name="oldValue">The original value</param>
+            <param name="newValue">
+            The value to which the data has changed or will change.
+            </param>
+        </member>
+        <member name="P:CSharpUtilities.ValueChangeEventArgsBase`1.OldValue">
+            <summary>
+            The original value for the changed or changing data.
+            </summary>
+        </member>
+        <member name="P:CSharpUtilities.ValueChangeEventArgsBase`1.NewValue">
+            <summary>
+            The new value for the changed or changing data.
+            </summary>
+        </member>
+        <member name="F:CSharpUtilities.ValueChangeEventArgsBase`1.mOldValue">
+            <summary>
+            The original value for the changed or changing data.
+            </summary>
+        </member>
+        <member name="F:CSharpUtilities.ValueChangeEventArgsBase`1.mNewValue">
+            <summary>
+            The new value for the changed or changing data.
+            </summary>
+        </member>
+        <member name="T:CSharpUtilities.ValueChangingEventArgs`1">
+            <summary>
+            EventArgs containing data for signalling that a data value will change
+            value.
+            </summary>
+            <typeparam name="ValueType">Type of the changing data value.</typeparam>
+        </member>
+        <member name="M:CSharpUtilities.ValueChangingEventArgs`1.#ctor(`0,`0)">
+            <summary>
+            Construct with an old and new value.
+            </summary>
+            <param name="oldValue">The current (old) value.</param>
+            <param name="newValue">
+            The new value to which the data value will change.
+            </param>
+        </member>
+        <member name="P:CSharpUtilities.ValueChangingEventArgs`1.AllowValueChange">
+            <summary>
+            Handlers may use this property to control whether the value will be
+            permitted to change,
+            </summary>
+        </member>
+        <member name="F:CSharpUtilities.ValueChangingEventArgs`1.mAllowValueChange">
+            <summary>
+            Handlers may use this property to control whether the value will be
+            permitted to change,
+            </summary>
+        </member>
+        <member name="T:CSharpUtilities.VariableGuard">
+            <summary>
+            Encapsulates safely temporarily setting a variable value while some 
+            operation is performed.
+            </summary>
+            <remarks>
+            <para>
+            VariableGuard safely encapsulates the following implementation pattern:
+            <list>
+            <item>1. Set a variable to a given value while performing an operation</item>
+            <item>2. Perform the operation</item>
+            <item>3. Set the variable back to its original value</item>
+            </list>
+            </para>
+            <para>
+            For example, to disable event handlers in a class, we might write:
+            <code>
+            EventHandler oldHandlers = SomeEvent;
+            SomeEvent = null;
+            DoOperation(arg1, arg2); // arg1 and arg2 are local variables
+            SomeEvent = oldHandlers.
+            </code>
+            </para>
+            <para>
+            Unfortunately, this isn't particularly safe since any exception thrown in
+            DoOperation will leave SomeEvent disabled.  We need a try/finally 
+            block to prevent this deleterious side-effect.  This class encapsulates
+            the pattern in a single call.  Using an anonymous delegate, which is bound to
+            its calling environment (a closure), the client code can invoke this guard 
+            using:
+            <code>
+            VariableGuard.Guard( SomeEvent, null, delegate { DoOperation(arg1, arg2); } );
+            </code>
+            </para>
+            </remarks>
+        </member>
+        <member name="T:CSharpUtilities.VariableGuard.GuardedCode">
+            <summary>
+            Delegate type for the delegate passed to the Guard method below.
+            </summary>
+        </member>
+        <member name="M:CSharpUtilities.VariableGuard.Guard``1(``0@,``0,CSharpUtilities.VariableGuard.GuardedCode)">
+            <summary>
+            Temporarily set variable to value while calling the guardedCode delegate.
+            </summary>
+            <remarks>
+            See the class documentation for more information.
+            </remarks>
+            <typeparam name="T">variable's type</typeparam>
+            <param name="variable">
+            reference parameter pointing to the variable to temporarily modify.
+            </param>
+            <param name="value">
+            the value to which to set the variable during the operation
+            </param>
+            <param name="guardedCode">
+            the operation delegate to call while variable is set to value.
+            </param>
+        </member>
+        <member name="T:CSharpUtilities.ExtendedEnum`1">
+             <summary>
+             Provides an extension of the typesafe enum idiom for complex types.  
+             </summary>
+             <typeparam name="T">The enumerated type.</typeparam>
+             <remarks>
+             <para>
+             The standard .NET enum implementation allows the programmer to create
+             a set of named object instances around one of the primitive data types such 
+             as int or byte.  ExtendedEnum provides much of enum's functionality around
+             any user-defined, preferably immutable, type that inherits from it.
+             This version of ExtendedEnum uses the curiously recursive template pattern
+             to allow users to create an Enum whose underlying value is the class itself.
+             </para>
+             <para>
+             To use ExtendedEnum, create a derived class in which the set of instances are
+             defined as static constant members of the class. For example, say we want a
+             predefined set of Balls each defined by its radius and bounciness, we could
+             declare these as an ExtendedEnum:
+             <code>
+             class Ball : ExtendedEnum&lt;Ball&gt;
+             {
+                public static readonly Ball Golf = new Ball(1, 10);
+                public static readonly Ball Billiard = new Ball(2, 1);
+                public static readonly Ball Baseball = new Ball(3, 3);
+                public static readonly Ball Soccer = new Ball(8, 4);
+                public static readonly Ball Basketball = new Ball(10, 5);
+                // etc
+            
+            
+            
+                public int Radius { get { return mRadius;} }
+                public int Bounciness { get { return mBounciness;} }
+            
+            	
+                private Ball(int radius, int bounciness)
+                {
+                   mRadius = radius;
+                   mBounciness = bounciness;
+                }
+            
+                private int mRadius;
+                private int mBounciness;
+             }
+             </code>
+             </para>
+             <para>
+             Client code may now refer to members of the Ball enumeration as Ball.Golf or
+             Ball.Billiard, much as it would for any standard enumeration.  This 
+             enumeration is also closed at compile time since the constructor is private.
+             </para>
+             <para>
+             When creating a class such as Ball which inherits from ExtendedEnum, 
+             the generic parameter T must be the generic class itself (i.e. Ball) or 
+             one of its base classes.
+             <code>
+             class Ball : ExtendedEnum&lt;Ball&gt; // Valid
+             {...}
+             
+             class TennisRacket : ExtendedEnum &lt;Ball&gt; // Invalid
+             {...}
+             
+             Note: This will add values to ExtendedEnum&lt;Ball&gt;
+             class SpecializedBall : Ball // Valid. 
+             {...}
+             </code>
+             </para>
+             </remarks>
+        </member>
+        <member name="P:CSharpUtilities.ExtendedEnum`1.UnderlyingType">
+            <summary>
+            The underlying type exposed as an Enum through this class. 
+            </summary>
+        </member>
+        <member name="P:CSharpUtilities.ExtendedEnum`1.Values">
+            <summary>
+            Produces an array of all the Enum's members.
+            </summary>
+            <remarks>
+            Changing the returned array will not affect this ExtendedEnum type.
+            </remarks>
+        </member>
+        <member name="M:CSharpUtilities.ExtendedEnum`1.GetExtendedEnum(`0)">
+            <summary>
+            Finds the ExtendedEnum member wrapping the given value. 
+            </summary>
+            <param name="value">The value to find in this Enum.</param>
+            <returns>
+            Either the found Enum member or null if no member is found.
+            </returns>
+        </member>
+        <member name="M:CSharpUtilities.ExtendedEnum`1.IsDefined(CSharpUtilities.ExtendedEnum{`0})">
+            <summary>
+            Determine if this ExtendedEnum type contains the given value. 
+            </summary>
+            <param name="value">The value to try to find.</param>
+            <returns>
+            true if value is found as a member of this Enum, false if not.
+            </returns>
+        </member>
+        <member name="M:CSharpUtilities.ExtendedEnum`1.IsDefined(`0)">
+            <summary>
+            Determine if this ExtendedEnum type contains the given value. 
+            </summary>
+            <param name="value">The value to try to find.</param>
+            <returns>
+            true if value is found as a member of this Enum, false if not.
+            </returns>
+        </member>
+        <member name="M:CSharpUtilities.ExtendedEnum`1.Equals(CSharpUtilities.ExtendedEnum{`0})">
+            <summary>
+            Determine the equality of this ExtendedEnum member to another 
+            ExtendedEnum member. 
+            </summary>
+            <remarks>
+            The equivalence is established based on the rank of the extended enum elements.
+            </remarks>
+            <param name="other">The other ExtendedEnum for comparison.</param>
+            <returns>
+            true if <c>this.Id == other.Id</c>, 
+            false if not.
+            </returns>
+        </member>
+        <member name="M:CSharpUtilities.ExtendedEnum`1.Equals(`0)">
+            <summary>
+            Determine the equality of this ExtendedEnum member to another 
+            value. 
+            </summary>
+            <remarks>
+            The equivalence is established based on the rank of the extended enum elements.
+            </remarks>
+            <param name="other">
+            T value against which to compare this ExtendedEnum member.
+            </param>
+            <returns>true if <c>this.Id == other.Id.</c></returns>
+        </member>
+        <member name="M:CSharpUtilities.ExtendedEnum`1.Equals(System.Object)">
+            <summary>
+            Determine the equality of this ExtendedEnum member to another object.
+            </summary>
+            <param name="other">
+            object against which to compare this ExtendedEnum member.
+            </param>
+            <returns>
+            <list>
+            <item>Returns false if other is null.</item>
+            <item>Returns true if other is referentially equal to this.</item>
+            <item>Returns true if other is a T and this.Equals( (T)other ).</item>
+            <item>Returns true if other is an ExtendedEnum&lt;T&gt; and </item>
+            <item>this.Equals( (ExtendedEnum&lt;T&gt;)other ).</item>
+            <item>Returns false otherwise.</item>
+            </list>
+            </returns>
+        </member>
+        <member name="M:CSharpUtilities.ExtendedEnum`1.GetHashCode">
+            <summary>
+            Get a hash code for this ExtendedEnum member. 
+            </summary>
+            <returns>
+            A hash code dependent on this enum type and on this enum member's Id.
+            </returns>
+        </member>
+        <member name="M:CSharpUtilities.ExtendedEnum`1.CompareTo(CSharpUtilities.ExtendedEnum{`0})">
+            <summary>
+            Compare this to another member of this ExtendedEnum, ordered according
+            to their Ids. 
+            </summary>
+            <param name="other">Other member against which to compare.</param>
+            <returns>&lt;0 if this member is ranked first, 0 if they are the same 
+            member, and &gt;0 if other should be ranked first.</returns>
+        </member>
+        <member name="P:CSharpUtilities.ExtendedEnum`1.UnderlyingValue">
+            <summary>
+            The underlying T value wrapped in this ExtendedEnum. 
+            </summary>
+        </member>
+        <member name="M:CSharpUtilities.ExtendedEnum`1.#cctor">
+            <summary>
+            Static constructor
+            </summary>
+            <remarks>
+            For the Ball example above, the static fields Ball.GolfBall, Ball.Basketball are 
+            initialized in the static constructor. According to the .Net specifications, 
+            a static constructor is called automatically to initialize the class
+            before the first instance is created or any static members are referenced.
+            If clients would call: Ball.Values, before any field in Ball would be referenced
+            (e.g. Ball.BasketBall.DoSomething()), then the Values array would be empty. 
+            This happens because the .Net compiler performs optimizations and does not call
+            the derived class' (e.g. Ball) static constructor. Instead, it calls base.Values. 
+            To avoid this, we use reflection to reference a static field in the caller class
+            which will trigger the call to the derived class' static constructor.
+            </remarks>
+        </member>
+        <member name="M:CSharpUtilities.ExtendedEnum`1.#ctor">
+            <summary>
+            Constructor intended for the default case, where the enumerated type is
+            the derived type.
+            </summary>
+            <remarks>
+            Also checks to see if the curiously recursive template pattern requirements
+            are satisfied.
+            </remarks>
+        </member>
+        <member name="F:CSharpUtilities.ExtendedEnum`1.sCounter">
+            <summary>
+            Provides the next Id value to assign to an Enum member added to the list.
+            </summary>
+            <remarks>
+            The next id is maintained in this counter instead of using 
+            <c>sValues.Count</c> to be future-proof against the possibility of 
+            removing Enum members from the list.
+            </remarks>
+        </member>
+        <member name="F:CSharpUtilities.ExtendedEnum`1.sValues">
+            <summary>
+            The list of members in this Enum.
+            </summary>
+        </member>
+        <member name="T:CSharpUtilities.ExtendedEnum`2">
+             <summary>
+             Provides an extension of the typesafe enum idiom for complex types.  
+             </summary>
+             <typeparam name="T">The enumerated type.</typeparam>
+             <typeparam name="U">The underlying value type.</typeparam>
+             <remarks>
+             <para>
+             The standard .NET enum implementation allows the programmer to create
+             a set of named object instances around one of the primitive data types such 
+             as int or byte.  ExtendedEnum provides much of enum's functionality around
+             any user-defined, preferably immutable, type.
+             This version of ExtendedEnum allows users to create an Enum whose underlying 
+             value is a user-defined or primitive type. It also uses the curiously recursive
+             template pattern to ensure that enums with the same Underlying type, which are
+             derived from different classes, do not share their values.
+             </para>
+             <para>
+             To use ExtendedEnum, create a derived class in which the set of instances are
+             defined as static constant members of the class.  For example, say we want a
+             predefined set of Balls with their name (String) as their UnderlyingValue,
+             each defined by their name, radius and bounciness, we could
+             declare these as an ExtendedEnum:
+             <code>
+             class Ball : ExtendedEnum&lt;Ball, String&gt;
+             {
+                public static readonly Ball Golf = new Ball("Golf", 1, 2);
+                public static readonly Ball Billiard = new Ball("Billiard", 3, 2);
+                public static readonly Ball Baseball = new Ball("Baseball", 4, 3);
+                public static readonly Ball Soccer = new Ball("Soccer", 10, 7);
+                public static readonly Ball Basketball = new Ball("Basketball", 12, 10);
+                // etc
+            
+            
+                public String Name {get { return mName;} }
+                public int Radius { get { return mRadius;} }
+                public int Bounciness { get { return mBounciness;} }
+            
+            	
+                private Ball(String name, int radius, int bounciness) : base(name)
+                {
+                   mName = name;
+                   mRadius = radius;
+                   mBounciness = bounciness;
+                }
+            
+                private String name;
+                private int mRadius;
+                private int mBounciness;
+             }
+             </code>
+             </para>
+             <para>
+             Client code may now refer to members of the Ball enumeration as Ball.Golf or
+             Ball.Billiard, much as it would for any standard enumeration.  This 
+             enumeration is also closed at compile time since the constructor is private.
+             </para>
+             <para>
+             When creating a class such as Ball which inherits from ExtendedEnum, 
+             the generic parameter T must be the generic class itself (i.e. Ball) or 
+             one of its base classes.
+             <code>
+             class Ball : ExtendedEnum&lt;Ball, String&gt; // Valid
+             {...}
+             
+             class TennisRacket : ExtendedEnum &lt;Ball, String&gt; // Invalid
+             {...}
+             
+             class SpecializedBall : Ball // Valid
+             {...}
+             </code>
+             </para>
+             </remarks>
+        </member>
+        <member name="P:CSharpUtilities.ExtendedEnum`2.UnderlyingType">
+            <summary>
+            The underlying type exposed as an Enum through this class. 
+            </summary>
+        </member>
+        <member name="P:CSharpUtilities.ExtendedEnum`2.Values">
+            <summary>
+            Produces an array of all the Enum's members.
+            </summary>
+            <remarks>
+            Changing the returned array will not affect this ExtendedEnum type.
+            </remarks>
+        </member>
+        <member name="M:CSharpUtilities.ExtendedEnum`2.GetExtendedEnum(`1)">
+            <summary>
+            Finds the ExtendedEnum member wrapping the given value. 
+            </summary>
+            <param name="value">The value to find in this Enum.</param>
+            <returns>
+            Either the found Enum member or null if no member is found.
+            </returns>
+        </member>
+        <member name="M:CSharpUtilities.ExtendedEnum`2.IsDefined(CSharpUtilities.ExtendedEnum{`0,`1})">
+            <summary>
+            Determine if this ExtendedEnum type contains the given value. 
+            </summary>
+            <param name="value">The value to try to find.</param>
+            <returns>
+            true if value is found as a member of this Enum, false if not.
+            </returns>
+        </member>
+        <member name="M:CSharpUtilities.ExtendedEnum`2.IsDefined(`1)">
+            <summary>
+            Determine if this ExtendedEnum type contains the given value. 
+            </summary>
+            <param name="value">The value to try to find.</param>
+            <returns>
+            true if value is found as a member of this Enum, false if not.
+            </returns>
+        </member>
+        <member name="M:CSharpUtilities.ExtendedEnum`2.op_Explicit(CSharpUtilities.ExtendedEnum{`0,`1})~`1">
+            <summary>
+            Converts from ExtendedEnum&lt;T, U&gt; to U. 
+            </summary>
+            <remarks>
+            This is equivalent to calling UnderlyingValue.
+            </remarks>
+            <param name="value">The ExtendedEnum member to convert.</param>
+            <returns>value's underlying value.</returns>
+        </member>
+        <member name="M:CSharpUtilities.ExtendedEnum`2.Equals(CSharpUtilities.ExtendedEnum{`0,`1})">
+            <summary>
+            Determine the equality of this ExtendedEnum member to another 
+            ExtendedEnum member. 
+            </summary>
+            <remarks>
+            This is equivalent to calling 
+            UnderlyingValue.Equals(other.UnderlyingValue).
+            </remarks>
+            <param name="other">The other value for comparison.</param>
+            <returns>
+            true if <c>this.UnderlyingValue.Equals(other.UnderlyingValue)</c>, 
+            false if not.
+            </returns>
+        </member>
+        <member name="M:CSharpUtilities.ExtendedEnum`2.Equals(`1)">
+            <summary>
+            Determine the equality of this ExtendedEnum member to another 
+            value. 
+            </summary>
+            <remarks>
+            This is equivalent to calling <c>UnderlyingValue.Equals(other)</c>.
+            </remarks>
+            <param name="other">
+            T value against which to compare this ExtendedEnum member.
+            </param>
+            <returns>true if <c>this.UnderlyingValue.Equals(other).</c></returns>
+        </member>
+        <member name="M:CSharpUtilities.ExtendedEnum`2.Equals(System.Object)">
+            <summary>
+            Determine the equality of this ExtendedEnum member to another object.
+            </summary>
+            <param name="other">
+            object against which to compare this ExtendedEnum member.
+            </param>
+            <returns>
+            <list>
+            <item>Returns false if other is null.</item>
+            <item>Returns true if other is referentially equal to this.</item>
+            <item>Returns true if other is a U and this.Equals( (U)other ).</item>
+            <item>Returns true if other is an ExtendedEnum&lt;T, U&gt; and </item>
+            <item>this.Equals( (ExtendedEnum&lt;T, U&gt;)other ).</item>
+            <item>Returns false otherwise.</item>
+            </list>
+            </returns>
+        </member>
+        <member name="M:CSharpUtilities.ExtendedEnum`2.GetHashCode">
+            <summary>
+            Get a hash code for this ExtendedEnum member. 
+            </summary>
+            <returns>
+            A hash code dependent on this enum type and on this enum member's Id.
+            </returns>
+        </member>
+        <member name="M:CSharpUtilities.ExtendedEnum`2.CompareTo(CSharpUtilities.ExtendedEnum{`0,`1})">
+            <summary>
+            Compare this to another member of this ExtendedEnum, ordered according
+            to their Ids. 
+            </summary>
+            <param name="other">Other member against which to compare.</param>
+            <returns>&lt;0 if this member is ranked first, 0 if they are the same 
+            member, and &gt;0 if other should be ranked first.</returns>
+        </member>
+        <member name="P:CSharpUtilities.ExtendedEnum`2.UnderlyingValue">
+            <summary>
+            The underlying T value wrapped in this ExtendedEnum. 
+            </summary>
+        </member>
+        <member name="M:CSharpUtilities.ExtendedEnum`2.ToString">
+            <summary>
+            Get the string representation for this ExtendedEnum member. 
+            </summary>
+            <remarks>
+            Equivalent to calling <c>UnderlyingValue.ToString()</c>.
+            </remarks>
+            <returns>The string representation for this ExtendedEnum member.</returns>
+        </member>
+        <member name="M:CSharpUtilities.ExtendedEnum`2.#cctor">
+            <summary>
+            Static constructor
+            </summary>
+            <remarks>
+            For the Ball example above, the static fields Ball.GolfBall, Ball.Basketball are 
+            initialized in the static constructor. According to the .Net specifications, 
+            a static constructor is called automatically to initialize the class 
+            before the first instance is created or any static members are referenced.
+            If clients would call: Ball.Values, before any field in Ball would be referenced
+            (e.g. Ball.BasketBall.DoSomething()), then the Values array would be empty. 
+            This happens because the .Net compiler performs optimizations and does not call
+            the derived class' (e.g. Ball) static constructor. It directly calls base.Values. 
+            To avoid this, we use reflection to reference a static field in the caller class
+            which will trigger the call to the derived class' static constructor.
+            </remarks>
+        </member>
+        <member name="M:CSharpUtilities.ExtendedEnum`2.#ctor(`1)">
+            <summary>
+            Constructor intended for enumerations designating a certain set of 
+            instances from another type.  
+            </summary>
+            <remarks>
+            This means that instances of the generic 
+            parameter U type can be constructed without labeling them as members
+            of the enumeration.
+            Also checks to see if the curiously recursive template pattern requirements
+            are satisfied.
+            </remarks>
+            <param name="underlyingValue">
+            U value to wrap as an ExtendedEnum member.
+            </param>
+        </member>
+        <member name="F:CSharpUtilities.ExtendedEnum`2.mUnderlyingValue">
+            <summary>
+             The underlying T value wrapped by this ExtendedEnum instance.
+            </summary>
+        </member>
+        <member name="F:CSharpUtilities.ExtendedEnum`2.sCounter">
+            <summary>
+            Provides the next Id value to assign to an Enum member added to the list.
+            </summary>
+            <remarks>
+            The next id is maintained in this counter instead of using 
+            <c>sValues.Count</c> to be future-proof against the possibility of 
+            removing Enum members from the list.
+            </remarks>
+        </member>
+        <member name="F:CSharpUtilities.ExtendedEnum`2.sValues">
+            <summary>
+            The list of members in this Enum.
+            </summary>
+        </member>
+        <member name="T:CSharpUtilities.WeakEvent">
+            <summary>
+            Maintains a list of event handlers through weak references.
+            </summary>
+            <remarks>
+            <para>
+            WeakEvent is intended for use as the backing storage for an event. Note that
+            WeakEvents invoke handlers through reflection and so are slower than standard
+            events. A WeakEvent is intended for cases where leaks are especially likely
+            to occur, such as for events published from a singleton object.
+            </para>
+            <para>
+            Example code for the publishing class:
+            <code>
+            class MyClass
+            {
+               public event EventHandler MyEvent
+             {
+                  add { WeakMyEvent.AddHandler(value) };
+                  remove { WeakMyEvent.RemoveHandler(value) };
+               }
+               
+               protected virtual void OnMyEvent(EventArgs e)
+               {
+                  WeakMyEvent.Raise(this, e);
+               }
+               
+               private readonly WeakEvent WeakMyEvent = new WeakEvent();
+            }
+            </code>
+            </para>
+            <para>
+            Event listeners add and remove themselves from such events as they would
+            for any standard event.
+            </para>
+            </remarks>
+        </member>
+        <member name="M:CSharpUtilities.WeakEvent.AddHandler(System.Delegate)">
+            <summary>
+            Add a handler, maintained by weak reference, to the list of event handlers
+            for this event.
+            </summary>
+            <param name="handler">Event handler</param>
+        </member>
+        <member name="M:CSharpUtilities.WeakEvent.RemoveHandler(System.Delegate)">
+            <summary>
+            Remove an event handler from this event.
+            </summary>
+            <param name="handler">Event handler</param>
+        </member>
+        <member name="M:CSharpUtilities.WeakEvent.Raise(System.Object,System.Object)">
+            <summary>
+            Raise this event, triggering any registered event handlers whose WeakReferences
+            have not been collected.
+            </summary>
+            <param name="sender">Source object for this event.</param>
+            <param name="args">Information about the event.</param>
+        </member>
+        <member name="T:CSharpUtilities.WeakEventHandler">
+            <summary>
+            Serves instead of a standard event handler to avoid maintaining a 
+            strong reference to the handler target causing a possible memory leak.
+            </summary>
+        </member>
+        <member name="M:CSharpUtilities.WeakEventHandler.#ctor(System.Delegate)">
+            <summary>
+            Construct from an event handler Delegate.
+            </summary>
+            <param name="handler">Event handler.</param>
+        </member>
+        <member name="P:CSharpUtilities.WeakEventHandler.TargetReference">
+            <summary>
+            WeakReference to the listening object.
+            </summary>
+        </member>
+        <member name="P:CSharpUtilities.WeakEventHandler.TargetMethod">
+            <summary>
+            The handler method.
+            </summary>
+        </member>
+        <member name="P:CSharpUtilities.WeakEventHandler.IsAlive">
+            <summary>
+            Is the WeakReference target still alive?
+            </summary>
+        </member>
+        <member name="M:CSharpUtilities.WeakEventHandler.Invoke(System.Object[])">
+            <summary>
+            Invokes this event handler. Does not check if the TargetReference is 
+            alive. It is up to the caller to check IsAlive first.
+            </summary>
+            <param name="args">Function arguments to pass to the event listener.</param>
+        </member>
+        <member name="T:CSharpUtilities.WpfUtilities">
+            <summary>
+            General utility methods for working with WPF.
+            </summary>
+        </member>
+        <member name="M:CSharpUtilities.WpfUtilities.ForceUiUpdate">
+            <summary>
+            Allows all pending Dispatcher messages to be processed before continuing.
+            </summary>
+            <remarks>
+            Avoid overuse of this method.  Generally, WPF does a better job of 
+            managing message processing priorities than this brute-force approach.
+            </remarks>
+        </member>
+        <member name="M:CSharpUtilities.WpfUtilities.ConvertToPixels(System.Windows.Point,System.Windows.Media.Visual)">
+            <summary>
+            Convert a point from WPF's device independent units to pixels based on
+            the Visual's presenter's DPI setting.
+            </summary>
+            <param name="deviceIndependentUnits">WPF point to convert.</param>
+            <param name="visual">Visual providing the DPI setting.</param>
+            <returns>The point converted to pixel coordinates.</returns>
+        </member>
+        <member name="M:CSharpUtilities.WpfUtilities.ConvertToPixels(System.Windows.Rect,System.Windows.Media.Visual)">
+            <summary>
+            Convert a Rect from WPF's device independent units to pixels based on
+            the Visual's presenter's DPI setting.
+            </summary>
+            <param name="deviceIndependentUnits">WPF Rect to convert.</param>
+            <param name="visual">Visual providing the DPI setting.</param>
+            <returns>The Rect converted to pixel coordinates.</returns>
+        </member>
+        <member name="M:CSharpUtilities.WpfUtilities.ConvertToDeviceIndependentUnits(System.Windows.Point,System.Windows.Media.Visual)">
+            <summary>
+            Convert a point from pixels to WPF's device independent units based on
+            the Visual's presenter's DPI setting.
+            </summary>
+            <param name="pixels">Point in pixel coordinates to convert.</param>
+            <param name="visual">Visual providing the DPI setting.</param>
+            <returns>The point converted to WPF's device independent units.</returns>
+        </member>
+        <member name="M:CSharpUtilities.WpfUtilities.ConvertToDeviceIndependentUnits(System.Windows.Rect,System.Windows.Media.Visual)">
+            <summary>
+            Convert a Rect from pixels to WPF's device independent units based on
+            the Visual's presenter's DPI setting.
+            </summary>
+            <param name="pixels">Rect in pixel coordinates to convert.</param>
+            <param name="visual">Visual providing the DPI setting.</param>
+            <returns>The Rect converted to WPF's device independent units.</returns>
+        </member>
+        <member name="M:CSharpUtilities.WpfUtilities.GetDeviceTransformMatrix(System.Windows.Media.Visual)">
+            <summary>
+            Get the current device transform, used to apply DPI settings among other 
+            things, for rendering the given Visual.
+            </summary>
+            <param name="visual">Visual with the desired rendering context.</param>
+            <returns>Render transform matrix used for the given visual.</returns>
+        </member>
+        <member name="M:CSharpUtilities.WpfUtilities.GetWindowRect(System.IntPtr,CSharpUtilities.WpfUtilities.RECT@)">
+            <summary>
+            P/Invokes GetWindowRect from the Windows API.
+            </summary>
+            <param name="hWnd">IntPtr wrapping the native window handle.</param>
+            <param name="lpRect">Out parameter returning the dimensions of the native window.</param>
+            <returns>nonzero on success, 0 on failure</returns>
+        </member>
+        <member name="T:CSharpUtilities.WpfUtilities.RECT">
+            <summary>
+            Data type created for marshalling to a Windows API RECT. Represents a 
+            window's dimensions in pixels.
+            </summary>
+        </member>
+        <member name="F:CSharpUtilities.WpfUtilities.RECT.Left">
+            <summary>
+            X-coordinate of the window's left edge.
+            </summary>
+        </member>
+        <member name="F:CSharpUtilities.WpfUtilities.RECT.Top">
+            <summary>
+            Y-coordinate of the window's top edge.
+            </summary>
+        </member>
+        <member name="F:CSharpUtilities.WpfUtilities.RECT.Right">
+            <summary>
+            X-coordinate of the window's right edge.
+            </summary>
+        </member>
+        <member name="F:CSharpUtilities.WpfUtilities.RECT.Bottom">
+            <summary>
+            Y-coordinate of the window's bottom edge.
+            </summary>
+        </member>
+        <member name="M:CSharpUtilities.WpfUtilities.GetNativeWindowRectInPixels(System.IntPtr)">
+            <summary>
+            Gets a native window's location and dimensions in pixels.
+            </summary>
+            <param name="hWnd">Handle to the native window.</param>
+            <returns>The native window's location and dimensions in pixels.</returns>
+        </member>
+        <member name="M:CSharpUtilities.WpfUtilities.CenterWindowToNativeOwner(System.Windows.Window)">
+            <summary>
+            Centers a WPF Window to a native Win32 owner window.
+            </summary>
+            <remarks>
+            <para>
+            For centering a WPF Window to a WPF owner window, it suffices to set
+            Window.WindowStartupLocation to CenterOwner. Unfortunately, this does not
+            work when centering a WPF window on a native owner, at least when the 
+            owner is maximized.
+            </para>
+            <para>
+            To center a Window at its startup, call CenterWindowToNativeOwner from
+            a Window.SourceInitialized event handler. CenterWindowToNativeOwner
+            requires the Window's HwndSource and Visual to have been created in order 
+            to translate to Device Independent Units.
+            </para>
+            </remarks>
+            <param name="window">Window to center</param>
+        </member>
+        <member name="M:CSharpUtilities.WpfUtilities.TurnOnSharpTextRendering(System.Windows.UIElement)">
+            <summary>
+            Given a UIElement, turns on the Display-style text rendering for this sub-tree of components.
+            </summary>
+            <remarks>
+            Certain projects need to target the .NET 3.5 SDK.  .NET 4.0 introduced a crucial WPF feature:
+            better rendering for small (less than or equal to 12pt) fonts, which mimics typical text rendering 
+            in Win32.  Since 3ds Max runs on the 4.0 platform (at a minimum) we can turn this feature on 
+            dynamically, using reflection.  Projects that target 4.0 should add the attached property
+            (TextOptions.TextFormattingMode = TextFormattingMode.Display) directly, using standard 
+            mechanisms.  This method is purely for projects that don't have the option to target the
+            4.0 framework directly.
+            </remarks>
+            <param name="element">The element for which Display-style formatting should be turned on.</param>
+        </member>
+        <member name="M:CSharpUtilities.WpfUtilities.ResolvesSetTextFormattingModeMethod">
+            <summary>
+            Looks up caches the reflection types needed in TurnOnSharpTextRendering(UIElement).
+            </summary>
+        </member>
+    </members>
+</doc>

@@ -1,0 +1,780 @@
+ImageRuntimeVersion: v4.0.30319
+Assembly ManagedServices, Version=0.0.*, Culture=Invariant Language (Invariant Country): 
+	hash=SHA1, flags=PublicKey
+Assembly mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089: 
+	hash=None, flags=None
+Assembly System.Core, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089: 
+	hash=None, flags=None
+Assembly System.Data, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089: 
+	hash=None, flags=None
+Assembly System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089: 
+	hash=None, flags=None
+Assembly System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a: 
+	hash=None, flags=None
+Assembly System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089: 
+	hash=None, flags=None
+Assembly System.Xaml, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089: 
+	hash=None, flags=None
+Assembly System.Xml, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089: 
+	hash=None, flags=None
+Assembly PresentationCore, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35: 
+	hash=None, flags=None
+Assembly CSharpUtilities, Version=20.3.*, Culture=Invariant Language (Invariant Country): 
+	hash=None, flags=None
+Assembly WindowsBase, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35: 
+	hash=None, flags=None
+Assembly PresentationFramework, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35: 
+	hash=None, flags=None
+Assembly UiViewModels, Version=20.3.*, Culture=Invariant Language (Invariant Country): 
+	hash=None, flags=None
+Assembly WindowsFormsIntegration, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35: 
+	hash=None, flags=None
+Assembly Microsoft.VisualBasic, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a: 
+	hash=None, flags=None
+Assembly CoreManagedUiControls, Version=20.3.*, Culture=Invariant Language (Invariant Country): 
+	hash=None, flags=None
+Class ManagedServices.GenericCommand: AutoLayout, AnsiClass, Class, Public, Abstract, BeforeFieldInit
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Interfaces:
+    System.Windows.Input.ICommand
+  Events:
+    System.EventHandler CanExecuteChanged: SpecialName
+  Methods:
+    CanExecute(Object): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask
+    Execute(Object): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask, Abstract
+    RaiseCanExecuteChanged(): PrivateScope, Public, HideBySig
+    add_CanExecuteChanged(EventHandler): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask, SpecialName
+    remove_CanExecuteChanged(EventHandler): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask, SpecialName
+    raise_CanExecuteChanged(Object, EventArgs): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask, SpecialName
+Class ManagedServices.ViewportTabs.GenericViewportCommand: AutoLayout, AnsiClass, Class, Public, Abstract, BeforeFieldInit
+  :ManagedServices.GenericCommand
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+Class ManagedServices.ViewportTabs.ActivateViewportCommand: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+  :ManagedServices.ViewportTabs.GenericViewportCommand
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Methods:
+    Execute(Object): PrivateScope, Public, Virtual, HideBySig
+Struct ClassDesc: AutoLayout, AnsiClass, Class, Public, SequentialLayout, Abstract, Sealed, BeforeFieldInit
+  :System.ValueType
+Class ManagedServices.AnimationFrameChangeListener: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Interfaces:
+    System.IDisposable
+  Events:
+    System.EventHandler AnimationFrameChanged: SpecialName
+  Methods:
+    add_AnimationFrameChanged(EventHandler): PrivateScope, Public, HideBySig, SpecialName
+    remove_AnimationFrameChanged(EventHandler): PrivateScope, Public, HideBySig, SpecialName
+    RaiseAnimationFrameChanged(): PrivateScope, Public, HideBySig
+    ~AnimationFrameChangeListener(): PrivateScope, Public, HideBySig
+    Dispose(): PrivateScope, Public, Final, Virtual, HideBySig
+Interface ManagedServices.IManagedHsvCallback: AutoLayout, AnsiClass, Class, Public, ClassSemanticsMask, Abstract, BeforeFieldInit
+  Methods:
+    ButtonDown(): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask, Abstract
+    ButtonUp(Boolean(HasFieldMarshal)): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask, Abstract
+    ColorChanged(Color, Boolean(HasFieldMarshal)): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask, Abstract
+    BeingDestroyed(Point): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask, Abstract
+    OnOK(): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask, Abstract
+    OnCancel(): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask, Abstract
+Class ManagedServices.AppSDK: AutoLayout, AnsiClass, Class, Public, Abstract, BeforeFieldInit
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Methods:
+    IsHolding(): PrivateScope, Public, Static, HideBySig
+    BeginHold(): PrivateScope, Public, Static, HideBySig
+    AcceptHold(String): PrivateScope, Public, Static, HideBySig
+    DisableAccelerators(): PrivateScope, Public, Static, HideBySig
+    EnableAccelerators(): PrivateScope, Public, Static, HideBySig
+    AcceleratorsEnabled(): PrivateScope, Public, Static, HideBySig
+    IsSelectionLocked(): PrivateScope, Public, Static, HideBySig
+    IsRenderActive(): PrivateScope, Public, Static, HideBySig
+    IsAnimPlaying(): PrivateScope, Public, Static, HideBySig
+    TranslateAndDispatchMessageToApplication(tagMSG* IsImplicitlyDereferenced): PrivateScope, Public, Static, HideBySig
+    TranslateAndDispatchMessageToApplication(KeyEvent, IntPtr, IntPtr): PrivateScope, Public, Static, HideBySig
+    TranslateAndDispatchMessageToApplication(Message&): PrivateScope, Public, Static, HideBySig
+    GetMaxHWND(): PrivateScope, Public, Static, HideBySig
+    GetActiveViewportHwnd(): PrivateScope, Public, Static, HideBySig
+    GetActiveViewportRect(): PrivateScope, Public, Static, HideBySig
+    GetPanCursorHandle(): PrivateScope, Public, Static, HideBySig
+    GetMainApplicationIcon(): PrivateScope, Public, Static, HideBySig
+    ConfigureWindowForMax(Window, Boolean(HasFieldMarshal)): PrivateScope, Public, Static, HideBySig
+    ConfigureWindowForMax(Window): PrivateScope, Public, Static, HideBySig
+    GetMaxCustomCursor(MaxCustomCursors): PrivateScope, Public, Static, HideBySig
+    MakeExtendedViewportActive(IntPtr): PrivateScope, Public, Static, HideBySig
+    PutUpViewMenu(IntPtr, Int32, Int32): PrivateScope, Public, Static, HideBySig
+    IsExtendedViewport(IntPtr): PrivateScope, Public, Static, HideBySig
+    IsExtendedViewportInViewportPanel(IntPtr): PrivateScope, Public, Static, HideBySig
+    SetApplicationSettingInt(String, String, Int32): PrivateScope, Public, Static, HideBySig
+    GetApplicationSettingInt(String, String, Int32): PrivateScope, Public, Static, HideBySig
+    SetApplicationSettingString(String, String, String): PrivateScope, Public, Static, HideBySig
+    GetApplicationSettingString(String, String, String): PrivateScope, Public, Static, HideBySig
+    LaunchHsvColorDialogModal(IManagedHsvCallback, IntPtr, String, Color, Point): PrivateScope, Public, Static, HideBySig
+    GetMainWindowCurrentScreenPosition(): PrivateScope, Public, Static, HideBySig
+    GetCurrentSubObjectLevel(): PrivateScope, Public, Static, HideBySig
+    SetCurrentSubObjectLevel(Int32): PrivateScope, Public, Static, HideBySig
+    IsQuietMode(): PrivateScope, Public, Static, HideBySig
+    CheckForSave(): PrivateScope, Public, Static, HideBySig
+    IsSaveRequired(): PrivateScope, Public, Static, HideBySig
+    SetSaveRequired(Boolean(HasFieldMarshal)): PrivateScope, Public, Static, HideBySig
+    LoadFile(String): PrivateScope, Public, Static, HideBySig
+    LogWarningMessage(String): PrivateScope, Public, Static, HideBySig
+    InNonInteractiveMode(Boolean(HasFieldMarshal)): PrivateScope, Public, Static, HideBySig
+    InSecureMode(): PrivateScope, Public, Static, HideBySig
+    HasValidDigitalSignature(String): PrivateScope, Public, Static, HideBySig
+    IsRibbonSupportEnabled(): PrivateScope, Public, Static, HideBySig
+    IsGpuPresent(): PrivateScope, Public, Static, HideBySig
+Struct ManagedServices.AppSDK+MaxCustomCursors: AutoLayout, AnsiClass, Class, NestedPublic, Sealed, BeforeFieldInit
+  :System.Enum
+  Fields:
+    Int32 value__ : Public, SpecialName, RTSpecialName
+    MaxCustomCursors PAN_CURSOR = 0 : Public, Static, Literal, HasDefault
+    MaxCustomCursors DRAG_OK_CURSOR = 1 : Public, Static, Literal, HasDefault
+    MaxCustomCursors DRAG_NO_CURSOR = 2 : Public, Static, Literal, HasDefault
+    MaxCustomCursors CROSSHAIR = 3 : Public, Static, Literal, HasDefault
+    MaxCustomCursors FORBIDDEN = 4 : Public, Static, Literal, HasDefault
+Class ManagedServices.PathSDK: AutoLayout, AnsiClass, Class, Public, Abstract, BeforeFieldInit
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Methods:
+    GetDirectoryPath(DirectoryID): PrivateScope, Public, Static, HideBySig
+    GetTooltipPath(): PrivateScope, Public, Static, HideBySig
+    GetRibbonConfigPath(): PrivateScope, Public, Static, HideBySig
+    GetWriteRibbonConfigPath(): PrivateScope, Public, Static, HideBySig
+    GetUiWritePath(): PrivateScope, Public, Static, HideBySig
+    GetUiResourcesRoot(): PrivateScope, Public, Static, HideBySig
+    GetUiThemePath(): PrivateScope, Public, Static, HideBySig
+    DoMaxOpenDialog(IntPtr, String, String&, String&, FileDialogFilterList): PrivateScope, Public, Static, HideBySig
+    BrowseForMaxFile(): PrivateScope, Public, Static, HideBySig
+    DoMaxSaveAsDialog(IntPtr, String, String&, String&, FileDialogFilterList): PrivateScope, Public, Static, HideBySig
+    GetLanguagePackDirectoryName(): PrivateScope, Public, Static, HideBySig
+Struct ManagedServices.PathSDK+DirectoryID: AutoLayout, AnsiClass, Class, NestedPublic, Sealed, BeforeFieldInit
+  :System.Enum
+  Fields:
+    Int32 value__ : Public, SpecialName, RTSpecialName
+    DirectoryID Font = 0 : Public, Static, Literal, HasDefault
+    DirectoryID Scene = 1 : Public, Static, Literal, HasDefault
+    DirectoryID Import = 2 : Public, Static, Literal, HasDefault
+    DirectoryID Export = 3 : Public, Static, Literal, HasDefault
+    DirectoryID Help = 4 : Public, Static, Literal, HasDefault
+    DirectoryID Expression = 5 : Public, Static, Literal, HasDefault
+    DirectoryID Preview = 6 : Public, Static, Literal, HasDefault
+    DirectoryID Image = 7 : Public, Static, Literal, HasDefault
+    DirectoryID Sound = 8 : Public, Static, Literal, HasDefault
+    DirectoryID PlugInConfig = 9 : Public, Static, Literal, HasDefault
+    DirectoryID MaxStart = 10 : Public, Static, Literal, HasDefault
+    DirectoryID VideoPost = 11 : Public, Static, Literal, HasDefault
+    DirectoryID Drivers = 12 : Public, Static, Literal, HasDefault
+    DirectoryID Autoback = 13 : Public, Static, Literal, HasDefault
+    DirectoryID MaterialLibrary = 14 : Public, Static, Literal, HasDefault
+    DirectoryID Scripts = 15 : Public, Static, Literal, HasDefault
+    DirectoryID StartupScripts = 16 : Public, Static, Literal, HasDefault
+    DirectoryID MarketDefaults = 17 : Public, Static, Literal, HasDefault
+    DirectoryID RenderPresets = 18 : Public, Static, Literal, HasDefault
+    DirectoryID UI = 19 : Public, Static, Literal, HasDefault
+    DirectoryID MaxSystemRoot = 20 : Public, Static, Literal, HasDefault
+    DirectoryID RenderOutput = 21 : Public, Static, Literal, HasDefault
+    DirectoryID Animation = 22 : Public, Static, Literal, HasDefault
+    DirectoryID Archives = 23 : Public, Static, Literal, HasDefault
+    DirectoryID Photometric = 24 : Public, Static, Literal, HasDefault
+    DirectoryID RenderAssets = 25 : Public, Static, Literal, HasDefault
+    DirectoryID UserScripts = 26 : Public, Static, Literal, HasDefault
+    DirectoryID UserMacros = 27 : Public, Static, Literal, HasDefault
+    DirectoryID UserStartupScripts = 28 : Public, Static, Literal, HasDefault
+    DirectoryID Temp = 29 : Public, Static, Literal, HasDefault
+    DirectoryID UserIcons = 30 : Public, Static, Literal, HasDefault
+    DirectoryID MaxData = 31 : Public, Static, Literal, HasDefault
+    DirectoryID ProjectFolder = 32 : Public, Static, Literal, HasDefault
+    DirectoryID Download = 33 : Public, Static, Literal, HasDefault
+    DirectoryID Proxies = 34 : Public, Static, Literal, HasDefault
+    DirectoryID ManagedAssemblies = 35 : Public, Static, Literal, HasDefault
+    DirectoryID PlugInLanguageNeutralConfig = 38 : Public, Static, Literal, HasDefault
+    DirectoryID UILanguageNeutral = 39 : Public, Static, Literal, HasDefault
+    DirectoryID AutodeskCloud = 40 : Public, Static, Literal, HasDefault
+    DirectoryID UserStartupTemplates = 43 : Public, Static, Literal, HasDefault
+    DirectoryID CFD = 44 : Public, Static, Literal, HasDefault
+    DirectoryID SystemImage = 45 : Public, Static, Literal, HasDefault
+    DirectoryID SystemPhotometric = 46 : Public, Static, Literal, HasDefault
+    DirectoryID SystemSound = 47 : Public, Static, Literal, HasDefault
+    DirectoryID SystemCFD = 48 : Public, Static, Literal, HasDefault
+Class ManagedServices.Workspaces.GenericWorkspaceCommand: AutoLayout, AnsiClass, Class, Public, Abstract, BeforeFieldInit
+  :ManagedServices.GenericCommand
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+Class ManagedServices.FileDialogFilterList: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+    Void .ctor(System.String): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Properties:
+    System.String FilterString 'get ' : 
+    Int32 NewIndex 'get set' : 
+    Int32 Index 'get set' : 
+  Methods:
+    ToNativeFilterList(FilterList* IsImplicitlyDereferenced): PrivateScope, Public, HideBySig
+    Append(String): PrivateScope, Public, HideBySig
+    GetFilterExtension(Int32): PrivateScope, Public, HideBySig
+    GetFilterDescriptor(Int32): PrivateScope, Public, HideBySig
+    get_Index(): PrivateScope, Public, HideBySig, SpecialName
+    set_Index(Int32): PrivateScope, Public, HideBySig, SpecialName
+    get_NewIndex(): PrivateScope, Public, HideBySig, SpecialName
+    set_NewIndex(Int32): PrivateScope, Public, HideBySig, SpecialName
+    get_FilterString(): PrivateScope, Public, HideBySig, SpecialName
+Interface ManagedServices.ClassDescWrapper: AutoLayout, AnsiClass, Class, Public, ClassSemanticsMask, Abstract, BeforeFieldInit
+  Interfaces:
+    System.IDisposable
+  Methods:
+    Get(): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask, Abstract
+    Release(): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask, Abstract
+Class ManagedServices.ClassDescOwner: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+    Void .ctor(ClassDesc*): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Interfaces:
+    ManagedServices.ClassDescWrapper
+    System.IDisposable
+  Methods:
+    Get(): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask
+    Release(): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask
+    ~ClassDescOwner(): PrivateScope, Public, HideBySig
+    Dispose(): PrivateScope, Public, Final, Virtual, HideBySig
+Interface ManagedServices.ClassDescFactory: AutoLayout, AnsiClass, Class, Public, ClassSemanticsMask, Abstract, BeforeFieldInit
+  Methods:
+    CreateClassDescs(): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask, Abstract
+Class ManagedServices.ClassDescReference: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+    Void .ctor(ClassDesc*): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Interfaces:
+    ManagedServices.ClassDescWrapper
+    System.IDisposable
+  Methods:
+    Get(): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask
+    Release(): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask
+    Dispose(): PrivateScope, Public, Final, Virtual, HideBySig
+Class ManagedServices.ViewportTabs.CreateViewportCommand: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+  :ManagedServices.ViewportTabs.GenericViewportCommand
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Methods:
+    CanExecute(Object): PrivateScope, Public, Virtual, HideBySig
+    Execute(Object): PrivateScope, Public, Virtual, HideBySig
+Class ManagedServices.ViewportTabs.CreateViewportFromPreset: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+  :ManagedServices.ViewportTabs.GenericViewportCommand
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Methods:
+    CanExecute(Object): PrivateScope, Public, Virtual, HideBySig
+    Execute(Object): PrivateScope, Public, Virtual, HideBySig
+Class ManagedServices.ViewportTabs.CreateViewportPresetCommand: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+  :ManagedServices.ViewportTabs.GenericViewportCommand
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Methods:
+    Execute(Object): PrivateScope, Public, Virtual, HideBySig
+Class ManagedServices.CuiUpdater: AutoLayout, AnsiClass, Class, Public
+  Interfaces:
+    System.IDisposable
+  Events:
+    System.EventHandler`1[System.EventArgs] CUIUpdated: SpecialName
+  Methods:
+    GetInstance(): PrivateScope, Public, Static, HideBySig
+    Destroy(): PrivateScope, Public, Static, HideBySig
+    GetControlColor(): PrivateScope, Public, HideBySig
+    GetTextColor(): PrivateScope, Public, HideBySig
+    GetEditControlColor(): PrivateScope, Public, HideBySig
+    GetButtonPressedColor(Boolean(HasFieldMarshal)): PrivateScope, Public, HideBySig
+    GetButtonDarkShadow(Boolean(HasFieldMarshal)): PrivateScope, Public, HideBySig
+    GetButtonLightShadow(Boolean(HasFieldMarshal)): PrivateScope, Public, HideBySig
+    GetColor(Int32): PrivateScope, Public, HideBySig
+    GetOldUiColor(Int32): PrivateScope, Public, HideBySig
+    GetMaxColor(UInt32 IsLong, State): PrivateScope, Public, HideBySig
+    GetMaxTextColor(): PrivateScope, Public, HideBySig
+    GetMaxWindowColor(): PrivateScope, Public, HideBySig
+    add_CUIUpdated(EventHandler`1): PrivateScope, Public, HideBySig, SpecialName
+    remove_CUIUpdated(EventHandler`1): PrivateScope, Public, HideBySig, SpecialName
+    RequestCUIUpdated(): PrivateScope, Public, HideBySig
+    RegisterForm(Form): PrivateScope, Public, HideBySig
+    UnregisterForm(Form): PrivateScope, Public, HideBySig
+    EnableForms(Boolean(HasFieldMarshal)): PrivateScope, Public, HideBySig
+    GetLoadedWorkspace(): PrivateScope, Public, HideBySig
+    LoadWorkspace(WorkspaceLoaderItem): PrivateScope, Public, HideBySig
+    GetWorkspaces(): PrivateScope, Public, HideBySig
+    Dispose(): PrivateScope, Public, Final, Virtual, HideBySig
+Class ManagedServices.ViewportTabs.DeleteViewportCommand: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+  :ManagedServices.ViewportTabs.GenericViewportCommand
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Methods:
+    Execute(Object): PrivateScope, Public, Virtual, HideBySig
+Class ManagedServices.ViewportTabs.DeleteViewportPresetCommand: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+  :ManagedServices.ViewportTabs.GenericViewportCommand
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Methods:
+    Execute(Object): PrivateScope, Public, Virtual, HideBySig
+Class ManagedServices.Internal.InternalAppSDK: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Methods:
+    LogUserAction(UInt32, String, String): PrivateScope, Public, Static, HideBySig
+Class ManagedServices.Keyboard: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+  :Microsoft.VisualBasic.Devices.Keyboard
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Methods:
+    IsKeyDown(Keys): PrivateScope, Public, Static, HideBySig
+    IsAnyKeyOrMouseButtonDown(): PrivateScope, Public, Static, HideBySig
+Class ManagedServices.KeyboardFocusDecorator: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Methods:
+    HandleWpfGotKeyboardFocus(Object, KeyboardFocusChangedEventArgs): PrivateScope, Public, HideBySig
+    HandleWpfLostKeyboardFocus(Object, KeyboardFocusChangedEventArgs): PrivateScope, Public, HideBySig
+Class ManagedServices.Internal.ManagedCUIEntry: AutoLayout, AnsiClass, Class, Public, Abstract, BeforeFieldInit
+    Void .ctor(UiViewModels.Actions.ICuiAction): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Interfaces:
+    System.IDisposable
+  Properties:
+    UiViewModels.Actions.ICuiAction Action 'get ' : 
+  Methods:
+    get_Action(): PrivateScope, Public, HideBySig, SpecialName
+    Execute(): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask, Abstract
+    ExecuteAtStartup(): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask, Abstract
+    IsEnabled(): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask
+    IsChecked(): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask
+    IsVisible(): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask
+    Dispose(): PrivateScope, Public, Final, Virtual, HideBySig
+Class ManagedServices.Internal.ManagedCUIActionEntry: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+  :ManagedServices.Internal.ManagedCUIEntry
+    Void .ctor(UiViewModels.Actions.ICuiActionCommand): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Methods:
+    Execute(): PrivateScope, Public, Virtual, HideBySig
+    ExecuteAtStartup(): PrivateScope, Public, Virtual, HideBySig
+    IsEnabled(): PrivateScope, Public, Virtual, HideBySig
+Class ManagedServices.Internal.ManagedCUIContentEntry: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+  :ManagedServices.Internal.ManagedCUIEntry
+    Void .ctor(UiViewModels.Actions.ICuiDockableContent): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Properties:
+    System.Type ContentType 'get ' : 
+    UiViewModels.Actions.ICuiDockableContent CuiDockableContent 'get ' : 
+  Methods:
+    get_CuiDockableContent(): PrivateScope, Public, HideBySig, SpecialName
+    get_ContentType(): PrivateScope, Public, HideBySig, SpecialName
+    Execute(): PrivateScope, Public, Virtual, HideBySig
+    ExecuteAtStartup(): PrivateScope, Public, Virtual, HideBySig
+    IsChecked(): PrivateScope, Public, Virtual, HideBySig
+Class ManagedServices.MaxscriptSDK: AutoLayout, AnsiClass, Class, Public, Abstract, BeforeFieldInit
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Methods:
+    ExecuteMaxscriptCommand(String): PrivateScope, Public, Static, HideBySig
+    ExecuteBooleanMaxscriptQuery(String): PrivateScope, Public, Static, HideBySig
+    ExecuteStringMaxscriptQuery(String): PrivateScope, Public, Static, HideBySig
+    ExecuteIntMaxscriptQuery(String): PrivateScope, Public, Static, HideBySig
+    ExecuteFloatMaxscriptQuery(String): PrivateScope, Public, Static, HideBySig
+    ExecuteColorMaxscriptQuery(String): PrivateScope, Public, Static, HideBySig
+    ConvertColorRefToColor(ValueType UInt32 IsBoxed): PrivateScope, Public, Static, HideBySig
+    AssembleScript(String, Object[]): PrivateScope, Public, Static, HideBySig
+    CompileUsedMacroEntries(): PrivateScope, Public, Static, HideBySig
+    DisableMacroEntryCompiles(): PrivateScope, Public, Static, HideBySig
+    EnableMacroEntryCompiles(): PrivateScope, Public, Static, HideBySig
+    IsTypeWhitelistedForSecureMode(Type, Boolean(HasFieldMarshal)): PrivateScope, Public, Static, HideBySig
+    IsAssemblyNameWhitelistedForSecureMode(String): PrivateScope, Public, Static, HideBySig
+Class ManagedServices.MaxActionItem: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+    Void .ctor(ActionItem*): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Properties:
+    System.String MetaData 'get set' : 
+    System.String ShortcutString 'get ' : 
+    System.String IconPath48 'get set' : 
+    System.String IconPath36 'get set' : 
+    System.String IconPath32 'get set' : 
+    System.String IconPath30 'get set' : 
+    System.String IconPath24 'get set' : 
+    System.String IconPath16 'get set' : 
+    System.String TooltipKey 'get set' : 
+    ManagedServices.MaxIcon Icon 'get ' : 
+    System.Windows.Media.ImageSource Image 'get ' : 
+    System.String MacroCategory 'get ' : 
+    System.String MacroName 'get ' : 
+    Boolean IsMacroCompiled 'get ' : 
+    Boolean IsMacro 'get ' : 
+    UInt32 TableId 'get ' : 
+    Boolean HasActionTable 'get ' : 
+    UInt32 Id  'get ' : 
+    Boolean Visible 'get ' : 
+    System.String CategoryText 'get ' : 
+    System.String ButtonText 'get ' : 
+    System.String DescriptionText 'get ' : 
+    System.String MenuText 'get ' : 
+  Methods:
+    Execute(): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask
+    IsChecked(): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask
+    IsEnabled(): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask
+    Equals(Object): PrivateScope, Public, Virtual, HideBySig
+    GetHashCode(): PrivateScope, Public, Virtual, HideBySig
+    get_MenuText(): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask, SpecialName
+    get_DescriptionText(): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask, SpecialName
+    get_ButtonText(): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask, SpecialName
+    get_CategoryText(): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask, SpecialName
+    get_Visible(): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask, SpecialName
+    get_Id(): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask, SpecialName
+    get_HasActionTable(): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask, SpecialName
+    get_TableId(): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask, SpecialName
+    get_IsMacro(): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask, SpecialName
+    get_IsMacroCompiled(): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask, SpecialName
+    get_MacroName(): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask, SpecialName
+    get_MacroCategory(): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask, SpecialName
+    get_Image(): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask, SpecialName
+    get_Icon(): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask, SpecialName
+    get_TooltipKey(): PrivateScope, Public, HideBySig, SpecialName
+    set_TooltipKey(String): PrivateScope, Public, HideBySig, SpecialName
+    get_IconPath16(): PrivateScope, Public, HideBySig, SpecialName
+    set_IconPath16(String): PrivateScope, Public, HideBySig, SpecialName
+    get_IconPath24(): PrivateScope, Public, HideBySig, SpecialName
+    set_IconPath24(String): PrivateScope, Public, HideBySig, SpecialName
+    get_IconPath30(): PrivateScope, Public, HideBySig, SpecialName
+    set_IconPath30(String): PrivateScope, Public, HideBySig, SpecialName
+    get_IconPath32(): PrivateScope, Public, HideBySig, SpecialName
+    set_IconPath32(String): PrivateScope, Public, HideBySig, SpecialName
+    get_IconPath36(): PrivateScope, Public, HideBySig, SpecialName
+    set_IconPath36(String): PrivateScope, Public, HideBySig, SpecialName
+    get_IconPath48(): PrivateScope, Public, HideBySig, SpecialName
+    set_IconPath48(String): PrivateScope, Public, HideBySig, SpecialName
+    get_ShortcutString(): PrivateScope, Public, HideBySig, SpecialName
+    get_MetaData(): PrivateScope, Public, HideBySig, SpecialName
+    set_MetaData(String): PrivateScope, Public, HideBySig, SpecialName
+Class ManagedServices.MaxIcon: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+    Void .ctor(MaxIcon*): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Interfaces:
+    System.IDisposable
+  Properties:
+    IntPtr LargeImageList 'get ' : 
+    IntPtr SmallImageList 'get ' : 
+  Methods:
+    GetSmallImageIndex(Boolean(HasFieldMarshal), Color): PrivateScope, Public, HideBySig
+    GetLargeImageIndex(Boolean(HasFieldMarshal), Color): PrivateScope, Public, HideBySig
+    get_SmallImageList(): PrivateScope, Public, HideBySig, SpecialName
+    get_LargeImageList(): PrivateScope, Public, HideBySig, SpecialName
+    Dispose(): PrivateScope, Public, Final, Virtual, HideBySig
+Class ManagedServices.MenuItem: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+    Void .ctor(IMenuItem*): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Interfaces:
+    System.IDisposable
+  Properties:
+    IntPtr NativePointer 'get ' : 
+    ManagedServices.MaxActionItem ActionItem 'get ' : 
+    Boolean UseCustomTitle 'get ' : 
+    Boolean IsSeparator 'get ' : 
+    ManagedServices.Menu SubMenu 'get ' : 
+    System.String Title 'get ' : 
+    ManagedServices.MaxIcon Icon 'get ' : 
+  Methods:
+    get_Icon(): PrivateScope, Public, HideBySig, SpecialName
+    get_Title(): PrivateScope, Public, HideBySig, SpecialName
+    get_SubMenu(): PrivateScope, Public, HideBySig, SpecialName
+    get_IsSeparator(): PrivateScope, Public, HideBySig, SpecialName
+    get_UseCustomTitle(): PrivateScope, Public, HideBySig, SpecialName
+    get_ActionItem(): PrivateScope, Public, HideBySig, SpecialName
+    get_NativePointer(): PrivateScope, Public, HideBySig, SpecialName
+    Dispose(): PrivateScope, Public, Final, Virtual, HideBySig
+Class ManagedServices.Menu: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+    Void .ctor(IMenu*): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Interfaces:
+    System.IDisposable
+  Properties:
+    IntPtr NativePointer 'get ' : 
+    Int32 NumItems 'get ' : 
+  Methods:
+    get_NumItems(): PrivateScope, Public, HideBySig, SpecialName
+    GetItem(Int32): PrivateScope, Public, HideBySig
+    get_NativePointer(): PrivateScope, Public, HideBySig, SpecialName
+    Dispose(): PrivateScope, Public, Final, Virtual, HideBySig
+Class ManagedServices.MenuManager: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+  Interfaces:
+    System.IDisposable
+  Properties:
+    System.String MenuFile 'get ' : 
+    ManagedServices.MenuManager Instance 'get ' : 
+  Methods:
+    get_Instance(): PrivateScope, Public, Static, HideBySig, SpecialName
+    GetMainMenu(): PrivateScope, Public, HideBySig
+    get_MenuFile(): PrivateScope, Public, HideBySig, SpecialName
+    Dispose(): PrivateScope, Public, Final, Virtual, HideBySig
+Class ManagedServices.MaxActionItemResolver: AutoLayout, AnsiClass, Class, Public, Abstract, BeforeFieldInit
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Methods:
+    ResolveMacroItem(String, String, Boolean(HasFieldMarshal)): PrivateScope, Public, Static, HideBySig
+    ResolveMacroItem(String, String): PrivateScope, Public, Static, HideBySig
+    ResolveNativeItem(String, String): PrivateScope, Public, Static, HideBySig
+    ResolveNativeItem(UInt32, UInt32): PrivateScope, Public, Static, HideBySig
+    GetContexts(): PrivateScope, Public, Static, HideBySig
+    GetContextId(String): PrivateScope, Public, Static, HideBySig
+    GetContextName(MaxActionContexts): PrivateScope, Public, Static, HideBySig
+    GetContextName(UInt32): PrivateScope, Public, Static, HideBySig
+    GenerateCategoryList(UInt32): PrivateScope, Public, Static, HideBySig
+    GetActionList(UInt32, String): PrivateScope, Public, Static, HideBySig
+    GetAllCommandsCategoryName(): PrivateScope, Public, Static, HideBySig
+    GetActionIconFilename(MaxActionItem, Int32): PrivateScope, Public, Static, HideBySig
+    StoreActionItemProperties(String, String, ValueType ActionItemExtensionProperties IsBoxed): PrivateScope, Public, Static, HideBySig
+    StoreActionItemProperties(UInt32, UInt32, ValueType ActionItemExtensionProperties IsBoxed): PrivateScope, Public, Static, HideBySig
+    LoadImageFromQtResource(String): PrivateScope, Public, Static, HideBySig
+Struct ManagedServices.MaxActionItemResolver+MaxActionContexts: AutoLayout, AnsiClass, Class, NestedPublic, Sealed, BeforeFieldInit
+  :System.Enum
+  Fields:
+    UInt32 value__ : Public, SpecialName, RTSpecialName
+    MaxActionContexts MainUi = 0 : Public, Static, Literal, HasDefault
+    MaxActionContexts TrackView = 1 : Public, Static, Literal, HasDefault
+    MaxActionContexts MaterialEditor = 2 : Public, Static, Literal, HasDefault
+    MaxActionContexts VideoPost = 3 : Public, Static, Literal, HasDefault
+    MaxActionContexts SchematicView = 5 : Public, Static, Literal, HasDefault
+    MaxActionContexts IReshade = 6 : Public, Static, Literal, HasDefault
+Class ManagedServices.MaxNotificationEventArgs: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+  :System.EventArgs
+    Void .ctor(Int32, IntPtr): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+    Void .ctor(Int32): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Properties:
+    System.String TextData 'get ' : 
+    IntPtr Data 'get ' : 
+    Int32 NotificationCode 'get ' : 
+  Methods:
+    get_NotificationCode(): PrivateScope, Public, HideBySig, SpecialName
+    get_Data(): PrivateScope, Public, HideBySig, SpecialName
+    get_TextData(): PrivateScope, Public, HideBySig, SpecialName
+Class ManagedServices.MaxNotificationListener: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+    Void .ctor(Int32): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Interfaces:
+    System.IDisposable
+  Events:
+    System.EventHandler`1[ManagedServices.MaxNotificationEventArgs] NotificationRaised: SpecialName
+  Methods:
+    GetNotificationCode(): PrivateScope, Public, HideBySig
+    RaiseNotificationEvent(Int32, IntPtr): PrivateScope, Public, HideBySig
+    add_NotificationRaised(EventHandler`1): PrivateScope, Public, HideBySig, SpecialName
+    remove_NotificationRaised(EventHandler`1): PrivateScope, Public, HideBySig, SpecialName
+    Dispose(): PrivateScope, Public, Final, Virtual, HideBySig
+Class ManagedServices.MaxNotificationCodes: AutoLayout, AnsiClass, Class, Public, Abstract, BeforeFieldInit
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Fields:
+    Int32 SceneSelectionChanged IsConst : Public, Static, HasDefault
+    Int32 SceneSelectionLocked IsConst : Public, Static, HasDefault
+    Int32 SceneSelectionUnlocked IsConst : Public, Static, HasDefault
+    Int32 ModifyPanelSelectionChanged IsConst : Public, Static, HasDefault
+    Int32 PostModifierAdded IsConst : Public, Static, HasDefault
+    Int32 PostModifierDeleted IsConst : Public, Static, HasDefault
+    Int32 PostRender IsConst : Public, Static, HasDefault
+    Int32 PreAppThemeChanged IsConst : Public, Static, HasDefault
+    Int32 AppThemeChanged IsConst : Public, Static, HasDefault
+    Int32 PreWorkspaceChanged IsConst : Public, Static, HasDefault
+    Int32 PostWorkspaceChanged IsConst : Public, Static, HasDefault
+    Int32 PreWorkspaceCollectionChanged IsConst : Public, Static, HasDefault
+    Int32 PostWorkspaceCollectionChanged IsConst : Public, Static, HasDefault
+    Int32 MaxShutdown IsConst : Public, Static, HasDefault
+    Int32 MaxStartup IsConst : Public, Static, HasDefault
+    Int32 MaxActivated IsConst : Public, Static, HasDefault
+    Int32 MaxDeactivated IsConst : Public, Static, HasDefault
+    Int32 MenusUpdated IsConst : Public, Static, HasDefault
+    Int32 PreMenusSaved IsConst : Public, Static, HasDefault
+    Int32 PostMenusSaved IsConst : Public, Static, HasDefault
+    Int32 PlaybackStart IsConst : Public, Static, HasDefault
+    Int32 PlaybackEnd IsConst : Public, Static, HasDefault
+Class ManagedServices.MaxInternalNotificationCodes: AutoLayout, AnsiClass, Class, Public, Abstract, BeforeFieldInit
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Fields:
+    Int32 WriteActionsOverlayFile IsConst : Public, Static, HasDefault
+    Int32 ActionsModified IsConst : Public, Static, HasDefault
+    Int32 AltKeyUp IsConst : Public, Static, HasDefault
+Class ManagedServices.MaxColorManager: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+  Interfaces:
+    System.ComponentModel.INotifyPropertyChanged
+  Fields:
+    System.String AppColorThemePropertyName : Public, Static, InitOnly
+  Properties:
+    CoreManagedUiControls.ThemeManager UiThemeManager 'get ' : 
+    ManagedServices.MaxColorManager Instance 'get ' : 
+    ColorTheme AppColorTheme 'get set' : 
+  Events:
+    System.ComponentModel.PropertyChangedEventHandler PropertyChanged: SpecialName
+  Methods:
+    get_AppColorTheme(): PrivateScope, Public, HideBySig, SpecialName
+    set_AppColorTheme(ColorTheme): PrivateScope, Public, HideBySig, SpecialName
+    GetColorThemeInternalName(ColorTheme): PrivateScope, Public, HideBySig
+    get_Instance(): PrivateScope, Public, Static, HideBySig, SpecialName
+    get_UiThemeManager(): PrivateScope, Public, HideBySig, SpecialName
+    add_PropertyChanged(PropertyChangedEventHandler): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask, SpecialName
+    remove_PropertyChanged(PropertyChangedEventHandler): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask, SpecialName
+    GetUIColor(UIElementColor): PrivateScope, Public, Static, HideBySig
+Struct ManagedServices.MaxColorManager+ColorTheme: AutoLayout, AnsiClass, Class, NestedPublic, Sealed, BeforeFieldInit
+  :System.Enum
+  Fields:
+    Int32 value__ : Public, SpecialName, RTSpecialName
+    ColorTheme Dark = 0 : Public, Static, Literal, HasDefault
+    ColorTheme Light = 1 : Public, Static, Literal, HasDefault
+Struct ManagedServices.MaxColorManager+UIElementColor: AutoLayout, AnsiClass, Class, NestedPublic, Sealed, BeforeFieldInit
+  :System.Enum
+  Fields:
+    Int32 value__ : Public, SpecialName, RTSpecialName
+    UIElementColor LayerHighLightForeground = 657632 : Public, Static, Literal, HasDefault
+    UIElementColor LayerHighLightBackground = 657633 : Public, Static, Literal, HasDefault
+Class ManagedServices.ConfirmColorEventHandler: AutoLayout, AnsiClass, Class, Public, Sealed, BeforeFieldInit
+  :System.MulticastDelegate
+    Void .ctor(System.Object, IntPtr): PrivateScope, Public, SpecialName, RTSpecialName
+  Methods:
+    Invoke(Object, ValueChangedEventArgs`1): PrivateScope, Public, Final, Virtual, VtableLayoutMask
+    BeginInvoke(Object, ValueChangedEventArgs`1, AsyncCallback, Object): PrivateScope, Public, Final, Virtual, VtableLayoutMask
+    EndInvoke(IAsyncResult): PrivateScope, Public, Final, Virtual, VtableLayoutMask
+Class ManagedServices.MaxColorPicker: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+    Void .ctor(IntPtr, Boolean, System.String): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Interfaces:
+    System.IDisposable
+  Properties:
+    Boolean IsColorSamplerMode 'get ' : 
+    System.Drawing.Point Position 'get set' : 
+    System.Drawing.Rectangle DialogRectangle 'get ' : 
+    System.Drawing.Color CurrentColor 'get set' : 
+  Events:
+    System.EventHandler DialogCancelled: SpecialName
+    ManagedServices.ConfirmColorEventHandler ColorConfirmed: SpecialName
+    ManagedServices.ConfirmColorEventHandler ColorChanged: SpecialName
+  Methods:
+    ShowModeless(): PrivateScope, Public, HideBySig
+    Close(): PrivateScope, Public, HideBySig
+    get_CurrentColor(): PrivateScope, Public, HideBySig, SpecialName
+    set_CurrentColor(Color): PrivateScope, Public, HideBySig, SpecialName
+    get_DialogRectangle(): PrivateScope, Public, HideBySig, SpecialName
+    get_Position(): PrivateScope, Public, HideBySig, SpecialName
+    set_Position(Point): PrivateScope, Public, HideBySig, SpecialName
+    get_IsColorSamplerMode(): PrivateScope, Public, HideBySig, SpecialName
+    add_ColorChanged(ConfirmColorEventHandler): PrivateScope, Public, HideBySig, SpecialName
+    remove_ColorChanged(ConfirmColorEventHandler): PrivateScope, Public, HideBySig, SpecialName
+    add_ColorConfirmed(ConfirmColorEventHandler): PrivateScope, Public, HideBySig, SpecialName
+    remove_ColorConfirmed(ConfirmColorEventHandler): PrivateScope, Public, HideBySig, SpecialName
+    add_DialogCancelled(EventHandler): PrivateScope, Public, HideBySig, SpecialName
+    remove_DialogCancelled(EventHandler): PrivateScope, Public, HideBySig, SpecialName
+    ~MaxColorPicker(): PrivateScope, Public, HideBySig
+    Dispose(): PrivateScope, Public, Final, Virtual, HideBySig
+Class ManagedServices.MaxFileMutexObject: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+    Void .ctor(System.String): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Interfaces:
+    System.IDisposable
+  Methods:
+    MutexAquired(): PrivateScope, Public, HideBySig
+    ReleaseMutex(): PrivateScope, Public, HideBySig
+    Dispose(): PrivateScope, Public, Final, Virtual, HideBySig
+Interface ManagedServices.IMaxValueCtrlWndMsg: AutoLayout, AnsiClass, Class, Public, ClassSemanticsMask, Abstract, BeforeFieldInit
+  Methods:
+    ValueChanged(Object): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask, Abstract
+    ButtonDown(Object): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask, Abstract
+    ButtonUp(Object): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask, Abstract
+    EditEnter(Object): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask, Abstract
+Class ManagedServices.MaxNativeControl: AutoLayout, AnsiClass, Class, Public, Abstract, BeforeFieldInit
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Properties:
+    Boolean ControlCreated 'get ' : 
+    IntPtr HostWindowHandle 'get ' : 
+    Int32 Height 'get set' : 
+    Int32 Width 'get set' : 
+    ManagedServices.IMaxValueCtrlWndMsg MessageHandler 'get set' : 
+  Methods:
+    get_MessageHandler(): PrivateScope, Public, HideBySig, SpecialName
+    set_MessageHandler(IMaxValueCtrlWndMsg): PrivateScope, Public, HideBySig, SpecialName
+    get_Width(): PrivateScope, Public, HideBySig, SpecialName
+    set_Width(Int32): PrivateScope, Public, HideBySig, SpecialName
+    get_Height(): PrivateScope, Public, HideBySig, SpecialName
+    set_Height(Int32): PrivateScope, Public, HideBySig, SpecialName
+    get_HostWindowHandle(): PrivateScope, Public, HideBySig, SpecialName
+    get_ControlCreated(): PrivateScope, Public, HideBySig, SpecialName
+    CreateControl(IntPtr): PrivateScope, Public, HideBySig
+    DestroyControl(): PrivateScope, Public, HideBySig
+Class ManagedServices.MenuItemExtensions: AutoLayout, AnsiClass, Class, Public, Abstract, BeforeFieldInit
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Methods:
+    GetIconPath(IntPtr): PrivateScope, Public, Static, HideBySig
+Class ManagedServices.Mouse: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Methods:
+    GetCursorPos(): PrivateScope, Public, Static, HideBySig
+    SimulateMouseLeftButtonDown(): PrivateScope, Public, Static, HideBySig
+    SimulateMouseLeftButtonUp(): PrivateScope, Public, Static, HideBySig
+    SimulateMouseRightButtonDown(): PrivateScope, Public, Static, HideBySig
+    SimulateMouseRightButtonUp(): PrivateScope, Public, Static, HideBySig
+Class ManagedServices.WinFormDockingFrame: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+    Void .ctor(System.Windows.Forms.Form): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Interfaces:
+    System.IDisposable
+  Methods:
+    RemoveFrame(): PrivateScope, Public, HideBySig
+    GetDockState(): PrivateScope, Public, HideBySig
+    SetDockState(Int32): PrivateScope, Public, HideBySig
+    IsFloating(): PrivateScope, Public, HideBySig
+    IsDocked(): PrivateScope, Public, HideBySig
+    SetFloatingPosition(Point): PrivateScope, Public, HideBySig
+    GetPosition(): PrivateScope, Public, HideBySig
+    SetFloatingSize(Size): PrivateScope, Public, HideBySig
+    GetSize(): PrivateScope, Public, HideBySig
+    IsLayoutRestored(): PrivateScope, Public, HideBySig
+    Dispose(): PrivateScope, Public, Final, Virtual, HideBySig
+Class ManagedServices.Renderers.Renderer: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+    Void .ctor(ClassDesc*): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Properties:
+    System.String Name 'get ' : 
+  Methods:
+    get_Name(): PrivateScope, Public, HideBySig, SpecialName
+    GetClassDesc(): PrivateScope, Public, HideBySig
+    Equals(Object): PrivateScope, Public, Virtual, HideBySig
+    op_Equality(Renderer, Renderer): PrivateScope, Public, Static, HideBySig, SpecialName
+Class ManagedServices.Renderers.RenderSDK: AutoLayout, AnsiClass, Class, Public, Abstract
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Properties:
+    ManagedServices.Renderers.Renderer ProductionRenderer 'get set' : 
+  Events:
+    System.EventHandler`1[System.EventArgs] ProductionRendererChanged: SpecialName
+  Methods:
+    GetProductionRenderers(): PrivateScope, Public, Static, HideBySig
+    get_ProductionRenderer(): PrivateScope, Public, Static, HideBySig, SpecialName
+    set_ProductionRenderer(Renderer): PrivateScope, Public, Static, HideBySig, SpecialName
+    add_ProductionRendererChanged(EventHandler`1): PrivateScope, Public, Static, HideBySig, SpecialName
+    remove_ProductionRendererChanged(EventHandler`1): PrivateScope, Public, Static, HideBySig, SpecialName
+Class ManagedServices.Workspaces.ResetWorkspaceToDefaultsCommand: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+  :ManagedServices.Workspaces.GenericWorkspaceCommand
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Methods:
+    Execute(Object): PrivateScope, Public, Virtual, HideBySig
+Class ManagedServices.SceneExplorerManager: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+  Interfaces:
+    System.IDisposable
+  Properties:
+    System.String ActiveExplorer 'get set' : 
+    ManagedServices.SceneExplorerManager Instance 'get ' : 
+  Methods:
+    get_Instance(): PrivateScope, Public, Static, HideBySig, SpecialName
+    get_ActiveExplorer(): PrivateScope, Public, HideBySig, SpecialName
+    set_ActiveExplorer(String): PrivateScope, Public, HideBySig, SpecialName
+    Dispose(): PrivateScope, Public, Final, Virtual, HideBySig
+Class ManagedServices.SceneUtilities: AutoLayout, AnsiClass, Class, Public, Abstract, BeforeFieldInit
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Methods:
+    IsSingleEditablePolyObjectSelected(): PrivateScope, Public, Static, HideBySig
+    IsSingleEditPolyModifierSelected(): PrivateScope, Public, Static, HideBySig
+    IsSingleEditableSplineObjectSelected(): PrivateScope, Public, Static, HideBySig
+    IsSingleEditSplineModifierSelected(): PrivateScope, Public, Static, HideBySig
+    IsSingleEditableMeshObjectSelected(): PrivateScope, Public, Static, HideBySig
+    IsSingleEditMeshModifierSelected(): PrivateScope, Public, Static, HideBySig
+    IsSingleEditablePatchObjectSelected(): PrivateScope, Public, Static, HideBySig
+    IsSingleEditPatchModifierSelected(): PrivateScope, Public, Static, HideBySig
+Class ManagedServices.SpinnerSettings: AutoLayout, AnsiClass, Class, Public, Abstract, BeforeFieldInit
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Methods:
+    GetPrecision(): PrivateScope, Public, Static, HideBySig
+    IsGlobalScaleEnabled(): PrivateScope, Public, Static, HideBySig
+    GetGlobalScale(): PrivateScope, Public, Static, HideBySig
+    IsNearWrapEnabled(): PrivateScope, Public, Static, HideBySig
+    GetNearWrapDistance(): PrivateScope, Public, Static, HideBySig
+Class ManagedServices.ViewportTabs.ViewportSynch: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Interfaces:
+    System.IDisposable
+  Properties:
+    System.Windows.FrameworkElement Control 'get set' : 
+  Methods:
+    LoadCurrentViews(Viewports): PrivateScope, Public, HideBySig
+    LoadViewPanelPresets(): PrivateScope, Public, HideBySig
+    ConstructPreset(Int32): PrivateScope, Public, HideBySig
+    ConfigureViewportTab(ViewportTab, Int32): PrivateScope, Public, HideBySig
+    ConfigureControl(): PrivateScope, Public, HideBySig
+    SetActiveViewportTab(Int32, ObservableCollection`1): PrivateScope, Public, HideBySig
+    SetActiveViewportTab(Int32): PrivateScope, Public, HideBySig
+    UpdatedViewportsList(): PrivateScope, Public, HideBySig
+    HandleViewportTabPropertyChanged(Object, PropertyChangedEventArgs): PrivateScope, Public, HideBySig
+    HandleViewportsPropertyChanged(Object, PropertyChangedEventArgs): PrivateScope, Public, HideBySig
+    HandleViewportPresetPropertyChanged(Object, PropertyChangedEventArgs): PrivateScope, Public, HideBySig
+    get_Control(): PrivateScope, Public, HideBySig, SpecialName
+    set_Control(FrameworkElement): PrivateScope, Public, HideBySig, SpecialName
+    Dispose(): PrivateScope, Public, Final, Virtual, HideBySig
+Class ManagedServices.Workspaces.WorkspaceSynch: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Methods:
+    Configure(WorkspaceManager): PrivateScope, Public, HideBySig
+    ReparseWorkspaces(): PrivateScope, Public, HideBySig
