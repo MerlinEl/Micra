@@ -121,7 +121,7 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>$(ILMergeConsolePath) /log:ILMerge_Log.txt  /allowDup:* /ver:1.0.0.2 /out:Micra.Star.dll Orien.Tools.dll Orien.NetUi.dll Micra.Tools.dll
+    <PostBuildEvent>$(ILMergeConsolePath) /log:ILMerge_Log.txt  /allowDup:* /ver:1.0.0.4 /out:Micra.Star.dll Orien.Tools.dll Orien.NetUi.dll Micra.Tools.dll
 xcopy $(ProjectDir)bin\Debug\Micra.Star.dll $(SolutionDir)..\..\Micra\Micra4\Assembly /Y /I</PostBuildEvent>
   </PropertyGroup>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

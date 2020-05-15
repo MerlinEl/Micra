@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Autodesk.Max;
+using System;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -56,5 +57,14 @@ namespace Micra.Tools {
             return window;
         }
         #endregion
+
+
+        public static IGlobal Global {
+            get { return GlobalInterface.Instance; }
+        }
+
+        public static IInterface13 Interface {
+            get { return  Global.COREInterface13; }
+        }
     }
 }

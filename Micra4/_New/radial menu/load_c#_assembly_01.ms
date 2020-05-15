@@ -31,6 +31,19 @@ _mcListener = (dotNetClass "System.Activator").CreateInstance cls --create class
 _mcListener.Write ("This message was sended from C#\n")
 
 
+
+--cls = dotNet.getType "Micra.Tools.MxGeometryOptimizer"
+--_mcGeoOpt = (dotNetClass "System.Activator").CreateInstance cls --create class instance 
+
+
+_mcGeoOpt = mcCSharp.getClassInstance "Micra.Tools.MxGeometryOptimizer" forceLoad:true
+_mcGeoOpt.owner = mcMicraDialog --bind form in to max window
+_mcGeoOpt.Show()
+
+Global McSetCs = mcCSharp.getClassInstance "Micra.Tools.MxSet" forceLoad:true
+McSetCs.LogLi
+
+
 --> Start Here 
 Global _mcString = mcDotnet.loadAssembly "Orien.Tools" "Orien.Tools.McString"
 Global _mcArray = mcDotnet.loadAssembly "Orien.Tools" "Orien.Tools.McArray"

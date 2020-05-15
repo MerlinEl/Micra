@@ -31,8 +31,6 @@ namespace MicraTools.Launcher {
 
             //dotNet.loadAssembly(micra.AssemblyDir + "Micra.Tools.dll")
             //doesfileexist(micra.AssemblyDir + "Micra.Tools.dll")
-            Autodesk.Max.IGlobal global = Listener.Global;
-
 
             CConsole = new MxConsole {
                 Owner = this
@@ -48,6 +46,11 @@ namespace MicraTools.Launcher {
             CConsole.Log("The {0} is {1} years old.", new object[] { "John", 33 });
             CConsole.Log("Personal", "hello Body"); //ok
             CConsole.Log("Formated", "The {0} is {1} years old.", new object[] { "Monika", 22 });
+        }
+
+        private void button3_Click(object sender, System.EventArgs e) {
+            Form geoop = new MxGeometryOptimizer();
+            geoop.Show();
         }
     }
 }
