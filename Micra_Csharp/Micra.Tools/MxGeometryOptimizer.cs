@@ -34,12 +34,11 @@ namespace Micra.Tools {
                 "Box pos:[100,0,0] name:(UniqueName \"ojobox\") wirecolor:green\n";
             ManagedServices.MaxscriptSDK.ExecuteMaxscriptCommand(cmd);
 
-
-            MxSet.LogLi("foreach Print All Scene Objects >");
+            MxSet.LogLi("Get All Scene Objects >");
             List<IINode> objects = MxObj.Objects();
+            MxGet.Interface.ForceCompleteRedraw(false);
+            MxSet.LogLi("Print All Scene Objects >");
             foreach (IINode n in objects) MxSet.LogLi("\t" + n.Name);
-            MxSet.LogLi("for Print All Scene Objects >");
-            for (int i=0; i< objects.Count; i++) MxSet.LogLi("\t" + objects[i].Name);
 
             //https://help.autodesk.com/view/3DSMAX/2017/ENU/?guid=__files_GUID_5F19208A_B95E_41A8_A788_3108F747AF0E_htm
             //Autodesk.Max.IInterface13.COREInterface13 collecting the IINodes

@@ -14,6 +14,7 @@ namespace Micra.Tools {
         internal static List<IINode> Objects() { //OK
 
             IINode root_node = MxGet.Interface.RootNode;
+            MxSet.LogLi("Objects > RootNode:" + root_node.Name);
             List<IINode> node_list = new List<IINode>() { };
             for ( int i = 1; i < root_node.NumChildren; i++ ) {
 
