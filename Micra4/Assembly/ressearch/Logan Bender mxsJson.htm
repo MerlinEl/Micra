@@ -1,0 +1,136 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<title>Logan Bender : mxsJson</title>
+<style type="text/css">
+body {padding:0px;
+margin:auto;
+font-size:11px;
+font-family:verdana,arial,'sans serif';
+background-color:#fff;
+color:Gray;
+}
+#greybox{
+width:612px;
+padding:10px;
+border:1px solid lightgray;
+margin:5px;
+}
+
+#code{
+font-size:11px;
+font-family:courier,'type';
+font-color:black;
+background-color:lightgray;
+width:95%;
+padding:10px;
+border:1px solid lightgray;
+margin:5px;
+}
+
+#greyline{
+width:75%px;
+padding:10px;
+border:1px solid lightgray;
+margin:5px;
+border-top-style:dotted;
+border-right-style:none;
+border-bottom-style:none;
+border-left-style:none;
+}
+
+#title{
+color: gray;
+font-size:14px;
+font-weight: bold;
+margin:0px;
+padding:0px;
+border:0px;
+}
+
+#header{
+color: gray;
+font-size:12px;
+font-style: normal;
+}
+
+p {margin-left:20px;}
+li{margin:10px;}
+em{color:#333333;}
+
+a:link {color:gray;}   
+a:visited {color:gray;} 
+a:hover {color:black;} 
+a:active {color:purple;} 
+
+</style>
+</head>
+<body>
+
+<div id="greybox"><center>
+<div id="title">My Code</div><br>
+Max Script files that some may find useful.<br>
+<a href="mailto:loganb@blarg.net"> loganb@blarg.net </a> <br>
+</center></div>
+
+
+<div id="greybox"><div id="title"><a href="http://home.avvanta.com/~loganb/code/json.ms"> json.ms </a></div><p>
+</p><div id="header">About </div><p>
+json.ms is a Max Script struct that wraps commands from<a href="http://james.newtonking.com/json">Json.net</a>
+ in a more max script freindly set of functions. Please keep in mind 
+that this is very much a WIP and provided as-is. It should be noted that
+ if you have any C# skills you should probably skip MXS and deal with 
+your JSON in C#.
+</p><p>
+I developed this project in order to manipulate JSON data within max 
+script. When I first tried to google solutions for manipulating JSON in 
+3DS Max, I found one only or two forum threads on CGtalk, Script Spot, 
+and Stack Overflow. It seems that XML is the external data format of 
+choice when dealing with 3dsmax and dotnet. I spent some time exploring 
+the json.net interface and eventually ended up with this struct, which I
+ use all the time.
+
+</p>
+<div id="greyline"></div>
+<div id="header">Installing json.net and using json.ms</div><p>
+before you can use json.ms you must install json.net<br>
+download the JSON.NET library from <a href="http://json.codeplex.com/">http://json.codeplex.com/</a><br>
+	and copy <br>
+		..\Json45r11\Bin\Net40\Newtonsoft.Json.dll<br>
+		..\Json45r11\Bin\Net40Newtonsoft.Json.xml (not sure if this is necessary)<br>
+	into your preferred location.<br>
+Inside json.mxs, edit the variable "dllPath" to point to Net40Newtonsoft.Json.dll<br>
+
+</p></div>
+
+
+<div id="greybox"><div id="title"><a href="http://home.avvanta.com/~loganb/code/dllManager.ms"> dllManager.ms </a></div><p>
+<img src="Logan%20Bender%20mxsJson_files/dllManager.png">
+</p><div id="header">history:</div>
+		<p>3.4.2014: added callMethod() for static classes<br>
+		</p><p>2.26.2014: bug fix in dllManager.instantiate<br>
+		</p><p>2.25.2014: added ability to instantiate a Class with parmaters.<br>
+	
+</p><div id="header">purpose:</div>
+		<p>dllManager is a simple dialog to help iterate on compiled dll C# 
+class libraries and easily reload your DLL in 3DS Max  as you work.
+		Now you don't have to restart 3DSMax because you can't 'unload' a 
+compiled dll loaded via dotNet.Loadassembly.
+</p><div id="header">usage: </div>
+	
+		<p>paste script into Max Script Editor and evaluate.<br>
+		double click on the DLL displayed to load a new one<br>
+		click 'reload' Dll after each C# compile<br>
+	
+</p><div id="header">Instantiating classes and calling methods on static classes :</div>
+		<p>to instantiate your class, avoid the <em> dotNetObject </em>Max Script command, instead use:</p><p>
+		</p><p></p><div id="code">dllManager.instantiate "MyClass.MyObject" [args:&lt; mxs array&gt; ]</div>
+		<p>to call method class, avoid the <em> dotNetClass</em>Max Script command, instead use:</p><p>
+		</p><p></p><div id="code">dllManager.callMethod "MyNamespace.MyClass.MyMethod()" [args:&lt; mxs array&gt; ]</div>
+		<p> <em> args </em> is optinonal
+
+	</p>	
+	the techniques used here are taken from <a href="http://forums.cgsociety.org/showthread.php?p=7758871#post7758871"> this CG Talk </a>thread<br>any issue you have might best be posted there.
+
+<p></p><a href=""></a>
+</div></body></html>
