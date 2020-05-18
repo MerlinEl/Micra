@@ -1,4 +1,5 @@
 
+
 (
 	try(dllManager.closeMe())catch()
 	/*
@@ -26,13 +27,16 @@
 		click 'reload' Dll after each C# compile
 	
 	IMPORTANT:  
-		to instantiate your DotNet objects use one of these Max Script Commands:
-	
-			dllManager.instantiate "MyClass.MyObject" [args:<mxs array>]
-			args is optinonal
+		to instantiate your class, avoid the dotNetObject Max Script command, instead use:
+
+		dllManager.instantiate "MyClass.MyObject" [args:< mxs array> ]
+		args is optional 
+		
+		to call method class, avoid the dotNetClassMax Script command, instead use:
+
+		dllManager.callMethod "MyNamespace.MyClass.MyMethod()" [args:< mxs array> ]
 			
-
-
+			
 	the techniques used here are taken from  this CG Talk thread
 		http://forums.cgsociety.org/showthread.php?p=7758871#post7758871
 		any issue you have might best be posted there.

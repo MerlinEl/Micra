@@ -30,11 +30,11 @@ namespace Micra.Tools {
         }
 
         private void OnTextAreaLostFocus(object sender, EventArgs e) {
-            MxGet.SetAccelerators(true);
+            MxSet.SetAccelerators(true);
         }
 
         private void OnTextAreaGotFocus(Object sender, EventArgs e) {
-            MxGet.SetAccelerators(false);
+            MxSet.SetAccelerators(false);
         }
 
         /*public static void RunMxs(string cmd) {

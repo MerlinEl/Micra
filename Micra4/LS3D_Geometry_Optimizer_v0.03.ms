@@ -16,7 +16,7 @@ rollout mcCollisionOptimizeDialog "Geometry Optimizer:" width:328 height:316
 	button 'btn_flatten_2d' "Flatten Object by Face N" pos:[172,18] width:144 height:24 align:#left
 	radioButtons 'rdo_offset_type' "" pos:[168,48] width:152 height:16 labels:#("front", "back", "mid") default:1 columns:3 align:#left
 	dotNetControl btn_bounding_box  "Button" text: "Create Bounding Box" pos:[172,70] width:144 height:24 align:#left
-	dotNetControl btn_bounding_plane  "Button" text: "Create Bounding Plane" pos:[172,100] width:144 height:24 align:#left
+	dotNetControl btn_bounding_plane  "Button" text: "Create Bounding Plane" pos:[172,100] width:126 height:24 align:#left
 	--button 'btn_projector_2d' "Projector 2D" pos:[172,44] width:144 height:24 align:#left enabled:false
 
 	dotNetControl btn_optimize_chamfers "Button" text: "Optimize by eRing" pos:[8,44] width:144 height:24 align:#left
@@ -33,6 +33,7 @@ rollout mcCollisionOptimizeDialog "Geometry Optimizer:" width:328 height:316
 	checkbox chk_wipe "wipe" pos:[280,186] width:60 height:24 align:#left checked:false --enabled:false
 	
 
+	button 'btn_flip_normal' "F" pos:[300,100] width:22 height:24 toolTip:"Flip Faces Normal"
 	button 'btn_opt_loop_by_n' "GO" pos:[288,160] width:28 height:24 align:#left
 	spinner 'spn_chamfer_len' "" pos:[72,24] width:60 height:16 range:[0,1e+06,3] type:#float align:#left
 	spinner 'spn_lop_each' "" pos:[248,164] width:34 height:16 range:[0,99,1] type:#integer align:#left
@@ -409,6 +410,12 @@ rollout mcCollisionOptimizeDialog "Geometry Optimizer:" width:328 height:316
 		--Returns a TriMesh value representing the convex bounding shape of the specified node
 		--<mesh>nvpx.CreateBoundingConvex <node>inode <integer>vertLimit <float>inflation
 	)
+	fn flipNormal obj = (
+		
+		local slev = subObjectLevel
+		if classOf obj != Editable_Poly or (subObjectLevel != 4 and subObjectLevel != 5) do return false
+		mcPoly.flipNormalsOnFsel obj
+	)
 	fn init = (
 	
 		lbl_units_01.text = units_type
@@ -427,22 +434,23 @@ rollout mcCollisionOptimizeDialog "Geometry Optimizer:" width:328 height:316
 	)
 	on mcCollisionOptimizeDialog open do init()
 	on btn_opt_flat click do undo label:"Optimize Flat Top " on (optimizeFlatTop (selection as array)[1])
-	on btn_optimize_chamfers click  do undo label:"Optimize Chamfers" on (optimizeChamfers (selection as array)[1])
-	on btn_unchamfer_edges click  do undo label:"Unchamfer Edges" on (mcPoly.unchamferEdges (selection as array)[1] (polyOp.getEdgeSelection (selection as array)[1]))
-	on btn_fuse_edges click  do undo label:"Fuse Edges" on (mcPoly.fuseEdges (selection as array)[1] wipe:chk_wipe.checked)
-	on btn_sel_sim_els click  do undo label:"Select simillar Elements" on (mcPoly.selectSimilarElements selection[1] offset:spn_area_offset.value)
-	on btn_select_faces_by_normal click  do undo label:"Select Faces By Normal" on (mcPoly.selectFacesByAngle selection[1] ddl_normal_way.selected)
-	on btn_select_faces_by_thickness click  do undo label:"Select Faces By Thickness" on selectFacesByThickness()
-	on btn_bounding_box click  do undo label:"Create Bounding Plane" on createBoundingBox selection[1]
-	on btn_bounding_plane click  do undo label:"Create Bounding Plane" on createBoundingPlane selection[1]
-	on btn_create_hull click  do undo label:"Create Convex Hull" on createConvexHull (selection as array)
+	on btn_optimize_chamfers click do undo label:"Optimize Chamfers" on (optimizeChamfers (selection as array)[1])
+	on btn_unchamfer_edges click do undo label:"Unchamfer Edges" on (mcPoly.unchamferEdges (selection as array)[1] (polyOp.getEdgeSelection (selection as array)[1]))
+	on btn_fuse_edges click do undo label:"Fuse Edges" on (mcPoly.fuseEdges (selection as array)[1] wipe:chk_wipe.checked)
+	on btn_sel_sim_els click do undo label:"Select simillar Elements" on (mcPoly.selectSimilarElements selection[1] offset:spn_area_offset.value)
+	on btn_select_faces_by_normal click do undo label:"Select Faces By Normal" on (mcPoly.selectFacesByAngle selection[1] ddl_normal_way.selected)
+	on btn_select_faces_by_thickness click do undo label:"Select Faces By Thickness" on selectFacesByThickness()
+	on btn_bounding_box click do undo label:"Create Bounding Plane" on createBoundingBox selection[1]
+	on btn_bounding_plane click do undo label:"Create Bounding Plane" on createBoundingPlane selection[1]
+	on btn_create_hull click do undo label:"Create Convex Hull" on createConvexHull (selection as array)
 	
-	on btn_flatten_2d pressed  do undo label:"Flatten Object" on flttenObject selection[1]
-	on btn_projector_2d pressed  do filein (micra.RootDir + "Projector2D_v0.01.ms")
-	on btn_opt_curb_and_fences pressed  do undo label:"Optimize Curbs And Fences" on (optimizeCurbsAndFences (selection as array))
-	on btn_opt_loop_by_n pressed  do undo label:"Optimize Loop By 2" on (selectEachEdgeInLoop selection[1] spn_lop_each.value)
+	on btn_flip_normal pressed do undo label:"Flip Normal" on flipNormal selection[1]
+	on btn_flatten_2d pressed do undo label:"Flatten Object" on flttenObject selection[1]
+	on btn_projector_2d pressed do filein (micra.RootDir + "Projector2D_v0.01.ms")
+	on btn_opt_curb_and_fences pressed do undo label:"Optimize Curbs And Fences" on (optimizeCurbsAndFences (selection as array))
+	on btn_opt_loop_by_n pressed do undo label:"Optimize Loop By 2" on (selectEachEdgeInLoop selection[1] spn_lop_each.value)
 
-	on btn_opt_crossroad pressed  do undo label:"Optimize Cross Road " on (optimizeCrossroad selection[1])
+	on btn_opt_crossroad pressed do undo label:"Optimize Cross Road " on (optimizeCrossroad selection[1])
 	
 )
 createDialog mcCollisionOptimizeDialog

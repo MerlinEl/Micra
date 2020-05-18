@@ -33,12 +33,7 @@ namespace Micra.Tools {
         public static Size NewSize(int w, int h) => new Size(w, h);
         public static Color NewColor(int r, int g, int b) => Color.FromArgb(r, g, b);
         public static Color ColorFromName(string clr_str) => Color.FromName(clr_str);
-        public static void SetAccelerators(bool state) {
-            if ( state )
-                ManagedServices.AppSDK.EnableAccelerators(); // for lostfocus
-            else
-                ManagedServices.AppSDK.DisableAccelerators(); // for gotfocus
-        }
+
         /// <summary>
         /// NativeWindow parentWindow = GetWindowFromHwnd(hwnd);
         /// try {
@@ -63,8 +58,30 @@ namespace Micra.Tools {
             get { return GlobalInterface.Instance; }
         }
 
+        /*public static IInterface Interface {
+            get { return Global.COREInterface; }
+        }*/
+
         public static IInterface13 Interface {
             get { return  Global.COREInterface13; }
         }
+
+        public static IPoint3 Point(double x, double y, double z) {
+
+            return Global.Point3.Create(x, y, z);
+        }
+
+        /*public class Point {
+            private double _x = 0;
+            private double _y = 0;
+            private double _z = 0;
+          *  private IPoint3 p;
+            public Point(double x, double y, double z) {
+                _x = x;
+                _y = y;
+                _z = z;
+                p = MxGet.Global.Point3.Create(x, y, z);
+            }
+        }*/
     }
 }

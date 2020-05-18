@@ -5205,3 +5205,2543 @@ Location for referenced assembly 'Autodesk.Max' is 'D:\ReneBaca\Aprog\Micra\Micr
 Location for referenced assembly 'ManagedServices' is 'D:\ReneBaca\Aprog\Micra\Micra_Csharp\bin\Debug\ManagedServices.dll'
 	There were no errors reported in  ManagedServices's metadata.
 ILMerge: Done.
+=============================================
+Timestamp (UTC): 5/18/2020 5:57:35 AM
+ILMerge version 3.0.0.0
+Copyright (C) Microsoft Corporation 2004-2006. All rights reserved.
+ILMerge /log:ILMerge_Log.txt /allowDup:* /ver:1.0.0.4 /out:Micra.Star.dll Orien.Tools.dll Orien.NetUi.dll Micra.Tools.dll 
+Set platform to 'v4', using directory 'C:\Windows\Microsoft.NET\Framework64\v4.0.30319\..\v4.0.30319' for mscorlib.dll
+Running on Microsoft (R) .NET Framework v4.0.30319
+mscorlib.dll version = 4.0.0.0
+The list of input assemblies is:
+	Orien.Tools.dll
+	Orien.NetUi.dll
+	Micra.Tools.dll
+Trying to read assembly from the file 'D:\ReneBaca\Aprog\Micra\Micra_Csharp\bin\Debug\Orien.Tools.dll'.
+	Successfully read in assembly.
+	There were no errors reported in Orien.Tools's metadata.
+Trying to read assembly from the file 'D:\ReneBaca\Aprog\Micra\Micra_Csharp\bin\Debug\Orien.NetUi.dll'.
+	Successfully read in assembly.
+	There were no errors reported in Orien.NetUi's metadata.
+Trying to read assembly from the file 'D:\ReneBaca\Aprog\Micra\Micra_Csharp\bin\Debug\Micra.Tools.dll'.
+	Successfully read in assembly.
+	There were no errors reported in Micra.Tools's metadata.
+Checking to see that all of the input assemblies have a compatible PeKind.
+	Orien.Tools.PeKind = ILonly
+	Orien.NetUi.PeKind = ILonly
+	Micra.Tools.PeKind = ILonly
+All input assemblies have a compatible PeKind value.
+AssemblyResolver: Assembly 'Orien.Tools' is referencing assembly 'System.Core'.
+	AssemblyResolver: Attempting referencing assembly's directory.
+	AssemblyResolver: Did not find assembly in referencing assembly's directory.
+	AssemblyResolver: Attempting input directory.
+	AssemblyResolver: Did not find assembly in input directory.
+	AssemblyResolver: Attempting user-supplied directories.
+	AssemblyResolver: No user-supplied directories.
+	AssemblyResolver: Attempting framework directory.
+Can not find PDB file. Debug info will not be available for assembly 'System.Core'.
+Resolved assembly reference 'System.Core' to 'C:\Windows\Microsoft.NET\Framework64\v4.0.30319\..\v4.0.30319\System.Core.dll'. (Used framework directory.)
+AssemblyResolver: Assembly 'Orien.Tools' is referencing assembly 'System.Xml.Linq'.
+	AssemblyResolver: Attempting referencing assembly's directory.
+	AssemblyResolver: Did not find assembly in referencing assembly's directory.
+	AssemblyResolver: Attempting input directory.
+	AssemblyResolver: Did not find assembly in input directory.
+	AssemblyResolver: Attempting user-supplied directories.
+	AssemblyResolver: No user-supplied directories.
+	AssemblyResolver: Attempting framework directory.
+Can not find PDB file. Debug info will not be available for assembly 'System.Xml.Linq'.
+Resolved assembly reference 'System.Xml.Linq' to 'C:\Windows\Microsoft.NET\Framework64\v4.0.30319\..\v4.0.30319\System.Xml.Linq.dll'. (Used framework directory.)
+AssemblyResolver: Assembly 'Micra.Tools' is referencing assembly 'Autodesk.Max'.
+	AssemblyResolver: Attempting referencing assembly's directory.
+Can not find PDB file. Debug info will not be available for assembly 'Autodesk.Max'.
+Resolved assembly reference 'Autodesk.Max' to 'D:\ReneBaca\Aprog\Micra\Micra_Csharp\bin\Debug\Autodesk.Max.dll'. (Used referencing Module's directory.)
+Using assembly 'Orien.Tools' for assembly-level attributes for the target assembly.
+Merging assembly 'Orien.Tools' into target assembly.
+Merging assembly 'Orien.NetUi' into target assembly.
+Merging assembly 'Micra.Tools' into target assembly.
+Copying 1 Win32 Resources from assembly 'Orien.Tools' into target assembly.
+	There were no errors reported in the target assembly's metadata.
+ILMerge: Writing target assembly 'Micra.Star.dll'.
+AssemblyResolver: Assembly 'Micra.Tools' is referencing assembly 'ManagedServices'.
+	AssemblyResolver: Attempting referencing assembly's directory.
+Can not find PDB file. Debug info will not be available for assembly 'ManagedServices'.
+Resolved assembly reference 'ManagedServices' to 'D:\ReneBaca\Aprog\Micra\Micra_Csharp\bin\Debug\ManagedServices.dll'. (Used referencing Module's directory.)
+AssemblyResolver: Assembly 'ManagedServices' is referencing assembly 'PresentationCore'.
+	AssemblyResolver: Attempting referencing assembly's directory.
+	AssemblyResolver: Did not find assembly in referencing assembly's directory.
+	AssemblyResolver: Attempting input directory.
+	AssemblyResolver: Did not find assembly in input directory.
+	AssemblyResolver: Attempting user-supplied directories.
+	AssemblyResolver: No user-supplied directories.
+	AssemblyResolver: Attempting framework directory.
+	AssemblyResolver: Did not find assembly in framework directory.
+AssemblyResolver: Unable to resolve reference. (It still might be found, e.g., in the GAC.)
+AssemblyResolver: Assembly 'ManagedServices' is referencing assembly 'CSharpUtilities'.
+	AssemblyResolver: Attempting referencing assembly's directory.
+Can not find PDB file. Debug info will not be available for assembly 'CSharpUtilities'.
+Resolved assembly reference 'CSharpUtilities' to 'D:\ReneBaca\Aprog\Micra\Micra_Csharp\bin\Debug\CSharpUtilities.dll'. (Used referencing Module's directory.)
+AssemblyResolver: Assembly 'ManagedServices' is referencing assembly 'WindowsBase'.
+	AssemblyResolver: Attempting referencing assembly's directory.
+	AssemblyResolver: Did not find assembly in referencing assembly's directory.
+	AssemblyResolver: Attempting input directory.
+	AssemblyResolver: Did not find assembly in input directory.
+	AssemblyResolver: Attempting user-supplied directories.
+	AssemblyResolver: No user-supplied directories.
+	AssemblyResolver: Attempting framework directory.
+	AssemblyResolver: Did not find assembly in framework directory.
+AssemblyResolver: Unable to resolve reference. (It still might be found, e.g., in the GAC.)
+AssemblyResolver: Assembly 'ManagedServices' is referencing assembly 'PresentationFramework'.
+	AssemblyResolver: Attempting referencing assembly's directory.
+	AssemblyResolver: Did not find assembly in referencing assembly's directory.
+	AssemblyResolver: Attempting input directory.
+	AssemblyResolver: Did not find assembly in input directory.
+	AssemblyResolver: Attempting user-supplied directories.
+	AssemblyResolver: No user-supplied directories.
+	AssemblyResolver: Attempting framework directory.
+	AssemblyResolver: Did not find assembly in framework directory.
+AssemblyResolver: Unable to resolve reference. (It still might be found, e.g., in the GAC.)
+AssemblyResolver: Assembly 'PresentationFramework' is referencing assembly 'System.Xaml'.
+	AssemblyResolver: Attempting referencing assembly's directory.
+	AssemblyResolver: Did not find assembly in referencing assembly's directory.
+	AssemblyResolver: Attempting input directory.
+	AssemblyResolver: Did not find assembly in input directory.
+	AssemblyResolver: Attempting user-supplied directories.
+	AssemblyResolver: No user-supplied directories.
+	AssemblyResolver: Attempting framework directory.
+Can not find PDB file. Debug info will not be available for assembly 'System.Xaml'.
+Resolved assembly reference 'System.Xaml' to 'C:\Windows\Microsoft.NET\Framework64\v4.0.30319\..\v4.0.30319\System.Xaml.dll'. (Used framework directory.)
+Location for referenced module 'user32.dll' is ''
+Location for referenced module 'Gdi32.dll' is ''
+Location for referenced module 'user32' is ''
+Location for referenced assembly 'mscorlib' is 'C:\Windows\Microsoft.NET\Framework64\v4.0.30319\mscorlib.dll'
+	There were no errors reported in  mscorlib's metadata.
+Location for referenced assembly 'System.Core' is 'C:\Windows\Microsoft.NET\Framework64\v4.0.30319\System.Core.dll'
+	There were no errors reported in  System.Core's metadata.
+Location for referenced assembly 'System' is 'C:\Windows\Microsoft.NET\Framework64\v4.0.30319\system.dll'
+	There were no errors reported in  System's metadata.
+Location for referenced assembly 'System.Drawing' is 'C:\Windows\Microsoft.NET\Framework64\v4.0.30319\System.Drawing.dll'
+	There were no errors reported in  System.Drawing's metadata.
+Location for referenced assembly 'System.Windows.Forms' is 'C:\Windows\Microsoft.NET\Framework64\v4.0.30319\System.Windows.Forms.dll'
+	There were no errors reported in  System.Windows.Forms's metadata.
+Location for referenced assembly 'System.Xml.Linq' is 'C:\Windows\Microsoft.NET\Framework64\v4.0.30319\System.Xml.Linq.dll'
+	There were no errors reported in  System.Xml.Linq's metadata.
+Location for referenced assembly 'System.Xml' is 'C:\Windows\Microsoft.NET\Framework64\v4.0.30319\System.Xml.dll'
+	There were no errors reported in  System.Xml's metadata.
+Location for referenced assembly 'Autodesk.Max' is 'D:\ReneBaca\Aprog\Micra\Micra_Csharp\bin\Debug\Autodesk.Max.dll'
+	There were no errors reported in  Autodesk.Max's metadata.
+Location for referenced assembly 'ManagedServices' is 'D:\ReneBaca\Aprog\Micra\Micra_Csharp\bin\Debug\ManagedServices.dll'
+	There were no errors reported in  ManagedServices's metadata.
+ILMerge: Done.
+=============================================
+Timestamp (UTC): 5/18/2020 5:58:43 AM
+ILMerge version 3.0.0.0
+Copyright (C) Microsoft Corporation 2004-2006. All rights reserved.
+ILMerge /log:ILMerge_Log.txt /allowDup:* /ver:1.0.0.4 /out:Micra.Star.dll Orien.Tools.dll Orien.NetUi.dll Micra.Tools.dll 
+Set platform to 'v4', using directory 'C:\Windows\Microsoft.NET\Framework64\v4.0.30319\..\v4.0.30319' for mscorlib.dll
+Running on Microsoft (R) .NET Framework v4.0.30319
+mscorlib.dll version = 4.0.0.0
+The list of input assemblies is:
+	Orien.Tools.dll
+	Orien.NetUi.dll
+	Micra.Tools.dll
+Trying to read assembly from the file 'D:\ReneBaca\Aprog\Micra\Micra_Csharp\bin\Debug\Orien.Tools.dll'.
+	Successfully read in assembly.
+	There were no errors reported in Orien.Tools's metadata.
+Trying to read assembly from the file 'D:\ReneBaca\Aprog\Micra\Micra_Csharp\bin\Debug\Orien.NetUi.dll'.
+	Successfully read in assembly.
+	There were no errors reported in Orien.NetUi's metadata.
+Trying to read assembly from the file 'D:\ReneBaca\Aprog\Micra\Micra_Csharp\bin\Debug\Micra.Tools.dll'.
+	Successfully read in assembly.
+	There were no errors reported in Micra.Tools's metadata.
+Checking to see that all of the input assemblies have a compatible PeKind.
+	Orien.Tools.PeKind = ILonly
+	Orien.NetUi.PeKind = ILonly
+	Micra.Tools.PeKind = ILonly
+All input assemblies have a compatible PeKind value.
+AssemblyResolver: Assembly 'Orien.Tools' is referencing assembly 'System.Core'.
+	AssemblyResolver: Attempting referencing assembly's directory.
+	AssemblyResolver: Did not find assembly in referencing assembly's directory.
+	AssemblyResolver: Attempting input directory.
+	AssemblyResolver: Did not find assembly in input directory.
+	AssemblyResolver: Attempting user-supplied directories.
+	AssemblyResolver: No user-supplied directories.
+	AssemblyResolver: Attempting framework directory.
+Can not find PDB file. Debug info will not be available for assembly 'System.Core'.
+Resolved assembly reference 'System.Core' to 'C:\Windows\Microsoft.NET\Framework64\v4.0.30319\..\v4.0.30319\System.Core.dll'. (Used framework directory.)
+AssemblyResolver: Assembly 'Orien.Tools' is referencing assembly 'System.Xml.Linq'.
+	AssemblyResolver: Attempting referencing assembly's directory.
+	AssemblyResolver: Did not find assembly in referencing assembly's directory.
+	AssemblyResolver: Attempting input directory.
+	AssemblyResolver: Did not find assembly in input directory.
+	AssemblyResolver: Attempting user-supplied directories.
+	AssemblyResolver: No user-supplied directories.
+	AssemblyResolver: Attempting framework directory.
+Can not find PDB file. Debug info will not be available for assembly 'System.Xml.Linq'.
+Resolved assembly reference 'System.Xml.Linq' to 'C:\Windows\Microsoft.NET\Framework64\v4.0.30319\..\v4.0.30319\System.Xml.Linq.dll'. (Used framework directory.)
+AssemblyResolver: Assembly 'Micra.Tools' is referencing assembly 'Autodesk.Max'.
+	AssemblyResolver: Attempting referencing assembly's directory.
+Can not find PDB file. Debug info will not be available for assembly 'Autodesk.Max'.
+Resolved assembly reference 'Autodesk.Max' to 'D:\ReneBaca\Aprog\Micra\Micra_Csharp\bin\Debug\Autodesk.Max.dll'. (Used referencing Module's directory.)
+Using assembly 'Orien.Tools' for assembly-level attributes for the target assembly.
+Merging assembly 'Orien.Tools' into target assembly.
+Merging assembly 'Orien.NetUi' into target assembly.
+Merging assembly 'Micra.Tools' into target assembly.
+Copying 1 Win32 Resources from assembly 'Orien.Tools' into target assembly.
+	There were no errors reported in the target assembly's metadata.
+ILMerge: Writing target assembly 'Micra.Star.dll'.
+AssemblyResolver: Assembly 'Micra.Tools' is referencing assembly 'ManagedServices'.
+	AssemblyResolver: Attempting referencing assembly's directory.
+Can not find PDB file. Debug info will not be available for assembly 'ManagedServices'.
+Resolved assembly reference 'ManagedServices' to 'D:\ReneBaca\Aprog\Micra\Micra_Csharp\bin\Debug\ManagedServices.dll'. (Used referencing Module's directory.)
+AssemblyResolver: Assembly 'ManagedServices' is referencing assembly 'PresentationCore'.
+	AssemblyResolver: Attempting referencing assembly's directory.
+	AssemblyResolver: Did not find assembly in referencing assembly's directory.
+	AssemblyResolver: Attempting input directory.
+	AssemblyResolver: Did not find assembly in input directory.
+	AssemblyResolver: Attempting user-supplied directories.
+	AssemblyResolver: No user-supplied directories.
+	AssemblyResolver: Attempting framework directory.
+	AssemblyResolver: Did not find assembly in framework directory.
+AssemblyResolver: Unable to resolve reference. (It still might be found, e.g., in the GAC.)
+AssemblyResolver: Assembly 'ManagedServices' is referencing assembly 'CSharpUtilities'.
+	AssemblyResolver: Attempting referencing assembly's directory.
+Can not find PDB file. Debug info will not be available for assembly 'CSharpUtilities'.
+Resolved assembly reference 'CSharpUtilities' to 'D:\ReneBaca\Aprog\Micra\Micra_Csharp\bin\Debug\CSharpUtilities.dll'. (Used referencing Module's directory.)
+AssemblyResolver: Assembly 'ManagedServices' is referencing assembly 'WindowsBase'.
+	AssemblyResolver: Attempting referencing assembly's directory.
+	AssemblyResolver: Did not find assembly in referencing assembly's directory.
+	AssemblyResolver: Attempting input directory.
+	AssemblyResolver: Did not find assembly in input directory.
+	AssemblyResolver: Attempting user-supplied directories.
+	AssemblyResolver: No user-supplied directories.
+	AssemblyResolver: Attempting framework directory.
+	AssemblyResolver: Did not find assembly in framework directory.
+AssemblyResolver: Unable to resolve reference. (It still might be found, e.g., in the GAC.)
+AssemblyResolver: Assembly 'ManagedServices' is referencing assembly 'PresentationFramework'.
+	AssemblyResolver: Attempting referencing assembly's directory.
+	AssemblyResolver: Did not find assembly in referencing assembly's directory.
+	AssemblyResolver: Attempting input directory.
+	AssemblyResolver: Did not find assembly in input directory.
+	AssemblyResolver: Attempting user-supplied directories.
+	AssemblyResolver: No user-supplied directories.
+	AssemblyResolver: Attempting framework directory.
+	AssemblyResolver: Did not find assembly in framework directory.
+AssemblyResolver: Unable to resolve reference. (It still might be found, e.g., in the GAC.)
+AssemblyResolver: Assembly 'PresentationFramework' is referencing assembly 'System.Xaml'.
+	AssemblyResolver: Attempting referencing assembly's directory.
+	AssemblyResolver: Did not find assembly in referencing assembly's directory.
+	AssemblyResolver: Attempting input directory.
+	AssemblyResolver: Did not find assembly in input directory.
+	AssemblyResolver: Attempting user-supplied directories.
+	AssemblyResolver: No user-supplied directories.
+	AssemblyResolver: Attempting framework directory.
+Can not find PDB file. Debug info will not be available for assembly 'System.Xaml'.
+Resolved assembly reference 'System.Xaml' to 'C:\Windows\Microsoft.NET\Framework64\v4.0.30319\..\v4.0.30319\System.Xaml.dll'. (Used framework directory.)
+Location for referenced module 'user32.dll' is ''
+Location for referenced module 'Gdi32.dll' is ''
+Location for referenced module 'user32' is ''
+Location for referenced assembly 'mscorlib' is 'C:\Windows\Microsoft.NET\Framework64\v4.0.30319\mscorlib.dll'
+	There were no errors reported in  mscorlib's metadata.
+Location for referenced assembly 'System.Core' is 'C:\Windows\Microsoft.NET\Framework64\v4.0.30319\System.Core.dll'
+	There were no errors reported in  System.Core's metadata.
+Location for referenced assembly 'System' is 'C:\Windows\Microsoft.NET\Framework64\v4.0.30319\system.dll'
+	There were no errors reported in  System's metadata.
+Location for referenced assembly 'System.Drawing' is 'C:\Windows\Microsoft.NET\Framework64\v4.0.30319\System.Drawing.dll'
+	There were no errors reported in  System.Drawing's metadata.
+Location for referenced assembly 'System.Windows.Forms' is 'C:\Windows\Microsoft.NET\Framework64\v4.0.30319\System.Windows.Forms.dll'
+	There were no errors reported in  System.Windows.Forms's metadata.
+Location for referenced assembly 'System.Xml.Linq' is 'C:\Windows\Microsoft.NET\Framework64\v4.0.30319\System.Xml.Linq.dll'
+	There were no errors reported in  System.Xml.Linq's metadata.
+Location for referenced assembly 'System.Xml' is 'C:\Windows\Microsoft.NET\Framework64\v4.0.30319\System.Xml.dll'
+	There were no errors reported in  System.Xml's metadata.
+Location for referenced assembly 'Autodesk.Max' is 'D:\ReneBaca\Aprog\Micra\Micra_Csharp\bin\Debug\Autodesk.Max.dll'
+	There were no errors reported in  Autodesk.Max's metadata.
+Location for referenced assembly 'ManagedServices' is 'D:\ReneBaca\Aprog\Micra\Micra_Csharp\bin\Debug\ManagedServices.dll'
+	There were no errors reported in  ManagedServices's metadata.
+ILMerge: Done.
+=============================================
+Timestamp (UTC): 5/18/2020 5:59:17 AM
+ILMerge version 3.0.0.0
+Copyright (C) Microsoft Corporation 2004-2006. All rights reserved.
+ILMerge /log:ILMerge_Log.txt /allowDup:* /ver:1.0.0.4 /out:Micra.Star.dll Orien.Tools.dll Orien.NetUi.dll Micra.Tools.dll 
+Set platform to 'v4', using directory 'C:\Windows\Microsoft.NET\Framework64\v4.0.30319\..\v4.0.30319' for mscorlib.dll
+Running on Microsoft (R) .NET Framework v4.0.30319
+mscorlib.dll version = 4.0.0.0
+The list of input assemblies is:
+	Orien.Tools.dll
+	Orien.NetUi.dll
+	Micra.Tools.dll
+Trying to read assembly from the file 'D:\ReneBaca\Aprog\Micra\Micra_Csharp\bin\Debug\Orien.Tools.dll'.
+	Successfully read in assembly.
+	There were no errors reported in Orien.Tools's metadata.
+Trying to read assembly from the file 'D:\ReneBaca\Aprog\Micra\Micra_Csharp\bin\Debug\Orien.NetUi.dll'.
+	Successfully read in assembly.
+	There were no errors reported in Orien.NetUi's metadata.
+Trying to read assembly from the file 'D:\ReneBaca\Aprog\Micra\Micra_Csharp\bin\Debug\Micra.Tools.dll'.
+	Successfully read in assembly.
+	There were no errors reported in Micra.Tools's metadata.
+Checking to see that all of the input assemblies have a compatible PeKind.
+	Orien.Tools.PeKind = ILonly
+	Orien.NetUi.PeKind = ILonly
+	Micra.Tools.PeKind = ILonly
+All input assemblies have a compatible PeKind value.
+AssemblyResolver: Assembly 'Orien.Tools' is referencing assembly 'System.Core'.
+	AssemblyResolver: Attempting referencing assembly's directory.
+	AssemblyResolver: Did not find assembly in referencing assembly's directory.
+	AssemblyResolver: Attempting input directory.
+	AssemblyResolver: Did not find assembly in input directory.
+	AssemblyResolver: Attempting user-supplied directories.
+	AssemblyResolver: No user-supplied directories.
+	AssemblyResolver: Attempting framework directory.
+Can not find PDB file. Debug info will not be available for assembly 'System.Core'.
+Resolved assembly reference 'System.Core' to 'C:\Windows\Microsoft.NET\Framework64\v4.0.30319\..\v4.0.30319\System.Core.dll'. (Used framework directory.)
+AssemblyResolver: Assembly 'Orien.Tools' is referencing assembly 'System.Xml.Linq'.
+	AssemblyResolver: Attempting referencing assembly's directory.
+	AssemblyResolver: Did not find assembly in referencing assembly's directory.
+	AssemblyResolver: Attempting input directory.
+	AssemblyResolver: Did not find assembly in input directory.
+	AssemblyResolver: Attempting user-supplied directories.
+	AssemblyResolver: No user-supplied directories.
+	AssemblyResolver: Attempting framework directory.
+Can not find PDB file. Debug info will not be available for assembly 'System.Xml.Linq'.
+Resolved assembly reference 'System.Xml.Linq' to 'C:\Windows\Microsoft.NET\Framework64\v4.0.30319\..\v4.0.30319\System.Xml.Linq.dll'. (Used framework directory.)
+AssemblyResolver: Assembly 'Micra.Tools' is referencing assembly 'Autodesk.Max'.
+	AssemblyResolver: Attempting referencing assembly's directory.
+Can not find PDB file. Debug info will not be available for assembly 'Autodesk.Max'.
+Resolved assembly reference 'Autodesk.Max' to 'D:\ReneBaca\Aprog\Micra\Micra_Csharp\bin\Debug\Autodesk.Max.dll'. (Used referencing Module's directory.)
+Using assembly 'Orien.Tools' for assembly-level attributes for the target assembly.
+Merging assembly 'Orien.Tools' into target assembly.
+Merging assembly 'Orien.NetUi' into target assembly.
+Merging assembly 'Micra.Tools' into target assembly.
+Copying 1 Win32 Resources from assembly 'Orien.Tools' into target assembly.
+	There were no errors reported in the target assembly's metadata.
+ILMerge: Writing target assembly 'Micra.Star.dll'.
+AssemblyResolver: Assembly 'Micra.Tools' is referencing assembly 'ManagedServices'.
+	AssemblyResolver: Attempting referencing assembly's directory.
+Can not find PDB file. Debug info will not be available for assembly 'ManagedServices'.
+Resolved assembly reference 'ManagedServices' to 'D:\ReneBaca\Aprog\Micra\Micra_Csharp\bin\Debug\ManagedServices.dll'. (Used referencing Module's directory.)
+AssemblyResolver: Assembly 'ManagedServices' is referencing assembly 'PresentationCore'.
+	AssemblyResolver: Attempting referencing assembly's directory.
+	AssemblyResolver: Did not find assembly in referencing assembly's directory.
+	AssemblyResolver: Attempting input directory.
+	AssemblyResolver: Did not find assembly in input directory.
+	AssemblyResolver: Attempting user-supplied directories.
+	AssemblyResolver: No user-supplied directories.
+	AssemblyResolver: Attempting framework directory.
+	AssemblyResolver: Did not find assembly in framework directory.
+AssemblyResolver: Unable to resolve reference. (It still might be found, e.g., in the GAC.)
+AssemblyResolver: Assembly 'ManagedServices' is referencing assembly 'CSharpUtilities'.
+	AssemblyResolver: Attempting referencing assembly's directory.
+Can not find PDB file. Debug info will not be available for assembly 'CSharpUtilities'.
+Resolved assembly reference 'CSharpUtilities' to 'D:\ReneBaca\Aprog\Micra\Micra_Csharp\bin\Debug\CSharpUtilities.dll'. (Used referencing Module's directory.)
+AssemblyResolver: Assembly 'ManagedServices' is referencing assembly 'WindowsBase'.
+	AssemblyResolver: Attempting referencing assembly's directory.
+	AssemblyResolver: Did not find assembly in referencing assembly's directory.
+	AssemblyResolver: Attempting input directory.
+	AssemblyResolver: Did not find assembly in input directory.
+	AssemblyResolver: Attempting user-supplied directories.
+	AssemblyResolver: No user-supplied directories.
+	AssemblyResolver: Attempting framework directory.
+	AssemblyResolver: Did not find assembly in framework directory.
+AssemblyResolver: Unable to resolve reference. (It still might be found, e.g., in the GAC.)
+AssemblyResolver: Assembly 'ManagedServices' is referencing assembly 'PresentationFramework'.
+	AssemblyResolver: Attempting referencing assembly's directory.
+	AssemblyResolver: Did not find assembly in referencing assembly's directory.
+	AssemblyResolver: Attempting input directory.
+	AssemblyResolver: Did not find assembly in input directory.
+	AssemblyResolver: Attempting user-supplied directories.
+	AssemblyResolver: No user-supplied directories.
+	AssemblyResolver: Attempting framework directory.
+	AssemblyResolver: Did not find assembly in framework directory.
+AssemblyResolver: Unable to resolve reference. (It still might be found, e.g., in the GAC.)
+AssemblyResolver: Assembly 'PresentationFramework' is referencing assembly 'System.Xaml'.
+	AssemblyResolver: Attempting referencing assembly's directory.
+	AssemblyResolver: Did not find assembly in referencing assembly's directory.
+	AssemblyResolver: Attempting input directory.
+	AssemblyResolver: Did not find assembly in input directory.
+	AssemblyResolver: Attempting user-supplied directories.
+	AssemblyResolver: No user-supplied directories.
+	AssemblyResolver: Attempting framework directory.
+Can not find PDB file. Debug info will not be available for assembly 'System.Xaml'.
+Resolved assembly reference 'System.Xaml' to 'C:\Windows\Microsoft.NET\Framework64\v4.0.30319\..\v4.0.30319\System.Xaml.dll'. (Used framework directory.)
+Location for referenced module 'user32.dll' is ''
+Location for referenced module 'Gdi32.dll' is ''
+Location for referenced module 'user32' is ''
+Location for referenced assembly 'mscorlib' is 'C:\Windows\Microsoft.NET\Framework64\v4.0.30319\mscorlib.dll'
+	There were no errors reported in  mscorlib's metadata.
+Location for referenced assembly 'System.Core' is 'C:\Windows\Microsoft.NET\Framework64\v4.0.30319\System.Core.dll'
+	There were no errors reported in  System.Core's metadata.
+Location for referenced assembly 'System' is 'C:\Windows\Microsoft.NET\Framework64\v4.0.30319\system.dll'
+	There were no errors reported in  System's metadata.
+Location for referenced assembly 'System.Drawing' is 'C:\Windows\Microsoft.NET\Framework64\v4.0.30319\System.Drawing.dll'
+	There were no errors reported in  System.Drawing's metadata.
+Location for referenced assembly 'System.Windows.Forms' is 'C:\Windows\Microsoft.NET\Framework64\v4.0.30319\System.Windows.Forms.dll'
+	There were no errors reported in  System.Windows.Forms's metadata.
+Location for referenced assembly 'System.Xml.Linq' is 'C:\Windows\Microsoft.NET\Framework64\v4.0.30319\System.Xml.Linq.dll'
+	There were no errors reported in  System.Xml.Linq's metadata.
+Location for referenced assembly 'System.Xml' is 'C:\Windows\Microsoft.NET\Framework64\v4.0.30319\System.Xml.dll'
+	There were no errors reported in  System.Xml's metadata.
+Location for referenced assembly 'Autodesk.Max' is 'D:\ReneBaca\Aprog\Micra\Micra_Csharp\bin\Debug\Autodesk.Max.dll'
+	There were no errors reported in  Autodesk.Max's metadata.
+Location for referenced assembly 'ManagedServices' is 'D:\ReneBaca\Aprog\Micra\Micra_Csharp\bin\Debug\ManagedServices.dll'
+	There were no errors reported in  ManagedServices's metadata.
+ILMerge: Done.
+=============================================
+Timestamp (UTC): 5/18/2020 6:29:25 AM
+ILMerge version 3.0.0.0
+Copyright (C) Microsoft Corporation 2004-2006. All rights reserved.
+ILMerge /log:ILMerge_Log.txt /allowDup:* /ver:1.0.0.4 /out:Micra.Star.dll Orien.Tools.dll Orien.NetUi.dll Micra.Tools.dll 
+Set platform to 'v4', using directory 'C:\Windows\Microsoft.NET\Framework64\v4.0.30319\..\v4.0.30319' for mscorlib.dll
+Running on Microsoft (R) .NET Framework v4.0.30319
+mscorlib.dll version = 4.0.0.0
+The list of input assemblies is:
+	Orien.Tools.dll
+	Orien.NetUi.dll
+	Micra.Tools.dll
+Trying to read assembly from the file 'D:\ReneBaca\Aprog\Micra\Micra_Csharp\bin\Debug\Orien.Tools.dll'.
+	Successfully read in assembly.
+	There were no errors reported in Orien.Tools's metadata.
+Trying to read assembly from the file 'D:\ReneBaca\Aprog\Micra\Micra_Csharp\bin\Debug\Orien.NetUi.dll'.
+	Successfully read in assembly.
+	There were no errors reported in Orien.NetUi's metadata.
+Trying to read assembly from the file 'D:\ReneBaca\Aprog\Micra\Micra_Csharp\bin\Debug\Micra.Tools.dll'.
+	Successfully read in assembly.
+	There were no errors reported in Micra.Tools's metadata.
+Checking to see that all of the input assemblies have a compatible PeKind.
+	Orien.Tools.PeKind = ILonly
+	Orien.NetUi.PeKind = ILonly
+	Micra.Tools.PeKind = ILonly
+All input assemblies have a compatible PeKind value.
+AssemblyResolver: Assembly 'Orien.Tools' is referencing assembly 'System.Core'.
+	AssemblyResolver: Attempting referencing assembly's directory.
+	AssemblyResolver: Did not find assembly in referencing assembly's directory.
+	AssemblyResolver: Attempting input directory.
+	AssemblyResolver: Did not find assembly in input directory.
+	AssemblyResolver: Attempting user-supplied directories.
+	AssemblyResolver: No user-supplied directories.
+	AssemblyResolver: Attempting framework directory.
+Can not find PDB file. Debug info will not be available for assembly 'System.Core'.
+Resolved assembly reference 'System.Core' to 'C:\Windows\Microsoft.NET\Framework64\v4.0.30319\..\v4.0.30319\System.Core.dll'. (Used framework directory.)
+AssemblyResolver: Assembly 'Orien.Tools' is referencing assembly 'System.Xml.Linq'.
+	AssemblyResolver: Attempting referencing assembly's directory.
+	AssemblyResolver: Did not find assembly in referencing assembly's directory.
+	AssemblyResolver: Attempting input directory.
+	AssemblyResolver: Did not find assembly in input directory.
+	AssemblyResolver: Attempting user-supplied directories.
+	AssemblyResolver: No user-supplied directories.
+	AssemblyResolver: Attempting framework directory.
+Can not find PDB file. Debug info will not be available for assembly 'System.Xml.Linq'.
+Resolved assembly reference 'System.Xml.Linq' to 'C:\Windows\Microsoft.NET\Framework64\v4.0.30319\..\v4.0.30319\System.Xml.Linq.dll'. (Used framework directory.)
+AssemblyResolver: Assembly 'Micra.Tools' is referencing assembly 'Autodesk.Max'.
+	AssemblyResolver: Attempting referencing assembly's directory.
+Can not find PDB file. Debug info will not be available for assembly 'Autodesk.Max'.
+Resolved assembly reference 'Autodesk.Max' to 'D:\ReneBaca\Aprog\Micra\Micra_Csharp\bin\Debug\Autodesk.Max.dll'. (Used referencing Module's directory.)
+Using assembly 'Orien.Tools' for assembly-level attributes for the target assembly.
+Merging assembly 'Orien.Tools' into target assembly.
+Merging assembly 'Orien.NetUi' into target assembly.
+Merging assembly 'Micra.Tools' into target assembly.
+Copying 1 Win32 Resources from assembly 'Orien.Tools' into target assembly.
+	There were no errors reported in the target assembly's metadata.
+ILMerge: Writing target assembly 'Micra.Star.dll'.
+AssemblyResolver: Assembly 'Micra.Tools' is referencing assembly 'ManagedServices'.
+	AssemblyResolver: Attempting referencing assembly's directory.
+Can not find PDB file. Debug info will not be available for assembly 'ManagedServices'.
+Resolved assembly reference 'ManagedServices' to 'D:\ReneBaca\Aprog\Micra\Micra_Csharp\bin\Debug\ManagedServices.dll'. (Used referencing Module's directory.)
+AssemblyResolver: Assembly 'ManagedServices' is referencing assembly 'PresentationCore'.
+	AssemblyResolver: Attempting referencing assembly's directory.
+	AssemblyResolver: Did not find assembly in referencing assembly's directory.
+	AssemblyResolver: Attempting input directory.
+	AssemblyResolver: Did not find assembly in input directory.
+	AssemblyResolver: Attempting user-supplied directories.
+	AssemblyResolver: No user-supplied directories.
+	AssemblyResolver: Attempting framework directory.
+	AssemblyResolver: Did not find assembly in framework directory.
+AssemblyResolver: Unable to resolve reference. (It still might be found, e.g., in the GAC.)
+AssemblyResolver: Assembly 'ManagedServices' is referencing assembly 'CSharpUtilities'.
+	AssemblyResolver: Attempting referencing assembly's directory.
+Can not find PDB file. Debug info will not be available for assembly 'CSharpUtilities'.
+Resolved assembly reference 'CSharpUtilities' to 'D:\ReneBaca\Aprog\Micra\Micra_Csharp\bin\Debug\CSharpUtilities.dll'. (Used referencing Module's directory.)
+AssemblyResolver: Assembly 'ManagedServices' is referencing assembly 'WindowsBase'.
+	AssemblyResolver: Attempting referencing assembly's directory.
+	AssemblyResolver: Did not find assembly in referencing assembly's directory.
+	AssemblyResolver: Attempting input directory.
+	AssemblyResolver: Did not find assembly in input directory.
+	AssemblyResolver: Attempting user-supplied directories.
+	AssemblyResolver: No user-supplied directories.
+	AssemblyResolver: Attempting framework directory.
+	AssemblyResolver: Did not find assembly in framework directory.
+AssemblyResolver: Unable to resolve reference. (It still might be found, e.g., in the GAC.)
+AssemblyResolver: Assembly 'ManagedServices' is referencing assembly 'PresentationFramework'.
+	AssemblyResolver: Attempting referencing assembly's directory.
+	AssemblyResolver: Did not find assembly in referencing assembly's directory.
+	AssemblyResolver: Attempting input directory.
+	AssemblyResolver: Did not find assembly in input directory.
+	AssemblyResolver: Attempting user-supplied directories.
+	AssemblyResolver: No user-supplied directories.
+	AssemblyResolver: Attempting framework directory.
+	AssemblyResolver: Did not find assembly in framework directory.
+AssemblyResolver: Unable to resolve reference. (It still might be found, e.g., in the GAC.)
+AssemblyResolver: Assembly 'PresentationFramework' is referencing assembly 'System.Xaml'.
+	AssemblyResolver: Attempting referencing assembly's directory.
+	AssemblyResolver: Did not find assembly in referencing assembly's directory.
+	AssemblyResolver: Attempting input directory.
+	AssemblyResolver: Did not find assembly in input directory.
+	AssemblyResolver: Attempting user-supplied directories.
+	AssemblyResolver: No user-supplied directories.
+	AssemblyResolver: Attempting framework directory.
+Can not find PDB file. Debug info will not be available for assembly 'System.Xaml'.
+Resolved assembly reference 'System.Xaml' to 'C:\Windows\Microsoft.NET\Framework64\v4.0.30319\..\v4.0.30319\System.Xaml.dll'. (Used framework directory.)
+Location for referenced module 'user32.dll' is ''
+Location for referenced module 'Gdi32.dll' is ''
+Location for referenced module 'user32' is ''
+Location for referenced assembly 'mscorlib' is 'C:\Windows\Microsoft.NET\Framework64\v4.0.30319\mscorlib.dll'
+	There were no errors reported in  mscorlib's metadata.
+Location for referenced assembly 'System.Core' is 'C:\Windows\Microsoft.NET\Framework64\v4.0.30319\System.Core.dll'
+	There were no errors reported in  System.Core's metadata.
+Location for referenced assembly 'System' is 'C:\Windows\Microsoft.NET\Framework64\v4.0.30319\system.dll'
+	There were no errors reported in  System's metadata.
+Location for referenced assembly 'System.Drawing' is 'C:\Windows\Microsoft.NET\Framework64\v4.0.30319\System.Drawing.dll'
+	There were no errors reported in  System.Drawing's metadata.
+Location for referenced assembly 'System.Windows.Forms' is 'C:\Windows\Microsoft.NET\Framework64\v4.0.30319\System.Windows.Forms.dll'
+	There were no errors reported in  System.Windows.Forms's metadata.
+Location for referenced assembly 'System.Xml.Linq' is 'C:\Windows\Microsoft.NET\Framework64\v4.0.30319\System.Xml.Linq.dll'
+	There were no errors reported in  System.Xml.Linq's metadata.
+Location for referenced assembly 'System.Xml' is 'C:\Windows\Microsoft.NET\Framework64\v4.0.30319\System.Xml.dll'
+	There were no errors reported in  System.Xml's metadata.
+Location for referenced assembly 'Autodesk.Max' is 'D:\ReneBaca\Aprog\Micra\Micra_Csharp\bin\Debug\Autodesk.Max.dll'
+	There were no errors reported in  Autodesk.Max's metadata.
+Location for referenced assembly 'ManagedServices' is 'D:\ReneBaca\Aprog\Micra\Micra_Csharp\bin\Debug\ManagedServices.dll'
+	There were no errors reported in  ManagedServices's metadata.
+ILMerge: Done.
+=============================================
+Timestamp (UTC): 5/18/2020 6:50:42 AM
+ILMerge version 3.0.0.0
+Copyright (C) Microsoft Corporation 2004-2006. All rights reserved.
+ILMerge /log:ILMerge_Log.txt /allowDup:* /ver:1.0.0.4 /out:Micra.Star.dll Orien.Tools.dll Orien.NetUi.dll Micra.Tools.dll 
+Set platform to 'v4', using directory 'C:\Windows\Microsoft.NET\Framework64\v4.0.30319\..\v4.0.30319' for mscorlib.dll
+Running on Microsoft (R) .NET Framework v4.0.30319
+mscorlib.dll version = 4.0.0.0
+The list of input assemblies is:
+	Orien.Tools.dll
+	Orien.NetUi.dll
+	Micra.Tools.dll
+Trying to read assembly from the file 'D:\ReneBaca\Aprog\Micra\Micra_Csharp\bin\Debug\Orien.Tools.dll'.
+	Successfully read in assembly.
+	There were no errors reported in Orien.Tools's metadata.
+Trying to read assembly from the file 'D:\ReneBaca\Aprog\Micra\Micra_Csharp\bin\Debug\Orien.NetUi.dll'.
+	Successfully read in assembly.
+	There were no errors reported in Orien.NetUi's metadata.
+Trying to read assembly from the file 'D:\ReneBaca\Aprog\Micra\Micra_Csharp\bin\Debug\Micra.Tools.dll'.
+	Successfully read in assembly.
+	There were no errors reported in Micra.Tools's metadata.
+Checking to see that all of the input assemblies have a compatible PeKind.
+	Orien.Tools.PeKind = ILonly
+	Orien.NetUi.PeKind = ILonly
+	Micra.Tools.PeKind = ILonly
+All input assemblies have a compatible PeKind value.
+AssemblyResolver: Assembly 'Orien.Tools' is referencing assembly 'System.Core'.
+	AssemblyResolver: Attempting referencing assembly's directory.
+	AssemblyResolver: Did not find assembly in referencing assembly's directory.
+	AssemblyResolver: Attempting input directory.
+	AssemblyResolver: Did not find assembly in input directory.
+	AssemblyResolver: Attempting user-supplied directories.
+	AssemblyResolver: No user-supplied directories.
+	AssemblyResolver: Attempting framework directory.
+Can not find PDB file. Debug info will not be available for assembly 'System.Core'.
+Resolved assembly reference 'System.Core' to 'C:\Windows\Microsoft.NET\Framework64\v4.0.30319\..\v4.0.30319\System.Core.dll'. (Used framework directory.)
+AssemblyResolver: Assembly 'Orien.Tools' is referencing assembly 'System.Xml.Linq'.
+	AssemblyResolver: Attempting referencing assembly's directory.
+	AssemblyResolver: Did not find assembly in referencing assembly's directory.
+	AssemblyResolver: Attempting input directory.
+	AssemblyResolver: Did not find assembly in input directory.
+	AssemblyResolver: Attempting user-supplied directories.
+	AssemblyResolver: No user-supplied directories.
+	AssemblyResolver: Attempting framework directory.
+Can not find PDB file. Debug info will not be available for assembly 'System.Xml.Linq'.
+Resolved assembly reference 'System.Xml.Linq' to 'C:\Windows\Microsoft.NET\Framework64\v4.0.30319\..\v4.0.30319\System.Xml.Linq.dll'. (Used framework directory.)
+AssemblyResolver: Assembly 'Micra.Tools' is referencing assembly 'Autodesk.Max'.
+	AssemblyResolver: Attempting referencing assembly's directory.
+Can not find PDB file. Debug info will not be available for assembly 'Autodesk.Max'.
+Resolved assembly reference 'Autodesk.Max' to 'D:\ReneBaca\Aprog\Micra\Micra_Csharp\bin\Debug\Autodesk.Max.dll'. (Used referencing Module's directory.)
+Using assembly 'Orien.Tools' for assembly-level attributes for the target assembly.
+Merging assembly 'Orien.Tools' into target assembly.
+Merging assembly 'Orien.NetUi' into target assembly.
+Merging assembly 'Micra.Tools' into target assembly.
+Copying 1 Win32 Resources from assembly 'Orien.Tools' into target assembly.
+	There were no errors reported in the target assembly's metadata.
+ILMerge: Writing target assembly 'Micra.Star.dll'.
+AssemblyResolver: Assembly 'Micra.Tools' is referencing assembly 'ManagedServices'.
+	AssemblyResolver: Attempting referencing assembly's directory.
+Can not find PDB file. Debug info will not be available for assembly 'ManagedServices'.
+Resolved assembly reference 'ManagedServices' to 'D:\ReneBaca\Aprog\Micra\Micra_Csharp\bin\Debug\ManagedServices.dll'. (Used referencing Module's directory.)
+AssemblyResolver: Assembly 'ManagedServices' is referencing assembly 'PresentationCore'.
+	AssemblyResolver: Attempting referencing assembly's directory.
+	AssemblyResolver: Did not find assembly in referencing assembly's directory.
+	AssemblyResolver: Attempting input directory.
+	AssemblyResolver: Did not find assembly in input directory.
+	AssemblyResolver: Attempting user-supplied directories.
+	AssemblyResolver: No user-supplied directories.
+	AssemblyResolver: Attempting framework directory.
+	AssemblyResolver: Did not find assembly in framework directory.
+AssemblyResolver: Unable to resolve reference. (It still might be found, e.g., in the GAC.)
+AssemblyResolver: Assembly 'ManagedServices' is referencing assembly 'CSharpUtilities'.
+	AssemblyResolver: Attempting referencing assembly's directory.
+Can not find PDB file. Debug info will not be available for assembly 'CSharpUtilities'.
+Resolved assembly reference 'CSharpUtilities' to 'D:\ReneBaca\Aprog\Micra\Micra_Csharp\bin\Debug\CSharpUtilities.dll'. (Used referencing Module's directory.)
+AssemblyResolver: Assembly 'ManagedServices' is referencing assembly 'WindowsBase'.
+	AssemblyResolver: Attempting referencing assembly's directory.
+	AssemblyResolver: Did not find assembly in referencing assembly's directory.
+	AssemblyResolver: Attempting input directory.
+	AssemblyResolver: Did not find assembly in input directory.
+	AssemblyResolver: Attempting user-supplied directories.
+	AssemblyResolver: No user-supplied directories.
+	AssemblyResolver: Attempting framework directory.
+	AssemblyResolver: Did not find assembly in framework directory.
+AssemblyResolver: Unable to resolve reference. (It still might be found, e.g., in the GAC.)
+AssemblyResolver: Assembly 'ManagedServices' is referencing assembly 'PresentationFramework'.
+	AssemblyResolver: Attempting referencing assembly's directory.
+	AssemblyResolver: Did not find assembly in referencing assembly's directory.
+	AssemblyResolver: Attempting input directory.
+	AssemblyResolver: Did not find assembly in input directory.
+	AssemblyResolver: Attempting user-supplied directories.
+	AssemblyResolver: No user-supplied directories.
+	AssemblyResolver: Attempting framework directory.
+	AssemblyResolver: Did not find assembly in framework directory.
+AssemblyResolver: Unable to resolve reference. (It still might be found, e.g., in the GAC.)
+AssemblyResolver: Assembly 'PresentationFramework' is referencing assembly 'System.Xaml'.
+	AssemblyResolver: Attempting referencing assembly's directory.
+	AssemblyResolver: Did not find assembly in referencing assembly's directory.
+	AssemblyResolver: Attempting input directory.
+	AssemblyResolver: Did not find assembly in input directory.
+	AssemblyResolver: Attempting user-supplied directories.
+	AssemblyResolver: No user-supplied directories.
+	AssemblyResolver: Attempting framework directory.
+Can not find PDB file. Debug info will not be available for assembly 'System.Xaml'.
+Resolved assembly reference 'System.Xaml' to 'C:\Windows\Microsoft.NET\Framework64\v4.0.30319\..\v4.0.30319\System.Xaml.dll'. (Used framework directory.)
+Location for referenced module 'user32.dll' is ''
+Location for referenced module 'Gdi32.dll' is ''
+Location for referenced module 'user32' is ''
+Location for referenced assembly 'mscorlib' is 'C:\Windows\Microsoft.NET\Framework64\v4.0.30319\mscorlib.dll'
+	There were no errors reported in  mscorlib's metadata.
+Location for referenced assembly 'System.Core' is 'C:\Windows\Microsoft.NET\Framework64\v4.0.30319\System.Core.dll'
+	There were no errors reported in  System.Core's metadata.
+Location for referenced assembly 'System' is 'C:\Windows\Microsoft.NET\Framework64\v4.0.30319\system.dll'
+	There were no errors reported in  System's metadata.
+Location for referenced assembly 'System.Drawing' is 'C:\Windows\Microsoft.NET\Framework64\v4.0.30319\System.Drawing.dll'
+	There were no errors reported in  System.Drawing's metadata.
+Location for referenced assembly 'System.Windows.Forms' is 'C:\Windows\Microsoft.NET\Framework64\v4.0.30319\System.Windows.Forms.dll'
+	There were no errors reported in  System.Windows.Forms's metadata.
+Location for referenced assembly 'System.Xml.Linq' is 'C:\Windows\Microsoft.NET\Framework64\v4.0.30319\System.Xml.Linq.dll'
+	There were no errors reported in  System.Xml.Linq's metadata.
+Location for referenced assembly 'System.Xml' is 'C:\Windows\Microsoft.NET\Framework64\v4.0.30319\System.Xml.dll'
+	There were no errors reported in  System.Xml's metadata.
+Location for referenced assembly 'Autodesk.Max' is 'D:\ReneBaca\Aprog\Micra\Micra_Csharp\bin\Debug\Autodesk.Max.dll'
+	There were no errors reported in  Autodesk.Max's metadata.
+Location for referenced assembly 'ManagedServices' is 'D:\ReneBaca\Aprog\Micra\Micra_Csharp\bin\Debug\ManagedServices.dll'
+	There were no errors reported in  ManagedServices's metadata.
+ILMerge: Done.
+=============================================
+Timestamp (UTC): 5/18/2020 7:36:34 AM
+ILMerge version 3.0.0.0
+Copyright (C) Microsoft Corporation 2004-2006. All rights reserved.
+ILMerge /log:ILMerge_Log.txt /allowDup:* /ver:1.0.0.4 /out:Micra.Star.dll Orien.Tools.dll Orien.NetUi.dll Micra.Tools.dll 
+Set platform to 'v4', using directory 'C:\Windows\Microsoft.NET\Framework64\v4.0.30319\..\v4.0.30319' for mscorlib.dll
+Running on Microsoft (R) .NET Framework v4.0.30319
+mscorlib.dll version = 4.0.0.0
+The list of input assemblies is:
+	Orien.Tools.dll
+	Orien.NetUi.dll
+	Micra.Tools.dll
+Trying to read assembly from the file 'D:\ReneBaca\Aprog\Micra\Micra_Csharp\bin\Debug\Orien.Tools.dll'.
+	Successfully read in assembly.
+	There were no errors reported in Orien.Tools's metadata.
+Trying to read assembly from the file 'D:\ReneBaca\Aprog\Micra\Micra_Csharp\bin\Debug\Orien.NetUi.dll'.
+	Successfully read in assembly.
+	There were no errors reported in Orien.NetUi's metadata.
+Trying to read assembly from the file 'D:\ReneBaca\Aprog\Micra\Micra_Csharp\bin\Debug\Micra.Tools.dll'.
+	Successfully read in assembly.
+	There were no errors reported in Micra.Tools's metadata.
+Checking to see that all of the input assemblies have a compatible PeKind.
+	Orien.Tools.PeKind = ILonly
+	Orien.NetUi.PeKind = ILonly
+	Micra.Tools.PeKind = ILonly
+All input assemblies have a compatible PeKind value.
+AssemblyResolver: Assembly 'Orien.Tools' is referencing assembly 'System.Core'.
+	AssemblyResolver: Attempting referencing assembly's directory.
+	AssemblyResolver: Did not find assembly in referencing assembly's directory.
+	AssemblyResolver: Attempting input directory.
+	AssemblyResolver: Did not find assembly in input directory.
+	AssemblyResolver: Attempting user-supplied directories.
+	AssemblyResolver: No user-supplied directories.
+	AssemblyResolver: Attempting framework directory.
+Can not find PDB file. Debug info will not be available for assembly 'System.Core'.
+Resolved assembly reference 'System.Core' to 'C:\Windows\Microsoft.NET\Framework64\v4.0.30319\..\v4.0.30319\System.Core.dll'. (Used framework directory.)
+AssemblyResolver: Assembly 'Orien.Tools' is referencing assembly 'System.Xml.Linq'.
+	AssemblyResolver: Attempting referencing assembly's directory.
+	AssemblyResolver: Did not find assembly in referencing assembly's directory.
+	AssemblyResolver: Attempting input directory.
+	AssemblyResolver: Did not find assembly in input directory.
+	AssemblyResolver: Attempting user-supplied directories.
+	AssemblyResolver: No user-supplied directories.
+	AssemblyResolver: Attempting framework directory.
+Can not find PDB file. Debug info will not be available for assembly 'System.Xml.Linq'.
+Resolved assembly reference 'System.Xml.Linq' to 'C:\Windows\Microsoft.NET\Framework64\v4.0.30319\..\v4.0.30319\System.Xml.Linq.dll'. (Used framework directory.)
+AssemblyResolver: Assembly 'Micra.Tools' is referencing assembly 'Autodesk.Max'.
+	AssemblyResolver: Attempting referencing assembly's directory.
+Can not find PDB file. Debug info will not be available for assembly 'Autodesk.Max'.
+Resolved assembly reference 'Autodesk.Max' to 'D:\ReneBaca\Aprog\Micra\Micra_Csharp\bin\Debug\Autodesk.Max.dll'. (Used referencing Module's directory.)
+Using assembly 'Orien.Tools' for assembly-level attributes for the target assembly.
+Merging assembly 'Orien.Tools' into target assembly.
+Merging assembly 'Orien.NetUi' into target assembly.
+Merging assembly 'Micra.Tools' into target assembly.
+Copying 1 Win32 Resources from assembly 'Orien.Tools' into target assembly.
+	There were no errors reported in the target assembly's metadata.
+ILMerge: Writing target assembly 'Micra.Star.dll'.
+AssemblyResolver: Assembly 'Micra.Tools' is referencing assembly 'ManagedServices'.
+	AssemblyResolver: Attempting referencing assembly's directory.
+Can not find PDB file. Debug info will not be available for assembly 'ManagedServices'.
+Resolved assembly reference 'ManagedServices' to 'D:\ReneBaca\Aprog\Micra\Micra_Csharp\bin\Debug\ManagedServices.dll'. (Used referencing Module's directory.)
+AssemblyResolver: Assembly 'ManagedServices' is referencing assembly 'PresentationCore'.
+	AssemblyResolver: Attempting referencing assembly's directory.
+	AssemblyResolver: Did not find assembly in referencing assembly's directory.
+	AssemblyResolver: Attempting input directory.
+	AssemblyResolver: Did not find assembly in input directory.
+	AssemblyResolver: Attempting user-supplied directories.
+	AssemblyResolver: No user-supplied directories.
+	AssemblyResolver: Attempting framework directory.
+	AssemblyResolver: Did not find assembly in framework directory.
+AssemblyResolver: Unable to resolve reference. (It still might be found, e.g., in the GAC.)
+AssemblyResolver: Assembly 'ManagedServices' is referencing assembly 'CSharpUtilities'.
+	AssemblyResolver: Attempting referencing assembly's directory.
+Can not find PDB file. Debug info will not be available for assembly 'CSharpUtilities'.
+Resolved assembly reference 'CSharpUtilities' to 'D:\ReneBaca\Aprog\Micra\Micra_Csharp\bin\Debug\CSharpUtilities.dll'. (Used referencing Module's directory.)
+AssemblyResolver: Assembly 'ManagedServices' is referencing assembly 'WindowsBase'.
+	AssemblyResolver: Attempting referencing assembly's directory.
+	AssemblyResolver: Did not find assembly in referencing assembly's directory.
+	AssemblyResolver: Attempting input directory.
+	AssemblyResolver: Did not find assembly in input directory.
+	AssemblyResolver: Attempting user-supplied directories.
+	AssemblyResolver: No user-supplied directories.
+	AssemblyResolver: Attempting framework directory.
+	AssemblyResolver: Did not find assembly in framework directory.
+AssemblyResolver: Unable to resolve reference. (It still might be found, e.g., in the GAC.)
+AssemblyResolver: Assembly 'ManagedServices' is referencing assembly 'PresentationFramework'.
+	AssemblyResolver: Attempting referencing assembly's directory.
+	AssemblyResolver: Did not find assembly in referencing assembly's directory.
+	AssemblyResolver: Attempting input directory.
+	AssemblyResolver: Did not find assembly in input directory.
+	AssemblyResolver: Attempting user-supplied directories.
+	AssemblyResolver: No user-supplied directories.
+	AssemblyResolver: Attempting framework directory.
+	AssemblyResolver: Did not find assembly in framework directory.
+AssemblyResolver: Unable to resolve reference. (It still might be found, e.g., in the GAC.)
+AssemblyResolver: Assembly 'PresentationFramework' is referencing assembly 'System.Xaml'.
+	AssemblyResolver: Attempting referencing assembly's directory.
+	AssemblyResolver: Did not find assembly in referencing assembly's directory.
+	AssemblyResolver: Attempting input directory.
+	AssemblyResolver: Did not find assembly in input directory.
+	AssemblyResolver: Attempting user-supplied directories.
+	AssemblyResolver: No user-supplied directories.
+	AssemblyResolver: Attempting framework directory.
+Can not find PDB file. Debug info will not be available for assembly 'System.Xaml'.
+Resolved assembly reference 'System.Xaml' to 'C:\Windows\Microsoft.NET\Framework64\v4.0.30319\..\v4.0.30319\System.Xaml.dll'. (Used framework directory.)
+Location for referenced module 'user32.dll' is ''
+Location for referenced module 'Gdi32.dll' is ''
+Location for referenced module 'user32' is ''
+Location for referenced assembly 'mscorlib' is 'C:\Windows\Microsoft.NET\Framework64\v4.0.30319\mscorlib.dll'
+	There were no errors reported in  mscorlib's metadata.
+Location for referenced assembly 'System.Core' is 'C:\Windows\Microsoft.NET\Framework64\v4.0.30319\System.Core.dll'
+	There were no errors reported in  System.Core's metadata.
+Location for referenced assembly 'System' is 'C:\Windows\Microsoft.NET\Framework64\v4.0.30319\system.dll'
+	There were no errors reported in  System's metadata.
+Location for referenced assembly 'System.Drawing' is 'C:\Windows\Microsoft.NET\Framework64\v4.0.30319\System.Drawing.dll'
+	There were no errors reported in  System.Drawing's metadata.
+Location for referenced assembly 'System.Windows.Forms' is 'C:\Windows\Microsoft.NET\Framework64\v4.0.30319\System.Windows.Forms.dll'
+	There were no errors reported in  System.Windows.Forms's metadata.
+Location for referenced assembly 'System.Xml.Linq' is 'C:\Windows\Microsoft.NET\Framework64\v4.0.30319\System.Xml.Linq.dll'
+	There were no errors reported in  System.Xml.Linq's metadata.
+Location for referenced assembly 'System.Xml' is 'C:\Windows\Microsoft.NET\Framework64\v4.0.30319\System.Xml.dll'
+	There were no errors reported in  System.Xml's metadata.
+Location for referenced assembly 'Autodesk.Max' is 'D:\ReneBaca\Aprog\Micra\Micra_Csharp\bin\Debug\Autodesk.Max.dll'
+	There were no errors reported in  Autodesk.Max's metadata.
+Location for referenced assembly 'ManagedServices' is 'D:\ReneBaca\Aprog\Micra\Micra_Csharp\bin\Debug\ManagedServices.dll'
+	There were no errors reported in  ManagedServices's metadata.
+ILMerge: Done.
+=============================================
+Timestamp (UTC): 5/18/2020 9:35:14 AM
+ILMerge version 3.0.0.0
+Copyright (C) Microsoft Corporation 2004-2006. All rights reserved.
+ILMerge /log:ILMerge_Log.txt /allowDup:* /ver:1.0.0.4 /out:Micra.Star.dll Orien.Tools.dll Orien.NetUi.dll Micra.Tools.dll 
+Set platform to 'v4', using directory 'C:\Windows\Microsoft.NET\Framework64\v4.0.30319\..\v4.0.30319' for mscorlib.dll
+Running on Microsoft (R) .NET Framework v4.0.30319
+mscorlib.dll version = 4.0.0.0
+The list of input assemblies is:
+	Orien.Tools.dll
+	Orien.NetUi.dll
+	Micra.Tools.dll
+Trying to read assembly from the file 'D:\ReneBaca\Aprog\Micra\Micra_Csharp\bin\Debug\Orien.Tools.dll'.
+	Successfully read in assembly.
+	There were no errors reported in Orien.Tools's metadata.
+Trying to read assembly from the file 'D:\ReneBaca\Aprog\Micra\Micra_Csharp\bin\Debug\Orien.NetUi.dll'.
+	Successfully read in assembly.
+	There were no errors reported in Orien.NetUi's metadata.
+Trying to read assembly from the file 'D:\ReneBaca\Aprog\Micra\Micra_Csharp\bin\Debug\Micra.Tools.dll'.
+	Successfully read in assembly.
+	There were no errors reported in Micra.Tools's metadata.
+Checking to see that all of the input assemblies have a compatible PeKind.
+	Orien.Tools.PeKind = ILonly
+	Orien.NetUi.PeKind = ILonly
+	Micra.Tools.PeKind = ILonly
+All input assemblies have a compatible PeKind value.
+AssemblyResolver: Assembly 'Orien.Tools' is referencing assembly 'System.Core'.
+	AssemblyResolver: Attempting referencing assembly's directory.
+	AssemblyResolver: Did not find assembly in referencing assembly's directory.
+	AssemblyResolver: Attempting input directory.
+	AssemblyResolver: Did not find assembly in input directory.
+	AssemblyResolver: Attempting user-supplied directories.
+	AssemblyResolver: No user-supplied directories.
+	AssemblyResolver: Attempting framework directory.
+Can not find PDB file. Debug info will not be available for assembly 'System.Core'.
+Resolved assembly reference 'System.Core' to 'C:\Windows\Microsoft.NET\Framework64\v4.0.30319\..\v4.0.30319\System.Core.dll'. (Used framework directory.)
+AssemblyResolver: Assembly 'Orien.Tools' is referencing assembly 'System.Xml.Linq'.
+	AssemblyResolver: Attempting referencing assembly's directory.
+	AssemblyResolver: Did not find assembly in referencing assembly's directory.
+	AssemblyResolver: Attempting input directory.
+	AssemblyResolver: Did not find assembly in input directory.
+	AssemblyResolver: Attempting user-supplied directories.
+	AssemblyResolver: No user-supplied directories.
+	AssemblyResolver: Attempting framework directory.
+Can not find PDB file. Debug info will not be available for assembly 'System.Xml.Linq'.
+Resolved assembly reference 'System.Xml.Linq' to 'C:\Windows\Microsoft.NET\Framework64\v4.0.30319\..\v4.0.30319\System.Xml.Linq.dll'. (Used framework directory.)
+AssemblyResolver: Assembly 'Micra.Tools' is referencing assembly 'Autodesk.Max'.
+	AssemblyResolver: Attempting referencing assembly's directory.
+Can not find PDB file. Debug info will not be available for assembly 'Autodesk.Max'.
+Resolved assembly reference 'Autodesk.Max' to 'D:\ReneBaca\Aprog\Micra\Micra_Csharp\bin\Debug\Autodesk.Max.dll'. (Used referencing Module's directory.)
+Using assembly 'Orien.Tools' for assembly-level attributes for the target assembly.
+Merging assembly 'Orien.Tools' into target assembly.
+Merging assembly 'Orien.NetUi' into target assembly.
+Merging assembly 'Micra.Tools' into target assembly.
+Copying 1 Win32 Resources from assembly 'Orien.Tools' into target assembly.
+	There were no errors reported in the target assembly's metadata.
+ILMerge: Writing target assembly 'Micra.Star.dll'.
+AssemblyResolver: Assembly 'Micra.Tools' is referencing assembly 'ManagedServices'.
+	AssemblyResolver: Attempting referencing assembly's directory.
+Can not find PDB file. Debug info will not be available for assembly 'ManagedServices'.
+Resolved assembly reference 'ManagedServices' to 'D:\ReneBaca\Aprog\Micra\Micra_Csharp\bin\Debug\ManagedServices.dll'. (Used referencing Module's directory.)
+AssemblyResolver: Assembly 'ManagedServices' is referencing assembly 'PresentationCore'.
+	AssemblyResolver: Attempting referencing assembly's directory.
+	AssemblyResolver: Did not find assembly in referencing assembly's directory.
+	AssemblyResolver: Attempting input directory.
+	AssemblyResolver: Did not find assembly in input directory.
+	AssemblyResolver: Attempting user-supplied directories.
+	AssemblyResolver: No user-supplied directories.
+	AssemblyResolver: Attempting framework directory.
+	AssemblyResolver: Did not find assembly in framework directory.
+AssemblyResolver: Unable to resolve reference. (It still might be found, e.g., in the GAC.)
+AssemblyResolver: Assembly 'ManagedServices' is referencing assembly 'CSharpUtilities'.
+	AssemblyResolver: Attempting referencing assembly's directory.
+Can not find PDB file. Debug info will not be available for assembly 'CSharpUtilities'.
+Resolved assembly reference 'CSharpUtilities' to 'D:\ReneBaca\Aprog\Micra\Micra_Csharp\bin\Debug\CSharpUtilities.dll'. (Used referencing Module's directory.)
+AssemblyResolver: Assembly 'ManagedServices' is referencing assembly 'WindowsBase'.
+	AssemblyResolver: Attempting referencing assembly's directory.
+	AssemblyResolver: Did not find assembly in referencing assembly's directory.
+	AssemblyResolver: Attempting input directory.
+	AssemblyResolver: Did not find assembly in input directory.
+	AssemblyResolver: Attempting user-supplied directories.
+	AssemblyResolver: No user-supplied directories.
+	AssemblyResolver: Attempting framework directory.
+	AssemblyResolver: Did not find assembly in framework directory.
+AssemblyResolver: Unable to resolve reference. (It still might be found, e.g., in the GAC.)
+AssemblyResolver: Assembly 'ManagedServices' is referencing assembly 'PresentationFramework'.
+	AssemblyResolver: Attempting referencing assembly's directory.
+	AssemblyResolver: Did not find assembly in referencing assembly's directory.
+	AssemblyResolver: Attempting input directory.
+	AssemblyResolver: Did not find assembly in input directory.
+	AssemblyResolver: Attempting user-supplied directories.
+	AssemblyResolver: No user-supplied directories.
+	AssemblyResolver: Attempting framework directory.
+	AssemblyResolver: Did not find assembly in framework directory.
+AssemblyResolver: Unable to resolve reference. (It still might be found, e.g., in the GAC.)
+AssemblyResolver: Assembly 'PresentationFramework' is referencing assembly 'System.Xaml'.
+	AssemblyResolver: Attempting referencing assembly's directory.
+	AssemblyResolver: Did not find assembly in referencing assembly's directory.
+	AssemblyResolver: Attempting input directory.
+	AssemblyResolver: Did not find assembly in input directory.
+	AssemblyResolver: Attempting user-supplied directories.
+	AssemblyResolver: No user-supplied directories.
+	AssemblyResolver: Attempting framework directory.
+Can not find PDB file. Debug info will not be available for assembly 'System.Xaml'.
+Resolved assembly reference 'System.Xaml' to 'C:\Windows\Microsoft.NET\Framework64\v4.0.30319\..\v4.0.30319\System.Xaml.dll'. (Used framework directory.)
+Location for referenced module 'user32.dll' is ''
+Location for referenced module 'Gdi32.dll' is ''
+Location for referenced module 'user32' is ''
+Location for referenced assembly 'mscorlib' is 'C:\Windows\Microsoft.NET\Framework64\v4.0.30319\mscorlib.dll'
+	There were no errors reported in  mscorlib's metadata.
+Location for referenced assembly 'System.Core' is 'C:\Windows\Microsoft.NET\Framework64\v4.0.30319\System.Core.dll'
+	There were no errors reported in  System.Core's metadata.
+Location for referenced assembly 'System' is 'C:\Windows\Microsoft.NET\Framework64\v4.0.30319\system.dll'
+	There were no errors reported in  System's metadata.
+Location for referenced assembly 'System.Drawing' is 'C:\Windows\Microsoft.NET\Framework64\v4.0.30319\System.Drawing.dll'
+	There were no errors reported in  System.Drawing's metadata.
+Location for referenced assembly 'System.Windows.Forms' is 'C:\Windows\Microsoft.NET\Framework64\v4.0.30319\System.Windows.Forms.dll'
+	There were no errors reported in  System.Windows.Forms's metadata.
+Location for referenced assembly 'System.Xml.Linq' is 'C:\Windows\Microsoft.NET\Framework64\v4.0.30319\System.Xml.Linq.dll'
+	There were no errors reported in  System.Xml.Linq's metadata.
+Location for referenced assembly 'System.Xml' is 'C:\Windows\Microsoft.NET\Framework64\v4.0.30319\System.Xml.dll'
+	There were no errors reported in  System.Xml's metadata.
+Location for referenced assembly 'Autodesk.Max' is 'D:\ReneBaca\Aprog\Micra\Micra_Csharp\bin\Debug\Autodesk.Max.dll'
+	There were no errors reported in  Autodesk.Max's metadata.
+Location for referenced assembly 'ManagedServices' is 'D:\ReneBaca\Aprog\Micra\Micra_Csharp\bin\Debug\ManagedServices.dll'
+	There were no errors reported in  ManagedServices's metadata.
+ILMerge: Done.
+=============================================
+Timestamp (UTC): 5/18/2020 9:35:58 AM
+ILMerge version 3.0.0.0
+Copyright (C) Microsoft Corporation 2004-2006. All rights reserved.
+ILMerge /log:ILMerge_Log.txt /allowDup:* /ver:1.0.0.4 /out:Micra.Star.dll Orien.Tools.dll Orien.NetUi.dll Micra.Tools.dll 
+Set platform to 'v4', using directory 'C:\Windows\Microsoft.NET\Framework64\v4.0.30319\..\v4.0.30319' for mscorlib.dll
+Running on Microsoft (R) .NET Framework v4.0.30319
+mscorlib.dll version = 4.0.0.0
+The list of input assemblies is:
+	Orien.Tools.dll
+	Orien.NetUi.dll
+	Micra.Tools.dll
+Trying to read assembly from the file 'D:\ReneBaca\Aprog\Micra\Micra_Csharp\bin\Debug\Orien.Tools.dll'.
+	Successfully read in assembly.
+	There were no errors reported in Orien.Tools's metadata.
+Trying to read assembly from the file 'D:\ReneBaca\Aprog\Micra\Micra_Csharp\bin\Debug\Orien.NetUi.dll'.
+	Successfully read in assembly.
+	There were no errors reported in Orien.NetUi's metadata.
+Trying to read assembly from the file 'D:\ReneBaca\Aprog\Micra\Micra_Csharp\bin\Debug\Micra.Tools.dll'.
+	Successfully read in assembly.
+	There were no errors reported in Micra.Tools's metadata.
+Checking to see that all of the input assemblies have a compatible PeKind.
+	Orien.Tools.PeKind = ILonly
+	Orien.NetUi.PeKind = ILonly
+	Micra.Tools.PeKind = ILonly
+All input assemblies have a compatible PeKind value.
+AssemblyResolver: Assembly 'Orien.Tools' is referencing assembly 'System.Core'.
+	AssemblyResolver: Attempting referencing assembly's directory.
+	AssemblyResolver: Did not find assembly in referencing assembly's directory.
+	AssemblyResolver: Attempting input directory.
+	AssemblyResolver: Did not find assembly in input directory.
+	AssemblyResolver: Attempting user-supplied directories.
+	AssemblyResolver: No user-supplied directories.
+	AssemblyResolver: Attempting framework directory.
+Can not find PDB file. Debug info will not be available for assembly 'System.Core'.
+Resolved assembly reference 'System.Core' to 'C:\Windows\Microsoft.NET\Framework64\v4.0.30319\..\v4.0.30319\System.Core.dll'. (Used framework directory.)
+AssemblyResolver: Assembly 'Orien.Tools' is referencing assembly 'System.Xml.Linq'.
+	AssemblyResolver: Attempting referencing assembly's directory.
+	AssemblyResolver: Did not find assembly in referencing assembly's directory.
+	AssemblyResolver: Attempting input directory.
+	AssemblyResolver: Did not find assembly in input directory.
+	AssemblyResolver: Attempting user-supplied directories.
+	AssemblyResolver: No user-supplied directories.
+	AssemblyResolver: Attempting framework directory.
+Can not find PDB file. Debug info will not be available for assembly 'System.Xml.Linq'.
+Resolved assembly reference 'System.Xml.Linq' to 'C:\Windows\Microsoft.NET\Framework64\v4.0.30319\..\v4.0.30319\System.Xml.Linq.dll'. (Used framework directory.)
+AssemblyResolver: Assembly 'Micra.Tools' is referencing assembly 'Autodesk.Max'.
+	AssemblyResolver: Attempting referencing assembly's directory.
+Can not find PDB file. Debug info will not be available for assembly 'Autodesk.Max'.
+Resolved assembly reference 'Autodesk.Max' to 'D:\ReneBaca\Aprog\Micra\Micra_Csharp\bin\Debug\Autodesk.Max.dll'. (Used referencing Module's directory.)
+Using assembly 'Orien.Tools' for assembly-level attributes for the target assembly.
+Merging assembly 'Orien.Tools' into target assembly.
+Merging assembly 'Orien.NetUi' into target assembly.
+Merging assembly 'Micra.Tools' into target assembly.
+Copying 1 Win32 Resources from assembly 'Orien.Tools' into target assembly.
+	There were no errors reported in the target assembly's metadata.
+ILMerge: Writing target assembly 'Micra.Star.dll'.
+AssemblyResolver: Assembly 'Micra.Tools' is referencing assembly 'ManagedServices'.
+	AssemblyResolver: Attempting referencing assembly's directory.
+Can not find PDB file. Debug info will not be available for assembly 'ManagedServices'.
+Resolved assembly reference 'ManagedServices' to 'D:\ReneBaca\Aprog\Micra\Micra_Csharp\bin\Debug\ManagedServices.dll'. (Used referencing Module's directory.)
+AssemblyResolver: Assembly 'ManagedServices' is referencing assembly 'PresentationCore'.
+	AssemblyResolver: Attempting referencing assembly's directory.
+	AssemblyResolver: Did not find assembly in referencing assembly's directory.
+	AssemblyResolver: Attempting input directory.
+	AssemblyResolver: Did not find assembly in input directory.
+	AssemblyResolver: Attempting user-supplied directories.
+	AssemblyResolver: No user-supplied directories.
+	AssemblyResolver: Attempting framework directory.
+	AssemblyResolver: Did not find assembly in framework directory.
+AssemblyResolver: Unable to resolve reference. (It still might be found, e.g., in the GAC.)
+AssemblyResolver: Assembly 'ManagedServices' is referencing assembly 'CSharpUtilities'.
+	AssemblyResolver: Attempting referencing assembly's directory.
+Can not find PDB file. Debug info will not be available for assembly 'CSharpUtilities'.
+Resolved assembly reference 'CSharpUtilities' to 'D:\ReneBaca\Aprog\Micra\Micra_Csharp\bin\Debug\CSharpUtilities.dll'. (Used referencing Module's directory.)
+AssemblyResolver: Assembly 'ManagedServices' is referencing assembly 'WindowsBase'.
+	AssemblyResolver: Attempting referencing assembly's directory.
+	AssemblyResolver: Did not find assembly in referencing assembly's directory.
+	AssemblyResolver: Attempting input directory.
+	AssemblyResolver: Did not find assembly in input directory.
+	AssemblyResolver: Attempting user-supplied directories.
+	AssemblyResolver: No user-supplied directories.
+	AssemblyResolver: Attempting framework directory.
+	AssemblyResolver: Did not find assembly in framework directory.
+AssemblyResolver: Unable to resolve reference. (It still might be found, e.g., in the GAC.)
+AssemblyResolver: Assembly 'ManagedServices' is referencing assembly 'PresentationFramework'.
+	AssemblyResolver: Attempting referencing assembly's directory.
+	AssemblyResolver: Did not find assembly in referencing assembly's directory.
+	AssemblyResolver: Attempting input directory.
+	AssemblyResolver: Did not find assembly in input directory.
+	AssemblyResolver: Attempting user-supplied directories.
+	AssemblyResolver: No user-supplied directories.
+	AssemblyResolver: Attempting framework directory.
+	AssemblyResolver: Did not find assembly in framework directory.
+AssemblyResolver: Unable to resolve reference. (It still might be found, e.g., in the GAC.)
+AssemblyResolver: Assembly 'PresentationFramework' is referencing assembly 'System.Xaml'.
+	AssemblyResolver: Attempting referencing assembly's directory.
+	AssemblyResolver: Did not find assembly in referencing assembly's directory.
+	AssemblyResolver: Attempting input directory.
+	AssemblyResolver: Did not find assembly in input directory.
+	AssemblyResolver: Attempting user-supplied directories.
+	AssemblyResolver: No user-supplied directories.
+	AssemblyResolver: Attempting framework directory.
+Can not find PDB file. Debug info will not be available for assembly 'System.Xaml'.
+Resolved assembly reference 'System.Xaml' to 'C:\Windows\Microsoft.NET\Framework64\v4.0.30319\..\v4.0.30319\System.Xaml.dll'. (Used framework directory.)
+Location for referenced module 'user32.dll' is ''
+Location for referenced module 'Gdi32.dll' is ''
+Location for referenced module 'user32' is ''
+Location for referenced assembly 'mscorlib' is 'C:\Windows\Microsoft.NET\Framework64\v4.0.30319\mscorlib.dll'
+	There were no errors reported in  mscorlib's metadata.
+Location for referenced assembly 'System.Core' is 'C:\Windows\Microsoft.NET\Framework64\v4.0.30319\System.Core.dll'
+	There were no errors reported in  System.Core's metadata.
+Location for referenced assembly 'System' is 'C:\Windows\Microsoft.NET\Framework64\v4.0.30319\system.dll'
+	There were no errors reported in  System's metadata.
+Location for referenced assembly 'System.Drawing' is 'C:\Windows\Microsoft.NET\Framework64\v4.0.30319\System.Drawing.dll'
+	There were no errors reported in  System.Drawing's metadata.
+Location for referenced assembly 'System.Windows.Forms' is 'C:\Windows\Microsoft.NET\Framework64\v4.0.30319\System.Windows.Forms.dll'
+	There were no errors reported in  System.Windows.Forms's metadata.
+Location for referenced assembly 'System.Xml.Linq' is 'C:\Windows\Microsoft.NET\Framework64\v4.0.30319\System.Xml.Linq.dll'
+	There were no errors reported in  System.Xml.Linq's metadata.
+Location for referenced assembly 'System.Xml' is 'C:\Windows\Microsoft.NET\Framework64\v4.0.30319\System.Xml.dll'
+	There were no errors reported in  System.Xml's metadata.
+Location for referenced assembly 'Autodesk.Max' is 'D:\ReneBaca\Aprog\Micra\Micra_Csharp\bin\Debug\Autodesk.Max.dll'
+	There were no errors reported in  Autodesk.Max's metadata.
+Location for referenced assembly 'ManagedServices' is 'D:\ReneBaca\Aprog\Micra\Micra_Csharp\bin\Debug\ManagedServices.dll'
+	There were no errors reported in  ManagedServices's metadata.
+ILMerge: Done.
+=============================================
+Timestamp (UTC): 5/18/2020 10:26:01 AM
+ILMerge version 3.0.0.0
+Copyright (C) Microsoft Corporation 2004-2006. All rights reserved.
+ILMerge /log:ILMerge_Log.txt /allowDup:* /ver:1.0.0.4 /out:Micra.Star.dll Orien.Tools.dll Orien.NetUi.dll Micra.Tools.dll 
+Set platform to 'v4', using directory 'C:\Windows\Microsoft.NET\Framework64\v4.0.30319\..\v4.0.30319' for mscorlib.dll
+Running on Microsoft (R) .NET Framework v4.0.30319
+mscorlib.dll version = 4.0.0.0
+The list of input assemblies is:
+	Orien.Tools.dll
+	Orien.NetUi.dll
+	Micra.Tools.dll
+Trying to read assembly from the file 'D:\ReneBaca\Aprog\Micra\Micra_Csharp\bin\Debug\Orien.Tools.dll'.
+	Successfully read in assembly.
+	There were no errors reported in Orien.Tools's metadata.
+Trying to read assembly from the file 'D:\ReneBaca\Aprog\Micra\Micra_Csharp\bin\Debug\Orien.NetUi.dll'.
+	Successfully read in assembly.
+	There were no errors reported in Orien.NetUi's metadata.
+Trying to read assembly from the file 'D:\ReneBaca\Aprog\Micra\Micra_Csharp\bin\Debug\Micra.Tools.dll'.
+	Successfully read in assembly.
+	There were no errors reported in Micra.Tools's metadata.
+Checking to see that all of the input assemblies have a compatible PeKind.
+	Orien.Tools.PeKind = ILonly
+	Orien.NetUi.PeKind = ILonly
+	Micra.Tools.PeKind = ILonly
+All input assemblies have a compatible PeKind value.
+AssemblyResolver: Assembly 'Orien.Tools' is referencing assembly 'System.Core'.
+	AssemblyResolver: Attempting referencing assembly's directory.
+	AssemblyResolver: Did not find assembly in referencing assembly's directory.
+	AssemblyResolver: Attempting input directory.
+	AssemblyResolver: Did not find assembly in input directory.
+	AssemblyResolver: Attempting user-supplied directories.
+	AssemblyResolver: No user-supplied directories.
+	AssemblyResolver: Attempting framework directory.
+Can not find PDB file. Debug info will not be available for assembly 'System.Core'.
+Resolved assembly reference 'System.Core' to 'C:\Windows\Microsoft.NET\Framework64\v4.0.30319\..\v4.0.30319\System.Core.dll'. (Used framework directory.)
+AssemblyResolver: Assembly 'Orien.Tools' is referencing assembly 'System.Xml.Linq'.
+	AssemblyResolver: Attempting referencing assembly's directory.
+	AssemblyResolver: Did not find assembly in referencing assembly's directory.
+	AssemblyResolver: Attempting input directory.
+	AssemblyResolver: Did not find assembly in input directory.
+	AssemblyResolver: Attempting user-supplied directories.
+	AssemblyResolver: No user-supplied directories.
+	AssemblyResolver: Attempting framework directory.
+Can not find PDB file. Debug info will not be available for assembly 'System.Xml.Linq'.
+Resolved assembly reference 'System.Xml.Linq' to 'C:\Windows\Microsoft.NET\Framework64\v4.0.30319\..\v4.0.30319\System.Xml.Linq.dll'. (Used framework directory.)
+AssemblyResolver: Assembly 'Micra.Tools' is referencing assembly 'Autodesk.Max'.
+	AssemblyResolver: Attempting referencing assembly's directory.
+Can not find PDB file. Debug info will not be available for assembly 'Autodesk.Max'.
+Resolved assembly reference 'Autodesk.Max' to 'D:\ReneBaca\Aprog\Micra\Micra_Csharp\bin\Debug\Autodesk.Max.dll'. (Used referencing Module's directory.)
+Using assembly 'Orien.Tools' for assembly-level attributes for the target assembly.
+Merging assembly 'Orien.Tools' into target assembly.
+Merging assembly 'Orien.NetUi' into target assembly.
+Merging assembly 'Micra.Tools' into target assembly.
+Copying 1 Win32 Resources from assembly 'Orien.Tools' into target assembly.
+	There were no errors reported in the target assembly's metadata.
+ILMerge: Writing target assembly 'Micra.Star.dll'.
+AssemblyResolver: Assembly 'Micra.Tools' is referencing assembly 'ManagedServices'.
+	AssemblyResolver: Attempting referencing assembly's directory.
+Can not find PDB file. Debug info will not be available for assembly 'ManagedServices'.
+Resolved assembly reference 'ManagedServices' to 'D:\ReneBaca\Aprog\Micra\Micra_Csharp\bin\Debug\ManagedServices.dll'. (Used referencing Module's directory.)
+AssemblyResolver: Assembly 'ManagedServices' is referencing assembly 'PresentationCore'.
+	AssemblyResolver: Attempting referencing assembly's directory.
+	AssemblyResolver: Did not find assembly in referencing assembly's directory.
+	AssemblyResolver: Attempting input directory.
+	AssemblyResolver: Did not find assembly in input directory.
+	AssemblyResolver: Attempting user-supplied directories.
+	AssemblyResolver: No user-supplied directories.
+	AssemblyResolver: Attempting framework directory.
+	AssemblyResolver: Did not find assembly in framework directory.
+AssemblyResolver: Unable to resolve reference. (It still might be found, e.g., in the GAC.)
+AssemblyResolver: Assembly 'ManagedServices' is referencing assembly 'CSharpUtilities'.
+	AssemblyResolver: Attempting referencing assembly's directory.
+Can not find PDB file. Debug info will not be available for assembly 'CSharpUtilities'.
+Resolved assembly reference 'CSharpUtilities' to 'D:\ReneBaca\Aprog\Micra\Micra_Csharp\bin\Debug\CSharpUtilities.dll'. (Used referencing Module's directory.)
+AssemblyResolver: Assembly 'ManagedServices' is referencing assembly 'WindowsBase'.
+	AssemblyResolver: Attempting referencing assembly's directory.
+	AssemblyResolver: Did not find assembly in referencing assembly's directory.
+	AssemblyResolver: Attempting input directory.
+	AssemblyResolver: Did not find assembly in input directory.
+	AssemblyResolver: Attempting user-supplied directories.
+	AssemblyResolver: No user-supplied directories.
+	AssemblyResolver: Attempting framework directory.
+	AssemblyResolver: Did not find assembly in framework directory.
+AssemblyResolver: Unable to resolve reference. (It still might be found, e.g., in the GAC.)
+AssemblyResolver: Assembly 'ManagedServices' is referencing assembly 'PresentationFramework'.
+	AssemblyResolver: Attempting referencing assembly's directory.
+	AssemblyResolver: Did not find assembly in referencing assembly's directory.
+	AssemblyResolver: Attempting input directory.
+	AssemblyResolver: Did not find assembly in input directory.
+	AssemblyResolver: Attempting user-supplied directories.
+	AssemblyResolver: No user-supplied directories.
+	AssemblyResolver: Attempting framework directory.
+	AssemblyResolver: Did not find assembly in framework directory.
+AssemblyResolver: Unable to resolve reference. (It still might be found, e.g., in the GAC.)
+AssemblyResolver: Assembly 'PresentationFramework' is referencing assembly 'System.Xaml'.
+	AssemblyResolver: Attempting referencing assembly's directory.
+	AssemblyResolver: Did not find assembly in referencing assembly's directory.
+	AssemblyResolver: Attempting input directory.
+	AssemblyResolver: Did not find assembly in input directory.
+	AssemblyResolver: Attempting user-supplied directories.
+	AssemblyResolver: No user-supplied directories.
+	AssemblyResolver: Attempting framework directory.
+Can not find PDB file. Debug info will not be available for assembly 'System.Xaml'.
+Resolved assembly reference 'System.Xaml' to 'C:\Windows\Microsoft.NET\Framework64\v4.0.30319\..\v4.0.30319\System.Xaml.dll'. (Used framework directory.)
+Location for referenced module 'user32.dll' is ''
+Location for referenced module 'Gdi32.dll' is ''
+Location for referenced module 'user32' is ''
+Location for referenced assembly 'mscorlib' is 'C:\Windows\Microsoft.NET\Framework64\v4.0.30319\mscorlib.dll'
+	There were no errors reported in  mscorlib's metadata.
+Location for referenced assembly 'System.Core' is 'C:\Windows\Microsoft.NET\Framework64\v4.0.30319\System.Core.dll'
+	There were no errors reported in  System.Core's metadata.
+Location for referenced assembly 'System' is 'C:\Windows\Microsoft.NET\Framework64\v4.0.30319\system.dll'
+	There were no errors reported in  System's metadata.
+Location for referenced assembly 'System.Drawing' is 'C:\Windows\Microsoft.NET\Framework64\v4.0.30319\System.Drawing.dll'
+	There were no errors reported in  System.Drawing's metadata.
+Location for referenced assembly 'System.Windows.Forms' is 'C:\Windows\Microsoft.NET\Framework64\v4.0.30319\System.Windows.Forms.dll'
+	There were no errors reported in  System.Windows.Forms's metadata.
+Location for referenced assembly 'System.Xml.Linq' is 'C:\Windows\Microsoft.NET\Framework64\v4.0.30319\System.Xml.Linq.dll'
+	There were no errors reported in  System.Xml.Linq's metadata.
+Location for referenced assembly 'System.Xml' is 'C:\Windows\Microsoft.NET\Framework64\v4.0.30319\System.Xml.dll'
+	There were no errors reported in  System.Xml's metadata.
+Location for referenced assembly 'Autodesk.Max' is 'D:\ReneBaca\Aprog\Micra\Micra_Csharp\bin\Debug\Autodesk.Max.dll'
+	There were no errors reported in  Autodesk.Max's metadata.
+Location for referenced assembly 'ManagedServices' is 'D:\ReneBaca\Aprog\Micra\Micra_Csharp\bin\Debug\ManagedServices.dll'
+	There were no errors reported in  ManagedServices's metadata.
+ILMerge: Done.
+=============================================
+Timestamp (UTC): 5/18/2020 10:32:45 AM
+ILMerge version 3.0.0.0
+Copyright (C) Microsoft Corporation 2004-2006. All rights reserved.
+ILMerge /log:ILMerge_Log.txt /allowDup:* /ver:1.0.0.4 /out:Micra.Star.dll Orien.Tools.dll Orien.NetUi.dll Micra.Tools.dll 
+Set platform to 'v4', using directory 'C:\Windows\Microsoft.NET\Framework64\v4.0.30319\..\v4.0.30319' for mscorlib.dll
+Running on Microsoft (R) .NET Framework v4.0.30319
+mscorlib.dll version = 4.0.0.0
+The list of input assemblies is:
+	Orien.Tools.dll
+	Orien.NetUi.dll
+	Micra.Tools.dll
+Trying to read assembly from the file 'D:\ReneBaca\Aprog\Micra\Micra_Csharp\bin\Debug\Orien.Tools.dll'.
+	Successfully read in assembly.
+	There were no errors reported in Orien.Tools's metadata.
+Trying to read assembly from the file 'D:\ReneBaca\Aprog\Micra\Micra_Csharp\bin\Debug\Orien.NetUi.dll'.
+	Successfully read in assembly.
+	There were no errors reported in Orien.NetUi's metadata.
+Trying to read assembly from the file 'D:\ReneBaca\Aprog\Micra\Micra_Csharp\bin\Debug\Micra.Tools.dll'.
+	Successfully read in assembly.
+	There were no errors reported in Micra.Tools's metadata.
+Checking to see that all of the input assemblies have a compatible PeKind.
+	Orien.Tools.PeKind = ILonly
+	Orien.NetUi.PeKind = ILonly
+	Micra.Tools.PeKind = ILonly
+All input assemblies have a compatible PeKind value.
+AssemblyResolver: Assembly 'Orien.Tools' is referencing assembly 'System.Core'.
+	AssemblyResolver: Attempting referencing assembly's directory.
+	AssemblyResolver: Did not find assembly in referencing assembly's directory.
+	AssemblyResolver: Attempting input directory.
+	AssemblyResolver: Did not find assembly in input directory.
+	AssemblyResolver: Attempting user-supplied directories.
+	AssemblyResolver: No user-supplied directories.
+	AssemblyResolver: Attempting framework directory.
+Can not find PDB file. Debug info will not be available for assembly 'System.Core'.
+Resolved assembly reference 'System.Core' to 'C:\Windows\Microsoft.NET\Framework64\v4.0.30319\..\v4.0.30319\System.Core.dll'. (Used framework directory.)
+AssemblyResolver: Assembly 'Orien.Tools' is referencing assembly 'System.Xml.Linq'.
+	AssemblyResolver: Attempting referencing assembly's directory.
+	AssemblyResolver: Did not find assembly in referencing assembly's directory.
+	AssemblyResolver: Attempting input directory.
+	AssemblyResolver: Did not find assembly in input directory.
+	AssemblyResolver: Attempting user-supplied directories.
+	AssemblyResolver: No user-supplied directories.
+	AssemblyResolver: Attempting framework directory.
+Can not find PDB file. Debug info will not be available for assembly 'System.Xml.Linq'.
+Resolved assembly reference 'System.Xml.Linq' to 'C:\Windows\Microsoft.NET\Framework64\v4.0.30319\..\v4.0.30319\System.Xml.Linq.dll'. (Used framework directory.)
+AssemblyResolver: Assembly 'Micra.Tools' is referencing assembly 'Autodesk.Max'.
+	AssemblyResolver: Attempting referencing assembly's directory.
+Can not find PDB file. Debug info will not be available for assembly 'Autodesk.Max'.
+Resolved assembly reference 'Autodesk.Max' to 'D:\ReneBaca\Aprog\Micra\Micra_Csharp\bin\Debug\Autodesk.Max.dll'. (Used referencing Module's directory.)
+Using assembly 'Orien.Tools' for assembly-level attributes for the target assembly.
+Merging assembly 'Orien.Tools' into target assembly.
+Merging assembly 'Orien.NetUi' into target assembly.
+Merging assembly 'Micra.Tools' into target assembly.
+Copying 1 Win32 Resources from assembly 'Orien.Tools' into target assembly.
+	There were no errors reported in the target assembly's metadata.
+ILMerge: Writing target assembly 'Micra.Star.dll'.
+AssemblyResolver: Assembly 'Micra.Tools' is referencing assembly 'ManagedServices'.
+	AssemblyResolver: Attempting referencing assembly's directory.
+Can not find PDB file. Debug info will not be available for assembly 'ManagedServices'.
+Resolved assembly reference 'ManagedServices' to 'D:\ReneBaca\Aprog\Micra\Micra_Csharp\bin\Debug\ManagedServices.dll'. (Used referencing Module's directory.)
+AssemblyResolver: Assembly 'ManagedServices' is referencing assembly 'PresentationCore'.
+	AssemblyResolver: Attempting referencing assembly's directory.
+	AssemblyResolver: Did not find assembly in referencing assembly's directory.
+	AssemblyResolver: Attempting input directory.
+	AssemblyResolver: Did not find assembly in input directory.
+	AssemblyResolver: Attempting user-supplied directories.
+	AssemblyResolver: No user-supplied directories.
+	AssemblyResolver: Attempting framework directory.
+	AssemblyResolver: Did not find assembly in framework directory.
+AssemblyResolver: Unable to resolve reference. (It still might be found, e.g., in the GAC.)
+AssemblyResolver: Assembly 'ManagedServices' is referencing assembly 'CSharpUtilities'.
+	AssemblyResolver: Attempting referencing assembly's directory.
+Can not find PDB file. Debug info will not be available for assembly 'CSharpUtilities'.
+Resolved assembly reference 'CSharpUtilities' to 'D:\ReneBaca\Aprog\Micra\Micra_Csharp\bin\Debug\CSharpUtilities.dll'. (Used referencing Module's directory.)
+AssemblyResolver: Assembly 'ManagedServices' is referencing assembly 'WindowsBase'.
+	AssemblyResolver: Attempting referencing assembly's directory.
+	AssemblyResolver: Did not find assembly in referencing assembly's directory.
+	AssemblyResolver: Attempting input directory.
+	AssemblyResolver: Did not find assembly in input directory.
+	AssemblyResolver: Attempting user-supplied directories.
+	AssemblyResolver: No user-supplied directories.
+	AssemblyResolver: Attempting framework directory.
+	AssemblyResolver: Did not find assembly in framework directory.
+AssemblyResolver: Unable to resolve reference. (It still might be found, e.g., in the GAC.)
+AssemblyResolver: Assembly 'ManagedServices' is referencing assembly 'PresentationFramework'.
+	AssemblyResolver: Attempting referencing assembly's directory.
+	AssemblyResolver: Did not find assembly in referencing assembly's directory.
+	AssemblyResolver: Attempting input directory.
+	AssemblyResolver: Did not find assembly in input directory.
+	AssemblyResolver: Attempting user-supplied directories.
+	AssemblyResolver: No user-supplied directories.
+	AssemblyResolver: Attempting framework directory.
+	AssemblyResolver: Did not find assembly in framework directory.
+AssemblyResolver: Unable to resolve reference. (It still might be found, e.g., in the GAC.)
+AssemblyResolver: Assembly 'PresentationFramework' is referencing assembly 'System.Xaml'.
+	AssemblyResolver: Attempting referencing assembly's directory.
+	AssemblyResolver: Did not find assembly in referencing assembly's directory.
+	AssemblyResolver: Attempting input directory.
+	AssemblyResolver: Did not find assembly in input directory.
+	AssemblyResolver: Attempting user-supplied directories.
+	AssemblyResolver: No user-supplied directories.
+	AssemblyResolver: Attempting framework directory.
+Can not find PDB file. Debug info will not be available for assembly 'System.Xaml'.
+Resolved assembly reference 'System.Xaml' to 'C:\Windows\Microsoft.NET\Framework64\v4.0.30319\..\v4.0.30319\System.Xaml.dll'. (Used framework directory.)
+Location for referenced module 'user32.dll' is ''
+Location for referenced module 'Gdi32.dll' is ''
+Location for referenced module 'user32' is ''
+Location for referenced assembly 'mscorlib' is 'C:\Windows\Microsoft.NET\Framework64\v4.0.30319\mscorlib.dll'
+	There were no errors reported in  mscorlib's metadata.
+Location for referenced assembly 'System.Core' is 'C:\Windows\Microsoft.NET\Framework64\v4.0.30319\System.Core.dll'
+	There were no errors reported in  System.Core's metadata.
+Location for referenced assembly 'System' is 'C:\Windows\Microsoft.NET\Framework64\v4.0.30319\system.dll'
+	There were no errors reported in  System's metadata.
+Location for referenced assembly 'System.Drawing' is 'C:\Windows\Microsoft.NET\Framework64\v4.0.30319\System.Drawing.dll'
+	There were no errors reported in  System.Drawing's metadata.
+Location for referenced assembly 'System.Windows.Forms' is 'C:\Windows\Microsoft.NET\Framework64\v4.0.30319\System.Windows.Forms.dll'
+	There were no errors reported in  System.Windows.Forms's metadata.
+Location for referenced assembly 'System.Xml.Linq' is 'C:\Windows\Microsoft.NET\Framework64\v4.0.30319\System.Xml.Linq.dll'
+	There were no errors reported in  System.Xml.Linq's metadata.
+Location for referenced assembly 'System.Xml' is 'C:\Windows\Microsoft.NET\Framework64\v4.0.30319\System.Xml.dll'
+	There were no errors reported in  System.Xml's metadata.
+Location for referenced assembly 'Autodesk.Max' is 'D:\ReneBaca\Aprog\Micra\Micra_Csharp\bin\Debug\Autodesk.Max.dll'
+	There were no errors reported in  Autodesk.Max's metadata.
+Location for referenced assembly 'ManagedServices' is 'D:\ReneBaca\Aprog\Micra\Micra_Csharp\bin\Debug\ManagedServices.dll'
+	There were no errors reported in  ManagedServices's metadata.
+ILMerge: Done.
+=============================================
+Timestamp (UTC): 5/18/2020 10:48:15 AM
+ILMerge version 3.0.0.0
+Copyright (C) Microsoft Corporation 2004-2006. All rights reserved.
+ILMerge /log:ILMerge_Log.txt /allowDup:* /ver:1.0.0.4 /out:Micra.Star.dll Orien.Tools.dll Orien.NetUi.dll Micra.Tools.dll 
+Set platform to 'v4', using directory 'C:\Windows\Microsoft.NET\Framework64\v4.0.30319\..\v4.0.30319' for mscorlib.dll
+Running on Microsoft (R) .NET Framework v4.0.30319
+mscorlib.dll version = 4.0.0.0
+The list of input assemblies is:
+	Orien.Tools.dll
+	Orien.NetUi.dll
+	Micra.Tools.dll
+Trying to read assembly from the file 'D:\ReneBaca\Aprog\Micra\Micra_Csharp\bin\Debug\Orien.Tools.dll'.
+	Successfully read in assembly.
+	There were no errors reported in Orien.Tools's metadata.
+Trying to read assembly from the file 'D:\ReneBaca\Aprog\Micra\Micra_Csharp\bin\Debug\Orien.NetUi.dll'.
+	Successfully read in assembly.
+	There were no errors reported in Orien.NetUi's metadata.
+Trying to read assembly from the file 'D:\ReneBaca\Aprog\Micra\Micra_Csharp\bin\Debug\Micra.Tools.dll'.
+	Successfully read in assembly.
+	There were no errors reported in Micra.Tools's metadata.
+Checking to see that all of the input assemblies have a compatible PeKind.
+	Orien.Tools.PeKind = ILonly
+	Orien.NetUi.PeKind = ILonly
+	Micra.Tools.PeKind = ILonly
+All input assemblies have a compatible PeKind value.
+AssemblyResolver: Assembly 'Orien.Tools' is referencing assembly 'System.Core'.
+	AssemblyResolver: Attempting referencing assembly's directory.
+	AssemblyResolver: Did not find assembly in referencing assembly's directory.
+	AssemblyResolver: Attempting input directory.
+	AssemblyResolver: Did not find assembly in input directory.
+	AssemblyResolver: Attempting user-supplied directories.
+	AssemblyResolver: No user-supplied directories.
+	AssemblyResolver: Attempting framework directory.
+Can not find PDB file. Debug info will not be available for assembly 'System.Core'.
+Resolved assembly reference 'System.Core' to 'C:\Windows\Microsoft.NET\Framework64\v4.0.30319\..\v4.0.30319\System.Core.dll'. (Used framework directory.)
+AssemblyResolver: Assembly 'Orien.Tools' is referencing assembly 'System.Xml.Linq'.
+	AssemblyResolver: Attempting referencing assembly's directory.
+	AssemblyResolver: Did not find assembly in referencing assembly's directory.
+	AssemblyResolver: Attempting input directory.
+	AssemblyResolver: Did not find assembly in input directory.
+	AssemblyResolver: Attempting user-supplied directories.
+	AssemblyResolver: No user-supplied directories.
+	AssemblyResolver: Attempting framework directory.
+Can not find PDB file. Debug info will not be available for assembly 'System.Xml.Linq'.
+Resolved assembly reference 'System.Xml.Linq' to 'C:\Windows\Microsoft.NET\Framework64\v4.0.30319\..\v4.0.30319\System.Xml.Linq.dll'. (Used framework directory.)
+AssemblyResolver: Assembly 'Micra.Tools' is referencing assembly 'Autodesk.Max'.
+	AssemblyResolver: Attempting referencing assembly's directory.
+Can not find PDB file. Debug info will not be available for assembly 'Autodesk.Max'.
+Resolved assembly reference 'Autodesk.Max' to 'D:\ReneBaca\Aprog\Micra\Micra_Csharp\bin\Debug\Autodesk.Max.dll'. (Used referencing Module's directory.)
+Using assembly 'Orien.Tools' for assembly-level attributes for the target assembly.
+Merging assembly 'Orien.Tools' into target assembly.
+Merging assembly 'Orien.NetUi' into target assembly.
+Merging assembly 'Micra.Tools' into target assembly.
+Copying 1 Win32 Resources from assembly 'Orien.Tools' into target assembly.
+	There were no errors reported in the target assembly's metadata.
+ILMerge: Writing target assembly 'Micra.Star.dll'.
+AssemblyResolver: Assembly 'Micra.Tools' is referencing assembly 'ManagedServices'.
+	AssemblyResolver: Attempting referencing assembly's directory.
+Can not find PDB file. Debug info will not be available for assembly 'ManagedServices'.
+Resolved assembly reference 'ManagedServices' to 'D:\ReneBaca\Aprog\Micra\Micra_Csharp\bin\Debug\ManagedServices.dll'. (Used referencing Module's directory.)
+AssemblyResolver: Assembly 'ManagedServices' is referencing assembly 'PresentationCore'.
+	AssemblyResolver: Attempting referencing assembly's directory.
+	AssemblyResolver: Did not find assembly in referencing assembly's directory.
+	AssemblyResolver: Attempting input directory.
+	AssemblyResolver: Did not find assembly in input directory.
+	AssemblyResolver: Attempting user-supplied directories.
+	AssemblyResolver: No user-supplied directories.
+	AssemblyResolver: Attempting framework directory.
+	AssemblyResolver: Did not find assembly in framework directory.
+AssemblyResolver: Unable to resolve reference. (It still might be found, e.g., in the GAC.)
+AssemblyResolver: Assembly 'ManagedServices' is referencing assembly 'CSharpUtilities'.
+	AssemblyResolver: Attempting referencing assembly's directory.
+Can not find PDB file. Debug info will not be available for assembly 'CSharpUtilities'.
+Resolved assembly reference 'CSharpUtilities' to 'D:\ReneBaca\Aprog\Micra\Micra_Csharp\bin\Debug\CSharpUtilities.dll'. (Used referencing Module's directory.)
+AssemblyResolver: Assembly 'ManagedServices' is referencing assembly 'WindowsBase'.
+	AssemblyResolver: Attempting referencing assembly's directory.
+	AssemblyResolver: Did not find assembly in referencing assembly's directory.
+	AssemblyResolver: Attempting input directory.
+	AssemblyResolver: Did not find assembly in input directory.
+	AssemblyResolver: Attempting user-supplied directories.
+	AssemblyResolver: No user-supplied directories.
+	AssemblyResolver: Attempting framework directory.
+	AssemblyResolver: Did not find assembly in framework directory.
+AssemblyResolver: Unable to resolve reference. (It still might be found, e.g., in the GAC.)
+AssemblyResolver: Assembly 'ManagedServices' is referencing assembly 'PresentationFramework'.
+	AssemblyResolver: Attempting referencing assembly's directory.
+	AssemblyResolver: Did not find assembly in referencing assembly's directory.
+	AssemblyResolver: Attempting input directory.
+	AssemblyResolver: Did not find assembly in input directory.
+	AssemblyResolver: Attempting user-supplied directories.
+	AssemblyResolver: No user-supplied directories.
+	AssemblyResolver: Attempting framework directory.
+	AssemblyResolver: Did not find assembly in framework directory.
+AssemblyResolver: Unable to resolve reference. (It still might be found, e.g., in the GAC.)
+AssemblyResolver: Assembly 'PresentationFramework' is referencing assembly 'System.Xaml'.
+	AssemblyResolver: Attempting referencing assembly's directory.
+	AssemblyResolver: Did not find assembly in referencing assembly's directory.
+	AssemblyResolver: Attempting input directory.
+	AssemblyResolver: Did not find assembly in input directory.
+	AssemblyResolver: Attempting user-supplied directories.
+	AssemblyResolver: No user-supplied directories.
+	AssemblyResolver: Attempting framework directory.
+Can not find PDB file. Debug info will not be available for assembly 'System.Xaml'.
+Resolved assembly reference 'System.Xaml' to 'C:\Windows\Microsoft.NET\Framework64\v4.0.30319\..\v4.0.30319\System.Xaml.dll'. (Used framework directory.)
+Location for referenced module 'user32.dll' is ''
+Location for referenced module 'Gdi32.dll' is ''
+Location for referenced module 'user32' is ''
+Location for referenced assembly 'mscorlib' is 'C:\Windows\Microsoft.NET\Framework64\v4.0.30319\mscorlib.dll'
+	There were no errors reported in  mscorlib's metadata.
+Location for referenced assembly 'System.Core' is 'C:\Windows\Microsoft.NET\Framework64\v4.0.30319\System.Core.dll'
+	There were no errors reported in  System.Core's metadata.
+Location for referenced assembly 'System' is 'C:\Windows\Microsoft.NET\Framework64\v4.0.30319\system.dll'
+	There were no errors reported in  System's metadata.
+Location for referenced assembly 'System.Drawing' is 'C:\Windows\Microsoft.NET\Framework64\v4.0.30319\System.Drawing.dll'
+	There were no errors reported in  System.Drawing's metadata.
+Location for referenced assembly 'System.Windows.Forms' is 'C:\Windows\Microsoft.NET\Framework64\v4.0.30319\System.Windows.Forms.dll'
+	There were no errors reported in  System.Windows.Forms's metadata.
+Location for referenced assembly 'System.Xml.Linq' is 'C:\Windows\Microsoft.NET\Framework64\v4.0.30319\System.Xml.Linq.dll'
+	There were no errors reported in  System.Xml.Linq's metadata.
+Location for referenced assembly 'System.Xml' is 'C:\Windows\Microsoft.NET\Framework64\v4.0.30319\System.Xml.dll'
+	There were no errors reported in  System.Xml's metadata.
+Location for referenced assembly 'Autodesk.Max' is 'D:\ReneBaca\Aprog\Micra\Micra_Csharp\bin\Debug\Autodesk.Max.dll'
+	There were no errors reported in  Autodesk.Max's metadata.
+Location for referenced assembly 'ManagedServices' is 'D:\ReneBaca\Aprog\Micra\Micra_Csharp\bin\Debug\ManagedServices.dll'
+	There were no errors reported in  ManagedServices's metadata.
+ILMerge: Done.
+=============================================
+Timestamp (UTC): 5/18/2020 1:48:07 PM
+ILMerge version 3.0.0.0
+Copyright (C) Microsoft Corporation 2004-2006. All rights reserved.
+ILMerge /log:ILMerge_Log.txt /allowDup:* /ver:1.0.0.4 /out:Micra.Star.dll Orien.Tools.dll Orien.NetUi.dll Micra.Tools.dll 
+Set platform to 'v4', using directory 'C:\Windows\Microsoft.NET\Framework64\v4.0.30319\..\v4.0.30319' for mscorlib.dll
+Running on Microsoft (R) .NET Framework v4.0.30319
+mscorlib.dll version = 4.0.0.0
+The list of input assemblies is:
+	Orien.Tools.dll
+	Orien.NetUi.dll
+	Micra.Tools.dll
+Trying to read assembly from the file 'D:\ReneBaca\Aprog\Micra\Micra_Csharp\bin\Debug\Orien.Tools.dll'.
+	Successfully read in assembly.
+	There were no errors reported in Orien.Tools's metadata.
+Trying to read assembly from the file 'D:\ReneBaca\Aprog\Micra\Micra_Csharp\bin\Debug\Orien.NetUi.dll'.
+	Successfully read in assembly.
+	There were no errors reported in Orien.NetUi's metadata.
+Trying to read assembly from the file 'D:\ReneBaca\Aprog\Micra\Micra_Csharp\bin\Debug\Micra.Tools.dll'.
+	Successfully read in assembly.
+	There were no errors reported in Micra.Tools's metadata.
+Checking to see that all of the input assemblies have a compatible PeKind.
+	Orien.Tools.PeKind = ILonly
+	Orien.NetUi.PeKind = ILonly
+	Micra.Tools.PeKind = ILonly
+All input assemblies have a compatible PeKind value.
+AssemblyResolver: Assembly 'Orien.Tools' is referencing assembly 'System.Core'.
+	AssemblyResolver: Attempting referencing assembly's directory.
+	AssemblyResolver: Did not find assembly in referencing assembly's directory.
+	AssemblyResolver: Attempting input directory.
+	AssemblyResolver: Did not find assembly in input directory.
+	AssemblyResolver: Attempting user-supplied directories.
+	AssemblyResolver: No user-supplied directories.
+	AssemblyResolver: Attempting framework directory.
+Can not find PDB file. Debug info will not be available for assembly 'System.Core'.
+Resolved assembly reference 'System.Core' to 'C:\Windows\Microsoft.NET\Framework64\v4.0.30319\..\v4.0.30319\System.Core.dll'. (Used framework directory.)
+AssemblyResolver: Assembly 'Orien.Tools' is referencing assembly 'System.Xml.Linq'.
+	AssemblyResolver: Attempting referencing assembly's directory.
+	AssemblyResolver: Did not find assembly in referencing assembly's directory.
+	AssemblyResolver: Attempting input directory.
+	AssemblyResolver: Did not find assembly in input directory.
+	AssemblyResolver: Attempting user-supplied directories.
+	AssemblyResolver: No user-supplied directories.
+	AssemblyResolver: Attempting framework directory.
+Can not find PDB file. Debug info will not be available for assembly 'System.Xml.Linq'.
+Resolved assembly reference 'System.Xml.Linq' to 'C:\Windows\Microsoft.NET\Framework64\v4.0.30319\..\v4.0.30319\System.Xml.Linq.dll'. (Used framework directory.)
+AssemblyResolver: Assembly 'Micra.Tools' is referencing assembly 'Autodesk.Max'.
+	AssemblyResolver: Attempting referencing assembly's directory.
+Can not find PDB file. Debug info will not be available for assembly 'Autodesk.Max'.
+Resolved assembly reference 'Autodesk.Max' to 'D:\ReneBaca\Aprog\Micra\Micra_Csharp\bin\Debug\Autodesk.Max.dll'. (Used referencing Module's directory.)
+Using assembly 'Orien.Tools' for assembly-level attributes for the target assembly.
+Merging assembly 'Orien.Tools' into target assembly.
+Merging assembly 'Orien.NetUi' into target assembly.
+Merging assembly 'Micra.Tools' into target assembly.
+Copying 1 Win32 Resources from assembly 'Orien.Tools' into target assembly.
+	There were no errors reported in the target assembly's metadata.
+ILMerge: Writing target assembly 'Micra.Star.dll'.
+AssemblyResolver: Assembly 'Micra.Tools' is referencing assembly 'ManagedServices'.
+	AssemblyResolver: Attempting referencing assembly's directory.
+Can not find PDB file. Debug info will not be available for assembly 'ManagedServices'.
+Resolved assembly reference 'ManagedServices' to 'D:\ReneBaca\Aprog\Micra\Micra_Csharp\bin\Debug\ManagedServices.dll'. (Used referencing Module's directory.)
+AssemblyResolver: Assembly 'ManagedServices' is referencing assembly 'PresentationCore'.
+	AssemblyResolver: Attempting referencing assembly's directory.
+	AssemblyResolver: Did not find assembly in referencing assembly's directory.
+	AssemblyResolver: Attempting input directory.
+	AssemblyResolver: Did not find assembly in input directory.
+	AssemblyResolver: Attempting user-supplied directories.
+	AssemblyResolver: No user-supplied directories.
+	AssemblyResolver: Attempting framework directory.
+	AssemblyResolver: Did not find assembly in framework directory.
+AssemblyResolver: Unable to resolve reference. (It still might be found, e.g., in the GAC.)
+AssemblyResolver: Assembly 'ManagedServices' is referencing assembly 'CSharpUtilities'.
+	AssemblyResolver: Attempting referencing assembly's directory.
+Can not find PDB file. Debug info will not be available for assembly 'CSharpUtilities'.
+Resolved assembly reference 'CSharpUtilities' to 'D:\ReneBaca\Aprog\Micra\Micra_Csharp\bin\Debug\CSharpUtilities.dll'. (Used referencing Module's directory.)
+AssemblyResolver: Assembly 'ManagedServices' is referencing assembly 'WindowsBase'.
+	AssemblyResolver: Attempting referencing assembly's directory.
+	AssemblyResolver: Did not find assembly in referencing assembly's directory.
+	AssemblyResolver: Attempting input directory.
+	AssemblyResolver: Did not find assembly in input directory.
+	AssemblyResolver: Attempting user-supplied directories.
+	AssemblyResolver: No user-supplied directories.
+	AssemblyResolver: Attempting framework directory.
+	AssemblyResolver: Did not find assembly in framework directory.
+AssemblyResolver: Unable to resolve reference. (It still might be found, e.g., in the GAC.)
+AssemblyResolver: Assembly 'ManagedServices' is referencing assembly 'PresentationFramework'.
+	AssemblyResolver: Attempting referencing assembly's directory.
+	AssemblyResolver: Did not find assembly in referencing assembly's directory.
+	AssemblyResolver: Attempting input directory.
+	AssemblyResolver: Did not find assembly in input directory.
+	AssemblyResolver: Attempting user-supplied directories.
+	AssemblyResolver: No user-supplied directories.
+	AssemblyResolver: Attempting framework directory.
+	AssemblyResolver: Did not find assembly in framework directory.
+AssemblyResolver: Unable to resolve reference. (It still might be found, e.g., in the GAC.)
+AssemblyResolver: Assembly 'PresentationFramework' is referencing assembly 'System.Xaml'.
+	AssemblyResolver: Attempting referencing assembly's directory.
+	AssemblyResolver: Did not find assembly in referencing assembly's directory.
+	AssemblyResolver: Attempting input directory.
+	AssemblyResolver: Did not find assembly in input directory.
+	AssemblyResolver: Attempting user-supplied directories.
+	AssemblyResolver: No user-supplied directories.
+	AssemblyResolver: Attempting framework directory.
+Can not find PDB file. Debug info will not be available for assembly 'System.Xaml'.
+Resolved assembly reference 'System.Xaml' to 'C:\Windows\Microsoft.NET\Framework64\v4.0.30319\..\v4.0.30319\System.Xaml.dll'. (Used framework directory.)
+Location for referenced module 'user32.dll' is ''
+Location for referenced module 'Gdi32.dll' is ''
+Location for referenced module 'user32' is ''
+Location for referenced assembly 'mscorlib' is 'C:\Windows\Microsoft.NET\Framework64\v4.0.30319\mscorlib.dll'
+	There were no errors reported in  mscorlib's metadata.
+Location for referenced assembly 'System.Core' is 'C:\Windows\Microsoft.NET\Framework64\v4.0.30319\System.Core.dll'
+	There were no errors reported in  System.Core's metadata.
+Location for referenced assembly 'System' is 'C:\Windows\Microsoft.NET\Framework64\v4.0.30319\system.dll'
+	There were no errors reported in  System's metadata.
+Location for referenced assembly 'System.Drawing' is 'C:\Windows\Microsoft.NET\Framework64\v4.0.30319\System.Drawing.dll'
+	There were no errors reported in  System.Drawing's metadata.
+Location for referenced assembly 'System.Windows.Forms' is 'C:\Windows\Microsoft.NET\Framework64\v4.0.30319\System.Windows.Forms.dll'
+	There were no errors reported in  System.Windows.Forms's metadata.
+Location for referenced assembly 'System.Xml.Linq' is 'C:\Windows\Microsoft.NET\Framework64\v4.0.30319\System.Xml.Linq.dll'
+	There were no errors reported in  System.Xml.Linq's metadata.
+Location for referenced assembly 'System.Xml' is 'C:\Windows\Microsoft.NET\Framework64\v4.0.30319\System.Xml.dll'
+	There were no errors reported in  System.Xml's metadata.
+Location for referenced assembly 'Autodesk.Max' is 'D:\ReneBaca\Aprog\Micra\Micra_Csharp\bin\Debug\Autodesk.Max.dll'
+	There were no errors reported in  Autodesk.Max's metadata.
+Location for referenced assembly 'ManagedServices' is 'D:\ReneBaca\Aprog\Micra\Micra_Csharp\bin\Debug\ManagedServices.dll'
+	There were no errors reported in  ManagedServices's metadata.
+ILMerge: Done.
+=============================================
+Timestamp (UTC): 5/18/2020 2:01:31 PM
+ILMerge version 3.0.0.0
+Copyright (C) Microsoft Corporation 2004-2006. All rights reserved.
+ILMerge /log:ILMerge_Log.txt /allowDup:* /ver:1.0.0.4 /out:Micra.Star.dll Orien.Tools.dll Orien.NetUi.dll Micra.Tools.dll 
+Set platform to 'v4', using directory 'C:\Windows\Microsoft.NET\Framework64\v4.0.30319\..\v4.0.30319' for mscorlib.dll
+Running on Microsoft (R) .NET Framework v4.0.30319
+mscorlib.dll version = 4.0.0.0
+The list of input assemblies is:
+	Orien.Tools.dll
+	Orien.NetUi.dll
+	Micra.Tools.dll
+Trying to read assembly from the file 'D:\ReneBaca\Aprog\Micra\Micra_Csharp\bin\Debug\Orien.Tools.dll'.
+	Successfully read in assembly.
+	There were no errors reported in Orien.Tools's metadata.
+Trying to read assembly from the file 'D:\ReneBaca\Aprog\Micra\Micra_Csharp\bin\Debug\Orien.NetUi.dll'.
+	Successfully read in assembly.
+	There were no errors reported in Orien.NetUi's metadata.
+Trying to read assembly from the file 'D:\ReneBaca\Aprog\Micra\Micra_Csharp\bin\Debug\Micra.Tools.dll'.
+	Successfully read in assembly.
+	There were no errors reported in Micra.Tools's metadata.
+Checking to see that all of the input assemblies have a compatible PeKind.
+	Orien.Tools.PeKind = ILonly
+	Orien.NetUi.PeKind = ILonly
+	Micra.Tools.PeKind = ILonly
+All input assemblies have a compatible PeKind value.
+AssemblyResolver: Assembly 'Orien.Tools' is referencing assembly 'System.Core'.
+	AssemblyResolver: Attempting referencing assembly's directory.
+	AssemblyResolver: Did not find assembly in referencing assembly's directory.
+	AssemblyResolver: Attempting input directory.
+	AssemblyResolver: Did not find assembly in input directory.
+	AssemblyResolver: Attempting user-supplied directories.
+	AssemblyResolver: No user-supplied directories.
+	AssemblyResolver: Attempting framework directory.
+Can not find PDB file. Debug info will not be available for assembly 'System.Core'.
+Resolved assembly reference 'System.Core' to 'C:\Windows\Microsoft.NET\Framework64\v4.0.30319\..\v4.0.30319\System.Core.dll'. (Used framework directory.)
+AssemblyResolver: Assembly 'Orien.Tools' is referencing assembly 'System.Xml.Linq'.
+	AssemblyResolver: Attempting referencing assembly's directory.
+	AssemblyResolver: Did not find assembly in referencing assembly's directory.
+	AssemblyResolver: Attempting input directory.
+	AssemblyResolver: Did not find assembly in input directory.
+	AssemblyResolver: Attempting user-supplied directories.
+	AssemblyResolver: No user-supplied directories.
+	AssemblyResolver: Attempting framework directory.
+Can not find PDB file. Debug info will not be available for assembly 'System.Xml.Linq'.
+Resolved assembly reference 'System.Xml.Linq' to 'C:\Windows\Microsoft.NET\Framework64\v4.0.30319\..\v4.0.30319\System.Xml.Linq.dll'. (Used framework directory.)
+AssemblyResolver: Assembly 'Micra.Tools' is referencing assembly 'Autodesk.Max'.
+	AssemblyResolver: Attempting referencing assembly's directory.
+Can not find PDB file. Debug info will not be available for assembly 'Autodesk.Max'.
+Resolved assembly reference 'Autodesk.Max' to 'D:\ReneBaca\Aprog\Micra\Micra_Csharp\bin\Debug\Autodesk.Max.dll'. (Used referencing Module's directory.)
+Using assembly 'Orien.Tools' for assembly-level attributes for the target assembly.
+Merging assembly 'Orien.Tools' into target assembly.
+Merging assembly 'Orien.NetUi' into target assembly.
+Merging assembly 'Micra.Tools' into target assembly.
+Copying 1 Win32 Resources from assembly 'Orien.Tools' into target assembly.
+	There were no errors reported in the target assembly's metadata.
+ILMerge: Writing target assembly 'Micra.Star.dll'.
+AssemblyResolver: Assembly 'Micra.Tools' is referencing assembly 'ManagedServices'.
+	AssemblyResolver: Attempting referencing assembly's directory.
+Can not find PDB file. Debug info will not be available for assembly 'ManagedServices'.
+Resolved assembly reference 'ManagedServices' to 'D:\ReneBaca\Aprog\Micra\Micra_Csharp\bin\Debug\ManagedServices.dll'. (Used referencing Module's directory.)
+AssemblyResolver: Assembly 'ManagedServices' is referencing assembly 'PresentationCore'.
+	AssemblyResolver: Attempting referencing assembly's directory.
+	AssemblyResolver: Did not find assembly in referencing assembly's directory.
+	AssemblyResolver: Attempting input directory.
+	AssemblyResolver: Did not find assembly in input directory.
+	AssemblyResolver: Attempting user-supplied directories.
+	AssemblyResolver: No user-supplied directories.
+	AssemblyResolver: Attempting framework directory.
+	AssemblyResolver: Did not find assembly in framework directory.
+AssemblyResolver: Unable to resolve reference. (It still might be found, e.g., in the GAC.)
+AssemblyResolver: Assembly 'ManagedServices' is referencing assembly 'CSharpUtilities'.
+	AssemblyResolver: Attempting referencing assembly's directory.
+Can not find PDB file. Debug info will not be available for assembly 'CSharpUtilities'.
+Resolved assembly reference 'CSharpUtilities' to 'D:\ReneBaca\Aprog\Micra\Micra_Csharp\bin\Debug\CSharpUtilities.dll'. (Used referencing Module's directory.)
+AssemblyResolver: Assembly 'ManagedServices' is referencing assembly 'WindowsBase'.
+	AssemblyResolver: Attempting referencing assembly's directory.
+	AssemblyResolver: Did not find assembly in referencing assembly's directory.
+	AssemblyResolver: Attempting input directory.
+	AssemblyResolver: Did not find assembly in input directory.
+	AssemblyResolver: Attempting user-supplied directories.
+	AssemblyResolver: No user-supplied directories.
+	AssemblyResolver: Attempting framework directory.
+	AssemblyResolver: Did not find assembly in framework directory.
+AssemblyResolver: Unable to resolve reference. (It still might be found, e.g., in the GAC.)
+AssemblyResolver: Assembly 'ManagedServices' is referencing assembly 'PresentationFramework'.
+	AssemblyResolver: Attempting referencing assembly's directory.
+	AssemblyResolver: Did not find assembly in referencing assembly's directory.
+	AssemblyResolver: Attempting input directory.
+	AssemblyResolver: Did not find assembly in input directory.
+	AssemblyResolver: Attempting user-supplied directories.
+	AssemblyResolver: No user-supplied directories.
+	AssemblyResolver: Attempting framework directory.
+	AssemblyResolver: Did not find assembly in framework directory.
+AssemblyResolver: Unable to resolve reference. (It still might be found, e.g., in the GAC.)
+AssemblyResolver: Assembly 'PresentationFramework' is referencing assembly 'System.Xaml'.
+	AssemblyResolver: Attempting referencing assembly's directory.
+	AssemblyResolver: Did not find assembly in referencing assembly's directory.
+	AssemblyResolver: Attempting input directory.
+	AssemblyResolver: Did not find assembly in input directory.
+	AssemblyResolver: Attempting user-supplied directories.
+	AssemblyResolver: No user-supplied directories.
+	AssemblyResolver: Attempting framework directory.
+Can not find PDB file. Debug info will not be available for assembly 'System.Xaml'.
+Resolved assembly reference 'System.Xaml' to 'C:\Windows\Microsoft.NET\Framework64\v4.0.30319\..\v4.0.30319\System.Xaml.dll'. (Used framework directory.)
+Location for referenced module 'user32.dll' is ''
+Location for referenced module 'Gdi32.dll' is ''
+Location for referenced module 'user32' is ''
+Location for referenced assembly 'mscorlib' is 'C:\Windows\Microsoft.NET\Framework64\v4.0.30319\mscorlib.dll'
+	There were no errors reported in  mscorlib's metadata.
+Location for referenced assembly 'System.Core' is 'C:\Windows\Microsoft.NET\Framework64\v4.0.30319\System.Core.dll'
+	There were no errors reported in  System.Core's metadata.
+Location for referenced assembly 'System' is 'C:\Windows\Microsoft.NET\Framework64\v4.0.30319\system.dll'
+	There were no errors reported in  System's metadata.
+Location for referenced assembly 'System.Drawing' is 'C:\Windows\Microsoft.NET\Framework64\v4.0.30319\System.Drawing.dll'
+	There were no errors reported in  System.Drawing's metadata.
+Location for referenced assembly 'System.Windows.Forms' is 'C:\Windows\Microsoft.NET\Framework64\v4.0.30319\System.Windows.Forms.dll'
+	There were no errors reported in  System.Windows.Forms's metadata.
+Location for referenced assembly 'System.Xml.Linq' is 'C:\Windows\Microsoft.NET\Framework64\v4.0.30319\System.Xml.Linq.dll'
+	There were no errors reported in  System.Xml.Linq's metadata.
+Location for referenced assembly 'System.Xml' is 'C:\Windows\Microsoft.NET\Framework64\v4.0.30319\System.Xml.dll'
+	There were no errors reported in  System.Xml's metadata.
+Location for referenced assembly 'Autodesk.Max' is 'D:\ReneBaca\Aprog\Micra\Micra_Csharp\bin\Debug\Autodesk.Max.dll'
+	There were no errors reported in  Autodesk.Max's metadata.
+Location for referenced assembly 'ManagedServices' is 'D:\ReneBaca\Aprog\Micra\Micra_Csharp\bin\Debug\ManagedServices.dll'
+	There were no errors reported in  ManagedServices's metadata.
+ILMerge: Done.
+=============================================
+Timestamp (UTC): 5/18/2020 2:03:19 PM
+ILMerge version 3.0.0.0
+Copyright (C) Microsoft Corporation 2004-2006. All rights reserved.
+ILMerge /log:ILMerge_Log.txt /allowDup:* /ver:1.0.0.4 /out:Micra.Star.dll Orien.Tools.dll Orien.NetUi.dll Micra.Tools.dll 
+Set platform to 'v4', using directory 'C:\Windows\Microsoft.NET\Framework64\v4.0.30319\..\v4.0.30319' for mscorlib.dll
+Running on Microsoft (R) .NET Framework v4.0.30319
+mscorlib.dll version = 4.0.0.0
+The list of input assemblies is:
+	Orien.Tools.dll
+	Orien.NetUi.dll
+	Micra.Tools.dll
+Trying to read assembly from the file 'D:\ReneBaca\Aprog\Micra\Micra_Csharp\bin\Debug\Orien.Tools.dll'.
+	Successfully read in assembly.
+	There were no errors reported in Orien.Tools's metadata.
+Trying to read assembly from the file 'D:\ReneBaca\Aprog\Micra\Micra_Csharp\bin\Debug\Orien.NetUi.dll'.
+	Successfully read in assembly.
+	There were no errors reported in Orien.NetUi's metadata.
+Trying to read assembly from the file 'D:\ReneBaca\Aprog\Micra\Micra_Csharp\bin\Debug\Micra.Tools.dll'.
+	Successfully read in assembly.
+	There were no errors reported in Micra.Tools's metadata.
+Checking to see that all of the input assemblies have a compatible PeKind.
+	Orien.Tools.PeKind = ILonly
+	Orien.NetUi.PeKind = ILonly
+	Micra.Tools.PeKind = ILonly
+All input assemblies have a compatible PeKind value.
+AssemblyResolver: Assembly 'Orien.Tools' is referencing assembly 'System.Core'.
+	AssemblyResolver: Attempting referencing assembly's directory.
+	AssemblyResolver: Did not find assembly in referencing assembly's directory.
+	AssemblyResolver: Attempting input directory.
+	AssemblyResolver: Did not find assembly in input directory.
+	AssemblyResolver: Attempting user-supplied directories.
+	AssemblyResolver: No user-supplied directories.
+	AssemblyResolver: Attempting framework directory.
+Can not find PDB file. Debug info will not be available for assembly 'System.Core'.
+Resolved assembly reference 'System.Core' to 'C:\Windows\Microsoft.NET\Framework64\v4.0.30319\..\v4.0.30319\System.Core.dll'. (Used framework directory.)
+AssemblyResolver: Assembly 'Orien.Tools' is referencing assembly 'System.Xml.Linq'.
+	AssemblyResolver: Attempting referencing assembly's directory.
+	AssemblyResolver: Did not find assembly in referencing assembly's directory.
+	AssemblyResolver: Attempting input directory.
+	AssemblyResolver: Did not find assembly in input directory.
+	AssemblyResolver: Attempting user-supplied directories.
+	AssemblyResolver: No user-supplied directories.
+	AssemblyResolver: Attempting framework directory.
+Can not find PDB file. Debug info will not be available for assembly 'System.Xml.Linq'.
+Resolved assembly reference 'System.Xml.Linq' to 'C:\Windows\Microsoft.NET\Framework64\v4.0.30319\..\v4.0.30319\System.Xml.Linq.dll'. (Used framework directory.)
+AssemblyResolver: Assembly 'Micra.Tools' is referencing assembly 'Autodesk.Max'.
+	AssemblyResolver: Attempting referencing assembly's directory.
+Can not find PDB file. Debug info will not be available for assembly 'Autodesk.Max'.
+Resolved assembly reference 'Autodesk.Max' to 'D:\ReneBaca\Aprog\Micra\Micra_Csharp\bin\Debug\Autodesk.Max.dll'. (Used referencing Module's directory.)
+Using assembly 'Orien.Tools' for assembly-level attributes for the target assembly.
+Merging assembly 'Orien.Tools' into target assembly.
+Merging assembly 'Orien.NetUi' into target assembly.
+Merging assembly 'Micra.Tools' into target assembly.
+Copying 1 Win32 Resources from assembly 'Orien.Tools' into target assembly.
+	There were no errors reported in the target assembly's metadata.
+ILMerge: Writing target assembly 'Micra.Star.dll'.
+AssemblyResolver: Assembly 'Micra.Tools' is referencing assembly 'ManagedServices'.
+	AssemblyResolver: Attempting referencing assembly's directory.
+Can not find PDB file. Debug info will not be available for assembly 'ManagedServices'.
+Resolved assembly reference 'ManagedServices' to 'D:\ReneBaca\Aprog\Micra\Micra_Csharp\bin\Debug\ManagedServices.dll'. (Used referencing Module's directory.)
+AssemblyResolver: Assembly 'ManagedServices' is referencing assembly 'PresentationCore'.
+	AssemblyResolver: Attempting referencing assembly's directory.
+	AssemblyResolver: Did not find assembly in referencing assembly's directory.
+	AssemblyResolver: Attempting input directory.
+	AssemblyResolver: Did not find assembly in input directory.
+	AssemblyResolver: Attempting user-supplied directories.
+	AssemblyResolver: No user-supplied directories.
+	AssemblyResolver: Attempting framework directory.
+	AssemblyResolver: Did not find assembly in framework directory.
+AssemblyResolver: Unable to resolve reference. (It still might be found, e.g., in the GAC.)
+AssemblyResolver: Assembly 'ManagedServices' is referencing assembly 'CSharpUtilities'.
+	AssemblyResolver: Attempting referencing assembly's directory.
+Can not find PDB file. Debug info will not be available for assembly 'CSharpUtilities'.
+Resolved assembly reference 'CSharpUtilities' to 'D:\ReneBaca\Aprog\Micra\Micra_Csharp\bin\Debug\CSharpUtilities.dll'. (Used referencing Module's directory.)
+AssemblyResolver: Assembly 'ManagedServices' is referencing assembly 'WindowsBase'.
+	AssemblyResolver: Attempting referencing assembly's directory.
+	AssemblyResolver: Did not find assembly in referencing assembly's directory.
+	AssemblyResolver: Attempting input directory.
+	AssemblyResolver: Did not find assembly in input directory.
+	AssemblyResolver: Attempting user-supplied directories.
+	AssemblyResolver: No user-supplied directories.
+	AssemblyResolver: Attempting framework directory.
+	AssemblyResolver: Did not find assembly in framework directory.
+AssemblyResolver: Unable to resolve reference. (It still might be found, e.g., in the GAC.)
+AssemblyResolver: Assembly 'ManagedServices' is referencing assembly 'PresentationFramework'.
+	AssemblyResolver: Attempting referencing assembly's directory.
+	AssemblyResolver: Did not find assembly in referencing assembly's directory.
+	AssemblyResolver: Attempting input directory.
+	AssemblyResolver: Did not find assembly in input directory.
+	AssemblyResolver: Attempting user-supplied directories.
+	AssemblyResolver: No user-supplied directories.
+	AssemblyResolver: Attempting framework directory.
+	AssemblyResolver: Did not find assembly in framework directory.
+AssemblyResolver: Unable to resolve reference. (It still might be found, e.g., in the GAC.)
+AssemblyResolver: Assembly 'PresentationFramework' is referencing assembly 'System.Xaml'.
+	AssemblyResolver: Attempting referencing assembly's directory.
+	AssemblyResolver: Did not find assembly in referencing assembly's directory.
+	AssemblyResolver: Attempting input directory.
+	AssemblyResolver: Did not find assembly in input directory.
+	AssemblyResolver: Attempting user-supplied directories.
+	AssemblyResolver: No user-supplied directories.
+	AssemblyResolver: Attempting framework directory.
+Can not find PDB file. Debug info will not be available for assembly 'System.Xaml'.
+Resolved assembly reference 'System.Xaml' to 'C:\Windows\Microsoft.NET\Framework64\v4.0.30319\..\v4.0.30319\System.Xaml.dll'. (Used framework directory.)
+Location for referenced module 'user32.dll' is ''
+Location for referenced module 'Gdi32.dll' is ''
+Location for referenced module 'user32' is ''
+Location for referenced assembly 'mscorlib' is 'C:\Windows\Microsoft.NET\Framework64\v4.0.30319\mscorlib.dll'
+	There were no errors reported in  mscorlib's metadata.
+Location for referenced assembly 'System.Core' is 'C:\Windows\Microsoft.NET\Framework64\v4.0.30319\System.Core.dll'
+	There were no errors reported in  System.Core's metadata.
+Location for referenced assembly 'System' is 'C:\Windows\Microsoft.NET\Framework64\v4.0.30319\system.dll'
+	There were no errors reported in  System's metadata.
+Location for referenced assembly 'System.Drawing' is 'C:\Windows\Microsoft.NET\Framework64\v4.0.30319\System.Drawing.dll'
+	There were no errors reported in  System.Drawing's metadata.
+Location for referenced assembly 'System.Windows.Forms' is 'C:\Windows\Microsoft.NET\Framework64\v4.0.30319\System.Windows.Forms.dll'
+	There were no errors reported in  System.Windows.Forms's metadata.
+Location for referenced assembly 'System.Xml.Linq' is 'C:\Windows\Microsoft.NET\Framework64\v4.0.30319\System.Xml.Linq.dll'
+	There were no errors reported in  System.Xml.Linq's metadata.
+Location for referenced assembly 'System.Xml' is 'C:\Windows\Microsoft.NET\Framework64\v4.0.30319\System.Xml.dll'
+	There were no errors reported in  System.Xml's metadata.
+Location for referenced assembly 'Autodesk.Max' is 'D:\ReneBaca\Aprog\Micra\Micra_Csharp\bin\Debug\Autodesk.Max.dll'
+	There were no errors reported in  Autodesk.Max's metadata.
+Location for referenced assembly 'ManagedServices' is 'D:\ReneBaca\Aprog\Micra\Micra_Csharp\bin\Debug\ManagedServices.dll'
+	There were no errors reported in  ManagedServices's metadata.
+ILMerge: Done.
+=============================================
+Timestamp (UTC): 5/18/2020 2:17:37 PM
+ILMerge version 3.0.0.0
+Copyright (C) Microsoft Corporation 2004-2006. All rights reserved.
+ILMerge /log:ILMerge_Log.txt /allowDup:* /ver:1.0.0.4 /out:Micra.Star.dll Orien.Tools.dll Orien.NetUi.dll Micra.Tools.dll 
+Set platform to 'v4', using directory 'C:\Windows\Microsoft.NET\Framework64\v4.0.30319\..\v4.0.30319' for mscorlib.dll
+Running on Microsoft (R) .NET Framework v4.0.30319
+mscorlib.dll version = 4.0.0.0
+The list of input assemblies is:
+	Orien.Tools.dll
+	Orien.NetUi.dll
+	Micra.Tools.dll
+Trying to read assembly from the file 'D:\ReneBaca\Aprog\Micra\Micra_Csharp\bin\Debug\Orien.Tools.dll'.
+	Successfully read in assembly.
+	There were no errors reported in Orien.Tools's metadata.
+Trying to read assembly from the file 'D:\ReneBaca\Aprog\Micra\Micra_Csharp\bin\Debug\Orien.NetUi.dll'.
+	Successfully read in assembly.
+	There were no errors reported in Orien.NetUi's metadata.
+Trying to read assembly from the file 'D:\ReneBaca\Aprog\Micra\Micra_Csharp\bin\Debug\Micra.Tools.dll'.
+	Successfully read in assembly.
+	There were no errors reported in Micra.Tools's metadata.
+Checking to see that all of the input assemblies have a compatible PeKind.
+	Orien.Tools.PeKind = ILonly
+	Orien.NetUi.PeKind = ILonly
+	Micra.Tools.PeKind = ILonly
+All input assemblies have a compatible PeKind value.
+AssemblyResolver: Assembly 'Orien.Tools' is referencing assembly 'System.Core'.
+	AssemblyResolver: Attempting referencing assembly's directory.
+	AssemblyResolver: Did not find assembly in referencing assembly's directory.
+	AssemblyResolver: Attempting input directory.
+	AssemblyResolver: Did not find assembly in input directory.
+	AssemblyResolver: Attempting user-supplied directories.
+	AssemblyResolver: No user-supplied directories.
+	AssemblyResolver: Attempting framework directory.
+Can not find PDB file. Debug info will not be available for assembly 'System.Core'.
+Resolved assembly reference 'System.Core' to 'C:\Windows\Microsoft.NET\Framework64\v4.0.30319\..\v4.0.30319\System.Core.dll'. (Used framework directory.)
+AssemblyResolver: Assembly 'Orien.Tools' is referencing assembly 'System.Xml.Linq'.
+	AssemblyResolver: Attempting referencing assembly's directory.
+	AssemblyResolver: Did not find assembly in referencing assembly's directory.
+	AssemblyResolver: Attempting input directory.
+	AssemblyResolver: Did not find assembly in input directory.
+	AssemblyResolver: Attempting user-supplied directories.
+	AssemblyResolver: No user-supplied directories.
+	AssemblyResolver: Attempting framework directory.
+Can not find PDB file. Debug info will not be available for assembly 'System.Xml.Linq'.
+Resolved assembly reference 'System.Xml.Linq' to 'C:\Windows\Microsoft.NET\Framework64\v4.0.30319\..\v4.0.30319\System.Xml.Linq.dll'. (Used framework directory.)
+AssemblyResolver: Assembly 'Micra.Tools' is referencing assembly 'Autodesk.Max'.
+	AssemblyResolver: Attempting referencing assembly's directory.
+Can not find PDB file. Debug info will not be available for assembly 'Autodesk.Max'.
+Resolved assembly reference 'Autodesk.Max' to 'D:\ReneBaca\Aprog\Micra\Micra_Csharp\bin\Debug\Autodesk.Max.dll'. (Used referencing Module's directory.)
+Using assembly 'Orien.Tools' for assembly-level attributes for the target assembly.
+Merging assembly 'Orien.Tools' into target assembly.
+Merging assembly 'Orien.NetUi' into target assembly.
+Merging assembly 'Micra.Tools' into target assembly.
+Copying 1 Win32 Resources from assembly 'Orien.Tools' into target assembly.
+	There were no errors reported in the target assembly's metadata.
+ILMerge: Writing target assembly 'Micra.Star.dll'.
+AssemblyResolver: Assembly 'Micra.Tools' is referencing assembly 'ManagedServices'.
+	AssemblyResolver: Attempting referencing assembly's directory.
+Can not find PDB file. Debug info will not be available for assembly 'ManagedServices'.
+Resolved assembly reference 'ManagedServices' to 'D:\ReneBaca\Aprog\Micra\Micra_Csharp\bin\Debug\ManagedServices.dll'. (Used referencing Module's directory.)
+AssemblyResolver: Assembly 'ManagedServices' is referencing assembly 'PresentationCore'.
+	AssemblyResolver: Attempting referencing assembly's directory.
+	AssemblyResolver: Did not find assembly in referencing assembly's directory.
+	AssemblyResolver: Attempting input directory.
+	AssemblyResolver: Did not find assembly in input directory.
+	AssemblyResolver: Attempting user-supplied directories.
+	AssemblyResolver: No user-supplied directories.
+	AssemblyResolver: Attempting framework directory.
+	AssemblyResolver: Did not find assembly in framework directory.
+AssemblyResolver: Unable to resolve reference. (It still might be found, e.g., in the GAC.)
+AssemblyResolver: Assembly 'ManagedServices' is referencing assembly 'CSharpUtilities'.
+	AssemblyResolver: Attempting referencing assembly's directory.
+Can not find PDB file. Debug info will not be available for assembly 'CSharpUtilities'.
+Resolved assembly reference 'CSharpUtilities' to 'D:\ReneBaca\Aprog\Micra\Micra_Csharp\bin\Debug\CSharpUtilities.dll'. (Used referencing Module's directory.)
+AssemblyResolver: Assembly 'ManagedServices' is referencing assembly 'WindowsBase'.
+	AssemblyResolver: Attempting referencing assembly's directory.
+	AssemblyResolver: Did not find assembly in referencing assembly's directory.
+	AssemblyResolver: Attempting input directory.
+	AssemblyResolver: Did not find assembly in input directory.
+	AssemblyResolver: Attempting user-supplied directories.
+	AssemblyResolver: No user-supplied directories.
+	AssemblyResolver: Attempting framework directory.
+	AssemblyResolver: Did not find assembly in framework directory.
+AssemblyResolver: Unable to resolve reference. (It still might be found, e.g., in the GAC.)
+AssemblyResolver: Assembly 'ManagedServices' is referencing assembly 'PresentationFramework'.
+	AssemblyResolver: Attempting referencing assembly's directory.
+	AssemblyResolver: Did not find assembly in referencing assembly's directory.
+	AssemblyResolver: Attempting input directory.
+	AssemblyResolver: Did not find assembly in input directory.
+	AssemblyResolver: Attempting user-supplied directories.
+	AssemblyResolver: No user-supplied directories.
+	AssemblyResolver: Attempting framework directory.
+	AssemblyResolver: Did not find assembly in framework directory.
+AssemblyResolver: Unable to resolve reference. (It still might be found, e.g., in the GAC.)
+AssemblyResolver: Assembly 'PresentationFramework' is referencing assembly 'System.Xaml'.
+	AssemblyResolver: Attempting referencing assembly's directory.
+	AssemblyResolver: Did not find assembly in referencing assembly's directory.
+	AssemblyResolver: Attempting input directory.
+	AssemblyResolver: Did not find assembly in input directory.
+	AssemblyResolver: Attempting user-supplied directories.
+	AssemblyResolver: No user-supplied directories.
+	AssemblyResolver: Attempting framework directory.
+Can not find PDB file. Debug info will not be available for assembly 'System.Xaml'.
+Resolved assembly reference 'System.Xaml' to 'C:\Windows\Microsoft.NET\Framework64\v4.0.30319\..\v4.0.30319\System.Xaml.dll'. (Used framework directory.)
+Location for referenced module 'user32.dll' is ''
+Location for referenced module 'Gdi32.dll' is ''
+Location for referenced module 'user32' is ''
+Location for referenced assembly 'mscorlib' is 'C:\Windows\Microsoft.NET\Framework64\v4.0.30319\mscorlib.dll'
+	There were no errors reported in  mscorlib's metadata.
+Location for referenced assembly 'System.Core' is 'C:\Windows\Microsoft.NET\Framework64\v4.0.30319\System.Core.dll'
+	There were no errors reported in  System.Core's metadata.
+Location for referenced assembly 'System' is 'C:\Windows\Microsoft.NET\Framework64\v4.0.30319\system.dll'
+	There were no errors reported in  System's metadata.
+Location for referenced assembly 'System.Drawing' is 'C:\Windows\Microsoft.NET\Framework64\v4.0.30319\System.Drawing.dll'
+	There were no errors reported in  System.Drawing's metadata.
+Location for referenced assembly 'System.Windows.Forms' is 'C:\Windows\Microsoft.NET\Framework64\v4.0.30319\System.Windows.Forms.dll'
+	There were no errors reported in  System.Windows.Forms's metadata.
+Location for referenced assembly 'System.Xml.Linq' is 'C:\Windows\Microsoft.NET\Framework64\v4.0.30319\System.Xml.Linq.dll'
+	There were no errors reported in  System.Xml.Linq's metadata.
+Location for referenced assembly 'System.Xml' is 'C:\Windows\Microsoft.NET\Framework64\v4.0.30319\System.Xml.dll'
+	There were no errors reported in  System.Xml's metadata.
+Location for referenced assembly 'Autodesk.Max' is 'D:\ReneBaca\Aprog\Micra\Micra_Csharp\bin\Debug\Autodesk.Max.dll'
+	There were no errors reported in  Autodesk.Max's metadata.
+Location for referenced assembly 'ManagedServices' is 'D:\ReneBaca\Aprog\Micra\Micra_Csharp\bin\Debug\ManagedServices.dll'
+	There were no errors reported in  ManagedServices's metadata.
+ILMerge: Done.
+=============================================
+Timestamp (UTC): 5/18/2020 2:56:10 PM
+ILMerge version 3.0.0.0
+Copyright (C) Microsoft Corporation 2004-2006. All rights reserved.
+ILMerge /log:ILMerge_Log.txt /allowDup:* /ver:1.0.0.4 /out:Micra.Star.dll Orien.Tools.dll Orien.NetUi.dll Micra.Tools.dll 
+Set platform to 'v4', using directory 'C:\Windows\Microsoft.NET\Framework64\v4.0.30319\..\v4.0.30319' for mscorlib.dll
+Running on Microsoft (R) .NET Framework v4.0.30319
+mscorlib.dll version = 4.0.0.0
+The list of input assemblies is:
+	Orien.Tools.dll
+	Orien.NetUi.dll
+	Micra.Tools.dll
+Trying to read assembly from the file 'D:\ReneBaca\Aprog\Micra\Micra_Csharp\bin\Debug\Orien.Tools.dll'.
+	Successfully read in assembly.
+	There were no errors reported in Orien.Tools's metadata.
+Trying to read assembly from the file 'D:\ReneBaca\Aprog\Micra\Micra_Csharp\bin\Debug\Orien.NetUi.dll'.
+	Successfully read in assembly.
+	There were no errors reported in Orien.NetUi's metadata.
+Trying to read assembly from the file 'D:\ReneBaca\Aprog\Micra\Micra_Csharp\bin\Debug\Micra.Tools.dll'.
+	Successfully read in assembly.
+	There were no errors reported in Micra.Tools's metadata.
+Checking to see that all of the input assemblies have a compatible PeKind.
+	Orien.Tools.PeKind = ILonly
+	Orien.NetUi.PeKind = ILonly
+	Micra.Tools.PeKind = ILonly, Requires64bits, AMD
+All input assemblies have a compatible PeKind value.
+AssemblyResolver: Assembly 'Orien.Tools' is referencing assembly 'System.Core'.
+	AssemblyResolver: Attempting referencing assembly's directory.
+	AssemblyResolver: Did not find assembly in referencing assembly's directory.
+	AssemblyResolver: Attempting input directory.
+	AssemblyResolver: Did not find assembly in input directory.
+	AssemblyResolver: Attempting user-supplied directories.
+	AssemblyResolver: No user-supplied directories.
+	AssemblyResolver: Attempting framework directory.
+Can not find PDB file. Debug info will not be available for assembly 'System.Core'.
+Resolved assembly reference 'System.Core' to 'C:\Windows\Microsoft.NET\Framework64\v4.0.30319\..\v4.0.30319\System.Core.dll'. (Used framework directory.)
+AssemblyResolver: Assembly 'Orien.Tools' is referencing assembly 'System.Xml.Linq'.
+	AssemblyResolver: Attempting referencing assembly's directory.
+	AssemblyResolver: Did not find assembly in referencing assembly's directory.
+	AssemblyResolver: Attempting input directory.
+	AssemblyResolver: Did not find assembly in input directory.
+	AssemblyResolver: Attempting user-supplied directories.
+	AssemblyResolver: No user-supplied directories.
+	AssemblyResolver: Attempting framework directory.
+Can not find PDB file. Debug info will not be available for assembly 'System.Xml.Linq'.
+Resolved assembly reference 'System.Xml.Linq' to 'C:\Windows\Microsoft.NET\Framework64\v4.0.30319\..\v4.0.30319\System.Xml.Linq.dll'. (Used framework directory.)
+AssemblyResolver: Assembly 'Micra.Tools' is referencing assembly 'Autodesk.Max'.
+	AssemblyResolver: Attempting referencing assembly's directory.
+Can not find PDB file. Debug info will not be available for assembly 'Autodesk.Max'.
+Resolved assembly reference 'Autodesk.Max' to 'D:\ReneBaca\Aprog\Micra\Micra_Csharp\bin\Debug\Autodesk.Max.dll'. (Used referencing Module's directory.)
+Using assembly 'Orien.Tools' for assembly-level attributes for the target assembly.
+Merging assembly 'Orien.Tools' into target assembly.
+Merging assembly 'Orien.NetUi' into target assembly.
+Merging assembly 'Micra.Tools' into target assembly.
+Copying 1 Win32 Resources from assembly 'Orien.Tools' into target assembly.
+	There were no errors reported in the target assembly's metadata.
+ILMerge: Writing target assembly 'Micra.Star.dll'.
+AssemblyResolver: Assembly 'Micra.Tools' is referencing assembly 'ManagedServices'.
+	AssemblyResolver: Attempting referencing assembly's directory.
+Can not find PDB file. Debug info will not be available for assembly 'ManagedServices'.
+Resolved assembly reference 'ManagedServices' to 'D:\ReneBaca\Aprog\Micra\Micra_Csharp\bin\Debug\ManagedServices.dll'. (Used referencing Module's directory.)
+AssemblyResolver: Assembly 'ManagedServices' is referencing assembly 'PresentationCore'.
+	AssemblyResolver: Attempting referencing assembly's directory.
+	AssemblyResolver: Did not find assembly in referencing assembly's directory.
+	AssemblyResolver: Attempting input directory.
+	AssemblyResolver: Did not find assembly in input directory.
+	AssemblyResolver: Attempting user-supplied directories.
+	AssemblyResolver: No user-supplied directories.
+	AssemblyResolver: Attempting framework directory.
+	AssemblyResolver: Did not find assembly in framework directory.
+AssemblyResolver: Unable to resolve reference. (It still might be found, e.g., in the GAC.)
+AssemblyResolver: Assembly 'ManagedServices' is referencing assembly 'CSharpUtilities'.
+	AssemblyResolver: Attempting referencing assembly's directory.
+Can not find PDB file. Debug info will not be available for assembly 'CSharpUtilities'.
+Resolved assembly reference 'CSharpUtilities' to 'D:\ReneBaca\Aprog\Micra\Micra_Csharp\bin\Debug\CSharpUtilities.dll'. (Used referencing Module's directory.)
+AssemblyResolver: Assembly 'ManagedServices' is referencing assembly 'WindowsBase'.
+	AssemblyResolver: Attempting referencing assembly's directory.
+	AssemblyResolver: Did not find assembly in referencing assembly's directory.
+	AssemblyResolver: Attempting input directory.
+	AssemblyResolver: Did not find assembly in input directory.
+	AssemblyResolver: Attempting user-supplied directories.
+	AssemblyResolver: No user-supplied directories.
+	AssemblyResolver: Attempting framework directory.
+	AssemblyResolver: Did not find assembly in framework directory.
+AssemblyResolver: Unable to resolve reference. (It still might be found, e.g., in the GAC.)
+AssemblyResolver: Assembly 'ManagedServices' is referencing assembly 'PresentationFramework'.
+	AssemblyResolver: Attempting referencing assembly's directory.
+	AssemblyResolver: Did not find assembly in referencing assembly's directory.
+	AssemblyResolver: Attempting input directory.
+	AssemblyResolver: Did not find assembly in input directory.
+	AssemblyResolver: Attempting user-supplied directories.
+	AssemblyResolver: No user-supplied directories.
+	AssemblyResolver: Attempting framework directory.
+	AssemblyResolver: Did not find assembly in framework directory.
+AssemblyResolver: Unable to resolve reference. (It still might be found, e.g., in the GAC.)
+AssemblyResolver: Assembly 'PresentationFramework' is referencing assembly 'System.Xaml'.
+	AssemblyResolver: Attempting referencing assembly's directory.
+	AssemblyResolver: Did not find assembly in referencing assembly's directory.
+	AssemblyResolver: Attempting input directory.
+	AssemblyResolver: Did not find assembly in input directory.
+	AssemblyResolver: Attempting user-supplied directories.
+	AssemblyResolver: No user-supplied directories.
+	AssemblyResolver: Attempting framework directory.
+Can not find PDB file. Debug info will not be available for assembly 'System.Xaml'.
+Resolved assembly reference 'System.Xaml' to 'C:\Windows\Microsoft.NET\Framework64\v4.0.30319\..\v4.0.30319\System.Xaml.dll'. (Used framework directory.)
+Location for referenced module 'user32.dll' is ''
+Location for referenced module 'Gdi32.dll' is ''
+Location for referenced module 'user32' is ''
+Location for referenced assembly 'mscorlib' is 'C:\Windows\Microsoft.NET\Framework64\v4.0.30319\mscorlib.dll'
+	There were no errors reported in  mscorlib's metadata.
+Location for referenced assembly 'System.Core' is 'C:\Windows\Microsoft.NET\Framework64\v4.0.30319\System.Core.dll'
+	There were no errors reported in  System.Core's metadata.
+Location for referenced assembly 'System' is 'C:\Windows\Microsoft.NET\Framework64\v4.0.30319\system.dll'
+	There were no errors reported in  System's metadata.
+Location for referenced assembly 'System.Drawing' is 'C:\Windows\Microsoft.NET\Framework64\v4.0.30319\System.Drawing.dll'
+	There were no errors reported in  System.Drawing's metadata.
+Location for referenced assembly 'System.Windows.Forms' is 'C:\Windows\Microsoft.NET\Framework64\v4.0.30319\System.Windows.Forms.dll'
+	There were no errors reported in  System.Windows.Forms's metadata.
+Location for referenced assembly 'System.Xml.Linq' is 'C:\Windows\Microsoft.NET\Framework64\v4.0.30319\System.Xml.Linq.dll'
+	There were no errors reported in  System.Xml.Linq's metadata.
+Location for referenced assembly 'System.Xml' is 'C:\Windows\Microsoft.NET\Framework64\v4.0.30319\System.Xml.dll'
+	There were no errors reported in  System.Xml's metadata.
+Location for referenced assembly 'Autodesk.Max' is 'D:\ReneBaca\Aprog\Micra\Micra_Csharp\bin\Debug\Autodesk.Max.dll'
+	There were no errors reported in  Autodesk.Max's metadata.
+Location for referenced assembly 'ManagedServices' is 'D:\ReneBaca\Aprog\Micra\Micra_Csharp\bin\Debug\ManagedServices.dll'
+	There were no errors reported in  ManagedServices's metadata.
+ILMerge: Done.
+=============================================
+Timestamp (UTC): 5/18/2020 3:00:08 PM
+ILMerge version 3.0.0.0
+Copyright (C) Microsoft Corporation 2004-2006. All rights reserved.
+ILMerge /log:ILMerge_Log.txt /allowDup:* /ver:1.0.0.4 /out:Micra.Star.dll Orien.Tools.dll Orien.NetUi.dll Micra.Tools.dll 
+Set platform to 'v4', using directory 'C:\Windows\Microsoft.NET\Framework64\v4.0.30319\..\v4.0.30319' for mscorlib.dll
+Running on Microsoft (R) .NET Framework v4.0.30319
+mscorlib.dll version = 4.0.0.0
+The list of input assemblies is:
+	Orien.Tools.dll
+	Orien.NetUi.dll
+	Micra.Tools.dll
+Trying to read assembly from the file 'D:\ReneBaca\Aprog\Micra\Micra_Csharp\bin\Debug\Orien.Tools.dll'.
+	Successfully read in assembly.
+	There were no errors reported in Orien.Tools's metadata.
+Trying to read assembly from the file 'D:\ReneBaca\Aprog\Micra\Micra_Csharp\bin\Debug\Orien.NetUi.dll'.
+	Successfully read in assembly.
+	There were no errors reported in Orien.NetUi's metadata.
+Trying to read assembly from the file 'D:\ReneBaca\Aprog\Micra\Micra_Csharp\bin\Debug\Micra.Tools.dll'.
+	Successfully read in assembly.
+	There were no errors reported in Micra.Tools's metadata.
+Checking to see that all of the input assemblies have a compatible PeKind.
+	Orien.Tools.PeKind = ILonly
+	Orien.NetUi.PeKind = ILonly
+	Micra.Tools.PeKind = ILonly, Requires64bits, AMD
+All input assemblies have a compatible PeKind value.
+AssemblyResolver: Assembly 'Orien.Tools' is referencing assembly 'System.Core'.
+	AssemblyResolver: Attempting referencing assembly's directory.
+	AssemblyResolver: Did not find assembly in referencing assembly's directory.
+	AssemblyResolver: Attempting input directory.
+	AssemblyResolver: Did not find assembly in input directory.
+	AssemblyResolver: Attempting user-supplied directories.
+	AssemblyResolver: No user-supplied directories.
+	AssemblyResolver: Attempting framework directory.
+Can not find PDB file. Debug info will not be available for assembly 'System.Core'.
+Resolved assembly reference 'System.Core' to 'C:\Windows\Microsoft.NET\Framework64\v4.0.30319\..\v4.0.30319\System.Core.dll'. (Used framework directory.)
+AssemblyResolver: Assembly 'Orien.Tools' is referencing assembly 'System.Xml.Linq'.
+	AssemblyResolver: Attempting referencing assembly's directory.
+	AssemblyResolver: Did not find assembly in referencing assembly's directory.
+	AssemblyResolver: Attempting input directory.
+	AssemblyResolver: Did not find assembly in input directory.
+	AssemblyResolver: Attempting user-supplied directories.
+	AssemblyResolver: No user-supplied directories.
+	AssemblyResolver: Attempting framework directory.
+Can not find PDB file. Debug info will not be available for assembly 'System.Xml.Linq'.
+Resolved assembly reference 'System.Xml.Linq' to 'C:\Windows\Microsoft.NET\Framework64\v4.0.30319\..\v4.0.30319\System.Xml.Linq.dll'. (Used framework directory.)
+AssemblyResolver: Assembly 'Micra.Tools' is referencing assembly 'Autodesk.Max'.
+	AssemblyResolver: Attempting referencing assembly's directory.
+Can not find PDB file. Debug info will not be available for assembly 'Autodesk.Max'.
+Resolved assembly reference 'Autodesk.Max' to 'D:\ReneBaca\Aprog\Micra\Micra_Csharp\bin\Debug\Autodesk.Max.dll'. (Used referencing Module's directory.)
+Using assembly 'Orien.Tools' for assembly-level attributes for the target assembly.
+Merging assembly 'Orien.Tools' into target assembly.
+Merging assembly 'Orien.NetUi' into target assembly.
+Merging assembly 'Micra.Tools' into target assembly.
+Copying 1 Win32 Resources from assembly 'Orien.Tools' into target assembly.
+	There were no errors reported in the target assembly's metadata.
+ILMerge: Writing target assembly 'Micra.Star.dll'.
+AssemblyResolver: Assembly 'Micra.Tools' is referencing assembly 'ManagedServices'.
+	AssemblyResolver: Attempting referencing assembly's directory.
+Can not find PDB file. Debug info will not be available for assembly 'ManagedServices'.
+Resolved assembly reference 'ManagedServices' to 'D:\ReneBaca\Aprog\Micra\Micra_Csharp\bin\Debug\ManagedServices.dll'. (Used referencing Module's directory.)
+AssemblyResolver: Assembly 'ManagedServices' is referencing assembly 'PresentationCore'.
+	AssemblyResolver: Attempting referencing assembly's directory.
+	AssemblyResolver: Did not find assembly in referencing assembly's directory.
+	AssemblyResolver: Attempting input directory.
+	AssemblyResolver: Did not find assembly in input directory.
+	AssemblyResolver: Attempting user-supplied directories.
+	AssemblyResolver: No user-supplied directories.
+	AssemblyResolver: Attempting framework directory.
+	AssemblyResolver: Did not find assembly in framework directory.
+AssemblyResolver: Unable to resolve reference. (It still might be found, e.g., in the GAC.)
+AssemblyResolver: Assembly 'ManagedServices' is referencing assembly 'CSharpUtilities'.
+	AssemblyResolver: Attempting referencing assembly's directory.
+Can not find PDB file. Debug info will not be available for assembly 'CSharpUtilities'.
+Resolved assembly reference 'CSharpUtilities' to 'D:\ReneBaca\Aprog\Micra\Micra_Csharp\bin\Debug\CSharpUtilities.dll'. (Used referencing Module's directory.)
+AssemblyResolver: Assembly 'ManagedServices' is referencing assembly 'WindowsBase'.
+	AssemblyResolver: Attempting referencing assembly's directory.
+	AssemblyResolver: Did not find assembly in referencing assembly's directory.
+	AssemblyResolver: Attempting input directory.
+	AssemblyResolver: Did not find assembly in input directory.
+	AssemblyResolver: Attempting user-supplied directories.
+	AssemblyResolver: No user-supplied directories.
+	AssemblyResolver: Attempting framework directory.
+	AssemblyResolver: Did not find assembly in framework directory.
+AssemblyResolver: Unable to resolve reference. (It still might be found, e.g., in the GAC.)
+AssemblyResolver: Assembly 'ManagedServices' is referencing assembly 'PresentationFramework'.
+	AssemblyResolver: Attempting referencing assembly's directory.
+	AssemblyResolver: Did not find assembly in referencing assembly's directory.
+	AssemblyResolver: Attempting input directory.
+	AssemblyResolver: Did not find assembly in input directory.
+	AssemblyResolver: Attempting user-supplied directories.
+	AssemblyResolver: No user-supplied directories.
+	AssemblyResolver: Attempting framework directory.
+	AssemblyResolver: Did not find assembly in framework directory.
+AssemblyResolver: Unable to resolve reference. (It still might be found, e.g., in the GAC.)
+AssemblyResolver: Assembly 'PresentationFramework' is referencing assembly 'System.Xaml'.
+	AssemblyResolver: Attempting referencing assembly's directory.
+	AssemblyResolver: Did not find assembly in referencing assembly's directory.
+	AssemblyResolver: Attempting input directory.
+	AssemblyResolver: Did not find assembly in input directory.
+	AssemblyResolver: Attempting user-supplied directories.
+	AssemblyResolver: No user-supplied directories.
+	AssemblyResolver: Attempting framework directory.
+Can not find PDB file. Debug info will not be available for assembly 'System.Xaml'.
+Resolved assembly reference 'System.Xaml' to 'C:\Windows\Microsoft.NET\Framework64\v4.0.30319\..\v4.0.30319\System.Xaml.dll'. (Used framework directory.)
+Location for referenced module 'user32.dll' is ''
+Location for referenced module 'Gdi32.dll' is ''
+Location for referenced module 'user32' is ''
+Location for referenced assembly 'mscorlib' is 'C:\Windows\Microsoft.NET\Framework64\v4.0.30319\mscorlib.dll'
+	There were no errors reported in  mscorlib's metadata.
+Location for referenced assembly 'System.Core' is 'C:\Windows\Microsoft.NET\Framework64\v4.0.30319\System.Core.dll'
+	There were no errors reported in  System.Core's metadata.
+Location for referenced assembly 'System' is 'C:\Windows\Microsoft.NET\Framework64\v4.0.30319\system.dll'
+	There were no errors reported in  System's metadata.
+Location for referenced assembly 'System.Drawing' is 'C:\Windows\Microsoft.NET\Framework64\v4.0.30319\System.Drawing.dll'
+	There were no errors reported in  System.Drawing's metadata.
+Location for referenced assembly 'System.Windows.Forms' is 'C:\Windows\Microsoft.NET\Framework64\v4.0.30319\System.Windows.Forms.dll'
+	There were no errors reported in  System.Windows.Forms's metadata.
+Location for referenced assembly 'System.Xml.Linq' is 'C:\Windows\Microsoft.NET\Framework64\v4.0.30319\System.Xml.Linq.dll'
+	There were no errors reported in  System.Xml.Linq's metadata.
+Location for referenced assembly 'System.Xml' is 'C:\Windows\Microsoft.NET\Framework64\v4.0.30319\System.Xml.dll'
+	There were no errors reported in  System.Xml's metadata.
+Location for referenced assembly 'Autodesk.Max' is 'D:\ReneBaca\Aprog\Micra\Micra_Csharp\bin\Debug\Autodesk.Max.dll'
+	There were no errors reported in  Autodesk.Max's metadata.
+Location for referenced assembly 'ManagedServices' is 'D:\ReneBaca\Aprog\Micra\Micra_Csharp\bin\Debug\ManagedServices.dll'
+	There were no errors reported in  ManagedServices's metadata.
+ILMerge: Done.
+=============================================
+Timestamp (UTC): 5/18/2020 3:02:40 PM
+ILMerge version 3.0.0.0
+Copyright (C) Microsoft Corporation 2004-2006. All rights reserved.
+ILMerge /log:ILMerge_Log.txt /allowDup:* /ver:1.0.0.4 /out:Micra.Star.dll Orien.Tools.dll Orien.NetUi.dll Micra.Tools.dll 
+Set platform to 'v4', using directory 'C:\Windows\Microsoft.NET\Framework64\v4.0.30319\..\v4.0.30319' for mscorlib.dll
+Running on Microsoft (R) .NET Framework v4.0.30319
+mscorlib.dll version = 4.0.0.0
+The list of input assemblies is:
+	Orien.Tools.dll
+	Orien.NetUi.dll
+	Micra.Tools.dll
+Trying to read assembly from the file 'D:\ReneBaca\Aprog\Micra\Micra_Csharp\bin\Debug\Orien.Tools.dll'.
+	Successfully read in assembly.
+	There were no errors reported in Orien.Tools's metadata.
+Trying to read assembly from the file 'D:\ReneBaca\Aprog\Micra\Micra_Csharp\bin\Debug\Orien.NetUi.dll'.
+	Successfully read in assembly.
+	There were no errors reported in Orien.NetUi's metadata.
+Trying to read assembly from the file 'D:\ReneBaca\Aprog\Micra\Micra_Csharp\bin\Debug\Micra.Tools.dll'.
+	Successfully read in assembly.
+	There were no errors reported in Micra.Tools's metadata.
+Checking to see that all of the input assemblies have a compatible PeKind.
+	Orien.Tools.PeKind = ILonly
+	Orien.NetUi.PeKind = ILonly
+	Micra.Tools.PeKind = ILonly, Requires64bits, AMD
+All input assemblies have a compatible PeKind value.
+AssemblyResolver: Assembly 'Orien.Tools' is referencing assembly 'System.Core'.
+	AssemblyResolver: Attempting referencing assembly's directory.
+	AssemblyResolver: Did not find assembly in referencing assembly's directory.
+	AssemblyResolver: Attempting input directory.
+	AssemblyResolver: Did not find assembly in input directory.
+	AssemblyResolver: Attempting user-supplied directories.
+	AssemblyResolver: No user-supplied directories.
+	AssemblyResolver: Attempting framework directory.
+Can not find PDB file. Debug info will not be available for assembly 'System.Core'.
+Resolved assembly reference 'System.Core' to 'C:\Windows\Microsoft.NET\Framework64\v4.0.30319\..\v4.0.30319\System.Core.dll'. (Used framework directory.)
+AssemblyResolver: Assembly 'Orien.Tools' is referencing assembly 'System.Xml.Linq'.
+	AssemblyResolver: Attempting referencing assembly's directory.
+	AssemblyResolver: Did not find assembly in referencing assembly's directory.
+	AssemblyResolver: Attempting input directory.
+	AssemblyResolver: Did not find assembly in input directory.
+	AssemblyResolver: Attempting user-supplied directories.
+	AssemblyResolver: No user-supplied directories.
+	AssemblyResolver: Attempting framework directory.
+Can not find PDB file. Debug info will not be available for assembly 'System.Xml.Linq'.
+Resolved assembly reference 'System.Xml.Linq' to 'C:\Windows\Microsoft.NET\Framework64\v4.0.30319\..\v4.0.30319\System.Xml.Linq.dll'. (Used framework directory.)
+AssemblyResolver: Assembly 'Micra.Tools' is referencing assembly 'Autodesk.Max'.
+	AssemblyResolver: Attempting referencing assembly's directory.
+Can not find PDB file. Debug info will not be available for assembly 'Autodesk.Max'.
+Resolved assembly reference 'Autodesk.Max' to 'D:\ReneBaca\Aprog\Micra\Micra_Csharp\bin\Debug\Autodesk.Max.dll'. (Used referencing Module's directory.)
+Using assembly 'Orien.Tools' for assembly-level attributes for the target assembly.
+Merging assembly 'Orien.Tools' into target assembly.
+Merging assembly 'Orien.NetUi' into target assembly.
+Merging assembly 'Micra.Tools' into target assembly.
+Copying 1 Win32 Resources from assembly 'Orien.Tools' into target assembly.
+	There were no errors reported in the target assembly's metadata.
+ILMerge: Writing target assembly 'Micra.Star.dll'.
+AssemblyResolver: Assembly 'Micra.Tools' is referencing assembly 'ManagedServices'.
+	AssemblyResolver: Attempting referencing assembly's directory.
+Can not find PDB file. Debug info will not be available for assembly 'ManagedServices'.
+Resolved assembly reference 'ManagedServices' to 'D:\ReneBaca\Aprog\Micra\Micra_Csharp\bin\Debug\ManagedServices.dll'. (Used referencing Module's directory.)
+AssemblyResolver: Assembly 'ManagedServices' is referencing assembly 'PresentationCore'.
+	AssemblyResolver: Attempting referencing assembly's directory.
+	AssemblyResolver: Did not find assembly in referencing assembly's directory.
+	AssemblyResolver: Attempting input directory.
+	AssemblyResolver: Did not find assembly in input directory.
+	AssemblyResolver: Attempting user-supplied directories.
+	AssemblyResolver: No user-supplied directories.
+	AssemblyResolver: Attempting framework directory.
+	AssemblyResolver: Did not find assembly in framework directory.
+AssemblyResolver: Unable to resolve reference. (It still might be found, e.g., in the GAC.)
+AssemblyResolver: Assembly 'ManagedServices' is referencing assembly 'CSharpUtilities'.
+	AssemblyResolver: Attempting referencing assembly's directory.
+Can not find PDB file. Debug info will not be available for assembly 'CSharpUtilities'.
+Resolved assembly reference 'CSharpUtilities' to 'D:\ReneBaca\Aprog\Micra\Micra_Csharp\bin\Debug\CSharpUtilities.dll'. (Used referencing Module's directory.)
+AssemblyResolver: Assembly 'ManagedServices' is referencing assembly 'WindowsBase'.
+	AssemblyResolver: Attempting referencing assembly's directory.
+	AssemblyResolver: Did not find assembly in referencing assembly's directory.
+	AssemblyResolver: Attempting input directory.
+	AssemblyResolver: Did not find assembly in input directory.
+	AssemblyResolver: Attempting user-supplied directories.
+	AssemblyResolver: No user-supplied directories.
+	AssemblyResolver: Attempting framework directory.
+	AssemblyResolver: Did not find assembly in framework directory.
+AssemblyResolver: Unable to resolve reference. (It still might be found, e.g., in the GAC.)
+AssemblyResolver: Assembly 'ManagedServices' is referencing assembly 'PresentationFramework'.
+	AssemblyResolver: Attempting referencing assembly's directory.
+	AssemblyResolver: Did not find assembly in referencing assembly's directory.
+	AssemblyResolver: Attempting input directory.
+	AssemblyResolver: Did not find assembly in input directory.
+	AssemblyResolver: Attempting user-supplied directories.
+	AssemblyResolver: No user-supplied directories.
+	AssemblyResolver: Attempting framework directory.
+	AssemblyResolver: Did not find assembly in framework directory.
+AssemblyResolver: Unable to resolve reference. (It still might be found, e.g., in the GAC.)
+AssemblyResolver: Assembly 'PresentationFramework' is referencing assembly 'System.Xaml'.
+	AssemblyResolver: Attempting referencing assembly's directory.
+	AssemblyResolver: Did not find assembly in referencing assembly's directory.
+	AssemblyResolver: Attempting input directory.
+	AssemblyResolver: Did not find assembly in input directory.
+	AssemblyResolver: Attempting user-supplied directories.
+	AssemblyResolver: No user-supplied directories.
+	AssemblyResolver: Attempting framework directory.
+Can not find PDB file. Debug info will not be available for assembly 'System.Xaml'.
+Resolved assembly reference 'System.Xaml' to 'C:\Windows\Microsoft.NET\Framework64\v4.0.30319\..\v4.0.30319\System.Xaml.dll'. (Used framework directory.)
+Location for referenced module 'user32.dll' is ''
+Location for referenced module 'Gdi32.dll' is ''
+Location for referenced module 'user32' is ''
+Location for referenced assembly 'mscorlib' is 'C:\Windows\Microsoft.NET\Framework64\v4.0.30319\mscorlib.dll'
+	There were no errors reported in  mscorlib's metadata.
+Location for referenced assembly 'System.Core' is 'C:\Windows\Microsoft.NET\Framework64\v4.0.30319\System.Core.dll'
+	There were no errors reported in  System.Core's metadata.
+Location for referenced assembly 'System' is 'C:\Windows\Microsoft.NET\Framework64\v4.0.30319\system.dll'
+	There were no errors reported in  System's metadata.
+Location for referenced assembly 'System.Drawing' is 'C:\Windows\Microsoft.NET\Framework64\v4.0.30319\System.Drawing.dll'
+	There were no errors reported in  System.Drawing's metadata.
+Location for referenced assembly 'System.Windows.Forms' is 'C:\Windows\Microsoft.NET\Framework64\v4.0.30319\System.Windows.Forms.dll'
+	There were no errors reported in  System.Windows.Forms's metadata.
+Location for referenced assembly 'System.Xml.Linq' is 'C:\Windows\Microsoft.NET\Framework64\v4.0.30319\System.Xml.Linq.dll'
+	There were no errors reported in  System.Xml.Linq's metadata.
+Location for referenced assembly 'System.Xml' is 'C:\Windows\Microsoft.NET\Framework64\v4.0.30319\System.Xml.dll'
+	There were no errors reported in  System.Xml's metadata.
+Location for referenced assembly 'Autodesk.Max' is 'D:\ReneBaca\Aprog\Micra\Micra_Csharp\bin\Debug\Autodesk.Max.dll'
+	There were no errors reported in  Autodesk.Max's metadata.
+Location for referenced assembly 'ManagedServices' is 'D:\ReneBaca\Aprog\Micra\Micra_Csharp\bin\Debug\ManagedServices.dll'
+	There were no errors reported in  ManagedServices's metadata.
+ILMerge: Done.
+=============================================
+Timestamp (UTC): 5/18/2020 3:09:06 PM
+ILMerge version 3.0.0.0
+Copyright (C) Microsoft Corporation 2004-2006. All rights reserved.
+ILMerge /log:ILMerge_Log.txt /allowDup:* /ver:1.0.0.4 /out:Micra.Star.dll Orien.Tools.dll Orien.NetUi.dll Micra.Tools.dll 
+Set platform to 'v4', using directory 'C:\Windows\Microsoft.NET\Framework64\v4.0.30319\..\v4.0.30319' for mscorlib.dll
+Running on Microsoft (R) .NET Framework v4.0.30319
+mscorlib.dll version = 4.0.0.0
+The list of input assemblies is:
+	Orien.Tools.dll
+	Orien.NetUi.dll
+	Micra.Tools.dll
+Trying to read assembly from the file 'D:\ReneBaca\Aprog\Micra\Micra_Csharp\bin\Debug\Orien.Tools.dll'.
+	Successfully read in assembly.
+	There were no errors reported in Orien.Tools's metadata.
+Trying to read assembly from the file 'D:\ReneBaca\Aprog\Micra\Micra_Csharp\bin\Debug\Orien.NetUi.dll'.
+	Successfully read in assembly.
+	There were no errors reported in Orien.NetUi's metadata.
+Trying to read assembly from the file 'D:\ReneBaca\Aprog\Micra\Micra_Csharp\bin\Debug\Micra.Tools.dll'.
+	Successfully read in assembly.
+	There were no errors reported in Micra.Tools's metadata.
+Checking to see that all of the input assemblies have a compatible PeKind.
+	Orien.Tools.PeKind = ILonly
+	Orien.NetUi.PeKind = ILonly
+	Micra.Tools.PeKind = ILonly
+All input assemblies have a compatible PeKind value.
+AssemblyResolver: Assembly 'Orien.Tools' is referencing assembly 'System.Core'.
+	AssemblyResolver: Attempting referencing assembly's directory.
+	AssemblyResolver: Did not find assembly in referencing assembly's directory.
+	AssemblyResolver: Attempting input directory.
+	AssemblyResolver: Did not find assembly in input directory.
+	AssemblyResolver: Attempting user-supplied directories.
+	AssemblyResolver: No user-supplied directories.
+	AssemblyResolver: Attempting framework directory.
+Can not find PDB file. Debug info will not be available for assembly 'System.Core'.
+Resolved assembly reference 'System.Core' to 'C:\Windows\Microsoft.NET\Framework64\v4.0.30319\..\v4.0.30319\System.Core.dll'. (Used framework directory.)
+AssemblyResolver: Assembly 'Orien.Tools' is referencing assembly 'System.Xml.Linq'.
+	AssemblyResolver: Attempting referencing assembly's directory.
+	AssemblyResolver: Did not find assembly in referencing assembly's directory.
+	AssemblyResolver: Attempting input directory.
+	AssemblyResolver: Did not find assembly in input directory.
+	AssemblyResolver: Attempting user-supplied directories.
+	AssemblyResolver: No user-supplied directories.
+	AssemblyResolver: Attempting framework directory.
+Can not find PDB file. Debug info will not be available for assembly 'System.Xml.Linq'.
+Resolved assembly reference 'System.Xml.Linq' to 'C:\Windows\Microsoft.NET\Framework64\v4.0.30319\..\v4.0.30319\System.Xml.Linq.dll'. (Used framework directory.)
+AssemblyResolver: Assembly 'Micra.Tools' is referencing assembly 'Autodesk.Max'.
+	AssemblyResolver: Attempting referencing assembly's directory.
+Can not find PDB file. Debug info will not be available for assembly 'Autodesk.Max'.
+Resolved assembly reference 'Autodesk.Max' to 'D:\ReneBaca\Aprog\Micra\Micra_Csharp\bin\Debug\Autodesk.Max.dll'. (Used referencing Module's directory.)
+Using assembly 'Orien.Tools' for assembly-level attributes for the target assembly.
+Merging assembly 'Orien.Tools' into target assembly.
+Merging assembly 'Orien.NetUi' into target assembly.
+Merging assembly 'Micra.Tools' into target assembly.
+Copying 1 Win32 Resources from assembly 'Orien.Tools' into target assembly.
+	There were no errors reported in the target assembly's metadata.
+ILMerge: Writing target assembly 'Micra.Star.dll'.
+AssemblyResolver: Assembly 'Micra.Tools' is referencing assembly 'ManagedServices'.
+	AssemblyResolver: Attempting referencing assembly's directory.
+Can not find PDB file. Debug info will not be available for assembly 'ManagedServices'.
+Resolved assembly reference 'ManagedServices' to 'D:\ReneBaca\Aprog\Micra\Micra_Csharp\bin\Debug\ManagedServices.dll'. (Used referencing Module's directory.)
+AssemblyResolver: Assembly 'ManagedServices' is referencing assembly 'PresentationCore'.
+	AssemblyResolver: Attempting referencing assembly's directory.
+	AssemblyResolver: Did not find assembly in referencing assembly's directory.
+	AssemblyResolver: Attempting input directory.
+	AssemblyResolver: Did not find assembly in input directory.
+	AssemblyResolver: Attempting user-supplied directories.
+	AssemblyResolver: No user-supplied directories.
+	AssemblyResolver: Attempting framework directory.
+	AssemblyResolver: Did not find assembly in framework directory.
+AssemblyResolver: Unable to resolve reference. (It still might be found, e.g., in the GAC.)
+AssemblyResolver: Assembly 'ManagedServices' is referencing assembly 'CSharpUtilities'.
+	AssemblyResolver: Attempting referencing assembly's directory.
+Can not find PDB file. Debug info will not be available for assembly 'CSharpUtilities'.
+Resolved assembly reference 'CSharpUtilities' to 'D:\ReneBaca\Aprog\Micra\Micra_Csharp\bin\Debug\CSharpUtilities.dll'. (Used referencing Module's directory.)
+AssemblyResolver: Assembly 'ManagedServices' is referencing assembly 'WindowsBase'.
+	AssemblyResolver: Attempting referencing assembly's directory.
+	AssemblyResolver: Did not find assembly in referencing assembly's directory.
+	AssemblyResolver: Attempting input directory.
+	AssemblyResolver: Did not find assembly in input directory.
+	AssemblyResolver: Attempting user-supplied directories.
+	AssemblyResolver: No user-supplied directories.
+	AssemblyResolver: Attempting framework directory.
+	AssemblyResolver: Did not find assembly in framework directory.
+AssemblyResolver: Unable to resolve reference. (It still might be found, e.g., in the GAC.)
+AssemblyResolver: Assembly 'ManagedServices' is referencing assembly 'PresentationFramework'.
+	AssemblyResolver: Attempting referencing assembly's directory.
+	AssemblyResolver: Did not find assembly in referencing assembly's directory.
+	AssemblyResolver: Attempting input directory.
+	AssemblyResolver: Did not find assembly in input directory.
+	AssemblyResolver: Attempting user-supplied directories.
+	AssemblyResolver: No user-supplied directories.
+	AssemblyResolver: Attempting framework directory.
+	AssemblyResolver: Did not find assembly in framework directory.
+AssemblyResolver: Unable to resolve reference. (It still might be found, e.g., in the GAC.)
+AssemblyResolver: Assembly 'PresentationFramework' is referencing assembly 'System.Xaml'.
+	AssemblyResolver: Attempting referencing assembly's directory.
+	AssemblyResolver: Did not find assembly in referencing assembly's directory.
+	AssemblyResolver: Attempting input directory.
+	AssemblyResolver: Did not find assembly in input directory.
+	AssemblyResolver: Attempting user-supplied directories.
+	AssemblyResolver: No user-supplied directories.
+	AssemblyResolver: Attempting framework directory.
+Can not find PDB file. Debug info will not be available for assembly 'System.Xaml'.
+Resolved assembly reference 'System.Xaml' to 'C:\Windows\Microsoft.NET\Framework64\v4.0.30319\..\v4.0.30319\System.Xaml.dll'. (Used framework directory.)
+Location for referenced module 'user32.dll' is ''
+Location for referenced module 'Gdi32.dll' is ''
+Location for referenced module 'user32' is ''
+Location for referenced assembly 'mscorlib' is 'C:\Windows\Microsoft.NET\Framework64\v4.0.30319\mscorlib.dll'
+	There were no errors reported in  mscorlib's metadata.
+Location for referenced assembly 'System.Core' is 'C:\Windows\Microsoft.NET\Framework64\v4.0.30319\System.Core.dll'
+	There were no errors reported in  System.Core's metadata.
+Location for referenced assembly 'System' is 'C:\Windows\Microsoft.NET\Framework64\v4.0.30319\system.dll'
+	There were no errors reported in  System's metadata.
+Location for referenced assembly 'System.Drawing' is 'C:\Windows\Microsoft.NET\Framework64\v4.0.30319\System.Drawing.dll'
+	There were no errors reported in  System.Drawing's metadata.
+Location for referenced assembly 'System.Windows.Forms' is 'C:\Windows\Microsoft.NET\Framework64\v4.0.30319\System.Windows.Forms.dll'
+	There were no errors reported in  System.Windows.Forms's metadata.
+Location for referenced assembly 'System.Xml.Linq' is 'C:\Windows\Microsoft.NET\Framework64\v4.0.30319\System.Xml.Linq.dll'
+	There were no errors reported in  System.Xml.Linq's metadata.
+Location for referenced assembly 'System.Xml' is 'C:\Windows\Microsoft.NET\Framework64\v4.0.30319\System.Xml.dll'
+	There were no errors reported in  System.Xml's metadata.
+Location for referenced assembly 'Autodesk.Max' is 'D:\ReneBaca\Aprog\Micra\Micra_Csharp\bin\Debug\Autodesk.Max.dll'
+	There were no errors reported in  Autodesk.Max's metadata.
+Location for referenced assembly 'ManagedServices' is 'D:\ReneBaca\Aprog\Micra\Micra_Csharp\bin\Debug\ManagedServices.dll'
+	There were no errors reported in  ManagedServices's metadata.
+ILMerge: Done.
+=============================================
+Timestamp (UTC): 5/18/2020 5:57:11 PM
+ILMerge version 3.0.0.0
+Copyright (C) Microsoft Corporation 2004-2006. All rights reserved.
+ILMerge /log:ILMerge_Log.txt /allowDup:* /ver:1.0.0.4 /out:Micra.Star.dll Orien.Tools.dll Orien.NetUi.dll Micra.Tools.dll 
+Set platform to 'v4', using directory 'C:\Windows\Microsoft.NET\Framework64\v4.0.30319\..\v4.0.30319' for mscorlib.dll
+Running on Microsoft (R) .NET Framework v4.0.30319
+mscorlib.dll version = 4.0.0.0
+The list of input assemblies is:
+	Orien.Tools.dll
+	Orien.NetUi.dll
+	Micra.Tools.dll
+Trying to read assembly from the file 'D:\ReneBaca\Aprog\Micra\Micra_Csharp\bin\Debug\Orien.Tools.dll'.
+	Successfully read in assembly.
+	There were no errors reported in Orien.Tools's metadata.
+Trying to read assembly from the file 'D:\ReneBaca\Aprog\Micra\Micra_Csharp\bin\Debug\Orien.NetUi.dll'.
+	Successfully read in assembly.
+	There were no errors reported in Orien.NetUi's metadata.
+Trying to read assembly from the file 'D:\ReneBaca\Aprog\Micra\Micra_Csharp\bin\Debug\Micra.Tools.dll'.
+	Successfully read in assembly.
+	There were no errors reported in Micra.Tools's metadata.
+Checking to see that all of the input assemblies have a compatible PeKind.
+	Orien.Tools.PeKind = ILonly
+	Orien.NetUi.PeKind = ILonly
+	Micra.Tools.PeKind = ILonly
+All input assemblies have a compatible PeKind value.
+AssemblyResolver: Assembly 'Orien.Tools' is referencing assembly 'System.Core'.
+	AssemblyResolver: Attempting referencing assembly's directory.
+	AssemblyResolver: Did not find assembly in referencing assembly's directory.
+	AssemblyResolver: Attempting input directory.
+	AssemblyResolver: Did not find assembly in input directory.
+	AssemblyResolver: Attempting user-supplied directories.
+	AssemblyResolver: No user-supplied directories.
+	AssemblyResolver: Attempting framework directory.
+Can not find PDB file. Debug info will not be available for assembly 'System.Core'.
+Resolved assembly reference 'System.Core' to 'C:\Windows\Microsoft.NET\Framework64\v4.0.30319\..\v4.0.30319\System.Core.dll'. (Used framework directory.)
+AssemblyResolver: Assembly 'Orien.Tools' is referencing assembly 'System.Xml.Linq'.
+	AssemblyResolver: Attempting referencing assembly's directory.
+	AssemblyResolver: Did not find assembly in referencing assembly's directory.
+	AssemblyResolver: Attempting input directory.
+	AssemblyResolver: Did not find assembly in input directory.
+	AssemblyResolver: Attempting user-supplied directories.
+	AssemblyResolver: No user-supplied directories.
+	AssemblyResolver: Attempting framework directory.
+Can not find PDB file. Debug info will not be available for assembly 'System.Xml.Linq'.
+Resolved assembly reference 'System.Xml.Linq' to 'C:\Windows\Microsoft.NET\Framework64\v4.0.30319\..\v4.0.30319\System.Xml.Linq.dll'. (Used framework directory.)
+AssemblyResolver: Assembly 'Micra.Tools' is referencing assembly 'Autodesk.Max'.
+	AssemblyResolver: Attempting referencing assembly's directory.
+Can not find PDB file. Debug info will not be available for assembly 'Autodesk.Max'.
+Resolved assembly reference 'Autodesk.Max' to 'D:\ReneBaca\Aprog\Micra\Micra_Csharp\bin\Debug\Autodesk.Max.dll'. (Used referencing Module's directory.)
+Using assembly 'Orien.Tools' for assembly-level attributes for the target assembly.
+Merging assembly 'Orien.Tools' into target assembly.
+Merging assembly 'Orien.NetUi' into target assembly.
+Merging assembly 'Micra.Tools' into target assembly.
+Copying 1 Win32 Resources from assembly 'Orien.Tools' into target assembly.
+	There were no errors reported in the target assembly's metadata.
+ILMerge: Writing target assembly 'Micra.Star.dll'.
+AssemblyResolver: Assembly 'Micra.Tools' is referencing assembly 'ManagedServices'.
+	AssemblyResolver: Attempting referencing assembly's directory.
+Can not find PDB file. Debug info will not be available for assembly 'ManagedServices'.
+Resolved assembly reference 'ManagedServices' to 'D:\ReneBaca\Aprog\Micra\Micra_Csharp\bin\Debug\ManagedServices.dll'. (Used referencing Module's directory.)
+AssemblyResolver: Assembly 'ManagedServices' is referencing assembly 'PresentationCore'.
+	AssemblyResolver: Attempting referencing assembly's directory.
+	AssemblyResolver: Did not find assembly in referencing assembly's directory.
+	AssemblyResolver: Attempting input directory.
+	AssemblyResolver: Did not find assembly in input directory.
+	AssemblyResolver: Attempting user-supplied directories.
+	AssemblyResolver: No user-supplied directories.
+	AssemblyResolver: Attempting framework directory.
+	AssemblyResolver: Did not find assembly in framework directory.
+AssemblyResolver: Unable to resolve reference. (It still might be found, e.g., in the GAC.)
+AssemblyResolver: Assembly 'ManagedServices' is referencing assembly 'CSharpUtilities'.
+	AssemblyResolver: Attempting referencing assembly's directory.
+Can not find PDB file. Debug info will not be available for assembly 'CSharpUtilities'.
+Resolved assembly reference 'CSharpUtilities' to 'D:\ReneBaca\Aprog\Micra\Micra_Csharp\bin\Debug\CSharpUtilities.dll'. (Used referencing Module's directory.)
+AssemblyResolver: Assembly 'ManagedServices' is referencing assembly 'WindowsBase'.
+	AssemblyResolver: Attempting referencing assembly's directory.
+	AssemblyResolver: Did not find assembly in referencing assembly's directory.
+	AssemblyResolver: Attempting input directory.
+	AssemblyResolver: Did not find assembly in input directory.
+	AssemblyResolver: Attempting user-supplied directories.
+	AssemblyResolver: No user-supplied directories.
+	AssemblyResolver: Attempting framework directory.
+	AssemblyResolver: Did not find assembly in framework directory.
+AssemblyResolver: Unable to resolve reference. (It still might be found, e.g., in the GAC.)
+AssemblyResolver: Assembly 'ManagedServices' is referencing assembly 'PresentationFramework'.
+	AssemblyResolver: Attempting referencing assembly's directory.
+	AssemblyResolver: Did not find assembly in referencing assembly's directory.
+	AssemblyResolver: Attempting input directory.
+	AssemblyResolver: Did not find assembly in input directory.
+	AssemblyResolver: Attempting user-supplied directories.
+	AssemblyResolver: No user-supplied directories.
+	AssemblyResolver: Attempting framework directory.
+	AssemblyResolver: Did not find assembly in framework directory.
+AssemblyResolver: Unable to resolve reference. (It still might be found, e.g., in the GAC.)
+AssemblyResolver: Assembly 'PresentationFramework' is referencing assembly 'System.Xaml'.
+	AssemblyResolver: Attempting referencing assembly's directory.
+	AssemblyResolver: Did not find assembly in referencing assembly's directory.
+	AssemblyResolver: Attempting input directory.
+	AssemblyResolver: Did not find assembly in input directory.
+	AssemblyResolver: Attempting user-supplied directories.
+	AssemblyResolver: No user-supplied directories.
+	AssemblyResolver: Attempting framework directory.
+Can not find PDB file. Debug info will not be available for assembly 'System.Xaml'.
+Resolved assembly reference 'System.Xaml' to 'C:\Windows\Microsoft.NET\Framework64\v4.0.30319\..\v4.0.30319\System.Xaml.dll'. (Used framework directory.)
+Location for referenced module 'user32.dll' is ''
+Location for referenced module 'Gdi32.dll' is ''
+Location for referenced module 'user32' is ''
+Location for referenced assembly 'mscorlib' is 'C:\Windows\Microsoft.NET\Framework64\v4.0.30319\mscorlib.dll'
+	There were no errors reported in  mscorlib's metadata.
+Location for referenced assembly 'System.Core' is 'C:\Windows\Microsoft.NET\Framework64\v4.0.30319\System.Core.dll'
+	There were no errors reported in  System.Core's metadata.
+Location for referenced assembly 'System' is 'C:\Windows\Microsoft.NET\Framework64\v4.0.30319\system.dll'
+	There were no errors reported in  System's metadata.
+Location for referenced assembly 'System.Drawing' is 'C:\Windows\Microsoft.NET\Framework64\v4.0.30319\System.Drawing.dll'
+	There were no errors reported in  System.Drawing's metadata.
+Location for referenced assembly 'System.Windows.Forms' is 'C:\Windows\Microsoft.NET\Framework64\v4.0.30319\System.Windows.Forms.dll'
+	There were no errors reported in  System.Windows.Forms's metadata.
+Location for referenced assembly 'System.Xml.Linq' is 'C:\Windows\Microsoft.NET\Framework64\v4.0.30319\System.Xml.Linq.dll'
+	There were no errors reported in  System.Xml.Linq's metadata.
+Location for referenced assembly 'System.Xml' is 'C:\Windows\Microsoft.NET\Framework64\v4.0.30319\System.Xml.dll'
+	There were no errors reported in  System.Xml's metadata.
+Location for referenced assembly 'Autodesk.Max' is 'D:\ReneBaca\Aprog\Micra\Micra_Csharp\bin\Debug\Autodesk.Max.dll'
+	There were no errors reported in  Autodesk.Max's metadata.
+Location for referenced assembly 'ManagedServices' is 'D:\ReneBaca\Aprog\Micra\Micra_Csharp\bin\Debug\ManagedServices.dll'
+	There were no errors reported in  ManagedServices's metadata.
+ILMerge: Done.

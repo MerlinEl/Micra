@@ -22,8 +22,16 @@ namespace Micra.Tools {
         /// Print Message in to Listener
         /// </summary>
         /// <param name="strMsg"></param>
-        public static void LogLi(string strMsg) {
+        public static void LogLi(string strMsg, params object[] args) {
+            if ( args.Length > 0 ) strMsg = String.Format(strMsg, args);
             Listener.WriteLine(strMsg);
+        }
+
+        public static void SetAccelerators(bool state) {
+            if ( state )
+                ManagedServices.AppSDK.EnableAccelerators(); // for lostfocus
+            else
+                ManagedServices.AppSDK.DisableAccelerators(); // for gotfocus
         }
 
         public static string FbxExport(string filePath) {

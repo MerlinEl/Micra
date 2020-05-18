@@ -1206,6 +1206,12 @@ struct MICRA_POLY
 		
 	),*/
 	
+	fn flipNormalsOnFsel obj = (
+	
+		if classOf obj != Editable_Poly do return false
+		obj.flipNormals 1
+	),
+	
 	fn fuseEdges obj wipe:false = (
 	
 		if classOf obj != Editable_Poly do return false;

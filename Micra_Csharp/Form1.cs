@@ -52,5 +52,10 @@ namespace MicraTools.Launcher {
             Form geoop = new MxGeometryOptimizer();
             geoop.Show();
         }
+
+        private void button4_Click(object sender, System.EventArgs e) {
+            Form ctm = new CtoMaxTest();
+            ctm.Show();
+        }
     }
 }

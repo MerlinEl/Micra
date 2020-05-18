@@ -268,6 +268,45 @@ Global mcCSharp = mcStructMan.instanceStructure MICRA_CSHARP_STRUCTURE "mcCSharp
 Global McGetCs = mcCSharp.getClassInstance "Micra.Tools.MxGet" forceLoad:true --one force is enough for reload
 Global McSetCs = mcCSharp.getClassInstance "Micra.Tools.MxSet"
 
+
+
+
+--http://www.klaasnienhuis.nl/2015/12/referenced-dlls-without-locking-in-3dsmax/
+--https://forums.cgsociety.org/t/sdk-c-iterating-on-a-dll-using-visual-studio-unload-reload-assemblies/1605686
+--http://home.avvanta.com/~loganb/code.htm
+
+--https://docs.microsoft.com/cs-cz/dotnet/api/system.appdomain.unload?view=netcore-3.1
+--https://www.codeproject.com/Articles/18729/Loading-and-Unloading-an-Assembly-at-Runtime
+
+/*
+AppDomain appDomain = null; 
+try
+{ 
+    string path = @"C:myAssembly.dll"; 
+    byte[] buffer = File.ReadAllBytes( path ); 
+ 
+    appDomain = AppDomain.CreateDomain( "Test" ); 
+    Assembly assm = appDomain.Load( buffer ); 
+ 
+    Type[] types = assm.GetTypes(); 
+    foreach (Type type in types) 
+    { 
+        Console.WriteLine( type.FullName ); 
+    } 
+} 
+catch (Exception ex) 
+{ 
+    Console.WriteLine( ex.Message ); 
+} 
+finally
+{ 
+    if (appDomain != null) 
+        AppDomain.Unload( appDomain ); 
+}
+*/
+
+
+
 /*
 if params.count == 0 then ( --object instance
 	format "mcCSharp > compile > As Instance\n"
