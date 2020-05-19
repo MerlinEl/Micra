@@ -33,13 +33,18 @@
             this.button6 = new System.Windows.Forms.Button();
             this.TbxAssemblyPath = new System.Windows.Forms.TextBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.button7 = new System.Windows.Forms.Button();
-            this.button8 = new System.Windows.Forms.Button();
-            this.button9 = new System.Windows.Forms.Button();
             this.button10 = new System.Windows.Forms.Button();
+            this.button9 = new System.Windows.Forms.Button();
+            this.button8 = new System.Windows.Forms.Button();
+            this.button7 = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.button11 = new System.Windows.Forms.Button();
+            this.button12 = new System.Windows.Forms.Button();
+            this.button13 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
+            this.groupBox3.SuspendLayout();
             this.SuspendLayout();
             // 
             // button1
@@ -151,34 +156,15 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Reload DLL";
             // 
-            // label1
+            // button10
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(7, 25);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(54, 13);
-            this.label1.TabIndex = 9;
-            this.label1.Text = "DLL path:";
-            // 
-            // button7
-            // 
-            this.button7.Location = new System.Drawing.Point(6, 77);
-            this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(118, 23);
-            this.button7.TabIndex = 10;
-            this.button7.Text = "Unload Domain";
-            this.button7.UseVisualStyleBackColor = true;
-            this.button7.Click += new System.EventHandler(this.button7_Click);
-            // 
-            // button8
-            // 
-            this.button8.Location = new System.Drawing.Point(130, 48);
-            this.button8.Name = "button8";
-            this.button8.Size = new System.Drawing.Size(118, 23);
-            this.button8.TabIndex = 11;
-            this.button8.Text = "Test Method";
-            this.button8.UseVisualStyleBackColor = true;
-            this.button8.Click += new System.EventHandler(this.button8_Click);
+            this.button10.Location = new System.Drawing.Point(522, 19);
+            this.button10.Name = "button10";
+            this.button10.Size = new System.Drawing.Size(68, 23);
+            this.button10.TabIndex = 13;
+            this.button10.Text = "Load Dll";
+            this.button10.UseVisualStyleBackColor = true;
+            this.button10.Click += new System.EventHandler(this.button10_Click);
             // 
             // button9
             // 
@@ -190,21 +176,83 @@
             this.button9.UseVisualStyleBackColor = true;
             this.button9.Click += new System.EventHandler(this.button9_Click);
             // 
-            // button10
+            // button8
             // 
-            this.button10.Location = new System.Drawing.Point(522, 19);
-            this.button10.Name = "button10";
-            this.button10.Size = new System.Drawing.Size(68, 23);
-            this.button10.TabIndex = 13;
-            this.button10.Text = "Load Dll";
-            this.button10.UseVisualStyleBackColor = true;
-            this.button10.Click += new System.EventHandler(this.button10_Click);
+            this.button8.Location = new System.Drawing.Point(130, 48);
+            this.button8.Name = "button8";
+            this.button8.Size = new System.Drawing.Size(118, 23);
+            this.button8.TabIndex = 11;
+            this.button8.Text = "Test Method";
+            this.button8.UseVisualStyleBackColor = true;
+            this.button8.Click += new System.EventHandler(this.button8_Click);
+            // 
+            // button7
+            // 
+            this.button7.Location = new System.Drawing.Point(6, 77);
+            this.button7.Name = "button7";
+            this.button7.Size = new System.Drawing.Size(118, 23);
+            this.button7.TabIndex = 10;
+            this.button7.Text = "Unload Domain";
+            this.button7.UseVisualStyleBackColor = true;
+            this.button7.Click += new System.EventHandler(this.button7_Click);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(7, 25);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(54, 13);
+            this.label1.TabIndex = 9;
+            this.label1.Text = "DLL path:";
+            // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.button13);
+            this.groupBox3.Controls.Add(this.button12);
+            this.groupBox3.Controls.Add(this.button11);
+            this.groupBox3.Location = new System.Drawing.Point(408, 12);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(200, 112);
+            this.groupBox3.TabIndex = 12;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "Assembly";
+            // 
+            // button11
+            // 
+            this.button11.Location = new System.Drawing.Point(10, 20);
+            this.button11.Name = "button11";
+            this.button11.Size = new System.Drawing.Size(184, 23);
+            this.button11.TabIndex = 0;
+            this.button11.Text = "Get Latest Assembly";
+            this.button11.UseVisualStyleBackColor = true;
+            this.button11.Click += new System.EventHandler(this.button11_Click);
+            // 
+            // button12
+            // 
+            this.button12.Location = new System.Drawing.Point(10, 49);
+            this.button12.Name = "button12";
+            this.button12.Size = new System.Drawing.Size(184, 23);
+            this.button12.TabIndex = 1;
+            this.button12.Text = "Reload Assembly";
+            this.button12.UseVisualStyleBackColor = true;
+            this.button12.Click += new System.EventHandler(this.button12_Click);
+            // 
+            // button13
+            // 
+            this.button13.Location = new System.Drawing.Point(10, 78);
+            this.button13.Name = "button13";
+            this.button13.Size = new System.Drawing.Size(184, 23);
+            this.button13.TabIndex = 2;
+            this.button13.Text = "Get All Assemblies";
+            this.button13.UseVisualStyleBackColor = true;
+            this.button13.Click += new System.EventHandler(this.button13_Click);
             // 
             // CtoMaxTest
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(620, 492);
+            this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.button4);
@@ -215,6 +263,7 @@
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
+            this.groupBox3.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -236,5 +285,9 @@
         private System.Windows.Forms.Button button8;
         private System.Windows.Forms.Button button9;
         private System.Windows.Forms.Button button10;
+        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.Button button11;
+        private System.Windows.Forms.Button button12;
+        private System.Windows.Forms.Button button13;
     }
 }

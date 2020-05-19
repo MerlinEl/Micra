@@ -41,9 +41,6 @@ namespace Micra.Tools {
             newDomain = AppDomain.CreateDomain(Domain_Name, AppDomain.CurrentDomain.Evidence, setup);
             MxSet.LogLi("Created New Domain:" + newDomain.FriendlyName);
 
-
-                
-
             System.Runtime.Remoting.ObjectHandle obj = newDomain.CreateInstance(typeof(Proxy).Assembly.FullName, typeof(Proxy).FullName);
             MxSet.LogLi("New Domain obj:" + obj.ToString());
             //As the object we are creating is from another appdomain hence we will get that object in wrapped format and hence in next step we have unwrappped it

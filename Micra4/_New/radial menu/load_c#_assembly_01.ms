@@ -1,4 +1,63 @@
 --> Test
+--method 7
+dotNet.loadAssembly (micra.AssemblyDir + "MyAssembly.dll")
+cls = dotNet.getType "MyAssembly.AssemblyUI"
+_mcAman = (dotNetClass "System.Activator").CreateInstance cls --create class instance 
+_mcAman.owner = mcMicraDialog --bind form in to max window
+_mcAman.show()
+
+_mcAman.loader
+_mcAman.newDomain.FriendlyName
+_mcAman.newDomain.GetAssemblies()
+
+--incerase assembly version
+ms = _mcAman.newDomain.GetAssembly "Micra.Star"
+cls = ms.GetTYpe "Micra.Tools.CtoMaxTest"
+_mcGeoOpt = (dotNetClass "System.Activator").CreateInstance cls --create class instance 
+_mcGeoOpt.owner = mcMicraDialog --bind form in to max window
+_mcGeoOpt.Show()
+
+
+_mcGeoOpt.GetLatestAssembly "Micra.Star"
+
+
+Global McGetCs = mcCSharp.getClassInstance "Micra.Tools.MxGet" forceLoad:true --one force is enough for reload
+---------------------------------------
+---------------------------------------
+McGetCs.TestFn1()
+McGetCs.TestFn2()
+McGetCs.GetAllAssemblies()
+assembly_path = micra.AssemblyDir + "Micra.Star.dll" ---Wictory :D tadaaaaaaaaa
+McGetCs.ReloadAssembly assembly_path
+asm = McGetCs.GetLatestAssembly "Micra.Star"
+asm.FullName
+cls = asm.GetType "Micra.Tools.MxGet" 
+McGetCs = (dotNetClass "System.Activator").CreateInstance cls --create class instance 
+McGetCs
+---------------------------------------
+---------------------------------------
+
+
+
+
+assembly_path = micra.AssemblyDir + "Micra.Star.dll"
+AssemblyName = dotNetClass "System.Reflection.AssemblyName"
+assem_name = AssemblyName.GetAssemblyName(assembly_path)
+format "Assembly.FullName:%\n" assem_name.FullName --print ddl name and version
+assembly_bytes = (dotnetClass "System.IO.File").ReadAllBytes assembly_path
+assembly = (dotnetClass "System.Reflection.Assembly").Load assembly_bytes
+
+cls = dotNet.getType "Micra.Tools.CtoMaxTest"
+_mcGeoOpt = (dotNetClass "System.Activator").CreateInstance cls
+_mcGeoOpt.owner = mcMicraDialog --bind form in to max window
+_mcGeoOpt.Show()
+
+
+gc()
+_mcAman.GC()
+
+
+
 --Load Assemblies
 dotNet.loadAssembly (micra.AssemblyDir + "Orien.Tools.dll")
 dotNet.loadAssembly (micra.AssemblyDir + "Orien.NetUi.dll")
@@ -16,6 +75,19 @@ activator = (dotNetClass "System.Activator")
 inst = activator.CreateInstance cls
 
 
+
+--method 3
+cls = dotNet.getType "Orien.Tools.mcMath"
+_mcMath = (dotNetClass "System.Activator").CreateInstance cls --create class instance 
+--Math operations
+_mcMath.minMax 100	1	50	--> 50
+_mcMath.minMax -1	1	50	--> 1
+_mcMath.minMax 100	1	200	--> 100
+
+
+
+
+
 params = #("Processing geometry calculations", true, true, true)
 args = dotNet.ValueToDotNetObject params (dotNetObject "System.Object")
 inst.ProgBar
@@ -30,6 +102,10 @@ _mcListener = (dotNetClass "System.Activator").CreateInstance cls --create class
 _mcListener.Write ("This message was sended from C#\n")
 
 
+--Manager.Unload not works check it in > max 2010
+_mcGeoOpt = mcCSharp.getClassInstance "Micra.Tools.CtoMaxTest" forceLoad:true
+_mcGeoOpt.owner = mcMicraDialog --bind form in to max window
+_mcGeoOpt.Show()
 
 --cls = dotNet.getType "Micra.Tools.MxGeometryOptimizer"
 --_mcGeoOpt = (dotNetClass "System.Activator").CreateInstance cls --create class instance 
@@ -39,10 +115,6 @@ _mcGeoOpt = mcCSharp.getClassInstance "Micra.Tools.MxGeometryOptimizer" forceLoa
 _mcGeoOpt.owner = mcMicraDialog --bind form in to max window
 _mcGeoOpt.Show()
 
---Manager.Unload not works check it in > max 2010
-_mcGeoOpt = mcCSharp.getClassInstance "Micra.Tools.CtoMaxTest" --forceLoad:true
-_mcGeoOpt.owner = mcMicraDialog --bind form in to max window
-_mcGeoOpt.Show()
 
 --Creating a new appdomain
 AppDomain =  dotNetClass"System.AppDomain"
@@ -136,11 +208,22 @@ AppDomain.Unload(newDomain); //After the method has been executed call unload me
 */
 
 
---method 7
-dotNet.loadAssembly (micra.AssemblyDir + "Orien.AssemblyManager.dll")
-cls = dotNet.getType "Orien.AssemblyManager.Manager"
-_mcAman = (dotNetClass "System.Activator").CreateInstance cls --create class instance 
-_mcAman.show()
+
+--C:\Program Files\Autodesk\3ds Max 2018\Autodesk.Max.dll
+--D:\ReneBaca\Aprog\Micra\Micra4\Assembly\Micra.Star.dll
+_mcAman.newDomain.FriendlyName
+ta = _mcAman.loader.TrustedAssembly
+ta.FullName
+ta.Location
+ta.CodeBase
+
+  .<System.Object>CreateInstance <System.String>typeName
+
+
+--public object ExecuteStaticMethod(string className, string methodName, params object[] parameters) {
+args = dotNet.ValueToDotNetObject #(100, 1 ,50) (dotNetObject "System.Object")
+_mcAman.loader.ExecuteStaticMethod "Orien.Tools.mcMath" "minMax" args
+_mcAman.appDomain.getType "Orien.Tools.McString"
 
 
 

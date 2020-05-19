@@ -24,7 +24,7 @@ namespace Micra.Tools {
         /// <param name="strMsg"></param>
         public static void LogLi(string strMsg, params object[] args) {
             if ( args.Length > 0 ) strMsg = String.Format(strMsg, args);
-            Listener.WriteLine(strMsg);
+            MxListener.WriteLine(strMsg);
         }
 
         public static void SetAccelerators(bool state) {

@@ -1,6 +1,8 @@
 ﻿using Autodesk.Max;
 using System;
 using System.Drawing;
+using System.IO;
+using System.Reflection;
 using System.Windows.Forms;
 
 namespace Micra.Tools {
@@ -34,6 +36,69 @@ namespace Micra.Tools {
         public static Color NewColor(int r, int g, int b) => Color.FromArgb(r, g, b);
         public static Color ColorFromName(string clr_str) => Color.FromName(clr_str);
 
+        #endregion
+
+        #region Assembly Methods
+
+        public static Assembly[] GetAllAssemblies() {
+
+            Assembly[] assemblies = AppDomain.CurrentDomain.GetAssemblies();
+            MxSet.LogLi("GetAllAssemblies > Current Domain:" + AppDomain.CurrentDomain.FriendlyName);
+            foreach ( Assembly asm in assemblies ) {
+
+                MxSet.LogLi("\t" + asm.FullName);
+            }
+            return assemblies;
+        }
+        public static Assembly GetLatestAssembly(string assembly_name) {
+
+            Assembly[] assemblies = AppDomain.CurrentDomain.GetAssemblies();
+            Assembly latest_assembly = null;
+            string version1 = "1.0.0.0";
+            foreach ( Assembly asm in assemblies ) {
+
+                if ( asm.GetName().Name == assembly_name ) {
+
+                    string version2 = asm.GetName().Version.ToString();
+                    var result = version2.CompareTo(version1);
+                    if ( result > 0 ) {
+                        latest_assembly = asm;
+                        version1 = version2;
+                    }
+                }
+            }
+            return latest_assembly;
+        }
+        public static Assembly ReloadAssembly(string assembly_path) {
+
+            MxSet.LogLi("Assembly Path:" + assembly_path);
+            AssemblyName assemblyName = AssemblyName.GetAssemblyName(assembly_path);
+            MxSet.LogLi("Assembly Name:" + assemblyName.FullName); //print ddl name and version
+            byte[] assembly_bytes = File.ReadAllBytes(assembly_path);
+            Assembly assembly = Assembly.Load(assembly_bytes); //load assembly in to current domain
+            Assembly latest_assembly = GetLatestAssembly(assemblyName.Name);
+            return latest_assembly;
+        }
+
+        public static string AssemblyDirectory {
+            get {
+                string codeBase = Assembly.GetExecutingAssembly().CodeBase;
+                UriBuilder uri = new UriBuilder(codeBase);
+                string path = Uri.UnescapeDataString(uri.Path);
+                return Path.GetDirectoryName(path);
+            }
+        }
+
+        public static void TestFn1() {
+            MxSet.LogLi("New Fn1");
+        }
+
+        public static void TestFn2() {
+            MxSet.LogLi("New Fn2");
+        }
+
+        #endregion
+
         /// <summary>
         /// NativeWindow parentWindow = GetWindowFromHwnd(hwnd);
         /// try {
@@ -51,7 +116,7 @@ namespace Micra.Tools {
             window.AssignHandle(handle);
             return window;
         }
-        #endregion
+
 
 
         public static IGlobal Global {

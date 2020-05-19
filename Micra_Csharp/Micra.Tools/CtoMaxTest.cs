@@ -1,6 +1,9 @@
 ﻿using Autodesk.Max;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
+using System.Reflection;
 using System.Windows.Forms;
 
 namespace Micra.Tools {
@@ -8,7 +11,14 @@ namespace Micra.Tools {
 
         public CtoMaxTest() {
             InitializeComponent();
+            Init();
         }
+
+        private void Init() {
+            string assembly_version = Assembly.GetExecutingAssembly().GetName().Version.ToString();
+            Text = Text + "     " + assembly_version;
+        }
+
         private void OnTextAreaLostFocus(object sender, EventArgs e) {
             MxSet.SetAccelerators(true);
         }
@@ -84,6 +94,28 @@ namespace Micra.Tools {
         private void button10_Click(object sender, EventArgs e) {
             MxSet.LogLi(( sender as Button ).Text);
             MxAssemblyManager.LoadAssembly(TbxAssemblyPath.Text);
+        }
+
+        private void button11_Click(object sender, EventArgs e) {
+
+            MxSet.LogLi("Search for latest Assembly in Current Domain:" + AppDomain.CurrentDomain.FriendlyName);
+            Assembly asm = MxGet.GetLatestAssembly("Micra.Star");
+            if ( asm != null ) {
+
+                MxSet.LogLi("Got Latest(Micra.Star) Assembly:" + asm.FullName);
+            } else {
+
+                MxSet.LogLi("Latest(Micra.Star) Assembly not Found");
+            }
+
+        }
+        private void button12_Click(object sender, EventArgs e) {
+
+            MxGet.ReloadAssembly(TbxAssemblyPath.Text);
+        }
+        private void button13_Click(object sender, EventArgs e) {
+
+            MxGet.GetAllAssemblies();
         }
     }
 }

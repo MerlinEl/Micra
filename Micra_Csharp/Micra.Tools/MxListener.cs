@@ -1,7 +1,7 @@
 ﻿using System;
 
 namespace Micra.Tools {
-    public class Listener {
+    public class MxListener {
         //MxGet.Global.TheListener.EditStream.Printf(strMsg + "", null);
         /*public static Autodesk.Max.IInterface14 Interface {
             get { return Global.COREInterface14; }

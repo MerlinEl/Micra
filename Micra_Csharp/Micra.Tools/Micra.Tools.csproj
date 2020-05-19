@@ -69,7 +69,7 @@
     <Compile Include="CtoMaxTest.Designer.cs">
       <DependentUpon>CtoMaxTest.cs</DependentUpon>
     </Compile>
-    <Compile Include="Listener.cs" />
+    <Compile Include="MxListener.cs" />
     <Compile Include="MxAssemblyManager.cs" />
     <Compile Include="MxConsole.cs">
       <SubType>Form</SubType>

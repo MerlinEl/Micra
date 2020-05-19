@@ -263,8 +263,9 @@ struct MICRA_CSHARP_STRUCTURE	(
 	)
 	/*<end>*/
 )	
- --create instance
+ --Create instance
 Global mcCSharp = mcStructMan.instanceStructure MICRA_CSHARP_STRUCTURE "mcCSharp"
+--Load Micra.Star.dll Assembly
 Global McGetCs = mcCSharp.getClassInstance "Micra.Tools.MxGet" forceLoad:true --one force is enough for reload
 Global McSetCs = mcCSharp.getClassInstance "Micra.Tools.MxSet"
 
