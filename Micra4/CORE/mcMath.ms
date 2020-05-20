@@ -218,6 +218,10 @@ struct MICRA_MATH (
 			dot vec1 (intersectionPoint - p1) > 0 and dot vec2 (intersectionPoint - p2) > 0
 		*/
 	),
+	/**
+	*@Usage 
+		search for itersections between both matrix vectors
+	*/
 	fn intersectionsMatrixMatrix p1 tm1 p2 tm2 = (
 
 		local p3 = intersectionVecVec p1 tm1.row1 p2 tm2.row1 

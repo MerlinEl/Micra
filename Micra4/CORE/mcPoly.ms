@@ -1448,12 +1448,12 @@ struct MICRA_POLY
 
 			/*tm1.scale = [1000000, 1000000, 1000000]
 			tm2.scale = [1000000, 1000000, 1000000]*/
-
+			
+			local intersections = mcMath.intersectionsMatrixMatrix p1 tm1 p2 tm2
 			local faces_normal = getFacesNormal obj edge_faces
 			local p0 = edge_center + (faces_normal * 3) --move normal in to middle of edge 
 			local final_point = intersections[1]
 			local shortest_dist = distance p0 final_point
-			local intersections = mcMath.intersectionsMatrixMatrix p1 tm1 p2 tm2
 			for p in intersections do (
 				local dist = distance p0 p
 				if dist < shortest_dist do (
