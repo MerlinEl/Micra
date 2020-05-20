@@ -1409,6 +1409,7 @@ struct MICRA_POLY
 			local v1edges = polyOp.getEdgesUsingVert obj v1_a
 			local v2edges = polyOp.getEdgesUsingVert obj v2_a
 			local grow_edges = v1edges + v2edges
+			--get two side neighbour edges 
 			local loop_side_edges = for ei in grow_edges where (
 				
 				not (mcPoly.isEdgeInFace obj ei efaces[1]) and
@@ -1421,7 +1422,7 @@ struct MICRA_POLY
 			local verts1 = polyOp.getVertsUsingEdge obj loop_side_edges[1] 
 			local verts2 = polyOp.getVertsUsingEdge obj loop_side_edges[2] 
 			local v1_b, v2_b
-			
+			--create vectors towards to main edge
 			if (verts1 - #{v1_a}).numberset == 1 then (
 				
 				v1_b =  ((verts1 - #{v1_a}) as array)[1]	
@@ -1442,15 +1443,17 @@ struct MICRA_POLY
 			
 			local v1 = normalize (p1_b - p1_a)
 			local v2 = normalize (p2_b - p2_a)
+			--create vectors imtersection
 			local final_point = mcMath.intersectionVecVec p1_a v1 p2_a v2
 			
 			if classOf final_point != Point3 do continue
 			--point pos:final_point wirecolor:blue size:10
 			
+			--move vertices to new position
 			polyOp.setVert obj v1_a final_point
 			polyOp.setVert obj v2_a final_point
 		)
-		--weld vertices
+		--finaly wee can weld vertices
 		obj.weldThreshold = 0.001
 		polyOp.weldVertsByThreshold obj edges_vertices
 	),
