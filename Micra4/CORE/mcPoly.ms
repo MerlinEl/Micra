@@ -850,10 +850,9 @@ struct MICRA_POLY
 		qsort faces_data sortByArea
 		faces_data[1].index
 	),
-	fn getFirstFaceUsingVert obj faces vert = (
+	fn filterFacesUsingVert obj faces vert = (
 
-		for f in faces where (mcPoly.isFaceUsingVert obj f vert) do return f
-		return undefined
+		for f in faces where (mcPoly.isFaceUsingVert obj f vert) collect f
 	),
 	fn getFaceCornerVertices obj face_index = ( --get three vertices from face (1 = corner , 2 = first handle, 3 = second handle)
 	
@@ -1393,33 +1392,69 @@ struct MICRA_POLY
 			)
 		)
 	),
-	/*
-	obj = $
-	ring_edges = mcPoly.get #esel
-	ring_verts = mcPoly.get #vuedge
-	for ei in esel do (
 
-
-	)
-	--unchamfer one_edge from ring
-	one_edge = ring_edges[1] 
-	--get edge 2 verices
-	everts = polyOp.getVertsUsingEdge obj one_edge as array
-	v1 = everts[1]
-	v2 = everts[2]
-	--get all edges sharing 2 vertices -> grow esel
-	v1edges = polyOp.getEdgesUsingVert obj v1
-	v2edges = polyOp.getEdgesUsingVert obj v2
-	grow_edges = v1edges + v2edges
-	--get only edges that belong to one_edge -> loop
-	filter_verts = (ring_verts as bitarray) - (everts as bitarray)
-	loop_edges = for ei in grow_edges where not (mcPoly.isEdgeUsingAnyVert obj ei filter_verts) collect ei
-	--get 2 neighbour edges -> TODO if there is more tan 2 fix it
-	side_edges = (loop_edges as bitarray) - #{one_edge}
-	--extend first edge
-	mcPoly.isEdgeUsingVert obj loop_edges[1]
-	*/
 	fn unchamferEdges obj edges debug:false = (
+	
+			if (classOf obj != Editable_Poly) do return (mcMsgList.warn "not_poly") 
+		if (edges.numberset == 0) do return (mcMsgList.warn "not_esel") 
+		local edges_vertices = #{}
+		for ei in edges do (
+	
+			local everts = polyOp.getVertsUsingEdge obj ei as array
+			local efaces = polyOp.getFacesUsingEdge obj ei as array
+			edges_vertices += (everts as bitarray)
+			local v1_a = everts[1]
+			local v2_a = everts[2]
+			--get all edges sharing 2 vertices -> grow esel
+			local v1edges = polyOp.getEdgesUsingVert obj v1_a
+			local v2edges = polyOp.getEdgesUsingVert obj v2_a
+			local grow_edges = v1edges + v2edges
+			local loop_side_edges = for ei in grow_edges where (
+				
+				not (mcPoly.isEdgeInFace obj ei efaces[1]) and
+				not (mcPoly.isEdgeInFace obj ei efaces[2])
+				
+			) collect ei
+			if loop_side_edges.count != 2 do continue --skip invalid geometry
+			local p1_a = polyOp.getVert obj v1_a
+			local p2_a = polyOp.getVert obj v2_a
+			local verts1 = polyOp.getVertsUsingEdge obj loop_side_edges[1] 
+			local verts2 = polyOp.getVertsUsingEdge obj loop_side_edges[2] 
+			local v1_b, v2_b
+			
+			if (verts1 - #{v1_a}).numberset == 1 then (
+				
+				v1_b =  ((verts1 - #{v1_a}) as array)[1]	
+				v2_b =  ((verts2 - #{v2_a}) as array)[1]	
+				
+			) else (
+				
+				v1_b =  ((verts2 - #{v1_a}) as array)[1]
+				v2_b =  ((verts1 - #{v2_a}) as array)[1]	
+			)
+			p1_b = polyOp.getVert obj v1_b 
+			p2_b = polyOp.getVert obj v2_b
+			
+			/*point pos:p1_a wirecolor:red
+			point pos:p1_b wirecolor:red
+			point pos:p2_a wirecolor:green
+			point pos:p2_b wirecolor:green*/
+			
+			local v1 = normalize (p1_b - p1_a)
+			local v2 = normalize (p2_b - p2_a)
+			local final_point = mcMath.intersectionVecVec p1_a v1 p2_a v2
+			
+			if classOf final_point != Point3 do continue
+			--point pos:final_point wirecolor:blue size:10
+			
+			polyOp.setVert obj v1_a final_point
+			polyOp.setVert obj v2_a final_point
+		)
+		--weld vertices
+		obj.weldThreshold = 0.001
+		polyOp.weldVertsByThreshold obj edges_vertices
+	),
+	fn unchamferEdges_old2 obj edges debug:false = (
 
 		if (classOf obj != Editable_Poly) do return (mcMsgList.warn "not_poly") 
 		if (edges.numberset == 0) do return (mcMsgList.warn "not_esel") 
@@ -1434,12 +1469,12 @@ struct MICRA_POLY
 			local edge_faces = polyOp.getFacesUsingEdge obj ei
 			local vert_faces = polyOp.getFacesUsingVert obj edge_verts --grow faces around edge
 			--get only two neighbour faces
-			local neighbour_faces = vert_faces - edge_faces
-
-			local f1 = getFirstFaceUsingVert obj neighbour_faces v1
-			local f2 = getFirstFaceUsingVert obj neighbour_faces v2
-			local tm1 = matrixFromNormal (PolyOp.getFaceNormal obj f1)*obj.transform
-			local tm2 = matrixFromNormal (PolyOp.getFaceNormal obj f2)*obj.transform
+			local neighbour_faces = vert_faces - edge_faces --remove top faces and leave only side faces
+			--divide face in to two groups
+			local faces1 = filterFacesUsingVert obj neighbour_faces v1
+			local faces2 = filterFacesUsingVert obj neighbour_faces v2
+			local tm1 = matrixFromNormal (getFacesNormal obj faces1)*obj.transform
+			local tm2 = matrixFromNormal (getFacesNormal obj faces2)*obj.transform
 			local p1 = polyOp.getVert obj v1
 			local p2 = polyOp.getVert obj v2
 
@@ -1450,7 +1485,7 @@ struct MICRA_POLY
 			tm2.scale = [1000000, 1000000, 1000000]*/
 			
 			local intersections = mcMath.intersectionsMatrixMatrix p1 tm1 p2 tm2
-			local faces_normal = getFacesNormal obj edge_faces
+			local faces_normal = getFacesNormal obj edge_faces --get two or one top faces normal
 			local p0 = edge_center + (faces_normal * 3) --move normal in to middle of edge 
 			local final_point = intersections[1]
 			local shortest_dist = distance p0 final_point
@@ -1461,14 +1496,17 @@ struct MICRA_POLY
 					shortest_dist = dist
 				)
 			)
-			polyOp.setVert obj v1 final_point
-			polyOp.setVert obj v2 final_point
+			point transform:tm1 wirecolor:green scale:[10, 10, 10]
+			point transform:tm2 wirecolor:yellow scale:[10, 10, 10]
+			
+			--polyOp.setVert obj v1 final_point
+			--polyOp.setVert obj v2 final_point
 		)
 		--weld vertices
 		obj.weldThreshold = 0.001
 		polyOp.weldVertsByThreshold obj edges_vertices
 	),
-	fn unchamferEdges_old obj edges debug:false = (
+	fn unchamferEdges_old2 obj edges debug:false = (
 
 		if (classOf obj != Editable_Poly) do return (mcMsgList.warn "not_poly") 
 		if (edges.numberset == 0) do return (mcMsgList.warn "not_esel")  
