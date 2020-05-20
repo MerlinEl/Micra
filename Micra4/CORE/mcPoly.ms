@@ -562,6 +562,10 @@ struct MICRA_POLY
 		local faces_list = if faces.numberset != 0 then faces else #{1..obj.faces.count}
 		for f in faces_list where findItem id_list (polyop.getFaceMatID obj f) > 0 collect f
 	),
+	fn getLocalFaceRotation obj face_index =(
+	
+	  (matrixFromNormal (PolyOp.getFaceNormal obj face_index)*obj.transform ) as eulerAngles
+	),
 		/**
 	*@Usage --> convert smg in to bits
 	*@Example
@@ -695,6 +699,24 @@ struct MICRA_POLY
 		local efaces = polyop.getFacesUsingEdge obj e_index
 		efaces.numberset == 1
 	),
+	fn isFaceUsingVert obj face_index vert_index = (
+
+		local fverts = polyOp.getVertsUsingFace obj face_index
+		(fverts - #{vert_index}).numberset < fverts.numberset
+	),
+	fn isEdgeUsingVert obj edge_index vert_index = (
+
+		local everts = polyOp.getVertsUsingEdge obj edge_index
+		(everts - #{vert_index}).numberset < everts.numberset
+	),
+	/**
+	*@Usage > if the edge lies at any vertex
+	*/
+	fn isEdgeUsingAnyVert obj edge_index verts_bar = (
+	
+		local everts = polyOp.getVertsUsingEdge obj edge_index
+		(verts_bar - everts).numberset < verts_bar.numberset
+	),
 	/**
 	*@Usage > when both edges have one comon vertex 
 	*/
@@ -827,6 +849,11 @@ struct MICRA_POLY
 		fn sortByArea n1 n2 = if n1.area > n2.area then -1 else if n1.area < n2.area then 1 else 0 
 		qsort faces_data sortByArea
 		faces_data[1].index
+	),
+	fn getFirstFaceUsingVert obj faces vert = (
+
+		for f in faces where (mcPoly.isFaceUsingVert obj f vert) do return f
+		return undefined
 	),
 	fn getFaceCornerVertices obj face_index = ( --get three vertices from face (1 = corner , 2 = first handle, 3 = second handle)
 	
@@ -1366,7 +1393,82 @@ struct MICRA_POLY
 			)
 		)
 	),
+	/*
+	obj = $
+	ring_edges = mcPoly.get #esel
+	ring_verts = mcPoly.get #vuedge
+	for ei in esel do (
+
+
+	)
+	--unchamfer one_edge from ring
+	one_edge = ring_edges[1] 
+	--get edge 2 verices
+	everts = polyOp.getVertsUsingEdge obj one_edge as array
+	v1 = everts[1]
+	v2 = everts[2]
+	--get all edges sharing 2 vertices -> grow esel
+	v1edges = polyOp.getEdgesUsingVert obj v1
+	v2edges = polyOp.getEdgesUsingVert obj v2
+	grow_edges = v1edges + v2edges
+	--get only edges that belong to one_edge -> loop
+	filter_verts = (ring_verts as bitarray) - (everts as bitarray)
+	loop_edges = for ei in grow_edges where not (mcPoly.isEdgeUsingAnyVert obj ei filter_verts) collect ei
+	--get 2 neighbour edges -> TODO if there is more tan 2 fix it
+	side_edges = (loop_edges as bitarray) - #{one_edge}
+	--extend first edge
+	mcPoly.isEdgeUsingVert obj loop_edges[1]
+	*/
 	fn unchamferEdges obj edges debug:false = (
+
+		if (classOf obj != Editable_Poly) do return (mcMsgList.warn "not_poly") 
+		if (edges.numberset == 0) do return (mcMsgList.warn "not_esel") 
+		local edges_vertices = #{}
+		for ei in edges do (
+
+			local edge_verts = polyOp.getVertsUsingEdge obj ei
+			edges_vertices += edge_verts
+			local v1 = (edge_verts as array)[1]
+			local v2 = (edge_verts as array)[2]
+			local edge_center = getEdgeCenter obj ei
+			local edge_faces = polyOp.getFacesUsingEdge obj ei
+			local vert_faces = polyOp.getFacesUsingVert obj edge_verts --grow faces around edge
+			--get only two neighbour faces
+			local neighbour_faces = vert_faces - edge_faces
+
+			local f1 = getFirstFaceUsingVert obj neighbour_faces v1
+			local f2 = getFirstFaceUsingVert obj neighbour_faces v2
+			local tm1 = matrixFromNormal (PolyOp.getFaceNormal obj f1)*obj.transform
+			local tm2 = matrixFromNormal (PolyOp.getFaceNormal obj f2)*obj.transform
+			local p1 = polyOp.getVert obj v1
+			local p2 = polyOp.getVert obj v2
+
+			tm1.pos = p1
+			tm2.pos = p2
+
+			/*tm1.scale = [1000000, 1000000, 1000000]
+			tm2.scale = [1000000, 1000000, 1000000]*/
+
+			local faces_normal = getFacesNormal obj edge_faces
+			local p0 = edge_center + (faces_normal * 3) --move normal in to middle of edge 
+			local final_point = intersections[1]
+			local shortest_dist = distance p0 final_point
+			local intersections = mcMath.intersectionsMatrixMatrix p1 tm1 p2 tm2
+			for p in intersections do (
+				local dist = distance p0 p
+				if dist < shortest_dist do (
+					final_point = p
+					shortest_dist = dist
+				)
+			)
+			polyOp.setVert obj v1 final_point
+			polyOp.setVert obj v2 final_point
+		)
+		--weld vertices
+		obj.weldThreshold = 0.001
+		polyOp.weldVertsByThreshold obj edges_vertices
+	),
+	fn unchamferEdges_old obj edges debug:false = (
 
 		if (classOf obj != Editable_Poly) do return (mcMsgList.warn "not_poly") 
 		if (edges.numberset == 0) do return (mcMsgList.warn "not_esel")  

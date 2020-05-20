@@ -195,6 +195,42 @@ struct MICRA_MATH (
 		if debug do for i=1 to points.count do text text:(i as string) pos:points[i] size:5 wirecolor:clr
 		points
 	),
+	/**
+	*@Author Serejah Jan.2018
+	*/
+	fn intersectionVecVec p1 vec1 p2 vec2 = (
+		if (abs (dot vec1 vec2)) > (1.0 - 0.0001) then (
+		
+			false -- are parallel
+			
+		) else (
+		
+			local vec3= p2 - p1
+			local cross1 = cross vec1 vec2
+			local cross2 = cross vec3 vec2
+			p1 + ( vec1*( (dot cross2 cross1)/((length cross1)^2) ) )	
+		)
+		/*
+			local vec3 = p2 - p1
+			local c1 = cross vec1 vec2
+			local c2 = cross vec3 vec2
+			local intersectionPoint = p1 + vec1 * ( (dot c2 c1)/((length c1)^2) )
+			dot vec1 (intersectionPoint - p1) > 0 and dot vec2 (intersectionPoint - p2) > 0
+		*/
+	),
+	fn intersectionsMatrixMatrix p1 tm1 p2 tm2 = (
+
+		local p3 = intersectionVecVec p1 tm1.row1 p2 tm2.row1 
+		local p4 = intersectionVecVec p1 tm1.row1 p2 tm2.row2 
+		local p5 = intersectionVecVec p1 tm1.row1 p2 tm2.row3 
+		local p6 = intersectionVecVec p1 tm1.row2 p2 tm2.row2 
+		local p7 = intersectionVecVec p1 tm1.row2 p2 tm2.row3 
+		local p8 = intersectionVecVec p1 tm1.row3 p2 tm2.row3 
+		local intersections = #(p3, p4, p5, p6, p7, p8)
+		local final = #()
+		for p in intersections where classOf p == Point3 do appendIfUnique final p
+		final
+	),
 	fn intersectionLineLine p1 p2 p3 p4 = 
 	(
 		local a=p2-p1
@@ -203,6 +239,13 @@ struct MICRA_MATH (
 		local cross1 = cross a b
 		local cross2 = cross c b
 		p1 + ( a*( (dot cross2 cross1)/((length cross1)^2) ) )
+	),
+	--https://m.cafe.daum.net/maxscript/9fTI/114?q=D_lZmDgpvDsMg0&
+	fn lineSphereIntersection sphereCenter sphereRadius linePoint lineVector = (
+		local nLineVector= normalize lineVector
+		local projPoint=linePoint+((dot (sphereCenter-linePoint) nLineVector)*nLineVector)
+		local dist=distance sphereCenter projPoint
+		if dist>sphereRadius then false else true
 	),
 	--intersection between a line and a plane
 	fn planeLineIntersect plane_pos plane_normal line_point line_vector = 
@@ -232,6 +275,22 @@ struct MICRA_MATH (
 	
 		local nABC=normalize (cross (pB-pA) (pC-pA))
 		length ((dot (pA-pD) nABC)*nABC)
+	),
+	/**
+	Plane-Plane Intersection : find the line which is the intersection of 2 planes
+	p1 : a point of the plane 1
+	n1 : the normal of the plane 1
+	*/
+	fn planePlaneIntersect p1 n1 p2 n2 = (
+		-- n1, n2 are normalized
+		local lineVector = cross n1 n2
+		local proj1=(dot n1 p1)*n1
+		local proj2=(dot n2 p2)*n2
+		local perp1=cross n1 (normalize lineVector)
+		local perp2=cross n2 (normalize lineVector)
+		local cr = cross (proj2-proj1) perp2
+		local intersectionPoint = proj1 + (perp1*( (dot cr lineVector) / ((length lineVector)^2)) )
+		ray intersectionPoint lineVector
 	),
 	fn isPointOnLine pA pB pC tol = 
 	(
