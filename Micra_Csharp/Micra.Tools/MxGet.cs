@@ -26,7 +26,7 @@ namespace Micra.Tools {
         #region Objects
 
         public static object FontStyles = Enum.ToObject(typeof(FontStyle), 0);
-
+        public static string Assembly_Version = Assembly.GetExecutingAssembly().GetName().Version.ToString();
         #endregion
 
         #region Methods
@@ -40,16 +40,7 @@ namespace Micra.Tools {
 
         #region Assembly Methods
 
-        public static Assembly[] GetAllAssemblies() {
-
-            Assembly[] assemblies = AppDomain.CurrentDomain.GetAssemblies();
-            MxSet.LogLi("GetAllAssemblies > Current Domain:" + AppDomain.CurrentDomain.FriendlyName);
-            foreach ( Assembly asm in assemblies ) {
-
-                MxSet.LogLi("\t" + asm.FullName);
-            }
-            return assemblies;
-        }
+        public static Assembly[] GetAllAssemblies() => AppDomain.CurrentDomain.GetAssemblies();
         public static Assembly GetLatestAssembly(string assembly_name) {
 
             Assembly[] assemblies = AppDomain.CurrentDomain.GetAssemblies();
@@ -87,14 +78,6 @@ namespace Micra.Tools {
                 string path = Uri.UnescapeDataString(uri.Path);
                 return Path.GetDirectoryName(path);
             }
-        }
-
-        public static void TestFn1() {
-            MxSet.LogLi("New Fn1");
-        }
-
-        public static void TestFn2() {
-            MxSet.LogLi("New Fn2");
         }
 
         #endregion

@@ -15,8 +15,8 @@ namespace Micra.Tools {
         }
 
         private void Init() {
-            string assembly_version = Assembly.GetExecutingAssembly().GetName().Version.ToString();
-            Text = Text + "     " + assembly_version;
+            Text = Text + "     " + MxGet.Assembly_Version;
+            CboxAsemblyGetType.SelectedIndex = CboxAsemblyGetType.Items.Count - 1;
         }
 
         private void OnTextAreaLostFocus(object sender, EventArgs e) {
@@ -41,7 +41,7 @@ namespace Micra.Tools {
             MxSet.LogLi(( sender as Button ).Text);
             string cmd = "Render()";
             textBox1.Text = cmd;
-            MxGet.Global.ExecuteMAXScriptScript(cmd, false, null);
+            MxSet.ExecuteMAXScriptScript(cmd);
         }
 
         private void button3_Click(object sender, EventArgs e) {
@@ -50,7 +50,7 @@ namespace Micra.Tools {
                 "Box pos:[0,0,0] name:(UniqueName \"ojobox\") wirecolor:blue\n" +
                 "Box pos:[100,0,0] name:(UniqueName \"ojobox\") wirecolor:green\n";
             textBox1.Text = cmd;
-            ManagedServices.MaxscriptSDK.ExecuteMaxscriptCommand(cmd);
+            MxSet.ExecuteMAXScriptScript(cmd);
         }
 
         private void button4_Click(object sender, EventArgs e) {
@@ -65,41 +65,14 @@ namespace Micra.Tools {
             MxSet.LogLi(( sender as Button ).Text);
             string cmd = "Render()";
             textBox1.Text = cmd;
-            IFPValue mxsRetVal = null;
-            MxGet.Global.ExecuteMAXScriptScript(cmd, false, mxsRetVal);
-            MxSet.LogLi("Render Click gor:" + mxsRetVal.S);
-        }
-
-        private void button6_Click(object sender, EventArgs e) {
-
-            MxSet.LogLi(( sender as Button ).Text);
-            MxAssemblyManager.CreateDomain();
-        }
-        private void button8_Click(object sender, EventArgs e) {
-
-            MxSet.LogLi(( sender as Button ).Text);
-            MxAssemblyManager.ExecuteStaticMethod("MxSet", "LogLi", new object[] { "Execute Static Method", "MxSet", "LogLi" });
-        }
-        private void button7_Click(object sender, EventArgs e) {
-
-            MxSet.LogLi(( sender as Button ).Text);
-            MxAssemblyManager.UnloadDomain();
-        }
-
-        private void button9_Click(object sender, EventArgs e) {
-            MxSet.LogLi(( sender as Button ).Text);
-            MxAssemblyManager.ShowloadedAssemblies();
-        }
-
-        private void button10_Click(object sender, EventArgs e) {
-            MxSet.LogLi(( sender as Button ).Text);
-            MxAssemblyManager.LoadAssembly(TbxAssemblyPath.Text);
+            IFPValue mxsRetVal = MxSet.ExecuteMAXScriptScript(cmd);
+            if ( mxsRetVal != null ) MxSet.LogLi("Render Click gor:" + mxsRetVal.S);
         }
 
         private void button11_Click(object sender, EventArgs e) {
 
             MxSet.LogLi("Search for latest Assembly in Current Domain:" + AppDomain.CurrentDomain.FriendlyName);
-            Assembly asm = MxGet.GetLatestAssembly("Micra.Star");
+            Assembly asm = MxGet.GetLatestAssembly(TbxAssemblyName.Text);
             if ( asm != null ) {
 
                 MxSet.LogLi("Got Latest(Micra.Star) Assembly:" + asm.FullName);
@@ -115,8 +88,22 @@ namespace Micra.Tools {
         }
         private void button13_Click(object sender, EventArgs e) {
 
-            MxGet.GetAllAssemblies();
+            MxSet.LogLi("Main > GetAllAssemblies > Current Domain:" + AppDomain.CurrentDomain.FriendlyName);
+            Assembly[] assemblies = MxGet.GetAllAssemblies();
+            
+            foreach ( Assembly asm in assemblies ) {
+
+                switch (CboxAsemblyGetType.SelectedItem.ToString()) {
+
+                    case "All": break;
+                    case "Micra.Star":
+                        if ( asm.GetName().Name != "Micra.Star" ) continue;
+                    break;
+                }
+                MxSet.LogLi("\t" + asm.FullName);
+            }
         }
+
     }
 }
 

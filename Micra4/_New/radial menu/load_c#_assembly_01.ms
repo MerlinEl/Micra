@@ -1,4 +1,18 @@
 --> Test
+--Final Method
+Global McGetCs = mcCSharp.getClassInstance "Micra.Tools.MxGet" forceLoad:true --one force is enough for reload
+Global McSetCs = mcCSharp.getClassInstance "Micra.Tools.MxSet" forceLoad:true --one force is enough for reload
+
+--TODO This will load latest DLL , but without force, Max wil  next time take OLD one
+_mcCsharpToMaxTest = mcCSharp.getClassInstance "Micra.Tools.CtoMaxTest" forceLoad:true --one force is enough for reload
+_mcCsharpToMaxTest.owner = mcMicraDialog --bind form in to max window
+_mcCsharpToMaxTest.Show()
+
+
+
+
+
+
 --method 7
 dotNet.loadAssembly (micra.AssemblyDir + "MyAssembly.dll")
 cls = dotNet.getType "MyAssembly.AssemblyUI"
@@ -21,11 +35,8 @@ _mcGeoOpt.Show()
 _mcGeoOpt.GetLatestAssembly "Micra.Star"
 
 
-Global McGetCs = mcCSharp.getClassInstance "Micra.Tools.MxGet" forceLoad:true --one force is enough for reload
 ---------------------------------------
 ---------------------------------------
-McGetCs.TestFn1()
-McGetCs.TestFn2()
 McGetCs.GetAllAssemblies()
 assembly_path = micra.AssemblyDir + "Micra.Star.dll" ---Wictory :D tadaaaaaaaaa
 McGetCs.ReloadAssembly assembly_path

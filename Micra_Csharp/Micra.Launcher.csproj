@@ -148,6 +148,9 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Backup\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>for /F "tokens=4" %25%25F in ('$(SolutionDir)filever.exe /B /A /D $(ProjectDir)bin\debug\Micra.Launcher.exe') do (

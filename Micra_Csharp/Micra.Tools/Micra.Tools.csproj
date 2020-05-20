@@ -62,7 +62,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Proxy.cs" />
+    <Content Include="Backup\Proxy.cs.txt" />
     <Compile Include="CtoMaxTest.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -70,7 +70,7 @@
       <DependentUpon>CtoMaxTest.cs</DependentUpon>
     </Compile>
     <Compile Include="MxListener.cs" />
-    <Compile Include="MxAssemblyManager.cs" />
+    <Content Include="Backup\MxAssemblyManager.cs.txt" />
     <Compile Include="MxConsole.cs">
       <SubType>Form</SubType>
     </Compile>

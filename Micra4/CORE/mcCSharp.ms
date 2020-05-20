@@ -36,8 +36,13 @@ struct MICRA_CSHARP_STRUCTURE	(
 	
 	--variables
 	debug = true,
+	--Create dotnet class to use some useful static functions
+	appDomain = dotNetClass "System.AppDomain",
+	assembly = dotNetClass "System.Reflection.Assembly",
 	activator = dotNetClass "System.Activator",
+	assemblyName = dotNetClass "System.Reflection.AssemblyName",
 	csharpProvider = dotnetobject "Microsoft.CSharp.CSharpCodeProvider",
+	assembly_path = micra.AssemblyDir + "Micra.Star.dll",
 	--functions
 	fn getSource = getSourceFileName(), --get path of this script
 	---------------------------------------------
@@ -63,17 +68,13 @@ struct MICRA_CSHARP_STRUCTURE	(
 			local dotnet_class = dotNet.getType classPath
 			if dotnet_class != undefined do (
 			
-				class_instance = (dotNetClass "System.Activator").CreateInstance dotnet_class	
+				class_instance = activator.CreateInstance dotnet_class	
 				return class_instance
 			)
 		)
 	
-		if not doesFileExist (micra.AssemblyDir + "Micra.Star.dll") do return false
-		--Create dotnet class to use some useful static functions
-		local AppDomain = dotNetClass "System.AppDomain"
-		local Assembly = dotNetClass "System.Reflection.Assembly"
-		local AssemblyName = dotNetClass "System.Reflection.AssemblyName"
-		
+		if not doesFileExist assembly_path do return false
+
 		-- -Set the shadow copy so actually original assembly file can be overriten...
 		-- SetShadowCopyFiles is obsoluted according to MSDN 
 		-- but that is the only way to enable ShadowCopy option for current AppDomain. Because through Maxscript
@@ -89,52 +90,67 @@ struct MICRA_CSHARP_STRUCTURE	(
 		-- if you use your own cache path using AppDomain.CurrentDomain.SetCachePath then you have delete them manually
 		-- So I'm not using that
 		
-		AppDomain.CurrentDomain.SetShadowCopyPath (micra.AssemblyDir)
-		AppDomain.CurrentDomain.SetShadowCopyFiles()
+		appDomain.CurrentDomain.SetShadowCopyPath (micra.AssemblyDir)
+		appDomain.CurrentDomain.SetShadowCopyFiles()
 		--load the first version...again don't forget to use different version for every compile in visual studio
-		--AssemblyName.GetAssemblyName using this method we can query to the dll what the version number we have setted in visual studio
-		local assemName = AssemblyName.GetAssemblyName(micra.AssemblyDir + "Micra.Star.dll") --print assemName.FullName
+		--assemblyName.GetAssemblyName using this method we can query to the dll what the version number we have setted in visual studio
+		local assemName = assemblyName.GetAssemblyName assembly_path --print assemName.FullName
 		print ("Assembly.FullName:" + assemName.FullName)
 		--result Micra.Star, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
 
 		--Now load it using assembly name, don't use LoadFromFile
-		local assem = Assembly.Load assemName
---replacement test >		
-			/*local assembly_path = micra.AssemblyDir + "Micra.Star.dll"
-			local assembly_bytes = (dotnetClass "System.IO.File").ReadAllBytes assembly_path
-			local assem = (dotnetClass "System.Reflection.Assembly").Load assembly_bytes*/
---replacement test <		
-		
-		print ("Assembly.Location:" + assem.Location)
+		local asm = assembly.Load assemName
+		print ("Assembly.Location:" + asm.Location)
 		--will print the temp file path runtime used for shadow copy  somthing like "\Application Data\assembly\dl3\OAV6J36X.Q9J\1Z7DWQ44.552\0f496cae\004a3872_967cc901\Micra.Star.dll"
 
 		--use this way to create object of sepcific version instead of (dotNetObject "MYLib.MyClass")
-		class_instance = assem.CreateInstance classPath --create object of first version of MYLib.MyClass
+		class_instance = asm.CreateInstance classPath --create object of first version of MYLib.MyClass
 		class_instance --return class instance
 	),
+	--[ Orien.Tools ] and [ Orine.NetUi ] are merged in to [ Micra.Star.dll ]
 	fn getClassInstance classPath constructorParams:#() forceLoad:false = (
-	
-		local class_instance
-		if not doesFileExist (micra.AssemblyDir + "Micra.Star.dll") do return false
-		if not isLoaded() or forceLoad do try ( --load first time or if forceLoad
-			--Orien.Tools and Orine.NetUi are mergetn in to > 
-			format "Assembly Micra.Star was loaded\n"
-			local assembly_path = micra.AssemblyDir + "Micra.Star.dll"
-			local AssemblyName = dotNetClass "System.Reflection.AssemblyName"
-			local assem_name = AssemblyName.GetAssemblyName(assembly_path)
-			format "Assembly.FullName:%\n" assem_name.FullName --print ddl name and version
-			local assembly_bytes = (dotnetClass "System.IO.File").ReadAllBytes assembly_path
-			local assembly = (dotnetClass "System.Reflection.Assembly").Load assembly_bytes
-
-		) catch (
 		
-			format "mcCSharp > getClassInstance > Unable to load Assembly:\n\t%\n"  (getCurrentException())
-			return false
+		local asm
+		local class_instance
+		if not doesFileExist assembly_path do return false
+		if not isLoaded() then (
+			try ( --load first time
+			
+				format "Loading Assembly [ Micra.Star ]\n"
+				local assem_name = assemblyName.GetAssemblyName assembly_path
+				format "Assembly.FullName:%\n" assem_name.FullName --print ddl name and version
+				local assembly_bytes = (dotnetClass "System.IO.File").ReadAllBytes assembly_path
+				asm = assembly.Load assembly_bytes
+
+			) catch (
+			
+				format "mcCSharp > getClassInstance > Unable to load Assembly:\n\t%\n"  (getCurrentException())
+				return false
+			)
+		) else if forceLoad and McGetCs != undefined do (
+		
+			try (
+				McGetCs.ReloadAssembly assembly_path
+				asm = McGetCs.GetLatestAssembly "Micra.Star"
+				local assem_name = assemblyName.GetAssemblyName assembly_path
+				format "Assembly.FullName:%\n" assem_name.FullName --print ddl name and version
+
+			) catch (
+			
+				format "mcCSharp > getClassInstance > Unable to load Assembly:\n\t%\n"  (getCurrentException())
+				return false
+			)
 		)
 		try (
-			local dotnet_class = dotNet.getType classPath
-			--format "cls:% path:%\n" dotnet_class classPath
-			class_instance = (dotNetClass "System.Activator").CreateInstance dotnet_class	
+			local cls = if forceLoad and McGetCs != undefined then (
+			
+				asm.getType classPath
+				
+			) else (
+			
+				dotNet.getType classPath
+			)
+			class_instance = activator.CreateInstance cls	
 		
 		) catch (
 			format "mcCSharp > getClassInstance > Unable to load Class:\n\t%\n"  (getCurrentException())

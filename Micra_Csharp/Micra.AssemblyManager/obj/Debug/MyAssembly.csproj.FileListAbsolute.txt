@@ -1,0 +1,11 @@
+D:\ReneBaca\Aprog\ORIENTOOLS\C#\MyAssembly\bin\Debug\MyAssembly.dll
+D:\ReneBaca\Aprog\ORIENTOOLS\C#\MyAssembly\bin\Debug\MyAssembly.pdb
+D:\ReneBaca\Aprog\ORIENTOOLS\C#\MyAssembly\obj\Debug\MyAssembly.csproj.CoreCompileInputs.cache
+D:\ReneBaca\Aprog\ORIENTOOLS\C#\MyAssembly\obj\Debug\MyAssembly.dll
+D:\ReneBaca\Aprog\ORIENTOOLS\C#\MyAssembly\obj\Debug\MyAssembly.pdb
+D:\ReneBaca\Aprog\ORIENTOOLS\C#\MyAssembly\obj\Debug\MyAssembly.AssemblyUI.resources
+D:\ReneBaca\Aprog\ORIENTOOLS\C#\MyAssembly\obj\Debug\MyAssembly.csproj.GenerateResource.cache
+D:\ReneBaca\Aprog\ORIENTOOLS\C#\MyAssembly\bin\Debug\Autodesk.Max.dll
+D:\ReneBaca\Aprog\ORIENTOOLS\C#\MyAssembly\bin\Debug\Autodesk.Max.xml
+D:\ReneBaca\Aprog\ORIENTOOLS\C#\MyAssembly\obj\Debug\MyAssembly.csproj.CopyComplete
+D:\ReneBaca\Aprog\ORIENTOOLS\C#\MyAssembly\obj\Debug\MyAssembly.csprojAssemblyReference.cache

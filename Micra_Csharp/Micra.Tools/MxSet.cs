@@ -6,7 +6,6 @@ using System.Reflection;
 namespace Micra.Tools {
     public class MxSet {
 
-
         public static bool Gc() {
             try {
                 GC.Collect(); // collects all unused memory
@@ -25,6 +24,13 @@ namespace Micra.Tools {
         public static void LogLi(string strMsg, params object[] args) {
             if ( args.Length > 0 ) strMsg = String.Format(strMsg, args);
             MxListener.WriteLine(strMsg);
+        }
+
+        public static IFPValue ExecuteMAXScriptScript(string action, bool quietErrors = false) {
+            IFPValue fpv = null;
+            MxGet.Global.ExecuteMAXScriptScript(action, quietErrors, fpv);
+            //ManagedServices.MaxscriptSDK.ExecuteMaxscriptCommand(cmd);
+            return fpv;
         }
 
         public static void SetAccelerators(bool state) {
