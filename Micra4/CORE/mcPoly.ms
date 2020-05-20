@@ -1397,25 +1397,25 @@ struct MICRA_POLY
 	
 			if (classOf obj != Editable_Poly) do return (mcMsgList.warn "not_poly") 
 		if (edges.numberset == 0) do return (mcMsgList.warn "not_esel") 
-		local edges_vertices = #{}
+		local edges_vertices = polyOp.getVertsUsingEdge obj edges
 		for ei in edges do (
 	
-			local everts = polyOp.getVertsUsingEdge obj ei as array
-			local efaces = polyOp.getFacesUsingEdge obj ei as array
-			edges_vertices += (everts as bitarray)
-			local v1_a = everts[1]
-			local v2_a = everts[2]
+			local everts = polyOp.getVertsUsingEdge obj ei
+			local v1_a = (everts as array)[1]
+			local v2_a = (everts as array)[2]
 			--get all edges sharing 2 vertices -> grow esel
-			local v1edges = polyOp.getEdgesUsingVert obj v1_a
-			local v2edges = polyOp.getEdgesUsingVert obj v2_a
-			local grow_edges = v1edges + v2edges
+			local v1edges = polyOp.getEdgesUsingVert obj v1_a --grow edges
+			local v2edges = polyOp.getEdgesUsingVert obj v2_a --grow edges
+			local grow_edges = (v1edges + v2edges) - #{ei} --minus this edge
 			--get two side neighbour edges 
+			local filter_verts = edges_vertices - everts
 			local loop_side_edges = for ei in grow_edges where (
-				
-				not (mcPoly.isEdgeInFace obj ei efaces[1]) and
-				not (mcPoly.isEdgeInFace obj ei efaces[2])
+				--format "e:% laying on verts:%\n" ei (mcPoly.isEdgeUsingAnyVert obj ei filter_verts)
+				not (mcPoly.isEdgeUsingAnyVert obj ei filter_verts)
 				
 			) collect ei
+			--format "loop_side_edges:%\n" loop_side_edges
+			
 			if loop_side_edges.count != 2 do continue --skip invalid geometry
 			local p1_a = polyOp.getVert obj v1_a
 			local p2_a = polyOp.getVert obj v2_a
