@@ -54,7 +54,7 @@ namespace MicraTools.Launcher {
         }
 
         private void button4_Click(object sender, System.EventArgs e) {
-            Form ctm = new CtoMaxTest();
+            Form ctm = new CsharpToMaxTest();
             ctm.Show();
         }
     }

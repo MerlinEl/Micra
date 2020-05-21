@@ -32,26 +32,26 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.numericUpDown2 = new System.Windows.Forms.NumericUpDown();
-            this.button3 = new System.Windows.Forms.Button();
+            this.BtnSelectFacesByThickness = new System.Windows.Forms.Button();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.button2 = new System.Windows.Forms.Button();
+            this.BtnSelectFacesByNormal = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
+            this.SpnAreaOffset = new System.Windows.Forms.NumericUpDown();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
-            this.button11 = new System.Windows.Forms.Button();
-            this.button10 = new System.Windows.Forms.Button();
-            this.button9 = new System.Windows.Forms.Button();
-            this.button8 = new System.Windows.Forms.Button();
+            this.BtnFlatenByNormal = new System.Windows.Forms.Button();
+            this.BtnFlatenTop = new System.Windows.Forms.Button();
+            this.BtnFuseEdges = new System.Windows.Forms.Button();
+            this.BtnUnchamferEring = new System.Windows.Forms.Button();
             this.label11 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
             this.numericUpDown4 = new System.Windows.Forms.NumericUpDown();
-            this.button6 = new System.Windows.Forms.Button();
+            this.BtnOptimizeEring = new System.Windows.Forms.Button();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.button7 = new System.Windows.Forms.Button();
-            this.button5 = new System.Windows.Forms.Button();
+            this.BtnCreateBoundingBox = new System.Windows.Forms.Button();
+            this.BtnCreateBoundingPlane = new System.Windows.Forms.Button();
             this.label9 = new System.Windows.Forms.Label();
             this.numericUpDown5 = new System.Windows.Forms.NumericUpDown();
             this.label7 = new System.Windows.Forms.Label();
@@ -61,10 +61,11 @@
             this.TitleBar = new System.Windows.Forms.Panel();
             this.BtnClose = new System.Windows.Forms.Button();
             this.TitleLabel = new System.Windows.Forms.Label();
+            this.BtnCreateConcaveHull = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown6)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.SpnAreaOffset)).BeginInit();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown4)).BeginInit();
             this.groupBox3.SuspendLayout();
@@ -92,13 +93,13 @@
             this.groupBox1.Controls.Add(this.label4);
             this.groupBox1.Controls.Add(this.label5);
             this.groupBox1.Controls.Add(this.numericUpDown2);
-            this.groupBox1.Controls.Add(this.button3);
+            this.groupBox1.Controls.Add(this.BtnSelectFacesByThickness);
             this.groupBox1.Controls.Add(this.comboBox1);
             this.groupBox1.Controls.Add(this.label3);
-            this.groupBox1.Controls.Add(this.button2);
+            this.groupBox1.Controls.Add(this.BtnSelectFacesByNormal);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Controls.Add(this.numericUpDown1);
+            this.groupBox1.Controls.Add(this.SpnAreaOffset);
             this.groupBox1.Controls.Add(this.BtnSelSimElements);
             this.groupBox1.Location = new System.Drawing.Point(4, 29);
             this.groupBox1.Name = "groupBox1";
@@ -179,14 +180,14 @@
             0,
             65536});
             // 
-            // button3
+            // BtnSelectFacesByThickness
             // 
-            this.button3.Location = new System.Drawing.Point(4, 135);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(144, 23);
-            this.button3.TabIndex = 7;
-            this.button3.Text = "Select Faces By Thickness";
-            this.button3.UseVisualStyleBackColor = true;
+            this.BtnSelectFacesByThickness.Location = new System.Drawing.Point(4, 135);
+            this.BtnSelectFacesByThickness.Name = "BtnSelectFacesByThickness";
+            this.BtnSelectFacesByThickness.Size = new System.Drawing.Size(144, 23);
+            this.BtnSelectFacesByThickness.TabIndex = 7;
+            this.BtnSelectFacesByThickness.Text = "Select Faces By Thickness";
+            this.BtnSelectFacesByThickness.UseVisualStyleBackColor = true;
             // 
             // comboBox1
             // 
@@ -213,14 +214,14 @@
             this.label3.TabIndex = 5;
             this.label3.Text = "Method:";
             // 
-            // button2
+            // BtnSelectFacesByNormal
             // 
-            this.button2.Location = new System.Drawing.Point(6, 76);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(144, 23);
-            this.button2.TabIndex = 3;
-            this.button2.Text = "Select Faces By Normal";
-            this.button2.UseVisualStyleBackColor = true;
+            this.BtnSelectFacesByNormal.Location = new System.Drawing.Point(6, 76);
+            this.BtnSelectFacesByNormal.Name = "BtnSelectFacesByNormal";
+            this.BtnSelectFacesByNormal.Size = new System.Drawing.Size(144, 23);
+            this.BtnSelectFacesByNormal.TabIndex = 3;
+            this.BtnSelectFacesByNormal.Text = "Select Faces By Normal";
+            this.BtnSelectFacesByNormal.UseVisualStyleBackColor = true;
             // 
             // label2
             // 
@@ -239,18 +240,18 @@
             this.label1.TabIndex = 2;
             this.label1.Text = "Tolerance:";
             // 
-            // numericUpDown1
+            // SpnAreaOffset
             // 
-            this.numericUpDown1.Increment = new decimal(new int[] {
+            this.SpnAreaOffset.Increment = new decimal(new int[] {
             1,
             0,
             0,
             65536});
-            this.numericUpDown1.Location = new System.Drawing.Point(72, 48);
-            this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(76, 20);
-            this.numericUpDown1.TabIndex = 1;
-            this.numericUpDown1.Value = new decimal(new int[] {
+            this.SpnAreaOffset.Location = new System.Drawing.Point(72, 48);
+            this.SpnAreaOffset.Name = "SpnAreaOffset";
+            this.SpnAreaOffset.Size = new System.Drawing.Size(76, 20);
+            this.SpnAreaOffset.TabIndex = 1;
+            this.SpnAreaOffset.Value = new decimal(new int[] {
             10,
             0,
             0,
@@ -259,14 +260,14 @@
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.checkBox1);
-            this.groupBox2.Controls.Add(this.button11);
-            this.groupBox2.Controls.Add(this.button10);
-            this.groupBox2.Controls.Add(this.button9);
-            this.groupBox2.Controls.Add(this.button8);
+            this.groupBox2.Controls.Add(this.BtnFlatenByNormal);
+            this.groupBox2.Controls.Add(this.BtnFlatenTop);
+            this.groupBox2.Controls.Add(this.BtnFuseEdges);
+            this.groupBox2.Controls.Add(this.BtnUnchamferEring);
             this.groupBox2.Controls.Add(this.label11);
             this.groupBox2.Controls.Add(this.label12);
             this.groupBox2.Controls.Add(this.numericUpDown4);
-            this.groupBox2.Controls.Add(this.button6);
+            this.groupBox2.Controls.Add(this.BtnOptimizeEring);
             this.groupBox2.Location = new System.Drawing.Point(164, 29);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(154, 246);
@@ -285,41 +286,41 @@
             this.checkBox1.Text = "wipe";
             this.checkBox1.UseVisualStyleBackColor = true;
             // 
-            // button11
+            // BtnFlatenByNormal
             // 
-            this.button11.Location = new System.Drawing.Point(4, 156);
-            this.button11.Name = "button11";
-            this.button11.Size = new System.Drawing.Size(144, 23);
-            this.button11.TabIndex = 6;
-            this.button11.Text = "Flatten By Face N";
-            this.button11.UseVisualStyleBackColor = true;
+            this.BtnFlatenByNormal.Location = new System.Drawing.Point(4, 156);
+            this.BtnFlatenByNormal.Name = "BtnFlatenByNormal";
+            this.BtnFlatenByNormal.Size = new System.Drawing.Size(144, 23);
+            this.BtnFlatenByNormal.TabIndex = 6;
+            this.BtnFlatenByNormal.Text = "Flatten By Face N";
+            this.BtnFlatenByNormal.UseVisualStyleBackColor = true;
             // 
-            // button10
+            // BtnFlatenTop
             // 
-            this.button10.Location = new System.Drawing.Point(4, 130);
-            this.button10.Name = "button10";
-            this.button10.Size = new System.Drawing.Size(144, 23);
-            this.button10.TabIndex = 5;
-            this.button10.Text = "Flatten Top";
-            this.button10.UseVisualStyleBackColor = true;
+            this.BtnFlatenTop.Location = new System.Drawing.Point(4, 130);
+            this.BtnFlatenTop.Name = "BtnFlatenTop";
+            this.BtnFlatenTop.Size = new System.Drawing.Size(144, 23);
+            this.BtnFlatenTop.TabIndex = 5;
+            this.BtnFlatenTop.Text = "Flatten Top";
+            this.BtnFlatenTop.UseVisualStyleBackColor = true;
             // 
-            // button9
+            // BtnFuseEdges
             // 
-            this.button9.Location = new System.Drawing.Point(4, 102);
-            this.button9.Name = "button9";
-            this.button9.Size = new System.Drawing.Size(92, 23);
-            this.button9.TabIndex = 4;
-            this.button9.Text = "Fuse Edges";
-            this.button9.UseVisualStyleBackColor = true;
+            this.BtnFuseEdges.Location = new System.Drawing.Point(4, 102);
+            this.BtnFuseEdges.Name = "BtnFuseEdges";
+            this.BtnFuseEdges.Size = new System.Drawing.Size(92, 23);
+            this.BtnFuseEdges.TabIndex = 4;
+            this.BtnFuseEdges.Text = "Fuse Edges";
+            this.BtnFuseEdges.UseVisualStyleBackColor = true;
             // 
-            // button8
+            // BtnUnchamferEring
             // 
-            this.button8.Location = new System.Drawing.Point(4, 76);
-            this.button8.Name = "button8";
-            this.button8.Size = new System.Drawing.Size(144, 23);
-            this.button8.TabIndex = 3;
-            this.button8.Text = "Unchamfer eRing";
-            this.button8.UseVisualStyleBackColor = true;
+            this.BtnUnchamferEring.Location = new System.Drawing.Point(4, 76);
+            this.BtnUnchamferEring.Name = "BtnUnchamferEring";
+            this.BtnUnchamferEring.Size = new System.Drawing.Size(144, 23);
+            this.BtnUnchamferEring.TabIndex = 3;
+            this.BtnUnchamferEring.Text = "Unchamfer eRing";
+            this.BtnUnchamferEring.UseVisualStyleBackColor = true;
             // 
             // label11
             // 
@@ -355,19 +356,20 @@
             0,
             0});
             // 
-            // button6
+            // BtnOptimizeEring
             // 
-            this.button6.Location = new System.Drawing.Point(4, 19);
-            this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(144, 23);
-            this.button6.TabIndex = 0;
-            this.button6.Text = "Optimize By eRing";
-            this.button6.UseVisualStyleBackColor = true;
+            this.BtnOptimizeEring.Location = new System.Drawing.Point(4, 19);
+            this.BtnOptimizeEring.Name = "BtnOptimizeEring";
+            this.BtnOptimizeEring.Size = new System.Drawing.Size(144, 23);
+            this.BtnOptimizeEring.TabIndex = 0;
+            this.BtnOptimizeEring.Text = "Optimize By eRing";
+            this.BtnOptimizeEring.UseVisualStyleBackColor = true;
             // 
             // groupBox3
             // 
-            this.groupBox3.Controls.Add(this.button7);
-            this.groupBox3.Controls.Add(this.button5);
+            this.groupBox3.Controls.Add(this.BtnCreateConcaveHull);
+            this.groupBox3.Controls.Add(this.BtnCreateBoundingBox);
+            this.groupBox3.Controls.Add(this.BtnCreateBoundingPlane);
             this.groupBox3.Controls.Add(this.label9);
             this.groupBox3.Controls.Add(this.numericUpDown5);
             this.groupBox3.Controls.Add(this.label7);
@@ -381,23 +383,23 @@
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Create:";
             // 
-            // button7
+            // BtnCreateBoundingBox
             // 
-            this.button7.Location = new System.Drawing.Point(4, 99);
-            this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(144, 23);
-            this.button7.TabIndex = 6;
-            this.button7.Text = "Create Bounding Box";
-            this.button7.UseVisualStyleBackColor = true;
+            this.BtnCreateBoundingBox.Location = new System.Drawing.Point(6, 188);
+            this.BtnCreateBoundingBox.Name = "BtnCreateBoundingBox";
+            this.BtnCreateBoundingBox.Size = new System.Drawing.Size(144, 23);
+            this.BtnCreateBoundingBox.TabIndex = 6;
+            this.BtnCreateBoundingBox.Text = "Create Bounding Box";
+            this.BtnCreateBoundingBox.UseVisualStyleBackColor = true;
             // 
-            // button5
+            // BtnCreateBoundingPlane
             // 
-            this.button5.Location = new System.Drawing.Point(4, 126);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(144, 23);
-            this.button5.TabIndex = 5;
-            this.button5.Text = "Create Bounding Plane";
-            this.button5.UseVisualStyleBackColor = true;
+            this.BtnCreateBoundingPlane.Location = new System.Drawing.Point(6, 215);
+            this.BtnCreateBoundingPlane.Name = "BtnCreateBoundingPlane";
+            this.BtnCreateBoundingPlane.Size = new System.Drawing.Size(144, 23);
+            this.BtnCreateBoundingPlane.TabIndex = 5;
+            this.BtnCreateBoundingPlane.Text = "Create Bounding Plane";
+            this.BtnCreateBoundingPlane.UseVisualStyleBackColor = true;
             // 
             // label9
             // 
@@ -509,6 +511,15 @@
             this.TitleLabel.TabIndex = 15;
             this.TitleLabel.Text = "Geometry Optimizer:";
             // 
+            // BtnCreateConcaveHull
+            // 
+            this.BtnCreateConcaveHull.Location = new System.Drawing.Point(6, 99);
+            this.BtnCreateConcaveHull.Name = "BtnCreateConcaveHull";
+            this.BtnCreateConcaveHull.Size = new System.Drawing.Size(144, 23);
+            this.BtnCreateConcaveHull.TabIndex = 7;
+            this.BtnCreateConcaveHull.Text = "Create Concave Hull";
+            this.BtnCreateConcaveHull.UseVisualStyleBackColor = true;
+            // 
             // MxGeometryOptimizer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -527,7 +538,7 @@
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown6)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.SpnAreaOffset)).EndInit();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown4)).EndInit();
@@ -546,21 +557,21 @@
         private System.Windows.Forms.Button BtnSelSimElements;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.NumericUpDown numericUpDown1;
+        private System.Windows.Forms.NumericUpDown SpnAreaOffset;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.NumericUpDown numericUpDown2;
-        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button BtnSelectFacesByThickness;
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button BtnSelectFacesByNormal;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.NumericUpDown numericUpDown4;
-        private System.Windows.Forms.Button button6;
+        private System.Windows.Forms.Button BtnOptimizeEring;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.NumericUpDown numericUpDown5;
@@ -568,12 +579,12 @@
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.NumericUpDown numericUpDown3;
         private System.Windows.Forms.Button BtnCreateConvexHull;
-        private System.Windows.Forms.Button button11;
-        private System.Windows.Forms.Button button10;
-        private System.Windows.Forms.Button button9;
-        private System.Windows.Forms.Button button8;
-        private System.Windows.Forms.Button button7;
-        private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.Button BtnFlatenByNormal;
+        private System.Windows.Forms.Button BtnFlatenTop;
+        private System.Windows.Forms.Button BtnFuseEdges;
+        private System.Windows.Forms.Button BtnUnchamferEring;
+        private System.Windows.Forms.Button BtnCreateBoundingBox;
+        private System.Windows.Forms.Button BtnCreateBoundingPlane;
         private System.Windows.Forms.CheckBox checkBox1;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.NumericUpDown numericUpDown6;
@@ -581,5 +592,6 @@
         private System.Windows.Forms.Panel TitleBar;
         private System.Windows.Forms.Label TitleLabel;
         private System.Windows.Forms.Button BtnClose;
+        private System.Windows.Forms.Button BtnCreateConcaveHull;
     }
 }

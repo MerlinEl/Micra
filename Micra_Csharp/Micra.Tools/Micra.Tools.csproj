@@ -63,11 +63,11 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Backup\Proxy.cs.txt" />
-    <Compile Include="CtoMaxTest.cs">
+    <Compile Include="CsharpToMaxTest.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="CtoMaxTest.Designer.cs">
-      <DependentUpon>CtoMaxTest.cs</DependentUpon>
+    <Compile Include="CsharpToMaxTest.Designer.cs">
+      <DependentUpon>CsharpToMaxTest.cs</DependentUpon>
     </Compile>
     <Compile Include="MxListener.cs" />
     <Content Include="Backup\MxAssemblyManager.cs.txt" />
@@ -82,16 +82,17 @@
       <DependentUpon>MxGeometryOptimizer.cs</DependentUpon>
     </Compile>
     <Compile Include="MxGet.cs" />
-    <Compile Include="MxObj.cs" />
+    <Compile Include="MxCollection.cs" />
     <Compile Include="MxPoly.cs" />
     <Compile Include="MxSet.cs" />
+    <Compile Include="MxUi.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Content Include="Resources\SurfaceRelax.cs.txt" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <EmbeddedResource Include="CtoMaxTest.resx">
-      <DependentUpon>CtoMaxTest.cs</DependentUpon>
+    <EmbeddedResource Include="CsharpToMaxTest.resx">
+      <DependentUpon>CsharpToMaxTest.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MxGeometryOptimizer.resx">
       <DependentUpon>MxGeometryOptimizer.cs</DependentUpon>

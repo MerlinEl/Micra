@@ -40,6 +40,8 @@ namespace Micra.Tools {
                 ManagedServices.AppSDK.DisableAccelerators(); // for gotfocus
         }
 
+        #region Untested
+
         public static string FbxExport(string filePath) {
 
             string fullPath = Path.Combine(filePath);
@@ -48,29 +50,9 @@ namespace Micra.Tools {
             return fullPath;
         }
 
-        //TODO TEST load - unload DLL
-        public static AppDomain Orien3DsMaxDomain = AppDomain.CreateDomain("Orien3DsMaxDomain"); //not used
-        public static Type[] LoadAssembly(string filePath) { //not used
+        #endregion
+        
 
-            if ( !File.Exists(filePath) ) return null;
-            //AppDomain dom = AppDomain.CreateDomain(domainName);
-            AssemblyName assemblyName = new AssemblyName();
-            assemblyName.CodeBase = filePath;
-            Assembly assembly = Orien3DsMaxDomain.Load(assemblyName);
-            return assembly.GetTypes();
 
-            //Assembly assem = Assembly.Load(File.ReadAllBytes(filePath));
-        }
-        public static bool UnloadAssembly() { //not used
-            try {
-
-                AppDomain.Unload(Orien3DsMaxDomain);
-
-            } catch {
-
-                return false;
-            }
-            return true;
-        }
     }
 }

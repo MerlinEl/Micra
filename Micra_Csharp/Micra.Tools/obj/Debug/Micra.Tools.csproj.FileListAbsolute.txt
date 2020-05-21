@@ -46,11 +46,11 @@ D:\ReneBaca\Aprog\Micra\Micra_Csharp\Micra.Tools\bin\Debug\fr-FR\AdWindows.resou
 D:\ReneBaca\Aprog\Micra\Micra_Csharp\Micra.Tools\bin\Debug\ja-JP\AdWindows.resources.dll
 D:\ReneBaca\Aprog\Micra\Micra_Csharp\Micra.Tools\bin\Debug\pt-BR\AdWindows.resources.dll
 D:\ReneBaca\Aprog\Micra\Micra_Csharp\Micra.Tools\bin\Debug\zh-CN\AdWindows.resources.dll
-D:\ReneBaca\Aprog\Micra\Micra_Csharp\Micra.Tools\obj\Debug\Micra.Tools.CtoMaxTest.resources
 D:\ReneBaca\Aprog\Micra\Micra_Csharp\Micra.Tools\obj\Debug\Micra.Tools.MxGeometryOptimizer.resources
 D:\ReneBaca\Aprog\Micra\Micra_Csharp\Micra.Tools\obj\Debug\Micra.Tools.csproj.GenerateResource.cache
 D:\ReneBaca\Aprog\Micra\Micra_Csharp\Micra.Tools\obj\Debug\Micra.Tools.csproj.CoreCompileInputs.cache
 D:\ReneBaca\Aprog\Micra\Micra_Csharp\Micra.Tools\obj\Debug\Micra.Tools.csproj.CopyComplete
 D:\ReneBaca\Aprog\Micra\Micra_Csharp\Micra.Tools\obj\Debug\Micra.Tools.dll
 D:\ReneBaca\Aprog\Micra\Micra_Csharp\Micra.Tools\obj\Debug\Micra.Tools.pdb
+D:\ReneBaca\Aprog\Micra\Micra_Csharp\Micra.Tools\obj\Debug\Micra.Tools.CsharpToMaxTest.resources
 D:\ReneBaca\Aprog\Micra\Micra_Csharp\Micra.Tools\obj\Debug\Micra.Tools.csprojAssemblyReference.cache

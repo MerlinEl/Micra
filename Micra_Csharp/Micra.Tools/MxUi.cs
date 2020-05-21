@@ -1,0 +1,34 @@
+﻿using Autodesk.Max.Plugins;
+using Orien.NetUi;
+using System;
+using System.Collections.Generic;
+using System.Drawing;
+using System.IO;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace Micra.Tools {
+    class MxUi {
+
+        public static void SetButonTooltip(Button ctrl, string bodyText, string imgName) {
+
+            McTooltip tltp = new McTooltip {
+
+                MaxSize = new Size(400, 400),
+                HeaderText = ctrl.Text,
+                BodyText = bodyText,
+                BodyTextFont = new Font("Arial", 12, FontStyle.Regular),
+                FooterText = "Press F1 for more help.",
+                BodyImageStretch = false,
+                ExtendedMode = true,
+                AutoHide = false//keep visible extended version while mouse is on button
+            };
+            //C# test get upper dir 2*
+            string micraDir = File.Exists(MxGet.MicraRootDir) ? MxGet.MicraRootDir : MxGet.MicraRootDir2; 
+            string imgPath = micraDir + @"\Img\TooltipIcons\" + imgName + ".png";
+            tltp.SetToolTip(ctrl, imgPath);
+        }
+    }
+}

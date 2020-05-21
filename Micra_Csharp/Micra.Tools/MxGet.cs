@@ -23,14 +23,33 @@ namespace Micra.Tools {
 
         #endregion
 
-        #region Objects
+        #region Interfaces
 
-        public static object FontStyles = Enum.ToObject(typeof(FontStyle), 0);
-        public static string Assembly_Version = Assembly.GetExecutingAssembly().GetName().Version.ToString();
+        public static IGlobal Global => GlobalInterface.Instance;
+        public static IInterface13 Interface => Global.COREInterface13;
+
+
         #endregion
 
-        #region Methods
+        #region Variables
 
+        public static string AssemblyVersion = Assembly.GetExecutingAssembly().GetName().Version.ToString();
+        public static string AssemblyDir {
+            get {
+                string codeBase = Assembly.GetExecutingAssembly().CodeBase;
+                UriBuilder uri = new UriBuilder(codeBase);
+                string path = Uri.UnescapeDataString(uri.Path);
+                return Path.GetDirectoryName(path);
+            }
+        }
+        public static string MicraRootDir = Directory.GetParent(AssemblyDir).FullName;
+        public static string MicraRootDir2 => Path.Combine(MicraRootDir, @"..\..\Micra4"); //C# test get upper dir 2*
+        #endregion
+
+
+        #region Objects - New Objects
+
+        public static object FontStyles = Enum.ToObject(typeof(FontStyle), 0);
         public static Font NewFont(string family, float size, FontStyle style) => new Font(family, size, style);
         public static Size NewSize(int w, int h) => new Size(w, h);
         public static Color NewColor(int r, int g, int b) => Color.FromArgb(r, g, b);
@@ -60,6 +79,9 @@ namespace Micra.Tools {
             }
             return latest_assembly;
         }
+
+
+
         public static Assembly ReloadAssembly(string assembly_path) {
 
             MxSet.LogLi("Assembly Path:" + assembly_path);
@@ -71,16 +93,10 @@ namespace Micra.Tools {
             return latest_assembly;
         }
 
-        public static string AssemblyDirectory {
-            get {
-                string codeBase = Assembly.GetExecutingAssembly().CodeBase;
-                UriBuilder uri = new UriBuilder(codeBase);
-                string path = Uri.UnescapeDataString(uri.Path);
-                return Path.GetDirectoryName(path);
-            }
-        }
-
         #endregion
+
+
+        #region Test
 
         /// <summary>
         /// NativeWindow parentWindow = GetWindowFromHwnd(hwnd);
@@ -99,21 +115,6 @@ namespace Micra.Tools {
             window.AssignHandle(handle);
             return window;
         }
-
-
-
-        public static IGlobal Global {
-            get { return GlobalInterface.Instance; }
-        }
-
-        /*public static IInterface Interface {
-            get { return Global.COREInterface; }
-        }*/
-
-        public static IInterface13 Interface {
-            get { return  Global.COREInterface13; }
-        }
-
         public static IPoint3 Point(double x, double y, double z) {
 
             return Global.Point3.Create(x, y, z);
@@ -131,5 +132,9 @@ namespace Micra.Tools {
                 p = MxGet.Global.Point3.Create(x, y, z);
             }
         }*/
+        #endregion
+
+
+
     }
 }
