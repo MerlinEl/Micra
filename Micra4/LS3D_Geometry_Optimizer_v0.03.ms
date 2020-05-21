@@ -293,41 +293,58 @@ rollout mcCollisionOptimizeDialog "Geometry Optimizer:" width:328 height:316
 		polyOp.attach obj bbox
 		subobjectlevel = slev
 	)
+	fn createPolygonFromPoints obj verts= (
+	
+		local polygon_points = for vi in verts collect (polyOp.getVert obj vi)
+		mcPoly.createPolygonObj polygon_points
+	)
 	fn createBoundingPlane obj = (
 	
 		if classOf obj != Editable_Poly do return (mcMsgList.warn "not_poly")
-		local slev = subobjectlevel
-		local fsel = mcPoly.getCurentSelectionAs obj #faces
-		if (slev != 4 and slev != 5) or fsel.count == 0 do return (mcMsgList.warn "not_fsel")
-		local vsel = mcPoly.getCurentSelectionAs obj #verts
-		local sum = [0,0,0]
-		local bmin, bmax
-		for v in vsel do (
-			local p = polyOp.getVert obj v --vert pos				
-			sum += p
-			if bmin != undefined then (
-				
-				bmin.x = amin #(p.x, bmin.x)
-				bmin.y = amin #(p.y, bmin.y)
-				bmin.z = amin #(p.z, bmin.z)
+		local slev = subobjectlevel, bbox, bigest_face
+		if (slev == 1) then ( --create geometry from vertices
+			
+			local vsel = polyOp.getVertSelection obj
+			if vsel.numberset == 0 do return (mcMsgList.warn "not_vsel")
+			bbox = createPolygonFromPoints obj vsel
+			bigest_face= ((polyOp.getFacesUsingVert obj (vsel as array)[1]) as array)[1]
 
-				bmax.x = amax #(p.x, bmax.x)
-				bmax.y = amax #(p.y, bmax.y)
-				bmax.z = amax #(p.z, bmax.z)
+		) else ( --build bounding plane
+		
+			local fsel = mcPoly.getCurentSelectionAs obj #faces
+			if (slev != 4 and slev != 5) or fsel.count == 0 do return (mcMsgList.warn "not_fsel")
+			local vsel = mcPoly.getCurentSelectionAs obj #verts
+			local sum = [0,0,0]
+			local bmin, bmax
+			for v in vsel do (
+				local p = polyOp.getVert obj v --vert pos				
+				sum += p
+				if bmin != undefined then (
+					
+					bmin.x = amin #(p.x, bmin.x)
+					bmin.y = amin #(p.y, bmin.y)
+					bmin.z = amin #(p.z, bmin.z)
+
+					bmax.x = amax #(p.x, bmax.x)
+					bmax.y = amax #(p.y, bmax.y)
+					bmax.z = amax #(p.z, bmax.z)
+				)
+				else bmin = copy (bmax = p)
 			)
-			else bmin = copy (bmax = p)
+			--create bounding box at center
+			local center = sum/vsel.count
+			bbox = mcPoly.createBoundingBox bmin bmax center (uniqueName "Bounding_Plane") addMaterial:false
+			
+			--on bbox delete all faces except one
+			local keep_face = mcPoly.getLargestFace bbox #{1..bbox.faces.count}
+			local faces_to_delete = for f in bbox.faces where f.index != keep_face collect f.index
+			polyop.deletefaces bbox faces_to_delete
+			bigest_face = mcPoly.getLargestFace obj fsel
 		)
-		--create bounding box at center
-		local center = sum/vsel.count
-		local bbox = mcPoly.createBoundingBox bmin bmax center (uniqueName "Bounding_Plane") addMaterial:false
+		
 		--from obj get material id and normal
-		local bigest_face = mcPoly.getLargestFace obj fsel
 		local face_normal = polyOp.getFaceNormal obj bigest_face
 		local face_mat_id = polyOp.getFaceMatID obj bigest_face
-		--on bbox delete all faces except one
-		local keep_face = mcPoly.getLargestFace bbox #{1..bbox.faces.count}
-		local faces_to_delete = for f in bbox.faces where f.index != keep_face collect f.index
-		polyop.deletefaces bbox faces_to_delete
 		polyOp.setFaceMatID bbox 1 face_mat_id
 		local need_to_flip = dot face_normal (polyOp.getFaceNormal bbox 1) == -1
 		--format "dot:% need flip:%\n" (dot face_normal (polyOp.getFaceNormal bbox 1)) need_to_flip
