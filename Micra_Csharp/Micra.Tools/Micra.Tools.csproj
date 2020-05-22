@@ -69,6 +69,7 @@
     <Compile Include="CsharpToMaxTest.Designer.cs">
       <DependentUpon>CsharpToMaxTest.cs</DependentUpon>
     </Compile>
+    <Compile Include="MxFile.cs" />
     <Compile Include="MxListener.cs" />
     <Content Include="Backup\MxAssemblyManager.cs.txt" />
     <Compile Include="MxConsole.cs">
@@ -83,9 +84,11 @@
     </Compile>
     <Compile Include="MxGet.cs" />
     <Compile Include="MxCollection.cs" />
+    <Compile Include="MxMap.cs" />
     <Compile Include="MxPoly.cs" />
     <Compile Include="MxSet.cs" />
     <Compile Include="MxUi.cs" />
+    <Compile Include="MxUvs.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Content Include="Resources\SurfaceRelax.cs.txt" />
   </ItemGroup>

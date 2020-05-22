@@ -50,6 +50,7 @@
             this.numericUpDown4 = new System.Windows.Forms.NumericUpDown();
             this.BtnOptimizeEring = new System.Windows.Forms.Button();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.BtnCreateConcaveHull = new System.Windows.Forms.Button();
             this.BtnCreateBoundingBox = new System.Windows.Forms.Button();
             this.BtnCreateBoundingPlane = new System.Windows.Forms.Button();
             this.label9 = new System.Windows.Forms.Label();
@@ -61,7 +62,6 @@
             this.TitleBar = new System.Windows.Forms.Panel();
             this.BtnClose = new System.Windows.Forms.Button();
             this.TitleLabel = new System.Windows.Forms.Label();
-            this.BtnCreateConcaveHull = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown6)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
@@ -383,6 +383,15 @@
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Create:";
             // 
+            // BtnCreateConcaveHull
+            // 
+            this.BtnCreateConcaveHull.Location = new System.Drawing.Point(6, 99);
+            this.BtnCreateConcaveHull.Name = "BtnCreateConcaveHull";
+            this.BtnCreateConcaveHull.Size = new System.Drawing.Size(144, 23);
+            this.BtnCreateConcaveHull.TabIndex = 7;
+            this.BtnCreateConcaveHull.Text = "Create Concave Hull";
+            this.BtnCreateConcaveHull.UseVisualStyleBackColor = true;
+            // 
             // BtnCreateBoundingBox
             // 
             this.BtnCreateBoundingBox.Location = new System.Drawing.Point(6, 188);
@@ -510,15 +519,6 @@
             this.TitleLabel.Size = new System.Drawing.Size(168, 19);
             this.TitleLabel.TabIndex = 15;
             this.TitleLabel.Text = "Geometry Optimizer:";
-            // 
-            // BtnCreateConcaveHull
-            // 
-            this.BtnCreateConcaveHull.Location = new System.Drawing.Point(6, 99);
-            this.BtnCreateConcaveHull.Name = "BtnCreateConcaveHull";
-            this.BtnCreateConcaveHull.Size = new System.Drawing.Size(144, 23);
-            this.BtnCreateConcaveHull.TabIndex = 7;
-            this.BtnCreateConcaveHull.Text = "Create Concave Hull";
-            this.BtnCreateConcaveHull.UseVisualStyleBackColor = true;
             // 
             // MxGeometryOptimizer
             // 

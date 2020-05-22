@@ -2,6 +2,7 @@
 using System;
 using System.IO;
 using System.Reflection;
+using System.Runtime.InteropServices;
 //Test Class for load unload Assembly
 namespace Micra.Tools {
     public class MxSet {
@@ -39,15 +40,26 @@ namespace Micra.Tools {
             else
                 ManagedServices.AppSDK.DisableAccelerators(); // for gotfocus
         }
+        public uint ProgressBarFunc(ref IntPtr ppContext) {
+            return 0;
+        }
+        delegate uint ProgressBarDelegate(ref IntPtr ppContext);
+
+
 
         #region Untested
 
-        public static string FbxExport(string filePath) {
+        //MxGet.Interface.AddPrompt("Yeeehaaaaaaaaaa!");
 
-            string fullPath = Path.Combine(filePath);
-            IClass_ID exporterID = MxGet.Global.Class_ID.Create(0x27227747, 0xDD6978);
-            MxGet.Interface.ExportToFile(fullPath, true, 1, exporterID);
-            return fullPath;
+        public void ShowProgressBar() {
+
+            //yourInterface is IInterface of Max SDK ,You can take pointer on BeginEditParams from UtilityObj
+            ProgressBarDelegate progressBarDelegate = new ProgressBarDelegate(ProgressBarFunc);
+            IntPtr progressBarFunc = Marshal.GetFunctionPointerForDelegate(progressBarDelegate);
+            MxGet.Interface.ProgressStart("Progress Started", false, progressBarFunc, IntPtr.Zero);
+            //If false parametre is true ,cancel btn of progress bar will be show.
+            MxGet.Interface.ProgressUpdate(0, false, "Progress Update");
+            MxGet.Interface.ProgressEnd();
         }
 
         #endregion

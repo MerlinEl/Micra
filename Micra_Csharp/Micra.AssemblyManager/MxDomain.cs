@@ -74,7 +74,6 @@ namespace MyAssembly {
         public void DestroyDomain() => AppDomain.Unload(appDomain);
 
         public Assembly[] GetAssemblies() => appDomain.GetAssemblies();
-
         public Assembly GetAssembly(string assemblyName) {
 
             Assembly[] assemblies = GetAssemblies();

@@ -130,10 +130,9 @@ struct MICRA_CSHARP_STRUCTURE	(
 		) else if forceLoad and McGetCs != undefined do (
 		
 			try (
-				McGetCs.ReloadAssembly assembly_path
-				asm = McGetCs.GetLatestAssembly "Micra.Star"
-				local assem_name = assemblyName.GetAssemblyName assembly_path
-				format "Assembly.FullName:%\n" assem_name.FullName --print ddl name and version
+				McGetCs.ReloadAssembly assembly_path --load dll file
+				asm = McGetCs.GetLatestAssembly "Micra.Star" --pickup latest dll instance from max domain
+				format "Assembly.FullName:%\n" asm.FullName --print ddl name and version
 
 			) catch (
 			
@@ -148,7 +147,7 @@ struct MICRA_CSHARP_STRUCTURE	(
 				
 			) else (
 			
-				dotNet.getType classPath
+				dotNet.getType classPath --is not working right (when in domain is multiple assembly versions, did not get latest one)
 			)
 			class_instance = activator.CreateInstance cls	
 		
@@ -282,8 +281,8 @@ struct MICRA_CSHARP_STRUCTURE	(
  --Create instance
 Global mcCSharp = mcStructMan.instanceStructure MICRA_CSHARP_STRUCTURE "mcCSharp"
 --Load Micra.Star.dll Assembly
-Global McGetCs = mcCSharp.getClassInstance "Micra.Tools.MxGet" forceLoad:true --one force is enough for reload
-Global McSetCs = mcCSharp.getClassInstance "Micra.Tools.MxSet"
+--Global McGetCs = mcCSharp.getClassInstance "Micra.Tools.MxGet" forceLoad:true --one force is enough for reload
+--Global McSetCs = mcCSharp.getClassInstance "Micra.Tools.MxSet"
 
 
 

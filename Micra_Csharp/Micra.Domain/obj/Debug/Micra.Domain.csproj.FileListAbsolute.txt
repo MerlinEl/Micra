@@ -1,0 +1,12 @@
+D:\ReneBaca\Aprog\Micra\Micra_Csharp\Micra.Domain\bin\Debug\Micra.Domain.dll
+D:\ReneBaca\Aprog\Micra\Micra_Csharp\Micra.Domain\bin\Debug\Micra.Domain.pdb
+D:\ReneBaca\Aprog\Micra\Micra_Csharp\Micra.Domain\bin\Debug\Autodesk.Max.dll
+D:\ReneBaca\Aprog\Micra\Micra_Csharp\Micra.Domain\bin\Debug\Autodesk.Max.xml
+D:\ReneBaca\Aprog\Micra\Micra_Csharp\Micra.Domain\obj\Debug\Micra.Domain.csproj.CoreCompileInputs.cache
+D:\ReneBaca\Aprog\Micra\Micra_Csharp\Micra.Domain\obj\Debug\Micra.Domain.csproj.CopyComplete
+D:\ReneBaca\Aprog\Micra\Micra_Csharp\Micra.Domain\obj\Debug\Micra.Domain.dll
+D:\ReneBaca\Aprog\Micra\Micra_Csharp\Micra.Domain\obj\Debug\Micra.Domain.pdb
+D:\ReneBaca\Aprog\Micra\Micra_Csharp\Micra.Domain\obj\Debug\Micra.Domain.DomainUi.resources
+D:\ReneBaca\Aprog\Micra\Micra_Csharp\Micra.Domain\obj\Debug\Micra.Domain.csproj.GenerateResource.cache
+D:\ReneBaca\Aprog\Micra\Micra_Csharp\Micra.Domain\obj\Debug\Interop.mscoree.dll
+D:\ReneBaca\Aprog\Micra\Micra_Csharp\Micra.Domain\obj\Debug\Micra.Domain.csproj.ResolveComReference.cache

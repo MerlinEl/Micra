@@ -4,7 +4,7 @@ using System.Drawing;
 using System.IO;
 using System.Reflection;
 using System.Windows.Forms;
-
+//Category > Max SDK and C#
 namespace Micra.Tools {
     public class MxGet {
 
@@ -59,7 +59,7 @@ namespace Micra.Tools {
 
         #region Assembly Methods
 
-        public static Assembly[] GetAllAssemblies() => AppDomain.CurrentDomain.GetAssemblies();
+        //asm = McGetCs.GetLatestAssembly "Micra.Star" --pickup latest dll instance from max domain
         public static Assembly GetLatestAssembly(string assembly_name) {
 
             Assembly[] assemblies = AppDomain.CurrentDomain.GetAssemblies();
@@ -79,8 +79,6 @@ namespace Micra.Tools {
             }
             return latest_assembly;
         }
-
-
 
         public static Assembly ReloadAssembly(string assembly_path) {
 

@@ -2,6 +2,7 @@
 using Autodesk.Max.Plugins;
 using System;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
 
 namespace Micra.Tools {
     internal class MxCollection {
@@ -48,12 +49,45 @@ namespace Micra.Tools {
             return node_list;
         }
 
-        internal static String GetNodeName(uint handle) {
+        /*
+        http://docs.autodesk.com/3DSMAX/16/ENU/3ds-Max-SDK-Programmer-Guide/index.html?url=files/GUID-C59F7DCE-8B96-4A49-A4E0-053EA2424A0D.htm,topicNumber=d30e11958
+         GEOMOBJECT_CLASS_ID =  0x000010
 
-            //MxGet.Interface.SelectNode(node);
-            IINode theNode = MxGet.Interface.GetINodeByHandle(handle);
-            return theNode.Name;
-        }
+             */
+
+
+        //not used not tested
+        /*private Autodesk.Max.INodeTab GetNodeInstances(IINode node) {
+
+            IObject obj = node.ObjectRef;
+            Autodesk.Max.INodeTab instanceAndRef = MxGet.Global.NodeTab.Create();
+            Autodesk.Max.INodeTab result = MxGet.Global.NodeTab.Create();
+
+            MxGet.Global.IInstanceMgr.InstanceMgr.GetInstances(node, instanceAndRef);
+
+            IntPtr indexer;
+
+            for ( int i = 0; i < instanceAndRef.Count; i++ ) {
+                indexer = new IntPtr(i);
+
+                if ( obj.Handle == instanceAndRef[indexer].ObjectRef.Handle ) {
+                    result.InsertNode(instanceAndRef[indexer], result.Count, true);
+                }
+
+                Marshal.FreeHGlobal(indexer);
+            }
+            return result;
+        }*/
+
+
+        /*internal static String GetNodeName(uint handle) {
+
+     //MxGet.Interface.SelectNode(node);
+     IINode theNode = MxGet.Interface.GetINodeByHandle(handle);
+     return theNode.Name;
+ }*/
+
+
         //http://help.autodesk.com/view/3DSMAX/2018/ENU/?guid=__cpp_ref_class_max_s_d_k_1_1_geom_bind_1_1_i_mesh_html
         /*internal static bool IsSpline(IINode obj) {
             obj is SplineShape

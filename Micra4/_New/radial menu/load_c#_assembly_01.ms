@@ -1,5 +1,67 @@
 --> Test
 --Final Method
+dotNet.loadAssembly (micra.AssemblyDir + "Micra.Domain.dll")
+cls = dotNet.getType "Micra.Domain.MxDomain"
+
+--Micra.Domain.MxDomain <System.String>domain_name
+dnArgs=dotNet.ValueToDotNetObject #("Micra_Domain") (dotNetClass "System.Object")
+Global MxDomain = (dotNetClass "System.Activator").CreateInstance cls dnArgs --create custom domain
+--Global MxDomain = (dotNetClass "System.Activator").CreateInstance cls "Micra_Domain" --create custom domain (not works)
+MxDomain.ShowUi(mcMicraDialog) --show form with owner MicraForm
+
+MxDomain.LoadAssembly(micra.AssemblyDir + "Micra.Star.dll") --load assembly in this domain --TODO return null , should be Loader
+MxDomain.ShowLoadedAssemblies() --print all loaded assemblies from this domain
+
+asm = MxDomain.GetLatestAssembly "Micra.Star" --get latest version assembly reference from this domain
+
+if (asm != undefined) do format "Assembly % loaded." asm.FullName
+	
+	asm.Location
+	asm.FullName
+	asm.IsFullyTrusted
+	asm.GetReferencedAssemblies()
+	asm.GetExportedTypes()
+	asm.GetLoadedModules()
+	asm.GetModules()
+s = (dotnetClass "System.String").Join "\n" (asm.GetTypes())
+
+	
+--Get Class Instance 1
+cls = asm.getType "Micra.Tools.MxGet"
+_mcGet = (dotNetClass "System.Activator").CreateInstance cls --create class instance 
+_mcGet.MicraRootDir
+	
+cls = asm.getType "Orien.Tools.McArray" --get latest version assembly reference from this domain
+cls = asm.getType "Micra.Tools.Listener"	
+_mcListener = (dotNetClass "System.Activator").CreateInstance cls --create class instance 
+_mcListener.Write ("This message was sended from C#\n")
+	
+	
+--Get Class Instance 2 (not accesible for now)
+cls = asm.getType "Orien.Tools.McMath"
+_mcMath = (dotNetClass "System.Activator").CreateInstance cls --create class instance 
+--Math operations
+_mcMath.minMax 100	1	50	--> 50
+_mcMath.minMax -1	1	50	--> 1
+_mcMath.minMax 100	1	200	--> 100
+	
+
+fn ReloadAllAssemblies = (
+	MxDomain.DestroyDomain() --destroy custom domain
+	MxDomain = (dotNetClass "System.Activator").CreateInstance cls "Micra_Domain" --create custom domain
+	MxDomain.LoadAssembly(micra.AssemblyDir + "Micra.Star.dll") --load assembly in this domain
+	MxDomain.LoadAssembly(micra.AssemblyDir + "?.dll") --load assembly in this domain
+	MxDomain.LoadAssembly(micra.AssemblyDir + "?.dll") --load assembly in this domain
+)
+	
+	
+McGetCs
+McSetCs
+
+show MxDomain
+showMethods MxDomain
+
+--method 8
 Global McGetCs = mcCSharp.getClassInstance "Micra.Tools.MxGet" forceLoad:true --one force is enough for reload
 Global McSetCs = mcCSharp.getClassInstance "Micra.Tools.MxSet" forceLoad:true --one force is enough for reload
 

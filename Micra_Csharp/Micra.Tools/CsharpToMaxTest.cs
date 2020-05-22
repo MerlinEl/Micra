@@ -89,7 +89,7 @@ namespace Micra.Tools {
         private void button13_Click(object sender, EventArgs e) {
 
             MxSet.LogLi("Main > GetAllAssemblies > Current Domain:" + AppDomain.CurrentDomain.FriendlyName);
-            Assembly[] assemblies = MxGet.GetAllAssemblies();
+            Assembly[] assemblies = AppDomain.CurrentDomain.GetAssemblies();
             
             foreach ( Assembly asm in assemblies ) {
 

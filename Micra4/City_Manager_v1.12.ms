@@ -259,7 +259,7 @@ rcmenu mcCityManDialogMenu (
 		local mats = #()
 		for o in sel where o.material != undefined do appendIfUnique mats o.material
 		for i = 1 to mats.count do setMeditMaterial i mats[i]
-		if matedit_state do MatEditor.Open()
+		MatEditor.Open()
 		select sel
 	)
 	--m1------------------------------------------------------------------------------------------------
