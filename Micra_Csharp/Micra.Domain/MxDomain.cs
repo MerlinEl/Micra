@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Globalization;
 using System.IO;
+using System.Linq;
 using System.Reflection;
 using System.Security;
 using System.Security.Permissions;
@@ -67,24 +68,49 @@ namespace Micra.Domain {
         }
 
         //Create a SandBox to load Assemblies with "Full Trust"
-        public AssemblySandBoxLoader LoadAssembly(string assemblyFilename) {
+        public bool LoadAssembly(string assemblyFilename) {
 
-            if ( appDomain == null || !File.Exists(assemblyFilename)) return null;
+            if ( appDomain == null ) {
+                Listener.WriteLine("Domain not Exists");
+                return false;
+            }
+            if ( !File.Exists(assemblyFilename) ) {
+                Listener.WriteLine("Assembly file {0} not found", assemblyFilename);
+                return false;
+            }
+            AssemblyName assemblyName = AssemblyName.GetAssemblyName(assemblyFilename);
+            Assembly asm = GetAssembly(assemblyName);
+            if ( asm != null ) {
+
+                Listener.WriteLine(
+                    String.Format("Assembly {0}  version:{1} is already loaded!\nLoad new version or Rebuild Domain",
+                    assemblyName.Name,
+                    assemblyName.Version
+                ));
+                return false;
+            }
 
             AssemblySandBoxLoader loader = appDomain.CreateInstanceAndUnwrap(
-              typeof(AssemblySandBoxLoader).Assembly.GetName().FullName,
-              typeof(AssemblySandBoxLoader).FullName,
-              false,
-              BindingFlags.Default,
-              null,
-              new object[] { assemblyFilename },
-              CultureInfo.InvariantCulture,
-              null) as AssemblySandBoxLoader;
+            typeof(AssemblySandBoxLoader).Assembly.GetName().FullName,
+            typeof(AssemblySandBoxLoader).FullName,
+            false,
+            BindingFlags.Default,
+            null,
+            new object[] { assemblyFilename },
+            CultureInfo.InvariantCulture,
+            null) as AssemblySandBoxLoader;
 
-            return loader;
+            return true;
         }
 
-        public void DestroyDomain() => AppDomain.Unload(appDomain);
+        public void DestroyDomain() {
+
+            if ( appDomain == null ) {
+                Listener.WriteLine("Domain not Exists");
+                return;
+            }
+            AppDomain.Unload(appDomain);
+        }
         //get all assemblies from this domain
         public Assembly[] GetAssemblies() => appDomain.GetAssemblies();
         public void ShowLoadedAssemblies() {
@@ -96,6 +122,17 @@ namespace Micra.Domain {
                 Listener.WriteLine("\t" + asm.FullName);
             }
         }
+        //compare assemblies FullName to find one
+        //assemblyName.FullName == "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+        public Assembly GetAssembly(AssemblyName assemblyName) {
+
+            Assembly[] assemblies = GetAssemblies().ToArray<Assembly>();
+            Assembly asm = ( from a in assemblies
+                             where a.FullName == assemblyName.FullName
+                             select a ).SingleOrDefault();
+            return asm;
+        }
+
         //get latest(version) loaded assembly from this dommain
         public Assembly GetLatestAssembly(string assemblyName) { //TODO search backwards (if same versions are exists to get last loaded)
 
@@ -118,7 +155,7 @@ namespace Micra.Domain {
             return latest_assembly;
         }
     }
-    public class AssemblySandBoxLoader : MarshalByRefObject {
+    public class AssemblySandBoxLoader:MarshalByRefObject {
         public AssemblySandBoxLoader(string assemblyFilename) {
 
             byte[] assembly_bytes = File.ReadAllBytes(assemblyFilename);
@@ -128,6 +165,15 @@ namespace Micra.Domain {
         }
 
         public Assembly TrustedAssembly { get; set; } = null;
+
+
+        //className = "System.Boolean"
+        /*public System.Runtime.Remoting.ObjectHandle GetClassInstance(AssemblyName assemblyName, string className, params object[] args) {
+
+            Assembly asm = GetAssembly(assemblyName);
+            if ( asm == null ) return null;
+            return Activator.CreateInstance(assemblyName.FullName, className);
+        }*/
 
         /*public object ExecuteStaticMethod(string className, string methodName, params object[] parameters) {
 
@@ -149,6 +195,7 @@ namespace Micra.Domain {
             MyMethod.Invoke(inst, BindingFlags.InvokeMethod, null, parameters, null);
             return null;
         }*/
+
     }
 }
 

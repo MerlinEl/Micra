@@ -131,6 +131,10 @@
     <Content Include="Resources\OnBuild.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="Micra.Domain\Micra.Domain.csproj">
+      <Project>{90796EEE-17C6-4381-98A0-3A71241C7D01}</Project>
+      <Name>Micra.Domain</Name>
+    </ProjectReference>
     <ProjectReference Include="Micra.Tools\Micra.Tools.csproj">
       <Project>{E0806683-B674-4296-81B6-BB62BF78CC60}</Project>
       <Name>Micra.Tools</Name>

@@ -6,8 +6,8 @@ using System.Reflection;
 using System.Windows.Forms;
 
 namespace Micra.Domain {
-    public partial class DomainUi : Form {
-        private MxDomain appDomain;
+    public partial class DomainUi:Form {
+        private MxDomain customAppDomain;
         public DomainUi() {
 
             InitializeComponent();
@@ -27,7 +27,7 @@ namespace Micra.Domain {
                         break;
                     if ( myAppDomain.FriendlyName.Equals(domainName) ) {
                         Listener.WriteLine("\tfound AppDomain Name - {0}", myAppDomain.FriendlyName);
-                        foundDomain = (AppDomain)domain;
+                        foundDomain = ( AppDomain )domain;
                         break;
                     }
                 }
@@ -39,61 +39,113 @@ namespace Micra.Domain {
 
         private void DestroyCurrentDomain() {
 
+            ClearAll();
+            customAppDomain.DestroyDomain();
+            customAppDomain = null;
+        }
+
+        private void ClearAll() {
             LbxAssemblies.Items.Clear();
-            appDomain.DestroyDomain();
-            appDomain = null;
+            LbxAssemblyTypes.Items.Clear();
+            TbxTypeData.Text = "";
         }
 
         private void ReloadAssembliesList() {
 
-            Assembly[] assemblies = appDomain.GetAssemblies();
-            LbxAssemblies.Items.Clear();
+            ClearAll();
+            Assembly[] assemblies = null;
+            if ( ChkCurrentDomain.Checked ) {
+
+                assemblies = AppDomain.CurrentDomain.GetAssemblies();
+            } else {
+
+                if ( customAppDomain == null ) return;
+                assemblies = customAppDomain.GetAssemblies();
+            }
             List<ListItem> list = assemblies
-                .Select(asm => new ListItem(( asm as Assembly ).FullName, asm))
+                .Select(a => new ListItem(( a as Assembly ).FullName, a))
                 .ToList();
             Listener.WriteLine("ReloadAssembliesList > list:{0}", String.Join("\n", list));
+            if ( list.Count == 0 ) return;
             LbxAssemblies.Items.AddRange(list.ToArray());
+            LbxAssemblies.SelectedIndex = 0;
         }
 
+        private void LoadAssemblyTypes(Assembly asm) {
+
+            LbxAssemblyTypes.Items.Clear();
+            Type[] types = asm.GetTypes();
+            List<ListItem> list = types
+                .Select(t => new ListItem(( t as Type ).FullName, t))
+                .ToList();
+            if ( list.Count == 0 ) return;
+            LbxAssemblyTypes.Items.AddRange(list.ToArray());
+            LbxAssemblyTypes.SelectedIndex = 0;
+        }
+
+        private void LoadTypeData(Type type) {
+
+            string str = ReadTypeInfo(type);
+            TbxTypeData.Text = str.Replace("\n", Environment.NewLine);
+        }
+        //TODO move it to static class manager?
         private void RebuildCurrentDomain() {
 
-            Assembly[] assemblies = appDomain.GetAssemblies();
+            Assembly[] assemblies = customAppDomain.GetAssemblies();
             string[] loaded_assembly_paths = assemblies
                 .Select(asm => ( asm as Assembly ).Location)
                 .ToArray();
             DestroyCurrentDomain();
-            appDomain = new MxDomain(TbxDomainName.Text);
+            customAppDomain = new MxDomain(TbxDomainName.Text);
             foreach ( string path in loaded_assembly_paths ) {
 
-                appDomain.LoadAssembly(path);
+                customAppDomain.LoadAssembly(path);
             }
             ReloadAssembliesList();
         }
 
         private void BtnLoadAssembly_Click(object sender, EventArgs e) {
 
-            if ( appDomain != null ) {
+            if ( customAppDomain != null ) {
 
-                appDomain.LoadAssembly(TbxAssemblyPath.Text);
-                ReloadAssembliesList();
+               bool success = customAppDomain.LoadAssembly(TbxAssemblyPath.Text);
+                if ( success ) {
+                    ReloadAssembliesList();
+                } else {
+                    MessageBox.Show("Assembly not found or is already loaded!\nTry to load new version or Rebuild Domain");
+                }
             }
         }
 
         private void BtnRebuildDomain_Click(object sender, EventArgs e) {
 
-            if ( appDomain != null ) RebuildCurrentDomain();
+            if ( customAppDomain != null ) {
+
+                RebuildCurrentDomain();
+
+            }else {
+
+                MessageBox.Show("Domain {0} not Exists", TbxDomainName.Text);
+            }
         }
 
         private void DestroyDomain_Click(object sender, EventArgs e) {
 
-            if ( appDomain != null ) DestroyCurrentDomain();
+            if ( customAppDomain != null ) {
+
+                DestroyCurrentDomain();
+
+            } else {
+
+                MessageBox.Show("Domain {0} not Exists", TbxDomainName.Text);
+            }
         }
 
         private void BtnCreateDomain_Click(object sender, EventArgs e) {
 
-            if ( appDomain == null ) {
+            if ( customAppDomain == null ) {
 
-                appDomain = new MxDomain(TbxDomainName.Text);
+                customAppDomain = new MxDomain(TbxDomainName.Text);
                 ReloadAssembliesList();
             }
         }
@@ -103,54 +155,127 @@ namespace Micra.Domain {
             AppDomain domain = GetAppDomain(TbxDomainName.Text);
             if ( domain != null ) {
 
-                appDomain = MxDomain.FromDomain(domain);
-                ReloadAssembliesList(); 
+                customAppDomain = MxDomain.FromDomain(domain);
+                ReloadAssembliesList();
             }
         }
 
-        private string GetParameters(ConstructorInfo co) {
-            string p = "";
-            ParameterInfo[] Params = co.GetParameters();
-            foreach ( ParameterInfo itm in Params ) {
-                p += "\n\t\t\t" + itm.ParameterType + " " + itm.Name;
+
+        private string ReadMembersInfo(MemberInfo[] ms) {
+
+            string out_data = "";
+            foreach ( MemberInfo m in ms ) {
+                out_data += String.Format("\t\t{0}{1}\n", "     ", m);
             }
-            return p;
+            return out_data;
         }
 
-        private void OnIListBoxIemDoubleClick(object sender, MouseEventArgs e) {
+        private string ReadTypeInfo(Type t) {
 
-            ListItem itm = LbxAssemblies.SelectedItem as ListItem;
-            Type[] types = itm.Asm.GetTypes();
-            string s = "------------------------------------------------------------------\n";
-            s += itm.Text + "\n";
-            foreach ( Type type in types ) {
-           
-                //s += "------------------------------------------------------------------\n";
-                string[] c = type.GetConstructors()
-                    .Select(co => GetParameters( co as ConstructorInfo ))
-                    .ToArray();
-                string[] m = type.GetMethods()
-                    .Select(me => ( me as MethodInfo ).ToString())
-                    .ToArray();
-                s += "\t" + type.FullName + " Namespace:" + type.Namespace + "\n\t\tMethods:" + String.Join("\n\t\t\t", m) + "\n";
-                /*s += String.Format("\tIs > Class:{0} Interface:{1} GenericType:{2} Public:{3} Sealed:{4}\n", 
-                        type.IsClass.ToString(), 
-                        type.IsInterface.ToString(),
-                        type.IsGenericType.ToString(),
-                        type.IsPublic.ToString(),
-                        type.IsSealed.ToString()
-                    );*/
+            // Specifies the class.
+            string out_data = String.Format("Listing all the members (public and non public) of the {0}\n", t);
+
+            // Lists static fields first.
+            FieldInfo[] fi = t.GetFields(BindingFlags.Static |
+                BindingFlags.NonPublic | BindingFlags.Public);
+            out_data += "\t> Static Fields:\n";
+            out_data += ReadMembersInfo(fi);
+
+            // Static properties.
+            PropertyInfo[] pi = t.GetProperties(BindingFlags.Static |
+                BindingFlags.NonPublic | BindingFlags.Public);
+            out_data += "\t> Static Properties:\n";
+            out_data += ReadMembersInfo(pi);
+
+            // Static events.
+            EventInfo[] ei = t.GetEvents(BindingFlags.Static |
+                BindingFlags.NonPublic | BindingFlags.Public);
+            out_data += "\t> Static Events:\n";
+            out_data += ReadMembersInfo(ei);
+
+            // Static methods.
+            MethodInfo[] mi = t.GetMethods(BindingFlags.Static |
+                BindingFlags.NonPublic | BindingFlags.Public);
+            out_data += "\t> Static Methods:\n";
+            out_data += ReadMembersInfo(mi);
+
+            // Constructors.
+            ConstructorInfo[] ci = t.GetConstructors(BindingFlags.Instance |
+                BindingFlags.NonPublic | BindingFlags.Public);
+            out_data += "\t> Constructors:\n";
+            out_data += ReadMembersInfo(ci);
+
+            // Instance fields.
+            fi = t.GetFields(BindingFlags.Instance | BindingFlags.NonPublic |
+                BindingFlags.Public);
+            out_data += "\t> Instance Fields:\n";
+            out_data += ReadMembersInfo(fi);
+
+            // Instance properites.
+            pi = t.GetProperties(BindingFlags.Instance | BindingFlags.NonPublic |
+                BindingFlags.Public);
+            out_data += "\t> Instance Properties:\n";
+            out_data += ReadMembersInfo(pi);
+
+            // Instance events.
+            ei = t.GetEvents(BindingFlags.Instance | BindingFlags.NonPublic |
+                BindingFlags.Public);
+            out_data += "\t> Instance Events:\n";
+            out_data += ReadMembersInfo(ei);
+
+            // Instance methods.
+            mi = t.GetMethods(BindingFlags.Instance | BindingFlags.NonPublic
+                | BindingFlags.Public);
+            out_data += "\t> Instance Methods:\n";
+            out_data += ReadMembersInfo(mi);
+
+            return out_data;
+        }
+
+        private void OnAssemblyItemSelectionChanged(object sender, EventArgs e) {
+
+            if ( LbxAssemblies.SelectedItem is ListItem itm )
+                LoadAssemblyTypes(itm.Tag as Assembly);
+        }
+
+        private void OnAssemblyTypeItemSelectionChanged(object sender, EventArgs e) {
+            if ( LbxAssemblyTypes.SelectedItem is ListItem itm )
+                LoadTypeData(itm.Tag as Type);
+        }
+
+        private void ChkCurrentDomain_CheckedChanged(object sender, EventArgs e) {
+            if ( ChkCurrentDomain.Checked ) {
+
+                TbxDomainName.Text = "Current";
+                TbxDomainName.Enabled = false;
+                BtnGetDomain.Enabled = false;
+                BtnCreateDomain.Enabled = false;
+                TbxAssemblyPath.Enabled = false;
+                BtnLoadAssembly.Enabled = false;
+                BtnRebuildDomain.Enabled = false;
+                DestroyDomain.Enabled = false;
+
+            } else {
+
+                TbxDomainName.Text = "Micra_Domain";
+                TbxDomainName.Enabled = true;
+                BtnGetDomain.Enabled = true;
+                BtnCreateDomain.Enabled = true;
+                TbxAssemblyPath.Enabled = true;
+                BtnLoadAssembly.Enabled = true;
+                BtnRebuildDomain.Enabled = true;
+                DestroyDomain.Enabled = true;
             }
-            Listener.WriteLine(s);
+            ReloadAssembliesList();
         }
     }
     public class ListItem {
-        public ListItem(string text, Assembly asm) {
+        public ListItem(string text, Object tag) {
             Text = text;
-            Asm = asm;
+            Tag = tag;
         }
         public string Text { get; set; }
-        public Assembly Asm { get; set; }
+        public Object Tag { get; set; }
         override public string ToString() => Text;
     }
 }
@@ -177,3 +302,40 @@ namespace Micra.Domain {
         Marshal.ReleaseComObject(host);
     }
 }*/
+
+/*private string GetParameters(ConstructorInfo co) {
+string p = "";
+ParameterInfo[] Params = co.GetParameters();
+foreach ( ParameterInfo itm in Params ) {
+    p += "\n\t\t\t" + itm.ParameterType + " " + itm.Name;
+}
+return p;
+}*/
+
+/*
+
+            ListItem itm = LbxAssemblies.SelectedItem as ListItem;
+            Type[] types = itm.Asm.GetTypes();
+            string s = "------------------------------------------------------------------\n";
+            s += itm.Text + "\n";
+            foreach ( Type type in types ) {
+
+                s += ReadTypeInfo(type);
+                //s += "------------------------------------------------------------------\n";
+                string[] c = type.GetConstructors()
+                    .Select(co => GetParameters( co as ConstructorInfo ))
+                    .ToArray();
+                string[] m = type.GetMethods()
+                    .Select(me => ( me as MethodInfo ).ToString())
+                    .ToArray();
+                s += "\t" + type.FullName + " Namespace:" + type.Namespace + "\n\t\tMethods:" + String.Join("\n\t\t\t", m) + "\n";*/
+/*s += String.Format("\tIs > Class:{0} Interface:{1} GenericType:{2} Public:{3} Sealed:{4}\n", 
+        type.IsClass.ToString(), 
+        type.IsInterface.ToString(),
+        type.IsGenericType.ToString(),
+        type.IsPublic.ToString(),
+        type.IsSealed.ToString()
+    );
+}
+Listener.WriteLine(s);
+     */

@@ -1,4 +1,5 @@
-﻿using Micra.Tools;
+﻿using Micra.Domain;
+using Micra.Tools;
 using MicraTools.Launcher.Properties;
 using Orien.NetUi;
 using System.Drawing;
@@ -37,7 +38,7 @@ namespace MicraTools.Launcher {
             };
         }
 
-        private void button2_Click(object sender, System.EventArgs e) {
+        private void Button2_Click(object sender, System.EventArgs e) {
 
             CConsole.Log("hello!"); // main console tab
             CConsole.Log("", "The {0} is {1} years old.", "Tifany", 12); // main console tab
@@ -48,14 +49,19 @@ namespace MicraTools.Launcher {
             CConsole.Log("Formated", "The {0} is {1} years old.", new object[] { "Monika", 22 });
         }
 
-        private void button3_Click(object sender, System.EventArgs e) {
+        private void Button3_Click(object sender, System.EventArgs e) {
             Form geoop = new MxGeometryOptimizer();
             geoop.Show();
         }
 
-        private void button4_Click(object sender, System.EventArgs e) {
+        private void Button4_Click(object sender, System.EventArgs e) {
             Form ctm = new CsharpToMaxTest();
             ctm.Show();
+        }
+
+        private void BtnDomainManager_Click(object sender, System.EventArgs e) {
+            MxDomain md = new MxDomain("Micra_Domain");
+            md.ShowUi(this);
         }
     }
 }
