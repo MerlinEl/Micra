@@ -29,6 +29,8 @@
             this.TbxAssemblyPath = new System.Windows.Forms.TextBox();
             this.BtnCreateDomain = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.ChkCurrentDomain = new System.Windows.Forms.CheckBox();
+            this.TbxDomainName = new System.Windows.Forms.TextBox();
             this.BtnGetDomain = new System.Windows.Forms.Button();
             this.LbxAssemblies = new System.Windows.Forms.ListBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
@@ -36,8 +38,6 @@
             this.LbxAssemblyTypes = new System.Windows.Forms.ListBox();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.TbxTypeData = new System.Windows.Forms.TextBox();
-            this.TbxDomainName = new System.Windows.Forms.TextBox();
-            this.ChkCurrentDomain = new System.Windows.Forms.CheckBox();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -87,6 +87,8 @@
             this.TbxAssemblyPath.TabIndex = 21;
             this.TbxAssemblyPath.Text = "D:\\ReneBaca\\Aprog\\Micra\\Micra4\\Assembly\\Micra.Star.dll";
             this.TbxAssemblyPath.WordWrap = false;
+            this.TbxAssemblyPath.Enter += new System.EventHandler(this.OnTextAreaGotFocus);
+            this.TbxAssemblyPath.Leave += new System.EventHandler(this.OnTextAreaLostFocus);
             // 
             // BtnCreateDomain
             // 
@@ -115,6 +117,27 @@
             this.groupBox1.TabIndex = 26;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Domain:";
+            // 
+            // ChkCurrentDomain
+            // 
+            this.ChkCurrentDomain.AutoSize = true;
+            this.ChkCurrentDomain.Location = new System.Drawing.Point(216, 19);
+            this.ChkCurrentDomain.Name = "ChkCurrentDomain";
+            this.ChkCurrentDomain.Size = new System.Drawing.Size(41, 17);
+            this.ChkCurrentDomain.TabIndex = 30;
+            this.ChkCurrentDomain.Text = "cur";
+            this.ChkCurrentDomain.UseVisualStyleBackColor = true;
+            this.ChkCurrentDomain.CheckedChanged += new System.EventHandler(this.ChkCurrentDomain_CheckedChanged);
+            // 
+            // TbxDomainName
+            // 
+            this.TbxDomainName.Location = new System.Drawing.Point(113, 17);
+            this.TbxDomainName.Name = "TbxDomainName";
+            this.TbxDomainName.Size = new System.Drawing.Size(97, 20);
+            this.TbxDomainName.TabIndex = 29;
+            this.TbxDomainName.Text = "Micra_Domain";
+            this.TbxDomainName.Enter += new System.EventHandler(this.OnTextAreaGotFocus);
+            this.TbxDomainName.Leave += new System.EventHandler(this.OnTextAreaLostFocus);
             // 
             // BtnGetDomain
             // 
@@ -188,25 +211,6 @@
             this.TbxTypeData.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.TbxTypeData.Size = new System.Drawing.Size(977, 365);
             this.TbxTypeData.TabIndex = 0;
-            // 
-            // TbxDomainName
-            // 
-            this.TbxDomainName.Location = new System.Drawing.Point(113, 17);
-            this.TbxDomainName.Name = "TbxDomainName";
-            this.TbxDomainName.Size = new System.Drawing.Size(97, 20);
-            this.TbxDomainName.TabIndex = 29;
-            this.TbxDomainName.Text = "Micra_Domain";
-            // 
-            // ChkCurrentDomain
-            // 
-            this.ChkCurrentDomain.AutoSize = true;
-            this.ChkCurrentDomain.Location = new System.Drawing.Point(216, 19);
-            this.ChkCurrentDomain.Name = "ChkCurrentDomain";
-            this.ChkCurrentDomain.Size = new System.Drawing.Size(41, 17);
-            this.ChkCurrentDomain.TabIndex = 30;
-            this.ChkCurrentDomain.Text = "cur";
-            this.ChkCurrentDomain.UseVisualStyleBackColor = true;
-            this.ChkCurrentDomain.CheckedChanged += new System.EventHandler(this.ChkCurrentDomain_CheckedChanged);
             // 
             // splitContainer1
             // 

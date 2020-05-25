@@ -268,6 +268,13 @@ namespace Micra.Domain {
             }
             ReloadAssembliesList();
         }
+        private void OnTextAreaLostFocus(object sender, EventArgs e) {
+            ManagedServices.AppSDK.EnableAccelerators(); // for lostfocus
+        }
+
+        private void OnTextAreaGotFocus(object sender, EventArgs e) {
+            ManagedServices.AppSDK.DisableAccelerators(); // for lostfocus
+        }
     }
     public class ListItem {
         public ListItem(string text, Object tag) {

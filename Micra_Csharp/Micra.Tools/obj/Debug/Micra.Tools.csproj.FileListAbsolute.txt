@@ -108,3 +108,4 @@ E:\Aprog\Orien\Micra\Micra_Csharp\Micra.Tools\obj\Debug\Micra.Tools.csproj.CoreC
 E:\Aprog\Orien\Micra\Micra_Csharp\Micra.Tools\obj\Debug\Micra.Tools.csproj.CopyComplete
 E:\Aprog\Orien\Micra\Micra_Csharp\Micra.Tools\obj\Debug\Micra.Tools.dll
 E:\Aprog\Orien\Micra\Micra_Csharp\Micra.Tools\obj\Debug\Micra.Tools.pdb
+D:\ReneBaca\Aprog\Micra\Micra_Csharp\Micra.Tools\obj\Debug\Micra.Tools.csprojAssemblyReference.cache

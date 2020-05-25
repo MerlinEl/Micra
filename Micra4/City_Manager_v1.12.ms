@@ -46,6 +46,7 @@ rcmenu mcCityManDialogMenu (
 		separator m4_sep_3
 		menuItem m4_6 "Link Collision(s) to closest Object and Fix Name"
 		menuItem m4_7 "Instance Collision to Selected Models"
+		menuItem m4_8 "Create Checker Red and Green"
 	)
 	subMenu "Modify" (
 	
@@ -262,6 +263,37 @@ rcmenu mcCityManDialogMenu (
 		MatEditor.Open()
 		select sel
 	)
+	fn createCheckerCollisions objs = (
+	
+		local top_layer = mcMax.getetOrCreateLayer "_Top"
+		local btm_layer = mcMax.getetOrCreateLayer "_Bottom"
+		
+		local top_objs = #()
+		local btm_objs = #()
+
+		maxOps.cloneNodes objs cloneType:#copy newNodes:&top_objs #nodialog
+		maxOps.cloneNodes objs cloneType:#copy newNodes:&btm_objs #nodialog
+
+		local top_material = standardMaterial name:"Top" diffusecolor:green
+		local btm_material = standardMaterial name:"Bottom" diffusecolor:red
+
+		for o in top_objs do (
+			top_layer.addNode o
+			o.material = top_material
+			o.backfaceCull = true
+			o.pos.z += 1
+		)
+		for o in btm_objs do (
+			btm_layer.addNode o
+			o.material = btm_material
+			o.pos.z -= 1
+			o.backfaceCull = true
+		)
+			
+		nm = Normalmodifier flip:on
+		addModifier btm_objs nm ui:off
+		collapsestack btm_objs
+	)
 	--m1------------------------------------------------------------------------------------------------
 	on m1_0 picked do undo label:(m1_0.Text) on selectLods(#("LOD1", "LOD2"))
 	on m1_1 picked do undo label:(m1_1.Text) on mcMax.selectObjectsByName "LOD0" visibleOnly:false exclude:#("coll", "occ")
@@ -302,6 +334,7 @@ rcmenu mcCityManDialogMenu (
 	--sep3
 	on m4_6 picked do if (queryBox "Link Selected Collision(s) to closest LOD0 and Rename?" title:"Warning:") do undo label:(m4_6.Text) on linkCollisionsByClosestObjectAndFixName()
 	on m4_7 picked do distributeInstancesInToSelection()
+	on m4_8 picked do if queryBox "Generate Checker Collisions?" title:"Create:" do undo label:(m4_8.Text) on createCheckerCollisions (selection as array)
 	--m5------------------------------------------------------------------------------------------------
 	on m5_1 picked do fileIn (micra.RootDir + "LS3D_Geometry_Optimizer_v0.03.ms")
 	on m5_2 picked do fileIn (micra.RootDir + "LS3D_Curb_Crumple.ms") 

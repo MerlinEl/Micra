@@ -57,8 +57,6 @@ namespace Micra.Tools {
 
         #endregion
 
-        #region Assembly Methods
-
         //asm = McGetCs.GetLatestAssembly "Micra.Star" --pickup latest dll instance from max domain
         public static Assembly GetLatestAssembly(string assembly_name) {
 
@@ -80,18 +78,14 @@ namespace Micra.Tools {
             return latest_assembly;
         }
 
-        public static Assembly ReloadAssembly(string assembly_path) {
+        /*public static Assembly LoadAssembly(string assembly_path) {
 
-            MxSet.LogLi("Assembly Path:" + assembly_path);
-            AssemblyName assemblyName = AssemblyName.GetAssemblyName(assembly_path);
-            MxSet.LogLi("Assembly Name:" + assemblyName.FullName); //print ddl name and version
-            byte[] assembly_bytes = File.ReadAllBytes(assembly_path);
-            Assembly assembly = Assembly.Load(assembly_bytes); //load assembly in to current domain
-            Assembly latest_assembly = GetLatestAssembly(assemblyName.Name);
-            return latest_assembly;
-        }
-
-        #endregion
+            MxSet.LogLi("Rading bytes from Assembly:\n\t" + assembly_path);
+            byte[] assembly_bytes = File.ReadAllBytes(assembly_path); //read assembly bytes, leave dll unlocked
+            Assembly asm = Assembly.Load(assembly_bytes); //load assembly in to current domain
+            MxSet.LogLi("Loaded Assembly:" + asm.FullName); //print ddl name and version
+            return asm;
+        }*/
 
 
         #region Test

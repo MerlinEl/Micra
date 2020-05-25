@@ -36,7 +36,9 @@ struct MICRA_CSHARP_STRUCTURE	(
 	
 	--variables
 	debug = true,
+	MicraAssembly, --latest Micra.Star.dll Assembly loaded
 	--Create dotnet class to use some useful static functions
+	sysFile = dotnetClass "System.IO.File",
 	appDomain = dotNetClass "System.AppDomain",
 	assembly = dotNetClass "System.Reflection.Assembly",
 	activator = dotNetClass "System.Activator",
@@ -58,7 +60,7 @@ struct MICRA_CSHARP_STRUCTURE	(
 			mcMath_Instance.minMax 100	1	200	--> 100
 		)
 	*/
-	fn isLoaded = (classOf (dotNet.getType "Micra.Tools.MxGet") == dotNetObject),
+	fn isLoaded = (classOf MicraAssembly == dotNetObject),
 	--forceLoad == false (know classes dont need to be loaded again)
 	fn getClassInstanceShadowCopy classPath constructorParams:#() forceLoad:false = ( --ShadowCopy method by susanta
 	
@@ -107,32 +109,17 @@ struct MICRA_CSHARP_STRUCTURE	(
 		class_instance = asm.CreateInstance classPath --create object of first version of MYLib.MyClass
 		class_instance --return class instance
 	),
-	--[ Orien.Tools ] and [ Orine.NetUi ] are merged in to [ Micra.Star.dll ]
+	--[ Orien.Tools ] and [ Orine.NetUi ] and [ any other dll] are merged in to [ Micra.Star.dll ]
 	fn getClassInstance classPath constructorParams:#() forceLoad:false = (
 		
-		local asm
-		local class_instance
 		if not doesFileExist assembly_path do return false
-		if not isLoaded() then (
-			try ( --load first time
-			
-				format "Loading Assembly [ Micra.Star ]\n"
-				local assem_name = assemblyName.GetAssemblyName assembly_path
-				format "Assembly.FullName:%\n" assem_name.FullName --print ddl name and version
-				local assembly_bytes = (dotnetClass "System.IO.File").ReadAllBytes assembly_path
-				asm = assembly.Load assembly_bytes
-
-			) catch (
-			
-				format "mcCSharp > getClassInstance > Unable to load Assembly:\n\t%\n"  (getCurrentException())
-				return false
-			)
-		) else if forceLoad and McGetCs != undefined do (
-		
+		--Load Assembly at first time or when force is True
+		if not isLoaded() or forceLoad do (
 			try (
-				McGetCs.ReloadAssembly assembly_path --load dll file
-				asm = McGetCs.GetLatestAssembly "Micra.Star" --pickup latest dll instance from max domain
-				format "Assembly.FullName:%\n" asm.FullName --print ddl name and version
+			
+				local asm_bytes = sysFile.ReadAllBytes assembly_path
+				MicraAssembly = assembly.Load asm_bytes
+				format "mcCSharp > getClassInstance > [ % ]\n" MicraAssembly.FullName --print ddl name and version
 
 			) catch (
 			
@@ -140,21 +127,15 @@ struct MICRA_CSHARP_STRUCTURE	(
 				return false
 			)
 		)
+		--Pick up class from micra assembly latest version
 		try (
-			local cls = if forceLoad and McGetCs != undefined then (
-			
-				asm.getType classPath
-				
-			) else (
-			
-				dotNet.getType classPath --is not working right (when in domain is multiple assembly versions, did not get latest one)
-			)
-			class_instance = activator.CreateInstance cls	
+			local cls = MicraAssembly.getType classPath --always get latest class
+			return activator.CreateInstance cls	--class_instance
 		
 		) catch (
 			format "mcCSharp > getClassInstance > Unable to load Class:\n\t%\n"  (getCurrentException())
+			undefined
 		)
-		class_instance
 	),
 	---------------------------------------------
 	--BUILDING ASSEMBLY FROM STRING--
@@ -281,8 +262,8 @@ struct MICRA_CSHARP_STRUCTURE	(
  --Create instance
 Global mcCSharp = mcStructMan.instanceStructure MICRA_CSHARP_STRUCTURE "mcCSharp"
 --Load Micra.Star.dll Assembly
---Global McGetCs = mcCSharp.getClassInstance "Micra.Tools.MxGet" forceLoad:true --one force is enough for reload
---Global McSetCs = mcCSharp.getClassInstance "Micra.Tools.MxSet"
+Global McGetCs = mcCSharp.getClassInstance "Micra.Tools.MxGet" forceLoad:true --one force is enough for reload
+Global McSetCs = mcCSharp.getClassInstance "Micra.Tools.MxSet"
 
 
 

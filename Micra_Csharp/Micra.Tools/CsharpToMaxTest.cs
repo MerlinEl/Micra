@@ -16,7 +16,6 @@ namespace Micra.Tools {
 
         private void Init() {
             Text = Text + "     " + MxGet.AssemblyVersion;
-            CboxAsemblyGetType.SelectedIndex = CboxAsemblyGetType.Items.Count - 1;
         }
 
         private void OnTextAreaLostFocus(object sender, EventArgs e) {
@@ -68,42 +67,6 @@ namespace Micra.Tools {
             IFPValue mxsRetVal = MxSet.ExecuteMAXScriptScript(cmd);
             if ( mxsRetVal != null ) MxSet.LogLi("Render Click gor:" + mxsRetVal.S);
         }
-
-        private void button11_Click(object sender, EventArgs e) {
-
-            MxSet.LogLi("Search for latest Assembly in Current Domain:" + AppDomain.CurrentDomain.FriendlyName);
-            Assembly asm = MxGet.GetLatestAssembly(TbxAssemblyName.Text);
-            if ( asm != null ) {
-
-                MxSet.LogLi("Got Latest(Micra.Star) Assembly:" + asm.FullName);
-            } else {
-
-                MxSet.LogLi("Latest(Micra.Star) Assembly not Found");
-            }
-
-        }
-        private void button12_Click(object sender, EventArgs e) {
-
-            MxGet.ReloadAssembly(TbxAssemblyPath.Text);
-        }
-        private void button13_Click(object sender, EventArgs e) {
-
-            MxSet.LogLi("Main > GetAllAssemblies > Current Domain:" + AppDomain.CurrentDomain.FriendlyName);
-            Assembly[] assemblies = AppDomain.CurrentDomain.GetAssemblies();
-            
-            foreach ( Assembly asm in assemblies ) {
-
-                switch (CboxAsemblyGetType.SelectedItem.ToString()) {
-
-                    case "All": break;
-                    case "Micra.Star":
-                        if ( asm.GetName().Name != "Micra.Star" ) continue;
-                    break;
-                }
-                MxSet.LogLi("\t" + asm.FullName);
-            }
-        }
-
     }
 }
 

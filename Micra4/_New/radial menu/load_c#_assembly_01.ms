@@ -1,8 +1,25 @@
+dotNet.getType
+dotNet.loadAssembly
+dotNet.load
+
+currentDirectory = (dotnetClass "System.IO.Directory").GetCurrentDirectory()
+exePath = (dotnetClass "System.IO.Path").GetDirectoryName(Application.ExecutablePath);
+
+var absolutePath = Path.GetFullPath("../../Resources/Red.jpg");
+
+sysio = (dotnetClass "Switch")
+sysio = (dotnetClass "Switch.System.IO.UseLegacyPathHandling")
+(dotnetClass "Switch.System.IO").UseLegacyPathHandling=true
+
 --> Test
 --Final Method
-dotNet.loadAssembly (micra.AssemblyDir + "Micra.Domain.dll")
-cls = dotNet.getType "Micra.Domain.MxDomain"
+/*dotNet.loadAssembly (micra.AssemblyDir + "Micra.Domain.dll")
+cls = dotNet.getType "Micra.Domain.MxDomain"*/
 
+asm_bytes = (dotnetClass "System.IO.File").ReadAllBytes (micra.AssemblyDir + "Micra.Domain.dll")
+asm = (dotNetClass "System.Reflection.Assembly").Load asm_bytes
+format "Micra IV > loadAssembly > [ % ]\n" asm.FullName --print ddl name and version
+cls = asm.getType "Micra.Domain.MxDomain"
 --Micra.Domain.MxDomain <System.String>domain_name
 dnArgs=dotNet.ValueToDotNetObject #("Micra_Domain") (dotNetClass "System.Object")
 Global MxDomain = (dotNetClass "System.Activator").CreateInstance cls dnArgs --create custom domain
@@ -54,9 +71,6 @@ fn ReloadAllAssemblies = (
 	MxDomain.LoadAssembly(micra.AssemblyDir + "?.dll") --load assembly in this domain
 )
 	
-	
-McGetCs
-McSetCs
 
 show MxDomain
 showMethods MxDomain
@@ -65,14 +79,18 @@ showMethods MxDomain
 Global McGetCs = mcCSharp.getClassInstance "Micra.Tools.MxGet" forceLoad:true --one force is enough for reload
 Global McSetCs = mcCSharp.getClassInstance "Micra.Tools.MxSet" forceLoad:true --one force is enough for reload
 
---TODO This will load latest DLL , but without force, Max wil  next time take OLD one
-_mcCsharpToMaxTest = mcCSharp.getClassInstance "Micra.Tools.CtoMaxTest" forceLoad:true --one force is enough for reload
+--A --Working example with always latest DLL version
+_mcCsharpToMaxTest = mcCSharp.getClassInstance "Micra.Tools.CsharpToMaxTest" forceLoad:true --one force is enough for reload
 _mcCsharpToMaxTest.owner = mcMicraDialog --bind form in to max window
 _mcCsharpToMaxTest.Show()
 
-
-
-
+--B
+--step by step - same result
+asm_bytes =  (dotnetClass "System.IO.File").ReadAllBytes  (micra.AssemblyDir + "Micra.Star.dll")
+asm = (dotNetClass "System.Reflection.Assembly").Load asm_bytes
+--asm = McGetCs.GetLatestAssembly "Micra.Star" --pickup latest dll instance from max domain
+cls = asm.getType "Micra.Tools.CsharpToMaxTest"  --get class
+_mcCsharpToMaxTest =  (dotNetClass "System.Activator").CreateInstance cls
 
 
 --method 7
@@ -88,7 +106,7 @@ _mcAman.newDomain.GetAssemblies()
 
 --incerase assembly version
 ms = _mcAman.newDomain.GetAssembly "Micra.Star"
-cls = ms.GetTYpe "Micra.Tools.CtoMaxTest"
+cls = ms.GetTYpe "Micra.Tools.CsharpToMaxTest"
 _mcGeoOpt = (dotNetClass "System.Activator").CreateInstance cls --create class instance 
 _mcGeoOpt.owner = mcMicraDialog --bind form in to max window
 _mcGeoOpt.Show()
@@ -120,7 +138,7 @@ format "Assembly.FullName:%\n" assem_name.FullName --print ddl name and version
 assembly_bytes = (dotnetClass "System.IO.File").ReadAllBytes assembly_path
 assembly = (dotnetClass "System.Reflection.Assembly").Load assembly_bytes
 
-cls = dotNet.getType "Micra.Tools.CtoMaxTest"
+cls = dotNet.getType "Micra.Tools.CsharpToMaxTest"
 _mcGeoOpt = (dotNetClass "System.Activator").CreateInstance cls
 _mcGeoOpt.owner = mcMicraDialog --bind form in to max window
 _mcGeoOpt.Show()
@@ -176,7 +194,7 @@ _mcListener.Write ("This message was sended from C#\n")
 
 
 --Manager.Unload not works check it in > max 2010
-_mcGeoOpt = mcCSharp.getClassInstance "Micra.Tools.CtoMaxTest" forceLoad:true
+_mcGeoOpt = mcCSharp.getClassInstance "Micra.Tools.CsharpToMaxTest" forceLoad:true
 _mcGeoOpt.owner = mcMicraDialog --bind form in to max window
 _mcGeoOpt.Show()
 
@@ -257,7 +275,7 @@ Interface17.Attributes
 
 
 
-ca2 = Assembly.GetAssembly (dotNet.getType "Micra.Tools.CtoMaxTest")
+ca2 = Assembly.GetAssembly (dotNet.getType "Micra.Tools.CsharpToMaxTest")
 ca2.FullName --"Micra.Star, Version=1.0.0.4, Culture=neutral, PublicKeyToken=null"
 
 Setup = AppDomain.CurrentDomain.SetupInformation

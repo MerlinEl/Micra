@@ -34,6 +34,9 @@
     <Reference Include="Autodesk.Max">
       <HintPath>C:\Program Files\Autodesk\3ds Max 2018\Autodesk.Max.dll</HintPath>
     </Reference>
+    <Reference Include="ManagedServices">
+      <HintPath>C:\Program Files\Autodesk\3ds Max 2018\ManagedServices.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
