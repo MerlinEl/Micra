@@ -10,22 +10,41 @@ using System.Windows.Forms;
 namespace Micra.Domain {
     public class MxDomain {
         private AppDomain appDomain;
+        //private static string AppBaseDir;
         public bool Debug = false;
         public string FriendlyName => appDomain.FriendlyName;
-        public MxDomain(string domain_name) {
+
+        public MxDomain(string domainName) => CrteateDomain(domainName);
+        /*public MxDomain(string domainName) => CrteateDomain(domainName, AppBaseDir);
+        public MxDomain(string domainName, string applicationBase) => CrteateDomain(domainName, applicationBase);*/
+
+        private void CrteateDomain(string domainName) { //, string applicationBase
+
+            string applicationBase = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location); //not works when using ReadAllBytes
+
+            Listener.WriteLine("MxDomain > CrteateDomain > GetExecutingAssembly dir:{0}", applicationBase);
+
+            //FileAttributes attr = File.GetAttributes(applicationBase);
+            //if ( attr.HasFlag(FileAttributes.Directory) && !Directory.Exists(applicationBase) ) return; //D:\ReneBaca\Aprog\Micra\Micra4\Assembly
+            //AppBaseDir = applicationBase;
 
             PermissionSet trustedLoadGrantSet = new PermissionSet(PermissionState.Unrestricted);
             AppDomainSetup trustedLoadSetup = new AppDomainSetup {
 
-                ApplicationBase = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)
+                ApplicationBase = applicationBase
             };
             AppDomain.CurrentDomain.AssemblyResolve += CurrentDomain_AssemblyResolve;
-            appDomain = AppDomain.CreateDomain(domain_name, null, trustedLoadSetup, trustedLoadGrantSet);
+            appDomain = AppDomain.CreateDomain(domainName, null, trustedLoadSetup, trustedLoadGrantSet);
         }
 
-        public void ShowUi(Form owner) {
+        public void DestroyDomain() {
 
-            new DomainUi() { Owner = owner }.Show();
+            if ( appDomain == null ) {
+                Listener.WriteLine("Domain not Exists");
+                return;
+            }
+            AppDomain.Unload(appDomain);
+            appDomain = null;
         }
 
         public static MxDomain FromDomain(AppDomain domain) {
@@ -34,6 +53,20 @@ namespace Micra.Domain {
                 appDomain = domain
             };
             return d;
+        }
+
+        public void ShowUi(Form owner) {
+
+            new DomainUi() { Owner = owner }.Show();
+        }
+
+        private string AssemblyDirectory {
+            get {
+                string codeBase = Assembly.GetExecutingAssembly().CodeBase;
+                UriBuilder uri = new UriBuilder(codeBase);
+                string path = Uri.UnescapeDataString(uri.Path);
+                return Path.GetDirectoryName(path);
+            }
         }
 
         /*
@@ -53,6 +86,7 @@ namespace Micra.Domain {
          because this is launched from a build task it is required to locate the current project.
         */
         private static Assembly CurrentDomain_AssemblyResolve(object sender, ResolveEventArgs args) {
+
             string projectDir = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
             string shortAssemblyName = args.Name.Substring(0, args.Name.IndexOf(','));
             string fileName = Path.Combine(projectDir, shortAssemblyName + ".dll");
@@ -78,6 +112,7 @@ namespace Micra.Domain {
                 Listener.WriteLine("Assembly file {0} not found", assemblyFilename);
                 return false;
             }
+            Listener.WriteLine("MxDomain > LoadAssembly > assemblyFilename:{0}", assemblyFilename);
             AssemblyName assemblyName = AssemblyName.GetAssemblyName(assemblyFilename);
             Assembly asm = GetAssembly(assemblyName);
             if ( asm != null ) {
@@ -103,14 +138,6 @@ namespace Micra.Domain {
             return true;
         }
 
-        public void DestroyDomain() {
-
-            if ( appDomain == null ) {
-                Listener.WriteLine("Domain not Exists");
-                return;
-            }
-            AppDomain.Unload(appDomain);
-        }
         //get all assemblies from this domain
         public Assembly[] GetAssemblies() => appDomain.GetAssemblies();
         public void ShowLoadedAssemblies() {

@@ -26,9 +26,9 @@
             this.BtnRebuildDomain = new System.Windows.Forms.Button();
             this.DestroyDomain = new System.Windows.Forms.Button();
             this.BtnLoadAssembly = new System.Windows.Forms.Button();
-            this.TbxAssemblyPath = new System.Windows.Forms.TextBox();
             this.BtnCreateDomain = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.TbxAssemblyFname = new System.Windows.Forms.TextBox();
             this.ChkCurrentDomain = new System.Windows.Forms.CheckBox();
             this.TbxDomainName = new System.Windows.Forms.TextBox();
             this.BtnGetDomain = new System.Windows.Forms.Button();
@@ -61,9 +61,9 @@
             // 
             // DestroyDomain
             // 
-            this.DestroyDomain.Location = new System.Drawing.Point(875, 17);
+            this.DestroyDomain.Location = new System.Drawing.Point(878, 17);
             this.DestroyDomain.Name = "DestroyDomain";
-            this.DestroyDomain.Size = new System.Drawing.Size(100, 22);
+            this.DestroyDomain.Size = new System.Drawing.Size(97, 22);
             this.DestroyDomain.TabIndex = 23;
             this.DestroyDomain.Text = "Destroy Domain";
             this.DestroyDomain.UseVisualStyleBackColor = true;
@@ -71,24 +71,13 @@
             // 
             // BtnLoadAssembly
             // 
-            this.BtnLoadAssembly.Location = new System.Drawing.Point(672, 17);
+            this.BtnLoadAssembly.Location = new System.Drawing.Point(669, 16);
             this.BtnLoadAssembly.Name = "BtnLoadAssembly";
             this.BtnLoadAssembly.Size = new System.Drawing.Size(97, 22);
             this.BtnLoadAssembly.TabIndex = 22;
             this.BtnLoadAssembly.Text = "Load Assembly";
             this.BtnLoadAssembly.UseVisualStyleBackColor = true;
             this.BtnLoadAssembly.Click += new System.EventHandler(this.BtnLoadAssembly_Click);
-            // 
-            // TbxAssemblyPath
-            // 
-            this.TbxAssemblyPath.Location = new System.Drawing.Point(372, 19);
-            this.TbxAssemblyPath.Name = "TbxAssemblyPath";
-            this.TbxAssemblyPath.Size = new System.Drawing.Size(294, 20);
-            this.TbxAssemblyPath.TabIndex = 21;
-            this.TbxAssemblyPath.Text = "D:\\ReneBaca\\Aprog\\Micra\\Micra4\\Assembly\\Micra.Star.dll";
-            this.TbxAssemblyPath.WordWrap = false;
-            this.TbxAssemblyPath.Enter += new System.EventHandler(this.OnTextAreaGotFocus);
-            this.TbxAssemblyPath.Leave += new System.EventHandler(this.OnTextAreaLostFocus);
             // 
             // BtnCreateDomain
             // 
@@ -102,10 +91,10 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.TbxAssemblyFname);
             this.groupBox1.Controls.Add(this.ChkCurrentDomain);
             this.groupBox1.Controls.Add(this.TbxDomainName);
             this.groupBox1.Controls.Add(this.BtnLoadAssembly);
-            this.groupBox1.Controls.Add(this.TbxAssemblyPath);
             this.groupBox1.Controls.Add(this.BtnGetDomain);
             this.groupBox1.Controls.Add(this.DestroyDomain);
             this.groupBox1.Controls.Add(this.BtnRebuildDomain);
@@ -113,15 +102,24 @@
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBox1.Location = new System.Drawing.Point(0, 0);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(983, 50);
+            this.groupBox1.Size = new System.Drawing.Size(983, 51);
             this.groupBox1.TabIndex = 26;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Domain:";
             // 
+            // TbxAssemblyFname
+            // 
+            this.TbxAssemblyFname.Location = new System.Drawing.Point(358, 17);
+            this.TbxAssemblyFname.Name = "TbxAssemblyFname";
+            this.TbxAssemblyFname.Size = new System.Drawing.Size(305, 20);
+            this.TbxAssemblyFname.TabIndex = 31;
+            this.TbxAssemblyFname.Text = "D:\\ReneBaca\\Aprog\\Micra\\Micra4\\Assembly\\Micra.Star.dll";
+            this.TbxAssemblyFname.WordWrap = false;
+            // 
             // ChkCurrentDomain
             // 
             this.ChkCurrentDomain.AutoSize = true;
-            this.ChkCurrentDomain.Location = new System.Drawing.Point(216, 19);
+            this.ChkCurrentDomain.Location = new System.Drawing.Point(205, 20);
             this.ChkCurrentDomain.Name = "ChkCurrentDomain";
             this.ChkCurrentDomain.Size = new System.Drawing.Size(41, 17);
             this.ChkCurrentDomain.TabIndex = 30;
@@ -131,9 +129,9 @@
             // 
             // TbxDomainName
             // 
-            this.TbxDomainName.Location = new System.Drawing.Point(113, 17);
+            this.TbxDomainName.Location = new System.Drawing.Point(113, 18);
             this.TbxDomainName.Name = "TbxDomainName";
-            this.TbxDomainName.Size = new System.Drawing.Size(97, 20);
+            this.TbxDomainName.Size = new System.Drawing.Size(86, 20);
             this.TbxDomainName.TabIndex = 29;
             this.TbxDomainName.Text = "Micra_Domain";
             this.TbxDomainName.Enter += new System.EventHandler(this.OnTextAreaGotFocus);
@@ -141,7 +139,7 @@
             // 
             // BtnGetDomain
             // 
-            this.BtnGetDomain.Location = new System.Drawing.Point(263, 17);
+            this.BtnGetDomain.Location = new System.Drawing.Point(252, 17);
             this.BtnGetDomain.Name = "BtnGetDomain";
             this.BtnGetDomain.Size = new System.Drawing.Size(100, 22);
             this.BtnGetDomain.TabIndex = 28;
@@ -155,7 +153,7 @@
             this.LbxAssemblies.FormattingEnabled = true;
             this.LbxAssemblies.Location = new System.Drawing.Point(3, 16);
             this.LbxAssemblies.Name = "LbxAssemblies";
-            this.LbxAssemblies.Size = new System.Drawing.Size(486, 228);
+            this.LbxAssemblies.Size = new System.Drawing.Size(486, 227);
             this.LbxAssemblies.TabIndex = 27;
             this.LbxAssemblies.SelectedValueChanged += new System.EventHandler(this.OnAssemblyItemSelectionChanged);
             // 
@@ -165,7 +163,7 @@
             this.groupBox2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox2.Location = new System.Drawing.Point(0, 0);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(492, 247);
+            this.groupBox2.Size = new System.Drawing.Size(492, 246);
             this.groupBox2.TabIndex = 28;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Assemblies:";
@@ -176,7 +174,7 @@
             this.groupBox3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox3.Location = new System.Drawing.Point(0, 0);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(487, 247);
+            this.groupBox3.Size = new System.Drawing.Size(487, 246);
             this.groupBox3.TabIndex = 29;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Types:";
@@ -187,7 +185,7 @@
             this.LbxAssemblyTypes.FormattingEnabled = true;
             this.LbxAssemblyTypes.Location = new System.Drawing.Point(3, 16);
             this.LbxAssemblyTypes.Name = "LbxAssemblyTypes";
-            this.LbxAssemblyTypes.Size = new System.Drawing.Size(481, 228);
+            this.LbxAssemblyTypes.Size = new System.Drawing.Size(481, 227);
             this.LbxAssemblyTypes.TabIndex = 0;
             this.LbxAssemblyTypes.SelectedValueChanged += new System.EventHandler(this.OnAssemblyTypeItemSelectionChanged);
             // 
@@ -216,7 +214,7 @@
             // 
             this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.splitContainer1.IsSplitterFixed = true;
-            this.splitContainer1.Location = new System.Drawing.Point(0, 50);
+            this.splitContainer1.Location = new System.Drawing.Point(0, 51);
             this.splitContainer1.Name = "splitContainer1";
             // 
             // splitContainer1.Panel1
@@ -226,7 +224,7 @@
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.groupBox3);
-            this.splitContainer1.Size = new System.Drawing.Size(983, 247);
+            this.splitContainer1.Size = new System.Drawing.Size(983, 246);
             this.splitContainer1.SplitterDistance = 492;
             this.splitContainer1.TabIndex = 31;
             // 
@@ -259,7 +257,6 @@
         private System.Windows.Forms.Button BtnRebuildDomain;
         private System.Windows.Forms.Button DestroyDomain;
         private System.Windows.Forms.Button BtnLoadAssembly;
-        private System.Windows.Forms.TextBox TbxAssemblyPath;
         private System.Windows.Forms.Button BtnCreateDomain;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.ListBox LbxAssemblies;
@@ -272,5 +269,6 @@
         private System.Windows.Forms.TextBox TbxDomainName;
         private System.Windows.Forms.CheckBox ChkCurrentDomain;
         private System.Windows.Forms.SplitContainer splitContainer1;
+        private System.Windows.Forms.TextBox TbxAssemblyFname;
     }
 }

@@ -1,7 +1,5 @@
 ﻿using Autodesk.Max;
 using System;
-using System.IO;
-using System.Reflection;
 
 namespace Micra.Domain {
     public class Listener {

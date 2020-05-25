@@ -1,36 +1,25 @@
-dotNet.getType
-dotNet.loadAssembly
-dotNet.load
-
-currentDirectory = (dotnetClass "System.IO.Directory").GetCurrentDirectory()
-exePath = (dotnetClass "System.IO.Path").GetDirectoryName(Application.ExecutablePath);
-
-var absolutePath = Path.GetFullPath("../../Resources/Red.jpg");
-
-sysio = (dotnetClass "Switch")
-sysio = (dotnetClass "Switch.System.IO.UseLegacyPathHandling")
-(dotnetClass "Switch.System.IO").UseLegacyPathHandling=true
-
 --> Test
 --Final Method
-/*dotNet.loadAssembly (micra.AssemblyDir + "Micra.Domain.dll")
-cls = dotNet.getType "Micra.Domain.MxDomain"*/
+--asm_bytes = (dotnetClass "System.IO.File").ReadAllBytes (micra.AssemblyDir + "Micra.Domain.dll") --do not use this (cant get correct path after)
+--asm = (dotNetClass "System.Reflection.Assembly").Load asm_bytes
 
-asm_bytes = (dotnetClass "System.IO.File").ReadAllBytes (micra.AssemblyDir + "Micra.Domain.dll")
-asm = (dotNetClass "System.Reflection.Assembly").Load asm_bytes
+asm = dotNet.loadAssembly (micra.AssemblyDir + "Micra.Domain.dll")
 format "Micra IV > loadAssembly > [ % ]\n" asm.FullName --print ddl name and version
 cls = asm.getType "Micra.Domain.MxDomain"
 --Micra.Domain.MxDomain <System.String>domain_name
 dnArgs=dotNet.ValueToDotNetObject #("Micra_Domain") (dotNetClass "System.Object")
+--D:\ReneBaca\Aprog\Micra\Micra4\Assembly
+--dnArgs=dotNet.ValueToDotNetObject #("Micra_Domain", micra.AssemblyDir) (dotNetClass "System.Object")
 Global MxDomain = (dotNetClass "System.Activator").CreateInstance cls dnArgs --create custom domain
 --Global MxDomain = (dotNetClass "System.Activator").CreateInstance cls "Micra_Domain" --create custom domain (not works)
 MxDomain.ShowUi(mcMicraDialog) --show form with owner MicraForm
 
+
 MxDomain.LoadAssembly(micra.AssemblyDir + "Micra.Star.dll") --load assembly in this domain --TODO return null , should be Loader
 MxDomain.ShowLoadedAssemblies() --print all loaded assemblies from this domain
 
-asm = MxDomain.GetLatestAssembly "Micra.Star" --get latest version assembly reference from this domain
 
+asm = MxDomain.GetLatestAssembly "Micra.Star" --get latest version assembly reference from this domain
 if (asm != undefined) do format "Assembly % loaded." asm.FullName
 	
 	asm.Location

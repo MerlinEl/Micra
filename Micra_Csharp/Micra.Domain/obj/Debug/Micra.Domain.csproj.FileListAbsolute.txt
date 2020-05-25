@@ -1,9 +1,6 @@
 D:\ReneBaca\Aprog\Micra\Micra_Csharp\Micra.Domain\bin\Debug\Micra.Domain.dll
 D:\ReneBaca\Aprog\Micra\Micra_Csharp\Micra.Domain\bin\Debug\Micra.Domain.pdb
-D:\ReneBaca\Aprog\Micra\Micra_Csharp\Micra.Domain\bin\Debug\Autodesk.Max.dll
-D:\ReneBaca\Aprog\Micra\Micra_Csharp\Micra.Domain\bin\Debug\Autodesk.Max.xml
 D:\ReneBaca\Aprog\Micra\Micra_Csharp\Micra.Domain\obj\Debug\Micra.Domain.csproj.CoreCompileInputs.cache
-D:\ReneBaca\Aprog\Micra\Micra_Csharp\Micra.Domain\obj\Debug\Micra.Domain.csproj.CopyComplete
 D:\ReneBaca\Aprog\Micra\Micra_Csharp\Micra.Domain\obj\Debug\Micra.Domain.dll
 D:\ReneBaca\Aprog\Micra\Micra_Csharp\Micra.Domain\obj\Debug\Micra.Domain.pdb
 D:\ReneBaca\Aprog\Micra\Micra_Csharp\Micra.Domain\obj\Debug\Micra.Domain.DomainUi.resources
@@ -22,6 +19,7 @@ E:\Aprog\Orien\Micra\Micra_Csharp\Micra.Domain\obj\Debug\Micra.Domain.csproj.Cor
 E:\Aprog\Orien\Micra\Micra_Csharp\Micra.Domain\obj\Debug\Micra.Domain.csproj.CopyComplete
 E:\Aprog\Orien\Micra\Micra_Csharp\Micra.Domain\obj\Debug\Micra.Domain.dll
 E:\Aprog\Orien\Micra\Micra_Csharp\Micra.Domain\obj\Debug\Micra.Domain.pdb
+D:\ReneBaca\Aprog\Micra\Micra_Csharp\Micra.Domain\bin\Debug\Autodesk.Max.dll
 D:\ReneBaca\Aprog\Micra\Micra_Csharp\Micra.Domain\bin\Debug\ManagedServices.dll
 D:\ReneBaca\Aprog\Micra\Micra_Csharp\Micra.Domain\bin\Debug\CSharpUtilities.dll
 D:\ReneBaca\Aprog\Micra\Micra_Csharp\Micra.Domain\bin\Debug\UiViewModels.dll
@@ -29,6 +27,7 @@ D:\ReneBaca\Aprog\Micra\Micra_Csharp\Micra.Domain\bin\Debug\CoreManagedUiControl
 D:\ReneBaca\Aprog\Micra\Micra_Csharp\Micra.Domain\bin\Debug\nunit.framework.dll
 D:\ReneBaca\Aprog\Micra\Micra_Csharp\Micra.Domain\bin\Debug\MaxPlusDotNet.dll
 D:\ReneBaca\Aprog\Micra\Micra_Csharp\Micra.Domain\bin\Debug\AdWindows.dll
+D:\ReneBaca\Aprog\Micra\Micra_Csharp\Micra.Domain\bin\Debug\Autodesk.Max.xml
 D:\ReneBaca\Aprog\Micra\Micra_Csharp\Micra.Domain\bin\Debug\CSharpUtilities.xml
 D:\ReneBaca\Aprog\Micra\Micra_Csharp\Micra.Domain\bin\Debug\UiViewModels.xml
 D:\ReneBaca\Aprog\Micra\Micra_Csharp\Micra.Domain\bin\Debug\CoreManagedUiControls.xml
@@ -46,4 +45,4 @@ D:\ReneBaca\Aprog\Micra\Micra_Csharp\Micra.Domain\bin\Debug\ja-JP\AdWindows.reso
 D:\ReneBaca\Aprog\Micra\Micra_Csharp\Micra.Domain\bin\Debug\ko-KR\AdWindows.resources.dll
 D:\ReneBaca\Aprog\Micra\Micra_Csharp\Micra.Domain\bin\Debug\pt-BR\AdWindows.resources.dll
 D:\ReneBaca\Aprog\Micra\Micra_Csharp\Micra.Domain\bin\Debug\zh-CN\AdWindows.resources.dll
-D:\ReneBaca\Aprog\Micra\Micra_Csharp\Micra.Domain\obj\Debug\Micra.Domain.csprojAssemblyReference.cache
+D:\ReneBaca\Aprog\Micra\Micra_Csharp\Micra.Domain\obj\Debug\Micra.Domain.csproj.CopyComplete

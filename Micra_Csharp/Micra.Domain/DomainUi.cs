@@ -96,7 +96,7 @@ namespace Micra.Domain {
                 .Select(asm => ( asm as Assembly ).Location)
                 .ToArray();
             DestroyCurrentDomain();
-            customAppDomain = new MxDomain(TbxDomainName.Text);
+            customAppDomain = new MxDomain(TbxDomainName.Text); //
             foreach ( string path in loaded_assembly_paths ) {
 
                 customAppDomain.LoadAssembly(path);
@@ -108,7 +108,7 @@ namespace Micra.Domain {
 
             if ( customAppDomain != null ) {
 
-               bool success = customAppDomain.LoadAssembly(TbxAssemblyPath.Text);
+               bool success = customAppDomain.LoadAssembly(TbxAssemblyFname.Text);
                 if ( success ) {
                     ReloadAssembliesList();
                 } else {
@@ -250,7 +250,7 @@ namespace Micra.Domain {
                 TbxDomainName.Enabled = false;
                 BtnGetDomain.Enabled = false;
                 BtnCreateDomain.Enabled = false;
-                TbxAssemblyPath.Enabled = false;
+                TbxAssemblyFname.Enabled = false;
                 BtnLoadAssembly.Enabled = false;
                 BtnRebuildDomain.Enabled = false;
                 DestroyDomain.Enabled = false;
@@ -261,7 +261,7 @@ namespace Micra.Domain {
                 TbxDomainName.Enabled = true;
                 BtnGetDomain.Enabled = true;
                 BtnCreateDomain.Enabled = true;
-                TbxAssemblyPath.Enabled = true;
+                TbxAssemblyFname.Enabled = true;
                 BtnLoadAssembly.Enabled = true;
                 BtnRebuildDomain.Enabled = true;
                 DestroyDomain.Enabled = true;
