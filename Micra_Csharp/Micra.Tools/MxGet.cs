@@ -1,7 +1,9 @@
 ﻿using Autodesk.Max;
 using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
+using System.Linq;
 using System.Reflection;
 using System.Windows.Forms;
 //Category > Max SDK and C#
@@ -26,13 +28,29 @@ namespace Micra.Tools {
         #region Interfaces
 
         public static IGlobal Global => GlobalInterface.Instance;
-        public static IInterface13 Interface => Global.COREInterface13;
+        public static IInterface13 Interface => Global.COREInterface14;
+        public static IIGameScene GameScene(bool onlySelected = true) {
 
+            IIGameScene gameScene = Global.IGameInterface;
+            gameScene.InitialiseIGame(onlySelected);
+            gameScene.SetStaticFrame(0);
+            return gameScene;
+        }
+        public static IINode MaxScene => Interface.RootNode;
 
+        public static string MaxSceneFileName => GameScene().SceneFileName;
+        public static IClass_ID Class_ID;
+
+        /*static void Initialize() {
+            if ( Class_ID == null ) {
+                Class_ID = Global.Class_ID.Create(0x8217f123, 0xef980456);
+                Interface.AddClass(new MxDescriptor());
+            }
+        }*/
         #endregion
 
         #region Variables
-
+        public static string MaxPath() => Interface.GetDir((int)MaxDirectory.ProjectFolder);
         public static string AssemblyVersion = Assembly.GetExecutingAssembly().GetName().Version.ToString();
         public static string AssemblyDir {
             get {
@@ -44,6 +62,7 @@ namespace Micra.Tools {
         }
         public static string MicraRootDir = Directory.GetParent(AssemblyDir).FullName;
         public static string MicraRootDir2 => Path.Combine(MicraRootDir, @"..\..\Micra4"); //C# test get upper dir 2*
+      
         #endregion
 
 
@@ -54,6 +73,8 @@ namespace Micra.Tools {
         public static Size NewSize(int w, int h) => new Size(w, h);
         public static Color NewColor(int r, int g, int b) => Color.FromArgb(r, g, b);
         public static Color ColorFromName(string clr_str) => Color.FromName(clr_str);
+        public static IPoint3 NewPoint3() => Global.Point3.Create();
+        public static IPoint3 NewPoint3(float X, float Y, float Z) => Global.Point3.Create(X,Y,Z);
 
         #endregion
 
@@ -90,6 +111,20 @@ namespace Micra.Tools {
 
         #region Test
 
+        /*public static ScaleUnitType GetSceneUnits() {
+
+            unsafe {
+
+                int unitType = 0;
+                double ptrScale = 0.0f;
+                IntPtr pType = new IntPtr(&unitType);
+                IntPtr pScale = new IntPtr(&ptrScale);
+
+                Global.GetMasterUnitInfo(pType, pScale);
+            }
+            float masterScale = (float)Global.GetMasterScale(unitType);
+            return (ScaleUnitType)unitType;
+        }*/
         /// <summary>
         /// NativeWindow parentWindow = GetWindowFromHwnd(hwnd);
         /// try {
@@ -107,26 +142,58 @@ namespace Micra.Tools {
             window.AssignHandle(handle);
             return window;
         }
-        public static IPoint3 Point(double x, double y, double z) {
 
-            return Global.Point3.Create(x, y, z);
-        }
-
-        /*public class Point {
-            private double _x = 0;
-            private double _y = 0;
-            private double _z = 0;
-          *  private IPoint3 p;
-            public Point(double x, double y, double z) {
-                _x = x;
-                _y = y;
-                _z = z;
-                p = MxGet.Global.Point3.Create(x, y, z);
-            }
-        }*/
         #endregion
 
 
 
     }
 }
+
+
+/*
+     public static IntPtr GetNativeHandle(this INativeObject obj) => obj.NativePointer;
+      public static IMatrix3 Identity { get { return Loader.Global.Matrix3.Create(XAxis, YAxis, ZAxis, Origin); } }
+      public static IInterval Forever {
+          get { return Loader.Global.Interval.Create(int.MinValue, int.MaxValue); }
+      }
+      //var type = GetWrappersAssembly().GetType("Autodesk.Max.Wrappers.IGameCamera");
+      //var constructor = type.GetConstructors()[0];
+      static Assembly GetWrappersAssembly() {
+          return Assembly.Load("Autodesk.Max.Wrappers, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null");
+      }
+       public static IEnumerable<Type> GetAllLoadableTypes() {
+          Assembly[] assemblies = AppDomain.CurrentDomain.GetAssemblies();
+          foreach ( Assembly assembly in assemblies ) {
+              foreach ( Type type in assembly.GetLoadableTypes() ) {
+                  yield return type;
+              }
+          }
+      }
+      public static IEnumerable<Type> GetLoadableTypes(this Assembly assembly) {
+          if ( assembly == null ) throw new ArgumentNullException("assembly");
+          try {
+              return assembly.GetTypes();
+          } catch ( ReflectionTypeLoadException e ) {
+              return e.Types.Where(t => t != null);
+          }
+      }
+      public struct VersionNumber {
+          public int Major;
+          public int Minor;
+          public int Revision;
+          public int BuildNumber;
+      }
+      public static VersionNumber GetMaxVersion() {
+
+          // https://getcoreinterface.typepad.com/blog/2017/02/querying-the-3ds-max-version.html
+          var versionString = ManagedServices.MaxscriptSDK.ExecuteStringMaxscriptQuery("getFileVersion \"$max/3dsmax.exe\"");
+          var versionSplit = versionString.Split(',');
+          int major, minor, revision, buildNumber = 0;
+          int.TryParse(versionSplit[0], out major);
+          int.TryParse(versionSplit[1], out minor);
+          int.TryParse(versionSplit[2], out revision);
+          int.TryParse(versionSplit[3], out buildNumber);
+          return new VersionNumber { Major = major, Minor = minor, Revision = revision, BuildNumber = buildNumber };
+      }
+      */

@@ -48,6 +48,7 @@
     <Reference Include="Orien.Tools">
       <HintPath>..\..\..\ORIENTOOLS\C#\Orien.Launcher\bin\Debug\Orien.Tools.dll</HintPath>
     </Reference>
+    <Reference Include="PresentationCore" />
     <Reference Include="SceneExplorer">
       <HintPath>C:\Program Files\Autodesk\3ds Max 2018\SceneExplorer.dll</HintPath>
     </Reference>
@@ -69,7 +70,9 @@
     <Compile Include="CsharpToMaxTest.Designer.cs">
       <DependentUpon>CsharpToMaxTest.cs</DependentUpon>
     </Compile>
+    <Content Include="Backup\MxDescriptor.cs.txt" />
     <Compile Include="MxFile.cs" />
+    <Compile Include="MxGeo.cs" />
     <Compile Include="MxListener.cs" />
     <Content Include="Backup\MxAssemblyManager.cs.txt" />
     <Compile Include="MxConsole.cs">
@@ -85,6 +88,7 @@
     <Compile Include="MxGet.cs" />
     <Compile Include="MxCollection.cs" />
     <Compile Include="MxMap.cs" />
+    <Compile Include="MxMath.cs" />
     <Compile Include="MxPoly.cs" />
     <Compile Include="MxSet.cs" />
     <Compile Include="MxUi.cs" />
@@ -92,7 +96,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Content Include="Resources\SurfaceRelax.cs.txt" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Tools\" />
+  </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="CsharpToMaxTest.resx">
       <DependentUpon>CsharpToMaxTest.cs</DependentUpon>

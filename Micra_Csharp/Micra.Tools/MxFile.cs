@@ -3,6 +3,19 @@ using System.IO;
 
 namespace Micra.Tools {
     class MxFile {
+
+        public static string ResolveRelativePath(string path) { //not tested not used
+
+            if ( string.IsNullOrEmpty(MxGet.Interface.CurFilePath) ) {
+                return path;
+            }
+            string dirName = MxGet.MaxPath();
+            if ( !path.StartsWith("\\") ) {
+                return path;
+            }
+            return string.Format(@"{0}{1}", dirName, path);
+        }
+
         /// <summary>
         /// This function writing bitmap File
         /// </summary>

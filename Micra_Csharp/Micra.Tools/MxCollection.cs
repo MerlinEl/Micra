@@ -7,17 +7,11 @@ using System.Runtime.InteropServices;
 namespace Micra.Tools {
     internal class MxCollection {
 
-        internal static IINode GetFirstSelectedNode() {
-            return MxGet.Interface.GetSelNode(0);
+        public static void DeselectAll(bool redraw = true) {
+
+            MxGet.Interface.ClearNodeSelection(redraw);
         }
 
-        //not tested not used
-        //http://help.autodesk.com/view/3DSMAX/2016/ENU/?guid=__cpp_ref_class_interface_html
-        //Returns a pointer to the object (or modifier) that is currently being edited in the modifier panel.
-        internal static IBaseObject CurEditObject() {
-
-            return MxGet.Interface.CurEditObject;
-        }
         /// <summary>
         /// Get All Scene Objects
         /// </summary>
@@ -34,9 +28,13 @@ namespace Micra.Tools {
             return node_list;
         }
 
+        internal static IINode GetFirstSelectedNode() {
+            return MxGet.Interface.GetSelNode(0);
+        }
+
         internal static List<IINode> GetSelectedNodes() {
 
-            IINodeTab selNodes = null;
+            IINodeTab selNodes = MxGet.Global.NodeTab.Create();
             MxSet.LogLi("GetSelectedNodes");
             MxGet.Interface.GetSelNodeTab(selNodes);
             MxSet.LogLi("GetSelectedNodes" + selNodes);
@@ -47,6 +45,50 @@ namespace Micra.Tools {
                 node_list.Add(selNodes[i]);
             }
             return node_list;
+        }
+
+
+        /*public static IInterface_ID EditablePoly { //not tested not used
+            get {
+                return MxGet.Global.Interface_ID.Create(0x092779, 0x634020);
+            }
+        }
+        public static IInterface_ID NodeLayerProperties { //not tested not used
+            get {
+                return MxGet.Global.Interface_ID.Create(0x44e025f8, 0x6b071e44);
+
+            }
+        }
+        public static IIFPLayerManager IIFPLayerManager { //not tested not used
+            get {
+                IInterface_ID iIFPLayerManagerID = MxGet.Global.Interface_ID.Create((uint)BuiltInInterfaceIDA.LAYERMANAGER_INTERFACE, (uint)BuiltInInterfaceIDB.LAYERMANAGER_INTERFACE);
+                return (IIFPLayerManager)MxGet.Global.GetCOREInterface(iIFPLayerManagerID);
+            }
+        }*/
+
+        //not tested not used
+        //http://help.autodesk.com/view/3DSMAX/2016/ENU/?guid=__cpp_ref_class_interface_html
+        //Returns a pointer to the object (or modifier) that is currently being edited in the modifier panel.
+        internal static IBaseObject CurEditObject() {
+
+            /*var camerasTab = MxGet.GameScene().GetIGameNodeByType(Autodesk.Max.IGameObject.ObjectTypes.Camera);
+            for ( int ix = 0; ix < camerasTab.Count; ++ix ) { }
+            var meshes = MxGet.GameScene().GetIGameNodeByType(Autodesk.Max.IGameObject.ObjectTypes.Mesh);
+            for ( int ix = 0; ix < meshes.Count; ++ix ) { }
+            var lightNodes = MxGet.GameScene().GetIGameNodeByType(Autodesk.Max.IGameObject.ObjectTypes.Light);
+            for ( var i = 0; i < lightNodes.Count; ++i ) { }
+
+            var meshes = MxGet.MaxScene.NodesListBySuperClasses(new[] { SuperClassID.GeometricObject, SuperClassID.Helper });
+            foreach ( var meshNode in meshes ) { }
+            foreach ( var lightNode in MxGet.MaxScene.NodesListBySuperClasses(SuperClassID.Light) )
+                firstNode.ObjectRef != null && firstNode.ObjectRef.Eval(0).Obj.SuperClassID == SClass_ID.Camera
+                firstNode.ObjectRef != null && firstNode.ObjectRef.Eval(0).Obj.SuperClassID == SClass_ID.Light*/
+
+                //Autodesk.Max.IPolyObject
+                //int c = (int)Autodesk.Max.IGameObject.ObjectTypes.Camera;
+                //int m = (int)Autodesk.Max.IGameObject.ObjectTypes.Mesh;
+                //var id = _camera.GetGuid().ToString();
+            return MxGet.Interface.CurEditObject;
         }
 
         /*

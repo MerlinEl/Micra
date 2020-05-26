@@ -47,9 +47,10 @@ struct MICRA_CSHARP_STRUCTURE	(
 	assembly_path = micra.AssemblyDir + "Micra.Star.dll",
 	--functions
 	fn getSource = getSourceFileName(), --get path of this script
-	---------------------------------------------
-	--LOADING ASSEMBLY FROM DLL (MEMORIZE CONTENT WITHOUT LOCK DLL)--
-	---------------------------------------------
+	fn isLoaded = (classOf MicraAssembly == dotNetObject),
+	-------------------------------------------------------------------
+	-- LOADING ASSEMBLY FROM DLL (MEMORIZE CONTENT WITHOUT LOCK DLL) --
+	-------------------------------------------------------------------
 	/**
 	*@Usage
 	*@Example
@@ -60,8 +61,44 @@ struct MICRA_CSHARP_STRUCTURE	(
 			mcMath_Instance.minMax 100	1	200	--> 100
 		)
 	*/
-	fn isLoaded = (classOf MicraAssembly == dotNetObject),
 	--forceLoad == false (know classes dont need to be loaded again)
+	--[ Orien.Tools ] and [ Orine.NetUi ] and [ any other dll] are merged in to [ Micra.Star.dll ]
+	fn getClassInstance classPath constructorParams:#() forceLoad:false = (
+		
+		if not doesFileExist assembly_path do return false
+		--Load Assembly at first time or when force is True
+		if not isLoaded() or forceLoad do (
+			try (
+			
+				local asm_bytes = sysFile.ReadAllBytes assembly_path
+				MicraAssembly = assembly.Load asm_bytes
+				format "mcCSharp > getClassInstance > [ % ]\n" MicraAssembly.FullName --print ddl name and version
+
+			) catch (
+			
+				format "mcCSharp > getClassInstance > Unable to load Assembly:\n\t%\n"  (getCurrentException())
+				return false
+			)
+		)
+		--Pick up class from micra assembly latest version
+		try (
+			local cls = MicraAssembly.getType classPath --always get latest class
+			if constructorParams.count > 0 then (
+			
+				--convert constructorParams array in to System.Object[]
+				local args = dotNet.ValueToDotNetObject constructorParams (dotNetClass "System.Object")
+				activator.CreateInstance cls args --return class instance
+			
+			) else (
+
+				activator.CreateInstance cls	--return class instance
+			)
+		
+		) catch (
+			format "mcCSharp > getClassInstance > Unable to load Class:\n\t%\n"  (getCurrentException())
+			undefined
+		)
+	),
 	fn getClassInstanceShadowCopy classPath constructorParams:#() forceLoad:false = ( --ShadowCopy method by susanta
 	
 		local class_instance 
@@ -108,34 +145,6 @@ struct MICRA_CSHARP_STRUCTURE	(
 		--use this way to create object of sepcific version instead of (dotNetObject "MYLib.MyClass")
 		class_instance = asm.CreateInstance classPath --create object of first version of MYLib.MyClass
 		class_instance --return class instance
-	),
-	--[ Orien.Tools ] and [ Orine.NetUi ] and [ any other dll] are merged in to [ Micra.Star.dll ]
-	fn getClassInstance classPath constructorParams:#() forceLoad:false = (
-		
-		if not doesFileExist assembly_path do return false
-		--Load Assembly at first time or when force is True
-		if not isLoaded() or forceLoad do (
-			try (
-			
-				local asm_bytes = sysFile.ReadAllBytes assembly_path
-				MicraAssembly = assembly.Load asm_bytes
-				format "mcCSharp > getClassInstance > [ % ]\n" MicraAssembly.FullName --print ddl name and version
-
-			) catch (
-			
-				format "mcCSharp > getClassInstance > Unable to load Assembly:\n\t%\n"  (getCurrentException())
-				return false
-			)
-		)
-		--Pick up class from micra assembly latest version
-		try (
-			local cls = MicraAssembly.getType classPath --always get latest class
-			return activator.CreateInstance cls	--class_instance
-		
-		) catch (
-			format "mcCSharp > getClassInstance > Unable to load Class:\n\t%\n"  (getCurrentException())
-			undefined
-		)
 	),
 	---------------------------------------------
 	--BUILDING ASSEMBLY FROM STRING--

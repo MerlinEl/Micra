@@ -1,5 +1,15 @@
 --> Test
+--A --Working example with always latest DLL version
+_mcCsharpToMaxTest = mcCSharp.getClassInstance "Micra.Tools.CsharpToMaxTest" forceLoad:true --one force is enough for reload
+_mcCsharpToMaxTest.owner = mcMicraDialog --bind form in to max window
+_mcCsharpToMaxTest.Show()
+
+
+
+
+---------------------
 --Final Method
+---------------------
 --asm_bytes = (dotnetClass "System.IO.File").ReadAllBytes (micra.AssemblyDir + "Micra.Domain.dll") --do not use this (cant get correct path after)
 --asm = (dotNetClass "System.Reflection.Assembly").Load asm_bytes
 

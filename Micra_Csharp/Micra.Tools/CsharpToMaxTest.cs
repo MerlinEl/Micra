@@ -1,6 +1,8 @@
 ﻿using Autodesk.Max;
+using Autodesk.Max.Plugins;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Windows.Forms;
 
 namespace Micra.Tools {
@@ -63,6 +65,61 @@ namespace Micra.Tools {
             textBox1.Text = cmd;
             IFPValue mxsRetVal = MxSet.ExecuteMAXScriptScript(cmd);
             if ( mxsRetVal != null ) MxSet.LogLi("Render Click gor:" + mxsRetVal.S);
+        }
+
+        private void BtnSelSimElements_Click(object sender, EventArgs e) {
+
+            MxSet.LogLi("SelSimElements");
+            List<IINode> sel_objs = MxCollection.GetSelectedNodes();
+            MxSet.LogLi("\tSelected objects:{0}", sel_objs.Count);
+            if ( sel_objs.Count == 0 ) return;
+            List<IINode> all_objs = MxCollection.Objects();
+            MxSet.LogLi("\tAll objects:{0}", all_objs.Count);
+            if ( all_objs.Count == 1 ) return;
+            List<double> volumes = new List<double> { };
+            foreach (IINode o in sel_objs ) {
+
+                float v = MxPoly.GetGeometryVolume(o);
+                MxSet.LogLi("\t\tget obj:{0} area:{1}", o.Name, v);
+            }
+
+            return;
+
+            IINode obj = MxCollection.GetFirstSelectedNode(); //Autodesk.Max.Wrappers.INode
+            ISubClassList clist = GlobalInterface.Instance.ClassDirectory.Instance.GetClassList(obj.ObjectRef.Eval(0).Obj.SuperClassID);
+            //IClassEntry.ClassName: "GeoSphere"
+            //IClassEntry.Category: "Standard Primitives"
+            //IClassEntry.DllNumber: 74
+            //TODO is good to do it with multiselection (obj or element or face)
+            //polyObjectClassID
+            //firstNode.ObjectRef != null && firstNode.ObjectRef.Eval(0).Obj.SuperClassID == SClass_ID.Light
+            //obj.SuperClassID == Basenode
+            if ( obj == null || obj.ObjectRef.Eval(0).Obj.SuperClassID != SClass_ID.Geomobject ) return;
+
+            Type obj_type = obj.GetType();
+
+            MxSet.LogLi("SelSimElements > sel obj:{0} is SuperClassID:{1} type:{2}", obj.Name, obj.ObjectRef.Eval(0).Obj.SuperClassID, obj_type.Name);
+            MxSet.LogLi("SelSimElements > class list:{0}", clist.ToString());
+            return;
+
+
+            int slev = MxGet.Interface.SubObjectLevel;
+
+            MxSet.LogLi("selectedObject:{0} subobjectLevel:{1}", obj.Name, slev);
+
+            if ( slev == 4 || slev == 5 ) { //select geometry with simillar volume
+
+                MxSet.LogLi("select geometry with simillar volume");
+
+            } else { //select objects with simillar volume
+
+                MxSet.LogLi("select objects with simillar volume");
+            }
+
+            /*MxSet.ExecuteMAXScriptScript("" +
+                "mcPoly.selectSimilarElements selection[1] " +
+                "offset:" + SpnAreaOffset.Value.ToString()
+            );*/
         }
     }
 }

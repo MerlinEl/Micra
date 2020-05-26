@@ -30,6 +30,7 @@
             this.button4 = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.BtnSelSimElements = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -105,16 +106,27 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Execute Max Script";
             // 
+            // BtnSelSimElements
+            // 
+            this.BtnSelSimElements.Location = new System.Drawing.Point(12, 41);
+            this.BtnSelSimElements.Name = "BtnSelSimElements";
+            this.BtnSelSimElements.Size = new System.Drawing.Size(172, 23);
+            this.BtnSelSimElements.TabIndex = 8;
+            this.BtnSelSimElements.Text = "Select Simillar Elements";
+            this.BtnSelSimElements.UseVisualStyleBackColor = true;
+            this.BtnSelSimElements.Click += new System.EventHandler(this.BtnSelSimElements_Click);
+            // 
             // CsharpToMaxTest
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(610, 492);
+            this.Controls.Add(this.BtnSelSimElements);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.button4);
             this.Controls.Add(this.button1);
             this.Name = "CsharpToMaxTest";
-            this.Text = "CtoMaxTest";
+            this.Text = "Csharp To Max Test:";
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
@@ -130,5 +142,6 @@
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Button BtnSelSimElements;
     }
 }
