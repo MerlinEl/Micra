@@ -48,13 +48,13 @@
     <Reference Include="Orien.Tools">
       <HintPath>..\..\..\ORIENTOOLS\C#\Orien.Launcher\bin\Debug\Orien.Tools.dll</HintPath>
     </Reference>
-    <Reference Include="PresentationCore" />
     <Reference Include="SceneExplorer">
       <HintPath>C:\Program Files\Autodesk\3ds Max 2018\SceneExplorer.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -93,6 +93,12 @@
     <Compile Include="MxSet.cs" />
     <Compile Include="MxUi.cs" />
     <Compile Include="MxUvs.cs" />
+    <Content Include="Objects\MxMatrix.cs.txt" />
+    <Compile Include="Objects\MxDoubleUtil.cs" />
+    <Compile Include="Objects\MxPoint.cs" />
+    <Compile Include="Objects\MxSize.cs" />
+    <Compile Include="Objects\MxVector.cs" />
+    <Compile Include="Objects\MxQuaternion.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Content Include="Resources\SurfaceRelax.cs.txt" />
   </ItemGroup>

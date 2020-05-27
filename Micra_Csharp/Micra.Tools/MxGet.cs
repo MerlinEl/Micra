@@ -29,6 +29,7 @@ namespace Micra.Tools {
 
         public static IGlobal Global => GlobalInterface.Instance;
         public static IInterface13 Interface => Global.COREInterface14;
+        public static IIInstanceMgr iInstanceMgr => Global.IInstanceMgr.InstanceMgr;
         public static IIGameScene GameScene(bool onlySelected = true) {
 
             IIGameScene gameScene = Global.IGameInterface;
@@ -74,7 +75,7 @@ namespace Micra.Tools {
         public static Color NewColor(int r, int g, int b) => Color.FromArgb(r, g, b);
         public static Color ColorFromName(string clr_str) => Color.FromName(clr_str);
         public static IPoint3 NewPoint3() => Global.Point3.Create();
-        public static IPoint3 NewPoint3(float X, float Y, float Z) => Global.Point3.Create(X,Y,Z);
+        public static IPoint3 NewIPoint3(float X, float Y, float Z) => Global.Point3.Create(X,Y,Z);
 
         #endregion
 

@@ -31,6 +31,9 @@
             this.button5 = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.BtnSelSimElements = new System.Windows.Forms.Button();
+            this.BtnSelectAll = new System.Windows.Forms.Button();
+            this.BtnSelectNone = new System.Windows.Forms.Button();
+            this.BtnPrintNodeInstances = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -116,11 +119,44 @@
             this.BtnSelSimElements.UseVisualStyleBackColor = true;
             this.BtnSelSimElements.Click += new System.EventHandler(this.BtnSelSimElements_Click);
             // 
+            // BtnSelectAll
+            // 
+            this.BtnSelectAll.Location = new System.Drawing.Point(430, 261);
+            this.BtnSelectAll.Name = "BtnSelectAll";
+            this.BtnSelectAll.Size = new System.Drawing.Size(172, 23);
+            this.BtnSelectAll.TabIndex = 9;
+            this.BtnSelectAll.Text = "Select All";
+            this.BtnSelectAll.UseVisualStyleBackColor = true;
+            this.BtnSelectAll.Click += new System.EventHandler(this.BtnSelectAll_Click);
+            // 
+            // BtnSelectNone
+            // 
+            this.BtnSelectNone.Location = new System.Drawing.Point(430, 290);
+            this.BtnSelectNone.Name = "BtnSelectNone";
+            this.BtnSelectNone.Size = new System.Drawing.Size(172, 23);
+            this.BtnSelectNone.TabIndex = 10;
+            this.BtnSelectNone.Text = "Select None";
+            this.BtnSelectNone.UseVisualStyleBackColor = true;
+            this.BtnSelectNone.Click += new System.EventHandler(this.BtnSelectNone_Click);
+            // 
+            // BtnPrintNodeInstances
+            // 
+            this.BtnPrintNodeInstances.Location = new System.Drawing.Point(12, 96);
+            this.BtnPrintNodeInstances.Name = "BtnPrintNodeInstances";
+            this.BtnPrintNodeInstances.Size = new System.Drawing.Size(172, 23);
+            this.BtnPrintNodeInstances.TabIndex = 11;
+            this.BtnPrintNodeInstances.Text = "Select Node Instances";
+            this.BtnPrintNodeInstances.UseVisualStyleBackColor = true;
+            this.BtnPrintNodeInstances.Click += new System.EventHandler(this.BtnPrintNodeInstances_Click);
+            // 
             // CsharpToMaxTest
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(610, 492);
+            this.Controls.Add(this.BtnPrintNodeInstances);
+            this.Controls.Add(this.BtnSelectNone);
+            this.Controls.Add(this.BtnSelectAll);
             this.Controls.Add(this.BtnSelSimElements);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.button4);
@@ -143,5 +179,8 @@
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Button BtnSelSimElements;
+        private System.Windows.Forms.Button BtnSelectAll;
+        private System.Windows.Forms.Button BtnSelectNone;
+        private System.Windows.Forms.Button BtnPrintNodeInstances;
     }
 }

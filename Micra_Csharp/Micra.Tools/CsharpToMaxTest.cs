@@ -53,7 +53,7 @@ namespace Micra.Tools {
 
         private void button4_Click(object sender, EventArgs e) {
 
-            List<IINode> objects = MxCollection.Objects();
+            List<IINode> objects = MxCollection.GetSceneObjects();
             MxSet.LogLi(( sender as Button ).Text + " objs:" + objects.Count);
             //MxGet.Interface.ForceCompleteRedraw(false);
             foreach ( IINode n in objects ) MxSet.LogLi("\t" + n.Name);
@@ -73,13 +73,14 @@ namespace Micra.Tools {
             List<IINode> sel_objs = MxCollection.GetSelectedNodes();
             MxSet.LogLi("\tSelected objects:{0}", sel_objs.Count);
             if ( sel_objs.Count == 0 ) return;
-            List<IINode> all_objs = MxCollection.Objects();
+            List<IINode> all_objs = MxCollection.GetSceneObjects();
             MxSet.LogLi("\tAll objects:{0}", all_objs.Count);
             if ( all_objs.Count == 1 ) return;
-            List<double> volumes = new List<double> { };
-            foreach (IINode o in sel_objs ) {
+            var volumes = new List<Tuple<IINode, double>> { }; //list of pairs
+            foreach (IINode o in sel_objs) {
 
-                float v = MxPoly.GetGeometryVolume(o);
+                double v = MxPoly.GetGeometryVolume(o);
+                volumes.Add(Tuple.Create(o, v));
                 MxSet.LogLi("\t\tget obj:{0} area:{1}", o.Name, v);
             }
 
@@ -120,6 +121,24 @@ namespace Micra.Tools {
                 "mcPoly.selectSimilarElements selection[1] " +
                 "offset:" + SpnAreaOffset.Value.ToString()
             );*/
+        }
+
+        private void BtnSelectAll_Click(object sender, EventArgs e) {
+            MxCollection.SelectAll();
+        }
+
+        private void BtnSelectNone_Click(object sender, EventArgs e) {
+            MxCollection.SelectNone();
+        }
+
+        private void BtnPrintNodeInstances_Click(object sender, EventArgs e) {
+            IINode obj = MxCollection.GetFirstSelectedNode();
+            if ( obj == null ) return;
+            MxSet.LogLi("Get Instances from Node:{0}", obj.Name);
+            List<IINode> instances = MxCollection.GetNodeInstances(obj);
+            if ( instances.Count == 0 ) return;
+            foreach ( IINode n in instances ) MxSet.LogLi("\t{0}", n.Name);
+            MxCollection.SelectNodes(instances);
         }
     }
 }

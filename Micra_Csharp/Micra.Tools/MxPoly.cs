@@ -1,10 +1,7 @@
 ﻿using Autodesk.Max;
+using Micra.Tools.Objects;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Media.Media3D;
 
 namespace Micra.Tools {
     class MxPoly {
@@ -22,19 +19,19 @@ namespace Micra.Tools {
 
             double objVolume = 0.0;
 
-            foreach ( IFace f in mesh.Faces) {
+            foreach ( IFace f in mesh.Faces ) {
 
                 IntPtr fverts = f.AllVerts;
                 IPoint3 v0 = mesh.GetVert((int)( f.GetVert(0) ));
                 IPoint3 v1 = mesh.GetVert((int)( f.GetVert(1) ));
                 IPoint3 v2 = mesh.GetVert((int)( f.GetVert(2) ));
 
-                Vector3D v3 = MxMath.VectorFromPoints(v1, v0);
-                Vector3D v4 = MxMath.VectorFromPoints(v2, v0);
-                Vector3D v5 = MxMath.VectorFromPoint(v0);
-                objVolume += Vector3D.DotProduct(Vector3D.CrossProduct(v3, v4), v5);
+                MxVector v3 = MxVector.FromIPoints(v1, v0);
+                MxVector v4 = MxVector.FromIPoints(v2, v0);
+                MxVector v5 = MxVector.FromIPoint(v0);
+                objVolume += MxVector.DotProduct(MxVector.CrossProduct(v3, v4), v5);
             }
-            return (float)(objVolume / mesh.Faces.Count);
+            return (float)( objVolume / mesh.Faces.Count );
         }
 
         internal static List<IPoint3> GetVerticesPositions(IINode obj) { //not tested not used
