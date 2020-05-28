@@ -188,3 +188,5 @@ E:\Aprog\Orien\Micra\Micra_Csharp\obj\Debug\Micra.Launcher.exe
 E:\Aprog\Orien\Micra\Micra_Csharp\obj\Debug\Micra.Launcher.pdb
 D:\ReneBaca\Aprog\Micra\Micra_Csharp\bin\Debug\Micra.Domain.dll
 D:\ReneBaca\Aprog\Micra\Micra_Csharp\bin\Debug\Micra.Domain.pdb
+D:\ReneBaca\Aprog\Micra\Micra_Csharp\bin\Debug\Micra.Core.dll
+D:\ReneBaca\Aprog\Micra\Micra_Csharp\bin\Debug\Micra.Core.pdb

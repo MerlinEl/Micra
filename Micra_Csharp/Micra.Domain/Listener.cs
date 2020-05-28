@@ -9,10 +9,12 @@ namespace Micra.Domain {
         }
 
         public static void Write(string s) {
-
-            GlobalInterface.Instance.TheListener.EditStream.Wputs(s);
-            GlobalInterface.Instance.TheListener.EditStream.Flush();
-            //Console.WriteLine(s); //switch console for build test
+            #if DEBUG
+                Console.WriteLine(s); //switch console for build test
+            # else
+                GlobalInterface.Instance.TheListener.EditStream.Wputs(s);
+                GlobalInterface.Instance.TheListener.EditStream.Flush();
+            #endif
         }
 
         public static void WriteLine(string s) {

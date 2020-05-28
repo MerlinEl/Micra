@@ -108,3 +108,15 @@ E:\Aprog\Orien\Micra\Micra_Csharp\Micra.Tools\obj\Debug\Micra.Tools.csproj.CoreC
 E:\Aprog\Orien\Micra\Micra_Csharp\Micra.Tools\obj\Debug\Micra.Tools.csproj.CopyComplete
 E:\Aprog\Orien\Micra\Micra_Csharp\Micra.Tools\obj\Debug\Micra.Tools.dll
 E:\Aprog\Orien\Micra\Micra_Csharp\Micra.Tools\obj\Debug\Micra.Tools.pdb
+D:\ReneBaca\Aprog\Micra\Micra_Csharp\Micra.Tools\bin\Debug\Autodesk.Max.Wrappers.dll
+D:\ReneBaca\Aprog\Micra\Micra_Csharp\Micra.Tools\bin\Debug\MaterialExplorerView.dll
+D:\ReneBaca\Aprog\Micra\Micra_Csharp\Micra.Tools\bin\Debug\SceneExplorerView.dll
+D:\ReneBaca\Aprog\Micra\Micra_Csharp\Micra.Tools\bin\Debug\de-DE\Autodesk.Max.Wrappers.resources.dll
+D:\ReneBaca\Aprog\Micra\Micra_Csharp\Micra.Tools\bin\Debug\fr-FR\Autodesk.Max.Wrappers.resources.dll
+D:\ReneBaca\Aprog\Micra\Micra_Csharp\Micra.Tools\bin\Debug\ja-JP\Autodesk.Max.Wrappers.resources.dll
+D:\ReneBaca\Aprog\Micra\Micra_Csharp\Micra.Tools\bin\Debug\ko-KR\Autodesk.Max.Wrappers.resources.dll
+D:\ReneBaca\Aprog\Micra\Micra_Csharp\Micra.Tools\bin\Debug\pt-BR\Autodesk.Max.Wrappers.resources.dll
+D:\ReneBaca\Aprog\Micra\Micra_Csharp\Micra.Tools\bin\Debug\zh-CN\Autodesk.Max.Wrappers.resources.dll
+D:\ReneBaca\Aprog\Micra\Micra_Csharp\Micra.Tools\obj\Debug\Micra.Tools.csprojAssemblyReference.cache
+D:\ReneBaca\Aprog\Micra\Micra_Csharp\Micra.Tools\bin\Debug\Micra.Core.dll
+D:\ReneBaca\Aprog\Micra\Micra_Csharp\Micra.Tools\bin\Debug\Micra.Core.pdb

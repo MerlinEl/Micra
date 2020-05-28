@@ -32,7 +32,7 @@
     <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
+    <PlatformTarget>x64</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -161,7 +161,7 @@
   set VERSION=%25%25F
 )
 echo Creating Merged Assembly Micra.Star.dll vith version %25VERSION%25
-$(ILMergeConsolePath) /log:ILMerge_Log.txt  /allowDup:* /ver:%25VERSION%25 /out:Micra.Star.dll Orien.Tools.dll Orien.NetUi.dll Micra.Tools.dll
+$(ILMergeConsolePath) /log:ILMerge_Log.txt  /allowDup:* /ver:%25VERSION%25 /out:Micra.Star.dll Orien.Tools.dll Orien.NetUi.dll Micra.Tools.dll Micra.Core.dll
 xcopy $(ProjectDir)bin\Debug\Micra.Star.dll $(SolutionDir)..\..\Micra\Micra4\Assembly /Y /I</PostBuildEvent>
   </PropertyGroup>
   <PropertyGroup>

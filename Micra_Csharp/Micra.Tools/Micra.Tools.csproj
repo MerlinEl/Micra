@@ -21,7 +21,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <PlatformTarget>AnyCPU</PlatformTarget>
+    <PlatformTarget>x64</PlatformTarget>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -35,12 +35,18 @@
     <Reference Include="Autodesk.Max">
       <HintPath>C:\Program Files\Autodesk\3ds Max 2018\Autodesk.Max.dll</HintPath>
     </Reference>
+    <Reference Include="Autodesk.Max.Wrappers">
+      <HintPath>C:\Program Files\Autodesk\3ds Max 2018\bin\assemblies\Autodesk.Max.Wrappers.dll</HintPath>
+    </Reference>
     <Reference Include="CSharpUtilities, Version=20.3.3149.0, Culture=neutral, processorArchitecture=AMD64">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>C:\Program Files\Autodesk\3ds Max 2018\CSharpUtilities.dll</HintPath>
     </Reference>
     <Reference Include="ManagedServices">
       <HintPath>C:\Program Files\Autodesk\3ds Max 2018\ManagedServices.dll</HintPath>
+    </Reference>
+    <Reference Include="MaterialExplorerView">
+      <HintPath>C:\Program Files\Autodesk\3ds Max 2018\bin\assemblies\MaterialExplorerView.dll</HintPath>
     </Reference>
     <Reference Include="Orien.NetUi">
       <HintPath>..\..\..\ORIENTOOLS\C#\Orien.Launcher\bin\Debug\Orien.NetUi.dll</HintPath>
@@ -50,6 +56,9 @@
     </Reference>
     <Reference Include="SceneExplorer">
       <HintPath>C:\Program Files\Autodesk\3ds Max 2018\SceneExplorer.dll</HintPath>
+    </Reference>
+    <Reference Include="SceneExplorerView">
+      <HintPath>C:\Program Files\Autodesk\3ds Max 2018\bin\assemblies\SceneExplorerView.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -100,6 +109,7 @@
     <Compile Include="Objects\MxVector.cs" />
     <Compile Include="Objects\MxQuaternion.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Content Include="Resources\MaxPluginUtilities.cs.txt" />
     <Content Include="Resources\SurfaceRelax.cs.txt" />
   </ItemGroup>
   <ItemGroup>
@@ -112,6 +122,12 @@
     <EmbeddedResource Include="MxGeometryOptimizer.resx">
       <DependentUpon>MxGeometryOptimizer.cs</DependentUpon>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Micra.Core\Micra.Core.csproj">
+      <Project>{2dbbe923-141a-468e-830d-85ca8f654556}</Project>
+      <Name>Micra.Core</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

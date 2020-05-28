@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Micra.Tools", "Micra.Tools\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Micra.Domain", "Micra.Domain\Micra.Domain.csproj", "{90796EEE-17C6-4381-98A0-3A71241C7D01}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Micra.Core", "Micra.Core\Micra.Core.csproj", "{2DBBE923-141A-468E-830D-85CA8F654556}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{90796EEE-17C6-4381-98A0-3A71241C7D01}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{90796EEE-17C6-4381-98A0-3A71241C7D01}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{90796EEE-17C6-4381-98A0-3A71241C7D01}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2DBBE923-141A-468E-830D-85CA8F654556}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2DBBE923-141A-468E-830D-85CA8F654556}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2DBBE923-141A-468E-830D-85CA8F654556}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2DBBE923-141A-468E-830D-85CA8F654556}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

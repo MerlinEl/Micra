@@ -6,6 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Windows.Forms;
+//http://help.autodesk.com/view/3DSMAX/2020/ENU/?guid=__cpp_ref_class_interface_html
 //Category > Max SDK and C#
 namespace Micra.Tools {
     public class MxGet {
@@ -28,8 +29,9 @@ namespace Micra.Tools {
         #region Interfaces
 
         public static IGlobal Global => GlobalInterface.Instance;
+        //http://help.autodesk.com/view/3DSMAX/2020/ENU/?guid=__cpp_ref_class_interface14_html
         public static IInterface13 Interface => Global.COREInterface14;
-        public static IIInstanceMgr iInstanceMgr => Global.IInstanceMgr.InstanceMgr;
+        public static IIInstanceMgr InstanceMgr => Global.IInstanceMgr.InstanceMgr;
         public static IIGameScene GameScene(bool onlySelected = true) {
 
             IIGameScene gameScene = Global.IGameInterface;
@@ -146,8 +148,60 @@ namespace Micra.Tools {
 
         #endregion
 
+    }
+    //https://github.com/sinushawa/TagManager
+    //Interface.AddClass(new testSub.Descriptor(Global));
+    public class testSub : Autodesk.Max.Plugins.UtilityObj { //test only
+        public class Descriptor : Autodesk.Max.Plugins.ClassDesc2 {
+            protected IGlobal _global;
+            internal static IClass_ID _classID;
 
+            public IGlobal Global {
+                get { return this._global; }
+            }
 
+            public Descriptor(IGlobal global) {
+                this._global = global;
+                _classID = _global.Class_ID.Create(0x8962d7, 0x285b3ff9);
+            }
+
+            public override string Category {
+                get { return "NetPluginTests"; }
+            }
+
+            public override IClass_ID ClassID {
+                get { return _classID; }
+            }
+
+            public override string ClassName {
+                get { return "TestPlugin01"; }
+            }
+
+            public override object Create(bool loading) {
+                return new testSub(this);
+            }
+
+            public override bool IsPublic {
+                get { return true; }
+            }
+
+            public override SClass_ID SuperClassID {
+                get { return SClass_ID.Utility; }
+            }
+        }
+        Descriptor _descriptor;
+
+        public testSub(Descriptor descriptor) {
+            this._descriptor = descriptor;
+        }
+
+        public override void BeginEditParams(IInterface ip, IIUtil iu) {
+            ip.PushPrompt("This is a prompt msg :D");
+        }
+
+        public override void EndEditParams(IInterface ip, IIUtil iu) {
+            ip.PopPrompt();
+        }
     }
 }
 

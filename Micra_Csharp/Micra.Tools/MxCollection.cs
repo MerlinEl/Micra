@@ -1,27 +1,88 @@
 ﻿using Autodesk.Max;
-using Autodesk.Max.Plugins;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices;
-
+//http://help.autodesk.com/view/3DSMAX/2020/ENU/?guid=__cpp_ref_class_interface14_html
 namespace Micra.Tools {
     internal class MxCollection {
+        //enum to class constants
+        public static IClass_ID triClass = MxGet.Global.Class_ID.Create((uint)BuiltInClassIDA.TRIOBJ_CLASS_ID, 0);
+        public static IClass_ID polyClass = MxGet.Global.Class_ID.Create((uint)BuiltInClassIDA.POLYOBJ_CLASS_ID, 0);
+        public static IClass_ID spsClass = MxGet.Global.Class_ID.Create((uint)BuiltInClassIDA.SPLINESHAPE_CLASS_ID, 0);
+        /*public static IInterface_ID EditablePoly { //not tested not used
+            get {
+                return MxGet.Global.Interface_ID.Create(0x092779, 0x634020);
+            }
+        }*/
+
+        /* C++ version
+        Object* obj = node->GetObjectRef();
+        PolyObject* poly = (PolyObject*)obj->ConvertToType(t, Class_ID(polyObjectClassID));
+        Object *pObj = poly->CollapseObject();
+        if (pObj != poly) delete poly;
+        node->SetObjectRef(pObj);
+         */
+        public static void ConvertToMesh(IINode obj) {
+
+            obj.ObjectRef.Eval(0).Obj.FindBaseObject().ConvertToType(0, triClass);
+
+            /*node = MaxPlus.Factory.CreateNode(obj)
+            node.Convert(MaxPlus.ClassIds.TriMeshGeometry)
+            obj = MaxPlus.Factory.CreateGeomObject(MaxPlus.ClassIds.Sphere)
+            obj = node.GetBaseObject()*/
+        }
+        public static void ConvertToPoly(IINode obj) {
+
+            obj.ObjectRef.Eval(0).Obj.FindBaseObject().ConvertToType(0, polyClass);
+
+            /*node = MaxPlus.Factory.CreateNode(obj)
+            node.Convert(MaxPlus.ClassIds.PolyMeshObject)
+            obj = MaxPlus.Factory.CreateGeomObject(MaxPlus.ClassIds.Sphere)
+            obj = node.GetBaseObject()*/
+        }
+
+        public void DemoTeapotHardWay(IGlobal global) { //test
+
+            var cid = MxGet.Global.Class_ID.Create((uint)BuiltInClassIDA.TEAPOT_CLASS_ID,
+            (uint)BuiltInClassIDB.TEAPOT_CLASS_ID);
+            var obj = MxGet.Interface.CreateInstance(SClass_ID.Geomobject, cid) as IObject;
+            var n = MxGet.Global.COREInterface.CreateObjectNode(obj);
+            var ps = obj.ParamBlock;
+            ps.SetValue(0, MxGet.Global.COREInterface.Time, 20.0f);
+            n.Move(global.COREInterface.Time, global.Matrix3.Create(),
+            global.Point3.Create(20, 20, 0), true, true, 0, true);
+
+        }
+        //Here is the MaxSharp approach to creating and moving a teapot from C#:
+        public static void test() {
+
+            /*var obj = Primitives.Teapot.Create();
+            obj["radius"] = 10.0f;
+            obj.Node.Move(Point3(20, 20, 0));*/
+        }
+
+        public static void PrintObjectClass(IINode obj) { //test only
+                                                          //if ( obj == null || obj.ObjectRef.Eval(0).Obj.SuperClassID != SClass_ID.Geomobject ) return;
+                                                          //MxGet.Global.Class_ID
+                                                          //PolyObject
+                                                          //MxGet.Interface.MaxPlus
+            IObject io = obj.ObjectRef.Eval(0).Obj;
+            //io.
+            IClass_ID classId = io.ClassID; //Autodesk.Max.Wrappers.Class_ID 
+            SClass_ID sclassID = io.SuperClassID; //Geomobject
+            MxSet.LogLi("PrintObjectClass > obj:{0} is ClassOf:{1} SuperClassOf:{2}", obj.Name, classId, sclassID);
+            //io.ConvertToType(0, polyObjectClassID);
+        }
 
         public static void SelectNone(bool redraw = true) {
 
             MxGet.Interface.ClearNodeSelection(redraw);
         }
-        public static void SelectAll() => SelectNodes(GetSceneObjects());
-        public static void SelectNodes(List<IINode> nodes) {
-
-            if ( nodes == null || nodes.Count == 0 ) return;
-            MxGet.Interface.SelectNodeTab(ToIINodeTab(nodes), true, true);
-        }
+        public static void SelectAll() => SetSelection(GetAllObjects());
         /// <summary>
         /// Get All Scene Objects
         /// </summary>
-        public static List<IINode> GetSceneObjects(bool visibleOnly = false) { //OK
+        public static List<IINode> GetAllObjects(bool visibleOnly = false) { //OK
 
             IINode root_node = MxGet.Interface.RootNode;
             MxSet.LogLi("Objects > RootNode:" + root_node.Name);
@@ -29,7 +90,7 @@ namespace Micra.Tools {
             for ( int i = 0; i < root_node.NumChildren; i++ ) {
 
                 IINode child_node = MxGet.Interface.RootNode.GetChildNode(i);
-                if ( visibleOnly && child_node.IsHidden(NodeHideFlags.Objects, false) ) continue;
+                if ( visibleOnly && child_node.IsHidden(NodeHideFlags.All, false) ) continue;
                 node_list.Add(child_node);
             };
             return node_list;
@@ -39,19 +100,55 @@ namespace Micra.Tools {
             return MxGet.Interface.GetSelNode(0);
         }
 
-        public static List<IINode> GetSelectedNodes() {
+        public static List<IINode> GetSelection() {
 
             IINodeTab selNodes = MxGet.Global.NodeTab.Create();
             MxGet.Interface.GetSelNodeTab(selNodes);
             return selNodes.ToIEnumerable().ToList();
+
+            /*List<IINode> selectedNodes = new List<IINode>();
+            for ( int i = 0; i < MxGet.Interface.SelNodeCount; i++ ) {
+                selectedNodes.Add(MxGet.Interface.GetSelNode(i));
+            }
+            return selectedNodes;*/
         }
-        //C++ version
-        //INodeTab instanceAndRef;
-        //IInstanceMgr::GetInstanceMgr()->GetInstances(node, instanceAndRef);
-        public static List<IINode> GetNodeInstances(IINode node) { //not tested not used
+        /*private static void SetSelection(List<IINode> _nodes) {
+            try {
+                _nodes = _nodes.Distinct().ToList();
+                IINodeTab selectedNodes = MxGet.Global.NodeTab.Create();
+                selectedNodes.Resize(_nodes.Count);
+                foreach ( IINode _node in _nodes ) {
+                    if ( _node != null ) {
+                        selectedNodes.AppendNode(_node, false, 1);
+                    }
+                    MxGet.Interface.SelectNode(_node, false);
+                }
+                MxGet.Interface.SelectNodeTab(selectedNodes, true, true);
+            } catch {
+            }
+        }
+        public static void SetSelection(List<uint> _nodesHandles) {
+            if ( !TagGlobals.addToSelection ) {
+                Interface.ClearNodeSelection(false);
+            }
+            Selection = _nodesHandles.GetNodesByHandles();
+        }
+        private static void SetSelection(SortableObservableCollection<IINode> _nodes) {
+            Selection = _nodes.ToList();
+        }*/
+        public static void SetSelection(List<IINode> nodes) {
+
+            if ( nodes == null || nodes.Count == 0 ) return;
+            MxGet.Interface.SelectNodeTab(ToIINodeTab(nodes), true, true);
+        }
+        /* C++ version
+        INodeTab instanceAndRef;
+        IInstanceMgr::GetInstanceMgr()->GetInstances(node, instanceAndRef);
+        */
+        public static List<IINode> GetInstances(IINode node) { //not tested not used
 
             IINodeTab instances = MxGet.Global.NodeTab.Create();
-            MxGet.iInstanceMgr.GetInstances(node, instances);
+            MxGet.InstanceMgr.GetInstances(node, instances);
             return instances.ToIEnumerable().ToList();
         }
 
@@ -100,10 +197,32 @@ namespace Micra.Tools {
             if ( nodesList == null ) return null;
             IINodeTab nodes = MxGet.Global.NodeTab.Create();
             foreach ( IINode n in nodesList ) {
-                nodes.AppendNode(n, true, 1);
+                if ( n != null ) nodes.AppendNode(n, true, 1);
+                //MxGet.Interface.SelectNode(n, false);
             }
             return nodes;
         }
+        /*public static ITab<IINode> ToITab(this List<IINode> _nodes) {
+
+            ITab<IINode> _Itab = _nodes.ToNodeTab() as ITab<IINode>;
+
+            return _Itab;
+        }
+        public static List<IINode> ToListNode(this IINodeTab _nodes) {
+            List<IINode> listNodes = new List<IINode>();
+            for ( int i = 0; i < _nodes.Count; i++ ) {
+                IntPtr pointer = (IntPtr)i;
+                listNodes.Add(_nodes[i]);
+            }
+            return listNodes;
+        }
+        public static List<uint> ToListHandles(this List<IINode> _nodes) {
+            List<uint> listHandles = new List<uint>();
+            foreach ( IINode _node in _nodes ) {
+                listHandles.Add(_node.Handle);
+            }
+            return listHandles;
+        }*/
     }
     internal static class MxCollectionExtensions {
         //julienCM69Q

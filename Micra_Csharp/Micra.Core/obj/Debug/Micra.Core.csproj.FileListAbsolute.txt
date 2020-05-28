@@ -1,0 +1,8 @@
+D:\ReneBaca\Aprog\Micra\Micra_Csharp\Micra.Core\obj\Debug\Micra.Core.csproj.CoreCompileInputs.cache
+D:\ReneBaca\Aprog\Micra\Micra_Csharp\Micra.Core\bin\Debug\Micra.Core.dll
+D:\ReneBaca\Aprog\Micra\Micra_Csharp\Micra.Core\bin\Debug\Micra.Core.pdb
+D:\ReneBaca\Aprog\Micra\Micra_Csharp\Micra.Core\bin\Debug\Autodesk.Max.dll
+D:\ReneBaca\Aprog\Micra\Micra_Csharp\Micra.Core\bin\Debug\Autodesk.Max.xml
+D:\ReneBaca\Aprog\Micra\Micra_Csharp\Micra.Core\obj\Debug\Micra.Core.csproj.CopyComplete
+D:\ReneBaca\Aprog\Micra\Micra_Csharp\Micra.Core\obj\Debug\Micra.Core.dll
+D:\ReneBaca\Aprog\Micra\Micra_Csharp\Micra.Core\obj\Debug\Micra.Core.pdb
