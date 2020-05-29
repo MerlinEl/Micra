@@ -1,4 +1,6 @@
 ﻿using Autodesk.Max;
+using Micra.Core;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices;
@@ -22,19 +24,47 @@ namespace Micra.Tools {
         if (pObj != poly) delete poly;
         node->SetObjectRef(pObj);
          */
-        public static void ConvertToMesh(IINode obj) {
+        public static IObject ConvertToMesh(IINode node) {
 
-            obj.ObjectRef.Eval(0).Obj.FindBaseObject().ConvertToType(0, triClass);
+            //Check if node is not null
+            if ( node == null ) {
+                //MxGet.Interface.PushPrompt("Nothing Selected! Select something first to explode it into faces.");
+                return null;
+            }
+            // Get it's current object state. If a modifier has been applied, for example,
+            // it is going to return the OS of the mesh in it's current form in the timeline.
+            IObjectState os = node.ObjectRef.Eval(MxGet.Interface.Time);
 
+            // Now grab the object itself.
+            IObject objOriginal = os.Obj;
+
+            // If can be converted then convert it...
+            if ( objOriginal.CanConvertToType(MxGet.Global.TriObjectClassID) == 1 )
+                return objOriginal.ConvertToType(MxGet.Interface.Time, MxGet.Global.TriObjectClassID);
+            else return null;
+
+            //single line
+            //obj.ObjectRef.Eval(0).Obj.FindBaseObject().ConvertToType(0, triClass);
+
+            //Python example
             /*node = MaxPlus.Factory.CreateNode(obj)
             node.Convert(MaxPlus.ClassIds.TriMeshGeometry)
             obj = MaxPlus.Factory.CreateGeomObject(MaxPlus.ClassIds.Sphere)
             obj = node.GetBaseObject()*/
         }
-        public static void ConvertToPoly(IINode obj) {
+        public static IObject ConvertToPoly(IINode node) {
 
-            obj.ObjectRef.Eval(0).Obj.FindBaseObject().ConvertToType(0, polyClass);
+            if ( node == null ) return null;
+            IObjectState os = node.ObjectRef.Eval(MxGet.Interface.Time);
+            IObject objOriginal = os.Obj;
+            if ( objOriginal.CanConvertToType(MxGet.Global.PolyObjectClassID) == 1 )
+                return objOriginal.ConvertToType(MxGet.Interface.Time, MxGet.Global.PolyObjectClassID);
+            else return null;
 
+            //single line
+            //obj.ObjectRef.Eval(0).Obj.FindBaseObject().ConvertToType(0, polyClass);
+
+            //Python example
             /*node = MaxPlus.Factory.CreateNode(obj)
             node.Convert(MaxPlus.ClassIds.PolyMeshObject)
             obj = MaxPlus.Factory.CreateGeomObject(MaxPlus.ClassIds.Sphere)
@@ -43,22 +73,16 @@ namespace Micra.Tools {
 
         public void DemoTeapotHardWay(IGlobal global) { //test
 
-            var cid = MxGet.Global.Class_ID.Create((uint)BuiltInClassIDA.TEAPOT_CLASS_ID,
-            (uint)BuiltInClassIDB.TEAPOT_CLASS_ID);
+            var cid = MxGet.Global.Class_ID.Create(
+                (uint)BuiltInClassIDA.TEAPOT_CLASS_ID,
+                (uint)BuiltInClassIDB.TEAPOT_CLASS_ID
+            );
             var obj = MxGet.Interface.CreateInstance(SClass_ID.Geomobject, cid) as IObject;
             var n = MxGet.Global.COREInterface.CreateObjectNode(obj);
             var ps = obj.ParamBlock;
             ps.SetValue(0, MxGet.Global.COREInterface.Time, 20.0f);
             n.Move(global.COREInterface.Time, global.Matrix3.Create(),
             global.Point3.Create(20, 20, 0), true, true, 0, true);
-
-        }
-        //Here is the MaxSharp approach to creating and moving a teapot from C#:
-        public static void test() {
-
-            /*var obj = Primitives.Teapot.Create();
-            obj["radius"] = 10.0f;
-            obj.Node.Move(Point3(20, 20, 0));*/
         }
 
         public static void PrintObjectClass(IINode obj) { //test only
@@ -67,7 +91,7 @@ namespace Micra.Tools {
                                                           //PolyObject
                                                           //MxGet.Interface.MaxPlus
             IObject io = obj.ObjectRef.Eval(0).Obj;
-            //io.
+
             IClass_ID classId = io.ClassID; //Autodesk.Max.Wrappers.Class_ID 
             SClass_ID sclassID = io.SuperClassID; //Geomobject
             MxSet.LogLi("PrintObjectClass > obj:{0} is ClassOf:{1} SuperClassOf:{2}", obj.Name, classId, sclassID);
@@ -79,6 +103,15 @@ namespace Micra.Tools {
             MxGet.Interface.ClearNodeSelection(redraw);
         }
         public static void SelectAll() => SetSelection(GetAllObjects());
+
+        public static void SelectAll2() {
+
+            /*IINodeTab nodes = MxGet.Global.NodeTab.Create();
+            Kernel.Scene.Objects.ForEach(n => nodes.AppendNode(( n as IINode ), true, 1));
+            MxGet.Interface.SelectNodeTab(nodes, true, true);*/
+            IINodeTab nodes = ToIINodeTab(Kernel.Scene.Objects.ToList());
+            MxGet.Interface.SelectNodeTab(nodes, true, true);
+        }
         /// <summary>
         /// Get All Scene Objects
         /// </summary>
@@ -192,7 +225,13 @@ namespace Micra.Tools {
                 getChildNodesRecurse(node.GetChildNode(i), array);
             }
         }
-        public static IINodeTab ToIINodeTab(List<IINode> nodesList) {
+        public static IINodeTab ToIINodeTab<T>(List<T> nodesList) {
+
+            IINodeTab nodes = MxGet.Global.NodeTab.Create();
+            nodesList.ForEach(n => nodes.AppendNode(( n as IINode ), true, 1));
+            return nodes;
+        }
+        /*public static IINodeTab ToIINodeTab(List<IINode> nodesList) {
 
             if ( nodesList == null ) return null;
             IINodeTab nodes = MxGet.Global.NodeTab.Create();
@@ -201,7 +240,7 @@ namespace Micra.Tools {
                 //MxGet.Interface.SelectNode(n, false);
             }
             return nodes;
-        }
+        }*/
         /*public static ITab<IINode> ToITab(this List<IINode> _nodes) {
 
             ITab<IINode> _Itab = _nodes.ToNodeTab() as ITab<IINode>;
@@ -242,6 +281,10 @@ namespace Micra.Tools {
             for ( int i = 0; i < itab.Count; i++ ) {
                 yield return itab[i];
             }
+        }
+        public static void ForEach<T>(this IEnumerable<T> collection, Action<T> action) {
+            foreach ( T item in collection )
+                action(item);
         }
     }
 }

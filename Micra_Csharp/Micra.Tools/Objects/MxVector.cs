@@ -183,7 +183,7 @@ namespace Micra.Tools.Objects {
                 theta = 2.0 * Math.Asin(( vector1 - vector2 ).Length / 2.0);
             }
 
-            return MxMath.RadiansToDegrees(theta);
+            return MxMath.RadToDeg(theta);
         }
 
         /// <summary>

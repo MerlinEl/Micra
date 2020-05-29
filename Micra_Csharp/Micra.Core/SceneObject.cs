@@ -106,8 +106,8 @@ namespace Micra.Core {
 
             Mesh r = new Mesh(tri.Mesh);
 
-            //if (tri.Handle != _Object.Handle)
-            if ( tri != _Object ) {
+            if ( tri.GetType().TypeHandle.Value != _Object.GetType().TypeHandle.Value) { 
+            //if (tri.Handle != _Object.Handle) {
                 RefResult rr = tri.MaybeAutoDelete();
                 if ( rr == RefResult.Fail )
                     throw new Exception("Failed to autodelete the tri-object");

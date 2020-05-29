@@ -1,4 +1,5 @@
 ﻿using Autodesk.Max;
+using Micra.Core;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,32 +9,29 @@ using System.Linq;
 namespace Micra.Tools {
     public class MxMath {
 
-        internal static double RadiansToDegrees(double radians) {
+        internal static double RadToDeg(double radians) {
             return radians * ( 180.0 / Math.PI );
         }
 
-        internal static double DegreesToRadians(double degrees) {
+        internal static double DegToRad(double degrees) {
             return degrees * ( Math.PI / 180.0 );
         }
 
         //Compute the dot product between two vectors as follows: 
-        public static float Dot(IPoint3 v1, IPoint3 v2) { //OK
+        public static float Dot(Point3 v1, Point3 v2) { //OK
 
             return ( v1.X * v2.X ) + ( v1.Y * v2.Y ) + ( v1.Z * v2.Z );
         }
         //Compute the cross product between two vectors, defined as the vector perpendicular to both input vectors, 
         //with its direction defined by the right-hand rule.
-        public static IPoint3 Cross(IPoint3 v1, IPoint3 v2) { //OK
+        public static Point3 Cross(Point3 v1, Point3 v2) { //OK
 
-            return MxGet.NewIPoint3(
+            return new Point3(
                 ( v1.Y * v2.Z ) - ( v1.Z * v2.Y ),
                 ( v1.Z * v2.X ) - ( v1.X * v2.Z ),
                 ( v1.X * v2.Y ) - ( v1.Y * v2.X )
             );
         }
-
-
-
     }
 }
 

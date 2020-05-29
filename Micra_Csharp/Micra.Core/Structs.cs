@@ -97,6 +97,7 @@ namespace Micra.Core {
         public uint a;
         public uint b;
 
+        public ClassID(BuiltInClassIDA id) : this(id, 0) { } //new under testing 29.05.2020
         public ClassID(Autodesk.Max.IClass_ID id) : this(id.PartA, id.PartB) { }
         public ClassID(uint a, uint b) { this.a = a; this.b = b; }
         public ClassID(BuiltInClassIDA a, BuiltInClassIDB b) { this.a = (uint)a; this.b = (uint)b; }
@@ -107,11 +108,17 @@ namespace Micra.Core {
             }
         }
 
+        //new under testing 29.05.2020
+        public static ClassID EditableMesh = new ClassID(BuiltInClassIDA.TRIOBJ_CLASS_ID);
+        public static ClassID EditablePoly = new ClassID(BuiltInClassIDA.EPOLYOBJ_CLASS_ID);
+        public static ClassID BoneGeometry = new ClassID(BuiltInClassIDA.BONE_CLASS_ID);
+
+        //TODO for replace
+        public static ClassID TriObject = new ClassID(0x0009, 0);
+
         public override string ToString() {
             return "ClassID(" + a.ToString() + ", " + b.ToString() + ")";
         }
-
-        public static ClassID TriObject = new ClassID(0x0009, 0);
 
         public override bool Equals(object obj) {
             if ( !( obj is ClassID ) )
@@ -278,6 +285,7 @@ namespace Micra.Core {
 
             return res;
         }
+        //matrix explanation here 
         // Operator overload - Matrix Mult
         public static Matrix3 operator *(Matrix3 lhs, Matrix3 rhs) {
             Matrix3 res = new Matrix3();

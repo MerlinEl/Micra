@@ -1,4 +1,4 @@
-//
+// Thank you MaxSharp
 // Copyright 2012 Autodesk, Inc.  All rights reserved.
 //
 // Use of this software is subject to the terms of the Autodesk license
@@ -156,6 +156,10 @@ namespace Micra.Core {
         /// <param name="s"></param>
         public static void WriteLine(string s) {
             Write(s + "\n");
+        }
+
+        public static void WriteLine(string s, params Object[] args) {
+            WriteLine(String.Format(s, args));
         }
 
         /// <summary>

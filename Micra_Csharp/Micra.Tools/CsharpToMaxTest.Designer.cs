@@ -34,7 +34,21 @@
             this.BtnSelectAll = new System.Windows.Forms.Button();
             this.BtnSelectNone = new System.Windows.Forms.Button();
             this.BtnPrintNodeInstances = new System.Windows.Forms.Button();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.button6 = new System.Windows.Forms.Button();
+            this.button7 = new System.Windows.Forms.Button();
+            this.button8 = new System.Windows.Forms.Button();
+            this.button9 = new System.Windows.Forms.Button();
+            this.button10 = new System.Windows.Forms.Button();
+            this.button11 = new System.Windows.Forms.Button();
+            this.button12 = new System.Windows.Forms.Button();
+            this.button13 = new System.Windows.Forms.Button();
+            this.CbxObjType = new System.Windows.Forms.ComboBox();
+            this.ChkPrintProps = new System.Windows.Forms.CheckBox();
+            this.ChkClearSel = new System.Windows.Forms.CheckBox();
+            this.ChkSelHidden = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
+            this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // button1
@@ -78,7 +92,7 @@
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(190, 12);
+            this.button4.Location = new System.Drawing.Point(12, 67);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(171, 23);
             this.button4.TabIndex = 4;
@@ -121,7 +135,7 @@
             // 
             // BtnSelectAll
             // 
-            this.BtnSelectAll.Location = new System.Drawing.Point(430, 261);
+            this.BtnSelectAll.Location = new System.Drawing.Point(12, 125);
             this.BtnSelectAll.Name = "BtnSelectAll";
             this.BtnSelectAll.Size = new System.Drawing.Size(172, 23);
             this.BtnSelectAll.TabIndex = 9;
@@ -131,7 +145,7 @@
             // 
             // BtnSelectNone
             // 
-            this.BtnSelectNone.Location = new System.Drawing.Point(430, 290);
+            this.BtnSelectNone.Location = new System.Drawing.Point(12, 154);
             this.BtnSelectNone.Name = "BtnSelectNone";
             this.BtnSelectNone.Size = new System.Drawing.Size(172, 23);
             this.BtnSelectNone.TabIndex = 10;
@@ -149,11 +163,177 @@
             this.BtnPrintNodeInstances.UseVisualStyleBackColor = true;
             this.BtnPrintNodeInstances.Click += new System.EventHandler(this.BtnPrintNodeInstances_Click);
             // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.ChkSelHidden);
+            this.groupBox2.Controls.Add(this.ChkClearSel);
+            this.groupBox2.Controls.Add(this.ChkPrintProps);
+            this.groupBox2.Controls.Add(this.CbxObjType);
+            this.groupBox2.Controls.Add(this.button13);
+            this.groupBox2.Controls.Add(this.button12);
+            this.groupBox2.Controls.Add(this.button11);
+            this.groupBox2.Controls.Add(this.button10);
+            this.groupBox2.Controls.Add(this.button6);
+            this.groupBox2.Controls.Add(this.button7);
+            this.groupBox2.Controls.Add(this.button8);
+            this.groupBox2.Controls.Add(this.button9);
+            this.groupBox2.Location = new System.Drawing.Point(293, 12);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(305, 294);
+            this.groupBox2.TabIndex = 12;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "MaxSharp";
+            // 
+            // button6
+            // 
+            this.button6.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.button6.Location = new System.Drawing.Point(13, 107);
+            this.button6.Name = "button6";
+            this.button6.Size = new System.Drawing.Size(105, 23);
+            this.button6.TabIndex = 8;
+            this.button6.Text = "Plugin List";
+            this.button6.UseVisualStyleBackColor = true;
+            this.button6.Click += new System.EventHandler(this.button6_Click);
+            // 
+            // button7
+            // 
+            this.button7.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.button7.Location = new System.Drawing.Point(13, 77);
+            this.button7.Name = "button7";
+            this.button7.Size = new System.Drawing.Size(105, 23);
+            this.button7.TabIndex = 7;
+            this.button7.Text = "Bent Cylinder";
+            this.button7.UseVisualStyleBackColor = true;
+            this.button7.Click += new System.EventHandler(this.button7_Click);
+            // 
+            // button8
+            // 
+            this.button8.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.button8.Location = new System.Drawing.Point(13, 48);
+            this.button8.Name = "button8";
+            this.button8.Size = new System.Drawing.Size(105, 23);
+            this.button8.TabIndex = 6;
+            this.button8.Text = "Create Teapot";
+            this.button8.UseVisualStyleBackColor = true;
+            this.button8.Click += new System.EventHandler(this.button8_Click);
+            // 
+            // button9
+            // 
+            this.button9.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.button9.Location = new System.Drawing.Point(13, 19);
+            this.button9.Name = "button9";
+            this.button9.Size = new System.Drawing.Size(105, 23);
+            this.button9.TabIndex = 5;
+            this.button9.Text = "Nodes";
+            this.button9.UseVisualStyleBackColor = true;
+            this.button9.Click += new System.EventHandler(this.button9_Click);
+            // 
+            // button10
+            // 
+            this.button10.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.button10.Location = new System.Drawing.Point(124, 19);
+            this.button10.Name = "button10";
+            this.button10.Size = new System.Drawing.Size(105, 23);
+            this.button10.TabIndex = 9;
+            this.button10.Text = "Kernel Print Test";
+            this.button10.UseVisualStyleBackColor = true;
+            this.button10.Click += new System.EventHandler(this.button10_Click);
+            // 
+            // button11
+            // 
+            this.button11.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.button11.Location = new System.Drawing.Point(13, 194);
+            this.button11.Name = "button11";
+            this.button11.Size = new System.Drawing.Size(105, 23);
+            this.button11.TabIndex = 10;
+            this.button11.Text = "Select All";
+            this.button11.UseVisualStyleBackColor = true;
+            this.button11.Click += new System.EventHandler(this.button11_Click);
+            // 
+            // button12
+            // 
+            this.button12.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.button12.Location = new System.Drawing.Point(13, 165);
+            this.button12.Name = "button12";
+            this.button12.Size = new System.Drawing.Size(105, 23);
+            this.button12.TabIndex = 11;
+            this.button12.Text = "Deselect All";
+            this.button12.UseVisualStyleBackColor = true;
+            this.button12.Click += new System.EventHandler(this.button12_Click);
+            // 
+            // button13
+            // 
+            this.button13.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.button13.Location = new System.Drawing.Point(13, 223);
+            this.button13.Name = "button13";
+            this.button13.Size = new System.Drawing.Size(105, 23);
+            this.button13.TabIndex = 12;
+            this.button13.Text = "Select All Of Type";
+            this.button13.UseVisualStyleBackColor = true;
+            this.button13.Click += new System.EventHandler(this.button13_Click);
+            // 
+            // CbxObjType
+            // 
+            this.CbxObjType.FormattingEnabled = true;
+            this.CbxObjType.Items.AddRange(new object[] {
+            "Light",
+            "Geometry",
+            "Mesh",
+            "Poly",
+            "Bone",
+            "Helper",
+            "Spline"});
+            this.CbxObjType.Location = new System.Drawing.Point(124, 223);
+            this.CbxObjType.Name = "CbxObjType";
+            this.CbxObjType.Size = new System.Drawing.Size(100, 21);
+            this.CbxObjType.TabIndex = 13;
+            // 
+            // ChkPrintProps
+            // 
+            this.ChkPrintProps.AutoSize = true;
+            this.ChkPrintProps.Location = new System.Drawing.Point(124, 198);
+            this.ChkPrintProps.Name = "ChkPrintProps";
+            this.ChkPrintProps.Size = new System.Drawing.Size(75, 17);
+            this.ChkPrintProps.TabIndex = 14;
+            this.ChkPrintProps.Text = "print props";
+            this.ChkPrintProps.UseVisualStyleBackColor = true;
+            // 
+            // ChkClearSel
+            // 
+            this.ChkClearSel.AutoSize = true;
+            this.ChkClearSel.Checked = true;
+            this.ChkClearSel.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.ChkClearSel.Location = new System.Drawing.Point(230, 225);
+            this.ChkClearSel.Name = "ChkClearSel";
+            this.ChkClearSel.Size = new System.Drawing.Size(65, 17);
+            this.ChkClearSel.TabIndex = 15;
+            this.ChkClearSel.Text = "clear sel";
+            this.ChkClearSel.UseVisualStyleBackColor = true;
+            // 
+            // ChkSelHidden
+            // 
+            this.ChkSelHidden.AutoSize = true;
+            this.ChkSelHidden.Location = new System.Drawing.Point(218, 198);
+            this.ChkSelHidden.Name = "ChkSelHidden";
+            this.ChkSelHidden.Size = new System.Drawing.Size(74, 17);
+            this.ChkSelHidden.TabIndex = 16;
+            this.ChkSelHidden.Text = "sel hidden";
+            this.ChkSelHidden.UseVisualStyleBackColor = true;
+            // 
             // CsharpToMaxTest
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(610, 492);
+            this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.BtnPrintNodeInstances);
             this.Controls.Add(this.BtnSelectNone);
             this.Controls.Add(this.BtnSelectAll);
@@ -165,6 +345,8 @@
             this.Text = "Csharp To Max Test:";
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -182,5 +364,18 @@
         private System.Windows.Forms.Button BtnSelectAll;
         private System.Windows.Forms.Button BtnSelectNone;
         private System.Windows.Forms.Button BtnPrintNodeInstances;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.Button button6;
+        private System.Windows.Forms.Button button7;
+        private System.Windows.Forms.Button button8;
+        private System.Windows.Forms.Button button9;
+        private System.Windows.Forms.Button button10;
+        private System.Windows.Forms.Button button11;
+        private System.Windows.Forms.Button button12;
+        private System.Windows.Forms.Button button13;
+        private System.Windows.Forms.ComboBox CbxObjType;
+        private System.Windows.Forms.CheckBox ChkPrintProps;
+        private System.Windows.Forms.CheckBox ChkClearSel;
+        private System.Windows.Forms.CheckBox ChkSelHidden;
     }
 }

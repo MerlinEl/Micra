@@ -1393,6 +1393,66 @@ struct MICRA_POLY
 		)
 	),
 
+/* unchamferEdges > New way must be tested
+obj = $
+ring_edges = mcPoly.get #esel
+ring_vertices = polyOp.getVertsUsingEdge obj ring_edges
+fn getMidVector obj edges v0 ring_vertices everts = (
+
+	local p0 = polyOp.getVert obj v0
+	if edges.numberset == 2 then ( --calculate mid edge from two vectors
+	
+		local everts1 = polyOp.getVertsUsingEdge obj (edges as array)[1]
+		local everts2 = polyOp.getVertsUsingEdge obj (edges as array)[2]
+		local v1 =( (everts1 - #{v0}) as array)[1]
+		local v2 =( (everts2 - #{v0}) as array)[1]
+		local p1 = polyOp.getVert obj v1 
+		local p2 = polyOp.getVert obj v2
+		local v1 = p0 - p1
+		local v2 = p0 - p2
+		local p4 = v1 + v2 + p0
+		return p0 - p4
+		
+		-- t = 0.5
+		-- a = a.transform.pos
+		-- b = b.transform.pos
+		-- c = c.transform.pos
+		-- n = (((normalize ((1-t)*b + t * c)) * (distance b a)) + a)
+
+	) else if edges.numberset == 3 then ( --find mid edge
+
+		local filter_verts = ring_vertices - (everts as bitarray)
+		local loop_side_edge = for ei in edges where (
+			not (mcPoly.isEdgeUsingAnyVert obj ei filter_verts)
+			
+		) do exit with ei
+		local everts = polyOp.getVertsUsingEdge obj loop_side_edge
+		everts -= #{v0}
+		local p = polyOp.getVert obj (everts as array)[1]
+		return p0 - p
+
+	) else (
+		return undefined
+	)
+)
+for ei in ring_edges do (
+
+	local everts = polyOp.getVertsUsingEdge obj ei as array
+	local v1_a = everts[1]
+	local v2_a = everts[2]
+	local p1_a = polyOp.getVert obj v1_a
+	local p2_a = polyOp.getVert obj v2_a
+	local v1_edges = polyOp.getEdgesUsingVert obj v1_a
+	local v2_edges = polyOp.getEdgesUsingVert obj v2_a
+	local v1_edges = v1_edges - #{ei}	
+	local v2_edges = v2_edges - #{ei}	
+	local v1 = normalize (getMidVector obj v1_edges v1_a ring_vertices everts)
+	local v2 = normalize (getMidVector obj v2_edges v2_a ring_vertices everts)
+	local final_point = mcMath.intersectionVecVec p1_a v1 p2_a v2
+	polyOp.setVert obj v1_a final_point
+	polyOp.setVert obj v2_a final_point
+)
+*/
 	fn unchamferEdges obj edges debug:false = (
 	
 			if (classOf obj != Editable_Poly) do return (mcMsgList.warn "not_poly") 

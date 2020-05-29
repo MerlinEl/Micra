@@ -1,5 +1,6 @@
 ﻿using Autodesk.Max;
 using Autodesk.Max.Plugins;
+using Micra.Core;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -15,6 +16,7 @@ namespace Micra.Tools {
 
         private void Init() {
             Text = Text + "     " + MxGet.AssemblyVersion;
+            CbxObjType.SelectedIndex = 0;
         }
 
         private void OnTextAreaLostFocus(object sender, EventArgs e) {
@@ -77,7 +79,7 @@ namespace Micra.Tools {
             MxSet.LogLi("\tAll objects:{0}", all_objs.Count);
             if ( all_objs.Count == 1 ) return;
             var volumes = new List<Tuple<IINode, double>> { }; //list of pairs
-            foreach (IINode o in sel_objs) {
+            foreach ( IINode o in sel_objs ) {
                 MxCollection.PrintObjectClass(o);
                 double v = MxPoly.GetGeometryVolume(o);
                 volumes.Add(Tuple.Create(o, v));
@@ -86,7 +88,7 @@ namespace Micra.Tools {
 
             return;
 
-            IINode obj = MxCollection.GetFirstSelectedNode(); //Autodesk.Max.Wrappers.INode
+            /*IINode obj = MxCollection.GetFirstSelectedNode(); //Autodesk.Max.Wrappers.INode
             ISubClassList clist = GlobalInterface.Instance.ClassDirectory.Instance.GetClassList(obj.ObjectRef.Eval(0).Obj.SuperClassID);
             //IClassEntry.ClassName: "GeoSphere"
             //IClassEntry.Category: "Standard Primitives"
@@ -115,7 +117,7 @@ namespace Micra.Tools {
             } else { //select objects with simillar volume
 
                 MxSet.LogLi("select objects with simillar volume");
-            }
+            }*/
 
             /*MxSet.ExecuteMAXScriptScript("" +
                 "mcPoly.selectSimilarElements selection[1] " +
@@ -125,8 +127,6 @@ namespace Micra.Tools {
 
         private void BtnSelectAll_Click(object sender, EventArgs e) {
 
-            Core.Point3 p = new Core.Point3(20,56,45);
-            MxSet.LogLi("Micra.Core > Point3 > p:{0}", p.ToString());
             MxCollection.SelectAll();
         }
 
@@ -142,6 +142,77 @@ namespace Micra.Tools {
             if ( instances.Count == 0 ) return;
             foreach ( IINode n in instances ) MxSet.LogLi("\t{0}", n.Name);
             MxCollection.SetSelection(instances);
+        }
+
+        private void button9_Click(object sender, EventArgs e) {
+
+            MxSet.LogLi("Scene nodes");
+            PrintNode(Kernel.Scene.RootNode);
+        }
+
+        private void PrintNode(Node n, string indent = "") {
+            MxSet.LogLi(indent + n.Name);
+            foreach ( var c in n.Children )
+                PrintNode(c, indent + "  ");
+        }
+
+        private void button8_Click(object sender, EventArgs e) {
+
+            var teapot = Primitives.Teapot.Create();
+            teapot["radius"] = 20.0;
+            teapot.Node.Move(new Point3(20, 10, 5));
+        }
+
+        private void button7_Click(object sender, EventArgs e) {
+
+            var cylinder = Primitives.Cylinder.Create();
+            MxSet.LogLi("Create Cylinder params:{0}", cylinder.Params.ToString());
+            cylinder["radius"] = 20.0f;
+            cylinder["height"] = 40.0f;
+            cylinder["heightsegs"] = 10;
+            MxSet.LogLi("Create Bend");
+            var bend = Primitives.Bend.Create();
+            cylinder.AddModifier(bend);
+            bend["bendangle"] = 30.0f;
+        }
+
+        private void button6_Click(object sender, EventArgs e) {
+
+            MxSet.LogLi("Plug-ins");
+            foreach ( var p in PluginMgr.Plugins ) MxSet.LogLi(p.ClassName);
+        }
+
+        private void button10_Click(object sender, EventArgs e) {
+
+            Kernel.PushPrompt("Look at the MAXScript listener window");
+            Kernel.WriteLine("I'm some text appearing in the MAXScript listener window!");
+        }
+
+        private void button11_Click(object sender, EventArgs e) {
+
+            Collections.SelectAll(ChkSelHidden.Checked, true, ChkPrintProps.Checked);
+        }
+
+        private void button12_Click(object sender, EventArgs e) {
+            Collections.DeselectAll(true);
+        }
+
+        private void button13_Click(object sender, EventArgs e) {
+
+            SuperClassID classId;
+            switch ( CbxObjType.SelectedItem ) {
+
+                case "Light": classId = SuperClassID.Light; break;
+                case "Geometry": classId = SuperClassID.GeometricObject; break;
+                //case "Mesh": classId = ClassID.EditableMesh; break;
+                //case "Poly": classId = ClassID.EditablePoly; break;
+                //case "Bone": classId = ClassID.BoneGeometry; break;
+                case "Helper": classId = SuperClassID.Helper; break;
+                case "Spline": classId = SuperClassID.Shape; break;
+                default : classId = SuperClassID.GeometricObject; break;
+            }
+            Kernel.WriteLine("Select All objects with type:{0}", CbxObjType.SelectedItem.ToString());
+            Collections.SelectAllOfType(classId, ChkClearSel.Checked, true);
         }
     }
 }
