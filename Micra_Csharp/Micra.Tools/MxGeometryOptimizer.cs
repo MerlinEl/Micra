@@ -1,12 +1,9 @@
-﻿using Autodesk.Max;
-using Orien.NetUi;
+﻿using Orien.NetUi;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Windows.Forms;
 
 namespace Micra.Tools {
-    public partial class MxGeometryOptimizer : Form {
+    public partial class MxGeometryOptimizer:Form {
         public MxGeometryOptimizer() {
             InitializeComponent();
             InitTooltips();
@@ -32,8 +29,8 @@ namespace Micra.Tools {
                 ( sender as Panel ).Capture = false;
                 // Create and send a WM_NCLBUTTONDOWN message.
                 Message msg =
-                    Message.Create(this.Handle, (int)McUIMsg.WM.NCLBUTTONDOWN,
-                        new IntPtr((int)McUIMsg.HT.CAPTION), IntPtr.Zero);
+                    Message.Create(this.Handle, ( int )McUIMsg.WM.NCLBUTTONDOWN,
+                        new IntPtr(( int )McUIMsg.HT.CAPTION), IntPtr.Zero);
                 this.DefWndProc(ref msg);
             }
         }
@@ -43,8 +40,8 @@ namespace Micra.Tools {
         }
 
         private void BtnSelSimElements_Click(object sender, EventArgs e) {
-   
-            IINode obj = MxCollection.GetFirstSelectedNode();
+
+            /*IINode obj = MxCollection.GetFirstSelectedNode();
             if (!(obj is IEditableObject)) return;
             int slev = MxGet.Interface.SubObjectLevel;
 
@@ -57,7 +54,7 @@ namespace Micra.Tools {
             } else { //select objects with simillar volume
 
                 MxSet.LogLi("select objects with simillar volume");
-            }
+            }*/
 
             /*MxSet.ExecuteMAXScriptScript("" +
                 "mcPoly.selectSimilarElements selection[1] " +

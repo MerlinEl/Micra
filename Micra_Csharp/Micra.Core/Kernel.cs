@@ -20,6 +20,7 @@ namespace Micra.Core {
         #region fields
         private delegate void TimerProc(IntPtr hWnd, uint nMsg, int nIDEvent, int dwTime);
         public static IInterface14 _Interface;
+        public static IIInstanceMgr _InstanceMgr;
         public static IGlobal _Global;
         internal static List<ReferenceListener> listeners = new List<ReferenceListener>();
         internal static Scene scene;
@@ -32,6 +33,7 @@ namespace Micra.Core {
             // Autodesk.Max.Wrappers.dll
             _Global = Autodesk.Max.GlobalInterface.Instance;
             _Interface = _Global.COREInterface14;
+            _InstanceMgr = _Global.IInstanceMgr.InstanceMgr;
             scene = new Scene(_Interface);
             dispatcher = Dispatcher.CurrentDispatcher;
         }
@@ -162,6 +164,10 @@ namespace Micra.Core {
             WriteLine(String.Format(s, args));
         }
 
+        public static void Write(string s, params Object[] args) {
+            Write(String.Format(s, args));
+        }
+
         /// <summary>
         /// Outputs a string the MAXScript listener
         /// </summary>
@@ -169,6 +175,15 @@ namespace Micra.Core {
         public static void Write(string s) {
             Kernel._Global.TheListener.EditStream.Wputs(s);
             Kernel._Global.TheListener.EditStream.Flush();
+        }
+
+        public static void WriteClear(bool macroRec) {
+            // clears the listener
+            SendMessage(_Global.TheListener.EditBox, 2004, ( IntPtr )0, ( IntPtr )0);
+            if ( !macroRec ) return;
+            // clears the macro recorder
+            SendMessage(_Global.TheListener.MacrorecBox, 2004, ( IntPtr )0, ( IntPtr )0);
+            //UIAccessor.SetWindowText(_Global.TheListener.MacrorecBox)[2][1]("");
         }
 
         /// <summary>
@@ -222,6 +237,10 @@ namespace Micra.Core {
         private static extern int SetTimer(IntPtr hwnd, int nIDEvent, int uElapse, TimerProc CB);
         [DllImport("user32")]
         private static extern int KillTimer(IntPtr hwnd, int nIDEvent);
+        [DllImport("user32.dll")]
+        public static extern int SendMessage(IntPtr hWnd, int wMsg, IntPtr wParam, IntPtr lParam);
+        [DllImport("user32.dll")]
+        public static extern IntPtr FindWindow(string lpClassName, String lpWindowName); //not used not tested
         #endregion
     }
 }

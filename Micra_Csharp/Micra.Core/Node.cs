@@ -232,13 +232,9 @@ namespace Micra.Core {
         #endregion 
         //@}
 
-        public void Delete() {
-            Delete(Kernel.Now);
-        }
+        public void Delete() => Delete(Kernel.Now);
 
-        public void Delete(TimeValue t) {
-            Delete(t, true);
-        }
+        public void Delete(TimeValue t) => Delete(t, true);
 
         public void Delete(TimeValue t, bool keepChildrenPositions) {
             _Node.Delete(t, keepChildrenPositions);
@@ -254,9 +250,14 @@ namespace Micra.Core {
             set { _Node.IsFrozen = value; }
         }
 
-        public void Move(Point3 pt) {
-            Move(pt, Kernel.Now);
-        }
+        public string ClassOf() => ClassID.GetClassName(Object.ClassID);
+        public string SuperClassOf() => SuperClassID.GetSuperClassName(Object.SuperClassID);
+
+        public bool IsClassOf(ClassID id) => Object.ClassID.a == id.a && Object.ClassID.b == id.b;
+
+        public bool IsSuperClassOf(SuperClassID id) => Object.SuperClassID == id;
+
+        public void Move(Point3 pt) => Move(pt, Kernel.Now);
 
         public void Move(Point3 pt, TimeValue t) {
             _Node.Move(t, Matrix3.Identity.Translate(pt)._IMatrix3, pt._IPoint3, false, true, (int)PivotMode.None, false);
@@ -342,7 +343,7 @@ namespace Micra.Core {
             get { return _Node.BoneNodeOnOff; }
         }
 
-        public Color Color {
+        public Color Wirecolor {
             get { return new Color(_Node.WireColor); }
             set { _Node.WireColor = value.SystemColor; }
         }

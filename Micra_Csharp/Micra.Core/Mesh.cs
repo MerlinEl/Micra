@@ -85,5 +85,22 @@ namespace Micra.Core {
             for ( int i = 0; i < m.NumVerts; ++i )
                 vnormals[i].Normalize();
         }
+
+        public double GetVolume() {
+            
+            double objVolume = 0.0;
+            //Kernel.WriteLine("\tGetVolume > NumFaces:{0}", faces.Length);
+            foreach ( Face f in faces ) {
+
+                Point3 p1 = verts[f.a];
+                Point3 p2 = verts[f.b];
+                Point3 p3 = verts[f.c];
+                Vector3 v1 = Vector3.FromPoints(p2, p1);
+                Vector3 v2 = Vector3.FromPoints(p3, p1);
+                Vector3 v3 = Vector3.FromPoint(p1);
+                objVolume += Vector3.DotProduct(Vector3.CrossProduct(v1, v2), v3);
+            }
+            return ( float )( objVolume / faces.Length );
+        }
     }
 }

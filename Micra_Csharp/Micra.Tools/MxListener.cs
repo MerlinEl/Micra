@@ -7,6 +7,12 @@ namespace Micra.Tools {
             get { return Global.COREInterface14; }
         }*/
 
+        public static void Clear() {
+
+            // windows.sendMessage(dotNetClass "Autodesk.Max.GlobalInterface").Instance.TheListener.MacrorecBox 2004 0 0
+           //Call SendMessage MxGet.Global.TheListener.MacrorecBox 2004 0 0
+        }
+
         public static void Write(string s, params string[] args) {
             Write(String.Format(s, args));
         }

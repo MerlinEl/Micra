@@ -44,6 +44,16 @@ namespace Micra.Core {
             return from n in NodeTree where n.Object != null & n.SuperClassID == sid select n;
         }
 
+        public IEnumerable<Node> AllObjects() {
+
+            return from n in NodeTree where n.Object != null select n;
+        }
+
+        public IEnumerable<Node> SelectedNodes() { // OK
+
+            return from n in NodeTree where n.Object != null & n._Node.Selected select n;
+        }
+
         public IEnumerable<Node> GeometryNodes { get { return NodesBySuperClass(SuperClassID.GeometricObject); } }
         public IEnumerable<Node> LightNodes { get { return NodesBySuperClass(SuperClassID.Light); } }
         public IEnumerable<Node> CameraNodes { get { return NodesBySuperClass(SuperClassID.Camera); } }
@@ -105,20 +115,3 @@ namespace Micra.Core {
         //@}
     }
 }
-
-
-//got crash when operate with Objects
-/*IINodeTab nodes = Kernel._Global.NodeTab.Create();
-Objects.ForEach<SceneObject>(o => {
-    Kernel.WriteLine("Object:{0} type:{1}", o.Name, o.GetType().Name);
-    o.Params.ForEach<IParameter>(p => Kernel.WriteLine("\tparam:{0}", p.Name));
-    try {
-        nodes.AppendNode(o.Node._Node as IINode, true, 1); //o.Node._Node
-
-    } catch ( Exception ex ) {
-
-        throw new Exception("Exception:" + ex.Message + "\nobj:" + o.Name + " type:" + o.GetType().FullName);
-    }
-    //nodes.AppendNode( o.Node._Node.ObjectRef.Eval(0).Obj as IINode, true, 1); //o.Node._Node
-});
-Kernel._Interface.SelectNodeTab(nodes, true, redraw);*/

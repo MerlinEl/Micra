@@ -7,6 +7,8 @@
 //
 using Autodesk.Max;
 using System;
+using System.Linq;
+using System.Reflection;
 
 namespace Micra.Core {
     /// <summary>
@@ -49,9 +51,9 @@ namespace Micra.Core {
     [Serializable]
     public struct SuperClassID {
         public ulong id;
-        public SuperClassID(SClass_ID id) { this.id = (ulong)id; }
+        public SuperClassID(SClass_ID id) { this.id = ( ulong )id; }
         public static implicit operator SuperClassID(SClass_ID id) { return new SuperClassID(id); }
-        public static implicit operator SClass_ID(SuperClassID id) { return (SClass_ID)id.id; }
+        public static implicit operator SClass_ID(SuperClassID id) { return ( SClass_ID )id.id; }
 
         public static SuperClassID GeometricObject = SClass_ID.Geomobject;
         public static SuperClassID ObjectModifier = SClass_ID.Osm;
@@ -65,7 +67,7 @@ namespace Micra.Core {
         public static SuperClassID Helper = SClass_ID.Helper;
         public static SuperClassID Atmospheric = SClass_ID.Atmospheric;
         public static SuperClassID PositionController = SClass_ID.CtrlPosition;
-        public static SuperClassID NotifyAll = new SuperClassID((SClass_ID)0xfffffff0);
+        public static SuperClassID NotifyAll = new SuperClassID(( SClass_ID )0xfffffff0);
         public static SuperClassID BaseNode = SClass_ID.Basenode;
         public static SuperClassID GenericDerivedObject = SClass_ID.GenDerivob;
         public static SuperClassID DerivedObject = SClass_ID.Derivob;
@@ -78,7 +80,7 @@ namespace Micra.Core {
         public override bool Equals(object obj) {
             if ( !( obj is SuperClassID ) )
                 return false;
-            return ( (SuperClassID)obj ).id == id;
+            return ( ( SuperClassID )obj ).id == id;
         }
 
         public override int GetHashCode() {
@@ -87,6 +89,39 @@ namespace Micra.Core {
 
         public static bool operator ==(SuperClassID x, SuperClassID y) { return x.id == y.id; }
         public static bool operator !=(SuperClassID x, SuperClassID y) { return x.id != y.id; }
+
+        internal string GetSuperClassName(SuperClassID superClassID) {
+            //get clas name from Max Enums
+            string clsStr = Enum.GetName(typeof(SClass_ID), superClassID.id);
+            //get Clas name From Kernel Struct
+            /*Type type = typeof(SuperClassID);
+            foreach ( var p in type.GetFields(BindingFlags.Static | BindingFlags.Public) ) {
+                var v = p.GetValue(null); // static classes cannot be instanced, so use null...
+                if ( v.ToString() == superClassID.ToString() ) {
+                    clsStr = p.Name;
+                    break;
+                }
+            }*/
+            return clsStr;
+        }
+
+        public static SuperClassID FromName(string sclassName) {
+
+            Type type = typeof(SuperClassID);
+            FieldInfo fi = type
+                .GetFields(BindingFlags.Static | BindingFlags.Public)
+                .Where(f => f.FieldType == type && f.Name == sclassName).FirstOrDefault();
+            return fi != null ? ( SuperClassID )fi.GetValue(fi) : new SuperClassID();
+        }
+
+        public static string[] GetNames() {
+
+            Type type = typeof(SuperClassID);
+            return type.GetFields(BindingFlags.Static | BindingFlags.Public)
+                .Where(f => f.FieldType == type)
+                .Select(f => f.Name)
+                .ToArray();
+        }
     }
 
     /// <summary>
@@ -96,25 +131,34 @@ namespace Micra.Core {
     public struct ClassID {
         public uint a;
         public uint b;
-
-        public ClassID(BuiltInClassIDA id) : this(id, 0) { } //new under testing 29.05.2020
         public ClassID(Autodesk.Max.IClass_ID id) : this(id.PartA, id.PartB) { }
         public ClassID(uint a, uint b) { this.a = a; this.b = b; }
-        public ClassID(BuiltInClassIDA a, BuiltInClassIDB b) { this.a = (uint)a; this.b = (uint)b; }
+        public ClassID(BuiltInClassIDA a, BuiltInClassIDB b) { this.a = ( uint )a; this.b = ( uint )b; }
 
-        public IClass_ID _IClass_ID {
-            get {
-                return Kernel._Global.Class_ID.Create(a, b);
-            }
+        public IClass_ID _IClass_ID => Kernel._Global.Class_ID.Create(a, b);
+
+        public static ClassID EditableMesh = new ClassID(BuiltInClassIDA.EDITTRIOBJ_CLASS_ID, 0);
+        public static ClassID EditablePoly = new ClassID(BuiltInClassIDA.EPOLYOBJ_CLASS_ID, BuiltInClassIDB.EPOLYOBJ_CLASS_ID);
+        public static ClassID BoneGeometry = new ClassID(BuiltInClassIDA.BONE_CLASS_ID, BuiltInClassIDB.BONE_OBJ_CLASSID);
+        public static ClassID TriObject = new ClassID(BuiltInClassIDA.TRIOBJ_CLASS_ID, 0); //not tested
+
+        //replaced --see if is ok and remove it
+        //public static ClassID TriObject = new ClassID(0x0009, 0);
+
+        public string GetClassName(ClassID clsID) {
+            //get clas name from Max Enums
+            string clsStr = Enum.GetName(typeof(BuiltInClassIDA), clsID.a);
+            //get Clas name From Kernel Struct
+            /*Type type = typeof(ClassID);
+            foreach ( var p in type.GetFields(BindingFlags.Static | BindingFlags.Public) ) {
+                var v = p.GetValue(null); // static classes cannot be instanced, so use null...
+                if (v.ToString() == clsID.ToString()) {
+                    clsStr = p.Name;
+                    break;
+                }
+            }*/
+            return clsStr;
         }
-
-        //new under testing 29.05.2020
-        public static ClassID EditableMesh = new ClassID(BuiltInClassIDA.TRIOBJ_CLASS_ID);
-        public static ClassID EditablePoly = new ClassID(BuiltInClassIDA.EPOLYOBJ_CLASS_ID);
-        public static ClassID BoneGeometry = new ClassID(BuiltInClassIDA.BONE_CLASS_ID);
-
-        //TODO for replace
-        public static ClassID TriObject = new ClassID(0x0009, 0);
 
         public override string ToString() {
             return "ClassID(" + a.ToString() + ", " + b.ToString() + ")";
@@ -123,12 +167,30 @@ namespace Micra.Core {
         public override bool Equals(object obj) {
             if ( !( obj is ClassID ) )
                 return false;
-            ClassID that = (ClassID)obj;
+            ClassID that = ( ClassID )obj;
             return a == that.a && b == that.b;
         }
 
         public override int GetHashCode() {
             return a.GetHashCode() ^ b.GetHashCode();
+        }
+
+        public static ClassID FromName(string sclassName) {
+
+            Type type = typeof(ClassID);
+            FieldInfo fi = type
+                .GetFields(BindingFlags.Static | BindingFlags.Public)
+                .Where(f => f.FieldType == type && f.Name == sclassName).FirstOrDefault();
+            return fi != null ? ( ClassID )fi.GetValue(fi) : new ClassID();
+        }
+
+        public static string[] GetNames() {
+
+            Type type = typeof(ClassID);
+            return type.GetFields(BindingFlags.Static | BindingFlags.Public)
+                .Where(f => f.FieldType == type)
+                .Select(f => f.Name)
+                .ToArray();
         }
 
         public static bool operator ==(ClassID x, ClassID y) { return ( x.a == y.a ) && ( x.b == y.b ); }
@@ -151,20 +213,20 @@ namespace Micra.Core {
         public Color(IAColor c) : this(c.R, c.G, c.B, c.A) { }
         public Color(float r, float g, float b, float a) { this.r = r; this.g = g; this.b = b; this.a = a; }
         public Color(float r, float g, float b) : this(r, g, b, 1.0f) { }
-        public Color(byte r, byte g, byte b, byte a) : this((float)r / 255.0f, (float)g / 255.0f, (float)b / 255.0f, (float)a / 255.0f) { }
+        public Color(byte r, byte g, byte b, byte a) : this(( float )r / 255.0f, ( float )g / 255.0f, ( float )b / 255.0f, ( float )a / 255.0f) { }
         public Color(byte r, byte g, byte b) : this(r, g, b, 255) { }
 
-        int IntR { get { return (int)( r * 255.0f ); } }
-        int IntG { get { return (int)( g * 255.0f ); } }
-        int IntB { get { return (int)( b * 255.0f ); } }
-        int IntA { get { return (int)( a * 255.0f ); } }
+        int IntR { get { return ( int )( r * 255.0f ); } }
+        int IntG { get { return ( int )( g * 255.0f ); } }
+        int IntB { get { return ( int )( b * 255.0f ); } }
+        int IntA { get { return ( int )( a * 255.0f ); } }
 
         public IAColor _IAColor { get { return Kernel._Global.AColor.Create(r, g, b, a); } }
         public IColor _IColor { get { return Kernel._Global.Color.Create(r, g, b); } }
         public System.Drawing.Color SystemColor { get { return System.Drawing.Color.FromArgb(IntA, IntR, IntG, IntB); } }
 
         public static readonly Color MinColor = new Color(0, 0, 0, 0);
-        public static readonly Color MaxColor = new Color((byte)255, (byte)255, (byte)255, (byte)255);
+        public static readonly Color MaxColor = new Color(( byte )255, ( byte )255, ( byte )255, ( byte )255);
     }
 
     /// <summary>
@@ -200,8 +262,8 @@ namespace Micra.Core {
 
         public IPoint3 _IPoint3 { get { return Kernel._Global.Point3.Create(X, Y, Z); } }
 
-        public float Length { get { return (float)Math.Sqrt(LengthSquared); } }
-        public float LengthSquared { get { return (float)( X * X + Y * Y + Z * Z ); } }
+        public float Length { get { return ( float )Math.Sqrt(LengthSquared); } }
+        public float LengthSquared { get { return ( float )( X * X + Y * Y + Z * Z ); } }
         public Point3 Normalized { get { float len = Length; return new Point3(X / len, Y / len, Z / len); } }
 
         public void Normalize() { float len = Length; X /= len; Y /= len; Z /= len; }
@@ -214,7 +276,7 @@ namespace Micra.Core {
                     case 1: return Y;
                     case 2: return Z;
                     default:
-                    throw new IndexOutOfRangeException();
+                        throw new IndexOutOfRangeException();
                 }
             }
             set {
@@ -223,7 +285,7 @@ namespace Micra.Core {
                     case 1: Y = value; break;
                     case 2: Z = value; break;
                     default:
-                    throw new IndexOutOfRangeException();
+                        throw new IndexOutOfRangeException();
                 }
             }
         }

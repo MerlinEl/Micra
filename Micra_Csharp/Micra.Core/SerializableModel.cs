@@ -46,7 +46,7 @@ namespace Micra.Core {
 
         public SerializableModel(Node node, TimeValue t, bool bMeshData, bool bReferencedData)
         {
-            color = node.Color;
+            color = node.Wirecolor;
             bone = node.IsBone;
             if (bMeshData) // && node.Visibility.Render)
                 mesh = node.GetMesh(t);            

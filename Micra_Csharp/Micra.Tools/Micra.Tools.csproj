@@ -95,24 +95,21 @@
       <DependentUpon>MxGeometryOptimizer.cs</DependentUpon>
     </Compile>
     <Compile Include="MxGet.cs" />
-    <Compile Include="MxCollection.cs" />
     <Compile Include="MxMap.cs" />
     <Compile Include="MxMath.cs" />
     <Compile Include="MxPoly.cs" />
     <Compile Include="MxSet.cs" />
     <Compile Include="MxUi.cs" />
     <Compile Include="MxUvs.cs" />
-    <Content Include="Objects\MxMatrix.cs.txt" />
     <Compile Include="Objects\MxDoubleUtil.cs" />
     <Compile Include="Objects\MxPoint.cs" />
     <Compile Include="Objects\MxSize.cs" />
     <Compile Include="Objects\MxVector.cs" />
     <Compile Include="Objects\MxQuaternion.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Content Include="Resources\MaxPluginUtilities.cs.txt" />
-    <Content Include="Resources\SurfaceRelax.cs.txt" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Resources\" />
     <Folder Include="Tools\" />
   </ItemGroup>
   <ItemGroup>

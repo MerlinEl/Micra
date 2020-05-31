@@ -4,10 +4,11 @@ using Micra.Core;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace Micra.Tools {
-    public partial class CsharpToMaxTest : Form {
+    public partial class CsharpToMaxTest:Form {
 
         public CsharpToMaxTest() {
             InitializeComponent();
@@ -16,7 +17,10 @@ namespace Micra.Tools {
 
         private void Init() {
             Text = Text + "     " + MxGet.AssemblyVersion;
-            CbxObjType.SelectedIndex = 0;
+            CbxClassOf.Items.AddRange(ClassID.GetNames());
+            CbxClassOf.SelectedIndex = 0;
+            CbxSuperClassOf.Items.AddRange(SuperClassID.GetNames());
+            CbxSuperClassOf.SelectedIndex = 0;
         }
 
         private void OnTextAreaLostFocus(object sender, EventArgs e) {
@@ -29,23 +33,21 @@ namespace Micra.Tools {
 
         private void Button1_Click(object sender, EventArgs e) {
 
-            MxSet.LogLi(( sender as Button ).Text);
-            var node = MxGet.Interface.GetSelNode(0);
-            MxGet.Interface.SelectNode(node, true);
-            //ITriObject triObj = node.ObjectRef.FindBaseObject() as ITriObject;
-            //IMesh mesh = triObj.Mesh;
-            //IntPtr meshPtr = mesh.NativePointer; //same as my C++ pointer - so it's correct
+            Kernel.WriteLine(( sender as Button ).Text);
+            Node node = Kernel.Scene.SelectedNodes().FirstOrDefault();
+            Kernel.WriteLine("first node:{0}", node);
+            if ( node != null ) node.SelectOnly();
         }
 
         private void button2_Click(object sender, EventArgs e) {
-            MxSet.LogLi(( sender as Button ).Text);
+            Kernel.WriteLine(( sender as Button ).Text);
             string cmd = "Render()";
             textBox1.Text = cmd;
             MxSet.ExecuteMAXScriptScript(cmd);
         }
 
         private void button3_Click(object sender, EventArgs e) {
-            MxSet.LogLi(( sender as Button ).Text);
+            Kernel.WriteLine(( sender as Button ).Text);
             string cmd = "Box pos:[-100,0,0] name:(UniqueName \"ojobox\") wirecolor:red\n" +
                 "Box pos:[0,0,0] name:(UniqueName \"ojobox\") wirecolor:blue\n" +
                 "Box pos:[100,0,0] name:(UniqueName \"ojobox\") wirecolor:green\n";
@@ -53,16 +55,8 @@ namespace Micra.Tools {
             MxSet.ExecuteMAXScriptScript(cmd);
         }
 
-        private void button4_Click(object sender, EventArgs e) {
-
-            List<IINode> objects = MxCollection.GetAllObjects();
-            MxSet.LogLi(( sender as Button ).Text + " objs:" + objects.Count);
-            //MxGet.Interface.ForceCompleteRedraw(false);
-            foreach ( IINode n in objects ) MxSet.LogLi("\t" + n.Name);
-        }
-
         private void button5_Click(object sender, EventArgs e) {
-            MxSet.LogLi(( sender as Button ).Text);
+            Kernel.WriteLine(( sender as Button ).Text);
             string cmd = "Render()";
             textBox1.Text = cmd;
             IFPValue mxsRetVal = MxSet.ExecuteMAXScriptScript(cmd);
@@ -71,22 +65,53 @@ namespace Micra.Tools {
 
         private void BtnSelSimElements_Click(object sender, EventArgs e) {
 
-            MxSet.LogLi("SelSimElements");
-            List<IINode> sel_objs = MxCollection.GetSelection();
-            MxSet.LogLi("\tSelected objects:{0}", sel_objs.Count);
-            if ( sel_objs.Count == 0 ) return;
-            List<IINode> all_objs = MxCollection.GetAllObjects();
-            MxSet.LogLi("\tAll objects:{0}", all_objs.Count);
-            if ( all_objs.Count == 1 ) return;
-            var volumes = new List<Tuple<IINode, double>> { }; //list of pairs
-            foreach ( IINode o in sel_objs ) {
+            Kernel.WriteLine(( sender as Button ).Text);
+            IEnumerable<Node> sel_objs = Kernel.Scene.SelectedNodes();
+            Kernel.WriteLine("\tSelected objects:{0}", sel_objs.Count());
+            if ( sel_objs.Count() == 0 ) return;
+            IEnumerable<Node> all_objs = Kernel.Scene.AllObjects();
+            Kernel.WriteLine("\tGeometry objects:{0}", all_objs.Count());
+            if ( all_objs.Count() == 1 ) { 
+            
+            
+            } else {
+
+                //collect selected geometry objects volumes
+                var volumes = sel_objs
+                    .Where(n=> n.IsSuperClassOf(SuperClassID.GeometricObject))
+                    .Select(n => {
+                        Kernel.WriteLine("process node:{0}", n.Name);
+                        double v = n.GetMesh().GetVolume();
+                        Kernel.WriteLine("\t\tget area:{0}", v);
+                        return new Tuple<Node, double>(n, v);
+                    }).ToList();
+                Kernel.WriteLine("\tvolumes count:{0}", volumes.Count());
+                //get prototypes with unique size
+                List<Tuple<Node, double>> uniques = volumes
+                  .GroupBy(p => p.Item2)
+                  .Select(g => g.First())
+                  .ToList();
+                Kernel.WriteLine("\tuniques count:{0}", uniques.Count());
+                uniques.ForEach(tuple => Kernel.WriteLine("\t\tget obj:{0} area:{1}", tuple.Item1.Name, tuple.Item2));
+  
+                //get geometry objects with similar volume
+                //all_objs < make unique array of objs
+
+            }
+
+            /*var volumes = new List<Tuple<Node, double>> { }; //list of pairs
+            foreach ( Node o in sel_objs ) {
                 MxCollection.PrintObjectClass(o);
                 double v = MxPoly.GetGeometryVolume(o);
                 volumes.Add(Tuple.Create(o, v));
                 MxSet.LogLi("\t\tget obj:{0} area:{1}", o.Name, v);
-            }
-
-            return;
+            }*/
+            /*
+ 
+            
+            
+            
+            */
 
             /*IINode obj = MxCollection.GetFirstSelectedNode(); //Autodesk.Max.Wrappers.INode
             ISubClassList clist = GlobalInterface.Instance.ClassDirectory.Instance.GetClassList(obj.ObjectRef.Eval(0).Obj.SuperClassID);
@@ -125,46 +150,27 @@ namespace Micra.Tools {
             );*/
         }
 
-        private void BtnSelectAll_Click(object sender, EventArgs e) {
-
-            MxCollection.SelectAll();
-        }
-
-        private void BtnSelectNone_Click(object sender, EventArgs e) {
-            MxCollection.SelectNone();
-        }
-
-        private void BtnPrintNodeInstances_Click(object sender, EventArgs e) {
-            IINode obj = MxCollection.GetFirstSelectedNode();
-            if ( obj == null ) return;
-            MxSet.LogLi("Get Instances from Node:{0}", obj.Name);
-            List<IINode> instances = MxCollection.GetInstances(obj);
-            if ( instances.Count == 0 ) return;
-            foreach ( IINode n in instances ) MxSet.LogLi("\t{0}", n.Name);
-            MxCollection.SetSelection(instances);
-        }
-
         private void button9_Click(object sender, EventArgs e) {
 
-            MxSet.LogLi("Scene nodes");
+            Kernel.WriteLine(( sender as Button ).Text);
             PrintNode(Kernel.Scene.RootNode);
         }
 
         private void PrintNode(Node n, string indent = "") {
-            MxSet.LogLi(indent + n.Name);
+            Kernel.WriteLine(indent + n.Name);
             foreach ( var c in n.Children )
                 PrintNode(c, indent + "  ");
         }
 
         private void button8_Click(object sender, EventArgs e) {
-
+            Kernel.WriteLine(( sender as Button ).Text);
             var teapot = Primitives.Teapot.Create();
             teapot["radius"] = 20.0;
             teapot.Node.Move(new Point3(20, 10, 5));
         }
 
         private void button7_Click(object sender, EventArgs e) {
-
+            Kernel.WriteLine(( sender as Button ).Text);
             var cylinder = Primitives.Cylinder.Create();
             MxSet.LogLi("Create Cylinder params:{0}", cylinder.Params.ToString());
             cylinder["radius"] = 20.0f;
@@ -178,7 +184,7 @@ namespace Micra.Tools {
 
         private void button6_Click(object sender, EventArgs e) {
 
-            MxSet.LogLi("Plug-ins");
+            Kernel.WriteLine(( sender as Button ).Text);
             foreach ( var p in PluginMgr.Plugins ) MxSet.LogLi(p.ClassName);
         }
 
@@ -189,30 +195,58 @@ namespace Micra.Tools {
         }
 
         private void button11_Click(object sender, EventArgs e) {
-
-            Collections.SelectAll(ChkSelHidden.Checked, true, ChkPrintProps.Checked);
+            Kernel.WriteLine(( sender as Button ).Text);
+            Collections.SelectAll(ChkSelHidden.Checked, true);
         }
 
         private void button12_Click(object sender, EventArgs e) {
+            Kernel.WriteLine(( sender as Button ).Text);
             Collections.DeselectAll(true);
         }
 
         private void button13_Click(object sender, EventArgs e) {
+            Kernel.WriteLine(( sender as Button ).Text);
+            if ( RbtClassOf.Checked ) {
 
-            SuperClassID classId;
-            switch ( CbxObjType.SelectedItem ) {
+                ClassID classId = ClassID.FromName(CbxClassOf.SelectedItem.ToString());
+                Kernel.WriteLine("classId:{0}", classId);
+                Collections.SelectAllOfType(classId, ChkClearSel.Checked, true);
 
-                case "Light": classId = SuperClassID.Light; break;
-                case "Geometry": classId = SuperClassID.GeometricObject; break;
-                //case "Mesh": classId = ClassID.EditableMesh; break;
-                //case "Poly": classId = ClassID.EditablePoly; break;
-                //case "Bone": classId = ClassID.BoneGeometry; break;
-                case "Helper": classId = SuperClassID.Helper; break;
-                case "Spline": classId = SuperClassID.Shape; break;
-                default : classId = SuperClassID.GeometricObject; break;
+            } else {
+
+                SuperClassID superClassId = SuperClassID.FromName(CbxSuperClassOf.SelectedItem.ToString());
+                Kernel.WriteLine("superClassId:{0}", superClassId);
+                Collections.SelectAllOfType(superClassId, ChkClearSel.Checked, true);
+
             }
-            Kernel.WriteLine("Select All objects with type:{0}", CbxObjType.SelectedItem.ToString());
-            Collections.SelectAllOfType(classId, ChkClearSel.Checked, true);
+        }
+
+        private void button14_Click(object sender, EventArgs e) {
+            Kernel.WriteLine(( sender as Button ).Text);
+            var nodes = Kernel.Scene.SelectedNodes();
+            Collections.ShowClass(nodes);
+        }
+
+        private void OnFormShown(object sender, EventArgs e) {
+            Kernel.WriteClear(false);
+        }
+
+        private void button15_Click(object sender, EventArgs e) {
+            Kernel.WriteLine(( sender as Button ).Text);
+            Kernel.WriteClear(ChkMacroRec.Checked);
+        }
+
+        private void button16_Click(object sender, EventArgs e) {
+            Kernel.WriteLine(( sender as Button ).Text);
+            var nodes = Kernel.Scene.SelectedNodes();
+            Collections.ShowParameters(nodes);
+        }
+
+        private void button4_Click_1(object sender, EventArgs e) {
+            Kernel.WriteLine(( sender as Button ).Text);
+            Node node = Kernel.Scene.SelectedNodes().FirstOrDefault();
+            var nodeInstances = Collections.GetNodeInsatances(node);
+            if ( nodeInstances.Count > 0 ) Collections.SelectNodes(nodeInstances);
         }
     }
 }
@@ -225,3 +259,23 @@ namespace Micra.Tools {
 if ( selectedNodes.Count == 0 ) return;
 MxSet.LogLi("Selected Nodes:" + selectedNodes.Count.ToString());
 //MxPoly.SelectSimillarElements(selectedNodes[0]);*/
+
+
+
+/*
+ System.Windows.Window dialog = new System.Windows.Window();
+            dialog.Title = "Explode It!";
+            dialog.SizeToContent = System.Windows.SizeToContent.WidthAndHeight;
+            ExplodeGeomUserControl1 ctlExplode = new ExplodeGeomUserControl1(dialog);
+            dialog.Content = ctlExplode;
+            dialog.WindowStartupLocation = System.Windows.WindowStartupLocation.CenterOwner;
+            dialog.ShowInTaskbar = false;
+            dialog.ResizeMode = System.Windows.ResizeMode.NoResize;
+
+            System.Windows.Interop.WindowInteropHelper windowHandle =
+                new System.Windows.Interop.WindowInteropHelper(dialog);
+            windowHandle.Owner = ManagedServices.AppSDK.GetMaxHWND();
+            ManagedServices.AppSDK.ConfigureWindowForMax(dialog);
+
+            dialog.ShowDialog(); //modal version; this prevents changes being made to model while our dialog is running, etc.
+ */

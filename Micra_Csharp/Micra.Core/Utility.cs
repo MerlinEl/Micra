@@ -21,12 +21,25 @@ namespace Micra.Core {
         /// <returns></returns>
         public static float OToF(object o) {
             if ( o is float )
-                return (float)o;
+                return ( float )o;
             if ( o is double )
-                return (float)(double)o;
+                return ( float )( double )o;
             throw new Exception("Unrecognized floating point type " + o);
         }
 
+        public static double ToDouble(float f) {
+            //f = 5.2F;
+            decimal dec = new decimal(f); //5.2
+            return ( double )dec; //5.2
+        }
+
+        public static double RadToDeg(double radians) {
+            return radians * ( 180.0 / Math.PI );
+        }
+
+        public static double DegToRad(double degrees) {
+            return degrees * ( Math.PI / 180.0 );
+        }
 
         /// <summary>
         /// Extends IEnumerable&lt;T> with a new function for selecing only those 
@@ -39,6 +52,27 @@ namespace Micra.Core {
             foreach ( var x in xs )
                 if ( x is T )
                     yield return x as T;
+        }
+
+        /// <summary> //not used not tested
+        /// So to find the distinct values using just the Id property, you could use:
+        /// var query = people.DistinctBy(p => p.Id);
+        /// And to use multiple properties, you can use anonymous types, which implement equality appropriately:
+        /// var query = people.DistinctBy(p => new { p.Id, p.Name });
+        /// </summary>
+        /// <typeparam name="TSource"></typeparam>
+        /// <typeparam name="TKey"></typeparam>
+        /// <param name="source"></param>
+        /// <param name="keySelector"></param>
+        /// <returns></returns>
+        public static IEnumerable<TSource> DistinctBy<TSource, TKey>
+            (this IEnumerable<TSource> source, Func<TSource, TKey> keySelector) {
+                    HashSet<TKey> seenKeys = new HashSet<TKey>();
+                    foreach ( TSource element in source ) {
+                        if ( seenKeys.Add(keySelector(element)) ) {
+                            yield return element;
+                        }
+                    }
         }
     }
 
