@@ -419,6 +419,7 @@ rollout mcLiveMeasureDialog "Live Measure:" width:236 height:244
 	--checkbutton btn_center "¤" pos:[212,176] width:16 height:24 checked:true
 	checkbox chk_snap "" pos:[8,204] width:16 height:16 checked:true
 	radioButtons rdo_snap "Snap:" pos:[26,204] width:187 height:30 labels:snap_vals default:3 columns:5
+	button 'btn_quick_measure' "Quick Measure" pos:[8,176] width:220 height:24 align:#left tooltiop:"Plant Line On Surface"
 	
 	fn markSelectedMeasure index = (
 	
@@ -646,6 +647,7 @@ rollout mcLiveMeasureDialog "Live Measure:" width:236 height:244
 	on lbx_measures selected index do markSelectedMeasure index--lbx_measures.selected = name
 	on lbx_measures doubleClicked itm do ()
 	on btn_delete_all pressed do removeAllMeasures()
+	on btn_quick_measure pressed do (mcFile.fileInVersion "Live_Measure_Plant")
 	--on btn_set_length pressed do setEdgeLength()
 	on mcLiveMeasureDialog open do Init()
 	on mcLiveMeasureDialog close do unload()

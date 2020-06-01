@@ -2,7 +2,7 @@
 <SETTINGS>
   <Micra>
     <born val="04.25.2006" />
-    <version val="6.41" />
+    <version val="6.42" />
   </Micra>
   <Structures val="All registred Micra's Structures">
     <!--independent classes-->
@@ -158,6 +158,7 @@
     <LS3D_Texel_Density val="0.02" />
     <Geometry_Projector2D val="0.03" />
     <Geometry_Builder val="0.01" />
+    <Live_Measure_Plant val="0.01" />
   </Version>
   <SystemFiles val="Micra's Settings Files">
     <Actions val="Contains all accesible Micra's actions" />

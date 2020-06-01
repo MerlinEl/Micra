@@ -127,8 +127,6 @@
   <ItemGroup>
     <Content Include="filever.exe" />
     <Content Include="IncrementFileVersion.exe" />
-    <Content Include="Resources\3ds Max .NET Assemblies.txt" />
-    <Content Include="Resources\OnBuild.txt" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="Micra.Domain\Micra.Domain.csproj">

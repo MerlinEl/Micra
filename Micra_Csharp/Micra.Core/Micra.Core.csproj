@@ -58,6 +58,7 @@
     <Compile Include="FileManager.cs" />
     <Compile Include="GenericAction.cs" />
     <Compile Include="Geometry.cs" />
+    <Compile Include="GlobalMethods.cs" />
     <Compile Include="Kernel.cs" />
     <Compile Include="Light.cs" />
     <Compile Include="Material.cs" />
@@ -83,8 +84,5 @@
     <Compile Include="Vector3.cs" />
   </ItemGroup>
   <ItemGroup />
-  <ItemGroup>
-    <Content Include="Resources\Draw on screen.txt" />
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -257,6 +257,12 @@ namespace Micra.Core {
 
         public bool IsSuperClassOf(SuperClassID id) => Object.SuperClassID == id;
 
+        public bool IsEditable() { //Todo Test This check with modifiers on object
+
+            //Kernel.WriteLine("is mesh:{0} is poly{1}", IsClassOf(ClassID.EditableMesh), IsClassOf(ClassID.EditablePoly));
+            return IsClassOf(ClassID.EditableMesh) || IsClassOf(ClassID.EditablePoly);
+        }
+
         public void Move(Point3 pt) => Move(pt, Kernel.Now);
 
         public void Move(Point3 pt, TimeValue t) {

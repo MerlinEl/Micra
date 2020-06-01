@@ -1,14 +1,13 @@
 ﻿using Autodesk.Max;
-using Autodesk.Max.Plugins;
 using Micra.Core;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
+using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 
 namespace Micra.Tools {
-    public partial class CsharpToMaxTest:Form {
+    public partial class CsharpToMaxTest : Form {
 
         public CsharpToMaxTest() {
             InitializeComponent();
@@ -68,24 +67,39 @@ namespace Micra.Tools {
             Kernel.WriteLine(( sender as Button ).Text);
             IEnumerable<Node> sel_objs = Kernel.Scene.SelectedNodes();
             Kernel.WriteLine("\tSelected objects:{0}", sel_objs.Count());
-            if ( sel_objs.Count() == 0 ) return;
-            IEnumerable<Node> all_objs = Kernel.Scene.AllObjects();
-            Kernel.WriteLine("\tGeometry objects:{0}", all_objs.Count());
-            if ( all_objs.Count() == 1 ) { 
-            
-            
-            } else {
+            if ( sel_objs.Count() == 1 ) { //if single object is selected
+
+                Node node = sel_objs.First();
+                if ( !node.IsEditable() ) return;
+                int slev = GlobalMethods.SubObjectLevel;
+                Kernel.WriteLine("selected Node:{0} subObjectLevel:{1}", node.Name, Kernel._Interface.SubObjectLevel);
+                switch ( slev ) { //next operation is depend on subobject level
+
+                    case 1: break;
+                    case 2: break;
+                    case 3: break;
+                    case 4: break;
+                    case 5: break;
+                }
+
+
+            } else if (sel_objs.Count() > 1) { //when multi object selection
+
+                IEnumerable<Node> all_objs = Kernel.Scene.AllObjects();
+                Kernel.WriteLine("\tGeometry objects:{0}", all_objs.Count());
 
                 //collect selected geometry objects volumes
                 var volumes = sel_objs
-                    .Where(n=> n.IsSuperClassOf(SuperClassID.GeometricObject))
+                    .Where(n => n.IsSuperClassOf(SuperClassID.GeometricObject))
                     .Select(n => {
                         Kernel.WriteLine("process node:{0}", n.Name);
                         double v = n.GetMesh().GetVolume();
                         Kernel.WriteLine("\t\tget area:{0}", v);
                         return new Tuple<Node, double>(n, v);
                     }).ToList();
+
                 Kernel.WriteLine("\tvolumes count:{0}", volumes.Count());
+
                 //get prototypes with unique size
                 List<Tuple<Node, double>> uniques = volumes
                   .GroupBy(p => p.Item2)
@@ -93,7 +107,7 @@ namespace Micra.Tools {
                   .ToList();
                 Kernel.WriteLine("\tuniques count:{0}", uniques.Count());
                 uniques.ForEach(tuple => Kernel.WriteLine("\t\tget obj:{0} area:{1}", tuple.Item1.Name, tuple.Item2));
-  
+
                 //get geometry objects with similar volume
                 //all_objs < make unique array of objs
 
@@ -247,6 +261,13 @@ namespace Micra.Tools {
             Node node = Kernel.Scene.SelectedNodes().FirstOrDefault();
             var nodeInstances = Collections.GetNodeInsatances(node);
             if ( nodeInstances.Count > 0 ) Collections.SelectNodes(nodeInstances);
+        }
+
+        private void BtnOpenMaxFile_Click(object sender, EventArgs e) {
+
+            string maxFilePpath = TbxMaxFilePath.Text;
+            Kernel.WriteLine("Open Max file:{0} exists:{1}", maxFilePpath, File.Exists(maxFilePpath));
+            Kernel._Interface.LoadFromFile(maxFilePpath, true);
         }
     }
 }

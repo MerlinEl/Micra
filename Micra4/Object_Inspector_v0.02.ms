@@ -159,7 +159,7 @@ rollout mcObjectInpectorDialog "Object Inspector:" width:344 height:464
 		lbl_color.text = obj.wireColor as string	
 		lbl_material.text = if obj.material  != undefined then obj.material.name else "..."	
 		lbl_position.text  = obj.pos as String
-		lbl_rotation.text  =  (getRotation obj) as String
+		if isproperty obj "rotation" do lbl_rotation.text  =  (getRotation obj) as String
 		lbl_scale.text  =  obj.scale as String
 	)
 	fn copyObjectData = (

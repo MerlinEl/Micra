@@ -1,5 +1,4 @@
 ﻿using Autodesk.Max;
-using Micra.Tools.Objects;
 using System;
 using System.Collections.Generic;
 
@@ -9,7 +8,7 @@ namespace Micra.Tools {
             throw new NotImplementedException();
         }
 
-        internal static float GetGeometryVolume(IINode obj) {
+        /*internal static float GetGeometryVolume(IINode obj) {
 
             IObjectState iState = obj.EvalWorldState(0, true);
             IObject iObj = iState.Obj;
@@ -32,7 +31,7 @@ namespace Micra.Tools {
                 objVolume += MxVector.DotProduct(MxVector.CrossProduct(v3, v4), v5);
             }
             return (float)( objVolume / mesh.Faces.Count );
-        }
+        }*/
 
         internal static List<IPoint3> GetVerticesPositions(IINode obj) { //not tested not used
 

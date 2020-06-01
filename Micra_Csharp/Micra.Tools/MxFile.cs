@@ -1,5 +1,7 @@
 ﻿using Autodesk.Max;
+using Autodesk.Max.Wrappers;
 using System.IO;
+using System.Linq;
 
 namespace Micra.Tools {
     class MxFile {
@@ -51,6 +53,15 @@ namespace Micra.Tools {
             //MxSet.LogLi("Height of image:" + bitmap.Height.ToString());
         }
 
+        public static string GetSolutionDirectory(string currentPath = null) { //not used
+            var directory = new DirectoryInfo(
+                currentPath ?? Directory.GetCurrentDirectory());
+            while ( directory != null && !directory.GetFiles("*.sln").Any() ) {
+                directory = directory.Parent;
+            }
+            return directory.FullName;
+        }
+
         #region Untested
 
         public static string FbxExport(string filePath) {
@@ -64,3 +75,23 @@ namespace Micra.Tools {
         #endregion
     }
 }
+
+
+/*
+ *
+// Getting path to the parent folder of the solution file using C#
+string startupPath = Path.Combine(Directory.GetParent(System.IO.Directory.GetCurrentDirectory()).Parent.Parent.Parent.FullName,"abc.txt");
+// Read the file as one string. 
+string text = System.IO.File.ReadAllText(startupPath);
+ * 
+// resolve file path
+var filePath = Path.Combine(
+    VisualStudioProvider.TryGetSolutionDirectoryInfo()
+    .Parent.FullName, 
+    "filename.ext");
+// usage file
+StreamReader reader = new StreamReader(filePath);
+ * 
+
+ * 
+ * */

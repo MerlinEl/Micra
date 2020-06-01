@@ -1,0 +1,11 @@
+﻿3ds Max .NET Assemblies
+The 3ds Max .NET SDK consists of the following .NET assemblies (DLLs). They can be found in the root folder 3ds Max application installation.
+
+Autodesk.Max.dll - Contains wrappers that expose most of the API elements from the 3ds Max C++ SDK to .NET constructs. Currently it is not recommended to derive from the Autodesk.Max.Plugins classes.
+AssemblyLoader.dll - Contains the Loader class.
+CSharpUtilities.dll - Various utility classes for .NET programming.
+ExplorerFramework.dll - Abstract explorer framework classes upon which the Scene Explorer is built. It can be used for creating a new node traversal for arbitrary scene explorers.
+ManagedServices.dll - Exposes some convenient 3ds Max SDK functionality to .NET.
+MaxCustomControls.dll - Various .NET utilities and UI components.
+SceneExplorer.dll - Specification of the ExplorerFramework components for the SceneExplorer with bindings to 3ds Max data.
+UiViewModels.dll - Contains classes for defining user actions and customizing the user interface.

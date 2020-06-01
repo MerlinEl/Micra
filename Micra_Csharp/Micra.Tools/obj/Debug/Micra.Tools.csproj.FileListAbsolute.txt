@@ -126,3 +126,9 @@ E:\Aprog\Orien\Micra\Micra_Csharp\Micra.Tools\bin\Debug\ja-JP\Autodesk.Max.Wrapp
 E:\Aprog\Orien\Micra\Micra_Csharp\Micra.Tools\bin\Debug\ko-KR\Autodesk.Max.Wrappers.resources.dll
 E:\Aprog\Orien\Micra\Micra_Csharp\Micra.Tools\bin\Debug\pt-BR\Autodesk.Max.Wrappers.resources.dll
 E:\Aprog\Orien\Micra\Micra_Csharp\Micra.Tools\bin\Debug\zh-CN\Autodesk.Max.Wrappers.resources.dll
+D:\ReneBaca\Aprog\Micra\Micra_Csharp\Micra.Tools\bin\Debug\de-DE\MaxExplorerBindings.resources.dll
+D:\ReneBaca\Aprog\Micra\Micra_Csharp\Micra.Tools\bin\Debug\fr-FR\MaxExplorerBindings.resources.dll
+D:\ReneBaca\Aprog\Micra\Micra_Csharp\Micra.Tools\bin\Debug\ja-JP\MaxExplorerBindings.resources.dll
+D:\ReneBaca\Aprog\Micra\Micra_Csharp\Micra.Tools\bin\Debug\ko-KR\MaxExplorerBindings.resources.dll
+D:\ReneBaca\Aprog\Micra\Micra_Csharp\Micra.Tools\bin\Debug\pt-BR\MaxExplorerBindings.resources.dll
+D:\ReneBaca\Aprog\Micra\Micra_Csharp\Micra.Tools\bin\Debug\zh-CN\MaxExplorerBindings.resources.dll

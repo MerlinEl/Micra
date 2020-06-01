@@ -72,18 +72,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Backup\Proxy.cs.txt" />
     <Compile Include="CsharpToMaxTest.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="CsharpToMaxTest.Designer.cs">
       <DependentUpon>CsharpToMaxTest.cs</DependentUpon>
     </Compile>
-    <Content Include="Backup\MxDescriptor.cs.txt" />
     <Compile Include="MxFile.cs" />
     <Compile Include="MxGeo.cs" />
     <Compile Include="MxListener.cs" />
-    <Content Include="Backup\MxAssemblyManager.cs.txt" />
     <Compile Include="MxConsole.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -96,21 +93,14 @@
     </Compile>
     <Compile Include="MxGet.cs" />
     <Compile Include="MxMap.cs" />
-    <Compile Include="MxMath.cs" />
     <Compile Include="MxPoly.cs" />
     <Compile Include="MxSet.cs" />
     <Compile Include="MxUi.cs" />
     <Compile Include="MxUvs.cs" />
-    <Compile Include="Objects\MxDoubleUtil.cs" />
-    <Compile Include="Objects\MxPoint.cs" />
-    <Compile Include="Objects\MxSize.cs" />
-    <Compile Include="Objects\MxVector.cs" />
-    <Compile Include="Objects\MxQuaternion.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\" />
-    <Folder Include="Tools\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="CsharpToMaxTest.resx">

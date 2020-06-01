@@ -31,25 +31,27 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.BtnSelSimElements = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.button4 = new System.Windows.Forms.Button();
+            this.RbtSuperClassOf = new System.Windows.Forms.RadioButton();
+            this.RbtClassOf = new System.Windows.Forms.RadioButton();
             this.button16 = new System.Windows.Forms.Button();
+            this.ChkClearSel = new System.Windows.Forms.CheckBox();
+            this.CbxSuperClassOf = new System.Windows.Forms.ComboBox();
             this.ChkMacroRec = new System.Windows.Forms.CheckBox();
             this.button15 = new System.Windows.Forms.Button();
             this.button14 = new System.Windows.Forms.Button();
             this.ChkSelHidden = new System.Windows.Forms.CheckBox();
-            this.ChkClearSel = new System.Windows.Forms.CheckBox();
-            this.CbxClassOf = new System.Windows.Forms.ComboBox();
-            this.button13 = new System.Windows.Forms.Button();
             this.button12 = new System.Windows.Forms.Button();
             this.button11 = new System.Windows.Forms.Button();
             this.button10 = new System.Windows.Forms.Button();
             this.button6 = new System.Windows.Forms.Button();
+            this.CbxClassOf = new System.Windows.Forms.ComboBox();
             this.button7 = new System.Windows.Forms.Button();
+            this.button13 = new System.Windows.Forms.Button();
             this.button8 = new System.Windows.Forms.Button();
             this.button9 = new System.Windows.Forms.Button();
-            this.CbxSuperClassOf = new System.Windows.Forms.ComboBox();
-            this.RbtClassOf = new System.Windows.Forms.RadioButton();
-            this.RbtSuperClassOf = new System.Windows.Forms.RadioButton();
-            this.button4 = new System.Windows.Forms.Button();
+            this.BtnOpenMaxFile = new System.Windows.Forms.Button();
+            this.TbxMaxFilePath = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -109,7 +111,7 @@
             this.groupBox1.Controls.Add(this.button5);
             this.groupBox1.Controls.Add(this.button2);
             this.groupBox1.Controls.Add(this.textBox1);
-            this.groupBox1.Location = new System.Drawing.Point(12, 322);
+            this.groupBox1.Location = new System.Drawing.Point(12, 357);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(662, 166);
             this.groupBox1.TabIndex = 7;
@@ -128,6 +130,8 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.TbxMaxFilePath);
+            this.groupBox2.Controls.Add(this.BtnOpenMaxFile);
             this.groupBox2.Controls.Add(this.button4);
             this.groupBox2.Controls.Add(this.BtnSelSimElements);
             this.groupBox2.Controls.Add(this.RbtSuperClassOf);
@@ -151,10 +155,42 @@
             this.groupBox2.Controls.Add(this.button9);
             this.groupBox2.Location = new System.Drawing.Point(18, 12);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(650, 304);
+            this.groupBox2.Size = new System.Drawing.Size(650, 339);
             this.groupBox2.TabIndex = 12;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "MaxSharp";
+            // 
+            // button4
+            // 
+            this.button4.Location = new System.Drawing.Point(6, 75);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(194, 23);
+            this.button4.TabIndex = 26;
+            this.button4.Text = "Seselect Instances";
+            this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click_1);
+            // 
+            // RbtSuperClassOf
+            // 
+            this.RbtSuperClassOf.AutoSize = true;
+            this.RbtSuperClassOf.Location = new System.Drawing.Point(140, 277);
+            this.RbtSuperClassOf.Name = "RbtSuperClassOf";
+            this.RbtSuperClassOf.Size = new System.Drawing.Size(87, 17);
+            this.RbtSuperClassOf.TabIndex = 25;
+            this.RbtSuperClassOf.Text = "superClassOf";
+            this.RbtSuperClassOf.UseVisualStyleBackColor = true;
+            // 
+            // RbtClassOf
+            // 
+            this.RbtClassOf.AutoSize = true;
+            this.RbtClassOf.Checked = true;
+            this.RbtClassOf.Location = new System.Drawing.Point(140, 251);
+            this.RbtClassOf.Name = "RbtClassOf";
+            this.RbtClassOf.Size = new System.Drawing.Size(60, 17);
+            this.RbtClassOf.TabIndex = 24;
+            this.RbtClassOf.TabStop = true;
+            this.RbtClassOf.Text = "classOf";
+            this.RbtClassOf.UseVisualStyleBackColor = true;
             // 
             // button16
             // 
@@ -165,6 +201,26 @@
             this.button16.Text = "Show Selection Parameters";
             this.button16.UseVisualStyleBackColor = true;
             this.button16.Click += new System.EventHandler(this.button16_Click);
+            // 
+            // ChkClearSel
+            // 
+            this.ChkClearSel.AutoSize = true;
+            this.ChkClearSel.Checked = true;
+            this.ChkClearSel.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.ChkClearSel.Location = new System.Drawing.Point(140, 224);
+            this.ChkClearSel.Name = "ChkClearSel";
+            this.ChkClearSel.Size = new System.Drawing.Size(65, 17);
+            this.ChkClearSel.TabIndex = 15;
+            this.ChkClearSel.Text = "clear sel";
+            this.ChkClearSel.UseVisualStyleBackColor = true;
+            // 
+            // CbxSuperClassOf
+            // 
+            this.CbxSuperClassOf.FormattingEnabled = true;
+            this.CbxSuperClassOf.Location = new System.Drawing.Point(6, 275);
+            this.CbxSuperClassOf.Name = "CbxSuperClassOf";
+            this.CbxSuperClassOf.Size = new System.Drawing.Size(122, 21);
+            this.CbxSuperClassOf.TabIndex = 22;
             // 
             // ChkMacroRec
             // 
@@ -206,36 +262,6 @@
             this.ChkSelHidden.Text = "sel hidden";
             this.ChkSelHidden.UseVisualStyleBackColor = true;
             // 
-            // ChkClearSel
-            // 
-            this.ChkClearSel.AutoSize = true;
-            this.ChkClearSel.Checked = true;
-            this.ChkClearSel.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.ChkClearSel.Location = new System.Drawing.Point(140, 224);
-            this.ChkClearSel.Name = "ChkClearSel";
-            this.ChkClearSel.Size = new System.Drawing.Size(65, 17);
-            this.ChkClearSel.TabIndex = 15;
-            this.ChkClearSel.Text = "clear sel";
-            this.ChkClearSel.UseVisualStyleBackColor = true;
-            // 
-            // CbxClassOf
-            // 
-            this.CbxClassOf.FormattingEnabled = true;
-            this.CbxClassOf.Location = new System.Drawing.Point(6, 249);
-            this.CbxClassOf.Name = "CbxClassOf";
-            this.CbxClassOf.Size = new System.Drawing.Size(122, 21);
-            this.CbxClassOf.TabIndex = 13;
-            // 
-            // button13
-            // 
-            this.button13.Location = new System.Drawing.Point(6, 220);
-            this.button13.Name = "button13";
-            this.button13.Size = new System.Drawing.Size(122, 23);
-            this.button13.TabIndex = 12;
-            this.button13.Text = "Select All Of Type";
-            this.button13.UseVisualStyleBackColor = true;
-            this.button13.Click += new System.EventHandler(this.button13_Click);
-            // 
             // button12
             // 
             this.button12.Location = new System.Drawing.Point(6, 46);
@@ -276,6 +302,14 @@
             this.button6.UseVisualStyleBackColor = true;
             this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
+            // CbxClassOf
+            // 
+            this.CbxClassOf.FormattingEnabled = true;
+            this.CbxClassOf.Location = new System.Drawing.Point(6, 249);
+            this.CbxClassOf.Name = "CbxClassOf";
+            this.CbxClassOf.Size = new System.Drawing.Size(122, 21);
+            this.CbxClassOf.TabIndex = 13;
+            // 
             // button7
             // 
             this.button7.Location = new System.Drawing.Point(412, 75);
@@ -285,6 +319,16 @@
             this.button7.Text = "Bent Cylinder";
             this.button7.UseVisualStyleBackColor = true;
             this.button7.Click += new System.EventHandler(this.button7_Click);
+            // 
+            // button13
+            // 
+            this.button13.Location = new System.Drawing.Point(6, 220);
+            this.button13.Name = "button13";
+            this.button13.Size = new System.Drawing.Size(122, 23);
+            this.button13.TabIndex = 12;
+            this.button13.Text = "Select All Of Type";
+            this.button13.UseVisualStyleBackColor = true;
+            this.button13.Click += new System.EventHandler(this.button13_Click);
             // 
             // button8
             // 
@@ -302,55 +346,33 @@
             this.button9.Name = "button9";
             this.button9.Size = new System.Drawing.Size(122, 23);
             this.button9.TabIndex = 5;
-            this.button9.Text = "Nodes";
+            this.button9.Text = "All Scene Nodes";
             this.button9.UseVisualStyleBackColor = true;
             this.button9.Click += new System.EventHandler(this.button9_Click);
             // 
-            // CbxSuperClassOf
+            // BtnOpenMaxFile
             // 
-            this.CbxSuperClassOf.FormattingEnabled = true;
-            this.CbxSuperClassOf.Location = new System.Drawing.Point(6, 275);
-            this.CbxSuperClassOf.Name = "CbxSuperClassOf";
-            this.CbxSuperClassOf.Size = new System.Drawing.Size(122, 21);
-            this.CbxSuperClassOf.TabIndex = 22;
+            this.BtnOpenMaxFile.Location = new System.Drawing.Point(6, 302);
+            this.BtnOpenMaxFile.Name = "BtnOpenMaxFile";
+            this.BtnOpenMaxFile.Size = new System.Drawing.Size(194, 23);
+            this.BtnOpenMaxFile.TabIndex = 27;
+            this.BtnOpenMaxFile.Text = "Open File";
+            this.BtnOpenMaxFile.UseVisualStyleBackColor = true;
+            this.BtnOpenMaxFile.Click += new System.EventHandler(this.BtnOpenMaxFile_Click);
             // 
-            // RbtClassOf
+            // TbxMaxFilePath
             // 
-            this.RbtClassOf.AutoSize = true;
-            this.RbtClassOf.Checked = true;
-            this.RbtClassOf.Location = new System.Drawing.Point(140, 251);
-            this.RbtClassOf.Name = "RbtClassOf";
-            this.RbtClassOf.Size = new System.Drawing.Size(60, 17);
-            this.RbtClassOf.TabIndex = 24;
-            this.RbtClassOf.TabStop = true;
-            this.RbtClassOf.Text = "classOf";
-            this.RbtClassOf.UseVisualStyleBackColor = true;
-            // 
-            // RbtSuperClassOf
-            // 
-            this.RbtSuperClassOf.AutoSize = true;
-            this.RbtSuperClassOf.Location = new System.Drawing.Point(140, 277);
-            this.RbtSuperClassOf.Name = "RbtSuperClassOf";
-            this.RbtSuperClassOf.Size = new System.Drawing.Size(87, 17);
-            this.RbtSuperClassOf.TabIndex = 25;
-            this.RbtSuperClassOf.Text = "superClassOf";
-            this.RbtSuperClassOf.UseVisualStyleBackColor = true;
-            // 
-            // button4
-            // 
-            this.button4.Location = new System.Drawing.Point(6, 75);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(194, 23);
-            this.button4.TabIndex = 26;
-            this.button4.Text = "Seselect Instances";
-            this.button4.UseVisualStyleBackColor = true;
-            this.button4.Click += new System.EventHandler(this.button4_Click_1);
+            this.TbxMaxFilePath.Location = new System.Drawing.Point(208, 304);
+            this.TbxMaxFilePath.Name = "TbxMaxFilePath";
+            this.TbxMaxFilePath.Size = new System.Drawing.Size(436, 20);
+            this.TbxMaxFilePath.TabIndex = 28;
+            this.TbxMaxFilePath.Text = "D:\\ReneBaca\\Aprog\\Micra\\Micra_Csharp\\Resources\\test_scene_01.max";
             // 
             // CsharpToMaxTest
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(682, 492);
+            this.ClientSize = new System.Drawing.Size(682, 527);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Name = "CsharpToMaxTest";
@@ -393,5 +415,7 @@
         private System.Windows.Forms.RadioButton RbtSuperClassOf;
         private System.Windows.Forms.RadioButton RbtClassOf;
         private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.TextBox TbxMaxFilePath;
+        private System.Windows.Forms.Button BtnOpenMaxFile;
     }
 }
