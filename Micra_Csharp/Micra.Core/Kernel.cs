@@ -21,6 +21,7 @@ namespace Micra.Core {
         private delegate void TimerProc(IntPtr hWnd, uint nMsg, int nIDEvent, int dwTime);
         public static IInterface14 _Interface;
         public static IIInstanceMgr _InstanceMgr;
+        public static IHold _TheHold;
         public static IGlobal _Global;
         internal static List<ReferenceListener> listeners = new List<ReferenceListener>();
         internal static Scene scene;
@@ -34,6 +35,7 @@ namespace Micra.Core {
             _Global = Autodesk.Max.GlobalInterface.Instance;
             _Interface = _Global.COREInterface14;
             _InstanceMgr = _Global.IInstanceMgr.InstanceMgr;
+            _TheHold = Kernel._Global.TheHold;
             scene = new Scene(_Interface);
             dispatcher = Dispatcher.CurrentDispatcher;
         }

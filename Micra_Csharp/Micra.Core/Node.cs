@@ -256,8 +256,10 @@ namespace Micra.Core {
         public bool IsClassOf(ClassID id) => Object.ClassID.a == id.a && Object.ClassID.b == id.b;
 
         public bool IsSuperClassOf(SuperClassID id) => Object.SuperClassID == id;
-
-        public bool IsEditable() { //Todo Test This check with modifiers on object
+        //Todo >
+        //-baseObject == allow modifiers
+        //-modPolyOrMesh == add posibility operate with editable_poy and editable_mesh modifiers
+        public bool IsEditable(bool baseObject = false, bool modPolyOrMesh = false) { 
 
             //Kernel.WriteLine("is mesh:{0} is poly{1}", IsClassOf(ClassID.EditableMesh), IsClassOf(ClassID.EditablePoly));
             return IsClassOf(ClassID.EditableMesh) || IsClassOf(ClassID.EditablePoly);
@@ -334,6 +336,7 @@ namespace Micra.Core {
         public Mesh GetMesh(TimeValue t, bool evalHidden) {
             // Retrieve the TriObject from the node
             IObjectState state = _Node.EvalWorldState(t, evalHidden);
+            //Kernel.WriteLine("GetMesh > node:{0} state:{1}", Name, state);
             if ( state == null )
                 return null;
 

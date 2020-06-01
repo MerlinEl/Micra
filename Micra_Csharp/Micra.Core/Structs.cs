@@ -11,6 +11,18 @@ using System.Linq;
 using System.Reflection;
 
 namespace Micra.Core {
+
+    public enum TaskModes : uint {
+
+        TASK_MODE_CREATE=1,
+        TASK_MODE_MODIFY=2,
+        TASK_MODE_HIERARCHY=3,
+        TASK_MODE_MOTION=4,
+        TASK_MODE_DISPLAY=5,
+        TASK_MODE_UTILITY=6,
+    }
+
+
     /// <summary>
     /// Represents a time value during an animation. 
     /// Wraps the TimeValue typedef in 3ds Max SDK.
@@ -140,6 +152,7 @@ namespace Micra.Core {
         public static ClassID EditableMesh = new ClassID(BuiltInClassIDA.EDITTRIOBJ_CLASS_ID, 0);
         public static ClassID EditablePoly = new ClassID(BuiltInClassIDA.EPOLYOBJ_CLASS_ID, BuiltInClassIDB.EPOLYOBJ_CLASS_ID);
         public static ClassID BoneGeometry = new ClassID(BuiltInClassIDA.BONE_CLASS_ID, BuiltInClassIDB.BONE_OBJ_CLASSID);
+        public static ClassID TargetObject = new ClassID(BuiltInClassIDA.TARGET_CLASS_ID, 0);
         public static ClassID TriObject = new ClassID(BuiltInClassIDA.TRIOBJ_CLASS_ID, 0); //not tested
 
         //replaced --see if is ok and remove it

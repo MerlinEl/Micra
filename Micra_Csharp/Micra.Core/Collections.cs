@@ -1,7 +1,10 @@
 ﻿using Autodesk.Max;
+using Autodesk.Max.EditorStyleDef;
+using Autodesk.Max.IIRenderMgr;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Runtime.InteropServices;
 
 namespace Micra.Core {
@@ -72,13 +75,60 @@ namespace Micra.Core {
         }
         public static void SelectNodes(List<Node> nodes, bool redraw = false) {
 
+            //Kernel._Interface.RedrawViews(Kernel.Now, RedrawFlags.Begin, null);
+            Kernel._Interface.DisableSceneRedraw();
+            Kernel._Interface.SuspendEditing((uint)TaskModes.TASK_MODE_MODIFY, true); //for now seem not works ... see it later
             DeselectAll(false);
-            foreach ( Node n in nodes ) {
-                if ( !n.Visible ) continue;
-                n.Selected = true;
+            try {
+                foreach ( Node n in nodes ) {
+                    if ( !n.Visible ) continue;
+                    n.Selected = true;
+                }
+            } catch ( Exception ex ) {
+
+                throw new Exception(ex.Message);
+
+            } finally {
+                Kernel._Interface.ResumeEditing((uint)TaskModes.TASK_MODE_MODIFY, true); //for now seem not works ... see it later
+                Kernel._Interface.EnableSceneRedraw();
             }
-            if ( redraw ) Kernel.RedrawViews();
             Kernel.WriteLine("Selected Instance nodes:{0}/{1}", Kernel.Scene.SelectedNodes().Count(), Kernel.Scene.RootNode.Children.Count());
+            //Kernel._Interface.RedrawViews(Kernel.Now, RedrawFlags.End, null);
+            if ( redraw ) Kernel.RedrawViews();
+        }
+
+        public static void SelectNodesWithSimillarVolume(List<Node> srcNodes) {
+
+            //collect selected geometry objects volumes
+            List<double> volumes = srcNodes
+                .Where(n =>
+                    n.IsSuperClassOf(SuperClassID.GeometricObject) && //get all geometry objects
+                    !n.IsClassOf(ClassID.TargetObject) //exclude any light Target
+                )
+                .Select(n => n.GetMesh().GetVolume()).Distinct()
+                .ToList();
+
+            //Kernel.WriteLine("\tVolumes types:{0}", volumes.Count());
+            IEnumerable<Node> allNodes = Kernel.Scene.AllNodes();
+            //Kernel.WriteLine("\tAll nodes:{0}", allNodes.Count());
+
+            //get geometry objects with similar volume
+            List<Node> matchVolumeNodes = allNodes
+                .Where(n =>
+                    n.IsSuperClassOf(SuperClassID.GeometricObject) && //get all geometry objects
+                    !n.IsClassOf(ClassID.TargetObject) && //exclude any light Target
+                    volumes.IndexOf(n.GetMesh().GetVolume()) != -1
+                 )
+                .Select(n => n)
+                .ToList();
+
+            Kernel.WriteLine("\tobjects count:{0}", matchVolumeNodes.Count());
+
+            //execute action with undo enabled
+            Kernel._TheHold.Begin();
+            SelectNodes(matchVolumeNodes, true);
+            Kernel._TheHold.Accept("Select Simillar");
+            Kernel._TheHold.End();
         }
     }
     internal static class CollectionExtensions {

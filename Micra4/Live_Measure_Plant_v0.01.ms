@@ -125,7 +125,70 @@ struct sQuickMeasure (
 gQuickMeasure = sQuickMeasure()
 gQuickMeasure.startDraw()
 
+/*
+class myDrawGrid : public RedrawViewsCallback 
+{
+	public:
+		myPlugin* mod;
+		~myDrawGrid() {}
+		myDrawGrid() {}
 
+		void proc(Interface *ip)
+		{
+			ViewExp &vpt = ip->GetActiveViewExp();
+			GraphicsWindow *gw = vpt.getGW();
+			
+			DWORD rlim = gw->getRndLimits();
+			DWORD rl = GW_WIREFRAME | GW_EDGES_ONLY | (rlim & GW_Z_BUFFER);
+			gw->setRndLimits(rl);
+
+			
+			//a few loops drawing the grid with only setColor and polyline called this way:
+			//	gw->setColor(LINE_COLOR, Point3(1.0f, 0.0f, 0.0f));
+			//	gw->polyline(2, points, NULL, NULL, 0, NULL);
+			
+
+			gw->setRndLimits(rlim);
+			gw->enlargeUpdateRect(NULL);
+			gw->updateScreen();
+		}
+};
+
+// Get redraw views callbacks
+class PolyCountCallback: public RedrawViewsCallback
+{
+	void proc(Interface *ip);
+};
+
+// Count the polygons and dislpay the bar graph after every redraw views
+void
+PolyCountCallback::proc(Interface* ip)
+{
+	InitFaceCount();
+	CountFaces(ip);
+	thePolyCounter.DrawBars();
+}
+
+PolyCountCallback pccb;
+
+void 
+PolygonCounter::Init()
+{
+	ip->RegisterRedrawViewsCallback(&pccb);
+}
+
+void
+PolygonCounter::End()
+{
+	ip->UnRegisterRedrawViewsCallback(&pccb);
+}
+#define GW_ILLUM				0x0000002
+#define GW_TEXTURE			0x0000010
+#define GW_Z_BUFFER			0x0000020
+DWORD rl = GW_ILLUM | GW_TEXTURE | GW_Z_BUFFER;
+gw->setRndLimits(rl);
+
+*/
 
 /*
 max show statistics toggle

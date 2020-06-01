@@ -44,7 +44,7 @@ namespace Micra.Core {
             return from n in NodeTree where n.Object != null & n.SuperClassID == sid select n;
         }
 
-        public IEnumerable<Node> AllObjects() {
+        public IEnumerable<Node> AllNodes() {
 
             return from n in NodeTree where n.Object != null select n;
         }

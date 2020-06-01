@@ -99,9 +99,7 @@
     <Compile Include="MxUvs.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Resources\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <EmbeddedResource Include="CsharpToMaxTest.resx">
       <DependentUpon>CsharpToMaxTest.cs</DependentUpon>

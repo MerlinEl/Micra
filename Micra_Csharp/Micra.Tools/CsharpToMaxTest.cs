@@ -65,13 +65,13 @@ namespace Micra.Tools {
         private void BtnSelSimElements_Click(object sender, EventArgs e) {
 
             Kernel.WriteLine(( sender as Button ).Text);
-            IEnumerable<Node> sel_objs = Kernel.Scene.SelectedNodes();
-            Kernel.WriteLine("\tSelected objects:{0}", sel_objs.Count());
-            if ( sel_objs.Count() == 1 ) { //if single object is selected
+            IEnumerable<Node> selNodes = Kernel.Scene.SelectedNodes();
+            Kernel.WriteLine("\tSelected nodes:{0}", selNodes.Count());
+            int slev = GlobalMethods.SubObjectLevel;
+            if ( selNodes.Count() == 1 && slev != 0) { //if single object is selected
 
-                Node node = sel_objs.First();
+                Node node = selNodes.First();
                 if ( !node.IsEditable() ) return;
-                int slev = GlobalMethods.SubObjectLevel;
                 Kernel.WriteLine("selected Node:{0} subObjectLevel:{1}", node.Name, Kernel._Interface.SubObjectLevel);
                 switch ( slev ) { //next operation is depend on subobject level
 
@@ -83,49 +83,10 @@ namespace Micra.Tools {
                 }
 
 
-            } else if (sel_objs.Count() > 1) { //when multi object selection
+            } else if (selNodes.Count() >= 1) { //when multi object selection
 
-                IEnumerable<Node> all_objs = Kernel.Scene.AllObjects();
-                Kernel.WriteLine("\tGeometry objects:{0}", all_objs.Count());
-
-                //collect selected geometry objects volumes
-                var volumes = sel_objs
-                    .Where(n => n.IsSuperClassOf(SuperClassID.GeometricObject))
-                    .Select(n => {
-                        Kernel.WriteLine("process node:{0}", n.Name);
-                        double v = n.GetMesh().GetVolume();
-                        Kernel.WriteLine("\t\tget area:{0}", v);
-                        return new Tuple<Node, double>(n, v);
-                    }).ToList();
-
-                Kernel.WriteLine("\tvolumes count:{0}", volumes.Count());
-
-                //get prototypes with unique size
-                List<Tuple<Node, double>> uniques = volumes
-                  .GroupBy(p => p.Item2)
-                  .Select(g => g.First())
-                  .ToList();
-                Kernel.WriteLine("\tuniques count:{0}", uniques.Count());
-                uniques.ForEach(tuple => Kernel.WriteLine("\t\tget obj:{0} area:{1}", tuple.Item1.Name, tuple.Item2));
-
-                //get geometry objects with similar volume
-                //all_objs < make unique array of objs
-
+                Collections.SelectNodesWithSimillarVolume(selNodes.ToList());
             }
-
-            /*var volumes = new List<Tuple<Node, double>> { }; //list of pairs
-            foreach ( Node o in sel_objs ) {
-                MxCollection.PrintObjectClass(o);
-                double v = MxPoly.GetGeometryVolume(o);
-                volumes.Add(Tuple.Create(o, v));
-                MxSet.LogLi("\t\tget obj:{0} area:{1}", o.Name, v);
-            }*/
-            /*
- 
-            
-            
-            
-            */
 
             /*IINode obj = MxCollection.GetFirstSelectedNode(); //Autodesk.Max.Wrappers.INode
             ISubClassList clist = GlobalInterface.Instance.ClassDirectory.Instance.GetClassList(obj.ObjectRef.Eval(0).Obj.SuperClassID);
@@ -162,6 +123,11 @@ namespace Micra.Tools {
                 "mcPoly.selectSimilarElements selection[1] " +
                 "offset:" + SpnAreaOffset.Value.ToString()
             );*/
+        }
+
+        private bool IsMatchVolume(double val, List<double> valList) {
+
+            return valList.IndexOf(val) != -1;
         }
 
         private void button9_Click(object sender, EventArgs e) {
