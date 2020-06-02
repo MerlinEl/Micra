@@ -31,6 +31,8 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.BtnSelSimElements = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.TbxMaxFilePath = new System.Windows.Forms.TextBox();
+            this.BtnOpenMaxFile = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
             this.RbtSuperClassOf = new System.Windows.Forms.RadioButton();
             this.RbtClassOf = new System.Windows.Forms.RadioButton();
@@ -50,8 +52,12 @@
             this.button13 = new System.Windows.Forms.Button();
             this.button8 = new System.Windows.Forms.Button();
             this.button9 = new System.Windows.Forms.Button();
-            this.BtnOpenMaxFile = new System.Windows.Forms.Button();
-            this.TbxMaxFilePath = new System.Windows.Forms.TextBox();
+            this.BtnGetSelFaces = new System.Windows.Forms.Button();
+            this.BtnGetSelEdges = new System.Windows.Forms.Button();
+            this.BtnGetSelVetts = new System.Windows.Forms.Button();
+            this.BtnHideGeometry = new System.Windows.Forms.Button();
+            this.BtnUnhideGeometry = new System.Windows.Forms.Button();
+            this.ChkSelected = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -130,6 +136,12 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.ChkSelected);
+            this.groupBox2.Controls.Add(this.BtnUnhideGeometry);
+            this.groupBox2.Controls.Add(this.BtnHideGeometry);
+            this.groupBox2.Controls.Add(this.BtnGetSelVetts);
+            this.groupBox2.Controls.Add(this.BtnGetSelEdges);
+            this.groupBox2.Controls.Add(this.BtnGetSelFaces);
             this.groupBox2.Controls.Add(this.TbxMaxFilePath);
             this.groupBox2.Controls.Add(this.BtnOpenMaxFile);
             this.groupBox2.Controls.Add(this.button4);
@@ -159,6 +171,24 @@
             this.groupBox2.TabIndex = 12;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "MaxSharp";
+            // 
+            // TbxMaxFilePath
+            // 
+            this.TbxMaxFilePath.Location = new System.Drawing.Point(208, 304);
+            this.TbxMaxFilePath.Name = "TbxMaxFilePath";
+            this.TbxMaxFilePath.Size = new System.Drawing.Size(436, 20);
+            this.TbxMaxFilePath.TabIndex = 28;
+            this.TbxMaxFilePath.Text = "D:\\ReneBaca\\Aprog\\Micra\\Micra_Csharp\\Resources\\test_scene_01.max";
+            // 
+            // BtnOpenMaxFile
+            // 
+            this.BtnOpenMaxFile.Location = new System.Drawing.Point(6, 302);
+            this.BtnOpenMaxFile.Name = "BtnOpenMaxFile";
+            this.BtnOpenMaxFile.Size = new System.Drawing.Size(194, 23);
+            this.BtnOpenMaxFile.TabIndex = 27;
+            this.BtnOpenMaxFile.Text = "Open File";
+            this.BtnOpenMaxFile.UseVisualStyleBackColor = true;
+            this.BtnOpenMaxFile.Click += new System.EventHandler(this.BtnOpenMaxFile_Click);
             // 
             // button4
             // 
@@ -350,23 +380,67 @@
             this.button9.UseVisualStyleBackColor = true;
             this.button9.Click += new System.EventHandler(this.button9_Click);
             // 
-            // BtnOpenMaxFile
+            // BtnGetSelFaces
             // 
-            this.BtnOpenMaxFile.Location = new System.Drawing.Point(6, 302);
-            this.BtnOpenMaxFile.Name = "BtnOpenMaxFile";
-            this.BtnOpenMaxFile.Size = new System.Drawing.Size(194, 23);
-            this.BtnOpenMaxFile.TabIndex = 27;
-            this.BtnOpenMaxFile.Text = "Open File";
-            this.BtnOpenMaxFile.UseVisualStyleBackColor = true;
-            this.BtnOpenMaxFile.Click += new System.EventHandler(this.BtnOpenMaxFile_Click);
+            this.BtnGetSelFaces.Location = new System.Drawing.Point(208, 133);
+            this.BtnGetSelFaces.Name = "BtnGetSelFaces";
+            this.BtnGetSelFaces.Size = new System.Drawing.Size(122, 23);
+            this.BtnGetSelFaces.TabIndex = 29;
+            this.BtnGetSelFaces.Text = "Get Selected Faces";
+            this.BtnGetSelFaces.UseVisualStyleBackColor = true;
+            this.BtnGetSelFaces.Click += new System.EventHandler(this.BtnGetSelFaces_Click);
             // 
-            // TbxMaxFilePath
+            // BtnGetSelEdges
             // 
-            this.TbxMaxFilePath.Location = new System.Drawing.Point(208, 304);
-            this.TbxMaxFilePath.Name = "TbxMaxFilePath";
-            this.TbxMaxFilePath.Size = new System.Drawing.Size(436, 20);
-            this.TbxMaxFilePath.TabIndex = 28;
-            this.TbxMaxFilePath.Text = "D:\\ReneBaca\\Aprog\\Micra\\Micra_Csharp\\Resources\\test_scene_01.max";
+            this.BtnGetSelEdges.Location = new System.Drawing.Point(208, 162);
+            this.BtnGetSelEdges.Name = "BtnGetSelEdges";
+            this.BtnGetSelEdges.Size = new System.Drawing.Size(122, 23);
+            this.BtnGetSelEdges.TabIndex = 30;
+            this.BtnGetSelEdges.Text = "Get Selected Edges";
+            this.BtnGetSelEdges.UseVisualStyleBackColor = true;
+            this.BtnGetSelEdges.Click += new System.EventHandler(this.BtnGetSelEdges_Click);
+            // 
+            // BtnGetSelVetts
+            // 
+            this.BtnGetSelVetts.Location = new System.Drawing.Point(208, 191);
+            this.BtnGetSelVetts.Name = "BtnGetSelVetts";
+            this.BtnGetSelVetts.Size = new System.Drawing.Size(122, 23);
+            this.BtnGetSelVetts.TabIndex = 31;
+            this.BtnGetSelVetts.Text = "Get Selected Verts";
+            this.BtnGetSelVetts.UseVisualStyleBackColor = true;
+            this.BtnGetSelVetts.Click += new System.EventHandler(this.BtnGetSelVetts_Click);
+            // 
+            // BtnHideGeometry
+            // 
+            this.BtnHideGeometry.Location = new System.Drawing.Point(423, 191);
+            this.BtnHideGeometry.Name = "BtnHideGeometry";
+            this.BtnHideGeometry.Size = new System.Drawing.Size(111, 23);
+            this.BtnHideGeometry.TabIndex = 32;
+            this.BtnHideGeometry.Text = "Hide Geometry";
+            this.BtnHideGeometry.UseVisualStyleBackColor = true;
+            this.BtnHideGeometry.Click += new System.EventHandler(this.BtnHideUnselFaces_Click);
+            // 
+            // BtnUnhideGeometry
+            // 
+            this.BtnUnhideGeometry.Location = new System.Drawing.Point(423, 162);
+            this.BtnUnhideGeometry.Name = "BtnUnhideGeometry";
+            this.BtnUnhideGeometry.Size = new System.Drawing.Size(111, 23);
+            this.BtnUnhideGeometry.TabIndex = 33;
+            this.BtnUnhideGeometry.Text = "Unhide Geometry";
+            this.BtnUnhideGeometry.UseVisualStyleBackColor = true;
+            this.BtnUnhideGeometry.Click += new System.EventHandler(this.BtnUnhideGeometry_Click);
+            // 
+            // ChkSelected
+            // 
+            this.ChkSelected.AutoSize = true;
+            this.ChkSelected.Checked = true;
+            this.ChkSelected.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.ChkSelected.Location = new System.Drawing.Point(542, 195);
+            this.ChkSelected.Name = "ChkSelected";
+            this.ChkSelected.Size = new System.Drawing.Size(66, 17);
+            this.ChkSelected.TabIndex = 34;
+            this.ChkSelected.Text = "selected";
+            this.ChkSelected.UseVisualStyleBackColor = true;
             // 
             // CsharpToMaxTest
             // 
@@ -417,5 +491,11 @@
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.TextBox TbxMaxFilePath;
         private System.Windows.Forms.Button BtnOpenMaxFile;
+        private System.Windows.Forms.Button BtnGetSelVetts;
+        private System.Windows.Forms.Button BtnGetSelEdges;
+        private System.Windows.Forms.Button BtnGetSelFaces;
+        private System.Windows.Forms.Button BtnHideGeometry;
+        private System.Windows.Forms.Button BtnUnhideGeometry;
+        private System.Windows.Forms.CheckBox ChkSelected;
     }
 }

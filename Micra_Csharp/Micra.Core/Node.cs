@@ -46,7 +46,7 @@ namespace Micra.Core {
         /// Encapsulates node visibility functionality. 
         /// </summary>
         public class NodeVisibility {
-            IINode node;
+            readonly IINode node;
 
             public NodeVisibility(IINode node) {
                 this.node = node;
@@ -259,7 +259,7 @@ namespace Micra.Core {
         //Todo >
         //-baseObject == allow modifiers
         //-modPolyOrMesh == add posibility operate with editable_poy and editable_mesh modifiers
-        public bool IsEditable(bool baseObject = false, bool modPolyOrMesh = false) { 
+        public bool IsEditable(bool baseObject = false, bool modPolyOrMesh = false) {
 
             //Kernel.WriteLine("is mesh:{0} is poly{1}", IsClassOf(ClassID.EditableMesh), IsClassOf(ClassID.EditablePoly));
             return IsClassOf(ClassID.EditableMesh) || IsClassOf(ClassID.EditablePoly);
@@ -324,6 +324,19 @@ namespace Micra.Core {
                 return new NodeVisibility(_Node);
             }
         }
+        /*public SceneObject GetSceneObject() => GetSceneObject(Kernel.Now, true);
+        public SceneObject GetSceneObject(TimeValue t, bool evalHidden) {
+
+            // Retrieve the TriObject from the node
+            IObjectState state = _Node.EvalWorldState(t, evalHidden);
+            //Kernel.WriteLine("GetMesh > node:{0} state:{1}", Name, state);
+            if ( state == null ) return null;
+
+            IObject obj = state.Obj;
+            if ( obj == null ) return null;
+
+            return new SceneObject(obj);
+        }*/
 
         public Mesh GetMesh() {
             return GetMesh(Kernel.Now);
@@ -334,18 +347,11 @@ namespace Micra.Core {
         }
 
         public Mesh GetMesh(TimeValue t, bool evalHidden) {
-            // Retrieve the TriObject from the node
-            IObjectState state = _Node.EvalWorldState(t, evalHidden);
-            //Kernel.WriteLine("GetMesh > node:{0} state:{1}", Name, state);
-            if ( state == null )
-                return null;
 
-            IObject obj = state.Obj;
-            if ( obj == null )
-                return null;
-
-            SceneObject o = new SceneObject(obj);
-            return o.GetMesh(t);
+            /*SceneObject o = GetSceneObject(t, evalHidden);
+            if ( o == null ) return null;
+            return o.GetMesh(t);*/
+            return Object.GetMesh(t);
         }
 
         public bool IsBone {

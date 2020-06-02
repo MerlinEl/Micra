@@ -5,11 +5,6 @@
 // agreement provided at the time of installation or download, or which
 // otherwise accompanies this software in either electronic or hard copy form.  
 //
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
 using Autodesk.Max;
 
 namespace Micra.Core {
@@ -17,8 +12,7 @@ namespace Micra.Core {
     /// Represents a geometric object in the scene.
     /// Wraps a GeomObject from the Max SDK.
     /// </summary>
-    public class Geometry : SceneObject
-    {
+    public class Geometry : SceneObject {
         internal Geometry(IGeomObject x) : base(x) { }
 
         /// <summary>

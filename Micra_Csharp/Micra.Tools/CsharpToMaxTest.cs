@@ -68,22 +68,21 @@ namespace Micra.Tools {
             IEnumerable<Node> selNodes = Kernel.Scene.SelectedNodes();
             Kernel.WriteLine("\tSelected nodes:{0}", selNodes.Count());
             int slev = GlobalMethods.SubObjectLevel;
-            if ( selNodes.Count() == 1 && slev != 0) { //if single object is selected
+            if ( selNodes.Count() == 1 && slev != 0 ) { //if single object is selected
 
                 Node node = selNodes.First();
                 if ( !node.IsEditable() ) return;
                 Kernel.WriteLine("selected Node:{0} subObjectLevel:{1}", node.Name, Kernel._Interface.SubObjectLevel);
                 switch ( slev ) { //next operation is depend on subobject level
 
-                    case 1: break;
-                    case 2: break;
+                    case 2: Collections.SelectEdgesWithSameLength(node); break;
                     case 3: break;
                     case 4: break;
                     case 5: break;
                 }
 
 
-            } else if (selNodes.Count() >= 1) { //when multi object selection
+            } else if ( selNodes.Count() >= 1 ) { //when multi object selection
 
                 Collections.SelectNodesWithSimillarVolume(selNodes.ToList());
             }
@@ -225,15 +224,59 @@ namespace Micra.Tools {
         private void button4_Click_1(object sender, EventArgs e) {
             Kernel.WriteLine(( sender as Button ).Text);
             Node node = Kernel.Scene.SelectedNodes().FirstOrDefault();
-            var nodeInstances = Collections.GetNodeInsatances(node);
-            if ( nodeInstances.Count > 0 ) Collections.SelectNodes(nodeInstances);
+            Collections.SelectInstances(node, true);
         }
 
         private void BtnOpenMaxFile_Click(object sender, EventArgs e) {
 
+            Kernel.WriteLine(( sender as Button ).Text);
             string maxFilePpath = TbxMaxFilePath.Text;
             Kernel.WriteLine("Open Max file:{0} exists:{1}", maxFilePpath, File.Exists(maxFilePpath));
             Kernel._Interface.LoadFromFile(maxFilePpath, true);
+        }
+
+        private void BtnGetSelFaces_Click(object sender, EventArgs e) {
+            Kernel.WriteLine(( sender as Button ).Text);
+            Node node = Kernel.Scene.SelectedNodes().FirstOrDefault();
+            Kernel.WriteLine("selected Node:{0} subObjectLevel:{1}", node.Name, Kernel._Interface.SubObjectLevel);
+            var fsel = node.Object.GetSelectedFaces();
+            Kernel.WriteLine("selected Faces:{0}", fsel.Count);
+        }
+
+        private void BtnGetSelEdges_Click(object sender, EventArgs e) {
+            Kernel.WriteLine(( sender as Button ).Text);
+            Node node = Kernel.Scene.SelectedNodes().FirstOrDefault();
+            Kernel.WriteLine("selected Node:{0} subObjectLevel:{1}", node.Name, Kernel._Interface.SubObjectLevel);
+            var esel = node.Object.GetSelectedEdges();
+            Kernel.WriteLine("selected Edges:{0}", esel.Count);
+        }
+
+        private void BtnGetSelVetts_Click(object sender, EventArgs e) {
+            Kernel.WriteLine(( sender as Button ).Text);
+            Node node = Kernel.Scene.SelectedNodes().FirstOrDefault();
+            Kernel.WriteLine("selected Node:{0} subObjectLevel:{1}", node.Name, Kernel._Interface.SubObjectLevel);
+            var vsel = node.Object.GetSelectedVerts();
+            Kernel.WriteLine("selected Verts:{0}", vsel.Count);
+        }
+
+        private void BtnHideUnselFaces_Click(object sender, EventArgs e) {
+            Kernel.WriteLine(( sender as Button ).Text);
+            Node node = Kernel.Scene.SelectedNodes().FirstOrDefault();
+            if ( node != null ) {
+                node.Object.HideGeometry(ChkSelected.Checked);
+                Kernel._Interface.InvalidateObCache(node._Node);
+                Kernel.RedrawViews();
+            }
+        }
+
+        private void BtnUnhideGeometry_Click(object sender, EventArgs e) {
+            Kernel.WriteLine(( sender as Button ).Text);
+            Node node = Kernel.Scene.SelectedNodes().FirstOrDefault();
+            if ( node != null ) {
+                node.Object.UnhideGeometry();
+                Kernel._Interface.InvalidateObCache(node._Node);
+                Kernel.RedrawViews();
+            }
         }
     }
 }

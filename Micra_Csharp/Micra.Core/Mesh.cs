@@ -30,9 +30,44 @@ namespace Micra.Core {
                 b = f.V[1];
                 c = f.V[2];
             }
+            public double Area(Point3[] verts) { //not used not tested
+
+                Point3 p1 = verts[a];
+                Point3 p2 = verts[b];
+                Point3 p3 = verts[c];
+                Vector3 v1 = Vector3.FromPoints(p2, p1);
+                Vector3 v2 = Vector3.FromPoints(p3, p1);
+                Vector3 v3 = Vector3.FromPoint(p1);
+                return Vector3.DotProduct(Vector3.CrossProduct(v1, v2), v3);
+
+                // The area of a face is very easy to compute, its just half the length of the normal cross product:
+                /*Point3 A = new Point3 (verts[b] - verts[a]);
+                Point3 B = new Point3 (verts[c] - verts[a]);
+                Point3 N = A ^ B;
+                area = Length(N) / 2.0f;*/
+            }
         }
 
+        public struct Edge {
+            public uint a;
+            public uint b;
+
+            public Edge(IEdge e) {
+
+                a = e.V[0];
+                b = e.V[1];
+            }
+            public double Length() {
+
+                //return Point3.Distance(p1, p2)
+                throw new NotImplementedException();
+            }
+        }
+
+        //public IMesh _IMesh;
+
         public Face[] faces;
+        //public Edge[] edges;
         public Point3[] verts;
         public Face[] tfaces;
         public Point3[] tverts;
@@ -43,9 +78,21 @@ namespace Micra.Core {
         }
 
         internal Mesh(IMesh m) {
+
+           /* _IMesh = m;
+            Kernel.WriteLine("Init Mesh from Imesh > NumVerts:{0} EdgeSel.IsEmpty:{1}", _IMesh.NumVerts, m.EdgeSel.IsEmpty);
+            for (int i = 0; i < m.EdgeSel.Size; i++ ) {
+
+                Kernel.WriteLine("\tedge{0}", m.EdgeSel[i]);
+            }*/
+
             faces = new Face[m.NumFaces];
             for ( int i = 0; i < m.NumFaces; ++i )
                 faces[i] = new Face(m.Faces[i]);
+
+            /*edges = new Edge[m.NumEdges];
+            for ( int i = 0; i < m.NumEdges; ++i )
+                edges[i] = new Edge(m.Edges[i]);*/
 
             verts = new Point3[m.NumVerts];
             for ( int i = 0; i < m.NumVerts; ++i )
@@ -86,21 +133,26 @@ namespace Micra.Core {
                 vnormals[i].Normalize();
         }
 
+        #region Public Methods
+
         public double GetVolume() {
             
             double objVolume = 0.0;
-            //Kernel.WriteLine("\tGetVolume > NumFaces:{0}", faces.Length);
-            foreach ( Face f in faces ) {
-
-                Point3 p1 = verts[f.a];
-                Point3 p2 = verts[f.b];
-                Point3 p3 = verts[f.c];
-                Vector3 v1 = Vector3.FromPoints(p2, p1);
-                Vector3 v2 = Vector3.FromPoints(p3, p1);
-                Vector3 v3 = Vector3.FromPoint(p1);
-                objVolume += Vector3.DotProduct(Vector3.CrossProduct(v1, v2), v3);
-            }
-            return ( float )( objVolume / faces.Length );
+            faces.ForEach(f => objVolume += f.Area(verts));
+            return ( objVolume / faces.Length );
         }
+
+        public double GetEdgeLength(int ei) { //TODO
+
+            //Point3.Distance( _mesh.ed ei.V
+            return 0;
+        }
+
+        #endregion
+
+        #region Public Static Methods
+
+
+        #endregion
     }
 }

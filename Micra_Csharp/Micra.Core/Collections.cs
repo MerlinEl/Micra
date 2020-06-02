@@ -65,6 +65,28 @@ namespace Micra.Core {
                 foreach ( IParameter p in n.Object.Params ) Kernel.WriteLine("\t\tparam:{0}", p.Name);
             });
         }
+
+        public static void SelectEdgesWithSameLength(Node node) {
+
+            List<int> esel = node.Object.GetSelectedEdges();
+            Mesh mesh = node.GetMesh();
+            Kernel.WriteLine("SelectEdgesWithSameLength > Node:{0} selEdges:{1} isEmpty:{2}", node.Name, esel.Count);
+            if ( esel.Count == 0 ) return;
+            esel.ForEach(ei => Kernel.WriteLine("ei:{0}", ei));
+
+            /*var lengths = selEdges.IEnumerable()
+                .Select(ei => mesh.GetEdgeLength(ei))
+                .ToList();
+            Kernel.WriteLine("SelectEdgesWithSameLength lengths > ", lengths);*/
+            /* for (in selEdges.NumberSet) {
+ IEdge ie 
+
+
+             }*/
+
+            //throw new NotImplementedException();
+        }
+
         public static List<Node> GetNodeInsatances(Node node) {
 
             IINodeTab instanceAndRef = Kernel._Global.NodeTab.Create();
@@ -77,7 +99,7 @@ namespace Micra.Core {
 
             //Kernel._Interface.RedrawViews(Kernel.Now, RedrawFlags.Begin, null);
             Kernel._Interface.DisableSceneRedraw();
-            Kernel._Interface.SuspendEditing((uint)TaskModes.TASK_MODE_MODIFY, true); //for now seem not works ... see it later
+            Kernel._Interface.SuspendEditing((uint)TaskModes.TASK_MODE_MODIFY, true); //for now seems not works ... see it later
             DeselectAll(false);
             try {
                 foreach ( Node n in nodes ) {
@@ -130,6 +152,13 @@ namespace Micra.Core {
             Kernel._TheHold.Accept("Select Simillar");
             Kernel._TheHold.End();
         }
+
+        public static void SelectInstances(Node node, bool redraw = false) {
+            var nodeInstances = GetNodeInsatances(node);
+            if ( nodeInstances.Count == 0 ) return;
+            SelectNodes(nodeInstances);
+            if ( redraw ) Kernel.RedrawViews();
+        }
     }
     internal static class CollectionExtensions {
 
@@ -152,6 +181,13 @@ namespace Micra.Core {
         public static IEnumerable<T> Where<T>(this IEnumerable<T> data, Func<T, bool> predicate) {
             foreach ( T value in data ) {
                 if ( predicate(value) ) yield return value;
+            }
+        }
+        //test test test
+        public static IEnumerable<int> IEnumerable(this IBitArray ba) { //testing
+            if ( ba.IsEmpty ) yield break;
+            for ( int i = 0; i < ba.Size; i++ ) {
+                yield return ba[i];
             }
         }
     }

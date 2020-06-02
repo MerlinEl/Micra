@@ -11,7 +11,7 @@ using System.Linq;
 using System.Reflection;
 
 namespace Micra.Core {
-
+    //https://github.com/mathieumg/inf4715/blob/master/Exporter/maxsdk/include/maxapi.h
     public enum TaskModes : uint {
 
         TASK_MODE_CREATE=1,
@@ -22,6 +22,13 @@ namespace Micra.Core {
         TASK_MODE_UTILITY=6,
     }
 
+    public enum GeometryType {
+
+        VERTEX = 1,
+        EDGE =2,
+        FACE = 3,
+        ANY = 4
+    }
 
     /// <summary>
     /// Represents a time value during an animation. 
