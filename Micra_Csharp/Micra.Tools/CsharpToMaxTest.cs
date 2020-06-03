@@ -82,15 +82,10 @@ namespace Micra.Tools {
                     case 5: break;
                 }
 
-
             } else if ( selNodes.Count() >= 1 ) { //when multi object selection
 
                 Collections.SelectNodesWithSimillarVolume(selNodes.ToList());
             }
-
-            /*IINode obj = MxCollection.GetFirstSelectedNode(); //Autodesk.Max.Wrappers.INode
-            ISubClassList clist = GlobalInterface.Instance.ClassDirectory.Instance.GetClassList(obj.ObjectRef.Eval(0).Obj.SuperClassID);
-            */
         }
 
         private void Button9_Click(object sender, EventArgs e) {
@@ -109,7 +104,7 @@ namespace Micra.Tools {
             Kernel.WriteLine(( sender as Button ).Text);
             var teapot = Primitives.Teapot.Create();
             teapot["radius"] = 20.0;
-            teapot.Node.Move(new Point3(20, 10, 5));
+            teapot._Node.Move(new Point3(20, 10, 5));
         }
 
         private void Button7_Click(object sender, EventArgs e) {
@@ -203,8 +198,44 @@ namespace Micra.Tools {
             Kernel.WriteLine(( sender as Button ).Text);
             Node node = Kernel.Scene.SelectedNodes().FirstOrDefault();
             Kernel.WriteLine("selected Node:{0} subObjectLevel:{1}", node.Name, Kernel._Interface.SubObjectLevel);
+
+            IObject io = node.GetObjectRef();
+            if ( ClassID.EditablePoly.Equals(io.ClassID) ) {
+
+                Kernel.WriteLine("Is Poly!");
+                //io
+                //node._Anim
+                //IMeshSelectData msd = Kernel._Global.getme
+            }
+            if ( ClassID.EditableMesh.Equals(io.ClassID) ) {
+
+                Kernel.WriteLine("Is Mesh!");
+                //IMeshSelectData msd = Kernel._Global.getme
+            }
+
             var fsel = node.Object.GetSelectedFaces();
             Kernel.WriteLine("selected Faces:{0}", fsel.Count);
+            fsel.ForEach(fi => Kernel.WriteLine("selected face:{0}", fi+1)); //max counting from 1 c# from 0
+
+
+            /*
+             Autodesk.Max.IAnimatable, it is easy to ask for the interface. 
+             GetMeshSelectDataInterface(anim) ((IMeshSelectData*)anim->GetInterface(I_MESHSELECTDATA)) 
+             A plug-in developer may use this macro as follows: Autodesk.Max.IIMeshSelectData; 
+             This return value will either be NULL or a pointer to a valid Autodesk.Max.IMesh Select Data interface.
+             * */
+
+
+            /*if ( obj->ClassID() == EPOLYOBJ_CLASS_ID ) {
+                IMeshSelectData* msd = GetMeshSelectDataInterface(obj);
+                if ( msd ) {
+                    GenericNamedSelSetList ss = msd->GetNamedFaceSelList();
+                    //ss.names
+                    //ss.sets
+                    //ss.ids
+                }
+            }*/
+
         }
 
         private void BtnGetSelEdges_Click(object sender, EventArgs e) {
@@ -228,7 +259,7 @@ namespace Micra.Tools {
             Node node = Kernel.Scene.SelectedNodes().FirstOrDefault();
             if ( node != null ) {
                 node.Object.HideGeometry(ChkSelected.Checked);
-                Kernel._Interface.InvalidateObCache(node._Node);
+                Kernel._Interface.InvalidateObCache(node._IINode);
                 Kernel.RedrawViews();
             }
         }
@@ -238,7 +269,7 @@ namespace Micra.Tools {
             Node node = Kernel.Scene.SelectedNodes().FirstOrDefault();
             if ( node != null ) {
                 node.Object.UnhideGeometry();
-                Kernel._Interface.InvalidateObCache(node._Node);
+                Kernel._Interface.InvalidateObCache(node._IINode);
                 Kernel.RedrawViews();
             }
         }

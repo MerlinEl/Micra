@@ -1,4 +1,7 @@
-﻿Quite simple, right? A bunch of points and some calls to draw lines.
+﻿//https://getcoreinterface.typepad.com/blog/c/
+
+
+Quite simple, right? A bunch of points and some calls to draw lines.
 Well ... easy things get complicated very fast when you draw something custom and parametric.
 Now we can start by creating a method responsible for drawing a double arrowhead segment with a label in the center of the segment:
 

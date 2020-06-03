@@ -47,7 +47,7 @@ namespace Micra.Core {
             Node n = Node.Create(o);
             if ( n == null )
                 throw new Exception("Failed to create object node");
-            o.Node = n;
+            o._Node = n;
             Kernel.RedrawViews();
             return o;
         }

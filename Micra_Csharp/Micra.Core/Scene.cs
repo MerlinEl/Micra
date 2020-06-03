@@ -41,17 +41,18 @@ namespace Micra.Core {
         }
 
         public IEnumerable<Node> NodesBySuperClass(SuperClassID sid) {
-            return from n in NodeTree where n.Object != null & n.Object.SuperClassID == sid select n;
+            //return from n in NodeTree where n.Object != null & n.Object.SuperClassID == sid select n;
+            return NodeTree.Where<Node>(n => n.Object != null && n.Object.SuperClassID == sid);//.Select(n => n);
         }
 
         public IEnumerable<Node> AllNodes() {
-
-            return from n in NodeTree where n.Object != null select n;
+            //return from n in NodeTree where n.Object != null select n;
+            return NodeTree.Where<Node>(n => n.Object != null);//.Select(n => n);
         }
 
         public IEnumerable<Node> SelectedNodes() { // OK
-
-            return from n in NodeTree where n.Object != null & n._Node.Selected select n;
+            //return from n in NodeTree where n.Object != null & n._Node.Selected select n;
+            return NodeTree.Where<Node>(n => n.Object != null && n._IINode.Selected);//.Select(n => n);
         }
 
         public IEnumerable<Node> GeometryNodes { get { return NodesBySuperClass(SuperClassID.GeometricObject); } }

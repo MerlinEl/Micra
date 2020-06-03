@@ -85,7 +85,7 @@ namespace Micra.Core {
         /// <summary>
         /// This is a handle to the low-level node managed by Autodesk.Max
         /// </summary>
-        public IINode _Node { get { return _Anim as IINode; } }
+        public IINode _IINode { get { return _Anim as IINode; } }
 
         /// <summary>
         /// Creates a node attached to a particular scene object. 
@@ -106,42 +106,42 @@ namespace Micra.Core {
             return CreateWrapper<Node>(Kernel._Interface.CreateObjectNode(o._Object, name));
         }
 
-        public void FlagForeground(TimeValue t, bool notify) { _Node.FlagForeground(t, notify); }
+        public void FlagForeground(TimeValue t, bool notify) { _IINode.FlagForeground(t, notify); }
         public void FlagForeground(TimeValue t) { FlagForeground(t, false); }
         public void FlagForeground() { FlagForeground(Kernel.Now); }
 
         public ulong NodeHandle {
-            get { return (ulong)_Node.NodeLong; }
+            get { return (ulong)_IINode.NodeLong; }
         }
 
         public String Name {
-            get { return _Node.Name; }
-            set { _Node.Name = value; }
+            get { return _IINode.Name; }
+            set { _IINode.Name = value; }
         }
 
         public String UserPropertyBuffer {
-            get { string tmp = ""; _Node.GetUserPropBuffer(ref tmp); return tmp; }
-            set { string tmp = value; _Node.SetUserPropBuffer(tmp); }
+            get { string tmp = ""; _IINode.GetUserPropBuffer(ref tmp); return tmp; }
+            set { string tmp = value; _IINode.SetUserPropBuffer(tmp); }
         }
 
         public NodeUserData UserData {
-            get { return new NodeUserData(_Node); }
+            get { return new NodeUserData(_IINode); }
         }
 
         public bool Selected {
-            get { return _Node.Selected; }
-            set { if ( value ) Kernel._Interface.SelectNode(_Node, false); else Kernel._Interface.DeSelectNode(_Node); }
+            get { return _IINode.Selected; }
+            set { if ( value ) Kernel._Interface.SelectNode(_IINode, false); else Kernel._Interface.DeSelectNode(_IINode); }
         }
 
         public void SelectOnly() {
-            Kernel._Interface.SelectNode(_Node, true);
+            Kernel._Interface.SelectNode(_IINode, true);
         }
 
         //! \name Parent and Child Node Relationships
         //@{
         #region parent / child node relationships
         public bool IsRoot {
-            get { return _Node.IsRootNode; }
+            get { return _IINode.IsRootNode; }
         }
 
         public bool IsTopParent {
@@ -153,20 +153,20 @@ namespace Micra.Core {
         }
 
         public Node Parent {
-            get { return CreateWrapper<Node>(_Node.ParentNode); }
+            get { return CreateWrapper<Node>(_IINode.ParentNode); }
         }
 
         public IEnumerable<Node> Children {
             get {
-                for ( int i = 0; i < _Node.NumberOfChildren; ++i )
-                    if ( _Node.GetChildNode(i) != null )
-                        yield return new Node(_Node.GetChildNode(i));
+                for ( int i = 0; i < _IINode.NumberOfChildren; ++i )
+                    if ( _IINode.GetChildNode(i) != null )
+                        yield return new Node(_IINode.GetChildNode(i));
             }
         }
 
         public Node GetChild(int i) {
-            if ( _Node.GetChildNode(i) != null )
-                return new Node(_Node.GetChildNode(i));
+            if ( _IINode.GetChildNode(i) != null )
+                return new Node(_IINode.GetChildNode(i));
             return null;
         }
 
@@ -175,7 +175,7 @@ namespace Micra.Core {
         }
 
         public void Attach(Node n, bool keepTM) {
-            _Node.AttachChild(n._Node, keepTM);
+            _IINode.AttachChild(n._IINode, keepTM);
         }
 
         public void Detach() {
@@ -187,7 +187,7 @@ namespace Micra.Core {
         }
 
         public void Detach(TimeValue t, bool keepTM) {
-            _Node.Detach(t, keepTM);
+            _IINode.Detach(t, keepTM);
         }
 
         public Node AddNewNode(SceneObject o, string name) {
@@ -198,7 +198,7 @@ namespace Micra.Core {
 
         public Node AddNewNode(SceneObject o) {
             Node n = new Node(Kernel._Interface.CreateObjectNode(o._Object));
-            _Node.AttachChild(n._Node, true);
+            _IINode.AttachChild(n._IINode, true);
             return n;
         }
 
@@ -224,9 +224,9 @@ namespace Micra.Core {
 
         public IEnumerable<Node> Nodes {
             get {
-                for ( int i = 0; i < _Node.NumberOfChildren; ++i )
-                    if ( _Node.GetChildNode(i) != null )
-                        yield return new Node(_Node.GetChildNode(i));
+                for ( int i = 0; i < _IINode.NumberOfChildren; ++i )
+                    if ( _IINode.GetChildNode(i) != null )
+                        yield return new Node(_IINode.GetChildNode(i));
             }
         }
         #endregion 
@@ -237,17 +237,17 @@ namespace Micra.Core {
         public void Delete(TimeValue t) => Delete(t, true);
 
         public void Delete(TimeValue t, bool keepChildrenPositions) {
-            _Node.Delete(t, keepChildrenPositions);
+            _IINode.Delete(t, keepChildrenPositions);
         }
 
         public bool Visible {
-            get { return !_Node.IsHidden(0, false); }
-            set { _Node.Hide(!value); }
+            get { return !_IINode.IsHidden(0, false); }
+            set { _IINode.Hide(!value); }
         }
 
         public bool Frozen {
-            get { return _Node.IsFrozen; }
-            set { _Node.IsFrozen = value; }
+            get { return _IINode.IsFrozen; }
+            set { _IINode.IsFrozen = value; }
         }
 
         public string ClassOf() => ClassID.GetClassName(Object.ClassID);
@@ -256,6 +256,8 @@ namespace Micra.Core {
         public bool IsClassOf(ClassID id) => Object.ClassID.a == id.a && Object.ClassID.b == id.b;
 
         public bool IsSuperClassOf(SuperClassID id) => Object.SuperClassID == id;
+
+
         //Todo >
         //-baseObject == allow modifiers
         //-modPolyOrMesh == add posibility operate with editable_poy and editable_mesh modifiers
@@ -268,29 +270,37 @@ namespace Micra.Core {
         public void Move(Point3 pt) => Move(pt, Kernel.Now);
 
         public void Move(Point3 pt, TimeValue t) {
-            _Node.Move(t, Matrix3.Identity.Translate(pt)._IMatrix3, pt._IPoint3, false, true, (int)PivotMode.None, false);
+            _IINode.Move(t, Matrix3.Identity.Translate(pt)._IMatrix3, pt._IPoint3, false, true, (int)PivotMode.None, false);
         }
 
         public SceneObject Object {
             get {
-                return CreateWrapper<SceneObject>(_Node.ObjectRef);
+                return CreateWrapper<SceneObject>(_IINode.ObjectRef);
             }
+        }
+
+        public IObject GetObjectRef() { //test only
+
+            /*IINode iinode = node._IINode;
+            IObjectState ios = iinode.ObjectRef.Eval(Kernel.Now);
+            IObject io = ios.Obj;*/
+            return _IINode.ObjectRef;
         }
 
         //! \name Modifier Functions
         //@{
         #region modifier functions
         public void AddModifier(Modifier m) {
-            Kernel._Interface.AddModifier(_Node, m._Modifier, 0);
+            Kernel._Interface.AddModifier(_IINode, m._Modifier, 0);
         }
 
         public void DeleteModifier(Modifier m) {
-            Kernel._Interface.DeleteModifier(_Node, m._Modifier);
+            Kernel._Interface.DeleteModifier(_IINode, m._Modifier);
         }
 
         public IEnumerable<Modifier> Modifiers {
             get {
-                IIDerivedObject ido = _Node.ObjectRef as IIDerivedObject;
+                IIDerivedObject ido = _IINode.ObjectRef as IIDerivedObject;
                 if ( ido == null )
                     yield break;
 
@@ -303,25 +313,25 @@ namespace Micra.Core {
 
         public bool BoxMode {
             get {
-                return _Node.BoxMode;
+                return _IINode.BoxMode;
             }
             set {
-                _Node.BoxMode = value;
+                _IINode.BoxMode = value;
             }
         }
 
         public bool AllEdges {
             get {
-                return _Node.AllEdges;
+                return _IINode.AllEdges;
             }
             set {
-                _Node.AllEdges = value;
+                _IINode.AllEdges = value;
             }
         }
 
         public NodeVisibility Visibility {
             get {
-                return new NodeVisibility(_Node);
+                return new NodeVisibility(_IINode);
             }
         }
         /*public SceneObject GetSceneObject() => GetSceneObject(Kernel.Now, true);
@@ -355,12 +365,12 @@ namespace Micra.Core {
         }
 
         public bool IsBone {
-            get { return _Node.BoneNodeOnOff; }
+            get { return _IINode.BoneNodeOnOff; }
         }
 
         public Color Wirecolor {
-            get { return new Color(_Node.WireColor); }
-            set { _Node.WireColor = value.SystemColor; }
+            get { return new Color(_IINode.WireColor); }
+            set { _IINode.WireColor = value.SystemColor; }
         }
 
         public Node CreateInstance() {
@@ -391,12 +401,12 @@ namespace Micra.Core {
         }
 
         public void SetNodeTransform(Matrix3 m, TimeValue t) {
-            _Node.SetNodeTM(t, m._IMatrix3);
+            _IINode.SetNodeTM(t, m._IMatrix3);
         }
 
         public Matrix3 GetNodeTransform(TimeValue t, out Interval validity) {
             IInterval v = Kernel._Global.Interval.Create();
-            Matrix3 r = new Matrix3(_Node.GetNodeTM(t, v));
+            Matrix3 r = new Matrix3(_IINode.GetNodeTM(t, v));
             validity = new Interval(v);
             return r;
         }
@@ -408,7 +418,7 @@ namespace Micra.Core {
 
         public Matrix3 GetObjectTransform(TimeValue t, out Interval validity) {
             IInterval v = Kernel._Global.Interval.Create();
-            Matrix3 r = new Matrix3(_Node.GetObjectTM(t, v));
+            Matrix3 r = new Matrix3(_IINode.GetObjectTM(t, v));
             validity = new Interval(v);
             return r;
         }
@@ -425,8 +435,8 @@ namespace Micra.Core {
             }
          */
         public Material Material {
-            get { return CreateWrapper<Material>(_Node.Mtl); }
-            set { _Node.Mtl = value._Mtl; }
+            get { return CreateWrapper<Material>(_IINode.Mtl); }
+            set { _IINode.Mtl = value._Mtl; }
         }
         //@}
 

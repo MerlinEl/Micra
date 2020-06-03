@@ -198,6 +198,12 @@ namespace Micra.Core {
             return "ClassID(" + a.ToString() + ", " + b.ToString() + ")";
         }
 
+        public bool Equals(IClass_ID icid) {
+
+            //Kernel.WriteLine("Equal test PartA:{0} PartB:{1} a:{2} b:{3}", icid.PartA, icid.PartB, a, b);
+            return icid.PartA == a && icid.PartB == b;
+        }
+
         public override bool Equals(object obj) {
             if ( !( obj is ClassID ) )
                 return false;

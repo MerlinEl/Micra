@@ -90,7 +90,7 @@ namespace Micra.Core {
         public static List<Node> GetNodeInsatances(Node node) {
 
             IINodeTab instanceAndRef = Kernel._Global.NodeTab.Create();
-            Kernel._InstanceMgr.GetInstances(node._Node, instanceAndRef);
+            Kernel._InstanceMgr.GetInstances(node._IINode, instanceAndRef);
             return instanceAndRef.ToIEnumerable<IINode>()
                 .Select(n => new Node(n))
                 .ToList();
@@ -120,26 +120,27 @@ namespace Micra.Core {
         }
 
         public static void SelectNodesWithSimillarVolume(List<Node> srcNodes) {
-
+            
+            Kernel.WriteLine("SelectNodesWithSimillarVolume > Sel nodes:{0}", srcNodes.Count());
             //collect selected geometry objects volumes
             List<double> volumes = srcNodes
                 .Where(n =>
                     n.IsSuperClassOf(SuperClassID.GeometricObject) && //get all geometry objects
                     !n.IsClassOf(ClassID.TargetObject) //exclude any light Target
                 )
-                .Select(n => n.Object.GetObjectVolume()).Distinct()
+                .Select(n => n.Object.GetVolume()).Distinct()
                 .ToList();
 
-            //Kernel.WriteLine("\tVolumes types:{0}", volumes.Count());
+            Kernel.WriteLine("\tVolumes types:{0}", volumes.Count());
             IEnumerable<Node> allNodes = Kernel.Scene.AllNodes();
-            //Kernel.WriteLine("\tAll nodes:{0}", allNodes.Count());
+            Kernel.WriteLine("\tAll nodes:{0}", allNodes.Count());
 
             //get geometry objects with similar volume
             List<Node> matchVolumeNodes = allNodes
                 .Where(n =>
                     n.IsSuperClassOf(SuperClassID.GeometricObject) && //get all geometry objects
                     !n.IsClassOf(ClassID.TargetObject) && //exclude any light Target
-                    volumes.IndexOf(n.Object.GetObjectVolume()) != -1
+                    volumes.IndexOf(n.Object.GetVolume()) != -1
                  )
                 .Select(n => n)
                 .ToList();
@@ -201,7 +202,9 @@ namespace Micra.Core {
     }
 }
 
-
+/*IINode obj = MxCollection.GetFirstSelectedNode(); //Autodesk.Max.Wrappers.INode
+ISubClassList clist = GlobalInterface.Instance.ClassDirectory.Instance.GetClassList(obj.ObjectRef.Eval(0).Obj.SuperClassID);
+*/
 //ITriObject triObj = node.ObjectRef.FindBaseObject() as ITriObject;
 //IMesh mesh = triObj.Mesh;
 //IntPtr meshPtr = mesh.NativePointer; //same as my C++ pointer - so it's correct

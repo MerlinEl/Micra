@@ -61,12 +61,12 @@ namespace Micra.Core {
         /// When an object is created, it should be manually associated with a single node.
         /// This is only for convenience. An object is not guaranteed to have a node.
         /// </summary>
-        public Node Node { get; set; }
+        public Node _Node { get; set; }
         public Mesh Mesh => GetMesh(Kernel.Now);
 
         public void AddModifier(Modifier m) {
-            if ( Node != null )
-                Node.AddModifier(m);
+            if ( _Node != null )
+                _Node.AddModifier(m);
         }
 
         public SceneObject Base {
@@ -109,9 +109,10 @@ namespace Micra.Core {
             return r;
         }
 
-        public double GetObjectVolume() {
+        public double GetVolume() {
 
-            Mesh m = Node.GetMesh();
+            Mesh m = _Node.GetMesh();
+            Kernel.WriteLine("GetVolume > Mesh:{0}", m);
             double objVolume = 0.0;
             m.faces.ForEach(f => objVolume += GeoOP.GetFaceArea(m, f));
             return ( objVolume / m.faces.Length );
@@ -136,6 +137,8 @@ namespace Micra.Core {
                 Kernel.WriteLine("selected:{0} face:{1}", isSelected, i);
                 if ( selected && isSelected ) {
                     im.Faces[i].Hide();
+                    //im.Faces[i].
+                    //im.FaceSel[i] = 0;
                 } else if ( !selected && !isSelected ) im.Faces[i].Hide();
             }
             im.InvalidateTopologyCache();
@@ -171,15 +174,12 @@ namespace Micra.Core {
             //if not faces are selected, return empty list
             if ( !im.FaceSel.AnyBitSet.Equals(true) ) return new List<int>() { };
 
-            int faceCount = im.FaceSel.Size;
-            Kernel.WriteLine("FaceSel.Size:{0}", faceCount);
+            List<int> fsel = new List<int>() { };
             for ( int i = 0; i < im.FaceSel.Size; i++ ) {
-
-                bool isSelected = im.FaceSel[i] == 1;
-                Kernel.WriteLine("selected:{0} face:{1}", isSelected, i);
-                if ( !isSelected ) im.Faces[i].Hide();
+                Kernel.WriteLine("selected:{0} bit:{1} index:{2}", im.FaceSel[i] == 1, im.FaceSel[i], i);
+                if ( im.FaceSel[i] == 1 ) fsel.Add(i);
             }
-            im.InvalidateGeomCache();
+            //im.InvalidateGeomCache();
             //im.Init();
 
             /*List<string> fsel = im.FaceSel.IEnumerable()
@@ -187,10 +187,10 @@ namespace Micra.Core {
                 .Select((item, index) => String.Format("selected:{0} index:{1}", item == 1, index)) //get IFace
                 .ToList();
 
-            fsel.ForEach(ei => Kernel.WriteLine("selected face:{0}", ei));*/
+            */
 
-            // return fsel;
-            throw new NotImplementedException();
+            // 
+            return fsel;
         }
         public List<int> GetSelectedEdges() {
 

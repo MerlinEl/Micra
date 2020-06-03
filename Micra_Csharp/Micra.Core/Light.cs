@@ -244,7 +244,7 @@ namespace Micra.Core {
 
         public void UpdateTargetDistance(TimeValue t, Node inode)
         {
-            _Light.UpdateTargDistance(t, inode._Node);
+            _Light.UpdateTargDistance(t, inode._IINode);
         }
 
         public bool UseAttenuation
