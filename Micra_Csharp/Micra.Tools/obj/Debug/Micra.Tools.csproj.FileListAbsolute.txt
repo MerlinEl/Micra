@@ -21,7 +21,6 @@ D:\ReneBaca\Aprog\Micra\Micra_Csharp\Micra.Tools\bin\Debug\Orien.Tools.pdb
 D:\ReneBaca\Aprog\Micra\Micra_Csharp\Micra.Tools\bin\Debug\nunit.framework.xml
 D:\ReneBaca\Aprog\Micra\Micra_Csharp\Micra.Tools\bin\Debug\UiViewModels.xml
 D:\ReneBaca\Aprog\Micra\Micra_Csharp\Micra.Tools\bin\Debug\CoreManagedUiControls.xml
-D:\ReneBaca\Aprog\Micra\Micra_Csharp\Micra.Tools\bin\Debug\ExplorerFramework.xml
 D:\ReneBaca\Aprog\Micra\Micra_Csharp\Micra.Tools\bin\Debug\de-DE\SceneExplorer.resources.dll
 D:\ReneBaca\Aprog\Micra\Micra_Csharp\Micra.Tools\bin\Debug\fr-FR\SceneExplorer.resources.dll
 D:\ReneBaca\Aprog\Micra\Micra_Csharp\Micra.Tools\bin\Debug\ja-JP\SceneExplorer.resources.dll
@@ -132,3 +131,4 @@ D:\ReneBaca\Aprog\Micra\Micra_Csharp\Micra.Tools\bin\Debug\ja-JP\MaxExplorerBind
 D:\ReneBaca\Aprog\Micra\Micra_Csharp\Micra.Tools\bin\Debug\ko-KR\MaxExplorerBindings.resources.dll
 D:\ReneBaca\Aprog\Micra\Micra_Csharp\Micra.Tools\bin\Debug\pt-BR\MaxExplorerBindings.resources.dll
 D:\ReneBaca\Aprog\Micra\Micra_Csharp\Micra.Tools\bin\Debug\zh-CN\MaxExplorerBindings.resources.dll
+D:\ReneBaca\Aprog\Micra\Micra_Csharp\Micra.Tools\bin\Debug\ExplorerFramework.xml

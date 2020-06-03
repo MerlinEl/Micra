@@ -127,7 +127,7 @@ namespace Micra.Core {
                     n.IsSuperClassOf(SuperClassID.GeometricObject) && //get all geometry objects
                     !n.IsClassOf(ClassID.TargetObject) //exclude any light Target
                 )
-                .Select(n => n.GetMesh().GetVolume()).Distinct()
+                .Select(n => n.Object.GetObjectVolume()).Distinct()
                 .ToList();
 
             //Kernel.WriteLine("\tVolumes types:{0}", volumes.Count());
@@ -139,7 +139,7 @@ namespace Micra.Core {
                 .Where(n =>
                     n.IsSuperClassOf(SuperClassID.GeometricObject) && //get all geometry objects
                     !n.IsClassOf(ClassID.TargetObject) && //exclude any light Target
-                    volumes.IndexOf(n.GetMesh().GetVolume()) != -1
+                    volumes.IndexOf(n.Object.GetObjectVolume()) != -1
                  )
                 .Select(n => n)
                 .ToList();
@@ -152,6 +152,11 @@ namespace Micra.Core {
             Kernel._TheHold.Accept("Select Simillar");
             Kernel._TheHold.End();
         }
+
+        /*private bool IsMatchVolume(double val, List<double> valList) {
+
+            return valList.IndexOf(val) != -1;
+        }*/
 
         public static void SelectInstances(Node node, bool redraw = false) {
             var nodeInstances = GetNodeInsatances(node);
@@ -169,10 +174,13 @@ namespace Micra.Core {
                 yield return itab[i];
             }
         }
+        // possibly call this "Realize"
+        public static void ForEach<T>(this IEnumerable<T> collection) {
+            foreach ( T item in collection ) { } // do nothing
+        }
         //items.ToList().ForEach(i => i.DoStuff());
         public static void ForEach<T>(this IEnumerable<T> collection, Action<T> action) {
-            foreach ( T item in collection )
-                action(item);
+            foreach ( T item in collection ) action(item);
         }
         //int[] data = {1,2,3,4,5};
         //var odd = data.Where(i => i % 2 != 0);

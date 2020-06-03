@@ -59,6 +59,7 @@
     <Compile Include="FileManager.cs" />
     <Compile Include="GenericAction.cs" />
     <Compile Include="Geometry.cs" />
+    <Compile Include="GeoOP.cs" />
     <Compile Include="GlobalMethods.cs" />
     <Compile Include="Kernel.cs" />
     <Compile Include="Light.cs" />

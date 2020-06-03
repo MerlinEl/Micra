@@ -141,6 +141,20 @@ namespace Micra.Core {
                 .Select(f => f.Name)
                 .ToArray();
         }
+        /// <summary>
+        /// Return SuperClassID Name
+        /// </summary>
+        /// <param name="superClassID"></param>
+        /// <returns></returns>
+        public static string GetName(SuperClassID superClassID) {
+
+            Type type = typeof(SuperClassID);
+            return type.GetFields(BindingFlags.Static | BindingFlags.Public)
+                    .Where(f => f.FieldType == type && f.GetValue(null).ToString() == superClassID.ToString())
+                    .Select(f => f.Name)
+                    .FirstOrDefault();
+            //return Enum.GetName(typeof(SuperClassID), superClassID.id);
+        }
     }
 
     /// <summary>

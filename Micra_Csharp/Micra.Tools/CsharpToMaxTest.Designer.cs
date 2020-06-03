@@ -31,6 +31,12 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.BtnSelSimElements = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.ChkSelected = new System.Windows.Forms.CheckBox();
+            this.BtnUnhideGeometry = new System.Windows.Forms.Button();
+            this.BtnHideGeometry = new System.Windows.Forms.Button();
+            this.BtnGetSelVetts = new System.Windows.Forms.Button();
+            this.BtnGetSelEdges = new System.Windows.Forms.Button();
+            this.BtnGetSelFaces = new System.Windows.Forms.Button();
             this.TbxMaxFilePath = new System.Windows.Forms.TextBox();
             this.BtnOpenMaxFile = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
@@ -52,12 +58,8 @@
             this.button13 = new System.Windows.Forms.Button();
             this.button8 = new System.Windows.Forms.Button();
             this.button9 = new System.Windows.Forms.Button();
-            this.BtnGetSelFaces = new System.Windows.Forms.Button();
-            this.BtnGetSelEdges = new System.Windows.Forms.Button();
-            this.BtnGetSelVetts = new System.Windows.Forms.Button();
-            this.BtnHideGeometry = new System.Windows.Forms.Button();
-            this.BtnUnhideGeometry = new System.Windows.Forms.Button();
-            this.ChkSelected = new System.Windows.Forms.CheckBox();
+            this.CbxSceneNodeTypes = new System.Windows.Forms.ComboBox();
+            this.BtnGetSceneObjects = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -80,7 +82,7 @@
             this.button2.TabIndex = 1;
             this.button2.Text = "Render Scene";
             this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.button2.Click += new System.EventHandler(this.Button2_Click);
             // 
             // button3
             // 
@@ -90,14 +92,14 @@
             this.button3.TabIndex = 2;
             this.button3.Text = "Create 3 Boxes";
             this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
+            this.button3.Click += new System.EventHandler(this.Button3_Click);
             // 
             // textBox1
             // 
             this.textBox1.Location = new System.Drawing.Point(6, 48);
             this.textBox1.Multiline = true;
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(650, 112);
+            this.textBox1.Size = new System.Drawing.Size(973, 112);
             this.textBox1.TabIndex = 3;
             this.textBox1.Text = "...";
             // 
@@ -109,7 +111,7 @@
             this.button5.TabIndex = 5;
             this.button5.Text = "Render With Rerurn Result";
             this.button5.UseVisualStyleBackColor = true;
-            this.button5.Click += new System.EventHandler(this.button5_Click);
+            this.button5.Click += new System.EventHandler(this.Button5_Click);
             // 
             // groupBox1
             // 
@@ -119,7 +121,7 @@
             this.groupBox1.Controls.Add(this.textBox1);
             this.groupBox1.Location = new System.Drawing.Point(12, 357);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(662, 166);
+            this.groupBox1.Size = new System.Drawing.Size(985, 166);
             this.groupBox1.TabIndex = 7;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Execute Max Script";
@@ -136,6 +138,8 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.BtnGetSceneObjects);
+            this.groupBox2.Controls.Add(this.CbxSceneNodeTypes);
             this.groupBox2.Controls.Add(this.ChkSelected);
             this.groupBox2.Controls.Add(this.BtnUnhideGeometry);
             this.groupBox2.Controls.Add(this.BtnHideGeometry);
@@ -167,10 +171,72 @@
             this.groupBox2.Controls.Add(this.button9);
             this.groupBox2.Location = new System.Drawing.Point(18, 12);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(650, 339);
+            this.groupBox2.Size = new System.Drawing.Size(979, 339);
             this.groupBox2.TabIndex = 12;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "MaxSharp";
+            // 
+            // ChkSelected
+            // 
+            this.ChkSelected.AutoSize = true;
+            this.ChkSelected.Checked = true;
+            this.ChkSelected.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.ChkSelected.Location = new System.Drawing.Point(542, 195);
+            this.ChkSelected.Name = "ChkSelected";
+            this.ChkSelected.Size = new System.Drawing.Size(66, 17);
+            this.ChkSelected.TabIndex = 34;
+            this.ChkSelected.Text = "selected";
+            this.ChkSelected.UseVisualStyleBackColor = true;
+            // 
+            // BtnUnhideGeometry
+            // 
+            this.BtnUnhideGeometry.Location = new System.Drawing.Point(423, 162);
+            this.BtnUnhideGeometry.Name = "BtnUnhideGeometry";
+            this.BtnUnhideGeometry.Size = new System.Drawing.Size(111, 23);
+            this.BtnUnhideGeometry.TabIndex = 33;
+            this.BtnUnhideGeometry.Text = "Unhide Geometry";
+            this.BtnUnhideGeometry.UseVisualStyleBackColor = true;
+            this.BtnUnhideGeometry.Click += new System.EventHandler(this.BtnUnhideGeometry_Click);
+            // 
+            // BtnHideGeometry
+            // 
+            this.BtnHideGeometry.Location = new System.Drawing.Point(423, 191);
+            this.BtnHideGeometry.Name = "BtnHideGeometry";
+            this.BtnHideGeometry.Size = new System.Drawing.Size(111, 23);
+            this.BtnHideGeometry.TabIndex = 32;
+            this.BtnHideGeometry.Text = "Hide Geometry";
+            this.BtnHideGeometry.UseVisualStyleBackColor = true;
+            this.BtnHideGeometry.Click += new System.EventHandler(this.BtnHideUnselFaces_Click);
+            // 
+            // BtnGetSelVetts
+            // 
+            this.BtnGetSelVetts.Location = new System.Drawing.Point(208, 191);
+            this.BtnGetSelVetts.Name = "BtnGetSelVetts";
+            this.BtnGetSelVetts.Size = new System.Drawing.Size(122, 23);
+            this.BtnGetSelVetts.TabIndex = 31;
+            this.BtnGetSelVetts.Text = "Get Selected Verts";
+            this.BtnGetSelVetts.UseVisualStyleBackColor = true;
+            this.BtnGetSelVetts.Click += new System.EventHandler(this.BtnGetSelVetts_Click);
+            // 
+            // BtnGetSelEdges
+            // 
+            this.BtnGetSelEdges.Location = new System.Drawing.Point(208, 162);
+            this.BtnGetSelEdges.Name = "BtnGetSelEdges";
+            this.BtnGetSelEdges.Size = new System.Drawing.Size(122, 23);
+            this.BtnGetSelEdges.TabIndex = 30;
+            this.BtnGetSelEdges.Text = "Get Selected Edges";
+            this.BtnGetSelEdges.UseVisualStyleBackColor = true;
+            this.BtnGetSelEdges.Click += new System.EventHandler(this.BtnGetSelEdges_Click);
+            // 
+            // BtnGetSelFaces
+            // 
+            this.BtnGetSelFaces.Location = new System.Drawing.Point(208, 133);
+            this.BtnGetSelFaces.Name = "BtnGetSelFaces";
+            this.BtnGetSelFaces.Size = new System.Drawing.Size(122, 23);
+            this.BtnGetSelFaces.TabIndex = 29;
+            this.BtnGetSelFaces.Text = "Get Selected Faces";
+            this.BtnGetSelFaces.UseVisualStyleBackColor = true;
+            this.BtnGetSelFaces.Click += new System.EventHandler(this.BtnGetSelFaces_Click);
             // 
             // TbxMaxFilePath
             // 
@@ -198,7 +264,7 @@
             this.button4.TabIndex = 26;
             this.button4.Text = "Seselect Instances";
             this.button4.UseVisualStyleBackColor = true;
-            this.button4.Click += new System.EventHandler(this.button4_Click_1);
+            this.button4.Click += new System.EventHandler(this.Button4_Click_1);
             // 
             // RbtSuperClassOf
             // 
@@ -230,7 +296,7 @@
             this.button16.TabIndex = 20;
             this.button16.Text = "Show Selection Parameters";
             this.button16.UseVisualStyleBackColor = true;
-            this.button16.Click += new System.EventHandler(this.button16_Click);
+            this.button16.Click += new System.EventHandler(this.Button16_Click);
             // 
             // ChkClearSel
             // 
@@ -270,7 +336,7 @@
             this.button15.TabIndex = 18;
             this.button15.Text = "Clear Listener";
             this.button15.UseVisualStyleBackColor = true;
-            this.button15.Click += new System.EventHandler(this.button15_Click);
+            this.button15.Click += new System.EventHandler(this.Button15_Click);
             // 
             // button14
             // 
@@ -280,7 +346,7 @@
             this.button14.TabIndex = 17;
             this.button14.Text = "Show Slection Class";
             this.button14.UseVisualStyleBackColor = true;
-            this.button14.Click += new System.EventHandler(this.button14_Click);
+            this.button14.Click += new System.EventHandler(this.Button14_Click);
             // 
             // ChkSelHidden
             // 
@@ -300,7 +366,7 @@
             this.button12.TabIndex = 11;
             this.button12.Text = "Deselect All";
             this.button12.UseVisualStyleBackColor = true;
-            this.button12.Click += new System.EventHandler(this.button12_Click);
+            this.button12.Click += new System.EventHandler(this.Button12_Click);
             // 
             // button11
             // 
@@ -310,7 +376,7 @@
             this.button11.TabIndex = 10;
             this.button11.Text = "Select All";
             this.button11.UseVisualStyleBackColor = true;
-            this.button11.Click += new System.EventHandler(this.button11_Click);
+            this.button11.Click += new System.EventHandler(this.Button11_Click);
             // 
             // button10
             // 
@@ -320,7 +386,7 @@
             this.button10.TabIndex = 9;
             this.button10.Text = "Kernel Print Test";
             this.button10.UseVisualStyleBackColor = true;
-            this.button10.Click += new System.EventHandler(this.button10_Click);
+            this.button10.Click += new System.EventHandler(this.Button10_Click);
             // 
             // button6
             // 
@@ -330,7 +396,7 @@
             this.button6.TabIndex = 8;
             this.button6.Text = "Plugin List";
             this.button6.UseVisualStyleBackColor = true;
-            this.button6.Click += new System.EventHandler(this.button6_Click);
+            this.button6.Click += new System.EventHandler(this.Button6_Click);
             // 
             // CbxClassOf
             // 
@@ -348,7 +414,7 @@
             this.button7.TabIndex = 7;
             this.button7.Text = "Bent Cylinder";
             this.button7.UseVisualStyleBackColor = true;
-            this.button7.Click += new System.EventHandler(this.button7_Click);
+            this.button7.Click += new System.EventHandler(this.Button7_Click);
             // 
             // button13
             // 
@@ -358,7 +424,7 @@
             this.button13.TabIndex = 12;
             this.button13.Text = "Select All Of Type";
             this.button13.UseVisualStyleBackColor = true;
-            this.button13.Click += new System.EventHandler(this.button13_Click);
+            this.button13.Click += new System.EventHandler(this.Button13_Click);
             // 
             // button8
             // 
@@ -368,7 +434,7 @@
             this.button8.TabIndex = 6;
             this.button8.Text = "Create Teapot";
             this.button8.UseVisualStyleBackColor = true;
-            this.button8.Click += new System.EventHandler(this.button8_Click);
+            this.button8.Click += new System.EventHandler(this.Button8_Click);
             // 
             // button9
             // 
@@ -378,75 +444,38 @@
             this.button9.TabIndex = 5;
             this.button9.Text = "All Scene Nodes";
             this.button9.UseVisualStyleBackColor = true;
-            this.button9.Click += new System.EventHandler(this.button9_Click);
+            this.button9.Click += new System.EventHandler(this.Button9_Click);
             // 
-            // BtnGetSelFaces
+            // CbxSceneNodeTypes
             // 
-            this.BtnGetSelFaces.Location = new System.Drawing.Point(208, 133);
-            this.BtnGetSelFaces.Name = "BtnGetSelFaces";
-            this.BtnGetSelFaces.Size = new System.Drawing.Size(122, 23);
-            this.BtnGetSelFaces.TabIndex = 29;
-            this.BtnGetSelFaces.Text = "Get Selected Faces";
-            this.BtnGetSelFaces.UseVisualStyleBackColor = true;
-            this.BtnGetSelFaces.Click += new System.EventHandler(this.BtnGetSelFaces_Click);
+            this.CbxSceneNodeTypes.FormattingEnabled = true;
+            this.CbxSceneNodeTypes.Items.AddRange(new object[] {
+            "All",
+            "GeometryNodes",
+            "LightNodes",
+            "CameraNodes",
+            "HelperNodes",
+            "ShapeNodes"});
+            this.CbxSceneNodeTypes.Location = new System.Drawing.Point(828, 17);
+            this.CbxSceneNodeTypes.Name = "CbxSceneNodeTypes";
+            this.CbxSceneNodeTypes.Size = new System.Drawing.Size(145, 21);
+            this.CbxSceneNodeTypes.TabIndex = 35;
             // 
-            // BtnGetSelEdges
+            // BtnGetSceneObjects
             // 
-            this.BtnGetSelEdges.Location = new System.Drawing.Point(208, 162);
-            this.BtnGetSelEdges.Name = "BtnGetSelEdges";
-            this.BtnGetSelEdges.Size = new System.Drawing.Size(122, 23);
-            this.BtnGetSelEdges.TabIndex = 30;
-            this.BtnGetSelEdges.Text = "Get Selected Edges";
-            this.BtnGetSelEdges.UseVisualStyleBackColor = true;
-            this.BtnGetSelEdges.Click += new System.EventHandler(this.BtnGetSelEdges_Click);
-            // 
-            // BtnGetSelVetts
-            // 
-            this.BtnGetSelVetts.Location = new System.Drawing.Point(208, 191);
-            this.BtnGetSelVetts.Name = "BtnGetSelVetts";
-            this.BtnGetSelVetts.Size = new System.Drawing.Size(122, 23);
-            this.BtnGetSelVetts.TabIndex = 31;
-            this.BtnGetSelVetts.Text = "Get Selected Verts";
-            this.BtnGetSelVetts.UseVisualStyleBackColor = true;
-            this.BtnGetSelVetts.Click += new System.EventHandler(this.BtnGetSelVetts_Click);
-            // 
-            // BtnHideGeometry
-            // 
-            this.BtnHideGeometry.Location = new System.Drawing.Point(423, 191);
-            this.BtnHideGeometry.Name = "BtnHideGeometry";
-            this.BtnHideGeometry.Size = new System.Drawing.Size(111, 23);
-            this.BtnHideGeometry.TabIndex = 32;
-            this.BtnHideGeometry.Text = "Hide Geometry";
-            this.BtnHideGeometry.UseVisualStyleBackColor = true;
-            this.BtnHideGeometry.Click += new System.EventHandler(this.BtnHideUnselFaces_Click);
-            // 
-            // BtnUnhideGeometry
-            // 
-            this.BtnUnhideGeometry.Location = new System.Drawing.Point(423, 162);
-            this.BtnUnhideGeometry.Name = "BtnUnhideGeometry";
-            this.BtnUnhideGeometry.Size = new System.Drawing.Size(111, 23);
-            this.BtnUnhideGeometry.TabIndex = 33;
-            this.BtnUnhideGeometry.Text = "Unhide Geometry";
-            this.BtnUnhideGeometry.UseVisualStyleBackColor = true;
-            this.BtnUnhideGeometry.Click += new System.EventHandler(this.BtnUnhideGeometry_Click);
-            // 
-            // ChkSelected
-            // 
-            this.ChkSelected.AutoSize = true;
-            this.ChkSelected.Checked = true;
-            this.ChkSelected.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.ChkSelected.Location = new System.Drawing.Point(542, 195);
-            this.ChkSelected.Name = "ChkSelected";
-            this.ChkSelected.Size = new System.Drawing.Size(66, 17);
-            this.ChkSelected.TabIndex = 34;
-            this.ChkSelected.Text = "selected";
-            this.ChkSelected.UseVisualStyleBackColor = true;
+            this.BtnGetSceneObjects.Location = new System.Drawing.Point(700, 17);
+            this.BtnGetSceneObjects.Name = "BtnGetSceneObjects";
+            this.BtnGetSceneObjects.Size = new System.Drawing.Size(122, 23);
+            this.BtnGetSceneObjects.TabIndex = 36;
+            this.BtnGetSceneObjects.Text = "Get Scene Objects";
+            this.BtnGetSceneObjects.UseVisualStyleBackColor = true;
+            this.BtnGetSceneObjects.Click += new System.EventHandler(this.BtnGetSceneObjects_Click);
             // 
             // CsharpToMaxTest
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(682, 527);
+            this.ClientSize = new System.Drawing.Size(1009, 527);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Name = "CsharpToMaxTest";
@@ -497,5 +526,7 @@
         private System.Windows.Forms.Button BtnHideGeometry;
         private System.Windows.Forms.Button BtnUnhideGeometry;
         private System.Windows.Forms.CheckBox ChkSelected;
+        private System.Windows.Forms.ComboBox CbxSceneNodeTypes;
+        private System.Windows.Forms.Button BtnGetSceneObjects;
     }
 }

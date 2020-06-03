@@ -20,6 +20,7 @@ namespace Micra.Tools {
             CbxClassOf.SelectedIndex = 0;
             CbxSuperClassOf.Items.AddRange(SuperClassID.GetNames());
             CbxSuperClassOf.SelectedIndex = 0;
+            CbxSceneNodeTypes.SelectedIndex = 0;
         }
 
         private void OnTextAreaLostFocus(object sender, EventArgs e) {
@@ -38,14 +39,14 @@ namespace Micra.Tools {
             if ( node != null ) node.SelectOnly();
         }
 
-        private void button2_Click(object sender, EventArgs e) {
+        private void Button2_Click(object sender, EventArgs e) {
             Kernel.WriteLine(( sender as Button ).Text);
             string cmd = "Render()";
             textBox1.Text = cmd;
             MxSet.ExecuteMAXScriptScript(cmd);
         }
 
-        private void button3_Click(object sender, EventArgs e) {
+        private void Button3_Click(object sender, EventArgs e) {
             Kernel.WriteLine(( sender as Button ).Text);
             string cmd = "Box pos:[-100,0,0] name:(UniqueName \"ojobox\") wirecolor:red\n" +
                 "Box pos:[0,0,0] name:(UniqueName \"ojobox\") wirecolor:blue\n" +
@@ -54,7 +55,7 @@ namespace Micra.Tools {
             MxSet.ExecuteMAXScriptScript(cmd);
         }
 
-        private void button5_Click(object sender, EventArgs e) {
+        private void Button5_Click(object sender, EventArgs e) {
             Kernel.WriteLine(( sender as Button ).Text);
             string cmd = "Render()";
             textBox1.Text = cmd;
@@ -89,47 +90,10 @@ namespace Micra.Tools {
 
             /*IINode obj = MxCollection.GetFirstSelectedNode(); //Autodesk.Max.Wrappers.INode
             ISubClassList clist = GlobalInterface.Instance.ClassDirectory.Instance.GetClassList(obj.ObjectRef.Eval(0).Obj.SuperClassID);
-            //IClassEntry.ClassName: "GeoSphere"
-            //IClassEntry.Category: "Standard Primitives"
-            //IClassEntry.DllNumber: 74
-            //TODO is good to do it with multiselection (obj or element or face)
-            //polyObjectClassID
-            //firstNode.ObjectRef != null && firstNode.ObjectRef.Eval(0).Obj.SuperClassID == SClass_ID.Light
-            //obj.SuperClassID == Basenode
-            if ( obj == null || obj.ObjectRef.Eval(0).Obj.SuperClassID != SClass_ID.Geomobject ) return;
-
-            Type obj_type = obj.GetType();
-
-            MxSet.LogLi("SelSimElements > sel obj:{0} is SuperClassID:{1} type:{2}", obj.Name, obj.ObjectRef.Eval(0).Obj.SuperClassID, obj_type.Name);
-            MxSet.LogLi("SelSimElements > class list:{0}", clist.ToString());
-            return;
-
-
-            int slev = MxGet.Interface.SubObjectLevel;
-
-            MxSet.LogLi("selectedObject:{0} subobjectLevel:{1}", obj.Name, slev);
-
-            if ( slev == 4 || slev == 5 ) { //select geometry with simillar volume
-
-                MxSet.LogLi("select geometry with simillar volume");
-
-            } else { //select objects with simillar volume
-
-                MxSet.LogLi("select objects with simillar volume");
-            }*/
-
-            /*MxSet.ExecuteMAXScriptScript("" +
-                "mcPoly.selectSimilarElements selection[1] " +
-                "offset:" + SpnAreaOffset.Value.ToString()
-            );*/
+            */
         }
 
-        private bool IsMatchVolume(double val, List<double> valList) {
-
-            return valList.IndexOf(val) != -1;
-        }
-
-        private void button9_Click(object sender, EventArgs e) {
+        private void Button9_Click(object sender, EventArgs e) {
 
             Kernel.WriteLine(( sender as Button ).Text);
             PrintNode(Kernel.Scene.RootNode);
@@ -141,14 +105,14 @@ namespace Micra.Tools {
                 PrintNode(c, indent + "  ");
         }
 
-        private void button8_Click(object sender, EventArgs e) {
+        private void Button8_Click(object sender, EventArgs e) {
             Kernel.WriteLine(( sender as Button ).Text);
             var teapot = Primitives.Teapot.Create();
             teapot["radius"] = 20.0;
             teapot.Node.Move(new Point3(20, 10, 5));
         }
 
-        private void button7_Click(object sender, EventArgs e) {
+        private void Button7_Click(object sender, EventArgs e) {
             Kernel.WriteLine(( sender as Button ).Text);
             var cylinder = Primitives.Cylinder.Create();
             MxSet.LogLi("Create Cylinder params:{0}", cylinder.Params.ToString());
@@ -161,29 +125,29 @@ namespace Micra.Tools {
             bend["bendangle"] = 30.0f;
         }
 
-        private void button6_Click(object sender, EventArgs e) {
+        private void Button6_Click(object sender, EventArgs e) {
 
             Kernel.WriteLine(( sender as Button ).Text);
             foreach ( var p in PluginMgr.Plugins ) MxSet.LogLi(p.ClassName);
         }
 
-        private void button10_Click(object sender, EventArgs e) {
+        private void Button10_Click(object sender, EventArgs e) {
 
             Kernel.PushPrompt("Look at the MAXScript listener window");
             Kernel.WriteLine("I'm some text appearing in the MAXScript listener window!");
         }
 
-        private void button11_Click(object sender, EventArgs e) {
+        private void Button11_Click(object sender, EventArgs e) {
             Kernel.WriteLine(( sender as Button ).Text);
             Collections.SelectAll(ChkSelHidden.Checked, true);
         }
 
-        private void button12_Click(object sender, EventArgs e) {
+        private void Button12_Click(object sender, EventArgs e) {
             Kernel.WriteLine(( sender as Button ).Text);
             Collections.DeselectAll(true);
         }
 
-        private void button13_Click(object sender, EventArgs e) {
+        private void Button13_Click(object sender, EventArgs e) {
             Kernel.WriteLine(( sender as Button ).Text);
             if ( RbtClassOf.Checked ) {
 
@@ -200,7 +164,7 @@ namespace Micra.Tools {
             }
         }
 
-        private void button14_Click(object sender, EventArgs e) {
+        private void Button14_Click(object sender, EventArgs e) {
             Kernel.WriteLine(( sender as Button ).Text);
             var nodes = Kernel.Scene.SelectedNodes();
             Collections.ShowClass(nodes);
@@ -210,18 +174,18 @@ namespace Micra.Tools {
             Kernel.WriteClear(false);
         }
 
-        private void button15_Click(object sender, EventArgs e) {
+        private void Button15_Click(object sender, EventArgs e) {
             Kernel.WriteLine(( sender as Button ).Text);
             Kernel.WriteClear(ChkMacroRec.Checked);
         }
 
-        private void button16_Click(object sender, EventArgs e) {
+        private void Button16_Click(object sender, EventArgs e) {
             Kernel.WriteLine(( sender as Button ).Text);
             var nodes = Kernel.Scene.SelectedNodes();
             Collections.ShowParameters(nodes);
         }
 
-        private void button4_Click_1(object sender, EventArgs e) {
+        private void Button4_Click_1(object sender, EventArgs e) {
             Kernel.WriteLine(( sender as Button ).Text);
             Node node = Kernel.Scene.SelectedNodes().FirstOrDefault();
             Collections.SelectInstances(node, true);
@@ -277,6 +241,26 @@ namespace Micra.Tools {
                 Kernel._Interface.InvalidateObCache(node._Node);
                 Kernel.RedrawViews();
             }
+        }
+
+        private void BtnGetSceneObjects_Click(object sender, EventArgs e) {
+            Kernel.WriteLine(( sender as Button ).Text);
+            IEnumerable<Node> nodes = Enumerable.Empty<Node>(); //new List<Node>(); 
+            switch ( CbxSceneNodeTypes.SelectedItem ) {
+
+                case "All"              : nodes = Kernel.Scene.AllNodes(); break;
+                case "GeometryNodes"    : nodes = Kernel.Scene.GeometryNodes; break;
+                case "LightNodes"       : nodes = Kernel.Scene.LightNodes; break;
+                case "CameraNodes"      : nodes = Kernel.Scene.CameraNodes; break;
+                case "HelperNodes"      : nodes = Kernel.Scene.HelperNodes; break;
+                case "ShapeNodes"       : nodes = Kernel.Scene.ShapeNodes; break;
+            }
+            Kernel.WriteLine("Get Scene objects by type:{0} ( {1} ) >", CbxSceneNodeTypes.SelectedItem, nodes.Count());
+            nodes.ToList()
+                .ForEach(n => Kernel.WriteLine("\tNode:{0}\t\tSuperClass:{1}", 
+                n.Name,
+                SuperClassID.GetName(n.Object.SuperClassID)
+                ));
         }
     }
 }

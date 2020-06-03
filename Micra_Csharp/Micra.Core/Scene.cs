@@ -41,7 +41,7 @@ namespace Micra.Core {
         }
 
         public IEnumerable<Node> NodesBySuperClass(SuperClassID sid) {
-            return from n in NodeTree where n.Object != null & n.SuperClassID == sid select n;
+            return from n in NodeTree where n.Object != null & n.Object.SuperClassID == sid select n;
         }
 
         public IEnumerable<Node> AllNodes() {
@@ -59,8 +59,8 @@ namespace Micra.Core {
         public IEnumerable<Node> CameraNodes { get { return NodesBySuperClass(SuperClassID.Camera); } }
         public IEnumerable<Node> HelperNodes { get { return NodesBySuperClass(SuperClassID.Helper); } }
         public IEnumerable<Node> ShapeNodes { get { return NodesBySuperClass(SuperClassID.Shape); } }
-        public IEnumerable<Node> SystemNodes { get { return NodesBySuperClass(SuperClassID.GeometricObject); } }
-        public IEnumerable<Node> SpaceWarpNodes { get { return NodesBySuperClass(SuperClassID.GeometricObject); } }
+        //public IEnumerable<Node> SystemNodes { get { return NodesBySuperClass(SuperClassID.GeometricObject); } }
+        //public IEnumerable<Node> SpaceWarpNodes { get { return NodesBySuperClass(SuperClassID.GeometricObject); } }
 
         public IEnumerable<SceneObject> Objects {
             get { return from n in NodeTree where n.Object != null select n.Object; }

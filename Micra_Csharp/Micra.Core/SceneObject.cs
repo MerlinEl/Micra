@@ -6,7 +6,6 @@
 // otherwise accompanies this software in either electronic or hard copy form.  
 //
 using Autodesk.Max;
-using Autodesk.Max.MaxSDK.Graphics;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -110,6 +109,14 @@ namespace Micra.Core {
             return r;
         }
 
+        public double GetObjectVolume() {
+
+            Mesh m = Node.GetMesh();
+            double objVolume = 0.0;
+            m.faces.ForEach(f => objVolume += GeoOP.GetFaceArea(m, f));
+            return ( objVolume / m.faces.Length );
+        }
+
         public void HideGeometry(bool selected) {
             //Based on SubobjectLevel
             switch ( Kernel._Interface.SubObjectLevel ) {
@@ -132,7 +139,7 @@ namespace Micra.Core {
                 } else if ( !selected && !isSelected ) im.Faces[i].Hide();
             }
             im.InvalidateTopologyCache();
-           // Kernel._Interface.InvalidateObCache(_BaseObject)
+            // Kernel._Interface.InvalidateObCache(_BaseObject)
         }
 
         public void UnhideGeometry() {
@@ -150,12 +157,12 @@ namespace Micra.Core {
             }
             im.InvalidateTopologyCache();
 
-           /* im.InvalidateGeomCache();
-            im.InvalidateTopologyCache();
-            ITriObject triObject = GetITriobject();
-            //triObject->NotifyDependents(FOREVER, OBJ_CHANNELS, REFMSG_CHANGE);
-            triObject.NotifyDependents(new Interval(), EnumChannels.OBJ_CHANNELS, EnumRefMsg.REFMSG_CHANGE);
-            Kernel._Interface.RedrawViews();*/
+            /* im.InvalidateGeomCache();
+             im.InvalidateTopologyCache();
+             ITriObject triObject = GetITriobject();
+             //triObject->NotifyDependents(FOREVER, OBJ_CHANNELS, REFMSG_CHANGE);
+             triObject.NotifyDependents(new Interval(), EnumChannels.OBJ_CHANNELS, EnumRefMsg.REFMSG_CHANGE);
+             Kernel._Interface.RedrawViews();*/
         }
 
         public List<int> GetSelectedFaces() {
