@@ -71,3 +71,4 @@ E:\Aprog\Orien\Micra\Micra_Csharp\Micra.Domain\bin\Debug\ko-KR\AdWindows.resourc
 E:\Aprog\Orien\Micra\Micra_Csharp\Micra.Domain\bin\Debug\pt-BR\AdWindows.resources.dll
 E:\Aprog\Orien\Micra\Micra_Csharp\Micra.Domain\bin\Debug\zh-CN\AdWindows.resources.dll
 E:\Aprog\Orien\Micra\Micra_Csharp\Micra.Domain\obj\Debug\Micra.Domain.csprojAssemblyReference.cache
+D:\ReneBaca\Aprog\Micra\Micra_Csharp\Micra.Domain\obj\Debug\Micra.Domain.csprojAssemblyReference.cache

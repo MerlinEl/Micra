@@ -10,11 +10,11 @@
     <mc_Dialog_G active="true" pos="[2168,622]" size="[148,138]" title="Modify:" btnCount="[6,5]" />
     <mc_Dialog_H active="true" pos="[2168,760]" size="[148,90]" title="Materials:" btnCount="[6,3]" />
     <mc_Dialog_I active="true" pos="[2168,916]" size="[148,66]" title="Programming:" btnCount="[6,2]" />
-    <mc_Dialog_J active="true" pos="[1632,1242]" size="[556,42]" title="Experimental:" btnCount="[23,1]" />
+    <mc_Dialog_J active="true" pos="[967,1058]" size="[580,42]" title="Experimental:" btnCount="[24,1]" />
   </Properties_1>
   <Properties_2>
     <mcMicraDialog active="true" pos="[2171,214]" size="[148,66]" title="" />
-    <mcCustomizeDialog active="false" pos="[1190,230]" size="[224,404]" title="" />
+    <mcCustomizeDialog active="false" pos="[1260,530]" size="[600,404]" title="" />
     <mcProgramDialog active="undefined" pos="[2076,0]" size="[256,232]" title="" />
     <mcisoDialog active="false" pos="[181,152]" size="[140,400]" title="" />
     <mcModifierDialog active="undefined" pos="[100,100]" size="[400,400]" title="" />
@@ -198,7 +198,6 @@
     <btn_I9 action="Holder" icon="118" />
     <btn_J10 action="Object_Inspector" icon="259" />
     <btn_J12 action="Smart_LS3D_Export" icon="260" />
-    <btn_J19 action="DirectX_LS3D_Switch" icon="263" />
     <btn_J5 action="Vertex_Color" icon="258" />
     <btn_J6 action="Vertex_Alpha_Blend" icon="261" />
     <btn_J7 action="Get_Edges_Length" icon="262" />
@@ -210,8 +209,6 @@
     <btn_J4 action="Vertex_Snap" icon="267" />
     <btn_J8 action="Create_Point_At_Vertex" icon="268" />
     <btn_J9 action="Delete_Empty_Layers" icon="269" />
-    <btn_J20 action="Align_Objects_3D" icon="270" />
-    <btn_J18 action="LS3D_Model_Manager" icon="254" />
     <btn_J17 action="City_Manager" icon="241" />
     <btn_G21 action="Patcher" icon="109" />
     <btn_B36 action="Distributor" icon="160" />
@@ -235,11 +232,15 @@
     <btn_B40 action="Unlock_Object" icon="89" />
     <btn_B39 action="Lock_Object" icon="88" />
     <btn_J11 action="Max_To_Blender" icon="287" />
-    <btn_J23 action="Normal_Map_Tester" icon="61" />
-    <btn_J22 action="Road_Generator_Tool" icon="266" />
-    <btn_J21 action="Road_Markings" icon="288" />
     <btn_B6 action="Create_3PGrid" icon="81" />
     <btn_B4 action="Geometry_Projector_2D" icon="11" />
     <btn_B26 action="Geometry_Builder" icon="139" />
+    <btn_J24 action="Normal_Map_Tester" icon="61" />
+    <btn_J23 action="Road_Generator_Tool" icon="266" />
+    <btn_J22 action="Road_Markings" icon="288" />
+    <btn_J21 action="Align_Objects_3D" icon="270" />
+    <btn_J20 action="DirectX_LS3D_Switch" icon="263" />
+    <btn_J19 action="LS3D_Model_Manager" icon="254" />
+    <btn_J18 action="Move_Object_To_Fusion_Position" icon="310" />
   </Buttons>
 </USER>

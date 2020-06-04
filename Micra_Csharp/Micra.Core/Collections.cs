@@ -11,6 +11,10 @@ namespace Micra.Core {
     public class Collections {
 
         public static void DeselectAll(bool redraw = false) {
+            //ClearSelection
+            //Kernel._Global.
+            //Kernel._Interface.SelectNodeTab(nodes, true, redraw);
+            //Kernel._Interface.ClearNodeSelection(redraw);
 
             var nodes = Kernel.Scene.SelectedNodes();
             nodes.ForEach(n => n.Selected = false);

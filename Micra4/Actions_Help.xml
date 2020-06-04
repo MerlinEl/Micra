@@ -192,5 +192,6 @@
     <Object_Inspector val="Kopírování parametrů z jednoho objektu na druhý." />
     <Smart_LS3D_Export val="Exportuje všechny nody ve scéně." />
     <Select_Player val="Exportuje všechny nody ve scéně." />
+    <Move_Object_To_Fusion_Position />
   </TuKej>
 </ACTIONS>

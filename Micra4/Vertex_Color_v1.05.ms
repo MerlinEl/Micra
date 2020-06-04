@@ -154,6 +154,21 @@ rollout mcVertexColorDialog "Vertex Color v1.05" width:408 height:348
 			update o
 		)
 	)
+	
+	fn setEpolyVertsColor verts_color = (
+		
+		multi_sel = selection as array
+		for o in multi_sel do with redraw off  (
+
+			if classOf o.baseobject != Editable_Poly do continue
+			select o
+			local gco = modPanel.GetCurrentObject()
+			local vsel = gco.getSelection #Vertex
+			if vsel.numberset > 0 do polyOp.setVertColor o.baseobject 0 vsel verts_color
+		)
+		select multi_sel
+	)
+	
 	fn setVertsColor obj verts_color = (
 		
 		format "setVertsColor > obj:% verts_color:%\n"  obj.name verts_color
@@ -349,7 +364,7 @@ rollout mcVertexColorDialog "Vertex Color v1.05" width:408 height:348
 			"objects"	: setObjectsColor sel clr map_channel
 			"faces"	: setFacesColor sel[1] clr
 			"edges"	: setEdgesColor sel[1] clr 	
-			"verts"	: setVertsColor  sel[1] clr
+			"verts"	: if selection.count > 1 then  setEpolyVertsColor clr else setVertsColor sel[1] clr
 			"default"	: undefined
 		)	
 	)

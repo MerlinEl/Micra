@@ -203,6 +203,19 @@ namespace Micra.Tools {
             if ( ClassID.EditablePoly.Equals(io.ClassID) ) {
 
                 Kernel.WriteLine("Is Poly!");
+                /*Geometry geo = node.Geometry;
+                bool can = geo._IGeomObject.CanConvertToType(ClassID.EditableMesh._IClass_ID) != 0;
+                Kernel.WriteLine("Can be converted in to Mesh?{0}", can);*/
+
+                bool can = io.CanConvertToType(ClassID.EditableMesh._IClass_ID) != 0;
+                Kernel.WriteLine("Can be converted in to Mesh?{0}", can);
+
+                //IMesh im = node.Object.GetImesh(Kernel.Now);
+                //IMeshSelection
+                //GetMeshSelectInterface
+
+                //Autodesk.Max.Wrappers
+
                 //io
                 //node._Anim
                 //IMeshSelectData msd = Kernel._Global.getme

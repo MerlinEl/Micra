@@ -22,6 +22,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <PlatformTarget>x64</PlatformTarget>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -30,10 +31,23 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Autodesk.Max">
       <HintPath>C:\Program Files\Autodesk\3ds Max 2018\Autodesk.Max.dll</HintPath>
+    </Reference>
+    <Reference Include="Autodesk.Max.Wrappers">
+      <HintPath>C:\Program Files\Autodesk\3ds Max 2018\bin\assemblies\Autodesk.Max.Wrappers.dll</HintPath>
+    </Reference>
+    <Reference Include="MaterialExplorerView">
+      <HintPath>C:\Program Files\Autodesk\3ds Max 2018\bin\assemblies\MaterialExplorerView.dll</HintPath>
+    </Reference>
+    <Reference Include="SceneExplorer">
+      <HintPath>C:\Program Files\Autodesk\3ds Max 2018\SceneExplorer.dll</HintPath>
+    </Reference>
+    <Reference Include="SceneExplorerView">
+      <HintPath>C:\Program Files\Autodesk\3ds Max 2018\bin\assemblies\SceneExplorerView.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -61,6 +75,7 @@
     <Compile Include="Geometry.cs" />
     <Compile Include="GeoOP.cs" />
     <Compile Include="GlobalMethods.cs" />
+    <Compile Include="IBitArrayExtensions.cs" />
     <Compile Include="Kernel.cs" />
     <Compile Include="Light.cs" />
     <Compile Include="Material.cs" />

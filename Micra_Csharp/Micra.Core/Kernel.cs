@@ -5,6 +5,26 @@
 // agreement provided at the time of installation or download, or which
 // otherwise accompanies this software in either electronic or hard copy form.  
 //
+/*
+ * Autodesk.Max.dll
+ * 
+The 3ds Max .NET SDK consists of the following .NET assemblies (DLLs). They can be found in the root folder 3ds Max application installation.
+
+Autodesk.Max.dll - Contains wrappers that expose most of the API elements from the 3ds Max C++ SDK to .NET constructs. Currently it is not recommended to derive from the Autodesk.Max.Plugins classes.
+AssemblyLoader.dll - Contains the Loader class.
+CSharpUtilities.dll - Various utility classes for .NET programming.
+ExplorerFramework.dll - Abstract explorer framework classes upon which the Scene Explorer is built. It can be used for creating a new node traversal for arbitrary scene explorers.
+ManagedServices.dll - Exposes some convenient 3ds Max SDK functionality to .NET.
+MaxCustomControls.dll - Various .NET utilities and UI components.
+SceneExplorer.dll - Specification of the ExplorerFramework components for the SceneExplorer with bindings to 3ds Max data.
+UiViewModels.dll - Contains classes for defining user actions and customizing the user interface.
+
+Resources
+http://discourse.techart.online/t/from-maxscript-to-c-or-c/3111/12
+https://area.autodesk.com/profile/SmsxxDGK/blog-posts/?p=2
+
+
+*/
 using Autodesk.Max;
 using System;
 using System.Collections.Generic;
@@ -181,10 +201,10 @@ namespace Micra.Core {
 
         public static void WriteClear(bool macroRec) {
             // clears the listener
-            SendMessage(_Global.TheListener.EditBox, 2004, ( IntPtr )0, ( IntPtr )0);
+            SendMessage(_Global.TheListener.EditBox, 2004, (IntPtr)0, (IntPtr)0);
             if ( !macroRec ) return;
             // clears the macro recorder
-            SendMessage(_Global.TheListener.MacrorecBox, 2004, ( IntPtr )0, ( IntPtr )0);
+            SendMessage(_Global.TheListener.MacrorecBox, 2004, (IntPtr)0, (IntPtr)0);
             //UIAccessor.SetWindowText(_Global.TheListener.MacrorecBox)[2][1]("");
         }
 

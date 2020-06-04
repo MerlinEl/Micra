@@ -43,6 +43,30 @@ struct MICRA_TUKEJ_STRUCTURE	(
 			player_obj.isHidden = false
 			if keyboard.controlPressed do max zoomext sel
 		)
+	),
+	fn moveObjectToFusionPos = (
+		
+		local obj = selection[1]
+		if obj == undefined do return false
+		local fusion_pos_str = getclipboardtext()
+		if fusion_pos_str.count == 0 do return false
+		local fusion_pos_arr = filterString fusion_pos_str ","
+		if fusion_pos_arr.count != 3 do return false
+		local fusion_pos = execute ("["+fusion_pos_arr[1]+","+fusion_pos_arr[2]+","+fusion_pos_arr[3]+"]")
+		local p = fusion_pos * 100
+		obj.pos = p
+	),
+	fn moveObjectToFusionPos = (
+		
+		local obj = selection[1]
+		if obj == undefined do return false
+		local fusion_pos_str = getclipboardtext()
+		if fusion_pos_str.count == 0 do return false
+		local fusion_pos_arr = filterString fusion_pos_str ","
+		if fusion_pos_arr.count != 3 do return false
+		local fusion_pos = execute ("["+fusion_pos_arr[1]+","+fusion_pos_arr[2]+","+fusion_pos_arr[3]+"]")
+		local p = fusion_pos * 100
+		obj.pos = p
 	)
 	/*<end>*/
 )	

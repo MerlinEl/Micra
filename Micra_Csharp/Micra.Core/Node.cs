@@ -273,11 +273,7 @@ namespace Micra.Core {
             _IINode.Move(t, Matrix3.Identity.Translate(pt)._IMatrix3, pt._IPoint3, false, true, (int)PivotMode.None, false);
         }
 
-        public SceneObject Object {
-            get {
-                return CreateWrapper<SceneObject>(_IINode.ObjectRef);
-            }
-        }
+        public SceneObject Object => CreateWrapper<SceneObject>(_IINode.ObjectRef);
 
         public IObject GetObjectRef() { //test only
 
@@ -286,6 +282,9 @@ namespace Micra.Core {
             IObject io = ios.Obj;*/
             return _IINode.ObjectRef;
         }
+
+        //public Geometry Geometry => CreateWrapper<Geometry>(_IINode.ObjectRef); //test for now
+
 
         //! \name Modifier Functions
         //@{

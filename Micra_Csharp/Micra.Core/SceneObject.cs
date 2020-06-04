@@ -64,6 +64,10 @@ namespace Micra.Core {
         public Node _Node { get; set; }
         public Mesh Mesh => GetMesh(Kernel.Now);
 
+        public IGeomObject _IGeomObject { get { return _Anim as IGeomObject; } } //test
+        public Geometry Geometry => CreateWrapper<Geometry>(_Anim); //test seems to works
+
+
         public void AddModifier(Modifier m) {
             if ( _Node != null )
                 _Node.AddModifier(m);
@@ -142,6 +146,9 @@ namespace Micra.Core {
                 } else if ( !selected && !isSelected ) im.Faces[i].Hide();
             }
             im.InvalidateTopologyCache();
+            //if ( selected ) _BaseObject.ClearSelection(Kernel._Interface.SubObjectLevel); //OK
+            //if (selected) Geometry._IGeomObject.ClearSelection(Kernel._Interface.SubObjectLevel); //OK
+            if (selected) _IGeomObject.ClearSelection(Kernel._Interface.SubObjectLevel);
             // Kernel._Interface.InvalidateObCache(_BaseObject)
         }
 

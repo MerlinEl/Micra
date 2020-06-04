@@ -19,6 +19,6 @@ namespace Micra.Core {
         /// Returns the corresponding wrapped object from the Autodesk.Max layer. 
         /// This is only used if the APIs of Autodesk.Max layer are required.
         /// </summary>
-        public IGeomObject _Geometry { get { return _Anim as IGeomObject; } }
+        public IGeomObject _IGeomObject { get { return _Anim as IGeomObject; } }
     }
 }
