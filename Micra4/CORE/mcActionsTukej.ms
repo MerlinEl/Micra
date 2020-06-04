@@ -66,7 +66,7 @@ struct MICRA_TUKEJ_STRUCTURE	(
 		if fusion_pos_arr.count != 3 do return false
 		local fusion_pos = execute ("["+fusion_pos_arr[1]+","+fusion_pos_arr[2]+","+fusion_pos_arr[3]+"]")
 		local p = fusion_pos * 100
-		obj.pos = p
+		undo "Move To Fusion Pos" on obj.pos = p
 	)
 	/*<end>*/
 )	
