@@ -9,49 +9,83 @@ using System.Runtime.InteropServices;
 
 namespace Micra.Core {
     public class Collections {
-
+        /// <summary>
+        /// Smart selection depends on SubobjectLevel
+        /// Works with Editable_Poly and Editable_Mesh
+        /// </summary>
+        /// <param name="redraw"></param>
         public static void DeselectAll(bool redraw = false) {
-            //ClearSelection
-            //Kernel._Global.
-            //Kernel._Interface.SelectNodeTab(nodes, true, redraw);
-            //Kernel._Interface.ClearNodeSelection(redraw);
 
+            /* Too slow
             var nodes = Kernel.Scene.SelectedNodes();
             nodes.ForEach(n => n.Selected = false);
-            if ( redraw ) Kernel.RedrawViews();
+            if ( redraw ) Kernel.RedrawViews();*/
+
+            if ( GlobalMethods.SubObjectLevel == 0 ) {
+                Kernel._Interface.ClearNodeSelection(redraw);
+            } else {
+                Node node = Kernel.Scene.SelectedNodes().FirstOrDefault();
+                if ( node != null ) node.Object.DeselectAll(redraw);
+            }
         }
 
+
+        /// <summary>
+        /// Smart selection depends on SubobjectLevel
+        /// Works with Editable_Poly and Editable_Mesh
+        /// </summary>
+        /// <param name="hidden"></param>
+        /// <param name="redraw"></param>
         public static void SelectAll(bool hidden = false, bool redraw = false) {
 
-            DeselectAll(false); //deselect frist is some hidden are selected
-            foreach ( Node n in Kernel.Scene.RootNode.Children ) {
-                if ( !hidden && !n.Visible ) continue;
-                n.Selected = true;
+            /* Too slow
+            Kernel._Interface.DisableSceneRedraw();
+            Kernel._Interface.SuspendEditing((uint)TaskModes.TASK_MODE_MODIFY, true); //for now seems not works ... see it later
+            try {
+                DeselectAll(false); //first deselect all, some hidden may be selected                
+                foreach ( Node n in Kernel.Scene.RootNode.Children ) {
+                    if ( !hidden && !n.Visible ) continue;
+                    n.Selected = true;
+                }
+            } catch ( Exception ex ) {
+                throw new Exception(ex.Message);
+            } finally {
+                Kernel._Interface.ResumeEditing((uint)TaskModes.TASK_MODE_MODIFY, true); //for now seem not works ... see it later
+                Kernel._Interface.EnableSceneRedraw();
             }
-            if ( redraw ) Kernel.RedrawViews();
-            Kernel.WriteLine("Selected nodes:{0}/{1}", Kernel.Scene.SelectedNodes().Count(), Kernel.Scene.RootNode.Children.Count());
+            if ( redraw ) Kernel.RedrawViews();*/
+
+            if ( GlobalMethods.SubObjectLevel == 0 ) {
+
+                DeselectAll(false); //first deselect all, some hidden objects may be selected            
+                List<Node> nodes = Kernel.Scene.RootNode.Children
+                    .Where(n => !hidden ? n.Visible : true)
+                    .ToList();
+                Kernel._Interface.SelectNodeTab(nodes.ToIINodeTab(), true, redraw);
+            } else {
+
+                Node node = Kernel.Scene.SelectedNodes().FirstOrDefault();
+                if ( node != null ) node.Object.SelectAll(redraw);
+            }
         }
         public static void SelectAllOfType(ClassID classId, bool hidden = false, bool clearSel = true, bool redraw = false) {
-            Kernel.WriteLine("Selected by Class");
-            if ( clearSel ) DeselectAll(false);
-            foreach ( Node n in Kernel.Scene.RootNode.Children ) {
-                if ( !hidden && !n.Visible ) continue;
-                if ( n.Object.ClassID != classId ) continue;
-                n.Selected = true;
-            }
-            if ( redraw ) Kernel.RedrawViews();
-            Kernel.WriteLine("\tnodes:{0}/{1}", Kernel.Scene.SelectedNodes().Count(), Kernel.Scene.RootNode.Children.Count());
+
+            if ( clearSel ) DeselectAll(true);
+            List<Node> nodes = Kernel.Scene.RootNode.Children
+                .Where(n => !hidden ? n.Visible : true)
+                .Where(n=> n.Object.ClassID == classId)
+                .ToList();
+            Kernel._Interface.SelectNodeTab(nodes.ToIINodeTab(), true, redraw);
+
         }
         public static void SelectAllOfType(SuperClassID sClassId, bool hidden = false, bool clearSel = true, bool redraw = false) {
-            Kernel.WriteLine("Selected by Superclass");
-            if ( clearSel ) DeselectAll(false);
-            foreach ( Node n in Kernel.Scene.RootNode.Children ) {
-                if ( !hidden && !n.Visible ) continue;
-                if ( n.Object.SuperClassID != sClassId ) continue;
-                n.Selected = true;
-            }
-            if ( redraw ) Kernel.RedrawViews();
-            Kernel.WriteLine("\tnodes:{0}/{1}", Kernel.Scene.SelectedNodes().Count(), Kernel.Scene.RootNode.Children.Count());
+
+            if ( clearSel ) DeselectAll(true);
+            List<Node> nodes = Kernel.Scene.RootNode.Children
+                .Where(n => !hidden ? n.Visible : true)
+                .Where(n => n.Object.SuperClassID == sClassId)
+                .ToList();
+            Kernel._Interface.SelectNodeTab(nodes.ToIINodeTab(), true, redraw);
         }
         public static void ShowClass(IEnumerable<Node> nodes) {
 
@@ -68,27 +102,6 @@ namespace Micra.Core {
                 Kernel.WriteLine("\tObject:{0} type:{1} params:{2}", n.Name, n.GetType().Name, n.Object.Params.Count());
                 foreach ( IParameter p in n.Object.Params ) Kernel.WriteLine("\t\tparam:{0}", p.Name);
             });
-        }
-
-        public static void SelectEdgesWithSameLength(Node node) {
-
-            List<int> esel = node.Object.GetSelectedEdges();
-            Mesh mesh = node.GetMesh();
-            Kernel.WriteLine("SelectEdgesWithSameLength > Node:{0} selEdges:{1} isEmpty:{2}", node.Name, esel.Count);
-            if ( esel.Count == 0 ) return;
-            esel.ForEach(ei => Kernel.WriteLine("ei:{0}", ei));
-
-            /*var lengths = selEdges.IEnumerable()
-                .Select(ei => mesh.GetEdgeLength(ei))
-                .ToList();
-            Kernel.WriteLine("SelectEdgesWithSameLength lengths > ", lengths);*/
-            /* for (in selEdges.NumberSet) {
- IEdge ie 
-
-
-             }*/
-
-            //throw new NotImplementedException();
         }
 
         public static List<Node> GetNodeInsatances(Node node) {
@@ -123,8 +136,8 @@ namespace Micra.Core {
             if ( redraw ) Kernel.RedrawViews();
         }
 
-        public static void SelectNodesWithSimillarVolume(List<Node> srcNodes) {
-            
+        public static void SelectSimillarNodes(List<Node> srcNodes) {
+
             Kernel.WriteLine("SelectNodesWithSimillarVolume > Sel nodes:{0}", srcNodes.Count());
             //collect selected geometry objects volumes
             List<double> volumes = srcNodes
@@ -208,6 +221,12 @@ namespace Micra.Core {
             }
         }
 
+        public static IINodeTab ToIINodeTab(this List<Node> nodesList) {
+
+            IINodeTab nodes = Kernel._Global.NodeTab.Create();
+            nodesList.ForEach(n => nodes.AppendNode(n._IINode, true, 1));
+            return nodes;
+        }
     }
 }
 

@@ -99,6 +99,7 @@ namespace Micra.Core {
 
         public IMesh GetImesh(TimeValue t) => GetITriobject(t).Mesh;
 
+        public Mesh GetMesh() => GetMesh(Kernel.Now);
         public Mesh GetMesh(TimeValue t) {
 
             ITriObject tri = GetITriobject(t);
@@ -115,8 +116,7 @@ namespace Micra.Core {
 
         public double GetVolume() {
 
-            Mesh m = _Node.GetMesh();
-            Kernel.WriteLine("GetVolume > Mesh:{0}", m);
+            Mesh m = GetMesh();
             double objVolume = 0.0;
             m.faces.ForEach(f => objVolume += GeoOP.GetFaceArea(m, f));
             return ( objVolume / m.faces.Length );
@@ -148,7 +148,7 @@ namespace Micra.Core {
             im.InvalidateTopologyCache();
             //if ( selected ) _BaseObject.ClearSelection(Kernel._Interface.SubObjectLevel); //OK
             //if (selected) Geometry._IGeomObject.ClearSelection(Kernel._Interface.SubObjectLevel); //OK
-            if (selected) _IGeomObject.ClearSelection(Kernel._Interface.SubObjectLevel);
+            if ( selected ) _IGeomObject.ClearSelection(Kernel._Interface.SubObjectLevel);
             // Kernel._Interface.InvalidateObCache(_BaseObject)
         }
 
@@ -231,8 +231,52 @@ return _IMesh.EdgeSel;*/
             throw new NotImplementedException();
         }
 
+        public void SelectSimillarEdges() {
+
+            Kernel.WriteLine("sel obj edges {0}", Name);
+            List<int> esel = GetSelectedEdges();
+            Mesh mesh = GetMesh();
+            Kernel.WriteLine("SelectEdgesWithSameLength > Node:{0} selEdges:{1} isEmpty:{2}", Name, esel.Count);
+            if ( esel.Count == 0 ) return;
+            esel.ForEach(ei => Kernel.WriteLine("ei:{0}", ei));
+
+            /*var lengths = selEdges.IEnumerable()
+                .Select(ei => mesh.GetEdgeLength(ei))
+                .ToList();
+            Kernel.WriteLine("SelectEdgesWithSameLength lengths > ", lengths);*/
+            /* for (in selEdges.NumberSet) {
+ IEdge ie 
+
+
+             }*/
+
+            //throw new NotImplementedException();
+        }
+
+        //TODO test with modifiers
+        public void SelectAll(bool redraw) {
+
+            _IGeomObject.SelectAll(GlobalMethods.SubObjectLevel);
+            if ( redraw ) Kernel.RedrawViews();
+        }
+        public void DeselectAll(bool redraw) { //deselect all geometry
+
+            _IGeomObject.ClearSelection(GlobalMethods.SubObjectLevel);
+            if ( redraw ) Kernel.RedrawViews();
+        }
     }
 }
+
+
+/*switch ( GlobalMethods.SubObjectLevel ) { //next operation is depend on subobject level
+
+    case 1: break;
+    case 2: break;
+    case 3: break;
+    case 4: break;
+    case 5: break;
+    default: break;
+}*/
 
 /*
  			IGlobal global = Autodesk.Max.GlobalInterface.Instance;

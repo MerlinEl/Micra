@@ -61,6 +61,9 @@
             this.button8 = new System.Windows.Forms.Button();
             this.button9 = new System.Windows.Forms.Button();
             this.button18 = new System.Windows.Forms.Button();
+            this.BtnListPrimitives = new System.Windows.Forms.Button();
+            this.CbxPrimitiveTypes = new System.Windows.Forms.ComboBox();
+            this.ChkSelHidden2 = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -139,6 +142,9 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.ChkSelHidden2);
+            this.groupBox2.Controls.Add(this.CbxPrimitiveTypes);
+            this.groupBox2.Controls.Add(this.BtnListPrimitives);
             this.groupBox2.Controls.Add(this.button18);
             this.groupBox2.Controls.Add(this.BtnGetSceneObjects);
             this.groupBox2.Controls.Add(this.CbxSceneNodeTypes);
@@ -330,7 +336,7 @@
             this.ChkClearSel.AutoSize = true;
             this.ChkClearSel.Checked = true;
             this.ChkClearSel.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.ChkClearSel.Location = new System.Drawing.Point(140, 224);
+            this.ChkClearSel.Location = new System.Drawing.Point(214, 224);
             this.ChkClearSel.Name = "ChkClearSel";
             this.ChkClearSel.Size = new System.Drawing.Size(65, 17);
             this.ChkClearSel.TabIndex = 15;
@@ -483,6 +489,38 @@
             this.button18.UseVisualStyleBackColor = true;
             this.button18.Click += new System.EventHandler(this.button18_Click);
             // 
+            // BtnListPrimitives
+            // 
+            this.BtnListPrimitives.Location = new System.Drawing.Point(700, 52);
+            this.BtnListPrimitives.Name = "BtnListPrimitives";
+            this.BtnListPrimitives.Size = new System.Drawing.Size(122, 23);
+            this.BtnListPrimitives.TabIndex = 39;
+            this.BtnListPrimitives.Text = "List Primitives";
+            this.BtnListPrimitives.UseVisualStyleBackColor = true;
+            this.BtnListPrimitives.Click += new System.EventHandler(this.BtnListPrimitives_Click);
+            // 
+            // CbxPrimitiveTypes
+            // 
+            this.CbxPrimitiveTypes.FormattingEnabled = true;
+            this.CbxPrimitiveTypes.Items.AddRange(new object[] {
+            "All",
+            "Standard",
+            "Extended"});
+            this.CbxPrimitiveTypes.Location = new System.Drawing.Point(828, 52);
+            this.CbxPrimitiveTypes.Name = "CbxPrimitiveTypes";
+            this.CbxPrimitiveTypes.Size = new System.Drawing.Size(145, 21);
+            this.CbxPrimitiveTypes.TabIndex = 41;
+            // 
+            // ChkSelHidden2
+            // 
+            this.ChkSelHidden2.AutoSize = true;
+            this.ChkSelHidden2.Location = new System.Drawing.Point(134, 224);
+            this.ChkSelHidden2.Name = "ChkSelHidden2";
+            this.ChkSelHidden2.Size = new System.Drawing.Size(74, 17);
+            this.ChkSelHidden2.TabIndex = 42;
+            this.ChkSelHidden2.Text = "sel hidden";
+            this.ChkSelHidden2.UseVisualStyleBackColor = true;
+            // 
             // CsharpToMaxTest
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -541,5 +579,8 @@
         private System.Windows.Forms.ComboBox CbxSceneNodeTypes;
         private System.Windows.Forms.Button BtnGetSceneObjects;
         private System.Windows.Forms.Button button18;
+        private System.Windows.Forms.ComboBox CbxPrimitiveTypes;
+        private System.Windows.Forms.Button BtnListPrimitives;
+        private System.Windows.Forms.CheckBox ChkSelHidden2;
     }
 }

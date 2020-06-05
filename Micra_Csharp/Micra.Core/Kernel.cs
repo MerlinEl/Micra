@@ -1,5 +1,6 @@
 // Thank you MaxSharp
 // Copyright 2012 Autodesk, Inc.  All rights reserved.
+// Mod by MerlinEl 2020
 //
 // Use of this software is subject to the terms of the Autodesk license
 // agreement provided at the time of installation or download, or which
@@ -40,10 +41,14 @@ namespace Micra.Core {
     public static class Kernel {
         #region fields
         private delegate void TimerProc(IntPtr hWnd, uint nMsg, int nIDEvent, int dwTime);
+        public static IGlobal _Global;
         public static IInterface14 _Interface;
         public static IIInstanceMgr _InstanceMgr;
-        public static IHold _TheHold;
-        public static IGlobal _Global;
+        public static IIFPLayerManager _IIFPLayerManager; //not used not tested
+        public static IInterface_ID _NodeLayerProperties; //not used not tested
+        public static IInterface_ID _EditablePoly; //not used not tested
+        public static IMeshSelection _IMeshSelection; //not used not tested 
+        public static IHold _TheHold; //not used not tested
         internal static List<ReferenceListener> listeners = new List<ReferenceListener>();
         internal static Scene scene;
         #endregion 
@@ -54,11 +59,26 @@ namespace Micra.Core {
             // If this is ever NULL, it is probably because 3ds Max has not yet loaded 
             // Autodesk.Max.Wrappers.dll
             _Global = Autodesk.Max.GlobalInterface.Instance;
-            _Interface = _Global.COREInterface14;
+            _Interface = _Global.COREInterface17;
             _InstanceMgr = _Global.IInstanceMgr.InstanceMgr;
-            _TheHold = Kernel._Global.TheHold;
+            _TheHold = Kernel._Global.TheHold; //not used not tested
             scene = new Scene(_Interface);
             dispatcher = Dispatcher.CurrentDispatcher;
+
+            //not used not tested
+            IInterface_ID iMeshSelectionID = _Global.Interface_ID.Create( //not used not tested
+                (uint)BuiltInClassIDA.MESHSELECT_CLASS_ID, 
+                0
+            );
+            IMeshSelection _IMeshSelection = (IMeshSelection)_Global.GetCOREInterface(iMeshSelectionID); //not used not tested
+            //not used not tested
+            IInterface_ID iIFPLayerManagerID = _Global.Interface_ID.Create( //not used not tested
+                (uint)BuiltInInterfaceIDA.LAYERMANAGER_INTERFACE, 
+                (uint)BuiltInInterfaceIDB.LAYERMANAGER_INTERFACE
+            );
+            _IIFPLayerManager = (IIFPLayerManager)_Global.GetCOREInterface(iIFPLayerManagerID); //not used not tested
+            _NodeLayerProperties = _Global.Interface_ID.Create(0x44e025f8, 0x6b071e44); //not used not tested
+            _EditablePoly = _Global.Interface_ID.Create(0x092779, 0x634020); //not used not tested
         }
 
         public static IITimeSlider _TimeSlider {
@@ -265,5 +285,20 @@ namespace Micra.Core {
         [DllImport("user32.dll")]
         public static extern IntPtr FindWindow(string lpClassName, String lpWindowName); //not used not tested
         #endregion
+    }
+    public static class ListenerExtensions { //test now
+        public static void WriteToListener<T>(this IList<T> collection) {
+
+            WriteToListener<T>(collection, "\t");
+        }
+
+        public static void WriteToListener<T>(this IList<T> collection, string delimiter) {
+
+            int count = collection.Count;
+            for ( int i = 0; i < count; ++i ) {
+                Kernel.Write("{0}{1}", collection[i].ToString(), delimiter);
+            }
+            Kernel.WriteLine("");
+        }
     }
 }

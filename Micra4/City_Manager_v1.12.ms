@@ -47,6 +47,7 @@ rcmenu mcCityManDialogMenu (
 		menuItem m4_6 "Link Collision(s) to closest Object and Fix Name"
 		menuItem m4_7 "Instance Collision to Selected Models"
 		menuItem m4_8 "Create Checker Red and Green"
+		menuItem m4_9 "Find Objects without Collision Property"
 	)
 	subMenu "Modify" (
 	
@@ -294,6 +295,12 @@ rcmenu mcCityManDialogMenu (
 		addModifier btm_objs nm ui:off
 		collapsestack btm_objs
 	)
+	fn findObjectsWithMissingCollisionProperty objs = (
+	
+		local objs_with_missing_prop = for o in objs where (isProperty o "~layer" == false) collect o
+		max select none
+		if objs_with_missing_prop.count > 0 do select objs_with_missing_prop
+	)
 	--m1------------------------------------------------------------------------------------------------
 	on m1_0 picked do undo label:(m1_0.Text) on selectLods(#("LOD1", "LOD2"))
 	on m1_1 picked do undo label:(m1_1.Text) on mcMax.selectObjectsByName "LOD0" visibleOnly:false exclude:#("coll", "occ")
@@ -335,6 +342,7 @@ rcmenu mcCityManDialogMenu (
 	on m4_6 picked do if (queryBox "Link Selected Collision(s) to closest LOD0 and Rename?" title:"Warning:") do undo label:(m4_6.Text) on linkCollisionsByClosestObjectAndFixName()
 	on m4_7 picked do distributeInstancesInToSelection()
 	on m4_8 picked do if queryBox "Generate Checker Collisions?" title:"Create:" do undo label:(m4_8.Text) on createCheckerCollisions (selection as array)
+	on m4_9 picked do undo label:(m4_9.Text) on findObjectsWithMissingCollisionProperty (selection as array)
 	--m5------------------------------------------------------------------------------------------------
 	on m5_1 picked do fileIn (micra.RootDir + "LS3D_Geometry_Optimizer_v0.03.ms")
 	on m5_2 picked do fileIn (micra.RootDir + "LS3D_Curb_Crumple.ms") 

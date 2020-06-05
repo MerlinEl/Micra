@@ -109,5 +109,51 @@ namespace Micra.Core {
                 Kernel.WriteLine("Exception occurred: " + ex.Message);
             }
         }
+        public void GetObjectsByLayer() {
+            //Access scene layers
+            //GlobalInterface.Instance.COREInterface13.LayerManager.GetLayer(i);
+            int layersCount = Autodesk.Max.MaxPlus.LayerManager.GetNumLayers();
+            for ( int i = 0; i < layersCount; i++ ) {
+                var layer = Autodesk.Max.MaxPlus.LayerManager.GetLayer(i);
+                Autodesk.Max.MaxPlus.INodeList nodes = layer.GetNodes();
+
+                //Each node is Autodesk.Max.MaxPlus.INode 
+                foreach ( var node in nodes.ToIEnumerable() ) {
+                    node.Object.DoStuff();
+                }
+            }
+        }
+        public void GetSceneMaterials() {
+
+            ITab<IMtlBase> materialsLib = GlobalInterface.Instance.COREInterface15.SceneMtls;
+
+            foreach ( var materialBase in materialsLib.ToIEnumerable() ) {
+
+
+            }
+        }
+        public class Extensions {
+            //Access scene layers
+            public static IEnumerable<Autodesk.Max.MaxPlus.INode> ToIEnumerable(this INodeList nodeList) {
+                if ( nodeList == null ) {
+                    yield break;
+                }
+
+                int count = nodeList.GetCount();
+                for ( int i = 0; i < count; i++ ) {
+                    yield return nodeList.GetItem(i);
+                }
+            }
+            //materials
+            public static IEnumerable<T> ToIEnumerable<T>(this ITab<T> itab) {
+                if ( itab == null ) {
+                    yield break;
+                }
+
+                for ( int i = 0; i < itab.Count; i++ ) {
+                    yield return itab[i];
+                }
+            }
+        }
     }
 }

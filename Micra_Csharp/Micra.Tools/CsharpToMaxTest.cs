@@ -2,9 +2,9 @@
 using Micra.Core;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Windows.Forms;
 
 namespace Micra.Tools {
@@ -22,6 +22,7 @@ namespace Micra.Tools {
             CbxSuperClassOf.Items.AddRange(SuperClassID.GetNames());
             CbxSuperClassOf.SelectedIndex = 0;
             CbxSceneNodeTypes.SelectedIndex = 0;
+            CbxPrimitiveTypes.SelectedIndex = 0;
         }
 
         private void OnTextAreaLostFocus(object sender, EventArgs e) {
@@ -67,7 +68,7 @@ namespace Micra.Tools {
         private void BtnSelSimElements_Click(object sender, EventArgs e) {
 
             Kernel.WriteLine(( sender as Button ).Text);
-            IEnumerable<Node> selNodes = Kernel.Scene.SelectedNodes();
+            List<Node> selNodes = Kernel.Scene.SelectedNodes().ToList();
             Kernel.WriteLine("\tSelected nodes:{0}", selNodes.Count());
             int slev = GlobalMethods.SubObjectLevel;
             if ( selNodes.Count() == 1 && slev != 0 ) { //if single object is selected
@@ -77,7 +78,7 @@ namespace Micra.Tools {
                 Kernel.WriteLine("selected Node:{0} subObjectLevel:{1}", node.Name, Kernel._Interface.SubObjectLevel);
                 switch ( slev ) { //next operation is depend on subobject level
 
-                    case 2: Collections.SelectEdgesWithSameLength(node); break;
+                    case 2: node.Object.SelectSimillarEdges(); break;
                     case 3: break;
                     case 4: break;
                     case 5: break;
@@ -85,7 +86,7 @@ namespace Micra.Tools {
 
             } else if ( selNodes.Count() >= 1 ) { //when multi object selection
 
-                Collections.SelectNodesWithSimillarVolume(selNodes.ToList());
+                Collections.SelectSimillarNodes(selNodes);
             }
         }
 
@@ -149,13 +150,13 @@ namespace Micra.Tools {
 
                 ClassID classId = ClassID.FromName(CbxClassOf.SelectedItem.ToString());
                 Kernel.WriteLine("classId:{0}", classId);
-                Collections.SelectAllOfType(classId, ChkClearSel.Checked, true);
+                Collections.SelectAllOfType(classId, ChkSelHidden2.Checked, ChkClearSel.Checked, true);
 
             } else {
 
                 SuperClassID superClassId = SuperClassID.FromName(CbxSuperClassOf.SelectedItem.ToString());
                 Kernel.WriteLine("superClassId:{0}", superClassId);
-                Collections.SelectAllOfType(superClassId, ChkClearSel.Checked, true);
+                Collections.SelectAllOfType(superClassId, ChkSelHidden2.Checked, ChkClearSel.Checked, true);
 
             }
         }
@@ -211,6 +212,11 @@ namespace Micra.Tools {
                 bool can = io.CanConvertToType(ClassID.EditableMesh._IClass_ID) != 0;
                 Kernel.WriteLine("Can be converted in to Mesh?{0}", can);
 
+
+                //IMeshSelectData
+
+                //Kernel._Global.IMeshSelect;
+
                 //IMesh im = node.Object.GetImesh(Kernel.Now);
                 //IMeshSelection
                 //GetMeshSelectInterface //AnimatableInterfaceIDs.h //#define GetMeshSelectInterface(anim) ((IMeshSelect*)(anim)->GetInterface(I_MESHSELECT)) //animtbl.h
@@ -224,12 +230,16 @@ namespace Micra.Tools {
             if ( ClassID.EditableMesh.Equals(io.ClassID) ) {
 
                 Kernel.WriteLine("Is Mesh!");
+                IBitArray vsel = Kernel._IMeshSelection.GetSelVertices(node.Object.GetImesh(Kernel.Now));
+                
+
+                Kernel.WriteLine("Selected vertices{0}", vsel.Size);
                 //IMeshSelectData msd = Kernel._Global.getme
             }
 
             var fsel = node.Object.GetSelectedFaces();
             Kernel.WriteLine("selected Faces:{0}", fsel.Count);
-            fsel.ForEach(fi => Kernel.WriteLine("selected face:{0}", fi+1)); //max counting from 1 c# from 0
+            fsel.ForEach(fi => Kernel.WriteLine("selected face:{0}", fi + 1)); //max counting from 1 c# from 0
 
 
             /*
@@ -293,16 +303,16 @@ namespace Micra.Tools {
             IEnumerable<Node> nodes = Enumerable.Empty<Node>(); //new List<Node>(); 
             switch ( CbxSceneNodeTypes.SelectedItem ) {
 
-                case "All"              : nodes = Kernel.Scene.AllNodes(); break;
-                case "GeometryNodes"    : nodes = Kernel.Scene.GeometryNodes; break;
-                case "LightNodes"       : nodes = Kernel.Scene.LightNodes; break;
-                case "CameraNodes"      : nodes = Kernel.Scene.CameraNodes; break;
-                case "HelperNodes"      : nodes = Kernel.Scene.HelperNodes; break;
-                case "ShapeNodes"       : nodes = Kernel.Scene.ShapeNodes; break;
+                case "All": nodes = Kernel.Scene.AllNodes(); break;
+                case "GeometryNodes": nodes = Kernel.Scene.GeometryNodes; break;
+                case "LightNodes": nodes = Kernel.Scene.LightNodes; break;
+                case "CameraNodes": nodes = Kernel.Scene.CameraNodes; break;
+                case "HelperNodes": nodes = Kernel.Scene.HelperNodes; break;
+                case "ShapeNodes": nodes = Kernel.Scene.ShapeNodes; break;
             }
             Kernel.WriteLine("Get Scene objects by type:{0} ( {1} ) >", CbxSceneNodeTypes.SelectedItem, nodes.Count());
             nodes.ToList()
-                .ForEach(n => Kernel.WriteLine("\tNode:{0}\t\tSuperClass:{1}", 
+                .ForEach(n => Kernel.WriteLine("\tNode:{0}\t\tSuperClass:{1}",
                 n.Name,
                 SuperClassID.GetName(n.Object.SuperClassID)
                 ));
@@ -312,6 +322,7 @@ namespace Micra.Tools {
 
             Kernel.WriteLine(( sender as Button ).Text);
 
+            //MaxSharp Mod by MerlinEl 2020
             Node node = Kernel.Scene.SelectedNodes().FirstOrDefault();
             SceneObject sceneObject = node.Object;
             Geometry geometry = node.Object.Geometry;
@@ -324,6 +335,15 @@ namespace Micra.Tools {
             IObject iObject = node.GetObjectRef(); //same as > //node.Object._Object; //_IINode.ObjectRef
             IAnimatable iAnimatable = node.Object._Anim;
             IParameterBlock iParamBlock = node.Object.ParameterBlock;
+
+            ITriObject triObject = sceneObject.GetITriobject(); //triObject.ClearSelection();
+            IMesh iMesh = sceneObject.GetImesh(Kernel.Now);
+
+            //IMNMesh mn = //Global.MNMesh;
+            //mn.OutToTri(iMesh);
+            //mn.SetFromTri(iMesh);
+
+
 
             Kernel.WriteLine("Selected Node:{0} subObjectLevel:{1}", node.Name, Kernel._Interface.SubObjectLevel);
             List<object> objs = new List<object> {
@@ -338,12 +358,22 @@ namespace Micra.Tools {
                 iBaseObject,
                 iObject,
                 iAnimatable,
-                iParamBlock
+                iParamBlock,
+                triObject,
+                iMesh
             };
-            Kernel.WriteLine("\tObject Types( {0} ) Parameters > ", objs.Count());
+            Kernel.WriteLine("\tObject Types( {0} ) > ", objs.Count());
+            objs.ForEach(o => {
+                Kernel.WriteLine("\n\t\t{0}", o);
+                try {
+                    Type t = o.GetType(); // Where obj is object whose properties you need.
+                    PropertyInfo[] pi = t.GetProperties();
+                    foreach ( PropertyInfo p in pi ) {
+                        Kernel.WriteLine("\t\t\t" + p.Name + " : " + p.GetType());
+                    }
 
-            var dump = ObjectDumper.Dump(objs.First());
-            Console.WriteLine("\t", dump);
+                } catch { }
+            });
 
             /*objs.ForEach(o => {
                 try {
@@ -352,7 +382,7 @@ namespace Micra.Tools {
                     //foreach ( PropertyDescriptor descriptor in TypeDescriptor.GetProperties(o) ) {
                     //    string name = descriptor.Name;
                     //    object value = descriptor.GetValue(o);
-                    //    Console.WriteLine("\t\tName:{0} Value:{1}", name, value);
+                    //    Kernel.WriteLine("\t\tName:{0} Value:{1}", name, value);
                     //}
                 } catch { }
             });*/
@@ -366,6 +396,29 @@ namespace Micra.Tools {
             //animArray = getSubAnimNames $[#Object__Editable_Patch][#Master]
             //node.Object.GetImesh.getsu
             //IMasterPointControl masterPointController = IMasterPointControl.GetSubController(1);
+        }
+
+        private void BtnListPrimitives_Click(object sender, EventArgs e) {
+ //not works
+            Kernel.WriteLine(( sender as Button ).Text);
+
+            ISubClassList iSubClassList = Kernel._Global.ClassDirectory.Instance.GetClassList(SClass_ID.Geomobject);
+            //SClass_ID
+            //BuiltInClassIDB
+            //Iterate through IGlobal.IGlobalClassDirectory
+            //Get all classes where Category == "Standard Primitives" || Category == "Extended Primitives"
+            Type type = typeof(IGlobal.IGlobalClassDirectory);
+            BindingFlags flags = BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Default; //default == "All"
+            switch ( CbxPrimitiveTypes.SelectedItem ) {
+
+                case "Standard": break;
+                case "Extended": break;
+            }
+           
+            Kernel.WriteLine("fields:{0}", type.GetFields(flags).Length);
+            type.GetFields(flags).WriteToListener("~");
+                //.Where(f => f.FieldType == type)
+                //.Apply(f => f.Name)
         }
     }
 }
