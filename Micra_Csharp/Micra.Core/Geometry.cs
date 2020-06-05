@@ -22,3 +22,11 @@ namespace Micra.Core {
         public IGeomObject _IGeomObject { get { return _Anim as IGeomObject; } }
     }
 }
+
+
+/*
+(GeomObject as ITriObject).Mesh.GetBoundingBox(TM)
+This returns the local space bounding box by default, but you can pass it:
+
+TM = GeomObject.WorldSpaceObjectNode.GetObjectTM(0, null)
+ *  */

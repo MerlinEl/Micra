@@ -20,6 +20,7 @@ SceneExplorer.dll - Specification of the ExplorerFramework components for the Sc
 UiViewModels.dll - Contains classes for defining user actions and customizing the user interface.
 
 Resources
+https://documentation.help/3DS-Max/idx_RM_interface_classes.htm
 http://discourse.techart.online/t/from-maxscript-to-c-or-c/3111/12
 https://area.autodesk.com/profile/SmsxxDGK/blog-posts/?p=2
 

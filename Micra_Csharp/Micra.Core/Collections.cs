@@ -179,8 +179,12 @@ namespace Micra.Core {
                 yield return itab[i];
             }
         }
-        // possibly call this "Realize"
-        public static void ForEach<T>(this IEnumerable<T> collection) {
+
+        public static IEnumerable<T> ToEnumerable<T>(this T input) { //test
+            yield return input;
+        }
+
+        public static void ForEach<T>(this IEnumerable<T> collection) {//test possibly call this "Realize"
             foreach ( T item in collection ) { } // do nothing
         }
         //items.ToList().ForEach(i => i.DoStuff());
@@ -203,6 +207,7 @@ namespace Micra.Core {
                 yield return ba[i];
             }
         }
+
     }
 }
 

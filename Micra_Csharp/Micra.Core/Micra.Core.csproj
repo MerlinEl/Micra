@@ -83,6 +83,7 @@
     <Compile Include="Mesh.cs" />
     <Compile Include="Modifier.cs" />
     <Compile Include="Node.cs" />
+    <Compile Include="ObjectDumper.cs" />
     <Compile Include="ParameterBlock1.cs" />
     <Compile Include="ParameterBlock2.cs" />
     <Compile Include="ParameterBlockInterface.cs" />
@@ -101,6 +102,8 @@
     <Compile Include="Utility.cs" />
     <Compile Include="Vector3.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Examples\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

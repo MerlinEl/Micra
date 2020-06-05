@@ -2,6 +2,7 @@
 using Micra.Core;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
@@ -212,7 +213,7 @@ namespace Micra.Tools {
 
                 //IMesh im = node.Object.GetImesh(Kernel.Now);
                 //IMeshSelection
-                //GetMeshSelectInterface
+                //GetMeshSelectInterface //AnimatableInterfaceIDs.h //#define GetMeshSelectInterface(anim) ((IMeshSelect*)(anim)->GetInterface(I_MESHSELECT)) //animtbl.h
 
                 //Autodesk.Max.Wrappers
 
@@ -305,6 +306,66 @@ namespace Micra.Tools {
                 n.Name,
                 SuperClassID.GetName(n.Object.SuperClassID)
                 ));
+        }
+
+        private void button18_Click(object sender, EventArgs e) {
+
+            Kernel.WriteLine(( sender as Button ).Text);
+
+            Node node = Kernel.Scene.SelectedNodes().FirstOrDefault();
+            SceneObject sceneObject = node.Object;
+            Geometry geometry = node.Object.Geometry;
+
+            IINode iiNode = node._IINode;
+            IReferenceTarget tRefTarget = node._Target;
+            IReferenceMaker iRefMarker = node._Maker;
+            IGeomObject iGeomObject = node.Object._IGeomObject;
+            IBaseObject iBaseObject = node.Object._BaseObject;
+            IObject iObject = node.GetObjectRef(); //same as > //node.Object._Object; //_IINode.ObjectRef
+            IAnimatable iAnimatable = node.Object._Anim;
+            IParameterBlock iParamBlock = node.Object.ParameterBlock;
+
+            Kernel.WriteLine("Selected Node:{0} subObjectLevel:{1}", node.Name, Kernel._Interface.SubObjectLevel);
+            List<object> objs = new List<object> {
+
+                node,
+                sceneObject,
+                geometry,
+                iiNode,
+                tRefTarget,
+                iRefMarker,
+                iGeomObject,
+                iBaseObject,
+                iObject,
+                iAnimatable,
+                iParamBlock
+            };
+            Kernel.WriteLine("\tObject Types( {0} ) Parameters > ", objs.Count());
+
+            var dump = ObjectDumper.Dump(objs.First());
+            Console.WriteLine("\t", dump);
+
+            /*objs.ForEach(o => {
+                try {
+                    var dump = ObjectDumper.Dump(o);
+                    Console.WriteLine("\t", dump);
+                    //foreach ( PropertyDescriptor descriptor in TypeDescriptor.GetProperties(o) ) {
+                    //    string name = descriptor.Name;
+                    //    object value = descriptor.GetValue(o);
+                    //    Console.WriteLine("\t\tName:{0} Value:{1}", name, value);
+                    //}
+                } catch { }
+            });*/
+
+
+            /*objs.ForEach(n => {
+                Kernel.WriteLine("\tObject:{0} type:{1} params:{2}", n.Name, n.GetType().Name, n.Object.Params.Count());
+                foreach ( IParameter p in n.Object.Params ) Kernel.WriteLine("\t\tparam:{0}", p.Name);
+            });*/
+
+            //animArray = getSubAnimNames $[#Object__Editable_Patch][#Master]
+            //node.Object.GetImesh.getsu
+            //IMasterPointControl masterPointController = IMasterPointControl.GetSubController(1);
         }
     }
 }

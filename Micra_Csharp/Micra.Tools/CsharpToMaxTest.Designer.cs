@@ -31,6 +31,8 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.BtnSelSimElements = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.BtnGetSceneObjects = new System.Windows.Forms.Button();
+            this.CbxSceneNodeTypes = new System.Windows.Forms.ComboBox();
             this.ChkSelected = new System.Windows.Forms.CheckBox();
             this.BtnUnhideGeometry = new System.Windows.Forms.Button();
             this.BtnHideGeometry = new System.Windows.Forms.Button();
@@ -58,8 +60,7 @@
             this.button13 = new System.Windows.Forms.Button();
             this.button8 = new System.Windows.Forms.Button();
             this.button9 = new System.Windows.Forms.Button();
-            this.CbxSceneNodeTypes = new System.Windows.Forms.ComboBox();
-            this.BtnGetSceneObjects = new System.Windows.Forms.Button();
+            this.button18 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -138,6 +139,7 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.button18);
             this.groupBox2.Controls.Add(this.BtnGetSceneObjects);
             this.groupBox2.Controls.Add(this.CbxSceneNodeTypes);
             this.groupBox2.Controls.Add(this.ChkSelected);
@@ -175,6 +177,31 @@
             this.groupBox2.TabIndex = 12;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "MaxSharp";
+            // 
+            // BtnGetSceneObjects
+            // 
+            this.BtnGetSceneObjects.Location = new System.Drawing.Point(700, 17);
+            this.BtnGetSceneObjects.Name = "BtnGetSceneObjects";
+            this.BtnGetSceneObjects.Size = new System.Drawing.Size(122, 23);
+            this.BtnGetSceneObjects.TabIndex = 36;
+            this.BtnGetSceneObjects.Text = "Get Scene Objects";
+            this.BtnGetSceneObjects.UseVisualStyleBackColor = true;
+            this.BtnGetSceneObjects.Click += new System.EventHandler(this.BtnGetSceneObjects_Click);
+            // 
+            // CbxSceneNodeTypes
+            // 
+            this.CbxSceneNodeTypes.FormattingEnabled = true;
+            this.CbxSceneNodeTypes.Items.AddRange(new object[] {
+            "All",
+            "GeometryNodes",
+            "LightNodes",
+            "CameraNodes",
+            "HelperNodes",
+            "ShapeNodes"});
+            this.CbxSceneNodeTypes.Location = new System.Drawing.Point(828, 17);
+            this.CbxSceneNodeTypes.Name = "CbxSceneNodeTypes";
+            this.CbxSceneNodeTypes.Size = new System.Drawing.Size(145, 21);
+            this.CbxSceneNodeTypes.TabIndex = 35;
             // 
             // ChkSelected
             // 
@@ -446,30 +473,15 @@
             this.button9.UseVisualStyleBackColor = true;
             this.button9.Click += new System.EventHandler(this.Button9_Click);
             // 
-            // CbxSceneNodeTypes
+            // button18
             // 
-            this.CbxSceneNodeTypes.FormattingEnabled = true;
-            this.CbxSceneNodeTypes.Items.AddRange(new object[] {
-            "All",
-            "GeometryNodes",
-            "LightNodes",
-            "CameraNodes",
-            "HelperNodes",
-            "ShapeNodes"});
-            this.CbxSceneNodeTypes.Location = new System.Drawing.Point(828, 17);
-            this.CbxSceneNodeTypes.Name = "CbxSceneNodeTypes";
-            this.CbxSceneNodeTypes.Size = new System.Drawing.Size(145, 21);
-            this.CbxSceneNodeTypes.TabIndex = 35;
-            // 
-            // BtnGetSceneObjects
-            // 
-            this.BtnGetSceneObjects.Location = new System.Drawing.Point(700, 17);
-            this.BtnGetSceneObjects.Name = "BtnGetSceneObjects";
-            this.BtnGetSceneObjects.Size = new System.Drawing.Size(122, 23);
-            this.BtnGetSceneObjects.TabIndex = 36;
-            this.BtnGetSceneObjects.Text = "Get Scene Objects";
-            this.BtnGetSceneObjects.UseVisualStyleBackColor = true;
-            this.BtnGetSceneObjects.Click += new System.EventHandler(this.BtnGetSceneObjects_Click);
+            this.button18.Location = new System.Drawing.Point(767, 195);
+            this.button18.Name = "button18";
+            this.button18.Size = new System.Drawing.Size(173, 73);
+            this.button18.TabIndex = 38;
+            this.button18.Text = "Poy - Mesh - All";
+            this.button18.UseVisualStyleBackColor = true;
+            this.button18.Click += new System.EventHandler(this.button18_Click);
             // 
             // CsharpToMaxTest
             // 
@@ -528,5 +540,6 @@
         private System.Windows.Forms.CheckBox ChkSelected;
         private System.Windows.Forms.ComboBox CbxSceneNodeTypes;
         private System.Windows.Forms.Button BtnGetSceneObjects;
+        private System.Windows.Forms.Button button18;
     }
 }

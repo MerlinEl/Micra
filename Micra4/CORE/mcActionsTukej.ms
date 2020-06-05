@@ -46,27 +46,40 @@ struct MICRA_TUKEJ_STRUCTURE	(
 	),
 	fn moveObjectToFusionPos = (
 		
-		local obj = selection[1]
-		if obj == undefined do return false
-		local fusion_pos_str = getclipboardtext()
-		if fusion_pos_str.count == 0 do return false
-		local fusion_pos_arr = filterString fusion_pos_str ","
-		if fusion_pos_arr.count != 3 do return false
-		local fusion_pos = execute ("["+fusion_pos_arr[1]+","+fusion_pos_arr[2]+","+fusion_pos_arr[3]+"]")
-		local p = fusion_pos * 100
-		obj.pos = p
-	),
-	fn moveObjectToFusionPos = (
 		
-		local obj = selection[1]
-		if obj == undefined do return false
+		if Keyboard.shiftPressed do ( --copy pos to fusion
+			
+			if selection.count == 0 do return false
+			format "Copy position for fusion\n"
+			format "\tmax pos:%\n" selection[1].pos
+			local fusion_pos = (selection[1].pos / 100)
+			format "\tfusion pos:%\n" fusion_pos
+			setclipboardtext fusion_pos
+			return OK
+		)
+		
+		local obj = getNodeByName "FusionPositionMarker" --try to pick marker if is already created
+		format "Pick FusionPositionMarker:%\n" (obj!=undefined)
+		if obj == undefined  do ( --create new marker
+			
+			obj = pyramid width:100 height:-400 depth:100 name:"FusionPositionMarker"
+			obj.pivot.z -= 400
+			obj.material = standardMaterial useSelfIllumColor:false selfIllumAmount:100 Diffuse:(color 255 0 234)	
+			format "Create new FusionPositionMarker.\n" 
+		)
+				subobjectlevel = 0
+				select obj
+		
 		local fusion_pos_str = getclipboardtext()
 		if fusion_pos_str.count == 0 do return false
 		local fusion_pos_arr = filterString fusion_pos_str ","
 		if fusion_pos_arr.count != 3 do return false
+		format "\tfusion pos:%\n" fusion_pos_str
 		local fusion_pos = execute ("["+fusion_pos_arr[1]+","+fusion_pos_arr[2]+","+fusion_pos_arr[3]+"]")
 		local p = fusion_pos * 100
-		undo "Move To Fusion Pos" on obj.pos = p
+		format "\tmax pos:%\n" p
+		obj.pos = p
+		mcMax.zoomToSelection()
 	)
 	/*<end>*/
 )	

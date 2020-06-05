@@ -50,6 +50,8 @@ struct MICRA_MAX_STRUCTURE	(
 	fn unhideAll = (if (queryBox "Unhide All Objects?" title:"Action:") do unhide objects; max zoomext sel all),
 	fn hideSelected = (hide selection),
 	fn unhideSelected = (unhide selection; max zoomext sel),
+	fn zoomToSelection = (max zoomext sel),
+	fn maxCreateMode = (max create mode),
 	fn selectObjectsByName str visibleOnly:true ignoreCase:true exclude:#() method:#any = (
 
 		select ( for o in objects where (
