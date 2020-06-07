@@ -97,8 +97,8 @@ namespace Micra.Core {
         /// Runs a MAXScript file.
         /// </summary>
         /// <param name="filename"></param>
-        public static void RunMAXScriptFile(string filename) {
-            RunMAXScriptFile(filename, false);
+        public static void ExecuteMaxScriptFile(string filename) {
+            ExecuteMaxScriptFile(filename, false);
         }
 
         /// <summary>
@@ -106,17 +106,17 @@ namespace Micra.Core {
         /// </summary>
         /// <param name="filename"></param>
         /// <param name="quieterrors"></param>
-        public static void RunMAXScriptFile(string filename, bool quieterrors) {
+        public static void ExecuteMaxScriptFile(string filename, bool quieterrors) {
             string script = File.ReadAllText(filename);
-            RunMAXScriptString(script, quieterrors);
+            ExecuteMaxScriptScript(script, quieterrors);
         }
 
         /// <summary>
         /// Evaluates a MAXScript string
         /// </summary>
         /// <param name="text"></param>
-        public static void RunMAXScriptString(string text) {
-            RunMAXScriptString(text, false);
+        public static void ExecuteMaxScriptScript(string text) {
+            ExecuteMaxScriptScript(text, false);
         }
 
         /// <summary>
@@ -124,7 +124,7 @@ namespace Micra.Core {
         /// </summary>
         /// <param name="text"></param>
         /// <param name="quieterrors"></param>
-        public static void RunMAXScriptString(string text, bool quieterrors) {
+        public static void ExecuteMaxScriptScript(string text, bool quieterrors) {
             Kernel._Global.ExecuteMAXScriptScript(text, quieterrors, null);
         }
 

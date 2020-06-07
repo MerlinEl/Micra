@@ -1,14 +1,10 @@
 ﻿using Autodesk.Max;
-using Autodesk.Max.EditorStyleDef;
-using Autodesk.Max.IIRenderMgr;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
-using System.Runtime.InteropServices;
 
 namespace Micra.Core {
-    public class Collections {
+    public class ObjOps {
         /// <summary>
         /// Smart selection depends on SubobjectLevel
         /// Works with Editable_Poly and Editable_Mesh
@@ -73,7 +69,7 @@ namespace Micra.Core {
             if ( clearSel ) DeselectAll(true);
             List<Node> nodes = Kernel.Scene.RootNode.Children
                 .Where(n => !hidden ? n.Visible : true)
-                .Where(n=> n.Object.ClassID == classId)
+                .Where(n => n.Object.ClassID == classId)
                 .ToList();
             Kernel._Interface.SelectNodeTab(nodes.ToIINodeTab(), true, redraw);
 
@@ -116,7 +112,7 @@ namespace Micra.Core {
 
             //Kernel._Interface.RedrawViews(Kernel.Now, RedrawFlags.Begin, null);
             Kernel._Interface.DisableSceneRedraw();
-            Kernel._Interface.SuspendEditing((uint)TaskModes.TASK_MODE_MODIFY, true); //for now seems not works ... see it later
+            Kernel._Interface.SuspendEditing(( uint )TaskModes.TASK_MODE_MODIFY, true); //for now seems not works ... see it later
             DeselectAll(false);
             try {
                 foreach ( Node n in nodes ) {
@@ -128,7 +124,7 @@ namespace Micra.Core {
                 throw new Exception(ex.Message);
 
             } finally {
-                Kernel._Interface.ResumeEditing((uint)TaskModes.TASK_MODE_MODIFY, true); //for now seem not works ... see it later
+                Kernel._Interface.ResumeEditing(( uint )TaskModes.TASK_MODE_MODIFY, true); //for now seem not works ... see it later
                 Kernel._Interface.EnableSceneRedraw();
             }
             Kernel.WriteLine("Selected Instance nodes:{0}/{1}", Kernel.Scene.SelectedNodes().Count(), Kernel.Scene.RootNode.Children.Count());
@@ -145,7 +141,7 @@ namespace Micra.Core {
                     n.IsSuperClassOf(SuperClassID.GeometricObject) && //get all geometry objects
                     !n.IsClassOf(ClassID.TargetObject) //exclude any light Target
                 )
-                .Select(n => n.Object.GetVolume()).Distinct()
+                .Select(n => n.Object.GetArea()).Distinct()
                 .ToList();
 
             Kernel.WriteLine("\tVolumes types:{0}", volumes.Count());
@@ -157,7 +153,7 @@ namespace Micra.Core {
                 .Where(n =>
                     n.IsSuperClassOf(SuperClassID.GeometricObject) && //get all geometry objects
                     !n.IsClassOf(ClassID.TargetObject) && //exclude any light Target
-                    volumes.IndexOf(n.Object.GetVolume()) != -1
+                    volumes.IndexOf(n.Object.GetArea()) != -1
                  )
                 .Select(n => n)
                 .ToList();
@@ -181,51 +177,6 @@ namespace Micra.Core {
             if ( nodeInstances.Count == 0 ) return;
             SelectNodes(nodeInstances);
             if ( redraw ) Kernel.RedrawViews();
-        }
-    }
-    internal static class CollectionExtensions {
-
-        public static IEnumerable<T> ToIEnumerable<T>(this ITab<T> itab) {
-
-            if ( itab == null ) yield break;
-            for ( int i = 0; i < itab.Count; i++ ) {
-                yield return itab[i];
-            }
-        }
-
-        public static IEnumerable<T> ToEnumerable<T>(this T input) { //test
-            yield return input;
-        }
-
-        public static void ForEach<T>(this IEnumerable<T> collection) {//test possibly call this "Realize"
-            foreach ( T item in collection ) { } // do nothing
-        }
-        //items.ToList().ForEach(i => i.DoStuff());
-        public static void ForEach<T>(this IEnumerable<T> collection, Action<T> action) {
-            foreach ( T item in collection ) action(item);
-        }
-        //int[] data = {1,2,3,4,5};
-        //var odd = data.Where(i => i % 2 != 0);
-        //or
-        //var odd = data.Where<int>(i=>i%2 != 0);
-        public static IEnumerable<T> Where<T>(this IEnumerable<T> data, Func<T, bool> predicate) {
-            foreach ( T value in data ) {
-                if ( predicate(value) ) yield return value;
-            }
-        }
-        //test test test
-        public static IEnumerable<int> IEnumerable(this IBitArray ba) { //testing
-            if ( ba.IsEmpty ) yield break;
-            for ( int i = 0; i < ba.Size; i++ ) {
-                yield return ba[i];
-            }
-        }
-
-        public static IINodeTab ToIINodeTab(this List<Node> nodesList) {
-
-            IINodeTab nodes = Kernel._Global.NodeTab.Create();
-            nodesList.ForEach(n => nodes.AppendNode(n._IINode, true, 1));
-            return nodes;
         }
     }
 }

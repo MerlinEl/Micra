@@ -250,14 +250,13 @@ namespace Micra.Core {
             set { _IINode.IsFrozen = value; }
         }
 
+        //test > in profress
+        //ClassID.EditableMesh.Equals(_Object.ClassID)
+        //ClassID.EditablePoly.Equals(_Object.ClassID)
         public string ClassOf() => ClassID.GetClassName(Object.ClassID);
         public string SuperClassOf() => SuperClassID.GetSuperClassName(Object.SuperClassID);
-
         public bool IsClassOf(ClassID id) => Object.ClassID.a == id.a && Object.ClassID.b == id.b;
-
         public bool IsSuperClassOf(SuperClassID id) => Object.SuperClassID == id;
-
-
         //Todo >
         //-baseObject == allow modifiers
         //-modPolyOrMesh == add posibility operate with editable_poy and editable_mesh modifiers
@@ -266,24 +265,27 @@ namespace Micra.Core {
             //Kernel.WriteLine("is mesh:{0} is poly{1}", IsClassOf(ClassID.EditableMesh), IsClassOf(ClassID.EditablePoly));
             return IsClassOf(ClassID.EditableMesh) || IsClassOf(ClassID.EditablePoly);
         }
+        // < test in profress
+
 
         public void Move(Point3 pt) => Move(pt, Kernel.Now);
-
         public void Move(Point3 pt, TimeValue t) {
             _IINode.Move(t, Matrix3.Identity.Translate(pt)._IMatrix3, pt._IPoint3, false, true, (int)PivotMode.None, false);
         }
 
         public SceneObject Object => CreateWrapper<SceneObject>(_IINode.ObjectRef);
+        public Geometry Geometry => CreateWrapper<Geometry>(_IINode.ObjectRef); //TODO test this
 
-        public IObject GetObjectRef() { //test only
+        public IObject GetObjectRef() => _IINode.ObjectRef; //test only
+        public Mesh GetMesh() => GetMesh(Kernel.Now);
+        public Mesh GetMesh(TimeValue t) => Object.GetMesh(t);
+        public Poly GetPoly() => Object.GetPoly(Kernel.Now);
+        public IMesh GetImesh() => Object.GetITriobject(Kernel.Now).Mesh;
+        public IMesh GetImesh(TimeValue t) => Object.GetITriobject(t).Mesh;
+        public IMNMesh GetPolyMesh() => Object.GetIpolyObject(Kernel.Now).Mesh;
+        public IMNMesh GetPolyMesh(TimeValue t) => Object.GetIpolyObject(t).Mesh;
 
-            /*IINode iinode = node._IINode;
-            IObjectState ios = iinode.ObjectRef.Eval(Kernel.Now);
-            IObject io = ios.Obj;*/
-            return _IINode.ObjectRef;
-        }
 
-        //public Geometry Geometry => CreateWrapper<Geometry>(_IINode.ObjectRef); //test for now
 
 
         //! \name Modifier Functions
@@ -332,35 +334,6 @@ namespace Micra.Core {
             get {
                 return new NodeVisibility(_IINode);
             }
-        }
-        /*public SceneObject GetSceneObject() => GetSceneObject(Kernel.Now, true);
-        public SceneObject GetSceneObject(TimeValue t, bool evalHidden) {
-
-            // Retrieve the TriObject from the node
-            IObjectState state = _Node.EvalWorldState(t, evalHidden);
-            //Kernel.WriteLine("GetMesh > node:{0} state:{1}", Name, state);
-            if ( state == null ) return null;
-
-            IObject obj = state.Obj;
-            if ( obj == null ) return null;
-
-            return new SceneObject(obj);
-        }*/
-
-        public Mesh GetMesh() {
-            return GetMesh(Kernel.Now);
-        }
-
-        public Mesh GetMesh(TimeValue t) {
-            return GetMesh(t, true);
-        }
-
-        public Mesh GetMesh(TimeValue t, bool evalHidden) {
-
-            /*SceneObject o = GetSceneObject(t, evalHidden);
-            if ( o == null ) return null;
-            return o.GetMesh(t);*/
-            return Object.GetMesh(t);
         }
 
         public bool IsBone {
@@ -451,3 +424,8 @@ namespace Micra.Core {
         //@}
     }
 }
+
+
+/*SceneObject o = GetSceneObject(t, evalHidden);
+if ( o == null ) return null;
+return o.GetMesh(t);*/

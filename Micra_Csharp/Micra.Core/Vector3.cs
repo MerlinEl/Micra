@@ -124,7 +124,7 @@ namespace Micra.Core {
             vector1.Normalize();
             vector2.Normalize();
 
-            double ratio = DotProduct(vector1, vector2);
+            double ratio = Dot(vector1, vector2);
 
             // The "straight forward" method of acos(u.v) has large precision
             // issues when the dot product is near +/-1.  This is due to the
@@ -404,8 +404,8 @@ namespace Micra.Core {
         /// <param name="vector1">First vector.</param>
         /// <param name="vector2">Second vector.</param>
         /// <returns>Dot product of two vectors.</returns>
-        public static double DotProduct(Vector3 vector1, Vector3 vector2) {
-            return DotProduct(ref vector1, ref vector2);
+        public static double Dot(Vector3 vector1, Vector3 vector2) {
+            return Dot(ref vector1, ref vector2);
         }
 
         /// <summary>
@@ -413,7 +413,7 @@ namespace Micra.Core {
         ///
         /// vector1 and vector2 to a passed by ref for perf and ARE NOT MODIFIED
         /// </summary>
-        internal static double DotProduct(ref Vector3 vector1, ref Vector3 vector2) {
+        internal static double Dot(ref Vector3 vector1, ref Vector3 vector2) {
             return vector1._x * vector2._x +
                    vector1._y * vector2._y +
                    vector1._z * vector2._z;
@@ -425,9 +425,9 @@ namespace Micra.Core {
         /// <param name="vector1">First vector.</param>
         /// <param name="vector2">Second vector.</param>
         /// <returns>Cross product of two vectors.</returns>
-        public static Vector3 CrossProduct(Vector3 vector1, Vector3 vector2) {
+        public static Vector3 Cross(Vector3 vector1, Vector3 vector2) {
             Vector3 result;
-            CrossProduct(ref vector1, ref vector2, out result);
+            Cross(ref vector1, ref vector2, out result);
             return result;
         }
 
@@ -436,7 +436,7 @@ namespace Micra.Core {
         ///
         /// vector1 and vector2 to a passed by ref for perf and ARE NOT MODIFIED
         /// </summary>
-        internal static void CrossProduct(ref Vector3 vector1, ref Vector3 vector2, out Vector3 result) {
+        internal static void Cross(ref Vector3 vector1, ref Vector3 vector2, out Vector3 result) {
             result._x = vector1._y * vector2._z - vector1._z * vector2._y;
             result._y = vector1._z * vector2._x - vector1._x * vector2._z;
             result._z = vector1._x * vector2._y - vector1._y * vector2._x;

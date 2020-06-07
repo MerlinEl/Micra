@@ -169,15 +169,15 @@ namespace Micra.Core {
         public ClassID(BuiltInClassIDA a, BuiltInClassIDB b) { this.a = ( uint )a; this.b = ( uint )b; }
 
         public IClass_ID _IClass_ID => Kernel._Global.Class_ID.Create(a, b);
-
+           
+        //is class
         public static ClassID EditableMesh = new ClassID(BuiltInClassIDA.EDITTRIOBJ_CLASS_ID, 0);
         public static ClassID EditablePoly = new ClassID(BuiltInClassIDA.EPOLYOBJ_CLASS_ID, BuiltInClassIDB.EPOLYOBJ_CLASS_ID);
         public static ClassID BoneGeometry = new ClassID(BuiltInClassIDA.BONE_CLASS_ID, BuiltInClassIDB.BONE_OBJ_CLASSID);
         public static ClassID TargetObject = new ClassID(BuiltInClassIDA.TARGET_CLASS_ID, 0);
-        public static ClassID TriObject = new ClassID(BuiltInClassIDA.TRIOBJ_CLASS_ID, 0); //not tested
-
-        //replaced --see if is ok and remove it
-        //public static ClassID TriObject = new ClassID(0x0009, 0);
+        //can convert
+        public static ClassID TriObject = new ClassID(BuiltInClassIDA.TRIOBJ_CLASS_ID, 0);
+        public static ClassID PolyObject = new ClassID(BuiltInClassIDA.POLYOBJ_CLASS_ID, 0);
 
         public string GetClassName(ClassID clsID) {
             //get clas name from Max Enums
@@ -307,6 +307,16 @@ namespace Micra.Core {
         public Point3 Normalized { get { float len = Length; return new Point3(X / len, Y / len, Z / len); } }
 
         public void Normalize() { float len = Length; X /= len; Y /= len; Z /= len; }
+
+        internal static double Distance(Point3 p1, Point3 p2) {
+
+            /*return Math.Sqrt(
+                ( Math.Pow( p2.X - p1.X, 2 ) ) +
+                ( Math.Pow( p2.Y - p1.Y, 2 ) ) +
+                ( Math.Pow( p2.Z - p1.Z, 2 ) )
+            );*/
+            return ( p2 - p1 ).Length;
+        }
 
         // Allow array-like access to this class
         public float this[int i] {

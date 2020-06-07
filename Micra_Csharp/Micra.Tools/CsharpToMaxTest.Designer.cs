@@ -24,13 +24,18 @@
         /// </summary>
         private void InitializeComponent() {
             this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.button5 = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.CbxScriptList = new System.Windows.Forms.ComboBox();
+            this.BtnExecute = new System.Windows.Forms.Button();
             this.BtnSelSimElements = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.CbxMaxFilePath = new System.Windows.Forms.ComboBox();
+            this.ChkSelHidden2 = new System.Windows.Forms.CheckBox();
+            this.CbxPrimitiveTypes = new System.Windows.Forms.ComboBox();
+            this.BtnListPrimitives = new System.Windows.Forms.Button();
+            this.button18 = new System.Windows.Forms.Button();
             this.BtnGetSceneObjects = new System.Windows.Forms.Button();
             this.CbxSceneNodeTypes = new System.Windows.Forms.ComboBox();
             this.ChkSelected = new System.Windows.Forms.CheckBox();
@@ -39,7 +44,6 @@
             this.BtnGetSelVetts = new System.Windows.Forms.Button();
             this.BtnGetSelEdges = new System.Windows.Forms.Button();
             this.BtnGetSelFaces = new System.Windows.Forms.Button();
-            this.TbxMaxFilePath = new System.Windows.Forms.TextBox();
             this.BtnOpenMaxFile = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
             this.RbtSuperClassOf = new System.Windows.Forms.RadioButton();
@@ -60,10 +64,8 @@
             this.button13 = new System.Windows.Forms.Button();
             this.button8 = new System.Windows.Forms.Button();
             this.button9 = new System.Windows.Forms.Button();
-            this.button18 = new System.Windows.Forms.Button();
-            this.BtnListPrimitives = new System.Windows.Forms.Button();
-            this.CbxPrimitiveTypes = new System.Windows.Forms.ComboBox();
-            this.ChkSelHidden2 = new System.Windows.Forms.CheckBox();
+            this.BtnGetObjArea1 = new System.Windows.Forms.Button();
+            this.BtnGetObjArea2 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -78,38 +80,18 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.Button1_Click);
             // 
-            // button2
-            // 
-            this.button2.Location = new System.Drawing.Point(130, 19);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(118, 23);
-            this.button2.TabIndex = 1;
-            this.button2.Text = "Render Scene";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.Button2_Click);
-            // 
-            // button3
-            // 
-            this.button3.Location = new System.Drawing.Point(6, 19);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(118, 23);
-            this.button3.TabIndex = 2;
-            this.button3.Text = "Create 3 Boxes";
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.Button3_Click);
-            // 
             // textBox1
             // 
             this.textBox1.Location = new System.Drawing.Point(6, 48);
             this.textBox1.Multiline = true;
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(973, 112);
+            this.textBox1.Size = new System.Drawing.Size(592, 172);
             this.textBox1.TabIndex = 3;
             this.textBox1.Text = "...";
             // 
             // button5
             // 
-            this.button5.Location = new System.Drawing.Point(254, 19);
+            this.button5.Location = new System.Drawing.Point(453, 17);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(145, 23);
             this.button5.TabIndex = 5;
@@ -119,16 +101,35 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.button3);
+            this.groupBox1.Controls.Add(this.CbxScriptList);
+            this.groupBox1.Controls.Add(this.BtnExecute);
             this.groupBox1.Controls.Add(this.button5);
-            this.groupBox1.Controls.Add(this.button2);
             this.groupBox1.Controls.Add(this.textBox1);
             this.groupBox1.Location = new System.Drawing.Point(12, 357);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(985, 166);
+            this.groupBox1.Size = new System.Drawing.Size(614, 228);
             this.groupBox1.TabIndex = 7;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Execute Max Script";
+            // 
+            // CbxScriptList
+            // 
+            this.CbxScriptList.FormattingEnabled = true;
+            this.CbxScriptList.Location = new System.Drawing.Point(130, 19);
+            this.CbxScriptList.Name = "CbxScriptList";
+            this.CbxScriptList.Size = new System.Drawing.Size(215, 21);
+            this.CbxScriptList.TabIndex = 44;
+            this.CbxScriptList.SelectedIndexChanged += new System.EventHandler(this.OnCbxScriptListSelChanges);
+            // 
+            // BtnExecute
+            // 
+            this.BtnExecute.Location = new System.Drawing.Point(6, 19);
+            this.BtnExecute.Name = "BtnExecute";
+            this.BtnExecute.Size = new System.Drawing.Size(118, 23);
+            this.BtnExecute.TabIndex = 6;
+            this.BtnExecute.Text = "EXECUTE";
+            this.BtnExecute.UseVisualStyleBackColor = true;
+            this.BtnExecute.Click += new System.EventHandler(this.BtnExecute_Click);
             // 
             // BtnSelSimElements
             // 
@@ -142,6 +143,9 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.BtnGetObjArea2);
+            this.groupBox2.Controls.Add(this.BtnGetObjArea1);
+            this.groupBox2.Controls.Add(this.CbxMaxFilePath);
             this.groupBox2.Controls.Add(this.ChkSelHidden2);
             this.groupBox2.Controls.Add(this.CbxPrimitiveTypes);
             this.groupBox2.Controls.Add(this.BtnListPrimitives);
@@ -154,7 +158,6 @@
             this.groupBox2.Controls.Add(this.BtnGetSelVetts);
             this.groupBox2.Controls.Add(this.BtnGetSelEdges);
             this.groupBox2.Controls.Add(this.BtnGetSelFaces);
-            this.groupBox2.Controls.Add(this.TbxMaxFilePath);
             this.groupBox2.Controls.Add(this.BtnOpenMaxFile);
             this.groupBox2.Controls.Add(this.button4);
             this.groupBox2.Controls.Add(this.BtnSelSimElements);
@@ -183,6 +186,59 @@
             this.groupBox2.TabIndex = 12;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "MaxSharp";
+            // 
+            // CbxMaxFilePath
+            // 
+            this.CbxMaxFilePath.FormattingEnabled = true;
+            this.CbxMaxFilePath.Items.AddRange(new object[] {
+            "D:\\ReneBaca\\Aprog\\Micra\\Micra_Csharp\\Resources\\test_scene_01.max",
+            "E:\\Aprog\\Orien\\Micra\\Micra_Csharp\\Resources\\test_scene_01.max"});
+            this.CbxMaxFilePath.Location = new System.Drawing.Point(208, 302);
+            this.CbxMaxFilePath.Name = "CbxMaxFilePath";
+            this.CbxMaxFilePath.Size = new System.Drawing.Size(400, 21);
+            this.CbxMaxFilePath.TabIndex = 43;
+            // 
+            // ChkSelHidden2
+            // 
+            this.ChkSelHidden2.AutoSize = true;
+            this.ChkSelHidden2.Location = new System.Drawing.Point(134, 224);
+            this.ChkSelHidden2.Name = "ChkSelHidden2";
+            this.ChkSelHidden2.Size = new System.Drawing.Size(74, 17);
+            this.ChkSelHidden2.TabIndex = 42;
+            this.ChkSelHidden2.Text = "sel hidden";
+            this.ChkSelHidden2.UseVisualStyleBackColor = true;
+            // 
+            // CbxPrimitiveTypes
+            // 
+            this.CbxPrimitiveTypes.FormattingEnabled = true;
+            this.CbxPrimitiveTypes.Items.AddRange(new object[] {
+            "All",
+            "Standard",
+            "Extended"});
+            this.CbxPrimitiveTypes.Location = new System.Drawing.Point(828, 52);
+            this.CbxPrimitiveTypes.Name = "CbxPrimitiveTypes";
+            this.CbxPrimitiveTypes.Size = new System.Drawing.Size(145, 21);
+            this.CbxPrimitiveTypes.TabIndex = 41;
+            // 
+            // BtnListPrimitives
+            // 
+            this.BtnListPrimitives.Location = new System.Drawing.Point(700, 52);
+            this.BtnListPrimitives.Name = "BtnListPrimitives";
+            this.BtnListPrimitives.Size = new System.Drawing.Size(122, 23);
+            this.BtnListPrimitives.TabIndex = 39;
+            this.BtnListPrimitives.Text = "List Primitives";
+            this.BtnListPrimitives.UseVisualStyleBackColor = true;
+            this.BtnListPrimitives.Click += new System.EventHandler(this.BtnListPrimitives_Click);
+            // 
+            // button18
+            // 
+            this.button18.Location = new System.Drawing.Point(861, 289);
+            this.button18.Name = "button18";
+            this.button18.Size = new System.Drawing.Size(112, 34);
+            this.button18.TabIndex = 38;
+            this.button18.Text = "Poy - Mesh - All";
+            this.button18.UseVisualStyleBackColor = true;
+            this.button18.Click += new System.EventHandler(this.button18_Click);
             // 
             // BtnGetSceneObjects
             // 
@@ -270,14 +326,6 @@
             this.BtnGetSelFaces.Text = "Get Selected Faces";
             this.BtnGetSelFaces.UseVisualStyleBackColor = true;
             this.BtnGetSelFaces.Click += new System.EventHandler(this.BtnGetSelFaces_Click);
-            // 
-            // TbxMaxFilePath
-            // 
-            this.TbxMaxFilePath.Location = new System.Drawing.Point(208, 304);
-            this.TbxMaxFilePath.Name = "TbxMaxFilePath";
-            this.TbxMaxFilePath.Size = new System.Drawing.Size(436, 20);
-            this.TbxMaxFilePath.TabIndex = 28;
-            this.TbxMaxFilePath.Text = "D:\\ReneBaca\\Aprog\\Micra\\Micra_Csharp\\Resources\\test_scene_01.max";
             // 
             // BtnOpenMaxFile
             // 
@@ -479,53 +527,31 @@
             this.button9.UseVisualStyleBackColor = true;
             this.button9.Click += new System.EventHandler(this.Button9_Click);
             // 
-            // button18
+            // BtnGetObjArea1
             // 
-            this.button18.Location = new System.Drawing.Point(767, 195);
-            this.button18.Name = "button18";
-            this.button18.Size = new System.Drawing.Size(173, 73);
-            this.button18.TabIndex = 38;
-            this.button18.Text = "Poy - Mesh - All";
-            this.button18.UseVisualStyleBackColor = true;
-            this.button18.Click += new System.EventHandler(this.button18_Click);
+            this.BtnGetObjArea1.Location = new System.Drawing.Point(723, 133);
+            this.BtnGetObjArea1.Name = "BtnGetObjArea1";
+            this.BtnGetObjArea1.Size = new System.Drawing.Size(122, 23);
+            this.BtnGetObjArea1.TabIndex = 44;
+            this.BtnGetObjArea1.Text = "Get Object Area";
+            this.BtnGetObjArea1.UseVisualStyleBackColor = true;
+            this.BtnGetObjArea1.Click += new System.EventHandler(this.BtnGetObjArea_Click);
             // 
-            // BtnListPrimitives
+            // BtnGetObjArea2
             // 
-            this.BtnListPrimitives.Location = new System.Drawing.Point(700, 52);
-            this.BtnListPrimitives.Name = "BtnListPrimitives";
-            this.BtnListPrimitives.Size = new System.Drawing.Size(122, 23);
-            this.BtnListPrimitives.TabIndex = 39;
-            this.BtnListPrimitives.Text = "List Primitives";
-            this.BtnListPrimitives.UseVisualStyleBackColor = true;
-            this.BtnListPrimitives.Click += new System.EventHandler(this.BtnListPrimitives_Click);
-            // 
-            // CbxPrimitiveTypes
-            // 
-            this.CbxPrimitiveTypes.FormattingEnabled = true;
-            this.CbxPrimitiveTypes.Items.AddRange(new object[] {
-            "All",
-            "Standard",
-            "Extended"});
-            this.CbxPrimitiveTypes.Location = new System.Drawing.Point(828, 52);
-            this.CbxPrimitiveTypes.Name = "CbxPrimitiveTypes";
-            this.CbxPrimitiveTypes.Size = new System.Drawing.Size(145, 21);
-            this.CbxPrimitiveTypes.TabIndex = 41;
-            // 
-            // ChkSelHidden2
-            // 
-            this.ChkSelHidden2.AutoSize = true;
-            this.ChkSelHidden2.Location = new System.Drawing.Point(134, 224);
-            this.ChkSelHidden2.Name = "ChkSelHidden2";
-            this.ChkSelHidden2.Size = new System.Drawing.Size(74, 17);
-            this.ChkSelHidden2.TabIndex = 42;
-            this.ChkSelHidden2.Text = "sel hidden";
-            this.ChkSelHidden2.UseVisualStyleBackColor = true;
+            this.BtnGetObjArea2.Location = new System.Drawing.Point(851, 133);
+            this.BtnGetObjArea2.Name = "BtnGetObjArea2";
+            this.BtnGetObjArea2.Size = new System.Drawing.Size(122, 23);
+            this.BtnGetObjArea2.TabIndex = 45;
+            this.BtnGetObjArea2.Text = "Get Face Area";
+            this.BtnGetObjArea2.UseVisualStyleBackColor = true;
+            this.BtnGetObjArea2.Click += new System.EventHandler(this.BtnGetFaceArea_Click);
             // 
             // CsharpToMaxTest
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1009, 527);
+            this.ClientSize = new System.Drawing.Size(1009, 589);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Name = "CsharpToMaxTest";
@@ -542,8 +568,6 @@
         #endregion
 
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button3;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.GroupBox groupBox1;
@@ -568,7 +592,6 @@
         private System.Windows.Forms.RadioButton RbtSuperClassOf;
         private System.Windows.Forms.RadioButton RbtClassOf;
         private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.TextBox TbxMaxFilePath;
         private System.Windows.Forms.Button BtnOpenMaxFile;
         private System.Windows.Forms.Button BtnGetSelVetts;
         private System.Windows.Forms.Button BtnGetSelEdges;
@@ -582,5 +605,10 @@
         private System.Windows.Forms.ComboBox CbxPrimitiveTypes;
         private System.Windows.Forms.Button BtnListPrimitives;
         private System.Windows.Forms.CheckBox ChkSelHidden2;
+        private System.Windows.Forms.ComboBox CbxMaxFilePath;
+        private System.Windows.Forms.Button BtnExecute;
+        private System.Windows.Forms.ComboBox CbxScriptList;
+        private System.Windows.Forms.Button BtnGetObjArea2;
+        private System.Windows.Forms.Button BtnGetObjArea1;
     }
 }

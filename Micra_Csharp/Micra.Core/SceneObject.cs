@@ -14,7 +14,7 @@ namespace Micra.Core {
     /// <summary>
     /// Represents an element of a scene. Wraps the BaseObject type in the 3ds Max SDK. 
     /// </summary>
-    public class SceneElement : ReferenceTarget {
+    public class SceneElement:ReferenceTarget {
         public IBaseObject _BaseObject { get { return _Anim as IBaseObject; } }
 
         internal SceneElement(IBaseObject x) : base(x) {
@@ -48,7 +48,7 @@ namespace Micra.Core {
     /// Represents an object that can flow through the geometry pipeline. Wraps the Object type 
     /// in the Max SDK. Associated with a Node. 
     /// </summary>
-    public class SceneObject : SceneElement {
+    public class SceneObject:SceneElement {
         internal SceneObject(IObject x) : base(x) { }
 
         /// <summary>
@@ -67,6 +67,8 @@ namespace Micra.Core {
         public IGeomObject _IGeomObject { get { return _Anim as IGeomObject; } } //test
         public Geometry Geometry => CreateWrapper<Geometry>(_Anim); //test seems to works
 
+        public bool IsClassOf(ClassID id) => ClassID.a == id.a && ClassID.b == id.b;
+        public bool IsSuperClassOf(SuperClassID id) => SuperClassID == id;
 
         public void AddModifier(Modifier m) {
             if ( _Node != null )
@@ -86,41 +88,71 @@ namespace Micra.Core {
                 return r;
             }
         }
+
+        #region MESH OBJECT
+
         public ITriObject GetITriobject() => GetITriobject(Kernel.Now);
-        public ITriObject GetITriobject(TimeValue t) {
+        public ITriObject GetITriobject(TimeValue t) { //Autodesk.Max.Wrappers.TriObject
 
-            IClass_ID triClass = Kernel._Global.Class_ID.Create((uint)BuiltInClassIDA.TRIOBJ_CLASS_ID, 0);
-            if ( _Object.CanConvertToType(ClassID.TriObject._IClass_ID) == 0 ) return null;
-
-            ITriObject tri = _Object.ConvertToType(t, triClass) as ITriObject;
-            if ( tri == null ) return null;
-            return tri;
+            //Kernel.WriteLine("GetITriobject > from _Object:{0}", _Object);
+            IClass_ID triClass = ClassID.TriObject._IClass_ID;
+            if ( _Object.CanConvertToType(triClass) == 0 ) return null;
+            return _Object.ConvertToType(t, triClass) as ITriObject;
         }
 
+        public IMesh GetImesh() => GetITriobject(Kernel.Now).Mesh;
         public IMesh GetImesh(TimeValue t) => GetITriobject(t).Mesh;
 
         public Mesh GetMesh() => GetMesh(Kernel.Now);
         public Mesh GetMesh(TimeValue t) {
 
             ITriObject tri = GetITriobject(t);
+            if ( tri == null ) return null;
             Mesh r = new Mesh(tri.Mesh);
 
             if ( tri.GetType().TypeHandle.Value != _Object.GetType().TypeHandle.Value ) {
-                //if (tri.Handle != _Object.Handle) {
+                //if ( tri.Handle != _Object.Handle ) { //replaced with .GetType().TypeHandle 
                 RefResult rr = tri.MaybeAutoDelete();
                 if ( rr == RefResult.Fail )
                     throw new Exception("Failed to autodelete the tri-object");
+
             }
             return r;
         }
 
-        public double GetVolume() {
+        #endregion
 
-            Mesh m = GetMesh();
-            double objVolume = 0.0;
-            m.faces.ForEach(f => objVolume += GeoOP.GetFaceArea(m, f));
-            return ( objVolume / m.faces.Length );
+        #region POLY OBJECT TEST
+
+        public IPolyObject GetIpolyObject(TimeValue t) { //Autodesk.Max.Wrappers.PolyObject
+
+            //Kernel.WriteLine("GetIpolyObject > from _Object:{0}", _Object);
+            IClass_ID polyClass = ClassID.PolyObject._IClass_ID;
+            if ( _Object.CanConvertToType(polyClass) == 0 ) return null;
+            return _Object.ConvertToType(t, polyClass) as IPolyObject;
         }
+
+        public IMNMesh GetPolyMesh() => GetIpolyObject(Kernel.Now).Mesh;
+        public IMNMesh GetPolyMesh(TimeValue t) => GetIpolyObject(t).Mesh;
+        public Poly GetPoly() => GetPoly(Kernel.Now);
+        public Poly GetPoly(TimeValue t) {
+
+            IPolyObject pol = GetIpolyObject(t);
+            if ( pol == null ) return null;
+            Poly r = new Poly(pol.Mesh);
+
+            if ( pol.GetType().TypeHandle.Value != _Object.GetType().TypeHandle.Value ) {
+                //if (pol.Handle != _Object.Handle) { //replaced with .GetType().TypeHandle 
+                RefResult rr = pol.MaybeAutoDelete();
+                if ( rr == RefResult.Fail )
+                    throw new Exception("Failed to autodelete the poly-object");
+            }
+            return r;
+        }
+
+        #endregion
+
+        public double GetArea() => GeoOps.GetObjectArea(GetMesh());
 
         public void HideGeometry(bool selected) {
             //Based on SubobjectLevel
@@ -132,24 +164,24 @@ namespace Micra.Core {
                 case 4: break;
                 case 5: break;
             }
+            //on poly or mesh
+
 
             IMesh im = GetImesh(Kernel.Now);
+
             Kernel.WriteLine("Mesh Faces:{0}", im.FaceSel.Size);
             for ( int i = 0; i < im.FaceSel.Size; i++ ) {
 
                 bool isSelected = im.FaceSel[i] == 1;
                 Kernel.WriteLine("selected:{0} face:{1}", isSelected, i);
                 if ( selected && isSelected ) {
+
                     im.Faces[i].Hide();
-                    //im.Faces[i].
-                    //im.FaceSel[i] = 0;
+
                 } else if ( !selected && !isSelected ) im.Faces[i].Hide();
             }
             im.InvalidateTopologyCache();
-            //if ( selected ) _BaseObject.ClearSelection(Kernel._Interface.SubObjectLevel); //OK
-            //if (selected) Geometry._IGeomObject.ClearSelection(Kernel._Interface.SubObjectLevel); //OK
             if ( selected ) _IGeomObject.ClearSelection(Kernel._Interface.SubObjectLevel);
-            // Kernel._Interface.InvalidateObCache(_BaseObject)
         }
 
         public void UnhideGeometry() {
@@ -177,82 +209,53 @@ namespace Micra.Core {
 
         public List<int> GetSelectedFaces() {
 
-            IMesh im = GetImesh(Kernel.Now);
-            //if not faces are selected, return empty list
-            if ( !im.FaceSel.AnyBitSet.Equals(true) ) return new List<int>() { };
+            if ( IsClassOf(ClassID.EditableMesh) ) {
+                Kernel.WriteLine("GetSelectedFaces > on Mesh!");
+                return GeoOps.GetSelectedFaces(GetImesh());
 
-            List<int> fsel = new List<int>() { };
-            for ( int i = 0; i < im.FaceSel.Size; i++ ) {
-                Kernel.WriteLine("selected:{0} bit:{1} index:{2}", im.FaceSel[i] == 1, im.FaceSel[i], i);
-                if ( im.FaceSel[i] == 1 ) fsel.Add(i);
+            } else if ( IsClassOf(ClassID.EditablePoly) ) {
+                Kernel.WriteLine("GetSelectedFaces > on Poly!");
+                return GeoOps.GetSelectedFaces(GetPolyMesh());
+
+            } else {
+
+                return null;
             }
-            //im.InvalidateGeomCache();
-            //im.Init();
-
-            /*List<string> fsel = im.FaceSel.IEnumerable()
-                //.Where(item => item == 1)
-                .Select((item, index) => String.Format("selected:{0} index:{1}", item == 1, index)) //get IFace
-                .ToList();
-
-            */
-
-            // 
-            return fsel;
         }
+
         public List<int> GetSelectedEdges() {
 
-            /*IBitArray selEdges = node.Object.GetSelectedEdges();
-            Mesh mesh = node.GetMesh();
-            Kernel.WriteLine("SelectEdgesWithSameLength > Node:{0} selEdges:{1} isEmpty:{2}", node.Name, selEdges.Size, selEdges.IsEmpty);
-            if ( selEdges.IsEmpty ) return;
-            selEdges.IEnumerable().ForEach(ei => Kernel.WriteLine("ei:{0}", ei));*/
+            if ( IsClassOf(ClassID.EditableMesh) ) {
+                Kernel.WriteLine("GetSelectedEdges > on Mesh!");
+                return GeoOps.GetSelectedEdges(GetImesh());
 
-            /*Kernel.WriteLine("GetSelectedEdges >_IMesh:{0}", _IMesh); //is not valid Imesh, 
-Kernel.WriteLine("\t_IMesh.NumVerts:{0}", _IMesh.NumVerts);
-Kernel.WriteLine("\tEdgeSel.IsEmpty:{0}", _IMesh.EdgeSel.IsEmpty);
-return _IMesh.EdgeSel;*/
+            } else if ( IsClassOf(ClassID.EditablePoly) ) {
+                Kernel.WriteLine("GetSelectedEdges > on Poly!");
+                return GeoOps.GetSelectedEdges(GetPolyMesh());
 
-            //http://docs.autodesk.com/3DSMAX/16/ENU/3ds-Max-SDK-Programmer-Guide/index.html?url=files/GUID-B2693B67-F56D-4EEB-9FB8-19700D7BAB90.htm,topicNumber=d30e23902
-            IMesh im = GetImesh(Kernel.Now);
-            List<string> esel = im.EdgeSel.IEnumerable()
-                //.Where(item => item == 1)
-                .Select((item, index) => String.Format("selected:{0} index:{1}", item == 1, index / 3))
-                .ToList();
+            } else {
 
-            esel.ForEach(ei => Kernel.WriteLine("selected esge:{0}", ei));
-
-            //return im.EdgeSel;
-            throw new NotImplementedException();
+                return null;
+            }
         }
+
         public List<int> GetSelectedVerts() {
 
-            //IMesh im = GetImesh(Kernel.Now);
-            //return im.VertSel;
-            throw new NotImplementedException();
+            if ( IsClassOf(ClassID.EditableMesh) ) {
+                Kernel.WriteLine("GetSelectedVerts > on Mesh!");
+                return GeoOps.GetSelectedVerts(GetImesh());
+
+            } else if ( IsClassOf(ClassID.EditablePoly) ) {
+                Kernel.WriteLine("GetSelectedVerts > on Poly!");
+                return GeoOps.GetSelectedVerts(GetPolyMesh());
+
+            } else {
+
+                return null;
+            }
         }
 
-        public void SelectSimillarEdges() {
-
-            Kernel.WriteLine("sel obj edges {0}", Name);
-            List<int> esel = GetSelectedEdges();
-            Mesh mesh = GetMesh();
-            Kernel.WriteLine("SelectEdgesWithSameLength > Node:{0} selEdges:{1} isEmpty:{2}", Name, esel.Count);
-            if ( esel.Count == 0 ) return;
-            esel.ForEach(ei => Kernel.WriteLine("ei:{0}", ei));
-
-            /*var lengths = selEdges.IEnumerable()
-                .Select(ei => mesh.GetEdgeLength(ei))
-                .ToList();
-            Kernel.WriteLine("SelectEdgesWithSameLength lengths > ", lengths);*/
-            /* for (in selEdges.NumberSet) {
- IEdge ie 
-
-
-             }*/
-
-            //throw new NotImplementedException();
-        }
-
+  
         //TODO test with modifiers
         public void SelectAll(bool redraw) {
 
@@ -266,6 +269,23 @@ return _IMesh.EdgeSel;*/
         }
     }
 }
+
+
+// solving Object reference not set to an instance of an object
+/*Kernel.WriteLine("GetIpolyObject > from _Object:{0}", _Object);
+Kernel.WriteLine("_Node:{0}", _Node);
+IObjectState istate = _Object.Eval(Kernel.Now);
+Kernel.WriteLine("istate:{0}", istate);
+IClass_ID polyClass = Kernel._Global.Class_ID.Create(( uint )BuiltInClassIDA.POLYOBJ_CLASS_ID, 0);
+Kernel.WriteLine("polyClass:{0} epoly:{1}", polyClass, ClassID.EditablePoly._IClass_ID);
+IObject iObj = istate.Obj;
+Kernel.WriteLine("iObj:{0}", iObj);
+if ( iObj.CanConvertToType(polyClass) == 0 ) return null;
+//_Object.GetReference(0)
+//if ( _Object.CanConvertToType(ClassID.EditablePoly._IClass_ID) == 0 ) return null;
+IPolyObject pobj = istate.Obj.ConvertToType(t, polyClass) as IPolyObject;
+if ( pobj == null ) return null;
+return pobj;*/
 
 
 /*switch ( GlobalMethods.SubObjectLevel ) { //next operation is depend on subobject level
