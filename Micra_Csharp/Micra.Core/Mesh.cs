@@ -32,7 +32,7 @@ namespace Micra.Core {
             }
         }
 
-        public struct Edge {
+        /*public struct Edge {
             public uint a;
             public uint b;
 
@@ -41,7 +41,7 @@ namespace Micra.Core {
                 a = e.V[0];
                 b = e.V[1];
             }
-        }
+        }*/
 
         //public IMesh _IMesh;
 
@@ -66,30 +66,24 @@ namespace Micra.Core {
             }*/
 
             faces = new Face[m.NumFaces];
-            for ( int i = 0; i < m.NumFaces; ++i )
-                faces[i] = new Face(m.Faces[i]);
+            for ( int i = 0; i < m.NumFaces; ++i ) faces[i] = new Face(m.Faces[i]); //from IFace
 
             /*edges = new Edge[m.NumEdges];
-            for ( int i = 0; i < m.NumEdges; ++i )
-                edges[i] = new Edge(m.Edges[i]);*/
+            for ( int i = 0; i < m.NumEdges; ++i ) edges[i] = new Edge(m.Edges[i]);*/
 
             verts = new Point3[m.NumVerts];
-            for ( int i = 0; i < m.NumVerts; ++i )
-                verts[i] = new Point3(m.Verts[i]);
+            for ( int i = 0; i < m.NumVerts; ++i ) verts[i] = new Point3(m.Verts[i]); //from IPoint3
 
             tfaces = new Face[m.NumFaces];
-            for ( int i = 0; i < m.NumFaces; ++i )
-                tfaces[i] = new Face(m.Faces[i]);
+            for ( int i = 0; i < m.NumFaces; ++i ) tfaces[i] = new Face(m.Faces[i]);
 
             tverts = new Point3[m.NumTVerts];
-            for ( int i = 0; i < m.NumTVerts; ++i )
-                tverts[i] = new Point3(m.TVerts[i]);
+            for ( int i = 0; i < m.NumTVerts; ++i ) tverts[i] = new Point3(m.TVerts[i]);
 
             fnormals = new Point3[m.NumFaces];
             vnormals = new Point3[m.NumVerts];
 
-            for ( int i = 0; i < m.NumVerts; ++i )
-                vnormals[i] = Point3.Origin;
+            for ( int i = 0; i < m.NumVerts; ++i ) vnormals[i] = Point3.Origin;
 
             // Compute vertex normals ignoring smoothing groups
             // Each vertex normal is the average of the face normals.
@@ -108,9 +102,16 @@ namespace Micra.Core {
             }
 
             // Last step is to normalize the vector normals.
-            for ( int i = 0; i < m.NumVerts; ++i )
-                vnormals[i].Normalize();
+            for ( int i = 0; i < m.NumVerts; ++i ) vnormals[i].Normalize();
         }
+        public double Area(int faceIndex) => faceIndex >= faces.Length - 1 ? -1 : Area(faces[faceIndex]);
+        // The area of a face is very easy to compute, its just half the length of the normal cross product
+        public double Area(Face f) {
 
+            Point3 corner = verts[f.a];
+            Vector3 a = Vector3.FromPoints(verts[f.b], corner);
+            Vector3 b = Vector3.FromPoints(verts[f.c], corner);
+            return Vector3.Cross(a, b).Length / 2.0;
+        }
     }
 }

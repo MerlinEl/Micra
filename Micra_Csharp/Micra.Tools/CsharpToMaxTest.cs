@@ -8,7 +8,7 @@ using System.Reflection;
 using System.Windows.Forms;
 
 namespace Micra.Tools {
-    public partial class CsharpToMaxTest:Form {
+    public partial class CsharpToMaxTest : Form {
 
         public CsharpToMaxTest() {
             InitializeComponent();
@@ -31,7 +31,8 @@ namespace Micra.Tools {
                 "SelVerts",
                 "3Boxes",
                 "Render",
-                "GetArea"
+                "GetFaceArea",
+                "GetObjectArea"
             });
             CbxScriptList.SelectedIndex = 0;
         }
@@ -364,7 +365,7 @@ namespace Micra.Tools {
             Kernel.WriteLine(( sender as Button ).Text);
             Node node = Kernel.Scene.SelectedNodes().FirstOrDefault();
             double area = GeoOps.GetObjectArea(node);
-            Kernel.WriteLine("Object:{0} Area:{1}", node.Name, area);
+            Kernel.WriteLine("Object:{0} Class:{1} Area:{2}", node.Name, node.ClassOf(), area);
         }
 
         private void BtnGetFaceArea_Click(object sender, EventArgs e) {
@@ -372,10 +373,20 @@ namespace Micra.Tools {
             Node node = Kernel.Scene.SelectedNodes().FirstOrDefault();
             if ( node.IsClassOf(ClassID.EditablePoly) ) {
 
+                Poly poly = node.GetPoly();
                 var fsel = node.Object.GetSelectedFaces();
                 fsel.ForEach(f => {
 
-                    double area = GeoOps.GetFaceArea(node.GetPolyMesh(), f);
+                    double area = GeoOps.GetFaceArea(poly, poly.ngons[f]);
+                    Kernel.WriteLine("Face:{0} Area:{1}", f, area);
+                });
+            } else if ( node.IsClassOf(ClassID.EditableMesh) ) {
+
+                Mesh mesh = node.GetMesh();
+                var fsel = node.Object.GetSelectedFaces();
+                fsel.ForEach(f => {
+
+                    double area = GeoOps.GetFaceArea(mesh, mesh.faces[f]);
                     Kernel.WriteLine("Face:{0} Area:{1}", f, area);
                 });
             }
@@ -384,6 +395,9 @@ namespace Micra.Tools {
         private void BtnExecute_Click(object sender, EventArgs e) {
             Kernel.WriteLine(( sender as Button ).Text);
             Kernel.ExecuteMaxScriptScript(textBox1.Text);
+        }
+        private void BtnClearExecute_Click(object sender, EventArgs e) {
+            textBox1.Text = "";
         }
 
         private void OnCbxScriptListSelChanges(object sender, EventArgs e) {
@@ -396,7 +410,21 @@ namespace Micra.Tools {
 "Box pos:[0,0,0] name:(UniqueName \"ojobox\") wirecolor:blue\n" +
 "Box pos:[100,0,0] name:(UniqueName \"ojobox\") wirecolor:green\n")
                 .Case("Render").Then("Render()")
-                .Case("GetArea").Then("" +
+                .Case("GetFaceArea").Then("" +
+"fn GetFacesArea obj &fsel = (\n" +
+"   local face_areas = #()\n" +
+"   if classOf obj == Editable_Mesh then (\n" +
+"      fsel = getFaceSelection obj\n" +
+"      for fi in fsel do append face_areas (meshOp.getFaceArea obj fi)\n" +
+"   ) else if classOf obj == Editable_Poly do (\n" +
+"      fsel = polyOp.getFaceSelection obj\n" +
+"      for fi in fsel do append face_areas (polyOp.getFaceArea obj fi)\n" +
+"   )\n" +
+"   face_areas\n" +
+")\n" +
+"fsel = 0\n" +
+"format \"Object:% Area:% Face:%\n\" selection[1].Name (GetFacesArea selection[1] &fsel) fsel")
+                .Case("GetObjectArea").Then("" +
 "fn GetObjectArea obj = (\n" +
 "   faces_area = 0\n" +
 "   if classOf obj == Editable_Mesh then (\n" +
@@ -406,10 +434,12 @@ namespace Micra.Tools {
 "   )\n" +
 "   faces_area\n" +
 ")\n" +
-"format \"Object:% Area:%\n\" selection[1].Name (getObjectArea selection[1])")
+"format \"Object:% Area:%\n\" selection[1].Name (GetObjectArea selection[1])")
                 .Default("");
             textBox1.Text = cmd.Replace("\n", Environment.NewLine);
         }
+
+
     }
 }
 

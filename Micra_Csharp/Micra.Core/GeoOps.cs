@@ -3,92 +3,42 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using static Micra.Core.Mesh;
+using static Micra.Core.Poly;
 //HIERARCHY
 // Node > SceneObject > Mesh or Poly
 namespace Micra.Core {
     public class GeoOps {
 
-        public static double GetFaceArea(Mesh m, int faceIndex) { //not used //not tested
-
-            return faceIndex >= m.faces.Length - 1 ? -1 : GetFaceArea(m, m.faces[faceIndex]);
-        }
-        // The area of a face is very easy to compute, its just half the length of the normal cross product
-        public static double GetFaceArea(Mesh m, Face f) {
-
-            Point3 corner = m.verts[f.a];
-            Vector3 a = Vector3.FromPoints(m.verts[f.b], corner);
-            Vector3 b = Vector3.FromPoints(m.verts[f.c], corner);
-            return Vector3.Cross(a, b).Length / 2.0;
-        }
-
+        public static double GetFaceArea(Mesh m, Face f) => m.Area(f);
+        public static double GetFaceArea(Poly m, Ngon f) => m.Area(f);
         private static double GetFaceArea(IMesh imesh, IFace face) {
 
-            Point3 corner = new Point3(imesh.GetVert(( int )face.V[0]));
-            Vector3 a = Vector3.FromPoints(new Point3(imesh.GetVert(( int )face.V[1])), corner);
-            Vector3 b = Vector3.FromPoints(new Point3(imesh.GetVert(( int )face.V[2])), corner);
+            Point3 corner = new Point3(imesh.GetVert((int)face.V[0]));
+            Vector3 a = Vector3.FromPoints(new Point3(imesh.GetVert((int)face.V[1])), corner);
+            Vector3 b = Vector3.FromPoints(new Point3(imesh.GetVert((int)face.V[2])), corner);
             return Vector3.Cross(a, b).Length / 2.0;
         }
-        //https://forums.cgsociety.org/t/get-uv-faces-area/2058271/5
-        public static double GetFaceArea(IMNMesh m, int fi) {
-
-            Kernel.WriteLine("\tSelected polygon index:{0} total:{1}", fi+1, m.FNum); //+1 Max count
-
-            IMNFace f = m.F(fi);
-
-            Kernel.WriteLine("face verts:{0} count:{1}", f.Vtx, f.Vtx.Count);
-
-            ITab<int> triangles = Kernel._Global.Tab.Create<int>();
-            f.GetTriangles(triangles); // get the tri (as indices of the face vert array)
-            int numtriangles = f.Deg - 2;
-            for ( int t = 0; t < numtriangles; ++t ) {
-
-                int i = t * 3;
-                int v1 = triangles[i];
-                int v2 = triangles[i + 1];
-                int v3 = triangles[i + 2];
-                Kernel.WriteLine("\t\tFace:{0} v1:{1} v1:{2} v1:{3}", i, v1,  v2, v3);
-                //AreaOfTriangle
-            }
-
-
-            /*Kernel.WriteLine("first vert:{0}", triangles[0]);
-
-            Kernel.WriteLine("\tPolygon vers:{0} total triangles:{1}", triangles.Count, m.TriNum);
-
-            IMesh imesh = Kernel._Global.Mesh.Create();
-            m.OutToTri(imesh);
-            for (int i = 0; i < triangles.Count; i++ ) {
-
-                //imesh.Faces[i]
-                // v2:{2} v3:{3}
-                //ITab tab = tris[i];
-                Kernel.WriteLine("\t\ti:{0} tris:{1}", i+1, triangles[i]);
-            }*/
-            return 0.0;
-        }
-        public static double GetObjectArea(Node node) {
-
-            if ( node.IsClassOf(ClassID.EditableMesh) ) {
-
-                return GeoOps.GetObjectArea(node.GetMesh());
-
-            } else if ( node.IsClassOf(ClassID.EditablePoly) ) {
-
-                return GeoOps.GetObjectArea(node.GetPolyMesh());
-
-            } else {
-
-                return -1;
-            }
-        }
-
-        public static double GetObjectArea(Mesh m) => m.faces.Sum(f => GetFaceArea(m, f));
-
         public static double GetObjectArea(IMNMesh m) {
 
             IMesh imesh = Kernel._Global.Mesh.Create();
             m.OutToTri(imesh);
             return imesh.Faces.Sum(f => GetFaceArea(imesh, f));
+        }
+        public static double GetObjectArea(Mesh m) => m.faces.Sum(f => GetFaceArea(m, f));
+        public static double GetObjectArea(Node node) {
+
+            if ( node.IsClassOf(ClassID.EditableMesh) ) {
+
+                return GetObjectArea(node.GetMesh());
+
+            } else if ( node.IsClassOf(ClassID.EditablePoly) ) {
+
+                return GetObjectArea(node.GetPolyMesh());
+
+            } else {
+
+                return -1;
+            }
         }
 
         public static double GetEdgeLength(IMesh m, int e) { //not used //not tested
@@ -255,6 +205,50 @@ namespace Micra.Core {
         }
     }
 }
+
+
+/*//https://forums.cgsociety.org/t/get-uv-faces-area/2058271/5
+//not good to pick up all data for calculating area of one face
+//TODO take area from vertices
+public static double GetFaceArea(IMNMesh m, int fi) { //TODO -not tested -not used
+
+    Kernel.WriteLine("\tSelected polygon index:{0} total:{1}", fi + 1, m.FNum); //+1 Max count
+    return new Poly(m).Area(fi); //Poly object will be filled with All face indexes and vertices positions
+
+    IMNFace f = m.F(fi);
+
+    Kernel.WriteLine("face verts:{0} count:{1}", f.Vtx, f.Vtx.Count);
+
+    ITab<int> triangles = Kernel._Global.Tab.Create<int>();
+    f.GetTriangles(triangles); // get the tri (as indices of the face vert array)
+    int numtriangles = f.Deg - 2;
+    for ( int t = 0; t < numtriangles; ++t ) {
+
+        int i = t * 3;
+        int v1 = triangles[i];
+        int v2 = triangles[i + 1];
+        int v3 = triangles[i + 2];
+        Kernel.WriteLine("\t\tFace:{0} v1:{1} v1:{2} v1:{3}", i, v1,  v2, v3);
+        //AreaOfTriangle
+    }*/
+
+
+/*Kernel.WriteLine("first vert:{0}", triangles[0]);
+
+Kernel.WriteLine("\tPolygon vers:{0} total triangles:{1}", triangles.Count, m.TriNum);
+
+IMesh imesh = Kernel._Global.Mesh.Create();
+m.OutToTri(imesh);
+for (int i = 0; i < triangles.Count; i++ ) {
+
+    //imesh.Faces[i]
+    // v2:{2} v3:{3}
+    //ITab tab = tris[i];
+    Kernel.WriteLine("\t\ti:{0} tris:{1}", i+1, triangles[i]);
+}
+//return 0.0;
+}*/
+
 
 /*double sum = 0.0;
 m.faces.ForEach(f => sum += GetFaceArea(m, f));

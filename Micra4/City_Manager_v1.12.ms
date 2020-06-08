@@ -74,6 +74,7 @@ rcmenu mcCityManDialogMenu (
 		menuItem m9_5 "Fix Names Suffix"
 		separator m9_sep_3
 		menuItem m9_6 "Reset Material Editor And Load Materials From Selection"
+		menuItem m9_7 "Add (Disabled Shadows and Dynamic) to Selection"
 	)
 	fn getLodByName obj lod_index = (
 	
@@ -113,8 +114,8 @@ rcmenu mcCityManDialogMenu (
 			findString (toUpper o.name) suffix_arr[1] != undefined or findString (toUpper o.name) suffix_arr[2]  != undefined
 		) collect o)
 	)
-	--Cutom Attributes D:\!2k_games\scotch_dev\code\srcTools\modules\ToolMAX\3dsmax\scripts\LS3DData\Shadows.ms
-	fn addAttributeShadowTo objs state = (
+	fn disableShadowInSelectedOCC objs = (
+
 		gProgLog.msg "@" --clear log
 		gProgLog.progSub 0 0
 		gProgLog.msg "OCC Data Manager Setup:" ti:"Initialize...." ty:"new_task"
@@ -122,12 +123,8 @@ rcmenu mcCityManDialogMenu (
 		for i=1 to objs.count do (
 			
 			local obj = objs[i]
-			if superClassOf obj != GeometryClass or findString (toUpper obj.name) "OCC" == undefined do continue 
-			if (getCustomAttributeByName obj "Shadows") == undefined do (
-			
-				AddCustomAttributeByName obj "Shadows"
-			) 
-			obj.'~Cast Shadows' = state
+			if findString (toUpper obj.name) "OCC" == undefined do continue 
+			::gCityManager.addAttributeShadow obj false
 			gProgLog.progSub i objs.count
 			gProgLog.msg ("progress obj:"+obj.name) ty:"proc"
 		)
@@ -301,6 +298,23 @@ rcmenu mcCityManDialogMenu (
 		max select none
 		if objs_with_missing_prop.count > 0 do select objs_with_missing_prop
 	)
+	fn addParamsNoSahdowAndDynamicFromSelection objs = (
+	
+		gProgLog.msg "@" --clear log
+		gProgLog.progSub 0 0
+		gProgLog.msg "Data Manager Setup:" ti:"Initialize...." ty:"new_task"
+		gProgLog.msg "Proces Start" ti:"3DsMax..." ty:"task_open"
+		for i=1 to objs.count do (
+			
+			local obj = objs[i]
+			::gCityManager.addAttributeShadow obj false
+			::gCityManager.addAttributeDynamic obj
+			gProgLog.progSub i objs.count
+			gProgLog.msg ("progress obj:"+obj.name) ty:"proc"
+		)
+		gProgLog.progSub objs.count objs.count
+		gProgLog.msg "All Done" ty:"task_close"
+	)
 	--m1------------------------------------------------------------------------------------------------
 	on m1_0 picked do undo label:(m1_0.Text) on selectLods(#("LOD1", "LOD2"))
 	on m1_1 picked do undo label:(m1_1.Text) on mcMax.selectObjectsByName "LOD0" visibleOnly:false exclude:#("coll", "occ")
@@ -329,7 +343,7 @@ rcmenu mcCityManDialogMenu (
 	on m3_1 picked do undo label:(m3_1.Text) on mcMax.selectObjectsByName "OCC" visibleOnly:false
 	on m3_2 picked do undo label:(m3_2.Text) on mcMax.selectObjectsByName "OCC"
 	on m3_3 picked do  mcFile.fileInVersion "Geometry_Projector2D"
-	on m3_4 picked do if (queryBox "Setup OCC Data Manager?" title:"Warning:") do undo off addAttributeShadowTo (selection as array) false
+	on m3_4 picked do if (queryBox "Setup OCC Data Manager?" title:"Warning:") do undo off disableShadowInSelectedOCC (selection as array)
 	--m4------------------------------------------------------------------------------------------------
 	on m4_1 picked do undo label:(m4_1.Text) on mcMax.selectObjectsByName "COLL" visibleOnly:false
 	on m4_2 picked do undo label:(m4_2.Text) on mcMax.selectObjectsByName "COLL"
@@ -397,6 +411,7 @@ rcmenu mcCityManDialogMenu (
 	on m9_5 picked do fixNamesSuffix m9_5.Text
 	--sep3
 	on m9_6 picked do undo label:(m9_6.Text) on resetMaterialEditorAndLoadMaterialsFromSelection()
+	on m9_7 picked do if (queryBox "Add Parameters (Disabled Shadows and Dynamic)  on Selection?" title:"Warning:") do undo label:(m9_7.Text) on addParamsNoSahdowAndDynamicFromSelection ( selection as array)
 )
 
 if ::mcCityManDialog != undefined do try(destroyDialog mcCityManDialog)catch()

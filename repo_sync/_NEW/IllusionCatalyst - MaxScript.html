@@ -1,0 +1,1153 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!-- saved from url=(0079)http://www.illusioncatalyst.com/3dsmax_files/snippets/editable_poly_sub_obj.php -->
+<html xmlns="http://www.w3.org/1999/xhtml" class="wf-inconsolata-n4-active wf-inconsolata-n7-active wf-opensans-n4-active wf-opensans-n6-active wf-active"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<title>IllusionCatalyst - MaxScript</title>
+
+<script type="text/javascript">WebFontConfig = {google: {families: ['Inconsolata:400', 'Inconsolata:700', 'Open Sans:400', 'Open Sans:600']}};</script>
+<link rel="stylesheet" href="./IllusionCatalyst - MaxScript_files/css"><script src="./IllusionCatalyst - MaxScript_files/webfont.js.download"></script>
+<!--<link href='http://fonts.googleapis.com/css?family=Inconsolata:400,700|Open+Sans:400,600,400italic' rel='stylesheet' type='text/css'>-->
+
+
+
+
+
+<link href="http://www.illusioncatalyst.com/imagesHTML/favicon.ico" rel="shortcut icon" type="image/x-icon">
+
+<link href="./IllusionCatalyst - MaxScript_files/style_common.css" rel="stylesheet" type="text/css">
+<link href="./IllusionCatalyst - MaxScript_files/style_mxs.css" rel="stylesheet" type="text/css">
+
+<script src="./IllusionCatalyst - MaxScript_files/jquery-1.11.1.js.download" type="text/javascript"></script>
+<script src="./IllusionCatalyst - MaxScript_files/jquery.columnizer.js.download" type="text/javascript"></script>
+
+
+<script src="./IllusionCatalyst - MaxScript_files/actionCommon.js.download" type="text/javascript"></script>
+
+
+<!-- Additional page elements -->
+
+
+
+
+
+
+
+
+</head>
+
+<body onload="$(&#39;#tableOfContent&#39;).columnize({columns:4, lastNeverTallest:true});">
+	<div id="mainframe"><!-- closed in footer() -->
+
+	<div id="header">
+	<span class="name">Enrico Gullotti</span><br>
+	<span class="subName">earnest wonderer</span>
+	</div>
+		<div id="menuNav">
+	<a class="selectable" href="http://www.illusioncatalyst.com/index.php">Home</a>
+	<a class="selectable" href="http://www.illusioncatalyst.com/notes.php">Notes</a>
+	<a class="selectable" href="http://www.illusioncatalyst.com/3dsmax.php">3ds Max</a>
+	<a class="selectable" href="http://www.illusioncatalyst.com/info.php">Info</a>
+	<script language="javascript">document.write(dF('%264Db%2631dmbtt%264E%2633tfmfdubcmf%2633%2631isfg%264E%2633nbjmup%264BtzodwjfxtAjmmvtjpodbubmztu/dpn%2633%264FFnbjm%264D0b%264F1'));</script><a class="selectable" href="mailto:syncviews@illusioncatalyst.com">Email</a>
+	<a class="selectable" href="http://www.aliquaforma.com/" target="_blank">AliquaForma</a>
+	</div>
+	
+<div class="pageCode">
+
+<a name="toc" id="toc"></a>
+<span class="section">Editable Poly sub objects selection and conversion</span>
+
+<div id="tableOfContent">
+	<ul>
+		<li><a href="http://www.illusioncatalyst.com/3dsmax_files/snippets/editable_poly_sub_obj.php#getSelectionAs" class="navigation">getSelAsVert/Edge/Face</a></li>
+		<li><a href="http://www.illusioncatalyst.com/3dsmax_files/snippets/editable_poly_sub_obj.php#getEdgesUsingVert" class="navigation">getIn/OutEdgesUsingVert</a></li>
+		<li><a href="http://www.illusioncatalyst.com/3dsmax_files/snippets/editable_poly_sub_obj.php#getFacesUsingVert" class="navigation">getIn/OutFacesUsingVert</a></li>
+		<li><a href="http://www.illusioncatalyst.com/3dsmax_files/snippets/editable_poly_sub_obj.php#getVertsUsingEdge" class="navigation">getIn/OutVertsUsingEdge</a></li>
+		<li><a href="http://www.illusioncatalyst.com/3dsmax_files/snippets/editable_poly_sub_obj.php#getFacesUsingEdge" class="navigation">getIn/OutFacesUsingEdge</a></li>
+		<li><a href="http://www.illusioncatalyst.com/3dsmax_files/snippets/editable_poly_sub_obj.php#getVertsUsingFace" class="navigation">getIn/OutVertsUsingFace</a></li>
+		<li><a href="http://www.illusioncatalyst.com/3dsmax_files/snippets/editable_poly_sub_obj.php#getEdgesUsingFace" class="navigation">getIn/OutEdgesUsingFace</a></li>
+		<li><a href="http://www.illusioncatalyst.com/3dsmax_files/snippets/editable_poly_sub_obj.php#subSel" class="navigation">mark/read/wipeSubSel</a></li>
+		<li><a href="http://www.illusioncatalyst.com/3dsmax_files/snippets/editable_poly_sub_obj.php#getRing" class="navigation">getVert/Edge/FaceRing</a></li>
+		<li><a href="http://www.illusioncatalyst.com/3dsmax_files/snippets/editable_poly_sub_obj.php#getLoop" class="navigation">getVert/Edge/FaceLoop</a></li>
+		<li><a href="http://www.illusioncatalyst.com/3dsmax_files/snippets/editable_poly_sub_obj.php#getNgon" class="navigation">getNgon</a></li>
+		<li><a href="http://www.illusioncatalyst.com/3dsmax_files/snippets/editable_poly_sub_obj.php#getFacesByAngle" class="navigation">getFacesByAngle</a></li>
+		<li><a href="http://www.illusioncatalyst.com/3dsmax_files/snippets/editable_poly_sub_obj.php#getSimilarFaces" class="navigation">getSimilarFaces</a></li>
+	</ul>
+</div>
+<br>
+
+<a name="getSelectionAs" id="getSelectionAs"></a><br>
+<a href="http://www.illusioncatalyst.com/3dsmax_files/snippets/editable_poly_sub_obj.php#toc" class="mxsTitleBlack" title="UP!">Get Current Selection as Vertices / Edges / Faces</a>
+<span class="mxsMember">&lt;BitArray vertList&gt; <strong>getSelectionAsVerts</strong> &lt;Poly poly&gt;<br>
+&lt;BitArray edgeList&gt; <strong>getSelectionAsEdges</strong> &lt;Poly poly&gt;<br>
+&lt;BitArray faceList&gt; <strong>getSelectionAsFaces</strong> &lt;Poly poly&gt;</span>
+<span class="mxsText">Gets the current sub-objects level and selection and returns it converted to vertices, edges or faces.</span>
+<div class="codeBox">
+<pre><span class="cRes">function</span> <strong>getSelectionAsVerts</strong> oPoly =
+(
+    <span class="cRes">if</span> ((<span class="cKey">classOf</span> oPoly) == <span class="cKey">Editable_Poly</span>) <span class="cRes">then</span>
+    (
+        <span class="cRes">local</span> iSubObjLev = <span class="cKey">subObjectLevel</span>
+        <span class="cRes">local</span> baVertSet = #{}
+
+        <span class="cRes">case</span> iSubObjLev <span class="cRes">of</span>
+        (
+            <span class="cNum">0</span>: (baVertSet = #{<span class="cNum">1</span>..(<span class="cKey">polyOp</span>.<span class="cKey">getNumVerts</span> oPoly)});
+            <span class="cNum">1</span>: (baVertSet = <span class="cKey">polyOp</span>.<span class="cKey">getVertSelection</span> oPoly);
+            <span class="cNum">2</span>: (baVertSet = <span class="cKey">polyOp</span>.<span class="cKey">getVertsUsingEdge</span> oPoly (<span class="cKey">polyOp</span>.<span class="cKey">getEdgeSelection</span> oPoly));
+            <span class="cNum">3</span>: (baVertSet = <span class="cKey">polyOp</span>.<span class="cKey">getVertsUsingEdge</span> oPoly (<span class="cKey">polyOp</span>.<span class="cKey">getEdgeSelection</span> oPoly));
+            <span class="cNum">4</span>: (baVertSet = <span class="cKey">polyOp</span>.<span class="cKey">getVertsUsingFace</span> oPoly (<span class="cKey">polyOp</span>.<span class="cKey">getFaceSelection</span> oPoly));
+            <span class="cNum">5</span>: (baVertSet = <span class="cKey">polyOp</span>.<span class="cKey">getVertsUsingFace</span> oPoly (<span class="cKey">polyOp</span>.<span class="cKey">getFaceSelection</span> oPoly));
+        )
+        <span class="cRes">return</span> baVertSet
+    )
+    <span class="cRes">else</span>
+    (
+        <span class="cRes">throw</span> <span class="cStr">"Wrong input in function getSelectionAsVerts()"</span>
+    )
+)
+
+<span class="cCom">--------------------------------------------------------------------------------</span>
+
+<span class="cRes">function</span> <strong>getSelectionAsEdges</strong> oPoly =
+(
+    <span class="cRes">if</span> ((<span class="cKey">classOf</span> oPoly) == <span class="cKey">Editable_Poly</span>) <span class="cRes">then</span>
+    (
+        <span class="cRes">local</span> iSubObjLev = <span class="cKey">subObjectLevel</span>
+        <span class="cRes">local</span> baEdgeSet = #{}
+
+        <span class="cRes">case</span> iSubObjLev <span class="cRes">of</span>
+        (
+            <span class="cNum">0</span>: (baEdgeSet = #{<span class="cNum">1</span>..(<span class="cKey">polyOp</span>.<span class="cKey">getNumEdges</span> oPoly)});
+            <span class="cNum">1</span>: (baEdgeSet = <span class="cKey">polyOp</span>.<span class="cKey">getEdgesUsingVert</span> oPoly (<span class="cKey">polyOp</span>.<span class="cKey">getVertSelection</span> oPoly));
+            <span class="cNum">2</span>: (baEdgeSet = <span class="cKey">polyOp</span>.<span class="cKey">getEdgeSelection</span> oPoly);
+            <span class="cNum">3</span>: (baEdgeSet = <span class="cKey">polyOp</span>.<span class="cKey">getEdgeSelection</span> oPoly);
+            <span class="cNum">4</span>: (baEdgeSet = <span class="cKey">polyOp</span>.<span class="cKey">getEdgesUsingFace</span> oPoly (<span class="cKey">polyOp</span>.<span class="cKey">getFaceSelection</span> oPoly));
+            <span class="cNum">5</span>: (baEdgeSet = <span class="cKey">polyOp</span>.<span class="cKey">getEdgesUsingFace</span> oPoly (<span class="cKey">polyOp</span>.<span class="cKey">getFaceSelection</span> oPoly));
+        )
+        <span class="cRes">return</span> baEdgeSet
+    )
+    <span class="cRes">else</span>
+    (
+        <span class="cRes">throw</span> <span class="cStr">"Wrong input in function getSelectionAsEdges()"</span>
+    )
+)
+
+<span class="cCom">--------------------------------------------------------------------------------</span>
+
+<span class="cRes">function</span> <strong>getSelectionAsFaces</strong> oPoly =
+(
+    <span class="cRes">if</span> ((<span class="cKey">classOf</span> oPoly) == <span class="cKey">Editable_Poly</span>) <span class="cRes">then</span>
+    (
+        <span class="cRes">local</span> iSubObjLev = <span class="cKey">subObjectLevel</span>
+        <span class="cRes">local</span> baFaceSet = #{}
+
+        <span class="cRes">case</span> iSubObjLev <span class="cRes">of</span>
+        (
+            <span class="cNum">0</span>: (baFaceSet = #{<span class="cNum">1</span>..(<span class="cKey">polyOp</span>.<span class="cKey">getNumfaces</span> oPoly)});
+            <span class="cNum">1</span>: (baFaceSet = <span class="cKey">polyOp</span>.<span class="cKey">getFacesUsingVert</span> oPoly (<span class="cKey">polyOp</span>.<span class="cKey">getVertSelection</span> oPoly));
+            <span class="cNum">2</span>: (baFaceSet = <span class="cKey">polyOp</span>.<span class="cKey">getFacesUsingEdge</span> oPoly (<span class="cKey">polyOp</span>.<span class="cKey">getEdgeSelection</span> oPoly));
+            <span class="cNum">3</span>: (baFaceSet = <span class="cKey">polyOp</span>.<span class="cKey">getFacesUsingEdge</span> oPoly (<span class="cKey">polyOp</span>.<span class="cKey">getEdgeSelection</span> oPoly));
+            <span class="cNum">4</span>: (baFaceSet = <span class="cKey">polyOp</span>.<span class="cKey">getFaceSelection</span> oPoly);
+            <span class="cNum">5</span>: (baFaceSet = <span class="cKey">polyOp</span>.<span class="cKey">getFaceSelection</span> oPoly);
+        )
+        <span class="cRes">return</span> baFaceSet
+    )
+    <span class="cRes">else</span>
+    (
+        <span class="cRes">throw</span> <span class="cStr">"Wrong input in function getSelectionAsFaces()"</span>
+    )
+)</pre>
+</div>
+
+
+
+<a name="getEdgesUsingVert" id="getEdgesUsingVert"></a><br>
+<a href="http://www.illusioncatalyst.com/3dsmax_files/snippets/editable_poly_sub_obj.php#toc" class="mxsTitleBlack" title="UP!">Get Inner / Outer Edges using Vertices</a>
+<span class="mxsMember">&lt;BitArray edgeList&gt; <strong>getInEdgesUsingVert</strong> &lt;Poly poly&gt; &lt;BitArray vertList&gt;<br>
+&lt;BitArray edgeList&gt; <strong>getOutEdgesUsingVert</strong> &lt;Poly poly&gt; &lt;BitArray vertList&gt;</span>
+<span class="mxsText">Return a list of all the edges included or along the perimeter of a space defined by the provided list of vertices.</span><br>
+<table border="0" cellspacing="0" cellpadding="0">
+	<tbody><tr>
+		<td width="175"><img src="./IllusionCatalyst - MaxScript_files/fromVert.gif" width="175" height="150"></td>
+		<td width="175"><img src="./IllusionCatalyst - MaxScript_files/fromVertToEdge.gif" width="175" height="150"></td>
+		<td width="175"><img src="./IllusionCatalyst - MaxScript_files/fromVertToInEdge.gif" width="175" height="150"></td>
+		<td width="175"><img src="./IllusionCatalyst - MaxScript_files/fromVertToOutEdge.gif" width="175" height="150"></td>
+	</tr>
+	<tr>
+		<td align="center" class="note">Source Selection</td>
+		<td align="center" class="note">Standard Conversion</td>
+		<td align="center" class="note">Inner Edges</td>
+		<td align="center" class="note">Outer Edges</td>
+	</tr>
+</tbody></table>
+<div class="codeBox">
+<pre><span class="cRes">function</span> <strong>getInEdgesUsingVert</strong> oPoly baVert =
+(
+    <span class="cRes">if</span> ( ((<span class="cKey">classOf</span> oPoly) == <span class="cKey">Editable_Poly</span>) <span class="cRes">and</span> ((<span class="cKey">classOf</span> baVert) == <span class="cKey">BitArray</span>) ) <span class="cRes">then</span>
+    (
+        <span class="cRes">if</span> (baVert.<span class="cKey">isEmpty</span> == <span class="cRes">true</span>) <span class="cRes">then</span> ( <span class="cRes">return</span> #{} )
+
+        <span class="cRes">local</span> baVertSet01 = #{<span class="cNum">1</span>..(<span class="cKey">polyOp</span>.<span class="cKey">getNumVerts</span> oPoly)} - baVert
+        <span class="cRes">local</span> baEdgeSet01 = <span class="cKey">polyOp</span>.<span class="cKey">getEdgesUsingVert</span> oPoly baVertSet01
+        <span class="cRes">local</span> baEdgeSet02 = #{<span class="cNum">1</span>..(<span class="cKey">polyOp</span>.<span class="cKey">getNumEdges</span> oPoly)} - baEdgeSet01
+
+        <span class="cRes">return</span> baEdgeSet02
+    )
+    <span class="cRes">else</span>
+    (
+        <span class="cRes">throw</span> <span class="cStr">"Wrong input in function getInEdgesUsingVert()"</span>
+    )
+)
+
+<span class="cCom">--------------------------------------------------------------------------------</span>
+
+<span class="cRes">function</span> <strong>getOutEdgesUsingVert</strong> oPoly baVert =
+(
+    <span class="cRes">if</span> ( ((<span class="cKey">classOf</span> oPoly) == <span class="cKey">Editable_Poly</span>) <span class="cRes">and</span> ((<span class="cKey">classOf</span> baVert) == <span class="cKey">BitArray</span>) ) <span class="cRes">then</span>
+    (
+        <span class="cRes">if</span> (baVert.<span class="cKey">isEmpty</span> == <span class="cRes">true</span>) <span class="cRes">then</span> ( <span class="cRes">return</span> #{} )
+
+        <span class="cRes">local</span> baVertSet01 = #{<span class="cNum">1</span>..(<span class="cKey">polyOp</span>.<span class="cKey">getNumVerts</span> oPoly)} - baVert
+        <span class="cRes">local</span> baEdgeSet01 = <span class="cKey">polyOp</span>.<span class="cKey">getEdgesUsingVert</span> oPoly baVertSet01
+
+        <span class="cRes">local</span> baFaceSet01 = <span class="cKey">polyOp</span>.<span class="cKey">getFacesUsingVert</span> oPoly baVertSet01
+        <span class="cRes">local</span> baVertSet02 = <span class="cKey">polyOp</span>.<span class="cKey">getVertsUsingFace</span> oPoly baFaceSet01
+        <span class="cRes">local</span> baEdgeSet02 = <span class="cKey">polyOp</span>.<span class="cKey">getEdgesUsingFace</span> oPoly baFaceSet01
+
+        <span class="cRes">local</span> baVertSet03 = (baVert - baVertSet02)
+        <span class="cRes">local</span> baEdgeSet03 = <span class="cKey">polyOp</span>.<span class="cKey">getEdgesUsingVert</span> oPoly baVertSet03
+
+        <span class="cRes">local</span> baEdgeSet04 = <span class="cKey">polyOp</span>.<span class="cKey">getEdgesUsingVert</span> oPoly baVert
+
+        <span class="cRes">local</span> baEdgeSet05 = (baEdgeSet04 - baEdgeSet01 - baEdgeSet03) * baEdgeSet02
+
+        <span class="cRes">return</span> baEdgeSet05
+    )
+    <span class="cRes">else</span>
+    (
+        <span class="cRes">throw</span> <span class="cStr">"Wrong input in function getOutEdgesUsingVert()"</span>
+    )
+)</pre>
+</div>
+<br>
+
+
+
+<a name="getFacesUsingVert" id="getFacesUsingVert"></a><br>
+<a href="http://www.illusioncatalyst.com/3dsmax_files/snippets/editable_poly_sub_obj.php#toc" class="mxsTitleBlack" title="UP!">Get Inner / Outer Faces using Vertices</a>
+<span class="mxsMember">&lt;BitArray faceList&gt; <strong>getInFacesUsingVert</strong> &lt;Poly poly&gt; &lt;BitArray vertList&gt;<br>
+&lt;BitArray faceList&gt; <strong>getOutFacesUsingVert</strong> &lt;Poly poly&gt; &lt;BitArray vertList&gt;</span>
+<span class="mxsText">Return a list of all the faces included or along the perimeter of a space defined by the provided list of vertices.</span><br>
+<table border="0" cellspacing="0" cellpadding="0">
+	<tbody><tr>
+		<td width="175"><img src="./IllusionCatalyst - MaxScript_files/fromVert.gif" width="175" height="150"></td>
+		<td width="175"><img src="./IllusionCatalyst - MaxScript_files/fromVertToFace.gif" width="175" height="150"></td>
+		<td width="175"><img src="./IllusionCatalyst - MaxScript_files/fromVertToInFace.gif" width="175" height="150"></td>
+		<td width="175"><img src="./IllusionCatalyst - MaxScript_files/fromVertToOutFace.gif" width="175" height="150"></td>
+	</tr>
+	<tr>
+		<td align="center" class="note">Source Selection</td>
+		<td align="center" class="note">Standard Conversion</td>
+		<td align="center" class="note">Inner Faces</td>
+		<td align="center" class="note">Outer Faces</td>
+	</tr>
+</tbody></table>
+<div class="codeBox">
+<pre><span class="cRes">function</span> <strong>getInFacesUsingVert</strong> oPoly baVert =
+(
+    <span class="cRes">if</span> ( ((<span class="cKey">classOf</span> oPoly) == <span class="cKey">Editable_Poly</span>) <span class="cRes">and</span> ((<span class="cKey">classOf</span> baVert) == <span class="cKey">BitArray</span>) ) <span class="cRes">then</span>
+    (
+        <span class="cRes">if</span> (baVert.<span class="cKey">isEmpty</span> == <span class="cRes">true</span>) <span class="cRes">then</span> ( <span class="cRes">return</span> #{} )
+
+        <span class="cRes">local</span> baFaceSet01 = <span class="cKey">polyOp</span>.<span class="cKey">getFacesUsingVert</span> oPoly baVert
+        <span class="cRes">local</span> baVertSet01 = #{<span class="cNum">1</span>..(<span class="cKey">polyOp</span>.<span class="cKey">getNumVerts</span> oPoly)} - baVert
+        <span class="cRes">local</span> baFaceSet02 = <span class="cKey">polyOp</span>.<span class="cKey">getFacesUsingVert</span> oPoly baVertSet01
+
+        <span class="cRes">return</span> (baFaceSet01 - baFaceSet02)
+    )
+    <span class="cRes">else</span>
+    (
+        <span class="cRes">throw</span> <span class="cStr">"Wrong input in function getInFacesUsingVert()"</span>
+    )
+)
+
+<span class="cCom">--------------------------------------------------------------------------------</span>
+
+<span class="cRes">function</span> <strong>getOutFacesUsingVert</strong> oPoly baVert =
+(
+    <span class="cRes">if</span> ( ((<span class="cKey">classOf</span> oPoly) == <span class="cKey">Editable_Poly</span>) <span class="cRes">and</span> ((<span class="cKey">classOf</span> baVert) == <span class="cKey">BitArray</span>) ) <span class="cRes">then</span>
+    (
+        <span class="cRes">if</span> (baVert.<span class="cKey">isEmpty</span> == <span class="cRes">true</span>) <span class="cRes">then</span> ( <span class="cRes">return</span> #{} )
+
+        <span class="cRes">local</span> baFaceSet01 = <span class="cKey">polyOp</span>.<span class="cKey">getFacesUsingVert</span> oPoly baVert
+        <span class="cRes">local</span> baVertSet01 = #{<span class="cNum">1</span>..(<span class="cKey">polyOp</span>.<span class="cKey">getNumVerts</span> oPoly)} - baVert
+        <span class="cRes">local</span> baFaceSet02 = <span class="cKey">polyOp</span>.<span class="cKey">getFacesUsingVert</span> oPoly baVertSet01
+
+        <span class="cRes">return</span> (baFaceSet01 * baFaceSet02)
+    )
+    <span class="cRes">else</span>
+    (
+        <span class="cRes">throw</span> <span class="cStr">"Wrong input in function getOutFacesUsingVert()"</span>
+    )
+)</pre>
+</div>
+<br>
+
+
+<a name="getVertsUsingEdge" id="getVertsUsingEdge"></a><br>
+<a href="http://www.illusioncatalyst.com/3dsmax_files/snippets/editable_poly_sub_obj.php#toc" class="mxsTitleBlack" title="UP!">Get Inner / Outer Vertices using Edges</a>
+<span class="mxsMember">&lt;BitArray vertList&gt; <strong>getInVertsUsingEdge</strong> &lt;Poly poly&gt; &lt;BitArray edgeList&gt;<br>
+&lt;BitArray vertList&gt; <strong>getOutVertsUsingEdge</strong> &lt;Poly poly&gt; &lt;BitArray edgeList&gt;</span>
+<span class="mxsText">Return a list of all the vertices included or along the perimeter of a space defined by the provided list of edges.</span><br>
+<table border="0" cellspacing="0" cellpadding="0">
+	<tbody><tr>
+		<td width="175"><img src="./IllusionCatalyst - MaxScript_files/fromEdge.gif" width="175" height="150"></td>
+		<td width="175"><img src="./IllusionCatalyst - MaxScript_files/fromEdgeToVert.gif" width="175" height="150"></td>
+		<td width="175" class="shortCut"><img src="./IllusionCatalyst - MaxScript_files/fromEdgeToInVert.gif" width="175" height="150"></td>
+		<td width="175"><img src="./IllusionCatalyst - MaxScript_files/fromEdgeToOutVert.gif" width="175" height="150"></td>
+	</tr>
+	<tr>
+		<td align="center" class="note">Source Selection</td>
+		<td align="center" class="note">Standard Conversion</td>
+		<td align="center" class="note">Inner vertices</td>
+		<td align="center" class="note">Outer Vertices</td>
+	</tr>
+</tbody></table>
+<div class="codeBox">
+<pre><span class="cRes">function</span> <strong>getInVertsUsingEdge</strong> oPoly baEdge =
+(
+    <span class="cRes">if</span> ( ((<span class="cKey">classOf</span> oPoly) == <span class="cKey">Editable_Poly</span>) <span class="cRes">and</span> ((<span class="cKey">classOf</span> baEdge) == <span class="cKey">BitArray</span>) ) <span class="cRes">then</span>
+    (
+        <span class="cRes">if</span> (baEdge.<span class="cKey">isEmpty</span> == <span class="cRes">true</span>) <span class="cRes">then</span> ( <span class="cRes">return</span> #{} )
+
+        <span class="cRes">local</span> baVertSet01 = <span class="cKey">polyOp</span>.<span class="cKey">getVertsUsingEdge</span> oPoly baEdge
+        <span class="cRes">local</span> baVertSet02 = #{<span class="cNum">1</span>..(<span class="cKey">polyOp</span>.<span class="cKey">getNumVerts</span> oPoly)} - baVertSet01
+        <span class="cRes">local</span> baFaceSet01 = <span class="cKey">polyOp</span>.<span class="cKey">getFacesUsingVert</span> oPoly baVertSet02
+        <span class="cRes">local</span> baVertSet03 = <span class="cKey">polyOp</span>.<span class="cKey">getVertsUsingFace</span> oPoly baFaceSet01
+
+        <span class="cRes">return</span> (baVertSet01 - baVertSet03)
+    )
+    <span class="cRes">else</span>
+    (
+        <span class="cRes">throw</span> <span class="cStr">"Wrong input in function getInVertsUsingEdge()"</span>
+    )
+)
+
+<span class="cCom">--------------------------------------------------------------------------------</span>
+
+<span class="cRes">function</span> <strong>getOutVertsUsingEdge</strong> oPoly baEdge =
+(
+    <span class="cRes">if</span> ( ((<span class="cKey">classOf</span> oPoly) == <span class="cKey">Editable_Poly</span>) <span class="cRes">and</span> ((<span class="cKey">classOf</span> baEdge) == <span class="cKey">BitArray</span>) ) <span class="cRes">then</span>
+    (
+        <span class="cRes">if</span> (baEdge.<span class="cKey">isEmpty</span> == <span class="cRes">true</span>) <span class="cRes">then</span> ( <span class="cRes">return</span> #{} )
+
+        <span class="cRes">local</span> baVertSet01 = <span class="cKey">polyOp</span>.<span class="cKey">getVertsUsingEdge</span> oPoly baEdge
+        <span class="cRes">local</span> baVertSet02 = #{<span class="cNum">1</span>..(<span class="cKey">polyOp</span>.<span class="cKey">getNumVerts</span> oPoly)} - baVertSet01
+        <span class="cRes">local</span> baFaceSet01 = <span class="cKey">polyOp</span>.<span class="cKey">getFacesUsingVert</span> oPoly baVertSet02
+        <span class="cRes">local</span> baVertSet03 = <span class="cKey">polyOp</span>.<span class="cKey">getVertsUsingFace</span> oPoly baFaceSet01
+
+        <span class="cRes">return</span> (baVertSet01 * baVertSet03)
+    )
+    <span class="cRes">else</span>
+    (
+        <span class="cRes">throw</span> <span class="cStr">"Wrong input in function getOutVertsUsingEdge()"</span>
+    )
+)</pre>
+</div>
+<br>
+
+
+
+<a name="getFacesUsingEdge" id="getFacesUsingEdge"></a><br>
+<a href="http://www.illusioncatalyst.com/3dsmax_files/snippets/editable_poly_sub_obj.php#toc" class="mxsTitleBlack" title="UP!">Get Inner / Outer Faces using Edges</a>
+<span class="mxsMember">&lt;BitArray faceList&gt; <strong>getInFacesUsingEdge</strong> &lt;Poly poly&gt; &lt;BitArray egdeList&gt;<br>
+&lt;BitArray faceList&gt; <strong>getOutFacesUsingEdge</strong> &lt;Poly poly&gt; &lt;BitArray edgeList&gt;</span>
+<span class="mxsText">Return a list of all the faces included or along the perimeter of a space defined by the provided list of edges.</span><br>
+<table border="0" cellspacing="0" cellpadding="0">
+	<tbody><tr>
+		<td width="175"><img src="./IllusionCatalyst - MaxScript_files/fromEdge.gif" width="175" height="150"></td>
+		<td width="175"><img src="./IllusionCatalyst - MaxScript_files/fromEdgeToFace.gif" width="175" height="150"></td>
+		<td width="175"><img src="./IllusionCatalyst - MaxScript_files/fromEdgeToInFace.gif" width="175" height="150"></td>
+		<td width="175"><img src="./IllusionCatalyst - MaxScript_files/fromEdgeToOutFace.gif" width="175" height="150"></td>
+	</tr>
+	<tr>
+		<td align="center" class="note">Source Selection</td>
+		<td align="center" class="note">Standard Conversion</td>
+		<td align="center" class="note">Inner Faces</td>
+		<td align="center" class="note">Outer Faces</td>
+	</tr>
+</tbody></table>
+<div class="codeBox">
+<pre><span class="cRes">function</span> <strong>getInFacesUsingEdge</strong> oPoly baEdge =
+(
+    <span class="cRes">if</span> ( ((<span class="cKey">classOf</span> oPoly) == <span class="cKey">Editable_Poly</span>) <span class="cRes">and</span> ((<span class="cKey">classOf</span> baEdge) == <span class="cKey">BitArray</span>) ) <span class="cRes">then</span>
+    (
+        <span class="cRes">if</span> (baEdge.<span class="cKey">isEmpty</span> == <span class="cRes">true</span>) <span class="cRes">then</span> ( <span class="cRes">return</span> #{} )
+
+        <span class="cRes">local</span> baVertSet01 = <span class="cKey">polyOp</span>.<span class="cKey">getVertsUsingEdge</span> oPoly baEdge
+        <span class="cRes">local</span> baFaceSet01 = <span class="cKey">polyOp</span>.<span class="cKey">getFacesUsingVert</span> oPoly baVertSet01
+        <span class="cRes">local</span> baVertSet02 = #{<span class="cNum">1</span>..(<span class="cKey">polyOp</span>.<span class="cKey">getNumVerts</span> oPoly)} - baVertSet01
+        <span class="cRes">local</span> baFaceSet02 = <span class="cKey">polyOp</span>.<span class="cKey">getFacesUsingVert</span> oPoly baVertSet02
+
+        <span class="cRes">return</span> (baFaceSet01 - baFaceSet02)
+    )
+    <span class="cRes">else</span>
+    (
+        <span class="cRes">throw</span> <span class="cStr">"Wrong input in function getInFacesUsingEdge()"</span>
+    )
+)
+
+<span class="cCom">--------------------------------------------------------------------------------</span>
+
+<span class="cRes">function</span> <strong>getOutFacesUsingEdge</strong> oPoly baEdge =
+(
+    <span class="cRes">if</span> ( ((<span class="cKey">classOf</span> oPoly) == <span class="cKey">Editable_Poly</span>) <span class="cRes">and</span> ((<span class="cKey">classOf</span> baEdge) == <span class="cKey">BitArray</span>) ) <span class="cRes">then</span>
+    (
+        <span class="cRes">if</span> (baEdge.<span class="cKey">isEmpty</span> == <span class="cRes">true</span>) <span class="cRes">then</span> ( <span class="cRes">return</span> #{} )
+
+        <span class="cRes">local</span> baVertSet01 = <span class="cKey">polyOp</span>.<span class="cKey">getVertsUsingEdge</span> oPoly baEdge
+        <span class="cRes">local</span> baFaceSet01 = <span class="cKey">polyOp</span>.<span class="cKey">getFacesUsingVert</span> oPoly baVertSet01
+        <span class="cRes">local</span> baVertSet02 = #{<span class="cNum">1</span>..(<span class="cKey">polyOp</span>.<span class="cKey">getNumVerts</span> oPoly)} - baVertSet01
+        <span class="cRes">local</span> baFaceSet02 = <span class="cKey">polyOp</span>.<span class="cKey">getFacesUsingVert</span> oPoly baVertSet02
+
+        <span class="cRes">return</span> (baFaceSet01 * baFaceSet02)
+    )
+    <span class="cRes">else</span>
+    (
+        <span class="cRes">throw</span> <span class="cStr">"Wrong input in function getOutFacesUsingEdge()"</span>
+    )
+)</pre>
+</div>
+<br>
+
+
+
+<a name="getVertsUsingFace" id="getVertsUsingFace"></a><br>
+<a href="http://www.illusioncatalyst.com/3dsmax_files/snippets/editable_poly_sub_obj.php#toc" class="mxsTitleBlack" title="UP!">Get Inner / Outer Vertices using Faces </a>
+<span class="mxsMember">&lt;BitArray vertList&gt; <strong>getInVertsUsingFace</strong> &lt;Poly poly&gt; &lt;BitArray faceList&gt;<br>
+&lt;BitArray vertList&gt; <strong>getOutVertsUsingFace</strong> &lt;Poly poly&gt; &lt;BitArray faceList&gt;</span>
+<span class="mxsText">Return a list of all the vertices included or along the perimeter of a space defined by the provided list of faces.</span><br>
+<table border="0" cellspacing="0" cellpadding="0">
+	<tbody><tr>
+		<td width="175"><img src="./IllusionCatalyst - MaxScript_files/fromFace.gif" width="175" height="150"></td>
+		<td width="175"><img src="./IllusionCatalyst - MaxScript_files/fromFaceToVert.gif" width="175" height="150"></td>
+		<td width="175"><img src="./IllusionCatalyst - MaxScript_files/fromFaceToInVert.gif" width="175" height="150"></td>
+		<td width="175"><img src="./IllusionCatalyst - MaxScript_files/fromFaceToOutVert.gif" width="175" height="150"></td>
+	</tr>
+	<tr>
+		<td align="center" class="note">Source Selection</td>
+		<td align="center" class="note">Standard Conversion</td>
+		<td align="center" class="note">Inner Vertices</td>
+		<td align="center" class="note">Outer Vertices</td>
+	</tr>
+</tbody></table>
+<div class="codeBox">
+<pre><span class="cRes">function</span> <strong>getInVertsUsingFace</strong> oPoly baFace =
+(
+    <span class="cRes">if</span> ( ((<span class="cKey">classOf</span> oPoly) == <span class="cKey">Editable_Poly</span>) <span class="cRes">and</span> ((<span class="cKey">classOf</span> baFace) == <span class="cKey">BitArray</span>) ) <span class="cRes">then</span>
+    (
+        <span class="cRes">if</span> (baFace.<span class="cKey">isEmpty</span> == <span class="cRes">true</span>) <span class="cRes">then</span> ( <span class="cRes">return</span> #{} )
+
+        <span class="cRes">local</span> baVertSet01 = <span class="cKey">polyOp</span>.<span class="cKey">getVertsUsedOnlyByFaces</span> oPoly baFace
+
+        <span class="cRes">return</span> baVertSet01
+    )
+    <span class="cRes">else</span>
+    (
+        <span class="cRes">throw</span> <span class="cStr">"Wrong input in function getInVertsUsingFace()"</span>
+    )
+)
+
+<span class="cCom">--------------------------------------------------------------------------------</span>
+
+<span class="cRes">function</span> <strong>getOutVertsUsingFace</strong> oPoly baFace =
+(
+    <span class="cRes">if</span> ( ((<span class="cKey">classOf</span> oPoly) == <span class="cKey">Editable_Poly</span>) <span class="cRes">and</span> ((<span class="cKey">classOf</span> baFace) == <span class="cKey">BitArray</span>) ) <span class="cRes">then</span>
+    (
+        <span class="cRes">if</span> (baFace.<span class="cKey">isEmpty</span> == <span class="cRes">true</span>) <span class="cRes">then</span> ( <span class="cRes">return</span> #{} )
+
+        <span class="cRes">local</span> baVertSet01 = <span class="cKey">polyOp</span>.<span class="cKey">getVertsUsingFace</span> oPoly baFace
+        <span class="cRes">local</span> baVertSet02 = <span class="cKey">polyOp</span>.<span class="cKey">getVertsUsedOnlyByFaces</span> oPoly baFace
+
+        <span class="cRes">return</span> (baVertSet01 - baVertSet02)
+    )
+    <span class="cRes">else</span>
+    (
+        <span class="cRes">throw</span> <span class="cStr">"Wrong input in function getOutVertsUsingFace()"</span>
+    )
+)</pre>
+</div>
+<br>
+
+
+
+<a name="getEdgesUsingFace" id="getEdgesUsingFace"></a><br>
+<a href="http://www.illusioncatalyst.com/3dsmax_files/snippets/editable_poly_sub_obj.php#toc" class="mxsTitleBlack" title="UP!">Get Inner / Outer Edges using Faces</a>
+<span class="mxsMember">&lt;BitArray edgeList&gt; <strong>getInEdgesUsingFace</strong> &lt;Poly poly&gt; &lt;BitArray faceList&gt;<br>
+&lt;BitArray edgeList&gt; <strong>getOutEdgesUsingFace</strong> &lt;Poly poly&gt; &lt;BitArray faceList&gt;</span>
+<span class="mxsText">Return a list of all the edges included or along the perimeter of a space defined by the provided list of faces.</span><br>
+<table border="0" cellspacing="0" cellpadding="0">
+	<tbody><tr>
+		<td width="175"><img src="./IllusionCatalyst - MaxScript_files/fromFace.gif" width="175" height="150"></td>
+		<td width="175"><img src="./IllusionCatalyst - MaxScript_files/fromFaceToEdge.gif" width="175" height="150"></td>
+		<td width="175"><img src="./IllusionCatalyst - MaxScript_files/fromFaceToInEdge.gif" width="175" height="150"></td>
+		<td width="175"><img src="./IllusionCatalyst - MaxScript_files/fromFaceToOutEdge.gif" width="175" height="150"></td>
+	</tr>
+	<tr>
+		<td align="center" class="note">Source Selection</td>
+		<td align="center" class="note">Standard Conversion</td>
+		<td align="center" class="note">Inner Egdes</td>
+		<td align="center" class="note">Outer Edges</td>
+	</tr>
+</tbody></table>
+<div class="codeBox">
+<pre><span class="cRes">function</span> <strong>getInEdgesUsingFace</strong> oPoly baFace =
+(
+    <span class="cRes">if</span> ( ((<span class="cKey">classOf</span> oPoly) == <span class="cKey">Editable_Poly</span>) <span class="cRes">and</span> ((<span class="cKey">classOf</span> baFace) == <span class="cKey">BitArray</span>) ) <span class="cRes">then</span>
+    (
+        <span class="cRes">if</span> (baFace.<span class="cKey">isEmpty</span> == <span class="cRes">true</span>) <span class="cRes">then</span> ( <span class="cRes">return</span> #{} )
+
+        <span class="cRes">local</span> baEdgeSet01 = <span class="cKey">polyOp</span>.<span class="cKey">getEdgesUsingFace</span> oPoly baFace
+        <span class="cRes">local</span> baFaceSet01 = #{<span class="cNum">1</span>..(<span class="cKey">polyOp</span>.<span class="cKey">getNumFaces</span>)} - baFace
+        <span class="cRes">local</span> baEdgeSet02 = <span class="cKey">polyOp</span>.<span class="cKey">getEdgesUsingFace</span> oPoly baFaceSet01
+
+        <span class="cRes">local</span> baEdgeSet03 = <span class="cKey">polyOp</span>.<span class="cKey">getOpenEdges</span> oPoly
+
+        <span class="cRes">return</span> (baEdgeSet01 - baEdgeSet02 - baEdgeSet03)
+    )
+    <span class="cRes">else</span>
+    (
+        <span class="cRes">throw</span> <span class="cStr">"Wrong input in function getInEdgesUsingFace()"</span>
+    )
+)
+
+<span class="cCom">--------------------------------------------------------------------------------</span>
+
+<span class="cRes">function</span> <strong>getOutEdgesUsingFace</strong> oPoly baFace =
+(
+    <span class="cRes">if</span> ( ((<span class="cKey">classOf</span> oPoly) == <span class="cKey">Editable_Poly</span>) <span class="cRes">and</span> ((<span class="cKey">classOf</span> baFace) == <span class="cKey">BitArray</span>) ) <span class="cRes">then</span>
+    (
+        <span class="cRes">if</span> (baFace.<span class="cKey">isEmpty</span> == <span class="cRes">true</span>) <span class="cRes">then</span> ( <span class="cRes">return</span> #{} )
+
+        <span class="cRes">local</span> baEdgeSet01 = <span class="cKey">polyOp</span>.<span class="cKey">getEdgesUsingFace</span> oPoly baFace
+        <span class="cRes">local</span> baFaceSet01 = #{<span class="cNum">1</span>..(<span class="cKey">polyOp</span>.<span class="cKey">getNumFaces</span> oPoly)} - baFace
+        <span class="cRes">local</span> baEdgeSet02 = <span class="cKey">polyOp</span>.<span class="cKey">getEdgesUsingFace</span> oPoly baFaceSet01
+
+        <span class="cRes">return</span> (baEdgeSet01 * baEdgeSet02)
+    )
+    <span class="cRes">else</span>
+    (
+        <span class="cRes">throw</span> <span class="cStr">"Wrong input in function getOutEdgesUsingFace()"</span>
+    )
+)</pre>
+</div>
+
+
+
+<a name="subSel" id="subSel"></a><br>
+<a href="http://www.illusioncatalyst.com/3dsmax_files/snippets/editable_poly_sub_obj.php#toc" class="mxsTitleBlack" title="UP!">Store / Fetch / erase Sub Objects Selections</a>
+<span class="mxsMember">&lt;void&gt; <strong>markSubSel</strong> &lt;Poly poly&gt; &lt;BitArray subObjectLevels&gt; &lt;Integer bit&gt;<br>
+&lt;void&gt; <strong>readSubSel</strong> &lt;Poly poly&gt; &lt;BitArray subObjectLevels&gt; &lt;Integer bit&gt;<br>
+&lt;void&gt; <strong>wipeSubSel</strong> &lt;Poly poly&gt; &lt;BitArray subObjectLevels&gt; &lt;Integer bit&gt;</span>
+<span class="mxsText">Group of functions to store and retrieve sub-object selections regardless of topology modifications.<br>
+<br>
+markSubSel() set a specific flag in the current vertices / edges / faces selection<br>
+readSubSel() read the flag set by markSubSel() in vertices / edges / faces selection<br>
+wipeSubSel() erase the flag set by markSubSel() in vertices / edges / faces selection<br>
+<br>
+These functions must be used in conjunction, with consistent parameters, in example: store the current vertices selection by setting a flag on bit 32, fetch the vertices selection by getting vertex flagged by bit 32 and erase the selection on vertices by erasing flag on bit 32. </span>
+<div class="codeBox">
+<pre><span class="cRes">function</span> <strong>markSubSel</strong> oPoly baLevel iBit =
+(
+    <span class="cRes">if</span> ( ((<span class="cKey">classOf</span> oPoly) == <span class="cKey">Editable_Poly</span>) <span class="cRes">and</span> ((<span class="cKey">classOf</span> baLevel) == <span class="cKey">BitArray</span>) <span class="cRes">and</span> \
+         ((<span class="cKey">classOf</span> iBit) == <span class="cKey">Integer</span>) ) <span class="cRes">then</span>
+    (
+        <span class="cRes">if</span> ( (iBit &gt;= <span class="cNum">25</span>) <span class="cRes">and</span> (iBit &lt;= <span class="cNum">32</span>) ) <span class="cRes">then</span>
+        (
+            <span class="cRes">local</span> iFlag = (<span class="cKey">bit</span>.<span class="cKey">set</span> <span class="cNum">0</span> iBit <span class="cRes">true</span>)
+
+            <span class="cRes">if</span> (baLevel[<span class="cNum">1</span>] == <span class="cRes">true</span>) <span class="cRes">then</span>
+                <span class="cKey">polyOp</span>.<span class="cKey">setVertFlags</span> oPoly (<span class="cKey">polyOp</span>.<span class="cKey">getVertSelection</span> oPoly) iFlag <span class="cKey">mask</span>:iFlag <span class="cKey">undoable</span>:<span class="cRes">true</span>
+
+            <span class="cRes">if</span> ( (baLevel[<span class="cNum">2</span>] == <span class="cRes">true</span>) <span class="cRes">or</span> (baLevel[<span class="cNum">3</span>] == <span class="cRes">true</span>) ) <span class="cRes">then</span>
+                <span class="cKey">polyOp</span>.<span class="cKey">setEdgeFlags</span> oPoly (<span class="cKey">polyOp</span>.<span class="cKey">getEdgeSelection</span> oPoly) iFlag <span class="cKey">mask</span>:iFlag <span class="cKey">undoable</span>:<span class="cRes">true</span>
+
+            <span class="cRes">if</span> ( (baLevel[<span class="cNum">4</span>] == <span class="cRes">true</span>) <span class="cRes">or</span> (baLevel[<span class="cNum">5</span>] == <span class="cRes">true</span>) ) <span class="cRes">then</span>
+                <span class="cKey">polyOp</span>.<span class="cKey">setFaceFlags</span> oPoly (<span class="cKey">polyOp</span>.<span class="cKey">getFaceSelection</span> oPoly) iFlag <span class="cKey">mask</span>:iFlag <span class="cKey">undoable</span>:<span class="cRes">true</span>
+        )
+        <span class="cRes">else</span>
+        (
+            <span class="cRes">throw</span> <span class="cStr">"Wrong input in function markSubSel(): iBit out of allowed range"</span>
+        )
+    )
+    <span class="cRes">else</span>
+    (
+        <span class="cRes">throw</span> <span class="cStr">"Wrong input in function markSubSel()"</span>
+    )
+)
+
+<span class="cCom">--------------------------------------------------------------------------------</span>
+
+<span class="cRes">function</span> <strong>readSubSel</strong> oPoly baLevel iBit =
+(
+    <span class="cRes">if</span> ( ((<span class="cKey">classOf</span> oPoly) == <span class="cKey">Editable_Poly</span>) <span class="cRes">and</span> ((<span class="cKey">classOf</span> baLevel) == <span class="cKey">BitArray</span>) <span class="cRes">and</span> \
+         ((<span class="cKey">classOf</span> iBit) == <span class="cKey">Integer</span>) ) <span class="cRes">then</span>
+    (
+        <span class="cRes">if</span> ( (iBit &gt;= <span class="cNum">25</span>) <span class="cRes">and</span> (iBit &lt;= <span class="cNum">32</span>) ) <span class="cRes">then</span>
+        (
+            <span class="cRes">local</span> iFlag = (<span class="cKey">bit</span>.<span class="cKey">set</span> <span class="cNum">0</span> iBit <span class="cRes">true</span>)
+
+            <span class="cRes">if</span> (baLevel[<span class="cNum">1</span>] == <span class="cRes">true</span>) <span class="cRes">then</span>
+                <span class="cKey">polyOp</span>.<span class="cKey">setVertSelection</span> oPoly (<span class="cKey">polyOp</span>.<span class="cKey">getVertsByFlag</span> oPoly iFlag <span class="cKey">mask</span>:iFlag)
+
+            <span class="cRes">if</span> ( (baLevel[<span class="cNum">2</span>] == <span class="cRes">true</span>) <span class="cRes">or</span> (baLevel[<span class="cNum">3</span>] == <span class="cRes">true</span>) ) <span class="cRes">then</span>
+                <span class="cKey">polyOp</span>.<span class="cKey">setEdgeSelection</span> oPoly (<span class="cKey">polyOp</span>.<span class="cKey">getEdgesByFlag</span> oPoly iFlag <span class="cKey">mask</span>:iFlag)
+
+            <span class="cRes">if</span> ( (baLevel[<span class="cNum">4</span>] == <span class="cRes">true</span>) <span class="cRes">or</span> (baLevel[<span class="cNum">5</span>] == <span class="cRes">true</span>) ) <span class="cRes">then</span>
+                <span class="cKey">polyOp</span>.<span class="cKey">setFaceSelection</span> oPoly (<span class="cKey">polyOp</span>.<span class="cKey">getFacesByFlag</span> oPoly iFlag <span class="cKey">mask</span>:iFlag)
+        )
+        <span class="cRes">else</span>
+        (
+            <span class="cRes">throw</span> <span class="cStr">"Wrong input in function readSubSel(): iBit out of allowed range"</span>
+        )
+    )
+    <span class="cRes">else</span>
+    (
+        <span class="cRes">throw</span> <span class="cStr">"Wrong input in function readSubSel()"</span>
+    )
+)
+
+<span class="cCom">--------------------------------------------------------------------------------</span>
+
+<span class="cRes">function</span> <strong>wipeSubSel</strong> oPoly baLevel iBit =
+(
+    <span class="cRes">if</span> ( ((<span class="cKey">classOf</span> oPoly) == <span class="cKey">Editable_Poly</span>) <span class="cRes">and</span> ((<span class="cKey">classOf</span> baLevel) == <span class="cKey">BitArray</span>) <span class="cRes">and</span> \
+         ((<span class="cKey">classOf</span> iBit) == <span class="cKey">Integer</span>) ) <span class="cRes">then</span>
+    (
+        <span class="cRes">if</span> ( (iBit &gt;= <span class="cNum">25</span>) <span class="cRes">and</span> (iBit &lt;= <span class="cNum">32</span>) ) <span class="cRes">then</span>
+        (
+            <span class="cRes">local</span> iFlag = (<span class="cKey">bit</span>.<span class="cKey">set</span> <span class="cNum">0</span> iBit <span class="cRes">true</span>)
+
+            <span class="cRes">if</span> (baLevel[<span class="cNum">1</span>] == <span class="cRes">true</span>) <span class="cRes">then</span>
+                <span class="cKey">polyOp</span>.<span class="cKey">setVertFlags</span> oPoly #{} iFlag <span class="cKey">mask</span>:iFlag <span class="cKey">undoable</span>:<span class="cRes">true</span>
+
+            <span class="cRes">if</span> ( (baLevel[<span class="cNum">2</span>] == <span class="cRes">true</span>) <span class="cRes">or</span> (baLevel[<span class="cNum">3</span>] == <span class="cRes">true</span>) ) <span class="cRes">then</span>
+                <span class="cKey">polyOp</span>.<span class="cKey">setEdgeFlags</span> oPoly #{} iFlag <span class="cKey">mask</span>:iFlag <span class="cKey">undoable</span>:<span class="cRes">true</span>
+
+            <span class="cRes">if</span> ( (baLevel[<span class="cNum">4</span>] == <span class="cRes">true</span>) <span class="cRes">or</span> (baLevel[<span class="cNum">5</span>] == <span class="cRes">true</span>) ) <span class="cRes">then</span>
+                <span class="cKey">polyOp</span>.<span class="cKey">setFaceFlags</span> oPoly #{} iFlag <span class="cKey">mask</span>:iFlag <span class="cKey">undoable</span>:<span class="cRes">true</span>
+        )
+        <span class="cRes">else</span>
+        (
+            <span class="cRes">throw</span> <span class="cStr">"Wrong input in function wipeSubSel(): iBit out of allowed range"</span>
+        )
+    )
+    <span class="cRes">else</span>
+    (
+        <span class="cRes">throw</span> <span class="cStr">"Wrong input in function wipeSubSel()"</span>
+    )
+)</pre>
+</div>
+<br>
+
+
+
+<a name="getRing" id="getRing"></a><br>
+<a href="http://www.illusioncatalyst.com/3dsmax_files/snippets/editable_poly_sub_obj.php#toc" class="mxsTitleBlack" title="UP!">Get Vertex / Edge / Face Ring</a>
+<span class="mxsMember">&lt;BitArray vertList&gt; <strong>getVertRing</strong> &lt;Poly poly&gt; &lt;BitArray vertList&gt;<br>
+&lt;BitArray edgeList&gt; <strong>getEdgeRing</strong> &lt;Poly poly&gt; &lt;BitArray edgeList&gt;<br>
+&lt;BitArray faceList&gt; <strong>getFaceRing</strong> &lt;Poly poly&gt; &lt;BitArray faceList&gt;</span>
+<span class="mxsText">These functions return a list of vertices / edges / faces forming a selection ring determined by the provided vertices / edges / faces list.
+In order to work with vertices and faces, at least two contiguous elements must be selected.<br>
+<br>
+<span class="note">Required functions: getInEdgesUsingFace(); markSubSel(); readSubSel(); wipeSubSel();</span></span>
+<div class="codeBox">
+<pre><span class="cRes">function</span> <strong>getVertRing</strong> oPoly baVert =
+(
+    <span class="cRes">if</span> ( ((<span class="cKey">classOf</span> oPoly) == <span class="cKey">Editable_Poly</span>) <span class="cRes">and</span> ((<span class="cKey">classOf</span> baVert) == <span class="cKey">BitArray</span>) ) <span class="cRes">then</span>
+    (
+        <span class="cRes">undo on</span>
+        (
+            <span class="cRes">with</span> <span class="cKey">redraw</span> <span class="cRes">off</span>
+            (
+                markSubSel oPoly #{<span class="cNum">1</span>..<span class="cNum">5</span>} <span class="cNum">32</span>
+
+                <span class="cKey">polyOp</span>.<span class="cKey">setVertSelection</span> oPoly baVert
+
+                oPoly.<span class="cKey">convertSelection</span> #Vertex #Edge
+                oPoly.<span class="cKey">shrinkSelection</span> <span class="cKey">selLevel</span>:#Edge
+                oPoly.<span class="cKey">selectEdgeRing</span>()
+                oPoly.<span class="cKey">convertSelection</span> #Edge #Vertex
+
+                <span class="cRes">local</span> baVertRing = <span class="cKey">polyOp</span>.<span class="cKey">getVertSelection</span> oPoly
+
+                readSubSel oPoly #{<span class="cNum">1</span>..<span class="cNum">5</span>} <span class="cNum">32</span>
+                wipeSubSel oPoly #{<span class="cNum">1</span>..<span class="cNum">5</span>} <span class="cNum">32</span>
+
+                <span class="cRes">return</span> baVertRing
+            )
+        )
+    )
+    <span class="cRes">else</span>
+    (
+        <span class="cRes">throw</span> <span class="cStr">"Wrong input in function getVertRing()"</span>
+    )
+)
+
+<span class="cCom">--------------------------------------------------------------------------------</span>
+
+<span class="cRes">function</span> <strong>getEdgeRing</strong> oPoly baEdge =
+(
+    <span class="cRes">if</span> ( ((<span class="cKey">classOf</span> oPoly) == <span class="cKey">Editable_Poly</span>) <span class="cRes">and</span> ((<span class="cKey">classOf</span> baEdge) == <span class="cKey">BitArray</span>) ) <span class="cRes">then</span>
+    (
+        <span class="cRes">undo on</span>
+        (
+            <span class="cRes">with</span> <span class="cKey">redraw</span> <span class="cRes">off</span>
+            (
+                markSubSel oPoly #{<span class="cNum">1</span>..<span class="cNum">5</span>} <span class="cNum">32</span>
+
+                <span class="cKey">polyOp</span>.<span class="cKey">setEdgeSelection</span> oPoly baEdge
+
+                oPoly.<span class="cKey">selectEdgeRing</span>()
+
+                <span class="cRes">local</span> baEdgeRing = <span class="cKey">polyOp</span>.<span class="cKey">getEdgeSelection</span> oPoly
+
+                readSubSel oPoly #{<span class="cNum">1</span>..<span class="cNum">5</span>} <span class="cNum">32</span>
+                wipeSubSel oPoly #{<span class="cNum">1</span>..<span class="cNum">5</span>} <span class="cNum">32</span>
+
+                <span class="cRes">return</span> baEdgeRing
+            )
+        )
+    )
+    <span class="cRes">else</span>
+    (
+        <span class="cRes">throw</span> <span class="cStr">"Wrong input in function getEdgeRing()"</span>
+    )
+)
+
+<span class="cCom">--------------------------------------------------------------------------------</span>
+
+<span class="cRes">function</span> <strong>getFaceRing</strong> oPoly baFace =
+(
+    <span class="cRes">if</span> ( ((<span class="cKey">classOf</span> oPoly) == <span class="cKey">Editable_Poly</span>) <span class="cRes">and</span> ((<span class="cKey">classOf</span> baFace) == <span class="cKey">BitArray</span>) ) <span class="cRes">then</span>
+    (
+        <span class="cRes">undo on</span>
+        (
+            <span class="cRes">with</span> <span class="cKey">redraw</span> <span class="cRes">off</span>
+            (
+                markSubSel oPoly #{<span class="cNum">1</span>..<span class="cNum">5</span>} <span class="cNum">32</span>
+
+                <span class="cRes">local</span> baInputEdge = <span class="cKey">polyOp</span>.<span class="cKey">getEdgesUsingFace</span> oPoly baFace
+
+                <span class="cRes">local</span> baEdgeSet01 = getInEdgesUsingFace oPoly baInputPoly
+
+                <span class="cRes">local</span> baVertSet01 = <span class="cKey">polyOp</span>.<span class="cKey">getVertsUsingEdge</span> oPoly baEdgeSet01
+                <span class="cRes">local</span> baEdgeSet02 = <span class="cKey">polyOp</span>.<span class="cKey">getEdgesUsingVert</span> oPoly baVertSet01
+                <span class="cRes">local</span> baEdgeSet03 = (baEdgeSet02 * baInputEdge) - baEdgeSet01
+
+                <span class="cKey">polyOp</span>.<span class="cKey">setEdgeSelection</span> oPoly baEdgeSet03
+                oPoly.<span class="cKey">selectEdgeRing</span>()
+
+                <span class="cRes">local</span> baEdgeSet04 = <span class="cKey">polyOp</span>.<span class="cKey">getEdgeSelection</span> oPoly
+                <span class="cRes">local</span> baFaceRing = <span class="cKey">polyOp</span>.<span class="cKey">getFacesUsingEdge</span> oPoly baEdgeSet04
+
+                readSubSel oPoly #{<span class="cNum">1</span>..<span class="cNum">5</span>} <span class="cNum">32</span>
+                wipeSubSel oPoly #{<span class="cNum">1</span>..<span class="cNum">5</span>} <span class="cNum">32</span>
+
+                <span class="cRes">return</span> baFaceRing
+            )
+        )
+    )
+    <span class="cRes">else</span>
+    (
+        <span class="cRes">throw</span> <span class="cStr">"Wrong input in function getFaceRing()"</span>
+    )
+)</pre>
+</div>
+<br>
+
+
+
+<a name="getLoop" id="getLoop"></a><br>
+<a href="http://www.illusioncatalyst.com/3dsmax_files/snippets/editable_poly_sub_obj.php#toc" class="mxsTitleBlack" title="UP!">Get Vertex / Edge / Face Loop</a>
+<span class="mxsMember">&lt;BitArray vertList&gt; <strong>getVertLoop</strong> &lt;Poly poly&gt; &lt;BitArray vertList&gt;<br>
+&lt;BitArray edgeList&gt; <strong>getEdgeLoop</strong> &lt;Poly poly&gt; &lt;BitArray edgeList&gt;<br>
+&lt;BitArray faceList&gt; <strong>getFaceLoop</strong> &lt;Poly poly&gt; &lt;BitArray faceList&gt;</span>
+<span class="mxsText">These functions return a list of vertices / edges / faces forming a selection loop determined by the provided vertices / edges / faces list.
+In order to work with vertices and faces, at least two contiguous elements must be selected.<br>
+<br>
+<span class="note">Required functions: getInEdgesUsingFace(); markSubSel(); readSubSel(); wipeSubSel();</span></span>
+<div class="codeBox">
+<pre><span class="cRes">function</span> <strong>getVertLoop</strong> oPoly baVert =
+(
+    <span class="cRes">if</span> ( ((<span class="cKey">classOf</span> oPoly) == <span class="cKey">Editable_Poly</span>) <span class="cRes">and</span> ((<span class="cKey">classOf</span> baVert) == <span class="cKey">BitArray</span>) ) <span class="cRes">then</span>
+    (
+        <span class="cRes">undo on</span>
+        (
+            <span class="cRes">with</span> <span class="cKey">redraw</span> <span class="cRes">off</span>
+            (
+                markSubSel oPoly #{<span class="cNum">1</span>..<span class="cNum">5</span>} <span class="cNum">32</span>
+
+                <span class="cKey">polyOp</span>.<span class="cKey">setVertSelection</span> oPoly baVert
+
+                oPoly.<span class="cKey">convertSelection</span> #Vertex #Edge
+                oPoly.<span class="cKey">shrinkSelection</span> <span class="cKey">selLevel</span>:#Edge
+                oPoly.<span class="cKey">selectEdgeLoop</span>()
+                oPoly.<span class="cKey">convertSelection</span> #Edge #Vertex
+
+                <span class="cRes">local</span> baVertLoop = <span class="cKey">polyOp</span>.<span class="cKey">getVertSelection</span> oPoly
+
+                readSubSel oPoly #{<span class="cNum">1</span>..<span class="cNum">5</span>} <span class="cNum">32</span>
+                wipeSubSel oPoly #{<span class="cNum">1</span>..<span class="cNum">5</span>} <span class="cNum">32</span>
+
+                <span class="cRes">return</span> baVertLoop
+            )
+        )
+    )
+    <span class="cRes">else</span>
+    (
+        <span class="cRes">throw</span> <span class="cStr">"Wrong input in function getVertLoop()"</span>
+    )
+)
+
+<span class="cCom">--------------------------------------------------------------------------------</span>
+
+<span class="cRes">function</span> <strong>getEdgeLoop</strong> oPoly baEdge =
+(
+    <span class="cRes">if</span> ( ((<span class="cKey">classOf</span> oPoly) == <span class="cKey">Editable_Poly</span>) <span class="cRes">and</span> ((<span class="cKey">classOf</span> baEdge) == <span class="cKey">BitArray</span>) ) <span class="cRes">then</span>
+    (
+        <span class="cRes">undo on</span>
+        (
+            <span class="cRes">with</span> <span class="cKey">redraw</span> <span class="cRes">off</span>
+            (
+                markSubSel oPoly #{<span class="cNum">1</span>..<span class="cNum">5</span>} <span class="cNum">32</span>
+
+                <span class="cKey">polyOp</span>.<span class="cKey">setEdgeSelection</span> oPoly baEdge
+
+                oPoly.<span class="cKey">selectEdgeLoop</span>()
+
+                <span class="cRes">local</span> baEdgeLoop = <span class="cKey">polyOp</span>.<span class="cKey">getEdgeSelection</span> oPoly
+
+                readSubSel oPoly #{<span class="cNum">1</span>..<span class="cNum">5</span>} <span class="cNum">32</span>
+                wipeSubSel oPoly #{<span class="cNum">1</span>..<span class="cNum">5</span>} <span class="cNum">32</span>
+
+                <span class="cRes">return</span> baEdgeLoop
+            )
+        )
+    )
+    <span class="cRes">else</span>
+    (
+        <span class="cRes">throw</span> <span class="cStr">"Wrong input in function getEdgeLoop()"</span>
+    )
+)
+
+<span class="cCom">--------------------------------------------------------------------------------</span>
+
+<span class="cRes">function</span> <strong>getFaceLoop</strong> oPoly baFace =
+(
+    <span class="cRes">if</span> ( ((<span class="cKey">classOf</span> oPoly) == <span class="cKey">Editable_Poly</span>) <span class="cRes">and</span> ((<span class="cKey">classOf</span> baFace) == <span class="cKey">BitArray</span>) ) <span class="cRes">then</span>
+    (
+        <span class="cRes">undo on</span>
+        (
+            <span class="cRes">with</span> <span class="cKey">redraw</span> <span class="cRes">off</span>
+            (
+                markSubSel oPoly #{<span class="cNum">1</span>..<span class="cNum">5</span>} <span class="cNum">32</span>
+
+                <span class="cRes">local</span> baEdgeSet01 = getInEdgesUsingFace oPoly baFace
+
+                <span class="cKey">polyOp</span>.<span class="cKey">setEdgeSelection</span> oPoly baEdgeSet01
+                oPoly.<span class="cKey">selectEdgeRing</span>()
+
+                <span class="cRes">local</span> baEdgeSet02 = <span class="cKey">polyOp</span>.<span class="cKey">getEdgeSelection</span> oPoly
+                <span class="cRes">local</span> baFaceLoop = <span class="cKey">polyOp</span>.<span class="cKey">getFacesUsingEdge</span> oPoly baEdgeSet02
+
+                readSubSel oPoly #{<span class="cNum">1</span>..<span class="cNum">5</span>} <span class="cNum">32</span>
+                wipeSubSel oPoly #{<span class="cNum">1</span>..<span class="cNum">5</span>} <span class="cNum">32</span>
+
+                <span class="cRes">return</span> baFaceLoop
+            )
+        )
+    )
+    <span class="cRes">else</span>
+    (
+        <span class="cRes">throw</span> <span class="cStr">"Wrong input in function getFaceLoop()"</span>
+    )
+)</pre>
+</div>
+
+
+
+<a name="getNgon" id="getNgon"></a><br>
+<a href="http://www.illusioncatalyst.com/3dsmax_files/snippets/editable_poly_sub_obj.php#toc" class="mxsTitleBlack" title="UP!">Get n-Gon</a>
+<span class="mxsMember">&lt;BitArray faceList&gt; <strong>getNgon</strong> &lt;Poly poly&gt; &lt;Integer numEdges&gt; [inverse:&lt;Boolean default:false&gt;]</span>
+<span class="mxsText">Collects all polygons matching the number of edges specified. If "inverse:" optional parameter is set to true, collects all the polygons with number of edges different from the one specified.</span>
+<div class="codeBox">
+<pre><span class="cRes">function</span> <strong>getNgon</strong> oPoly iNumEdges inverse:<span class="cRes">false</span> =
+(
+    <span class="cRes">if</span> ( ((<span class="cKey">classOf</span> oPoly) == <span class="cKey">Editable_Poly</span>) <span class="cRes">and</span> ((<span class="cKey">classOf</span> iNumEdges) == <span class="cKey">Integer</span>) <span class="cRes">and</span> \
+         ((<span class="cKey">classOf</span> inverse) == <span class="cKey">BooleanClass</span>) ) <span class="cRes">then</span>
+    (
+        <span class="cRes">local</span> baAllFace = #{<span class="cNum">1</span>..(<span class="cKey">polyOp</span>.<span class="cKey">getNumFaces</span> oPoly)}
+        <span class="cRes">local</span> baSelFace = #{}
+
+        <span class="cRes">if</span> (inverse == <span class="cRes">false</span>) <span class="cRes">then</span>
+        (
+            <span class="cRes">for</span> iFace <span class="cRes">in</span> baAllFace <span class="cRes">do</span>
+            (
+                <span class="cRes">if</span> ((<span class="cKey">polyOp</span>.<span class="cKey">getFaceDeg</span> oPoly iFace) == iNumEdges) <span class="cRes">then</span>
+                (
+                    baSelFace[iFace] = <span class="cRes">true</span>
+                )
+            )
+        )
+        <span class="cRes">else</span>
+        (
+            <span class="cRes">for</span> iFace <span class="cRes">in</span> baAllFace <span class="cRes">do</span>
+            (
+                <span class="cRes">if</span> ((<span class="cKey">polyOp</span>.<span class="cKey">getFaceDeg</span> oPoly iFace) != iNumEdges) <span class="cRes">then</span>
+                (
+                    baSelFace[iFace] = <span class="cRes">true</span>
+                )
+            )
+        )
+
+        <span class="cRes">return</span> baSelFace
+    )
+    <span class="cRes">else</span>
+    (
+        <span class="cRes">throw</span> <span class="cStr">"Wrong input in function getNgon()"</span>
+    )
+)
+</pre>
+</div>
+<br>
+
+
+
+<a name="getSimilarFaces" id="getSimilarFaces"></a><br>
+<a href="http://www.illusioncatalyst.com/3dsmax_files/snippets/editable_poly_sub_obj.php#toc" class="mxsTitleBlack" title="UP!">Get Similar Faces</a>
+<span class="mxsMember">&lt;BitArray faceList&gt; <strong>getSimilarFaces</strong> &lt;Poly poly&gt; &lt;BitArray faceList&gt; [tolerance:&lt;Float default:2e-5&gt;]</span>
+<span class="mxsText">Collects all the polygons sharing the same number of edges, surface extension and perimeter with the provided list of faces. "tolerance:" optional parameter, allows to loosen or tighten matching value ranges. </span>
+<div class="codeBox">
+<pre><span class="cRes">function</span> <strong>getSimilarFaces</strong> oPoly baInputFace tolerance:<span class="cNum">2</span><span class="cRes">e</span>-<span class="cNum">5</span> =
+(
+    <span class="cRes">if</span> ( ((<span class="cKey">classOf</span> oPoly) == <span class="cKey">Editable_Poly</span>) <span class="cRes">and</span> ((<span class="cKey">classOf</span> baInputFace) == <span class="cKey">BitArray</span>) <span class="cRes">and</span> \
+         ((<span class="cKey">classOf</span> tolerance) == <span class="cKey">Float</span>) ) <span class="cRes">then</span>
+    (
+        <span class="cRes">local</span> fThresh = tolerance * <span class="cNum">0.5</span>
+
+        <span class="cRes">local</span> baTestFace = #{<span class="cNum">1</span>..(<span class="cKey">polyOp</span>.<span class="cKey">getNumFaces</span> oPoly)} - baInputFace
+        <span class="cRes">local</span> baSelFace = #{}
+
+        <span class="cRes">local</span> aaFaceData = #()
+        <span class="cRes">local</span> iNumInputFace = baInputFace.<span class="cKey">numberSet</span>
+
+        <span class="cRes">local</span> iFaceDeg = <span class="cNum">0</span>
+        <span class="cRes">local</span> fFaceArea = <span class="cNum">0.0</span>
+        <span class="cRes">local</span> aiFaceVerts = #()
+        <span class="cRes">local</span> ap3VertPos = #()
+        <span class="cRes">local</span> fAvgEdgeLen = <span class="cNum">0.0</span>
+
+        <span class="cRes">for</span> iFace <span class="cRes">in</span> baInputFace <span class="cRes">do</span>
+        (
+            iFaceDeg = <span class="cKey">polyOp</span>.<span class="cKey">getFaceDeg</span> oPoly iFace
+            fFaceArea = <span class="cKey">polyOp</span>.<span class="cKey">getFaceArea</span> oPoly iFace
+            aiFaceVerts = <span class="cKey">polyOp</span>.<span class="cKey">getFaceVerts</span> oPoly iFace
+
+            ap3VertPos = #()
+            <span class="cRes">for</span> i = <span class="cNum">1</span> to iFaceDeg <span class="cRes">do</span>
+            (
+                ap3VertPos[i] = <span class="cKey">polyOp</span>.<span class="cKey">getVert</span> oPoly aiFaceVerts[i]
+            )
+            ap3VertPos[iFaceDeg+<span class="cNum">1</span>] = ap3VertPos[<span class="cNum">1</span>]
+
+            fAvgEdgeLen = <span class="cNum">0.0</span>
+            <span class="cRes">for</span> i = <span class="cNum">1</span> to iFaceDeg <span class="cRes">do</span>
+            (
+                fAvgEdgeLen += <span class="cKey">distance</span> ap3VertPos[i] ap3VertPos[i+<span class="cNum">1</span>]
+            )
+            fAvgEdgeLen /= iFaceDeg
+
+            <span class="cKey">append</span> aaFaceData #(iFaceDeg, fFaceArea, fAvgEdgeLen)
+        )
+
+        <span class="cRes">for</span> iFace <span class="cRes">in</span> baTestFace <span class="cRes">do</span>
+        (
+            iFaceDeg = <span class="cKey">polyOp</span>.<span class="cKey">getFaceDeg</span> oPoly iFace
+            <span class="cRes">for</span> i = <span class="cNum">1</span> <span class="cRes">to</span> iNumInputFace <span class="cRes">do</span>
+            (
+                <span class="cRes">if</span> (iFaceDeg != aaFaceData[i][<span class="cNum">1</span>]) <span class="cRes">then</span>
+                    baTestFace[iFace] = <span class="cRes">false</span>
+            )
+        )
+
+        <span class="cRes">for</span> iFace <span class="cRes">in</span> baTestFace <span class="cRes">do</span>
+        (
+            fFaceArea = <span class="cKey">polyOp</span>.<span class="cKey">getFaceArea</span> oPoly iFace
+
+            <span class="cRes">for</span> i = <span class="cNum">1</span> <span class="cRes">to</span> iNumInputFace <span class="cRes">do</span>
+            (
+                <span class="cRes">if</span> ( (fFaceArea &gt;= (aaFaceData[i][<span class="cNum">2</span>] - fThresh)) <span class="cRes">and</span> \
+                     (fFaceArea &lt;= (aaFaceData[i][<span class="cNum">2</span>] + fThresh)) ) <span class="cRes">then</span>
+                (
+                    iFaceDeg = aaFaceData[i][<span class="cNum">1</span>]
+                    aiFaceVerts = <span class="cKey">polyOp</span>.<span class="cKey">getFaceVerts</span> oPoly iFace
+
+                    ap3VertPos = #()
+                    <span class="cRes">for</span> j = <span class="cNum">1</span> <span class="cRes">to</span> iFaceDeg <span class="cRes">do</span>
+                    (
+                        ap3VertPos[j] = <span class="cKey">polyOp</span>.<span class="cKey">getVert</span> oPoly aiFaceVerts[j]
+                    )
+                    ap3VertPos[iFaceDeg+<span class="cNum">1</span>] = ap3VertPos[<span class="cNum">1</span>]
+
+                    fAvgEdgeLen = <span class="cNum">0.0</span>
+                    <span class="cRes">for</span> j = <span class="cNum">1</span> <span class="cRes">to</span> iFaceDeg <span class="cRes">do</span>
+                    (
+                        fAvgEdgeLen += <span class="cKey">distance</span> ap3VertPos[j] ap3VertPos[j+<span class="cNum">1</span>]
+                    )
+                    fAvgEdgeLen /= iFaceDeg
+
+                    <span class="cRes">if</span> ( (fAvgEdgeLen &gt;= (aaFaceData[i][<span class="cNum">3</span>] - fThresh)) <span class="cRes">and</span> \
+                         (fAvgEdgeLen &lt;= (aaFaceData[i][<span class="cNum">3</span>] + fThresh)) ) <span class="cRes">then</span>
+                    (
+                        baSelFace[iFace] = <span class="cRes">true</span>
+                    )
+                )
+            )
+        )
+
+        <span class="cRes">return</span> baSelFace
+    )
+    <span class="cRes">else</span>
+    (
+        <span class="cRes">throw</span> <span class="cStr">"Wrong input in function getSimilarFaces()"</span>
+    )
+)</pre>
+</div>
+
+
+
+<a name="getFacesByAngle" id="getFacesByAngle"></a><br>
+<a href="http://www.illusioncatalyst.com/3dsmax_files/snippets/editable_poly_sub_obj.php#toc" class="mxsTitleBlack" title="UP!">Get Faces By Angle</a>
+<span class="mxsMember">&lt;BitArray faceList&gt; <strong>getFacesByAngle</strong> &lt;Poly poly&gt; &lt;Integer startFace&gt; &lt;Float angleDegThreshold&gt; [contig:#none]</span>
+<span class="mxsText">Collects all the polygons having normal within the specified angle expressed in degrees relative to the start face normal. Contiguity can be specified to limit selection.</span><span class="mxsOptions"><strong>#none</strong> - no contiguity limits<br>
+<strong>#byVert</strong> - faces must be contiguous for at least a vertex<br>
+<strong>#byEdge</strong> - faces must be contiguous for at least an edge</span>
+<div class="codeBox">
+<pre><span class="cRes">function</span> <strong>getFacesByAngle</strong> oPoly iFace fDegThresh contig:#none =
+(
+    <span class="cRes">if</span> ((<span class="cRes">classOf</span> oPoly) != <span class="cKey">Editable_Poly</span>) <span class="cRes">then</span>
+        <span class="cRes">throw</span> <span class="cStr">"Wrong input in function getFacesByAngle() - Editable Poly"</span>
+
+    <span class="cRes">if</span> ((<span class="cRes">classOf</span> iFace) != <span class="cKey">Integer</span>) <span class="cRes">then</span>
+        <span class="cRes">throw</span> <span class="cStr">"Wrong input in function getFacesByAngle() - Face Index"</span>
+
+    <span class="cRes">if</span> ( (iFace &lt;= <span class="cNum">0</span>) <span class="cRes">or</span> (iFace &gt; (<span class="cKey">polyOp</span>.<span class="cKey">getNumFaces</span> oPoly)) ) <span class="cRes">then</span>
+        <span class="cRes">throw</span> <span class="cStr">"Wrong input in function getFacesByAngle() - Face Index out of boundaries"</span>
+
+    <span class="cRes">if</span> ( (<span class="cRes">classOf</span> fDegThresh != <span class="cKey">Float</span>) <span class="cRes">and</span> (<span class="cRes">classOf</span> fDegThresh != <span class="cKey">Integer</span>) ) <span class="cRes">then</span>
+        <span class="cRes">throw</span> <span class="cStr">"Wrong input in function getFacesByAngle() - Angle Threshold"</span>
+
+    <span class="cRes">if</span> ( (fDegThresh &lt; <span class="cNum">0</span>) <span class="cRes">or</span> (fDegThresh &gt; <span class="cNum">180</span>) ) <span class="cRes">then</span>
+        <span class="cRes">throw</span> <span class="cStr">"Wrong input in function getFacesByAngle() - Angle Threshold out of boundaries"</span>
+
+    <span class="cCom">-- remove all previous tests if not necessary</span>
+
+    <span class="cRes">local</span> p3FaceNormal = <span class="cKey">polyOp</span>.<span class="cKey">getFaceNormal</span> oPoly iFace
+    <span class="cRes">local</span> fTestDot = <span class="cKey">cos</span> fDegThresh
+
+    <span class="cRes">local</span> iNumFaces = <span class="cKey">polyOp</span>.<span class="cKey">getNumFaces</span> oPoly
+    <span class="cRes">local</span> p3ItemNormal = [<span class="cNum">0</span>,<span class="cNum">0</span>,<span class="cNum">0</span>]
+
+    <span class="cRes">if</span> (contig == #none) <span class="cRes">then</span>
+    (
+        <span class="cRes">local</span> baSelFaces = #{<span class="cNum">1</span>..iNumFaces}
+
+        <span class="cRes">for</span> i = <span class="cNum">1</span> <span class="cRes">to</span> iNumFaces <span class="cRes">do</span>
+        (
+            p3ItemNormal = <span class="cKey">polyOp</span>.<span class="cKey">getFaceNormal</span> oPoly i
+
+            <span class="cRes">if</span> ((<span class="cKey">dot</span> p3FaceNormal p3ItemNormal) &lt; fTestDot) <span class="cRes">then</span>
+                baSelFaces[i] = <span class="cRes">false</span>
+        )
+    )
+    <span class="cRes">else if</span> (contig == #byVert) <span class="cRes">then</span>
+    (
+        <span class="cRes">local</span> baLimitVerts = #{}
+        <span class="cRes">local</span> baLimitFaces = #{iFace}
+
+        <span class="cRes">local</span> baSelFaces = #{iFace}
+        <span class="cRes">local</span> baUnselFaces = #{}
+
+        <span class="cRes">while</span> (baLimitFaces.<span class="cKey">isEmpty</span> == <span class="cRes">false</span>) <span class="cRes">do</span>
+        (
+            baLimitVerts = (<span class="cKey">polyOp</span>.<span class="cKey">getVertsUsingFace</span> oPoly baSelFaces) - (<span class="cKey">polyOp</span>.<span class="cKey">getVertsUsedOnlyByFaces</span> oPoly baSelFaces)
+            baLimitFaces = (<span class="cKey">polyOp</span>.<span class="cKey">getFacesUsingVert</span> oPoly baLimitVerts) - baSelFaces - baUnselFaces
+
+            <span class="cRes">for</span> item <span class="cRes">in</span> baLimitFaces <span class="cRes">do</span>
+            (
+                p3ItemNormal = <span class="cKey">polyOp</span>.<span class="cKey">getFaceNormal</span> oPoly item
+
+                <span class="cRes">if</span> ((<span class="cKey">dot</span> p3FaceNormal p3ItemNormal) &gt;= fTestDot) <span class="cRes">then</span>
+                (
+                    baSelFaces[item] = <span class="cRes">true</span>
+                )
+                <span class="cRes">else</span>
+                (
+                    baUnselFaces[item] = <span class="cRes">true</span>
+                )
+            )
+        )
+    )
+    <span class="cRes">else if</span> (contig == #byEdge) <span class="cRes">then</span>
+    (
+        <span class="cRes">local</span> iNumFaces = <span class="cKey">polyOp</span>.<span class="cKey">getNumFaces</span> oPoly
+
+        <span class="cRes">local</span> baLimitVerts = #{}
+        <span class="cRes">local</span> baLimitFaces = #{iFace}
+
+        <span class="cRes">local</span> baSelFaces = #{iFace}
+        <span class="cRes">local</span> baUnselFaces = #{}
+
+        <span class="cRes">local</span> baEdgeSet01 = #{}
+        <span class="cRes">local</span> baFaceSet01 = #{}
+        <span class="cRes">local</span> baEdgeSet02 = #{}
+
+        <span class="cRes">while</span> (baLimitFaces.<span class="cKey">isEmpty</span> == <span class="cRes">false</span>) <span class="cRes">do</span>
+        (
+            baEdgeSet01 = <span class="cKey">polyOp</span>.<span class="cKey">getEdgesUsingFace</span> oPoly baSelFaces
+            baFaceSet01 = #{<span class="cNum">1</span>..iNumFaces} - baSelFaces
+            baEdgeSet02 = <span class="cKey">polyOp</span>.<span class="cKey">getEdgesUsingFace</span> oPoly baFaceSet01
+
+            baLimitEdges = baEdgeSet01 * baEdgeSet02
+            baLimitFaces = (<span class="cKey">polyOp</span>.<span class="cKey">getFacesUsingEdge</span> oPoly baLimitEdges) - baSelFaces - baUnselFaces
+
+            <span class="cRes">for</span> item <span class="cRes">in</span> baLimitFaces <span class="cRes">do</span>
+            (
+                p3ItemNormal = <span class="cKey">polyOp</span>.<span class="cKey">getFaceNormal</span> oPoly item
+
+                <span class="cRes">if</span> ((<span class="cKey">dot</span> p3FaceNormal p3ItemNormal) &gt;= fTestDot) <span class="cRes">then</span>
+                (
+                    baSelFaces[item] = <span class="cRes">true</span>
+                )
+                <span class="cRes">else</span>
+                (
+                    baUnselFaces[item] = <span class="cRes">true</span>
+                )
+            )
+        )
+    )
+    <span class="cRes">return</span> baSelFaces
+)</pre>
+</div>
+
+
+</div>
+
+	<div id="footer">
+	<span class="note">Copyright © 2007-2015 Enrico Gullotti</span>
+	</div>
+
+	</div><!-- opened in header() -->
+	
+</body></html>

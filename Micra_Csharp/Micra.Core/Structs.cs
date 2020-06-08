@@ -168,6 +168,15 @@ namespace Micra.Core {
         public ClassID(uint a, uint b) { this.a = a; this.b = b; }
         public ClassID(BuiltInClassIDA a, BuiltInClassIDB b) { this.a = ( uint )a; this.b = ( uint )b; }
 
+        public static ClassID FromName(string sclassName) {
+
+            Type type = typeof(ClassID);
+            FieldInfo fi = type
+                .GetFields(BindingFlags.Static | BindingFlags.Public)
+                .Where(f => f.FieldType == type && f.Name == sclassName).FirstOrDefault();
+            return fi != null ? (ClassID)fi.GetValue(fi) : new ClassID();
+        }
+
         public IClass_ID _IClass_ID => Kernel._Global.Class_ID.Create(a, b);
            
         //is class
@@ -178,6 +187,8 @@ namespace Micra.Core {
         //can convert
         public static ClassID TriObject = new ClassID(BuiltInClassIDA.TRIOBJ_CLASS_ID, 0);
         public static ClassID PolyObject = new ClassID(BuiltInClassIDA.POLYOBJ_CLASS_ID, 0);
+
+        //public string Name => Enum.GetName(typeof(BuiltInClassIDA), a);
 
         public string GetClassName(ClassID clsID) {
             //get clas name from Max Enums
@@ -213,15 +224,6 @@ namespace Micra.Core {
 
         public override int GetHashCode() {
             return a.GetHashCode() ^ b.GetHashCode();
-        }
-
-        public static ClassID FromName(string sclassName) {
-
-            Type type = typeof(ClassID);
-            FieldInfo fi = type
-                .GetFields(BindingFlags.Static | BindingFlags.Public)
-                .Where(f => f.FieldType == type && f.Name == sclassName).FirstOrDefault();
-            return fi != null ? ( ClassID )fi.GetValue(fi) : new ClassID();
         }
 
         public static string[] GetNames() {
@@ -299,6 +301,8 @@ namespace Micra.Core {
         public static float operator *(Point3 a, Point3 b) { return ( a.X * b.X + a.Y * b.Y + a.Z * b.Z ); }
         // Scale
         public static Point3 operator *(Point3 a, float scale) { return new Point3(a.X * scale, a.Y * scale, a.Z * scale); }
+        // Scale
+        public static Point3 operator /(Point3 a, float scale) { return new Point3(a.X / scale, a.Y / scale, a.Z / scale); }
 
         public IPoint3 _IPoint3 { get { return Kernel._Global.Point3.Create(X, Y, Z); } }
 
@@ -307,6 +311,8 @@ namespace Micra.Core {
         public Point3 Normalized { get { float len = Length; return new Point3(X / len, Y / len, Z / len); } }
 
         public void Normalize() { float len = Length; X /= len; Y /= len; Z /= len; }
+
+        internal double DistanceTo(Point3 p2) => Distance(this, p2); //TODO -not tested -not used
 
         internal static double Distance(Point3 p1, Point3 p2) {
 

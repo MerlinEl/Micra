@@ -1,0 +1,95 @@
+
+.codeBox {
+	/*width:880px;*/
+	padding:10px 10px 10px 10px;
+	margin:15px 0px 15px 0px;
+	background-color:#F7F7F7;
+	/*border-left:3px solid #CCCCCC;*/
+	font-family:"Inconsolata", monospace;
+	white-space:nowrap;
+	overflow:auto;
+}
+
+.genCodeBox {
+	/*width:880px;*/
+	padding:10px 10px 10px 10px;
+	margin:15px 0px 15px 0px;
+	border-left:2px solid #A0A0A0;
+	background-color:#F7F7F7;
+	font-family:"Inconsolata", monospace;
+	white-space:nowrap;
+	overflow:auto;
+}
+
+pre {
+	font-family:"Inconsolata", monospace;
+	font-size:14.6px;
+	line-height:18px;
+	margin:0px;
+	padding:0px;
+	color:#333333;
+}
+
+
+.cCom {
+	color:#339933;
+}
+.cRes {
+	font-weight:bold;
+	color:#0066CC;
+}
+.cKey {
+	color:#0066CC;
+}
+.cStr {
+	color:#0099FF;
+}
+.cNum {
+	color:#009900;
+}
+
+/* -------------------------------------------------------------------------- */
+
+.mxsTitleBlack, .mxsTitleGreen {
+	display:block;
+	margin:4px 0px 4px 0px;
+	padding:0px 0px 0px 3px;
+	text-align:left;
+	font-weight:700;
+	font-size:15px;
+}
+
+.mxsTitleBlack {
+	background-color:#666666;
+	color:#FFFFFF;
+	text-decoration:none;
+}
+
+.mxsTitleGreen {
+	background-color:#CCFFCC;
+	color:#000000;
+}
+
+.mxsMember, .mxsOptions {
+	display:block;
+	margin:0px 0px 0px 0px;
+	padding:0px 3px 0px 3px;
+	background-color:#CCE5FF;
+	color:#000000;
+	font-family:"Inconsolata", "Open Sans", "Times New Roman", monospace;
+	font-size:15px;
+	font-weight:400;
+	text-align:left;
+}
+
+.mxsOptions {
+	margin:0px 10px 0px 0px;
+	padding:10px 10px 10px 10px;
+	background-color:#FFFFFF;
+}
+
+.mxsText {
+	display:block;
+	margin:3px 0px 3px 0px;
+	padding:0px 3px 3px 3px;
+}

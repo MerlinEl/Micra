@@ -300,6 +300,24 @@ struct sCityManager	(
 		)
 		if failed_atempts > 0 do MessageBox "Some Lods was not aded. See trace log for more details." title:"Warning"
 	),
+	--Cutom Attributes D:\!2k_games\scotch_dev\code\srcTools\modules\ToolMAX\3dsmax\scripts\LS3DData\Shadows.ms
+	fn addAttributeShadow obj state = (
+
+		if superClassOf obj != GeometryClass do return false
+		if (getCustomAttributeByName obj "Shadows") == undefined do (
+		
+			AddCustomAttributeByName obj "Shadows"
+		) 
+		obj.'~Cast Shadows' = state
+	),
+	fn addAttributeDynamic obj = (
+
+		if superClassOf obj != GeometryClass do return false
+		if (getCustomAttributeByName obj "Dynamic") == undefined do (
+		
+			AddCustomAttributeByName obj "Dynamic"
+		) 
+	),
 	fn addLodesCustom = (
 	
 

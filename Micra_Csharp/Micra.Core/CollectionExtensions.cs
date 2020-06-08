@@ -26,12 +26,20 @@ namespace Micra.Core {
             foreach ( T item in collection ) action(item);
         }
         //values.ForEachWithIndex((item, idx) => Console.WriteLine("{0}: {1}", idx, item));
-        public static void ForEach<T>(this IEnumerable<T> enumerable, Action<T, int> handler) {
+        public static void ForEach<T>(this IEnumerable<T> collection, Action<T, int> handler) {
             int idx = 0;
-            foreach ( T item in enumerable )
+            foreach ( T item in collection )
                 handler(item, idx++);
         }
-      
+
+        //TODO -not tested -not used
+        //Point3 center = f.Vtx.Select(v => verts[v]).Sum();
+        /*public static Point3 Sum(this IEnumerable<Point3> collection) {
+            Point3 sum = new Point3();
+            foreach ( Point3 p in collection ) sum += p;
+            return sum;
+        }*/
+
         //int[] data = {1,2,3,4,5};
         //var odd = data.Where(i => i % 2 != 0);
         //or

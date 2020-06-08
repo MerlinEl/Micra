@@ -1,0 +1,170 @@
+// JavaScript Document
+
+AjaxCaller = function() {
+
+	this.oDoc = null;
+
+	this.toCall = null;
+	this.onerror = this.defaultError;
+}
+
+AjaxCaller.prototype.makeCall = function(toCall, sUrl, sQueryString, sMethod, sType) {
+
+	_self = this;
+	this.toCall = toCall;
+
+	if (window.ActiveXObject) {
+		this._oXmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
+	}
+	else if (window.XMLHttpRequest) {
+		this._oXmlHttp = new XMLHttpRequest();
+	}
+
+	if (sMethod == 'get') {
+		if (sQueryString != '') {
+			var arr = new Array();
+			arr[0] = sUrl;
+			arr[1] = '?';
+			arr[2] = sQueryString;
+			sUrl = arr.join('');
+		}
+		this._oXmlHttp.onreadystatechange = function() { AjaxCaller.prototype.callback.call(_self, sType); }
+		this._oXmlHttp.open('GET', sUrl, true);
+		this._oXmlHttp.send(null);
+	}
+	else if (sMethod == 'post') {
+		this._oXmlHttp.onreadystatechange = function() { AjaxCaller.prototype.callback.call(_self, sType); }
+		this._oXmlHttp.open('POST', sUrl, true);
+		this._oXmlHttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+		this._oXmlHttp.send(sQueryString);
+	}
+}
+
+AjaxCaller.prototype.callback = function(sType) {
+
+	this.sType = sType;
+
+	if (this._oXmlHttp.readyState == 4) {
+		if (this._oXmlHttp.status == 200) {
+
+			if (this.sType == 'xml') {
+				this.oDoc = _self._oXmlHttp.responseXML;
+			} else if (this.sType == 'txt') {
+				this.oDoc = this._oXmlHttp.responseText;
+			}
+			delete this._oXmlHttp;
+			this.toCall.call(this);
+		}
+	}
+}
+
+AjaxCaller.prototype.defaultError = function() {
+	alert("error fetching data!"
+		+"\n\nreadyState:"+this._oXmlHttp.readyState
+		+"\nstatus: "+this._oXmlHttp.status
+		+"\nheaders: "+this._oXmlHttp.getAllResponseHeaders());
+}
+
+var oCaller = new AjaxCaller();
+
+
+//------------------------------------------------------------------------------
+
+function menuAction(sMenu)
+{	
+	document.getElementById("menuHome").className = "selectable";
+	document.getElementById("menuScripts").className = "selectable";
+	document.getElementById("menuPlugins").className = "selectable";
+	document.getElementById("menuMaxScript").className = "selectable";
+	document.getElementById("menuInfo").className = "selectable";
+
+	if (sMenu != "none")
+	{
+		document.getElementById(sMenu).className = "current";
+	}
+}
+
+function markdown(sName)
+{
+	var aMarkElements = document.getElementsByName(sName);
+	
+	alert("0");
+	
+	for (markElement in aMarkElements)
+	{
+		alert("1");
+		var markText = markElement.innerText ? markElement.innerText : markElement.textContent;
+		var html = Markdown(markText);
+		markElement.innerHTML = html;
+	}
+}
+
+/*
+function columnize(sDiv, iNum)
+{
+	var sHashedDiv = "#" + sDiv;
+	alert(sHashedDiv);
+	$(sHashedDiv).columnize({columns: 3});
+}
+*/
+
+/*
+function loadMenu(sSection)
+{
+	oParam = {};
+	oParam.fnCallback = loadMenuCallback;
+	oParam.aArgs = new Array(menuNav);
+	oParam.sUrl = 'menu_files/'+sSection+'.html';
+	oParam.sQueryString = '';
+	oParam.sMethod = 'post';
+	oParam.sType = 'txt';
+
+	oCaller.makeCall(oParam.fnCallback, oParam.aArgs, oParam.sUrl, oParam.sQueryString, oParam.sMethod, oParam.sType);
+}
+
+function loadMenuCallback()
+{
+	var oDiv = document.getElementById(menuNav);
+	oDiv.innerHTML = oCaller.oDoc;
+}
+*/
+//------------------------------------------------------------------------------
+
+var oBin;
+var oNav;
+var oBar;
+
+function init() {
+	oBin = document.getElementById("bin");
+	oBin.style.width = (document.body.clientWidth-60);
+
+	oNav = document.getElementById("sideNav");
+	oBar = document.getElementById("sideBar");
+	oPage = document.getElementById("page");
+
+	oNav.style.display = "block";
+}
+
+
+function resize() {
+	oBin.style.width = (document.body.clientWidth-60);
+}
+
+
+//------------------------------------------------------------------------------
+
+
+function toggleDiv(sDivId) {
+	var oDiv = document.getElementById(sDivId);
+	oDiv.style.display = (oDiv.style.display == "none") ? "block" :	"none";
+}
+
+
+//------------------------------------------------------------------------------
+
+
+function dF(s){
+	var s1=unescape(s.substr(0,s.length-1)); var t='';
+	for(i=0;i<s1.length;i++)t+=String.fromCharCode(s1.charCodeAt(i)-s.substr(s.length-1,1));
+	return(unescape(t));
+}

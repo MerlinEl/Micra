@@ -1,0 +1,291 @@
+
+html, body {
+	background-color:#FFFFFF;
+}
+
+body {
+	font-family:'Open Sans', sans-serif;
+	font-size:16px;
+	line-height:24px;
+	font-weight:400;
+
+	text-align:center;
+	margin:0px;
+	padding:0px;
+
+	padding:0em 0 0 0;
+	background:url(foo) fixed;
+
+	overflow-x:hidden;
+	overflow-y:scroll;
+	color:#555555;
+}
+
+#mainframe {
+	width:930px;
+	margin:auto;
+	text-align:justify;
+}
+
+#auxframe {
+	width:930px;
+	padding:0;
+	margin:0;
+}
+
+#bin {
+	width:930px;
+	/*top:170px;*/
+	margin:0px 15px 0px 15px;
+	text-align:justify;
+}
+
+#header {
+	width:930px;
+	height:120px;
+	margin:15px 15px 0px 15px;
+	text-align:left;
+	color:#999999;
+	background-image:url("../imagesHTML/header.jpg");
+	background-position:bottom;
+	background-repeat:no-repeat;
+}
+
+#menuNav {
+	width:960px;
+	height:60px;
+	margin:0px 0px 15px 0px;
+	text-align:left;
+}
+
+.page {
+	width:600px;
+	margin:0px 15px 0px 15px;
+	text-align:justify;
+}
+
+.pageCode {
+	width:900px;
+	margin:0px 15px 0px 15px;
+	text-align:justify;
+}
+
+#footer {
+	width:930px;
+	margin:40px 15px 15px 15px;
+	text-align:left;
+	color:#999999;
+}
+
+#toolBox {
+	clear:both;
+	display:block;
+	margin:0px;
+	padding:0px;
+}
+.toolBoxLeft {
+	display:block;
+	float:left;
+	padding:0px 0px 0px 0px;
+	width:260px;
+}
+.toolBoxRight {
+	display:block;
+	padding:0px 0px 5px 0px;
+	margin-left:275px;
+	width:488px;
+}
+
+.separator {
+	/*border-bottom:1px solid #F2F2F2;*/
+	border-bottom:1px solid #CCCCCC;
+	margin:15px 0px 15px 0px;
+	padding:0px;
+}
+
+/* -------------------------------------------------------------------------- */
+
+#columns {
+	float: left;
+	width:100%;
+	margin:20px 0px 20px 0px;
+}
+
+#columns .column {
+	position:relative;
+	width:48.333%;
+	padding:0px;
+/*	border:1px solid #FFF;*/
+}
+
+#columns .left {
+	float: left;
+}
+
+#columns .right {
+	float: right;
+}
+
+/* -------------------------------------------------------------------------- */
+
+#menuNav a {
+	padding:5px 15px 5px 15px;
+	display:block;
+	float:left;
+	font-weight:400;
+}
+
+#menuNav a:link, #menuNav a:visited {
+	text-decoration:none;
+}
+
+#menuNav a:hover {
+	color:#0066CC;
+	text-decoration:underline;
+}
+
+#menuNav a:hover.current, .current {
+	color:#0066CC;
+	cursor:default;
+	text-decoration:none;
+}
+
+.selectable {
+	color:#000000;
+	cursor:pointer;
+}
+
+/* -------------------------------------------------------------------------- */
+
+/* Lists */
+ul, ol {
+	padding:0px 0px 0px 0px;
+}
+
+ul {
+	list-style-image:url("../imagesHTML/squareDot.gif");
+	margin:0px 0px 0px 15px;
+}
+
+ol {
+	list-style-image:none;
+	margin:0px 0px 0px 20px;
+}
+
+li {
+	margin:0px 0px 5px 0px;
+}
+
+/* Images */
+img, object {
+	border:0px;
+	margin:0px;
+	padding:0px;
+}
+
+/* -------------------------------------------------------------------------- */
+
+/* Tables */
+table {
+	font-size:14px;
+	line-height:23px;
+
+	border-collapse:collapse;
+}
+td, tr {
+	padding:0px 15px 0px 0px;
+}
+
+/* Layout */
+.noPad {
+	padding:0px;
+}
+
+/* Text Links */
+a.navigation {
+	font-weight:400;
+	color:#000000;
+}
+a.navigation:link, a.navigation:visited {
+	text-decoration:none;
+}
+a.navigation:hover {
+	text-decoration:underline;
+	color:#0066CC;
+}
+
+/* -------------------------------------------------------------------------- */
+
+/* Text */
+
+.name {
+	font-size:18px;
+	font-weight:400;
+	color:#0066CC;
+}
+
+.subName {
+	font-size:14px;
+	font-weight:400;
+	color:#999999;
+	font-style:italic;
+}
+
+.black, .color, .section, .subsection {
+	cursor:default;
+	color:#0066CC;
+}
+
+.section {
+	display:block;
+	font-size:18px;
+	margin-bottom:15px;
+}
+
+.subsection {
+	display:block;
+	font-size:17px;
+	margin-bottom:15px;
+}
+
+.note {
+	padding:0px;
+	font-size:12px;
+}
+
+/* -------------------------------------------------------------------------- */
+/* ADDED for support of legacy Script pages --------------------------------- */
+
+.toggleButton a {
+	display:block;
+	float:left;
+	margin:0px 10px 0px 0px;
+	padding:0px 3px 1px 3px;
+	width:13px;
+	height:18px;
+	background-color:#E5E5E5;
+	font-size:15px;
+	font-weight:bold;
+	color:#333333;
+}
+
+.toggleButton a:link, .toggleButton a:visited {
+	text-decoration:none;
+}
+
+.toggleButton a:hover {
+	background-color:#FFFFFF;
+	cursor:pointer;
+	color:#0066CC;
+}
+
+.separatorRef {
+	display:block;
+	height:18px;
+	border-bottom:1px solid #666666;
+	margin:0px 0px 15px 0px;
+	padding:0px;
+}
+
+/* -------------------------------------------------------------------------- */
+/* MathJax -------------------------------------------------------------------*/

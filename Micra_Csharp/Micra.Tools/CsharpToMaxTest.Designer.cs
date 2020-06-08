@@ -31,6 +31,8 @@
             this.BtnExecute = new System.Windows.Forms.Button();
             this.BtnSelSimElements = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.BtnGetObjArea2 = new System.Windows.Forms.Button();
+            this.BtnGetObjArea1 = new System.Windows.Forms.Button();
             this.CbxMaxFilePath = new System.Windows.Forms.ComboBox();
             this.ChkSelHidden2 = new System.Windows.Forms.CheckBox();
             this.CbxPrimitiveTypes = new System.Windows.Forms.ComboBox();
@@ -64,8 +66,7 @@
             this.button13 = new System.Windows.Forms.Button();
             this.button8 = new System.Windows.Forms.Button();
             this.button9 = new System.Windows.Forms.Button();
-            this.BtnGetObjArea1 = new System.Windows.Forms.Button();
-            this.BtnGetObjArea2 = new System.Windows.Forms.Button();
+            this.BtnClearExecute = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -85,13 +86,15 @@
             this.textBox1.Location = new System.Drawing.Point(6, 48);
             this.textBox1.Multiline = true;
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(592, 172);
+            this.textBox1.Size = new System.Drawing.Size(592, 281);
             this.textBox1.TabIndex = 3;
             this.textBox1.Text = "...";
+            this.textBox1.MouseEnter += new System.EventHandler(this.OnTextAreaGotFocus);
+            this.textBox1.MouseLeave += new System.EventHandler(this.OnTextAreaLostFocus);
             // 
             // button5
             // 
-            this.button5.Location = new System.Drawing.Point(453, 17);
+            this.button5.Location = new System.Drawing.Point(374, 17);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(145, 23);
             this.button5.TabIndex = 5;
@@ -101,13 +104,14 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.BtnClearExecute);
             this.groupBox1.Controls.Add(this.CbxScriptList);
             this.groupBox1.Controls.Add(this.BtnExecute);
             this.groupBox1.Controls.Add(this.button5);
             this.groupBox1.Controls.Add(this.textBox1);
             this.groupBox1.Location = new System.Drawing.Point(12, 357);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(614, 228);
+            this.groupBox1.Size = new System.Drawing.Size(614, 335);
             this.groupBox1.TabIndex = 7;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Execute Max Script";
@@ -186,6 +190,26 @@
             this.groupBox2.TabIndex = 12;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "MaxSharp";
+            // 
+            // BtnGetObjArea2
+            // 
+            this.BtnGetObjArea2.Location = new System.Drawing.Point(851, 133);
+            this.BtnGetObjArea2.Name = "BtnGetObjArea2";
+            this.BtnGetObjArea2.Size = new System.Drawing.Size(122, 23);
+            this.BtnGetObjArea2.TabIndex = 45;
+            this.BtnGetObjArea2.Text = "Get Face Area";
+            this.BtnGetObjArea2.UseVisualStyleBackColor = true;
+            this.BtnGetObjArea2.Click += new System.EventHandler(this.BtnGetFaceArea_Click);
+            // 
+            // BtnGetObjArea1
+            // 
+            this.BtnGetObjArea1.Location = new System.Drawing.Point(723, 133);
+            this.BtnGetObjArea1.Name = "BtnGetObjArea1";
+            this.BtnGetObjArea1.Size = new System.Drawing.Size(122, 23);
+            this.BtnGetObjArea1.TabIndex = 44;
+            this.BtnGetObjArea1.Text = "Get Object Area";
+            this.BtnGetObjArea1.UseVisualStyleBackColor = true;
+            this.BtnGetObjArea1.Click += new System.EventHandler(this.BtnGetObjArea_Click);
             // 
             // CbxMaxFilePath
             // 
@@ -527,31 +551,21 @@
             this.button9.UseVisualStyleBackColor = true;
             this.button9.Click += new System.EventHandler(this.Button9_Click);
             // 
-            // BtnGetObjArea1
+            // BtnClearExecute
             // 
-            this.BtnGetObjArea1.Location = new System.Drawing.Point(723, 133);
-            this.BtnGetObjArea1.Name = "BtnGetObjArea1";
-            this.BtnGetObjArea1.Size = new System.Drawing.Size(122, 23);
-            this.BtnGetObjArea1.TabIndex = 44;
-            this.BtnGetObjArea1.Text = "Get Object Area";
-            this.BtnGetObjArea1.UseVisualStyleBackColor = true;
-            this.BtnGetObjArea1.Click += new System.EventHandler(this.BtnGetObjArea_Click);
-            // 
-            // BtnGetObjArea2
-            // 
-            this.BtnGetObjArea2.Location = new System.Drawing.Point(851, 133);
-            this.BtnGetObjArea2.Name = "BtnGetObjArea2";
-            this.BtnGetObjArea2.Size = new System.Drawing.Size(122, 23);
-            this.BtnGetObjArea2.TabIndex = 45;
-            this.BtnGetObjArea2.Text = "Get Face Area";
-            this.BtnGetObjArea2.UseVisualStyleBackColor = true;
-            this.BtnGetObjArea2.Click += new System.EventHandler(this.BtnGetFaceArea_Click);
+            this.BtnClearExecute.Location = new System.Drawing.Point(532, 19);
+            this.BtnClearExecute.Name = "BtnClearExecute";
+            this.BtnClearExecute.Size = new System.Drawing.Size(66, 23);
+            this.BtnClearExecute.TabIndex = 45;
+            this.BtnClearExecute.Text = "Clear";
+            this.BtnClearExecute.UseVisualStyleBackColor = true;
+            this.BtnClearExecute.Click += new System.EventHandler(this.BtnClearExecute_Click);
             // 
             // CsharpToMaxTest
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1009, 589);
+            this.ClientSize = new System.Drawing.Size(1009, 704);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Name = "CsharpToMaxTest";
@@ -610,5 +624,6 @@
         private System.Windows.Forms.ComboBox CbxScriptList;
         private System.Windows.Forms.Button BtnGetObjArea2;
         private System.Windows.Forms.Button BtnGetObjArea1;
+        private System.Windows.Forms.Button BtnClearExecute;
     }
 }
