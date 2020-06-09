@@ -18,25 +18,15 @@ namespace Micra.Core {
         /// </summary>
         [Serializable]
         public struct Ngon {
-            /// <summary>
-            /// Vertex List
-            /// </summary>
+            /// <summary>Vertex List</summary>
             public IList<int> Vtx;
-            /// <summary>
-            /// Vertex 0
-            /// </summary>
+            /// <summary>Vertex 0</summary>
             public int a;
-            /// <summary>
-            /// Vertex 1
-            /// </summary>
+            /// <summary>Vertex 1</summary>
             public int b;
-            /// <summary>
-            /// Vertex 2
-            /// </summary>
+            /// <summary>Vertex 2</summary>
             public int c;
-            /// <summary>
-            /// Vertex 3
-            /// </summary>
+            /// <summary>Vertex 3</summary>
             public int d;
 
             public Ngon(IMNFace f) {
@@ -126,6 +116,14 @@ namespace Micra.Core {
             for ( int i = 0; i < m.VNum; ++i )
                 vnormals[i].Normalize();*/
         }
+        /// <summary> Calculate Face, Polygon, Ngon Area
+        ///     <example> 
+        ///         <code>
+		///             example: 
+		///         </code>
+		///     </example>
+        ///     <para>param: <paramref name=""/></para>
+        /// </summary>
         public double Area(int ngonIndex) => Area(ngons[ngonIndex]);
         /**
             This script is based upon Heron’s Formula, which calculates 
@@ -157,7 +155,13 @@ namespace Micra.Core {
             double area2 = face.IsQuad ? GetTriangleArea(p1, p3, verts[face.d]) : 0;
             return area1 + area2;
         }
-        // Heron’s Formula
+        /// <summary> Heron’s Formula to calculate face area
+        ///     <example> 
+        ///         <code>
+        ///             example: GetTriangleArea(p1, p2, p3);
+        ///         </code>
+        ///     </example>
+        /// </summary>
         private double GetTriangleArea(Point3 p1, Point3 p2, Point3 p3) {
 
             double a = p1.DistanceTo(p2);

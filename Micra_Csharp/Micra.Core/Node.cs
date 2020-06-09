@@ -258,12 +258,12 @@ namespace Micra.Core {
         public bool IsClassOf(ClassID id) => Object.ClassID.a == id.a && Object.ClassID.b == id.b;
         public bool IsSuperClassOf(SuperClassID id) => Object.SuperClassID == id;
 
-        /// <summary>usage: Check if Object is Editable Poly or Editable Mesh</summary>
+        /// <summary> Check if Object is Editable_Poly or Editable_Mesh
         /// <example> 
         /// <code>example: if ( !node.IsEditable() ) return; </code>
-        /// <param name="baseObject">TODO check base of object (allow modifiers)</param>
-        /// <param name="modPolyOrMesh">TODO check modifier of object (editable_poy and editable_mesh modifiers)</param>
-        ///	</example>
+        /// <para>param: <paramref name="baseObject"/> TODO check base of object (allow modifiers)</para>
+        /// <para>param: <paramref name="modPolyOrMesh"/> TODO check modifier of object (editable_poy and editable_mesh modifiers)</para>
+        ///	</example></summary>
         public bool IsEditable(bool baseObject = false, bool modPolyOrMesh = false) {
 
             //Kernel.WriteLine("is mesh:{0} is poly{1}", IsClassOf(ClassID.EditableMesh), IsClassOf(ClassID.EditablePoly));
