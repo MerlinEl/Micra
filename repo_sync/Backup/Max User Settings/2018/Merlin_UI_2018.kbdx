@@ -546,6 +546,27 @@
     <shortcut fVirt="27" accleleratorKey="83" actionID="40006" actionTableID="1809145376" />
     <shortcut fVirt="27" accleleratorKey="86" actionID="40005" actionTableID="1809145376" />
     <shortcut fVirt="3" accleleratorKey="57" actionID="102" actionTableID="1195574973" />
+    <shortcut fVirt="23" accleleratorKey="96" actionID="40044" actionTableID="679950689" />
+    <shortcut fVirt="23" accleleratorKey="97" actionID="40045" actionTableID="679950689" />
+    <shortcut fVirt="23" accleleratorKey="67" actionID="40018" actionTableID="679950689" />
+    <shortcut fVirt="23" accleleratorKey="82" actionID="40019" actionTableID="679950689" />
+    <shortcut fVirt="23" accleleratorKey="40" actionID="40013" actionTableID="679950689" />
+    <shortcut fVirt="23" accleleratorKey="72" actionID="57670" actionTableID="679950689" />
+    <shortcut fVirt="23" accleleratorKey="36" actionID="40042" actionTableID="679950689" />
+    <shortcut fVirt="23" accleleratorKey="35" actionID="40043" actionTableID="679950689" />
+    <shortcut fVirt="23" accleleratorKey="37" actionID="40010" actionTableID="679950689" />
+    <shortcut fVirt="23" accleleratorKey="89" actionID="40035" actionTableID="679950689" />
+    <shortcut fVirt="23" accleleratorKey="39" actionID="40011" actionTableID="679950689" />
+    <shortcut fVirt="23" accleleratorKey="116" actionID="40047" actionTableID="679950689" />
+    <shortcut fVirt="23" accleleratorKey="117" actionID="40046" actionTableID="679950689" />
+    <shortcut fVirt="23" accleleratorKey="76" actionID="40022" actionTableID="679950689" />
+    <shortcut fVirt="23" accleleratorKey="65" actionID="40031" actionTableID="679950689" />
+    <shortcut fVirt="23" accleleratorKey="68" actionID="40024" actionTableID="679950689" />
+    <shortcut fVirt="23" accleleratorKey="70" actionID="40025" actionTableID="679950689" />
+    <shortcut fVirt="23" accleleratorKey="79" actionID="40026" actionTableID="679950689" />
+    <shortcut fVirt="23" accleleratorKey="89" actionID="40027" actionTableID="679950689" />
+    <shortcut fVirt="23" accleleratorKey="84" actionID="40012" actionTableID="679950689" />
+    <shortcut fVirt="23" accleleratorKey="90" actionID="40034" actionTableID="679950689" />
     <shortcut fVirt="19" accleleratorKey="69" actionID="EPoly_Toggle_Edge_Constraint`Editable Polygon Object" actionTableID="647394" />
     <shortcut fVirt="11" accleleratorKey="77" actionID="EPoly_Meshsmooth`Editable Polygon Object" actionTableID="647394" />
     <shortcut fVirt="19" accleleratorKey="67" actionID="EPoly_Cut`Editable Polygon Object" actionTableID="647394" />
@@ -572,7 +593,6 @@
     <shortcut fVirt="19" accleleratorKey="73" actionID="EPoly_Hide_Unselected`Editable Polygon Object" actionTableID="647394" />
     <shortcut fVirt="3" accleleratorKey="186" actionID="EPoly_Repeat_Last`Editable Polygon Object" actionTableID="647394" />
     <shortcut fVirt="15" accleleratorKey="87" actionID="EPoly_Weld`Editable Polygon Object" actionTableID="647394" />
-    <shortcut fVirt="19" accleleratorKey="76" actionID="Loop2`Micra" actionTableID="647394" />
     <shortcut fVirt="19" accleleratorKey="82" actionID="Ring2`Micra" actionTableID="647394" />
     <shortcut fVirt="3" accleleratorKey="219" actionID="EPoly_Shrink`Editable Polygon Object" actionTableID="647394" />
     <shortcut fVirt="3" accleleratorKey="221" actionID="EPoly_Grow`Editable Polygon Object" actionTableID="647394" />
@@ -593,9 +613,11 @@
     <shortcut fVirt="11" accleleratorKey="192" actionID="SubObject_0`Micra" actionTableID="647394" />
     <shortcut fVirt="15" accleleratorKey="81" actionID="MC_Move_To_Surface`Micra" actionTableID="647394" />
     <shortcut fVirt="11" accleleratorKey="76" actionID="DeepIsolateHide`Micra" actionTableID="647394" />
+    <shortcut fVirt="15" accleleratorKey="79" actionID="DW_InteractiveRolloutBuilder`DW Tools" actionTableID="647394" />
     <shortcut fVirt="19" accleleratorKey="86" actionID="PerserveUVs`Ribbon - Modeling" actionTableID="647394" />
     <shortcut fVirt="19" accleleratorKey="66" actionID="MC_Poly_Bridge`Micra" actionTableID="647394" />
     <shortcut fVirt="19" accleleratorKey="77" actionID="MC_RemEdgesToFixMapping`Micra" actionTableID="647394" />
     <shortcut fVirt="7" accleleratorKey="77" actionID="MC_RecFixedMappingEdges`Micra" actionTableID="647394" />
+    <shortcut fVirt="19" accleleratorKey="76" actionID="Loop2`Micra" actionTableID="647394" />
     <shortcut fVirt="3" accleleratorKey="86" actionID="Viewports" actionTableID="1261319018" />
 </ADSK_KBD>

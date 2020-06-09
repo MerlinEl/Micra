@@ -257,22 +257,23 @@ namespace Micra.Core {
         public string SuperClassOf() => SuperClassID.GetSuperClassName(Object.SuperClassID);
         public bool IsClassOf(ClassID id) => Object.ClassID.a == id.a && Object.ClassID.b == id.b;
         public bool IsSuperClassOf(SuperClassID id) => Object.SuperClassID == id;
-        //Todo >
-        //-baseObject == allow modifiers
-        //-modPolyOrMesh == add posibility operate with editable_poy and editable_mesh modifiers
+
+        /// <summary>usage: Check if Object is Editable Poly or Editable Mesh</summary>
+        /// <example> 
+        /// <code>example: if ( !node.IsEditable() ) return; </code>
+        /// <param name="baseObject">TODO check base of object (allow modifiers)</param>
+        /// <param name="modPolyOrMesh">TODO check modifier of object (editable_poy and editable_mesh modifiers)</param>
+        ///	</example>
         public bool IsEditable(bool baseObject = false, bool modPolyOrMesh = false) {
 
             //Kernel.WriteLine("is mesh:{0} is poly{1}", IsClassOf(ClassID.EditableMesh), IsClassOf(ClassID.EditablePoly));
             return IsClassOf(ClassID.EditableMesh) || IsClassOf(ClassID.EditablePoly);
         }
-        // < test in profress
-
 
         public void Move(Point3 pt) => Move(pt, Kernel.Now);
         public void Move(Point3 pt, TimeValue t) {
             _IINode.Move(t, Matrix3.Identity.Translate(pt)._IMatrix3, pt._IPoint3, false, true, (int)PivotMode.None, false);
         }
-
         public SceneObject Object => CreateWrapper<SceneObject>(_IINode.ObjectRef);
         public Geometry Geometry => CreateWrapper<Geometry>(_IINode.ObjectRef); //TODO test this
 

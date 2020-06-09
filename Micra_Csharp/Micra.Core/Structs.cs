@@ -11,21 +11,22 @@ using System.Linq;
 using System.Reflection;
 
 namespace Micra.Core {
-    //https://github.com/mathieumg/inf4715/blob/master/Exporter/maxsdk/include/maxapi.h
+    //comments guide > https://docs.microsoft.com/cs-cz/dotnet/csharp/language-reference/language-specification/documentation-comments
+    //maxapi.h > https://github.com/mathieumg/inf4715/blob/master/Exporter/maxsdk/include/maxapi.h
     public enum TaskModes : uint {
 
-        TASK_MODE_CREATE=1,
-        TASK_MODE_MODIFY=2,
-        TASK_MODE_HIERARCHY=3,
-        TASK_MODE_MOTION=4,
-        TASK_MODE_DISPLAY=5,
-        TASK_MODE_UTILITY=6,
+        TASK_MODE_CREATE = 1,
+        TASK_MODE_MODIFY = 2,
+        TASK_MODE_HIERARCHY = 3,
+        TASK_MODE_MOTION = 4,
+        TASK_MODE_DISPLAY = 5,
+        TASK_MODE_UTILITY = 6,
     }
 
     public enum GeometryType {
 
         VERTEX = 1,
-        EDGE =2,
+        EDGE = 2,
         FACE = 3,
         ANY = 4
     }
@@ -70,9 +71,27 @@ namespace Micra.Core {
     [Serializable]
     public struct SuperClassID {
         public ulong id;
-        public SuperClassID(SClass_ID id) { this.id = ( ulong )id; }
+        public SuperClassID(SClass_ID id) { this.id = (ulong)id; }
         public static implicit operator SuperClassID(SClass_ID id) { return new SuperClassID(id); }
-        public static implicit operator SClass_ID(SuperClassID id) { return ( SClass_ID )id.id; }
+        public static implicit operator SClass_ID(SuperClassID id) { return (SClass_ID)id.id; }
+        /// <summary>
+        /// usage: Create SuperClassID from Name
+        /// <example>
+        /// <code>
+        /// example: SuperClassID superClassId = SuperClassID.FromName("Light");
+        /// </code>
+        /// </example>
+        /// <param name="sclassName"></param>
+        /// <returns>return: new SuperClassID</returns>
+        /// </summary>
+        public static SuperClassID FromName(string sclassName) {
+
+            Type type = typeof(SuperClassID);
+            FieldInfo fi = type
+                .GetFields(BindingFlags.Static | BindingFlags.Public)
+                .Where(f => f.FieldType == type && f.Name == sclassName).FirstOrDefault();
+            return fi != null ? (SuperClassID)fi.GetValue(fi) : new SuperClassID();
+        }
 
         public static SuperClassID GeometricObject = SClass_ID.Geomobject;
         public static SuperClassID ObjectModifier = SClass_ID.Osm;
@@ -86,7 +105,7 @@ namespace Micra.Core {
         public static SuperClassID Helper = SClass_ID.Helper;
         public static SuperClassID Atmospheric = SClass_ID.Atmospheric;
         public static SuperClassID PositionController = SClass_ID.CtrlPosition;
-        public static SuperClassID NotifyAll = new SuperClassID(( SClass_ID )0xfffffff0);
+        public static SuperClassID NotifyAll = new SuperClassID((SClass_ID)0xfffffff0);
         public static SuperClassID BaseNode = SClass_ID.Basenode;
         public static SuperClassID GenericDerivedObject = SClass_ID.GenDerivob;
         public static SuperClassID DerivedObject = SClass_ID.Derivob;
@@ -99,7 +118,7 @@ namespace Micra.Core {
         public override bool Equals(object obj) {
             if ( !( obj is SuperClassID ) )
                 return false;
-            return ( ( SuperClassID )obj ).id == id;
+            return ( (SuperClassID)obj ).id == id;
         }
 
         public override int GetHashCode() {
@@ -108,6 +127,7 @@ namespace Micra.Core {
 
         public static bool operator ==(SuperClassID x, SuperClassID y) { return x.id == y.id; }
         public static bool operator !=(SuperClassID x, SuperClassID y) { return x.id != y.id; }
+
 
         internal string GetSuperClassName(SuperClassID superClassID) {
             //get clas name from Max Enums
@@ -124,14 +144,6 @@ namespace Micra.Core {
             return clsStr;
         }
 
-        public static SuperClassID FromName(string sclassName) {
-
-            Type type = typeof(SuperClassID);
-            FieldInfo fi = type
-                .GetFields(BindingFlags.Static | BindingFlags.Public)
-                .Where(f => f.FieldType == type && f.Name == sclassName).FirstOrDefault();
-            return fi != null ? ( SuperClassID )fi.GetValue(fi) : new SuperClassID();
-        }
 
         public static string[] GetNames() {
 
@@ -166,19 +178,27 @@ namespace Micra.Core {
         public uint b;
         public ClassID(Autodesk.Max.IClass_ID id) : this(id.PartA, id.PartB) { }
         public ClassID(uint a, uint b) { this.a = a; this.b = b; }
-        public ClassID(BuiltInClassIDA a, BuiltInClassIDB b) { this.a = ( uint )a; this.b = ( uint )b; }
-
-        public static ClassID FromName(string sclassName) {
+        public ClassID(BuiltInClassIDA a, BuiltInClassIDB b) { this.a = (uint)a; this.b = (uint)b; }
+        /// <summary>usage: Create ClassID from Name
+        /// <example>
+        /// <code>example: 
+        /// ClassID classId = ClassID.FromName("EditableMesh");
+        /// </code> 
+        /// </example>
+        ///	<returns>result:new ClassID</returns>	
+        /// <param name="className">ClassID Name</param>
+        /// </summary>
+        public static ClassID FromName(string className) {
 
             Type type = typeof(ClassID);
             FieldInfo fi = type
                 .GetFields(BindingFlags.Static | BindingFlags.Public)
-                .Where(f => f.FieldType == type && f.Name == sclassName).FirstOrDefault();
+                .Where(f => f.FieldType == type && f.Name == className).FirstOrDefault();
             return fi != null ? (ClassID)fi.GetValue(fi) : new ClassID();
         }
 
         public IClass_ID _IClass_ID => Kernel._Global.Class_ID.Create(a, b);
-           
+
         //is class
         public static ClassID EditableMesh = new ClassID(BuiltInClassIDA.EDITTRIOBJ_CLASS_ID, 0);
         public static ClassID EditablePoly = new ClassID(BuiltInClassIDA.EPOLYOBJ_CLASS_ID, BuiltInClassIDB.EPOLYOBJ_CLASS_ID);
@@ -187,21 +207,22 @@ namespace Micra.Core {
         //can convert
         public static ClassID TriObject = new ClassID(BuiltInClassIDA.TRIOBJ_CLASS_ID, 0);
         public static ClassID PolyObject = new ClassID(BuiltInClassIDA.POLYOBJ_CLASS_ID, 0);
-
-        //public string Name => Enum.GetName(typeof(BuiltInClassIDA), a);
-
+        /// <summary>usage: Get a Name from current ClasID as Kenel Name</summary>
         public string GetClassName(ClassID clsID) {
-            //get clas name from Max Enums
-            string clsStr = Enum.GetName(typeof(BuiltInClassIDA), clsID.a);
             //get Clas name From Kernel Struct
-            /*Type type = typeof(ClassID);
+            Type type = typeof(ClassID);
             foreach ( var p in type.GetFields(BindingFlags.Static | BindingFlags.Public) ) {
                 var v = p.GetValue(null); // static classes cannot be instanced, so use null...
-                if (v.ToString() == clsID.ToString()) {
-                    clsStr = p.Name;
-                    break;
+                if ( v.ToString() == clsID.ToString() ) {
+                    return p.Name;
                 }
-            }*/
+            }
+            return null;
+        }
+        /// <summary>usage: Get a Name from current ClasID as Max Name</summary>
+        public string GetIClassName(ClassID clsID) {
+            //get clas name from Max Enums
+            string clsStr = Enum.GetName(typeof(BuiltInClassIDA), clsID.a);
             return clsStr;
         }
 
@@ -218,7 +239,7 @@ namespace Micra.Core {
         public override bool Equals(object obj) {
             if ( !( obj is ClassID ) )
                 return false;
-            ClassID that = ( ClassID )obj;
+            ClassID that = (ClassID)obj;
             return a == that.a && b == that.b;
         }
 
@@ -255,20 +276,20 @@ namespace Micra.Core {
         public Color(IAColor c) : this(c.R, c.G, c.B, c.A) { }
         public Color(float r, float g, float b, float a) { this.r = r; this.g = g; this.b = b; this.a = a; }
         public Color(float r, float g, float b) : this(r, g, b, 1.0f) { }
-        public Color(byte r, byte g, byte b, byte a) : this(( float )r / 255.0f, ( float )g / 255.0f, ( float )b / 255.0f, ( float )a / 255.0f) { }
+        public Color(byte r, byte g, byte b, byte a) : this((float)r / 255.0f, (float)g / 255.0f, (float)b / 255.0f, (float)a / 255.0f) { }
         public Color(byte r, byte g, byte b) : this(r, g, b, 255) { }
 
-        int IntR { get { return ( int )( r * 255.0f ); } }
-        int IntG { get { return ( int )( g * 255.0f ); } }
-        int IntB { get { return ( int )( b * 255.0f ); } }
-        int IntA { get { return ( int )( a * 255.0f ); } }
+        int IntR { get { return (int)( r * 255.0f ); } }
+        int IntG { get { return (int)( g * 255.0f ); } }
+        int IntB { get { return (int)( b * 255.0f ); } }
+        int IntA { get { return (int)( a * 255.0f ); } }
 
         public IAColor _IAColor { get { return Kernel._Global.AColor.Create(r, g, b, a); } }
         public IColor _IColor { get { return Kernel._Global.Color.Create(r, g, b); } }
         public System.Drawing.Color SystemColor { get { return System.Drawing.Color.FromArgb(IntA, IntR, IntG, IntB); } }
 
         public static readonly Color MinColor = new Color(0, 0, 0, 0);
-        public static readonly Color MaxColor = new Color(( byte )255, ( byte )255, ( byte )255, ( byte )255);
+        public static readonly Color MaxColor = new Color((byte)255, (byte)255, (byte)255, (byte)255);
     }
 
     /// <summary>
@@ -291,29 +312,29 @@ namespace Micra.Core {
 
         public static Point3 operator -(Point3 a) { return new Point3(-a.X, -a.Y, -a.Z); }
 
-        // Vector Addition
+        /// <summary>usage: Vector Addition</summary>
         public static Point3 operator +(Point3 a, Point3 b) { return new Point3(a.X + b.X, a.Y + b.Y, a.Z + b.Z); }
-        // Vector Subtraction
+        /// <summary>usage: Vector Subtraction</summary>
         public static Point3 operator -(Point3 a, Point3 b) { return new Point3(a.X - b.X, a.Y - b.Y, a.Z - b.Z); }
-        // Cross Product
+        /// <summary>usage: Cross Product</summary>
         public static Point3 operator ^(Point3 a, Point3 b) { return new Point3(a.Y * b.Z - b.Y * a.Z, a.Z * b.X - b.Z * a.X, a.X * b.Y - b.X * a.Y); }
-        // Dot Product
+        /// <summary>usage: Dot Product</summary>
         public static float operator *(Point3 a, Point3 b) { return ( a.X * b.X + a.Y * b.Y + a.Z * b.Z ); }
-        // Scale
+        /// <summary>usage:Scale Up</summary>
         public static Point3 operator *(Point3 a, float scale) { return new Point3(a.X * scale, a.Y * scale, a.Z * scale); }
-        // Scale
+        /// <summary>usage: Scale Down</summary>
         public static Point3 operator /(Point3 a, float scale) { return new Point3(a.X / scale, a.Y / scale, a.Z / scale); }
-
+        /// <summary>usage: Get IPoint3 from Point3</summary>
         public IPoint3 _IPoint3 { get { return Kernel._Global.Point3.Create(X, Y, Z); } }
 
-        public float Length { get { return ( float )Math.Sqrt(LengthSquared); } }
-        public float LengthSquared { get { return ( float )( X * X + Y * Y + Z * Z ); } }
+        public float Length { get { return (float)Math.Sqrt(LengthSquared); } }
+        public float LengthSquared { get { return (float)( X * X + Y * Y + Z * Z ); } }
         public Point3 Normalized { get { float len = Length; return new Point3(X / len, Y / len, Z / len); } }
 
         public void Normalize() { float len = Length; X /= len; Y /= len; Z /= len; }
-
+        /// <summary>usage: Distance from current Point3 to another Point3</summary>
         internal double DistanceTo(Point3 p2) => Distance(this, p2); //TODO -not tested -not used
-
+        /// <summary>usage: Distance between two Points3</summary>
         internal static double Distance(Point3 p1, Point3 p2) {
 
             /*return Math.Sqrt(
@@ -332,7 +353,7 @@ namespace Micra.Core {
                     case 1: return Y;
                     case 2: return Z;
                     default:
-                        throw new IndexOutOfRangeException();
+                    throw new IndexOutOfRangeException();
                 }
             }
             set {
@@ -341,7 +362,7 @@ namespace Micra.Core {
                     case 1: Y = value; break;
                     case 2: Z = value; break;
                     default:
-                        throw new IndexOutOfRangeException();
+                    throw new IndexOutOfRangeException();
                 }
             }
         }

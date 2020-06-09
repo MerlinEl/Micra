@@ -140,13 +140,13 @@ namespace Micra.Tools {
             Kernel.WriteLine(( sender as Button ).Text);
             ObjOps.DeselectAll(true);
         }
-
+        
         private void Button13_Click(object sender, EventArgs e) {
             Kernel.WriteLine(( sender as Button ).Text);
             if ( RbtClassOf.Checked ) {
 
                 ClassID classId = ClassID.FromName(CbxClassOf.SelectedItem.ToString());
-                Kernel.WriteLine("classId:{0}", classId);
+                Kernel.WriteLine("classId:{0} Name:{1}", classId, classId.GetClassName(classId));
                 ObjOps.SelectAllOfType(classId, ChkSelHidden2.Checked, ChkClearSel.Checked, true);
 
             } else {
@@ -154,10 +154,8 @@ namespace Micra.Tools {
                 SuperClassID superClassId = SuperClassID.FromName(CbxSuperClassOf.SelectedItem.ToString());
                 Kernel.WriteLine("superClassId:{0}", superClassId);
                 ObjOps.SelectAllOfType(superClassId, ChkSelHidden2.Checked, ChkClearSel.Checked, true);
-
             }
         }
-
         private void Button14_Click(object sender, EventArgs e) {
             Kernel.WriteLine(( sender as Button ).Text);
             var nodes = Kernel.Scene.SelectedNodes();
