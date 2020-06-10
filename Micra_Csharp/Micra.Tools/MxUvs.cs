@@ -35,11 +35,12 @@ namespace Micra.Tools {
                 return null;
             }
 
-            Uv uv = new Uv();
-            //Uv Array is arranged in a row
-            //Texture verts(Tv) has all uv coordinates
-            uv.X = mesh.Maps[mapNumber].Tv[coordinateIndex * 3];
-            uv.Y = mesh.Maps[mapNumber].Tv[( coordinateIndex * 3 ) + 1];
+            Uv uv = new Uv {
+                //Uv Array is arranged in a row
+                //Texture verts(Tv) has all uv coordinates
+                X = mesh.Maps[mapNumber].Tv[coordinateIndex * 3],
+                Y = mesh.Maps[mapNumber].Tv[( coordinateIndex * 3 ) + 1]
+            };
 
             return uv;
         }

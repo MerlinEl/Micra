@@ -21,7 +21,7 @@ namespace Micra.Core {
     /// </summary>
     public class ParameterBlock1 : ReferenceTarget, IParameterBlock
     {
-        List<Param1> ps = new List<Param1>();
+        readonly List<Param1> ps = new List<Param1>();
 
         //unsafe internal ParameterBlock1(IIParamBlock pb) : base(pb) 
         internal ParameterBlock1(IIParamBlock pb) : base(pb) 

@@ -1,6 +1,6 @@
 ﻿using Micra.Domain;
+using Micra.Launcher.Properties;
 using Micra.Tools;
-using MicraTools.Launcher.Properties;
 using Orien.NetUi;
 using System.Drawing;
 using System.Windows.Forms;

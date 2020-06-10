@@ -6,6 +6,9 @@
 // otherwise accompanies this software in either electronic or hard copy form.  
 //
 
+using System.Reflection;
+using System.Xml;
+
 namespace Micra.Core {
     /// <summary>
     /// Contains global functions related to working with files.

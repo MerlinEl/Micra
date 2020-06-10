@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace MicraTools.Launcher.Properties {
+namespace Micra.Launcher.Properties {
     using System;
     
     

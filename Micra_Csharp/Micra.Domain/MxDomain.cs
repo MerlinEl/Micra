@@ -55,12 +55,9 @@ namespace Micra.Domain {
             return d;
         }
 
-        public void ShowUi(Form owner) {
+        public void ShowUi(Form owner) => new DomainUi() { Owner = owner }.Show();
 
-            new DomainUi() { Owner = owner }.Show();
-        }
-
-        private string AssemblyDirectory {
+        public string AssemblyDirectory {
             get {
                 string codeBase = Assembly.GetExecutingAssembly().CodeBase;
                 UriBuilder uri = new UriBuilder(codeBase);
@@ -182,7 +179,7 @@ namespace Micra.Domain {
             return latest_assembly;
         }
     }
-    public class AssemblySandBoxLoader:MarshalByRefObject {
+    public class AssemblySandBoxLoader : MarshalByRefObject {
         public AssemblySandBoxLoader(string assemblyFilename) {
 
             byte[] assembly_bytes = File.ReadAllBytes(assemblyFilename);

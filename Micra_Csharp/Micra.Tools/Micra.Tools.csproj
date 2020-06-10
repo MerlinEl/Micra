@@ -80,7 +80,6 @@
     </Compile>
     <Compile Include="MxFile.cs" />
     <Compile Include="MxGeo.cs" />
-    <Compile Include="MxListener.cs" />
     <Compile Include="MxConsole.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -98,14 +97,25 @@
     <Compile Include="MxUi.cs" />
     <Compile Include="MxUvs.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="Resources\MaxScriptActions.xml" />
+  </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="CsharpToMaxTest.resx">
       <DependentUpon>CsharpToMaxTest.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MxGeometryOptimizer.resx">
       <DependentUpon>MxGeometryOptimizer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

@@ -15,7 +15,7 @@ namespace Micra.Core {
     /// Represents an element of a scene. Wraps the BaseObject type in the 3ds Max SDK. 
     /// </summary>
     public class SceneElement:ReferenceTarget {
-        public IBaseObject _BaseObject { get { return _Anim as IBaseObject; } }
+        public IBaseObject _BaseObject => _Anim as IBaseObject;
 
         internal SceneElement(IBaseObject x) : base(x) {
             if ( parameterBlock == null ) {
@@ -25,23 +25,11 @@ namespace Micra.Core {
             }
         }
 
-        public IEnumerable<Node> Nodes {
-            get {
-                return from x in Observers where x is Node select x as Node;
-            }
-        }
+        public IEnumerable<Node> Nodes => from x in Observers where x is Node select x as Node;
 
-        public bool Instanced {
-            get {
-                return Nodes.Count() > 1;
-            }
-        }
+        public bool Instanced => Nodes.Count() > 1;
 
-        public string Name {
-            get {
-                return _BaseObject.ObjectName;
-            }
-        }
+        public string Name => _BaseObject.ObjectName;
     }
 
     /// <summary>
@@ -51,30 +39,31 @@ namespace Micra.Core {
     public class SceneObject:SceneElement {
         internal SceneObject(IObject x) : base(x) { }
 
+        #region INTERNAL TYPES
+
         /// <summary>
         /// Returns the corresponding wrapped object from the Autodesk.Max layer. 
         /// This is only used if the APIs of Autodesk.Max layer are required.
         /// </summary>
-        public IObject _Object { get { return _Anim as IObject; } }
-
+        internal IObject _Object => _Anim as IObject;
+        /// <summary> Returns <see cref="Autodesk.Max.IGeomObject"/></summary>
+        internal IGeomObject _IGeomObject => _Anim as IGeomObject;  //test
         /// <summary>
-        /// When an object is created, it should be manually associated with a single node.
-        /// This is only for convenience. An object is not guaranteed to have a node.
+        /// <br>When an object is created, it should be manually associated with a single node.</br>
+        /// <br>This is only for convenience. An object is not guaranteed to have a node.</br>
+        /// <example><code>
+        /// Example: <see cref="PrimObjectFactory.Create"/>
+        /// </code></example>
         /// </summary>
-        public Node _Node { get; set; }
+        internal Node _Node { get; set; } //get parent Node if is assinged
+
+        #endregion
+
+
+        #region PUBLIC TYPES
+
         public Mesh Mesh => GetMesh(Kernel.Now);
-
-        public IGeomObject _IGeomObject { get { return _Anim as IGeomObject; } } //test
         public Geometry Geometry => CreateWrapper<Geometry>(_Anim); //test seems to works
-
-        public bool IsClassOf(ClassID id) => ClassID.a == id.a && ClassID.b == id.b;
-        public bool IsSuperClassOf(SuperClassID id) => SuperClassID == id;
-
-        public void AddModifier(Modifier m) {
-            if ( _Node != null )
-                _Node.AddModifier(m);
-        }
-
         public SceneObject Base {
             get {
                 SceneObject r = this;
@@ -89,6 +78,8 @@ namespace Micra.Core {
             }
         }
 
+        #endregion
+
         #region MESH OBJECT
 
         public ITriObject GetITriobject() => GetITriobject(Kernel.Now);
@@ -101,6 +92,7 @@ namespace Micra.Core {
         }
 
         public IMesh GetImesh() => GetITriobject(Kernel.Now).Mesh;
+
         public IMesh GetImesh(TimeValue t) => GetITriobject(t).Mesh;
 
         public Mesh GetMesh() => GetMesh(Kernel.Now);
@@ -152,60 +144,16 @@ namespace Micra.Core {
 
         #endregion
 
+
+
+        public bool IsClassOf(ClassID id) => ClassID.a == id.a && ClassID.b == id.b;
+        public bool IsSuperClassOf(SuperClassID id) => SuperClassID == id;
+        public void AddModifier(Modifier m) => _Node?.AddModifier(m);
+
+
+        public void Move(Point3 p) => _Node?.Move(p); //shortcut > if (_Node!=null) _Node.Move(p)
+
         public double GetArea() => GeoOps.GetObjectArea(GetMesh());
-
-        public void HideGeometry(bool selected) {
-            //Based on SubobjectLevel
-            switch ( Kernel._Interface.SubObjectLevel ) {
-
-                case 1: break;
-                case 2: break;
-                case 3: break;
-                case 4: break;
-                case 5: break;
-            }
-            //on poly or mesh
-
-
-            IMesh im = GetImesh(Kernel.Now);
-
-            Kernel.WriteLine("Mesh Faces:{0}", im.FaceSel.Size);
-            for ( int i = 0; i < im.FaceSel.Size; i++ ) {
-
-                bool isSelected = im.FaceSel[i] == 1;
-                Kernel.WriteLine("selected:{0} face:{1}", isSelected, i);
-                if ( selected && isSelected ) {
-
-                    im.Faces[i].Hide();
-
-                } else if ( !selected && !isSelected ) im.Faces[i].Hide();
-            }
-            im.InvalidateTopologyCache();
-            if ( selected ) _IGeomObject.ClearSelection(Kernel._Interface.SubObjectLevel);
-        }
-
-        public void UnhideGeometry() {
-
-            IMesh im = GetImesh(Kernel.Now);
-            //Based on SubobjectLevel
-            switch ( Kernel._Interface.SubObjectLevel ) {
-                //todo
-                /*case 1: im.Verts.ForEach<IVert>(v => v.Show()); break; //this not vertices onlt positions Point3
-                case 2: im.Edges.ForEach<IEdge>(e => e.Show()); break;
-                case 3: im.Edges.ForEach<IEdge>(e => e.Show()); break;*/
-                case 3: im.Faces.ForEach<IFace>(f => f.Show()); break; //if is Mesh (poly have spline here)
-                case 4: im.Faces.ForEach<IFace>(f => f.Show()); break;
-                case 5: im.Faces.ForEach<IFace>(f => f.Show()); break;
-            }
-            im.InvalidateTopologyCache();
-
-            /* im.InvalidateGeomCache();
-             im.InvalidateTopologyCache();
-             ITriObject triObject = GetITriobject();
-             //triObject->NotifyDependents(FOREVER, OBJ_CHANNELS, REFMSG_CHANGE);
-             triObject.NotifyDependents(new Interval(), EnumChannels.OBJ_CHANNELS, EnumRefMsg.REFMSG_CHANGE);
-             Kernel._Interface.RedrawViews();*/
-        }
 
         public List<int> GetSelectedFaces() {
 

@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<SCRIPTS>
+  <item name="SelFaces">print $.selectedFaces</item>
+  <item name="SelEdges">print $.selectedEdges</item>
+  <item name="SelVerts">print $.selectedVerts</item>
+  <item name="3Boxes">
+Box pos:[-100,0,0] name:(UniqueName "ojobox") wirecolor:red
+Box pos:[0,0,0] name:(UniqueName "ojobox") wirecolor:blue
+Box pos:[100,0,0] name:(UniqueName "ojobox") wirecolor:green
+  </item>
+  <item name="GetFaceArea">
+(
+  local fsel = 0
+  fn GetFacesArea obj = (
+  
+    local face_areas = #()
+    if classOf obj == Editable_Mesh then (
+  
+      fsel = getFaceSelection obj
+      for fi in fsel do append face_areas (meshOp.getFaceArea obj fi)
+      
+    ) else if classOf obj == Editable_Poly do (
+  
+      fsel = polyOp.getFaceSelection obj
+      for fi in fsel do append face_areas (polyOp.getFaceArea obj fi)
+    )
+    face_areas
+  )
+  format "Object:% Area:% Face:%\n" selection[1].Name (GetFacesArea selection[1]) fsel
+)
+  </item>
+  <item name="GetObjectArea">
+fn GetObjectArea obj = (
+
+   faces_area = 0
+   if classOf obj == Editable_Mesh then (
+   
+      for f in obj.faces do faces_area += meshOp.getFaceArea obj f.index
+      
+   ) else if classOf obj == Editable_Poly do (
+   
+      for f in obj.faces do faces_area += polyOp.getFaceArea obj f.index
+   )
+   faces_area
+)
+format "Object:% Area:%\n" selection[1].Name (GetObjectArea selection[1])
+  </item>
+  <item name=""></item>
+  <item name=""></item>
+  <item name=""></item>
+</SCRIPTS>

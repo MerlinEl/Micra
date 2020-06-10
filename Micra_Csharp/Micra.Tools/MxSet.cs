@@ -18,14 +18,6 @@ namespace Micra.Tools {
             }
             return true;
         }
-        /// <summary>
-        /// Print Message in to Listener
-        /// </summary>
-        /// <param name="strMsg"></param>
-        public static void LogLi(string strMsg, params object[] args) {
-            if ( args.Length > 0 ) strMsg = String.Format(strMsg, args);
-            MxListener.WriteLine(strMsg);
-        }
 
         public static IFPValue ExecuteMAXScriptScript(string action, bool quietErrors = false) {
             IFPValue fpv = null;

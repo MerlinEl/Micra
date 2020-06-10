@@ -1,9 +1,4 @@
 ﻿using Autodesk.Max;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 /*
  This might be a bit of a long shot but I have noticed that in the Autodesk.max.dll from 2014+ the [] operator has gone missing from IBitArray. I know you no longer develop this so I’ve got a question about a workaround I was trying to use:
 

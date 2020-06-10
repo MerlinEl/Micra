@@ -45,15 +45,15 @@ namespace Micra.Tools {
             if (!(obj is IEditableObject)) return;
             int slev = MxGet.Interface.SubObjectLevel;
 
-            MxSet.LogLi("selectedObject:{0} subobjectLevel:{1}", obj.Name, slev);
+            Kernel.WriteLine("selectedObject:{0} subobjectLevel:{1}", obj.Name, slev);
  
             if (slev == 4 || slev == 5 ) { //select geometry with simillar volume
 
-                MxSet.LogLi("select geometry with simillar volume"); 
+                Kernel.WriteLine("select geometry with simillar volume"); 
 
             } else { //select objects with simillar volume
 
-                MxSet.LogLi("select objects with simillar volume");
+                Kernel.WriteLine("select objects with simillar volume");
             }*/
 
             /*MxSet.ExecuteMAXScriptScript("" +

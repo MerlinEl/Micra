@@ -5,6 +5,10 @@ using System.Linq;
 
 namespace Micra.Core {
     public class ObjOps {
+
+        public static List<Node> GetSlectedNodes() => Kernel.Scene.SelectedNodes().ToList();
+        /// <summary> Get First Node From Selected Objects</summary>
+        public static Node GetFirstSlectedNode() => GetSlectedNodes().FirstOrDefault();
         /// <summary>
         /// Smart selection depends on SubobjectLevel
         /// Works with Editable_Poly and Editable_Mesh
@@ -64,6 +68,7 @@ namespace Micra.Core {
                 if ( node != null ) node.Object.SelectAll(redraw);
             }
         }
+
         public static void SelectAllOfType(ClassID classId, bool hidden = false, bool clearSel = true, bool redraw = false) {
 
             if ( clearSel ) DeselectAll(true);

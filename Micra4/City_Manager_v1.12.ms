@@ -27,6 +27,8 @@ rcmenu mcCityManDialogMenu (
 		separator m1_sep_4
 		menuItem m1_11 "Generate Lods Custom"
 		menuItem m1_12 "Destroy Lods in Selection" 
+		menuItem m1_13 "Show Selection Lods" 
+		menuItem m1_14 "Print Selected Object Lods" 
 	)
 	subMenu "Occ Planes"(
 		menuItem m3_1 "Select All Occ "
@@ -315,6 +317,33 @@ rcmenu mcCityManDialogMenu (
 		gProgLog.progSub objs.count objs.count
 		gProgLog.msg "All Done" ty:"task_close"
 	)
+	fn showSelectionLods objs = (
+	
+		local lods_form_sel = #()
+		for o in objs do (
+		
+			select o
+			for i=0 to (LS3DGUP.LODU.GetNumLODs())-1 do (
+				LS3DGUP.LODU.SetSelectedLOD i
+				append lods_form_sel (LS3DGUP.LODU.GetNode())
+			)
+		)
+		if lods_form_sel.count > 0 do unhide lods_form_sel dolayer:true --unhide lods
+		select objs --restore selection
+	)
+	fn printUsedLods objs = (
+
+		for o in objs do (
+			select o
+			format "\nObject:%\n" o.name
+			for i=1 to (LS3DGUP.LODU.GetNumLODs())-1 do (
+				LS3DGUP.LODU.SetSelectedLOD i
+				local lod = (LS3DGUP.LODU.GetNode())
+				format "\tLOD(%):%\n" i lod.Name
+			)
+		)
+		select objs --restore selection
+	)
 	--m1------------------------------------------------------------------------------------------------
 	on m1_0 picked do undo label:(m1_0.Text) on selectLods(#("LOD1", "LOD2"))
 	on m1_1 picked do undo label:(m1_1.Text) on mcMax.selectObjectsByName "LOD0" visibleOnly:false exclude:#("coll", "occ")
@@ -333,6 +362,8 @@ rcmenu mcCityManDialogMenu (
 	--sep4
 	on m1_11 picked do fileIn (micra.RootDir + "LS3D_LOD_Manager.ms")
 	on m1_12 picked do if (queryBox "Destroy Lodes on Selection?" title:"Warning:") do undo off ::gCityManager.destroyLodsInSelection()
+	on m1_13 picked do undo label:(m1_13.Text) on showSelectionLods (selection as array)
+	on m1_14 picked do undo label:(m1_14.Text) on printUsedLods (selection as array)
 	--m2------------------------------------------------------------------------------------------------
 	on m2_1 picked do undo label:(m2_1.Text) on mcMax.hideAll()
 	on m2_2 picked do undo label:(m2_2.Text) on mcMax.unhideAll()
@@ -1264,7 +1295,7 @@ rollout mcCityManDialog "" width:500 height:988
 			)
 			"All": (
 			
-				undo "Show All" on ( unhide objects )
+				undo "Show All" on ( unhide objects dolayer:true)
 			)
 		)
 	)

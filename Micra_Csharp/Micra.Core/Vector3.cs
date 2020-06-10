@@ -426,8 +426,7 @@ namespace Micra.Core {
         /// <param name="vector2">Second vector.</param>
         /// <returns>Cross product of two vectors.</returns>
         public static Vector3 Cross(Vector3 vector1, Vector3 vector2) {
-            Vector3 result;
-            Cross(ref vector1, ref vector2, out result);
+            Cross(ref vector1, ref vector2, out Vector3 result);
             return result;
         }
 

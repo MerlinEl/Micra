@@ -55,7 +55,7 @@ namespace Micra.Core
     /// </summary>
     public class AppData
     {
-        IAnimatable anim;
+        readonly IAnimatable anim;
         ClassID cid;
         SuperClassID scid;
 
@@ -106,7 +106,7 @@ namespace Micra.Core
     /// </summary>
     public class Animatable 
     {
-        private IAnimatable wrapped;
+        private readonly IAnimatable wrapped;
 
         protected IParameterBlock parameterBlock;
 
@@ -217,18 +217,19 @@ namespace Micra.Core
 
         public static bool operator ==(Animatable a, Animatable b)
         {
-            return (object)a == null ? (object)b == null : a.Equals(b);
+            //return (object)a == null ? (object)b == null : a.Equals(b);
+            return a is null ? b is null : a.Equals(b);
         }
 
         public static bool operator !=(Animatable a, Animatable b)
         {
-            return (object)a == null ? (object)b != null : !a.Equals(b);
+            //return (object)a == null ? (object)b != null : !a.Equals(b);
+            return a is null ? b is object : !a.Equals(b);
         }
 
         public override bool Equals(object obj)
         {
-            Animatable that = obj as Animatable;
-            if ((object)that == null) return false;
+            if ( !( obj is Animatable that ) ) return false;
             return AnimHandle == that.AnimHandle;
         }
 

@@ -38,7 +38,8 @@ namespace Micra.Core {
 
         public static Animatable Create(string internalName) {
             var p = GetPlugin(internalName);
-            return p != null ? p.Create() : null;
+            //return p != null ? p.Create() : null;
+            return p?.Create();
         }
 
         public static Animatable Create(SuperClassID scid, ClassID cid) {

@@ -17,10 +17,9 @@ namespace Micra.Core {
     /// </summary>
     internal class SceneConstructor
     {
-        Scene scene;
-
-        Dictionary<ulong, SerializableScene.Plugin> plugins = new Dictionary<ulong, SerializableScene.Plugin>();
-        Dictionary<ulong, Animatable> anims = new Dictionary<ulong, Animatable>();
+        readonly Scene scene;
+        readonly Dictionary<ulong, SerializableScene.Plugin> plugins = new Dictionary<ulong, SerializableScene.Plugin>();
+        readonly Dictionary<ulong, Animatable> anims = new Dictionary<ulong, Animatable>();
 
         public SceneConstructor(Scene s)
         {

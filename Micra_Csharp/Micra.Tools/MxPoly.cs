@@ -1,4 +1,5 @@
 ﻿using Autodesk.Max;
+using Micra.Core;
 using System;
 using System.Collections.Generic;
 
@@ -14,7 +15,7 @@ namespace Micra.Tools {
             IObject iObj = iState.Obj;
             ITriObject iTri = (ITriObject)iObj.ConvertToType(0, MxGet.Global.TriObjectClassID);
             IMesh mesh = iTri.Mesh; //Autodesk.Max.Wrappers.Mesh
-            MxSet.LogLi("\tGetGeometryVolume obj:{0} trimesh:{1} NumFaces:{2}", obj.Name, mesh.ToString(), mesh.NumFaces);
+            Kernel.WriteLine("\tGetGeometryVolume obj:{0} trimesh:{1} NumFaces:{2}", obj.Name, mesh.ToString(), mesh.NumFaces);
 
             double objVolume = 0.0;
 
@@ -53,7 +54,7 @@ namespace Micra.Tools {
                 //IPoint3 vertWorldSpace = worldTm.PointTransform(vertObjectSpace);
                 points.Add(vertWorldSpace);
 
-                MxSet.LogLi(vertID.ToString() + ": " + vertWorldSpace.X.ToString() + ", " + vertWorldSpace.Y.ToString() + ", " + vertWorldSpace.Z.ToString());
+                Kernel.WriteLine(vertID.ToString() + ": " + vertWorldSpace.X.ToString() + ", " + vertWorldSpace.Y.ToString() + ", " + vertWorldSpace.Z.ToString());
             }
             return points;
         }
@@ -69,12 +70,12 @@ namespace Micra.Tools {
             IObject iObj = iState.Obj;
             ITriObject iTri = (ITriObject)iObj.ConvertToType(0, MxGet.Global.TriObjectClassID);
             IMesh mesh = iTri.Mesh; //Autodesk.Max.Wrappers.Mesh
-            MxSet.LogLi("\tGetGeometryVolume obj:{0} trimesh:{1} numVerts:{2}", obj.Name, mesh.ToString(), mesh.NumVerts);
+            Kernel.WriteLine("\tGetGeometryVolume obj:{0} trimesh:{1} numVerts:{2}", obj.Name, mesh.ToString(), mesh.NumVerts);
             List<IPoint3> points = new List<IPoint3> { };
             for ( int vertID = 0; vertID < mesh.NumVerts; vertID++ ) {
 
                 IPoint3 p = mesh.GetVert(vertID);
-                MxSet.LogLi("\tpos [{0}, {1}, {2}]", p.X, p.Y, p.Z);
+                Kernel.WriteLine("\tpos [{0}, {1}, {2}]", p.X, p.Y, p.Z);
                 points.Add(p);
             }
             return MxMath.GetAreaFromPoints(points);

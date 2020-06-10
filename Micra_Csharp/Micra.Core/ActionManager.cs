@@ -26,7 +26,7 @@ namespace Micra.Core {
     /// Wraps a ActionTable in the 3ds Max SDK. 
     /// </summary>
     public class ActionTable {
-        IActionTable at;
+        readonly IActionTable at;
 
         public IActionTable _ActionTable { get { return at; } }
         public ActionTable(IActionTable at) { this.at = at; }
@@ -46,7 +46,7 @@ namespace Micra.Core {
     /// Wraps an ActionItem in the 3ds Max SDK. 
     /// </summary>
     public class ActionItem {
-        IActionItem ai;
+        readonly IActionItem ai;
 
         public IActionItem _ActionItem { get { return ai; } }
 

@@ -14,8 +14,8 @@ namespace Micra.Core {
     /// </summary>
     internal class ReferenceListener : Autodesk.Max.Plugins.ReferenceMaker {
         ReferenceTarget target;
-        RefMessage message;
-        Action action;
+        readonly RefMessage message;
+        readonly Action action;
 
         public ReferenceListener(ReferenceTarget target, RefMessage message, Action action) {
             this.target = target;

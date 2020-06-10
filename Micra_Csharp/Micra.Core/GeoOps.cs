@@ -203,6 +203,61 @@ namespace Micra.Core {
             Kernel._TheHold.Accept("Select Simillar");
             Kernel._TheHold.End();*/
         }
+
+        public static void HideGeometry(Node n, bool selected) {
+            //Based on SubobjectLevel
+            switch ( Kernel._Interface.SubObjectLevel ) {
+
+                case 1: break;
+                case 2: break;
+                case 3: break;
+                case 4: break;
+                case 5: break;
+            }
+            //TODO on poly or mesh
+
+            IMesh im = n.GetImesh(Kernel.Now);
+
+            Kernel.WriteLine("Mesh Faces:{0}", im.FaceSel.Size);
+            for ( int i = 0; i < im.FaceSel.Size; i++ ) {
+
+                bool isSelected = im.FaceSel[i] == 1;
+                //Kernel.WriteLine("selected:{0} face:{1}", isSelected, i);
+                if ( selected && isSelected ) {
+
+                    im.Faces[i].Hide();
+
+                } else if ( !selected && !isSelected ) im.Faces[i].Hide();
+            }
+            if ( selected ) n.Object._IGeomObject.ClearSelection(Kernel._Interface.SubObjectLevel);
+            im.InvalidateTopologyCache();
+            n.InvalidateObjCache();
+            Kernel.RedrawViews();
+        }
+
+        public static void UnhideGeometry(Node n) {
+
+            IMesh im = n.GetImesh(Kernel.Now);
+            //Based on SubobjectLevel
+            switch ( Kernel._Interface.SubObjectLevel ) {
+                //todo
+                /*case 1: im.Verts.ForEach<IVert>(v => v.Show()); break; //this not vertices onlt positions Point3
+                case 2: im.Edges.ForEach<IEdge>(e => e.Show()); break;
+                case 3: im.Edges.ForEach<IEdge>(e => e.Show()); break;*/
+                case 3: im.Faces.ForEach<IFace>(f => f.Show()); break; //if is Mesh (poly have spline here)
+                case 4: im.Faces.ForEach<IFace>(f => f.Show()); break;
+                case 5: im.Faces.ForEach<IFace>(f => f.Show()); break;
+            }
+            im.InvalidateTopologyCache();
+            n.InvalidateObjCache();
+            Kernel.RedrawViews();
+            /* im.InvalidateGeomCache();
+             im.InvalidateTopologyCache();
+             ITriObject triObject = GetITriobject();
+             //triObject->NotifyDependents(FOREVER, OBJ_CHANNELS, REFMSG_CHANGE);
+             triObject.NotifyDependents(new Interval(), EnumChannels.OBJ_CHANNELS, EnumRefMsg.REFMSG_CHANGE);
+             Kernel._Interface.RedrawViews();*/
+        }
     }
 }
 

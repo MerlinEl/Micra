@@ -104,10 +104,10 @@ namespace Micra.Tools {
 
         /*public static Assembly LoadAssembly(string assembly_path) {
 
-            MxSet.LogLi("Rading bytes from Assembly:\n\t" + assembly_path);
+            Kernel.WriteLine("Rading bytes from Assembly:\n\t" + assembly_path);
             byte[] assembly_bytes = File.ReadAllBytes(assembly_path); //read assembly bytes, leave dll unlocked
             Assembly asm = Assembly.Load(assembly_bytes); //load assembly in to current domain
-            MxSet.LogLi("Loaded Assembly:" + asm.FullName); //print ddl name and version
+            Kernel.WriteLine("Loaded Assembly:" + asm.FullName); //print ddl name and version
             return asm;
         }*/
 
@@ -189,7 +189,8 @@ namespace Micra.Tools {
                 get { return SClass_ID.Utility; }
             }
         }
-        Descriptor _descriptor;
+
+        readonly Descriptor _descriptor;
 
         public testSub(Descriptor descriptor) {
             this._descriptor = descriptor;

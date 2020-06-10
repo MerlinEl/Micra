@@ -6,20 +6,24 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Windows.Forms;
+using System.Xml;
+using System.Xml.Linq;
 
 namespace Micra.Tools {
     public partial class CsharpToMaxTest : Form {
-
+        XDocument MaxActionsXML = MxFile.GetXMLFromResources("MaxScriptActions.xml");//load XML from Resources
         public CsharpToMaxTest() {
             InitializeComponent();
             Init();
         }
-
         private void Init() {
+
+            //get assembly version
             Text = Text + "     " + MxGet.AssemblyVersion;
-            CbxClassOf.Items.AddRange(ClassID.GetNames());
+            //fill list boxes
+            CbxClassOf.Items.AddRange(ClassID.GetClassNames());
             CbxClassOf.SelectedIndex = 0;
-            CbxSuperClassOf.Items.AddRange(SuperClassID.GetNames());
+            CbxSuperClassOf.Items.AddRange(SuperClassID.GetClassNames());
             CbxSuperClassOf.SelectedIndex = 0;
             CbxSceneNodeTypes.SelectedIndex = 0;
             CbxPrimitiveTypes.SelectedIndex = 0;
@@ -48,7 +52,7 @@ namespace Micra.Tools {
         private void Button1_Click(object sender, EventArgs e) {
 
             Kernel.WriteLine(( sender as Button ).Text);
-            Node node = Kernel.Scene.SelectedNodes().FirstOrDefault();
+            Node node = ObjOps.GetFirstSlectedNode();
             Kernel.WriteLine("first node:{0}", node);
             if ( node != null ) node.SelectOnly();
         }
@@ -58,13 +62,13 @@ namespace Micra.Tools {
             string cmd = "Render()";
             textBox1.Text = cmd;
             IFPValue mxsRetVal = MxSet.ExecuteMAXScriptScript(cmd);
-            if ( mxsRetVal != null ) MxSet.LogLi("Render Click gor:" + mxsRetVal.S);
+            if ( mxsRetVal != null ) Kernel.WriteLine("Render Click gor:" + mxsRetVal.S);
         }
 
         private void BtnSelSimElements_Click(object sender, EventArgs e) {
 
             Kernel.WriteLine(( sender as Button ).Text);
-            List<Node> selNodes = Kernel.Scene.SelectedNodes().ToList();
+            List<Node> selNodes = ObjOps.GetSlectedNodes();
             Kernel.WriteLine("\tSelected nodes:{0}", selNodes.Count());
             int slev = GlobalMethods.SubObjectLevel;
             if ( selNodes.Count() == 1 && slev != 0 ) { //if single object is selected
@@ -102,18 +106,18 @@ namespace Micra.Tools {
             Kernel.WriteLine(( sender as Button ).Text);
             var teapot = Primitives.Teapot.Create();
             teapot["radius"] = 20.0;
-            teapot._Node.Move(new Point3(20, 10, 5));
+            teapot.Move(new Point3(20, 10, 5));
             //teapot._Object.Move
         }
 
         private void Button7_Click(object sender, EventArgs e) {
             Kernel.WriteLine(( sender as Button ).Text);
             var cylinder = Primitives.Cylinder.Create();
-            MxSet.LogLi("Create Cylinder params:{0}", cylinder.Params.ToString());
+            Kernel.WriteLine("Create Cylinder params:{0}", cylinder.Params.ToString());
             cylinder["radius"] = 20.0f;
             cylinder["height"] = 40.0f;
             cylinder["heightsegs"] = 10;
-            MxSet.LogLi("Create Bend");
+            Kernel.WriteLine("Create Bend");
             var bend = Primitives.Bend.Create();
             cylinder.AddModifier(bend);
             bend["bendangle"] = 30.0f;
@@ -122,7 +126,7 @@ namespace Micra.Tools {
         private void Button6_Click(object sender, EventArgs e) {
 
             Kernel.WriteLine(( sender as Button ).Text);
-            foreach ( var p in PluginMgr.Plugins ) MxSet.LogLi(p.ClassName);
+            foreach ( var p in PluginMgr.Plugins ) Kernel.WriteLine(p.ClassName);
         }
 
         private void Button10_Click(object sender, EventArgs e) {
@@ -140,7 +144,7 @@ namespace Micra.Tools {
             Kernel.WriteLine(( sender as Button ).Text);
             ObjOps.DeselectAll(true);
         }
-        
+
         private void Button13_Click(object sender, EventArgs e) {
             Kernel.WriteLine(( sender as Button ).Text);
             if ( RbtClassOf.Checked ) {
@@ -156,10 +160,9 @@ namespace Micra.Tools {
                 ObjOps.SelectAllOfType(superClassId, ChkSelHidden2.Checked, ChkClearSel.Checked, true);
             }
         }
-        private void Button14_Click(object sender, EventArgs e) {
+        private void Button_ShowSelClass(object sender, EventArgs e) {
             Kernel.WriteLine(( sender as Button ).Text);
-            var nodes = Kernel.Scene.SelectedNodes();
-            ObjOps.ShowClass(nodes);
+            ObjOps.ShowClass(ObjOps.GetSlectedNodes());
         }
 
         private void OnFormShown(object sender, EventArgs e) {
@@ -171,20 +174,17 @@ namespace Micra.Tools {
             Kernel.WriteClear(ChkMacroRec.Checked);
         }
 
-        private void Button16_Click(object sender, EventArgs e) {
+        private void Button_ShowSelParams(object sender, EventArgs e) {
             Kernel.WriteLine(( sender as Button ).Text);
-            var nodes = Kernel.Scene.SelectedNodes();
-            ObjOps.ShowParameters(nodes);
+            ObjOps.ShowParameters(ObjOps.GetSlectedNodes());
         }
 
-        private void Button4_Click_1(object sender, EventArgs e) {
+        private void Button_SelInstances(object sender, EventArgs e) {
             Kernel.WriteLine(( sender as Button ).Text);
-            Node node = Kernel.Scene.SelectedNodes().FirstOrDefault();
-            ObjOps.SelectInstances(node, true);
+            ObjOps.SelectInstances(ObjOps.GetFirstSlectedNode(), true);
         }
 
         private void BtnOpenMaxFile_Click(object sender, EventArgs e) {
-
             Kernel.WriteLine(( sender as Button ).Text);
             string maxFilePpath = CbxMaxFilePath.Text;
             Kernel.WriteLine("Open Max file:{0} exists:{1}", maxFilePpath, File.Exists(maxFilePpath));
@@ -193,7 +193,7 @@ namespace Micra.Tools {
 
         private void BtnGetSelFaces_Click(object sender, EventArgs e) {
             Kernel.WriteLine(( sender as Button ).Text);
-            Node node = Kernel.Scene.SelectedNodes().FirstOrDefault();
+            Node node = ObjOps.GetFirstSlectedNode();
             Kernel.WriteLine("selected Node:{0} subObjectLevel:{1}", node.Name, Kernel._Interface.SubObjectLevel);
             List<int> fsel = node.Object.GetSelectedFaces();
             Kernel.WriteLine("selected Faces:{0} #({1})", fsel.Count, String.Join(",", fsel));
@@ -201,7 +201,7 @@ namespace Micra.Tools {
 
         private void BtnGetSelEdges_Click(object sender, EventArgs e) {
             Kernel.WriteLine(( sender as Button ).Text);
-            Node node = Kernel.Scene.SelectedNodes().FirstOrDefault();
+            Node node = ObjOps.GetFirstSlectedNode();
             Kernel.WriteLine("selected Node:{0} subObjectLevel:{1}", node.Name, Kernel._Interface.SubObjectLevel);
             var esel = node.Object.GetSelectedEdges();
             Kernel.WriteLine("selected Edges:{0} #({1})", esel.Count, String.Join(",", esel));
@@ -209,7 +209,7 @@ namespace Micra.Tools {
 
         private void BtnGetSelVetts_Click(object sender, EventArgs e) {
             Kernel.WriteLine(( sender as Button ).Text);
-            Node node = Kernel.Scene.SelectedNodes().FirstOrDefault();
+            Node node = ObjOps.GetFirstSlectedNode();
             Kernel.WriteLine("selected Node:{0} subObjectLevel:{1}", node.Name, Kernel._Interface.SubObjectLevel);
             var vsel = node.Object.GetSelectedVerts();
             Kernel.WriteLine("selected Verts:{0} #({1})", vsel.Count, String.Join(",", vsel));
@@ -217,22 +217,14 @@ namespace Micra.Tools {
 
         private void BtnHideUnselFaces_Click(object sender, EventArgs e) {
             Kernel.WriteLine(( sender as Button ).Text);
-            Node node = Kernel.Scene.SelectedNodes().FirstOrDefault();
-            if ( node != null ) {
-                node.Object.HideGeometry(ChkSelected.Checked);
-                Kernel._Interface.InvalidateObCache(node._IINode);
-                Kernel.RedrawViews();
-            }
+            Node node = ObjOps.GetFirstSlectedNode();
+            if ( node != null ) { GeoOps.HideGeometry(node, ChkSelected.Checked); }
         }
 
         private void BtnUnhideGeometry_Click(object sender, EventArgs e) {
             Kernel.WriteLine(( sender as Button ).Text);
-            Node node = Kernel.Scene.SelectedNodes().FirstOrDefault();
-            if ( node != null ) {
-                node.Object.UnhideGeometry();
-                Kernel._Interface.InvalidateObCache(node._IINode);
-                Kernel.RedrawViews();
-            }
+            Node node = ObjOps.GetFirstSlectedNode();
+            if ( node != null ) { GeoOps.UnhideGeometry(node); }
         }
 
         private void BtnGetSceneObjects_Click(object sender, EventArgs e) {
@@ -251,23 +243,23 @@ namespace Micra.Tools {
             nodes.ToList()
                 .ForEach(n => Kernel.WriteLine("\tNode:{0}\t\tSuperClass:{1}",
                 n.Name,
-                SuperClassID.GetName(n.Object.SuperClassID)
+                n.Object.SuperClassID.GetClassName(n.Object.SuperClassID)
                 ));
         }
 
-        private void button18_Click(object sender, EventArgs e) {
+        private void Button18_Click(object sender, EventArgs e) {
 
             Kernel.WriteLine(( sender as Button ).Text);
 
             //MaxSharp Mod by MerlinEl 2020
-            Node node = Kernel.Scene.SelectedNodes().FirstOrDefault();
+            Node node = ObjOps.GetFirstSlectedNode();
             SceneObject sceneObject = node.Object;
             Geometry geometry = node.Object.Geometry;
 
             IINode iiNode = node._IINode;
             IReferenceTarget tRefTarget = node._Target;
             IReferenceMaker iRefMarker = node._Maker;
-            IGeomObject iGeomObject = node.Object._IGeomObject;
+            //IGeomObject iGeomObject = node.Object._IGeomObject;
             IBaseObject iBaseObject = node.Object._BaseObject;
             IObject iObject = node.GetObjectRef(); //same as > //node.Object._Object; //_IINode.ObjectRef
             IAnimatable iAnimatable = node.Object._Anim;
@@ -291,7 +283,7 @@ namespace Micra.Tools {
                 iiNode,
                 tRefTarget,
                 iRefMarker,
-                iGeomObject,
+               // iGeomObject,
                 iBaseObject,
                 iObject,
                 iAnimatable,
@@ -361,14 +353,14 @@ namespace Micra.Tools {
 
         private void BtnGetObjArea_Click(object sender, EventArgs e) {
             Kernel.WriteLine(( sender as Button ).Text);
-            Node node = Kernel.Scene.SelectedNodes().FirstOrDefault();
+            Node node = ObjOps.GetFirstSlectedNode();
             double area = GeoOps.GetObjectArea(node);
             Kernel.WriteLine("Object:{0} Class:{1} Area:{2}", node.Name, node.ClassOf(), area);
         }
 
         private void BtnGetFaceArea_Click(object sender, EventArgs e) {
             Kernel.WriteLine(( sender as Button ).Text);
-            Node node = Kernel.Scene.SelectedNodes().FirstOrDefault();
+            Node node = ObjOps.GetFirstSlectedNode();
             if ( node.IsClassOf(ClassID.EditablePoly) ) {
 
                 Poly poly = node.GetPoly();
@@ -398,46 +390,19 @@ namespace Micra.Tools {
             textBox1.Text = "";
         }
 
+        /// <summary> Load Max String Commands in to TextBox</summary>
         private void OnCbxScriptListSelChanges(object sender, EventArgs e) {
             string cmd = Switch.On(CbxScriptList.Text)
-                .Case("SelFaces").Then("print $.selectedFaces")
-                .Case("SelEdges").Then("print $.selectedEdges")
-                .Case("SelVerts").Then("print $.selectedVerts")
-                .Case("3Boxes").Then("" +
-"Box pos:[-100,0,0] name:(UniqueName \"ojobox\") wirecolor:red\n" +
-"Box pos:[0,0,0] name:(UniqueName \"ojobox\") wirecolor:blue\n" +
-"Box pos:[100,0,0] name:(UniqueName \"ojobox\") wirecolor:green\n")
+                .Case("SelFaces").Then(MxFile.GetMaxScriptFromXML(MaxActionsXML, "SelFaces"))
+                .Case("SelEdges").Then(MxFile.GetMaxScriptFromXML(MaxActionsXML, "SelEdges"))
+                .Case("SelVerts").Then(MxFile.GetMaxScriptFromXML(MaxActionsXML, "SelVerts"))
+                .Case("3Boxes").Then(MxFile.GetMaxScriptFromXML(MaxActionsXML, "3Boxes"))
                 .Case("Render").Then("Render()")
-                .Case("GetFaceArea").Then("" +
-"fn GetFacesArea obj &fsel = (\n" +
-"   local face_areas = #()\n" +
-"   if classOf obj == Editable_Mesh then (\n" +
-"      fsel = getFaceSelection obj\n" +
-"      for fi in fsel do append face_areas (meshOp.getFaceArea obj fi)\n" +
-"   ) else if classOf obj == Editable_Poly do (\n" +
-"      fsel = polyOp.getFaceSelection obj\n" +
-"      for fi in fsel do append face_areas (polyOp.getFaceArea obj fi)\n" +
-"   )\n" +
-"   face_areas\n" +
-")\n" +
-"fsel = 0\n" +
-"format \"Object:% Area:% Face:%\n\" selection[1].Name (GetFacesArea selection[1] &fsel) fsel")
-                .Case("GetObjectArea").Then("" +
-"fn GetObjectArea obj = (\n" +
-"   faces_area = 0\n" +
-"   if classOf obj == Editable_Mesh then (\n" +
-"      for f in obj.faces do faces_area += meshOp.getFaceArea obj f.index\n" +
-"   ) else if classOf obj == Editable_Poly do (\n" +
-"      for f in obj.faces do faces_area += polyOp.getFaceArea obj f.index\n" +
-"   )\n" +
-"   faces_area\n" +
-")\n" +
-"format \"Object:% Area:%\n\" selection[1].Name (GetObjectArea selection[1])")
+                .Case("GetFaceArea").Then(MxFile.GetMaxScriptFromXML(MaxActionsXML, "GetFaceArea"))
+                .Case("GetObjectArea").Then(MxFile.GetMaxScriptFromXML(MaxActionsXML, "GetObjectArea"))
                 .Default("");
             textBox1.Text = cmd.Replace("\n", Environment.NewLine);
         }
-
-
     }
 }
 
@@ -447,7 +412,7 @@ namespace Micra.Tools {
 // get a list of all selected nodes.
 /*List<IINode> selectedNodes = MxObj.GetSelectedNodes();
 if ( selectedNodes.Count == 0 ) return;
-MxSet.LogLi("Selected Nodes:" + selectedNodes.Count.ToString());
+Kernel.WriteLine("Selected Nodes:" + selectedNodes.Count.ToString());
 //MxPoly.SelectSimillarElements(selectedNodes[0]);*/
 
 

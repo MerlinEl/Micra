@@ -13,7 +13,7 @@ namespace Micra.Core {
         }
 
         public class SwitchBuilder<TElement> {
-            TElement _element;
+            readonly TElement _element;
             TElement _firstCase;
             internal SwitchBuilder(TElement element) { _element = element; }
             internal CaseBuilder Start() {
@@ -44,9 +44,9 @@ namespace Micra.Core {
         }
 
         public class SwitchBuilder<TElement, TResult> {
-            TElement _element;
+            readonly TElement _element;
             TElement _currentCase;
-            IDictionary<TElement, TResult> _map = new Dictionary<TElement, TResult>();
+            readonly IDictionary<TElement, TResult> _map = new Dictionary<TElement, TResult>();
             internal SwitchBuilder(TElement element, TElement firstCase, TResult firstResult) {
                 _element = element;
                 _map.Add(firstCase, firstResult);
@@ -63,8 +63,7 @@ namespace Micra.Core {
                 return new CaseBuilder() { Switch = this };
             }
             private TResult Default(TResult defaultResult) {
-                TResult result;
-                if ( _map.TryGetValue(_element, out result) ) {
+                if ( _map.TryGetValue(_element, out TResult result) ) {
                     return result;
                 }
                 return defaultResult;

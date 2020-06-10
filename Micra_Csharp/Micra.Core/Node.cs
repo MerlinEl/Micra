@@ -36,7 +36,6 @@ namespace Micra.Core {
                     }
                 }
                 set {
-                    string tmp = value;
                     node.SetUserPropString(key, value);
                 }
             }
@@ -250,22 +249,21 @@ namespace Micra.Core {
             set { _IINode.IsFrozen = value; }
         }
 
-        //test > in profress
-        //ClassID.EditableMesh.Equals(_Object.ClassID)
-        //ClassID.EditablePoly.Equals(_Object.ClassID)
         public string ClassOf() => ClassID.GetClassName(Object.ClassID);
-        public string SuperClassOf() => SuperClassID.GetSuperClassName(Object.SuperClassID);
+        public string SuperClassOf() => SuperClassID.GetClassName(Object.SuperClassID);
         public bool IsClassOf(ClassID id) => Object.ClassID.a == id.a && Object.ClassID.b == id.b;
+
         public bool IsSuperClassOf(SuperClassID id) => Object.SuperClassID == id;
 
-        /// <summary> Check if Object is Editable_Poly or Editable_Mesh
+        /// <summary> Use this Method to filter objects with Editable_Poly and Editable_Mesh class
         /// <example> 
         /// <code>example: if ( !node.IsEditable() ) return; </code>
-        /// <para>param: <paramref name="baseObject"/> TODO check base of object (allow modifiers)</para>
+        /// <para>param: <paramref name="baseObject"/> TODO check base of object (allow to work bellow modifiers)</para>
         /// <para>param: <paramref name="modPolyOrMesh"/> TODO check modifier of object (editable_poy and editable_mesh modifiers)</para>
         ///	</example></summary>
         public bool IsEditable(bool baseObject = false, bool modPolyOrMesh = false) {
 
+            Kernel.WriteLine("IsEditable > baseObject{0} modPolyOrMesh:{1}", baseObject, modPolyOrMesh);
             //Kernel.WriteLine("is mesh:{0} is poly{1}", IsClassOf(ClassID.EditableMesh), IsClassOf(ClassID.EditablePoly));
             return IsClassOf(ClassID.EditableMesh) || IsClassOf(ClassID.EditablePoly);
         }
@@ -286,8 +284,9 @@ namespace Micra.Core {
         public IMNMesh GetPolyMesh() => Object.GetIpolyObject(Kernel.Now).Mesh;
         public IMNMesh GetPolyMesh(TimeValue t) => Object.GetIpolyObject(t).Mesh;
 
-
-
+        internal void InvalidateObjCache() {
+            Kernel._Interface.InvalidateObCache(_IINode);
+        }
 
         //! \name Modifier Functions
         //@{

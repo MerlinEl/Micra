@@ -21,16 +21,16 @@ namespace Micra.Core {
         /// <returns></returns>
         public static float OToF(object o) {
             if ( o is float )
-                return ( float )o;
+                return (float)o;
             if ( o is double )
-                return ( float )( double )o;
+                return (float)(double)o;
             throw new Exception("Unrecognized floating point type " + o);
         }
 
         public static double ToDouble(float f) {
             //f = 5.2F;
             decimal dec = new decimal(f); //5.2
-            return ( double )dec; //5.2
+            return (double)dec; //5.2
         }
 
         public static double RadToDeg(double radians) {
@@ -67,13 +67,14 @@ namespace Micra.Core {
         /// <returns></returns>
         public static IEnumerable<TSource> DistinctBy<TSource, TKey>
             (this IEnumerable<TSource> source, Func<TSource, TKey> keySelector) {
-                    HashSet<TKey> seenKeys = new HashSet<TKey>();
-                    foreach ( TSource element in source ) {
-                        if ( seenKeys.Add(keySelector(element)) ) {
-                            yield return element;
-                        }
-                    }
+            HashSet<TKey> seenKeys = new HashSet<TKey>();
+            foreach ( TSource element in source ) {
+                if ( seenKeys.Add(keySelector(element)) ) {
+                    yield return element;
+                }
+            }
         }
+
     }
 
     /// <summary>
@@ -85,8 +86,8 @@ namespace Micra.Core {
     /// <typeparam name="IndexT"></typeparam>
     /// <typeparam name="ValueT"></typeparam>
     public class IndexedProperty<IndexT, ValueT> {
-        Action<IndexT, ValueT> setAction;
-        Func<IndexT, ValueT> getFunc;
+        readonly Action<IndexT, ValueT> setAction;
+        readonly Func<IndexT, ValueT> getFunc;
 
         public IndexedProperty(Func<IndexT, ValueT> getFunc, Action<IndexT, ValueT> setAction) {
             this.getFunc = getFunc;

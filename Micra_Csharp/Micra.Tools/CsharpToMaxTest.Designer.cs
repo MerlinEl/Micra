@@ -27,6 +27,7 @@
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.button5 = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.BtnClearExecute = new System.Windows.Forms.Button();
             this.CbxScriptList = new System.Windows.Forms.ComboBox();
             this.BtnExecute = new System.Windows.Forms.Button();
             this.BtnSelSimElements = new System.Windows.Forms.Button();
@@ -55,7 +56,7 @@
             this.CbxSuperClassOf = new System.Windows.Forms.ComboBox();
             this.ChkMacroRec = new System.Windows.Forms.CheckBox();
             this.button15 = new System.Windows.Forms.Button();
-            this.button14 = new System.Windows.Forms.Button();
+            this.BtnShowSelClass = new System.Windows.Forms.Button();
             this.ChkSelHidden = new System.Windows.Forms.CheckBox();
             this.button12 = new System.Windows.Forms.Button();
             this.button11 = new System.Windows.Forms.Button();
@@ -66,7 +67,6 @@
             this.button13 = new System.Windows.Forms.Button();
             this.button8 = new System.Windows.Forms.Button();
             this.button9 = new System.Windows.Forms.Button();
-            this.BtnClearExecute = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -116,6 +116,16 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Execute Max Script";
             // 
+            // BtnClearExecute
+            // 
+            this.BtnClearExecute.Location = new System.Drawing.Point(532, 19);
+            this.BtnClearExecute.Name = "BtnClearExecute";
+            this.BtnClearExecute.Size = new System.Drawing.Size(66, 23);
+            this.BtnClearExecute.TabIndex = 45;
+            this.BtnClearExecute.Text = "Clear";
+            this.BtnClearExecute.UseVisualStyleBackColor = true;
+            this.BtnClearExecute.Click += new System.EventHandler(this.BtnClearExecute_Click);
+            // 
             // CbxScriptList
             // 
             this.CbxScriptList.FormattingEnabled = true;
@@ -131,7 +141,7 @@
             this.BtnExecute.Name = "BtnExecute";
             this.BtnExecute.Size = new System.Drawing.Size(118, 23);
             this.BtnExecute.TabIndex = 6;
-            this.BtnExecute.Text = "EXECUTE";
+            this.BtnExecute.Text = "EXECUTE SCRIPT";
             this.BtnExecute.UseVisualStyleBackColor = true;
             this.BtnExecute.Click += new System.EventHandler(this.BtnExecute_Click);
             // 
@@ -173,7 +183,7 @@
             this.groupBox2.Controls.Add(this.CbxSuperClassOf);
             this.groupBox2.Controls.Add(this.ChkMacroRec);
             this.groupBox2.Controls.Add(this.button15);
-            this.groupBox2.Controls.Add(this.button14);
+            this.groupBox2.Controls.Add(this.BtnShowSelClass);
             this.groupBox2.Controls.Add(this.ChkSelHidden);
             this.groupBox2.Controls.Add(this.button12);
             this.groupBox2.Controls.Add(this.button11);
@@ -262,7 +272,7 @@
             this.button18.TabIndex = 38;
             this.button18.Text = "Poy - Mesh - All";
             this.button18.UseVisualStyleBackColor = true;
-            this.button18.Click += new System.EventHandler(this.button18_Click);
+            this.button18.Click += new System.EventHandler(this.Button18_Click);
             // 
             // BtnGetSceneObjects
             // 
@@ -369,7 +379,7 @@
             this.button4.TabIndex = 26;
             this.button4.Text = "Seselect Instances";
             this.button4.UseVisualStyleBackColor = true;
-            this.button4.Click += new System.EventHandler(this.Button4_Click_1);
+            this.button4.Click += new System.EventHandler(this.Button_SelInstances);
             // 
             // RbtSuperClassOf
             // 
@@ -401,7 +411,7 @@
             this.button16.TabIndex = 20;
             this.button16.Text = "Show Selection Parameters";
             this.button16.UseVisualStyleBackColor = true;
-            this.button16.Click += new System.EventHandler(this.Button16_Click);
+            this.button16.Click += new System.EventHandler(this.Button_ShowSelParams);
             // 
             // ChkClearSel
             // 
@@ -443,15 +453,15 @@
             this.button15.UseVisualStyleBackColor = true;
             this.button15.Click += new System.EventHandler(this.Button15_Click);
             // 
-            // button14
+            // BtnShowSelClass
             // 
-            this.button14.Location = new System.Drawing.Point(6, 133);
-            this.button14.Name = "button14";
-            this.button14.Size = new System.Drawing.Size(194, 23);
-            this.button14.TabIndex = 17;
-            this.button14.Text = "Show Slection Class";
-            this.button14.UseVisualStyleBackColor = true;
-            this.button14.Click += new System.EventHandler(this.Button14_Click);
+            this.BtnShowSelClass.Location = new System.Drawing.Point(6, 133);
+            this.BtnShowSelClass.Name = "BtnShowSelClass";
+            this.BtnShowSelClass.Size = new System.Drawing.Size(194, 23);
+            this.BtnShowSelClass.TabIndex = 17;
+            this.BtnShowSelClass.Text = "Show Slection Class";
+            this.BtnShowSelClass.UseVisualStyleBackColor = true;
+            this.BtnShowSelClass.Click += new System.EventHandler(this.Button_ShowSelClass);
             // 
             // ChkSelHidden
             // 
@@ -551,16 +561,6 @@
             this.button9.UseVisualStyleBackColor = true;
             this.button9.Click += new System.EventHandler(this.Button9_Click);
             // 
-            // BtnClearExecute
-            // 
-            this.BtnClearExecute.Location = new System.Drawing.Point(532, 19);
-            this.BtnClearExecute.Name = "BtnClearExecute";
-            this.BtnClearExecute.Size = new System.Drawing.Size(66, 23);
-            this.BtnClearExecute.TabIndex = 45;
-            this.BtnClearExecute.Text = "Clear";
-            this.BtnClearExecute.UseVisualStyleBackColor = true;
-            this.BtnClearExecute.Click += new System.EventHandler(this.BtnClearExecute_Click);
-            // 
             // CsharpToMaxTest
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -598,7 +598,7 @@
         private System.Windows.Forms.ComboBox CbxClassOf;
         private System.Windows.Forms.CheckBox ChkClearSel;
         private System.Windows.Forms.CheckBox ChkSelHidden;
-        private System.Windows.Forms.Button button14;
+        private System.Windows.Forms.Button BtnShowSelClass;
         private System.Windows.Forms.Button button15;
         private System.Windows.Forms.CheckBox ChkMacroRec;
         private System.Windows.Forms.Button button16;

@@ -1,7 +1,11 @@
 ﻿using Autodesk.Max;
-using Autodesk.Max.Wrappers;
+using Micra.Tools.Properties;
+using System.Data;
 using System.IO;
 using System.Linq;
+using System.Reflection;
+using System.Xml;
+using System.Xml.Linq;
 
 namespace Micra.Tools {
     class MxFile {
@@ -50,7 +54,7 @@ namespace Micra.Tools {
             IBitmapInfo bitmapInfo = global.BitmapInfo.Create();
             bitmapInfo.SetName(path);
             global.TheManager.LoadInto(bitmapInfo, bitmap, false);
-            //MxSet.LogLi("Height of image:" + bitmap.Height.ToString());
+            //Kernel.WriteLine("Height of image:" + bitmap.Height.ToString());
         }
 
         public static string GetSolutionDirectory(string currentPath = null) { //not used
@@ -73,6 +77,40 @@ namespace Micra.Tools {
         }
 
         #endregion
+
+        /// <summary> Read XML File from Resources
+        ///     <example> 
+        ///         <code>
+        ///             example: XDocument MaxActionsXML = MxFile.GetXMLFromResources("MaxScriptActions.xml");
+        ///         </code>
+        ///     </example> 
+        ///     <para>param: <paramref name="xmlFname"/> is XML file name</para>
+        /// </summary>
+        internal static XDocument GetXMLFromResources(string xmlFname) {
+
+            DataSet ds = new DataSet();
+            XDocument doc = XDocument.Parse(Resources.MaxScriptActions);
+            ds.ReadXml(doc.CreateReader());
+            return doc;
+        }
+
+        /// <summary> Get MaxScript Command From XML by Name
+        ///     <example> 
+        ///         <code>
+        ///             example: MxFile.GetMaxScriptFromXML(MaxActionsXML, "SelFaces")
+        ///         </code>
+        ///     </example>
+        ///     <para>param: <paramref name="xmlKey"/> is Command Name String</para>
+        /// </summary>
+        internal static string GetMaxScriptFromXML(XDocument xml, string xmlKey) {
+
+            var list = xml.Root.Elements("item");
+            var node = list.Cast<XElement>()
+               .Where(n => n.FirstAttribute.Value == xmlKey)
+               .Select(n => n)
+               .FirstOrDefault();
+            return node != null ? node.Value.ToString().TrimStart('\r', '\n') : "undefined";
+        }
     }
 }
 

@@ -45,9 +45,7 @@ namespace Micra.Core {
         public override SceneObject Create() {
             SceneObject o = Animatable.CreatePluginInstance<SceneObject>(scid, cid);
             Node n = Node.Create(o);
-            if ( n == null )
-                throw new Exception("Failed to create object node");
-            o._Node = n;
+            o._Node = n ?? throw new Exception("Failed to create object node");
             Kernel.RedrawViews();
             return o;
         }

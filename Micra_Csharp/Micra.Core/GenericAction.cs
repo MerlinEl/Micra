@@ -12,10 +12,10 @@ namespace Micra.Core {
     /// Used for declaring action items. 
     /// </summary>
     public class GenericAction : Autodesk.Max.Plugins.ActionItem {
-        string name;
-        string category;
-        string description;
-        Action action;
+        readonly string name;
+        readonly string category;
+        readonly string description;
+        readonly Action action;
 
         public GenericAction(string name, string category, string description, Action action) {
             this.name = name;

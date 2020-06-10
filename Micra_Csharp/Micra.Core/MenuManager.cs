@@ -10,7 +10,7 @@ using System.Collections.Generic;
 
 namespace Micra.Core {
     public static class MenuManager {
-        static IIMenuManager mgr;
+        static readonly IIMenuManager mgr;
 
         static MenuManager() {
             mgr = Kernel._Interface.MenuManager;
@@ -41,19 +41,20 @@ namespace Micra.Core {
             if ( menu != null ) {
                 mgr.UnRegisterMenu(menu._Menu);
                 Kernel._Global.ReleaseIMenu(menu._Menu);
-                menu = null;
             }
 
-            menu = new Menu();
-            menu.Title = name;
+            menu = new Menu {
+                Title = name
+            };
             RegisterMenu(menu);
 
             foreach ( var a in actions )
                 menu.AddItem(new MenuItem(a));
 
-            MenuItem item = new MenuItem();
-            item.Title = name;
-            item.SubMenu = menu;
+            MenuItem item = new MenuItem {
+                Title = name,
+                SubMenu = menu
+            };
             MainMenuBar.AddItem(item);
             UpdateMenuBar();
             return menu;
@@ -61,7 +62,7 @@ namespace Micra.Core {
     }
 
     public class Menu {
-        IIMenu menu;
+        readonly IIMenu menu;
 
         public IIMenu _Menu { get { return menu; } }
 
@@ -113,7 +114,7 @@ namespace Micra.Core {
     }
 
     public class MenuItem {
-        IIMenuItem item;
+        readonly IIMenuItem item;
         public IIMenuItem _Item { get { return item; } }
         public MenuItem(IIMenuItem item) { this.item = item; }
         public MenuItem() : this(Kernel._Global.IMenuItem) { }
