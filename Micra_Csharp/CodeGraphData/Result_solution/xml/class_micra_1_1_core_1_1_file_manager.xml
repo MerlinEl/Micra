@@ -1,0 +1,247 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
+  <compounddef id="class_micra_1_1_core_1_1_file_manager" kind="class" prot="public">
+    <compoundname>Micra::Core::FileManager</compoundname>
+      <sectiondef kind="property">
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_file_manager_1a46c5d178c514dc6b8acd5c6fbcf8a527" prot="public" static="yes" readable="no" writable="no" gettable="yes" settable="no">
+        <type>string</type>
+        <definition>string Micra.Core.FileManager.CurFileName</definition>
+        <argsstring></argsstring>
+        <name>CurFileName</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/FileManager.cs" line="30" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/FileManager.cs" bodystart="30" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_file_manager_1a51de3ec3e7de269a7e702ef06abffa32" prot="public" static="yes" readable="no" writable="no" gettable="yes" settable="no">
+        <type>string</type>
+        <definition>string Micra.Core.FileManager.CurFilePath</definition>
+        <argsstring></argsstring>
+        <name>CurFilePath</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/FileManager.cs" line="31" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/FileManager.cs" bodystart="31" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_file_manager_1aaf83d12125abd41b4bf6ddcc740778f2" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>static void Micra.Core.FileManager.Open</definition>
+        <argsstring>()</argsstring>
+        <name>Open</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/FileManager.cs" line="17" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/FileManager.cs" bodystart="17" bodyend="17"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_file_manager_1a1463594601e32cb9fca29e2c0f0b82e7" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>static bool Micra.Core.FileManager.Save</definition>
+        <argsstring>()</argsstring>
+        <name>Save</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/FileManager.cs" line="18" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/FileManager.cs" bodystart="18" bodyend="18"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_file_manager_1a83c24dea7d5496f27bf04584062dd1f8" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>static void Micra.Core.FileManager.SaveSelected</definition>
+        <argsstring>()</argsstring>
+        <name>SaveSelected</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/FileManager.cs" line="19" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/FileManager.cs" bodystart="19" bodyend="19"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_file_manager_1ac6de7a26dc4871c02f4f8107db12ae60" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>static void Micra.Core.FileManager.SaveSelected</definition>
+        <argsstring>(string s)</argsstring>
+        <name>SaveSelected</name>
+        <param>
+          <type>string</type>
+          <declname>s</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/FileManager.cs" line="20" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/FileManager.cs" bodystart="20" bodyend="20"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_file_manager_1a11b2ae19b0e281b6adb6f0437fab0e6b" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>static bool Micra.Core.FileManager.SaveAs</definition>
+        <argsstring>(string s)</argsstring>
+        <name>SaveAs</name>
+        <param>
+          <type>string</type>
+          <declname>s</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/FileManager.cs" line="21" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/FileManager.cs" bodystart="21" bodyend="21"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_file_manager_1a212b3785af501ff6c9b9d88c7126bc06" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>static bool Micra.Core.FileManager.Open</definition>
+        <argsstring>(string s)</argsstring>
+        <name>Open</name>
+        <param>
+          <type>string</type>
+          <declname>s</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/FileManager.cs" line="22" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/FileManager.cs" bodystart="22" bodyend="22"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_file_manager_1a7e015f0c8b84c6666022816f9b3cfab8" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>static void Micra.Core.FileManager.Merge</definition>
+        <argsstring>()</argsstring>
+        <name>Merge</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/FileManager.cs" line="23" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/FileManager.cs" bodystart="23" bodyend="23"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_file_manager_1a73e34ef78c7f112a082d29a6875eb54e" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>static void Micra.Core.FileManager.Hold</definition>
+        <argsstring>()</argsstring>
+        <name>Hold</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/FileManager.cs" line="24" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/FileManager.cs" bodystart="24" bodyend="24"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_file_manager_1afa0e790607272af5a2b1c8f30119b03c" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>static void Micra.Core.FileManager.Fetch</definition>
+        <argsstring>()</argsstring>
+        <name>Fetch</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/FileManager.cs" line="25" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/FileManager.cs" bodystart="25" bodyend="25"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_file_manager_1aa5c113bdee64ef2215afde0c5c41b0da" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>static bool Micra.Core.FileManager.Import</definition>
+        <argsstring>()</argsstring>
+        <name>Import</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/FileManager.cs" line="26" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/FileManager.cs" bodystart="26" bodyend="26"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_file_manager_1a27e9d7e8a62139aa156ab0687a6c34f1" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>static bool Micra.Core.FileManager.Export</definition>
+        <argsstring>()</argsstring>
+        <name>Export</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/FileManager.cs" line="27" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/FileManager.cs" bodystart="27" bodyend="27"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_file_manager_1ab90447c0d5c034044254583e7a6830ee" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>static bool Micra.Core.FileManager.Import</definition>
+        <argsstring>(string s)</argsstring>
+        <name>Import</name>
+        <param>
+          <type>string</type>
+          <declname>s</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/FileManager.cs" line="28" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/FileManager.cs" bodystart="28" bodyend="28"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_file_manager_1a3b17834531c9f11b4870f5c93d0577d6" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>static bool Micra.Core.FileManager.Export</definition>
+        <argsstring>(string s)</argsstring>
+        <name>Export</name>
+        <param>
+          <type>string</type>
+          <declname>s</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/FileManager.cs" line="29" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/FileManager.cs" bodystart="29" bodyend="29"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Contains global functions related to working with files. </para>    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/FileManager.cs" line="16" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/FileManager.cs" bodystart="16" bodyend="32"/>
+    <listofallmembers>
+      <member refid="class_micra_1_1_core_1_1_file_manager_1a46c5d178c514dc6b8acd5c6fbcf8a527" prot="public" virt="non-virtual"><scope>Micra::Core::FileManager</scope><name>CurFileName</name></member>
+      <member refid="class_micra_1_1_core_1_1_file_manager_1a51de3ec3e7de269a7e702ef06abffa32" prot="public" virt="non-virtual"><scope>Micra::Core::FileManager</scope><name>CurFilePath</name></member>
+      <member refid="class_micra_1_1_core_1_1_file_manager_1a27e9d7e8a62139aa156ab0687a6c34f1" prot="public" virt="non-virtual"><scope>Micra::Core::FileManager</scope><name>Export</name></member>
+      <member refid="class_micra_1_1_core_1_1_file_manager_1a3b17834531c9f11b4870f5c93d0577d6" prot="public" virt="non-virtual"><scope>Micra::Core::FileManager</scope><name>Export</name></member>
+      <member refid="class_micra_1_1_core_1_1_file_manager_1afa0e790607272af5a2b1c8f30119b03c" prot="public" virt="non-virtual"><scope>Micra::Core::FileManager</scope><name>Fetch</name></member>
+      <member refid="class_micra_1_1_core_1_1_file_manager_1a73e34ef78c7f112a082d29a6875eb54e" prot="public" virt="non-virtual"><scope>Micra::Core::FileManager</scope><name>Hold</name></member>
+      <member refid="class_micra_1_1_core_1_1_file_manager_1aa5c113bdee64ef2215afde0c5c41b0da" prot="public" virt="non-virtual"><scope>Micra::Core::FileManager</scope><name>Import</name></member>
+      <member refid="class_micra_1_1_core_1_1_file_manager_1ab90447c0d5c034044254583e7a6830ee" prot="public" virt="non-virtual"><scope>Micra::Core::FileManager</scope><name>Import</name></member>
+      <member refid="class_micra_1_1_core_1_1_file_manager_1a7e015f0c8b84c6666022816f9b3cfab8" prot="public" virt="non-virtual"><scope>Micra::Core::FileManager</scope><name>Merge</name></member>
+      <member refid="class_micra_1_1_core_1_1_file_manager_1aaf83d12125abd41b4bf6ddcc740778f2" prot="public" virt="non-virtual"><scope>Micra::Core::FileManager</scope><name>Open</name></member>
+      <member refid="class_micra_1_1_core_1_1_file_manager_1a212b3785af501ff6c9b9d88c7126bc06" prot="public" virt="non-virtual"><scope>Micra::Core::FileManager</scope><name>Open</name></member>
+      <member refid="class_micra_1_1_core_1_1_file_manager_1a1463594601e32cb9fca29e2c0f0b82e7" prot="public" virt="non-virtual"><scope>Micra::Core::FileManager</scope><name>Save</name></member>
+      <member refid="class_micra_1_1_core_1_1_file_manager_1a11b2ae19b0e281b6adb6f0437fab0e6b" prot="public" virt="non-virtual"><scope>Micra::Core::FileManager</scope><name>SaveAs</name></member>
+      <member refid="class_micra_1_1_core_1_1_file_manager_1a83c24dea7d5496f27bf04584062dd1f8" prot="public" virt="non-virtual"><scope>Micra::Core::FileManager</scope><name>SaveSelected</name></member>
+      <member refid="class_micra_1_1_core_1_1_file_manager_1ac6de7a26dc4871c02f4f8107db12ae60" prot="public" virt="non-virtual"><scope>Micra::Core::FileManager</scope><name>SaveSelected</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

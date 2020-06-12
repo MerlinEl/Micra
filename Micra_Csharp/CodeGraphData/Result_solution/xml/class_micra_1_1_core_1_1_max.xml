@@ -1,0 +1,105 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
+  <compounddef id="class_micra_1_1_core_1_1_max" kind="class" prot="public">
+    <compoundname>Micra::Core::Max</compoundname>
+      <sectiondef kind="public-static-attrib">
+      <memberdef kind="variable" id="class_micra_1_1_core_1_1_max_1a486651cc0ca97d434ada12b4f753e853" prot="public" static="yes" mutable="no">
+        <type>int</type>
+        <definition>int Micra.Core.Max.SubObjectLevel</definition>
+        <argsstring></argsstring>
+        <name>SubObjectLevel</name>
+        <initializer>=&gt; Kernel._Interface.SubObjectLevel</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Max.cs" line="7" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Max.cs" bodystart="7" bodyend="-1"/>
+        <referencedby refid="class_micra_1_1_core_1_1_scene_object_1a3f0b7e599ef13e1ae65428388308f955" compoundref="_scene_object_8cs" startline="222" endline="233">Micra.Core.SceneObject.HideGeometry</referencedby>
+        <referencedby refid="class_micra_1_1_core_1_1_scene_object_1ac53565a7b6abba34c3ef11183247dea5" compoundref="_scene_object_8cs" startline="255" endline="266">Micra.Core.SceneObject.UnhideGeometry</referencedby>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_max_1af0817d59183cdad58e612c474bd7326e" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void Micra.Core.Max.LogClear</definition>
+        <argsstring>(bool macroRec=false)</argsstring>
+        <name>LogClear</name>
+        <param>
+          <type>bool</type>
+          <declname>macroRec</declname>
+          <defval>false</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Max.cs" line="4" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_max_1aeeade19b0d9c0b8c4ccc99c7093e59f7" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void Micra.Core.Max.Log</definition>
+        <argsstring>(string str)</argsstring>
+        <name>Log</name>
+        <param>
+          <type>string</type>
+          <declname>str</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Max.cs" line="5" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_max_1a352e1afdb0932a3e2f4fef23d60e44c6" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void Micra.Core.Max.Log</definition>
+        <argsstring>(string str, params object[] args)</argsstring>
+        <name>Log</name>
+        <param>
+          <type>string</type>
+          <declname>str</declname>
+        </param>
+        <param>
+          <type>params object[]</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Max.cs" line="6" column="1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para><ref refid="class_micra_1_1_core_1_1_max" kindref="compound">Max</ref> Global Methods - Variables </para>    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="220">
+        <label>Micra.Core.Max</label>
+        <link refid="class_micra_1_1_core_1_1_max"/>
+        <childnode refid="221" relation="usage">
+          <edgelabel>SubObjectLevel</edgelabel>
+        </childnode>
+      </node>
+      <node id="221">
+        <label>static</label>
+      </node>
+    </collaborationgraph>
+    <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Max.cs" line="3" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Max.cs" bodystart="3" bodyend="8"/>
+    <listofallmembers>
+      <member refid="class_micra_1_1_core_1_1_max_1aeeade19b0d9c0b8c4ccc99c7093e59f7" prot="public" virt="non-virtual"><scope>Micra::Core::Max</scope><name>Log</name></member>
+      <member refid="class_micra_1_1_core_1_1_max_1a352e1afdb0932a3e2f4fef23d60e44c6" prot="public" virt="non-virtual"><scope>Micra::Core::Max</scope><name>Log</name></member>
+      <member refid="class_micra_1_1_core_1_1_max_1af0817d59183cdad58e612c474bd7326e" prot="public" virt="non-virtual"><scope>Micra::Core::Max</scope><name>LogClear</name></member>
+      <member refid="class_micra_1_1_core_1_1_max_1a486651cc0ca97d434ada12b4f753e853" prot="public" virt="non-virtual"><scope>Micra::Core::Max</scope><name>SubObjectLevel</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

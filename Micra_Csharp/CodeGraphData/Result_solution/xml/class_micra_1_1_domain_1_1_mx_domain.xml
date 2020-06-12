@@ -1,0 +1,275 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
+  <compounddef id="class_micra_1_1_domain_1_1_mx_domain" kind="class" prot="public">
+    <compoundname>Micra::Domain::MxDomain</compoundname>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="class_micra_1_1_domain_1_1_mx_domain_1a9ff61243148d704610ea9bfdc40ea352" prot="private" static="no" mutable="no">
+        <type>AppDomain</type>
+        <definition>AppDomain Micra.Domain.MxDomain.appDomain</definition>
+        <argsstring></argsstring>
+        <name>appDomain</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Domain/MxDomain.cs" line="12" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Domain/MxDomain.cs" bodystart="12" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="class_micra_1_1_domain_1_1_mx_domain_1aca9e5afefcc71e35a46dc1d7124db01c" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool Micra.Domain.MxDomain.Debug</definition>
+        <argsstring></argsstring>
+        <name>Debug</name>
+        <initializer>= false</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Domain/MxDomain.cs" line="14" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Domain/MxDomain.cs" bodystart="14" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_micra_1_1_domain_1_1_mx_domain_1a4211ae7397dc0aaefdbc3be636bf8761" prot="public" static="no" mutable="no">
+        <type>string</type>
+        <definition>string Micra.Domain.MxDomain.FriendlyName</definition>
+        <argsstring></argsstring>
+        <name>FriendlyName</name>
+        <initializer>=&gt; appDomain.FriendlyName</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Domain/MxDomain.cs" line="15" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Domain/MxDomain.cs" bodystart="15" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="property">
+      <memberdef kind="property" id="class_micra_1_1_domain_1_1_mx_domain_1a0ba94b4b2bba8691d7bbc72ad68b2fda" prot="public" static="no" readable="no" writable="no" gettable="yes" settable="no">
+        <type>string</type>
+        <definition>string Micra.Domain.MxDomain.AssemblyDirectory</definition>
+        <argsstring></argsstring>
+        <name>AssemblyDirectory</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Domain/MxDomain.cs" line="60" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Domain/MxDomain.cs" bodystart="60" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="class_micra_1_1_domain_1_1_mx_domain_1a252a2d6dd2c179970cd506b81f79a0b4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Micra.Domain.MxDomain.MxDomain</definition>
+        <argsstring>(string domainName)</argsstring>
+        <name>MxDomain</name>
+        <param>
+          <type>string</type>
+          <declname>domainName</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Domain/MxDomain.cs" line="17" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_domain_1_1_mx_domain_1a720e852a22898f8a61b146260569f5e9" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Micra.Domain.MxDomain.DestroyDomain</definition>
+        <argsstring>()</argsstring>
+        <name>DestroyDomain</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Domain/MxDomain.cs" line="40" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Domain/MxDomain.cs" bodystart="40" bodyend="48"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_domain_1_1_mx_domain_1a6e657037333cb514785acd55844c1a33" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Micra.Domain.MxDomain.ShowUi</definition>
+        <argsstring>(Form owner)</argsstring>
+        <name>ShowUi</name>
+        <param>
+          <type>Form</type>
+          <declname>owner</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Domain/MxDomain.cs" line="58" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_domain_1_1_mx_domain_1adb8eb7c71ba2fdb81b2371529a5c0e17" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool Micra.Domain.MxDomain.LoadAssembly</definition>
+        <argsstring>(string assemblyFilename)</argsstring>
+        <name>LoadAssembly</name>
+        <param>
+          <type>string</type>
+          <declname>assemblyFilename</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Domain/MxDomain.cs" line="102" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Domain/MxDomain.cs" bodystart="102" bodyend="136"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_domain_1_1_mx_domain_1a95dd372011c8ff79b9f63cbe74fe1edc" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>Assembly[]</type>
+        <definition>Assembly [] Micra.Domain.MxDomain.GetAssemblies</definition>
+        <argsstring>()</argsstring>
+        <name>GetAssemblies</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Domain/MxDomain.cs" line="139" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_domain_1_1_mx_domain_1aa30891636248569289a8bf380d016322" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Micra.Domain.MxDomain.ShowLoadedAssemblies</definition>
+        <argsstring>()</argsstring>
+        <name>ShowLoadedAssemblies</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Domain/MxDomain.cs" line="140" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Domain/MxDomain.cs" bodystart="140" bodyend="148"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_domain_1_1_mx_domain_1a3871d2ad2db0f42f49204853c82d02bf" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>Assembly</type>
+        <definition>Assembly Micra.Domain.MxDomain.GetAssembly</definition>
+        <argsstring>(AssemblyName assemblyName)</argsstring>
+        <name>GetAssembly</name>
+        <param>
+          <type>AssemblyName</type>
+          <declname>assemblyName</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Domain/MxDomain.cs" line="151" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Domain/MxDomain.cs" bodystart="151" bodyend="158"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_domain_1_1_mx_domain_1ae077d4f9d5999779c2b27e9003cc4968" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>Assembly</type>
+        <definition>Assembly Micra.Domain.MxDomain.GetLatestAssembly</definition>
+        <argsstring>(string assemblyName)</argsstring>
+        <name>GetLatestAssembly</name>
+        <param>
+          <type>string</type>
+          <declname>assemblyName</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Domain/MxDomain.cs" line="161" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Domain/MxDomain.cs" bodystart="161" bodyend="180"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-func">
+      <memberdef kind="function" id="class_micra_1_1_domain_1_1_mx_domain_1ad980550b9794b39068b6899662347dc7" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Micra.Domain.MxDomain.CrteateDomain</definition>
+        <argsstring>(string domainName)</argsstring>
+        <name>CrteateDomain</name>
+        <param>
+          <type>string</type>
+          <declname>domainName</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Domain/MxDomain.cs" line="21" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Domain/MxDomain.cs" bodystart="21" bodyend="38"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="class_micra_1_1_domain_1_1_mx_domain_1a81598a1968d5254cfebd4bcbe4ba6f96" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="class_micra_1_1_domain_1_1_mx_domain" kindref="compound">MxDomain</ref></type>
+        <definition>static MxDomain Micra.Domain.MxDomain.FromDomain</definition>
+        <argsstring>(AppDomain domain)</argsstring>
+        <name>FromDomain</name>
+        <param>
+          <type>AppDomain</type>
+          <declname>domain</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Domain/MxDomain.cs" line="50" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Domain/MxDomain.cs" bodystart="50" bodyend="56"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-static-func">
+      <memberdef kind="function" id="class_micra_1_1_domain_1_1_mx_domain_1add149c2eb36a7caa83fddb6ba4e68d02" prot="private" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>Assembly</type>
+        <definition>static Assembly Micra.Domain.MxDomain.CurrentDomain_AssemblyResolve</definition>
+        <argsstring>(object sender, ResolveEventArgs args)</argsstring>
+        <name>CurrentDomain_AssemblyResolve</name>
+        <param>
+          <type>object</type>
+          <declname>sender</declname>
+        </param>
+        <param>
+          <type>ResolveEventArgs</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Domain/MxDomain.cs" line="85" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Domain/MxDomain.cs" bodystart="85" bodyend="99"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Domain/MxDomain.cs" line="11" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Domain/MxDomain.cs" bodystart="11" bodyend="181"/>
+    <listofallmembers>
+      <member refid="class_micra_1_1_domain_1_1_mx_domain_1a9ff61243148d704610ea9bfdc40ea352" prot="private" virt="non-virtual"><scope>Micra::Domain::MxDomain</scope><name>appDomain</name></member>
+      <member refid="class_micra_1_1_domain_1_1_mx_domain_1a0ba94b4b2bba8691d7bbc72ad68b2fda" prot="public" virt="non-virtual"><scope>Micra::Domain::MxDomain</scope><name>AssemblyDirectory</name></member>
+      <member refid="class_micra_1_1_domain_1_1_mx_domain_1ad980550b9794b39068b6899662347dc7" prot="private" virt="non-virtual"><scope>Micra::Domain::MxDomain</scope><name>CrteateDomain</name></member>
+      <member refid="class_micra_1_1_domain_1_1_mx_domain_1add149c2eb36a7caa83fddb6ba4e68d02" prot="private" virt="non-virtual"><scope>Micra::Domain::MxDomain</scope><name>CurrentDomain_AssemblyResolve</name></member>
+      <member refid="class_micra_1_1_domain_1_1_mx_domain_1aca9e5afefcc71e35a46dc1d7124db01c" prot="public" virt="non-virtual"><scope>Micra::Domain::MxDomain</scope><name>Debug</name></member>
+      <member refid="class_micra_1_1_domain_1_1_mx_domain_1a720e852a22898f8a61b146260569f5e9" prot="public" virt="non-virtual"><scope>Micra::Domain::MxDomain</scope><name>DestroyDomain</name></member>
+      <member refid="class_micra_1_1_domain_1_1_mx_domain_1a4211ae7397dc0aaefdbc3be636bf8761" prot="public" virt="non-virtual"><scope>Micra::Domain::MxDomain</scope><name>FriendlyName</name></member>
+      <member refid="class_micra_1_1_domain_1_1_mx_domain_1a81598a1968d5254cfebd4bcbe4ba6f96" prot="public" virt="non-virtual"><scope>Micra::Domain::MxDomain</scope><name>FromDomain</name></member>
+      <member refid="class_micra_1_1_domain_1_1_mx_domain_1a95dd372011c8ff79b9f63cbe74fe1edc" prot="public" virt="non-virtual"><scope>Micra::Domain::MxDomain</scope><name>GetAssemblies</name></member>
+      <member refid="class_micra_1_1_domain_1_1_mx_domain_1a3871d2ad2db0f42f49204853c82d02bf" prot="public" virt="non-virtual"><scope>Micra::Domain::MxDomain</scope><name>GetAssembly</name></member>
+      <member refid="class_micra_1_1_domain_1_1_mx_domain_1ae077d4f9d5999779c2b27e9003cc4968" prot="public" virt="non-virtual"><scope>Micra::Domain::MxDomain</scope><name>GetLatestAssembly</name></member>
+      <member refid="class_micra_1_1_domain_1_1_mx_domain_1adb8eb7c71ba2fdb81b2371529a5c0e17" prot="public" virt="non-virtual"><scope>Micra::Domain::MxDomain</scope><name>LoadAssembly</name></member>
+      <member refid="class_micra_1_1_domain_1_1_mx_domain_1a252a2d6dd2c179970cd506b81f79a0b4" prot="public" virt="non-virtual"><scope>Micra::Domain::MxDomain</scope><name>MxDomain</name></member>
+      <member refid="class_micra_1_1_domain_1_1_mx_domain_1aa30891636248569289a8bf380d016322" prot="public" virt="non-virtual"><scope>Micra::Domain::MxDomain</scope><name>ShowLoadedAssemblies</name></member>
+      <member refid="class_micra_1_1_domain_1_1_mx_domain_1a6e657037333cb514785acd55844c1a33" prot="public" virt="non-virtual"><scope>Micra::Domain::MxDomain</scope><name>ShowUi</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -9,37 +9,6 @@ using static Micra.Core.Poly;
 namespace Micra.Core {
     public class GeoOps {
 
-        public static double GetFaceArea(Mesh m, Face f) => m.Area(f);
-        public static double GetFaceArea(Poly m, Ngon f) => m.Area(f);
-        private static double GetFaceArea(IMesh imesh, IFace face) {
-
-            Point3 corner = new Point3(imesh.GetVert((int)face.V[0]));
-            Vector3 a = Vector3.FromPoints(new Point3(imesh.GetVert((int)face.V[1])), corner);
-            Vector3 b = Vector3.FromPoints(new Point3(imesh.GetVert((int)face.V[2])), corner);
-            return Vector3.Cross(a, b).Length / 2.0;
-        }
-        public static double GetObjectArea(IMNMesh m) {
-
-            IMesh imesh = Kernel._Global.Mesh.Create();
-            m.OutToTri(imesh);
-            return imesh.Faces.Sum(f => GetFaceArea(imesh, f));
-        }
-        public static double GetObjectArea(Mesh m) => m.faces.Sum(f => GetFaceArea(m, f));
-        public static double GetObjectArea(Node node) {
-
-            if ( node.IsClassOf(ClassID.EditableMesh) ) {
-
-                return GetObjectArea(node.GetMesh());
-
-            } else if ( node.IsClassOf(ClassID.EditablePoly) ) {
-
-                return GetObjectArea(node.GetPolyMesh());
-
-            } else {
-
-                return -1;
-            }
-        }
 
         public static double GetEdgeLength(IMesh m, int e) { //not used //not tested
 
@@ -56,134 +25,30 @@ namespace Micra.Core {
             Point3 p1 = new Point3(vert1.P);
             Point3 p2 = new Point3(vert2.P);
             double dist = Point3.Distance(p1, p2);
-            Kernel.WriteLine("Edge:{0} Verts:#({1}, {2}) Length:{3}", ei, edge.V1, edge.V2, dist);
+            Max.Log("Edge:{0} Verts:#({1}, {2}) Length:{3}", ei, edge.V1, edge.V2, dist);
             return dist;
         }
 
-        public static List<int> GetSelectedFaces(IMesh m) { //im:Autodesk.Max.Wrappers.Mesh
-
-            List<int> fsel = new List<int>() { };
-            m.FaceSel.IEnumerable().ForEach((item, index) => {
-
-                if ( item == 1 ) fsel.Add(index); //+3DsMax count + 1
-            });
-            return fsel;
-        }
-
-        public static List<int> GetSelectedFaces(IMNMesh m) { //pm:Autodesk.Max.Wrappers.MNMesh
-
-            List<int> fsel = new List<int>() { };
-            IBitArray ba = Kernel._Global.BitArray.Create();
-            m.GetFaceSel(ba);
-            ba.IEnumerable().ForEach((item, index) => {
-
-                if ( item == 1 ) fsel.Add(index); //+3DsMax count + 1
-            });
-            return fsel;
-        }
-
-        public static List<int> GetSelectedEdges(Node node) {
-
-            if ( node.IsClassOf(ClassID.EditableMesh) ) {
-
-                return GetSelectedEdges(node.GetImesh());
-
-            } else if ( node.IsClassOf(ClassID.EditablePoly) ) {
-
-                return GetSelectedEdges(node.GetPolyMesh());
-
-            } else { //TODO read Modifiers
-
-                return null;
-            }
-        }
-
-        public static List<int> GetSelectedEdges(IMesh m) {
-
-            List<int> esel = new List<int>() { };
-            m.EdgeSel.IEnumerable().ForEach((item, index) => {
-
-                if ( item == 1 ) esel.Add(index); //+3DsMax count + 1
-            });
-            return esel;
-        }
-
-        public static List<int> GetSelectedEdges(IMNMesh m) {
-
-            List<int> esel = new List<int>() { };
-            IBitArray ba = Kernel._Global.BitArray.Create();
-            m.GetEdgeSel(ba);
-            ba.IEnumerable().ForEach((item, index) => {
-
-                if ( item == 1 ) esel.Add(index); //+3DsMax count + 1
-            });
-            return esel;
-        }
-
-        public static List<int> GetSelectedVerts(IMesh m) {
-
-            List<int> vsel = new List<int>() { };
-            m.VertSel.IEnumerable().ForEach((item, index) => {
-
-                if ( item == 1 ) vsel.Add(index); //+3DsMax count + 1
-            });
-            return vsel;
-        }
-
-        public static List<int> GetSelectedVerts(IMNMesh m) {
-
-            List<int> vsel = new List<int>() { };
-            IBitArray ba = Kernel._Global.BitArray.Create();
-            m.GetVertexSel(ba);
-            ba.IEnumerable().ForEach((item, index) => {
-
-                if ( item == 1 ) vsel.Add(index); //+3DsMax count + 1
-            });
-            return vsel;
-        }
 
         public static void SelectSimillarFaces(Node node) {
 
-            Kernel.WriteLine("SelectSimillarFaces > The obj:{0}", node.Name);
+            Max.Log("SelectSimillarFaces > The obj:{0}", node.Name);
             List<double> source_volumes = new List<double>() { };
             throw new NotImplementedException();
         }
 
         public static void SelectSimillarEdges(Node node) {
 
-            Kernel.WriteLine("SelectSimillarEdges > The obj:{0}", node.Name);
-            List<double> source_volumes = new List<double>() { };
-            if ( node.IsClassOf(ClassID.EditableMesh) ) {
-
-                IMesh im = node.GetImesh();
-                var esel_m = GetSelectedEdges(im);
-                Kernel.WriteLine("\tSel edges:{0}", esel_m.Count);
-                //collect selected edges volume
-                source_volumes = esel_m
-                    .Select(n => GetEdgeLength(im, n)).Distinct()
+            Max.Log("SelectSimillarEdges > The obj:{0}", node.Name);
+            var esel_m = node.Object.GetSelectedEdges();
+            List<double> source_volumes = esel_m
+                    .Select(i => node.Object.GetEdgeLength(i)).Distinct()
                     .ToList();
-
-
-            } else if ( node.IsClassOf(ClassID.EditablePoly) ) {
-
-                IMNMesh imn = node.GetPolyMesh();
-                var esel_p = GetSelectedEdges(imn);
-                Kernel.WriteLine("\tSel edges:{0}", esel_p.Count);
-                //collect selected edges volume
-                source_volumes = esel_p
-                    .Select(n => GetEdgeLength(imn, n)).Distinct()
-                    .ToList();
-
-            } else { //TODO read Modifiers
-
-
-            }
-
-            Kernel.WriteLine("\t({0}) Volumes:{1}", source_volumes.Count, String.Join("\n\t\t", source_volumes));
+            Max.Log("\t({0}) Volumes:{1}", source_volumes.Count, String.Join("\n\t\t", source_volumes));
 
 
             /*IEnumerable<Node> allEdges = GetAllEdges();
-            Kernel.WriteLine("\tAll nodes:{0}", allNodes.Count());
+            Max.Log("\tAll nodes:{0}", allNodes.Count());
 
             //get geometry objects with similar volume
             List<Node> matchVolumeNodes = allNodes
@@ -195,68 +60,13 @@ namespace Micra.Core {
                 .Select(n => n)
                 .ToList();
 
-            Kernel.WriteLine("\tobjects count:{0}", matchVolumeNodes.Count());
+            Max.Log("\tobjects count:{0}", matchVolumeNodes.Count());
 
             //execute action with undo enabled
             Kernel._TheHold.Begin();
             SelectNodes(matchVolumeNodes, true);
             Kernel._TheHold.Accept("Select Simillar");
             Kernel._TheHold.End();*/
-        }
-
-        public static void HideGeometry(Node n, bool selected) {
-            //Based on SubobjectLevel
-            switch ( Kernel._Interface.SubObjectLevel ) {
-
-                case 1: break;
-                case 2: break;
-                case 3: break;
-                case 4: break;
-                case 5: break;
-            }
-            //TODO on poly or mesh
-
-            IMesh im = n.GetImesh(Kernel.Now);
-
-            Kernel.WriteLine("Mesh Faces:{0}", im.FaceSel.Size);
-            for ( int i = 0; i < im.FaceSel.Size; i++ ) {
-
-                bool isSelected = im.FaceSel[i] == 1;
-                //Kernel.WriteLine("selected:{0} face:{1}", isSelected, i);
-                if ( selected && isSelected ) {
-
-                    im.Faces[i].Hide();
-
-                } else if ( !selected && !isSelected ) im.Faces[i].Hide();
-            }
-            if ( selected ) n.Object._IGeomObject.ClearSelection(Kernel._Interface.SubObjectLevel);
-            im.InvalidateTopologyCache();
-            n.InvalidateObjCache();
-            Kernel.RedrawViews();
-        }
-
-        public static void UnhideGeometry(Node n) {
-
-            IMesh im = n.GetImesh(Kernel.Now);
-            //Based on SubobjectLevel
-            switch ( Kernel._Interface.SubObjectLevel ) {
-                //todo
-                /*case 1: im.Verts.ForEach<IVert>(v => v.Show()); break; //this not vertices onlt positions Point3
-                case 2: im.Edges.ForEach<IEdge>(e => e.Show()); break;
-                case 3: im.Edges.ForEach<IEdge>(e => e.Show()); break;*/
-                case 3: im.Faces.ForEach<IFace>(f => f.Show()); break; //if is Mesh (poly have spline here)
-                case 4: im.Faces.ForEach<IFace>(f => f.Show()); break;
-                case 5: im.Faces.ForEach<IFace>(f => f.Show()); break;
-            }
-            im.InvalidateTopologyCache();
-            n.InvalidateObjCache();
-            Kernel.RedrawViews();
-            /* im.InvalidateGeomCache();
-             im.InvalidateTopologyCache();
-             ITriObject triObject = GetITriobject();
-             //triObject->NotifyDependents(FOREVER, OBJ_CHANNELS, REFMSG_CHANGE);
-             triObject.NotifyDependents(new Interval(), EnumChannels.OBJ_CHANNELS, EnumRefMsg.REFMSG_CHANGE);
-             Kernel._Interface.RedrawViews();*/
         }
     }
 }
@@ -267,12 +77,12 @@ namespace Micra.Core {
 //TODO take area from vertices
 public static double GetFaceArea(IMNMesh m, int fi) { //TODO -not tested -not used
 
-    Kernel.WriteLine("\tSelected polygon index:{0} total:{1}", fi + 1, m.FNum); //+1 Max count
+    Max.Log("\tSelected polygon index:{0} total:{1}", fi + 1, m.FNum); //+1 Max count
     return new Poly(m).Area(fi); //Poly object will be filled with All face indexes and vertices positions
 
     IMNFace f = m.F(fi);
 
-    Kernel.WriteLine("face verts:{0} count:{1}", f.Vtx, f.Vtx.Count);
+    Max.Log("face verts:{0} count:{1}", f.Vtx, f.Vtx.Count);
 
     ITab<int> triangles = Kernel._Global.Tab.Create<int>();
     f.GetTriangles(triangles); // get the tri (as indices of the face vert array)
@@ -283,14 +93,14 @@ public static double GetFaceArea(IMNMesh m, int fi) { //TODO -not tested -not us
         int v1 = triangles[i];
         int v2 = triangles[i + 1];
         int v3 = triangles[i + 2];
-        Kernel.WriteLine("\t\tFace:{0} v1:{1} v1:{2} v1:{3}", i, v1,  v2, v3);
+        Max.Log("\t\tFace:{0} v1:{1} v1:{2} v1:{3}", i, v1,  v2, v3);
         //AreaOfTriangle
     }*/
 
 
-/*Kernel.WriteLine("first vert:{0}", triangles[0]);
+/*Max.Log("first vert:{0}", triangles[0]);
 
-Kernel.WriteLine("\tPolygon vers:{0} total triangles:{1}", triangles.Count, m.TriNum);
+Max.Log("\tPolygon vers:{0} total triangles:{1}", triangles.Count, m.TriNum);
 
 IMesh imesh = Kernel._Global.Mesh.Create();
 m.OutToTri(imesh);
@@ -299,7 +109,7 @@ for (int i = 0; i < triangles.Count; i++ ) {
     //imesh.Faces[i]
     // v2:{2} v3:{3}
     //ITab tab = tris[i];
-    Kernel.WriteLine("\t\ti:{0} tris:{1}", i+1, triangles[i]);
+    Max.Log("\t\ti:{0} tris:{1}", i+1, triangles[i]);
 }
 //return 0.0;
 }*/

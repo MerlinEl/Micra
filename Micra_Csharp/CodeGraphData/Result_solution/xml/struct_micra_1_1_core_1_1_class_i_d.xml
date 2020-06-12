@@ -1,0 +1,705 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
+  <compounddef id="struct_micra_1_1_core_1_1_class_i_d" kind="struct" prot="public">
+    <compoundname>Micra::Core::ClassID</compoundname>
+      <sectiondef kind="public-type">
+      <memberdef kind="enum" id="struct_micra_1_1_core_1_1_class_i_d_1ac68101686981840990dc9c1e668a4699" prot="public" static="no">
+        <name>ClassName</name>
+        <enumvalue id="struct_micra_1_1_core_1_1_class_i_d_1ac68101686981840990dc9c1e668a4699a068b8086137c2b5b383c4c6c7f22a7ba" prot="public">
+          <name>EditableMesh</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="struct_micra_1_1_core_1_1_class_i_d_1ac68101686981840990dc9c1e668a4699a336232a4cd5fbd5c76c42f89ae6e0dea" prot="public">
+          <name>EditablePoly</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/ClassID.cs" line="30" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/ClassID.cs" bodystart="30" bodyend="34"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="struct_micra_1_1_core_1_1_class_i_d_1aa17d3d25dce96f7960d915611f26a777" prot="public" static="no" mutable="no">
+        <type>uint</type>
+        <definition>uint Micra.Core.ClassID.PartA</definition>
+        <argsstring></argsstring>
+        <name>PartA</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/ClassID.cs" line="35" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/ClassID.cs" bodystart="35" bodyend="-1"/>
+        <referencedby refid="struct_micra_1_1_core_1_1_class_i_d_1ab566b2ce1f46af32973bf4fdffef84b7" compoundref="_class_i_d_8cs" startline="133" endline="133">Micra.Core.ClassID.operator!=</referencedby>
+        <referencedby refid="struct_micra_1_1_core_1_1_class_i_d_1a4e42eb0f9bf4c017c429dd6d0fa56e41" compoundref="_class_i_d_8cs" startline="132" endline="132">Micra.Core.ClassID.operator==</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="struct_micra_1_1_core_1_1_class_i_d_1a696d7d43cefc81e186007499b7172127" prot="public" static="no" mutable="no">
+        <type>uint</type>
+        <definition>uint Micra.Core.ClassID.PartB</definition>
+        <argsstring></argsstring>
+        <name>PartB</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/ClassID.cs" line="36" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/ClassID.cs" bodystart="36" bodyend="-1"/>
+        <referencedby refid="struct_micra_1_1_core_1_1_class_i_d_1a6d6f9bee0c5acb6fa4efef022af0274d" compoundref="_class_i_d_8cs" startline="99" endline="103">Micra.Core.ClassID.GetIClassName</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="struct_micra_1_1_core_1_1_class_i_d_1a697a164aa74a453defc5b11738ee970f" prot="public" static="no" mutable="no">
+        <type>IClass_ID</type>
+        <definition>IClass_ID Micra.Core.ClassID._IClass_ID</definition>
+        <argsstring></argsstring>
+        <name>_IClass_ID</name>
+        <initializer>=&gt; Kernel._Global.Class_ID.Create(<ref refid="struct_micra_1_1_core_1_1_class_i_d_1aa17d3d25dce96f7960d915611f26a777" kindref="member">PartA</ref>, <ref refid="struct_micra_1_1_core_1_1_class_i_d_1a696d7d43cefc81e186007499b7172127" kindref="member">PartB</ref>)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/ClassID.cs" line="58" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/ClassID.cs" bodystart="58" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-static-attrib">
+      <memberdef kind="variable" id="struct_micra_1_1_core_1_1_class_i_d_1adf93402615b1eafbd97992a1c054eb02" prot="public" static="yes" mutable="no">
+        <type><ref refid="struct_micra_1_1_core_1_1_class_i_d" kindref="compound">ClassID</ref></type>
+        <definition>ClassID Micra.Core.ClassID.EditableMesh</definition>
+        <argsstring></argsstring>
+        <name>EditableMesh</name>
+        <initializer>= new <ref refid="struct_micra_1_1_core_1_1_class_i_d" kindref="compound">ClassID</ref>(BuiltInClassIDA.EDITTRIOBJ_CLASS_ID, 0)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/ClassID.cs" line="61" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/ClassID.cs" bodystart="61" bodyend="-1"/>
+        <referencedby refid="class_micra_1_1_tools_1_1_csharp_to_max_test_1a3b219c82297259ad63d4011c4f883e5c" compoundref="_csharp_to_max_test_8cs" startline="361" endline="383">Micra.Tools.CsharpToMaxTest.BtnGetFaceArea_Click</referencedby>
+        <referencedby refid="class_micra_1_1_core_1_1_scene_object_1ad4b6bc6ab4ace76bc9afcceb03607bda" compoundref="_scene_object_8cs" startline="156" endline="164">Micra.Core.SceneObject.GetArea</referencedby>
+        <referencedby refid="class_micra_1_1_core_1_1_geo_ops_1af40f0a2e6a55f496eee56b4fde2c646b" compoundref="_geo_ops_8cs" startline="33" endline="47">Micra.Core.GeoOps.GetSelectedEdges</referencedby>
+        <referencedby refid="class_micra_1_1_core_1_1_scene_object_1a0a999c503fe9bb116c2b95b7e4a0a5dd" compoundref="_scene_object_8cs" startline="177" endline="191">Micra.Core.SceneObject.GetSelectedEdges</referencedby>
+        <referencedby refid="class_micra_1_1_core_1_1_scene_object_1a13c54f1c468310f8a688ae5c74f6dcad" compoundref="_scene_object_8cs" startline="165" endline="175">Micra.Core.SceneObject.GetSelectedFaces</referencedby>
+        <referencedby refid="class_micra_1_1_core_1_1_scene_object_1a350fe67e539e59adcd8d5c246a35cd81" compoundref="_scene_object_8cs" startline="193" endline="207">Micra.Core.SceneObject.GetSelectedVerts</referencedby>
+        <referencedby refid="class_micra_1_1_core_1_1_scene_object_1aa49d1daf20588eba18208e3ca4564715" compoundref="_scene_object_8cs" startline="242" endline="253">Micra.Core.SceneObject.HideFaces</referencedby>
+        <referencedby refid="class_micra_1_1_core_1_1_node_1ad6bb0e974ea5a7b8fa4d30c80183e35a" compoundref="_node_8cs" startline="261" endline="266">Micra.Core.Node.IsEditable</referencedby>
+        <referencedby refid="class_micra_1_1_core_1_1_geo_ops_1acc01585d08b02d12da864fade34c79eb" compoundref="_geo_ops_8cs" startline="100" endline="153">Micra.Core.GeoOps.SelectSimillarEdges</referencedby>
+        <referencedby refid="class_micra_1_1_core_1_1_scene_object_1ab584949133612722f723b45af4dcd4a1" compoundref="_scene_object_8cs" startline="268" endline="282">Micra.Core.SceneObject.UnhideFaces</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="struct_micra_1_1_core_1_1_class_i_d_1afcdcf24fa5c77b7690a1d86a8d53a3f2" prot="public" static="yes" mutable="no">
+        <type><ref refid="struct_micra_1_1_core_1_1_class_i_d" kindref="compound">ClassID</ref></type>
+        <definition>ClassID Micra.Core.ClassID.EditablePoly</definition>
+        <argsstring></argsstring>
+        <name>EditablePoly</name>
+        <initializer>= new <ref refid="struct_micra_1_1_core_1_1_class_i_d" kindref="compound">ClassID</ref>(BuiltInClassIDA.EPOLYOBJ_CLASS_ID, BuiltInClassIDB.EPOLYOBJ_CLASS_ID)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/ClassID.cs" line="62" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/ClassID.cs" bodystart="62" bodyend="-1"/>
+        <referencedby refid="class_micra_1_1_tools_1_1_csharp_to_max_test_1a3b219c82297259ad63d4011c4f883e5c" compoundref="_csharp_to_max_test_8cs" startline="361" endline="383">Micra.Tools.CsharpToMaxTest.BtnGetFaceArea_Click</referencedby>
+        <referencedby refid="class_micra_1_1_core_1_1_scene_object_1ad4b6bc6ab4ace76bc9afcceb03607bda" compoundref="_scene_object_8cs" startline="156" endline="164">Micra.Core.SceneObject.GetArea</referencedby>
+        <referencedby refid="class_micra_1_1_core_1_1_geo_ops_1af40f0a2e6a55f496eee56b4fde2c646b" compoundref="_geo_ops_8cs" startline="33" endline="47">Micra.Core.GeoOps.GetSelectedEdges</referencedby>
+        <referencedby refid="class_micra_1_1_core_1_1_scene_object_1a0a999c503fe9bb116c2b95b7e4a0a5dd" compoundref="_scene_object_8cs" startline="177" endline="191">Micra.Core.SceneObject.GetSelectedEdges</referencedby>
+        <referencedby refid="class_micra_1_1_core_1_1_scene_object_1a13c54f1c468310f8a688ae5c74f6dcad" compoundref="_scene_object_8cs" startline="165" endline="175">Micra.Core.SceneObject.GetSelectedFaces</referencedby>
+        <referencedby refid="class_micra_1_1_core_1_1_scene_object_1a350fe67e539e59adcd8d5c246a35cd81" compoundref="_scene_object_8cs" startline="193" endline="207">Micra.Core.SceneObject.GetSelectedVerts</referencedby>
+        <referencedby refid="class_micra_1_1_core_1_1_scene_object_1aa49d1daf20588eba18208e3ca4564715" compoundref="_scene_object_8cs" startline="242" endline="253">Micra.Core.SceneObject.HideFaces</referencedby>
+        <referencedby refid="class_micra_1_1_core_1_1_node_1ad6bb0e974ea5a7b8fa4d30c80183e35a" compoundref="_node_8cs" startline="261" endline="266">Micra.Core.Node.IsEditable</referencedby>
+        <referencedby refid="class_micra_1_1_core_1_1_geo_ops_1acc01585d08b02d12da864fade34c79eb" compoundref="_geo_ops_8cs" startline="100" endline="153">Micra.Core.GeoOps.SelectSimillarEdges</referencedby>
+        <referencedby refid="class_micra_1_1_core_1_1_scene_object_1ab584949133612722f723b45af4dcd4a1" compoundref="_scene_object_8cs" startline="268" endline="282">Micra.Core.SceneObject.UnhideFaces</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="struct_micra_1_1_core_1_1_class_i_d_1aa10d5288b66fc172d4789d8138c382a6" prot="public" static="yes" mutable="no">
+        <type><ref refid="struct_micra_1_1_core_1_1_class_i_d" kindref="compound">ClassID</ref></type>
+        <definition>ClassID Micra.Core.ClassID.BoneObject</definition>
+        <argsstring></argsstring>
+        <name>BoneObject</name>
+        <initializer>= new <ref refid="struct_micra_1_1_core_1_1_class_i_d" kindref="compound">ClassID</ref>(BuiltInClassIDA.BONE_OBJ_CLASSID, BuiltInClassIDB.BONE_OBJ_CLASSID)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/ClassID.cs" line="63" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/ClassID.cs" bodystart="63" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_micra_1_1_core_1_1_class_i_d_1abed81e2dd42f4d33191d47fbc9c5faf9" prot="public" static="yes" mutable="no">
+        <type><ref refid="struct_micra_1_1_core_1_1_class_i_d" kindref="compound">ClassID</ref></type>
+        <definition>ClassID Micra.Core.ClassID.TargetObject</definition>
+        <argsstring></argsstring>
+        <name>TargetObject</name>
+        <initializer>= new <ref refid="struct_micra_1_1_core_1_1_class_i_d" kindref="compound">ClassID</ref>(BuiltInClassIDA.TARGET_CLASS_ID, 0)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/ClassID.cs" line="64" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/ClassID.cs" bodystart="64" bodyend="-1"/>
+        <referencedby refid="class_micra_1_1_core_1_1_obj_ops_1aa0011818fb56bd21af032892abe04402" compoundref="_obj_ops_8cs" startline="140" endline="173">Micra.Core.ObjOps.SelectSimillarNodes</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="struct_micra_1_1_core_1_1_class_i_d_1ab7b73ed6ef5c6babf413c19a2f771f56" prot="public" static="yes" mutable="no">
+        <type><ref refid="struct_micra_1_1_core_1_1_class_i_d" kindref="compound">ClassID</ref></type>
+        <definition>ClassID Micra.Core.ClassID.SpotLight</definition>
+        <argsstring></argsstring>
+        <name>SpotLight</name>
+        <initializer>= new <ref refid="struct_micra_1_1_core_1_1_class_i_d" kindref="compound">ClassID</ref>(BuiltInClassIDA.SPOT_LIGHT_CLASS_ID, 0)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/ClassID.cs" line="65" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/ClassID.cs" bodystart="65" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_micra_1_1_core_1_1_class_i_d_1a4ccd6caf9a86fb78c813573715e293d6" prot="public" static="yes" mutable="no">
+        <type><ref refid="struct_micra_1_1_core_1_1_class_i_d" kindref="compound">ClassID</ref></type>
+        <definition>ClassID Micra.Core.ClassID.OmniLight</definition>
+        <argsstring></argsstring>
+        <name>OmniLight</name>
+        <initializer>= new <ref refid="struct_micra_1_1_core_1_1_class_i_d" kindref="compound">ClassID</ref>(BuiltInClassIDA.OMNI_LIGHT_CLASS_ID, 0)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/ClassID.cs" line="66" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/ClassID.cs" bodystart="66" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_micra_1_1_core_1_1_class_i_d_1a0a90f811c8538fa6bac34f155ace00d9" prot="public" static="yes" mutable="no">
+        <type><ref refid="struct_micra_1_1_core_1_1_class_i_d" kindref="compound">ClassID</ref></type>
+        <definition>ClassID Micra.Core.ClassID.PointHelper</definition>
+        <argsstring></argsstring>
+        <name>PointHelper</name>
+        <initializer>= new <ref refid="struct_micra_1_1_core_1_1_class_i_d" kindref="compound">ClassID</ref>(BuiltInClassIDA.EXPR_POS_CONTROL_CLASS_ID, 0)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/ClassID.cs" line="67" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/ClassID.cs" bodystart="67" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_micra_1_1_core_1_1_class_i_d_1a65e164ee2082324f19bddd5e77373866" prot="public" static="yes" mutable="no">
+        <type><ref refid="struct_micra_1_1_core_1_1_class_i_d" kindref="compound">ClassID</ref></type>
+        <definition>ClassID Micra.Core.ClassID.DummyHelper</definition>
+        <argsstring></argsstring>
+        <name>DummyHelper</name>
+        <initializer>= new <ref refid="struct_micra_1_1_core_1_1_class_i_d" kindref="compound">ClassID</ref>(BuiltInClassIDA.DUMMY_CLASS_ID, 0)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/ClassID.cs" line="68" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/ClassID.cs" bodystart="68" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_micra_1_1_core_1_1_class_i_d_1a4c421df446beb63882237ce171d6589e" prot="public" static="yes" mutable="no">
+        <type><ref refid="struct_micra_1_1_core_1_1_class_i_d" kindref="compound">ClassID</ref></type>
+        <definition>ClassID Micra.Core.ClassID.TapeHelper</definition>
+        <argsstring></argsstring>
+        <name>TapeHelper</name>
+        <initializer>= new <ref refid="struct_micra_1_1_core_1_1_class_i_d" kindref="compound">ClassID</ref>(BuiltInClassIDA.TAPEHELP_CLASS_ID, 0)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/ClassID.cs" line="69" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/ClassID.cs" bodystart="69" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_micra_1_1_core_1_1_class_i_d_1a24e90c9b616af7ce7cec57f5547cb448" prot="public" static="yes" mutable="no">
+        <type><ref refid="struct_micra_1_1_core_1_1_class_i_d" kindref="compound">ClassID</ref></type>
+        <definition>ClassID Micra.Core.ClassID.SplineShape</definition>
+        <argsstring></argsstring>
+        <name>SplineShape</name>
+        <initializer>= new <ref refid="struct_micra_1_1_core_1_1_class_i_d" kindref="compound">ClassID</ref>(BuiltInClassIDA.SPLINE3D_CLASS_ID, 0)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/ClassID.cs" line="71" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/ClassID.cs" bodystart="71" bodyend="-1"/>
+        <referencedby refid="class_micra_1_1_core_1_1_scene_object_1aa49d1daf20588eba18208e3ca4564715" compoundref="_scene_object_8cs" startline="242" endline="253">Micra.Core.SceneObject.HideFaces</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="struct_micra_1_1_core_1_1_class_i_d_1a30b8714f9647edb9a2387f690141f116" prot="public" static="yes" mutable="no">
+        <type><ref refid="struct_micra_1_1_core_1_1_class_i_d" kindref="compound">ClassID</ref></type>
+        <definition>ClassID Micra.Core.ClassID.CircleShape</definition>
+        <argsstring></argsstring>
+        <name>CircleShape</name>
+        <initializer>= new <ref refid="struct_micra_1_1_core_1_1_class_i_d" kindref="compound">ClassID</ref>(BuiltInClassIDA.CIRCLE_CLASS_ID, 0)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/ClassID.cs" line="72" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/ClassID.cs" bodystart="72" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_micra_1_1_core_1_1_class_i_d_1af45ee71512def6369fff65a2f6f41089" prot="public" static="yes" mutable="no">
+        <type><ref refid="struct_micra_1_1_core_1_1_class_i_d" kindref="compound">ClassID</ref></type>
+        <definition>ClassID Micra.Core.ClassID.ElipseShape</definition>
+        <argsstring></argsstring>
+        <name>ElipseShape</name>
+        <initializer>= new <ref refid="struct_micra_1_1_core_1_1_class_i_d" kindref="compound">ClassID</ref>(BuiltInClassIDA.ELLIPSE_CLASS_ID, 0)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/ClassID.cs" line="73" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/ClassID.cs" bodystart="73" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_micra_1_1_core_1_1_class_i_d_1a41fce7c9fa09bc1f6d632f29b52ac544" prot="public" static="yes" mutable="no">
+        <type><ref refid="struct_micra_1_1_core_1_1_class_i_d" kindref="compound">ClassID</ref></type>
+        <definition>ClassID Micra.Core.ClassID.RectangleShape</definition>
+        <argsstring></argsstring>
+        <name>RectangleShape</name>
+        <initializer>= new <ref refid="struct_micra_1_1_core_1_1_class_i_d" kindref="compound">ClassID</ref>(BuiltInClassIDA.RECTANGLE_CLASS_ID, 0)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/ClassID.cs" line="74" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/ClassID.cs" bodystart="74" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_micra_1_1_core_1_1_class_i_d_1a0230829e2ff20b4ac2e92b400a2af53a" prot="public" static="yes" mutable="no">
+        <type><ref refid="struct_micra_1_1_core_1_1_class_i_d" kindref="compound">ClassID</ref></type>
+        <definition>ClassID Micra.Core.ClassID.DonutShape</definition>
+        <argsstring></argsstring>
+        <name>DonutShape</name>
+        <initializer>= new <ref refid="struct_micra_1_1_core_1_1_class_i_d" kindref="compound">ClassID</ref>(BuiltInClassIDA.DONUT_CLASS_ID, 0)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/ClassID.cs" line="75" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/ClassID.cs" bodystart="75" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_micra_1_1_core_1_1_class_i_d_1a8b195527aaa668106fdc4603b0b3d673" prot="public" static="yes" mutable="no">
+        <type><ref refid="struct_micra_1_1_core_1_1_class_i_d" kindref="compound">ClassID</ref></type>
+        <definition>ClassID Micra.Core.ClassID.SphereObj</definition>
+        <argsstring></argsstring>
+        <name>SphereObj</name>
+        <initializer>= new <ref refid="struct_micra_1_1_core_1_1_class_i_d" kindref="compound">ClassID</ref>(BuiltInClassIDA.SPHERE_CLASS_ID, 0)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/ClassID.cs" line="76" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/ClassID.cs" bodystart="76" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_micra_1_1_core_1_1_class_i_d_1a24e3cbf5aa1d2d59e52d979273df0890" prot="public" static="yes" mutable="no">
+        <type><ref refid="struct_micra_1_1_core_1_1_class_i_d" kindref="compound">ClassID</ref></type>
+        <definition>ClassID Micra.Core.ClassID.CylinderObject</definition>
+        <argsstring></argsstring>
+        <name>CylinderObject</name>
+        <initializer>= new <ref refid="struct_micra_1_1_core_1_1_class_i_d" kindref="compound">ClassID</ref>(BuiltInClassIDA.DMTL2_CLASS_ID, 0)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/ClassID.cs" line="77" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/ClassID.cs" bodystart="77" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_micra_1_1_core_1_1_class_i_d_1ae6e76017cffb2d4f1afc9fb58ce3ef26" prot="public" static="yes" mutable="no">
+        <type><ref refid="struct_micra_1_1_core_1_1_class_i_d" kindref="compound">ClassID</ref></type>
+        <definition>ClassID Micra.Core.ClassID.BoxObject</definition>
+        <argsstring></argsstring>
+        <name>BoxObject</name>
+        <initializer>= new <ref refid="struct_micra_1_1_core_1_1_class_i_d" kindref="compound">ClassID</ref>(BuiltInClassIDA.BOXOBJ_CLASS_ID, 0)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/ClassID.cs" line="78" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/ClassID.cs" bodystart="78" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_micra_1_1_core_1_1_class_i_d_1a7c39175dbfe3a864fe37fd96642b82d2" prot="public" static="yes" mutable="no">
+        <type><ref refid="struct_micra_1_1_core_1_1_class_i_d" kindref="compound">ClassID</ref></type>
+        <definition>ClassID Micra.Core.ClassID.TriObject</definition>
+        <argsstring></argsstring>
+        <name>TriObject</name>
+        <initializer>= new <ref refid="struct_micra_1_1_core_1_1_class_i_d" kindref="compound">ClassID</ref>(BuiltInClassIDA.TRIOBJ_CLASS_ID, 0)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/ClassID.cs" line="80" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/ClassID.cs" bodystart="80" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_micra_1_1_core_1_1_class_i_d_1a62a4218e9868cce36a50b5f6e034bfef" prot="public" static="yes" mutable="no">
+        <type><ref refid="struct_micra_1_1_core_1_1_class_i_d" kindref="compound">ClassID</ref></type>
+        <definition>ClassID Micra.Core.ClassID.PolyObject</definition>
+        <argsstring></argsstring>
+        <name>PolyObject</name>
+        <initializer>= new <ref refid="struct_micra_1_1_core_1_1_class_i_d" kindref="compound">ClassID</ref>(BuiltInClassIDA.POLYOBJ_CLASS_ID, 0)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/ClassID.cs" line="81" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/ClassID.cs" bodystart="81" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_micra_1_1_core_1_1_class_i_d_1a18a34e1ad703ac45695b4dfe2e445e3b" prot="public" static="yes" mutable="no">
+        <type><ref refid="struct_micra_1_1_core_1_1_class_i_d" kindref="compound">ClassID</ref></type>
+        <definition>ClassID Micra.Core.ClassID.TeapotObject</definition>
+        <argsstring></argsstring>
+        <name>TeapotObject</name>
+        <initializer>= new <ref refid="struct_micra_1_1_core_1_1_class_i_d" kindref="compound">ClassID</ref>(BuiltInClassIDA.TEAPOT_CLASS_ID, BuiltInClassIDB.TEAPOT_CLASS_ID)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/ClassID.cs" line="82" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/ClassID.cs" bodystart="82" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="struct_micra_1_1_core_1_1_class_i_d_1ae3c012d674dcbdad0327eb13fc946a0d" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>Micra.Core.ClassID.ClassID</definition>
+        <argsstring>(IClass_ID id)</argsstring>
+        <name>ClassID</name>
+        <param>
+          <type>IClass_ID</type>
+          <declname>id</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/ClassID.cs" line="37" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/ClassID.cs" bodystart="37" bodyend="37"/>
+      </memberdef>
+      <memberdef kind="function" id="struct_micra_1_1_core_1_1_class_i_d_1a8554da260db9652ba889ed37aa2a49d1" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>Micra.Core.ClassID.ClassID</definition>
+        <argsstring>(uint a, uint b)</argsstring>
+        <name>ClassID</name>
+        <param>
+          <type>uint</type>
+          <declname>a</declname>
+        </param>
+        <param>
+          <type>uint</type>
+          <declname>b</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/ClassID.cs" line="38" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/ClassID.cs" bodystart="38" bodyend="38"/>
+      </memberdef>
+      <memberdef kind="function" id="struct_micra_1_1_core_1_1_class_i_d_1aec532b2bc9751a27b1f98cf64a4b7916" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>Micra.Core.ClassID.ClassID</definition>
+        <argsstring>(BuiltInClassIDA a, BuiltInClassIDB b)</argsstring>
+        <name>ClassID</name>
+        <param>
+          <type>BuiltInClassIDA</type>
+          <declname>a</declname>
+        </param>
+        <param>
+          <type>BuiltInClassIDB</type>
+          <declname>b</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/ClassID.cs" line="39" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/ClassID.cs" bodystart="39" bodyend="39"/>
+      </memberdef>
+      <memberdef kind="function" id="struct_micra_1_1_core_1_1_class_i_d_1af61d5a4817a0ba40cc68eb75661cac02" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>string</type>
+        <definition>string Micra.Core.ClassID.GetClassName</definition>
+        <argsstring>()</argsstring>
+        <name>GetClassName</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/ClassID.cs" line="84" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="struct_micra_1_1_core_1_1_class_i_d_1a7bd2efb38144601927b2a2adb050792c" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>string</type>
+        <definition>string Micra.Core.ClassID.GetClassName</definition>
+        <argsstring>(ClassID clsID)</argsstring>
+        <name>GetClassName</name>
+        <param>
+          <type><ref refid="struct_micra_1_1_core_1_1_class_i_d" kindref="compound">ClassID</ref></type>
+          <declname>clsID</declname>
+        </param>
+        <briefdescription>
+<para>usage: Get a Name from current ClasID as Kenel Name</para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/ClassID.cs" line="86" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/ClassID.cs" bodystart="86" bodyend="97"/>
+      </memberdef>
+      <memberdef kind="function" id="struct_micra_1_1_core_1_1_class_i_d_1a6d6f9bee0c5acb6fa4efef022af0274d" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>string</type>
+        <definition>string Micra.Core.ClassID.GetIClassName</definition>
+        <argsstring>(ClassID clsID)</argsstring>
+        <name>GetIClassName</name>
+        <param>
+          <type><ref refid="struct_micra_1_1_core_1_1_class_i_d" kindref="compound">ClassID</ref></type>
+          <declname>clsID</declname>
+        </param>
+        <briefdescription>
+<para>usage: Get Name from a ClasID as <ref refid="class_micra_1_1_core_1_1_max" kindref="compound">Max</ref> Name</para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/ClassID.cs" line="99" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/ClassID.cs" bodystart="99" bodyend="103"/>
+        <references refid="struct_micra_1_1_core_1_1_class_i_d_1a696d7d43cefc81e186007499b7172127" compoundref="_class_i_d_8cs" startline="36">Micra.Core.ClassID.PartB</references>
+      </memberdef>
+      <memberdef kind="function" id="struct_micra_1_1_core_1_1_class_i_d_1af90fca15706709b023da9ef76e86621c" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>override string</type>
+        <definition>override string Micra.Core.ClassID.ToString</definition>
+        <argsstring>()</argsstring>
+        <name>ToString</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/ClassID.cs" line="114" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/ClassID.cs" bodystart="114" bodyend="116"/>
+      </memberdef>
+      <memberdef kind="function" id="struct_micra_1_1_core_1_1_class_i_d_1a6d1d861471fb52c8952957e78775cd20" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool Micra.Core.ClassID.Equals</definition>
+        <argsstring>(IClass_ID icid)</argsstring>
+        <name>Equals</name>
+        <param>
+          <type>IClass_ID</type>
+          <declname>icid</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/ClassID.cs" line="118" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/ClassID.cs" bodystart="118" bodyend="122"/>
+      </memberdef>
+      <memberdef kind="function" id="struct_micra_1_1_core_1_1_class_i_d_1a2ce581610acab6404e9894f2ccea2387" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>override bool</type>
+        <definition>override bool Micra.Core.ClassID.Equals</definition>
+        <argsstring>(object obj)</argsstring>
+        <name>Equals</name>
+        <param>
+          <type>object</type>
+          <declname>obj</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/ClassID.cs" line="124" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/ClassID.cs" bodystart="124" bodyend="128"/>
+      </memberdef>
+      <memberdef kind="function" id="struct_micra_1_1_core_1_1_class_i_d_1a2300c8a367cedc8b539e2a3e13dfee7b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>override int</type>
+        <definition>override int Micra.Core.ClassID.GetHashCode</definition>
+        <argsstring>()</argsstring>
+        <name>GetHashCode</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/ClassID.cs" line="130" column="1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="struct_micra_1_1_core_1_1_class_i_d_1aa7cb61811dcd342dbdac5f2460aaa041" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="struct_micra_1_1_core_1_1_class_i_d" kindref="compound">ClassID</ref></type>
+        <definition>static ClassID Micra.Core.ClassID.FromName</definition>
+        <argsstring>(string className)</argsstring>
+        <name>FromName</name>
+        <param>
+          <type>string</type>
+          <declname>className</declname>
+        </param>
+        <briefdescription>
+<para>usage: Create <ref refid="struct_micra_1_1_core_1_1_class_i_d" kindref="compound">ClassID</ref> from Name  </para>        </briefdescription>
+        <detaileddescription>
+<para><computeroutput>example: <ref refid="struct_micra_1_1_core_1_1_class_i_d" kindref="compound">ClassID</ref> classId = <ref refid="struct_micra_1_1_core_1_1_class_i_d_1aa7cb61811dcd342dbdac5f2460aaa041" kindref="member">ClassID.FromName</ref>(&quot;EditableMesh&quot;); </computeroutput> </para><para><simplesect kind="return"><para>result:new <ref refid="struct_micra_1_1_core_1_1_class_i_d" kindref="compound">ClassID</ref></para></simplesect>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>className</parametername>
+</parameternamelist>
+<parameterdescription>
+<para><ref refid="struct_micra_1_1_core_1_1_class_i_d" kindref="compound">ClassID</ref> Name</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/ClassID.cs" line="49" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/ClassID.cs" bodystart="49" bodyend="56"/>
+      </memberdef>
+      <memberdef kind="function" id="struct_micra_1_1_core_1_1_class_i_d_1ab1c40f14d7e06d9b44de8eaf43d501a9" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>string[]</type>
+        <definition>static string [] Micra.Core.ClassID.GetClassNames</definition>
+        <argsstring>()</argsstring>
+        <name>GetClassNames</name>
+        <briefdescription>
+<para>Get All <ref refid="struct_micra_1_1_core_1_1_class_i_d" kindref="compound">ClassID</ref> Names</para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/ClassID.cs" line="105" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/ClassID.cs" bodystart="105" bodyend="112"/>
+      </memberdef>
+      <memberdef kind="function" id="struct_micra_1_1_core_1_1_class_i_d_1a4e42eb0f9bf4c017c429dd6d0fa56e41" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>static bool Micra.Core.ClassID.operator==</definition>
+        <argsstring>(ClassID x, ClassID y)</argsstring>
+        <name>operator==</name>
+        <param>
+          <type><ref refid="struct_micra_1_1_core_1_1_class_i_d" kindref="compound">ClassID</ref></type>
+          <declname>x</declname>
+        </param>
+        <param>
+          <type><ref refid="struct_micra_1_1_core_1_1_class_i_d" kindref="compound">ClassID</ref></type>
+          <declname>y</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/ClassID.cs" line="132" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/ClassID.cs" bodystart="132" bodyend="132"/>
+        <references refid="struct_micra_1_1_core_1_1_class_i_d_1aa17d3d25dce96f7960d915611f26a777" compoundref="_class_i_d_8cs" startline="35">Micra.Core.ClassID.PartA</references>
+      </memberdef>
+      <memberdef kind="function" id="struct_micra_1_1_core_1_1_class_i_d_1ab566b2ce1f46af32973bf4fdffef84b7" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>static bool Micra.Core.ClassID.operator!=</definition>
+        <argsstring>(ClassID x, ClassID y)</argsstring>
+        <name>operator!=</name>
+        <param>
+          <type><ref refid="struct_micra_1_1_core_1_1_class_i_d" kindref="compound">ClassID</ref></type>
+          <declname>x</declname>
+        </param>
+        <param>
+          <type><ref refid="struct_micra_1_1_core_1_1_class_i_d" kindref="compound">ClassID</ref></type>
+          <declname>y</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/ClassID.cs" line="133" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/ClassID.cs" bodystart="133" bodyend="133"/>
+        <references refid="struct_micra_1_1_core_1_1_class_i_d_1aa17d3d25dce96f7960d915611f26a777" compoundref="_class_i_d_8cs" startline="35">Micra.Core.ClassID.PartA</references>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Identifies a particular plug-in. Wraps the Class_ID class in the 3sd <ref refid="class_micra_1_1_core_1_1_max" kindref="compound">Max</ref> SDK.  </para>    </briefdescription>
+    <detaileddescription>
+<para><computeroutput> example: switch ( node.ClassOf() ) { <linebreak/>
+case nameof(<ref refid="struct_micra_1_1_core_1_1_class_i_d_1afcdcf24fa5c77b7690a1d86a8d53a3f2" kindref="member">ClassID.EditablePoly</ref>) : <ref refid="class_micra_1_1_core_1_1_max_1aeeade19b0d9c0b8c4ccc99c7093e59f7" kindref="member">Max.Log</ref>(&quot;is poly&quot;); break; <linebreak/>
+case nameof(<ref refid="struct_micra_1_1_core_1_1_class_i_d_1adf93402615b1eafbd97992a1c054eb02" kindref="member">ClassID.EditableMesh</ref>) : <ref refid="class_micra_1_1_core_1_1_max_1aeeade19b0d9c0b8c4ccc99c7093e59f7" kindref="member">Max.Log</ref>(&quot;is mesh&quot;); break; <linebreak/>
+} </computeroutput> </para>    </detaileddescription>
+    <collaborationgraph>
+      <node id="74">
+        <label>Micra.Core.ClassID</label>
+        <link refid="struct_micra_1_1_core_1_1_class_i_d"/>
+        <childnode refid="75" relation="usage">
+          <edgelabel>CylinderObject</edgelabel>
+          <edgelabel>DummyHelper</edgelabel>
+          <edgelabel>EditablePoly</edgelabel>
+          <edgelabel>RectangleShape</edgelabel>
+          <edgelabel>OmniLight</edgelabel>
+          <edgelabel>CircleShape</edgelabel>
+          <edgelabel>PointHelper</edgelabel>
+          <edgelabel>EditableMesh</edgelabel>
+          <edgelabel>PolyObject</edgelabel>
+          <edgelabel>BoxObject</edgelabel>
+          <edgelabel>...</edgelabel>
+        </childnode>
+      </node>
+      <node id="75">
+        <label>static</label>
+      </node>
+    </collaborationgraph>
+    <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/ClassID.cs" line="26" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/ClassID.cs" bodystart="26" bodyend="139"/>
+    <listofallmembers>
+      <member refid="struct_micra_1_1_core_1_1_class_i_d_1a697a164aa74a453defc5b11738ee970f" prot="public" virt="non-virtual"><scope>Micra::Core::ClassID</scope><name>_IClass_ID</name></member>
+      <member refid="struct_micra_1_1_core_1_1_class_i_d_1aa10d5288b66fc172d4789d8138c382a6" prot="public" virt="non-virtual"><scope>Micra::Core::ClassID</scope><name>BoneObject</name></member>
+      <member refid="struct_micra_1_1_core_1_1_class_i_d_1ae6e76017cffb2d4f1afc9fb58ce3ef26" prot="public" virt="non-virtual"><scope>Micra::Core::ClassID</scope><name>BoxObject</name></member>
+      <member refid="struct_micra_1_1_core_1_1_class_i_d_1a30b8714f9647edb9a2387f690141f116" prot="public" virt="non-virtual"><scope>Micra::Core::ClassID</scope><name>CircleShape</name></member>
+      <member refid="struct_micra_1_1_core_1_1_class_i_d_1ae3c012d674dcbdad0327eb13fc946a0d" prot="public" virt="non-virtual"><scope>Micra::Core::ClassID</scope><name>ClassID</name></member>
+      <member refid="struct_micra_1_1_core_1_1_class_i_d_1a8554da260db9652ba889ed37aa2a49d1" prot="public" virt="non-virtual"><scope>Micra::Core::ClassID</scope><name>ClassID</name></member>
+      <member refid="struct_micra_1_1_core_1_1_class_i_d_1aec532b2bc9751a27b1f98cf64a4b7916" prot="public" virt="non-virtual"><scope>Micra::Core::ClassID</scope><name>ClassID</name></member>
+      <member refid="struct_micra_1_1_core_1_1_class_i_d_1ac68101686981840990dc9c1e668a4699" prot="public" virt="non-virtual"><scope>Micra::Core::ClassID</scope><name>ClassName</name></member>
+      <member refid="struct_micra_1_1_core_1_1_class_i_d_1a24e3cbf5aa1d2d59e52d979273df0890" prot="public" virt="non-virtual"><scope>Micra::Core::ClassID</scope><name>CylinderObject</name></member>
+      <member refid="struct_micra_1_1_core_1_1_class_i_d_1a0230829e2ff20b4ac2e92b400a2af53a" prot="public" virt="non-virtual"><scope>Micra::Core::ClassID</scope><name>DonutShape</name></member>
+      <member refid="struct_micra_1_1_core_1_1_class_i_d_1a65e164ee2082324f19bddd5e77373866" prot="public" virt="non-virtual"><scope>Micra::Core::ClassID</scope><name>DummyHelper</name></member>
+      <member refid="struct_micra_1_1_core_1_1_class_i_d_1adf93402615b1eafbd97992a1c054eb02" prot="public" virt="non-virtual"><scope>Micra::Core::ClassID</scope><name>EditableMesh</name></member>
+      <member refid="struct_micra_1_1_core_1_1_class_i_d_1afcdcf24fa5c77b7690a1d86a8d53a3f2" prot="public" virt="non-virtual"><scope>Micra::Core::ClassID</scope><name>EditablePoly</name></member>
+      <member refid="struct_micra_1_1_core_1_1_class_i_d_1af45ee71512def6369fff65a2f6f41089" prot="public" virt="non-virtual"><scope>Micra::Core::ClassID</scope><name>ElipseShape</name></member>
+      <member refid="struct_micra_1_1_core_1_1_class_i_d_1a6d1d861471fb52c8952957e78775cd20" prot="public" virt="non-virtual"><scope>Micra::Core::ClassID</scope><name>Equals</name></member>
+      <member refid="struct_micra_1_1_core_1_1_class_i_d_1a2ce581610acab6404e9894f2ccea2387" prot="public" virt="non-virtual"><scope>Micra::Core::ClassID</scope><name>Equals</name></member>
+      <member refid="struct_micra_1_1_core_1_1_class_i_d_1aa7cb61811dcd342dbdac5f2460aaa041" prot="public" virt="non-virtual"><scope>Micra::Core::ClassID</scope><name>FromName</name></member>
+      <member refid="struct_micra_1_1_core_1_1_class_i_d_1af61d5a4817a0ba40cc68eb75661cac02" prot="public" virt="non-virtual"><scope>Micra::Core::ClassID</scope><name>GetClassName</name></member>
+      <member refid="struct_micra_1_1_core_1_1_class_i_d_1a7bd2efb38144601927b2a2adb050792c" prot="public" virt="non-virtual"><scope>Micra::Core::ClassID</scope><name>GetClassName</name></member>
+      <member refid="struct_micra_1_1_core_1_1_class_i_d_1ab1c40f14d7e06d9b44de8eaf43d501a9" prot="public" virt="non-virtual"><scope>Micra::Core::ClassID</scope><name>GetClassNames</name></member>
+      <member refid="struct_micra_1_1_core_1_1_class_i_d_1a2300c8a367cedc8b539e2a3e13dfee7b" prot="public" virt="non-virtual"><scope>Micra::Core::ClassID</scope><name>GetHashCode</name></member>
+      <member refid="struct_micra_1_1_core_1_1_class_i_d_1a6d6f9bee0c5acb6fa4efef022af0274d" prot="public" virt="non-virtual"><scope>Micra::Core::ClassID</scope><name>GetIClassName</name></member>
+      <member refid="struct_micra_1_1_core_1_1_class_i_d_1a4ccd6caf9a86fb78c813573715e293d6" prot="public" virt="non-virtual"><scope>Micra::Core::ClassID</scope><name>OmniLight</name></member>
+      <member refid="struct_micra_1_1_core_1_1_class_i_d_1ab566b2ce1f46af32973bf4fdffef84b7" prot="public" virt="non-virtual"><scope>Micra::Core::ClassID</scope><name>operator!=</name></member>
+      <member refid="struct_micra_1_1_core_1_1_class_i_d_1a4e42eb0f9bf4c017c429dd6d0fa56e41" prot="public" virt="non-virtual"><scope>Micra::Core::ClassID</scope><name>operator==</name></member>
+      <member refid="struct_micra_1_1_core_1_1_class_i_d_1aa17d3d25dce96f7960d915611f26a777" prot="public" virt="non-virtual"><scope>Micra::Core::ClassID</scope><name>PartA</name></member>
+      <member refid="struct_micra_1_1_core_1_1_class_i_d_1a696d7d43cefc81e186007499b7172127" prot="public" virt="non-virtual"><scope>Micra::Core::ClassID</scope><name>PartB</name></member>
+      <member refid="struct_micra_1_1_core_1_1_class_i_d_1a0a90f811c8538fa6bac34f155ace00d9" prot="public" virt="non-virtual"><scope>Micra::Core::ClassID</scope><name>PointHelper</name></member>
+      <member refid="struct_micra_1_1_core_1_1_class_i_d_1a62a4218e9868cce36a50b5f6e034bfef" prot="public" virt="non-virtual"><scope>Micra::Core::ClassID</scope><name>PolyObject</name></member>
+      <member refid="struct_micra_1_1_core_1_1_class_i_d_1a41fce7c9fa09bc1f6d632f29b52ac544" prot="public" virt="non-virtual"><scope>Micra::Core::ClassID</scope><name>RectangleShape</name></member>
+      <member refid="struct_micra_1_1_core_1_1_class_i_d_1a8b195527aaa668106fdc4603b0b3d673" prot="public" virt="non-virtual"><scope>Micra::Core::ClassID</scope><name>SphereObj</name></member>
+      <member refid="struct_micra_1_1_core_1_1_class_i_d_1a24e90c9b616af7ce7cec57f5547cb448" prot="public" virt="non-virtual"><scope>Micra::Core::ClassID</scope><name>SplineShape</name></member>
+      <member refid="struct_micra_1_1_core_1_1_class_i_d_1ab7b73ed6ef5c6babf413c19a2f771f56" prot="public" virt="non-virtual"><scope>Micra::Core::ClassID</scope><name>SpotLight</name></member>
+      <member refid="struct_micra_1_1_core_1_1_class_i_d_1a4c421df446beb63882237ce171d6589e" prot="public" virt="non-virtual"><scope>Micra::Core::ClassID</scope><name>TapeHelper</name></member>
+      <member refid="struct_micra_1_1_core_1_1_class_i_d_1abed81e2dd42f4d33191d47fbc9c5faf9" prot="public" virt="non-virtual"><scope>Micra::Core::ClassID</scope><name>TargetObject</name></member>
+      <member refid="struct_micra_1_1_core_1_1_class_i_d_1a18a34e1ad703ac45695b4dfe2e445e3b" prot="public" virt="non-virtual"><scope>Micra::Core::ClassID</scope><name>TeapotObject</name></member>
+      <member refid="struct_micra_1_1_core_1_1_class_i_d_1af90fca15706709b023da9ef76e86621c" prot="public" virt="non-virtual"><scope>Micra::Core::ClassID</scope><name>ToString</name></member>
+      <member refid="struct_micra_1_1_core_1_1_class_i_d_1a7c39175dbfe3a864fe37fd96642b82d2" prot="public" virt="non-virtual"><scope>Micra::Core::ClassID</scope><name>TriObject</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,136 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
+  <compounddef id="class_micra_1_1_core_1_1_i_bit_array_extensions" kind="class" prot="public">
+    <compoundname>Micra::Core::IBitArrayExtensions</compoundname>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="class_micra_1_1_core_1_1_i_bit_array_extensions_1a1018d2f391b8c389065f849d342c89d6" prot="private" static="no" mutable="no">
+        <type>const int</type>
+        <definition>const int Micra.Core.IBitArrayExtensions.NSHIFT</definition>
+        <argsstring></argsstring>
+        <name>NSHIFT</name>
+        <initializer>= 6</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/IBitArrayExtensions.cs" line="32" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/IBitArrayExtensions.cs" bodystart="32" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_micra_1_1_core_1_1_i_bit_array_extensions_1a4496a927c11c459922d3e1e81d01d07a" prot="private" static="no" mutable="no">
+        <type>const int</type>
+        <definition>const int Micra.Core.IBitArrayExtensions.CHAR_BIT</definition>
+        <argsstring></argsstring>
+        <name>CHAR_BIT</name>
+        <initializer>= 8</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/IBitArrayExtensions.cs" line="33" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/IBitArrayExtensions.cs" bodystart="33" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_micra_1_1_core_1_1_i_bit_array_extensions_1aa97e544d4e36bd89e32b2f58f8a40442" prot="private" static="no" mutable="no">
+        <type>const int</type>
+        <definition>const int Micra.Core.IBitArrayExtensions.kMAX_LOCALBITS</definition>
+        <argsstring></argsstring>
+        <name>kMAX_LOCALBITS</name>
+        <initializer>= <ref refid="class_micra_1_1_core_1_1_i_bit_array_extensions_1a4496a927c11c459922d3e1e81d01d07a" kindref="member">CHAR_BIT</ref> * sizeof(ulong)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/IBitArrayExtensions.cs" line="34" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/IBitArrayExtensions.cs" bodystart="34" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_micra_1_1_core_1_1_i_bit_array_extensions_1a10b860e70edb0920c0450431b14d0b76" prot="private" static="no" mutable="no">
+        <type>const int</type>
+        <definition>const int Micra.Core.IBitArrayExtensions.BITS_PER_DWORD_PTR</definition>
+        <argsstring></argsstring>
+        <name>BITS_PER_DWORD_PTR</name>
+        <initializer>= ( <ref refid="class_micra_1_1_core_1_1_i_bit_array_extensions_1a4496a927c11c459922d3e1e81d01d07a" kindref="member">CHAR_BIT</ref> * sizeof(ulong) )</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/IBitArrayExtensions.cs" line="36" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/IBitArrayExtensions.cs" bodystart="36" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_micra_1_1_core_1_1_i_bit_array_extensions_1abcca269d9330451734da92ba56ffce00" prot="private" static="no" mutable="no">
+        <type>const int</type>
+        <definition>const int Micra.Core.IBitArrayExtensions.BITS_PER_DWORD_PTR_MASK</definition>
+        <argsstring></argsstring>
+        <name>BITS_PER_DWORD_PTR_MASK</name>
+        <initializer>= <ref refid="class_micra_1_1_core_1_1_i_bit_array_extensions_1a10b860e70edb0920c0450431b14d0b76" kindref="member">BITS_PER_DWORD_PTR</ref> - 1</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/IBitArrayExtensions.cs" line="37" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/IBitArrayExtensions.cs" bodystart="37" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_i_bit_array_extensions_1a6f1d8da70f0dd0ba9e57b9f59383aaa0" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>unsafe int</type>
+        <definition>static unsafe int Micra.Core.IBitArrayExtensions.GetBit</definition>
+        <argsstring>(this IBitArray bitArray, int index)</argsstring>
+        <name>GetBit</name>
+        <param>
+          <type>this IBitArray</type>
+          <declname>bitArray</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>index</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/IBitArrayExtensions.cs" line="39" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/IBitArrayExtensions.cs" bodystart="39" bodyend="61"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_i_bit_array_extensions_1a5a52372984b8e4bdab32be510526f41a" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>IBitArray</type>
+        <definition>static IBitArray Micra.Core.IBitArrayExtensions.BitwiseOR</definition>
+        <argsstring>(this IBitArray A, IBitArray B)</argsstring>
+        <name>BitwiseOR</name>
+        <param>
+          <type>this IBitArray</type>
+          <declname>A</declname>
+        </param>
+        <param>
+          <type>IBitArray</type>
+          <declname>B</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/IBitArrayExtensions.cs" line="62" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/IBitArrayExtensions.cs" bodystart="62" bodyend="73"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/IBitArrayExtensions.cs" line="31" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/IBitArrayExtensions.cs" bodystart="31" bodyend="74"/>
+    <listofallmembers>
+      <member refid="class_micra_1_1_core_1_1_i_bit_array_extensions_1a10b860e70edb0920c0450431b14d0b76" prot="private" virt="non-virtual"><scope>Micra::Core::IBitArrayExtensions</scope><name>BITS_PER_DWORD_PTR</name></member>
+      <member refid="class_micra_1_1_core_1_1_i_bit_array_extensions_1abcca269d9330451734da92ba56ffce00" prot="private" virt="non-virtual"><scope>Micra::Core::IBitArrayExtensions</scope><name>BITS_PER_DWORD_PTR_MASK</name></member>
+      <member refid="class_micra_1_1_core_1_1_i_bit_array_extensions_1a5a52372984b8e4bdab32be510526f41a" prot="public" virt="non-virtual"><scope>Micra::Core::IBitArrayExtensions</scope><name>BitwiseOR</name></member>
+      <member refid="class_micra_1_1_core_1_1_i_bit_array_extensions_1a4496a927c11c459922d3e1e81d01d07a" prot="private" virt="non-virtual"><scope>Micra::Core::IBitArrayExtensions</scope><name>CHAR_BIT</name></member>
+      <member refid="class_micra_1_1_core_1_1_i_bit_array_extensions_1a6f1d8da70f0dd0ba9e57b9f59383aaa0" prot="public" virt="non-virtual"><scope>Micra::Core::IBitArrayExtensions</scope><name>GetBit</name></member>
+      <member refid="class_micra_1_1_core_1_1_i_bit_array_extensions_1aa97e544d4e36bd89e32b2f58f8a40442" prot="private" virt="non-virtual"><scope>Micra::Core::IBitArrayExtensions</scope><name>kMAX_LOCALBITS</name></member>
+      <member refid="class_micra_1_1_core_1_1_i_bit_array_extensions_1a1018d2f391b8c389065f849d342c89d6" prot="private" virt="non-virtual"><scope>Micra::Core::IBitArrayExtensions</scope><name>NSHIFT</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

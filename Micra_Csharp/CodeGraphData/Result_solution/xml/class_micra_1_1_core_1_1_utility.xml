@@ -1,0 +1,210 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
+  <compounddef id="class_micra_1_1_core_1_1_utility" kind="class" prot="public">
+    <compoundname>Micra::Core::Utility</compoundname>
+      <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_utility_1abe75256c2b594fefb42765470d31865d" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>float</type>
+        <definition>static float Micra.Core.Utility.OToF</definition>
+        <argsstring>(object o)</argsstring>
+        <name>OToF</name>
+        <param>
+          <type>object</type>
+          <declname>o</declname>
+        </param>
+        <briefdescription>
+<para>Converts an float or double object to a float. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>o</parametername>
+</parameternamelist>
+<parameterdescription>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para></para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" line="22" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" bodystart="22" bodyend="28"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_utility_1aa205dbd4a98a74082a2895275d2bc2ad" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>double</type>
+        <definition>static double Micra.Core.Utility.ToDouble</definition>
+        <argsstring>(float f)</argsstring>
+        <name>ToDouble</name>
+        <param>
+          <type>float</type>
+          <declname>f</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" line="30" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" bodystart="30" bodyend="34"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_utility_1a3039cd44ae50aee9fc8194a10dc3e58a" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>double</type>
+        <definition>static double Micra.Core.Utility.RadToDeg</definition>
+        <argsstring>(double radians)</argsstring>
+        <name>RadToDeg</name>
+        <param>
+          <type>double</type>
+          <declname>radians</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" line="36" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" bodystart="36" bodyend="38"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_utility_1ae36a134f54f9f1aac8f59ae060a24b2c" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>double</type>
+        <definition>static double Micra.Core.Utility.DegToRad</definition>
+        <argsstring>(double degrees)</argsstring>
+        <name>DegToRad</name>
+        <param>
+          <type>double</type>
+          <declname>degrees</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" line="40" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" bodystart="40" bodyend="42"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_utility_1a9c2397798014cd82bbb31f6a56539b62" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>double</type>
+        <definition>static double Micra.Core.Utility.GetTriangleArea</definition>
+        <argsstring>(Point3 p1, Point3 p2, Point3 p3)</argsstring>
+        <name>GetTriangleArea</name>
+        <param>
+          <type><ref refid="class_micra_1_1_core_1_1_point3" kindref="compound">Point3</ref></type>
+          <declname>p1</declname>
+        </param>
+        <param>
+          <type><ref refid="class_micra_1_1_core_1_1_point3" kindref="compound">Point3</ref></type>
+          <declname>p2</declname>
+        </param>
+        <param>
+          <type><ref refid="class_micra_1_1_core_1_1_point3" kindref="compound">Point3</ref></type>
+          <declname>p3</declname>
+        </param>
+        <briefdescription>
+<para>Heron’s Formula to calculate face area  </para>        </briefdescription>
+        <detaileddescription>
+<para><computeroutput> example: GetTriangleArea(p1, p2, p3); </computeroutput> </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" line="51" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" bodystart="51" bodyend="58"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_utility_1a58151e76885bdb33ac3bf575e578d5fc" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>IEnumerable&lt; T &gt;</type>
+        <definition>static IEnumerable&lt;T&gt; Micra.Core.Utility.FilterType&lt; T &gt;</definition>
+        <argsstring>(this IEnumerable xs)</argsstring>
+        <name>FilterType&lt; T &gt;</name>
+        <param>
+          <type>this IEnumerable</type>
+          <declname>xs</declname>
+        </param>
+        <briefdescription>
+<para>Extends IEnumerable&lt;T&gt; with a new function for selecing only those instances which match a specific type. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>xs</parametername>
+</parameternamelist>
+<parameterdescription>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para></para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" line="67" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" bodystart="67" bodyend="71"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_utility_1a43cebeb19817514aa58167d86988daa9" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>IEnumerable&lt; TSource &gt;</type>
+        <definition>static IEnumerable&lt;TSource&gt; Micra.Core.Utility.DistinctBy&lt; TSource, TKey &gt;</definition>
+        <argsstring>(this IEnumerable&lt; TSource &gt; source, Func&lt; TSource, TKey &gt; keySelector)</argsstring>
+        <name>DistinctBy&lt; TSource, TKey &gt;</name>
+        <param>
+          <type>this IEnumerable&lt; TSource &gt;</type>
+          <declname>source</declname>
+        </param>
+        <param>
+          <type>Func&lt; TSource, TKey &gt;</type>
+          <declname>keySelector</declname>
+        </param>
+        <briefdescription>
+<para>//not used not tested So to find the distinct values using just the Id property, you could use: var query = people.DistinctBy(p =&gt; p.Id); And to use multiple properties, you can use anonymous types, which implement equality appropriately: var query = people.DistinctBy(p =&gt; new { p.Id, p.Name }); </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>TSource</parametername>
+</parameternamelist>
+<parameterdescription>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>TKey</parametername>
+</parameternamelist>
+<parameterdescription>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>source</parametername>
+</parameternamelist>
+<parameterdescription>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>keySelector</parametername>
+</parameternamelist>
+<parameterdescription>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para></para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" line="84" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" bodystart="85" bodyend="92"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Contains various utility functions. </para>    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" line="16" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" bodystart="16" bodyend="94"/>
+    <listofallmembers>
+      <member refid="class_micra_1_1_core_1_1_utility_1ae36a134f54f9f1aac8f59ae060a24b2c" prot="public" virt="non-virtual"><scope>Micra::Core::Utility</scope><name>DegToRad</name></member>
+      <member refid="class_micra_1_1_core_1_1_utility_1a43cebeb19817514aa58167d86988daa9" prot="public" virt="non-virtual"><scope>Micra::Core::Utility</scope><name>DistinctBy&lt; TSource, TKey &gt;</name></member>
+      <member refid="class_micra_1_1_core_1_1_utility_1a58151e76885bdb33ac3bf575e578d5fc" prot="public" virt="non-virtual"><scope>Micra::Core::Utility</scope><name>FilterType&lt; T &gt;</name></member>
+      <member refid="class_micra_1_1_core_1_1_utility_1a9c2397798014cd82bbb31f6a56539b62" prot="public" virt="non-virtual"><scope>Micra::Core::Utility</scope><name>GetTriangleArea</name></member>
+      <member refid="class_micra_1_1_core_1_1_utility_1abe75256c2b594fefb42765470d31865d" prot="public" virt="non-virtual"><scope>Micra::Core::Utility</scope><name>OToF</name></member>
+      <member refid="class_micra_1_1_core_1_1_utility_1a3039cd44ae50aee9fc8194a10dc3e58a" prot="public" virt="non-virtual"><scope>Micra::Core::Utility</scope><name>RadToDeg</name></member>
+      <member refid="class_micra_1_1_core_1_1_utility_1aa205dbd4a98a74082a2895275d2bc2ad" prot="public" virt="non-virtual"><scope>Micra::Core::Utility</scope><name>ToDouble</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

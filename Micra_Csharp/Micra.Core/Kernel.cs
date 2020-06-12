@@ -59,13 +59,16 @@ namespace Micra.Core {
         static Kernel() {
             // If this is ever NULL, it is probably because 3ds Max has not yet loaded 
             // Autodesk.Max.Wrappers.dll
-            _Global = Autodesk.Max.GlobalInterface.Instance;
+            _Global = GlobalInterface.Instance;
             _Interface = _Global.COREInterface17;
             _InstanceMgr = _Global.IInstanceMgr.InstanceMgr;
             _TheHold = Kernel._Global.TheHold; //not used not tested
             scene = new Scene(_Interface);
             dispatcher = Dispatcher.CurrentDispatcher;
 
+
+
+            //TODO test and move it in right place
             //not used not tested
             IInterface_ID iMeshSelectionID = _Global.Interface_ID.Create( //not used not tested
                 (uint)BuiltInClassIDA.MESHSELECT_CLASS_ID, 

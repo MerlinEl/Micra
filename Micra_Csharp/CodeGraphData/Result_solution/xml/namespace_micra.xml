@@ -1,0 +1,15 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
+  <compounddef id="namespace_micra" kind="namespace">
+    <compoundname>Micra</compoundname>
+    <innernamespace refid="namespace_micra_1_1_core">Micra::Core</innernamespace>
+    <innernamespace refid="namespace_micra_1_1_domain">Micra::Domain</innernamespace>
+    <innernamespace refid="namespace_micra_1_1_launcher">Micra::Launcher</innernamespace>
+    <innernamespace refid="namespace_micra_1_1_tools">Micra::Tools</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="[generated]" line="1" column="1"/>
+  </compounddef>
+</doxygen>

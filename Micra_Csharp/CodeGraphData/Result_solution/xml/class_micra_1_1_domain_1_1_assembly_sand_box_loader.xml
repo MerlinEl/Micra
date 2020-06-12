@@ -1,0 +1,72 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
+  <compounddef id="class_micra_1_1_domain_1_1_assembly_sand_box_loader" kind="class" prot="public">
+    <compoundname>Micra::Domain::AssemblySandBoxLoader</compoundname>
+    <basecompoundref prot="public" virt="non-virtual">MarshalByRefObject</basecompoundref>
+      <sectiondef kind="property">
+      <memberdef kind="property" id="class_micra_1_1_domain_1_1_assembly_sand_box_loader_1a0b31f2e4c9549f0f13c490f01bb93d43" prot="public" static="no" readable="no" writable="no" gettable="yes" settable="yes">
+        <type>Assembly</type>
+        <definition>Assembly Micra.Domain.AssemblySandBoxLoader.TrustedAssembly</definition>
+        <argsstring></argsstring>
+        <name>TrustedAssembly</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Domain/MxDomain.cs" line="191" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Domain/MxDomain.cs" bodystart="191" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="class_micra_1_1_domain_1_1_assembly_sand_box_loader_1a6ba38469be71c0ffc0ef91a62326bb63" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>Micra.Domain.AssemblySandBoxLoader.AssemblySandBoxLoader</definition>
+        <argsstring>(string assemblyFilename)</argsstring>
+        <name>AssemblySandBoxLoader</name>
+        <param>
+          <type>string</type>
+          <declname>assemblyFilename</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Domain/MxDomain.cs" line="183" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Domain/MxDomain.cs" bodystart="183" bodyend="189"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="34">
+        <label>Micra.Domain.AssemblySandBoxLoader</label>
+        <link refid="class_micra_1_1_domain_1_1_assembly_sand_box_loader"/>
+        <childnode refid="35" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="35">
+        <label>MarshalByRefObject</label>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="36">
+        <label>Micra.Domain.AssemblySandBoxLoader</label>
+        <link refid="class_micra_1_1_domain_1_1_assembly_sand_box_loader"/>
+        <childnode refid="37" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="37">
+        <label>MarshalByRefObject</label>
+      </node>
+    </collaborationgraph>
+    <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Domain/MxDomain.cs" line="182" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Domain/MxDomain.cs" bodystart="182" bodyend="223"/>
+    <listofallmembers>
+      <member refid="class_micra_1_1_domain_1_1_assembly_sand_box_loader_1a6ba38469be71c0ffc0ef91a62326bb63" prot="public" virt="non-virtual"><scope>Micra::Domain::AssemblySandBoxLoader</scope><name>AssemblySandBoxLoader</name></member>
+      <member refid="class_micra_1_1_domain_1_1_assembly_sand_box_loader_1a0b31f2e4c9549f0f13c490f01bb93d43" prot="public" virt="non-virtual"><scope>Micra::Domain::AssemblySandBoxLoader</scope><name>TrustedAssembly</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

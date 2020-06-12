@@ -1,0 +1,582 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
+  <compounddef id="class_micra_1_1_core_1_1_animatable" kind="class" prot="public">
+    <compoundname>Micra::Core::Animatable</compoundname>
+    <derivedcompoundref refid="class_micra_1_1_core_1_1_reference_maker" prot="public" virt="non-virtual">Micra.Core.ReferenceMaker</derivedcompoundref>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="class_micra_1_1_core_1_1_animatable_1a399c45d564034fef7a33b25300f2970f" prot="private" static="no" mutable="no">
+        <type>readonly IAnimatable</type>
+        <definition>readonly IAnimatable Micra.Core.Animatable.wrapped</definition>
+        <argsstring></argsstring>
+        <name>wrapped</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Animatable.cs" line="89" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Animatable.cs" bodystart="89" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="protected-attrib">
+      <memberdef kind="variable" id="class_micra_1_1_core_1_1_animatable_1aae0278c0d6842fd3e79cd2700851cf4a" prot="protected" static="no" mutable="no">
+        <type><ref refid="interface_micra_1_1_core_1_1_i_parameter_block" kindref="compound">IParameterBlock</ref></type>
+        <definition>IParameterBlock Micra.Core.Animatable.parameterBlock</definition>
+        <argsstring></argsstring>
+        <name>parameterBlock</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Animatable.cs" line="91" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Animatable.cs" bodystart="91" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="property">
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_animatable_1a7447ebfdfa1b5c49c3908334edcaa995" prot="public" static="no" readable="no" writable="no" gettable="yes" settable="no">
+        <type>IAnimatable</type>
+        <definition>IAnimatable Micra.Core.Animatable._Anim</definition>
+        <argsstring></argsstring>
+        <name>_Anim</name>
+        <briefdescription>
+<para>Returns the corresponding wrapped object from the Autodesk.Max layer. This is only used if the APIs of Autodesk.Max layer are required. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Animatable.cs" line="106" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Animatable.cs" bodystart="106" bodyend="-1"/>
+        <referencedby refid="class_micra_1_1_core_1_1_animatable_1a014952bd2d29637c0ed71b32f1ad4807" compoundref="_animatable_8cs" startline="93" endline="100">Micra.Core.Animatable.Animatable</referencedby>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_animatable_1a7304895f0a6857929d3aab907db7cd1f" prot="public" static="no" readable="no" writable="no" gettable="yes" settable="no">
+        <type>IEnumerable&lt; <ref refid="class_micra_1_1_core_1_1_animatable" kindref="compound">Animatable</ref> &gt;</type>
+        <definition>IEnumerable&lt;Animatable&gt; Micra.Core.Animatable.Anims</definition>
+        <argsstring></argsstring>
+        <name>Anims</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Animatable.cs" line="176" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Animatable.cs" bodystart="176" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_animatable_1adc1bd49a3dc65f202e6848e7746d97aa" prot="public" static="no" readable="no" writable="no" gettable="yes" settable="no">
+        <type>string</type>
+        <definition>string Micra.Core.Animatable.ClassName</definition>
+        <argsstring></argsstring>
+        <name>ClassName</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Animatable.cs" line="209" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Animatable.cs" bodystart="209" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_animatable_1a1e8eff94a4d40b89666cfd96f2c0b282" prot="public" static="no" readable="no" writable="no" gettable="yes" settable="no">
+        <type><ref refid="struct_micra_1_1_core_1_1_class_i_d" kindref="compound">ClassID</ref></type>
+        <definition>ClassID Micra.Core.Animatable.ClassID</definition>
+        <argsstring></argsstring>
+        <name>ClassID</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Animatable.cs" line="210" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Animatable.cs" bodystart="210" bodyend="-1"/>
+        <referencedby refid="class_micra_1_1_core_1_1_animatable_1a1f05a5f32d4a4227aded083c6431c586" compoundref="_animatable_8cs" startline="216" endline="216">Micra.Core.Animatable.GetAppData</referencedby>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_animatable_1a743ff05031ca9d95ca4f5b078e29f946" prot="public" static="no" readable="no" writable="no" gettable="yes" settable="no">
+        <type><ref refid="struct_micra_1_1_core_1_1_super_class_i_d" kindref="compound">SuperClassID</ref></type>
+        <definition>SuperClassID Micra.Core.Animatable.SuperClassID</definition>
+        <argsstring></argsstring>
+        <name>SuperClassID</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Animatable.cs" line="211" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Animatable.cs" bodystart="211" bodyend="-1"/>
+        <referencedby refid="class_micra_1_1_core_1_1_animatable_1a014952bd2d29637c0ed71b32f1ad4807" compoundref="_animatable_8cs" startline="93" endline="100">Micra.Core.Animatable.Animatable</referencedby>
+        <referencedby refid="class_micra_1_1_core_1_1_animatable_1a1f05a5f32d4a4227aded083c6431c586" compoundref="_animatable_8cs" startline="216" endline="216">Micra.Core.Animatable.GetAppData</referencedby>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_animatable_1a4a088130407a9d834ca65c1c6b20255f" prot="public" static="no" readable="no" writable="no" gettable="yes" settable="no">
+        <type>UIntPtr</type>
+        <definition>UIntPtr Micra.Core.Animatable.AnimHandle</definition>
+        <argsstring></argsstring>
+        <name>AnimHandle</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Animatable.cs" line="212" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Animatable.cs" bodystart="212" bodyend="-1"/>
+        <referencedby refid="class_micra_1_1_core_1_1_serializable_scene_1_1_reference_1aa7fac6257ad9565b38eff09b94b46cc7" compoundref="_serializable_scene_8cs" startline="35" endline="45">Micra.Core.SerializableScene.Reference.Reference</referencedby>
+        <referencedby refid="class_micra_1_1_core_1_1_serializable_scene_1_1_target_1a5522398dfb4b0ba21432765be3235a29" compoundref="_serializable_scene_8cs" startline="61" endline="64">Micra.Core.SerializableScene.Target.Target</referencedby>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_animatable_1a340a84a8efcb552049aa7623d4d11960" prot="public" static="no" readable="no" writable="no" gettable="yes" settable="no">
+        <type>bool</type>
+        <definition>bool Micra.Core.Animatable.Valid</definition>
+        <argsstring></argsstring>
+        <name>Valid</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Animatable.cs" line="213" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Animatable.cs" bodystart="213" bodyend="-1"/>
+        <referencedby refid="class_micra_1_1_core_1_1_serializable_scene_1_1_reference_1aa7fac6257ad9565b38eff09b94b46cc7" compoundref="_serializable_scene_8cs" startline="35" endline="45">Micra.Core.SerializableScene.Reference.Reference</referencedby>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_animatable_1a1d7058760b77578b3f0aa73ac02ec0ab" prot="public" static="no" readable="no" writable="no" gettable="yes" settable="no">
+        <type><ref refid="class_micra_1_1_core_1_1_custom_attributes" kindref="compound">CustomAttributes</ref></type>
+        <definition>CustomAttributes Micra.Core.Animatable.AttributeContainer</definition>
+        <argsstring></argsstring>
+        <name>AttributeContainer</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Animatable.cs" line="219" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Animatable.cs" bodystart="219" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_animatable_1a8adb3e32d41511c2ffd6007b8612e35d" prot="public" static="no" readable="no" writable="no" gettable="yes" settable="no">
+        <type>IEnumerable&lt; <ref refid="interface_micra_1_1_core_1_1_i_parameter" kindref="compound">IParameter</ref> &gt;</type>
+        <definition>IEnumerable&lt;IParameter&gt; Micra.Core.Animatable.Params</definition>
+        <argsstring></argsstring>
+        <name>Params</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Animatable.cs" line="222" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Animatable.cs" bodystart="222" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_animatable_1a7942d170433ad2f7b8ce19bfcde45a48" prot="public" static="no" readable="no" writable="no" gettable="yes" settable="no">
+        <type><ref refid="interface_micra_1_1_core_1_1_i_parameter_block" kindref="compound">IParameterBlock</ref></type>
+        <definition>IParameterBlock Micra.Core.Animatable.ParameterBlock</definition>
+        <argsstring></argsstring>
+        <name>ParameterBlock</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Animatable.cs" line="232" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Animatable.cs" bodystart="232" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_animatable_1ac4e35d5d21af8962f61a963f8f9ecdeb" prot="public" static="no" readable="no" writable="no" gettable="yes" settable="yes">
+        <type>Object</type>
+        <definition>Object Micra.Core.Animatable.this[string sParamName]</definition>
+        <argsstring></argsstring>
+        <name>this[string sParamName]</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Animatable.cs" line="238" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Animatable.cs" bodystart="238" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_animatable_1a63dfadedc8b28c3e5ced8c3e62a277a1" prot="public" static="no" readable="no" writable="no" gettable="yes" settable="yes">
+        <type>Object</type>
+        <definition>Object Micra.Core.Animatable.this[int paramID]</definition>
+        <argsstring></argsstring>
+        <name>this[int paramID]</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Animatable.cs" line="247" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Animatable.cs" bodystart="247" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="package-func">
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_animatable_1a014952bd2d29637c0ed71b32f1ad4807" prot="package" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>Micra.Core.Animatable.Animatable</definition>
+        <argsstring>(IAnimatable x)</argsstring>
+        <name>Animatable</name>
+        <param>
+          <type>IAnimatable</type>
+          <declname>x</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Animatable.cs" line="93" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Animatable.cs" bodystart="93" bodyend="100"/>
+        <references refid="class_micra_1_1_core_1_1_animatable_1a7447ebfdfa1b5c49c3908334edcaa995" compoundref="_animatable_8cs" startline="106">Micra.Core.Animatable._Anim</references>
+        <references refid="struct_micra_1_1_core_1_1_super_class_i_d_1a4fd1bde1da24f831b4227e5f94a95a1e" compoundref="_super_class_i_d_8cs" startline="58">Micra.Core.SuperClassID.ParameterBlock2</references>
+        <references refid="class_micra_1_1_core_1_1_animatable_1a743ff05031ca9d95ca4f5b078e29f946" compoundref="_animatable_8cs" startline="211">Micra.Core.Animatable.SuperClassID</references>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_animatable_1a32a37b9c84068a644c2488bf6f7e764b" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>T</type>
+        <definition>static T Micra.Core.Animatable.CreateWrapper&lt; T &gt;</definition>
+        <argsstring>(IAnimatable x)</argsstring>
+        <name>CreateWrapper&lt; T &gt;</name>
+        <param>
+          <type>IAnimatable</type>
+          <declname>x</declname>
+        </param>
+        <briefdescription>
+<para>This function is used internally for creating a MaxDotNet object from the Autodesk.Max layer. Specifical You might need to use it if you are needing to write code that uses both MaxDotNet assembly and the Autodesk.Max layer. That workflow is not officially supported. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>x</parametername>
+</parameternamelist>
+<parameterdescription>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para></para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Animatable.cs" line="116" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Animatable.cs" bodystart="116" bodyend="157"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_animatable_1a5898e44fafdfc0b28894f556e1f7fa57" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>T</type>
+        <definition>static T Micra.Core.Animatable.CreatePluginInstance&lt; T &gt;</definition>
+        <argsstring>(SuperClassID scid, ClassID cid)</argsstring>
+        <name>CreatePluginInstance&lt; T &gt;</name>
+        <param>
+          <type><ref refid="struct_micra_1_1_core_1_1_super_class_i_d" kindref="compound">SuperClassID</ref></type>
+          <declname>scid</declname>
+        </param>
+        <param>
+          <type><ref refid="struct_micra_1_1_core_1_1_class_i_d" kindref="compound">ClassID</ref></type>
+          <declname>cid</declname>
+        </param>
+        <briefdescription>
+<para>Returns an animatable from a super class ID and a class ID </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>scid</parametername>
+</parameternamelist>
+<parameterdescription>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>cid</parametername>
+</parameternamelist>
+<parameterdescription>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para></para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Animatable.cs" line="166" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Animatable.cs" bodystart="166" bodyend="174"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_animatable_1a64eb885c9f69ce79734e55885baa7c66" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>static bool Micra.Core.Animatable.operator==</definition>
+        <argsstring>(Animatable a, Animatable b)</argsstring>
+        <name>operator==</name>
+        <param>
+          <type><ref refid="class_micra_1_1_core_1_1_animatable" kindref="compound">Animatable</ref></type>
+          <declname>a</declname>
+        </param>
+        <param>
+          <type><ref refid="class_micra_1_1_core_1_1_animatable" kindref="compound">Animatable</ref></type>
+          <declname>b</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Animatable.cs" line="190" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Animatable.cs" bodystart="190" bodyend="193"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_animatable_1a246fac518c0fac502df5754450db01d2" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>static bool Micra.Core.Animatable.operator!=</definition>
+        <argsstring>(Animatable a, Animatable b)</argsstring>
+        <name>operator!=</name>
+        <param>
+          <type><ref refid="class_micra_1_1_core_1_1_animatable" kindref="compound">Animatable</ref></type>
+          <declname>a</declname>
+        </param>
+        <param>
+          <type><ref refid="class_micra_1_1_core_1_1_animatable" kindref="compound">Animatable</ref></type>
+          <declname>b</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Animatable.cs" line="195" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Animatable.cs" bodystart="195" bodyend="198"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_animatable_1a3b13687f6bf6e3463e0d4757384f2087" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>override bool</type>
+        <definition>override bool Micra.Core.Animatable.Equals</definition>
+        <argsstring>(object obj)</argsstring>
+        <name>Equals</name>
+        <param>
+          <type>object</type>
+          <declname>obj</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Animatable.cs" line="200" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Animatable.cs" bodystart="200" bodyend="203"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_animatable_1a1c67edf5846ded97a1d12b7a7a4f8f6c" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>override int</type>
+        <definition>override int Micra.Core.Animatable.GetHashCode</definition>
+        <argsstring>()</argsstring>
+        <name>GetHashCode</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Animatable.cs" line="205" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Animatable.cs" bodystart="205" bodyend="207"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_animatable_1a2657885a3480546390fc5f7a4d251b43" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="class_micra_1_1_core_1_1_app_data" kindref="compound">AppData</ref></type>
+        <definition>AppData Micra.Core.Animatable.GetAppData</definition>
+        <argsstring>(ClassID cid, SuperClassID scid)</argsstring>
+        <name>GetAppData</name>
+        <param>
+          <type><ref refid="struct_micra_1_1_core_1_1_class_i_d" kindref="compound">ClassID</ref></type>
+          <declname>cid</declname>
+        </param>
+        <param>
+          <type><ref refid="struct_micra_1_1_core_1_1_super_class_i_d" kindref="compound">SuperClassID</ref></type>
+          <declname>scid</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Animatable.cs" line="215" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Animatable.cs" bodystart="215" bodyend="215"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_animatable_1a1f05a5f32d4a4227aded083c6431c586" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="class_micra_1_1_core_1_1_app_data" kindref="compound">AppData</ref></type>
+        <definition>AppData Micra.Core.Animatable.GetAppData</definition>
+        <argsstring>(Animatable plugin)</argsstring>
+        <name>GetAppData</name>
+        <param>
+          <type><ref refid="class_micra_1_1_core_1_1_animatable" kindref="compound">Animatable</ref></type>
+          <declname>plugin</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Animatable.cs" line="216" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Animatable.cs" bodystart="216" bodyend="216"/>
+        <references refid="class_micra_1_1_core_1_1_animatable_1a1e8eff94a4d40b89666cfd96f2c0b282" compoundref="_animatable_8cs" startline="210">Micra.Core.Animatable.ClassID</references>
+        <references refid="class_micra_1_1_core_1_1_animatable_1a743ff05031ca9d95ca4f5b078e29f946" compoundref="_animatable_8cs" startline="211">Micra.Core.Animatable.SuperClassID</references>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_animatable_1a61edf59c9f88800bc360d6e17ddafd47" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Micra.Core.Animatable.ClearAppData</definition>
+        <argsstring>()</argsstring>
+        <name>ClearAppData</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Animatable.cs" line="217" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Animatable.cs" bodystart="217" bodyend="217"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Represents common functionality for all scene elements. Wraps the Autodesk.Max.IAnimatable class which wraps the 3ds <ref refid="class_micra_1_1_core_1_1_max" kindref="compound">Max</ref> SDK <ref refid="class_micra_1_1_core_1_1_animatable" kindref="compound">Animatable</ref> class. Provides services for managing and exposing the wrapper to all derived classes. </para>    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="22">
+        <label>Micra.Core.BaseStdMaterial</label>
+        <link refid="class_micra_1_1_core_1_1_base_std_material"/>
+        <childnode refid="21" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="14">
+        <label>Micra.Core.SceneElement</label>
+        <link refid="class_micra_1_1_core_1_1_scene_element"/>
+        <childnode refid="8" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="16">
+        <label>Micra.Core.SceneObject</label>
+        <link refid="class_micra_1_1_core_1_1_scene_object"/>
+        <childnode refid="14" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="11">
+        <label>Micra.Core.Node</label>
+        <link refid="class_micra_1_1_core_1_1_node"/>
+        <childnode refid="8" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="21">
+        <label>Micra.Core.Material</label>
+        <link refid="class_micra_1_1_core_1_1_material"/>
+        <childnode refid="20" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="23">
+        <label>Micra.Core.StdMaterial</label>
+        <link refid="class_micra_1_1_core_1_1_std_material"/>
+        <childnode refid="22" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="12">
+        <label>Micra.Core.ParameterBlock1</label>
+        <link refid="class_micra_1_1_core_1_1_parameter_block1"/>
+        <childnode refid="8" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="13">
+        <label>Micra.Core.ParameterBlock2</label>
+        <link refid="class_micra_1_1_core_1_1_parameter_block2"/>
+        <childnode refid="8" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="24">
+        <label>Micra.Core.Texture</label>
+        <link refid="class_micra_1_1_core_1_1_texture"/>
+        <childnode refid="20" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="17">
+        <label>Micra.Core.Camera</label>
+        <link refid="class_micra_1_1_core_1_1_camera"/>
+        <childnode refid="16" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="18">
+        <label>Micra.Core.Geometry</label>
+        <link refid="class_micra_1_1_core_1_1_geometry"/>
+        <childnode refid="16" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="8">
+        <label>Micra.Core.ReferenceTarget</label>
+        <link refid="class_micra_1_1_core_1_1_reference_target"/>
+        <childnode refid="7" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="7">
+        <label>Micra.Core.ReferenceMaker</label>
+        <link refid="class_micra_1_1_core_1_1_reference_maker"/>
+        <childnode refid="6" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="10">
+        <label>Micra.Core.CustomAttributes</label>
+        <link refid="class_micra_1_1_core_1_1_custom_attributes"/>
+        <childnode refid="8" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="20">
+        <label>Micra.Core.ShadingObject</label>
+        <link refid="class_micra_1_1_core_1_1_shading_object"/>
+        <childnode refid="8" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>Micra.Core.Animatable</label>
+        <link refid="class_micra_1_1_core_1_1_animatable"/>
+      </node>
+      <node id="19">
+        <label>Micra.Core.Light</label>
+        <link refid="class_micra_1_1_core_1_1_light"/>
+        <childnode refid="16" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="9">
+        <label>Micra.Core.CustomAttribute</label>
+        <link refid="class_micra_1_1_core_1_1_custom_attribute"/>
+        <childnode refid="8" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="15">
+        <label>Micra.Core.Modifier</label>
+        <link refid="class_micra_1_1_core_1_1_modifier"/>
+        <childnode refid="14" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="25">
+        <label>Micra.Core.Animatable</label>
+        <link refid="class_micra_1_1_core_1_1_animatable"/>
+        <childnode refid="26" relation="usage">
+          <edgelabel>parameterBlock</edgelabel>
+        </childnode>
+      </node>
+      <node id="26">
+        <label>Micra.Core.IParameterBlock</label>
+        <link refid="interface_micra_1_1_core_1_1_i_parameter_block"/>
+      </node>
+    </collaborationgraph>
+    <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Animatable.cs" line="88" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Animatable.cs" bodystart="88" bodyend="256"/>
+    <listofallmembers>
+      <member refid="class_micra_1_1_core_1_1_animatable_1a7447ebfdfa1b5c49c3908334edcaa995" prot="public" virt="non-virtual"><scope>Micra::Core::Animatable</scope><name>_Anim</name></member>
+      <member refid="class_micra_1_1_core_1_1_animatable_1a014952bd2d29637c0ed71b32f1ad4807" prot="package" virt="non-virtual"><scope>Micra::Core::Animatable</scope><name>Animatable</name></member>
+      <member refid="class_micra_1_1_core_1_1_animatable_1a4a088130407a9d834ca65c1c6b20255f" prot="public" virt="non-virtual"><scope>Micra::Core::Animatable</scope><name>AnimHandle</name></member>
+      <member refid="class_micra_1_1_core_1_1_animatable_1a7304895f0a6857929d3aab907db7cd1f" prot="public" virt="non-virtual"><scope>Micra::Core::Animatable</scope><name>Anims</name></member>
+      <member refid="class_micra_1_1_core_1_1_animatable_1a1d7058760b77578b3f0aa73ac02ec0ab" prot="public" virt="non-virtual"><scope>Micra::Core::Animatable</scope><name>AttributeContainer</name></member>
+      <member refid="class_micra_1_1_core_1_1_animatable_1a1e8eff94a4d40b89666cfd96f2c0b282" prot="public" virt="non-virtual"><scope>Micra::Core::Animatable</scope><name>ClassID</name></member>
+      <member refid="class_micra_1_1_core_1_1_animatable_1adc1bd49a3dc65f202e6848e7746d97aa" prot="public" virt="non-virtual"><scope>Micra::Core::Animatable</scope><name>ClassName</name></member>
+      <member refid="class_micra_1_1_core_1_1_animatable_1a61edf59c9f88800bc360d6e17ddafd47" prot="public" virt="non-virtual"><scope>Micra::Core::Animatable</scope><name>ClearAppData</name></member>
+      <member refid="class_micra_1_1_core_1_1_animatable_1a5898e44fafdfc0b28894f556e1f7fa57" prot="public" virt="non-virtual"><scope>Micra::Core::Animatable</scope><name>CreatePluginInstance&lt; T &gt;</name></member>
+      <member refid="class_micra_1_1_core_1_1_animatable_1a32a37b9c84068a644c2488bf6f7e764b" prot="public" virt="non-virtual"><scope>Micra::Core::Animatable</scope><name>CreateWrapper&lt; T &gt;</name></member>
+      <member refid="class_micra_1_1_core_1_1_animatable_1a3b13687f6bf6e3463e0d4757384f2087" prot="public" virt="non-virtual"><scope>Micra::Core::Animatable</scope><name>Equals</name></member>
+      <member refid="class_micra_1_1_core_1_1_animatable_1a2657885a3480546390fc5f7a4d251b43" prot="public" virt="non-virtual"><scope>Micra::Core::Animatable</scope><name>GetAppData</name></member>
+      <member refid="class_micra_1_1_core_1_1_animatable_1a1f05a5f32d4a4227aded083c6431c586" prot="public" virt="non-virtual"><scope>Micra::Core::Animatable</scope><name>GetAppData</name></member>
+      <member refid="class_micra_1_1_core_1_1_animatable_1a1c67edf5846ded97a1d12b7a7a4f8f6c" prot="public" virt="non-virtual"><scope>Micra::Core::Animatable</scope><name>GetHashCode</name></member>
+      <member refid="class_micra_1_1_core_1_1_animatable_1a246fac518c0fac502df5754450db01d2" prot="public" virt="non-virtual"><scope>Micra::Core::Animatable</scope><name>operator!=</name></member>
+      <member refid="class_micra_1_1_core_1_1_animatable_1a64eb885c9f69ce79734e55885baa7c66" prot="public" virt="non-virtual"><scope>Micra::Core::Animatable</scope><name>operator==</name></member>
+      <member refid="class_micra_1_1_core_1_1_animatable_1a7942d170433ad2f7b8ce19bfcde45a48" prot="public" virt="non-virtual"><scope>Micra::Core::Animatable</scope><name>ParameterBlock</name></member>
+      <member refid="class_micra_1_1_core_1_1_animatable_1aae0278c0d6842fd3e79cd2700851cf4a" prot="protected" virt="non-virtual"><scope>Micra::Core::Animatable</scope><name>parameterBlock</name></member>
+      <member refid="class_micra_1_1_core_1_1_animatable_1a8adb3e32d41511c2ffd6007b8612e35d" prot="public" virt="non-virtual"><scope>Micra::Core::Animatable</scope><name>Params</name></member>
+      <member refid="class_micra_1_1_core_1_1_animatable_1a743ff05031ca9d95ca4f5b078e29f946" prot="public" virt="non-virtual"><scope>Micra::Core::Animatable</scope><name>SuperClassID</name></member>
+      <member refid="class_micra_1_1_core_1_1_animatable_1a63dfadedc8b28c3e5ced8c3e62a277a1" prot="public" virt="non-virtual"><scope>Micra::Core::Animatable</scope><name>this[int paramID]</name></member>
+      <member refid="class_micra_1_1_core_1_1_animatable_1ac4e35d5d21af8962f61a963f8f9ecdeb" prot="public" virt="non-virtual"><scope>Micra::Core::Animatable</scope><name>this[string sParamName]</name></member>
+      <member refid="class_micra_1_1_core_1_1_animatable_1a340a84a8efcb552049aa7623d4d11960" prot="public" virt="non-virtual"><scope>Micra::Core::Animatable</scope><name>Valid</name></member>
+      <member refid="class_micra_1_1_core_1_1_animatable_1a399c45d564034fef7a33b25300f2970f" prot="private" virt="non-virtual"><scope>Micra::Core::Animatable</scope><name>wrapped</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

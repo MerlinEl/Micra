@@ -1,0 +1,77 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
+  <compounddef id="struct_micra_1_1_core_1_1_mesh_1_1_face" kind="struct" prot="public">
+    <compoundname>Micra::Core::Mesh::Face</compoundname>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="struct_micra_1_1_core_1_1_mesh_1_1_face_1a5dc570143ca502b1a622e5474fc52048" prot="public" static="no" mutable="no">
+        <type>uint</type>
+        <definition>uint Micra.Core.Mesh.Face.a</definition>
+        <argsstring></argsstring>
+        <name>a</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Mesh.cs" line="26" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Mesh.cs" bodystart="26" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_micra_1_1_core_1_1_mesh_1_1_face_1ab24cc5c1af034dfd9177cbd834b8377e" prot="public" static="no" mutable="no">
+        <type>uint</type>
+        <definition>uint Micra.Core.Mesh.Face.b</definition>
+        <argsstring></argsstring>
+        <name>b</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Mesh.cs" line="27" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Mesh.cs" bodystart="27" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_micra_1_1_core_1_1_mesh_1_1_face_1ae91fd95ce0632ece6ae72b7ecedf7535" prot="public" static="no" mutable="no">
+        <type>uint</type>
+        <definition>uint Micra.Core.Mesh.Face.c</definition>
+        <argsstring></argsstring>
+        <name>c</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Mesh.cs" line="28" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Mesh.cs" bodystart="28" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="struct_micra_1_1_core_1_1_mesh_1_1_face_1a117108b393f69caa7449ac677ccc3fce" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>Micra.Core.Mesh.Face.Face</definition>
+        <argsstring>(IFace f)</argsstring>
+        <name>Face</name>
+        <param>
+          <type>IFace</type>
+          <declname>f</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Mesh.cs" line="30" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Mesh.cs" bodystart="30" bodyend="34"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Represents a mesh face. </para>    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Mesh.cs" line="25" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Mesh.cs" bodystart="25" bodyend="35"/>
+    <listofallmembers>
+      <member refid="struct_micra_1_1_core_1_1_mesh_1_1_face_1a5dc570143ca502b1a622e5474fc52048" prot="public" virt="non-virtual"><scope>Micra::Core::Mesh::Face</scope><name>a</name></member>
+      <member refid="struct_micra_1_1_core_1_1_mesh_1_1_face_1ab24cc5c1af034dfd9177cbd834b8377e" prot="public" virt="non-virtual"><scope>Micra::Core::Mesh::Face</scope><name>b</name></member>
+      <member refid="struct_micra_1_1_core_1_1_mesh_1_1_face_1ae91fd95ce0632ece6ae72b7ecedf7535" prot="public" virt="non-virtual"><scope>Micra::Core::Mesh::Face</scope><name>c</name></member>
+      <member refid="struct_micra_1_1_core_1_1_mesh_1_1_face_1a117108b393f69caa7449ac677ccc3fce" prot="public" virt="non-virtual"><scope>Micra::Core::Mesh::Face</scope><name>Face</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

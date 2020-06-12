@@ -1,0 +1,296 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
+  <compounddef id="class_micra_1_1_core_1_1_poly" kind="class" prot="public">
+    <compoundname>Micra::Core::Poly</compoundname>
+    <innerclass refid="struct_micra_1_1_core_1_1_poly_1_1_ngon" prot="public">Micra::Core::Poly::Ngon</innerclass>
+      <sectiondef kind="property">
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_poly_1aba8c9efd28421de7973ff3719e7577df" prot="private" static="no" readable="no" writable="no" gettable="yes" settable="no">
+        <type>IMNMesh</type>
+        <definition>IMNMesh Micra.Core.Poly._IMNMesh</definition>
+        <argsstring></argsstring>
+        <name>_IMNMesh</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Poly.cs" line="44" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Poly.cs" bodystart="44" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_poly_1a450ef867a9c031a4bb1e324b2259eecc" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="class_micra_1_1_core_1_1_point3" kindref="compound">Point3</ref></type>
+        <definition>Point3 Micra.Core.Poly.VertPos</definition>
+        <argsstring>(int vertIndex)</argsstring>
+        <name>VertPos</name>
+        <param>
+          <type>int</type>
+          <declname>vertIndex</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Poly.cs" line="34" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_poly_1a5e95b08bccc28a57fca1c3643d62081c" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="class_micra_1_1_core_1_1_point3" kindref="compound">Point3</ref></type>
+        <definition>Point3 Micra.Core.Poly.FaceCenter</definition>
+        <argsstring>(int faceIndex)</argsstring>
+        <name>FaceCenter</name>
+        <param>
+          <type>int</type>
+          <declname>faceIndex</declname>
+        </param>
+        <briefdescription>
+<para>Check if face have more than 4 vertices.</para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Poly.cs" line="37" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Poly.cs" bodystart="37" bodyend="43"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_poly_1ad1c0c6dd034f7b816ca6afe3f3d81048" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>List&lt; int &gt;</type>
+        <definition>List&lt;int&gt; Micra.Core.Poly.GetSelectedFaces</definition>
+        <argsstring>()</argsstring>
+        <name>GetSelectedFaces</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Poly.cs" line="47" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Poly.cs" bodystart="47" bodyend="65"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_poly_1a60e3d4a8165d525976b1bbb31bd8c81f" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>List&lt; int &gt;</type>
+        <definition>List&lt;int&gt; Micra.Core.Poly.GetSelectedEdges</definition>
+        <argsstring>()</argsstring>
+        <name>GetSelectedEdges</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Poly.cs" line="66" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Poly.cs" bodystart="66" bodyend="75"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_poly_1a64490d818f0923d42f1b49117c0934e7" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>double</type>
+        <definition>double Micra.Core.Poly.GetArea</definition>
+        <argsstring>()</argsstring>
+        <name>GetArea</name>
+        <briefdescription>
+<para>Calculate Face, Polygon, <ref refid="struct_micra_1_1_core_1_1_poly_1_1_ngon" kindref="compound">Ngon</ref> Area  </para>        </briefdescription>
+        <detaileddescription>
+<para><computeroutput> example: </computeroutput> </para><para>param: <emphasis></emphasis> </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Poly.cs" line="85" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Poly.cs" bodystart="85" bodyend="90"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_poly_1ac428c9a94c168c9efc4bd16ace675cd5" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>double</type>
+        <definition>double Micra.Core.Poly.GetFaceArea</definition>
+        <argsstring>(int faceIndex)</argsstring>
+        <name>GetFaceArea</name>
+        <param>
+          <type>int</type>
+          <declname>faceIndex</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>This script is based upon Heron’s Formula, which calculates the area of a triangle based upon knowing its three lengths. The script also calculates the area for quads. It does this by dividing the quad into two triangles. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Poly.cs" line="104" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Poly.cs" bodystart="104" bodyend="128"/>
+        <references refid="struct_micra_1_1_core_1_1_poly_1_1_ngon_1a3c74cf4f6d192fdfe2f1a72ad536d0cd" compoundref="_poly_8cs" startline="31">Micra.Core.Poly.Ngon.IsNgon</references>
+        <references refid="struct_micra_1_1_core_1_1_poly_1_1_ngon_1a293fe003d76d13be99a6d247793dce8a" compoundref="_poly_8cs" startline="23">Micra.Core.Poly.Ngon.verts</references>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="package-func">
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_poly_1a76cfb8317b084ab05414330f98f0710d" prot="package" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Micra.Core.Poly.Poly</definition>
+        <argsstring>(IMNMesh m)</argsstring>
+        <name>Poly</name>
+        <param>
+          <type>IMNMesh</type>
+          <declname>m</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Poly.cs" line="45" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_poly_1a789f1097b4ed6d28c4e045cf0999e082" prot="package" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool Micra.Core.Poly.IsFaceSelected</definition>
+        <argsstring>(int faceIndex)</argsstring>
+        <name>IsFaceSelected</name>
+        <param>
+          <type>int</type>
+          <declname>faceIndex</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Poly.cs" line="129" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_poly_1ad2bcd7614cd2ca1c94a0d0794369823f" prot="package" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool Micra.Core.Poly.IsEdgeSelected</definition>
+        <argsstring>(int edgeIndex)</argsstring>
+        <name>IsEdgeSelected</name>
+        <param>
+          <type>int</type>
+          <declname>edgeIndex</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Poly.cs" line="130" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_poly_1a5e413f3c18b298cafe824ad49d540cd7" prot="package" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool Micra.Core.Poly.IsVertSelected</definition>
+        <argsstring>(int edgeIndex)</argsstring>
+        <name>IsVertSelected</name>
+        <param>
+          <type>int</type>
+          <declname>edgeIndex</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Poly.cs" line="131" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_poly_1a41342c5077ecd76c45d9bfd6bddff823" prot="package" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Micra.Core.Poly.ShowFace</definition>
+        <argsstring>(int faceIncex)</argsstring>
+        <name>ShowFace</name>
+        <param>
+          <type>int</type>
+          <declname>faceIncex</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Poly.cs" line="133" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_poly_1aba8f31d40961b57910e08cf8bd9095fc" prot="package" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Micra.Core.Poly.HideFace</definition>
+        <argsstring>(int faceIncex)</argsstring>
+        <name>HideFace</name>
+        <param>
+          <type>int</type>
+          <declname>faceIncex</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Poly.cs" line="134" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_poly_1a05ac10c459d9794b905ba966dff6b328" prot="package" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Micra.Core.Poly.HideFaces</definition>
+        <argsstring>(bool selected)</argsstring>
+        <name>HideFaces</name>
+        <param>
+          <type>bool</type>
+          <declname>selected</declname>
+        </param>
+        <briefdescription>
+<para>Hide Selected or Unselected Faces  </para>        </briefdescription>
+        <detaileddescription>
+<para><computeroutput> example: GetPoly().HideFaces(true); </computeroutput> </para><para>param: <emphasis>selected</emphasis>  &gt; True(Hide Selected), False(Hide Unselected)</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Poly.cs" line="143" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Poly.cs" bodystart="143" bodyend="162"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_poly_1a5d44e75354847f56c63fc3287d7d5e0d" prot="package" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Micra.Core.Poly.UnhideFaces</definition>
+        <argsstring>()</argsstring>
+        <name>UnhideFaces</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Poly.cs" line="163" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Poly.cs" bodystart="163" bodyend="169"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-static-func">
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_poly_1ae6c3f38aaa18675ffc3c16a1b2897449" prot="private" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>double</type>
+        <definition>static double Micra.Core.Poly.GetFaceArea</definition>
+        <argsstring>(IMesh imesh, IFace face)</argsstring>
+        <name>GetFaceArea</name>
+        <param>
+          <type>IMesh</type>
+          <declname>imesh</declname>
+        </param>
+        <param>
+          <type>IFace</type>
+          <declname>face</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Poly.cs" line="91" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Poly.cs" bodystart="91" bodyend="97"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>This is poly data stored in a format that can be automatically serialized to file as XML and across a network via TCP. It computes both vertex normals and face normals ignoring smoothing group data. </para>    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Poly.cs" line="15" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Poly.cs" bodystart="15" bodyend="170"/>
+    <listofallmembers>
+      <member refid="class_micra_1_1_core_1_1_poly_1aba8c9efd28421de7973ff3719e7577df" prot="private" virt="non-virtual"><scope>Micra::Core::Poly</scope><name>_IMNMesh</name></member>
+      <member refid="class_micra_1_1_core_1_1_poly_1a5e95b08bccc28a57fca1c3643d62081c" prot="public" virt="non-virtual"><scope>Micra::Core::Poly</scope><name>FaceCenter</name></member>
+      <member refid="class_micra_1_1_core_1_1_poly_1a64490d818f0923d42f1b49117c0934e7" prot="public" virt="non-virtual"><scope>Micra::Core::Poly</scope><name>GetArea</name></member>
+      <member refid="class_micra_1_1_core_1_1_poly_1ae6c3f38aaa18675ffc3c16a1b2897449" prot="private" virt="non-virtual"><scope>Micra::Core::Poly</scope><name>GetFaceArea</name></member>
+      <member refid="class_micra_1_1_core_1_1_poly_1ac428c9a94c168c9efc4bd16ace675cd5" prot="public" virt="non-virtual"><scope>Micra::Core::Poly</scope><name>GetFaceArea</name></member>
+      <member refid="class_micra_1_1_core_1_1_poly_1a60e3d4a8165d525976b1bbb31bd8c81f" prot="public" virt="non-virtual"><scope>Micra::Core::Poly</scope><name>GetSelectedEdges</name></member>
+      <member refid="class_micra_1_1_core_1_1_poly_1ad1c0c6dd034f7b816ca6afe3f3d81048" prot="public" virt="non-virtual"><scope>Micra::Core::Poly</scope><name>GetSelectedFaces</name></member>
+      <member refid="class_micra_1_1_core_1_1_poly_1aba8f31d40961b57910e08cf8bd9095fc" prot="package" virt="non-virtual"><scope>Micra::Core::Poly</scope><name>HideFace</name></member>
+      <member refid="class_micra_1_1_core_1_1_poly_1a05ac10c459d9794b905ba966dff6b328" prot="package" virt="non-virtual"><scope>Micra::Core::Poly</scope><name>HideFaces</name></member>
+      <member refid="class_micra_1_1_core_1_1_poly_1ad2bcd7614cd2ca1c94a0d0794369823f" prot="package" virt="non-virtual"><scope>Micra::Core::Poly</scope><name>IsEdgeSelected</name></member>
+      <member refid="class_micra_1_1_core_1_1_poly_1a789f1097b4ed6d28c4e045cf0999e082" prot="package" virt="non-virtual"><scope>Micra::Core::Poly</scope><name>IsFaceSelected</name></member>
+      <member refid="class_micra_1_1_core_1_1_poly_1a5e413f3c18b298cafe824ad49d540cd7" prot="package" virt="non-virtual"><scope>Micra::Core::Poly</scope><name>IsVertSelected</name></member>
+      <member refid="class_micra_1_1_core_1_1_poly_1a76cfb8317b084ab05414330f98f0710d" prot="package" virt="non-virtual"><scope>Micra::Core::Poly</scope><name>Poly</name></member>
+      <member refid="class_micra_1_1_core_1_1_poly_1a41342c5077ecd76c45d9bfd6bddff823" prot="package" virt="non-virtual"><scope>Micra::Core::Poly</scope><name>ShowFace</name></member>
+      <member refid="class_micra_1_1_core_1_1_poly_1a5d44e75354847f56c63fc3287d7d5e0d" prot="package" virt="non-virtual"><scope>Micra::Core::Poly</scope><name>UnhideFaces</name></member>
+      <member refid="class_micra_1_1_core_1_1_poly_1a450ef867a9c031a4bb1e324b2259eecc" prot="public" virt="non-virtual"><scope>Micra::Core::Poly</scope><name>VertPos</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,310 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
+  <compounddef id="class_micra_tools_1_1_launcher_1_1_form1" kind="class" prot="public">
+    <compoundname>MicraTools::Launcher::Form1</compoundname>
+    <basecompoundref prot="public" virt="non-virtual">Form</basecompoundref>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="class_micra_tools_1_1_launcher_1_1_form1_1a6500fb0ed061f2dbffa7e3e704920023" prot="private" static="no" mutable="no">
+        <type><ref refid="class_micra_1_1_tools_1_1_mx_console" kindref="compound">MxConsole</ref></type>
+        <definition>MxConsole MicraTools.Launcher.Form1.CConsole</definition>
+        <argsstring></argsstring>
+        <name>CConsole</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Form1.cs" line="10" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Form1.cs" bodystart="10" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_micra_tools_1_1_launcher_1_1_form1_1a91708ff5b5331f9738a5af8a67e34a45" prot="private" static="no" mutable="no">
+        <type>System.ComponentModel.IContainer</type>
+        <definition>System.ComponentModel.IContainer MicraTools.Launcher.Form1.components</definition>
+        <argsstring></argsstring>
+        <name>components</name>
+        <initializer>= null</initializer>
+        <briefdescription>
+<para>Required designer variable. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Form1.Designer.cs" line="6" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Form1.Designer.cs" bodystart="6" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_micra_tools_1_1_launcher_1_1_form1_1a0cdb2ba7227e62bcdb71729572e474a5" prot="private" static="no" mutable="no">
+        <type>System.Windows.Forms.Button</type>
+        <definition>System.Windows.Forms.Button MicraTools.Launcher.Form1.button1</definition>
+        <argsstring></argsstring>
+        <name>button1</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Form1.Designer.cs" line="100" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Form1.Designer.cs" bodystart="100" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_micra_tools_1_1_launcher_1_1_form1_1a03a2bf21d14444c10113bab9f11e8a0f" prot="private" static="no" mutable="no">
+        <type>System.Windows.Forms.Button</type>
+        <definition>System.Windows.Forms.Button MicraTools.Launcher.Form1.button2</definition>
+        <argsstring></argsstring>
+        <name>button2</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Form1.Designer.cs" line="101" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Form1.Designer.cs" bodystart="101" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_micra_tools_1_1_launcher_1_1_form1_1a3d8770dcd5b6e790a7c45b916c39276d" prot="private" static="no" mutable="no">
+        <type>System.Windows.Forms.Button</type>
+        <definition>System.Windows.Forms.Button MicraTools.Launcher.Form1.button3</definition>
+        <argsstring></argsstring>
+        <name>button3</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Form1.Designer.cs" line="102" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Form1.Designer.cs" bodystart="102" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_micra_tools_1_1_launcher_1_1_form1_1a61e2b88b327d13905c65f2cc565b2f1b" prot="private" static="no" mutable="no">
+        <type>System.Windows.Forms.Button</type>
+        <definition>System.Windows.Forms.Button MicraTools.Launcher.Form1.button4</definition>
+        <argsstring></argsstring>
+        <name>button4</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Form1.Designer.cs" line="103" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Form1.Designer.cs" bodystart="103" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_micra_tools_1_1_launcher_1_1_form1_1a9e3d167b26761a5b557162462cfdd050" prot="private" static="no" mutable="no">
+        <type>System.Windows.Forms.Button</type>
+        <definition>System.Windows.Forms.Button MicraTools.Launcher.Form1.BtnDomainManager</definition>
+        <argsstring></argsstring>
+        <name>BtnDomainManager</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Form1.Designer.cs" line="104" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Form1.Designer.cs" bodystart="104" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="class_micra_tools_1_1_launcher_1_1_form1_1ad32f673e60742ac4107cf4520a3935f9" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>MicraTools.Launcher.Form1.Form1</definition>
+        <argsstring>()</argsstring>
+        <name>Form1</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Form1.cs" line="11" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Form1.cs" bodystart="11" bodyend="14"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-func">
+      <memberdef kind="function" id="class_micra_tools_1_1_launcher_1_1_form1_1ad99de74c430bd20e87f52433fe5f3ee1" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void MicraTools.Launcher.Form1.InitializeProgram</definition>
+        <argsstring>()</argsstring>
+        <name>InitializeProgram</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Form1.cs" line="16" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Form1.cs" bodystart="16" bodyend="39"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_tools_1_1_launcher_1_1_form1_1aa4aebbb8011dffd65901c6308f8995dd" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void MicraTools.Launcher.Form1.Button2_Click</definition>
+        <argsstring>(object sender, System.EventArgs e)</argsstring>
+        <name>Button2_Click</name>
+        <param>
+          <type>object</type>
+          <declname>sender</declname>
+        </param>
+        <param>
+          <type>System.EventArgs</type>
+          <declname>e</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Form1.cs" line="41" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Form1.cs" bodystart="41" bodyend="50"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_tools_1_1_launcher_1_1_form1_1a187f14328dc602358bc310464a10bc13" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void MicraTools.Launcher.Form1.Button3_Click</definition>
+        <argsstring>(object sender, System.EventArgs e)</argsstring>
+        <name>Button3_Click</name>
+        <param>
+          <type>object</type>
+          <declname>sender</declname>
+        </param>
+        <param>
+          <type>System.EventArgs</type>
+          <declname>e</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Form1.cs" line="52" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Form1.cs" bodystart="52" bodyend="55"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_tools_1_1_launcher_1_1_form1_1ab4ab65251c4bdc97bd9d03d4a90ef48e" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void MicraTools.Launcher.Form1.Button4_Click</definition>
+        <argsstring>(object sender, System.EventArgs e)</argsstring>
+        <name>Button4_Click</name>
+        <param>
+          <type>object</type>
+          <declname>sender</declname>
+        </param>
+        <param>
+          <type>System.EventArgs</type>
+          <declname>e</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Form1.cs" line="57" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Form1.cs" bodystart="57" bodyend="60"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_tools_1_1_launcher_1_1_form1_1a17d4c8b94c779056465af16404bc564f" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void MicraTools.Launcher.Form1.BtnDomainManager_Click</definition>
+        <argsstring>(object sender, System.EventArgs e)</argsstring>
+        <name>BtnDomainManager_Click</name>
+        <param>
+          <type>object</type>
+          <declname>sender</declname>
+        </param>
+        <param>
+          <type>System.EventArgs</type>
+          <declname>e</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Form1.cs" line="62" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Form1.cs" bodystart="62" bodyend="65"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_tools_1_1_launcher_1_1_form1_1aec2096a7f2f08a2db74f10cf0e830ed6" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void MicraTools.Launcher.Form1.InitializeComponent</definition>
+        <argsstring>()</argsstring>
+        <name>InitializeComponent</name>
+        <briefdescription>
+<para>Required method for Designer support - do not modify the contents of this method with the code editor. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Form1.Designer.cs" line="25" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Form1.Designer.cs" bodystart="25" bodyend="96"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="protected-func">
+      <memberdef kind="function" id="class_micra_tools_1_1_launcher_1_1_form1_1a19a97326fa626f0baa6dfb9d1776f462" prot="protected" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>override void</type>
+        <definition>override void MicraTools.Launcher.Form1.Dispose</definition>
+        <argsstring>(bool disposing)</argsstring>
+        <name>Dispose</name>
+        <param>
+          <type>bool</type>
+          <declname>disposing</declname>
+        </param>
+        <briefdescription>
+<para>Clean up any resources being used. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>disposing</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>true if managed resources should be disposed; otherwise, false.</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Form1.Designer.cs" line="12" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Form1.Designer.cs" bodystart="12" bodyend="17"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="130">
+        <label>Form</label>
+      </node>
+      <node id="129">
+        <label>MicraTools.Launcher.Form1</label>
+        <link refid="class_micra_tools_1_1_launcher_1_1_form1"/>
+        <childnode refid="130" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="132">
+        <label>Form</label>
+      </node>
+      <node id="133">
+        <label>System</label>
+      </node>
+      <node id="131">
+        <label>MicraTools.Launcher.Form1</label>
+        <link refid="class_micra_tools_1_1_launcher_1_1_form1"/>
+        <childnode refid="132" relation="public-inheritance">
+        </childnode>
+        <childnode refid="133" relation="usage">
+          <edgelabel>button4</edgelabel>
+          <edgelabel>components</edgelabel>
+          <edgelabel>BtnDomainManager</edgelabel>
+          <edgelabel>button1</edgelabel>
+          <edgelabel>button2</edgelabel>
+          <edgelabel>button3</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Form1.cs" line="9" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Form1.cs" bodystart="9" bodyend="66"/>
+    <listofallmembers>
+      <member refid="class_micra_tools_1_1_launcher_1_1_form1_1a9e3d167b26761a5b557162462cfdd050" prot="private" virt="non-virtual"><scope>MicraTools::Launcher::Form1</scope><name>BtnDomainManager</name></member>
+      <member refid="class_micra_tools_1_1_launcher_1_1_form1_1a17d4c8b94c779056465af16404bc564f" prot="private" virt="non-virtual"><scope>MicraTools::Launcher::Form1</scope><name>BtnDomainManager_Click</name></member>
+      <member refid="class_micra_tools_1_1_launcher_1_1_form1_1a0cdb2ba7227e62bcdb71729572e474a5" prot="private" virt="non-virtual"><scope>MicraTools::Launcher::Form1</scope><name>button1</name></member>
+      <member refid="class_micra_tools_1_1_launcher_1_1_form1_1a03a2bf21d14444c10113bab9f11e8a0f" prot="private" virt="non-virtual"><scope>MicraTools::Launcher::Form1</scope><name>button2</name></member>
+      <member refid="class_micra_tools_1_1_launcher_1_1_form1_1aa4aebbb8011dffd65901c6308f8995dd" prot="private" virt="non-virtual"><scope>MicraTools::Launcher::Form1</scope><name>Button2_Click</name></member>
+      <member refid="class_micra_tools_1_1_launcher_1_1_form1_1a3d8770dcd5b6e790a7c45b916c39276d" prot="private" virt="non-virtual"><scope>MicraTools::Launcher::Form1</scope><name>button3</name></member>
+      <member refid="class_micra_tools_1_1_launcher_1_1_form1_1a187f14328dc602358bc310464a10bc13" prot="private" virt="non-virtual"><scope>MicraTools::Launcher::Form1</scope><name>Button3_Click</name></member>
+      <member refid="class_micra_tools_1_1_launcher_1_1_form1_1a61e2b88b327d13905c65f2cc565b2f1b" prot="private" virt="non-virtual"><scope>MicraTools::Launcher::Form1</scope><name>button4</name></member>
+      <member refid="class_micra_tools_1_1_launcher_1_1_form1_1ab4ab65251c4bdc97bd9d03d4a90ef48e" prot="private" virt="non-virtual"><scope>MicraTools::Launcher::Form1</scope><name>Button4_Click</name></member>
+      <member refid="class_micra_tools_1_1_launcher_1_1_form1_1a6500fb0ed061f2dbffa7e3e704920023" prot="private" virt="non-virtual"><scope>MicraTools::Launcher::Form1</scope><name>CConsole</name></member>
+      <member refid="class_micra_tools_1_1_launcher_1_1_form1_1a91708ff5b5331f9738a5af8a67e34a45" prot="private" virt="non-virtual"><scope>MicraTools::Launcher::Form1</scope><name>components</name></member>
+      <member refid="class_micra_tools_1_1_launcher_1_1_form1_1a19a97326fa626f0baa6dfb9d1776f462" prot="protected" virt="non-virtual"><scope>MicraTools::Launcher::Form1</scope><name>Dispose</name></member>
+      <member refid="class_micra_tools_1_1_launcher_1_1_form1_1ad32f673e60742ac4107cf4520a3935f9" prot="public" virt="non-virtual"><scope>MicraTools::Launcher::Form1</scope><name>Form1</name></member>
+      <member refid="class_micra_tools_1_1_launcher_1_1_form1_1aec2096a7f2f08a2db74f10cf0e830ed6" prot="private" virt="non-virtual"><scope>MicraTools::Launcher::Form1</scope><name>InitializeComponent</name></member>
+      <member refid="class_micra_tools_1_1_launcher_1_1_form1_1ad99de74c430bd20e87f52433fe5f3ee1" prot="private" virt="non-virtual"><scope>MicraTools::Launcher::Form1</scope><name>InitializeProgram</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

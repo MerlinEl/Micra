@@ -7,6 +7,8 @@
 //
 using Autodesk.Max;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Micra.Core {
     /// <summary>
@@ -43,8 +45,7 @@ namespace Micra.Core {
             }
         }*/
 
-        //public IMesh _IMesh;
-
+        private IMesh _IMesh { get; }
         public Face[] faces;
         //public Edge[] edges;
         public Point3[] verts;
@@ -53,17 +54,14 @@ namespace Micra.Core {
         public Point3[] fnormals;
         public Point3[] vnormals;
 
-        public Mesh() {
-        }
-
         internal Mesh(IMesh m) {
+            _IMesh = m;
+            /*
+             Kernel.WriteLine("Init Mesh from Imesh > NumVerts:{0} EdgeSel.IsEmpty:{1}", _IMesh.NumVerts, m.EdgeSel.IsEmpty);
+             for (int i = 0; i < m.EdgeSel.Size; i++ ) {
 
-           /* _IMesh = m;
-            Kernel.WriteLine("Init Mesh from Imesh > NumVerts:{0} EdgeSel.IsEmpty:{1}", _IMesh.NumVerts, m.EdgeSel.IsEmpty);
-            for (int i = 0; i < m.EdgeSel.Size; i++ ) {
-
-                Kernel.WriteLine("\tedge{0}", m.EdgeSel[i]);
-            }*/
+                 Kernel.WriteLine("\tedge{0}", m.EdgeSel[i]);
+             }*/
 
             faces = new Face[m.NumFaces];
             for ( int i = 0; i < m.NumFaces; ++i ) faces[i] = new Face(m.Faces[i]); //from IFace
@@ -104,14 +102,79 @@ namespace Micra.Core {
             // Last step is to normalize the vector normals.
             for ( int i = 0; i < m.NumVerts; ++i ) vnormals[i].Normalize();
         }
-        public double Area(int faceIndex) => faceIndex >= faces.Length - 1 ? -1 : Area(faces[faceIndex]);
+        internal double GetArea() => faces.Sum(f => GetFaceArea(f));
+        public double GetFaceArea(int faceIndex) => faceIndex >= faces.Length - 1 ? -1 : GetFaceArea(faces[faceIndex]);
         // The area of a face is very easy to compute, its just half the length of the normal cross product
-        public double Area(Face f) {
+        public double GetFaceArea(Face f) {
 
             Point3 corner = verts[f.a];
             Vector3 a = Vector3.FromPoints(verts[f.b], corner);
             Vector3 b = Vector3.FromPoints(verts[f.c], corner);
             return Vector3.Cross(a, b).Length / 2.0;
+        }
+
+        internal List<int> GetSelectedFaces() {//im:Autodesk.Max.Wrappers.Mesh
+            Max.Log("GetSelectedFaces > on Mesh!");
+            List<int> fsel = new List<int>() { };
+            _IMesh.FaceSel.IEnumerable().ForEach((item, index) => {
+
+                if ( item == 1 ) fsel.Add(index); //+3DsMax count + 1
+            });
+            return fsel;
+        }
+
+        public List<int> GetSelectedEdges() {
+
+            List<int> esel = new List<int>() { };
+            _IMesh.EdgeSel.IEnumerable().ForEach((item, index) => {
+
+                if ( item == 1 ) esel.Add(index); //+3DsMax count + 1
+            });
+            return esel;
+        }
+
+        public List<int> GetSelectedVerts() {
+
+            List<int> vsel = new List<int>() { };
+            _IMesh.VertSel.IEnumerable().ForEach((item, index) => {
+
+                if ( item == 1 ) vsel.Add(index); //+3DsMax count + 1
+            });
+            return vsel;
+        }
+
+
+
+        internal void HideFaces(List<int> lists) => lists.ForEach(i => _IMesh.Faces[i].Hide()); //TODO validate list indexes
+        /// <summary> Hide Selected or Unselected Faces
+        ///     <example> 
+        ///         <code>
+		///             example: GetMesh().HideFaces(true);
+		///         </code>
+		///     </example>
+        ///     <para>param: <paramref name="selected"/> > True(Hide Selected), False(Hide Unselected)</para>
+        /// </summary>
+        internal void HideFaces(bool selected) {
+            Max.Log("HideFaces > on Mesh!");
+            for ( int i = 0; i < _IMesh.FaceSel.Size; i++ ) {
+
+                bool isSelected = _IMesh.FaceSel[i] == 1;
+                //Max.Log("face:{0} selected:{1} ", i, isSelected);
+                if ( selected && isSelected ) {
+                    Max.Log("hide face:{0}", i);
+                    _IMesh.Faces[i].Hide();
+
+                } else if ( !selected && !isSelected ) _IMesh.Faces[i].Hide();
+            }
+            _IMesh.InvalidateTopologyCache();
+        }
+        internal void UnhideFaces() {
+            _IMesh.Faces.ForEach<IFace>(f => f.Show());
+            _IMesh.InvalidateTopologyCache();
+        }
+
+        internal double EdgeLength(int edgeIndex) {
+            throw new NotImplementedException();
         }
     }
 }

@@ -1,0 +1,296 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
+  <compounddef id="_mx_domain_8cs" kind="file">
+    <compoundname>MxDomain.cs</compoundname>
+    <innerclass refid="class_micra_1_1_domain_1_1_mx_domain" prot="public">Micra::Domain::MxDomain</innerclass>
+    <innerclass refid="class_micra_1_1_domain_1_1_assembly_sand_box_loader" prot="public">Micra::Domain::AssemblySandBoxLoader</innerclass>
+    <innernamespace refid="namespace_micra_1_1_domain">Micra::Domain</innernamespace>
+    <innernamespace refid="namespace_system_1_1_globalization">System::Globalization</innernamespace>
+    <innernamespace refid="namespace_system_1_1_security">System::Security</innernamespace>
+    <innernamespace refid="namespace_system_1_1_security_1_1_permissions">System::Security::Permissions</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="keyword">using</highlight><highlight class="normal"><sp/>System;</highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="keyword">using</highlight><highlight class="normal"><sp/>System.Globalization;</highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight><highlight class="keyword">using</highlight><highlight class="normal"><sp/>System.IO;</highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="keyword">using</highlight><highlight class="normal"><sp/>System.Linq;</highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="keyword">using</highlight><highlight class="normal"><sp/>System.Reflection;</highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="keyword">using</highlight><highlight class="normal"><sp/>System.Security;</highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="keyword">using</highlight><highlight class="normal"><sp/>System.Security.Permissions;</highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight><highlight class="keyword">using</highlight><highlight class="normal"><sp/>System.Windows.Forms;</highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">Micra.Domain<sp/>{</highlight></codeline>
+<codeline lineno="11" refid="class_micra_1_1_domain_1_1_mx_domain" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="class_micra_1_1_domain_1_1_mx_domain" kindref="compound">MxDomain</ref><sp/>{</highlight></codeline>
+<codeline lineno="12" refid="class_micra_1_1_domain_1_1_mx_domain_1a9ff61243148d704610ea9bfdc40ea352" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">private</highlight><highlight class="normal"><sp/>AppDomain<sp/><ref refid="class_micra_1_1_domain_1_1_mx_domain_1a9ff61243148d704610ea9bfdc40ea352" kindref="member">appDomain</ref>;</highlight></codeline>
+<codeline lineno="13"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//private<sp/>static<sp/>string<sp/>AppBaseDir;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="14" refid="class_micra_1_1_domain_1_1_mx_domain_1aca9e5afefcc71e35a46dc1d7124db01c" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>Debug<sp/>=<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="15" refid="class_micra_1_1_domain_1_1_mx_domain_1a4211ae7397dc0aaefdbc3be636bf8761" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal"><sp/>FriendlyName<sp/>=&gt;<sp/>appDomain.FriendlyName;</highlight></codeline>
+<codeline lineno="16"><highlight class="normal"></highlight></codeline>
+<codeline lineno="17"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/><ref refid="class_micra_1_1_domain_1_1_mx_domain" kindref="compound">MxDomain</ref>(</highlight><highlight class="keywordtype">string</highlight><highlight class="normal"><sp/>domainName)<sp/>=&gt;<sp/>CrteateDomain(domainName);</highlight></codeline>
+<codeline lineno="18"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*public<sp/>MxDomain(string<sp/>domainName)<sp/>=&gt;<sp/>CrteateDomain(domainName,<sp/>AppBaseDir);</highlight></codeline>
+<codeline lineno="19"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>public<sp/>MxDomain(string<sp/>domainName,<sp/>string<sp/>applicationBase)<sp/>=&gt;<sp/>CrteateDomain(domainName,<sp/>applicationBase);*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="20"><highlight class="normal"></highlight></codeline>
+<codeline lineno="21" refid="class_micra_1_1_domain_1_1_mx_domain_1ad980550b9794b39068b6899662347dc7" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">private</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_micra_1_1_domain_1_1_mx_domain_1ad980550b9794b39068b6899662347dc7" kindref="member">CrteateDomain</ref>(</highlight><highlight class="keywordtype">string</highlight><highlight class="normal"><sp/>domainName)<sp/>{<sp/></highlight><highlight class="comment">//,<sp/>string<sp/>applicationBase</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="22"><highlight class="normal"></highlight></codeline>
+<codeline lineno="23"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal"><sp/>applicationBase<sp/>=<sp/>Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);<sp/></highlight><highlight class="comment">//not<sp/>works<sp/>when<sp/>using<sp/>ReadAllBytes</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="24"><highlight class="normal"></highlight></codeline>
+<codeline lineno="25"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Listener.WriteLine(</highlight><highlight class="stringliteral">&quot;MxDomain<sp/>&gt;<sp/>CrteateDomain<sp/>&gt;<sp/>GetExecutingAssembly<sp/>dir:{0}&quot;</highlight><highlight class="normal">,<sp/>applicationBase);</highlight></codeline>
+<codeline lineno="26"><highlight class="normal"></highlight></codeline>
+<codeline lineno="27"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//FileAttributes<sp/>attr<sp/>=<sp/>File.GetAttributes(applicationBase);</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="28"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//if<sp/>(<sp/>attr.HasFlag(FileAttributes.Directory)<sp/>&amp;&amp;<sp/>!Directory.Exists(applicationBase)<sp/>)<sp/>return;<sp/>//D:\ReneBaca\Aprog\Micra\Micra4\Assembly</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="29"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//AppBaseDir<sp/>=<sp/>applicationBase;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="30"><highlight class="normal"></highlight></codeline>
+<codeline lineno="31"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>PermissionSet<sp/>trustedLoadGrantSet<sp/>=<sp/></highlight><highlight class="keyword">new</highlight><highlight class="normal"><sp/>PermissionSet(PermissionState.Unrestricted);</highlight></codeline>
+<codeline lineno="32"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>AppDomainSetup<sp/>trustedLoadSetup<sp/>=<sp/></highlight><highlight class="keyword">new</highlight><highlight class="normal"><sp/>AppDomainSetup<sp/>{</highlight></codeline>
+<codeline lineno="33"><highlight class="normal"></highlight></codeline>
+<codeline lineno="34"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ApplicationBase<sp/>=<sp/>applicationBase</highlight></codeline>
+<codeline lineno="35"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="36"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>AppDomain.CurrentDomain.AssemblyResolve<sp/>+=<sp/>CurrentDomain_AssemblyResolve;</highlight></codeline>
+<codeline lineno="37"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>appDomain<sp/>=<sp/>AppDomain.CreateDomain(domainName,<sp/>null,<sp/>trustedLoadSetup,<sp/>trustedLoadGrantSet);</highlight></codeline>
+<codeline lineno="38"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="39"><highlight class="normal"></highlight></codeline>
+<codeline lineno="40" refid="class_micra_1_1_domain_1_1_mx_domain_1a720e852a22898f8a61b146260569f5e9" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_micra_1_1_domain_1_1_mx_domain_1a720e852a22898f8a61b146260569f5e9" kindref="member">DestroyDomain</ref>()<sp/>{</highlight></codeline>
+<codeline lineno="41"><highlight class="normal"></highlight></codeline>
+<codeline lineno="42"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(<sp/>appDomain<sp/>==<sp/>null<sp/>)<sp/>{</highlight></codeline>
+<codeline lineno="43"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Listener.WriteLine(</highlight><highlight class="stringliteral">&quot;Domain<sp/>not<sp/>Exists&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="44"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="45"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="46"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>AppDomain.Unload(appDomain);</highlight></codeline>
+<codeline lineno="47"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>appDomain<sp/>=<sp/>null;</highlight></codeline>
+<codeline lineno="48"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="49"><highlight class="normal"></highlight></codeline>
+<codeline lineno="50" refid="class_micra_1_1_domain_1_1_mx_domain_1a81598a1968d5254cfebd4bcbe4ba6f96" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/><ref refid="class_micra_1_1_domain_1_1_mx_domain" kindref="compound">MxDomain</ref><sp/><ref refid="class_micra_1_1_domain_1_1_mx_domain_1a81598a1968d5254cfebd4bcbe4ba6f96" kindref="member">FromDomain</ref>(AppDomain<sp/>domain)<sp/>{</highlight></codeline>
+<codeline lineno="51"><highlight class="normal"></highlight></codeline>
+<codeline lineno="52"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="class_micra_1_1_domain_1_1_mx_domain" kindref="compound">MxDomain</ref><sp/>d<sp/>=<sp/></highlight><highlight class="keyword">new</highlight><highlight class="normal"><sp/><ref refid="class_micra_1_1_domain_1_1_mx_domain" kindref="compound">MxDomain</ref>(domain.FriendlyName)<sp/>{</highlight></codeline>
+<codeline lineno="53"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>appDomain<sp/>=<sp/>domain</highlight></codeline>
+<codeline lineno="54"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="55"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>d;</highlight></codeline>
+<codeline lineno="56"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="57"><highlight class="normal"></highlight></codeline>
+<codeline lineno="58"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>ShowUi(Form<sp/>owner)<sp/>=&gt;<sp/></highlight><highlight class="keyword">new</highlight><highlight class="normal"><sp/><ref refid="class_micra_1_1_domain_1_1_domain_ui" kindref="compound">DomainUi</ref>()<sp/>{<sp/>Owner<sp/>=<sp/>owner<sp/>}.Show();</highlight></codeline>
+<codeline lineno="59"><highlight class="normal"></highlight></codeline>
+<codeline lineno="60" refid="class_micra_1_1_domain_1_1_mx_domain_1a0ba94b4b2bba8691d7bbc72ad68b2fda" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal"><sp/>AssemblyDirectory<sp/>{</highlight></codeline>
+<codeline lineno="61"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">get</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="62"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal"><sp/>codeBase<sp/>=<sp/>Assembly.GetExecutingAssembly().CodeBase;</highlight></codeline>
+<codeline lineno="63"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>UriBuilder<sp/>uri<sp/>=<sp/></highlight><highlight class="keyword">new</highlight><highlight class="normal"><sp/>UriBuilder(codeBase);</highlight></codeline>
+<codeline lineno="64"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal"><sp/>path<sp/>=<sp/>Uri.UnescapeDataString(uri.Path);</highlight></codeline>
+<codeline lineno="65"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>Path.GetDirectoryName(path);</highlight></codeline>
+<codeline lineno="66"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="67"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="68"><highlight class="normal"></highlight></codeline>
+<codeline lineno="69"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*</highlight></codeline>
+<codeline lineno="70"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>Unable<sp/>to<sp/>cast<sp/>transparent<sp/>proxy<sp/>to<sp/>type<sp/>&apos;Configuration.CompileProxy.Compiler&apos;.</highlight></codeline>
+<codeline lineno="71"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/></highlight></codeline>
+<codeline lineno="72"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Solution<sp/>found.</highlight></codeline>
+<codeline lineno="73"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>The<sp/>solution<sp/>is<sp/>to<sp/>subscribe<sp/>to<sp/>the<sp/>AssemblyResolve<sp/>Event<sp/>for<sp/>the<sp/>first<sp/>AppDomain<sp/></highlight></codeline>
+<codeline lineno="74"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>(this<sp/>is<sp/>if<sp/>you<sp/>use<sp/>the<sp/>CreateInstanceAndUnWrap()<sp/>which<sp/>also<sp/>requires<sp/>you<sp/>to<sp/></highlight></codeline>
+<codeline lineno="75"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>set<sp/>the<sp/>AppBase<sp/>of<sp/>your<sp/>new<sp/>AppDomain<sp/>to<sp/>the<sp/>location<sp/>of<sp/>your<sp/>assemblies).</highlight></codeline>
+<codeline lineno="76"><highlight class="comment"></highlight></codeline>
+<codeline lineno="77"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>(I<sp/>did<sp/>notice<sp/>an<sp/>infinite<sp/>loop<sp/>when<sp/>subscribing<sp/>to<sp/>this<sp/>event<sp/>before,<sp/></highlight></codeline>
+<codeline lineno="78"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>maybe<sp/>it<sp/>was<sp/>because<sp/>I<sp/>was<sp/>using<sp/>CreateInstanceFromAndUnWrap()).</highlight></codeline>
+<codeline lineno="79"><highlight class="comment"></highlight></codeline>
+<codeline lineno="80"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>the<sp/>Configuration.GalaxyBuildTask.GalaxyBuildTask._presentProjectLocation<sp/></highlight></codeline>
+<codeline lineno="81"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>is<sp/>set<sp/>earlier<sp/>using<sp/>_presentProjectLocation<sp/>=<sp/>BuildEngine.ProjectFileOfTaskNode;</highlight></codeline>
+<codeline lineno="82"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>this<sp/>sets<sp/>the<sp/>location<sp/>to<sp/>be<sp/>that<sp/>of<sp/>the<sp/>current<sp/>VS<sp/>project,<sp/></highlight></codeline>
+<codeline lineno="83"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>because<sp/>this<sp/>is<sp/>launched<sp/>from<sp/>a<sp/>build<sp/>task<sp/>it<sp/>is<sp/>required<sp/>to<sp/>locate<sp/>the<sp/>current<sp/>project.</highlight></codeline>
+<codeline lineno="84"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="85" refid="class_micra_1_1_domain_1_1_mx_domain_1add149c2eb36a7caa83fddb6ba4e68d02" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">private</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/>Assembly<sp/><ref refid="class_micra_1_1_domain_1_1_mx_domain_1add149c2eb36a7caa83fddb6ba4e68d02" kindref="member">CurrentDomain_AssemblyResolve</ref>(</highlight><highlight class="keywordtype">object</highlight><highlight class="normal"><sp/>sender,<sp/>ResolveEventArgs<sp/>args)<sp/>{</highlight></codeline>
+<codeline lineno="86"><highlight class="normal"></highlight></codeline>
+<codeline lineno="87"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal"><sp/>projectDir<sp/>=<sp/>Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);</highlight></codeline>
+<codeline lineno="88"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal"><sp/>shortAssemblyName<sp/>=<sp/>args.Name.Substring(0,<sp/>args.Name.IndexOf(</highlight><highlight class="charliteral">&apos;,&apos;</highlight><highlight class="normal">));</highlight></codeline>
+<codeline lineno="89"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal"><sp/>fileName<sp/>=<sp/>Path.Combine(projectDir,<sp/>shortAssemblyName<sp/>+<sp/></highlight><highlight class="stringliteral">&quot;.dll&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="90"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(<sp/>File.Exists(fileName)<sp/>)<sp/>{</highlight></codeline>
+<codeline lineno="91"><highlight class="normal"></highlight></codeline>
+<codeline lineno="92"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>byte[]<sp/>assembly_bytes<sp/>=<sp/>File.ReadAllBytes(fileName);</highlight></codeline>
+<codeline lineno="93"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Assembly<sp/>result<sp/>=<sp/>Assembly.Load(assembly_bytes);</highlight></codeline>
+<codeline lineno="94"><highlight class="normal"></highlight></codeline>
+<codeline lineno="95"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//Assembly<sp/>result<sp/>=<sp/>Assembly.LoadFrom(fileName);</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="96"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>result;</highlight></codeline>
+<codeline lineno="97"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}<sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="98"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>Assembly.GetExecutingAssembly().FullName<sp/>==<sp/>args.Name<sp/>?<sp/>Assembly.GetExecutingAssembly()<sp/>:<sp/>null;</highlight></codeline>
+<codeline lineno="99"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="100"><highlight class="normal"></highlight></codeline>
+<codeline lineno="101"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//Create<sp/>a<sp/>SandBox<sp/>to<sp/>load<sp/>Assemblies<sp/>with<sp/>&quot;Full<sp/>Trust&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="102" refid="class_micra_1_1_domain_1_1_mx_domain_1adb8eb7c71ba2fdb81b2371529a5c0e17" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="class_micra_1_1_domain_1_1_mx_domain_1adb8eb7c71ba2fdb81b2371529a5c0e17" kindref="member">LoadAssembly</ref>(</highlight><highlight class="keywordtype">string</highlight><highlight class="normal"><sp/>assemblyFilename)<sp/>{</highlight></codeline>
+<codeline lineno="103"><highlight class="normal"></highlight></codeline>
+<codeline lineno="104"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(<sp/>appDomain<sp/>==<sp/>null<sp/>)<sp/>{</highlight></codeline>
+<codeline lineno="105"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Listener.WriteLine(</highlight><highlight class="stringliteral">&quot;Domain<sp/>not<sp/>Exists&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="106"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="107"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="108"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(<sp/>!File.Exists(assemblyFilename)<sp/>)<sp/>{</highlight></codeline>
+<codeline lineno="109"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Listener.WriteLine(</highlight><highlight class="stringliteral">&quot;Assembly<sp/>file<sp/>{0}<sp/>not<sp/>found&quot;</highlight><highlight class="normal">,<sp/>assemblyFilename);</highlight></codeline>
+<codeline lineno="110"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="111"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="112"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Listener.WriteLine(</highlight><highlight class="stringliteral">&quot;MxDomain<sp/>&gt;<sp/>LoadAssembly<sp/>&gt;<sp/>assemblyFilename:{0}&quot;</highlight><highlight class="normal">,<sp/>assemblyFilename);</highlight></codeline>
+<codeline lineno="113"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>AssemblyName<sp/>assemblyName<sp/>=<sp/>AssemblyName.GetAssemblyName(assemblyFilename);</highlight></codeline>
+<codeline lineno="114"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Assembly<sp/></highlight><highlight class="keyword">asm</highlight><highlight class="normal"><sp/>=<sp/>GetAssembly(assemblyName);</highlight></codeline>
+<codeline lineno="115"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(<sp/></highlight><highlight class="keyword">asm</highlight><highlight class="normal"><sp/>!=<sp/>null<sp/>)<sp/>{</highlight></codeline>
+<codeline lineno="116"><highlight class="normal"></highlight></codeline>
+<codeline lineno="117"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Listener.WriteLine(</highlight></codeline>
+<codeline lineno="118"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>String.Format(</highlight><highlight class="stringliteral">&quot;Assembly<sp/>{0}<sp/><sp/>version:{1}<sp/>is<sp/>already<sp/>loaded!\nLoad<sp/>new<sp/>version<sp/>or<sp/>Rebuild<sp/>Domain&quot;</highlight><highlight class="normal">,</highlight></codeline>
+<codeline lineno="119"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>assemblyName.Name,</highlight></codeline>
+<codeline lineno="120"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>assemblyName.Version</highlight></codeline>
+<codeline lineno="121"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>));</highlight></codeline>
+<codeline lineno="122"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="123"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="124"><highlight class="normal"></highlight></codeline>
+<codeline lineno="125"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="class_micra_1_1_domain_1_1_assembly_sand_box_loader" kindref="compound">AssemblySandBoxLoader</ref><sp/>loader<sp/>=<sp/>appDomain.CreateInstanceAndUnwrap(</highlight></codeline>
+<codeline lineno="126"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>typeof(<ref refid="class_micra_1_1_domain_1_1_assembly_sand_box_loader" kindref="compound">AssemblySandBoxLoader</ref>).Assembly.GetName().FullName,</highlight></codeline>
+<codeline lineno="127"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>typeof(<ref refid="class_micra_1_1_domain_1_1_assembly_sand_box_loader" kindref="compound">AssemblySandBoxLoader</ref>).FullName,</highlight></codeline>
+<codeline lineno="128"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">,</highlight></codeline>
+<codeline lineno="129"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>BindingFlags.Default,</highlight></codeline>
+<codeline lineno="130"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>null,</highlight></codeline>
+<codeline lineno="131"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">new</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">object</highlight><highlight class="normal">[]<sp/>{<sp/>assemblyFilename<sp/>},</highlight></codeline>
+<codeline lineno="132"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>CultureInfo.InvariantCulture,</highlight></codeline>
+<codeline lineno="133"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>null)<sp/>as<sp/><ref refid="class_micra_1_1_domain_1_1_assembly_sand_box_loader" kindref="compound">AssemblySandBoxLoader</ref>;</highlight></codeline>
+<codeline lineno="134"><highlight class="normal"></highlight></codeline>
+<codeline lineno="135"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="136"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="137"><highlight class="normal"></highlight></codeline>
+<codeline lineno="138"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//get<sp/>all<sp/>assemblies<sp/>from<sp/>this<sp/>domain</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="139"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/>Assembly[]<sp/>GetAssemblies()<sp/>=&gt;<sp/>appDomain.GetAssemblies();</highlight></codeline>
+<codeline lineno="140" refid="class_micra_1_1_domain_1_1_mx_domain_1aa30891636248569289a8bf380d016322" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_micra_1_1_domain_1_1_mx_domain_1aa30891636248569289a8bf380d016322" kindref="member">ShowLoadedAssemblies</ref>()<sp/>{</highlight></codeline>
+<codeline lineno="141"><highlight class="normal"></highlight></codeline>
+<codeline lineno="142"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Assembly[]<sp/>assemblies<sp/>=<sp/>GetAssemblies();</highlight></codeline>
+<codeline lineno="143"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Listener.WriteLine(</highlight><highlight class="stringliteral">&quot;PrintAssemblies<sp/>&gt;<sp/>Current<sp/>Domain:&quot;</highlight><highlight class="normal"><sp/>+<sp/>FriendlyName);</highlight></codeline>
+<codeline lineno="144"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">foreach</highlight><highlight class="normal"><sp/>(<sp/>Assembly<sp/></highlight><highlight class="keyword">asm</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordflow">in</highlight><highlight class="normal"><sp/>assemblies<sp/>)<sp/>{</highlight></codeline>
+<codeline lineno="145"><highlight class="normal"></highlight></codeline>
+<codeline lineno="146"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Listener.WriteLine(</highlight><highlight class="stringliteral">&quot;\t&quot;</highlight><highlight class="normal"><sp/>+<sp/>asm.FullName);</highlight></codeline>
+<codeline lineno="147"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="148"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="149"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//compare<sp/>assemblies<sp/>FullName<sp/>to<sp/>find<sp/>one</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="150"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//assemblyName.FullName<sp/>==<sp/>&quot;mscorlib,<sp/>Version=4.0.0.0,<sp/>Culture=neutral,<sp/>PublicKeyToken=b77a5c561934e089&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="151" refid="class_micra_1_1_domain_1_1_mx_domain_1a3871d2ad2db0f42f49204853c82d02bf" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/>Assembly<sp/><ref refid="class_micra_1_1_domain_1_1_mx_domain_1a3871d2ad2db0f42f49204853c82d02bf" kindref="member">GetAssembly</ref>(AssemblyName<sp/>assemblyName)<sp/>{</highlight></codeline>
+<codeline lineno="152"><highlight class="normal"></highlight></codeline>
+<codeline lineno="153"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Assembly[]<sp/>assemblies<sp/>=<sp/>GetAssemblies().ToArray&lt;Assembly&gt;();</highlight></codeline>
+<codeline lineno="154"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Assembly<sp/></highlight><highlight class="keyword">asm</highlight><highlight class="normal"><sp/>=<sp/>(<sp/>from<sp/>a<sp/>in<sp/>assemblies</highlight></codeline>
+<codeline lineno="155"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>where<sp/>a.FullName<sp/>==<sp/>assemblyName.FullName</highlight></codeline>
+<codeline lineno="156"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>select<sp/>a<sp/>).SingleOrDefault();</highlight></codeline>
+<codeline lineno="157"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">asm</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="158"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="159"><highlight class="normal"></highlight></codeline>
+<codeline lineno="160"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//get<sp/>latest(version)<sp/>loaded<sp/>assembly<sp/>from<sp/>this<sp/>dommain</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="161" refid="class_micra_1_1_domain_1_1_mx_domain_1ae077d4f9d5999779c2b27e9003cc4968" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/>Assembly<sp/><ref refid="class_micra_1_1_domain_1_1_mx_domain_1ae077d4f9d5999779c2b27e9003cc4968" kindref="member">GetLatestAssembly</ref>(</highlight><highlight class="keywordtype">string</highlight><highlight class="normal"><sp/>assemblyName)<sp/>{<sp/></highlight><highlight class="comment">//TODO<sp/>search<sp/>backwards<sp/>(if<sp/>same<sp/>versions<sp/>are<sp/>exists<sp/>to<sp/>get<sp/>last<sp/>loaded)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="162"><highlight class="normal"></highlight></codeline>
+<codeline lineno="163"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(<sp/>Debug<sp/>)<sp/>Listener.WriteLine(</highlight><highlight class="stringliteral">&quot;GetLatestAssembly<sp/>&gt;<sp/>Name:{0}&quot;</highlight><highlight class="normal">,<sp/>assemblyName);</highlight></codeline>
+<codeline lineno="164"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Assembly[]<sp/>assemblies<sp/>=<sp/>GetAssemblies();</highlight></codeline>
+<codeline lineno="165"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Assembly<sp/>latest_assembly<sp/>=<sp/>null;</highlight></codeline>
+<codeline lineno="166"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal"><sp/>version1<sp/>=<sp/></highlight><highlight class="stringliteral">&quot;1.0.0.0&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="167"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">foreach</highlight><highlight class="normal"><sp/>(<sp/>Assembly<sp/></highlight><highlight class="keyword">asm</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordflow">in</highlight><highlight class="normal"><sp/>assemblies<sp/>)<sp/>{</highlight></codeline>
+<codeline lineno="168"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(<sp/>Debug<sp/>)<sp/>Listener.WriteLine(</highlight><highlight class="stringliteral">&quot;\t<sp/>compare<sp/>A:{0}<sp/>b:{1}&quot;</highlight><highlight class="normal">,<sp/>assemblyName,<sp/>asm.GetName().Name);</highlight></codeline>
+<codeline lineno="169"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(<sp/></highlight><highlight class="keyword">asm</highlight><highlight class="normal">.GetName().Name<sp/>==<sp/>assemblyName<sp/>)<sp/>{</highlight></codeline>
+<codeline lineno="170"><highlight class="normal"></highlight></codeline>
+<codeline lineno="171"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal"><sp/>version2<sp/>=<sp/>asm.GetName().Version.ToString();</highlight></codeline>
+<codeline lineno="172"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>var<sp/>result<sp/>=<sp/>version2.CompareTo(version1);</highlight></codeline>
+<codeline lineno="173"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(<sp/>result<sp/>&gt;<sp/>0<sp/>)<sp/>{</highlight></codeline>
+<codeline lineno="174"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>latest_assembly<sp/>=<sp/></highlight><highlight class="keyword">asm</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="175"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>version1<sp/>=<sp/>version2;</highlight></codeline>
+<codeline lineno="176"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="177"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="178"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="179"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>latest_assembly;</highlight></codeline>
+<codeline lineno="180"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="181"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="182" refid="class_micra_1_1_domain_1_1_assembly_sand_box_loader" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="class_micra_1_1_domain_1_1_assembly_sand_box_loader" kindref="compound">AssemblySandBoxLoader</ref><sp/>:<sp/>MarshalByRefObject<sp/>{</highlight></codeline>
+<codeline lineno="183" refid="class_micra_1_1_domain_1_1_assembly_sand_box_loader_1a6ba38469be71c0ffc0ef91a62326bb63" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/><ref refid="class_micra_1_1_domain_1_1_assembly_sand_box_loader_1a6ba38469be71c0ffc0ef91a62326bb63" kindref="member">AssemblySandBoxLoader</ref>(</highlight><highlight class="keywordtype">string</highlight><highlight class="normal"><sp/>assemblyFilename)<sp/>{</highlight></codeline>
+<codeline lineno="184"><highlight class="normal"></highlight></codeline>
+<codeline lineno="185"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>byte[]<sp/>assembly_bytes<sp/>=<sp/>File.ReadAllBytes(assemblyFilename);</highlight></codeline>
+<codeline lineno="186"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>TrustedAssembly<sp/>=<sp/>Assembly.Load(assembly_bytes);</highlight></codeline>
+<codeline lineno="187"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//TrustedAssembly<sp/>=<sp/>Assembly.LoadFile(assemblyFilename);</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="188"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//MaxListener.WriteLine(&quot;AssemblySandBoxLoader<sp/>&gt;<sp/>Load<sp/>Assembly:&quot;<sp/>+<sp/>assemblyFilename);</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="189"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="190"><highlight class="normal"></highlight></codeline>
+<codeline lineno="191" refid="class_micra_1_1_domain_1_1_assembly_sand_box_loader_1a0b31f2e4c9549f0f13c490f01bb93d43" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/>Assembly<sp/>TrustedAssembly<sp/>{<sp/></highlight><highlight class="keyword">get</highlight><highlight class="normal">;<sp/>set;<sp/>}<sp/>=<sp/>null;</highlight></codeline>
+<codeline lineno="192"><highlight class="normal"></highlight></codeline>
+<codeline lineno="193"><highlight class="normal"></highlight></codeline>
+<codeline lineno="194"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//className<sp/>=<sp/>&quot;System.Boolean&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="195"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*public<sp/>System.Runtime.Remoting.ObjectHandle<sp/>GetClassInstance(AssemblyName<sp/>assemblyName,<sp/>string<sp/>className,<sp/>params<sp/>object[]<sp/>args)<sp/>{</highlight></codeline>
+<codeline lineno="196"><highlight class="comment"></highlight></codeline>
+<codeline lineno="197"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Assembly<sp/>asm<sp/>=<sp/>GetAssembly(assemblyName);</highlight></codeline>
+<codeline lineno="198"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>if<sp/>(<sp/>asm<sp/>==<sp/>null<sp/>)<sp/>return<sp/>null;</highlight></codeline>
+<codeline lineno="199"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>return<sp/>Activator.CreateInstance(assemblyName.FullName,<sp/>className);</highlight></codeline>
+<codeline lineno="200"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="201"><highlight class="normal"></highlight></codeline>
+<codeline lineno="202"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*public<sp/>object<sp/>ExecuteStaticMethod(string<sp/>className,<sp/>string<sp/>methodName,<sp/>params<sp/>object[]<sp/>parameters)<sp/>{</highlight></codeline>
+<codeline lineno="203"><highlight class="comment"></highlight></codeline>
+<codeline lineno="204"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>//MaxListener.WriteLine(&quot;AssemblySandBoxLoader<sp/>&gt;<sp/>className:{0}<sp/>methodName:{1}<sp/>params:{2}&quot;,<sp/>className,<sp/>methodName,<sp/>parameters.Length.ToString());</highlight></codeline>
+<codeline lineno="205"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Listener.WriteLine(&quot;AssemblySandBoxLoader<sp/>&gt;<sp/>className:{0}<sp/>methodName:{1}<sp/>params:{2}&quot;,<sp/>className,<sp/>methodName,<sp/>parameters.Length.ToString());</highlight></codeline>
+<codeline lineno="206"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Type<sp/>MyType<sp/>=<sp/>null;</highlight></codeline>
+<codeline lineno="207"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>object<sp/>inst<sp/>=<sp/>null;</highlight></codeline>
+<codeline lineno="208"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>foreach<sp/>(<sp/>Type<sp/>type<sp/>in<sp/>TrustedAssembly.GetTypes()<sp/>)<sp/>{</highlight></codeline>
+<codeline lineno="209"><highlight class="comment"></highlight></codeline>
+<codeline lineno="210"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Listener.WriteLine(&quot;\tprop<sp/>name:{0}&quot;,<sp/>type.Name);</highlight></codeline>
+<codeline lineno="211"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>if<sp/>(<sp/>String.Compare(type.Name,<sp/>className,<sp/>true)<sp/>==<sp/>0<sp/>)<sp/>{</highlight></codeline>
+<codeline lineno="212"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>MyType<sp/>=<sp/>type;</highlight></codeline>
+<codeline lineno="213"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>inst<sp/>=<sp/>TrustedAssembly.CreateInstance(type.FullName);</highlight></codeline>
+<codeline lineno="214"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>break;</highlight></codeline>
+<codeline lineno="215"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="216"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="217"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>if<sp/>(<sp/>inst<sp/>==<sp/>null<sp/>)<sp/>return<sp/>null;</highlight></codeline>
+<codeline lineno="218"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>MethodInfo<sp/>MyMethod<sp/>=<sp/>MyType.GetMethod(methodName,<sp/>new<sp/>Type[]<sp/>{<sp/>typeof(int),<sp/>typeof(string),<sp/>typeof(string),<sp/>typeof(string)<sp/>});</highlight></codeline>
+<codeline lineno="219"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>MyMethod.Invoke(inst,<sp/>BindingFlags.InvokeMethod,<sp/>null,<sp/>parameters,<sp/>null);</highlight></codeline>
+<codeline lineno="220"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>return<sp/>null;</highlight></codeline>
+<codeline lineno="221"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="222"><highlight class="normal"></highlight></codeline>
+<codeline lineno="223"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="224"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="225"><highlight class="normal"></highlight></codeline>
+<codeline lineno="226"><highlight class="normal"></highlight></codeline>
+<codeline lineno="227"><highlight class="normal"></highlight></codeline>
+<codeline lineno="228"><highlight class="normal"></highlight></codeline>
+<codeline lineno="229"><highlight class="normal"></highlight></codeline>
+<codeline lineno="230"><highlight class="normal"></highlight></codeline>
+<codeline lineno="231"><highlight class="normal"></highlight></codeline>
+<codeline lineno="232"><highlight class="normal"></highlight></codeline>
+<codeline lineno="233"><highlight class="normal"></highlight></codeline>
+<codeline lineno="234"><highlight class="normal"></highlight></codeline>
+<codeline lineno="235"><highlight class="normal"></highlight><highlight class="comment">/*public<sp/>static<sp/>string<sp/>ASSEMBLY_FNAME<sp/>{<sp/>get;<sp/>set;<sp/>}<sp/>=<sp/>&quot;Micra.Star.dll&quot;;</highlight></codeline>
+<codeline lineno="236"><highlight class="comment">public<sp/>static<sp/>string<sp/>AssemblyDir<sp/>{</highlight></codeline>
+<codeline lineno="237"><highlight class="comment"><sp/><sp/><sp/><sp/>get<sp/>{</highlight></codeline>
+<codeline lineno="238"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>string<sp/>codeBase<sp/>=<sp/>Assembly.GetExecutingAssembly().CodeBase;</highlight></codeline>
+<codeline lineno="239"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>UriBuilder<sp/>uri<sp/>=<sp/>new<sp/>UriBuilder(codeBase);</highlight></codeline>
+<codeline lineno="240"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>string<sp/>path<sp/>=<sp/>Uri.UnescapeDataString(uri.Path);</highlight></codeline>
+<codeline lineno="241"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>return<sp/>Path.GetDirectoryName(path);</highlight></codeline>
+<codeline lineno="242"><highlight class="comment"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="243"><highlight class="comment">}</highlight></codeline>
+<codeline lineno="244"><highlight class="comment">public<sp/>static<sp/>string<sp/>AssemblyPath<sp/>=&gt;<sp/>AssemblyDir<sp/>+<sp/>ASSEMBLY_FNAME;</highlight></codeline>
+<codeline lineno="250"><highlight class="comment">public<sp/>static<sp/>void<sp/>ShowAsseblies(string<sp/>type<sp/>=<sp/>&quot;All&quot;)<sp/>{</highlight></codeline>
+<codeline lineno="251"><highlight class="comment"></highlight></codeline>
+<codeline lineno="252"><highlight class="comment"><sp/><sp/><sp/><sp/>Listener.WriteLine(&quot;Main<sp/>&gt;<sp/>GetAllAssemblies<sp/>&gt;<sp/>Current<sp/>Domain:&quot;<sp/>+<sp/>AppDomain.CurrentDomain.FriendlyName);</highlight></codeline>
+<codeline lineno="253"><highlight class="comment"><sp/><sp/><sp/><sp/>Assembly[]<sp/>assemblies<sp/>=<sp/>AppDomain.CurrentDomain.GetAssemblies();</highlight></codeline>
+<codeline lineno="254"><highlight class="comment"></highlight></codeline>
+<codeline lineno="255"><highlight class="comment"><sp/><sp/><sp/><sp/>foreach<sp/>(<sp/>Assembly<sp/>asm<sp/>in<sp/>assemblies<sp/>)<sp/>{</highlight></codeline>
+<codeline lineno="256"><highlight class="comment"></highlight></codeline>
+<codeline lineno="257"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>if<sp/>(<sp/>type<sp/>!=<sp/>&quot;All&quot;<sp/>)<sp/>{</highlight></codeline>
+<codeline lineno="258"><highlight class="comment"></highlight></codeline>
+<codeline lineno="259"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>if<sp/>(<sp/>asm.GetName().Name<sp/>!=<sp/>type<sp/>)<sp/>continue;</highlight></codeline>
+<codeline lineno="260"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="261"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Listener.WriteLine(&quot;\t&quot;<sp/>+<sp/>asm.FullName);</highlight></codeline>
+<codeline lineno="262"><highlight class="comment"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="263"><highlight class="comment">}</highlight></codeline>
+<codeline lineno="264"><highlight class="comment">public<sp/>static<sp/>Object<sp/>GetClassInstance(string<sp/>classPath,<sp/>bool<sp/>forceLoad<sp/>=<sp/>false,<sp/>params<sp/>object[]<sp/>args)<sp/>{</highlight></codeline>
+<codeline lineno="265"><highlight class="comment"><sp/><sp/><sp/><sp/>Listener.WriteLine(&quot;GetClassInstance<sp/>&gt;<sp/>AssemblyPath:{0}&quot;,<sp/>AssemblyPath);</highlight></codeline>
+<codeline lineno="266"><highlight class="comment"><sp/><sp/><sp/><sp/>if<sp/>(<sp/>!File.Exists(AssemblyPath)<sp/>)<sp/>return<sp/>null;</highlight></codeline>
+<codeline lineno="267"><highlight class="comment"><sp/><sp/><sp/><sp/>Listener.WriteLine(&quot;GetClassInstance<sp/>&gt;<sp/>classPath:{0}<sp/>forceLoad:{1}<sp/>params:{2}&quot;,<sp/>classPath,<sp/>forceLoad,<sp/>args);</highlight></codeline>
+<codeline lineno="268"><highlight class="comment"><sp/><sp/><sp/><sp/>if<sp/>(<sp/>forceLoad<sp/>)<sp/>Reload();</highlight></codeline>
+<codeline lineno="269"><highlight class="comment"></highlight></codeline>
+<codeline lineno="270"><highlight class="comment"><sp/><sp/><sp/><sp/>if<sp/>(<sp/>args.Length<sp/>&gt;<sp/>0<sp/>)<sp/>{</highlight></codeline>
+<codeline lineno="271"><highlight class="comment"></highlight></codeline>
+<codeline lineno="272"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Listener.WriteLine(&quot;\twith<sp/>args:{0}&quot;,<sp/>args.Length);</highlight></codeline>
+<codeline lineno="273"><highlight class="comment"><sp/><sp/><sp/><sp/>}<sp/>else<sp/>{</highlight></codeline>
+<codeline lineno="274"><highlight class="comment"></highlight></codeline>
+<codeline lineno="275"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Listener.WriteLine(&quot;\twithout<sp/>args&quot;);</highlight></codeline>
+<codeline lineno="276"><highlight class="comment"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="277"><highlight class="comment"><sp/><sp/><sp/><sp/>return<sp/>null;</highlight></codeline>
+<codeline lineno="278"><highlight class="comment">}</highlight></codeline>
+<codeline lineno="279"><highlight class="comment"></highlight></codeline>
+<codeline lineno="280"><highlight class="comment">private<sp/>static<sp/>void<sp/>Reload()<sp/>{</highlight></codeline>
+<codeline lineno="281"><highlight class="comment"><sp/><sp/><sp/><sp/>throw<sp/>new<sp/>NotImplementedException();</highlight></codeline>
+<codeline lineno="282"><highlight class="comment">}*/</highlight><highlight class="normal"></highlight></codeline>
+    </programlisting>
+    <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Domain/MxDomain.cs"/>
+  </compounddef>
+</doxygen>

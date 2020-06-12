@@ -1,0 +1,16 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
+  <compounddef id="dir_8e13a8cdf1c219115db3bb953229cff8" kind="dir">
+    <compoundname>D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Domain</compoundname>
+    <innerdir refid="dir_508cb3b518aacc47728dd86f8057dce9">D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Domain/Properties</innerdir>
+    <innerfile refid="_domain_ui_8cs">DomainUi.cs</innerfile>
+    <innerfile refid="_domain_ui_8_designer_8cs">DomainUi.Designer.cs</innerfile>
+    <innerfile refid="_listener_8cs">Listener.cs</innerfile>
+    <innerfile refid="_mx_domain_8cs">MxDomain.cs</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Domain/"/>
+  </compounddef>
+</doxygen>

@@ -124,8 +124,8 @@ namespace Micra.Core {
             return _Object.ConvertToType(t, polyClass) as IPolyObject;
         }
 
-        public IMNMesh GetPolyMesh() => GetIpolyObject(Kernel.Now).Mesh;
-        public IMNMesh GetPolyMesh(TimeValue t) => GetIpolyObject(t).Mesh;
+        public IMNMesh GetIpoly() => GetIpolyObject(Kernel.Now).Mesh;
+        public IMNMesh GetIpoly(TimeValue t) => GetIpolyObject(t).Mesh;
         public Poly GetPoly() => GetPoly(Kernel.Now);
         public Poly GetPoly(TimeValue t) {
 
@@ -144,63 +144,63 @@ namespace Micra.Core {
 
         #endregion
 
-
-
-        public bool IsClassOf(ClassID id) => ClassID.a == id.a && ClassID.b == id.b;
+        public string ClassOf() => ClassID.GetClassName(ClassID);
+        public string SuperClassOf() => SuperClassID.GetClassName(SuperClassID);
+        public bool IsClassOf(ClassID id) => ClassID.PartA == id.PartA && ClassID.PartB == id.PartB;
         public bool IsSuperClassOf(SuperClassID id) => SuperClassID == id;
         public void AddModifier(Modifier m) => _Node?.AddModifier(m);
 
 
         public void Move(Point3 p) => _Node?.Move(p); //shortcut > if (_Node!=null) _Node.Move(p)
 
-        public double GetArea() => GeoOps.GetObjectArea(GetMesh());
+        public double GetArea() {
+
+            switch ( ClassOf() ) {
+
+                case nameof(ClassID.EditableMesh):return GetMesh().GetArea();
+                case nameof(ClassID.EditablePoly):return GetPoly().GetArea(); 
+            }
+            return -1;
+        }
+
+        public double GetFaceArea(int faceIndex) {
+
+            switch ( ClassOf() ) {
+
+                case nameof(ClassID.EditableMesh): return GetMesh().GetFaceArea(faceIndex);
+                case nameof(ClassID.EditablePoly): return GetPoly().GetFaceArea(faceIndex);
+            }
+            return -1;
+        }
 
         public List<int> GetSelectedFaces() {
 
-            if ( IsClassOf(ClassID.EditableMesh) ) {
-                Kernel.WriteLine("GetSelectedFaces > on Mesh!");
-                return GeoOps.GetSelectedFaces(GetImesh());
+            switch ( ClassOf() ) {
 
-            } else if ( IsClassOf(ClassID.EditablePoly) ) {
-                Kernel.WriteLine("GetSelectedFaces > on Poly!");
-                return GeoOps.GetSelectedFaces(GetPolyMesh());
-
-            } else {
-
-                return null;
+                case nameof(ClassID.EditableMesh): return GetMesh().GetSelectedFaces();
+                case nameof(ClassID.EditablePoly): return GetPoly().GetSelectedFaces();
             }
+            return null;
         }
 
         public List<int> GetSelectedEdges() {
 
-            if ( IsClassOf(ClassID.EditableMesh) ) {
-                Kernel.WriteLine("GetSelectedEdges > on Mesh!");
-                return GeoOps.GetSelectedEdges(GetImesh());
+            switch ( ClassOf() ) {
 
-            } else if ( IsClassOf(ClassID.EditablePoly) ) {
-                Kernel.WriteLine("GetSelectedEdges > on Poly!");
-                return GeoOps.GetSelectedEdges(GetPolyMesh());
-
-            } else {
-
-                return null;
+                case nameof(ClassID.EditableMesh): return GetMesh().GetSelectedEdges();
+                case nameof(ClassID.EditablePoly): return GetPoly().GetSelectedEdges();
             }
+            return null;
         }
 
         public List<int> GetSelectedVerts() {
 
-            if ( IsClassOf(ClassID.EditableMesh) ) {
-                Kernel.WriteLine("GetSelectedVerts > on Mesh!");
-                return GeoOps.GetSelectedVerts(GetImesh());
+            switch ( ClassOf() ) {
 
-            } else if ( IsClassOf(ClassID.EditablePoly) ) {
-                Kernel.WriteLine("GetSelectedVerts > on Poly!");
-                return GeoOps.GetSelectedVerts(GetPolyMesh());
-
-            } else {
-
-                return null;
+                case nameof(ClassID.EditableMesh): return GetMesh().GetSelectedVerts();
+                case nameof(ClassID.EditablePoly): return GetPoly().GetSelectedVerts();
             }
+            return null;
         }
 
   
@@ -215,9 +215,92 @@ namespace Micra.Core {
             _IGeomObject.ClearSelection(GlobalMethods.SubObjectLevel);
             if ( redraw ) Kernel.RedrawViews();
         }
+
+        public void HideGeometry(bool selected) {
+
+            //TODO replace with switch for Modifiers like:(Unwrap, UvMap, ...)
+            switch ( Max.SubObjectLevel ) {
+
+                case 1: HideVerts(selected); break;
+                case 2: HideEdges(selected); break;
+                case 3: HideEdges(selected); break;
+                case 4: HideFaces(selected); break;
+                case 5: HideFaces(selected); break;
+            }
+        }
+        private void HideVerts(bool selected) {
+            throw new NotImplementedException();
+        }
+
+        private void HideEdges(bool selected) {
+            throw new NotImplementedException();
+        }
+
+        private void HideFaces(bool selected) {
+
+            switch ( ClassOf() ) {
+
+                case nameof(ClassID.EditableMesh):GetMesh().HideFaces(selected); break;
+                case nameof(ClassID.EditablePoly):GetPoly().HideFaces(selected);break;
+                case nameof(ClassID.SplineShape):break;
+            }
+            if ( selected ) _IGeomObject.ClearSelection(Kernel._Interface.SubObjectLevel);
+            _IGeomObject.InvalidateChannels((uint)EnumChannels.GEOM_CHANNEL);
+            Kernel.RedrawViews();
+        }
+
+        public void UnhideGeometry() {
+
+            //TODO replace with switch for Modifiers like:(Unwrap, UvMap, ...)
+            switch ( Max.SubObjectLevel ) {
+
+                case 1: UnhideVerts(); break;
+                case 2: UnhideEdges(); break;
+                case 3: UnhideEdges(); break;
+                case 4: UnhideFaces(); break;
+                case 5: UnhideFaces(); break;
+            }
+        }
+
+        private void UnhideFaces() {
+            switch ( ClassOf() ) {
+
+                case nameof(ClassID.EditableMesh):GetMesh().UnhideFaces();break;
+                case nameof(ClassID.EditablePoly):GetPoly().UnhideFaces();break;
+            }
+            _IGeomObject.InvalidateChannels((uint)EnumChannels.GEOM_CHANNEL);
+            Kernel.RedrawViews();
+        }
+
+        private void UnhideEdges() {
+            throw new NotImplementedException();
+        }
+
+        private void UnhideVerts() {
+            throw new NotImplementedException();
+        }
+
+        public double GetEdgeLength(int edgeIndex) {
+            double edge_len = 0;
+            switch ( ClassOf() ) {
+
+                case nameof(ClassID.EditableMesh): edge_len = GetMesh().EdgeLength(edgeIndex);break;
+                case nameof(ClassID.EditablePoly): edge_len = GetPoly().EdgeLength(edgeIndex);break;
+            }
+            return edge_len;
+        }
     }
 }
 
+
+/*
+ ITriObject triObject = GetITriobject();
+ //triObject->NotifyDependents(FOREVER, OBJ_CHANNELS, REFMSG_CHANGE);
+ triObject.NotifyDependents(new Interval(), EnumChannels.OBJ_CHANNELS, EnumRefMsg.REFMSG_CHANGE);
+ Kernel._Interface.RedrawViews();
+            //_Node.InvalidateObjCache();
+// n.InvalidateObjCache();
+*/
 
 // solving Object reference not set to an instance of an object
 /*Kernel.WriteLine("GetIpolyObject > from _Object:{0}", _Object);

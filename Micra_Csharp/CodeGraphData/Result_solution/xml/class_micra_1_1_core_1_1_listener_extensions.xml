@@ -1,0 +1,55 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
+  <compounddef id="class_micra_1_1_core_1_1_listener_extensions" kind="class" prot="public">
+    <compoundname>Micra::Core::ListenerExtensions</compoundname>
+      <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_listener_extensions_1a8e86cc84ace8660a176091c85720d563" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>static void Micra.Core.ListenerExtensions.WriteToListener&lt; T &gt;</definition>
+        <argsstring>(this IList&lt; T &gt; collection)</argsstring>
+        <name>WriteToListener&lt; T &gt;</name>
+        <param>
+          <type>this IList&lt; T &gt;</type>
+          <declname>collection</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Kernel.cs" line="294" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Kernel.cs" bodystart="294" bodyend="297"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_listener_extensions_1a40e038d1f02e77b7449fc1498a775d83" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>static void Micra.Core.ListenerExtensions.WriteToListener&lt; T &gt;</definition>
+        <argsstring>(this IList&lt; T &gt; collection, string delimiter)</argsstring>
+        <name>WriteToListener&lt; T &gt;</name>
+        <param>
+          <type>this IList&lt; T &gt;</type>
+          <declname>collection</declname>
+        </param>
+        <param>
+          <type>string</type>
+          <declname>delimiter</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Kernel.cs" line="299" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Kernel.cs" bodystart="299" bodyend="306"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Kernel.cs" line="293" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Kernel.cs" bodystart="293" bodyend="307"/>
+    <listofallmembers>
+      <member refid="class_micra_1_1_core_1_1_listener_extensions_1a8e86cc84ace8660a176091c85720d563" prot="public" virt="non-virtual"><scope>Micra::Core::ListenerExtensions</scope><name>WriteToListener&lt; T &gt;</name></member>
+      <member refid="class_micra_1_1_core_1_1_listener_extensions_1a40e038d1f02e77b7449fc1498a775d83" prot="public" virt="non-virtual"><scope>Micra::Core::ListenerExtensions</scope><name>WriteToListener&lt; T &gt;</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

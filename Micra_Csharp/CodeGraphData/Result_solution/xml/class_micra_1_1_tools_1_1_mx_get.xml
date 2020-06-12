@@ -1,0 +1,495 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
+  <compounddef id="class_micra_1_1_tools_1_1_mx_get" kind="class" prot="public">
+    <compoundname>Micra::Tools::MxGet</compoundname>
+      <sectiondef kind="public-type">
+      <memberdef kind="enum" id="class_micra_1_1_tools_1_1_mx_get_1a8b17370fdc9a5c8bfc9c15c468777a34" prot="public" static="no">
+        <name>MouseEventFlags</name>
+        <enumvalue id="class_micra_1_1_tools_1_1_mx_get_1a8b17370fdc9a5c8bfc9c15c468777a34a24d32b37cbf15990c29bf4d4efc7f172" prot="public">
+          <name>LEFTDOWN</name>
+          <initializer>= 0x00000002</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="class_micra_1_1_tools_1_1_mx_get_1a8b17370fdc9a5c8bfc9c15c468777a34a94490ac849ec1c8a279b96b5f4408f39" prot="public">
+          <name>LEFTUP</name>
+          <initializer>= 0x00000004</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="class_micra_1_1_tools_1_1_mx_get_1a8b17370fdc9a5c8bfc9c15c468777a34a55ad2d78bf1dcb9521a9b6f6a8145a68" prot="public">
+          <name>MIDDLEDOWN</name>
+          <initializer>= 0x00000020</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="class_micra_1_1_tools_1_1_mx_get_1a8b17370fdc9a5c8bfc9c15c468777a34ac9a5aa7fe53cbf921f2b0284a9678600" prot="public">
+          <name>MIDDLEUP</name>
+          <initializer>= 0x00000040</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="class_micra_1_1_tools_1_1_mx_get_1a8b17370fdc9a5c8bfc9c15c468777a34af7f93635f8e193a924ae4a691bb66b8f" prot="public">
+          <name>MOVE</name>
+          <initializer>= 0x00000001</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="class_micra_1_1_tools_1_1_mx_get_1a8b17370fdc9a5c8bfc9c15c468777a34a3a0bc063b6db8cae0361657958be836f" prot="public">
+          <name>ABSOLUTE</name>
+          <initializer>= 0x00008000</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="class_micra_1_1_tools_1_1_mx_get_1a8b17370fdc9a5c8bfc9c15c468777a34a79aba4b2f57c6a061d8ea74dc563b4d2" prot="public">
+          <name>RIGHTDOWN</name>
+          <initializer>= 0x00000008</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="class_micra_1_1_tools_1_1_mx_get_1a8b17370fdc9a5c8bfc9c15c468777a34a2726bd9f86a0a0417e71c4691707c8b1" prot="public">
+          <name>RIGHTUP</name>
+          <initializer>= 0x00000010</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/MxGet.cs" line="16" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/MxGet.cs" bodystart="16" bodyend="25"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-static-attrib">
+      <memberdef kind="variable" id="class_micra_1_1_tools_1_1_mx_get_1a1231af5f9820ab4ed031b0637cb4988c" prot="public" static="yes" mutable="no">
+        <type>IGlobal</type>
+        <definition>IGlobal Micra.Tools.MxGet.Global</definition>
+        <argsstring></argsstring>
+        <name>Global</name>
+        <initializer>=&gt; GlobalInterface.Instance</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/MxGet.cs" line="31" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/MxGet.cs" bodystart="31" bodyend="-1"/>
+        <referencedby refid="class_micra_1_1_tools_1_1_mx_poly_1a77fbcbfe33405d4e5e3845c9f1fba57b" compoundref="_mx_poly_8cs" startline="37" endline="60">Micra.Tools.MxPoly.GetVerticesPositions</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="class_micra_1_1_tools_1_1_mx_get_1a0761cffd8d672c543fd9dad7bb20071a" prot="public" static="yes" mutable="no">
+        <type>IInterface13</type>
+        <definition>IInterface13 Micra.Tools.MxGet.Interface</definition>
+        <argsstring></argsstring>
+        <name>Interface</name>
+        <initializer>=&gt; Global.COREInterface14</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/MxGet.cs" line="33" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/MxGet.cs" bodystart="33" bodyend="-1"/>
+        <referencedby refid="class_micra_1_1_tools_1_1_mx_file_1a981e82d81bc65773d83f73922ec412d8" compoundref="_mx_file_8cs" startline="13" endline="23">Micra.Tools.MxFile.ResolveRelativePath</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="class_micra_1_1_tools_1_1_mx_get_1a1a4e542a2190f68117753310a6ec5da6" prot="public" static="yes" mutable="no">
+        <type>IIInstanceMgr</type>
+        <definition>IIInstanceMgr Micra.Tools.MxGet.InstanceMgr</definition>
+        <argsstring></argsstring>
+        <name>InstanceMgr</name>
+        <initializer>=&gt; Global.IInstanceMgr.InstanceMgr</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/MxGet.cs" line="34" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/MxGet.cs" bodystart="34" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_micra_1_1_tools_1_1_mx_get_1a7869795d55030d3f106eb520f60e15cc" prot="public" static="yes" mutable="no">
+        <type>IINode</type>
+        <definition>IINode Micra.Tools.MxGet.MaxScene</definition>
+        <argsstring></argsstring>
+        <name>MaxScene</name>
+        <initializer>=&gt; Interface.RootNode</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/MxGet.cs" line="42" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/MxGet.cs" bodystart="42" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_micra_1_1_tools_1_1_mx_get_1ae0d17bf71e871198b543a2896eb0bf79" prot="public" static="yes" mutable="no">
+        <type>string</type>
+        <definition>string Micra.Tools.MxGet.MaxSceneFileName</definition>
+        <argsstring></argsstring>
+        <name>MaxSceneFileName</name>
+        <initializer>=&gt; <ref refid="class_micra_1_1_tools_1_1_mx_get_1adcc441132a75baea2849c5936422f2ca" kindref="member">GameScene</ref>().SceneFileName</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/MxGet.cs" line="44" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/MxGet.cs" bodystart="44" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_micra_1_1_tools_1_1_mx_get_1a01d4446d03f086d20ec30d67540cc3b5" prot="public" static="yes" mutable="no">
+        <type>IClass_ID</type>
+        <definition>IClass_ID Micra.Tools.MxGet.Class_ID</definition>
+        <argsstring></argsstring>
+        <name>Class_ID</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/MxGet.cs" line="45" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/MxGet.cs" bodystart="45" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_micra_1_1_tools_1_1_mx_get_1aa23ab7ec72bcf6ba1580eac21857b299" prot="public" static="yes" mutable="no">
+        <type>string</type>
+        <definition>string Micra.Tools.MxGet.AssemblyVersion</definition>
+        <argsstring></argsstring>
+        <name>AssemblyVersion</name>
+        <initializer>= Assembly.GetExecutingAssembly().GetName().Version.ToString()</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/MxGet.cs" line="57" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/MxGet.cs" bodystart="57" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_micra_1_1_tools_1_1_mx_get_1ada70c982c42bdaeefbbbc867055456ad" prot="public" static="yes" mutable="no">
+        <type>string</type>
+        <definition>string Micra.Tools.MxGet.MicraRootDir</definition>
+        <argsstring></argsstring>
+        <name>MicraRootDir</name>
+        <initializer>= Directory.GetParent(<ref refid="class_micra_1_1_tools_1_1_mx_get_1ad77278ed7f0e4d8a27655a570ffb1c53" kindref="member">AssemblyDir</ref>).FullName</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/MxGet.cs" line="66" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/MxGet.cs" bodystart="66" bodyend="-1"/>
+        <referencedby refid="class_micra_1_1_tools_1_1_mx_ui_1aa54efe8760aa4aab18b9c5ab034e1f12" compoundref="_mx_ui_8cs" startline="10" endline="27">Micra.Tools.MxUi.SetButonTooltip</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="class_micra_1_1_tools_1_1_mx_get_1a933c25490901b8b67a27c586c879c29d" prot="public" static="yes" mutable="no">
+        <type>string</type>
+        <definition>string Micra.Tools.MxGet.MicraRootDir2</definition>
+        <argsstring></argsstring>
+        <name>MicraRootDir2</name>
+        <initializer>=&gt; Path.Combine(<ref refid="class_micra_1_1_tools_1_1_mx_get_1ada70c982c42bdaeefbbbc867055456ad" kindref="member">MicraRootDir</ref>, @&quot;..\..\Micra4&quot;)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/MxGet.cs" line="67" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/MxGet.cs" bodystart="67" bodyend="-1"/>
+        <referencedby refid="class_micra_1_1_tools_1_1_mx_ui_1aa54efe8760aa4aab18b9c5ab034e1f12" compoundref="_mx_ui_8cs" startline="10" endline="27">Micra.Tools.MxUi.SetButonTooltip</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="class_micra_1_1_tools_1_1_mx_get_1ad406cb4720dcaf9e045d779328f07125" prot="public" static="yes" mutable="no">
+        <type>object</type>
+        <definition>object Micra.Tools.MxGet.FontStyles</definition>
+        <argsstring></argsstring>
+        <name>FontStyles</name>
+        <initializer>= Enum.ToObject(typeof(FontStyle), 0)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/MxGet.cs" line="74" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/MxGet.cs" bodystart="74" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="property">
+      <memberdef kind="property" id="class_micra_1_1_tools_1_1_mx_get_1ad77278ed7f0e4d8a27655a570ffb1c53" prot="public" static="yes" readable="no" writable="no" gettable="yes" settable="no">
+        <type>string</type>
+        <definition>string Micra.Tools.MxGet.AssemblyDir</definition>
+        <argsstring></argsstring>
+        <name>AssemblyDir</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/MxGet.cs" line="58" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/MxGet.cs" bodystart="58" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="class_micra_1_1_tools_1_1_mx_get_1adcc441132a75baea2849c5936422f2ca" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>IIGameScene</type>
+        <definition>static IIGameScene Micra.Tools.MxGet.GameScene</definition>
+        <argsstring>(bool onlySelected=true)</argsstring>
+        <name>GameScene</name>
+        <param>
+          <type>bool</type>
+          <declname>onlySelected</declname>
+          <defval>true</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/MxGet.cs" line="35" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/MxGet.cs" bodystart="35" bodyend="41"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_tools_1_1_mx_get_1afe1cb0e94f4322d7f9e044d06d95dd50" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>string</type>
+        <definition>static string Micra.Tools.MxGet.MaxPath</definition>
+        <argsstring>()</argsstring>
+        <name>MaxPath</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/MxGet.cs" line="56" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_tools_1_1_mx_get_1aae7ccb2af858ffafb68e2ea517669db8" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>Font</type>
+        <definition>static Font Micra.Tools.MxGet.NewFont</definition>
+        <argsstring>(string family, float size, FontStyle style)</argsstring>
+        <name>NewFont</name>
+        <param>
+          <type>string</type>
+          <declname>family</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>size</declname>
+        </param>
+        <param>
+          <type>FontStyle</type>
+          <declname>style</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/MxGet.cs" line="75" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_tools_1_1_mx_get_1a336a5c06e895f5523ad8bc1ad4569b73" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>Size</type>
+        <definition>static Size Micra.Tools.MxGet.NewSize</definition>
+        <argsstring>(int w, int h)</argsstring>
+        <name>NewSize</name>
+        <param>
+          <type>int</type>
+          <declname>w</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>h</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/MxGet.cs" line="76" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_tools_1_1_mx_get_1a805be410caaa23e1e7f7e992ab0a13b3" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>Color</type>
+        <definition>static Color Micra.Tools.MxGet.NewColor</definition>
+        <argsstring>(int r, int g, int b)</argsstring>
+        <name>NewColor</name>
+        <param>
+          <type>int</type>
+          <declname>r</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>g</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>b</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/MxGet.cs" line="77" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_tools_1_1_mx_get_1a95b3ba580c31be6b9f50f85d185db8c6" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>Color</type>
+        <definition>static Color Micra.Tools.MxGet.ColorFromName</definition>
+        <argsstring>(string clr_str)</argsstring>
+        <name>ColorFromName</name>
+        <param>
+          <type>string</type>
+          <declname>clr_str</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/MxGet.cs" line="78" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_tools_1_1_mx_get_1a4c8be5cfbe76a7b890ce2e4409117982" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>IPoint3</type>
+        <definition>static IPoint3 Micra.Tools.MxGet.NewPoint3</definition>
+        <argsstring>()</argsstring>
+        <name>NewPoint3</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/MxGet.cs" line="79" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_tools_1_1_mx_get_1a14a11d470dc55d7472ac8adc8db62c34" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>IPoint3</type>
+        <definition>static IPoint3 Micra.Tools.MxGet.NewIPoint3</definition>
+        <argsstring>(float X, float Y, float Z)</argsstring>
+        <name>NewIPoint3</name>
+        <param>
+          <type>float</type>
+          <declname>X</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>Y</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>Z</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/MxGet.cs" line="80" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_tools_1_1_mx_get_1a234ead8cde7cad804da1953abcba401b" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>Assembly</type>
+        <definition>static Assembly Micra.Tools.MxGet.GetLatestAssembly</definition>
+        <argsstring>(string assembly_name)</argsstring>
+        <name>GetLatestAssembly</name>
+        <param>
+          <type>string</type>
+          <declname>assembly_name</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/MxGet.cs" line="85" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/MxGet.cs" bodystart="85" bodyend="103"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_tools_1_1_mx_get_1a42462d7a0af8962c509826664400d965" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>NativeWindow</type>
+        <definition>static NativeWindow Micra.Tools.MxGet.GetWindowFromHwnd</definition>
+        <argsstring>(long hwnd)</argsstring>
+        <name>GetWindowFromHwnd</name>
+        <param>
+          <type>long</type>
+          <declname>hwnd</declname>
+        </param>
+        <briefdescription>
+<para>NativeWindow parentWindow = GetWindowFromHwnd(hwnd); try { myForm.ShowDialog(parentWindow); } finally { parentWindow.DestroyHandle(); } </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>hwnd</parametername>
+</parameternamelist>
+<parameterdescription>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para></para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/MxGet.cs" line="142" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/MxGet.cs" bodystart="142" bodyend="147"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="262">
+        <label>static</label>
+      </node>
+      <node id="261">
+        <label>Micra.Tools.MxGet</label>
+        <link refid="class_micra_1_1_tools_1_1_mx_get"/>
+        <childnode refid="262" relation="usage">
+          <edgelabel>Global</edgelabel>
+          <edgelabel>MaxScene</edgelabel>
+          <edgelabel>FontStyles</edgelabel>
+          <edgelabel>MaxSceneFileName</edgelabel>
+          <edgelabel>InstanceMgr</edgelabel>
+          <edgelabel>MicraRootDir2</edgelabel>
+          <edgelabel>AssemblyVersion</edgelabel>
+          <edgelabel>MicraRootDir</edgelabel>
+          <edgelabel>Interface</edgelabel>
+          <edgelabel>Class_ID</edgelabel>
+          <edgelabel>...</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/MxGet.cs" line="12" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/MxGet.cs" bodystart="12" bodyend="151"/>
+    <listofallmembers>
+      <member refid="class_micra_1_1_tools_1_1_mx_get_1ad77278ed7f0e4d8a27655a570ffb1c53" prot="public" virt="non-virtual"><scope>Micra::Tools::MxGet</scope><name>AssemblyDir</name></member>
+      <member refid="class_micra_1_1_tools_1_1_mx_get_1aa23ab7ec72bcf6ba1580eac21857b299" prot="public" virt="non-virtual"><scope>Micra::Tools::MxGet</scope><name>AssemblyVersion</name></member>
+      <member refid="class_micra_1_1_tools_1_1_mx_get_1a01d4446d03f086d20ec30d67540cc3b5" prot="public" virt="non-virtual"><scope>Micra::Tools::MxGet</scope><name>Class_ID</name></member>
+      <member refid="class_micra_1_1_tools_1_1_mx_get_1a95b3ba580c31be6b9f50f85d185db8c6" prot="public" virt="non-virtual"><scope>Micra::Tools::MxGet</scope><name>ColorFromName</name></member>
+      <member refid="class_micra_1_1_tools_1_1_mx_get_1ad406cb4720dcaf9e045d779328f07125" prot="public" virt="non-virtual"><scope>Micra::Tools::MxGet</scope><name>FontStyles</name></member>
+      <member refid="class_micra_1_1_tools_1_1_mx_get_1adcc441132a75baea2849c5936422f2ca" prot="public" virt="non-virtual"><scope>Micra::Tools::MxGet</scope><name>GameScene</name></member>
+      <member refid="class_micra_1_1_tools_1_1_mx_get_1a234ead8cde7cad804da1953abcba401b" prot="public" virt="non-virtual"><scope>Micra::Tools::MxGet</scope><name>GetLatestAssembly</name></member>
+      <member refid="class_micra_1_1_tools_1_1_mx_get_1a42462d7a0af8962c509826664400d965" prot="public" virt="non-virtual"><scope>Micra::Tools::MxGet</scope><name>GetWindowFromHwnd</name></member>
+      <member refid="class_micra_1_1_tools_1_1_mx_get_1a1231af5f9820ab4ed031b0637cb4988c" prot="public" virt="non-virtual"><scope>Micra::Tools::MxGet</scope><name>Global</name></member>
+      <member refid="class_micra_1_1_tools_1_1_mx_get_1a1a4e542a2190f68117753310a6ec5da6" prot="public" virt="non-virtual"><scope>Micra::Tools::MxGet</scope><name>InstanceMgr</name></member>
+      <member refid="class_micra_1_1_tools_1_1_mx_get_1a0761cffd8d672c543fd9dad7bb20071a" prot="public" virt="non-virtual"><scope>Micra::Tools::MxGet</scope><name>Interface</name></member>
+      <member refid="class_micra_1_1_tools_1_1_mx_get_1afe1cb0e94f4322d7f9e044d06d95dd50" prot="public" virt="non-virtual"><scope>Micra::Tools::MxGet</scope><name>MaxPath</name></member>
+      <member refid="class_micra_1_1_tools_1_1_mx_get_1a7869795d55030d3f106eb520f60e15cc" prot="public" virt="non-virtual"><scope>Micra::Tools::MxGet</scope><name>MaxScene</name></member>
+      <member refid="class_micra_1_1_tools_1_1_mx_get_1ae0d17bf71e871198b543a2896eb0bf79" prot="public" virt="non-virtual"><scope>Micra::Tools::MxGet</scope><name>MaxSceneFileName</name></member>
+      <member refid="class_micra_1_1_tools_1_1_mx_get_1ada70c982c42bdaeefbbbc867055456ad" prot="public" virt="non-virtual"><scope>Micra::Tools::MxGet</scope><name>MicraRootDir</name></member>
+      <member refid="class_micra_1_1_tools_1_1_mx_get_1a933c25490901b8b67a27c586c879c29d" prot="public" virt="non-virtual"><scope>Micra::Tools::MxGet</scope><name>MicraRootDir2</name></member>
+      <member refid="class_micra_1_1_tools_1_1_mx_get_1a8b17370fdc9a5c8bfc9c15c468777a34" prot="public" virt="non-virtual"><scope>Micra::Tools::MxGet</scope><name>MouseEventFlags</name></member>
+      <member refid="class_micra_1_1_tools_1_1_mx_get_1a805be410caaa23e1e7f7e992ab0a13b3" prot="public" virt="non-virtual"><scope>Micra::Tools::MxGet</scope><name>NewColor</name></member>
+      <member refid="class_micra_1_1_tools_1_1_mx_get_1aae7ccb2af858ffafb68e2ea517669db8" prot="public" virt="non-virtual"><scope>Micra::Tools::MxGet</scope><name>NewFont</name></member>
+      <member refid="class_micra_1_1_tools_1_1_mx_get_1a14a11d470dc55d7472ac8adc8db62c34" prot="public" virt="non-virtual"><scope>Micra::Tools::MxGet</scope><name>NewIPoint3</name></member>
+      <member refid="class_micra_1_1_tools_1_1_mx_get_1a4c8be5cfbe76a7b890ce2e4409117982" prot="public" virt="non-virtual"><scope>Micra::Tools::MxGet</scope><name>NewPoint3</name></member>
+      <member refid="class_micra_1_1_tools_1_1_mx_get_1a336a5c06e895f5523ad8bc1ad4569b73" prot="public" virt="non-virtual"><scope>Micra::Tools::MxGet</scope><name>NewSize</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

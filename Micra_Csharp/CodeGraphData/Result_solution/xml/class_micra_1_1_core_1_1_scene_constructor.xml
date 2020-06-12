@@ -1,0 +1,292 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
+  <compounddef id="class_micra_1_1_core_1_1_scene_constructor" kind="class" prot="package">
+    <compoundname>Micra::Core::SceneConstructor</compoundname>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="class_micra_1_1_core_1_1_scene_constructor_1abae8586e7210381ed70a9b376c9834fd" prot="private" static="no" mutable="no">
+        <type>readonly <ref refid="class_micra_1_1_core_1_1_scene" kindref="compound">Scene</ref></type>
+        <definition>readonly Scene Micra.Core.SceneConstructor.scene</definition>
+        <argsstring></argsstring>
+        <name>scene</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/SceneConstructor.cs" line="20" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/SceneConstructor.cs" bodystart="20" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_micra_1_1_core_1_1_scene_constructor_1a2cff9b7fca99f0af277047e51a518db6" prot="private" static="no" mutable="no">
+        <type>readonly Dictionary&lt; ulong, <ref refid="class_micra_1_1_core_1_1_serializable_scene_1_1_plugin" kindref="compound">SerializableScene.Plugin</ref> &gt;</type>
+        <definition>readonly Dictionary&lt;ulong, SerializableScene.Plugin&gt; Micra.Core.SceneConstructor.plugins</definition>
+        <argsstring></argsstring>
+        <name>plugins</name>
+        <initializer>= new Dictionary&lt;ulong, <ref refid="class_micra_1_1_core_1_1_serializable_scene_1_1_plugin" kindref="compound">SerializableScene.Plugin</ref>&gt;()</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/SceneConstructor.cs" line="21" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/SceneConstructor.cs" bodystart="21" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_micra_1_1_core_1_1_scene_constructor_1a94a21c681c38085e6d39bb8f9eab01b1" prot="private" static="no" mutable="no">
+        <type>readonly Dictionary&lt; ulong, <ref refid="class_micra_1_1_core_1_1_animatable" kindref="compound">Animatable</ref> &gt;</type>
+        <definition>readonly Dictionary&lt;ulong, Animatable&gt; Micra.Core.SceneConstructor.anims</definition>
+        <argsstring></argsstring>
+        <name>anims</name>
+        <initializer>= new Dictionary&lt;ulong, <ref refid="class_micra_1_1_core_1_1_animatable" kindref="compound">Animatable</ref>&gt;()</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/SceneConstructor.cs" line="22" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/SceneConstructor.cs" bodystart="22" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_scene_constructor_1a8f6fddc3ddb04d3b360a125ea72f6b5b" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>Micra.Core.SceneConstructor.SceneConstructor</definition>
+        <argsstring>(Scene s)</argsstring>
+        <name>SceneConstructor</name>
+        <param>
+          <type><ref refid="class_micra_1_1_core_1_1_scene" kindref="compound">Scene</ref></type>
+          <declname>s</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/SceneConstructor.cs" line="24" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/SceneConstructor.cs" bodystart="24" bodyend="27"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_scene_constructor_1ae0e41e58dd5dd276e34108cf07c64e9c" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Micra.Core.SceneConstructor.ConstructScene</definition>
+        <argsstring>(SerializableScene ss)</argsstring>
+        <name>ConstructScene</name>
+        <param>
+          <type><ref refid="class_micra_1_1_core_1_1_serializable_scene" kindref="compound">SerializableScene</ref></type>
+          <declname>ss</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/SceneConstructor.cs" line="29" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/SceneConstructor.cs" bodystart="29" bodyend="36"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_scene_constructor_1a25250a2d735f0a89f7ee0ccb05874200" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Micra.Core.SceneConstructor.SetParameters</definition>
+        <argsstring>()</argsstring>
+        <name>SetParameters</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/SceneConstructor.cs" line="53" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/SceneConstructor.cs" bodystart="53" bodyend="66"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_scene_constructor_1a90e50ae0fc3e3fb8cb660ba2c317cb9d" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Micra.Core.SceneConstructor.SetReferences</definition>
+        <argsstring>()</argsstring>
+        <name>SetReferences</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/SceneConstructor.cs" line="68" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/SceneConstructor.cs" bodystart="68" bodyend="104"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_scene_constructor_1a8a00b4852810d04fdc93d46c3717b576" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Micra.Core.SceneConstructor.AddNodes</definition>
+        <argsstring>(Node node, IEnumerable&lt; SerializableScene.Node &gt; nodes)</argsstring>
+        <name>AddNodes</name>
+        <param>
+          <type><ref refid="class_micra_1_1_core_1_1_node" kindref="compound">Node</ref></type>
+          <declname>node</declname>
+        </param>
+        <param>
+          <type>IEnumerable&lt; <ref refid="class_micra_1_1_core_1_1_serializable_scene_1_1_node" kindref="compound">SerializableScene.Node</ref> &gt;</type>
+          <declname>nodes</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/SceneConstructor.cs" line="106" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/SceneConstructor.cs" bodystart="106" bodyend="137"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-func">
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_scene_constructor_1af0bd1c8217a15dcc3b7aca1457fb7650" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>T</type>
+        <definition>T Micra.Core.SceneConstructor.CreatePlugin&lt; T &gt;</definition>
+        <argsstring>(ulong id)</argsstring>
+        <name>CreatePlugin&lt; T &gt;</name>
+        <param>
+          <type>ulong</type>
+          <declname>id</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/SceneConstructor.cs" line="38" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/SceneConstructor.cs" bodystart="38" bodyend="51"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Creates a scene in 3ds <ref refid="class_micra_1_1_core_1_1_max" kindref="compound">Max</ref> from serializable scene data. This is not exposed as part of the API. Instead you would use <ref refid="class_micra_1_1_core_1_1_scene_1ae9b23ad8105e314886d57140a90599f9" kindref="member">Scene.CreateScene()</ref>. </para>    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="527">
+        <label>SceneObject</label>
+        <link refid="class_micra_1_1_core_1_1_scene_object"/>
+        <childnode refid="525" relation="public-inheritance">
+        </childnode>
+        <childnode refid="526" relation="usage">
+          <edgelabel>Geometry</edgelabel>
+        </childnode>
+        <childnode refid="528" relation="usage">
+          <edgelabel>Mesh</edgelabel>
+        </childnode>
+      </node>
+      <node id="524">
+        <label>Micra.Core.SceneObject</label>
+        <link refid="class_micra_1_1_core_1_1_scene_object"/>
+        <childnode refid="525" relation="public-inheritance">
+        </childnode>
+        <childnode refid="526" relation="usage">
+          <edgelabel>Geometry</edgelabel>
+        </childnode>
+        <childnode refid="528" relation="usage">
+          <edgelabel>Mesh</edgelabel>
+        </childnode>
+      </node>
+      <node id="522">
+        <label>Micra.Core.Node</label>
+        <link refid="class_micra_1_1_core_1_1_node"/>
+        <childnode refid="523" relation="public-inheritance">
+        </childnode>
+        <childnode refid="524" relation="usage">
+          <edgelabel>Object</edgelabel>
+        </childnode>
+        <childnode refid="526" relation="usage">
+          <edgelabel>Geometry</edgelabel>
+        </childnode>
+        <childnode refid="531" relation="usage">
+          <edgelabel>UserData</edgelabel>
+        </childnode>
+      </node>
+      <node id="519">
+        <label>ReferenceMaker</label>
+        <link refid="class_micra_1_1_core_1_1_reference_maker"/>
+        <childnode refid="520" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="531">
+        <label>Micra.Core.Node.NodeUserData</label>
+        <link refid="class_micra_1_1_core_1_1_node_1_1_node_user_data"/>
+      </node>
+      <node id="520">
+        <label>Animatable</label>
+        <link refid="class_micra_1_1_core_1_1_animatable"/>
+        <childnode refid="521" relation="usage">
+          <edgelabel>parameterBlock</edgelabel>
+        </childnode>
+      </node>
+      <node id="528">
+        <label>Micra.Core.Mesh</label>
+        <link refid="class_micra_1_1_core_1_1_mesh"/>
+        <childnode refid="529" relation="usage">
+          <edgelabel>verts</edgelabel>
+          <edgelabel>vnormals</edgelabel>
+          <edgelabel>fnormals</edgelabel>
+          <edgelabel>tverts</edgelabel>
+        </childnode>
+        <childnode refid="530" relation="usage">
+          <edgelabel>tfaces</edgelabel>
+          <edgelabel>faces</edgelabel>
+        </childnode>
+      </node>
+      <node id="526">
+        <label>Micra.Core.Geometry</label>
+        <link refid="class_micra_1_1_core_1_1_geometry"/>
+        <childnode refid="527" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="518">
+        <label>Micra.Core.ReferenceTarget</label>
+        <link refid="class_micra_1_1_core_1_1_reference_target"/>
+        <childnode refid="519" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="523">
+        <label>ReferenceTarget</label>
+        <link refid="class_micra_1_1_core_1_1_reference_target"/>
+        <childnode refid="519" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="516">
+        <label>Micra.Core.SceneConstructor</label>
+        <link refid="class_micra_1_1_core_1_1_scene_constructor"/>
+        <childnode refid="517" relation="usage">
+          <edgelabel>scene</edgelabel>
+        </childnode>
+      </node>
+      <node id="530">
+        <label>Micra.Core.Mesh.Face</label>
+        <link refid="struct_micra_1_1_core_1_1_mesh_1_1_face"/>
+      </node>
+      <node id="529">
+        <label>Micra.Core.Point3</label>
+        <link refid="class_micra_1_1_core_1_1_point3"/>
+      </node>
+      <node id="517">
+        <label>Micra.Core.Scene</label>
+        <link refid="class_micra_1_1_core_1_1_scene"/>
+        <childnode refid="518" relation="usage">
+          <edgelabel>sceneRefTarget</edgelabel>
+        </childnode>
+        <childnode refid="522" relation="usage">
+          <edgelabel>sceneRootNode</edgelabel>
+        </childnode>
+      </node>
+      <node id="521">
+        <label>Micra.Core.IParameterBlock</label>
+        <link refid="interface_micra_1_1_core_1_1_i_parameter_block"/>
+      </node>
+      <node id="525">
+        <label>SceneElement</label>
+        <link refid="class_micra_1_1_core_1_1_scene_element"/>
+        <childnode refid="523" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/SceneConstructor.cs" line="19" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/SceneConstructor.cs" bodystart="18" bodyend="138"/>
+    <listofallmembers>
+      <member refid="class_micra_1_1_core_1_1_scene_constructor_1a8a00b4852810d04fdc93d46c3717b576" prot="public" virt="non-virtual"><scope>Micra::Core::SceneConstructor</scope><name>AddNodes</name></member>
+      <member refid="class_micra_1_1_core_1_1_scene_constructor_1a94a21c681c38085e6d39bb8f9eab01b1" prot="private" virt="non-virtual"><scope>Micra::Core::SceneConstructor</scope><name>anims</name></member>
+      <member refid="class_micra_1_1_core_1_1_scene_constructor_1ae0e41e58dd5dd276e34108cf07c64e9c" prot="public" virt="non-virtual"><scope>Micra::Core::SceneConstructor</scope><name>ConstructScene</name></member>
+      <member refid="class_micra_1_1_core_1_1_scene_constructor_1af0bd1c8217a15dcc3b7aca1457fb7650" prot="private" virt="non-virtual"><scope>Micra::Core::SceneConstructor</scope><name>CreatePlugin&lt; T &gt;</name></member>
+      <member refid="class_micra_1_1_core_1_1_scene_constructor_1a2cff9b7fca99f0af277047e51a518db6" prot="private" virt="non-virtual"><scope>Micra::Core::SceneConstructor</scope><name>plugins</name></member>
+      <member refid="class_micra_1_1_core_1_1_scene_constructor_1abae8586e7210381ed70a9b376c9834fd" prot="private" virt="non-virtual"><scope>Micra::Core::SceneConstructor</scope><name>scene</name></member>
+      <member refid="class_micra_1_1_core_1_1_scene_constructor_1a8f6fddc3ddb04d3b360a125ea72f6b5b" prot="public" virt="non-virtual"><scope>Micra::Core::SceneConstructor</scope><name>SceneConstructor</name></member>
+      <member refid="class_micra_1_1_core_1_1_scene_constructor_1a25250a2d735f0a89f7ee0ccb05874200" prot="public" virt="non-virtual"><scope>Micra::Core::SceneConstructor</scope><name>SetParameters</name></member>
+      <member refid="class_micra_1_1_core_1_1_scene_constructor_1a90e50ae0fc3e3fb8cb660ba2c317cb9d" prot="public" virt="non-virtual"><scope>Micra::Core::SceneConstructor</scope><name>SetReferences</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

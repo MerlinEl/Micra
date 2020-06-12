@@ -1,0 +1,73 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
+  <compounddef id="class_micra_1_1_core_1_1_observer_iterator" kind="class" prot="public">
+    <compoundname>Micra::Core::ObserverIterator</compoundname>
+    <basecompoundref prot="public" virt="non-virtual">DependentEnumProc</basecompoundref>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="class_micra_1_1_core_1_1_observer_iterator_1a6488da44fb881645a81488772aacef0e" prot="public" static="no" mutable="no">
+        <type>List&lt; <ref refid="class_micra_1_1_core_1_1_reference_maker" kindref="compound">ReferenceMaker</ref> &gt;</type>
+        <definition>List&lt;ReferenceMaker&gt; Micra.Core.ObserverIterator.makers</definition>
+        <argsstring></argsstring>
+        <name>makers</name>
+        <initializer>= new List&lt;<ref refid="class_micra_1_1_core_1_1_reference_maker" kindref="compound">ReferenceMaker</ref>&gt;()</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/ReferenceMakerAndTarget.cs" line="106" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/ReferenceMakerAndTarget.cs" bodystart="106" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_observer_iterator_1af3343f38f769da4b1f88433c350be416" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>override int</type>
+        <definition>override int Micra.Core.ObserverIterator.Proc</definition>
+        <argsstring>(IReferenceMaker rmaker)</argsstring>
+        <name>Proc</name>
+        <param>
+          <type>IReferenceMaker</type>
+          <declname>rmaker</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/ReferenceMakerAndTarget.cs" line="108" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/ReferenceMakerAndTarget.cs" bodystart="108" bodyend="113"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>An iterator that allows the observers of a reference target to be enumerated. </para>    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="307">
+        <label>Autodesk::Max::Plugins::DependentEnumProc</label>
+      </node>
+      <node id="306">
+        <label>Micra.Core.ObserverIterator</label>
+        <link refid="class_micra_1_1_core_1_1_observer_iterator"/>
+        <childnode refid="307" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="309">
+        <label>Autodesk::Max::Plugins::DependentEnumProc</label>
+      </node>
+      <node id="308">
+        <label>Micra.Core.ObserverIterator</label>
+        <link refid="class_micra_1_1_core_1_1_observer_iterator"/>
+        <childnode refid="309" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/ReferenceMakerAndTarget.cs" line="105" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/ReferenceMakerAndTarget.cs" bodystart="104" bodyend="114"/>
+    <listofallmembers>
+      <member refid="class_micra_1_1_core_1_1_observer_iterator_1a6488da44fb881645a81488772aacef0e" prot="public" virt="non-virtual"><scope>Micra::Core::ObserverIterator</scope><name>makers</name></member>
+      <member refid="class_micra_1_1_core_1_1_observer_iterator_1af3343f38f769da4b1f88433c350be416" prot="public" virt="non-virtual"><scope>Micra::Core::ObserverIterator</scope><name>Proc</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

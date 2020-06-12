@@ -1,0 +1,1686 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
+  <compounddef id="class_micra_1_1_tools_1_1_csharp_to_max_test" kind="class" prot="public">
+    <compoundname>Micra::Tools::CsharpToMaxTest</compoundname>
+    <basecompoundref prot="public" virt="non-virtual">Form</basecompoundref>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="class_micra_1_1_tools_1_1_csharp_to_max_test_1a390feeb14905782e3c4deaf2da0ce13e" prot="private" static="no" mutable="no">
+        <type>XDocument</type>
+        <definition>XDocument Micra.Tools.CsharpToMaxTest.MaxActionsXML</definition>
+        <argsstring></argsstring>
+        <name>MaxActionsXML</name>
+        <initializer>= <ref refid="class_micra_1_1_tools_1_1_mx_file_1a30ff35a74a0f3403e545b805444eafd2" kindref="member">MxFile.GetXMLFromResources</ref>(&quot;MaxScriptActions.xml&quot;)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/CsharpToMaxTest.cs" line="14" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/CsharpToMaxTest.cs" bodystart="14" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_micra_1_1_tools_1_1_csharp_to_max_test_1a0003c46718b2082b808968ed4f618777" prot="private" static="no" mutable="no">
+        <type>System.ComponentModel.IContainer</type>
+        <definition>System.ComponentModel.IContainer Micra.Tools.CsharpToMaxTest.components</definition>
+        <argsstring></argsstring>
+        <name>components</name>
+        <initializer>= null</initializer>
+        <briefdescription>
+<para>Required designer variable. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/CsharpToMaxTest.Designer.cs" line="6" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/CsharpToMaxTest.Designer.cs" bodystart="6" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_micra_1_1_tools_1_1_csharp_to_max_test_1aa14868eccb8c342f74d8f75a673c202a" prot="private" static="no" mutable="no">
+        <type>System.Windows.Forms.Button</type>
+        <definition>System.Windows.Forms.Button Micra.Tools.CsharpToMaxTest.button1</definition>
+        <argsstring></argsstring>
+        <name>button1</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/CsharpToMaxTest.Designer.cs" line="733" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/CsharpToMaxTest.Designer.cs" bodystart="733" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_micra_1_1_tools_1_1_csharp_to_max_test_1ad419a6e18c694263c398c15d58c8d165" prot="private" static="no" mutable="no">
+        <type>System.Windows.Forms.TextBox</type>
+        <definition>System.Windows.Forms.TextBox Micra.Tools.CsharpToMaxTest.textBox1</definition>
+        <argsstring></argsstring>
+        <name>textBox1</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/CsharpToMaxTest.Designer.cs" line="734" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/CsharpToMaxTest.Designer.cs" bodystart="734" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_micra_1_1_tools_1_1_csharp_to_max_test_1aadb4b41bf077148e775232ed4c9209d7" prot="private" static="no" mutable="no">
+        <type>System.Windows.Forms.Button</type>
+        <definition>System.Windows.Forms.Button Micra.Tools.CsharpToMaxTest.button5</definition>
+        <argsstring></argsstring>
+        <name>button5</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/CsharpToMaxTest.Designer.cs" line="735" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/CsharpToMaxTest.Designer.cs" bodystart="735" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_micra_1_1_tools_1_1_csharp_to_max_test_1a37cf6eaff2f236fed085b14c2a7cd968" prot="private" static="no" mutable="no">
+        <type>System.Windows.Forms.GroupBox</type>
+        <definition>System.Windows.Forms.GroupBox Micra.Tools.CsharpToMaxTest.groupBox1</definition>
+        <argsstring></argsstring>
+        <name>groupBox1</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/CsharpToMaxTest.Designer.cs" line="736" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/CsharpToMaxTest.Designer.cs" bodystart="736" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_micra_1_1_tools_1_1_csharp_to_max_test_1a73e1b57530f5148a4e7c142d573622a5" prot="private" static="no" mutable="no">
+        <type>System.Windows.Forms.Button</type>
+        <definition>System.Windows.Forms.Button Micra.Tools.CsharpToMaxTest.BtnSelSimElements</definition>
+        <argsstring></argsstring>
+        <name>BtnSelSimElements</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/CsharpToMaxTest.Designer.cs" line="737" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/CsharpToMaxTest.Designer.cs" bodystart="737" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_micra_1_1_tools_1_1_csharp_to_max_test_1a36466b445b094967ae77ddc4b0e76e0f" prot="private" static="no" mutable="no">
+        <type>System.Windows.Forms.GroupBox</type>
+        <definition>System.Windows.Forms.GroupBox Micra.Tools.CsharpToMaxTest.groupBox2</definition>
+        <argsstring></argsstring>
+        <name>groupBox2</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/CsharpToMaxTest.Designer.cs" line="738" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/CsharpToMaxTest.Designer.cs" bodystart="738" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_micra_1_1_tools_1_1_csharp_to_max_test_1a56380555d8227e042d5505ea50ece299" prot="private" static="no" mutable="no">
+        <type>System.Windows.Forms.Button</type>
+        <definition>System.Windows.Forms.Button Micra.Tools.CsharpToMaxTest.button6</definition>
+        <argsstring></argsstring>
+        <name>button6</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/CsharpToMaxTest.Designer.cs" line="739" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/CsharpToMaxTest.Designer.cs" bodystart="739" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_micra_1_1_tools_1_1_csharp_to_max_test_1a106cb364f4b76c4d5ddfba2918ce78d1" prot="private" static="no" mutable="no">
+        <type>System.Windows.Forms.Button</type>
+        <definition>System.Windows.Forms.Button Micra.Tools.CsharpToMaxTest.button7</definition>
+        <argsstring></argsstring>
+        <name>button7</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/CsharpToMaxTest.Designer.cs" line="740" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/CsharpToMaxTest.Designer.cs" bodystart="740" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_micra_1_1_tools_1_1_csharp_to_max_test_1acf665066d2a8e04f115911611065456e" prot="private" static="no" mutable="no">
+        <type>System.Windows.Forms.Button</type>
+        <definition>System.Windows.Forms.Button Micra.Tools.CsharpToMaxTest.button8</definition>
+        <argsstring></argsstring>
+        <name>button8</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/CsharpToMaxTest.Designer.cs" line="741" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/CsharpToMaxTest.Designer.cs" bodystart="741" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_micra_1_1_tools_1_1_csharp_to_max_test_1ab7f1bb080a466c545d738ca3297a23d4" prot="private" static="no" mutable="no">
+        <type>System.Windows.Forms.Button</type>
+        <definition>System.Windows.Forms.Button Micra.Tools.CsharpToMaxTest.button9</definition>
+        <argsstring></argsstring>
+        <name>button9</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/CsharpToMaxTest.Designer.cs" line="742" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/CsharpToMaxTest.Designer.cs" bodystart="742" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_micra_1_1_tools_1_1_csharp_to_max_test_1ab770fb4a820f08044c8d19114f000f9d" prot="private" static="no" mutable="no">
+        <type>System.Windows.Forms.Button</type>
+        <definition>System.Windows.Forms.Button Micra.Tools.CsharpToMaxTest.button10</definition>
+        <argsstring></argsstring>
+        <name>button10</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/CsharpToMaxTest.Designer.cs" line="743" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/CsharpToMaxTest.Designer.cs" bodystart="743" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_micra_1_1_tools_1_1_csharp_to_max_test_1a938196863be9ac87956630c3be9a0bf1" prot="private" static="no" mutable="no">
+        <type>System.Windows.Forms.Button</type>
+        <definition>System.Windows.Forms.Button Micra.Tools.CsharpToMaxTest.button11</definition>
+        <argsstring></argsstring>
+        <name>button11</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/CsharpToMaxTest.Designer.cs" line="744" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/CsharpToMaxTest.Designer.cs" bodystart="744" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_micra_1_1_tools_1_1_csharp_to_max_test_1a22b1c16fb9c9c8a4de407f1fc2d7f145" prot="private" static="no" mutable="no">
+        <type>System.Windows.Forms.Button</type>
+        <definition>System.Windows.Forms.Button Micra.Tools.CsharpToMaxTest.button12</definition>
+        <argsstring></argsstring>
+        <name>button12</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/CsharpToMaxTest.Designer.cs" line="745" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/CsharpToMaxTest.Designer.cs" bodystart="745" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_micra_1_1_tools_1_1_csharp_to_max_test_1afdc3b695c35b3a765cf6a8b6d710804c" prot="private" static="no" mutable="no">
+        <type>System.Windows.Forms.Button</type>
+        <definition>System.Windows.Forms.Button Micra.Tools.CsharpToMaxTest.button13</definition>
+        <argsstring></argsstring>
+        <name>button13</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/CsharpToMaxTest.Designer.cs" line="746" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/CsharpToMaxTest.Designer.cs" bodystart="746" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_micra_1_1_tools_1_1_csharp_to_max_test_1aa724e2ac23afdc87477cdc5c10c72035" prot="private" static="no" mutable="no">
+        <type>System.Windows.Forms.ComboBox</type>
+        <definition>System.Windows.Forms.ComboBox Micra.Tools.CsharpToMaxTest.CbxClassOf</definition>
+        <argsstring></argsstring>
+        <name>CbxClassOf</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/CsharpToMaxTest.Designer.cs" line="747" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/CsharpToMaxTest.Designer.cs" bodystart="747" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_micra_1_1_tools_1_1_csharp_to_max_test_1a8bbc570c7c776dbcf887bfdddb215393" prot="private" static="no" mutable="no">
+        <type>System.Windows.Forms.CheckBox</type>
+        <definition>System.Windows.Forms.CheckBox Micra.Tools.CsharpToMaxTest.ChkClearSel</definition>
+        <argsstring></argsstring>
+        <name>ChkClearSel</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/CsharpToMaxTest.Designer.cs" line="748" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/CsharpToMaxTest.Designer.cs" bodystart="748" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_micra_1_1_tools_1_1_csharp_to_max_test_1a833ee8f67b915672f31fd3453bc5008a" prot="private" static="no" mutable="no">
+        <type>System.Windows.Forms.CheckBox</type>
+        <definition>System.Windows.Forms.CheckBox Micra.Tools.CsharpToMaxTest.ChkSelHidden</definition>
+        <argsstring></argsstring>
+        <name>ChkSelHidden</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/CsharpToMaxTest.Designer.cs" line="749" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/CsharpToMaxTest.Designer.cs" bodystart="749" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_micra_1_1_tools_1_1_csharp_to_max_test_1a18108300255fbe0e8dfd48b07ba56428" prot="private" static="no" mutable="no">
+        <type>System.Windows.Forms.Button</type>
+        <definition>System.Windows.Forms.Button Micra.Tools.CsharpToMaxTest.BtnShowSelClass</definition>
+        <argsstring></argsstring>
+        <name>BtnShowSelClass</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/CsharpToMaxTest.Designer.cs" line="750" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/CsharpToMaxTest.Designer.cs" bodystart="750" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_micra_1_1_tools_1_1_csharp_to_max_test_1ae52a0ab96d859a181ebba15516eba025" prot="private" static="no" mutable="no">
+        <type>System.Windows.Forms.Button</type>
+        <definition>System.Windows.Forms.Button Micra.Tools.CsharpToMaxTest.button15</definition>
+        <argsstring></argsstring>
+        <name>button15</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/CsharpToMaxTest.Designer.cs" line="751" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/CsharpToMaxTest.Designer.cs" bodystart="751" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_micra_1_1_tools_1_1_csharp_to_max_test_1a497fcd619221fa4c4dad87c93069fb77" prot="private" static="no" mutable="no">
+        <type>System.Windows.Forms.CheckBox</type>
+        <definition>System.Windows.Forms.CheckBox Micra.Tools.CsharpToMaxTest.ChkMacroRec</definition>
+        <argsstring></argsstring>
+        <name>ChkMacroRec</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/CsharpToMaxTest.Designer.cs" line="752" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/CsharpToMaxTest.Designer.cs" bodystart="752" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_micra_1_1_tools_1_1_csharp_to_max_test_1a5975f9510a243ec3928cbdaec3a5871b" prot="private" static="no" mutable="no">
+        <type>System.Windows.Forms.Button</type>
+        <definition>System.Windows.Forms.Button Micra.Tools.CsharpToMaxTest.button16</definition>
+        <argsstring></argsstring>
+        <name>button16</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/CsharpToMaxTest.Designer.cs" line="753" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/CsharpToMaxTest.Designer.cs" bodystart="753" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_micra_1_1_tools_1_1_csharp_to_max_test_1ab6c6f86390a27f3af6b3ad030cbfb83f" prot="private" static="no" mutable="no">
+        <type>System.Windows.Forms.ComboBox</type>
+        <definition>System.Windows.Forms.ComboBox Micra.Tools.CsharpToMaxTest.CbxSuperClassOf</definition>
+        <argsstring></argsstring>
+        <name>CbxSuperClassOf</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/CsharpToMaxTest.Designer.cs" line="754" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/CsharpToMaxTest.Designer.cs" bodystart="754" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_micra_1_1_tools_1_1_csharp_to_max_test_1a7ab65861d856d119df6d729b3c743a70" prot="private" static="no" mutable="no">
+        <type>System.Windows.Forms.RadioButton</type>
+        <definition>System.Windows.Forms.RadioButton Micra.Tools.CsharpToMaxTest.RbtSuperClassOf</definition>
+        <argsstring></argsstring>
+        <name>RbtSuperClassOf</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/CsharpToMaxTest.Designer.cs" line="755" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/CsharpToMaxTest.Designer.cs" bodystart="755" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_micra_1_1_tools_1_1_csharp_to_max_test_1a58db731be11ee86255770af862f20e8f" prot="private" static="no" mutable="no">
+        <type>System.Windows.Forms.RadioButton</type>
+        <definition>System.Windows.Forms.RadioButton Micra.Tools.CsharpToMaxTest.RbtClassOf</definition>
+        <argsstring></argsstring>
+        <name>RbtClassOf</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/CsharpToMaxTest.Designer.cs" line="756" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/CsharpToMaxTest.Designer.cs" bodystart="756" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_micra_1_1_tools_1_1_csharp_to_max_test_1ab3dd2f5086d18a3f73f238d59110daea" prot="private" static="no" mutable="no">
+        <type>System.Windows.Forms.Button</type>
+        <definition>System.Windows.Forms.Button Micra.Tools.CsharpToMaxTest.button4</definition>
+        <argsstring></argsstring>
+        <name>button4</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/CsharpToMaxTest.Designer.cs" line="757" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/CsharpToMaxTest.Designer.cs" bodystart="757" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_micra_1_1_tools_1_1_csharp_to_max_test_1ab2e47905d82acbf5f489ac1ff5e69ff2" prot="private" static="no" mutable="no">
+        <type>System.Windows.Forms.Button</type>
+        <definition>System.Windows.Forms.Button Micra.Tools.CsharpToMaxTest.BtnOpenMaxFile</definition>
+        <argsstring></argsstring>
+        <name>BtnOpenMaxFile</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/CsharpToMaxTest.Designer.cs" line="758" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/CsharpToMaxTest.Designer.cs" bodystart="758" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_micra_1_1_tools_1_1_csharp_to_max_test_1ab777c6bffad5bed5f97bccf21c28f622" prot="private" static="no" mutable="no">
+        <type>System.Windows.Forms.Button</type>
+        <definition>System.Windows.Forms.Button Micra.Tools.CsharpToMaxTest.BtnGetSelVetts</definition>
+        <argsstring></argsstring>
+        <name>BtnGetSelVetts</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/CsharpToMaxTest.Designer.cs" line="759" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/CsharpToMaxTest.Designer.cs" bodystart="759" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_micra_1_1_tools_1_1_csharp_to_max_test_1a4ff8b455dec71d48329f4af356339d91" prot="private" static="no" mutable="no">
+        <type>System.Windows.Forms.Button</type>
+        <definition>System.Windows.Forms.Button Micra.Tools.CsharpToMaxTest.BtnGetSelEdges</definition>
+        <argsstring></argsstring>
+        <name>BtnGetSelEdges</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/CsharpToMaxTest.Designer.cs" line="760" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/CsharpToMaxTest.Designer.cs" bodystart="760" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_micra_1_1_tools_1_1_csharp_to_max_test_1a9721367a36275dee8f7ef8c1d31609d0" prot="private" static="no" mutable="no">
+        <type>System.Windows.Forms.Button</type>
+        <definition>System.Windows.Forms.Button Micra.Tools.CsharpToMaxTest.BtnGetSelFaces</definition>
+        <argsstring></argsstring>
+        <name>BtnGetSelFaces</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/CsharpToMaxTest.Designer.cs" line="761" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/CsharpToMaxTest.Designer.cs" bodystart="761" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_micra_1_1_tools_1_1_csharp_to_max_test_1abd7cc955483052d24e639a7c83e8154c" prot="private" static="no" mutable="no">
+        <type>System.Windows.Forms.Button</type>
+        <definition>System.Windows.Forms.Button Micra.Tools.CsharpToMaxTest.BtnHideGeometry</definition>
+        <argsstring></argsstring>
+        <name>BtnHideGeometry</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/CsharpToMaxTest.Designer.cs" line="762" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/CsharpToMaxTest.Designer.cs" bodystart="762" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_micra_1_1_tools_1_1_csharp_to_max_test_1acf2f27947344aad7bc341f647186f95d" prot="private" static="no" mutable="no">
+        <type>System.Windows.Forms.Button</type>
+        <definition>System.Windows.Forms.Button Micra.Tools.CsharpToMaxTest.BtnUnhideGeometry</definition>
+        <argsstring></argsstring>
+        <name>BtnUnhideGeometry</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/CsharpToMaxTest.Designer.cs" line="763" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/CsharpToMaxTest.Designer.cs" bodystart="763" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_micra_1_1_tools_1_1_csharp_to_max_test_1aba9ed211849ffbc83b5233ac358f3c72" prot="private" static="no" mutable="no">
+        <type>System.Windows.Forms.CheckBox</type>
+        <definition>System.Windows.Forms.CheckBox Micra.Tools.CsharpToMaxTest.ChkSelected</definition>
+        <argsstring></argsstring>
+        <name>ChkSelected</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/CsharpToMaxTest.Designer.cs" line="764" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/CsharpToMaxTest.Designer.cs" bodystart="764" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_micra_1_1_tools_1_1_csharp_to_max_test_1ab846d03299ced96077ecaca57d77f25e" prot="private" static="no" mutable="no">
+        <type>System.Windows.Forms.ComboBox</type>
+        <definition>System.Windows.Forms.ComboBox Micra.Tools.CsharpToMaxTest.CbxSceneNodeTypes</definition>
+        <argsstring></argsstring>
+        <name>CbxSceneNodeTypes</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/CsharpToMaxTest.Designer.cs" line="765" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/CsharpToMaxTest.Designer.cs" bodystart="765" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_micra_1_1_tools_1_1_csharp_to_max_test_1af9df04fb290b5e4b06e39bbe44ae54b6" prot="private" static="no" mutable="no">
+        <type>System.Windows.Forms.Button</type>
+        <definition>System.Windows.Forms.Button Micra.Tools.CsharpToMaxTest.BtnGetSceneObjects</definition>
+        <argsstring></argsstring>
+        <name>BtnGetSceneObjects</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/CsharpToMaxTest.Designer.cs" line="766" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/CsharpToMaxTest.Designer.cs" bodystart="766" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_micra_1_1_tools_1_1_csharp_to_max_test_1a1da2bf94d69d3d195f593b4c7ab10530" prot="private" static="no" mutable="no">
+        <type>System.Windows.Forms.Button</type>
+        <definition>System.Windows.Forms.Button Micra.Tools.CsharpToMaxTest.button18</definition>
+        <argsstring></argsstring>
+        <name>button18</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/CsharpToMaxTest.Designer.cs" line="767" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/CsharpToMaxTest.Designer.cs" bodystart="767" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_micra_1_1_tools_1_1_csharp_to_max_test_1a7e12210c7af2f667861eaa63dfa3f1bd" prot="private" static="no" mutable="no">
+        <type>System.Windows.Forms.ComboBox</type>
+        <definition>System.Windows.Forms.ComboBox Micra.Tools.CsharpToMaxTest.CbxPrimitiveTypes</definition>
+        <argsstring></argsstring>
+        <name>CbxPrimitiveTypes</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/CsharpToMaxTest.Designer.cs" line="768" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/CsharpToMaxTest.Designer.cs" bodystart="768" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_micra_1_1_tools_1_1_csharp_to_max_test_1a5874a7387811a9c5b068626f51090a1d" prot="private" static="no" mutable="no">
+        <type>System.Windows.Forms.Button</type>
+        <definition>System.Windows.Forms.Button Micra.Tools.CsharpToMaxTest.BtnListPrimitives</definition>
+        <argsstring></argsstring>
+        <name>BtnListPrimitives</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/CsharpToMaxTest.Designer.cs" line="769" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/CsharpToMaxTest.Designer.cs" bodystart="769" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_micra_1_1_tools_1_1_csharp_to_max_test_1addf71796283746a463b85a9a9f9f0c78" prot="private" static="no" mutable="no">
+        <type>System.Windows.Forms.CheckBox</type>
+        <definition>System.Windows.Forms.CheckBox Micra.Tools.CsharpToMaxTest.ChkSelHidden2</definition>
+        <argsstring></argsstring>
+        <name>ChkSelHidden2</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/CsharpToMaxTest.Designer.cs" line="770" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/CsharpToMaxTest.Designer.cs" bodystart="770" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_micra_1_1_tools_1_1_csharp_to_max_test_1ab75b7d18775a10d86a1b7b8c617be84e" prot="private" static="no" mutable="no">
+        <type>System.Windows.Forms.ComboBox</type>
+        <definition>System.Windows.Forms.ComboBox Micra.Tools.CsharpToMaxTest.CbxMaxFilePath</definition>
+        <argsstring></argsstring>
+        <name>CbxMaxFilePath</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/CsharpToMaxTest.Designer.cs" line="771" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/CsharpToMaxTest.Designer.cs" bodystart="771" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_micra_1_1_tools_1_1_csharp_to_max_test_1aa135a47a25d10360551fc5ff9bec52a7" prot="private" static="no" mutable="no">
+        <type>System.Windows.Forms.Button</type>
+        <definition>System.Windows.Forms.Button Micra.Tools.CsharpToMaxTest.BtnExecute</definition>
+        <argsstring></argsstring>
+        <name>BtnExecute</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/CsharpToMaxTest.Designer.cs" line="772" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/CsharpToMaxTest.Designer.cs" bodystart="772" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_micra_1_1_tools_1_1_csharp_to_max_test_1a7acc196cdb19aab55c60e831058bb577" prot="private" static="no" mutable="no">
+        <type>System.Windows.Forms.ComboBox</type>
+        <definition>System.Windows.Forms.ComboBox Micra.Tools.CsharpToMaxTest.CbxScriptList</definition>
+        <argsstring></argsstring>
+        <name>CbxScriptList</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/CsharpToMaxTest.Designer.cs" line="773" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/CsharpToMaxTest.Designer.cs" bodystart="773" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_micra_1_1_tools_1_1_csharp_to_max_test_1a8f2b0b17f7d100312649276f45938441" prot="private" static="no" mutable="no">
+        <type>System.Windows.Forms.Button</type>
+        <definition>System.Windows.Forms.Button Micra.Tools.CsharpToMaxTest.BtnGetObjArea2</definition>
+        <argsstring></argsstring>
+        <name>BtnGetObjArea2</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/CsharpToMaxTest.Designer.cs" line="774" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/CsharpToMaxTest.Designer.cs" bodystart="774" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_micra_1_1_tools_1_1_csharp_to_max_test_1a7f94acd90c268c3037e73d2b86f254a9" prot="private" static="no" mutable="no">
+        <type>System.Windows.Forms.Button</type>
+        <definition>System.Windows.Forms.Button Micra.Tools.CsharpToMaxTest.BtnGetObjArea1</definition>
+        <argsstring></argsstring>
+        <name>BtnGetObjArea1</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/CsharpToMaxTest.Designer.cs" line="775" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/CsharpToMaxTest.Designer.cs" bodystart="775" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_micra_1_1_tools_1_1_csharp_to_max_test_1abbe0c6b1160af77b5e1fa48306d4473b" prot="private" static="no" mutable="no">
+        <type>System.Windows.Forms.Button</type>
+        <definition>System.Windows.Forms.Button Micra.Tools.CsharpToMaxTest.BtnClearExecute</definition>
+        <argsstring></argsstring>
+        <name>BtnClearExecute</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/CsharpToMaxTest.Designer.cs" line="776" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/CsharpToMaxTest.Designer.cs" bodystart="776" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_micra_1_1_tools_1_1_csharp_to_max_test_1a364badab2444673f12129dcabbac9699" prot="private" static="no" mutable="no">
+        <type>System.Windows.Forms.GroupBox</type>
+        <definition>System.Windows.Forms.GroupBox Micra.Tools.CsharpToMaxTest.groupBox6</definition>
+        <argsstring></argsstring>
+        <name>groupBox6</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/CsharpToMaxTest.Designer.cs" line="777" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/CsharpToMaxTest.Designer.cs" bodystart="777" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_micra_1_1_tools_1_1_csharp_to_max_test_1a4c70114a02eda931b7164f7c943647ce" prot="private" static="no" mutable="no">
+        <type>System.Windows.Forms.GroupBox</type>
+        <definition>System.Windows.Forms.GroupBox Micra.Tools.CsharpToMaxTest.groupBox5</definition>
+        <argsstring></argsstring>
+        <name>groupBox5</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/CsharpToMaxTest.Designer.cs" line="778" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/CsharpToMaxTest.Designer.cs" bodystart="778" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_micra_1_1_tools_1_1_csharp_to_max_test_1af4b85c7d71422fa5477bdb8f186e903c" prot="private" static="no" mutable="no">
+        <type>System.Windows.Forms.GroupBox</type>
+        <definition>System.Windows.Forms.GroupBox Micra.Tools.CsharpToMaxTest.groupBox4</definition>
+        <argsstring></argsstring>
+        <name>groupBox4</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/CsharpToMaxTest.Designer.cs" line="779" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/CsharpToMaxTest.Designer.cs" bodystart="779" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_micra_1_1_tools_1_1_csharp_to_max_test_1a01916fdcb239793828c60c918499c1fd" prot="private" static="no" mutable="no">
+        <type>System.Windows.Forms.TabControl</type>
+        <definition>System.Windows.Forms.TabControl Micra.Tools.CsharpToMaxTest.tabControl1</definition>
+        <argsstring></argsstring>
+        <name>tabControl1</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/CsharpToMaxTest.Designer.cs" line="780" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/CsharpToMaxTest.Designer.cs" bodystart="780" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_micra_1_1_tools_1_1_csharp_to_max_test_1a30729ea64882735989c9aa10d4557c9d" prot="private" static="no" mutable="no">
+        <type>System.Windows.Forms.TabPage</type>
+        <definition>System.Windows.Forms.TabPage Micra.Tools.CsharpToMaxTest.tabPage3</definition>
+        <argsstring></argsstring>
+        <name>tabPage3</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/CsharpToMaxTest.Designer.cs" line="781" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/CsharpToMaxTest.Designer.cs" bodystart="781" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_micra_1_1_tools_1_1_csharp_to_max_test_1a7b8d9da1eaa06b296f1101e3bc7a6c6a" prot="private" static="no" mutable="no">
+        <type>System.Windows.Forms.TabPage</type>
+        <definition>System.Windows.Forms.TabPage Micra.Tools.CsharpToMaxTest.tabPage1</definition>
+        <argsstring></argsstring>
+        <name>tabPage1</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/CsharpToMaxTest.Designer.cs" line="782" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/CsharpToMaxTest.Designer.cs" bodystart="782" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_micra_1_1_tools_1_1_csharp_to_max_test_1a052faa20c7858cead881611b689caef1" prot="private" static="no" mutable="no">
+        <type>System.Windows.Forms.TabPage</type>
+        <definition>System.Windows.Forms.TabPage Micra.Tools.CsharpToMaxTest.tabPage2</definition>
+        <argsstring></argsstring>
+        <name>tabPage2</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/CsharpToMaxTest.Designer.cs" line="783" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/CsharpToMaxTest.Designer.cs" bodystart="783" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_micra_1_1_tools_1_1_csharp_to_max_test_1a5f13210b0e40f034affd144274f03236" prot="private" static="no" mutable="no">
+        <type>System.Windows.Forms.GroupBox</type>
+        <definition>System.Windows.Forms.GroupBox Micra.Tools.CsharpToMaxTest.groupBox7</definition>
+        <argsstring></argsstring>
+        <name>groupBox7</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/CsharpToMaxTest.Designer.cs" line="784" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/CsharpToMaxTest.Designer.cs" bodystart="784" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_micra_1_1_tools_1_1_csharp_to_max_test_1a13ca7f47ce94e288ef87c402c0df57af" prot="private" static="no" mutable="no">
+        <type>System.Windows.Forms.GroupBox</type>
+        <definition>System.Windows.Forms.GroupBox Micra.Tools.CsharpToMaxTest.groupBox3</definition>
+        <argsstring></argsstring>
+        <name>groupBox3</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/CsharpToMaxTest.Designer.cs" line="785" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/CsharpToMaxTest.Designer.cs" bodystart="785" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_micra_1_1_tools_1_1_csharp_to_max_test_1a942b5047f4358ca6671ff3ffd00276b1" prot="private" static="no" mutable="no">
+        <type>System.Windows.Forms.TabPage</type>
+        <definition>System.Windows.Forms.TabPage Micra.Tools.CsharpToMaxTest.tabPage4</definition>
+        <argsstring></argsstring>
+        <name>tabPage4</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/CsharpToMaxTest.Designer.cs" line="786" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/CsharpToMaxTest.Designer.cs" bodystart="786" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_micra_1_1_tools_1_1_csharp_to_max_test_1afc05be12e0f3097ad1dbfbe24baada9e" prot="private" static="no" mutable="no">
+        <type>System.Windows.Forms.GroupBox</type>
+        <definition>System.Windows.Forms.GroupBox Micra.Tools.CsharpToMaxTest.groupBox8</definition>
+        <argsstring></argsstring>
+        <name>groupBox8</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/CsharpToMaxTest.Designer.cs" line="787" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/CsharpToMaxTest.Designer.cs" bodystart="787" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="class_micra_1_1_tools_1_1_csharp_to_max_test_1a9a0ece38b8024b4eeb9fc494e6b29ce7" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>Micra.Tools.CsharpToMaxTest.CsharpToMaxTest</definition>
+        <argsstring>()</argsstring>
+        <name>CsharpToMaxTest</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/CsharpToMaxTest.cs" line="15" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/CsharpToMaxTest.cs" bodystart="15" bodyend="18"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-func">
+      <memberdef kind="function" id="class_micra_1_1_tools_1_1_csharp_to_max_test_1a241e49b3e19ebc728f05a6c633976002" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Micra.Tools.CsharpToMaxTest.Init</definition>
+        <argsstring>()</argsstring>
+        <name>Init</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/CsharpToMaxTest.cs" line="19" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/CsharpToMaxTest.cs" bodystart="19" bodyend="42"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_tools_1_1_csharp_to_max_test_1a9f3331a10893aafad4b150711dbbeb1a" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Micra.Tools.CsharpToMaxTest.OnTextAreaLostFocus</definition>
+        <argsstring>(object sender, EventArgs e)</argsstring>
+        <name>OnTextAreaLostFocus</name>
+        <param>
+          <type>object</type>
+          <declname>sender</declname>
+        </param>
+        <param>
+          <type>EventArgs</type>
+          <declname>e</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/CsharpToMaxTest.cs" line="44" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/CsharpToMaxTest.cs" bodystart="44" bodyend="46"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_tools_1_1_csharp_to_max_test_1a99de6f565f59f5591148750906cd5a99" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Micra.Tools.CsharpToMaxTest.OnTextAreaGotFocus</definition>
+        <argsstring>(object sender, EventArgs e)</argsstring>
+        <name>OnTextAreaGotFocus</name>
+        <param>
+          <type>object</type>
+          <declname>sender</declname>
+        </param>
+        <param>
+          <type>EventArgs</type>
+          <declname>e</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/CsharpToMaxTest.cs" line="48" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/CsharpToMaxTest.cs" bodystart="48" bodyend="50"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_tools_1_1_csharp_to_max_test_1af466250fbc31cf386ecaada54d49ced1" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Micra.Tools.CsharpToMaxTest.Button1_Click</definition>
+        <argsstring>(object sender, EventArgs e)</argsstring>
+        <name>Button1_Click</name>
+        <param>
+          <type>object</type>
+          <declname>sender</declname>
+        </param>
+        <param>
+          <type>EventArgs</type>
+          <declname>e</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/CsharpToMaxTest.cs" line="52" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/CsharpToMaxTest.cs" bodystart="52" bodyend="58"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_tools_1_1_csharp_to_max_test_1a2bb337da59e9bc6f1f98fc3649d89684" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Micra.Tools.CsharpToMaxTest.Button5_Click</definition>
+        <argsstring>(object sender, EventArgs e)</argsstring>
+        <name>Button5_Click</name>
+        <param>
+          <type>object</type>
+          <declname>sender</declname>
+        </param>
+        <param>
+          <type>EventArgs</type>
+          <declname>e</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/CsharpToMaxTest.cs" line="60" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/CsharpToMaxTest.cs" bodystart="60" bodyend="66"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_tools_1_1_csharp_to_max_test_1a490b38a71c44a56a17e1565e9c408c70" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Micra.Tools.CsharpToMaxTest.BtnSelSimElements_Click</definition>
+        <argsstring>(object sender, EventArgs e)</argsstring>
+        <name>BtnSelSimElements_Click</name>
+        <param>
+          <type>object</type>
+          <declname>sender</declname>
+        </param>
+        <param>
+          <type>EventArgs</type>
+          <declname>e</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/CsharpToMaxTest.cs" line="68" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/CsharpToMaxTest.cs" bodystart="68" bodyend="91"/>
+        <references refid="class_micra_1_1_core_1_1_node_1ad6bb0e974ea5a7b8fa4d30c80183e35a" compoundref="_node_8cs" startline="261" endline="266">Micra.Core.Node.IsEditable</references>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_tools_1_1_csharp_to_max_test_1a7a13262b911b15a22f5f4493262df12d" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Micra.Tools.CsharpToMaxTest.Button9_Click</definition>
+        <argsstring>(object sender, EventArgs e)</argsstring>
+        <name>Button9_Click</name>
+        <param>
+          <type>object</type>
+          <declname>sender</declname>
+        </param>
+        <param>
+          <type>EventArgs</type>
+          <declname>e</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/CsharpToMaxTest.cs" line="93" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/CsharpToMaxTest.cs" bodystart="93" bodyend="97"/>
+        <references refid="class_micra_1_1_core_1_1_scene_1af18acdf337993dab40dc3eed7ec71a19" compoundref="_scene_8cs" startline="35">Micra.Core.Scene.RootNode</references>
+        <references refid="class_micra_1_1_core_1_1_kernel_1a1cc58fd9cf4893f0b8e77ade462884a3" compoundref="_kernel_8cs" startline="138">Micra.Core.Kernel.Scene</references>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_tools_1_1_csharp_to_max_test_1a6e47d6f9d9ca2aabbb6e246738e683c6" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Micra.Tools.CsharpToMaxTest.PrintNode</definition>
+        <argsstring>(Node n, string indent=&quot;&quot;)</argsstring>
+        <name>PrintNode</name>
+        <param>
+          <type><ref refid="class_micra_1_1_core_1_1_node" kindref="compound">Node</ref></type>
+          <declname>n</declname>
+        </param>
+        <param>
+          <type>string</type>
+          <declname>indent</declname>
+          <defval>&quot;&quot;</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/CsharpToMaxTest.cs" line="99" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/CsharpToMaxTest.cs" bodystart="99" bodyend="103"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_tools_1_1_csharp_to_max_test_1af0796121ff98fe030d03a725adf00044" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Micra.Tools.CsharpToMaxTest.Button8_Click</definition>
+        <argsstring>(object sender, EventArgs e)</argsstring>
+        <name>Button8_Click</name>
+        <param>
+          <type>object</type>
+          <declname>sender</declname>
+        </param>
+        <param>
+          <type>EventArgs</type>
+          <declname>e</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/CsharpToMaxTest.cs" line="105" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/CsharpToMaxTest.cs" bodystart="105" bodyend="111"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_tools_1_1_csharp_to_max_test_1a371032ec65bdab01b7bb7de5e59899f0" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Micra.Tools.CsharpToMaxTest.Button7_Click</definition>
+        <argsstring>(object sender, EventArgs e)</argsstring>
+        <name>Button7_Click</name>
+        <param>
+          <type>object</type>
+          <declname>sender</declname>
+        </param>
+        <param>
+          <type>EventArgs</type>
+          <declname>e</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/CsharpToMaxTest.cs" line="113" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/CsharpToMaxTest.cs" bodystart="113" bodyend="124"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_tools_1_1_csharp_to_max_test_1a50755e53ff64cb7b178420a62efdb541" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Micra.Tools.CsharpToMaxTest.Button6_Click</definition>
+        <argsstring>(object sender, EventArgs e)</argsstring>
+        <name>Button6_Click</name>
+        <param>
+          <type>object</type>
+          <declname>sender</declname>
+        </param>
+        <param>
+          <type>EventArgs</type>
+          <declname>e</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/CsharpToMaxTest.cs" line="126" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/CsharpToMaxTest.cs" bodystart="126" bodyend="130"/>
+        <references refid="class_micra_1_1_core_1_1_plugin_mgr_1ab9d71751da55672a3a8273c6e459a0c1" compoundref="_plugins_8cs" startline="27">Micra.Core.PluginMgr.Plugins</references>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_tools_1_1_csharp_to_max_test_1a0c53ffcd1cc753d010f3cc7d25916250" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Micra.Tools.CsharpToMaxTest.Button10_Click</definition>
+        <argsstring>(object sender, EventArgs e)</argsstring>
+        <name>Button10_Click</name>
+        <param>
+          <type>object</type>
+          <declname>sender</declname>
+        </param>
+        <param>
+          <type>EventArgs</type>
+          <declname>e</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/CsharpToMaxTest.cs" line="132" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/CsharpToMaxTest.cs" bodystart="132" bodyend="136"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_tools_1_1_csharp_to_max_test_1a256db439004a28128c6755b33d33c4df" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Micra.Tools.CsharpToMaxTest.Button11_Click</definition>
+        <argsstring>(object sender, EventArgs e)</argsstring>
+        <name>Button11_Click</name>
+        <param>
+          <type>object</type>
+          <declname>sender</declname>
+        </param>
+        <param>
+          <type>EventArgs</type>
+          <declname>e</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/CsharpToMaxTest.cs" line="138" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/CsharpToMaxTest.cs" bodystart="138" bodyend="141"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_tools_1_1_csharp_to_max_test_1a58b01b29b223a495bad915867e0a22ce" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Micra.Tools.CsharpToMaxTest.Button12_Click</definition>
+        <argsstring>(object sender, EventArgs e)</argsstring>
+        <name>Button12_Click</name>
+        <param>
+          <type>object</type>
+          <declname>sender</declname>
+        </param>
+        <param>
+          <type>EventArgs</type>
+          <declname>e</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/CsharpToMaxTest.cs" line="143" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/CsharpToMaxTest.cs" bodystart="143" bodyend="146"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_tools_1_1_csharp_to_max_test_1ac266a7ae6ce321224628e14c6f2d6f3b" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Micra.Tools.CsharpToMaxTest.Button13_Click</definition>
+        <argsstring>(object sender, EventArgs e)</argsstring>
+        <name>Button13_Click</name>
+        <param>
+          <type>object</type>
+          <declname>sender</declname>
+        </param>
+        <param>
+          <type>EventArgs</type>
+          <declname>e</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/CsharpToMaxTest.cs" line="148" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/CsharpToMaxTest.cs" bodystart="148" bodyend="162"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_tools_1_1_csharp_to_max_test_1ad4c060a6e7ff652854add39e73f3df1f" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Micra.Tools.CsharpToMaxTest.Button_ShowSelClass</definition>
+        <argsstring>(object sender, EventArgs e)</argsstring>
+        <name>Button_ShowSelClass</name>
+        <param>
+          <type>object</type>
+          <declname>sender</declname>
+        </param>
+        <param>
+          <type>EventArgs</type>
+          <declname>e</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/CsharpToMaxTest.cs" line="163" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/CsharpToMaxTest.cs" bodystart="163" bodyend="166"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_tools_1_1_csharp_to_max_test_1a0c30f57263664e27de4de543d9901e51" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Micra.Tools.CsharpToMaxTest.OnFormShown</definition>
+        <argsstring>(object sender, EventArgs e)</argsstring>
+        <name>OnFormShown</name>
+        <param>
+          <type>object</type>
+          <declname>sender</declname>
+        </param>
+        <param>
+          <type>EventArgs</type>
+          <declname>e</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/CsharpToMaxTest.cs" line="168" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/CsharpToMaxTest.cs" bodystart="168" bodyend="170"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_tools_1_1_csharp_to_max_test_1a43d9aad9f79c098efda38471b429b553" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Micra.Tools.CsharpToMaxTest.Button15_Click</definition>
+        <argsstring>(object sender, EventArgs e)</argsstring>
+        <name>Button15_Click</name>
+        <param>
+          <type>object</type>
+          <declname>sender</declname>
+        </param>
+        <param>
+          <type>EventArgs</type>
+          <declname>e</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/CsharpToMaxTest.cs" line="172" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/CsharpToMaxTest.cs" bodystart="172" bodyend="175"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_tools_1_1_csharp_to_max_test_1a487106d604c6e3c7c3ea0cae321a3e0e" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Micra.Tools.CsharpToMaxTest.Button_ShowSelParams</definition>
+        <argsstring>(object sender, EventArgs e)</argsstring>
+        <name>Button_ShowSelParams</name>
+        <param>
+          <type>object</type>
+          <declname>sender</declname>
+        </param>
+        <param>
+          <type>EventArgs</type>
+          <declname>e</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/CsharpToMaxTest.cs" line="177" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/CsharpToMaxTest.cs" bodystart="177" bodyend="180"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_tools_1_1_csharp_to_max_test_1a7893696eae4a343591a3a7e266d76a3c" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Micra.Tools.CsharpToMaxTest.Button_SelInstances</definition>
+        <argsstring>(object sender, EventArgs e)</argsstring>
+        <name>Button_SelInstances</name>
+        <param>
+          <type>object</type>
+          <declname>sender</declname>
+        </param>
+        <param>
+          <type>EventArgs</type>
+          <declname>e</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/CsharpToMaxTest.cs" line="182" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/CsharpToMaxTest.cs" bodystart="182" bodyend="185"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_tools_1_1_csharp_to_max_test_1a5398a0d30ca3907e131f7f764a9bab42" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Micra.Tools.CsharpToMaxTest.BtnOpenMaxFile_Click</definition>
+        <argsstring>(object sender, EventArgs e)</argsstring>
+        <name>BtnOpenMaxFile_Click</name>
+        <param>
+          <type>object</type>
+          <declname>sender</declname>
+        </param>
+        <param>
+          <type>EventArgs</type>
+          <declname>e</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/CsharpToMaxTest.cs" line="187" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/CsharpToMaxTest.cs" bodystart="187" bodyend="192"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_tools_1_1_csharp_to_max_test_1a916293908b170546fa5256aff1fb7b09" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Micra.Tools.CsharpToMaxTest.BtnGetSelFaces_Click</definition>
+        <argsstring>(object sender, EventArgs e)</argsstring>
+        <name>BtnGetSelFaces_Click</name>
+        <param>
+          <type>object</type>
+          <declname>sender</declname>
+        </param>
+        <param>
+          <type>EventArgs</type>
+          <declname>e</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/CsharpToMaxTest.cs" line="194" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/CsharpToMaxTest.cs" bodystart="194" bodyend="200"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_tools_1_1_csharp_to_max_test_1a7dc5892d7c4f10b1aa86d4cfa148c061" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Micra.Tools.CsharpToMaxTest.BtnGetSelEdges_Click</definition>
+        <argsstring>(object sender, EventArgs e)</argsstring>
+        <name>BtnGetSelEdges_Click</name>
+        <param>
+          <type>object</type>
+          <declname>sender</declname>
+        </param>
+        <param>
+          <type>EventArgs</type>
+          <declname>e</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/CsharpToMaxTest.cs" line="202" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/CsharpToMaxTest.cs" bodystart="202" bodyend="208"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_tools_1_1_csharp_to_max_test_1ad9eef58f89f04ef0bc771f21f9acbaa2" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Micra.Tools.CsharpToMaxTest.BtnGetSelVetts_Click</definition>
+        <argsstring>(object sender, EventArgs e)</argsstring>
+        <name>BtnGetSelVetts_Click</name>
+        <param>
+          <type>object</type>
+          <declname>sender</declname>
+        </param>
+        <param>
+          <type>EventArgs</type>
+          <declname>e</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/CsharpToMaxTest.cs" line="210" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/CsharpToMaxTest.cs" bodystart="210" bodyend="216"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_tools_1_1_csharp_to_max_test_1a58fae71bebd1d64c21c804d29cdbf844" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Micra.Tools.CsharpToMaxTest.BtnHideUnselFaces_Click</definition>
+        <argsstring>(object sender, EventArgs e)</argsstring>
+        <name>BtnHideUnselFaces_Click</name>
+        <param>
+          <type>object</type>
+          <declname>sender</declname>
+        </param>
+        <param>
+          <type>EventArgs</type>
+          <declname>e</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/CsharpToMaxTest.cs" line="218" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/CsharpToMaxTest.cs" bodystart="218" bodyend="222"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_tools_1_1_csharp_to_max_test_1a6d0eea011a8eff4de15b2082bcc50507" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Micra.Tools.CsharpToMaxTest.BtnUnhideGeometry_Click</definition>
+        <argsstring>(object sender, EventArgs e)</argsstring>
+        <name>BtnUnhideGeometry_Click</name>
+        <param>
+          <type>object</type>
+          <declname>sender</declname>
+        </param>
+        <param>
+          <type>EventArgs</type>
+          <declname>e</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/CsharpToMaxTest.cs" line="224" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/CsharpToMaxTest.cs" bodystart="224" bodyend="228"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_tools_1_1_csharp_to_max_test_1a9e928296709b7c5efea1f0b2a4aa7af2" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Micra.Tools.CsharpToMaxTest.BtnGetSceneObjects_Click</definition>
+        <argsstring>(object sender, EventArgs e)</argsstring>
+        <name>BtnGetSceneObjects_Click</name>
+        <param>
+          <type>object</type>
+          <declname>sender</declname>
+        </param>
+        <param>
+          <type>EventArgs</type>
+          <declname>e</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/CsharpToMaxTest.cs" line="230" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/CsharpToMaxTest.cs" bodystart="230" bodyend="248"/>
+        <references refid="class_micra_1_1_core_1_1_kernel_1a3750dce995b0d382cc405ea627cf294e" compoundref="_kernel_8cs" startline="206" endline="208">Micra.Core.Kernel.WriteLine</references>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_tools_1_1_csharp_to_max_test_1a6821f0d457fc61d85885c2d596fb0263" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Micra.Tools.CsharpToMaxTest.Button18_Click</definition>
+        <argsstring>(object sender, EventArgs e)</argsstring>
+        <name>Button18_Click</name>
+        <param>
+          <type>object</type>
+          <declname>sender</declname>
+        </param>
+        <param>
+          <type>EventArgs</type>
+          <declname>e</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/CsharpToMaxTest.cs" line="250" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/CsharpToMaxTest.cs" bodystart="250" bodyend="328"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_tools_1_1_csharp_to_max_test_1af9d1265eb4804e7ff130749ef51cdb3c" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Micra.Tools.CsharpToMaxTest.BtnListPrimitives_Click</definition>
+        <argsstring>(object sender, EventArgs e)</argsstring>
+        <name>BtnListPrimitives_Click</name>
+        <param>
+          <type>object</type>
+          <declname>sender</declname>
+        </param>
+        <param>
+          <type>EventArgs</type>
+          <declname>e</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/CsharpToMaxTest.cs" line="330" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/CsharpToMaxTest.cs" bodystart="330" bodyend="351"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_tools_1_1_csharp_to_max_test_1a982ae27f001823c1707d1b3a26b8e425" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Micra.Tools.CsharpToMaxTest.BtnGetObjArea_Click</definition>
+        <argsstring>(object sender, EventArgs e)</argsstring>
+        <name>BtnGetObjArea_Click</name>
+        <param>
+          <type>object</type>
+          <declname>sender</declname>
+        </param>
+        <param>
+          <type>EventArgs</type>
+          <declname>e</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/CsharpToMaxTest.cs" line="354" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/CsharpToMaxTest.cs" bodystart="354" bodyend="359"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_tools_1_1_csharp_to_max_test_1a3b219c82297259ad63d4011c4f883e5c" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Micra.Tools.CsharpToMaxTest.BtnGetFaceArea_Click</definition>
+        <argsstring>(object sender, EventArgs e)</argsstring>
+        <name>BtnGetFaceArea_Click</name>
+        <param>
+          <type>object</type>
+          <declname>sender</declname>
+        </param>
+        <param>
+          <type>EventArgs</type>
+          <declname>e</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/CsharpToMaxTest.cs" line="361" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/CsharpToMaxTest.cs" bodystart="361" bodyend="383"/>
+        <references refid="struct_micra_1_1_core_1_1_class_i_d_1adf93402615b1eafbd97992a1c054eb02" compoundref="_class_i_d_8cs" startline="61">Micra.Core.ClassID.EditableMesh</references>
+        <references refid="struct_micra_1_1_core_1_1_class_i_d_1afcdcf24fa5c77b7690a1d86a8d53a3f2" compoundref="_class_i_d_8cs" startline="62">Micra.Core.ClassID.EditablePoly</references>
+        <references refid="class_micra_1_1_core_1_1_node_1a3f4b72340ed13d7440184fa15280d4fc">Micra.Core.Node.IsClassOf</references>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_tools_1_1_csharp_to_max_test_1a4d7c5af6b0cb891b35e58027c323a676" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Micra.Tools.CsharpToMaxTest.BtnExecute_Click</definition>
+        <argsstring>(object sender, EventArgs e)</argsstring>
+        <name>BtnExecute_Click</name>
+        <param>
+          <type>object</type>
+          <declname>sender</declname>
+        </param>
+        <param>
+          <type>EventArgs</type>
+          <declname>e</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/CsharpToMaxTest.cs" line="385" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/CsharpToMaxTest.cs" bodystart="385" bodyend="388"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_tools_1_1_csharp_to_max_test_1a061c8f1abbe3df7f4cd0deeb95ef7521" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Micra.Tools.CsharpToMaxTest.BtnClearExecute_Click</definition>
+        <argsstring>(object sender, EventArgs e)</argsstring>
+        <name>BtnClearExecute_Click</name>
+        <param>
+          <type>object</type>
+          <declname>sender</declname>
+        </param>
+        <param>
+          <type>EventArgs</type>
+          <declname>e</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/CsharpToMaxTest.cs" line="389" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/CsharpToMaxTest.cs" bodystart="389" bodyend="391"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_tools_1_1_csharp_to_max_test_1aa1711fef8c14652c5c5d5f8dbc023913" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Micra.Tools.CsharpToMaxTest.OnCbxScriptListSelChanges</definition>
+        <argsstring>(object sender, EventArgs e)</argsstring>
+        <name>OnCbxScriptListSelChanges</name>
+        <param>
+          <type>object</type>
+          <declname>sender</declname>
+        </param>
+        <param>
+          <type>EventArgs</type>
+          <declname>e</declname>
+        </param>
+        <briefdescription>
+<para>Load Max String Commands in to TextBox</para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/CsharpToMaxTest.cs" line="394" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/CsharpToMaxTest.cs" bodystart="394" bodyend="405"/>
+        <references refid="class_micra_1_1_tools_1_1_mx_file_1ac03fa95486c25945a56ceeb1a603c416" compoundref="_mx_file_8cs" startline="105" endline="113">Micra.Tools.MxFile.GetMaxScriptFromXML</references>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_tools_1_1_csharp_to_max_test_1ade87bb0fb237d8e60f71492e38c4cda2" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Micra.Tools.CsharpToMaxTest.ChkSelected_CheckedChanged</definition>
+        <argsstring>(object sender, EventArgs e)</argsstring>
+        <name>ChkSelected_CheckedChanged</name>
+        <param>
+          <type>object</type>
+          <declname>sender</declname>
+        </param>
+        <param>
+          <type>EventArgs</type>
+          <declname>e</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/CsharpToMaxTest.cs" line="407" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/CsharpToMaxTest.cs" bodystart="407" bodyend="409"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_tools_1_1_csharp_to_max_test_1ada404266a347c915e43e828505b439f4" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Micra.Tools.CsharpToMaxTest.InitializeComponent</definition>
+        <argsstring>()</argsstring>
+        <name>InitializeComponent</name>
+        <briefdescription>
+<para>Required method for Designer support - do not modify the contents of this method with the code editor. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/CsharpToMaxTest.Designer.cs" line="25" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/CsharpToMaxTest.Designer.cs" bodystart="25" bodyend="729"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="protected-func">
+      <memberdef kind="function" id="class_micra_1_1_tools_1_1_csharp_to_max_test_1adf50a7ed1a49284f3cbe68a15eb56f6c" prot="protected" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>override void</type>
+        <definition>override void Micra.Tools.CsharpToMaxTest.Dispose</definition>
+        <argsstring>(bool disposing)</argsstring>
+        <name>Dispose</name>
+        <param>
+          <type>bool</type>
+          <declname>disposing</declname>
+        </param>
+        <briefdescription>
+<para>Clean up any resources being used. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>disposing</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>true if managed resources should be disposed; otherwise, false.</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/CsharpToMaxTest.Designer.cs" line="12" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/CsharpToMaxTest.Designer.cs" bodystart="12" bodyend="17"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="83">
+        <label>Micra.Tools.CsharpToMaxTest</label>
+        <link refid="class_micra_1_1_tools_1_1_csharp_to_max_test"/>
+        <childnode refid="84" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="84">
+        <label>Form</label>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="85">
+        <label>Micra.Tools.CsharpToMaxTest</label>
+        <link refid="class_micra_1_1_tools_1_1_csharp_to_max_test"/>
+        <childnode refid="86" relation="public-inheritance">
+        </childnode>
+        <childnode refid="87" relation="usage">
+          <edgelabel>button4</edgelabel>
+          <edgelabel>button10</edgelabel>
+          <edgelabel>BtnGetSelFaces</edgelabel>
+          <edgelabel>button11</edgelabel>
+          <edgelabel>button5</edgelabel>
+          <edgelabel>ChkSelHidden2</edgelabel>
+          <edgelabel>button12</edgelabel>
+          <edgelabel>button6</edgelabel>
+          <edgelabel>BtnOpenMaxFile</edgelabel>
+          <edgelabel>button13</edgelabel>
+          <edgelabel>...</edgelabel>
+        </childnode>
+      </node>
+      <node id="86">
+        <label>Form</label>
+      </node>
+      <node id="87">
+        <label>System</label>
+      </node>
+    </collaborationgraph>
+    <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/CsharpToMaxTest.cs" line="13" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/CsharpToMaxTest.cs" bodystart="13" bodyend="410"/>
+    <listofallmembers>
+      <member refid="class_micra_1_1_tools_1_1_csharp_to_max_test_1abbe0c6b1160af77b5e1fa48306d4473b" prot="private" virt="non-virtual"><scope>Micra::Tools::CsharpToMaxTest</scope><name>BtnClearExecute</name></member>
+      <member refid="class_micra_1_1_tools_1_1_csharp_to_max_test_1a061c8f1abbe3df7f4cd0deeb95ef7521" prot="private" virt="non-virtual"><scope>Micra::Tools::CsharpToMaxTest</scope><name>BtnClearExecute_Click</name></member>
+      <member refid="class_micra_1_1_tools_1_1_csharp_to_max_test_1aa135a47a25d10360551fc5ff9bec52a7" prot="private" virt="non-virtual"><scope>Micra::Tools::CsharpToMaxTest</scope><name>BtnExecute</name></member>
+      <member refid="class_micra_1_1_tools_1_1_csharp_to_max_test_1a4d7c5af6b0cb891b35e58027c323a676" prot="private" virt="non-virtual"><scope>Micra::Tools::CsharpToMaxTest</scope><name>BtnExecute_Click</name></member>
+      <member refid="class_micra_1_1_tools_1_1_csharp_to_max_test_1a3b219c82297259ad63d4011c4f883e5c" prot="private" virt="non-virtual"><scope>Micra::Tools::CsharpToMaxTest</scope><name>BtnGetFaceArea_Click</name></member>
+      <member refid="class_micra_1_1_tools_1_1_csharp_to_max_test_1a7f94acd90c268c3037e73d2b86f254a9" prot="private" virt="non-virtual"><scope>Micra::Tools::CsharpToMaxTest</scope><name>BtnGetObjArea1</name></member>
+      <member refid="class_micra_1_1_tools_1_1_csharp_to_max_test_1a8f2b0b17f7d100312649276f45938441" prot="private" virt="non-virtual"><scope>Micra::Tools::CsharpToMaxTest</scope><name>BtnGetObjArea2</name></member>
+      <member refid="class_micra_1_1_tools_1_1_csharp_to_max_test_1a982ae27f001823c1707d1b3a26b8e425" prot="private" virt="non-virtual"><scope>Micra::Tools::CsharpToMaxTest</scope><name>BtnGetObjArea_Click</name></member>
+      <member refid="class_micra_1_1_tools_1_1_csharp_to_max_test_1af9df04fb290b5e4b06e39bbe44ae54b6" prot="private" virt="non-virtual"><scope>Micra::Tools::CsharpToMaxTest</scope><name>BtnGetSceneObjects</name></member>
+      <member refid="class_micra_1_1_tools_1_1_csharp_to_max_test_1a9e928296709b7c5efea1f0b2a4aa7af2" prot="private" virt="non-virtual"><scope>Micra::Tools::CsharpToMaxTest</scope><name>BtnGetSceneObjects_Click</name></member>
+      <member refid="class_micra_1_1_tools_1_1_csharp_to_max_test_1a4ff8b455dec71d48329f4af356339d91" prot="private" virt="non-virtual"><scope>Micra::Tools::CsharpToMaxTest</scope><name>BtnGetSelEdges</name></member>
+      <member refid="class_micra_1_1_tools_1_1_csharp_to_max_test_1a7dc5892d7c4f10b1aa86d4cfa148c061" prot="private" virt="non-virtual"><scope>Micra::Tools::CsharpToMaxTest</scope><name>BtnGetSelEdges_Click</name></member>
+      <member refid="class_micra_1_1_tools_1_1_csharp_to_max_test_1a9721367a36275dee8f7ef8c1d31609d0" prot="private" virt="non-virtual"><scope>Micra::Tools::CsharpToMaxTest</scope><name>BtnGetSelFaces</name></member>
+      <member refid="class_micra_1_1_tools_1_1_csharp_to_max_test_1a916293908b170546fa5256aff1fb7b09" prot="private" virt="non-virtual"><scope>Micra::Tools::CsharpToMaxTest</scope><name>BtnGetSelFaces_Click</name></member>
+      <member refid="class_micra_1_1_tools_1_1_csharp_to_max_test_1ab777c6bffad5bed5f97bccf21c28f622" prot="private" virt="non-virtual"><scope>Micra::Tools::CsharpToMaxTest</scope><name>BtnGetSelVetts</name></member>
+      <member refid="class_micra_1_1_tools_1_1_csharp_to_max_test_1ad9eef58f89f04ef0bc771f21f9acbaa2" prot="private" virt="non-virtual"><scope>Micra::Tools::CsharpToMaxTest</scope><name>BtnGetSelVetts_Click</name></member>
+      <member refid="class_micra_1_1_tools_1_1_csharp_to_max_test_1abd7cc955483052d24e639a7c83e8154c" prot="private" virt="non-virtual"><scope>Micra::Tools::CsharpToMaxTest</scope><name>BtnHideGeometry</name></member>
+      <member refid="class_micra_1_1_tools_1_1_csharp_to_max_test_1a58fae71bebd1d64c21c804d29cdbf844" prot="private" virt="non-virtual"><scope>Micra::Tools::CsharpToMaxTest</scope><name>BtnHideUnselFaces_Click</name></member>
+      <member refid="class_micra_1_1_tools_1_1_csharp_to_max_test_1a5874a7387811a9c5b068626f51090a1d" prot="private" virt="non-virtual"><scope>Micra::Tools::CsharpToMaxTest</scope><name>BtnListPrimitives</name></member>
+      <member refid="class_micra_1_1_tools_1_1_csharp_to_max_test_1af9d1265eb4804e7ff130749ef51cdb3c" prot="private" virt="non-virtual"><scope>Micra::Tools::CsharpToMaxTest</scope><name>BtnListPrimitives_Click</name></member>
+      <member refid="class_micra_1_1_tools_1_1_csharp_to_max_test_1ab2e47905d82acbf5f489ac1ff5e69ff2" prot="private" virt="non-virtual"><scope>Micra::Tools::CsharpToMaxTest</scope><name>BtnOpenMaxFile</name></member>
+      <member refid="class_micra_1_1_tools_1_1_csharp_to_max_test_1a5398a0d30ca3907e131f7f764a9bab42" prot="private" virt="non-virtual"><scope>Micra::Tools::CsharpToMaxTest</scope><name>BtnOpenMaxFile_Click</name></member>
+      <member refid="class_micra_1_1_tools_1_1_csharp_to_max_test_1a73e1b57530f5148a4e7c142d573622a5" prot="private" virt="non-virtual"><scope>Micra::Tools::CsharpToMaxTest</scope><name>BtnSelSimElements</name></member>
+      <member refid="class_micra_1_1_tools_1_1_csharp_to_max_test_1a490b38a71c44a56a17e1565e9c408c70" prot="private" virt="non-virtual"><scope>Micra::Tools::CsharpToMaxTest</scope><name>BtnSelSimElements_Click</name></member>
+      <member refid="class_micra_1_1_tools_1_1_csharp_to_max_test_1a18108300255fbe0e8dfd48b07ba56428" prot="private" virt="non-virtual"><scope>Micra::Tools::CsharpToMaxTest</scope><name>BtnShowSelClass</name></member>
+      <member refid="class_micra_1_1_tools_1_1_csharp_to_max_test_1acf2f27947344aad7bc341f647186f95d" prot="private" virt="non-virtual"><scope>Micra::Tools::CsharpToMaxTest</scope><name>BtnUnhideGeometry</name></member>
+      <member refid="class_micra_1_1_tools_1_1_csharp_to_max_test_1a6d0eea011a8eff4de15b2082bcc50507" prot="private" virt="non-virtual"><scope>Micra::Tools::CsharpToMaxTest</scope><name>BtnUnhideGeometry_Click</name></member>
+      <member refid="class_micra_1_1_tools_1_1_csharp_to_max_test_1aa14868eccb8c342f74d8f75a673c202a" prot="private" virt="non-virtual"><scope>Micra::Tools::CsharpToMaxTest</scope><name>button1</name></member>
+      <member refid="class_micra_1_1_tools_1_1_csharp_to_max_test_1ab770fb4a820f08044c8d19114f000f9d" prot="private" virt="non-virtual"><scope>Micra::Tools::CsharpToMaxTest</scope><name>button10</name></member>
+      <member refid="class_micra_1_1_tools_1_1_csharp_to_max_test_1a0c53ffcd1cc753d010f3cc7d25916250" prot="private" virt="non-virtual"><scope>Micra::Tools::CsharpToMaxTest</scope><name>Button10_Click</name></member>
+      <member refid="class_micra_1_1_tools_1_1_csharp_to_max_test_1a938196863be9ac87956630c3be9a0bf1" prot="private" virt="non-virtual"><scope>Micra::Tools::CsharpToMaxTest</scope><name>button11</name></member>
+      <member refid="class_micra_1_1_tools_1_1_csharp_to_max_test_1a256db439004a28128c6755b33d33c4df" prot="private" virt="non-virtual"><scope>Micra::Tools::CsharpToMaxTest</scope><name>Button11_Click</name></member>
+      <member refid="class_micra_1_1_tools_1_1_csharp_to_max_test_1a22b1c16fb9c9c8a4de407f1fc2d7f145" prot="private" virt="non-virtual"><scope>Micra::Tools::CsharpToMaxTest</scope><name>button12</name></member>
+      <member refid="class_micra_1_1_tools_1_1_csharp_to_max_test_1a58b01b29b223a495bad915867e0a22ce" prot="private" virt="non-virtual"><scope>Micra::Tools::CsharpToMaxTest</scope><name>Button12_Click</name></member>
+      <member refid="class_micra_1_1_tools_1_1_csharp_to_max_test_1afdc3b695c35b3a765cf6a8b6d710804c" prot="private" virt="non-virtual"><scope>Micra::Tools::CsharpToMaxTest</scope><name>button13</name></member>
+      <member refid="class_micra_1_1_tools_1_1_csharp_to_max_test_1ac266a7ae6ce321224628e14c6f2d6f3b" prot="private" virt="non-virtual"><scope>Micra::Tools::CsharpToMaxTest</scope><name>Button13_Click</name></member>
+      <member refid="class_micra_1_1_tools_1_1_csharp_to_max_test_1ae52a0ab96d859a181ebba15516eba025" prot="private" virt="non-virtual"><scope>Micra::Tools::CsharpToMaxTest</scope><name>button15</name></member>
+      <member refid="class_micra_1_1_tools_1_1_csharp_to_max_test_1a43d9aad9f79c098efda38471b429b553" prot="private" virt="non-virtual"><scope>Micra::Tools::CsharpToMaxTest</scope><name>Button15_Click</name></member>
+      <member refid="class_micra_1_1_tools_1_1_csharp_to_max_test_1a5975f9510a243ec3928cbdaec3a5871b" prot="private" virt="non-virtual"><scope>Micra::Tools::CsharpToMaxTest</scope><name>button16</name></member>
+      <member refid="class_micra_1_1_tools_1_1_csharp_to_max_test_1a1da2bf94d69d3d195f593b4c7ab10530" prot="private" virt="non-virtual"><scope>Micra::Tools::CsharpToMaxTest</scope><name>button18</name></member>
+      <member refid="class_micra_1_1_tools_1_1_csharp_to_max_test_1a6821f0d457fc61d85885c2d596fb0263" prot="private" virt="non-virtual"><scope>Micra::Tools::CsharpToMaxTest</scope><name>Button18_Click</name></member>
+      <member refid="class_micra_1_1_tools_1_1_csharp_to_max_test_1af466250fbc31cf386ecaada54d49ced1" prot="private" virt="non-virtual"><scope>Micra::Tools::CsharpToMaxTest</scope><name>Button1_Click</name></member>
+      <member refid="class_micra_1_1_tools_1_1_csharp_to_max_test_1ab3dd2f5086d18a3f73f238d59110daea" prot="private" virt="non-virtual"><scope>Micra::Tools::CsharpToMaxTest</scope><name>button4</name></member>
+      <member refid="class_micra_1_1_tools_1_1_csharp_to_max_test_1aadb4b41bf077148e775232ed4c9209d7" prot="private" virt="non-virtual"><scope>Micra::Tools::CsharpToMaxTest</scope><name>button5</name></member>
+      <member refid="class_micra_1_1_tools_1_1_csharp_to_max_test_1a2bb337da59e9bc6f1f98fc3649d89684" prot="private" virt="non-virtual"><scope>Micra::Tools::CsharpToMaxTest</scope><name>Button5_Click</name></member>
+      <member refid="class_micra_1_1_tools_1_1_csharp_to_max_test_1a56380555d8227e042d5505ea50ece299" prot="private" virt="non-virtual"><scope>Micra::Tools::CsharpToMaxTest</scope><name>button6</name></member>
+      <member refid="class_micra_1_1_tools_1_1_csharp_to_max_test_1a50755e53ff64cb7b178420a62efdb541" prot="private" virt="non-virtual"><scope>Micra::Tools::CsharpToMaxTest</scope><name>Button6_Click</name></member>
+      <member refid="class_micra_1_1_tools_1_1_csharp_to_max_test_1a106cb364f4b76c4d5ddfba2918ce78d1" prot="private" virt="non-virtual"><scope>Micra::Tools::CsharpToMaxTest</scope><name>button7</name></member>
+      <member refid="class_micra_1_1_tools_1_1_csharp_to_max_test_1a371032ec65bdab01b7bb7de5e59899f0" prot="private" virt="non-virtual"><scope>Micra::Tools::CsharpToMaxTest</scope><name>Button7_Click</name></member>
+      <member refid="class_micra_1_1_tools_1_1_csharp_to_max_test_1acf665066d2a8e04f115911611065456e" prot="private" virt="non-virtual"><scope>Micra::Tools::CsharpToMaxTest</scope><name>button8</name></member>
+      <member refid="class_micra_1_1_tools_1_1_csharp_to_max_test_1af0796121ff98fe030d03a725adf00044" prot="private" virt="non-virtual"><scope>Micra::Tools::CsharpToMaxTest</scope><name>Button8_Click</name></member>
+      <member refid="class_micra_1_1_tools_1_1_csharp_to_max_test_1ab7f1bb080a466c545d738ca3297a23d4" prot="private" virt="non-virtual"><scope>Micra::Tools::CsharpToMaxTest</scope><name>button9</name></member>
+      <member refid="class_micra_1_1_tools_1_1_csharp_to_max_test_1a7a13262b911b15a22f5f4493262df12d" prot="private" virt="non-virtual"><scope>Micra::Tools::CsharpToMaxTest</scope><name>Button9_Click</name></member>
+      <member refid="class_micra_1_1_tools_1_1_csharp_to_max_test_1a7893696eae4a343591a3a7e266d76a3c" prot="private" virt="non-virtual"><scope>Micra::Tools::CsharpToMaxTest</scope><name>Button_SelInstances</name></member>
+      <member refid="class_micra_1_1_tools_1_1_csharp_to_max_test_1ad4c060a6e7ff652854add39e73f3df1f" prot="private" virt="non-virtual"><scope>Micra::Tools::CsharpToMaxTest</scope><name>Button_ShowSelClass</name></member>
+      <member refid="class_micra_1_1_tools_1_1_csharp_to_max_test_1a487106d604c6e3c7c3ea0cae321a3e0e" prot="private" virt="non-virtual"><scope>Micra::Tools::CsharpToMaxTest</scope><name>Button_ShowSelParams</name></member>
+      <member refid="class_micra_1_1_tools_1_1_csharp_to_max_test_1aa724e2ac23afdc87477cdc5c10c72035" prot="private" virt="non-virtual"><scope>Micra::Tools::CsharpToMaxTest</scope><name>CbxClassOf</name></member>
+      <member refid="class_micra_1_1_tools_1_1_csharp_to_max_test_1ab75b7d18775a10d86a1b7b8c617be84e" prot="private" virt="non-virtual"><scope>Micra::Tools::CsharpToMaxTest</scope><name>CbxMaxFilePath</name></member>
+      <member refid="class_micra_1_1_tools_1_1_csharp_to_max_test_1a7e12210c7af2f667861eaa63dfa3f1bd" prot="private" virt="non-virtual"><scope>Micra::Tools::CsharpToMaxTest</scope><name>CbxPrimitiveTypes</name></member>
+      <member refid="class_micra_1_1_tools_1_1_csharp_to_max_test_1ab846d03299ced96077ecaca57d77f25e" prot="private" virt="non-virtual"><scope>Micra::Tools::CsharpToMaxTest</scope><name>CbxSceneNodeTypes</name></member>
+      <member refid="class_micra_1_1_tools_1_1_csharp_to_max_test_1a7acc196cdb19aab55c60e831058bb577" prot="private" virt="non-virtual"><scope>Micra::Tools::CsharpToMaxTest</scope><name>CbxScriptList</name></member>
+      <member refid="class_micra_1_1_tools_1_1_csharp_to_max_test_1ab6c6f86390a27f3af6b3ad030cbfb83f" prot="private" virt="non-virtual"><scope>Micra::Tools::CsharpToMaxTest</scope><name>CbxSuperClassOf</name></member>
+      <member refid="class_micra_1_1_tools_1_1_csharp_to_max_test_1a8bbc570c7c776dbcf887bfdddb215393" prot="private" virt="non-virtual"><scope>Micra::Tools::CsharpToMaxTest</scope><name>ChkClearSel</name></member>
+      <member refid="class_micra_1_1_tools_1_1_csharp_to_max_test_1a497fcd619221fa4c4dad87c93069fb77" prot="private" virt="non-virtual"><scope>Micra::Tools::CsharpToMaxTest</scope><name>ChkMacroRec</name></member>
+      <member refid="class_micra_1_1_tools_1_1_csharp_to_max_test_1aba9ed211849ffbc83b5233ac358f3c72" prot="private" virt="non-virtual"><scope>Micra::Tools::CsharpToMaxTest</scope><name>ChkSelected</name></member>
+      <member refid="class_micra_1_1_tools_1_1_csharp_to_max_test_1ade87bb0fb237d8e60f71492e38c4cda2" prot="private" virt="non-virtual"><scope>Micra::Tools::CsharpToMaxTest</scope><name>ChkSelected_CheckedChanged</name></member>
+      <member refid="class_micra_1_1_tools_1_1_csharp_to_max_test_1a833ee8f67b915672f31fd3453bc5008a" prot="private" virt="non-virtual"><scope>Micra::Tools::CsharpToMaxTest</scope><name>ChkSelHidden</name></member>
+      <member refid="class_micra_1_1_tools_1_1_csharp_to_max_test_1addf71796283746a463b85a9a9f9f0c78" prot="private" virt="non-virtual"><scope>Micra::Tools::CsharpToMaxTest</scope><name>ChkSelHidden2</name></member>
+      <member refid="class_micra_1_1_tools_1_1_csharp_to_max_test_1a0003c46718b2082b808968ed4f618777" prot="private" virt="non-virtual"><scope>Micra::Tools::CsharpToMaxTest</scope><name>components</name></member>
+      <member refid="class_micra_1_1_tools_1_1_csharp_to_max_test_1a9a0ece38b8024b4eeb9fc494e6b29ce7" prot="public" virt="non-virtual"><scope>Micra::Tools::CsharpToMaxTest</scope><name>CsharpToMaxTest</name></member>
+      <member refid="class_micra_1_1_tools_1_1_csharp_to_max_test_1adf50a7ed1a49284f3cbe68a15eb56f6c" prot="protected" virt="non-virtual"><scope>Micra::Tools::CsharpToMaxTest</scope><name>Dispose</name></member>
+      <member refid="class_micra_1_1_tools_1_1_csharp_to_max_test_1a37cf6eaff2f236fed085b14c2a7cd968" prot="private" virt="non-virtual"><scope>Micra::Tools::CsharpToMaxTest</scope><name>groupBox1</name></member>
+      <member refid="class_micra_1_1_tools_1_1_csharp_to_max_test_1a36466b445b094967ae77ddc4b0e76e0f" prot="private" virt="non-virtual"><scope>Micra::Tools::CsharpToMaxTest</scope><name>groupBox2</name></member>
+      <member refid="class_micra_1_1_tools_1_1_csharp_to_max_test_1a13ca7f47ce94e288ef87c402c0df57af" prot="private" virt="non-virtual"><scope>Micra::Tools::CsharpToMaxTest</scope><name>groupBox3</name></member>
+      <member refid="class_micra_1_1_tools_1_1_csharp_to_max_test_1af4b85c7d71422fa5477bdb8f186e903c" prot="private" virt="non-virtual"><scope>Micra::Tools::CsharpToMaxTest</scope><name>groupBox4</name></member>
+      <member refid="class_micra_1_1_tools_1_1_csharp_to_max_test_1a4c70114a02eda931b7164f7c943647ce" prot="private" virt="non-virtual"><scope>Micra::Tools::CsharpToMaxTest</scope><name>groupBox5</name></member>
+      <member refid="class_micra_1_1_tools_1_1_csharp_to_max_test_1a364badab2444673f12129dcabbac9699" prot="private" virt="non-virtual"><scope>Micra::Tools::CsharpToMaxTest</scope><name>groupBox6</name></member>
+      <member refid="class_micra_1_1_tools_1_1_csharp_to_max_test_1a5f13210b0e40f034affd144274f03236" prot="private" virt="non-virtual"><scope>Micra::Tools::CsharpToMaxTest</scope><name>groupBox7</name></member>
+      <member refid="class_micra_1_1_tools_1_1_csharp_to_max_test_1afc05be12e0f3097ad1dbfbe24baada9e" prot="private" virt="non-virtual"><scope>Micra::Tools::CsharpToMaxTest</scope><name>groupBox8</name></member>
+      <member refid="class_micra_1_1_tools_1_1_csharp_to_max_test_1a241e49b3e19ebc728f05a6c633976002" prot="private" virt="non-virtual"><scope>Micra::Tools::CsharpToMaxTest</scope><name>Init</name></member>
+      <member refid="class_micra_1_1_tools_1_1_csharp_to_max_test_1ada404266a347c915e43e828505b439f4" prot="private" virt="non-virtual"><scope>Micra::Tools::CsharpToMaxTest</scope><name>InitializeComponent</name></member>
+      <member refid="class_micra_1_1_tools_1_1_csharp_to_max_test_1a390feeb14905782e3c4deaf2da0ce13e" prot="private" virt="non-virtual"><scope>Micra::Tools::CsharpToMaxTest</scope><name>MaxActionsXML</name></member>
+      <member refid="class_micra_1_1_tools_1_1_csharp_to_max_test_1aa1711fef8c14652c5c5d5f8dbc023913" prot="private" virt="non-virtual"><scope>Micra::Tools::CsharpToMaxTest</scope><name>OnCbxScriptListSelChanges</name></member>
+      <member refid="class_micra_1_1_tools_1_1_csharp_to_max_test_1a0c30f57263664e27de4de543d9901e51" prot="private" virt="non-virtual"><scope>Micra::Tools::CsharpToMaxTest</scope><name>OnFormShown</name></member>
+      <member refid="class_micra_1_1_tools_1_1_csharp_to_max_test_1a99de6f565f59f5591148750906cd5a99" prot="private" virt="non-virtual"><scope>Micra::Tools::CsharpToMaxTest</scope><name>OnTextAreaGotFocus</name></member>
+      <member refid="class_micra_1_1_tools_1_1_csharp_to_max_test_1a9f3331a10893aafad4b150711dbbeb1a" prot="private" virt="non-virtual"><scope>Micra::Tools::CsharpToMaxTest</scope><name>OnTextAreaLostFocus</name></member>
+      <member refid="class_micra_1_1_tools_1_1_csharp_to_max_test_1a6e47d6f9d9ca2aabbb6e246738e683c6" prot="private" virt="non-virtual"><scope>Micra::Tools::CsharpToMaxTest</scope><name>PrintNode</name></member>
+      <member refid="class_micra_1_1_tools_1_1_csharp_to_max_test_1a58db731be11ee86255770af862f20e8f" prot="private" virt="non-virtual"><scope>Micra::Tools::CsharpToMaxTest</scope><name>RbtClassOf</name></member>
+      <member refid="class_micra_1_1_tools_1_1_csharp_to_max_test_1a7ab65861d856d119df6d729b3c743a70" prot="private" virt="non-virtual"><scope>Micra::Tools::CsharpToMaxTest</scope><name>RbtSuperClassOf</name></member>
+      <member refid="class_micra_1_1_tools_1_1_csharp_to_max_test_1a01916fdcb239793828c60c918499c1fd" prot="private" virt="non-virtual"><scope>Micra::Tools::CsharpToMaxTest</scope><name>tabControl1</name></member>
+      <member refid="class_micra_1_1_tools_1_1_csharp_to_max_test_1a7b8d9da1eaa06b296f1101e3bc7a6c6a" prot="private" virt="non-virtual"><scope>Micra::Tools::CsharpToMaxTest</scope><name>tabPage1</name></member>
+      <member refid="class_micra_1_1_tools_1_1_csharp_to_max_test_1a052faa20c7858cead881611b689caef1" prot="private" virt="non-virtual"><scope>Micra::Tools::CsharpToMaxTest</scope><name>tabPage2</name></member>
+      <member refid="class_micra_1_1_tools_1_1_csharp_to_max_test_1a30729ea64882735989c9aa10d4557c9d" prot="private" virt="non-virtual"><scope>Micra::Tools::CsharpToMaxTest</scope><name>tabPage3</name></member>
+      <member refid="class_micra_1_1_tools_1_1_csharp_to_max_test_1a942b5047f4358ca6671ff3ffd00276b1" prot="private" virt="non-virtual"><scope>Micra::Tools::CsharpToMaxTest</scope><name>tabPage4</name></member>
+      <member refid="class_micra_1_1_tools_1_1_csharp_to_max_test_1ad419a6e18c694263c398c15d58c8d165" prot="private" virt="non-virtual"><scope>Micra::Tools::CsharpToMaxTest</scope><name>textBox1</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

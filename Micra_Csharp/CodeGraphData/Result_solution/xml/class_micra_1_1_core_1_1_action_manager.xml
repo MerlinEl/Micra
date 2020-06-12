@@ -1,0 +1,43 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
+  <compounddef id="class_micra_1_1_core_1_1_action_manager" kind="class" prot="public">
+    <compoundname>Micra::Core::ActionManager</compoundname>
+      <sectiondef kind="property">
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_action_manager_1ab34c4aadfacf7627b6a8ad42bb2db4ea" prot="public" static="yes" readable="no" writable="no" gettable="yes" settable="no">
+        <type>IEnumerable&lt; <ref refid="class_micra_1_1_core_1_1_action_item" kindref="compound">ActionItem</ref> &gt;</type>
+        <definition>IEnumerable&lt;ActionItem&gt; Micra.Core.ActionManager.Actions</definition>
+        <argsstring></argsstring>
+        <name>Actions</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/ActionManager.cs" line="9" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/ActionManager.cs" bodystart="9" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_action_manager_1ad6112c15de15be13781bffa1d4424b1d" prot="public" static="yes" readable="no" writable="no" gettable="yes" settable="no">
+        <type>IEnumerable&lt; <ref refid="class_micra_1_1_core_1_1_action_table" kindref="compound">ActionTable</ref> &gt;</type>
+        <definition>IEnumerable&lt;ActionTable&gt; Micra.Core.ActionManager.ActionTables</definition>
+        <argsstring></argsstring>
+        <name>ActionTables</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/ActionManager.cs" line="17" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/ActionManager.cs" bodystart="17" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Provides access to custom actions and custom action tables. </para>    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/ActionManager.cs" line="8" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/ActionManager.cs" bodystart="8" bodyend="23"/>
+    <listofallmembers>
+      <member refid="class_micra_1_1_core_1_1_action_manager_1ab34c4aadfacf7627b6a8ad42bb2db4ea" prot="public" virt="non-virtual"><scope>Micra::Core::ActionManager</scope><name>Actions</name></member>
+      <member refid="class_micra_1_1_core_1_1_action_manager_1ad6112c15de15be13781bffa1d4424b1d" prot="public" virt="non-virtual"><scope>Micra::Core::ActionManager</scope><name>ActionTables</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

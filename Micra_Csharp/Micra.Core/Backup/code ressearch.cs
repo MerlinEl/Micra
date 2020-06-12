@@ -1,5 +1,66 @@
 
 
+private Poly mesh2poly_csg(IMesh dag) {
+
+    Point3[] pts = new Point3[] { };
+    MIntArray tris = new MIntArray();
+    MFnMesh mesh = new MFnMesh(dag);
+    mesh.getPoints(pts, MSpace.kWorld);
+    MIntArray tcounts = new MIntArray();
+    mesh.getTriangles(tcounts, tris);
+
+    List<Vert> v = new List<Vert>();
+    for ( uint i = 0; i < pts.length(); i++ ) {
+        v.Add(Vert(carve.geom.VECTOR(pts[i].x, pts[i].y, pts[i].z)));
+    }
+
+    List<Face> faces = new List<Face>();
+    for ( uint i = 0; i < tris.length() / 3; i++ ) {
+        faces.Add(Ngon(v[tris[3 * i]], v[tris[3 * i + 1]], v[tris[3 * i + 2]]));
+    }
+
+    return new Poly(faces);
+}
+
+private Mesh poly_csg2mesh(IMNMesh poly) {
+    List<Point3> pts = new List<Point3>() { };
+    List<int> tris = new List<int>() { };
+    List<int> polyCounts = new List<int>() { };
+
+    for ( int i = 0; i < poly.Numv; i++ ) {
+
+        IMNVert v = poly.V(i);
+        pts.Add(new Point3(v.P[0], v.P[1], v.P[2]));
+    }
+
+    for ( int i = 0, l = poly.Numf; i != l; i++ ) {
+
+        IMNFace f = poly.F(i);
+        for ( int j = 0; j < f.Vtx.Count; j++ ) {
+
+            tris.Add(f.Vtx[j]);
+        }
+        polyCounts.Add(f.Vtx.Count);
+    }
+
+    //create Triobject Class
+    IClass_ID cid = Kernel._Global.Class_ID.Create((uint)BuiltInClassIDA.TRIOBJ_CLASS_ID, 0);
+    // Create a new mesh object for each new face.
+    object objectNewFace = Kernel._Interface.CreateInstance(SClass_ID.Geomobject, cid);
+    // Create a new node to hold it in the scene.
+    IObject objNewFace = (IObject)objectNewFace;
+    IINode n = Kernel._Interface.CreateObjectNode(objNewFace);
+    n.CenterPivot(0, false);
+    n.Name = "MeshObj_001";
+    // Based on what we created above, we can safely cast it to TriObject
+    IMesh mesh = objNewFace as IMesh;
+    mesh.SetNumVerts(pts.Count, false, false);
+    mesh.SetNumFaces(polyCounts.Count, false, false);
+    //IFace f = mesh.Faces[0];
+    return new Mesh(mesh);
+}
+
+
 IMesh m = Global.Mesh;
 IMNMesh mn = Global.MNMesh;
 mn.OutToTri(m);

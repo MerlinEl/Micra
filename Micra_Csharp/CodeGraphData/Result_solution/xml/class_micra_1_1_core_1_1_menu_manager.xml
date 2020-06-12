@@ -1,0 +1,147 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
+  <compounddef id="class_micra_1_1_core_1_1_menu_manager" kind="class" prot="public">
+    <compoundname>Micra::Core::MenuManager</compoundname>
+      <sectiondef kind="private-static-attrib">
+      <memberdef kind="variable" id="class_micra_1_1_core_1_1_menu_manager_1a9f4ea3a23d2b477ed03025e3aeaf59d0" prot="private" static="yes" mutable="no">
+        <type>readonly IIMenuManager</type>
+        <definition>readonly IIMenuManager Micra.Core.MenuManager.mgr</definition>
+        <argsstring></argsstring>
+        <name>mgr</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/MenuManager.cs" line="13" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/MenuManager.cs" bodystart="13" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="property">
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_menu_manager_1aa60492bba6ba28e3e39d2dc1b455c61d" prot="public" static="yes" readable="no" writable="no" gettable="yes" settable="no">
+        <type><ref refid="class_micra_1_1_core_1_1_menu" kindref="compound">Menu</ref></type>
+        <definition>Menu Micra.Core.MenuManager.MainMenuBar</definition>
+        <argsstring></argsstring>
+        <name>MainMenuBar</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/MenuManager.cs" line="34" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/MenuManager.cs" bodystart="34" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-static-func">
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_menu_manager_1a7eaa43c9595278966d8b5359458988aa" prot="private" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>static</type>
+        <definition>static Micra.Core.MenuManager.MenuManager</definition>
+        <argsstring>()</argsstring>
+        <name>MenuManager</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/MenuManager.cs" line="15" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/MenuManager.cs" bodystart="15" bodyend="17"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_menu_manager_1a529880c122fd3f6046e2193aa78ef70a" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="class_micra_1_1_core_1_1_menu" kindref="compound">Menu</ref></type>
+        <definition>static Menu Micra.Core.MenuManager.FindMenu</definition>
+        <argsstring>(string name)</argsstring>
+        <name>FindMenu</name>
+        <param>
+          <type>string</type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/MenuManager.cs" line="19" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/MenuManager.cs" bodystart="19" bodyend="24"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_menu_manager_1a20810a3094b62791f42a4a6cf1aef1c1" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>static void Micra.Core.MenuManager.UpdateMenuBar</definition>
+        <argsstring>()</argsstring>
+        <name>UpdateMenuBar</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/MenuManager.cs" line="26" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/MenuManager.cs" bodystart="26" bodyend="28"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_menu_manager_1a58e9f9a474899ef2fe813a8d01c71d85" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>static void Micra.Core.MenuManager.RegisterMenu</definition>
+        <argsstring>(Menu menu)</argsstring>
+        <name>RegisterMenu</name>
+        <param>
+          <type><ref refid="class_micra_1_1_core_1_1_menu" kindref="compound">Menu</ref></type>
+          <declname>menu</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/MenuManager.cs" line="30" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/MenuManager.cs" bodystart="30" bodyend="32"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_menu_manager_1a84d20fbb0646e58ff6817f2e6838f08b" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="class_micra_1_1_core_1_1_menu" kindref="compound">Menu</ref></type>
+        <definition>static Menu Micra.Core.MenuManager.CreateMenuFromActions</definition>
+        <argsstring>(string name, IEnumerable&lt; ActionItem &gt; actions)</argsstring>
+        <name>CreateMenuFromActions</name>
+        <param>
+          <type>string</type>
+          <declname>name</declname>
+        </param>
+        <param>
+          <type>IEnumerable&lt; <ref refid="class_micra_1_1_core_1_1_action_item" kindref="compound">ActionItem</ref> &gt;</type>
+          <declname>actions</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/MenuManager.cs" line="38" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/MenuManager.cs" bodystart="38" bodyend="61"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="227">
+        <label>Micra.Core.MenuManager</label>
+        <link refid="class_micra_1_1_core_1_1_menu_manager"/>
+        <childnode refid="228" relation="usage">
+          <edgelabel>mgr</edgelabel>
+        </childnode>
+      </node>
+      <node id="228">
+        <label>static</label>
+      </node>
+    </collaborationgraph>
+    <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/MenuManager.cs" line="12" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/MenuManager.cs" bodystart="12" bodyend="62"/>
+    <listofallmembers>
+      <member refid="class_micra_1_1_core_1_1_menu_manager_1a84d20fbb0646e58ff6817f2e6838f08b" prot="public" virt="non-virtual"><scope>Micra::Core::MenuManager</scope><name>CreateMenuFromActions</name></member>
+      <member refid="class_micra_1_1_core_1_1_menu_manager_1a529880c122fd3f6046e2193aa78ef70a" prot="public" virt="non-virtual"><scope>Micra::Core::MenuManager</scope><name>FindMenu</name></member>
+      <member refid="class_micra_1_1_core_1_1_menu_manager_1aa60492bba6ba28e3e39d2dc1b455c61d" prot="public" virt="non-virtual"><scope>Micra::Core::MenuManager</scope><name>MainMenuBar</name></member>
+      <member refid="class_micra_1_1_core_1_1_menu_manager_1a7eaa43c9595278966d8b5359458988aa" prot="private" virt="non-virtual"><scope>Micra::Core::MenuManager</scope><name>MenuManager</name></member>
+      <member refid="class_micra_1_1_core_1_1_menu_manager_1a9f4ea3a23d2b477ed03025e3aeaf59d0" prot="private" virt="non-virtual"><scope>Micra::Core::MenuManager</scope><name>mgr</name></member>
+      <member refid="class_micra_1_1_core_1_1_menu_manager_1a58e9f9a474899ef2fe813a8d01c71d85" prot="public" virt="non-virtual"><scope>Micra::Core::MenuManager</scope><name>RegisterMenu</name></member>
+      <member refid="class_micra_1_1_core_1_1_menu_manager_1a20810a3094b62791f42a4a6cf1aef1c1" prot="public" virt="non-virtual"><scope>Micra::Core::MenuManager</scope><name>UpdateMenuBar</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

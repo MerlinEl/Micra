@@ -1,0 +1,12 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
+  <compounddef id="group___object_channels" kind="group">
+    <compoundname>ObjectChannels</compoundname>
+    <title>Object Channels</title>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para>Some of the sample code specifies these channels as PART_* as opposed to *_CHANNEL. For example, PART_GEOM|PART_TOPO instead of GEOM_CHANNEL|TOPO_CHANNEL. The proper usage is the *_CHANNEL version. <simplesect kind="see"><para>The Geometry Pipeline System, Modifiers, and Class Mesh in the <bold>3ds Max Programmer&apos;s Guide</bold>, and Object Channel Indices <ulink url="#Object_Channel_Indices">here</ulink>. </para></simplesect>
+</para>    </detaileddescription>
+  </compounddef>
+</doxygen>

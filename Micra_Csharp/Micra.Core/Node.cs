@@ -109,9 +109,7 @@ namespace Micra.Core {
         public void FlagForeground(TimeValue t) { FlagForeground(t, false); }
         public void FlagForeground() { FlagForeground(Kernel.Now); }
 
-        public ulong NodeHandle {
-            get { return (ulong)_IINode.NodeLong; }
-        }
+        public ulong NodeHandle => (ulong)_IINode.NodeLong;
 
         public String Name {
             get { return _IINode.Name; }
@@ -123,18 +121,14 @@ namespace Micra.Core {
             set { string tmp = value; _IINode.SetUserPropBuffer(tmp); }
         }
 
-        public NodeUserData UserData {
-            get { return new NodeUserData(_IINode); }
-        }
+        public NodeUserData UserData => new NodeUserData(_IINode);
 
         public bool Selected {
             get { return _IINode.Selected; }
             set { if ( value ) Kernel._Interface.SelectNode(_IINode, false); else Kernel._Interface.DeSelectNode(_IINode); }
         }
 
-        public void SelectOnly() {
-            Kernel._Interface.SelectNode(_IINode, true);
-        }
+        public void SelectOnly() => Kernel._Interface.SelectNode(_IINode, true);
 
         //! \name Parent and Child Node Relationships
         //@{
@@ -249,11 +243,14 @@ namespace Micra.Core {
             set { _IINode.IsFrozen = value; }
         }
 
-        public string ClassOf() => ClassID.GetClassName(Object.ClassID);
-        public string SuperClassOf() => SuperClassID.GetClassName(Object.SuperClassID);
-        public bool IsClassOf(ClassID id) => Object.ClassID.a == id.a && Object.ClassID.b == id.b;
+        #region Object Shortcut Methods
 
-        public bool IsSuperClassOf(SuperClassID id) => Object.SuperClassID == id;
+        public string ClassOf() => Object.ClassOf();
+        public string SuperClassOf() => Object.SuperClassOf();
+        public bool IsClassOf(ClassID id) => Object.IsClassOf(id);
+        public bool IsSuperClassOf(SuperClassID id) => Object.IsSuperClassOf(id);
+
+        #endregion
 
         /// <summary> Use this Method to filter objects with Editable_Poly and Editable_Mesh class
         /// <example> 
@@ -281,8 +278,8 @@ namespace Micra.Core {
         public Poly GetPoly() => Object.GetPoly(Kernel.Now);
         public IMesh GetImesh() => Object.GetITriobject(Kernel.Now).Mesh;
         public IMesh GetImesh(TimeValue t) => Object.GetITriobject(t).Mesh;
-        public IMNMesh GetPolyMesh() => Object.GetIpolyObject(Kernel.Now).Mesh;
-        public IMNMesh GetPolyMesh(TimeValue t) => Object.GetIpolyObject(t).Mesh;
+        public IMNMesh GetIpoly() => Object.GetIpolyObject(Kernel.Now).Mesh;
+        public IMNMesh GetIpoly(TimeValue t) => Object.GetIpolyObject(t).Mesh;
 
         internal void InvalidateObjCache() {
             Kernel._Interface.InvalidateObCache(_IINode);

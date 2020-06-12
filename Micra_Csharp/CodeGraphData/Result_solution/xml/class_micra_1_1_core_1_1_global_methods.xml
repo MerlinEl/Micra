@@ -1,0 +1,44 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
+  <compounddef id="class_micra_1_1_core_1_1_global_methods" kind="class" prot="public">
+    <compoundname>Micra::Core::GlobalMethods</compoundname>
+      <sectiondef kind="public-static-attrib">
+      <memberdef kind="variable" id="class_micra_1_1_core_1_1_global_methods_1a15fd44a94c61bd3de798e3fc3cfbcf34" prot="public" static="yes" mutable="no">
+        <type>int</type>
+        <definition>int Micra.Core.GlobalMethods.SubObjectLevel</definition>
+        <argsstring></argsstring>
+        <name>SubObjectLevel</name>
+        <initializer>=&gt; Kernel._Interface.SubObjectLevel</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/GlobalMethods.cs" line="9" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/GlobalMethods.cs" bodystart="9" bodyend="-1"/>
+        <referencedby refid="class_micra_1_1_core_1_1_obj_ops_1ad5d9321273d7494e95b93ff8ae96afb8" compoundref="_obj_ops_8cs" startline="17" endline="30">Micra.Core.ObjOps.DeselectAll</referencedby>
+        <referencedby refid="class_micra_1_1_core_1_1_obj_ops_1a3a0f13f57afb89b080fa22470a8aae50" compoundref="_obj_ops_8cs" startline="39" endline="70">Micra.Core.ObjOps.SelectAll</referencedby>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="157">
+        <label>Micra.Core.GlobalMethods</label>
+        <link refid="class_micra_1_1_core_1_1_global_methods"/>
+        <childnode refid="158" relation="usage">
+          <edgelabel>SubObjectLevel</edgelabel>
+        </childnode>
+      </node>
+      <node id="158">
+        <label>static</label>
+      </node>
+    </collaborationgraph>
+    <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/GlobalMethods.cs" line="8" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/GlobalMethods.cs" bodystart="8" bodyend="11"/>
+    <listofallmembers>
+      <member refid="class_micra_1_1_core_1_1_global_methods_1a15fd44a94c61bd3de798e3fc3cfbcf34" prot="public" virt="non-virtual"><scope>Micra::Core::GlobalMethods</scope><name>SubObjectLevel</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

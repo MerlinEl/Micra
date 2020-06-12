@@ -1,0 +1,137 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
+  <compounddef id="interface_micra_1_1_core_1_1_i_parameter" kind="interface" prot="public">
+    <compoundname>Micra::Core::IParameter</compoundname>
+    <derivedcompoundref refid="struct_micra_1_1_core_1_1_param1" prot="public" virt="non-virtual">Micra.Core.Param1</derivedcompoundref>
+    <derivedcompoundref refid="struct_micra_1_1_core_1_1_parameter2" prot="public" virt="non-virtual">Micra.Core.Parameter2</derivedcompoundref>
+      <sectiondef kind="property">
+      <memberdef kind="property" id="interface_micra_1_1_core_1_1_i_parameter_1a00b73e7e2dc71f8be0d016e0af0857d5" prot="public" static="no" readable="no" writable="no" gettable="yes" settable="yes">
+        <type>Object</type>
+        <definition>Object Micra.Core.IParameter.Value</definition>
+        <argsstring></argsstring>
+        <name>Value</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/ParameterBlockInterface.cs" line="46" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/ParameterBlockInterface.cs" bodystart="46" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="interface_micra_1_1_core_1_1_i_parameter_1a670bb4169dc63ab6ebaccfe4ab441da1" prot="public" static="no" readable="no" writable="no" gettable="yes" settable="no">
+        <type>int</type>
+        <definition>int Micra.Core.IParameter.Id</definition>
+        <argsstring></argsstring>
+        <name>Id</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/ParameterBlockInterface.cs" line="47" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/ParameterBlockInterface.cs" bodystart="47" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="interface_micra_1_1_core_1_1_i_parameter_1ad859717b2f023fb409a03f3b647b2133" prot="public" static="no" readable="no" writable="no" gettable="yes" settable="no">
+        <type>string</type>
+        <definition>string Micra.Core.IParameter.Name</definition>
+        <argsstring></argsstring>
+        <name>Name</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/ParameterBlockInterface.cs" line="48" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/ParameterBlockInterface.cs" bodystart="48" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="interface_micra_1_1_core_1_1_i_parameter_1a65d9703c32ff275b8a8330de72d9e33d" prot="public" static="no" readable="no" writable="no" gettable="yes" settable="no">
+        <type>string</type>
+        <definition>string Micra.Core.IParameter.Type</definition>
+        <argsstring></argsstring>
+        <name>Type</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/ParameterBlockInterface.cs" line="49" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/ParameterBlockInterface.cs" bodystart="49" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="interface_micra_1_1_core_1_1_i_parameter_1a4f8aba555e6a52b84a34cfd6d6eb1f75" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>Object</type>
+        <definition>Object Micra.Core.IParameter.GetValue</definition>
+        <argsstring>(TimeValue t)</argsstring>
+        <name>GetValue</name>
+        <reimplementedby refid="struct_micra_1_1_core_1_1_parameter2_1a509f46ec44f4ff0a9dbe444d6da7e3c3">GetValue</reimplementedby>
+        <reimplementedby refid="struct_micra_1_1_core_1_1_param1_1a754b1e76010386b4d217a0e520359cfc">GetValue</reimplementedby>
+        <param>
+          <type><ref refid="struct_micra_1_1_core_1_1_time_value" kindref="compound">TimeValue</ref></type>
+          <declname>t</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/ParameterBlockInterface.cs" line="50" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="interface_micra_1_1_core_1_1_i_parameter_1a9a7012f56a95ac4188da30f9c229f16d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Micra.Core.IParameter.SetValue</definition>
+        <argsstring>(Object value, TimeValue t)</argsstring>
+        <name>SetValue</name>
+        <reimplementedby refid="struct_micra_1_1_core_1_1_parameter2_1a1b02f6f91d2486b0f8c1b3fc8b0f9e85">SetValue</reimplementedby>
+        <reimplementedby refid="struct_micra_1_1_core_1_1_param1_1ab98af3db1d7b61e41bbef0ed3ac0e6bc">SetValue</reimplementedby>
+        <param>
+          <type>Object</type>
+          <declname>value</declname>
+        </param>
+        <param>
+          <type><ref refid="struct_micra_1_1_core_1_1_time_value" kindref="compound">TimeValue</ref></type>
+          <declname>t</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/ParameterBlockInterface.cs" line="51" column="1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Represents a single parameter in either an IParamBlock or IParamBlock2. </para>    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="167">
+        <label>Micra.Core.IParameter</label>
+        <link refid="interface_micra_1_1_core_1_1_i_parameter"/>
+      </node>
+      <node id="168">
+        <label>Micra.Core.Param1</label>
+        <link refid="struct_micra_1_1_core_1_1_param1"/>
+        <childnode refid="167" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="169">
+        <label>Micra.Core.Parameter2</label>
+        <link refid="struct_micra_1_1_core_1_1_parameter2"/>
+        <childnode refid="167" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/ParameterBlockInterface.cs" line="45" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/ParameterBlockInterface.cs" bodystart="44" bodyend="52"/>
+    <listofallmembers>
+      <member refid="interface_micra_1_1_core_1_1_i_parameter_1a4f8aba555e6a52b84a34cfd6d6eb1f75" prot="public" virt="non-virtual"><scope>Micra::Core::IParameter</scope><name>GetValue</name></member>
+      <member refid="interface_micra_1_1_core_1_1_i_parameter_1a670bb4169dc63ab6ebaccfe4ab441da1" prot="public" virt="non-virtual"><scope>Micra::Core::IParameter</scope><name>Id</name></member>
+      <member refid="interface_micra_1_1_core_1_1_i_parameter_1ad859717b2f023fb409a03f3b647b2133" prot="public" virt="non-virtual"><scope>Micra::Core::IParameter</scope><name>Name</name></member>
+      <member refid="interface_micra_1_1_core_1_1_i_parameter_1a9a7012f56a95ac4188da30f9c229f16d" prot="public" virt="non-virtual"><scope>Micra::Core::IParameter</scope><name>SetValue</name></member>
+      <member refid="interface_micra_1_1_core_1_1_i_parameter_1a65d9703c32ff275b8a8330de72d9e33d" prot="public" virt="non-virtual"><scope>Micra::Core::IParameter</scope><name>Type</name></member>
+      <member refid="interface_micra_1_1_core_1_1_i_parameter_1a00b73e7e2dc71f8be0d016e0af0857d5" prot="public" virt="non-virtual"><scope>Micra::Core::IParameter</scope><name>Value</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

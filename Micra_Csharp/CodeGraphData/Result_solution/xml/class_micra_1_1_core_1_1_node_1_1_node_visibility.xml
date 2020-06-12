@@ -1,0 +1,93 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
+  <compounddef id="class_micra_1_1_core_1_1_node_1_1_node_visibility" kind="class" prot="public">
+    <compoundname>Micra::Core::Node::NodeVisibility</compoundname>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="class_micra_1_1_core_1_1_node_1_1_node_visibility_1a26044c706da6593e1fbb98169dc9a007" prot="private" static="no" mutable="no">
+        <type>readonly IINode</type>
+        <definition>readonly IINode Micra.Core.Node.NodeVisibility.node</definition>
+        <argsstring></argsstring>
+        <name>node</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Node.cs" line="48" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Node.cs" bodystart="48" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="property">
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_node_1_1_node_visibility_1aba6736e3ba8553f1b2ecaa10f9638d4d" prot="public" static="no" readable="no" writable="no" gettable="yes" settable="yes">
+        <type>bool</type>
+        <definition>bool Micra.Core.Node.NodeVisibility.Render</definition>
+        <argsstring></argsstring>
+        <name>Render</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Node.cs" line="54" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Node.cs" bodystart="54" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_node_1_1_node_visibility_1a5ec8ae5241ad2a2a1e3c945a7d77bb45" prot="public" static="no" readable="no" writable="no" gettable="yes" settable="yes">
+        <type>bool</type>
+        <definition>bool Micra.Core.Node.NodeVisibility.Primary</definition>
+        <argsstring></argsstring>
+        <name>Primary</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Node.cs" line="63" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Node.cs" bodystart="63" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_node_1_1_node_visibility_1a8811add4acbb527d4cfd490bd2e6915a" prot="public" static="no" readable="no" writable="no" gettable="yes" settable="yes">
+        <type>bool</type>
+        <definition>bool Micra.Core.Node.NodeVisibility.Secondary</definition>
+        <argsstring></argsstring>
+        <name>Secondary</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Node.cs" line="72" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Node.cs" bodystart="72" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_node_1_1_node_visibility_1af03e90acff3d74ab4462e7515ddcf8c5" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>Micra.Core.Node.NodeVisibility.NodeVisibility</definition>
+        <argsstring>(IINode node)</argsstring>
+        <name>NodeVisibility</name>
+        <param>
+          <type>IINode</type>
+          <declname>node</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Node.cs" line="50" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Node.cs" bodystart="50" bodyend="52"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Encapsulates node visibility functionality. </para>    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Node.cs" line="47" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Node.cs" bodystart="47" bodyend="80"/>
+    <listofallmembers>
+      <member refid="class_micra_1_1_core_1_1_node_1_1_node_visibility_1a26044c706da6593e1fbb98169dc9a007" prot="private" virt="non-virtual"><scope>Micra::Core::Node::NodeVisibility</scope><name>node</name></member>
+      <member refid="class_micra_1_1_core_1_1_node_1_1_node_visibility_1af03e90acff3d74ab4462e7515ddcf8c5" prot="public" virt="non-virtual"><scope>Micra::Core::Node::NodeVisibility</scope><name>NodeVisibility</name></member>
+      <member refid="class_micra_1_1_core_1_1_node_1_1_node_visibility_1a5ec8ae5241ad2a2a1e3c945a7d77bb45" prot="public" virt="non-virtual"><scope>Micra::Core::Node::NodeVisibility</scope><name>Primary</name></member>
+      <member refid="class_micra_1_1_core_1_1_node_1_1_node_visibility_1aba6736e3ba8553f1b2ecaa10f9638d4d" prot="public" virt="non-virtual"><scope>Micra::Core::Node::NodeVisibility</scope><name>Render</name></member>
+      <member refid="class_micra_1_1_core_1_1_node_1_1_node_visibility_1a8811add4acbb527d4cfd490bd2e6915a" prot="public" virt="non-virtual"><scope>Micra::Core::Node::NodeVisibility</scope><name>Secondary</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

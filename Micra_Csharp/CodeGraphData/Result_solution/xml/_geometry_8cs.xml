@@ -1,0 +1,39 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
+  <compounddef id="_geometry_8cs" kind="file">
+    <compoundname>Geometry.cs</compoundname>
+    <innerclass refid="class_micra_1_1_core_1_1_geometry" prot="public">Micra::Core::Geometry</innerclass>
+    <innernamespace refid="namespace_micra_1_1_core">Micra::Core</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="comment">//</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="comment">//<sp/>Copyright<sp/>2012<sp/>Autodesk,<sp/>Inc.<sp/><sp/>All<sp/>rights<sp/>reserved.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight><highlight class="comment">//</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="comment">//<sp/>Use<sp/>of<sp/>this<sp/>software<sp/>is<sp/>subject<sp/>to<sp/>the<sp/>terms<sp/>of<sp/>the<sp/>Autodesk<sp/>license</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="comment">//<sp/>agreement<sp/>provided<sp/>at<sp/>the<sp/>time<sp/>of<sp/>installation<sp/>or<sp/>download,<sp/>or<sp/>which</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="comment">//<sp/>otherwise<sp/>accompanies<sp/>this<sp/>software<sp/>in<sp/>either<sp/>electronic<sp/>or<sp/>hard<sp/>copy<sp/>form.<sp/><sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="comment">//</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight><highlight class="keyword">using</highlight><highlight class="normal"><sp/>Autodesk.Max;</highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">Micra.Core<sp/>{</highlight></codeline>
+<codeline lineno="15" refid="class_micra_1_1_core_1_1_geometry" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="class_micra_1_1_core_1_1_geometry" kindref="compound">Geometry</ref><sp/>:<sp/><ref refid="class_micra_1_1_core_1_1_scene_object" kindref="compound">SceneObject</ref><sp/>{</highlight></codeline>
+<codeline lineno="16" refid="class_micra_1_1_core_1_1_geometry_1a51c2cffe00d5212bfd30489692145b6a" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">internal</highlight><highlight class="normal"><sp/><ref refid="class_micra_1_1_core_1_1_geometry_1a51c2cffe00d5212bfd30489692145b6a" kindref="member">Geometry</ref>(IGeomObject<sp/>x)<sp/>:<sp/>base(x)<sp/>{<sp/>}</highlight></codeline>
+<codeline lineno="17"><highlight class="normal"></highlight></codeline>
+<codeline lineno="22"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//public<sp/>IGeomObject<sp/>_IGeomObject<sp/>=&gt;<sp/>_Anim<sp/>as<sp/>IGeomObject;<sp/>//already<sp/>defined<sp/>in<sp/>SceneObject</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="23"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="24"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="25"><highlight class="normal"></highlight></codeline>
+<codeline lineno="26"><highlight class="normal"></highlight></codeline>
+<codeline lineno="27"><highlight class="normal"></highlight><highlight class="comment">/*</highlight></codeline>
+<codeline lineno="28"><highlight class="comment">(GeomObject<sp/>as<sp/>ITriObject).Mesh.GetBoundingBox(TM)</highlight></codeline>
+<codeline lineno="29"><highlight class="comment">This<sp/>returns<sp/>the<sp/>local<sp/>space<sp/>bounding<sp/>box<sp/>by<sp/>default,<sp/>but<sp/>you<sp/>can<sp/>pass<sp/>it:</highlight></codeline>
+<codeline lineno="30"><highlight class="comment"></highlight></codeline>
+<codeline lineno="31"><highlight class="comment">TM<sp/>=<sp/>GeomObject.WorldSpaceObjectNode.GetObjectTM(0,<sp/>null)</highlight></codeline>
+<codeline lineno="32"><highlight class="comment"><sp/>*<sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+    </programlisting>
+    <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Geometry.cs"/>
+  </compounddef>
+</doxygen>

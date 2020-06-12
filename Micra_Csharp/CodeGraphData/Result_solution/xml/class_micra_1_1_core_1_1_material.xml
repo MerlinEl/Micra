@@ -1,0 +1,945 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
+  <compounddef id="class_micra_1_1_core_1_1_material" kind="class" prot="public">
+    <compoundname>Micra::Core::Material</compoundname>
+    <basecompoundref refid="class_micra_1_1_core_1_1_shading_object" prot="public" virt="non-virtual">Micra.Core.ShadingObject</basecompoundref>
+    <derivedcompoundref refid="class_micra_1_1_core_1_1_base_std_material" prot="public" virt="non-virtual">Micra.Core.BaseStdMaterial</derivedcompoundref>
+      <sectiondef kind="property">
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_material_1a5526b3df45a77f6ed5f96ec8190b1070" prot="public" static="no" readable="no" writable="no" gettable="yes" settable="no">
+        <type>IMtl</type>
+        <definition>IMtl Micra.Core.Material._Mtl</definition>
+        <argsstring></argsstring>
+        <name>_Mtl</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Material.cs" line="27" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Material.cs" bodystart="27" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_material_1ab2ee591a226730075f712986c9e2270e" prot="public" static="no" readable="no" writable="no" gettable="yes" settable="yes">
+        <type><ref refid="class_micra_1_1_core_1_1_shading_object" kindref="compound">ShadingObject</ref></type>
+        <definition>ShadingObject Micra.Core.Material.ActiveTexmap</definition>
+        <argsstring></argsstring>
+        <name>ActiveTexmap</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Material.cs" line="34" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Material.cs" bodystart="34" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_material_1af8ef6d679ec5c2bf29fdf1ed1665bd6e" prot="public" static="no" readable="no" writable="no" gettable="yes" settable="no">
+        <type>bool</type>
+        <definition>bool Micra.Core.Material.DontKeepOldMaterial</definition>
+        <argsstring></argsstring>
+        <name>DontKeepOldMaterial</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Material.cs" line="35" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Material.cs" bodystart="35" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_material_1ad8fc3493de50d2e287c90d9590cc0d04" prot="public" static="no" readable="no" writable="no" gettable="yes" settable="no">
+        <type>int</type>
+        <definition>int Micra.Core.Material.NumSubMaterials</definition>
+        <argsstring></argsstring>
+        <name>NumSubMaterials</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Material.cs" line="37" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Material.cs" bodystart="37" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_material_1a30dff5dc8f5f9dc7a31b126171e17e78" prot="public" static="no" readable="no" writable="no" gettable="yes" settable="no">
+        <type>bool</type>
+        <definition>bool Micra.Core.Material.SupportsRenderElements</definition>
+        <argsstring></argsstring>
+        <name>SupportsRenderElements</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Material.cs" line="40" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Material.cs" bodystart="40" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_material_1a24a1f88415733b3e3f484236884d6bdf" prot="public" static="no" readable="no" writable="no" gettable="yes" settable="no">
+        <type>bool</type>
+        <definition>bool Micra.Core.Material.SupportsShaders</definition>
+        <argsstring></argsstring>
+        <name>SupportsShaders</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Material.cs" line="41" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Material.cs" bodystart="41" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_material_1a1ff3342b2a9768a7e4c83ea9be4b7d37" prot="public" static="no" readable="no" writable="no" gettable="yes" settable="no">
+        <type><ref refid="struct_micra_1_1_core_1_1_color" kindref="compound">Color</ref></type>
+        <definition>Color Micra.Core.Material.Ambient</definition>
+        <argsstring></argsstring>
+        <name>Ambient</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Material.cs" line="68" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Material.cs" bodystart="68" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_material_1a83664b774472a4e3eabe246d01cc8625" prot="public" static="no" readable="no" writable="no" gettable="yes" settable="no">
+        <type><ref refid="struct_micra_1_1_core_1_1_color" kindref="compound">Color</ref></type>
+        <definition>Color Micra.Core.Material.Diffuse</definition>
+        <argsstring></argsstring>
+        <name>Diffuse</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Material.cs" line="69" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Material.cs" bodystart="69" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_material_1aad586118e02c4e0f95da8593379d1eb2" prot="public" static="no" readable="no" writable="no" gettable="yes" settable="no">
+        <type><ref refid="struct_micra_1_1_core_1_1_color" kindref="compound">Color</ref></type>
+        <definition>Color Micra.Core.Material.SelfIllumColor</definition>
+        <argsstring></argsstring>
+        <name>SelfIllumColor</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Material.cs" line="70" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Material.cs" bodystart="70" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_material_1af02773758ecf8ea31e18879e24ee9f23" prot="public" static="no" readable="no" writable="no" gettable="yes" settable="no">
+        <type><ref refid="struct_micra_1_1_core_1_1_color" kindref="compound">Color</ref></type>
+        <definition>Color Micra.Core.Material.Specular</definition>
+        <argsstring></argsstring>
+        <name>Specular</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Material.cs" line="71" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Material.cs" bodystart="71" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_material_1a464c3dd2159c2de73f127ea96b1295fc" prot="public" static="no" readable="no" writable="no" gettable="yes" settable="no">
+        <type>bool</type>
+        <definition>bool Micra.Core.Material.SelfIlluminationColorOn</definition>
+        <argsstring></argsstring>
+        <name>SelfIlluminationColorOn</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Material.cs" line="72" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Material.cs" bodystart="72" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_material_1ab950703caabc732a97b378c8b953fa1f" prot="public" static="no" readable="no" writable="no" gettable="yes" settable="no">
+        <type>float</type>
+        <definition>float Micra.Core.Material.SelfIllumination</definition>
+        <argsstring></argsstring>
+        <name>SelfIllumination</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Material.cs" line="73" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Material.cs" bodystart="73" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_material_1a7d5db5ffc8a897cf6739ecd945f6cabf" prot="public" static="no" readable="no" writable="no" gettable="yes" settable="no">
+        <type>float</type>
+        <definition>float Micra.Core.Material.Shininess</definition>
+        <argsstring></argsstring>
+        <name>Shininess</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Material.cs" line="74" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Material.cs" bodystart="74" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_material_1a31159a4ac21674e60130e31b07470c8d" prot="public" static="no" readable="no" writable="no" gettable="yes" settable="no">
+        <type>float</type>
+        <definition>float Micra.Core.Material.ShinyStrength</definition>
+        <argsstring></argsstring>
+        <name>ShinyStrength</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Material.cs" line="75" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Material.cs" bodystart="75" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_material_1a85d35899c2c0071bb7fefebb4fb41024" prot="public" static="no" readable="no" writable="no" gettable="yes" settable="no">
+        <type>float</type>
+        <definition>float Micra.Core.Material.Transparency</definition>
+        <argsstring></argsstring>
+        <name>Transparency</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Material.cs" line="76" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Material.cs" bodystart="76" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_material_1ac8fd2c95cde44cd8b662c42d38f09232" prot="public" static="no" readable="no" writable="no" gettable="yes" settable="no">
+        <type>float</type>
+        <definition>float Micra.Core.Material.WireSize</definition>
+        <argsstring></argsstring>
+        <name>WireSize</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Material.cs" line="77" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Material.cs" bodystart="77" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="package-func">
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_material_1ae4193e2a0a455502e421699070a81dc5" prot="package" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>Micra.Core.Material.Material</definition>
+        <argsstring>(IMtl x)</argsstring>
+        <name>Material</name>
+        <param>
+          <type>IMtl</type>
+          <declname>x</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Material.cs" line="26" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Material.cs" bodystart="26" bodyend="26"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_material_1ac3e156f4b2f74217942c5bae87825c94" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Micra.Core.Material.SetAmbient</definition>
+        <argsstring>(Color c, TimeValue t)</argsstring>
+        <name>SetAmbient</name>
+        <param>
+          <type><ref refid="struct_micra_1_1_core_1_1_color" kindref="compound">Color</ref></type>
+          <declname>c</declname>
+        </param>
+        <param>
+          <type><ref refid="struct_micra_1_1_core_1_1_time_value" kindref="compound">TimeValue</ref></type>
+          <declname>t</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Material.cs" line="29" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Material.cs" bodystart="29" bodyend="29"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_material_1a062c11f85528907106dc8a0e2f47dcf2" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Micra.Core.Material.SetDiffuse</definition>
+        <argsstring>(Color c, TimeValue t)</argsstring>
+        <name>SetDiffuse</name>
+        <param>
+          <type><ref refid="struct_micra_1_1_core_1_1_color" kindref="compound">Color</ref></type>
+          <declname>c</declname>
+        </param>
+        <param>
+          <type><ref refid="struct_micra_1_1_core_1_1_time_value" kindref="compound">TimeValue</ref></type>
+          <declname>t</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Material.cs" line="30" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Material.cs" bodystart="30" bodyend="30"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_material_1a65435adbc232fedeb6e4c3ac946c4a6e" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Micra.Core.Material.SetSpecular</definition>
+        <argsstring>(Color c, TimeValue t)</argsstring>
+        <name>SetSpecular</name>
+        <param>
+          <type><ref refid="struct_micra_1_1_core_1_1_color" kindref="compound">Color</ref></type>
+          <declname>c</declname>
+        </param>
+        <param>
+          <type><ref refid="struct_micra_1_1_core_1_1_time_value" kindref="compound">TimeValue</ref></type>
+          <declname>t</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Material.cs" line="31" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Material.cs" bodystart="31" bodyend="31"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_material_1a957c77c970e86d0e461fa6f726d8975b" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Micra.Core.Material.SetShininess</definition>
+        <argsstring>(float v, TimeValue t)</argsstring>
+        <name>SetShininess</name>
+        <param>
+          <type>float</type>
+          <declname>v</declname>
+        </param>
+        <param>
+          <type><ref refid="struct_micra_1_1_core_1_1_time_value" kindref="compound">TimeValue</ref></type>
+          <declname>t</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Material.cs" line="32" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Material.cs" bodystart="32" bodyend="32"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_material_1a0641f54a8635c212bb7a92d3fa56a343" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="class_micra_1_1_core_1_1_shading_object" kindref="compound">ShadingObject</ref></type>
+        <definition>ShadingObject Micra.Core.Material.GetSubMaterial</definition>
+        <argsstring>(int n)</argsstring>
+        <name>GetSubMaterial</name>
+        <param>
+          <type>int</type>
+          <declname>n</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Material.cs" line="38" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Material.cs" bodystart="38" bodyend="38"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_material_1aa9f6f3ec67d537ee7a7f7af022c858ba" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Micra.Core.Material.SetSubMaterial</definition>
+        <argsstring>(int n, Material m)</argsstring>
+        <name>SetSubMaterial</name>
+        <param>
+          <type>int</type>
+          <declname>n</declname>
+        </param>
+        <param>
+          <type><ref refid="class_micra_1_1_core_1_1_material" kindref="compound">Material</ref></type>
+          <declname>m</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Material.cs" line="39" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Material.cs" bodystart="39" bodyend="39"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_material_1a4ade04ad1c8b622c3ae3d87d077e1a50" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>string</type>
+        <definition>string Micra.Core.Material.GetSubMaterialSlotName</definition>
+        <argsstring>(int i)</argsstring>
+        <name>GetSubMaterialSlotName</name>
+        <param>
+          <type>int</type>
+          <declname>i</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Material.cs" line="43" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Material.cs" bodystart="43" bodyend="43"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_material_1ac619380fdfdea0e8b9a8641da4cc30c3" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>string</type>
+        <definition>string Micra.Core.Material.GetSubMaterialTrackViewName</definition>
+        <argsstring>(int i)</argsstring>
+        <name>GetSubMaterialTrackViewName</name>
+        <param>
+          <type>int</type>
+          <declname>i</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Material.cs" line="44" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Material.cs" bodystart="44" bodyend="44"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_material_1a3992f5d581e811dea07990e6e1f8dcb3" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="struct_micra_1_1_core_1_1_color" kindref="compound">Color</ref></type>
+        <definition>Color Micra.Core.Material.GetAmbient</definition>
+        <argsstring>(int mtlNum, bool backFace)</argsstring>
+        <name>GetAmbient</name>
+        <param>
+          <type>int</type>
+          <declname>mtlNum</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>backFace</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Material.cs" line="46" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Material.cs" bodystart="46" bodyend="46"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_material_1ae101cbacafe254d2dba465d9db869991" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="struct_micra_1_1_core_1_1_color" kindref="compound">Color</ref></type>
+        <definition>Color Micra.Core.Material.GetDiffuse</definition>
+        <argsstring>(int mtlNum, bool backFace)</argsstring>
+        <name>GetDiffuse</name>
+        <param>
+          <type>int</type>
+          <declname>mtlNum</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>backFace</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Material.cs" line="47" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Material.cs" bodystart="47" bodyend="47"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_material_1aaa4793e8692b2bc6ebae090c1a5bd67a" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="struct_micra_1_1_core_1_1_color" kindref="compound">Color</ref></type>
+        <definition>Color Micra.Core.Material.GetSelfIllumColor</definition>
+        <argsstring>(int mtlNum, bool backFace)</argsstring>
+        <name>GetSelfIllumColor</name>
+        <param>
+          <type>int</type>
+          <declname>mtlNum</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>backFace</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Material.cs" line="48" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Material.cs" bodystart="48" bodyend="48"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_material_1ae635b9bdc5e90fbcfc24721d85eb91b2" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="struct_micra_1_1_core_1_1_color" kindref="compound">Color</ref></type>
+        <definition>Color Micra.Core.Material.GetSpecular</definition>
+        <argsstring>(int mtlNum, bool backFace)</argsstring>
+        <name>GetSpecular</name>
+        <param>
+          <type>int</type>
+          <declname>mtlNum</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>backFace</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Material.cs" line="49" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Material.cs" bodystart="49" bodyend="49"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_material_1af468e487aabfc84fa09efdc203d3a747" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool Micra.Core.Material.IsSelfIlluminationColorOn</definition>
+        <argsstring>(int mtlNum, bool backFace)</argsstring>
+        <name>IsSelfIlluminationColorOn</name>
+        <param>
+          <type>int</type>
+          <declname>mtlNum</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>backFace</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Material.cs" line="50" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Material.cs" bodystart="50" bodyend="50"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_material_1a0dcfe0410efc6315ea2459050dd1d157" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>float</type>
+        <definition>float Micra.Core.Material.GetSelfIllumination</definition>
+        <argsstring>(int mtlNum, bool backFace)</argsstring>
+        <name>GetSelfIllumination</name>
+        <param>
+          <type>int</type>
+          <declname>mtlNum</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>backFace</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Material.cs" line="51" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Material.cs" bodystart="51" bodyend="51"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_material_1a005b8ad233c2f4279159b4ec0335fb92" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>float</type>
+        <definition>float Micra.Core.Material.GetShininess</definition>
+        <argsstring>(int mtlNum, bool backFace)</argsstring>
+        <name>GetShininess</name>
+        <param>
+          <type>int</type>
+          <declname>mtlNum</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>backFace</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Material.cs" line="52" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Material.cs" bodystart="52" bodyend="52"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_material_1aa80b181cb0fc5e3c459b3df3e63c4550" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>float</type>
+        <definition>float Micra.Core.Material.GetShinyStrength</definition>
+        <argsstring>(int mtlNum, bool backFace)</argsstring>
+        <name>GetShinyStrength</name>
+        <param>
+          <type>int</type>
+          <declname>mtlNum</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>backFace</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Material.cs" line="53" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Material.cs" bodystart="53" bodyend="53"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_material_1ae76739e42393c38f2e67f2534920e5b7" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>float</type>
+        <definition>float Micra.Core.Material.GetTransparency</definition>
+        <argsstring>(int mtlNum, bool backFace)</argsstring>
+        <name>GetTransparency</name>
+        <param>
+          <type>int</type>
+          <declname>mtlNum</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>backFace</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Material.cs" line="54" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Material.cs" bodystart="54" bodyend="54"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_material_1a17bd1c6b993ae4108938c01648f8b2fd" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>float</type>
+        <definition>float Micra.Core.Material.GetWireSize</definition>
+        <argsstring>(int mtlNum, bool backFace)</argsstring>
+        <name>GetWireSize</name>
+        <param>
+          <type>int</type>
+          <declname>mtlNum</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>backFace</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Material.cs" line="55" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Material.cs" bodystart="55" bodyend="55"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_material_1a4b2554b0489f90f2ab569fa6cc88a2f2" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="struct_micra_1_1_core_1_1_color" kindref="compound">Color</ref></type>
+        <definition>Color Micra.Core.Material.GetAmbient</definition>
+        <argsstring>(int mtlNum)</argsstring>
+        <name>GetAmbient</name>
+        <param>
+          <type>int</type>
+          <declname>mtlNum</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Material.cs" line="57" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Material.cs" bodystart="57" bodyend="57"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_material_1a75d5c68ae4e74f177f79238d83d0cafa" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="struct_micra_1_1_core_1_1_color" kindref="compound">Color</ref></type>
+        <definition>Color Micra.Core.Material.GetDiffuse</definition>
+        <argsstring>(int mtlNum)</argsstring>
+        <name>GetDiffuse</name>
+        <param>
+          <type>int</type>
+          <declname>mtlNum</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Material.cs" line="58" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Material.cs" bodystart="58" bodyend="58"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_material_1a8c2f4858832c4a3f3a79d3f45882acb5" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="struct_micra_1_1_core_1_1_color" kindref="compound">Color</ref></type>
+        <definition>Color Micra.Core.Material.GetSelfIllumColor</definition>
+        <argsstring>(int mtlNum)</argsstring>
+        <name>GetSelfIllumColor</name>
+        <param>
+          <type>int</type>
+          <declname>mtlNum</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Material.cs" line="59" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Material.cs" bodystart="59" bodyend="59"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_material_1afe4cca1db8afd51ed592c54cec1e135f" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="struct_micra_1_1_core_1_1_color" kindref="compound">Color</ref></type>
+        <definition>Color Micra.Core.Material.GetSpecular</definition>
+        <argsstring>(int mtlNum)</argsstring>
+        <name>GetSpecular</name>
+        <param>
+          <type>int</type>
+          <declname>mtlNum</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Material.cs" line="60" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Material.cs" bodystart="60" bodyend="60"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_material_1a8e1306b360f9444503c6ccea3e97605e" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool Micra.Core.Material.IsSelfIlluminationColorOn</definition>
+        <argsstring>(int mtlNum)</argsstring>
+        <name>IsSelfIlluminationColorOn</name>
+        <param>
+          <type>int</type>
+          <declname>mtlNum</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Material.cs" line="61" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Material.cs" bodystart="61" bodyend="61"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_material_1a54db92b677d3b759426b67f33da64bf7" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>float</type>
+        <definition>float Micra.Core.Material.GetSelfIllumination</definition>
+        <argsstring>(int mtlNum)</argsstring>
+        <name>GetSelfIllumination</name>
+        <param>
+          <type>int</type>
+          <declname>mtlNum</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Material.cs" line="62" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Material.cs" bodystart="62" bodyend="62"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_material_1ad52bd933d33a5fa457d300459444c943" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>float</type>
+        <definition>float Micra.Core.Material.GetShininess</definition>
+        <argsstring>(int mtlNum)</argsstring>
+        <name>GetShininess</name>
+        <param>
+          <type>int</type>
+          <declname>mtlNum</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Material.cs" line="63" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Material.cs" bodystart="63" bodyend="63"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_material_1ae4c3d1ff5eceff3561f35b54a768ab0b" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>float</type>
+        <definition>float Micra.Core.Material.GetShinyStrength</definition>
+        <argsstring>(int mtlNum)</argsstring>
+        <name>GetShinyStrength</name>
+        <param>
+          <type>int</type>
+          <declname>mtlNum</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Material.cs" line="64" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Material.cs" bodystart="64" bodyend="64"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_material_1aaf4d8f7b50b069b799a26b30f71076ff" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>float</type>
+        <definition>float Micra.Core.Material.GetTransparency</definition>
+        <argsstring>(int mtlNum)</argsstring>
+        <name>GetTransparency</name>
+        <param>
+          <type>int</type>
+          <declname>mtlNum</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Material.cs" line="65" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Material.cs" bodystart="65" bodyend="65"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_material_1ab907059a48fd754d1cb022ac32683593" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>float</type>
+        <definition>float Micra.Core.Material.GetWireSize</definition>
+        <argsstring>(int mtlNum)</argsstring>
+        <name>GetWireSize</name>
+        <param>
+          <type>int</type>
+          <declname>mtlNum</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Material.cs" line="66" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Material.cs" bodystart="66" bodyend="66"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Represents a material. Wraps the Mtl class in the 3ds <ref refid="class_micra_1_1_core_1_1_max" kindref="compound">Max</ref> SDK. </para>    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="204">
+        <label>ShadingObject</label>
+        <link refid="class_micra_1_1_core_1_1_shading_object"/>
+        <childnode refid="205" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="208">
+        <label>Micra.Core.BaseStdMaterial</label>
+        <link refid="class_micra_1_1_core_1_1_base_std_material"/>
+        <childnode refid="203" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="203">
+        <label>Micra.Core.Material</label>
+        <link refid="class_micra_1_1_core_1_1_material"/>
+        <childnode refid="204" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="206">
+        <label>ReferenceMaker</label>
+        <link refid="class_micra_1_1_core_1_1_reference_maker"/>
+        <childnode refid="207" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="207">
+        <label>Animatable</label>
+        <link refid="class_micra_1_1_core_1_1_animatable"/>
+      </node>
+      <node id="209">
+        <label>Micra.Core.StdMaterial</label>
+        <link refid="class_micra_1_1_core_1_1_std_material"/>
+        <childnode refid="208" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="205">
+        <label>ReferenceTarget</label>
+        <link refid="class_micra_1_1_core_1_1_reference_target"/>
+        <childnode refid="206" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="211">
+        <label>ShadingObject</label>
+        <link refid="class_micra_1_1_core_1_1_shading_object"/>
+        <childnode refid="212" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="210">
+        <label>Micra.Core.Material</label>
+        <link refid="class_micra_1_1_core_1_1_material"/>
+        <childnode refid="211" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="213">
+        <label>ReferenceMaker</label>
+        <link refid="class_micra_1_1_core_1_1_reference_maker"/>
+        <childnode refid="214" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="214">
+        <label>Animatable</label>
+        <link refid="class_micra_1_1_core_1_1_animatable"/>
+        <childnode refid="215" relation="usage">
+          <edgelabel>parameterBlock</edgelabel>
+        </childnode>
+      </node>
+      <node id="212">
+        <label>ReferenceTarget</label>
+        <link refid="class_micra_1_1_core_1_1_reference_target"/>
+        <childnode refid="213" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="215">
+        <label>Micra.Core.IParameterBlock</label>
+        <link refid="interface_micra_1_1_core_1_1_i_parameter_block"/>
+      </node>
+    </collaborationgraph>
+    <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Material.cs" line="25" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Material.cs" bodystart="25" bodyend="78"/>
+    <listofallmembers>
+      <member refid="class_micra_1_1_core_1_1_animatable_1a7447ebfdfa1b5c49c3908334edcaa995" prot="public" virt="non-virtual"><scope>Micra::Core::Material</scope><name>_Anim</name></member>
+      <member refid="class_micra_1_1_core_1_1_reference_maker_1a20e29410474e32f5694ab0c2f572148b" prot="public" virt="non-virtual"><scope>Micra::Core::Material</scope><name>_Maker</name></member>
+      <member refid="class_micra_1_1_core_1_1_material_1a5526b3df45a77f6ed5f96ec8190b1070" prot="public" virt="non-virtual"><scope>Micra::Core::Material</scope><name>_Mtl</name></member>
+      <member refid="class_micra_1_1_core_1_1_shading_object_1a49fa04cb50b7f6fc624aa135c34546f2" prot="public" virt="non-virtual"><scope>Micra::Core::Material</scope><name>_MtlBase</name></member>
+      <member refid="class_micra_1_1_core_1_1_reference_target_1a59df2a4540430af935c20d5914fce089" prot="public" virt="non-virtual"><scope>Micra::Core::Material</scope><name>_Target</name></member>
+      <member refid="class_micra_1_1_core_1_1_material_1ab2ee591a226730075f712986c9e2270e" prot="public" virt="non-virtual"><scope>Micra::Core::Material</scope><name>ActiveTexmap</name></member>
+      <member refid="class_micra_1_1_core_1_1_reference_target_1a705530b02a3c4cd77bb6420e86d7c8c5" prot="public" virt="non-virtual"><scope>Micra::Core::Material</scope><name>AddListener</name></member>
+      <member refid="class_micra_1_1_core_1_1_material_1a1ff3342b2a9768a7e4c83ea9be4b7d37" prot="public" virt="non-virtual"><scope>Micra::Core::Material</scope><name>Ambient</name></member>
+      <member refid="class_micra_1_1_core_1_1_animatable_1a014952bd2d29637c0ed71b32f1ad4807" prot="package" virt="non-virtual"><scope>Micra::Core::Material</scope><name>Animatable</name></member>
+      <member refid="class_micra_1_1_core_1_1_animatable_1a4a088130407a9d834ca65c1c6b20255f" prot="public" virt="non-virtual"><scope>Micra::Core::Material</scope><name>AnimHandle</name></member>
+      <member refid="class_micra_1_1_core_1_1_animatable_1a7304895f0a6857929d3aab907db7cd1f" prot="public" virt="non-virtual"><scope>Micra::Core::Material</scope><name>Anims</name></member>
+      <member refid="class_micra_1_1_core_1_1_animatable_1a1d7058760b77578b3f0aa73ac02ec0ab" prot="public" virt="non-virtual"><scope>Micra::Core::Material</scope><name>AttributeContainer</name></member>
+      <member refid="class_micra_1_1_core_1_1_animatable_1a1e8eff94a4d40b89666cfd96f2c0b282" prot="public" virt="non-virtual"><scope>Micra::Core::Material</scope><name>ClassID</name></member>
+      <member refid="class_micra_1_1_core_1_1_animatable_1adc1bd49a3dc65f202e6848e7746d97aa" prot="public" virt="non-virtual"><scope>Micra::Core::Material</scope><name>ClassName</name></member>
+      <member refid="class_micra_1_1_core_1_1_animatable_1a61edf59c9f88800bc360d6e17ddafd47" prot="public" virt="non-virtual"><scope>Micra::Core::Material</scope><name>ClearAppData</name></member>
+      <member refid="class_micra_1_1_core_1_1_animatable_1a5898e44fafdfc0b28894f556e1f7fa57" prot="public" virt="non-virtual"><scope>Micra::Core::Material</scope><name>CreatePluginInstance&lt; T &gt;</name></member>
+      <member refid="class_micra_1_1_core_1_1_animatable_1a32a37b9c84068a644c2488bf6f7e764b" prot="public" virt="non-virtual"><scope>Micra::Core::Material</scope><name>CreateWrapper&lt; T &gt;</name></member>
+      <member refid="class_micra_1_1_core_1_1_material_1a83664b774472a4e3eabe246d01cc8625" prot="public" virt="non-virtual"><scope>Micra::Core::Material</scope><name>Diffuse</name></member>
+      <member refid="class_micra_1_1_core_1_1_material_1af8ef6d679ec5c2bf29fdf1ed1665bd6e" prot="public" virt="non-virtual"><scope>Micra::Core::Material</scope><name>DontKeepOldMaterial</name></member>
+      <member refid="class_micra_1_1_core_1_1_animatable_1a3b13687f6bf6e3463e0d4757384f2087" prot="public" virt="non-virtual"><scope>Micra::Core::Material</scope><name>Equals</name></member>
+      <member refid="class_micra_1_1_core_1_1_shading_object_1a64a91f44ebb529706d5679636fe2dc81" prot="public" virt="non-virtual"><scope>Micra::Core::Material</scope><name>GBufferID</name></member>
+      <member refid="class_micra_1_1_core_1_1_material_1a3992f5d581e811dea07990e6e1f8dcb3" prot="public" virt="non-virtual"><scope>Micra::Core::Material</scope><name>GetAmbient</name></member>
+      <member refid="class_micra_1_1_core_1_1_material_1a4b2554b0489f90f2ab569fa6cc88a2f2" prot="public" virt="non-virtual"><scope>Micra::Core::Material</scope><name>GetAmbient</name></member>
+      <member refid="class_micra_1_1_core_1_1_animatable_1a2657885a3480546390fc5f7a4d251b43" prot="public" virt="non-virtual"><scope>Micra::Core::Material</scope><name>GetAppData</name></member>
+      <member refid="class_micra_1_1_core_1_1_animatable_1a1f05a5f32d4a4227aded083c6431c586" prot="public" virt="non-virtual"><scope>Micra::Core::Material</scope><name>GetAppData</name></member>
+      <member refid="class_micra_1_1_core_1_1_material_1ae101cbacafe254d2dba465d9db869991" prot="public" virt="non-virtual"><scope>Micra::Core::Material</scope><name>GetDiffuse</name></member>
+      <member refid="class_micra_1_1_core_1_1_material_1a75d5c68ae4e74f177f79238d83d0cafa" prot="public" virt="non-virtual"><scope>Micra::Core::Material</scope><name>GetDiffuse</name></member>
+      <member refid="class_micra_1_1_core_1_1_animatable_1a1c67edf5846ded97a1d12b7a7a4f8f6c" prot="public" virt="non-virtual"><scope>Micra::Core::Material</scope><name>GetHashCode</name></member>
+      <member refid="class_micra_1_1_core_1_1_material_1aaa4793e8692b2bc6ebae090c1a5bd67a" prot="public" virt="non-virtual"><scope>Micra::Core::Material</scope><name>GetSelfIllumColor</name></member>
+      <member refid="class_micra_1_1_core_1_1_material_1a8c2f4858832c4a3f3a79d3f45882acb5" prot="public" virt="non-virtual"><scope>Micra::Core::Material</scope><name>GetSelfIllumColor</name></member>
+      <member refid="class_micra_1_1_core_1_1_material_1a0dcfe0410efc6315ea2459050dd1d157" prot="public" virt="non-virtual"><scope>Micra::Core::Material</scope><name>GetSelfIllumination</name></member>
+      <member refid="class_micra_1_1_core_1_1_material_1a54db92b677d3b759426b67f33da64bf7" prot="public" virt="non-virtual"><scope>Micra::Core::Material</scope><name>GetSelfIllumination</name></member>
+      <member refid="class_micra_1_1_core_1_1_material_1a005b8ad233c2f4279159b4ec0335fb92" prot="public" virt="non-virtual"><scope>Micra::Core::Material</scope><name>GetShininess</name></member>
+      <member refid="class_micra_1_1_core_1_1_material_1ad52bd933d33a5fa457d300459444c943" prot="public" virt="non-virtual"><scope>Micra::Core::Material</scope><name>GetShininess</name></member>
+      <member refid="class_micra_1_1_core_1_1_material_1aa80b181cb0fc5e3c459b3df3e63c4550" prot="public" virt="non-virtual"><scope>Micra::Core::Material</scope><name>GetShinyStrength</name></member>
+      <member refid="class_micra_1_1_core_1_1_material_1ae4c3d1ff5eceff3561f35b54a768ab0b" prot="public" virt="non-virtual"><scope>Micra::Core::Material</scope><name>GetShinyStrength</name></member>
+      <member refid="class_micra_1_1_core_1_1_material_1ae635b9bdc5e90fbcfc24721d85eb91b2" prot="public" virt="non-virtual"><scope>Micra::Core::Material</scope><name>GetSpecular</name></member>
+      <member refid="class_micra_1_1_core_1_1_material_1afe4cca1db8afd51ed592c54cec1e135f" prot="public" virt="non-virtual"><scope>Micra::Core::Material</scope><name>GetSpecular</name></member>
+      <member refid="class_micra_1_1_core_1_1_material_1a0641f54a8635c212bb7a92d3fa56a343" prot="public" virt="non-virtual"><scope>Micra::Core::Material</scope><name>GetSubMaterial</name></member>
+      <member refid="class_micra_1_1_core_1_1_material_1a4ade04ad1c8b622c3ae3d87d077e1a50" prot="public" virt="non-virtual"><scope>Micra::Core::Material</scope><name>GetSubMaterialSlotName</name></member>
+      <member refid="class_micra_1_1_core_1_1_material_1ac619380fdfdea0e8b9a8641da4cc30c3" prot="public" virt="non-virtual"><scope>Micra::Core::Material</scope><name>GetSubMaterialTrackViewName</name></member>
+      <member refid="class_micra_1_1_core_1_1_reference_maker_1a47bc65c1764be30262558c83fab2354e" prot="public" virt="non-virtual"><scope>Micra::Core::Material</scope><name>GetTarget</name></member>
+      <member refid="class_micra_1_1_core_1_1_material_1ae76739e42393c38f2e67f2534920e5b7" prot="public" virt="non-virtual"><scope>Micra::Core::Material</scope><name>GetTransparency</name></member>
+      <member refid="class_micra_1_1_core_1_1_material_1aaf4d8f7b50b069b799a26b30f71076ff" prot="public" virt="non-virtual"><scope>Micra::Core::Material</scope><name>GetTransparency</name></member>
+      <member refid="class_micra_1_1_core_1_1_material_1a17bd1c6b993ae4108938c01648f8b2fd" prot="public" virt="non-virtual"><scope>Micra::Core::Material</scope><name>GetWireSize</name></member>
+      <member refid="class_micra_1_1_core_1_1_material_1ab907059a48fd754d1cb022ac32683593" prot="public" virt="non-virtual"><scope>Micra::Core::Material</scope><name>GetWireSize</name></member>
+      <member refid="class_micra_1_1_core_1_1_shading_object_1a00ea19c2957ffc4ed33a3556b03a4629" prot="public" virt="non-virtual"><scope>Micra::Core::Material</scope><name>IsMultiMtl</name></member>
+      <member refid="class_micra_1_1_core_1_1_material_1af468e487aabfc84fa09efdc203d3a747" prot="public" virt="non-virtual"><scope>Micra::Core::Material</scope><name>IsSelfIlluminationColorOn</name></member>
+      <member refid="class_micra_1_1_core_1_1_material_1a8e1306b360f9444503c6ccea3e97605e" prot="public" virt="non-virtual"><scope>Micra::Core::Material</scope><name>IsSelfIlluminationColorOn</name></member>
+      <member refid="class_micra_1_1_core_1_1_material_1ae4193e2a0a455502e421699070a81dc5" prot="package" virt="non-virtual"><scope>Micra::Core::Material</scope><name>Material</name></member>
+      <member refid="class_micra_1_1_core_1_1_material_1ad8fc3493de50d2e287c90d9590cc0d04" prot="public" virt="non-virtual"><scope>Micra::Core::Material</scope><name>NumSubMaterials</name></member>
+      <member refid="class_micra_1_1_core_1_1_reference_maker_1a14da943e6bc58c94ac81840b6409e992" prot="public" virt="non-virtual"><scope>Micra::Core::Material</scope><name>NumTargets</name></member>
+      <member refid="class_micra_1_1_core_1_1_reference_target_1a9120ed5666fc5c60b655d43806867504" prot="public" virt="non-virtual"><scope>Micra::Core::Material</scope><name>Observers</name></member>
+      <member refid="class_micra_1_1_core_1_1_animatable_1a246fac518c0fac502df5754450db01d2" prot="public" virt="non-virtual"><scope>Micra::Core::Material</scope><name>operator!=</name></member>
+      <member refid="class_micra_1_1_core_1_1_animatable_1a64eb885c9f69ce79734e55885baa7c66" prot="public" virt="non-virtual"><scope>Micra::Core::Material</scope><name>operator==</name></member>
+      <member refid="class_micra_1_1_core_1_1_animatable_1aae0278c0d6842fd3e79cd2700851cf4a" prot="protected" virt="non-virtual"><scope>Micra::Core::Material</scope><name>parameterBlock</name></member>
+      <member refid="class_micra_1_1_core_1_1_animatable_1a7942d170433ad2f7b8ce19bfcde45a48" prot="public" virt="non-virtual"><scope>Micra::Core::Material</scope><name>ParameterBlock</name></member>
+      <member refid="class_micra_1_1_core_1_1_animatable_1a8adb3e32d41511c2ffd6007b8612e35d" prot="public" virt="non-virtual"><scope>Micra::Core::Material</scope><name>Params</name></member>
+      <member refid="class_micra_1_1_core_1_1_reference_maker_1aad1f8efb71568fa68daf5345fa5cfd07" prot="package" virt="non-virtual"><scope>Micra::Core::Material</scope><name>ReferenceMaker</name></member>
+      <member refid="class_micra_1_1_core_1_1_reference_target_1a60505293508d1145baa574340dbf867c" prot="package" virt="non-virtual"><scope>Micra::Core::Material</scope><name>ReferenceTarget</name></member>
+      <member refid="class_micra_1_1_core_1_1_material_1aad586118e02c4e0f95da8593379d1eb2" prot="public" virt="non-virtual"><scope>Micra::Core::Material</scope><name>SelfIllumColor</name></member>
+      <member refid="class_micra_1_1_core_1_1_material_1ab950703caabc732a97b378c8b953fa1f" prot="public" virt="non-virtual"><scope>Micra::Core::Material</scope><name>SelfIllumination</name></member>
+      <member refid="class_micra_1_1_core_1_1_material_1a464c3dd2159c2de73f127ea96b1295fc" prot="public" virt="non-virtual"><scope>Micra::Core::Material</scope><name>SelfIlluminationColorOn</name></member>
+      <member refid="class_micra_1_1_core_1_1_material_1ac3e156f4b2f74217942c5bae87825c94" prot="public" virt="non-virtual"><scope>Micra::Core::Material</scope><name>SetAmbient</name></member>
+      <member refid="class_micra_1_1_core_1_1_material_1a062c11f85528907106dc8a0e2f47dcf2" prot="public" virt="non-virtual"><scope>Micra::Core::Material</scope><name>SetDiffuse</name></member>
+      <member refid="class_micra_1_1_core_1_1_material_1a957c77c970e86d0e461fa6f726d8975b" prot="public" virt="non-virtual"><scope>Micra::Core::Material</scope><name>SetShininess</name></member>
+      <member refid="class_micra_1_1_core_1_1_material_1a65435adbc232fedeb6e4c3ac946c4a6e" prot="public" virt="non-virtual"><scope>Micra::Core::Material</scope><name>SetSpecular</name></member>
+      <member refid="class_micra_1_1_core_1_1_material_1aa9f6f3ec67d537ee7a7f7af022c858ba" prot="public" virt="non-virtual"><scope>Micra::Core::Material</scope><name>SetSubMaterial</name></member>
+      <member refid="class_micra_1_1_core_1_1_reference_maker_1a482e63b2e6c6847d9f801b0e3d6c11cf" prot="public" virt="non-virtual"><scope>Micra::Core::Material</scope><name>SetTarget</name></member>
+      <member refid="class_micra_1_1_core_1_1_shading_object_1a065c7b4712ef7851b9b2b068ee0008a3" prot="package" virt="non-virtual"><scope>Micra::Core::Material</scope><name>ShadingObject</name></member>
+      <member refid="class_micra_1_1_core_1_1_material_1a7d5db5ffc8a897cf6739ecd945f6cabf" prot="public" virt="non-virtual"><scope>Micra::Core::Material</scope><name>Shininess</name></member>
+      <member refid="class_micra_1_1_core_1_1_material_1a31159a4ac21674e60130e31b07470c8d" prot="public" virt="non-virtual"><scope>Micra::Core::Material</scope><name>ShinyStrength</name></member>
+      <member refid="class_micra_1_1_core_1_1_material_1af02773758ecf8ea31e18879e24ee9f23" prot="public" virt="non-virtual"><scope>Micra::Core::Material</scope><name>Specular</name></member>
+      <member refid="class_micra_1_1_core_1_1_animatable_1a743ff05031ca9d95ca4f5b078e29f946" prot="public" virt="non-virtual"><scope>Micra::Core::Material</scope><name>SuperClassID</name></member>
+      <member refid="class_micra_1_1_core_1_1_material_1a30dff5dc8f5f9dc7a31b126171e17e78" prot="public" virt="non-virtual"><scope>Micra::Core::Material</scope><name>SupportsRenderElements</name></member>
+      <member refid="class_micra_1_1_core_1_1_material_1a24a1f88415733b3e3f484236884d6bdf" prot="public" virt="non-virtual"><scope>Micra::Core::Material</scope><name>SupportsShaders</name></member>
+      <member refid="class_micra_1_1_core_1_1_reference_maker_1a7d67a6c1812fd58d6c215fea52ed870d" prot="public" virt="non-virtual"><scope>Micra::Core::Material</scope><name>TargetArray</name></member>
+      <member refid="class_micra_1_1_core_1_1_reference_maker_1a5ffd2f44ec035353ed8f4282e7bccd18" prot="public" virt="non-virtual"><scope>Micra::Core::Material</scope><name>Targets</name></member>
+      <member refid="class_micra_1_1_core_1_1_reference_maker_1a9a146243a9c16a1b81b31078267095af" prot="public" virt="non-virtual"><scope>Micra::Core::Material</scope><name>TargetTree</name></member>
+      <member refid="class_micra_1_1_core_1_1_animatable_1a63dfadedc8b28c3e5ced8c3e62a277a1" prot="public" virt="non-virtual"><scope>Micra::Core::Material</scope><name>this[int paramID]</name></member>
+      <member refid="class_micra_1_1_core_1_1_animatable_1ac4e35d5d21af8962f61a963f8f9ecdeb" prot="public" virt="non-virtual"><scope>Micra::Core::Material</scope><name>this[string sParamName]</name></member>
+      <member refid="class_micra_1_1_core_1_1_material_1a85d35899c2c0071bb7fefebb4fb41024" prot="public" virt="non-virtual"><scope>Micra::Core::Material</scope><name>Transparency</name></member>
+      <member refid="class_micra_1_1_core_1_1_animatable_1a340a84a8efcb552049aa7623d4d11960" prot="public" virt="non-virtual"><scope>Micra::Core::Material</scope><name>Valid</name></member>
+      <member refid="class_micra_1_1_core_1_1_material_1ac8fd2c95cde44cd8b662c42d38f09232" prot="public" virt="non-virtual"><scope>Micra::Core::Material</scope><name>WireSize</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

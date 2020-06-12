@@ -1,0 +1,16 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
+  <compounddef id="namespace_micra_1_1_domain" kind="namespace">
+    <compoundname>Micra::Domain</compoundname>
+    <innerclass refid="class_micra_1_1_domain_1_1_domain_ui" prot="public">Micra::Domain::DomainUi</innerclass>
+    <innerclass refid="class_micra_1_1_domain_1_1_list_item" prot="public">Micra::Domain::ListItem</innerclass>
+    <innerclass refid="class_micra_1_1_domain_1_1_listener" prot="public">Micra::Domain::Listener</innerclass>
+    <innerclass refid="class_micra_1_1_domain_1_1_mx_domain" prot="public">Micra::Domain::MxDomain</innerclass>
+    <innerclass refid="class_micra_1_1_domain_1_1_assembly_sand_box_loader" prot="public">Micra::Domain::AssemblySandBoxLoader</innerclass>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Domain/DomainUi.cs" line="8" column="1"/>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,26 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
+  <compounddef id="dir_e222082c64598b2342d85c1356c444fc" kind="dir">
+    <compoundname>D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools</compoundname>
+    <innerdir refid="dir_36adcb4b869570aa2e029f69eb4650df">D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/Properties</innerdir>
+    <innerfile refid="_csharp_to_max_test_8cs">CsharpToMaxTest.cs</innerfile>
+    <innerfile refid="_csharp_to_max_test_8_designer_8cs">CsharpToMaxTest.Designer.cs</innerfile>
+    <innerfile refid="_mx_console_8cs">MxConsole.cs</innerfile>
+    <innerfile refid="_mx_console_8_designer_8cs">MxConsole.Designer.cs</innerfile>
+    <innerfile refid="_mx_file_8cs">MxFile.cs</innerfile>
+    <innerfile refid="_mx_geo_8cs">MxGeo.cs</innerfile>
+    <innerfile refid="_mx_geometry_optimizer_8cs">MxGeometryOptimizer.cs</innerfile>
+    <innerfile refid="_mx_geometry_optimizer_8_designer_8cs">MxGeometryOptimizer.Designer.cs</innerfile>
+    <innerfile refid="_mx_get_8cs">MxGet.cs</innerfile>
+    <innerfile refid="_mx_map_8cs">MxMap.cs</innerfile>
+    <innerfile refid="_mx_poly_8cs">MxPoly.cs</innerfile>
+    <innerfile refid="_mx_set_8cs">MxSet.cs</innerfile>
+    <innerfile refid="_mx_ui_8cs">MxUi.cs</innerfile>
+    <innerfile refid="_mx_uvs_8cs">MxUvs.cs</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/"/>
+  </compounddef>
+</doxygen>

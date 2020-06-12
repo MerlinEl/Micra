@@ -1,0 +1,106 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
+  <compounddef id="class_micra_1_1_core_1_1_indexed_property_3_01_index_t_00_01_value_t_01_4" kind="class" prot="public">
+    <compoundname>Micra::Core::IndexedProperty&lt; IndexT, ValueT &gt;</compoundname>
+    <templateparamlist>
+      <param>
+        <type>IndexT</type>
+      </param>
+      <param>
+        <type>ValueT</type>
+      </param>
+    </templateparamlist>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="class_micra_1_1_core_1_1_indexed_property_3_01_index_t_00_01_value_t_01_4_1a5b04ff5de00c72a2ab2b87aada38abbd" prot="private" static="no" mutable="no">
+        <type>readonly Action&lt; IndexT, ValueT &gt;</type>
+        <definition>readonly Action&lt;IndexT, ValueT&gt; Micra.Core.IndexedProperty&lt; IndexT, ValueT &gt;.setAction</definition>
+        <argsstring></argsstring>
+        <name>setAction</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" line="105" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" bodystart="105" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_micra_1_1_core_1_1_indexed_property_3_01_index_t_00_01_value_t_01_4_1ae967d95df35b0620bcea5934ac8f0473" prot="private" static="no" mutable="no">
+        <type>readonly Func&lt; IndexT, ValueT &gt;</type>
+        <definition>readonly Func&lt;IndexT, ValueT&gt; Micra.Core.IndexedProperty&lt; IndexT, ValueT &gt;.getFunc</definition>
+        <argsstring></argsstring>
+        <name>getFunc</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" line="106" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" bodystart="106" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="property">
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_indexed_property_3_01_index_t_00_01_value_t_01_4_1a1166fcf32fb772ae74fb4028ec0f6ee2" prot="public" static="no" readable="no" writable="no" gettable="yes" settable="yes">
+        <type>ValueT</type>
+        <definition>ValueT Micra.Core.IndexedProperty&lt; IndexT, ValueT &gt;.this[IndexT i]</definition>
+        <argsstring></argsstring>
+        <name>this[IndexT i]</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" line="113" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" bodystart="113" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_indexed_property_3_01_index_t_00_01_value_t_01_4_1a54ac7c77a541c352623a0b93ddcc927a" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>Micra.Core.IndexedProperty&lt; IndexT, ValueT &gt;.IndexedProperty</definition>
+        <argsstring>(Func&lt; IndexT, ValueT &gt; getFunc, Action&lt; IndexT, ValueT &gt; setAction)</argsstring>
+        <name>IndexedProperty</name>
+        <param>
+          <type>Func&lt; IndexT, ValueT &gt;</type>
+          <declname>getFunc</declname>
+        </param>
+        <param>
+          <type>Action&lt; IndexT, ValueT &gt;</type>
+          <declname>setAction</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" line="108" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" bodystart="108" bodyend="111"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Simplifies the declaration of named index properties on a class, by allowing the getter and setter functions to be mapped to anonymous functions. This is important because in C#, a named property can&apos;t be accessed using the &apos;[x]&apos; property. </para>    </briefdescription>
+    <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>IndexT</parametername>
+</parameternamelist>
+<parameterdescription>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>ValueT</parametername>
+</parameternamelist>
+<parameterdescription>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>    </detaileddescription>
+    <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" line="104" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" bodystart="104" bodyend="121"/>
+    <listofallmembers>
+      <member refid="class_micra_1_1_core_1_1_indexed_property_3_01_index_t_00_01_value_t_01_4_1ae967d95df35b0620bcea5934ac8f0473" prot="private" virt="non-virtual"><scope>Micra::Core::IndexedProperty&lt; IndexT, ValueT &gt;</scope><name>getFunc</name></member>
+      <member refid="class_micra_1_1_core_1_1_indexed_property_3_01_index_t_00_01_value_t_01_4_1a54ac7c77a541c352623a0b93ddcc927a" prot="public" virt="non-virtual"><scope>Micra::Core::IndexedProperty&lt; IndexT, ValueT &gt;</scope><name>IndexedProperty</name></member>
+      <member refid="class_micra_1_1_core_1_1_indexed_property_3_01_index_t_00_01_value_t_01_4_1a5b04ff5de00c72a2ab2b87aada38abbd" prot="private" virt="non-virtual"><scope>Micra::Core::IndexedProperty&lt; IndexT, ValueT &gt;</scope><name>setAction</name></member>
+      <member refid="class_micra_1_1_core_1_1_indexed_property_3_01_index_t_00_01_value_t_01_4_1a1166fcf32fb772ae74fb4028ec0f6ee2" prot="public" virt="non-virtual"><scope>Micra::Core::IndexedProperty&lt; IndexT, ValueT &gt;</scope><name>this[IndexT i]</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

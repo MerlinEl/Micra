@@ -1,0 +1,219 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
+  <compounddef id="class_micra_1_1_core_1_1_serializable_scene_1_1_plugin" kind="class" prot="public">
+    <compoundname>Micra::Core::SerializableScene::Plugin</compoundname>
+    <basecompoundref refid="class_micra_1_1_core_1_1_serializable_scene_1_1_target" prot="public" virt="non-virtual">Micra.Core.SerializableScene.Target</basecompoundref>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="class_micra_1_1_core_1_1_serializable_scene_1_1_plugin_1a6fb7770e3901dfd416924c91a83e287e" prot="public" static="no" mutable="no">
+        <type>string</type>
+        <definition>string Micra.Core.SerializableScene.Plugin.className</definition>
+        <argsstring></argsstring>
+        <name>className</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/SerializableScene.cs" line="73" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/SerializableScene.cs" bodystart="73" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_micra_1_1_core_1_1_serializable_scene_1_1_plugin_1adf9f651718698c27deed75550c555d68" prot="public" static="no" mutable="no">
+        <type><ref refid="struct_micra_1_1_core_1_1_class_i_d" kindref="compound">ClassID</ref></type>
+        <definition>ClassID Micra.Core.SerializableScene.Plugin.cid</definition>
+        <argsstring></argsstring>
+        <name>cid</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/SerializableScene.cs" line="74" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/SerializableScene.cs" bodystart="74" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_micra_1_1_core_1_1_serializable_scene_1_1_plugin_1a20a3349fb7af6779dbeda528b9b83ab5" prot="public" static="no" mutable="no">
+        <type><ref refid="struct_micra_1_1_core_1_1_super_class_i_d" kindref="compound">SuperClassID</ref></type>
+        <definition>SuperClassID Micra.Core.SerializableScene.Plugin.scid</definition>
+        <argsstring></argsstring>
+        <name>scid</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/SerializableScene.cs" line="75" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/SerializableScene.cs" bodystart="75" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_micra_1_1_core_1_1_serializable_scene_1_1_plugin_1ab0446856529b56cf3b8845c2b16202f1" prot="public" static="no" mutable="no">
+        <type><ref refid="class_micra_1_1_core_1_1_serializable_scene_1_1_reference" kindref="compound">Reference</ref>[]</type>
+        <definition>Reference [] Micra.Core.SerializableScene.Plugin.targets</definition>
+        <argsstring></argsstring>
+        <name>targets</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/SerializableScene.cs" line="76" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/SerializableScene.cs" bodystart="76" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_micra_1_1_core_1_1_serializable_scene_1_1_plugin_1aeca227d4c0a5773a340d3390009a5d6a" prot="public" static="no" mutable="no">
+        <type><ref refid="class_micra_1_1_core_1_1_serializable_scene_1_1_parameter_block" kindref="compound">ParameterBlock</ref>[]</type>
+        <definition>ParameterBlock [] Micra.Core.SerializableScene.Plugin.paramblocks</definition>
+        <argsstring></argsstring>
+        <name>paramblocks</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/SerializableScene.cs" line="77" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/SerializableScene.cs" bodystart="77" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_serializable_scene_1_1_plugin_1a375134700f58e79df151041270fbf3c2" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>Micra.Core.SerializableScene.Plugin.Plugin</definition>
+        <argsstring>()</argsstring>
+        <name>Plugin</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/SerializableScene.cs" line="79" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/SerializableScene.cs" bodystart="79" bodyend="81"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_serializable_scene_1_1_plugin_1a021603f47dcf7831418cd68fbc98f13f" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>Micra.Core.SerializableScene.Plugin.Plugin</definition>
+        <argsstring>(Animatable a)</argsstring>
+        <name>Plugin</name>
+        <param>
+          <type><ref refid="class_micra_1_1_core_1_1_animatable" kindref="compound">Animatable</ref></type>
+          <declname>a</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/SerializableScene.cs" line="83" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/SerializableScene.cs" bodystart="83" bodyend="114"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Serializalbe represdentation of a plug-in. </para>    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="353">
+        <label>Micra.Core.SerializableScene.Plugin</label>
+        <link refid="class_micra_1_1_core_1_1_serializable_scene_1_1_plugin"/>
+        <childnode refid="354" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="354">
+        <label>Target</label>
+        <link refid="class_micra_1_1_core_1_1_serializable_scene_1_1_target"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="360">
+        <label>Micra.Core.SerializableScene.Parameter</label>
+        <link refid="class_micra_1_1_core_1_1_serializable_scene_1_1_parameter"/>
+        <childnode refid="361" relation="usage">
+          <edgelabel>value</edgelabel>
+        </childnode>
+      </node>
+      <node id="359">
+        <label>Micra.Core.SerializableScene.ParameterBlock</label>
+        <link refid="class_micra_1_1_core_1_1_serializable_scene_1_1_parameter_block"/>
+        <childnode refid="356" relation="public-inheritance">
+        </childnode>
+        <childnode refid="360" relation="usage">
+          <edgelabel>parameters</edgelabel>
+        </childnode>
+      </node>
+      <node id="355">
+        <label>Micra.Core.SerializableScene.Plugin</label>
+        <link refid="class_micra_1_1_core_1_1_serializable_scene_1_1_plugin"/>
+        <childnode refid="356" relation="public-inheritance">
+        </childnode>
+        <childnode refid="357" relation="usage">
+          <edgelabel>scid</edgelabel>
+        </childnode>
+        <childnode refid="359" relation="usage">
+          <edgelabel>paramblocks</edgelabel>
+        </childnode>
+        <childnode refid="362" relation="usage">
+          <edgelabel>cid</edgelabel>
+        </childnode>
+        <childnode refid="363" relation="usage">
+          <edgelabel>targets</edgelabel>
+        </childnode>
+      </node>
+      <node id="361">
+        <label>System</label>
+      </node>
+      <node id="357">
+        <label>Micra.Core.SuperClassID</label>
+        <link refid="struct_micra_1_1_core_1_1_super_class_i_d"/>
+        <childnode refid="358" relation="usage">
+          <edgelabel>ParameterBlock2</edgelabel>
+          <edgelabel>Light</edgelabel>
+          <edgelabel>ReferenceTarget</edgelabel>
+          <edgelabel>DerivedObject</edgelabel>
+          <edgelabel>PositionController</edgelabel>
+          <edgelabel>Material</edgelabel>
+          <edgelabel>Camera</edgelabel>
+          <edgelabel>Texture</edgelabel>
+          <edgelabel>BaseNode</edgelabel>
+          <edgelabel>ObjectModifier</edgelabel>
+          <edgelabel>...</edgelabel>
+        </childnode>
+      </node>
+      <node id="356">
+        <label>Target</label>
+        <link refid="class_micra_1_1_core_1_1_serializable_scene_1_1_target"/>
+      </node>
+      <node id="363">
+        <label>Micra.Core.SerializableScene.Reference</label>
+        <link refid="class_micra_1_1_core_1_1_serializable_scene_1_1_reference"/>
+      </node>
+      <node id="362">
+        <label>Micra.Core.ClassID</label>
+        <link refid="struct_micra_1_1_core_1_1_class_i_d"/>
+        <childnode refid="358" relation="usage">
+          <edgelabel>CylinderObject</edgelabel>
+          <edgelabel>DummyHelper</edgelabel>
+          <edgelabel>EditablePoly</edgelabel>
+          <edgelabel>RectangleShape</edgelabel>
+          <edgelabel>OmniLight</edgelabel>
+          <edgelabel>CircleShape</edgelabel>
+          <edgelabel>PointHelper</edgelabel>
+          <edgelabel>EditableMesh</edgelabel>
+          <edgelabel>PolyObject</edgelabel>
+          <edgelabel>BoxObject</edgelabel>
+          <edgelabel>...</edgelabel>
+        </childnode>
+      </node>
+      <node id="358">
+        <label>static</label>
+      </node>
+    </collaborationgraph>
+    <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/SerializableScene.cs" line="72" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/SerializableScene.cs" bodystart="71" bodyend="115"/>
+    <listofallmembers>
+      <member refid="class_micra_1_1_core_1_1_serializable_scene_1_1_plugin_1adf9f651718698c27deed75550c555d68" prot="public" virt="non-virtual"><scope>Micra::Core::SerializableScene::Plugin</scope><name>cid</name></member>
+      <member refid="class_micra_1_1_core_1_1_serializable_scene_1_1_plugin_1a6fb7770e3901dfd416924c91a83e287e" prot="public" virt="non-virtual"><scope>Micra::Core::SerializableScene::Plugin</scope><name>className</name></member>
+      <member refid="class_micra_1_1_core_1_1_serializable_scene_1_1_target_1ac6881d31ab14e586a99fd451cc39a185" prot="public" virt="non-virtual"><scope>Micra::Core::SerializableScene::Plugin</scope><name>id</name></member>
+      <member refid="class_micra_1_1_core_1_1_serializable_scene_1_1_plugin_1aeca227d4c0a5773a340d3390009a5d6a" prot="public" virt="non-virtual"><scope>Micra::Core::SerializableScene::Plugin</scope><name>paramblocks</name></member>
+      <member refid="class_micra_1_1_core_1_1_serializable_scene_1_1_plugin_1a375134700f58e79df151041270fbf3c2" prot="public" virt="non-virtual"><scope>Micra::Core::SerializableScene::Plugin</scope><name>Plugin</name></member>
+      <member refid="class_micra_1_1_core_1_1_serializable_scene_1_1_plugin_1a021603f47dcf7831418cd68fbc98f13f" prot="public" virt="non-virtual"><scope>Micra::Core::SerializableScene::Plugin</scope><name>Plugin</name></member>
+      <member refid="class_micra_1_1_core_1_1_serializable_scene_1_1_plugin_1a20a3349fb7af6779dbeda528b9b83ab5" prot="public" virt="non-virtual"><scope>Micra::Core::SerializableScene::Plugin</scope><name>scid</name></member>
+      <member refid="class_micra_1_1_core_1_1_serializable_scene_1_1_target_1a52726e61044b3e1d7755df0a9bec2917" prot="public" virt="non-virtual"><scope>Micra::Core::SerializableScene::Plugin</scope><name>Target</name></member>
+      <member refid="class_micra_1_1_core_1_1_serializable_scene_1_1_target_1a5522398dfb4b0ba21432765be3235a29" prot="public" virt="non-virtual"><scope>Micra::Core::SerializableScene::Plugin</scope><name>Target</name></member>
+      <member refid="class_micra_1_1_core_1_1_serializable_scene_1_1_plugin_1ab0446856529b56cf3b8845c2b16202f1" prot="public" virt="non-virtual"><scope>Micra::Core::SerializableScene::Plugin</scope><name>targets</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

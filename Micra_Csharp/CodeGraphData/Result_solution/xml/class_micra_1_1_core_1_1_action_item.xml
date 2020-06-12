@@ -1,0 +1,233 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
+  <compounddef id="class_micra_1_1_core_1_1_action_item" kind="class" prot="public">
+    <compoundname>Micra::Core::ActionItem</compoundname>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="class_micra_1_1_core_1_1_action_item_1a26f4937c99d5dad9d69ed83d904690e3" prot="private" static="no" mutable="no">
+        <type>readonly IActionItem</type>
+        <definition>readonly IActionItem Micra.Core.ActionItem.ai</definition>
+        <argsstring></argsstring>
+        <name>ai</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/ActionManager.cs" line="49" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/ActionManager.cs" bodystart="49" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="property">
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_action_item_1a5cd35457f147d2e97e767e60589be273" prot="public" static="no" readable="no" writable="no" gettable="yes" settable="no">
+        <type>IActionItem</type>
+        <definition>IActionItem Micra.Core.ActionItem._ActionItem</definition>
+        <argsstring></argsstring>
+        <name>_ActionItem</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/ActionManager.cs" line="51" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/ActionManager.cs" bodystart="51" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_action_item_1a51faa669f5b5ccee0ce52d1fbbb508a7" prot="public" static="no" readable="no" writable="no" gettable="yes" settable="no">
+        <type>string</type>
+        <definition>string Micra.Core.ActionItem.ButtonText</definition>
+        <argsstring></argsstring>
+        <name>ButtonText</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/ActionManager.cs" line="55" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/ActionManager.cs" bodystart="55" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_action_item_1a248de42317b7b1310d8d048e2f7f70b3" prot="public" static="no" readable="no" writable="no" gettable="yes" settable="no">
+        <type>string</type>
+        <definition>string Micra.Core.ActionItem.Category</definition>
+        <argsstring></argsstring>
+        <name>Category</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/ActionManager.cs" line="56" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/ActionManager.cs" bodystart="56" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_action_item_1acaf2bfb1242802212ab0e0708b202dbb" prot="public" static="no" readable="no" writable="no" gettable="yes" settable="no">
+        <type>string</type>
+        <definition>string Micra.Core.ActionItem.MenuText</definition>
+        <argsstring></argsstring>
+        <name>MenuText</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/ActionManager.cs" line="57" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/ActionManager.cs" bodystart="57" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_action_item_1a8baeb2e7d3f5c2163f36c2438940eae7" prot="public" static="no" readable="no" writable="no" gettable="yes" settable="no">
+        <type>string</type>
+        <definition>string Micra.Core.ActionItem.Description</definition>
+        <argsstring></argsstring>
+        <name>Description</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/ActionManager.cs" line="58" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/ActionManager.cs" bodystart="58" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_action_item_1a1169c814b08a2d997b8a7be095957669" prot="public" static="no" readable="no" writable="no" gettable="yes" settable="no">
+        <type>bool</type>
+        <definition>bool Micra.Core.ActionItem.IsDynamicAction</definition>
+        <argsstring></argsstring>
+        <name>IsDynamicAction</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/ActionManager.cs" line="59" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/ActionManager.cs" bodystart="59" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_action_item_1a5fbc03569866fe2ca7d6196e1b0e9c4f" prot="public" static="no" readable="no" writable="no" gettable="yes" settable="no">
+        <type>int</type>
+        <definition>int Micra.Core.ActionItem.ID</definition>
+        <argsstring></argsstring>
+        <name>ID</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/ActionManager.cs" line="66" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/ActionManager.cs" bodystart="66" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_action_item_1aa5359116fc230cc3b79400ca6219569b" prot="public" static="no" readable="no" writable="no" gettable="yes" settable="no">
+        <type>bool</type>
+        <definition>bool Micra.Core.ActionItem.IsChecked</definition>
+        <argsstring></argsstring>
+        <name>IsChecked</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/ActionManager.cs" line="67" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/ActionManager.cs" bodystart="67" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_action_item_1a2364225e6230602b18e8fab8cd0f12a2" prot="public" static="no" readable="no" writable="no" gettable="yes" settable="no">
+        <type>bool</type>
+        <definition>bool Micra.Core.ActionItem.IsEnabled</definition>
+        <argsstring></argsstring>
+        <name>IsEnabled</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/ActionManager.cs" line="68" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/ActionManager.cs" bodystart="68" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_action_item_1a5627df5569ce2ede2620446cd87f27f1" prot="public" static="no" readable="no" writable="no" gettable="yes" settable="no">
+        <type>bool</type>
+        <definition>bool Micra.Core.ActionItem.IsItemVisible</definition>
+        <argsstring></argsstring>
+        <name>IsItemVisible</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/ActionManager.cs" line="71" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/ActionManager.cs" bodystart="71" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_action_item_1a6417a5d0eb321fe23eda18d9572f1524" prot="public" static="no" readable="no" writable="no" gettable="yes" settable="no">
+        <type>string</type>
+        <definition>string Micra.Core.ActionItem.ShortcutString</definition>
+        <argsstring></argsstring>
+        <name>ShortcutString</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/ActionManager.cs" line="72" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/ActionManager.cs" bodystart="72" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_action_item_1ad60f036b7a32de32cad0b0f01f2711a9" prot="public" static="no" readable="no" writable="no" gettable="yes" settable="yes">
+        <type><ref refid="class_micra_1_1_core_1_1_action_table" kindref="compound">ActionTable</ref></type>
+        <definition>ActionTable Micra.Core.ActionItem.Table</definition>
+        <argsstring></argsstring>
+        <name>Table</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/ActionManager.cs" line="73" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/ActionManager.cs" bodystart="73" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_action_item_1adf1d637dd9156fca539f026c9deebf74" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>Micra.Core.ActionItem.ActionItem</definition>
+        <argsstring>(IActionItem ai)</argsstring>
+        <name>ActionItem</name>
+        <param>
+          <type>IActionItem</type>
+          <declname>ai</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/ActionManager.cs" line="53" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/ActionManager.cs" bodystart="53" bodyend="53"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_action_item_1a44d750d1c0d7966c855d299b6e866dca" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool Micra.Core.ActionItem.Execute</definition>
+        <argsstring>()</argsstring>
+        <name>Execute</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/ActionManager.cs" line="75" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/ActionManager.cs" bodystart="75" bodyend="75"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Wraps an <ref refid="class_micra_1_1_core_1_1_action_item" kindref="compound">ActionItem</ref> in the 3ds <ref refid="class_micra_1_1_core_1_1_max" kindref="compound">Max</ref> SDK. </para>    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/ActionManager.cs" line="48" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/ActionManager.cs" bodystart="48" bodyend="76"/>
+    <listofallmembers>
+      <member refid="class_micra_1_1_core_1_1_action_item_1a5cd35457f147d2e97e767e60589be273" prot="public" virt="non-virtual"><scope>Micra::Core::ActionItem</scope><name>_ActionItem</name></member>
+      <member refid="class_micra_1_1_core_1_1_action_item_1adf1d637dd9156fca539f026c9deebf74" prot="public" virt="non-virtual"><scope>Micra::Core::ActionItem</scope><name>ActionItem</name></member>
+      <member refid="class_micra_1_1_core_1_1_action_item_1a26f4937c99d5dad9d69ed83d904690e3" prot="private" virt="non-virtual"><scope>Micra::Core::ActionItem</scope><name>ai</name></member>
+      <member refid="class_micra_1_1_core_1_1_action_item_1a51faa669f5b5ccee0ce52d1fbbb508a7" prot="public" virt="non-virtual"><scope>Micra::Core::ActionItem</scope><name>ButtonText</name></member>
+      <member refid="class_micra_1_1_core_1_1_action_item_1a248de42317b7b1310d8d048e2f7f70b3" prot="public" virt="non-virtual"><scope>Micra::Core::ActionItem</scope><name>Category</name></member>
+      <member refid="class_micra_1_1_core_1_1_action_item_1a8baeb2e7d3f5c2163f36c2438940eae7" prot="public" virt="non-virtual"><scope>Micra::Core::ActionItem</scope><name>Description</name></member>
+      <member refid="class_micra_1_1_core_1_1_action_item_1a44d750d1c0d7966c855d299b6e866dca" prot="public" virt="non-virtual"><scope>Micra::Core::ActionItem</scope><name>Execute</name></member>
+      <member refid="class_micra_1_1_core_1_1_action_item_1a5fbc03569866fe2ca7d6196e1b0e9c4f" prot="public" virt="non-virtual"><scope>Micra::Core::ActionItem</scope><name>ID</name></member>
+      <member refid="class_micra_1_1_core_1_1_action_item_1aa5359116fc230cc3b79400ca6219569b" prot="public" virt="non-virtual"><scope>Micra::Core::ActionItem</scope><name>IsChecked</name></member>
+      <member refid="class_micra_1_1_core_1_1_action_item_1a1169c814b08a2d997b8a7be095957669" prot="public" virt="non-virtual"><scope>Micra::Core::ActionItem</scope><name>IsDynamicAction</name></member>
+      <member refid="class_micra_1_1_core_1_1_action_item_1a2364225e6230602b18e8fab8cd0f12a2" prot="public" virt="non-virtual"><scope>Micra::Core::ActionItem</scope><name>IsEnabled</name></member>
+      <member refid="class_micra_1_1_core_1_1_action_item_1a5627df5569ce2ede2620446cd87f27f1" prot="public" virt="non-virtual"><scope>Micra::Core::ActionItem</scope><name>IsItemVisible</name></member>
+      <member refid="class_micra_1_1_core_1_1_action_item_1acaf2bfb1242802212ab0e0708b202dbb" prot="public" virt="non-virtual"><scope>Micra::Core::ActionItem</scope><name>MenuText</name></member>
+      <member refid="class_micra_1_1_core_1_1_action_item_1a6417a5d0eb321fe23eda18d9572f1524" prot="public" virt="non-virtual"><scope>Micra::Core::ActionItem</scope><name>ShortcutString</name></member>
+      <member refid="class_micra_1_1_core_1_1_action_item_1ad60f036b7a32de32cad0b0f01f2711a9" prot="public" virt="non-virtual"><scope>Micra::Core::ActionItem</scope><name>Table</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

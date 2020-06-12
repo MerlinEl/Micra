@@ -27,14 +27,18 @@
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.button5 = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.BtnGetSelFaces = new System.Windows.Forms.Button();
+            this.BtnGetSelEdges = new System.Windows.Forms.Button();
+            this.BtnGetSelVetts = new System.Windows.Forms.Button();
             this.BtnClearExecute = new System.Windows.Forms.Button();
             this.CbxScriptList = new System.Windows.Forms.ComboBox();
             this.BtnExecute = new System.Windows.Forms.Button();
             this.BtnSelSimElements = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.CbxMaxFilePath = new System.Windows.Forms.ComboBox();
+            this.BtnOpenMaxFile = new System.Windows.Forms.Button();
             this.BtnGetObjArea2 = new System.Windows.Forms.Button();
             this.BtnGetObjArea1 = new System.Windows.Forms.Button();
-            this.CbxMaxFilePath = new System.Windows.Forms.ComboBox();
             this.ChkSelHidden2 = new System.Windows.Forms.CheckBox();
             this.CbxPrimitiveTypes = new System.Windows.Forms.ComboBox();
             this.BtnListPrimitives = new System.Windows.Forms.Button();
@@ -44,10 +48,6 @@
             this.ChkSelected = new System.Windows.Forms.CheckBox();
             this.BtnUnhideGeometry = new System.Windows.Forms.Button();
             this.BtnHideGeometry = new System.Windows.Forms.Button();
-            this.BtnGetSelVetts = new System.Windows.Forms.Button();
-            this.BtnGetSelEdges = new System.Windows.Forms.Button();
-            this.BtnGetSelFaces = new System.Windows.Forms.Button();
-            this.BtnOpenMaxFile = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
             this.RbtSuperClassOf = new System.Windows.Forms.RadioButton();
             this.RbtClassOf = new System.Windows.Forms.RadioButton();
@@ -67,26 +67,49 @@
             this.button13 = new System.Windows.Forms.Button();
             this.button8 = new System.Windows.Forms.Button();
             this.button9 = new System.Windows.Forms.Button();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.groupBox6 = new System.Windows.Forms.GroupBox();
+            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.groupBox7 = new System.Windows.Forms.GroupBox();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.groupBox8 = new System.Windows.Forms.GroupBox();
+            this.BtnSelFacesOtToTri = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
+            this.groupBox4.SuspendLayout();
+            this.groupBox5.SuspendLayout();
+            this.groupBox6.SuspendLayout();
+            this.tabControl1.SuspendLayout();
+            this.tabPage3.SuspendLayout();
+            this.tabPage1.SuspendLayout();
+            this.tabPage2.SuspendLayout();
+            this.groupBox7.SuspendLayout();
+            this.groupBox3.SuspendLayout();
+            this.tabPage4.SuspendLayout();
+            this.groupBox8.SuspendLayout();
             this.SuspendLayout();
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(6, 104);
+            this.button1.Location = new System.Drawing.Point(6, 106);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(194, 23);
+            this.button1.Size = new System.Drawing.Size(122, 23);
             this.button1.TabIndex = 0;
-            this.button1.Text = "Select First Node From Selection";
+            this.button1.Text = "Select First From Sel";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.Button1_Click);
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(6, 48);
+            this.textBox1.Location = new System.Drawing.Point(6, 33);
             this.textBox1.Multiline = true;
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(592, 281);
+            this.textBox1.Size = new System.Drawing.Size(570, 580);
             this.textBox1.TabIndex = 3;
             this.textBox1.Text = "...";
             this.textBox1.MouseEnter += new System.EventHandler(this.OnTextAreaGotFocus);
@@ -94,7 +117,7 @@
             // 
             // button5
             // 
-            this.button5.Location = new System.Drawing.Point(374, 17);
+            this.button5.Location = new System.Drawing.Point(6, 619);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(145, 23);
             this.button5.TabIndex = 5;
@@ -104,21 +127,49 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.BtnClearExecute);
-            this.groupBox1.Controls.Add(this.CbxScriptList);
-            this.groupBox1.Controls.Add(this.BtnExecute);
-            this.groupBox1.Controls.Add(this.button5);
-            this.groupBox1.Controls.Add(this.textBox1);
-            this.groupBox1.Location = new System.Drawing.Point(12, 357);
+            this.groupBox1.Controls.Add(this.BtnGetSelFaces);
+            this.groupBox1.Controls.Add(this.BtnGetSelEdges);
+            this.groupBox1.Controls.Add(this.BtnGetSelVetts);
+            this.groupBox1.Location = new System.Drawing.Point(6, 6);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(614, 335);
+            this.groupBox1.Size = new System.Drawing.Size(137, 185);
             this.groupBox1.TabIndex = 7;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Execute Max Script";
+            this.groupBox1.Text = "Slect:";
+            // 
+            // BtnGetSelFaces
+            // 
+            this.BtnGetSelFaces.Location = new System.Drawing.Point(6, 19);
+            this.BtnGetSelFaces.Name = "BtnGetSelFaces";
+            this.BtnGetSelFaces.Size = new System.Drawing.Size(122, 23);
+            this.BtnGetSelFaces.TabIndex = 29;
+            this.BtnGetSelFaces.Text = "Get Selected Faces";
+            this.BtnGetSelFaces.UseVisualStyleBackColor = true;
+            this.BtnGetSelFaces.Click += new System.EventHandler(this.BtnGetSelFaces_Click);
+            // 
+            // BtnGetSelEdges
+            // 
+            this.BtnGetSelEdges.Location = new System.Drawing.Point(6, 48);
+            this.BtnGetSelEdges.Name = "BtnGetSelEdges";
+            this.BtnGetSelEdges.Size = new System.Drawing.Size(122, 23);
+            this.BtnGetSelEdges.TabIndex = 30;
+            this.BtnGetSelEdges.Text = "Get Selected Edges";
+            this.BtnGetSelEdges.UseVisualStyleBackColor = true;
+            this.BtnGetSelEdges.Click += new System.EventHandler(this.BtnGetSelEdges_Click);
+            // 
+            // BtnGetSelVetts
+            // 
+            this.BtnGetSelVetts.Location = new System.Drawing.Point(6, 77);
+            this.BtnGetSelVetts.Name = "BtnGetSelVetts";
+            this.BtnGetSelVetts.Size = new System.Drawing.Size(122, 23);
+            this.BtnGetSelVetts.TabIndex = 31;
+            this.BtnGetSelVetts.Text = "Get Selected Verts";
+            this.BtnGetSelVetts.UseVisualStyleBackColor = true;
+            this.BtnGetSelVetts.Click += new System.EventHandler(this.BtnGetSelVetts_Click);
             // 
             // BtnClearExecute
             // 
-            this.BtnClearExecute.Location = new System.Drawing.Point(532, 19);
+            this.BtnClearExecute.Location = new System.Drawing.Point(510, 6);
             this.BtnClearExecute.Name = "BtnClearExecute";
             this.BtnClearExecute.Size = new System.Drawing.Size(66, 23);
             this.BtnClearExecute.TabIndex = 45;
@@ -129,15 +180,15 @@
             // CbxScriptList
             // 
             this.CbxScriptList.FormattingEnabled = true;
-            this.CbxScriptList.Location = new System.Drawing.Point(130, 19);
+            this.CbxScriptList.Location = new System.Drawing.Point(130, 6);
             this.CbxScriptList.Name = "CbxScriptList";
-            this.CbxScriptList.Size = new System.Drawing.Size(215, 21);
+            this.CbxScriptList.Size = new System.Drawing.Size(374, 21);
             this.CbxScriptList.TabIndex = 44;
             this.CbxScriptList.SelectedIndexChanged += new System.EventHandler(this.OnCbxScriptListSelChanges);
             // 
             // BtnExecute
             // 
-            this.BtnExecute.Location = new System.Drawing.Point(6, 19);
+            this.BtnExecute.Location = new System.Drawing.Point(6, 5);
             this.BtnExecute.Name = "BtnExecute";
             this.BtnExecute.Size = new System.Drawing.Size(118, 23);
             this.BtnExecute.TabIndex = 6;
@@ -147,7 +198,7 @@
             // 
             // BtnSelSimElements
             // 
-            this.BtnSelSimElements.Location = new System.Drawing.Point(6, 191);
+            this.BtnSelSimElements.Location = new System.Drawing.Point(6, 19);
             this.BtnSelSimElements.Name = "BtnSelSimElements";
             this.BtnSelSimElements.Size = new System.Drawing.Size(194, 23);
             this.BtnSelSimElements.TabIndex = 8;
@@ -157,53 +208,39 @@
             // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.BtnGetObjArea2);
-            this.groupBox2.Controls.Add(this.BtnGetObjArea1);
             this.groupBox2.Controls.Add(this.CbxMaxFilePath);
-            this.groupBox2.Controls.Add(this.ChkSelHidden2);
-            this.groupBox2.Controls.Add(this.CbxPrimitiveTypes);
-            this.groupBox2.Controls.Add(this.BtnListPrimitives);
-            this.groupBox2.Controls.Add(this.button18);
-            this.groupBox2.Controls.Add(this.BtnGetSceneObjects);
-            this.groupBox2.Controls.Add(this.CbxSceneNodeTypes);
-            this.groupBox2.Controls.Add(this.ChkSelected);
-            this.groupBox2.Controls.Add(this.BtnUnhideGeometry);
-            this.groupBox2.Controls.Add(this.BtnHideGeometry);
-            this.groupBox2.Controls.Add(this.BtnGetSelVetts);
-            this.groupBox2.Controls.Add(this.BtnGetSelEdges);
-            this.groupBox2.Controls.Add(this.BtnGetSelFaces);
             this.groupBox2.Controls.Add(this.BtnOpenMaxFile);
-            this.groupBox2.Controls.Add(this.button4);
-            this.groupBox2.Controls.Add(this.BtnSelSimElements);
-            this.groupBox2.Controls.Add(this.RbtSuperClassOf);
-            this.groupBox2.Controls.Add(this.RbtClassOf);
-            this.groupBox2.Controls.Add(this.button1);
-            this.groupBox2.Controls.Add(this.button16);
-            this.groupBox2.Controls.Add(this.ChkClearSel);
-            this.groupBox2.Controls.Add(this.CbxSuperClassOf);
-            this.groupBox2.Controls.Add(this.ChkMacroRec);
-            this.groupBox2.Controls.Add(this.button15);
-            this.groupBox2.Controls.Add(this.BtnShowSelClass);
-            this.groupBox2.Controls.Add(this.ChkSelHidden);
-            this.groupBox2.Controls.Add(this.button12);
-            this.groupBox2.Controls.Add(this.button11);
-            this.groupBox2.Controls.Add(this.button10);
-            this.groupBox2.Controls.Add(this.button6);
-            this.groupBox2.Controls.Add(this.CbxClassOf);
-            this.groupBox2.Controls.Add(this.button7);
-            this.groupBox2.Controls.Add(this.button13);
-            this.groupBox2.Controls.Add(this.button8);
-            this.groupBox2.Controls.Add(this.button9);
-            this.groupBox2.Location = new System.Drawing.Point(18, 12);
+            this.groupBox2.Location = new System.Drawing.Point(6, 6);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(979, 339);
+            this.groupBox2.Size = new System.Drawing.Size(570, 97);
             this.groupBox2.TabIndex = 12;
             this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "MaxSharp";
+            this.groupBox2.Text = "File:";
+            // 
+            // CbxMaxFilePath
+            // 
+            this.CbxMaxFilePath.FormattingEnabled = true;
+            this.CbxMaxFilePath.Items.AddRange(new object[] {
+            "D:\\ReneBaca\\Aprog\\Micra\\Micra_Csharp\\Resources\\test_scene_01.max",
+            "E:\\Aprog\\Orien\\Micra\\Micra_Csharp\\Resources\\test_scene_01.max"});
+            this.CbxMaxFilePath.Location = new System.Drawing.Point(206, 19);
+            this.CbxMaxFilePath.Name = "CbxMaxFilePath";
+            this.CbxMaxFilePath.Size = new System.Drawing.Size(358, 21);
+            this.CbxMaxFilePath.TabIndex = 43;
+            // 
+            // BtnOpenMaxFile
+            // 
+            this.BtnOpenMaxFile.Location = new System.Drawing.Point(6, 17);
+            this.BtnOpenMaxFile.Name = "BtnOpenMaxFile";
+            this.BtnOpenMaxFile.Size = new System.Drawing.Size(194, 23);
+            this.BtnOpenMaxFile.TabIndex = 27;
+            this.BtnOpenMaxFile.Text = "Open File";
+            this.BtnOpenMaxFile.UseVisualStyleBackColor = true;
+            this.BtnOpenMaxFile.Click += new System.EventHandler(this.BtnOpenMaxFile_Click);
             // 
             // BtnGetObjArea2
             // 
-            this.BtnGetObjArea2.Location = new System.Drawing.Point(851, 133);
+            this.BtnGetObjArea2.Location = new System.Drawing.Point(6, 48);
             this.BtnGetObjArea2.Name = "BtnGetObjArea2";
             this.BtnGetObjArea2.Size = new System.Drawing.Size(122, 23);
             this.BtnGetObjArea2.TabIndex = 45;
@@ -213,7 +250,7 @@
             // 
             // BtnGetObjArea1
             // 
-            this.BtnGetObjArea1.Location = new System.Drawing.Point(723, 133);
+            this.BtnGetObjArea1.Location = new System.Drawing.Point(6, 19);
             this.BtnGetObjArea1.Name = "BtnGetObjArea1";
             this.BtnGetObjArea1.Size = new System.Drawing.Size(122, 23);
             this.BtnGetObjArea1.TabIndex = 44;
@@ -221,21 +258,10 @@
             this.BtnGetObjArea1.UseVisualStyleBackColor = true;
             this.BtnGetObjArea1.Click += new System.EventHandler(this.BtnGetObjArea_Click);
             // 
-            // CbxMaxFilePath
-            // 
-            this.CbxMaxFilePath.FormattingEnabled = true;
-            this.CbxMaxFilePath.Items.AddRange(new object[] {
-            "D:\\ReneBaca\\Aprog\\Micra\\Micra_Csharp\\Resources\\test_scene_01.max",
-            "E:\\Aprog\\Orien\\Micra\\Micra_Csharp\\Resources\\test_scene_01.max"});
-            this.CbxMaxFilePath.Location = new System.Drawing.Point(208, 302);
-            this.CbxMaxFilePath.Name = "CbxMaxFilePath";
-            this.CbxMaxFilePath.Size = new System.Drawing.Size(400, 21);
-            this.CbxMaxFilePath.TabIndex = 43;
-            // 
             // ChkSelHidden2
             // 
             this.ChkSelHidden2.AutoSize = true;
-            this.ChkSelHidden2.Location = new System.Drawing.Point(134, 224);
+            this.ChkSelHidden2.Location = new System.Drawing.Point(134, 158);
             this.ChkSelHidden2.Name = "ChkSelHidden2";
             this.ChkSelHidden2.Size = new System.Drawing.Size(74, 17);
             this.ChkSelHidden2.TabIndex = 42;
@@ -249,14 +275,14 @@
             "All",
             "Standard",
             "Extended"});
-            this.CbxPrimitiveTypes.Location = new System.Drawing.Point(828, 52);
+            this.CbxPrimitiveTypes.Location = new System.Drawing.Point(134, 109);
             this.CbxPrimitiveTypes.Name = "CbxPrimitiveTypes";
             this.CbxPrimitiveTypes.Size = new System.Drawing.Size(145, 21);
             this.CbxPrimitiveTypes.TabIndex = 41;
             // 
             // BtnListPrimitives
             // 
-            this.BtnListPrimitives.Location = new System.Drawing.Point(700, 52);
+            this.BtnListPrimitives.Location = new System.Drawing.Point(6, 109);
             this.BtnListPrimitives.Name = "BtnListPrimitives";
             this.BtnListPrimitives.Size = new System.Drawing.Size(122, 23);
             this.BtnListPrimitives.TabIndex = 39;
@@ -266,7 +292,7 @@
             // 
             // button18
             // 
-            this.button18.Location = new System.Drawing.Point(861, 289);
+            this.button18.Location = new System.Drawing.Point(6, 77);
             this.button18.Name = "button18";
             this.button18.Size = new System.Drawing.Size(112, 34);
             this.button18.TabIndex = 38;
@@ -276,7 +302,7 @@
             // 
             // BtnGetSceneObjects
             // 
-            this.BtnGetSceneObjects.Location = new System.Drawing.Point(700, 17);
+            this.BtnGetSceneObjects.Location = new System.Drawing.Point(6, 74);
             this.BtnGetSceneObjects.Name = "BtnGetSceneObjects";
             this.BtnGetSceneObjects.Size = new System.Drawing.Size(122, 23);
             this.BtnGetSceneObjects.TabIndex = 36;
@@ -294,7 +320,7 @@
             "CameraNodes",
             "HelperNodes",
             "ShapeNodes"});
-            this.CbxSceneNodeTypes.Location = new System.Drawing.Point(828, 17);
+            this.CbxSceneNodeTypes.Location = new System.Drawing.Point(134, 74);
             this.CbxSceneNodeTypes.Name = "CbxSceneNodeTypes";
             this.CbxSceneNodeTypes.Size = new System.Drawing.Size(145, 21);
             this.CbxSceneNodeTypes.TabIndex = 35;
@@ -304,16 +330,17 @@
             this.ChkSelected.AutoSize = true;
             this.ChkSelected.Checked = true;
             this.ChkSelected.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.ChkSelected.Location = new System.Drawing.Point(542, 195);
+            this.ChkSelected.Location = new System.Drawing.Point(125, 23);
             this.ChkSelected.Name = "ChkSelected";
             this.ChkSelected.Size = new System.Drawing.Size(66, 17);
             this.ChkSelected.TabIndex = 34;
             this.ChkSelected.Text = "selected";
             this.ChkSelected.UseVisualStyleBackColor = true;
+            this.ChkSelected.CheckedChanged += new System.EventHandler(this.ChkSelected_CheckedChanged);
             // 
             // BtnUnhideGeometry
             // 
-            this.BtnUnhideGeometry.Location = new System.Drawing.Point(423, 162);
+            this.BtnUnhideGeometry.Location = new System.Drawing.Point(6, 48);
             this.BtnUnhideGeometry.Name = "BtnUnhideGeometry";
             this.BtnUnhideGeometry.Size = new System.Drawing.Size(111, 23);
             this.BtnUnhideGeometry.TabIndex = 33;
@@ -323,7 +350,7 @@
             // 
             // BtnHideGeometry
             // 
-            this.BtnHideGeometry.Location = new System.Drawing.Point(423, 191);
+            this.BtnHideGeometry.Location = new System.Drawing.Point(6, 19);
             this.BtnHideGeometry.Name = "BtnHideGeometry";
             this.BtnHideGeometry.Size = new System.Drawing.Size(111, 23);
             this.BtnHideGeometry.TabIndex = 32;
@@ -331,51 +358,11 @@
             this.BtnHideGeometry.UseVisualStyleBackColor = true;
             this.BtnHideGeometry.Click += new System.EventHandler(this.BtnHideUnselFaces_Click);
             // 
-            // BtnGetSelVetts
-            // 
-            this.BtnGetSelVetts.Location = new System.Drawing.Point(208, 191);
-            this.BtnGetSelVetts.Name = "BtnGetSelVetts";
-            this.BtnGetSelVetts.Size = new System.Drawing.Size(122, 23);
-            this.BtnGetSelVetts.TabIndex = 31;
-            this.BtnGetSelVetts.Text = "Get Selected Verts";
-            this.BtnGetSelVetts.UseVisualStyleBackColor = true;
-            this.BtnGetSelVetts.Click += new System.EventHandler(this.BtnGetSelVetts_Click);
-            // 
-            // BtnGetSelEdges
-            // 
-            this.BtnGetSelEdges.Location = new System.Drawing.Point(208, 162);
-            this.BtnGetSelEdges.Name = "BtnGetSelEdges";
-            this.BtnGetSelEdges.Size = new System.Drawing.Size(122, 23);
-            this.BtnGetSelEdges.TabIndex = 30;
-            this.BtnGetSelEdges.Text = "Get Selected Edges";
-            this.BtnGetSelEdges.UseVisualStyleBackColor = true;
-            this.BtnGetSelEdges.Click += new System.EventHandler(this.BtnGetSelEdges_Click);
-            // 
-            // BtnGetSelFaces
-            // 
-            this.BtnGetSelFaces.Location = new System.Drawing.Point(208, 133);
-            this.BtnGetSelFaces.Name = "BtnGetSelFaces";
-            this.BtnGetSelFaces.Size = new System.Drawing.Size(122, 23);
-            this.BtnGetSelFaces.TabIndex = 29;
-            this.BtnGetSelFaces.Text = "Get Selected Faces";
-            this.BtnGetSelFaces.UseVisualStyleBackColor = true;
-            this.BtnGetSelFaces.Click += new System.EventHandler(this.BtnGetSelFaces_Click);
-            // 
-            // BtnOpenMaxFile
-            // 
-            this.BtnOpenMaxFile.Location = new System.Drawing.Point(6, 302);
-            this.BtnOpenMaxFile.Name = "BtnOpenMaxFile";
-            this.BtnOpenMaxFile.Size = new System.Drawing.Size(194, 23);
-            this.BtnOpenMaxFile.TabIndex = 27;
-            this.BtnOpenMaxFile.Text = "Open File";
-            this.BtnOpenMaxFile.UseVisualStyleBackColor = true;
-            this.BtnOpenMaxFile.Click += new System.EventHandler(this.BtnOpenMaxFile_Click);
-            // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(6, 75);
+            this.button4.Location = new System.Drawing.Point(6, 77);
             this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(194, 23);
+            this.button4.Size = new System.Drawing.Size(122, 23);
             this.button4.TabIndex = 26;
             this.button4.Text = "Seselect Instances";
             this.button4.UseVisualStyleBackColor = true;
@@ -384,7 +371,7 @@
             // RbtSuperClassOf
             // 
             this.RbtSuperClassOf.AutoSize = true;
-            this.RbtSuperClassOf.Location = new System.Drawing.Point(140, 277);
+            this.RbtSuperClassOf.Location = new System.Drawing.Point(140, 211);
             this.RbtSuperClassOf.Name = "RbtSuperClassOf";
             this.RbtSuperClassOf.Size = new System.Drawing.Size(87, 17);
             this.RbtSuperClassOf.TabIndex = 25;
@@ -395,7 +382,7 @@
             // 
             this.RbtClassOf.AutoSize = true;
             this.RbtClassOf.Checked = true;
-            this.RbtClassOf.Location = new System.Drawing.Point(140, 251);
+            this.RbtClassOf.Location = new System.Drawing.Point(140, 185);
             this.RbtClassOf.Name = "RbtClassOf";
             this.RbtClassOf.Size = new System.Drawing.Size(60, 17);
             this.RbtClassOf.TabIndex = 24;
@@ -405,7 +392,7 @@
             // 
             // button16
             // 
-            this.button16.Location = new System.Drawing.Point(6, 162);
+            this.button16.Location = new System.Drawing.Point(6, 16);
             this.button16.Name = "button16";
             this.button16.Size = new System.Drawing.Size(194, 23);
             this.button16.TabIndex = 20;
@@ -418,7 +405,7 @@
             this.ChkClearSel.AutoSize = true;
             this.ChkClearSel.Checked = true;
             this.ChkClearSel.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.ChkClearSel.Location = new System.Drawing.Point(214, 224);
+            this.ChkClearSel.Location = new System.Drawing.Point(214, 158);
             this.ChkClearSel.Name = "ChkClearSel";
             this.ChkClearSel.Size = new System.Drawing.Size(65, 17);
             this.ChkClearSel.TabIndex = 15;
@@ -428,7 +415,7 @@
             // CbxSuperClassOf
             // 
             this.CbxSuperClassOf.FormattingEnabled = true;
-            this.CbxSuperClassOf.Location = new System.Drawing.Point(6, 275);
+            this.CbxSuperClassOf.Location = new System.Drawing.Point(6, 209);
             this.CbxSuperClassOf.Name = "CbxSuperClassOf";
             this.CbxSuperClassOf.Size = new System.Drawing.Size(122, 21);
             this.CbxSuperClassOf.TabIndex = 22;
@@ -436,7 +423,7 @@
             // ChkMacroRec
             // 
             this.ChkMacroRec.AutoSize = true;
-            this.ChkMacroRec.Location = new System.Drawing.Point(334, 21);
+            this.ChkMacroRec.Location = new System.Drawing.Point(498, 623);
             this.ChkMacroRec.Name = "ChkMacroRec";
             this.ChkMacroRec.Size = new System.Drawing.Size(73, 17);
             this.ChkMacroRec.TabIndex = 19;
@@ -445,7 +432,7 @@
             // 
             // button15
             // 
-            this.button15.Location = new System.Drawing.Point(208, 17);
+            this.button15.Location = new System.Drawing.Point(372, 619);
             this.button15.Name = "button15";
             this.button15.Size = new System.Drawing.Size(120, 23);
             this.button15.TabIndex = 18;
@@ -455,7 +442,7 @@
             // 
             // BtnShowSelClass
             // 
-            this.BtnShowSelClass.Location = new System.Drawing.Point(6, 133);
+            this.BtnShowSelClass.Location = new System.Drawing.Point(6, 45);
             this.BtnShowSelClass.Name = "BtnShowSelClass";
             this.BtnShowSelClass.Size = new System.Drawing.Size(194, 23);
             this.BtnShowSelClass.TabIndex = 17;
@@ -466,7 +453,7 @@
             // ChkSelHidden
             // 
             this.ChkSelHidden.AutoSize = true;
-            this.ChkSelHidden.Location = new System.Drawing.Point(334, 50);
+            this.ChkSelHidden.Location = new System.Drawing.Point(132, 23);
             this.ChkSelHidden.Name = "ChkSelHidden";
             this.ChkSelHidden.Size = new System.Drawing.Size(74, 17);
             this.ChkSelHidden.TabIndex = 16;
@@ -475,9 +462,9 @@
             // 
             // button12
             // 
-            this.button12.Location = new System.Drawing.Point(6, 46);
+            this.button12.Location = new System.Drawing.Point(6, 48);
             this.button12.Name = "button12";
-            this.button12.Size = new System.Drawing.Size(194, 23);
+            this.button12.Size = new System.Drawing.Size(122, 23);
             this.button12.TabIndex = 11;
             this.button12.Text = "Deselect All";
             this.button12.UseVisualStyleBackColor = true;
@@ -485,7 +472,7 @@
             // 
             // button11
             // 
-            this.button11.Location = new System.Drawing.Point(208, 46);
+            this.button11.Location = new System.Drawing.Point(6, 19);
             this.button11.Name = "button11";
             this.button11.Size = new System.Drawing.Size(122, 23);
             this.button11.TabIndex = 10;
@@ -495,9 +482,9 @@
             // 
             // button10
             // 
-            this.button10.Location = new System.Drawing.Point(6, 19);
+            this.button10.Location = new System.Drawing.Point(191, 619);
             this.button10.Name = "button10";
-            this.button10.Size = new System.Drawing.Size(194, 23);
+            this.button10.Size = new System.Drawing.Size(122, 23);
             this.button10.TabIndex = 9;
             this.button10.Text = "Kernel Print Test";
             this.button10.UseVisualStyleBackColor = true;
@@ -505,7 +492,7 @@
             // 
             // button6
             // 
-            this.button6.Location = new System.Drawing.Point(412, 104);
+            this.button6.Location = new System.Drawing.Point(6, 48);
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(122, 23);
             this.button6.TabIndex = 8;
@@ -516,14 +503,14 @@
             // CbxClassOf
             // 
             this.CbxClassOf.FormattingEnabled = true;
-            this.CbxClassOf.Location = new System.Drawing.Point(6, 249);
+            this.CbxClassOf.Location = new System.Drawing.Point(6, 183);
             this.CbxClassOf.Name = "CbxClassOf";
             this.CbxClassOf.Size = new System.Drawing.Size(122, 21);
             this.CbxClassOf.TabIndex = 13;
             // 
             // button7
             // 
-            this.button7.Location = new System.Drawing.Point(412, 75);
+            this.button7.Location = new System.Drawing.Point(6, 48);
             this.button7.Name = "button7";
             this.button7.Size = new System.Drawing.Size(122, 23);
             this.button7.TabIndex = 7;
@@ -533,7 +520,7 @@
             // 
             // button13
             // 
-            this.button13.Location = new System.Drawing.Point(6, 220);
+            this.button13.Location = new System.Drawing.Point(6, 154);
             this.button13.Name = "button13";
             this.button13.Size = new System.Drawing.Size(122, 23);
             this.button13.TabIndex = 12;
@@ -543,17 +530,17 @@
             // 
             // button8
             // 
-            this.button8.Location = new System.Drawing.Point(412, 46);
+            this.button8.Location = new System.Drawing.Point(6, 19);
             this.button8.Name = "button8";
             this.button8.Size = new System.Drawing.Size(122, 23);
             this.button8.TabIndex = 6;
-            this.button8.Text = "Create Teapot";
+            this.button8.Text = "Teapot";
             this.button8.UseVisualStyleBackColor = true;
             this.button8.Click += new System.EventHandler(this.Button8_Click);
             // 
             // button9
             // 
-            this.button9.Location = new System.Drawing.Point(412, 17);
+            this.button9.Location = new System.Drawing.Point(6, 138);
             this.button9.Name = "button9";
             this.button9.Size = new System.Drawing.Size(122, 23);
             this.button9.TabIndex = 5;
@@ -561,20 +548,194 @@
             this.button9.UseVisualStyleBackColor = true;
             this.button9.Click += new System.EventHandler(this.Button9_Click);
             // 
+            // groupBox4
+            // 
+            this.groupBox4.Controls.Add(this.button8);
+            this.groupBox4.Controls.Add(this.button7);
+            this.groupBox4.Location = new System.Drawing.Point(304, 6);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Size = new System.Drawing.Size(135, 242);
+            this.groupBox4.TabIndex = 43;
+            this.groupBox4.TabStop = false;
+            this.groupBox4.Text = "Create:";
+            // 
+            // groupBox5
+            // 
+            this.groupBox5.Controls.Add(this.button11);
+            this.groupBox5.Controls.Add(this.ChkSelHidden);
+            this.groupBox5.Controls.Add(this.ChkSelHidden2);
+            this.groupBox5.Controls.Add(this.button12);
+            this.groupBox5.Controls.Add(this.button13);
+            this.groupBox5.Controls.Add(this.CbxClassOf);
+            this.groupBox5.Controls.Add(this.button1);
+            this.groupBox5.Controls.Add(this.RbtSuperClassOf);
+            this.groupBox5.Controls.Add(this.button4);
+            this.groupBox5.Controls.Add(this.CbxSuperClassOf);
+            this.groupBox5.Controls.Add(this.ChkClearSel);
+            this.groupBox5.Controls.Add(this.RbtClassOf);
+            this.groupBox5.Location = new System.Drawing.Point(6, 6);
+            this.groupBox5.Name = "groupBox5";
+            this.groupBox5.Size = new System.Drawing.Size(292, 242);
+            this.groupBox5.TabIndex = 44;
+            this.groupBox5.TabStop = false;
+            this.groupBox5.Text = "Select:";
+            // 
+            // groupBox6
+            // 
+            this.groupBox6.Controls.Add(this.button16);
+            this.groupBox6.Controls.Add(this.BtnGetSceneObjects);
+            this.groupBox6.Controls.Add(this.button9);
+            this.groupBox6.Controls.Add(this.BtnShowSelClass);
+            this.groupBox6.Controls.Add(this.CbxPrimitiveTypes);
+            this.groupBox6.Controls.Add(this.BtnListPrimitives);
+            this.groupBox6.Controls.Add(this.CbxSceneNodeTypes);
+            this.groupBox6.Location = new System.Drawing.Point(6, 254);
+            this.groupBox6.Name = "groupBox6";
+            this.groupBox6.Size = new System.Drawing.Size(292, 242);
+            this.groupBox6.TabIndex = 45;
+            this.groupBox6.TabStop = false;
+            this.groupBox6.Text = "Inspect:";
+            // 
+            // tabControl1
+            // 
+            this.tabControl1.Controls.Add(this.tabPage3);
+            this.tabControl1.Controls.Add(this.tabPage1);
+            this.tabControl1.Controls.Add(this.tabPage2);
+            this.tabControl1.Controls.Add(this.tabPage4);
+            this.tabControl1.Location = new System.Drawing.Point(6, 4);
+            this.tabControl1.Name = "tabControl1";
+            this.tabControl1.SelectedIndex = 0;
+            this.tabControl1.Size = new System.Drawing.Size(590, 674);
+            this.tabControl1.TabIndex = 47;
+            // 
+            // tabPage3
+            // 
+            this.tabPage3.Controls.Add(this.button5);
+            this.tabPage3.Controls.Add(this.button10);
+            this.tabPage3.Controls.Add(this.ChkMacroRec);
+            this.tabPage3.Controls.Add(this.BtnClearExecute);
+            this.tabPage3.Controls.Add(this.button15);
+            this.tabPage3.Controls.Add(this.textBox1);
+            this.tabPage3.Controls.Add(this.CbxScriptList);
+            this.tabPage3.Controls.Add(this.BtnExecute);
+            this.tabPage3.Location = new System.Drawing.Point(4, 22);
+            this.tabPage3.Name = "tabPage3";
+            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage3.Size = new System.Drawing.Size(582, 648);
+            this.tabPage3.TabIndex = 2;
+            this.tabPage3.Text = "Execute Script";
+            this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // tabPage1
+            // 
+            this.tabPage1.Controls.Add(this.groupBox6);
+            this.tabPage1.Controls.Add(this.groupBox5);
+            this.tabPage1.Controls.Add(this.groupBox4);
+            this.tabPage1.Location = new System.Drawing.Point(4, 22);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage1.Size = new System.Drawing.Size(582, 648);
+            this.tabPage1.TabIndex = 0;
+            this.tabPage1.Text = "Object";
+            this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // tabPage2
+            // 
+            this.tabPage2.Controls.Add(this.BtnSelFacesOtToTri);
+            this.tabPage2.Controls.Add(this.groupBox7);
+            this.tabPage2.Controls.Add(this.groupBox3);
+            this.tabPage2.Controls.Add(this.groupBox1);
+            this.tabPage2.Location = new System.Drawing.Point(4, 22);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(582, 648);
+            this.tabPage2.TabIndex = 1;
+            this.tabPage2.Text = "Geometry";
+            this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // groupBox7
+            // 
+            this.groupBox7.Controls.Add(this.BtnUnhideGeometry);
+            this.groupBox7.Controls.Add(this.BtnHideGeometry);
+            this.groupBox7.Controls.Add(this.ChkSelected);
+            this.groupBox7.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.groupBox7.Location = new System.Drawing.Point(6, 197);
+            this.groupBox7.Name = "groupBox7";
+            this.groupBox7.Size = new System.Drawing.Size(343, 212);
+            this.groupBox7.TabIndex = 49;
+            this.groupBox7.TabStop = false;
+            this.groupBox7.Text = "Modify:";
+            // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.BtnGetObjArea1);
+            this.groupBox3.Controls.Add(this.BtnGetObjArea2);
+            this.groupBox3.Location = new System.Drawing.Point(149, 6);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(200, 185);
+            this.groupBox3.TabIndex = 48;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "Inspect:";
+            // 
+            // tabPage4
+            // 
+            this.tabPage4.Controls.Add(this.groupBox8);
+            this.tabPage4.Controls.Add(this.groupBox2);
+            this.tabPage4.Location = new System.Drawing.Point(4, 22);
+            this.tabPage4.Name = "tabPage4";
+            this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage4.Size = new System.Drawing.Size(582, 648);
+            this.tabPage4.TabIndex = 3;
+            this.tabPage4.Text = "Global";
+            this.tabPage4.UseVisualStyleBackColor = true;
+            // 
+            // groupBox8
+            // 
+            this.groupBox8.Controls.Add(this.BtnSelSimElements);
+            this.groupBox8.Controls.Add(this.button6);
+            this.groupBox8.Controls.Add(this.button18);
+            this.groupBox8.Location = new System.Drawing.Point(6, 109);
+            this.groupBox8.Name = "groupBox8";
+            this.groupBox8.Size = new System.Drawing.Size(570, 533);
+            this.groupBox8.TabIndex = 13;
+            this.groupBox8.TabStop = false;
+            this.groupBox8.Text = "Actions:";
+            // 
+            // BtnSelFacesOtToTri
+            // 
+            this.BtnSelFacesOtToTri.Location = new System.Drawing.Point(369, 25);
+            this.BtnSelFacesOtToTri.Name = "BtnSelFacesOtToTri";
+            this.BtnSelFacesOtToTri.Size = new System.Drawing.Size(192, 23);
+            this.BtnSelFacesOtToTri.TabIndex = 32;
+            this.BtnSelFacesOtToTri.Text = "Get Selected Faces Out To Tri";
+            this.BtnSelFacesOtToTri.UseVisualStyleBackColor = true;
+            this.BtnSelFacesOtToTri.Click += new System.EventHandler(this.BtnSelFacesOtToTri_Click);
+            // 
             // CsharpToMaxTest
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1009, 704);
-            this.Controls.Add(this.groupBox2);
-            this.Controls.Add(this.groupBox1);
+            this.ClientSize = new System.Drawing.Size(600, 682);
+            this.Controls.Add(this.tabControl1);
             this.Name = "CsharpToMaxTest";
             this.Text = "Csharp To Max Test:";
             this.Shown += new System.EventHandler(this.OnFormShown);
             this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
-            this.groupBox2.PerformLayout();
+            this.groupBox4.ResumeLayout(false);
+            this.groupBox5.ResumeLayout(false);
+            this.groupBox5.PerformLayout();
+            this.groupBox6.ResumeLayout(false);
+            this.tabControl1.ResumeLayout(false);
+            this.tabPage3.ResumeLayout(false);
+            this.tabPage3.PerformLayout();
+            this.tabPage1.ResumeLayout(false);
+            this.tabPage2.ResumeLayout(false);
+            this.groupBox7.ResumeLayout(false);
+            this.groupBox7.PerformLayout();
+            this.groupBox3.ResumeLayout(false);
+            this.tabPage4.ResumeLayout(false);
+            this.groupBox8.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -625,5 +786,17 @@
         private System.Windows.Forms.Button BtnGetObjArea2;
         private System.Windows.Forms.Button BtnGetObjArea1;
         private System.Windows.Forms.Button BtnClearExecute;
+        private System.Windows.Forms.GroupBox groupBox6;
+        private System.Windows.Forms.GroupBox groupBox5;
+        private System.Windows.Forms.GroupBox groupBox4;
+        private System.Windows.Forms.TabControl tabControl1;
+        private System.Windows.Forms.TabPage tabPage3;
+        private System.Windows.Forms.TabPage tabPage1;
+        private System.Windows.Forms.TabPage tabPage2;
+        private System.Windows.Forms.GroupBox groupBox7;
+        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.TabPage tabPage4;
+        private System.Windows.Forms.GroupBox groupBox8;
+        private System.Windows.Forms.Button BtnSelFacesOtToTri;
     }
 }

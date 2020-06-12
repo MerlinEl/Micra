@@ -1,0 +1,290 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
+  <compounddef id="_geo_ops_8cs" kind="file">
+    <compoundname>GeoOps.cs</compoundname>
+    <innerclass refid="class_micra_1_1_core_1_1_geo_ops" prot="public">Micra::Core::GeoOps</innerclass>
+    <innernamespace refid="namespace_micra_1_1_core">Micra::Core</innernamespace>
+    <innernamespace refid="namespacestatic">static</innernamespace>
+    <innernamespace refid="namespace_micra_1_1_core_1_1_mesh">Micra::Core::Mesh</innernamespace>
+    <innernamespace refid="namespace_micra_1_1_core_1_1_poly">Micra::Core::Poly</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="keyword">using</highlight><highlight class="normal"><sp/>Autodesk.Max;</highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="keyword">using</highlight><highlight class="normal"><sp/>System;</highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight><highlight class="keyword">using</highlight><highlight class="normal"><sp/>System.Collections.Generic;</highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="keyword">using</highlight><highlight class="normal"><sp/>System.Linq;</highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="keyword">using</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/><ref refid="class_micra_1_1_core_1_1_mesh" kindref="compound">Micra.Core.Mesh</ref>;</highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="keyword">using</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/><ref refid="class_micra_1_1_core_1_1_poly" kindref="compound">Micra.Core.Poly</ref>;</highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="comment">//HIERARCHY</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight><highlight class="comment">//<sp/>Node<sp/>&gt;<sp/>SceneObject<sp/>&gt;<sp/>Mesh<sp/>or<sp/>Poly</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">Micra.Core<sp/>{</highlight></codeline>
+<codeline lineno="10" refid="class_micra_1_1_core_1_1_geo_ops" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="class_micra_1_1_core_1_1_geo_ops" kindref="compound">GeoOps</ref><sp/>{</highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight></codeline>
+<codeline lineno="12"><highlight class="normal"></highlight></codeline>
+<codeline lineno="13" refid="class_micra_1_1_core_1_1_geo_ops_1a7e90375c0d4afbeba315b322fd0b28c4" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/><ref refid="class_micra_1_1_core_1_1_geo_ops_1a7e90375c0d4afbeba315b322fd0b28c4" kindref="member">GetEdgeLength</ref>(IMesh<sp/>m,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>e)<sp/>{<sp/></highlight><highlight class="comment">//not<sp/>used<sp/>//not<sp/>tested</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="14"><highlight class="normal"></highlight></codeline>
+<codeline lineno="15"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//m.EdgeSel</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="16"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//Point3.Distance(<sp/>_mesh.ed<sp/>ei.V</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="17"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">throw</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">new</highlight><highlight class="normal"><sp/>NotImplementedException();</highlight></codeline>
+<codeline lineno="18"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="19"><highlight class="normal"></highlight></codeline>
+<codeline lineno="20" refid="class_micra_1_1_core_1_1_geo_ops_1a17e7a150b106bb82cc0047b84162e74f" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/><ref refid="class_micra_1_1_core_1_1_geo_ops_1a17e7a150b106bb82cc0047b84162e74f" kindref="member">GetEdgeLength</ref>(IMNMesh<sp/>m,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>ei)<sp/>{</highlight></codeline>
+<codeline lineno="21"><highlight class="normal"></highlight></codeline>
+<codeline lineno="22"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>IMNEdge<sp/>edge<sp/>=<sp/>m.E(ei);</highlight></codeline>
+<codeline lineno="23"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>IMNVert<sp/>vert1<sp/>=<sp/>m.V(edge.V1);</highlight></codeline>
+<codeline lineno="24"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>IMNVert<sp/>vert2<sp/>=<sp/>m.V(edge.V2);</highlight></codeline>
+<codeline lineno="25"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="class_micra_1_1_core_1_1_point3" kindref="compound">Point3</ref><sp/>p1<sp/>=<sp/></highlight><highlight class="keyword">new</highlight><highlight class="normal"><sp/><ref refid="class_micra_1_1_core_1_1_point3" kindref="compound">Point3</ref>(vert1.P);</highlight></codeline>
+<codeline lineno="26"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="class_micra_1_1_core_1_1_point3" kindref="compound">Point3</ref><sp/>p2<sp/>=<sp/></highlight><highlight class="keyword">new</highlight><highlight class="normal"><sp/><ref refid="class_micra_1_1_core_1_1_point3" kindref="compound">Point3</ref>(vert2.P);</highlight></codeline>
+<codeline lineno="27"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>dist<sp/>=<sp/>Point3.Distance(p1,<sp/>p2);</highlight></codeline>
+<codeline lineno="28"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Max.Log(</highlight><highlight class="stringliteral">&quot;Edge:{0}<sp/>Verts:#({1},<sp/>{2})<sp/>Length:{3}&quot;</highlight><highlight class="normal">,<sp/>ei,<sp/>edge.V1,<sp/>edge.V2,<sp/>dist);</highlight></codeline>
+<codeline lineno="29"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>dist;</highlight></codeline>
+<codeline lineno="30"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="31"><highlight class="normal"></highlight></codeline>
+<codeline lineno="32"><highlight class="normal"></highlight></codeline>
+<codeline lineno="33" refid="class_micra_1_1_core_1_1_geo_ops_1af40f0a2e6a55f496eee56b4fde2c646b" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/>List&lt;int&gt;<sp/><ref refid="class_micra_1_1_core_1_1_geo_ops_1af40f0a2e6a55f496eee56b4fde2c646b" kindref="member">GetSelectedEdges</ref>(<ref refid="class_micra_1_1_core_1_1_node" kindref="compound">Node</ref><sp/>node)<sp/>{</highlight></codeline>
+<codeline lineno="34"><highlight class="normal"></highlight></codeline>
+<codeline lineno="35"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(<sp/>node.<ref refid="class_micra_1_1_core_1_1_node_1a3f4b72340ed13d7440184fa15280d4fc" kindref="member">IsClassOf</ref>(<ref refid="struct_micra_1_1_core_1_1_class_i_d" kindref="compound">ClassID</ref>.<ref refid="struct_micra_1_1_core_1_1_class_i_d_1adf93402615b1eafbd97992a1c054eb02" kindref="member">EditableMesh</ref>)<sp/>)<sp/>{</highlight></codeline>
+<codeline lineno="36"><highlight class="normal"></highlight></codeline>
+<codeline lineno="37"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>GetSelectedEdges(node.<ref refid="class_micra_1_1_core_1_1_node_1adbc1b2ea89d01db85b4f66e140527d77" kindref="member">GetImesh</ref>());</highlight></codeline>
+<codeline lineno="38"><highlight class="normal"></highlight></codeline>
+<codeline lineno="39"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}<sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(<sp/>node.<ref refid="class_micra_1_1_core_1_1_node_1a3f4b72340ed13d7440184fa15280d4fc" kindref="member">IsClassOf</ref>(<ref refid="struct_micra_1_1_core_1_1_class_i_d" kindref="compound">ClassID</ref>.<ref refid="struct_micra_1_1_core_1_1_class_i_d_1afcdcf24fa5c77b7690a1d86a8d53a3f2" kindref="member">EditablePoly</ref>)<sp/>)<sp/>{</highlight></codeline>
+<codeline lineno="40"><highlight class="normal"></highlight></codeline>
+<codeline lineno="41"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>GetSelectedEdges(node.<ref refid="class_micra_1_1_core_1_1_node_1ac1ce77e3e675b67dae9d240ddaed693f" kindref="member">GetIpoly</ref>());</highlight></codeline>
+<codeline lineno="42"><highlight class="normal"></highlight></codeline>
+<codeline lineno="43"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}<sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/>{<sp/></highlight><highlight class="comment">//TODO<sp/>read<sp/>Modifiers</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="44"><highlight class="normal"></highlight></codeline>
+<codeline lineno="45"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>null;</highlight></codeline>
+<codeline lineno="46"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="47"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="48"><highlight class="normal"></highlight></codeline>
+<codeline lineno="49" refid="class_micra_1_1_core_1_1_geo_ops_1a61ea4dd61a4fba866688b4063a365fc1" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/>List&lt;int&gt;<sp/><ref refid="class_micra_1_1_core_1_1_geo_ops_1a61ea4dd61a4fba866688b4063a365fc1" kindref="member">GetSelectedEdges</ref>(IMesh<sp/>m)<sp/>{</highlight></codeline>
+<codeline lineno="50"><highlight class="normal"></highlight></codeline>
+<codeline lineno="51"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>List&lt;int&gt;<sp/>esel<sp/>=<sp/></highlight><highlight class="keyword">new</highlight><highlight class="normal"><sp/>List&lt;int&gt;()<sp/>{<sp/>};</highlight></codeline>
+<codeline lineno="52"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>m.EdgeSel.IEnumerable().ForEach((item,<sp/>index)<sp/>=&gt;<sp/>{</highlight></codeline>
+<codeline lineno="53"><highlight class="normal"></highlight></codeline>
+<codeline lineno="54"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(<sp/>item<sp/>==<sp/>1<sp/>)<sp/>esel.Add(index);<sp/></highlight><highlight class="comment">//+3DsMax<sp/>count<sp/>+<sp/>1</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="55"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>});</highlight></codeline>
+<codeline lineno="56"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>esel;</highlight></codeline>
+<codeline lineno="57"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="58"><highlight class="normal"></highlight></codeline>
+<codeline lineno="59" refid="class_micra_1_1_core_1_1_geo_ops_1a1542765bd3eaad46bdffbf4818c0d8eb" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/>List&lt;int&gt;<sp/><ref refid="class_micra_1_1_core_1_1_geo_ops_1a1542765bd3eaad46bdffbf4818c0d8eb" kindref="member">GetSelectedEdges</ref>(IMNMesh<sp/>m)<sp/>{</highlight></codeline>
+<codeline lineno="60"><highlight class="normal"></highlight></codeline>
+<codeline lineno="61"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>List&lt;int&gt;<sp/>esel<sp/>=<sp/></highlight><highlight class="keyword">new</highlight><highlight class="normal"><sp/>List&lt;int&gt;()<sp/>{<sp/>};</highlight></codeline>
+<codeline lineno="62"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>IBitArray<sp/>ba<sp/>=<sp/>Kernel._Global.BitArray.Create();</highlight></codeline>
+<codeline lineno="63"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>m.GetEdgeSel(ba);</highlight></codeline>
+<codeline lineno="64"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ba.IEnumerable().ForEach((item,<sp/>index)<sp/>=&gt;<sp/>{</highlight></codeline>
+<codeline lineno="65"><highlight class="normal"></highlight></codeline>
+<codeline lineno="66"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(<sp/>item<sp/>==<sp/>1<sp/>)<sp/>esel.Add(index);<sp/></highlight><highlight class="comment">//+3DsMax<sp/>count<sp/>+<sp/>1</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="67"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>});</highlight></codeline>
+<codeline lineno="68"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>esel;</highlight></codeline>
+<codeline lineno="69"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="70"><highlight class="normal"></highlight></codeline>
+<codeline lineno="71" refid="class_micra_1_1_core_1_1_geo_ops_1a9eb2a35c4ce754eed18cb7c027459187" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/>List&lt;int&gt;<sp/><ref refid="class_micra_1_1_core_1_1_geo_ops_1a9eb2a35c4ce754eed18cb7c027459187" kindref="member">GetSelectedVerts</ref>(IMesh<sp/>m)<sp/>{</highlight></codeline>
+<codeline lineno="72"><highlight class="normal"></highlight></codeline>
+<codeline lineno="73"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>List&lt;int&gt;<sp/>vsel<sp/>=<sp/></highlight><highlight class="keyword">new</highlight><highlight class="normal"><sp/>List&lt;int&gt;()<sp/>{<sp/>};</highlight></codeline>
+<codeline lineno="74"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>m.VertSel.IEnumerable().ForEach((item,<sp/>index)<sp/>=&gt;<sp/>{</highlight></codeline>
+<codeline lineno="75"><highlight class="normal"></highlight></codeline>
+<codeline lineno="76"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(<sp/>item<sp/>==<sp/>1<sp/>)<sp/>vsel.Add(index);<sp/></highlight><highlight class="comment">//+3DsMax<sp/>count<sp/>+<sp/>1</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="77"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>});</highlight></codeline>
+<codeline lineno="78"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>vsel;</highlight></codeline>
+<codeline lineno="79"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="80"><highlight class="normal"></highlight></codeline>
+<codeline lineno="81" refid="class_micra_1_1_core_1_1_geo_ops_1a6741de28d2c732ffd51e41477915d010" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/>List&lt;int&gt;<sp/><ref refid="class_micra_1_1_core_1_1_geo_ops_1a6741de28d2c732ffd51e41477915d010" kindref="member">GetSelectedVerts</ref>(IMNMesh<sp/>m)<sp/>{</highlight></codeline>
+<codeline lineno="82"><highlight class="normal"></highlight></codeline>
+<codeline lineno="83"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>List&lt;int&gt;<sp/>vsel<sp/>=<sp/></highlight><highlight class="keyword">new</highlight><highlight class="normal"><sp/>List&lt;int&gt;()<sp/>{<sp/>};</highlight></codeline>
+<codeline lineno="84"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>IBitArray<sp/>ba<sp/>=<sp/>Kernel._Global.BitArray.Create();</highlight></codeline>
+<codeline lineno="85"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>m.GetVertexSel(ba);</highlight></codeline>
+<codeline lineno="86"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ba.IEnumerable().ForEach((item,<sp/>index)<sp/>=&gt;<sp/>{</highlight></codeline>
+<codeline lineno="87"><highlight class="normal"></highlight></codeline>
+<codeline lineno="88"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(<sp/>item<sp/>==<sp/>1<sp/>)<sp/>vsel.Add(index);<sp/></highlight><highlight class="comment">//+3DsMax<sp/>count<sp/>+<sp/>1</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="89"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>});</highlight></codeline>
+<codeline lineno="90"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>vsel;</highlight></codeline>
+<codeline lineno="91"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="92"><highlight class="normal"></highlight></codeline>
+<codeline lineno="93" refid="class_micra_1_1_core_1_1_geo_ops_1af7291270256fc24bb9298d5c24f0c510" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_micra_1_1_core_1_1_geo_ops_1af7291270256fc24bb9298d5c24f0c510" kindref="member">SelectSimillarFaces</ref>(<ref refid="class_micra_1_1_core_1_1_node" kindref="compound">Node</ref><sp/>node)<sp/>{</highlight></codeline>
+<codeline lineno="94"><highlight class="normal"></highlight></codeline>
+<codeline lineno="95"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Max.Log(</highlight><highlight class="stringliteral">&quot;SelectSimillarFaces<sp/>&gt;<sp/>The<sp/>obj:{0}&quot;</highlight><highlight class="normal">,<sp/>node.Name);</highlight></codeline>
+<codeline lineno="96"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>List&lt;double&gt;<sp/>source_volumes<sp/>=<sp/></highlight><highlight class="keyword">new</highlight><highlight class="normal"><sp/>List&lt;double&gt;()<sp/>{<sp/>};</highlight></codeline>
+<codeline lineno="97"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">throw</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">new</highlight><highlight class="normal"><sp/>NotImplementedException();</highlight></codeline>
+<codeline lineno="98"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="99"><highlight class="normal"></highlight></codeline>
+<codeline lineno="100" refid="class_micra_1_1_core_1_1_geo_ops_1acc01585d08b02d12da864fade34c79eb" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_micra_1_1_core_1_1_geo_ops_1acc01585d08b02d12da864fade34c79eb" kindref="member">SelectSimillarEdges</ref>(<ref refid="class_micra_1_1_core_1_1_node" kindref="compound">Node</ref><sp/>node)<sp/>{</highlight></codeline>
+<codeline lineno="101"><highlight class="normal"></highlight></codeline>
+<codeline lineno="102"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Max.Log(</highlight><highlight class="stringliteral">&quot;SelectSimillarEdges<sp/>&gt;<sp/>The<sp/>obj:{0}&quot;</highlight><highlight class="normal">,<sp/>node.Name);</highlight></codeline>
+<codeline lineno="103"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>List&lt;double&gt;<sp/>source_volumes<sp/>=<sp/></highlight><highlight class="keyword">new</highlight><highlight class="normal"><sp/>List&lt;double&gt;()<sp/>{<sp/>};</highlight></codeline>
+<codeline lineno="104"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(<sp/>node.<ref refid="class_micra_1_1_core_1_1_node_1a3f4b72340ed13d7440184fa15280d4fc" kindref="member">IsClassOf</ref>(<ref refid="struct_micra_1_1_core_1_1_class_i_d" kindref="compound">ClassID</ref>.<ref refid="struct_micra_1_1_core_1_1_class_i_d_1adf93402615b1eafbd97992a1c054eb02" kindref="member">EditableMesh</ref>)<sp/>)<sp/>{</highlight></codeline>
+<codeline lineno="105"><highlight class="normal"></highlight></codeline>
+<codeline lineno="106"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>IMesh<sp/>im<sp/>=<sp/>node.GetImesh();</highlight></codeline>
+<codeline lineno="107"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>var<sp/>esel_m<sp/>=<sp/>GetSelectedEdges(im);</highlight></codeline>
+<codeline lineno="108"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Max.Log(</highlight><highlight class="stringliteral">&quot;\tSel<sp/>edges:{0}&quot;</highlight><highlight class="normal">,<sp/>esel_m.Count);</highlight></codeline>
+<codeline lineno="109"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//collect<sp/>selected<sp/>edges<sp/>volume</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="110"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>source_volumes<sp/>=<sp/>esel_m</highlight></codeline>
+<codeline lineno="111"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.Select(n<sp/>=&gt;<sp/>GetEdgeLength(im,<sp/>n)).Distinct()</highlight></codeline>
+<codeline lineno="112"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.ToList();</highlight></codeline>
+<codeline lineno="113"><highlight class="normal"></highlight></codeline>
+<codeline lineno="114"><highlight class="normal"></highlight></codeline>
+<codeline lineno="115"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}<sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(<sp/>node.<ref refid="class_micra_1_1_core_1_1_node_1a3f4b72340ed13d7440184fa15280d4fc" kindref="member">IsClassOf</ref>(<ref refid="struct_micra_1_1_core_1_1_class_i_d" kindref="compound">ClassID</ref>.<ref refid="struct_micra_1_1_core_1_1_class_i_d_1afcdcf24fa5c77b7690a1d86a8d53a3f2" kindref="member">EditablePoly</ref>)<sp/>)<sp/>{</highlight></codeline>
+<codeline lineno="116"><highlight class="normal"></highlight></codeline>
+<codeline lineno="117"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>IMNMesh<sp/>imn<sp/>=<sp/>node.GetIpoly();</highlight></codeline>
+<codeline lineno="118"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>var<sp/>esel_p<sp/>=<sp/>GetSelectedEdges(imn);</highlight></codeline>
+<codeline lineno="119"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Max.Log(</highlight><highlight class="stringliteral">&quot;\tSel<sp/>edges:{0}&quot;</highlight><highlight class="normal">,<sp/>esel_p.Count);</highlight></codeline>
+<codeline lineno="120"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//collect<sp/>selected<sp/>edges<sp/>volume</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="121"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>source_volumes<sp/>=<sp/>esel_p</highlight></codeline>
+<codeline lineno="122"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.Select(n<sp/>=&gt;<sp/>GetEdgeLength(imn,<sp/>n)).Distinct()</highlight></codeline>
+<codeline lineno="123"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.ToList();</highlight></codeline>
+<codeline lineno="124"><highlight class="normal"></highlight></codeline>
+<codeline lineno="125"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}<sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/>{<sp/></highlight><highlight class="comment">//TODO<sp/>read<sp/>Modifiers</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="126"><highlight class="normal"></highlight></codeline>
+<codeline lineno="127"><highlight class="normal"></highlight></codeline>
+<codeline lineno="128"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="129"><highlight class="normal"></highlight></codeline>
+<codeline lineno="130"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Max.Log(</highlight><highlight class="stringliteral">&quot;\t({0})<sp/>Volumes:{1}&quot;</highlight><highlight class="normal">,<sp/>source_volumes.Count,<sp/>String.Join(</highlight><highlight class="stringliteral">&quot;\n\t\t&quot;</highlight><highlight class="normal">,<sp/>source_volumes));</highlight></codeline>
+<codeline lineno="131"><highlight class="normal"></highlight></codeline>
+<codeline lineno="132"><highlight class="normal"></highlight></codeline>
+<codeline lineno="133"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*IEnumerable&lt;Node&gt;<sp/>allEdges<sp/>=<sp/>GetAllEdges();</highlight></codeline>
+<codeline lineno="134"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Max.Log(&quot;\tAll<sp/>nodes:{0}&quot;,<sp/>allNodes.Count());</highlight></codeline>
+<codeline lineno="135"><highlight class="comment"></highlight></codeline>
+<codeline lineno="136"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>//get<sp/>geometry<sp/>objects<sp/>with<sp/>similar<sp/>volume</highlight></codeline>
+<codeline lineno="137"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>List&lt;Node&gt;<sp/>matchVolumeNodes<sp/>=<sp/>allNodes</highlight></codeline>
+<codeline lineno="138"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.Where(n<sp/>=&gt;</highlight></codeline>
+<codeline lineno="139"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>n.IsSuperClassOf(SuperClassID.GeometricObject)<sp/>&amp;&amp;<sp/>//get<sp/>all<sp/>geometry<sp/>objects</highlight></codeline>
+<codeline lineno="140"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>!n.IsClassOf(ClassID.TargetObject)<sp/>&amp;&amp;<sp/>//exclude<sp/>any<sp/>light<sp/>Target</highlight></codeline>
+<codeline lineno="141"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>volumes.IndexOf(n.Object.GetVolume())<sp/>!=<sp/>-1</highlight></codeline>
+<codeline lineno="142"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>)</highlight></codeline>
+<codeline lineno="143"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.Select(n<sp/>=&gt;<sp/>n)</highlight></codeline>
+<codeline lineno="144"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.ToList();</highlight></codeline>
+<codeline lineno="145"><highlight class="comment"></highlight></codeline>
+<codeline lineno="146"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Max.Log(&quot;\tobjects<sp/>count:{0}&quot;,<sp/>matchVolumeNodes.Count());</highlight></codeline>
+<codeline lineno="147"><highlight class="comment"></highlight></codeline>
+<codeline lineno="148"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>//execute<sp/>action<sp/>with<sp/>undo<sp/>enabled</highlight></codeline>
+<codeline lineno="149"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Kernel._TheHold.Begin();</highlight></codeline>
+<codeline lineno="150"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SelectNodes(matchVolumeNodes,<sp/>true);</highlight></codeline>
+<codeline lineno="151"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Kernel._TheHold.Accept(&quot;Select<sp/>Simillar&quot;);</highlight></codeline>
+<codeline lineno="152"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Kernel._TheHold.End();*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="153"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="154"><highlight class="normal"></highlight></codeline>
+<codeline lineno="155"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="156"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="157"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="158"><highlight class="normal"></highlight></codeline>
+<codeline lineno="159"><highlight class="normal"></highlight></codeline>
+<codeline lineno="160"><highlight class="normal"></highlight><highlight class="comment">/*//https://forums.cgsociety.org/t/get-uv-faces-area/2058271/5</highlight></codeline>
+<codeline lineno="161"><highlight class="comment">//not<sp/>good<sp/>to<sp/>pick<sp/>up<sp/>all<sp/>data<sp/>for<sp/>calculating<sp/>area<sp/>of<sp/>one<sp/>face</highlight></codeline>
+<codeline lineno="162"><highlight class="comment">//TODO<sp/>take<sp/>area<sp/>from<sp/>vertices</highlight></codeline>
+<codeline lineno="163"><highlight class="comment">public<sp/>static<sp/>double<sp/>GetFaceArea(IMNMesh<sp/>m,<sp/>int<sp/>fi)<sp/>{<sp/>//TODO<sp/>-not<sp/>tested<sp/>-not<sp/>used</highlight></codeline>
+<codeline lineno="164"><highlight class="comment"></highlight></codeline>
+<codeline lineno="165"><highlight class="comment"><sp/><sp/><sp/><sp/>Max.Log(&quot;\tSelected<sp/>polygon<sp/>index:{0}<sp/>total:{1}&quot;,<sp/>fi<sp/>+<sp/>1,<sp/>m.FNum);<sp/>//+1<sp/>Max<sp/>count</highlight></codeline>
+<codeline lineno="166"><highlight class="comment"><sp/><sp/><sp/><sp/>return<sp/>new<sp/>Poly(m).Area(fi);<sp/>//Poly<sp/>object<sp/>will<sp/>be<sp/>filled<sp/>with<sp/>All<sp/>face<sp/>indexes<sp/>and<sp/>vertices<sp/>positions</highlight></codeline>
+<codeline lineno="167"><highlight class="comment"></highlight></codeline>
+<codeline lineno="168"><highlight class="comment"><sp/><sp/><sp/><sp/>IMNFace<sp/>f<sp/>=<sp/>m.F(fi);</highlight></codeline>
+<codeline lineno="169"><highlight class="comment"></highlight></codeline>
+<codeline lineno="170"><highlight class="comment"><sp/><sp/><sp/><sp/>Max.Log(&quot;face<sp/>verts:{0}<sp/>count:{1}&quot;,<sp/>f.Vtx,<sp/>f.Vtx.Count);</highlight></codeline>
+<codeline lineno="171"><highlight class="comment"></highlight></codeline>
+<codeline lineno="172"><highlight class="comment"><sp/><sp/><sp/><sp/>ITab&lt;int&gt;<sp/>triangles<sp/>=<sp/>Kernel._Global.Tab.Create&lt;int&gt;();</highlight></codeline>
+<codeline lineno="173"><highlight class="comment"><sp/><sp/><sp/><sp/>f.GetTriangles(triangles);<sp/>//<sp/>get<sp/>the<sp/>tri<sp/>(as<sp/>indices<sp/>of<sp/>the<sp/>face<sp/>vert<sp/>array)</highlight></codeline>
+<codeline lineno="174"><highlight class="comment"><sp/><sp/><sp/><sp/>int<sp/>numtriangles<sp/>=<sp/>f.Deg<sp/>-<sp/>2;</highlight></codeline>
+<codeline lineno="175"><highlight class="comment"><sp/><sp/><sp/><sp/>for<sp/>(<sp/>int<sp/>t<sp/>=<sp/>0;<sp/>t<sp/>&lt;<sp/>numtriangles;<sp/>++t<sp/>)<sp/>{</highlight></codeline>
+<codeline lineno="176"><highlight class="comment"></highlight></codeline>
+<codeline lineno="177"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>int<sp/>i<sp/>=<sp/>t<sp/>*<sp/>3;</highlight></codeline>
+<codeline lineno="178"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>int<sp/>v1<sp/>=<sp/>triangles[i];</highlight></codeline>
+<codeline lineno="179"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>int<sp/>v2<sp/>=<sp/>triangles[i<sp/>+<sp/>1];</highlight></codeline>
+<codeline lineno="180"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>int<sp/>v3<sp/>=<sp/>triangles[i<sp/>+<sp/>2];</highlight></codeline>
+<codeline lineno="181"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Max.Log(&quot;\t\tFace:{0}<sp/>v1:{1}<sp/>v1:{2}<sp/>v1:{3}&quot;,<sp/>i,<sp/>v1,<sp/><sp/>v2,<sp/>v3);</highlight></codeline>
+<codeline lineno="182"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>//AreaOfTriangle</highlight></codeline>
+<codeline lineno="183"><highlight class="comment"><sp/><sp/><sp/><sp/>}*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="184"><highlight class="normal"></highlight></codeline>
+<codeline lineno="185"><highlight class="normal"></highlight></codeline>
+<codeline lineno="186"><highlight class="normal"></highlight><highlight class="comment">/*Max.Log(&quot;first<sp/>vert:{0}&quot;,<sp/>triangles[0]);</highlight></codeline>
+<codeline lineno="187"><highlight class="comment"></highlight></codeline>
+<codeline lineno="188"><highlight class="comment">Max.Log(&quot;\tPolygon<sp/>vers:{0}<sp/>total<sp/>triangles:{1}&quot;,<sp/>triangles.Count,<sp/>m.TriNum);</highlight></codeline>
+<codeline lineno="189"><highlight class="comment"></highlight></codeline>
+<codeline lineno="190"><highlight class="comment">IMesh<sp/>imesh<sp/>=<sp/>Kernel._Global.Mesh.Create();</highlight></codeline>
+<codeline lineno="191"><highlight class="comment">m.OutToTri(imesh);</highlight></codeline>
+<codeline lineno="192"><highlight class="comment">for<sp/>(int<sp/>i<sp/>=<sp/>0;<sp/>i<sp/>&lt;<sp/>triangles.Count;<sp/>i++<sp/>)<sp/>{</highlight></codeline>
+<codeline lineno="193"><highlight class="comment"></highlight></codeline>
+<codeline lineno="194"><highlight class="comment"><sp/><sp/><sp/><sp/>//imesh.Faces[i]</highlight></codeline>
+<codeline lineno="195"><highlight class="comment"><sp/><sp/><sp/><sp/>//<sp/>v2:{2}<sp/>v3:{3}</highlight></codeline>
+<codeline lineno="196"><highlight class="comment"><sp/><sp/><sp/><sp/>//ITab<sp/>tab<sp/>=<sp/>tris[i];</highlight></codeline>
+<codeline lineno="197"><highlight class="comment"><sp/><sp/><sp/><sp/>Max.Log(&quot;\t\ti:{0}<sp/>tris:{1}&quot;,<sp/>i+1,<sp/>triangles[i]);</highlight></codeline>
+<codeline lineno="198"><highlight class="comment">}</highlight></codeline>
+<codeline lineno="199"><highlight class="comment">//return<sp/>0.0;</highlight></codeline>
+<codeline lineno="200"><highlight class="comment">}*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="201"><highlight class="normal"></highlight></codeline>
+<codeline lineno="202"><highlight class="normal"></highlight></codeline>
+<codeline lineno="203"><highlight class="normal"></highlight><highlight class="comment">/*double<sp/>sum<sp/>=<sp/>0.0;</highlight></codeline>
+<codeline lineno="204"><highlight class="comment">m.faces.ForEach(f<sp/>=&gt;<sp/>sum<sp/>+=<sp/>GetFaceArea(m,<sp/>f));</highlight></codeline>
+<codeline lineno="205"><highlight class="comment">return<sp/>sum;*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="206"><highlight class="normal"></highlight><highlight class="comment">/*</highlight></codeline>
+<codeline lineno="207"><highlight class="comment">We<sp/>can<sp/>grab<sp/>the<sp/>faces<sp/>as<sp/>a<sp/>List<sp/>and<sp/>iterate<sp/>them<sp/>in<sp/>.NET<sp/>API.</highlight></codeline>
+<codeline lineno="208"><highlight class="comment">IMesh<sp/>mesh<sp/>=<sp/>triOriginal.Mesh;</highlight></codeline>
+<codeline lineno="209"><highlight class="comment">IList&lt;IFace&gt;<sp/>faces<sp/>=<sp/>triOriginal.Mesh.Faces;</highlight></codeline>
+<codeline lineno="210"><highlight class="comment">Get<sp/>the<sp/>vertex<sp/>from<sp/>the<sp/>original<sp/>object&apos;s<sp/>face<sp/>we<sp/>are<sp/>processing</highlight></codeline>
+<codeline lineno="211"><highlight class="comment">IPoint3<sp/>point<sp/>=<sp/>triOriginal.Mesh.GetVert((<sp/>int<sp/>)face.GetVert(i));</highlight></codeline>
+<codeline lineno="212"><highlight class="comment">IMNFace<sp/>f<sp/>=<sp/>polyObj.Mesh.F(i);</highlight></codeline>
+<codeline lineno="213"><highlight class="comment">IMNVert<sp/>vert<sp/>=<sp/>polyObj.Mesh.V(nvindex);</highlight></codeline>
+<codeline lineno="214"><highlight class="comment">IMNEdge<sp/>edge<sp/>=<sp/>polyNewFace.Mesh.E(nedge);</highlight></codeline>
+<codeline lineno="215"><highlight class="comment"></highlight></codeline>
+<codeline lineno="216"><highlight class="comment"></highlight></codeline>
+<codeline lineno="217"><highlight class="comment"><sp/>*<sp/></highlight></codeline>
+<codeline lineno="218"><highlight class="comment"><sp/>*<sp/>public<sp/>static<sp/>List&lt;int&gt;<sp/>convertMeshFaceToPolyFace(Mesh<sp/>m,<sp/>Poly<sp/>p,<sp/>int<sp/>f)<sp/>{</highlight></codeline>
+<codeline lineno="219"><highlight class="comment"></highlight></codeline>
+<codeline lineno="220"><highlight class="comment"><sp/><sp/><sp/><sp/>List&lt;int&gt;<sp/>verts<sp/>=<sp/>(<sp/>meshop.getVertsUsingFace<sp/>m<sp/>f)<sp/>as<sp/>array;</highlight></codeline>
+<codeline lineno="221"><highlight class="comment"><sp/><sp/><sp/><sp/>List&lt;int&gt;<sp/>facesPerVert<sp/>=<sp/>new<sp/>List&lt;int&gt;()<sp/>{<sp/>};</highlight></codeline>
+<codeline lineno="222"><highlight class="comment"><sp/><sp/><sp/><sp/>foreach<sp/>(<sp/>int<sp/>v<sp/>in<sp/>verts<sp/>)<sp/>{</highlight></codeline>
+<codeline lineno="223"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>local<sp/>faces<sp/>=<sp/>polyop.getFacesUsingVert<sp/>p<sp/>v;</highlight></codeline>
+<codeline lineno="224"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>facesPerVert.Add(faces);</highlight></codeline>
+<codeline lineno="225"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="226"><highlight class="comment"><sp/><sp/><sp/><sp/>local<sp/>deltaFaces<sp/>=<sp/>facesPerVert[1];</highlight></codeline>
+<codeline lineno="227"><highlight class="comment"><sp/><sp/><sp/><sp/>for<sp/>i<sp/>=<sp/>2<sp/>to<sp/>facesPerVert.count<sp/>do<sp/>deltaFaces<sp/>=<sp/>deltaFaces<sp/>*<sp/>facesPerVert[i];</highlight></codeline>
+<codeline lineno="228"><highlight class="comment"><sp/><sp/><sp/><sp/>return<sp/>(<sp/>deltaFaces<sp/>as<sp/>array<sp/>)[1];</highlight></codeline>
+<codeline lineno="229"><highlight class="comment">}*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="230"><highlight class="normal"></highlight><highlight class="comment">/*</highlight></codeline>
+<codeline lineno="231"><highlight class="comment">mxssetedgevisflags<sp/>msh<sp/>fi<sp/>#{1,3};</highlight></codeline>
+<codeline lineno="232"><highlight class="comment"><sp/>fn<sp/>mxssetedgevisflags<sp/>m<sp/>face<sp/>flags<sp/>=</highlight></codeline>
+<codeline lineno="233"><highlight class="comment"><sp/>(<sp/><sp/></highlight></codeline>
+<codeline lineno="234"><highlight class="comment"><sp/><sp/><sp/><sp/>setEdgeVis<sp/>m<sp/><sp/>face<sp/>1<sp/>flags[1];</highlight></codeline>
+<codeline lineno="235"><highlight class="comment"><sp/><sp/><sp/><sp/>setEdgeVis<sp/>m<sp/><sp/>face<sp/>2<sp/>flags[2];</highlight></codeline>
+<codeline lineno="236"><highlight class="comment"><sp/><sp/><sp/><sp/>setEdgeVis<sp/>m<sp/><sp/>face<sp/>3<sp/>flags[3];</highlight></codeline>
+<codeline lineno="237"><highlight class="comment"><sp/>)<sp/></highlight></codeline>
+<codeline lineno="238"><highlight class="comment"><sp/>*<sp/></highlight></codeline>
+<codeline lineno="239"><highlight class="comment">mesh.faces[fi].setEdgeVisFlags(1,0,1);</highlight></codeline>
+<codeline lineno="240"><highlight class="comment"><sp/>*<sp/></highlight></codeline>
+<codeline lineno="241"><highlight class="comment"><sp/>*<sp/></highlight></codeline>
+<codeline lineno="242"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>public<sp/>IMesh<sp/>DeleteVertices(IMesh<sp/>mesh,<sp/>IImmutableList&lt;int&gt;<sp/>indices_to_remove)</highlight></codeline>
+<codeline lineno="243"><highlight class="comment"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="244"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>var<sp/>indices_to_remove_set<sp/>=<sp/>new<sp/>HashSet&lt;int&gt;(indices_to_remove);</highlight></codeline>
+<codeline lineno="245"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>var<sp/>new_vertices<sp/>=<sp/>new<sp/>List&lt;Vector&gt;();</highlight></codeline>
+<codeline lineno="246"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>var<sp/>map<sp/>=<sp/>new<sp/>int[mesh.Vertices.Count];</highlight></codeline>
+<codeline lineno="247"><highlight class="comment"></highlight></codeline>
+<codeline lineno="248"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>for<sp/>(var<sp/>i<sp/>=<sp/>0;<sp/>i<sp/>&lt;<sp/>mesh.Vertices.Count;<sp/>i++)</highlight></codeline>
+<codeline lineno="249"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="250"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>if<sp/>(indices_to_remove_set.Contains(i))</highlight></codeline>
+<codeline lineno="251"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="252"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>map[i]<sp/>=<sp/>-1;</highlight></codeline>
+<codeline lineno="253"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="254"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>else</highlight></codeline>
+<codeline lineno="255"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="256"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>new_vertices.Add(mesh.Vertices[i]);</highlight></codeline>
+<codeline lineno="257"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>map[i]<sp/>=<sp/>new_vertices.Count<sp/>-<sp/>1;</highlight></codeline>
+<codeline lineno="258"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="259"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="260"><highlight class="comment"></highlight></codeline>
+<codeline lineno="261"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>var<sp/>new_triangle_list<sp/>=<sp/>from<sp/>triangle<sp/>in<sp/>mesh.Triangles</highlight></codeline>
+<codeline lineno="262"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>where<sp/>map[triangle.A]<sp/>!=<sp/>-1<sp/>&amp;&amp;</highlight></codeline>
+<codeline lineno="263"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>map[triangle.B]<sp/>!=<sp/>-1<sp/>&amp;&amp;</highlight></codeline>
+<codeline lineno="264"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>map[triangle.C]<sp/>!=<sp/>-1</highlight></codeline>
+<codeline lineno="265"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>select<sp/>new<sp/>IndexTriangle(</highlight></codeline>
+<codeline lineno="266"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>map[triangle.A],</highlight></codeline>
+<codeline lineno="267"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>map[triangle.B],</highlight></codeline>
+<codeline lineno="268"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>map[triangle.C]);</highlight></codeline>
+<codeline lineno="269"><highlight class="comment"></highlight></codeline>
+<codeline lineno="270"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>//build<sp/>new<sp/>mesh...</highlight></codeline>
+<codeline lineno="271"><highlight class="comment"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="272"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+    </programlisting>
+    <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/GeoOps.cs"/>
+  </compounddef>
+</doxygen>

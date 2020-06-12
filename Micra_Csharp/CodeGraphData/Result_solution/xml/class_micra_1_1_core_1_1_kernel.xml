@@ -1,0 +1,901 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
+  <compounddef id="class_micra_1_1_core_1_1_kernel" kind="class" prot="public">
+    <compoundname>Micra::Core::Kernel</compoundname>
+      <sectiondef kind="public-static-attrib">
+      <memberdef kind="variable" id="class_micra_1_1_core_1_1_kernel_1a44336d52e2c059cad784908c16c9b258" prot="public" static="yes" mutable="no">
+        <type>IGlobal</type>
+        <definition>IGlobal Micra.Core.Kernel._Global</definition>
+        <argsstring></argsstring>
+        <name>_Global</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Kernel.cs" line="45" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Kernel.cs" bodystart="45" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_micra_1_1_core_1_1_kernel_1a689788c4b3949c1c3a72d9333bd9eabf" prot="public" static="yes" mutable="no">
+        <type>IInterface14</type>
+        <definition>IInterface14 Micra.Core.Kernel._Interface</definition>
+        <argsstring></argsstring>
+        <name>_Interface</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Kernel.cs" line="46" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Kernel.cs" bodystart="46" bodyend="-1"/>
+        <referencedby refid="class_micra_1_1_core_1_1_node_1a64904b635937636dc286a6949432b2ac" compoundref="_node_8cs" startline="192" endline="196">Micra.Core.Node.AddNewNode</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="class_micra_1_1_core_1_1_kernel_1a3a29ca47a54f4b38b7390b015f0a55f6" prot="public" static="yes" mutable="no">
+        <type>IIInstanceMgr</type>
+        <definition>IIInstanceMgr Micra.Core.Kernel._InstanceMgr</definition>
+        <argsstring></argsstring>
+        <name>_InstanceMgr</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Kernel.cs" line="47" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Kernel.cs" bodystart="47" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_micra_1_1_core_1_1_kernel_1a72919fd50836ee5cb1de3909b5619e72" prot="public" static="yes" mutable="no">
+        <type>IIFPLayerManager</type>
+        <definition>IIFPLayerManager Micra.Core.Kernel._IIFPLayerManager</definition>
+        <argsstring></argsstring>
+        <name>_IIFPLayerManager</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Kernel.cs" line="48" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Kernel.cs" bodystart="48" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_micra_1_1_core_1_1_kernel_1a6a0511273d65fcd5a50ce447938238a3" prot="public" static="yes" mutable="no">
+        <type>IInterface_ID</type>
+        <definition>IInterface_ID Micra.Core.Kernel._NodeLayerProperties</definition>
+        <argsstring></argsstring>
+        <name>_NodeLayerProperties</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Kernel.cs" line="49" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Kernel.cs" bodystart="49" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_micra_1_1_core_1_1_kernel_1a6400a41f916aea1d797fd9c0ff637179" prot="public" static="yes" mutable="no">
+        <type>IInterface_ID</type>
+        <definition>IInterface_ID Micra.Core.Kernel._EditablePoly</definition>
+        <argsstring></argsstring>
+        <name>_EditablePoly</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Kernel.cs" line="50" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Kernel.cs" bodystart="50" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_micra_1_1_core_1_1_kernel_1a83d7a8f7c9e3704fe803bc3384cf3b3e" prot="public" static="yes" mutable="no">
+        <type>IMeshSelection</type>
+        <definition>IMeshSelection Micra.Core.Kernel._IMeshSelection</definition>
+        <argsstring></argsstring>
+        <name>_IMeshSelection</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Kernel.cs" line="51" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Kernel.cs" bodystart="51" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_micra_1_1_core_1_1_kernel_1a9f184d007237f638d6a50623629aa50f" prot="public" static="yes" mutable="no">
+        <type>IHold</type>
+        <definition>IHold Micra.Core.Kernel._TheHold</definition>
+        <argsstring></argsstring>
+        <name>_TheHold</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Kernel.cs" line="52" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Kernel.cs" bodystart="52" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_micra_1_1_core_1_1_kernel_1a1be79d7fd2cc6f6af3439d70667f89d1" prot="public" static="yes" mutable="no">
+        <type>Dispatcher</type>
+        <definition>Dispatcher Micra.Core.Kernel.dispatcher</definition>
+        <argsstring></argsstring>
+        <name>dispatcher</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Kernel.cs" line="57" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Kernel.cs" bodystart="57" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="package-static-attrib">
+      <memberdef kind="variable" id="class_micra_1_1_core_1_1_kernel_1a2ab8be1363ad4b9bd541f484eeb9fe9c" prot="package" static="yes" mutable="no">
+        <type>List&lt; <ref refid="class_micra_1_1_core_1_1_reference_listener" kindref="compound">ReferenceListener</ref> &gt;</type>
+        <definition>List&lt;ReferenceListener&gt; Micra.Core.Kernel.listeners</definition>
+        <argsstring></argsstring>
+        <name>listeners</name>
+        <initializer>= new List&lt;<ref refid="class_micra_1_1_core_1_1_reference_listener" kindref="compound">ReferenceListener</ref>&gt;()</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Kernel.cs" line="53" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Kernel.cs" bodystart="53" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_micra_1_1_core_1_1_kernel_1a70bef5349ab3e3f641a334a107175167" prot="package" static="yes" mutable="no">
+        <type><ref refid="class_micra_1_1_core_1_1_scene" kindref="compound">Scene</ref></type>
+        <definition>Scene Micra.Core.Kernel.scene</definition>
+        <argsstring></argsstring>
+        <name>scene</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Kernel.cs" line="54" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Kernel.cs" bodystart="54" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="property">
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_kernel_1ae0574b81abb5dcd0c5d8069dc716bf33" prot="public" static="yes" readable="no" writable="no" gettable="yes" settable="no">
+        <type>IITimeSlider</type>
+        <definition>IITimeSlider Micra.Core.Kernel._TimeSlider</definition>
+        <argsstring></argsstring>
+        <name>_TimeSlider</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Kernel.cs" line="88" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Kernel.cs" bodystart="88" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_kernel_1a208bd59a5f60049ec4b0d6a3f31d1fda" prot="public" static="yes" readable="no" writable="no" gettable="yes" settable="no">
+        <type>IIStatusPanel</type>
+        <definition>IIStatusPanel Micra.Core.Kernel._StatusPanel</definition>
+        <argsstring></argsstring>
+        <name>_StatusPanel</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Kernel.cs" line="94" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Kernel.cs" bodystart="94" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_kernel_1a1cc58fd9cf4893f0b8e77ade462884a3" prot="public" static="yes" readable="no" writable="no" gettable="yes" settable="no">
+        <type><ref refid="class_micra_1_1_core_1_1_scene" kindref="compound">Scene</ref></type>
+        <definition>Scene Micra.Core.Kernel.Scene</definition>
+        <argsstring></argsstring>
+        <name>Scene</name>
+        <briefdescription>
+<para>Returns a scene object. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Kernel.cs" line="138" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Kernel.cs" bodystart="138" bodyend="-1"/>
+        <referencedby refid="class_micra_1_1_tools_1_1_csharp_to_max_test_1a7a13262b911b15a22f5f4493262df12d" compoundref="_csharp_to_max_test_8cs" startline="93" endline="97">Micra.Tools.CsharpToMaxTest.Button9_Click</referencedby>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_kernel_1a69390eb10a4e222d27395138c67796aa" prot="public" static="yes" readable="no" writable="no" gettable="yes" settable="no">
+        <type><ref refid="struct_micra_1_1_core_1_1_time_value" kindref="compound">TimeValue</ref></type>
+        <definition>TimeValue Micra.Core.Kernel.Now</definition>
+        <argsstring></argsstring>
+        <name>Now</name>
+        <briefdescription>
+<para>Returns the current animation time. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Kernel.cs" line="143" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Kernel.cs" bodystart="143" bodyend="-1"/>
+        <referencedby refid="class_micra_1_1_core_1_1_node_1a01775d268422dc56ec959e0e624284e4" compoundref="_node_8cs" startline="174" endline="176">Micra.Core.Node.Detach</referencedby>
+        <referencedby refid="class_micra_1_1_core_1_1_node_1a50f8f0cf98127830d272769964fe3166" compoundref="_node_8cs" startline="110" endline="110">Micra.Core.Node.FlagForeground</referencedby>
+        <referencedby refid="class_micra_1_1_core_1_1_scene_1a83b21147926c4146616eeb27b470ea24" compoundref="_scene_8cs" startline="33" endline="33">Micra.Core.Scene.FlagForegroundAnimatedNodes</referencedby>
+        <referencedby refid="class_micra_1_1_core_1_1_scene_1a2370470ced9a575ba59b300068eb7933" compoundref="_scene_8cs" startline="31" endline="31">Micra.Core.Scene.FlagForegroundSelectedNodes</referencedby>
+        <referencedby refid="struct_micra_1_1_core_1_1_parameter2_1abf596de2828a1f19d27896236682fb95" compoundref="_parameter_block2_8cs" startline="113" endline="116">Micra.Core.Parameter2.GetTableValues</referencedby>
+        <referencedby refid="class_micra_1_1_core_1_1_i_parameter_block_extensions_1a9a1ec6b673042ca2519fc53d36f6a785" compoundref="_parameter_block_interface_8cs" startline="20" endline="23">Micra.Core.IParameterBlockExtensions.GetValues</referencedby>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_kernel_1a56f028e6cbd98af2f53f1e17b3f9c781" prot="public" static="yes" readable="no" writable="no" gettable="yes" settable="no">
+        <type>IEnumerable&lt; <ref refid="class_micra_1_1_core_1_1_animatable" kindref="compound">Animatable</ref> &gt;</type>
+        <definition>IEnumerable&lt;Animatable&gt; Micra.Core.Kernel.Animatables</definition>
+        <argsstring></argsstring>
+        <name>Animatables</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Kernel.cs" line="148" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Kernel.cs" bodystart="148" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_kernel_1a3c794ac55d3564a83d1e0510d64ace2c" prot="public" static="yes" readable="no" writable="no" gettable="yes" settable="no">
+        <type>bool</type>
+        <definition>bool Micra.Core.Kernel.Initialized</definition>
+        <argsstring></argsstring>
+        <name>Initialized</name>
+        <briefdescription>
+<para>Indicates whether the kernel is initialized. Primarily a debugging tool. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Kernel.cs" line="159" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Kernel.cs" bodystart="159" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_kernel_1ae41d3015124ed3c7c484bafcc75cd42e" prot="public" static="yes" readable="no" writable="no" gettable="yes" settable="yes">
+        <type>bool</type>
+        <definition>bool Micra.Core.Kernel.TimeSliderVisibility</definition>
+        <argsstring></argsstring>
+        <name>TimeSliderVisibility</name>
+        <briefdescription>
+<para>Time slider visibility. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Kernel.cs" line="244" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Kernel.cs" bodystart="244" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_kernel_1a1152d645d2b922523816dd08d7329b33" prot="public" static="yes" readable="no" writable="no" gettable="yes" settable="yes">
+        <type>bool</type>
+        <definition>bool Micra.Core.Kernel.StatusPanelVisibility</definition>
+        <argsstring></argsstring>
+        <name>StatusPanelVisibility</name>
+        <briefdescription>
+<para>Status panel visibility. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Kernel.cs" line="257" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Kernel.cs" bodystart="257" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-func">
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_kernel_1a3f845de743d970fa60b4977122d55c2f" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>delegate void</type>
+        <definition>delegate void Micra.Core.Kernel.TimerProc</definition>
+        <argsstring>(IntPtr hWnd, uint nMsg, int nIDEvent, int dwTime)</argsstring>
+        <name>TimerProc</name>
+        <param>
+          <type>IntPtr</type>
+          <declname>hWnd</declname>
+        </param>
+        <param>
+          <type>uint</type>
+          <declname>nMsg</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>nIDEvent</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>dwTime</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Kernel.cs" line="44" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_kernel_1a319fa6da57a44a680165b6ee8aada1bd" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>static int Micra.Core.Kernel.SetTimer</definition>
+        <argsstring>(IntPtr hwnd, int nIDEvent, int uElapse, TimerProc CB)</argsstring>
+        <name>SetTimer</name>
+        <param>
+          <type>IntPtr</type>
+          <declname>hwnd</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>nIDEvent</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>uElapse</declname>
+        </param>
+        <param>
+          <type><ref refid="class_micra_1_1_core_1_1_kernel_1a3f845de743d970fa60b4977122d55c2f" kindref="member">TimerProc</ref></type>
+          <declname>CB</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Kernel.cs" line="284" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_kernel_1a477ee7c226ba081e310cbb01754053dc" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>static int Micra.Core.Kernel.KillTimer</definition>
+        <argsstring>(IntPtr hwnd, int nIDEvent)</argsstring>
+        <name>KillTimer</name>
+        <param>
+          <type>IntPtr</type>
+          <declname>hwnd</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>nIDEvent</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Kernel.cs" line="286" column="1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-static-func">
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_kernel_1a76a41a117aaf1d65d5a76933921e0e28" prot="private" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>static</type>
+        <definition>static Micra.Core.Kernel.Kernel</definition>
+        <argsstring>()</argsstring>
+        <name>Kernel</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Kernel.cs" line="59" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Kernel.cs" bodystart="59" bodyend="86"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_kernel_1afd4d4d05bdf8dd685668a0e1cbd50ecc" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>static void Micra.Core.Kernel.ExecuteMaxScriptFile</definition>
+        <argsstring>(string filename)</argsstring>
+        <name>ExecuteMaxScriptFile</name>
+        <param>
+          <type>string</type>
+          <declname>filename</declname>
+        </param>
+        <briefdescription>
+<para>Runs a MAXScript file. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>filename</parametername>
+</parameternamelist>
+<parameterdescription>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Kernel.cs" line="104" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Kernel.cs" bodystart="104" bodyend="106"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_kernel_1a3d839b4eaf42771c6db7cf65de9ecd29" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>static void Micra.Core.Kernel.ExecuteMaxScriptFile</definition>
+        <argsstring>(string filename, bool quieterrors)</argsstring>
+        <name>ExecuteMaxScriptFile</name>
+        <param>
+          <type>string</type>
+          <declname>filename</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>quieterrors</declname>
+        </param>
+        <briefdescription>
+<para>Runs a MAXScript file. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>filename</parametername>
+</parameternamelist>
+<parameterdescription>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>quieterrors</parametername>
+</parameternamelist>
+<parameterdescription>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Kernel.cs" line="113" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Kernel.cs" bodystart="113" bodyend="116"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_kernel_1ab62bc97a72a05b770c9ef83669de43d4" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>static void Micra.Core.Kernel.ExecuteMaxScriptScript</definition>
+        <argsstring>(string text)</argsstring>
+        <name>ExecuteMaxScriptScript</name>
+        <param>
+          <type>string</type>
+          <declname>text</declname>
+        </param>
+        <briefdescription>
+<para>Evaluates a MAXScript string </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>text</parametername>
+</parameternamelist>
+<parameterdescription>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Kernel.cs" line="122" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Kernel.cs" bodystart="122" bodyend="124"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_kernel_1a6a7d9ac25e063bfec8f98a6f86bd5d5c" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>static void Micra.Core.Kernel.ExecuteMaxScriptScript</definition>
+        <argsstring>(string text, bool quieterrors)</argsstring>
+        <name>ExecuteMaxScriptScript</name>
+        <param>
+          <type>string</type>
+          <declname>text</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>quieterrors</declname>
+        </param>
+        <briefdescription>
+<para>Evaluates a MAXScript string </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>text</parametername>
+</parameternamelist>
+<parameterdescription>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>quieterrors</parametername>
+</parameternamelist>
+<parameterdescription>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Kernel.cs" line="131" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Kernel.cs" bodystart="131" bodyend="133"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_kernel_1a9932478038f0785df945a6122d5cea42" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>static void Micra.Core.Kernel.RedrawViews</definition>
+        <argsstring>(TimeValue t)</argsstring>
+        <name>RedrawViews</name>
+        <param>
+          <type><ref refid="struct_micra_1_1_core_1_1_time_value" kindref="compound">TimeValue</ref></type>
+          <declname>t</declname>
+        </param>
+        <briefdescription>
+<para>Forces all views to redraw at time T. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Kernel.cs" line="164" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Kernel.cs" bodystart="164" bodyend="166"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_kernel_1a7240ce17efe2eb86aadbb5c033b51f9a" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>static void Micra.Core.Kernel.RedrawViews</definition>
+        <argsstring>()</argsstring>
+        <name>RedrawViews</name>
+        <briefdescription>
+<para>Forces all views to redraw. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Kernel.cs" line="171" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Kernel.cs" bodystart="171" bodyend="173"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_kernel_1ab16be5af62dc039328b555835717b367" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>int</type>
+        <definition>static int Micra.Core.Kernel.StartTimer</definition>
+        <argsstring>(int msecInterval, Action&lt; int &gt; callback)</argsstring>
+        <name>StartTimer</name>
+        <param>
+          <type>int</type>
+          <declname>msecInterval</declname>
+        </param>
+        <param>
+          <type>Action&lt; int &gt;</type>
+          <declname>callback</declname>
+        </param>
+        <briefdescription>
+<para>Starts a timer that is called on a regular interval. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>msecInterval</parametername>
+</parameternamelist>
+<parameterdescription>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>callback</parametername>
+</parameternamelist>
+<parameterdescription>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>An integer ID of the timer.</para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Kernel.cs" line="181" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Kernel.cs" bodystart="181" bodyend="184"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_kernel_1ae9b5ec15e4de9b3f2040d12aa8c1e3ad" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>static void Micra.Core.Kernel.CancelTimer</definition>
+        <argsstring>(int nTimer)</argsstring>
+        <name>CancelTimer</name>
+        <param>
+          <type>int</type>
+          <declname>nTimer</declname>
+        </param>
+        <briefdescription>
+<para>Cancels the identified timer. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>nTimer</parametername>
+</parameternamelist>
+<parameterdescription>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Kernel.cs" line="190" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Kernel.cs" bodystart="190" bodyend="192"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_kernel_1a3e43f4b45e4b90758f66b481ceb6a494" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>static void Micra.Core.Kernel.PushPrompt</definition>
+        <argsstring>(string s)</argsstring>
+        <name>PushPrompt</name>
+        <param>
+          <type>string</type>
+          <declname>s</declname>
+        </param>
+        <briefdescription>
+<para>Add a string as a new line to the prompt. This is a convenient way to write messages back to the user. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>s</parametername>
+</parameternamelist>
+<parameterdescription>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Kernel.cs" line="198" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Kernel.cs" bodystart="198" bodyend="200"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_kernel_1a3750dce995b0d382cc405ea627cf294e" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>static void Micra.Core.Kernel.WriteLine</definition>
+        <argsstring>(string s)</argsstring>
+        <name>WriteLine</name>
+        <param>
+          <type>string</type>
+          <declname>s</declname>
+        </param>
+        <briefdescription>
+<para>Outputs a string the MAXScript listener with a newline appended </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>s</parametername>
+</parameternamelist>
+<parameterdescription>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Kernel.cs" line="206" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Kernel.cs" bodystart="206" bodyend="208"/>
+        <referencedby refid="class_micra_1_1_tools_1_1_csharp_to_max_test_1a9e928296709b7c5efea1f0b2a4aa7af2" compoundref="_csharp_to_max_test_8cs" startline="230" endline="248">Micra.Tools.CsharpToMaxTest.BtnGetSceneObjects_Click</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_kernel_1a6049ba4afc168daaeb577c3e6d232f42" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>static void Micra.Core.Kernel.WriteLine</definition>
+        <argsstring>(string s, params Object[] args)</argsstring>
+        <name>WriteLine</name>
+        <param>
+          <type>string</type>
+          <declname>s</declname>
+        </param>
+        <param>
+          <type>params Object[]</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Kernel.cs" line="210" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Kernel.cs" bodystart="210" bodyend="212"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_kernel_1ad82bfb5543ff575640b68600565631fe" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>static void Micra.Core.Kernel.Write</definition>
+        <argsstring>(string s, params Object[] args)</argsstring>
+        <name>Write</name>
+        <param>
+          <type>string</type>
+          <declname>s</declname>
+        </param>
+        <param>
+          <type>params Object[]</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Kernel.cs" line="214" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Kernel.cs" bodystart="214" bodyend="216"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_kernel_1ae21d6312875e153ec77986a680fea799" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>static void Micra.Core.Kernel.Write</definition>
+        <argsstring>(string s)</argsstring>
+        <name>Write</name>
+        <param>
+          <type>string</type>
+          <declname>s</declname>
+        </param>
+        <briefdescription>
+<para>Outputs a string the MAXScript listener </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>s</parametername>
+</parameternamelist>
+<parameterdescription>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Kernel.cs" line="222" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Kernel.cs" bodystart="222" bodyend="225"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_kernel_1ad1b08522458e996ee422a119a00b1e6f" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>static void Micra.Core.Kernel.WriteClear</definition>
+        <argsstring>(bool macroRec)</argsstring>
+        <name>WriteClear</name>
+        <param>
+          <type>bool</type>
+          <declname>macroRec</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Kernel.cs" line="227" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Kernel.cs" bodystart="227" bodyend="234"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_kernel_1a5681af48b679adf6346062c6d4afda39" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>static void Micra.Core.Kernel.Reset</definition>
+        <argsstring>()</argsstring>
+        <name>Reset</name>
+        <briefdescription>
+<para>Performs a file reset. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Kernel.cs" line="239" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Kernel.cs" bodystart="239" bodyend="239"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_kernel_1adb66ddaea300c1a51d46448d94579057" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>static void Micra.Core.Kernel.Invoke</definition>
+        <argsstring>(Action a)</argsstring>
+        <name>Invoke</name>
+        <param>
+          <type>Action</type>
+          <declname>a</declname>
+        </param>
+        <briefdescription>
+<para>Used to synchronously execute an action on the main thread. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>a</parametername>
+</parameternamelist>
+<parameterdescription>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Kernel.cs" line="270" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Kernel.cs" bodystart="270" bodyend="272"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_kernel_1ab084547c5ca4a6d8c1ad7f575b19eef7" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>DispatcherOperation</type>
+        <definition>static DispatcherOperation Micra.Core.Kernel.InvokeAsync</definition>
+        <argsstring>(Action a)</argsstring>
+        <name>InvokeAsync</name>
+        <param>
+          <type>Action</type>
+          <declname>a</declname>
+        </param>
+        <briefdescription>
+<para>Used to asynchronously execute an action on the main thread. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>a</parametername>
+</parameternamelist>
+<parameterdescription>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Kernel.cs" line="278" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Kernel.cs" bodystart="278" bodyend="280"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_kernel_1ac48b597c761d74fc476283f5a22bcdb4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>static int Micra.Core.Kernel.SendMessage</definition>
+        <argsstring>(IntPtr hWnd, int wMsg, IntPtr wParam, IntPtr lParam)</argsstring>
+        <name>SendMessage</name>
+        <param>
+          <type>IntPtr</type>
+          <declname>hWnd</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>wMsg</declname>
+        </param>
+        <param>
+          <type>IntPtr</type>
+          <declname>wParam</declname>
+        </param>
+        <param>
+          <type>IntPtr</type>
+          <declname>lParam</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Kernel.cs" line="288" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_kernel_1add06676a758cbbe6fe1c676dad6a4e71" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>IntPtr</type>
+        <definition>static IntPtr Micra.Core.Kernel.FindWindow</definition>
+        <argsstring>(string lpClassName, String lpWindowName)</argsstring>
+        <name>FindWindow</name>
+        <param>
+          <type>string</type>
+          <declname>lpClassName</declname>
+        </param>
+        <param>
+          <type>String</type>
+          <declname>lpWindowName</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Kernel.cs" line="290" column="1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Provides access to global data structures and functionality of the 3ds <ref refid="class_micra_1_1_core_1_1_max" kindref="compound">Max</ref> SDK. </para>    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="178">
+        <label>Micra.Core.Kernel</label>
+        <link refid="class_micra_1_1_core_1_1_kernel"/>
+        <childnode refid="179" relation="usage">
+          <edgelabel>dispatcher</edgelabel>
+          <edgelabel>listeners</edgelabel>
+          <edgelabel>_EditablePoly</edgelabel>
+          <edgelabel>_NodeLayerProperties</edgelabel>
+          <edgelabel>_Interface</edgelabel>
+          <edgelabel>_InstanceMgr</edgelabel>
+          <edgelabel>scene</edgelabel>
+          <edgelabel>_Global</edgelabel>
+          <edgelabel>_IIFPLayerManager</edgelabel>
+          <edgelabel>_TheHold</edgelabel>
+          <edgelabel>...</edgelabel>
+        </childnode>
+      </node>
+      <node id="179">
+        <label>static</label>
+      </node>
+    </collaborationgraph>
+    <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Kernel.cs" line="42" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Kernel.cs" bodystart="42" bodyend="292"/>
+    <listofallmembers>
+      <member refid="class_micra_1_1_core_1_1_kernel_1a6400a41f916aea1d797fd9c0ff637179" prot="public" virt="non-virtual"><scope>Micra::Core::Kernel</scope><name>_EditablePoly</name></member>
+      <member refid="class_micra_1_1_core_1_1_kernel_1a44336d52e2c059cad784908c16c9b258" prot="public" virt="non-virtual"><scope>Micra::Core::Kernel</scope><name>_Global</name></member>
+      <member refid="class_micra_1_1_core_1_1_kernel_1a72919fd50836ee5cb1de3909b5619e72" prot="public" virt="non-virtual"><scope>Micra::Core::Kernel</scope><name>_IIFPLayerManager</name></member>
+      <member refid="class_micra_1_1_core_1_1_kernel_1a83d7a8f7c9e3704fe803bc3384cf3b3e" prot="public" virt="non-virtual"><scope>Micra::Core::Kernel</scope><name>_IMeshSelection</name></member>
+      <member refid="class_micra_1_1_core_1_1_kernel_1a3a29ca47a54f4b38b7390b015f0a55f6" prot="public" virt="non-virtual"><scope>Micra::Core::Kernel</scope><name>_InstanceMgr</name></member>
+      <member refid="class_micra_1_1_core_1_1_kernel_1a689788c4b3949c1c3a72d9333bd9eabf" prot="public" virt="non-virtual"><scope>Micra::Core::Kernel</scope><name>_Interface</name></member>
+      <member refid="class_micra_1_1_core_1_1_kernel_1a6a0511273d65fcd5a50ce447938238a3" prot="public" virt="non-virtual"><scope>Micra::Core::Kernel</scope><name>_NodeLayerProperties</name></member>
+      <member refid="class_micra_1_1_core_1_1_kernel_1a208bd59a5f60049ec4b0d6a3f31d1fda" prot="public" virt="non-virtual"><scope>Micra::Core::Kernel</scope><name>_StatusPanel</name></member>
+      <member refid="class_micra_1_1_core_1_1_kernel_1a9f184d007237f638d6a50623629aa50f" prot="public" virt="non-virtual"><scope>Micra::Core::Kernel</scope><name>_TheHold</name></member>
+      <member refid="class_micra_1_1_core_1_1_kernel_1ae0574b81abb5dcd0c5d8069dc716bf33" prot="public" virt="non-virtual"><scope>Micra::Core::Kernel</scope><name>_TimeSlider</name></member>
+      <member refid="class_micra_1_1_core_1_1_kernel_1a56f028e6cbd98af2f53f1e17b3f9c781" prot="public" virt="non-virtual"><scope>Micra::Core::Kernel</scope><name>Animatables</name></member>
+      <member refid="class_micra_1_1_core_1_1_kernel_1ae9b5ec15e4de9b3f2040d12aa8c1e3ad" prot="public" virt="non-virtual"><scope>Micra::Core::Kernel</scope><name>CancelTimer</name></member>
+      <member refid="class_micra_1_1_core_1_1_kernel_1a1be79d7fd2cc6f6af3439d70667f89d1" prot="public" virt="non-virtual"><scope>Micra::Core::Kernel</scope><name>dispatcher</name></member>
+      <member refid="class_micra_1_1_core_1_1_kernel_1afd4d4d05bdf8dd685668a0e1cbd50ecc" prot="public" virt="non-virtual"><scope>Micra::Core::Kernel</scope><name>ExecuteMaxScriptFile</name></member>
+      <member refid="class_micra_1_1_core_1_1_kernel_1a3d839b4eaf42771c6db7cf65de9ecd29" prot="public" virt="non-virtual"><scope>Micra::Core::Kernel</scope><name>ExecuteMaxScriptFile</name></member>
+      <member refid="class_micra_1_1_core_1_1_kernel_1ab62bc97a72a05b770c9ef83669de43d4" prot="public" virt="non-virtual"><scope>Micra::Core::Kernel</scope><name>ExecuteMaxScriptScript</name></member>
+      <member refid="class_micra_1_1_core_1_1_kernel_1a6a7d9ac25e063bfec8f98a6f86bd5d5c" prot="public" virt="non-virtual"><scope>Micra::Core::Kernel</scope><name>ExecuteMaxScriptScript</name></member>
+      <member refid="class_micra_1_1_core_1_1_kernel_1add06676a758cbbe6fe1c676dad6a4e71" prot="public" virt="non-virtual"><scope>Micra::Core::Kernel</scope><name>FindWindow</name></member>
+      <member refid="class_micra_1_1_core_1_1_kernel_1a3c794ac55d3564a83d1e0510d64ace2c" prot="public" virt="non-virtual"><scope>Micra::Core::Kernel</scope><name>Initialized</name></member>
+      <member refid="class_micra_1_1_core_1_1_kernel_1adb66ddaea300c1a51d46448d94579057" prot="public" virt="non-virtual"><scope>Micra::Core::Kernel</scope><name>Invoke</name></member>
+      <member refid="class_micra_1_1_core_1_1_kernel_1ab084547c5ca4a6d8c1ad7f575b19eef7" prot="public" virt="non-virtual"><scope>Micra::Core::Kernel</scope><name>InvokeAsync</name></member>
+      <member refid="class_micra_1_1_core_1_1_kernel_1a76a41a117aaf1d65d5a76933921e0e28" prot="private" virt="non-virtual"><scope>Micra::Core::Kernel</scope><name>Kernel</name></member>
+      <member refid="class_micra_1_1_core_1_1_kernel_1a477ee7c226ba081e310cbb01754053dc" prot="private" virt="non-virtual"><scope>Micra::Core::Kernel</scope><name>KillTimer</name></member>
+      <member refid="class_micra_1_1_core_1_1_kernel_1a2ab8be1363ad4b9bd541f484eeb9fe9c" prot="package" virt="non-virtual"><scope>Micra::Core::Kernel</scope><name>listeners</name></member>
+      <member refid="class_micra_1_1_core_1_1_kernel_1a69390eb10a4e222d27395138c67796aa" prot="public" virt="non-virtual"><scope>Micra::Core::Kernel</scope><name>Now</name></member>
+      <member refid="class_micra_1_1_core_1_1_kernel_1a3e43f4b45e4b90758f66b481ceb6a494" prot="public" virt="non-virtual"><scope>Micra::Core::Kernel</scope><name>PushPrompt</name></member>
+      <member refid="class_micra_1_1_core_1_1_kernel_1a9932478038f0785df945a6122d5cea42" prot="public" virt="non-virtual"><scope>Micra::Core::Kernel</scope><name>RedrawViews</name></member>
+      <member refid="class_micra_1_1_core_1_1_kernel_1a7240ce17efe2eb86aadbb5c033b51f9a" prot="public" virt="non-virtual"><scope>Micra::Core::Kernel</scope><name>RedrawViews</name></member>
+      <member refid="class_micra_1_1_core_1_1_kernel_1a5681af48b679adf6346062c6d4afda39" prot="public" virt="non-virtual"><scope>Micra::Core::Kernel</scope><name>Reset</name></member>
+      <member refid="class_micra_1_1_core_1_1_kernel_1a70bef5349ab3e3f641a334a107175167" prot="package" virt="non-virtual"><scope>Micra::Core::Kernel</scope><name>scene</name></member>
+      <member refid="class_micra_1_1_core_1_1_kernel_1a1cc58fd9cf4893f0b8e77ade462884a3" prot="public" virt="non-virtual"><scope>Micra::Core::Kernel</scope><name>Scene</name></member>
+      <member refid="class_micra_1_1_core_1_1_kernel_1ac48b597c761d74fc476283f5a22bcdb4" prot="public" virt="non-virtual"><scope>Micra::Core::Kernel</scope><name>SendMessage</name></member>
+      <member refid="class_micra_1_1_core_1_1_kernel_1a319fa6da57a44a680165b6ee8aada1bd" prot="private" virt="non-virtual"><scope>Micra::Core::Kernel</scope><name>SetTimer</name></member>
+      <member refid="class_micra_1_1_core_1_1_kernel_1ab16be5af62dc039328b555835717b367" prot="public" virt="non-virtual"><scope>Micra::Core::Kernel</scope><name>StartTimer</name></member>
+      <member refid="class_micra_1_1_core_1_1_kernel_1a1152d645d2b922523816dd08d7329b33" prot="public" virt="non-virtual"><scope>Micra::Core::Kernel</scope><name>StatusPanelVisibility</name></member>
+      <member refid="class_micra_1_1_core_1_1_kernel_1a3f845de743d970fa60b4977122d55c2f" prot="private" virt="non-virtual"><scope>Micra::Core::Kernel</scope><name>TimerProc</name></member>
+      <member refid="class_micra_1_1_core_1_1_kernel_1ae41d3015124ed3c7c484bafcc75cd42e" prot="public" virt="non-virtual"><scope>Micra::Core::Kernel</scope><name>TimeSliderVisibility</name></member>
+      <member refid="class_micra_1_1_core_1_1_kernel_1ad82bfb5543ff575640b68600565631fe" prot="public" virt="non-virtual"><scope>Micra::Core::Kernel</scope><name>Write</name></member>
+      <member refid="class_micra_1_1_core_1_1_kernel_1ae21d6312875e153ec77986a680fea799" prot="public" virt="non-virtual"><scope>Micra::Core::Kernel</scope><name>Write</name></member>
+      <member refid="class_micra_1_1_core_1_1_kernel_1ad1b08522458e996ee422a119a00b1e6f" prot="public" virt="non-virtual"><scope>Micra::Core::Kernel</scope><name>WriteClear</name></member>
+      <member refid="class_micra_1_1_core_1_1_kernel_1a3750dce995b0d382cc405ea627cf294e" prot="public" virt="non-virtual"><scope>Micra::Core::Kernel</scope><name>WriteLine</name></member>
+      <member refid="class_micra_1_1_core_1_1_kernel_1a6049ba4afc168daaeb577c3e6d232f42" prot="public" virt="non-virtual"><scope>Micra::Core::Kernel</scope><name>WriteLine</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

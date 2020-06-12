@@ -1,0 +1,121 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
+  <compounddef id="class_micra_1_1_core_1_1_dll" kind="class" prot="public">
+    <compoundname>Micra::Core::Dll</compoundname>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="class_micra_1_1_core_1_1_dll_1a67fc273449935d150f23de312cb5da84" prot="public" static="no" mutable="no">
+        <type>IDllDesc</type>
+        <definition>IDllDesc Micra.Core.Dll._dll</definition>
+        <argsstring></argsstring>
+        <name>_dll</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Plugins.cs" line="55" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Plugins.cs" bodystart="55" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="property">
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_dll_1a3a642975380a15823c0819403d25c3e7" prot="public" static="no" readable="no" writable="no" gettable="yes" settable="no">
+        <type>string</type>
+        <definition>string Micra.Core.Dll.Description</definition>
+        <argsstring></argsstring>
+        <name>Description</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Plugins.cs" line="58" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Plugins.cs" bodystart="58" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_dll_1aded294351c1829eef1c6a1907551c28a" prot="public" static="no" readable="no" writable="no" gettable="yes" settable="no">
+        <type>IEnumerable&lt; <ref refid="class_micra_1_1_core_1_1_plugin" kindref="compound">Plugin</ref> &gt;</type>
+        <definition>IEnumerable&lt;Plugin&gt; Micra.Core.Dll.Plugins</definition>
+        <argsstring></argsstring>
+        <name>Plugins</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Plugins.cs" line="59" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Plugins.cs" bodystart="59" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_dll_1adfdb0f4b9e7eb842bb5192809b088292" prot="public" static="no" readable="no" writable="no" gettable="yes" settable="no">
+        <type>string</type>
+        <definition>string Micra.Core.Dll.Directory</definition>
+        <argsstring></argsstring>
+        <name>Directory</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Plugins.cs" line="72" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Plugins.cs" bodystart="72" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_dll_1a7ff5868d9431f89074688ddf38f792f2" prot="public" static="no" readable="no" writable="no" gettable="yes" settable="no">
+        <type>string</type>
+        <definition>string Micra.Core.Dll.FileName</definition>
+        <argsstring></argsstring>
+        <name>FileName</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Plugins.cs" line="73" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Plugins.cs" bodystart="73" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_dll_1a6b890012a052f52908151154f1a154b9" prot="public" static="no" readable="no" writable="no" gettable="yes" settable="no">
+        <type>bool</type>
+        <definition>bool Micra.Core.Dll.Loaded</definition>
+        <argsstring></argsstring>
+        <name>Loaded</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Plugins.cs" line="74" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Plugins.cs" bodystart="74" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="package-func">
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_dll_1a8410b02994d46be4fa8ede58b17ebef8" prot="package" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>Micra.Core.Dll.Dll</definition>
+        <argsstring>(IDllDesc dll)</argsstring>
+        <name>Dll</name>
+        <param>
+          <type>IDllDesc</type>
+          <declname>dll</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Plugins.cs" line="56" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Plugins.cs" bodystart="56" bodyend="56"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Contains information about a plug-in dll. Wraps a DllDesc object in the 3ds <ref refid="class_micra_1_1_core_1_1_max" kindref="compound">Max</ref> SDK. </para>    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Plugins.cs" line="54" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Plugins.cs" bodystart="54" bodyend="76"/>
+    <listofallmembers>
+      <member refid="class_micra_1_1_core_1_1_dll_1a67fc273449935d150f23de312cb5da84" prot="public" virt="non-virtual"><scope>Micra::Core::Dll</scope><name>_dll</name></member>
+      <member refid="class_micra_1_1_core_1_1_dll_1a3a642975380a15823c0819403d25c3e7" prot="public" virt="non-virtual"><scope>Micra::Core::Dll</scope><name>Description</name></member>
+      <member refid="class_micra_1_1_core_1_1_dll_1adfdb0f4b9e7eb842bb5192809b088292" prot="public" virt="non-virtual"><scope>Micra::Core::Dll</scope><name>Directory</name></member>
+      <member refid="class_micra_1_1_core_1_1_dll_1a8410b02994d46be4fa8ede58b17ebef8" prot="package" virt="non-virtual"><scope>Micra::Core::Dll</scope><name>Dll</name></member>
+      <member refid="class_micra_1_1_core_1_1_dll_1a7ff5868d9431f89074688ddf38f792f2" prot="public" virt="non-virtual"><scope>Micra::Core::Dll</scope><name>FileName</name></member>
+      <member refid="class_micra_1_1_core_1_1_dll_1a6b890012a052f52908151154f1a154b9" prot="public" virt="non-virtual"><scope>Micra::Core::Dll</scope><name>Loaded</name></member>
+      <member refid="class_micra_1_1_core_1_1_dll_1aded294351c1829eef1c6a1907551c28a" prot="public" virt="non-virtual"><scope>Micra::Core::Dll</scope><name>Plugins</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

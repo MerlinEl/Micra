@@ -1,0 +1,175 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
+  <compounddef id="class_micra_1_1_core_1_1_prim_mod_object_factory" kind="class" prot="public">
+    <compoundname>Micra::Core::PrimModObjectFactory</compoundname>
+    <basecompoundref refid="class_micra_1_1_core_1_1_primitive_factory_3_01_t_01_4" prot="public" virt="non-virtual">Micra.Core.PrimitiveFactory&lt; T &gt;</basecompoundref>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_prim_mod_object_factory_1a1cedd6777c15784dfad68ab59fd3a15d" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>Micra.Core.PrimModObjectFactory.PrimModObjectFactory</definition>
+        <argsstring>(BuiltInClassIDA cidA, BuiltInClassIDB cidB)</argsstring>
+        <name>PrimModObjectFactory</name>
+        <param>
+          <type>BuiltInClassIDA</type>
+          <declname>cidA</declname>
+        </param>
+        <param>
+          <type>BuiltInClassIDB</type>
+          <declname>cidB</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Primitives.cs" line="74" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Primitives.cs" bodystart="74" bodyend="74"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_prim_mod_object_factory_1a293ca7c356c2f4515ec253e2706fab5b" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>Micra.Core.PrimModObjectFactory.PrimModObjectFactory</definition>
+        <argsstring>(BuiltInClassIDA cidA)</argsstring>
+        <name>PrimModObjectFactory</name>
+        <param>
+          <type>BuiltInClassIDA</type>
+          <declname>cidA</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Primitives.cs" line="75" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Primitives.cs" bodystart="75" bodyend="75"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_prim_mod_object_factory_1a34cd9334a18337304d94216a90afd7a8" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type>override <ref refid="class_micra_1_1_core_1_1_modifier" kindref="compound">Modifier</ref></type>
+        <definition>override Modifier Micra.Core.PrimModObjectFactory.Create</definition>
+        <argsstring>()</argsstring>
+        <name>Create</name>
+        <reimplements refid="class_micra_1_1_core_1_1_primitive_factory_3_01_t_01_4_1a8dfcf097270d6c27b703e8164d9ceedf">Create</reimplements>
+        <briefdescription>
+<para>Creates a primitive with a new node. </para>        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para></para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Primitives.cs" line="77" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Primitives.cs" bodystart="77" bodyend="79"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_prim_mod_object_factory_1ae13059d1e9e891145c9e4767ae39303e" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="class_micra_1_1_core_1_1_modifier" kindref="compound">Modifier</ref></type>
+        <definition>Modifier Micra.Core.PrimModObjectFactory.Create</definition>
+        <argsstring>(Node node)</argsstring>
+        <name>Create</name>
+        <param>
+          <type><ref refid="class_micra_1_1_core_1_1_node" kindref="compound">Node</ref></type>
+          <declname>node</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Primitives.cs" line="81" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Primitives.cs" bodystart="81" bodyend="85"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Base class for predefined modifier factories. </para>    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="416">
+        <label>Micra.Core.PrimModObjectFactory</label>
+        <link refid="class_micra_1_1_core_1_1_prim_mod_object_factory"/>
+        <childnode refid="417" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="417">
+        <label>PrimitiveFactory&lt; Modifier &gt;</label>
+        <link refid="class_micra_1_1_core_1_1_primitive_factory_3_01_t_01_4"/>
+        <childnode refid="418" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="418">
+        <label>PrimitiveFactory</label>
+        <link refid="class_micra_1_1_core_1_1_primitive_factory"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="419">
+        <label>Micra.Core.PrimModObjectFactory</label>
+        <link refid="class_micra_1_1_core_1_1_prim_mod_object_factory"/>
+        <childnode refid="420" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="422">
+        <label>Micra.Core.SuperClassID</label>
+        <link refid="struct_micra_1_1_core_1_1_super_class_i_d"/>
+        <childnode refid="423" relation="usage">
+          <edgelabel>ParameterBlock2</edgelabel>
+          <edgelabel>Light</edgelabel>
+          <edgelabel>ReferenceTarget</edgelabel>
+          <edgelabel>DerivedObject</edgelabel>
+          <edgelabel>PositionController</edgelabel>
+          <edgelabel>Material</edgelabel>
+          <edgelabel>Camera</edgelabel>
+          <edgelabel>Texture</edgelabel>
+          <edgelabel>BaseNode</edgelabel>
+          <edgelabel>ObjectModifier</edgelabel>
+          <edgelabel>...</edgelabel>
+        </childnode>
+      </node>
+      <node id="420">
+        <label>PrimitiveFactory&lt; Modifier &gt;</label>
+        <link refid="class_micra_1_1_core_1_1_primitive_factory_3_01_t_01_4"/>
+        <childnode refid="421" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="424">
+        <label>Micra.Core.ClassID</label>
+        <link refid="struct_micra_1_1_core_1_1_class_i_d"/>
+        <childnode refid="423" relation="usage">
+          <edgelabel>CylinderObject</edgelabel>
+          <edgelabel>DummyHelper</edgelabel>
+          <edgelabel>EditablePoly</edgelabel>
+          <edgelabel>RectangleShape</edgelabel>
+          <edgelabel>OmniLight</edgelabel>
+          <edgelabel>CircleShape</edgelabel>
+          <edgelabel>PointHelper</edgelabel>
+          <edgelabel>EditableMesh</edgelabel>
+          <edgelabel>PolyObject</edgelabel>
+          <edgelabel>BoxObject</edgelabel>
+          <edgelabel>...</edgelabel>
+        </childnode>
+      </node>
+      <node id="423">
+        <label>static</label>
+      </node>
+      <node id="421">
+        <label>PrimitiveFactory</label>
+        <link refid="class_micra_1_1_core_1_1_primitive_factory"/>
+        <childnode refid="422" relation="usage">
+          <edgelabel>scid</edgelabel>
+        </childnode>
+        <childnode refid="424" relation="usage">
+          <edgelabel>cid</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Primitives.cs" line="73" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Primitives.cs" bodystart="73" bodyend="86"/>
+    <listofallmembers>
+      <member refid="class_micra_1_1_core_1_1_primitive_factory_1ae00071bdc150077184a8c66a1cb6e4e0" prot="protected" virt="non-virtual"><scope>Micra::Core::PrimModObjectFactory</scope><name>cid</name></member>
+      <member refid="class_micra_1_1_core_1_1_primitive_factory_1af0a29424f1e8aa559b579feda4139df2" prot="public" virt="non-virtual"><scope>Micra::Core::PrimModObjectFactory</scope><name>ClassID</name></member>
+      <member refid="class_micra_1_1_core_1_1_prim_mod_object_factory_1a34cd9334a18337304d94216a90afd7a8" prot="public" virt="virtual"><scope>Micra::Core::PrimModObjectFactory</scope><name>Create</name></member>
+      <member refid="class_micra_1_1_core_1_1_prim_mod_object_factory_1ae13059d1e9e891145c9e4767ae39303e" prot="public" virt="non-virtual"><scope>Micra::Core::PrimModObjectFactory</scope><name>Create</name></member>
+      <member refid="class_micra_1_1_core_1_1_primitive_factory_3_01_t_01_4_1a09c17de1657fdf64c34171e50156966b" prot="package" virt="non-virtual"><scope>Micra::Core::PrimModObjectFactory</scope><name>PrimitiveFactory</name></member>
+      <member refid="class_micra_1_1_core_1_1_primitive_factory_3_01_t_01_4_1a51f6d2f403d14efe991280c64f6ebbb7" prot="package" virt="non-virtual"><scope>Micra::Core::PrimModObjectFactory</scope><name>PrimitiveFactory</name></member>
+      <member refid="class_micra_1_1_core_1_1_prim_mod_object_factory_1a1cedd6777c15784dfad68ab59fd3a15d" prot="public" virt="non-virtual"><scope>Micra::Core::PrimModObjectFactory</scope><name>PrimModObjectFactory</name></member>
+      <member refid="class_micra_1_1_core_1_1_prim_mod_object_factory_1a293ca7c356c2f4515ec253e2706fab5b" prot="public" virt="non-virtual"><scope>Micra::Core::PrimModObjectFactory</scope><name>PrimModObjectFactory</name></member>
+      <member refid="class_micra_1_1_core_1_1_primitive_factory_1a77c16ec84c7b86287e2a784b7f3baa0a" prot="protected" virt="non-virtual"><scope>Micra::Core::PrimModObjectFactory</scope><name>scid</name></member>
+      <member refid="class_micra_1_1_core_1_1_primitive_factory_1acd1555d542f96fb30c3d55b89bf47669" prot="public" virt="non-virtual"><scope>Micra::Core::PrimModObjectFactory</scope><name>SuperClassID</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

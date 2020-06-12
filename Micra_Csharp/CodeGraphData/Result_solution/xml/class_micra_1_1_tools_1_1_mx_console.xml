@@ -1,0 +1,192 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
+  <compounddef id="class_micra_1_1_tools_1_1_mx_console" kind="class" prot="public">
+    <compoundname>Micra::Tools::MxConsole</compoundname>
+    <basecompoundref prot="public" virt="non-virtual">McConsole</basecompoundref>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="class_micra_1_1_tools_1_1_mx_console_1acbfbfac98c0a8a682320ce2890b3c29f" prot="private" static="no" mutable="no">
+        <type>System.ComponentModel.IContainer</type>
+        <definition>System.ComponentModel.IContainer Micra.Tools.MxConsole.components</definition>
+        <argsstring></argsstring>
+        <name>components</name>
+        <initializer>= null</initializer>
+        <briefdescription>
+<para>Required designer variable. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/MxConsole.Designer.cs" line="6" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/MxConsole.Designer.cs" bodystart="6" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="class_micra_1_1_tools_1_1_mx_console_1affa723f6ee0660eb2e7af060b2fdfde7" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>Micra.Tools.MxConsole.MxConsole</definition>
+        <argsstring>()</argsstring>
+        <name>MxConsole</name>
+        <briefdescription>
+<para>CConsole = new McConsole(progBar); CConsole.msg &quot;@&quot; <ndash/>clear log CConsole.msg &quot;ASSET BUILDER LOG:&quot; ti:&quot;Initialize....&quot; ty:&quot;new_task&quot; CConsole.msg &quot;Creating Max File&quot; ti:&quot;3DsMax...&quot; ty:&quot;task_open&quot; CConsole.msg &quot;Paths and Name is OK&quot; ty:&quot;proc&quot; CConsole.msg &quot;Name OK&quot; ty:&quot;proc&quot; output_dir = "E:&quot;
+mcProgLog.msg(&quot;Failed Save Max File. Unable to find Directory.<linebreak/>
+:[ &quot;+output_dir+&quot; ]&quot;) ti:&quot;Aborted!&quot; ty:&quot;error&quot;
+mcProgLog.msg &quot;All Done&quot; ty:&quot;task_close" </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>msg</parametername>
+</parameternamelist>
+<parameterdescription>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+if (msg == &quot;@&quot;) { RichTextBox1.Text = &quot;&quot;; } RichTextBox1.AppendText(msg + &quot;\n&quot;); </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/MxConsole.cs" line="26" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/MxConsole.cs" bodystart="26" bodyend="30"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_tools_1_1_mx_console_1adcf8272261c3503d4e8b91524a8a8c9e" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Micra.Tools.MxConsole.ShowConsole</definition>
+        <argsstring>(long hwnd)</argsstring>
+        <name>ShowConsole</name>
+        <param>
+          <type>long</type>
+          <declname>hwnd</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/MxConsole.cs" line="45" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/MxConsole.cs" bodystart="45" bodyend="53"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-func">
+      <memberdef kind="function" id="class_micra_1_1_tools_1_1_mx_console_1a29bb75ad7327d47f565302760dd619ca" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Micra.Tools.MxConsole.OnTextAreaLostFocus</definition>
+        <argsstring>(object sender, EventArgs e)</argsstring>
+        <name>OnTextAreaLostFocus</name>
+        <param>
+          <type>object</type>
+          <declname>sender</declname>
+        </param>
+        <param>
+          <type>EventArgs</type>
+          <declname>e</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/MxConsole.cs" line="32" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/MxConsole.cs" bodystart="32" bodyend="34"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_tools_1_1_mx_console_1ae5dc8a5f997e439c1cca4d2d66b4ed72" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Micra.Tools.MxConsole.OnTextAreaGotFocus</definition>
+        <argsstring>(Object sender, EventArgs e)</argsstring>
+        <name>OnTextAreaGotFocus</name>
+        <param>
+          <type>Object</type>
+          <declname>sender</declname>
+        </param>
+        <param>
+          <type>EventArgs</type>
+          <declname>e</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/MxConsole.cs" line="36" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/MxConsole.cs" bodystart="36" bodyend="38"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_tools_1_1_mx_console_1a4a6df1f191a3d8c1d66a72bf2c1188d6" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>new void</type>
+        <definition>new void Micra.Tools.MxConsole.InitializeComponent</definition>
+        <argsstring>()</argsstring>
+        <name>InitializeComponent</name>
+        <briefdescription>
+<para>Required method for Designer support - do not modify the contents of this method with the code editor. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/MxConsole.Designer.cs" line="25" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/MxConsole.Designer.cs" bodystart="25" bodyend="27"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="protected-func">
+      <memberdef kind="function" id="class_micra_1_1_tools_1_1_mx_console_1aab72104489156eb2b591e1ac3e16a5f6" prot="protected" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>override void</type>
+        <definition>override void Micra.Tools.MxConsole.Dispose</definition>
+        <argsstring>(bool disposing)</argsstring>
+        <name>Dispose</name>
+        <param>
+          <type>bool</type>
+          <declname>disposing</declname>
+        </param>
+        <briefdescription>
+<para>Clean up any resources being used. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>disposing</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>true if managed resources should be disposed; otherwise, false.</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/MxConsole.Designer.cs" line="12" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/MxConsole.Designer.cs" bodystart="12" bodyend="17"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="244">
+        <label>Micra.Tools.MxConsole</label>
+        <link refid="class_micra_1_1_tools_1_1_mx_console"/>
+        <childnode refid="245" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="245">
+        <label>Orien::NetUi::McConsole</label>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="246">
+        <label>Micra.Tools.MxConsole</label>
+        <link refid="class_micra_1_1_tools_1_1_mx_console"/>
+        <childnode refid="247" relation="public-inheritance">
+        </childnode>
+        <childnode refid="248" relation="usage">
+          <edgelabel>components</edgelabel>
+        </childnode>
+      </node>
+      <node id="248">
+        <label>System</label>
+      </node>
+      <node id="247">
+        <label>Orien::NetUi::McConsole</label>
+      </node>
+    </collaborationgraph>
+    <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/MxConsole.cs" line="11" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/MxConsole.cs" bodystart="11" bodyend="54"/>
+    <listofallmembers>
+      <member refid="class_micra_1_1_tools_1_1_mx_console_1acbfbfac98c0a8a682320ce2890b3c29f" prot="private" virt="non-virtual"><scope>Micra::Tools::MxConsole</scope><name>components</name></member>
+      <member refid="class_micra_1_1_tools_1_1_mx_console_1aab72104489156eb2b591e1ac3e16a5f6" prot="protected" virt="non-virtual"><scope>Micra::Tools::MxConsole</scope><name>Dispose</name></member>
+      <member refid="class_micra_1_1_tools_1_1_mx_console_1a4a6df1f191a3d8c1d66a72bf2c1188d6" prot="private" virt="non-virtual"><scope>Micra::Tools::MxConsole</scope><name>InitializeComponent</name></member>
+      <member refid="class_micra_1_1_tools_1_1_mx_console_1affa723f6ee0660eb2e7af060b2fdfde7" prot="public" virt="non-virtual"><scope>Micra::Tools::MxConsole</scope><name>MxConsole</name></member>
+      <member refid="class_micra_1_1_tools_1_1_mx_console_1ae5dc8a5f997e439c1cca4d2d66b4ed72" prot="private" virt="non-virtual"><scope>Micra::Tools::MxConsole</scope><name>OnTextAreaGotFocus</name></member>
+      <member refid="class_micra_1_1_tools_1_1_mx_console_1a29bb75ad7327d47f565302760dd619ca" prot="private" virt="non-virtual"><scope>Micra::Tools::MxConsole</scope><name>OnTextAreaLostFocus</name></member>
+      <member refid="class_micra_1_1_tools_1_1_mx_console_1adcf8272261c3503d4e8b91524a8a8c9e" prot="public" virt="non-virtual"><scope>Micra::Tools::MxConsole</scope><name>ShowConsole</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

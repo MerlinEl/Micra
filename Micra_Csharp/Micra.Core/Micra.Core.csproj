@@ -72,6 +72,8 @@
     <Compile Include="ClassID.cs" />
     <Compile Include="CollectionExtensions.cs" />
     <Compile Include="Color.cs" />
+    <Compile Include="EnumFlags.cs" />
+    <Compile Include="Max.cs" />
     <Compile Include="Matrix3.cs" />
     <Compile Include="ObjOps.cs" />
     <Compile Include="CustomAttribute.cs" />

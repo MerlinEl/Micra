@@ -1,0 +1,35 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
+  <compounddef id="class_micra_1_1_core_1_1_switch" kind="class" prot="public">
+    <compoundname>Micra::Core::Switch</compoundname>
+    <innerclass refid="class_micra_1_1_core_1_1_switch_1_1_switch_builder_3_01_t_element_01_4" prot="public">Micra::Core::Switch::SwitchBuilder&lt; TElement &gt;</innerclass>
+    <innerclass refid="class_micra_1_1_core_1_1_switch_1_1_switch_builder_3_01_t_element_00_01_t_result_01_4" prot="public">Micra::Core::Switch::SwitchBuilder&lt; TElement, TResult &gt;</innerclass>
+      <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_switch_1a8a1104421c22b49ee1c381da4366aa38" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>SwitchBuilder&lt; TElement &gt;.CaseBuilder</type>
+        <definition>static SwitchBuilder&lt;TElement&gt;.CaseBuilder Micra.Core.Switch.On&lt; TElement &gt;</definition>
+        <argsstring>(TElement element)</argsstring>
+        <name>On&lt; TElement &gt;</name>
+        <param>
+          <type>TElement</type>
+          <declname>element</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Switch.cs" line="11" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Switch.cs" bodystart="11" bodyend="13"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Switch.cs" line="9" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Switch.cs" bodystart="9" bodyend="88"/>
+    <listofallmembers>
+      <member refid="class_micra_1_1_core_1_1_switch_1a8a1104421c22b49ee1c381da4366aa38" prot="public" virt="non-virtual"><scope>Micra::Core::Switch</scope><name>On&lt; TElement &gt;</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

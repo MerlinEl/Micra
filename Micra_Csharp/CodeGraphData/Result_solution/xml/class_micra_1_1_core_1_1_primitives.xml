@@ -1,0 +1,562 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
+  <compounddef id="class_micra_1_1_core_1_1_primitives" kind="class" prot="public">
+    <compoundname>Micra::Core::Primitives</compoundname>
+      <sectiondef kind="public-static-attrib">
+      <memberdef kind="variable" id="class_micra_1_1_core_1_1_primitives_1a4cf2a6dd9f2dfea26c925800e7d05d7e" prot="public" static="yes" mutable="no">
+        <type><ref refid="class_micra_1_1_core_1_1_prim_geom_object_factory" kindref="compound">PrimGeomObjectFactory</ref></type>
+        <definition>PrimGeomObjectFactory Micra.Core.Primitives.Teapot</definition>
+        <argsstring></argsstring>
+        <name>Teapot</name>
+        <initializer>= new <ref refid="class_micra_1_1_core_1_1_prim_geom_object_factory" kindref="compound">PrimGeomObjectFactory</ref>(BuiltInClassIDA.TEAPOT_CLASS_ID, BuiltInClassIDB.TEAPOT_CLASS_ID)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Primitives.cs" line="93" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Primitives.cs" bodystart="93" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_micra_1_1_core_1_1_primitives_1af64dd2a73e15b28c13f74d982af51c76" prot="public" static="yes" mutable="no">
+        <type><ref refid="class_micra_1_1_core_1_1_prim_geom_object_factory" kindref="compound">PrimGeomObjectFactory</ref></type>
+        <definition>PrimGeomObjectFactory Micra.Core.Primitives.Box</definition>
+        <argsstring></argsstring>
+        <name>Box</name>
+        <initializer>= new <ref refid="class_micra_1_1_core_1_1_prim_geom_object_factory" kindref="compound">PrimGeomObjectFactory</ref>(BuiltInClassIDA.BOXOBJ_CLASS_ID)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Primitives.cs" line="94" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Primitives.cs" bodystart="94" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_micra_1_1_core_1_1_primitives_1a60251dbf0480a9babeb7f73d4b39790f" prot="public" static="yes" mutable="no">
+        <type><ref refid="class_micra_1_1_core_1_1_prim_geom_object_factory" kindref="compound">PrimGeomObjectFactory</ref></type>
+        <definition>PrimGeomObjectFactory Micra.Core.Primitives.Sphere</definition>
+        <argsstring></argsstring>
+        <name>Sphere</name>
+        <initializer>= new <ref refid="class_micra_1_1_core_1_1_prim_geom_object_factory" kindref="compound">PrimGeomObjectFactory</ref>(BuiltInClassIDA.SPHERE_CLASS_ID)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Primitives.cs" line="95" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Primitives.cs" bodystart="95" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_micra_1_1_core_1_1_primitives_1af88c24739a9ff94cbb56792154cb7b3d" prot="public" static="yes" mutable="no">
+        <type><ref refid="class_micra_1_1_core_1_1_prim_geom_object_factory" kindref="compound">PrimGeomObjectFactory</ref></type>
+        <definition>PrimGeomObjectFactory Micra.Core.Primitives.Cylinder</definition>
+        <argsstring></argsstring>
+        <name>Cylinder</name>
+        <initializer>= new <ref refid="class_micra_1_1_core_1_1_prim_geom_object_factory" kindref="compound">PrimGeomObjectFactory</ref>(BuiltInClassIDA.CYLINDER_CLASS_ID)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Primitives.cs" line="96" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Primitives.cs" bodystart="96" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_micra_1_1_core_1_1_primitives_1ae6a8285b9b491dc720467b9aff20b1d1" prot="public" static="yes" mutable="no">
+        <type><ref refid="class_micra_1_1_core_1_1_prim_geom_object_factory" kindref="compound">PrimGeomObjectFactory</ref></type>
+        <definition>PrimGeomObjectFactory Micra.Core.Primitives.Wave</definition>
+        <argsstring></argsstring>
+        <name>Wave</name>
+        <initializer>= new <ref refid="class_micra_1_1_core_1_1_prim_geom_object_factory" kindref="compound">PrimGeomObjectFactory</ref>(BuiltInClassIDA.WAVEOBJ_CLASS_ID)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Primitives.cs" line="97" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Primitives.cs" bodystart="97" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_micra_1_1_core_1_1_primitives_1a7d040d396687e20f2e4ff14315d29c2d" prot="public" static="yes" mutable="no">
+        <type><ref refid="class_micra_1_1_core_1_1_prim_geom_object_factory" kindref="compound">PrimGeomObjectFactory</ref></type>
+        <definition>PrimGeomObjectFactory Micra.Core.Primitives.Torus</definition>
+        <argsstring></argsstring>
+        <name>Torus</name>
+        <initializer>= new <ref refid="class_micra_1_1_core_1_1_prim_geom_object_factory" kindref="compound">PrimGeomObjectFactory</ref>(BuiltInClassIDA.TORUS_CLASS_ID)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Primitives.cs" line="98" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Primitives.cs" bodystart="98" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_micra_1_1_core_1_1_primitives_1aed574b0f731a631fa8436d3b65e3a34f" prot="public" static="yes" mutable="no">
+        <type><ref refid="class_micra_1_1_core_1_1_prim_geom_object_factory" kindref="compound">PrimGeomObjectFactory</ref></type>
+        <definition>PrimGeomObjectFactory Micra.Core.Primitives.Donut</definition>
+        <argsstring></argsstring>
+        <name>Donut</name>
+        <initializer>= new <ref refid="class_micra_1_1_core_1_1_prim_geom_object_factory" kindref="compound">PrimGeomObjectFactory</ref>(BuiltInClassIDA.DONUT_CLASS_ID)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Primitives.cs" line="99" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Primitives.cs" bodystart="99" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_micra_1_1_core_1_1_primitives_1a927feb699cd99ba511e0fcedff313b34" prot="public" static="yes" mutable="no">
+        <type><ref refid="class_micra_1_1_core_1_1_prim_geom_object_factory" kindref="compound">PrimGeomObjectFactory</ref></type>
+        <definition>PrimGeomObjectFactory Micra.Core.Primitives.GSphere</definition>
+        <argsstring></argsstring>
+        <name>GSphere</name>
+        <initializer>= new <ref refid="class_micra_1_1_core_1_1_prim_geom_object_factory" kindref="compound">PrimGeomObjectFactory</ref>(BuiltInClassIDA.GSPHERE_CLASS_ID)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Primitives.cs" line="100" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Primitives.cs" bodystart="100" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_micra_1_1_core_1_1_primitives_1ab618474ac4586eeb2bed605773bd5ac7" prot="public" static="yes" mutable="no">
+        <type><ref refid="class_micra_1_1_core_1_1_prim_geom_object_factory" kindref="compound">PrimGeomObjectFactory</ref></type>
+        <definition>PrimGeomObjectFactory Micra.Core.Primitives.Hedra</definition>
+        <argsstring></argsstring>
+        <name>Hedra</name>
+        <initializer>= new <ref refid="class_micra_1_1_core_1_1_prim_geom_object_factory" kindref="compound">PrimGeomObjectFactory</ref>(BuiltInClassIDA.HEDRA_CLASS_ID)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Primitives.cs" line="101" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Primitives.cs" bodystart="101" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_micra_1_1_core_1_1_primitives_1a20651672155f11f1ca6c30a7611f73b2" prot="public" static="yes" mutable="no">
+        <type><ref refid="class_micra_1_1_core_1_1_prim_geom_object_factory" kindref="compound">PrimGeomObjectFactory</ref></type>
+        <definition>PrimGeomObjectFactory Micra.Core.Primitives.Loft</definition>
+        <argsstring></argsstring>
+        <name>Loft</name>
+        <initializer>= new <ref refid="class_micra_1_1_core_1_1_prim_geom_object_factory" kindref="compound">PrimGeomObjectFactory</ref>(BuiltInClassIDA.LOFTOBJ_CLASS_ID)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Primitives.cs" line="102" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Primitives.cs" bodystart="102" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_micra_1_1_core_1_1_primitives_1a1e7664539941781eeb261d9112dfba05" prot="public" static="yes" mutable="no">
+        <type><ref refid="class_micra_1_1_core_1_1_prim_geom_object_factory" kindref="compound">PrimGeomObjectFactory</ref></type>
+        <definition>PrimGeomObjectFactory Micra.Core.Primitives.Pipe</definition>
+        <argsstring></argsstring>
+        <name>Pipe</name>
+        <initializer>= new <ref refid="class_micra_1_1_core_1_1_prim_geom_object_factory" kindref="compound">PrimGeomObjectFactory</ref>(BuiltInClassIDA.PIPE_CLASS_ID)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Primitives.cs" line="103" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Primitives.cs" bodystart="103" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_micra_1_1_core_1_1_primitives_1a73f2b0530e118f838859921812eafa20" prot="public" static="yes" mutable="no">
+        <type><ref refid="class_micra_1_1_core_1_1_prim_geom_object_factory" kindref="compound">PrimGeomObjectFactory</ref></type>
+        <definition>PrimGeomObjectFactory Micra.Core.Primitives.Pyramid</definition>
+        <argsstring></argsstring>
+        <name>Pyramid</name>
+        <initializer>= new <ref refid="class_micra_1_1_core_1_1_prim_geom_object_factory" kindref="compound">PrimGeomObjectFactory</ref>(BuiltInClassIDA.PYRAMID_CLASS_ID)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Primitives.cs" line="104" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Primitives.cs" bodystart="104" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_micra_1_1_core_1_1_primitives_1add5b5b4c6efda2ce6b496939233ef976" prot="public" static="yes" mutable="no">
+        <type><ref refid="class_micra_1_1_core_1_1_prim_geom_object_factory" kindref="compound">PrimGeomObjectFactory</ref></type>
+        <definition>PrimGeomObjectFactory Micra.Core.Primitives.Tube</definition>
+        <argsstring></argsstring>
+        <name>Tube</name>
+        <initializer>= new <ref refid="class_micra_1_1_core_1_1_prim_geom_object_factory" kindref="compound">PrimGeomObjectFactory</ref>(BuiltInClassIDA.TUBE_CLASS_ID)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Primitives.cs" line="105" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Primitives.cs" bodystart="105" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_micra_1_1_core_1_1_primitives_1ab478a189f3f88f40893bbe07106f0353" prot="public" static="yes" mutable="no">
+        <type><ref refid="class_micra_1_1_core_1_1_prim_helper_factory" kindref="compound">PrimHelperFactory</ref></type>
+        <definition>PrimHelperFactory Micra.Core.Primitives.PointHelper</definition>
+        <argsstring></argsstring>
+        <name>PointHelper</name>
+        <initializer>= new <ref refid="class_micra_1_1_core_1_1_prim_helper_factory" kindref="compound">PrimHelperFactory</ref>(BuiltInClassIDA.POINTHELP_CLASS_ID)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Primitives.cs" line="109" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Primitives.cs" bodystart="109" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_micra_1_1_core_1_1_primitives_1a2a56827018ec8711a53c15b4b30b9ec1" prot="public" static="yes" mutable="no">
+        <type><ref refid="class_micra_1_1_core_1_1_prim_mod_object_factory" kindref="compound">PrimModObjectFactory</ref></type>
+        <definition>PrimModObjectFactory Micra.Core.Primitives.Bend</definition>
+        <argsstring></argsstring>
+        <name>Bend</name>
+        <initializer>= new <ref refid="class_micra_1_1_core_1_1_prim_mod_object_factory" kindref="compound">PrimModObjectFactory</ref>(BuiltInClassIDA.BENDOSM_CLASS_ID)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Primitives.cs" line="113" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Primitives.cs" bodystart="113" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_micra_1_1_core_1_1_primitives_1acb5f47b09d1dd46cbb03707b76363436" prot="public" static="yes" mutable="no">
+        <type><ref refid="class_micra_1_1_core_1_1_prim_mod_object_factory" kindref="compound">PrimModObjectFactory</ref></type>
+        <definition>PrimModObjectFactory Micra.Core.Primitives.Taper</definition>
+        <argsstring></argsstring>
+        <name>Taper</name>
+        <initializer>= new <ref refid="class_micra_1_1_core_1_1_prim_mod_object_factory" kindref="compound">PrimModObjectFactory</ref>(BuiltInClassIDA.TAPEROSM_CLASS_ID)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Primitives.cs" line="114" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Primitives.cs" bodystart="114" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_micra_1_1_core_1_1_primitives_1ab918de022c1a2ed9fb3f4aca608926ae" prot="public" static="yes" mutable="no">
+        <type><ref refid="class_micra_1_1_core_1_1_prim_mod_object_factory" kindref="compound">PrimModObjectFactory</ref></type>
+        <definition>PrimModObjectFactory Micra.Core.Primitives.Twist</definition>
+        <argsstring></argsstring>
+        <name>Twist</name>
+        <initializer>= new <ref refid="class_micra_1_1_core_1_1_prim_mod_object_factory" kindref="compound">PrimModObjectFactory</ref>(BuiltInClassIDA.TWISTOSM_CLASS_ID)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Primitives.cs" line="115" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Primitives.cs" bodystart="115" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_micra_1_1_core_1_1_primitives_1ab461fd5247465b34bf95d8a3e144489f" prot="public" static="yes" mutable="no">
+        <type><ref refid="class_micra_1_1_core_1_1_prim_mod_object_factory" kindref="compound">PrimModObjectFactory</ref></type>
+        <definition>PrimModObjectFactory Micra.Core.Primitives.Extrude</definition>
+        <argsstring></argsstring>
+        <name>Extrude</name>
+        <initializer>= new <ref refid="class_micra_1_1_core_1_1_prim_mod_object_factory" kindref="compound">PrimModObjectFactory</ref>(BuiltInClassIDA.EXTRUDEOSM_CLASS_ID)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Primitives.cs" line="116" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Primitives.cs" bodystart="116" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_micra_1_1_core_1_1_primitives_1acde97c72c71a3aadbcd5860e70672840" prot="public" static="yes" mutable="no">
+        <type><ref refid="class_micra_1_1_core_1_1_prim_mod_object_factory" kindref="compound">PrimModObjectFactory</ref></type>
+        <definition>PrimModObjectFactory Micra.Core.Primitives.Smooth</definition>
+        <argsstring></argsstring>
+        <name>Smooth</name>
+        <initializer>= new <ref refid="class_micra_1_1_core_1_1_prim_mod_object_factory" kindref="compound">PrimModObjectFactory</ref>(BuiltInClassIDA.SMOOTHOSM_CLASS_ID)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Primitives.cs" line="117" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Primitives.cs" bodystart="117" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_micra_1_1_core_1_1_primitives_1ab8a513a272294720b0a42391be41ee0b" prot="public" static="yes" mutable="no">
+        <type><ref refid="class_micra_1_1_core_1_1_prim_object_factory" kindref="compound">PrimObjectFactory</ref></type>
+        <definition>PrimObjectFactory Micra.Core.Primitives.Circle</definition>
+        <argsstring></argsstring>
+        <name>Circle</name>
+        <initializer>= new <ref refid="class_micra_1_1_core_1_1_prim_object_factory" kindref="compound">PrimObjectFactory</ref>(SClass_ID.Shape, BuiltInClassIDA.CIRCLE_CLASS_ID)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Primitives.cs" line="121" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Primitives.cs" bodystart="121" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_micra_1_1_core_1_1_primitives_1a15076d44f0aee949bc5d86da91e6ad5f" prot="public" static="yes" mutable="no">
+        <type><ref refid="class_micra_1_1_core_1_1_prim_object_factory" kindref="compound">PrimObjectFactory</ref></type>
+        <definition>PrimObjectFactory Micra.Core.Primitives.Ellipse</definition>
+        <argsstring></argsstring>
+        <name>Ellipse</name>
+        <initializer>= new <ref refid="class_micra_1_1_core_1_1_prim_object_factory" kindref="compound">PrimObjectFactory</ref>(SClass_ID.Shape, BuiltInClassIDA.ELLIPSE_CLASS_ID)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Primitives.cs" line="122" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Primitives.cs" bodystart="122" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_micra_1_1_core_1_1_primitives_1a0a0073d00989c1f8ed281dc2a8a185f8" prot="public" static="yes" mutable="no">
+        <type><ref refid="class_micra_1_1_core_1_1_prim_object_factory" kindref="compound">PrimObjectFactory</ref></type>
+        <definition>PrimObjectFactory Micra.Core.Primitives.Helix</definition>
+        <argsstring></argsstring>
+        <name>Helix</name>
+        <initializer>= new <ref refid="class_micra_1_1_core_1_1_prim_object_factory" kindref="compound">PrimObjectFactory</ref>(SClass_ID.Shape, BuiltInClassIDA.HELIX_CLASS_ID)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Primitives.cs" line="123" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Primitives.cs" bodystart="123" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_micra_1_1_core_1_1_primitives_1ad92ee42cc4d8e06f3bbc7037ee7cdbf8" prot="public" static="yes" mutable="no">
+        <type><ref refid="class_micra_1_1_core_1_1_prim_object_factory" kindref="compound">PrimObjectFactory</ref></type>
+        <definition>PrimObjectFactory Micra.Core.Primitives.LinearShape</definition>
+        <argsstring></argsstring>
+        <name>LinearShape</name>
+        <initializer>= new <ref refid="class_micra_1_1_core_1_1_prim_object_factory" kindref="compound">PrimObjectFactory</ref>(SClass_ID.Shape, BuiltInClassIDA.LINEARSHAPE_CLASS_ID)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Primitives.cs" line="124" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Primitives.cs" bodystart="124" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_micra_1_1_core_1_1_primitives_1aeeac8c3c0fdfc33bf8044e1169c14b24" prot="public" static="yes" mutable="no">
+        <type><ref refid="class_micra_1_1_core_1_1_prim_object_factory" kindref="compound">PrimObjectFactory</ref></type>
+        <definition>PrimObjectFactory Micra.Core.Primitives.LinearWave</definition>
+        <argsstring></argsstring>
+        <name>LinearWave</name>
+        <initializer>= new <ref refid="class_micra_1_1_core_1_1_prim_object_factory" kindref="compound">PrimObjectFactory</ref>(SClass_ID.Shape, BuiltInClassIDA.LINWAVE_CLASS_ID)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Primitives.cs" line="125" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Primitives.cs" bodystart="125" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_micra_1_1_core_1_1_primitives_1acc93bd9427cffc439ce4b8ec603916e9" prot="public" static="yes" mutable="no">
+        <type><ref refid="class_micra_1_1_core_1_1_prim_object_factory" kindref="compound">PrimObjectFactory</ref></type>
+        <definition>PrimObjectFactory Micra.Core.Primitives.Polygon</definition>
+        <argsstring></argsstring>
+        <name>Polygon</name>
+        <initializer>= new <ref refid="class_micra_1_1_core_1_1_prim_object_factory" kindref="compound">PrimObjectFactory</ref>(SClass_ID.Shape, BuiltInClassIDA.NGON_CLASS_ID)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Primitives.cs" line="126" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Primitives.cs" bodystart="126" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_micra_1_1_core_1_1_primitives_1a8dc8a2611568b1d7ce688af8a2c68489" prot="public" static="yes" mutable="no">
+        <type><ref refid="class_micra_1_1_core_1_1_prim_object_factory" kindref="compound">PrimObjectFactory</ref></type>
+        <definition>PrimObjectFactory Micra.Core.Primitives.Plane</definition>
+        <argsstring></argsstring>
+        <name>Plane</name>
+        <initializer>= new <ref refid="class_micra_1_1_core_1_1_prim_object_factory" kindref="compound">PrimObjectFactory</ref>(SClass_ID.Shape, BuiltInClassIDA.PLANE_CLASS_ID)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Primitives.cs" line="127" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Primitives.cs" bodystart="127" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_micra_1_1_core_1_1_primitives_1a5bac0e3ef6adc2e0e64e31f8d228b6f7" prot="public" static="yes" mutable="no">
+        <type><ref refid="class_micra_1_1_core_1_1_prim_object_factory" kindref="compound">PrimObjectFactory</ref></type>
+        <definition>PrimObjectFactory Micra.Core.Primitives.Rectangle</definition>
+        <argsstring></argsstring>
+        <name>Rectangle</name>
+        <initializer>= new <ref refid="class_micra_1_1_core_1_1_prim_object_factory" kindref="compound">PrimObjectFactory</ref>(SClass_ID.Shape, BuiltInClassIDA.RECTANGLE_CLASS_ID)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Primitives.cs" line="128" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Primitives.cs" bodystart="128" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_micra_1_1_core_1_1_primitives_1a361763997b7b8ac378d990bbacd34687" prot="public" static="yes" mutable="no">
+        <type><ref refid="class_micra_1_1_core_1_1_prim_object_factory" kindref="compound">PrimObjectFactory</ref></type>
+        <definition>PrimObjectFactory Micra.Core.Primitives.SineWave</definition>
+        <argsstring></argsstring>
+        <name>SineWave</name>
+        <initializer>= new <ref refid="class_micra_1_1_core_1_1_prim_object_factory" kindref="compound">PrimObjectFactory</ref>(SClass_ID.Shape, BuiltInClassIDA.SINEWAVE_CLASS_ID)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Primitives.cs" line="129" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Primitives.cs" bodystart="129" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_micra_1_1_core_1_1_primitives_1ac18b21b39a849a2949b8a94e9af3eabb" prot="public" static="yes" mutable="no">
+        <type><ref refid="class_micra_1_1_core_1_1_prim_object_factory" kindref="compound">PrimObjectFactory</ref></type>
+        <definition>PrimObjectFactory Micra.Core.Primitives.SimpleCamera</definition>
+        <argsstring></argsstring>
+        <name>SimpleCamera</name>
+        <initializer>= new <ref refid="class_micra_1_1_core_1_1_prim_object_factory" kindref="compound">PrimObjectFactory</ref>(SClass_ID.Camera, BuiltInClassIDA.SIMPLE_CAM_CLASS_ID)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Primitives.cs" line="133" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Primitives.cs" bodystart="133" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_micra_1_1_core_1_1_primitives_1ad15249b0b157aacf6d6dcc47205dd7fa" prot="public" static="yes" mutable="no">
+        <type><ref refid="class_micra_1_1_core_1_1_prim_object_factory" kindref="compound">PrimObjectFactory</ref></type>
+        <definition>PrimObjectFactory Micra.Core.Primitives.LookAtCamera</definition>
+        <argsstring></argsstring>
+        <name>LookAtCamera</name>
+        <initializer>= new <ref refid="class_micra_1_1_core_1_1_prim_object_factory" kindref="compound">PrimObjectFactory</ref>(SClass_ID.Camera, BuiltInClassIDA.LOOKAT_CAM_CLASS_ID)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Primitives.cs" line="134" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Primitives.cs" bodystart="134" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_micra_1_1_core_1_1_primitives_1a797fb0c63eddf6180500f7e65665e644" prot="public" static="yes" mutable="no">
+        <type><ref refid="class_micra_1_1_core_1_1_prim_object_factory" kindref="compound">PrimObjectFactory</ref></type>
+        <definition>PrimObjectFactory Micra.Core.Primitives.OmniLight</definition>
+        <argsstring></argsstring>
+        <name>OmniLight</name>
+        <initializer>= new <ref refid="class_micra_1_1_core_1_1_prim_object_factory" kindref="compound">PrimObjectFactory</ref>(SClass_ID.Light, BuiltInClassIDA.OMNI_LIGHT_CLASS_ID)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Primitives.cs" line="138" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Primitives.cs" bodystart="138" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_micra_1_1_core_1_1_primitives_1ac65148e5d1798512e70b7b63dc327c54" prot="public" static="yes" mutable="no">
+        <type><ref refid="class_micra_1_1_core_1_1_prim_object_factory" kindref="compound">PrimObjectFactory</ref></type>
+        <definition>PrimObjectFactory Micra.Core.Primitives.SpotLight</definition>
+        <argsstring></argsstring>
+        <name>SpotLight</name>
+        <initializer>= new <ref refid="class_micra_1_1_core_1_1_prim_object_factory" kindref="compound">PrimObjectFactory</ref>(SClass_ID.Light, BuiltInClassIDA.SPOT_LIGHT_CLASS_ID)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Primitives.cs" line="139" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Primitives.cs" bodystart="139" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_micra_1_1_core_1_1_primitives_1a8116e68916efcb9cdb4b7fdf128e8db1" prot="public" static="yes" mutable="no">
+        <type><ref refid="class_micra_1_1_core_1_1_prim_object_factory" kindref="compound">PrimObjectFactory</ref></type>
+        <definition>PrimObjectFactory Micra.Core.Primitives.SunLight</definition>
+        <argsstring></argsstring>
+        <name>SunLight</name>
+        <initializer>= new <ref refid="class_micra_1_1_core_1_1_prim_object_factory" kindref="compound">PrimObjectFactory</ref>(SClass_ID.Light, BuiltInClassIDA.SUNLIGHT_CLASS_ID)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Primitives.cs" line="140" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Primitives.cs" bodystart="140" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_micra_1_1_core_1_1_primitives_1ae79070d76aea00191e848686b3b9d3e5" prot="public" static="yes" mutable="no">
+        <type><ref refid="class_micra_1_1_core_1_1_prim_object_factory" kindref="compound">PrimObjectFactory</ref></type>
+        <definition>PrimObjectFactory Micra.Core.Primitives.LookAtCtrl</definition>
+        <argsstring></argsstring>
+        <name>LookAtCtrl</name>
+        <initializer>= new <ref refid="class_micra_1_1_core_1_1_prim_object_factory" kindref="compound">PrimObjectFactory</ref>(SClass_ID.CtrlRotation, BuiltInClassIDA.LOOKAT_CONTROL_CLASS_ID)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Primitives.cs" line="144" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Primitives.cs" bodystart="144" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_micra_1_1_core_1_1_primitives_1ae275dde51a79a2e557435671cc6b89ee" prot="public" static="yes" mutable="no">
+        <type><ref refid="class_micra_1_1_core_1_1_prim_object_factory" kindref="compound">PrimObjectFactory</ref></type>
+        <definition>PrimObjectFactory Micra.Core.Primitives.Path</definition>
+        <argsstring></argsstring>
+        <name>Path</name>
+        <initializer>= new <ref refid="class_micra_1_1_core_1_1_prim_object_factory" kindref="compound">PrimObjectFactory</ref>(SClass_ID.CtrlPosition, BuiltInClassIDA.PATH_CONTROL_CLASS_ID)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Primitives.cs" line="145" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Primitives.cs" bodystart="145" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Static container class containing all predefined primitives. </para>    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="414">
+        <label>Micra.Core.Primitives</label>
+        <link refid="class_micra_1_1_core_1_1_primitives"/>
+        <childnode refid="415" relation="usage">
+          <edgelabel>Polygon</edgelabel>
+          <edgelabel>Torus</edgelabel>
+          <edgelabel>Extrude</edgelabel>
+          <edgelabel>Tube</edgelabel>
+          <edgelabel>Cylinder</edgelabel>
+          <edgelabel>SunLight</edgelabel>
+          <edgelabel>OmniLight</edgelabel>
+          <edgelabel>LookAtCamera</edgelabel>
+          <edgelabel>Twist</edgelabel>
+          <edgelabel>Hedra</edgelabel>
+          <edgelabel>...</edgelabel>
+        </childnode>
+      </node>
+      <node id="415">
+        <label>static</label>
+      </node>
+    </collaborationgraph>
+    <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Primitives.cs" line="91" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Primitives.cs" bodystart="91" bodyend="147"/>
+    <listofallmembers>
+      <member refid="class_micra_1_1_core_1_1_primitives_1a2a56827018ec8711a53c15b4b30b9ec1" prot="public" virt="non-virtual"><scope>Micra::Core::Primitives</scope><name>Bend</name></member>
+      <member refid="class_micra_1_1_core_1_1_primitives_1af64dd2a73e15b28c13f74d982af51c76" prot="public" virt="non-virtual"><scope>Micra::Core::Primitives</scope><name>Box</name></member>
+      <member refid="class_micra_1_1_core_1_1_primitives_1ab8a513a272294720b0a42391be41ee0b" prot="public" virt="non-virtual"><scope>Micra::Core::Primitives</scope><name>Circle</name></member>
+      <member refid="class_micra_1_1_core_1_1_primitives_1af88c24739a9ff94cbb56792154cb7b3d" prot="public" virt="non-virtual"><scope>Micra::Core::Primitives</scope><name>Cylinder</name></member>
+      <member refid="class_micra_1_1_core_1_1_primitives_1aed574b0f731a631fa8436d3b65e3a34f" prot="public" virt="non-virtual"><scope>Micra::Core::Primitives</scope><name>Donut</name></member>
+      <member refid="class_micra_1_1_core_1_1_primitives_1a15076d44f0aee949bc5d86da91e6ad5f" prot="public" virt="non-virtual"><scope>Micra::Core::Primitives</scope><name>Ellipse</name></member>
+      <member refid="class_micra_1_1_core_1_1_primitives_1ab461fd5247465b34bf95d8a3e144489f" prot="public" virt="non-virtual"><scope>Micra::Core::Primitives</scope><name>Extrude</name></member>
+      <member refid="class_micra_1_1_core_1_1_primitives_1a927feb699cd99ba511e0fcedff313b34" prot="public" virt="non-virtual"><scope>Micra::Core::Primitives</scope><name>GSphere</name></member>
+      <member refid="class_micra_1_1_core_1_1_primitives_1ab618474ac4586eeb2bed605773bd5ac7" prot="public" virt="non-virtual"><scope>Micra::Core::Primitives</scope><name>Hedra</name></member>
+      <member refid="class_micra_1_1_core_1_1_primitives_1a0a0073d00989c1f8ed281dc2a8a185f8" prot="public" virt="non-virtual"><scope>Micra::Core::Primitives</scope><name>Helix</name></member>
+      <member refid="class_micra_1_1_core_1_1_primitives_1ad92ee42cc4d8e06f3bbc7037ee7cdbf8" prot="public" virt="non-virtual"><scope>Micra::Core::Primitives</scope><name>LinearShape</name></member>
+      <member refid="class_micra_1_1_core_1_1_primitives_1aeeac8c3c0fdfc33bf8044e1169c14b24" prot="public" virt="non-virtual"><scope>Micra::Core::Primitives</scope><name>LinearWave</name></member>
+      <member refid="class_micra_1_1_core_1_1_primitives_1a20651672155f11f1ca6c30a7611f73b2" prot="public" virt="non-virtual"><scope>Micra::Core::Primitives</scope><name>Loft</name></member>
+      <member refid="class_micra_1_1_core_1_1_primitives_1ad15249b0b157aacf6d6dcc47205dd7fa" prot="public" virt="non-virtual"><scope>Micra::Core::Primitives</scope><name>LookAtCamera</name></member>
+      <member refid="class_micra_1_1_core_1_1_primitives_1ae79070d76aea00191e848686b3b9d3e5" prot="public" virt="non-virtual"><scope>Micra::Core::Primitives</scope><name>LookAtCtrl</name></member>
+      <member refid="class_micra_1_1_core_1_1_primitives_1a797fb0c63eddf6180500f7e65665e644" prot="public" virt="non-virtual"><scope>Micra::Core::Primitives</scope><name>OmniLight</name></member>
+      <member refid="class_micra_1_1_core_1_1_primitives_1ae275dde51a79a2e557435671cc6b89ee" prot="public" virt="non-virtual"><scope>Micra::Core::Primitives</scope><name>Path</name></member>
+      <member refid="class_micra_1_1_core_1_1_primitives_1a1e7664539941781eeb261d9112dfba05" prot="public" virt="non-virtual"><scope>Micra::Core::Primitives</scope><name>Pipe</name></member>
+      <member refid="class_micra_1_1_core_1_1_primitives_1a8dc8a2611568b1d7ce688af8a2c68489" prot="public" virt="non-virtual"><scope>Micra::Core::Primitives</scope><name>Plane</name></member>
+      <member refid="class_micra_1_1_core_1_1_primitives_1ab478a189f3f88f40893bbe07106f0353" prot="public" virt="non-virtual"><scope>Micra::Core::Primitives</scope><name>PointHelper</name></member>
+      <member refid="class_micra_1_1_core_1_1_primitives_1acc93bd9427cffc439ce4b8ec603916e9" prot="public" virt="non-virtual"><scope>Micra::Core::Primitives</scope><name>Polygon</name></member>
+      <member refid="class_micra_1_1_core_1_1_primitives_1a73f2b0530e118f838859921812eafa20" prot="public" virt="non-virtual"><scope>Micra::Core::Primitives</scope><name>Pyramid</name></member>
+      <member refid="class_micra_1_1_core_1_1_primitives_1a5bac0e3ef6adc2e0e64e31f8d228b6f7" prot="public" virt="non-virtual"><scope>Micra::Core::Primitives</scope><name>Rectangle</name></member>
+      <member refid="class_micra_1_1_core_1_1_primitives_1ac18b21b39a849a2949b8a94e9af3eabb" prot="public" virt="non-virtual"><scope>Micra::Core::Primitives</scope><name>SimpleCamera</name></member>
+      <member refid="class_micra_1_1_core_1_1_primitives_1a361763997b7b8ac378d990bbacd34687" prot="public" virt="non-virtual"><scope>Micra::Core::Primitives</scope><name>SineWave</name></member>
+      <member refid="class_micra_1_1_core_1_1_primitives_1acde97c72c71a3aadbcd5860e70672840" prot="public" virt="non-virtual"><scope>Micra::Core::Primitives</scope><name>Smooth</name></member>
+      <member refid="class_micra_1_1_core_1_1_primitives_1a60251dbf0480a9babeb7f73d4b39790f" prot="public" virt="non-virtual"><scope>Micra::Core::Primitives</scope><name>Sphere</name></member>
+      <member refid="class_micra_1_1_core_1_1_primitives_1ac65148e5d1798512e70b7b63dc327c54" prot="public" virt="non-virtual"><scope>Micra::Core::Primitives</scope><name>SpotLight</name></member>
+      <member refid="class_micra_1_1_core_1_1_primitives_1a8116e68916efcb9cdb4b7fdf128e8db1" prot="public" virt="non-virtual"><scope>Micra::Core::Primitives</scope><name>SunLight</name></member>
+      <member refid="class_micra_1_1_core_1_1_primitives_1acb5f47b09d1dd46cbb03707b76363436" prot="public" virt="non-virtual"><scope>Micra::Core::Primitives</scope><name>Taper</name></member>
+      <member refid="class_micra_1_1_core_1_1_primitives_1a4cf2a6dd9f2dfea26c925800e7d05d7e" prot="public" virt="non-virtual"><scope>Micra::Core::Primitives</scope><name>Teapot</name></member>
+      <member refid="class_micra_1_1_core_1_1_primitives_1a7d040d396687e20f2e4ff14315d29c2d" prot="public" virt="non-virtual"><scope>Micra::Core::Primitives</scope><name>Torus</name></member>
+      <member refid="class_micra_1_1_core_1_1_primitives_1add5b5b4c6efda2ce6b496939233ef976" prot="public" virt="non-virtual"><scope>Micra::Core::Primitives</scope><name>Tube</name></member>
+      <member refid="class_micra_1_1_core_1_1_primitives_1ab918de022c1a2ed9fb3f4aca608926ae" prot="public" virt="non-virtual"><scope>Micra::Core::Primitives</scope><name>Twist</name></member>
+      <member refid="class_micra_1_1_core_1_1_primitives_1ae6a8285b9b491dc720467b9aff20b1d1" prot="public" virt="non-virtual"><scope>Micra::Core::Primitives</scope><name>Wave</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

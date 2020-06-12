@@ -1,0 +1,137 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
+  <compounddef id="class_micra_1_1_core_1_1_plugin" kind="class" prot="public">
+    <compoundname>Micra::Core::Plugin</compoundname>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="class_micra_1_1_core_1_1_plugin_1a4bf7e0ef654bdbc6b4668472a7e77817" prot="public" static="no" mutable="no">
+        <type>IClassDesc</type>
+        <definition>IClassDesc Micra.Core.Plugin._cd</definition>
+        <argsstring></argsstring>
+        <name>_cd</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Plugins.cs" line="84" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Plugins.cs" bodystart="84" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="property">
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_plugin_1af7547d802e5afde87839356008a0e909" prot="public" static="no" readable="no" writable="no" gettable="yes" settable="no">
+        <type>string</type>
+        <definition>string Micra.Core.Plugin.ClassName</definition>
+        <argsstring></argsstring>
+        <name>ClassName</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Plugins.cs" line="86" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Plugins.cs" bodystart="86" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_plugin_1a2f183d819108bf8c1f1e5a06b6aafe19" prot="public" static="no" readable="no" writable="no" gettable="yes" settable="no">
+        <type>string</type>
+        <definition>string Micra.Core.Plugin.Category</definition>
+        <argsstring></argsstring>
+        <name>Category</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Plugins.cs" line="87" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Plugins.cs" bodystart="87" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_plugin_1adfd43fe2052d81e78cf86f21eca65111" prot="public" static="no" readable="no" writable="no" gettable="yes" settable="no">
+        <type>string</type>
+        <definition>string Micra.Core.Plugin.InternalName</definition>
+        <argsstring></argsstring>
+        <name>InternalName</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Plugins.cs" line="89" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Plugins.cs" bodystart="89" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_plugin_1a534155d11408d66cb9d7bdf4554888c4" prot="public" static="no" readable="no" writable="no" gettable="yes" settable="no">
+        <type><ref refid="struct_micra_1_1_core_1_1_super_class_i_d" kindref="compound">SuperClassID</ref></type>
+        <definition>SuperClassID Micra.Core.Plugin.SuperClassID</definition>
+        <argsstring></argsstring>
+        <name>SuperClassID</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Plugins.cs" line="90" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Plugins.cs" bodystart="90" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_plugin_1afcfe2c2ba7f4ac1f988667508c84bd58" prot="public" static="no" readable="no" writable="no" gettable="yes" settable="no">
+        <type><ref refid="struct_micra_1_1_core_1_1_class_i_d" kindref="compound">ClassID</ref></type>
+        <definition>ClassID Micra.Core.Plugin.ClassID</definition>
+        <argsstring></argsstring>
+        <name>ClassID</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Plugins.cs" line="91" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Plugins.cs" bodystart="91" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="package-func">
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_plugin_1a4ccf0965bb7895318871792bcb845790" prot="package" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>Micra.Core.Plugin.Plugin</definition>
+        <argsstring>(IClassDesc cd)</argsstring>
+        <name>Plugin</name>
+        <param>
+          <type>IClassDesc</type>
+          <declname>cd</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Plugins.cs" line="85" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Plugins.cs" bodystart="85" bodyend="85"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_plugin_1ac8bbf93e53b10e2f17cfe6fba229c8a2" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="class_micra_1_1_core_1_1_animatable" kindref="compound">Animatable</ref></type>
+        <definition>Animatable Micra.Core.Plugin.Create</definition>
+        <argsstring>()</argsstring>
+        <name>Create</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Plugins.cs" line="88" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Plugins.cs" bodystart="88" bodyend="88"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Contains information about a plug-in and provides access to its constructor. Only supports &quot;Animatable&quot; derived plug-ins. Wraps a ClassDesc instance in the 3ds <ref refid="class_micra_1_1_core_1_1_max" kindref="compound">Max</ref> SDK. </para>    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Plugins.cs" line="83" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Plugins.cs" bodystart="83" bodyend="92"/>
+    <listofallmembers>
+      <member refid="class_micra_1_1_core_1_1_plugin_1a4bf7e0ef654bdbc6b4668472a7e77817" prot="public" virt="non-virtual"><scope>Micra::Core::Plugin</scope><name>_cd</name></member>
+      <member refid="class_micra_1_1_core_1_1_plugin_1a2f183d819108bf8c1f1e5a06b6aafe19" prot="public" virt="non-virtual"><scope>Micra::Core::Plugin</scope><name>Category</name></member>
+      <member refid="class_micra_1_1_core_1_1_plugin_1afcfe2c2ba7f4ac1f988667508c84bd58" prot="public" virt="non-virtual"><scope>Micra::Core::Plugin</scope><name>ClassID</name></member>
+      <member refid="class_micra_1_1_core_1_1_plugin_1af7547d802e5afde87839356008a0e909" prot="public" virt="non-virtual"><scope>Micra::Core::Plugin</scope><name>ClassName</name></member>
+      <member refid="class_micra_1_1_core_1_1_plugin_1ac8bbf93e53b10e2f17cfe6fba229c8a2" prot="public" virt="non-virtual"><scope>Micra::Core::Plugin</scope><name>Create</name></member>
+      <member refid="class_micra_1_1_core_1_1_plugin_1adfd43fe2052d81e78cf86f21eca65111" prot="public" virt="non-virtual"><scope>Micra::Core::Plugin</scope><name>InternalName</name></member>
+      <member refid="class_micra_1_1_core_1_1_plugin_1a4ccf0965bb7895318871792bcb845790" prot="package" virt="non-virtual"><scope>Micra::Core::Plugin</scope><name>Plugin</name></member>
+      <member refid="class_micra_1_1_core_1_1_plugin_1a534155d11408d66cb9d7bdf4554888c4" prot="public" virt="non-virtual"><scope>Micra::Core::Plugin</scope><name>SuperClassID</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

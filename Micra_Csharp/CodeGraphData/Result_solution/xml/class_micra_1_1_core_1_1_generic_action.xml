@@ -1,0 +1,268 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
+  <compounddef id="class_micra_1_1_core_1_1_generic_action" kind="class" prot="public">
+    <compoundname>Micra::Core::GenericAction</compoundname>
+    <basecompoundref prot="public" virt="non-virtual">ActionItem</basecompoundref>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="class_micra_1_1_core_1_1_generic_action_1adb519b44cf9fc006d872b7064fd535d2" prot="private" static="no" mutable="no">
+        <type>readonly string</type>
+        <definition>readonly string Micra.Core.GenericAction.name</definition>
+        <argsstring></argsstring>
+        <name>name</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/GenericAction.cs" line="15" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/GenericAction.cs" bodystart="15" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_micra_1_1_core_1_1_generic_action_1a50741369b630f750a42eebf654aa7278" prot="private" static="no" mutable="no">
+        <type>readonly string</type>
+        <definition>readonly string Micra.Core.GenericAction.category</definition>
+        <argsstring></argsstring>
+        <name>category</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/GenericAction.cs" line="16" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/GenericAction.cs" bodystart="16" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_micra_1_1_core_1_1_generic_action_1a3e5aa5221518b575bd4c344475cb26b5" prot="private" static="no" mutable="no">
+        <type>readonly string</type>
+        <definition>readonly string Micra.Core.GenericAction.description</definition>
+        <argsstring></argsstring>
+        <name>description</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/GenericAction.cs" line="17" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/GenericAction.cs" bodystart="17" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_micra_1_1_core_1_1_generic_action_1adcf5f86abe0fa943103a6f0eca4ac4ac" prot="private" static="no" mutable="no">
+        <type>readonly Action</type>
+        <definition>readonly Action Micra.Core.GenericAction.action</definition>
+        <argsstring></argsstring>
+        <name>action</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/GenericAction.cs" line="18" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/GenericAction.cs" bodystart="18" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="property">
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_generic_action_1a9be4c31e1924ad8b4f4beb2f63360d63" prot="public" static="no" readable="no" writable="no" gettable="yes" settable="no">
+        <type>override string</type>
+        <definition>override string Micra.Core.GenericAction.ButtonText</definition>
+        <argsstring></argsstring>
+        <name>ButtonText</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/GenericAction.cs" line="27" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/GenericAction.cs" bodystart="27" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_generic_action_1a423b8c5aa012298b1a9b187fce541a9e" prot="public" static="no" readable="no" writable="no" gettable="yes" settable="no">
+        <type>override string</type>
+        <definition>override string Micra.Core.GenericAction.CategoryText</definition>
+        <argsstring></argsstring>
+        <name>CategoryText</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/GenericAction.cs" line="31" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/GenericAction.cs" bodystart="31" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_generic_action_1a346bf9b082d978b99460d0aae229fdc7" prot="public" static="no" readable="no" writable="no" gettable="yes" settable="no">
+        <type>override string</type>
+        <definition>override string Micra.Core.GenericAction.DescriptionText</definition>
+        <argsstring></argsstring>
+        <name>DescriptionText</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/GenericAction.cs" line="35" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/GenericAction.cs" bodystart="35" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_generic_action_1ac2681ccc82bdbf2c71df8df74b5224be" prot="public" static="no" readable="no" writable="no" gettable="yes" settable="no">
+        <type>override Autodesk.Max.IMaxIcon</type>
+        <definition>override Autodesk.Max.IMaxIcon Micra.Core.GenericAction.Icon</definition>
+        <argsstring></argsstring>
+        <name>Icon</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/GenericAction.cs" line="44" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/GenericAction.cs" bodystart="44" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_generic_action_1ab93b11c7f0939af0a8b6df1360b022f5" prot="public" static="no" readable="no" writable="no" gettable="yes" settable="no">
+        <type>override bool</type>
+        <definition>override bool Micra.Core.GenericAction.IsItemVisible</definition>
+        <argsstring></argsstring>
+        <name>IsItemVisible</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/GenericAction.cs" line="48" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/GenericAction.cs" bodystart="48" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_generic_action_1a8b8f3d1ca937ff6405ae62a8474c5f82" prot="public" static="no" readable="no" writable="no" gettable="yes" settable="no">
+        <type>override string</type>
+        <definition>override string Micra.Core.GenericAction.MenuText</definition>
+        <argsstring></argsstring>
+        <name>MenuText</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/GenericAction.cs" line="52" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/GenericAction.cs" bodystart="52" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_generic_action_1ab10a4908c2bcba46252d5a64f9116eae" prot="public" static="no" readable="no" writable="no" gettable="yes" settable="no">
+        <type>override int</type>
+        <definition>override int Micra.Core.GenericAction.Id_</definition>
+        <argsstring></argsstring>
+        <name>Id_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/GenericAction.cs" line="72" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/GenericAction.cs" bodystart="72" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_generic_action_1aa510a7839f9cd979d2e337007b794135" prot="public" static="no" readable="no" writable="no" gettable="yes" settable="no">
+        <type>override bool</type>
+        <definition>override bool Micra.Core.GenericAction.IsChecked_</definition>
+        <argsstring></argsstring>
+        <name>IsChecked_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/GenericAction.cs" line="76" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/GenericAction.cs" bodystart="76" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_generic_action_1a42ab8df270bda50769386da9cf48086c" prot="public" static="no" readable="no" writable="no" gettable="yes" settable="no">
+        <type>override bool</type>
+        <definition>override bool Micra.Core.GenericAction.IsEnabled_</definition>
+        <argsstring></argsstring>
+        <name>IsEnabled_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/GenericAction.cs" line="80" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/GenericAction.cs" bodystart="80" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_generic_action_1a1a84a09da477443bcde13b1b9988449d" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>Micra.Core.GenericAction.GenericAction</definition>
+        <argsstring>(string name, string category, string description, Action action)</argsstring>
+        <name>GenericAction</name>
+        <param>
+          <type>string</type>
+          <declname>name</declname>
+        </param>
+        <param>
+          <type>string</type>
+          <declname>category</declname>
+        </param>
+        <param>
+          <type>string</type>
+          <declname>description</declname>
+        </param>
+        <param>
+          <type>Action</type>
+          <declname>action</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/GenericAction.cs" line="20" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/GenericAction.cs" bodystart="20" bodyend="25"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_generic_action_1ae1e2cffdf5f9674e8e55b7b017bca175" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>override bool</type>
+        <definition>override bool Micra.Core.GenericAction.ExecuteAction</definition>
+        <argsstring>()</argsstring>
+        <name>ExecuteAction</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/GenericAction.cs" line="39" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/GenericAction.cs" bodystart="39" bodyend="42"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Used for declaring action items. </para>    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="135">
+        <label>Autodesk::Max::Plugins::ActionItem</label>
+      </node>
+      <node id="134">
+        <label>Micra.Core.GenericAction</label>
+        <link refid="class_micra_1_1_core_1_1_generic_action"/>
+        <childnode refid="135" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="137">
+        <label>Autodesk::Max::Plugins::ActionItem</label>
+      </node>
+      <node id="136">
+        <label>Micra.Core.GenericAction</label>
+        <link refid="class_micra_1_1_core_1_1_generic_action"/>
+        <childnode refid="137" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/GenericAction.cs" line="14" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/GenericAction.cs" bodystart="14" bodyend="84"/>
+    <listofallmembers>
+      <member refid="class_micra_1_1_core_1_1_generic_action_1adcf5f86abe0fa943103a6f0eca4ac4ac" prot="private" virt="non-virtual"><scope>Micra::Core::GenericAction</scope><name>action</name></member>
+      <member refid="class_micra_1_1_core_1_1_generic_action_1a9be4c31e1924ad8b4f4beb2f63360d63" prot="public" virt="non-virtual"><scope>Micra::Core::GenericAction</scope><name>ButtonText</name></member>
+      <member refid="class_micra_1_1_core_1_1_generic_action_1a50741369b630f750a42eebf654aa7278" prot="private" virt="non-virtual"><scope>Micra::Core::GenericAction</scope><name>category</name></member>
+      <member refid="class_micra_1_1_core_1_1_generic_action_1a423b8c5aa012298b1a9b187fce541a9e" prot="public" virt="non-virtual"><scope>Micra::Core::GenericAction</scope><name>CategoryText</name></member>
+      <member refid="class_micra_1_1_core_1_1_generic_action_1a3e5aa5221518b575bd4c344475cb26b5" prot="private" virt="non-virtual"><scope>Micra::Core::GenericAction</scope><name>description</name></member>
+      <member refid="class_micra_1_1_core_1_1_generic_action_1a346bf9b082d978b99460d0aae229fdc7" prot="public" virt="non-virtual"><scope>Micra::Core::GenericAction</scope><name>DescriptionText</name></member>
+      <member refid="class_micra_1_1_core_1_1_generic_action_1ae1e2cffdf5f9674e8e55b7b017bca175" prot="public" virt="non-virtual"><scope>Micra::Core::GenericAction</scope><name>ExecuteAction</name></member>
+      <member refid="class_micra_1_1_core_1_1_generic_action_1a1a84a09da477443bcde13b1b9988449d" prot="public" virt="non-virtual"><scope>Micra::Core::GenericAction</scope><name>GenericAction</name></member>
+      <member refid="class_micra_1_1_core_1_1_generic_action_1ac2681ccc82bdbf2c71df8df74b5224be" prot="public" virt="non-virtual"><scope>Micra::Core::GenericAction</scope><name>Icon</name></member>
+      <member refid="class_micra_1_1_core_1_1_generic_action_1ab10a4908c2bcba46252d5a64f9116eae" prot="public" virt="non-virtual"><scope>Micra::Core::GenericAction</scope><name>Id_</name></member>
+      <member refid="class_micra_1_1_core_1_1_generic_action_1aa510a7839f9cd979d2e337007b794135" prot="public" virt="non-virtual"><scope>Micra::Core::GenericAction</scope><name>IsChecked_</name></member>
+      <member refid="class_micra_1_1_core_1_1_generic_action_1a42ab8df270bda50769386da9cf48086c" prot="public" virt="non-virtual"><scope>Micra::Core::GenericAction</scope><name>IsEnabled_</name></member>
+      <member refid="class_micra_1_1_core_1_1_generic_action_1ab93b11c7f0939af0a8b6df1360b022f5" prot="public" virt="non-virtual"><scope>Micra::Core::GenericAction</scope><name>IsItemVisible</name></member>
+      <member refid="class_micra_1_1_core_1_1_generic_action_1a8b8f3d1ca937ff6405ae62a8474c5f82" prot="public" virt="non-virtual"><scope>Micra::Core::GenericAction</scope><name>MenuText</name></member>
+      <member refid="class_micra_1_1_core_1_1_generic_action_1adb519b44cf9fc006d872b7064fd535d2" prot="private" virt="non-virtual"><scope>Micra::Core::GenericAction</scope><name>name</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

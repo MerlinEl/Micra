@@ -1,0 +1,24 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
+  <compounddef id="namespace_micra_1_1_tools" kind="namespace">
+    <compoundname>Micra::Tools</compoundname>
+    <innerclass refid="class_micra_1_1_tools_1_1_csharp_to_max_test" prot="public">Micra::Tools::CsharpToMaxTest</innerclass>
+    <innerclass refid="class_micra_1_1_tools_1_1_mx_console" prot="public">Micra::Tools::MxConsole</innerclass>
+    <innerclass refid="class_micra_1_1_tools_1_1_mx_file" prot="public">Micra::Tools::MxFile</innerclass>
+    <innerclass refid="class_micra_1_1_tools_1_1_mx_geo" prot="public">Micra::Tools::MxGeo</innerclass>
+    <innerclass refid="class_micra_1_1_tools_1_1_mx_geometry_optimizer" prot="public">Micra::Tools::MxGeometryOptimizer</innerclass>
+    <innerclass refid="class_micra_1_1_tools_1_1_mx_get" prot="public">Micra::Tools::MxGet</innerclass>
+    <innerclass refid="class_micra_1_1_tools_1_1test_sub" prot="public">Micra::Tools::testSub</innerclass>
+    <innerclass refid="class_micra_1_1_tools_1_1_mx_map" prot="public">Micra::Tools::MxMap</innerclass>
+    <innerclass refid="class_micra_1_1_tools_1_1_mx_poly" prot="public">Micra::Tools::MxPoly</innerclass>
+    <innerclass refid="class_micra_1_1_tools_1_1_mx_set" prot="public">Micra::Tools::MxSet</innerclass>
+    <innerclass refid="class_micra_1_1_tools_1_1_mx_ui" prot="public">Micra::Tools::MxUi</innerclass>
+    <innerclass refid="class_micra_1_1_tools_1_1_mx_uvs" prot="public">Micra::Tools::MxUvs</innerclass>
+    <innernamespace refid="namespace_micra_1_1_tools_1_1_properties">Micra::Tools::Properties</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/CsharpToMaxTest.cs" line="12" column="1"/>
+  </compounddef>
+</doxygen>

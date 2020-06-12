@@ -1,0 +1,14 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
+  <compounddef id="namespace_micra_tools_1_1_launcher" kind="namespace">
+    <compoundname>MicraTools::Launcher</compoundname>
+    <innerclass refid="class_micra_tools_1_1_launcher_1_1_form1" prot="public">MicraTools::Launcher::Form1</innerclass>
+    <innerclass refid="class_micra_tools_1_1_launcher_1_1_program" prot="public">MicraTools::Launcher::Program</innerclass>
+    <innernamespace refid="namespace_micra_tools_1_1_launcher_1_1_properties">MicraTools::Launcher::Properties</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Form1.cs" line="8" column="1"/>
+  </compounddef>
+</doxygen>

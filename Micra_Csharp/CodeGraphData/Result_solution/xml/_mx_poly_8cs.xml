@@ -1,0 +1,128 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
+  <compounddef id="_mx_poly_8cs" kind="file">
+    <compoundname>MxPoly.cs</compoundname>
+    <innerclass refid="class_micra_1_1_tools_1_1_mx_poly" prot="public">Micra::Tools::MxPoly</innerclass>
+    <innernamespace refid="namespace_micra_1_1_tools">Micra::Tools</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="keyword">using</highlight><highlight class="normal"><sp/>Autodesk.Max;</highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="keyword">using</highlight><highlight class="normal"><sp/>Micra.Core;</highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight><highlight class="keyword">using</highlight><highlight class="normal"><sp/>System;</highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="keyword">using</highlight><highlight class="normal"><sp/>System.Collections.Generic;</highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">Micra.Tools<sp/>{</highlight></codeline>
+<codeline lineno="7" refid="class_micra_1_1_tools_1_1_mx_poly" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="class_micra_1_1_tools_1_1_mx_poly" kindref="compound">MxPoly</ref><sp/>{</highlight></codeline>
+<codeline lineno="8" refid="class_micra_1_1_tools_1_1_mx_poly_1a0e90bd8aa82248ad9231802832e1d4d3" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">internal</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_micra_1_1_tools_1_1_mx_poly_1a0e90bd8aa82248ad9231802832e1d4d3" kindref="member">SelectSimillarElements</ref>()<sp/>{</highlight></codeline>
+<codeline lineno="9"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">throw</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">new</highlight><highlight class="normal"><sp/>NotImplementedException();</highlight></codeline>
+<codeline lineno="10"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight></codeline>
+<codeline lineno="12"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*internal<sp/>static<sp/>float<sp/>GetGeometryVolume(IINode<sp/>obj)<sp/>{</highlight></codeline>
+<codeline lineno="13"><highlight class="comment"></highlight></codeline>
+<codeline lineno="14"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>IObjectState<sp/>iState<sp/>=<sp/>obj.EvalWorldState(0,<sp/>true);</highlight></codeline>
+<codeline lineno="15"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>IObject<sp/>iObj<sp/>=<sp/>iState.Obj;</highlight></codeline>
+<codeline lineno="16"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ITriObject<sp/>iTri<sp/>=<sp/>(ITriObject)iObj.ConvertToType(0,<sp/>MxGet.Global.TriObjectClassID);</highlight></codeline>
+<codeline lineno="17"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>IMesh<sp/>mesh<sp/>=<sp/>iTri.Mesh;<sp/>//Autodesk.Max.Wrappers.Mesh</highlight></codeline>
+<codeline lineno="18"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Kernel.WriteLine(&quot;\tGetGeometryVolume<sp/>obj:{0}<sp/>trimesh:{1}<sp/>NumFaces:{2}&quot;,<sp/>obj.Name,<sp/>mesh.ToString(),<sp/>mesh.NumFaces);</highlight></codeline>
+<codeline lineno="19"><highlight class="comment"></highlight></codeline>
+<codeline lineno="20"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>double<sp/>objVolume<sp/>=<sp/>0.0;</highlight></codeline>
+<codeline lineno="21"><highlight class="comment"></highlight></codeline>
+<codeline lineno="22"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>foreach<sp/>(<sp/>IFace<sp/>f<sp/>in<sp/>mesh.Faces<sp/>)<sp/>{</highlight></codeline>
+<codeline lineno="23"><highlight class="comment"></highlight></codeline>
+<codeline lineno="24"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>IntPtr<sp/>fverts<sp/>=<sp/>f.AllVerts;</highlight></codeline>
+<codeline lineno="25"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>IPoint3<sp/>v0<sp/>=<sp/>mesh.GetVert((int)(<sp/>f.GetVert(0)<sp/>));</highlight></codeline>
+<codeline lineno="26"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>IPoint3<sp/>v1<sp/>=<sp/>mesh.GetVert((int)(<sp/>f.GetVert(1)<sp/>));</highlight></codeline>
+<codeline lineno="27"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>IPoint3<sp/>v2<sp/>=<sp/>mesh.GetVert((int)(<sp/>f.GetVert(2)<sp/>));</highlight></codeline>
+<codeline lineno="28"><highlight class="comment"></highlight></codeline>
+<codeline lineno="29"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>MxVector<sp/>v3<sp/>=<sp/>MxVector.FromIPoints(v1,<sp/>v0);</highlight></codeline>
+<codeline lineno="30"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>MxVector<sp/>v4<sp/>=<sp/>MxVector.FromIPoints(v2,<sp/>v0);</highlight></codeline>
+<codeline lineno="31"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>MxVector<sp/>v5<sp/>=<sp/>MxVector.FromIPoint(v0);</highlight></codeline>
+<codeline lineno="32"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>objVolume<sp/>+=<sp/>MxVector.DotProduct(MxVector.CrossProduct(v3,<sp/>v4),<sp/>v5);</highlight></codeline>
+<codeline lineno="33"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="34"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>return<sp/>(float)(<sp/>objVolume<sp/>/<sp/>mesh.Faces.Count<sp/>);</highlight></codeline>
+<codeline lineno="35"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="36"><highlight class="normal"></highlight></codeline>
+<codeline lineno="37" refid="class_micra_1_1_tools_1_1_mx_poly_1a77fbcbfe33405d4e5e3845c9f1fba57b" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">internal</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/>List&lt;IPoint3&gt;<sp/><ref refid="class_micra_1_1_tools_1_1_mx_poly_1a77fbcbfe33405d4e5e3845c9f1fba57b" kindref="member">GetVerticesPositions</ref>(IINode<sp/>obj)<sp/>{<sp/></highlight><highlight class="comment">//not<sp/>tested<sp/>not<sp/>used</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="38"><highlight class="normal"></highlight></codeline>
+<codeline lineno="39"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>IObjectState<sp/>iState<sp/>=<sp/>obj.EvalWorldState(0,<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="40"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>IObject<sp/>iObj<sp/>=<sp/>iState.Obj;</highlight></codeline>
+<codeline lineno="41"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ITriObject<sp/>iTri<sp/>=<sp/>(ITriObject)iObj.ConvertToType(0,<sp/><ref refid="class_micra_1_1_tools_1_1_mx_get" kindref="compound">MxGet</ref>.<ref refid="class_micra_1_1_tools_1_1_mx_get_1a1231af5f9820ab4ed031b0637cb4988c" kindref="member">Global</ref>.TriObjectClassID);</highlight></codeline>
+<codeline lineno="42"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>IMesh<sp/>mesh<sp/>=<sp/>iTri.Mesh;</highlight></codeline>
+<codeline lineno="43"><highlight class="normal"></highlight></codeline>
+<codeline lineno="45"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>IInterval<sp/>iTimeRange<sp/>=<sp/>obj.GetTimeRange(0);</highlight></codeline>
+<codeline lineno="46"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//IMatrix3<sp/>worldTm<sp/>=<sp/>obj.GetObjTMAfterWSM(0,<sp/>iTimeRange);</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="47"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>IMatrix3<sp/>tmObj2World<sp/>=<sp/>obj.GetObjectTM(0,<sp/>iTimeRange);<sp/></highlight><highlight class="comment">//<sp/>where<sp/>i<sp/>is<sp/>your<sp/>IINode</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="48"><highlight class="normal"></highlight></codeline>
+<codeline lineno="49"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>List&lt;IPoint3&gt;<sp/>points<sp/>=<sp/></highlight><highlight class="keyword">new</highlight><highlight class="normal"><sp/>List&lt;IPoint3&gt;<sp/>{<sp/>};</highlight></codeline>
+<codeline lineno="50"><highlight class="normal"></highlight></codeline>
+<codeline lineno="51"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>vertID<sp/>=<sp/>0;<sp/>vertID<sp/>&lt;<sp/>mesh.NumVerts;<sp/>vertID++<sp/>)<sp/>{</highlight></codeline>
+<codeline lineno="52"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>IPoint3<sp/>vertObjectSpace<sp/>=<sp/>mesh.GetVert(vertID);</highlight></codeline>
+<codeline lineno="53"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>IPoint3<sp/>vertWorldSpace<sp/>=<sp/>tmObj2World.PointTransform(vertObjectSpace);<sp/></highlight><highlight class="comment">//correction</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="54"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//IPoint3<sp/>vertWorldSpace<sp/>=<sp/>worldTm.PointTransform(vertObjectSpace);</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="55"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>points.Add(vertWorldSpace);</highlight></codeline>
+<codeline lineno="56"><highlight class="normal"></highlight></codeline>
+<codeline lineno="57"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Kernel.WriteLine(vertID.ToString()<sp/>+<sp/></highlight><highlight class="stringliteral">&quot;:<sp/>&quot;</highlight><highlight class="normal"><sp/>+<sp/>vertWorldSpace.X.ToString()<sp/>+<sp/></highlight><highlight class="stringliteral">&quot;,<sp/>&quot;</highlight><highlight class="normal"><sp/>+<sp/>vertWorldSpace.Y.ToString()<sp/>+<sp/></highlight><highlight class="stringliteral">&quot;,<sp/>&quot;</highlight><highlight class="normal"><sp/>+<sp/>vertWorldSpace.Z.ToString());</highlight></codeline>
+<codeline lineno="58"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="59"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>points;</highlight></codeline>
+<codeline lineno="60"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="61"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="62"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="63"><highlight class="normal"></highlight></codeline>
+<codeline lineno="64"><highlight class="normal"></highlight></codeline>
+<codeline lineno="65"><highlight class="normal"></highlight><highlight class="comment">/*</highlight></codeline>
+<codeline lineno="66"><highlight class="comment"></highlight></codeline>
+<codeline lineno="67"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>internal<sp/>static<sp/>float<sp/>GetGeometryVolume(IINode<sp/>obj)<sp/>{</highlight></codeline>
+<codeline lineno="68"><highlight class="comment"></highlight></codeline>
+<codeline lineno="69"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>IObjectState<sp/>iState<sp/>=<sp/>obj.EvalWorldState(0,<sp/>true);</highlight></codeline>
+<codeline lineno="70"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>IObject<sp/>iObj<sp/>=<sp/>iState.Obj;</highlight></codeline>
+<codeline lineno="71"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ITriObject<sp/>iTri<sp/>=<sp/>(ITriObject)iObj.ConvertToType(0,<sp/>MxGet.Global.TriObjectClassID);</highlight></codeline>
+<codeline lineno="72"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>IMesh<sp/>mesh<sp/>=<sp/>iTri.Mesh;<sp/>//Autodesk.Max.Wrappers.Mesh</highlight></codeline>
+<codeline lineno="73"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Kernel.WriteLine(&quot;\tGetGeometryVolume<sp/>obj:{0}<sp/>trimesh:{1}<sp/>numVerts:{2}&quot;,<sp/>obj.Name,<sp/>mesh.ToString(),<sp/>mesh.NumVerts);</highlight></codeline>
+<codeline lineno="74"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>List&lt;IPoint3&gt;<sp/>points<sp/>=<sp/>new<sp/>List&lt;IPoint3&gt;<sp/>{<sp/>};</highlight></codeline>
+<codeline lineno="75"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>for<sp/>(<sp/>int<sp/>vertID<sp/>=<sp/>0;<sp/>vertID<sp/>&lt;<sp/>mesh.NumVerts;<sp/>vertID++<sp/>)<sp/>{</highlight></codeline>
+<codeline lineno="76"><highlight class="comment"></highlight></codeline>
+<codeline lineno="77"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>IPoint3<sp/>p<sp/>=<sp/>mesh.GetVert(vertID);</highlight></codeline>
+<codeline lineno="78"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Kernel.WriteLine(&quot;\tpos<sp/>[{0},<sp/>{1},<sp/>{2}]&quot;,<sp/>p.X,<sp/>p.Y,<sp/>p.Z);</highlight></codeline>
+<codeline lineno="79"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>points.Add(p);</highlight></codeline>
+<codeline lineno="80"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="81"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>return<sp/>MxMath.GetAreaFromPoints(points);</highlight></codeline>
+<codeline lineno="82"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="83"><highlight class="comment"><sp/>*<sp/></highlight></codeline>
+<codeline lineno="84"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>var<sp/>invertedWorldMatrix<sp/>=<sp/>GetInvertWorldTM(meshNode,<sp/>0);</highlight></codeline>
+<codeline lineno="85"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>var<sp/>offsetTM<sp/>=<sp/>GetOffsetTM(meshNode,<sp/>0);</highlight></codeline>
+<codeline lineno="86"><highlight class="comment"><sp/>*<sp/></highlight></codeline>
+<codeline lineno="87"><highlight class="comment"><sp/>*<sp/></highlight></codeline>
+<codeline lineno="88"><highlight class="comment">fn<sp/>CalculateVolumeAndCenterOfMass<sp/>obj<sp/>=</highlight></codeline>
+<codeline lineno="89"><highlight class="comment">(</highlight></codeline>
+<codeline lineno="90"><highlight class="comment">local<sp/>Volume=<sp/>0.0</highlight></codeline>
+<codeline lineno="91"><highlight class="comment">local<sp/>Center=<sp/>[0.0,<sp/>0.0,<sp/>0.0]</highlight></codeline>
+<codeline lineno="92"><highlight class="comment">local<sp/>theMesh<sp/>=<sp/>snapshotasmesh<sp/>obj</highlight></codeline>
+<codeline lineno="93"><highlight class="comment">local<sp/>numFaces<sp/>=<sp/>theMesh.numfaces</highlight></codeline>
+<codeline lineno="94"><highlight class="comment">for<sp/>i<sp/>=<sp/>1<sp/>to<sp/>numFaces<sp/>do</highlight></codeline>
+<codeline lineno="95"><highlight class="comment">(</highlight></codeline>
+<codeline lineno="96"><highlight class="comment"><sp/><sp/>local<sp/>Face=<sp/>getFace<sp/>theMesh<sp/>i</highlight></codeline>
+<codeline lineno="97"><highlight class="comment"><sp/><sp/>local<sp/>vert2<sp/>=<sp/>getVert<sp/>theMesh<sp/>Face.z</highlight></codeline>
+<codeline lineno="98"><highlight class="comment"><sp/><sp/>local<sp/>vert1<sp/>=<sp/>getVert<sp/>theMesh<sp/>Face.y</highlight></codeline>
+<codeline lineno="99"><highlight class="comment"><sp/><sp/>local<sp/>vert0<sp/>=<sp/>getVert<sp/>theMesh<sp/>Face.x</highlight></codeline>
+<codeline lineno="100"><highlight class="comment"><sp/><sp/>local<sp/>dV<sp/>=<sp/>Dot<sp/>(Cross<sp/>(vert1<sp/>-<sp/>vert0)<sp/>(vert2<sp/>-<sp/>vert0))<sp/>vert0</highlight></codeline>
+<codeline lineno="101"><highlight class="comment"><sp/><sp/>Volume+=<sp/>dV</highlight></codeline>
+<codeline lineno="102"><highlight class="comment"><sp/><sp/>Center+=<sp/>(vert0<sp/>+<sp/>vert1<sp/>+<sp/>vert2)<sp/>*<sp/>dV</highlight></codeline>
+<codeline lineno="103"><highlight class="comment">)</highlight></codeline>
+<codeline lineno="104"><highlight class="comment">delete<sp/>theMesh</highlight></codeline>
+<codeline lineno="105"><highlight class="comment">Volume<sp/>/=<sp/>6</highlight></codeline>
+<codeline lineno="106"><highlight class="comment">Center<sp/>/=<sp/>24</highlight></codeline>
+<codeline lineno="107"><highlight class="comment">Center<sp/>/=<sp/>Volume</highlight></codeline>
+<codeline lineno="108"><highlight class="comment">#(Volume,Center)</highlight></codeline>
+<codeline lineno="109"><highlight class="comment">)</highlight></codeline>
+<codeline lineno="110"><highlight class="comment"><sp/>--Call<sp/>the<sp/>function<sp/>on<sp/>a<sp/>geometry<sp/>object<sp/>-<sp/>the<sp/>result<sp/>will<sp/>be<sp/>a<sp/>list<sp/>--containing<sp/>the<sp/>Volume<sp/>and<sp/>the<sp/>Center<sp/>of<sp/>mass<sp/>in<sp/>local<sp/>space.</highlight></codeline>
+<codeline lineno="111"><highlight class="comment">theVolAndCom<sp/>=<sp/>CalculateVolumeAndCenterOfMass<sp/>$Sphere01</highlight></codeline>
+<codeline lineno="112"><highlight class="comment">--To<sp/>get<sp/>the<sp/>world<sp/>space<sp/>of<sp/>the<sp/>Center<sp/>of<sp/>Mass<sp/>just<sp/>like<sp/>in<sp/>the<sp/>Utility,<sp/>--you<sp/>have<sp/>to<sp/>do<sp/>some<sp/>extra<sp/>work:</highlight></codeline>
+<codeline lineno="113"><highlight class="comment">theComInWorld<sp/>=<sp/>theVolAndCom[2]<sp/>*<sp/>$Sphere01.objectTransform</highlight></codeline>
+<codeline lineno="114"><highlight class="comment"><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+    </programlisting>
+    <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/MxPoly.cs"/>
+  </compounddef>
+</doxygen>

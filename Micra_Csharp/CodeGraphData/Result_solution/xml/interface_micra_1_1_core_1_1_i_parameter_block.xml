@@ -1,0 +1,77 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
+  <compounddef id="interface_micra_1_1_core_1_1_i_parameter_block" kind="interface" prot="public">
+    <compoundname>Micra::Core::IParameterBlock</compoundname>
+    <derivedcompoundref refid="class_micra_1_1_core_1_1_parameter_block1" prot="public" virt="non-virtual">Micra.Core.ParameterBlock1</derivedcompoundref>
+    <derivedcompoundref refid="class_micra_1_1_core_1_1_parameter_block2" prot="public" virt="non-virtual">Micra.Core.ParameterBlock2</derivedcompoundref>
+      <sectiondef kind="property">
+      <memberdef kind="property" id="interface_micra_1_1_core_1_1_i_parameter_block_1a60cbcc721fd1cf91ebeaaf5f6c00b08c" prot="public" static="no" readable="no" writable="no" gettable="yes" settable="no">
+        <type>IEnumerable&lt; <ref refid="interface_micra_1_1_core_1_1_i_parameter" kindref="compound">IParameter</ref> &gt;</type>
+        <definition>IEnumerable&lt;IParameter&gt; Micra.Core.IParameterBlock.Params</definition>
+        <argsstring></argsstring>
+        <name>Params</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/ParameterBlockInterface.cs" line="36" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/ParameterBlockInterface.cs" bodystart="36" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="interface_micra_1_1_core_1_1_i_parameter_block_1a645587add786c0fad1876679f6d215e1" prot="public" static="no" readable="no" writable="no" gettable="yes" settable="no">
+        <type><ref refid="interface_micra_1_1_core_1_1_i_parameter" kindref="compound">IParameter</ref></type>
+        <definition>IParameter Micra.Core.IParameterBlock.this[string internalName]</definition>
+        <argsstring></argsstring>
+        <name>this[string internalName]</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/ParameterBlockInterface.cs" line="37" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/ParameterBlockInterface.cs" bodystart="37" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="interface_micra_1_1_core_1_1_i_parameter_block_1a46a5c80cb8cad9f57706d1d3d1a118d2" prot="public" static="no" readable="no" writable="no" gettable="yes" settable="no">
+        <type><ref refid="interface_micra_1_1_core_1_1_i_parameter" kindref="compound">IParameter</ref></type>
+        <definition>IParameter Micra.Core.IParameterBlock.this[int id]</definition>
+        <argsstring></argsstring>
+        <name>this[int id]</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/ParameterBlockInterface.cs" line="38" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/ParameterBlockInterface.cs" bodystart="38" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Represents a list of parameters, either from an IParamBlock or IParamBlock2 </para>    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="172">
+        <label>Micra.Core.ParameterBlock1</label>
+        <link refid="class_micra_1_1_core_1_1_parameter_block1"/>
+        <childnode refid="171" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="173">
+        <label>Micra.Core.ParameterBlock2</label>
+        <link refid="class_micra_1_1_core_1_1_parameter_block2"/>
+        <childnode refid="171" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="171">
+        <label>Micra.Core.IParameterBlock</label>
+        <link refid="interface_micra_1_1_core_1_1_i_parameter_block"/>
+      </node>
+    </inheritancegraph>
+    <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/ParameterBlockInterface.cs" line="35" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/ParameterBlockInterface.cs" bodystart="34" bodyend="39"/>
+    <listofallmembers>
+      <member refid="interface_micra_1_1_core_1_1_i_parameter_block_1a60cbcc721fd1cf91ebeaaf5f6c00b08c" prot="public" virt="non-virtual"><scope>Micra::Core::IParameterBlock</scope><name>Params</name></member>
+      <member refid="interface_micra_1_1_core_1_1_i_parameter_block_1a46a5c80cb8cad9f57706d1d3d1a118d2" prot="public" virt="non-virtual"><scope>Micra::Core::IParameterBlock</scope><name>this[int id]</name></member>
+      <member refid="interface_micra_1_1_core_1_1_i_parameter_block_1a645587add786c0fad1876679f6d215e1" prot="public" virt="non-virtual"><scope>Micra::Core::IParameterBlock</scope><name>this[string internalName]</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,77 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
+  <compounddef id="class_micra_1_1_tools_1_1_mx_uvs" kind="class" prot="public">
+    <compoundname>Micra::Tools::MxUvs</compoundname>
+    <innerclass refid="class_micra_1_1_tools_1_1_mx_uvs_1_1_uv" prot="public">Micra::Tools::MxUvs::Uv</innerclass>
+      <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="class_micra_1_1_tools_1_1_mx_uvs_1a5b8ab1df0c095c0f09d057e98c833b9b" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="class_micra_1_1_tools_1_1_mx_uvs_1_1_uv" kindref="compound">Uv</ref></type>
+        <definition>static Uv Micra.Tools.MxUvs.GetUvCoordinate</definition>
+        <argsstring>(IINode node, int coordinateIndex, IGlobal global, int mapNumber=1)</argsstring>
+        <name>GetUvCoordinate</name>
+        <param>
+          <type>IINode</type>
+          <declname>node</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>coordinateIndex</declname>
+        </param>
+        <param>
+          <type>IGlobal</type>
+          <declname>global</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>mapNumber</declname>
+          <defval>1</defval>
+        </param>
+        <briefdescription>
+<para>Return uv coordinate by index </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>node</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>node </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>coordinateIndex</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>index of uv array </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+/// <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>global</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>IGlobal object.</para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>mapNumber</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>UVW Map Number</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/MxUvs.cs" line="19" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/MxUvs.cs" bodystart="19" bodyend="46"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/MxUvs.cs" line="5" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/MxUvs.cs" bodystart="5" bodyend="47"/>
+    <listofallmembers>
+      <member refid="class_micra_1_1_tools_1_1_mx_uvs_1a5b8ab1df0c095c0f09d057e98c833b9b" prot="public" virt="non-virtual"><scope>Micra::Tools::MxUvs</scope><name>GetUvCoordinate</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

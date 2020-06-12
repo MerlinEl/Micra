@@ -1,0 +1,58 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
+  <compounddef id="dir_7e725df29100e00411ca2e6ad2eb17ed" kind="dir">
+    <compoundname>D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core</compoundname>
+    <innerdir refid="dir_5c6a74a19dd3df242b25728bfbcdcd15">D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Properties</innerdir>
+    <innerfile refid="_action_manager_8cs">ActionManager.cs</innerfile>
+    <innerfile refid="_animatable_8cs">Animatable.cs</innerfile>
+    <innerfile refid="_animation_manager_8cs">AnimationManager.cs</innerfile>
+    <innerfile refid="_camera_8cs">Camera.cs</innerfile>
+    <innerfile refid="_class_i_d_8cs">ClassID.cs</innerfile>
+    <innerfile refid="_collection_extensions_8cs">CollectionExtensions.cs</innerfile>
+    <innerfile refid="_color_8cs">Color.cs</innerfile>
+    <innerfile refid="_custom_attribute_8cs">CustomAttribute.cs</innerfile>
+    <innerfile refid="_enum_channels_8cs">EnumChannels.cs</innerfile>
+    <innerfile refid="_enum_flags_8cs">EnumFlags.cs</innerfile>
+    <innerfile refid="_enum_ref_msg_8cs">EnumRefMsg.cs</innerfile>
+    <innerfile refid="_file_manager_8cs">FileManager.cs</innerfile>
+    <innerfile refid="_generic_action_8cs">GenericAction.cs</innerfile>
+    <innerfile refid="_geometry_8cs">Geometry.cs</innerfile>
+    <innerfile refid="_geo_ops_8cs">GeoOps.cs</innerfile>
+    <innerfile refid="_global_methods_8cs">GlobalMethods.cs</innerfile>
+    <innerfile refid="_i_bit_array_extensions_8cs">IBitArrayExtensions.cs</innerfile>
+    <innerfile refid="_kernel_8cs">Kernel.cs</innerfile>
+    <innerfile refid="_light_8cs">Light.cs</innerfile>
+    <innerfile refid="_material_8cs">Material.cs</innerfile>
+    <innerfile refid="_matrix3_8cs">Matrix3.cs</innerfile>
+    <innerfile refid="_max_8cs">Max.cs</innerfile>
+    <innerfile refid="_menu_manager_8cs">MenuManager.cs</innerfile>
+    <innerfile refid="_mesh_8cs">Mesh.cs</innerfile>
+    <innerfile refid="_modifier_8cs">Modifier.cs</innerfile>
+    <innerfile refid="_node_8cs">Node.cs</innerfile>
+    <innerfile refid="_obj_ops_8cs">ObjOps.cs</innerfile>
+    <innerfile refid="_parameter_block1_8cs">ParameterBlock1.cs</innerfile>
+    <innerfile refid="_parameter_block2_8cs">ParameterBlock2.cs</innerfile>
+    <innerfile refid="_parameter_block_interface_8cs">ParameterBlockInterface.cs</innerfile>
+    <innerfile refid="_plugins_8cs">Plugins.cs</innerfile>
+    <innerfile refid="_point3_8cs">Point3.cs</innerfile>
+    <innerfile refid="_poly_8cs">Poly.cs</innerfile>
+    <innerfile refid="_primitives_8cs">Primitives.cs</innerfile>
+    <innerfile refid="_reference_listener_8cs">ReferenceListener.cs</innerfile>
+    <innerfile refid="_reference_maker_and_target_8cs">ReferenceMakerAndTarget.cs</innerfile>
+    <innerfile refid="_scene_8cs">Scene.cs</innerfile>
+    <innerfile refid="_scene_constructor_8cs">SceneConstructor.cs</innerfile>
+    <innerfile refid="_scene_object_8cs">SceneObject.cs</innerfile>
+    <innerfile refid="_serializable_model_8cs">SerializableModel.cs</innerfile>
+    <innerfile refid="_serializable_scene_8cs">SerializableScene.cs</innerfile>
+    <innerfile refid="_structs_8cs">Structs.cs</innerfile>
+    <innerfile refid="_super_class_i_d_8cs">SuperClassID.cs</innerfile>
+    <innerfile refid="_switch_8cs">Switch.cs</innerfile>
+    <innerfile refid="_utility_8cs">Utility.cs</innerfile>
+    <innerfile refid="_vector3_8cs">Vector3.cs</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/"/>
+  </compounddef>
+</doxygen>

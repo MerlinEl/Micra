@@ -1,0 +1,211 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
+  <compounddef id="class_micra_1_1_core_1_1_parameter_block1" kind="class" prot="public">
+    <compoundname>Micra::Core::ParameterBlock1</compoundname>
+    <basecompoundref refid="class_micra_1_1_core_1_1_reference_target" prot="public" virt="non-virtual">Micra.Core.ReferenceTarget</basecompoundref>
+    <basecompoundref refid="interface_micra_1_1_core_1_1_i_parameter_block" prot="public" virt="non-virtual">Micra.Core.IParameterBlock</basecompoundref>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="class_micra_1_1_core_1_1_parameter_block1_1ad5510af6f2b7f5dfe36e6585f3552262" prot="private" static="no" mutable="no">
+        <type>readonly List&lt; <ref refid="struct_micra_1_1_core_1_1_param1" kindref="compound">Param1</ref> &gt;</type>
+        <definition>readonly List&lt;Param1&gt; Micra.Core.ParameterBlock1.ps</definition>
+        <argsstring></argsstring>
+        <name>ps</name>
+        <initializer>= new List&lt;<ref refid="struct_micra_1_1_core_1_1_param1" kindref="compound">Param1</ref>&gt;()</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/ParameterBlock1.cs" line="24" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/ParameterBlock1.cs" bodystart="24" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="property">
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_parameter_block1_1a0e59aa2fb2c128a15207d55a09000748" prot="public" static="no" readable="no" writable="no" gettable="yes" settable="no">
+        <type>IIParamBlock</type>
+        <definition>IIParamBlock Micra.Core.ParameterBlock1._Block</definition>
+        <argsstring></argsstring>
+        <name>_Block</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/ParameterBlock1.cs" line="53" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/ParameterBlock1.cs" bodystart="53" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_parameter_block1_1a141687c96c41069f4cdb4a6453e49592" prot="public" static="no" readable="no" writable="no" gettable="yes" settable="no">
+        <type>new IEnumerable&lt; <ref refid="interface_micra_1_1_core_1_1_i_parameter" kindref="compound">IParameter</ref> &gt;</type>
+        <definition>new IEnumerable&lt;IParameter&gt; Micra.Core.ParameterBlock1.Params</definition>
+        <argsstring></argsstring>
+        <name>Params</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/ParameterBlock1.cs" line="55" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/ParameterBlock1.cs" bodystart="56" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_parameter_block1_1a62d7e0445e9882905aac11c6416760c3" prot="public" static="no" readable="no" writable="no" gettable="yes" settable="no">
+        <type>new <ref refid="interface_micra_1_1_core_1_1_i_parameter" kindref="compound">IParameter</ref></type>
+        <definition>new IParameter Micra.Core.ParameterBlock1.this[string internalName]</definition>
+        <argsstring></argsstring>
+        <name>this[string internalName]</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/ParameterBlock1.cs" line="60" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/ParameterBlock1.cs" bodystart="61" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_parameter_block1_1aec17712c51f1bfea9d83937c6eba807c" prot="public" static="no" readable="no" writable="no" gettable="yes" settable="no">
+        <type>new <ref refid="interface_micra_1_1_core_1_1_i_parameter" kindref="compound">IParameter</ref></type>
+        <definition>new IParameter Micra.Core.ParameterBlock1.this[int id]</definition>
+        <argsstring></argsstring>
+        <name>this[int id]</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/ParameterBlock1.cs" line="65" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/ParameterBlock1.cs" bodystart="66" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="package-func">
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_parameter_block1_1aeda53553a6a0c3ab0527135a0833a29e" prot="package" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>Micra.Core.ParameterBlock1.ParameterBlock1</definition>
+        <argsstring>(IIParamBlock pb)</argsstring>
+        <name>ParameterBlock1</name>
+        <param>
+          <type>IIParamBlock</type>
+          <declname>pb</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/ParameterBlock1.cs" line="27" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/ParameterBlock1.cs" bodystart="27" bodyend="51"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Wraps a IParamBlock (parameter block 1) in the 3ds <ref refid="class_micra_1_1_core_1_1_max" kindref="compound">Max</ref> SDK. You should use the <ref refid="interface_micra_1_1_core_1_1_i_parameter_block" kindref="compound">IParameterBlock</ref> interface, instead which provides a common interface to both parameter block 1 and parameter block 2. <ref refid="interface_micra_1_1_core_1_1_i_parameter_block" kindref="compound">IParameterBlock</ref> </para>    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="331">
+        <label>ReferenceMaker</label>
+        <link refid="class_micra_1_1_core_1_1_reference_maker"/>
+        <childnode refid="332" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="332">
+        <label>Animatable</label>
+        <link refid="class_micra_1_1_core_1_1_animatable"/>
+      </node>
+      <node id="329">
+        <label>Micra.Core.ParameterBlock1</label>
+        <link refid="class_micra_1_1_core_1_1_parameter_block1"/>
+        <childnode refid="330" relation="public-inheritance">
+        </childnode>
+        <childnode refid="333" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="333">
+        <label>IParameterBlock</label>
+        <link refid="interface_micra_1_1_core_1_1_i_parameter_block"/>
+      </node>
+      <node id="330">
+        <label>ReferenceTarget</label>
+        <link refid="class_micra_1_1_core_1_1_reference_target"/>
+        <childnode refid="331" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="336">
+        <label>ReferenceMaker</label>
+        <link refid="class_micra_1_1_core_1_1_reference_maker"/>
+        <childnode refid="337" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="337">
+        <label>Animatable</label>
+        <link refid="class_micra_1_1_core_1_1_animatable"/>
+        <childnode refid="338" relation="usage">
+          <edgelabel>parameterBlock</edgelabel>
+        </childnode>
+      </node>
+      <node id="334">
+        <label>Micra.Core.ParameterBlock1</label>
+        <link refid="class_micra_1_1_core_1_1_parameter_block1"/>
+        <childnode refid="335" relation="public-inheritance">
+        </childnode>
+        <childnode refid="339" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="339">
+        <label>IParameterBlock</label>
+        <link refid="interface_micra_1_1_core_1_1_i_parameter_block"/>
+      </node>
+      <node id="335">
+        <label>ReferenceTarget</label>
+        <link refid="class_micra_1_1_core_1_1_reference_target"/>
+        <childnode refid="336" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="338">
+        <label>Micra.Core.IParameterBlock</label>
+        <link refid="interface_micra_1_1_core_1_1_i_parameter_block"/>
+      </node>
+    </collaborationgraph>
+    <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/ParameterBlock1.cs" line="23" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/ParameterBlock1.cs" bodystart="22" bodyend="69"/>
+    <listofallmembers>
+      <member refid="class_micra_1_1_core_1_1_animatable_1a7447ebfdfa1b5c49c3908334edcaa995" prot="public" virt="non-virtual"><scope>Micra::Core::ParameterBlock1</scope><name>_Anim</name></member>
+      <member refid="class_micra_1_1_core_1_1_parameter_block1_1a0e59aa2fb2c128a15207d55a09000748" prot="public" virt="non-virtual"><scope>Micra::Core::ParameterBlock1</scope><name>_Block</name></member>
+      <member refid="class_micra_1_1_core_1_1_reference_maker_1a20e29410474e32f5694ab0c2f572148b" prot="public" virt="non-virtual"><scope>Micra::Core::ParameterBlock1</scope><name>_Maker</name></member>
+      <member refid="class_micra_1_1_core_1_1_reference_target_1a59df2a4540430af935c20d5914fce089" prot="public" virt="non-virtual"><scope>Micra::Core::ParameterBlock1</scope><name>_Target</name></member>
+      <member refid="class_micra_1_1_core_1_1_reference_target_1a705530b02a3c4cd77bb6420e86d7c8c5" prot="public" virt="non-virtual"><scope>Micra::Core::ParameterBlock1</scope><name>AddListener</name></member>
+      <member refid="class_micra_1_1_core_1_1_animatable_1a014952bd2d29637c0ed71b32f1ad4807" prot="package" virt="non-virtual"><scope>Micra::Core::ParameterBlock1</scope><name>Animatable</name></member>
+      <member refid="class_micra_1_1_core_1_1_animatable_1a4a088130407a9d834ca65c1c6b20255f" prot="public" virt="non-virtual"><scope>Micra::Core::ParameterBlock1</scope><name>AnimHandle</name></member>
+      <member refid="class_micra_1_1_core_1_1_animatable_1a7304895f0a6857929d3aab907db7cd1f" prot="public" virt="non-virtual"><scope>Micra::Core::ParameterBlock1</scope><name>Anims</name></member>
+      <member refid="class_micra_1_1_core_1_1_animatable_1a1d7058760b77578b3f0aa73ac02ec0ab" prot="public" virt="non-virtual"><scope>Micra::Core::ParameterBlock1</scope><name>AttributeContainer</name></member>
+      <member refid="class_micra_1_1_core_1_1_animatable_1a1e8eff94a4d40b89666cfd96f2c0b282" prot="public" virt="non-virtual"><scope>Micra::Core::ParameterBlock1</scope><name>ClassID</name></member>
+      <member refid="class_micra_1_1_core_1_1_animatable_1adc1bd49a3dc65f202e6848e7746d97aa" prot="public" virt="non-virtual"><scope>Micra::Core::ParameterBlock1</scope><name>ClassName</name></member>
+      <member refid="class_micra_1_1_core_1_1_animatable_1a61edf59c9f88800bc360d6e17ddafd47" prot="public" virt="non-virtual"><scope>Micra::Core::ParameterBlock1</scope><name>ClearAppData</name></member>
+      <member refid="class_micra_1_1_core_1_1_animatable_1a5898e44fafdfc0b28894f556e1f7fa57" prot="public" virt="non-virtual"><scope>Micra::Core::ParameterBlock1</scope><name>CreatePluginInstance&lt; T &gt;</name></member>
+      <member refid="class_micra_1_1_core_1_1_animatable_1a32a37b9c84068a644c2488bf6f7e764b" prot="public" virt="non-virtual"><scope>Micra::Core::ParameterBlock1</scope><name>CreateWrapper&lt; T &gt;</name></member>
+      <member refid="class_micra_1_1_core_1_1_animatable_1a3b13687f6bf6e3463e0d4757384f2087" prot="public" virt="non-virtual"><scope>Micra::Core::ParameterBlock1</scope><name>Equals</name></member>
+      <member refid="class_micra_1_1_core_1_1_animatable_1a2657885a3480546390fc5f7a4d251b43" prot="public" virt="non-virtual"><scope>Micra::Core::ParameterBlock1</scope><name>GetAppData</name></member>
+      <member refid="class_micra_1_1_core_1_1_animatable_1a1f05a5f32d4a4227aded083c6431c586" prot="public" virt="non-virtual"><scope>Micra::Core::ParameterBlock1</scope><name>GetAppData</name></member>
+      <member refid="class_micra_1_1_core_1_1_animatable_1a1c67edf5846ded97a1d12b7a7a4f8f6c" prot="public" virt="non-virtual"><scope>Micra::Core::ParameterBlock1</scope><name>GetHashCode</name></member>
+      <member refid="class_micra_1_1_core_1_1_reference_maker_1a47bc65c1764be30262558c83fab2354e" prot="public" virt="non-virtual"><scope>Micra::Core::ParameterBlock1</scope><name>GetTarget</name></member>
+      <member refid="class_micra_1_1_core_1_1_reference_maker_1a14da943e6bc58c94ac81840b6409e992" prot="public" virt="non-virtual"><scope>Micra::Core::ParameterBlock1</scope><name>NumTargets</name></member>
+      <member refid="class_micra_1_1_core_1_1_reference_target_1a9120ed5666fc5c60b655d43806867504" prot="public" virt="non-virtual"><scope>Micra::Core::ParameterBlock1</scope><name>Observers</name></member>
+      <member refid="class_micra_1_1_core_1_1_animatable_1a246fac518c0fac502df5754450db01d2" prot="public" virt="non-virtual"><scope>Micra::Core::ParameterBlock1</scope><name>operator!=</name></member>
+      <member refid="class_micra_1_1_core_1_1_animatable_1a64eb885c9f69ce79734e55885baa7c66" prot="public" virt="non-virtual"><scope>Micra::Core::ParameterBlock1</scope><name>operator==</name></member>
+      <member refid="class_micra_1_1_core_1_1_animatable_1aae0278c0d6842fd3e79cd2700851cf4a" prot="protected" virt="non-virtual"><scope>Micra::Core::ParameterBlock1</scope><name>parameterBlock</name></member>
+      <member refid="class_micra_1_1_core_1_1_animatable_1a7942d170433ad2f7b8ce19bfcde45a48" prot="public" virt="non-virtual"><scope>Micra::Core::ParameterBlock1</scope><name>ParameterBlock</name></member>
+      <member refid="class_micra_1_1_core_1_1_parameter_block1_1aeda53553a6a0c3ab0527135a0833a29e" prot="package" virt="non-virtual"><scope>Micra::Core::ParameterBlock1</scope><name>ParameterBlock1</name></member>
+      <member refid="class_micra_1_1_core_1_1_parameter_block1_1a141687c96c41069f4cdb4a6453e49592" prot="public" virt="non-virtual"><scope>Micra::Core::ParameterBlock1</scope><name>Params</name></member>
+      <member refid="class_micra_1_1_core_1_1_parameter_block1_1ad5510af6f2b7f5dfe36e6585f3552262" prot="private" virt="non-virtual"><scope>Micra::Core::ParameterBlock1</scope><name>ps</name></member>
+      <member refid="class_micra_1_1_core_1_1_reference_maker_1aad1f8efb71568fa68daf5345fa5cfd07" prot="package" virt="non-virtual"><scope>Micra::Core::ParameterBlock1</scope><name>ReferenceMaker</name></member>
+      <member refid="class_micra_1_1_core_1_1_reference_target_1a60505293508d1145baa574340dbf867c" prot="package" virt="non-virtual"><scope>Micra::Core::ParameterBlock1</scope><name>ReferenceTarget</name></member>
+      <member refid="class_micra_1_1_core_1_1_reference_maker_1a482e63b2e6c6847d9f801b0e3d6c11cf" prot="public" virt="non-virtual"><scope>Micra::Core::ParameterBlock1</scope><name>SetTarget</name></member>
+      <member refid="class_micra_1_1_core_1_1_animatable_1a743ff05031ca9d95ca4f5b078e29f946" prot="public" virt="non-virtual"><scope>Micra::Core::ParameterBlock1</scope><name>SuperClassID</name></member>
+      <member refid="class_micra_1_1_core_1_1_reference_maker_1a7d67a6c1812fd58d6c215fea52ed870d" prot="public" virt="non-virtual"><scope>Micra::Core::ParameterBlock1</scope><name>TargetArray</name></member>
+      <member refid="class_micra_1_1_core_1_1_reference_maker_1a5ffd2f44ec035353ed8f4282e7bccd18" prot="public" virt="non-virtual"><scope>Micra::Core::ParameterBlock1</scope><name>Targets</name></member>
+      <member refid="class_micra_1_1_core_1_1_reference_maker_1a9a146243a9c16a1b81b31078267095af" prot="public" virt="non-virtual"><scope>Micra::Core::ParameterBlock1</scope><name>TargetTree</name></member>
+      <member refid="class_micra_1_1_core_1_1_parameter_block1_1aec17712c51f1bfea9d83937c6eba807c" prot="public" virt="non-virtual"><scope>Micra::Core::ParameterBlock1</scope><name>this[int id]</name></member>
+      <member refid="class_micra_1_1_core_1_1_animatable_1a63dfadedc8b28c3e5ced8c3e62a277a1" prot="public" virt="non-virtual"><scope>Micra::Core::ParameterBlock1</scope><name>this[int paramID]</name></member>
+      <member refid="class_micra_1_1_core_1_1_parameter_block1_1a62d7e0445e9882905aac11c6416760c3" prot="public" virt="non-virtual"><scope>Micra::Core::ParameterBlock1</scope><name>this[string internalName]</name></member>
+      <member refid="class_micra_1_1_core_1_1_animatable_1ac4e35d5d21af8962f61a963f8f9ecdeb" prot="public" virt="non-virtual"><scope>Micra::Core::ParameterBlock1</scope><name>this[string sParamName]</name></member>
+      <member refid="class_micra_1_1_core_1_1_animatable_1a340a84a8efcb552049aa7623d4d11960" prot="public" virt="non-virtual"><scope>Micra::Core::ParameterBlock1</scope><name>Valid</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

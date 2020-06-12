@@ -63,5 +63,21 @@ namespace Micra.Core {
             nodesList.ForEach(n => nodes.AppendNode(n._IINode, true, 1));
             return nodes;
         }
+        /// <summary> Lop trough custommers and set the parameter for tohse which fullfill condition
+        ///     <example> 
+        ///         <code>
+		///             example: 
+        ///             <br>customers.Where(c => c.IsValid).SetValue(c => c.CreditLimit = 1000).ToList();</br>
+        ///             <br>or</br>
+        ///             <br>var newCustomers = customers.Where(c => c.IsValid).SetValue(c => c.CreditLimit = 1000);</br>
+		///         </code>
+		///     </example>
+        /// </summary>
+        public static IEnumerable<T> SetValue<T>(this IEnumerable<T> items, Action<T> updateMethod) {
+            foreach ( T item in items ) {
+                updateMethod(item);
+            }
+            return items;
+        }
     }
 }

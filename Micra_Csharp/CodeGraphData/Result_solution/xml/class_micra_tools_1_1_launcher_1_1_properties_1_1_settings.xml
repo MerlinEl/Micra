@@ -1,0 +1,75 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
+  <compounddef id="class_micra_tools_1_1_launcher_1_1_properties_1_1_settings" kind="class" prot="package">
+    <compoundname>MicraTools::Launcher::Properties::Settings</compoundname>
+    <basecompoundref prot="public" virt="non-virtual">ApplicationSettingsBase</basecompoundref>
+      <sectiondef kind="private-static-attrib">
+      <memberdef kind="variable" id="class_micra_tools_1_1_launcher_1_1_properties_1_1_settings_1a710152d5a11f9a53e1085025f78b5df4" prot="private" static="yes" mutable="no">
+        <type><ref refid="class_micra_tools_1_1_launcher_1_1_properties_1_1_settings" kindref="compound">Settings</ref></type>
+        <definition>Settings MicraTools.Launcher.Properties.Settings.defaultInstance</definition>
+        <argsstring></argsstring>
+        <name>defaultInstance</name>
+        <initializer>= ( (<ref refid="class_micra_tools_1_1_launcher_1_1_properties_1_1_settings" kindref="compound">Settings</ref>)( global::System.Configuration.ApplicationSettingsBase.Synchronized(new <ref refid="class_micra_tools_1_1_launcher_1_1_properties_1_1_settings" kindref="compound">Settings</ref>()) ) )</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Properties/Settings.Designer.cs" line="18" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Properties/Settings.Designer.cs" bodystart="18" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="property">
+      <memberdef kind="property" id="class_micra_tools_1_1_launcher_1_1_properties_1_1_settings_1ad848cc247b5726b5764353ef42d4b844" prot="public" static="yes" readable="no" writable="no" gettable="yes" settable="no">
+        <type><ref refid="class_micra_tools_1_1_launcher_1_1_properties_1_1_settings" kindref="compound">Settings</ref></type>
+        <definition>Settings MicraTools.Launcher.Properties.Settings.Default</definition>
+        <argsstring></argsstring>
+        <name>Default</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Properties/Settings.Designer.cs" line="20" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Properties/Settings.Designer.cs" bodystart="20" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="588">
+        <label>global::SystemConfiguration::ApplicationSettingsBase</label>
+      </node>
+      <node id="587">
+        <label>MicraTools.Launcher.Properties.Settings</label>
+        <link refid="class_micra_tools_1_1_launcher_1_1_properties_1_1_settings"/>
+        <childnode refid="588" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="590">
+        <label>global::SystemConfiguration::ApplicationSettingsBase</label>
+      </node>
+      <node id="591">
+        <label>static</label>
+      </node>
+      <node id="589">
+        <label>MicraTools.Launcher.Properties.Settings</label>
+        <link refid="class_micra_tools_1_1_launcher_1_1_properties_1_1_settings"/>
+        <childnode refid="590" relation="public-inheritance">
+        </childnode>
+        <childnode refid="591" relation="usage">
+          <edgelabel>defaultInstance</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Properties/Settings.Designer.cs" line="16" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Properties/Settings.Designer.cs" bodystart="16" bodyend="25"/>
+    <listofallmembers>
+      <member refid="class_micra_tools_1_1_launcher_1_1_properties_1_1_settings_1ad848cc247b5726b5764353ef42d4b844" prot="public" virt="non-virtual"><scope>MicraTools::Launcher::Properties::Settings</scope><name>Default</name></member>
+      <member refid="class_micra_tools_1_1_launcher_1_1_properties_1_1_settings_1a710152d5a11f9a53e1085025f78b5df4" prot="private" virt="non-virtual"><scope>MicraTools::Launcher::Properties::Settings</scope><name>defaultInstance</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

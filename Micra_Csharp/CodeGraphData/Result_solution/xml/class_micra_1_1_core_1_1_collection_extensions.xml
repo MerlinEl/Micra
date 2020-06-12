@@ -1,0 +1,171 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
+  <compounddef id="class_micra_1_1_core_1_1_collection_extensions" kind="class" prot="package">
+    <compoundname>Micra::Core::CollectionExtensions</compoundname>
+      <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_collection_extensions_1a591baedc21a30005f314b74f1a869a9a" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="class_micra_1_1_core_1_1_collection_extensions_1a8ac2e38be9497063daecff4f2bf8d7ba" kindref="member">IEnumerable</ref>&lt; T &gt;</type>
+        <definition>static IEnumerable&lt;T&gt; Micra.Core.CollectionExtensions.ToIEnumerable&lt; T &gt;</definition>
+        <argsstring>(this ITab&lt; T &gt; itab)</argsstring>
+        <name>ToIEnumerable&lt; T &gt;</name>
+        <param>
+          <type>this ITab&lt; T &gt;</type>
+          <declname>itab</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/CollectionExtensions.cs" line="8" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/CollectionExtensions.cs" bodystart="8" bodyend="14"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_collection_extensions_1aadc342974f30666709d0d4276c837642" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="class_micra_1_1_core_1_1_collection_extensions_1a8ac2e38be9497063daecff4f2bf8d7ba" kindref="member">IEnumerable</ref>&lt; T &gt;</type>
+        <definition>static IEnumerable&lt;T&gt; Micra.Core.CollectionExtensions.ToEnumerable&lt; T &gt;</definition>
+        <argsstring>(this T input)</argsstring>
+        <name>ToEnumerable&lt; T &gt;</name>
+        <param>
+          <type>this T</type>
+          <declname>input</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/CollectionExtensions.cs" line="16" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/CollectionExtensions.cs" bodystart="16" bodyend="18"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_collection_extensions_1a082c3b6b5b8558488cca1fa49d7a3bd4" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>static void Micra.Core.CollectionExtensions.ForEach&lt; T &gt;</definition>
+        <argsstring>(this IEnumerable&lt; T &gt; collection)</argsstring>
+        <name>ForEach&lt; T &gt;</name>
+        <param>
+          <type>this <ref refid="class_micra_1_1_core_1_1_collection_extensions_1a8ac2e38be9497063daecff4f2bf8d7ba" kindref="member">IEnumerable</ref>&lt; T &gt;</type>
+          <declname>collection</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/CollectionExtensions.cs" line="20" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/CollectionExtensions.cs" bodystart="20" bodyend="22"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_collection_extensions_1abc720135ade1cf98821b872c83c1cc99" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>static void Micra.Core.CollectionExtensions.ForEach&lt; T &gt;</definition>
+        <argsstring>(this IEnumerable&lt; T &gt; collection, Action&lt; T &gt; action)</argsstring>
+        <name>ForEach&lt; T &gt;</name>
+        <param>
+          <type>this <ref refid="class_micra_1_1_core_1_1_collection_extensions_1a8ac2e38be9497063daecff4f2bf8d7ba" kindref="member">IEnumerable</ref>&lt; T &gt;</type>
+          <declname>collection</declname>
+        </param>
+        <param>
+          <type>Action&lt; T &gt;</type>
+          <declname>action</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/CollectionExtensions.cs" line="25" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/CollectionExtensions.cs" bodystart="25" bodyend="27"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_collection_extensions_1a9f2b127b8765ccd8efdc35868cc500d5" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>static void Micra.Core.CollectionExtensions.ForEach&lt; T &gt;</definition>
+        <argsstring>(this IEnumerable&lt; T &gt; collection, Action&lt; T, int &gt; handler)</argsstring>
+        <name>ForEach&lt; T &gt;</name>
+        <param>
+          <type>this <ref refid="class_micra_1_1_core_1_1_collection_extensions_1a8ac2e38be9497063daecff4f2bf8d7ba" kindref="member">IEnumerable</ref>&lt; T &gt;</type>
+          <declname>collection</declname>
+        </param>
+        <param>
+          <type>Action&lt; T, int &gt;</type>
+          <declname>handler</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/CollectionExtensions.cs" line="29" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/CollectionExtensions.cs" bodystart="29" bodyend="33"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_collection_extensions_1a592b34b33957cd325951549bc969ae9b" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="class_micra_1_1_core_1_1_collection_extensions_1a8ac2e38be9497063daecff4f2bf8d7ba" kindref="member">IEnumerable</ref>&lt; T &gt;</type>
+        <definition>static IEnumerable&lt;T&gt; Micra.Core.CollectionExtensions.Where&lt; T &gt;</definition>
+        <argsstring>(this IEnumerable&lt; T &gt; data, Func&lt; T, bool &gt; predicate)</argsstring>
+        <name>Where&lt; T &gt;</name>
+        <param>
+          <type>this <ref refid="class_micra_1_1_core_1_1_collection_extensions_1a8ac2e38be9497063daecff4f2bf8d7ba" kindref="member">IEnumerable</ref>&lt; T &gt;</type>
+          <declname>data</declname>
+        </param>
+        <param>
+          <type>Func&lt; T, bool &gt;</type>
+          <declname>predicate</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/CollectionExtensions.cs" line="47" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/CollectionExtensions.cs" bodystart="47" bodyend="51"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_collection_extensions_1a8ac2e38be9497063daecff4f2bf8d7ba" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>IEnumerable&lt; int &gt;</type>
+        <definition>static IEnumerable&lt;int&gt; Micra.Core.CollectionExtensions.IEnumerable</definition>
+        <argsstring>(this IBitArray ba)</argsstring>
+        <name>IEnumerable</name>
+        <param>
+          <type>this IBitArray</type>
+          <declname>ba</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/CollectionExtensions.cs" line="53" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/CollectionExtensions.cs" bodystart="53" bodyend="58"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_collection_extensions_1ab5b2f332fd797451b9377e9d1ee3da0d" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>IINodeTab</type>
+        <definition>static IINodeTab Micra.Core.CollectionExtensions.ToIINodeTab</definition>
+        <argsstring>(this List&lt; Node &gt; nodesList)</argsstring>
+        <name>ToIINodeTab</name>
+        <param>
+          <type>this List&lt; <ref refid="class_micra_1_1_core_1_1_node" kindref="compound">Node</ref> &gt;</type>
+          <declname>nodesList</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/CollectionExtensions.cs" line="60" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/CollectionExtensions.cs" bodystart="60" bodyend="65"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/CollectionExtensions.cs" line="6" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/CollectionExtensions.cs" bodystart="6" bodyend="66"/>
+    <listofallmembers>
+      <member refid="class_micra_1_1_core_1_1_collection_extensions_1a082c3b6b5b8558488cca1fa49d7a3bd4" prot="public" virt="non-virtual"><scope>Micra::Core::CollectionExtensions</scope><name>ForEach&lt; T &gt;</name></member>
+      <member refid="class_micra_1_1_core_1_1_collection_extensions_1abc720135ade1cf98821b872c83c1cc99" prot="public" virt="non-virtual"><scope>Micra::Core::CollectionExtensions</scope><name>ForEach&lt; T &gt;</name></member>
+      <member refid="class_micra_1_1_core_1_1_collection_extensions_1a9f2b127b8765ccd8efdc35868cc500d5" prot="public" virt="non-virtual"><scope>Micra::Core::CollectionExtensions</scope><name>ForEach&lt; T &gt;</name></member>
+      <member refid="class_micra_1_1_core_1_1_collection_extensions_1a8ac2e38be9497063daecff4f2bf8d7ba" prot="public" virt="non-virtual"><scope>Micra::Core::CollectionExtensions</scope><name>IEnumerable</name></member>
+      <member refid="class_micra_1_1_core_1_1_collection_extensions_1aadc342974f30666709d0d4276c837642" prot="public" virt="non-virtual"><scope>Micra::Core::CollectionExtensions</scope><name>ToEnumerable&lt; T &gt;</name></member>
+      <member refid="class_micra_1_1_core_1_1_collection_extensions_1a591baedc21a30005f314b74f1a869a9a" prot="public" virt="non-virtual"><scope>Micra::Core::CollectionExtensions</scope><name>ToIEnumerable&lt; T &gt;</name></member>
+      <member refid="class_micra_1_1_core_1_1_collection_extensions_1ab5b2f332fd797451b9377e9d1ee3da0d" prot="public" virt="non-virtual"><scope>Micra::Core::CollectionExtensions</scope><name>ToIINodeTab</name></member>
+      <member refid="class_micra_1_1_core_1_1_collection_extensions_1a592b34b33957cd325951549bc969ae9b" prot="public" virt="non-virtual"><scope>Micra::Core::CollectionExtensions</scope><name>Where&lt; T &gt;</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

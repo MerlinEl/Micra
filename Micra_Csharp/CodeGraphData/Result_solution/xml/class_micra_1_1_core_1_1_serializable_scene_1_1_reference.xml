@@ -1,0 +1,65 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
+  <compounddef id="class_micra_1_1_core_1_1_serializable_scene_1_1_reference" kind="class" prot="public">
+    <compoundname>Micra::Core::SerializableScene::Reference</compoundname>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="class_micra_1_1_core_1_1_serializable_scene_1_1_reference_1ac3561a881e080591e58854eec58c159c" prot="public" static="no" mutable="no">
+        <type>ulong</type>
+        <definition>ulong Micra.Core.SerializableScene.Reference.id</definition>
+        <argsstring></argsstring>
+        <name>id</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/SerializableScene.cs" line="29" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/SerializableScene.cs" bodystart="29" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_serializable_scene_1_1_reference_1a5b698d4db18ec508e373e959472d9062" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>Micra.Core.SerializableScene.Reference.Reference</definition>
+        <argsstring>()</argsstring>
+        <name>Reference</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/SerializableScene.cs" line="31" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/SerializableScene.cs" bodystart="31" bodyend="33"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_serializable_scene_1_1_reference_1aa7fac6257ad9565b38eff09b94b46cc7" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>Micra.Core.SerializableScene.Reference.Reference</definition>
+        <argsstring>(ReferenceTarget rt)</argsstring>
+        <name>Reference</name>
+        <param>
+          <type><ref refid="class_micra_1_1_core_1_1_reference_target" kindref="compound">ReferenceTarget</ref></type>
+          <declname>rt</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/SerializableScene.cs" line="35" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/SerializableScene.cs" bodystart="35" bodyend="45"/>
+        <references refid="class_micra_1_1_core_1_1_animatable_1a4a088130407a9d834ca65c1c6b20255f" compoundref="_animatable_8cs" startline="212">Micra.Core.Animatable.AnimHandle</references>
+        <references refid="class_micra_1_1_core_1_1_animatable_1a340a84a8efcb552049aa7623d4d11960" compoundref="_animatable_8cs" startline="213">Micra.Core.Animatable.Valid</references>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Serializable representation of a reference to a target. </para>    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/SerializableScene.cs" line="28" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/SerializableScene.cs" bodystart="27" bodyend="46"/>
+    <listofallmembers>
+      <member refid="class_micra_1_1_core_1_1_serializable_scene_1_1_reference_1ac3561a881e080591e58854eec58c159c" prot="public" virt="non-virtual"><scope>Micra::Core::SerializableScene::Reference</scope><name>id</name></member>
+      <member refid="class_micra_1_1_core_1_1_serializable_scene_1_1_reference_1a5b698d4db18ec508e373e959472d9062" prot="public" virt="non-virtual"><scope>Micra::Core::SerializableScene::Reference</scope><name>Reference</name></member>
+      <member refid="class_micra_1_1_core_1_1_serializable_scene_1_1_reference_1aa7fac6257ad9565b38eff09b94b46cc7" prot="public" virt="non-virtual"><scope>Micra::Core::SerializableScene::Reference</scope><name>Reference</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -67,9 +67,7 @@ namespace Micra.Core {
             return ( (SuperClassID)obj ).id == id;
         }
 
-        public override int GetHashCode() {
-            return id.GetHashCode();
-        }
+        public override int GetHashCode() => id.GetHashCode();
 
         public static bool operator ==(SuperClassID x, SuperClassID y) { return x.id == y.id; }
         public static bool operator !=(SuperClassID x, SuperClassID y) { return x.id != y.id; }

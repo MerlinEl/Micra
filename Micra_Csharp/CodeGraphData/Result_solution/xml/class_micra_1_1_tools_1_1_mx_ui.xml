@@ -1,0 +1,89 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
+  <compounddef id="class_micra_1_1_tools_1_1_mx_ui" kind="class" prot="public">
+    <compoundname>Micra::Tools::MxUi</compoundname>
+      <sectiondef kind="private-static-attrib">
+      <memberdef kind="variable" id="class_micra_1_1_tools_1_1_mx_ui_1a6a6f29e864a99c9c7b735d70601a9faf" prot="private" static="yes" mutable="no">
+        <type>NativeWindow</type>
+        <definition>NativeWindow Micra.Tools.MxUi.parentWindow</definition>
+        <argsstring></argsstring>
+        <name>parentWindow</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/MxUi.cs" line="9" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/MxUi.cs" bodystart="9" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="class_micra_1_1_tools_1_1_mx_ui_1aa54efe8760aa4aab18b9c5ab034e1f12" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>static void Micra.Tools.MxUi.SetButonTooltip</definition>
+        <argsstring>(Button ctrl, string bodyText, string imgName)</argsstring>
+        <name>SetButonTooltip</name>
+        <param>
+          <type>Button</type>
+          <declname>ctrl</declname>
+        </param>
+        <param>
+          <type>string</type>
+          <declname>bodyText</declname>
+        </param>
+        <param>
+          <type>string</type>
+          <declname>imgName</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/MxUi.cs" line="10" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/MxUi.cs" bodystart="10" bodyend="27"/>
+        <references refid="class_micra_1_1_tools_1_1_mx_get_1ada70c982c42bdaeefbbbc867055456ad" compoundref="_mx_get_8cs" startline="66">Micra.Tools.MxGet.MicraRootDir</references>
+        <references refid="class_micra_1_1_tools_1_1_mx_get_1a933c25490901b8b67a27c586c879c29d" compoundref="_mx_get_8cs" startline="67">Micra.Tools.MxGet.MicraRootDir2</references>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_tools_1_1_mx_ui_1aebf807fd5c7fc6add6b456408ad21ce9" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>static void Micra.Tools.MxUi.ShowForm</definition>
+        <argsstring>(Form form)</argsstring>
+        <name>ShowForm</name>
+        <param>
+          <type>Form</type>
+          <declname>form</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/MxUi.cs" line="29" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/MxUi.cs" bodystart="29" bodyend="37"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="270">
+        <label>Micra.Tools.MxUi</label>
+        <link refid="class_micra_1_1_tools_1_1_mx_ui"/>
+        <childnode refid="271" relation="usage">
+          <edgelabel>parentWindow</edgelabel>
+        </childnode>
+      </node>
+      <node id="271">
+        <label>static</label>
+      </node>
+    </collaborationgraph>
+    <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/MxUi.cs" line="8" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/MxUi.cs" bodystart="8" bodyend="38"/>
+    <listofallmembers>
+      <member refid="class_micra_1_1_tools_1_1_mx_ui_1a6a6f29e864a99c9c7b735d70601a9faf" prot="private" virt="non-virtual"><scope>Micra::Tools::MxUi</scope><name>parentWindow</name></member>
+      <member refid="class_micra_1_1_tools_1_1_mx_ui_1aa54efe8760aa4aab18b9c5ab034e1f12" prot="public" virt="non-virtual"><scope>Micra::Tools::MxUi</scope><name>SetButonTooltip</name></member>
+      <member refid="class_micra_1_1_tools_1_1_mx_ui_1aebf807fd5c7fc6add6b456408ad21ce9" prot="public" virt="non-virtual"><scope>Micra::Tools::MxUi</scope><name>ShowForm</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

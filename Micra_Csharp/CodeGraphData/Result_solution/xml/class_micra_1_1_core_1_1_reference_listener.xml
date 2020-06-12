@@ -1,0 +1,225 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
+  <compounddef id="class_micra_1_1_core_1_1_reference_listener" kind="class" prot="package">
+    <compoundname>Micra::Core::ReferenceListener</compoundname>
+    <basecompoundref prot="public" virt="non-virtual">ReferenceMaker</basecompoundref>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="class_micra_1_1_core_1_1_reference_listener_1a60d3cfd5d66a68cf2bd04764e20fe3ae" prot="private" static="no" mutable="no">
+        <type><ref refid="class_micra_1_1_core_1_1_reference_target" kindref="compound">ReferenceTarget</ref></type>
+        <definition>ReferenceTarget Micra.Core.ReferenceListener.target</definition>
+        <argsstring></argsstring>
+        <name>target</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/ReferenceListener.cs" line="16" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/ReferenceListener.cs" bodystart="16" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_micra_1_1_core_1_1_reference_listener_1ab294b0bc1f3376d9b7d7e1e01efd9cbb" prot="private" static="no" mutable="no">
+        <type>readonly RefMessage</type>
+        <definition>readonly RefMessage Micra.Core.ReferenceListener.message</definition>
+        <argsstring></argsstring>
+        <name>message</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/ReferenceListener.cs" line="17" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/ReferenceListener.cs" bodystart="17" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_micra_1_1_core_1_1_reference_listener_1a528598c73a2e3fd70dddb510db78ef94" prot="private" static="no" mutable="no">
+        <type>readonly Action</type>
+        <definition>readonly Action Micra.Core.ReferenceListener.action</definition>
+        <argsstring></argsstring>
+        <name>action</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/ReferenceListener.cs" line="18" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/ReferenceListener.cs" bodystart="18" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="property">
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_reference_listener_1ac56d7629a784654985a309c5242d550f" prot="public" static="no" readable="no" writable="no" gettable="yes" settable="no">
+        <type>override int</type>
+        <definition>override int Micra.Core.ReferenceListener.NumRefs</definition>
+        <argsstring></argsstring>
+        <name>NumRefs</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/ReferenceListener.cs" line="41" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/ReferenceListener.cs" bodystart="41" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_reference_listener_1a3d2146cbc53391d312046204d0332148" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>Micra.Core.ReferenceListener.ReferenceListener</definition>
+        <argsstring>(ReferenceTarget target, RefMessage message, Action action)</argsstring>
+        <name>ReferenceListener</name>
+        <param>
+          <type><ref refid="class_micra_1_1_core_1_1_reference_target" kindref="compound">ReferenceTarget</ref></type>
+          <declname>target</declname>
+        </param>
+        <param>
+          <type>RefMessage</type>
+          <declname>message</declname>
+        </param>
+        <param>
+          <type>Action</type>
+          <declname>action</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/ReferenceListener.cs" line="20" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/ReferenceListener.cs" bodystart="20" bodyend="26"/>
+        <references refid="class_micra_1_1_core_1_1_reference_target_1a59df2a4540430af935c20d5914fce089" compoundref="_reference_maker_and_target_8cs" startline="125">Micra.Core.ReferenceTarget._Target</references>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_reference_listener_1ac93c700ee2e5ce7e0240a0bd1da262b7" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>override RefResult</type>
+        <definition>override RefResult Micra.Core.ReferenceListener.NotifyRefChanged</definition>
+        <argsstring>(IInterval changeInt, IReferenceTarget hTarget, ref UIntPtr partID, RefMessage message, bool propagate)</argsstring>
+        <name>NotifyRefChanged</name>
+        <param>
+          <type>IInterval</type>
+          <declname>changeInt</declname>
+        </param>
+        <param>
+          <type>IReferenceTarget</type>
+          <declname>hTarget</declname>
+        </param>
+        <param>
+          <type>ref UIntPtr</type>
+          <declname>partID</declname>
+        </param>
+        <param>
+          <type>RefMessage</type>
+          <declname>message</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>propagate</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/ReferenceListener.cs" line="28" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/ReferenceListener.cs" bodystart="28" bodyend="39"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_reference_listener_1a77c8c68a9f831d9eaed44b030b388e5b" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>override IReferenceTarget</type>
+        <definition>override IReferenceTarget Micra.Core.ReferenceListener.GetReference</definition>
+        <argsstring>(int i)</argsstring>
+        <name>GetReference</name>
+        <param>
+          <type>int</type>
+          <declname>i</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/ReferenceListener.cs" line="47" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/ReferenceListener.cs" bodystart="47" bodyend="50"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_reference_listener_1aad263df220f9e1210f4db23d29d65f0c" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>override void</type>
+        <definition>override void Micra.Core.ReferenceListener.SetReference</definition>
+        <argsstring>(int i, IReferenceTarget rtarg)</argsstring>
+        <name>SetReference</name>
+        <param>
+          <type>int</type>
+          <declname>i</declname>
+        </param>
+        <param>
+          <type>IReferenceTarget</type>
+          <declname>rtarg</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/ReferenceListener.cs" line="52" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/ReferenceListener.cs" bodystart="52" bodyend="59"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>A utility class for associating call-back functions with change notifications. </para>    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="440">
+        <label>Micra.Core.ReferenceListener</label>
+        <link refid="class_micra_1_1_core_1_1_reference_listener"/>
+        <childnode refid="441" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="441">
+        <label>Autodesk::Max::Plugins::ReferenceMaker</label>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="445">
+        <label>ReferenceMaker</label>
+        <link refid="class_micra_1_1_core_1_1_reference_maker"/>
+        <childnode refid="446" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="446">
+        <label>Animatable</label>
+        <link refid="class_micra_1_1_core_1_1_animatable"/>
+        <childnode refid="447" relation="usage">
+          <edgelabel>parameterBlock</edgelabel>
+        </childnode>
+      </node>
+      <node id="444">
+        <label>Micra.Core.ReferenceTarget</label>
+        <link refid="class_micra_1_1_core_1_1_reference_target"/>
+        <childnode refid="445" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="442">
+        <label>Micra.Core.ReferenceListener</label>
+        <link refid="class_micra_1_1_core_1_1_reference_listener"/>
+        <childnode refid="443" relation="public-inheritance">
+        </childnode>
+        <childnode refid="444" relation="usage">
+          <edgelabel>target</edgelabel>
+        </childnode>
+      </node>
+      <node id="443">
+        <label>Autodesk::Max::Plugins::ReferenceMaker</label>
+      </node>
+      <node id="447">
+        <label>Micra.Core.IParameterBlock</label>
+        <link refid="interface_micra_1_1_core_1_1_i_parameter_block"/>
+      </node>
+    </collaborationgraph>
+    <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/ReferenceListener.cs" line="15" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/ReferenceListener.cs" bodystart="15" bodyend="60"/>
+    <listofallmembers>
+      <member refid="class_micra_1_1_core_1_1_reference_listener_1a528598c73a2e3fd70dddb510db78ef94" prot="private" virt="non-virtual"><scope>Micra::Core::ReferenceListener</scope><name>action</name></member>
+      <member refid="class_micra_1_1_core_1_1_reference_listener_1a77c8c68a9f831d9eaed44b030b388e5b" prot="public" virt="non-virtual"><scope>Micra::Core::ReferenceListener</scope><name>GetReference</name></member>
+      <member refid="class_micra_1_1_core_1_1_reference_listener_1ab294b0bc1f3376d9b7d7e1e01efd9cbb" prot="private" virt="non-virtual"><scope>Micra::Core::ReferenceListener</scope><name>message</name></member>
+      <member refid="class_micra_1_1_core_1_1_reference_listener_1ac93c700ee2e5ce7e0240a0bd1da262b7" prot="public" virt="non-virtual"><scope>Micra::Core::ReferenceListener</scope><name>NotifyRefChanged</name></member>
+      <member refid="class_micra_1_1_core_1_1_reference_listener_1ac56d7629a784654985a309c5242d550f" prot="public" virt="non-virtual"><scope>Micra::Core::ReferenceListener</scope><name>NumRefs</name></member>
+      <member refid="class_micra_1_1_core_1_1_reference_listener_1a3d2146cbc53391d312046204d0332148" prot="public" virt="non-virtual"><scope>Micra::Core::ReferenceListener</scope><name>ReferenceListener</name></member>
+      <member refid="class_micra_1_1_core_1_1_reference_listener_1aad263df220f9e1210f4db23d29d65f0c" prot="public" virt="non-virtual"><scope>Micra::Core::ReferenceListener</scope><name>SetReference</name></member>
+      <member refid="class_micra_1_1_core_1_1_reference_listener_1a60d3cfd5d66a68cf2bd04764e20fe3ae" prot="private" virt="non-virtual"><scope>Micra::Core::ReferenceListener</scope><name>target</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

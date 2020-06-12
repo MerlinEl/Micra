@@ -1,0 +1,78 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
+  <compounddef id="_enum_channels_8cs" kind="file">
+    <compoundname>EnumChannels.cs</compoundname>
+    <innernamespace refid="namespace_micra_1_1_core">Micra::Core</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="comment">/**********************************************************************</highlight></codeline>
+<codeline lineno="2"><highlight class="comment">*&lt;</highlight></codeline>
+<codeline lineno="3"><highlight class="comment">FILE:<sp/>channel.h</highlight></codeline>
+<codeline lineno="4"><highlight class="comment">DESCRIPTION:</highlight></codeline>
+<codeline lineno="5"><highlight class="comment">CREATED<sp/>BY:<sp/>Dan<sp/>Silva</highlight></codeline>
+<codeline lineno="6"><highlight class="comment">HISTORY:</highlight></codeline>
+<codeline lineno="7"><highlight class="comment">*&gt;<sp/><sp/>Copyright<sp/>(c)<sp/>1994,<sp/>All<sp/>Rights<sp/>Reserved.</highlight></codeline>
+<codeline lineno="8"><highlight class="comment">**********************************************************************/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight><highlight class="comment">//#<sp/>include<sp/>&quot;maxtypes.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">Micra.Core<sp/>{</highlight></codeline>
+<codeline lineno="11" refid="namespace_micra_1_1_core_1a618a72559b6df442102e52ea0b174d24" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">enum</highlight><highlight class="normal"><sp/><ref refid="namespace_micra_1_1_core_1a618a72559b6df442102e52ea0b174d24" kindref="member">EnumChannels</ref><sp/>{</highlight></codeline>
+<codeline lineno="12"><highlight class="normal"></highlight></codeline>
+<codeline lineno="14"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="namespace_micra_1_1_core_1a618a72559b6df442102e52ea0b174d24af96480b1e1a24bc47c921d58e6493911" kindref="member">NUM_OBJ_CHANS</ref><sp/>=<sp/>11,</highlight></codeline>
+<codeline lineno="17"></codeline>
+<codeline lineno="25"></codeline>
+<codeline lineno="32"></codeline>
+<codeline lineno="35"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="namespace_micra_1_1_core_1a618a72559b6df442102e52ea0b174d24a26b1943fb4cbbf46cf6a396bba2ba824" kindref="member">TOPO_CHANNEL</ref><sp/>=<sp/>(<sp/>1<sp/>&lt;&lt;<sp/>0<sp/>),</highlight></codeline>
+<codeline lineno="37"></codeline>
+<codeline lineno="38"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="namespace_micra_1_1_core_1a618a72559b6df442102e52ea0b174d24a4721241cf012d87103c74f1f8d02bd1b" kindref="member">GEOM_CHANNEL</ref><sp/>=<sp/>(<sp/>1<sp/>&lt;&lt;<sp/>1<sp/>),</highlight></codeline>
+<codeline lineno="40"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="namespace_micra_1_1_core_1a618a72559b6df442102e52ea0b174d24a1e9d7d26032174428e5d0fa62716f98f" kindref="member">TEXMAP_CHANNEL</ref><sp/>=<sp/>(<sp/>1<sp/>&lt;&lt;<sp/>2<sp/>),</highlight></codeline>
+<codeline lineno="42"></codeline>
+<codeline lineno="43"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="namespace_micra_1_1_core_1a618a72559b6df442102e52ea0b174d24a462c69ec51fe03d87f5d68b3c69a431a" kindref="member">MTL_CHANNEL</ref><sp/>=<sp/>(<sp/>1<sp/>&lt;&lt;<sp/>3<sp/>),</highlight></codeline>
+<codeline lineno="45"></codeline>
+<codeline lineno="49"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="namespace_micra_1_1_core_1a618a72559b6df442102e52ea0b174d24a1a3e6378a4705f0fda2a723e8bade761" kindref="member">SELECT_CHANNEL</ref><sp/>=<sp/>(<sp/>1<sp/>&lt;&lt;<sp/>4<sp/>),</highlight></codeline>
+<codeline lineno="51"></codeline>
+<codeline lineno="56"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="namespace_micra_1_1_core_1a618a72559b6df442102e52ea0b174d24a081ea0608ee65c73d2ed3738d57ca487" kindref="member">SUBSEL_TYPE_CHANNEL</ref><sp/>=<sp/>(<sp/>1<sp/>&lt;&lt;<sp/>5<sp/>),</highlight></codeline>
+<codeline lineno="58"></codeline>
+<codeline lineno="60"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="namespace_micra_1_1_core_1a618a72559b6df442102e52ea0b174d24a1282ce1de2417db42bad6333638688f4" kindref="member">DISP_ATTRIB_CHANNEL</ref><sp/>=<sp/>(<sp/>1<sp/>&lt;&lt;<sp/>6<sp/>),</highlight></codeline>
+<codeline lineno="62"></codeline>
+<codeline lineno="63"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="namespace_micra_1_1_core_1a618a72559b6df442102e52ea0b174d24aa0b3798b4b218e0ce749c406ed41745e" kindref="member">VERTCOLOR_CHANNEL</ref><sp/>=<sp/>(<sp/>1<sp/>&lt;&lt;<sp/>7<sp/>),</highlight></codeline>
+<codeline lineno="65"></codeline>
+<codeline lineno="66"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="namespace_micra_1_1_core_1a618a72559b6df442102e52ea0b174d24a5f6ef6648220414405cdc590066e137c" kindref="member">GFX_DATA_CHANNEL</ref><sp/>=<sp/>(<sp/>1<sp/>&lt;&lt;<sp/>8<sp/>),<sp/></highlight><highlight class="comment">//<sp/>stripping,<sp/>edge<sp/>list,<sp/>etc.</highlight></codeline>
+<codeline lineno="68"><highlight class="comment"></highlight><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="namespace_micra_1_1_core_1a618a72559b6df442102e52ea0b174d24a7fa647d06c3176067a907d1318b754b0" kindref="member">DISP_APPROX_CHANNEL</ref><sp/>=<sp/>(<sp/>1<sp/>&lt;&lt;<sp/>9<sp/>),</highlight></codeline>
+<codeline lineno="70"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="namespace_micra_1_1_core_1a618a72559b6df442102e52ea0b174d24a07cd3f9435e19710c744e92bf5236f4e" kindref="member">EXTENSION_CHANNEL</ref><sp/>=<sp/>(<sp/>1<sp/>&lt;&lt;<sp/>13<sp/>),</highlight></codeline>
+<codeline lineno="72"></codeline>
+<codeline lineno="73"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="namespace_micra_1_1_core_1a618a72559b6df442102e52ea0b174d24af3a1a96d4ada305ae7c1267aa09a795e" kindref="member">TM_CHANNEL</ref><sp/>=<sp/>(<sp/>1<sp/>&lt;&lt;<sp/>10<sp/>),</highlight></codeline>
+<codeline lineno="74"><highlight class="normal"></highlight></codeline>
+<codeline lineno="76"></codeline>
+<codeline lineno="77"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="namespace_micra_1_1_core_1a618a72559b6df442102e52ea0b174d24a99e5ef9a3095c559681406a401ad8a5d" kindref="member">EDGEVISIBLITY_CHANNEL</ref><sp/>=<sp/>(<sp/>1<sp/>&lt;&lt;<sp/>11<sp/>),</highlight></codeline>
+<codeline lineno="78"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>watje</highlight></codeline>
+<codeline lineno="80"><highlight class="comment"></highlight></codeline>
+<codeline lineno="81"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="namespace_micra_1_1_core_1a618a72559b6df442102e52ea0b174d24a9a488461b99b3c26b6073787c8563f28" kindref="member">DONT_RECREATE_TRISTRIP_CHANNEL</ref><sp/>=<sp/>(<sp/>1<sp/>&lt;&lt;<sp/>12<sp/>),</highlight></codeline>
+<codeline lineno="83"></codeline>
+<codeline lineno="85"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="namespace_micra_1_1_core_1a618a72559b6df442102e52ea0b174d24a4a8ee3c5bf38a678461328fa6b96cadc" kindref="member">GLOBMTL_CHANNEL</ref><sp/>=<sp/>(<sp/>1<sp/>&lt;&lt;<sp/>31<sp/>),</highlight></codeline>
+<codeline lineno="87"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="namespace_micra_1_1_core_1a618a72559b6df442102e52ea0b174d24a0d1d2646dee74c801ad06e05abaebeee" kindref="member">OBJ_CHANNELS</ref><sp/>=<sp/>(<sp/><ref refid="namespace_micra_1_1_core_1a618a72559b6df442102e52ea0b174d24a26b1943fb4cbbf46cf6a396bba2ba824" kindref="member">TOPO_CHANNEL</ref><sp/>|<sp/><ref refid="namespace_micra_1_1_core_1a618a72559b6df442102e52ea0b174d24a4721241cf012d87103c74f1f8d02bd1b" kindref="member">GEOM_CHANNEL</ref><sp/>|<sp/><ref refid="namespace_micra_1_1_core_1a618a72559b6df442102e52ea0b174d24a1a3e6378a4705f0fda2a723e8bade761" kindref="member">SELECT_CHANNEL</ref><sp/>|<sp/><ref refid="namespace_micra_1_1_core_1a618a72559b6df442102e52ea0b174d24a1e9d7d26032174428e5d0fa62716f98f" kindref="member">TEXMAP_CHANNEL</ref><sp/>|<sp/><ref refid="namespace_micra_1_1_core_1a618a72559b6df442102e52ea0b174d24a462c69ec51fe03d87f5d68b3c69a431a" kindref="member">MTL_CHANNEL</ref><sp/>|<sp/><ref refid="namespace_micra_1_1_core_1a618a72559b6df442102e52ea0b174d24a081ea0608ee65c73d2ed3738d57ca487" kindref="member">SUBSEL_TYPE_CHANNEL</ref><sp/>|<sp/><ref refid="namespace_micra_1_1_core_1a618a72559b6df442102e52ea0b174d24a1282ce1de2417db42bad6333638688f4" kindref="member">DISP_ATTRIB_CHANNEL</ref><sp/>|<sp/><ref refid="namespace_micra_1_1_core_1a618a72559b6df442102e52ea0b174d24aa0b3798b4b218e0ce749c406ed41745e" kindref="member">VERTCOLOR_CHANNEL</ref><sp/>|<sp/><ref refid="namespace_micra_1_1_core_1a618a72559b6df442102e52ea0b174d24a5f6ef6648220414405cdc590066e137c" kindref="member">GFX_DATA_CHANNEL</ref><sp/>|<sp/><ref refid="namespace_micra_1_1_core_1a618a72559b6df442102e52ea0b174d24a7fa647d06c3176067a907d1318b754b0" kindref="member">DISP_APPROX_CHANNEL</ref><sp/>|<sp/><ref refid="namespace_micra_1_1_core_1a618a72559b6df442102e52ea0b174d24a07cd3f9435e19710c744e92bf5236f4e" kindref="member">EXTENSION_CHANNEL</ref><sp/>),</highlight></codeline>
+<codeline lineno="89"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="namespace_micra_1_1_core_1a618a72559b6df442102e52ea0b174d24a9487b02b877ad1d066979817d4e4c1d3" kindref="member">ALL_CHANNELS</ref><sp/>=<sp/>(<sp/><ref refid="namespace_micra_1_1_core_1a618a72559b6df442102e52ea0b174d24a0d1d2646dee74c801ad06e05abaebeee" kindref="member">OBJ_CHANNELS</ref><sp/>|<sp/><ref refid="namespace_micra_1_1_core_1a618a72559b6df442102e52ea0b174d24af3a1a96d4ada305ae7c1267aa09a795e" kindref="member">TM_CHANNEL</ref><sp/>|<sp/><ref refid="namespace_micra_1_1_core_1a618a72559b6df442102e52ea0b174d24a4a8ee3c5bf38a678461328fa6b96cadc" kindref="member">GLOBMTL_CHANNEL</ref><sp/>),</highlight></codeline>
+<codeline lineno="90"><highlight class="normal"></highlight></codeline>
+<codeline lineno="92"></codeline>
+<codeline lineno="98"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="namespace_micra_1_1_core_1a618a72559b6df442102e52ea0b174d24a49e42c01ffc6de0b54a65d9dc8d6cda7" kindref="member">TOPO_CHAN_NUM</ref><sp/>=<sp/>0,</highlight></codeline>
+<codeline lineno="102"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="namespace_micra_1_1_core_1a618a72559b6df442102e52ea0b174d24aef1c8a7d7f01109593a7f8b0e61ebf5f" kindref="member">GEOM_CHAN_NUM</ref><sp/>=<sp/>1,</highlight></codeline>
+<codeline lineno="104"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="namespace_micra_1_1_core_1a618a72559b6df442102e52ea0b174d24acafcc349c70728c301ad08555eda4e4c" kindref="member">TEXMAP_CHAN_NUM</ref><sp/>=<sp/>2,</highlight></codeline>
+<codeline lineno="106"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="namespace_micra_1_1_core_1a618a72559b6df442102e52ea0b174d24ac5daa5b2474dcbe7dce20cb2e80b37e0" kindref="member">MTL_CHAN_NUM</ref><sp/>=<sp/>3,</highlight></codeline>
+<codeline lineno="108"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="namespace_micra_1_1_core_1a618a72559b6df442102e52ea0b174d24a2b0c62163325e1ec89bdf34262271142" kindref="member">SELECT_CHAN_NUM</ref><sp/>=<sp/>4,</highlight></codeline>
+<codeline lineno="110"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="namespace_micra_1_1_core_1a618a72559b6df442102e52ea0b174d24a07f447cc8fd03efb4187a1085e47e89f" kindref="member">SUBSEL_TYPE_CHAN_NUM</ref><sp/>=<sp/>5,</highlight></codeline>
+<codeline lineno="112"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="namespace_micra_1_1_core_1a618a72559b6df442102e52ea0b174d24a71a9e9ff411a772cde58994888581df6" kindref="member">DISP_ATTRIB_CHAN_NUM</ref><sp/>=<sp/>6,</highlight></codeline>
+<codeline lineno="114"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="namespace_micra_1_1_core_1a618a72559b6df442102e52ea0b174d24a1fb6ecd4276464c36930b11e441a6ca2" kindref="member">VERT_COLOR_CHAN_NUM</ref><sp/>=<sp/>7,</highlight></codeline>
+<codeline lineno="116"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="namespace_micra_1_1_core_1a618a72559b6df442102e52ea0b174d24a8e1dfc422f73c41e070674ef9c97db89" kindref="member">GFX_DATA_CHAN_NUM</ref><sp/>=<sp/>8,</highlight></codeline>
+<codeline lineno="118"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="namespace_micra_1_1_core_1a618a72559b6df442102e52ea0b174d24a083eec2580663b2fadc3187a2123e745" kindref="member">DISP_APPROX_CHAN_NUM</ref><sp/>=<sp/>9,</highlight></codeline>
+<codeline lineno="120"></codeline>
+<codeline lineno="125"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="namespace_micra_1_1_core_1a618a72559b6df442102e52ea0b174d24a1a36447f865482aade58ccbc12fc0f97" kindref="member">EXTENSION_CHAN_NUM</ref><sp/>=<sp/>10,</highlight></codeline>
+<codeline lineno="126"><highlight class="normal"></highlight></codeline>
+<codeline lineno="128"></codeline>
+<codeline lineno="130"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="131"><highlight class="normal">}</highlight></codeline>
+    </programlisting>
+    <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/EnumChannels.cs"/>
+  </compounddef>
+</doxygen>

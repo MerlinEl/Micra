@@ -1,0 +1,1975 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
+  <compounddef id="class_micra_1_1_core_1_1_colors" kind="class" prot="public">
+    <compoundname>Micra::Core::Colors</compoundname>
+      <sectiondef kind="property">
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_colors_1a876e5a453c76a9b341d36f3b44617052" prot="public" static="yes" readable="no" writable="no" gettable="yes" settable="no">
+        <type><ref refid="struct_micra_1_1_core_1_1_color" kindref="compound">Color</ref></type>
+        <definition>Color Micra.Core.Colors.AliceBlue</definition>
+        <argsstring></argsstring>
+        <name>AliceBlue</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" line="127" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" bodystart="127" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_colors_1ae9ba6cb4b2235b83b8ef9be53bc2b5cb" prot="public" static="yes" readable="no" writable="no" gettable="yes" settable="no">
+        <type><ref refid="struct_micra_1_1_core_1_1_color" kindref="compound">Color</ref></type>
+        <definition>Color Micra.Core.Colors.AntiqueWhite</definition>
+        <argsstring></argsstring>
+        <name>AntiqueWhite</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" line="128" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" bodystart="128" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_colors_1a0ed9430ef168c9d18c97dd296bef13b3" prot="public" static="yes" readable="no" writable="no" gettable="yes" settable="no">
+        <type><ref refid="struct_micra_1_1_core_1_1_color" kindref="compound">Color</ref></type>
+        <definition>Color Micra.Core.Colors.Aqua</definition>
+        <argsstring></argsstring>
+        <name>Aqua</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" line="129" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" bodystart="129" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_colors_1ac6040876b854d6e9a83c05bfacd77eec" prot="public" static="yes" readable="no" writable="no" gettable="yes" settable="no">
+        <type><ref refid="struct_micra_1_1_core_1_1_color" kindref="compound">Color</ref></type>
+        <definition>Color Micra.Core.Colors.Aquamarine</definition>
+        <argsstring></argsstring>
+        <name>Aquamarine</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" line="130" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" bodystart="130" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_colors_1a285ad468d777b4fe82f81d8559bb4296" prot="public" static="yes" readable="no" writable="no" gettable="yes" settable="no">
+        <type><ref refid="struct_micra_1_1_core_1_1_color" kindref="compound">Color</ref></type>
+        <definition>Color Micra.Core.Colors.Azure</definition>
+        <argsstring></argsstring>
+        <name>Azure</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" line="131" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" bodystart="131" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_colors_1afb9726157b636038ac85d31e4e18364d" prot="public" static="yes" readable="no" writable="no" gettable="yes" settable="no">
+        <type><ref refid="struct_micra_1_1_core_1_1_color" kindref="compound">Color</ref></type>
+        <definition>Color Micra.Core.Colors.Beige</definition>
+        <argsstring></argsstring>
+        <name>Beige</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" line="132" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" bodystart="132" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_colors_1a15f2066c94c0594c62e0fcb0c6734985" prot="public" static="yes" readable="no" writable="no" gettable="yes" settable="no">
+        <type><ref refid="struct_micra_1_1_core_1_1_color" kindref="compound">Color</ref></type>
+        <definition>Color Micra.Core.Colors.Bisque</definition>
+        <argsstring></argsstring>
+        <name>Bisque</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" line="133" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" bodystart="133" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_colors_1aef916f784cc243c83a9b284c24ada5ff" prot="public" static="yes" readable="no" writable="no" gettable="yes" settable="no">
+        <type><ref refid="struct_micra_1_1_core_1_1_color" kindref="compound">Color</ref></type>
+        <definition>Color Micra.Core.Colors.Black</definition>
+        <argsstring></argsstring>
+        <name>Black</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" line="134" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" bodystart="134" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_colors_1a2cebf6b6b3c4107e523c999a9e1fb8a1" prot="public" static="yes" readable="no" writable="no" gettable="yes" settable="no">
+        <type><ref refid="struct_micra_1_1_core_1_1_color" kindref="compound">Color</ref></type>
+        <definition>Color Micra.Core.Colors.BlanchedAlmond</definition>
+        <argsstring></argsstring>
+        <name>BlanchedAlmond</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" line="135" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" bodystart="135" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_colors_1ad8748e15cdfe4e74425fa4de4a37704b" prot="public" static="yes" readable="no" writable="no" gettable="yes" settable="no">
+        <type><ref refid="struct_micra_1_1_core_1_1_color" kindref="compound">Color</ref></type>
+        <definition>Color Micra.Core.Colors.Blue</definition>
+        <argsstring></argsstring>
+        <name>Blue</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" line="136" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" bodystart="136" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_colors_1a1a51af6a8b75bc7dea630f1833d5b12a" prot="public" static="yes" readable="no" writable="no" gettable="yes" settable="no">
+        <type><ref refid="struct_micra_1_1_core_1_1_color" kindref="compound">Color</ref></type>
+        <definition>Color Micra.Core.Colors.BlueViolet</definition>
+        <argsstring></argsstring>
+        <name>BlueViolet</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" line="137" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" bodystart="137" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_colors_1a678da486a24dff6cb947f0b6bf0cf838" prot="public" static="yes" readable="no" writable="no" gettable="yes" settable="no">
+        <type><ref refid="struct_micra_1_1_core_1_1_color" kindref="compound">Color</ref></type>
+        <definition>Color Micra.Core.Colors.Brown</definition>
+        <argsstring></argsstring>
+        <name>Brown</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" line="138" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" bodystart="138" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_colors_1a3f0b6c6b31f619ae5ae40ec214b8f4ed" prot="public" static="yes" readable="no" writable="no" gettable="yes" settable="no">
+        <type><ref refid="struct_micra_1_1_core_1_1_color" kindref="compound">Color</ref></type>
+        <definition>Color Micra.Core.Colors.BurlyWood</definition>
+        <argsstring></argsstring>
+        <name>BurlyWood</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" line="139" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" bodystart="139" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_colors_1a0b10388b6f64e06d555a029e238a042c" prot="public" static="yes" readable="no" writable="no" gettable="yes" settable="no">
+        <type><ref refid="struct_micra_1_1_core_1_1_color" kindref="compound">Color</ref></type>
+        <definition>Color Micra.Core.Colors.CadetBlue</definition>
+        <argsstring></argsstring>
+        <name>CadetBlue</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" line="140" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" bodystart="140" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_colors_1a1e4c2c3c86a4827145bf7dc7c00f8b15" prot="public" static="yes" readable="no" writable="no" gettable="yes" settable="no">
+        <type><ref refid="struct_micra_1_1_core_1_1_color" kindref="compound">Color</ref></type>
+        <definition>Color Micra.Core.Colors.Chartreuse</definition>
+        <argsstring></argsstring>
+        <name>Chartreuse</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" line="141" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" bodystart="141" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_colors_1a4d1ee6c75789a7efa2d6b00cbba114e8" prot="public" static="yes" readable="no" writable="no" gettable="yes" settable="no">
+        <type><ref refid="struct_micra_1_1_core_1_1_color" kindref="compound">Color</ref></type>
+        <definition>Color Micra.Core.Colors.Chocolate</definition>
+        <argsstring></argsstring>
+        <name>Chocolate</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" line="142" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" bodystart="142" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_colors_1ad66556da75d24b3e9c0d63f748cbb7b4" prot="public" static="yes" readable="no" writable="no" gettable="yes" settable="no">
+        <type><ref refid="struct_micra_1_1_core_1_1_color" kindref="compound">Color</ref></type>
+        <definition>Color Micra.Core.Colors.Coral</definition>
+        <argsstring></argsstring>
+        <name>Coral</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" line="143" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" bodystart="143" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_colors_1a779923619d8e4a9514f6504547bd0db9" prot="public" static="yes" readable="no" writable="no" gettable="yes" settable="no">
+        <type><ref refid="struct_micra_1_1_core_1_1_color" kindref="compound">Color</ref></type>
+        <definition>Color Micra.Core.Colors.CornflowerBlue</definition>
+        <argsstring></argsstring>
+        <name>CornflowerBlue</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" line="144" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" bodystart="144" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_colors_1ac3ebc6d8a9bb677c38d5236dfd37ae21" prot="public" static="yes" readable="no" writable="no" gettable="yes" settable="no">
+        <type><ref refid="struct_micra_1_1_core_1_1_color" kindref="compound">Color</ref></type>
+        <definition>Color Micra.Core.Colors.Cornsilk</definition>
+        <argsstring></argsstring>
+        <name>Cornsilk</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" line="145" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" bodystart="145" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_colors_1aa5af808adad5c1cb00a00d98bbdfc837" prot="public" static="yes" readable="no" writable="no" gettable="yes" settable="no">
+        <type><ref refid="struct_micra_1_1_core_1_1_color" kindref="compound">Color</ref></type>
+        <definition>Color Micra.Core.Colors.Crimson</definition>
+        <argsstring></argsstring>
+        <name>Crimson</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" line="146" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" bodystart="146" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_colors_1accf14fdd9d0c0be6174d330de7974b20" prot="public" static="yes" readable="no" writable="no" gettable="yes" settable="no">
+        <type><ref refid="struct_micra_1_1_core_1_1_color" kindref="compound">Color</ref></type>
+        <definition>Color Micra.Core.Colors.Cyan</definition>
+        <argsstring></argsstring>
+        <name>Cyan</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" line="147" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" bodystart="147" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_colors_1abdc6228fd16ece57863395de2622fb61" prot="public" static="yes" readable="no" writable="no" gettable="yes" settable="no">
+        <type><ref refid="struct_micra_1_1_core_1_1_color" kindref="compound">Color</ref></type>
+        <definition>Color Micra.Core.Colors.DarkBlue</definition>
+        <argsstring></argsstring>
+        <name>DarkBlue</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" line="148" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" bodystart="148" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_colors_1a56b69735d204edb2f894020979ae09b5" prot="public" static="yes" readable="no" writable="no" gettable="yes" settable="no">
+        <type><ref refid="struct_micra_1_1_core_1_1_color" kindref="compound">Color</ref></type>
+        <definition>Color Micra.Core.Colors.DarkCyan</definition>
+        <argsstring></argsstring>
+        <name>DarkCyan</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" line="149" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" bodystart="149" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_colors_1af95b98b3e5b39a3b6415e14ef16a7a59" prot="public" static="yes" readable="no" writable="no" gettable="yes" settable="no">
+        <type><ref refid="struct_micra_1_1_core_1_1_color" kindref="compound">Color</ref></type>
+        <definition>Color Micra.Core.Colors.DarkGoldenrod</definition>
+        <argsstring></argsstring>
+        <name>DarkGoldenrod</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" line="150" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" bodystart="150" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_colors_1a920e73b0d26c6dbb01436fb7f731f402" prot="public" static="yes" readable="no" writable="no" gettable="yes" settable="no">
+        <type><ref refid="struct_micra_1_1_core_1_1_color" kindref="compound">Color</ref></type>
+        <definition>Color Micra.Core.Colors.DarkGray</definition>
+        <argsstring></argsstring>
+        <name>DarkGray</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" line="151" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" bodystart="151" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_colors_1a1488a0ce7ef79fb539efa40aba9f50a2" prot="public" static="yes" readable="no" writable="no" gettable="yes" settable="no">
+        <type><ref refid="struct_micra_1_1_core_1_1_color" kindref="compound">Color</ref></type>
+        <definition>Color Micra.Core.Colors.DarkGreen</definition>
+        <argsstring></argsstring>
+        <name>DarkGreen</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" line="152" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" bodystart="152" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_colors_1ac3709123f60561dac0b021eb131db496" prot="public" static="yes" readable="no" writable="no" gettable="yes" settable="no">
+        <type><ref refid="struct_micra_1_1_core_1_1_color" kindref="compound">Color</ref></type>
+        <definition>Color Micra.Core.Colors.DarkKhaki</definition>
+        <argsstring></argsstring>
+        <name>DarkKhaki</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" line="153" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" bodystart="153" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_colors_1acb83c10299105c7ad59ae8a62775c0a6" prot="public" static="yes" readable="no" writable="no" gettable="yes" settable="no">
+        <type><ref refid="struct_micra_1_1_core_1_1_color" kindref="compound">Color</ref></type>
+        <definition>Color Micra.Core.Colors.DarkMagenta</definition>
+        <argsstring></argsstring>
+        <name>DarkMagenta</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" line="154" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" bodystart="154" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_colors_1a1d650fe28349e1e46da7bc4bd1ec0153" prot="public" static="yes" readable="no" writable="no" gettable="yes" settable="no">
+        <type><ref refid="struct_micra_1_1_core_1_1_color" kindref="compound">Color</ref></type>
+        <definition>Color Micra.Core.Colors.DarkOliveGreen</definition>
+        <argsstring></argsstring>
+        <name>DarkOliveGreen</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" line="155" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" bodystart="155" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_colors_1a1f3861704c8a43809a603b89fffc02e0" prot="public" static="yes" readable="no" writable="no" gettable="yes" settable="no">
+        <type><ref refid="struct_micra_1_1_core_1_1_color" kindref="compound">Color</ref></type>
+        <definition>Color Micra.Core.Colors.DarkOrange</definition>
+        <argsstring></argsstring>
+        <name>DarkOrange</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" line="156" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" bodystart="156" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_colors_1a76710a16318255e56ee3ae0771897cc9" prot="public" static="yes" readable="no" writable="no" gettable="yes" settable="no">
+        <type><ref refid="struct_micra_1_1_core_1_1_color" kindref="compound">Color</ref></type>
+        <definition>Color Micra.Core.Colors.DarkOrchid</definition>
+        <argsstring></argsstring>
+        <name>DarkOrchid</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" line="157" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" bodystart="157" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_colors_1a80ca29e16938d194aa3a3766375d2e23" prot="public" static="yes" readable="no" writable="no" gettable="yes" settable="no">
+        <type><ref refid="struct_micra_1_1_core_1_1_color" kindref="compound">Color</ref></type>
+        <definition>Color Micra.Core.Colors.DarkRed</definition>
+        <argsstring></argsstring>
+        <name>DarkRed</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" line="158" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" bodystart="158" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_colors_1a66441eba26b012a7263f3d9755f4da63" prot="public" static="yes" readable="no" writable="no" gettable="yes" settable="no">
+        <type><ref refid="struct_micra_1_1_core_1_1_color" kindref="compound">Color</ref></type>
+        <definition>Color Micra.Core.Colors.DarkSalmon</definition>
+        <argsstring></argsstring>
+        <name>DarkSalmon</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" line="159" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" bodystart="159" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_colors_1ad7e129ebeb528e22581e740904ef7fab" prot="public" static="yes" readable="no" writable="no" gettable="yes" settable="no">
+        <type><ref refid="struct_micra_1_1_core_1_1_color" kindref="compound">Color</ref></type>
+        <definition>Color Micra.Core.Colors.DarkSeaGreen</definition>
+        <argsstring></argsstring>
+        <name>DarkSeaGreen</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" line="160" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" bodystart="160" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_colors_1aaaeab011418c63aed001d8e3e19abede" prot="public" static="yes" readable="no" writable="no" gettable="yes" settable="no">
+        <type><ref refid="struct_micra_1_1_core_1_1_color" kindref="compound">Color</ref></type>
+        <definition>Color Micra.Core.Colors.DarkSlateBlue</definition>
+        <argsstring></argsstring>
+        <name>DarkSlateBlue</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" line="161" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" bodystart="161" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_colors_1a7cf6e8658d97b0ed54d87b8209f9de9a" prot="public" static="yes" readable="no" writable="no" gettable="yes" settable="no">
+        <type><ref refid="struct_micra_1_1_core_1_1_color" kindref="compound">Color</ref></type>
+        <definition>Color Micra.Core.Colors.DarkSlateGray</definition>
+        <argsstring></argsstring>
+        <name>DarkSlateGray</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" line="162" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" bodystart="162" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_colors_1ae9e599c172917a3201438ddf01794210" prot="public" static="yes" readable="no" writable="no" gettable="yes" settable="no">
+        <type><ref refid="struct_micra_1_1_core_1_1_color" kindref="compound">Color</ref></type>
+        <definition>Color Micra.Core.Colors.DarkTurquoise</definition>
+        <argsstring></argsstring>
+        <name>DarkTurquoise</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" line="163" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" bodystart="163" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_colors_1aa61fd4a571d8d0a9b40d561b409f2daf" prot="public" static="yes" readable="no" writable="no" gettable="yes" settable="no">
+        <type><ref refid="struct_micra_1_1_core_1_1_color" kindref="compound">Color</ref></type>
+        <definition>Color Micra.Core.Colors.DarkViolet</definition>
+        <argsstring></argsstring>
+        <name>DarkViolet</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" line="164" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" bodystart="164" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_colors_1ae096f98680eb600aac947441b9e6a919" prot="public" static="yes" readable="no" writable="no" gettable="yes" settable="no">
+        <type><ref refid="struct_micra_1_1_core_1_1_color" kindref="compound">Color</ref></type>
+        <definition>Color Micra.Core.Colors.DeepPink</definition>
+        <argsstring></argsstring>
+        <name>DeepPink</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" line="165" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" bodystart="165" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_colors_1ab39df9583fd64132039d70fa90311331" prot="public" static="yes" readable="no" writable="no" gettable="yes" settable="no">
+        <type><ref refid="struct_micra_1_1_core_1_1_color" kindref="compound">Color</ref></type>
+        <definition>Color Micra.Core.Colors.DeepSkyBlue</definition>
+        <argsstring></argsstring>
+        <name>DeepSkyBlue</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" line="166" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" bodystart="166" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_colors_1a255329075879a7efc0b76afe5b7dc8e6" prot="public" static="yes" readable="no" writable="no" gettable="yes" settable="no">
+        <type><ref refid="struct_micra_1_1_core_1_1_color" kindref="compound">Color</ref></type>
+        <definition>Color Micra.Core.Colors.DimGray</definition>
+        <argsstring></argsstring>
+        <name>DimGray</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" line="167" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" bodystart="167" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_colors_1a9dde9c45450737a0c0179c6d689364ef" prot="public" static="yes" readable="no" writable="no" gettable="yes" settable="no">
+        <type><ref refid="struct_micra_1_1_core_1_1_color" kindref="compound">Color</ref></type>
+        <definition>Color Micra.Core.Colors.DodgerBlue</definition>
+        <argsstring></argsstring>
+        <name>DodgerBlue</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" line="168" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" bodystart="168" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_colors_1ad7255511a08cb99a5a58ed384cee3ea3" prot="public" static="yes" readable="no" writable="no" gettable="yes" settable="no">
+        <type><ref refid="struct_micra_1_1_core_1_1_color" kindref="compound">Color</ref></type>
+        <definition>Color Micra.Core.Colors.Firebrick</definition>
+        <argsstring></argsstring>
+        <name>Firebrick</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" line="169" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" bodystart="169" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_colors_1a894219655bc8cc4ac115b6d40717e692" prot="public" static="yes" readable="no" writable="no" gettable="yes" settable="no">
+        <type><ref refid="struct_micra_1_1_core_1_1_color" kindref="compound">Color</ref></type>
+        <definition>Color Micra.Core.Colors.FloralWhite</definition>
+        <argsstring></argsstring>
+        <name>FloralWhite</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" line="170" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" bodystart="170" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_colors_1a7754d918f1acb058ee2f5804dc65c498" prot="public" static="yes" readable="no" writable="no" gettable="yes" settable="no">
+        <type><ref refid="struct_micra_1_1_core_1_1_color" kindref="compound">Color</ref></type>
+        <definition>Color Micra.Core.Colors.ForestGreen</definition>
+        <argsstring></argsstring>
+        <name>ForestGreen</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" line="171" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" bodystart="171" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_colors_1a9a096569b9de1f1693de889d3105a0e4" prot="public" static="yes" readable="no" writable="no" gettable="yes" settable="no">
+        <type><ref refid="struct_micra_1_1_core_1_1_color" kindref="compound">Color</ref></type>
+        <definition>Color Micra.Core.Colors.Fuchsia</definition>
+        <argsstring></argsstring>
+        <name>Fuchsia</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" line="172" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" bodystart="172" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_colors_1add66115f09580cc85972d796c84dd350" prot="public" static="yes" readable="no" writable="no" gettable="yes" settable="no">
+        <type><ref refid="struct_micra_1_1_core_1_1_color" kindref="compound">Color</ref></type>
+        <definition>Color Micra.Core.Colors.Gainsboro</definition>
+        <argsstring></argsstring>
+        <name>Gainsboro</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" line="173" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" bodystart="173" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_colors_1a00e49c386e8c114c8d4729ea6d6dbe83" prot="public" static="yes" readable="no" writable="no" gettable="yes" settable="no">
+        <type><ref refid="struct_micra_1_1_core_1_1_color" kindref="compound">Color</ref></type>
+        <definition>Color Micra.Core.Colors.GhostWhite</definition>
+        <argsstring></argsstring>
+        <name>GhostWhite</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" line="174" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" bodystart="174" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_colors_1a279f80352879c5aef8d887066efc52d9" prot="public" static="yes" readable="no" writable="no" gettable="yes" settable="no">
+        <type><ref refid="struct_micra_1_1_core_1_1_color" kindref="compound">Color</ref></type>
+        <definition>Color Micra.Core.Colors.Gold</definition>
+        <argsstring></argsstring>
+        <name>Gold</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" line="175" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" bodystart="175" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_colors_1a4c0a2702f4f280fe6b2c3df4089311cd" prot="public" static="yes" readable="no" writable="no" gettable="yes" settable="no">
+        <type><ref refid="struct_micra_1_1_core_1_1_color" kindref="compound">Color</ref></type>
+        <definition>Color Micra.Core.Colors.Goldenrod</definition>
+        <argsstring></argsstring>
+        <name>Goldenrod</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" line="176" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" bodystart="176" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_colors_1a9ba3206dda6bb7b68c95f9f464836e39" prot="public" static="yes" readable="no" writable="no" gettable="yes" settable="no">
+        <type><ref refid="struct_micra_1_1_core_1_1_color" kindref="compound">Color</ref></type>
+        <definition>Color Micra.Core.Colors.Gray</definition>
+        <argsstring></argsstring>
+        <name>Gray</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" line="177" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" bodystart="177" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_colors_1a234491e1c9b164cb9b9595715e0b8b11" prot="public" static="yes" readable="no" writable="no" gettable="yes" settable="no">
+        <type><ref refid="struct_micra_1_1_core_1_1_color" kindref="compound">Color</ref></type>
+        <definition>Color Micra.Core.Colors.Green</definition>
+        <argsstring></argsstring>
+        <name>Green</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" line="178" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" bodystart="178" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_colors_1aa810097fdd80189f0bee6a9feb0b4317" prot="public" static="yes" readable="no" writable="no" gettable="yes" settable="no">
+        <type><ref refid="struct_micra_1_1_core_1_1_color" kindref="compound">Color</ref></type>
+        <definition>Color Micra.Core.Colors.GreenYellow</definition>
+        <argsstring></argsstring>
+        <name>GreenYellow</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" line="179" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" bodystart="179" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_colors_1ae2bcba727772c5ab6b42ab13492a6e74" prot="public" static="yes" readable="no" writable="no" gettable="yes" settable="no">
+        <type><ref refid="struct_micra_1_1_core_1_1_color" kindref="compound">Color</ref></type>
+        <definition>Color Micra.Core.Colors.Honeydew</definition>
+        <argsstring></argsstring>
+        <name>Honeydew</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" line="180" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" bodystart="180" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_colors_1aed0e0403d138395bb4e9dd65cfd4b7e4" prot="public" static="yes" readable="no" writable="no" gettable="yes" settable="no">
+        <type><ref refid="struct_micra_1_1_core_1_1_color" kindref="compound">Color</ref></type>
+        <definition>Color Micra.Core.Colors.HotPink</definition>
+        <argsstring></argsstring>
+        <name>HotPink</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" line="181" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" bodystart="181" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_colors_1a662298006872d4003df04314abd355fb" prot="public" static="yes" readable="no" writable="no" gettable="yes" settable="no">
+        <type><ref refid="struct_micra_1_1_core_1_1_color" kindref="compound">Color</ref></type>
+        <definition>Color Micra.Core.Colors.IndianRed</definition>
+        <argsstring></argsstring>
+        <name>IndianRed</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" line="182" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" bodystart="182" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_colors_1a309b10431afd280748c28e95d86386bd" prot="public" static="yes" readable="no" writable="no" gettable="yes" settable="no">
+        <type><ref refid="struct_micra_1_1_core_1_1_color" kindref="compound">Color</ref></type>
+        <definition>Color Micra.Core.Colors.Indigo</definition>
+        <argsstring></argsstring>
+        <name>Indigo</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" line="183" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" bodystart="183" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_colors_1afaf0b4994fc2a1a1e9a2189cc9631a32" prot="public" static="yes" readable="no" writable="no" gettable="yes" settable="no">
+        <type><ref refid="struct_micra_1_1_core_1_1_color" kindref="compound">Color</ref></type>
+        <definition>Color Micra.Core.Colors.Khaki</definition>
+        <argsstring></argsstring>
+        <name>Khaki</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" line="184" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" bodystart="184" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_colors_1a16be023cfcc884b7f03c2d9e3ce44ea0" prot="public" static="yes" readable="no" writable="no" gettable="yes" settable="no">
+        <type><ref refid="struct_micra_1_1_core_1_1_color" kindref="compound">Color</ref></type>
+        <definition>Color Micra.Core.Colors.Lavender</definition>
+        <argsstring></argsstring>
+        <name>Lavender</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" line="185" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" bodystart="185" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_colors_1a265650e511207ce9b2d32d224d141e52" prot="public" static="yes" readable="no" writable="no" gettable="yes" settable="no">
+        <type><ref refid="struct_micra_1_1_core_1_1_color" kindref="compound">Color</ref></type>
+        <definition>Color Micra.Core.Colors.LavenderBlush</definition>
+        <argsstring></argsstring>
+        <name>LavenderBlush</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" line="186" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" bodystart="186" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_colors_1addbaab4a89d3b0b31f5966b7cc0ef88e" prot="public" static="yes" readable="no" writable="no" gettable="yes" settable="no">
+        <type><ref refid="struct_micra_1_1_core_1_1_color" kindref="compound">Color</ref></type>
+        <definition>Color Micra.Core.Colors.LawnGreen</definition>
+        <argsstring></argsstring>
+        <name>LawnGreen</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" line="187" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" bodystart="187" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_colors_1a23b5e353423dc1721124f512586ff1ac" prot="public" static="yes" readable="no" writable="no" gettable="yes" settable="no">
+        <type><ref refid="struct_micra_1_1_core_1_1_color" kindref="compound">Color</ref></type>
+        <definition>Color Micra.Core.Colors.LemonChiffon</definition>
+        <argsstring></argsstring>
+        <name>LemonChiffon</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" line="188" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" bodystart="188" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_colors_1a9d2081d5ef816ed7c76159474febb680" prot="public" static="yes" readable="no" writable="no" gettable="yes" settable="no">
+        <type><ref refid="struct_micra_1_1_core_1_1_color" kindref="compound">Color</ref></type>
+        <definition>Color Micra.Core.Colors.LightBlue</definition>
+        <argsstring></argsstring>
+        <name>LightBlue</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" line="189" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" bodystart="189" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_colors_1adbf75f25b27883cb5fa4bfe64435bf5a" prot="public" static="yes" readable="no" writable="no" gettable="yes" settable="no">
+        <type><ref refid="struct_micra_1_1_core_1_1_color" kindref="compound">Color</ref></type>
+        <definition>Color Micra.Core.Colors.LightCoral</definition>
+        <argsstring></argsstring>
+        <name>LightCoral</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" line="190" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" bodystart="190" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_colors_1a82138ff76a3bd26c6fb0a3e81ca5d5ab" prot="public" static="yes" readable="no" writable="no" gettable="yes" settable="no">
+        <type><ref refid="struct_micra_1_1_core_1_1_color" kindref="compound">Color</ref></type>
+        <definition>Color Micra.Core.Colors.LightCyan</definition>
+        <argsstring></argsstring>
+        <name>LightCyan</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" line="191" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" bodystart="191" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_colors_1afabb6aa520ef52450e1a5176e21d4a56" prot="public" static="yes" readable="no" writable="no" gettable="yes" settable="no">
+        <type><ref refid="struct_micra_1_1_core_1_1_color" kindref="compound">Color</ref></type>
+        <definition>Color Micra.Core.Colors.LightGoldenrodYellow</definition>
+        <argsstring></argsstring>
+        <name>LightGoldenrodYellow</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" line="192" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" bodystart="192" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_colors_1a1f9b2a380bb6178f9aa9100f10c97aa0" prot="public" static="yes" readable="no" writable="no" gettable="yes" settable="no">
+        <type><ref refid="struct_micra_1_1_core_1_1_color" kindref="compound">Color</ref></type>
+        <definition>Color Micra.Core.Colors.LightGray</definition>
+        <argsstring></argsstring>
+        <name>LightGray</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" line="193" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" bodystart="193" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_colors_1aecf71f0a018ab2cc3b5d3ddc1a604937" prot="public" static="yes" readable="no" writable="no" gettable="yes" settable="no">
+        <type><ref refid="struct_micra_1_1_core_1_1_color" kindref="compound">Color</ref></type>
+        <definition>Color Micra.Core.Colors.LightGreen</definition>
+        <argsstring></argsstring>
+        <name>LightGreen</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" line="194" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" bodystart="194" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_colors_1a2a883bc377ffc1e6235cfdf583ff5928" prot="public" static="yes" readable="no" writable="no" gettable="yes" settable="no">
+        <type><ref refid="struct_micra_1_1_core_1_1_color" kindref="compound">Color</ref></type>
+        <definition>Color Micra.Core.Colors.LightPink</definition>
+        <argsstring></argsstring>
+        <name>LightPink</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" line="195" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" bodystart="195" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_colors_1affa3edfb21ea022bfa7edc53f8e6b6f0" prot="public" static="yes" readable="no" writable="no" gettable="yes" settable="no">
+        <type><ref refid="struct_micra_1_1_core_1_1_color" kindref="compound">Color</ref></type>
+        <definition>Color Micra.Core.Colors.LightSalmon</definition>
+        <argsstring></argsstring>
+        <name>LightSalmon</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" line="196" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" bodystart="196" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_colors_1ac7169d943f981ca736b86062bf4da57e" prot="public" static="yes" readable="no" writable="no" gettable="yes" settable="no">
+        <type><ref refid="struct_micra_1_1_core_1_1_color" kindref="compound">Color</ref></type>
+        <definition>Color Micra.Core.Colors.LightSeaGreen</definition>
+        <argsstring></argsstring>
+        <name>LightSeaGreen</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" line="197" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" bodystart="197" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_colors_1a19864240511013e9207dfd5ed52c32fe" prot="public" static="yes" readable="no" writable="no" gettable="yes" settable="no">
+        <type><ref refid="struct_micra_1_1_core_1_1_color" kindref="compound">Color</ref></type>
+        <definition>Color Micra.Core.Colors.LightSkyBlue</definition>
+        <argsstring></argsstring>
+        <name>LightSkyBlue</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" line="198" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" bodystart="198" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_colors_1aae9663dd51a460defa39539bacdc151f" prot="public" static="yes" readable="no" writable="no" gettable="yes" settable="no">
+        <type><ref refid="struct_micra_1_1_core_1_1_color" kindref="compound">Color</ref></type>
+        <definition>Color Micra.Core.Colors.LightSlateGray</definition>
+        <argsstring></argsstring>
+        <name>LightSlateGray</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" line="199" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" bodystart="199" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_colors_1aa2d1c5985e02c92e61b7a24b17064585" prot="public" static="yes" readable="no" writable="no" gettable="yes" settable="no">
+        <type><ref refid="struct_micra_1_1_core_1_1_color" kindref="compound">Color</ref></type>
+        <definition>Color Micra.Core.Colors.LightSteelBlue</definition>
+        <argsstring></argsstring>
+        <name>LightSteelBlue</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" line="200" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" bodystart="200" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_colors_1ad56743884734838e54ae6e8ba490bca5" prot="public" static="yes" readable="no" writable="no" gettable="yes" settable="no">
+        <type><ref refid="struct_micra_1_1_core_1_1_color" kindref="compound">Color</ref></type>
+        <definition>Color Micra.Core.Colors.LightYellow</definition>
+        <argsstring></argsstring>
+        <name>LightYellow</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" line="201" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" bodystart="201" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_colors_1a792bbcd61d4c7fbb1da53350ab99f926" prot="public" static="yes" readable="no" writable="no" gettable="yes" settable="no">
+        <type><ref refid="struct_micra_1_1_core_1_1_color" kindref="compound">Color</ref></type>
+        <definition>Color Micra.Core.Colors.Lime</definition>
+        <argsstring></argsstring>
+        <name>Lime</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" line="202" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" bodystart="202" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_colors_1a5ce28b56c48abca6720e0f2e298c42f3" prot="public" static="yes" readable="no" writable="no" gettable="yes" settable="no">
+        <type><ref refid="struct_micra_1_1_core_1_1_color" kindref="compound">Color</ref></type>
+        <definition>Color Micra.Core.Colors.LimeGreen</definition>
+        <argsstring></argsstring>
+        <name>LimeGreen</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" line="203" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" bodystart="203" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_colors_1a5ae37cd6e671ec9e2c652eff67763bcb" prot="public" static="yes" readable="no" writable="no" gettable="yes" settable="no">
+        <type><ref refid="struct_micra_1_1_core_1_1_color" kindref="compound">Color</ref></type>
+        <definition>Color Micra.Core.Colors.Linen</definition>
+        <argsstring></argsstring>
+        <name>Linen</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" line="204" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" bodystart="204" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_colors_1a584120debe5e6126e54fb836f6b4e017" prot="public" static="yes" readable="no" writable="no" gettable="yes" settable="no">
+        <type><ref refid="struct_micra_1_1_core_1_1_color" kindref="compound">Color</ref></type>
+        <definition>Color Micra.Core.Colors.Magenta</definition>
+        <argsstring></argsstring>
+        <name>Magenta</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" line="205" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" bodystart="205" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_colors_1a9395cbbfb3c3e963a75d66052921dd96" prot="public" static="yes" readable="no" writable="no" gettable="yes" settable="no">
+        <type><ref refid="struct_micra_1_1_core_1_1_color" kindref="compound">Color</ref></type>
+        <definition>Color Micra.Core.Colors.Maroon</definition>
+        <argsstring></argsstring>
+        <name>Maroon</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" line="206" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" bodystart="206" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_colors_1aa5956207c800460bb6afa2225659bd89" prot="public" static="yes" readable="no" writable="no" gettable="yes" settable="no">
+        <type><ref refid="struct_micra_1_1_core_1_1_color" kindref="compound">Color</ref></type>
+        <definition>Color Micra.Core.Colors.MediumAquamarine</definition>
+        <argsstring></argsstring>
+        <name>MediumAquamarine</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" line="207" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" bodystart="207" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_colors_1a54a07d145cad482f8f918b280b5d4023" prot="public" static="yes" readable="no" writable="no" gettable="yes" settable="no">
+        <type><ref refid="struct_micra_1_1_core_1_1_color" kindref="compound">Color</ref></type>
+        <definition>Color Micra.Core.Colors.MediumBlue</definition>
+        <argsstring></argsstring>
+        <name>MediumBlue</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" line="208" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" bodystart="208" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_colors_1a7fcaba43b63826a162ed9cbb7edd1f2e" prot="public" static="yes" readable="no" writable="no" gettable="yes" settable="no">
+        <type><ref refid="struct_micra_1_1_core_1_1_color" kindref="compound">Color</ref></type>
+        <definition>Color Micra.Core.Colors.MediumOrchid</definition>
+        <argsstring></argsstring>
+        <name>MediumOrchid</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" line="209" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" bodystart="209" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_colors_1aa76d28523011fcf1ff08eda3f8ead5c2" prot="public" static="yes" readable="no" writable="no" gettable="yes" settable="no">
+        <type><ref refid="struct_micra_1_1_core_1_1_color" kindref="compound">Color</ref></type>
+        <definition>Color Micra.Core.Colors.MediumPurple</definition>
+        <argsstring></argsstring>
+        <name>MediumPurple</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" line="210" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" bodystart="210" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_colors_1ae069d05937432b7ee19e8c9207a8018a" prot="public" static="yes" readable="no" writable="no" gettable="yes" settable="no">
+        <type><ref refid="struct_micra_1_1_core_1_1_color" kindref="compound">Color</ref></type>
+        <definition>Color Micra.Core.Colors.MediumSeaGreen</definition>
+        <argsstring></argsstring>
+        <name>MediumSeaGreen</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" line="211" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" bodystart="211" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_colors_1aec0f2d754be6b6b971b515491a4378f5" prot="public" static="yes" readable="no" writable="no" gettable="yes" settable="no">
+        <type><ref refid="struct_micra_1_1_core_1_1_color" kindref="compound">Color</ref></type>
+        <definition>Color Micra.Core.Colors.MediumSlateBlue</definition>
+        <argsstring></argsstring>
+        <name>MediumSlateBlue</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" line="212" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" bodystart="212" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_colors_1a73093c5bd26ffb15ef911bc840017bd2" prot="public" static="yes" readable="no" writable="no" gettable="yes" settable="no">
+        <type><ref refid="struct_micra_1_1_core_1_1_color" kindref="compound">Color</ref></type>
+        <definition>Color Micra.Core.Colors.MediumSpringGreen</definition>
+        <argsstring></argsstring>
+        <name>MediumSpringGreen</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" line="213" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" bodystart="213" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_colors_1a2daf03720632fc6d1be7523183fdc5df" prot="public" static="yes" readable="no" writable="no" gettable="yes" settable="no">
+        <type><ref refid="struct_micra_1_1_core_1_1_color" kindref="compound">Color</ref></type>
+        <definition>Color Micra.Core.Colors.MediumTurquoise</definition>
+        <argsstring></argsstring>
+        <name>MediumTurquoise</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" line="214" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" bodystart="214" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_colors_1aced7bccf7fc07b06be7602302e93aa9b" prot="public" static="yes" readable="no" writable="no" gettable="yes" settable="no">
+        <type><ref refid="struct_micra_1_1_core_1_1_color" kindref="compound">Color</ref></type>
+        <definition>Color Micra.Core.Colors.MediumVioletRed</definition>
+        <argsstring></argsstring>
+        <name>MediumVioletRed</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" line="215" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" bodystart="215" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_colors_1acc09f177e02b500fdf8a7c0afd6a9b84" prot="public" static="yes" readable="no" writable="no" gettable="yes" settable="no">
+        <type><ref refid="struct_micra_1_1_core_1_1_color" kindref="compound">Color</ref></type>
+        <definition>Color Micra.Core.Colors.MidnightBlue</definition>
+        <argsstring></argsstring>
+        <name>MidnightBlue</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" line="216" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" bodystart="216" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_colors_1af7c951df85799823a0297834ab8317dd" prot="public" static="yes" readable="no" writable="no" gettable="yes" settable="no">
+        <type><ref refid="struct_micra_1_1_core_1_1_color" kindref="compound">Color</ref></type>
+        <definition>Color Micra.Core.Colors.MintCream</definition>
+        <argsstring></argsstring>
+        <name>MintCream</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" line="217" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" bodystart="217" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_colors_1a9287d2756debced11781d5f125e67b85" prot="public" static="yes" readable="no" writable="no" gettable="yes" settable="no">
+        <type><ref refid="struct_micra_1_1_core_1_1_color" kindref="compound">Color</ref></type>
+        <definition>Color Micra.Core.Colors.MistyRose</definition>
+        <argsstring></argsstring>
+        <name>MistyRose</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" line="218" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" bodystart="218" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_colors_1aeb78bf5df8bfb9285edef1c80fc84112" prot="public" static="yes" readable="no" writable="no" gettable="yes" settable="no">
+        <type><ref refid="struct_micra_1_1_core_1_1_color" kindref="compound">Color</ref></type>
+        <definition>Color Micra.Core.Colors.Moccasin</definition>
+        <argsstring></argsstring>
+        <name>Moccasin</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" line="219" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" bodystart="219" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_colors_1ae799a49b0181753bc7e10c3288f0823f" prot="public" static="yes" readable="no" writable="no" gettable="yes" settable="no">
+        <type><ref refid="struct_micra_1_1_core_1_1_color" kindref="compound">Color</ref></type>
+        <definition>Color Micra.Core.Colors.NavajoWhite</definition>
+        <argsstring></argsstring>
+        <name>NavajoWhite</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" line="220" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" bodystart="220" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_colors_1a6de6285b1f3210e2f2cbf910234f4989" prot="public" static="yes" readable="no" writable="no" gettable="yes" settable="no">
+        <type><ref refid="struct_micra_1_1_core_1_1_color" kindref="compound">Color</ref></type>
+        <definition>Color Micra.Core.Colors.Navy</definition>
+        <argsstring></argsstring>
+        <name>Navy</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" line="221" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" bodystart="221" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_colors_1addeb6f3de9b2e85d4d54290c4b179e76" prot="public" static="yes" readable="no" writable="no" gettable="yes" settable="no">
+        <type><ref refid="struct_micra_1_1_core_1_1_color" kindref="compound">Color</ref></type>
+        <definition>Color Micra.Core.Colors.OldLace</definition>
+        <argsstring></argsstring>
+        <name>OldLace</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" line="222" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" bodystart="222" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_colors_1a3ae47a10484f4f8bca081dd6153d67d5" prot="public" static="yes" readable="no" writable="no" gettable="yes" settable="no">
+        <type><ref refid="struct_micra_1_1_core_1_1_color" kindref="compound">Color</ref></type>
+        <definition>Color Micra.Core.Colors.Olive</definition>
+        <argsstring></argsstring>
+        <name>Olive</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" line="223" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" bodystart="223" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_colors_1a5229312fdbc09a4e837fc192875b50eb" prot="public" static="yes" readable="no" writable="no" gettable="yes" settable="no">
+        <type><ref refid="struct_micra_1_1_core_1_1_color" kindref="compound">Color</ref></type>
+        <definition>Color Micra.Core.Colors.OliveDrab</definition>
+        <argsstring></argsstring>
+        <name>OliveDrab</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" line="224" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" bodystart="224" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_colors_1adbf29174da3b91fd8f806de820180cf9" prot="public" static="yes" readable="no" writable="no" gettable="yes" settable="no">
+        <type><ref refid="struct_micra_1_1_core_1_1_color" kindref="compound">Color</ref></type>
+        <definition>Color Micra.Core.Colors.Orange</definition>
+        <argsstring></argsstring>
+        <name>Orange</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" line="225" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" bodystart="225" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_colors_1aed58c468fa5e5896cd1361354f064cc9" prot="public" static="yes" readable="no" writable="no" gettable="yes" settable="no">
+        <type><ref refid="struct_micra_1_1_core_1_1_color" kindref="compound">Color</ref></type>
+        <definition>Color Micra.Core.Colors.OrangeRed</definition>
+        <argsstring></argsstring>
+        <name>OrangeRed</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" line="226" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" bodystart="226" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_colors_1a6d023fe3368efc100f2c140b9123b267" prot="public" static="yes" readable="no" writable="no" gettable="yes" settable="no">
+        <type><ref refid="struct_micra_1_1_core_1_1_color" kindref="compound">Color</ref></type>
+        <definition>Color Micra.Core.Colors.Orchid</definition>
+        <argsstring></argsstring>
+        <name>Orchid</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" line="227" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" bodystart="227" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_colors_1aa7a70efad7545cbf82f6031ccf743de7" prot="public" static="yes" readable="no" writable="no" gettable="yes" settable="no">
+        <type><ref refid="struct_micra_1_1_core_1_1_color" kindref="compound">Color</ref></type>
+        <definition>Color Micra.Core.Colors.PaleGoldenrod</definition>
+        <argsstring></argsstring>
+        <name>PaleGoldenrod</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" line="228" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" bodystart="228" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_colors_1a63b8840a8af7b2882f670bc023313312" prot="public" static="yes" readable="no" writable="no" gettable="yes" settable="no">
+        <type><ref refid="struct_micra_1_1_core_1_1_color" kindref="compound">Color</ref></type>
+        <definition>Color Micra.Core.Colors.PaleGreen</definition>
+        <argsstring></argsstring>
+        <name>PaleGreen</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" line="229" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" bodystart="229" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_colors_1a56326def988e0a86ecc585f710a68ce0" prot="public" static="yes" readable="no" writable="no" gettable="yes" settable="no">
+        <type><ref refid="struct_micra_1_1_core_1_1_color" kindref="compound">Color</ref></type>
+        <definition>Color Micra.Core.Colors.PaleTurquoise</definition>
+        <argsstring></argsstring>
+        <name>PaleTurquoise</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" line="230" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" bodystart="230" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_colors_1ab76501d16903e6da76ea7dc8a2d37a1c" prot="public" static="yes" readable="no" writable="no" gettable="yes" settable="no">
+        <type><ref refid="struct_micra_1_1_core_1_1_color" kindref="compound">Color</ref></type>
+        <definition>Color Micra.Core.Colors.PaleVioletRed</definition>
+        <argsstring></argsstring>
+        <name>PaleVioletRed</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" line="231" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" bodystart="231" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_colors_1a33d11a77a83a2ad18ffa0a6e4a570d79" prot="public" static="yes" readable="no" writable="no" gettable="yes" settable="no">
+        <type><ref refid="struct_micra_1_1_core_1_1_color" kindref="compound">Color</ref></type>
+        <definition>Color Micra.Core.Colors.PapayaWhip</definition>
+        <argsstring></argsstring>
+        <name>PapayaWhip</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" line="232" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" bodystart="232" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_colors_1a7bf9da83be72e4686df3524c5222e230" prot="public" static="yes" readable="no" writable="no" gettable="yes" settable="no">
+        <type><ref refid="struct_micra_1_1_core_1_1_color" kindref="compound">Color</ref></type>
+        <definition>Color Micra.Core.Colors.PeachPuff</definition>
+        <argsstring></argsstring>
+        <name>PeachPuff</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" line="233" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" bodystart="233" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_colors_1a2c36ecedebb324706fb4187c8f839ead" prot="public" static="yes" readable="no" writable="no" gettable="yes" settable="no">
+        <type><ref refid="struct_micra_1_1_core_1_1_color" kindref="compound">Color</ref></type>
+        <definition>Color Micra.Core.Colors.Peru</definition>
+        <argsstring></argsstring>
+        <name>Peru</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" line="234" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" bodystart="234" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_colors_1a7fb658ef811d79943a755f2d65effea4" prot="public" static="yes" readable="no" writable="no" gettable="yes" settable="no">
+        <type><ref refid="struct_micra_1_1_core_1_1_color" kindref="compound">Color</ref></type>
+        <definition>Color Micra.Core.Colors.Pink</definition>
+        <argsstring></argsstring>
+        <name>Pink</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" line="235" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" bodystart="235" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_colors_1a482d6359b138319e2c8b5a9fdeb579d6" prot="public" static="yes" readable="no" writable="no" gettable="yes" settable="no">
+        <type><ref refid="struct_micra_1_1_core_1_1_color" kindref="compound">Color</ref></type>
+        <definition>Color Micra.Core.Colors.Plum</definition>
+        <argsstring></argsstring>
+        <name>Plum</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" line="236" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" bodystart="236" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_colors_1a3a529d50995890b0c56eefa744d60be9" prot="public" static="yes" readable="no" writable="no" gettable="yes" settable="no">
+        <type><ref refid="struct_micra_1_1_core_1_1_color" kindref="compound">Color</ref></type>
+        <definition>Color Micra.Core.Colors.PowderBlue</definition>
+        <argsstring></argsstring>
+        <name>PowderBlue</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" line="237" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" bodystart="237" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_colors_1a87150523da157861d5779aff1dc3bcb7" prot="public" static="yes" readable="no" writable="no" gettable="yes" settable="no">
+        <type><ref refid="struct_micra_1_1_core_1_1_color" kindref="compound">Color</ref></type>
+        <definition>Color Micra.Core.Colors.Purple</definition>
+        <argsstring></argsstring>
+        <name>Purple</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" line="238" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" bodystart="238" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_colors_1a5b6d10822806ed4caab546aa83103077" prot="public" static="yes" readable="no" writable="no" gettable="yes" settable="no">
+        <type><ref refid="struct_micra_1_1_core_1_1_color" kindref="compound">Color</ref></type>
+        <definition>Color Micra.Core.Colors.Red</definition>
+        <argsstring></argsstring>
+        <name>Red</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" line="239" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" bodystart="239" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_colors_1a84a740151a4cab1a352b2518100b356a" prot="public" static="yes" readable="no" writable="no" gettable="yes" settable="no">
+        <type><ref refid="struct_micra_1_1_core_1_1_color" kindref="compound">Color</ref></type>
+        <definition>Color Micra.Core.Colors.RosyBrown</definition>
+        <argsstring></argsstring>
+        <name>RosyBrown</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" line="240" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" bodystart="240" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_colors_1aecc5a7fc6fc3ba29bbbcc0c4dd43e7b3" prot="public" static="yes" readable="no" writable="no" gettable="yes" settable="no">
+        <type><ref refid="struct_micra_1_1_core_1_1_color" kindref="compound">Color</ref></type>
+        <definition>Color Micra.Core.Colors.RoyalBlue</definition>
+        <argsstring></argsstring>
+        <name>RoyalBlue</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" line="241" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" bodystart="241" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_colors_1ad7a9ab4526b1fb524ffcc857a665240e" prot="public" static="yes" readable="no" writable="no" gettable="yes" settable="no">
+        <type><ref refid="struct_micra_1_1_core_1_1_color" kindref="compound">Color</ref></type>
+        <definition>Color Micra.Core.Colors.SaddleBrown</definition>
+        <argsstring></argsstring>
+        <name>SaddleBrown</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" line="242" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" bodystart="242" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_colors_1ae60c254f86859b858d85bfdd531f4314" prot="public" static="yes" readable="no" writable="no" gettable="yes" settable="no">
+        <type><ref refid="struct_micra_1_1_core_1_1_color" kindref="compound">Color</ref></type>
+        <definition>Color Micra.Core.Colors.Salmon</definition>
+        <argsstring></argsstring>
+        <name>Salmon</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" line="243" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" bodystart="243" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_colors_1a7fafd64e20ef3e6c195aa97b41c7f2e1" prot="public" static="yes" readable="no" writable="no" gettable="yes" settable="no">
+        <type><ref refid="struct_micra_1_1_core_1_1_color" kindref="compound">Color</ref></type>
+        <definition>Color Micra.Core.Colors.SandyBrown</definition>
+        <argsstring></argsstring>
+        <name>SandyBrown</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" line="244" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" bodystart="244" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_colors_1a7f9561a2720b5eabb7ef021dccefa7b5" prot="public" static="yes" readable="no" writable="no" gettable="yes" settable="no">
+        <type><ref refid="struct_micra_1_1_core_1_1_color" kindref="compound">Color</ref></type>
+        <definition>Color Micra.Core.Colors.SeaGreen</definition>
+        <argsstring></argsstring>
+        <name>SeaGreen</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" line="245" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" bodystart="245" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_colors_1a5edab8dd8483022c07554156a8ab6259" prot="public" static="yes" readable="no" writable="no" gettable="yes" settable="no">
+        <type><ref refid="struct_micra_1_1_core_1_1_color" kindref="compound">Color</ref></type>
+        <definition>Color Micra.Core.Colors.SeaShell</definition>
+        <argsstring></argsstring>
+        <name>SeaShell</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" line="246" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" bodystart="246" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_colors_1aec3fae1f11c1c000e166cdb47a443466" prot="public" static="yes" readable="no" writable="no" gettable="yes" settable="no">
+        <type><ref refid="struct_micra_1_1_core_1_1_color" kindref="compound">Color</ref></type>
+        <definition>Color Micra.Core.Colors.Sienna</definition>
+        <argsstring></argsstring>
+        <name>Sienna</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" line="247" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" bodystart="247" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_colors_1aa10cc7b36c3085c48ab75445a944a642" prot="public" static="yes" readable="no" writable="no" gettable="yes" settable="no">
+        <type><ref refid="struct_micra_1_1_core_1_1_color" kindref="compound">Color</ref></type>
+        <definition>Color Micra.Core.Colors.Silver</definition>
+        <argsstring></argsstring>
+        <name>Silver</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" line="248" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" bodystart="248" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_colors_1a7f57ffa9babaa6e469cbbf01fdf26f0f" prot="public" static="yes" readable="no" writable="no" gettable="yes" settable="no">
+        <type><ref refid="struct_micra_1_1_core_1_1_color" kindref="compound">Color</ref></type>
+        <definition>Color Micra.Core.Colors.SkyBlue</definition>
+        <argsstring></argsstring>
+        <name>SkyBlue</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" line="249" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" bodystart="249" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_colors_1a40a371862ecf817818a0c9d920518d7e" prot="public" static="yes" readable="no" writable="no" gettable="yes" settable="no">
+        <type><ref refid="struct_micra_1_1_core_1_1_color" kindref="compound">Color</ref></type>
+        <definition>Color Micra.Core.Colors.SlateBlue</definition>
+        <argsstring></argsstring>
+        <name>SlateBlue</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" line="250" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" bodystart="250" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_colors_1aa046de8dd2852c584484b7b89556a3de" prot="public" static="yes" readable="no" writable="no" gettable="yes" settable="no">
+        <type><ref refid="struct_micra_1_1_core_1_1_color" kindref="compound">Color</ref></type>
+        <definition>Color Micra.Core.Colors.SlateGray</definition>
+        <argsstring></argsstring>
+        <name>SlateGray</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" line="251" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" bodystart="251" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_colors_1a059f139ef91f3f6369ade6c0f24ae7d5" prot="public" static="yes" readable="no" writable="no" gettable="yes" settable="no">
+        <type><ref refid="struct_micra_1_1_core_1_1_color" kindref="compound">Color</ref></type>
+        <definition>Color Micra.Core.Colors.Snow</definition>
+        <argsstring></argsstring>
+        <name>Snow</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" line="252" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" bodystart="252" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_colors_1a64907935a217da2c769044b5f8d301b4" prot="public" static="yes" readable="no" writable="no" gettable="yes" settable="no">
+        <type><ref refid="struct_micra_1_1_core_1_1_color" kindref="compound">Color</ref></type>
+        <definition>Color Micra.Core.Colors.SpringGreen</definition>
+        <argsstring></argsstring>
+        <name>SpringGreen</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" line="253" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" bodystart="253" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_colors_1a5d31081a7e702436facbbff45aaa6673" prot="public" static="yes" readable="no" writable="no" gettable="yes" settable="no">
+        <type><ref refid="struct_micra_1_1_core_1_1_color" kindref="compound">Color</ref></type>
+        <definition>Color Micra.Core.Colors.SteelBlue</definition>
+        <argsstring></argsstring>
+        <name>SteelBlue</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" line="254" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" bodystart="254" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_colors_1ad693644150d77eb73e773676bb8ad899" prot="public" static="yes" readable="no" writable="no" gettable="yes" settable="no">
+        <type><ref refid="struct_micra_1_1_core_1_1_color" kindref="compound">Color</ref></type>
+        <definition>Color Micra.Core.Colors.Tan</definition>
+        <argsstring></argsstring>
+        <name>Tan</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" line="255" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" bodystart="255" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_colors_1a4d32d78b4b369ff89b9e625e689d4ab0" prot="public" static="yes" readable="no" writable="no" gettable="yes" settable="no">
+        <type><ref refid="struct_micra_1_1_core_1_1_color" kindref="compound">Color</ref></type>
+        <definition>Color Micra.Core.Colors.Teal</definition>
+        <argsstring></argsstring>
+        <name>Teal</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" line="256" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" bodystart="256" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_colors_1aeaeae909df42012f7d10a2d786bc81eb" prot="public" static="yes" readable="no" writable="no" gettable="yes" settable="no">
+        <type><ref refid="struct_micra_1_1_core_1_1_color" kindref="compound">Color</ref></type>
+        <definition>Color Micra.Core.Colors.Thistle</definition>
+        <argsstring></argsstring>
+        <name>Thistle</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" line="257" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" bodystart="257" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_colors_1a8cd441b3ef617fa45dd2ae3e539b5318" prot="public" static="yes" readable="no" writable="no" gettable="yes" settable="no">
+        <type><ref refid="struct_micra_1_1_core_1_1_color" kindref="compound">Color</ref></type>
+        <definition>Color Micra.Core.Colors.Tomato</definition>
+        <argsstring></argsstring>
+        <name>Tomato</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" line="258" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" bodystart="258" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_colors_1affb3e4561a4d5fda65bc9372f8ff472c" prot="public" static="yes" readable="no" writable="no" gettable="yes" settable="no">
+        <type><ref refid="struct_micra_1_1_core_1_1_color" kindref="compound">Color</ref></type>
+        <definition>Color Micra.Core.Colors.Transparent</definition>
+        <argsstring></argsstring>
+        <name>Transparent</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" line="259" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" bodystart="259" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_colors_1a7eb499a5ccf45a42b550e2b4fbeba2f8" prot="public" static="yes" readable="no" writable="no" gettable="yes" settable="no">
+        <type><ref refid="struct_micra_1_1_core_1_1_color" kindref="compound">Color</ref></type>
+        <definition>Color Micra.Core.Colors.Turquoise</definition>
+        <argsstring></argsstring>
+        <name>Turquoise</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" line="260" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" bodystart="260" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_colors_1a5b713492605c0b600857771443168520" prot="public" static="yes" readable="no" writable="no" gettable="yes" settable="no">
+        <type><ref refid="struct_micra_1_1_core_1_1_color" kindref="compound">Color</ref></type>
+        <definition>Color Micra.Core.Colors.Violet</definition>
+        <argsstring></argsstring>
+        <name>Violet</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" line="261" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" bodystart="261" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_colors_1ad8c6ada93a142da0131af2fb578b0c8d" prot="public" static="yes" readable="no" writable="no" gettable="yes" settable="no">
+        <type><ref refid="struct_micra_1_1_core_1_1_color" kindref="compound">Color</ref></type>
+        <definition>Color Micra.Core.Colors.Wheat</definition>
+        <argsstring></argsstring>
+        <name>Wheat</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" line="262" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" bodystart="262" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_colors_1a427f0a09037cafd6b3a877055f50ebe9" prot="public" static="yes" readable="no" writable="no" gettable="yes" settable="no">
+        <type><ref refid="struct_micra_1_1_core_1_1_color" kindref="compound">Color</ref></type>
+        <definition>Color Micra.Core.Colors.White</definition>
+        <argsstring></argsstring>
+        <name>White</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" line="263" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" bodystart="263" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_colors_1ace34d26627a531f9d11446f98c5ca1ad" prot="public" static="yes" readable="no" writable="no" gettable="yes" settable="no">
+        <type><ref refid="struct_micra_1_1_core_1_1_color" kindref="compound">Color</ref></type>
+        <definition>Color Micra.Core.Colors.WhiteSmoke</definition>
+        <argsstring></argsstring>
+        <name>WhiteSmoke</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" line="264" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" bodystart="264" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_colors_1ace84b195a9648b8c13b1bd3eb5fa92d4" prot="public" static="yes" readable="no" writable="no" gettable="yes" settable="no">
+        <type><ref refid="struct_micra_1_1_core_1_1_color" kindref="compound">Color</ref></type>
+        <definition>Color Micra.Core.Colors.Yellow</definition>
+        <argsstring></argsstring>
+        <name>Yellow</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" line="265" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" bodystart="265" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_colors_1a2fd6437a1e48e3f3aafac019c875007b" prot="public" static="yes" readable="no" writable="no" gettable="yes" settable="no">
+        <type><ref refid="struct_micra_1_1_core_1_1_color" kindref="compound">Color</ref></type>
+        <definition>Color Micra.Core.Colors.YellowGreen</definition>
+        <argsstring></argsstring>
+        <name>YellowGreen</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" line="266" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" bodystart="266" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Provides a number of predefined colors for convenience. </para>    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" line="126" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Utility.cs" bodystart="126" bodyend="267"/>
+    <listofallmembers>
+      <member refid="class_micra_1_1_core_1_1_colors_1a876e5a453c76a9b341d36f3b44617052" prot="public" virt="non-virtual"><scope>Micra::Core::Colors</scope><name>AliceBlue</name></member>
+      <member refid="class_micra_1_1_core_1_1_colors_1ae9ba6cb4b2235b83b8ef9be53bc2b5cb" prot="public" virt="non-virtual"><scope>Micra::Core::Colors</scope><name>AntiqueWhite</name></member>
+      <member refid="class_micra_1_1_core_1_1_colors_1a0ed9430ef168c9d18c97dd296bef13b3" prot="public" virt="non-virtual"><scope>Micra::Core::Colors</scope><name>Aqua</name></member>
+      <member refid="class_micra_1_1_core_1_1_colors_1ac6040876b854d6e9a83c05bfacd77eec" prot="public" virt="non-virtual"><scope>Micra::Core::Colors</scope><name>Aquamarine</name></member>
+      <member refid="class_micra_1_1_core_1_1_colors_1a285ad468d777b4fe82f81d8559bb4296" prot="public" virt="non-virtual"><scope>Micra::Core::Colors</scope><name>Azure</name></member>
+      <member refid="class_micra_1_1_core_1_1_colors_1afb9726157b636038ac85d31e4e18364d" prot="public" virt="non-virtual"><scope>Micra::Core::Colors</scope><name>Beige</name></member>
+      <member refid="class_micra_1_1_core_1_1_colors_1a15f2066c94c0594c62e0fcb0c6734985" prot="public" virt="non-virtual"><scope>Micra::Core::Colors</scope><name>Bisque</name></member>
+      <member refid="class_micra_1_1_core_1_1_colors_1aef916f784cc243c83a9b284c24ada5ff" prot="public" virt="non-virtual"><scope>Micra::Core::Colors</scope><name>Black</name></member>
+      <member refid="class_micra_1_1_core_1_1_colors_1a2cebf6b6b3c4107e523c999a9e1fb8a1" prot="public" virt="non-virtual"><scope>Micra::Core::Colors</scope><name>BlanchedAlmond</name></member>
+      <member refid="class_micra_1_1_core_1_1_colors_1ad8748e15cdfe4e74425fa4de4a37704b" prot="public" virt="non-virtual"><scope>Micra::Core::Colors</scope><name>Blue</name></member>
+      <member refid="class_micra_1_1_core_1_1_colors_1a1a51af6a8b75bc7dea630f1833d5b12a" prot="public" virt="non-virtual"><scope>Micra::Core::Colors</scope><name>BlueViolet</name></member>
+      <member refid="class_micra_1_1_core_1_1_colors_1a678da486a24dff6cb947f0b6bf0cf838" prot="public" virt="non-virtual"><scope>Micra::Core::Colors</scope><name>Brown</name></member>
+      <member refid="class_micra_1_1_core_1_1_colors_1a3f0b6c6b31f619ae5ae40ec214b8f4ed" prot="public" virt="non-virtual"><scope>Micra::Core::Colors</scope><name>BurlyWood</name></member>
+      <member refid="class_micra_1_1_core_1_1_colors_1a0b10388b6f64e06d555a029e238a042c" prot="public" virt="non-virtual"><scope>Micra::Core::Colors</scope><name>CadetBlue</name></member>
+      <member refid="class_micra_1_1_core_1_1_colors_1a1e4c2c3c86a4827145bf7dc7c00f8b15" prot="public" virt="non-virtual"><scope>Micra::Core::Colors</scope><name>Chartreuse</name></member>
+      <member refid="class_micra_1_1_core_1_1_colors_1a4d1ee6c75789a7efa2d6b00cbba114e8" prot="public" virt="non-virtual"><scope>Micra::Core::Colors</scope><name>Chocolate</name></member>
+      <member refid="class_micra_1_1_core_1_1_colors_1ad66556da75d24b3e9c0d63f748cbb7b4" prot="public" virt="non-virtual"><scope>Micra::Core::Colors</scope><name>Coral</name></member>
+      <member refid="class_micra_1_1_core_1_1_colors_1a779923619d8e4a9514f6504547bd0db9" prot="public" virt="non-virtual"><scope>Micra::Core::Colors</scope><name>CornflowerBlue</name></member>
+      <member refid="class_micra_1_1_core_1_1_colors_1ac3ebc6d8a9bb677c38d5236dfd37ae21" prot="public" virt="non-virtual"><scope>Micra::Core::Colors</scope><name>Cornsilk</name></member>
+      <member refid="class_micra_1_1_core_1_1_colors_1aa5af808adad5c1cb00a00d98bbdfc837" prot="public" virt="non-virtual"><scope>Micra::Core::Colors</scope><name>Crimson</name></member>
+      <member refid="class_micra_1_1_core_1_1_colors_1accf14fdd9d0c0be6174d330de7974b20" prot="public" virt="non-virtual"><scope>Micra::Core::Colors</scope><name>Cyan</name></member>
+      <member refid="class_micra_1_1_core_1_1_colors_1abdc6228fd16ece57863395de2622fb61" prot="public" virt="non-virtual"><scope>Micra::Core::Colors</scope><name>DarkBlue</name></member>
+      <member refid="class_micra_1_1_core_1_1_colors_1a56b69735d204edb2f894020979ae09b5" prot="public" virt="non-virtual"><scope>Micra::Core::Colors</scope><name>DarkCyan</name></member>
+      <member refid="class_micra_1_1_core_1_1_colors_1af95b98b3e5b39a3b6415e14ef16a7a59" prot="public" virt="non-virtual"><scope>Micra::Core::Colors</scope><name>DarkGoldenrod</name></member>
+      <member refid="class_micra_1_1_core_1_1_colors_1a920e73b0d26c6dbb01436fb7f731f402" prot="public" virt="non-virtual"><scope>Micra::Core::Colors</scope><name>DarkGray</name></member>
+      <member refid="class_micra_1_1_core_1_1_colors_1a1488a0ce7ef79fb539efa40aba9f50a2" prot="public" virt="non-virtual"><scope>Micra::Core::Colors</scope><name>DarkGreen</name></member>
+      <member refid="class_micra_1_1_core_1_1_colors_1ac3709123f60561dac0b021eb131db496" prot="public" virt="non-virtual"><scope>Micra::Core::Colors</scope><name>DarkKhaki</name></member>
+      <member refid="class_micra_1_1_core_1_1_colors_1acb83c10299105c7ad59ae8a62775c0a6" prot="public" virt="non-virtual"><scope>Micra::Core::Colors</scope><name>DarkMagenta</name></member>
+      <member refid="class_micra_1_1_core_1_1_colors_1a1d650fe28349e1e46da7bc4bd1ec0153" prot="public" virt="non-virtual"><scope>Micra::Core::Colors</scope><name>DarkOliveGreen</name></member>
+      <member refid="class_micra_1_1_core_1_1_colors_1a1f3861704c8a43809a603b89fffc02e0" prot="public" virt="non-virtual"><scope>Micra::Core::Colors</scope><name>DarkOrange</name></member>
+      <member refid="class_micra_1_1_core_1_1_colors_1a76710a16318255e56ee3ae0771897cc9" prot="public" virt="non-virtual"><scope>Micra::Core::Colors</scope><name>DarkOrchid</name></member>
+      <member refid="class_micra_1_1_core_1_1_colors_1a80ca29e16938d194aa3a3766375d2e23" prot="public" virt="non-virtual"><scope>Micra::Core::Colors</scope><name>DarkRed</name></member>
+      <member refid="class_micra_1_1_core_1_1_colors_1a66441eba26b012a7263f3d9755f4da63" prot="public" virt="non-virtual"><scope>Micra::Core::Colors</scope><name>DarkSalmon</name></member>
+      <member refid="class_micra_1_1_core_1_1_colors_1ad7e129ebeb528e22581e740904ef7fab" prot="public" virt="non-virtual"><scope>Micra::Core::Colors</scope><name>DarkSeaGreen</name></member>
+      <member refid="class_micra_1_1_core_1_1_colors_1aaaeab011418c63aed001d8e3e19abede" prot="public" virt="non-virtual"><scope>Micra::Core::Colors</scope><name>DarkSlateBlue</name></member>
+      <member refid="class_micra_1_1_core_1_1_colors_1a7cf6e8658d97b0ed54d87b8209f9de9a" prot="public" virt="non-virtual"><scope>Micra::Core::Colors</scope><name>DarkSlateGray</name></member>
+      <member refid="class_micra_1_1_core_1_1_colors_1ae9e599c172917a3201438ddf01794210" prot="public" virt="non-virtual"><scope>Micra::Core::Colors</scope><name>DarkTurquoise</name></member>
+      <member refid="class_micra_1_1_core_1_1_colors_1aa61fd4a571d8d0a9b40d561b409f2daf" prot="public" virt="non-virtual"><scope>Micra::Core::Colors</scope><name>DarkViolet</name></member>
+      <member refid="class_micra_1_1_core_1_1_colors_1ae096f98680eb600aac947441b9e6a919" prot="public" virt="non-virtual"><scope>Micra::Core::Colors</scope><name>DeepPink</name></member>
+      <member refid="class_micra_1_1_core_1_1_colors_1ab39df9583fd64132039d70fa90311331" prot="public" virt="non-virtual"><scope>Micra::Core::Colors</scope><name>DeepSkyBlue</name></member>
+      <member refid="class_micra_1_1_core_1_1_colors_1a255329075879a7efc0b76afe5b7dc8e6" prot="public" virt="non-virtual"><scope>Micra::Core::Colors</scope><name>DimGray</name></member>
+      <member refid="class_micra_1_1_core_1_1_colors_1a9dde9c45450737a0c0179c6d689364ef" prot="public" virt="non-virtual"><scope>Micra::Core::Colors</scope><name>DodgerBlue</name></member>
+      <member refid="class_micra_1_1_core_1_1_colors_1ad7255511a08cb99a5a58ed384cee3ea3" prot="public" virt="non-virtual"><scope>Micra::Core::Colors</scope><name>Firebrick</name></member>
+      <member refid="class_micra_1_1_core_1_1_colors_1a894219655bc8cc4ac115b6d40717e692" prot="public" virt="non-virtual"><scope>Micra::Core::Colors</scope><name>FloralWhite</name></member>
+      <member refid="class_micra_1_1_core_1_1_colors_1a7754d918f1acb058ee2f5804dc65c498" prot="public" virt="non-virtual"><scope>Micra::Core::Colors</scope><name>ForestGreen</name></member>
+      <member refid="class_micra_1_1_core_1_1_colors_1a9a096569b9de1f1693de889d3105a0e4" prot="public" virt="non-virtual"><scope>Micra::Core::Colors</scope><name>Fuchsia</name></member>
+      <member refid="class_micra_1_1_core_1_1_colors_1add66115f09580cc85972d796c84dd350" prot="public" virt="non-virtual"><scope>Micra::Core::Colors</scope><name>Gainsboro</name></member>
+      <member refid="class_micra_1_1_core_1_1_colors_1a00e49c386e8c114c8d4729ea6d6dbe83" prot="public" virt="non-virtual"><scope>Micra::Core::Colors</scope><name>GhostWhite</name></member>
+      <member refid="class_micra_1_1_core_1_1_colors_1a279f80352879c5aef8d887066efc52d9" prot="public" virt="non-virtual"><scope>Micra::Core::Colors</scope><name>Gold</name></member>
+      <member refid="class_micra_1_1_core_1_1_colors_1a4c0a2702f4f280fe6b2c3df4089311cd" prot="public" virt="non-virtual"><scope>Micra::Core::Colors</scope><name>Goldenrod</name></member>
+      <member refid="class_micra_1_1_core_1_1_colors_1a9ba3206dda6bb7b68c95f9f464836e39" prot="public" virt="non-virtual"><scope>Micra::Core::Colors</scope><name>Gray</name></member>
+      <member refid="class_micra_1_1_core_1_1_colors_1a234491e1c9b164cb9b9595715e0b8b11" prot="public" virt="non-virtual"><scope>Micra::Core::Colors</scope><name>Green</name></member>
+      <member refid="class_micra_1_1_core_1_1_colors_1aa810097fdd80189f0bee6a9feb0b4317" prot="public" virt="non-virtual"><scope>Micra::Core::Colors</scope><name>GreenYellow</name></member>
+      <member refid="class_micra_1_1_core_1_1_colors_1ae2bcba727772c5ab6b42ab13492a6e74" prot="public" virt="non-virtual"><scope>Micra::Core::Colors</scope><name>Honeydew</name></member>
+      <member refid="class_micra_1_1_core_1_1_colors_1aed0e0403d138395bb4e9dd65cfd4b7e4" prot="public" virt="non-virtual"><scope>Micra::Core::Colors</scope><name>HotPink</name></member>
+      <member refid="class_micra_1_1_core_1_1_colors_1a662298006872d4003df04314abd355fb" prot="public" virt="non-virtual"><scope>Micra::Core::Colors</scope><name>IndianRed</name></member>
+      <member refid="class_micra_1_1_core_1_1_colors_1a309b10431afd280748c28e95d86386bd" prot="public" virt="non-virtual"><scope>Micra::Core::Colors</scope><name>Indigo</name></member>
+      <member refid="class_micra_1_1_core_1_1_colors_1afaf0b4994fc2a1a1e9a2189cc9631a32" prot="public" virt="non-virtual"><scope>Micra::Core::Colors</scope><name>Khaki</name></member>
+      <member refid="class_micra_1_1_core_1_1_colors_1a16be023cfcc884b7f03c2d9e3ce44ea0" prot="public" virt="non-virtual"><scope>Micra::Core::Colors</scope><name>Lavender</name></member>
+      <member refid="class_micra_1_1_core_1_1_colors_1a265650e511207ce9b2d32d224d141e52" prot="public" virt="non-virtual"><scope>Micra::Core::Colors</scope><name>LavenderBlush</name></member>
+      <member refid="class_micra_1_1_core_1_1_colors_1addbaab4a89d3b0b31f5966b7cc0ef88e" prot="public" virt="non-virtual"><scope>Micra::Core::Colors</scope><name>LawnGreen</name></member>
+      <member refid="class_micra_1_1_core_1_1_colors_1a23b5e353423dc1721124f512586ff1ac" prot="public" virt="non-virtual"><scope>Micra::Core::Colors</scope><name>LemonChiffon</name></member>
+      <member refid="class_micra_1_1_core_1_1_colors_1a9d2081d5ef816ed7c76159474febb680" prot="public" virt="non-virtual"><scope>Micra::Core::Colors</scope><name>LightBlue</name></member>
+      <member refid="class_micra_1_1_core_1_1_colors_1adbf75f25b27883cb5fa4bfe64435bf5a" prot="public" virt="non-virtual"><scope>Micra::Core::Colors</scope><name>LightCoral</name></member>
+      <member refid="class_micra_1_1_core_1_1_colors_1a82138ff76a3bd26c6fb0a3e81ca5d5ab" prot="public" virt="non-virtual"><scope>Micra::Core::Colors</scope><name>LightCyan</name></member>
+      <member refid="class_micra_1_1_core_1_1_colors_1afabb6aa520ef52450e1a5176e21d4a56" prot="public" virt="non-virtual"><scope>Micra::Core::Colors</scope><name>LightGoldenrodYellow</name></member>
+      <member refid="class_micra_1_1_core_1_1_colors_1a1f9b2a380bb6178f9aa9100f10c97aa0" prot="public" virt="non-virtual"><scope>Micra::Core::Colors</scope><name>LightGray</name></member>
+      <member refid="class_micra_1_1_core_1_1_colors_1aecf71f0a018ab2cc3b5d3ddc1a604937" prot="public" virt="non-virtual"><scope>Micra::Core::Colors</scope><name>LightGreen</name></member>
+      <member refid="class_micra_1_1_core_1_1_colors_1a2a883bc377ffc1e6235cfdf583ff5928" prot="public" virt="non-virtual"><scope>Micra::Core::Colors</scope><name>LightPink</name></member>
+      <member refid="class_micra_1_1_core_1_1_colors_1affa3edfb21ea022bfa7edc53f8e6b6f0" prot="public" virt="non-virtual"><scope>Micra::Core::Colors</scope><name>LightSalmon</name></member>
+      <member refid="class_micra_1_1_core_1_1_colors_1ac7169d943f981ca736b86062bf4da57e" prot="public" virt="non-virtual"><scope>Micra::Core::Colors</scope><name>LightSeaGreen</name></member>
+      <member refid="class_micra_1_1_core_1_1_colors_1a19864240511013e9207dfd5ed52c32fe" prot="public" virt="non-virtual"><scope>Micra::Core::Colors</scope><name>LightSkyBlue</name></member>
+      <member refid="class_micra_1_1_core_1_1_colors_1aae9663dd51a460defa39539bacdc151f" prot="public" virt="non-virtual"><scope>Micra::Core::Colors</scope><name>LightSlateGray</name></member>
+      <member refid="class_micra_1_1_core_1_1_colors_1aa2d1c5985e02c92e61b7a24b17064585" prot="public" virt="non-virtual"><scope>Micra::Core::Colors</scope><name>LightSteelBlue</name></member>
+      <member refid="class_micra_1_1_core_1_1_colors_1ad56743884734838e54ae6e8ba490bca5" prot="public" virt="non-virtual"><scope>Micra::Core::Colors</scope><name>LightYellow</name></member>
+      <member refid="class_micra_1_1_core_1_1_colors_1a792bbcd61d4c7fbb1da53350ab99f926" prot="public" virt="non-virtual"><scope>Micra::Core::Colors</scope><name>Lime</name></member>
+      <member refid="class_micra_1_1_core_1_1_colors_1a5ce28b56c48abca6720e0f2e298c42f3" prot="public" virt="non-virtual"><scope>Micra::Core::Colors</scope><name>LimeGreen</name></member>
+      <member refid="class_micra_1_1_core_1_1_colors_1a5ae37cd6e671ec9e2c652eff67763bcb" prot="public" virt="non-virtual"><scope>Micra::Core::Colors</scope><name>Linen</name></member>
+      <member refid="class_micra_1_1_core_1_1_colors_1a584120debe5e6126e54fb836f6b4e017" prot="public" virt="non-virtual"><scope>Micra::Core::Colors</scope><name>Magenta</name></member>
+      <member refid="class_micra_1_1_core_1_1_colors_1a9395cbbfb3c3e963a75d66052921dd96" prot="public" virt="non-virtual"><scope>Micra::Core::Colors</scope><name>Maroon</name></member>
+      <member refid="class_micra_1_1_core_1_1_colors_1aa5956207c800460bb6afa2225659bd89" prot="public" virt="non-virtual"><scope>Micra::Core::Colors</scope><name>MediumAquamarine</name></member>
+      <member refid="class_micra_1_1_core_1_1_colors_1a54a07d145cad482f8f918b280b5d4023" prot="public" virt="non-virtual"><scope>Micra::Core::Colors</scope><name>MediumBlue</name></member>
+      <member refid="class_micra_1_1_core_1_1_colors_1a7fcaba43b63826a162ed9cbb7edd1f2e" prot="public" virt="non-virtual"><scope>Micra::Core::Colors</scope><name>MediumOrchid</name></member>
+      <member refid="class_micra_1_1_core_1_1_colors_1aa76d28523011fcf1ff08eda3f8ead5c2" prot="public" virt="non-virtual"><scope>Micra::Core::Colors</scope><name>MediumPurple</name></member>
+      <member refid="class_micra_1_1_core_1_1_colors_1ae069d05937432b7ee19e8c9207a8018a" prot="public" virt="non-virtual"><scope>Micra::Core::Colors</scope><name>MediumSeaGreen</name></member>
+      <member refid="class_micra_1_1_core_1_1_colors_1aec0f2d754be6b6b971b515491a4378f5" prot="public" virt="non-virtual"><scope>Micra::Core::Colors</scope><name>MediumSlateBlue</name></member>
+      <member refid="class_micra_1_1_core_1_1_colors_1a73093c5bd26ffb15ef911bc840017bd2" prot="public" virt="non-virtual"><scope>Micra::Core::Colors</scope><name>MediumSpringGreen</name></member>
+      <member refid="class_micra_1_1_core_1_1_colors_1a2daf03720632fc6d1be7523183fdc5df" prot="public" virt="non-virtual"><scope>Micra::Core::Colors</scope><name>MediumTurquoise</name></member>
+      <member refid="class_micra_1_1_core_1_1_colors_1aced7bccf7fc07b06be7602302e93aa9b" prot="public" virt="non-virtual"><scope>Micra::Core::Colors</scope><name>MediumVioletRed</name></member>
+      <member refid="class_micra_1_1_core_1_1_colors_1acc09f177e02b500fdf8a7c0afd6a9b84" prot="public" virt="non-virtual"><scope>Micra::Core::Colors</scope><name>MidnightBlue</name></member>
+      <member refid="class_micra_1_1_core_1_1_colors_1af7c951df85799823a0297834ab8317dd" prot="public" virt="non-virtual"><scope>Micra::Core::Colors</scope><name>MintCream</name></member>
+      <member refid="class_micra_1_1_core_1_1_colors_1a9287d2756debced11781d5f125e67b85" prot="public" virt="non-virtual"><scope>Micra::Core::Colors</scope><name>MistyRose</name></member>
+      <member refid="class_micra_1_1_core_1_1_colors_1aeb78bf5df8bfb9285edef1c80fc84112" prot="public" virt="non-virtual"><scope>Micra::Core::Colors</scope><name>Moccasin</name></member>
+      <member refid="class_micra_1_1_core_1_1_colors_1ae799a49b0181753bc7e10c3288f0823f" prot="public" virt="non-virtual"><scope>Micra::Core::Colors</scope><name>NavajoWhite</name></member>
+      <member refid="class_micra_1_1_core_1_1_colors_1a6de6285b1f3210e2f2cbf910234f4989" prot="public" virt="non-virtual"><scope>Micra::Core::Colors</scope><name>Navy</name></member>
+      <member refid="class_micra_1_1_core_1_1_colors_1addeb6f3de9b2e85d4d54290c4b179e76" prot="public" virt="non-virtual"><scope>Micra::Core::Colors</scope><name>OldLace</name></member>
+      <member refid="class_micra_1_1_core_1_1_colors_1a3ae47a10484f4f8bca081dd6153d67d5" prot="public" virt="non-virtual"><scope>Micra::Core::Colors</scope><name>Olive</name></member>
+      <member refid="class_micra_1_1_core_1_1_colors_1a5229312fdbc09a4e837fc192875b50eb" prot="public" virt="non-virtual"><scope>Micra::Core::Colors</scope><name>OliveDrab</name></member>
+      <member refid="class_micra_1_1_core_1_1_colors_1adbf29174da3b91fd8f806de820180cf9" prot="public" virt="non-virtual"><scope>Micra::Core::Colors</scope><name>Orange</name></member>
+      <member refid="class_micra_1_1_core_1_1_colors_1aed58c468fa5e5896cd1361354f064cc9" prot="public" virt="non-virtual"><scope>Micra::Core::Colors</scope><name>OrangeRed</name></member>
+      <member refid="class_micra_1_1_core_1_1_colors_1a6d023fe3368efc100f2c140b9123b267" prot="public" virt="non-virtual"><scope>Micra::Core::Colors</scope><name>Orchid</name></member>
+      <member refid="class_micra_1_1_core_1_1_colors_1aa7a70efad7545cbf82f6031ccf743de7" prot="public" virt="non-virtual"><scope>Micra::Core::Colors</scope><name>PaleGoldenrod</name></member>
+      <member refid="class_micra_1_1_core_1_1_colors_1a63b8840a8af7b2882f670bc023313312" prot="public" virt="non-virtual"><scope>Micra::Core::Colors</scope><name>PaleGreen</name></member>
+      <member refid="class_micra_1_1_core_1_1_colors_1a56326def988e0a86ecc585f710a68ce0" prot="public" virt="non-virtual"><scope>Micra::Core::Colors</scope><name>PaleTurquoise</name></member>
+      <member refid="class_micra_1_1_core_1_1_colors_1ab76501d16903e6da76ea7dc8a2d37a1c" prot="public" virt="non-virtual"><scope>Micra::Core::Colors</scope><name>PaleVioletRed</name></member>
+      <member refid="class_micra_1_1_core_1_1_colors_1a33d11a77a83a2ad18ffa0a6e4a570d79" prot="public" virt="non-virtual"><scope>Micra::Core::Colors</scope><name>PapayaWhip</name></member>
+      <member refid="class_micra_1_1_core_1_1_colors_1a7bf9da83be72e4686df3524c5222e230" prot="public" virt="non-virtual"><scope>Micra::Core::Colors</scope><name>PeachPuff</name></member>
+      <member refid="class_micra_1_1_core_1_1_colors_1a2c36ecedebb324706fb4187c8f839ead" prot="public" virt="non-virtual"><scope>Micra::Core::Colors</scope><name>Peru</name></member>
+      <member refid="class_micra_1_1_core_1_1_colors_1a7fb658ef811d79943a755f2d65effea4" prot="public" virt="non-virtual"><scope>Micra::Core::Colors</scope><name>Pink</name></member>
+      <member refid="class_micra_1_1_core_1_1_colors_1a482d6359b138319e2c8b5a9fdeb579d6" prot="public" virt="non-virtual"><scope>Micra::Core::Colors</scope><name>Plum</name></member>
+      <member refid="class_micra_1_1_core_1_1_colors_1a3a529d50995890b0c56eefa744d60be9" prot="public" virt="non-virtual"><scope>Micra::Core::Colors</scope><name>PowderBlue</name></member>
+      <member refid="class_micra_1_1_core_1_1_colors_1a87150523da157861d5779aff1dc3bcb7" prot="public" virt="non-virtual"><scope>Micra::Core::Colors</scope><name>Purple</name></member>
+      <member refid="class_micra_1_1_core_1_1_colors_1a5b6d10822806ed4caab546aa83103077" prot="public" virt="non-virtual"><scope>Micra::Core::Colors</scope><name>Red</name></member>
+      <member refid="class_micra_1_1_core_1_1_colors_1a84a740151a4cab1a352b2518100b356a" prot="public" virt="non-virtual"><scope>Micra::Core::Colors</scope><name>RosyBrown</name></member>
+      <member refid="class_micra_1_1_core_1_1_colors_1aecc5a7fc6fc3ba29bbbcc0c4dd43e7b3" prot="public" virt="non-virtual"><scope>Micra::Core::Colors</scope><name>RoyalBlue</name></member>
+      <member refid="class_micra_1_1_core_1_1_colors_1ad7a9ab4526b1fb524ffcc857a665240e" prot="public" virt="non-virtual"><scope>Micra::Core::Colors</scope><name>SaddleBrown</name></member>
+      <member refid="class_micra_1_1_core_1_1_colors_1ae60c254f86859b858d85bfdd531f4314" prot="public" virt="non-virtual"><scope>Micra::Core::Colors</scope><name>Salmon</name></member>
+      <member refid="class_micra_1_1_core_1_1_colors_1a7fafd64e20ef3e6c195aa97b41c7f2e1" prot="public" virt="non-virtual"><scope>Micra::Core::Colors</scope><name>SandyBrown</name></member>
+      <member refid="class_micra_1_1_core_1_1_colors_1a7f9561a2720b5eabb7ef021dccefa7b5" prot="public" virt="non-virtual"><scope>Micra::Core::Colors</scope><name>SeaGreen</name></member>
+      <member refid="class_micra_1_1_core_1_1_colors_1a5edab8dd8483022c07554156a8ab6259" prot="public" virt="non-virtual"><scope>Micra::Core::Colors</scope><name>SeaShell</name></member>
+      <member refid="class_micra_1_1_core_1_1_colors_1aec3fae1f11c1c000e166cdb47a443466" prot="public" virt="non-virtual"><scope>Micra::Core::Colors</scope><name>Sienna</name></member>
+      <member refid="class_micra_1_1_core_1_1_colors_1aa10cc7b36c3085c48ab75445a944a642" prot="public" virt="non-virtual"><scope>Micra::Core::Colors</scope><name>Silver</name></member>
+      <member refid="class_micra_1_1_core_1_1_colors_1a7f57ffa9babaa6e469cbbf01fdf26f0f" prot="public" virt="non-virtual"><scope>Micra::Core::Colors</scope><name>SkyBlue</name></member>
+      <member refid="class_micra_1_1_core_1_1_colors_1a40a371862ecf817818a0c9d920518d7e" prot="public" virt="non-virtual"><scope>Micra::Core::Colors</scope><name>SlateBlue</name></member>
+      <member refid="class_micra_1_1_core_1_1_colors_1aa046de8dd2852c584484b7b89556a3de" prot="public" virt="non-virtual"><scope>Micra::Core::Colors</scope><name>SlateGray</name></member>
+      <member refid="class_micra_1_1_core_1_1_colors_1a059f139ef91f3f6369ade6c0f24ae7d5" prot="public" virt="non-virtual"><scope>Micra::Core::Colors</scope><name>Snow</name></member>
+      <member refid="class_micra_1_1_core_1_1_colors_1a64907935a217da2c769044b5f8d301b4" prot="public" virt="non-virtual"><scope>Micra::Core::Colors</scope><name>SpringGreen</name></member>
+      <member refid="class_micra_1_1_core_1_1_colors_1a5d31081a7e702436facbbff45aaa6673" prot="public" virt="non-virtual"><scope>Micra::Core::Colors</scope><name>SteelBlue</name></member>
+      <member refid="class_micra_1_1_core_1_1_colors_1ad693644150d77eb73e773676bb8ad899" prot="public" virt="non-virtual"><scope>Micra::Core::Colors</scope><name>Tan</name></member>
+      <member refid="class_micra_1_1_core_1_1_colors_1a4d32d78b4b369ff89b9e625e689d4ab0" prot="public" virt="non-virtual"><scope>Micra::Core::Colors</scope><name>Teal</name></member>
+      <member refid="class_micra_1_1_core_1_1_colors_1aeaeae909df42012f7d10a2d786bc81eb" prot="public" virt="non-virtual"><scope>Micra::Core::Colors</scope><name>Thistle</name></member>
+      <member refid="class_micra_1_1_core_1_1_colors_1a8cd441b3ef617fa45dd2ae3e539b5318" prot="public" virt="non-virtual"><scope>Micra::Core::Colors</scope><name>Tomato</name></member>
+      <member refid="class_micra_1_1_core_1_1_colors_1affb3e4561a4d5fda65bc9372f8ff472c" prot="public" virt="non-virtual"><scope>Micra::Core::Colors</scope><name>Transparent</name></member>
+      <member refid="class_micra_1_1_core_1_1_colors_1a7eb499a5ccf45a42b550e2b4fbeba2f8" prot="public" virt="non-virtual"><scope>Micra::Core::Colors</scope><name>Turquoise</name></member>
+      <member refid="class_micra_1_1_core_1_1_colors_1a5b713492605c0b600857771443168520" prot="public" virt="non-virtual"><scope>Micra::Core::Colors</scope><name>Violet</name></member>
+      <member refid="class_micra_1_1_core_1_1_colors_1ad8c6ada93a142da0131af2fb578b0c8d" prot="public" virt="non-virtual"><scope>Micra::Core::Colors</scope><name>Wheat</name></member>
+      <member refid="class_micra_1_1_core_1_1_colors_1a427f0a09037cafd6b3a877055f50ebe9" prot="public" virt="non-virtual"><scope>Micra::Core::Colors</scope><name>White</name></member>
+      <member refid="class_micra_1_1_core_1_1_colors_1ace34d26627a531f9d11446f98c5ca1ad" prot="public" virt="non-virtual"><scope>Micra::Core::Colors</scope><name>WhiteSmoke</name></member>
+      <member refid="class_micra_1_1_core_1_1_colors_1ace84b195a9648b8c13b1bd3eb5fa92d4" prot="public" virt="non-virtual"><scope>Micra::Core::Colors</scope><name>Yellow</name></member>
+      <member refid="class_micra_1_1_core_1_1_colors_1a2fd6437a1e48e3f3aafac019c875007b" prot="public" virt="non-virtual"><scope>Micra::Core::Colors</scope><name>YellowGreen</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

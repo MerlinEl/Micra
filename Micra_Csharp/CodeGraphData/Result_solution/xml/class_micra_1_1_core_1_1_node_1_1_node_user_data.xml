@@ -1,0 +1,65 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
+  <compounddef id="class_micra_1_1_core_1_1_node_1_1_node_user_data" kind="class" prot="public">
+    <compoundname>Micra::Core::Node::NodeUserData</compoundname>
+      <sectiondef kind="package-attrib">
+      <memberdef kind="variable" id="class_micra_1_1_core_1_1_node_1_1_node_user_data_1a8ed05e1180425a3a1968dce106caa0d7" prot="package" static="no" mutable="no">
+        <type>IINode</type>
+        <definition>IINode Micra.Core.Node.NodeUserData.node</definition>
+        <argsstring></argsstring>
+        <name>node</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Node.cs" line="24" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Node.cs" bodystart="24" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="property">
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_node_1_1_node_user_data_1a220614caa3c4ebaece0b5c30f4c2e531" prot="public" static="no" readable="no" writable="no" gettable="yes" settable="yes">
+        <type>string</type>
+        <definition>string Micra.Core.Node.NodeUserData.this[string key]</definition>
+        <argsstring></argsstring>
+        <name>this[string key]</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Node.cs" line="28" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Node.cs" bodystart="28" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="package-func">
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_node_1_1_node_user_data_1acfc7944210337d7386fa8c17a9c52da2" prot="package" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>Micra.Core.Node.NodeUserData.NodeUserData</definition>
+        <argsstring>(IINode node)</argsstring>
+        <name>NodeUserData</name>
+        <param>
+          <type>IINode</type>
+          <declname>node</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Node.cs" line="26" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Node.cs" bodystart="26" bodyend="26"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Wraps functionality of a <ref refid="class_micra_1_1_core_1_1_node" kindref="compound">Node</ref> for getting and setting user data strings. </para>    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Node.cs" line="23" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Node.cs" bodystart="23" bodyend="42"/>
+    <listofallmembers>
+      <member refid="class_micra_1_1_core_1_1_node_1_1_node_user_data_1a8ed05e1180425a3a1968dce106caa0d7" prot="package" virt="non-virtual"><scope>Micra::Core::Node::NodeUserData</scope><name>node</name></member>
+      <member refid="class_micra_1_1_core_1_1_node_1_1_node_user_data_1acfc7944210337d7386fa8c17a9c52da2" prot="package" virt="non-virtual"><scope>Micra::Core::Node::NodeUserData</scope><name>NodeUserData</name></member>
+      <member refid="class_micra_1_1_core_1_1_node_1_1_node_user_data_1a220614caa3c4ebaece0b5c30f4c2e531" prot="public" virt="non-virtual"><scope>Micra::Core::Node::NodeUserData</scope><name>this[string key]</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

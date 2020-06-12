@@ -1,0 +1,547 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
+  <compounddef id="struct_micra_1_1_core_1_1_super_class_i_d" kind="struct" prot="public">
+    <compoundname>Micra::Core::SuperClassID</compoundname>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="struct_micra_1_1_core_1_1_super_class_i_d_1a79bad75e6903a305a9dba1d818e3a8f9" prot="public" static="no" mutable="no">
+        <type>ulong</type>
+        <definition>ulong Micra.Core.SuperClassID.id</definition>
+        <argsstring></argsstring>
+        <name>id</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/SuperClassID.cs" line="19" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/SuperClassID.cs" bodystart="19" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-static-attrib">
+      <memberdef kind="variable" id="struct_micra_1_1_core_1_1_super_class_i_d_1ac34d57cc144e569d0815cfd440e85423" prot="public" static="yes" mutable="no">
+        <type><ref refid="struct_micra_1_1_core_1_1_super_class_i_d" kindref="compound">SuperClassID</ref></type>
+        <definition>SuperClassID Micra.Core.SuperClassID.GeometricObject</definition>
+        <argsstring></argsstring>
+        <name>GeometricObject</name>
+        <initializer>= SClass_ID.Geomobject</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/SuperClassID.cs" line="42" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/SuperClassID.cs" bodystart="42" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_micra_1_1_core_1_1_super_class_i_d_1ae6aaf8df56c875ae76853d77183dad65" prot="public" static="yes" mutable="no">
+        <type><ref refid="struct_micra_1_1_core_1_1_super_class_i_d" kindref="compound">SuperClassID</ref></type>
+        <definition>SuperClassID Micra.Core.SuperClassID.ObjectModifier</definition>
+        <argsstring></argsstring>
+        <name>ObjectModifier</name>
+        <initializer>= SClass_ID.Osm</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/SuperClassID.cs" line="43" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/SuperClassID.cs" bodystart="43" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_micra_1_1_core_1_1_super_class_i_d_1a3d0df3e16354e2f0cde4033aa0cc576b" prot="public" static="yes" mutable="no">
+        <type><ref refid="struct_micra_1_1_core_1_1_super_class_i_d" kindref="compound">SuperClassID</ref></type>
+        <definition>SuperClassID Micra.Core.SuperClassID.Material</definition>
+        <argsstring></argsstring>
+        <name>Material</name>
+        <initializer>= SClass_ID.Material</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/SuperClassID.cs" line="44" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/SuperClassID.cs" bodystart="44" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_micra_1_1_core_1_1_super_class_i_d_1a1650125500bbd515d8cda0ba7b23ef95" prot="public" static="yes" mutable="no">
+        <type><ref refid="struct_micra_1_1_core_1_1_super_class_i_d" kindref="compound">SuperClassID</ref></type>
+        <definition>SuperClassID Micra.Core.SuperClassID.Texture</definition>
+        <argsstring></argsstring>
+        <name>Texture</name>
+        <initializer>= SClass_ID.Texmap</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/SuperClassID.cs" line="45" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/SuperClassID.cs" bodystart="45" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_micra_1_1_core_1_1_super_class_i_d_1a3a7168b9b76e61a6ca6b28536bb568ac" prot="public" static="yes" mutable="no">
+        <type><ref refid="struct_micra_1_1_core_1_1_super_class_i_d" kindref="compound">SuperClassID</ref></type>
+        <definition>SuperClassID Micra.Core.SuperClassID.ReferenceTarget</definition>
+        <argsstring></argsstring>
+        <name>ReferenceTarget</name>
+        <initializer>= SClass_ID.RefTarget</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/SuperClassID.cs" line="46" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/SuperClassID.cs" bodystart="46" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_micra_1_1_core_1_1_super_class_i_d_1a97dd56483664b4d874eb1d614ee82ace" prot="public" static="yes" mutable="no">
+        <type><ref refid="struct_micra_1_1_core_1_1_super_class_i_d" kindref="compound">SuperClassID</ref></type>
+        <definition>SuperClassID Micra.Core.SuperClassID.ReferenceMaker</definition>
+        <argsstring></argsstring>
+        <name>ReferenceMaker</name>
+        <initializer>= SClass_ID.RefMaker</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/SuperClassID.cs" line="47" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/SuperClassID.cs" bodystart="47" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_micra_1_1_core_1_1_super_class_i_d_1a9dc71234131fb0b520fc3fe6d7f1bd19" prot="public" static="yes" mutable="no">
+        <type><ref refid="struct_micra_1_1_core_1_1_super_class_i_d" kindref="compound">SuperClassID</ref></type>
+        <definition>SuperClassID Micra.Core.SuperClassID.Light</definition>
+        <argsstring></argsstring>
+        <name>Light</name>
+        <initializer>= SClass_ID.Light</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/SuperClassID.cs" line="48" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/SuperClassID.cs" bodystart="48" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_micra_1_1_core_1_1_super_class_i_d_1acf1b5d7d6c02342442e549b11501d72c" prot="public" static="yes" mutable="no">
+        <type><ref refid="struct_micra_1_1_core_1_1_super_class_i_d" kindref="compound">SuperClassID</ref></type>
+        <definition>SuperClassID Micra.Core.SuperClassID.Shape</definition>
+        <argsstring></argsstring>
+        <name>Shape</name>
+        <initializer>= SClass_ID.Shape</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/SuperClassID.cs" line="49" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/SuperClassID.cs" bodystart="49" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_micra_1_1_core_1_1_super_class_i_d_1aedbc47f77dbeb6c25767f52fa9da3902" prot="public" static="yes" mutable="no">
+        <type><ref refid="struct_micra_1_1_core_1_1_super_class_i_d" kindref="compound">SuperClassID</ref></type>
+        <definition>SuperClassID Micra.Core.SuperClassID.Camera</definition>
+        <argsstring></argsstring>
+        <name>Camera</name>
+        <initializer>= SClass_ID.Camera</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/SuperClassID.cs" line="50" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/SuperClassID.cs" bodystart="50" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_micra_1_1_core_1_1_super_class_i_d_1a750a57d6c8c01a6e509d7009b4f16afb" prot="public" static="yes" mutable="no">
+        <type><ref refid="struct_micra_1_1_core_1_1_super_class_i_d" kindref="compound">SuperClassID</ref></type>
+        <definition>SuperClassID Micra.Core.SuperClassID.Helper</definition>
+        <argsstring></argsstring>
+        <name>Helper</name>
+        <initializer>= SClass_ID.Helper</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/SuperClassID.cs" line="51" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/SuperClassID.cs" bodystart="51" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_micra_1_1_core_1_1_super_class_i_d_1ad80b43e08bd4f8df715e6ad194e5dd04" prot="public" static="yes" mutable="no">
+        <type><ref refid="struct_micra_1_1_core_1_1_super_class_i_d" kindref="compound">SuperClassID</ref></type>
+        <definition>SuperClassID Micra.Core.SuperClassID.Atmospheric</definition>
+        <argsstring></argsstring>
+        <name>Atmospheric</name>
+        <initializer>= SClass_ID.Atmospheric</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/SuperClassID.cs" line="52" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/SuperClassID.cs" bodystart="52" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_micra_1_1_core_1_1_super_class_i_d_1a683b43817b7ce90b00bbab1f8f8ff7a2" prot="public" static="yes" mutable="no">
+        <type><ref refid="struct_micra_1_1_core_1_1_super_class_i_d" kindref="compound">SuperClassID</ref></type>
+        <definition>SuperClassID Micra.Core.SuperClassID.PositionController</definition>
+        <argsstring></argsstring>
+        <name>PositionController</name>
+        <initializer>= SClass_ID.CtrlPosition</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/SuperClassID.cs" line="53" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/SuperClassID.cs" bodystart="53" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_micra_1_1_core_1_1_super_class_i_d_1a8195fc3030fa8f99f3a30f26fb8f00cb" prot="public" static="yes" mutable="no">
+        <type><ref refid="struct_micra_1_1_core_1_1_super_class_i_d" kindref="compound">SuperClassID</ref></type>
+        <definition>SuperClassID Micra.Core.SuperClassID.NotifyAll</definition>
+        <argsstring></argsstring>
+        <name>NotifyAll</name>
+        <initializer>= new <ref refid="struct_micra_1_1_core_1_1_super_class_i_d" kindref="compound">SuperClassID</ref>((SClass_ID)0xfffffff0)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/SuperClassID.cs" line="54" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/SuperClassID.cs" bodystart="54" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_micra_1_1_core_1_1_super_class_i_d_1aa5804ad0257fd0bd771d11c5c275dfb3" prot="public" static="yes" mutable="no">
+        <type><ref refid="struct_micra_1_1_core_1_1_super_class_i_d" kindref="compound">SuperClassID</ref></type>
+        <definition>SuperClassID Micra.Core.SuperClassID.BaseNode</definition>
+        <argsstring></argsstring>
+        <name>BaseNode</name>
+        <initializer>= SClass_ID.Basenode</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/SuperClassID.cs" line="55" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/SuperClassID.cs" bodystart="55" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_micra_1_1_core_1_1_super_class_i_d_1affd855bbeacfcbd7a28b46a4dc3ab717" prot="public" static="yes" mutable="no">
+        <type><ref refid="struct_micra_1_1_core_1_1_super_class_i_d" kindref="compound">SuperClassID</ref></type>
+        <definition>SuperClassID Micra.Core.SuperClassID.GenericDerivedObject</definition>
+        <argsstring></argsstring>
+        <name>GenericDerivedObject</name>
+        <initializer>= SClass_ID.GenDerivob</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/SuperClassID.cs" line="56" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/SuperClassID.cs" bodystart="56" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_micra_1_1_core_1_1_super_class_i_d_1a0ad9f3a5005fb4d12565527922957a60" prot="public" static="yes" mutable="no">
+        <type><ref refid="struct_micra_1_1_core_1_1_super_class_i_d" kindref="compound">SuperClassID</ref></type>
+        <definition>SuperClassID Micra.Core.SuperClassID.DerivedObject</definition>
+        <argsstring></argsstring>
+        <name>DerivedObject</name>
+        <initializer>= SClass_ID.Derivob</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/SuperClassID.cs" line="57" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/SuperClassID.cs" bodystart="57" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_micra_1_1_core_1_1_super_class_i_d_1a4fd1bde1da24f831b4227e5f94a95a1e" prot="public" static="yes" mutable="no">
+        <type><ref refid="struct_micra_1_1_core_1_1_super_class_i_d" kindref="compound">SuperClassID</ref></type>
+        <definition>SuperClassID Micra.Core.SuperClassID.ParameterBlock2</definition>
+        <argsstring></argsstring>
+        <name>ParameterBlock2</name>
+        <initializer>= SClass_ID.ParameterBlock2</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/SuperClassID.cs" line="58" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/SuperClassID.cs" bodystart="58" bodyend="-1"/>
+        <referencedby refid="class_micra_1_1_core_1_1_animatable_1a014952bd2d29637c0ed71b32f1ad4807" compoundref="_animatable_8cs" startline="93" endline="100">Micra.Core.Animatable.Animatable</referencedby>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="struct_micra_1_1_core_1_1_super_class_i_d_1aadd1a15499ec06e436f827ee98202344" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>Micra.Core.SuperClassID.SuperClassID</definition>
+        <argsstring>(SClass_ID id)</argsstring>
+        <name>SuperClassID</name>
+        <param>
+          <type>SClass_ID</type>
+          <declname>id</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/SuperClassID.cs" line="20" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/SuperClassID.cs" bodystart="20" bodyend="20"/>
+      </memberdef>
+      <memberdef kind="function" id="struct_micra_1_1_core_1_1_super_class_i_d_1a8708b46e64318e99d6727e151e52caf9" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>override string</type>
+        <definition>override string Micra.Core.SuperClassID.ToString</definition>
+        <argsstring>()</argsstring>
+        <name>ToString</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/SuperClassID.cs" line="60" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/SuperClassID.cs" bodystart="60" bodyend="62"/>
+        <referencedby refid="struct_micra_1_1_core_1_1_super_class_i_d_1ac08ed83be735520ebd52e043a27e692c" compoundref="_super_class_i_d_8cs" startline="96" endline="106">Micra.Core.SuperClassID.GetClassName</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="struct_micra_1_1_core_1_1_super_class_i_d_1a49b20d82d65b35175acbd1e72451ec96" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>override bool</type>
+        <definition>override bool Micra.Core.SuperClassID.Equals</definition>
+        <argsstring>(object obj)</argsstring>
+        <name>Equals</name>
+        <param>
+          <type>object</type>
+          <declname>obj</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/SuperClassID.cs" line="64" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/SuperClassID.cs" bodystart="64" bodyend="68"/>
+      </memberdef>
+      <memberdef kind="function" id="struct_micra_1_1_core_1_1_super_class_i_d_1acba776476845227a57887c9057e1eba1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>override int</type>
+        <definition>override int Micra.Core.SuperClassID.GetHashCode</definition>
+        <argsstring>()</argsstring>
+        <name>GetHashCode</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/SuperClassID.cs" line="70" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="struct_micra_1_1_core_1_1_super_class_i_d_1ac08ed83be735520ebd52e043a27e692c" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>string</type>
+        <definition>string Micra.Core.SuperClassID.GetClassName</definition>
+        <argsstring>(SuperClassID superClassID)</argsstring>
+        <name>GetClassName</name>
+        <param>
+          <type><ref refid="struct_micra_1_1_core_1_1_super_class_i_d" kindref="compound">SuperClassID</ref></type>
+          <declname>superClassID</declname>
+        </param>
+        <briefdescription>
+<para>Return <ref refid="struct_micra_1_1_core_1_1_super_class_i_d" kindref="compound">SuperClassID</ref> Name </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>superClassID</parametername>
+</parameternamelist>
+<parameterdescription>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para></para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/SuperClassID.cs" line="96" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/SuperClassID.cs" bodystart="96" bodyend="106"/>
+        <references refid="struct_micra_1_1_core_1_1_super_class_i_d_1a8708b46e64318e99d6727e151e52caf9" compoundref="_super_class_i_d_8cs" startline="60" endline="62">Micra.Core.SuperClassID.ToString</references>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="struct_micra_1_1_core_1_1_super_class_i_d_1aac15ea0e980c42355792fce45b4d7af3" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>implicit</type>
+        <definition>static implicit Micra.Core.SuperClassID.operator SuperClassID</definition>
+        <argsstring>(SClass_ID id)</argsstring>
+        <name>operator SuperClassID</name>
+        <param>
+          <type>SClass_ID</type>
+          <declname>id</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/SuperClassID.cs" line="21" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/SuperClassID.cs" bodystart="21" bodyend="21"/>
+      </memberdef>
+      <memberdef kind="function" id="struct_micra_1_1_core_1_1_super_class_i_d_1ad00c33195dd35de019503242e251d027" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>implicit</type>
+        <definition>static implicit Micra.Core.SuperClassID.operator SClass_ID</definition>
+        <argsstring>(SuperClassID id)</argsstring>
+        <name>operator SClass_ID</name>
+        <param>
+          <type><ref refid="struct_micra_1_1_core_1_1_super_class_i_d" kindref="compound">SuperClassID</ref></type>
+          <declname>id</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/SuperClassID.cs" line="22" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/SuperClassID.cs" bodystart="22" bodyend="22"/>
+      </memberdef>
+      <memberdef kind="function" id="struct_micra_1_1_core_1_1_super_class_i_d_1a4f06c9c5e923eb306f75811a946d3cc3" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="struct_micra_1_1_core_1_1_super_class_i_d" kindref="compound">SuperClassID</ref></type>
+        <definition>static SuperClassID Micra.Core.SuperClassID.FromName</definition>
+        <argsstring>(string sclassName)</argsstring>
+        <name>FromName</name>
+        <param>
+          <type>string</type>
+          <declname>sclassName</declname>
+        </param>
+        <briefdescription>
+<para>usage: Create <ref refid="struct_micra_1_1_core_1_1_super_class_i_d" kindref="compound">SuperClassID</ref> from Name  </para>        </briefdescription>
+        <detaileddescription>
+<para><computeroutput> example: <ref refid="struct_micra_1_1_core_1_1_super_class_i_d" kindref="compound">SuperClassID</ref> superClassId = <ref refid="struct_micra_1_1_core_1_1_super_class_i_d_1a4f06c9c5e923eb306f75811a946d3cc3" kindref="member">SuperClassID.FromName</ref>(&quot;Light&quot;); </computeroutput> </para><para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>sclassName</parametername>
+</parameternamelist>
+<parameterdescription>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>return: new <ref refid="struct_micra_1_1_core_1_1_super_class_i_d" kindref="compound">SuperClassID</ref></para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/SuperClassID.cs" line="33" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/SuperClassID.cs" bodystart="33" bodyend="40"/>
+      </memberdef>
+      <memberdef kind="function" id="struct_micra_1_1_core_1_1_super_class_i_d_1a334b65238c7c40d896b2ec5083e867a4" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>static bool Micra.Core.SuperClassID.operator==</definition>
+        <argsstring>(SuperClassID x, SuperClassID y)</argsstring>
+        <name>operator==</name>
+        <param>
+          <type><ref refid="struct_micra_1_1_core_1_1_super_class_i_d" kindref="compound">SuperClassID</ref></type>
+          <declname>x</declname>
+        </param>
+        <param>
+          <type><ref refid="struct_micra_1_1_core_1_1_super_class_i_d" kindref="compound">SuperClassID</ref></type>
+          <declname>y</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/SuperClassID.cs" line="72" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/SuperClassID.cs" bodystart="72" bodyend="72"/>
+      </memberdef>
+      <memberdef kind="function" id="struct_micra_1_1_core_1_1_super_class_i_d_1a666c8f40293ce0343ca6b162a40dec8c" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>static bool Micra.Core.SuperClassID.operator!=</definition>
+        <argsstring>(SuperClassID x, SuperClassID y)</argsstring>
+        <name>operator!=</name>
+        <param>
+          <type><ref refid="struct_micra_1_1_core_1_1_super_class_i_d" kindref="compound">SuperClassID</ref></type>
+          <declname>x</declname>
+        </param>
+        <param>
+          <type><ref refid="struct_micra_1_1_core_1_1_super_class_i_d" kindref="compound">SuperClassID</ref></type>
+          <declname>y</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/SuperClassID.cs" line="73" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/SuperClassID.cs" bodystart="73" bodyend="73"/>
+      </memberdef>
+      <memberdef kind="function" id="struct_micra_1_1_core_1_1_super_class_i_d_1a672595515eff2b1dae1762a6d9a014ac" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>string[]</type>
+        <definition>static string [] Micra.Core.SuperClassID.GetClassNames</definition>
+        <argsstring>()</argsstring>
+        <name>GetClassNames</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/SuperClassID.cs" line="83" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/SuperClassID.cs" bodystart="83" bodyend="90"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="package-func">
+      <memberdef kind="function" id="struct_micra_1_1_core_1_1_super_class_i_d_1ac32c0ff4cc1d56897d987f52e3ab91c6" prot="package" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>string</type>
+        <definition>string Micra.Core.SuperClassID.GetIClassName</definition>
+        <argsstring>(SuperClassID superClassID)</argsstring>
+        <name>GetIClassName</name>
+        <param>
+          <type><ref refid="struct_micra_1_1_core_1_1_super_class_i_d" kindref="compound">SuperClassID</ref></type>
+          <declname>superClassID</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/SuperClassID.cs" line="76" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/SuperClassID.cs" bodystart="76" bodyend="80"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Identifies a category of plug-in type. Wraps the SClass_ID class in the 3ds <ref refid="class_micra_1_1_core_1_1_max" kindref="compound">Max</ref> SDK. </para>    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="621">
+        <label>Micra.Core.SuperClassID</label>
+        <link refid="struct_micra_1_1_core_1_1_super_class_i_d"/>
+        <childnode refid="622" relation="usage">
+          <edgelabel>ParameterBlock2</edgelabel>
+          <edgelabel>Light</edgelabel>
+          <edgelabel>ReferenceTarget</edgelabel>
+          <edgelabel>DerivedObject</edgelabel>
+          <edgelabel>PositionController</edgelabel>
+          <edgelabel>Material</edgelabel>
+          <edgelabel>Camera</edgelabel>
+          <edgelabel>Texture</edgelabel>
+          <edgelabel>BaseNode</edgelabel>
+          <edgelabel>ObjectModifier</edgelabel>
+          <edgelabel>...</edgelabel>
+        </childnode>
+      </node>
+      <node id="622">
+        <label>static</label>
+      </node>
+    </collaborationgraph>
+    <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/SuperClassID.cs" line="18" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/SuperClassID.cs" bodystart="18" bodyend="107"/>
+    <listofallmembers>
+      <member refid="struct_micra_1_1_core_1_1_super_class_i_d_1ad80b43e08bd4f8df715e6ad194e5dd04" prot="public" virt="non-virtual"><scope>Micra::Core::SuperClassID</scope><name>Atmospheric</name></member>
+      <member refid="struct_micra_1_1_core_1_1_super_class_i_d_1aa5804ad0257fd0bd771d11c5c275dfb3" prot="public" virt="non-virtual"><scope>Micra::Core::SuperClassID</scope><name>BaseNode</name></member>
+      <member refid="struct_micra_1_1_core_1_1_super_class_i_d_1aedbc47f77dbeb6c25767f52fa9da3902" prot="public" virt="non-virtual"><scope>Micra::Core::SuperClassID</scope><name>Camera</name></member>
+      <member refid="struct_micra_1_1_core_1_1_super_class_i_d_1a0ad9f3a5005fb4d12565527922957a60" prot="public" virt="non-virtual"><scope>Micra::Core::SuperClassID</scope><name>DerivedObject</name></member>
+      <member refid="struct_micra_1_1_core_1_1_super_class_i_d_1a49b20d82d65b35175acbd1e72451ec96" prot="public" virt="non-virtual"><scope>Micra::Core::SuperClassID</scope><name>Equals</name></member>
+      <member refid="struct_micra_1_1_core_1_1_super_class_i_d_1a4f06c9c5e923eb306f75811a946d3cc3" prot="public" virt="non-virtual"><scope>Micra::Core::SuperClassID</scope><name>FromName</name></member>
+      <member refid="struct_micra_1_1_core_1_1_super_class_i_d_1affd855bbeacfcbd7a28b46a4dc3ab717" prot="public" virt="non-virtual"><scope>Micra::Core::SuperClassID</scope><name>GenericDerivedObject</name></member>
+      <member refid="struct_micra_1_1_core_1_1_super_class_i_d_1ac34d57cc144e569d0815cfd440e85423" prot="public" virt="non-virtual"><scope>Micra::Core::SuperClassID</scope><name>GeometricObject</name></member>
+      <member refid="struct_micra_1_1_core_1_1_super_class_i_d_1ac08ed83be735520ebd52e043a27e692c" prot="public" virt="non-virtual"><scope>Micra::Core::SuperClassID</scope><name>GetClassName</name></member>
+      <member refid="struct_micra_1_1_core_1_1_super_class_i_d_1a672595515eff2b1dae1762a6d9a014ac" prot="public" virt="non-virtual"><scope>Micra::Core::SuperClassID</scope><name>GetClassNames</name></member>
+      <member refid="struct_micra_1_1_core_1_1_super_class_i_d_1acba776476845227a57887c9057e1eba1" prot="public" virt="non-virtual"><scope>Micra::Core::SuperClassID</scope><name>GetHashCode</name></member>
+      <member refid="struct_micra_1_1_core_1_1_super_class_i_d_1ac32c0ff4cc1d56897d987f52e3ab91c6" prot="package" virt="non-virtual"><scope>Micra::Core::SuperClassID</scope><name>GetIClassName</name></member>
+      <member refid="struct_micra_1_1_core_1_1_super_class_i_d_1a750a57d6c8c01a6e509d7009b4f16afb" prot="public" virt="non-virtual"><scope>Micra::Core::SuperClassID</scope><name>Helper</name></member>
+      <member refid="struct_micra_1_1_core_1_1_super_class_i_d_1a79bad75e6903a305a9dba1d818e3a8f9" prot="public" virt="non-virtual"><scope>Micra::Core::SuperClassID</scope><name>id</name></member>
+      <member refid="struct_micra_1_1_core_1_1_super_class_i_d_1a9dc71234131fb0b520fc3fe6d7f1bd19" prot="public" virt="non-virtual"><scope>Micra::Core::SuperClassID</scope><name>Light</name></member>
+      <member refid="struct_micra_1_1_core_1_1_super_class_i_d_1a3d0df3e16354e2f0cde4033aa0cc576b" prot="public" virt="non-virtual"><scope>Micra::Core::SuperClassID</scope><name>Material</name></member>
+      <member refid="struct_micra_1_1_core_1_1_super_class_i_d_1a8195fc3030fa8f99f3a30f26fb8f00cb" prot="public" virt="non-virtual"><scope>Micra::Core::SuperClassID</scope><name>NotifyAll</name></member>
+      <member refid="struct_micra_1_1_core_1_1_super_class_i_d_1ae6aaf8df56c875ae76853d77183dad65" prot="public" virt="non-virtual"><scope>Micra::Core::SuperClassID</scope><name>ObjectModifier</name></member>
+      <member refid="struct_micra_1_1_core_1_1_super_class_i_d_1ad00c33195dd35de019503242e251d027" prot="public" virt="non-virtual"><scope>Micra::Core::SuperClassID</scope><name>operator SClass_ID</name></member>
+      <member refid="struct_micra_1_1_core_1_1_super_class_i_d_1aac15ea0e980c42355792fce45b4d7af3" prot="public" virt="non-virtual"><scope>Micra::Core::SuperClassID</scope><name>operator SuperClassID</name></member>
+      <member refid="struct_micra_1_1_core_1_1_super_class_i_d_1a666c8f40293ce0343ca6b162a40dec8c" prot="public" virt="non-virtual"><scope>Micra::Core::SuperClassID</scope><name>operator!=</name></member>
+      <member refid="struct_micra_1_1_core_1_1_super_class_i_d_1a334b65238c7c40d896b2ec5083e867a4" prot="public" virt="non-virtual"><scope>Micra::Core::SuperClassID</scope><name>operator==</name></member>
+      <member refid="struct_micra_1_1_core_1_1_super_class_i_d_1a4fd1bde1da24f831b4227e5f94a95a1e" prot="public" virt="non-virtual"><scope>Micra::Core::SuperClassID</scope><name>ParameterBlock2</name></member>
+      <member refid="struct_micra_1_1_core_1_1_super_class_i_d_1a683b43817b7ce90b00bbab1f8f8ff7a2" prot="public" virt="non-virtual"><scope>Micra::Core::SuperClassID</scope><name>PositionController</name></member>
+      <member refid="struct_micra_1_1_core_1_1_super_class_i_d_1a97dd56483664b4d874eb1d614ee82ace" prot="public" virt="non-virtual"><scope>Micra::Core::SuperClassID</scope><name>ReferenceMaker</name></member>
+      <member refid="struct_micra_1_1_core_1_1_super_class_i_d_1a3a7168b9b76e61a6ca6b28536bb568ac" prot="public" virt="non-virtual"><scope>Micra::Core::SuperClassID</scope><name>ReferenceTarget</name></member>
+      <member refid="struct_micra_1_1_core_1_1_super_class_i_d_1acf1b5d7d6c02342442e549b11501d72c" prot="public" virt="non-virtual"><scope>Micra::Core::SuperClassID</scope><name>Shape</name></member>
+      <member refid="struct_micra_1_1_core_1_1_super_class_i_d_1aadd1a15499ec06e436f827ee98202344" prot="public" virt="non-virtual"><scope>Micra::Core::SuperClassID</scope><name>SuperClassID</name></member>
+      <member refid="struct_micra_1_1_core_1_1_super_class_i_d_1a1650125500bbd515d8cda0ba7b23ef95" prot="public" virt="non-virtual"><scope>Micra::Core::SuperClassID</scope><name>Texture</name></member>
+      <member refid="struct_micra_1_1_core_1_1_super_class_i_d_1a8708b46e64318e99d6727e151e52caf9" prot="public" virt="non-virtual"><scope>Micra::Core::SuperClassID</scope><name>ToString</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

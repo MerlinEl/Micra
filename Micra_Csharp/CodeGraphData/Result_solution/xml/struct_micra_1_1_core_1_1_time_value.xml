@@ -1,0 +1,133 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
+  <compounddef id="struct_micra_1_1_core_1_1_time_value" kind="struct" prot="public">
+    <compoundname>Micra::Core::TimeValue</compoundname>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="struct_micra_1_1_core_1_1_time_value_1aa559b7327826217a6ed470df739fbf5b" prot="public" static="no" mutable="no">
+        <type>int</type>
+        <definition>int Micra.Core.TimeValue.time</definition>
+        <argsstring></argsstring>
+        <name>time</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Structs.cs" line="39" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Structs.cs" bodystart="39" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-static-attrib">
+      <memberdef kind="variable" id="struct_micra_1_1_core_1_1_time_value_1a0c414b21d65cf268ae038aa09496e71d" prot="public" static="yes" mutable="no">
+        <type>readonly <ref refid="struct_micra_1_1_core_1_1_time_value" kindref="compound">TimeValue</ref></type>
+        <definition>readonly TimeValue Micra.Core.TimeValue.PositiveInfinity</definition>
+        <argsstring></argsstring>
+        <name>PositiveInfinity</name>
+        <initializer>= int.MaxValue</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Structs.cs" line="44" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Structs.cs" bodystart="44" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_micra_1_1_core_1_1_time_value_1a2d5a47664f609cbb7252ae704d7af55a" prot="public" static="yes" mutable="no">
+        <type>readonly <ref refid="struct_micra_1_1_core_1_1_time_value" kindref="compound">TimeValue</ref></type>
+        <definition>readonly TimeValue Micra.Core.TimeValue.NegativeInfinity</definition>
+        <argsstring></argsstring>
+        <name>NegativeInfinity</name>
+        <initializer>= int.MinValue</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Structs.cs" line="45" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Structs.cs" bodystart="45" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="struct_micra_1_1_core_1_1_time_value_1accba9479ffd621733253578131f2a45b" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>Micra.Core.TimeValue.TimeValue</definition>
+        <argsstring>(int time)</argsstring>
+        <name>TimeValue</name>
+        <param>
+          <type>int</type>
+          <declname>time</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Structs.cs" line="40" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Structs.cs" bodystart="40" bodyend="40"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="struct_micra_1_1_core_1_1_time_value_1abdafe5b5d40beeb6de7efc120d587ccc" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>implicit</type>
+        <definition>static implicit Micra.Core.TimeValue.operator TimeValue</definition>
+        <argsstring>(int time)</argsstring>
+        <name>operator TimeValue</name>
+        <param>
+          <type>int</type>
+          <declname>time</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Structs.cs" line="41" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Structs.cs" bodystart="41" bodyend="41"/>
+      </memberdef>
+      <memberdef kind="function" id="struct_micra_1_1_core_1_1_time_value_1a72fd5bbc44e36f44cad3ff085f5730a8" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>implicit</type>
+        <definition>static implicit Micra.Core.TimeValue.operator int</definition>
+        <argsstring>(TimeValue time)</argsstring>
+        <name>operator int</name>
+        <param>
+          <type><ref refid="struct_micra_1_1_core_1_1_time_value" kindref="compound">TimeValue</ref></type>
+          <declname>time</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Structs.cs" line="42" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Structs.cs" bodystart="42" bodyend="42"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Represents a time value during an animation. Wraps the <ref refid="struct_micra_1_1_core_1_1_time_value" kindref="compound">TimeValue</ref> typedef in 3ds <ref refid="class_micra_1_1_core_1_1_max" kindref="compound">Max</ref> SDK. <simplesect kind="see"><para><ref refid="struct_micra_1_1_core_1_1_interval" kindref="compound">Interval</ref></para></simplesect>
+</para>    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="657">
+        <label>Micra.Core.TimeValue</label>
+        <link refid="struct_micra_1_1_core_1_1_time_value"/>
+        <childnode refid="658" relation="usage">
+          <edgelabel>PositiveInfinity</edgelabel>
+          <edgelabel>NegativeInfinity</edgelabel>
+        </childnode>
+      </node>
+      <node id="658">
+        <label>static</label>
+      </node>
+    </collaborationgraph>
+    <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Structs.cs" line="38" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Structs.cs" bodystart="38" bodyend="46"/>
+    <listofallmembers>
+      <member refid="struct_micra_1_1_core_1_1_time_value_1a2d5a47664f609cbb7252ae704d7af55a" prot="public" virt="non-virtual"><scope>Micra::Core::TimeValue</scope><name>NegativeInfinity</name></member>
+      <member refid="struct_micra_1_1_core_1_1_time_value_1a72fd5bbc44e36f44cad3ff085f5730a8" prot="public" virt="non-virtual"><scope>Micra::Core::TimeValue</scope><name>operator int</name></member>
+      <member refid="struct_micra_1_1_core_1_1_time_value_1abdafe5b5d40beeb6de7efc120d587ccc" prot="public" virt="non-virtual"><scope>Micra::Core::TimeValue</scope><name>operator TimeValue</name></member>
+      <member refid="struct_micra_1_1_core_1_1_time_value_1a0c414b21d65cf268ae038aa09496e71d" prot="public" virt="non-virtual"><scope>Micra::Core::TimeValue</scope><name>PositiveInfinity</name></member>
+      <member refid="struct_micra_1_1_core_1_1_time_value_1aa559b7327826217a6ed470df739fbf5b" prot="public" virt="non-virtual"><scope>Micra::Core::TimeValue</scope><name>time</name></member>
+      <member refid="struct_micra_1_1_core_1_1_time_value_1accba9479ffd621733253578131f2a45b" prot="public" virt="non-virtual"><scope>Micra::Core::TimeValue</scope><name>TimeValue</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

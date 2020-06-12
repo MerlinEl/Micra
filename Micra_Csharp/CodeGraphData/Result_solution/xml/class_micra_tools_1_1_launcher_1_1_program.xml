@@ -1,0 +1,29 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
+  <compounddef id="class_micra_tools_1_1_launcher_1_1_program" kind="class" prot="public">
+    <compoundname>MicraTools::Launcher::Program</compoundname>
+      <sectiondef kind="private-static-func">
+      <memberdef kind="function" id="class_micra_tools_1_1_launcher_1_1_program_1a7f5cc2addebf18e8e15833506003c8ca" prot="private" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>static void MicraTools.Launcher.Program.Main</definition>
+        <argsstring>()</argsstring>
+        <name>Main</name>
+        <briefdescription>
+<para>The main entry point for the application. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Program.cs" line="13" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Program.cs" bodystart="13" bodyend="17"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Program.cs" line="8" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Program.cs" bodystart="8" bodyend="18"/>
+    <listofallmembers>
+      <member refid="class_micra_tools_1_1_launcher_1_1_program_1a7f5cc2addebf18e8e15833506003c8ca" prot="private" virt="non-virtual"><scope>MicraTools::Launcher::Program</scope><name>Main</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

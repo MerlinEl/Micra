@@ -1,0 +1,199 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
+  <compounddef id="class_micra_1_1_tools_1_1_mx_file" kind="class" prot="public">
+    <compoundname>Micra::Tools::MxFile</compoundname>
+      <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="class_micra_1_1_tools_1_1_mx_file_1a981e82d81bc65773d83f73922ec412d8" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>string</type>
+        <definition>static string Micra.Tools.MxFile.ResolveRelativePath</definition>
+        <argsstring>(string path)</argsstring>
+        <name>ResolveRelativePath</name>
+        <param>
+          <type>string</type>
+          <declname>path</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/MxFile.cs" line="13" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/MxFile.cs" bodystart="13" bodyend="23"/>
+        <references refid="class_micra_1_1_tools_1_1_mx_get_1a0761cffd8d672c543fd9dad7bb20071a" compoundref="_mx_get_8cs" startline="33">Micra.Tools.MxGet.Interface</references>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_tools_1_1_mx_file_1a950e364e45688fd9ff274f75a7e2ec6b" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>static void Micra.Tools.MxFile.SaveBitmap</definition>
+        <argsstring>(IBitmap bitmap, IGlobal global, string outputPath)</argsstring>
+        <name>SaveBitmap</name>
+        <param>
+          <type>IBitmap</type>
+          <declname>bitmap</declname>
+        </param>
+        <param>
+          <type>IGlobal</type>
+          <declname>global</declname>
+        </param>
+        <param>
+          <type>string</type>
+          <declname>outputPath</declname>
+        </param>
+        <briefdescription>
+<para>This function writing bitmap File </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>bitmap</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Bitmap properties</para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>global</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Your Global</para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>outputPath</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>File writing location</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/MxFile.cs" line="31" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/MxFile.cs" bodystart="31" bodyend="44"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_tools_1_1_mx_file_1a0b007e84bf9f0b91951fff0ad2df26ef" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>static void Micra.Tools.MxFile.LoadBitmap</definition>
+        <argsstring>(IGlobal global, string path)</argsstring>
+        <name>LoadBitmap</name>
+        <param>
+          <type>IGlobal</type>
+          <declname>global</declname>
+        </param>
+        <param>
+          <type>string</type>
+          <declname>path</declname>
+        </param>
+        <briefdescription>
+<para>This Function is loading textures. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>path</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>File Location</para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>global</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Your IGlobal param.</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/MxFile.cs" line="51" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/MxFile.cs" bodystart="51" bodyend="58"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_tools_1_1_mx_file_1a8ccb479c2c923c23ab1dcdc7a2299669" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>string</type>
+        <definition>static string Micra.Tools.MxFile.GetSolutionDirectory</definition>
+        <argsstring>(string currentPath=null)</argsstring>
+        <name>GetSolutionDirectory</name>
+        <param>
+          <type>string</type>
+          <declname>currentPath</declname>
+          <defval>null</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/MxFile.cs" line="60" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/MxFile.cs" bodystart="60" bodyend="67"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_tools_1_1_mx_file_1a6fe589e5e031761ea1cfa444e04b4deb" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>string</type>
+        <definition>static string Micra.Tools.MxFile.FbxExport</definition>
+        <argsstring>(string filePath)</argsstring>
+        <name>FbxExport</name>
+        <param>
+          <type>string</type>
+          <declname>filePath</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/MxFile.cs" line="71" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/MxFile.cs" bodystart="71" bodyend="77"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="package-static-func">
+      <memberdef kind="function" id="class_micra_1_1_tools_1_1_mx_file_1a30ff35a74a0f3403e545b805444eafd2" prot="package" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>XDocument</type>
+        <definition>static XDocument Micra.Tools.MxFile.GetXMLFromResources</definition>
+        <argsstring>(string xmlFname)</argsstring>
+        <name>GetXMLFromResources</name>
+        <param>
+          <type>string</type>
+          <declname>xmlFname</declname>
+        </param>
+        <briefdescription>
+<para>Read XML File from Resources  </para>        </briefdescription>
+        <detaileddescription>
+<para><computeroutput> example: XDocument MaxActionsXML = <ref refid="class_micra_1_1_tools_1_1_mx_file_1a30ff35a74a0f3403e545b805444eafd2" kindref="member">MxFile.GetXMLFromResources</ref>(&quot;MaxScriptActions.xml&quot;); </computeroutput> </para><para>param: <emphasis>xmlFname</emphasis>  is XML file name</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/MxFile.cs" line="89" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/MxFile.cs" bodystart="89" bodyend="95"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_tools_1_1_mx_file_1ac03fa95486c25945a56ceeb1a603c416" prot="package" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>string</type>
+        <definition>static string Micra.Tools.MxFile.GetMaxScriptFromXML</definition>
+        <argsstring>(XDocument xml, string xmlKey)</argsstring>
+        <name>GetMaxScriptFromXML</name>
+        <param>
+          <type>XDocument</type>
+          <declname>xml</declname>
+        </param>
+        <param>
+          <type>string</type>
+          <declname>xmlKey</declname>
+        </param>
+        <briefdescription>
+<para>Get MaxScript Command From XML by Name  </para>        </briefdescription>
+        <detaileddescription>
+<para><computeroutput> example: <ref refid="class_micra_1_1_tools_1_1_mx_file_1ac03fa95486c25945a56ceeb1a603c416" kindref="member">MxFile.GetMaxScriptFromXML</ref>(MaxActionsXML, &quot;SelFaces&quot;) </computeroutput> </para><para>param: <emphasis>xmlKey</emphasis>  is Command Name String</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/MxFile.cs" line="105" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/MxFile.cs" bodystart="105" bodyend="113"/>
+        <referencedby refid="class_micra_1_1_tools_1_1_csharp_to_max_test_1aa1711fef8c14652c5c5d5f8dbc023913" compoundref="_csharp_to_max_test_8cs" startline="394" endline="405">Micra.Tools.CsharpToMaxTest.OnCbxScriptListSelChanges</referencedby>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/MxFile.cs" line="11" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/MxFile.cs" bodystart="11" bodyend="114"/>
+    <listofallmembers>
+      <member refid="class_micra_1_1_tools_1_1_mx_file_1a6fe589e5e031761ea1cfa444e04b4deb" prot="public" virt="non-virtual"><scope>Micra::Tools::MxFile</scope><name>FbxExport</name></member>
+      <member refid="class_micra_1_1_tools_1_1_mx_file_1ac03fa95486c25945a56ceeb1a603c416" prot="package" virt="non-virtual"><scope>Micra::Tools::MxFile</scope><name>GetMaxScriptFromXML</name></member>
+      <member refid="class_micra_1_1_tools_1_1_mx_file_1a8ccb479c2c923c23ab1dcdc7a2299669" prot="public" virt="non-virtual"><scope>Micra::Tools::MxFile</scope><name>GetSolutionDirectory</name></member>
+      <member refid="class_micra_1_1_tools_1_1_mx_file_1a30ff35a74a0f3403e545b805444eafd2" prot="package" virt="non-virtual"><scope>Micra::Tools::MxFile</scope><name>GetXMLFromResources</name></member>
+      <member refid="class_micra_1_1_tools_1_1_mx_file_1a0b007e84bf9f0b91951fff0ad2df26ef" prot="public" virt="non-virtual"><scope>Micra::Tools::MxFile</scope><name>LoadBitmap</name></member>
+      <member refid="class_micra_1_1_tools_1_1_mx_file_1a981e82d81bc65773d83f73922ec412d8" prot="public" virt="non-virtual"><scope>Micra::Tools::MxFile</scope><name>ResolveRelativePath</name></member>
+      <member refid="class_micra_1_1_tools_1_1_mx_file_1a950e364e45688fd9ff274f75a7e2ec6b" prot="public" virt="non-virtual"><scope>Micra::Tools::MxFile</scope><name>SaveBitmap</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

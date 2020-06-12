@@ -1,0 +1,285 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
+  <compounddef id="class_micra_1_1_core_1_1_serializable_model" kind="class" prot="public">
+    <compoundname>Micra::Core::SerializableModel</compoundname>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="class_micra_1_1_core_1_1_serializable_model_1a6a0bd3f35dc9ef8b5165fd53ff2283bd" prot="public" static="no" mutable="no">
+        <type><ref refid="class_micra_1_1_core_1_1_mesh" kindref="compound">Mesh</ref></type>
+        <definition>Mesh Micra.Core.SerializableModel.mesh</definition>
+        <argsstring></argsstring>
+        <name>mesh</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/SerializableModel.cs" line="21" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/SerializableModel.cs" bodystart="21" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_micra_1_1_core_1_1_serializable_model_1a022f132e473523997c54fbdaa60f0706" prot="public" static="no" mutable="no">
+        <type>string</type>
+        <definition>string Micra.Core.SerializableModel.name</definition>
+        <argsstring></argsstring>
+        <name>name</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/SerializableModel.cs" line="22" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/SerializableModel.cs" bodystart="22" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_micra_1_1_core_1_1_serializable_model_1a28574290dcbef22dfcae0aff1c7e6d7a" prot="public" static="no" mutable="no">
+        <type><ref refid="class_micra_1_1_core_1_1_matrix3" kindref="compound">Matrix3</ref></type>
+        <definition>Matrix3 Micra.Core.SerializableModel.transform</definition>
+        <argsstring></argsstring>
+        <name>transform</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/SerializableModel.cs" line="23" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/SerializableModel.cs" bodystart="23" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_micra_1_1_core_1_1_serializable_model_1a1c44bae2023c8f360cd7955dee7b7dd8" prot="public" static="no" mutable="no">
+        <type>List&lt; <ref refid="class_micra_1_1_core_1_1_serializable_model" kindref="compound">SerializableModel</ref> &gt;</type>
+        <definition>List&lt;SerializableModel&gt; Micra.Core.SerializableModel.models</definition>
+        <argsstring></argsstring>
+        <name>models</name>
+        <initializer>= new List&lt;<ref refid="class_micra_1_1_core_1_1_serializable_model" kindref="compound">SerializableModel</ref>&gt;()</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/SerializableModel.cs" line="24" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/SerializableModel.cs" bodystart="24" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_micra_1_1_core_1_1_serializable_model_1a28b8ba7a3f8639f99b0612a4aec93530" prot="public" static="no" mutable="no">
+        <type>List&lt; <ref refid="class_micra_1_1_core_1_1_mesh" kindref="compound">Mesh</ref> &gt;</type>
+        <definition>List&lt;Mesh&gt; Micra.Core.SerializableModel.submeshes</definition>
+        <argsstring></argsstring>
+        <name>submeshes</name>
+        <initializer>= new List&lt;<ref refid="class_micra_1_1_core_1_1_mesh" kindref="compound">Mesh</ref>&gt;()</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/SerializableModel.cs" line="25" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/SerializableModel.cs" bodystart="25" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_micra_1_1_core_1_1_serializable_model_1a22dbfafe524016331913e7eb4e2e8ea3" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool Micra.Core.SerializableModel.bone</definition>
+        <argsstring></argsstring>
+        <name>bone</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/SerializableModel.cs" line="26" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/SerializableModel.cs" bodystart="26" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_micra_1_1_core_1_1_serializable_model_1a1db7afd3784883608b8ba4defd21d9e4" prot="public" static="no" mutable="no">
+        <type><ref refid="struct_micra_1_1_core_1_1_color" kindref="compound">Color</ref></type>
+        <definition>Color Micra.Core.SerializableModel.color</definition>
+        <argsstring></argsstring>
+        <name>color</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/SerializableModel.cs" line="27" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/SerializableModel.cs" bodystart="27" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_serializable_model_1abf102198bf515ec00325bf1d09945b48" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>Micra.Core.SerializableModel.SerializableModel</definition>
+        <argsstring>()</argsstring>
+        <name>SerializableModel</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/SerializableModel.cs" line="29" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/SerializableModel.cs" bodystart="29" bodyend="31"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_serializable_model_1afece69ddf70f14548cc050c9dea00e4d" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>Micra.Core.SerializableModel.SerializableModel</definition>
+        <argsstring>(Node node)</argsstring>
+        <name>SerializableModel</name>
+        <param>
+          <type><ref refid="class_micra_1_1_core_1_1_node" kindref="compound">Node</ref></type>
+          <declname>node</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/SerializableModel.cs" line="33" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/SerializableModel.cs" bodystart="33" bodyend="36"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_serializable_model_1a14f932c9a908c2ef6a6ce347dd20e2c9" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>Micra.Core.SerializableModel.SerializableModel</definition>
+        <argsstring>(Node node, TimeValue t)</argsstring>
+        <name>SerializableModel</name>
+        <param>
+          <type><ref refid="class_micra_1_1_core_1_1_node" kindref="compound">Node</ref></type>
+          <declname>node</declname>
+        </param>
+        <param>
+          <type><ref refid="struct_micra_1_1_core_1_1_time_value" kindref="compound">TimeValue</ref></type>
+          <declname>t</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/SerializableModel.cs" line="38" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/SerializableModel.cs" bodystart="38" bodyend="41"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_serializable_model_1a40370c8f22c29673a88e85c40fa20b22" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>Micra.Core.SerializableModel.SerializableModel</definition>
+        <argsstring>(Node node, TimeValue t, bool bMeshData)</argsstring>
+        <name>SerializableModel</name>
+        <param>
+          <type><ref refid="class_micra_1_1_core_1_1_node" kindref="compound">Node</ref></type>
+          <declname>node</declname>
+        </param>
+        <param>
+          <type><ref refid="struct_micra_1_1_core_1_1_time_value" kindref="compound">TimeValue</ref></type>
+          <declname>t</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>bMeshData</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/SerializableModel.cs" line="43" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/SerializableModel.cs" bodystart="43" bodyend="45"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_serializable_model_1ab6daf9127e9aac9e21ded9f1a9fe58ae" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>Micra.Core.SerializableModel.SerializableModel</definition>
+        <argsstring>(Node node, TimeValue t, bool bMeshData, bool bReferencedData)</argsstring>
+        <name>SerializableModel</name>
+        <param>
+          <type><ref refid="class_micra_1_1_core_1_1_node" kindref="compound">Node</ref></type>
+          <declname>node</declname>
+        </param>
+        <param>
+          <type><ref refid="struct_micra_1_1_core_1_1_time_value" kindref="compound">TimeValue</ref></type>
+          <declname>t</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>bMeshData</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>bReferencedData</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/SerializableModel.cs" line="47" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/SerializableModel.cs" bodystart="47" bodyend="61"/>
+        <references refid="class_micra_1_1_core_1_1_scene_object_1a27051dfb65cc90a6a854a35a01d3c083">Micra.Core.SceneObject.GetMesh</references>
+        <references refid="class_micra_1_1_core_1_1_node_1ae0b8ddd4231be767f51ca2672bee923b" compoundref="_node_8cs" startline="218">Micra.Core.Node.Nodes</references>
+        <references refid="class_micra_1_1_core_1_1_reference_maker_1a9a146243a9c16a1b81b31078267095af" compoundref="_reference_maker_and_target_8cs" startline="57">Micra.Core.ReferenceMaker.TargetTree</references>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Represents a simplfified representation of a model that can be easily serialzied. A model is created from a node and all of its children. </para>    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="566">
+        <label>Micra.Core.SerializableModel</label>
+        <link refid="class_micra_1_1_core_1_1_serializable_model"/>
+        <childnode refid="567" relation="usage">
+          <edgelabel>color</edgelabel>
+        </childnode>
+        <childnode refid="569" relation="usage">
+          <edgelabel>mesh</edgelabel>
+        </childnode>
+        <childnode refid="572" relation="usage">
+          <edgelabel>transform</edgelabel>
+        </childnode>
+      </node>
+      <node id="569">
+        <label>Micra.Core.Mesh</label>
+        <link refid="class_micra_1_1_core_1_1_mesh"/>
+        <childnode refid="570" relation="usage">
+          <edgelabel>verts</edgelabel>
+          <edgelabel>vnormals</edgelabel>
+          <edgelabel>fnormals</edgelabel>
+          <edgelabel>tverts</edgelabel>
+        </childnode>
+        <childnode refid="571" relation="usage">
+          <edgelabel>tfaces</edgelabel>
+          <edgelabel>faces</edgelabel>
+        </childnode>
+      </node>
+      <node id="567">
+        <label>Micra.Core.Color</label>
+        <link refid="struct_micra_1_1_core_1_1_color"/>
+        <childnode refid="568" relation="usage">
+          <edgelabel>MaxColor</edgelabel>
+          <edgelabel>MinColor</edgelabel>
+        </childnode>
+      </node>
+      <node id="572">
+        <label>Micra.Core.Matrix3</label>
+        <link refid="class_micra_1_1_core_1_1_matrix3"/>
+        <childnode refid="570" relation="usage">
+          <edgelabel>rows</edgelabel>
+        </childnode>
+      </node>
+      <node id="571">
+        <label>Micra.Core.Mesh.Face</label>
+        <link refid="struct_micra_1_1_core_1_1_mesh_1_1_face"/>
+      </node>
+      <node id="570">
+        <label>Micra.Core.Point3</label>
+        <link refid="class_micra_1_1_core_1_1_point3"/>
+      </node>
+      <node id="568">
+        <label>static</label>
+      </node>
+    </collaborationgraph>
+    <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/SerializableModel.cs" line="20" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/SerializableModel.cs" bodystart="19" bodyend="62"/>
+    <listofallmembers>
+      <member refid="class_micra_1_1_core_1_1_serializable_model_1a22dbfafe524016331913e7eb4e2e8ea3" prot="public" virt="non-virtual"><scope>Micra::Core::SerializableModel</scope><name>bone</name></member>
+      <member refid="class_micra_1_1_core_1_1_serializable_model_1a1db7afd3784883608b8ba4defd21d9e4" prot="public" virt="non-virtual"><scope>Micra::Core::SerializableModel</scope><name>color</name></member>
+      <member refid="class_micra_1_1_core_1_1_serializable_model_1a6a0bd3f35dc9ef8b5165fd53ff2283bd" prot="public" virt="non-virtual"><scope>Micra::Core::SerializableModel</scope><name>mesh</name></member>
+      <member refid="class_micra_1_1_core_1_1_serializable_model_1a1c44bae2023c8f360cd7955dee7b7dd8" prot="public" virt="non-virtual"><scope>Micra::Core::SerializableModel</scope><name>models</name></member>
+      <member refid="class_micra_1_1_core_1_1_serializable_model_1a022f132e473523997c54fbdaa60f0706" prot="public" virt="non-virtual"><scope>Micra::Core::SerializableModel</scope><name>name</name></member>
+      <member refid="class_micra_1_1_core_1_1_serializable_model_1abf102198bf515ec00325bf1d09945b48" prot="public" virt="non-virtual"><scope>Micra::Core::SerializableModel</scope><name>SerializableModel</name></member>
+      <member refid="class_micra_1_1_core_1_1_serializable_model_1afece69ddf70f14548cc050c9dea00e4d" prot="public" virt="non-virtual"><scope>Micra::Core::SerializableModel</scope><name>SerializableModel</name></member>
+      <member refid="class_micra_1_1_core_1_1_serializable_model_1a14f932c9a908c2ef6a6ce347dd20e2c9" prot="public" virt="non-virtual"><scope>Micra::Core::SerializableModel</scope><name>SerializableModel</name></member>
+      <member refid="class_micra_1_1_core_1_1_serializable_model_1a40370c8f22c29673a88e85c40fa20b22" prot="public" virt="non-virtual"><scope>Micra::Core::SerializableModel</scope><name>SerializableModel</name></member>
+      <member refid="class_micra_1_1_core_1_1_serializable_model_1ab6daf9127e9aac9e21ded9f1a9fe58ae" prot="public" virt="non-virtual"><scope>Micra::Core::SerializableModel</scope><name>SerializableModel</name></member>
+      <member refid="class_micra_1_1_core_1_1_serializable_model_1a28b8ba7a3f8639f99b0612a4aec93530" prot="public" virt="non-virtual"><scope>Micra::Core::SerializableModel</scope><name>submeshes</name></member>
+      <member refid="class_micra_1_1_core_1_1_serializable_model_1a28574290dcbef22dfcae0aff1c7e6d7a" prot="public" virt="non-virtual"><scope>Micra::Core::SerializableModel</scope><name>transform</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

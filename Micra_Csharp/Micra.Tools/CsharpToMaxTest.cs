@@ -41,6 +41,35 @@ namespace Micra.Tools {
             CbxScriptList.SelectedIndex = 0;
         }
 
+        #region Execute Max Script
+
+        private void BtnExecute_Click(object sender, EventArgs e) {
+            Kernel.WriteLine(( sender as Button ).Text);
+            Kernel.ExecuteMaxScriptScript(textBox1.Text);
+        }
+        private void BtnClearExecute_Click(object sender, EventArgs e) {
+            textBox1.Text = "";
+        }
+
+        /// <summary> Load Max String Commands in to TextBox</summary>
+        private void OnCbxScriptListSelChanges(object sender, EventArgs e) {
+            string cmd = Switch.On(CbxScriptList.Text)
+                .Case("SelFaces").Then(MxFile.GetMaxScriptFromXML(MaxActionsXML, "SelFaces"))
+                .Case("SelEdges").Then(MxFile.GetMaxScriptFromXML(MaxActionsXML, "SelEdges"))
+                .Case("SelVerts").Then(MxFile.GetMaxScriptFromXML(MaxActionsXML, "SelVerts"))
+                .Case("3Boxes").Then(MxFile.GetMaxScriptFromXML(MaxActionsXML, "3Boxes"))
+                .Case("Render").Then("Render()")
+                .Case("GetFaceArea").Then(MxFile.GetMaxScriptFromXML(MaxActionsXML, "GetFaceArea"))
+                .Case("GetObjectArea").Then(MxFile.GetMaxScriptFromXML(MaxActionsXML, "GetObjectArea"))
+                .Default("");
+            textBox1.Text = cmd.Replace("\n", Environment.NewLine);
+        }
+
+        #endregion
+
+        #region UI Events
+
+
         private void OnTextAreaLostFocus(object sender, EventArgs e) {
             MxSet.SetAccelerators(true);
         }
@@ -48,6 +77,8 @@ namespace Micra.Tools {
         private void OnTextAreaGotFocus(object sender, EventArgs e) {
             MxSet.SetAccelerators(false);
         }
+
+        #endregion
 
         private void Button1_Click(object sender, EventArgs e) {
 
@@ -196,7 +227,7 @@ namespace Micra.Tools {
             Node node = ObjOps.GetFirstSlectedNode();
             Kernel.WriteLine("selected Node:{0} subObjectLevel:{1}", node.Name, Kernel._Interface.SubObjectLevel);
             List<int> fsel = node.Object.GetSelectedFaces();
-            Kernel.WriteLine("selected Faces:{0} #({1})", fsel.Count, String.Join(",", fsel));
+            Kernel.WriteLine("selected Faces:{0} #({1}) -- +1 in Max", fsel.Count, String.Join(",", fsel));
         }
 
         private void BtnGetSelEdges_Click(object sender, EventArgs e) {
@@ -204,7 +235,7 @@ namespace Micra.Tools {
             Node node = ObjOps.GetFirstSlectedNode();
             Kernel.WriteLine("selected Node:{0} subObjectLevel:{1}", node.Name, Kernel._Interface.SubObjectLevel);
             var esel = node.Object.GetSelectedEdges();
-            Kernel.WriteLine("selected Edges:{0} #({1})", esel.Count, String.Join(",", esel));
+            Kernel.WriteLine("selected Edges:{0} #({1}) -- +1 in Max", esel.Count, String.Join(",", esel));
         }
 
         private void BtnGetSelVetts_Click(object sender, EventArgs e) {
@@ -212,19 +243,19 @@ namespace Micra.Tools {
             Node node = ObjOps.GetFirstSlectedNode();
             Kernel.WriteLine("selected Node:{0} subObjectLevel:{1}", node.Name, Kernel._Interface.SubObjectLevel);
             var vsel = node.Object.GetSelectedVerts();
-            Kernel.WriteLine("selected Verts:{0} #({1})", vsel.Count, String.Join(",", vsel));
+            Kernel.WriteLine("selected Verts:{0} #({1}) -- +1 in Max", vsel.Count, String.Join(",", vsel));
         }
 
         private void BtnHideUnselFaces_Click(object sender, EventArgs e) {
             Kernel.WriteLine(( sender as Button ).Text);
             Node node = ObjOps.GetFirstSlectedNode();
-            if ( node != null ) { GeoOps.HideGeometry(node, ChkSelected.Checked); }
+            if ( node != null ) { node.Object.HideGeometry(ChkSelected.Checked); }
         }
 
         private void BtnUnhideGeometry_Click(object sender, EventArgs e) {
             Kernel.WriteLine(( sender as Button ).Text);
             Node node = ObjOps.GetFirstSlectedNode();
-            if ( node != null ) { GeoOps.UnhideGeometry(node); }
+            if ( node != null ) { node.Object.UnhideGeometry(); }
         }
 
         private void BtnGetSceneObjects_Click(object sender, EventArgs e) {
@@ -354,54 +385,37 @@ namespace Micra.Tools {
         private void BtnGetObjArea_Click(object sender, EventArgs e) {
             Kernel.WriteLine(( sender as Button ).Text);
             Node node = ObjOps.GetFirstSlectedNode();
-            double area = GeoOps.GetObjectArea(node);
+            double area = node.Object.GetArea();
             Kernel.WriteLine("Object:{0} Class:{1} Area:{2}", node.Name, node.ClassOf(), area);
         }
 
         private void BtnGetFaceArea_Click(object sender, EventArgs e) {
             Kernel.WriteLine(( sender as Button ).Text);
             Node node = ObjOps.GetFirstSlectedNode();
-            if ( node.IsClassOf(ClassID.EditablePoly) ) {
+            var fsel = node.Object.GetSelectedFaces();
+            fsel.ForEach(f => {
 
-                Poly poly = node.GetPoly();
-                var fsel = node.Object.GetSelectedFaces();
-                fsel.ForEach(f => {
-
-                    double area = GeoOps.GetFaceArea(poly, poly.ngons[f]);
-                    Kernel.WriteLine("Face:{0} Area:{1}", f, area);
-                });
-            } else if ( node.IsClassOf(ClassID.EditableMesh) ) {
-
-                Mesh mesh = node.GetMesh();
-                var fsel = node.Object.GetSelectedFaces();
-                fsel.ForEach(f => {
-
-                    double area = GeoOps.GetFaceArea(mesh, mesh.faces[f]);
-                    Kernel.WriteLine("Face:{0} Area:{1}", f, area);
-                });
-            }
+                double area = node.Object.GetFaceArea(f);
+                Kernel.WriteLine("Face:{0} Area:{1}", f, area);
+            });
         }
 
-        private void BtnExecute_Click(object sender, EventArgs e) {
+
+
+        private void ChkSelected_CheckedChanged(object sender, EventArgs e) {
+
+        }
+
+        private void BtnSelFacesOtToTri_Click(object sender, EventArgs e) {
             Kernel.WriteLine(( sender as Button ).Text);
-            Kernel.ExecuteMaxScriptScript(textBox1.Text);
-        }
-        private void BtnClearExecute_Click(object sender, EventArgs e) {
-            textBox1.Text = "";
-        }
+            Node node = ObjOps.GetFirstSlectedNode();
+            Poly poly = node.GetPoly();
+            var fsel = node.Object.GetSelectedFaces();
+            fsel.ForEach(f => {
 
-        /// <summary> Load Max String Commands in to TextBox</summary>
-        private void OnCbxScriptListSelChanges(object sender, EventArgs e) {
-            string cmd = Switch.On(CbxScriptList.Text)
-                .Case("SelFaces").Then(MxFile.GetMaxScriptFromXML(MaxActionsXML, "SelFaces"))
-                .Case("SelEdges").Then(MxFile.GetMaxScriptFromXML(MaxActionsXML, "SelEdges"))
-                .Case("SelVerts").Then(MxFile.GetMaxScriptFromXML(MaxActionsXML, "SelVerts"))
-                .Case("3Boxes").Then(MxFile.GetMaxScriptFromXML(MaxActionsXML, "3Boxes"))
-                .Case("Render").Then("Render()")
-                .Case("GetFaceArea").Then(MxFile.GetMaxScriptFromXML(MaxActionsXML, "GetFaceArea"))
-                .Case("GetObjectArea").Then(MxFile.GetMaxScriptFromXML(MaxActionsXML, "GetObjectArea"))
-                .Default("");
-            textBox1.Text = cmd.Replace("\n", Environment.NewLine);
+                double area = poly.GtiTrifaceArea(f);
+                Kernel.WriteLine("Face:{0} Area:{1}", f, area);
+            });
         }
     }
 }

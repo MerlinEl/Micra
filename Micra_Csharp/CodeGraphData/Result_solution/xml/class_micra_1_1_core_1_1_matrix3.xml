@@ -1,0 +1,289 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
+  <compounddef id="class_micra_1_1_core_1_1_matrix3" kind="class" prot="public">
+    <compoundname>Micra::Core::Matrix3</compoundname>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="class_micra_1_1_core_1_1_matrix3_1ab75a6849479c0c4e4899a52ab79faaa5" prot="public" static="no" mutable="no">
+        <type><ref refid="class_micra_1_1_core_1_1_point3" kindref="compound">Point3</ref>[]</type>
+        <definition>Point3 [] Micra.Core.Matrix3.rows</definition>
+        <argsstring></argsstring>
+        <name>rows</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Matrix3.cs" line="17" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Matrix3.cs" bodystart="17" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="property">
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_matrix3_1a10a2aa57e31796e4efb0419be98b675e" prot="public" static="yes" readable="no" writable="no" gettable="yes" settable="no">
+        <type><ref refid="class_micra_1_1_core_1_1_matrix3" kindref="compound">Matrix3</ref></type>
+        <definition>Matrix3 Micra.Core.Matrix3.Identity</definition>
+        <argsstring></argsstring>
+        <name>Identity</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Matrix3.cs" line="42" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Matrix3.cs" bodystart="42" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_matrix3_1a6642f580b1bbb0d77b081d2eddf261e3" prot="public" static="yes" readable="no" writable="no" gettable="yes" settable="no">
+        <type><ref refid="class_micra_1_1_core_1_1_matrix3" kindref="compound">Matrix3</ref></type>
+        <definition>Matrix3 Micra.Core.Matrix3.Origin</definition>
+        <argsstring></argsstring>
+        <name>Origin</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Matrix3.cs" line="43" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Matrix3.cs" bodystart="43" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_matrix3_1a03aece1f2a9ccae86839abb8451a07fb" prot="public" static="no" readable="no" writable="no" gettable="yes" settable="yes">
+        <type><ref refid="class_micra_1_1_core_1_1_point3" kindref="compound">Point3</ref></type>
+        <definition>Point3 Micra.Core.Matrix3.this[int i]</definition>
+        <argsstring></argsstring>
+        <name>this[int i]</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Matrix3.cs" line="50" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Matrix3.cs" bodystart="50" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_matrix3_1ad3a052cf782b4e948d54574d2d992fb9" prot="public" static="no" readable="no" writable="no" gettable="yes" settable="no">
+        <type>IMatrix3</type>
+        <definition>IMatrix3 Micra.Core.Matrix3._IMatrix3</definition>
+        <argsstring></argsstring>
+        <name>_IMatrix3</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Matrix3.cs" line="104" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Matrix3.cs" bodystart="104" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_matrix3_1afe42909355bea63c797370c3d421797d" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>Micra.Core.Matrix3.Matrix3</definition>
+        <argsstring>()</argsstring>
+        <name>Matrix3</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Matrix3.cs" line="19" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Matrix3.cs" bodystart="19" bodyend="25"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_matrix3_1aa28de472566a361120d848f75a9f6145" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>Micra.Core.Matrix3.Matrix3</definition>
+        <argsstring>(IMatrix3 x)</argsstring>
+        <name>Matrix3</name>
+        <param>
+          <type>IMatrix3</type>
+          <declname>x</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Matrix3.cs" line="27" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Matrix3.cs" bodystart="27" bodyend="28"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_matrix3_1accba488c26d349a1a7a0307d79bf2df2" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>Micra.Core.Matrix3.Matrix3</definition>
+        <argsstring>(Point3 r0, Point3 r1, Point3 r2, Point3 r3)</argsstring>
+        <name>Matrix3</name>
+        <param>
+          <type><ref refid="class_micra_1_1_core_1_1_point3" kindref="compound">Point3</ref></type>
+          <declname>r0</declname>
+        </param>
+        <param>
+          <type><ref refid="class_micra_1_1_core_1_1_point3" kindref="compound">Point3</ref></type>
+          <declname>r1</declname>
+        </param>
+        <param>
+          <type><ref refid="class_micra_1_1_core_1_1_point3" kindref="compound">Point3</ref></type>
+          <declname>r2</declname>
+        </param>
+        <param>
+          <type><ref refid="class_micra_1_1_core_1_1_point3" kindref="compound">Point3</ref></type>
+          <declname>r3</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Matrix3.cs" line="30" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Matrix3.cs" bodystart="30" bodyend="36"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_matrix3_1a2a15c906a200abd8a713e6d64b5028a6" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>Micra.Core.Matrix3.Matrix3</definition>
+        <argsstring>(Point3 r0, Point3 r1, Point3 r2)</argsstring>
+        <name>Matrix3</name>
+        <param>
+          <type><ref refid="class_micra_1_1_core_1_1_point3" kindref="compound">Point3</ref></type>
+          <declname>r0</declname>
+        </param>
+        <param>
+          <type><ref refid="class_micra_1_1_core_1_1_point3" kindref="compound">Point3</ref></type>
+          <declname>r1</declname>
+        </param>
+        <param>
+          <type><ref refid="class_micra_1_1_core_1_1_point3" kindref="compound">Point3</ref></type>
+          <declname>r2</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Matrix3.cs" line="38" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Matrix3.cs" bodystart="38" bodyend="40"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_matrix3_1a998465ca8a768989e7525fd28b33ff7b" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="class_micra_1_1_core_1_1_matrix3" kindref="compound">Matrix3</ref></type>
+        <definition>Matrix3 Micra.Core.Matrix3.Invert</definition>
+        <argsstring>()</argsstring>
+        <name>Invert</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Matrix3.cs" line="91" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Matrix3.cs" bodystart="91" bodyend="97"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_matrix3_1a3ab7e51830aa7bddb4374a1296a9444c" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="class_micra_1_1_core_1_1_matrix3" kindref="compound">Matrix3</ref></type>
+        <definition>Matrix3 Micra.Core.Matrix3.Translate</definition>
+        <argsstring>(Point3 p)</argsstring>
+        <name>Translate</name>
+        <param>
+          <type><ref refid="class_micra_1_1_core_1_1_point3" kindref="compound">Point3</ref></type>
+          <declname>p</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Matrix3.cs" line="99" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Matrix3.cs" bodystart="99" bodyend="102"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_matrix3_1a1e5a6edd6dcd211f66207e7a032e4043" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="class_micra_1_1_core_1_1_matrix3" kindref="compound">Matrix3</ref></type>
+        <definition>static Matrix3 Micra.Core.Matrix3.Translation</definition>
+        <argsstring>(Point3 p)</argsstring>
+        <name>Translation</name>
+        <param>
+          <type><ref refid="class_micra_1_1_core_1_1_point3" kindref="compound">Point3</ref></type>
+          <declname>p</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Matrix3.cs" line="45" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Matrix3.cs" bodystart="45" bodyend="47"/>
+        <references refid="class_micra_1_1_core_1_1_point3_1a5d59ac1c8ad78e54440274373f7d7762" compoundref="_point3_8cs" startline="26">Micra.Core.Point3.XAxis</references>
+        <references refid="class_micra_1_1_core_1_1_point3_1a27f31cacd3bf19d2f6fa09e7ff16ea12" compoundref="_point3_8cs" startline="27">Micra.Core.Point3.YAxis</references>
+        <references refid="class_micra_1_1_core_1_1_point3_1af7d87f97e8048b8838cb8821157f9389" compoundref="_point3_8cs" startline="28">Micra.Core.Point3.ZAxis</references>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_matrix3_1a06e563674a32640e832dcf3eb8f4c153" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="class_micra_1_1_core_1_1_point3" kindref="compound">Point3</ref></type>
+        <definition>static Point3 Micra.Core.Matrix3.operator*</definition>
+        <argsstring>(Point3 lhs, Matrix3 rhs)</argsstring>
+        <name>operator*</name>
+        <param>
+          <type><ref refid="class_micra_1_1_core_1_1_point3" kindref="compound">Point3</ref></type>
+          <declname>lhs</declname>
+        </param>
+        <param>
+          <type><ref refid="class_micra_1_1_core_1_1_matrix3" kindref="compound">Matrix3</ref></type>
+          <declname>rhs</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Matrix3.cs" line="60" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Matrix3.cs" bodystart="60" bodyend="67"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_matrix3_1acce3f2c7956a56d546da729d05a08b8d" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="class_micra_1_1_core_1_1_matrix3" kindref="compound">Matrix3</ref></type>
+        <definition>static Matrix3 Micra.Core.Matrix3.operator*</definition>
+        <argsstring>(Matrix3 lhs, Matrix3 rhs)</argsstring>
+        <name>operator*</name>
+        <param>
+          <type><ref refid="class_micra_1_1_core_1_1_matrix3" kindref="compound">Matrix3</ref></type>
+          <declname>lhs</declname>
+        </param>
+        <param>
+          <type><ref refid="class_micra_1_1_core_1_1_matrix3" kindref="compound">Matrix3</ref></type>
+          <declname>rhs</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Matrix3.cs" line="70" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Matrix3.cs" bodystart="70" bodyend="89"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Represents a transform matrix as four rows of <ref refid="class_micra_1_1_core_1_1_point3" kindref="compound">Point3</ref>. </para>    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="217">
+        <label>Micra.Core.Matrix3</label>
+        <link refid="class_micra_1_1_core_1_1_matrix3"/>
+        <childnode refid="218" relation="usage">
+          <edgelabel>rows</edgelabel>
+        </childnode>
+      </node>
+      <node id="218">
+        <label>Micra.Core.Point3</label>
+        <link refid="class_micra_1_1_core_1_1_point3"/>
+      </node>
+    </collaborationgraph>
+    <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Matrix3.cs" line="16" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Matrix3.cs" bodystart="16" bodyend="109"/>
+    <listofallmembers>
+      <member refid="class_micra_1_1_core_1_1_matrix3_1ad3a052cf782b4e948d54574d2d992fb9" prot="public" virt="non-virtual"><scope>Micra::Core::Matrix3</scope><name>_IMatrix3</name></member>
+      <member refid="class_micra_1_1_core_1_1_matrix3_1a10a2aa57e31796e4efb0419be98b675e" prot="public" virt="non-virtual"><scope>Micra::Core::Matrix3</scope><name>Identity</name></member>
+      <member refid="class_micra_1_1_core_1_1_matrix3_1a998465ca8a768989e7525fd28b33ff7b" prot="public" virt="non-virtual"><scope>Micra::Core::Matrix3</scope><name>Invert</name></member>
+      <member refid="class_micra_1_1_core_1_1_matrix3_1afe42909355bea63c797370c3d421797d" prot="public" virt="non-virtual"><scope>Micra::Core::Matrix3</scope><name>Matrix3</name></member>
+      <member refid="class_micra_1_1_core_1_1_matrix3_1aa28de472566a361120d848f75a9f6145" prot="public" virt="non-virtual"><scope>Micra::Core::Matrix3</scope><name>Matrix3</name></member>
+      <member refid="class_micra_1_1_core_1_1_matrix3_1accba488c26d349a1a7a0307d79bf2df2" prot="public" virt="non-virtual"><scope>Micra::Core::Matrix3</scope><name>Matrix3</name></member>
+      <member refid="class_micra_1_1_core_1_1_matrix3_1a2a15c906a200abd8a713e6d64b5028a6" prot="public" virt="non-virtual"><scope>Micra::Core::Matrix3</scope><name>Matrix3</name></member>
+      <member refid="class_micra_1_1_core_1_1_matrix3_1a06e563674a32640e832dcf3eb8f4c153" prot="public" virt="non-virtual"><scope>Micra::Core::Matrix3</scope><name>operator*</name></member>
+      <member refid="class_micra_1_1_core_1_1_matrix3_1acce3f2c7956a56d546da729d05a08b8d" prot="public" virt="non-virtual"><scope>Micra::Core::Matrix3</scope><name>operator*</name></member>
+      <member refid="class_micra_1_1_core_1_1_matrix3_1a6642f580b1bbb0d77b081d2eddf261e3" prot="public" virt="non-virtual"><scope>Micra::Core::Matrix3</scope><name>Origin</name></member>
+      <member refid="class_micra_1_1_core_1_1_matrix3_1ab75a6849479c0c4e4899a52ab79faaa5" prot="public" virt="non-virtual"><scope>Micra::Core::Matrix3</scope><name>rows</name></member>
+      <member refid="class_micra_1_1_core_1_1_matrix3_1a03aece1f2a9ccae86839abb8451a07fb" prot="public" virt="non-virtual"><scope>Micra::Core::Matrix3</scope><name>this[int i]</name></member>
+      <member refid="class_micra_1_1_core_1_1_matrix3_1a3ab7e51830aa7bddb4374a1296a9444c" prot="public" virt="non-virtual"><scope>Micra::Core::Matrix3</scope><name>Translate</name></member>
+      <member refid="class_micra_1_1_core_1_1_matrix3_1a1e5a6edd6dcd211f66207e7a032e4043" prot="public" virt="non-virtual"><scope>Micra::Core::Matrix3</scope><name>Translation</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

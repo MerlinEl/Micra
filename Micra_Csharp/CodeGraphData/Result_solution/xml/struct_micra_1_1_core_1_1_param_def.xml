@@ -1,0 +1,49 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
+  <compounddef id="struct_micra_1_1_core_1_1_param_def" kind="struct" prot="package">
+    <compoundname>Micra::Core::ParamDef</compoundname>
+      <sectiondef kind="package-attrib">
+      <memberdef kind="variable" id="struct_micra_1_1_core_1_1_param_def_1a9075056b97cde0d84505bc246e324415" prot="package" static="no" mutable="no">
+        <type>IParamDef</type>
+        <definition>IParamDef Micra.Core.ParamDef.def</definition>
+        <argsstring></argsstring>
+        <name>def</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/ParameterBlock2.cs" line="55" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/ParameterBlock2.cs" bodystart="55" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="package-func">
+      <memberdef kind="function" id="struct_micra_1_1_core_1_1_param_def_1aa6fde033d67521c0e63ade40edc95890" prot="package" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>Micra.Core.ParamDef.ParamDef</definition>
+        <argsstring>(IParamDef def)</argsstring>
+        <name>ParamDef</name>
+        <param>
+          <type>IParamDef</type>
+          <declname>def</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/ParameterBlock2.cs" line="56" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/ParameterBlock2.cs" bodystart="56" bodyend="56"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Wraps a <ref refid="struct_micra_1_1_core_1_1_param_def" kindref="compound">ParamDef</ref> struct. </para>    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/ParameterBlock2.cs" line="54" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/ParameterBlock2.cs" bodystart="53" bodyend="57"/>
+    <listofallmembers>
+      <member refid="struct_micra_1_1_core_1_1_param_def_1a9075056b97cde0d84505bc246e324415" prot="package" virt="non-virtual"><scope>Micra::Core::ParamDef</scope><name>def</name></member>
+      <member refid="struct_micra_1_1_core_1_1_param_def_1aa6fde033d67521c0e63ade40edc95890" prot="package" virt="non-virtual"><scope>Micra::Core::ParamDef</scope><name>ParamDef</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

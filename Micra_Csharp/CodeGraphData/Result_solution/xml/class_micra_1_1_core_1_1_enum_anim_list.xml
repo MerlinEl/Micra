@@ -1,0 +1,136 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
+  <compounddef id="class_micra_1_1_core_1_1_enum_anim_list" kind="class" prot="package">
+    <compoundname>Micra::Core::EnumAnimList</compoundname>
+    <basecompoundref prot="public" virt="non-virtual">IEnumAnimList</basecompoundref>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="class_micra_1_1_core_1_1_enum_anim_list_1a7077e3f97cdfe968222f49bf44d84861" prot="public" static="no" mutable="no">
+        <type>List&lt; <ref refid="class_micra_1_1_core_1_1_animatable" kindref="compound">Animatable</ref> &gt;</type>
+        <definition>List&lt;Animatable&gt; Micra.Core.EnumAnimList.animatables</definition>
+        <argsstring></argsstring>
+        <name>animatables</name>
+        <initializer>= new List&lt;<ref refid="class_micra_1_1_core_1_1_animatable" kindref="compound">Animatable</ref>&gt;()</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Animatable.cs" line="17" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Animatable.cs" bodystart="17" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_micra_1_1_core_1_1_enum_anim_list_1acd4c4b1eb79693a960e8c66bad446796" prot="public" static="no" mutable="no">
+        <type>IntPtr</type>
+        <definition>IntPtr Micra.Core.EnumAnimList.NativePointer</definition>
+        <argsstring></argsstring>
+        <name>NativePointer</name>
+        <initializer>=&gt; throw new NotImplementedException()</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Animatable.cs" line="38" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Animatable.cs" bodystart="38" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="property">
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_enum_anim_list_1a0df153c00b098c3baad35d0c346eb551" prot="public" static="no" readable="no" writable="no" gettable="yes" settable="no">
+        <type>IntPtr</type>
+        <definition>IntPtr Micra.Core.EnumAnimList.Handle</definition>
+        <argsstring></argsstring>
+        <name>Handle</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Animatable.cs" line="36" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Animatable.cs" bodystart="36" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_enum_anim_list_1a065abaae8b8e67a485547823c5659289" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool Micra.Core.EnumAnimList.Proc</definition>
+        <argsstring>(IAnimatable theAnim)</argsstring>
+        <name>Proc</name>
+        <param>
+          <type>IAnimatable</type>
+          <declname>theAnim</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Animatable.cs" line="20" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Animatable.cs" bodystart="20" bodyend="23"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_enum_anim_list_1a150b3e7f3631291760abbbc4429480bc" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool Micra.Core.EnumAnimList.Equals</definition>
+        <argsstring>(Autodesk.Max.Animatable.IEnumAnimList other)</argsstring>
+        <name>Equals</name>
+        <param>
+          <type>Autodesk.Max.Animatable.IEnumAnimList</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Animatable.cs" line="27" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Animatable.cs" bodystart="27" bodyend="29"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_enum_anim_list_1a7bfe9ff8b8ea831bc428df65db17bf29" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Micra.Core.EnumAnimList.Dispose</definition>
+        <argsstring>()</argsstring>
+        <name>Dispose</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Animatable.cs" line="33" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Animatable.cs" bodystart="33" bodyend="33"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Used internally to create a list of all animatables in a scene. </para>    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="119">
+        <label>Micra.Core.EnumAnimList</label>
+        <link refid="class_micra_1_1_core_1_1_enum_anim_list"/>
+        <childnode refid="120" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="120">
+        <label>Autodesk::Max::Animatable::IEnumAnimList</label>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="121">
+        <label>Micra.Core.EnumAnimList</label>
+        <link refid="class_micra_1_1_core_1_1_enum_anim_list"/>
+        <childnode refid="122" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="122">
+        <label>Autodesk::Max::Animatable::IEnumAnimList</label>
+      </node>
+    </collaborationgraph>
+    <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Animatable.cs" line="16" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Animatable.cs" bodystart="16" bodyend="39"/>
+    <listofallmembers>
+      <member refid="class_micra_1_1_core_1_1_enum_anim_list_1a7077e3f97cdfe968222f49bf44d84861" prot="public" virt="non-virtual"><scope>Micra::Core::EnumAnimList</scope><name>animatables</name></member>
+      <member refid="class_micra_1_1_core_1_1_enum_anim_list_1a7bfe9ff8b8ea831bc428df65db17bf29" prot="public" virt="non-virtual"><scope>Micra::Core::EnumAnimList</scope><name>Dispose</name></member>
+      <member refid="class_micra_1_1_core_1_1_enum_anim_list_1a150b3e7f3631291760abbbc4429480bc" prot="public" virt="non-virtual"><scope>Micra::Core::EnumAnimList</scope><name>Equals</name></member>
+      <member refid="class_micra_1_1_core_1_1_enum_anim_list_1a0df153c00b098c3baad35d0c346eb551" prot="public" virt="non-virtual"><scope>Micra::Core::EnumAnimList</scope><name>Handle</name></member>
+      <member refid="class_micra_1_1_core_1_1_enum_anim_list_1acd4c4b1eb79693a960e8c66bad446796" prot="public" virt="non-virtual"><scope>Micra::Core::EnumAnimList</scope><name>NativePointer</name></member>
+      <member refid="class_micra_1_1_core_1_1_enum_anim_list_1a065abaae8b8e67a485547823c5659289" prot="public" virt="non-virtual"><scope>Micra::Core::EnumAnimList</scope><name>Proc</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

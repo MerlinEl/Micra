@@ -1,0 +1,976 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
+  <compounddef id="class_micra_1_1_core_1_1_light" kind="class" prot="public">
+    <compoundname>Micra::Core::Light</compoundname>
+    <basecompoundref refid="class_micra_1_1_core_1_1_scene_object" prot="public" virt="non-virtual">Micra.Core.SceneObject</basecompoundref>
+      <sectiondef kind="property">
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_light_1a3e9a94818cb070c7afcea3de01e58be3" prot="public" static="no" readable="no" writable="no" gettable="yes" settable="no">
+        <type>ILightObject</type>
+        <definition>ILightObject Micra.Core.Light._Light</definition>
+        <argsstring></argsstring>
+        <name>_Light</name>
+        <briefdescription>
+<para>Returns the corresponding wrapped object from the Autodesk.Max layer. This is only used if the APIs of Autodesk.Max layer are required. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Light.cs" line="28" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Light.cs" bodystart="28" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_light_1ab3c1c64b939bf8f936c7674c13bdb215" prot="public" static="no" readable="no" writable="no" gettable="yes" settable="yes">
+        <type>int</type>
+        <definition>int Micra.Core.Light.AbsoluteMapBias</definition>
+        <argsstring></argsstring>
+        <name>AbsoluteMapBias</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Light.cs" line="30" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Light.cs" bodystart="31" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_light_1a0ba2091d0f60fb8ce2b869150c06ad46" prot="public" static="no" readable="no" writable="no" gettable="yes" settable="yes">
+        <type>bool</type>
+        <definition>bool Micra.Core.Light.DisplayAttenuation</definition>
+        <argsstring></argsstring>
+        <name>DisplayAttenuation</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Light.cs" line="42" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Light.cs" bodystart="43" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_light_1a3e41e84baf4be3dd931f5f2b3dfb0154" prot="public" static="no" readable="no" writable="no" gettable="yes" settable="no">
+        <type>bool</type>
+        <definition>bool Micra.Core.Light.DisplayCone</definition>
+        <argsstring></argsstring>
+        <name>DisplayCone</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Light.cs" line="48" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Light.cs" bodystart="49" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_light_1a10e69223652ba261dd7e996a031d4f0a" prot="public" static="no" readable="no" writable="no" gettable="yes" settable="no">
+        <type>bool</type>
+        <definition>bool Micra.Core.Light.Include</definition>
+        <argsstring></argsstring>
+        <name>Include</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Light.cs" line="114" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Light.cs" bodystart="115" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_light_1afd626638e3a6ba736f95912ec77cd5da" prot="public" static="no" readable="no" writable="no" gettable="yes" settable="yes">
+        <type>int</type>
+        <definition>int Micra.Core.Light.Overshoot</definition>
+        <argsstring></argsstring>
+        <name>Overshoot</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Light.cs" line="119" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Light.cs" bodystart="120" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_light_1a1923d4a67a87bd9ff54ff5c141822154" prot="public" static="no" readable="no" writable="no" gettable="yes" settable="yes">
+        <type><ref refid="class_micra_1_1_core_1_1_texture" kindref="compound">Texture</ref></type>
+        <definition>Texture Micra.Core.Light.ProjectionMap</definition>
+        <argsstring></argsstring>
+        <name>ProjectionMap</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Light.cs" line="131" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Light.cs" bodystart="132" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_light_1a18735c391d4ab72736ecb30d03fea8b9" prot="public" static="no" readable="no" writable="no" gettable="yes" settable="yes">
+        <type>int</type>
+        <definition>int Micra.Core.Light.Projector</definition>
+        <argsstring></argsstring>
+        <name>Projector</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Light.cs" line="143" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Light.cs" bodystart="144" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_light_1a8ae9908d6f51ff11dd6d240fa16e8c9a" prot="public" static="no" readable="no" writable="no" gettable="yes" settable="yes">
+        <type>int</type>
+        <definition>int Micra.Core.Light.Shadow</definition>
+        <argsstring></argsstring>
+        <name>Shadow</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Light.cs" line="216" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Light.cs" bodystart="217" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_light_1ac515ab986104abc7f196f166c0613d62" prot="public" static="no" readable="no" writable="no" gettable="yes" settable="no">
+        <type>int</type>
+        <definition>int Micra.Core.Light.ShadowMethod</definition>
+        <argsstring></argsstring>
+        <name>ShadowMethod</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Light.cs" line="228" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Light.cs" bodystart="229" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_light_1a99de0b86548b669d037828cad66fb721" prot="public" static="no" readable="no" writable="no" gettable="yes" settable="yes">
+        <type>int</type>
+        <definition>int Micra.Core.Light.ShadowType</definition>
+        <argsstring></argsstring>
+        <name>ShadowType</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Light.cs" line="233" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Light.cs" bodystart="234" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_light_1ad2b4d79184ab9ea1c6db72b0b25c4606" prot="public" static="no" readable="no" writable="no" gettable="yes" settable="no">
+        <type>bool</type>
+        <definition>bool Micra.Core.Light.UseAttenuation</definition>
+        <argsstring></argsstring>
+        <name>UseAttenuation</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Light.cs" line="250" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Light.cs" bodystart="251" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_light_1a5b4935bc11b2535a45f248110f94b11d" prot="public" static="no" readable="no" writable="no" gettable="yes" settable="yes">
+        <type>bool</type>
+        <definition>bool Micra.Core.Light.UseGlobal</definition>
+        <argsstring></argsstring>
+        <name>UseGlobal</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Light.cs" line="255" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Light.cs" bodystart="256" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_light_1ac0c93da32cd4076bd2d0220dcdafc930" prot="public" static="no" readable="no" writable="no" gettable="yes" settable="yes">
+        <type>bool</type>
+        <definition>bool Micra.Core.Light.UseLight</definition>
+        <argsstring></argsstring>
+        <name>UseLight</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Light.cs" line="267" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Light.cs" bodystart="268" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="package-func">
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_light_1a4c251f333bc1b52d916dbc3d37f9e42c" prot="package" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>Micra.Core.Light.Light</definition>
+        <argsstring>(ILightObject x)</argsstring>
+        <name>Light</name>
+        <param>
+          <type>ILightObject</type>
+          <declname>x</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Light.cs" line="22" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Light.cs" bodystart="22" bodyend="22"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_light_1a12fc8ccacdb83e433b4adbba1ebc8ed7" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Micra.Core.Light.Enable</definition>
+        <argsstring>(bool b)</argsstring>
+        <name>Enable</name>
+        <param>
+          <type>bool</type>
+          <declname>b</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Light.cs" line="53" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Light.cs" bodystart="53" bodyend="56"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_light_1ad8ea4a5a27a1349e3f47aab5c7450cab" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>float</type>
+        <definition>float Micra.Core.Light.GetAspect</definition>
+        <argsstring>(TimeValue t, Interval valid)</argsstring>
+        <name>GetAspect</name>
+        <param>
+          <type><ref refid="struct_micra_1_1_core_1_1_time_value" kindref="compound">TimeValue</ref></type>
+          <declname>t</declname>
+        </param>
+        <param>
+          <type><ref refid="struct_micra_1_1_core_1_1_interval" kindref="compound">Interval</ref></type>
+          <declname>valid</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Light.cs" line="58" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Light.cs" bodystart="58" bodyend="61"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_light_1a3612c7e46d216448bcf796d587e56617" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>float</type>
+        <definition>float Micra.Core.Light.GetAttenuation</definition>
+        <argsstring>(TimeValue t, int which, Interval valid)</argsstring>
+        <name>GetAttenuation</name>
+        <param>
+          <type><ref refid="struct_micra_1_1_core_1_1_time_value" kindref="compound">TimeValue</ref></type>
+          <declname>t</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>which</declname>
+        </param>
+        <param>
+          <type><ref refid="struct_micra_1_1_core_1_1_interval" kindref="compound">Interval</ref></type>
+          <declname>valid</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Light.cs" line="63" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Light.cs" bodystart="63" bodyend="66"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_light_1a906b3aa726705035a518a4c2595064dd" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>float</type>
+        <definition>float Micra.Core.Light.GetFallOffSize</definition>
+        <argsstring>(TimeValue t, Interval valid)</argsstring>
+        <name>GetFallOffSize</name>
+        <param>
+          <type><ref refid="struct_micra_1_1_core_1_1_time_value" kindref="compound">TimeValue</ref></type>
+          <declname>t</declname>
+        </param>
+        <param>
+          <type><ref refid="struct_micra_1_1_core_1_1_interval" kindref="compound">Interval</ref></type>
+          <declname>valid</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Light.cs" line="68" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Light.cs" bodystart="68" bodyend="71"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_light_1a4732b69f3a8571cf1a29b3b6bc7c9957" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>float</type>
+        <definition>float Micra.Core.Light.GetHotspot</definition>
+        <argsstring>(TimeValue t, Interval valid)</argsstring>
+        <name>GetHotspot</name>
+        <param>
+          <type><ref refid="struct_micra_1_1_core_1_1_time_value" kindref="compound">TimeValue</ref></type>
+          <declname>t</declname>
+        </param>
+        <param>
+          <type><ref refid="struct_micra_1_1_core_1_1_interval" kindref="compound">Interval</ref></type>
+          <declname>valid</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Light.cs" line="73" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Light.cs" bodystart="73" bodyend="76"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_light_1a923b3a3c8f3a941af61fe6ff37e22363" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>float</type>
+        <definition>float Micra.Core.Light.GetIntensity</definition>
+        <argsstring>(TimeValue t, Interval valid)</argsstring>
+        <name>GetIntensity</name>
+        <param>
+          <type><ref refid="struct_micra_1_1_core_1_1_time_value" kindref="compound">TimeValue</ref></type>
+          <declname>t</declname>
+        </param>
+        <param>
+          <type><ref refid="struct_micra_1_1_core_1_1_interval" kindref="compound">Interval</ref></type>
+          <declname>valid</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Light.cs" line="78" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Light.cs" bodystart="78" bodyend="81"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_light_1a0123563e44cbe7648cce630a4b8bbd8a" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>float</type>
+        <definition>float Micra.Core.Light.GetMapBias</definition>
+        <argsstring>(TimeValue t, Interval valid)</argsstring>
+        <name>GetMapBias</name>
+        <param>
+          <type><ref refid="struct_micra_1_1_core_1_1_time_value" kindref="compound">TimeValue</ref></type>
+          <declname>t</declname>
+        </param>
+        <param>
+          <type><ref refid="struct_micra_1_1_core_1_1_interval" kindref="compound">Interval</ref></type>
+          <declname>valid</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Light.cs" line="83" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Light.cs" bodystart="83" bodyend="86"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_light_1ae3ac8c1a9449a956a8d05982bbf5a57b" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>float</type>
+        <definition>float Micra.Core.Light.GetMapRange</definition>
+        <argsstring>(TimeValue t, Interval valid)</argsstring>
+        <name>GetMapRange</name>
+        <param>
+          <type><ref refid="struct_micra_1_1_core_1_1_time_value" kindref="compound">TimeValue</ref></type>
+          <declname>t</declname>
+        </param>
+        <param>
+          <type><ref refid="struct_micra_1_1_core_1_1_interval" kindref="compound">Interval</ref></type>
+          <declname>valid</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Light.cs" line="88" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Light.cs" bodystart="88" bodyend="91"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_light_1a471ecd4a1572c850bfc48c4dedad07e0" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>int</type>
+        <definition>int Micra.Core.Light.GetMapSize</definition>
+        <argsstring>(TimeValue t, Interval valid)</argsstring>
+        <name>GetMapSize</name>
+        <param>
+          <type><ref refid="struct_micra_1_1_core_1_1_time_value" kindref="compound">TimeValue</ref></type>
+          <declname>t</declname>
+        </param>
+        <param>
+          <type><ref refid="struct_micra_1_1_core_1_1_interval" kindref="compound">Interval</ref></type>
+          <declname>valid</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Light.cs" line="93" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Light.cs" bodystart="93" bodyend="96"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_light_1a29dcbf20916279ddefd79ba42ba0d5f1" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="struct_micra_1_1_core_1_1_color" kindref="compound">Color</ref></type>
+        <definition>Color Micra.Core.Light.GetRGBColor</definition>
+        <argsstring>(TimeValue t, Interval valid)</argsstring>
+        <name>GetRGBColor</name>
+        <param>
+          <type><ref refid="struct_micra_1_1_core_1_1_time_value" kindref="compound">TimeValue</ref></type>
+          <declname>t</declname>
+        </param>
+        <param>
+          <type><ref refid="struct_micra_1_1_core_1_1_interval" kindref="compound">Interval</ref></type>
+          <declname>valid</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Light.cs" line="98" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Light.cs" bodystart="98" bodyend="102"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_light_1a7fe1e78cc53ff1d4c6f752d7930f67ee" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>float</type>
+        <definition>float Micra.Core.Light.GetRayBias</definition>
+        <argsstring>(TimeValue t, Interval valid)</argsstring>
+        <name>GetRayBias</name>
+        <param>
+          <type><ref refid="struct_micra_1_1_core_1_1_time_value" kindref="compound">TimeValue</ref></type>
+          <declname>t</declname>
+        </param>
+        <param>
+          <type><ref refid="struct_micra_1_1_core_1_1_interval" kindref="compound">Interval</ref></type>
+          <declname>valid</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Light.cs" line="104" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Light.cs" bodystart="104" bodyend="107"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_light_1a58e240e5654a5e5d5af5d866fecd466e" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>float</type>
+        <definition>float Micra.Core.Light.GetTargetDist</definition>
+        <argsstring>(TimeValue t, Interval valid)</argsstring>
+        <name>GetTargetDist</name>
+        <param>
+          <type><ref refid="struct_micra_1_1_core_1_1_time_value" kindref="compound">TimeValue</ref></type>
+          <declname>t</declname>
+        </param>
+        <param>
+          <type><ref refid="struct_micra_1_1_core_1_1_interval" kindref="compound">Interval</ref></type>
+          <declname>valid</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Light.cs" line="109" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Light.cs" bodystart="109" bodyend="112"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_light_1a3adfe06d9a8448463ec859bb04b79e56" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Micra.Core.Light.SetAspect</definition>
+        <argsstring>(TimeValue t, float f)</argsstring>
+        <name>SetAspect</name>
+        <param>
+          <type><ref refid="struct_micra_1_1_core_1_1_time_value" kindref="compound">TimeValue</ref></type>
+          <declname>t</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>f</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Light.cs" line="155" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Light.cs" bodystart="155" bodyend="158"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_light_1a7b51f8e8e60514f69d1b4817d8bc1893" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Micra.Core.Light.SetAttenuation</definition>
+        <argsstring>(TimeValue time, int which, float f)</argsstring>
+        <name>SetAttenuation</name>
+        <param>
+          <type><ref refid="struct_micra_1_1_core_1_1_time_value" kindref="compound">TimeValue</ref></type>
+          <declname>time</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>which</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>f</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Light.cs" line="160" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Light.cs" bodystart="160" bodyend="163"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_light_1a8d3ee9d8abb0be160f0c992315f148a3" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Micra.Core.Light.SetConeDisplay</definition>
+        <argsstring>(bool b, int notify)</argsstring>
+        <name>SetConeDisplay</name>
+        <param>
+          <type>bool</type>
+          <declname>b</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>notify</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Light.cs" line="165" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Light.cs" bodystart="165" bodyend="168"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_light_1a9c38e8f07e2f5dd341464cdce4d8ab02" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Micra.Core.Light.SetFallOffSize</definition>
+        <argsstring>(TimeValue time, float f)</argsstring>
+        <name>SetFallOffSize</name>
+        <param>
+          <type><ref refid="struct_micra_1_1_core_1_1_time_value" kindref="compound">TimeValue</ref></type>
+          <declname>time</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>f</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Light.cs" line="170" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Light.cs" bodystart="170" bodyend="173"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_light_1a68c26a9d6fd79c3be7f36411f7dae249" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Micra.Core.Light.SetHotspot</definition>
+        <argsstring>(TimeValue time, float f)</argsstring>
+        <name>SetHotspot</name>
+        <param>
+          <type><ref refid="struct_micra_1_1_core_1_1_time_value" kindref="compound">TimeValue</ref></type>
+          <declname>time</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>f</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Light.cs" line="175" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Light.cs" bodystart="175" bodyend="178"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_light_1ac7efb8878a28fe547bb98ef97fec800b" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Micra.Core.Light.SetIntensity</definition>
+        <argsstring>(TimeValue time, float f)</argsstring>
+        <name>SetIntensity</name>
+        <param>
+          <type><ref refid="struct_micra_1_1_core_1_1_time_value" kindref="compound">TimeValue</ref></type>
+          <declname>time</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>f</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Light.cs" line="180" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Light.cs" bodystart="180" bodyend="183"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_light_1a846bee8ef1e6013d89db30aae65c0f8f" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Micra.Core.Light.SetMapBias</definition>
+        <argsstring>(TimeValue t, float f)</argsstring>
+        <name>SetMapBias</name>
+        <param>
+          <type><ref refid="struct_micra_1_1_core_1_1_time_value" kindref="compound">TimeValue</ref></type>
+          <declname>t</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>f</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Light.cs" line="185" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Light.cs" bodystart="185" bodyend="188"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_light_1a7d4bf8a83b9ed536d0a68269a451451e" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Micra.Core.Light.SetMapRange</definition>
+        <argsstring>(TimeValue t, float f)</argsstring>
+        <name>SetMapRange</name>
+        <param>
+          <type><ref refid="struct_micra_1_1_core_1_1_time_value" kindref="compound">TimeValue</ref></type>
+          <declname>t</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>f</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Light.cs" line="190" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Light.cs" bodystart="190" bodyend="193"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_light_1abc83794b6bb7cfdaa14943dc337b5f21" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Micra.Core.Light.SetMapSize</definition>
+        <argsstring>(TimeValue t, int param1)</argsstring>
+        <name>SetMapSize</name>
+        <param>
+          <type><ref refid="struct_micra_1_1_core_1_1_time_value" kindref="compound">TimeValue</ref></type>
+          <declname>t</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>param1</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Light.cs" line="195" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Light.cs" bodystart="195" bodyend="198"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_light_1a9fa24cc90d0591b24b35856a0fb4043f" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Micra.Core.Light.SetRGBColor</definition>
+        <argsstring>(TimeValue t, Color rgb)</argsstring>
+        <name>SetRGBColor</name>
+        <param>
+          <type><ref refid="struct_micra_1_1_core_1_1_time_value" kindref="compound">TimeValue</ref></type>
+          <declname>t</declname>
+        </param>
+        <param>
+          <type><ref refid="struct_micra_1_1_core_1_1_color" kindref="compound">Color</ref></type>
+          <declname>rgb</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Light.cs" line="200" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Light.cs" bodystart="200" bodyend="204"/>
+        <references refid="struct_micra_1_1_core_1_1_color_1a13a866208cbac4184c18f46c04f4045e" compoundref="_color_8cs" startline="20">Micra.Core.Color.b</references>
+        <references refid="struct_micra_1_1_core_1_1_color_1a241f0df68517f584063c5a932f343fb5" compoundref="_color_8cs" startline="19">Micra.Core.Color.g</references>
+        <references refid="struct_micra_1_1_core_1_1_color_1ad5371d54ed4aae73a5aacfbff3fdae83" compoundref="_color_8cs" startline="18">Micra.Core.Color.r</references>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_light_1a829762817e7a41061781a475b8b57c76" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Micra.Core.Light.SetRayBias</definition>
+        <argsstring>(TimeValue t, float f)</argsstring>
+        <name>SetRayBias</name>
+        <param>
+          <type><ref refid="struct_micra_1_1_core_1_1_time_value" kindref="compound">TimeValue</ref></type>
+          <declname>t</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>f</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Light.cs" line="206" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Light.cs" bodystart="206" bodyend="209"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_light_1a6fe81c2781df1b70e3bc00ad67b53caf" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Micra.Core.Light.SetTargetDist</definition>
+        <argsstring>(TimeValue time, float f)</argsstring>
+        <name>SetTargetDist</name>
+        <param>
+          <type><ref refid="struct_micra_1_1_core_1_1_time_value" kindref="compound">TimeValue</ref></type>
+          <declname>time</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>f</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Light.cs" line="211" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Light.cs" bodystart="211" bodyend="214"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_light_1a188ca4c29693b36a63a542586b176b8c" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Micra.Core.Light.UpdateTargetDistance</definition>
+        <argsstring>(TimeValue t, Node inode)</argsstring>
+        <name>UpdateTargetDistance</name>
+        <param>
+          <type><ref refid="struct_micra_1_1_core_1_1_time_value" kindref="compound">TimeValue</ref></type>
+          <declname>t</declname>
+        </param>
+        <param>
+          <type><ref refid="class_micra_1_1_core_1_1_node" kindref="compound">Node</ref></type>
+          <declname>inode</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Light.cs" line="245" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Light.cs" bodystart="245" bodyend="248"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Represents a light in the scene. Wraps a LightObject in the 3ds <ref refid="class_micra_1_1_core_1_1_max" kindref="compound">Max</ref> SDK. </para>    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="181">
+        <label>SceneObject</label>
+        <link refid="class_micra_1_1_core_1_1_scene_object"/>
+        <childnode refid="182" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="184">
+        <label>ReferenceMaker</label>
+        <link refid="class_micra_1_1_core_1_1_reference_maker"/>
+        <childnode refid="185" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="185">
+        <label>Animatable</label>
+        <link refid="class_micra_1_1_core_1_1_animatable"/>
+      </node>
+      <node id="183">
+        <label>ReferenceTarget</label>
+        <link refid="class_micra_1_1_core_1_1_reference_target"/>
+        <childnode refid="184" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="180">
+        <label>Micra.Core.Light</label>
+        <link refid="class_micra_1_1_core_1_1_light"/>
+        <childnode refid="181" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="182">
+        <label>SceneElement</label>
+        <link refid="class_micra_1_1_core_1_1_scene_element"/>
+        <childnode refid="183" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="187">
+        <label>SceneObject</label>
+        <link refid="class_micra_1_1_core_1_1_scene_object"/>
+        <childnode refid="188" relation="public-inheritance">
+        </childnode>
+        <childnode refid="193" relation="usage">
+          <edgelabel>Geometry</edgelabel>
+        </childnode>
+        <childnode refid="194" relation="usage">
+          <edgelabel>Mesh</edgelabel>
+        </childnode>
+      </node>
+      <node id="190">
+        <label>ReferenceMaker</label>
+        <link refid="class_micra_1_1_core_1_1_reference_maker"/>
+        <childnode refid="191" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="191">
+        <label>Animatable</label>
+        <link refid="class_micra_1_1_core_1_1_animatable"/>
+        <childnode refid="192" relation="usage">
+          <edgelabel>parameterBlock</edgelabel>
+        </childnode>
+      </node>
+      <node id="194">
+        <label>Micra.Core.Mesh</label>
+        <link refid="class_micra_1_1_core_1_1_mesh"/>
+        <childnode refid="195" relation="usage">
+          <edgelabel>verts</edgelabel>
+          <edgelabel>vnormals</edgelabel>
+          <edgelabel>fnormals</edgelabel>
+          <edgelabel>tverts</edgelabel>
+        </childnode>
+        <childnode refid="196" relation="usage">
+          <edgelabel>tfaces</edgelabel>
+          <edgelabel>faces</edgelabel>
+        </childnode>
+      </node>
+      <node id="193">
+        <label>Micra.Core.Geometry</label>
+        <link refid="class_micra_1_1_core_1_1_geometry"/>
+        <childnode refid="187" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="189">
+        <label>ReferenceTarget</label>
+        <link refid="class_micra_1_1_core_1_1_reference_target"/>
+        <childnode refid="190" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="186">
+        <label>Micra.Core.Light</label>
+        <link refid="class_micra_1_1_core_1_1_light"/>
+        <childnode refid="187" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="196">
+        <label>Micra.Core.Mesh.Face</label>
+        <link refid="struct_micra_1_1_core_1_1_mesh_1_1_face"/>
+      </node>
+      <node id="195">
+        <label>Micra.Core.Point3</label>
+        <link refid="class_micra_1_1_core_1_1_point3"/>
+      </node>
+      <node id="192">
+        <label>Micra.Core.IParameterBlock</label>
+        <link refid="interface_micra_1_1_core_1_1_i_parameter_block"/>
+      </node>
+      <node id="188">
+        <label>SceneElement</label>
+        <link refid="class_micra_1_1_core_1_1_scene_element"/>
+        <childnode refid="189" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Light.cs" line="21" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Light.cs" bodystart="20" bodyend="272"/>
+    <listofallmembers>
+      <member refid="class_micra_1_1_core_1_1_animatable_1a7447ebfdfa1b5c49c3908334edcaa995" prot="public" virt="non-virtual"><scope>Micra::Core::Light</scope><name>_Anim</name></member>
+      <member refid="class_micra_1_1_core_1_1_scene_element_1a6355948b11d4a5f07268a3dbeddeae99" prot="public" virt="non-virtual"><scope>Micra::Core::Light</scope><name>_BaseObject</name></member>
+      <member refid="class_micra_1_1_core_1_1_scene_object_1a7a263bf51190c6e3dfd9a7c1e8fbca2e" prot="package" virt="non-virtual"><scope>Micra::Core::Light</scope><name>_IGeomObject</name></member>
+      <member refid="class_micra_1_1_core_1_1_light_1a3e9a94818cb070c7afcea3de01e58be3" prot="public" virt="non-virtual"><scope>Micra::Core::Light</scope><name>_Light</name></member>
+      <member refid="class_micra_1_1_core_1_1_reference_maker_1a20e29410474e32f5694ab0c2f572148b" prot="public" virt="non-virtual"><scope>Micra::Core::Light</scope><name>_Maker</name></member>
+      <member refid="class_micra_1_1_core_1_1_scene_object_1a1bc0798c10b681c86ba84476c44f4711" prot="package" virt="non-virtual"><scope>Micra::Core::Light</scope><name>_Node</name></member>
+      <member refid="class_micra_1_1_core_1_1_scene_object_1a9a034b3cc67f0fe85e9cb1de18ce2110" prot="package" virt="non-virtual"><scope>Micra::Core::Light</scope><name>_Object</name></member>
+      <member refid="class_micra_1_1_core_1_1_reference_target_1a59df2a4540430af935c20d5914fce089" prot="public" virt="non-virtual"><scope>Micra::Core::Light</scope><name>_Target</name></member>
+      <member refid="class_micra_1_1_core_1_1_light_1ab3c1c64b939bf8f936c7674c13bdb215" prot="public" virt="non-virtual"><scope>Micra::Core::Light</scope><name>AbsoluteMapBias</name></member>
+      <member refid="class_micra_1_1_core_1_1_reference_target_1a705530b02a3c4cd77bb6420e86d7c8c5" prot="public" virt="non-virtual"><scope>Micra::Core::Light</scope><name>AddListener</name></member>
+      <member refid="class_micra_1_1_core_1_1_scene_object_1a8d17f198bac24e10ebdbc12871167f61" prot="public" virt="non-virtual"><scope>Micra::Core::Light</scope><name>AddModifier</name></member>
+      <member refid="class_micra_1_1_core_1_1_animatable_1a014952bd2d29637c0ed71b32f1ad4807" prot="package" virt="non-virtual"><scope>Micra::Core::Light</scope><name>Animatable</name></member>
+      <member refid="class_micra_1_1_core_1_1_animatable_1a4a088130407a9d834ca65c1c6b20255f" prot="public" virt="non-virtual"><scope>Micra::Core::Light</scope><name>AnimHandle</name></member>
+      <member refid="class_micra_1_1_core_1_1_animatable_1a7304895f0a6857929d3aab907db7cd1f" prot="public" virt="non-virtual"><scope>Micra::Core::Light</scope><name>Anims</name></member>
+      <member refid="class_micra_1_1_core_1_1_animatable_1a1d7058760b77578b3f0aa73ac02ec0ab" prot="public" virt="non-virtual"><scope>Micra::Core::Light</scope><name>AttributeContainer</name></member>
+      <member refid="class_micra_1_1_core_1_1_scene_object_1aedf78c6d2a5ccec06f5b2c6b67f94718" prot="public" virt="non-virtual"><scope>Micra::Core::Light</scope><name>Base</name></member>
+      <member refid="class_micra_1_1_core_1_1_animatable_1a1e8eff94a4d40b89666cfd96f2c0b282" prot="public" virt="non-virtual"><scope>Micra::Core::Light</scope><name>ClassID</name></member>
+      <member refid="class_micra_1_1_core_1_1_animatable_1adc1bd49a3dc65f202e6848e7746d97aa" prot="public" virt="non-virtual"><scope>Micra::Core::Light</scope><name>ClassName</name></member>
+      <member refid="class_micra_1_1_core_1_1_scene_object_1acd70928510ac90773427117e01f52a2f" prot="public" virt="non-virtual"><scope>Micra::Core::Light</scope><name>ClassOf</name></member>
+      <member refid="class_micra_1_1_core_1_1_animatable_1a61edf59c9f88800bc360d6e17ddafd47" prot="public" virt="non-virtual"><scope>Micra::Core::Light</scope><name>ClearAppData</name></member>
+      <member refid="class_micra_1_1_core_1_1_animatable_1a5898e44fafdfc0b28894f556e1f7fa57" prot="public" virt="non-virtual"><scope>Micra::Core::Light</scope><name>CreatePluginInstance&lt; T &gt;</name></member>
+      <member refid="class_micra_1_1_core_1_1_animatable_1a32a37b9c84068a644c2488bf6f7e764b" prot="public" virt="non-virtual"><scope>Micra::Core::Light</scope><name>CreateWrapper&lt; T &gt;</name></member>
+      <member refid="class_micra_1_1_core_1_1_scene_object_1ae0fa91eccd2894f228121b1880b744f3" prot="public" virt="non-virtual"><scope>Micra::Core::Light</scope><name>DeselectAll</name></member>
+      <member refid="class_micra_1_1_core_1_1_light_1a0ba2091d0f60fb8ce2b869150c06ad46" prot="public" virt="non-virtual"><scope>Micra::Core::Light</scope><name>DisplayAttenuation</name></member>
+      <member refid="class_micra_1_1_core_1_1_light_1a3e41e84baf4be3dd931f5f2b3dfb0154" prot="public" virt="non-virtual"><scope>Micra::Core::Light</scope><name>DisplayCone</name></member>
+      <member refid="class_micra_1_1_core_1_1_light_1a12fc8ccacdb83e433b4adbba1ebc8ed7" prot="public" virt="non-virtual"><scope>Micra::Core::Light</scope><name>Enable</name></member>
+      <member refid="class_micra_1_1_core_1_1_animatable_1a3b13687f6bf6e3463e0d4757384f2087" prot="public" virt="non-virtual"><scope>Micra::Core::Light</scope><name>Equals</name></member>
+      <member refid="class_micra_1_1_core_1_1_scene_object_1a4239bd0837f144fd4cee24a8303dfd01" prot="public" virt="non-virtual"><scope>Micra::Core::Light</scope><name>Geometry</name></member>
+      <member refid="class_micra_1_1_core_1_1_animatable_1a2657885a3480546390fc5f7a4d251b43" prot="public" virt="non-virtual"><scope>Micra::Core::Light</scope><name>GetAppData</name></member>
+      <member refid="class_micra_1_1_core_1_1_animatable_1a1f05a5f32d4a4227aded083c6431c586" prot="public" virt="non-virtual"><scope>Micra::Core::Light</scope><name>GetAppData</name></member>
+      <member refid="class_micra_1_1_core_1_1_scene_object_1ad4b6bc6ab4ace76bc9afcceb03607bda" prot="public" virt="non-virtual"><scope>Micra::Core::Light</scope><name>GetArea</name></member>
+      <member refid="class_micra_1_1_core_1_1_light_1ad8ea4a5a27a1349e3f47aab5c7450cab" prot="public" virt="non-virtual"><scope>Micra::Core::Light</scope><name>GetAspect</name></member>
+      <member refid="class_micra_1_1_core_1_1_light_1a3612c7e46d216448bcf796d587e56617" prot="public" virt="non-virtual"><scope>Micra::Core::Light</scope><name>GetAttenuation</name></member>
+      <member refid="class_micra_1_1_core_1_1_light_1a906b3aa726705035a518a4c2595064dd" prot="public" virt="non-virtual"><scope>Micra::Core::Light</scope><name>GetFallOffSize</name></member>
+      <member refid="class_micra_1_1_core_1_1_animatable_1a1c67edf5846ded97a1d12b7a7a4f8f6c" prot="public" virt="non-virtual"><scope>Micra::Core::Light</scope><name>GetHashCode</name></member>
+      <member refid="class_micra_1_1_core_1_1_light_1a4732b69f3a8571cf1a29b3b6bc7c9957" prot="public" virt="non-virtual"><scope>Micra::Core::Light</scope><name>GetHotspot</name></member>
+      <member refid="class_micra_1_1_core_1_1_scene_object_1a76dec62dbe76a7f2164d9407760a4e34" prot="public" virt="non-virtual"><scope>Micra::Core::Light</scope><name>GetImesh</name></member>
+      <member refid="class_micra_1_1_core_1_1_scene_object_1a01858e487d69ff9356953e5796c07312" prot="public" virt="non-virtual"><scope>Micra::Core::Light</scope><name>GetImesh</name></member>
+      <member refid="class_micra_1_1_core_1_1_light_1a923b3a3c8f3a941af61fe6ff37e22363" prot="public" virt="non-virtual"><scope>Micra::Core::Light</scope><name>GetIntensity</name></member>
+      <member refid="class_micra_1_1_core_1_1_scene_object_1aef21cf8d88192bcf0188a5b1c87139d0" prot="public" virt="non-virtual"><scope>Micra::Core::Light</scope><name>GetIpoly</name></member>
+      <member refid="class_micra_1_1_core_1_1_scene_object_1a96f0e7d06bdc27d5618aaeab52d4eb5d" prot="public" virt="non-virtual"><scope>Micra::Core::Light</scope><name>GetIpoly</name></member>
+      <member refid="class_micra_1_1_core_1_1_scene_object_1a841e9ca68569d056c11b6d332987f918" prot="public" virt="non-virtual"><scope>Micra::Core::Light</scope><name>GetIpolyObject</name></member>
+      <member refid="class_micra_1_1_core_1_1_scene_object_1a54d7144a5b793c724c2959c52da97ac8" prot="public" virt="non-virtual"><scope>Micra::Core::Light</scope><name>GetITriobject</name></member>
+      <member refid="class_micra_1_1_core_1_1_scene_object_1aa8b5cefda5c4ef25ee49f97b3b363e03" prot="public" virt="non-virtual"><scope>Micra::Core::Light</scope><name>GetITriobject</name></member>
+      <member refid="class_micra_1_1_core_1_1_light_1a0123563e44cbe7648cce630a4b8bbd8a" prot="public" virt="non-virtual"><scope>Micra::Core::Light</scope><name>GetMapBias</name></member>
+      <member refid="class_micra_1_1_core_1_1_light_1ae3ac8c1a9449a956a8d05982bbf5a57b" prot="public" virt="non-virtual"><scope>Micra::Core::Light</scope><name>GetMapRange</name></member>
+      <member refid="class_micra_1_1_core_1_1_light_1a471ecd4a1572c850bfc48c4dedad07e0" prot="public" virt="non-virtual"><scope>Micra::Core::Light</scope><name>GetMapSize</name></member>
+      <member refid="class_micra_1_1_core_1_1_scene_object_1a27051dfb65cc90a6a854a35a01d3c083" prot="public" virt="non-virtual"><scope>Micra::Core::Light</scope><name>GetMesh</name></member>
+      <member refid="class_micra_1_1_core_1_1_scene_object_1a5a4917095d3f658b90d84b8fe8c44448" prot="public" virt="non-virtual"><scope>Micra::Core::Light</scope><name>GetMesh</name></member>
+      <member refid="class_micra_1_1_core_1_1_scene_object_1a3991eb5e877eea8fbe656b43cfa7f552" prot="public" virt="non-virtual"><scope>Micra::Core::Light</scope><name>GetPoly</name></member>
+      <member refid="class_micra_1_1_core_1_1_scene_object_1ab041c992ccfb447506a8cafdf9112902" prot="public" virt="non-virtual"><scope>Micra::Core::Light</scope><name>GetPoly</name></member>
+      <member refid="class_micra_1_1_core_1_1_light_1a7fe1e78cc53ff1d4c6f752d7930f67ee" prot="public" virt="non-virtual"><scope>Micra::Core::Light</scope><name>GetRayBias</name></member>
+      <member refid="class_micra_1_1_core_1_1_light_1a29dcbf20916279ddefd79ba42ba0d5f1" prot="public" virt="non-virtual"><scope>Micra::Core::Light</scope><name>GetRGBColor</name></member>
+      <member refid="class_micra_1_1_core_1_1_scene_object_1a0a999c503fe9bb116c2b95b7e4a0a5dd" prot="public" virt="non-virtual"><scope>Micra::Core::Light</scope><name>GetSelectedEdges</name></member>
+      <member refid="class_micra_1_1_core_1_1_scene_object_1a13c54f1c468310f8a688ae5c74f6dcad" prot="public" virt="non-virtual"><scope>Micra::Core::Light</scope><name>GetSelectedFaces</name></member>
+      <member refid="class_micra_1_1_core_1_1_scene_object_1a350fe67e539e59adcd8d5c246a35cd81" prot="public" virt="non-virtual"><scope>Micra::Core::Light</scope><name>GetSelectedVerts</name></member>
+      <member refid="class_micra_1_1_core_1_1_reference_maker_1a47bc65c1764be30262558c83fab2354e" prot="public" virt="non-virtual"><scope>Micra::Core::Light</scope><name>GetTarget</name></member>
+      <member refid="class_micra_1_1_core_1_1_light_1a58e240e5654a5e5d5af5d866fecd466e" prot="public" virt="non-virtual"><scope>Micra::Core::Light</scope><name>GetTargetDist</name></member>
+      <member refid="class_micra_1_1_core_1_1_scene_object_1a3f0b7e599ef13e1ae65428388308f955" prot="public" virt="non-virtual"><scope>Micra::Core::Light</scope><name>HideGeometry</name></member>
+      <member refid="class_micra_1_1_core_1_1_light_1a10e69223652ba261dd7e996a031d4f0a" prot="public" virt="non-virtual"><scope>Micra::Core::Light</scope><name>Include</name></member>
+      <member refid="class_micra_1_1_core_1_1_scene_element_1a0a9eb0952dcfe0d371fcd40acbcd37c6" prot="public" virt="non-virtual"><scope>Micra::Core::Light</scope><name>Instanced</name></member>
+      <member refid="class_micra_1_1_core_1_1_scene_object_1abbed828c88d49e8b22c81f0d64f18b53" prot="public" virt="non-virtual"><scope>Micra::Core::Light</scope><name>IsClassOf</name></member>
+      <member refid="class_micra_1_1_core_1_1_scene_object_1aea87723d012aea20483b8fe8b99b7614" prot="public" virt="non-virtual"><scope>Micra::Core::Light</scope><name>IsSuperClassOf</name></member>
+      <member refid="class_micra_1_1_core_1_1_light_1a4c251f333bc1b52d916dbc3d37f9e42c" prot="package" virt="non-virtual"><scope>Micra::Core::Light</scope><name>Light</name></member>
+      <member refid="class_micra_1_1_core_1_1_scene_object_1abbfb676f39795bcdb1f7a485445f8949" prot="public" virt="non-virtual"><scope>Micra::Core::Light</scope><name>Mesh</name></member>
+      <member refid="class_micra_1_1_core_1_1_scene_object_1a6e8264b29b0a1f677fcabf67a3cc16ef" prot="public" virt="non-virtual"><scope>Micra::Core::Light</scope><name>Move</name></member>
+      <member refid="class_micra_1_1_core_1_1_scene_element_1a4ef09fef3dac4cbbd0a767286dec2d9f" prot="public" virt="non-virtual"><scope>Micra::Core::Light</scope><name>Name</name></member>
+      <member refid="class_micra_1_1_core_1_1_scene_element_1a3502b1479d65a502d4cd7fdce6411a06" prot="public" virt="non-virtual"><scope>Micra::Core::Light</scope><name>Nodes</name></member>
+      <member refid="class_micra_1_1_core_1_1_reference_maker_1a14da943e6bc58c94ac81840b6409e992" prot="public" virt="non-virtual"><scope>Micra::Core::Light</scope><name>NumTargets</name></member>
+      <member refid="class_micra_1_1_core_1_1_reference_target_1a9120ed5666fc5c60b655d43806867504" prot="public" virt="non-virtual"><scope>Micra::Core::Light</scope><name>Observers</name></member>
+      <member refid="class_micra_1_1_core_1_1_animatable_1a246fac518c0fac502df5754450db01d2" prot="public" virt="non-virtual"><scope>Micra::Core::Light</scope><name>operator!=</name></member>
+      <member refid="class_micra_1_1_core_1_1_animatable_1a64eb885c9f69ce79734e55885baa7c66" prot="public" virt="non-virtual"><scope>Micra::Core::Light</scope><name>operator==</name></member>
+      <member refid="class_micra_1_1_core_1_1_light_1afd626638e3a6ba736f95912ec77cd5da" prot="public" virt="non-virtual"><scope>Micra::Core::Light</scope><name>Overshoot</name></member>
+      <member refid="class_micra_1_1_core_1_1_animatable_1aae0278c0d6842fd3e79cd2700851cf4a" prot="protected" virt="non-virtual"><scope>Micra::Core::Light</scope><name>parameterBlock</name></member>
+      <member refid="class_micra_1_1_core_1_1_animatable_1a7942d170433ad2f7b8ce19bfcde45a48" prot="public" virt="non-virtual"><scope>Micra::Core::Light</scope><name>ParameterBlock</name></member>
+      <member refid="class_micra_1_1_core_1_1_animatable_1a8adb3e32d41511c2ffd6007b8612e35d" prot="public" virt="non-virtual"><scope>Micra::Core::Light</scope><name>Params</name></member>
+      <member refid="class_micra_1_1_core_1_1_light_1a1923d4a67a87bd9ff54ff5c141822154" prot="public" virt="non-virtual"><scope>Micra::Core::Light</scope><name>ProjectionMap</name></member>
+      <member refid="class_micra_1_1_core_1_1_light_1a18735c391d4ab72736ecb30d03fea8b9" prot="public" virt="non-virtual"><scope>Micra::Core::Light</scope><name>Projector</name></member>
+      <member refid="class_micra_1_1_core_1_1_reference_maker_1aad1f8efb71568fa68daf5345fa5cfd07" prot="package" virt="non-virtual"><scope>Micra::Core::Light</scope><name>ReferenceMaker</name></member>
+      <member refid="class_micra_1_1_core_1_1_reference_target_1a60505293508d1145baa574340dbf867c" prot="package" virt="non-virtual"><scope>Micra::Core::Light</scope><name>ReferenceTarget</name></member>
+      <member refid="class_micra_1_1_core_1_1_scene_element_1aa51687267fc269e02a082c95d4411d8b" prot="package" virt="non-virtual"><scope>Micra::Core::Light</scope><name>SceneElement</name></member>
+      <member refid="class_micra_1_1_core_1_1_scene_object_1a0adeac7a6f35de14e5fd5b1ca7fbafca" prot="package" virt="non-virtual"><scope>Micra::Core::Light</scope><name>SceneObject</name></member>
+      <member refid="class_micra_1_1_core_1_1_scene_object_1aa144f93b4bf9c0680596f66af8cd64b0" prot="public" virt="non-virtual"><scope>Micra::Core::Light</scope><name>SelectAll</name></member>
+      <member refid="class_micra_1_1_core_1_1_light_1a3adfe06d9a8448463ec859bb04b79e56" prot="public" virt="non-virtual"><scope>Micra::Core::Light</scope><name>SetAspect</name></member>
+      <member refid="class_micra_1_1_core_1_1_light_1a7b51f8e8e60514f69d1b4817d8bc1893" prot="public" virt="non-virtual"><scope>Micra::Core::Light</scope><name>SetAttenuation</name></member>
+      <member refid="class_micra_1_1_core_1_1_light_1a8d3ee9d8abb0be160f0c992315f148a3" prot="public" virt="non-virtual"><scope>Micra::Core::Light</scope><name>SetConeDisplay</name></member>
+      <member refid="class_micra_1_1_core_1_1_light_1a9c38e8f07e2f5dd341464cdce4d8ab02" prot="public" virt="non-virtual"><scope>Micra::Core::Light</scope><name>SetFallOffSize</name></member>
+      <member refid="class_micra_1_1_core_1_1_light_1a68c26a9d6fd79c3be7f36411f7dae249" prot="public" virt="non-virtual"><scope>Micra::Core::Light</scope><name>SetHotspot</name></member>
+      <member refid="class_micra_1_1_core_1_1_light_1ac7efb8878a28fe547bb98ef97fec800b" prot="public" virt="non-virtual"><scope>Micra::Core::Light</scope><name>SetIntensity</name></member>
+      <member refid="class_micra_1_1_core_1_1_light_1a846bee8ef1e6013d89db30aae65c0f8f" prot="public" virt="non-virtual"><scope>Micra::Core::Light</scope><name>SetMapBias</name></member>
+      <member refid="class_micra_1_1_core_1_1_light_1a7d4bf8a83b9ed536d0a68269a451451e" prot="public" virt="non-virtual"><scope>Micra::Core::Light</scope><name>SetMapRange</name></member>
+      <member refid="class_micra_1_1_core_1_1_light_1abc83794b6bb7cfdaa14943dc337b5f21" prot="public" virt="non-virtual"><scope>Micra::Core::Light</scope><name>SetMapSize</name></member>
+      <member refid="class_micra_1_1_core_1_1_light_1a829762817e7a41061781a475b8b57c76" prot="public" virt="non-virtual"><scope>Micra::Core::Light</scope><name>SetRayBias</name></member>
+      <member refid="class_micra_1_1_core_1_1_light_1a9fa24cc90d0591b24b35856a0fb4043f" prot="public" virt="non-virtual"><scope>Micra::Core::Light</scope><name>SetRGBColor</name></member>
+      <member refid="class_micra_1_1_core_1_1_reference_maker_1a482e63b2e6c6847d9f801b0e3d6c11cf" prot="public" virt="non-virtual"><scope>Micra::Core::Light</scope><name>SetTarget</name></member>
+      <member refid="class_micra_1_1_core_1_1_light_1a6fe81c2781df1b70e3bc00ad67b53caf" prot="public" virt="non-virtual"><scope>Micra::Core::Light</scope><name>SetTargetDist</name></member>
+      <member refid="class_micra_1_1_core_1_1_light_1a8ae9908d6f51ff11dd6d240fa16e8c9a" prot="public" virt="non-virtual"><scope>Micra::Core::Light</scope><name>Shadow</name></member>
+      <member refid="class_micra_1_1_core_1_1_light_1ac515ab986104abc7f196f166c0613d62" prot="public" virt="non-virtual"><scope>Micra::Core::Light</scope><name>ShadowMethod</name></member>
+      <member refid="class_micra_1_1_core_1_1_light_1a99de0b86548b669d037828cad66fb721" prot="public" virt="non-virtual"><scope>Micra::Core::Light</scope><name>ShadowType</name></member>
+      <member refid="class_micra_1_1_core_1_1_animatable_1a743ff05031ca9d95ca4f5b078e29f946" prot="public" virt="non-virtual"><scope>Micra::Core::Light</scope><name>SuperClassID</name></member>
+      <member refid="class_micra_1_1_core_1_1_scene_object_1a83d5e1b954e0376782c93857ae630384" prot="public" virt="non-virtual"><scope>Micra::Core::Light</scope><name>SuperClassOf</name></member>
+      <member refid="class_micra_1_1_core_1_1_reference_maker_1a7d67a6c1812fd58d6c215fea52ed870d" prot="public" virt="non-virtual"><scope>Micra::Core::Light</scope><name>TargetArray</name></member>
+      <member refid="class_micra_1_1_core_1_1_reference_maker_1a5ffd2f44ec035353ed8f4282e7bccd18" prot="public" virt="non-virtual"><scope>Micra::Core::Light</scope><name>Targets</name></member>
+      <member refid="class_micra_1_1_core_1_1_reference_maker_1a9a146243a9c16a1b81b31078267095af" prot="public" virt="non-virtual"><scope>Micra::Core::Light</scope><name>TargetTree</name></member>
+      <member refid="class_micra_1_1_core_1_1_animatable_1a63dfadedc8b28c3e5ced8c3e62a277a1" prot="public" virt="non-virtual"><scope>Micra::Core::Light</scope><name>this[int paramID]</name></member>
+      <member refid="class_micra_1_1_core_1_1_animatable_1ac4e35d5d21af8962f61a963f8f9ecdeb" prot="public" virt="non-virtual"><scope>Micra::Core::Light</scope><name>this[string sParamName]</name></member>
+      <member refid="class_micra_1_1_core_1_1_scene_object_1ac53565a7b6abba34c3ef11183247dea5" prot="public" virt="non-virtual"><scope>Micra::Core::Light</scope><name>UnhideGeometry</name></member>
+      <member refid="class_micra_1_1_core_1_1_light_1a188ca4c29693b36a63a542586b176b8c" prot="public" virt="non-virtual"><scope>Micra::Core::Light</scope><name>UpdateTargetDistance</name></member>
+      <member refid="class_micra_1_1_core_1_1_light_1ad2b4d79184ab9ea1c6db72b0b25c4606" prot="public" virt="non-virtual"><scope>Micra::Core::Light</scope><name>UseAttenuation</name></member>
+      <member refid="class_micra_1_1_core_1_1_light_1a5b4935bc11b2535a45f248110f94b11d" prot="public" virt="non-virtual"><scope>Micra::Core::Light</scope><name>UseGlobal</name></member>
+      <member refid="class_micra_1_1_core_1_1_light_1ac0c93da32cd4076bd2d0220dcdafc930" prot="public" virt="non-virtual"><scope>Micra::Core::Light</scope><name>UseLight</name></member>
+      <member refid="class_micra_1_1_core_1_1_animatable_1a340a84a8efcb552049aa7623d4d11960" prot="public" virt="non-virtual"><scope>Micra::Core::Light</scope><name>Valid</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

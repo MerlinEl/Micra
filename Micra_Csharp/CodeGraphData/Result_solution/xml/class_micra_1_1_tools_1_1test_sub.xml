@@ -1,0 +1,135 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
+  <compounddef id="class_micra_1_1_tools_1_1test_sub" kind="class" prot="public">
+    <compoundname>Micra::Tools::testSub</compoundname>
+    <basecompoundref prot="public" virt="non-virtual">UtilityObj</basecompoundref>
+    <innerclass refid="class_micra_1_1_tools_1_1test_sub_1_1_descriptor" prot="public">Micra::Tools::testSub::Descriptor</innerclass>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="class_micra_1_1_tools_1_1test_sub_1a714fbe72ffff840cfd3ced847518c848" prot="private" static="no" mutable="no">
+        <type>readonly <ref refid="class_micra_1_1_tools_1_1test_sub_1_1_descriptor" kindref="compound">Descriptor</ref></type>
+        <definition>readonly Descriptor Micra.Tools.testSub._descriptor</definition>
+        <argsstring></argsstring>
+        <name>_descriptor</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/MxGet.cs" line="193" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/MxGet.cs" bodystart="193" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="class_micra_1_1_tools_1_1test_sub_1a0cd4ab1f0ba6f5ad7a6cb6db5fd61aa7" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>Micra.Tools.testSub.testSub</definition>
+        <argsstring>(Descriptor descriptor)</argsstring>
+        <name>testSub</name>
+        <param>
+          <type><ref refid="class_micra_1_1_tools_1_1test_sub_1_1_descriptor" kindref="compound">Descriptor</ref></type>
+          <declname>descriptor</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/MxGet.cs" line="195" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/MxGet.cs" bodystart="195" bodyend="197"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_tools_1_1test_sub_1aea5862a060b156acc9f7e45682fc86e1" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>override void</type>
+        <definition>override void Micra.Tools.testSub.BeginEditParams</definition>
+        <argsstring>(IInterface ip, IIUtil iu)</argsstring>
+        <name>BeginEditParams</name>
+        <param>
+          <type>IInterface</type>
+          <declname>ip</declname>
+        </param>
+        <param>
+          <type>IIUtil</type>
+          <declname>iu</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/MxGet.cs" line="199" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/MxGet.cs" bodystart="199" bodyend="201"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_tools_1_1test_sub_1a9d191914e1e7901d4b470da2dd9a769d" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>override void</type>
+        <definition>override void Micra.Tools.testSub.EndEditParams</definition>
+        <argsstring>(IInterface ip, IIUtil iu)</argsstring>
+        <name>EndEditParams</name>
+        <param>
+          <type>IInterface</type>
+          <declname>ip</declname>
+        </param>
+        <param>
+          <type>IIUtil</type>
+          <declname>iu</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/MxGet.cs" line="203" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/MxGet.cs" bodystart="203" bodyend="205"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="635">
+        <label>Autodesk::Max::Plugins::UtilityObj</label>
+      </node>
+      <node id="634">
+        <label>Micra.Tools.testSub</label>
+        <link refid="class_micra_1_1_tools_1_1test_sub"/>
+        <childnode refid="635" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="637">
+        <label>Autodesk::Max::Plugins::UtilityObj</label>
+      </node>
+      <node id="636">
+        <label>Micra.Tools.testSub</label>
+        <link refid="class_micra_1_1_tools_1_1test_sub"/>
+        <childnode refid="637" relation="public-inheritance">
+        </childnode>
+        <childnode refid="638" relation="usage">
+          <edgelabel>_descriptor</edgelabel>
+        </childnode>
+      </node>
+      <node id="638">
+        <label>Micra.Tools.testSub.Descriptor</label>
+        <link refid="class_micra_1_1_tools_1_1test_sub_1_1_descriptor"/>
+        <childnode refid="639" relation="public-inheritance">
+        </childnode>
+        <childnode refid="640" relation="usage">
+          <edgelabel>_classID</edgelabel>
+        </childnode>
+      </node>
+      <node id="640">
+        <label>static</label>
+      </node>
+      <node id="639">
+        <label>Autodesk::Max::Plugins::ClassDesc2</label>
+      </node>
+    </collaborationgraph>
+    <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/MxGet.cs" line="154" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/MxGet.cs" bodystart="154" bodyend="206"/>
+    <listofallmembers>
+      <member refid="class_micra_1_1_tools_1_1test_sub_1a714fbe72ffff840cfd3ced847518c848" prot="private" virt="non-virtual"><scope>Micra::Tools::testSub</scope><name>_descriptor</name></member>
+      <member refid="class_micra_1_1_tools_1_1test_sub_1aea5862a060b156acc9f7e45682fc86e1" prot="public" virt="non-virtual"><scope>Micra::Tools::testSub</scope><name>BeginEditParams</name></member>
+      <member refid="class_micra_1_1_tools_1_1test_sub_1a9d191914e1e7901d4b470da2dd9a769d" prot="public" virt="non-virtual"><scope>Micra::Tools::testSub</scope><name>EndEditParams</name></member>
+      <member refid="class_micra_1_1_tools_1_1test_sub_1a0cd4ab1f0ba6f5ad7a6cb6db5fd61aa7" prot="public" virt="non-virtual"><scope>Micra::Tools::testSub</scope><name>testSub</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

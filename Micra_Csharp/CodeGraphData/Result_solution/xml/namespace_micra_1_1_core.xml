@@ -1,0 +1,1160 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
+  <compounddef id="namespace_micra_1_1_core" kind="namespace">
+    <compoundname>Micra::Core</compoundname>
+    <innerclass refid="class_micra_1_1_core_1_1_action_manager" prot="public">Micra::Core::ActionManager</innerclass>
+    <innerclass refid="class_micra_1_1_core_1_1_action_table" prot="public">Micra::Core::ActionTable</innerclass>
+    <innerclass refid="class_micra_1_1_core_1_1_action_item" prot="public">Micra::Core::ActionItem</innerclass>
+    <innerclass refid="class_micra_1_1_core_1_1_enum_anim_list" prot="package">Micra::Core::EnumAnimList</innerclass>
+    <innerclass refid="class_micra_1_1_core_1_1_app_data" prot="public">Micra::Core::AppData</innerclass>
+    <innerclass refid="class_micra_1_1_core_1_1_animatable" prot="public">Micra::Core::Animatable</innerclass>
+    <innerclass refid="class_micra_1_1_core_1_1_animation_manager" prot="public">Micra::Core::AnimationManager</innerclass>
+    <innerclass refid="class_micra_1_1_core_1_1_camera" prot="public">Micra::Core::Camera</innerclass>
+    <innerclass refid="struct_micra_1_1_core_1_1_class_i_d" prot="public">Micra::Core::ClassID</innerclass>
+    <innerclass refid="class_micra_1_1_core_1_1_collection_extensions" prot="package">Micra::Core::CollectionExtensions</innerclass>
+    <innerclass refid="struct_micra_1_1_core_1_1_color" prot="public">Micra::Core::Color</innerclass>
+    <innerclass refid="class_micra_1_1_core_1_1_custom_attributes" prot="public">Micra::Core::CustomAttributes</innerclass>
+    <innerclass refid="class_micra_1_1_core_1_1_custom_attribute" prot="public">Micra::Core::CustomAttribute</innerclass>
+    <innerclass refid="class_micra_1_1_core_1_1_enum_flags" prot="public">Micra::Core::EnumFlags</innerclass>
+    <innerclass refid="class_micra_1_1_core_1_1_file_manager" prot="public">Micra::Core::FileManager</innerclass>
+    <innerclass refid="class_micra_1_1_core_1_1_generic_action" prot="public">Micra::Core::GenericAction</innerclass>
+    <innerclass refid="class_micra_1_1_core_1_1_geometry" prot="public">Micra::Core::Geometry</innerclass>
+    <innerclass refid="class_micra_1_1_core_1_1_geo_ops" prot="public">Micra::Core::GeoOps</innerclass>
+    <innerclass refid="class_micra_1_1_core_1_1_global_methods" prot="public">Micra::Core::GlobalMethods</innerclass>
+    <innerclass refid="class_micra_1_1_core_1_1_i_bit_array_extensions" prot="public">Micra::Core::IBitArrayExtensions</innerclass>
+    <innerclass refid="class_micra_1_1_core_1_1_kernel" prot="public">Micra::Core::Kernel</innerclass>
+    <innerclass refid="class_micra_1_1_core_1_1_listener_extensions" prot="public">Micra::Core::ListenerExtensions</innerclass>
+    <innerclass refid="class_micra_1_1_core_1_1_light" prot="public">Micra::Core::Light</innerclass>
+    <innerclass refid="class_micra_1_1_core_1_1_shading_object" prot="public">Micra::Core::ShadingObject</innerclass>
+    <innerclass refid="class_micra_1_1_core_1_1_material" prot="public">Micra::Core::Material</innerclass>
+    <innerclass refid="class_micra_1_1_core_1_1_base_std_material" prot="public">Micra::Core::BaseStdMaterial</innerclass>
+    <innerclass refid="class_micra_1_1_core_1_1_std_material" prot="public">Micra::Core::StdMaterial</innerclass>
+    <innerclass refid="class_micra_1_1_core_1_1_texture" prot="public">Micra::Core::Texture</innerclass>
+    <innerclass refid="class_micra_1_1_core_1_1_matrix3" prot="public">Micra::Core::Matrix3</innerclass>
+    <innerclass refid="class_micra_1_1_core_1_1_max" prot="public">Micra::Core::Max</innerclass>
+    <innerclass refid="class_micra_1_1_core_1_1_menu_manager" prot="public">Micra::Core::MenuManager</innerclass>
+    <innerclass refid="class_micra_1_1_core_1_1_menu" prot="public">Micra::Core::Menu</innerclass>
+    <innerclass refid="class_micra_1_1_core_1_1_menu_item" prot="public">Micra::Core::MenuItem</innerclass>
+    <innerclass refid="class_micra_1_1_core_1_1_mesh" prot="public">Micra::Core::Mesh</innerclass>
+    <innerclass refid="class_micra_1_1_core_1_1_modifier" prot="public">Micra::Core::Modifier</innerclass>
+    <innerclass refid="class_micra_1_1_core_1_1_node" prot="public">Micra::Core::Node</innerclass>
+    <innerclass refid="class_micra_1_1_core_1_1_obj_ops" prot="public">Micra::Core::ObjOps</innerclass>
+    <innerclass refid="class_micra_1_1_core_1_1_parameter_block1" prot="public">Micra::Core::ParameterBlock1</innerclass>
+    <innerclass refid="struct_micra_1_1_core_1_1_param1" prot="package">Micra::Core::Param1</innerclass>
+    <innerclass refid="class_micra_1_1_core_1_1_parameter_block2" prot="public">Micra::Core::ParameterBlock2</innerclass>
+    <innerclass refid="struct_micra_1_1_core_1_1_param_def" prot="package">Micra::Core::ParamDef</innerclass>
+    <innerclass refid="struct_micra_1_1_core_1_1_parameter2" prot="public">Micra::Core::Parameter2</innerclass>
+    <innerclass refid="class_micra_1_1_core_1_1_i_parameter_block_extensions" prot="public">Micra::Core::IParameterBlockExtensions</innerclass>
+    <innerclass refid="interface_micra_1_1_core_1_1_i_parameter_block" prot="public">Micra::Core::IParameterBlock</innerclass>
+    <innerclass refid="interface_micra_1_1_core_1_1_i_parameter" prot="public">Micra::Core::IParameter</innerclass>
+    <innerclass refid="class_micra_1_1_core_1_1_plugin_mgr" prot="public">Micra::Core::PluginMgr</innerclass>
+    <innerclass refid="class_micra_1_1_core_1_1_dll" prot="public">Micra::Core::Dll</innerclass>
+    <innerclass refid="class_micra_1_1_core_1_1_plugin" prot="public">Micra::Core::Plugin</innerclass>
+    <innerclass refid="class_micra_1_1_core_1_1_point3" prot="public">Micra::Core::Point3</innerclass>
+    <innerclass refid="class_micra_1_1_core_1_1_poly" prot="public">Micra::Core::Poly</innerclass>
+    <innerclass refid="class_micra_1_1_core_1_1_primitive_factory" prot="public">Micra::Core::PrimitiveFactory</innerclass>
+    <innerclass refid="class_micra_1_1_core_1_1_primitive_factory_3_01_t_01_4" prot="public">Micra::Core::PrimitiveFactory&lt; T &gt;</innerclass>
+    <innerclass refid="class_micra_1_1_core_1_1_prim_object_factory" prot="public">Micra::Core::PrimObjectFactory</innerclass>
+    <innerclass refid="class_micra_1_1_core_1_1_prim_geom_object_factory" prot="public">Micra::Core::PrimGeomObjectFactory</innerclass>
+    <innerclass refid="class_micra_1_1_core_1_1_prim_helper_factory" prot="public">Micra::Core::PrimHelperFactory</innerclass>
+    <innerclass refid="class_micra_1_1_core_1_1_prim_mod_object_factory" prot="public">Micra::Core::PrimModObjectFactory</innerclass>
+    <innerclass refid="class_micra_1_1_core_1_1_primitives" prot="public">Micra::Core::Primitives</innerclass>
+    <innerclass refid="class_micra_1_1_core_1_1_reference_listener" prot="package">Micra::Core::ReferenceListener</innerclass>
+    <innerclass refid="class_micra_1_1_core_1_1_reference_maker" prot="public">Micra::Core::ReferenceMaker</innerclass>
+    <innerclass refid="class_micra_1_1_core_1_1_observer_iterator" prot="public">Micra::Core::ObserverIterator</innerclass>
+    <innerclass refid="class_micra_1_1_core_1_1_reference_target" prot="public">Micra::Core::ReferenceTarget</innerclass>
+    <innerclass refid="class_micra_1_1_core_1_1_scene" prot="public">Micra::Core::Scene</innerclass>
+    <innerclass refid="class_micra_1_1_core_1_1_scene_constructor" prot="package">Micra::Core::SceneConstructor</innerclass>
+    <innerclass refid="class_micra_1_1_core_1_1_scene_element" prot="public">Micra::Core::SceneElement</innerclass>
+    <innerclass refid="class_micra_1_1_core_1_1_scene_object" prot="public">Micra::Core::SceneObject</innerclass>
+    <innerclass refid="class_micra_1_1_core_1_1_serializable_model" prot="public">Micra::Core::SerializableModel</innerclass>
+    <innerclass refid="class_micra_1_1_core_1_1_serializable_scene" prot="public">Micra::Core::SerializableScene</innerclass>
+    <innerclass refid="struct_micra_1_1_core_1_1_time_value" prot="public">Micra::Core::TimeValue</innerclass>
+    <innerclass refid="struct_micra_1_1_core_1_1_interval" prot="public">Micra::Core::Interval</innerclass>
+    <innerclass refid="struct_micra_1_1_core_1_1_super_class_i_d" prot="public">Micra::Core::SuperClassID</innerclass>
+    <innerclass refid="class_micra_1_1_core_1_1_switch" prot="public">Micra::Core::Switch</innerclass>
+    <innerclass refid="class_micra_1_1_core_1_1_utility" prot="public">Micra::Core::Utility</innerclass>
+    <innerclass refid="class_micra_1_1_core_1_1_indexed_property_3_01_index_t_00_01_value_t_01_4" prot="public">Micra::Core::IndexedProperty&lt; IndexT, ValueT &gt;</innerclass>
+    <innerclass refid="class_micra_1_1_core_1_1_colors" prot="public">Micra::Core::Colors</innerclass>
+    <innerclass refid="struct_micra_1_1_core_1_1_vector3" prot="public">Micra::Core::Vector3</innerclass>
+      <sectiondef kind="user-defined">
+      <header>Channels within the object.</header>
+      </sectiondef>
+      <sectiondef kind="user-defined">
+      <header>Channels</header>
+      <description><para><anchor id="_1Channels"/> The pipeline is divided into the following channels: </para></description>
+      </sectiondef>
+      <sectiondef kind="user-defined">
+      <header>Object Channel Indices</header>
+      <description><para><anchor id="_1Object_Channel_Indices"/> The following are the indices that may be used for the object channels. These values are used in the methods Object::UpdateValidity(), Object::SetChannelValidity() and Object::ChannelValidity(). </para></description>
+      </sectiondef>
+      <sectiondef kind="enum">
+      <memberdef kind="enum" id="namespace_micra_1_1_core_1a618a72559b6df442102e52ea0b174d24" prot="public" static="no">
+        <name>EnumChannels</name>
+        <enumvalue id="namespace_micra_1_1_core_1a618a72559b6df442102e52ea0b174d24a0da381748e9ccc51fe4f8e7ebc2cc699" prot="public">
+          <name>Channels within the object.</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespace_micra_1_1_core_1a618a72559b6df442102e52ea0b174d24af96480b1e1a24bc47c921d58e6493911" prot="public">
+          <name>NUM_OBJ_CHANS</name>
+          <initializer>= 11</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespace_micra_1_1_core_1a618a72559b6df442102e52ea0b174d24a0a3b45827c0b895b4fd634ee2926880f" prot="public">
+          <name>ObjectChannels</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+<para>Some of the sample code specifies these channels as PART_* as opposed to *_CHANNEL. For example, PART_GEOM|PART_TOPO instead of GEOM_CHANNEL|TOPO_CHANNEL. The proper usage is the *_CHANNEL version. <simplesect kind="see"><para>The <ref refid="class_micra_1_1_core_1_1_geometry" kindref="compound">Geometry</ref> Pipeline System, Modifiers, and Class <ref refid="class_micra_1_1_core_1_1_mesh" kindref="compound">Mesh</ref> in the <bold>3ds <ref refid="class_micra_1_1_core_1_1_max" kindref="compound">Max</ref> Programmer&apos;s Guide</bold>, and Object Channel Indices <ulink url="#Object_Channel_Indices">here</ulink>. </para></simplesect>
+</para>          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespace_micra_1_1_core_1a618a72559b6df442102e52ea0b174d24a14cb425d8170ed04f3d8016d5a0ccf20" prot="public">
+          <name>Channels</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespace_micra_1_1_core_1a618a72559b6df442102e52ea0b174d24a26b1943fb4cbbf46cf6a396bba2ba824" prot="public">
+          <name>TOPO_CHANNEL</name>
+          <initializer>= ( 1 &lt;&lt; 0 )</initializer>
+          <briefdescription>
+<para>The topology channel - the face or polygon structures. </para>          </briefdescription>
+          <detaileddescription>
+<para>Smoothing groups and materials are also part of this channel. Edge visibility is also part of this channels since it is an attribute of the face structure. </para>          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespace_micra_1_1_core_1a618a72559b6df442102e52ea0b174d24a4721241cf012d87103c74f1f8d02bd1b" prot="public">
+          <name>GEOM_CHANNEL</name>
+          <initializer>= ( 1 &lt;&lt; 1 )</initializer>
+          <briefdescription>
+<para>The vertices of the object. </para>          </briefdescription>
+          <detaileddescription>
+<para>Most modifiers only alter this channel. </para>          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespace_micra_1_1_core_1a618a72559b6df442102e52ea0b174d24a1e9d7d26032174428e5d0fa62716f98f" prot="public">
+          <name>TEXMAP_CHANNEL</name>
+          <initializer>= ( 1 &lt;&lt; 2 )</initializer>
+          <briefdescription>
+<para>The texture vertices and procedural mappings. </para>          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespace_micra_1_1_core_1a618a72559b6df442102e52ea0b174d24a462c69ec51fe03d87f5d68b3c69a431a" prot="public">
+          <name>MTL_CHANNEL</name>
+          <initializer>= ( 1 &lt;&lt; 3 )</initializer>
+          <briefdescription>
+<para>This is no longer used. </para>          </briefdescription>
+          <detaileddescription>
+<para>Materials are rolled into the Face data structure and are part of the topology channel. </para>          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespace_micra_1_1_core_1a618a72559b6df442102e52ea0b174d24a1a3e6378a4705f0fda2a723e8bade761" prot="public">
+          <name>SELECT_CHANNEL</name>
+          <initializer>= ( 1 &lt;&lt; 4 )</initializer>
+          <briefdescription>
+<para>The sub-object selection channel. </para>          </briefdescription>
+          <detaileddescription>
+<para>An object&apos;s selection flows down the pipeline. What the selection is actually comprised of is up to the specific object type. For example, TriObjects have bits for face, edge and vertex selection. This channel is the actual BitArray used, like selLevel of the class <ref refid="class_micra_1_1_core_1_1_mesh" kindref="compound">Mesh</ref>. </para>          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespace_micra_1_1_core_1a618a72559b6df442102e52ea0b174d24a081ea0608ee65c73d2ed3738d57ca487" prot="public">
+          <name>SUBSEL_TYPE_CHANNEL</name>
+          <initializer>= ( 1 &lt;&lt; 5 )</initializer>
+          <briefdescription>
+<para>The current level of selection. </para>          </briefdescription>
+          <detaileddescription>
+<para>Every object that flows down the pipeline is at a certain level that corresponds to the Sub-Object drop down in the 3ds <ref refid="class_micra_1_1_core_1_1_max" kindref="compound">Max</ref> user interface. This channel indicates which level the object is at. This is also specific to the object type. There are 32 bits to represent the level of selection. When all the bits are 0, the object is at object level selection. </para>          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespace_micra_1_1_core_1a618a72559b6df442102e52ea0b174d24a1282ce1de2417db42bad6333638688f4" prot="public">
+          <name>DISP_ATTRIB_CHANNEL</name>
+          <initializer>= ( 1 &lt;&lt; 6 )</initializer>
+          <briefdescription>
+<para>The miscellaneous bits controlling the item&apos;s display. </para>          </briefdescription>
+          <detaileddescription>
+<para>These bits are specific to the type of object. For the <ref refid="class_micra_1_1_core_1_1_mesh" kindref="compound">Mesh</ref> object these are the surface normal scale, display of surface normals, edge visibility and display flags. </para>          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespace_micra_1_1_core_1a618a72559b6df442102e52ea0b174d24aa0b3798b4b218e0ce749c406ed41745e" prot="public">
+          <name>VERTCOLOR_CHANNEL</name>
+          <initializer>= ( 1 &lt;&lt; 7 )</initializer>
+          <briefdescription>
+<para>The color per vertex channel. </para>          </briefdescription>
+          <detaileddescription>
+<para>This is also used for the second texture mapping channel. </para>          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespace_micra_1_1_core_1a618a72559b6df442102e52ea0b174d24a5f6ef6648220414405cdc590066e137c" prot="public">
+          <name>GFX_DATA_CHANNEL</name>
+          <initializer>= ( 1 &lt;&lt; 8 )</initializer>
+          <briefdescription>
+<para>The used internally by 3ds <ref refid="class_micra_1_1_core_1_1_max" kindref="compound">Max</ref> for stripping. </para>          </briefdescription>
+          <detaileddescription>
+<para>Plug-In developers don&apos;t need to specify this channel as being changed or used in their plug-ins. </para>          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespace_micra_1_1_core_1a618a72559b6df442102e52ea0b174d24a7fa647d06c3176067a907d1318b754b0" prot="public">
+          <name>DISP_APPROX_CHANNEL</name>
+          <initializer>= ( 1 &lt;&lt; 9 )</initializer>
+          <briefdescription>
+<para>Displacement approximation. </para>          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespace_micra_1_1_core_1a618a72559b6df442102e52ea0b174d24a07cd3f9435e19710c744e92bf5236f4e" prot="public">
+          <name>EXTENSION_CHANNEL</name>
+          <initializer>= ( 1 &lt;&lt; 13 )</initializer>
+          <briefdescription>
+<para>The channel used by extension channel objects. </para>          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespace_micra_1_1_core_1a618a72559b6df442102e52ea0b174d24af3a1a96d4ada305ae7c1267aa09a795e" prot="public">
+          <name>TM_CHANNEL</name>
+          <initializer>= ( 1 &lt;&lt; 10 )</initializer>
+          <briefdescription>
+<para>The ObjectState Transform that flows down the pipeline. </para>          </briefdescription>
+          <detaileddescription>
+<para>This Transform may be modified by modifiers. </para>          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespace_micra_1_1_core_1a618a72559b6df442102e52ea0b174d24a99e5ef9a3095c559681406a401ad8a5d" prot="public">
+          <name>EDGEVISIBLITY_CHANNEL</name>
+          <initializer>= ( 1 &lt;&lt; 11 )</initializer>
+          <briefdescription>
+<para>For internal use. </para>          </briefdescription>
+          <detaileddescription>
+<para>Edge visiblity channel used internally to create an edit mesh edge vis cache </para>          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespace_micra_1_1_core_1a618a72559b6df442102e52ea0b174d24a9a488461b99b3c26b6073787c8563f28" prot="public">
+          <name>DONT_RECREATE_TRISTRIP_CHANNEL</name>
+          <initializer>= ( 1 &lt;&lt; 12 )</initializer>
+          <briefdescription>
+<para>For internal use. </para>          </briefdescription>
+          <detaileddescription>
+<para>A channel used to determine whether we should use tri strips or not </para>          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespace_micra_1_1_core_1a618a72559b6df442102e52ea0b174d24a4a8ee3c5bf38a678461328fa6b96cadc" prot="public">
+          <name>GLOBMTL_CHANNEL</name>
+          <initializer>= ( 1 &lt;&lt; 31 )</initializer>
+          <briefdescription>
+<para>This is no longer used. </para>          </briefdescription>
+          <detaileddescription>
+<para><ref refid="class_micra_1_1_core_1_1_material" kindref="compound">Material</ref> applied to object as whole. Materials are rolled into the Face data structure and are part of the topology channel. </para>          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespace_micra_1_1_core_1a618a72559b6df442102e52ea0b174d24a0d1d2646dee74c801ad06e05abaebeee" prot="public">
+          <name>OBJ_CHANNELS</name>
+          <initializer>= ( TOPO_CHANNEL | GEOM_CHANNEL | SELECT_CHANNEL | TEXMAP_CHANNEL | MTL_CHANNEL | SUBSEL_TYPE_CHANNEL | DISP_ATTRIB_CHANNEL | VERTCOLOR_CHANNEL | GFX_DATA_CHANNEL | DISP_APPROX_CHANNEL | EXTENSION_CHANNEL )</initializer>
+          <briefdescription>
+<para>All geometry channels. </para>          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespace_micra_1_1_core_1a618a72559b6df442102e52ea0b174d24a9487b02b877ad1d066979817d4e4c1d3" prot="public">
+          <name>ALL_CHANNELS</name>
+          <initializer>= ( OBJ_CHANNELS | TM_CHANNEL | GLOBMTL_CHANNEL )</initializer>
+          <briefdescription>
+<para>All object, transform and global material channels. </para>          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespace_micra_1_1_core_1a618a72559b6df442102e52ea0b174d24a1252a0376b744b745682d5b2a10a3587" prot="public">
+          <name>Object Channel Indices</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespace_micra_1_1_core_1a618a72559b6df442102e52ea0b174d24a49e42c01ffc6de0b54a65d9dc8d6cda7" prot="public">
+          <name>TOPO_CHAN_NUM</name>
+          <initializer>= 0</initializer>
+          <briefdescription>
+<para>The topology channel number. </para>          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespace_micra_1_1_core_1a618a72559b6df442102e52ea0b174d24aef1c8a7d7f01109593a7f8b0e61ebf5f" prot="public">
+          <name>GEOM_CHAN_NUM</name>
+          <initializer>= 1</initializer>
+          <briefdescription>
+<para>The geometry channel number. </para>          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespace_micra_1_1_core_1a618a72559b6df442102e52ea0b174d24acafcc349c70728c301ad08555eda4e4c" prot="public">
+          <name>TEXMAP_CHAN_NUM</name>
+          <initializer>= 2</initializer>
+          <briefdescription>
+<para>The texture vertices and procedural mappings channels number. </para>          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespace_micra_1_1_core_1a618a72559b6df442102e52ea0b174d24ac5daa5b2474dcbe7dce20cb2e80b37e0" prot="public">
+          <name>MTL_CHAN_NUM</name>
+          <initializer>= 3</initializer>
+          <briefdescription>
+<para>This is no longer used. </para>          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespace_micra_1_1_core_1a618a72559b6df442102e52ea0b174d24a2b0c62163325e1ec89bdf34262271142" prot="public">
+          <name>SELECT_CHAN_NUM</name>
+          <initializer>= 4</initializer>
+          <briefdescription>
+<para>The sub-object selection channel number. </para>          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespace_micra_1_1_core_1a618a72559b6df442102e52ea0b174d24a07f447cc8fd03efb4187a1085e47e89f" prot="public">
+          <name>SUBSEL_TYPE_CHAN_NUM</name>
+          <initializer>= 5</initializer>
+          <briefdescription>
+<para>This is the current level of selection number. </para>          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespace_micra_1_1_core_1a618a72559b6df442102e52ea0b174d24a71a9e9ff411a772cde58994888581df6" prot="public">
+          <name>DISP_ATTRIB_CHAN_NUM</name>
+          <initializer>= 6</initializer>
+          <briefdescription>
+<para>The display channel number. </para>          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespace_micra_1_1_core_1a618a72559b6df442102e52ea0b174d24a1fb6ecd4276464c36930b11e441a6ca2" prot="public">
+          <name>VERT_COLOR_CHAN_NUM</name>
+          <initializer>= 7</initializer>
+          <briefdescription>
+<para>The vertex colors number. This is also used for the second mapping channel. </para>          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespace_micra_1_1_core_1a618a72559b6df442102e52ea0b174d24a8e1dfc422f73c41e070674ef9c97db89" prot="public">
+          <name>GFX_DATA_CHAN_NUM</name>
+          <initializer>= 8</initializer>
+          <briefdescription>
+<para>The stripping, edge list, etc. channel number. </para>          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespace_micra_1_1_core_1a618a72559b6df442102e52ea0b174d24a083eec2580663b2fadc3187a2123e745" prot="public">
+          <name>DISP_APPROX_CHAN_NUM</name>
+          <initializer>= 9</initializer>
+          <briefdescription>
+<para>The displacement approximation channel number. </para>          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespace_micra_1_1_core_1a618a72559b6df442102e52ea0b174d24a1a36447f865482aade58ccbc12fc0f97" prot="public">
+          <name>EXTENSION_CHAN_NUM</name>
+          <initializer>= 10</initializer>
+          <briefdescription>
+<para>The extension object channel number. </para>          </briefdescription>
+          <detaileddescription>
+<para>Developers tend to confuse these object channel numbers (<ref refid="namespace_micra_1_1_core_1a618a72559b6df442102e52ea0b174d24a49e42c01ffc6de0b54a65d9dc8d6cda7" kindref="member">TOPO_CHAN_NUM</ref>, <ref refid="namespace_micra_1_1_core_1a618a72559b6df442102e52ea0b174d24aef1c8a7d7f01109593a7f8b0e61ebf5f" kindref="member">GEOM_CHAN_NUM</ref>, etc.) and the channel bits (<ref refid="namespace_micra_1_1_core_1a618a72559b6df442102e52ea0b174d24a26b1943fb4cbbf46cf6a396bba2ba824" kindref="member">TOPO_CHANNEL</ref>, <ref refid="namespace_micra_1_1_core_1a618a72559b6df442102e52ea0b174d24a4721241cf012d87103c74f1f8d02bd1b" kindref="member">GEOM_CHANNEL</ref>, etc.). Some methods refer to the channel by number and some by bit. Developers must not confuse these two as the compiler will not catch this as an error. See <ulink url="#Channels">Channels</ulink>. </para>          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/EnumChannels.cs" line="11" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/EnumChannels.cs" bodystart="11" bodyend="130"/>
+      </memberdef>
+      <memberdef kind="enum" id="namespace_micra_1_1_core_1aa95fba8b17e30090aefcdf358d062279" prot="public" static="no">
+        <name>EnumRefMsg</name>
+        <enumvalue id="namespace_micra_1_1_core_1aa95fba8b17e30090aefcdf358d062279a0e6c2d410cd39d22100f10e83a20713d" prot="public">
+          <name>REFMSG_LOOPTEST</name>
+          <initializer>= 0x00000010</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespace_micra_1_1_core_1aa95fba8b17e30090aefcdf358d062279afdaf6334e0ce8cc537ac0aaf0db969d4" prot="public">
+          <name>REFMSG_TARGET_DELETED</name>
+          <initializer>= 0x00000020</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespace_micra_1_1_core_1aa95fba8b17e30090aefcdf358d062279aec94e5686589b0e9581903733b0da436" prot="public">
+          <name>REFMSG_MODAPP_DELETING</name>
+          <initializer>= 0x00000021</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespace_micra_1_1_core_1aa95fba8b17e30090aefcdf358d062279a67e3be7a5ac9822abbe2b5fdf4e74a10" prot="public">
+          <name>REFMSG_EVAL</name>
+          <initializer>= 0x00000030</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespace_micra_1_1_core_1aa95fba8b17e30090aefcdf358d062279af304e35edd8c4374b18742b7fb1042b3" prot="public">
+          <name>REFMSG_RESET_ORIGIN</name>
+          <initializer>= 0x00000040</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespace_micra_1_1_core_1aa95fba8b17e30090aefcdf358d062279a055f5c4b8bb2dcc66f56c4474b370187" prot="public">
+          <name>REFMSG_CHANGE</name>
+          <initializer>= 0x00000050</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespace_micra_1_1_core_1aa95fba8b17e30090aefcdf358d062279afb0ff44e3c9ed9dfbaa50cee1110eb8a" prot="public">
+          <name>REFMSG_FLAGDEPENDENTS</name>
+          <initializer>= 0x00000070</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespace_micra_1_1_core_1aa95fba8b17e30090aefcdf358d062279a27254c42a3714557fcc0b23bed44c8b8" prot="public">
+          <name>REFMSG_TARGET_SELECTIONCHANGE</name>
+          <initializer>= 0x00000080</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespace_micra_1_1_core_1aa95fba8b17e30090aefcdf358d062279ae4909bc24175ee32633676b48abfb1ac" prot="public">
+          <name>REFMSG_BEGIN_EDIT</name>
+          <initializer>= 0x00000090</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespace_micra_1_1_core_1aa95fba8b17e30090aefcdf358d062279a067c7487f577d08bec9d20efb8c6e784" prot="public">
+          <name>REFMSG_END_EDIT</name>
+          <initializer>= 0x000000A0</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespace_micra_1_1_core_1aa95fba8b17e30090aefcdf358d062279ad7c1ce85271a6a6c8baad7c89c3c8955" prot="public">
+          <name>REFMSG_DISABLE</name>
+          <initializer>= 0x000000B0</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespace_micra_1_1_core_1aa95fba8b17e30090aefcdf358d062279a4f68f7f5c7e54d3114d4b6ded8c5f36c" prot="public">
+          <name>REFMSG_ENABLE</name>
+          <initializer>= 0x000000C0</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespace_micra_1_1_core_1aa95fba8b17e30090aefcdf358d062279a9283e47e4f276cd14ccfc708ed45a1de" prot="public">
+          <name>REFMSG_TURNON</name>
+          <initializer>= 0x000000D0</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespace_micra_1_1_core_1aa95fba8b17e30090aefcdf358d062279a704bd83e1ce740c1cfa57a895888e4fd" prot="public">
+          <name>REFMSG_TURNOFF</name>
+          <initializer>= 0x000000E0</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespace_micra_1_1_core_1aa95fba8b17e30090aefcdf358d062279aec7afccd4b3ceb5f3b3c790ad6a0a0af" prot="public">
+          <name>REFMSG_LOOKAT_TARGET_DELETED</name>
+          <initializer>= 0x000000F0</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespace_micra_1_1_core_1aa95fba8b17e30090aefcdf358d062279a26b52e933891a6330efca70a049233fb" prot="public">
+          <name>REFMSG_INVALIDATE_IF_BG</name>
+          <initializer>= 0x000000F1</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespace_micra_1_1_core_1aa95fba8b17e30090aefcdf358d062279a103c90a4febb2ccb70bccc6ef3aaa586" prot="public">
+          <name>REFMSG_MOD_DISPLAY_ON</name>
+          <initializer>= 0x000000F2</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespace_micra_1_1_core_1aa95fba8b17e30090aefcdf358d062279a10b50d8e57858fe27e04df9bb487332d" prot="public">
+          <name>REFMSG_MOD_DISPLAY_OFF</name>
+          <initializer>= 0x000000F3</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespace_micra_1_1_core_1aa95fba8b17e30090aefcdf358d062279ae958392b8c68906dd1317a58523a622a" prot="public">
+          <name>REFMSG_MOD_EVAL</name>
+          <initializer>= 0x000000F4</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespace_micra_1_1_core_1aa95fba8b17e30090aefcdf358d062279a76f4fe727bc9a43af51760808554b072" prot="public">
+          <name>REFMSG_IS_OK_TO_CHANGE_TOPOLOGY</name>
+          <initializer>= 0x000000F5</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespace_micra_1_1_core_1aa95fba8b17e30090aefcdf358d062279a04b71b1bf020221aafc3fdd41b29bd49" prot="public">
+          <name>REFMSG_NODE_LINK</name>
+          <initializer>= 0x000000F6</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespace_micra_1_1_core_1aa95fba8b17e30090aefcdf358d062279a11a95e6d924191721fe2eb3f56497d82" prot="public">
+          <name>REFMSG_NODE_NAMECHANGE</name>
+          <initializer>= 0x000000F7</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespace_micra_1_1_core_1aa95fba8b17e30090aefcdf358d062279aa7d541608fcd4f23b0162b9b48d3e151" prot="public">
+          <name>REFMSG_OBREF_CHANGE</name>
+          <initializer>= 0x000000F8</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespace_micra_1_1_core_1aa95fba8b17e30090aefcdf358d062279a6d26b89321408cd11e3c419f984cf1a2" prot="public">
+          <name>REFMSG_MODIFIER_ADDED</name>
+          <initializer>= 0x000000F9</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespace_micra_1_1_core_1aa95fba8b17e30090aefcdf358d062279a6368ac6ee2ea670ad23232800d51b233" prot="public">
+          <name>REFMSG_CONTROLREF_CHANGE</name>
+          <initializer>= 0x000000FA</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespace_micra_1_1_core_1aa95fba8b17e30090aefcdf358d062279a60a64ff90ccf561a4608c7cc650d2ebd" prot="public">
+          <name>REFMSG_GET_PARAM_NAME</name>
+          <initializer>= 0x000000FB</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespace_micra_1_1_core_1aa95fba8b17e30090aefcdf358d062279a4b19fca700241e0347fbe14e4de81f39" prot="public">
+          <name>REFMSG_GET_PARAM_DIM</name>
+          <initializer>= 0x000000FC</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespace_micra_1_1_core_1aa95fba8b17e30090aefcdf358d062279a26748ee9addf17443e7f0c6ada4a88b5" prot="public">
+          <name>REFMSG_GET_CONTROL_DIM</name>
+          <initializer>= 0x000000FD</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespace_micra_1_1_core_1aa95fba8b17e30090aefcdf358d062279a0aca5a7ce31254b3b5d606e53e819fb1" prot="public">
+          <name>REFMSG_TM_CHANGE</name>
+          <initializer>= 0x000000FE</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespace_micra_1_1_core_1aa95fba8b17e30090aefcdf358d062279af7b9aa0f6a314a1de82c5be4054261c3" prot="public">
+          <name>REFMSG_RANGE_CHANGE</name>
+          <initializer>= 0x000000FF</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespace_micra_1_1_core_1aa95fba8b17e30090aefcdf358d062279a6438e67b0da201fbf58907823eb661f2" prot="public">
+          <name>REFMSG_LINEHEIGHT_CHANGE</name>
+          <initializer>= 0x00000100</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespace_micra_1_1_core_1aa95fba8b17e30090aefcdf358d062279a5c256030da2118771fe2a651b896abf7" prot="public">
+          <name>REFMSG_BECOMING_ANIMATED</name>
+          <initializer>= 0x00000101</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespace_micra_1_1_core_1aa95fba8b17e30090aefcdf358d062279a826f248aa07695137f4a00c4a8776d27" prot="public">
+          <name>REFMSG_SUBANIM_STRUCTURE_CHANGED</name>
+          <initializer>= 0x00000102</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespace_micra_1_1_core_1aa95fba8b17e30090aefcdf358d062279a5896b53ed43580ddc9edc190a78f2bb9" prot="public">
+          <name>REFMSG_REF_DELETED</name>
+          <initializer>= 0x00000103</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespace_micra_1_1_core_1aa95fba8b17e30090aefcdf358d062279a8ef309496e229905d12df0d3fbc201e6" prot="public">
+          <name>REFMSG_REF_ADDED</name>
+          <initializer>= 0x00000104</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespace_micra_1_1_core_1aa95fba8b17e30090aefcdf358d062279abff266b4f205e2b96593a90a3390cebb" prot="public">
+          <name>REFMSG_BRANCHED_HISTORY_CHANGED</name>
+          <initializer>= 0x00000105</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespace_micra_1_1_core_1aa95fba8b17e30090aefcdf358d062279a1f2d4d8e36b9d158c0cb3129828204f1" prot="public">
+          <name>REFMSG_NODEINSELSET_CHANGED</name>
+          <initializer>= 0x00000106</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespace_micra_1_1_core_1aa95fba8b17e30090aefcdf358d062279a831fe9a078cd485ae6927211932ca4f9" prot="public">
+          <name>REFMSG_TEST_DEPENDENCY</name>
+          <initializer>= 0x00000107</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespace_micra_1_1_core_1aa95fba8b17e30090aefcdf358d062279a00e9f5b3eaa2d4409067bc3de30fb71f" prot="public">
+          <name>REFMSG_WANT_SHOWPARAMLEVEL</name>
+          <initializer>= 0x00000108</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespace_micra_1_1_core_1aa95fba8b17e30090aefcdf358d062279ae6df9dca134d0b48adc504c3c32fcd24" prot="public">
+          <name>REFMSG_BEFORE_PASTE</name>
+          <initializer>= 0x00000109</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespace_micra_1_1_core_1aa95fba8b17e30090aefcdf358d062279ae4cff6422273062d3a194af381c7d03e" prot="public">
+          <name>REFMSG_NOTIFY_PASTE</name>
+          <initializer>= 0x0000010A</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespace_micra_1_1_core_1aa95fba8b17e30090aefcdf358d062279a1e2e767e9e0d20ce18595c84c0f798c8" prot="public">
+          <name>REFMSG_UV_SYM_CHANGE</name>
+          <initializer>= 0x0000010B</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespace_micra_1_1_core_1aa95fba8b17e30090aefcdf358d062279ac5a30c899e44d34b6e2a618fdce0ac8c" prot="public">
+          <name>REFMSG_GET_NODE_NAME</name>
+          <initializer>= 0x0000010C</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespace_micra_1_1_core_1aa95fba8b17e30090aefcdf358d062279a807134817743dd49384bd2b103b3eae5" prot="public">
+          <name>REFMSG_SEL_NODES_DELETED</name>
+          <initializer>= 0x0000010D</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespace_micra_1_1_core_1aa95fba8b17e30090aefcdf358d062279a320313753486fc2a4b774e287f2b735b" prot="public">
+          <name>REFMSG_PRENOTIFY_PASTE</name>
+          <initializer>= 0x0000010E</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespace_micra_1_1_core_1aa95fba8b17e30090aefcdf358d062279afed8126f0fefef7260bc02e8bcc90c32" prot="public">
+          <name>REFMSG_SHAPE_START_CHANGE</name>
+          <initializer>= 0x0000010F</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespace_micra_1_1_core_1aa95fba8b17e30090aefcdf358d062279a064e0c46faeb490fe1303ba9ecd56239" prot="public">
+          <name>REFMSG_SHAPE_END_CHANGE</name>
+          <initializer>= 0x00000110</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespace_micra_1_1_core_1aa95fba8b17e30090aefcdf358d062279add6f0566fe4f085ce3385a85f4c5aaf1" prot="public">
+          <name>REFMSG_TEXMAP_REMOVED</name>
+          <initializer>= 0x00000111</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespace_micra_1_1_core_1aa95fba8b17e30090aefcdf358d062279a66b69d8b83ece2a8611b89ae599c8974" prot="public">
+          <name>REFMSG_FLAG_NODES_WITH_SEL_DEPENDENTS</name>
+          <initializer>= 0x00000112</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespace_micra_1_1_core_1aa95fba8b17e30090aefcdf358d062279a4082b9ef401d96df2609e6604d22cf3d" prot="public">
+          <name>REFMSG_CONTAINED_SHAPE_POS_CHANGE</name>
+          <initializer>= 0x00000120</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespace_micra_1_1_core_1aa95fba8b17e30090aefcdf358d062279af8f01dc350f8541e9c97982966022da6" prot="public">
+          <name>REFMSG_CONTAINED_SHAPE_SEL_CHANGE</name>
+          <initializer>= 0x00000121</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespace_micra_1_1_core_1aa95fba8b17e30090aefcdf358d062279a15c4290e73ec3ea968eb994f1c09dad0" prot="public">
+          <name>REFMSG_CONTAINED_SHAPE_GENERAL_CHANGE</name>
+          <initializer>= 0x00000122</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespace_micra_1_1_core_1aa95fba8b17e30090aefcdf358d062279a6218ba593dee0817bf033b351cc1d052" prot="public">
+          <name>REFMSG_SELECT_BRANCH</name>
+          <initializer>= 0x00000130</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespace_micra_1_1_core_1aa95fba8b17e30090aefcdf358d062279af363f57c07cd39437c433dd464a5a451" prot="public">
+          <name>REFMSG_MOUSE_CYCLE_STARTED</name>
+          <initializer>= 0x00000140</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespace_micra_1_1_core_1aa95fba8b17e30090aefcdf358d062279a488c98508dd4aba6aebdee5c430473b7" prot="public">
+          <name>REFMSG_MOUSE_CYCLE_COMPLETED</name>
+          <initializer>= 0x00000150</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespace_micra_1_1_core_1aa95fba8b17e30090aefcdf358d062279ac28a7581b5b17f8fb0d2ca5d77901d49" prot="public">
+          <name>REFMSG_CHECK_FOR_INVALID_BIND</name>
+          <initializer>= 0x00000161</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespace_micra_1_1_core_1aa95fba8b17e30090aefcdf358d062279a27a3ddac8742cdf9867f0cf4a52baed6" prot="public">
+          <name>REFMSG_OBJECT_CACHE_DUMPED</name>
+          <initializer>= 0x00000162</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespace_micra_1_1_core_1aa95fba8b17e30090aefcdf358d062279a044cf60dd40fde021ace04d1b07333d8" prot="public">
+          <name>REFMSG_SFX_CHANGE</name>
+          <initializer>= 0x00000170</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespace_micra_1_1_core_1aa95fba8b17e30090aefcdf358d062279a3ce78150a6291137aa941d9df4e86122" prot="public">
+          <name>REFMSG_OBJXREF_UPDATEMAT</name>
+          <initializer>= 0x00000180</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespace_micra_1_1_core_1aa95fba8b17e30090aefcdf358d062279ab69441a1a5b322542b6934d74bd0de27" prot="public">
+          <name>REFMSG_OBJXREF_UPDATECTRL</name>
+          <initializer>= 0x00000181</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespace_micra_1_1_core_1aa95fba8b17e30090aefcdf358d062279a2a15801ab489037d4ad03b434a490b0a" prot="public">
+          <name>REFMSG_OBJECT_REPLACED</name>
+          <initializer>= 0x00000200</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespace_micra_1_1_core_1aa95fba8b17e30090aefcdf358d062279ab2f5ad6130b1e3260f14aeceb9ccf894" prot="public">
+          <name>REFMSG_NODE_WIRECOLOR_CHANGED</name>
+          <initializer>= 0x00000210</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespace_micra_1_1_core_1aa95fba8b17e30090aefcdf358d062279a8bd71711fe2d0c0774858159ae417762" prot="public">
+          <name>REFMSG_NUM_SUBOBJECTTYPES_CHANGED</name>
+          <initializer>= 0x00000211</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespace_micra_1_1_core_1aa95fba8b17e30090aefcdf358d062279a9f1a8743617f07893a64d9b8ae9ef36a" prot="public">
+          <name>REFMSG_GET_NODE_HANDLE</name>
+          <initializer>= 0x00000220</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespace_micra_1_1_core_1aa95fba8b17e30090aefcdf358d062279abb4b5f402aad5dd4510bba3804d10a59" prot="public">
+          <name>REFMSG_END_MODIFY_PARAMS</name>
+          <initializer>= 0x00000230</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespace_micra_1_1_core_1aa95fba8b17e30090aefcdf358d062279a892eeed3ca6f28ee942140baee1349f9" prot="public">
+          <name>REFMSG_BEGIN_MODIFY_PARAMS</name>
+          <initializer>= 0x00000231</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespace_micra_1_1_core_1aa95fba8b17e30090aefcdf358d062279a240cf8906102b2bdafcc6db4ac2894ef" prot="public">
+          <name>REFMSG_TAB_ELEMENT_NULLED</name>
+          <initializer>= 0x00000232</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespace_micra_1_1_core_1aa95fba8b17e30090aefcdf358d062279a0e25387f57d1f6a05805f956f5f6333a" prot="public">
+          <name>REFMSG_NODE_HANDLE_CHANGED</name>
+          <initializer>= 0x00000233</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespace_micra_1_1_core_1aa95fba8b17e30090aefcdf358d062279a0c82f46dc0bbe526474179d1b1dc7525" prot="public">
+          <name>REFMSG_NODE_WSCACHE_UPDATED</name>
+          <initializer>= 0x00000234</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespace_micra_1_1_core_1aa95fba8b17e30090aefcdf358d062279aaa90b60545497300a368f142cd5743ce" prot="public">
+          <name>REFMSG_NODE_MATERIAL_CHANGED</name>
+          <initializer>= 0x00000235</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespace_micra_1_1_core_1aa95fba8b17e30090aefcdf358d062279a8d59d416aaa04c077fad3291826afb0a" prot="public">
+          <name>REFMSG_SUBANIM_NUMBER_CHANGED</name>
+          <initializer>= 0x00000236</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespace_micra_1_1_core_1aa95fba8b17e30090aefcdf358d062279a391208e857ee476fa7ecbd704f2e5bc4" prot="public">
+          <name>REFMSG_NODE_FLAGOMB_RENDER</name>
+          <initializer>= 0x00000237</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespace_micra_1_1_core_1aa95fba8b17e30090aefcdf358d062279a64a8cf36b40c0035bbf5ebb7ed1f6393" prot="public">
+          <name>REFMSG_NODE_GI_PROP_CHANGED</name>
+          <initializer>= 0x00000238</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespace_micra_1_1_core_1aa95fba8b17e30090aefcdf358d062279a48ada095e267d0ed2e8606e8beba534c" prot="public">
+          <name>REFMSG_KEY_SELECTION_CHANGED</name>
+          <initializer>= 0x00000239</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespace_micra_1_1_core_1aa95fba8b17e30090aefcdf358d062279a4be4dd8a991321b4ea33b66d91fab6ac" prot="public">
+          <name>REFMSG_NODE_RENDERING_PROP_CHANGED</name>
+          <initializer>= 0x00000240</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespace_micra_1_1_core_1aa95fba8b17e30090aefcdf358d062279a7f4b85d421625959e3881474b8404ec2" prot="public">
+          <name>REFMSG_NODE_DISPLAY_PROP_CHANGED</name>
+          <initializer>= 0x00000241</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespace_micra_1_1_core_1aa95fba8b17e30090aefcdf358d062279a82f839fe0c3f9039554ed666d6d18538" prot="public">
+          <name>REFMSG_NODE_LAYER_PROP_CHANGED</name>
+          <initializer>= 0x00000242</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespace_micra_1_1_core_1aa95fba8b17e30090aefcdf358d062279a5ec757e12bfbd8c61c6b65407acb9dc6" prot="public">
+          <name>REFMSG_MXS_CUSTATTRIB_CHANGE</name>
+          <initializer>= 0x00000250</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespace_micra_1_1_core_1aa95fba8b17e30090aefcdf358d062279a05e03f6d9183d8c1bd46f14d911e7b4d" prot="public">
+          <name>REFMSG_NODE_PRE_DELETE</name>
+          <initializer>= 0x00000255</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespace_micra_1_1_core_1aa95fba8b17e30090aefcdf358d062279a17ce93dc23edf9cc1f5e356ac2d65cce" prot="public">
+          <name>REFMSG_LOCKED</name>
+          <initializer>= 0x00000260</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespace_micra_1_1_core_1aa95fba8b17e30090aefcdf358d062279acceda14d6ed60ac7063a9e4b2c9f8b5b" prot="public">
+          <name>REFMSG_UNLOCKED</name>
+          <initializer>= 0x00000261</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespace_micra_1_1_core_1aa95fba8b17e30090aefcdf358d062279a02b3312b3eb3df06b63e1dc19fccbd85" prot="public">
+          <name>REFMSG_OBJECT_DEFINITION_CHANGE_BEGIN</name>
+          <initializer>= 0x00000270</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespace_micra_1_1_core_1aa95fba8b17e30090aefcdf358d062279a6c0b6c27bb08bce931abb7fbb1a73d2b" prot="public">
+          <name>REFMSG_OBJECT_DEFINITION_CHANGE_END</name>
+          <initializer>= 0x00000271</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespace_micra_1_1_core_1aa95fba8b17e30090aefcdf358d062279ac4bef5df474bc936536dd0caed6584e6" prot="public">
+          <name>REFMSG_DISPLAY_MATERIAL_CHANGE</name>
+          <initializer>= 0x00000275</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespace_micra_1_1_core_1aa95fba8b17e30090aefcdf358d062279abd22686a4c88c2477a7debbea3f326ea" prot="public">
+          <name>REFMSG_USER</name>
+          <initializer>= 0x00010000</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/EnumRefMsg.cs" line="9" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/EnumRefMsg.cs" bodystart="9" bodyend="264"/>
+      </memberdef>
+      <memberdef kind="enum" id="namespace_micra_1_1_core_1a49887bfc6cfd0ab41a046b9d7659dcbf" prot="public" static="no">
+        <name>TaskModes</name>
+        <enumvalue id="namespace_micra_1_1_core_1a49887bfc6cfd0ab41a046b9d7659dcbfa30747c73757e1583780f45b12ed3e814" prot="public">
+          <name>TASK_MODE_CREATE</name>
+          <initializer>= 1</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespace_micra_1_1_core_1a49887bfc6cfd0ab41a046b9d7659dcbfaec197d6c8bebb633dd0cde86f8d6f4c0" prot="public">
+          <name>TASK_MODE_MODIFY</name>
+          <initializer>= 2</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespace_micra_1_1_core_1a49887bfc6cfd0ab41a046b9d7659dcbfaedfe2e2857edb3a1f0b3c465865957be" prot="public">
+          <name>TASK_MODE_HIERARCHY</name>
+          <initializer>= 3</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespace_micra_1_1_core_1a49887bfc6cfd0ab41a046b9d7659dcbfa3b2252218981f76d5eb9e50607d236d3" prot="public">
+          <name>TASK_MODE_MOTION</name>
+          <initializer>= 4</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespace_micra_1_1_core_1a49887bfc6cfd0ab41a046b9d7659dcbfa5428b1859af1b76226d3a481191af6a0" prot="public">
+          <name>TASK_MODE_DISPLAY</name>
+          <initializer>= 5</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespace_micra_1_1_core_1a49887bfc6cfd0ab41a046b9d7659dcbfade1a91a9e68b8c5688beed60ee13ceef" prot="public">
+          <name>TASK_MODE_UTILITY</name>
+          <initializer>= 6</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Structs.cs" line="14" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Structs.cs" bodystart="14" bodyend="22"/>
+      </memberdef>
+      <memberdef kind="enum" id="namespace_micra_1_1_core_1a4b6ae249be17c6f02a66b0f636c4d134" prot="public" static="no">
+        <name>GeometryType</name>
+        <enumvalue id="namespace_micra_1_1_core_1a4b6ae249be17c6f02a66b0f636c4d134a0c3e47aef93a7f244f41ab309a33634b" prot="public">
+          <name>VERTEX</name>
+          <initializer>= 1</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespace_micra_1_1_core_1a4b6ae249be17c6f02a66b0f636c4d134a6563b7570ee4add31ffc4e94fa86b6fb" prot="public">
+          <name>EDGE</name>
+          <initializer>= 2</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespace_micra_1_1_core_1a4b6ae249be17c6f02a66b0f636c4d134a345094d9e282b0f2b2b49fab9b8ad89f" prot="public">
+          <name>FACE</name>
+          <initializer>= 3</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespace_micra_1_1_core_1a4b6ae249be17c6f02a66b0f636c4d134a8e1bde3c3d303163521522cf1d62f21f" prot="public">
+          <name>ANY</name>
+          <initializer>= 4</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Structs.cs" line="24" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Structs.cs" bodystart="24" bodyend="30"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/ActionManager.cs" line="4" column="1"/>
+  </compounddef>
+</doxygen>

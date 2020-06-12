@@ -1,0 +1,303 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
+  <compounddef id="struct_micra_1_1_core_1_1_parameter2" kind="struct" prot="public">
+    <compoundname>Micra::Core::Parameter2</compoundname>
+    <basecompoundref refid="interface_micra_1_1_core_1_1_i_parameter" prot="public" virt="non-virtual">Micra.Core.IParameter</basecompoundref>
+      <sectiondef kind="package-attrib">
+      <memberdef kind="variable" id="struct_micra_1_1_core_1_1_parameter2_1ad5024da394c08fd9b3e848c57e7411f1" prot="package" static="no" mutable="no">
+        <type>short</type>
+        <definition>short Micra.Core.Parameter2.id</definition>
+        <argsstring></argsstring>
+        <name>id</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/ParameterBlock2.cs" line="65" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/ParameterBlock2.cs" bodystart="65" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_micra_1_1_core_1_1_parameter2_1a21156380c923abc7826e08e70c168023" prot="package" static="no" mutable="no">
+        <type>IIParamBlock2</type>
+        <definition>IIParamBlock2 Micra.Core.Parameter2.pb</definition>
+        <argsstring></argsstring>
+        <name>pb</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/ParameterBlock2.cs" line="66" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/ParameterBlock2.cs" bodystart="66" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="property">
+      <memberdef kind="property" id="struct_micra_1_1_core_1_1_parameter2_1a65c46007bd2c2cd94b9b25ab5db794da" prot="package" static="no" readable="no" writable="no" gettable="yes" settable="no">
+        <type><ref refid="struct_micra_1_1_core_1_1_param_def" kindref="compound">ParamDef</ref></type>
+        <definition>ParamDef Micra.Core.Parameter2.Def</definition>
+        <argsstring></argsstring>
+        <name>Def</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/ParameterBlock2.cs" line="69" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/ParameterBlock2.cs" bodystart="70" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="struct_micra_1_1_core_1_1_parameter2_1a3a830a03336ac5a84c4948a13235d8f5" prot="public" static="no" readable="no" writable="no" gettable="yes" settable="no">
+        <type>string</type>
+        <definition>string Micra.Core.Parameter2.Name</definition>
+        <argsstring></argsstring>
+        <name>Name</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/ParameterBlock2.cs" line="74" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/ParameterBlock2.cs" bodystart="75" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="struct_micra_1_1_core_1_1_parameter2_1aa9457e73af02d7289561feac15558505" prot="public" static="no" readable="no" writable="no" gettable="yes" settable="yes">
+        <type>Object</type>
+        <definition>Object Micra.Core.Parameter2.Value</definition>
+        <argsstring></argsstring>
+        <name>Value</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/ParameterBlock2.cs" line="79" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/ParameterBlock2.cs" bodystart="80" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="struct_micra_1_1_core_1_1_parameter2_1af94fbec74ccdd2ce8be64e34af7bb4d8" prot="public" static="no" readable="no" writable="no" gettable="yes" settable="yes">
+        <type>int</type>
+        <definition>int Micra.Core.Parameter2.TableSize</definition>
+        <argsstring></argsstring>
+        <name>TableSize</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/ParameterBlock2.cs" line="101" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/ParameterBlock2.cs" bodystart="102" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="struct_micra_1_1_core_1_1_parameter2_1a3b9b2c5f0a18cdfee7a5fccba84a0160" prot="public" static="no" readable="no" writable="no" gettable="yes" settable="no">
+        <type>int</type>
+        <definition>int Micra.Core.Parameter2.Id</definition>
+        <argsstring></argsstring>
+        <name>Id</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/ParameterBlock2.cs" line="124" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/ParameterBlock2.cs" bodystart="125" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="struct_micra_1_1_core_1_1_parameter2_1ad0be328a5919ff0400a3e9828bcd0e1f" prot="public" static="no" readable="no" writable="no" gettable="yes" settable="no">
+        <type>string</type>
+        <definition>string Micra.Core.Parameter2.Type</definition>
+        <argsstring></argsstring>
+        <name>Type</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/ParameterBlock2.cs" line="130" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/ParameterBlock2.cs" bodystart="131" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="package-func">
+      <memberdef kind="function" id="struct_micra_1_1_core_1_1_parameter2_1a0b5bb7e955de2c95ed66e5cb14d30948" prot="package" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>Micra.Core.Parameter2.Parameter2</definition>
+        <argsstring>(IIParamBlock2 pb, short id)</argsstring>
+        <name>Parameter2</name>
+        <param>
+          <type>IIParamBlock2</type>
+          <declname>pb</declname>
+        </param>
+        <param>
+          <type>short</type>
+          <declname>id</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/ParameterBlock2.cs" line="67" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/ParameterBlock2.cs" bodystart="67" bodyend="67"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="struct_micra_1_1_core_1_1_parameter2_1a1b02f6f91d2486b0f8c1b3fc8b0f9e85" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Micra.Core.Parameter2.SetValue</definition>
+        <argsstring>(Object value, TimeValue t)</argsstring>
+        <name>SetValue</name>
+        <reimplements refid="interface_micra_1_1_core_1_1_i_parameter_1a9a7012f56a95ac4188da30f9c229f16d">SetValue</reimplements>
+        <param>
+          <type>Object</type>
+          <declname>value</declname>
+        </param>
+        <param>
+          <type><ref refid="struct_micra_1_1_core_1_1_time_value" kindref="compound">TimeValue</ref></type>
+          <declname>t</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/ParameterBlock2.cs" line="91" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/ParameterBlock2.cs" bodystart="91" bodyend="94"/>
+      </memberdef>
+      <memberdef kind="function" id="struct_micra_1_1_core_1_1_parameter2_1a509f46ec44f4ff0a9dbe444d6da7e3c3" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>Object</type>
+        <definition>Object Micra.Core.Parameter2.GetValue</definition>
+        <argsstring>(TimeValue t)</argsstring>
+        <name>GetValue</name>
+        <reimplements refid="interface_micra_1_1_core_1_1_i_parameter_1a4f8aba555e6a52b84a34cfd6d6eb1f75">GetValue</reimplements>
+        <param>
+          <type><ref refid="struct_micra_1_1_core_1_1_time_value" kindref="compound">TimeValue</ref></type>
+          <declname>t</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/ParameterBlock2.cs" line="96" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/ParameterBlock2.cs" bodystart="96" bodyend="99"/>
+      </memberdef>
+      <memberdef kind="function" id="struct_micra_1_1_core_1_1_parameter2_1abf596de2828a1f19d27896236682fb95" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>IEnumerable&lt; Object &gt;</type>
+        <definition>IEnumerable&lt;Object&gt; Micra.Core.Parameter2.GetTableValues</definition>
+        <argsstring>()</argsstring>
+        <name>GetTableValues</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/ParameterBlock2.cs" line="113" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/ParameterBlock2.cs" bodystart="113" bodyend="116"/>
+        <references refid="class_micra_1_1_core_1_1_kernel_1a69390eb10a4e222d27395138c67796aa" compoundref="_kernel_8cs" startline="143">Micra.Core.Kernel.Now</references>
+      </memberdef>
+      <memberdef kind="function" id="struct_micra_1_1_core_1_1_parameter2_1a5cde24709eef6878de776608a139df83" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>IEnumerable&lt; Object &gt;</type>
+        <definition>IEnumerable&lt;Object&gt; Micra.Core.Parameter2.GetTableValues</definition>
+        <argsstring>(TimeValue t)</argsstring>
+        <name>GetTableValues</name>
+        <param>
+          <type><ref refid="struct_micra_1_1_core_1_1_time_value" kindref="compound">TimeValue</ref></type>
+          <declname>t</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/ParameterBlock2.cs" line="118" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/ParameterBlock2.cs" bodystart="118" bodyend="122"/>
+      </memberdef>
+      <memberdef kind="function" id="struct_micra_1_1_core_1_1_parameter2_1a47b8b535663f246f8450ec2bc3f06f8b" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>Object</type>
+        <definition>Object Micra.Core.Parameter2.GetValue</definition>
+        <argsstring>(TimeValue t, int tabIndex)</argsstring>
+        <name>GetValue</name>
+        <param>
+          <type><ref refid="struct_micra_1_1_core_1_1_time_value" kindref="compound">TimeValue</ref></type>
+          <declname>t</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>tabIndex</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/ParameterBlock2.cs" line="135" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/ParameterBlock2.cs" bodystart="135" bodyend="215"/>
+      </memberdef>
+      <memberdef kind="function" id="struct_micra_1_1_core_1_1_parameter2_1ad03badc8b44e4138cdbd6efcf8dd5a2b" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Micra.Core.Parameter2.SetValue</definition>
+        <argsstring>(Object value, TimeValue time, int tabIndex)</argsstring>
+        <name>SetValue</name>
+        <param>
+          <type>Object</type>
+          <declname>value</declname>
+        </param>
+        <param>
+          <type><ref refid="struct_micra_1_1_core_1_1_time_value" kindref="compound">TimeValue</ref></type>
+          <declname>time</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>tabIndex</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/ParameterBlock2.cs" line="217" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/ParameterBlock2.cs" bodystart="217" bodyend="296"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Represents a single parameter in a parameter block. There is no such thing in the 3ds <ref refid="class_micra_1_1_core_1_1_max" kindref="compound">Max</ref> SDK, so this wraps a parameter block and a parameter id together. </para>    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="320">
+        <label>IParameter</label>
+        <link refid="interface_micra_1_1_core_1_1_i_parameter"/>
+      </node>
+      <node id="319">
+        <label>Micra.Core.Parameter2</label>
+        <link refid="struct_micra_1_1_core_1_1_parameter2"/>
+        <childnode refid="320" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="322">
+        <label>IParameter</label>
+        <link refid="interface_micra_1_1_core_1_1_i_parameter"/>
+      </node>
+      <node id="321">
+        <label>Micra.Core.Parameter2</label>
+        <link refid="struct_micra_1_1_core_1_1_parameter2"/>
+        <childnode refid="322" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/ParameterBlock2.cs" line="64" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/ParameterBlock2.cs" bodystart="63" bodyend="297"/>
+    <listofallmembers>
+      <member refid="struct_micra_1_1_core_1_1_parameter2_1a65c46007bd2c2cd94b9b25ab5db794da" prot="package" virt="non-virtual"><scope>Micra::Core::Parameter2</scope><name>Def</name></member>
+      <member refid="struct_micra_1_1_core_1_1_parameter2_1abf596de2828a1f19d27896236682fb95" prot="public" virt="non-virtual"><scope>Micra::Core::Parameter2</scope><name>GetTableValues</name></member>
+      <member refid="struct_micra_1_1_core_1_1_parameter2_1a5cde24709eef6878de776608a139df83" prot="public" virt="non-virtual"><scope>Micra::Core::Parameter2</scope><name>GetTableValues</name></member>
+      <member refid="struct_micra_1_1_core_1_1_parameter2_1a509f46ec44f4ff0a9dbe444d6da7e3c3" prot="public" virt="non-virtual"><scope>Micra::Core::Parameter2</scope><name>GetValue</name></member>
+      <member refid="struct_micra_1_1_core_1_1_parameter2_1a47b8b535663f246f8450ec2bc3f06f8b" prot="public" virt="non-virtual"><scope>Micra::Core::Parameter2</scope><name>GetValue</name></member>
+      <member refid="struct_micra_1_1_core_1_1_parameter2_1ad5024da394c08fd9b3e848c57e7411f1" prot="package" virt="non-virtual"><scope>Micra::Core::Parameter2</scope><name>id</name></member>
+      <member refid="struct_micra_1_1_core_1_1_parameter2_1a3b9b2c5f0a18cdfee7a5fccba84a0160" prot="public" virt="non-virtual"><scope>Micra::Core::Parameter2</scope><name>Id</name></member>
+      <member refid="struct_micra_1_1_core_1_1_parameter2_1a3a830a03336ac5a84c4948a13235d8f5" prot="public" virt="non-virtual"><scope>Micra::Core::Parameter2</scope><name>Name</name></member>
+      <member refid="struct_micra_1_1_core_1_1_parameter2_1a0b5bb7e955de2c95ed66e5cb14d30948" prot="package" virt="non-virtual"><scope>Micra::Core::Parameter2</scope><name>Parameter2</name></member>
+      <member refid="struct_micra_1_1_core_1_1_parameter2_1a21156380c923abc7826e08e70c168023" prot="package" virt="non-virtual"><scope>Micra::Core::Parameter2</scope><name>pb</name></member>
+      <member refid="struct_micra_1_1_core_1_1_parameter2_1a1b02f6f91d2486b0f8c1b3fc8b0f9e85" prot="public" virt="non-virtual"><scope>Micra::Core::Parameter2</scope><name>SetValue</name></member>
+      <member refid="struct_micra_1_1_core_1_1_parameter2_1ad03badc8b44e4138cdbd6efcf8dd5a2b" prot="public" virt="non-virtual"><scope>Micra::Core::Parameter2</scope><name>SetValue</name></member>
+      <member refid="struct_micra_1_1_core_1_1_parameter2_1af94fbec74ccdd2ce8be64e34af7bb4d8" prot="public" virt="non-virtual"><scope>Micra::Core::Parameter2</scope><name>TableSize</name></member>
+      <member refid="struct_micra_1_1_core_1_1_parameter2_1ad0be328a5919ff0400a3e9828bcd0e1f" prot="public" virt="non-virtual"><scope>Micra::Core::Parameter2</scope><name>Type</name></member>
+      <member refid="struct_micra_1_1_core_1_1_parameter2_1aa9457e73af02d7289561feac15558505" prot="public" virt="non-virtual"><scope>Micra::Core::Parameter2</scope><name>Value</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

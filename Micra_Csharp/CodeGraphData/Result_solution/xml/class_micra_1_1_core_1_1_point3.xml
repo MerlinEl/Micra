@@ -1,0 +1,511 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
+  <compounddef id="class_micra_1_1_core_1_1_point3" kind="class" prot="public">
+    <compoundname>Micra::Core::Point3</compoundname>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="class_micra_1_1_core_1_1_point3_1a15e734520cae1d3494ec4ad294332f1d" prot="public" static="no" mutable="no">
+        <type>float</type>
+        <definition>float Micra.Core.Point3.X</definition>
+        <argsstring></argsstring>
+        <name>X</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Point3.cs" line="17" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Point3.cs" bodystart="17" bodyend="-1"/>
+        <referencedby refid="struct_micra_1_1_core_1_1_vector3_1ae1da37c22270b0cfcad9a5671243070e" compoundref="_vector3_8cs" startline="267" endline="273">Micra.Core.Vector3.Add</referencedby>
+        <referencedby refid="struct_micra_1_1_core_1_1_vector3_1ad794736215566ecb62515ce60a79d857" compoundref="_vector3_8cs" startline="58" endline="65">Micra.Core.Vector3.FromPoints</referencedby>
+        <referencedby refid="class_micra_1_1_core_1_1_point3_1a7ff2eb01b2ea070234f166187acff8a3" compoundref="_point3_8cs" startline="39" endline="39">Micra.Core.Point3.operator*</referencedby>
+        <referencedby refid="class_micra_1_1_core_1_1_point3_1a94555f1cde18df273fb8ab01a63672bf" compoundref="_point3_8cs" startline="33" endline="33">Micra.Core.Point3.operator+</referencedby>
+        <referencedby refid="struct_micra_1_1_core_1_1_vector3_1a771e17ae368db506e27df18b1b1577f2" compoundref="_vector3_8cs" startline="253" endline="259">Micra.Core.Vector3.operator+</referencedby>
+        <referencedby refid="class_micra_1_1_core_1_1_point3_1a67c3e34777de4fadeef0ecc44b963250" compoundref="_point3_8cs" startline="30" endline="30">Micra.Core.Point3.operator-</referencedby>
+        <referencedby refid="struct_micra_1_1_core_1_1_vector3_1a9171ebf08edacc3d8a2fb8cced9cdf9b" compoundref="_vector3_8cs" startline="281" endline="287">Micra.Core.Vector3.operator-</referencedby>
+        <referencedby refid="class_micra_1_1_core_1_1_point3_1a5c377d8d419c41309a7f7c9a57d8125d" compoundref="_point3_8cs" startline="43" endline="43">Micra.Core.Point3.operator/</referencedby>
+        <referencedby refid="class_micra_1_1_core_1_1_point3_1a0fa4a2d2dd48e57b540b13001eb32855" compoundref="_point3_8cs" startline="37" endline="37">Micra.Core.Point3.operator^</referencedby>
+        <referencedby refid="struct_micra_1_1_core_1_1_vector3_1a7ad34c6283f98b13fe0130b82cf55847" compoundref="_vector3_8cs" startline="295" endline="301">Micra.Core.Vector3.Subtract</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="class_micra_1_1_core_1_1_point3_1acee244b58bc2c836872196386fc48bde" prot="public" static="no" mutable="no">
+        <type>float</type>
+        <definition>float Micra.Core.Point3.Y</definition>
+        <argsstring></argsstring>
+        <name>Y</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Point3.cs" line="18" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Point3.cs" bodystart="18" bodyend="-1"/>
+        <referencedby refid="struct_micra_1_1_core_1_1_vector3_1ae1da37c22270b0cfcad9a5671243070e" compoundref="_vector3_8cs" startline="267" endline="273">Micra.Core.Vector3.Add</referencedby>
+        <referencedby refid="struct_micra_1_1_core_1_1_vector3_1ad794736215566ecb62515ce60a79d857" compoundref="_vector3_8cs" startline="58" endline="65">Micra.Core.Vector3.FromPoints</referencedby>
+        <referencedby refid="class_micra_1_1_core_1_1_point3_1a7ff2eb01b2ea070234f166187acff8a3" compoundref="_point3_8cs" startline="39" endline="39">Micra.Core.Point3.operator*</referencedby>
+        <referencedby refid="class_micra_1_1_core_1_1_point3_1a94555f1cde18df273fb8ab01a63672bf" compoundref="_point3_8cs" startline="33" endline="33">Micra.Core.Point3.operator+</referencedby>
+        <referencedby refid="struct_micra_1_1_core_1_1_vector3_1a771e17ae368db506e27df18b1b1577f2" compoundref="_vector3_8cs" startline="253" endline="259">Micra.Core.Vector3.operator+</referencedby>
+        <referencedby refid="class_micra_1_1_core_1_1_point3_1a67c3e34777de4fadeef0ecc44b963250" compoundref="_point3_8cs" startline="30" endline="30">Micra.Core.Point3.operator-</referencedby>
+        <referencedby refid="struct_micra_1_1_core_1_1_vector3_1a9171ebf08edacc3d8a2fb8cced9cdf9b" compoundref="_vector3_8cs" startline="281" endline="287">Micra.Core.Vector3.operator-</referencedby>
+        <referencedby refid="class_micra_1_1_core_1_1_point3_1a5c377d8d419c41309a7f7c9a57d8125d" compoundref="_point3_8cs" startline="43" endline="43">Micra.Core.Point3.operator/</referencedby>
+        <referencedby refid="class_micra_1_1_core_1_1_point3_1a0fa4a2d2dd48e57b540b13001eb32855" compoundref="_point3_8cs" startline="37" endline="37">Micra.Core.Point3.operator^</referencedby>
+        <referencedby refid="struct_micra_1_1_core_1_1_vector3_1a7ad34c6283f98b13fe0130b82cf55847" compoundref="_vector3_8cs" startline="295" endline="301">Micra.Core.Vector3.Subtract</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="class_micra_1_1_core_1_1_point3_1a34790f4384cf805be47de66f98a601cb" prot="public" static="no" mutable="no">
+        <type>float</type>
+        <definition>float Micra.Core.Point3.Z</definition>
+        <argsstring></argsstring>
+        <name>Z</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Point3.cs" line="19" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Point3.cs" bodystart="19" bodyend="-1"/>
+        <referencedby refid="struct_micra_1_1_core_1_1_vector3_1ae1da37c22270b0cfcad9a5671243070e" compoundref="_vector3_8cs" startline="267" endline="273">Micra.Core.Vector3.Add</referencedby>
+        <referencedby refid="struct_micra_1_1_core_1_1_vector3_1ad794736215566ecb62515ce60a79d857" compoundref="_vector3_8cs" startline="58" endline="65">Micra.Core.Vector3.FromPoints</referencedby>
+        <referencedby refid="class_micra_1_1_core_1_1_point3_1a7ff2eb01b2ea070234f166187acff8a3" compoundref="_point3_8cs" startline="39" endline="39">Micra.Core.Point3.operator*</referencedby>
+        <referencedby refid="class_micra_1_1_core_1_1_point3_1a94555f1cde18df273fb8ab01a63672bf" compoundref="_point3_8cs" startline="33" endline="33">Micra.Core.Point3.operator+</referencedby>
+        <referencedby refid="struct_micra_1_1_core_1_1_vector3_1a771e17ae368db506e27df18b1b1577f2" compoundref="_vector3_8cs" startline="253" endline="259">Micra.Core.Vector3.operator+</referencedby>
+        <referencedby refid="class_micra_1_1_core_1_1_point3_1a67c3e34777de4fadeef0ecc44b963250" compoundref="_point3_8cs" startline="30" endline="30">Micra.Core.Point3.operator-</referencedby>
+        <referencedby refid="struct_micra_1_1_core_1_1_vector3_1a9171ebf08edacc3d8a2fb8cced9cdf9b" compoundref="_vector3_8cs" startline="281" endline="287">Micra.Core.Vector3.operator-</referencedby>
+        <referencedby refid="class_micra_1_1_core_1_1_point3_1a5c377d8d419c41309a7f7c9a57d8125d" compoundref="_point3_8cs" startline="43" endline="43">Micra.Core.Point3.operator/</referencedby>
+        <referencedby refid="class_micra_1_1_core_1_1_point3_1a0fa4a2d2dd48e57b540b13001eb32855" compoundref="_point3_8cs" startline="37" endline="37">Micra.Core.Point3.operator^</referencedby>
+        <referencedby refid="struct_micra_1_1_core_1_1_vector3_1a7ad34c6283f98b13fe0130b82cf55847" compoundref="_vector3_8cs" startline="295" endline="301">Micra.Core.Vector3.Subtract</referencedby>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="property">
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_point3_1a70d40c6cbc6b49c5c97ab54a02026070" prot="public" static="yes" readable="no" writable="no" gettable="yes" settable="no">
+        <type><ref refid="class_micra_1_1_core_1_1_point3" kindref="compound">Point3</ref></type>
+        <definition>Point3 Micra.Core.Point3.Origin</definition>
+        <argsstring></argsstring>
+        <name>Origin</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Point3.cs" line="25" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Point3.cs" bodystart="25" bodyend="-1"/>
+        <referencedby refid="class_micra_1_1_core_1_1_mesh_1a2a72c9b685dec497f232f225561e4f97" compoundref="_mesh_8cs" startline="57" endline="104">Micra.Core.Mesh.Mesh</referencedby>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_point3_1a5d59ac1c8ad78e54440274373f7d7762" prot="public" static="yes" readable="no" writable="no" gettable="yes" settable="no">
+        <type><ref refid="class_micra_1_1_core_1_1_point3" kindref="compound">Point3</ref></type>
+        <definition>Point3 Micra.Core.Point3.XAxis</definition>
+        <argsstring></argsstring>
+        <name>XAxis</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Point3.cs" line="26" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Point3.cs" bodystart="26" bodyend="-1"/>
+        <referencedby refid="class_micra_1_1_core_1_1_matrix3_1a1e5a6edd6dcd211f66207e7a032e4043" compoundref="_matrix3_8cs" startline="45" endline="47">Micra.Core.Matrix3.Translation</referencedby>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_point3_1a27f31cacd3bf19d2f6fa09e7ff16ea12" prot="public" static="yes" readable="no" writable="no" gettable="yes" settable="no">
+        <type><ref refid="class_micra_1_1_core_1_1_point3" kindref="compound">Point3</ref></type>
+        <definition>Point3 Micra.Core.Point3.YAxis</definition>
+        <argsstring></argsstring>
+        <name>YAxis</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Point3.cs" line="27" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Point3.cs" bodystart="27" bodyend="-1"/>
+        <referencedby refid="class_micra_1_1_core_1_1_matrix3_1a1e5a6edd6dcd211f66207e7a032e4043" compoundref="_matrix3_8cs" startline="45" endline="47">Micra.Core.Matrix3.Translation</referencedby>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_point3_1af7d87f97e8048b8838cb8821157f9389" prot="public" static="yes" readable="no" writable="no" gettable="yes" settable="no">
+        <type><ref refid="class_micra_1_1_core_1_1_point3" kindref="compound">Point3</ref></type>
+        <definition>Point3 Micra.Core.Point3.ZAxis</definition>
+        <argsstring></argsstring>
+        <name>ZAxis</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Point3.cs" line="28" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Point3.cs" bodystart="28" bodyend="-1"/>
+        <referencedby refid="class_micra_1_1_core_1_1_matrix3_1a1e5a6edd6dcd211f66207e7a032e4043" compoundref="_matrix3_8cs" startline="45" endline="47">Micra.Core.Matrix3.Translation</referencedby>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_point3_1a5b602ad040a4753282c23487823088bf" prot="public" static="no" readable="no" writable="no" gettable="yes" settable="no">
+        <type>IPoint3</type>
+        <definition>IPoint3 Micra.Core.Point3._IPoint3</definition>
+        <argsstring></argsstring>
+        <name>_IPoint3</name>
+        <briefdescription>
+<para>usage: Get IPoint3 from <ref refid="class_micra_1_1_core_1_1_point3" kindref="compound">Point3</ref></para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Point3.cs" line="45" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Point3.cs" bodystart="45" bodyend="-1"/>
+        <referencedby refid="class_micra_1_1_core_1_1_node_1a4d4d738e1fcbc244eefab24d82642dab" compoundref="_node_8cs" startline="269" endline="271">Micra.Core.Node.Move</referencedby>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_point3_1a207999ea56127ec2eacf6b4e5575ad9f" prot="public" static="no" readable="no" writable="no" gettable="yes" settable="no">
+        <type>float</type>
+        <definition>float Micra.Core.Point3.Length</definition>
+        <argsstring></argsstring>
+        <name>Length</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Point3.cs" line="47" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Point3.cs" bodystart="47" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_point3_1a2ba5d49eb5bcdad751d23ef9a779d00b" prot="public" static="no" readable="no" writable="no" gettable="yes" settable="no">
+        <type>float</type>
+        <definition>float Micra.Core.Point3.LengthSquared</definition>
+        <argsstring></argsstring>
+        <name>LengthSquared</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Point3.cs" line="48" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Point3.cs" bodystart="48" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_point3_1a5804f7b84f7b536360f32b223ffffbb5" prot="public" static="no" readable="no" writable="no" gettable="yes" settable="no">
+        <type><ref refid="class_micra_1_1_core_1_1_point3" kindref="compound">Point3</ref></type>
+        <definition>Point3 Micra.Core.Point3.Normalized</definition>
+        <argsstring></argsstring>
+        <name>Normalized</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Point3.cs" line="49" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Point3.cs" bodystart="49" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_point3_1ae6faa5898b35a577135079bfa0b5098b" prot="public" static="no" readable="no" writable="no" gettable="yes" settable="yes">
+        <type>float</type>
+        <definition>float Micra.Core.Point3.this[int i]</definition>
+        <argsstring></argsstring>
+        <name>this[int i]</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Point3.cs" line="66" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Point3.cs" bodystart="66" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_point3_1aab86615cc660955374d13bc4fa2e0fe8" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>Micra.Core.Point3.Point3</definition>
+        <argsstring>()</argsstring>
+        <name>Point3</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Point3.cs" line="21" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Point3.cs" bodystart="21" bodyend="21"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_point3_1a36cb9f0258db616b938ed7e6f3be668a" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>Micra.Core.Point3.Point3</definition>
+        <argsstring>(IPoint3 pt)</argsstring>
+        <name>Point3</name>
+        <param>
+          <type>IPoint3</type>
+          <declname>pt</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Point3.cs" line="22" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Point3.cs" bodystart="22" bodyend="22"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_point3_1a7f6a5b4ba9d0346f839629bb8e4fb462" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>Micra.Core.Point3.Point3</definition>
+        <argsstring>(float x, float y, float z)</argsstring>
+        <name>Point3</name>
+        <param>
+          <type>float</type>
+          <declname>x</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>y</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>z</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Point3.cs" line="23" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Point3.cs" bodystart="23" bodyend="23"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_point3_1a4e3237a62a8bbb546bf33f43454f5241" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Micra.Core.Point3.Normalize</definition>
+        <argsstring>()</argsstring>
+        <name>Normalize</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Point3.cs" line="51" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Point3.cs" bodystart="51" bodyend="51"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_point3_1a67c3e34777de4fadeef0ecc44b963250" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="class_micra_1_1_core_1_1_point3" kindref="compound">Point3</ref></type>
+        <definition>static Point3 Micra.Core.Point3.operator-</definition>
+        <argsstring>(Point3 a)</argsstring>
+        <name>operator-</name>
+        <param>
+          <type><ref refid="class_micra_1_1_core_1_1_point3" kindref="compound">Point3</ref></type>
+          <declname>a</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Point3.cs" line="30" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Point3.cs" bodystart="30" bodyend="30"/>
+        <references refid="class_micra_1_1_core_1_1_point3_1a15e734520cae1d3494ec4ad294332f1d" compoundref="_point3_8cs" startline="17">Micra.Core.Point3.X</references>
+        <references refid="class_micra_1_1_core_1_1_point3_1acee244b58bc2c836872196386fc48bde" compoundref="_point3_8cs" startline="18">Micra.Core.Point3.Y</references>
+        <references refid="class_micra_1_1_core_1_1_point3_1a34790f4384cf805be47de66f98a601cb" compoundref="_point3_8cs" startline="19">Micra.Core.Point3.Z</references>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_point3_1a94555f1cde18df273fb8ab01a63672bf" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="class_micra_1_1_core_1_1_point3" kindref="compound">Point3</ref></type>
+        <definition>static Point3 Micra.Core.Point3.operator+</definition>
+        <argsstring>(Point3 a, Point3 b)</argsstring>
+        <name>operator+</name>
+        <param>
+          <type><ref refid="class_micra_1_1_core_1_1_point3" kindref="compound">Point3</ref></type>
+          <declname>a</declname>
+        </param>
+        <param>
+          <type><ref refid="class_micra_1_1_core_1_1_point3" kindref="compound">Point3</ref></type>
+          <declname>b</declname>
+        </param>
+        <briefdescription>
+<para>usage: Vector Addition</para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Point3.cs" line="33" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Point3.cs" bodystart="33" bodyend="33"/>
+        <references refid="class_micra_1_1_core_1_1_point3_1a15e734520cae1d3494ec4ad294332f1d" compoundref="_point3_8cs" startline="17">Micra.Core.Point3.X</references>
+        <references refid="class_micra_1_1_core_1_1_point3_1acee244b58bc2c836872196386fc48bde" compoundref="_point3_8cs" startline="18">Micra.Core.Point3.Y</references>
+        <references refid="class_micra_1_1_core_1_1_point3_1a34790f4384cf805be47de66f98a601cb" compoundref="_point3_8cs" startline="19">Micra.Core.Point3.Z</references>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_point3_1aaa7103751936324c0ed82bac054fe27d" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="class_micra_1_1_core_1_1_point3" kindref="compound">Point3</ref></type>
+        <definition>static Point3 Micra.Core.Point3.operator-</definition>
+        <argsstring>(Point3 a, Point3 b)</argsstring>
+        <name>operator-</name>
+        <param>
+          <type><ref refid="class_micra_1_1_core_1_1_point3" kindref="compound">Point3</ref></type>
+          <declname>a</declname>
+        </param>
+        <param>
+          <type><ref refid="class_micra_1_1_core_1_1_point3" kindref="compound">Point3</ref></type>
+          <declname>b</declname>
+        </param>
+        <briefdescription>
+<para>usage: Vector Subtraction</para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Point3.cs" line="35" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Point3.cs" bodystart="35" bodyend="35"/>
+        <references refid="class_micra_1_1_core_1_1_point3_1a15e734520cae1d3494ec4ad294332f1d" compoundref="_point3_8cs" startline="17">Micra.Core.Point3.X</references>
+        <references refid="class_micra_1_1_core_1_1_point3_1acee244b58bc2c836872196386fc48bde" compoundref="_point3_8cs" startline="18">Micra.Core.Point3.Y</references>
+        <references refid="class_micra_1_1_core_1_1_point3_1a34790f4384cf805be47de66f98a601cb" compoundref="_point3_8cs" startline="19">Micra.Core.Point3.Z</references>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_point3_1a0fa4a2d2dd48e57b540b13001eb32855" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="class_micra_1_1_core_1_1_point3" kindref="compound">Point3</ref></type>
+        <definition>static Point3 Micra.Core.Point3.operator^</definition>
+        <argsstring>(Point3 a, Point3 b)</argsstring>
+        <name>operator^</name>
+        <param>
+          <type><ref refid="class_micra_1_1_core_1_1_point3" kindref="compound">Point3</ref></type>
+          <declname>a</declname>
+        </param>
+        <param>
+          <type><ref refid="class_micra_1_1_core_1_1_point3" kindref="compound">Point3</ref></type>
+          <declname>b</declname>
+        </param>
+        <briefdescription>
+<para>usage: Cross Product</para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Point3.cs" line="37" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Point3.cs" bodystart="37" bodyend="37"/>
+        <references refid="class_micra_1_1_core_1_1_point3_1a15e734520cae1d3494ec4ad294332f1d" compoundref="_point3_8cs" startline="17">Micra.Core.Point3.X</references>
+        <references refid="class_micra_1_1_core_1_1_point3_1acee244b58bc2c836872196386fc48bde" compoundref="_point3_8cs" startline="18">Micra.Core.Point3.Y</references>
+        <references refid="class_micra_1_1_core_1_1_point3_1a34790f4384cf805be47de66f98a601cb" compoundref="_point3_8cs" startline="19">Micra.Core.Point3.Z</references>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_point3_1a7ff2eb01b2ea070234f166187acff8a3" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>float</type>
+        <definition>static float Micra.Core.Point3.operator*</definition>
+        <argsstring>(Point3 a, Point3 b)</argsstring>
+        <name>operator*</name>
+        <param>
+          <type><ref refid="class_micra_1_1_core_1_1_point3" kindref="compound">Point3</ref></type>
+          <declname>a</declname>
+        </param>
+        <param>
+          <type><ref refid="class_micra_1_1_core_1_1_point3" kindref="compound">Point3</ref></type>
+          <declname>b</declname>
+        </param>
+        <briefdescription>
+<para>usage: Dot Product</para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Point3.cs" line="39" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Point3.cs" bodystart="39" bodyend="39"/>
+        <references refid="class_micra_1_1_core_1_1_point3_1a15e734520cae1d3494ec4ad294332f1d" compoundref="_point3_8cs" startline="17">Micra.Core.Point3.X</references>
+        <references refid="class_micra_1_1_core_1_1_point3_1acee244b58bc2c836872196386fc48bde" compoundref="_point3_8cs" startline="18">Micra.Core.Point3.Y</references>
+        <references refid="class_micra_1_1_core_1_1_point3_1a34790f4384cf805be47de66f98a601cb" compoundref="_point3_8cs" startline="19">Micra.Core.Point3.Z</references>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_point3_1a6fd5dd7210a74bf9b42e8cd0491cdb11" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="class_micra_1_1_core_1_1_point3" kindref="compound">Point3</ref></type>
+        <definition>static Point3 Micra.Core.Point3.operator*</definition>
+        <argsstring>(Point3 a, float scale)</argsstring>
+        <name>operator*</name>
+        <param>
+          <type><ref refid="class_micra_1_1_core_1_1_point3" kindref="compound">Point3</ref></type>
+          <declname>a</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>scale</declname>
+        </param>
+        <briefdescription>
+<para>usage:Scale Up</para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Point3.cs" line="41" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Point3.cs" bodystart="41" bodyend="41"/>
+        <references refid="class_micra_1_1_core_1_1_point3_1a15e734520cae1d3494ec4ad294332f1d" compoundref="_point3_8cs" startline="17">Micra.Core.Point3.X</references>
+        <references refid="class_micra_1_1_core_1_1_point3_1acee244b58bc2c836872196386fc48bde" compoundref="_point3_8cs" startline="18">Micra.Core.Point3.Y</references>
+        <references refid="class_micra_1_1_core_1_1_point3_1a34790f4384cf805be47de66f98a601cb" compoundref="_point3_8cs" startline="19">Micra.Core.Point3.Z</references>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_point3_1a5c377d8d419c41309a7f7c9a57d8125d" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="class_micra_1_1_core_1_1_point3" kindref="compound">Point3</ref></type>
+        <definition>static Point3 Micra.Core.Point3.operator/</definition>
+        <argsstring>(Point3 a, float scale)</argsstring>
+        <name>operator/</name>
+        <param>
+          <type><ref refid="class_micra_1_1_core_1_1_point3" kindref="compound">Point3</ref></type>
+          <declname>a</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>scale</declname>
+        </param>
+        <briefdescription>
+<para>usage: Scale Down</para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Point3.cs" line="43" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Point3.cs" bodystart="43" bodyend="43"/>
+        <references refid="class_micra_1_1_core_1_1_point3_1a15e734520cae1d3494ec4ad294332f1d" compoundref="_point3_8cs" startline="17">Micra.Core.Point3.X</references>
+        <references refid="class_micra_1_1_core_1_1_point3_1acee244b58bc2c836872196386fc48bde" compoundref="_point3_8cs" startline="18">Micra.Core.Point3.Y</references>
+        <references refid="class_micra_1_1_core_1_1_point3_1a34790f4384cf805be47de66f98a601cb" compoundref="_point3_8cs" startline="19">Micra.Core.Point3.Z</references>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="package-func">
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_point3_1a950e8664043a286f8e0df296b9179036" prot="package" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>double</type>
+        <definition>double Micra.Core.Point3.DistanceTo</definition>
+        <argsstring>(Point3 p2)</argsstring>
+        <name>DistanceTo</name>
+        <param>
+          <type><ref refid="class_micra_1_1_core_1_1_point3" kindref="compound">Point3</ref></type>
+          <declname>p2</declname>
+        </param>
+        <briefdescription>
+<para>usage: Distance from current <ref refid="class_micra_1_1_core_1_1_point3" kindref="compound">Point3</ref> to another <ref refid="class_micra_1_1_core_1_1_point3" kindref="compound">Point3</ref></para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Point3.cs" line="53" column="1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="package-static-func">
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_point3_1a10aa3a10777cf3bcb1f907d8cd02d393" prot="package" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>double</type>
+        <definition>static double Micra.Core.Point3.Distance</definition>
+        <argsstring>(Point3 p1, Point3 p2)</argsstring>
+        <name>Distance</name>
+        <param>
+          <type><ref refid="class_micra_1_1_core_1_1_point3" kindref="compound">Point3</ref></type>
+          <declname>p1</declname>
+        </param>
+        <param>
+          <type><ref refid="class_micra_1_1_core_1_1_point3" kindref="compound">Point3</ref></type>
+          <declname>p2</declname>
+        </param>
+        <briefdescription>
+<para>usage: Distance between two Points3</para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Point3.cs" line="55" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Point3.cs" bodystart="55" bodyend="63"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Represents 3-dimensional control points with floating point values. </para>    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Point3.cs" line="16" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Point3.cs" bodystart="16" bodyend="86"/>
+    <listofallmembers>
+      <member refid="class_micra_1_1_core_1_1_point3_1a5b602ad040a4753282c23487823088bf" prot="public" virt="non-virtual"><scope>Micra::Core::Point3</scope><name>_IPoint3</name></member>
+      <member refid="class_micra_1_1_core_1_1_point3_1a10aa3a10777cf3bcb1f907d8cd02d393" prot="package" virt="non-virtual"><scope>Micra::Core::Point3</scope><name>Distance</name></member>
+      <member refid="class_micra_1_1_core_1_1_point3_1a950e8664043a286f8e0df296b9179036" prot="package" virt="non-virtual"><scope>Micra::Core::Point3</scope><name>DistanceTo</name></member>
+      <member refid="class_micra_1_1_core_1_1_point3_1a207999ea56127ec2eacf6b4e5575ad9f" prot="public" virt="non-virtual"><scope>Micra::Core::Point3</scope><name>Length</name></member>
+      <member refid="class_micra_1_1_core_1_1_point3_1a2ba5d49eb5bcdad751d23ef9a779d00b" prot="public" virt="non-virtual"><scope>Micra::Core::Point3</scope><name>LengthSquared</name></member>
+      <member refid="class_micra_1_1_core_1_1_point3_1a4e3237a62a8bbb546bf33f43454f5241" prot="public" virt="non-virtual"><scope>Micra::Core::Point3</scope><name>Normalize</name></member>
+      <member refid="class_micra_1_1_core_1_1_point3_1a5804f7b84f7b536360f32b223ffffbb5" prot="public" virt="non-virtual"><scope>Micra::Core::Point3</scope><name>Normalized</name></member>
+      <member refid="class_micra_1_1_core_1_1_point3_1a7ff2eb01b2ea070234f166187acff8a3" prot="public" virt="non-virtual"><scope>Micra::Core::Point3</scope><name>operator*</name></member>
+      <member refid="class_micra_1_1_core_1_1_point3_1a6fd5dd7210a74bf9b42e8cd0491cdb11" prot="public" virt="non-virtual"><scope>Micra::Core::Point3</scope><name>operator*</name></member>
+      <member refid="class_micra_1_1_core_1_1_point3_1a94555f1cde18df273fb8ab01a63672bf" prot="public" virt="non-virtual"><scope>Micra::Core::Point3</scope><name>operator+</name></member>
+      <member refid="class_micra_1_1_core_1_1_point3_1a67c3e34777de4fadeef0ecc44b963250" prot="public" virt="non-virtual"><scope>Micra::Core::Point3</scope><name>operator-</name></member>
+      <member refid="class_micra_1_1_core_1_1_point3_1aaa7103751936324c0ed82bac054fe27d" prot="public" virt="non-virtual"><scope>Micra::Core::Point3</scope><name>operator-</name></member>
+      <member refid="class_micra_1_1_core_1_1_point3_1a5c377d8d419c41309a7f7c9a57d8125d" prot="public" virt="non-virtual"><scope>Micra::Core::Point3</scope><name>operator/</name></member>
+      <member refid="class_micra_1_1_core_1_1_point3_1a0fa4a2d2dd48e57b540b13001eb32855" prot="public" virt="non-virtual"><scope>Micra::Core::Point3</scope><name>operator^</name></member>
+      <member refid="class_micra_1_1_core_1_1_point3_1a70d40c6cbc6b49c5c97ab54a02026070" prot="public" virt="non-virtual"><scope>Micra::Core::Point3</scope><name>Origin</name></member>
+      <member refid="class_micra_1_1_core_1_1_point3_1aab86615cc660955374d13bc4fa2e0fe8" prot="public" virt="non-virtual"><scope>Micra::Core::Point3</scope><name>Point3</name></member>
+      <member refid="class_micra_1_1_core_1_1_point3_1a36cb9f0258db616b938ed7e6f3be668a" prot="public" virt="non-virtual"><scope>Micra::Core::Point3</scope><name>Point3</name></member>
+      <member refid="class_micra_1_1_core_1_1_point3_1a7f6a5b4ba9d0346f839629bb8e4fb462" prot="public" virt="non-virtual"><scope>Micra::Core::Point3</scope><name>Point3</name></member>
+      <member refid="class_micra_1_1_core_1_1_point3_1ae6faa5898b35a577135079bfa0b5098b" prot="public" virt="non-virtual"><scope>Micra::Core::Point3</scope><name>this[int i]</name></member>
+      <member refid="class_micra_1_1_core_1_1_point3_1a15e734520cae1d3494ec4ad294332f1d" prot="public" virt="non-virtual"><scope>Micra::Core::Point3</scope><name>X</name></member>
+      <member refid="class_micra_1_1_core_1_1_point3_1a5d59ac1c8ad78e54440274373f7d7762" prot="public" virt="non-virtual"><scope>Micra::Core::Point3</scope><name>XAxis</name></member>
+      <member refid="class_micra_1_1_core_1_1_point3_1acee244b58bc2c836872196386fc48bde" prot="public" virt="non-virtual"><scope>Micra::Core::Point3</scope><name>Y</name></member>
+      <member refid="class_micra_1_1_core_1_1_point3_1a27f31cacd3bf19d2f6fa09e7ff16ea12" prot="public" virt="non-virtual"><scope>Micra::Core::Point3</scope><name>YAxis</name></member>
+      <member refid="class_micra_1_1_core_1_1_point3_1a34790f4384cf805be47de66f98a601cb" prot="public" virt="non-virtual"><scope>Micra::Core::Point3</scope><name>Z</name></member>
+      <member refid="class_micra_1_1_core_1_1_point3_1af7d87f97e8048b8838cb8821157f9389" prot="public" virt="non-virtual"><scope>Micra::Core::Point3</scope><name>ZAxis</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

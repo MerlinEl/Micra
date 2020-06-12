@@ -1,0 +1,49 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
+  <compounddef id="class_micra_1_1_core_1_1_switch_1_1_switch_builder_3_01_t_element_01_4_1_1_case_builder" kind="class" prot="public">
+    <compoundname>Micra::Core::Switch::SwitchBuilder&lt; TElement &gt;::CaseBuilder</compoundname>
+      <sectiondef kind="property">
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_switch_1_1_switch_builder_3_01_t_element_01_4_1_1_case_builder_1aae7d6b2cadc5111918c545022ef110a3" prot="package" static="no" readable="no" writable="no" gettable="yes" settable="yes">
+        <type><ref refid="class_micra_1_1_core_1_1_switch_1_1_switch_builder_3_01_t_element_01_4_1a73e06b12b506dcb03923e7351838bd6c" kindref="member">SwitchBuilder</ref>&lt; TElement &gt;</type>
+        <definition>SwitchBuilder&lt;TElement&gt; Micra.Core.Switch.SwitchBuilder&lt; TElement &gt;.CaseBuilder.Switch</definition>
+        <argsstring></argsstring>
+        <name>Switch</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Switch.cs" line="33" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Switch.cs" bodystart="33" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_switch_1_1_switch_builder_3_01_t_element_01_4_1_1_case_builder_1aa59d6d55b5dc942ba8736f9c6836ddb6" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>ThenBuilder</type>
+        <definition>ThenBuilder Micra.Core.Switch.SwitchBuilder&lt; TElement &gt;.CaseBuilder.Case</definition>
+        <argsstring>(TElement element)</argsstring>
+        <name>Case</name>
+        <param>
+          <type>TElement</type>
+          <declname>element</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Switch.cs" line="34" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Switch.cs" bodystart="34" bodyend="36"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Switch.cs" line="32" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Switch.cs" bodystart="32" bodyend="37"/>
+    <listofallmembers>
+      <member refid="class_micra_1_1_core_1_1_switch_1_1_switch_builder_3_01_t_element_01_4_1_1_case_builder_1aa59d6d55b5dc942ba8736f9c6836ddb6" prot="public" virt="non-virtual"><scope>Micra::Core::Switch::SwitchBuilder&lt; TElement &gt;::CaseBuilder</scope><name>Case</name></member>
+      <member refid="class_micra_1_1_core_1_1_switch_1_1_switch_builder_3_01_t_element_01_4_1_1_case_builder_1aae7d6b2cadc5111918c545022ef110a3" prot="package" virt="non-virtual"><scope>Micra::Core::Switch::SwitchBuilder&lt; TElement &gt;::CaseBuilder</scope><name>Switch</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

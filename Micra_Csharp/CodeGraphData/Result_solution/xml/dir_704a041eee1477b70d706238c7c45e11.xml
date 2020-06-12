@@ -1,0 +1,14 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
+  <compounddef id="dir_704a041eee1477b70d706238c7c45e11" kind="dir">
+    <compoundname>D:/ReneBaca/Aprog/Micra/Micra_Csharp/Properties</compoundname>
+    <innerfile refid="_properties_2_assembly_info_8cs">AssemblyInfo.cs</innerfile>
+    <innerfile refid="_properties_2_resources_8_designer_8cs">Resources.Designer.cs</innerfile>
+    <innerfile refid="_settings_8_designer_8cs">Settings.Designer.cs</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Properties/"/>
+  </compounddef>
+</doxygen>

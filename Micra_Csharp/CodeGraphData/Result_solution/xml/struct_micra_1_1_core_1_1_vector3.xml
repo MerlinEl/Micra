@@ -1,0 +1,1109 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
+  <compounddef id="struct_micra_1_1_core_1_1_vector3" kind="struct" prot="public">
+    <compoundname>Micra::Core::Vector3</compoundname>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="struct_micra_1_1_core_1_1_vector3_1acf101b427093910c46ab1202a35cfcad" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double Micra.Core.Vector3._x</definition>
+        <argsstring></argsstring>
+        <name>_x</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Vector3.cs" line="21" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Vector3.cs" bodystart="21" bodyend="-1"/>
+        <referencedby refid="struct_micra_1_1_core_1_1_vector3_1a4edaec8ed71c6c4a716b457c4b1b770b" compoundref="_vector3_8cs" startline="217" endline="221">Micra.Core.Vector3.Add</referencedby>
+        <referencedby refid="struct_micra_1_1_core_1_1_vector3_1a2d9ba503ff2cf1bcc34b4a026b6bd61d" compoundref="_vector3_8cs" startline="323" endline="329">Micra.Core.Vector3.Multiply</referencedby>
+        <referencedby refid="struct_micra_1_1_core_1_1_vector3_1a290524ea9c073a0017a60e573d1a95ee" compoundref="_vector3_8cs" startline="449" endline="451">Micra.Core.Vector3.operator Point3</referencedby>
+        <referencedby refid="struct_micra_1_1_core_1_1_vector3_1a3c1b10a2a0023ac48fb3da9532295833" compoundref="_vector3_8cs" startline="309" endline="315">Micra.Core.Vector3.operator*</referencedby>
+        <referencedby refid="struct_micra_1_1_core_1_1_vector3_1a07c97e02929437fd86e448fd7a56318b" compoundref="_vector3_8cs" startline="205" endline="209">Micra.Core.Vector3.operator+</referencedby>
+        <referencedby refid="struct_micra_1_1_core_1_1_vector3_1afdecf4e729349a9364c1fcb46f3a9c84" compoundref="_vector3_8cs" startline="186" endline="188">Micra.Core.Vector3.operator-</referencedby>
+        <referencedby refid="struct_micra_1_1_core_1_1_vector3_1a95c146588449347ce333f2bea26d1155" compoundref="_vector3_8cs" startline="241" endline="245">Micra.Core.Vector3.Subtract</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="struct_micra_1_1_core_1_1_vector3_1a2b0234dc12bfad90d66281ba520924da" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double Micra.Core.Vector3._y</definition>
+        <argsstring></argsstring>
+        <name>_y</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Vector3.cs" line="22" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Vector3.cs" bodystart="22" bodyend="-1"/>
+        <referencedby refid="struct_micra_1_1_core_1_1_vector3_1a4edaec8ed71c6c4a716b457c4b1b770b" compoundref="_vector3_8cs" startline="217" endline="221">Micra.Core.Vector3.Add</referencedby>
+        <referencedby refid="struct_micra_1_1_core_1_1_vector3_1a2d9ba503ff2cf1bcc34b4a026b6bd61d" compoundref="_vector3_8cs" startline="323" endline="329">Micra.Core.Vector3.Multiply</referencedby>
+        <referencedby refid="struct_micra_1_1_core_1_1_vector3_1a290524ea9c073a0017a60e573d1a95ee" compoundref="_vector3_8cs" startline="449" endline="451">Micra.Core.Vector3.operator Point3</referencedby>
+        <referencedby refid="struct_micra_1_1_core_1_1_vector3_1a3c1b10a2a0023ac48fb3da9532295833" compoundref="_vector3_8cs" startline="309" endline="315">Micra.Core.Vector3.operator*</referencedby>
+        <referencedby refid="struct_micra_1_1_core_1_1_vector3_1a07c97e02929437fd86e448fd7a56318b" compoundref="_vector3_8cs" startline="205" endline="209">Micra.Core.Vector3.operator+</referencedby>
+        <referencedby refid="struct_micra_1_1_core_1_1_vector3_1afdecf4e729349a9364c1fcb46f3a9c84" compoundref="_vector3_8cs" startline="186" endline="188">Micra.Core.Vector3.operator-</referencedby>
+        <referencedby refid="struct_micra_1_1_core_1_1_vector3_1a95c146588449347ce333f2bea26d1155" compoundref="_vector3_8cs" startline="241" endline="245">Micra.Core.Vector3.Subtract</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="struct_micra_1_1_core_1_1_vector3_1a7e1043eacdea74b19bfabf27e508e3fa" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double Micra.Core.Vector3._z</definition>
+        <argsstring></argsstring>
+        <name>_z</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Vector3.cs" line="23" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Vector3.cs" bodystart="23" bodyend="-1"/>
+        <referencedby refid="struct_micra_1_1_core_1_1_vector3_1a4edaec8ed71c6c4a716b457c4b1b770b" compoundref="_vector3_8cs" startline="217" endline="221">Micra.Core.Vector3.Add</referencedby>
+        <referencedby refid="struct_micra_1_1_core_1_1_vector3_1a2d9ba503ff2cf1bcc34b4a026b6bd61d" compoundref="_vector3_8cs" startline="323" endline="329">Micra.Core.Vector3.Multiply</referencedby>
+        <referencedby refid="struct_micra_1_1_core_1_1_vector3_1a290524ea9c073a0017a60e573d1a95ee" compoundref="_vector3_8cs" startline="449" endline="451">Micra.Core.Vector3.operator Point3</referencedby>
+        <referencedby refid="struct_micra_1_1_core_1_1_vector3_1a3c1b10a2a0023ac48fb3da9532295833" compoundref="_vector3_8cs" startline="309" endline="315">Micra.Core.Vector3.operator*</referencedby>
+        <referencedby refid="struct_micra_1_1_core_1_1_vector3_1a07c97e02929437fd86e448fd7a56318b" compoundref="_vector3_8cs" startline="205" endline="209">Micra.Core.Vector3.operator+</referencedby>
+        <referencedby refid="struct_micra_1_1_core_1_1_vector3_1afdecf4e729349a9364c1fcb46f3a9c84" compoundref="_vector3_8cs" startline="186" endline="188">Micra.Core.Vector3.operator-</referencedby>
+        <referencedby refid="struct_micra_1_1_core_1_1_vector3_1a95c146588449347ce333f2bea26d1155" compoundref="_vector3_8cs" startline="241" endline="245">Micra.Core.Vector3.Subtract</referencedby>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="property">
+      <memberdef kind="property" id="struct_micra_1_1_core_1_1_vector3_1a0af06ab5e1688553dae3fa865d80885a" prot="package" static="no" readable="no" writable="no" gettable="yes" settable="yes">
+        <type>double</type>
+        <definition>double Micra.Core.Vector3.X</definition>
+        <argsstring></argsstring>
+        <name>X</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Vector3.cs" line="53" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Vector3.cs" bodystart="53" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="struct_micra_1_1_core_1_1_vector3_1a82c9699e07ac3c54c5c9718eb720bfe3" prot="package" static="no" readable="no" writable="no" gettable="yes" settable="yes">
+        <type>double</type>
+        <definition>double Micra.Core.Vector3.Y</definition>
+        <argsstring></argsstring>
+        <name>Y</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Vector3.cs" line="54" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Vector3.cs" bodystart="54" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="struct_micra_1_1_core_1_1_vector3_1ad0f773e169c3a39a4dff304963433d54" prot="package" static="no" readable="no" writable="no" gettable="yes" settable="yes">
+        <type>double</type>
+        <definition>double Micra.Core.Vector3.Z</definition>
+        <argsstring></argsstring>
+        <name>Z</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Vector3.cs" line="55" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Vector3.cs" bodystart="55" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="struct_micra_1_1_core_1_1_vector3_1a61d8c5c15469cca5b0b195d8ed0c29b3" prot="public" static="no" readable="no" writable="no" gettable="yes" settable="no">
+        <type>double</type>
+        <definition>double Micra.Core.Vector3.Length</definition>
+        <argsstring></argsstring>
+        <name>Length</name>
+        <briefdescription>
+<para>Length of the vector. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Vector3.cs" line="70" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Vector3.cs" bodystart="70" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="struct_micra_1_1_core_1_1_vector3_1aedc0116419549959ddf2aefdd83514af" prot="public" static="no" readable="no" writable="no" gettable="yes" settable="no">
+        <type>double</type>
+        <definition>double Micra.Core.Vector3.LengthSquared</definition>
+        <argsstring></argsstring>
+        <name>LengthSquared</name>
+        <briefdescription>
+<para>Length of the vector squared. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Vector3.cs" line="79" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Vector3.cs" bodystart="79" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="struct_micra_1_1_core_1_1_vector3_1a3a74edd049ba00cfd8062c5c2e1e0d16" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>Micra.Core.Vector3.Vector3</definition>
+        <argsstring>(double x, double y, double z)</argsstring>
+        <name>Vector3</name>
+        <param>
+          <type>double</type>
+          <declname>x</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>y</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>z</declname>
+        </param>
+        <briefdescription>
+<para>Constructor that sets vector&apos;s initial values. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>x</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Value of the X coordinate of the new vector.</para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>y</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Value of the Y coordinate of the new vector.</para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>z</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Value of the Z coordinate of the new vector.</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Vector3.cs" line="41" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Vector3.cs" bodystart="41" bodyend="45"/>
+      </memberdef>
+      <memberdef kind="function" id="struct_micra_1_1_core_1_1_vector3_1a4f83b81b611f599ba6f972972b2ec0dd" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Micra.Core.Vector3.Normalize</definition>
+        <argsstring>()</argsstring>
+        <name>Normalize</name>
+        <briefdescription>
+<para>Updates the vector to maintain its direction, but to have a length of 1. Equivalent to dividing the vector by its Length. Returns NaN if length is zero. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Vector3.cs" line="90" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Vector3.cs" bodystart="90" bodyend="110"/>
+      </memberdef>
+      <memberdef kind="function" id="struct_micra_1_1_core_1_1_vector3_1a956a2587f1d0824a66ea6c883cfd1ba2" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Micra.Core.Vector3.Negate</definition>
+        <argsstring>()</argsstring>
+        <name>Negate</name>
+        <briefdescription>
+<para>Negates the values of X, Y, and Z on this Vector3D </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Vector3.cs" line="193" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Vector3.cs" bodystart="193" bodyend="197"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="package-static-func">
+      <memberdef kind="function" id="struct_micra_1_1_core_1_1_vector3_1ae436a2dc35e87da7a035699d52394a4f" prot="package" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="struct_micra_1_1_core_1_1_vector3" kindref="compound">Vector3</ref></type>
+        <definition>static Vector3 Micra.Core.Vector3.FromPoint</definition>
+        <argsstring>(Point3 p)</argsstring>
+        <name>FromPoint</name>
+        <param>
+          <type><ref refid="class_micra_1_1_core_1_1_point3" kindref="compound">Point3</ref></type>
+          <declname>p</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Vector3.cs" line="57" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="struct_micra_1_1_core_1_1_vector3_1ad794736215566ecb62515ce60a79d857" prot="package" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="struct_micra_1_1_core_1_1_vector3" kindref="compound">Vector3</ref></type>
+        <definition>static Vector3 Micra.Core.Vector3.FromPoints</definition>
+        <argsstring>(Point3 p1, Point3 p2)</argsstring>
+        <name>FromPoints</name>
+        <param>
+          <type><ref refid="class_micra_1_1_core_1_1_point3" kindref="compound">Point3</ref></type>
+          <declname>p1</declname>
+        </param>
+        <param>
+          <type><ref refid="class_micra_1_1_core_1_1_point3" kindref="compound">Point3</ref></type>
+          <declname>p2</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Vector3.cs" line="58" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Vector3.cs" bodystart="58" bodyend="65"/>
+        <references refid="class_micra_1_1_core_1_1_point3_1a15e734520cae1d3494ec4ad294332f1d" compoundref="_point3_8cs" startline="17">Micra.Core.Point3.X</references>
+        <references refid="class_micra_1_1_core_1_1_point3_1acee244b58bc2c836872196386fc48bde" compoundref="_point3_8cs" startline="18">Micra.Core.Point3.Y</references>
+        <references refid="class_micra_1_1_core_1_1_point3_1a34790f4384cf805be47de66f98a601cb" compoundref="_point3_8cs" startline="19">Micra.Core.Point3.Z</references>
+      </memberdef>
+      <memberdef kind="function" id="struct_micra_1_1_core_1_1_vector3_1a7ad946dd54dcef3e55f7c6361bf35c01" prot="package" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>double</type>
+        <definition>static double Micra.Core.Vector3.Dot</definition>
+        <argsstring>(ref Vector3 vector1, ref Vector3 vector2)</argsstring>
+        <name>Dot</name>
+        <param>
+          <type>ref <ref refid="struct_micra_1_1_core_1_1_vector3" kindref="compound">Vector3</ref></type>
+          <declname>vector1</declname>
+        </param>
+        <param>
+          <type>ref <ref refid="struct_micra_1_1_core_1_1_vector3" kindref="compound">Vector3</ref></type>
+          <declname>vector2</declname>
+        </param>
+        <briefdescription>
+<para>Faster internal version of DotProduct that avoids copies </para>        </briefdescription>
+        <detaileddescription>
+<para>vector1 and vector2 to a passed by ref for perf and ARE NOT MODIFIED </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Vector3.cs" line="416" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Vector3.cs" bodystart="416" bodyend="420"/>
+      </memberdef>
+      <memberdef kind="function" id="struct_micra_1_1_core_1_1_vector3_1ad4674c4c39677b93a0cd9818ade15401" prot="package" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>static void Micra.Core.Vector3.Cross</definition>
+        <argsstring>(ref Vector3 vector1, ref Vector3 vector2, out Vector3 result)</argsstring>
+        <name>Cross</name>
+        <param>
+          <type>ref <ref refid="struct_micra_1_1_core_1_1_vector3" kindref="compound">Vector3</ref></type>
+          <declname>vector1</declname>
+        </param>
+        <param>
+          <type>ref <ref refid="struct_micra_1_1_core_1_1_vector3" kindref="compound">Vector3</ref></type>
+          <declname>vector2</declname>
+        </param>
+        <param>
+          <type>out <ref refid="struct_micra_1_1_core_1_1_vector3" kindref="compound">Vector3</ref></type>
+          <declname>result</declname>
+        </param>
+        <briefdescription>
+<para>Faster internal version of CrossProduct that avoids copies </para>        </briefdescription>
+        <detaileddescription>
+<para>vector1 and vector2 to a passed by ref for perf and ARE NOT MODIFIED </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Vector3.cs" line="438" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Vector3.cs" bodystart="438" bodyend="442"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="struct_micra_1_1_core_1_1_vector3_1a6edba47a6a9e399e8fbbce43981a18e1" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>double</type>
+        <definition>static double Micra.Core.Vector3.AngleBetween</definition>
+        <argsstring>(Vector3 vector1, Vector3 vector2)</argsstring>
+        <name>AngleBetween</name>
+        <param>
+          <type><ref refid="struct_micra_1_1_core_1_1_vector3" kindref="compound">Vector3</ref></type>
+          <declname>vector1</declname>
+        </param>
+        <param>
+          <type><ref refid="struct_micra_1_1_core_1_1_vector3" kindref="compound">Vector3</ref></type>
+          <declname>vector2</declname>
+        </param>
+        <briefdescription>
+<para>Computes the angle between two vectors. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>vector1</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>First vector.</para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>vector2</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Second vector.</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Returns the angle required to rotate vector1 into vector2 in degrees. This will return a value between [0, 180] degrees. (Note that this is slightly different from the Vector member function of the same name. Signed angles do not extend to 3D.) </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Vector3.cs" line="123" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Vector3.cs" bodystart="123" bodyend="179"/>
+      </memberdef>
+      <memberdef kind="function" id="struct_micra_1_1_core_1_1_vector3_1afdecf4e729349a9364c1fcb46f3a9c84" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="struct_micra_1_1_core_1_1_vector3" kindref="compound">Vector3</ref></type>
+        <definition>static Vector3 Micra.Core.Vector3.operator-</definition>
+        <argsstring>(Vector3 vector)</argsstring>
+        <name>operator-</name>
+        <param>
+          <type><ref refid="struct_micra_1_1_core_1_1_vector3" kindref="compound">Vector3</ref></type>
+          <declname>vector</declname>
+        </param>
+        <briefdescription>
+<para>Operator -Vector (unary negation). </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>vector</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Vector being negated.</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Negation of the given vector.</para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Vector3.cs" line="186" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Vector3.cs" bodystart="186" bodyend="188"/>
+        <references refid="struct_micra_1_1_core_1_1_vector3_1acf101b427093910c46ab1202a35cfcad" compoundref="_vector3_8cs" startline="21">Micra.Core.Vector3._x</references>
+        <references refid="struct_micra_1_1_core_1_1_vector3_1a2b0234dc12bfad90d66281ba520924da" compoundref="_vector3_8cs" startline="22">Micra.Core.Vector3._y</references>
+        <references refid="struct_micra_1_1_core_1_1_vector3_1a7e1043eacdea74b19bfabf27e508e3fa" compoundref="_vector3_8cs" startline="23">Micra.Core.Vector3._z</references>
+      </memberdef>
+      <memberdef kind="function" id="struct_micra_1_1_core_1_1_vector3_1a07c97e02929437fd86e448fd7a56318b" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="struct_micra_1_1_core_1_1_vector3" kindref="compound">Vector3</ref></type>
+        <definition>static Vector3 Micra.Core.Vector3.operator+</definition>
+        <argsstring>(Vector3 vector1, Vector3 vector2)</argsstring>
+        <name>operator+</name>
+        <param>
+          <type><ref refid="struct_micra_1_1_core_1_1_vector3" kindref="compound">Vector3</ref></type>
+          <declname>vector1</declname>
+        </param>
+        <param>
+          <type><ref refid="struct_micra_1_1_core_1_1_vector3" kindref="compound">Vector3</ref></type>
+          <declname>vector2</declname>
+        </param>
+        <briefdescription>
+<para>Vector addition. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>vector1</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>First vector being added.</para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>vector2</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Second vector being added.</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Result of addition.</para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Vector3.cs" line="205" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Vector3.cs" bodystart="205" bodyend="209"/>
+        <references refid="struct_micra_1_1_core_1_1_vector3_1acf101b427093910c46ab1202a35cfcad" compoundref="_vector3_8cs" startline="21">Micra.Core.Vector3._x</references>
+        <references refid="struct_micra_1_1_core_1_1_vector3_1a2b0234dc12bfad90d66281ba520924da" compoundref="_vector3_8cs" startline="22">Micra.Core.Vector3._y</references>
+        <references refid="struct_micra_1_1_core_1_1_vector3_1a7e1043eacdea74b19bfabf27e508e3fa" compoundref="_vector3_8cs" startline="23">Micra.Core.Vector3._z</references>
+      </memberdef>
+      <memberdef kind="function" id="struct_micra_1_1_core_1_1_vector3_1a4edaec8ed71c6c4a716b457c4b1b770b" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="struct_micra_1_1_core_1_1_vector3" kindref="compound">Vector3</ref></type>
+        <definition>static Vector3 Micra.Core.Vector3.Add</definition>
+        <argsstring>(Vector3 vector1, Vector3 vector2)</argsstring>
+        <name>Add</name>
+        <param>
+          <type><ref refid="struct_micra_1_1_core_1_1_vector3" kindref="compound">Vector3</ref></type>
+          <declname>vector1</declname>
+        </param>
+        <param>
+          <type><ref refid="struct_micra_1_1_core_1_1_vector3" kindref="compound">Vector3</ref></type>
+          <declname>vector2</declname>
+        </param>
+        <briefdescription>
+<para>Vector addition. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>vector1</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>First vector being added.</para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>vector2</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Second vector being added.</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Result of addition.</para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Vector3.cs" line="217" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Vector3.cs" bodystart="217" bodyend="221"/>
+        <references refid="struct_micra_1_1_core_1_1_vector3_1acf101b427093910c46ab1202a35cfcad" compoundref="_vector3_8cs" startline="21">Micra.Core.Vector3._x</references>
+        <references refid="struct_micra_1_1_core_1_1_vector3_1a2b0234dc12bfad90d66281ba520924da" compoundref="_vector3_8cs" startline="22">Micra.Core.Vector3._y</references>
+        <references refid="struct_micra_1_1_core_1_1_vector3_1a7e1043eacdea74b19bfabf27e508e3fa" compoundref="_vector3_8cs" startline="23">Micra.Core.Vector3._z</references>
+      </memberdef>
+      <memberdef kind="function" id="struct_micra_1_1_core_1_1_vector3_1a84727d8c0c59b1d67c21375ab62ab78c" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="struct_micra_1_1_core_1_1_vector3" kindref="compound">Vector3</ref></type>
+        <definition>static Vector3 Micra.Core.Vector3.operator-</definition>
+        <argsstring>(Vector3 vector1, Vector3 vector2)</argsstring>
+        <name>operator-</name>
+        <param>
+          <type><ref refid="struct_micra_1_1_core_1_1_vector3" kindref="compound">Vector3</ref></type>
+          <declname>vector1</declname>
+        </param>
+        <param>
+          <type><ref refid="struct_micra_1_1_core_1_1_vector3" kindref="compound">Vector3</ref></type>
+          <declname>vector2</declname>
+        </param>
+        <briefdescription>
+<para>Vector subtraction. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>vector1</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Vector that is subtracted from.</para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>vector2</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Vector being subtracted.</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Result of subtraction.</para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Vector3.cs" line="229" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Vector3.cs" bodystart="229" bodyend="233"/>
+        <references refid="struct_micra_1_1_core_1_1_vector3_1acf101b427093910c46ab1202a35cfcad" compoundref="_vector3_8cs" startline="21">Micra.Core.Vector3._x</references>
+        <references refid="struct_micra_1_1_core_1_1_vector3_1a2b0234dc12bfad90d66281ba520924da" compoundref="_vector3_8cs" startline="22">Micra.Core.Vector3._y</references>
+        <references refid="struct_micra_1_1_core_1_1_vector3_1a7e1043eacdea74b19bfabf27e508e3fa" compoundref="_vector3_8cs" startline="23">Micra.Core.Vector3._z</references>
+      </memberdef>
+      <memberdef kind="function" id="struct_micra_1_1_core_1_1_vector3_1a95c146588449347ce333f2bea26d1155" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="struct_micra_1_1_core_1_1_vector3" kindref="compound">Vector3</ref></type>
+        <definition>static Vector3 Micra.Core.Vector3.Subtract</definition>
+        <argsstring>(Vector3 vector1, Vector3 vector2)</argsstring>
+        <name>Subtract</name>
+        <param>
+          <type><ref refid="struct_micra_1_1_core_1_1_vector3" kindref="compound">Vector3</ref></type>
+          <declname>vector1</declname>
+        </param>
+        <param>
+          <type><ref refid="struct_micra_1_1_core_1_1_vector3" kindref="compound">Vector3</ref></type>
+          <declname>vector2</declname>
+        </param>
+        <briefdescription>
+<para>Vector subtraction. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>vector1</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Vector that is subtracted from.</para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>vector2</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Vector being subtracted.</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Result of subtraction.</para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Vector3.cs" line="241" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Vector3.cs" bodystart="241" bodyend="245"/>
+        <references refid="struct_micra_1_1_core_1_1_vector3_1acf101b427093910c46ab1202a35cfcad" compoundref="_vector3_8cs" startline="21">Micra.Core.Vector3._x</references>
+        <references refid="struct_micra_1_1_core_1_1_vector3_1a2b0234dc12bfad90d66281ba520924da" compoundref="_vector3_8cs" startline="22">Micra.Core.Vector3._y</references>
+        <references refid="struct_micra_1_1_core_1_1_vector3_1a7e1043eacdea74b19bfabf27e508e3fa" compoundref="_vector3_8cs" startline="23">Micra.Core.Vector3._z</references>
+      </memberdef>
+      <memberdef kind="function" id="struct_micra_1_1_core_1_1_vector3_1a771e17ae368db506e27df18b1b1577f2" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="class_micra_1_1_core_1_1_point3" kindref="compound">Point3</ref></type>
+        <definition>static Point3 Micra.Core.Vector3.operator+</definition>
+        <argsstring>(Vector3 vector, Point3 point)</argsstring>
+        <name>operator+</name>
+        <param>
+          <type><ref refid="struct_micra_1_1_core_1_1_vector3" kindref="compound">Vector3</ref></type>
+          <declname>vector</declname>
+        </param>
+        <param>
+          <type><ref refid="class_micra_1_1_core_1_1_point3" kindref="compound">Point3</ref></type>
+          <declname>point</declname>
+        </param>
+        <briefdescription>
+<para>Vector3D + <ref refid="class_micra_1_1_core_1_1_point3" kindref="compound">Point3</ref> addition. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>vector</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Vector by which we offset the point.</para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>point</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Point being offset by the given vector.</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Result of addition.</para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Vector3.cs" line="253" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Vector3.cs" bodystart="253" bodyend="259"/>
+        <references refid="struct_micra_1_1_core_1_1_vector3_1acf101b427093910c46ab1202a35cfcad" compoundref="_vector3_8cs" startline="21">Micra.Core.Vector3._x</references>
+        <references refid="struct_micra_1_1_core_1_1_vector3_1a2b0234dc12bfad90d66281ba520924da" compoundref="_vector3_8cs" startline="22">Micra.Core.Vector3._y</references>
+        <references refid="struct_micra_1_1_core_1_1_vector3_1a7e1043eacdea74b19bfabf27e508e3fa" compoundref="_vector3_8cs" startline="23">Micra.Core.Vector3._z</references>
+        <references refid="class_micra_1_1_core_1_1_point3_1a15e734520cae1d3494ec4ad294332f1d" compoundref="_point3_8cs" startline="17">Micra.Core.Point3.X</references>
+        <references refid="class_micra_1_1_core_1_1_point3_1acee244b58bc2c836872196386fc48bde" compoundref="_point3_8cs" startline="18">Micra.Core.Point3.Y</references>
+        <references refid="class_micra_1_1_core_1_1_point3_1a34790f4384cf805be47de66f98a601cb" compoundref="_point3_8cs" startline="19">Micra.Core.Point3.Z</references>
+      </memberdef>
+      <memberdef kind="function" id="struct_micra_1_1_core_1_1_vector3_1ae1da37c22270b0cfcad9a5671243070e" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="class_micra_1_1_core_1_1_point3" kindref="compound">Point3</ref></type>
+        <definition>static Point3 Micra.Core.Vector3.Add</definition>
+        <argsstring>(Vector3 vector, Point3 point)</argsstring>
+        <name>Add</name>
+        <param>
+          <type><ref refid="struct_micra_1_1_core_1_1_vector3" kindref="compound">Vector3</ref></type>
+          <declname>vector</declname>
+        </param>
+        <param>
+          <type><ref refid="class_micra_1_1_core_1_1_point3" kindref="compound">Point3</ref></type>
+          <declname>point</declname>
+        </param>
+        <briefdescription>
+<para>Vector3D + <ref refid="class_micra_1_1_core_1_1_point3" kindref="compound">Point3</ref> addition. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>vector</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Vector by which we offset the point.</para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>point</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Point being offset by the given vector.</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Result of addition.</para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Vector3.cs" line="267" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Vector3.cs" bodystart="267" bodyend="273"/>
+        <references refid="struct_micra_1_1_core_1_1_vector3_1acf101b427093910c46ab1202a35cfcad" compoundref="_vector3_8cs" startline="21">Micra.Core.Vector3._x</references>
+        <references refid="struct_micra_1_1_core_1_1_vector3_1a2b0234dc12bfad90d66281ba520924da" compoundref="_vector3_8cs" startline="22">Micra.Core.Vector3._y</references>
+        <references refid="struct_micra_1_1_core_1_1_vector3_1a7e1043eacdea74b19bfabf27e508e3fa" compoundref="_vector3_8cs" startline="23">Micra.Core.Vector3._z</references>
+        <references refid="class_micra_1_1_core_1_1_point3_1a15e734520cae1d3494ec4ad294332f1d" compoundref="_point3_8cs" startline="17">Micra.Core.Point3.X</references>
+        <references refid="class_micra_1_1_core_1_1_point3_1acee244b58bc2c836872196386fc48bde" compoundref="_point3_8cs" startline="18">Micra.Core.Point3.Y</references>
+        <references refid="class_micra_1_1_core_1_1_point3_1a34790f4384cf805be47de66f98a601cb" compoundref="_point3_8cs" startline="19">Micra.Core.Point3.Z</references>
+      </memberdef>
+      <memberdef kind="function" id="struct_micra_1_1_core_1_1_vector3_1a9171ebf08edacc3d8a2fb8cced9cdf9b" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="class_micra_1_1_core_1_1_point3" kindref="compound">Point3</ref></type>
+        <definition>static Point3 Micra.Core.Vector3.operator-</definition>
+        <argsstring>(Vector3 vector, Point3 point)</argsstring>
+        <name>operator-</name>
+        <param>
+          <type><ref refid="struct_micra_1_1_core_1_1_vector3" kindref="compound">Vector3</ref></type>
+          <declname>vector</declname>
+        </param>
+        <param>
+          <type><ref refid="class_micra_1_1_core_1_1_point3" kindref="compound">Point3</ref></type>
+          <declname>point</declname>
+        </param>
+        <briefdescription>
+<para>Vector3D - <ref refid="class_micra_1_1_core_1_1_point3" kindref="compound">Point3</ref> subtraction. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>vector</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Vector by which we offset the point.</para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>point</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Point being offset by the given vector.</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Result of subtraction.</para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Vector3.cs" line="281" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Vector3.cs" bodystart="281" bodyend="287"/>
+        <references refid="struct_micra_1_1_core_1_1_vector3_1acf101b427093910c46ab1202a35cfcad" compoundref="_vector3_8cs" startline="21">Micra.Core.Vector3._x</references>
+        <references refid="struct_micra_1_1_core_1_1_vector3_1a2b0234dc12bfad90d66281ba520924da" compoundref="_vector3_8cs" startline="22">Micra.Core.Vector3._y</references>
+        <references refid="struct_micra_1_1_core_1_1_vector3_1a7e1043eacdea74b19bfabf27e508e3fa" compoundref="_vector3_8cs" startline="23">Micra.Core.Vector3._z</references>
+        <references refid="class_micra_1_1_core_1_1_point3_1a15e734520cae1d3494ec4ad294332f1d" compoundref="_point3_8cs" startline="17">Micra.Core.Point3.X</references>
+        <references refid="class_micra_1_1_core_1_1_point3_1acee244b58bc2c836872196386fc48bde" compoundref="_point3_8cs" startline="18">Micra.Core.Point3.Y</references>
+        <references refid="class_micra_1_1_core_1_1_point3_1a34790f4384cf805be47de66f98a601cb" compoundref="_point3_8cs" startline="19">Micra.Core.Point3.Z</references>
+      </memberdef>
+      <memberdef kind="function" id="struct_micra_1_1_core_1_1_vector3_1a7ad34c6283f98b13fe0130b82cf55847" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="class_micra_1_1_core_1_1_point3" kindref="compound">Point3</ref></type>
+        <definition>static Point3 Micra.Core.Vector3.Subtract</definition>
+        <argsstring>(Vector3 vector, Point3 point)</argsstring>
+        <name>Subtract</name>
+        <param>
+          <type><ref refid="struct_micra_1_1_core_1_1_vector3" kindref="compound">Vector3</ref></type>
+          <declname>vector</declname>
+        </param>
+        <param>
+          <type><ref refid="class_micra_1_1_core_1_1_point3" kindref="compound">Point3</ref></type>
+          <declname>point</declname>
+        </param>
+        <briefdescription>
+<para>Vector3D - <ref refid="class_micra_1_1_core_1_1_point3" kindref="compound">Point3</ref> subtraction. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>vector</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Vector by which we offset the point.</para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>point</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Point being offset by the given vector.</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Result of subtraction.</para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Vector3.cs" line="295" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Vector3.cs" bodystart="295" bodyend="301"/>
+        <references refid="struct_micra_1_1_core_1_1_vector3_1acf101b427093910c46ab1202a35cfcad" compoundref="_vector3_8cs" startline="21">Micra.Core.Vector3._x</references>
+        <references refid="struct_micra_1_1_core_1_1_vector3_1a2b0234dc12bfad90d66281ba520924da" compoundref="_vector3_8cs" startline="22">Micra.Core.Vector3._y</references>
+        <references refid="struct_micra_1_1_core_1_1_vector3_1a7e1043eacdea74b19bfabf27e508e3fa" compoundref="_vector3_8cs" startline="23">Micra.Core.Vector3._z</references>
+        <references refid="class_micra_1_1_core_1_1_point3_1a15e734520cae1d3494ec4ad294332f1d" compoundref="_point3_8cs" startline="17">Micra.Core.Point3.X</references>
+        <references refid="class_micra_1_1_core_1_1_point3_1acee244b58bc2c836872196386fc48bde" compoundref="_point3_8cs" startline="18">Micra.Core.Point3.Y</references>
+        <references refid="class_micra_1_1_core_1_1_point3_1a34790f4384cf805be47de66f98a601cb" compoundref="_point3_8cs" startline="19">Micra.Core.Point3.Z</references>
+      </memberdef>
+      <memberdef kind="function" id="struct_micra_1_1_core_1_1_vector3_1a3c1b10a2a0023ac48fb3da9532295833" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="struct_micra_1_1_core_1_1_vector3" kindref="compound">Vector3</ref></type>
+        <definition>static Vector3 Micra.Core.Vector3.operator*</definition>
+        <argsstring>(Vector3 vector, double scalar)</argsstring>
+        <name>operator*</name>
+        <param>
+          <type><ref refid="struct_micra_1_1_core_1_1_vector3" kindref="compound">Vector3</ref></type>
+          <declname>vector</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>scalar</declname>
+        </param>
+        <briefdescription>
+<para>Scalar multiplication. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>vector</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Vector being multiplied.</para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>scalar</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Scalar value by which the vector is multiplied.</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Result of multiplication.</para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Vector3.cs" line="309" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Vector3.cs" bodystart="309" bodyend="315"/>
+        <references refid="struct_micra_1_1_core_1_1_vector3_1acf101b427093910c46ab1202a35cfcad" compoundref="_vector3_8cs" startline="21">Micra.Core.Vector3._x</references>
+        <references refid="struct_micra_1_1_core_1_1_vector3_1a2b0234dc12bfad90d66281ba520924da" compoundref="_vector3_8cs" startline="22">Micra.Core.Vector3._y</references>
+        <references refid="struct_micra_1_1_core_1_1_vector3_1a7e1043eacdea74b19bfabf27e508e3fa" compoundref="_vector3_8cs" startline="23">Micra.Core.Vector3._z</references>
+      </memberdef>
+      <memberdef kind="function" id="struct_micra_1_1_core_1_1_vector3_1a2d9ba503ff2cf1bcc34b4a026b6bd61d" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="struct_micra_1_1_core_1_1_vector3" kindref="compound">Vector3</ref></type>
+        <definition>static Vector3 Micra.Core.Vector3.Multiply</definition>
+        <argsstring>(Vector3 vector, double scalar)</argsstring>
+        <name>Multiply</name>
+        <param>
+          <type><ref refid="struct_micra_1_1_core_1_1_vector3" kindref="compound">Vector3</ref></type>
+          <declname>vector</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>scalar</declname>
+        </param>
+        <briefdescription>
+<para>Scalar multiplication. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>vector</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Vector being multiplied.</para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>scalar</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Scalar value by which the vector is multiplied.</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Result of multiplication.</para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Vector3.cs" line="323" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Vector3.cs" bodystart="323" bodyend="329"/>
+        <references refid="struct_micra_1_1_core_1_1_vector3_1acf101b427093910c46ab1202a35cfcad" compoundref="_vector3_8cs" startline="21">Micra.Core.Vector3._x</references>
+        <references refid="struct_micra_1_1_core_1_1_vector3_1a2b0234dc12bfad90d66281ba520924da" compoundref="_vector3_8cs" startline="22">Micra.Core.Vector3._y</references>
+        <references refid="struct_micra_1_1_core_1_1_vector3_1a7e1043eacdea74b19bfabf27e508e3fa" compoundref="_vector3_8cs" startline="23">Micra.Core.Vector3._z</references>
+      </memberdef>
+      <memberdef kind="function" id="struct_micra_1_1_core_1_1_vector3_1ad1e77178550278f9e600e6c9f50e5c9c" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="struct_micra_1_1_core_1_1_vector3" kindref="compound">Vector3</ref></type>
+        <definition>static Vector3 Micra.Core.Vector3.operator*</definition>
+        <argsstring>(double scalar, Vector3 vector)</argsstring>
+        <name>operator*</name>
+        <param>
+          <type>double</type>
+          <declname>scalar</declname>
+        </param>
+        <param>
+          <type><ref refid="struct_micra_1_1_core_1_1_vector3" kindref="compound">Vector3</ref></type>
+          <declname>vector</declname>
+        </param>
+        <briefdescription>
+<para>Scalar multiplication. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>scalar</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Scalar value by which the vector is multiplied</para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>vector</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Vector being multiplied.</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Result of multiplication.</para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Vector3.cs" line="337" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Vector3.cs" bodystart="337" bodyend="343"/>
+        <references refid="struct_micra_1_1_core_1_1_vector3_1acf101b427093910c46ab1202a35cfcad" compoundref="_vector3_8cs" startline="21">Micra.Core.Vector3._x</references>
+        <references refid="struct_micra_1_1_core_1_1_vector3_1a2b0234dc12bfad90d66281ba520924da" compoundref="_vector3_8cs" startline="22">Micra.Core.Vector3._y</references>
+        <references refid="struct_micra_1_1_core_1_1_vector3_1a7e1043eacdea74b19bfabf27e508e3fa" compoundref="_vector3_8cs" startline="23">Micra.Core.Vector3._z</references>
+      </memberdef>
+      <memberdef kind="function" id="struct_micra_1_1_core_1_1_vector3_1a44ccf8ebb466de759b7916adfa9d97e9" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="struct_micra_1_1_core_1_1_vector3" kindref="compound">Vector3</ref></type>
+        <definition>static Vector3 Micra.Core.Vector3.Multiply</definition>
+        <argsstring>(double scalar, Vector3 vector)</argsstring>
+        <name>Multiply</name>
+        <param>
+          <type>double</type>
+          <declname>scalar</declname>
+        </param>
+        <param>
+          <type><ref refid="struct_micra_1_1_core_1_1_vector3" kindref="compound">Vector3</ref></type>
+          <declname>vector</declname>
+        </param>
+        <briefdescription>
+<para>Scalar multiplication. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>scalar</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Scalar value by which the vector is multiplied</para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>vector</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Vector being multiplied.</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Result of multiplication.</para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Vector3.cs" line="351" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Vector3.cs" bodystart="351" bodyend="357"/>
+        <references refid="struct_micra_1_1_core_1_1_vector3_1acf101b427093910c46ab1202a35cfcad" compoundref="_vector3_8cs" startline="21">Micra.Core.Vector3._x</references>
+        <references refid="struct_micra_1_1_core_1_1_vector3_1a2b0234dc12bfad90d66281ba520924da" compoundref="_vector3_8cs" startline="22">Micra.Core.Vector3._y</references>
+        <references refid="struct_micra_1_1_core_1_1_vector3_1a7e1043eacdea74b19bfabf27e508e3fa" compoundref="_vector3_8cs" startline="23">Micra.Core.Vector3._z</references>
+      </memberdef>
+      <memberdef kind="function" id="struct_micra_1_1_core_1_1_vector3_1a5355e64d486dcb6058fa6b387264edac" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="struct_micra_1_1_core_1_1_vector3" kindref="compound">Vector3</ref></type>
+        <definition>static Vector3 Micra.Core.Vector3.operator/</definition>
+        <argsstring>(Vector3 vector, double scalar)</argsstring>
+        <name>operator/</name>
+        <param>
+          <type><ref refid="struct_micra_1_1_core_1_1_vector3" kindref="compound">Vector3</ref></type>
+          <declname>vector</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>scalar</declname>
+        </param>
+        <briefdescription>
+<para>Scalar division. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>vector</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Vector being divided.</para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>scalar</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Scalar value by which we divide the vector.</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Result of division.</para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Vector3.cs" line="365" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Vector3.cs" bodystart="365" bodyend="367"/>
+      </memberdef>
+      <memberdef kind="function" id="struct_micra_1_1_core_1_1_vector3_1a895685dfe519133aaaa00497770c43e2" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="struct_micra_1_1_core_1_1_vector3" kindref="compound">Vector3</ref></type>
+        <definition>static Vector3 Micra.Core.Vector3.Divide</definition>
+        <argsstring>(Vector3 vector, double scalar)</argsstring>
+        <name>Divide</name>
+        <param>
+          <type><ref refid="struct_micra_1_1_core_1_1_vector3" kindref="compound">Vector3</ref></type>
+          <declname>vector</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>scalar</declname>
+        </param>
+        <briefdescription>
+<para>Scalar division. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>vector</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Vector being divided.</para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>scalar</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Scalar value by which we divide the vector.</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Result of division.</para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Vector3.cs" line="375" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Vector3.cs" bodystart="375" bodyend="377"/>
+      </memberdef>
+      <memberdef kind="function" id="struct_micra_1_1_core_1_1_vector3_1ae4176d427a1896a6aa1389afe54ae3d6" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>double</type>
+        <definition>static double Micra.Core.Vector3.Dot</definition>
+        <argsstring>(Vector3 vector1, Vector3 vector2)</argsstring>
+        <name>Dot</name>
+        <param>
+          <type><ref refid="struct_micra_1_1_core_1_1_vector3" kindref="compound">Vector3</ref></type>
+          <declname>vector1</declname>
+        </param>
+        <param>
+          <type><ref refid="struct_micra_1_1_core_1_1_vector3" kindref="compound">Vector3</ref></type>
+          <declname>vector2</declname>
+        </param>
+        <briefdescription>
+<para>Vector3D * MxMatrix multiplication </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>vector</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Vector being tranformed.</para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>matrix</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Transformation matrix applied to the vector.</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Result of multiplication.</para></simplesect>
+TODO fix </para><para>Vector3D * MxMatrix multiplication </para><para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>vector</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Vector being tranformed.</para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>matrix</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Transformation matrix applied to the vector.</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Result of multiplication.</para></simplesect>
+TODO fix </para><para>Vector dot product. </para><para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>vector1</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>First vector.</para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>vector2</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Second vector.</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Dot product of two vectors.</para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Vector3.cs" line="407" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Vector3.cs" bodystart="407" bodyend="409"/>
+      </memberdef>
+      <memberdef kind="function" id="struct_micra_1_1_core_1_1_vector3_1a0e9194e13b3e2e3dce175b93b22c9292" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="struct_micra_1_1_core_1_1_vector3" kindref="compound">Vector3</ref></type>
+        <definition>static Vector3 Micra.Core.Vector3.Cross</definition>
+        <argsstring>(Vector3 vector1, Vector3 vector2)</argsstring>
+        <name>Cross</name>
+        <param>
+          <type><ref refid="struct_micra_1_1_core_1_1_vector3" kindref="compound">Vector3</ref></type>
+          <declname>vector1</declname>
+        </param>
+        <param>
+          <type><ref refid="struct_micra_1_1_core_1_1_vector3" kindref="compound">Vector3</ref></type>
+          <declname>vector2</declname>
+        </param>
+        <briefdescription>
+<para>Vector cross product. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>vector1</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>First vector.</para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>vector2</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Second vector.</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Cross product of two vectors.</para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Vector3.cs" line="428" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Vector3.cs" bodystart="428" bodyend="431"/>
+      </memberdef>
+      <memberdef kind="function" id="struct_micra_1_1_core_1_1_vector3_1a290524ea9c073a0017a60e573d1a95ee" prot="public" static="yes" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type>static</type>
+        <definition>static Micra.Core.Vector3.operator Point3</definition>
+        <argsstring>(Vector3 vector)</argsstring>
+        <name>operator Point3</name>
+        <param>
+          <type><ref refid="struct_micra_1_1_core_1_1_vector3" kindref="compound">Vector3</ref></type>
+          <declname>vector</declname>
+        </param>
+        <briefdescription>
+<para>Vector3D to <ref refid="class_micra_1_1_core_1_1_point3" kindref="compound">Point3</ref> conversion. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>vector</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Vector being converted.</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Point representing the given vector.</para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Vector3.cs" line="449" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Vector3.cs" bodystart="449" bodyend="451"/>
+        <references refid="struct_micra_1_1_core_1_1_vector3_1acf101b427093910c46ab1202a35cfcad" compoundref="_vector3_8cs" startline="21">Micra.Core.Vector3._x</references>
+        <references refid="struct_micra_1_1_core_1_1_vector3_1a2b0234dc12bfad90d66281ba520924da" compoundref="_vector3_8cs" startline="22">Micra.Core.Vector3._y</references>
+        <references refid="struct_micra_1_1_core_1_1_vector3_1a7e1043eacdea74b19bfabf27e508e3fa" compoundref="_vector3_8cs" startline="23">Micra.Core.Vector3._z</references>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Vector3.cs" line="11" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Vector3.cs" bodystart="11" bodyend="465"/>
+    <listofallmembers>
+      <member refid="struct_micra_1_1_core_1_1_vector3_1acf101b427093910c46ab1202a35cfcad" prot="private" virt="non-virtual"><scope>Micra::Core::Vector3</scope><name>_x</name></member>
+      <member refid="struct_micra_1_1_core_1_1_vector3_1a2b0234dc12bfad90d66281ba520924da" prot="private" virt="non-virtual"><scope>Micra::Core::Vector3</scope><name>_y</name></member>
+      <member refid="struct_micra_1_1_core_1_1_vector3_1a7e1043eacdea74b19bfabf27e508e3fa" prot="private" virt="non-virtual"><scope>Micra::Core::Vector3</scope><name>_z</name></member>
+      <member refid="struct_micra_1_1_core_1_1_vector3_1a4edaec8ed71c6c4a716b457c4b1b770b" prot="public" virt="non-virtual"><scope>Micra::Core::Vector3</scope><name>Add</name></member>
+      <member refid="struct_micra_1_1_core_1_1_vector3_1ae1da37c22270b0cfcad9a5671243070e" prot="public" virt="non-virtual"><scope>Micra::Core::Vector3</scope><name>Add</name></member>
+      <member refid="struct_micra_1_1_core_1_1_vector3_1a6edba47a6a9e399e8fbbce43981a18e1" prot="public" virt="non-virtual"><scope>Micra::Core::Vector3</scope><name>AngleBetween</name></member>
+      <member refid="struct_micra_1_1_core_1_1_vector3_1a0e9194e13b3e2e3dce175b93b22c9292" prot="public" virt="non-virtual"><scope>Micra::Core::Vector3</scope><name>Cross</name></member>
+      <member refid="struct_micra_1_1_core_1_1_vector3_1ad4674c4c39677b93a0cd9818ade15401" prot="package" virt="non-virtual"><scope>Micra::Core::Vector3</scope><name>Cross</name></member>
+      <member refid="struct_micra_1_1_core_1_1_vector3_1a895685dfe519133aaaa00497770c43e2" prot="public" virt="non-virtual"><scope>Micra::Core::Vector3</scope><name>Divide</name></member>
+      <member refid="struct_micra_1_1_core_1_1_vector3_1ae4176d427a1896a6aa1389afe54ae3d6" prot="public" virt="non-virtual"><scope>Micra::Core::Vector3</scope><name>Dot</name></member>
+      <member refid="struct_micra_1_1_core_1_1_vector3_1a7ad946dd54dcef3e55f7c6361bf35c01" prot="package" virt="non-virtual"><scope>Micra::Core::Vector3</scope><name>Dot</name></member>
+      <member refid="struct_micra_1_1_core_1_1_vector3_1ae436a2dc35e87da7a035699d52394a4f" prot="package" virt="non-virtual"><scope>Micra::Core::Vector3</scope><name>FromPoint</name></member>
+      <member refid="struct_micra_1_1_core_1_1_vector3_1ad794736215566ecb62515ce60a79d857" prot="package" virt="non-virtual"><scope>Micra::Core::Vector3</scope><name>FromPoints</name></member>
+      <member refid="struct_micra_1_1_core_1_1_vector3_1a61d8c5c15469cca5b0b195d8ed0c29b3" prot="public" virt="non-virtual"><scope>Micra::Core::Vector3</scope><name>Length</name></member>
+      <member refid="struct_micra_1_1_core_1_1_vector3_1aedc0116419549959ddf2aefdd83514af" prot="public" virt="non-virtual"><scope>Micra::Core::Vector3</scope><name>LengthSquared</name></member>
+      <member refid="struct_micra_1_1_core_1_1_vector3_1a2d9ba503ff2cf1bcc34b4a026b6bd61d" prot="public" virt="non-virtual"><scope>Micra::Core::Vector3</scope><name>Multiply</name></member>
+      <member refid="struct_micra_1_1_core_1_1_vector3_1a44ccf8ebb466de759b7916adfa9d97e9" prot="public" virt="non-virtual"><scope>Micra::Core::Vector3</scope><name>Multiply</name></member>
+      <member refid="struct_micra_1_1_core_1_1_vector3_1a956a2587f1d0824a66ea6c883cfd1ba2" prot="public" virt="non-virtual"><scope>Micra::Core::Vector3</scope><name>Negate</name></member>
+      <member refid="struct_micra_1_1_core_1_1_vector3_1a4f83b81b611f599ba6f972972b2ec0dd" prot="public" virt="non-virtual"><scope>Micra::Core::Vector3</scope><name>Normalize</name></member>
+      <member refid="struct_micra_1_1_core_1_1_vector3_1a290524ea9c073a0017a60e573d1a95ee" prot="public" virt="non-virtual"><scope>Micra::Core::Vector3</scope><name>operator Point3</name></member>
+      <member refid="struct_micra_1_1_core_1_1_vector3_1a3c1b10a2a0023ac48fb3da9532295833" prot="public" virt="non-virtual"><scope>Micra::Core::Vector3</scope><name>operator*</name></member>
+      <member refid="struct_micra_1_1_core_1_1_vector3_1ad1e77178550278f9e600e6c9f50e5c9c" prot="public" virt="non-virtual"><scope>Micra::Core::Vector3</scope><name>operator*</name></member>
+      <member refid="struct_micra_1_1_core_1_1_vector3_1a07c97e02929437fd86e448fd7a56318b" prot="public" virt="non-virtual"><scope>Micra::Core::Vector3</scope><name>operator+</name></member>
+      <member refid="struct_micra_1_1_core_1_1_vector3_1a771e17ae368db506e27df18b1b1577f2" prot="public" virt="non-virtual"><scope>Micra::Core::Vector3</scope><name>operator+</name></member>
+      <member refid="struct_micra_1_1_core_1_1_vector3_1afdecf4e729349a9364c1fcb46f3a9c84" prot="public" virt="non-virtual"><scope>Micra::Core::Vector3</scope><name>operator-</name></member>
+      <member refid="struct_micra_1_1_core_1_1_vector3_1a84727d8c0c59b1d67c21375ab62ab78c" prot="public" virt="non-virtual"><scope>Micra::Core::Vector3</scope><name>operator-</name></member>
+      <member refid="struct_micra_1_1_core_1_1_vector3_1a9171ebf08edacc3d8a2fb8cced9cdf9b" prot="public" virt="non-virtual"><scope>Micra::Core::Vector3</scope><name>operator-</name></member>
+      <member refid="struct_micra_1_1_core_1_1_vector3_1a5355e64d486dcb6058fa6b387264edac" prot="public" virt="non-virtual"><scope>Micra::Core::Vector3</scope><name>operator/</name></member>
+      <member refid="struct_micra_1_1_core_1_1_vector3_1a95c146588449347ce333f2bea26d1155" prot="public" virt="non-virtual"><scope>Micra::Core::Vector3</scope><name>Subtract</name></member>
+      <member refid="struct_micra_1_1_core_1_1_vector3_1a7ad34c6283f98b13fe0130b82cf55847" prot="public" virt="non-virtual"><scope>Micra::Core::Vector3</scope><name>Subtract</name></member>
+      <member refid="struct_micra_1_1_core_1_1_vector3_1a3a74edd049ba00cfd8062c5c2e1e0d16" prot="public" virt="non-virtual"><scope>Micra::Core::Vector3</scope><name>Vector3</name></member>
+      <member refid="struct_micra_1_1_core_1_1_vector3_1a0af06ab5e1688553dae3fa865d80885a" prot="package" virt="non-virtual"><scope>Micra::Core::Vector3</scope><name>X</name></member>
+      <member refid="struct_micra_1_1_core_1_1_vector3_1a82c9699e07ac3c54c5c9718eb720bfe3" prot="package" virt="non-virtual"><scope>Micra::Core::Vector3</scope><name>Y</name></member>
+      <member refid="struct_micra_1_1_core_1_1_vector3_1ad0f773e169c3a39a4dff304963433d54" prot="package" virt="non-virtual"><scope>Micra::Core::Vector3</scope><name>Z</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

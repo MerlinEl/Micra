@@ -1,0 +1,208 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
+  <compounddef id="class_micra_1_1_core_1_1_app_data" kind="class" prot="public">
+    <compoundname>Micra::Core::AppData</compoundname>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="class_micra_1_1_core_1_1_app_data_1a29ee9b730d5ca650d7cd5069295526bc" prot="private" static="no" mutable="no">
+        <type>readonly IAnimatable</type>
+        <definition>readonly IAnimatable Micra.Core.AppData.anim</definition>
+        <argsstring></argsstring>
+        <name>anim</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Animatable.cs" line="46" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Animatable.cs" bodystart="46" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_micra_1_1_core_1_1_app_data_1a11d4ffeb6305873052503b2b3d187598" prot="private" static="no" mutable="no">
+        <type><ref refid="struct_micra_1_1_core_1_1_class_i_d" kindref="compound">ClassID</ref></type>
+        <definition>ClassID Micra.Core.AppData.cid</definition>
+        <argsstring></argsstring>
+        <name>cid</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Animatable.cs" line="47" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Animatable.cs" bodystart="47" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_micra_1_1_core_1_1_app_data_1a957cf250cc5800e6d1efd9d2e662629f" prot="private" static="no" mutable="no">
+        <type><ref refid="struct_micra_1_1_core_1_1_super_class_i_d" kindref="compound">SuperClassID</ref></type>
+        <definition>SuperClassID Micra.Core.AppData.scid</definition>
+        <argsstring></argsstring>
+        <name>scid</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Animatable.cs" line="48" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Animatable.cs" bodystart="48" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="property">
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_app_data_1a82a39ec4f71a3904ff678597e81e5f3d" prot="public" static="no" readable="no" writable="no" gettable="yes" settable="no">
+        <type>IEnumerable&lt; byte[]&gt;</type>
+        <definition>IEnumerable&lt;byte[]&gt; Micra.Core.AppData.Chunks</definition>
+        <argsstring></argsstring>
+        <name>Chunks</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Animatable.cs" line="70" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Animatable.cs" bodystart="70" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_app_data_1aeffe4c68047a500e792b09d6187a0bd6" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>Micra.Core.AppData.AppData</definition>
+        <argsstring>(IAnimatable anim, ClassID cid, SuperClassID scid)</argsstring>
+        <name>AppData</name>
+        <param>
+          <type>IAnimatable</type>
+          <declname>anim</declname>
+        </param>
+        <param>
+          <type><ref refid="struct_micra_1_1_core_1_1_class_i_d" kindref="compound">ClassID</ref></type>
+          <declname>cid</declname>
+        </param>
+        <param>
+          <type><ref refid="struct_micra_1_1_core_1_1_super_class_i_d" kindref="compound">SuperClassID</ref></type>
+          <declname>scid</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Animatable.cs" line="50" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Animatable.cs" bodystart="50" bodyend="54"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_app_data_1a4657c20a6c0e72090914e09376a32ad4" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>byte[]</type>
+        <definition>byte [] Micra.Core.AppData.GetChunk</definition>
+        <argsstring>(uint id)</argsstring>
+        <name>GetChunk</name>
+        <param>
+          <type>uint</type>
+          <declname>id</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Animatable.cs" line="56" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Animatable.cs" bodystart="56" bodyend="60"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_app_data_1a1097eb13514e2b39e39a78ab830ec0f6" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Micra.Core.AppData.AddChunk</definition>
+        <argsstring>(uint id, byte[] data)</argsstring>
+        <name>AddChunk</name>
+        <param>
+          <type>uint</type>
+          <declname>id</declname>
+        </param>
+        <param>
+          <type>byte[]</type>
+          <declname>data</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Animatable.cs" line="62" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Animatable.cs" bodystart="62" bodyend="64"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_app_data_1a78ee4415d1e90789d6d89f2e9a2f0bf4" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Micra.Core.AppData.RemoveChunk</definition>
+        <argsstring>(uint id)</argsstring>
+        <name>RemoveChunk</name>
+        <param>
+          <type>uint</type>
+          <declname>id</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Animatable.cs" line="66" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Animatable.cs" bodystart="66" bodyend="68"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Represents an <ref refid="class_micra_1_1_core_1_1_app_data" kindref="compound">AppData</ref> chunk. It wraps an Autodesk.Max.IAnimatable and provides access to the chunk functions. </para>    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="30">
+        <label>Micra.Core.AppData</label>
+        <link refid="class_micra_1_1_core_1_1_app_data"/>
+        <childnode refid="31" relation="usage">
+          <edgelabel>scid</edgelabel>
+        </childnode>
+        <childnode refid="33" relation="usage">
+          <edgelabel>cid</edgelabel>
+        </childnode>
+      </node>
+      <node id="31">
+        <label>Micra.Core.SuperClassID</label>
+        <link refid="struct_micra_1_1_core_1_1_super_class_i_d"/>
+        <childnode refid="32" relation="usage">
+          <edgelabel>ParameterBlock2</edgelabel>
+          <edgelabel>Light</edgelabel>
+          <edgelabel>ReferenceTarget</edgelabel>
+          <edgelabel>DerivedObject</edgelabel>
+          <edgelabel>PositionController</edgelabel>
+          <edgelabel>Material</edgelabel>
+          <edgelabel>Camera</edgelabel>
+          <edgelabel>Texture</edgelabel>
+          <edgelabel>BaseNode</edgelabel>
+          <edgelabel>ObjectModifier</edgelabel>
+          <edgelabel>...</edgelabel>
+        </childnode>
+      </node>
+      <node id="33">
+        <label>Micra.Core.ClassID</label>
+        <link refid="struct_micra_1_1_core_1_1_class_i_d"/>
+        <childnode refid="32" relation="usage">
+          <edgelabel>CylinderObject</edgelabel>
+          <edgelabel>DummyHelper</edgelabel>
+          <edgelabel>EditablePoly</edgelabel>
+          <edgelabel>RectangleShape</edgelabel>
+          <edgelabel>OmniLight</edgelabel>
+          <edgelabel>CircleShape</edgelabel>
+          <edgelabel>PointHelper</edgelabel>
+          <edgelabel>EditableMesh</edgelabel>
+          <edgelabel>PolyObject</edgelabel>
+          <edgelabel>BoxObject</edgelabel>
+          <edgelabel>...</edgelabel>
+        </childnode>
+      </node>
+      <node id="32">
+        <label>static</label>
+      </node>
+    </collaborationgraph>
+    <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Animatable.cs" line="45" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Animatable.cs" bodystart="45" bodyend="80"/>
+    <listofallmembers>
+      <member refid="class_micra_1_1_core_1_1_app_data_1a1097eb13514e2b39e39a78ab830ec0f6" prot="public" virt="non-virtual"><scope>Micra::Core::AppData</scope><name>AddChunk</name></member>
+      <member refid="class_micra_1_1_core_1_1_app_data_1a29ee9b730d5ca650d7cd5069295526bc" prot="private" virt="non-virtual"><scope>Micra::Core::AppData</scope><name>anim</name></member>
+      <member refid="class_micra_1_1_core_1_1_app_data_1aeffe4c68047a500e792b09d6187a0bd6" prot="public" virt="non-virtual"><scope>Micra::Core::AppData</scope><name>AppData</name></member>
+      <member refid="class_micra_1_1_core_1_1_app_data_1a82a39ec4f71a3904ff678597e81e5f3d" prot="public" virt="non-virtual"><scope>Micra::Core::AppData</scope><name>Chunks</name></member>
+      <member refid="class_micra_1_1_core_1_1_app_data_1a11d4ffeb6305873052503b2b3d187598" prot="private" virt="non-virtual"><scope>Micra::Core::AppData</scope><name>cid</name></member>
+      <member refid="class_micra_1_1_core_1_1_app_data_1a4657c20a6c0e72090914e09376a32ad4" prot="public" virt="non-virtual"><scope>Micra::Core::AppData</scope><name>GetChunk</name></member>
+      <member refid="class_micra_1_1_core_1_1_app_data_1a78ee4415d1e90789d6d89f2e9a2f0bf4" prot="public" virt="non-virtual"><scope>Micra::Core::AppData</scope><name>RemoveChunk</name></member>
+      <member refid="class_micra_1_1_core_1_1_app_data_1a957cf250cc5800e6d1efd9d2e662629f" prot="private" virt="non-virtual"><scope>Micra::Core::AppData</scope><name>scid</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

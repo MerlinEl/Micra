@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
+  <compounddef id="dir_0a6cc45f3e2e88b0a8f8f2a27fa9eee0" kind="dir">
+    <compoundname>D:/ReneBaca/Aprog/Micra/Micra_Csharp</compoundname>
+    <innerdir refid="dir_7e725df29100e00411ca2e6ad2eb17ed">D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core</innerdir>
+    <innerdir refid="dir_8e13a8cdf1c219115db3bb953229cff8">D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Domain</innerdir>
+    <innerdir refid="dir_e222082c64598b2342d85c1356c444fc">D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools</innerdir>
+    <innerdir refid="dir_704a041eee1477b70d706238c7c45e11">D:/ReneBaca/Aprog/Micra/Micra_Csharp/Properties</innerdir>
+    <innerfile refid="_form1_8cs">Form1.cs</innerfile>
+    <innerfile refid="_form1_8_designer_8cs">Form1.Designer.cs</innerfile>
+    <innerfile refid="_program_8cs">Program.cs</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/"/>
+  </compounddef>
+</doxygen>

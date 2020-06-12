@@ -1,0 +1,128 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
+  <compounddef id="struct_micra_1_1_core_1_1_poly_1_1_ngon" kind="struct" prot="public">
+    <compoundname>Micra::Core::Poly::Ngon</compoundname>
+      <sectiondef kind="property">
+      <memberdef kind="property" id="struct_micra_1_1_core_1_1_poly_1_1_ngon_1a2943b01bc99d13e6be8a42a4eefed4ca" prot="private" static="no" readable="no" writable="no" gettable="yes" settable="no">
+        <type>IMNFace</type>
+        <definition>IMNFace Micra.Core.Poly.Ngon._IMNFace</definition>
+        <argsstring></argsstring>
+        <name>_IMNFace</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Poly.cs" line="21" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Poly.cs" bodystart="21" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="struct_micra_1_1_core_1_1_poly_1_1_ngon_1a293fe003d76d13be99a6d247793dce8a" prot="public" static="no" mutable="no">
+        <type>IList&lt; int &gt;</type>
+        <definition>IList&lt;int&gt; Micra.Core.Poly.Ngon.verts</definition>
+        <argsstring></argsstring>
+        <name>verts</name>
+        <initializer>=&gt; _IMNFace.Vtx</initializer>
+        <briefdescription>
+<para>Vertex List</para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Poly.cs" line="23" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Poly.cs" bodystart="23" bodyend="-1"/>
+        <referencedby refid="class_micra_1_1_core_1_1_poly_1ac428c9a94c168c9efc4bd16ace675cd5" compoundref="_poly_8cs" startline="104" endline="128">Micra.Core.Poly.GetFaceArea</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="struct_micra_1_1_core_1_1_poly_1_1_ngon_1a1a9a1e3ec4bf814ad8de9331d9f14a3c" prot="public" static="no" mutable="no">
+        <type>int</type>
+        <definition>int Micra.Core.Poly.Ngon.Vnum</definition>
+        <argsstring></argsstring>
+        <name>Vnum</name>
+        <initializer>=&gt; _IMNFace.Vtx.Count</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Poly.cs" line="25" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Poly.cs" bodystart="25" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_micra_1_1_core_1_1_poly_1_1_ngon_1a71aa9eb2dfe084863d407532cf74dc06" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool Micra.Core.Poly.Ngon.IsTriangle</definition>
+        <argsstring></argsstring>
+        <name>IsTriangle</name>
+        <initializer>=&gt; <ref refid="struct_micra_1_1_core_1_1_poly_1_1_ngon_1a1a9a1e3ec4bf814ad8de9331d9f14a3c" kindref="member">Vnum</ref> == 3</initializer>
+        <briefdescription>
+<para>Check if face have exactly 3 vertices.</para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Poly.cs" line="27" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Poly.cs" bodystart="27" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_micra_1_1_core_1_1_poly_1_1_ngon_1a021a36e86f68ff5294db1d7309195953" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool Micra.Core.Poly.Ngon.IsQuad</definition>
+        <argsstring></argsstring>
+        <name>IsQuad</name>
+        <initializer>=&gt; <ref refid="struct_micra_1_1_core_1_1_poly_1_1_ngon_1a1a9a1e3ec4bf814ad8de9331d9f14a3c" kindref="member">Vnum</ref> == 4</initializer>
+        <briefdescription>
+<para>Check if face have exactly 4 vertices.</para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Poly.cs" line="29" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Poly.cs" bodystart="29" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_micra_1_1_core_1_1_poly_1_1_ngon_1a3c74cf4f6d192fdfe2f1a72ad536d0cd" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool Micra.Core.Poly.Ngon.IsNgon</definition>
+        <argsstring></argsstring>
+        <name>IsNgon</name>
+        <initializer>=&gt; <ref refid="struct_micra_1_1_core_1_1_poly_1_1_ngon_1a1a9a1e3ec4bf814ad8de9331d9f14a3c" kindref="member">Vnum</ref> &gt; 4</initializer>
+        <briefdescription>
+<para>Check if face have more than 4 vertices.</para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Poly.cs" line="31" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Poly.cs" bodystart="31" bodyend="-1"/>
+        <referencedby refid="class_micra_1_1_core_1_1_poly_1ac428c9a94c168c9efc4bd16ace675cd5" compoundref="_poly_8cs" startline="104" endline="128">Micra.Core.Poly.GetFaceArea</referencedby>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="struct_micra_1_1_core_1_1_poly_1_1_ngon_1a4de116a9bf0a11392577d34fb6a2f299" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Micra.Core.Poly.Ngon.Ngon</definition>
+        <argsstring>(IMNFace f)</argsstring>
+        <name>Ngon</name>
+        <param>
+          <type>IMNFace</type>
+          <declname>f</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Poly.cs" line="24" column="1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Represents a poly face. </para>    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Poly.cs" line="20" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Poly.cs" bodystart="20" bodyend="32"/>
+    <listofallmembers>
+      <member refid="struct_micra_1_1_core_1_1_poly_1_1_ngon_1a2943b01bc99d13e6be8a42a4eefed4ca" prot="private" virt="non-virtual"><scope>Micra::Core::Poly::Ngon</scope><name>_IMNFace</name></member>
+      <member refid="struct_micra_1_1_core_1_1_poly_1_1_ngon_1a3c74cf4f6d192fdfe2f1a72ad536d0cd" prot="public" virt="non-virtual"><scope>Micra::Core::Poly::Ngon</scope><name>IsNgon</name></member>
+      <member refid="struct_micra_1_1_core_1_1_poly_1_1_ngon_1a021a36e86f68ff5294db1d7309195953" prot="public" virt="non-virtual"><scope>Micra::Core::Poly::Ngon</scope><name>IsQuad</name></member>
+      <member refid="struct_micra_1_1_core_1_1_poly_1_1_ngon_1a71aa9eb2dfe084863d407532cf74dc06" prot="public" virt="non-virtual"><scope>Micra::Core::Poly::Ngon</scope><name>IsTriangle</name></member>
+      <member refid="struct_micra_1_1_core_1_1_poly_1_1_ngon_1a4de116a9bf0a11392577d34fb6a2f299" prot="public" virt="non-virtual"><scope>Micra::Core::Poly::Ngon</scope><name>Ngon</name></member>
+      <member refid="struct_micra_1_1_core_1_1_poly_1_1_ngon_1a293fe003d76d13be99a6d247793dce8a" prot="public" virt="non-virtual"><scope>Micra::Core::Poly::Ngon</scope><name>verts</name></member>
+      <member refid="struct_micra_1_1_core_1_1_poly_1_1_ngon_1a1a9a1e3ec4bf814ad8de9331d9f14a3c" prot="public" virt="non-virtual"><scope>Micra::Core::Poly::Ngon</scope><name>Vnum</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,48 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
+  <compounddef id="class_micra_1_1_tools_1_1_mx_poly" kind="class" prot="public">
+    <compoundname>Micra::Tools::MxPoly</compoundname>
+      <sectiondef kind="package-static-func">
+      <memberdef kind="function" id="class_micra_1_1_tools_1_1_mx_poly_1a0e90bd8aa82248ad9231802832e1d4d3" prot="package" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>static void Micra.Tools.MxPoly.SelectSimillarElements</definition>
+        <argsstring>()</argsstring>
+        <name>SelectSimillarElements</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/MxPoly.cs" line="8" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/MxPoly.cs" bodystart="8" bodyend="10"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_tools_1_1_mx_poly_1a77fbcbfe33405d4e5e3845c9f1fba57b" prot="package" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>List&lt; IPoint3 &gt;</type>
+        <definition>static List&lt;IPoint3&gt; Micra.Tools.MxPoly.GetVerticesPositions</definition>
+        <argsstring>(IINode obj)</argsstring>
+        <name>GetVerticesPositions</name>
+        <param>
+          <type>IINode</type>
+          <declname>obj</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+<para>OBJECT TRANSFORM MATRIX </para>        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/MxPoly.cs" line="37" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/MxPoly.cs" bodystart="37" bodyend="60"/>
+        <references refid="class_micra_1_1_tools_1_1_mx_get_1a1231af5f9820ab4ed031b0637cb4988c" compoundref="_mx_get_8cs" startline="31">Micra.Tools.MxGet.Global</references>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/MxPoly.cs" line="7" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/MxPoly.cs" bodystart="7" bodyend="61"/>
+    <listofallmembers>
+      <member refid="class_micra_1_1_tools_1_1_mx_poly_1a77fbcbfe33405d4e5e3845c9f1fba57b" prot="package" virt="non-virtual"><scope>Micra::Tools::MxPoly</scope><name>GetVerticesPositions</name></member>
+      <member refid="class_micra_1_1_tools_1_1_mx_poly_1a0e90bd8aa82248ad9231802832e1d4d3" prot="package" virt="non-virtual"><scope>Micra::Tools::MxPoly</scope><name>SelectSimillarElements</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

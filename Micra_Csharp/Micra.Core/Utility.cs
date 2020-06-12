@@ -41,6 +41,22 @@ namespace Micra.Core {
             return degrees * ( Math.PI / 180.0 );
         }
 
+        /// <summary> Heron’s Formula to calculate face area
+        ///     <example> 
+        ///         <code>
+        ///             example: GetTriangleArea(p1, p2, p3);
+        ///         </code>
+        ///     </example>
+        /// </summary>
+        public static double GetTriangleArea(Point3 p1, Point3 p2, Point3 p3) {
+
+            double a = p1.DistanceTo(p2);
+            double b = p2.DistanceTo(p3);
+            double c = p3.DistanceTo(p1);
+            double p = 0.5 * ( a + b + c );
+            return Math.Sqrt(p * ( p - a ) * ( p - b ) * ( p - c ));
+        }
+
         /// <summary>
         /// Extends IEnumerable&lt;T> with a new function for selecing only those 
         /// instances which match a specific type.

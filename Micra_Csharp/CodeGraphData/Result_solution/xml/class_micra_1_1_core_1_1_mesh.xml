@@ -1,0 +1,277 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
+  <compounddef id="class_micra_1_1_core_1_1_mesh" kind="class" prot="public">
+    <compoundname>Micra::Core::Mesh</compoundname>
+    <innerclass refid="struct_micra_1_1_core_1_1_mesh_1_1_face" prot="public">Micra::Core::Mesh::Face</innerclass>
+      <sectiondef kind="property">
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_mesh_1a5bae1d89f539c4b0a7f71efd0b1e9c10" prot="private" static="no" readable="no" writable="no" gettable="yes" settable="no">
+        <type>IMesh</type>
+        <definition>IMesh Micra.Core.Mesh._IMesh</definition>
+        <argsstring></argsstring>
+        <name>_IMesh</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Mesh.cs" line="48" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Mesh.cs" bodystart="48" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="class_micra_1_1_core_1_1_mesh_1a39652c2cc93f36d12ec7317061621f7e" prot="public" static="no" mutable="no">
+        <type><ref refid="struct_micra_1_1_core_1_1_mesh_1_1_face" kindref="compound">Face</ref>[]</type>
+        <definition>Face [] Micra.Core.Mesh.faces</definition>
+        <argsstring></argsstring>
+        <name>faces</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Mesh.cs" line="49" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Mesh.cs" bodystart="49" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_micra_1_1_core_1_1_mesh_1abc8674d2fb3568358819750c6335f187" prot="public" static="no" mutable="no">
+        <type><ref refid="class_micra_1_1_core_1_1_point3" kindref="compound">Point3</ref>[]</type>
+        <definition>Point3 [] Micra.Core.Mesh.verts</definition>
+        <argsstring></argsstring>
+        <name>verts</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Mesh.cs" line="51" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Mesh.cs" bodystart="51" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_micra_1_1_core_1_1_mesh_1a18a1fa37b0b72d25b6ac3693fbcc73f2" prot="public" static="no" mutable="no">
+        <type><ref refid="struct_micra_1_1_core_1_1_mesh_1_1_face" kindref="compound">Face</ref>[]</type>
+        <definition>Face [] Micra.Core.Mesh.tfaces</definition>
+        <argsstring></argsstring>
+        <name>tfaces</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Mesh.cs" line="52" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Mesh.cs" bodystart="52" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_micra_1_1_core_1_1_mesh_1ab624fe18e23b46055690ebbc4a5dff11" prot="public" static="no" mutable="no">
+        <type><ref refid="class_micra_1_1_core_1_1_point3" kindref="compound">Point3</ref>[]</type>
+        <definition>Point3 [] Micra.Core.Mesh.tverts</definition>
+        <argsstring></argsstring>
+        <name>tverts</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Mesh.cs" line="53" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Mesh.cs" bodystart="53" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_micra_1_1_core_1_1_mesh_1a48b76b1b59f4b1eb43fbae22f7313af1" prot="public" static="no" mutable="no">
+        <type><ref refid="class_micra_1_1_core_1_1_point3" kindref="compound">Point3</ref>[]</type>
+        <definition>Point3 [] Micra.Core.Mesh.fnormals</definition>
+        <argsstring></argsstring>
+        <name>fnormals</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Mesh.cs" line="54" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Mesh.cs" bodystart="54" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_micra_1_1_core_1_1_mesh_1a6401e30673e67d1b715550646f3a7a73" prot="public" static="no" mutable="no">
+        <type><ref refid="class_micra_1_1_core_1_1_point3" kindref="compound">Point3</ref>[]</type>
+        <definition>Point3 [] Micra.Core.Mesh.vnormals</definition>
+        <argsstring></argsstring>
+        <name>vnormals</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Mesh.cs" line="55" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Mesh.cs" bodystart="55" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="package-func">
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_mesh_1a2a72c9b685dec497f232f225561e4f97" prot="package" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>Micra.Core.Mesh.Mesh</definition>
+        <argsstring>(IMesh m)</argsstring>
+        <name>Mesh</name>
+        <param>
+          <type>IMesh</type>
+          <declname>m</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Mesh.cs" line="57" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Mesh.cs" bodystart="57" bodyend="104"/>
+        <references refid="class_micra_1_1_core_1_1_point3_1a70d40c6cbc6b49c5c97ab54a02026070" compoundref="_point3_8cs" startline="25">Micra.Core.Point3.Origin</references>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_mesh_1a1f73ed75187456313bf324a586788472" prot="package" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>double</type>
+        <definition>double Micra.Core.Mesh.GetArea</definition>
+        <argsstring>()</argsstring>
+        <name>GetArea</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Mesh.cs" line="105" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_mesh_1a2f11a9438d9aea364a2971ce4f05d3f1" prot="package" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>List&lt; int &gt;</type>
+        <definition>List&lt;int&gt; Micra.Core.Mesh.GetSelectedFaces</definition>
+        <argsstring>()</argsstring>
+        <name>GetSelectedFaces</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Mesh.cs" line="116" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Mesh.cs" bodystart="116" bodyend="124"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_mesh_1a6e9434aecdbc005143091663e65fe19d" prot="package" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Micra.Core.Mesh.HideFaces</definition>
+        <argsstring>(List&lt; int &gt; lists)</argsstring>
+        <name>HideFaces</name>
+        <param>
+          <type>List&lt; int &gt;</type>
+          <declname>lists</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Mesh.cs" line="126" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_mesh_1a705f80d1e34983eb77c7a8ec010e79bd" prot="package" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Micra.Core.Mesh.HideFaces</definition>
+        <argsstring>(bool selected)</argsstring>
+        <name>HideFaces</name>
+        <param>
+          <type>bool</type>
+          <declname>selected</declname>
+        </param>
+        <briefdescription>
+<para>Hide Selected or Unselected Faces  </para>        </briefdescription>
+        <detaileddescription>
+<para><computeroutput> example: GetMesh().HideFaces(true); </computeroutput> </para><para>param: <emphasis>selected</emphasis>  &gt; True(Hide Selected), False(Hide Unselected)</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Mesh.cs" line="135" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Mesh.cs" bodystart="135" bodyend="148"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_mesh_1a7b0442bb896888b2516ae050fdbc2b87" prot="package" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Micra.Core.Mesh.UnhideFaces</definition>
+        <argsstring>()</argsstring>
+        <name>UnhideFaces</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Mesh.cs" line="149" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Mesh.cs" bodystart="149" bodyend="152"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_mesh_1a4ddaa6cb6f50fa13fd0b507fdd3566a1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>double</type>
+        <definition>double Micra.Core.Mesh.GetFaceArea</definition>
+        <argsstring>(int faceIndex)</argsstring>
+        <name>GetFaceArea</name>
+        <param>
+          <type>int</type>
+          <declname>faceIndex</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Mesh.cs" line="106" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_mesh_1a5ec13df980afd36210c91965a74227e9" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>double</type>
+        <definition>double Micra.Core.Mesh.GetFaceArea</definition>
+        <argsstring>(Face f)</argsstring>
+        <name>GetFaceArea</name>
+        <param>
+          <type><ref refid="struct_micra_1_1_core_1_1_mesh_1_1_face" kindref="compound">Face</ref></type>
+          <declname>f</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Mesh.cs" line="108" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Mesh.cs" bodystart="108" bodyend="114"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>This is mesh data stored in a format that can be automatically serialized to file as XML and across a network via TCP. It computes both vertex normals and face normals ignoring smoothing group data. </para>    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="230">
+        <label>Micra.Core.Mesh</label>
+        <link refid="class_micra_1_1_core_1_1_mesh"/>
+        <childnode refid="231" relation="usage">
+          <edgelabel>verts</edgelabel>
+          <edgelabel>vnormals</edgelabel>
+          <edgelabel>fnormals</edgelabel>
+          <edgelabel>tverts</edgelabel>
+        </childnode>
+        <childnode refid="232" relation="usage">
+          <edgelabel>tfaces</edgelabel>
+          <edgelabel>faces</edgelabel>
+        </childnode>
+      </node>
+      <node id="232">
+        <label>Micra.Core.Mesh.Face</label>
+        <link refid="struct_micra_1_1_core_1_1_mesh_1_1_face"/>
+      </node>
+      <node id="231">
+        <label>Micra.Core.Point3</label>
+        <link refid="class_micra_1_1_core_1_1_point3"/>
+      </node>
+    </collaborationgraph>
+    <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Mesh.cs" line="20" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Mesh.cs" bodystart="20" bodyend="153"/>
+    <listofallmembers>
+      <member refid="class_micra_1_1_core_1_1_mesh_1a5bae1d89f539c4b0a7f71efd0b1e9c10" prot="private" virt="non-virtual"><scope>Micra::Core::Mesh</scope><name>_IMesh</name></member>
+      <member refid="class_micra_1_1_core_1_1_mesh_1a39652c2cc93f36d12ec7317061621f7e" prot="public" virt="non-virtual"><scope>Micra::Core::Mesh</scope><name>faces</name></member>
+      <member refid="class_micra_1_1_core_1_1_mesh_1a48b76b1b59f4b1eb43fbae22f7313af1" prot="public" virt="non-virtual"><scope>Micra::Core::Mesh</scope><name>fnormals</name></member>
+      <member refid="class_micra_1_1_core_1_1_mesh_1a1f73ed75187456313bf324a586788472" prot="package" virt="non-virtual"><scope>Micra::Core::Mesh</scope><name>GetArea</name></member>
+      <member refid="class_micra_1_1_core_1_1_mesh_1a4ddaa6cb6f50fa13fd0b507fdd3566a1" prot="public" virt="non-virtual"><scope>Micra::Core::Mesh</scope><name>GetFaceArea</name></member>
+      <member refid="class_micra_1_1_core_1_1_mesh_1a5ec13df980afd36210c91965a74227e9" prot="public" virt="non-virtual"><scope>Micra::Core::Mesh</scope><name>GetFaceArea</name></member>
+      <member refid="class_micra_1_1_core_1_1_mesh_1a2f11a9438d9aea364a2971ce4f05d3f1" prot="package" virt="non-virtual"><scope>Micra::Core::Mesh</scope><name>GetSelectedFaces</name></member>
+      <member refid="class_micra_1_1_core_1_1_mesh_1a6e9434aecdbc005143091663e65fe19d" prot="package" virt="non-virtual"><scope>Micra::Core::Mesh</scope><name>HideFaces</name></member>
+      <member refid="class_micra_1_1_core_1_1_mesh_1a705f80d1e34983eb77c7a8ec010e79bd" prot="package" virt="non-virtual"><scope>Micra::Core::Mesh</scope><name>HideFaces</name></member>
+      <member refid="class_micra_1_1_core_1_1_mesh_1a2a72c9b685dec497f232f225561e4f97" prot="package" virt="non-virtual"><scope>Micra::Core::Mesh</scope><name>Mesh</name></member>
+      <member refid="class_micra_1_1_core_1_1_mesh_1a18a1fa37b0b72d25b6ac3693fbcc73f2" prot="public" virt="non-virtual"><scope>Micra::Core::Mesh</scope><name>tfaces</name></member>
+      <member refid="class_micra_1_1_core_1_1_mesh_1ab624fe18e23b46055690ebbc4a5dff11" prot="public" virt="non-virtual"><scope>Micra::Core::Mesh</scope><name>tverts</name></member>
+      <member refid="class_micra_1_1_core_1_1_mesh_1a7b0442bb896888b2516ae050fdbc2b87" prot="package" virt="non-virtual"><scope>Micra::Core::Mesh</scope><name>UnhideFaces</name></member>
+      <member refid="class_micra_1_1_core_1_1_mesh_1abc8674d2fb3568358819750c6335f187" prot="public" virt="non-virtual"><scope>Micra::Core::Mesh</scope><name>verts</name></member>
+      <member refid="class_micra_1_1_core_1_1_mesh_1a6401e30673e67d1b715550646f3a7a73" prot="public" virt="non-virtual"><scope>Micra::Core::Mesh</scope><name>vnormals</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

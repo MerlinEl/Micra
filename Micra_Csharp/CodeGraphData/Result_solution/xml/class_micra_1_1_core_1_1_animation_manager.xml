@@ -1,0 +1,365 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
+  <compounddef id="class_micra_1_1_core_1_1_animation_manager" kind="class" prot="public">
+    <compoundname>Micra::Core::AnimationManager</compoundname>
+      <sectiondef kind="property">
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_animation_manager_1abaaef4ba1f1c8ef2872dc4a19de2ab42" prot="public" static="yes" readable="no" writable="no" gettable="yes" settable="yes">
+        <type>int</type>
+        <definition>int Micra.Core.AnimationManager.Speed</definition>
+        <argsstring></argsstring>
+        <name>Speed</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/AnimationManager.cs" line="22" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/AnimationManager.cs" bodystart="22" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_animation_manager_1af2b0c450fb0c82cad592e08c5abe8451" prot="public" static="yes" readable="no" writable="no" gettable="yes" settable="yes">
+        <type>bool</type>
+        <definition>bool Micra.Core.AnimationManager.Loop</definition>
+        <argsstring></argsstring>
+        <name>Loop</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/AnimationManager.cs" line="23" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/AnimationManager.cs" bodystart="23" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_animation_manager_1ac46ee7c42fcf30da12d8e9af7c9513ad" prot="public" static="yes" readable="no" writable="no" gettable="yes" settable="yes">
+        <type>bool</type>
+        <definition>bool Micra.Core.AnimationManager.IsPlaying</definition>
+        <argsstring></argsstring>
+        <name>IsPlaying</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/AnimationManager.cs" line="25" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/AnimationManager.cs" bodystart="25" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_animation_manager_1a7ad9f20d20dd57a2033e7ea4878bbcbc" prot="public" static="yes" readable="no" writable="no" gettable="yes" settable="yes">
+        <type>bool</type>
+        <definition>bool Micra.Core.AnimationManager.AnimateButtonEnabled</definition>
+        <argsstring></argsstring>
+        <name>AnimateButtonEnabled</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/AnimationManager.cs" line="26" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/AnimationManager.cs" bodystart="26" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_animation_manager_1a24308ae339d78f614a78b0f621c3e6b9" prot="public" static="yes" readable="no" writable="no" gettable="yes" settable="yes">
+        <type>bool</type>
+        <definition>bool Micra.Core.AnimationManager.RealTimePlayback</definition>
+        <argsstring></argsstring>
+        <name>RealTimePlayback</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/AnimationManager.cs" line="27" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/AnimationManager.cs" bodystart="27" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_animation_manager_1ac6a0c9d185ad8edff0070dd02f6985a5" prot="public" static="yes" readable="no" writable="no" gettable="yes" settable="yes">
+        <type><ref refid="struct_micra_1_1_core_1_1_time_value" kindref="compound">TimeValue</ref></type>
+        <definition>TimeValue Micra.Core.AnimationManager.StartTime</definition>
+        <argsstring></argsstring>
+        <name>StartTime</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/AnimationManager.cs" line="28" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/AnimationManager.cs" bodystart="28" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_animation_manager_1ae7a81b5efe67a73d374e7673e3f50562" prot="public" static="yes" readable="no" writable="no" gettable="yes" settable="yes">
+        <type><ref refid="struct_micra_1_1_core_1_1_time_value" kindref="compound">TimeValue</ref></type>
+        <definition>TimeValue Micra.Core.AnimationManager.EndTime</definition>
+        <argsstring></argsstring>
+        <name>EndTime</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/AnimationManager.cs" line="29" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/AnimationManager.cs" bodystart="29" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_animation_manager_1a7ceee23ac85b5194425bc2759dd11a94" prot="public" static="yes" readable="no" writable="no" gettable="yes" settable="yes">
+        <type><ref refid="struct_micra_1_1_core_1_1_interval" kindref="compound">Interval</ref></type>
+        <definition>Interval Micra.Core.AnimationManager.TimeRange</definition>
+        <argsstring></argsstring>
+        <name>TimeRange</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/AnimationManager.cs" line="30" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/AnimationManager.cs" bodystart="30" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_animation_manager_1a9a2192cc681beef9ccd243c4f088b58e" prot="public" static="yes" readable="no" writable="no" gettable="yes" settable="no">
+        <type>int</type>
+        <definition>int Micra.Core.AnimationManager.StartFrame</definition>
+        <argsstring></argsstring>
+        <name>StartFrame</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/AnimationManager.cs" line="31" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/AnimationManager.cs" bodystart="31" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_animation_manager_1a3fe25a89c027eaf2c34a126464598768" prot="public" static="yes" readable="no" writable="no" gettable="yes" settable="no">
+        <type>int</type>
+        <definition>int Micra.Core.AnimationManager.EndFrame</definition>
+        <argsstring></argsstring>
+        <name>EndFrame</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/AnimationManager.cs" line="32" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/AnimationManager.cs" bodystart="32" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_animation_manager_1ac370b53d1bb6598fc3bf627b6f602d21" prot="public" static="yes" readable="no" writable="no" gettable="yes" settable="yes">
+        <type>bool</type>
+        <definition>bool Micra.Core.AnimationManager.IsRealTime</definition>
+        <argsstring></argsstring>
+        <name>IsRealTime</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/AnimationManager.cs" line="33" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/AnimationManager.cs" bodystart="33" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_animation_manager_1a91197cec23cabf2928113b785cb3520d" prot="public" static="yes" readable="no" writable="no" gettable="yes" settable="yes">
+        <type>int</type>
+        <definition>int Micra.Core.AnimationManager.FrameRate</definition>
+        <argsstring></argsstring>
+        <name>FrameRate</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/AnimationManager.cs" line="34" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/AnimationManager.cs" bodystart="34" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_animation_manager_1a6a58b6e1de118808f944129640cbd0bc" prot="public" static="yes" readable="no" writable="no" gettable="yes" settable="yes">
+        <type>int</type>
+        <definition>int Micra.Core.AnimationManager.TicksPerFrame</definition>
+        <argsstring></argsstring>
+        <name>TicksPerFrame</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/AnimationManager.cs" line="35" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/AnimationManager.cs" bodystart="35" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_animation_manager_1a13a4870920336ccd39ac060fc9b04ac4" prot="public" static="yes" readable="no" writable="no" gettable="yes" settable="yes">
+        <type>TimeDisp</type>
+        <definition>TimeDisp Micra.Core.AnimationManager.TimeDisplay</definition>
+        <argsstring></argsstring>
+        <name>TimeDisplay</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/AnimationManager.cs" line="37" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/AnimationManager.cs" bodystart="37" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_animation_manager_1a12dd9d005f313f24a125987313127674" prot="public" static="yes" readable="no" writable="no" gettable="yes" settable="no">
+        <type>int</type>
+        <definition>int Micra.Core.AnimationManager.TicksPerSec</definition>
+        <argsstring></argsstring>
+        <name>TicksPerSec</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/AnimationManager.cs" line="40" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/AnimationManager.cs" bodystart="40" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_animation_manager_1a0e0c842607a40428e11afdc3f569f920" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>static void Micra.Core.AnimationManager.StartPlayback</definition>
+        <argsstring>(bool selectedOnly)</argsstring>
+        <name>StartPlayback</name>
+        <param>
+          <type>bool</type>
+          <declname>selectedOnly</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/AnimationManager.cs" line="20" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/AnimationManager.cs" bodystart="20" bodyend="20"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_animation_manager_1a109b5923d6fdd8a37d0d05e8e4e079d8" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>static void Micra.Core.AnimationManager.StartPlayback</definition>
+        <argsstring>()</argsstring>
+        <name>StartPlayback</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/AnimationManager.cs" line="21" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/AnimationManager.cs" bodystart="21" bodyend="21"/>
+        <references refid="class_micra_1_1_core_1_1_animation_manager_1a109b5923d6fdd8a37d0d05e8e4e079d8" compoundref="_animation_manager_8cs" startline="21" endline="21">Micra.Core.AnimationManager.StartPlayback</references>
+        <referencedby refid="class_micra_1_1_core_1_1_animation_manager_1a109b5923d6fdd8a37d0d05e8e4e079d8" compoundref="_animation_manager_8cs" startline="21" endline="21">Micra.Core.AnimationManager.StartPlayback</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_animation_manager_1a0dc22ee726472c910a38b7450dfddef4" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>static void Micra.Core.AnimationManager.EndPlayback</definition>
+        <argsstring>()</argsstring>
+        <name>EndPlayback</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/AnimationManager.cs" line="24" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/AnimationManager.cs" bodystart="24" bodyend="24"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_animation_manager_1af29910594c5afeeeb914e2eb5d2e7c02" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>static bool Micra.Core.AnimationManager.IsLegalFrameRate</definition>
+        <argsstring>(int r)</argsstring>
+        <name>IsLegalFrameRate</name>
+        <param>
+          <type>int</type>
+          <declname>r</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/AnimationManager.cs" line="36" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/AnimationManager.cs" bodystart="36" bodyend="36"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_animation_manager_1a5f0c5f810fd2f7f38dfa1b4df1752886" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>int</type>
+        <definition>static int Micra.Core.AnimationManager.TimeToFrame</definition>
+        <argsstring>(TimeValue t)</argsstring>
+        <name>TimeToFrame</name>
+        <param>
+          <type><ref refid="struct_micra_1_1_core_1_1_time_value" kindref="compound">TimeValue</ref></type>
+          <declname>t</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/AnimationManager.cs" line="38" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/AnimationManager.cs" bodystart="38" bodyend="38"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_animation_manager_1a67d883ae6a2f8529b83bcfd510177aa2" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="struct_micra_1_1_core_1_1_time_value" kindref="compound">TimeValue</ref></type>
+        <definition>static TimeValue Micra.Core.AnimationManager.FrameToTime</definition>
+        <argsstring>(int f)</argsstring>
+        <name>FrameToTime</name>
+        <param>
+          <type>int</type>
+          <declname>f</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/AnimationManager.cs" line="39" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/AnimationManager.cs" bodystart="39" bodyend="39"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_animation_manager_1a7010dc6bc0def38a658d1a673ae5d469" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="struct_micra_1_1_core_1_1_time_value" kindref="compound">TimeValue</ref></type>
+        <definition>static TimeValue Micra.Core.AnimationManager.SecToTimeSpan</definition>
+        <argsstring>(double sec)</argsstring>
+        <name>SecToTimeSpan</name>
+        <param>
+          <type>double</type>
+          <declname>sec</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/AnimationManager.cs" line="41" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/AnimationManager.cs" bodystart="41" bodyend="41"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_animation_manager_1a4d3870d69e874ab0edcfe8af0aa8091a" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>double</type>
+        <definition>static double Micra.Core.AnimationManager.TimeSpanToSec</definition>
+        <argsstring>(TimeValue t)</argsstring>
+        <name>TimeSpanToSec</name>
+        <param>
+          <type><ref refid="struct_micra_1_1_core_1_1_time_value" kindref="compound">TimeValue</ref></type>
+          <declname>t</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/AnimationManager.cs" line="42" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/AnimationManager.cs" bodystart="42" bodyend="42"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Provides access to global functionality for managing animations. </para>    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/AnimationManager.cs" line="19" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/AnimationManager.cs" bodystart="19" bodyend="43"/>
+    <listofallmembers>
+      <member refid="class_micra_1_1_core_1_1_animation_manager_1a7ad9f20d20dd57a2033e7ea4878bbcbc" prot="public" virt="non-virtual"><scope>Micra::Core::AnimationManager</scope><name>AnimateButtonEnabled</name></member>
+      <member refid="class_micra_1_1_core_1_1_animation_manager_1a3fe25a89c027eaf2c34a126464598768" prot="public" virt="non-virtual"><scope>Micra::Core::AnimationManager</scope><name>EndFrame</name></member>
+      <member refid="class_micra_1_1_core_1_1_animation_manager_1a0dc22ee726472c910a38b7450dfddef4" prot="public" virt="non-virtual"><scope>Micra::Core::AnimationManager</scope><name>EndPlayback</name></member>
+      <member refid="class_micra_1_1_core_1_1_animation_manager_1ae7a81b5efe67a73d374e7673e3f50562" prot="public" virt="non-virtual"><scope>Micra::Core::AnimationManager</scope><name>EndTime</name></member>
+      <member refid="class_micra_1_1_core_1_1_animation_manager_1a91197cec23cabf2928113b785cb3520d" prot="public" virt="non-virtual"><scope>Micra::Core::AnimationManager</scope><name>FrameRate</name></member>
+      <member refid="class_micra_1_1_core_1_1_animation_manager_1a67d883ae6a2f8529b83bcfd510177aa2" prot="public" virt="non-virtual"><scope>Micra::Core::AnimationManager</scope><name>FrameToTime</name></member>
+      <member refid="class_micra_1_1_core_1_1_animation_manager_1af29910594c5afeeeb914e2eb5d2e7c02" prot="public" virt="non-virtual"><scope>Micra::Core::AnimationManager</scope><name>IsLegalFrameRate</name></member>
+      <member refid="class_micra_1_1_core_1_1_animation_manager_1ac46ee7c42fcf30da12d8e9af7c9513ad" prot="public" virt="non-virtual"><scope>Micra::Core::AnimationManager</scope><name>IsPlaying</name></member>
+      <member refid="class_micra_1_1_core_1_1_animation_manager_1ac370b53d1bb6598fc3bf627b6f602d21" prot="public" virt="non-virtual"><scope>Micra::Core::AnimationManager</scope><name>IsRealTime</name></member>
+      <member refid="class_micra_1_1_core_1_1_animation_manager_1af2b0c450fb0c82cad592e08c5abe8451" prot="public" virt="non-virtual"><scope>Micra::Core::AnimationManager</scope><name>Loop</name></member>
+      <member refid="class_micra_1_1_core_1_1_animation_manager_1a24308ae339d78f614a78b0f621c3e6b9" prot="public" virt="non-virtual"><scope>Micra::Core::AnimationManager</scope><name>RealTimePlayback</name></member>
+      <member refid="class_micra_1_1_core_1_1_animation_manager_1a7010dc6bc0def38a658d1a673ae5d469" prot="public" virt="non-virtual"><scope>Micra::Core::AnimationManager</scope><name>SecToTimeSpan</name></member>
+      <member refid="class_micra_1_1_core_1_1_animation_manager_1abaaef4ba1f1c8ef2872dc4a19de2ab42" prot="public" virt="non-virtual"><scope>Micra::Core::AnimationManager</scope><name>Speed</name></member>
+      <member refid="class_micra_1_1_core_1_1_animation_manager_1a9a2192cc681beef9ccd243c4f088b58e" prot="public" virt="non-virtual"><scope>Micra::Core::AnimationManager</scope><name>StartFrame</name></member>
+      <member refid="class_micra_1_1_core_1_1_animation_manager_1a0e0c842607a40428e11afdc3f569f920" prot="public" virt="non-virtual"><scope>Micra::Core::AnimationManager</scope><name>StartPlayback</name></member>
+      <member refid="class_micra_1_1_core_1_1_animation_manager_1a109b5923d6fdd8a37d0d05e8e4e079d8" prot="public" virt="non-virtual"><scope>Micra::Core::AnimationManager</scope><name>StartPlayback</name></member>
+      <member refid="class_micra_1_1_core_1_1_animation_manager_1ac6a0c9d185ad8edff0070dd02f6985a5" prot="public" virt="non-virtual"><scope>Micra::Core::AnimationManager</scope><name>StartTime</name></member>
+      <member refid="class_micra_1_1_core_1_1_animation_manager_1a6a58b6e1de118808f944129640cbd0bc" prot="public" virt="non-virtual"><scope>Micra::Core::AnimationManager</scope><name>TicksPerFrame</name></member>
+      <member refid="class_micra_1_1_core_1_1_animation_manager_1a12dd9d005f313f24a125987313127674" prot="public" virt="non-virtual"><scope>Micra::Core::AnimationManager</scope><name>TicksPerSec</name></member>
+      <member refid="class_micra_1_1_core_1_1_animation_manager_1a13a4870920336ccd39ac060fc9b04ac4" prot="public" virt="non-virtual"><scope>Micra::Core::AnimationManager</scope><name>TimeDisplay</name></member>
+      <member refid="class_micra_1_1_core_1_1_animation_manager_1a7ceee23ac85b5194425bc2759dd11a94" prot="public" virt="non-virtual"><scope>Micra::Core::AnimationManager</scope><name>TimeRange</name></member>
+      <member refid="class_micra_1_1_core_1_1_animation_manager_1a4d3870d69e874ab0edcfe8af0aa8091a" prot="public" virt="non-virtual"><scope>Micra::Core::AnimationManager</scope><name>TimeSpanToSec</name></member>
+      <member refid="class_micra_1_1_core_1_1_animation_manager_1a5f0c5f810fd2f7f38dfa1b4df1752886" prot="public" virt="non-virtual"><scope>Micra::Core::AnimationManager</scope><name>TimeToFrame</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

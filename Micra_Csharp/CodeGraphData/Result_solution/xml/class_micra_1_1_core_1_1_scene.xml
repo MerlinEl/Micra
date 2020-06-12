@@ -1,0 +1,531 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
+  <compounddef id="class_micra_1_1_core_1_1_scene" kind="class" prot="public">
+    <compoundname>Micra::Core::Scene</compoundname>
+      <sectiondef kind="user-defined">
+      <header>Scene Serialization Functions</header>
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_scene_1ae9b23ad8105e314886d57140a90599f9" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Micra.Core.Scene.CreateScene</definition>
+        <argsstring>(SerializableScene s)</argsstring>
+        <name>CreateScene</name>
+        <param>
+          <type><ref refid="class_micra_1_1_core_1_1_serializable_scene" kindref="compound">SerializableScene</ref></type>
+          <declname>s</declname>
+        </param>
+        <briefdescription>
+<para>Creates a scene from a SceneData instance. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>s</parametername>
+</parameternamelist>
+<parameterdescription>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Scene.cs" line="104" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Scene.cs" bodystart="104" bodyend="108"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_scene_1a78a66178cc2e11cb630ef7fad460f7e8" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="class_micra_1_1_core_1_1_serializable_scene" kindref="compound">SerializableScene</ref></type>
+        <definition>SerializableScene Micra.Core.Scene.GetSerializableScene</definition>
+        <argsstring>()</argsstring>
+        <name>GetSerializableScene</name>
+        <briefdescription>
+<para>Creates an object that represents scene data that can be serialized. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Scene.cs" line="113" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Scene.cs" bodystart="113" bodyend="115"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="package-attrib">
+      <memberdef kind="variable" id="class_micra_1_1_core_1_1_scene_1a6669cd0028e3e60445d60d194a2ff0fe" prot="package" static="no" mutable="no">
+        <type><ref refid="class_micra_1_1_core_1_1_reference_target" kindref="compound">ReferenceTarget</ref></type>
+        <definition>ReferenceTarget Micra.Core.Scene.sceneRefTarget</definition>
+        <argsstring></argsstring>
+        <name>sceneRefTarget</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Scene.cs" line="20" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Scene.cs" bodystart="20" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_micra_1_1_core_1_1_scene_1a995ca4b2e05c9c4f3aff9231584fbdbc" prot="package" static="no" mutable="no">
+        <type>IIScene</type>
+        <definition>IIScene Micra.Core.Scene.scene</definition>
+        <argsstring></argsstring>
+        <name>scene</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Scene.cs" line="21" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Scene.cs" bodystart="21" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_micra_1_1_core_1_1_scene_1ad2b15f95503d652dd9d2bfc12f7ee63a" prot="package" static="no" mutable="no">
+        <type><ref refid="class_micra_1_1_core_1_1_node" kindref="compound">Node</ref></type>
+        <definition>Node Micra.Core.Scene.sceneRootNode</definition>
+        <argsstring></argsstring>
+        <name>sceneRootNode</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Scene.cs" line="22" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Scene.cs" bodystart="22" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="property">
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_scene_1af18acdf337993dab40dc3eed7ec71a19" prot="public" static="no" readable="no" writable="no" gettable="yes" settable="no">
+        <type><ref refid="class_micra_1_1_core_1_1_node" kindref="compound">Node</ref></type>
+        <definition>Node Micra.Core.Scene.RootNode</definition>
+        <argsstring></argsstring>
+        <name>RootNode</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Scene.cs" line="35" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Scene.cs" bodystart="35" bodyend="-1"/>
+        <referencedby refid="class_micra_1_1_tools_1_1_csharp_to_max_test_1a7a13262b911b15a22f5f4493262df12d" compoundref="_csharp_to_max_test_8cs" startline="93" endline="97">Micra.Tools.CsharpToMaxTest.Button9_Click</referencedby>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_scene_1a7c4571adf4e6c7fb8e60a1624e634761" prot="public" static="no" readable="no" writable="no" gettable="yes" settable="no">
+        <type>IEnumerable&lt; <ref refid="class_micra_1_1_core_1_1_node" kindref="compound">Node</ref> &gt;</type>
+        <definition>IEnumerable&lt;Node&gt; Micra.Core.Scene.NodeTree</definition>
+        <argsstring></argsstring>
+        <name>NodeTree</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Scene.cs" line="39" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Scene.cs" bodystart="39" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_scene_1a36a4263cd2b374fb278e32c907188a73" prot="public" static="no" readable="no" writable="no" gettable="yes" settable="no">
+        <type>IEnumerable&lt; <ref refid="class_micra_1_1_core_1_1_node" kindref="compound">Node</ref> &gt;</type>
+        <definition>IEnumerable&lt;Node&gt; Micra.Core.Scene.GeometryNodes</definition>
+        <argsstring></argsstring>
+        <name>GeometryNodes</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Scene.cs" line="58" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Scene.cs" bodystart="58" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_scene_1a45abec2340eb4422e8c088bf465ed460" prot="public" static="no" readable="no" writable="no" gettable="yes" settable="no">
+        <type>IEnumerable&lt; <ref refid="class_micra_1_1_core_1_1_node" kindref="compound">Node</ref> &gt;</type>
+        <definition>IEnumerable&lt;Node&gt; Micra.Core.Scene.LightNodes</definition>
+        <argsstring></argsstring>
+        <name>LightNodes</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Scene.cs" line="59" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Scene.cs" bodystart="59" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_scene_1a3d9962d3237ce3dee5bb6d3e8e4c4bfa" prot="public" static="no" readable="no" writable="no" gettable="yes" settable="no">
+        <type>IEnumerable&lt; <ref refid="class_micra_1_1_core_1_1_node" kindref="compound">Node</ref> &gt;</type>
+        <definition>IEnumerable&lt;Node&gt; Micra.Core.Scene.CameraNodes</definition>
+        <argsstring></argsstring>
+        <name>CameraNodes</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Scene.cs" line="60" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Scene.cs" bodystart="60" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_scene_1a7804bf388ac0777b4e617abf547c51e2" prot="public" static="no" readable="no" writable="no" gettable="yes" settable="no">
+        <type>IEnumerable&lt; <ref refid="class_micra_1_1_core_1_1_node" kindref="compound">Node</ref> &gt;</type>
+        <definition>IEnumerable&lt;Node&gt; Micra.Core.Scene.HelperNodes</definition>
+        <argsstring></argsstring>
+        <name>HelperNodes</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Scene.cs" line="61" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Scene.cs" bodystart="61" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_scene_1aeea6910e30234a328e7762162c31b8d2" prot="public" static="no" readable="no" writable="no" gettable="yes" settable="no">
+        <type>IEnumerable&lt; <ref refid="class_micra_1_1_core_1_1_node" kindref="compound">Node</ref> &gt;</type>
+        <definition>IEnumerable&lt;Node&gt; Micra.Core.Scene.ShapeNodes</definition>
+        <argsstring></argsstring>
+        <name>ShapeNodes</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Scene.cs" line="62" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Scene.cs" bodystart="62" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_scene_1a005c7010054181cfbee61306691d5c35" prot="public" static="no" readable="no" writable="no" gettable="yes" settable="no">
+        <type>IEnumerable&lt; <ref refid="class_micra_1_1_core_1_1_scene_object" kindref="compound">SceneObject</ref> &gt;</type>
+        <definition>IEnumerable&lt;SceneObject&gt; Micra.Core.Scene.Objects</definition>
+        <argsstring></argsstring>
+        <name>Objects</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Scene.cs" line="66" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Scene.cs" bodystart="66" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_scene_1afd9cbef91ffc2b46a85c42f26ba55c0a" prot="public" static="no" readable="no" writable="no" gettable="yes" settable="no">
+        <type><ref refid="class_micra_1_1_core_1_1_reference_target" kindref="compound">ReferenceTarget</ref></type>
+        <definition>ReferenceTarget Micra.Core.Scene.RootTarget</definition>
+        <argsstring></argsstring>
+        <name>RootTarget</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Scene.cs" line="70" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Scene.cs" bodystart="70" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_scene_1ac82d9556f617dcb19f32fc818a8d3174" prot="private" static="no" readable="no" writable="no" gettable="yes" settable="no">
+        <type>IEnumerable&lt; <ref refid="class_micra_1_1_core_1_1_reference_target" kindref="compound">ReferenceTarget</ref> &gt;</type>
+        <definition>IEnumerable&lt;ReferenceTarget&gt; Micra.Core.Scene.AllTargets</definition>
+        <argsstring></argsstring>
+        <name>AllTargets</name>
+        <briefdescription>
+<para>Because of the nature of the reference hierarchy, it is very likely to receive duplicate </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Scene.cs" line="81" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Scene.cs" bodystart="81" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="package-func">
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_scene_1a9acd1baadaed530c8fc19c2d399a37b4" prot="package" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>Micra.Core.Scene.Scene</definition>
+        <argsstring>(IInterface14 x)</argsstring>
+        <name>Scene</name>
+        <param>
+          <type>IInterface14</type>
+          <declname>x</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Scene.cs" line="24" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Scene.cs" bodystart="24" bodyend="28"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_scene_1aa10eb095e72ec7d4733c8192540edb6a" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Micra.Core.Scene.FlagForegroundSelectedNodes</definition>
+        <argsstring>(TimeValue t)</argsstring>
+        <name>FlagForegroundSelectedNodes</name>
+        <param>
+          <type><ref refid="struct_micra_1_1_core_1_1_time_value" kindref="compound">TimeValue</ref></type>
+          <declname>t</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Scene.cs" line="30" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Scene.cs" bodystart="30" bodyend="30"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_scene_1a2370470ced9a575ba59b300068eb7933" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Micra.Core.Scene.FlagForegroundSelectedNodes</definition>
+        <argsstring>()</argsstring>
+        <name>FlagForegroundSelectedNodes</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Scene.cs" line="31" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Scene.cs" bodystart="31" bodyend="31"/>
+        <references refid="class_micra_1_1_core_1_1_scene_1a2370470ced9a575ba59b300068eb7933" compoundref="_scene_8cs" startline="31" endline="31">Micra.Core.Scene.FlagForegroundSelectedNodes</references>
+        <references refid="class_micra_1_1_core_1_1_kernel_1a69390eb10a4e222d27395138c67796aa" compoundref="_kernel_8cs" startline="143">Micra.Core.Kernel.Now</references>
+        <referencedby refid="class_micra_1_1_core_1_1_scene_1a2370470ced9a575ba59b300068eb7933" compoundref="_scene_8cs" startline="31" endline="31">Micra.Core.Scene.FlagForegroundSelectedNodes</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_scene_1a94aa31ed478d8552a4ea2a035dfc9f76" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Micra.Core.Scene.FlagForegroundAnimatedNodes</definition>
+        <argsstring>(TimeValue t)</argsstring>
+        <name>FlagForegroundAnimatedNodes</name>
+        <param>
+          <type><ref refid="struct_micra_1_1_core_1_1_time_value" kindref="compound">TimeValue</ref></type>
+          <declname>t</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Scene.cs" line="32" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Scene.cs" bodystart="32" bodyend="32"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_scene_1a83b21147926c4146616eeb27b470ea24" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Micra.Core.Scene.FlagForegroundAnimatedNodes</definition>
+        <argsstring>()</argsstring>
+        <name>FlagForegroundAnimatedNodes</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Scene.cs" line="33" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Scene.cs" bodystart="33" bodyend="33"/>
+        <references refid="class_micra_1_1_core_1_1_scene_1a83b21147926c4146616eeb27b470ea24" compoundref="_scene_8cs" startline="33" endline="33">Micra.Core.Scene.FlagForegroundAnimatedNodes</references>
+        <references refid="class_micra_1_1_core_1_1_kernel_1a69390eb10a4e222d27395138c67796aa" compoundref="_kernel_8cs" startline="143">Micra.Core.Kernel.Now</references>
+        <referencedby refid="class_micra_1_1_core_1_1_scene_1a83b21147926c4146616eeb27b470ea24" compoundref="_scene_8cs" startline="33" endline="33">Micra.Core.Scene.FlagForegroundAnimatedNodes</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_scene_1a366858fed2c9c6c8041c5e511547bdc5" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>IEnumerable&lt; <ref refid="class_micra_1_1_core_1_1_node" kindref="compound">Node</ref> &gt;</type>
+        <definition>IEnumerable&lt;Node&gt; Micra.Core.Scene.NodesBySuperClass</definition>
+        <argsstring>(SuperClassID sid)</argsstring>
+        <name>NodesBySuperClass</name>
+        <param>
+          <type><ref refid="struct_micra_1_1_core_1_1_super_class_i_d" kindref="compound">SuperClassID</ref></type>
+          <declname>sid</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Scene.cs" line="43" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Scene.cs" bodystart="43" bodyend="46"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_scene_1a523262b100d0ae94270573d150541b22" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>IEnumerable&lt; <ref refid="class_micra_1_1_core_1_1_node" kindref="compound">Node</ref> &gt;</type>
+        <definition>IEnumerable&lt;Node&gt; Micra.Core.Scene.AllNodes</definition>
+        <argsstring>()</argsstring>
+        <name>AllNodes</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Scene.cs" line="48" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Scene.cs" bodystart="48" bodyend="51"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_scene_1ac66e3e25e54b7a06730f9c2199922533" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>IEnumerable&lt; <ref refid="class_micra_1_1_core_1_1_node" kindref="compound">Node</ref> &gt;</type>
+        <definition>IEnumerable&lt;Node&gt; Micra.Core.Scene.SelectedNodes</definition>
+        <argsstring>()</argsstring>
+        <name>SelectedNodes</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Scene.cs" line="53" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Scene.cs" bodystart="53" bodyend="56"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_scene_1a4086a985bc4efbcd475e91cfb8c0274c" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>IEnumerable&lt; T &gt;</type>
+        <definition>IEnumerable&lt;T&gt; Micra.Core.Scene.GetObjects&lt; T &gt;</definition>
+        <argsstring>()</argsstring>
+        <name>GetObjects&lt; T &gt;</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Scene.cs" line="74" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Scene.cs" bodystart="74" bodyend="76"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_scene_1aea0bce454149b8a630ac6a8e1ec6f3f0" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Micra.Core.Scene.OnChanged</definition>
+        <argsstring>(Action callback)</argsstring>
+        <name>OnChanged</name>
+        <param>
+          <type>Action</type>
+          <declname>callback</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Scene.cs" line="94" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Scene.cs" bodystart="94" bodyend="96"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Represent the 3ds <ref refid="class_micra_1_1_core_1_1_max" kindref="compound">Max</ref> scene graph, and provides access to other elements of the scene not directly accessible from the scene graph. Provides access to scene related functionality in the 3ds <ref refid="class_micra_1_1_core_1_1_max" kindref="compound">Max</ref> SDK but doesn&apos;t correspond to any single class. </para>    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="510">
+        <label>SceneObject</label>
+        <link refid="class_micra_1_1_core_1_1_scene_object"/>
+        <childnode refid="508" relation="public-inheritance">
+        </childnode>
+        <childnode refid="509" relation="usage">
+          <edgelabel>Geometry</edgelabel>
+        </childnode>
+        <childnode refid="511" relation="usage">
+          <edgelabel>Mesh</edgelabel>
+        </childnode>
+      </node>
+      <node id="507">
+        <label>Micra.Core.SceneObject</label>
+        <link refid="class_micra_1_1_core_1_1_scene_object"/>
+        <childnode refid="508" relation="public-inheritance">
+        </childnode>
+        <childnode refid="509" relation="usage">
+          <edgelabel>Geometry</edgelabel>
+        </childnode>
+        <childnode refid="511" relation="usage">
+          <edgelabel>Mesh</edgelabel>
+        </childnode>
+      </node>
+      <node id="505">
+        <label>Micra.Core.Node</label>
+        <link refid="class_micra_1_1_core_1_1_node"/>
+        <childnode refid="506" relation="public-inheritance">
+        </childnode>
+        <childnode refid="507" relation="usage">
+          <edgelabel>Object</edgelabel>
+        </childnode>
+        <childnode refid="509" relation="usage">
+          <edgelabel>Geometry</edgelabel>
+        </childnode>
+        <childnode refid="514" relation="usage">
+          <edgelabel>UserData</edgelabel>
+        </childnode>
+      </node>
+      <node id="502">
+        <label>ReferenceMaker</label>
+        <link refid="class_micra_1_1_core_1_1_reference_maker"/>
+        <childnode refid="503" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="514">
+        <label>Micra.Core.Node.NodeUserData</label>
+        <link refid="class_micra_1_1_core_1_1_node_1_1_node_user_data"/>
+      </node>
+      <node id="503">
+        <label>Animatable</label>
+        <link refid="class_micra_1_1_core_1_1_animatable"/>
+        <childnode refid="504" relation="usage">
+          <edgelabel>parameterBlock</edgelabel>
+        </childnode>
+      </node>
+      <node id="511">
+        <label>Micra.Core.Mesh</label>
+        <link refid="class_micra_1_1_core_1_1_mesh"/>
+        <childnode refid="512" relation="usage">
+          <edgelabel>verts</edgelabel>
+          <edgelabel>vnormals</edgelabel>
+          <edgelabel>fnormals</edgelabel>
+          <edgelabel>tverts</edgelabel>
+        </childnode>
+        <childnode refid="513" relation="usage">
+          <edgelabel>tfaces</edgelabel>
+          <edgelabel>faces</edgelabel>
+        </childnode>
+      </node>
+      <node id="509">
+        <label>Micra.Core.Geometry</label>
+        <link refid="class_micra_1_1_core_1_1_geometry"/>
+        <childnode refid="510" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="501">
+        <label>Micra.Core.ReferenceTarget</label>
+        <link refid="class_micra_1_1_core_1_1_reference_target"/>
+        <childnode refid="502" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="506">
+        <label>ReferenceTarget</label>
+        <link refid="class_micra_1_1_core_1_1_reference_target"/>
+        <childnode refid="502" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="513">
+        <label>Micra.Core.Mesh.Face</label>
+        <link refid="struct_micra_1_1_core_1_1_mesh_1_1_face"/>
+      </node>
+      <node id="512">
+        <label>Micra.Core.Point3</label>
+        <link refid="class_micra_1_1_core_1_1_point3"/>
+      </node>
+      <node id="500">
+        <label>Micra.Core.Scene</label>
+        <link refid="class_micra_1_1_core_1_1_scene"/>
+        <childnode refid="501" relation="usage">
+          <edgelabel>sceneRefTarget</edgelabel>
+        </childnode>
+        <childnode refid="505" relation="usage">
+          <edgelabel>sceneRootNode</edgelabel>
+        </childnode>
+      </node>
+      <node id="504">
+        <label>Micra.Core.IParameterBlock</label>
+        <link refid="interface_micra_1_1_core_1_1_i_parameter_block"/>
+      </node>
+      <node id="508">
+        <label>SceneElement</label>
+        <link refid="class_micra_1_1_core_1_1_scene_element"/>
+        <childnode refid="506" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Scene.cs" line="19" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Scene.cs" bodystart="19" bodyend="117"/>
+    <listofallmembers>
+      <member refid="class_micra_1_1_core_1_1_scene_1a523262b100d0ae94270573d150541b22" prot="public" virt="non-virtual"><scope>Micra::Core::Scene</scope><name>AllNodes</name></member>
+      <member refid="class_micra_1_1_core_1_1_scene_1ac82d9556f617dcb19f32fc818a8d3174" prot="private" virt="non-virtual"><scope>Micra::Core::Scene</scope><name>AllTargets</name></member>
+      <member refid="class_micra_1_1_core_1_1_scene_1a3d9962d3237ce3dee5bb6d3e8e4c4bfa" prot="public" virt="non-virtual"><scope>Micra::Core::Scene</scope><name>CameraNodes</name></member>
+      <member refid="class_micra_1_1_core_1_1_scene_1ae9b23ad8105e314886d57140a90599f9" prot="public" virt="non-virtual"><scope>Micra::Core::Scene</scope><name>CreateScene</name></member>
+      <member refid="class_micra_1_1_core_1_1_scene_1a94aa31ed478d8552a4ea2a035dfc9f76" prot="public" virt="non-virtual"><scope>Micra::Core::Scene</scope><name>FlagForegroundAnimatedNodes</name></member>
+      <member refid="class_micra_1_1_core_1_1_scene_1a83b21147926c4146616eeb27b470ea24" prot="public" virt="non-virtual"><scope>Micra::Core::Scene</scope><name>FlagForegroundAnimatedNodes</name></member>
+      <member refid="class_micra_1_1_core_1_1_scene_1aa10eb095e72ec7d4733c8192540edb6a" prot="public" virt="non-virtual"><scope>Micra::Core::Scene</scope><name>FlagForegroundSelectedNodes</name></member>
+      <member refid="class_micra_1_1_core_1_1_scene_1a2370470ced9a575ba59b300068eb7933" prot="public" virt="non-virtual"><scope>Micra::Core::Scene</scope><name>FlagForegroundSelectedNodes</name></member>
+      <member refid="class_micra_1_1_core_1_1_scene_1a36a4263cd2b374fb278e32c907188a73" prot="public" virt="non-virtual"><scope>Micra::Core::Scene</scope><name>GeometryNodes</name></member>
+      <member refid="class_micra_1_1_core_1_1_scene_1a4086a985bc4efbcd475e91cfb8c0274c" prot="public" virt="non-virtual"><scope>Micra::Core::Scene</scope><name>GetObjects&lt; T &gt;</name></member>
+      <member refid="class_micra_1_1_core_1_1_scene_1a78a66178cc2e11cb630ef7fad460f7e8" prot="public" virt="non-virtual"><scope>Micra::Core::Scene</scope><name>GetSerializableScene</name></member>
+      <member refid="class_micra_1_1_core_1_1_scene_1a7804bf388ac0777b4e617abf547c51e2" prot="public" virt="non-virtual"><scope>Micra::Core::Scene</scope><name>HelperNodes</name></member>
+      <member refid="class_micra_1_1_core_1_1_scene_1a45abec2340eb4422e8c088bf465ed460" prot="public" virt="non-virtual"><scope>Micra::Core::Scene</scope><name>LightNodes</name></member>
+      <member refid="class_micra_1_1_core_1_1_scene_1a366858fed2c9c6c8041c5e511547bdc5" prot="public" virt="non-virtual"><scope>Micra::Core::Scene</scope><name>NodesBySuperClass</name></member>
+      <member refid="class_micra_1_1_core_1_1_scene_1a7c4571adf4e6c7fb8e60a1624e634761" prot="public" virt="non-virtual"><scope>Micra::Core::Scene</scope><name>NodeTree</name></member>
+      <member refid="class_micra_1_1_core_1_1_scene_1a005c7010054181cfbee61306691d5c35" prot="public" virt="non-virtual"><scope>Micra::Core::Scene</scope><name>Objects</name></member>
+      <member refid="class_micra_1_1_core_1_1_scene_1aea0bce454149b8a630ac6a8e1ec6f3f0" prot="public" virt="non-virtual"><scope>Micra::Core::Scene</scope><name>OnChanged</name></member>
+      <member refid="class_micra_1_1_core_1_1_scene_1af18acdf337993dab40dc3eed7ec71a19" prot="public" virt="non-virtual"><scope>Micra::Core::Scene</scope><name>RootNode</name></member>
+      <member refid="class_micra_1_1_core_1_1_scene_1afd9cbef91ffc2b46a85c42f26ba55c0a" prot="public" virt="non-virtual"><scope>Micra::Core::Scene</scope><name>RootTarget</name></member>
+      <member refid="class_micra_1_1_core_1_1_scene_1a995ca4b2e05c9c4f3aff9231584fbdbc" prot="package" virt="non-virtual"><scope>Micra::Core::Scene</scope><name>scene</name></member>
+      <member refid="class_micra_1_1_core_1_1_scene_1a9acd1baadaed530c8fc19c2d399a37b4" prot="package" virt="non-virtual"><scope>Micra::Core::Scene</scope><name>Scene</name></member>
+      <member refid="class_micra_1_1_core_1_1_scene_1a6669cd0028e3e60445d60d194a2ff0fe" prot="package" virt="non-virtual"><scope>Micra::Core::Scene</scope><name>sceneRefTarget</name></member>
+      <member refid="class_micra_1_1_core_1_1_scene_1ad2b15f95503d652dd9d2bfc12f7ee63a" prot="package" virt="non-virtual"><scope>Micra::Core::Scene</scope><name>sceneRootNode</name></member>
+      <member refid="class_micra_1_1_core_1_1_scene_1ac66e3e25e54b7a06730f9c2199922533" prot="public" virt="non-virtual"><scope>Micra::Core::Scene</scope><name>SelectedNodes</name></member>
+      <member refid="class_micra_1_1_core_1_1_scene_1aeea6910e30234a328e7762162c31b8d2" prot="public" virt="non-virtual"><scope>Micra::Core::Scene</scope><name>ShapeNodes</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

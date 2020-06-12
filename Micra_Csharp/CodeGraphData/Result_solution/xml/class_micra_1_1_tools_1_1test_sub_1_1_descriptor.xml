@@ -1,0 +1,198 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
+  <compounddef id="class_micra_1_1_tools_1_1test_sub_1_1_descriptor" kind="class" prot="public">
+    <compoundname>Micra::Tools::testSub::Descriptor</compoundname>
+    <basecompoundref prot="public" virt="non-virtual">ClassDesc2</basecompoundref>
+      <sectiondef kind="protected-attrib">
+      <memberdef kind="variable" id="class_micra_1_1_tools_1_1test_sub_1_1_descriptor_1a9d2f3c440f2dab899392bb3207aacf70" prot="protected" static="no" mutable="no">
+        <type>IGlobal</type>
+        <definition>IGlobal Micra.Tools.testSub.Descriptor._global</definition>
+        <argsstring></argsstring>
+        <name>_global</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/MxGet.cs" line="156" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/MxGet.cs" bodystart="156" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="package-static-attrib">
+      <memberdef kind="variable" id="class_micra_1_1_tools_1_1test_sub_1_1_descriptor_1a6ee23f2fddcc268ee948738ca50ff80f" prot="package" static="yes" mutable="no">
+        <type>IClass_ID</type>
+        <definition>IClass_ID Micra.Tools.testSub.Descriptor._classID</definition>
+        <argsstring></argsstring>
+        <name>_classID</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/MxGet.cs" line="157" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/MxGet.cs" bodystart="157" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="property">
+      <memberdef kind="property" id="class_micra_1_1_tools_1_1test_sub_1_1_descriptor_1a3d03320cd73e06e6322adb671b687a6d" prot="public" static="no" readable="no" writable="no" gettable="yes" settable="no">
+        <type>IGlobal</type>
+        <definition>IGlobal Micra.Tools.testSub.Descriptor.Global</definition>
+        <argsstring></argsstring>
+        <name>Global</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/MxGet.cs" line="159" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/MxGet.cs" bodystart="159" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_tools_1_1test_sub_1_1_descriptor_1ad9a5b41e626420a394824d14387b780a" prot="public" static="no" readable="no" writable="no" gettable="yes" settable="no">
+        <type>override string</type>
+        <definition>override string Micra.Tools.testSub.Descriptor.Category</definition>
+        <argsstring></argsstring>
+        <name>Category</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/MxGet.cs" line="168" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/MxGet.cs" bodystart="168" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_tools_1_1test_sub_1_1_descriptor_1a85004352c53b6d23b7fea4ada010a5a9" prot="public" static="no" readable="no" writable="no" gettable="yes" settable="no">
+        <type>override IClass_ID</type>
+        <definition>override IClass_ID Micra.Tools.testSub.Descriptor.ClassID</definition>
+        <argsstring></argsstring>
+        <name>ClassID</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/MxGet.cs" line="172" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/MxGet.cs" bodystart="172" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_tools_1_1test_sub_1_1_descriptor_1a670fe2274cff0c648e917c7c2592bdce" prot="public" static="no" readable="no" writable="no" gettable="yes" settable="no">
+        <type>override string</type>
+        <definition>override string Micra.Tools.testSub.Descriptor.ClassName</definition>
+        <argsstring></argsstring>
+        <name>ClassName</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/MxGet.cs" line="176" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/MxGet.cs" bodystart="176" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_tools_1_1test_sub_1_1_descriptor_1a5c8572cc815e2d7d6a9aae5a22bca0b5" prot="public" static="no" readable="no" writable="no" gettable="yes" settable="no">
+        <type>override bool</type>
+        <definition>override bool Micra.Tools.testSub.Descriptor.IsPublic</definition>
+        <argsstring></argsstring>
+        <name>IsPublic</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/MxGet.cs" line="184" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/MxGet.cs" bodystart="184" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_tools_1_1test_sub_1_1_descriptor_1a7e56896223b436fb1bf6d33c58776122" prot="public" static="no" readable="no" writable="no" gettable="yes" settable="no">
+        <type>override SClass_ID</type>
+        <definition>override SClass_ID Micra.Tools.testSub.Descriptor.SuperClassID</definition>
+        <argsstring></argsstring>
+        <name>SuperClassID</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/MxGet.cs" line="188" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/MxGet.cs" bodystart="188" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="class_micra_1_1_tools_1_1test_sub_1_1_descriptor_1ab9747cac83f411f742153a81c663b666" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>Micra.Tools.testSub.Descriptor.Descriptor</definition>
+        <argsstring>(IGlobal global)</argsstring>
+        <name>Descriptor</name>
+        <param>
+          <type>IGlobal</type>
+          <declname>global</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/MxGet.cs" line="163" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/MxGet.cs" bodystart="163" bodyend="166"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_tools_1_1test_sub_1_1_descriptor_1a3e61509eec2b45ff2c00943ba4c35a81" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>override object</type>
+        <definition>override object Micra.Tools.testSub.Descriptor.Create</definition>
+        <argsstring>(bool loading)</argsstring>
+        <name>Create</name>
+        <param>
+          <type>bool</type>
+          <declname>loading</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/MxGet.cs" line="180" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/MxGet.cs" bodystart="180" bodyend="182"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="106">
+        <label>Micra.Tools.testSub.Descriptor</label>
+        <link refid="class_micra_1_1_tools_1_1test_sub_1_1_descriptor"/>
+        <childnode refid="107" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="107">
+        <label>Autodesk::Max::Plugins::ClassDesc2</label>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="108">
+        <label>Micra.Tools.testSub.Descriptor</label>
+        <link refid="class_micra_1_1_tools_1_1test_sub_1_1_descriptor"/>
+        <childnode refid="109" relation="public-inheritance">
+        </childnode>
+        <childnode refid="110" relation="usage">
+          <edgelabel>_classID</edgelabel>
+        </childnode>
+      </node>
+      <node id="110">
+        <label>static</label>
+      </node>
+      <node id="109">
+        <label>Autodesk::Max::Plugins::ClassDesc2</label>
+      </node>
+    </collaborationgraph>
+    <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/MxGet.cs" line="155" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/MxGet.cs" bodystart="155" bodyend="191"/>
+    <listofallmembers>
+      <member refid="class_micra_1_1_tools_1_1test_sub_1_1_descriptor_1a6ee23f2fddcc268ee948738ca50ff80f" prot="package" virt="non-virtual"><scope>Micra::Tools::testSub::Descriptor</scope><name>_classID</name></member>
+      <member refid="class_micra_1_1_tools_1_1test_sub_1_1_descriptor_1a9d2f3c440f2dab899392bb3207aacf70" prot="protected" virt="non-virtual"><scope>Micra::Tools::testSub::Descriptor</scope><name>_global</name></member>
+      <member refid="class_micra_1_1_tools_1_1test_sub_1_1_descriptor_1ad9a5b41e626420a394824d14387b780a" prot="public" virt="non-virtual"><scope>Micra::Tools::testSub::Descriptor</scope><name>Category</name></member>
+      <member refid="class_micra_1_1_tools_1_1test_sub_1_1_descriptor_1a85004352c53b6d23b7fea4ada010a5a9" prot="public" virt="non-virtual"><scope>Micra::Tools::testSub::Descriptor</scope><name>ClassID</name></member>
+      <member refid="class_micra_1_1_tools_1_1test_sub_1_1_descriptor_1a670fe2274cff0c648e917c7c2592bdce" prot="public" virt="non-virtual"><scope>Micra::Tools::testSub::Descriptor</scope><name>ClassName</name></member>
+      <member refid="class_micra_1_1_tools_1_1test_sub_1_1_descriptor_1a3e61509eec2b45ff2c00943ba4c35a81" prot="public" virt="non-virtual"><scope>Micra::Tools::testSub::Descriptor</scope><name>Create</name></member>
+      <member refid="class_micra_1_1_tools_1_1test_sub_1_1_descriptor_1ab9747cac83f411f742153a81c663b666" prot="public" virt="non-virtual"><scope>Micra::Tools::testSub::Descriptor</scope><name>Descriptor</name></member>
+      <member refid="class_micra_1_1_tools_1_1test_sub_1_1_descriptor_1a3d03320cd73e06e6322adb671b687a6d" prot="public" virt="non-virtual"><scope>Micra::Tools::testSub::Descriptor</scope><name>Global</name></member>
+      <member refid="class_micra_1_1_tools_1_1test_sub_1_1_descriptor_1a5c8572cc815e2d7d6a9aae5a22bca0b5" prot="public" virt="non-virtual"><scope>Micra::Tools::testSub::Descriptor</scope><name>IsPublic</name></member>
+      <member refid="class_micra_1_1_tools_1_1test_sub_1_1_descriptor_1a7e56896223b436fb1bf6d33c58776122" prot="public" virt="non-virtual"><scope>Micra::Tools::testSub::Descriptor</scope><name>SuperClassID</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

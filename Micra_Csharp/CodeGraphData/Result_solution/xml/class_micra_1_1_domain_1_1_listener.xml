@@ -1,0 +1,95 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
+  <compounddef id="class_micra_1_1_domain_1_1_listener" kind="class" prot="public">
+    <compoundname>Micra::Domain::Listener</compoundname>
+      <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="class_micra_1_1_domain_1_1_listener_1a8d27462ce34b9c9bedcb36d27a9052f6" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>static void Micra.Domain.Listener.Write</definition>
+        <argsstring>(string s, params string[] args)</argsstring>
+        <name>Write</name>
+        <param>
+          <type>string</type>
+          <declname>s</declname>
+        </param>
+        <param>
+          <type>params string[]</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Domain/Listener.cs" line="7" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Domain/Listener.cs" bodystart="7" bodyend="9"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_domain_1_1_listener_1ae4e6cc44dc7da351ebb1ed3c9a1c0d44" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>static void Micra.Domain.Listener.Write</definition>
+        <argsstring>(string s)</argsstring>
+        <name>Write</name>
+        <param>
+          <type>string</type>
+          <declname>s</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Domain/Listener.cs" line="11" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Domain/Listener.cs" bodystart="11" bodyend="18"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_domain_1_1_listener_1a5467fb7d1d354180836ce1e9e34850f9" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>static void Micra.Domain.Listener.WriteLine</definition>
+        <argsstring>(string s)</argsstring>
+        <name>WriteLine</name>
+        <param>
+          <type>string</type>
+          <declname>s</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Domain/Listener.cs" line="20" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Domain/Listener.cs" bodystart="20" bodyend="23"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_domain_1_1_listener_1ac96c635e75c1af6b14e2c99dc1808f99" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>static void Micra.Domain.Listener.WriteLine</definition>
+        <argsstring>(string s, params object[] args)</argsstring>
+        <name>WriteLine</name>
+        <param>
+          <type>string</type>
+          <declname>s</declname>
+        </param>
+        <param>
+          <type>params object[]</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Domain/Listener.cs" line="25" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Domain/Listener.cs" bodystart="25" bodyend="27"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Domain/Listener.cs" line="5" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Domain/Listener.cs" bodystart="5" bodyend="28"/>
+    <listofallmembers>
+      <member refid="class_micra_1_1_domain_1_1_listener_1a8d27462ce34b9c9bedcb36d27a9052f6" prot="public" virt="non-virtual"><scope>Micra::Domain::Listener</scope><name>Write</name></member>
+      <member refid="class_micra_1_1_domain_1_1_listener_1ae4e6cc44dc7da351ebb1ed3c9a1c0d44" prot="public" virt="non-virtual"><scope>Micra::Domain::Listener</scope><name>Write</name></member>
+      <member refid="class_micra_1_1_domain_1_1_listener_1a5467fb7d1d354180836ce1e9e34850f9" prot="public" virt="non-virtual"><scope>Micra::Domain::Listener</scope><name>WriteLine</name></member>
+      <member refid="class_micra_1_1_domain_1_1_listener_1ac96c635e75c1af6b14e2c99dc1808f99" prot="public" virt="non-virtual"><scope>Micra::Domain::Listener</scope><name>WriteLine</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,387 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
+  <compounddef id="struct_micra_1_1_core_1_1_color" kind="struct" prot="public">
+    <compoundname>Micra::Core::Color</compoundname>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="struct_micra_1_1_core_1_1_color_1ad5371d54ed4aae73a5aacfbff3fdae83" prot="public" static="no" mutable="no">
+        <type>float</type>
+        <definition>float Micra.Core.Color.r</definition>
+        <argsstring></argsstring>
+        <name>r</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Color.cs" line="18" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Color.cs" bodystart="18" bodyend="-1"/>
+        <referencedby refid="class_micra_1_1_core_1_1_light_1a9fa24cc90d0591b24b35856a0fb4043f" compoundref="_light_8cs" startline="200" endline="204">Micra.Core.Light.SetRGBColor</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="struct_micra_1_1_core_1_1_color_1a241f0df68517f584063c5a932f343fb5" prot="public" static="no" mutable="no">
+        <type>float</type>
+        <definition>float Micra.Core.Color.g</definition>
+        <argsstring></argsstring>
+        <name>g</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Color.cs" line="19" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Color.cs" bodystart="19" bodyend="-1"/>
+        <referencedby refid="class_micra_1_1_core_1_1_light_1a9fa24cc90d0591b24b35856a0fb4043f" compoundref="_light_8cs" startline="200" endline="204">Micra.Core.Light.SetRGBColor</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="struct_micra_1_1_core_1_1_color_1a13a866208cbac4184c18f46c04f4045e" prot="public" static="no" mutable="no">
+        <type>float</type>
+        <definition>float Micra.Core.Color.b</definition>
+        <argsstring></argsstring>
+        <name>b</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Color.cs" line="20" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Color.cs" bodystart="20" bodyend="-1"/>
+        <referencedby refid="class_micra_1_1_core_1_1_light_1a9fa24cc90d0591b24b35856a0fb4043f" compoundref="_light_8cs" startline="200" endline="204">Micra.Core.Light.SetRGBColor</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="struct_micra_1_1_core_1_1_color_1a2696e97962a0c097ce16fa251ce7fc80" prot="public" static="no" mutable="no">
+        <type>float</type>
+        <definition>float Micra.Core.Color.a</definition>
+        <argsstring></argsstring>
+        <name>a</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Color.cs" line="21" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Color.cs" bodystart="21" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="property">
+      <memberdef kind="property" id="struct_micra_1_1_core_1_1_color_1a0b3c02fe60a14ff02089ab22e24eb12a" prot="public" static="no" readable="no" writable="no" gettable="yes" settable="no">
+        <type>int</type>
+        <definition>int Micra.Core.Color.IntR</definition>
+        <argsstring></argsstring>
+        <name>IntR</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Color.cs" line="31" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Color.cs" bodystart="31" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="struct_micra_1_1_core_1_1_color_1a0f8189164f7ea1f1316982da0843130c" prot="public" static="no" readable="no" writable="no" gettable="yes" settable="no">
+        <type>int</type>
+        <definition>int Micra.Core.Color.IntG</definition>
+        <argsstring></argsstring>
+        <name>IntG</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Color.cs" line="32" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Color.cs" bodystart="32" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="struct_micra_1_1_core_1_1_color_1a0704bbf306c5c31197c1d2c230d83ee7" prot="public" static="no" readable="no" writable="no" gettable="yes" settable="no">
+        <type>int</type>
+        <definition>int Micra.Core.Color.IntB</definition>
+        <argsstring></argsstring>
+        <name>IntB</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Color.cs" line="33" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Color.cs" bodystart="33" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="struct_micra_1_1_core_1_1_color_1a5e10101f3161651e17c8fbf3f7c70301" prot="public" static="no" readable="no" writable="no" gettable="yes" settable="no">
+        <type>int</type>
+        <definition>int Micra.Core.Color.IntA</definition>
+        <argsstring></argsstring>
+        <name>IntA</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Color.cs" line="34" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Color.cs" bodystart="34" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="struct_micra_1_1_core_1_1_color_1a138d16a47489ce82132eef2ec1e0557d" prot="public" static="no" readable="no" writable="no" gettable="yes" settable="no">
+        <type>IAColor</type>
+        <definition>IAColor Micra.Core.Color._IAColor</definition>
+        <argsstring></argsstring>
+        <name>_IAColor</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Color.cs" line="36" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Color.cs" bodystart="36" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="struct_micra_1_1_core_1_1_color_1a4fc306f2d4922566e5d02c03ab2d4576" prot="public" static="no" readable="no" writable="no" gettable="yes" settable="no">
+        <type>IColor</type>
+        <definition>IColor Micra.Core.Color._IColor</definition>
+        <argsstring></argsstring>
+        <name>_IColor</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Color.cs" line="37" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Color.cs" bodystart="37" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="struct_micra_1_1_core_1_1_color_1a3d38d445a1d54d9b6ea16efd0f5cde87" prot="public" static="no" readable="no" writable="no" gettable="yes" settable="no">
+        <type>System.Drawing.Color</type>
+        <definition>System.Drawing.Color Micra.Core.Color.SystemColor</definition>
+        <argsstring></argsstring>
+        <name>SystemColor</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Color.cs" line="38" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Color.cs" bodystart="38" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-static-attrib">
+      <memberdef kind="variable" id="struct_micra_1_1_core_1_1_color_1ab07c359c3e5f17c9e387eefbe64810a5" prot="public" static="yes" mutable="no">
+        <type>readonly <ref refid="struct_micra_1_1_core_1_1_color" kindref="compound">Color</ref></type>
+        <definition>readonly Color Micra.Core.Color.MinColor</definition>
+        <argsstring></argsstring>
+        <name>MinColor</name>
+        <initializer>= new <ref refid="struct_micra_1_1_core_1_1_color" kindref="compound">Color</ref>(0, 0, 0, 0)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Color.cs" line="40" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Color.cs" bodystart="40" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_micra_1_1_core_1_1_color_1aa1c414c4f2a6c2a02a395269c706bd01" prot="public" static="yes" mutable="no">
+        <type>readonly <ref refid="struct_micra_1_1_core_1_1_color" kindref="compound">Color</ref></type>
+        <definition>readonly Color Micra.Core.Color.MaxColor</definition>
+        <argsstring></argsstring>
+        <name>MaxColor</name>
+        <initializer>= new <ref refid="struct_micra_1_1_core_1_1_color" kindref="compound">Color</ref>((byte)255, (byte)255, (byte)255, (byte)255)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Color.cs" line="41" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Color.cs" bodystart="41" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="struct_micra_1_1_core_1_1_color_1a712ab75c86f41c0cfd747d139f7dbd7b" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>Micra.Core.Color.Color</definition>
+        <argsstring>(System.Drawing.Color c)</argsstring>
+        <name>Color</name>
+        <param>
+          <type>System.Drawing.Color</type>
+          <declname>c</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Color.cs" line="23" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Color.cs" bodystart="23" bodyend="23"/>
+      </memberdef>
+      <memberdef kind="function" id="struct_micra_1_1_core_1_1_color_1a65814b648f18592843c2f3d5146e47d7" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>Micra.Core.Color.Color</definition>
+        <argsstring>(IColor c)</argsstring>
+        <name>Color</name>
+        <param>
+          <type>IColor</type>
+          <declname>c</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Color.cs" line="24" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Color.cs" bodystart="24" bodyend="24"/>
+      </memberdef>
+      <memberdef kind="function" id="struct_micra_1_1_core_1_1_color_1ae2976ae6e49755d9871d1ab19bdbbd50" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>Micra.Core.Color.Color</definition>
+        <argsstring>(IAColor c)</argsstring>
+        <name>Color</name>
+        <param>
+          <type>IAColor</type>
+          <declname>c</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Color.cs" line="25" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Color.cs" bodystart="25" bodyend="25"/>
+      </memberdef>
+      <memberdef kind="function" id="struct_micra_1_1_core_1_1_color_1aa93ce129e9fdae83919a1027f139f258" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>Micra.Core.Color.Color</definition>
+        <argsstring>(float r, float g, float b, float a)</argsstring>
+        <name>Color</name>
+        <param>
+          <type>float</type>
+          <declname>r</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>g</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>b</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>a</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Color.cs" line="26" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Color.cs" bodystart="26" bodyend="26"/>
+      </memberdef>
+      <memberdef kind="function" id="struct_micra_1_1_core_1_1_color_1a687237359873e3ef1dd45427ed201c95" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>Micra.Core.Color.Color</definition>
+        <argsstring>(float r, float g, float b)</argsstring>
+        <name>Color</name>
+        <param>
+          <type>float</type>
+          <declname>r</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>g</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>b</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Color.cs" line="27" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Color.cs" bodystart="27" bodyend="27"/>
+      </memberdef>
+      <memberdef kind="function" id="struct_micra_1_1_core_1_1_color_1a387830f288cd914a57aabddeef116d23" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>Micra.Core.Color.Color</definition>
+        <argsstring>(byte r, byte g, byte b, byte a)</argsstring>
+        <name>Color</name>
+        <param>
+          <type>byte</type>
+          <declname>r</declname>
+        </param>
+        <param>
+          <type>byte</type>
+          <declname>g</declname>
+        </param>
+        <param>
+          <type>byte</type>
+          <declname>b</declname>
+        </param>
+        <param>
+          <type>byte</type>
+          <declname>a</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Color.cs" line="28" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Color.cs" bodystart="28" bodyend="28"/>
+      </memberdef>
+      <memberdef kind="function" id="struct_micra_1_1_core_1_1_color_1a1f89bbb5c4dade8a792ffae6aa403995" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>Micra.Core.Color.Color</definition>
+        <argsstring>(byte r, byte g, byte b)</argsstring>
+        <name>Color</name>
+        <param>
+          <type>byte</type>
+          <declname>r</declname>
+        </param>
+        <param>
+          <type>byte</type>
+          <declname>g</declname>
+        </param>
+        <param>
+          <type>byte</type>
+          <declname>b</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Color.cs" line="29" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Color.cs" bodystart="29" bodyend="29"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Represents a color with each color component represented as a float, including the transparency. </para>    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="79">
+        <label>Micra.Core.Color</label>
+        <link refid="struct_micra_1_1_core_1_1_color"/>
+        <childnode refid="80" relation="usage">
+          <edgelabel>MaxColor</edgelabel>
+          <edgelabel>MinColor</edgelabel>
+        </childnode>
+      </node>
+      <node id="80">
+        <label>static</label>
+      </node>
+    </collaborationgraph>
+    <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Color.cs" line="17" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/Color.cs" bodystart="17" bodyend="42"/>
+    <listofallmembers>
+      <member refid="struct_micra_1_1_core_1_1_color_1a138d16a47489ce82132eef2ec1e0557d" prot="public" virt="non-virtual"><scope>Micra::Core::Color</scope><name>_IAColor</name></member>
+      <member refid="struct_micra_1_1_core_1_1_color_1a4fc306f2d4922566e5d02c03ab2d4576" prot="public" virt="non-virtual"><scope>Micra::Core::Color</scope><name>_IColor</name></member>
+      <member refid="struct_micra_1_1_core_1_1_color_1a2696e97962a0c097ce16fa251ce7fc80" prot="public" virt="non-virtual"><scope>Micra::Core::Color</scope><name>a</name></member>
+      <member refid="struct_micra_1_1_core_1_1_color_1a13a866208cbac4184c18f46c04f4045e" prot="public" virt="non-virtual"><scope>Micra::Core::Color</scope><name>b</name></member>
+      <member refid="struct_micra_1_1_core_1_1_color_1a712ab75c86f41c0cfd747d139f7dbd7b" prot="public" virt="non-virtual"><scope>Micra::Core::Color</scope><name>Color</name></member>
+      <member refid="struct_micra_1_1_core_1_1_color_1a65814b648f18592843c2f3d5146e47d7" prot="public" virt="non-virtual"><scope>Micra::Core::Color</scope><name>Color</name></member>
+      <member refid="struct_micra_1_1_core_1_1_color_1ae2976ae6e49755d9871d1ab19bdbbd50" prot="public" virt="non-virtual"><scope>Micra::Core::Color</scope><name>Color</name></member>
+      <member refid="struct_micra_1_1_core_1_1_color_1aa93ce129e9fdae83919a1027f139f258" prot="public" virt="non-virtual"><scope>Micra::Core::Color</scope><name>Color</name></member>
+      <member refid="struct_micra_1_1_core_1_1_color_1a687237359873e3ef1dd45427ed201c95" prot="public" virt="non-virtual"><scope>Micra::Core::Color</scope><name>Color</name></member>
+      <member refid="struct_micra_1_1_core_1_1_color_1a387830f288cd914a57aabddeef116d23" prot="public" virt="non-virtual"><scope>Micra::Core::Color</scope><name>Color</name></member>
+      <member refid="struct_micra_1_1_core_1_1_color_1a1f89bbb5c4dade8a792ffae6aa403995" prot="public" virt="non-virtual"><scope>Micra::Core::Color</scope><name>Color</name></member>
+      <member refid="struct_micra_1_1_core_1_1_color_1a241f0df68517f584063c5a932f343fb5" prot="public" virt="non-virtual"><scope>Micra::Core::Color</scope><name>g</name></member>
+      <member refid="struct_micra_1_1_core_1_1_color_1a5e10101f3161651e17c8fbf3f7c70301" prot="public" virt="non-virtual"><scope>Micra::Core::Color</scope><name>IntA</name></member>
+      <member refid="struct_micra_1_1_core_1_1_color_1a0704bbf306c5c31197c1d2c230d83ee7" prot="public" virt="non-virtual"><scope>Micra::Core::Color</scope><name>IntB</name></member>
+      <member refid="struct_micra_1_1_core_1_1_color_1a0f8189164f7ea1f1316982da0843130c" prot="public" virt="non-virtual"><scope>Micra::Core::Color</scope><name>IntG</name></member>
+      <member refid="struct_micra_1_1_core_1_1_color_1a0b3c02fe60a14ff02089ab22e24eb12a" prot="public" virt="non-virtual"><scope>Micra::Core::Color</scope><name>IntR</name></member>
+      <member refid="struct_micra_1_1_core_1_1_color_1aa1c414c4f2a6c2a02a395269c706bd01" prot="public" virt="non-virtual"><scope>Micra::Core::Color</scope><name>MaxColor</name></member>
+      <member refid="struct_micra_1_1_core_1_1_color_1ab07c359c3e5f17c9e387eefbe64810a5" prot="public" virt="non-virtual"><scope>Micra::Core::Color</scope><name>MinColor</name></member>
+      <member refid="struct_micra_1_1_core_1_1_color_1ad5371d54ed4aae73a5aacfbff3fdae83" prot="public" virt="non-virtual"><scope>Micra::Core::Color</scope><name>r</name></member>
+      <member refid="struct_micra_1_1_core_1_1_color_1a3d38d445a1d54d9b6ea16efd0f5cde87" prot="public" virt="non-virtual"><scope>Micra::Core::Color</scope><name>SystemColor</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

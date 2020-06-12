@@ -1,0 +1,225 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
+  <compounddef id="class_micra_1_1_core_1_1_menu" kind="class" prot="public">
+    <compoundname>Micra::Core::Menu</compoundname>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="class_micra_1_1_core_1_1_menu_1ad23bcd42ca9157efd6d877740b071ae7" prot="private" static="no" mutable="no">
+        <type>readonly IIMenu</type>
+        <definition>readonly IIMenu Micra.Core.Menu.menu</definition>
+        <argsstring></argsstring>
+        <name>menu</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/MenuManager.cs" line="65" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/MenuManager.cs" bodystart="65" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="property">
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_menu_1a026240f80b26764d7ec32afd0b18fdc4" prot="public" static="no" readable="no" writable="no" gettable="yes" settable="no">
+        <type>IIMenu</type>
+        <definition>IIMenu Micra.Core.Menu._Menu</definition>
+        <argsstring></argsstring>
+        <name>_Menu</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/MenuManager.cs" line="67" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/MenuManager.cs" bodystart="67" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_menu_1a29fb8c64112e43b9dca5396569917faa" prot="public" static="no" readable="no" writable="no" gettable="yes" settable="no">
+        <type>IEnumerable&lt; <ref refid="class_micra_1_1_core_1_1_menu_item" kindref="compound">MenuItem</ref> &gt;</type>
+        <definition>IEnumerable&lt;MenuItem&gt; Micra.Core.Menu.Items</definition>
+        <argsstring></argsstring>
+        <name>Items</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/MenuManager.cs" line="72" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/MenuManager.cs" bodystart="72" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_menu_1a2b03441f1bd5e26e4b50389090b7a626" prot="public" static="no" readable="no" writable="no" gettable="yes" settable="yes">
+        <type>string</type>
+        <definition>string Micra.Core.Menu.Title</definition>
+        <argsstring></argsstring>
+        <name>Title</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/MenuManager.cs" line="79" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/MenuManager.cs" bodystart="79" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_menu_1ab818cf6b5dfb95c082545af146714722" prot="public" static="no" readable="no" writable="no" gettable="yes" settable="yes">
+        <type>string</type>
+        <definition>string Micra.Core.Menu.CustomTitle</definition>
+        <argsstring></argsstring>
+        <name>CustomTitle</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/MenuManager.cs" line="84" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/MenuManager.cs" bodystart="84" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_menu_1a36db4f991169d0bff7eaef3172ed7423" prot="public" static="no" readable="no" writable="no" gettable="yes" settable="yes">
+        <type>bool</type>
+        <definition>bool Micra.Core.Menu.ShowTitle</definition>
+        <argsstring></argsstring>
+        <name>ShowTitle</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/MenuManager.cs" line="89" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/MenuManager.cs" bodystart="89" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_menu_1acfb1b49be945d88830d25a7a89b47dca" prot="public" static="no" readable="no" writable="no" gettable="yes" settable="yes">
+        <type>bool</type>
+        <definition>bool Micra.Core.Menu.UseCustomTitle</definition>
+        <argsstring></argsstring>
+        <name>UseCustomTitle</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/MenuManager.cs" line="94" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/MenuManager.cs" bodystart="94" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_menu_1a279ee7860932227637bec6d20c7b04bb" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>Micra.Core.Menu.Menu</definition>
+        <argsstring>(IIMenu m)</argsstring>
+        <name>Menu</name>
+        <param>
+          <type>IIMenu</type>
+          <declname>m</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/MenuManager.cs" line="69" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/MenuManager.cs" bodystart="69" bodyend="69"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_menu_1ad5181ee0ace3e0e4cff1f1525ef859bf" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>Micra.Core.Menu.Menu</definition>
+        <argsstring>()</argsstring>
+        <name>Menu</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/MenuManager.cs" line="70" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/MenuManager.cs" bodystart="70" bodyend="70"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_menu_1a37375916cffa051c352d61fb254cc0cc" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Micra.Core.Menu.InsertItem</definition>
+        <argsstring>(MenuItem item, int position)</argsstring>
+        <name>InsertItem</name>
+        <param>
+          <type><ref refid="class_micra_1_1_core_1_1_menu_item" kindref="compound">MenuItem</ref></type>
+          <declname>item</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>position</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/MenuManager.cs" line="99" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/MenuManager.cs" bodystart="99" bodyend="101"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_menu_1a587593c012121a576403cba76ef4f593" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Micra.Core.Menu.AddItem</definition>
+        <argsstring>(MenuItem item)</argsstring>
+        <name>AddItem</name>
+        <param>
+          <type><ref refid="class_micra_1_1_core_1_1_menu_item" kindref="compound">MenuItem</ref></type>
+          <declname>item</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/MenuManager.cs" line="103" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/MenuManager.cs" bodystart="103" bodyend="105"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_menu_1a264d22c04db9baf2b4d868c53e071c7e" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Micra.Core.Menu.Delete</definition>
+        <argsstring>(MenuItem item)</argsstring>
+        <name>Delete</name>
+        <param>
+          <type><ref refid="class_micra_1_1_core_1_1_menu_item" kindref="compound">MenuItem</ref></type>
+          <declname>item</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/MenuManager.cs" line="107" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/MenuManager.cs" bodystart="107" bodyend="109"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_menu_1a8b87a364fa80865333751a41af999f82" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Micra.Core.Menu.RemoveAt</definition>
+        <argsstring>(int position)</argsstring>
+        <name>RemoveAt</name>
+        <param>
+          <type>int</type>
+          <declname>position</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/MenuManager.cs" line="111" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/MenuManager.cs" bodystart="111" bodyend="113"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/MenuManager.cs" line="64" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/MenuManager.cs" bodystart="64" bodyend="114"/>
+    <listofallmembers>
+      <member refid="class_micra_1_1_core_1_1_menu_1a026240f80b26764d7ec32afd0b18fdc4" prot="public" virt="non-virtual"><scope>Micra::Core::Menu</scope><name>_Menu</name></member>
+      <member refid="class_micra_1_1_core_1_1_menu_1a587593c012121a576403cba76ef4f593" prot="public" virt="non-virtual"><scope>Micra::Core::Menu</scope><name>AddItem</name></member>
+      <member refid="class_micra_1_1_core_1_1_menu_1ab818cf6b5dfb95c082545af146714722" prot="public" virt="non-virtual"><scope>Micra::Core::Menu</scope><name>CustomTitle</name></member>
+      <member refid="class_micra_1_1_core_1_1_menu_1a264d22c04db9baf2b4d868c53e071c7e" prot="public" virt="non-virtual"><scope>Micra::Core::Menu</scope><name>Delete</name></member>
+      <member refid="class_micra_1_1_core_1_1_menu_1a37375916cffa051c352d61fb254cc0cc" prot="public" virt="non-virtual"><scope>Micra::Core::Menu</scope><name>InsertItem</name></member>
+      <member refid="class_micra_1_1_core_1_1_menu_1a29fb8c64112e43b9dca5396569917faa" prot="public" virt="non-virtual"><scope>Micra::Core::Menu</scope><name>Items</name></member>
+      <member refid="class_micra_1_1_core_1_1_menu_1a279ee7860932227637bec6d20c7b04bb" prot="public" virt="non-virtual"><scope>Micra::Core::Menu</scope><name>Menu</name></member>
+      <member refid="class_micra_1_1_core_1_1_menu_1ad5181ee0ace3e0e4cff1f1525ef859bf" prot="public" virt="non-virtual"><scope>Micra::Core::Menu</scope><name>Menu</name></member>
+      <member refid="class_micra_1_1_core_1_1_menu_1ad23bcd42ca9157efd6d877740b071ae7" prot="private" virt="non-virtual"><scope>Micra::Core::Menu</scope><name>menu</name></member>
+      <member refid="class_micra_1_1_core_1_1_menu_1a8b87a364fa80865333751a41af999f82" prot="public" virt="non-virtual"><scope>Micra::Core::Menu</scope><name>RemoveAt</name></member>
+      <member refid="class_micra_1_1_core_1_1_menu_1a36db4f991169d0bff7eaef3172ed7423" prot="public" virt="non-virtual"><scope>Micra::Core::Menu</scope><name>ShowTitle</name></member>
+      <member refid="class_micra_1_1_core_1_1_menu_1a2b03441f1bd5e26e4b50389090b7a626" prot="public" virt="non-virtual"><scope>Micra::Core::Menu</scope><name>Title</name></member>
+      <member refid="class_micra_1_1_core_1_1_menu_1acfb1b49be945d88830d25a7a89b47dca" prot="public" virt="non-virtual"><scope>Micra::Core::Menu</scope><name>UseCustomTitle</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,740 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
+  <compounddef id="class_micra_1_1_domain_1_1_domain_ui" kind="class" prot="public">
+    <compoundname>Micra::Domain::DomainUi</compoundname>
+    <basecompoundref prot="public" virt="non-virtual">Form</basecompoundref>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="class_micra_1_1_domain_1_1_domain_ui_1a7578678540f379954ffc91c3cb8badd1" prot="private" static="no" mutable="no">
+        <type><ref refid="class_micra_1_1_domain_1_1_mx_domain" kindref="compound">MxDomain</ref></type>
+        <definition>MxDomain Micra.Domain.DomainUi.customAppDomain</definition>
+        <argsstring></argsstring>
+        <name>customAppDomain</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Domain/DomainUi.cs" line="10" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Domain/DomainUi.cs" bodystart="10" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_micra_1_1_domain_1_1_domain_ui_1a13afec0e501596d0b7961cbe859635ad" prot="private" static="no" mutable="no">
+        <type>System.ComponentModel.IContainer</type>
+        <definition>System.ComponentModel.IContainer Micra.Domain.DomainUi.components</definition>
+        <argsstring></argsstring>
+        <name>components</name>
+        <initializer>= null</initializer>
+        <briefdescription>
+<para>Required designer variable. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Domain/DomainUi.Designer.cs" line="6" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Domain/DomainUi.Designer.cs" bodystart="6" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_micra_1_1_domain_1_1_domain_ui_1a5e365a29d6660b1f5d1868219772c2cd" prot="private" static="no" mutable="no">
+        <type>System.Windows.Forms.Button</type>
+        <definition>System.Windows.Forms.Button Micra.Domain.DomainUi.BtnRebuildDomain</definition>
+        <argsstring></argsstring>
+        <name>BtnRebuildDomain</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Domain/DomainUi.Designer.cs" line="257" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Domain/DomainUi.Designer.cs" bodystart="257" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_micra_1_1_domain_1_1_domain_ui_1a3cbf558cb0fcf1611df9c125c679e6bb" prot="private" static="no" mutable="no">
+        <type>System.Windows.Forms.Button</type>
+        <definition>System.Windows.Forms.Button Micra.Domain.DomainUi.DestroyDomain</definition>
+        <argsstring></argsstring>
+        <name>DestroyDomain</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Domain/DomainUi.Designer.cs" line="258" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Domain/DomainUi.Designer.cs" bodystart="258" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_micra_1_1_domain_1_1_domain_ui_1a865a920caec899a54b5b760bf496b68d" prot="private" static="no" mutable="no">
+        <type>System.Windows.Forms.Button</type>
+        <definition>System.Windows.Forms.Button Micra.Domain.DomainUi.BtnLoadAssembly</definition>
+        <argsstring></argsstring>
+        <name>BtnLoadAssembly</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Domain/DomainUi.Designer.cs" line="259" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Domain/DomainUi.Designer.cs" bodystart="259" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_micra_1_1_domain_1_1_domain_ui_1abff69b78284008bffa89c35a5661ec95" prot="private" static="no" mutable="no">
+        <type>System.Windows.Forms.Button</type>
+        <definition>System.Windows.Forms.Button Micra.Domain.DomainUi.BtnCreateDomain</definition>
+        <argsstring></argsstring>
+        <name>BtnCreateDomain</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Domain/DomainUi.Designer.cs" line="260" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Domain/DomainUi.Designer.cs" bodystart="260" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_micra_1_1_domain_1_1_domain_ui_1a2f79754eb49bf34794a5ab5c5b744fa7" prot="private" static="no" mutable="no">
+        <type>System.Windows.Forms.GroupBox</type>
+        <definition>System.Windows.Forms.GroupBox Micra.Domain.DomainUi.groupBox1</definition>
+        <argsstring></argsstring>
+        <name>groupBox1</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Domain/DomainUi.Designer.cs" line="261" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Domain/DomainUi.Designer.cs" bodystart="261" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_micra_1_1_domain_1_1_domain_ui_1aed90387a5a8dfe3cc1588ee5e7edec58" prot="private" static="no" mutable="no">
+        <type>System.Windows.Forms.ListBox</type>
+        <definition>System.Windows.Forms.ListBox Micra.Domain.DomainUi.LbxAssemblies</definition>
+        <argsstring></argsstring>
+        <name>LbxAssemblies</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Domain/DomainUi.Designer.cs" line="262" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Domain/DomainUi.Designer.cs" bodystart="262" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_micra_1_1_domain_1_1_domain_ui_1aa4e9b93b93d4221f71380fcb27642000" prot="private" static="no" mutable="no">
+        <type>System.Windows.Forms.Button</type>
+        <definition>System.Windows.Forms.Button Micra.Domain.DomainUi.BtnGetDomain</definition>
+        <argsstring></argsstring>
+        <name>BtnGetDomain</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Domain/DomainUi.Designer.cs" line="263" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Domain/DomainUi.Designer.cs" bodystart="263" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_micra_1_1_domain_1_1_domain_ui_1a10a14a95f3878b03aa484fc78b9ce9a0" prot="private" static="no" mutable="no">
+        <type>System.Windows.Forms.GroupBox</type>
+        <definition>System.Windows.Forms.GroupBox Micra.Domain.DomainUi.groupBox2</definition>
+        <argsstring></argsstring>
+        <name>groupBox2</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Domain/DomainUi.Designer.cs" line="264" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Domain/DomainUi.Designer.cs" bodystart="264" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_micra_1_1_domain_1_1_domain_ui_1a6c69667825a95c6b0737276d04405879" prot="private" static="no" mutable="no">
+        <type>System.Windows.Forms.GroupBox</type>
+        <definition>System.Windows.Forms.GroupBox Micra.Domain.DomainUi.groupBox3</definition>
+        <argsstring></argsstring>
+        <name>groupBox3</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Domain/DomainUi.Designer.cs" line="265" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Domain/DomainUi.Designer.cs" bodystart="265" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_micra_1_1_domain_1_1_domain_ui_1a1380d01a53d6440dc2ff0982448929f2" prot="private" static="no" mutable="no">
+        <type>System.Windows.Forms.ListBox</type>
+        <definition>System.Windows.Forms.ListBox Micra.Domain.DomainUi.LbxAssemblyTypes</definition>
+        <argsstring></argsstring>
+        <name>LbxAssemblyTypes</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Domain/DomainUi.Designer.cs" line="266" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Domain/DomainUi.Designer.cs" bodystart="266" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_micra_1_1_domain_1_1_domain_ui_1ac26f2c5fce1e84a4076988a461902e18" prot="private" static="no" mutable="no">
+        <type>System.Windows.Forms.GroupBox</type>
+        <definition>System.Windows.Forms.GroupBox Micra.Domain.DomainUi.groupBox4</definition>
+        <argsstring></argsstring>
+        <name>groupBox4</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Domain/DomainUi.Designer.cs" line="267" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Domain/DomainUi.Designer.cs" bodystart="267" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_micra_1_1_domain_1_1_domain_ui_1aa370aa72bc0cd0b8447c80295cb26f55" prot="private" static="no" mutable="no">
+        <type>System.Windows.Forms.TextBox</type>
+        <definition>System.Windows.Forms.TextBox Micra.Domain.DomainUi.TbxTypeData</definition>
+        <argsstring></argsstring>
+        <name>TbxTypeData</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Domain/DomainUi.Designer.cs" line="268" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Domain/DomainUi.Designer.cs" bodystart="268" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_micra_1_1_domain_1_1_domain_ui_1acd7d3db8f9728c1ddcbc2f36303087b6" prot="private" static="no" mutable="no">
+        <type>System.Windows.Forms.TextBox</type>
+        <definition>System.Windows.Forms.TextBox Micra.Domain.DomainUi.TbxDomainName</definition>
+        <argsstring></argsstring>
+        <name>TbxDomainName</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Domain/DomainUi.Designer.cs" line="269" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Domain/DomainUi.Designer.cs" bodystart="269" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_micra_1_1_domain_1_1_domain_ui_1aa2036b81eb4ffd4a9d112d6a005960cd" prot="private" static="no" mutable="no">
+        <type>System.Windows.Forms.CheckBox</type>
+        <definition>System.Windows.Forms.CheckBox Micra.Domain.DomainUi.ChkCurrentDomain</definition>
+        <argsstring></argsstring>
+        <name>ChkCurrentDomain</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Domain/DomainUi.Designer.cs" line="270" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Domain/DomainUi.Designer.cs" bodystart="270" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_micra_1_1_domain_1_1_domain_ui_1a5dca6862129fb97f6699924bfb4bbe07" prot="private" static="no" mutable="no">
+        <type>System.Windows.Forms.SplitContainer</type>
+        <definition>System.Windows.Forms.SplitContainer Micra.Domain.DomainUi.splitContainer1</definition>
+        <argsstring></argsstring>
+        <name>splitContainer1</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Domain/DomainUi.Designer.cs" line="271" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Domain/DomainUi.Designer.cs" bodystart="271" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_micra_1_1_domain_1_1_domain_ui_1a43bc22a5eb5a2dde8755eab1830a5beb" prot="private" static="no" mutable="no">
+        <type>System.Windows.Forms.TextBox</type>
+        <definition>System.Windows.Forms.TextBox Micra.Domain.DomainUi.TbxAssemblyFname</definition>
+        <argsstring></argsstring>
+        <name>TbxAssemblyFname</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Domain/DomainUi.Designer.cs" line="272" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Domain/DomainUi.Designer.cs" bodystart="272" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="class_micra_1_1_domain_1_1_domain_ui_1a8a82800ff90079f0f0cb2cad09cca878" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>Micra.Domain.DomainUi.DomainUi</definition>
+        <argsstring>()</argsstring>
+        <name>DomainUi</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Domain/DomainUi.cs" line="11" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Domain/DomainUi.cs" bodystart="11" bodyend="14"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_domain_1_1_domain_ui_1a829bd35c46f35346fcbf0b398fc8bae8" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>AppDomain</type>
+        <definition>AppDomain Micra.Domain.DomainUi.GetAppDomain</definition>
+        <argsstring>(string domainName)</argsstring>
+        <name>GetAppDomain</name>
+        <param>
+          <type>string</type>
+          <declname>domainName</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Domain/DomainUi.cs" line="16" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Domain/DomainUi.cs" bodystart="16" bodyend="38"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-func">
+      <memberdef kind="function" id="class_micra_1_1_domain_1_1_domain_ui_1aad4b031ee7284cb0e6fb185cb7750bd0" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Micra.Domain.DomainUi.DestroyCurrentDomain</definition>
+        <argsstring>()</argsstring>
+        <name>DestroyCurrentDomain</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Domain/DomainUi.cs" line="40" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Domain/DomainUi.cs" bodystart="40" bodyend="45"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_domain_1_1_domain_ui_1a38dcf7b2bcc00e73f47981efc984fe95" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Micra.Domain.DomainUi.ClearAll</definition>
+        <argsstring>()</argsstring>
+        <name>ClearAll</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Domain/DomainUi.cs" line="47" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Domain/DomainUi.cs" bodystart="47" bodyend="51"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_domain_1_1_domain_ui_1a7ae4346643404b6b260b9eed85594d21" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Micra.Domain.DomainUi.ReloadAssembliesList</definition>
+        <argsstring>()</argsstring>
+        <name>ReloadAssembliesList</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Domain/DomainUi.cs" line="53" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Domain/DomainUi.cs" bodystart="53" bodyend="72"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_domain_1_1_domain_ui_1a037003b37b3a0509299bfb0398cabe82" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Micra.Domain.DomainUi.LoadAssemblyTypes</definition>
+        <argsstring>(Assembly asm)</argsstring>
+        <name>LoadAssemblyTypes</name>
+        <param>
+          <type>Assembly</type>
+          <declname>asm</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Domain/DomainUi.cs" line="74" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Domain/DomainUi.cs" bodystart="74" bodyend="84"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_domain_1_1_domain_ui_1a1e1c7ff33a5596f973bb38997793e62c" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Micra.Domain.DomainUi.LoadTypeData</definition>
+        <argsstring>(Type type)</argsstring>
+        <name>LoadTypeData</name>
+        <param>
+          <type>Type</type>
+          <declname>type</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Domain/DomainUi.cs" line="86" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Domain/DomainUi.cs" bodystart="86" bodyend="90"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_domain_1_1_domain_ui_1a02fb0447f4af4ffe085fcb126ee7bb07" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Micra.Domain.DomainUi.RebuildCurrentDomain</definition>
+        <argsstring>()</argsstring>
+        <name>RebuildCurrentDomain</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Domain/DomainUi.cs" line="92" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Domain/DomainUi.cs" bodystart="92" bodyend="105"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_domain_1_1_domain_ui_1a7826732dd618298a1452aa55212efdb3" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Micra.Domain.DomainUi.BtnLoadAssembly_Click</definition>
+        <argsstring>(object sender, EventArgs e)</argsstring>
+        <name>BtnLoadAssembly_Click</name>
+        <param>
+          <type>object</type>
+          <declname>sender</declname>
+        </param>
+        <param>
+          <type>EventArgs</type>
+          <declname>e</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Domain/DomainUi.cs" line="107" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Domain/DomainUi.cs" bodystart="107" bodyend="118"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_domain_1_1_domain_ui_1a2f2fba914bcfa35a36d6c0c17c376041" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Micra.Domain.DomainUi.BtnRebuildDomain_Click</definition>
+        <argsstring>(object sender, EventArgs e)</argsstring>
+        <name>BtnRebuildDomain_Click</name>
+        <param>
+          <type>object</type>
+          <declname>sender</declname>
+        </param>
+        <param>
+          <type>EventArgs</type>
+          <declname>e</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Domain/DomainUi.cs" line="120" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Domain/DomainUi.cs" bodystart="120" bodyend="130"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_domain_1_1_domain_ui_1a7cac3c3c4382e06dc4ec74a9262ebe37" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Micra.Domain.DomainUi.DestroyDomain_Click</definition>
+        <argsstring>(object sender, EventArgs e)</argsstring>
+        <name>DestroyDomain_Click</name>
+        <param>
+          <type>object</type>
+          <declname>sender</declname>
+        </param>
+        <param>
+          <type>EventArgs</type>
+          <declname>e</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Domain/DomainUi.cs" line="132" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Domain/DomainUi.cs" bodystart="132" bodyend="142"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_domain_1_1_domain_ui_1a2fc6b491fcbc01d38e2c0e9a296ac8da" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Micra.Domain.DomainUi.BtnCreateDomain_Click</definition>
+        <argsstring>(object sender, EventArgs e)</argsstring>
+        <name>BtnCreateDomain_Click</name>
+        <param>
+          <type>object</type>
+          <declname>sender</declname>
+        </param>
+        <param>
+          <type>EventArgs</type>
+          <declname>e</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Domain/DomainUi.cs" line="144" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Domain/DomainUi.cs" bodystart="144" bodyend="151"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_domain_1_1_domain_ui_1a8db55147a14d5287d88447314518a58a" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Micra.Domain.DomainUi.BtnGetDomain_Click</definition>
+        <argsstring>(object sender, EventArgs e)</argsstring>
+        <name>BtnGetDomain_Click</name>
+        <param>
+          <type>object</type>
+          <declname>sender</declname>
+        </param>
+        <param>
+          <type>EventArgs</type>
+          <declname>e</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Domain/DomainUi.cs" line="153" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Domain/DomainUi.cs" bodystart="153" bodyend="161"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_domain_1_1_domain_ui_1abd7e0479a1e910331c2548d62f9d9172" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>string</type>
+        <definition>string Micra.Domain.DomainUi.ReadMembersInfo</definition>
+        <argsstring>(MemberInfo[] ms)</argsstring>
+        <name>ReadMembersInfo</name>
+        <param>
+          <type>MemberInfo[]</type>
+          <declname>ms</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Domain/DomainUi.cs" line="164" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Domain/DomainUi.cs" bodystart="164" bodyend="171"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_domain_1_1_domain_ui_1af1b52747516d578d975c5666b3ae059f" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>string</type>
+        <definition>string Micra.Domain.DomainUi.ReadTypeInfo</definition>
+        <argsstring>(Type t)</argsstring>
+        <name>ReadTypeInfo</name>
+        <param>
+          <type>Type</type>
+          <declname>t</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Domain/DomainUi.cs" line="173" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Domain/DomainUi.cs" bodystart="173" bodyend="233"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_domain_1_1_domain_ui_1a1e9cd6dc55c49a624910ef07ee56c671" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Micra.Domain.DomainUi.OnAssemblyItemSelectionChanged</definition>
+        <argsstring>(object sender, EventArgs e)</argsstring>
+        <name>OnAssemblyItemSelectionChanged</name>
+        <param>
+          <type>object</type>
+          <declname>sender</declname>
+        </param>
+        <param>
+          <type>EventArgs</type>
+          <declname>e</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Domain/DomainUi.cs" line="235" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Domain/DomainUi.cs" bodystart="235" bodyend="239"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_domain_1_1_domain_ui_1a5de23589754cd3f69fe22dbadfbcef8f" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Micra.Domain.DomainUi.OnAssemblyTypeItemSelectionChanged</definition>
+        <argsstring>(object sender, EventArgs e)</argsstring>
+        <name>OnAssemblyTypeItemSelectionChanged</name>
+        <param>
+          <type>object</type>
+          <declname>sender</declname>
+        </param>
+        <param>
+          <type>EventArgs</type>
+          <declname>e</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Domain/DomainUi.cs" line="241" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Domain/DomainUi.cs" bodystart="241" bodyend="244"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_domain_1_1_domain_ui_1aa242f0e0d00d8f9055c4d3c647ab1f46" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Micra.Domain.DomainUi.ChkCurrentDomain_CheckedChanged</definition>
+        <argsstring>(object sender, EventArgs e)</argsstring>
+        <name>ChkCurrentDomain_CheckedChanged</name>
+        <param>
+          <type>object</type>
+          <declname>sender</declname>
+        </param>
+        <param>
+          <type>EventArgs</type>
+          <declname>e</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Domain/DomainUi.cs" line="246" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Domain/DomainUi.cs" bodystart="246" bodyend="270"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_domain_1_1_domain_ui_1ac4d94e204be0d681e9c5829636505b77" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Micra.Domain.DomainUi.OnTextAreaLostFocus</definition>
+        <argsstring>(object sender, EventArgs e)</argsstring>
+        <name>OnTextAreaLostFocus</name>
+        <param>
+          <type>object</type>
+          <declname>sender</declname>
+        </param>
+        <param>
+          <type>EventArgs</type>
+          <declname>e</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Domain/DomainUi.cs" line="271" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Domain/DomainUi.cs" bodystart="271" bodyend="273"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_domain_1_1_domain_ui_1abb31fb60ff58160c21983ce1eeac3e2f" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Micra.Domain.DomainUi.OnTextAreaGotFocus</definition>
+        <argsstring>(object sender, EventArgs e)</argsstring>
+        <name>OnTextAreaGotFocus</name>
+        <param>
+          <type>object</type>
+          <declname>sender</declname>
+        </param>
+        <param>
+          <type>EventArgs</type>
+          <declname>e</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Domain/DomainUi.cs" line="275" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Domain/DomainUi.cs" bodystart="275" bodyend="277"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_domain_1_1_domain_ui_1a405b1ed42a6252a31853ed6cafdffed9" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Micra.Domain.DomainUi.InitializeComponent</definition>
+        <argsstring>()</argsstring>
+        <name>InitializeComponent</name>
+        <briefdescription>
+<para>Required method for Designer support - do not modify the contents of this method with the code editor. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Domain/DomainUi.Designer.cs" line="25" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Domain/DomainUi.Designer.cs" bodystart="25" bodyend="253"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="protected-func">
+      <memberdef kind="function" id="class_micra_1_1_domain_1_1_domain_ui_1afaa35255b2bfd763cd200bbd710f8f85" prot="protected" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>override void</type>
+        <definition>override void Micra.Domain.DomainUi.Dispose</definition>
+        <argsstring>(bool disposing)</argsstring>
+        <name>Dispose</name>
+        <param>
+          <type>bool</type>
+          <declname>disposing</declname>
+        </param>
+        <briefdescription>
+<para>Clean up any resources being used. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>disposing</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>true if managed resources should be disposed; otherwise, false.</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Domain/DomainUi.Designer.cs" line="12" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Domain/DomainUi.Designer.cs" bodystart="12" bodyend="17"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="114">
+        <label>Form</label>
+      </node>
+      <node id="113">
+        <label>Micra.Domain.DomainUi</label>
+        <link refid="class_micra_1_1_domain_1_1_domain_ui"/>
+        <childnode refid="114" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="116">
+        <label>Form</label>
+      </node>
+      <node id="118">
+        <label>System</label>
+      </node>
+      <node id="117">
+        <label>Micra.Domain.MxDomain</label>
+        <link refid="class_micra_1_1_domain_1_1_mx_domain"/>
+      </node>
+      <node id="115">
+        <label>Micra.Domain.DomainUi</label>
+        <link refid="class_micra_1_1_domain_1_1_domain_ui"/>
+        <childnode refid="116" relation="public-inheritance">
+        </childnode>
+        <childnode refid="117" relation="usage">
+          <edgelabel>customAppDomain</edgelabel>
+        </childnode>
+        <childnode refid="118" relation="usage">
+          <edgelabel>BtnCreateDomain</edgelabel>
+          <edgelabel>LbxAssemblies</edgelabel>
+          <edgelabel>DestroyDomain</edgelabel>
+          <edgelabel>groupBox1</edgelabel>
+          <edgelabel>TbxDomainName</edgelabel>
+          <edgelabel>groupBox2</edgelabel>
+          <edgelabel>BtnRebuildDomain</edgelabel>
+          <edgelabel>groupBox3</edgelabel>
+          <edgelabel>BtnGetDomain</edgelabel>
+          <edgelabel>components</edgelabel>
+          <edgelabel>...</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Domain/DomainUi.cs" line="9" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Domain/DomainUi.cs" bodystart="9" bodyend="278"/>
+    <listofallmembers>
+      <member refid="class_micra_1_1_domain_1_1_domain_ui_1abff69b78284008bffa89c35a5661ec95" prot="private" virt="non-virtual"><scope>Micra::Domain::DomainUi</scope><name>BtnCreateDomain</name></member>
+      <member refid="class_micra_1_1_domain_1_1_domain_ui_1a2fc6b491fcbc01d38e2c0e9a296ac8da" prot="private" virt="non-virtual"><scope>Micra::Domain::DomainUi</scope><name>BtnCreateDomain_Click</name></member>
+      <member refid="class_micra_1_1_domain_1_1_domain_ui_1aa4e9b93b93d4221f71380fcb27642000" prot="private" virt="non-virtual"><scope>Micra::Domain::DomainUi</scope><name>BtnGetDomain</name></member>
+      <member refid="class_micra_1_1_domain_1_1_domain_ui_1a8db55147a14d5287d88447314518a58a" prot="private" virt="non-virtual"><scope>Micra::Domain::DomainUi</scope><name>BtnGetDomain_Click</name></member>
+      <member refid="class_micra_1_1_domain_1_1_domain_ui_1a865a920caec899a54b5b760bf496b68d" prot="private" virt="non-virtual"><scope>Micra::Domain::DomainUi</scope><name>BtnLoadAssembly</name></member>
+      <member refid="class_micra_1_1_domain_1_1_domain_ui_1a7826732dd618298a1452aa55212efdb3" prot="private" virt="non-virtual"><scope>Micra::Domain::DomainUi</scope><name>BtnLoadAssembly_Click</name></member>
+      <member refid="class_micra_1_1_domain_1_1_domain_ui_1a5e365a29d6660b1f5d1868219772c2cd" prot="private" virt="non-virtual"><scope>Micra::Domain::DomainUi</scope><name>BtnRebuildDomain</name></member>
+      <member refid="class_micra_1_1_domain_1_1_domain_ui_1a2f2fba914bcfa35a36d6c0c17c376041" prot="private" virt="non-virtual"><scope>Micra::Domain::DomainUi</scope><name>BtnRebuildDomain_Click</name></member>
+      <member refid="class_micra_1_1_domain_1_1_domain_ui_1aa2036b81eb4ffd4a9d112d6a005960cd" prot="private" virt="non-virtual"><scope>Micra::Domain::DomainUi</scope><name>ChkCurrentDomain</name></member>
+      <member refid="class_micra_1_1_domain_1_1_domain_ui_1aa242f0e0d00d8f9055c4d3c647ab1f46" prot="private" virt="non-virtual"><scope>Micra::Domain::DomainUi</scope><name>ChkCurrentDomain_CheckedChanged</name></member>
+      <member refid="class_micra_1_1_domain_1_1_domain_ui_1a38dcf7b2bcc00e73f47981efc984fe95" prot="private" virt="non-virtual"><scope>Micra::Domain::DomainUi</scope><name>ClearAll</name></member>
+      <member refid="class_micra_1_1_domain_1_1_domain_ui_1a13afec0e501596d0b7961cbe859635ad" prot="private" virt="non-virtual"><scope>Micra::Domain::DomainUi</scope><name>components</name></member>
+      <member refid="class_micra_1_1_domain_1_1_domain_ui_1a7578678540f379954ffc91c3cb8badd1" prot="private" virt="non-virtual"><scope>Micra::Domain::DomainUi</scope><name>customAppDomain</name></member>
+      <member refid="class_micra_1_1_domain_1_1_domain_ui_1aad4b031ee7284cb0e6fb185cb7750bd0" prot="private" virt="non-virtual"><scope>Micra::Domain::DomainUi</scope><name>DestroyCurrentDomain</name></member>
+      <member refid="class_micra_1_1_domain_1_1_domain_ui_1a3cbf558cb0fcf1611df9c125c679e6bb" prot="private" virt="non-virtual"><scope>Micra::Domain::DomainUi</scope><name>DestroyDomain</name></member>
+      <member refid="class_micra_1_1_domain_1_1_domain_ui_1a7cac3c3c4382e06dc4ec74a9262ebe37" prot="private" virt="non-virtual"><scope>Micra::Domain::DomainUi</scope><name>DestroyDomain_Click</name></member>
+      <member refid="class_micra_1_1_domain_1_1_domain_ui_1afaa35255b2bfd763cd200bbd710f8f85" prot="protected" virt="non-virtual"><scope>Micra::Domain::DomainUi</scope><name>Dispose</name></member>
+      <member refid="class_micra_1_1_domain_1_1_domain_ui_1a8a82800ff90079f0f0cb2cad09cca878" prot="public" virt="non-virtual"><scope>Micra::Domain::DomainUi</scope><name>DomainUi</name></member>
+      <member refid="class_micra_1_1_domain_1_1_domain_ui_1a829bd35c46f35346fcbf0b398fc8bae8" prot="public" virt="non-virtual"><scope>Micra::Domain::DomainUi</scope><name>GetAppDomain</name></member>
+      <member refid="class_micra_1_1_domain_1_1_domain_ui_1a2f79754eb49bf34794a5ab5c5b744fa7" prot="private" virt="non-virtual"><scope>Micra::Domain::DomainUi</scope><name>groupBox1</name></member>
+      <member refid="class_micra_1_1_domain_1_1_domain_ui_1a10a14a95f3878b03aa484fc78b9ce9a0" prot="private" virt="non-virtual"><scope>Micra::Domain::DomainUi</scope><name>groupBox2</name></member>
+      <member refid="class_micra_1_1_domain_1_1_domain_ui_1a6c69667825a95c6b0737276d04405879" prot="private" virt="non-virtual"><scope>Micra::Domain::DomainUi</scope><name>groupBox3</name></member>
+      <member refid="class_micra_1_1_domain_1_1_domain_ui_1ac26f2c5fce1e84a4076988a461902e18" prot="private" virt="non-virtual"><scope>Micra::Domain::DomainUi</scope><name>groupBox4</name></member>
+      <member refid="class_micra_1_1_domain_1_1_domain_ui_1a405b1ed42a6252a31853ed6cafdffed9" prot="private" virt="non-virtual"><scope>Micra::Domain::DomainUi</scope><name>InitializeComponent</name></member>
+      <member refid="class_micra_1_1_domain_1_1_domain_ui_1aed90387a5a8dfe3cc1588ee5e7edec58" prot="private" virt="non-virtual"><scope>Micra::Domain::DomainUi</scope><name>LbxAssemblies</name></member>
+      <member refid="class_micra_1_1_domain_1_1_domain_ui_1a1380d01a53d6440dc2ff0982448929f2" prot="private" virt="non-virtual"><scope>Micra::Domain::DomainUi</scope><name>LbxAssemblyTypes</name></member>
+      <member refid="class_micra_1_1_domain_1_1_domain_ui_1a037003b37b3a0509299bfb0398cabe82" prot="private" virt="non-virtual"><scope>Micra::Domain::DomainUi</scope><name>LoadAssemblyTypes</name></member>
+      <member refid="class_micra_1_1_domain_1_1_domain_ui_1a1e1c7ff33a5596f973bb38997793e62c" prot="private" virt="non-virtual"><scope>Micra::Domain::DomainUi</scope><name>LoadTypeData</name></member>
+      <member refid="class_micra_1_1_domain_1_1_domain_ui_1a1e9cd6dc55c49a624910ef07ee56c671" prot="private" virt="non-virtual"><scope>Micra::Domain::DomainUi</scope><name>OnAssemblyItemSelectionChanged</name></member>
+      <member refid="class_micra_1_1_domain_1_1_domain_ui_1a5de23589754cd3f69fe22dbadfbcef8f" prot="private" virt="non-virtual"><scope>Micra::Domain::DomainUi</scope><name>OnAssemblyTypeItemSelectionChanged</name></member>
+      <member refid="class_micra_1_1_domain_1_1_domain_ui_1abb31fb60ff58160c21983ce1eeac3e2f" prot="private" virt="non-virtual"><scope>Micra::Domain::DomainUi</scope><name>OnTextAreaGotFocus</name></member>
+      <member refid="class_micra_1_1_domain_1_1_domain_ui_1ac4d94e204be0d681e9c5829636505b77" prot="private" virt="non-virtual"><scope>Micra::Domain::DomainUi</scope><name>OnTextAreaLostFocus</name></member>
+      <member refid="class_micra_1_1_domain_1_1_domain_ui_1abd7e0479a1e910331c2548d62f9d9172" prot="private" virt="non-virtual"><scope>Micra::Domain::DomainUi</scope><name>ReadMembersInfo</name></member>
+      <member refid="class_micra_1_1_domain_1_1_domain_ui_1af1b52747516d578d975c5666b3ae059f" prot="private" virt="non-virtual"><scope>Micra::Domain::DomainUi</scope><name>ReadTypeInfo</name></member>
+      <member refid="class_micra_1_1_domain_1_1_domain_ui_1a02fb0447f4af4ffe085fcb126ee7bb07" prot="private" virt="non-virtual"><scope>Micra::Domain::DomainUi</scope><name>RebuildCurrentDomain</name></member>
+      <member refid="class_micra_1_1_domain_1_1_domain_ui_1a7ae4346643404b6b260b9eed85594d21" prot="private" virt="non-virtual"><scope>Micra::Domain::DomainUi</scope><name>ReloadAssembliesList</name></member>
+      <member refid="class_micra_1_1_domain_1_1_domain_ui_1a5dca6862129fb97f6699924bfb4bbe07" prot="private" virt="non-virtual"><scope>Micra::Domain::DomainUi</scope><name>splitContainer1</name></member>
+      <member refid="class_micra_1_1_domain_1_1_domain_ui_1a43bc22a5eb5a2dde8755eab1830a5beb" prot="private" virt="non-virtual"><scope>Micra::Domain::DomainUi</scope><name>TbxAssemblyFname</name></member>
+      <member refid="class_micra_1_1_domain_1_1_domain_ui_1acd7d3db8f9728c1ddcbc2f36303087b6" prot="private" virt="non-virtual"><scope>Micra::Domain::DomainUi</scope><name>TbxDomainName</name></member>
+      <member refid="class_micra_1_1_domain_1_1_domain_ui_1aa370aa72bc0cd0b8447c80295cb26f55" prot="private" virt="non-virtual"><scope>Micra::Domain::DomainUi</scope><name>TbxTypeData</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

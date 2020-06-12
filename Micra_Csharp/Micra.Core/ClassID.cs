@@ -11,16 +11,32 @@ using System.Linq;
 using System.Reflection;
 
 namespace Micra.Core {
-    /// <summary>
-    /// Identifies a particular plug-in. Wraps the Class_ID class in the 3sd Max SDK.
+    /// <summary> Identifies a particular plug-in. Wraps the Class_ID class in the 3sd Max SDK.
+    ///     <example> 
+    ///         <code>
+    ///             example: 
+    ///             switch ( node.ClassOf() ) {
+    ///                 <br>case nameof(ClassID.EditablePoly) : Max.Log("is poly"); break;</br>
+    ///                 <br>case nameof(ClassID.EditableMesh) : Max.Log("is mesh"); break;</br>
+    ///             <br>}</br>
+    ///         </code>
+    ///     </example>
     /// </summary>
     [Serializable]
     public struct ClassID {
-        public uint a;
-        public uint b;
-        public ClassID(Autodesk.Max.IClass_ID id) : this(id.PartA, id.PartB) { }
-        public ClassID(uint a, uint b) { this.a = a; this.b = b; }
-        public ClassID(BuiltInClassIDA a, BuiltInClassIDB b) { this.a = (uint)a; this.b = (uint)b; }
+        /*switch ( node.ClassOf() ) {
+            case ClassID.ClassName.EditablePoly: MaxLog("is poly"); break;
+        }*/
+        public enum ClassName {
+
+            EditableMesh,
+            EditablePoly
+        }
+        public uint PartA;
+        public uint PartB;
+        public ClassID(IClass_ID id) : this(id.PartA, id.PartB) { }
+        public ClassID(uint a, uint b) { this.PartA = a; this.PartB = b; }
+        public ClassID(BuiltInClassIDA a, BuiltInClassIDB b) { this.PartA = (uint)a; this.PartB = (uint)b; }
         /// <summary>usage: Create ClassID from Name
         /// <example>
         /// <code>example: 
@@ -39,7 +55,7 @@ namespace Micra.Core {
             return fi != null ? (ClassID)fi.GetValue(fi) : new ClassID();
         }
 
-        public IClass_ID _IClass_ID => Kernel._Global.Class_ID.Create(a, b);
+        public IClass_ID _IClass_ID => Kernel._Global.Class_ID.Create(PartA, PartB);
 
         //is class
         public static ClassID EditableMesh = new ClassID(BuiltInClassIDA.EDITTRIOBJ_CLASS_ID, 0);
@@ -52,7 +68,6 @@ namespace Micra.Core {
         public static ClassID DummyHelper = new ClassID(BuiltInClassIDA.DUMMY_CLASS_ID, 0);
         public static ClassID TapeHelper = new ClassID(BuiltInClassIDA.TAPEHELP_CLASS_ID, 0);
         //primitive classes
-        //public static ClassID LineShape = new ClassID(BuiltInClassIDA.SPLINE3D_CLASS_ID, 0);
         public static ClassID SplineShape = new ClassID(BuiltInClassIDA.SPLINE3D_CLASS_ID, 0);
         public static ClassID CircleShape = new ClassID(BuiltInClassIDA.CIRCLE_CLASS_ID, 0);
         public static ClassID ElipseShape = new ClassID(BuiltInClassIDA.ELLIPSE_CLASS_ID, 0);
@@ -66,8 +81,9 @@ namespace Micra.Core {
         public static ClassID PolyObject = new ClassID(BuiltInClassIDA.POLYOBJ_CLASS_ID, 0);
         public static ClassID TeapotObject = new ClassID(BuiltInClassIDA.TEAPOT_CLASS_ID, BuiltInClassIDB.TEAPOT_CLASS_ID);
 
-        /// <summary>usage: Get a Name from current ClasID as Kenel Name</summary>
-        public string GetClassName(ClassID clsID) {
+        public string GetClassName() => GetClassName(new ClassID(PartA, PartB));
+            /// <summary>usage: Get a Name from current ClasID as Kenel Name</summary>
+            public string GetClassName(ClassID clsID) {
             //get Clas name From Kernel Struct
             Type type = typeof(ClassID);
             foreach ( var p in type.GetFields(BindingFlags.Static | BindingFlags.Public) ) {
@@ -77,13 +93,13 @@ namespace Micra.Core {
                 }
             }
             //if class not found in ClassID, provide original Max BuiltInClassIDA Name
-            return GetIClassNames(clsID) + "- This Class is not Registed in ClassID. VIP.";
+            return GetIClassName(clsID) + "- This Class is not Registed in ClassID. VIP.";
         }
         /// <summary>usage: Get Name from a ClasID as Max Name</summary>
-        public string GetIClassNames(ClassID clsID) {
+        public string GetIClassName(ClassID clsID) {
             //get clas name from Max Enums
             Type t = typeof(BuiltInClassIDA);
-            return Enum.GetName(t, clsID.a) + " | " + Enum.GetName(t, clsID.b);
+            return Enum.GetName(t, clsID.PartA) + " | " + Enum.GetName(t, clsID.PartB);
         }
         /// <summary> Get All ClassID Names</summary>
         public static string[] GetClassNames() {
@@ -96,27 +112,100 @@ namespace Micra.Core {
         }
 
         public override string ToString() {
-            return "ClassID(" + a.ToString() + ", " + b.ToString() + ")";
+            return "ClassID(" + PartA.ToString() + ", " + PartB.ToString() + ")";
         }
 
         public bool Equals(IClass_ID icid) {
 
             //Kernel.WriteLine("Equal test PartA:{0} PartB:{1} a:{2} b:{3}", icid.PartA, icid.PartB, a, b);
-            return icid.PartA == a && icid.PartB == b;
+            return icid.PartA == PartA && icid.PartB == PartB;
         }
 
         public override bool Equals(object obj) {
-            if ( !( obj is ClassID ) )
-                return false;
+            if ( !( obj is ClassID ) ) return false;
             ClassID that = (ClassID)obj;
-            return a == that.a && b == that.b;
+            return PartA == that.PartA && PartB == that.PartB;
         }
 
-        public override int GetHashCode() {
-            return a.GetHashCode() ^ b.GetHashCode();
-        }
+        public override int GetHashCode() => PartA.GetHashCode() ^ PartB.GetHashCode();
 
-        public static bool operator ==(ClassID x, ClassID y) { return ( x.a == y.a ) && ( x.b == y.b ); }
-        public static bool operator !=(ClassID x, ClassID y) { return ( x.a != y.a ) || ( x.b != y.b ); }
+        public static bool operator ==(ClassID x, ClassID y) { return ( x.PartA == y.PartA ) && ( x.PartB == y.PartB ); }
+        public static bool operator !=(ClassID x, ClassID y) { return ( x.PartA != y.PartA ) || ( x.PartB != y.PartB ); }
+
+  
+
+        //internal static int GetID(ClassID clsID) => (int)( clsID.a + clsID.b );
+        //internal int GetID() => (int)( a + b );
     }
 }
+
+
+/* Custom Enum Type
+public static class EnumExtensions
+{
+    public static TAttribute GetAttribute<TAttribute>(this Enum value)
+        where TAttribute : Attribute
+    {
+        var type = value.GetType();
+        var name = Enum.GetName(type, value);
+        return type.GetField(name) // I prefer to get attributes this way
+            .GetCustomAttributes(false)
+            .OfType<TAttribute>()
+            .SingleOrDefault();
+    }
+}
+
+public static class EnumExtensions
+{
+    public static TAttribute GetAttribute<TAttribute>(this Enum value)
+        where TAttribute : Attribute
+    {
+        var type = value.GetType();
+        var name = Enum.GetName(type, value);
+        return type.GetField(name) // I prefer to get attributes this way
+            .GetCustomAttribute<TAttribute>();
+    }
+}
+
+public class PlanetInfoAttribute : Attribute
+{
+    internal PlanetInfoAttribute(double mass, double radius)
+    {
+        this.Mass = mass;
+        this.Radius = radius;
+    }
+    public double Mass { get; private set; }
+    public double Radius { get; private set; }
+}
+
+
+public enum Planet
+{
+    [PlanetInfo(3.303e+23, 2.43970e6)]  Mecury,
+    [PlanetInfo(4.869e+24, 6.05180e6)]  Venus,
+    [PlanetInfo(5.976e+24, 6.37814e6)]  Earth,
+    [PlanetInfo(6.421e+23, 3.39720e6)]  Mars,
+    [PlanetInfo(1.900e+27, 7.14920e7)]  Jupiter,
+    [PlanetInfo(5.688e+26, 6.02680e7)]  Saturn,
+    [PlanetInfo(8.686e+25, 2.55590e7)]  Uranus,
+    [PlanetInfo(1.024e+26, 2.47460e7)]  Neptune,
+    [PlanetInfo(1.270e+22, 1.13700e6)]  Pluto,
+}
+
+public static class PlanetExtensions
+{
+    public static double GetSurfaceGravity(this Planet p)
+    {
+        var attr = p.GetAttribute<PlanetInfoAttribute>();
+        return G * attr.Mass / (attr.Radius * attr.Radius);
+    }
+
+    public static double GetSurfaceWeight(this Planet p, double otherMass)
+    {
+        return otherMass * p.GetSurfaceGravity();
+    }
+
+    public const double G = 6.67300E-11;
+}
+
+*/

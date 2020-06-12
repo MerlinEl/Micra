@@ -1,0 +1,90 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
+  <compounddef id="_i_bit_array_extensions_8cs" kind="file">
+    <compoundname>IBitArrayExtensions.cs</compoundname>
+    <innerclass refid="class_micra_1_1_core_1_1_i_bit_array_extensions" prot="public">Micra::Core::IBitArrayExtensions</innerclass>
+    <innernamespace refid="namespace_micra_1_1_core">Micra::Core</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="keyword">using</highlight><highlight class="normal"><sp/>Autodesk.Max;</highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="comment">/*</highlight></codeline>
+<codeline lineno="3"><highlight class="comment"><sp/>This<sp/>might<sp/>be<sp/>a<sp/>bit<sp/>of<sp/>a<sp/>long<sp/>shot<sp/>but<sp/>I<sp/>have<sp/>noticed<sp/>that<sp/>in<sp/>the<sp/>Autodesk.max.dll<sp/>from<sp/>2014+<sp/>the<sp/>[]<sp/>operator<sp/>has<sp/>gone<sp/>missing<sp/>from<sp/>IBitArray.<sp/>I<sp/>know<sp/>you<sp/>no<sp/>longer<sp/>develop<sp/>this<sp/>so<sp/>I’ve<sp/>got<sp/>a<sp/>question<sp/>about<sp/>a<sp/>workaround<sp/>I<sp/>was<sp/>trying<sp/>to<sp/>use:</highlight></codeline>
+<codeline lineno="4"><highlight class="comment"></highlight></codeline>
+<codeline lineno="5"><highlight class="comment">I<sp/>wanted<sp/>to<sp/>use<sp/>EnumSet(IBitArrayCallback<sp/>cb)<sp/>method.<sp/>However<sp/>I<sp/>seem<sp/>to<sp/>be<sp/>unable<sp/>to<sp/>create<sp/>a<sp/>valid<sp/>class<sp/>that<sp/>inherits<sp/>from<sp/>IBitArrayCallback.<sp/>I<sp/>get<sp/>a<sp/>&apos;System.InvalidCastException&apos;<sp/>error:<sp/>Unable<sp/>to<sp/>cast<sp/>object<sp/>of<sp/>type<sp/>&apos;TestNewAssembly.TestCallback&apos;<sp/>to<sp/>type<sp/>&apos;Autodesk.Max.IImplementable&apos;.</highlight></codeline>
+<codeline lineno="6"><highlight class="comment"></highlight></codeline>
+<codeline lineno="7"><highlight class="comment">IBitArray<sp/>selVert<sp/>=<sp/>mesh.VertSel;</highlight></codeline>
+<codeline lineno="8"><highlight class="comment">TestCallback<sp/>test<sp/>=<sp/>new<sp/>TestCallback();</highlight></codeline>
+<codeline lineno="9"><highlight class="comment">selVert.EnumSet(test);</highlight></codeline>
+<codeline lineno="10"><highlight class="comment"></highlight></codeline>
+<codeline lineno="11"><highlight class="comment">...</highlight></codeline>
+<codeline lineno="12"><highlight class="comment"></highlight></codeline>
+<codeline lineno="13"><highlight class="comment">public<sp/>class<sp/>TestCallback<sp/>:<sp/>IBitArrayCallback</highlight></codeline>
+<codeline lineno="14"><highlight class="comment">{</highlight></codeline>
+<codeline lineno="15"><highlight class="comment">public<sp/>void<sp/>Proc(int<sp/>n)</highlight></codeline>
+<codeline lineno="16"><highlight class="comment">{}</highlight></codeline>
+<codeline lineno="17"><highlight class="comment"></highlight></codeline>
+<codeline lineno="18"><highlight class="comment">public<sp/>bool<sp/>Equals(IBitArrayCallback<sp/>other)</highlight></codeline>
+<codeline lineno="19"><highlight class="comment">{return<sp/>false;}</highlight></codeline>
+<codeline lineno="20"><highlight class="comment"></highlight></codeline>
+<codeline lineno="21"><highlight class="comment">public<sp/>void<sp/>Dispose()</highlight></codeline>
+<codeline lineno="22"><highlight class="comment">{}</highlight></codeline>
+<codeline lineno="23"><highlight class="comment"></highlight></codeline>
+<codeline lineno="24"><highlight class="comment">public<sp/>IntPtr<sp/>NativePointer</highlight></codeline>
+<codeline lineno="25"><highlight class="comment">{get<sp/>{<sp/>return<sp/>IntPtr.Zero;<sp/>}}</highlight></codeline>
+<codeline lineno="26"><highlight class="comment">}</highlight></codeline>
+<codeline lineno="27"><highlight class="comment"></highlight></codeline>
+<codeline lineno="28"><highlight class="comment"><sp/><sp/><sp/><sp/>Solution<sp/>bellow</highlight></codeline>
+<codeline lineno="29"><highlight class="comment">*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="30"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">Micra.Core<sp/>{</highlight></codeline>
+<codeline lineno="31" refid="class_micra_1_1_core_1_1_i_bit_array_extensions" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="class_micra_1_1_core_1_1_i_bit_array_extensions" kindref="compound">IBitArrayExtensions</ref><sp/>{<sp/></highlight><highlight class="comment">//not<sp/>tested<sp/>//not<sp/>used</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="32" refid="class_micra_1_1_core_1_1_i_bit_array_extensions_1a1018d2f391b8c389065f849d342c89d6" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">private</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>NSHIFT<sp/>=<sp/>6;</highlight></codeline>
+<codeline lineno="33" refid="class_micra_1_1_core_1_1_i_bit_array_extensions_1a4496a927c11c459922d3e1e81d01d07a" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">private</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>CHAR_BIT<sp/>=<sp/>8;</highlight></codeline>
+<codeline lineno="34" refid="class_micra_1_1_core_1_1_i_bit_array_extensions_1aa97e544d4e36bd89e32b2f58f8a40442" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">private</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>kMAX_LOCALBITS<sp/>=<sp/>CHAR_BIT<sp/>*<sp/></highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">(ulong);</highlight></codeline>
+<codeline lineno="35"><highlight class="normal"></highlight></codeline>
+<codeline lineno="36" refid="class_micra_1_1_core_1_1_i_bit_array_extensions_1a10b860e70edb0920c0450431b14d0b76" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">private</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>BITS_PER_DWORD_PTR<sp/>=<sp/>(<sp/>CHAR_BIT<sp/>*<sp/></highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">(ulong)<sp/>);</highlight></codeline>
+<codeline lineno="37" refid="class_micra_1_1_core_1_1_i_bit_array_extensions_1abcca269d9330451734da92ba56ffce00" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">private</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>BITS_PER_DWORD_PTR_MASK<sp/>=<sp/>BITS_PER_DWORD_PTR<sp/>-<sp/>1;</highlight></codeline>
+<codeline lineno="38"><highlight class="normal"></highlight></codeline>
+<codeline lineno="39" refid="class_micra_1_1_core_1_1_i_bit_array_extensions_1a6f1d8da70f0dd0ba9e57b9f59383aaa0" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/>unsafe<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="class_micra_1_1_core_1_1_i_bit_array_extensions_1a6f1d8da70f0dd0ba9e57b9f59383aaa0" kindref="member">GetBit</ref>(</highlight><highlight class="keyword">this</highlight><highlight class="normal"><sp/>IBitArray<sp/>bitArray,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>index)<sp/>{</highlight></codeline>
+<codeline lineno="40"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//Number<sp/>of<sp/>bits<sp/>in<sp/>the<sp/>bitArray</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="41"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>numBits<sp/>=<sp/>bitArray.Size;</highlight></codeline>
+<codeline lineno="42"><highlight class="normal"></highlight></codeline>
+<codeline lineno="43"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//Pointer<sp/>to<sp/>the<sp/>start<sp/>of<sp/>either<sp/>DWORD_PTR*<sp/>bits<sp/>or<sp/>DWORD_PTR<sp/>localBits</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="44"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//DWORD_PTR<sp/>is<sp/>of<sp/>type<sp/>ulong</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="45"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal">*<sp/>nativePtr<sp/>=<sp/>bitArray.NativePointer.ToPointer();</highlight></codeline>
+<codeline lineno="46"><highlight class="normal"></highlight></codeline>
+<codeline lineno="47"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//Determines<sp/>whether<sp/>we<sp/>use<sp/>bits<sp/>or<sp/>localBits</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="48"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>useLocal<sp/>=<sp/>numBits<sp/>&lt;=<sp/>kMAX_LOCALBITS;</highlight></codeline>
+<codeline lineno="49"><highlight class="normal"></highlight></codeline>
+<codeline lineno="50"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(<sp/>useLocal<sp/>)<sp/>{</highlight></codeline>
+<codeline lineno="51"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ulong<sp/>localBits<sp/>=<sp/>(<sp/>(ulong*)nativePtr<sp/>)[0];</highlight></codeline>
+<codeline lineno="52"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ulong<sp/>bitMask<sp/>=<sp/>(<sp/>index<sp/>&lt;<sp/>kMAX_LOCALBITS<sp/>)<sp/>?<sp/>(<sp/>(<sp/>(ulong)1<sp/>)<sp/>&lt;&lt;<sp/>index<sp/>)<sp/>:<sp/>0;</highlight></codeline>
+<codeline lineno="53"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>(<sp/>(<sp/>localBits<sp/>&amp;<sp/>bitMask<sp/>)<sp/>!=<sp/>0<sp/>)<sp/>?<sp/>1<sp/>:<sp/>0;</highlight></codeline>
+<codeline lineno="54"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}<sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="55"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ulong*<sp/>bits<sp/>=<sp/>(<sp/>(ulong**)nativePtr<sp/>)[0];</highlight></codeline>
+<codeline lineno="56"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>bitIndex<sp/>=<sp/>index<sp/>&gt;&gt;<sp/>NSHIFT;</highlight></codeline>
+<codeline lineno="57"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>var<sp/>bitMaskParameter<sp/>=<sp/>index<sp/>&amp;<sp/>BITS_PER_DWORD_PTR_MASK;</highlight></codeline>
+<codeline lineno="58"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ulong<sp/>bitMask<sp/>=<sp/>(<sp/>bitMaskParameter<sp/>&lt;<sp/>kMAX_LOCALBITS<sp/>)<sp/>?<sp/>(<sp/>(<sp/>(ulong)1<sp/>)<sp/>&lt;&lt;<sp/>bitMaskParameter<sp/>)<sp/>:<sp/>0;</highlight></codeline>
+<codeline lineno="59"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>(<sp/>(<sp/>bits[bitIndex]<sp/>&amp;<sp/>bitMask<sp/>)<sp/>!=<sp/>0<sp/>)<sp/>?<sp/>1<sp/>:<sp/>0;</highlight></codeline>
+<codeline lineno="60"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="61"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="62" refid="class_micra_1_1_core_1_1_i_bit_array_extensions_1a5a52372984b8e4bdab32be510526f41a" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/>IBitArray<sp/><ref refid="class_micra_1_1_core_1_1_i_bit_array_extensions_1a5a52372984b8e4bdab32be510526f41a" kindref="member">BitwiseOR</ref>(</highlight><highlight class="keyword">this</highlight><highlight class="normal"><sp/>IBitArray<sp/>A,<sp/>IBitArray<sp/>B)<sp/>{</highlight></codeline>
+<codeline lineno="63"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>sizeA<sp/>=<sp/>A.Size;</highlight></codeline>
+<codeline lineno="64"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>sizeB<sp/>=<sp/>B.Size;</highlight></codeline>
+<codeline lineno="65"><highlight class="normal"></highlight></codeline>
+<codeline lineno="66"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(<sp/>sizeA<sp/>&gt;<sp/>sizeB<sp/>)<sp/>{</highlight></codeline>
+<codeline lineno="67"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>B.SetSize(sizeA,<sp/>1);</highlight></codeline>
+<codeline lineno="68"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}<sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="69"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>A.SetSize(sizeB,<sp/>1);</highlight></codeline>
+<codeline lineno="70"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="71"><highlight class="normal"></highlight></codeline>
+<codeline lineno="72"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>B.BitwiseXor(A.BitwiseXor(A.BitwiseAnd(B)));</highlight></codeline>
+<codeline lineno="73"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="74"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="75"><highlight class="normal">}</highlight></codeline>
+    </programlisting>
+    <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/IBitArrayExtensions.cs"/>
+  </compounddef>
+</doxygen>

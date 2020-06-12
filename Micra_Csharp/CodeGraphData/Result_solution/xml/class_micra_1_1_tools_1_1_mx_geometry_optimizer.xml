@@ -1,0 +1,777 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
+  <compounddef id="class_micra_1_1_tools_1_1_mx_geometry_optimizer" kind="class" prot="public">
+    <compoundname>Micra::Tools::MxGeometryOptimizer</compoundname>
+    <basecompoundref prot="public" virt="non-virtual">Form</basecompoundref>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="class_micra_1_1_tools_1_1_mx_geometry_optimizer_1af736ca571e83bb0a62019db88ed0a69b" prot="private" static="no" mutable="no">
+        <type>System.ComponentModel.IContainer</type>
+        <definition>System.ComponentModel.IContainer Micra.Tools.MxGeometryOptimizer.components</definition>
+        <argsstring></argsstring>
+        <name>components</name>
+        <initializer>= null</initializer>
+        <briefdescription>
+<para>Required designer variable. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/MxGeometryOptimizer.Designer.cs" line="6" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/MxGeometryOptimizer.Designer.cs" bodystart="6" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_micra_1_1_tools_1_1_mx_geometry_optimizer_1ae1446b0cc3944eef0fe7348eaeaeb4f1" prot="private" static="no" mutable="no">
+        <type>System.Windows.Forms.Button</type>
+        <definition>System.Windows.Forms.Button Micra.Tools.MxGeometryOptimizer.BtnSelSimElements</definition>
+        <argsstring></argsstring>
+        <name>BtnSelSimElements</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/MxGeometryOptimizer.Designer.cs" line="557" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/MxGeometryOptimizer.Designer.cs" bodystart="557" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_micra_1_1_tools_1_1_mx_geometry_optimizer_1af9ee5207cd3bdaa15e263bd86868820a" prot="private" static="no" mutable="no">
+        <type>System.Windows.Forms.GroupBox</type>
+        <definition>System.Windows.Forms.GroupBox Micra.Tools.MxGeometryOptimizer.groupBox1</definition>
+        <argsstring></argsstring>
+        <name>groupBox1</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/MxGeometryOptimizer.Designer.cs" line="558" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/MxGeometryOptimizer.Designer.cs" bodystart="558" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_micra_1_1_tools_1_1_mx_geometry_optimizer_1a262e85236b31128a9cb297cb5b58976a" prot="private" static="no" mutable="no">
+        <type>System.Windows.Forms.Label</type>
+        <definition>System.Windows.Forms.Label Micra.Tools.MxGeometryOptimizer.label1</definition>
+        <argsstring></argsstring>
+        <name>label1</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/MxGeometryOptimizer.Designer.cs" line="559" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/MxGeometryOptimizer.Designer.cs" bodystart="559" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_micra_1_1_tools_1_1_mx_geometry_optimizer_1a6ac77d5ccf20d19c154ed924c8944ad0" prot="private" static="no" mutable="no">
+        <type>System.Windows.Forms.NumericUpDown</type>
+        <definition>System.Windows.Forms.NumericUpDown Micra.Tools.MxGeometryOptimizer.SpnAreaOffset</definition>
+        <argsstring></argsstring>
+        <name>SpnAreaOffset</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/MxGeometryOptimizer.Designer.cs" line="560" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/MxGeometryOptimizer.Designer.cs" bodystart="560" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_micra_1_1_tools_1_1_mx_geometry_optimizer_1af4f94b118f6162733725991b6ae6b88d" prot="private" static="no" mutable="no">
+        <type>System.Windows.Forms.Label</type>
+        <definition>System.Windows.Forms.Label Micra.Tools.MxGeometryOptimizer.label6</definition>
+        <argsstring></argsstring>
+        <name>label6</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/MxGeometryOptimizer.Designer.cs" line="561" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/MxGeometryOptimizer.Designer.cs" bodystart="561" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_micra_1_1_tools_1_1_mx_geometry_optimizer_1a2a87827f3737980bbac59f91ab962e27" prot="private" static="no" mutable="no">
+        <type>System.Windows.Forms.Label</type>
+        <definition>System.Windows.Forms.Label Micra.Tools.MxGeometryOptimizer.label4</definition>
+        <argsstring></argsstring>
+        <name>label4</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/MxGeometryOptimizer.Designer.cs" line="562" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/MxGeometryOptimizer.Designer.cs" bodystart="562" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_micra_1_1_tools_1_1_mx_geometry_optimizer_1af4b632b4abcd6bbdb1ec4a5e20803fbc" prot="private" static="no" mutable="no">
+        <type>System.Windows.Forms.Label</type>
+        <definition>System.Windows.Forms.Label Micra.Tools.MxGeometryOptimizer.label5</definition>
+        <argsstring></argsstring>
+        <name>label5</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/MxGeometryOptimizer.Designer.cs" line="563" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/MxGeometryOptimizer.Designer.cs" bodystart="563" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_micra_1_1_tools_1_1_mx_geometry_optimizer_1a9b3b2de0116cdea7268dc0e42a1b2fbb" prot="private" static="no" mutable="no">
+        <type>System.Windows.Forms.NumericUpDown</type>
+        <definition>System.Windows.Forms.NumericUpDown Micra.Tools.MxGeometryOptimizer.numericUpDown2</definition>
+        <argsstring></argsstring>
+        <name>numericUpDown2</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/MxGeometryOptimizer.Designer.cs" line="564" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/MxGeometryOptimizer.Designer.cs" bodystart="564" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_micra_1_1_tools_1_1_mx_geometry_optimizer_1a2944603b666430f26eba43ce77b84a36" prot="private" static="no" mutable="no">
+        <type>System.Windows.Forms.Button</type>
+        <definition>System.Windows.Forms.Button Micra.Tools.MxGeometryOptimizer.BtnSelectFacesByThickness</definition>
+        <argsstring></argsstring>
+        <name>BtnSelectFacesByThickness</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/MxGeometryOptimizer.Designer.cs" line="565" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/MxGeometryOptimizer.Designer.cs" bodystart="565" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_micra_1_1_tools_1_1_mx_geometry_optimizer_1af5d8e82a7dbb3040a95fdb3594b2f234" prot="private" static="no" mutable="no">
+        <type>System.Windows.Forms.ComboBox</type>
+        <definition>System.Windows.Forms.ComboBox Micra.Tools.MxGeometryOptimizer.comboBox1</definition>
+        <argsstring></argsstring>
+        <name>comboBox1</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/MxGeometryOptimizer.Designer.cs" line="566" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/MxGeometryOptimizer.Designer.cs" bodystart="566" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_micra_1_1_tools_1_1_mx_geometry_optimizer_1a2e2a6d8e6e825a363071ace823c57eaa" prot="private" static="no" mutable="no">
+        <type>System.Windows.Forms.Label</type>
+        <definition>System.Windows.Forms.Label Micra.Tools.MxGeometryOptimizer.label3</definition>
+        <argsstring></argsstring>
+        <name>label3</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/MxGeometryOptimizer.Designer.cs" line="567" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/MxGeometryOptimizer.Designer.cs" bodystart="567" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_micra_1_1_tools_1_1_mx_geometry_optimizer_1afdcfd48ccf6991814d2dedf6b0b11bdf" prot="private" static="no" mutable="no">
+        <type>System.Windows.Forms.Button</type>
+        <definition>System.Windows.Forms.Button Micra.Tools.MxGeometryOptimizer.BtnSelectFacesByNormal</definition>
+        <argsstring></argsstring>
+        <name>BtnSelectFacesByNormal</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/MxGeometryOptimizer.Designer.cs" line="568" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/MxGeometryOptimizer.Designer.cs" bodystart="568" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_micra_1_1_tools_1_1_mx_geometry_optimizer_1afad3da4fec32df3e01bf19985706f42a" prot="private" static="no" mutable="no">
+        <type>System.Windows.Forms.Label</type>
+        <definition>System.Windows.Forms.Label Micra.Tools.MxGeometryOptimizer.label2</definition>
+        <argsstring></argsstring>
+        <name>label2</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/MxGeometryOptimizer.Designer.cs" line="569" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/MxGeometryOptimizer.Designer.cs" bodystart="569" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_micra_1_1_tools_1_1_mx_geometry_optimizer_1a9ee13e7dade5594bf2899736540480f0" prot="private" static="no" mutable="no">
+        <type>System.Windows.Forms.GroupBox</type>
+        <definition>System.Windows.Forms.GroupBox Micra.Tools.MxGeometryOptimizer.groupBox2</definition>
+        <argsstring></argsstring>
+        <name>groupBox2</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/MxGeometryOptimizer.Designer.cs" line="570" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/MxGeometryOptimizer.Designer.cs" bodystart="570" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_micra_1_1_tools_1_1_mx_geometry_optimizer_1a04051920b2c240808b06a0e6888a5169" prot="private" static="no" mutable="no">
+        <type>System.Windows.Forms.Label</type>
+        <definition>System.Windows.Forms.Label Micra.Tools.MxGeometryOptimizer.label11</definition>
+        <argsstring></argsstring>
+        <name>label11</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/MxGeometryOptimizer.Designer.cs" line="571" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/MxGeometryOptimizer.Designer.cs" bodystart="571" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_micra_1_1_tools_1_1_mx_geometry_optimizer_1a6f05d4a67f87ea8b7d3191687201955b" prot="private" static="no" mutable="no">
+        <type>System.Windows.Forms.Label</type>
+        <definition>System.Windows.Forms.Label Micra.Tools.MxGeometryOptimizer.label12</definition>
+        <argsstring></argsstring>
+        <name>label12</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/MxGeometryOptimizer.Designer.cs" line="572" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/MxGeometryOptimizer.Designer.cs" bodystart="572" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_micra_1_1_tools_1_1_mx_geometry_optimizer_1a33b58459b1262fbb224f2a12af9fb2e7" prot="private" static="no" mutable="no">
+        <type>System.Windows.Forms.NumericUpDown</type>
+        <definition>System.Windows.Forms.NumericUpDown Micra.Tools.MxGeometryOptimizer.numericUpDown4</definition>
+        <argsstring></argsstring>
+        <name>numericUpDown4</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/MxGeometryOptimizer.Designer.cs" line="573" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/MxGeometryOptimizer.Designer.cs" bodystart="573" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_micra_1_1_tools_1_1_mx_geometry_optimizer_1aeaabac2f417a1f3257b3286c16ffa3b0" prot="private" static="no" mutable="no">
+        <type>System.Windows.Forms.Button</type>
+        <definition>System.Windows.Forms.Button Micra.Tools.MxGeometryOptimizer.BtnOptimizeEring</definition>
+        <argsstring></argsstring>
+        <name>BtnOptimizeEring</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/MxGeometryOptimizer.Designer.cs" line="574" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/MxGeometryOptimizer.Designer.cs" bodystart="574" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_micra_1_1_tools_1_1_mx_geometry_optimizer_1a41801332fbc6f6b5d2a7123b07fe41f2" prot="private" static="no" mutable="no">
+        <type>System.Windows.Forms.GroupBox</type>
+        <definition>System.Windows.Forms.GroupBox Micra.Tools.MxGeometryOptimizer.groupBox3</definition>
+        <argsstring></argsstring>
+        <name>groupBox3</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/MxGeometryOptimizer.Designer.cs" line="575" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/MxGeometryOptimizer.Designer.cs" bodystart="575" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_micra_1_1_tools_1_1_mx_geometry_optimizer_1a044d7ec5490fd15d6c77e688a7f1a8a6" prot="private" static="no" mutable="no">
+        <type>System.Windows.Forms.Label</type>
+        <definition>System.Windows.Forms.Label Micra.Tools.MxGeometryOptimizer.label9</definition>
+        <argsstring></argsstring>
+        <name>label9</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/MxGeometryOptimizer.Designer.cs" line="576" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/MxGeometryOptimizer.Designer.cs" bodystart="576" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_micra_1_1_tools_1_1_mx_geometry_optimizer_1ab3a38e7fcfcc7085aefa3c9dca7e04ba" prot="private" static="no" mutable="no">
+        <type>System.Windows.Forms.NumericUpDown</type>
+        <definition>System.Windows.Forms.NumericUpDown Micra.Tools.MxGeometryOptimizer.numericUpDown5</definition>
+        <argsstring></argsstring>
+        <name>numericUpDown5</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/MxGeometryOptimizer.Designer.cs" line="577" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/MxGeometryOptimizer.Designer.cs" bodystart="577" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_micra_1_1_tools_1_1_mx_geometry_optimizer_1aa85a78b51c2b21a16452ad3f40601831" prot="private" static="no" mutable="no">
+        <type>System.Windows.Forms.Label</type>
+        <definition>System.Windows.Forms.Label Micra.Tools.MxGeometryOptimizer.label7</definition>
+        <argsstring></argsstring>
+        <name>label7</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/MxGeometryOptimizer.Designer.cs" line="578" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/MxGeometryOptimizer.Designer.cs" bodystart="578" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_micra_1_1_tools_1_1_mx_geometry_optimizer_1a1a214ac3fcf1b5624d4d536a240024d8" prot="private" static="no" mutable="no">
+        <type>System.Windows.Forms.Label</type>
+        <definition>System.Windows.Forms.Label Micra.Tools.MxGeometryOptimizer.label8</definition>
+        <argsstring></argsstring>
+        <name>label8</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/MxGeometryOptimizer.Designer.cs" line="579" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/MxGeometryOptimizer.Designer.cs" bodystart="579" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_micra_1_1_tools_1_1_mx_geometry_optimizer_1ae34ef3231875b7cf683d965bbdc92b35" prot="private" static="no" mutable="no">
+        <type>System.Windows.Forms.NumericUpDown</type>
+        <definition>System.Windows.Forms.NumericUpDown Micra.Tools.MxGeometryOptimizer.numericUpDown3</definition>
+        <argsstring></argsstring>
+        <name>numericUpDown3</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/MxGeometryOptimizer.Designer.cs" line="580" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/MxGeometryOptimizer.Designer.cs" bodystart="580" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_micra_1_1_tools_1_1_mx_geometry_optimizer_1a49d81bc9ef5a21917844a2839a725864" prot="private" static="no" mutable="no">
+        <type>System.Windows.Forms.Button</type>
+        <definition>System.Windows.Forms.Button Micra.Tools.MxGeometryOptimizer.BtnCreateConvexHull</definition>
+        <argsstring></argsstring>
+        <name>BtnCreateConvexHull</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/MxGeometryOptimizer.Designer.cs" line="581" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/MxGeometryOptimizer.Designer.cs" bodystart="581" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_micra_1_1_tools_1_1_mx_geometry_optimizer_1acff100e07e25b7be1715052fd4a87f46" prot="private" static="no" mutable="no">
+        <type>System.Windows.Forms.Button</type>
+        <definition>System.Windows.Forms.Button Micra.Tools.MxGeometryOptimizer.BtnFlatenByNormal</definition>
+        <argsstring></argsstring>
+        <name>BtnFlatenByNormal</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/MxGeometryOptimizer.Designer.cs" line="582" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/MxGeometryOptimizer.Designer.cs" bodystart="582" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_micra_1_1_tools_1_1_mx_geometry_optimizer_1a6302d01a6cdf1ef0cb7c74219722ea3d" prot="private" static="no" mutable="no">
+        <type>System.Windows.Forms.Button</type>
+        <definition>System.Windows.Forms.Button Micra.Tools.MxGeometryOptimizer.BtnFlatenTop</definition>
+        <argsstring></argsstring>
+        <name>BtnFlatenTop</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/MxGeometryOptimizer.Designer.cs" line="583" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/MxGeometryOptimizer.Designer.cs" bodystart="583" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_micra_1_1_tools_1_1_mx_geometry_optimizer_1a1a5e08c2c15fc76cc9ce7cc9ab05d173" prot="private" static="no" mutable="no">
+        <type>System.Windows.Forms.Button</type>
+        <definition>System.Windows.Forms.Button Micra.Tools.MxGeometryOptimizer.BtnFuseEdges</definition>
+        <argsstring></argsstring>
+        <name>BtnFuseEdges</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/MxGeometryOptimizer.Designer.cs" line="584" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/MxGeometryOptimizer.Designer.cs" bodystart="584" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_micra_1_1_tools_1_1_mx_geometry_optimizer_1abec20e61f1f74aaba8de03d1596a5bce" prot="private" static="no" mutable="no">
+        <type>System.Windows.Forms.Button</type>
+        <definition>System.Windows.Forms.Button Micra.Tools.MxGeometryOptimizer.BtnUnchamferEring</definition>
+        <argsstring></argsstring>
+        <name>BtnUnchamferEring</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/MxGeometryOptimizer.Designer.cs" line="585" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/MxGeometryOptimizer.Designer.cs" bodystart="585" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_micra_1_1_tools_1_1_mx_geometry_optimizer_1a5356b916c7dce2f7fe3b663f3dcf0850" prot="private" static="no" mutable="no">
+        <type>System.Windows.Forms.Button</type>
+        <definition>System.Windows.Forms.Button Micra.Tools.MxGeometryOptimizer.BtnCreateBoundingBox</definition>
+        <argsstring></argsstring>
+        <name>BtnCreateBoundingBox</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/MxGeometryOptimizer.Designer.cs" line="586" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/MxGeometryOptimizer.Designer.cs" bodystart="586" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_micra_1_1_tools_1_1_mx_geometry_optimizer_1a4b3fed7162510537d0852bf7071f8943" prot="private" static="no" mutable="no">
+        <type>System.Windows.Forms.Button</type>
+        <definition>System.Windows.Forms.Button Micra.Tools.MxGeometryOptimizer.BtnCreateBoundingPlane</definition>
+        <argsstring></argsstring>
+        <name>BtnCreateBoundingPlane</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/MxGeometryOptimizer.Designer.cs" line="587" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/MxGeometryOptimizer.Designer.cs" bodystart="587" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_micra_1_1_tools_1_1_mx_geometry_optimizer_1ad04d0f965d5b4a23b8860b21cf845759" prot="private" static="no" mutable="no">
+        <type>System.Windows.Forms.CheckBox</type>
+        <definition>System.Windows.Forms.CheckBox Micra.Tools.MxGeometryOptimizer.checkBox1</definition>
+        <argsstring></argsstring>
+        <name>checkBox1</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/MxGeometryOptimizer.Designer.cs" line="588" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/MxGeometryOptimizer.Designer.cs" bodystart="588" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_micra_1_1_tools_1_1_mx_geometry_optimizer_1af119a574e00e94baf1ec3c49a55b3fa6" prot="private" static="no" mutable="no">
+        <type>System.Windows.Forms.Label</type>
+        <definition>System.Windows.Forms.Label Micra.Tools.MxGeometryOptimizer.label10</definition>
+        <argsstring></argsstring>
+        <name>label10</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/MxGeometryOptimizer.Designer.cs" line="589" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/MxGeometryOptimizer.Designer.cs" bodystart="589" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_micra_1_1_tools_1_1_mx_geometry_optimizer_1a059ef6ea2b66a4024eadf43fddcf50ea" prot="private" static="no" mutable="no">
+        <type>System.Windows.Forms.NumericUpDown</type>
+        <definition>System.Windows.Forms.NumericUpDown Micra.Tools.MxGeometryOptimizer.numericUpDown6</definition>
+        <argsstring></argsstring>
+        <name>numericUpDown6</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/MxGeometryOptimizer.Designer.cs" line="590" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/MxGeometryOptimizer.Designer.cs" bodystart="590" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_micra_1_1_tools_1_1_mx_geometry_optimizer_1a0951d7e96affd4ad0a4e931997a528b8" prot="private" static="no" mutable="no">
+        <type>System.Windows.Forms.Button</type>
+        <definition>System.Windows.Forms.Button Micra.Tools.MxGeometryOptimizer.button12</definition>
+        <argsstring></argsstring>
+        <name>button12</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/MxGeometryOptimizer.Designer.cs" line="591" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/MxGeometryOptimizer.Designer.cs" bodystart="591" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_micra_1_1_tools_1_1_mx_geometry_optimizer_1ad7004a101097349a14a6e3b06f888054" prot="private" static="no" mutable="no">
+        <type>System.Windows.Forms.Panel</type>
+        <definition>System.Windows.Forms.Panel Micra.Tools.MxGeometryOptimizer.TitleBar</definition>
+        <argsstring></argsstring>
+        <name>TitleBar</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/MxGeometryOptimizer.Designer.cs" line="592" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/MxGeometryOptimizer.Designer.cs" bodystart="592" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_micra_1_1_tools_1_1_mx_geometry_optimizer_1a09b2af477c6470da6507ac6a57a0c129" prot="private" static="no" mutable="no">
+        <type>System.Windows.Forms.Label</type>
+        <definition>System.Windows.Forms.Label Micra.Tools.MxGeometryOptimizer.TitleLabel</definition>
+        <argsstring></argsstring>
+        <name>TitleLabel</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/MxGeometryOptimizer.Designer.cs" line="593" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/MxGeometryOptimizer.Designer.cs" bodystart="593" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_micra_1_1_tools_1_1_mx_geometry_optimizer_1ac8e441ac53d759de3bd94c2df8a284fa" prot="private" static="no" mutable="no">
+        <type>System.Windows.Forms.Button</type>
+        <definition>System.Windows.Forms.Button Micra.Tools.MxGeometryOptimizer.BtnClose</definition>
+        <argsstring></argsstring>
+        <name>BtnClose</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/MxGeometryOptimizer.Designer.cs" line="594" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/MxGeometryOptimizer.Designer.cs" bodystart="594" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_micra_1_1_tools_1_1_mx_geometry_optimizer_1a43d56a7f5894138e0c5429017688a4e3" prot="private" static="no" mutable="no">
+        <type>System.Windows.Forms.Button</type>
+        <definition>System.Windows.Forms.Button Micra.Tools.MxGeometryOptimizer.BtnCreateConcaveHull</definition>
+        <argsstring></argsstring>
+        <name>BtnCreateConcaveHull</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/MxGeometryOptimizer.Designer.cs" line="595" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/MxGeometryOptimizer.Designer.cs" bodystart="595" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="class_micra_1_1_tools_1_1_mx_geometry_optimizer_1a9ccd6c98b73d2eab56bb0dd4fcdb99a5" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>Micra.Tools.MxGeometryOptimizer.MxGeometryOptimizer</definition>
+        <argsstring>()</argsstring>
+        <name>MxGeometryOptimizer</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/MxGeometryOptimizer.cs" line="7" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/MxGeometryOptimizer.cs" bodystart="7" bodyend="10"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-func">
+      <memberdef kind="function" id="class_micra_1_1_tools_1_1_mx_geometry_optimizer_1a6747a2c06d4030b7e98cf7eb45d525c0" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Micra.Tools.MxGeometryOptimizer.InitTooltips</definition>
+        <argsstring>()</argsstring>
+        <name>InitTooltips</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/MxGeometryOptimizer.cs" line="12" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/MxGeometryOptimizer.cs" bodystart="12" bodyend="24"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_tools_1_1_mx_geometry_optimizer_1a257cfcbb72f3308627caa266c41a0dc7" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Micra.Tools.MxGeometryOptimizer.OnToolbarDrag</definition>
+        <argsstring>(object sender, MouseEventArgs e)</argsstring>
+        <name>OnToolbarDrag</name>
+        <param>
+          <type>object</type>
+          <declname>sender</declname>
+        </param>
+        <param>
+          <type>MouseEventArgs</type>
+          <declname>e</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/MxGeometryOptimizer.cs" line="26" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/MxGeometryOptimizer.cs" bodystart="26" bodyend="36"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_tools_1_1_mx_geometry_optimizer_1a2b39188626d7711d149a5d8c70da5ed8" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Micra.Tools.MxGeometryOptimizer.BtnClose_Click</definition>
+        <argsstring>(object sender, EventArgs e)</argsstring>
+        <name>BtnClose_Click</name>
+        <param>
+          <type>object</type>
+          <declname>sender</declname>
+        </param>
+        <param>
+          <type>EventArgs</type>
+          <declname>e</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/MxGeometryOptimizer.cs" line="38" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/MxGeometryOptimizer.cs" bodystart="38" bodyend="40"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_tools_1_1_mx_geometry_optimizer_1a6db360d3247c014fd669cff303f73a41" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Micra.Tools.MxGeometryOptimizer.BtnSelSimElements_Click</definition>
+        <argsstring>(object sender, EventArgs e)</argsstring>
+        <name>BtnSelSimElements_Click</name>
+        <param>
+          <type>object</type>
+          <declname>sender</declname>
+        </param>
+        <param>
+          <type>EventArgs</type>
+          <declname>e</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/MxGeometryOptimizer.cs" line="42" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/MxGeometryOptimizer.cs" bodystart="42" bodyend="63"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_tools_1_1_mx_geometry_optimizer_1a7e57299d9074165ab2ad5fa1be63e4f9" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Micra.Tools.MxGeometryOptimizer.BtnCreateConvexHull_Click</definition>
+        <argsstring>(object sender, EventArgs e)</argsstring>
+        <name>BtnCreateConvexHull_Click</name>
+        <param>
+          <type>object</type>
+          <declname>sender</declname>
+        </param>
+        <param>
+          <type>EventArgs</type>
+          <declname>e</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/MxGeometryOptimizer.cs" line="65" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/MxGeometryOptimizer.cs" bodystart="65" bodyend="67"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_tools_1_1_mx_geometry_optimizer_1a214403443ec58bf03366c2047451efc6" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Micra.Tools.MxGeometryOptimizer.InitializeComponent</definition>
+        <argsstring>()</argsstring>
+        <name>InitializeComponent</name>
+        <briefdescription>
+<para>Required method for Designer support - do not modify the contents of this method with the code editor. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/MxGeometryOptimizer.Designer.cs" line="25" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/MxGeometryOptimizer.Designer.cs" bodystart="25" bodyend="553"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="protected-func">
+      <memberdef kind="function" id="class_micra_1_1_tools_1_1_mx_geometry_optimizer_1a55c7343e5faf0dedb327184c0685c508" prot="protected" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>override void</type>
+        <definition>override void Micra.Tools.MxGeometryOptimizer.Dispose</definition>
+        <argsstring>(bool disposing)</argsstring>
+        <name>Dispose</name>
+        <param>
+          <type>bool</type>
+          <declname>disposing</declname>
+        </param>
+        <briefdescription>
+<para>Clean up any resources being used. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>disposing</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>true if managed resources should be disposed; otherwise, false.</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/MxGeometryOptimizer.Designer.cs" line="12" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/MxGeometryOptimizer.Designer.cs" bodystart="12" bodyend="17"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="256">
+        <label>Form</label>
+      </node>
+      <node id="255">
+        <label>Micra.Tools.MxGeometryOptimizer</label>
+        <link refid="class_micra_1_1_tools_1_1_mx_geometry_optimizer"/>
+        <childnode refid="256" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="258">
+        <label>Form</label>
+      </node>
+      <node id="259">
+        <label>System</label>
+      </node>
+      <node id="257">
+        <label>Micra.Tools.MxGeometryOptimizer</label>
+        <link refid="class_micra_1_1_tools_1_1_mx_geometry_optimizer"/>
+        <childnode refid="258" relation="public-inheritance">
+        </childnode>
+        <childnode refid="259" relation="usage">
+          <edgelabel>BtnCreateConcaveHull</edgelabel>
+          <edgelabel>numericUpDown3</edgelabel>
+          <edgelabel>numericUpDown4</edgelabel>
+          <edgelabel>label1</edgelabel>
+          <edgelabel>button12</edgelabel>
+          <edgelabel>BtnCreateBoundingPlane</edgelabel>
+          <edgelabel>numericUpDown5</edgelabel>
+          <edgelabel>label2</edgelabel>
+          <edgelabel>numericUpDown6</edgelabel>
+          <edgelabel>label3</edgelabel>
+          <edgelabel>...</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/MxGeometryOptimizer.cs" line="6" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Tools/MxGeometryOptimizer.cs" bodystart="6" bodyend="68"/>
+    <listofallmembers>
+      <member refid="class_micra_1_1_tools_1_1_mx_geometry_optimizer_1ac8e441ac53d759de3bd94c2df8a284fa" prot="private" virt="non-virtual"><scope>Micra::Tools::MxGeometryOptimizer</scope><name>BtnClose</name></member>
+      <member refid="class_micra_1_1_tools_1_1_mx_geometry_optimizer_1a2b39188626d7711d149a5d8c70da5ed8" prot="private" virt="non-virtual"><scope>Micra::Tools::MxGeometryOptimizer</scope><name>BtnClose_Click</name></member>
+      <member refid="class_micra_1_1_tools_1_1_mx_geometry_optimizer_1a5356b916c7dce2f7fe3b663f3dcf0850" prot="private" virt="non-virtual"><scope>Micra::Tools::MxGeometryOptimizer</scope><name>BtnCreateBoundingBox</name></member>
+      <member refid="class_micra_1_1_tools_1_1_mx_geometry_optimizer_1a4b3fed7162510537d0852bf7071f8943" prot="private" virt="non-virtual"><scope>Micra::Tools::MxGeometryOptimizer</scope><name>BtnCreateBoundingPlane</name></member>
+      <member refid="class_micra_1_1_tools_1_1_mx_geometry_optimizer_1a43d56a7f5894138e0c5429017688a4e3" prot="private" virt="non-virtual"><scope>Micra::Tools::MxGeometryOptimizer</scope><name>BtnCreateConcaveHull</name></member>
+      <member refid="class_micra_1_1_tools_1_1_mx_geometry_optimizer_1a49d81bc9ef5a21917844a2839a725864" prot="private" virt="non-virtual"><scope>Micra::Tools::MxGeometryOptimizer</scope><name>BtnCreateConvexHull</name></member>
+      <member refid="class_micra_1_1_tools_1_1_mx_geometry_optimizer_1a7e57299d9074165ab2ad5fa1be63e4f9" prot="private" virt="non-virtual"><scope>Micra::Tools::MxGeometryOptimizer</scope><name>BtnCreateConvexHull_Click</name></member>
+      <member refid="class_micra_1_1_tools_1_1_mx_geometry_optimizer_1acff100e07e25b7be1715052fd4a87f46" prot="private" virt="non-virtual"><scope>Micra::Tools::MxGeometryOptimizer</scope><name>BtnFlatenByNormal</name></member>
+      <member refid="class_micra_1_1_tools_1_1_mx_geometry_optimizer_1a6302d01a6cdf1ef0cb7c74219722ea3d" prot="private" virt="non-virtual"><scope>Micra::Tools::MxGeometryOptimizer</scope><name>BtnFlatenTop</name></member>
+      <member refid="class_micra_1_1_tools_1_1_mx_geometry_optimizer_1a1a5e08c2c15fc76cc9ce7cc9ab05d173" prot="private" virt="non-virtual"><scope>Micra::Tools::MxGeometryOptimizer</scope><name>BtnFuseEdges</name></member>
+      <member refid="class_micra_1_1_tools_1_1_mx_geometry_optimizer_1aeaabac2f417a1f3257b3286c16ffa3b0" prot="private" virt="non-virtual"><scope>Micra::Tools::MxGeometryOptimizer</scope><name>BtnOptimizeEring</name></member>
+      <member refid="class_micra_1_1_tools_1_1_mx_geometry_optimizer_1afdcfd48ccf6991814d2dedf6b0b11bdf" prot="private" virt="non-virtual"><scope>Micra::Tools::MxGeometryOptimizer</scope><name>BtnSelectFacesByNormal</name></member>
+      <member refid="class_micra_1_1_tools_1_1_mx_geometry_optimizer_1a2944603b666430f26eba43ce77b84a36" prot="private" virt="non-virtual"><scope>Micra::Tools::MxGeometryOptimizer</scope><name>BtnSelectFacesByThickness</name></member>
+      <member refid="class_micra_1_1_tools_1_1_mx_geometry_optimizer_1ae1446b0cc3944eef0fe7348eaeaeb4f1" prot="private" virt="non-virtual"><scope>Micra::Tools::MxGeometryOptimizer</scope><name>BtnSelSimElements</name></member>
+      <member refid="class_micra_1_1_tools_1_1_mx_geometry_optimizer_1a6db360d3247c014fd669cff303f73a41" prot="private" virt="non-virtual"><scope>Micra::Tools::MxGeometryOptimizer</scope><name>BtnSelSimElements_Click</name></member>
+      <member refid="class_micra_1_1_tools_1_1_mx_geometry_optimizer_1abec20e61f1f74aaba8de03d1596a5bce" prot="private" virt="non-virtual"><scope>Micra::Tools::MxGeometryOptimizer</scope><name>BtnUnchamferEring</name></member>
+      <member refid="class_micra_1_1_tools_1_1_mx_geometry_optimizer_1a0951d7e96affd4ad0a4e931997a528b8" prot="private" virt="non-virtual"><scope>Micra::Tools::MxGeometryOptimizer</scope><name>button12</name></member>
+      <member refid="class_micra_1_1_tools_1_1_mx_geometry_optimizer_1ad04d0f965d5b4a23b8860b21cf845759" prot="private" virt="non-virtual"><scope>Micra::Tools::MxGeometryOptimizer</scope><name>checkBox1</name></member>
+      <member refid="class_micra_1_1_tools_1_1_mx_geometry_optimizer_1af5d8e82a7dbb3040a95fdb3594b2f234" prot="private" virt="non-virtual"><scope>Micra::Tools::MxGeometryOptimizer</scope><name>comboBox1</name></member>
+      <member refid="class_micra_1_1_tools_1_1_mx_geometry_optimizer_1af736ca571e83bb0a62019db88ed0a69b" prot="private" virt="non-virtual"><scope>Micra::Tools::MxGeometryOptimizer</scope><name>components</name></member>
+      <member refid="class_micra_1_1_tools_1_1_mx_geometry_optimizer_1a55c7343e5faf0dedb327184c0685c508" prot="protected" virt="non-virtual"><scope>Micra::Tools::MxGeometryOptimizer</scope><name>Dispose</name></member>
+      <member refid="class_micra_1_1_tools_1_1_mx_geometry_optimizer_1af9ee5207cd3bdaa15e263bd86868820a" prot="private" virt="non-virtual"><scope>Micra::Tools::MxGeometryOptimizer</scope><name>groupBox1</name></member>
+      <member refid="class_micra_1_1_tools_1_1_mx_geometry_optimizer_1a9ee13e7dade5594bf2899736540480f0" prot="private" virt="non-virtual"><scope>Micra::Tools::MxGeometryOptimizer</scope><name>groupBox2</name></member>
+      <member refid="class_micra_1_1_tools_1_1_mx_geometry_optimizer_1a41801332fbc6f6b5d2a7123b07fe41f2" prot="private" virt="non-virtual"><scope>Micra::Tools::MxGeometryOptimizer</scope><name>groupBox3</name></member>
+      <member refid="class_micra_1_1_tools_1_1_mx_geometry_optimizer_1a214403443ec58bf03366c2047451efc6" prot="private" virt="non-virtual"><scope>Micra::Tools::MxGeometryOptimizer</scope><name>InitializeComponent</name></member>
+      <member refid="class_micra_1_1_tools_1_1_mx_geometry_optimizer_1a6747a2c06d4030b7e98cf7eb45d525c0" prot="private" virt="non-virtual"><scope>Micra::Tools::MxGeometryOptimizer</scope><name>InitTooltips</name></member>
+      <member refid="class_micra_1_1_tools_1_1_mx_geometry_optimizer_1a262e85236b31128a9cb297cb5b58976a" prot="private" virt="non-virtual"><scope>Micra::Tools::MxGeometryOptimizer</scope><name>label1</name></member>
+      <member refid="class_micra_1_1_tools_1_1_mx_geometry_optimizer_1af119a574e00e94baf1ec3c49a55b3fa6" prot="private" virt="non-virtual"><scope>Micra::Tools::MxGeometryOptimizer</scope><name>label10</name></member>
+      <member refid="class_micra_1_1_tools_1_1_mx_geometry_optimizer_1a04051920b2c240808b06a0e6888a5169" prot="private" virt="non-virtual"><scope>Micra::Tools::MxGeometryOptimizer</scope><name>label11</name></member>
+      <member refid="class_micra_1_1_tools_1_1_mx_geometry_optimizer_1a6f05d4a67f87ea8b7d3191687201955b" prot="private" virt="non-virtual"><scope>Micra::Tools::MxGeometryOptimizer</scope><name>label12</name></member>
+      <member refid="class_micra_1_1_tools_1_1_mx_geometry_optimizer_1afad3da4fec32df3e01bf19985706f42a" prot="private" virt="non-virtual"><scope>Micra::Tools::MxGeometryOptimizer</scope><name>label2</name></member>
+      <member refid="class_micra_1_1_tools_1_1_mx_geometry_optimizer_1a2e2a6d8e6e825a363071ace823c57eaa" prot="private" virt="non-virtual"><scope>Micra::Tools::MxGeometryOptimizer</scope><name>label3</name></member>
+      <member refid="class_micra_1_1_tools_1_1_mx_geometry_optimizer_1a2a87827f3737980bbac59f91ab962e27" prot="private" virt="non-virtual"><scope>Micra::Tools::MxGeometryOptimizer</scope><name>label4</name></member>
+      <member refid="class_micra_1_1_tools_1_1_mx_geometry_optimizer_1af4b632b4abcd6bbdb1ec4a5e20803fbc" prot="private" virt="non-virtual"><scope>Micra::Tools::MxGeometryOptimizer</scope><name>label5</name></member>
+      <member refid="class_micra_1_1_tools_1_1_mx_geometry_optimizer_1af4f94b118f6162733725991b6ae6b88d" prot="private" virt="non-virtual"><scope>Micra::Tools::MxGeometryOptimizer</scope><name>label6</name></member>
+      <member refid="class_micra_1_1_tools_1_1_mx_geometry_optimizer_1aa85a78b51c2b21a16452ad3f40601831" prot="private" virt="non-virtual"><scope>Micra::Tools::MxGeometryOptimizer</scope><name>label7</name></member>
+      <member refid="class_micra_1_1_tools_1_1_mx_geometry_optimizer_1a1a214ac3fcf1b5624d4d536a240024d8" prot="private" virt="non-virtual"><scope>Micra::Tools::MxGeometryOptimizer</scope><name>label8</name></member>
+      <member refid="class_micra_1_1_tools_1_1_mx_geometry_optimizer_1a044d7ec5490fd15d6c77e688a7f1a8a6" prot="private" virt="non-virtual"><scope>Micra::Tools::MxGeometryOptimizer</scope><name>label9</name></member>
+      <member refid="class_micra_1_1_tools_1_1_mx_geometry_optimizer_1a9ccd6c98b73d2eab56bb0dd4fcdb99a5" prot="public" virt="non-virtual"><scope>Micra::Tools::MxGeometryOptimizer</scope><name>MxGeometryOptimizer</name></member>
+      <member refid="class_micra_1_1_tools_1_1_mx_geometry_optimizer_1a9b3b2de0116cdea7268dc0e42a1b2fbb" prot="private" virt="non-virtual"><scope>Micra::Tools::MxGeometryOptimizer</scope><name>numericUpDown2</name></member>
+      <member refid="class_micra_1_1_tools_1_1_mx_geometry_optimizer_1ae34ef3231875b7cf683d965bbdc92b35" prot="private" virt="non-virtual"><scope>Micra::Tools::MxGeometryOptimizer</scope><name>numericUpDown3</name></member>
+      <member refid="class_micra_1_1_tools_1_1_mx_geometry_optimizer_1a33b58459b1262fbb224f2a12af9fb2e7" prot="private" virt="non-virtual"><scope>Micra::Tools::MxGeometryOptimizer</scope><name>numericUpDown4</name></member>
+      <member refid="class_micra_1_1_tools_1_1_mx_geometry_optimizer_1ab3a38e7fcfcc7085aefa3c9dca7e04ba" prot="private" virt="non-virtual"><scope>Micra::Tools::MxGeometryOptimizer</scope><name>numericUpDown5</name></member>
+      <member refid="class_micra_1_1_tools_1_1_mx_geometry_optimizer_1a059ef6ea2b66a4024eadf43fddcf50ea" prot="private" virt="non-virtual"><scope>Micra::Tools::MxGeometryOptimizer</scope><name>numericUpDown6</name></member>
+      <member refid="class_micra_1_1_tools_1_1_mx_geometry_optimizer_1a257cfcbb72f3308627caa266c41a0dc7" prot="private" virt="non-virtual"><scope>Micra::Tools::MxGeometryOptimizer</scope><name>OnToolbarDrag</name></member>
+      <member refid="class_micra_1_1_tools_1_1_mx_geometry_optimizer_1a6ac77d5ccf20d19c154ed924c8944ad0" prot="private" virt="non-virtual"><scope>Micra::Tools::MxGeometryOptimizer</scope><name>SpnAreaOffset</name></member>
+      <member refid="class_micra_1_1_tools_1_1_mx_geometry_optimizer_1ad7004a101097349a14a6e3b06f888054" prot="private" virt="non-virtual"><scope>Micra::Tools::MxGeometryOptimizer</scope><name>TitleBar</name></member>
+      <member refid="class_micra_1_1_tools_1_1_mx_geometry_optimizer_1a09b2af477c6470da6507ac6a57a0c129" prot="private" virt="non-virtual"><scope>Micra::Tools::MxGeometryOptimizer</scope><name>TitleLabel</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

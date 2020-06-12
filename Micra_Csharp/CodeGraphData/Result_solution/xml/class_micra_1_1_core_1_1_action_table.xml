@@ -1,0 +1,115 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
+  <compounddef id="class_micra_1_1_core_1_1_action_table" kind="class" prot="public">
+    <compoundname>Micra::Core::ActionTable</compoundname>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="class_micra_1_1_core_1_1_action_table_1a931cdf955389cd881c3ba16b88ec46d6" prot="private" static="no" mutable="no">
+        <type>readonly IActionTable</type>
+        <definition>readonly IActionTable Micra.Core.ActionTable.at</definition>
+        <argsstring></argsstring>
+        <name>at</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/ActionManager.cs" line="29" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/ActionManager.cs" bodystart="29" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="property">
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_action_table_1ae668ec64dbe2898797bcd0382dfd5417" prot="public" static="no" readable="no" writable="no" gettable="yes" settable="no">
+        <type>IActionTable</type>
+        <definition>IActionTable Micra.Core.ActionTable._ActionTable</definition>
+        <argsstring></argsstring>
+        <name>_ActionTable</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/ActionManager.cs" line="31" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/ActionManager.cs" bodystart="31" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_micra_1_1_core_1_1_action_table_1ad6ad8dd17d3a94b37975ca077dd8dd9f" prot="public" static="no" readable="no" writable="no" gettable="yes" settable="no">
+        <type>IEnumerable&lt; <ref refid="class_micra_1_1_core_1_1_action_item" kindref="compound">ActionItem</ref> &gt;</type>
+        <definition>IEnumerable&lt;ActionItem&gt; Micra.Core.ActionTable.Actions</definition>
+        <argsstring></argsstring>
+        <name>Actions</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/ActionManager.cs" line="34" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/ActionManager.cs" bodystart="34" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_action_table_1a6817479bcf2f6da69751b47e025e79e2" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>Micra.Core.ActionTable.ActionTable</definition>
+        <argsstring>(IActionTable at)</argsstring>
+        <name>ActionTable</name>
+        <param>
+          <type>IActionTable</type>
+          <declname>at</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/ActionManager.cs" line="32" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/ActionManager.cs" bodystart="32" bodyend="32"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_action_table_1a1e69e79fff6ae0b264743ff1b64ba597" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Micra.Core.ActionTable.Append</definition>
+        <argsstring>(ActionItem action)</argsstring>
+        <name>Append</name>
+        <param>
+          <type><ref refid="class_micra_1_1_core_1_1_action_item" kindref="compound">ActionItem</ref></type>
+          <declname>action</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/ActionManager.cs" line="41" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/ActionManager.cs" bodystart="41" bodyend="41"/>
+      </memberdef>
+      <memberdef kind="function" id="class_micra_1_1_core_1_1_action_table_1a1eb479e9c77d0626863524167eaa7b34" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Micra.Core.ActionTable.Delete</definition>
+        <argsstring>(ActionItem action)</argsstring>
+        <name>Delete</name>
+        <param>
+          <type><ref refid="class_micra_1_1_core_1_1_action_item" kindref="compound">ActionItem</ref></type>
+          <declname>action</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/ActionManager.cs" line="42" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/ActionManager.cs" bodystart="42" bodyend="42"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Wraps a <ref refid="class_micra_1_1_core_1_1_action_table" kindref="compound">ActionTable</ref> in the 3ds <ref refid="class_micra_1_1_core_1_1_max" kindref="compound">Max</ref> SDK. </para>    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/ActionManager.cs" line="28" column="1" bodyfile="D:/ReneBaca/Aprog/Micra/Micra_Csharp/Micra.Core/ActionManager.cs" bodystart="28" bodyend="43"/>
+    <listofallmembers>
+      <member refid="class_micra_1_1_core_1_1_action_table_1ae668ec64dbe2898797bcd0382dfd5417" prot="public" virt="non-virtual"><scope>Micra::Core::ActionTable</scope><name>_ActionTable</name></member>
+      <member refid="class_micra_1_1_core_1_1_action_table_1ad6ad8dd17d3a94b37975ca077dd8dd9f" prot="public" virt="non-virtual"><scope>Micra::Core::ActionTable</scope><name>Actions</name></member>
+      <member refid="class_micra_1_1_core_1_1_action_table_1a6817479bcf2f6da69751b47e025e79e2" prot="public" virt="non-virtual"><scope>Micra::Core::ActionTable</scope><name>ActionTable</name></member>
+      <member refid="class_micra_1_1_core_1_1_action_table_1a1e69e79fff6ae0b264743ff1b64ba597" prot="public" virt="non-virtual"><scope>Micra::Core::ActionTable</scope><name>Append</name></member>
+      <member refid="class_micra_1_1_core_1_1_action_table_1a931cdf955389cd881c3ba16b88ec46d6" prot="private" virt="non-virtual"><scope>Micra::Core::ActionTable</scope><name>at</name></member>
+      <member refid="class_micra_1_1_core_1_1_action_table_1a1eb479e9c77d0626863524167eaa7b34" prot="public" virt="non-virtual"><scope>Micra::Core::ActionTable</scope><name>Delete</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>
