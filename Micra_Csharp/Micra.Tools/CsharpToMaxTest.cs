@@ -28,6 +28,7 @@ namespace Micra.Tools {
             CbxSceneNodeTypes.SelectedIndex = 0;
             CbxPrimitiveTypes.SelectedIndex = 0;
             CbxMaxFilePath.SelectedIndex = 0;
+            CbxSimillarObjBy.SelectedIndex = 0;
 
             CbxScriptList.Items.AddRange(new object[]{
                 "SelFaces",
@@ -36,7 +37,8 @@ namespace Micra.Tools {
                 "3Boxes",
                 "Render",
                 "GetFaceArea",
-                "GetObjectArea"
+                "GetObjectArea",
+                "GetSelectedVertices"
             });
             CbxScriptList.SelectedIndex = 0;
         }
@@ -53,15 +55,8 @@ namespace Micra.Tools {
 
         /// <summary> Load Max String Commands in to TextBox</summary>
         private void OnCbxScriptListSelChanges(object sender, EventArgs e) {
-            string cmd = Switch.On(CbxScriptList.Text)
-                .Case("SelFaces").Then(MxFile.GetMaxScriptFromXML(MaxActionsXML, "SelFaces"))
-                .Case("SelEdges").Then(MxFile.GetMaxScriptFromXML(MaxActionsXML, "SelEdges"))
-                .Case("SelVerts").Then(MxFile.GetMaxScriptFromXML(MaxActionsXML, "SelVerts"))
-                .Case("3Boxes").Then(MxFile.GetMaxScriptFromXML(MaxActionsXML, "3Boxes"))
-                .Case("Render").Then("Render()")
-                .Case("GetFaceArea").Then(MxFile.GetMaxScriptFromXML(MaxActionsXML, "GetFaceArea"))
-                .Case("GetObjectArea").Then(MxFile.GetMaxScriptFromXML(MaxActionsXML, "GetObjectArea"))
-                .Default("");
+
+            string cmd = MxFile.GetMaxScriptFromXML(MaxActionsXML, CbxScriptList.Text);
             textBox1.Text = cmd.Replace("\n", Environment.NewLine);
         }
 
@@ -117,7 +112,9 @@ namespace Micra.Tools {
 
             } else if ( selNodes.Count() >= 1 ) { //when multi object selection
 
-                ObjOps.SelectSimillarNodes(selNodes);
+                bool byArea = CbxSimillarObjBy.SelectedIndex == 0 || CbxSimillarObjBy.SelectedIndex == 1;
+                bool byVcount = CbxSimillarObjBy.SelectedIndex == 2;
+                ObjOps.SelectSimillarNodes(selNodes, byArea, byVcount);
             }
         }
 
@@ -400,22 +397,26 @@ namespace Micra.Tools {
             });
         }
 
-
-
         private void ChkSelected_CheckedChanged(object sender, EventArgs e) {
 
         }
 
-        private void BtnSelFacesOtToTri_Click(object sender, EventArgs e) {
+        private void BtnFacesCount_Click(object sender, EventArgs e) {
             Kernel.WriteLine(( sender as Button ).Text);
             Node node = ObjOps.GetFirstSlectedNode();
-            Poly poly = node.GetPoly();
-            var fsel = node.Object.GetSelectedFaces();
-            fsel.ForEach(f => {
+            Max.Log("Faces count:{0}", node.Object.NumFaces);
+        }
 
-                double area = poly.GtiTrifaceArea(f);
-                Kernel.WriteLine("Face:{0} Area:{1}", f, area);
-            });
+        private void BtnEdgesCount_Click(object sender, EventArgs e) {
+            Kernel.WriteLine(( sender as Button ).Text);
+            Node node = ObjOps.GetFirstSlectedNode();
+            Max.Log("Edges count:{0}", node.Object.NumEdges);
+        }
+
+        private void BtnVertsCount_Click(object sender, EventArgs e) {
+            Kernel.WriteLine(( sender as Button ).Text);
+            Node node = ObjOps.GetFirstSlectedNode();
+            Max.Log("Verts count:{0}", node.Object.NumVerts);
         }
     }
 }

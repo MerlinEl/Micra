@@ -1,4 +1,5 @@
 ﻿using Autodesk.Max;
+using Humanizer;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -136,40 +137,58 @@ namespace Micra.Core {
             //Kernel._Interface.RedrawViews(Kernel.Now, RedrawFlags.End, null);
             if ( redraw ) Kernel.RedrawViews();
         }
+        /// <summary>
+        /// Select simillar nodes based on vertex count and faces area
+        /// </summary>
+        /// <param name="srcNodes"></param>
+        public static void SelectSimillarNodes(List<Node> srcNodes, bool byArea = true, bool byVcount = false) {
 
-        public static void SelectSimillarNodes(List<Node> srcNodes) {
-
-            Kernel.WriteLine("SelectNodesWithSimillarVolume > Sel nodes:{0}", srcNodes.Count());
-            //collect selected geometry objects volumes
-            List<double> volumes = srcNodes
+            // collect selected objects (handle, area, vertnum)
+            List<ObjectData> objData = srcNodes
                 .Where(n =>
                     n.IsSuperClassOf(SuperClassID.GeometricObject) && //get all geometry objects
                     !n.IsClassOf(ClassID.TargetObject) //exclude any light Target
                 )
-                .Select(n => n.Object.GetArea()).Distinct()
+                .Select(n => new ObjectData(n.Handle, n.Object.GetArea(), n.Object.NumVerts))
                 .ToList();
+            // get only unique types
+            List<ObjectData> distinctObjData = objData
+                .GroupBy(o => new { o.AREA, o.VNUM })
+                .Select(g => g.First())
+                .ToList();
+            // print data
+            Max.Log("\t\tSource unique nodes:{0}", distinctObjData.Count());
+            //distinctObjData.ForEach(o => Max.Log("\t\tHandle:{0}\n\t\t\tArea:{1}\n\t\t\tVcount:{2}", o.HANDLE, o.AREA, o.VNUM));
 
-            Kernel.WriteLine("\tVolumes types:{0}", volumes.Count());
             IEnumerable<Node> allNodes = Kernel.Scene.AllNodes();
-            Kernel.WriteLine("\tAll nodes:{0}", allNodes.Count());
+            Kernel.WriteLine("\t\tAll scene nodes:{0}", allNodes.Count());
 
-            //get geometry objects with similar volume
-            List<Node> matchVolumeNodes = allNodes
+            //get geometry objects with similar (area, vertnum)
+            List<Node> matchNodes = allNodes
                 .Where(n =>
                     n.IsSuperClassOf(SuperClassID.GeometricObject) && //get all geometry objects
                     !n.IsClassOf(ClassID.TargetObject) && //exclude any light Target
-                    volumes.IndexOf(n.Object.GetArea()) != -1
+                    // Returns:
+                    //     The zero-based index of the first occurrence of an element
+                    //     that matches the conditions defined by match, if found; 
+                    //     otherwise, –1.
+                    objData.FindIndex(o=> o.MatchBy(
+                        new ObjectData (n.Handle, n.Object.GetArea(), n.Object.NumVerts),
+                        byArea, byVcount
+                    )) != -1
                  )
-                .Select(n => n)
+                .GroupBy(n => n.Handle) //group by handle id
+                .Select(g => g.First()) //get unique nodes by handle
                 .ToList();
 
-            Kernel.WriteLine("\tobjects count:{0}", matchVolumeNodes.Count());
+            Kernel.WriteLine("\tSimillar nodes count:{0}", matchNodes.Count());
+            //matchNodes.ForEach(o => Max.Log("\t\tHandle:{0}\n\t\t\tArea:{1}\n\t\t\tVcount:{2}", o.Handle, o.Object.GetArea(), o.Object.NumVerts));
 
             //execute action with undo enabled
-            Kernel._TheHold.Begin();
-            SelectNodes(matchVolumeNodes, true);
-            Kernel._TheHold.Accept("Select Simillar");
-            Kernel._TheHold.End();
+            Kernel.Undo.Begin();
+            SelectNodes(matchNodes, true);
+            Kernel.Undo.Accept("Select Simillar");
+            Kernel.Undo.End();
         }
 
         /*private bool IsMatchVolume(double val, List<double> valList) {
@@ -182,6 +201,25 @@ namespace Micra.Core {
             if ( nodeInstances.Count == 0 ) return;
             SelectNodes(nodeInstances);
             if ( redraw ) Kernel.RedrawViews();
+        }
+    }
+    internal class ObjectData {
+
+        public ulong HANDLE { get; set; }
+        public double AREA { get; set; } = 0.0;
+        public int VNUM { get; set; } = 0;
+        public ObjectData(ulong handle, double area = 0, int vnum = 0) {
+
+            HANDLE = handle;
+            AREA = area;
+            VNUM = vnum;
+        }
+        public bool MatchBy(ObjectData obj, bool byArea, bool byVcount) {
+
+            if ( byArea == true && byVcount == true ) return obj.AREA == AREA && obj.VNUM == VNUM;
+            if ( byArea ) return obj.AREA == AREA;
+            if ( byVcount ) return obj.VNUM == VNUM;
+            return false;
         }
     }
 }

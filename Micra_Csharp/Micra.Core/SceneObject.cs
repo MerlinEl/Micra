@@ -9,6 +9,7 @@ using Autodesk.Max;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Metadata;
 //http://docs.autodesk.com/3DSMAX/16/ENU/3ds-Max-SDK-Programmer-Guide/index.html?url=files/GUID-B2693B67-F56D-4EEB-9FB8-19700D7BAB90.htm,topicNumber=d30e23902
 namespace Micra.Core {
     /// <summary>
@@ -101,7 +102,6 @@ namespace Micra.Core {
             ITriObject tri = GetITriobject(t);
             if ( tri == null ) return null;
             Mesh r = new Mesh(tri.Mesh);
-
             if ( tri.GetType().TypeHandle.Value != _Object.GetType().TypeHandle.Value ) {
                 //if ( tri.Handle != _Object.Handle ) { //replaced with .GetType().TypeHandle 
                 RefResult rr = tri.MaybeAutoDelete();
@@ -160,6 +160,10 @@ namespace Micra.Core {
                 case nameof(ClassID.EditableMesh):return GetMesh().GetArea();
                 case nameof(ClassID.EditablePoly):return GetPoly().GetArea(); 
             }
+            if ( SuperClassOf() == nameof(SuperClassID.GeometricObject) ) {
+
+                return GetMesh().GetArea();
+            }
             return -1;
         }
 
@@ -171,6 +175,51 @@ namespace Micra.Core {
                 case nameof(ClassID.EditablePoly): return GetPoly().GetFaceArea(faceIndex);
             }
             return -1;
+        }
+
+        public int NumFaces {
+            get {
+                switch ( ClassOf() ) {
+
+                    case nameof(ClassID.EditableMesh): return GetImesh().NumFaces;
+                    case nameof(ClassID.EditablePoly): return GetIpoly().FNum;
+                }
+                if ( SuperClassOf() == nameof(SuperClassID.GeometricObject) ) {
+
+                    return GetImesh().NumFaces;
+                }
+                return -1;
+            }
+        }
+
+        public int NumEdges {
+            get {
+                switch ( ClassOf() ) {
+
+                    case nameof(ClassID.EditableMesh): return GetImesh().EdgeSel.Size; //TODO -not tested -not used
+                    case nameof(ClassID.EditablePoly): return GetIpoly().ENum;
+                }
+                if ( SuperClassOf() == nameof(SuperClassID.GeometricObject) ) {
+
+                    return GetImesh().NumFaces;
+                }
+                return -1;
+            }
+        }
+
+        public int NumVerts {
+            get {
+                 switch ( ClassOf() ) {
+
+                    case nameof(ClassID.EditableMesh): return GetImesh().NumVerts;
+                    case nameof(ClassID.EditablePoly): return GetIpoly().Numv;
+                }
+                if ( SuperClassOf() == nameof(SuperClassID.GeometricObject) ) {
+
+                    return GetImesh().NumFaces;
+                }
+                return -1;
+            }
         }
 
         public List<int> GetSelectedFaces() {

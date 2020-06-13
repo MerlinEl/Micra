@@ -45,6 +45,22 @@ fn GetObjectArea obj = (
 )
 format "Object:% Area:%\n" selection[1].Name (GetObjectArea selection[1])
   </item>
+  <item name="GetSelectedVertices">
+fn GetSelectedVertices obj = (
+    if classOf obj == Editable_Mesh then (
+
+        getVertSelection obj as array
+
+    ) else if classOf obj == Editable_Poly do (
+
+        polyOp.getVertSelection obj as array
+    )
+)
+format "Object:% Vertices:%\n" selection[1].Name (GetSelectedVertices selection[1])
+  </item>
+  <item name=""></item>
+  <item name=""></item>
+  <item name=""></item>
   <item name=""></item>
   <item name=""></item>
   <item name=""></item>

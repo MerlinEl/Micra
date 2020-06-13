@@ -1,5 +1,70 @@
 
 
+public double GtiTrifaceArea(int faceIndex) {
+
+    IMesh imesh = Kernel._Global.Mesh.Create();
+    IMNFace face = _IMNMesh.F(faceIndex);
+    ITab<int> tris = Kernel._Global.Tab.Create<int>();
+    face.GetTriangles(tris);
+
+    Max.Log("face:{0} tris:{1}", faceIndex, tris.Count);
+    for ( int i = 0; i < tris.Count; i++ ) Max.Log("\ttris:{0}", i);
+    double area = 0.0;
+    int numtriangles = face.Deg - 2;
+    int j = tris.Count - 1;
+    for ( int t = 0; t < numtriangles; ++t ) { //TODO ensure to get right vertex idex
+        int i = t * 3;
+        //Max.Log("\tv:{0} v2:{1} v3:{2}", face.Vtx[t]+1, face.Vtx[t] + 2, face.Vtx[t] + 3);
+        Max.Log("\ti:{0} v:{1} v2:{2} v3:{3}", i, face.Vtx[i] + 1, face.Vtx[i + 1] + 1, face.Vtx[t + 2] + 1);
+        //Max.Log("\tv:{0} p:{1}", face.Vtx[t]+1, face.VertIndex(face.Vtx[t], j));
+        /*area += Utility.GetTriangleArea(
+
+            new Point3(_IMNMesh.V(tris[i]  ).P),
+            new Point3(_IMNMesh.V(tris[i+1]).P),
+            new Point3(_IMNMesh.V(tris[i+2]).P)
+        );*/
+        j = t;
+    }
+    Max.Log("face{0} tris count:{1} vtx count:{2} area:{3}", faceIndex, face.TriNum, face.Vtx.Count, area);
+    //face.
+
+    /* _IMNMesh.OutToTri(imesh);
+     Max.Log("imesh\n\tsel faces:{0}", imesh.FaceSel.Size);
+     Max.Log("\t all faces:{0}", imesh.NumFaces);
+     imesh.FaceSel.ToEnumerable().ForEach((item, index) => {
+
+         Max.Log("\t\tface:{0} selected{1}", index, item);
+     });*/
+    return area;
+}
+
+polyOp.getVertSelection $ as array
+fn getFacePolyTable obj =
+(
+    local index = 0
+	local polyByFace = #()
+	format "obj:%\n" obj.name
+	for poly = 1 to polyop.getNumFaces obj do
+
+    (
+        local numTris = polyop.getFaceDeg obj poly - 2
+
+        format "\tpoly:% tris:%\n" poly numTris
+		for face = index + 1 to index + numTris do (
+            polyByFace[face] = poly
+
+            format "\t\tface:%\n" face
+
+         )
+
+        index += numTris
+	)
+	return polyByFace
+)
+getFacePolyTable $
+
+
+
 private Poly mesh2poly_csg(IMesh dag) {
 
     Point3[] pts = new Point3[] { };

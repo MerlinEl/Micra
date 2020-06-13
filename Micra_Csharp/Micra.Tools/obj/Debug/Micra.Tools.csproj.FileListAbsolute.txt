@@ -133,3 +133,9 @@ D:\ReneBaca\Aprog\Micra\Micra_Csharp\Micra.Tools\bin\Debug\pt-BR\MaxExplorerBind
 D:\ReneBaca\Aprog\Micra\Micra_Csharp\Micra.Tools\bin\Debug\zh-CN\MaxExplorerBindings.resources.dll
 D:\ReneBaca\Aprog\Micra\Micra_Csharp\Micra.Tools\bin\Debug\ExplorerFramework.xml
 D:\ReneBaca\Aprog\Micra\Micra_Csharp\Micra.Tools\obj\Debug\Micra.Tools.Properties.Resources.resources
+E:\Aprog\Orien\Micra\Micra_Csharp\Micra.Tools\obj\Debug\Micra.Tools.Properties.Resources.resources
+E:\Aprog\Orien\Micra\Micra_Csharp\Micra.Tools\bin\Debug\Humanizer.dll
+E:\Aprog\Orien\Micra\Micra_Csharp\Micra.Tools\bin\Debug\System.Collections.Immutable.dll
+E:\Aprog\Orien\Micra\Micra_Csharp\Micra.Tools\bin\Debug\System.Reflection.Metadata.dll
+E:\Aprog\Orien\Micra\Micra_Csharp\Micra.Tools\bin\Debug\System.Collections.Immutable.xml
+E:\Aprog\Orien\Micra\Micra_Csharp\Micra.Tools\bin\Debug\System.Reflection.Metadata.xml

@@ -109,7 +109,8 @@ namespace Micra.Core {
         public void FlagForeground(TimeValue t) { FlagForeground(t, false); }
         public void FlagForeground() { FlagForeground(Kernel.Now); }
 
-        public ulong NodeHandle => (ulong)_IINode.NodeLong;
+        public ulong Handle => ( ulong )_IINode.Handle;
+        //public ulong NodeHandle => (ulong)_IINode.NodeLong;  //TODO -not tested -not used
 
         public String Name {
             get { return _IINode.Name; }

@@ -192,3 +192,8 @@ D:\ReneBaca\Aprog\Micra\Micra_Csharp\bin\Debug\Micra.Core.dll
 D:\ReneBaca\Aprog\Micra\Micra_Csharp\bin\Debug\Micra.Core.pdb
 E:\Aprog\Orien\Micra\Micra_Csharp\bin\Debug\Micra.Core.dll
 E:\Aprog\Orien\Micra\Micra_Csharp\bin\Debug\Micra.Core.pdb
+E:\Aprog\Orien\Micra\Micra_Csharp\bin\Debug\Humanizer.dll
+E:\Aprog\Orien\Micra\Micra_Csharp\bin\Debug\System.Collections.Immutable.dll
+E:\Aprog\Orien\Micra\Micra_Csharp\bin\Debug\System.Reflection.Metadata.dll
+E:\Aprog\Orien\Micra\Micra_Csharp\bin\Debug\System.Collections.Immutable.xml
+E:\Aprog\Orien\Micra\Micra_Csharp\bin\Debug\System.Reflection.Metadata.xml

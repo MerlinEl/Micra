@@ -1,5 +1,6 @@
 using Autodesk.Max;
 using Autodesk.Max.Wrappers;
+using Humanizer;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,7 +18,7 @@ namespace Micra.Core {
         /// Represents a poly face. 
         /// </summary>
         [Serializable]
-        public struct Ngon {
+        public struct Ngon { //TODO -not tested -not used
             private IMNFace _IMNFace { get; }
             /// <summary>Vertex List</summary>
             public IList<int> verts => _IMNFace.Vtx;
@@ -91,89 +92,63 @@ namespace Micra.Core {
             return Vector3.Cross(a, b).Length / 2.0;
         }
 
-        public double GtiTrifaceArea(int faceIndex) {
+        public double GetFaceArea(int faceIndex) {
 
-            IMesh imesh = Kernel._Global.Mesh.Create();
-            IMNFace face = _IMNMesh.F(faceIndex);
-            ITab<int> tris = Kernel._Global.Tab.Create<int>();
-            face.GetTriangles(tris);
+            IMNFace ngon = _IMNMesh.F(faceIndex);
+            List<Point3> polygon = ngon.Vtx.Select(vi => VertPos(vi)).ToList();
+            Point3 normal = new Point3();
+            double dist = 0.0;
             double area = 0.0;
-            int numtriangles = face.Deg - 2;
-            for ( int t = 0; t < numtriangles; ++t ) { //TODO ensure to get right vertex idex
-                int i = t * 3;
-                area += Utility.GetTriangleArea(
+            int n = polygon.Count; //number of vertices
+            if ( n == 3 ) { //is triangle
+                Point3 a = polygon[0];
+                Point3 b = polygon[1];
+                Point3 c = polygon[2];
+                Point3 v = b - a;
+                normal = v.Cross(c - a);
+                dist = normal.Dot(a);
+            } else if ( n == 4 ) { //is polygon
+                Point3 a = polygon[0];
+                Point3 b = polygon[1];
+                Point3 c = polygon[2];
+                Point3 d = polygon[3];
 
-                    new Point3(_IMNMesh.V(tris[i]  ).P),
-                    new Point3(_IMNMesh.V(tris[i+1]).P),
-                    new Point3(_IMNMesh.V(tris[i+2]).P)
-                );
+                normal.X = ( c.Y - a.Y ) * ( d.Z - b.Z )
+                  + ( c.Z - a.Z ) * ( b.Y - d.Y );
+                normal.Y = ( c.Z - a.Z ) * ( d.X - b.X )
+                  + ( c.X - a.X ) * ( b.Z - d.Z );
+                normal.Z = ( c.X - a.X ) * ( d.Y - b.Y )
+                  + ( c.Y - a.Y ) * ( b.X - d.X );
+
+                dist = 0.25 *
+                  ( normal.X * ( a.X + b.X + c.X + d.X )
+                  + normal.Y * ( a.Y + b.Y + c.Y + d.Y )
+                  + normal.Z * ( a.Z + b.Z + c.Z + d.Z ) );
+            } else if ( n > 4 ) { //is ngon
+                Point3 a;
+                Point3 b = polygon[n - 2];
+                Point3 c = polygon[n - 1];
+                Point3 s = new Point3();
+
+                for ( int i = 0; i < n; ++i ) {
+                    a = b;
+                    b = c;
+                    c = polygon[i];
+
+                    normal.X += b.Y * ( c.Z - a.Z );
+                    normal.Y += b.Z * ( c.X - a.X );
+                    normal.Z += b.X * ( c.Y - a.Y );
+
+                    s += c;
+                }
+                dist = s.Dot(normal) / n;
             }
-            Max.Log("face{0} tris count:{1} vtx count:{2} area:{3}", faceIndex, face.TriNum, face.Vtx.Count, area);
-            //face.
-
-           /* _IMNMesh.OutToTri(imesh);
-            Max.Log("imesh\n\tsel faces:{0}", imesh.FaceSel.Size);
-            Max.Log("\t all faces:{0}", imesh.NumFaces);
-            imesh.FaceSel.ToEnumerable().ForEach((item, index) => {
-
-                Max.Log("\t\tface:{0} selected{1}", index, item);
-            });*/
+            float length = normal.Length;
+            normal /= length;
+            area = 0.5 * length;
             return area;
         }
-        /*
-        fn getFacePolyTable obj =
-        (
-	        local index = 0
-	        local polyByFace = #()
-            format "obj:%" obj.name
-	        for poly = 1 to polyop.getNumFaces obj do
-	        (    
-		        local numTris = polyop.getFaceDeg obj poly - 2
-                format "\tpoly:% tris:%\n" poly numTris
-		        for face = index + 1 to index + numTris do (
-                    polyByFace[face] = poly
-                    format "\t\tface:%\n" face
-                 )
-		        index += numTris
-	        )
-	        return polyByFace
-        )
-        */
-
-
-
-        /**
-            This script is based upon Heron’s Formula, which calculates 
-            the area of a triangle based upon knowing its three lengths.
-            The script also calculates the area for quads.
-            It does this by dividing the quad into two triangles.
-        */
-        public double GetFaceArea(int faceIndex) { //TODO -under testing
-
-            Ngon face = new Ngon(_IMNMesh.F(faceIndex));
-            //if there is more than 4 vertices use centralized triangulation method (MerlinEl 2020)
-            if ( face.IsNgon ) {
-
-                Point3 center = FaceCenter(faceIndex);
-                double area = 0.0;
-                //create triangle from two verts in order and center (I hope that Vtx indexes are in order)
-                for ( int i = 0; i < face.Vnum - 1; i++ ) {
-                    //get edge p1 p2 and center for triangle base
-                    area += Utility.GetTriangleArea(center, VertPos(face.verts[i]), VertPos(face.verts[i + 1]));
-                }
-                return area;
-            }
-            //get points
-            Point3 p1 = VertPos(face.verts[0]);
-            Point3 p2 = VertPos(face.verts[1]);
-            Point3 p3 = VertPos(face.verts[2]);
-            //calculate area of triangle
-            double area1 = Utility.GetTriangleArea(p1, p2, p3);
-            //if is quad, calc area of second triangle
-            double area2 = face.IsQuad ? Utility.GetTriangleArea(p1, p3, VertPos(face.verts[3])) : 0;
-            return area1 + area2;
-        }
-
+   
         /// <summary> Hide Selected or Unselected Faces
         ///     <example> 
         ///         <code>

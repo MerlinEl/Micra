@@ -49,7 +49,6 @@ namespace Micra.Core {
         public static IInterface_ID _NodeLayerProperties; //not used not tested
         public static IInterface_ID _EditablePoly; //not used not tested
         public static IMeshSelection _IMeshSelection; //not used not tested 
-        public static IHold _TheHold; //not used not tested
         internal static List<ReferenceListener> listeners = new List<ReferenceListener>();
         internal static Scene scene;
         #endregion 
@@ -62,7 +61,6 @@ namespace Micra.Core {
             _Global = GlobalInterface.Instance;
             _Interface = _Global.COREInterface17;
             _InstanceMgr = _Global.IInstanceMgr.InstanceMgr;
-            _TheHold = Kernel._Global.TheHold; //not used not tested
             scene = new Scene(_Interface);
             dispatcher = Dispatcher.CurrentDispatcher;
 
@@ -84,6 +82,8 @@ namespace Micra.Core {
             _NodeLayerProperties = _Global.Interface_ID.Create(0x44e025f8, 0x6b071e44); //not used not tested
             _EditablePoly = _Global.Interface_ID.Create(0x092779, 0x634020); //not used not tested
         }
+
+        public static IHold Undo => Kernel._Global.TheHold;
 
         public static IITimeSlider _TimeSlider {
             get {

@@ -79,5 +79,45 @@ namespace Micra.Core {
             }
             return items;
         }
+        //TODO -not tested -not used
+        /// <summary> LINQ's Distinct() on a particular property
+        ///     <example> 
+        ///         <code>
+		///             example: 
+        ///             <br>var query = people.DistinctBy(p => p.Id);</br>
+        ///             <br>var query = people.DistinctBy(p => new { p.Id, p.Name });</br>
+		///         </code>
+		///     </example>
+        /// </summary>
+        public static IEnumerable<TSource> DistinctBy<TSource, TKey> (this IEnumerable<TSource> source, Func<TSource, TKey> keySelector) {
+            HashSet<TKey> seenKeys = new HashSet<TKey>();
+            foreach ( TSource element in source ) {
+                if ( seenKeys.Add(keySelector(element)) ) {
+                    yield return element;
+                }
+            }
+        }
     }
 }
+
+
+/*
+
+
+What if I want to obtain a distinct list based on one or more properties?
+Simple! You want to group them and pick a winner out of the group.
+
+List<Person> distinctPeople = allPeople
+  .GroupBy(p => p.PersonId)
+  .Select(g => g.First())
+  .ToList();
+
+If you want to define groups on multiple properties, here's how:
+
+List<Person> distinctPeople = allPeople
+  .GroupBy(p => new {p.PersonId, p.FavoriteColor} )
+  .Select(g => g.First())
+  .ToList();
+
+
+ */

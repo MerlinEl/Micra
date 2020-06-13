@@ -47,7 +47,10 @@ namespace Micra.Core {
         public float Length { get { return (float)Math.Sqrt(LengthSquared); } }
         public float LengthSquared { get { return (float)( X * X + Y * Y + Z * Z ); } }
         public Point3 Normalized { get { float len = Length; return new Point3(X / len, Y / len, Z / len); } }
-
+        /// <summary>usage: Cross Product</summary>
+        internal Point3 Cross(Point3 v) => this ^ v;
+        /// <summary>usage: Dot Product</summary>
+        internal float Dot(Point3 v) => this * v;
         public void Normalize() { float len = Length; X /= len; Y /= len; Z /= len; }
         /// <summary>usage: Distance from current Point3 to another Point3</summary>
         internal double DistanceTo(Point3 p2) => Distance(this, p2); //TODO -not tested -not used
@@ -83,5 +86,6 @@ namespace Micra.Core {
                 }
             }
         }
+
     }
 }
