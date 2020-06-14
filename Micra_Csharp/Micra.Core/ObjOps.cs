@@ -144,15 +144,15 @@ namespace Micra.Core {
         public static void SelectSimillarNodes(List<Node> srcNodes, bool byArea = true, bool byVcount = false) {
 
             // collect selected objects (handle, area, vertnum)
-            List<ObjectData> objData = srcNodes
+            List<ObjectCompareData> objData = srcNodes
                 .Where(n =>
                     n.IsSuperClassOf(SuperClassID.GeometricObject) && //get all geometry objects
                     !n.IsClassOf(ClassID.TargetObject) //exclude any light Target
                 )
-                .Select(n => new ObjectData(n.Handle, n.Object.GetArea(), n.Object.NumVerts))
+                .Select(n => new ObjectCompareData(n.Handle, n.Object.GetArea(), n.Object.NumVerts))
                 .ToList();
             // get only unique types
-            List<ObjectData> distinctObjData = objData
+            List<ObjectCompareData> distinctObjData = objData
                 .GroupBy(o => new { o.AREA, o.VNUM })
                 .Select(g => g.First())
                 .ToList();
@@ -173,7 +173,7 @@ namespace Micra.Core {
                     //     that matches the conditions defined by match, if found; 
                     //     otherwise, –1.
                     objData.FindIndex(o=> o.MatchBy(
-                        new ObjectData (n.Handle, n.Object.GetArea(), n.Object.NumVerts),
+                        new ObjectCompareData (n.Handle, n.Object.GetArea(), n.Object.NumVerts),
                         byArea, byVcount
                     )) != -1
                  )
@@ -187,14 +187,9 @@ namespace Micra.Core {
             //execute action with undo enabled
             Kernel.Undo.Begin();
             SelectNodes(matchNodes, true);
-            Kernel.Undo.Accept("Select Simillar");
+            Kernel.Undo.Accept("Select Simillar Object's");
             Kernel.Undo.End();
         }
-
-        /*private bool IsMatchVolume(double val, List<double> valList) {
-
-            return valList.IndexOf(val) != -1;
-        }*/
 
         public static void SelectInstances(Node node, bool redraw = false) {
             var nodeInstances = GetNodeInsatances(node);
@@ -203,22 +198,22 @@ namespace Micra.Core {
             if ( redraw ) Kernel.RedrawViews();
         }
     }
-    internal class ObjectData {
+    internal class ObjectCompareData {
 
-        public ulong HANDLE { get; set; }
-        public double AREA { get; set; } = 0.0;
-        public int VNUM { get; set; } = 0;
-        public ObjectData(ulong handle, double area = 0, int vnum = 0) {
+        public ulong HANDLE { get;}
+        public double AREA { get;} = 0.0;
+        public int VNUM { get;} = 0;
+        public ObjectCompareData(ulong handle, double area = 0, int vnum = 0) {
 
             HANDLE = handle;
             AREA = area;
             VNUM = vnum;
         }
-        public bool MatchBy(ObjectData obj, bool byArea, bool byVcount) {
+        public bool MatchBy(ObjectCompareData cd, bool byArea, bool byVcount) {
 
-            if ( byArea == true && byVcount == true ) return obj.AREA == AREA && obj.VNUM == VNUM;
-            if ( byArea ) return obj.AREA == AREA;
-            if ( byVcount ) return obj.VNUM == VNUM;
+            if ( byArea == true && byVcount == true ) return cd.AREA != -1 && cd.VNUM != -1 && cd.AREA == AREA && cd.VNUM == VNUM;
+            if ( byArea ) return cd.AREA != -1 && cd.AREA == AREA;
+            if ( byVcount ) return cd.VNUM != -1 && cd.VNUM == VNUM;
             return false;
         }
     }

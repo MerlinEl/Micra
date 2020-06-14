@@ -94,6 +94,8 @@ namespace Micra.Tools {
         private void BtnSelSimElements_Click(object sender, EventArgs e) {
 
             Kernel.WriteLine(( sender as Button ).Text);
+            bool byArea = CbxSimillarObjBy.SelectedIndex == 0 || CbxSimillarObjBy.SelectedIndex == 1;
+            bool byVcount = CbxSimillarObjBy.SelectedIndex == 2;
             List<Node> selNodes = ObjOps.GetSlectedNodes();
             Kernel.WriteLine("\tSelected nodes:{0}", selNodes.Count());
             int slev = GlobalMethods.SubObjectLevel;
@@ -104,16 +106,14 @@ namespace Micra.Tools {
                 Kernel.WriteLine("selected Node:{0} subObjectLevel:{1}", node.Name, Kernel._Interface.SubObjectLevel);
                 switch ( slev ) { //next operation is depend on subobject level
 
-                    case 2: GeoOps.SelectSimillarEdges(node); break;
-                    case 3: GeoOps.SelectSimillarEdges(node); break;
-                    case 4: GeoOps.SelectSimillarFaces(node); break;
-                    case 5: GeoOps.SelectSimillarFaces(node); break;
+                    case 2: GeoOps.SelectSimillarEdges(node, byArea, byVcount); break;
+                    case 3: GeoOps.SelectSimillarEdges(node, byArea, byVcount); break;
+                    case 4: GeoOps.SelectSimillarFaces(node, byArea, byVcount); break;
+                    case 5: GeoOps.SelectSimillarElements(node, byArea, byVcount); break;
                 }
 
             } else if ( selNodes.Count() >= 1 ) { //when multi object selection
 
-                bool byArea = CbxSimillarObjBy.SelectedIndex == 0 || CbxSimillarObjBy.SelectedIndex == 1;
-                bool byVcount = CbxSimillarObjBy.SelectedIndex == 2;
                 ObjOps.SelectSimillarNodes(selNodes, byArea, byVcount);
             }
         }

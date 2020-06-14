@@ -157,8 +157,8 @@ namespace Micra.Core {
 
             switch ( ClassOf() ) {
 
-                case nameof(ClassID.EditableMesh):return GetMesh().GetArea();
-                case nameof(ClassID.EditablePoly):return GetPoly().GetArea(); 
+                case nameof(ClassID.EditableMesh): return GetMesh().GetArea();
+                case nameof(ClassID.EditablePoly): return GetPoly().GetArea();
             }
             if ( SuperClassOf() == nameof(SuperClassID.GeometricObject) ) {
 
@@ -175,6 +175,16 @@ namespace Micra.Core {
                 case nameof(ClassID.EditablePoly): return GetPoly().GetFaceArea(faceIndex);
             }
             return -1;
+        }
+
+        public List<int> GetFaceVerts(int faceIndex) {
+
+            switch ( ClassOf() ) {
+
+                case nameof(ClassID.EditableMesh): return GetMesh().GetFaceVerts(faceIndex);
+                case nameof(ClassID.EditablePoly): return GetPoly().GetFaceVerts(faceIndex);
+            }
+            return new List<int>() { };
         }
 
         public int NumFaces {
@@ -209,7 +219,7 @@ namespace Micra.Core {
 
         public int NumVerts {
             get {
-                 switch ( ClassOf() ) {
+                switch ( ClassOf() ) {
 
                     case nameof(ClassID.EditableMesh): return GetImesh().NumVerts;
                     case nameof(ClassID.EditablePoly): return GetIpoly().Numv;
@@ -252,7 +262,19 @@ namespace Micra.Core {
             return null;
         }
 
-  
+        //TODO 111111111
+        public void SetSelectedFaces(List<int> faceIndexes, bool redraw) {
+            
+            switch ( ClassOf() ) {
+
+                case nameof(ClassID.EditableMesh): GetMesh().SetSelectedFaces(faceIndexes); break;
+                case nameof(ClassID.EditablePoly): GetPoly().SetSelectedFaces(faceIndexes); break;
+            }
+            //_IGeomObject.InvalidateChannels(( uint )EnumChannels.GEOM_CHANNEL); //if need
+            if ( redraw ) Kernel.RedrawViews();
+        }
+
+
         //TODO test with modifiers
         public void SelectAll(bool redraw) {
 
@@ -289,12 +311,12 @@ namespace Micra.Core {
 
             switch ( ClassOf() ) {
 
-                case nameof(ClassID.EditableMesh):GetMesh().HideFaces(selected); break;
-                case nameof(ClassID.EditablePoly):GetPoly().HideFaces(selected);break;
-                case nameof(ClassID.SplineShape):break;
+                case nameof(ClassID.EditableMesh): GetMesh().HideFaces(selected); break;
+                case nameof(ClassID.EditablePoly): GetPoly().HideFaces(selected); break;
+                case nameof(ClassID.SplineShape): break;
             }
             if ( selected ) _IGeomObject.ClearSelection(Kernel._Interface.SubObjectLevel);
-            _IGeomObject.InvalidateChannels((uint)EnumChannels.GEOM_CHANNEL);
+            _IGeomObject.InvalidateChannels(( uint )EnumChannels.GEOM_CHANNEL);
             Kernel.RedrawViews();
         }
 
@@ -314,10 +336,10 @@ namespace Micra.Core {
         private void UnhideFaces() {
             switch ( ClassOf() ) {
 
-                case nameof(ClassID.EditableMesh):GetMesh().UnhideFaces();break;
-                case nameof(ClassID.EditablePoly):GetPoly().UnhideFaces();break;
+                case nameof(ClassID.EditableMesh): GetMesh().UnhideFaces(); break;
+                case nameof(ClassID.EditablePoly): GetPoly().UnhideFaces(); break;
             }
-            _IGeomObject.InvalidateChannels((uint)EnumChannels.GEOM_CHANNEL);
+            _IGeomObject.InvalidateChannels(( uint )EnumChannels.GEOM_CHANNEL);
             Kernel.RedrawViews();
         }
 
@@ -333,8 +355,8 @@ namespace Micra.Core {
             double edge_len = 0;
             switch ( ClassOf() ) {
 
-                case nameof(ClassID.EditableMesh): edge_len = GetMesh().EdgeLength(edgeIndex);break;
-                case nameof(ClassID.EditablePoly): edge_len = GetPoly().EdgeLength(edgeIndex);break;
+                case nameof(ClassID.EditableMesh): edge_len = GetMesh().EdgeLength(edgeIndex); break;
+                case nameof(ClassID.EditablePoly): edge_len = GetPoly().EdgeLength(edgeIndex); break;
             }
             return edge_len;
         }

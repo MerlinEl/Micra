@@ -70,6 +70,17 @@ namespace Micra.Core {
             for ( int i = 0; i < _IMNMesh.Numv; i++ ) if ( IsVertSelected(i) ) vsel.Add(i);
             return vsel;
         }
+        // TODO 111111111
+        internal void SetSelectedFaces(List<int> faceIndexes) {
+            
+            var bytes = faceIndexes.Select(i => BitConverter.GetBytes(i)).ToArray();
+            IBitArray ba = Kernel.MakeBits();
+            _IMNMesh.FaceSelect(ba);
+            //ba.
+            //
+            //faceIndexes.SelectMany<int, byte>(BitConverter.GetBytes).ToArray()
+        }
+
         /// <summary> Calculate Face, Polygon, Ngon Area
         ///     <example> 
         ///         <code>
@@ -172,6 +183,12 @@ namespace Micra.Core {
             _IMNMesh.InvalidateTopoCache(false);
             _IMNMesh.InvalidateGeomCache();
         }
+
+        internal List<int> GetFaceVerts(int faceIndex) {
+            if ( faceIndex > _IMNMesh.Numf - 1 ) throw new Exception("Face index is out of range.");
+            return _IMNMesh.F(faceIndex).Vtx.ToList();
+        }
+
         internal void UnhideFaces() {
             //_IMNMesh.F.ForEach<IMNFace>(f => ShowFace(f));
             Max.Log("UnhideFaces > on Poly!");

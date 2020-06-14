@@ -29,22 +29,53 @@ namespace Micra.Core {
             return dist;
         }
 
+        public static void SelectSimillarFaces(Node n, bool byArea = true, bool byVcount = false) {
 
-        public static void SelectSimillarFaces(Node node) {
+            Max.Log("SelectSimillarFaces > The obj:{0}", n.Name);
+            // collect selected faces (area, vertnum)
+            var fsel = n.Object.GetSelectedFaces();
+            List<GeomCompareData> objData = fsel
+                .Select(f => new GeomCompareData(f, n.Object.GetFaceArea(f), n.Object.GetFaceVerts(f).Count))
+                .ToList();
+            // get only unique types
+            List<GeomCompareData> distinctObjData = objData
+                .GroupBy(o => new { o.AREA, o.VNUM })
+                .Select(g => g.First())
+                .ToList();
+            // print data
+            Max.Log("\t\tSource unique nodes:{0}", distinctObjData.Count());
+            //distinctObjData.ForEach(o => Max.Log("\t\tHandle:{0}\n\t\t\tArea:{1}\n\t\t\tVcount:{2}", o.HANDLE, o.AREA, o.VNUM));
 
-            Max.Log("SelectSimillarFaces > The obj:{0}", node.Name);
-            List<double> source_volumes = new List<double>() { };
-            throw new NotImplementedException();
+            Kernel.WriteLine("\t\tAll nodes faces:{0}", n.Object.NumFaces);
+            List<int> matchFaces = new List<int>() { };
+            for (int f = 0; f < n.Object.NumFaces; f++ ) {
+
+                if ( objData.FindIndex(o => o.MatchBy(
+                         new GeomCompareData(f, n.Object.GetFaceArea(f), n.Object.GetFaceVerts(f).Count),
+                         byArea, byVcount
+                     )) == -1
+                 ) continue; //skip faces with different area or verts count or both
+                if ( matchFaces.IndexOf(f) == -1) matchFaces.Add(f); // add only unique face indexes
+            }
+
+            Kernel.WriteLine("\tSimillar faces count:{0}", matchFaces.Count());
+            //matchNodes.ForEach(o => Max.Log("\t\tIndex:{0}\n\t\t\tArea:{1}\n\t\t\tVcount:{2}", o.ID, o.Object.GetArea(), o.Object.NumVerts));
+
+            //execute action with undo enabled
+            Kernel.Undo.Begin();
+            n.Object.SetSelectedFaces(matchFaces, true);
+            Kernel.Undo.Accept("Select Simillar Faces");
+            Kernel.Undo.End();
         }
 
-        public static void SelectSimillarEdges(Node node) {
+        public static void SelectSimillarEdges(Node node, bool byArea = true, bool byVcount = false) {
 
             Max.Log("SelectSimillarEdges > The obj:{0}", node.Name);
             var esel_m = node.Object.GetSelectedEdges();
             List<double> source_volumes = esel_m
                     .Select(i => node.Object.GetEdgeLength(i)).Distinct()
                     .ToList();
-            Max.Log("\t({0}) Volumes:{1}", source_volumes.Count, String.Join("\n\t\t", source_volumes));
+            Max.Log("\t({0}) Lengths:{1}\n", source_volumes.Count, String.Join("\n\t\t", source_volumes));
 
 
             /*IEnumerable<Node> allEdges = GetAllEdges();
@@ -67,6 +98,29 @@ namespace Micra.Core {
             SelectNodes(matchVolumeNodes, true);
             Kernel._TheHold.Accept("Select Simillar");
             Kernel._TheHold.End();*/
+        }
+
+        public static void SelectSimillarElements(Node node, bool byArea = true, bool byVcount = false) {
+            Max.Log("SelectSimillarElements > The obj:{0}", node.Name);
+            throw new NotImplementedException();
+        }
+    }
+    internal class GeomCompareData {
+
+        public int ID { get;} = 0;
+        public double AREA { get;} = 0.0;
+        public int VNUM { get;} = 0;
+        public GeomCompareData(int elementIndex, double area = 0, int vnum = 0) {
+
+            AREA = area;
+            VNUM = vnum;
+        }
+        public bool MatchBy(GeomCompareData cd, bool byArea, bool byVcount) {
+
+            if ( byArea == true && byVcount == true ) return cd.AREA != -1 && cd.VNUM != -1 && cd.AREA == AREA && cd.VNUM == VNUM;
+            if ( byArea ) return cd.AREA != -1 && cd.AREA == AREA;
+            if ( byVcount ) return cd.VNUM != -1 && cd.VNUM == VNUM;
+            return false;
         }
     }
 }

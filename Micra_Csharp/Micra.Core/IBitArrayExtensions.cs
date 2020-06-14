@@ -1,8 +1,13 @@
 ﻿using Autodesk.Max;
 /*
- This might be a bit of a long shot but I have noticed that in the Autodesk.max.dll from 2014+ the [] operator has gone missing from IBitArray. I know you no longer develop this so I’ve got a question about a workaround I was trying to use:
+ This might be a bit of a long shot but I have noticed that in the 
+Autodesk.max.dll from 2014+ the [] operator has gone missing from IBitArray. 
+I know you no longer develop this so I’ve got a question about a workaround I was trying to use:
 
-I wanted to use EnumSet(IBitArrayCallback cb) method. However I seem to be unable to create a valid class that inherits from IBitArrayCallback. I get a 'System.InvalidCastException' error: Unable to cast object of type 'TestNewAssembly.TestCallback' to type 'Autodesk.Max.IImplementable'.
+I wanted to use EnumSet(IBitArrayCallback cb) method. 
+However I seem to be unable to create a valid class that inherits from IBitArrayCallback. 
+I get a 'System.InvalidCastException' error: Unable to cast object of type 'TestNewAssembly.
+TestCallback' to type 'Autodesk.Max.IImplementable'.
 
 IBitArray selVert = mesh.VertSel;
 TestCallback test = new TestCallback();

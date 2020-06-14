@@ -197,3 +197,17 @@ E:\Aprog\Orien\Micra\Micra_Csharp\bin\Debug\System.Collections.Immutable.dll
 E:\Aprog\Orien\Micra\Micra_Csharp\bin\Debug\System.Reflection.Metadata.dll
 E:\Aprog\Orien\Micra\Micra_Csharp\bin\Debug\System.Collections.Immutable.xml
 E:\Aprog\Orien\Micra\Micra_Csharp\bin\Debug\System.Reflection.Metadata.xml
+E:\Aprog\Orien\Micra\Micra_Csharp\bin\Debug\System.Buffers.dll
+E:\Aprog\Orien\Micra\Micra_Csharp\bin\Debug\System.Memory.dll
+E:\Aprog\Orien\Micra\Micra_Csharp\bin\Debug\System.Numerics.Vectors.dll
+E:\Aprog\Orien\Micra\Micra_Csharp\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
+E:\Aprog\Orien\Micra\Micra_Csharp\bin\Debug\System.ValueTuple.dll
+E:\Aprog\Orien\Micra\Micra_Csharp\bin\Debug\Micra.Domain.dll.config
+E:\Aprog\Orien\Micra\Micra_Csharp\bin\Debug\Micra.Tools.dll.config
+E:\Aprog\Orien\Micra\Micra_Csharp\bin\Debug\Humanizer.xml
+E:\Aprog\Orien\Micra\Micra_Csharp\bin\Debug\System.Buffers.xml
+E:\Aprog\Orien\Micra\Micra_Csharp\bin\Debug\System.Memory.xml
+E:\Aprog\Orien\Micra\Micra_Csharp\bin\Debug\System.Numerics.Vectors.xml
+E:\Aprog\Orien\Micra\Micra_Csharp\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
+E:\Aprog\Orien\Micra\Micra_Csharp\bin\Debug\System.ValueTuple.xml
+E:\Aprog\Orien\Micra\Micra_Csharp\bin\Debug\Micra.Core.dll.config

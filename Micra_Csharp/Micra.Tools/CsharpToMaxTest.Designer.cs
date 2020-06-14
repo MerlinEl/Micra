@@ -23,6 +23,7 @@
         /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent() {
+            this.components = new System.ComponentModel.Container();
             this.button1 = new System.Windows.Forms.Button();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.button5 = new System.Windows.Forms.Button();
@@ -81,12 +82,17 @@
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.groupBox8 = new System.Windows.Forms.GroupBox();
-            this.CbxSimillarObjBy = new System.Windows.Forms.ComboBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.SpnSimillarATolerance = new System.Windows.Forms.NumericUpDown();
-            this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
+            this.label2 = new System.Windows.Forms.Label();
+            this.SpnSimillarATolerance = new System.Windows.Forms.NumericUpDown();
+            this.label1 = new System.Windows.Forms.Label();
+            this.CbxSimillarObjBy = new System.Windows.Forms.ComboBox();
+            this.groupBox9 = new System.Windows.Forms.GroupBox();
+            this.numericUpDown2 = new System.Windows.Forms.NumericUpDown();
+            this.label4 = new System.Windows.Forms.Label();
+            this.BtnSelectFaces = new System.Windows.Forms.Button();
+            this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox4.SuspendLayout();
@@ -100,8 +106,10 @@
             this.groupBox3.SuspendLayout();
             this.tabPage4.SuspendLayout();
             this.groupBox8.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.SpnSimillarATolerance)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.SpnSimillarATolerance)).BeginInit();
+            this.groupBox9.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
             this.SuspendLayout();
             // 
             // button1
@@ -148,7 +156,7 @@
             this.groupBox1.Size = new System.Drawing.Size(137, 291);
             this.groupBox1.TabIndex = 7;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Slect:";
+            this.groupBox1.Text = "Get Slect:";
             // 
             // BtnFacesCount
             // 
@@ -684,6 +692,7 @@
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.groupBox9);
             this.tabPage2.Controls.Add(this.groupBox7);
             this.tabPage2.Controls.Add(this.groupBox3);
             this.tabPage2.Controls.Add(this.groupBox1);
@@ -712,7 +721,7 @@
             // 
             this.groupBox3.Controls.Add(this.BtnGetObjArea1);
             this.groupBox3.Controls.Add(this.BtnGetObjArea2);
-            this.groupBox3.Location = new System.Drawing.Point(149, 6);
+            this.groupBox3.Location = new System.Drawing.Point(376, 6);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(200, 185);
             this.groupBox3.TabIndex = 48;
@@ -749,43 +758,6 @@
             this.groupBox8.TabStop = false;
             this.groupBox8.Text = "Actions:";
             // 
-            // CbxSimillarObjBy
-            // 
-            this.CbxSimillarObjBy.FormattingEnabled = true;
-            this.CbxSimillarObjBy.Items.AddRange(new object[] {
-            "Area",
-            "VertsCount",
-            "AreaAndVertsCount"});
-            this.CbxSimillarObjBy.Location = new System.Drawing.Point(190, 19);
-            this.CbxSimillarObjBy.Name = "CbxSimillarObjBy";
-            this.CbxSimillarObjBy.Size = new System.Drawing.Size(121, 21);
-            this.CbxSimillarObjBy.TabIndex = 41;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(163, 24);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(21, 13);
-            this.label1.TabIndex = 42;
-            this.label1.Text = "by:";
-            // 
-            // SpnSimillarATolerance
-            // 
-            this.SpnSimillarATolerance.Location = new System.Drawing.Point(416, 22);
-            this.SpnSimillarATolerance.Name = "SpnSimillarATolerance";
-            this.SpnSimillarATolerance.Size = new System.Drawing.Size(65, 20);
-            this.SpnSimillarATolerance.TabIndex = 43;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(327, 24);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(83, 13);
-            this.label2.TabIndex = 44;
-            this.label2.Text = "Area Tolerance:";
-            // 
             // label3
             // 
             this.label3.AutoSize = true;
@@ -801,6 +773,91 @@
             this.numericUpDown1.Name = "numericUpDown1";
             this.numericUpDown1.Size = new System.Drawing.Size(65, 20);
             this.numericUpDown1.TabIndex = 45;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(327, 24);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(83, 13);
+            this.label2.TabIndex = 44;
+            this.label2.Text = "Area Tolerance:";
+            // 
+            // SpnSimillarATolerance
+            // 
+            this.SpnSimillarATolerance.Location = new System.Drawing.Point(416, 22);
+            this.SpnSimillarATolerance.Name = "SpnSimillarATolerance";
+            this.SpnSimillarATolerance.Size = new System.Drawing.Size(65, 20);
+            this.SpnSimillarATolerance.TabIndex = 43;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(163, 24);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(21, 13);
+            this.label1.TabIndex = 42;
+            this.label1.Text = "by:";
+            // 
+            // CbxSimillarObjBy
+            // 
+            this.CbxSimillarObjBy.FormattingEnabled = true;
+            this.CbxSimillarObjBy.Items.AddRange(new object[] {
+            "Area",
+            "VertsCount",
+            "AreaAndVertsCount"});
+            this.CbxSimillarObjBy.Location = new System.Drawing.Point(190, 19);
+            this.CbxSimillarObjBy.Name = "CbxSimillarObjBy";
+            this.CbxSimillarObjBy.Size = new System.Drawing.Size(121, 21);
+            this.CbxSimillarObjBy.TabIndex = 41;
+            // 
+            // groupBox9
+            // 
+            this.groupBox9.Controls.Add(this.BtnSelectFaces);
+            this.groupBox9.Controls.Add(this.label4);
+            this.groupBox9.Controls.Add(this.numericUpDown2);
+            this.groupBox9.Location = new System.Drawing.Point(149, 6);
+            this.groupBox9.Name = "groupBox9";
+            this.groupBox9.Size = new System.Drawing.Size(167, 291);
+            this.groupBox9.TabIndex = 50;
+            this.groupBox9.TabStop = false;
+            this.groupBox9.Text = "Set Select:";
+            // 
+            // numericUpDown2
+            // 
+            this.numericUpDown2.Location = new System.Drawing.Point(95, 19);
+            this.numericUpDown2.Name = "numericUpDown2";
+            this.numericUpDown2.Size = new System.Drawing.Size(66, 20);
+            this.numericUpDown2.TabIndex = 0;
+            this.numericUpDown2.Value = new decimal(new int[] {
+            3,
+            0,
+            0,
+            0});
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(6, 23);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(83, 13);
+            this.label4.TabIndex = 1;
+            this.label4.Text = "Elements count:";
+            // 
+            // BtnSelectFaces
+            // 
+            this.BtnSelectFaces.Location = new System.Drawing.Point(9, 48);
+            this.BtnSelectFaces.Name = "BtnSelectFaces";
+            this.BtnSelectFaces.Size = new System.Drawing.Size(122, 23);
+            this.BtnSelectFaces.TabIndex = 35;
+            this.BtnSelectFaces.Text = "Selecte Faces";
+            this.BtnSelectFaces.UseVisualStyleBackColor = true;
+            // 
+            // imageList1
+            // 
+            this.imageList1.ColorDepth = System.Windows.Forms.ColorDepth.Depth8Bit;
+            this.imageList1.ImageSize = new System.Drawing.Size(16, 16);
+            this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
             // 
             // CsharpToMaxTest
             // 
@@ -828,8 +885,11 @@
             this.tabPage4.ResumeLayout(false);
             this.groupBox8.ResumeLayout(false);
             this.groupBox8.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.SpnSimillarATolerance)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.SpnSimillarATolerance)).EndInit();
+            this.groupBox9.ResumeLayout(false);
+            this.groupBox9.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -900,5 +960,10 @@
         private System.Windows.Forms.NumericUpDown numericUpDown1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.NumericUpDown SpnSimillarATolerance;
+        private System.Windows.Forms.GroupBox groupBox9;
+        private System.Windows.Forms.Button BtnSelectFaces;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.NumericUpDown numericUpDown2;
+        private System.Windows.Forms.ImageList imageList1;
     }
 }

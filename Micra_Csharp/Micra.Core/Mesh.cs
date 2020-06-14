@@ -113,8 +113,18 @@ namespace Micra.Core {
             return Vector3.Cross(a, b).Length / 2.0;
         }
 
-        internal List<int> GetSelectedFaces() {//im:Autodesk.Max.Wrappers.Mesh
-            Max.Log("GetSelectedFaces > on Mesh!");
+        internal List<IFace> GetSelectedIFaces() { //TODO -not tested -not used
+
+            List<IFace> fsel = new List<IFace>() { };
+            _IMesh.FaceSel.IEnumerable().ForEach((item, index) => {
+
+                if ( item == 1 ) fsel.Add(_IMesh.Faces[index]); //+3DsMax count + 1
+            });
+            return fsel;
+        }
+
+        internal List<int> GetSelectedFaces() { //im:Autodesk.Max.Wrappers.Mesh
+
             List<int> fsel = new List<int>() { };
             _IMesh.FaceSel.IEnumerable().ForEach((item, index) => {
 
@@ -143,7 +153,16 @@ namespace Micra.Core {
             return vsel;
         }
 
+        //TODO 11111111
+        internal void SetSelectedFaces(List<int> faces) {
 
+            /*_IMesh.s
+            _IMesh.FaceSel.IEnumerable().ForEach((item, index) => {
+
+                if ( item == 1 ) fsel.Add(index); //+3DsMax count + 1
+            });
+            */
+        }
 
         internal void HideFaces(List<int> lists) => lists.ForEach(i => _IMesh.Faces[i].Hide()); //TODO validate list indexes
         /// <summary> Hide Selected or Unselected Faces
@@ -175,6 +194,11 @@ namespace Micra.Core {
 
         internal double EdgeLength(int edgeIndex) {
             throw new NotImplementedException();
+        }
+
+        internal List<int> GetFaceVerts(int faceIndex) {
+            if ( faceIndex > faces.Length - 1 ) throw new Exception("Face index is out of range.");
+            return new List<int>() {(int)faces[faceIndex].a, (int)faces[faceIndex].b, (int)faces[faceIndex].c };
         }
     }
 }
