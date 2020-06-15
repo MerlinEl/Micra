@@ -262,7 +262,6 @@ namespace Micra.Core {
             return null;
         }
 
-        //TODO 111111111
         public void SetSelectedFaces(List<int> faceIndexes, bool redraw) {
             
             switch ( ClassOf() ) {
@@ -270,10 +269,28 @@ namespace Micra.Core {
                 case nameof(ClassID.EditableMesh): GetMesh().SetSelectedFaces(faceIndexes); break;
                 case nameof(ClassID.EditablePoly): GetPoly().SetSelectedFaces(faceIndexes); break;
             }
-            //_IGeomObject.InvalidateChannels(( uint )EnumChannels.GEOM_CHANNEL); //if need
             if ( redraw ) Kernel.RedrawViews();
         }
 
+        public void SetSelectedEdges(List<int> faceIndexes, bool redraw) {
+
+            switch ( ClassOf() ) {
+
+                case nameof(ClassID.EditableMesh): GetMesh().SetSelectedEdges(faceIndexes); break;
+                case nameof(ClassID.EditablePoly): GetPoly().SetSelectedEdges(faceIndexes); break;
+            }
+            if ( redraw ) Kernel.RedrawViews();
+        }
+
+        public void SetSelectedVerts(List<int> faceIndexes, bool redraw) {
+
+            switch ( ClassOf() ) {
+
+                case nameof(ClassID.EditableMesh): GetMesh().SetSelectedVerts(faceIndexes); break;
+                case nameof(ClassID.EditablePoly): GetPoly().SetSelectedVerts(faceIndexes); break;
+            }
+            if ( redraw ) Kernel.RedrawViews();
+        }
 
         //TODO test with modifiers
         public void SelectAll(bool redraw) {

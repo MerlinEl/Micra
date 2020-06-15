@@ -6,6 +6,7 @@
 // otherwise accompanies this software in either electronic or hard copy form.  
 //
 using Autodesk.Max;
+using Humanizer;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -153,16 +154,52 @@ namespace Micra.Core {
             return vsel;
         }
 
-        //TODO 11111111
-        internal void SetSelectedFaces(List<int> faces) {
+        /// <summary> Set Face selection
+        ///     <example> 
+        ///         <code>
+        ///             example: Node.Object
+        ///             <br>switch ( ClassOf() ) {</br>
+        ///                 <br>case nameof(ClassID.EditableMesh) : GetMesh().SetSelectedFaces(faceIndexes); break;</br>
+        ///                 <br>case nameof(ClassID.EditablePoly) : GetPoly().SetSelectedFaces(faceIndexes); break;</br>
+        ///             <br>}</br>
+        ///         </code>
+        ///     </example>
+        ///     <para>param: <paramref name="faceIndexes"/>List(int) of face indexes</para>
+        /// </summary>
+        public void SetSelectedFaces(List<int> faceIndexes) {
 
-            /*_IMesh.s
-            _IMesh.FaceSel.IEnumerable().ForEach((item, index) => {
-
-                if ( item == 1 ) fsel.Add(index); //+3DsMax count + 1
-            });
-            */
+            var bytes = faceIndexes.Select(i => BitConverter.GetBytes(i)).ToArray();
+            IBitArray ba = Kernel.NewIBitarray(Numf);
+            //for each face index which is in range(all faces), set bit to 1(selected) 
+            faceIndexes.Where(i => i < ba.Size).ForEach(i => ba.Set(i));
+            _IMesh.FaceSel_ = ba;
+            _IMesh.InvalidateTopologyCache();
         }
+
+        public void SetSelectedEdges(List<int> edgetIndexes) {
+
+            var bytes = edgetIndexes.Select(i => BitConverter.GetBytes(i)).ToArray();
+            IBitArray ba = Kernel.NewIBitarray(Nume);
+            //for each edge index which is in range(all edges), set bit to 1(selected) 
+            edgetIndexes.Where(i => i < ba.Size).ForEach(i => ba.Set(i));
+            _IMesh.EdgeSel = ba;
+            _IMesh.InvalidateTopologyCache();
+        }
+
+        public void SetSelectedVerts(List<int> vertIndexes) {
+
+            var bytes = vertIndexes.Select(i => BitConverter.GetBytes(i)).ToArray();
+            IBitArray ba = Kernel.NewIBitarray(Numv);
+            //for each vert index which is in range(all verts), set bit to 1(selected) 
+            vertIndexes.Where(i => i < ba.Size).ForEach(i => ba.Set(i));
+            _IMesh.VertSel_ = ba;
+            _IMesh.InvalidateTopologyCache();
+        }
+
+        public int Numf => _IMesh.NumFaces;
+        //no better method for now (missing NumEdges in _IMesh)
+        public int Nume => _IMesh.EdgeSel.Size;
+        public int Numv => _IMesh.NumVerts;
 
         internal void HideFaces(List<int> lists) => lists.ForEach(i => _IMesh.Faces[i].Hide()); //TODO validate list indexes
         /// <summary> Hide Selected or Unselected Faces
@@ -202,3 +239,38 @@ namespace Micra.Core {
         }
     }
 }
+
+
+/*
+        public List<int> getEditableMeshElementsSDK (Node node) {
+
+            fn firstBit bits = (
+
+                local b
+                for n in bits while not(b = n; bits[n]) do ()
+               b
+            )
+
+INode iNode = Kernel._Interface.GetINodeByHandle(obj.inode.handle);
+IMesh iMesh = iNode.EvalWorldState(Kernel.Now, true).Obj.Mesh_
+            IAdjFaceList adjFaceList = Kernel._Global.AdjFaceList.Create IMesh(Kernel._Global.AdjEdgeList.Create IMesh)
+            IBitArray bitArray = Kernel._Global.BitArray.Create IMesh.NumFaces_
+            local faces = #{1..obj.numfaces}
+            local elements = #()
+           //CACHED FUNCTIONS
+           local IMeshElementFromFace = IMesh.ElementFromFace
+           local IBitArrayClearAll = IBitArray.ClearAll    
+            while not faces.isEmpty do (
+
+                IBitArrayClearAll()
+                IMesh.ElementFromFace((firstBit faces)-1, IBitArray, bitArray);
+IMesh.FaceSel = IBitArray
+elementFaces = getFaceSelection obj
+faces -= elementFaces
+append elements elementFaces
+        
+            )
+           return elements
+
+    }
+*/

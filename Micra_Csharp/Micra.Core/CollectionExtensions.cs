@@ -4,7 +4,16 @@ using System.Collections.Generic;
 
 namespace Micra.Core {
     internal static class CollectionExtensions {
-
+        /// <summary> Extension method to convert ITab<T> to an IEnumerable to easily iterate through the list.
+        ///     <example> 
+        ///         <code>
+		///             example:
+        ///             ITab<IMtlBase> materialsLib = GlobalInterface.Instance.COREInterface15.SceneMtls;
+        ///             foreach (var materialBase in materialsLib.ToIEnumerable()) {.... }
+		///         </code>
+		///     </example>
+        ///     <para>param: <paramref name=""/></para>
+        /// </summary>
         public static IEnumerable<T> ToIEnumerable<T>(this ITab<T> itab) {
 
             if ( itab == null ) yield break;

@@ -7,6 +7,24 @@ using System.Linq;
 namespace Micra.Core {
     public class ObjOps {
 
+        //global is your start IGlobal object
+        /*private Autodesk.Max.INodeTab GetNodeInstances(IINode node) {
+            IObject obj = node.ObjectRef;
+            Autodesk.Max.INodeTab instanceAndRef = Kernel._Global.NodeTab.Create();
+            Autodesk.Max.INodeTab result = Kernel._Global.NodeTab.Create();
+            Kernel._Global.IInstanceMgr.InstanceMgr.GetInstances(node, instanceAndRef);
+            IntPtr indexer;
+            for ( int i = 0; i < instanceAndRef.Count; i++ ) {
+                indexer = new IntPtr(i);
+
+                if ( obj.Handle == instanceAndRef[indexer].ObjectRef.Handle ) {
+                    result.InsertNode(instanceAndRef[indexer], result.Count, true);
+                }
+
+                Marshal.FreeHGlobal(indexer);
+            }
+            return result;
+        }*/
         public static List<Node> GetSlectedNodes() => Kernel.Scene.SelectedNodes().ToList();
         /// <summary> Get First Node From Selected Objects</summary>
         public static Node GetFirstSlectedNode() => GetSlectedNodes().FirstOrDefault();

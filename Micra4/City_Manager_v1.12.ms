@@ -1,5 +1,6 @@
 Global mcCityManDialog
 Global mcCityManDialogMenu
+Global mcConformFacesDialog
 rcmenu mcCityManDialogMenu (
 	subMenu "Visibility" (
 		menuItem m2_2 "Show All Objects"
@@ -50,6 +51,9 @@ rcmenu mcCityManDialogMenu (
 		menuItem m4_7 "Instance Collision to Selected Models"
 		menuItem m4_8 "Create Checker Red and Green"
 		menuItem m4_9 "Find Objects without Collision Property"
+		separator m4_sep_4
+		menuItem m4_10 "Add Collision Attribute Rail Navmesh(4)"
+		menuItem m4_11 "Add Collision Attribute Basic (-1)"
 	)
 	subMenu "Modify" (
 	
@@ -77,6 +81,7 @@ rcmenu mcCityManDialogMenu (
 		separator m9_sep_3
 		menuItem m9_6 "Reset Material Editor And Load Materials From Selection"
 		menuItem m9_7 "Add (Disabled Shadows and Dynamic) to Selection"
+		menuItem m9_8 "Conform Faces To another Object"
 	)
 	fn getLodByName obj lod_index = (
 	
@@ -344,6 +349,67 @@ rcmenu mcCityManDialogMenu (
 		)
 		select objs --restore selection
 	)
+	fn addCollisionAttribute objs layer_index = (
+		
+		for o in objs  do (
+			
+			if  (isProperty o "~layer" == false) do AddCustomAttributeByName o "CollisionMesh"
+			o.'~layer' = layer_index
+		)
+	)
+	fn conformFacesToAnotherObject = (
+		if mcConformFacesDialog != undefined do destroyDialog mcConformFacesDialog
+		rollout mcConformFacesDialog "Conform Faces:" width:400 height:76
+		(
+			button 'btn_src' "Get Source" pos:[4,4] width:100 height:20 align:#left
+			button 'btn_trgt' "Get Target" pos:[4,28] width:100 height:20 align:#left
+			label 'lbl_src' "...." pos:[112,4] width:284 height:20 align:#left
+			label 'lbl_trgt' "...." pos:[112,28] width:284 height:20 align:#left
+			button 'btn_conform' "CONFORM FACES" pos:[4,52] width:284 height:20 align:#left
+			label 'lbl3' "max dist:" pos:[292,56] width:44 height:16 align:#left
+			spinner 'spn_max_dist' "" pos:[344,56] width:52 height:16 range:[1.4,100,0] type:#float align:#left
+			local src_obj
+			local trgt_obj
+			fn conformFaces = (
+				
+				if src_obj == undefined or trgt_obj == undefined do return false
+				format "Conform source object:% to target objec:%\n" src_obj.name trgt_obj.name
+				local fsel = polyOp.getFaceSelection src_obj
+				local fverts = polyop.GetVertsUsingFace src_obj fsel
+				if fsel.numberset == 0 do return false
+				local trgt_vert_pos = for v in trgt_obj.verts collect (polyOp.getVert trgt_obj v.index)
+				--try snap vertices from source obj to nearest starget objverts
+				for v in fverts do (
+					local p1 = polyOp.getVert src_obj v
+					for p2 in trgt_vert_pos do(
+						local dist = distance p1 p2
+						if (dist != 0) and (dist < spn_max_dist.value)  do (
+							format "\tsnap vert:% p1:% to p2:% dist:%\n" v p1 p2 dist
+							polyOp.setVert src_obj v p2
+							break
+						)
+					)
+				)
+			)
+			on btn_src pressed  do
+			(
+				if classOf selection[1] == Editable_Poly do (
+					
+					src_obj = selection[1]
+					lbl_src.Text = src_obj.Name
+				)
+			)
+			on btn_trgt pressed  do
+			(
+					if classOf selection[1] == Editable_Poly do (
+					trgt_obj = selection[1]
+					lbl_trgt.Text = trgt_obj.Name
+				)
+			)
+			on btn_conform pressed  do undo "Conform Faces" on (conformFaces())
+		)
+		createDialog mcConformFacesDialog
+	)
 	--m1------------------------------------------------------------------------------------------------
 	on m1_0 picked do undo label:(m1_0.Text) on selectLods(#("LOD1", "LOD2"))
 	on m1_1 picked do undo label:(m1_1.Text) on mcMax.selectObjectsByName "LOD0" visibleOnly:false exclude:#("coll", "occ")
@@ -388,6 +454,9 @@ rcmenu mcCityManDialogMenu (
 	on m4_7 picked do distributeInstancesInToSelection()
 	on m4_8 picked do if queryBox "Generate Checker Collisions?" title:"Create:" do undo label:(m4_8.Text) on createCheckerCollisions (selection as array)
 	on m4_9 picked do undo label:(m4_9.Text) on findObjectsWithMissingCollisionProperty (selection as array)
+	--sep4
+	on m4_10 picked do undo label:(m4_10.Text) on addCollisionAttribute  (selection as array) 4
+	on m4_11 picked do undo label:(m4_11.Text) on addCollisionAttribute  (selection as array) -1
 	--m5------------------------------------------------------------------------------------------------
 	on m5_1 picked do fileIn (micra.RootDir + "LS3D_Geometry_Optimizer_v0.03.ms")
 	on m5_2 picked do fileIn (micra.RootDir + "LS3D_Curb_Crumple.ms") 
@@ -443,6 +512,7 @@ rcmenu mcCityManDialogMenu (
 	--sep3
 	on m9_6 picked do undo label:(m9_6.Text) on resetMaterialEditorAndLoadMaterialsFromSelection()
 	on m9_7 picked do if (queryBox "Add Parameters (Disabled Shadows and Dynamic)  on Selection?" title:"Warning:") do undo label:(m9_7.Text) on addParamsNoSahdowAndDynamicFromSelection ( selection as array)
+	on m9_8 picked do  conformFacesToAnotherObject()
 )
 
 if ::mcCityManDialog != undefined do try(destroyDialog mcCityManDialog)catch()

@@ -70,15 +70,54 @@ namespace Micra.Core {
             for ( int i = 0; i < _IMNMesh.Numv; i++ ) if ( IsVertSelected(i) ) vsel.Add(i);
             return vsel;
         }
-        // TODO 111111111
+
+        public IBitArray GetFaceElement(int faceIndex) { //TODO -not tested -not used
+
+            IBitArray eleBits = Kernel._Global.BitArray.Create(_IMNMesh.Numf);
+           //_IMNMesh.FaceSelect(eleBits);
+           _IMNMesh.ElementFromFace(faceIndex, eleBits);
+            return eleBits;
+        }
+        /// <summary> Set Face selection
+        ///     <example> 
+        ///         <code>
+        ///             example: Node.Object
+        ///             <br>switch ( ClassOf() ) {</br>
+        ///                 <br>case nameof(ClassID.EditableMesh) : GetMesh().SetSelectedFaces(faceIndexes); break;</br>
+        ///                 <br>case nameof(ClassID.EditablePoly) : GetPoly().SetSelectedFaces(faceIndexes); break;</br>
+        ///             <br>}</br>
+        ///         </code>
+        ///     </example>
+        ///     <para>param: <paramref name="faceIndexes"/>List(int) of face indexes</para>
+        /// </summary>
         internal void SetSelectedFaces(List<int> faceIndexes) {
-            
+
             var bytes = faceIndexes.Select(i => BitConverter.GetBytes(i)).ToArray();
-            IBitArray ba = Kernel.MakeBits();
+            IBitArray ba = Kernel.NewIBitarray(_IMNMesh.Numf);
+            //for each face index which is in range(all faces), set bit to 1(selected) 
+            faceIndexes.Where(i=> i < ba.Size).ForEach(i=> ba.Set(i));
             _IMNMesh.FaceSelect(ba);
-            //ba.
-            //
-            //faceIndexes.SelectMany<int, byte>(BitConverter.GetBytes).ToArray()
+            _IMNMesh.InvalidateGeomCache();
+        }
+
+        internal void SetSelectedEdges(List<int> edgeIndexes) {
+
+            var bytes = edgeIndexes.Select(i => BitConverter.GetBytes(i)).ToArray();
+            IBitArray ba = Kernel.NewIBitarray(_IMNMesh.Nume);
+            //for each edge index which is in range(all edges), set bit to 1(selected) 
+            edgeIndexes.Where(i => i < ba.Size).ForEach(i => ba.Set(i));
+            _IMNMesh.EdgeSelect(ba);
+            _IMNMesh.InvalidateGeomCache();
+        }
+
+        internal void SetSelectedVerts(List<int> vertIndexes) {
+
+            var bytes = vertIndexes.Select(i => BitConverter.GetBytes(i)).ToArray();
+            IBitArray ba = Kernel.NewIBitarray(_IMNMesh.Numv);
+            //for each vert index which is in range(all verts), set bit to 1(selected) 
+            vertIndexes.Where(i => i < ba.Size).ForEach(i => ba.Set(i));
+            _IMNMesh.VertexSelect(ba);
+            _IMNMesh.InvalidateGeomCache();
         }
 
         /// <summary> Calculate Face, Polygon, Ngon Area

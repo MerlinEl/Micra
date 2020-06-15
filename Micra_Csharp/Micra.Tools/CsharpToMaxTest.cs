@@ -418,6 +418,30 @@ namespace Micra.Tools {
             Node node = ObjOps.GetFirstSlectedNode();
             Max.Log("Verts count:{0}", node.Object.NumVerts);
         }
+
+        private void BtnSelectFaces_Click(object sender, EventArgs e) {
+            Kernel.WriteLine(( sender as Button ).Text);
+            List<int> faceIndexes = TbxElementsIndexes.Text.Split(',').Select(Int32.Parse).ToList();
+            Max.Log("SetSelectedFaces > faces:({0})", string.Join(",", faceIndexes));
+            Node node = ObjOps.GetFirstSlectedNode();
+            node.Object.SetSelectedFaces(faceIndexes, true);
+        }
+
+        private void BtnSelectEdges_Click(object sender, EventArgs e) {
+            Kernel.WriteLine(( sender as Button ).Text);
+            List<int> edgeIndexes = TbxElementsIndexes.Text.Split(',').Select(Int32.Parse).ToList();
+            Max.Log("SetSelectedEdges > edges:({0})", string.Join(",", edgeIndexes));
+            Node node = ObjOps.GetFirstSlectedNode();
+            node.Object.SetSelectedEdges(edgeIndexes, true);
+        }
+
+        private void BtnSelectVerts_Click(object sender, EventArgs e) {
+            Kernel.WriteLine(( sender as Button ).Text);
+            List<int> vertIndexes = TbxElementsIndexes.Text.Split(',').Select(Int32.Parse).ToList();
+            Max.Log("SetSelectedVerts > verts:({0})", string.Join(",", vertIndexes));
+            Node node = ObjOps.GetFirstSlectedNode();
+            node.Object.SetSelectedVerts(vertIndexes, true);
+        }
     }
 }
 

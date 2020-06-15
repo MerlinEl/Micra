@@ -85,7 +85,7 @@ namespace Micra.Core {
 
         public static IHold Undo => Kernel._Global.TheHold;
 
-        public static IBitArray MakeBits() => Kernel._Global.BitArray.Create();
+        public static IBitArray NewIBitarray() => Kernel._Global.BitArray.Create();
         public static IBitArray NewIBitarray(int size) => Kernel._Global.BitArray.Create(size);
 
         public static IITimeSlider _TimeSlider {
@@ -154,6 +154,10 @@ namespace Micra.Core {
                 _Global.Animatable.EnumerateAllAnimatables(eal);
                 return eal.animatables;
             }
+        }
+
+        internal static IBitArray NewIBitarray(object numEdges) {
+            throw new NotImplementedException();
         }
 
         /// <summary>

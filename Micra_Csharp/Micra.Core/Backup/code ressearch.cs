@@ -1,3 +1,27 @@
+IObjectState iState = i.EvalWorldState(0, true);
+IObject iObj = iState.Obj;
+IPolyObject iPoly = (IPolyObject)iObj.ConvertToType(0, global.PolyObjectClassID);
+ITriObject iTri = (ITriObject)iObj.ConvertToType(0, global.TriObjectClassID);
+IMesh mesh = iTri.Mesh;
+
+
+// Name it and ensure it is unique...
+string newname = "ADN-Sample-Face";
+Kernel._Intrerface.MakeNameUnique(ref newname);
+node.Name = newname;
+
+void DemoTeapot() {
+    IGlobal global = Autodesk.Max.GlobalInterface.Instance;  //note that global will be an instance of an abstract class.
+    var intfc = global.COREInterface13;
+    IClass_ID cid = global.Class_ID.Create((uint)BuiltInClassIDA.TEAPOT_CLASS_ID, (uint)BuiltInClassIDB.TEAPOT_CLASS_ID);
+    object obj = intfc.CreateInstance(SClass_ID.Geomobject, cid as IClass_ID);
+    if ( obj == null ) throw new Exception("Failed to create a sphere!");
+    IINode n = global.COREInterface.CreateObjectNode((IObject)obj);
+    IObject iobj = (IObject)obj;
+    IIParamArray ps = iobj.ParamBlock;
+    ps.SetValue(0, global.COREInterface.Time, 20.0f);
+    n.Move(global.COREInterface.Time, global.Matrix3.Create(), global.Point3.Create(20, 20, 0), true, true, 0, true);
+}
 
 
 public double GtiTrifaceArea(int faceIndex) {
@@ -37,6 +61,42 @@ public double GtiTrifaceArea(int faceIndex) {
      });*/
     return area;
 }
+
+
+/*for ( int fID = 0; fID < _IMesh.NumFaces; fID++ ) {
+
+IBitArray eleBits = Kernel._Global.BitArray.Create(_IMesh.NumFaces);
+IFace f = _IMesh.Faces[fID];
+if ( f.GetFlag(Convert.ToUInt32(allPolys[0])) ) {
+getBits.Set(fID);
+}
+}
+_IMesh.FaceSelect(getBits);*/
+//mesh.FaceSelect(eleBits);
+/*_IMesh.s
+_IMesh.FaceSel.IEnumerable().ForEach((item, index) => {
+
+    if ( item == 1 ) fsel.Add(index); //+3DsMax count + 1
+});
+*/
+/*for ( int i = 0; i < ba.Size; i++ ) {
+
+    if ( faceIndexes.IndexOf(i) != -1 ) ba.Set(i); //set bit as selected
+}*/
+
+
+/*for ( int fID = 0; fID < _IMNMesh.Numf; fID++ ) {
+
+    IBitArray getBits = Kernel._Global.BitArray.Create(_IMNMesh.Numf);
+    IMNFace f = _IMNMesh.F(fID);
+    if ( f.GetFlag(Convert.ToUInt32(allPolys[0])) ) {
+        getBits.Set(fID);
+    }
+    _IMNMesh.FaceSelect(getBits);
+}*/
+//ba.
+//
+//faceIndexes.SelectMany<int, byte>(BitConverter.GetBytes).ToArray()
 
 polyOp.getVertSelection $ as array
 fn getFacePolyTable obj =

@@ -78,6 +78,9 @@
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.groupBox9 = new System.Windows.Forms.GroupBox();
+            this.BtnSelectFaces = new System.Windows.Forms.Button();
+            this.label4 = new System.Windows.Forms.Label();
             this.groupBox7 = new System.Windows.Forms.GroupBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.tabPage4 = new System.Windows.Forms.TabPage();
@@ -88,11 +91,11 @@
             this.SpnSimillarATolerance = new System.Windows.Forms.NumericUpDown();
             this.label1 = new System.Windows.Forms.Label();
             this.CbxSimillarObjBy = new System.Windows.Forms.ComboBox();
-            this.groupBox9 = new System.Windows.Forms.GroupBox();
-            this.numericUpDown2 = new System.Windows.Forms.NumericUpDown();
-            this.label4 = new System.Windows.Forms.Label();
-            this.BtnSelectFaces = new System.Windows.Forms.Button();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
+            this.TbxElementsIndexes = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.BtnSelectEdges = new System.Windows.Forms.Button();
+            this.BtnSelectVerts = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox4.SuspendLayout();
@@ -102,14 +105,13 @@
             this.tabPage3.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
+            this.groupBox9.SuspendLayout();
             this.groupBox7.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.tabPage4.SuspendLayout();
             this.groupBox8.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.SpnSimillarATolerance)).BeginInit();
-            this.groupBox9.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
             this.SuspendLayout();
             // 
             // button1
@@ -704,6 +706,40 @@
             this.tabPage2.Text = "Geometry";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
+            // groupBox9
+            // 
+            this.groupBox9.Controls.Add(this.BtnSelectVerts);
+            this.groupBox9.Controls.Add(this.BtnSelectEdges);
+            this.groupBox9.Controls.Add(this.label5);
+            this.groupBox9.Controls.Add(this.TbxElementsIndexes);
+            this.groupBox9.Controls.Add(this.BtnSelectFaces);
+            this.groupBox9.Controls.Add(this.label4);
+            this.groupBox9.Location = new System.Drawing.Point(149, 6);
+            this.groupBox9.Name = "groupBox9";
+            this.groupBox9.Size = new System.Drawing.Size(200, 291);
+            this.groupBox9.TabIndex = 50;
+            this.groupBox9.TabStop = false;
+            this.groupBox9.Text = "Set Select:";
+            // 
+            // BtnSelectFaces
+            // 
+            this.BtnSelectFaces.Location = new System.Drawing.Point(9, 48);
+            this.BtnSelectFaces.Name = "BtnSelectFaces";
+            this.BtnSelectFaces.Size = new System.Drawing.Size(185, 23);
+            this.BtnSelectFaces.TabIndex = 35;
+            this.BtnSelectFaces.Text = "Select Faces";
+            this.BtnSelectFaces.UseVisualStyleBackColor = true;
+            this.BtnSelectFaces.Click += new System.EventHandler(this.BtnSelectFaces_Click);
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(6, 23);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(53, 13);
+            this.label4.TabIndex = 1;
+            this.label4.Text = "Elements:";
+            // 
             // groupBox7
             // 
             this.groupBox7.Controls.Add(this.BtnUnhideGeometry);
@@ -811,53 +847,50 @@
             this.CbxSimillarObjBy.Size = new System.Drawing.Size(121, 21);
             this.CbxSimillarObjBy.TabIndex = 41;
             // 
-            // groupBox9
-            // 
-            this.groupBox9.Controls.Add(this.BtnSelectFaces);
-            this.groupBox9.Controls.Add(this.label4);
-            this.groupBox9.Controls.Add(this.numericUpDown2);
-            this.groupBox9.Location = new System.Drawing.Point(149, 6);
-            this.groupBox9.Name = "groupBox9";
-            this.groupBox9.Size = new System.Drawing.Size(167, 291);
-            this.groupBox9.TabIndex = 50;
-            this.groupBox9.TabStop = false;
-            this.groupBox9.Text = "Set Select:";
-            // 
-            // numericUpDown2
-            // 
-            this.numericUpDown2.Location = new System.Drawing.Point(95, 19);
-            this.numericUpDown2.Name = "numericUpDown2";
-            this.numericUpDown2.Size = new System.Drawing.Size(66, 20);
-            this.numericUpDown2.TabIndex = 0;
-            this.numericUpDown2.Value = new decimal(new int[] {
-            3,
-            0,
-            0,
-            0});
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(6, 23);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(83, 13);
-            this.label4.TabIndex = 1;
-            this.label4.Text = "Elements count:";
-            // 
-            // BtnSelectFaces
-            // 
-            this.BtnSelectFaces.Location = new System.Drawing.Point(9, 48);
-            this.BtnSelectFaces.Name = "BtnSelectFaces";
-            this.BtnSelectFaces.Size = new System.Drawing.Size(122, 23);
-            this.BtnSelectFaces.TabIndex = 35;
-            this.BtnSelectFaces.Text = "Selecte Faces";
-            this.BtnSelectFaces.UseVisualStyleBackColor = true;
-            // 
             // imageList1
             // 
             this.imageList1.ColorDepth = System.Windows.Forms.ColorDepth.Depth8Bit;
             this.imageList1.ImageSize = new System.Drawing.Size(16, 16);
             this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
+            // 
+            // TbxElementsIndexes
+            // 
+            this.TbxElementsIndexes.Location = new System.Drawing.Point(61, 19);
+            this.TbxElementsIndexes.Name = "TbxElementsIndexes";
+            this.TbxElementsIndexes.Size = new System.Drawing.Size(70, 20);
+            this.TbxElementsIndexes.TabIndex = 36;
+            this.TbxElementsIndexes.Text = "3,5,6";
+            this.TbxElementsIndexes.MouseEnter += new System.EventHandler(this.OnTextAreaGotFocus);
+            this.TbxElementsIndexes.MouseLeave += new System.EventHandler(this.OnTextAreaLostFocus);
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(137, 23);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(59, 13);
+            this.label5.TabIndex = 37;
+            this.label5.Text = "zero based";
+            // 
+            // BtnSelectEdges
+            // 
+            this.BtnSelectEdges.Location = new System.Drawing.Point(9, 77);
+            this.BtnSelectEdges.Name = "BtnSelectEdges";
+            this.BtnSelectEdges.Size = new System.Drawing.Size(185, 23);
+            this.BtnSelectEdges.TabIndex = 38;
+            this.BtnSelectEdges.Text = "Select Edges";
+            this.BtnSelectEdges.UseVisualStyleBackColor = true;
+            this.BtnSelectEdges.Click += new System.EventHandler(this.BtnSelectEdges_Click);
+            // 
+            // BtnSelectVerts
+            // 
+            this.BtnSelectVerts.Location = new System.Drawing.Point(9, 106);
+            this.BtnSelectVerts.Name = "BtnSelectVerts";
+            this.BtnSelectVerts.Size = new System.Drawing.Size(185, 23);
+            this.BtnSelectVerts.TabIndex = 39;
+            this.BtnSelectVerts.Text = "Select Verts";
+            this.BtnSelectVerts.UseVisualStyleBackColor = true;
+            this.BtnSelectVerts.Click += new System.EventHandler(this.BtnSelectVerts_Click);
             // 
             // CsharpToMaxTest
             // 
@@ -879,6 +912,8 @@
             this.tabPage3.PerformLayout();
             this.tabPage1.ResumeLayout(false);
             this.tabPage2.ResumeLayout(false);
+            this.groupBox9.ResumeLayout(false);
+            this.groupBox9.PerformLayout();
             this.groupBox7.ResumeLayout(false);
             this.groupBox7.PerformLayout();
             this.groupBox3.ResumeLayout(false);
@@ -887,9 +922,6 @@
             this.groupBox8.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.SpnSimillarATolerance)).EndInit();
-            this.groupBox9.ResumeLayout(false);
-            this.groupBox9.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -963,7 +995,10 @@
         private System.Windows.Forms.GroupBox groupBox9;
         private System.Windows.Forms.Button BtnSelectFaces;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.NumericUpDown numericUpDown2;
         private System.Windows.Forms.ImageList imageList1;
+        private System.Windows.Forms.TextBox TbxElementsIndexes;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Button BtnSelectVerts;
+        private System.Windows.Forms.Button BtnSelectEdges;
     }
 }
