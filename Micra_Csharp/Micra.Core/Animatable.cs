@@ -138,6 +138,10 @@ namespace Micra.Core {
                 return new Light(x as ILightObject) as T;
             else if ( x is IGeomObject )
                 return new Geometry(x as IGeomObject) as T;
+
+            //else if ( x is IPrimitive )
+                //return new PBox(x as IPrimitive) as T;
+
             else if ( x is IObject )
                 return new SceneObject(x as IObject) as T;
             else if ( x is IBaseObject )

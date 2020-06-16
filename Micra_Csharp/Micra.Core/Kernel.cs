@@ -29,10 +29,10 @@ https://area.autodesk.com/profile/SmsxxDGK/blog-posts/?p=2
 
 */
 using Autodesk.Max;
+using Autodesk.Max.Remoting;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Runtime.InteropServices;
 using System.Windows.Threading;
 
 namespace Micra.Core {
@@ -41,8 +41,8 @@ namespace Micra.Core {
     /// </summary>
     public static class Kernel {
         #region fields
-        private delegate void TimerProc(IntPtr hWnd, uint nMsg, int nIDEvent, int dwTime);
-        public static IGlobal _Global;
+        //public static IGlobal _Global;
+        private static IGlobal global;
         public static IInterface14 _Interface;
         public static IIInstanceMgr _InstanceMgr;
         public static IIFPLayerManager _IIFPLayerManager; //not used not tested
@@ -58,7 +58,7 @@ namespace Micra.Core {
         static Kernel() {
             // If this is ever NULL, it is probably because 3ds Max has not yet loaded 
             // Autodesk.Max.Wrappers.dll
-            _Global = GlobalInterface.Instance;
+            //_Global = GlobalInterface.Instance;
             _Interface = _Global.COREInterface17;
             _InstanceMgr = _Global.IInstanceMgr.InstanceMgr;
             scene = new Scene(_Interface);
@@ -69,18 +69,39 @@ namespace Micra.Core {
             //TODO test and move it in right place
             //not used not tested
             IInterface_ID iMeshSelectionID = _Global.Interface_ID.Create( //not used not tested
-                (uint)BuiltInClassIDA.MESHSELECT_CLASS_ID, 
+                (uint)BuiltInClassIDA.MESHSELECT_CLASS_ID,
                 0
             );
             IMeshSelection _IMeshSelection = (IMeshSelection)_Global.GetCOREInterface(iMeshSelectionID); //not used not tested
             //not used not tested
             IInterface_ID iIFPLayerManagerID = _Global.Interface_ID.Create( //not used not tested
-                (uint)BuiltInInterfaceIDA.LAYERMANAGER_INTERFACE, 
+                (uint)BuiltInInterfaceIDA.LAYERMANAGER_INTERFACE,
                 (uint)BuiltInInterfaceIDB.LAYERMANAGER_INTERFACE
             );
             _IIFPLayerManager = (IIFPLayerManager)_Global.GetCOREInterface(iIFPLayerManagerID); //not used not tested
             _NodeLayerProperties = _Global.Interface_ID.Create(0x44e025f8, 0x6b071e44); //not used not tested
             _EditablePoly = _Global.Interface_ID.Create(0x092779, 0x634020); //not used not tested
+        }
+  
+        /// <summary>
+        /// Gets the Global interface.
+        /// </summary>
+        public static IGlobal _Global { //test
+            get {
+                if ( global == null ) global = GlobalInterface.Instance;
+#if DEBUG
+                if ( global == null ) {
+                    try {
+                        IManager manager = Activator.GetObject(typeof(RManager)
+                                                              , "tcp://localhost:9998/Manager") as IManager;
+                        if ( manager != null ) global = manager.Global;
+                    } catch ( System.Net.Sockets.SocketException ) {
+                        //Remoting is disabled or unavailable for some other reason.
+                    }
+                }
+#endif
+                return global;
+            }
         }
 
         public static IHold Undo => Kernel._Global.TheHold;
@@ -156,10 +177,6 @@ namespace Micra.Core {
             }
         }
 
-        internal static IBitArray NewIBitarray(object numEdges) {
-            throw new NotImplementedException();
-        }
-
         /// <summary>
         /// Indicates whether the kernel is initialized. Primarily a debugging tool. 
         /// </summary>
@@ -175,44 +192,31 @@ namespace Micra.Core {
         /// <summary>
         /// Forces all views to redraw.
         /// </summary>
-        public static void RedrawViews() {
-            RedrawViews(Now);
-        }
+        public static void RedrawViews() => RedrawViews(Now);
+
 
         /// <summary>
-        /// Starts a timer that is called on a regular interval.
+        /// Forces a complete redraw of all views.
         /// </summary>
-        /// <param name="msecInterval"></param>
-        /// <param name="callback"></param>
-        /// <returns>An integer ID of the timer.</returns>
-        public static int StartTimer(int msecInterval, Action<int> callback) {
-            TimerProc proc = (IntPtr hWnd, uint nMsg, int nIDEvent, int dwTime) => callback(dwTime);
-            return SetTimer(IntPtr.Zero, 0, msecInterval, proc);
-        }
+        public static void CompleteRedraw() => _Interface.ForceCompleteRedraw(false);
 
         /// <summary>
-        /// Cancels the identified timer.
+        /// Gets the active viewport.
         /// </summary>
-        /// <param name="nTimer"></param>
-        public static void CancelTimer(int nTimer) {
-            KillTimer(IntPtr.Zero, nTimer);
-        }
+        public static IViewExp ActiveView => _Interface.ActiveViewExp;
+
 
         /// <summary>
         /// Add a string as a new line to the prompt. This is a convenient way to write messages back to the user. 
         /// </summary>
         /// <param name="s"></param>
-        public static void PushPrompt(string s) {
-            Kernel._Interface.PushPrompt(s);
-        }
+        public static void PushPrompt(string s) => Kernel._Interface.PushPrompt(s);
 
         /// <summary>
         /// Outputs a string the MAXScript listener with a newline appended
         /// </summary>
         /// <param name="s"></param>
-        public static void WriteLine(string s) {
-            Write(s + "\n");
-        }
+        public static void WriteLine(string s) => Write(s + "\n");
 
         public static void WriteLine(string s, params Object[] args) {
             WriteLine(String.Format(s, args));
@@ -233,17 +237,17 @@ namespace Micra.Core {
 
         public static void WriteClear(bool macroRec) {
             // clears the listener
-            SendMessage(_Global.TheListener.EditBox, 2004, (IntPtr)0, (IntPtr)0);
+            User32.SendMessage(_Global.TheListener.EditBox, 2004, (IntPtr)0, (IntPtr)0);
             if ( !macroRec ) return;
             // clears the macro recorder
-            SendMessage(_Global.TheListener.MacrorecBox, 2004, (IntPtr)0, (IntPtr)0);
+            User32.SendMessage(_Global.TheListener.MacrorecBox, 2004, (IntPtr)0, (IntPtr)0);
             //UIAccessor.SetWindowText(_Global.TheListener.MacrorecBox)[2][1]("");
         }
 
         /// <summary>
         /// Performs a file reset.
         /// </summary>
-        public static void Reset() { _Interface.FileReset(true); }
+        public static void ResetScene(bool noPrompt) { _Interface.FileReset(noPrompt); }
 
         /// <summary>
         /// Time slider visibility.
@@ -285,17 +289,6 @@ namespace Micra.Core {
         public static DispatcherOperation InvokeAsync(Action a) {
             return dispatcher.BeginInvoke(a);
         }
-
-        #region windows DLL imported functions
-        [DllImport("user32")]
-        private static extern int SetTimer(IntPtr hwnd, int nIDEvent, int uElapse, TimerProc CB);
-        [DllImport("user32")]
-        private static extern int KillTimer(IntPtr hwnd, int nIDEvent);
-        [DllImport("user32.dll")]
-        public static extern int SendMessage(IntPtr hWnd, int wMsg, IntPtr wParam, IntPtr lParam);
-        [DllImport("user32.dll")]
-        public static extern IntPtr FindWindow(string lpClassName, String lpWindowName); //not used not tested
-        #endregion
     }
     public static class ListenerExtensions { //test now
         public static void WriteToListener<T>(this IList<T> collection) {

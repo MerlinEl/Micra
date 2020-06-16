@@ -282,7 +282,7 @@ namespace Micra.Tools {
             //MaxSharp Mod by MerlinEl 2020
             Node node = ObjOps.GetFirstSlectedNode();
             SceneObject sceneObject = node.Object;
-            Geometry geometry = node.Object.Geometry;
+            //Geometry geometry = node.Object.Geometry;
 
             IINode iiNode = node._IINode;
             IReferenceTarget tRefTarget = node._Target;
@@ -300,14 +300,12 @@ namespace Micra.Tools {
             //mn.OutToTri(iMesh);
             //mn.SetFromTri(iMesh);
 
-
-
             Kernel.WriteLine("Selected Node:{0} subObjectLevel:{1}", node.Name, Kernel._Interface.SubObjectLevel);
             List<object> objs = new List<object> {
 
                 node,
                 sceneObject,
-                geometry,
+                //geometry,
                 iiNode,
                 tRefTarget,
                 iRefMarker,
@@ -442,9 +440,76 @@ namespace Micra.Tools {
             Node node = ObjOps.GetFirstSlectedNode();
             node.Object.SetSelectedVerts(vertIndexes, true);
         }
+
+        private void BtnSelSimElements_Click_1(object sender, EventArgs e) {
+            Kernel.WriteLine(( sender as Button ).Text);
+            bool byArea = CbxSimillarObjBy.SelectedIndex == 0 || CbxSimillarObjBy.SelectedIndex == 1;
+            bool byVcount = CbxSimillarObjBy.SelectedIndex == 2;
+            List<Node> selNodes = ObjOps.GetSlectedNodes();
+            Kernel.WriteLine("\tSelected nodes:{0}", selNodes.Count());
+            int slev = GlobalMethods.SubObjectLevel;
+            if ( selNodes.Count() == 1 && slev != 0 ) { //if single object is selected
+
+                Node node = selNodes.First();
+                if ( !node.IsEditable() ) return;
+                Kernel.WriteLine("selected Node:{0} subObjectLevel:{1}", node.Name, Kernel._Interface.SubObjectLevel);
+                switch ( slev ) { //next operation is depend on subobject level
+
+                    case 2: GeoOps.SelectSimillarEdges(node, byArea, byVcount); break;
+                    case 3: GeoOps.SelectSimillarEdges(node, byArea, byVcount); break;
+                    case 4: GeoOps.SelectSimillarFaces(node, byArea, byVcount); break;
+                    case 5: GeoOps.SelectSimillarElements(node, byArea, byVcount); break;
+                }
+
+            } else if ( selNodes.Count() >= 1 ) { //when multi object selection
+
+                ObjOps.SelectSimillarNodes(selNodes, byArea, byVcount);
+            }
+        }
+
+        private void BtnCreateBox_Click(object sender, EventArgs e) {
+            Kernel.WriteLine(( sender as Button ).Text);
+            float offsetX = (float)SpnBoxOffsetX.Value;
+            for (int i = 0; i < SpnBoxCnt.Value; i++) {
+                //PBox is derived from SceneObject
+                var box = new PBox(Primitives.Box.Create()) {
+                    Length = (float)SpnBoxLen.Value,
+                    Width = (float)SpnBoxWid.Value,
+                    Height = (float)SpnBoxHei.Value,
+                    Wirecolor = Color.RainbowColor((int)SpnBoxCnt.Value, i),
+                    Pos = new Point3(( (float)SpnBoxWid.Value + offsetX ) * i, 0, 0)
+                };
+            }
+        }
     }
 }
 
+
+/*
+                var box = new PBox(Primitives.Box.Create()); //as PBox; // is derived from SceneObject
+                box.Length = (float)SpnBoxLen.Value;
+                box.Width = (float)SpnBoxWid.Value;
+                box.Height = (float)SpnBoxHei.Value;
+                box.Wirecolor = Color.RainbowColor((int)SpnBoxCnt.Value, i);
+                box.Move(new Point3(((float)SpnBoxWid.Value + offsetX) * i, 0, 0));
+*/
+
+
+//var box = PBox.Create(); //PBox is derived from SceneObject
+/*box["Length"] = (float)SpnBoxLen.Value; //old way
+box["Width"] = (float)SpnBoxWid.Value; //old way
+box["Height"] = (float)SpnBoxHei.Value; //old way*/
+//box[PBox.Length] = (float)SpnBoxLen.Value; //old way
+
+
+/*IGenBoxObject boxObject = Kernel._Interface.CreateInstance(
+      SClass_ID.Geomobject, 
+      Kernel._Global.Class_ID.Create( (uint)BuiltInClassIDA.BOXOBJ_CLASS_ID,  0 )
+  ) as IGenBoxObject;
+  boxObject.SetParams(10, 10, 10, 1, 1, 1, true);
+  var box = Kernel._Interface.CreateObjectNode(boxObject);
+  INodeWrapper node = MaxNodeWrapper.Create(box) as INodeWrapper;
+  */
 
 //https://help.autodesk.com/view/3DSMAX/2017/ENU/?guid=__files_GUID_5F19208A_B95E_41A8_A788_3108F747AF0E_htm
 //Autodesk.Max.IInterface13.COREInterface13 collecting the IINodes

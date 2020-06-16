@@ -28,16 +28,22 @@
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.button5 = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.BtnFacesCount = new System.Windows.Forms.Button();
+            this.label3 = new System.Windows.Forms.Label();
             this.BtnGetSelFaces = new System.Windows.Forms.Button();
-            this.BtnEdgesCount = new System.Windows.Forms.Button();
+            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
             this.BtnGetSelEdges = new System.Windows.Forms.Button();
+            this.label2 = new System.Windows.Forms.Label();
+            this.SpnSimillarATolerance = new System.Windows.Forms.NumericUpDown();
             this.BtnGetSelVetts = new System.Windows.Forms.Button();
+            this.BtnSelSimElements = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
+            this.CbxSimillarObjBy = new System.Windows.Forms.ComboBox();
+            this.BtnFacesCount = new System.Windows.Forms.Button();
+            this.BtnEdgesCount = new System.Windows.Forms.Button();
             this.BtnVertsCount = new System.Windows.Forms.Button();
             this.BtnClearExecute = new System.Windows.Forms.Button();
             this.CbxScriptList = new System.Windows.Forms.ComboBox();
             this.BtnExecute = new System.Windows.Forms.Button();
-            this.BtnSelSimElements = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.CbxMaxFilePath = new System.Windows.Forms.ComboBox();
             this.BtnOpenMaxFile = new System.Windows.Forms.Button();
@@ -72,6 +78,17 @@
             this.button8 = new System.Windows.Forms.Button();
             this.button9 = new System.Windows.Forms.Button();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.label9 = new System.Windows.Forms.Label();
+            this.SpnBoxOffsetX = new System.Windows.Forms.NumericUpDown();
+            this.label8 = new System.Windows.Forms.Label();
+            this.SpnBoxCnt = new System.Windows.Forms.NumericUpDown();
+            this.label7 = new System.Windows.Forms.Label();
+            this.SpnBoxHei = new System.Windows.Forms.NumericUpDown();
+            this.label6 = new System.Windows.Forms.Label();
+            this.SpnBoxWid = new System.Windows.Forms.NumericUpDown();
+            this.label5 = new System.Windows.Forms.Label();
+            this.SpnBoxLen = new System.Windows.Forms.NumericUpDown();
+            this.BtnCreateBox = new System.Windows.Forms.Button();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
             this.tabControl1 = new System.Windows.Forms.TabControl();
@@ -79,26 +96,26 @@
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.groupBox9 = new System.Windows.Forms.GroupBox();
+            this.BtnSelectVerts = new System.Windows.Forms.Button();
+            this.BtnSelectEdges = new System.Windows.Forms.Button();
+            this.TbxElementsIndexes = new System.Windows.Forms.TextBox();
             this.BtnSelectFaces = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
             this.groupBox7 = new System.Windows.Forms.GroupBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.groupBox8 = new System.Windows.Forms.GroupBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
-            this.label2 = new System.Windows.Forms.Label();
-            this.SpnSimillarATolerance = new System.Windows.Forms.NumericUpDown();
-            this.label1 = new System.Windows.Forms.Label();
-            this.CbxSimillarObjBy = new System.Windows.Forms.ComboBox();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
-            this.TbxElementsIndexes = new System.Windows.Forms.TextBox();
-            this.label5 = new System.Windows.Forms.Label();
-            this.BtnSelectEdges = new System.Windows.Forms.Button();
-            this.BtnSelectVerts = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.SpnSimillarATolerance)).BeginInit();
             this.groupBox2.SuspendLayout();
             this.groupBox4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.SpnBoxOffsetX)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.SpnBoxCnt)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.SpnBoxHei)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.SpnBoxWid)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.SpnBoxLen)).BeginInit();
             this.groupBox5.SuspendLayout();
             this.groupBox6.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -110,8 +127,6 @@
             this.groupBox3.SuspendLayout();
             this.tabPage4.SuspendLayout();
             this.groupBox8.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.SpnSimillarATolerance)).BeginInit();
             this.SuspendLayout();
             // 
             // button1
@@ -147,22 +162,119 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.BtnFacesCount);
+            this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.BtnGetSelFaces);
-            this.groupBox1.Controls.Add(this.BtnEdgesCount);
+            this.groupBox1.Controls.Add(this.numericUpDown1);
             this.groupBox1.Controls.Add(this.BtnGetSelEdges);
+            this.groupBox1.Controls.Add(this.label2);
+            this.groupBox1.Controls.Add(this.SpnSimillarATolerance);
             this.groupBox1.Controls.Add(this.BtnGetSelVetts);
-            this.groupBox1.Controls.Add(this.BtnVertsCount);
+            this.groupBox1.Controls.Add(this.BtnSelSimElements);
+            this.groupBox1.Controls.Add(this.label1);
+            this.groupBox1.Controls.Add(this.CbxSimillarObjBy);
             this.groupBox1.Location = new System.Drawing.Point(6, 6);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(137, 291);
+            this.groupBox1.Size = new System.Drawing.Size(167, 291);
             this.groupBox1.TabIndex = 7;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Get Slect:";
+            this.groupBox1.Text = "Get Slected:";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(9, 193);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(85, 13);
+            this.label3.TabIndex = 57;
+            this.label3.Text = "Verts Tolerance:";
+            // 
+            // BtnGetSelFaces
+            // 
+            this.BtnGetSelFaces.Location = new System.Drawing.Point(6, 19);
+            this.BtnGetSelFaces.Name = "BtnGetSelFaces";
+            this.BtnGetSelFaces.Size = new System.Drawing.Size(154, 23);
+            this.BtnGetSelFaces.TabIndex = 29;
+            this.BtnGetSelFaces.Text = "Get Selected Faces";
+            this.BtnGetSelFaces.UseVisualStyleBackColor = true;
+            this.BtnGetSelFaces.Click += new System.EventHandler(this.BtnGetSelFaces_Click);
+            // 
+            // numericUpDown1
+            // 
+            this.numericUpDown1.Location = new System.Drawing.Point(98, 191);
+            this.numericUpDown1.Name = "numericUpDown1";
+            this.numericUpDown1.Size = new System.Drawing.Size(65, 20);
+            this.numericUpDown1.TabIndex = 56;
+            // 
+            // BtnGetSelEdges
+            // 
+            this.BtnGetSelEdges.Location = new System.Drawing.Point(6, 48);
+            this.BtnGetSelEdges.Name = "BtnGetSelEdges";
+            this.BtnGetSelEdges.Size = new System.Drawing.Size(154, 23);
+            this.BtnGetSelEdges.TabIndex = 30;
+            this.BtnGetSelEdges.Text = "Get Selected Edges";
+            this.BtnGetSelEdges.UseVisualStyleBackColor = true;
+            this.BtnGetSelEdges.Click += new System.EventHandler(this.BtnGetSelEdges_Click);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(9, 167);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(83, 13);
+            this.label2.TabIndex = 55;
+            this.label2.Text = "Area Tolerance:";
+            // 
+            // SpnSimillarATolerance
+            // 
+            this.SpnSimillarATolerance.Location = new System.Drawing.Point(98, 165);
+            this.SpnSimillarATolerance.Name = "SpnSimillarATolerance";
+            this.SpnSimillarATolerance.Size = new System.Drawing.Size(65, 20);
+            this.SpnSimillarATolerance.TabIndex = 54;
+            // 
+            // BtnGetSelVetts
+            // 
+            this.BtnGetSelVetts.Location = new System.Drawing.Point(6, 77);
+            this.BtnGetSelVetts.Name = "BtnGetSelVetts";
+            this.BtnGetSelVetts.Size = new System.Drawing.Size(154, 23);
+            this.BtnGetSelVetts.TabIndex = 31;
+            this.BtnGetSelVetts.Text = "Get Selected Verts";
+            this.BtnGetSelVetts.UseVisualStyleBackColor = true;
+            this.BtnGetSelVetts.Click += new System.EventHandler(this.BtnGetSelVetts_Click);
+            // 
+            // BtnSelSimElements
+            // 
+            this.BtnSelSimElements.Location = new System.Drawing.Point(6, 106);
+            this.BtnSelSimElements.Name = "BtnSelSimElements";
+            this.BtnSelSimElements.Size = new System.Drawing.Size(154, 25);
+            this.BtnSelSimElements.TabIndex = 51;
+            this.BtnSelSimElements.Text = "Select Simillar Elements";
+            this.BtnSelSimElements.UseVisualStyleBackColor = true;
+            this.BtnSelSimElements.Click += new System.EventHandler(this.BtnSelSimElements_Click_1);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(9, 142);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(21, 13);
+            this.label1.TabIndex = 53;
+            this.label1.Text = "by:";
+            // 
+            // CbxSimillarObjBy
+            // 
+            this.CbxSimillarObjBy.FormattingEnabled = true;
+            this.CbxSimillarObjBy.Items.AddRange(new object[] {
+            "Area",
+            "VertsCount",
+            "AreaAndVertsCount"});
+            this.CbxSimillarObjBy.Location = new System.Drawing.Point(36, 137);
+            this.CbxSimillarObjBy.Name = "CbxSimillarObjBy";
+            this.CbxSimillarObjBy.Size = new System.Drawing.Size(124, 21);
+            this.CbxSimillarObjBy.TabIndex = 52;
             // 
             // BtnFacesCount
             // 
-            this.BtnFacesCount.Location = new System.Drawing.Point(9, 204);
+            this.BtnFacesCount.Location = new System.Drawing.Point(6, 162);
             this.BtnFacesCount.Name = "BtnFacesCount";
             this.BtnFacesCount.Size = new System.Drawing.Size(122, 23);
             this.BtnFacesCount.TabIndex = 32;
@@ -170,19 +282,9 @@
             this.BtnFacesCount.UseVisualStyleBackColor = true;
             this.BtnFacesCount.Click += new System.EventHandler(this.BtnFacesCount_Click);
             // 
-            // BtnGetSelFaces
-            // 
-            this.BtnGetSelFaces.Location = new System.Drawing.Point(6, 19);
-            this.BtnGetSelFaces.Name = "BtnGetSelFaces";
-            this.BtnGetSelFaces.Size = new System.Drawing.Size(122, 23);
-            this.BtnGetSelFaces.TabIndex = 29;
-            this.BtnGetSelFaces.Text = "Get Selected Faces";
-            this.BtnGetSelFaces.UseVisualStyleBackColor = true;
-            this.BtnGetSelFaces.Click += new System.EventHandler(this.BtnGetSelFaces_Click);
-            // 
             // BtnEdgesCount
             // 
-            this.BtnEdgesCount.Location = new System.Drawing.Point(9, 233);
+            this.BtnEdgesCount.Location = new System.Drawing.Point(6, 191);
             this.BtnEdgesCount.Name = "BtnEdgesCount";
             this.BtnEdgesCount.Size = new System.Drawing.Size(122, 23);
             this.BtnEdgesCount.TabIndex = 33;
@@ -190,29 +292,9 @@
             this.BtnEdgesCount.UseVisualStyleBackColor = true;
             this.BtnEdgesCount.Click += new System.EventHandler(this.BtnEdgesCount_Click);
             // 
-            // BtnGetSelEdges
-            // 
-            this.BtnGetSelEdges.Location = new System.Drawing.Point(6, 48);
-            this.BtnGetSelEdges.Name = "BtnGetSelEdges";
-            this.BtnGetSelEdges.Size = new System.Drawing.Size(122, 23);
-            this.BtnGetSelEdges.TabIndex = 30;
-            this.BtnGetSelEdges.Text = "Get Selected Edges";
-            this.BtnGetSelEdges.UseVisualStyleBackColor = true;
-            this.BtnGetSelEdges.Click += new System.EventHandler(this.BtnGetSelEdges_Click);
-            // 
-            // BtnGetSelVetts
-            // 
-            this.BtnGetSelVetts.Location = new System.Drawing.Point(6, 77);
-            this.BtnGetSelVetts.Name = "BtnGetSelVetts";
-            this.BtnGetSelVetts.Size = new System.Drawing.Size(122, 23);
-            this.BtnGetSelVetts.TabIndex = 31;
-            this.BtnGetSelVetts.Text = "Get Selected Verts";
-            this.BtnGetSelVetts.UseVisualStyleBackColor = true;
-            this.BtnGetSelVetts.Click += new System.EventHandler(this.BtnGetSelVetts_Click);
-            // 
             // BtnVertsCount
             // 
-            this.BtnVertsCount.Location = new System.Drawing.Point(9, 262);
+            this.BtnVertsCount.Location = new System.Drawing.Point(6, 220);
             this.BtnVertsCount.Name = "BtnVertsCount";
             this.BtnVertsCount.Size = new System.Drawing.Size(122, 23);
             this.BtnVertsCount.TabIndex = 34;
@@ -248,16 +330,6 @@
             this.BtnExecute.Text = "EXECUTE SCRIPT";
             this.BtnExecute.UseVisualStyleBackColor = true;
             this.BtnExecute.Click += new System.EventHandler(this.BtnExecute_Click);
-            // 
-            // BtnSelSimElements
-            // 
-            this.BtnSelSimElements.Location = new System.Drawing.Point(6, 19);
-            this.BtnSelSimElements.Name = "BtnSelSimElements";
-            this.BtnSelSimElements.Size = new System.Drawing.Size(148, 23);
-            this.BtnSelSimElements.TabIndex = 8;
-            this.BtnSelSimElements.Text = "Select Simillar Elements";
-            this.BtnSelSimElements.UseVisualStyleBackColor = true;
-            this.BtnSelSimElements.Click += new System.EventHandler(this.BtnSelSimElements_Click);
             // 
             // groupBox2
             // 
@@ -345,7 +417,7 @@
             // 
             // button18
             // 
-            this.button18.Location = new System.Drawing.Point(6, 77);
+            this.button18.Location = new System.Drawing.Point(311, 13);
             this.button18.Name = "button18";
             this.button18.Size = new System.Drawing.Size(112, 34);
             this.button18.TabIndex = 38;
@@ -545,7 +617,7 @@
             // 
             // button6
             // 
-            this.button6.Location = new System.Drawing.Point(6, 48);
+            this.button6.Location = new System.Drawing.Point(6, 19);
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(148, 23);
             this.button6.TabIndex = 8;
@@ -603,14 +675,189 @@
             // 
             // groupBox4
             // 
+            this.groupBox4.Controls.Add(this.label9);
+            this.groupBox4.Controls.Add(this.SpnBoxOffsetX);
+            this.groupBox4.Controls.Add(this.label8);
+            this.groupBox4.Controls.Add(this.SpnBoxCnt);
+            this.groupBox4.Controls.Add(this.label7);
+            this.groupBox4.Controls.Add(this.SpnBoxHei);
+            this.groupBox4.Controls.Add(this.label6);
+            this.groupBox4.Controls.Add(this.SpnBoxWid);
+            this.groupBox4.Controls.Add(this.label5);
+            this.groupBox4.Controls.Add(this.SpnBoxLen);
+            this.groupBox4.Controls.Add(this.BtnCreateBox);
             this.groupBox4.Controls.Add(this.button8);
             this.groupBox4.Controls.Add(this.button7);
             this.groupBox4.Location = new System.Drawing.Point(304, 6);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(135, 242);
+            this.groupBox4.Size = new System.Drawing.Size(272, 242);
             this.groupBox4.TabIndex = 43;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Create:";
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(6, 210);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(48, 13);
+            this.label9.TabIndex = 65;
+            this.label9.Text = "Offset X:";
+            // 
+            // SpnBoxOffsetX
+            // 
+            this.SpnBoxOffsetX.DecimalPlaces = 1;
+            this.SpnBoxOffsetX.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+            this.SpnBoxOffsetX.Location = new System.Drawing.Point(58, 206);
+            this.SpnBoxOffsetX.Maximum = new decimal(new int[] {
+            1000000,
+            0,
+            0,
+            0});
+            this.SpnBoxOffsetX.Name = "SpnBoxOffsetX";
+            this.SpnBoxOffsetX.Size = new System.Drawing.Size(70, 20);
+            this.SpnBoxOffsetX.TabIndex = 64;
+            this.SpnBoxOffsetX.Value = new decimal(new int[] {
+            20,
+            0,
+            0,
+            0});
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(6, 184);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(38, 13);
+            this.label8.TabIndex = 63;
+            this.label8.Text = "Count:";
+            // 
+            // SpnBoxCnt
+            // 
+            this.SpnBoxCnt.Location = new System.Drawing.Point(58, 180);
+            this.SpnBoxCnt.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            this.SpnBoxCnt.Name = "SpnBoxCnt";
+            this.SpnBoxCnt.Size = new System.Drawing.Size(70, 20);
+            this.SpnBoxCnt.TabIndex = 62;
+            this.SpnBoxCnt.Value = new decimal(new int[] {
+            8,
+            0,
+            0,
+            0});
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(6, 158);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(41, 13);
+            this.label7.TabIndex = 61;
+            this.label7.Text = "Height:";
+            // 
+            // SpnBoxHei
+            // 
+            this.SpnBoxHei.DecimalPlaces = 1;
+            this.SpnBoxHei.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+            this.SpnBoxHei.Location = new System.Drawing.Point(58, 154);
+            this.SpnBoxHei.Maximum = new decimal(new int[] {
+            1000000,
+            0,
+            0,
+            0});
+            this.SpnBoxHei.Name = "SpnBoxHei";
+            this.SpnBoxHei.Size = new System.Drawing.Size(70, 20);
+            this.SpnBoxHei.TabIndex = 60;
+            this.SpnBoxHei.Value = new decimal(new int[] {
+            500,
+            0,
+            0,
+            0});
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(6, 132);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(38, 13);
+            this.label6.TabIndex = 59;
+            this.label6.Text = "Width:";
+            // 
+            // SpnBoxWid
+            // 
+            this.SpnBoxWid.DecimalPlaces = 1;
+            this.SpnBoxWid.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+            this.SpnBoxWid.Location = new System.Drawing.Point(58, 128);
+            this.SpnBoxWid.Maximum = new decimal(new int[] {
+            1000000,
+            0,
+            0,
+            0});
+            this.SpnBoxWid.Name = "SpnBoxWid";
+            this.SpnBoxWid.Size = new System.Drawing.Size(70, 20);
+            this.SpnBoxWid.TabIndex = 58;
+            this.SpnBoxWid.Value = new decimal(new int[] {
+            50,
+            0,
+            0,
+            0});
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(6, 106);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(43, 13);
+            this.label5.TabIndex = 57;
+            this.label5.Text = "Length:";
+            // 
+            // SpnBoxLen
+            // 
+            this.SpnBoxLen.DecimalPlaces = 1;
+            this.SpnBoxLen.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+            this.SpnBoxLen.Location = new System.Drawing.Point(58, 102);
+            this.SpnBoxLen.Maximum = new decimal(new int[] {
+            1000000,
+            0,
+            0,
+            0});
+            this.SpnBoxLen.Name = "SpnBoxLen";
+            this.SpnBoxLen.Size = new System.Drawing.Size(70, 20);
+            this.SpnBoxLen.TabIndex = 56;
+            this.SpnBoxLen.Value = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
+            // 
+            // BtnCreateBox
+            // 
+            this.BtnCreateBox.Location = new System.Drawing.Point(6, 77);
+            this.BtnCreateBox.Name = "BtnCreateBox";
+            this.BtnCreateBox.Size = new System.Drawing.Size(122, 23);
+            this.BtnCreateBox.TabIndex = 8;
+            this.BtnCreateBox.Text = "Create Boxes";
+            this.BtnCreateBox.UseVisualStyleBackColor = true;
+            this.BtnCreateBox.Click += new System.EventHandler(this.BtnCreateBox_Click);
             // 
             // groupBox5
             // 
@@ -644,7 +891,7 @@
             this.groupBox6.Controls.Add(this.CbxSceneNodeTypes);
             this.groupBox6.Location = new System.Drawing.Point(6, 254);
             this.groupBox6.Name = "groupBox6";
-            this.groupBox6.Size = new System.Drawing.Size(292, 242);
+            this.groupBox6.Size = new System.Drawing.Size(570, 242);
             this.groupBox6.TabIndex = 45;
             this.groupBox6.TabStop = false;
             this.groupBox6.Text = "Inspect:";
@@ -710,22 +957,51 @@
             // 
             this.groupBox9.Controls.Add(this.BtnSelectVerts);
             this.groupBox9.Controls.Add(this.BtnSelectEdges);
-            this.groupBox9.Controls.Add(this.label5);
             this.groupBox9.Controls.Add(this.TbxElementsIndexes);
             this.groupBox9.Controls.Add(this.BtnSelectFaces);
             this.groupBox9.Controls.Add(this.label4);
-            this.groupBox9.Location = new System.Drawing.Point(149, 6);
+            this.groupBox9.Location = new System.Drawing.Point(179, 6);
             this.groupBox9.Name = "groupBox9";
-            this.groupBox9.Size = new System.Drawing.Size(200, 291);
+            this.groupBox9.Size = new System.Drawing.Size(167, 291);
             this.groupBox9.TabIndex = 50;
             this.groupBox9.TabStop = false;
-            this.groupBox9.Text = "Set Select:";
+            this.groupBox9.Text = "Set Selected:";
+            // 
+            // BtnSelectVerts
+            // 
+            this.BtnSelectVerts.Location = new System.Drawing.Point(6, 119);
+            this.BtnSelectVerts.Name = "BtnSelectVerts";
+            this.BtnSelectVerts.Size = new System.Drawing.Size(155, 23);
+            this.BtnSelectVerts.TabIndex = 39;
+            this.BtnSelectVerts.Text = "Select Verts";
+            this.BtnSelectVerts.UseVisualStyleBackColor = true;
+            this.BtnSelectVerts.Click += new System.EventHandler(this.BtnSelectVerts_Click);
+            // 
+            // BtnSelectEdges
+            // 
+            this.BtnSelectEdges.Location = new System.Drawing.Point(6, 90);
+            this.BtnSelectEdges.Name = "BtnSelectEdges";
+            this.BtnSelectEdges.Size = new System.Drawing.Size(155, 23);
+            this.BtnSelectEdges.TabIndex = 38;
+            this.BtnSelectEdges.Text = "Select Edges";
+            this.BtnSelectEdges.UseVisualStyleBackColor = true;
+            this.BtnSelectEdges.Click += new System.EventHandler(this.BtnSelectEdges_Click);
+            // 
+            // TbxElementsIndexes
+            // 
+            this.TbxElementsIndexes.Location = new System.Drawing.Point(6, 35);
+            this.TbxElementsIndexes.Name = "TbxElementsIndexes";
+            this.TbxElementsIndexes.Size = new System.Drawing.Size(155, 20);
+            this.TbxElementsIndexes.TabIndex = 36;
+            this.TbxElementsIndexes.Text = "3,5,6";
+            this.TbxElementsIndexes.MouseEnter += new System.EventHandler(this.OnTextAreaGotFocus);
+            this.TbxElementsIndexes.MouseLeave += new System.EventHandler(this.OnTextAreaLostFocus);
             // 
             // BtnSelectFaces
             // 
-            this.BtnSelectFaces.Location = new System.Drawing.Point(9, 48);
+            this.BtnSelectFaces.Location = new System.Drawing.Point(6, 61);
             this.BtnSelectFaces.Name = "BtnSelectFaces";
-            this.BtnSelectFaces.Size = new System.Drawing.Size(185, 23);
+            this.BtnSelectFaces.Size = new System.Drawing.Size(155, 23);
             this.BtnSelectFaces.TabIndex = 35;
             this.BtnSelectFaces.Text = "Select Faces";
             this.BtnSelectFaces.UseVisualStyleBackColor = true;
@@ -734,11 +1010,11 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(6, 23);
+            this.label4.Location = new System.Drawing.Point(6, 19);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(53, 13);
+            this.label4.Size = new System.Drawing.Size(117, 13);
             this.label4.TabIndex = 1;
-            this.label4.Text = "Elements:";
+            this.label4.Text = "Elements:  (zero based)";
             // 
             // groupBox7
             // 
@@ -748,18 +1024,21 @@
             this.groupBox7.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.groupBox7.Location = new System.Drawing.Point(6, 303);
             this.groupBox7.Name = "groupBox7";
-            this.groupBox7.Size = new System.Drawing.Size(343, 212);
+            this.groupBox7.Size = new System.Drawing.Size(570, 339);
             this.groupBox7.TabIndex = 49;
             this.groupBox7.TabStop = false;
             this.groupBox7.Text = "Modify:";
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.BtnFacesCount);
+            this.groupBox3.Controls.Add(this.BtnEdgesCount);
             this.groupBox3.Controls.Add(this.BtnGetObjArea1);
+            this.groupBox3.Controls.Add(this.BtnVertsCount);
             this.groupBox3.Controls.Add(this.BtnGetObjArea2);
-            this.groupBox3.Location = new System.Drawing.Point(376, 6);
+            this.groupBox3.Location = new System.Drawing.Point(352, 6);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(200, 185);
+            this.groupBox3.Size = new System.Drawing.Size(224, 291);
             this.groupBox3.TabIndex = 48;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Inspect:";
@@ -778,13 +1057,6 @@
             // 
             // groupBox8
             // 
-            this.groupBox8.Controls.Add(this.label3);
-            this.groupBox8.Controls.Add(this.numericUpDown1);
-            this.groupBox8.Controls.Add(this.label2);
-            this.groupBox8.Controls.Add(this.SpnSimillarATolerance);
-            this.groupBox8.Controls.Add(this.label1);
-            this.groupBox8.Controls.Add(this.CbxSimillarObjBy);
-            this.groupBox8.Controls.Add(this.BtnSelSimElements);
             this.groupBox8.Controls.Add(this.button6);
             this.groupBox8.Controls.Add(this.button18);
             this.groupBox8.Location = new System.Drawing.Point(6, 109);
@@ -794,103 +1066,11 @@
             this.groupBox8.TabStop = false;
             this.groupBox8.Text = "Actions:";
             // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(327, 50);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(85, 13);
-            this.label3.TabIndex = 46;
-            this.label3.Text = "Verts Tolerance:";
-            // 
-            // numericUpDown1
-            // 
-            this.numericUpDown1.Location = new System.Drawing.Point(416, 48);
-            this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(65, 20);
-            this.numericUpDown1.TabIndex = 45;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(327, 24);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(83, 13);
-            this.label2.TabIndex = 44;
-            this.label2.Text = "Area Tolerance:";
-            // 
-            // SpnSimillarATolerance
-            // 
-            this.SpnSimillarATolerance.Location = new System.Drawing.Point(416, 22);
-            this.SpnSimillarATolerance.Name = "SpnSimillarATolerance";
-            this.SpnSimillarATolerance.Size = new System.Drawing.Size(65, 20);
-            this.SpnSimillarATolerance.TabIndex = 43;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(163, 24);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(21, 13);
-            this.label1.TabIndex = 42;
-            this.label1.Text = "by:";
-            // 
-            // CbxSimillarObjBy
-            // 
-            this.CbxSimillarObjBy.FormattingEnabled = true;
-            this.CbxSimillarObjBy.Items.AddRange(new object[] {
-            "Area",
-            "VertsCount",
-            "AreaAndVertsCount"});
-            this.CbxSimillarObjBy.Location = new System.Drawing.Point(190, 19);
-            this.CbxSimillarObjBy.Name = "CbxSimillarObjBy";
-            this.CbxSimillarObjBy.Size = new System.Drawing.Size(121, 21);
-            this.CbxSimillarObjBy.TabIndex = 41;
-            // 
             // imageList1
             // 
             this.imageList1.ColorDepth = System.Windows.Forms.ColorDepth.Depth8Bit;
             this.imageList1.ImageSize = new System.Drawing.Size(16, 16);
             this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
-            // 
-            // TbxElementsIndexes
-            // 
-            this.TbxElementsIndexes.Location = new System.Drawing.Point(61, 19);
-            this.TbxElementsIndexes.Name = "TbxElementsIndexes";
-            this.TbxElementsIndexes.Size = new System.Drawing.Size(70, 20);
-            this.TbxElementsIndexes.TabIndex = 36;
-            this.TbxElementsIndexes.Text = "3,5,6";
-            this.TbxElementsIndexes.MouseEnter += new System.EventHandler(this.OnTextAreaGotFocus);
-            this.TbxElementsIndexes.MouseLeave += new System.EventHandler(this.OnTextAreaLostFocus);
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(137, 23);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(59, 13);
-            this.label5.TabIndex = 37;
-            this.label5.Text = "zero based";
-            // 
-            // BtnSelectEdges
-            // 
-            this.BtnSelectEdges.Location = new System.Drawing.Point(9, 77);
-            this.BtnSelectEdges.Name = "BtnSelectEdges";
-            this.BtnSelectEdges.Size = new System.Drawing.Size(185, 23);
-            this.BtnSelectEdges.TabIndex = 38;
-            this.BtnSelectEdges.Text = "Select Edges";
-            this.BtnSelectEdges.UseVisualStyleBackColor = true;
-            this.BtnSelectEdges.Click += new System.EventHandler(this.BtnSelectEdges_Click);
-            // 
-            // BtnSelectVerts
-            // 
-            this.BtnSelectVerts.Location = new System.Drawing.Point(9, 106);
-            this.BtnSelectVerts.Name = "BtnSelectVerts";
-            this.BtnSelectVerts.Size = new System.Drawing.Size(185, 23);
-            this.BtnSelectVerts.TabIndex = 39;
-            this.BtnSelectVerts.Text = "Select Verts";
-            this.BtnSelectVerts.UseVisualStyleBackColor = true;
-            this.BtnSelectVerts.Click += new System.EventHandler(this.BtnSelectVerts_Click);
             // 
             // CsharpToMaxTest
             // 
@@ -902,8 +1082,17 @@
             this.Text = "Csharp To Max Test:";
             this.Shown += new System.EventHandler(this.OnFormShown);
             this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.SpnSimillarATolerance)).EndInit();
             this.groupBox2.ResumeLayout(false);
             this.groupBox4.ResumeLayout(false);
+            this.groupBox4.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.SpnBoxOffsetX)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.SpnBoxCnt)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.SpnBoxHei)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.SpnBoxWid)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.SpnBoxLen)).EndInit();
             this.groupBox5.ResumeLayout(false);
             this.groupBox5.PerformLayout();
             this.groupBox6.ResumeLayout(false);
@@ -919,9 +1108,6 @@
             this.groupBox3.ResumeLayout(false);
             this.tabPage4.ResumeLayout(false);
             this.groupBox8.ResumeLayout(false);
-            this.groupBox8.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.SpnSimillarATolerance)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -932,7 +1118,6 @@
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.Button BtnSelSimElements;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Button button6;
         private System.Windows.Forms.Button button7;
@@ -986,19 +1171,30 @@
         private System.Windows.Forms.Button BtnFacesCount;
         private System.Windows.Forms.Button BtnEdgesCount;
         private System.Windows.Forms.Button BtnVertsCount;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.ComboBox CbxSimillarObjBy;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.NumericUpDown numericUpDown1;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.NumericUpDown SpnSimillarATolerance;
         private System.Windows.Forms.GroupBox groupBox9;
         private System.Windows.Forms.Button BtnSelectFaces;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.ImageList imageList1;
         private System.Windows.Forms.TextBox TbxElementsIndexes;
-        private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Button BtnSelectVerts;
         private System.Windows.Forms.Button BtnSelectEdges;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.NumericUpDown numericUpDown1;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.NumericUpDown SpnSimillarATolerance;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.ComboBox CbxSimillarObjBy;
+        private System.Windows.Forms.Button BtnSelSimElements;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.NumericUpDown SpnBoxOffsetX;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.NumericUpDown SpnBoxCnt;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.NumericUpDown SpnBoxHei;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.NumericUpDown SpnBoxWid;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.NumericUpDown SpnBoxLen;
+        private System.Windows.Forms.Button BtnCreateBox;
     }
 }

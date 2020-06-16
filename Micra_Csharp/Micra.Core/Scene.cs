@@ -102,7 +102,7 @@ namespace Micra.Core {
         /// </summary>
         /// <param name="s"></param>
         public void CreateScene(SerializableScene s) {
-            Kernel.Reset();
+            Kernel.ResetScene(true);
             var sc = new SceneConstructor(this);
             sc.ConstructScene(s);
         }

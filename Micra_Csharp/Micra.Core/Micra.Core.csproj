@@ -39,6 +39,9 @@
     <Reference Include="Autodesk.Max">
       <HintPath>C:\Program Files\Autodesk\3ds Max 2018\Autodesk.Max.dll</HintPath>
     </Reference>
+    <Reference Include="Autodesk.Max.Remoting">
+      <HintPath>C:\Program Files\Autodesk\3ds Max 2018\Autodesk.Max.Remoting.dll</HintPath>
+    </Reference>
     <Reference Include="Autodesk.Max.Wrappers">
       <HintPath>C:\Program Files\Autodesk\3ds Max 2018\bin\assemblies\Autodesk.Max.Wrappers.dll</HintPath>
     </Reference>
@@ -98,6 +101,8 @@
     <Compile Include="CollectionExtensions.cs" />
     <Compile Include="Color.cs" />
     <Compile Include="EnumFlags.cs" />
+    <Compile Include="IPrimitive.cs" />
+    <Compile Include="NodeProperty.cs" />
     <Compile Include="Max.cs" />
     <Compile Include="Matrix3.cs" />
     <Compile Include="ObjOps.cs" />
@@ -123,6 +128,7 @@
     <Compile Include="ParameterBlockInterface.cs" />
     <Compile Include="Plugins.cs" />
     <Compile Include="Primitives.cs" />
+    <Compile Include="PrimitiveParams.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ReferenceListener.cs" />
     <Compile Include="ReferenceMakerAndTarget.cs" />
@@ -135,6 +141,8 @@
     <Compile Include="Structs.cs" />
     <Compile Include="SuperClassID.cs" />
     <Compile Include="Switch.cs" />
+    <Compile Include="Throw.cs" />
+    <Compile Include="User32.cs" />
     <Compile Include="Utility.cs" />
     <Compile Include="UvOps.cs" />
     <Compile Include="Vector3.cs" />

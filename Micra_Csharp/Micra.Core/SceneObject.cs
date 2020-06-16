@@ -64,7 +64,8 @@ namespace Micra.Core {
         #region PUBLIC TYPES
 
         public Mesh Mesh => GetMesh(Kernel.Now);
-        public Geometry Geometry => CreateWrapper<Geometry>(_Anim); //test seems to works
+        //public Geometry Geometry => CreateWrapper<Geometry>(_Anim); //TODO test this if need
+
         public SceneObject Base {
             get {
                 SceneObject r = this;
@@ -377,11 +378,41 @@ namespace Micra.Core {
             }
             return edge_len;
         }
+
+        #region Primitive Parameters
+
+        //TODO test it with mesh and poly
+        /// <summary> Set Wirecolor to Node. Works in Primitives.</summary>
+        public Color Wirecolor {
+            get { return new Color(_Node._IINode.WireColor); }
+            set { _Node._IINode.WireColor = value.SystemColor; }
+        }
+
+        public Point3 Pos {
+            get { return _Node?.GetNodeTransform(Kernel.Now).rows[0]; }
+            set {_Node?.SetNodeTransform(Matrix3.Identity.Translate(value), Kernel.Now);} 
+        }
+
+        /*public float Length {
+            get => parameterBlock["Length"] != null ? (float)parameterBlock["Length"].Value : -1;
+            set { if (parameterBlock["Length"] != null) parameterBlock["Length"].Value = value;}
+        }
+        public float Width {
+            get => parameterBlock["Width"] != null ? (float)parameterBlock["Width"].Value : -1;
+            set { if ( parameterBlock["Width"] != null ) parameterBlock["Width"].Value = value; }
+        }
+        public float Height {
+            get => parameterBlock["Height"] != null ? (float)parameterBlock["Height"].Value : -1;
+            set { if ( parameterBlock["Height"] != null ) parameterBlock["Height"].Value = value; }
+        }*/
+        #endregion
     }
 }
 
 
 /*
+parameterBlock.Params.Any("Length")
+
  ITriObject triObject = GetITriobject();
  //triObject->NotifyDependents(FOREVER, OBJ_CHANNELS, REFMSG_CHANGE);
  triObject.NotifyDependents(new Interval(), EnumChannels.OBJ_CHANNELS, EnumRefMsg.REFMSG_CHANGE);

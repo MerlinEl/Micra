@@ -15,6 +15,9 @@ namespace Micra.Core {
     /// Contains various utility functions.
     /// </summary>
     static class Utility {
+        /// <summary>Give ramdom values from 0.0 to 1.0. Default with three decimals.</summary>
+        public static float RandomFloat(Random random) => (float)(Math.Round(random.NextDouble(), 3));
+        public static float RandomFloat(Random random, int decimals) => (float)(Math.Round(random.NextDouble(), decimals));
         /// <summary>
         /// Converts an float or double object to a float.
         /// </summary>

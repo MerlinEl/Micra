@@ -232,6 +232,7 @@ namespace Micra.Core {
 
         public void Delete(TimeValue t, bool keepChildrenPositions) {
             _IINode.Delete(t, keepChildrenPositions);
+            //Kernel._Interface.DeleteNode(node._IINode, false, false);
         }
 
         public bool Visible {
@@ -270,8 +271,20 @@ namespace Micra.Core {
         public void Move(Point3 pt, TimeValue t) {
             _IINode.Move(t, Matrix3.Identity.Translate(pt)._IMatrix3, pt._IPoint3, false, true, (int)PivotMode.None, false);
         }
+
+        public Point3 Pos { //TODO not tested not used
+            get { return new Point3(_IINode.GetNodeTM(Kernel.Now, Kernel._Global.Interval.Create(0, 0)).GetRow(0)); }
+            set { Move(value); }
+        }
+
+        /*public void Unlink() { //TODO finish it
+            IINode parent = _IINode.ParentNode;
+            parent.depe
+            if ( !parent.IsRootNode ) parent.RemoveChildNode(node);
+        }*/
+
         public SceneObject Object => CreateWrapper<SceneObject>(_IINode.ObjectRef);
-        public Geometry Geometry => CreateWrapper<Geometry>(_IINode.ObjectRef); //TODO test this
+        //public Geometry Geometry => CreateWrapper<Geometry>(_IINode.ObjectRef); //TODO test this if need
 
         public IObject GetObjectRef() => _IINode.ObjectRef; //test only
         public Mesh GetMesh() => GetMesh(Kernel.Now);

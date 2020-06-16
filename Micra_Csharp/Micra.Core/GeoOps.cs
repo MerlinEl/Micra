@@ -126,6 +126,22 @@ namespace Micra.Core {
 }
 
 
+/*
+   /// <summary>
+   /// Returns the polycount of an IINode.
+   /// </summary>
+   public static Int32 GetPolyCount(IINode node)
+   {
+      int time = MaxInterfaces.COREInterface.Time;
+      IObjectWrapper objWrapperX = MaxInterfaces.Global.ObjectWrapper.Create();
+      objWrapperX.Init(time, node.EvalWorldState(time, true), false, enable, nativeType);
+
+      int xNumFaces = objWrapperX.NumFaces;
+      objWrapperX.Release();
+      return xNumFaces;
+   }
+*/
+
 /*//https://forums.cgsociety.org/t/get-uv-faces-area/2058271/5
 //not good to pick up all data for calculating area of one face
 //TODO take area from vertices

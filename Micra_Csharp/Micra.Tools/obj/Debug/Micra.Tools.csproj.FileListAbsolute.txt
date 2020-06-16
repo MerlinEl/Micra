@@ -170,3 +170,4 @@ D:\ReneBaca\Aprog\Micra\Micra_Csharp\Micra.Tools\bin\Debug\System.Numerics.Vecto
 D:\ReneBaca\Aprog\Micra\Micra_Csharp\Micra.Tools\bin\Debug\System.Reflection.Metadata.xml
 D:\ReneBaca\Aprog\Micra\Micra_Csharp\Micra.Tools\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
 D:\ReneBaca\Aprog\Micra\Micra_Csharp\Micra.Tools\bin\Debug\System.ValueTuple.xml
+D:\ReneBaca\Aprog\Micra\Micra_Csharp\Micra.Tools\bin\Debug\Autodesk.Max.Remoting.dll

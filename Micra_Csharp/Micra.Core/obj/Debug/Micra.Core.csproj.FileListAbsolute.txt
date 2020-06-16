@@ -33,7 +33,6 @@ D:\ReneBaca\Aprog\Micra\Micra_Csharp\Micra.Core\bin\Debug\CoreManagedUiControls.
 D:\ReneBaca\Aprog\Micra\Micra_Csharp\Micra.Core\bin\Debug\nunit.framework.dll
 D:\ReneBaca\Aprog\Micra\Micra_Csharp\Micra.Core\bin\Debug\MaxPlusDotNet.dll
 D:\ReneBaca\Aprog\Micra\Micra_Csharp\Micra.Core\bin\Debug\AdWindows.dll
-D:\ReneBaca\Aprog\Micra\Micra_Csharp\Micra.Core\bin\Debug\ExplorerFramework.xml
 D:\ReneBaca\Aprog\Micra\Micra_Csharp\Micra.Core\bin\Debug\CSharpUtilities.xml
 D:\ReneBaca\Aprog\Micra\Micra_Csharp\Micra.Core\bin\Debug\UiViewModels.xml
 D:\ReneBaca\Aprog\Micra\Micra_Csharp\Micra.Core\bin\Debug\CoreManagedUiControls.xml
@@ -44,12 +43,6 @@ D:\ReneBaca\Aprog\Micra\Micra_Csharp\Micra.Core\bin\Debug\ja-JP\SceneExplorer.re
 D:\ReneBaca\Aprog\Micra\Micra_Csharp\Micra.Core\bin\Debug\ko-KR\SceneExplorer.resources.dll
 D:\ReneBaca\Aprog\Micra\Micra_Csharp\Micra.Core\bin\Debug\pt-BR\SceneExplorer.resources.dll
 D:\ReneBaca\Aprog\Micra\Micra_Csharp\Micra.Core\bin\Debug\zh-CN\SceneExplorer.resources.dll
-D:\ReneBaca\Aprog\Micra\Micra_Csharp\Micra.Core\bin\Debug\de-DE\MaxExplorerBindings.resources.dll
-D:\ReneBaca\Aprog\Micra\Micra_Csharp\Micra.Core\bin\Debug\fr-FR\MaxExplorerBindings.resources.dll
-D:\ReneBaca\Aprog\Micra\Micra_Csharp\Micra.Core\bin\Debug\ja-JP\MaxExplorerBindings.resources.dll
-D:\ReneBaca\Aprog\Micra\Micra_Csharp\Micra.Core\bin\Debug\ko-KR\MaxExplorerBindings.resources.dll
-D:\ReneBaca\Aprog\Micra\Micra_Csharp\Micra.Core\bin\Debug\pt-BR\MaxExplorerBindings.resources.dll
-D:\ReneBaca\Aprog\Micra\Micra_Csharp\Micra.Core\bin\Debug\zh-CN\MaxExplorerBindings.resources.dll
 D:\ReneBaca\Aprog\Micra\Micra_Csharp\Micra.Core\bin\Debug\de-DE\CoreManagedUiControls.resources.dll
 D:\ReneBaca\Aprog\Micra\Micra_Csharp\Micra.Core\bin\Debug\fr-FR\CoreManagedUiControls.resources.dll
 D:\ReneBaca\Aprog\Micra\Micra_Csharp\Micra.Core\bin\Debug\ja-JP\CoreManagedUiControls.resources.dll
@@ -147,4 +140,12 @@ D:\ReneBaca\Aprog\Micra\Micra_Csharp\Micra.Core\bin\Debug\System.Numerics.Vector
 D:\ReneBaca\Aprog\Micra\Micra_Csharp\Micra.Core\bin\Debug\System.Reflection.Metadata.xml
 D:\ReneBaca\Aprog\Micra\Micra_Csharp\Micra.Core\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
 D:\ReneBaca\Aprog\Micra\Micra_Csharp\Micra.Core\bin\Debug\System.ValueTuple.xml
+D:\ReneBaca\Aprog\Micra\Micra_Csharp\Micra.Core\bin\Debug\Autodesk.Max.Remoting.dll
+D:\ReneBaca\Aprog\Micra\Micra_Csharp\Micra.Core\bin\Debug\ExplorerFramework.xml
+D:\ReneBaca\Aprog\Micra\Micra_Csharp\Micra.Core\bin\Debug\de-DE\MaxExplorerBindings.resources.dll
+D:\ReneBaca\Aprog\Micra\Micra_Csharp\Micra.Core\bin\Debug\fr-FR\MaxExplorerBindings.resources.dll
+D:\ReneBaca\Aprog\Micra\Micra_Csharp\Micra.Core\bin\Debug\ja-JP\MaxExplorerBindings.resources.dll
+D:\ReneBaca\Aprog\Micra\Micra_Csharp\Micra.Core\bin\Debug\ko-KR\MaxExplorerBindings.resources.dll
+D:\ReneBaca\Aprog\Micra\Micra_Csharp\Micra.Core\bin\Debug\pt-BR\MaxExplorerBindings.resources.dll
+D:\ReneBaca\Aprog\Micra\Micra_Csharp\Micra.Core\bin\Debug\zh-CN\MaxExplorerBindings.resources.dll
 D:\ReneBaca\Aprog\Micra\Micra_Csharp\Micra.Core\obj\Debug\Micra.Core.csprojAssemblyReference.cache

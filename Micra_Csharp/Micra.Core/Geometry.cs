@@ -15,15 +15,26 @@ namespace Micra.Core {
     public class Geometry : SceneObject {
         internal Geometry(IGeomObject x) : base(x) { }
 
+        /*public float Length {
+            get => (float)parameterBlock["Length"].Value;
+            set { parameterBlock["Length"].Value = value; }
+        }
+        public float Width {
+            get => (float)parameterBlock["Width"].Value;
+            set { parameterBlock["Width"].Value = value; }
+        }
+        public float Height {
+            get => (float)parameterBlock["Height"].Value;
+            set { parameterBlock["Height"].Value = value; }
+        }*/
+    }
+}
+
         /// <summary>
         /// Returns the corresponding wrapped object from the Autodesk.Max layer. 
         /// This is only used if the APIs of Autodesk.Max layer are required.
         /// </summary>
         //public IGeomObject _IGeomObject => _Anim as IGeomObject; //already defined in SceneObject
-    }
-}
-
-
 /*
 (GeomObject as ITriObject).Mesh.GetBoundingBox(TM)
 This returns the local space bounding box by default, but you can pass it:
