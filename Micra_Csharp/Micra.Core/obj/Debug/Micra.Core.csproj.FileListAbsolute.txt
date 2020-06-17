@@ -148,4 +148,3 @@ D:\ReneBaca\Aprog\Micra\Micra_Csharp\Micra.Core\bin\Debug\ja-JP\MaxExplorerBindi
 D:\ReneBaca\Aprog\Micra\Micra_Csharp\Micra.Core\bin\Debug\ko-KR\MaxExplorerBindings.resources.dll
 D:\ReneBaca\Aprog\Micra\Micra_Csharp\Micra.Core\bin\Debug\pt-BR\MaxExplorerBindings.resources.dll
 D:\ReneBaca\Aprog\Micra\Micra_Csharp\Micra.Core\bin\Debug\zh-CN\MaxExplorerBindings.resources.dll
-D:\ReneBaca\Aprog\Micra\Micra_Csharp\Micra.Core\obj\Debug\Micra.Core.csprojAssemblyReference.cache

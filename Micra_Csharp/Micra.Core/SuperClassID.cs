@@ -7,6 +7,7 @@
 //
 using Autodesk.Max;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 
@@ -79,15 +80,6 @@ namespace Micra.Core {
             return clsStr;
         }
 
-
-        public static string[] GetClassNames() {
-
-            Type type = typeof(SuperClassID);
-            return type.GetFields(BindingFlags.Static | BindingFlags.Public)
-                .Where(f => f.FieldType == type)
-                .Select(f => f.Name)
-                .ToArray();
-        }
         /// <summary>
         /// Return SuperClassID Name
         /// </summary>

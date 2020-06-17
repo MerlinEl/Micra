@@ -54,7 +54,7 @@ namespace Micra.Tools {
                 //IPoint3 vertWorldSpace = worldTm.PointTransform(vertObjectSpace);
                 points.Add(vertWorldSpace);
 
-                Kernel.WriteLine(vertID.ToString() + ": " + vertWorldSpace.X.ToString() + ", " + vertWorldSpace.Y.ToString() + ", " + vertWorldSpace.Z.ToString());
+                Max.Log(vertID.ToString() + ": " + vertWorldSpace.X.ToString() + ", " + vertWorldSpace.Y.ToString() + ", " + vertWorldSpace.Z.ToString());
             }
             return points;
         }

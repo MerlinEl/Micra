@@ -7,6 +7,9 @@
 //
 using Autodesk.Max;
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
 
 namespace Micra.Core {
     /// <summary>
@@ -44,10 +47,10 @@ namespace Micra.Core {
 
         public override SceneObject Create() {
             SceneObject o = Animatable.CreatePluginInstance<SceneObject>(scid, cid);
-            Node n = Node.Create(o);
-            o._Node = n ?? throw new Exception("Failed to create object node");
+            Node n = Node.Create(o); //create new Node from SceneObject
+            o._Node = n ?? throw new Exception("Failed to create object node"); //put Node Reference in to SceneObject
             Kernel.RedrawViews();
-            return o;
+            return o; //return SceneObject with embeded _Node reference
         }
     }
 

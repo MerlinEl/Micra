@@ -91,6 +91,7 @@
             this.BtnCreateBox = new System.Windows.Forms.Button();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
+            this.BtnGenParamsForCs = new System.Windows.Forms.Button();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.tabPage1 = new System.Windows.Forms.TabPage();
@@ -106,6 +107,7 @@
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.groupBox8 = new System.Windows.Forms.GroupBox();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
+            this.BtnShowBuiltInClassIDAB = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.SpnSimillarATolerance)).BeginInit();
@@ -400,7 +402,7 @@
             "All",
             "Standard",
             "Extended"});
-            this.CbxPrimitiveTypes.Location = new System.Drawing.Point(134, 109);
+            this.CbxPrimitiveTypes.Location = new System.Drawing.Point(285, 74);
             this.CbxPrimitiveTypes.Name = "CbxPrimitiveTypes";
             this.CbxPrimitiveTypes.Size = new System.Drawing.Size(145, 21);
             this.CbxPrimitiveTypes.TabIndex = 41;
@@ -623,7 +625,7 @@
             this.button6.TabIndex = 8;
             this.button6.Text = "Plugin List";
             this.button6.UseVisualStyleBackColor = true;
-            this.button6.Click += new System.EventHandler(this.Button6_Click);
+            this.button6.Click += new System.EventHandler(this.BtnPluginList);
             // 
             // CbxClassOf
             // 
@@ -882,6 +884,8 @@
             // 
             // groupBox6
             // 
+            this.groupBox6.Controls.Add(this.BtnShowBuiltInClassIDAB);
+            this.groupBox6.Controls.Add(this.BtnGenParamsForCs);
             this.groupBox6.Controls.Add(this.button16);
             this.groupBox6.Controls.Add(this.BtnGetSceneObjects);
             this.groupBox6.Controls.Add(this.button9);
@@ -895,6 +899,16 @@
             this.groupBox6.TabIndex = 45;
             this.groupBox6.TabStop = false;
             this.groupBox6.Text = "Inspect:";
+            // 
+            // BtnGenParamsForCs
+            // 
+            this.BtnGenParamsForCs.Location = new System.Drawing.Point(370, 45);
+            this.BtnGenParamsForCs.Name = "BtnGenParamsForCs";
+            this.BtnGenParamsForCs.Size = new System.Drawing.Size(194, 23);
+            this.BtnGenParamsForCs.TabIndex = 42;
+            this.BtnGenParamsForCs.Text = "Generate Parameters For Cs";
+            this.BtnGenParamsForCs.UseVisualStyleBackColor = true;
+            this.BtnGenParamsForCs.Click += new System.EventHandler(this.BtnGenParamsForCs_Click);
             // 
             // tabControl1
             // 
@@ -1072,6 +1086,16 @@
             this.imageList1.ImageSize = new System.Drawing.Size(16, 16);
             this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
             // 
+            // BtnShowBuiltInClassIDAB
+            // 
+            this.BtnShowBuiltInClassIDAB.Location = new System.Drawing.Point(370, 16);
+            this.BtnShowBuiltInClassIDAB.Name = "BtnShowBuiltInClassIDAB";
+            this.BtnShowBuiltInClassIDAB.Size = new System.Drawing.Size(194, 23);
+            this.BtnShowBuiltInClassIDAB.TabIndex = 43;
+            this.BtnShowBuiltInClassIDAB.Text = "Show BuiltInClassID (A - B)";
+            this.BtnShowBuiltInClassIDAB.UseVisualStyleBackColor = true;
+            this.BtnShowBuiltInClassIDAB.Click += new System.EventHandler(this.BtnShowBuiltInClassIDAB_Click);
+            // 
             // CsharpToMaxTest
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1196,5 +1220,7 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.NumericUpDown SpnBoxLen;
         private System.Windows.Forms.Button BtnCreateBox;
+        private System.Windows.Forms.Button BtnGenParamsForCs;
+        private System.Windows.Forms.Button BtnShowBuiltInClassIDAB;
     }
 }

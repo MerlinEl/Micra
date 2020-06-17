@@ -1,3 +1,40 @@
+
+FieldInfo[] fields1 = typeof(Primitives).GetFields(BindingFlags.Static | BindingFlags.Public);
+            foreach (FieldInfo f1 in fields1 ) {
+                Max.Log("\tparam:{0} val:{1}", f1.Name, f1.GetValue(Primitives.Bend).ToString());
+ 
+            }
+
+//TODO -not tested -not used
+// Get All roperties from a class
+// Utility.GetPropertiesNameOfClass(typeof(Primitives)).ForEach(n => Max.Log("\t{0}", n));
+public static List<string> GetPropertiesNameOfClass(Type type) {
+    List<string> propertyList = new List<string>();
+    if ( type != null ) {
+        foreach ( var prop in type.GetType().GetProperties() ) {
+            propertyList.Add(prop.Name);
+        }
+    }
+    return propertyList;
+}
+//TODO -not tested -not used
+//Utility.GetTypePropertyNames(typeof(Primitives), BindingFlags.Public | BindingFlags.Static)
+public static List<string> GetTypePropertyNames(Type type, BindingFlags bindingFlags) {
+    var propertyInfos = type.GetProperties(bindingFlags);
+    return propertyInfos.Select(propertyInfo => propertyInfo.Name).ToList();
+}
+
+public static List<string> GetClassPublicNames(Type type) {
+
+    FieldInfo[] fields = type.GetFields(BindingFlags.Static | BindingFlags.Public);
+    List<string> propertyList = new List<string>();
+    foreach ( FieldInfo fi in fields ) {
+        propertyList.Add(fi.Name);
+    }
+    return propertyList;
+}
+
+
 IObjectState iState = i.EvalWorldState(0, true);
 IObject iObj = iState.Obj;
 IPolyObject iPoly = (IPolyObject)iObj.ConvertToType(0, global.PolyObjectClassID);

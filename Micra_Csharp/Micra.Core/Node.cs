@@ -262,8 +262,8 @@ namespace Micra.Core {
         ///	</example></summary>
         public bool IsEditable(bool baseObject = false, bool modPolyOrMesh = false) {
 
-            Kernel.WriteLine("IsEditable > baseObject{0} modPolyOrMesh:{1}", baseObject, modPolyOrMesh);
-            //Kernel.WriteLine("is mesh:{0} is poly{1}", IsClassOf(ClassID.EditableMesh), IsClassOf(ClassID.EditablePoly));
+            Max.Log("IsEditable > baseObject{0} modPolyOrMesh:{1}", baseObject, modPolyOrMesh);
+            //Max.Log("is mesh:{0} is poly{1}", IsClassOf(ClassID.EditableMesh), IsClassOf(ClassID.EditablePoly));
             return IsClassOf(ClassID.EditableMesh) || IsClassOf(ClassID.EditablePoly);
         }
 

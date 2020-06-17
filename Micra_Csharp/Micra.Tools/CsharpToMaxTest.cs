@@ -21,9 +21,9 @@ namespace Micra.Tools {
             //get assembly version
             Text = Text + "     " + MxGet.AssemblyVersion;
             //fill list boxes
-            CbxClassOf.Items.AddRange(ClassID.GetClassNames());
+            CbxClassOf.Items.AddRange(Utility.GetClassNames(typeof(ClassID)).ToArray());
             CbxClassOf.SelectedIndex = 0;
-            CbxSuperClassOf.Items.AddRange(SuperClassID.GetClassNames());
+            CbxSuperClassOf.Items.AddRange(Utility.GetClassNames(typeof(SuperClassID)).ToArray());
             CbxSuperClassOf.SelectedIndex = 0;
             CbxSceneNodeTypes.SelectedIndex = 0;
             CbxPrimitiveTypes.SelectedIndex = 0;
@@ -46,7 +46,7 @@ namespace Micra.Tools {
         #region Execute Max Script
 
         private void BtnExecute_Click(object sender, EventArgs e) {
-            Kernel.WriteLine(( sender as Button ).Text);
+            Max.Log(( sender as Button ).Text);
             Kernel.ExecuteMaxScriptScript(textBox1.Text);
         }
         private void BtnClearExecute_Click(object sender, EventArgs e) {
@@ -77,33 +77,33 @@ namespace Micra.Tools {
 
         private void Button1_Click(object sender, EventArgs e) {
 
-            Kernel.WriteLine(( sender as Button ).Text);
+            Max.Log(( sender as Button ).Text);
             Node node = ObjOps.GetFirstSlectedNode();
-            Kernel.WriteLine("first node:{0}", node);
+            Max.Log("first node:{0}", node);
             if ( node != null ) node.SelectOnly();
         }
 
         private void Button5_Click(object sender, EventArgs e) {
-            Kernel.WriteLine(( sender as Button ).Text);
+            Max.Log(( sender as Button ).Text);
             string cmd = "Render()";
             textBox1.Text = cmd;
             IFPValue mxsRetVal = MxSet.ExecuteMAXScriptScript(cmd);
-            if ( mxsRetVal != null ) Kernel.WriteLine("Render Click gor:" + mxsRetVal.S);
+            if ( mxsRetVal != null ) Max.Log("Render Click gor:" + mxsRetVal.S);
         }
 
         private void BtnSelSimElements_Click(object sender, EventArgs e) {
 
-            Kernel.WriteLine(( sender as Button ).Text);
+            Max.Log(( sender as Button ).Text);
             bool byArea = CbxSimillarObjBy.SelectedIndex == 0 || CbxSimillarObjBy.SelectedIndex == 1;
             bool byVcount = CbxSimillarObjBy.SelectedIndex == 2;
             List<Node> selNodes = ObjOps.GetSlectedNodes();
-            Kernel.WriteLine("\tSelected nodes:{0}", selNodes.Count());
+            Max.Log("\tSelected nodes:{0}", selNodes.Count());
             int slev = GlobalMethods.SubObjectLevel;
             if ( selNodes.Count() == 1 && slev != 0 ) { //if single object is selected
 
                 Node node = selNodes.First();
                 if ( !node.IsEditable() ) return;
-                Kernel.WriteLine("selected Node:{0} subObjectLevel:{1}", node.Name, Kernel._Interface.SubObjectLevel);
+                Max.Log("selected Node:{0} subObjectLevel:{1}", node.Name, Kernel._Interface.SubObjectLevel);
                 switch ( slev ) { //next operation is depend on subobject level
 
                     case 2: GeoOps.SelectSimillarEdges(node, byArea, byVcount); break;
@@ -120,18 +120,18 @@ namespace Micra.Tools {
 
         private void Button9_Click(object sender, EventArgs e) {
 
-            Kernel.WriteLine(( sender as Button ).Text);
+            Max.Log(( sender as Button ).Text);
             PrintNode(Kernel.Scene.RootNode);
         }
 
         private void PrintNode(Node n, string indent = "") {
-            Kernel.WriteLine(indent + n.Name);
+            Max.Log(indent + n.Name);
             foreach ( var c in n.Children )
                 PrintNode(c, indent + "  ");
         }
 
         private void Button8_Click(object sender, EventArgs e) {
-            Kernel.WriteLine(( sender as Button ).Text);
+            Max.Log(( sender as Button ).Text);
             var teapot = Primitives.Teapot.Create();
             teapot["radius"] = 20.0;
             teapot.Move(new Point3(20, 10, 5));
@@ -139,124 +139,124 @@ namespace Micra.Tools {
         }
 
         private void Button7_Click(object sender, EventArgs e) {
-            Kernel.WriteLine(( sender as Button ).Text);
+            Max.Log(( sender as Button ).Text);
             var cylinder = Primitives.Cylinder.Create();
-            Kernel.WriteLine("Create Cylinder params:{0}", cylinder.Params.ToString());
+            Max.Log("Create Cylinder params:{0}", cylinder.Params.ToString());
             cylinder["radius"] = 20.0f;
             cylinder["height"] = 40.0f;
             cylinder["heightsegs"] = 10;
-            Kernel.WriteLine("Create Bend");
+            Max.Log("Create Bend");
             var bend = Primitives.Bend.Create();
             cylinder.AddModifier(bend);
             bend["bendangle"] = 30.0f;
         }
 
-        private void Button6_Click(object sender, EventArgs e) {
+        private void BtnPluginList(object sender, EventArgs e) {
 
-            Kernel.WriteLine(( sender as Button ).Text);
-            foreach ( var p in PluginMgr.Plugins ) Kernel.WriteLine(p.ClassName);
+            Max.Log(( sender as Button ).Text);
+            foreach ( var p in PluginMgr.Plugins ) Max.Log(p.ClassName);
         }
 
         private void Button10_Click(object sender, EventArgs e) {
 
-            Kernel.PushPrompt("Look at the MAXScript listener window");
-            Kernel.WriteLine("I'm some text appearing in the MAXScript listener window!");
+            Max.PushPrompt("Look at the MAXScript listener window");
+            Max.Log("I'm some text appearing in the MAXScript listener window!");
         }
 
         private void Button11_Click(object sender, EventArgs e) {
-            Kernel.WriteLine(( sender as Button ).Text);
+            Max.Log(( sender as Button ).Text);
             ObjOps.SelectAll(ChkSelHidden.Checked, true);
         }
 
         private void Button12_Click(object sender, EventArgs e) {
-            Kernel.WriteLine(( sender as Button ).Text);
+            Max.Log(( sender as Button ).Text);
             ObjOps.DeselectAll(true);
         }
 
         private void Button13_Click(object sender, EventArgs e) {
-            Kernel.WriteLine(( sender as Button ).Text);
+            Max.Log(( sender as Button ).Text);
             if ( RbtClassOf.Checked ) {
 
                 ClassID classId = ClassID.FromName(CbxClassOf.SelectedItem.ToString());
-                Kernel.WriteLine("classId:{0} Name:{1}", classId, classId.GetClassName(classId));
+                Max.Log("classId:{0} Name:{1}", classId, classId.GetClassName(classId));
                 ObjOps.SelectAllOfType(classId, ChkSelHidden2.Checked, ChkClearSel.Checked, true);
 
             } else {
 
                 SuperClassID superClassId = SuperClassID.FromName(CbxSuperClassOf.SelectedItem.ToString());
-                Kernel.WriteLine("superClassId:{0}", superClassId);
+                Max.Log("superClassId:{0}", superClassId);
                 ObjOps.SelectAllOfType(superClassId, ChkSelHidden2.Checked, ChkClearSel.Checked, true);
             }
         }
         private void Button_ShowSelClass(object sender, EventArgs e) {
-            Kernel.WriteLine(( sender as Button ).Text);
+            Max.Log(( sender as Button ).Text);
             ObjOps.ShowClass(ObjOps.GetSlectedNodes());
         }
 
         private void OnFormShown(object sender, EventArgs e) {
-            Kernel.WriteClear(false);
+            Max.LogClear(false);
         }
 
         private void Button15_Click(object sender, EventArgs e) {
-            Kernel.WriteLine(( sender as Button ).Text);
-            Kernel.WriteClear(ChkMacroRec.Checked);
+            Max.Log(( sender as Button ).Text);
+            Max.LogClear(ChkMacroRec.Checked);
         }
 
         private void Button_ShowSelParams(object sender, EventArgs e) {
-            Kernel.WriteLine(( sender as Button ).Text);
-            ObjOps.ShowParameters(ObjOps.GetSlectedNodes());
+            Max.Log(( sender as Button ).Text);
+            Utility.ShowParameters(ObjOps.GetSlectedNodes());
         }
 
         private void Button_SelInstances(object sender, EventArgs e) {
-            Kernel.WriteLine(( sender as Button ).Text);
+            Max.Log(( sender as Button ).Text);
             ObjOps.SelectInstances(ObjOps.GetFirstSlectedNode(), true);
         }
 
         private void BtnOpenMaxFile_Click(object sender, EventArgs e) {
-            Kernel.WriteLine(( sender as Button ).Text);
+            Max.Log(( sender as Button ).Text);
             string maxFilePpath = CbxMaxFilePath.Text;
-            Kernel.WriteLine("Open Max file:{0} exists:{1}", maxFilePpath, File.Exists(maxFilePpath));
+            Max.Log("Open Max file:{0} exists:{1}", maxFilePpath, File.Exists(maxFilePpath));
             Kernel._Interface.LoadFromFile(maxFilePpath, true);
         }
 
         private void BtnGetSelFaces_Click(object sender, EventArgs e) {
-            Kernel.WriteLine(( sender as Button ).Text);
+            Max.Log(( sender as Button ).Text);
             Node node = ObjOps.GetFirstSlectedNode();
-            Kernel.WriteLine("selected Node:{0} subObjectLevel:{1}", node.Name, Kernel._Interface.SubObjectLevel);
+            Max.Log("selected Node:{0} subObjectLevel:{1}", node.Name, Kernel._Interface.SubObjectLevel);
             List<int> fsel = node.Object.GetSelectedFaces();
-            Kernel.WriteLine("selected Faces:{0} #({1}) -- +1 in Max", fsel.Count, String.Join(",", fsel));
+            Max.Log("selected Faces:{0} #({1}) -- +1 in Max", fsel.Count, String.Join(",", fsel));
         }
 
         private void BtnGetSelEdges_Click(object sender, EventArgs e) {
-            Kernel.WriteLine(( sender as Button ).Text);
+            Max.Log(( sender as Button ).Text);
             Node node = ObjOps.GetFirstSlectedNode();
-            Kernel.WriteLine("selected Node:{0} subObjectLevel:{1}", node.Name, Kernel._Interface.SubObjectLevel);
+            Max.Log("selected Node:{0} subObjectLevel:{1}", node.Name, Kernel._Interface.SubObjectLevel);
             var esel = node.Object.GetSelectedEdges();
-            Kernel.WriteLine("selected Edges:{0} #({1}) -- +1 in Max", esel.Count, String.Join(",", esel));
+            Max.Log("selected Edges:{0} #({1}) -- +1 in Max", esel.Count, String.Join(",", esel));
         }
 
         private void BtnGetSelVetts_Click(object sender, EventArgs e) {
-            Kernel.WriteLine(( sender as Button ).Text);
+            Max.Log(( sender as Button ).Text);
             Node node = ObjOps.GetFirstSlectedNode();
-            Kernel.WriteLine("selected Node:{0} subObjectLevel:{1}", node.Name, Kernel._Interface.SubObjectLevel);
+            Max.Log("selected Node:{0} subObjectLevel:{1}", node.Name, Kernel._Interface.SubObjectLevel);
             var vsel = node.Object.GetSelectedVerts();
-            Kernel.WriteLine("selected Verts:{0} #({1}) -- +1 in Max", vsel.Count, String.Join(",", vsel));
+            Max.Log("selected Verts:{0} #({1}) -- +1 in Max", vsel.Count, String.Join(",", vsel));
         }
 
         private void BtnHideUnselFaces_Click(object sender, EventArgs e) {
-            Kernel.WriteLine(( sender as Button ).Text);
+            Max.Log(( sender as Button ).Text);
             Node node = ObjOps.GetFirstSlectedNode();
             if ( node != null ) { node.Object.HideGeometry(ChkSelected.Checked); }
         }
 
         private void BtnUnhideGeometry_Click(object sender, EventArgs e) {
-            Kernel.WriteLine(( sender as Button ).Text);
+            Max.Log(( sender as Button ).Text);
             Node node = ObjOps.GetFirstSlectedNode();
             if ( node != null ) { node.Object.UnhideGeometry(); }
         }
 
         private void BtnGetSceneObjects_Click(object sender, EventArgs e) {
-            Kernel.WriteLine(( sender as Button ).Text);
+            Max.Log(( sender as Button ).Text);
             IEnumerable<Node> nodes = Enumerable.Empty<Node>(); //new List<Node>(); 
             switch ( CbxSceneNodeTypes.SelectedItem ) {
 
@@ -267,9 +267,9 @@ namespace Micra.Tools {
                 case "HelperNodes": nodes = Kernel.Scene.HelperNodes; break;
                 case "ShapeNodes": nodes = Kernel.Scene.ShapeNodes; break;
             }
-            Kernel.WriteLine("Get Scene objects by type:{0} ( {1} ) >", CbxSceneNodeTypes.SelectedItem, nodes.Count());
+            Max.Log("Get Scene objects by type:{0} ( {1} ) >", CbxSceneNodeTypes.SelectedItem, nodes.Count());
             nodes.ToList()
-                .ForEach(n => Kernel.WriteLine("\tNode:{0}\t\tSuperClass:{1}",
+                .ForEach(n => Max.Log("\tNode:{0}\t\tSuperClass:{1}",
                 n.Name,
                 n.Object.SuperClassID.GetClassName(n.Object.SuperClassID)
                 ));
@@ -277,7 +277,7 @@ namespace Micra.Tools {
 
         private void Button18_Click(object sender, EventArgs e) {
 
-            Kernel.WriteLine(( sender as Button ).Text);
+            Max.Log(( sender as Button ).Text);
 
             //MaxSharp Mod by MerlinEl 2020
             Node node = ObjOps.GetFirstSlectedNode();
@@ -300,7 +300,7 @@ namespace Micra.Tools {
             //mn.OutToTri(iMesh);
             //mn.SetFromTri(iMesh);
 
-            Kernel.WriteLine("Selected Node:{0} subObjectLevel:{1}", node.Name, Kernel._Interface.SubObjectLevel);
+            Max.Log("Selected Node:{0} subObjectLevel:{1}", node.Name, Kernel._Interface.SubObjectLevel);
             List<object> objs = new List<object> {
 
                 node,
@@ -317,14 +317,14 @@ namespace Micra.Tools {
                 triObject,
                 iMesh
             };
-            Kernel.WriteLine("\tObject Types( {0} ) > ", objs.Count());
+            Max.Log("\tObject Types( {0} ) > ", objs.Count());
             objs.ForEach(o => {
-                Kernel.WriteLine("\n\t\t{0}", o);
+                Max.Log("\n\t\t{0}", o);
                 try {
                     Type t = o.GetType(); // Where obj is object whose properties you need.
                     PropertyInfo[] pi = t.GetProperties();
                     foreach ( PropertyInfo p in pi ) {
-                        Kernel.WriteLine("\t\t\t" + p.Name + " : " + p.GetType());
+                        Max.Log("\t\t\t" + p.Name + " : " + p.GetType());
                     }
 
                 } catch { }
@@ -337,15 +337,15 @@ namespace Micra.Tools {
                     //foreach ( PropertyDescriptor descriptor in TypeDescriptor.GetProperties(o) ) {
                     //    string name = descriptor.Name;
                     //    object value = descriptor.GetValue(o);
-                    //    Kernel.WriteLine("\t\tName:{0} Value:{1}", name, value);
+                    //    Max.Log("\t\tName:{0} Value:{1}", name, value);
                     //}
                 } catch { }
             });*/
 
 
             /*objs.ForEach(n => {
-                Kernel.WriteLine("\tObject:{0} type:{1} params:{2}", n.Name, n.GetType().Name, n.Object.Params.Count());
-                foreach ( IParameter p in n.Object.Params ) Kernel.WriteLine("\t\tparam:{0}", p.Name);
+                Max.Log("\tObject:{0} type:{1} params:{2}", n.Name, n.GetType().Name, n.Object.Params.Count());
+                foreach ( IParameter p in n.Object.Params ) Max.Log("\t\tparam:{0}", p.Name);
             });*/
 
             //animArray = getSubAnimNames $[#Object__Editable_Patch][#Master]
@@ -353,45 +353,21 @@ namespace Micra.Tools {
             //IMasterPointControl masterPointController = IMasterPointControl.GetSubController(1);
         }
 
-        private void BtnListPrimitives_Click(object sender, EventArgs e) {
-            //not works
-            Kernel.WriteLine(( sender as Button ).Text);
-
-            ISubClassList iSubClassList = Kernel._Global.ClassDirectory.Instance.GetClassList(SClass_ID.Geomobject);
-            //SClass_ID
-            //BuiltInClassIDB
-            //Iterate through IGlobal.IGlobalClassDirectory
-            //Get all classes where Category == "Standard Primitives" || Category == "Extended Primitives"
-            Type type = typeof(IGlobal.IGlobalClassDirectory);
-            BindingFlags flags = BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Default; //default == "All"
-            switch ( CbxPrimitiveTypes.SelectedItem ) {
-
-                case "Standard": break;
-                case "Extended": break;
-            }
-
-            Kernel.WriteLine("fields:{0}", type.GetFields(flags).Length);
-            type.GetFields(flags).WriteToListener("~");
-            //.Where(f => f.FieldType == type)
-            //.Apply(f => f.Name)
-        }
-
-
         private void BtnGetObjArea_Click(object sender, EventArgs e) {
-            Kernel.WriteLine(( sender as Button ).Text);
+            Max.Log(( sender as Button ).Text);
             Node node = ObjOps.GetFirstSlectedNode();
             double area = node.Object.GetArea();
-            Kernel.WriteLine("Object:{0} Class:{1} Area:{2}", node.Name, node.ClassOf(), area);
+            Max.Log("Object:{0} Class:{1} Area:{2}", node.Name, node.ClassOf(), area);
         }
 
         private void BtnGetFaceArea_Click(object sender, EventArgs e) {
-            Kernel.WriteLine(( sender as Button ).Text);
+            Max.Log(( sender as Button ).Text);
             Node node = ObjOps.GetFirstSlectedNode();
             var fsel = node.Object.GetSelectedFaces();
             fsel.ForEach(f => {
 
                 double area = node.Object.GetFaceArea(f);
-                Kernel.WriteLine("Face:{0} Area:{1}", f, area);
+                Max.Log("Face:{0} Area:{1}", f, area);
             });
         }
 
@@ -400,25 +376,25 @@ namespace Micra.Tools {
         }
 
         private void BtnFacesCount_Click(object sender, EventArgs e) {
-            Kernel.WriteLine(( sender as Button ).Text);
+            Max.Log(( sender as Button ).Text);
             Node node = ObjOps.GetFirstSlectedNode();
             Max.Log("Faces count:{0}", node.Object.NumFaces);
         }
 
         private void BtnEdgesCount_Click(object sender, EventArgs e) {
-            Kernel.WriteLine(( sender as Button ).Text);
+            Max.Log(( sender as Button ).Text);
             Node node = ObjOps.GetFirstSlectedNode();
             Max.Log("Edges count:{0}", node.Object.NumEdges);
         }
 
         private void BtnVertsCount_Click(object sender, EventArgs e) {
-            Kernel.WriteLine(( sender as Button ).Text);
+            Max.Log(( sender as Button ).Text);
             Node node = ObjOps.GetFirstSlectedNode();
             Max.Log("Verts count:{0}", node.Object.NumVerts);
         }
 
         private void BtnSelectFaces_Click(object sender, EventArgs e) {
-            Kernel.WriteLine(( sender as Button ).Text);
+            Max.Log(( sender as Button ).Text);
             List<int> faceIndexes = TbxElementsIndexes.Text.Split(',').Select(Int32.Parse).ToList();
             Max.Log("SetSelectedFaces > faces:({0})", string.Join(",", faceIndexes));
             Node node = ObjOps.GetFirstSlectedNode();
@@ -426,7 +402,7 @@ namespace Micra.Tools {
         }
 
         private void BtnSelectEdges_Click(object sender, EventArgs e) {
-            Kernel.WriteLine(( sender as Button ).Text);
+            Max.Log(( sender as Button ).Text);
             List<int> edgeIndexes = TbxElementsIndexes.Text.Split(',').Select(Int32.Parse).ToList();
             Max.Log("SetSelectedEdges > edges:({0})", string.Join(",", edgeIndexes));
             Node node = ObjOps.GetFirstSlectedNode();
@@ -434,7 +410,7 @@ namespace Micra.Tools {
         }
 
         private void BtnSelectVerts_Click(object sender, EventArgs e) {
-            Kernel.WriteLine(( sender as Button ).Text);
+            Max.Log(( sender as Button ).Text);
             List<int> vertIndexes = TbxElementsIndexes.Text.Split(',').Select(Int32.Parse).ToList();
             Max.Log("SetSelectedVerts > verts:({0})", string.Join(",", vertIndexes));
             Node node = ObjOps.GetFirstSlectedNode();
@@ -442,17 +418,17 @@ namespace Micra.Tools {
         }
 
         private void BtnSelSimElements_Click_1(object sender, EventArgs e) {
-            Kernel.WriteLine(( sender as Button ).Text);
+            Max.Log(( sender as Button ).Text);
             bool byArea = CbxSimillarObjBy.SelectedIndex == 0 || CbxSimillarObjBy.SelectedIndex == 1;
             bool byVcount = CbxSimillarObjBy.SelectedIndex == 2;
             List<Node> selNodes = ObjOps.GetSlectedNodes();
-            Kernel.WriteLine("\tSelected nodes:{0}", selNodes.Count());
+            Max.Log("\tSelected nodes:{0}", selNodes.Count());
             int slev = GlobalMethods.SubObjectLevel;
             if ( selNodes.Count() == 1 && slev != 0 ) { //if single object is selected
 
                 Node node = selNodes.First();
                 if ( !node.IsEditable() ) return;
-                Kernel.WriteLine("selected Node:{0} subObjectLevel:{1}", node.Name, Kernel._Interface.SubObjectLevel);
+                Max.Log("selected Node:{0} subObjectLevel:{1}", node.Name, Kernel._Interface.SubObjectLevel);
                 switch ( slev ) { //next operation is depend on subobject level
 
                     case 2: GeoOps.SelectSimillarEdges(node, byArea, byVcount); break;
@@ -468,31 +444,182 @@ namespace Micra.Tools {
         }
 
         private void BtnCreateBox_Click(object sender, EventArgs e) {
-            Kernel.WriteLine(( sender as Button ).Text);
+
+            //Node node = ObjOps.GetFirstSlectedNode();
+            //node.Object.Params.
+            //foreach ( IParameter p in n.Object.Params )
+            /*SceneObject box = Primitives.Box.Create();
+            var pbox = new PBox(Primitives.Box.Create());
+            pbox.Length = 0;
+            var param = box.Params.FirstOrDefault(t => t.Name == "Width");
+            if ( param != null ) {
+                param.Value = 0;
+            }*/
+
+            Max.Log(( sender as Button ).Text);
             float offsetX = (float)SpnBoxOffsetX.Value;
-            for (int i = 0; i < SpnBoxCnt.Value; i++) {
+            for ( int i = 0; i < SpnBoxCnt.Value; i++ ) {
                 //PBox is derived from SceneObject
-                var box = new PBox(Primitives.Box.Create()) {
+                new PBox(Primitives.Box.Create()) {
                     Length = (float)SpnBoxLen.Value,
                     Width = (float)SpnBoxWid.Value,
                     Height = (float)SpnBoxHei.Value,
                     Wirecolor = Color.RainbowColor((int)SpnBoxCnt.Value, i),
                     Pos = new Point3(( (float)SpnBoxWid.Value + offsetX ) * i, 0, 0)
+                    //realWorldMapSize = false //not works
                 };
             }
         }
+
+        private void BtnGenParamsForCs_Click(object sender, EventArgs e) {
+            Max.Log(( sender as Button ).Text);
+            //var o = Primitives.Box.Create();
+            FieldInfo[] fields1 = typeof(Primitives).GetFields(BindingFlags.Static | BindingFlags.Public);
+            foreach ( FieldInfo f1 in fields1 ) {
+                Max.Log("\tMax.Log(\"create:{0}\");\nso.Add(Primitives.{0}.Create());", f1.Name);
+ 
+            }
+            List<SceneObject> so = new List<SceneObject>() { };
+            Max.Log("create:Teapot");
+            so.Add(Primitives.Teapot.Create());
+            Max.Log("create:Box");
+            so.Add(Primitives.Box.Create());
+            Max.Log("create:Sphere");
+            so.Add(Primitives.Sphere.Create());
+            Max.Log("create:Cylinder");
+            so.Add(Primitives.Cylinder.Create());
+            Max.Log("create:Torus");
+            so.Add(Primitives.Torus.Create());
+            Max.Log("create:Donut");
+            so.Add(Primitives.Donut.Create());
+            Max.Log("create:GSphere");
+            so.Add(Primitives.GSphere.Create());
+            Max.Log("create:Hedra");
+            so.Add(Primitives.Hedra.Create());
+            Max.Log("create:Loft");
+            so.Add(Primitives.Loft.Create());
+            Max.Log("create:Pipe");
+            so.Add(Primitives.Pipe.Create());
+            Max.Log("create:Pyramid");
+            so.Add(Primitives.Pyramid.Create());
+            Max.Log("create:Tube");
+            so.Add(Primitives.Tube.Create());
+            Max.Log("create:PointHelper");
+            so.Add(Primitives.PointHelper.Create());
+            Max.Log("create:Circle");
+            so.Add(Primitives.Circle.Create());
+            Max.Log("create:Ellipse");
+            so.Add(Primitives.Ellipse.Create());
+            Max.Log("create:Helix");
+            so.Add(Primitives.Helix.Create());
+            Max.Log("create:LinearShape");
+            so.Add(Primitives.LinearShape.Create());
+            Max.Log("create:LinearWave");
+            so.Add(Primitives.LinearWave.Create());
+            Max.Log("create:Polygon");
+            so.Add(Primitives.Polygon.Create());
+            Max.Log("create:Plane");
+            so.Add(Primitives.Plane.Create());
+            Max.Log("create:Rectangle");
+            so.Add(Primitives.Rectangle.Create());
+            Max.Log("create:SineWave");
+            so.Add(Primitives.SineWave.Create());
+            Max.Log("create:SimpleCamera");
+            so.Add(Primitives.SimpleCamera.Create());
+            Max.Log("create:LookAtCamera");
+            so.Add(Primitives.LookAtCamera.Create());
+            Max.Log("create:OmniLight");
+            so.Add(Primitives.OmniLight.Create());
+            Max.Log("create:SpotLight");
+            so.Add(Primitives.SpotLight.Create());
+            Max.Log("create:SunLight");
+            so.Add(Primitives.SunLight.Create());
+            so.ForEach(o => Max.Log("node:{0} params:{1}", o.Name, Utility.GetParamNames(o.GetNode())));
+
+
+
+
+            //SceneObject o = Primitives.Box.Create();
+            //Utility.GetParamNames(o.GetNode());
+
+            /*Utility.GetClassNames(typeof(Primitives)).ForEach(
+                s => {
+                    Max.Log("\tPrimitive SceneObject:{0}", s);
+                    var o = Primitives.Box.Create();
+                    FieldInfo[] fields = o.GetType().GetFields(BindingFlags.Static | BindingFlags.Public);
+                    foreach ( FieldInfo fi in fields ) {
+                        Max.Log("\tparam:{0} val:{1}", fi.Name, fi.GetValue(o).ToString());
+                    }
+                    //var o = Primitives.Box.Create();
+
+                }
+
+
+           );*/
+
+            /*Max.Log("\tObject:{0} type:{1} params:{2}", n.Name, n.GetType().Name, n.Object.Params.Count());
+            foreach ( IParameter p in n.Object.Params ) Max.Log("\t\tparam:{0}", p.Name);*/
+            //Utility.DictionaryFromType(typeof(Primitives)).Select(d => { Max.Log("Key:{0} Val:{1}", d.Key, d.Value); return d; }); 
+            //Utility.GetTypePropertyNames(typeof(Primitives), BindingFlags.Public).ForEach(n => Max.Log("\t{0}", n));
+        }
+
+        private void BtnListPrimitives_Click(object sender, EventArgs e) {
+            Max.Log(( sender as Button ).Text);
+            //not works
+            _CPP_TO_CSHARP_01.DemoTeapot();
+            _CPP_TO_CSHARP_01.CreatePlane(100, 200, 10, 20);
+            /*
+            Utility.GetStructPublicNames(typeof(BuiltInClassIDA)).ForEach(
+                s => {
+                    Max.Log("\tBuiltInClassIDA:{0}", s);
+                    //var o = Primitives.Box.Create();
+
+                }
+            );*/
+
+            /*ISubClassList iSubClassList = Kernel._Global.ClassDirectory.Instance.GetClassList(IGlobal.IGlobalClassDirectory);
+            Max.Log("iSubClassList:{0}", iSubClassList.Count((int)EnumPlugins.AccesType.ACC_ALL));
+
+            Utility.GetStructPublicNames(typeof(IGlobal.IGlobalClassDirectory)).ForEach(
+                    s => {
+                        Max.Log("\tIGlobalClassDirectory:{0}", s);
+
+                    }
+               );*/
+
+            //ISubClassList iSubClassList = Kernel._Global.ClassDirectory.Instance.GetClassList(SClass_ID.Geomobject);
+            //SClass_ID
+            //BuiltInClassIDB
+            //Iterate through IGlobal.IGlobalClassDirectory
+            //Get all classes where Category == "Standard Primitives" || Category == "Extended Primitives"
+            /*Type type = typeof(IGlobal.IGlobalClassDirectory);
+            BindingFlags flags = BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Default; //default == "All"
+            switch ( CbxPrimitiveTypes.SelectedItem ) {
+
+                case "Standard": break;
+                case "Extended": break;
+            }
+
+            Max.Log("fields:{0}", type.GetFields(flags).Length);
+            type.GetFields(flags).WriteToListener("~");*/
+            //type.GetFields(flags).WriteToListener("~");
+            //.Where(f => f.FieldType == type)
+            //.Apply(f => f.Name)
+        }
+
+        private void BtnShowBuiltInClassIDAB_Click(object sender, EventArgs e) {
+            Max.Log(( sender as Button ).Text);
+            Max.Log("\nBuiltInClassIDA:");
+            Utility.GetClassNames(typeof(BuiltInClassIDA)).ForEach(
+                s => { Max.Log("\t{0}", s); }
+            );
+            Max.Log("\nBuiltInClassIDB:");
+            Utility.GetClassNames(typeof(BuiltInClassIDB)).ForEach(
+                s => { Max.Log("\t{0}", s); }
+            );
+        }
     }
 }
-
-
-/*
-                var box = new PBox(Primitives.Box.Create()); //as PBox; // is derived from SceneObject
-                box.Length = (float)SpnBoxLen.Value;
-                box.Width = (float)SpnBoxWid.Value;
-                box.Height = (float)SpnBoxHei.Value;
-                box.Wirecolor = Color.RainbowColor((int)SpnBoxCnt.Value, i);
-                box.Move(new Point3(((float)SpnBoxWid.Value + offsetX) * i, 0, 0));
-*/
 
 
 //var box = PBox.Create(); //PBox is derived from SceneObject
@@ -516,7 +643,7 @@ box["Height"] = (float)SpnBoxHei.Value; //old way*/
 // get a list of all selected nodes.
 /*List<IINode> selectedNodes = MxObj.GetSelectedNodes();
 if ( selectedNodes.Count == 0 ) return;
-Kernel.WriteLine("Selected Nodes:" + selectedNodes.Count.ToString());
+Max.Log("Selected Nodes:" + selectedNodes.Count.ToString());
 //MxPoly.SelectSimillarElements(selectedNodes[0]);*/
 
 

@@ -63,6 +63,8 @@ namespace Micra.Core {
 
         #region PUBLIC TYPES
 
+        public Node GetNode() => _Node; //for test
+
         public Mesh Mesh => GetMesh(Kernel.Now);
         //public Geometry Geometry => CreateWrapper<Geometry>(_Anim); //TODO test this if need
 
@@ -87,7 +89,7 @@ namespace Micra.Core {
         public ITriObject GetITriobject() => GetITriobject(Kernel.Now);
         public ITriObject GetITriobject(TimeValue t) { //Autodesk.Max.Wrappers.TriObject
 
-            //Kernel.WriteLine("GetITriobject > from _Object:{0}", _Object);
+            //Max.Log("GetITriobject > from _Object:{0}", _Object);
             IClass_ID triClass = ClassID.TriObject._IClass_ID;
             if ( _Object.CanConvertToType(triClass) == 0 ) return null;
             return _Object.ConvertToType(t, triClass) as ITriObject;
@@ -119,7 +121,7 @@ namespace Micra.Core {
 
         public IPolyObject GetIpolyObject(TimeValue t) { //Autodesk.Max.Wrappers.PolyObject
 
-            //Kernel.WriteLine("GetIpolyObject > from _Object:{0}", _Object);
+            //Max.Log("GetIpolyObject > from _Object:{0}", _Object);
             IClass_ID polyClass = ClassID.PolyObject._IClass_ID;
             if ( _Object.CanConvertToType(polyClass) == 0 ) return null;
             return _Object.ConvertToType(t, polyClass) as IPolyObject;
@@ -422,14 +424,14 @@ parameterBlock.Params.Any("Length")
 */
 
 // solving Object reference not set to an instance of an object
-/*Kernel.WriteLine("GetIpolyObject > from _Object:{0}", _Object);
-Kernel.WriteLine("_Node:{0}", _Node);
+/*Max.Log("GetIpolyObject > from _Object:{0}", _Object);
+Max.Log("_Node:{0}", _Node);
 IObjectState istate = _Object.Eval(Kernel.Now);
-Kernel.WriteLine("istate:{0}", istate);
+Max.Log("istate:{0}", istate);
 IClass_ID polyClass = Kernel._Global.Class_ID.Create(( uint )BuiltInClassIDA.POLYOBJ_CLASS_ID, 0);
-Kernel.WriteLine("polyClass:{0} epoly:{1}", polyClass, ClassID.EditablePoly._IClass_ID);
+Max.Log("polyClass:{0} epoly:{1}", polyClass, ClassID.EditablePoly._IClass_ID);
 IObject iObj = istate.Obj;
-Kernel.WriteLine("iObj:{0}", iObj);
+Max.Log("iObj:{0}", iObj);
 if ( iObj.CanConvertToType(polyClass) == 0 ) return null;
 //_Object.GetReference(0)
 //if ( _Object.CanConvertToType(ClassID.EditablePoly._IClass_ID) == 0 ) return null;

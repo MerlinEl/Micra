@@ -107,22 +107,16 @@ namespace Micra.Core {
                 .ToList();
             Kernel._Interface.SelectNodeTab(nodes.ToIINodeTab(), true, redraw);
         }
+        /// <summary> Show Class and SuperClass of Nodes</summary>
         public static void ShowClass(IEnumerable<Node> nodes) {
 
             nodes.ForEach(n => {
-                Kernel.WriteLine("obj:{0}", n.Name);
-                Kernel.WriteLine("\tclassOf:{0}\n\tsuperClassOf:{1}",
+                Max.Log("obj:{0}", n.Name);
+                Max.Log("\tclassOf:{0}\n\tsuperClassOf:{1}",
                     n.ClassOf(), n.SuperClassOf());
             });
         }
-        public static void ShowParameters(IEnumerable<Node> nodes) {
 
-            Kernel.WriteLine("Selected Nodes( {0} ) Parameters > ", nodes.Count());
-            nodes.ForEach<Node>(n => {
-                Kernel.WriteLine("\tObject:{0} type:{1} params:{2}", n.Name, n.GetType().Name, n.Object.Params.Count());
-                foreach ( IParameter p in n.Object.Params ) Kernel.WriteLine("\t\tparam:{0}", p.Name);
-            });
-        }
 
         public static List<Node> GetNodeInsatances(Node node) {
 
@@ -136,7 +130,7 @@ namespace Micra.Core {
 
             //Kernel._Interface.RedrawViews(Kernel.Now, RedrawFlags.Begin, null);
             Kernel._Interface.DisableSceneRedraw();
-            Kernel._Interface.SuspendEditing(( uint )TaskModes.TASK_MODE_MODIFY, true); //for now seems not works ... see it later
+            Kernel._Interface.SuspendEditing((uint)TaskModes.TASK_MODE_MODIFY, true); //for now seems not works ... see it later
             DeselectAll(false);
             try {
                 foreach ( Node n in nodes ) {
@@ -148,10 +142,10 @@ namespace Micra.Core {
                 throw new Exception(ex.Message);
 
             } finally {
-                Kernel._Interface.ResumeEditing(( uint )TaskModes.TASK_MODE_MODIFY, true); //for now seem not works ... see it later
+                Kernel._Interface.ResumeEditing((uint)TaskModes.TASK_MODE_MODIFY, true); //for now seem not works ... see it later
                 Kernel._Interface.EnableSceneRedraw();
             }
-            Kernel.WriteLine("Selected Instance nodes:{0}/{1}", Kernel.Scene.SelectedNodes().Count(), Kernel.Scene.RootNode.Children.Count());
+            Max.Log("Selected Instance nodes:{0}/{1}", Kernel.Scene.SelectedNodes().Count(), Kernel.Scene.RootNode.Children.Count());
             //Kernel._Interface.RedrawViews(Kernel.Now, RedrawFlags.End, null);
             if ( redraw ) Kernel.RedrawViews();
         }
@@ -179,19 +173,19 @@ namespace Micra.Core {
             //distinctObjData.ForEach(o => Max.Log("\t\tHandle:{0}\n\t\t\tArea:{1}\n\t\t\tVcount:{2}", o.HANDLE, o.AREA, o.VNUM));
 
             IEnumerable<Node> allNodes = Kernel.Scene.AllNodes();
-            Kernel.WriteLine("\t\tAll scene nodes:{0}", allNodes.Count());
+            Max.Log("\t\tAll scene nodes:{0}", allNodes.Count());
 
             //get geometry objects with similar (area, vertnum)
             List<Node> matchNodes = allNodes
                 .Where(n =>
                     n.IsSuperClassOf(SuperClassID.GeometricObject) && //get all geometry objects
                     !n.IsClassOf(ClassID.TargetObject) && //exclude any light Target
-                    // Returns:
-                    //     The zero-based index of the first occurrence of an element
-                    //     that matches the conditions defined by match, if found; 
-                    //     otherwise, –1.
-                    objData.FindIndex(o=> o.MatchBy(
-                        new ObjectCompareData (n.Handle, n.Object.GetArea(), n.Object.NumVerts),
+                                                          // Returns:
+                                                          //     The zero-based index of the first occurrence of an element
+                                                          //     that matches the conditions defined by match, if found; 
+                                                          //     otherwise, –1.
+                    objData.FindIndex(o => o.MatchBy(
+                        new ObjectCompareData(n.Handle, n.Object.GetArea(), n.Object.NumVerts),
                         byArea, byVcount
                     )) != -1
                  )
@@ -199,7 +193,7 @@ namespace Micra.Core {
                 .Select(g => g.First()) //get unique nodes by handle
                 .ToList();
 
-            Kernel.WriteLine("\tSimillar nodes count:{0}", matchNodes.Count());
+            Max.Log("\tSimillar nodes count:{0}", matchNodes.Count());
             //matchNodes.ForEach(o => Max.Log("\t\tHandle:{0}\n\t\t\tArea:{1}\n\t\t\tVcount:{2}", o.Handle, o.Object.GetArea(), o.Object.NumVerts));
 
             //execute action with undo enabled
@@ -218,9 +212,9 @@ namespace Micra.Core {
     }
     internal class ObjectCompareData {
 
-        public ulong HANDLE { get;}
-        public double AREA { get;} = 0.0;
-        public int VNUM { get;} = 0;
+        public ulong HANDLE { get; }
+        public double AREA { get; } = 0.0;
+        public int VNUM { get; } = 0;
         public ObjectCompareData(ulong handle, double area = 0, int vnum = 0) {
 
             HANDLE = handle;
@@ -264,7 +258,7 @@ public static IINodeTab ToIINodeTab<T>(List<T> nodesList) {
 List<IINode> nodes = new List<IINode>() { };
 foreach ( Node n in Kernel.Scene.RootNode.Children ) {
 
-    Kernel.WriteLine("Object class:{0} Compare class:{1} match:{2}", n.Object.SuperClassID, classId, ( n.Object.SuperClassID == classId ));
+    Max.Log("Object class:{0} Compare class:{1} match:{2}", n.Object.SuperClassID, classId, ( n.Object.SuperClassID == classId ));
 
     if ( n.Object.SuperClassID == classId ) nodes.Add(n._Node);
 }
@@ -281,8 +275,8 @@ public static List<IINode> GetSelection() {
 //got crash when operate with Objects
 IINodeTab nodes = Kernel._Global.NodeTab.Create();
 Objects.ForEach<SceneObject>(o => {
-    Kernel.WriteLine("Object:{0} type:{1}", o.Name, o.GetType().Name);
-    o.Params.ForEach<IParameter>(p => Kernel.WriteLine("\tparam:{0}", p.Name));
+    Max.Log("Object:{0} type:{1}", o.Name, o.GetType().Name);
+    o.Params.ForEach<IParameter>(p => Max.Log("\tparam:{0}", p.Name));
     try {
         nodes.AppendNode(o.Node._Node as IINode, true, 1); //o.Node._Node
 

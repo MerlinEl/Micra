@@ -9,12 +9,14 @@ using Autodesk.Max;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
 
 namespace Micra.Core {
     /// <summary>
     /// Contains various utility functions.
     /// </summary>
-    static class Utility {
+    public static class Utility {
         /// <summary>Give ramdom values from 0.0 to 1.0. Default with three decimals.</summary>
         public static float RandomFloat(Random random) => (float)(Math.Round(random.NextDouble(), 3));
         public static float RandomFloat(Random random, int decimals) => (float)(Math.Round(random.NextDouble(), decimals));
@@ -60,6 +62,41 @@ namespace Micra.Core {
             double p = 0.5 * ( a + b + c );
             return Math.Sqrt(p * ( p - a ) * ( p - b ) * ( p - c ));
         }
+
+        #region ISPECT CLASS
+
+
+        /// <summary> Get Public Static Class Names</summary>
+        /// Utility.GetClassNames(typeof(ClassID)).ToArray()
+        /// Utility.GetClassNames(typeof(ClassID), BindingFlags.Static).ToArray()
+        public static List<string> GetClassNames(Type type) {
+            return GetClassNames(type, BindingFlags.Static | BindingFlags.Public);
+        }
+
+        public static List<string> GetClassNames(Type type, BindingFlags bindingFlags) {
+            return type.GetFields(bindingFlags).Select(f => f.Name).ToList();
+        }
+
+        public static List<string> GetClassNames(Type type, BindingFlags bindingFlags, Type fieldType) { //TODO -not tested -not used
+            return type.GetFields(bindingFlags)
+            .Where(f => f.FieldType == fieldType)
+            .Select(f => f.Name)
+            .ToList();
+        }
+
+            /// <summary> Get Node Paramaters which can be accessed from C# (From 3DsMax can be accessed more)</summary>
+            public static List<string> GetParamNames(Node n) => n.Object.Params.Select(p => p.Name).ToList();
+        /// <summary> Show all C# accesible Nodes parameters</summary>
+        public static void ShowParameters(IEnumerable<Node> nodes) {
+
+            Max.Log("Selected Nodes( {0} ) Parameters > ", nodes.Count());
+            nodes.ForEach<Node>(n => {
+                Max.Log("\tObject:{0} type:{1} params:{2}", n.Name, n.GetType().Name, n.Object.Params.Count());
+                GetParamNames(n).ForEach(p => Max.Log("\t\tparam:{0}", p));
+            });
+        }
+
+        #endregion
 
         /// <summary>
         /// Extends IEnumerable&lt;T> with a new function for selecing only those 

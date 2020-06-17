@@ -101,7 +101,9 @@
     <Compile Include="CollectionExtensions.cs" />
     <Compile Include="Color.cs" />
     <Compile Include="EnumFlags.cs" />
+    <Compile Include="EnumPlugins.cs" />
     <Compile Include="IPrimitive.cs" />
+    <Compile Include="Listener.cs" />
     <Compile Include="NodeProperty.cs" />
     <Compile Include="Max.cs" />
     <Compile Include="Matrix3.cs" />
@@ -146,6 +148,7 @@
     <Compile Include="Utility.cs" />
     <Compile Include="UvOps.cs" />
     <Compile Include="Vector3.cs" />
+    <Compile Include="_CPP_TO_CSHARP_01.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

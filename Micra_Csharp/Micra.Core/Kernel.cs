@@ -21,6 +21,8 @@ SceneExplorer.dll - Specification of the ExplorerFramework components for the Sc
 UiViewModels.dll - Contains classes for defining user actions and customizing the user interface.
 
 Resources
+Draw on window https://getcoreinterface.typepad.com/blog/c/
+Good SDK https://documentation.help/3DS-Max/idx_AT_working_with_meshes.htm
 https://docs.microsoft.com/cs-cz/dotnet/csharp/language-reference/language-specification/documentation-comments
 https://documentation.help/3DS-Max/idx_RM_interface_classes.htm
 http://discourse.techart.online/t/from-maxscript-to-c-or-c/3111/12
@@ -43,7 +45,7 @@ namespace Micra.Core {
         #region fields
         //public static IGlobal _Global;
         private static IGlobal global;
-        public static IInterface14 _Interface;
+        public static IInterface17 _Interface;
         public static IIInstanceMgr _InstanceMgr;
         public static IIFPLayerManager _IIFPLayerManager; //not used not tested
         public static IInterface_ID _NodeLayerProperties; //not used not tested
@@ -88,7 +90,7 @@ namespace Micra.Core {
         /// </summary>
         public static IGlobal _Global { //test
             get {
-                if ( global == null ) global = GlobalInterface.Instance;
+                if ( global == null ) global = GlobalInterface.Instance; //note that global will be an instance of an abstract class.
 #if DEBUG
                 if ( global == null ) {
                     try {
@@ -205,45 +207,6 @@ namespace Micra.Core {
         /// </summary>
         public static IViewExp ActiveView => _Interface.ActiveViewExp;
 
-
-        /// <summary>
-        /// Add a string as a new line to the prompt. This is a convenient way to write messages back to the user. 
-        /// </summary>
-        /// <param name="s"></param>
-        public static void PushPrompt(string s) => Kernel._Interface.PushPrompt(s);
-
-        /// <summary>
-        /// Outputs a string the MAXScript listener with a newline appended
-        /// </summary>
-        /// <param name="s"></param>
-        public static void WriteLine(string s) => Write(s + "\n");
-
-        public static void WriteLine(string s, params Object[] args) {
-            WriteLine(String.Format(s, args));
-        }
-
-        public static void Write(string s, params Object[] args) {
-            Write(String.Format(s, args));
-        }
-
-        /// <summary>
-        /// Outputs a string the MAXScript listener
-        /// </summary>
-        /// <param name="s"></param>
-        public static void Write(string s) {
-            Kernel._Global.TheListener.EditStream.Wputs(s);
-            Kernel._Global.TheListener.EditStream.Flush();
-        }
-
-        public static void WriteClear(bool macroRec) {
-            // clears the listener
-            User32.SendMessage(_Global.TheListener.EditBox, 2004, (IntPtr)0, (IntPtr)0);
-            if ( !macroRec ) return;
-            // clears the macro recorder
-            User32.SendMessage(_Global.TheListener.MacrorecBox, 2004, (IntPtr)0, (IntPtr)0);
-            //UIAccessor.SetWindowText(_Global.TheListener.MacrorecBox)[2][1]("");
-        }
-
         /// <summary>
         /// Performs a file reset.
         /// </summary>
@@ -260,7 +223,6 @@ namespace Micra.Core {
                 _TimeSlider.SetVisible(value, true);
             }
         }
-
 
         /// <summary>
         /// Status panel visibility.
@@ -288,21 +250,6 @@ namespace Micra.Core {
         /// <param name="a"></param>
         public static DispatcherOperation InvokeAsync(Action a) {
             return dispatcher.BeginInvoke(a);
-        }
-    }
-    public static class ListenerExtensions { //test now
-        public static void WriteToListener<T>(this IList<T> collection) {
-
-            WriteToListener<T>(collection, "\t");
-        }
-
-        public static void WriteToListener<T>(this IList<T> collection, string delimiter) {
-
-            int count = collection.Count;
-            for ( int i = 0; i < count; ++i ) {
-                Kernel.Write("{0}{1}", collection[i].ToString(), delimiter);
-            }
-            Kernel.WriteLine("");
         }
     }
 }

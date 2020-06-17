@@ -58,10 +58,10 @@ namespace Micra.Core {
         internal Mesh(IMesh m) {
             _IMesh = m;
             /*
-             Kernel.WriteLine("Init Mesh from Imesh > NumVerts:{0} EdgeSel.IsEmpty:{1}", _IMesh.NumVerts, m.EdgeSel.IsEmpty);
+             Max.Log("Init Mesh from Imesh > NumVerts:{0} EdgeSel.IsEmpty:{1}", _IMesh.NumVerts, m.EdgeSel.IsEmpty);
              for (int i = 0; i < m.EdgeSel.Size; i++ ) {
 
-                 Kernel.WriteLine("\tedge{0}", m.EdgeSel[i]);
+                 Max.Log("\tedge{0}", m.EdgeSel[i]);
              }*/
 
             faces = new Face[m.NumFaces];

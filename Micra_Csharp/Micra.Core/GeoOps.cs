@@ -46,7 +46,7 @@ namespace Micra.Core {
             Max.Log("\t\tSource unique nodes:{0}", distinctObjData.Count());
             //distinctObjData.ForEach(o => Max.Log("\t\tHandle:{0}\n\t\t\tArea:{1}\n\t\t\tVcount:{2}", o.HANDLE, o.AREA, o.VNUM));
 
-            Kernel.WriteLine("\t\tAll nodes faces:{0}", n.Object.NumFaces);
+            Max.Log("\t\tAll nodes faces:{0}", n.Object.NumFaces);
             List<int> matchFaces = new List<int>() { };
             for (int f = 0; f < n.Object.NumFaces; f++ ) {
 
@@ -58,7 +58,7 @@ namespace Micra.Core {
                 if ( matchFaces.IndexOf(f) == -1) matchFaces.Add(f); // add only unique face indexes
             }
 
-            Kernel.WriteLine("\tSimillar faces count:{0}", matchFaces.Count());
+            Max.Log("\tSimillar faces count:{0}", matchFaces.Count());
             //matchNodes.ForEach(o => Max.Log("\t\tIndex:{0}\n\t\t\tArea:{1}\n\t\t\tVcount:{2}", o.ID, o.Object.GetArea(), o.Object.NumVerts));
 
             //execute action with undo enabled

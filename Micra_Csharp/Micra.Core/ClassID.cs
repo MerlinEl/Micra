@@ -7,6 +7,7 @@
 //
 using Autodesk.Max;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 
@@ -27,11 +28,11 @@ namespace Micra.Core {
         /*switch ( node.ClassOf() ) {
             case ClassID.ClassName.EditablePoly: MaxLog("is poly"); break;
         }*/
-        public enum ClassName {
+        /*public enum ClassName {
 
             EditableMesh,
             EditablePoly
-        }
+        }*/
         public uint PartA;
         public uint PartB;
         public ClassID(IClass_ID id) : this(id.PartA, id.PartB) { }
@@ -101,15 +102,6 @@ namespace Micra.Core {
             Type t = typeof(BuiltInClassIDA);
             return Enum.GetName(t, clsID.PartA) + " | " + Enum.GetName(t, clsID.PartB);
         }
-        /// <summary> Get All ClassID Names</summary>
-        public static string[] GetClassNames() {
-
-            Type type = typeof(ClassID);
-            return type.GetFields(BindingFlags.Static | BindingFlags.Public)
-                .Where(f => f.FieldType == type)
-                .Select(f => f.Name)
-                .ToArray();
-        }
 
         public override string ToString() {
             return "ClassID(" + PartA.ToString() + ", " + PartB.ToString() + ")";
@@ -117,7 +109,7 @@ namespace Micra.Core {
 
         public bool Equals(IClass_ID icid) {
 
-            //Kernel.WriteLine("Equal test PartA:{0} PartB:{1} a:{2} b:{3}", icid.PartA, icid.PartB, a, b);
+            //Max.Log("Equal test PartA:{0} PartB:{1} a:{2} b:{3}", icid.PartA, icid.PartB, a, b);
             return icid.PartA == PartA && icid.PartB == PartB;
         }
 
