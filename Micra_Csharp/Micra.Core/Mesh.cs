@@ -7,6 +7,7 @@
 //
 using Autodesk.Max;
 using Humanizer;
+using Micra.Core.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Linq;

@@ -1,19 +1,25 @@
 ﻿using Autodesk.Max;
 using Micra.Core;
+using Micra.Core.Extensions;
+using Micra.Core.Ops;
+using Micra.Core.Prim;
+using Micra.Core.Ressearch;
+using Micra.Core.Utils;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Windows.Forms;
-using System.Xml;
 using System.Xml.Linq;
+using static Micra.Core.Prim.PrimitiveTypes;
 
 namespace Micra.Tools {
     public partial class CsharpToMaxTest : Form {
         XDocument MaxActionsXML = MxFile.GetXMLFromResources("MaxScriptActions.xml");//load XML from Resources
         public CsharpToMaxTest() {
             InitializeComponent();
+            CloseAllFormInstancesExceptThisOne();
             Init();
         }
         private void Init() {
@@ -21,15 +27,17 @@ namespace Micra.Tools {
             //get assembly version
             Text = Text + "     " + MxGet.AssemblyVersion;
             //fill list boxes
-            CbxClassOf.Items.AddRange(Utility.GetClassNames(typeof(ClassID)).ToArray());
+            CbxClassOf.Items.AddRange(ClassReader.GetClassNames(typeof(ClassID)).ToArray());
             CbxClassOf.SelectedIndex = 0;
-            CbxSuperClassOf.Items.AddRange(Utility.GetClassNames(typeof(SuperClassID)).ToArray());
+            CbxSuperClassOf.Items.AddRange(ClassReader.GetClassNames(typeof(SuperClassID)).ToArray());
             CbxSuperClassOf.SelectedIndex = 0;
             CbxSceneNodeTypes.SelectedIndex = 0;
             CbxPrimitiveTypes.SelectedIndex = 0;
             CbxMaxFilePath.SelectedIndex = 0;
             CbxSimillarObjBy.SelectedIndex = 0;
+            LbxPrimitiveObjectNames.SelectedIndex = 0;
 
+            //Todo read all key names from XML
             CbxScriptList.Items.AddRange(new object[]{
                 "SelFaces",
                 "SelEdges",
@@ -41,6 +49,17 @@ namespace Micra.Tools {
                 "GetSelectedVertices"
             });
             CbxScriptList.SelectedIndex = 0;
+
+            CbxPrimitiveCategories.Items.AddRange(new object[] {
+
+                "Geometry", //PrimGeomObjectFactory
+                "Helpers", //PrimHelperFactory
+                "Shapes", //PrimShapeObjectFactory
+                "Cameras", //PrimCamObjectFactory
+                "Lights" //PrimLightObjectFactory
+            });
+            CbxPrimitiveCategories.SelectedIndex = 0;
+
         }
 
         #region Execute Max Script
@@ -64,16 +83,31 @@ namespace Micra.Tools {
 
         #region UI Events
 
+        private void OnTextAreaGotFocus(object sender, EventArgs e) {
+            MxSet.SetAccelerators(false);
+        }
+
 
         private void OnTextAreaLostFocus(object sender, EventArgs e) {
             MxSet.SetAccelerators(true);
         }
 
-        private void OnTextAreaGotFocus(object sender, EventArgs e) {
-            MxSet.SetAccelerators(false);
+        #endregion
+
+        private void CloseAllFormInstancesExceptThisOne() {
+
+            List<Form> AllButThisForm = Application.OpenForms
+                .OfType<Form>()
+                .Where(frm => frm.Name.Contains(this.Name) && frm.Handle != this.Handle)
+                .ToList<Form>();
+
+            foreach ( Form othrFrm in AllButThisForm ) othrFrm.Close();
         }
 
-        #endregion
+        private void OnFormShown(object sender, EventArgs e) {
+            Max.LogClear(false);
+        }
+
 
         private void Button1_Click(object sender, EventArgs e) {
 
@@ -98,7 +132,7 @@ namespace Micra.Tools {
             bool byVcount = CbxSimillarObjBy.SelectedIndex == 2;
             List<Node> selNodes = ObjOps.GetSlectedNodes();
             Max.Log("\tSelected nodes:{0}", selNodes.Count());
-            int slev = GlobalMethods.SubObjectLevel;
+            int slev = Max.SubObjectLevel;
             if ( selNodes.Count() == 1 && slev != 0 ) { //if single object is selected
 
                 Node node = selNodes.First();
@@ -128,14 +162,6 @@ namespace Micra.Tools {
             Max.Log(indent + n.Name);
             foreach ( var c in n.Children )
                 PrintNode(c, indent + "  ");
-        }
-
-        private void Button8_Click(object sender, EventArgs e) {
-            Max.Log(( sender as Button ).Text);
-            var teapot = Primitives.Teapot.Create();
-            teapot["radius"] = 20.0;
-            teapot.Move(new Point3(20, 10, 5));
-            //teapot._Object.Move
         }
 
         private void Button7_Click(object sender, EventArgs e) {
@@ -190,11 +216,7 @@ namespace Micra.Tools {
         }
         private void Button_ShowSelClass(object sender, EventArgs e) {
             Max.Log(( sender as Button ).Text);
-            ObjOps.ShowClass(ObjOps.GetSlectedNodes());
-        }
-
-        private void OnFormShown(object sender, EventArgs e) {
-            Max.LogClear(false);
+            ObjOps.ShowClass(ObjOps.GetSlectedNodes(), ChkShowMaxClass.Checked);
         }
 
         private void Button15_Click(object sender, EventArgs e) {
@@ -204,7 +226,30 @@ namespace Micra.Tools {
 
         private void Button_ShowSelParams(object sender, EventArgs e) {
             Max.Log(( sender as Button ).Text);
-            Utility.ShowParameters(ObjOps.GetSlectedNodes());
+            ClassReader.ShowParameters(ObjOps.GetSlectedNodes());
+
+            //https://help.autodesk.com/view/3DSMAX/2017/ENU/?guid=__cpp_ref_class_param_block_desc2_html
+            /*for ( int i = 0; i < Kernel._Interface.RootNode.NumChildren; i++ ) {
+                IINode node = Kernel._Interface.RootNode.GetChildNode(i);
+                if ( !node.Selected ) continue;
+                Max.Log("obj:{0} ", node.Name);
+                IObject io = node.ObjectRef;
+                if ( io == null ) continue;
+                //IObjectState ist = io.Eval(Kernel.Now);
+                //ist.Obj
+                //return GetDescByID(PARTICLECHANNELBOOLR_INTERFACE); }
+                node.GetDescByID(Kernel._Interface.Id);
+                Max.Log("\tNumParamBlocks:{0}", io.NumParamBlocks);
+                for (int j = 0; j < io.NumParamBlocks; j++ ) {
+
+                    IIParamBlock2 ip2 = io.GetParamBlock(i);
+                    Max.Log("\t\tNumParams:{0}", ip2.NumParams);
+                    for (int k = 0; k < ip2.NumParams; k++ ) {
+
+                        Max.Log("\t\t\tparam:{0}", ip2.GetParamDefByIndex((uint)k).IntName);
+                    }
+                }
+            }*/
         }
 
         private void Button_SelInstances(object sender, EventArgs e) {
@@ -423,7 +468,7 @@ namespace Micra.Tools {
             bool byVcount = CbxSimillarObjBy.SelectedIndex == 2;
             List<Node> selNodes = ObjOps.GetSlectedNodes();
             Max.Log("\tSelected nodes:{0}", selNodes.Count());
-            int slev = GlobalMethods.SubObjectLevel;
+            int slev = Max.SubObjectLevel;
             if ( selNodes.Count() == 1 && slev != 0 ) { //if single object is selected
 
                 Node node = selNodes.First();
@@ -443,184 +488,233 @@ namespace Micra.Tools {
             }
         }
 
-        private void BtnCreateBox_Click(object sender, EventArgs e) {
-
-            //Node node = ObjOps.GetFirstSlectedNode();
-            //node.Object.Params.
-            //foreach ( IParameter p in n.Object.Params )
-            /*SceneObject box = Primitives.Box.Create();
-            var pbox = new PBox(Primitives.Box.Create());
-            pbox.Length = 0;
-            var param = box.Params.FirstOrDefault(t => t.Name == "Width");
-            if ( param != null ) {
-                param.Value = 0;
-            }*/
-
+        private void BtnListAllPrimitives_Click(object sender, EventArgs e) {
             Max.Log(( sender as Button ).Text);
-            float offsetX = (float)SpnBoxOffsetX.Value;
-            for ( int i = 0; i < SpnBoxCnt.Value; i++ ) {
-                //PBox is derived from SceneObject
-                new PBox(Primitives.Box.Create()) {
-                    Length = (float)SpnBoxLen.Value,
-                    Width = (float)SpnBoxWid.Value,
-                    Height = (float)SpnBoxHei.Value,
-                    Wirecolor = Color.RainbowColor((int)SpnBoxCnt.Value, i),
-                    Pos = new Point3(( (float)SpnBoxWid.Value + offsetX ) * i, 0, 0)
-                    //realWorldMapSize = false //not works
-                };
-            }
+            ClassReader.GetClassNames(typeof(Primitives)).ForEach(
+                s => {
+                    Max.Log("\tPrimitives:{0}", s);
+                }
+            );
         }
 
-        private void BtnGenParamsForCs_Click(object sender, EventArgs e) {
+        private void BtnListGeomPrim_Click(object sender, EventArgs e) {
+
             Max.Log(( sender as Button ).Text);
-            //var o = Primitives.Box.Create();
-            FieldInfo[] fields1 = typeof(Primitives).GetFields(BindingFlags.Static | BindingFlags.Public);
-            foreach ( FieldInfo f1 in fields1 ) {
-                Max.Log("\tMax.Log(\"create:{0}\");\nso.Add(Primitives.{0}.Create());", f1.Name);
- 
-            }
-            List<SceneObject> so = new List<SceneObject>() { };
-            Max.Log("create:Teapot");
-            so.Add(Primitives.Teapot.Create());
-            Max.Log("create:Box");
-            so.Add(Primitives.Box.Create());
-            Max.Log("create:Sphere");
-            so.Add(Primitives.Sphere.Create());
-            Max.Log("create:Cylinder");
-            so.Add(Primitives.Cylinder.Create());
-            Max.Log("create:Torus");
-            so.Add(Primitives.Torus.Create());
-            Max.Log("create:Donut");
-            so.Add(Primitives.Donut.Create());
-            Max.Log("create:GSphere");
-            so.Add(Primitives.GSphere.Create());
-            Max.Log("create:Hedra");
-            so.Add(Primitives.Hedra.Create());
-            Max.Log("create:Loft");
-            so.Add(Primitives.Loft.Create());
-            Max.Log("create:Pipe");
-            so.Add(Primitives.Pipe.Create());
-            Max.Log("create:Pyramid");
-            so.Add(Primitives.Pyramid.Create());
-            Max.Log("create:Tube");
-            so.Add(Primitives.Tube.Create());
-            Max.Log("create:PointHelper");
-            so.Add(Primitives.PointHelper.Create());
-            Max.Log("create:Circle");
-            so.Add(Primitives.Circle.Create());
-            Max.Log("create:Ellipse");
-            so.Add(Primitives.Ellipse.Create());
-            Max.Log("create:Helix");
-            so.Add(Primitives.Helix.Create());
-            Max.Log("create:LinearShape");
-            so.Add(Primitives.LinearShape.Create());
-            Max.Log("create:LinearWave");
-            so.Add(Primitives.LinearWave.Create());
-            Max.Log("create:Polygon");
-            so.Add(Primitives.Polygon.Create());
-            Max.Log("create:Plane");
-            so.Add(Primitives.Plane.Create());
-            Max.Log("create:Rectangle");
-            so.Add(Primitives.Rectangle.Create());
-            Max.Log("create:SineWave");
-            so.Add(Primitives.SineWave.Create());
-            Max.Log("create:SimpleCamera");
-            so.Add(Primitives.SimpleCamera.Create());
-            Max.Log("create:LookAtCamera");
-            so.Add(Primitives.LookAtCamera.Create());
-            Max.Log("create:OmniLight");
-            so.Add(Primitives.OmniLight.Create());
-            Max.Log("create:SpotLight");
-            so.Add(Primitives.SpotLight.Create());
-            Max.Log("create:SunLight");
-            so.Add(Primitives.SunLight.Create());
-            so.ForEach(o => Max.Log("node:{0} params:{1}", o.Name, Utility.GetParamNames(o.GetNode())));
-
-
-
-
-            //SceneObject o = Primitives.Box.Create();
-            //Utility.GetParamNames(o.GetNode());
-
-            /*Utility.GetClassNames(typeof(Primitives)).ForEach(
+            ClassReader.GetClassNames(typeof(Primitives), typeof(PrimGeomObjectFactory)).ForEach(
                 s => {
-                    Max.Log("\tPrimitive SceneObject:{0}", s);
-                    var o = Primitives.Box.Create();
-                    FieldInfo[] fields = o.GetType().GetFields(BindingFlags.Static | BindingFlags.Public);
-                    foreach ( FieldInfo fi in fields ) {
-                        Max.Log("\tparam:{0} val:{1}", fi.Name, fi.GetValue(o).ToString());
-                    }
-                    //var o = Primitives.Box.Create();
-
+                    Max.Log("\tPrimitives > PrimGeomObjectFactory:{0}", s);
                 }
-
-
-           );*/
-
-            /*Max.Log("\tObject:{0} type:{1} params:{2}", n.Name, n.GetType().Name, n.Object.Params.Count());
-            foreach ( IParameter p in n.Object.Params ) Max.Log("\t\tparam:{0}", p.Name);*/
-            //Utility.DictionaryFromType(typeof(Primitives)).Select(d => { Max.Log("Key:{0} Val:{1}", d.Key, d.Value); return d; }); 
-            //Utility.GetTypePropertyNames(typeof(Primitives), BindingFlags.Public).ForEach(n => Max.Log("\t{0}", n));
-        }
-
-        private void BtnListPrimitives_Click(object sender, EventArgs e) {
-            Max.Log(( sender as Button ).Text);
-            //not works
-            _CPP_TO_CSHARP_01.DemoTeapot();
-            _CPP_TO_CSHARP_01.CreatePlane(100, 200, 10, 20);
-            /*
-            Utility.GetStructPublicNames(typeof(BuiltInClassIDA)).ForEach(
-                s => {
-                    Max.Log("\tBuiltInClassIDA:{0}", s);
-                    //var o = Primitives.Box.Create();
-
-                }
-            );*/
-
-            /*ISubClassList iSubClassList = Kernel._Global.ClassDirectory.Instance.GetClassList(IGlobal.IGlobalClassDirectory);
-            Max.Log("iSubClassList:{0}", iSubClassList.Count((int)EnumPlugins.AccesType.ACC_ALL));
-
-            Utility.GetStructPublicNames(typeof(IGlobal.IGlobalClassDirectory)).ForEach(
-                    s => {
-                        Max.Log("\tIGlobalClassDirectory:{0}", s);
-
-                    }
-               );*/
-
-            //ISubClassList iSubClassList = Kernel._Global.ClassDirectory.Instance.GetClassList(SClass_ID.Geomobject);
-            //SClass_ID
-            //BuiltInClassIDB
-            //Iterate through IGlobal.IGlobalClassDirectory
-            //Get all classes where Category == "Standard Primitives" || Category == "Extended Primitives"
-            /*Type type = typeof(IGlobal.IGlobalClassDirectory);
-            BindingFlags flags = BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Default; //default == "All"
-            switch ( CbxPrimitiveTypes.SelectedItem ) {
-
-                case "Standard": break;
-                case "Extended": break;
-            }
-
-            Max.Log("fields:{0}", type.GetFields(flags).Length);
-            type.GetFields(flags).WriteToListener("~");*/
-            //type.GetFields(flags).WriteToListener("~");
-            //.Where(f => f.FieldType == type)
-            //.Apply(f => f.Name)
+            );
         }
 
         private void BtnShowBuiltInClassIDAB_Click(object sender, EventArgs e) {
             Max.Log(( sender as Button ).Text);
             Max.Log("\nBuiltInClassIDA:");
-            Utility.GetClassNames(typeof(BuiltInClassIDA)).ForEach(
+            ClassReader.GetClassNames(typeof(BuiltInClassIDA)).ForEach(
                 s => { Max.Log("\t{0}", s); }
             );
             Max.Log("\nBuiltInClassIDB:");
-            Utility.GetClassNames(typeof(BuiltInClassIDB)).ForEach(
+            ClassReader.GetClassNames(typeof(BuiltInClassIDB)).ForEach(
                 s => { Max.Log("\t{0}", s); }
             );
         }
+
+        private void BtnCreatePrimitivesGenerator_Click(object sender, EventArgs e) {
+            Max.Log(( sender as Button ).Text);
+            TbxCoding.Text = PrimitivesClassGenerator.CreatePrimitiveCommandsList().Replace("\n", Environment.NewLine);
+        }
+
+        private void BtnGeneratePrimitivesParamClasses_Click(object sender, EventArgs e) {
+            Max.Log(( sender as Button ).Text);
+            TbxCoding.Text = PrimitivesClassGenerator.GenerateClasses().Replace("\n", Environment.NewLine);
+        }
+
+        private void BtnCodingClear_Click(object sender, EventArgs e) {
+            TbxCoding.Text = "";
+        }
+
+        private void BtnCodingCopy_Click(object sender, EventArgs e) {
+            Clipboard.SetText(TbxCoding.Text);
+        }
+
+        private void button2_Click(object sender, EventArgs e) {
+            Max.Log(( sender as Button ).Text);
+
+            float offsetX = (float)SpnPrimOffsetX.Value;
+            float offsetY = (float)SpnPrimOffsetY.Value;
+            for ( int i = 0; i < SpnPrimCnt.Value; i++ ) {
+                CreatePrimitiveByName(LbxPrimitiveObjectNames.SelectedItem.ToString(), offsetX, offsetY, i);
+            }
+        }
+        private void CreatePrimitiveByName(string primName, float offsetX, float offsetY, int i) {
+
+            switch ( primName ) {
+
+                case "Box":
+                new PBox(Primitives.Box.Create()) {
+                    Length = (float)SpnPrimLen.Value,
+                    Width = (float)SpnPrimWid.Value,
+                    Height = (float)SpnPrimHei.Value,
+                    Wirecolor = Color.RainbowColor((int)SpnPrimCnt.Value, i),
+                    Pos = new Point3(( (float)SpnPrimWid.Value + offsetX ) * i, 0, 0)
+                    //realWorldMapSize = false //not works
+                }; break;
+
+                case "Sphere":
+                new PSphere(Primitives.Sphere.Create()) {
+                    Radius = (float)SpnPrimRadius1.Value,
+                    Wirecolor = Color.RainbowColor((int)SpnPrimCnt.Value, i),
+                    Pos = new Point3(( (float)SpnPrimWid.Value * 4 + offsetX ) * i, ( (float)SpnPrimRadius1.Value + offsetY ) * 2, 0)
+                }; break;
+
+                case "Teapot":
+                new PTeapot(Primitives.Teapot.Create()) {
+                    Radius = (float)SpnPrimRadius1.Value,
+                    Wirecolor = Color.RainbowColor((int)SpnPrimCnt.Value, i),
+                    Pos = new Point3(( (float)SpnPrimWid.Value * 4 + offsetX ) * i, ( (float)SpnPrimRadius1.Value + offsetY ) * 3, 0)
+                }; break;
+
+                case "Cylinder":
+                new PCylinder(Primitives.Cylinder.Create()) {
+                    Radius = (float)SpnPrimRadius1.Value,
+                    Height = (float)SpnPrimHei.Value,
+                    Wirecolor = Color.RainbowColor((int)SpnPrimCnt.Value, i),
+                    Pos = new Point3(( (float)SpnPrimWid.Value * 4 + offsetX ) * i, ( (float)SpnPrimRadius1.Value + offsetY ) * 4, 0)
+                }; break;
+
+                case "Torus":
+                new PTorus(Primitives.Torus.Create()) {
+                    Radius1 = (float)SpnPrimRadius1.Value,
+                    Radius2 = (float)SpnPrimRadius2.Value,
+                    Wirecolor = Color.RainbowColor((int)SpnPrimCnt.Value, i),
+                    Pos = new Point3(( (float)SpnPrimWid.Value * 4 + offsetX ) * i, ( (float)SpnPrimRadius1.Value + offsetY ) * 5, 0)
+                }; break;
+
+                case "Tube":
+                new PTube(Primitives.Tube.Create()) {
+                    Radius1 = (float)SpnPrimRadius1.Value,
+                    Radius2 = (float)SpnPrimRadius2.Value,
+                    Height = (float)SpnPrimHei.Value,
+                    Wirecolor = Color.RainbowColor((int)SpnPrimCnt.Value, i),
+                    Pos = new Point3(( (float)SpnPrimWid.Value * 4 + offsetX ) * i, ( (float)SpnPrimRadius1.Value + offsetY ) * 6, 0)
+                }; break;
+
+                case "Plane":
+                new PPlane(Primitives.Plane.Create()) {
+                    Length = (float)SpnPrimLen.Value,
+                    Width = (float)SpnPrimWid.Value,
+                    Wirecolor = Color.RainbowColor((int)SpnPrimCnt.Value, i),
+                    Pos = new Point3(( (float)SpnPrimWid.Value + offsetX ) * i, 0, 0)
+                }; break;
+            }
+        }
+
+        private void BtnGetSelectedPrimitiveClass_Click(object sender, EventArgs e) {
+
+            Max.Log(( sender as Button ).Text);
+            Node n = ObjOps.GetFirstSlectedNode();
+            if ( n == null ) return;
+            TbxObjType.Text = PrimitivesClassGenerator.GetObjectClass(n);
+        }
+
+        private void BtnGenerateClassParams_Click(object sender, EventArgs e) {
+
+            Max.Log("Create:{0}", TbxObjType.Text);
+            if ( TbxObjType.Text.Length == 0 ) return;
+            PrimGeomObjectFactory o = (PrimGeomObjectFactory)ClassReader.GetFieldValueByName(typeof(Primitives), TbxObjType.Text);
+            if ( o == null ) return;
+            Max.Log("\tClass:{0}", o.ClassID.PartA);
+            SceneObject so = o.Create();
+            TbxCoding.Text = PrimitivesClassGenerator.GenerateClass(so).Replace("\n", Environment.NewLine);
+            Max.DeleteObject(so);
+        }
+
+        private void BtnCreatePlaneComplex_Click(object sender, EventArgs e) {
+            Max.Log(( sender as Button ).Text);
+            //not works
+            //_CPP_TO_CSHARP_01.CreateBox();
+            //_CPP_TO_CSHARP_01.CreateTeapot();
+            CPP_TO_CSHARP_01.CreatePlane(100, 200, 10, 20);
+        }
+
+        private void BtnCreateBoxComplex_Click(object sender, EventArgs e) {
+            Max.Log(( sender as Button ).Text);
+            CPP_TO_CSHARP_01.CreateBox();
+        }
+
+        private void BtnCreateTeapotComplex_Click(object sender, EventArgs e) {
+            Max.Log(( sender as Button ).Text);
+            CPP_TO_CSHARP_01.CreateTeapot();
+        }
+
+        private void OnPrimitiveCategoryChanged(object sender, EventArgs e) {
+
+            string categoryType = CbxPrimitiveCategories.SelectedItem.ToString();
+            Type primType = GetPrimitiveTypeByName(categoryType);
+            var items = ClassReader.GetClassNames(typeof(Primitives), primType).ToArray();
+            LbxPrimitiveObjectNames.Items.Clear();
+            LbxPrimitiveObjectNames.Items.AddRange(items);
+            LbxPrimitiveObjectNames.SelectedIndex = 0;
+        }
+
+        private void OnPrimitiveItemChanged(object sender, EventArgs e) {
+
+            LbxParamList.Items.Clear();
+            string primitiveObjectName = LbxPrimitiveObjectNames.SelectedItem.ToString();
+            var so = Primitives.CreateSceneObjectByPrimitiveName(primitiveObjectName);
+            if ( so == null ) {
+
+                LbxParamList.Items.Add("Unable to get Parameters.");
+                return;
+            }
+            so.Params.ForEach(p => Max.Log("obj:{0} param:{1}", primitiveObjectName, p));
+            LbxParamList.Items.AddRange(so.Params.Where(p=> !String.IsNullOrEmpty(p.Name)).Select(p=> p.Name).ToArray());
+            LbxParamList.SelectedIndex = 0;
+            so = null;
+        }
+
+
     }
 }
 
+
+/*
+         Utility.GetStructPublicNames(typeof(BuiltInClassIDA)).ForEach(
+             s => {
+                 Max.Log("\tBuiltInClassIDA:{0}", s);
+                 //var o = Primitives.Box.Create();
+
+             }
+         );*/
+
+/*ISubClassList iSubClassList = Kernel._Global.ClassDirectory.Instance.GetClassList(IGlobal.IGlobalClassDirectory);
+Max.Log("iSubClassList:{0}", iSubClassList.Count((int)EnumPlugins.AccesType.ACC_ALL));
+
+Utility.GetStructPublicNames(typeof(IGlobal.IGlobalClassDirectory)).ForEach(
+        s => {
+            Max.Log("\tIGlobalClassDirectory:{0}", s);
+
+        }
+   );*/
+
+//ISubClassList iSubClassList = Kernel._Global.ClassDirectory.Instance.GetClassList(SClass_ID.Geomobject);
+//SClass_ID
+//BuiltInClassIDB
+//Iterate through IGlobal.IGlobalClassDirectory
+//Get all classes where Category == "Standard Primitives" || Category == "Extended Primitives"
+/*Type type = typeof(IGlobal.IGlobalClassDirectory);
+BindingFlags flags = BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Default; //default == "All"
+switch ( CbxPrimitiveTypes.SelectedItem ) {
+
+    case "Standard": break;
+    case "Extended": break;
+}
+
+Max.Log("fields:{0}", type.GetFields(flags).Length);
+type.GetFields(flags).WriteToListener("~");*/
+//type.GetFields(flags).WriteToListener("~");
+//.Where(f => f.FieldType == type)
+//.Apply(f => f.Name)
 
 //var box = PBox.Create(); //PBox is derived from SceneObject
 /*box["Length"] = (float)SpnBoxLen.Value; //old way
@@ -628,15 +722,6 @@ box["Width"] = (float)SpnBoxWid.Value; //old way
 box["Height"] = (float)SpnBoxHei.Value; //old way*/
 //box[PBox.Length] = (float)SpnBoxLen.Value; //old way
 
-
-/*IGenBoxObject boxObject = Kernel._Interface.CreateInstance(
-      SClass_ID.Geomobject, 
-      Kernel._Global.Class_ID.Create( (uint)BuiltInClassIDA.BOXOBJ_CLASS_ID,  0 )
-  ) as IGenBoxObject;
-  boxObject.SetParams(10, 10, 10, 1, 1, 1, true);
-  var box = Kernel._Interface.CreateObjectNode(boxObject);
-  INodeWrapper node = MaxNodeWrapper.Create(box) as INodeWrapper;
-  */
 
 //https://help.autodesk.com/view/3DSMAX/2017/ENU/?guid=__files_GUID_5F19208A_B95E_41A8_A788_3108F747AF0E_htm
 //Autodesk.Max.IInterface13.COREInterface13 collecting the IINodes

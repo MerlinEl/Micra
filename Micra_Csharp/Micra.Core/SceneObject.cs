@@ -6,6 +6,8 @@
 // otherwise accompanies this software in either electronic or hard copy form.  
 //
 using Autodesk.Max;
+using Micra.Core.Enums;
+using Micra.Core.Prim;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -298,12 +300,12 @@ namespace Micra.Core {
         //TODO test with modifiers
         public void SelectAll(bool redraw) {
 
-            _IGeomObject.SelectAll(GlobalMethods.SubObjectLevel);
+            _IGeomObject.SelectAll(Max.SubObjectLevel);
             if ( redraw ) Kernel.RedrawViews();
         }
         public void DeselectAll(bool redraw) { //deselect all geometry
 
-            _IGeomObject.ClearSelection(GlobalMethods.SubObjectLevel);
+            _IGeomObject.ClearSelection(Max.SubObjectLevel);
             if ( redraw ) Kernel.RedrawViews();
         }
 
@@ -333,7 +335,7 @@ namespace Micra.Core {
 
                 case nameof(ClassID.EditableMesh): GetMesh().HideFaces(selected); break;
                 case nameof(ClassID.EditablePoly): GetPoly().HideFaces(selected); break;
-                case nameof(ClassID.SplineShape): break;
+                case nameof(ClassID.Spline): break;
             }
             if ( selected ) _IGeomObject.ClearSelection(Kernel._Interface.SubObjectLevel);
             _IGeomObject.InvalidateChannels(( uint )EnumChannels.GEOM_CHANNEL);
@@ -381,8 +383,6 @@ namespace Micra.Core {
             return edge_len;
         }
 
-        #region Primitive Parameters
-
         //TODO test it with mesh and poly
         /// <summary> Set Wirecolor to Node. Works in Primitives.</summary>
         public Color Wirecolor {
@@ -394,20 +394,6 @@ namespace Micra.Core {
             get { return _Node?.GetNodeTransform(Kernel.Now).rows[0]; }
             set {_Node?.SetNodeTransform(Matrix3.Identity.Translate(value), Kernel.Now);} 
         }
-
-        /*public float Length {
-            get => parameterBlock["Length"] != null ? (float)parameterBlock["Length"].Value : -1;
-            set { if (parameterBlock["Length"] != null) parameterBlock["Length"].Value = value;}
-        }
-        public float Width {
-            get => parameterBlock["Width"] != null ? (float)parameterBlock["Width"].Value : -1;
-            set { if ( parameterBlock["Width"] != null ) parameterBlock["Width"].Value = value; }
-        }
-        public float Height {
-            get => parameterBlock["Height"] != null ? (float)parameterBlock["Height"].Value : -1;
-            set { if ( parameterBlock["Height"] != null ) parameterBlock["Height"].Value = value; }
-        }*/
-        #endregion
     }
 }
 

@@ -75,26 +75,39 @@
             this.CbxClassOf = new System.Windows.Forms.ComboBox();
             this.button7 = new System.Windows.Forms.Button();
             this.button13 = new System.Windows.Forms.Button();
-            this.button8 = new System.Windows.Forms.Button();
             this.button9 = new System.Windows.Forms.Button();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.LbxParamList = new System.Windows.Forms.ListBox();
+            this.CbxPrimitiveCategories = new System.Windows.Forms.ComboBox();
+            this.label12 = new System.Windows.Forms.Label();
+            this.SpnPrimRadius2 = new System.Windows.Forms.NumericUpDown();
+            this.label11 = new System.Windows.Forms.Label();
+            this.SpnPrimRadius1 = new System.Windows.Forms.NumericUpDown();
+            this.label10 = new System.Windows.Forms.Label();
+            this.SpnPrimOffsetY = new System.Windows.Forms.NumericUpDown();
+            this.LbxPrimitiveObjectNames = new System.Windows.Forms.ListBox();
+            this.BtnCreatePrimitives = new System.Windows.Forms.Button();
             this.label9 = new System.Windows.Forms.Label();
-            this.SpnBoxOffsetX = new System.Windows.Forms.NumericUpDown();
+            this.SpnPrimOffsetX = new System.Windows.Forms.NumericUpDown();
             this.label8 = new System.Windows.Forms.Label();
-            this.SpnBoxCnt = new System.Windows.Forms.NumericUpDown();
+            this.SpnPrimCnt = new System.Windows.Forms.NumericUpDown();
             this.label7 = new System.Windows.Forms.Label();
-            this.SpnBoxHei = new System.Windows.Forms.NumericUpDown();
+            this.SpnPrimHei = new System.Windows.Forms.NumericUpDown();
             this.label6 = new System.Windows.Forms.Label();
-            this.SpnBoxWid = new System.Windows.Forms.NumericUpDown();
+            this.SpnPrimWid = new System.Windows.Forms.NumericUpDown();
             this.label5 = new System.Windows.Forms.Label();
-            this.SpnBoxLen = new System.Windows.Forms.NumericUpDown();
-            this.BtnCreateBox = new System.Windows.Forms.Button();
+            this.SpnPrimLen = new System.Windows.Forms.NumericUpDown();
+            this.BtnCreatePlaneComplex = new System.Windows.Forms.Button();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
-            this.BtnGenParamsForCs = new System.Windows.Forms.Button();
+            this.BtnListGeomPrim = new System.Windows.Forms.Button();
+            this.ChkShowMaxClass = new System.Windows.Forms.CheckBox();
+            this.BtnShowBuiltInClassIDAB = new System.Windows.Forms.Button();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.groupBox10 = new System.Windows.Forms.GroupBox();
+            this.BtnCreateBoxComplex = new System.Windows.Forms.Button();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.groupBox9 = new System.Windows.Forms.GroupBox();
             this.BtnSelectVerts = new System.Windows.Forms.Button();
@@ -106,29 +119,43 @@
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.groupBox8 = new System.Windows.Forms.GroupBox();
+            this.tabPage5 = new System.Windows.Forms.TabPage();
+            this.TbxObjType = new System.Windows.Forms.TextBox();
+            this.BtnCreateSelectionGenerator = new System.Windows.Forms.Button();
+            this.BtnGenerateSelectionParamClasses = new System.Windows.Forms.Button();
+            this.BtnCodingClear = new System.Windows.Forms.Button();
+            this.BtnCodingCopy = new System.Windows.Forms.Button();
+            this.TbxCoding = new System.Windows.Forms.TextBox();
+            this.BtnGeneratePrimitivesParamClasses = new System.Windows.Forms.Button();
+            this.BtnCreatePrimitivesGenerator = new System.Windows.Forms.Button();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
-            this.BtnShowBuiltInClassIDAB = new System.Windows.Forms.Button();
+            this.BtnCreateTeapotComplex = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.SpnSimillarATolerance)).BeginInit();
             this.groupBox2.SuspendLayout();
             this.groupBox4.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.SpnBoxOffsetX)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.SpnBoxCnt)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.SpnBoxHei)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.SpnBoxWid)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.SpnBoxLen)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.SpnPrimRadius2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.SpnPrimRadius1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.SpnPrimOffsetY)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.SpnPrimOffsetX)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.SpnPrimCnt)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.SpnPrimHei)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.SpnPrimWid)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.SpnPrimLen)).BeginInit();
             this.groupBox5.SuspendLayout();
             this.groupBox6.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage3.SuspendLayout();
             this.tabPage1.SuspendLayout();
+            this.groupBox10.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.groupBox9.SuspendLayout();
             this.groupBox7.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.tabPage4.SuspendLayout();
             this.groupBox8.SuspendLayout();
+            this.tabPage5.SuspendLayout();
             this.SuspendLayout();
             // 
             // button1
@@ -413,9 +440,9 @@
             this.BtnListPrimitives.Name = "BtnListPrimitives";
             this.BtnListPrimitives.Size = new System.Drawing.Size(122, 23);
             this.BtnListPrimitives.TabIndex = 39;
-            this.BtnListPrimitives.Text = "List Primitives";
+            this.BtnListPrimitives.Text = "List All Primitives";
             this.BtnListPrimitives.UseVisualStyleBackColor = true;
-            this.BtnListPrimitives.Click += new System.EventHandler(this.BtnListPrimitives_Click);
+            this.BtnListPrimitives.Click += new System.EventHandler(this.BtnListAllPrimitives_Click);
             // 
             // button18
             // 
@@ -637,7 +664,7 @@
             // 
             // button7
             // 
-            this.button7.Location = new System.Drawing.Point(6, 48);
+            this.button7.Location = new System.Drawing.Point(7, 359);
             this.button7.Name = "button7";
             this.button7.Size = new System.Drawing.Size(122, 23);
             this.button7.TabIndex = 7;
@@ -655,16 +682,6 @@
             this.button13.UseVisualStyleBackColor = true;
             this.button13.Click += new System.EventHandler(this.Button13_Click);
             // 
-            // button8
-            // 
-            this.button8.Location = new System.Drawing.Point(6, 19);
-            this.button8.Name = "button8";
-            this.button8.Size = new System.Drawing.Size(122, 23);
-            this.button8.TabIndex = 6;
-            this.button8.Text = "Teapot";
-            this.button8.UseVisualStyleBackColor = true;
-            this.button8.Click += new System.EventHandler(this.Button8_Click);
-            // 
             // button9
             // 
             this.button9.Location = new System.Drawing.Point(6, 138);
@@ -677,54 +694,198 @@
             // 
             // groupBox4
             // 
+            this.groupBox4.Controls.Add(this.LbxParamList);
+            this.groupBox4.Controls.Add(this.CbxPrimitiveCategories);
+            this.groupBox4.Controls.Add(this.label12);
+            this.groupBox4.Controls.Add(this.SpnPrimRadius2);
+            this.groupBox4.Controls.Add(this.label11);
+            this.groupBox4.Controls.Add(this.SpnPrimRadius1);
+            this.groupBox4.Controls.Add(this.label10);
+            this.groupBox4.Controls.Add(this.SpnPrimOffsetY);
+            this.groupBox4.Controls.Add(this.LbxPrimitiveObjectNames);
+            this.groupBox4.Controls.Add(this.BtnCreatePrimitives);
             this.groupBox4.Controls.Add(this.label9);
-            this.groupBox4.Controls.Add(this.SpnBoxOffsetX);
+            this.groupBox4.Controls.Add(this.SpnPrimOffsetX);
             this.groupBox4.Controls.Add(this.label8);
-            this.groupBox4.Controls.Add(this.SpnBoxCnt);
+            this.groupBox4.Controls.Add(this.SpnPrimCnt);
             this.groupBox4.Controls.Add(this.label7);
-            this.groupBox4.Controls.Add(this.SpnBoxHei);
+            this.groupBox4.Controls.Add(this.SpnPrimHei);
             this.groupBox4.Controls.Add(this.label6);
-            this.groupBox4.Controls.Add(this.SpnBoxWid);
+            this.groupBox4.Controls.Add(this.SpnPrimWid);
             this.groupBox4.Controls.Add(this.label5);
-            this.groupBox4.Controls.Add(this.SpnBoxLen);
-            this.groupBox4.Controls.Add(this.BtnCreateBox);
-            this.groupBox4.Controls.Add(this.button8);
+            this.groupBox4.Controls.Add(this.SpnPrimLen);
             this.groupBox4.Controls.Add(this.button7);
             this.groupBox4.Location = new System.Drawing.Point(304, 6);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(272, 242);
+            this.groupBox4.Size = new System.Drawing.Size(272, 388);
             this.groupBox4.TabIndex = 43;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Create:";
             // 
+            // LbxParamList
+            // 
+            this.LbxParamList.FormattingEnabled = true;
+            this.LbxParamList.Items.AddRange(new object[] {
+            "..."});
+            this.LbxParamList.Location = new System.Drawing.Point(7, 229);
+            this.LbxParamList.Name = "LbxParamList";
+            this.LbxParamList.Size = new System.Drawing.Size(259, 121);
+            this.LbxParamList.TabIndex = 76;
+            // 
+            // CbxPrimitiveCategories
+            // 
+            this.CbxPrimitiveCategories.FormattingEnabled = true;
+            this.CbxPrimitiveCategories.Location = new System.Drawing.Point(6, 49);
+            this.CbxPrimitiveCategories.Name = "CbxPrimitiveCategories";
+            this.CbxPrimitiveCategories.Size = new System.Drawing.Size(132, 21);
+            this.CbxPrimitiveCategories.TabIndex = 43;
+            this.CbxPrimitiveCategories.SelectedIndexChanged += new System.EventHandler(this.OnPrimitiveCategoryChanged);
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(144, 208);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(49, 13);
+            this.label12.TabIndex = 73;
+            this.label12.Text = "Radius2:";
+            // 
+            // SpnPrimRadius2
+            // 
+            this.SpnPrimRadius2.DecimalPlaces = 1;
+            this.SpnPrimRadius2.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+            this.SpnPrimRadius2.Location = new System.Drawing.Point(196, 204);
+            this.SpnPrimRadius2.Maximum = new decimal(new int[] {
+            1000000,
+            0,
+            0,
+            0});
+            this.SpnPrimRadius2.Name = "SpnPrimRadius2";
+            this.SpnPrimRadius2.Size = new System.Drawing.Size(70, 20);
+            this.SpnPrimRadius2.TabIndex = 72;
+            this.SpnPrimRadius2.Value = new decimal(new int[] {
+            40,
+            0,
+            0,
+            0});
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(144, 182);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(49, 13);
+            this.label11.TabIndex = 71;
+            this.label11.Text = "Radius1:";
+            // 
+            // SpnPrimRadius1
+            // 
+            this.SpnPrimRadius1.DecimalPlaces = 1;
+            this.SpnPrimRadius1.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+            this.SpnPrimRadius1.Location = new System.Drawing.Point(196, 178);
+            this.SpnPrimRadius1.Maximum = new decimal(new int[] {
+            1000000,
+            0,
+            0,
+            0});
+            this.SpnPrimRadius1.Name = "SpnPrimRadius1";
+            this.SpnPrimRadius1.Size = new System.Drawing.Size(70, 20);
+            this.SpnPrimRadius1.TabIndex = 70;
+            this.SpnPrimRadius1.Value = new decimal(new int[] {
+            100,
+            0,
+            0,
+            0});
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(144, 156);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(48, 13);
+            this.label10.TabIndex = 69;
+            this.label10.Text = "Offset Y:";
+            // 
+            // SpnPrimOffsetY
+            // 
+            this.SpnPrimOffsetY.DecimalPlaces = 1;
+            this.SpnPrimOffsetY.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+            this.SpnPrimOffsetY.Location = new System.Drawing.Point(196, 152);
+            this.SpnPrimOffsetY.Maximum = new decimal(new int[] {
+            1000000,
+            0,
+            0,
+            0});
+            this.SpnPrimOffsetY.Name = "SpnPrimOffsetY";
+            this.SpnPrimOffsetY.Size = new System.Drawing.Size(70, 20);
+            this.SpnPrimOffsetY.TabIndex = 68;
+            this.SpnPrimOffsetY.Value = new decimal(new int[] {
+            100,
+            0,
+            0,
+            0});
+            // 
+            // LbxPrimitiveObjectNames
+            // 
+            this.LbxPrimitiveObjectNames.FormattingEnabled = true;
+            this.LbxPrimitiveObjectNames.Items.AddRange(new object[] {
+            "..."});
+            this.LbxPrimitiveObjectNames.Location = new System.Drawing.Point(7, 76);
+            this.LbxPrimitiveObjectNames.Name = "LbxPrimitiveObjectNames";
+            this.LbxPrimitiveObjectNames.Size = new System.Drawing.Size(131, 147);
+            this.LbxPrimitiveObjectNames.TabIndex = 67;
+            this.LbxPrimitiveObjectNames.SelectedIndexChanged += new System.EventHandler(this.OnPrimitiveItemChanged);
+            // 
+            // BtnCreatePrimitives
+            // 
+            this.BtnCreatePrimitives.Location = new System.Drawing.Point(6, 19);
+            this.BtnCreatePrimitives.Name = "BtnCreatePrimitives";
+            this.BtnCreatePrimitives.Size = new System.Drawing.Size(132, 23);
+            this.BtnCreatePrimitives.TabIndex = 66;
+            this.BtnCreatePrimitives.Text = "Create Primitives";
+            this.BtnCreatePrimitives.UseVisualStyleBackColor = true;
+            this.BtnCreatePrimitives.Click += new System.EventHandler(this.button2_Click);
+            // 
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(6, 210);
+            this.label9.Location = new System.Drawing.Point(144, 127);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(48, 13);
             this.label9.TabIndex = 65;
             this.label9.Text = "Offset X:";
             // 
-            // SpnBoxOffsetX
+            // SpnPrimOffsetX
             // 
-            this.SpnBoxOffsetX.DecimalPlaces = 1;
-            this.SpnBoxOffsetX.Increment = new decimal(new int[] {
+            this.SpnPrimOffsetX.DecimalPlaces = 1;
+            this.SpnPrimOffsetX.Increment = new decimal(new int[] {
             1,
             0,
             0,
             65536});
-            this.SpnBoxOffsetX.Location = new System.Drawing.Point(58, 206);
-            this.SpnBoxOffsetX.Maximum = new decimal(new int[] {
+            this.SpnPrimOffsetX.Location = new System.Drawing.Point(196, 123);
+            this.SpnPrimOffsetX.Maximum = new decimal(new int[] {
             1000000,
             0,
             0,
             0});
-            this.SpnBoxOffsetX.Name = "SpnBoxOffsetX";
-            this.SpnBoxOffsetX.Size = new System.Drawing.Size(70, 20);
-            this.SpnBoxOffsetX.TabIndex = 64;
-            this.SpnBoxOffsetX.Value = new decimal(new int[] {
-            20,
+            this.SpnPrimOffsetX.Name = "SpnPrimOffsetX";
+            this.SpnPrimOffsetX.Size = new System.Drawing.Size(70, 20);
+            this.SpnPrimOffsetX.TabIndex = 64;
+            this.SpnPrimOffsetX.Value = new decimal(new int[] {
+            50,
             0,
             0,
             0});
@@ -732,24 +893,24 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(6, 184);
+            this.label8.Location = new System.Drawing.Point(144, 101);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(38, 13);
             this.label8.TabIndex = 63;
             this.label8.Text = "Count:";
             // 
-            // SpnBoxCnt
+            // SpnPrimCnt
             // 
-            this.SpnBoxCnt.Location = new System.Drawing.Point(58, 180);
-            this.SpnBoxCnt.Maximum = new decimal(new int[] {
+            this.SpnPrimCnt.Location = new System.Drawing.Point(196, 97);
+            this.SpnPrimCnt.Maximum = new decimal(new int[] {
             1000,
             0,
             0,
             0});
-            this.SpnBoxCnt.Name = "SpnBoxCnt";
-            this.SpnBoxCnt.Size = new System.Drawing.Size(70, 20);
-            this.SpnBoxCnt.TabIndex = 62;
-            this.SpnBoxCnt.Value = new decimal(new int[] {
+            this.SpnPrimCnt.Name = "SpnPrimCnt";
+            this.SpnPrimCnt.Size = new System.Drawing.Size(70, 20);
+            this.SpnPrimCnt.TabIndex = 62;
+            this.SpnPrimCnt.Value = new decimal(new int[] {
             8,
             0,
             0,
@@ -758,30 +919,30 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(6, 158);
+            this.label7.Location = new System.Drawing.Point(144, 75);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(41, 13);
             this.label7.TabIndex = 61;
             this.label7.Text = "Height:";
             // 
-            // SpnBoxHei
+            // SpnPrimHei
             // 
-            this.SpnBoxHei.DecimalPlaces = 1;
-            this.SpnBoxHei.Increment = new decimal(new int[] {
+            this.SpnPrimHei.DecimalPlaces = 1;
+            this.SpnPrimHei.Increment = new decimal(new int[] {
             1,
             0,
             0,
             65536});
-            this.SpnBoxHei.Location = new System.Drawing.Point(58, 154);
-            this.SpnBoxHei.Maximum = new decimal(new int[] {
+            this.SpnPrimHei.Location = new System.Drawing.Point(196, 71);
+            this.SpnPrimHei.Maximum = new decimal(new int[] {
             1000000,
             0,
             0,
             0});
-            this.SpnBoxHei.Name = "SpnBoxHei";
-            this.SpnBoxHei.Size = new System.Drawing.Size(70, 20);
-            this.SpnBoxHei.TabIndex = 60;
-            this.SpnBoxHei.Value = new decimal(new int[] {
+            this.SpnPrimHei.Name = "SpnPrimHei";
+            this.SpnPrimHei.Size = new System.Drawing.Size(70, 20);
+            this.SpnPrimHei.TabIndex = 60;
+            this.SpnPrimHei.Value = new decimal(new int[] {
             500,
             0,
             0,
@@ -790,30 +951,30 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(6, 132);
+            this.label6.Location = new System.Drawing.Point(144, 49);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(38, 13);
             this.label6.TabIndex = 59;
             this.label6.Text = "Width:";
             // 
-            // SpnBoxWid
+            // SpnPrimWid
             // 
-            this.SpnBoxWid.DecimalPlaces = 1;
-            this.SpnBoxWid.Increment = new decimal(new int[] {
+            this.SpnPrimWid.DecimalPlaces = 1;
+            this.SpnPrimWid.Increment = new decimal(new int[] {
             1,
             0,
             0,
             65536});
-            this.SpnBoxWid.Location = new System.Drawing.Point(58, 128);
-            this.SpnBoxWid.Maximum = new decimal(new int[] {
+            this.SpnPrimWid.Location = new System.Drawing.Point(196, 45);
+            this.SpnPrimWid.Maximum = new decimal(new int[] {
             1000000,
             0,
             0,
             0});
-            this.SpnBoxWid.Name = "SpnBoxWid";
-            this.SpnBoxWid.Size = new System.Drawing.Size(70, 20);
-            this.SpnBoxWid.TabIndex = 58;
-            this.SpnBoxWid.Value = new decimal(new int[] {
+            this.SpnPrimWid.Name = "SpnPrimWid";
+            this.SpnPrimWid.Size = new System.Drawing.Size(70, 20);
+            this.SpnPrimWid.TabIndex = 58;
+            this.SpnPrimWid.Value = new decimal(new int[] {
             50,
             0,
             0,
@@ -822,44 +983,44 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(6, 106);
+            this.label5.Location = new System.Drawing.Point(144, 23);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(43, 13);
             this.label5.TabIndex = 57;
             this.label5.Text = "Length:";
             // 
-            // SpnBoxLen
+            // SpnPrimLen
             // 
-            this.SpnBoxLen.DecimalPlaces = 1;
-            this.SpnBoxLen.Increment = new decimal(new int[] {
+            this.SpnPrimLen.DecimalPlaces = 1;
+            this.SpnPrimLen.Increment = new decimal(new int[] {
             1,
             0,
             0,
             65536});
-            this.SpnBoxLen.Location = new System.Drawing.Point(58, 102);
-            this.SpnBoxLen.Maximum = new decimal(new int[] {
+            this.SpnPrimLen.Location = new System.Drawing.Point(196, 19);
+            this.SpnPrimLen.Maximum = new decimal(new int[] {
             1000000,
             0,
             0,
             0});
-            this.SpnBoxLen.Name = "SpnBoxLen";
-            this.SpnBoxLen.Size = new System.Drawing.Size(70, 20);
-            this.SpnBoxLen.TabIndex = 56;
-            this.SpnBoxLen.Value = new decimal(new int[] {
+            this.SpnPrimLen.Name = "SpnPrimLen";
+            this.SpnPrimLen.Size = new System.Drawing.Size(70, 20);
+            this.SpnPrimLen.TabIndex = 56;
+            this.SpnPrimLen.Value = new decimal(new int[] {
             10,
             0,
             0,
             0});
             // 
-            // BtnCreateBox
+            // BtnCreatePlaneComplex
             // 
-            this.BtnCreateBox.Location = new System.Drawing.Point(6, 77);
-            this.BtnCreateBox.Name = "BtnCreateBox";
-            this.BtnCreateBox.Size = new System.Drawing.Size(122, 23);
-            this.BtnCreateBox.TabIndex = 8;
-            this.BtnCreateBox.Text = "Create Boxes";
-            this.BtnCreateBox.UseVisualStyleBackColor = true;
-            this.BtnCreateBox.Click += new System.EventHandler(this.BtnCreateBox_Click);
+            this.BtnCreatePlaneComplex.Location = new System.Drawing.Point(6, 19);
+            this.BtnCreatePlaneComplex.Name = "BtnCreatePlaneComplex";
+            this.BtnCreatePlaneComplex.Size = new System.Drawing.Size(122, 23);
+            this.BtnCreatePlaneComplex.TabIndex = 75;
+            this.BtnCreatePlaneComplex.Text = "Create Plane Complex";
+            this.BtnCreatePlaneComplex.UseVisualStyleBackColor = true;
+            this.BtnCreatePlaneComplex.Click += new System.EventHandler(this.BtnCreatePlaneComplex_Click);
             // 
             // groupBox5
             // 
@@ -884,8 +1045,9 @@
             // 
             // groupBox6
             // 
+            this.groupBox6.Controls.Add(this.BtnListGeomPrim);
+            this.groupBox6.Controls.Add(this.ChkShowMaxClass);
             this.groupBox6.Controls.Add(this.BtnShowBuiltInClassIDAB);
-            this.groupBox6.Controls.Add(this.BtnGenParamsForCs);
             this.groupBox6.Controls.Add(this.button16);
             this.groupBox6.Controls.Add(this.BtnGetSceneObjects);
             this.groupBox6.Controls.Add(this.button9);
@@ -893,22 +1055,42 @@
             this.groupBox6.Controls.Add(this.CbxPrimitiveTypes);
             this.groupBox6.Controls.Add(this.BtnListPrimitives);
             this.groupBox6.Controls.Add(this.CbxSceneNodeTypes);
-            this.groupBox6.Location = new System.Drawing.Point(6, 254);
+            this.groupBox6.Location = new System.Drawing.Point(8, 400);
             this.groupBox6.Name = "groupBox6";
             this.groupBox6.Size = new System.Drawing.Size(570, 242);
             this.groupBox6.TabIndex = 45;
             this.groupBox6.TabStop = false;
             this.groupBox6.Text = "Inspect:";
             // 
-            // BtnGenParamsForCs
+            // BtnListGeomPrim
             // 
-            this.BtnGenParamsForCs.Location = new System.Drawing.Point(370, 45);
-            this.BtnGenParamsForCs.Name = "BtnGenParamsForCs";
-            this.BtnGenParamsForCs.Size = new System.Drawing.Size(194, 23);
-            this.BtnGenParamsForCs.TabIndex = 42;
-            this.BtnGenParamsForCs.Text = "Generate Parameters For Cs";
-            this.BtnGenParamsForCs.UseVisualStyleBackColor = true;
-            this.BtnGenParamsForCs.Click += new System.EventHandler(this.BtnGenParamsForCs_Click);
+            this.BtnListGeomPrim.Location = new System.Drawing.Point(134, 109);
+            this.BtnListGeomPrim.Name = "BtnListGeomPrim";
+            this.BtnListGeomPrim.Size = new System.Drawing.Size(116, 23);
+            this.BtnListGeomPrim.TabIndex = 44;
+            this.BtnListGeomPrim.Text = "List Geom Primitives";
+            this.BtnListGeomPrim.UseVisualStyleBackColor = true;
+            this.BtnListGeomPrim.Click += new System.EventHandler(this.BtnListGeomPrim_Click);
+            // 
+            // ChkShowMaxClass
+            // 
+            this.ChkShowMaxClass.AutoSize = true;
+            this.ChkShowMaxClass.Location = new System.Drawing.Point(206, 49);
+            this.ChkShowMaxClass.Name = "ChkShowMaxClass";
+            this.ChkShowMaxClass.Size = new System.Drawing.Size(94, 17);
+            this.ChkShowMaxClass.TabIndex = 43;
+            this.ChkShowMaxClass.Text = "with max class";
+            this.ChkShowMaxClass.UseVisualStyleBackColor = true;
+            // 
+            // BtnShowBuiltInClassIDAB
+            // 
+            this.BtnShowBuiltInClassIDAB.Location = new System.Drawing.Point(370, 16);
+            this.BtnShowBuiltInClassIDAB.Name = "BtnShowBuiltInClassIDAB";
+            this.BtnShowBuiltInClassIDAB.Size = new System.Drawing.Size(194, 23);
+            this.BtnShowBuiltInClassIDAB.TabIndex = 43;
+            this.BtnShowBuiltInClassIDAB.Text = "Show BuiltInClassID (A - B)";
+            this.BtnShowBuiltInClassIDAB.UseVisualStyleBackColor = true;
+            this.BtnShowBuiltInClassIDAB.Click += new System.EventHandler(this.BtnShowBuiltInClassIDAB_Click);
             // 
             // tabControl1
             // 
@@ -916,6 +1098,7 @@
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Controls.Add(this.tabPage4);
+            this.tabControl1.Controls.Add(this.tabPage5);
             this.tabControl1.Location = new System.Drawing.Point(6, 4);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
@@ -942,6 +1125,7 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.groupBox10);
             this.tabPage1.Controls.Add(this.groupBox6);
             this.tabPage1.Controls.Add(this.groupBox5);
             this.tabPage1.Controls.Add(this.groupBox4);
@@ -952,6 +1136,28 @@
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Object";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // groupBox10
+            // 
+            this.groupBox10.Controls.Add(this.BtnCreateTeapotComplex);
+            this.groupBox10.Controls.Add(this.BtnCreateBoxComplex);
+            this.groupBox10.Controls.Add(this.BtnCreatePlaneComplex);
+            this.groupBox10.Location = new System.Drawing.Point(6, 254);
+            this.groupBox10.Name = "groupBox10";
+            this.groupBox10.Size = new System.Drawing.Size(140, 110);
+            this.groupBox10.TabIndex = 46;
+            this.groupBox10.TabStop = false;
+            this.groupBox10.Text = "Low Level Tests:";
+            // 
+            // BtnCreateBoxComplex
+            // 
+            this.BtnCreateBoxComplex.Location = new System.Drawing.Point(6, 48);
+            this.BtnCreateBoxComplex.Name = "BtnCreateBoxComplex";
+            this.BtnCreateBoxComplex.Size = new System.Drawing.Size(122, 23);
+            this.BtnCreateBoxComplex.TabIndex = 76;
+            this.BtnCreateBoxComplex.Text = "Create Box Complex";
+            this.BtnCreateBoxComplex.UseVisualStyleBackColor = true;
+            this.BtnCreateBoxComplex.Click += new System.EventHandler(this.BtnCreateBoxComplex_Click);
             // 
             // tabPage2
             // 
@@ -1080,21 +1286,119 @@
             this.groupBox8.TabStop = false;
             this.groupBox8.Text = "Actions:";
             // 
+            // tabPage5
+            // 
+            this.tabPage5.Controls.Add(this.TbxObjType);
+            this.tabPage5.Controls.Add(this.BtnCreateSelectionGenerator);
+            this.tabPage5.Controls.Add(this.BtnGenerateSelectionParamClasses);
+            this.tabPage5.Controls.Add(this.BtnCodingClear);
+            this.tabPage5.Controls.Add(this.BtnCodingCopy);
+            this.tabPage5.Controls.Add(this.TbxCoding);
+            this.tabPage5.Controls.Add(this.BtnGeneratePrimitivesParamClasses);
+            this.tabPage5.Controls.Add(this.BtnCreatePrimitivesGenerator);
+            this.tabPage5.Location = new System.Drawing.Point(4, 22);
+            this.tabPage5.Name = "tabPage5";
+            this.tabPage5.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage5.Size = new System.Drawing.Size(582, 648);
+            this.tabPage5.TabIndex = 4;
+            this.tabPage5.Text = "Class Generator";
+            this.tabPage5.UseVisualStyleBackColor = true;
+            // 
+            // TbxObjType
+            // 
+            this.TbxObjType.Location = new System.Drawing.Point(390, 8);
+            this.TbxObjType.Name = "TbxObjType";
+            this.TbxObjType.Size = new System.Drawing.Size(186, 20);
+            this.TbxObjType.TabIndex = 50;
+            this.TbxObjType.Enter += new System.EventHandler(this.OnTextAreaGotFocus);
+            this.TbxObjType.Leave += new System.EventHandler(this.OnTextAreaLostFocus);
+            // 
+            // BtnCreateSelectionGenerator
+            // 
+            this.BtnCreateSelectionGenerator.Location = new System.Drawing.Point(235, 6);
+            this.BtnCreateSelectionGenerator.Name = "BtnCreateSelectionGenerator";
+            this.BtnCreateSelectionGenerator.Size = new System.Drawing.Size(149, 23);
+            this.BtnCreateSelectionGenerator.TabIndex = 49;
+            this.BtnCreateSelectionGenerator.Text = "Get Selected Primitive Type";
+            this.BtnCreateSelectionGenerator.UseVisualStyleBackColor = true;
+            this.BtnCreateSelectionGenerator.Click += new System.EventHandler(this.BtnGetSelectedPrimitiveClass_Click);
+            // 
+            // BtnGenerateSelectionParamClasses
+            // 
+            this.BtnGenerateSelectionParamClasses.Location = new System.Drawing.Point(235, 35);
+            this.BtnGenerateSelectionParamClasses.Name = "BtnGenerateSelectionParamClasses";
+            this.BtnGenerateSelectionParamClasses.Size = new System.Drawing.Size(341, 23);
+            this.BtnGenerateSelectionParamClasses.TabIndex = 48;
+            this.BtnGenerateSelectionParamClasses.Text = "Generate Parameters Class From Type";
+            this.BtnGenerateSelectionParamClasses.UseVisualStyleBackColor = true;
+            this.BtnGenerateSelectionParamClasses.Click += new System.EventHandler(this.BtnGenerateClassParams_Click);
+            // 
+            // BtnCodingClear
+            // 
+            this.BtnCodingClear.Location = new System.Drawing.Point(452, 619);
+            this.BtnCodingClear.Name = "BtnCodingClear";
+            this.BtnCodingClear.Size = new System.Drawing.Size(124, 23);
+            this.BtnCodingClear.TabIndex = 47;
+            this.BtnCodingClear.Text = "Clear";
+            this.BtnCodingClear.UseVisualStyleBackColor = true;
+            this.BtnCodingClear.Click += new System.EventHandler(this.BtnCodingClear_Click);
+            // 
+            // BtnCodingCopy
+            // 
+            this.BtnCodingCopy.Location = new System.Drawing.Point(6, 619);
+            this.BtnCodingCopy.Name = "BtnCodingCopy";
+            this.BtnCodingCopy.Size = new System.Drawing.Size(124, 23);
+            this.BtnCodingCopy.TabIndex = 46;
+            this.BtnCodingCopy.Text = "Copy";
+            this.BtnCodingCopy.UseVisualStyleBackColor = true;
+            this.BtnCodingCopy.Click += new System.EventHandler(this.BtnCodingCopy_Click);
+            // 
+            // TbxCoding
+            // 
+            this.TbxCoding.Location = new System.Drawing.Point(6, 64);
+            this.TbxCoding.Multiline = true;
+            this.TbxCoding.Name = "TbxCoding";
+            this.TbxCoding.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+            this.TbxCoding.Size = new System.Drawing.Size(570, 550);
+            this.TbxCoding.TabIndex = 45;
+            this.TbxCoding.Text = "...";
+            this.TbxCoding.WordWrap = false;
+            // 
+            // BtnGeneratePrimitivesParamClasses
+            // 
+            this.BtnGeneratePrimitivesParamClasses.Location = new System.Drawing.Point(6, 35);
+            this.BtnGeneratePrimitivesParamClasses.Name = "BtnGeneratePrimitivesParamClasses";
+            this.BtnGeneratePrimitivesParamClasses.Size = new System.Drawing.Size(223, 23);
+            this.BtnGeneratePrimitivesParamClasses.TabIndex = 44;
+            this.BtnGeneratePrimitivesParamClasses.Text = "Generate Primitives Parameter Classes";
+            this.BtnGeneratePrimitivesParamClasses.UseVisualStyleBackColor = true;
+            this.BtnGeneratePrimitivesParamClasses.Click += new System.EventHandler(this.BtnGeneratePrimitivesParamClasses_Click);
+            // 
+            // BtnCreatePrimitivesGenerator
+            // 
+            this.BtnCreatePrimitivesGenerator.Location = new System.Drawing.Point(6, 6);
+            this.BtnCreatePrimitivesGenerator.Name = "BtnCreatePrimitivesGenerator";
+            this.BtnCreatePrimitivesGenerator.Size = new System.Drawing.Size(223, 23);
+            this.BtnCreatePrimitivesGenerator.TabIndex = 43;
+            this.BtnCreatePrimitivesGenerator.Text = "Create Primitives Generator";
+            this.BtnCreatePrimitivesGenerator.UseVisualStyleBackColor = true;
+            this.BtnCreatePrimitivesGenerator.Click += new System.EventHandler(this.BtnCreatePrimitivesGenerator_Click);
+            // 
             // imageList1
             // 
             this.imageList1.ColorDepth = System.Windows.Forms.ColorDepth.Depth8Bit;
             this.imageList1.ImageSize = new System.Drawing.Size(16, 16);
             this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
             // 
-            // BtnShowBuiltInClassIDAB
+            // BtnCreateTeapotComplex
             // 
-            this.BtnShowBuiltInClassIDAB.Location = new System.Drawing.Point(370, 16);
-            this.BtnShowBuiltInClassIDAB.Name = "BtnShowBuiltInClassIDAB";
-            this.BtnShowBuiltInClassIDAB.Size = new System.Drawing.Size(194, 23);
-            this.BtnShowBuiltInClassIDAB.TabIndex = 43;
-            this.BtnShowBuiltInClassIDAB.Text = "Show BuiltInClassID (A - B)";
-            this.BtnShowBuiltInClassIDAB.UseVisualStyleBackColor = true;
-            this.BtnShowBuiltInClassIDAB.Click += new System.EventHandler(this.BtnShowBuiltInClassIDAB_Click);
+            this.BtnCreateTeapotComplex.Location = new System.Drawing.Point(6, 77);
+            this.BtnCreateTeapotComplex.Name = "BtnCreateTeapotComplex";
+            this.BtnCreateTeapotComplex.Size = new System.Drawing.Size(122, 23);
+            this.BtnCreateTeapotComplex.TabIndex = 77;
+            this.BtnCreateTeapotComplex.Text = "Create Teapot Complex";
+            this.BtnCreateTeapotComplex.UseVisualStyleBackColor = true;
+            this.BtnCreateTeapotComplex.Click += new System.EventHandler(this.BtnCreateTeapotComplex_Click);
             // 
             // CsharpToMaxTest
             // 
@@ -1112,18 +1416,23 @@
             this.groupBox2.ResumeLayout(false);
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.SpnBoxOffsetX)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.SpnBoxCnt)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.SpnBoxHei)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.SpnBoxWid)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.SpnBoxLen)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.SpnPrimRadius2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.SpnPrimRadius1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.SpnPrimOffsetY)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.SpnPrimOffsetX)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.SpnPrimCnt)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.SpnPrimHei)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.SpnPrimWid)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.SpnPrimLen)).EndInit();
             this.groupBox5.ResumeLayout(false);
             this.groupBox5.PerformLayout();
             this.groupBox6.ResumeLayout(false);
+            this.groupBox6.PerformLayout();
             this.tabControl1.ResumeLayout(false);
             this.tabPage3.ResumeLayout(false);
             this.tabPage3.PerformLayout();
             this.tabPage1.ResumeLayout(false);
+            this.groupBox10.ResumeLayout(false);
             this.tabPage2.ResumeLayout(false);
             this.groupBox9.ResumeLayout(false);
             this.groupBox9.PerformLayout();
@@ -1132,6 +1441,8 @@
             this.groupBox3.ResumeLayout(false);
             this.tabPage4.ResumeLayout(false);
             this.groupBox8.ResumeLayout(false);
+            this.tabPage5.ResumeLayout(false);
+            this.tabPage5.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -1145,7 +1456,6 @@
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Button button6;
         private System.Windows.Forms.Button button7;
-        private System.Windows.Forms.Button button8;
         private System.Windows.Forms.Button button9;
         private System.Windows.Forms.Button button10;
         private System.Windows.Forms.Button button11;
@@ -1210,17 +1520,40 @@
         private System.Windows.Forms.ComboBox CbxSimillarObjBy;
         private System.Windows.Forms.Button BtnSelSimElements;
         private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.NumericUpDown SpnBoxOffsetX;
+        private System.Windows.Forms.NumericUpDown SpnPrimOffsetX;
         private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.NumericUpDown SpnBoxCnt;
+        private System.Windows.Forms.NumericUpDown SpnPrimCnt;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.NumericUpDown SpnBoxHei;
+        private System.Windows.Forms.NumericUpDown SpnPrimHei;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.NumericUpDown SpnBoxWid;
+        private System.Windows.Forms.NumericUpDown SpnPrimWid;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.NumericUpDown SpnBoxLen;
-        private System.Windows.Forms.Button BtnCreateBox;
-        private System.Windows.Forms.Button BtnGenParamsForCs;
+        private System.Windows.Forms.NumericUpDown SpnPrimLen;
         private System.Windows.Forms.Button BtnShowBuiltInClassIDAB;
+        private System.Windows.Forms.TabPage tabPage5;
+        private System.Windows.Forms.Button BtnGeneratePrimitivesParamClasses;
+        private System.Windows.Forms.Button BtnCreatePrimitivesGenerator;
+        private System.Windows.Forms.Button BtnCodingClear;
+        private System.Windows.Forms.Button BtnCodingCopy;
+        private System.Windows.Forms.TextBox TbxCoding;
+        private System.Windows.Forms.ListBox LbxPrimitiveObjectNames;
+        private System.Windows.Forms.Button BtnCreatePrimitives;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.NumericUpDown SpnPrimRadius1;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.NumericUpDown SpnPrimOffsetY;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.NumericUpDown SpnPrimRadius2;
+        private System.Windows.Forms.CheckBox ChkShowMaxClass;
+        private System.Windows.Forms.Button BtnCreateSelectionGenerator;
+        private System.Windows.Forms.Button BtnGenerateSelectionParamClasses;
+        private System.Windows.Forms.Button BtnCreatePlaneComplex;
+        private System.Windows.Forms.Button BtnListGeomPrim;
+        private System.Windows.Forms.TextBox TbxObjType;
+        private System.Windows.Forms.ComboBox CbxPrimitiveCategories;
+        private System.Windows.Forms.ListBox LbxParamList;
+        private System.Windows.Forms.GroupBox groupBox10;
+        private System.Windows.Forms.Button BtnCreateBoxComplex;
+        private System.Windows.Forms.Button BtnCreateTeapotComplex;
     }
 }

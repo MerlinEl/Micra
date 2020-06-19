@@ -105,3 +105,4 @@ D:\ReneBaca\Aprog\Micra\Micra_Csharp\Micra.Domain\bin\Debug\System.Numerics.Vect
 D:\ReneBaca\Aprog\Micra\Micra_Csharp\Micra.Domain\bin\Debug\System.Reflection.Metadata.xml
 D:\ReneBaca\Aprog\Micra\Micra_Csharp\Micra.Domain\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
 D:\ReneBaca\Aprog\Micra\Micra_Csharp\Micra.Domain\bin\Debug\System.ValueTuple.xml
+D:\ReneBaca\Aprog\Micra\Micra_Csharp\Micra.Domain\obj\Debug\Micra.Domain.csprojAssemblyReference.cache

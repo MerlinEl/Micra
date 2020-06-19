@@ -24,6 +24,11 @@ namespace Micra.Core {
         public static void PushPrompt(string s) => Kernel._Interface.PushPrompt(s);
         public static int SubObjectLevel => Kernel._Interface.SubObjectLevel;
         public static IILayer CreateLayer() => Kernel._Interface.LayerManager.CreateLayer(); //TODO -not tested -not used
+
+        public static void DeleteObject(SceneObject so) {
+            so._Node?.Delete();
+            Kernel.RedrawViews();
+        }
         //ILayerWrapper layer = MaxNodeWrapper.Create(CreateLayer()) as ILayerWrapper;
         //   Assert.IsNotNull(layer);
     }

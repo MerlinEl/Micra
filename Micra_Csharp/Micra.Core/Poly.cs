@@ -1,6 +1,8 @@
 using Autodesk.Max;
 using Autodesk.Max.Wrappers;
 using Humanizer;
+using Micra.Core.Enums;
+using Micra.Core.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Linq;

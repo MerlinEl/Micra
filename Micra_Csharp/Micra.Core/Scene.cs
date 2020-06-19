@@ -6,6 +6,7 @@
 // otherwise accompanies this software in either electronic or hard copy form.  
 //
 using Autodesk.Max;
+using Micra.Core.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -52,7 +53,7 @@ namespace Micra.Core {
 
         public IEnumerable<Node> SelectedNodes() { // OK
             //return from n in NodeTree where n.Object != null & n._Node.Selected select n;
-            return NodeTree.Where<Node>(n => n.Object != null && n._IINode.Selected);//.Select(n => n);
+            return NodeTree.Where<Node>(n => n.Object != null && n.Selected);//.Select(n => n);
         }
 
         public IEnumerable<Node> GeometryNodes { get { return NodesBySuperClass(SuperClassID.GeometricObject); } }

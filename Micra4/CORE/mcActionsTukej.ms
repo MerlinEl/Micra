@@ -67,13 +67,18 @@ struct MICRA_TUKEJ_STRUCTURE	(
 			obj.material = standardMaterial useSelfIllumColor:false selfIllumAmount:100 Diffuse:(color 255 0 234)	
 			format "Create new FusionPositionMarker.\n" 
 		)
-				subobjectlevel = 0
-				select obj
+		
+		subobjectlevel = 0
+		select obj
 		
 		local fusion_pos_str = getclipboardtext()
 		if fusion_pos_str.count == 0 do return false
 		local fusion_pos_arr = filterString fusion_pos_str ","
-		if fusion_pos_arr.count != 3 do return false
+		if fusion_pos_arr.count != 3 do ( --of marker exists zoom only
+			
+			mcMax.zoomToSelection()
+			return false
+		)
 		format "\tfusion pos:%\n" fusion_pos_str
 		local fusion_pos = execute ("["+fusion_pos_arr[1]+","+fusion_pos_arr[2]+","+fusion_pos_arr[3]+"]")
 		local p = fusion_pos * 100

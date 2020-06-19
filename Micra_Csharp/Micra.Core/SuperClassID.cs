@@ -6,6 +6,7 @@
 // otherwise accompanies this software in either electronic or hard copy form.  
 //
 using Autodesk.Max;
+using Micra.Core.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Linq;

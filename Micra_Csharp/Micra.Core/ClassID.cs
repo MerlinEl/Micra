@@ -6,6 +6,7 @@
 // otherwise accompanies this software in either electronic or hard copy form.  
 //
 using Autodesk.Max;
+using Micra.Core.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -58,33 +59,38 @@ namespace Micra.Core {
 
         public IClass_ID _IClass_ID => Kernel._Global.Class_ID.Create(PartA, PartB);
 
-        //is class
+        //controll classes (is poly, is mesh)
         public static ClassID EditableMesh = new ClassID(BuiltInClassIDA.EDITTRIOBJ_CLASS_ID, 0);
         public static ClassID EditablePoly = new ClassID(BuiltInClassIDA.EPOLYOBJ_CLASS_ID, BuiltInClassIDB.EPOLYOBJ_CLASS_ID);
-        public static ClassID BoneObject = new ClassID(BuiltInClassIDA.BONE_OBJ_CLASSID, BuiltInClassIDB.BONE_OBJ_CLASSID);
-        public static ClassID TargetObject = new ClassID(BuiltInClassIDA.TARGET_CLASS_ID, 0);
-        public static ClassID SpotLight = new ClassID(BuiltInClassIDA.SPOT_LIGHT_CLASS_ID, 0);
-        public static ClassID OmniLight = new ClassID(BuiltInClassIDA.OMNI_LIGHT_CLASS_ID, 0);
+        //helper classes
+        public static ClassID Bone = new ClassID(BuiltInClassIDA.BONE_OBJ_CLASSID, BuiltInClassIDB.BONE_OBJ_CLASSID);
         public static ClassID PointHelper = new ClassID(BuiltInClassIDA.EXPR_POS_CONTROL_CLASS_ID, 0);
         public static ClassID DummyHelper = new ClassID(BuiltInClassIDA.DUMMY_CLASS_ID, 0);
         public static ClassID TapeHelper = new ClassID(BuiltInClassIDA.TAPEHELP_CLASS_ID, 0);
-        //primitive classes
-        public static ClassID SplineShape = new ClassID(BuiltInClassIDA.SPLINE3D_CLASS_ID, 0);
-        public static ClassID CircleShape = new ClassID(BuiltInClassIDA.CIRCLE_CLASS_ID, 0);
-        public static ClassID ElipseShape = new ClassID(BuiltInClassIDA.ELLIPSE_CLASS_ID, 0);
-        public static ClassID RectangleShape = new ClassID(BuiltInClassIDA.RECTANGLE_CLASS_ID, 0);
-        public static ClassID DonutShape = new ClassID(BuiltInClassIDA.DONUT_CLASS_ID, 0);
-        public static ClassID SphereObj = new ClassID(BuiltInClassIDA.SPHERE_CLASS_ID, 0);
-        public static ClassID CylinderObject = new ClassID(BuiltInClassIDA.DMTL2_CLASS_ID, 0);
-        public static ClassID BoxObject = new ClassID(BuiltInClassIDA.BOXOBJ_CLASS_ID, 0);
+        //light classes
+        public static ClassID SpotLight = new ClassID(BuiltInClassIDA.SPOT_LIGHT_CLASS_ID, 0);
+        public static ClassID OmniLight = new ClassID(BuiltInClassIDA.OMNI_LIGHT_CLASS_ID, 0);
+        public static ClassID TargetObject = new ClassID(BuiltInClassIDA.TARGET_CLASS_ID, 0);
+        //primitive shapes classes
+        public static ClassID Spline     = new ClassID(BuiltInClassIDA.SPLINE3D_CLASS_ID, 0);
+        public static ClassID Circle = new ClassID(BuiltInClassIDA.CIRCLE_CLASS_ID, 0);
+        public static ClassID Elipse = new ClassID(BuiltInClassIDA.ELLIPSE_CLASS_ID, 0);
+        public static ClassID Rectangle = new ClassID(BuiltInClassIDA.RECTANGLE_CLASS_ID, 0);
+        public static ClassID Donut = new ClassID(BuiltInClassIDA.DONUT_CLASS_ID, 0);
+        //primitive objects classes
+        public static ClassID Sphere = new ClassID(BuiltInClassIDA.SPHERE_CLASS_ID, 0);
+        public static ClassID Cylinder = new ClassID(BuiltInClassIDA.CYLINDER_CLASS_ID, 0);
+        public static ClassID Box = new ClassID(BuiltInClassIDA.BOXOBJ_CLASS_ID, 0);
+        public static ClassID Plane = new ClassID(BuiltInClassIDA.PLANE_CLASS_ID, BuiltInClassIDB.PLANE_CLASS_ID);
+        public static ClassID Torus = new ClassID(BuiltInClassIDA.TAPEROSM_CLASS_ID, 0);
         //can convert
         public static ClassID TriObject = new ClassID(BuiltInClassIDA.TRIOBJ_CLASS_ID, 0);
         public static ClassID PolyObject = new ClassID(BuiltInClassIDA.POLYOBJ_CLASS_ID, 0);
         public static ClassID TeapotObject = new ClassID(BuiltInClassIDA.TEAPOT_CLASS_ID, BuiltInClassIDB.TEAPOT_CLASS_ID);
 
         public string GetClassName() => GetClassName(new ClassID(PartA, PartB));
-            /// <summary>usage: Get a Name from current ClasID as Kenel Name</summary>
-            public string GetClassName(ClassID clsID) {
+        /// <summary>usage: Get a Name from current ClasID as Kenel Name</summary>
+        public string GetClassName(ClassID clsID) {
             //get Clas name From Kernel Struct
             Type type = typeof(ClassID);
             foreach ( var p in type.GetFields(BindingFlags.Static | BindingFlags.Public) ) {
@@ -94,13 +100,15 @@ namespace Micra.Core {
                 }
             }
             //if class not found in ClassID, provide original Max BuiltInClassIDA Name
-            return GetIClassName(clsID) + "- This Class is not Registed in ClassID. VIP.";
+            return GetIClassName(clsID) + " - This Class is not Registed in ClassID. VIP.";
         }
+        //public static string GetIClassName(IClass_ID iClsID) => GetIClassName(new ClassID(iClsID));
         /// <summary>usage: Get Name from a ClasID as Max Name</summary>
-        public string GetIClassName(ClassID clsID) {
+        public static string GetIClassName(ClassID clsID) {
             //get clas name from Max Enums
-            Type t = typeof(BuiltInClassIDA);
-            return Enum.GetName(t, clsID.PartA) + " | " + Enum.GetName(t, clsID.PartB);
+            Type ta = typeof(BuiltInClassIDA);
+            Type tb = typeof(BuiltInClassIDB);
+            return Enum.GetName(ta, clsID.PartA) + " | " + Enum.GetName(tb, clsID.PartB);
         }
 
         public override string ToString() {
@@ -124,7 +132,7 @@ namespace Micra.Core {
         public static bool operator ==(ClassID x, ClassID y) { return ( x.PartA == y.PartA ) && ( x.PartB == y.PartB ); }
         public static bool operator !=(ClassID x, ClassID y) { return ( x.PartA != y.PartA ) || ( x.PartB != y.PartB ); }
 
-  
+
 
         //internal static int GetID(ClassID clsID) => (int)( clsID.a + clsID.b );
         //internal int GetID() => (int)( a + b );
