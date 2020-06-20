@@ -267,7 +267,7 @@ namespace Micra.Core {
             return null;
         }
 
-        public void SetSelectedFaces(List<int> faceIndexes, bool redraw) {
+        public void SetSelectedFaces(List<int> faceIndexes, bool redraw = true) {
             
             switch ( ClassOf() ) {
 

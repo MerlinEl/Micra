@@ -171,3 +171,4 @@ D:\ReneBaca\Aprog\Micra\Micra_Csharp\Micra.Tools\bin\Debug\System.Reflection.Met
 D:\ReneBaca\Aprog\Micra\Micra_Csharp\Micra.Tools\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
 D:\ReneBaca\Aprog\Micra\Micra_Csharp\Micra.Tools\bin\Debug\System.ValueTuple.xml
 D:\ReneBaca\Aprog\Micra\Micra_Csharp\Micra.Tools\bin\Debug\Autodesk.Max.Remoting.dll
+E:\Aprog\Orien\Micra\Micra_Csharp\Micra.Tools\bin\Debug\Autodesk.Max.Remoting.dll

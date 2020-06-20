@@ -7,6 +7,7 @@ using Micra.Core.Ressearch;
 using Micra.Core.Utils;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -36,6 +37,7 @@ namespace Micra.Tools {
             CbxMaxFilePath.SelectedIndex = 0;
             CbxSimillarObjBy.SelectedIndex = 0;
             LbxPrimitiveObjectNames.SelectedIndex = 0;
+            SpnSimillarAreaTolerance.SelectedIndex = 2;
 
             //Todo read all key names from XML
             CbxScriptList.Items.AddRange(new object[]{
@@ -59,7 +61,6 @@ namespace Micra.Tools {
                 "Lights" //PrimLightObjectFactory
             });
             CbxPrimitiveCategories.SelectedIndex = 0;
-
         }
 
         #region Execute Max Script
@@ -123,33 +124,6 @@ namespace Micra.Tools {
             textBox1.Text = cmd;
             IFPValue mxsRetVal = MxSet.ExecuteMAXScriptScript(cmd);
             if ( mxsRetVal != null ) Max.Log("Render Click gor:" + mxsRetVal.S);
-        }
-
-        private void BtnSelSimElements_Click(object sender, EventArgs e) {
-
-            Max.Log(( sender as Button ).Text);
-            bool byArea = CbxSimillarObjBy.SelectedIndex == 0 || CbxSimillarObjBy.SelectedIndex == 1;
-            bool byVcount = CbxSimillarObjBy.SelectedIndex == 2;
-            List<Node> selNodes = ObjOps.GetSlectedNodes();
-            Max.Log("\tSelected nodes:{0}", selNodes.Count());
-            int slev = Max.SubObjectLevel;
-            if ( selNodes.Count() == 1 && slev != 0 ) { //if single object is selected
-
-                Node node = selNodes.First();
-                if ( !node.IsEditable() ) return;
-                Max.Log("selected Node:{0} subObjectLevel:{1}", node.Name, Kernel._Interface.SubObjectLevel);
-                switch ( slev ) { //next operation is depend on subobject level
-
-                    case 2: GeoOps.SelectSimillarEdges(node, byArea, byVcount); break;
-                    case 3: GeoOps.SelectSimillarEdges(node, byArea, byVcount); break;
-                    case 4: GeoOps.SelectSimillarFaces(node, byArea, byVcount); break;
-                    case 5: GeoOps.SelectSimillarElements(node, byArea, byVcount); break;
-                }
-
-            } else if ( selNodes.Count() >= 1 ) { //when multi object selection
-
-                ObjOps.SelectSimillarNodes(selNodes, byArea, byVcount);
-            }
         }
 
         private void Button9_Click(object sender, EventArgs e) {
@@ -463,6 +437,7 @@ namespace Micra.Tools {
         }
 
         private void BtnSelSimElements_Click_1(object sender, EventArgs e) {
+
             Max.Log(( sender as Button ).Text);
             bool byArea = CbxSimillarObjBy.SelectedIndex == 0 || CbxSimillarObjBy.SelectedIndex == 1;
             bool byVcount = CbxSimillarObjBy.SelectedIndex == 2;
@@ -476,10 +451,22 @@ namespace Micra.Tools {
                 Max.Log("selected Node:{0} subObjectLevel:{1}", node.Name, Kernel._Interface.SubObjectLevel);
                 switch ( slev ) { //next operation is depend on subobject level
 
-                    case 2: GeoOps.SelectSimillarEdges(node, byArea, byVcount); break;
-                    case 3: GeoOps.SelectSimillarEdges(node, byArea, byVcount); break;
-                    case 4: GeoOps.SelectSimillarFaces(node, byArea, byVcount); break;
-                    case 5: GeoOps.SelectSimillarElements(node, byArea, byVcount); break;
+                    case 2: GeoOps.SelectSimillarEdges(node,
+                        float.Parse(SpnSimillarAreaTolerance.SelectedItem.ToString(), CultureInfo.InvariantCulture.NumberFormat)
+                        ); break;
+                    /*case 3: GeoOps.SelectSimillarEdgeLoops(node,
+                        float.Parse(SpnSimillarAreaTolerance.SelectedItem.ToString(), CultureInfo.InvariantCulture.NumberFormat)
+                        ); break;*/
+                    case 4:
+                        GeoOps.SelectSimillarFaces(node, byArea, byVcount,
+                    float.Parse(SpnSimillarAreaTolerance.SelectedItem.ToString(), CultureInfo.InvariantCulture.NumberFormat),
+                    ( int )SpnSimillarVertsTolerance.Value
+                ); break;
+                    case 5:
+                        GeoOps.SelectSimillarElements(node, byArea, byVcount,
+                    float.Parse(SpnSimillarAreaTolerance.SelectedItem.ToString(), CultureInfo.InvariantCulture.NumberFormat),
+                    ( int )SpnSimillarVertsTolerance.Value
+                ); break;
                 }
 
             } else if ( selNodes.Count() >= 1 ) { //when multi object selection

@@ -99,6 +99,7 @@ namespace Micra.Core {
             //for each face index which is in range(all faces), set bit to 1(selected) 
             faceIndexes.Where(i=> i < ba.Size).ForEach(i=> ba.Set(i));
             _IMNMesh.FaceSelect(ba);
+            _IMNMesh.InvalidateTopoCache(false);
             _IMNMesh.InvalidateGeomCache();
         }
 
@@ -109,6 +110,7 @@ namespace Micra.Core {
             //for each edge index which is in range(all edges), set bit to 1(selected) 
             edgeIndexes.Where(i => i < ba.Size).ForEach(i => ba.Set(i));
             _IMNMesh.EdgeSelect(ba);
+            _IMNMesh.InvalidateTopoCache(false);
             _IMNMesh.InvalidateGeomCache();
         }
 
@@ -119,6 +121,7 @@ namespace Micra.Core {
             //for each vert index which is in range(all verts), set bit to 1(selected) 
             vertIndexes.Where(i => i < ba.Size).ForEach(i => ba.Set(i));
             _IMNMesh.VertexSelect(ba);
+            _IMNMesh.InvalidateTopoCache(false);
             _IMNMesh.InvalidateGeomCache();
         }
 

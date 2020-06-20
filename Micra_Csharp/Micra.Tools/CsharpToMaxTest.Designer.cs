@@ -30,10 +30,9 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.label3 = new System.Windows.Forms.Label();
             this.BtnGetSelFaces = new System.Windows.Forms.Button();
-            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
+            this.SpnSimillarVertsTolerance = new System.Windows.Forms.NumericUpDown();
             this.BtnGetSelEdges = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
-            this.SpnSimillarATolerance = new System.Windows.Forms.NumericUpDown();
             this.BtnGetSelVetts = new System.Windows.Forms.Button();
             this.BtnSelSimElements = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
@@ -107,6 +106,7 @@
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.groupBox10 = new System.Windows.Forms.GroupBox();
+            this.BtnCreateTeapotComplex = new System.Windows.Forms.Button();
             this.BtnCreateBoxComplex = new System.Windows.Forms.Button();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.groupBox9 = new System.Windows.Forms.GroupBox();
@@ -129,10 +129,11 @@
             this.BtnGeneratePrimitivesParamClasses = new System.Windows.Forms.Button();
             this.BtnCreatePrimitivesGenerator = new System.Windows.Forms.Button();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
-            this.BtnCreateTeapotComplex = new System.Windows.Forms.Button();
+            this.label13 = new System.Windows.Forms.Label();
+            this.label14 = new System.Windows.Forms.Label();
+            this.SpnSimillarAreaTolerance = new System.Windows.Forms.ComboBox();
             this.groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.SpnSimillarATolerance)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.SpnSimillarVertsTolerance)).BeginInit();
             this.groupBox2.SuspendLayout();
             this.groupBox4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.SpnPrimRadius2)).BeginInit();
@@ -191,12 +192,14 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.SpnSimillarAreaTolerance);
+            this.groupBox1.Controls.Add(this.label14);
+            this.groupBox1.Controls.Add(this.label13);
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.BtnGetSelFaces);
-            this.groupBox1.Controls.Add(this.numericUpDown1);
+            this.groupBox1.Controls.Add(this.SpnSimillarVertsTolerance);
             this.groupBox1.Controls.Add(this.BtnGetSelEdges);
             this.groupBox1.Controls.Add(this.label2);
-            this.groupBox1.Controls.Add(this.SpnSimillarATolerance);
             this.groupBox1.Controls.Add(this.BtnGetSelVetts);
             this.groupBox1.Controls.Add(this.BtnSelSimElements);
             this.groupBox1.Controls.Add(this.label1);
@@ -211,11 +214,11 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(9, 193);
+            this.label3.Location = new System.Drawing.Point(9, 222);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(85, 13);
+            this.label3.Size = new System.Drawing.Size(81, 13);
             this.label3.TabIndex = 57;
-            this.label3.Text = "Verts Tolerance:";
+            this.label3.Text = "Verts tolerance:";
             // 
             // BtnGetSelFaces
             // 
@@ -227,12 +230,22 @@
             this.BtnGetSelFaces.UseVisualStyleBackColor = true;
             this.BtnGetSelFaces.Click += new System.EventHandler(this.BtnGetSelFaces_Click);
             // 
-            // numericUpDown1
+            // SpnSimillarVertsTolerance
             // 
-            this.numericUpDown1.Location = new System.Drawing.Point(98, 191);
-            this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(65, 20);
-            this.numericUpDown1.TabIndex = 56;
+            this.SpnSimillarVertsTolerance.Location = new System.Drawing.Point(52, 238);
+            this.SpnSimillarVertsTolerance.Maximum = new decimal(new int[] {
+            1000000,
+            0,
+            0,
+            0});
+            this.SpnSimillarVertsTolerance.Name = "SpnSimillarVertsTolerance";
+            this.SpnSimillarVertsTolerance.Size = new System.Drawing.Size(65, 20);
+            this.SpnSimillarVertsTolerance.TabIndex = 56;
+            this.SpnSimillarVertsTolerance.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             // 
             // BtnGetSelEdges
             // 
@@ -249,16 +262,9 @@
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(9, 167);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(83, 13);
+            this.label2.Size = new System.Drawing.Size(77, 13);
             this.label2.TabIndex = 55;
-            this.label2.Text = "Area Tolerance:";
-            // 
-            // SpnSimillarATolerance
-            // 
-            this.SpnSimillarATolerance.Location = new System.Drawing.Point(98, 165);
-            this.SpnSimillarATolerance.Name = "SpnSimillarATolerance";
-            this.SpnSimillarATolerance.Size = new System.Drawing.Size(65, 20);
-            this.SpnSimillarATolerance.TabIndex = 54;
+            this.label2.Text = "Area precision:";
             // 
             // BtnGetSelVetts
             // 
@@ -1149,6 +1155,16 @@
             this.groupBox10.TabStop = false;
             this.groupBox10.Text = "Low Level Tests:";
             // 
+            // BtnCreateTeapotComplex
+            // 
+            this.BtnCreateTeapotComplex.Location = new System.Drawing.Point(6, 77);
+            this.BtnCreateTeapotComplex.Name = "BtnCreateTeapotComplex";
+            this.BtnCreateTeapotComplex.Size = new System.Drawing.Size(122, 23);
+            this.BtnCreateTeapotComplex.TabIndex = 77;
+            this.BtnCreateTeapotComplex.Text = "Create Teapot Complex";
+            this.BtnCreateTeapotComplex.UseVisualStyleBackColor = true;
+            this.BtnCreateTeapotComplex.Click += new System.EventHandler(this.BtnCreateTeapotComplex_Click);
+            // 
             // BtnCreateBoxComplex
             // 
             this.BtnCreateBoxComplex.Location = new System.Drawing.Point(6, 48);
@@ -1390,15 +1406,42 @@
             this.imageList1.ImageSize = new System.Drawing.Size(16, 16);
             this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
             // 
-            // BtnCreateTeapotComplex
+            // label13
             // 
-            this.BtnCreateTeapotComplex.Location = new System.Drawing.Point(6, 77);
-            this.BtnCreateTeapotComplex.Name = "BtnCreateTeapotComplex";
-            this.BtnCreateTeapotComplex.Size = new System.Drawing.Size(122, 23);
-            this.BtnCreateTeapotComplex.TabIndex = 77;
-            this.BtnCreateTeapotComplex.Text = "Create Teapot Complex";
-            this.BtnCreateTeapotComplex.UseVisualStyleBackColor = true;
-            this.BtnCreateTeapotComplex.Click += new System.EventHandler(this.BtnCreateTeapotComplex_Click);
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(123, 186);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(21, 13);
+            this.label13.TabIndex = 58;
+            this.label13.Text = "cm";
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(123, 241);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(34, 13);
+            this.label14.TabIndex = 59;
+            this.label14.Text = "count";
+            // 
+            // SpnSimillarAreaTolerance
+            // 
+            this.SpnSimillarAreaTolerance.FormattingEnabled = true;
+            this.SpnSimillarAreaTolerance.Items.AddRange(new object[] {
+            "0.0001",
+            "0.001",
+            "0.01",
+            "0.1",
+            "0",
+            "1",
+            "10",
+            "100",
+            "1000",
+            "10000"});
+            this.SpnSimillarAreaTolerance.Location = new System.Drawing.Point(52, 183);
+            this.SpnSimillarAreaTolerance.Name = "SpnSimillarAreaTolerance";
+            this.SpnSimillarAreaTolerance.Size = new System.Drawing.Size(65, 21);
+            this.SpnSimillarAreaTolerance.TabIndex = 60;
             // 
             // CsharpToMaxTest
             // 
@@ -1411,8 +1454,7 @@
             this.Shown += new System.EventHandler(this.OnFormShown);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.SpnSimillarATolerance)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.SpnSimillarVertsTolerance)).EndInit();
             this.groupBox2.ResumeLayout(false);
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
@@ -1513,9 +1555,8 @@
         private System.Windows.Forms.Button BtnSelectVerts;
         private System.Windows.Forms.Button BtnSelectEdges;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.NumericUpDown numericUpDown1;
+        private System.Windows.Forms.NumericUpDown SpnSimillarVertsTolerance;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.NumericUpDown SpnSimillarATolerance;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox CbxSimillarObjBy;
         private System.Windows.Forms.Button BtnSelSimElements;
@@ -1555,5 +1596,8 @@
         private System.Windows.Forms.GroupBox groupBox10;
         private System.Windows.Forms.Button BtnCreateBoxComplex;
         private System.Windows.Forms.Button BtnCreateTeapotComplex;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.ComboBox SpnSimillarAreaTolerance;
     }
 }

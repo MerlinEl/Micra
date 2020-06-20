@@ -175,6 +175,7 @@ namespace Micra.Core {
             faceIndexes.Where(i => i < ba.Size).ForEach(i => ba.Set(i));
             _IMesh.FaceSel_ = ba;
             _IMesh.InvalidateTopologyCache();
+            _IMesh.InvalidateGeomCache();
         }
 
         public void SetSelectedEdges(List<int> edgetIndexes) {
@@ -185,6 +186,7 @@ namespace Micra.Core {
             edgetIndexes.Where(i => i < ba.Size).ForEach(i => ba.Set(i));
             _IMesh.EdgeSel = ba;
             _IMesh.InvalidateTopologyCache();
+            _IMesh.InvalidateGeomCache();
         }
 
         public void SetSelectedVerts(List<int> vertIndexes) {
@@ -195,6 +197,7 @@ namespace Micra.Core {
             vertIndexes.Where(i => i < ba.Size).ForEach(i => ba.Set(i));
             _IMesh.VertSel_ = ba;
             _IMesh.InvalidateTopologyCache();
+            _IMesh.InvalidateGeomCache();
         }
 
         public int Numf => _IMesh.NumFaces;

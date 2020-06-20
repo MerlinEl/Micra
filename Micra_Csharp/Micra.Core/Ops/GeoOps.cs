@@ -28,13 +28,50 @@ namespace Micra.Core.Ops {
             return dist;
         }
 
-        public static void SelectSimillarFaces(Node n, bool byArea = true, bool byVcount = false) {
+        public static int DigitsCount(int n) {
+            if ( n == 0 ) return 0;
+            return 1 + DigitsCount(n / 10);
+        }
+        public static int DecimaslCount(float value) {
+            bool start = false;
+            int count = 0;
+            foreach ( var s in value.ToString() ) {
+                if ( s == ',' || s == '.' ) {
+                    start = true;
+                } else if ( start ) {
+                    count++;
+                }
+            }
+            return count;
+        }
 
-            Max.Log("SelectSimillarFaces > The obj:{0}", n.Name);
+
+        internal static double RoundArea(double area, float precision) {
+           
+
+            if ( precision == 0 ) return area; //nothing changes
+            if ( precision >= 1 ) { //roud whole number
+
+                return Math.Round(area / precision) * (int)precision;
+                // double multi = Math.Pow(10, decimlaPlaces);
+                // return Math.Round(area / multi, 0) * multi;
+
+            } else { //round to decimals
+
+                int decimlaPlaces = DecimaslCount(precision);
+                //Max.Log("RoundArea:{0} precision:{1} decimlaPlaces:{2}", area, precision, decimlaPlaces);
+                return Math.Round(area, decimlaPlaces);
+            }
+        }
+
+        public static void SelectSimillarFaces(Node n, bool byArea, bool byVcount, float areaSizeTolerance = 0, int vertsCountTolerance = 0) {
+
+            Max.Log("\tareaSizeTolerance:{0} vertsCountTolerance:{1}", areaSizeTolerance, vertsCountTolerance);
             // collect selected faces (area, vertnum)
             var fsel = n.Object.GetSelectedFaces();
+            Max.Log("SelectSimillarFaces > The obj:{0} fse:{1}", n.Name, fsel.Count);
             List<GeomCompareData> objData = fsel
-                .Select(f => new GeomCompareData(f, n.Object.GetFaceArea(f), n.Object.GetFaceVerts(f).Count))
+                .Select(f => new GeomCompareData(f, RoundArea(n.Object.GetFaceArea(f), areaSizeTolerance), n.Object.GetFaceVerts(f).Count))
                 .ToList();
             // get only unique types
             List<GeomCompareData> distinctObjData = objData
@@ -42,7 +79,7 @@ namespace Micra.Core.Ops {
                 .Select(g => g.First())
                 .ToList();
             // print data
-            Max.Log("\t\tSource unique nodes:{0}", distinctObjData.Count());
+            Max.Log("\t\tSource unique faces:{0} data:\n\t\t\t{1}", distinctObjData.Count(), String.Join("\n\t\t\t", distinctObjData));
             //distinctObjData.ForEach(o => Max.Log("\t\tHandle:{0}\n\t\t\tArea:{1}\n\t\t\tVcount:{2}", o.HANDLE, o.AREA, o.VNUM));
 
             Max.Log("\t\tAll nodes faces:{0}", n.Object.NumFaces);
@@ -50,7 +87,7 @@ namespace Micra.Core.Ops {
             for ( int f = 0; f < n.Object.NumFaces; f++ ) {
 
                 if ( objData.FindIndex(o => o.MatchBy(
-                         new GeomCompareData(f, n.Object.GetFaceArea(f), n.Object.GetFaceVerts(f).Count),
+                         new GeomCompareData(f, RoundArea(n.Object.GetFaceArea(f), areaSizeTolerance), n.Object.GetFaceVerts(f).Count),
                          byArea, byVcount
                      )) == -1
                  ) continue; //skip faces with different area or verts count or both
@@ -62,12 +99,12 @@ namespace Micra.Core.Ops {
 
             //execute action with undo enabled
             Kernel.Undo.Begin();
-            n.Object.SetSelectedFaces(matchFaces, true);
+            n.Object.SetSelectedFaces(matchFaces);
             Kernel.Undo.Accept("Select Simillar Faces");
             Kernel.Undo.End();
         }
 
-        public static void SelectSimillarEdges(Node node, bool byArea = true, bool byVcount = false) {
+        public static void SelectSimillarEdges(Node node, float areaSizeTolerance = 0) {
 
             Max.Log("SelectSimillarEdges > The obj:{0}", node.Name);
             var esel_m = node.Object.GetSelectedEdges();
@@ -99,8 +136,8 @@ namespace Micra.Core.Ops {
             Kernel._TheHold.End();*/
         }
 
-        public static void SelectSimillarElements(Node node, bool byArea = true, bool byVcount = false) {
-            Max.Log("SelectSimillarElements > The obj:{0}", node.Name);
+        public static void SelectSimillarElements(Node n, bool byArea, bool byVcount, float areaSizeTolerance = 0, int vertsCountTolerance = 0) {
+            Max.Log("SelectSimillarElements > The obj:{0}", n.Name);
             throw new NotImplementedException();
         }
     }
@@ -111,6 +148,7 @@ namespace Micra.Core.Ops {
         public int VNUM { get; } = 0;
         public GeomCompareData(int elementIndex, double area = 0, int vnum = 0) {
 
+            ID = elementIndex;
             AREA = area;
             VNUM = vnum;
         }
@@ -120,6 +158,9 @@ namespace Micra.Core.Ops {
             if ( byArea ) return cd.AREA != -1 && cd.AREA == AREA;
             if ( byVcount ) return cd.VNUM != -1 && cd.VNUM == VNUM;
             return false;
+        }
+        public override string ToString() {
+            return String.Format("area:{0} vnum:{1}", AREA, VNUM);
         }
     }
 }
