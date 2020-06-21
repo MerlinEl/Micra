@@ -1,20 +1,11 @@
 ﻿using Autodesk.Max;
+using Micra.Core.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using static Micra.Core.Mesh;
-using static Micra.Core.Poly;
 
 namespace Micra.Core.Ops {
     public class GeoOps {
-
-
-        public static double GetEdgeLength(IMesh m, int e) { //not used //not tested
-
-            //m.EdgeSel
-            //Point3.Distance( _mesh.ed ei.V
-            throw new NotImplementedException();
-        }
 
         public static double GetEdgeLength(IMNMesh m, int ei) {
 
@@ -28,50 +19,29 @@ namespace Micra.Core.Ops {
             return dist;
         }
 
-        public static int DigitsCount(int n) {
-            if ( n == 0 ) return 0;
-            return 1 + DigitsCount(n / 10);
-        }
-        public static int DecimaslCount(float value) {
-            bool start = false;
-            int count = 0;
-            foreach ( var s in value.ToString() ) {
-                if ( s == ',' || s == '.' ) {
-                    start = true;
-                } else if ( start ) {
-                    count++;
-                }
-            }
-            return count;
-        }
-
-
         internal static double RoundArea(double area, float precision) {
-           
 
             if ( precision == 0 ) return area; //nothing changes
             if ( precision >= 1 ) { //roud whole number
 
-                return Math.Round(area / precision) * (int)precision;
-                // double multi = Math.Pow(10, decimlaPlaces);
-                // return Math.Round(area / multi, 0) * multi;
+                return Calc.RoundInt(( int )area, ( int )precision);
 
             } else { //round to decimals
 
-                int decimlaPlaces = DecimaslCount(precision);
-                //Max.Log("RoundArea:{0} precision:{1} decimlaPlaces:{2}", area, precision, decimlaPlaces);
-                return Math.Round(area, decimlaPlaces);
+                return Calc.RoundDouble(area, precision);
             }
         }
 
         public static void SelectSimillarFaces(Node n, bool byArea, bool byVcount, float areaSizeTolerance = 0, int vertsCountTolerance = 0) {
 
             Max.Log("\tareaSizeTolerance:{0} vertsCountTolerance:{1}", areaSizeTolerance, vertsCountTolerance);
+            Geo geo = new Geo(n);
             // collect selected faces (area, vertnum)
-            var fsel = n.Object.GetSelectedFaces();
+            var fsel = geo.GetSelectedFaces();
+
             Max.Log("SelectSimillarFaces > The obj:{0} fse:{1}", n.Name, fsel.Count);
             List<GeomCompareData> objData = fsel
-                .Select(f => new GeomCompareData(f, RoundArea(n.Object.GetFaceArea(f), areaSizeTolerance), n.Object.GetFaceVerts(f).Count))
+                .Select(f => new GeomCompareData(f, RoundArea(geo.GetFaceArea(f), areaSizeTolerance), geo.GetFaceVerts(f).Count))
                 .ToList();
             // get only unique types
             List<GeomCompareData> distinctObjData = objData
@@ -82,12 +52,13 @@ namespace Micra.Core.Ops {
             Max.Log("\t\tSource unique faces:{0} data:\n\t\t\t{1}", distinctObjData.Count(), String.Join("\n\t\t\t", distinctObjData));
             //distinctObjData.ForEach(o => Max.Log("\t\tHandle:{0}\n\t\t\tArea:{1}\n\t\t\tVcount:{2}", o.HANDLE, o.AREA, o.VNUM));
 
-            Max.Log("\t\tAll nodes faces:{0}", n.Object.NumFaces);
+            int numF = geo.NumFaces;
+            Max.Log("\t\tAll nodes faces:{0}", numF);
             List<int> matchFaces = new List<int>() { };
-            for ( int f = 0; f < n.Object.NumFaces; f++ ) {
+            for ( int f = 0; f < numF; f++ ) {
 
                 if ( objData.FindIndex(o => o.MatchBy(
-                         new GeomCompareData(f, RoundArea(n.Object.GetFaceArea(f), areaSizeTolerance), n.Object.GetFaceVerts(f).Count),
+                         new GeomCompareData(f, RoundArea(geo.GetFaceArea(f), areaSizeTolerance), geo.GetFaceVerts(f).Count),
                          byArea, byVcount
                      )) == -1
                  ) continue; //skip faces with different area or verts count or both
@@ -102,6 +73,11 @@ namespace Micra.Core.Ops {
             n.Object.SetSelectedFaces(matchFaces);
             Kernel.Undo.Accept("Select Simillar Faces");
             Kernel.Undo.End();
+        }
+
+        public static void SelectSimillarElements(Node n, bool byArea, bool byVcount, float areaSizeTolerance = 0, int vertsCountTolerance = 0) {
+            Max.Log("SelectSimillarElements > The obj:{0}", n.Name);
+            throw new NotImplementedException();
         }
 
         public static void SelectSimillarEdges(Node node, float areaSizeTolerance = 0) {
@@ -135,11 +111,8 @@ namespace Micra.Core.Ops {
             Kernel._TheHold.Accept("Select Simillar");
             Kernel._TheHold.End();*/
         }
+        public static void SelectSimillarEdgeLoops(Node node, float areaSizeTolerance = 0) { }
 
-        public static void SelectSimillarElements(Node n, bool byArea, bool byVcount, float areaSizeTolerance = 0, int vertsCountTolerance = 0) {
-            Max.Log("SelectSimillarElements > The obj:{0}", n.Name);
-            throw new NotImplementedException();
-        }
     }
     internal class GeomCompareData {
 

@@ -28,6 +28,9 @@
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.button5 = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.SpnSimillarAreaTolerance = new System.Windows.Forms.ComboBox();
+            this.label14 = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.BtnGetSelFaces = new System.Windows.Forms.Button();
             this.SpnSimillarVertsTolerance = new System.Windows.Forms.NumericUpDown();
@@ -129,9 +132,15 @@
             this.BtnGeneratePrimitivesParamClasses = new System.Windows.Forms.Button();
             this.BtnCreatePrimitivesGenerator = new System.Windows.Forms.Button();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
-            this.label13 = new System.Windows.Forms.Label();
-            this.label14 = new System.Windows.Forms.Label();
-            this.SpnSimillarAreaTolerance = new System.Windows.Forms.ComboBox();
+            this.tabPage6 = new System.Windows.Forms.TabPage();
+            this.CbxDecimalsCount = new System.Windows.Forms.ComboBox();
+            this.BtnDecimalsCount = new System.Windows.Forms.Button();
+            this.BtnDigitsCount = new System.Windows.Forms.Button();
+            this.CbxDigitsCount = new System.Windows.Forms.ComboBox();
+            this.BtnRoundDecimal = new System.Windows.Forms.Button();
+            this.BtnRoundInt = new System.Windows.Forms.Button();
+            this.SpnRoundDouble = new System.Windows.Forms.NumericUpDown();
+            this.SpnRoundInt = new System.Windows.Forms.NumericUpDown();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.SpnSimillarVertsTolerance)).BeginInit();
             this.groupBox2.SuspendLayout();
@@ -157,6 +166,9 @@
             this.tabPage4.SuspendLayout();
             this.groupBox8.SuspendLayout();
             this.tabPage5.SuspendLayout();
+            this.tabPage6.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.SpnRoundDouble)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.SpnRoundInt)).BeginInit();
             this.SuspendLayout();
             // 
             // button1
@@ -211,10 +223,47 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Get Slected:";
             // 
+            // SpnSimillarAreaTolerance
+            // 
+            this.SpnSimillarAreaTolerance.FormattingEnabled = true;
+            this.SpnSimillarAreaTolerance.Items.AddRange(new object[] {
+            "0.0001",
+            "0.001",
+            "0.01",
+            "0.1",
+            "0",
+            "1",
+            "10",
+            "100",
+            "1000",
+            "10000"});
+            this.SpnSimillarAreaTolerance.Location = new System.Drawing.Point(52, 183);
+            this.SpnSimillarAreaTolerance.Name = "SpnSimillarAreaTolerance";
+            this.SpnSimillarAreaTolerance.Size = new System.Drawing.Size(65, 21);
+            this.SpnSimillarAreaTolerance.TabIndex = 60;
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(123, 241);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(34, 13);
+            this.label14.TabIndex = 59;
+            this.label14.Text = "count";
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(123, 186);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(21, 13);
+            this.label13.TabIndex = 58;
+            this.label13.Text = "cm";
+            // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(9, 222);
+            this.label3.Location = new System.Drawing.Point(9, 220);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(81, 13);
             this.label3.TabIndex = 57;
@@ -1105,6 +1154,7 @@
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Controls.Add(this.tabPage4);
             this.tabControl1.Controls.Add(this.tabPage5);
+            this.tabControl1.Controls.Add(this.tabPage6);
             this.tabControl1.Location = new System.Drawing.Point(6, 4);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
@@ -1406,42 +1456,133 @@
             this.imageList1.ImageSize = new System.Drawing.Size(16, 16);
             this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
             // 
-            // label13
+            // tabPage6
             // 
-            this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(123, 186);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(21, 13);
-            this.label13.TabIndex = 58;
-            this.label13.Text = "cm";
+            this.tabPage6.Controls.Add(this.SpnRoundInt);
+            this.tabPage6.Controls.Add(this.SpnRoundDouble);
+            this.tabPage6.Controls.Add(this.BtnRoundInt);
+            this.tabPage6.Controls.Add(this.BtnRoundDecimal);
+            this.tabPage6.Controls.Add(this.CbxDigitsCount);
+            this.tabPage6.Controls.Add(this.BtnDigitsCount);
+            this.tabPage6.Controls.Add(this.BtnDecimalsCount);
+            this.tabPage6.Controls.Add(this.CbxDecimalsCount);
+            this.tabPage6.Location = new System.Drawing.Point(4, 22);
+            this.tabPage6.Name = "tabPage6";
+            this.tabPage6.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage6.Size = new System.Drawing.Size(582, 648);
+            this.tabPage6.TabIndex = 5;
+            this.tabPage6.Text = "Math";
+            this.tabPage6.UseVisualStyleBackColor = true;
             // 
-            // label14
+            // CbxDecimalsCount
             // 
-            this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(123, 241);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(34, 13);
-            this.label14.TabIndex = 59;
-            this.label14.Text = "count";
-            // 
-            // SpnSimillarAreaTolerance
-            // 
-            this.SpnSimillarAreaTolerance.FormattingEnabled = true;
-            this.SpnSimillarAreaTolerance.Items.AddRange(new object[] {
+            this.CbxDecimalsCount.FormattingEnabled = true;
+            this.CbxDecimalsCount.Items.AddRange(new object[] {
             "0.0001",
             "0.001",
+            "0,001",
             "0.01",
+            "0,01",
             "0.1",
+            "0",
+            "8,81785297393799",
+            "8.81785297393799"});
+            this.CbxDecimalsCount.Location = new System.Drawing.Point(131, 16);
+            this.CbxDecimalsCount.Name = "CbxDecimalsCount";
+            this.CbxDecimalsCount.Size = new System.Drawing.Size(133, 21);
+            this.CbxDecimalsCount.TabIndex = 62;
+            // 
+            // BtnDecimalsCount
+            // 
+            this.BtnDecimalsCount.Location = new System.Drawing.Point(6, 15);
+            this.BtnDecimalsCount.Name = "BtnDecimalsCount";
+            this.BtnDecimalsCount.Size = new System.Drawing.Size(119, 23);
+            this.BtnDecimalsCount.TabIndex = 63;
+            this.BtnDecimalsCount.Text = "Decimals Count";
+            this.BtnDecimalsCount.UseVisualStyleBackColor = true;
+            this.BtnDecimalsCount.Click += new System.EventHandler(this.BtnDecimalsCount_Click);
+            // 
+            // BtnDigitsCount
+            // 
+            this.BtnDigitsCount.Location = new System.Drawing.Point(6, 41);
+            this.BtnDigitsCount.Name = "BtnDigitsCount";
+            this.BtnDigitsCount.Size = new System.Drawing.Size(119, 23);
+            this.BtnDigitsCount.TabIndex = 64;
+            this.BtnDigitsCount.Text = "Digits Count";
+            this.BtnDigitsCount.UseVisualStyleBackColor = true;
+            this.BtnDigitsCount.Click += new System.EventHandler(this.BtnDigitsCount_Click);
+            // 
+            // CbxDigitsCount
+            // 
+            this.CbxDigitsCount.FormattingEnabled = true;
+            this.CbxDigitsCount.Items.AddRange(new object[] {
             "0",
             "1",
             "10",
             "100",
             "1000",
-            "10000"});
-            this.SpnSimillarAreaTolerance.Location = new System.Drawing.Point(52, 183);
-            this.SpnSimillarAreaTolerance.Name = "SpnSimillarAreaTolerance";
-            this.SpnSimillarAreaTolerance.Size = new System.Drawing.Size(65, 21);
-            this.SpnSimillarAreaTolerance.TabIndex = 60;
+            "10000",
+            "1654656"});
+            this.CbxDigitsCount.Location = new System.Drawing.Point(131, 42);
+            this.CbxDigitsCount.Name = "CbxDigitsCount";
+            this.CbxDigitsCount.Size = new System.Drawing.Size(133, 21);
+            this.CbxDigitsCount.TabIndex = 65;
+            // 
+            // BtnRoundDecimal
+            // 
+            this.BtnRoundDecimal.Location = new System.Drawing.Point(270, 14);
+            this.BtnRoundDecimal.Name = "BtnRoundDecimal";
+            this.BtnRoundDecimal.Size = new System.Drawing.Size(68, 23);
+            this.BtnRoundDecimal.TabIndex = 66;
+            this.BtnRoundDecimal.Text = "Round";
+            this.BtnRoundDecimal.UseVisualStyleBackColor = true;
+            this.BtnRoundDecimal.Click += new System.EventHandler(this.BtnRoundDecimal_Click);
+            // 
+            // BtnRoundInt
+            // 
+            this.BtnRoundInt.Location = new System.Drawing.Point(270, 41);
+            this.BtnRoundInt.Name = "BtnRoundInt";
+            this.BtnRoundInt.Size = new System.Drawing.Size(68, 23);
+            this.BtnRoundInt.TabIndex = 67;
+            this.BtnRoundInt.Text = "Round";
+            this.BtnRoundInt.UseVisualStyleBackColor = true;
+            this.BtnRoundInt.Click += new System.EventHandler(this.BtnRoundInt_Click);
+            // 
+            // SpnRoundDouble
+            // 
+            this.SpnRoundDouble.DecimalPlaces = 1;
+            this.SpnRoundDouble.Location = new System.Drawing.Point(344, 16);
+            this.SpnRoundDouble.Maximum = new decimal(new int[] {
+            1000000,
+            0,
+            0,
+            0});
+            this.SpnRoundDouble.Name = "SpnRoundDouble";
+            this.SpnRoundDouble.Size = new System.Drawing.Size(70, 20);
+            this.SpnRoundDouble.TabIndex = 68;
+            this.SpnRoundDouble.Value = new decimal(new int[] {
+            3,
+            0,
+            0,
+            0});
+            // 
+            // SpnRoundInt
+            // 
+            this.SpnRoundInt.DecimalPlaces = 1;
+            this.SpnRoundInt.Location = new System.Drawing.Point(344, 41);
+            this.SpnRoundInt.Maximum = new decimal(new int[] {
+            1000000,
+            0,
+            0,
+            0});
+            this.SpnRoundInt.Name = "SpnRoundInt";
+            this.SpnRoundInt.Size = new System.Drawing.Size(70, 20);
+            this.SpnRoundInt.TabIndex = 69;
+            this.SpnRoundInt.Value = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
             // 
             // CsharpToMaxTest
             // 
@@ -1485,6 +1626,9 @@
             this.groupBox8.ResumeLayout(false);
             this.tabPage5.ResumeLayout(false);
             this.tabPage5.PerformLayout();
+            this.tabPage6.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.SpnRoundDouble)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.SpnRoundInt)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1599,5 +1743,14 @@
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.ComboBox SpnSimillarAreaTolerance;
+        private System.Windows.Forms.TabPage tabPage6;
+        private System.Windows.Forms.ComboBox CbxDecimalsCount;
+        private System.Windows.Forms.ComboBox CbxDigitsCount;
+        private System.Windows.Forms.Button BtnDigitsCount;
+        private System.Windows.Forms.Button BtnDecimalsCount;
+        private System.Windows.Forms.Button BtnRoundInt;
+        private System.Windows.Forms.Button BtnRoundDecimal;
+        private System.Windows.Forms.NumericUpDown SpnRoundInt;
+        private System.Windows.Forms.NumericUpDown SpnRoundDouble;
     }
 }

@@ -172,26 +172,6 @@ namespace Micra.Core {
             return -1;
         }
 
-        public double GetFaceArea(int faceIndex) {
-
-            switch ( ClassOf() ) {
-
-                case nameof(ClassID.EditableMesh): return GetMesh().GetFaceArea(faceIndex);
-                case nameof(ClassID.EditablePoly): return GetPoly().GetFaceArea(faceIndex);
-            }
-            return -1;
-        }
-
-        public List<int> GetFaceVerts(int faceIndex) {
-
-            switch ( ClassOf() ) {
-
-                case nameof(ClassID.EditableMesh): return GetMesh().GetFaceVerts(faceIndex);
-                case nameof(ClassID.EditablePoly): return GetPoly().GetFaceVerts(faceIndex);
-            }
-            return new List<int>() { };
-        }
-
         public int NumFaces {
             get {
                 switch ( ClassOf() ) {
@@ -274,6 +254,7 @@ namespace Micra.Core {
                 case nameof(ClassID.EditableMesh): GetMesh().SetSelectedFaces(faceIndexes); break;
                 case nameof(ClassID.EditablePoly): GetPoly().SetSelectedFaces(faceIndexes); break;
             }
+            _IGeomObject.InvalidateChannels(( uint )EnumChannels.SELECT_CHANNEL); //test if works like (update $)
             if ( redraw ) Kernel.RedrawViews();
         }
 

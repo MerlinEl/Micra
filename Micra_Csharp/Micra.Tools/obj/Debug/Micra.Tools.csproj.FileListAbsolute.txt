@@ -81,12 +81,6 @@ E:\Aprog\Orien\Micra\Micra_Csharp\Micra.Tools\bin\Debug\ja-JP\CoreManagedUiContr
 E:\Aprog\Orien\Micra\Micra_Csharp\Micra.Tools\bin\Debug\ko-KR\CoreManagedUiControls.resources.dll
 E:\Aprog\Orien\Micra\Micra_Csharp\Micra.Tools\bin\Debug\pt-BR\CoreManagedUiControls.resources.dll
 E:\Aprog\Orien\Micra\Micra_Csharp\Micra.Tools\bin\Debug\zh-CN\CoreManagedUiControls.resources.dll
-E:\Aprog\Orien\Micra\Micra_Csharp\Micra.Tools\bin\Debug\de-DE\MaxExplorerBindings.resources.dll
-E:\Aprog\Orien\Micra\Micra_Csharp\Micra.Tools\bin\Debug\fr-FR\MaxExplorerBindings.resources.dll
-E:\Aprog\Orien\Micra\Micra_Csharp\Micra.Tools\bin\Debug\ja-JP\MaxExplorerBindings.resources.dll
-E:\Aprog\Orien\Micra\Micra_Csharp\Micra.Tools\bin\Debug\ko-KR\MaxExplorerBindings.resources.dll
-E:\Aprog\Orien\Micra\Micra_Csharp\Micra.Tools\bin\Debug\pt-BR\MaxExplorerBindings.resources.dll
-E:\Aprog\Orien\Micra\Micra_Csharp\Micra.Tools\bin\Debug\zh-CN\MaxExplorerBindings.resources.dll
 E:\Aprog\Orien\Micra\Micra_Csharp\Micra.Tools\bin\Debug\de-DE\AdWindows.resources.dll
 E:\Aprog\Orien\Micra\Micra_Csharp\Micra.Tools\bin\Debug\en-US\AdWindows.resources.dll
 E:\Aprog\Orien\Micra\Micra_Csharp\Micra.Tools\bin\Debug\fr-FR\AdWindows.resources.dll
@@ -172,3 +166,9 @@ D:\ReneBaca\Aprog\Micra\Micra_Csharp\Micra.Tools\bin\Debug\System.Runtime.Compil
 D:\ReneBaca\Aprog\Micra\Micra_Csharp\Micra.Tools\bin\Debug\System.ValueTuple.xml
 D:\ReneBaca\Aprog\Micra\Micra_Csharp\Micra.Tools\bin\Debug\Autodesk.Max.Remoting.dll
 E:\Aprog\Orien\Micra\Micra_Csharp\Micra.Tools\bin\Debug\Autodesk.Max.Remoting.dll
+E:\Aprog\Orien\Micra\Micra_Csharp\Micra.Tools\bin\Debug\de-DE\MaxExplorerBindings.resources.dll
+E:\Aprog\Orien\Micra\Micra_Csharp\Micra.Tools\bin\Debug\fr-FR\MaxExplorerBindings.resources.dll
+E:\Aprog\Orien\Micra\Micra_Csharp\Micra.Tools\bin\Debug\ja-JP\MaxExplorerBindings.resources.dll
+E:\Aprog\Orien\Micra\Micra_Csharp\Micra.Tools\bin\Debug\ko-KR\MaxExplorerBindings.resources.dll
+E:\Aprog\Orien\Micra\Micra_Csharp\Micra.Tools\bin\Debug\pt-BR\MaxExplorerBindings.resources.dll
+E:\Aprog\Orien\Micra\Micra_Csharp\Micra.Tools\bin\Debug\zh-CN\MaxExplorerBindings.resources.dll

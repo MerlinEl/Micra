@@ -36,76 +36,69 @@ namespace Micra.Core {
             }
         }
 
-        /*public struct Edge {
-            public uint a;
-            public uint b;
-
-            public Edge(IEdge e) {
-
-                a = e.V[0];
-                b = e.V[1];
-            }
-        }*/
-
         private IMesh _IMesh { get; }
         public Face[] faces;
-        //public Edge[] edges;
         public Point3[] verts;
         public Face[] tfaces;
         public Point3[] tverts;
         public Point3[] fnormals;
         public Point3[] vnormals;
 
-        internal Mesh(IMesh m) {
+        internal Mesh(IMesh m, bool serialize = false) {
             _IMesh = m;
-            /*
-             Max.Log("Init Mesh from Imesh > NumVerts:{0} EdgeSel.IsEmpty:{1}", _IMesh.NumVerts, m.EdgeSel.IsEmpty);
-             for (int i = 0; i < m.EdgeSel.Size; i++ ) {
+            if ( serialize ) {
 
-                 Max.Log("\tedge{0}", m.EdgeSel[i]);
-             }*/
+                faces = new Face[m.NumFaces];
+                for ( int i = 0; i < m.NumFaces; ++i ) faces[i] = new Face(m.Faces[i]); //from IFace
 
-            faces = new Face[m.NumFaces];
-            for ( int i = 0; i < m.NumFaces; ++i ) faces[i] = new Face(m.Faces[i]); //from IFace
+                verts = new Point3[m.NumVerts];
+                for ( int i = 0; i < m.NumVerts; ++i ) verts[i] = new Point3(m.Verts[i]); //from IPoint3
 
-            /*edges = new Edge[m.NumEdges];
-            for ( int i = 0; i < m.NumEdges; ++i ) edges[i] = new Edge(m.Edges[i]);*/
+                tfaces = new Face[m.NumFaces];
+                for ( int i = 0; i < m.NumFaces; ++i ) tfaces[i] = new Face(m.Faces[i]);
 
-            verts = new Point3[m.NumVerts];
-            for ( int i = 0; i < m.NumVerts; ++i ) verts[i] = new Point3(m.Verts[i]); //from IPoint3
+                tverts = new Point3[m.NumTVerts];
+                for ( int i = 0; i < m.NumTVerts; ++i ) tverts[i] = new Point3(m.TVerts[i]);
 
-            tfaces = new Face[m.NumFaces];
-            for ( int i = 0; i < m.NumFaces; ++i ) tfaces[i] = new Face(m.Faces[i]);
+                fnormals = new Point3[m.NumFaces];
+                vnormals = new Point3[m.NumVerts];
 
-            tverts = new Point3[m.NumTVerts];
-            for ( int i = 0; i < m.NumTVerts; ++i ) tverts[i] = new Point3(m.TVerts[i]);
+                for ( int i = 0; i < m.NumVerts; ++i ) vnormals[i] = Point3.Origin;
 
-            fnormals = new Point3[m.NumFaces];
-            vnormals = new Point3[m.NumVerts];
+                // Compute vertex normals ignoring smoothing groups
+                // Each vertex normal is the average of the face normals.
+                for ( int i = 0; i < m.NumFaces; ++i ) {
+                    uint a = faces[i].a;
+                    uint b = faces[i].b;
+                    uint c = faces[i].c;
+                    Point3 va = verts[a];
+                    Point3 vb = verts[b];
+                    Point3 vc = verts[c];
+                    Point3 fnorm = ( vb - va ) ^ ( vc - vb );
+                    vnormals[a] += fnorm;
+                    vnormals[b] += fnorm;
+                    vnormals[c] += fnorm;
+                    fnormals[i] = fnorm.Normalized;
+                }
 
-            for ( int i = 0; i < m.NumVerts; ++i ) vnormals[i] = Point3.Origin;
-
-            // Compute vertex normals ignoring smoothing groups
-            // Each vertex normal is the average of the face normals.
-            for ( int i = 0; i < m.NumFaces; ++i ) {
-                uint a = faces[i].a;
-                uint b = faces[i].b;
-                uint c = faces[i].c;
-                Point3 va = verts[a];
-                Point3 vb = verts[b];
-                Point3 vc = verts[c];
-                Point3 fnorm = ( vb - va ) ^ ( vc - vb );
-                vnormals[a] += fnorm;
-                vnormals[b] += fnorm;
-                vnormals[c] += fnorm;
-                fnormals[i] = fnorm.Normalized;
+                // Last step is to normalize the vector normals.
+                for ( int i = 0; i < m.NumVerts; ++i ) vnormals[i].Normalize();
             }
-
-            // Last step is to normalize the vector normals.
-            for ( int i = 0; i < m.NumVerts; ++i ) vnormals[i].Normalize();
         }
-        internal double GetArea() => faces.Sum(f => GetFaceArea(f));
+
+        public double GetArea() => _IMesh.Faces.Sum(f => GetFaceArea(f));
+        public double GetFaceArea(int faceIndex) => faceIndex >= _IMesh.Faces.Count - 1 ? -1 : GetFaceArea(_IMesh.Faces[faceIndex]);
+        public double GetFaceArea(IFace f) {
+            
+            Point3 corner = new Point3 (_IMesh.Verts[(int)f.V[0]]);
+            Vector3 a = Vector3.FromPoints(new Point3(_IMesh.Verts[( int )f.V[1]]), corner);
+            Vector3 b = Vector3.FromPoints(new Point3(_IMesh.Verts[( int )f.V[2]]), corner);
+            return Vector3.Cross(a, b).Length / 2.0;
+        }
+
+        /*internal double GetArea() => faces.Sum(f => GetFaceArea(f));
         public double GetFaceArea(int faceIndex) => faceIndex >= faces.Length - 1 ? -1 : GetFaceArea(faces[faceIndex]);
+
         // The area of a face is very easy to compute, its just half the length of the normal cross product
         public double GetFaceArea(Face f) {
 
@@ -113,7 +106,7 @@ namespace Micra.Core {
             Vector3 a = Vector3.FromPoints(verts[f.b], corner);
             Vector3 b = Vector3.FromPoints(verts[f.c], corner);
             return Vector3.Cross(a, b).Length / 2.0;
-        }
+        }*/
 
         internal List<IFace> GetSelectedIFaces() { //TODO -not tested -not used
 
@@ -238,8 +231,24 @@ namespace Micra.Core {
         }
 
         internal List<int> GetFaceVerts(int faceIndex) {
+            if ( faceIndex > _IMesh.Faces.Count - 1 ) throw new Exception("Face index is out of range.");
+            return new List<int>() { 
+                ( int )_IMesh.Faces[faceIndex].V[0], 
+                ( int )_IMesh.Faces[faceIndex].V[1], 
+                ( int )_IMesh.Faces[faceIndex].V[2]
+            };
+        }
+
+        /*internal List<int> GetFaceVerts(int faceIndex) {
             if ( faceIndex > faces.Length - 1 ) throw new Exception("Face index is out of range.");
-            return new List<int>() {(int)faces[faceIndex].a, (int)faces[faceIndex].b, (int)faces[faceIndex].c };
+            return new List<int>() { ( int )faces[faceIndex].a, ( int )faces[faceIndex].b, ( int )faces[faceIndex].c };
+        }*/
+
+        public static double GetEdgeLength(IMesh m, int e) { //not used //not tested
+
+            //m.EdgeSel
+            //Point3.Distance( _mesh.ed ei.V
+            throw new NotImplementedException();
         }
     }
 }

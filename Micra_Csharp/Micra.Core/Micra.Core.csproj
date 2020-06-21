@@ -99,9 +99,11 @@
     <Compile Include="Camera.cs" />
     <Compile Include="ClassID.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
+    <Compile Include="Geo.cs" />
     <Compile Include="Prim\PrimitiveFactory.cs" />
     <Compile Include="Prim\PrimitiveTypes.cs" />
     <Compile Include="Ressearch\CPP_TO_CSHARP_02.cs" />
+    <Compile Include="Utils\Calc.cs" />
     <Compile Include="Utils\ClassReader.cs" />
     <Compile Include="Extensions\CollectionExtensions.cs" />
     <Compile Include="Color.cs" />
