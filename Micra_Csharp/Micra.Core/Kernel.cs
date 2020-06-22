@@ -60,7 +60,6 @@ namespace Micra.Core {
         static Kernel() {
             // If this is ever NULL, it is probably because 3ds Max has not yet loaded 
             // Autodesk.Max.Wrappers.dll
-            //_Global = GlobalInterface.Instance;
             _Interface = _Global.COREInterface17;
             _InstanceMgr = _Global.IInstanceMgr.InstanceMgr;
             scene = new Scene(_Interface);

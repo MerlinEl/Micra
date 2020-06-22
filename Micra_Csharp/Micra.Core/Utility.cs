@@ -9,59 +9,12 @@ using Autodesk.Max;
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
 
 namespace Micra.Core {
     /// <summary>
     /// Contains various utility functions.
     /// </summary>
     public static class Utility {
-        /// <summary>Give ramdom values from 0.0 to 1.0. Default with three decimals.</summary>
-        public static float RandomFloat(Random random) => (float)( Math.Round(random.NextDouble(), 3) );
-        public static float RandomFloat(Random random, int decimals) => (float)( Math.Round(random.NextDouble(), decimals) );
-        /// <summary>
-        /// Converts an float or double object to a float.
-        /// </summary>
-        /// <param name="o"></param>
-        /// <returns></returns>
-        public static float OToF(object o) {
-            if ( o is float )
-                return (float)o;
-            if ( o is double )
-                return (float)(double)o;
-            throw new Exception("Unrecognized floating point type " + o);
-        }
-
-        public static double ToDouble(float f) {
-            //f = 5.2F;
-            decimal dec = new decimal(f); //5.2
-            return (double)dec; //5.2
-        }
-
-        public static double RadToDeg(double radians) {
-            return radians * ( 180.0 / Math.PI );
-        }
-
-        public static double DegToRad(double degrees) {
-            return degrees * ( Math.PI / 180.0 );
-        }
-
-        /// <summary> Heron’s Formula to calculate face area
-        ///     <example> 
-        ///         <code>
-        ///             example: GetTriangleArea(p1, p2, p3);
-        ///         </code>
-        ///     </example>
-        /// </summary>
-        public static double GetTriangleArea(Point3 p1, Point3 p2, Point3 p3) {
-
-            double a = p1.DistanceTo(p2);
-            double b = p2.DistanceTo(p3);
-            double c = p3.DistanceTo(p1);
-            double p = 0.5 * ( a + b + c );
-            return Math.Sqrt(p * ( p - a ) * ( p - b ) * ( p - c ));
-        }
 
         /// <summary>
         /// Extends IEnumerable&lt;T> with a new function for selecing only those 

@@ -19,19 +19,6 @@ namespace Micra.Core.Ops {
             return dist;
         }
 
-        internal static double RoundArea(double area, float precision) {
-
-            if ( precision == 0 ) return area; //nothing changes
-            if ( precision >= 1 ) { //roud whole number
-
-                return Calc.RoundInt(( int )area, ( int )precision);
-
-            } else { //round to decimals
-
-                return Calc.RoundDouble(area, precision);
-            }
-        }
-
         public static void SelectSimillarFaces(Node n, bool byArea, bool byVcount, float areaSizeTolerance = 0, int vertsCountTolerance = 0) {
 
             Max.Log("\tareaSizeTolerance:{0} vertsCountTolerance:{1}", areaSizeTolerance, vertsCountTolerance);
@@ -41,7 +28,7 @@ namespace Micra.Core.Ops {
 
             Max.Log("SelectSimillarFaces > The obj:{0} fse:{1}", n.Name, fsel.Count);
             List<GeomCompareData> objData = fsel
-                .Select(f => new GeomCompareData(f, RoundArea(geo.GetFaceArea(f), areaSizeTolerance), geo.GetFaceVerts(f).Count))
+                .Select(f => new GeomCompareData(f, Calc.RoundArea(geo.GetFaceArea(f), areaSizeTolerance), geo.GetFaceVerts(f).Count))
                 .ToList();
             // get only unique types
             List<GeomCompareData> distinctObjData = objData
@@ -58,7 +45,7 @@ namespace Micra.Core.Ops {
             for ( int f = 0; f < numF; f++ ) {
 
                 if ( objData.FindIndex(o => o.MatchBy(
-                         new GeomCompareData(f, RoundArea(geo.GetFaceArea(f), areaSizeTolerance), geo.GetFaceVerts(f).Count),
+                         new GeomCompareData(f, Calc.RoundArea(geo.GetFaceArea(f), areaSizeTolerance), geo.GetFaceVerts(f).Count),
                          byArea, byVcount
                      )) == -1
                  ) continue; //skip faces with different area or verts count or both
@@ -80,12 +67,13 @@ namespace Micra.Core.Ops {
             throw new NotImplementedException();
         }
 
-        public static void SelectSimillarEdges(Node node, float areaSizeTolerance = 0) {
+        public static void SelectSimillarEdges(Node n, float areaSizeTolerance = 0) {
 
-            Max.Log("SelectSimillarEdges > The obj:{0}", node.Name);
-            var esel_m = node.Object.GetSelectedEdges();
-            List<double> source_volumes = esel_m
-                    .Select(i => node.Object.GetEdgeLength(i)).Distinct()
+            Max.Log("SelectSimillarEdges > The obj:{0}", n.Name);
+            Geo geo = new Geo(n);
+            var esel = geo.GetSelectedEdges();
+            List<double> source_volumes = esel
+                    .Select(i => Calc.RoundArea(geo.GetEdgeLength(i), areaSizeTolerance)).Distinct()
                     .ToList();
             Max.Log("\t({0}) Lengths:{1}\n", source_volumes.Count, string.Join("\n\t\t", source_volumes));
 

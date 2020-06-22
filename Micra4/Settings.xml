@@ -2,7 +2,7 @@
 <SETTINGS>
   <Micra>
     <born val="04.25.2006" />
-    <version val="6.47" />
+    <version val="6.48" />
   </Micra>
   <Structures val="All registred Micra's Structures">
     <!--independent classes-->
@@ -153,7 +153,7 @@
     <Object_Planter_Interactive val="0.01" />
     <Smoothing_Groups val="0.04" />
     <Max_To_Blender val="1.02" />
-    <Road_Generator_Marking val="0.06" />
+    <Road_Generator_Marking val="0.07" />
     <Vertex_Color_Mixer val="1.09" />
     <LS3D_Texel_Density val="0.02" />
     <Geometry_Projector2D val="0.03" />

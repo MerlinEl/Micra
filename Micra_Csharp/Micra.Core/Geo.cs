@@ -7,7 +7,7 @@ namespace Micra.Core {
         private Node _Node;
 
         public Geo(Node node) => _Node = node;
-        public dynamic geo { 
+        private dynamic geo { 
             
             get {
                 if ( _Node.IsClassOf(ClassID.EditableMesh) ) return _Node.GetMesh();
@@ -19,7 +19,10 @@ namespace Micra.Core {
         public int NumFaces => _Node.Object.NumFaces;
 
         public double GetFaceArea(int faceIndex) => geo.GetFaceArea(faceIndex);
+        public double GetEdgeLength(int edgeIndex) => geo.Object.GetEdgeLength(edgeIndex);
         public List<int> GetFaceVerts(int faceIndex) => geo.GetFaceVerts(faceIndex);
         internal List<int> GetSelectedFaces() => _Node.Object.GetSelectedFaces();
+        internal List<int> GetSelectedEdges() => _Node.Object.GetSelectedEdges();
+        internal List<int> GetSelectedVerts() => _Node.Object.GetSelectedVerts();
     }
 }

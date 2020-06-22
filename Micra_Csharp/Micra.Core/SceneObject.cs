@@ -358,8 +358,8 @@ namespace Micra.Core {
             double edge_len = 0;
             switch ( ClassOf() ) {
 
-                case nameof(ClassID.EditableMesh): edge_len = GetMesh().EdgeLength(edgeIndex); break;
-                case nameof(ClassID.EditablePoly): edge_len = GetPoly().EdgeLength(edgeIndex); break;
+                case nameof(ClassID.EditableMesh): edge_len = GetMesh().GetEdgeLength(edgeIndex); break;
+                case nameof(ClassID.EditablePoly): edge_len = GetPoly().GetEdgeLength(edgeIndex); break;
             }
             return edge_len;
         }

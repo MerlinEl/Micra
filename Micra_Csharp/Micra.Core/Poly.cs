@@ -1,6 +1,4 @@
 using Autodesk.Max;
-using Autodesk.Max.Wrappers;
-using Humanizer;
 using Micra.Core.Enums;
 using Micra.Core.Extensions;
 using System;
@@ -76,8 +74,8 @@ namespace Micra.Core {
         public IBitArray GetFaceElement(int faceIndex) { //TODO -not tested -not used
 
             IBitArray eleBits = Kernel._Global.BitArray.Create(_IMNMesh.Numf);
-           //_IMNMesh.FaceSelect(eleBits);
-           _IMNMesh.ElementFromFace(faceIndex, eleBits);
+            //_IMNMesh.FaceSelect(eleBits);
+            _IMNMesh.ElementFromFace(faceIndex, eleBits);
             return eleBits;
         }
         /// <summary> Set Face selection
@@ -97,7 +95,7 @@ namespace Micra.Core {
             var bytes = faceIndexes.Select(i => BitConverter.GetBytes(i)).ToArray();
             IBitArray ba = Kernel.NewIBitarray(_IMNMesh.Numf);
             //for each face index which is in range(all faces), set bit to 1(selected) 
-            faceIndexes.Where(i=> i < ba.Size).ForEach(i=> ba.Set(i));
+            faceIndexes.Where(i => i < ba.Size).ForEach(i => ba.Set(i));
             _IMNMesh.FaceSelect(ba);
             _IMNMesh.InvalidateTopoCache(false);
             _IMNMesh.InvalidateGeomCache();
@@ -203,7 +201,7 @@ namespace Micra.Core {
             area = 0.5 * length;
             return area;
         }
-   
+
         /// <summary> Hide Selected or Unselected Faces
         ///     <example> 
         ///         <code>
@@ -229,7 +227,8 @@ namespace Micra.Core {
         }
 
         internal List<int> GetFaceVerts(int faceIndex) {
-            if ( faceIndex > _IMNMesh.Numf - 1 ) throw new Exception("Face index is out of range.");
+
+            Throw.IfLargerThan(faceIndex, _IMNMesh.Numf, "Face");
             return _IMNMesh.F(faceIndex).Vtx.ToList();
         }
 
@@ -241,12 +240,21 @@ namespace Micra.Core {
             _IMNMesh.InvalidateGeomCache();
         }
 
-        internal double EdgeLength(int edgeIndex) {
-            throw new NotImplementedException();
+        internal double GetEdgeLength(int edgeIndex) {
+
+            Throw.IfLargerThan(edgeIndex, _IMNMesh.ENum, "Edge");
+            IMNEdge edge = _IMNMesh.E(edgeIndex);
+            return VertPos(edge.V1).DistanceTo(VertPos(edge.V2));
         }
     }
 }
-
+/*
+if ( _IMNMesh.Nume < edgeIndex - 1 ) throw new InvalidOperationException(
+                String.Format("Edge index({0}) is out of range({1}).", edgeIndex, _IMNMesh.Nume)
+            );
+if ( faceIndex > _IMNMesh.Numf - 1 ) throw new InvalidOperationException(
+     String.Format("Face index({0}) is out of range({1}).", faceIndex, _IMNMesh.Numf)
+ );*/
 //MNTempData mtd = new MNTempData(_IMNMesh, true);
 //mtd.Invalidate((uint)EnumChannels.SELECT_CHANNEL | (uint)EnumChannels.TOPO_CHANNEL);
 //mtd.FreeAll();

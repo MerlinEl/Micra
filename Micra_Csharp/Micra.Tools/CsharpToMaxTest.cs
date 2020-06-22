@@ -478,7 +478,7 @@ namespace Micra.Tools {
 
             } else if ( selNodes.Count() >= 1 ) { //when multi object selection
 
-                ObjOps.SelectSimillarNodes(selNodes, byArea, byVcount);
+                ObjOps.SelectSimillarNodes(selNodes, byArea, byVcount, areaToloerance, (int)SpnSimillarVertsTolerance.Value);
             }
         }
 

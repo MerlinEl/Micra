@@ -226,9 +226,66 @@ namespace Micra.Core {
             _IMesh.InvalidateTopologyCache();
         }
 
-        internal double EdgeLength(int edgeIndex) {
+        internal double GetEdgeLength(int edgeIndex) {
+
+            Throw.IfLargerThan(edgeIndex, Nume, "Edge");
+
+            IMeshTempData meshTempData = Kernel._Global.MeshTempData.Create(_IMesh);
+            meshTempData.FreeAll();
+            IAdjEdgeList elist = meshTempData.AdjEList;
+            uint MESH_EDGE = 2;
+            uint MESH_FACE = 4;
+            //ITab<IPoint3> = meshTempData.ClusterCenters(MESH_FACE); //selection level FACE
+
+
+            //_IMesh.EdgeSel
+            //_IMesh.AngleBetweenFaces
+            //m.EdgeSel
+            //IEdge edge
+            //Point3.Distance( _mesh.ed ei.V
+            /*IInterface_ID iMeshSelectionID = Kernel._Global.Interface_ID.Create( //not used not tested
+                (uint)BuiltInClassIDA.MESHSELECT_CLASS_ID,
+                0
+            );
+            IMeshSelection _IMeshSelection = (IMeshSelection)Kernel._Global.GetCOREInterface(iMeshSelectionID); //not used not tested*/
+            //Autodesk.Max.IAdjEdgeList
+            // Autodesk.Max.IFaceElementList
+            // _IMesh.MakeEdgeList
+            //_IMesh.BuildVisEdgeList()
+            //IEdge edge = _IMesh.E(edgeIndex);
+            //return VertPos(edge.V[0]).DistanceTo(VertPos(edge.V[1]));
             throw new NotImplementedException();
         }
+
+        /*internal void GetElements() {
+
+            IAdjEdgeList elist = Kernel._Global.AdjEdgeList.Create(_IMesh);
+            IAdjFaceList flist = Kernel._Global.AdjFaceList.Create(_IMesh, elist);
+            var iBitArray = Kernel._Global.BitArray.Create(_IMesh.NumFaces);
+            var faces = new List<int>(_IMesh.NumFaces) { };
+            var elements = new List<int>() { };
+            while ( faces.Count > 0 ) do (
+
+                iBitArray.ClearAll();
+                _IMesh.ElementFromFace(( firstBit(faces)) - 1 ) iBitArray(IAdjFaceList)
+
+                IMesh.FaceSel = IBitArray
+                elementFaces = getFaceSelection obj
+               faces -= elementFaces
+
+
+                append elements elementFaces
+        
+            )
+        }*/
+
+        /*private uint firstBit(List<int> bits) {
+
+            int b;
+            foreach ( int n in bits ) {
+                while !( b = n ); bits[n])) do b;
+           }
+        }*/
 
         internal List<int> GetFaceVerts(int faceIndex) {
             if ( faceIndex > _IMesh.Faces.Count - 1 ) throw new Exception("Face index is out of range.");
@@ -243,13 +300,6 @@ namespace Micra.Core {
             if ( faceIndex > faces.Length - 1 ) throw new Exception("Face index is out of range.");
             return new List<int>() { ( int )faces[faceIndex].a, ( int )faces[faceIndex].b, ( int )faces[faceIndex].c };
         }*/
-
-        public static double GetEdgeLength(IMesh m, int e) { //not used //not tested
-
-            //m.EdgeSel
-            //Point3.Distance( _mesh.ed ei.V
-            throw new NotImplementedException();
-        }
     }
 }
 

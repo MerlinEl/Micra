@@ -11,6 +11,7 @@ using System.Linq;
 using System.Text;
 
 using Autodesk.Max;
+using Micra.Core.Utils;
 
 namespace Micra.Core {
     /// <summary>
@@ -244,7 +245,7 @@ namespace Micra.Core {
 
                         try
                         {
-                            pb.SetValue(id, time, dimension != null ? dimension.UnConvert(Utility.OToF(value)) : Utility.OToF(value), tabIndex);
+                            pb.SetValue(id, time, dimension != null ? dimension.UnConvert(Calc.OToF(value)) : Calc.OToF(value), tabIndex);
                         }
                         // Happens sometimes?
                         catch (AccessViolationException)

@@ -151,7 +151,7 @@ rollout mcVertexSnapDialog "" width:320 height:256
 					polyOp.setVert objToAlign v closestPosInRange
 				)
 			)
-			format "Remains vertices to snap:%\n" failedVertices
+			format "Remains vertices to snap:%\n" failedVertices.numberset
 			polyOP.setVertSelection objToAlign failedVertices
 		)
 	)

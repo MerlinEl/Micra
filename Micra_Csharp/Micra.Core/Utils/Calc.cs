@@ -1,10 +1,37 @@
-﻿using Autodesk.Max.Wrappers;
-using System;
+﻿using System;
 using System.Globalization;
-using System.Linq;
 
 namespace Micra.Core.Utils {
     public class Calc {
+        /// <summary>Give ramdom values from 0.0 to 1.0. Default with three decimals.</summary>
+        public static float RandomFloat(Random random) => (float)( Math.Round(random.NextDouble(), 3) );
+        public static float RandomFloat(Random random, int decimals) => (float)( Math.Round(random.NextDouble(), decimals) );
+        /// <summary>
+        /// Converts an float or double object to a float.
+        /// </summary>
+        /// <param name="o"></param>
+        /// <returns></returns>
+        public static float OToF(object o) {
+            if ( o is float )
+                return (float)o;
+            if ( o is double )
+                return (float)(double)o;
+            throw new Exception("Unrecognized floating point type " + o);
+        }
+
+        public static double ToDouble(float f) {
+            //f = 5.2F;
+            decimal dec = new decimal(f); //5.2
+            return (double)dec; //5.2
+        }
+
+        public static double RadToDeg(double radians) {
+            return radians * ( 180.0 / Math.PI );
+        }
+
+        public static double DegToRad(double degrees) {
+            return degrees * ( Math.PI / 180.0 );
+        }
 
         public static int DigitsCount(int n) {
 
@@ -72,8 +99,21 @@ namespace Micra.Core.Utils {
 
             int digitsCount = DigitsCount(precision);
             double multi = Math.Pow(10, digitsCount);
-            int proportion = ( int )Math.Round(area / multi);
-            return ( int )( proportion * multi );
+            int proportion = (int)Math.Round(area / multi);
+            return (int)( proportion * multi );
+        }
+
+        internal static double RoundArea(double area, float precision) {
+
+            if ( precision == 0 ) return area; //nothing changes
+            if ( precision >= 1 ) { //roud whole number
+
+                return Calc.RoundInt((int)area, (int)precision);
+
+            } else { //round to decimals
+
+                return Calc.RoundDouble(area, precision);
+            }
         }
 
         public static double StringToDouble(string str) {
@@ -88,6 +128,22 @@ namespace Micra.Core.Utils {
             str = str.Replace(',', '.');
             float.TryParse(str, NumberStyles.Any, CultureInfo.InvariantCulture, out float value);
             return value;
+        }
+
+        /// <summary> Heron’s Formula to calculate face area
+        ///     <example> 
+        ///         <code>
+        ///             example: GetTriangleArea(p1, p2, p3);
+        ///         </code>
+        ///     </example>
+        /// </summary>
+        public static double GetTriangleArea(Point3 p1, Point3 p2, Point3 p3) {
+
+            double a = p1.DistanceTo(p2);
+            double b = p2.DistanceTo(p3);
+            double c = p3.DistanceTo(p1);
+            double p = 0.5 * ( a + b + c );
+            return Math.Sqrt(p * ( p - a ) * ( p - b ) * ( p - c ));
         }
     }
 }

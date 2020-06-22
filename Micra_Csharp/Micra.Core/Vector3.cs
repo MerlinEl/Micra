@@ -5,6 +5,7 @@
 // agreement provided at the time of installation or download, or which
 // otherwise accompanies this software in either electronic or hard copy form.  
 //
+using Micra.Core.Utils;
 using System;
 
 namespace Micra.Core {
@@ -175,7 +176,7 @@ namespace Micra.Core {
                 theta = 2.0 * Math.Asin(( vector1 - vector2 ).Length / 2.0);
             }
 
-            return Utility.RadToDeg(theta);
+            return Calc.RadToDeg(theta);
         }
 
         /// <summary>

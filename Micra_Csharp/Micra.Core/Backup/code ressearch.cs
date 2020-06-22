@@ -1,3 +1,10 @@
+//Prepare object
+IINode node = global.COREInterface.GetINodeByHandle(handle);
+IObjectState os = node.EvalWorldState(0, true);
+IObjectWrapper ow = global.ObjectWrapper.Create();
+ow.Init(0, os, false, 0, 0)
+
+
 
 FieldInfo[] fields1 = typeof(Primitives).GetFields(BindingFlags.Static | BindingFlags.Public);
             foreach (FieldInfo f1 in fields1 ) {

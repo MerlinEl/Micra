@@ -1172,7 +1172,9 @@ rollout mcCityManDialog "" width:500 height:988
 	)
 	fn showObjectsByNamePart obj_array name_part state = (
 		
-		for o in obj_array where findString o.name name_part != undefined do o.isHidden = not state
+		--for o in obj_array where findString o.name name_part != undefined do o.isHidden = not state
+		local objs = for o in obj_array where findString o.name name_part != undefined collect o
+		if state then unhide objs dolayer:true else hide objs
 	)
 	fn fixDupplicetedNamesInSelection = (
 		

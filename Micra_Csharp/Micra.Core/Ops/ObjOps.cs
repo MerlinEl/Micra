@@ -1,6 +1,7 @@
 ﻿using Autodesk.Max;
 using Humanizer;
 using Micra.Core.Extensions;
+using Micra.Core.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -161,15 +162,15 @@ namespace Micra.Core.Ops {
         /// Select simillar nodes based on vertex count and faces area
         /// </summary>
         /// <param name="srcNodes"></param>
-        public static void SelectSimillarNodes(List<Node> srcNodes, bool byArea = true, bool byVcount = false) {
-
+        public static void SelectSimillarNodes(List<Node> srcNodes, bool byArea, bool byVcount = false, float areaSizeTolerance = 0, int vertsCountTolerance = 0) {
+            
             // collect selected objects (handle, area, vertnum)
             List<ObjectCompareData> objData = srcNodes
                 .Where(n =>
                     n.IsSuperClassOf(SuperClassID.GeometricObject) && //get all geometry objects
                     !n.IsClassOf(ClassID.TargetObject) //exclude any light Target
                 )
-                .Select(n => new ObjectCompareData(n.Handle, n.Object.GetArea(), n.Object.NumVerts))
+                .Select(n => new ObjectCompareData(n.Handle, Calc.RoundArea(n.Object.GetArea(), areaSizeTolerance), n.Object.NumVerts))
                 .ToList();
             // get only unique types
             List<ObjectCompareData> distinctObjData = objData
@@ -193,7 +194,7 @@ namespace Micra.Core.Ops {
                                                           //     that matches the conditions defined by match, if found; 
                                                           //     otherwise, –1.
                     objData.FindIndex(o => o.MatchBy(
-                        new ObjectCompareData(n.Handle, n.Object.GetArea(), n.Object.NumVerts),
+                        new ObjectCompareData(n.Handle, Calc.RoundArea(n.Object.GetArea(), areaSizeTolerance), n.Object.NumVerts),
                         byArea, byVcount
                     )) != -1
                  )

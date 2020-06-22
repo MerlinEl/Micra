@@ -6,6 +6,7 @@
 // otherwise accompanies this software in either electronic or hard copy form.  
 //
 using Autodesk.Max;
+using Micra.Core.Utils;
 using System;
 
 namespace Micra.Core {
@@ -42,7 +43,7 @@ namespace Micra.Core {
         /// <summary>Generate Random Color RGB in range( 0.0 to 1.0 )</summary>
         public static Color Random() {
             Random random = new Random();
-            return new Color(Utility.RandomFloat(random), Utility.RandomFloat(random), Utility.RandomFloat(random));
+            return new Color(Calc.RandomFloat(random), Calc.RandomFloat(random), Calc.RandomFloat(random));
         }
         /// <summary> Generate Rainbow Color RGB in range( 0.0 to 1.0 )
         ///     <example> 
