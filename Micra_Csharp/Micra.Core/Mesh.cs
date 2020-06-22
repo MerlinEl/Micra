@@ -20,6 +20,10 @@ namespace Micra.Core {
     /// </summary>
     [Serializable]
     public class Mesh {
+
+        public static uint MESH_VERT = 1;
+        public static uint MESH_EDGE = 2;
+        public static uint MESH_FACE = 4;
         /// <summary>
         /// Represents a mesh face. 
         /// </summary>
@@ -230,11 +234,9 @@ namespace Micra.Core {
 
             Throw.IfLargerThan(edgeIndex, Nume, "Edge");
 
-            IMeshTempData meshTempData = Kernel._Global.MeshTempData.Create(_IMesh);
-            meshTempData.FreeAll();
-            IAdjEdgeList elist = meshTempData.AdjEList;
-            uint MESH_EDGE = 2;
-            uint MESH_FACE = 4;
+            //IMeshTempData meshTempData = Kernel._Global.MeshTempData.Create(_IMesh);
+            //meshTempData.FreeAll();
+            //IAdjEdgeList elist = meshTempData.AdjEList;
             //ITab<IPoint3> = meshTempData.ClusterCenters(MESH_FACE); //selection level FACE
 
 
