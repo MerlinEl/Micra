@@ -1,6 +1,6 @@
 Global mcVertexSnapDialog
 if mcVertexSnapDialog != undefined do destroyDialog mcVertexSnapDialog
-rollout mcVertexSnapDialog "" width:320 height:232
+rollout mcVertexSnapDialog "" width:320 height:256
 (
 	local form_title = "Vertex Snap"
     local metric_type = units.SystemType as String
@@ -13,11 +13,12 @@ rollout mcVertexSnapDialog "" width:320 height:232
 	GroupBox 'grp2' "Single:" pos:[8,4] width:308 height:56 align:#left
 	button 'btn_get_pos' "Get Position" pos:[16,24] width:136 height:24 align:#left
 	button 'btn_set_pos' "Set Position" pos:[160,24] width:148 height:24 align:#left
-	GroupBox 'grp3' "Multiple:" pos:[8,72] width:308 height:156 align:#left
+	GroupBox 'grp3' "Multiple:" pos:[8,72] width:308 height:180 align:#left
 	radiobuttons 'rdo_offset' "" pos:[64,148] width:245 height:32 labels:#("1", "2", "3", "4", "5", "10", "15", "20", "25", "30", "40", "50", "70", "99") columns:7 align:#left
 	label 'lbl4' "quick:" pos:[16,148] width:40 height:16 align:#left
-	button 'btnSnapMore' "Snap Vertices" pos:[16,184] width:292 height:36 align:#left
+	button 'btnSnapMore' "Snap Vertices" pos:[16,208] width:292 height:36 align:#left
 	checkbox 'chk_borders_only' "Borders only" pos:[228,117] width:76 height:20 enabled:true checked:true align:#left
+	checkbox 'chk_copy_vertex_color' "Copy Vertex Color" pos:[16,184] width:132 height:20 enabled:true checked:false align:#left
     local vert_pos
     
 	function GetVertexSelection obj =
