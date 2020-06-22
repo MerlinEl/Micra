@@ -21,8 +21,8 @@ namespace Micra.Core {
     [Serializable]
     public class Mesh {
 
-        public static uint MESH_VERT = 1;
-        public static uint MESH_EDGE = 2;
+        //public static uint MESH_VERT = 1; //test it
+        //public static uint MESH_EDGE = 8; //test it
         public static uint MESH_FACE = 4;
         /// <summary>
         /// Represents a mesh face. 
@@ -230,15 +230,29 @@ namespace Micra.Core {
             _IMesh.InvalidateTopologyCache();
         }
 
+        internal Point3 GetTransformAxisPos() { //TODO -not tested -not used
+
+            IMeshTempData meshTempData = Kernel._Global.MeshTempData.Create(_IMesh);
+            meshTempData.FreeAll();
+            //IAdjEdgeList elist = meshTempData.AdjEList;
+            //get faces or edges centers
+            ITab<IPoint3> cc = meshTempData.ClusterCenters(MESH_FACE); 
+            Point3 result = new Point3();
+            for ( int i = 0; i < cc.Count; i++ ) {
+
+                Point3 pos = new Point3 (cc[i]);
+                result.X += pos.X;
+                result.Y += pos.Y;
+                result.Z += pos.Z;
+            }
+            result /= cc.Count; //GetTransformAxisPos
+            meshTempData.Dispose();
+            return result;
+        }
+
         internal double GetEdgeLength(int edgeIndex) {
 
             Throw.IfLargerThan(edgeIndex, Nume, "Edge");
-
-            //IMeshTempData meshTempData = Kernel._Global.MeshTempData.Create(_IMesh);
-            //meshTempData.FreeAll();
-            //IAdjEdgeList elist = meshTempData.AdjEList;
-            //ITab<IPoint3> = meshTempData.ClusterCenters(MESH_FACE); //selection level FACE
-
 
             //_IMesh.EdgeSel
             //_IMesh.AngleBetweenFaces

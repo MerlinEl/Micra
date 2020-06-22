@@ -1,0 +1,17 @@
+using System;
+using Autodesk.Max;
+using Autodesk.Max.Plugins;
+
+namespace MyProject
+{
+    public class MyPlugin : IPlugin
+    {
+        void IPlugin.Cleanup() {}
+        void IPlugin.Initialize(IGlobal global, System.ComponentModel.ISynchronizeInvoke sync) { }
+        public String MyTestFunction() { return "return"; }
+    }
+}
+
+Save the compiled test.dll into MaxRoot\plugins and run into listener
+
+(dotNetObject "MyProject.MyPlugin").MyTestFunction()

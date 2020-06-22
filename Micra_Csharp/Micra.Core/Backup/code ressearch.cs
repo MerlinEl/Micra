@@ -1,3 +1,214 @@
+In .NET: UIntPtr myHandle = global.Animatable.GetHandleByAnim(myMaterial or anything else );
+In MXS: myMaterial = GetAnimByHandle myHandle
+
+public static IList<IPoint3> getObjectPoints(IObject obj, IINode node, bool bbox, float bias) {
+    if ( bbox ) {
+        List<IPoint3> bb_points = new List<IPoint3>();
+        //IINode node = obj.WorldSpaceObjectNode;
+        IBox3 bb_box = obj.GetLocalBoundBox(max_interface.Time, node, null);
+
+        IPoint3 bb_min = bb_box.Min;
+        IPoint3 bb_max = bb_box.Max;
+
+        if ( bias > 0 ) {
+            float bias_coeff = bias / 200;
+
+            IPoint3 margins = ( bb_box.Max.Subtract(bb_box.Min) ).MultiplyBy(bias_coeff);
+            if ( DEBUG )
+                global.TheListener.EditStream.Printf($"new: x: {margins.X},x: {margins.Y},x: {margins.Z}\n");
+
+            bb_min = bb_min.Add(margins);
+            bb_max = bb_max.DecreaseBy(margins);
+        }
+        //Corners Instantiate
+        IPoint3 top_right_front = global.Point3.Create(bb_max.X, bb_max.Y, bb_max.Z);
+        IPoint3 top_right_back = global.Point3.Create(bb_max.X, bb_min.Y, bb_max.Z);
+        IPoint3 top_left_back = global.Point3.Create(bb_min.X, bb_min.Y, bb_max.Z);
+        IPoint3 top_left_front = global.Point3.Create(bb_min.X, bb_max.Y, bb_max.Z);
+        IPoint3 bottom_right_front = global.Point3.Create(bb_max.X, bb_max.Y, bb_min.Z);
+        IPoint3 bottom_right_back = global.Point3.Create(bb_max.X, bb_min.Y, bb_min.Z);
+        IPoint3 bottom_left_back = global.Point3.Create(bb_min.X, bb_min.Y, bb_min.Z);
+        IPoint3 bottom_left_front = global.Point3.Create(bb_min.X, bb_max.Y, bb_min.Z);
+        //End Corners Instantiate
+
+        //Start Add in List
+        bb_points.Add(top_right_front);
+        bb_points.Add(top_right_back);
+        bb_points.Add(top_left_back);
+        bb_points.Add(top_left_front);
+        bb_points.Add(bottom_right_front);
+        bb_points.Add(bottom_right_back);
+        bb_points.Add(bottom_left_back);
+        bb_points.Add(bottom_left_front);
+        //Greate :)
+        return bb_points;
+    } else {
+        List<IPoint3> verts = new List<IPoint3>();
+        ITriObject tri_obj = (ITriObject)obj.ConvertToType(max_interface.Time, global.TriObjectClassID);
+        IMesh mesh = tri_obj.Mesh;
+        int count_verts = mesh.NumVerts;
+
+        for ( int i = 0; i < count_verts; i++ ) {
+            IPoint3 vertObjectSpace = mesh.GetVert(i);
+
+            //IPoint3 vert = mesh.GetVert(i);
+            IMatrix3 tmObj2World = node.GetObjectTM(max_interface.Time, null);
+            IPoint3 vertWorldSpace = tmObj2World.PointTransform(vertObjectSpace);
+            verts.Add(vertWorldSpace);
+        }
+        bool debug = false;
+        if ( debug )
+            return mesh.Verts;
+        else
+            return verts;
+    }
+
+}
+
+public static int getVertsInViewport(IList<IPoint3> points, IINode cam, IINode node) {
+    List<IPoint3> insideVerts = new List<IPoint3>();
+    List<IPoint3> outsideVerts = new List<IPoint3>();
+
+    IMatrix3 testTM = max_interface.ActiveViewExp.AffineTM;
+
+    IPoint3 point31 = testTM.PointTransform(cam.ObjOffsetPos);
+    if ( DEBUG )
+        global.TheListener.EditStream.Printf("-___- - AffineTM - Lazy Debug - NAME: " + cam.Name + " X : " + point31.X + " Y : " + point31.Y + " Z : " + point31.Z + "\n");
+
+    int width = max_interface2.RendWidth;
+    int height = max_interface2.RendHeight;
+    foreach ( IPoint3 pnt in points ) {
+        IMatrix3 tmObj2World = node.GetObjectTM(max_interface.Time, null);
+        IPoint3 pnt2 = tmObj2World.PointTransform(pnt);
+        if ( DEBUG )
+            global.TheListener.EditStream.Printf("._. Work Please -  pnt - X : " + pnt2.X + " Y : " + pnt2.Y + " Z : " + pnt2.Z + "\n");
+
+        //Win!!! Eeeee  --- thePos = pnt * theTM ---
+        IPoint3 thePos = testTM.PointTransform(pnt2);
+        //End Win!!! Eeeee
+
+        if ( DEBUG )
+            global.TheListener.EditStream.Printf("._. Work Please -  thePos - X : " + thePos.X + " Y : " + thePos.Y + " Z : " + thePos.Z + "\n");
+
+        IIPoint2 point2 = global.IPoint2NS.Create(0, 0);
+        IIPoint2 point23 = global.IPoint2NS.Create(width, height);
+        if ( DEBUG )
+            global.TheListener.EditStream.Printf($"Start point 0,0 X : {point2.X} , Y : {point2.Y}\n");
+        if ( DEBUG )
+            global.TheListener.EditStream.Printf($"End point X : {point23.X} , Y : {point23.Y}\n");
+
+        IPoint3 points3 = max_interface2.ActiveViewExp.MapScreenToView(point2, thePos.Z);
+        IPoint3 point32 = max_interface2.ActiveViewExp.MapScreenToView(point23, thePos.Z);
+
+        if ( DEBUG )
+            global.TheListener.EditStream.Printf("._. Work Please -  points3 - X : " + points3.X + " Y : " + points3.Y + " Z : " + points3.Z + "\n");
+        if ( DEBUG )
+            global.TheListener.EditStream.Printf("._. Work Please -  point32 - X : " + point32.X + " Y : " + point32.Y + " Z : " + point32.Z + "\n");
+
+        IPoint3 world_size = points3.Subtract(point32);
+
+        if ( DEBUG )
+            global.TheListener.EditStream.Printf("0.0 Work Please -  world_size - X : " + world_size.X + " Y : " + world_size.Y + " Z : " + world_size.Z + "\n");
+
+
+        float x_aspect = width / ( Math.Abs(world_size.X) );
+        float y_aspect = height / ( Math.Abs(world_size.Y) );
+
+        if ( DEBUG )
+            global.TheListener.EditStream.Printf("Aspects - Work Please - X : " + x_aspect + " Y : " + y_aspect + "\n");
+
+        IPoint2 screen_coords = global.Point2.Create(( x_aspect / ( thePos.X - points3.X ) ), ( -( y_aspect * ( thePos.Y - points3.Y ) ) ));
+
+        if ( DEBUG )
+            global.TheListener.EditStream.Printf("?.? Work Please - screene_coords - X : " + screen_coords.X + " Y : " + screen_coords.Y + "\n");
+
+        if ( ( screen_coords.X <= 0 ) || ( screen_coords.Y <= 0 ) || ( screen_coords.X > width ) || ( screen_coords.Y > height ) ) {
+            outsideVerts.Add(thePos);
+            if ( DEBUG )
+                global.TheListener.EditStream.Printf("!.! Please - out - X : " + thePos.X + " Y : " + thePos.Y + " Z : " + thePos.Z + "\n");
+        } else {
+            insideVerts.Add(thePos);
+            if ( DEBUG )
+                global.TheListener.EditStream.Printf("#.# Please - in - X : " + thePos.X + " Y : " + thePos.Y + " Z : " + thePos.Z + "\n");
+        }
+    }
+    return insideVerts.Count;
+}
+
+public static List<List<uint>> Vertex_in_sight(UIntPtr camera_handle) {
+
+    List<List<uint>> response = new List<List<uint>>();
+    //List<IINode> all_nodes = SceneNodes.GetAllNodes(max_interface.RootNode);
+
+    IAnimatable camera = global.Animatable.GetAnimByHandle(camera_handle);
+    IINode camera_node = camera as IINode;
+
+    if ( DEBUG )
+        global.TheListener.EditStream.Printf("Debug - NAME: " + camera_handle + " Camera :" + camera.NodeName + " Node : " + camera_node.Name + "\n");
+    foreach ( IINode node in applicable_nodes ) {
+        IObject obj = node.EvalWorldState(max_interface.Time, false).Obj;
+        IBox3 bbox = obj.GetLocalBoundBox(max_interface.Time, node, null);
+
+
+        IList<IPoint3> obj_bbox_points = getObjectPoints(obj, node, true, 40);
+        IList<IPoint3> obj_mesh_points = getObjectPoints(obj, node, false, 0);
+        int pre_check = getVertsInViewport(obj_bbox_points, camera_node, node);
+
+        if ( DEBUG ) {
+            foreach ( IPoint3 point in obj_mesh_points )
+                global.TheListener.EditStream.Printf($"Node: {node.Name} x : {point.X} , y: {point.Y} , z: {point.Z}\n");
+        }
+        List<uint> pair = new List<uint>();
+        if ( pre_check == 0 ) {
+            pair.Add(node.Handle);
+            pair.Add(0);
+            response.Add(pair);
+        }
+    }
+    return response;
+
+
+
+    void MeshObj::CreateVertexList(S3DVertex* outverts, material_info& m) {
+    int index = 0;
+    int matid_counter = 0;
+    FaceEx* f;
+    TVFace mapface;
+
+    for ( int i = 0; i < number_of_faces; i++ ) {
+        // for all faces of material matid
+
+        f = mesh->GetFace(i);
+        if ( f->matID == m.id ) {
+            index = 3 * matid_counter;
+            mesh->GetMapFaceIndex(MAPCHANNEL_2, i, mapface.t);
+
+            for ( int j = 0; j < 3; j++ ) {
+                int tbIndex = mesh->GetFaceVertexTangentBinormal(i, j);
+                m.bbox += mesh->GetVertex(f->vert[j], true); // expand the bounding box
+                outverts[index].pos = vector3d(mesh->GetVertex(f->vert[j], true));
+                outverts[index].normal = vector3d(mesh->GetNormal(f->norm[j], true));
+                outverts[index].tangent = vector3d(tm.VectorTransform(mesh->GetTangent(tbIndex)));
+                outverts[index].binormal = vector3d(tm.VectorTransform(mesh->GetBinormal(tbIndex)));
+                Point3 vcolour;
+                if ( mesh->GetColorVertex(f->color[j], vcolour) )
+                    outverts[index].color = SColor(vcolour);
+                else // set the vertex colour to white
+                    outverts[index].color = SColor(255, 255, 255, 255);
+                float alpha;
+                if ( mesh->GetAlphaVertex(f->alpha[j], alpha) )
+                    outverts[index].color.setAlpha(alpha);
+                outverts[index].tcoord1 = vector2d(mesh->GetTexVertex(f->texCoord[j]));
+                outverts[index].tcoord2 = vector2d(mesh->GetMapVertex(MAPCHANNEL_2, mapface.t[j]));
+                outverts[index].vertindex = f->vert[j];
+                index++;
+            }
+            matid_counter++;
+        }
+    }
+}
+
+
 //Prepare object
 IINode node = global.COREInterface.GetINodeByHandle(handle);
 IObjectState os = node.EvalWorldState(0, true);

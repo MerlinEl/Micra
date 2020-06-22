@@ -1,0 +1,27 @@
+Fn CreateHelixShape Height Radius Turns ShapeColor:Green ShapeName:"HelixSpline"  CW: true  =
+(
+    local TheHelixShape , TheHandleLength,HeightDelta
+    try
+    (
+        TheHelixShape = SplineSHape Name:(UniqueName ShapeName) WireColor:ShapeColor
+        AddNewSpline TheHelixShape
+        TheHandleLength = Radius * 0.552285
+        HeightDelta = (Height as float ) / Turns / 4
+        HandleHeightDelta = (Height as float ) / Turns / 12
+        for tn = 0 to (Turns - 1) do
+        (
+            local ThisHD
+            ThisHD = Tn * HeightDelta * 4
+            AddKnot TheHelixShape 1  #Bezier #Curve [0,Radius,ThisHD]         [-TheHandleLength,Radius,ThisHD - HandleHeightDelta]     [TheHandleLength,Radius,ThisHD + HandleHeightDelta]
+            ThisHD += HeightDelta
+            AddKnot TheHelixShape 1  #Bezier #Curve [Radius,0,ThisHD]         [Radius,TheHandleLength,ThisHD - HandleHeightDelta]     [Radius,-TheHandleLength,ThisHD + HandleHeightDelta]
+            ThisHD += HeightDelta
+            AddKnot TheHelixShape 1  #Bezier #Curve [0,-Radius,ThisHD]     [TheHandleLength,-Radius,ThisHD - HandleHeightDelta]     [-TheHandleLength,-Radius,ThisHD + HandleHeightDelta]
+            ThisHD += HeightDelta
+            AddKnot TheHelixShape 1  #Bezier #Curve [-Radius,0,ThisHD]     [-Radius,-TheHandleLength,ThisHD - HandleHeightDelta]     [-Radius,TheHandleLength,ThisHD + HandleHeightDelta]    
+        )
+        UpdateShape TheHelixShape
+    )
+    catch ( Print   (GetCurrentException()) )
+    TheHelixShape
+)
