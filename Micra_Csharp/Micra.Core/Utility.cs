@@ -49,13 +49,14 @@ namespace Micra.Core {
                 }
             }
         }
+        ///collect only bits field indexes where value is 1
         /// <summary> Convert IBitArray to int List</summary>
-        public static List<int> IBitarrayToList(IBitArray bits) { //TODO -not tested -not used
+        public static List<int> SelectIBitarrayIndexes(IBitArray bits, bool selectTrue) { //TODO -not tested -not used
 
             List<int> _bits = new List<int>();
             for ( int index = 0; index < bits.Size; index++ ) {
 
-                if ( bits[index] == 1 ) _bits.Add(index); //collect only bits with True state
+                if ( bits[index] == 1) _bits.Add(index); //collect only bits with True state
             }
             return _bits;
         }

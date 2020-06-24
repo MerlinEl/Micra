@@ -7,6 +7,7 @@
 //
 using Autodesk.Max;
 using Humanizer;
+using Micra.Core.Enums;
 using Micra.Core.Extensions;
 using System;
 using System.Collections.Generic;
@@ -29,14 +30,30 @@ namespace Micra.Core {
         /// </summary>
         [Serializable]
         public struct Face {
+
             public uint a;
             public uint b;
             public uint c;
-
             public Face(IFace f) {
                 a = f.V[0];
                 b = f.V[1];
                 c = f.V[2];
+            }
+            public override string ToString() {
+                return String.Format("[{0}, {1}, {2}]", a, b, c);
+            }
+        }
+
+        public struct Edge {
+
+            public uint V1;
+            public uint V2;
+            public Edge(uint v1, uint v2) {
+                V1 = v1;
+                V2 = v2;
+            }
+            public override string ToString() {
+                return String.Format("[{0}, {1}]", V1, V2);
             }
         }
 
@@ -48,7 +65,7 @@ namespace Micra.Core {
         public Point3[] fnormals;
         public Point3[] vnormals;
 
-        internal Mesh(IMesh m, bool serialize = false) {
+        public Mesh(IMesh m, bool serialize = false) {
             _IMesh = m;
             if ( serialize ) {
 
@@ -112,7 +129,7 @@ namespace Micra.Core {
             return Vector3.Cross(a, b).Length / 2.0;
         }*/
 
-        internal List<IFace> GetSelectedIFaces() { //TODO -not tested -not used
+        public List<IFace> GetSelectedIFaces() { //TODO -not tested -not used
 
             List<IFace> fsel = new List<IFace>() { };
             _IMesh.FaceSel.IEnumerable().ForEach((item, index) => {
@@ -121,35 +138,45 @@ namespace Micra.Core {
             });
             return fsel;
         }
+        /// <summary> Get currently selected Face indexes (in 3DsMax count + 1)</summary>
+        public List<int> GetSelectedFaces() { //im:Autodesk.Max.Wrappers.Mesh
 
-        internal List<int> GetSelectedFaces() { //im:Autodesk.Max.Wrappers.Mesh
-
-            List<int> fsel = new List<int>() { };
+            /*List<int> fsel = new List<int>() { };
             _IMesh.FaceSel.IEnumerable().ForEach((item, index) => {
 
                 if ( item == 1 ) fsel.Add(index); //+3DsMax count + 1
             });
-            return fsel;
-        }
+            return fsel;*/
 
+            return _IMesh.FaceSel.IEnumerable()
+                .Select((item, i) => new {bit = item, index = i}) 
+                .Where(m => m.bit == 1).Select(m => m.index).ToList(); //LinQ Rules!!!
+        }
+        /// <summary> Get currently selected Edge indexes (in 3DsMax count + 1)</summary>
         public List<int> GetSelectedEdges() {
 
-            List<int> esel = new List<int>() { };
-            _IMesh.EdgeSel.IEnumerable().ForEach((item, index) => {
-
-                if ( item == 1 ) esel.Add(index); //+3DsMax count + 1
-            });
-            return esel;
+            return _IMesh.EdgeSel.IEnumerable()
+                .Select((item, i) => new { bit = item, index = i }) 
+                .Where(m => m.bit == 1).Select(m => m.index).ToList(); //LinQ Rules!!!
         }
-
+        /// <summary> Get currently selected Vert indexes (in 3DsMax count + 1)</summary>
         public List<int> GetSelectedVerts() {
 
-            List<int> vsel = new List<int>() { };
-            _IMesh.VertSel.IEnumerable().ForEach((item, index) => {
+            return _IMesh.VertSel.IEnumerable()
+                .Select((item, i) => new { bit = item, index = i }) 
+                .Where(m => m.bit == 1).Select(m => m.index).ToList(); //LinQ Rules!!!
+        }
 
-                if ( item == 1 ) vsel.Add(index); //+3DsMax count + 1
-            });
-            return vsel;
+        public void ClearSelection(string elementType) {
+
+            switch ( elementType ) {
+
+                case "Faces": _IMesh.FaceSel.ClearAll(); break;
+                case "Edges": _IMesh.EdgeSel.ClearAll(); break;
+                case "Verts": _IMesh.VertSel.ClearAll(); break;
+            }
+            _IMesh.InvalidateTopologyCache();
+            _IMesh.InvalidateGeomCache();
         }
 
         /// <summary> Set Face selection
@@ -167,7 +194,7 @@ namespace Micra.Core {
         public void SetSelectedFaces(List<int> faceIndexes) {
 
             var bytes = faceIndexes.Select(i => BitConverter.GetBytes(i)).ToArray();
-            IBitArray ba = Kernel.NewIBitarray(Numf);
+            IBitArray ba = Kernel.NewIBitarray(NumFaces);
             //for each face index which is in range(all faces), set bit to 1(selected) 
             faceIndexes.Where(i => i < ba.Size).ForEach(i => ba.Set(i));
             _IMesh.FaceSel_ = ba;
@@ -178,7 +205,7 @@ namespace Micra.Core {
         public void SetSelectedEdges(List<int> edgetIndexes) {
 
             var bytes = edgetIndexes.Select(i => BitConverter.GetBytes(i)).ToArray();
-            IBitArray ba = Kernel.NewIBitarray(Nume);
+            IBitArray ba = Kernel.NewIBitarray(NumEdges);
             //for each edge index which is in range(all edges), set bit to 1(selected) 
             edgetIndexes.Where(i => i < ba.Size).ForEach(i => ba.Set(i));
             _IMesh.EdgeSel = ba;
@@ -189,7 +216,7 @@ namespace Micra.Core {
         public void SetSelectedVerts(List<int> vertIndexes) {
 
             var bytes = vertIndexes.Select(i => BitConverter.GetBytes(i)).ToArray();
-            IBitArray ba = Kernel.NewIBitarray(Numv);
+            IBitArray ba = Kernel.NewIBitarray(NumVerts);
             //for each vert index which is in range(all verts), set bit to 1(selected) 
             vertIndexes.Where(i => i < ba.Size).ForEach(i => ba.Set(i));
             _IMesh.VertSel_ = ba;
@@ -197,12 +224,15 @@ namespace Micra.Core {
             _IMesh.InvalidateGeomCache();
         }
 
-        public int Numf => _IMesh.NumFaces;
-        //no better method for now (missing NumEdges in _IMesh)
-        public int Nume => _IMesh.EdgeSel.Size;
-        public int Numv => _IMesh.NumVerts;
+        public int NumFaces => _IMesh.NumFaces;
+        public int NumEdges => _IMesh.NumFaces * 3; // _IMesh.EdgeSel.Size;
+        public int NumVerts => _IMesh.NumVerts;
 
-        internal void HideFaces(List<int> lists) => lists.ForEach(i => _IMesh.Faces[i].Hide()); //TODO validate list indexes
+        public List<int> AllFaces => Enumerable.Range(0, NumFaces).ToList();
+        public List<int> AllEdges => Enumerable.Range(0, NumEdges).ToList();
+        public List<int> AllVerts => Enumerable.Range(0, NumVerts).ToList();
+
+        public void HideFaces(List<int> lists) => lists.ForEach(i => _IMesh.Faces[i].Hide()); //TODO validate list indexes
         /// <summary> Hide Selected or Unselected Faces
         ///     <example> 
         ///         <code>
@@ -211,7 +241,7 @@ namespace Micra.Core {
 		///     </example>
         ///     <para>param: <paramref name="selected"/> > True(Hide Selected), False(Hide Unselected)</para>
         /// </summary>
-        internal void HideFaces(bool selected) {
+        public void HideFaces(bool selected) {
             Max.Log("HideFaces > on Mesh!");
             for ( int i = 0; i < _IMesh.FaceSel.Size; i++ ) {
 
@@ -225,12 +255,12 @@ namespace Micra.Core {
             }
             _IMesh.InvalidateTopologyCache();
         }
-        internal void UnhideFaces() {
+        public void UnhideFaces() {
             _IMesh.Faces.ForEach<IFace>(f => f.Show());
             _IMesh.InvalidateTopologyCache();
         }
 
-        internal Point3 GetTransformAxisPos() { //TODO -not tested -not used
+        public Point3 GetTransformAxisPos() { //TODO -not tested -not used
 
             IMeshTempData meshTempData = Kernel._Global.MeshTempData.Create(_IMesh);
             meshTempData.FreeAll();
@@ -250,27 +280,31 @@ namespace Micra.Core {
             return result;
         }
 
-        internal double GetEdgeLength(int edgeIndex) {
+        public Edge GetEdge(int edgeIndex){
 
-            Throw.IfLargerThan(edgeIndex, Nume, "Edge");
+            Throw.IfNotInRange(edgeIndex, 0, NumEdges - 1, "Edge");
+            int faceIndex = ( edgeIndex / 3 );
+            IFace face = _IMesh.Faces[faceIndex];
+            /*Max.Log("GetEdge > face index:{0} verts:[{1}", faceIndex,
+                face.V[0] + " " + face.V[1] + " " + face.V[2] + "]"
+            );*/
+            Edge edge = new Edge();
+            switch ( (int)( edgeIndex % 3) ) {
 
-            //_IMesh.EdgeSel
-            //_IMesh.AngleBetweenFaces
-            //m.EdgeSel
-            //IEdge edge
-            //Point3.Distance( _mesh.ed ei.V
-            /*IInterface_ID iMeshSelectionID = Kernel._Global.Interface_ID.Create( //not used not tested
-                (uint)BuiltInClassIDA.MESHSELECT_CLASS_ID,
-                0
-            );
-            IMeshSelection _IMeshSelection = (IMeshSelection)Kernel._Global.GetCOREInterface(iMeshSelectionID); //not used not tested*/
-            //Autodesk.Max.IAdjEdgeList
-            // Autodesk.Max.IFaceElementList
-            // _IMesh.MakeEdgeList
-            //_IMesh.BuildVisEdgeList()
-            //IEdge edge = _IMesh.E(edgeIndex);
-            //return VertPos(edge.V[0]).DistanceTo(VertPos(edge.V[1]));
-            throw new NotImplementedException();
+                case 0: edge = new Edge(face.V[0], face.V[1]); break;
+                case 1: edge = new Edge(face.V[1], face.V[2]); break;
+                case 2: edge = new Edge(face.V[2], face.V[0]); break;
+            }
+            return edge;
+        }
+
+        public double GetEdgeLength(int edgeIndex) {
+
+            Throw.IfNotInRange(edgeIndex, 0, NumEdges - 1, "Edge");
+            Edge edge = GetEdge(edgeIndex);
+            Point3 p1 = new Point3( _IMesh.GetVert((int)edge.V1) );
+            Point3 p2 = new Point3( _IMesh.GetVert((int)edge.V2) );
+            return p1.DistanceTo(p2);
         }
 
         /*internal void GetElements() {
@@ -303,7 +337,7 @@ namespace Micra.Core {
            }
         }*/
 
-        internal List<int> GetFaceVerts(int faceIndex) {
+        public List<int> GetFaceVerts(int faceIndex) {
             if ( faceIndex > _IMesh.Faces.Count - 1 ) throw new Exception("Face index is out of range.");
             return new List<int>() { 
                 ( int )_IMesh.Faces[faceIndex].V[0], 

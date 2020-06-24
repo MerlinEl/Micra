@@ -163,14 +163,14 @@ namespace Micra.Core.Ops {
         /// </summary>
         /// <param name="srcNodes"></param>
         public static void SelectSimillarNodes(List<Node> srcNodes, bool byArea, bool byVcount = false, float areaSizeTolerance = 0, int vertsCountTolerance = 0) {
-            
+
             // collect selected objects (handle, area, vertnum)
             List<ObjectCompareData> objData = srcNodes
                 .Where(n =>
                     n.IsSuperClassOf(SuperClassID.GeometricObject) && //get all geometry objects
                     !n.IsClassOf(ClassID.TargetObject) //exclude any light Target
                 )
-                .Select(n => new ObjectCompareData(n.Handle, Calc.RoundArea(n.Object.GetArea(), areaSizeTolerance), n.Object.NumVerts))
+                .Select(n => ObjectCompareData.FromNode(n, areaSizeTolerance))
                 .ToList();
             // get only unique types
             List<ObjectCompareData> distinctObjData = objData
@@ -189,14 +189,14 @@ namespace Micra.Core.Ops {
                 .Where(n =>
                     n.IsSuperClassOf(SuperClassID.GeometricObject) && //get all geometry objects
                     !n.IsClassOf(ClassID.TargetObject) && //exclude any light Target
-                                                          // Returns:
-                                                          //     The zero-based index of the first occurrence of an element
-                                                          //     that matches the conditions defined by match, if found; 
-                                                          //     otherwise, –1.
+                    // Returns:
+                    // The zero-based index of the first occurrence of an element
+                    // that matches the conditions defined by match, if found; 
+                    // otherwise, –1.
                     objData.FindIndex(o => o.MatchBy(
-                        new ObjectCompareData(n.Handle, Calc.RoundArea(n.Object.GetArea(), areaSizeTolerance), n.Object.NumVerts),
-                        byArea, byVcount
-                    )) != -1
+                        ObjectCompareData.FromNode(n, areaSizeTolerance), 
+                        byArea, byVcount)
+                    ) != -1
                  )
                 .GroupBy(n => n.Handle) //group by handle id
                 .Select(g => g.First()) //get unique nodes by handle
@@ -237,9 +237,19 @@ namespace Micra.Core.Ops {
             if ( byVcount ) return cd.VNUM != -1 && cd.VNUM == VNUM;
             return false;
         }
+
+        internal static ObjectCompareData FromNode(Node n, float areaSizeTolerance) {
+
+            Geo geo = new Geo(n);
+            return new ObjectCompareData(n.Handle, Calc.RoundArea(geo.GetArea(), areaSizeTolerance), geo.NumVerts);
+        }
     }
 }
 
+/*{
+Geo geo = new Geo(n);
+return new ObjectCompareData(n.Handle, Calc.RoundArea(geo.GetArea(), areaSizeTolerance), geo.NumVerts);
+})*/
 
 /*IINode obj = MxCollection.GetFirstSelectedNode(); //Autodesk.Max.Wrappers.INode
 ISubClassList clist = GlobalInterface.Instance.ClassDirectory.Instance.GetClassList(obj.ObjectRef.Eval(0).Obj.SuperClassID);

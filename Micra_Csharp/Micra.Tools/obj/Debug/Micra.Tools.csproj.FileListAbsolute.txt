@@ -125,7 +125,6 @@ D:\ReneBaca\Aprog\Micra\Micra_Csharp\Micra.Tools\bin\Debug\ja-JP\MaxExplorerBind
 D:\ReneBaca\Aprog\Micra\Micra_Csharp\Micra.Tools\bin\Debug\ko-KR\MaxExplorerBindings.resources.dll
 D:\ReneBaca\Aprog\Micra\Micra_Csharp\Micra.Tools\bin\Debug\pt-BR\MaxExplorerBindings.resources.dll
 D:\ReneBaca\Aprog\Micra\Micra_Csharp\Micra.Tools\bin\Debug\zh-CN\MaxExplorerBindings.resources.dll
-D:\ReneBaca\Aprog\Micra\Micra_Csharp\Micra.Tools\bin\Debug\ExplorerFramework.xml
 D:\ReneBaca\Aprog\Micra\Micra_Csharp\Micra.Tools\obj\Debug\Micra.Tools.Properties.Resources.resources
 E:\Aprog\Orien\Micra\Micra_Csharp\Micra.Tools\obj\Debug\Micra.Tools.Properties.Resources.resources
 E:\Aprog\Orien\Micra\Micra_Csharp\Micra.Tools\bin\Debug\Humanizer.dll
@@ -172,3 +171,4 @@ E:\Aprog\Orien\Micra\Micra_Csharp\Micra.Tools\bin\Debug\ja-JP\MaxExplorerBinding
 E:\Aprog\Orien\Micra\Micra_Csharp\Micra.Tools\bin\Debug\ko-KR\MaxExplorerBindings.resources.dll
 E:\Aprog\Orien\Micra\Micra_Csharp\Micra.Tools\bin\Debug\pt-BR\MaxExplorerBindings.resources.dll
 E:\Aprog\Orien\Micra\Micra_Csharp\Micra.Tools\bin\Debug\zh-CN\MaxExplorerBindings.resources.dll
+D:\ReneBaca\Aprog\Micra\Micra_Csharp\Micra.Tools\bin\Debug\ExplorerFramework.xml

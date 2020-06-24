@@ -5,6 +5,7 @@ using System.Linq;
 
 namespace Micra.Core.Extensions {
     public static class CollectionExtensions {
+
         /// <summary> Extension method to convert ITab<T> to an IEnumerable to easily iterate through the list.
         ///     <example> 
         ///         <code>
@@ -13,7 +14,7 @@ namespace Micra.Core.Extensions {
         ///             foreach (var materialBase in materialsLib.ToIEnumerable()) {.... }
 		///         </code>
 		///     </example>
-        ///     <para>param: <paramref name=""/></para>
+        ///     <para>param: <paramref name="itab"/></para>
         /// </summary>
         public static IEnumerable<T> ToIEnumerable<T>(this ITab<T> itab) {
 
@@ -63,6 +64,23 @@ namespace Micra.Core.Extensions {
             nodesList.ForEach(n => nodes.AppendNode(n._IINode, true, 1));
             return nodes;
         }
+
+        /// <summary> Cast IEnumerable<ints> in to IBitarray (not used - need test)
+        ///     <example> 
+        ///         <code>
+		///             example: 
+        ///             Enumerable.Range(0, 10).Select(i=> 1).ToBitArray() //set all 10 bits to true
+		///         </code>
+		///     </example>
+        ///     <para>param: <paramref name=""/></para>
+        /// </summary>
+        public static IBitArray ToBitArray(this IEnumerable<int> bitList) {
+
+            IBitArray barr = Kernel.NewIBitarray(bitList.Count());
+            bitList.ForEach(i => barr.Set(i));
+            return barr;
+        }
+
         /// <summary> Lop trough custommers and set the parameter for tohse which fullfill condition
         ///     <example> 
         ///         <code>

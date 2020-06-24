@@ -120,6 +120,11 @@
             this.label4 = new System.Windows.Forms.Label();
             this.groupBox7 = new System.Windows.Forms.GroupBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.BtnGetSelectedEdgeVerts = new System.Windows.Forms.Button();
+            this.BtnGetEdgeVerts = new System.Windows.Forms.Button();
+            this.BtnGetSelectedEdgeLength = new System.Windows.Forms.Button();
+            this.SpnEdgeLenIndex = new System.Windows.Forms.NumericUpDown();
+            this.BtnGetEdgeLength = new System.Windows.Forms.Button();
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.groupBox8 = new System.Windows.Forms.GroupBox();
             this.tabPage5 = new System.Windows.Forms.TabPage();
@@ -131,16 +136,20 @@
             this.TbxCoding = new System.Windows.Forms.TextBox();
             this.BtnGeneratePrimitivesParamClasses = new System.Windows.Forms.Button();
             this.BtnCreatePrimitivesGenerator = new System.Windows.Forms.Button();
-            this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.tabPage6 = new System.Windows.Forms.TabPage();
-            this.CbxDecimalsCount = new System.Windows.Forms.ComboBox();
-            this.BtnDecimalsCount = new System.Windows.Forms.Button();
-            this.BtnDigitsCount = new System.Windows.Forms.Button();
-            this.CbxDigitsCount = new System.Windows.Forms.ComboBox();
-            this.BtnRoundDecimal = new System.Windows.Forms.Button();
-            this.BtnRoundInt = new System.Windows.Forms.Button();
-            this.SpnRoundDouble = new System.Windows.Forms.NumericUpDown();
             this.SpnRoundInt = new System.Windows.Forms.NumericUpDown();
+            this.SpnRoundDouble = new System.Windows.Forms.NumericUpDown();
+            this.BtnRoundInt = new System.Windows.Forms.Button();
+            this.BtnRoundDecimal = new System.Windows.Forms.Button();
+            this.CbxDigitsCount = new System.Windows.Forms.ComboBox();
+            this.BtnDigitsCount = new System.Windows.Forms.Button();
+            this.BtnDecimalsCount = new System.Windows.Forms.Button();
+            this.CbxDecimalsCount = new System.Windows.Forms.ComboBox();
+            this.imageList1 = new System.Windows.Forms.ImageList(this.components);
+            this.BtnDeselectVerts = new System.Windows.Forms.Button();
+            this.BtnDeselectEdges = new System.Windows.Forms.Button();
+            this.BtnDeselectFaces = new System.Windows.Forms.Button();
+            this.ChkAppendToSelection = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.SpnSimillarVertsTolerance)).BeginInit();
             this.groupBox2.SuspendLayout();
@@ -163,12 +172,13 @@
             this.groupBox9.SuspendLayout();
             this.groupBox7.SuspendLayout();
             this.groupBox3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.SpnEdgeLenIndex)).BeginInit();
             this.tabPage4.SuspendLayout();
             this.groupBox8.SuspendLayout();
             this.tabPage5.SuspendLayout();
             this.tabPage6.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.SpnRoundDouble)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.SpnRoundInt)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.SpnRoundDouble)).BeginInit();
             this.SuspendLayout();
             // 
             // button1
@@ -218,7 +228,7 @@
             this.groupBox1.Controls.Add(this.CbxSimillarObjBy);
             this.groupBox1.Location = new System.Drawing.Point(6, 6);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(167, 291);
+            this.groupBox1.Size = new System.Drawing.Size(167, 386);
             this.groupBox1.TabIndex = 7;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Get Slected:";
@@ -358,7 +368,7 @@
             // 
             // BtnFacesCount
             // 
-            this.BtnFacesCount.Location = new System.Drawing.Point(6, 162);
+            this.BtnFacesCount.Location = new System.Drawing.Point(6, 200);
             this.BtnFacesCount.Name = "BtnFacesCount";
             this.BtnFacesCount.Size = new System.Drawing.Size(122, 23);
             this.BtnFacesCount.TabIndex = 32;
@@ -368,7 +378,7 @@
             // 
             // BtnEdgesCount
             // 
-            this.BtnEdgesCount.Location = new System.Drawing.Point(6, 191);
+            this.BtnEdgesCount.Location = new System.Drawing.Point(6, 229);
             this.BtnEdgesCount.Name = "BtnEdgesCount";
             this.BtnEdgesCount.Size = new System.Drawing.Size(122, 23);
             this.BtnEdgesCount.TabIndex = 33;
@@ -378,7 +388,7 @@
             // 
             // BtnVertsCount
             // 
-            this.BtnVertsCount.Location = new System.Drawing.Point(6, 220);
+            this.BtnVertsCount.Location = new System.Drawing.Point(6, 258);
             this.BtnVertsCount.Name = "BtnVertsCount";
             this.BtnVertsCount.Size = new System.Drawing.Size(122, 23);
             this.BtnVertsCount.TabIndex = 34;
@@ -1241,6 +1251,10 @@
             // 
             // groupBox9
             // 
+            this.groupBox9.Controls.Add(this.ChkAppendToSelection);
+            this.groupBox9.Controls.Add(this.BtnDeselectVerts);
+            this.groupBox9.Controls.Add(this.BtnDeselectEdges);
+            this.groupBox9.Controls.Add(this.BtnDeselectFaces);
             this.groupBox9.Controls.Add(this.BtnSelectVerts);
             this.groupBox9.Controls.Add(this.BtnSelectEdges);
             this.groupBox9.Controls.Add(this.TbxElementsIndexes);
@@ -1308,15 +1322,20 @@
             this.groupBox7.Controls.Add(this.BtnHideGeometry);
             this.groupBox7.Controls.Add(this.ChkSelected);
             this.groupBox7.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.groupBox7.Location = new System.Drawing.Point(6, 303);
+            this.groupBox7.Location = new System.Drawing.Point(6, 398);
             this.groupBox7.Name = "groupBox7";
-            this.groupBox7.Size = new System.Drawing.Size(570, 339);
+            this.groupBox7.Size = new System.Drawing.Size(570, 244);
             this.groupBox7.TabIndex = 49;
             this.groupBox7.TabStop = false;
             this.groupBox7.Text = "Modify:";
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.BtnGetSelectedEdgeVerts);
+            this.groupBox3.Controls.Add(this.BtnGetEdgeVerts);
+            this.groupBox3.Controls.Add(this.BtnGetSelectedEdgeLength);
+            this.groupBox3.Controls.Add(this.SpnEdgeLenIndex);
+            this.groupBox3.Controls.Add(this.BtnGetEdgeLength);
             this.groupBox3.Controls.Add(this.BtnFacesCount);
             this.groupBox3.Controls.Add(this.BtnEdgesCount);
             this.groupBox3.Controls.Add(this.BtnGetObjArea1);
@@ -1328,6 +1347,63 @@
             this.groupBox3.TabIndex = 48;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Inspect:";
+            // 
+            // BtnGetSelectedEdgeVerts
+            // 
+            this.BtnGetSelectedEdgeVerts.Location = new System.Drawing.Point(6, 135);
+            this.BtnGetSelectedEdgeVerts.Name = "BtnGetSelectedEdgeVerts";
+            this.BtnGetSelectedEdgeVerts.Size = new System.Drawing.Size(212, 23);
+            this.BtnGetSelectedEdgeVerts.TabIndex = 64;
+            this.BtnGetSelectedEdgeVerts.Text = "Get Selected Edges Verts";
+            this.BtnGetSelectedEdgeVerts.UseVisualStyleBackColor = true;
+            this.BtnGetSelectedEdgeVerts.Click += new System.EventHandler(this.BtnGetSelectedEdgeVerts_Click);
+            // 
+            // BtnGetEdgeVerts
+            // 
+            this.BtnGetEdgeVerts.Location = new System.Drawing.Point(6, 106);
+            this.BtnGetEdgeVerts.Name = "BtnGetEdgeVerts";
+            this.BtnGetEdgeVerts.Size = new System.Drawing.Size(122, 23);
+            this.BtnGetEdgeVerts.TabIndex = 63;
+            this.BtnGetEdgeVerts.Text = "Get Edges Verts";
+            this.BtnGetEdgeVerts.UseVisualStyleBackColor = true;
+            this.BtnGetEdgeVerts.Click += new System.EventHandler(this.BtnGetEdgeVerts_Click);
+            // 
+            // BtnGetSelectedEdgeLength
+            // 
+            this.BtnGetSelectedEdgeLength.Location = new System.Drawing.Point(6, 164);
+            this.BtnGetSelectedEdgeLength.Name = "BtnGetSelectedEdgeLength";
+            this.BtnGetSelectedEdgeLength.Size = new System.Drawing.Size(212, 23);
+            this.BtnGetSelectedEdgeLength.TabIndex = 62;
+            this.BtnGetSelectedEdgeLength.Text = "Get Selected Edge Length";
+            this.BtnGetSelectedEdgeLength.UseVisualStyleBackColor = true;
+            this.BtnGetSelectedEdgeLength.Click += new System.EventHandler(this.BtnGetSelectedEdgeLength_Click);
+            // 
+            // SpnEdgeLenIndex
+            // 
+            this.SpnEdgeLenIndex.Location = new System.Drawing.Point(134, 93);
+            this.SpnEdgeLenIndex.Maximum = new decimal(new int[] {
+            1000000,
+            0,
+            0,
+            0});
+            this.SpnEdgeLenIndex.Name = "SpnEdgeLenIndex";
+            this.SpnEdgeLenIndex.Size = new System.Drawing.Size(84, 20);
+            this.SpnEdgeLenIndex.TabIndex = 61;
+            this.SpnEdgeLenIndex.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // BtnGetEdgeLength
+            // 
+            this.BtnGetEdgeLength.Location = new System.Drawing.Point(6, 77);
+            this.BtnGetEdgeLength.Name = "BtnGetEdgeLength";
+            this.BtnGetEdgeLength.Size = new System.Drawing.Size(122, 23);
+            this.BtnGetEdgeLength.TabIndex = 46;
+            this.BtnGetEdgeLength.Text = "Get Edge Length";
+            this.BtnGetEdgeLength.UseVisualStyleBackColor = true;
+            this.BtnGetEdgeLength.Click += new System.EventHandler(this.BtnGetEdgeLength_Click);
             // 
             // tabPage4
             // 
@@ -1450,12 +1526,6 @@
             this.BtnCreatePrimitivesGenerator.UseVisualStyleBackColor = true;
             this.BtnCreatePrimitivesGenerator.Click += new System.EventHandler(this.BtnCreatePrimitivesGenerator_Click);
             // 
-            // imageList1
-            // 
-            this.imageList1.ColorDepth = System.Windows.Forms.ColorDepth.Depth8Bit;
-            this.imageList1.ImageSize = new System.Drawing.Size(16, 16);
-            this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
-            // 
             // tabPage6
             // 
             this.tabPage6.Controls.Add(this.SpnRoundInt);
@@ -1474,79 +1544,23 @@
             this.tabPage6.Text = "Math";
             this.tabPage6.UseVisualStyleBackColor = true;
             // 
-            // CbxDecimalsCount
+            // SpnRoundInt
             // 
-            this.CbxDecimalsCount.FormattingEnabled = true;
-            this.CbxDecimalsCount.Items.AddRange(new object[] {
-            "0.0001",
-            "0.001",
-            "0,001",
-            "0.01",
-            "0,01",
-            "0.1",
-            "0",
-            "8,81785297393799",
-            "8.81785297393799"});
-            this.CbxDecimalsCount.Location = new System.Drawing.Point(131, 16);
-            this.CbxDecimalsCount.Name = "CbxDecimalsCount";
-            this.CbxDecimalsCount.Size = new System.Drawing.Size(133, 21);
-            this.CbxDecimalsCount.TabIndex = 62;
-            // 
-            // BtnDecimalsCount
-            // 
-            this.BtnDecimalsCount.Location = new System.Drawing.Point(6, 15);
-            this.BtnDecimalsCount.Name = "BtnDecimalsCount";
-            this.BtnDecimalsCount.Size = new System.Drawing.Size(119, 23);
-            this.BtnDecimalsCount.TabIndex = 63;
-            this.BtnDecimalsCount.Text = "Decimals Count";
-            this.BtnDecimalsCount.UseVisualStyleBackColor = true;
-            this.BtnDecimalsCount.Click += new System.EventHandler(this.BtnDecimalsCount_Click);
-            // 
-            // BtnDigitsCount
-            // 
-            this.BtnDigitsCount.Location = new System.Drawing.Point(6, 41);
-            this.BtnDigitsCount.Name = "BtnDigitsCount";
-            this.BtnDigitsCount.Size = new System.Drawing.Size(119, 23);
-            this.BtnDigitsCount.TabIndex = 64;
-            this.BtnDigitsCount.Text = "Digits Count";
-            this.BtnDigitsCount.UseVisualStyleBackColor = true;
-            this.BtnDigitsCount.Click += new System.EventHandler(this.BtnDigitsCount_Click);
-            // 
-            // CbxDigitsCount
-            // 
-            this.CbxDigitsCount.FormattingEnabled = true;
-            this.CbxDigitsCount.Items.AddRange(new object[] {
-            "0",
-            "1",
-            "10",
-            "100",
-            "1000",
-            "10000",
-            "1654656"});
-            this.CbxDigitsCount.Location = new System.Drawing.Point(131, 42);
-            this.CbxDigitsCount.Name = "CbxDigitsCount";
-            this.CbxDigitsCount.Size = new System.Drawing.Size(133, 21);
-            this.CbxDigitsCount.TabIndex = 65;
-            // 
-            // BtnRoundDecimal
-            // 
-            this.BtnRoundDecimal.Location = new System.Drawing.Point(270, 14);
-            this.BtnRoundDecimal.Name = "BtnRoundDecimal";
-            this.BtnRoundDecimal.Size = new System.Drawing.Size(68, 23);
-            this.BtnRoundDecimal.TabIndex = 66;
-            this.BtnRoundDecimal.Text = "Round";
-            this.BtnRoundDecimal.UseVisualStyleBackColor = true;
-            this.BtnRoundDecimal.Click += new System.EventHandler(this.BtnRoundDecimal_Click);
-            // 
-            // BtnRoundInt
-            // 
-            this.BtnRoundInt.Location = new System.Drawing.Point(270, 41);
-            this.BtnRoundInt.Name = "BtnRoundInt";
-            this.BtnRoundInt.Size = new System.Drawing.Size(68, 23);
-            this.BtnRoundInt.TabIndex = 67;
-            this.BtnRoundInt.Text = "Round";
-            this.BtnRoundInt.UseVisualStyleBackColor = true;
-            this.BtnRoundInt.Click += new System.EventHandler(this.BtnRoundInt_Click);
+            this.SpnRoundInt.DecimalPlaces = 1;
+            this.SpnRoundInt.Location = new System.Drawing.Point(344, 41);
+            this.SpnRoundInt.Maximum = new decimal(new int[] {
+            1000000,
+            0,
+            0,
+            0});
+            this.SpnRoundInt.Name = "SpnRoundInt";
+            this.SpnRoundInt.Size = new System.Drawing.Size(70, 20);
+            this.SpnRoundInt.TabIndex = 69;
+            this.SpnRoundInt.Value = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
             // 
             // SpnRoundDouble
             // 
@@ -1566,23 +1580,125 @@
             0,
             0});
             // 
-            // SpnRoundInt
+            // BtnRoundInt
             // 
-            this.SpnRoundInt.DecimalPlaces = 1;
-            this.SpnRoundInt.Location = new System.Drawing.Point(344, 41);
-            this.SpnRoundInt.Maximum = new decimal(new int[] {
-            1000000,
-            0,
-            0,
-            0});
-            this.SpnRoundInt.Name = "SpnRoundInt";
-            this.SpnRoundInt.Size = new System.Drawing.Size(70, 20);
-            this.SpnRoundInt.TabIndex = 69;
-            this.SpnRoundInt.Value = new decimal(new int[] {
-            10,
-            0,
-            0,
-            0});
+            this.BtnRoundInt.Location = new System.Drawing.Point(270, 41);
+            this.BtnRoundInt.Name = "BtnRoundInt";
+            this.BtnRoundInt.Size = new System.Drawing.Size(68, 23);
+            this.BtnRoundInt.TabIndex = 67;
+            this.BtnRoundInt.Text = "Round";
+            this.BtnRoundInt.UseVisualStyleBackColor = true;
+            this.BtnRoundInt.Click += new System.EventHandler(this.BtnRoundInt_Click);
+            // 
+            // BtnRoundDecimal
+            // 
+            this.BtnRoundDecimal.Location = new System.Drawing.Point(270, 14);
+            this.BtnRoundDecimal.Name = "BtnRoundDecimal";
+            this.BtnRoundDecimal.Size = new System.Drawing.Size(68, 23);
+            this.BtnRoundDecimal.TabIndex = 66;
+            this.BtnRoundDecimal.Text = "Round";
+            this.BtnRoundDecimal.UseVisualStyleBackColor = true;
+            this.BtnRoundDecimal.Click += new System.EventHandler(this.BtnRoundDecimal_Click);
+            // 
+            // CbxDigitsCount
+            // 
+            this.CbxDigitsCount.FormattingEnabled = true;
+            this.CbxDigitsCount.Items.AddRange(new object[] {
+            "0",
+            "1",
+            "10",
+            "100",
+            "1000",
+            "10000",
+            "1654656"});
+            this.CbxDigitsCount.Location = new System.Drawing.Point(131, 42);
+            this.CbxDigitsCount.Name = "CbxDigitsCount";
+            this.CbxDigitsCount.Size = new System.Drawing.Size(133, 21);
+            this.CbxDigitsCount.TabIndex = 65;
+            // 
+            // BtnDigitsCount
+            // 
+            this.BtnDigitsCount.Location = new System.Drawing.Point(6, 41);
+            this.BtnDigitsCount.Name = "BtnDigitsCount";
+            this.BtnDigitsCount.Size = new System.Drawing.Size(119, 23);
+            this.BtnDigitsCount.TabIndex = 64;
+            this.BtnDigitsCount.Text = "Digits Count";
+            this.BtnDigitsCount.UseVisualStyleBackColor = true;
+            this.BtnDigitsCount.Click += new System.EventHandler(this.BtnDigitsCount_Click);
+            // 
+            // BtnDecimalsCount
+            // 
+            this.BtnDecimalsCount.Location = new System.Drawing.Point(6, 15);
+            this.BtnDecimalsCount.Name = "BtnDecimalsCount";
+            this.BtnDecimalsCount.Size = new System.Drawing.Size(119, 23);
+            this.BtnDecimalsCount.TabIndex = 63;
+            this.BtnDecimalsCount.Text = "Decimals Count";
+            this.BtnDecimalsCount.UseVisualStyleBackColor = true;
+            this.BtnDecimalsCount.Click += new System.EventHandler(this.BtnDecimalsCount_Click);
+            // 
+            // CbxDecimalsCount
+            // 
+            this.CbxDecimalsCount.FormattingEnabled = true;
+            this.CbxDecimalsCount.Items.AddRange(new object[] {
+            "0.0001",
+            "0.001",
+            "0,001",
+            "0.01",
+            "0,01",
+            "0.1",
+            "0",
+            "8,81785297393799",
+            "8.81785297393799"});
+            this.CbxDecimalsCount.Location = new System.Drawing.Point(131, 16);
+            this.CbxDecimalsCount.Name = "CbxDecimalsCount";
+            this.CbxDecimalsCount.Size = new System.Drawing.Size(133, 21);
+            this.CbxDecimalsCount.TabIndex = 62;
+            // 
+            // imageList1
+            // 
+            this.imageList1.ColorDepth = System.Windows.Forms.ColorDepth.Depth8Bit;
+            this.imageList1.ImageSize = new System.Drawing.Size(16, 16);
+            this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
+            // 
+            // BtnDeselectVerts
+            // 
+            this.BtnDeselectVerts.Location = new System.Drawing.Point(6, 258);
+            this.BtnDeselectVerts.Name = "BtnDeselectVerts";
+            this.BtnDeselectVerts.Size = new System.Drawing.Size(155, 23);
+            this.BtnDeselectVerts.TabIndex = 42;
+            this.BtnDeselectVerts.Text = "Deselect Verts";
+            this.BtnDeselectVerts.UseVisualStyleBackColor = true;
+            this.BtnDeselectVerts.Click += new System.EventHandler(this.BtnDeselectVerts_Click);
+            // 
+            // BtnDeselectEdges
+            // 
+            this.BtnDeselectEdges.Location = new System.Drawing.Point(6, 229);
+            this.BtnDeselectEdges.Name = "BtnDeselectEdges";
+            this.BtnDeselectEdges.Size = new System.Drawing.Size(155, 23);
+            this.BtnDeselectEdges.TabIndex = 41;
+            this.BtnDeselectEdges.Text = "Deselect Edges";
+            this.BtnDeselectEdges.UseVisualStyleBackColor = true;
+            this.BtnDeselectEdges.Click += new System.EventHandler(this.BtnDeselectEdges_Click);
+            // 
+            // BtnDeselectFaces
+            // 
+            this.BtnDeselectFaces.Location = new System.Drawing.Point(6, 200);
+            this.BtnDeselectFaces.Name = "BtnDeselectFaces";
+            this.BtnDeselectFaces.Size = new System.Drawing.Size(155, 23);
+            this.BtnDeselectFaces.TabIndex = 40;
+            this.BtnDeselectFaces.Text = "Deselect Faces";
+            this.BtnDeselectFaces.UseVisualStyleBackColor = true;
+            this.BtnDeselectFaces.Click += new System.EventHandler(this.BtnDeselectFaces_Click);
+            // 
+            // ChkAppendToSelection
+            // 
+            this.ChkAppendToSelection.AutoSize = true;
+            this.ChkAppendToSelection.Location = new System.Drawing.Point(6, 148);
+            this.ChkAppendToSelection.Name = "ChkAppendToSelection";
+            this.ChkAppendToSelection.Size = new System.Drawing.Size(158, 17);
+            this.ChkAppendToSelection.TabIndex = 43;
+            this.ChkAppendToSelection.Text = "Append to current Selection";
+            this.ChkAppendToSelection.UseVisualStyleBackColor = true;
             // 
             // CsharpToMaxTest
             // 
@@ -1622,13 +1738,14 @@
             this.groupBox7.ResumeLayout(false);
             this.groupBox7.PerformLayout();
             this.groupBox3.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.SpnEdgeLenIndex)).EndInit();
             this.tabPage4.ResumeLayout(false);
             this.groupBox8.ResumeLayout(false);
             this.tabPage5.ResumeLayout(false);
             this.tabPage5.PerformLayout();
             this.tabPage6.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.SpnRoundDouble)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.SpnRoundInt)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.SpnRoundDouble)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1752,5 +1869,14 @@
         private System.Windows.Forms.Button BtnRoundDecimal;
         private System.Windows.Forms.NumericUpDown SpnRoundInt;
         private System.Windows.Forms.NumericUpDown SpnRoundDouble;
+        private System.Windows.Forms.NumericUpDown SpnEdgeLenIndex;
+        private System.Windows.Forms.Button BtnGetEdgeLength;
+        private System.Windows.Forms.Button BtnGetSelectedEdgeLength;
+        private System.Windows.Forms.Button BtnGetEdgeVerts;
+        private System.Windows.Forms.Button BtnGetSelectedEdgeVerts;
+        private System.Windows.Forms.Button BtnDeselectVerts;
+        private System.Windows.Forms.Button BtnDeselectEdges;
+        private System.Windows.Forms.Button BtnDeselectFaces;
+        private System.Windows.Forms.CheckBox ChkAppendToSelection;
     }
 }

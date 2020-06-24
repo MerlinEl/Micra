@@ -7,16 +7,16 @@ using Micra.Core.Ressearch;
 using Micra.Core.Utils;
 using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Windows.Forms;
 using System.Xml.Linq;
+using static Micra.Core.Mesh;
 using static Micra.Core.Prim.PrimitiveTypes;
 
 namespace Micra.Tools {
-    public partial class CsharpToMaxTest:Form {
+    public partial class CsharpToMaxTest : Form {
         XDocument MaxActionsXML = MxFile.GetXMLFromResources("MaxScriptActions.xml");//load XML from Resources
         public CsharpToMaxTest() {
             InitializeComponent();
@@ -50,7 +50,8 @@ namespace Micra.Tools {
                 "Render",
                 "GetFaceArea",
                 "GetObjectArea",
-                "GetSelectedVertices"
+                "GetSelectedVertices",
+                "GetSelectedEdgeLength"
             });
             CbxScriptList.SelectedIndex = 0;
 
@@ -244,7 +245,8 @@ namespace Micra.Tools {
             Max.Log(( sender as Button ).Text);
             Node node = ObjOps.GetFirstSlectedNode();
             Max.Log("selected Node:{0} subObjectLevel:{1}", node.Name, Kernel._Interface.SubObjectLevel);
-            List<int> fsel = node.Object.GetSelectedFaces();
+            Geo geo = new Geo(node);
+            List<int> fsel = geo.GetSelectedFaces();
             Max.Log("selected Faces:{0} #({1}) -- +1 in Max", fsel.Count, String.Join(",", fsel));
         }
 
@@ -252,7 +254,8 @@ namespace Micra.Tools {
             Max.Log(( sender as Button ).Text);
             Node node = ObjOps.GetFirstSlectedNode();
             Max.Log("selected Node:{0} subObjectLevel:{1}", node.Name, Kernel._Interface.SubObjectLevel);
-            var esel = node.Object.GetSelectedEdges();
+            Geo geo = new Geo(node);
+            var esel = geo.GetSelectedEdges();
             Max.Log("selected Edges:{0} #({1}) -- +1 in Max", esel.Count, String.Join(",", esel));
         }
 
@@ -260,20 +263,21 @@ namespace Micra.Tools {
             Max.Log(( sender as Button ).Text);
             Node node = ObjOps.GetFirstSlectedNode();
             Max.Log("selected Node:{0} subObjectLevel:{1}", node.Name, Kernel._Interface.SubObjectLevel);
-            var vsel = node.Object.GetSelectedVerts();
+            Geo geo = new Geo(node);
+            var vsel = geo.GetSelectedVerts();
             Max.Log("selected Verts:{0} #({1}) -- +1 in Max", vsel.Count, String.Join(",", vsel));
         }
 
         private void BtnHideUnselFaces_Click(object sender, EventArgs e) {
             Max.Log(( sender as Button ).Text);
             Node node = ObjOps.GetFirstSlectedNode();
-            if ( node != null ) { node.Object.HideGeometry(ChkSelected.Checked); }
+            if ( node != null ) GeoOps.HideGeometry(node, ChkSelected.Checked);
         }
 
         private void BtnUnhideGeometry_Click(object sender, EventArgs e) {
             Max.Log(( sender as Button ).Text);
             Node node = ObjOps.GetFirstSlectedNode();
-            if ( node != null ) { node.Object.UnhideGeometry(); }
+            if ( node != null ) GeoOps.UnhideGeometry(node);
         }
 
         private void BtnGetSceneObjects_Click(object sender, EventArgs e) {
@@ -377,7 +381,7 @@ namespace Micra.Tools {
         private void BtnGetObjArea_Click(object sender, EventArgs e) {
             Max.Log(( sender as Button ).Text);
             Node node = ObjOps.GetFirstSlectedNode();
-            double area = node.Object.GetArea();
+            double area = new Geo(node).GetArea();
             Max.Log("Object:{0} Class:{1} Area:{2}", node.Name, node.ClassOf(), area);
         }
 
@@ -385,7 +389,7 @@ namespace Micra.Tools {
             Max.Log(( sender as Button ).Text);
             Node node = ObjOps.GetFirstSlectedNode();
             Geo geo = new Geo(node); //poly or mesh or later modpoly modmesh
-            var fsel = node.Object.GetSelectedFaces();
+            var fsel = geo.GetSelectedFaces();
             fsel.ForEach(f => {
 
                 double area = geo.GetFaceArea(f);
@@ -400,19 +404,22 @@ namespace Micra.Tools {
         private void BtnFacesCount_Click(object sender, EventArgs e) {
             Max.Log(( sender as Button ).Text);
             Node node = ObjOps.GetFirstSlectedNode();
-            Max.Log("Faces count:{0}", node.Object.NumFaces);
+            Geo geo = new Geo(node);
+            Max.Log("Faces count:{0}", geo.NumFaces);
         }
 
         private void BtnEdgesCount_Click(object sender, EventArgs e) {
             Max.Log(( sender as Button ).Text);
             Node node = ObjOps.GetFirstSlectedNode();
-            Max.Log("Edges count:{0}", node.Object.NumEdges);
+            Geo geo = new Geo(node);
+            Max.Log("Edges count:{0}", geo.NumEdges);
         }
 
         private void BtnVertsCount_Click(object sender, EventArgs e) {
             Max.Log(( sender as Button ).Text);
             Node node = ObjOps.GetFirstSlectedNode();
-            Max.Log("Verts count:{0}", node.Object.NumVerts);
+            Geo geo = new Geo(node);
+            Max.Log("Verts count:{0}", geo.NumVerts);
         }
 
         private void BtnSelectFaces_Click(object sender, EventArgs e) {
@@ -420,7 +427,8 @@ namespace Micra.Tools {
             List<int> faceIndexes = TbxElementsIndexes.Text.Split(',').Select(Int32.Parse).ToList();
             Max.Log("SetSelectedFaces > faces:({0})", string.Join(",", faceIndexes));
             Node node = ObjOps.GetFirstSlectedNode();
-            node.Object.SetSelectedFaces(faceIndexes, true);
+            Geo geo = new Geo(node);
+            geo.SetSelectedFaces(faceIndexes, ChkAppendToSelection.Checked);
         }
 
         private void BtnSelectEdges_Click(object sender, EventArgs e) {
@@ -428,7 +436,8 @@ namespace Micra.Tools {
             List<int> edgeIndexes = TbxElementsIndexes.Text.Split(',').Select(Int32.Parse).ToList();
             Max.Log("SetSelectedEdges > edges:({0})", string.Join(",", edgeIndexes));
             Node node = ObjOps.GetFirstSlectedNode();
-            node.Object.SetSelectedEdges(edgeIndexes, true);
+            Geo geo = new Geo(node);
+            geo.SetSelectedEdges(edgeIndexes, ChkAppendToSelection.Checked);
         }
 
         private void BtnSelectVerts_Click(object sender, EventArgs e) {
@@ -436,7 +445,8 @@ namespace Micra.Tools {
             List<int> vertIndexes = TbxElementsIndexes.Text.Split(',').Select(Int32.Parse).ToList();
             Max.Log("SetSelectedVerts > verts:({0})", string.Join(",", vertIndexes));
             Node node = ObjOps.GetFirstSlectedNode();
-            node.Object.SetSelectedVerts(vertIndexes, true);
+            Geo geo = new Geo(node);
+            geo.SetSelectedVerts(vertIndexes, ChkAppendToSelection.Checked);
         }
 
         private void BtnSelSimElements_Click_1(object sender, EventArgs e) {
@@ -458,22 +468,22 @@ namespace Micra.Tools {
 
                     case 2: GeoOps.SelectSimillarEdges(node, areaToloerance); break;
                     case 3:
-                        if (node.IsClassOf(ClassID.EditableMesh)) {
- 
-                            GeoOps.SelectSimillarFaces(node, byArea, byVcount,
-                                areaToloerance, ( int )SpnSimillarVertsTolerance.Value);
+                    if ( node.IsClassOf(ClassID.EditableMesh) ) {
 
-                        } else if (node.IsClassOf(ClassID.EditablePoly)) {
+                        GeoOps.SelectSimillarFaces(node, byArea, byVcount,
+                            areaToloerance, (int)SpnSimillarVertsTolerance.Value);
 
-                            GeoOps.SelectSimillarEdgeLoops(node, areaToloerance); 
-                        }
+                    } else if ( node.IsClassOf(ClassID.EditablePoly) ) {
+
+                        GeoOps.SelectSimillarEdgeLoops(node, areaToloerance);
+                    }
                     break;
                     case 4:
-                        GeoOps.SelectSimillarFaces(node, byArea, byVcount,
-                            areaToloerance, ( int )SpnSimillarVertsTolerance.Value); break;
+                    GeoOps.SelectSimillarFaces(node, byArea, byVcount,
+                        areaToloerance, (int)SpnSimillarVertsTolerance.Value); break;
                     case 5:
-                        GeoOps.SelectSimillarElements(node, byArea, byVcount,
-                            areaToloerance, ( int )SpnSimillarVertsTolerance.Value); break;
+                    GeoOps.SelectSimillarElements(node, byArea, byVcount,
+                        areaToloerance, (int)SpnSimillarVertsTolerance.Value); break;
                 }
 
             } else if ( selNodes.Count() >= 1 ) { //when multi object selection
@@ -534,8 +544,8 @@ namespace Micra.Tools {
         private void button2_Click(object sender, EventArgs e) {
             Max.Log(( sender as Button ).Text);
 
-            float offsetX = ( float )SpnPrimOffsetX.Value;
-            float offsetY = ( float )SpnPrimOffsetY.Value;
+            float offsetX = (float)SpnPrimOffsetX.Value;
+            float offsetY = (float)SpnPrimOffsetY.Value;
             for ( int i = 0; i < SpnPrimCnt.Value; i++ ) {
                 CreatePrimitiveByName(LbxPrimitiveObjectNames.SelectedItem.ToString(), offsetX, offsetY, i);
             }
@@ -545,61 +555,61 @@ namespace Micra.Tools {
             switch ( primName ) {
 
                 case "Box":
-                    new PBox(Primitives.Box.Create()) {
-                        Length = ( float )SpnPrimLen.Value,
-                        Width = ( float )SpnPrimWid.Value,
-                        Height = ( float )SpnPrimHei.Value,
-                        Wirecolor = Color.RainbowColor(( int )SpnPrimCnt.Value, i),
-                        Pos = new Point3(( ( float )SpnPrimWid.Value + offsetX ) * i, 0, 0)
-                        //realWorldMapSize = false //not works
-                    }; break;
+                new PBox(Primitives.Box.Create()) {
+                    Length = (float)SpnPrimLen.Value,
+                    Width = (float)SpnPrimWid.Value,
+                    Height = (float)SpnPrimHei.Value,
+                    Wirecolor = Color.RainbowColor((int)SpnPrimCnt.Value, i),
+                    Pos = new Point3(( (float)SpnPrimWid.Value + offsetX ) * i, 0, 0)
+                    //realWorldMapSize = false //not works
+                }; break;
 
                 case "Sphere":
-                    new PSphere(Primitives.Sphere.Create()) {
-                        Radius = ( float )SpnPrimRadius1.Value,
-                        Wirecolor = Color.RainbowColor(( int )SpnPrimCnt.Value, i),
-                        Pos = new Point3(( ( float )SpnPrimWid.Value * 4 + offsetX ) * i, ( ( float )SpnPrimRadius1.Value + offsetY ) * 2, 0)
-                    }; break;
+                new PSphere(Primitives.Sphere.Create()) {
+                    Radius = (float)SpnPrimRadius1.Value,
+                    Wirecolor = Color.RainbowColor((int)SpnPrimCnt.Value, i),
+                    Pos = new Point3(( (float)SpnPrimWid.Value * 4 + offsetX ) * i, ( (float)SpnPrimRadius1.Value + offsetY ) * 2, 0)
+                }; break;
 
                 case "Teapot":
-                    new PTeapot(Primitives.Teapot.Create()) {
-                        Radius = ( float )SpnPrimRadius1.Value,
-                        Wirecolor = Color.RainbowColor(( int )SpnPrimCnt.Value, i),
-                        Pos = new Point3(( ( float )SpnPrimWid.Value * 4 + offsetX ) * i, ( ( float )SpnPrimRadius1.Value + offsetY ) * 3, 0)
-                    }; break;
+                new PTeapot(Primitives.Teapot.Create()) {
+                    Radius = (float)SpnPrimRadius1.Value,
+                    Wirecolor = Color.RainbowColor((int)SpnPrimCnt.Value, i),
+                    Pos = new Point3(( (float)SpnPrimWid.Value * 4 + offsetX ) * i, ( (float)SpnPrimRadius1.Value + offsetY ) * 3, 0)
+                }; break;
 
                 case "Cylinder":
-                    new PCylinder(Primitives.Cylinder.Create()) {
-                        Radius = ( float )SpnPrimRadius1.Value,
-                        Height = ( float )SpnPrimHei.Value,
-                        Wirecolor = Color.RainbowColor(( int )SpnPrimCnt.Value, i),
-                        Pos = new Point3(( ( float )SpnPrimWid.Value * 4 + offsetX ) * i, ( ( float )SpnPrimRadius1.Value + offsetY ) * 4, 0)
-                    }; break;
+                new PCylinder(Primitives.Cylinder.Create()) {
+                    Radius = (float)SpnPrimRadius1.Value,
+                    Height = (float)SpnPrimHei.Value,
+                    Wirecolor = Color.RainbowColor((int)SpnPrimCnt.Value, i),
+                    Pos = new Point3(( (float)SpnPrimWid.Value * 4 + offsetX ) * i, ( (float)SpnPrimRadius1.Value + offsetY ) * 4, 0)
+                }; break;
 
                 case "Torus":
-                    new PTorus(Primitives.Torus.Create()) {
-                        Radius1 = ( float )SpnPrimRadius1.Value,
-                        Radius2 = ( float )SpnPrimRadius2.Value,
-                        Wirecolor = Color.RainbowColor(( int )SpnPrimCnt.Value, i),
-                        Pos = new Point3(( ( float )SpnPrimWid.Value * 4 + offsetX ) * i, ( ( float )SpnPrimRadius1.Value + offsetY ) * 5, 0)
-                    }; break;
+                new PTorus(Primitives.Torus.Create()) {
+                    Radius1 = (float)SpnPrimRadius1.Value,
+                    Radius2 = (float)SpnPrimRadius2.Value,
+                    Wirecolor = Color.RainbowColor((int)SpnPrimCnt.Value, i),
+                    Pos = new Point3(( (float)SpnPrimWid.Value * 4 + offsetX ) * i, ( (float)SpnPrimRadius1.Value + offsetY ) * 5, 0)
+                }; break;
 
                 case "Tube":
-                    new PTube(Primitives.Tube.Create()) {
-                        Radius1 = ( float )SpnPrimRadius1.Value,
-                        Radius2 = ( float )SpnPrimRadius2.Value,
-                        Height = ( float )SpnPrimHei.Value,
-                        Wirecolor = Color.RainbowColor(( int )SpnPrimCnt.Value, i),
-                        Pos = new Point3(( ( float )SpnPrimWid.Value * 4 + offsetX ) * i, ( ( float )SpnPrimRadius1.Value + offsetY ) * 6, 0)
-                    }; break;
+                new PTube(Primitives.Tube.Create()) {
+                    Radius1 = (float)SpnPrimRadius1.Value,
+                    Radius2 = (float)SpnPrimRadius2.Value,
+                    Height = (float)SpnPrimHei.Value,
+                    Wirecolor = Color.RainbowColor((int)SpnPrimCnt.Value, i),
+                    Pos = new Point3(( (float)SpnPrimWid.Value * 4 + offsetX ) * i, ( (float)SpnPrimRadius1.Value + offsetY ) * 6, 0)
+                }; break;
 
                 case "Plane":
-                    new PPlane(Primitives.Plane.Create()) {
-                        Length = ( float )SpnPrimLen.Value,
-                        Width = ( float )SpnPrimWid.Value,
-                        Wirecolor = Color.RainbowColor(( int )SpnPrimCnt.Value, i),
-                        Pos = new Point3(( ( float )SpnPrimWid.Value + offsetX ) * i, 0, 0)
-                    }; break;
+                new PPlane(Primitives.Plane.Create()) {
+                    Length = (float)SpnPrimLen.Value,
+                    Width = (float)SpnPrimWid.Value,
+                    Wirecolor = Color.RainbowColor((int)SpnPrimCnt.Value, i),
+                    Pos = new Point3(( (float)SpnPrimWid.Value + offsetX ) * i, 0, 0)
+                }; break;
             }
         }
 
@@ -615,7 +625,7 @@ namespace Micra.Tools {
 
             Max.Log("Create:{0}", TbxObjType.Text);
             if ( TbxObjType.Text.Length == 0 ) return;
-            PrimGeomObjectFactory o = ( PrimGeomObjectFactory )ClassReader.GetFieldValueByName(typeof(Primitives), TbxObjType.Text);
+            PrimGeomObjectFactory o = (PrimGeomObjectFactory)ClassReader.GetFieldValueByName(typeof(Primitives), TbxObjType.Text);
             if ( o == null ) return;
             Max.Log("\tClass:{0}", o.ClassID.PartA);
             SceneObject so = o.Create();
@@ -682,15 +692,84 @@ namespace Micra.Tools {
         private void BtnRoundDecimal_Click(object sender, EventArgs e) {
             Max.Log("double:{0}", Calc.RoundDouble(
                 Calc.StringToDouble(CbxDecimalsCount.SelectedItem.ToString()),
-                ( int )SpnRoundDouble.Value)
+                (int)SpnRoundDouble.Value)
             );
         }
 
         private void BtnRoundInt_Click(object sender, EventArgs e) {
             Max.Log("int:{0}", Calc.RoundInt(
                 Int32.Parse(CbxDigitsCount.SelectedItem.ToString()),
-                ( int )SpnRoundInt.Value)
+                (int)SpnRoundInt.Value)
             );
+        }
+
+        private void BtnGetEdgeLength_Click(object sender, EventArgs e) {
+            Max.Log(( sender as Button ).Text);
+            Node n = ObjOps.GetFirstSlectedNode();
+            if ( n == null ) return;
+            Geo geo = new Geo(n);
+            Max.Log("\tedge:{0} len:{1}", SpnEdgeLenIndex.Value, geo.GetEdgeLength((int)SpnEdgeLenIndex.Value));
+        }
+
+        private void BtnGetSelectedEdgeLength_Click(object sender, EventArgs e) {
+            Max.Log(( sender as Button ).Text);
+            Node n = ObjOps.GetFirstSlectedNode();
+            if ( n == null ) return;
+            Geo geo = new Geo(n);
+            int selEdgeIndex = geo.GetSelectedEdges().FirstOrDefault();
+            Max.Log("\tEdge:{0} Length:{1}", selEdgeIndex, geo.GetEdgeLength(selEdgeIndex));
+        }
+
+        private void BtnGetEdgeVerts_Click(object sender, EventArgs e) {
+            Max.Log(( sender as Button ).Text);
+            Node n = ObjOps.GetFirstSlectedNode();
+            if ( n == null ) return;
+            Geo geo = new Geo(n);
+            Edge edge = geo.GetEdge((int)SpnEdgeLenIndex.Value);
+            Max.Log("\tObj:{0} Edge:{1} Verts:{2}", n.Name, SpnEdgeLenIndex.Value, edge.ToString());
+        }
+
+        private void BtnGetSelectedEdgeVerts_Click(object sender, EventArgs e) {
+            Max.Log(( sender as Button ).Text);
+            Node n = ObjOps.GetFirstSlectedNode();
+            if ( n == null ) return;
+            Geo geo = new Geo(n);
+            int selEdgeIndex = geo.GetSelectedEdges().FirstOrDefault();
+            Edge edge = geo.GetEdge(selEdgeIndex);
+            Max.Log("\tObj:{0} Edge:{1} Verts:{2}", n.Name, selEdgeIndex, edge.ToString());
+        }
+
+        private void BtnDeselectFaces_Click(object sender, EventArgs e) {
+            Max.Log(( sender as Button ).Text);
+            Node n = ObjOps.GetFirstSlectedNode();
+            if ( n == null ) return;
+            Geo geo = new Geo(n);
+            Kernel.Undo.Begin();
+            geo.ClearSelection("Faces");
+            Kernel.Undo.Accept("Deselect Faces");
+            Kernel.Undo.End();
+        }
+
+        private void BtnDeselectEdges_Click(object sender, EventArgs e) {
+            Max.Log(( sender as Button ).Text);
+            Node n = ObjOps.GetFirstSlectedNode();
+            if ( n == null ) return;
+            Geo geo = new Geo(n);
+            Kernel.Undo.Begin();
+            geo.ClearSelection("Edges");
+            Kernel.Undo.Accept("Deselect Edges");
+            Kernel.Undo.End();
+        }
+
+        private void BtnDeselectVerts_Click(object sender, EventArgs e) {
+            Max.Log(( sender as Button ).Text);
+            Node n = ObjOps.GetFirstSlectedNode();
+            if ( n == null ) return;
+            Geo geo = new Geo(n);
+            Kernel.Undo.Begin();
+            geo.ClearSelection("Verts");
+            Kernel.Undo.Accept("Deselect Verts");
+            Kernel.Undo.End();
         }
     }
 }

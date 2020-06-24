@@ -295,7 +295,7 @@ namespace Micra.Core {
         public IMNMesh GetIpoly() => Object.GetIpolyObject(Kernel.Now).Mesh;
         public IMNMesh GetIpoly(TimeValue t) => Object.GetIpolyObject(t).Mesh;
 
-        internal void InvalidateObjCache() {
+        internal void InvalidateObjCache() { //used one time and object was crashed -- TODO more tests
             Kernel._Interface.InvalidateObCache(_IINode);
         }
 

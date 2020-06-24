@@ -1,3 +1,57 @@
+BitArray* IMXSExposure::GetMeshMapSeams(const Mesh* mesh, int mapChannel) const {
+    if (!mesh || !mesh->mapSupport(mapChannel))
+        return nullptr; // translates to 'undefined' in MAXScript
+ 
+    MNMesh poly(*mesh); // dereferencing the pointer
+Mesh meshCopy(*mesh);
+ 
+    if (!poly.nume)
+        return nullptr; // without edges, there are no seams
+ 
+    poly.ClearEFlags(MN_SEL);
+    poly.SetMapSeamFlags(mapChannel);
+    poly.PropegateComponentFlags(MNM_SL_EDGE, MN_SEL, MNM_SL_EDGE, MN_EDGE_MAP_SEAM);
+    poly.OutToTri(meshCopy);
+
+    if (mesh->numFaces != meshCopy.numFaces)
+        return nullptr; // topology changed when converting to poly
+    
+    return new BitArray(meshCopy.edgeSel);
+}
+
+//Deselects the hidden edges in the mesh.This method is not applicable to TriMeshes.
+obj = convertToMesh(Sphere()) -- Create a Sphere, turn to EMesh
+obj.allEdges = true -- Show all edges
+select obj -- Select the mesh
+max modify mode -- Switch to Modify panel
+subObjectLevel = 2-- Set Sub-Object level to Edge
+edgeSelSet=#() -- Init. an Array
+for face = 1 to obj.numfaces do -- Go through all faces
+for edge = 1 to 3 do -- And for every of the 3 edges
+if (getedgevis obj face edge) do -- If the visibility is true,
+append edgeSelSet(((face-1)*3)+edge) --collect the edge
+setedgeselection obj edgeSelSet -- Select all visible edges
+
+
+
+            //_IMesh.EdgeSel
+            //_IMesh.AngleBetweenFaces
+            //m.EdgeSel
+            //IEdge edge
+            //Point3.Distance( _mesh.ed ei.V
+/*IInterface_ID iMeshSelectionID = Kernel._Global.Interface_ID.Create( //not used not tested
+    (uint)BuiltInClassIDA.MESHSELECT_CLASS_ID,
+    0
+);
+IMeshSelection _IMeshSelection = (IMeshSelection)Kernel._Global.GetCOREInterface(iMeshSelectionID); //not used not tested*/
+//Autodesk.Max.IAdjEdgeList
+// Autodesk.Max.IFaceElementList
+// _IMesh.MakeEdgeList
+//_IMesh.BuildVisEdgeList()
+//IEdge edge = _IMesh.E(edgeIndex);
+//return VertPos(edge.V[0]).DistanceTo(VertPos(edge.V[1]));
+
+
 In .NET: UIntPtr myHandle = global.Animatable.GetHandleByAnim(myMaterial or anything else );
 In MXS: myMaterial = GetAnimByHandle myHandle
 

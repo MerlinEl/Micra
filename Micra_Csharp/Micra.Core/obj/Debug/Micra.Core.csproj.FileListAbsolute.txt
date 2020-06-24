@@ -147,5 +147,4 @@ D:\ReneBaca\Aprog\Micra\Micra_Csharp\Micra.Core\bin\Debug\ExplorerFramework.xml
 D:\ReneBaca\Aprog\Micra\Micra_Csharp\Micra.Core\bin\Debug\nunit.framework.dll
 D:\ReneBaca\Aprog\Micra\Micra_Csharp\Micra.Core\bin\Debug\MaxPlusDotNet.dll
 D:\ReneBaca\Aprog\Micra\Micra_Csharp\Micra.Core\bin\Debug\nunit.framework.xml
-D:\ReneBaca\Aprog\Micra\Micra_Csharp\Micra.Core\obj\Debug\Micra.Core.csprojAssemblyReference.cache
 E:\Aprog\Orien\Micra\Micra_Csharp\Micra.Core\bin\Debug\Autodesk.Max.Remoting.dll

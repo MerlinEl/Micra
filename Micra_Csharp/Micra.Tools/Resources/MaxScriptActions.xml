@@ -26,7 +26,7 @@ Box pos:[100,0,0] name:(UniqueName "ojobox") wirecolor:green
     )
     face_areas
   )
-  format "Object:% Area:% Face:%\n" selection[1].Name (GetFacesArea selection[1]) fsel
+  format "\tObject:% Area:% Face:%\n" selection[1].Name (GetFacesArea selection[1]) fsel
 )
   </item>
   <item name="GetObjectArea">
@@ -43,7 +43,7 @@ fn GetObjectArea obj = (
    )
    faces_area
 )
-format "Object:% Area:%\n" selection[1].Name (GetObjectArea selection[1])
+format "\tObject:% Area:%\n" selection[1].Name (GetObjectArea selection[1])
   </item>
   <item name="GetSelectedVertices">
 fn GetSelectedVertices obj = (
@@ -56,9 +56,35 @@ fn GetSelectedVertices obj = (
         polyOp.getVertSelection obj as array
     )
 )
-format "Object:% Vertices:%\n" selection[1].Name (GetSelectedVertices selection[1])
+format "\tObject:% Vertices:%\n" selection[1].Name (GetSelectedVertices selection[1])
   </item>
-  <item name=""></item>
+  <item name="GetSelectedEdgeLength">
+fn edgeVerts obj theEdge = (
+
+    if not (classof obj == Editable_mesh or classof obj == triMesh) do
+    return undefined
+    if theEdge &lt; 1 or theEdge >(obj.numfaces*3) do
+	  return undefined
+	  local theFace = ((theEdge-1)/3)+1
+	  local theVerts = getFace obj theFace
+    format "\t face index:% face:%" theFace theVerts
+	  case ((mod (theEdge-1)3) as integer) of (
+    
+	    0: point2 theVerts.x theVerts.y
+	    1: point2 theVerts.y theVerts.z
+	    2: point2 theVerts.z theVerts.x
+	  )
+)
+fn getSelectedEdgeLength = (
+
+  local obj = selection[1]
+	local selEdge = (getEdgeSelection obj as array)[1]
+	local eVerts = edgeVerts obj selEdge
+    format "\tObj:% Edge:% Verts:%" obj.name selEdge eVerts
+	distance obj.verts[eVerts[1]].pos obj.verts[eVerts[2]].pos
+)   
+format " Length:%\n" (getSelectedEdgeLength())
+  </item>
   <item name=""></item>
   <item name=""></item>
   <item name=""></item>

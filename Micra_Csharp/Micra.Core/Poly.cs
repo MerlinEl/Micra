@@ -37,6 +37,14 @@ namespace Micra.Core {
         private IMNMesh _IMNMesh { get; } //Autodesk.Max.Wrappers.MNMesh
         internal Poly(IMNMesh m) => _IMNMesh = m;
 
+        public int NumFaces => _IMNMesh.Numf;
+        public int NumEdges => _IMNMesh.Nume;
+        public int NumVerts => _IMNMesh.Numv;
+
+        public List<int> AllFaces => Enumerable.Range(0, NumFaces).ToList();
+        public List<int> AllEdges => Enumerable.Range(0, NumEdges).ToList();
+        public List<int> AllVerts => Enumerable.Range(0, NumVerts).ToList();
+
         internal bool IsFaceSelected(int faceIndex) => _IMNMesh.F(faceIndex).GetFlag((uint)EnumFlags.MNMeshComponent.MN_SEL);
         internal bool IsEdgeSelected(int edgeIndex) => _IMNMesh.E(edgeIndex).GetFlag((uint)EnumFlags.MNMeshComponent.MN_SEL);
         internal bool IsVertSelected(int edgeIndex) => _IMNMesh.V(edgeIndex).GetFlag((uint)EnumFlags.MNMeshComponent.MN_SEL);
@@ -54,26 +62,31 @@ namespace Micra.Core {
         }
         public List<int> GetSelectedFaces() {
 
-            var fsel = new List<int>() { };
-            for ( int i = 0; i < _IMNMesh.Numf; i++ ) if ( IsFaceSelected(i) ) fsel.Add(i);
-            return fsel;
+            return Enumerable.Range(0, NumFaces).Where(i => IsFaceSelected(i)).ToList(); //LinQ Rules!!!
+            /*var fsel = new List<int>() { };
+            for ( int i = 0; i < NumFaces; i++ ) if ( IsFaceSelected(i) ) fsel.Add(i);
+            return fsel;*/
         }
         public List<int> GetSelectedEdges() {
 
-            var esel = new List<int>() { };
-            for ( int i = 0; i < _IMNMesh.Nume; i++ ) if ( IsEdgeSelected(i) ) esel.Add(i);
-            return esel;
+            return Enumerable.Range(0, NumEdges).Where(i => IsEdgeSelected(i)).ToList(); //LinQ Rules!!!
+
+            /*var esel = new List<int>() { };
+            for ( int i = 0; i < NumEdges; i++ ) if ( IsEdgeSelected(i) ) esel.Add(i);
+            return esel;*/
         }
         public List<int> GetSelectedVerts() {
 
-            var vsel = new List<int>() { };
-            for ( int i = 0; i < _IMNMesh.Numv; i++ ) if ( IsVertSelected(i) ) vsel.Add(i);
-            return vsel;
+            return Enumerable.Range(0, NumVerts).Where(i => IsVertSelected(i)).ToList(); //LinQ Rules!!!
+
+            /*var vsel = new List<int>() { };
+            for ( int i = 0; i < NumVerts; i++ ) if ( IsVertSelected(i) ) vsel.Add(i);
+            return vsel;*/
         }
 
         public IBitArray GetFaceElement(int faceIndex) { //TODO -not tested -not used
 
-            IBitArray eleBits = Kernel._Global.BitArray.Create(_IMNMesh.Numf);
+            IBitArray eleBits = Kernel._Global.BitArray.Create(NumFaces);
             //_IMNMesh.FaceSelect(eleBits);
             _IMNMesh.ElementFromFace(faceIndex, eleBits);
             return eleBits;
@@ -92,8 +105,8 @@ namespace Micra.Core {
         /// </summary>
         internal void SetSelectedFaces(List<int> faceIndexes) {
 
-            var bytes = faceIndexes.Select(i => BitConverter.GetBytes(i)).ToArray();
-            IBitArray ba = Kernel.NewIBitarray(_IMNMesh.Numf);
+            //var bytes = faceIndexes.Select(i => BitConverter.GetBytes(i)).ToArray();
+            IBitArray ba = Kernel.NewIBitarray(NumFaces);
             //for each face index which is in range(all faces), set bit to 1(selected) 
             faceIndexes.Where(i => i < ba.Size).ForEach(i => ba.Set(i));
             _IMNMesh.FaceSelect(ba);
@@ -103,8 +116,8 @@ namespace Micra.Core {
 
         internal void SetSelectedEdges(List<int> edgeIndexes) {
 
-            var bytes = edgeIndexes.Select(i => BitConverter.GetBytes(i)).ToArray();
-            IBitArray ba = Kernel.NewIBitarray(_IMNMesh.Nume);
+            //var bytes = edgeIndexes.Select(i => BitConverter.GetBytes(i)).ToArray();
+            IBitArray ba = Kernel.NewIBitarray(NumEdges);
             //for each edge index which is in range(all edges), set bit to 1(selected) 
             edgeIndexes.Where(i => i < ba.Size).ForEach(i => ba.Set(i));
             _IMNMesh.EdgeSelect(ba);
@@ -114,14 +127,27 @@ namespace Micra.Core {
 
         internal void SetSelectedVerts(List<int> vertIndexes) {
 
-            var bytes = vertIndexes.Select(i => BitConverter.GetBytes(i)).ToArray();
-            IBitArray ba = Kernel.NewIBitarray(_IMNMesh.Numv);
+            //var bytes = vertIndexes.Select(i => BitConverter.GetBytes(i)).ToArray();
+            IBitArray ba = Kernel.NewIBitarray(NumVerts);
             //for each vert index which is in range(all verts), set bit to 1(selected) 
             vertIndexes.Where(i => i < ba.Size).ForEach(i => ba.Set(i));
             _IMNMesh.VertexSelect(ba);
             _IMNMesh.InvalidateTopoCache(false);
             _IMNMesh.InvalidateGeomCache();
         }
+
+        public void ClearSelection(string elementType) {
+
+            switch ( elementType ) {
+
+                case "Faces": _IMNMesh.FaceSelect  (Kernel.NewIBitarray(NumFaces)); break;
+                case "Edges": _IMNMesh.EdgeSelect  (Kernel.NewIBitarray(NumEdges)); break;
+                case "Verts": _IMNMesh.VertexSelect(Kernel.NewIBitarray(NumVerts)); break;
+            }
+            _IMNMesh.InvalidateTopoCache(false);
+            _IMNMesh.InvalidateGeomCache();
+        }
+
 
         /// <summary> Calculate Face, Polygon, Ngon Area
         ///     <example> 
@@ -147,6 +173,7 @@ namespace Micra.Core {
 
         public double GetFaceArea(int faceIndex) {
 
+            Throw.IfNotInRange(faceIndex, 0, NumFaces - 1, "Face");
             IMNFace ngon = _IMNMesh.F(faceIndex);
             List<Point3> polygon = ngon.Vtx.Select(vi => VertPos(vi)).ToList();
             Point3 normal = new Point3();
@@ -211,7 +238,7 @@ namespace Micra.Core {
         ///     <para>param: <paramref name="selected"/> > True(Hide Selected), False(Hide Unselected)</para>
         /// </summary>
         internal void HideFaces(bool selected) {
-            Max.Log("HideFaces > on Poly!");
+            //Max.Log("HideFaces > on Poly!");
             for ( int i = 0; i < _IMNMesh.Numf; i++ ) {
 
                 bool isSelected = IsFaceSelected(i);
@@ -228,21 +255,23 @@ namespace Micra.Core {
 
         internal List<int> GetFaceVerts(int faceIndex) {
 
-            Throw.IfLargerThan(faceIndex, _IMNMesh.Numf, "Face");
+            //Throw.IfLargerThan(faceIndex, _IMNMesh.Numf, "Face");
+            Throw.IfNotInRange(faceIndex, 0, NumFaces - 1, "Face");
             return _IMNMesh.F(faceIndex).Vtx.ToList();
         }
 
         internal void UnhideFaces() {
             //_IMNMesh.F.ForEach<IMNFace>(f => ShowFace(f));
-            Max.Log("UnhideFaces > on Poly!");
-            for ( int i = 0; i < _IMNMesh.Numf; i++ ) ShowFace(i);
+            //Max.Log("UnhideFaces > on Poly!");
+            for ( int i = 0; i < NumFaces; i++ ) ShowFace(i);
             _IMNMesh.InvalidateTopoCache(false);
             _IMNMesh.InvalidateGeomCache();
         }
 
         internal double GetEdgeLength(int edgeIndex) {
 
-            Throw.IfLargerThan(edgeIndex, _IMNMesh.ENum, "Edge");
+            //Throw.IfLargerThan(edgeIndex, _IMNMesh.ENum, "Edge");
+            Throw.IfNotInRange(edgeIndex, 0, NumEdges - 1, "Edge");
             IMNEdge edge = _IMNMesh.E(edgeIndex);
             return VertPos(edge.V1).DistanceTo(VertPos(edge.V2));
         }

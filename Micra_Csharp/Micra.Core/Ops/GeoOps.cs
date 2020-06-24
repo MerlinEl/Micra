@@ -1,4 +1,5 @@
 ﻿using Autodesk.Max;
+using Micra.Core.Extensions;
 using Micra.Core.Utils;
 using System;
 using System.Collections.Generic;
@@ -37,12 +38,10 @@ namespace Micra.Core.Ops {
                 .ToList();
             // print data
             Max.Log("\t\tSource unique faces:{0} data:\n\t\t\t{1}", distinctObjData.Count(), String.Join("\n\t\t\t", distinctObjData));
-            //distinctObjData.ForEach(o => Max.Log("\t\tHandle:{0}\n\t\t\tArea:{1}\n\t\t\tVcount:{2}", o.HANDLE, o.AREA, o.VNUM));
-
-            int numF = geo.NumFaces;
-            Max.Log("\t\tAll nodes faces:{0}", numF);
+            //compare objData with all faces
+            Max.Log("\t\tAll nodes faces:{0}", geo.NumFaces);
             List<int> matchFaces = new List<int>() { };
-            for ( int f = 0; f < numF; f++ ) {
+            for ( int f = 0; f < geo.NumFaces; f++ ) {
 
                 if ( objData.FindIndex(o => o.MatchBy(
                          new GeomCompareData(f, Calc.RoundArea(geo.GetFaceArea(f), areaSizeTolerance), geo.GetFaceVerts(f).Count),
@@ -57,7 +56,7 @@ namespace Micra.Core.Ops {
 
             //execute action with undo enabled
             Kernel.Undo.Begin();
-            n.Object.SetSelectedFaces(matchFaces);
+            geo.SetSelectedFaces(matchFaces);
             Kernel.Undo.Accept("Select Simillar Faces");
             Kernel.Undo.End();
         }
@@ -71,36 +70,80 @@ namespace Micra.Core.Ops {
 
             Max.Log("SelectSimillarEdges > The obj:{0}", n.Name);
             Geo geo = new Geo(n);
+
+            //get unique length edges
             var esel = geo.GetSelectedEdges();
-            List<double> source_volumes = esel
+            List<double> srcLengths = esel
                     .Select(i => Calc.RoundArea(geo.GetEdgeLength(i), areaSizeTolerance)).Distinct()
                     .ToList();
-            Max.Log("\t({0}) Lengths:{1}\n", source_volumes.Count, string.Join("\n\t\t", source_volumes));
+            Max.Log("\t({0}) Lengths:{1}\n", srcLengths.Count, string.Join("\n\t\t", srcLengths));
 
+            //get edges with similar volume
+            var allEdges = geo.AllEdges;
+            Max.Log("\tAll edges:{0}", allEdges.Count());
+            List<int> matchEdges = allEdges
+                .Where(ei => srcLengths.IndexOf(
 
-            /*IEnumerable<Node> allEdges = GetAllEdges();
-            Max.Log("\tAll nodes:{0}", allNodes.Count());
-
-            //get geometry objects with similar volume
-            List<Node> matchVolumeNodes = allNodes
-                .Where(n =>
-                    n.IsSuperClassOf(SuperClassID.GeometricObject) && //get all geometry objects
-                    !n.IsClassOf(ClassID.TargetObject) && //exclude any light Target
-                    volumes.IndexOf(n.Object.GetVolume()) != -1
-                 )
-                .Select(n => n)
+                    Calc.RoundArea(geo.GetEdgeLength(ei), areaSizeTolerance)
+                 ) != -1 )
+                .Select(ei => ei)
                 .ToList();
 
-            Max.Log("\tobjects count:{0}", matchVolumeNodes.Count());
+            Max.Log("\tedges count:{0}", matchEdges.Count());
 
             //execute action with undo enabled
-            Kernel._TheHold.Begin();
-            SelectNodes(matchVolumeNodes, true);
-            Kernel._TheHold.Accept("Select Simillar");
-            Kernel._TheHold.End();*/
+            Kernel.Undo.Begin();
+            geo.SetSelectedEdges(matchEdges, true);
+            Kernel.Undo.Accept("Select Simillar Edges");
+            Kernel.Undo.End();
         }
         public static void SelectSimillarEdgeLoops(Node node, float areaSizeTolerance = 0) { }
 
+        public static void UnhideGeometry(Node node) {
+
+            Geo geo = new Geo(node);
+            //TODO add master switch for Modifiers like:(Unwrap, UvMap, ...)
+            switch ( Max.SubObjectLevel ) {
+
+                case 1: geo.UnhideVerts(); break;
+                case 2: geo.UnhideEdges(); break;
+                case 3:
+                if ( node.IsClassOf(ClassID.EditableMesh) ) {
+
+                    geo.UnhideFaces();
+
+                } else if ( node.IsClassOf(ClassID.EditablePoly) ) {
+
+                    geo.UnhideEdges();
+                }
+                break;
+                case 4: geo.UnhideFaces(); break;
+                case 5: geo.UnhideFaces(); break;
+            }
+        }
+
+        public static void HideGeometry(Node node, bool selected) {
+
+            Geo geo = new Geo(node);
+            //TODO replace with switch for Modifiers like:(Unwrap, UvMap, ...)
+            switch ( Max.SubObjectLevel ) {
+
+                case 1: geo.HideVerts(selected); break;
+                case 2: geo.HideEdges(selected); break;
+                case 3:
+                if ( node.IsClassOf(ClassID.EditableMesh) ) {
+
+                    geo.HideFaces(selected);
+
+                } else if ( node.IsClassOf(ClassID.EditablePoly) ) {
+
+                    geo.HideEdges(selected);
+                }
+                break;
+                case 4: geo.HideFaces(selected); break;
+                case 5: geo.HideFaces(selected); break;
+            }
+        }
     }
     internal class GeomCompareData {
 
@@ -126,6 +169,18 @@ namespace Micra.Core.Ops {
     }
 }
 
+
+/*
+            List<int> matchEdges = allEdges
+                .Where(ei => {
+                        double edgeLength = Calc.RoundArea(geo.GetEdgeLength(ei), areaSizeTolerance);
+                        Max.Log("edge:{0} len:{1}", ei, edgeLength);
+                        return srcLengths.IndexOf(edgeLength) != -1;
+                    }
+                 )
+                .Select(ei => ei)
+                .ToList();
+*/
 
 /*
    /// <summary>

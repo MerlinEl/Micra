@@ -110,5 +110,23 @@ namespace Micra.Core {
                 throw new ArgumentOutOfRangeException(argName, argValue, "Minimum value: " + minimumValue.ToString());
             }
         }
+
+        /// <summary> Throws an exception if the supplied value is not in given range
+        ///     <example> 
+        ///         <code>
+		///             example: 
+        ///             Throw.IfNotInRange(edgeIndex, 1, Numf*3, "Edge")
+		///         </code>
+		///     </example>
+        ///     <para>param: <paramref name="minimumValue"/> Minimum Value Range</para>
+        ///     <para>param: <paramref name="maximumValue"/> Maximum Value Range</para>
+        /// </summary>
+        public static void IfNotInRange<T>(T argValue, T minimumValue, T maximumValue, string argName) where T : IComparable<T> {
+            if ( argValue.CompareTo(minimumValue) < 0 || argValue.CompareTo(maximumValue) > 0 ) {
+                throw new ArgumentOutOfRangeException(argName, argValue, 
+                    "Allowed range: [ " + minimumValue.ToString() + ", " + maximumValue.ToString() + " ]"
+                );
+            }
+        }
     }
 }
