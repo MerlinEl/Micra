@@ -67,6 +67,11 @@ struct MICRA_TUKEJ_STRUCTURE	(
 			obj.material = standardMaterial useSelfIllumColor:false selfIllumAmount:100 Diffuse:(color 255 0 234)	
 			format "Create new FusionPositionMarker.\n" 
 		)
+		--check if marker is in right layer and is visible
+		local marker_layer = mcMax.getetOrCreateLayer "Micra_Helpers"
+		marker_layer.addnode obj
+		unhide obj doLayer:true
+		
 		
 		subobjectlevel = 0
 		select obj
