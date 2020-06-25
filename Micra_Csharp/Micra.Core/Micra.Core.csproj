@@ -98,6 +98,7 @@
     <Compile Include="AnimationManager.cs" />
     <Compile Include="Camera.cs" />
     <Compile Include="ClassID.cs" />
+    <Compile Include="Extensions\ArrayBitArrayExtensions.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="Geo.cs" />
     <Compile Include="Prim\PrimitiveFactory.cs" />

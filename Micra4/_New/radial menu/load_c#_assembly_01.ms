@@ -5,7 +5,10 @@ _mcCsharpToMaxTest.owner = mcMicraDialog --bind form in to max window
 _mcCsharpToMaxTest.Show()
 
 
-
+--B --Working example with always latest DLL version
+_mcGeometryOptimizer= mcCSharp.getClassInstance "Micra.Tools.MxGeometryOptimizer" forceLoad:true --one force is enough for reload
+_mcGeometryOptimizer.owner = mcMicraDialog --bind form in to max window
+_mcGeometryOptimizer.Show()
 
 ---------------------
 --Final Method

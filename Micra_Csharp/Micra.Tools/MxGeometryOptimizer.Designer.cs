@@ -246,16 +246,21 @@
             1,
             0,
             0,
-            65536});
+            131072});
             this.SpnAreaOffset.Location = new System.Drawing.Point(72, 48);
+            this.SpnAreaOffset.Maximum = new decimal(new int[] {
+            1000000,
+            0,
+            0,
+            0});
             this.SpnAreaOffset.Name = "SpnAreaOffset";
             this.SpnAreaOffset.Size = new System.Drawing.Size(76, 20);
             this.SpnAreaOffset.TabIndex = 1;
             this.SpnAreaOffset.Value = new decimal(new int[] {
-            10,
+            1,
             0,
             0,
-            0});
+            131072});
             // 
             // groupBox2
             // 

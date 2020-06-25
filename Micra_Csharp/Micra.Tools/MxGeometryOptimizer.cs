@@ -56,10 +56,10 @@ namespace Micra.Tools {
                 Kernel.WriteLine("select objects with simillar volume");
             }*/
 
-            /*MxSet.ExecuteMAXScriptScript("" +
+            MxSet.ExecuteMAXScriptScript("" +
                 "mcPoly.selectSimilarElements selection[1] " +
                 "offset:" + SpnAreaOffset.Value.ToString()
-            );*/
+            );
         }
 
         private void BtnCreateConvexHull_Click(object sender, EventArgs e) {
