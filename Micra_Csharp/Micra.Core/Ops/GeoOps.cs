@@ -170,60 +170,6 @@ namespace Micra.Core.Ops {
 }
 
 
-/*
-            List<int> matchEdges = allEdges
-                .Where(ei => {
-                        double edgeLength = Calc.RoundArea(geo.GetEdgeLength(ei), areaSizeTolerance);
-                        Max.Log("edge:{0} len:{1}", ei, edgeLength);
-                        return srcLengths.IndexOf(edgeLength) != -1;
-                    }
-                 )
-                .Select(ei => ei)
-                .ToList();
-*/
-
-/*
-   /// <summary>
-   /// Returns the polycount of an IINode.
-   /// </summary>
-   public static Int32 GetPolyCount(IINode node)
-   {
-      int time = MaxInterfaces.COREInterface.Time;
-      IObjectWrapper objWrapperX = MaxInterfaces.Global.ObjectWrapper.Create();
-      objWrapperX.Init(time, node.EvalWorldState(time, true), false, enable, nativeType);
-
-      int xNumFaces = objWrapperX.NumFaces;
-      objWrapperX.Release();
-      return xNumFaces;
-   }
-*/
-
-/*//https://forums.cgsociety.org/t/get-uv-faces-area/2058271/5
-//not good to pick up all data for calculating area of one face
-//TODO take area from vertices
-public static double GetFaceArea(IMNMesh m, int fi) { //TODO -not tested -not used
-
-    Max.Log("\tSelected polygon index:{0} total:{1}", fi + 1, m.FNum); //+1 Max count
-    return new Poly(m).Area(fi); //Poly object will be filled with All face indexes and vertices positions
-
-    IMNFace f = m.F(fi);
-
-    Max.Log("face verts:{0} count:{1}", f.Vtx, f.Vtx.Count);
-
-    ITab<int> triangles = Kernel._Global.Tab.Create<int>();
-    f.GetTriangles(triangles); // get the tri (as indices of the face vert array)
-    int numtriangles = f.Deg - 2;
-    for ( int t = 0; t < numtriangles; ++t ) {
-
-        int i = t * 3;
-        int v1 = triangles[i];
-        int v2 = triangles[i + 1];
-        int v3 = triangles[i + 2];
-        Max.Log("\t\tFace:{0} v1:{1} v1:{2} v1:{3}", i, v1,  v2, v3);
-        //AreaOfTriangle
-    }*/
-
-
 /*Max.Log("first vert:{0}", triangles[0]);
 
 Max.Log("\tPolygon vers:{0} total triangles:{1}", triangles.Count, m.TriNum);

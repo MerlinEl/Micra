@@ -65,22 +65,6 @@ namespace Micra.Core.Extensions {
             return nodes;
         }
 
-        /// <summary> Cast IEnumerable<ints> in to IBitarray (not used - need test)
-        ///     <example> 
-        ///         <code>
-		///             example: 
-        ///             Enumerable.Range(0, 10).Select(i=> 1).ToBitArray() //set all 10 bits to true
-		///         </code>
-		///     </example>
-        ///     <para>param: <paramref name=""/></para>
-        /// </summary>
-        public static IBitArray ToBitArray(this IEnumerable<int> bitList) {
-
-            IBitArray barr = Kernel.NewIBitarray(bitList.Count());
-            bitList.ForEach(i => barr.Set(i));
-            return barr;
-        }
-
         /// <summary> Lop trough custommers and set the parameter for tohse which fullfill condition
         ///     <example> 
         ///         <code>

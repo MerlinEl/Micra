@@ -269,7 +269,7 @@ namespace Micra.Core {
         }
 
         internal double GetEdgeLength(int edgeIndex) {
-
+            
             //Throw.IfLargerThan(edgeIndex, _IMNMesh.ENum, "Edge");
             Throw.IfNotInRange(edgeIndex, 0, NumEdges - 1, "Edge");
             IMNEdge edge = _IMNMesh.E(edgeIndex);
@@ -277,6 +277,33 @@ namespace Micra.Core {
         }
     }
 }
+
+/*//https://forums.cgsociety.org/t/get-uv-faces-area/2058271/5
+//not good to pick up all data for calculating area of one face
+//TODO take area from vertices
+public static double GetFaceArea(IMNMesh m, int fi) { //TODO -not tested -not used
+
+    Max.Log("\tSelected polygon index:{0} total:{1}", fi + 1, m.FNum); //+1 Max count
+    return new Poly(m).Area(fi); //Poly object will be filled with All face indexes and vertices positions
+
+    IMNFace f = m.F(fi);
+
+    Max.Log("face verts:{0} count:{1}", f.Vtx, f.Vtx.Count);
+
+    ITab<int> triangles = Kernel._Global.Tab.Create<int>();
+    f.GetTriangles(triangles); // get the tri (as indices of the face vert array)
+    int numtriangles = f.Deg - 2;
+    for ( int t = 0; t < numtriangles; ++t ) {
+
+        int i = t * 3;
+        int v1 = triangles[i];
+        int v2 = triangles[i + 1];
+        int v3 = triangles[i + 2];
+        Max.Log("\t\tFace:{0} v1:{1} v1:{2} v1:{3}", i, v1,  v2, v3);
+        //AreaOfTriangle
+    }*/
+
+
 /*
 if ( _IMNMesh.Nume < edgeIndex - 1 ) throw new InvalidOperationException(
                 String.Format("Edge index({0}) is out of range({1}).", edgeIndex, _IMNMesh.Nume)

@@ -1,3 +1,18 @@
+/// <summary>
+/// Returns the polycount of an IINode.
+/// </summary>
+public static Int32 GetPolyCount(IINode node) {
+    int time = MaxInterfaces.COREInterface.Time;
+    IObjectWrapper objWrapperX = MaxInterfaces.Global.ObjectWrapper.Create();
+    objWrapperX.Init(time, node.EvalWorldState(time, true), false, enable, nativeType);
+
+    int xNumFaces = objWrapperX.NumFaces;
+    objWrapperX.Release();
+    return xNumFaces;
+}
+
+
+
 BitArray* IMXSExposure::GetMeshMapSeams(const Mesh* mesh, int mapChannel) const {
     if (!mesh || !mesh->mapSupport(mapChannel))
         return nullptr; // translates to 'undefined' in MAXScript
