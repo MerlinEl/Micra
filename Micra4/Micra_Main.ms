@@ -161,13 +161,14 @@ struct MICRA_STRUCTURE (
 		fn restorePos dname dpath user_xml max_size = (
 			
 			local dpos = execute (mcFile.readSettings user_xml dpath type:"pos")
-			if dpos.x > max_size.x or dpos.x < 0  then (
+			if dpos.x > max_size.x or dpos.x < 0  do (
 
 				format "MOVE > dialog% from:% to:%\n" dname dpos.x max_size.x
 				dpos.x = max_size.x
-			) else (
-
-				format "SKIP > dialog:% pos:%\n" dname dpos
+			)
+			if dpos.y > max_size.y or dpos.y < 0  do (
+			
+				dpos.y = max_size.y
 			)
 			mcFile.saveSettings user_xml dpath (dpos as string) type:"pos"
 		)
