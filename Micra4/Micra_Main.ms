@@ -161,20 +161,21 @@ struct MICRA_STRUCTURE (
 		fn restorePos dname dpath user_xml max_size = (
 			
 			local dpos = execute (mcFile.readSettings user_xml dpath type:"pos")
-			if dpos.x > max_size.x or dpos.x < 0  then (
+			if dpos.x > max_size.x or dpos.x < 0  do (
 
 				format "MOVE > dialog% from:% to:%\n" dname dpos.x max_size.x
 				dpos.x = max_size.x
-			) else (
-
-				format "SKIP > dialog:% pos:%\n" dname dpos
+			)
+			if dpos.y > max_size.y or dpos.y < 0  do (
+			
+				dpos.y = max_size.y
 			)
 			mcFile.saveSettings user_xml dpath (dpos as string) type:"pos"
 		)
 		for n in dialogs_names_1 do restorePos n ("Properties_1/"+n) user_xml max_size
 		for n in dialogs_names_2 do restorePos n ("Properties_2/"+n) user_xml max_size
-		if mcMicraDialog.location.x  > max_size.x or mcMicraDialog.location.x < 0 do  mcMicraDialog.location.x = max_size.x
 		load()
+		if mcMicraDialog.location.x  > max_size.x or mcMicraDialog.location.x < 0 do  mcMicraDialog.location.x = max_size.x
 		messageBox "Done!" title:"Micra:"
 	),
 	--Get last used Profile ( Profile_1.xml, ..., Profile_8.xml)
