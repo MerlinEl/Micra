@@ -1,28 +1,28 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <USER val="Default">
   <Properties_1>
-    <mc_Dialog_A active="true" pos="[1507,722]" size="[148,66]" title="Menu:" btnCount="[6,2]" />
-    <mc_Dialog_B active="true" pos="[1505,209]" size="[148,162]" title="Object:" btnCount="[6,6]" />
-    <mc_Dialog_C active="true" pos="[1505,371]" size="[148,66]" title="Pivot:" btnCount="[6,2]" />
-    <mc_Dialog_D active="true" pos="[1505,437]" size="[148,90]" title="Select:" btnCount="[6,3]" />
-    <mc_Dialog_E active="false" pos="[100,843]" size="[244,42]" title="Animation:" btnCount="[10,1]" />
-    <mc_Dialog_F active="true" pos="[1244,132]" size="[196,90]" title="Modifiers:" btnCount="[8,3]" />
-    <mc_Dialog_G active="true" pos="[1507,566]" size="[148,90]" title="Modify:" btnCount="[6,3]" />
-    <mc_Dialog_H active="true" pos="[1507,656]" size="[148,66]" title="Materials:" btnCount="[6,2]" />
-    <mc_Dialog_I active="true" pos="[1507,788]" size="[148,66]" title="Programming:" btnCount="[6,2]" />
-    <mc_Dialog_J active="true" pos="[1203,935]" size="[460,42]" title="Experimental:" btnCount="[19,1]" />
+    <mc_Dialog_A active="true" pos="[1640,784]" size="[148,66]" title="Menu:" btnCount="[6,2]" />
+    <mc_Dialog_B active="true" pos="[1639,310]" size="[148,162]" title="Object:" btnCount="[6,6]" />
+    <mc_Dialog_C active="true" pos="[1640,472]" size="[148,66]" title="Pivot:" btnCount="[6,2]" />
+    <mc_Dialog_D active="true" pos="[1640,538]" size="[148,90]" title="Select:" btnCount="[6,3]" />
+    <mc_Dialog_E active="true" pos="[1423,1227]" size="[364,42]" title="Animation:" btnCount="[15,1]" />
+    <mc_Dialog_F active="true" pos="[1443,244]" size="[196,90]" title="Modifiers:" btnCount="[8,3]" />
+    <mc_Dialog_G active="true" pos="[1640,628]" size="[148,90]" title="Modify:" btnCount="[6,3]" />
+    <mc_Dialog_H active="true" pos="[1640,718]" size="[148,66]" title="Materials:" btnCount="[6,2]" />
+    <mc_Dialog_I active="true" pos="[1640,850]" size="[148,66]" title="Programming:" btnCount="[6,2]" />
+    <mc_Dialog_J active="true" pos="[1327,1269]" size="[460,42]" title="Experimental:" btnCount="[19,1]" />
   </Properties_1>
   <Properties_2>
-    <mcMicraDialog active="true" pos="[1505,143]" size="[148,66]" title="" />
-    <mcCustomizeDialog active="false" pos="[1180,300]" size="[224,404]" title="" />
+    <mcMicraDialog active="true" pos="[1639,244]" size="[148,66]" title="" />
+    <mcCustomizeDialog active="false" pos="[630,370]" size="[224,404]" title="" />
     <mcProgramDialog active="false" pos="[100,0]" size="[256,232]" title="" />
     <mcisoDialog active="false" pos="[100,152]" size="[140,400]" title="" />
     <mcModifierDialog active="false" pos="[100,100]" size="[400,400]" title="" />
     <mcIconMakerDialog active="false" pos="[670,440]" size="[730,500]" title="" />
     <mcDeepIsolateDialog active="false" pos="[1090,180]" size="[84,44]" title="" />
-    <mcMoveTowardsDialog active="false" pos="[100,377]" size="[200,76]" title="" />
+    <mcMoveTowardsDialog active="true" pos="[100,377]" size="[200,76]" title="" />
     <mcClonerDialog active="true" pos="[126,185]" size="[164,296]" title="" />
-    <mcRenameDialog active="true" pos="[100,280]" size="[224,312]" title="" />
+    <mcRenameDialog active="true" pos="[352,138]" size="[224,368]" title="" />
     <mcObjectPlanterDialog active="false" pos="[100,201]" size="[356,92]" title="" />
     <mcPivotPlanterDialog active="false" pos="[100,308]" size="[116,141]" title="" />
     <mcRepairDialog active="false" pos="[100,307]" size="[144,152]" title="" />
@@ -30,8 +30,8 @@
     <mcResizeUVWDialog active="false" pos="[100,463]" size="[240,56]" title="" />
     <mcLodeTestDialog active="true" pos="[499,454]" size="[328,164]" title="" />
     <mcLpWizardDialog active="true" pos="[620,198]" size="[528,84]" title="" />
-    <mcCharSelectDialog active="false" pos="[100,390]" size="[212,388]" title="" />
-    <mcCharPoseDialog active="false" pos="[100,304]" size="[146,388]" title="" />
+    <mcCharSelectDialog active="true" pos="[375,273]" size="[212,388]" title="" />
+    <mcCharPoseDialog active="true" pos="[100,304]" size="[146,388]" title="" />
     <mcSaveProfileAsDialog active="true" pos="[1300,280]" size="[240,66]" title="" />
     <mcDgalleryDialog active="false" pos="[100,148]" size="[875,850]" title="" />
     <mcRandomizeDialog active="false" pos="[100,152]" size="[152,332]" title="" />
@@ -55,7 +55,7 @@
     <gMcDrawBezierDialog active="true" pos="[-734,424]" size="[644,502]" />
     <mcUnwrapToolbardialog active="false" pos="[70,390]" size="[220,200]" />
     <mcPopUp active="true" pos="[90,313]" size="[810,68]" />
-    <mcObjectInpectorDialog active="true" pos="[785,294]" size="[344,464]" />
+    <mcObjectInpectorDialog active="true" pos="[244,216]" size="[344,464]" />
     <mcCityManDialog active="true" pos="[480,76]" size="[500,988]" />
   </Properties_2>
   <Buttons>
@@ -208,5 +208,21 @@
     <btn_J13 action="Max_To_Blender" icon="287" />
     <btn_J17 action="Road_Markings" icon="288" />
     <btn_J8 action="City_Manager" icon="241" />
+    <btn_J16 action="Create_Point_At_Vertex" icon="268" />
+    <btn_J7 action="Vertex_Snap" icon="267" />
+    <btn_J14 action="Fit_Max_Windows" icon="313" />
+    <btn_J15 action="Toggle_Layer_Explorer" icon="311" />
+    <btn_J11 action="Delete_Empty_Layers" icon="269" />
+    <btn_E12 action="Paste_Pose" icon="312" />
+    <btn_E11 action="Copy_Pose" icon="130" />
+    <btn_E10 action="Load_Skin_Data" icon="286" />
+    <btn_E9 action="Save_Skin_Data" icon="314" />
+    <btn_B36 action="Paste_TM_From_Clipboard" icon="253" />
+    <btn_B35 action="Copy_TM_To_Clipboard" icon="252" />
+    <btn_E7 action="Setup_Character_Render" icon="144" />
+    <btn_E8 action="Add_Character_Audio" icon="317" />
+    <btn_E6 action="Mirror_Bone_Verts" icon="315" />
+    <btn_E13 action="Add_Visibility_Track" icon="316" />
+    <btn_E15 action="Character_Bip_Tool" icon="314" />
   </Buttons>
 </USER>

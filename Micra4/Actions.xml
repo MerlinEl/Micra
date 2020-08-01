@@ -44,6 +44,9 @@
     <FBX_Quick_Import_Export icon="277" cmd="mcFile.fileInVersion FBX_Quick_Import_Export" tooltip="FBX Quick Import Export" />
     <Move_To_Surface icon="280" cmd="mcAction.moveObjectToSurface()" tooltip="Move To Surface" />
     <Geometry_Projector_2D icon="11" cmd="mcFile.fileInVersion Geometry_Projector2D" tooltip="Geometry Projector 2D" />
+    <Toggle_Layer_Explorer icon="311" cmd="mcMax.toggleLayerExplorer()" tooltip="Toggle Layer Explorer" />
+    <Copy_TM_To_Clipboard icon="252" cmd="mcTransform.copyTmToClipboard()" tooltip="Copy TM To Clipboard" />
+    <Paste_TM_From_Clipboard icon="253" cmd="mcTransform.pasteTMFromClipboard()" tooltip="Paste TM From Clipboard" />
   </Object>
   <Pivot>
     <Afect_Pivot_Only icon="51" cmd="mcAction.pivot_affect_only()" tooltip="Afect Pivot Only" />
@@ -198,6 +201,7 @@
     <Icon_Maker icon="247" cmd="mcFile.fileInVersion Icon_Maker" tooltip="Icon Maker" />
     <Autosave_Switch icon="3" cmd="mcSystem.autosaveSwitch()" tooltip="Autosave Switch" />
     <Keyboard_Switch icon="257" cmd="mcSystem.keyboardSwitch()" tooltip="Keyboard Switch'" />
+    <Fit_Max_Windows icon="313" cmd="mcAction.fitMaxWindows()" tooltip="Fit Max Windows" />
   </Programming>
   <Material>
     <Edit_Textures icon="136" cmd="mcSystem.editTexturesInPhotoshop()" tooltip="Edit Textures" />
@@ -236,6 +240,15 @@
     <Reverse_Animation icon="106" cmd="mcAnimation.reverse 0 10" tooltip="Reverse Animation" />
     <Copy_Animation icon="193" cmd="mcAnimation.store()" tooltip="Copy Animation" />
     <Paste_Animation icon="194" cmd="mcAnimation.paste()" tooltip="Paste Animation" />
+    <Copy_Bones_Transform icon="262" cmd="mcBones.copyTransform()" tooltip="Copy Bones Transform" />
+    <Paste_Bones_Transform icon="262" cmd="mcBones.pasteTransform()" tooltip="Paste Bones Transform" />
+    <Copy_Pose icon="130" cmd="mcBones.copyPose()" tooltip="Copy Pose" />
+    <Paste_Pose icon="312" cmd="mcBones.pastePose()" tooltip="Paste Pose" />
+    <Save_Skin_Data icon="314" cmd="mcBiped.saveSkinData()" tooltip="Save Skin Data" />
+    <Load_Skin_Data icon="286" cmd="mcBiped.loadSkinData()" tooltip="Load Skin Data" />
+    <Mirror_Bone_Verts icon="315" cmd="mcBiped.mirrorSelectedBoneVerts()" tooltip="Mirror Bone Verts" />
+    <Add_Visibility_Track icon="316" cmd="mcAnimation.addVisibilityTrack()" tooltip="Add Visibility Track" />
+    <Character_Bip_Tool icon="314" cmd="mcFile.fileInVersion Character_Tool" tooltip="Character Bip Tool" />
   </Animation>
   <Skinning>
     <Add_Weapon_Skin icon="130" cmd="mcSkin.wpnSetupSkin()" tooltip="Add Weapon Skin" />
@@ -253,4 +266,8 @@
     <Road_Markings icon="288" cmd="mcFile.fileInVersion Road_Generator_Marking" tooltip="Road Markings" />
     <Move_Object_To_Fusion_Position icon="310" cmd="mcActionsTukej.moveObjectToFusionPos()" tooltip="Move Object To Fusion Position" />
   </TuKej>
+  <Ns>
+    <Setup_Character_Render icon="144" cmd="mcAction.setupCharacterRender()" tooltip="Setup Character Render" />
+    <Add_Character_Audio icon="317" cmd="mcAction.addCharacterAudio()" tooltip="Add Character Audio" />
+  </Ns>
 </ACTIONS>

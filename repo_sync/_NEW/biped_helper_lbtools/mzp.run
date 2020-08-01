@@ -1,0 +1,7 @@
+name "Biped Helper"
+version 2.4
+copy LBTools_*.ms to $userStartupScripts
+copy LBTools_*.pdf to $userStartupScripts
+copy *.bmp to $usericons
+drop "run.ms"
+clear temp

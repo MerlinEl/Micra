@@ -145,6 +145,50 @@ struct MICRA_MAX_STRUCTURE	(
 			)
 		)
 		return counter
+	),
+	fn saveLayerExplorerSettings explorer_name = (
+		
+		local cfgpath = pathConfig.GetDir #plugcfg
+		cfgpath = pathConfig.appendPath cfgpath "ExplorerConfig\SceneExplorer"
+		local fileName = "Default" + explorer_name + ".ini"
+		local cfgfile = pathConfig.appendPath cfgpath fileName
+		--A Resource ID is identified as a name surrounded by tildes, for example ~LIGHT_LISTER_DIALOG_NAME~. 
+		--c:\Program Files\Autodesk\3ds Max 2018\en-US\MacroScripts\Macro_SceneExplorer.mcr.res
+		local SEQ_MAKEDEFAULT_TT = "Save Active Explorer to Default"
+		local INI_FILES_TYPES = "INI (*.ini)|*.ini|All|*.*|"
+		local SEQ_MAKEDEFAULT = "Save Active Explorer to Default"
+		local fName = getSaveFileName filename:cfgfile caption:SEQ_MAKEDEFAULT_TT types:INI_FILES_TYPES historyCategory:SEQ_MAKEDEFAULT
+-- 		initialDir:(cfgpath)
+		if fName != undefined do  (
+			SceneExplorerManager.SaveExplorerConfiguration explorer_name fName
+		)
+	),
+	fn toggleLayerExplorer = (
+		
+		local explorer_name = "LightExplorer"
+		if not (SceneExplorerManager.ExplorerExists explorer_name) do (
+			
+			SceneExplorerManager.CreateADefaultExplorer explorer_name
+			--SceneExplorerManager.CreateExplorerFromDefault explorer_name
+		) 
+		if keyboard.controlPressed do (
+			saveLayerExplorerSettings explorer_name
+			return ok
+		)
+		if SceneExplorerManager.ExplorerIsOpen explorer_name then (
+			
+			SceneExplorerManager.CloseExplorer explorer_name
+			
+		) else (
+			
+			SceneExplorerManager.OpenExplorer explorer_name
+		)
+-- 		macros.run "Scene Explorer" "SELayerExplorer"
+-- 		iLayerManager.show
+-- 		SceneExplorerManager.CreateExplorerFromDefault "Light Explorer"
+-- 		SceneExplorerManager.GetActiveExplorer()
+-- 		SceneExplorerManager.GetActiveExplorerHwnd()
+-- 		SceneExplorerManager.SaveExplorerConfiguration <&String>explorerName <&String>outputConfigurationFile
 	)
 	/*<end>*/
 )	

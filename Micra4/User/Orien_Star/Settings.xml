@@ -9,11 +9,13 @@
     <CurrentProfile val="1" />
     <DialogSnap val="true" />
     <AimScaleFactor val="10" />
-    <SaveWirecolor val="off" />
+    <SaveWirecolor val="on" />
     <SaveLinks val="on" />
     <BlenderAppPath val="E:\Aprog\Blender\blender.exe" />
     <BlenderScriptsPath val="E:\Aprog\Blender\2.81\scripts\startup\" />
     <BlenderBridgeAutorun val="true" />
+    <ZBrushScaleFactor val="0.01" />
+    <SaveLayer val="on" />
   </Settings>
   <Profiles>
     <menu_1 val="Default" />

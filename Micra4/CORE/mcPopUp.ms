@@ -29,7 +29,7 @@ Global mcPopUp
 	::mcPopUp.show "But this also aligns the label control to the centre" title:"Info:" pos:[90, 313]
 	::mcPopUp.show "DotNet controls cannot only be placed inside 3ds Max Dialogs and Rollouts, but they can also be used to generate user interfaces implemented completely using DotNet Forms." title:"Info:" pos:[90, 313]
 	if (::mcPopUp.show "Do you want create a 'New Scene'?." title:"Micra:" type:#YesNo) == true then (format "Accepted\n") else (format "Canceled:\n")
-	
+	::mcPopUp.show "0.0001" title:"Change Scale Ratio in Cm:" type:#Input
 	::mcPopUp.show "Tpe new object Name" title:"Collapse stack:" type:#Input
 *
 */
@@ -103,7 +103,7 @@ private
 	fn onTitleBarMouseMove s a = (  --drag form
 	
 		local _mcs = mcPopUp --struct instance
-		if _mcs.netDMove do  mcDialog.moveAndSnap _mcs.form
+		if _mcs.netDMove do  ::mcDialog.moveAndSnap _mcs.form
 	),
 	fn onTitleBarMouseDown s a = ( --start drag
 			
@@ -111,7 +111,7 @@ private
 		_mcs.form.cursor.current = mcDotnet.cursors.Hand
 		if a.Button == a.Button.left do ( --enable drag
 		
-			mcDialog.init _mcs.form
+			::mcDialog.init _mcs.form
 			_mcs.netDMove = true 
 		)
 	),
@@ -187,6 +187,12 @@ private
 		mcPopUp.form_output = false
 		mcPopUp.close()
 	),
+	/*fn textBoxMouseEnter s a  = (
+		enableAccelerators = true
+	),
+	fn textBoxMouseLeave s a  = (
+		enableAccelerators = false
+	),*/
 	fn textBoxKeyUp s a  = (
 		
 		case a.Keycode.toString() of ( --when pressed Escape
@@ -316,6 +322,8 @@ private
 		dotNet.addEventHandler btnCancel  "MouseUp" onBtnCancel
 		dotNet.addEventHandler textLayout  "Resize" onTextResize
 		dotnet.addeventhandler dtimer "Elapsed" onTimeElapsed
+		-- dotnet.addEventHandler edtBox "MouseEnter" textBoxMouseEnter
+		-- dotnet.addEventHandler edtBox "MouseLeave" textBoxMouseLeave
 		dotnet.addEventHandler edtBox "KeyUp" textBoxKeyUp
 		dotnet.addEventHandler edtBox "KeyDown" textBoxKeyDown
 		

@@ -38,6 +38,7 @@
     <mcSecurity val="on" info="popup windows of any type" />
     <mcGM val="on" />
     <mcAnimation val="on" />
+    <mcBiped val="on" info="Biped Skeleton functions"/>
     <mcArray val="on" />
     <mcFile val="on" info="read - write functions" />
     <mcInfo val="on" />
@@ -109,7 +110,7 @@
     <Paint_Selection val="0.05" />
     <Pivot_Planter val="2.03" />
     <Randomize val="0.01" />
-    <Rename val="0.02" />
+    <Rename val="0.03" />
     <Render_To_Texture_Mod val="0.04" />
     <Repair_Object val="1.09" />
     <Manage_Profiles val="0.06" />

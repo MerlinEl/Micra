@@ -17,9 +17,20 @@ Global mcTempControllerData
 	undefined
 *
 */
-struct mcAnimation
+struct MICRA_ANIMATION_STRUCT
 (
 	fn getSource = getSourceFileName(), --get path of this script
+	fn openTrackView tName:"Orien" tHeight:300 = (
+			if trackviews.numTrackViews() == 0 then (
+				--<boolean>trackviews.open <fpvalue>name or index [layoutName:<string>] [pos:<point2>] [width:<integer>] [height:<integer>] [dock:<enum>] 
+				--trackviews.open "Dope Sheet Editor" layoutName:"Orien" pos:[300,100] width:800 height:400 dock:#bottom --enums: {#float|#top|#bottom|#canDockOnTop} 
+				trackviews.open "Dope Sheet Editor" layoutName:tName height:tHeight dock:#right
+			) else (
+				if trackviews.isOpen "Dope Sheet Editor"
+				then trackviews.close "Dope Sheet Editor"
+				else trackviews.open "Dope Sheet Editor" layoutName:tName height:tHeight dock:#right
+			)
+	),
 	fn reverse begin end =
 	(
 		sel = selection as array
@@ -47,6 +58,28 @@ struct mcAnimation
 			obj.scale.controller    = mcTempControllerData[3]
 			obj.pos = old_obj_pos
 		)
+	),
+	fn addVisibilityTrack = (
+		
+		--currentTime
+		for o in selection do animate on (
+			
+			at time 0 (o.visibility = 0 ) --brgin
+			at time (animationRange.end /2 ) (o.visibility = 1) --half time
+			at time animationRange.end  (o.visibility = 0) --end
+		)
+		--openTrackView()
 	)
 	/*<end>*/
 )
+
+mcAnimation = MICRA_ANIMATION_STRUCT()
+
+/*
+if trackviews.isOpen “Curve Editor”
+then trackviews.close “Curve Editor”
+else trackviews.open “Curve Editor” layoutName:“Orien” height:300 dock:#bottom
+		--C:\Program Files\Autodesk\3ds Max 2018\en-US\MacroScripts\Macro_TrackView.mcr.res
+		local TRACK_VIEW_DOPE_SHEET_CAPTION  =  "Track View - Dope Sheet" 
+		trackviews.open TRACK_VIEW_DOPE_SHEET_CAPTION
+*/

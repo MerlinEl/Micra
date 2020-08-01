@@ -150,6 +150,7 @@
     <Script_Editor val="Programovaci nastroje , slouzi pro vylepseni nebo opravy teto aplikace." />
     <Viewport_Recorder val="Muzes si nahrat postup sve prace do animovaneho gif souboru." />
     <Autosave_Switch val="Přepínač, který vypne - zapne Autosave." />
+    <Fit_MaxWindow />
   </Programming>
   <Material>
     <Edit_Textures val="Otevre Textury v aplikaci Photoshop. Oznac materail nebo objekty." />
@@ -181,6 +182,9 @@
     <Reverse_Animation val="Reverzne Animaci." />
     <Copy_Animation val="Copy animation from a object." />
     <Paste_Animation val="Paste animation to an object." />
+    <Load_Skin_Data />
+    <Save_Skin_Data />
+    <Character_Bip_Tool />
   </Animation>
   <Skinning>
     <Add_Weapon_Skin val="Prida skin na zbran a nastavi parametry" />
@@ -194,4 +198,7 @@
     <Select_Player val="Exportuje všechny nody ve scéně." />
     <Move_Object_To_Fusion_Position />
   </TuKej>
+  <Ns>
+    <Add_Character_Audio />
+  </Ns>
 </ACTIONS>

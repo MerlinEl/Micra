@@ -15,7 +15,7 @@
 	undefined
 *
 */
-struct MICRA_NEW_STRUCTURE	(
+struct MICRA_NODE_STRUCTURE	(
 	
 	--variables
 
@@ -26,4 +26,4 @@ struct MICRA_NEW_STRUCTURE	(
 	/*<end>*/
 )	
  --create instance
-Global mcNode = mcStructMan.instanceStructure MICRA_NEW_STRUCTURE "mcNode"
+Global mcNode = mcStructMan.instanceStructure MICRA_NODE_STRUCTURE "mcNode"

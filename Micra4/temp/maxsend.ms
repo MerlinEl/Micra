@@ -1,4 +1,4 @@
--- format "progress:%\n" 3
+format "progress:%\n" 3
 -- mcProgRad.form.invalidate()
 -- mcProgRad.progressTo 60 msg:"Processing..."
 	-- mcProgRad.progressTo 100 msg:"Processing Finished:"
@@ -7,4 +7,4 @@
 	
 -- mousehook.mouseops.release()
 --mcPopUp.close()
-saveMaxFile "c:/temp/reco.max" useNewFile:false
+--saveMaxFile "c:/temp/reco.max" useNewFile:false

@@ -1282,12 +1282,11 @@ struct mcAction (
 	),
 	fn scale_to_zb = undo "Scale To ZBrush" on (
 		--todo create boundinjg box with correct size not sphere
-		local scale_ratio = 0.0001
+		--load ratio from xml
+		local scale_ratio = execute (mcFile.readSettings micra.UserSettings "USER/Settings/ZBrushScaleFactor")
+		if ClassOf scale_ratio != Float and ClassOf scale_ratio != Integer do scale_ratio = 0.0001
 		if keyboard.controlPressed do (
-			--load ratio from xml
-			scale_ratio = execute (mcFile.readSettings micra.UserSettings "USER/Settings/ZBrushScaleFactor")
-			if ClassOf scale_ratio != Float and  ClassOf scale_ratio != Integer do (
-				
+			
 				local str = (mcPopUp.show "0.0001" title:"Change Scale Ratio in Cm:" type:#Input)
 				if ClassOf str != String do return false
 				scale_ratio = execute str
@@ -1296,17 +1295,15 @@ struct mcAction (
 					mcFile.saveSettings micra.UserSettings "USER/Settings/ZBrushScaleFactor" str	
 					
 				) else (
-
 					scale_ratio = 0.0001
 				)
-			) 
 		)
 		format "scale to ZB in ratio:%\n" scale_ratio
 		--Global BEFORE_TO_ZB_DATA = mcObject()
 		local cnt = 1
 		for o in selection where superClassOf o == GeometryClass do (
 			
-			if o.scale.x != 1 do (
+			if ceil o.scale.x != 1 do (
 				
 				format "Skiped object: [ % ] Scale must be 1\n" o.name
 				continue
@@ -2652,6 +2649,49 @@ struct mcAction (
 				mcSnap.setSnapSettings snap_settings
 			)
 		)*/
+	),
+	fn fitMaxWindows = (
+		
+		::mcSystem.setMaxBounds 0 0 2053 1440
+		::mcSystem.setListenerBounds  -839 390 840 1050
+		::mcSystem.setMxsEditorBounds 2052 0 1388 1440
+	),
+	fn setupCharacterRender = (
+		
+		rendTimeType = 2 --Active time segment ( animationRange ). 
+		setRenderType #view
+		renderWidth = 550
+		renderHeight = 400
+		renderPixelAspect = 1.0
+		rendSaveFile = true
+		local fname = (getFilenameFile maxFileName)
+		local dirname =  mcString.join (filterString fname "_") 
+		local fpath = maxFilePath + "render" + @"\" + dirname + @"\" + dirname + "0000.png"
+		rendOutputFilename = fpath
+		format "Set Render output to:%\n" fpath
+	),
+	fn addCharacterAudio = (
+		
+		--remove all sound tracks
+		while prosound.NumTracks() > 0 do prosound.delete 1
+		--add current sound track
+		local sndpath = maxFilePath + "audio\\" + (getFilenameFile maxFileName) + ".wav"
+		format "Loading Audio [%] :" sndpath
+		if doesFileExist sndpath then (
+			format " success!\n"
+			prosound.append sndpath --adds a file
+
+			/*actionMan.executeAction 1 "280"  -- Track View: Add/Remove Keys
+			addNewKey rootScene[#Sound][#_Master_Waveform] 0f #select
+			rootScene[#Sound][#_Master_Waveform].keys[1].value = 0.1*/
+
+-- 			mySphere = Sphere()
+-- 			mySphere.radius.controller = AudioFloat()
+-- 			wavSound.filename = "c:\temp\\sonar.wav"
+-- 			at time wavsound.start with animate on ( mySphere.radius = 1.0 )
+-- 			at time wavsound.end with animate on ( mySphere.radius = 100.0 )
+			
+		) else format " failed!\n"
 	)
 	/*<end>*/
 )

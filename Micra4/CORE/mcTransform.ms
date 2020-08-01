@@ -85,6 +85,45 @@ struct mcTransform (
 			#lenght:max.y-min.y
 			#height:max.z-min.z
 		)
+	),
+	fn copyTmToClipboard = (
+		
+		local obj = selection[1]
+		case classOf obj of (
+			
+			PolyMeshObject : (
+				
+				setClipboardText (obj.transform as string)	
+			)
+			Targetcamera : (
+				
+				setClipboardText (obj.transform as string + "|" + obj.target.transform as string)	
+			)	
+		)
+	),
+	fn pasteTMFromClipboard = (
+		
+		local obj = selection[1]
+		case classOf obj of (
+			
+			PolyMeshObject : (
+				
+				local tm = execute (getClipboardText())
+				if classOf tm	== Matrix3 do obj.transform = tm
+			)
+			Targetcamera : (
+				
+				local tm_str_arr = splitString (getClipboardText()) "|"
+				if tm_str_arr.count != 2 do return false
+				local tm1 = execute tm_str_arr[1]
+				local tm2 = execute tm_str_arr[2]
+				if classOf tm1	== Matrix3 and classOf tm2 == Matrix3 do (
+					
+					obj.transform = tm1
+					obj.target.transform = tm2
+				)
+			)	
+		)
 	)
 	/*<end>*/
 )

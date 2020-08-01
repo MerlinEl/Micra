@@ -73,6 +73,7 @@ Public
 	fn lastIndexOf str val = ((dotnetObject "System.String" str).lastIndexOf val),
 	fn contains str value = (findstring str value != undefined), --mcString.contains mcString.testr "we"
 	fn split str value = (filterString str value), --mcString.split mcString.testr " "
+	fn join arr = (local str = ""; for s in arr do str+=s; str),
 	fn dSplit str value = ((dotnetObject "System.String" str).split value), --dotnet version Test Not used
 	/**
 		*@Usage 

@@ -13,6 +13,20 @@
 struct MICRA_SYSTEM (
 
 	maxHandle =  Windows.GetMAXHWND(),
+	mxsEditorHandle = ( --MSX Editor handle
+		
+		local handle = for c in (windows.getChildrenHWND 0) 
+			where c[4] == "MXS_SciTEWindow" do 
+				exit with c[1]
+		if classOf handle == OkClass then undefined else handle		
+	),
+	listenerHandle = ( --MSX Listener Handle
+	
+		local handle = (for child in (windows.getChildrenHWND 0 parent:#max) 
+			where (child[5] == "MAXScript Listener") 
+				do exit with child[1])
+		if classOf handle == OkClass then undefined else handle
+	),
 	fn getSource = getSourceFileName(), --get path of this script
 	fn getMaxWindow = (
 	
@@ -240,7 +254,7 @@ struct MICRA_SYSTEM (
 	),
 	fn minMaxApp app_name state = (
 	
-		local app_handle = (mcSystem.getAppHandle app_name)[1]
+		local app_handle = (getAppHandle app_name)[1]
 		if app_handle == undefined do return false
 		if state == #max then (
 		
@@ -255,6 +269,26 @@ struct MICRA_SYSTEM (
 	fn getMaxBounds = (
 		
 		return windows.getWindowPos maxHandle
+	),
+	fn setMaxBounds pos_x pos_y w h = (
+	
+		windows.setWindowPos maxHandle pos_x pos_y w h true
+	),
+	fn getListenerBounds = (
+		
+		return windows.getWindowPos listenerHandle
+	),
+	fn setListenerBounds pos_x pos_y w h = (
+	
+		windows.setWindowPos listenerHandle pos_x pos_y w h true
+	),
+	fn getMxsEditorBounds = (
+		
+		return windows.getWindowPos mxsEditorHandle
+	),
+	fn setMxsEditorBounds pos_x pos_y w h = (
+	
+		windows.setWindowPos mxsEditorHandle pos_x pos_y w h true
 	),
 	fn getMaxCenter = (
 	
