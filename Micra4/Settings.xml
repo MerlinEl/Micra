@@ -2,7 +2,7 @@
 <SETTINGS>
   <Micra>
     <born val="04.25.2006" />
-    <version val="6.53" />
+    <version val="6.54" />
   </Micra>
   <Structures val="All registred Micra's Structures">
     <!--independent classes-->
@@ -38,7 +38,7 @@
     <mcSecurity val="on" info="popup windows of any type" />
     <mcGM val="on" />
     <mcAnimation val="on" />
-    <mcBiped val="on" info="Biped Skeleton functions"/>
+    <mcBiped val="on" info="Biped Skeleton functions" />
     <mcArray val="on" />
     <mcFile val="on" info="read - write functions" />
     <mcInfo val="on" />
@@ -69,7 +69,7 @@
     <Bridge_Spline val="0.02" />
     <Box_Builder val="0.01" />
     <Character_Pose val="0.17" />
-    <Character_Tool val="0.10" />
+    <Character_Tool val="0.11" />
     <Clone2 val="1.03" />
     <Color_Palete val="0.56" />
     <Color_Picker val="0.2" />

@@ -322,7 +322,7 @@ rollout mcCharSelectDialog "Character Tool v0.02" width:212 height:388
 	--ON OPEN
 	on mcCharSelectDialog open do  
 	(
-		axFlash.movie = (Micra.RootDir + "App\\Character_Tool.swf")
+		axFlash.movie = (Micra.RootDir + "App\\Character_Tool_Woman.swf")
 		
 		callbacks.addScript #SelectionSetChanged " mcCharTool.updateSelection() " id:#mcCT_Callbacks
 		callbacks.addScript #sceneUndo           " mcCharTool.updateSelection() " id:#mcCT_Callbacks

@@ -69,6 +69,48 @@ struct MICRA_ANIMATION_STRUCT
 			at time animationRange.end  (o.visibility = 0) --end
 		)
 		--openTrackView()
+	),
+	fn deleteAnimationKeys = (
+		if removeAnimationKeysDialog != undefined do destroyDialog removeAnimationKeysDialog
+		rollout removeAnimationKeysDialog "Delete Animation Keys:" width:204 height:108
+		(
+			checkbox 'chk_pos' " pos" pos:[8,20] width:60 height:24 align:#left
+			checkbox 'chk_scale' " scale" pos:[64,20] width:60 height:24 align:#left
+			checkbox 'chk_rotation' " rotation" pos:[128,20] width:60 height:24 align:#left
+			GroupBox 'grp1' "Set-Up" pos:[4,4] width:192 height:100 align:#left
+			button 'btn_remove' "Remove" pos:[8,72] width:180 height:24 align:#left
+			spinner 'spn_start' "start" pos:[12,48] width:64 height:16 range:[0, 1000000, 0] type:#integer align:#left
+			spinner 'spn_end' "end" pos:[104,48] width:66 height:16 range:[0, 1000000, 0] type:#integer align:#left
+			fn deleteAnimationKeys start end = (
+			for o in selection do (
+					
+					if chk_pos.checked then (-- Position keys
+						for i=start to end do (
+							selectKeys o.pos.controller i
+							deleteKeys o.pos.controller #selection 
+						)
+					)
+					if chk_rotation.checked then (-- Rotation keys
+						for i=start to end do (
+							selectKeys o.rotation.controller i
+							deleteKeys o.rotation.controller #selection 
+						)
+					)
+					if chk_scale.checked then (-- Scale keys
+						for i=start to end do (
+							selectKeys o.scale.controller i
+							deleteKeys o.scale.controller #selection 
+						)
+					)
+				)
+			)
+			on removeAnimationKeysDialog open do (
+				spn_start.value = animationRange.start 
+				spn_end.value = animationRange.end
+			)
+			on btn_remove pressed do undo on "Delete Animation Keys" deleteAnimationKeys spn_start.value spn_end.value
+		)
+		createDialog removeAnimationKeysDialog
 	)
 	/*<end>*/
 )

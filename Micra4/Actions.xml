@@ -249,6 +249,7 @@
     <Mirror_Bone_Verts icon="315" cmd="mcBiped.mirrorSelectedBoneVerts()" tooltip="Mirror Bone Verts" />
     <Add_Visibility_Track icon="316" cmd="mcAnimation.addVisibilityTrack()" tooltip="Add Visibility Track" />
     <Character_Bip_Tool icon="314" cmd="mcFile.fileInVersion Character_Tool" tooltip="Character Bip Tool" />
+    <Delete_Animation_Keys icon="318" cmd="mcAnimation.deleteAnimationKeys()" tooltip="Delete Animation Keys" />
   </Animation>
   <Skinning>
     <Add_Weapon_Skin icon="130" cmd="mcSkin.wpnSetupSkin()" tooltip="Add Weapon Skin" />

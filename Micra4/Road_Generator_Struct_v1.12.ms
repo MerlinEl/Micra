@@ -23,6 +23,7 @@ struct ROAD_GENERATOR_STRUCTURE	(
 	TANGENT_TEST_COUNT = 100,
 	C_LAYER_NAME = "---noexport---terrain_generator_modules",
 	H_LAYER_NAME = "---noexport---terrain_generator_helpers",
+	C_FLOAT_MAX = 2147483647,
 	--functions
 	fn getSource = getSourceFileName(), --get path of this script
 	fn runLocalScript script_name = (
@@ -151,12 +152,12 @@ struct ROAD_GENERATOR_STRUCTURE	(
 			"(2-4)R                "		+ getRoadSymbol #("a", "a", "a", "a", "r", "s", "r", "a", "a", "a", "a") ,												--4
 			"(2-5)                "		+ getRoadSymbol #("a", "a", "a", "a", "a", "s", "a", "a", "a", "a", "a"),														--5
 			"(4-4)       "			+ getRoadSymbol #("a", "a", "a", "a", "s", "a", "a", "a", "a", "s", "a", "a", "a", "a", "s", "a", "a", "a", "a") ,					--6
-			"(4-5)  "				+ getRoadSymbol #("a", "a", "a", "a", "a", "s", "a", "a", "a", "a", "a", "s", "a", "a", "a", "a", "a", "s", "a", "a", "a", "a", "a"),	--7
-			"(1-6D)                      "	+ getRoadSymbol #("a", "a", "a", "a", "a", "a") ,																		--8
-			"(2-6D)                "		+ getRoadSymbol #("a", "a", "a", "a", "a", "a", "s", "a", "a", "a", "a", "a", "a"),										--9
-			"(2-6C)                "		+ getRoadSymbol #("a", "a", "a", "a", "a", "a", "s", "a", "a", "a", "a", "a", "a"),										--10
-			"(3-6C)                "		+ getRoadSymbol #("a", "a", "a", "a", "a", "a", "s", "a", "a", "a", "a", "a", "a", "s", "a", "a", "a", "a", "a", "a"),			--11										--10
-			"(2-4S)                "		+ getRoadSymbol #("a", "a", "a", "a", "s", "a", "a", "a", "a")																--12
+			"(4-5)  "				+ getRoadSymbol #("a", "a", "a", "a", "a", "s", "a", "a", "a", "a", "a", "s", "a", "a", "a", "a", "a", "s", "a", "a", "a", "a", "a")--,	--7
+-- 			"(1-6D)                      "	+ getRoadSymbol #("a", "a", "a", "a", "a", "a") ,																		--8
+-- 			"(2-6D)                "		+ getRoadSymbol #("a", "a", "a", "a", "a", "a", "s", "a", "a", "a", "a", "a", "a"),										--9
+-- 			"(2-6C)                "		+ getRoadSymbol #("a", "a", "a", "a", "a", "a", "s", "a", "a", "a", "a", "a", "a"),										--10
+-- 			"(3-6C)                "		+ getRoadSymbol #("a", "a", "a", "a", "a", "a", "s", "a", "a", "a", "a", "a", "a", "s", "a", "a", "a", "a", "a", "a"),			--11										--10
+-- 			"(2-4S)                "		+ getRoadSymbol #("a", "a", "a", "a", "s", "a", "a", "a", "a")																--12
 		)	
 	),
 	fn getMissingPrefabs = (
@@ -175,11 +176,11 @@ struct ROAD_GENERATOR_STRUCTURE	(
 			"generator_road_4_5",
 			"generator_road_4_5_spec",
 			--road types new 2019
-			"generator_road_1_6d",
-			"generator_road_2_6d",
-			"generator_road_2_6c",
-			"generator_road_3_6c",
-			"generator_road_2_4s",
+-- 			"generator_road_1_6d",
+-- 			"generator_road_2_6d",
+-- 			"generator_road_2_6c",
+-- 			"generator_road_3_6c",
+-- 			"generator_road_2_4s",
 			--sidewalks
 			"generator_sidewalk_left",
 			"generator_sidewalk_right",
@@ -391,6 +392,14 @@ struct ROAD_GENERATOR_STRUCTURE	(
 		)
 		ed --return edge index and length
 	),
+	fn RMin a b = (
+		
+		if a > b then return b else return a
+	),
+	fn RMax a b = (
+		
+		if a < b then return b else return a
+	),	
 	fn getBoundingBox &poly = (
 	
 		local p_min = [C_FLOAT_MAX, C_FLOAT_MAX, C_FLOAT_MAX]

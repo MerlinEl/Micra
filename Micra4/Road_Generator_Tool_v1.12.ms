@@ -1,7 +1,7 @@
-
 -------------------------
 -->modyfy by MerlinEl 1.3.2019
 -------------------------
+
 
 --###################################################################################--
 --	                               Custom Attributes                                 --
@@ -60,10 +60,12 @@ fn runLocalScript script_name = (
 		messageBox ("Script ["+script_file+"] Not Found.") title:"Road Generator:"
 	)
 )
---Load all functions
+
+
+--Load all functions as struct
 Global roGenStruct
 runLocalScript "Road_Generator_Struct_v1.12"
---< MerlinEl
+--< 
 
 
 --###################################################################################--
@@ -91,8 +93,10 @@ H_LAYER_NAME = "---noexport---terrain_generator_helpers"
 -- C_COMPONENTS_PATH = "E:\\Aprog\\Orien\Micra\\repo_sync\\_NEW\\Road Tool\\terrain_generator_components.max"
 -- C_COMPONENTS_PATH = LS3DGUP.LS3DGUP.UtilsPath+"terrain_generator_components.max"
 -- C_COMPONENTS_PATH = "D:\\!2K_Games\\scotch_dev\\resources\\graphics\\_data_\\3dsmax\\terrain_generator_components.max"
--- C_COMPONENTS_PATH = "D:\\ReneBaca\\3DsMax\\terrain_generator_components.max"
-C_COMPONENTS_PATH = "D:\\!2k_games\scotch_dev\\resources\\utilities\\3dsmax\\terrain_generator_components.max"
+--C_COMPONENTS_PATH = "D:\\ReneBaca\\3DsMax\\terrain_generator_components.max"
+--C_COMPONENTS_PATH = "D:\\!2k_games\scotch_dev\\resources\\utilities\\3dsmax\\terrain_generator_components.max"
+-- C_COMPONENTS_PATH = "E:\\Work\\2K Games\\DriveD\\!2K_Games\\scotch_dev\\resources\\graphics\\_data_\\3dsmax\\terrain_generator_components.max"
+C_COMPONENTS_PATH = "E:\\Work\\2K Games\\DriveD\\!2K_Games\\scotch_dev\\resources\\graphics\\_data_\\3dsmax\\terrain_generator_components_nomat.max"
 
 C_SIDEWALK_LEFT = 1
 C_SIDEWALK_RIGHT = 2
@@ -108,8 +112,6 @@ C_DONT_FLIP = FALSE
 
 C_OLD_MATERIAL_ID = 11
 C_NEW_MATERIAL_ID = 13
-
-C_FLOAT_MAX = 2147483647
 
 C_TANGENT_OFFSET = 3000
 
@@ -183,16 +185,6 @@ fn IsLesserEqual val1 val2 =
 		return false
 )
 
-
-fn RMin a b =
-(
-	if a > b then return b else return a
-)
-
-fn RMax a b =
-(
-	if a < b then return b else return a
-)	
 
 fn GetSign boolean =
 (
@@ -613,14 +605,14 @@ fn GetRoadEdgeIndices road =
 			--print ("Edge: "+(controlled_edge as string))
 			if (ArrayContainsValue controlled_edge left_top_index) and (ArrayContainsValue controlled_edge right_top_index) then (
 				top_edge_index = i
-				min = RMin left_top_index right_top_index
+				min = roGenStruct.RMin left_top_index right_top_index
 				if(min == left_top_index) then (
 					top_left_to_right = false
 				)
 			)
 			if (ArrayContainsValue controlled_edge left_bottom_index) and (ArrayContainsValue controlled_edge right_bottom_index) then (
 				bottom_edge_index = i
-				min = RMin left_bottom_index right_bottom_index
+				min = roGenStruct.RMin left_bottom_index right_bottom_index
 				if(min == left_bottom_index) then (
 					bottom_left_to_right = false
 				)
@@ -1090,7 +1082,7 @@ fn CreateRoadWithPL  roads parkingLanes crossroadIndex &spec leftPL rightPL &ori
 -- 	copyLeftPl.pos 		= [0,0,0]
 -- 	copyRighttPl.pos		= [0,0,0]
 			
-	bbRoad 			= GetBoundingBox copyRoad
+	bbRoad 			= roGenStruct.getBoundingBox copyRoad
 	
 -- 			
 -- 			-------------------------------------------------------------------------------------
@@ -1099,7 +1091,7 @@ fn CreateRoadWithPL  roads parkingLanes crossroadIndex &spec leftPL rightPL &ori
 		
 		copyLeftPl 			= copy pl_Left
 		copyLeftPl.pos 	= [0,0,0]
-		bbPlLeft 			= GetBoundingBox copyLeftPl
+		bbPlLeft 			= roGenStruct.getBoundingBox copyLeftPl
 		copyLeftPl.pivot 	= bbPlLeft[1]
 		copyLeftPl.pos 	= placeLeftPl
 		
@@ -1111,7 +1103,7 @@ fn CreateRoadWithPL  roads parkingLanes crossroadIndex &spec leftPL rightPL &ori
 		
 		copyRighttPl		= copy pl_Right
 		copyRighttPl.pos	= [0,0,0]
-		bbPlRight 			= GetBoundingBox copyRighttPl
+		bbPlRight 			= roGenStruct.getBoundingBox copyRighttPl
 		copyRighttPl.pivot= [bbPlRight[1][1], bbPlRight[2][2], bbPlRight[1][3]]
 		copyRighttPl.pos		= placeRightPl
 		
@@ -1119,11 +1111,11 @@ fn CreateRoadWithPL  roads parkingLanes crossroadIndex &spec leftPL rightPL &ori
 	)
 	
 	
--- 	bbPlLeft 	= GetBoundingBox copyLeftPl
+-- 	bbPlLeft 	= roGenStruct.getBoundingBox copyLeftPl
 -- 	print bbPlLeft
 -- 	copyLeftPl.pivot = bbPlLeft[1]
 -- 			
--- 	bbPlRight 	= GetBoundingBox copyRighttPl
+-- 	bbPlRight 	= roGenStruct.getBoundingBox copyRighttPl
 -- 	print bbPlRight
 -- 	copyRighttPl.pivot = [bbPlRight[1][1], bbPlRight[2][2], bbPlRight[1][3]]
 -- 			
@@ -1217,10 +1209,14 @@ rollout dlgCrossroadGenerator "Crossroad Generator"
   (
 	undo off(
 		
+		
+		
 -- 		start = timeStamp()
 		
 		PreSetupAndChecks &generated_road &finalPos
 
+		format "generated_road:% finalPos:%" generated_road finalPos
+		
 		spec_1 = (not cb_parking_lane_1.state) and cb_parking_lane_2.state
 		spec_2 = cb_parking_lane_1.state and (not cb_parking_lane_2.state)
 		
@@ -1256,6 +1252,8 @@ rollout dlgCrossroadGenerator "Crossroad Generator"
 		
 			
 		road_1 = copy road_1_model
+		
+		print ("road:" + road_1 as string)
 
 		road_1.name = replace road_1.name 11 6 "crossroad_4R"
 		road_1.name = uniquename(road_1.name)	
@@ -1275,12 +1273,12 @@ rollout dlgCrossroadGenerator "Crossroad Generator"
 		  
 		-- 	GenereteCrossRoad road_1 road_2_a road_2_b corner_model spnr_angle_1.value spnr_angle_2.value spnr_offset_1.value spnr_offset_2.value cb_parking_lane_1.state cb_parking_lane_2.state
 		  
-		road_1_bb = GetBoundingBox road_1
-		road_2_bb = GetBoundingBox road_2_a
+		road_1_bb = roGenStruct.getBoundingBox road_1
+		road_2_bb = roGenStruct.getBoundingBox road_2_a
 		
 		road_1_length = roGenStruct.getLengthBB road_1_bb
 		
-		corner_bb = GetBoundingBox corner_model
+		corner_bb = roGenStruct.getBoundingBox corner_model
 		
 		
 		pTop 	= undefined
@@ -1315,8 +1313,8 @@ rollout dlgCrossroadGenerator "Crossroad Generator"
 		  ChangeMaterialId bottom_corners[2] C_OLD_MATERIAL_ID C_NEW_MATERIAL_ID
 		)
 		  
-		max_dist_left = RMin (attributes_1[2][1]) (attributes_2[2][2])
-		max_dist_right = RMax (attributes_1[2][2]) (attributes_2[2][1])
+		max_dist_left = roGenStruct.RMin (attributes_1[2][1]) (attributes_2[2][2])
+		max_dist_right = roGenStruct.RMax (attributes_1[2][2]) (attributes_2[2][1])
 		--print ("max dist left "+(max_dist_left as string)) 
 		--print ("max dist right "+(max_dist_right as string))
 		
@@ -1330,7 +1328,7 @@ rollout dlgCrossroadGenerator "Crossroad Generator"
 		append road_1.children attributes_2[1][4]
 		
 		road_1 = ConvertTo road_1 editable_poly
-		cutted_road_bb = GetBoundingBox road_1
+		cutted_road_bb = roGenStruct.getBoundingBox road_1
 		--AddRoadSlicer road_1 (attributes_1[2][4]) 1
 		--AddRoadSlicer road_1 (attributes_2[2][4]) 1
 		  
@@ -1349,8 +1347,8 @@ rollout dlgCrossroadGenerator "Crossroad Generator"
 		  tri_right_top_further = -1
 
 		
-		sidewalk_bb = GetBoundingBox sidewalks[C_SIDEWALK_LEFT]
-		parking_lane_bb = GetBoundingBox parking_lanes[C_PARKING_LANE_LEFT]
+		sidewalk_bb = roGenStruct.getBoundingBox sidewalks[C_SIDEWALK_LEFT]
+		parking_lane_bb = roGenStruct.getBoundingBox parking_lanes[C_PARKING_LANE_LEFT]
 		  
 
 		place_pl_1 = cb_parking_lane_1.state or cb_parking_lane_2.state
@@ -1688,14 +1686,14 @@ rollout dlgCrossroadGenerator2 "Crossroad Generator"
 		  
 		-- 	GenereteCrossRoad road_1 road_2_a road_2_b corner_model spnr_angle_1.value spnr_angle_2.value spnr_offset_1.value spnr_offset_2.value cb_parking_lane_1.state cb_parking_lane_2.state
 		  
-		road_1_bb = GetBoundingBox road_1
-		road_2_bb = GetBoundingBox road_2_a
-		road_3_bb = GetBoundingBox road_2_b
+		road_1_bb = roGenStruct.getBoundingBox road_1
+		road_2_bb = roGenStruct.getBoundingBox road_2_a
+		road_3_bb = roGenStruct.getBoundingBox road_2_b
 		
 		road_1_length = roGenStruct.getLengthBB road_1_bb
 		
-		corner_bb = GetBoundingBox corner_model
-		corner_2_bb = GetBoundingBox corner_model_2
+		corner_bb = roGenStruct.getBoundingBox corner_model
+		corner_2_bb = roGenStruct.getBoundingBox corner_model_2
 		
 		
 		
@@ -1738,8 +1736,8 @@ rollout dlgCrossroadGenerator2 "Crossroad Generator"
 		
 		
 		  
-		max_dist_left = RMin (attributes_1[2][1]) (attributes_2[2][2])
-		max_dist_right = RMax (attributes_1[2][2]) (attributes_2[2][1])
+		max_dist_left = roGenStruct.RMin (attributes_1[2][1]) (attributes_2[2][2])
+		max_dist_right = roGenStruct.RMax (attributes_1[2][2]) (attributes_2[2][1])
 		--print ("max dist left "+(max_dist_left as string)) 
 		--print ("max dist right "+(max_dist_right as string))
 		
@@ -1786,7 +1784,7 @@ rollout dlgCrossroadGenerator2 "Crossroad Generator"
 		append road_1.children attributes_2[1][4]
 		
 		road_1 = ConvertTo road_1 editable_poly
-		cutted_road_bb = GetBoundingBox road_1
+		cutted_road_bb = roGenStruct.getBoundingBox road_1
 		--AddRoadSlicer road_1 (attributes_1[2][4]) 1
 		--AddRoadSlicer road_1 (attributes_2[2][4]) 1
 		  
@@ -1812,8 +1810,8 @@ rollout dlgCrossroadGenerator2 "Crossroad Generator"
 		--print ("Tri state left "+(tri_left_top_further  as string)) 
 		--print ("Tri state right "+(tri_right_top_further as string))
 		
-		sidewalk_bb = GetBoundingBox sidewalks[C_SIDEWALK_LEFT]
-		parking_lane_bb = GetBoundingBox parking_lanes[C_PARKING_LANE_LEFT]
+		sidewalk_bb = roGenStruct.getBoundingBox sidewalks[C_SIDEWALK_LEFT]
+		parking_lane_bb = roGenStruct.getBoundingBox parking_lanes[C_PARKING_LANE_LEFT]
 		
 		
 		
@@ -2076,12 +2074,12 @@ rollout dlgCrossroadGenerator3 "Crossroad Generator"
 		  
 		-- 	GenereteCrossRoad road_1 road_2_a road_2_b corner_model spnr_angle_1.value spnr_angle_2.value spnr_offset_1.value spnr_offset_2.value cb_parking_lane_1.state cb_parking_lane_2.state
 		  
-		road_1_bb = GetBoundingBox road_1
-		road_2_bb = GetBoundingBox road_2_a
+		road_1_bb = roGenStruct.getBoundingBox road_1
+		road_2_bb = roGenStruct.getBoundingBox road_2_a
 		
 		road_1_length = roGenStruct.getLengthBB road_1_bb
 		
-		corner_bb = GetBoundingBox corner_model
+		corner_bb = roGenStruct.getBoundingBox corner_model
 		
 		
 		pTop 	= undefined
@@ -2118,8 +2116,8 @@ rollout dlgCrossroadGenerator3 "Crossroad Generator"
 		  
 		
 	-- 	EDIT:
-	--     max_dist_left = RMin (attributes_1[2][1]) (attributes_2[2][2])
-	--     max_dist_right = RMax (attributes_1[2][2]) (attributes_2[2][1])
+	--     max_dist_left = roGenStruct.RMin (attributes_1[2][1]) (attributes_2[2][2])
+	--     max_dist_right = roGenStruct.RMax (attributes_1[2][2]) (attributes_2[2][1])
 		
 	-- 	format "%\n%\n" attributes_1[2][1] attributes_1[2][2]
 		
@@ -2137,7 +2135,7 @@ rollout dlgCrossroadGenerator3 "Crossroad Generator"
 	-- 	append road_1.children attributes_2[1][4]
 		
 		road_1 = ConvertTo road_1 editable_poly
-		cutted_road_bb = GetBoundingBox road_1
+		cutted_road_bb = roGenStruct.getBoundingBox road_1
 		--AddRoadSlicer road_1 (attributes_1[2][4]) 1
 		--AddRoadSlicer road_1 (attributes_2[2][4]) 1
 		  
@@ -2148,8 +2146,8 @@ rollout dlgCrossroadGenerator3 "Crossroad Generator"
 		tri_right_top_further = 1
 		
 		
-		sidewalk_bb = GetBoundingBox sidewalks[C_SIDEWALK_LEFT]
-		parking_lane_bb = GetBoundingBox parking_lanes[C_PARKING_LANE_LEFT]
+		sidewalk_bb = roGenStruct.getBoundingBox sidewalks[C_SIDEWALK_LEFT]
+		parking_lane_bb = roGenStruct.getBoundingBox parking_lanes[C_PARKING_LANE_LEFT]
 		  
 		place_pl_1 = cb_parking_lane_1.state or cb_parking_lane_2.state
 		place_pl_2 = cb_parking_lane_1.state or cb_parking_lane_2.state
@@ -2385,12 +2383,12 @@ rollout dlgCrossroadGenerator3 "Crossroad Generator"
 		  
 		-- 	GenereteCrossRoad road_1 road_2_a road_2_b corner_model spnr_angle_1.value spnr_angle_2.value spnr_offset_1.value spnr_offset_2.value cb_parking_lane_1.state cb_parking_lane_2.state
 		  
-		road_1_bb = GetBoundingBox road_1
-		road_2_bb = GetBoundingBox road_2_b
+		road_1_bb = roGenStruct.getBoundingBox road_1
+		road_2_bb = roGenStruct.getBoundingBox road_2_b
 		
 		road_1_length = roGenStruct.getLengthBB road_1_bb
 		
-		corner_bb = GetBoundingBox corner_model
+		corner_bb = roGenStruct.getBoundingBox corner_model
 		
 		
 		pTop 	= undefined
@@ -2435,8 +2433,8 @@ rollout dlgCrossroadGenerator3 "Crossroad Generator"
 		  
 		
 -- 	-- 	EDIT:
-	--     max_dist_left = RMin (attributes_1[2][1]) (attributes_2[2][2])
-	--     max_dist_right = RMax (attributes_1[2][2]) (attributes_2[2][1])
+	--     max_dist_left = roGenStruct.RMin (attributes_1[2][1]) (attributes_2[2][2])
+	--     max_dist_right = roGenStruct.RMax (attributes_1[2][2]) (attributes_2[2][1])
 		
 	-- 	format "%\n%\n" attributes_1[2][1] attributes_1[2][2]
 		
@@ -2451,7 +2449,7 @@ rollout dlgCrossroadGenerator3 "Crossroad Generator"
 
 		
 		road_1 = ConvertTo road_1 editable_poly
-		cutted_road_bb = GetBoundingBox road_1
+		cutted_road_bb = roGenStruct.getBoundingBox road_1
 		--AddRoadSlicer road_1 (attributes_1[2][4]) 1
 		--AddRoadSlicer road_1 (attributes_2[2][4]) 1
 		  
@@ -2462,8 +2460,8 @@ rollout dlgCrossroadGenerator3 "Crossroad Generator"
 		tri_right_top_further = -1
 		
 		
-		sidewalk_bb = GetBoundingBox sidewalks[C_SIDEWALK_LEFT]
-		parking_lane_bb = GetBoundingBox parking_lanes[C_PARKING_LANE_LEFT]
+		sidewalk_bb = roGenStruct.getBoundingBox sidewalks[C_SIDEWALK_LEFT]
+		parking_lane_bb = roGenStruct.getBoundingBox parking_lanes[C_PARKING_LANE_LEFT]
 		  
 -- 		place_pl_1 = cb_parking_lane_1.state or cb_parking_lane_2.state
 		place_pl_2 = cb_parking_lane_1.state or cb_parking_lane_2.state
