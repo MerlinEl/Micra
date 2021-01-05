@@ -184,7 +184,11 @@ rollout mcRoadMarkingGeneratorDialog "Road Marking Generator:" width:464 height:
 			-- suspendEditing()
 			--get material
 			local terrain_mat = currentMaterialLibrary["bc_terrain_main"]
-			if terrain_mat == undefined do return return (mcMsgList.warn "not_termat")
+			if terrain_mat == undefined do (
+				--return return (mcMsgList.warn "not_termat")
+				terrain_mat = StandardMaterial()
+				terrain_mat.diffuseColor = green;
+			)
 			--create spline from points
 			local sps = (
 			

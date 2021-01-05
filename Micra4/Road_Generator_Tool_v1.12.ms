@@ -794,8 +794,8 @@ fn CreateConnectingRoad road_2 bb_1 bb_2 corner bb_corner angle_road placed_item
 	uvwmapping.width = 400.0;
 	uvwmapping.length= 400.0;
 	addModifier fill_mesh uvwmapping
-	--add universal tilable material in generated geometry > ID 449 (based on multimaterial Road_Material_D) MerlinEl 2019
-	fill_material = MaterialModifier materialId:449 name:"fill_material"
+	--add universal tilable material in generated geometry > ID 6 (based on multimaterial Road_Material_D) MerlinEl 2019
+	fill_material = MaterialModifier materialId:6 name:"fill_material"
 	addModifier fill_mesh fill_material
 	
 	fill_poly = ConvertTo fill_mesh Editable_poly

@@ -1,16 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <USER val="Default">
   <Properties_1>
-    <mc_Dialog_A active="true" pos="[1876,784]" size="[148,66]" title="Menu:" btnCount="[6,2]" />
-    <mc_Dialog_B active="true" pos="[1876,310]" size="[148,162]" title="Object:" btnCount="[6,6]" />
-    <mc_Dialog_C active="true" pos="[1876,472]" size="[148,66]" title="Pivot:" btnCount="[6,2]" />
-    <mc_Dialog_D active="true" pos="[1876,538]" size="[148,90]" title="Select:" btnCount="[6,3]" />
-    <mc_Dialog_E active="true" pos="[1662,1230]" size="[364,42]" title="Animation:" btnCount="[15,1]" />
-    <mc_Dialog_F active="true" pos="[1828,220]" size="[196,90]" title="Modifiers:" btnCount="[8,3]" />
-    <mc_Dialog_G active="true" pos="[1876,628]" size="[148,90]" title="Modify:" btnCount="[6,3]" />
-    <mc_Dialog_H active="true" pos="[1876,718]" size="[148,66]" title="Materials:" btnCount="[6,2]" />
-    <mc_Dialog_I active="true" pos="[1876,850]" size="[148,66]" title="Programming:" btnCount="[6,2]" />
-    <mc_Dialog_J active="true" pos="[1566,1272]" size="[460,42]" title="Experimental:" btnCount="[19,1]" />
+    <mc_Dialog_A active="true" pos="[1646,783]" size="[148,66]" title="Menu:" btnCount="[6,2]" />
+    <mc_Dialog_B active="true" pos="[1646,309]" size="[148,162]" title="Object:" btnCount="[6,6]" />
+    <mc_Dialog_C active="true" pos="[1646,471]" size="[148,66]" title="Pivot:" btnCount="[6,2]" />
+    <mc_Dialog_D active="true" pos="[1646,537]" size="[148,90]" title="Select:" btnCount="[6,3]" />
+    <mc_Dialog_E active="true" pos="[1442,1230]" size="[364,42]" title="Animation:" btnCount="[15,1]" />
+    <mc_Dialog_F active="true" pos="[1597,219]" size="[196,90]" title="Modifiers:" btnCount="[8,3]" />
+    <mc_Dialog_G active="true" pos="[1646,627]" size="[148,90]" title="Modify:" btnCount="[6,3]" />
+    <mc_Dialog_H active="true" pos="[1646,717]" size="[148,66]" title="Materials:" btnCount="[6,2]" />
+    <mc_Dialog_I active="true" pos="[1646,849]" size="[148,66]" title="Programming:" btnCount="[6,2]" />
+    <mc_Dialog_J active="true" pos="[1346,1272]" size="[460,42]" title="Experimental:" btnCount="[19,1]" />
   </Properties_1>
   <Properties_2>
     <mcMicraDialog active="true" pos="[1639,244]" size="[148,66]" title="" />
