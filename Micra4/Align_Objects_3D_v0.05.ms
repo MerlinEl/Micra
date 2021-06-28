@@ -1,24 +1,25 @@
 Global mcAlignObjectsDialog
 if mcAlignObjectsDialog != undefined do DestroyDialog mcAlignObjectsDialog
-rollout mcAlignObjectsDialog "Align Objects:" width:156 height:268
+rollout mcAlignObjectsDialog "Align Objects:" width:156 height:296
 (
 	local axis_labels = #("X", "Y", "Z")
-	GroupBox 'grp9' "Axis:" pos:[4,4] width:148 height:46 align:#left
-	radiobuttons 'rdo_axis' "" pos:[28,22] width:97 height:16 labels:#("X", "Y", "Z") columns:3 align:#left
+	GroupBox grp9 "Axis:" pos:[4,4] width:148 height:46
+	radiobuttons rdo_axis "" pos:[28,22] width:97 height:16 labels:#("X", "Y", "Z") columns:3
 	
-	GroupBox 'grp1' "Align:" pos:[4,56] width:148 height:52 align:#left
-	button 'btn_min' "MIN" pos:[8,76] width:40 height:24 align:#left
-	button 'btn_max' "MAX" pos:[104,76] width:40 height:24 align:#left
-	button 'btn_center' "CENTER" pos:[48,76] width:52 height:24 align:#left
+	GroupBox grp1 "Align:" pos:[4,84] width:148 height:52
+	button btn_min "MIN" pos:[8,104] width:40 height:24
+	button btn_max "MAX" pos:[104,104] width:40 height:24
+	button btn_center "CENTER" pos:[48,104] width:52 height:24
 	
-	GroupBox 'grp2' "Copy - Paste:" pos:[4,112] width:148 height:76 align:#left
-	button 'btn_Copy' "COPY" pos:[8,156] width:66 height:24 align:#left
-	button 'btn_paste' "PASTE" pos:[80,156] width:66 height:24 align:#left
-	dropdownList 'ddl_way' "" pos:[8,132] width:136 height:21 items:#("X", "Y", "Z", "MIN", "MAX", "CENTER") align:#left
-	groupBox 'grp4' "Snap:" pos:[4,192] width:148 height:72 align:#left
-	pickbutton 'btn_pick_obj' "pick..." pos:[8,208] width:36 height:24 align:#left
-	label 'lbl_obj_name' "..." pos:[48,212] width:96 height:20 align:#left
-	button 'btn_snap_obj' "SNAP" pos:[8,236] width:136 height:24 align:#left
+	GroupBox grp2 "Copy - Paste:" pos:[4,140] width:148 height:76
+	button btn_Copy "COPY" pos:[8,184] width:66 height:24
+	button btn_paste "PASTE" pos:[80,184] width:66 height:24
+	dropdownList ddl_way "" pos:[8,160] width:136 height:21 items:#("X", "Y", "Z", "MIN", "MAX", "CENTER")
+	GroupBox grp4 "Snap:" pos:[4,220] width:148 height:72
+	pickbutton btn_pick_obj "pick..." pos:[8,236] width:36 height:24
+	label lbl_obj_name "..." pos:[48,240] width:96 height:20
+	button btn_snap_obj "SNAP" pos:[8,264] width:136 height:24
+	button btn_distribute_obj "DISTRIBUTE" pos:[4,56] width:148 height:24
 	struct NODE_TM (pos, mi, ma)
 	local saved_tm = NODE_TM [0, 0, 0]  [0, 0, 0]  [0, 0, 0]
 	fn getObjectsBB obj_arr = (
@@ -219,6 +220,66 @@ rollout mcAlignObjectsDialog "Align Objects:" width:156 height:268
 		)
 		completeRedraw()
 	)
+
+	fn getPosAt obj axis = (
+		
+		case axis of (
+			
+			"X":obj.pos.x
+			"Y":obj.pos.y
+			"Z":obj.pos.z
+		)
+	)
+	
+	fn setPosAt obj axis val = (
+		
+		case axis of (
+			
+			"X":obj.pos.x = val
+			"Y":obj.pos.y = val
+			"Z":obj.pos.z = val
+		)
+	)
+	
+	--For now DISTANCES are based on PIVOT not on SIZE
+	fn distributeObjectsAlongAxis sel axis = (
+	
+		if sel.count < 3 do return false
+		local first_obj = sel[1]
+		local last_obj = sel[1]
+		local first_val = getPosAt first_obj axis
+		local last_val = getPosAt last_obj axis
+		--Find FIRST
+		for o in sel where getPosAt o axis < first_val do (
+		
+			first_obj = o
+			first_val = getPosAt o axis
+		)
+		--Find LAST
+		for o in sel where getPosAt o axis > last_val do (
+		
+			last_obj = o
+			last_val = getPosAt o axis
+		)	
+		format "axis:% fo:% lo:%\n" axis first_obj.name last_obj.name
+		--calculate distances
+		local len = distance first_obj last_obj
+		local dist = len / (sel.count - 1)
+		local next_val = first_val
+		-- Distribute objects between FISRT and LAST point
+		for o in sel do (
+		
+			setPosAt o axis next_val
+			next_val += dist
+		)
+	)
+	
+	fn distributeObjects = (
+		
+		local sel = selection as array
+		local axis = axis_labels[rdo_axis.state]
+		distributeObjectsAlongAxis sel axis
+	)
 	
 	on btn_min				pressed	do	( undo "Align Objects Min" on offsetObjects #min				)
 	on btn_max			pressed	do	( undo "Align Objects Max" on offsetObjects #max				)
@@ -231,6 +292,7 @@ rollout mcAlignObjectsDialog "Align Objects:" width:156 height:268
 		local obj = getNodeByName lbl_obj_name.text
 		if isValidnode obj do mcPoly.alignObjectToSelection obj
 	)
+	on btn_distribute_obj pressed do ( undo "Distribute Object's" on distributeObjects() )
 )
 CreateDialog mcAlignObjectsDialog
 

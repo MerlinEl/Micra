@@ -1,25 +1,25 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <USER val="Default">
   <Properties_1>
-    <mc_Dialog_A active="true" pos="[1646,783]" size="[148,66]" title="Menu:" btnCount="[6,2]" />
-    <mc_Dialog_B active="true" pos="[1646,309]" size="[148,162]" title="Object:" btnCount="[6,6]" />
-    <mc_Dialog_C active="true" pos="[1646,471]" size="[148,66]" title="Pivot:" btnCount="[6,2]" />
-    <mc_Dialog_D active="true" pos="[1646,537]" size="[148,90]" title="Select:" btnCount="[6,3]" />
-    <mc_Dialog_E active="true" pos="[1442,1230]" size="[364,42]" title="Animation:" btnCount="[15,1]" />
-    <mc_Dialog_F active="true" pos="[1597,219]" size="[196,90]" title="Modifiers:" btnCount="[8,3]" />
-    <mc_Dialog_G active="true" pos="[1646,627]" size="[148,90]" title="Modify:" btnCount="[6,3]" />
-    <mc_Dialog_H active="true" pos="[1646,717]" size="[148,66]" title="Materials:" btnCount="[6,2]" />
-    <mc_Dialog_I active="true" pos="[1646,849]" size="[148,66]" title="Programming:" btnCount="[6,2]" />
-    <mc_Dialog_J active="true" pos="[1346,1272]" size="[460,42]" title="Experimental:" btnCount="[19,1]" />
+    <mc_Dialog_A active="true" pos="[1950,906]" size="[148,66]" title="Menu:" btnCount="[6,2]" />
+    <mc_Dialog_B active="true" pos="[1950,360]" size="[148,186]" title="Object:" btnCount="[6,7]" />
+    <mc_Dialog_C active="true" pos="[1950,546]" size="[148,66]" title="Pivot:" btnCount="[6,2]" />
+    <mc_Dialog_D active="true" pos="[1950,612]" size="[148,90]" title="Select:" btnCount="[6,3]" />
+    <mc_Dialog_E active="true" pos="[1227,1306]" size="[364,42]" title="Animation:" btnCount="[15,1]" />
+    <mc_Dialog_F active="true" pos="[1757,295]" size="[196,90]" title="Modifiers:" btnCount="[8,3]" />
+    <mc_Dialog_G active="true" pos="[1950,702]" size="[148,114]" title="Modify:" btnCount="[6,4]" />
+    <mc_Dialog_H active="true" pos="[1950,816]" size="[148,90]" title="Materials:" btnCount="[6,3]" />
+    <mc_Dialog_I active="true" pos="[1950,972]" size="[148,66]" title="Programming:" btnCount="[6,2]" />
+    <mc_Dialog_J active="true" pos="[1591,1306]" size="[508,42]" title="Experimental:" btnCount="[21,1]" />
   </Properties_1>
   <Properties_2>
-    <mcMicraDialog active="true" pos="[1639,244]" size="[148,66]" title="" />
+    <mcMicraDialog active="true" pos="[1950,294]" size="[148,66]" title="" />
     <mcCustomizeDialog active="false" pos="[630,370]" size="[224,404]" title="" />
     <mcProgramDialog active="false" pos="[100,0]" size="[256,232]" title="" />
     <mcisoDialog active="false" pos="[100,152]" size="[140,400]" title="" />
     <mcModifierDialog active="false" pos="[100,100]" size="[400,400]" title="" />
     <mcIconMakerDialog active="false" pos="[670,440]" size="[730,500]" title="" />
-    <mcDeepIsolateDialog active="false" pos="[1090,180]" size="[84,44]" title="" />
+    <mcDeepIsolateDialog active="true" pos="[1098,185]" size="[84,44]" title="" />
     <mcMoveTowardsDialog active="true" pos="[100,377]" size="[200,76]" title="" />
     <mcClonerDialog active="true" pos="[126,185]" size="[164,296]" title="" />
     <mcRenameDialog active="true" pos="[352,138]" size="[224,368]" title="" />
@@ -55,8 +55,8 @@
     <gMcDrawBezierDialog active="true" pos="[-734,424]" size="[644,502]" />
     <mcUnwrapToolbardialog active="false" pos="[70,390]" size="[220,200]" />
     <mcPopUp active="true" pos="[90,313]" size="[810,68]" />
-    <mcObjectInpectorDialog active="true" pos="[244,216]" size="[344,464]" />
-    <mcCityManDialog active="true" pos="[480,76]" size="[500,988]" />
+    <mcObjectInpectorDialog active="true" pos="[511,368]" size="[344,464]" />
+    <mcCityManDialog active="true" pos="[226,127]" size="[500,988]" />
   </Properties_2>
   <Buttons>
     <btn_B2 action="Move_To_X" icon="28" />
@@ -177,7 +177,6 @@
     <btn_B18 action="Randomize" icon="131" />
     <btn_B23 action="Duppilcate_Object" icon="245" />
     <btn_B24 action="Swap_Two_Objects" icon="244" />
-    <btn_H11 action="Cube_Map_To_Away" icon="246" />
     <btn_I6 action="Viewport_Recorder" icon="172" />
     <btn_B25 action="Gallery_3D" icon="221" />
     <btn_B30 action="Spline_Magnet" icon="224" />
@@ -225,5 +224,11 @@
     <btn_E13 action="Add_Visibility_Track" icon="316" />
     <btn_E15 action="Character_Bip_Tool" icon="314" />
     <btn_E14 action="Delete_Animation_Keys" icon="318" />
+    <btn_J21 action="Export_To_3Ds" icon="319" />
+    <btn_G19 action="Quadrangulate" icon="195" />
+    <btn_B37 action="Offset_Rotate_Object" icon="276" />
+    <btn_H12 action="Select_By_Material_ID" icon="222" />
+    <btn_H13 action="Cube_Map_To_Away" icon="246" />
+    <btn_H11 action="Image_Plane_Fit" icon="320" />
   </Buttons>
 </USER>

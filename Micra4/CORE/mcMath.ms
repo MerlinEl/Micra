@@ -62,7 +62,7 @@ struct MICRA_MATH (
 	--Author :  Kostadin Kotev / miau_u@yahoo.com /
 	function roundFloat d pre:0.01 = (
 	
-		d = (d as float)/pre
+		local d = (d as float)/pre
 		local v = if (d - (v1 = floor d)) > ((v2 = ceil d) - d) then v2 else v1 
 		v*pre
 	),
@@ -73,8 +73,10 @@ struct MICRA_MATH (
 	),
 	--Round number each > 1cm, 5cm, 10cm, 50cm, 1m 
 	fn roundIntLimited num step:10 = (
-
-		--if is float round it first
+		
+		-- if step is float round folat
+		if classOf step == Float do return roundFloat num pre:step
+		--if  num is float round it first
 		if classOf num == Float do num = int (roundFloat num pre:1)	
 		local cnt = int (num / step) --steps count in num
 		local m = mod num step --get modulo

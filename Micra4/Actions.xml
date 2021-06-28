@@ -47,6 +47,7 @@
     <Toggle_Layer_Explorer icon="311" cmd="mcMax.toggleLayerExplorer()" tooltip="Toggle Layer Explorer" />
     <Copy_TM_To_Clipboard icon="252" cmd="mcTransform.copyTmToClipboard()" tooltip="Copy TM To Clipboard" />
     <Paste_TM_From_Clipboard icon="253" cmd="mcTransform.pasteTMFromClipboard()" tooltip="Paste TM From Clipboard" />
+    <Export_To_3Ds icon="319" cmd="mcMax.exportTo3Ds()" tooltip="Export To 3Ds" />
   </Object>
   <Pivot>
     <Afect_Pivot_Only icon="51" cmd="mcAction.pivot_affect_only()" tooltip="Afect Pivot Only" />
@@ -222,6 +223,8 @@
     <Cube_Map_To_Away icon="246" cmd="mcAction.translateCubeMapToAway3D()" tooltip="Cube Map To Away" />
     <Quick_Materials icon="275" cmd="mcFile.fileInVersion LS3D_Quick_Materials" tooltip="Quick Materials" />
     <LS3D_Material_Manager icon="279" cmd="mcFile.fileInVersion LS3D_Material_Manager" tooltip="LS3D Material Manager" />
+    <Select_By_Material_ID icon="222" cmd="mcAction.selectByMaterialID()" tooltip="Select By Material ID" />
+    <Image_Plane_Fit icon="320" cmd="mcAction.fitImageToBox()" tooltip="Image Plane Fit" />
   </Material>
   <Helpers>
     <Lode_Tester icon="129" cmd="mcFile.fileInVersion Lode_Tester" tooltip="Lode Tester" />

@@ -35,6 +35,7 @@
     <Create_Bounding_Box val="Vytvori mesh z bounding boxu u vybraneho(nych) objektu." />
     <Move_To_Surface val="Move selected object in to surface" />
     <Geometry_Projector_2D val="Project 2D shapes or planes from 3D Geometry" />
+    <Export_To_3Ds />
   </Object>
   <Pivot>
     <Afect_Pivot_Only val="Zapina / Vypina pohyblivost pivotu." />
@@ -170,6 +171,7 @@
     <Silhouette val="Zobrazi selektnute objekty bez odlesku jen v cerne barve." />
     <LS3D_Material_Manager />
     <Quick_Materials />
+    <Image_Plane_Fit />
   </Material>
   <Helpers>
     <Lode_Tester val="Stridave zobrazuje dva lody." />

@@ -14,8 +14,9 @@
     <BlenderAppPath val="E:\Aprog\Blender\blender.exe" />
     <BlenderScriptsPath val="E:\Aprog\Blender\2.81\scripts\startup\" />
     <BlenderBridgeAutorun val="true" />
-    <ZBrushScaleFactor val="0.01" />
+    <ZBrushScaleFactor val="0.0001" />
     <SaveLayer val="on" />
+    <Export3DsDir val="E:\Work\NováŠkola\@ASSETS\models\fogring4.3DS" />
   </Settings>
   <Profiles>
     <menu_1 val="Default" />

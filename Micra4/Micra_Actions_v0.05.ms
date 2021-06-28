@@ -326,22 +326,17 @@ struct mcAction (
 	),
 	fn moveObjectToGround = (
 		
+		if selection.count == 0 do (
+				
+			::mcPopUp.show "Selektni si nejdrive nejake objeky." type:#Warning delay:2000
+			return false
+		)
 		undo "Object's to Ground" on (
-			
-			if selection.count == 1 then ( --aim snap object
+			if keyboard.shiftPressed then ( --aim snap object
+				if selection.count == 1 do mcFile.fileInVersion "Object_Planter"
+			) else (  --snap selected objwcts to z min
 				
-				if keyboard.shiftPressed then ( --show planter tool
-				
-					 mcFile.fileInVersion "Object_Planter"
-					
-				) else (  --snap selected objwcts to z min
-					
-					for i in selection do (i.pos.z = i.pivot.z - i.min.z)
-				)
-				
-			) else (
-				
-				::mcPopUp.show "Selektni si nejdrive nejake objeky." type:#Warning delay:2000
+				for i in selection do (i.pos.z = i.pivot.z - i.min.z)
 			)
 		)
 	),
@@ -585,16 +580,28 @@ struct mcAction (
 			delete temp_tape
 		)
 	),
-	fn pivot_move_to_vert =
-	(
-	    local sel = selection[1]
-		if sel != undefiend do 
-		(
-			local oldSnap = snapMode.Active
-			snapMode.Active = on
-			local pp = pickpoint prompt:"Click to desired location." snap:#3d 
-			if pp != undefiend do sel.pivot = pp  
-			snapMode.Active = oldSnap	
+	fn pivot_move_to_vert = (
+	   
+		local sel = selection[1]
+		if sel != undefiend do (
+			
+			if keyboard.controlPressed then (
+				--pick a vertex to move pivot there
+				local oldSnap = snapMode.Active
+				snapMode.Active = on
+				local pp = pickpoint prompt:"Click to desired location." snap:#3d 
+				if pp != undefiend do sel.pivot = pp  
+				snapMode.Active = oldSnap	
+				
+			) else (
+				--move pivot to first selected vertex pos
+				local obj = selection[1]
+				if classOf obj != Editable_Poly do return false
+				local vert_sel = polyOp.getVertSelection obj as array
+				if vert_sel.count == 0 do return false
+				local first_verts_pos = polyOp.getVert obj vert_sel[1]
+				undo "Pivot to Vertex" on obj.pivot = first_verts_pos
+			)
 		)										
 	),
 	fn pointToVertSelection =
@@ -1305,8 +1312,8 @@ struct mcAction (
 			
 			if ceil o.scale.x != 1 do (
 				
-				format "Skiped object: [ % ] Scale must be 1\n" o.name
-				continue
+				::mcPopUp.show ("Aborted! Object: [  "+o.name+" ] scale must be 100%.") type:#Warning delay:5000
+				return false
 			)
 			--BEFORE_TO_ZB_DATA.add o.name o.material
 			 --strore original pos in placeholder
@@ -2652,9 +2659,9 @@ struct mcAction (
 	),
 	fn fitMaxWindows = (
 		
-		::mcSystem.setMaxBounds 0 0 2053 1440
-		::mcSystem.setListenerBounds  -839 390 840 1050
-		::mcSystem.setMxsEditorBounds 2052 0 1388 1440
+		::mcSystem.setMaxBounds -7 0 2312 1447
+		::mcSystem.setListenerBounds  -839 182 846 1057
+		::mcSystem.setMxsEditorBounds 2291 0 1156 1447
 	),
 	fn setupCharacterRender = (
 		
@@ -2692,6 +2699,52 @@ struct mcAction (
 -- 			at time wavsound.end with animate on ( mySphere.radius = 100.0 )
 			
 		) else format " failed!\n"
+	),
+	fn selectByMaterialID = (
+		
+		local obj = selection[1]
+		local fsel = polyOp.getFaceSelection obj
+		local sel_ids = (for f in fsel collect polyOp.getFaceMatID obj f) as bitarray
+		local faces = (for f = 1 to obj.numfaces where (findItem sel_ids (polyOp.getFaceMatID obj f) > 0) collect f)
+		polyOp.setFaceSelection obj faces
+		completeRedraw()
+	),
+	fn fitImageToBox = (
+		
+		local _box = undefined
+		local _plane = undefined
+		local _points = #()
+		--pock componets from selection
+		for o in selection do (
+			
+			--print (classOf o)
+			case classOf o of (
+
+				Box: _box = o
+				Plane: _plane = o
+				Point: append _points o	
+			)
+		)
+		format "\tbox:%\n\tplane:%\n\tpoints:%\n" _box _plane _points
+		if _box == undefined or _plane == undefined or _points.count == 0 do (
+			
+			messageBox "Please select Box, Plane and 2 Points." title:" Warning:"
+			return false 
+		)
+		
+		local box_side = (mcPopUp.show "length" title:"Compare box side:" type:#Input)
+		if ClassOf box_side != String do return false
+		
+		--get scale diference
+		local points_distance = distance _points[1] _points[2]
+		local box_size = case box_side of (
+
+			"length": _box.length
+			"width": box.width
+			"height": box.height
+		)
+		local ratio  = points_distance / box_size
+		undo "Image Plane Fit" on _plane.scale /= [ratio, ratio, ratio]
 	)
 	/*<end>*/
 )

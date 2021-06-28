@@ -399,27 +399,27 @@ struct mcLiveMeasureActions (
 )
 	
 if mcLiveMeasureDialog != undefined do DestroyDialog mcLiveMeasureDialog
-rollout mcLiveMeasureDialog "Live Measure:" width:236 height:244
+rollout mcLiveMeasureDialog "Live Measure:" width:260 height:244
 (
-	local snap_vals = #("1", "5", "10", "50", "100")
+	local snap_vals = #("0.1", "1", "5", "10", "50", "100")
 	local all_measures = #()
 	local active_measure = undefined
 	local checked_state = #center
 	
-	GroupBox grp1 "Active:" pos:[4,4] width:228 height:236
-	listbox lbx_measures "" pos:[8,20] width:220 height:7
+	GroupBox grp1 "Active:" pos:[4,4] width:251 height:236
+	listbox lbx_measures "" pos:[8,20] width:244 height:7
 	button btn_add_lines "Add Line(s)" pos:[8,120] width:108 height:24
-	button btn_add_tripod "Add Tripod" pos:[120,120] width:108 height:24
+	button btn_add_tripod "Add Tripod" pos:[144,120] width:108 height:24
 	button btn_delete "Delete" pos:[8,148] width:108 height:24
-	button btn_delete_all "Delete All" pos:[120,148] width:108 height:24
+	button btn_delete_all "Delete All" pos:[144,148] width:108 height:24
 	--spinner spn_edge_length "" pos:[88,180] width:76 height:16 range:[0,1000000,0.001] scale:0.001
 	--button btn_set_length "Set Length" pos:[8,176] width:76 height:24
 	--checkbutton btn_up "?" pos:[172,176] width:16 height:24
 	--checkbutton btn_down "?" pos:[192,176] width:16 height:24
 	--checkbutton btn_center "¤" pos:[212,176] width:16 height:24 checked:true
-	checkbox chk_snap "" pos:[8,204] width:16 height:16 checked:true
-	radioButtons rdo_snap "Snap:" pos:[26,204] width:187 height:30 labels:snap_vals default:3 columns:5
-	button 'btn_quick_measure' "Quick Measure" pos:[8,176] width:220 height:24 align:#left tooltiop:"Plant Line On Surface"
+	checkbox chk_snap "" pos:[42,204] width:16 height:16 checked:true
+	radioButtons rdo_snap "Snap:" pos:[8,204] width:187 height:30 labels:snap_vals default:3 columns:6
+	button 'btn_quick_measure' "Quick Measure" pos:[8,176] width:244 height:24 tooltiop:"Plant Line On Surface"
 	
 	fn markSelectedMeasure index = (
 	

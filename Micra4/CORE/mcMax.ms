@@ -189,6 +189,37 @@ struct MICRA_MAX_STRUCTURE	(
 -- 		SceneExplorerManager.GetActiveExplorer()
 -- 		SceneExplorerManager.GetActiveExplorerHwnd()
 -- 		SceneExplorerManager.SaveExplorerConfiguration <&String>explorerName <&String>outputConfigurationFile
+	),
+	fn exportTo3Ds = (
+		
+		if selection.count == 0 do return false
+		--remove textures (for export)	
+		local materials = #()
+		undo "Remove Materials" on for o in selection do (
+			append materials o.material
+			o.material = undefined
+		)
+		
+		--e:/Work/Nov·äkola/@ASSETS/models/land\statueofliberity/statue.3ds
+		local export_fpath = (mcFile.readSettings micra.UserSettings "USER/Settings/Export3DsDir")	
+		if export_fpath.count == 0 do export_fpath = GetDir #scene + "export.3ds"
+		if keyboard.controlPressed then (
+			
+			local picked_dir = getSaveFileName caption:"Type export 3Ds File Path" filename:("*.3ds") types:"3Ds file: [*.3ds]" initialDir:export_fpath
+			if picked_dir.count == 0 do return false
+			mcFile.saveSettings micra.UserSettings "USER/Settings/Export3DsDir" picked_dir	
+			export_fpath = picked_dir 
+		) 
+		local theClasses = exporterPlugin.classes
+		local _3dsIdx = 1 --findItem theClasses 3D_StudioExporterPlugin
+		-- to export selection to *.3ds
+		print export_fpath
+		exportFile (export_fpath) #noprompt selectedOnly:on using:theClasses[_3dsIdx]
+		
+		--resrore materials back
+		for i = 1 to selection.count do selection[i].material = materials[i]
+			
+		mcPopUp.show ("Exported to:"+export_fpath) title:"Export 3Ds:" type:#confirm
 	)
 	/*<end>*/
 )	
