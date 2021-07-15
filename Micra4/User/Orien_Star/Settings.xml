@@ -112,12 +112,12 @@
     <Enable_Global_Supersampler val="true" />
     <Sampler val="2" />
     <Light_Tracer val="false" />
-    <Visible_Edges val="true" />
-    <Seam_Edges val="false" />
-    <Seam_Edges_Color val="(color 0 255 0)" />
+    <Visible_Edges val="false" />
+    <Seam_Edges val="true" />
+    <Seam_Edges_Color val="(color 255 255 255)" />
     <Mode val="1" />
     <Size val="6" />
-    <Slected_Faces val="true" />
+    <Slected_Faces val="false" />
   </RenderToTextureMod>
   <Interface>
     <lastprofile val="1" />

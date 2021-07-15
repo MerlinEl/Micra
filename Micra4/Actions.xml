@@ -48,6 +48,7 @@
     <Copy_TM_To_Clipboard icon="252" cmd="mcTransform.copyTmToClipboard()" tooltip="Copy TM To Clipboard" />
     <Paste_TM_From_Clipboard icon="253" cmd="mcTransform.pasteTMFromClipboard()" tooltip="Paste TM From Clipboard" />
     <Export_To_3Ds icon="319" cmd="mcMax.exportTo3Ds()" tooltip="Export To 3Ds" />
+    <Align_View_To_Object icon="324" cmd="mcMax.alignViewToObject()" tooltip="Align View To Object" />
   </Object>
   <Pivot>
     <Afect_Pivot_Only icon="51" cmd="mcAction.pivot_affect_only()" tooltip="Afect Pivot Only" />
@@ -65,6 +66,9 @@
     <Pivot_Planter_2 icon="59" cmd="mcFile.fileInVersion Pivot_Planter_Manip" tooltip="Pivot Planter 2" />
     <Pivot_To_Zero icon="264" cmd="mcAction.pivotToZero()" tooltip="Pivot To Zero" />
     <Align_To_Face icon="265" cmd="mcAction.alignPivotToSelectedFace()" tooltip="Align To Face" />
+    <Pivot_To_Verts_Center icon="323" cmd="mcAction.pivotToVertsCenter()" tooltip="Pivot To Verts Center" />
+    <Align_Working_Pivot_To_Face icon="325" cmd="mcAction.alignWorkingPivotToSelectedFace()" tooltip="Align Working Pivot To Face" />
+    <Align_Working_Pivot_To_Edges icon="326" cmd="mcAction.alignWorkingPivotToSelectedEdges()" tooltip="Align Working Pivot To Edges" />
   </Pivot>
   <Select>
     <Advanced_Edge_Loop icon="1" cmd="mcFile.fileInVersion Advanced_Edge_Loop" tooltip="Advanced Edge Loop" />
@@ -87,6 +91,8 @@
     <Select_Unsmoth_Faces icon="139" cmd="mcAction.selectUnsmoothFaces()" tooltip="Select Unsmoth Faces" />
     <Verts_Loop icon="37" cmd="mcAction.select_verts #loop" tooltip="Verts Loop" />
     <Select_Objects_By_Wirecolor icon="272" cmd="mcAction.selectObjectsByWirecolor()" tooltip="Select Objects By Wireframe Color" />
+    <Select_Half_Top icon="321" cmd="mcAction.selectHalf #top" tooltip="Select Half Top" />
+    <Select_Half_Bottom icon="322" cmd="mcAction.selectHalf #btm" tooltip="Select Half Bottom" />
   </Select>
   <Modify>
     <Breake_To_Elements icon="128" cmd="mcAction.breake_to_elements()" tooltip="Breake To Elements" />

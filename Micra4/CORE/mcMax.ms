@@ -220,6 +220,25 @@ struct MICRA_MAX_STRUCTURE	(
 		for i = 1 to selection.count do selection[i].material = materials[i]
 			
 		mcPopUp.show ("Exported to:"+export_fpath) title:"Export 3Ds:" type:#confirm
+	),
+	fn alignViewToObject = (
+		
+		if selection.count == 0 do return false
+		local vtm = getViewTM()
+		local ntm = $.transform
+		local tm2 = translate (rotate (scalematrix vtm.scale) (inverse ntm.rotation)) vtm.pos
+		tm2 = rotate tm2 (eulerangles 90.0 0.0 180 as quat)
+		undo "Align View To Object" on (
+			
+			viewport.setTm tm2
+			max tool zoomextents
+		)
+		--restore
+		--viewport.setTm vtm
+		 -- Normal from Object Local Space to World Space:
+		--p3WorldNormal = [0,1,0] * $.transform.rotationPart as Matrix3
+		-- Normal from World space to Object Local Space:
+		--p3LocalNormal = p3WorldNormal * inverse(object.transform.rotationPart as Matrix3)
 	)
 	/*<end>*/
 )	

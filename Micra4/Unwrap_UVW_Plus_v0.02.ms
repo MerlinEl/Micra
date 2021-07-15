@@ -157,7 +157,7 @@ rollout mcUnwrapEditorDialog "UV+" width:96 height:648
 		local gco = modpanel.getcurrentobject()	
 		local sel_center = gco.getSelCenter()
 		local sel_faces = gco.getSelectedFaces()
-		if sel_faces.numberset < 2 do return false
+		if sel_faces.numberset == 0 do return false
 		local excluded_faces = #() --removed element faces
 		undo "Align Elements" on
 		(

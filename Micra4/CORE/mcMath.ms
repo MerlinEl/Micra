@@ -336,6 +336,13 @@ struct MICRA_MATH (
 		local v2=normalize (p2-p1)
 		normalize (cross v2 v3)
 	),
+	fn getLocalMatrix p1 p2 p3 = ( -- p1 is corner
+		
+		local v1 = normalize (p2 - p1)
+		local v3 = normalize (cross v1 (normalize (p3 - p1)))
+		local v2 = normalize (cross v3 v1)
+		return matrix3 v1 v2 v3 p1
+	),		
 	fn getPointsCenter pos_arr = (
 	
 		local points_center = [0,0,0]

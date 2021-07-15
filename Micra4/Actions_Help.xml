@@ -50,6 +50,7 @@
     <Pivot_Align_3P val="Natoci pivot podle trech bodu." />
     <Pivot_Planter val="Rychle posouvani pivotu podle grafickeho modelu." />
     <Iron_Sight val="Priblizi zvolenou oblast." />
+    <Align_Working_Pivot_To_Edges />
   </Pivot>
   <Select>
     <Advanced_Edge_Loop val="Z ringu vybere kazdou druhou nebo treti edge atd..." />
@@ -72,6 +73,7 @@
     <Select_Objects_By_Wirecolor val="Selektne objekty, ktere pouzivaji stejny wireframe color." />
     <Select_Unsmoth_Faces val="Oznaci polygony, ktere nemaji prirazenou smooth grupu." />
     <Verts_Loop val="Multiselekce vertexu. (vyber dva sousedici vertexy)" />
+    <Select_Half_Bottom val="Selektne levou polovinu objektu." />
   </Select>
   <Modify>
     <Affect_Backfacing val="Zapne / Vypne oznacovani zadni strany geometrie. Neni dokonceno." />

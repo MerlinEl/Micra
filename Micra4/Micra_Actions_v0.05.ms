@@ -886,40 +886,28 @@ struct mcAction (
 		if obj == undefined or classOf obj != Editable_Poly do return false
 		try (max modify mode ; subobjectlevel = 4) catch()
 		
-		local axis = "X"
-		if keyboard.shiftPressed then axis = "Y"
-		else if keyboard.controlPressed then axis = "Z"
+		local axis = "TopView"
+		if keyboard.controlPressed then axis = "SideView"
 		
 		for f = 1 to obj.Faces.count do 
 		(
 			local thePos = polyOp.getFaceCenter obj f 
-			case axis of
-			(
-				"X":
-				(
-					thePos.x -= obj.pos.x
-					case side of
-					(
-						#left:  (if thePos.x < 0 do append faces f)
-						#right: (if thePos.x > 0 do append faces f)
+			thePos -= obj.pos
+			case axis of (
+				"TopView": (
+					case side of (
+						#left:	if thePos.x < 0 do append faces f
+						#right:	if thePos.x > 0 do append faces f
+						#top:	if thePos.y > 0 do append faces f
+						#btm:	if thePos.y < 0 do append faces f
 					)
 				)
-				"Y":
-				(
-					thePos.y -= obj.pos.y
-					case side of
-					(
-						#left:  (if thePos.y < 0 do append faces f)
-						#right: (if thePos.y > 0 do append faces f)
-					)
-				)
-				"Z":
-				(
-					thePos.z -= obj.pos.z
-					case side of
-					(
-						#left:  (if thePos.z < 0 do append faces f)
-						#right: (if thePos.z > 0 do append faces f)
+				"SideView": (
+					case side of (
+						#left:	if thePos.x < 0 do append faces f
+						#right:	if thePos.x > 0 do append faces f
+						#top:  	if thePos.z > 0 do append faces f
+						#btm: 	if thePos.z < 0 do append faces f
 					)
 				)
 			)
@@ -2496,9 +2484,11 @@ struct mcAction (
 			
 				Editable_Poly:(
 					
-					local vert_index = (polyop.getVertSelection obj as array)[1]
-					if vert_index == undefined do return false
-					polyop.getVert obj vert_index
+					local verts_pos = for v in (polyop.getVertSelection obj as Array) collect polyOp.getVert obj v
+					if verts_pos.count == 0 do return false
+					local pos_sum = [0,0,0]
+					for p in verts_pos do pos_sum += p
+					pos_sum / verts_pos.count
 				)
 				SplineShape:(
 					
@@ -2745,6 +2735,53 @@ struct mcAction (
 		)
 		local ratio  = points_distance / box_size
 		undo "Image Plane Fit" on _plane.scale /= [ratio, ratio, ratio]
+	),
+	fn pivotToVertsCenter = (
+		
+		local obj = (selection as array)[1]
+		if obj == undefined or classOf obj != Editable_Poly do return false
+		local verts_pos = for v in (polyop.getVertSelection obj as Array) collect polyOp.getVert obj v
+		local pos_sum = [0,0,0]
+		for p in verts_pos do pos_sum += p
+		local verts_center = pos_sum / verts_pos.count
+		obj.pivot = verts_center
+	),
+	fn alignWorkingPivotToSelectedFace = (
+		
+		local obj = selection[1]
+		if (obj == undefined or classOf obj != Editable_Poly) do return false
+		local selected_face = (polyOp.getFaceSelection obj as array)[1]
+		if selected_face == undfefined do return false
+		local face_normal = polyOp.getFaceNormal obj selected_face
+		local tm = matrixFromNormal face_normal
+		/*if WorkingPivot.UseMode == false do (
+		
+			WorkingPivot.UseMode = true -- causing trouble with pivot jump out
+			toolMode.pivotCenter() -- fix bug when pivot is going out
+		)*/
+		undo "Align Working Pivot To Face" on  (WorkingPivot.setTM tm)
+		update obj
+	),
+	fn alignWorkingPivotToSelectedEdges = (
+		
+		local obj = selection[1]
+		if (obj == undefined or classOf obj != Editable_Poly) do return false
+		local selected_edges = (polyOp.getEdgeSelection obj as array)
+		if selected_edges.count != 2 do return false
+		local edge_a = selected_edges[1]
+		local edge_b = selected_edges[2]
+		local edge_a_verts = polyOp.getVertsUsingEdge obj edge_a
+		local edge_b_verts = polyOp.getVertsUsingEdge obj edge_b
+		format "verts a:% b:%\n" edge_a_verts edge_b_verts
+		local vert_corner = edge_a_verts * edge_b_verts
+		local vert_ends = (edge_a_verts + edge_b_verts) - vert_corner
+		format "verts corner:% vert_ends:%\n" vert_corner vert_ends
+		local p1 = polyOp.getVert obj (vert_corner as Array)[1]
+		local p2 = polyOp.getVert obj (vert_ends as Array)[1]
+		local p3 = polyOp.getVert obj (vert_ends as Array)[2]
+		local tm = mcMath.getLocalMatrix p1 p2 p3
+		undo "Align Working Pivot To Edges" on  (WorkingPivot.setTM tm)
+		update obj
 	)
 	/*<end>*/
 )
