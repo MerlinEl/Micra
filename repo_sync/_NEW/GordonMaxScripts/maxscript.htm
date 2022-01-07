@@ -1,0 +1,177 @@
+<html>
+<head>
+<title>Rainnea Graphics Technology - MAXScripts</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+</head>
+
+<body bgcolor="#999999">
+<div align="center"> 
+  <table width="100%" border="0" cellspacing="0" cellpadding="0">
+    <tr> 
+      <td width="25%"> 
+        <h1 align="center"><a href="http://www.rainnea.com"><img src="ms_logo.gif" width="180" height="91" align="left" border="0"></a> 
+        </h1>
+      </td>
+      <td width="50%"> 
+        <h1 align="center">Rab's MAXScripts</h1>
+      </td>
+      <td width="25%"><a href="http://www.rainnea.com"><img src="ms_logo.gif" width="180" height="91" align="right" border="0"></a></td>
+    </tr>
+  </table>
+  <h3>A number of MAXScripts are available for free download here, descriptions 
+    below. </h3>
+  <p align="left"> I'm not a programmer, but have been developing a set of tools 
+    using MAXScript to help create and carve designs straight from within 3D Studio 
+    MAX, most of the scripts on this page are spinoffs from the development of 
+    this <a href="tech.htm">project</a>.<br>
+  </p>
+  <p align="left"> I'd like to thank and acknowledge the help and encouragement 
+    of Doug McNabb who wrote an HPGL import function which was the starting point 
+    for everything else.<br>
+    I'd also like to thank Swami Lama for the amount of time he has spent corresponding 
+    via email on numerous MAXScript issues, offering code and advice, and of course 
+    Bobo for making so much of his MAXScript code public. For general info on 
+    MAX or MAXScript, please visit a few of the links below.<br>
+    I hope you find some of this stuff useful, there are no doubt some bugs and 
+    cases where the scripts could work more effeiciently, if you have any comments 
+    or bug reports, please email me directly at <a href="rab@rainnea.com"> rab@rainnea.com</a> 
+    <br>
+  </p>
+  <table width="100%" border="0" cellspacing="0" cellpadding="0">
+    <tr> 
+      <td width="44%">&nbsp;</td>
+      <td width="56%">&nbsp;</td>
+    </tr>
+    <tr> 
+      <td width="44%"> 
+        <p><img src="ms_CNCToolkit.gif" width="179" height="556"></p>
+        <p>&nbsp;</p>
+      </td>
+      <td width="56%" valign="top"> 
+        <h3>CNC Toolkit:</h3>
+        <p>Although this script is under early development for our own use, it 
+          has given us far more accurate control over how our CNC machine operates 
+          and flexibility than the software supplied with the machine or many 
+          commercially available packages. </p>
+        <h3>Functions include:</h3>
+        imports and exports HPGL format toolpaths<br>
+        send toolpath directly to machine<br>
+        create planing toolpaths<br>
+        project toolpaths onto surface of mesh<br>
+        limited machine function control 
+        <h3>Functions to implement include:</h3>
+        <p>offset contours, possibly using vornoi method<br>
+          read position info back from machine<br>
+          toolpath preview<br>
+          Adapt to form universal HPGL Plotter Driver <br>
+        </p>
+        <p><a href="tech.htm">An example of this script being applied</a></p>
+        <p>Status: Under Development</p>
+      </td>
+    </tr>
+    <tr> 
+      <td width="44%"> 
+        <p><img src="ms_contour.gif" width="483" height="193"></p>
+        <p>&nbsp;</p>
+      </td>
+      <td width="56%" valign="top"> 
+        <h3>Contour Creator:</h3>
+        <p>Creates a series of contours from a selected mesh.<br>
+          Has the option of combining all contours and welding any vertices within 
+          the Threshold amount which although slow, gives a far better end result 
+          as otherwise the contours are composed of many small splines with coincident 
+          vertices.<br>
+          If &quot;Weld all Contours ?&quot; is left unchecked, a selection set 
+          of contour lines will be created. You can always use the weld function 
+          in the next script to add and weld these together.<br>
+          Status: Available for download as part of &quot;Rab's MAXScripts&quot;</p>
+        </td>
+    </tr>
+    <tr> 
+      <td width="44%"> 
+        <p><img src="ms_fnw.gif" width="401" height="133"><br>
+        </p>
+      </td>
+      <td width="56%" valign="top"> 
+        <h3>Fuse n' Weld:</h3>
+        <p>Takes all vertices in a shape, compares them to their closest neighbour 
+          and moves them to an average position if within the threshold.<br>
+          &quot;Fuse&quot; moves only, &quot;Weld&quot; moves and welds.<br>
+          If many vertices are within the threshold, it only operates on the closest 
+          so it may be nesseccary to run the script a couple of times.<br>
+          If multiple shapes are selected then all shapes are combined.<br>
+          &quot;Detach All Splines&quot; dissolves a shape or shapes into it's 
+          component splines.<br>
+          Status: Available for download as part of &quot;Rab's MAXScripts&quot; 
+        </p>
+      </td>
+    </tr>
+    <tr> 
+      <td width="44%"> 
+        <p><img src="ms_refinespline.gif" width="499" height="560"></p>
+        <p>&nbsp;</p>
+      </td>
+      <td width="56%" valign="top"> 
+        <h3>&nbsp;</h3>
+        <h3>Refine Spline:</h3>
+        <p> Adaptively adds extra points to a shape while retaining the shape's 
+          existing points and curvature. Most useful if a curve's vertices are 
+          converted to corner, or if in our case you're doing point to point machining.<br>
+          In the exmple to the left, the top test curve is the original, the middle 
+          is the same curve with its vertices converted to corners, the bottom 
+          curve has had Refine Spline applied to it prior to the vertices being 
+          converted to corners.</p>
+        <p>Status: Available for download as part of &quot;Rab's MAXScripts&quot;</p>
+      </td>
+    </tr>
+    <tr> 
+      <td width="44%"> 
+        <p><img src="ms_optspline.gif" width="491" height="239"></p>
+        <p>&nbsp;</p>
+      </td>
+      <td width="56%" valign="top"> 
+        <h3>&nbsp;</h3>
+        <h3>Optimise Spline: </h3>
+        <p> Adaptively removes points from a curve while retaining the shape's 
+          existing curvature.<br>
+          In the example on left, compare the top and bottom test curves, while 
+          the lower curve contains around a third less vertices, it still retains 
+          the original shape. Experimant with the variables to get the best results.</p>
+        <p>Status: Available for download as part of &quot;Rab's MAXScriptcripts&quot;</p>
+      </td>
+    </tr>
+    <tr>
+      <td width="44%">
+        <p><img src="ms_project.gif" width="413" height="202"></p>
+        <p>&nbsp;</p>
+      </td>
+      <td width="56%" valign="top"> 
+        <h3>&nbsp;</h3>
+        <h3>Project Spline:</h3>
+        <p>Projects a spline onto the surface of a mesh.</p>
+        <p>Status: Will be available soon.</p>
+          </td>
+    </tr>
+    <tr> 
+      <td width="44%">
+        <div align="center">
+          <p><img src="ms_preview.gif" width="199" height="191"></p>
+          <p>&nbsp;</p>
+        </div>
+      </td>
+      <td width="56%" valign="top"> 
+        <div align="left"> 
+          <h3>&nbsp;</h3>
+          <h3>Preview Toolpath:</h3>
+          <p>Previews finished CNC cut for a given path, tool and material block<br>
+          </p>
+          <p>Status: Under Development</p>
+          <p>&nbsp; </p>
+        </div>
+      </td>
+    </tr>
+  </table>
+  <h3 align="left">&nbsp;</h3>
+</div>
+</body>
+</html>

@@ -36,6 +36,8 @@
     <Move_To_Surface val="Move selected object in to surface" />
     <Geometry_Projector_2D val="Project 2D shapes or planes from 3D Geometry" />
     <Export_To_3Ds />
+    <Save_Objects_Pos val="Zarovnavani objektu na pozici rotaci a velikost." />
+    <Restore_Objects_Pos val="Zarovnavani objektu na pozici rotaci a velikost." />
   </Object>
   <Pivot>
     <Afect_Pivot_Only val="Zapina / Vypina pohyblivost pivotu." />

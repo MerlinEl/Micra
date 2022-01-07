@@ -49,6 +49,9 @@
     <Paste_TM_From_Clipboard icon="253" cmd="mcTransform.pasteTMFromClipboard()" tooltip="Paste TM From Clipboard" />
     <Export_To_3Ds icon="319" cmd="mcMax.exportTo3Ds()" tooltip="Export To 3Ds" />
     <Align_View_To_Object icon="324" cmd="mcMax.alignViewToObject()" tooltip="Align View To Object" />
+    <Rotate_NGon icon="327" cmd="mcMax.rotateNgon()" tooltip="Rotate NGon" />
+    <Save_Objects_Pos icon="328" cmd="mcMax.saveObjectsPos()" tooltip="Save Objects Pos" />
+    <Restore_Objects_Pos icon="329" cmd="mcMax.restoreObjectsPos()" tooltip="Restore Objects Pos" />
   </Object>
   <Pivot>
     <Afect_Pivot_Only icon="51" cmd="mcAction.pivot_affect_only()" tooltip="Afect Pivot Only" />

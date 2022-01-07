@@ -234,11 +234,55 @@ struct MICRA_MAX_STRUCTURE	(
 			max tool zoomextents
 		)
 		--restore
-		--viewport.setTm vtm
-		 -- Normal from Object Local Space to World Space:
-		--p3WorldNormal = [0,1,0] * $.transform.rotationPart as Matrix3
-		-- Normal from World space to Object Local Space:
-		--p3LocalNormal = p3WorldNormal * inverse(object.transform.rotationPart as Matrix3)
+		/*
+		vtm = getViewTM()
+		viewport.setTm vtm
+		viewport.setTm (matrixFromNormal [0,1,0])
+		viewport.setTm vtm
+		-- Normal from Object Local Space to World Space:
+		p3WorldNormal = [0,1,0] * $.transform.rotationPart as Matrix3
+		--Normal from World space to Object Local Space:
+		p3LocalNormal = p3WorldNormal * inverse(object.transform.rotationPart as Matrix3)
+		*/
+	),
+	fn rotateNgon = (
+		
+		if rotateNgonDialog != undefined do destroyDialog rotateNgonDialog
+		rollout rotateNgonDialog "Rotate Ngon:" width:220 height:96 (
+			
+			radioButtons rdo_axis "Axis" pos:[16,24] width:97 height:30 labels:#("X", "Y", "Z") default:1 columns:3
+			groupBox grp1 "Options:" pos:[4,4] width:212 height:88
+			spinner spn_segments "" pos:[64,64] width:56 height:16 range:[1,100,8] type:#integer scale:1
+			label lbl1 "Segments:" pos:[12,64] width:56 height:20
+			button btn_rotate "Rotate" pos:[132,28] width:76 height:52
+			on btn_rotate pressed  do (
+				
+				local a = 360.0/spn_segments.value
+				format "rotate ngon by:%\n" a
+				for o in selection do undo "Rotate Ngon" on (
+					
+					case rdo_axis.state of (
+
+						1 :  o.rotation.x_rotation += a
+						2 :  o.rotation.y_rotation += a
+						3 :  o.rotation.z_rotation += a
+					)
+				)
+			)
+		)
+		createDialog rotateNgonDialog
+	),
+	fn saveObjectsPos = (
+		
+		for o in selection do setUserProp o "start_pos" o.pos
+	),
+	fn restoreObjectsPos = (
+		
+		for o in selection  do  (
+				
+			local pos = getUserProp o "start_pos"
+			if (pos != undefined) do o.pos = execute pos
+		)
 	)
 	/*<end>*/
 )	
