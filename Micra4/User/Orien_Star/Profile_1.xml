@@ -6,7 +6,7 @@
     <mc_Dialog_C active="true" pos="[1946,534]" size="[148,90]" title="Pivot:" btnCount="[6,3]" />
     <mc_Dialog_D active="true" pos="[1946,624]" size="[148,90]" title="Select:" btnCount="[6,3]" />
     <mc_Dialog_E active="true" pos="[1231,1304]" size="[364,42]" title="Animation:" btnCount="[15,1]" />
-    <mc_Dialog_F active="true" pos="[1750,270]" size="[196,90]" title="Modifiers:" btnCount="[8,3]" />
+    <mc_Dialog_F active="true" pos="[1750,223]" size="[196,90]" title="Modifiers:" btnCount="[8,3]" />
     <mc_Dialog_G active="true" pos="[1946,714]" size="[148,114]" title="Modify:" btnCount="[6,4]" />
     <mc_Dialog_H active="true" pos="[1954,853]" size="[148,90]" title="Materials:" btnCount="[6,3]" />
     <mc_Dialog_I active="true" pos="[1954,1009]" size="[148,66]" title="Programming:" btnCount="[6,2]" />
